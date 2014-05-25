@@ -53,6 +53,7 @@ class Xvm(object):
         self.lang_data = None
         self.battleFlashObject = None
         self.vmmFlashObject = None
+        self._battleStateTimersId = dict()
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
@@ -160,28 +161,36 @@ class Xvm(object):
         g_minimap_circles.updateConfig(self.config)
         self.config_str = json.dumps(self.config)
         self.sendConfig(self.battleFlashObject)
-        BigWorld.callback(0, self.updateBattleStates)
+        BigWorld.callback(0, self.invalidateBattleStates)
 
-    def updateBattleStates(self):
+    def invalidateBattleStates(self):
         import Vehicle
         for v in BigWorld.entities.values():
             if isinstance(v, Vehicle.Vehicle) and v.isStarted:
-                self.updateBattleState(v)
+                self.invalidateBattleState(v)
 
     def initVmm(self):
         self.sendConfig(self.vmmFlashObject)
 
-    def updateBattleState(self, vehicle):
-        #debug(vehicle)
+    def invalidateBattleState(self, vehicle):
         if self.config is None or not self.config['battle']['allowHpInPanelsAndMinimap']:
             return
+        if self._battleStateTimersId.get(vehicle.id, None) == None:
+            self._battleStateTimersId[vehicle.id] = \
+                BigWorld.callback(0.1, lambda: self._updateBattleState(vehicle))
+
+    def _updateBattleState(self, vehicle):
+        #debug(vehicle)
+
+        self._battleStateTimersId[vehicle.id] = None
+
         if self.battleFlashObject is not None:
             try:
                 movie = self.battleFlashObject.movie
                 if movie is not None:
                     movie.invoke((RESPOND_BATTLESTATE, [json.dumps(getVehicleStateData(vehicle))]))
             except Exception, ex:
-                err('updateBattleState(): ' + traceback.format_exc())
+                err('invalidateBattleState(): ' + traceback.format_exc())
 
     def sendConfig(self, flashObject):
         if self.config is None or flashObject is None:

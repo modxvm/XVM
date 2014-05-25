@@ -100,22 +100,22 @@ def LoginView_onSetOptions(base, self, optionsList, host):
 # on any player marker appear (spectators only)
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
-    g_xvm.updateBattleState(vehicle)
+    g_xvm.invalidateBattleState(vehicle)
 
 # on any player marker lost
 def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
     #debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
-    g_xvm.updateBattleState(vehicle)
+    g_xvm.invalidateBattleState(vehicle)
 
-# on any vehicle health update
-def Vehicle_set_health(self, prev):
-    #debug("> Vehicle_set_health: %i, %i" % (self.health, prev))
-    g_xvm.updateBattleState(self)
+## on any vehicle health update
+#def Vehicle_set_health(self, prev):
+#    #debug("> Vehicle_set_health: %i, %i" % (self.health, prev))
+#    g_xvm.invalidateBattleState(self)
 
 # on any vehicle hit received
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     #debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    g_xvm.updateBattleState(self)
+    g_xvm.invalidateBattleState(self)
 
 def onArenaCreated():
     #debug('> onArenaCreated')

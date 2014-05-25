@@ -5,18 +5,38 @@ import wot.Minimap.dataTypes.*;
 
 class com.xvm.Macros
 {
+    private static var macros_cache = { };
+
     private static var dict:Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
     public static var globals:Object = {};
 
     public static function Format(playerName:String, format:String, options:Object):String
     {
         //Logger.add("format:" + format + " player:" + playerName);
+        if (format == null || playerName == null)
+            return null;
         try
         {
+            var player_cache = macros_cache[playerName];
+            if (player_cache == null)
+            {
+                macros_cache[playerName] = { alive: { }, dead: { }};
+                player_cache = macros_cache[playerName];
+            }
+            var dead:Boolean = options != null && options.dead == true;
+            var dead_value:String = dead ? "dead" : "alive";
+            var cached_value = player_cache[dead_value][format];
+            if (cached_value != undefined)
+            {
+                //Logger.add("cached: " + cached_value);
+                return cached_value;
+            }
+
             var formatArr:Array = format.split("{{");
 
             var res:String = formatArr[0];
             var len:Number = formatArr.length;
+            var isStaticMacro = true;
             if (len > 1)
             {
                 var name:String = Utils.GetPlayerName(playerName);
@@ -31,16 +51,54 @@ class com.xvm.Macros
                     }
                     else
                     {
-                        if (dict.hasOwnProperty(name))
-                            res += FormatMacro(macro, dict[name], options);
+                        var pdata = dict[name];
+                        if (pdata != null)
+                        {
+                            var parts:Array = GetMacroParts(macro, pdata, dead);
+
+                            var macroName = parts[0];
+                            var norm = parts[1];
+                            var def:String = parts[5];
+
+                            var value = pdata[macroName];
+                            if (value === undefined)
+                                value = globals[macroName];
+
+                            if (value === undefined)
+                            {
+                                res += def;
+                                isStaticMacro = false;
+                            }
+                            else if (value == null)
+                            {
+                                //Logger.add(macroName + " " + norm + " " + def + "  " + format);
+                                res += prepareValue(NaN, macroName, norm, def, pdata);
+                            }
+                            else
+                            {
+                                // is static macro
+                                var type:String = typeof value;
+                                if (type == "function" && macroName != "alive")
+                                    isStaticMacro = false;
+
+                                res += FormatMacro(macro, parts, value, pdata, options);
+                            }
+                        }
                         res += arr2[1];
                     }
                 }
             }
 
+            res = Utils.fixImgTag(res);
+
+            if (isStaticMacro)
+                player_cache[dead_value][format] = res;
+            //else
+            //    Logger.add(playerName + "> " + format);
+
             //Logger.add(playerName + "> " + format);
             //Logger.add(playerName + "> " + res);
-            return Utils.fixImgTag(res);
+            return res;
         }
         catch (ex:Error)
         {
@@ -50,7 +108,7 @@ class com.xvm.Macros
         return "";
     }
 
-    private static function FormatMacro(macro:String, pdata:Object, options:Object):String
+    private static function GetMacroParts(macro:String, pdata:Object, dead:Boolean):Array
     {
         //Logger.addObject(pdata);
         var parts:Array = [null,null,null,null,null,null];
@@ -115,29 +173,25 @@ class com.xvm.Macros
         }
         parts[section] = part;
 
+        if (dead && Strings.startsWith("c:", parts[0]) && pdata[parts[0] + "#d"] != null)
+            parts[0] += "#d";
+        if (parts[5] == null)
+            parts[5] = "";
+
+        return parts;
+    }
+
+    private static function FormatMacro(macro:String, parts:Array, value, pdata, options:Object):String
+    {
         var name:String = parts[0];
         var norm:String = parts[1];
         var fmt:String = parts[2];
         var suf:String = parts[3];
         var rep:String = parts[4];
-        var def:String = parts[5] || "";
+        var def:String = parts[5];
 
         // substitute
         //Logger.add("name:" + name + " norm:" + norm + " fmt:" + fmt + " suf:" + suf + " rep:" + rep + " def:" + def);
-
-        if (options.dead == true && Strings.startsWith("c:", name) && pdata[name + "#d"] != null)
-            name += "#d";
-
-        if (!pdata.hasOwnProperty(name) && !globals.hasOwnProperty(name))
-        {
-            //Logger.add("Warning: unknown macro: " + macro);
-            return def;
-        }
-
-        var value = pdata.hasOwnProperty(name) ? pdata[name] : globals[name];
-        //Logger.add("value:" + value);
-        if (value == null)
-            return prepareValue(NaN, name, norm, def, pdata);
 
         var type:String = typeof value;
         //Logger.add("type:" + type + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
@@ -146,7 +200,7 @@ class com.xvm.Macros
             return prepareValue(NaN, name, norm, def, pdata);
 
         var res:String = value;
-        if (typeof value == "function")
+        if (type == "function")
         {
             value = options ? value(options) : "{{" + macro + "}}";
             if (value == null)
@@ -180,7 +234,7 @@ class com.xvm.Macros
                     if (parts.length == 2)
                     {
                         parts = parts[1].split('');
-                        len = parts.length;
+                        var len:Number = parts.length;
                         var precision:Number = 0;
                         for (var i:Number = 0; i < len; ++i)
                         {

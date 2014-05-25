@@ -360,9 +360,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         var img:UILoaderAlt = (UILoaderAlt)(mc.attachMovie("UILoaderAlt", "f" + n, mc.getNextHighestDepth()));
         img["data"] = {
-            x: x, y: y, w: w, h: h, format: format,
+            x: x, y: y, w: w, h: h,
+            format: format,
             align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
         };
+        //Logger.addObject(img["data"]);
 
         img._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
         img._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
@@ -383,11 +385,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
         //Logger.add("onExtraMovieClipLoadInit");
 
         var data = img["data"];
-        if (isNaN(data.w))
+        if (isNaN(data.w) && data.format.w == null)
             data.w = img.content._width;
-        if (isNaN(data.h))
+        if (isNaN(data.h) && data.format.h == null)
             data.h = img.content._height;
-        //Logger.addObject(data);
+        //Logger.addObject(data, 2, m_name);
 
         alignField(img);
 
@@ -548,6 +550,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             src = "../../" + Utils.fixImgTag(src).split("img://").join("");
             //Logger.add(m_name + " " + src);
             f.source = src;
+            //needAlign = false;
         }
 
         if (needAlign)
@@ -593,7 +596,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
         else
         {
             if (img.width != w || img.height != h)
-                field.setSize(w, h);
+            {
+                //Logger.addObject(img["data"]);
+                //Logger.add(img.width + "->" + w + " " + x + " " + y + " " + m_name + " " + wrapper._name);
+                img.setSize(w, h);
+            }
         }
     }
 
