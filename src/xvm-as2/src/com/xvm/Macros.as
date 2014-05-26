@@ -17,11 +17,12 @@ class com.xvm.Macros
             return null;
         try
         {
-            var player_cache = macros_cache[playerName];
+            var name:String = Utils.GetPlayerName(playerName);
+            var player_cache = macros_cache[name];
             if (player_cache == null)
             {
-                macros_cache[playerName] = { alive: { }, dead: { }};
-                player_cache = macros_cache[playerName];
+                macros_cache[name] = { alive: { }, dead: { }};
+                player_cache = macros_cache[name];
             }
             var dead:Boolean = options != null && options.dead == true;
             var dead_value:String = dead ? "dead" : "alive";
@@ -39,7 +40,6 @@ class com.xvm.Macros
             var isStaticMacro = true;
             if (len > 1)
             {
-                var name:String = Utils.GetPlayerName(playerName);
                 for (var i:Number = 1; i < len; ++i)
                 {
                     var part:String = formatArr[i];
@@ -94,10 +94,10 @@ class com.xvm.Macros
             if (isStaticMacro)
                 player_cache[dead_value][format] = res;
             //else
-            //    Logger.add(playerName + "> " + format);
+            //    Logger.add(name + "> " + format);
 
-            //Logger.add(playerName + "> " + format);
-            //Logger.add(playerName + "> " + res);
+            //Logger.add(name + "> " + format);
+            //Logger.add(name + "> " + res);
             return res;
         }
         catch (ex:Error)

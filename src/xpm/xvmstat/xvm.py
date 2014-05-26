@@ -174,19 +174,21 @@ class Xvm(object):
         self.sendConfig(self.vmmFlashObject)
 
     def invalidateBattleState(self, vehicle):
+        #log("invalidateBattleState: " + str(vehicle.id))
         if self.config is None or not self.config['battle']['allowHpInPanelsAndMinimap']:
             return
-        self._battleStateData[vehicle.id] = getVehicleStateData(vehicle)
-        if self._battleStateTimersId.get(vehicle.id, None) == None:
-            self._battleStateTimersId[vehicle.id] = \
-                BigWorld.callback(0.1, lambda: self._updateBattleState(vehicle.id))
+        vehId = vehicle.id
+        self._battleStateData[vehId] = getVehicleStateData(vehicle)
+        #self._updateBattleState(vehId)
+        if self._battleStateTimersId.get(vehId, None) == None:
+            self._battleStateTimersId[vehId] = \
+                BigWorld.callback(0.3, lambda: self._updateBattleState(vehId))
 
     def _updateBattleState(self, vehId):
-        #debug(vehicle)
-
+        #log("_updateBattleState: " + str(vehId))
+        self._battleStateTimersId[vehId] = None
         if self.battleFlashObject is not None:
             try:
-                self._battleStateTimersId[vehId] = None
                 vdata = self._battleStateData.get(vehId, None)
                 if vdata is not None:
                     movie = self.battleFlashObject.movie
