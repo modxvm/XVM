@@ -625,7 +625,7 @@ class com.xvm.Macros
         // {{dead}}
         pdata["dead"] = data.curHealth < 0
             ? Config.config.hitLog.blowupMarker
-            : (data.curHealth == 0 || data.dead) ? Config.config.hitLog.deadMarker : "";
+            : (data.curHealth == 0 || data.dead) ? Config.config.hitLog.deadMarker : null;
 
         // {{n}}
         pdata["n"] = hits.length;
