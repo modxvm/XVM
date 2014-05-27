@@ -304,7 +304,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private function _internal_createExtraFields(owner:MovieClip, mode:String, formats:Array, width:Number, height:Number, cfg:Object):MovieClip
     {
         var idx = parseInt(wrapper._name.split("renderer").join(""));
-        var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + team + "_" + idx, owner.getNextHighestDepth());
+        var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + team + "_" + mode + "_" + idx, owner.getNextHighestDepth());
         mc._visible = false;
         mc.idx = idx;
         if (cfg != null)
@@ -320,8 +320,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 continue;
 
             if (typeof format == "string")
+            {
                 format = { format: format };
                 formats[i] = format;
+            }
 
             if (typeof format != "object")
                 continue;
