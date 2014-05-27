@@ -3,7 +3,7 @@
 # PUBLIC
 
 def getVehicleStateData(vehicle, playerId):
-    return _getVehicleStateData(vehicle)
+    return _getVehicleStateData(vehicle, playerId)
 
 # PRIVATE
 
