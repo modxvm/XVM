@@ -2,7 +2,7 @@
 
 # PUBLIC
 
-def getVehicleStateData(vehicle):
+def getVehicleStateData(vehicle, playerId):
     return _getVehicleStateData(vehicle)
 
 # PRIVATE
@@ -12,13 +12,13 @@ import BigWorld
 from xpm import *
 from logger import *
 
-def _getVehicleStateData(vehicle):
+def _getVehicleStateData(vehicle, playerId):
     #log(vars(vehicle))
     #log(vars(vehicle.typeDescriptor))
     #self.maxHealth = vData['vehicleType'].maxHealth
     return {
         'playerName': vehicle.publicInfo.name,
-        'playerId': BigWorld.player().arena.vehicles[vehicle.id]['accountDBID'],
+        'playerId': playerId,
         'vehId': vehicle.id,
         'dead': not vehicle.isAlive(),
         'curHealth': vehicle.health,

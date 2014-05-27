@@ -179,11 +179,12 @@ class Xvm(object):
             return
 
         player = BigWorld.player()
-        if player is None or not hasattr(player, 'arena'):
+        if player is None or not hasattr(player, 'arena') or player.arena is None:
             return
 
         vehId = vehicle.id
-        self._battleStateData[vehId] = getVehicleStateData(vehicle)
+        playerId = player.arena.vehicles[vehId]['accountDBID']
+        self._battleStateData[vehId] = getVehicleStateData(vehicle, playerId)
         #self._updateBattleState(vehId)
         if self._battleStateTimersId.get(vehId, None) == None:
             self._battleStateTimersId[vehId] = \
