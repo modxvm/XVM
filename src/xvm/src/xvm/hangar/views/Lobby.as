@@ -32,8 +32,7 @@ package xvm.hangar.views
             hideTutorial();
 
             //Cmd.runTest("battleResults", "9734308549388187");
-            //Cmd.runTest("battleResults", "103617539112960506");
-            //Cmd.runTest("battleResults", "69889899666055611");
+            //Cmd.runTest("battleResults", "1390325263390697");
         }
 
         public override function onBeforeDispose(e:LifeCycleEvent):void

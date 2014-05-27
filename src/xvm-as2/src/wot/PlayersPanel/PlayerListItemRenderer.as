@@ -553,29 +553,20 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         if (format.src != null)
         {
-            if (f.timerId)
-                clearTimeout(f.timerId);
-            var $this = this;
-            //f.timerId = setTimeout(function() {
-                $this.setImgSource(f, format, obj);
-            //}, 10);
+            //var dead = (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
+            //Logger.add(dead + " " + obj.dead + " " + m_name);
+            var src:String = Macros.Format(m_name, format.src, obj);
+            src = "../../" + Utils.fixImgTag(src).split("img://").join("");
+            if (f.source != src)
+            {
+                //Logger.add(m_name + " " + f.source + " => " + src);
+                f._visible = false;
+                f.source = src;
+            }
         }
 
         if (needAlign)
             alignField(f);
-    }
-
-    private function setImgSource(f, format, obj)
-    {
-        delete f.timerId;
-        var src:String = Macros.Format(m_name, format.src, obj);
-        src = "../../" + Utils.fixImgTag(src).split("img://").join("");
-        if (f.source != src)
-        {
-            //Logger.add(m_name + " " + f.source + " => " + src);
-            f._visible = false;
-            f.source = src;
-        }
     }
 
     private function alignField(field)
@@ -622,10 +613,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 img._y = y;
             if (img.width != w || img.height != h)
             {
-                //Logger.addObject(img["data"]);
                 //Logger.add(img.width + "->" + w + " " + x + " " + y + " " + m_name + " " + wrapper._name);
                 img.setSize(w, h);
-                //img.validateNow();
+                img.validateNow();
             }
         }
     }

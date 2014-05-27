@@ -29,6 +29,9 @@
       //{ "x": 500, "y": 10, "w": 5, "h": 3, "borderColor": "0x00FF00" },
       //{ "x": 500, "y": 15, "w": 5, "h": 4, "borderColor": "0x00FF00" },
 
+      //{ "x": 350, "y": 5, "h": 13, "w": 146, "src": "xvm://configs/sirmax/img/hp-bg.png" },
+      //{ "x": 350, "y": 5, "h": 14, "w": "{{hp-ratio:150}}", "src": "xvm://configs/sirmax/img/hp-{{squad?squad|ally}}-{{alive}}.png" },
+
       { "src": "xvm://configs/sirmax/img/panel-bg-l-{{alive|dead}}.png" },
       { "x": 25, "y": 2, "h": 24, "w": "{{hp-max:230}}", "bgColor": 0, "alpha": "{{alive?50|0}}" },
       { "x": 25, "y": 2, "h": 24, "w": "{{hp:230}}", "bgColor": ${"def.c1"}, "alpha": 60 },
@@ -57,10 +60,9 @@
       //{ "x": 450, "y": 10, "w": 5, "h": 3, "bgColor": "0xFFFFFF" },
       //{ "x": 450, "y": 15, "w": 5, "h": 4, "bgColor": "0xFFFFFF" },
 
-      //{ "x": 400, "y": 5, "h": 14, "w": 100, "src": "xvmres://icons2/hp_bg.png" },
-      //{ "x": 400, "y": 10, "h": 14, "w": "{{hp-ratio:100}}", "src": "xvmres://icons2/enemy/hp_{{alive|dead}}.png" },
-      //{ "x": 500, "y": 5, "format": "{{hp-ratio}}" },
-
+      //{ "x": 350, "y": 5, "h": 13, "w": 146, "src": "xvm://configs/sirmax/img/hp-bg.png" },
+      //{ "x": 350, "y": 5, "h": 14, "w": "{{hp-ratio:150}}", "src": "xvm://configs/sirmax/img/hp-enemy-{{alive}}.png" },
+     
       { "src": "xvm://configs/sirmax/img/panel-bg-r-{{alive|dead}}.png" },
       { "x": 25, "y": 2, "h": 24, "w": "{{hp-max:230}}", "bgColor": 0, "alpha": "{{alive?50|0}}" },
       { "x": 25, "y": 2, "h": 24, "w": "{{hp:230}}", "bgColor": ${"def.c2"}, "alpha": 60 },

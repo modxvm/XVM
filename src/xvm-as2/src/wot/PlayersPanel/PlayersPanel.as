@@ -91,7 +91,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private function setDataImpl()
     {
         m_data_arguments = arguments;
-        validateNow(); // TODO: invalidate(100)
+        validateNow(); // TODO: invalidate(100);
     }
 
     private function draw()
