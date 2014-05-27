@@ -177,6 +177,11 @@ class Xvm(object):
         #log("invalidateBattleState: " + str(vehicle.id))
         if self.config is None or not self.config['battle']['allowHpInPanelsAndMinimap']:
             return
+
+        player = BigWorld.player()
+        if player is None or not hasattr(player, 'arena'):
+            return
+
         vehId = vehicle.id
         self._battleStateData[vehId] = getVehicleStateData(vehicle)
         #self._updateBattleState(vehId)
