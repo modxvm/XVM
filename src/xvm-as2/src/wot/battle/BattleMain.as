@@ -129,7 +129,7 @@ class wot.battle.BattleMain
 
     function updateState(moduleName:String, state:String)
     {
-        Logger.add("updateState: " + moduleName + ", " + state);
+        //Logger.add("updateState: " + moduleName + ", " + state);
     	_root.damagePanel.updateState.apply(_root.damagePanel, arguments);
 
         if (state == "destroyed")
