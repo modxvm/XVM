@@ -406,6 +406,31 @@ class com.xvm.Macros
 
             // {{c:system}}
             pdata["c:system"] = function(o):String { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
+
+            // hitlog
+
+            // {{dead}}
+            pdata["dead"] = function(o):String
+            {
+                return o.curHealth < 0
+                    ? Config.config.hitLog.blowupMarker
+                    : (o.curHealth == 0 || o.dead) ? Config.config.hitLog.deadMarker : null;
+            }
+
+            // {{n}}
+            pdata["n"] = function(o):Number { return o.global.hits.length }
+
+            // {{dmg-total}}
+            pdata["dmg-total"] = function(o):Number { return o.global.total }
+
+            // {{dmg-avg}}
+            pdata["dmg-avg"] = function(o):Number { return o.global.hits.length == 0 ? 0 : Math.round(o.global.total / o.global.hits.length); }
+
+            // {{n-player}}
+            pdata["n-player"] = function(o):Number { return o.hits.length };
+
+            // {{dmg-player}}
+            pdata["dmg-player"] = function(o):Number { return o.total };
         }
     }
 
@@ -611,36 +636,6 @@ class com.xvm.Macros
 
         // {{turret}}
         pdata["turret"] = data.turret || "";
-    }
-
-    public static function RegisterHitlogMacros(playerName:String, data:Object, hits:Array, total:Number)
-    {
-        if (!data)
-            return;
-        var pname:String = Utils.GetPlayerName(playerName);
-        if (!dict.hasOwnProperty(pname))
-            dict[pname] = { };
-        var pdata = dict[pname];
-
-        // {{dead}}
-        pdata["dead"] = data.curHealth < 0
-            ? Config.config.hitLog.blowupMarker
-            : (data.curHealth == 0 || data.dead) ? Config.config.hitLog.deadMarker : null;
-
-        // {{n}}
-        pdata["n"] = hits.length;
-
-        // {{n-player}}
-        pdata["n-player"] = data.hits.length;
-
-        // {{dmg-total}}
-        pdata["dmg-total"] = total;
-
-        // {{dmg-avg}}
-        pdata["dmg-avg"] = hits.length == 0 ? 0 : Math.round(total / hits.length);
-
-        // {{dmg-player}}
-        pdata["dmg-player"] = data.total;
     }
 
     // PRIVATE

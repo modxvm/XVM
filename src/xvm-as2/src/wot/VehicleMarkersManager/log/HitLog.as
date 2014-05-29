@@ -120,10 +120,14 @@ class wot.VehicleMarkersManager.log.HitLog
         player.dead = last_player_hit_data.dead;
         player.damageType = last_player_hit_data.damageType;
 
-        Macros.RegisterHitlogMacros(playerName, player, hits, total);
+        player.global = {
+            hits: hits,
+            total: total
+        };
 
         //Logger.addObject(player);
         var header:String = Macros.Format(playerName, formatHeader, player);
+        //Logger.add(formatHeader);
 
         if (lines <= 0)
         {
