@@ -17,6 +17,7 @@ XVM-5.3.0-test2:
       minimap/circles/artillery - maximum range of fire for artillery
       minimap/circles/shell - maximum range of shooting for autocannon and semi-automatic cannon
       minimap/circles/view - view distance (dynamically changes when switching binocular telescope)
+      minimap/circles/major - removed, replaced with "view" section
     Omegaice's code was used for this component.
   * added macro {{squad-num}} - squad number or null if not in squad
   * changed value of macro {{squad}} from '1' to 'sq'

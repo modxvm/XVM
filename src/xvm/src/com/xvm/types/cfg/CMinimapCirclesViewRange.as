@@ -6,6 +6,9 @@ package com.xvm.types.cfg
 {
     public dynamic class CMinimapCirclesViewRange extends Object
     {
+        public var enabled:Boolean;
+        public var distance:String;
+        public var scale:Number;
         public var alpha:Number;
         public var color:String;
         public var thickness:Number;

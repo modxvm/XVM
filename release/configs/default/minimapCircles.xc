@@ -5,13 +5,36 @@
 {
     "circles": {
         "enabled": true,
-        // Основные круги.
-        // "enabled": false - выключен; "distance" - дистанция; "thickness" - толщина; "alpha" - прозрачность; "color" - цвет.
-        "major": [
-            // 445 meters - maximum reveal distance. / 445 метров - максимальная дистанция засвета.
-            { "enabled": true,  "distance": 445, "thickness": 0.75, "alpha": 45, "color": "0xFFCC66" },
-            // 50 meters - X-ray reveal distance. / 50 метров - дистанция засвета "рентгеном".
-            { "enabled": false, "distance": 50,  "thickness": 1,    "alpha": 100, "color": "0xFFFFFF" }
+        // TODO: better description and translation
+        // View distance
+        // Дальность обзора
+        // Параметры:
+        //   "enabled": false - выключен;
+        //   "distance" - дистанция;
+        //   "scale" - масштаб круга (множитель расстояния);
+        //   "thickness" - толщина;
+        //   "alpha" - прозрачность;
+        //   "color" - цвет.
+        // Доступные значения расстояния:
+        //   N - число в метрах, рисуется статический круг
+        //   "blindarea" - граница слепой зоны
+        //   "dynamic"   - реальная дальность обзора танка c учётом стоит/движется
+        //   "standing"  - реальная дальность обзора танка стоя
+        //   "motion"    - реальная дальность обзора танка в движении
+        // Источник:
+        //   http://www.koreanrandom.com/forum/topic/15467-/page-5#entry187139
+        //   http://www.koreanrandom.com/forum/topic/15467-/page-4#entry186794
+        "view": [
+            // Simple model (one dynamic circle), for most players
+            { "enabled": true, "distance": "blindarea", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0xFFFF00" }
+
+            /*
+            // Extended model (4 circles), for experienced players
+            { "enabled": true, "distance": 50, "scale": 1, "thickness": 0.75, "alpha": 60, "color": "0xFFFFFF" },
+            { "enabled": true, "distance": 445, "scale": 1, "thickness": 1.1, "alpha": 45, "color": "0xFFCC66" },
+            { "enabled": true, "distance": standing", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0xFF0000" },
+            { "enabled": true, "distance": motion", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x0000FF" }
+            */
         ],
         // Maximum range of fire for artillery
         // Artillery gun fire range may differ depending on vehicle angle relative to ground
@@ -22,21 +45,10 @@
         // Дальнобойность арты может меняться в зависимости от углов постановки машины на склонах местности
         // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
-        "artillery": { "enabled": true, "alpha": 50, "color": "0xFF0000", "thickness": 0.5 },
+        "artillery": { "enabled": true, "alpha": 55, "color": "0x3EB5F1", "thickness": 0.5 },
         // Maximum range of shooting for machine gun
         // Максимальная дальность полета снаряда для пулеметных танков
-        "shell":     { "enabled": true, "alpha": 50, "color": "0xFF0000", "thickness": 0.5 },
-        // View distance (dynamically changes when switching stereoscope)
-        // Дальность обзора (динамически изменяется при включении стереотрубы)
-        "view": {
-          "enabled": true,
-          // Active circle - current view range
-          // Активный круг - текущая дальность обзора
-          "active":  { "alpha": 50, "color": "0xAAAAFF", "thickness": 1 },
-          // Passive circle - view range with or without binoculars (depending from current state)
-          // Пассивный круг - с рогами или без них, в зависимости от текущего состояния
-          "passive": { "alpha": 0, "color": "0x8888FF", "thickness": 0.5 }
-        },
+        "shell":     { "enabled": true, "alpha": 55, "color": "0x3EB5F1", "thickness": 0.5 },
         // Special circles dependent on vehicle type.
         // Many configuration lines for the same vehicle make many circles.
         // See other vehicle types at (replace : symbol with -):

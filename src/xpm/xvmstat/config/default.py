@@ -441,10 +441,6 @@ class _DefaultConfig(object):
             };
             c.circles = {
               enabled: true,
-              major: [
-                { enabled: true, distance: 445, thickness: 0.75, alpha: 45, color: 0xFFCC66 },
-                { enabled: false, distance: 50, thickness: 1, alpha: 100, color: 0xFFFFFF }
-              ],
               special: [
               ]
             };

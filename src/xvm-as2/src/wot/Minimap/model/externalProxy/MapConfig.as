@@ -77,14 +77,9 @@ class wot.Minimap.model.externalProxy.MapConfig
     public static function get mapSizeLabelShadow():DropShadowFilter            { return Utils.extractShadowFilter(labels.mapSize.shadow); }
     public static function get mapSizeLabelWidth() :Number                      { return mapSize.width; }
     public static function get mapSizeLabelHeight():Number                      { return mapSize.height; }
+
     /** Circles */
     public static function get circles():Object         { return minimap.circles; }
-    public static function get circlesEnabled():Boolean { return circles.enabled; }
-    public static function get circlesMajor():Array     { return circles.major; }
-    public static function get circlesSpecial():Array   { return circles.special; }
-    public static function get circlesView():Array      { return circles.view; }
-    public static function get circlesShell():Array     { return circles.shell; }
-    public static function get circlesInternal():Array  { return circles._internal; }
 
     /** Square */
     public static function get squareEnabled():Boolean  { return square.enabled; }

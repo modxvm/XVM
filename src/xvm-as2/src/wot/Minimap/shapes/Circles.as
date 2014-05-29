@@ -15,8 +15,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 {
     private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness/angularity */
 
-    private var mc_view:MovieClip = null;
-    private var mc_binocular:MovieClip = null;
+    private var dynamicCircles:Array = [];
 
     private var destroyedCrew:Object = {};
     private var surveyingDeviceDestroyed:Boolean = false;
@@ -34,16 +33,23 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         for (var i in circlesCfg)
         {
             var circleCfg:CircleCfg = circlesCfg[i];
-
-            if (circleCfg.enabled)
-            {
-                var radius:Number = scaleFactor * circleCfg.distance;
-                drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
-            }
+            var radius:Number = scaleFactor * circleCfg.distance;
+            if (circleCfg.scale != null)
+                radius *= circleCfg.scale;
+            drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
         }
 
         var cfg = MapConfig.circles;
         //Logger.addObject(cfg, 2);
+
+        if (dynamicCircles.length > 0)
+        {
+            onViewRangeChanged();
+            GlobalEventDispatcher.addEventListener(Defines.E_MODULE_DESTROYED, this, onModuleDestroyed);
+            GlobalEventDispatcher.addEventListener(Defines.E_MODULE_REPAIRED, this, onModuleRepaired);
+            GlobalEventDispatcher.addEventListener(Defines.E_BINOCULAR_TOGGLED, this, onBinocularToggled);
+            GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
+        }
 
         if (cfg.artillery.enabled)
         {
@@ -58,17 +64,6 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             if (radius > 0)
                 drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
         }
-
-        if (cfg.view.enabled || cfg.camouflage.enabled)
-        {
-            onViewRangeChanged(false);
-            GlobalEventDispatcher.addEventListener(Defines.E_MODULE_DESTROYED, this, onModuleDestroyed);
-            GlobalEventDispatcher.addEventListener(Defines.E_MODULE_REPAIRED, this, onModuleRepaired);
-            if (cfg.view.enabled)
-                GlobalEventDispatcher.addEventListener(Defines.E_BINOCULAR_TOGGLED, this, onBinocularToggled);
-            if (cfg.camouflage.enabled)
-                GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
-        }
     }
 
     /** Private */
@@ -78,19 +73,40 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         var cfg:Array = [];
 
         /** Special vehicle type dependent circle configs */
-        var spec:Array = MapConfig.circlesSpecial;
-        for (var i in spec)
+        var spec:Array = MapConfig.circles.special;
+        var len:Number = spec.length;
+        for (var i:Number = 0; i < len; ++i)
         {
             var rule:Object = spec[i];
             if (rule[vehicleType])
             {
-                cfg.push(spec[i][vehicleType]);
+                var c = spec[i][vehicleType];
+                if (c.enabled)
+                    cfg.push(c);
             }
         }
 
-        /** Major circle configs */
-        cfg = cfg.concat(MapConfig.circlesMajor);
+        dynamicCircles = [];
+        var view:Array = MapConfig.circles.view;
+        len = view.length;
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var c = view[i];
+            if (!c.enabled)
+                continue;
+            if (isFinite(c.distance))
+            {
+                if (isNaN(c.distance))
+                    c.distance = parseFloat(c.distance);
+                cfg.push(c);
+            }
+            else
+            {
+                dynamicCircles.push(c);
+            }
+        }
 
+        //Logger.addObject(cfg, 2);
         return cfg;
     }
 
@@ -170,9 +186,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     private function onMovingStateChanged(event)
     {
         //Logger.add("onMovingStateChanged: " + event.value);
-
-        if (event.value == "surveyingDevice")
-            onViewRangeChanged();
+        //onViewRangeChanged();
     }
 
     private function onBinocularToggled(event)
@@ -189,11 +203,9 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     private function onViewRangeChanged()
     {
         var cfg = MapConfig.circles;
-        if (!cfg.view.enabled)
-            return;
 
+        // Calculations
         var ci = cfg._internal;
-
         var view_distance_vehicle:Number = ci.view_distance_vehicle;
         var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
         var vent:Number = ci.view_ventilation ? 5 : 0;
@@ -215,35 +227,59 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         var Kn1 = surveyingDeviceDestroyed ? 10 : 1;
         var Kn2 = surveyingDeviceDestroyed ? 0.5 : 1;
 
-        var view_distance:Number = view_distance_vehicle * (K * 0.0043 + 0.57) *
-            (1 + Kn1 * 0.0002 * Kee) * (1 + 0.0003 * Krf) * Kn2;
-
+        // Calculate final values
+        var view_distance:Number = view_distance_vehicle * (K * 0.0043 + 0.57) * (1 + Kn1 * 0.0002 * Kee) * (1 + 0.0003 * Krf) * Kn2;
         var binocular_distance:Number = view_distance * 1.25;
-
         if (ci.view_coated_optics == true)
             view_distance = view_distance * 1.1
 
         //Logger.addObject(cfg._internal, 2);
         //Logger.add("K=" + K + " view_distance=" + view_distance);
 
-        // view
-        var radius:Number = scaleFactor * view_distance;
-        if (radius > 0 && (mc_view == null || mc_view["$raduis"] != radius || mc_view["$active"] != !binoculars_enabled))
-        {
-            var c = binoculars_enabled ? cfg.view.passive : cfg.view.active;
-            if (mc_view != null)
-                mc_view.removeMovieClip();
-            mc_view = drawCircle(radius, c.thickness, c.color, c.alpha);
-        }
+        // Drawing
 
-        // binocular
-        radius = binoculars_exists ? scaleFactor * binocular_distance : 0;
-        if (radius > 0 && (mc_binocular == null || mc_binocular["$raduis"] != radius || mc_binocular["$active"] != binoculars_enabled))
+        // view
+        var len:Number = dynamicCircles.length;
+        for (var i:Number = 0; i < len; ++i)
         {
-            var c = binoculars_enabled ? cfg.view.active : cfg.view.passive;
-            if (mc_binocular != null)
-                mc_binocular.removeMovieClip();
-            mc_binocular = drawCircle(radius, c.thickness, c.color, c.alpha);
+            var dc = dynamicCircles[i];
+
+            var radius:Number = 0;
+            switch (dc.distance)
+            {
+                case "blindarea":
+                    radius = binoculars_exists && binoculars_enabled ? binocular_distance : view_distance;
+                    if (radius < 50)
+                        radius = 50;
+                    if (radius > 445)
+                        radius = 445;
+                    break;
+                case "dynamic":
+                    radius = binoculars_exists && binoculars_enabled ? binocular_distance : view_distance;
+                    break;
+                case "motion":
+                    radius = view_distance;
+                    break;
+                case "standing":
+                    radius = binocular_distance;
+                    break;
+            }
+
+            if (radius <= 0)
+                continue;
+
+            radius *= scaleFactor;
+            if (dc.scale != null)
+                radius *= dc.scale;
+
+            var mc:MovieClip = dc.$mc;
+            if (mc == null || Math.abs(dc.$radius - radius) > 0.1)
+            {
+                if (mc != null)
+                    mc.removeMovieClip();
+                dc.$mc = drawCircle(radius, dc.thickness, dc.color, dc.alpha);
+                dc.$radius = radius;
+            }
         }
     }
 }

@@ -7,13 +7,13 @@ import wot.Minimap.view.*;
 class wot.Minimap.Features
 {
     private static var _instance:Features;
-    
+
     private static var MAP_BORDER_SIZE_INDEX:Number = 0;
-    
+
     private var markerScaling:MarkerScaling;
     private var zoom:Zoom;
     private var mapSizeLabel:MapSizeLabel
-    
+
     /**
      * Shape to icon attachments.
      * Shows game related distances and direction.
@@ -28,10 +28,10 @@ class wot.Minimap.Features
         {
             _instance = new Features();
         }
-        
+
         return _instance;
     }
-    
+
     /**
      * Have to be public.
      * Invoked each time minimap.scaleMarkers is called.
@@ -44,7 +44,7 @@ class wot.Minimap.Features
         }
         markerScaling.scale();
     }
-    
+
     /**
      * Have to be public.
      * Invoked each time minimap.correctSizeIndexImpl is called.
@@ -58,15 +58,15 @@ class wot.Minimap.Features
         {
             sizeIndex = MAP_BORDER_SIZE_INDEX;
         }
-        
+
         return sizeIndex;
     }
-    
+
     /**
      * Setup alpha for camera of player himself.
      * Looks like green highlighted corner.
      * TODO: Detach camera line
-     * 
+     *
      * Have to be public.
      * Invoked each time minimap.onEntryInited is called.
      */
@@ -78,12 +78,12 @@ class wot.Minimap.Features
             camera.wrapper._alpha = MapConfig.cameraAlpha;
         }
     }
-    
+
     public function applyMajorMods():Void
     {
         setBGMapImageAlpha();
         setPlayerIconAlpha();
-        
+
         /** With enable switch */
         zoomFeature();
         /** And dependent on successful map size recognition */
@@ -93,9 +93,9 @@ class wot.Minimap.Features
             shapesFeatures();
         }
     }
-    
+
     //-- Private
-    
+
     /**
      * Set alpha of background map image.
      * Does not affect markers
@@ -104,7 +104,7 @@ class wot.Minimap.Features
     {
         MinimapProxy.wrapper.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
     }
-    
+
     /**
      * Setup alpha for icon of player himself.
      * Looks like white arrow.
@@ -116,7 +116,7 @@ class wot.Minimap.Features
         var selfIcon:MinimapEntry = IconsProxy.selfEntry;
         selfIcon.wrapper.selfIcon._alpha = MapConfig.selfIconAlpha;
     }
-    
+
     private function zoomFeature():Void
     {
         if (MapConfig.zoomEnabled)
@@ -124,7 +124,7 @@ class wot.Minimap.Features
             zoom = new Zoom();
         }
     }
-    
+
     private function mapSizeFeature():Void
     {
         /** Draw map size at map corner */
@@ -133,14 +133,14 @@ class wot.Minimap.Features
             mapSizeLabel = new MapSizeLabel();
         }
     }
-    
+
     private function shapesFeatures():Void
     {
         /**
          * Draw customized circles.
          * Outlines distance in meters.
          */
-        if (MapConfig.circlesEnabled)
+        if (MapConfig.circles.enabled)
         {
             circles = new Circles(); /** Total map side distance in meters */
         }
