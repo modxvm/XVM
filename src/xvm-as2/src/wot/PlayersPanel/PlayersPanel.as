@@ -119,6 +119,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
             var namesStr:String = "";
             var vehiclesStr:String = "";
+            var fragsStr:String = "";
             var values:Array = vehiclesStrOrig.split("<br/>");
             var len = data.length;
             for (var i = 0; i < len; ++i)
@@ -134,16 +135,18 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 {
                     namesStr += "<br/>";
                     vehiclesStr += "<br/>";
+                    fragsStr += "<br/>";
                 }
                 namesStr += value.split(item.vehicle).join(getTextValue(Defines.FIELDTYPE_NICK, item, item.userName));
                 vehiclesStr += value.split(item.vehicle).join(getTextValue(Defines.FIELDTYPE_VEHICLE, item, item.vehicle));
+                fragsStr += value.split(item.vehicle).join(getTextValue(Defines.FIELDTYPE_FRAGS, item, item.frags));
             }
 
             //Logger.add(vehiclesStr);
 
             var deadCountPrev:Number = wrapper.saved_params[wrapper.m_type].dPC;
 
-            base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStr, namesStr);
+            base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
             base.saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig);
 
             wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
@@ -223,19 +226,41 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var format:String = null;
         switch (wrapper.state)
         {
+            case "short":
+                if (fieldType == Defines.FIELDTYPE_FRAGS)
+                {
+                    format = (wrapper.type == "left")
+                        ? Config.config.playersPanel.short.fragsFormatLeft
+                        : Config.config.playersPanel.short.fragsFormatRight;
+                }
+                break;
             case "medium":
-                if (fieldType == Defines.FIELDTYPE_VEHICLE)
-                    break;
-                format = (wrapper.type == "left")
-                    ? Config.config.playersPanel.medium.formatLeft
-                    : Config.config.playersPanel.medium.formatRight;
+                if (fieldType == Defines.FIELDTYPE_NICK)
+                {
+                    format = (wrapper.type == "left")
+                        ? Config.config.playersPanel.medium.formatLeft
+                        : Config.config.playersPanel.medium.formatRight;
+                }
+                else if (fieldType == Defines.FIELDTYPE_FRAGS)
+                {
+                    format = (wrapper.type == "left")
+                        ? Config.config.playersPanel.medium.fragsFormatLeft
+                        : Config.config.playersPanel.medium.fragsFormatRight;
+                }
                 break;
             case "medium2":
-                if (fieldType == Defines.FIELDTYPE_NICK)
-                    break;
-                format = (wrapper.type == "left")
-                    ? Config.config.playersPanel.medium2.formatLeft
-                    : Config.config.playersPanel.medium2.formatRight;
+                if (fieldType == Defines.FIELDTYPE_VEHICLE)
+                {
+                    format = (wrapper.type == "left")
+                        ? Config.config.playersPanel.medium2.formatLeft
+                        : Config.config.playersPanel.medium2.formatRight;
+                }
+                else if (fieldType == Defines.FIELDTYPE_FRAGS)
+                {
+                    format = (wrapper.type == "left")
+                        ? Config.config.playersPanel.medium2.fragsFormatLeft
+                        : Config.config.playersPanel.medium2.fragsFormatRight;
+                }
                 break;
             case "large":
                 if (fieldType == Defines.FIELDTYPE_NICK)
@@ -249,6 +274,12 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                     format = (wrapper.type == "left")
                         ? Config.config.playersPanel.large.vehicleFormatLeft
                         : Config.config.playersPanel.large.vehicleFormatRight;
+                }
+                else if (fieldType == Defines.FIELDTYPE_FRAGS)
+                {
+                    format = (wrapper.type == "left")
+                        ? Config.config.playersPanel.large.fragsFormatLeft
+                        : Config.config.playersPanel.large.fragsFormatRight;
                 }
                 break;
             default:

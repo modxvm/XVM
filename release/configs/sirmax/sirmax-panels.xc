@@ -11,6 +11,8 @@
     "vehicleFormatRight": "{{hp}} / {{hp-max}}",
     //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
     //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>",
+    //"fragsFormatLeft": "{{frags|0}}",
+    //"fragsFormatRight": "{{frags|0}}",
     "extraFieldsLeft": [
       // for tests
       //{ "w": 1, "h": 23, "bgColor": "0xFFFFFF" },

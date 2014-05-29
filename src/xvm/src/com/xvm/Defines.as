@@ -91,6 +91,7 @@ package com.xvm
         public static const FIELDTYPE_NONE:int = 0;
         public static const FIELDTYPE_NICK:int = 1;
         public static const FIELDTYPE_VEHICLE:int = 2;
+        public static const FIELDTYPE_FRAGS:int = 3;
 
         // Dead State
         public static const DEADSTATE_NONE:int = 0;

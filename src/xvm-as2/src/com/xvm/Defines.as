@@ -58,6 +58,7 @@ class com.xvm.Defines
     public static var FIELDTYPE_NONE:Number = 0;
     public static var FIELDTYPE_NICK:Number = 1;
     public static var FIELDTYPE_VEHICLE:Number = 2;
+    public static var FIELDTYPE_FRAGS:Number = 3;
 
     // Dead State
     public static var DEADSTATE_NONE:Number = 0;

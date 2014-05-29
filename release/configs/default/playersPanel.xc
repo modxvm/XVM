@@ -72,7 +72,7 @@
     "none": {
       // Layout ("vertical" or "horizontal")
       // Размещение ("vertical" - вертикально, или "horizontal" - горизонтально)
-      "layout": "vertical", 
+      "layout": "vertical",
       // Extra fields.
       // Дополнительные поля.
       "extraFields": {
@@ -147,6 +147,10 @@
     // Options for the "short" panels - panels with frags and vehicle icon.
     // Режим ушей "short" - короткие уши (фраги и иконка танка).
     "short": {
+      // Display format for frags (macros allowed, see readme-en.txt).
+      // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
+      "fragsFormatLeft": "{{frags}}",
+      "fragsFormatRight": "{{frags}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
       // Set of formats for left panel (extended format supported, see above)
@@ -168,6 +172,10 @@
       // Display format for the right panel (macros allowed, see readme-en.txt).
       // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
       "formatRight": "<font color='{{c:xwn8}}'>{{nick}}</font>",
+      // Display format for frags (macros allowed, see readme-en.txt).
+      // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
+      "fragsFormatLeft": "{{frags}}",
+      "fragsFormatRight": "{{frags}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
       // Set of formats for left panel (extended format supported, see above)
@@ -189,6 +197,10 @@
       // Display format for the right panel (macros allowed, see readme-en.txt).
       // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
       "formatRight": "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
+      // Display format for frags (macros allowed, see readme-en.txt).
+      // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
+      "fragsFormatLeft": "{{frags}}",
+      "fragsFormatRight": "{{frags}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
       // Set of formats for left panel (extended format supported, see above)
@@ -212,6 +224,10 @@
       // Формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt).
       "vehicleFormatLeft": "{{vehicle}}",
       "vehicleFormatRight": "{{vehicle}}",
+      // Display format for frags (macros allowed, see readme-en.txt).
+      // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
+      "fragsFormatLeft": "{{frags}}",
+      "fragsFormatRight": "{{frags}}",
       // Extra fields. Each field have size 350x25. Fields are placed one above the other.
       // Дополнительные поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
       // Set of formats for left panel (extended format supported, see above)

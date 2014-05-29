@@ -324,6 +324,8 @@ package com.xvm.misc
               }
             };
             c.short = {
+                fragsFormatLeft: "{{frags}}",
+                fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: []
             };
@@ -334,6 +336,8 @@ package com.xvm.misc
                 // Dispay format.
                 formatLeft: "<font color='{{c:xwn8}}'>{{nick}}</font>",
                 formatRight: "<font color='{{c:xwn8}}'>{{nick}}</font>",
+                fragsFormatLeft: "{{frags}}",
+                fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: []
             };
@@ -344,6 +348,8 @@ package com.xvm.misc
                 // Dispay format.
                 formatLeft: "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
                 formatRight: "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
+                fragsFormatLeft: "{{frags}}",
+                fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: []
             };
@@ -356,6 +362,8 @@ package com.xvm.misc
                 nickFormatRight: "{{nick}} <font color='{{c:xwn8}}'>{{xwn8}}</font>",
                 vehicleFormatLeft: "{{vehicle}}",
                 vehicleFormatRight: "{{vehicle}}",
+                fragsFormatLeft: "{{frags}}",
+                fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
                 extraFieldsRight: []
             };
