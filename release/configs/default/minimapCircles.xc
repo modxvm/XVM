@@ -32,8 +32,8 @@
             // Extended model (4 circles), for experienced players
             { "enabled": true, "distance": 50, "scale": 1, "thickness": 0.75, "alpha": 60, "color": "0xFFFFFF" },
             { "enabled": true, "distance": 445, "scale": 1, "thickness": 1.1, "alpha": 45, "color": "0xFFCC66" },
-            { "enabled": true, "distance": standing", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0xFF0000" },
-            { "enabled": true, "distance": motion", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x0000FF" }
+            { "enabled": true, "distance": "standing", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0xFF0000" },
+            { "enabled": true, "distance": "motion", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x0000FF" }
             */
         ],
         // Maximum range of fire for artillery
