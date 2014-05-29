@@ -17,7 +17,7 @@
         //   "color" - цвет.
         // Доступные значения расстояния:
         //   N - число в метрах, рисуется статический круг
-        //   "blindarea" - граница слепой зоны
+        //   "blindarea" - реальная граница слепой зоны танка (50<=X<=445)
         //   "dynamic"   - реальная дальность обзора танка c учётом стоит/движется
         //   "standing"  - реальная дальность обзора танка стоя
         //   "motion"    - реальная дальность обзора танка в движении
@@ -25,15 +25,16 @@
         //   http://www.koreanrandom.com/forum/topic/15467-/page-5#entry187139
         //   http://www.koreanrandom.com/forum/topic/15467-/page-4#entry186794
         "view": [
-            // Simple model (one dynamic circle), for most players
+            // Simple model (one dynamic circle for blindarea), for most players
             { "enabled": true, "distance": "blindarea", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0xFFFF00" }
 
             /*
-            // Extended model (4 circles), for experienced players
+            // Extended model (5 circles), for experienced players
             { "enabled": true, "distance": 50, "scale": 1, "thickness": 0.75, "alpha": 60, "color": "0xFFFFFF" },
             { "enabled": true, "distance": 445, "scale": 1, "thickness": 1.1, "alpha": 45, "color": "0xFFCC66" },
             { "enabled": true, "distance": "standing", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0xFF0000" },
-            { "enabled": true, "distance": "motion", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x0000FF" }
+            { "enabled": true, "distance": "motion", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x0000FF" },
+            { "enabled": true, "distance": "dynamic", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x00FF00" }
             */
         ],
         // Maximum range of fire for artillery
