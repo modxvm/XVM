@@ -117,10 +117,12 @@
     //"iconScale": 2,
     "circles": {
         "view": [
-            { "enabled": false, "distance": 50, "scale": 1, "thickness": 0.5, "alpha": 45, "color": "0xFFFFFF" },
-            { "enabled": false, "distance": 445, "scale": 1, "thickness": 0.5, "alpha": 45, "color": "0xFFFFFF" },
+            { "enabled": true, "state": 1, "distance": 50, "scale": 1, "thickness": 0.5, "alpha": 70, "color": "0xFFFFFF" },
+            { "enabled": true, "state": 2, "distance": 50, "scale": 1, "thickness": 0.5, "alpha": 45, "color": "0xFFFFFF" },
+            //{ "enabled": true, "distance": 445, "scale": 1, "thickness": 0.5, "alpha": 45, "color": "0xFFFFFF" },
             //{ "enabled": true, "distance": "blindarea", "scale": 0.9, "thickness": 1.5, "alpha": 80, "color": "0xFFFF00" },
-            { "enabled": true, "distance": "dynamic", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0xFFFF00" },
+            { "enabled": true, "state": 1, "distance": "dynamic", "scale": 1, "thickness": 1, "alpha": 80, "color": "0x3EB5F1" },
+            { "enabled": true, "state": 2, "distance": "dynamic", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0x3EB5F1" },
             //{ "enabled": true, "distance": "motion", "scale": 1, "thickness": 0.75, "alpha": 60, "color": "0xFFFF00" },
             //{ "enabled": true, "distance": "standing", "scale": 1, "thickness": 0.75, "alpha": 50, "color": "0xFFFF00" },
             {}

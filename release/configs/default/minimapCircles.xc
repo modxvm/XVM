@@ -15,6 +15,7 @@
         //   "thickness" - толщина;
         //   "alpha" - прозрачность;
         //   "color" - цвет.
+        //   "state" - состояние танка (1-стоит, 2-двигается, 3-стоит+двигается), по умолчанию 3
         // Доступные значения расстояния:
         //   N - число в метрах, рисуется статический круг
         //   "blindarea" - реальная граница слепой зоны танка (50<=X<=445)
@@ -26,7 +27,7 @@
         //   http://www.koreanrandom.com/forum/topic/15467-/page-4#entry186794
         "view": [
             // Simple model (one dynamic circle for blindarea), for most players
-            { "enabled": true, "distance": "blindarea", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0xFFFF00" }
+            { "enabled": true, "distance": "blindarea", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0x3EB5F1" }
 
             /*
             // Extended model (5 circles), for experienced players
@@ -34,7 +35,7 @@
             { "enabled": true, "distance": 445, "scale": 1, "thickness": 1.1, "alpha": 45, "color": "0xFFCC66" },
             { "enabled": true, "distance": "standing", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0xFF0000" },
             { "enabled": true, "distance": "motion", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x0000FF" },
-            { "enabled": true, "distance": "dynamic", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x00FF00" }
+            { "enabled": true, "distance": "dynamic", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x3EB5F1" }
             */
         ],
         // Maximum range of fire for artillery
@@ -46,10 +47,10 @@
         // Дальнобойность арты может меняться в зависимости от углов постановки машины на склонах местности
         // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
-        "artillery": { "enabled": true, "alpha": 55, "color": "0x3EB5F1", "thickness": 0.5 },
+        "artillery": { "enabled": true, "alpha": 55, "color": "0xFF6666", "thickness": 0.5 },
         // Maximum range of shooting for machine gun
         // Максимальная дальность полета снаряда для пулеметных танков
-        "shell":     { "enabled": true, "alpha": 55, "color": "0x3EB5F1", "thickness": 0.5 },
+        "shell":     { "enabled": true, "alpha": 55, "color": "0xFF6666", "thickness": 0.5 },
         // Special circles dependent on vehicle type.
         // Many configuration lines for the same vehicle make many circles.
         // See other vehicle types at (replace : symbol with -):

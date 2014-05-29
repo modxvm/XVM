@@ -15,32 +15,40 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 {
     private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness/angularity */
 
+    private var staticCircles:Array = [];
     private var dynamicCircles:Array = [];
 
     private var destroyedCrew:Object = {};
     private var surveyingDeviceDestroyed:Boolean = false;
     private var binoculars_exists:Boolean = false;
     private var binoculars_enabled:Boolean = false;
+    private var moving_state:Number;
 
     public function Circles()
     {
         super();
 
+        moving_state = Defines.MOVING_STATE_STOPPED;
+
         var player:Player = PlayersPanelProxy.self;
         var vdata:VehicleData = VehicleInfo.getByIcon(player.icon);
-        var circlesCfg:Array = defineCirclesCfg(vdata.key.split(":").join("-"));
 
-        for (var i in circlesCfg)
+        staticCircles = defineCirclesCfg(vdata.key.split(":").join("-"));
+        var len:Number = staticCircles.length;
+        for (var i:Number = 0; i < len; ++i)
         {
-            var circleCfg:CircleCfg = circlesCfg[i];
+            var circleCfg:CircleCfg = staticCircles[i];
             var radius:Number = scaleFactor * circleCfg.distance;
             if (circleCfg.scale != null)
                 radius *= circleCfg.scale;
-            drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
+            circleCfg.$mc = drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
+            circleCfg.$radius = radius;
         }
 
         var cfg = MapConfig.circles;
         //Logger.addObject(cfg, 2);
+
+        GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
 
         if (dynamicCircles.length > 0)
         {
@@ -48,7 +56,6 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             GlobalEventDispatcher.addEventListener(Defines.E_MODULE_DESTROYED, this, onModuleDestroyed);
             GlobalEventDispatcher.addEventListener(Defines.E_MODULE_REPAIRED, this, onModuleRepaired);
             GlobalEventDispatcher.addEventListener(Defines.E_BINOCULAR_TOGGLED, this, onBinocularToggled);
-            GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
         }
 
         if (cfg.artillery.enabled)
@@ -102,6 +109,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             }
             else
             {
+                if (c.state == null)
+                    c.state = Defines.MOVING_STATE_ALL;
                 dynamicCircles.push(c);
             }
         }
@@ -110,7 +119,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         return cfg;
     }
 
-    private function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number)
+    private function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number):MovieClip
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
         var mc:MovieClip = selfAttachments.createEmptyMovieClip("circle" + depth, depth);
@@ -186,7 +195,9 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     private function onMovingStateChanged(event)
     {
         //Logger.add("onMovingStateChanged: " + event.value);
-        //onViewRangeChanged();
+        moving_state = event.value ? Defines.MOVING_STATE_MOVING : Defines.MOVING_STATE_STOPPED;
+        updateCirclesMovingState(staticCircles);
+        updateCirclesMovingState(dynamicCircles);
     }
 
     private function onBinocularToggled(event)
@@ -275,11 +286,30 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             var mc:MovieClip = dc.$mc;
             if (mc == null || Math.abs(dc.$radius - radius) > 0.1)
             {
+                var visible:Boolean = true;
                 if (mc != null)
+                {
+                    if (!mc._visible)
+                        visible = false;
                     mc.removeMovieClip();
+                }
                 dc.$mc = drawCircle(radius, dc.thickness, dc.color, dc.alpha);
+                dc.$mc._visible = visible;
                 dc.$radius = radius;
             }
+        }
+    }
+
+    private function updateCirclesMovingState(circles:Array)
+    {
+        var len:Number = circles.length;
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var c = circles[i];
+            var mc:MovieClip = c.$mc;
+            //Logger.add(c.state + " " + moving_state + " " + (c.state & moving_state));
+            if (mc != null)
+                mc._visible = (c.state & moving_state != 0);
         }
     }
 }

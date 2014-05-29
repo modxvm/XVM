@@ -133,6 +133,11 @@ class com.xvm.Defines
     public static var C_ALLY_ALIVE = "0x96FF00";
     public static var C_ENEMY_ALIVE = "0xF50800";
 
+    // Moving state
+    public static var MOVING_STATE_STOPPED = 0x01;
+    public static var MOVING_STATE_MOVING = 0x02;
+    public static var MOVING_STATE_ALL = MOVING_STATE_STOPPED | MOVING_STATE_MOVING;
+
     // Events
     public static var E_CONFIG_LOADED = "config_loaded";
     public static var E_STAT_LOADED = "stat_loaded";
