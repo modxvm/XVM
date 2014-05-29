@@ -101,6 +101,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             var c = view[i];
             if (!c.enabled)
                 continue;
+            if (c.state == null)
+                c.state = Defines.MOVING_STATE_ALL;
             if (isFinite(c.distance))
             {
                 if (isNaN(c.distance))
@@ -109,8 +111,6 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             }
             else
             {
-                if (c.state == null)
-                    c.state = Defines.MOVING_STATE_ALL;
                 dynamicCircles.push(c);
             }
         }
