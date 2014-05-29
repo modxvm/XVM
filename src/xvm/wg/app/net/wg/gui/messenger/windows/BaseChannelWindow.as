@@ -50,7 +50,7 @@ package net.wg.gui.messenger.windows
       override protected function onPopulate() : void {
          super.onPopulate();
          registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
-         window.contentPadding = new Padding(40,12,15,11);
+         window.contentPadding = new Padding(40,12,16,9);
          geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
       }
 

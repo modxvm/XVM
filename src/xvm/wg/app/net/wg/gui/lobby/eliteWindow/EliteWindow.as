@@ -8,7 +8,7 @@ package net.wg.gui.lobby.eliteWindow
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.utils.Constraints;
    import net.wg.data.constants.SoundTypes;
-   import net.wg.gui.cyberSport.vo.VehicleVO;
+   import net.wg.gui.rally.vo.VehicleVO;
    import flash.display.InteractiveObject;
 
 

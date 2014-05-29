@@ -1,11 +1,9 @@
 package net.wg.gui.lobby.profile.pages.technique
 {
    import net.wg.gui.components.advanced.InteractiveSortingButton;
-   import flash.text.TextField;
    import net.wg.gui.events.UILoaderEvent;
-   import scaleform.gfx.TextFieldEx;
-   import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.gui.components.controls.NormalSortingBtnInfo;
    import scaleform.clik.constants.InvalidationType;
 
 
@@ -16,14 +14,16 @@ package net.wg.gui.lobby.profile.pages.technique
          super();
       }
 
-      public var labelField:TextField;
-
       private var showSeparator:Boolean = true;
 
       override protected function configUI() : void {
          super.configUI();
          mcDescendingIcon.addEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
-         TextFieldEx.setVerticalAlign(this.labelField,TextFieldAutoSize.CENTER);
+      }
+
+      override protected function onDispose() : void {
+         mcDescendingIcon.removeEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
+         super.onDispose();
       }
 
       override protected function sortingIconLoadingCompleteHandler(param1:UILoaderEvent) : void {
@@ -38,11 +38,11 @@ package net.wg.gui.lobby.profile.pages.technique
       }
 
       override public function set data(param1:Object) : void {
-         var _loc2_:ProfileSortingBtnInfo = null;
+         var _loc2_:NormalSortingBtnInfo = null;
          super.data = param1;
-         if(param1  is  ProfileSortingBtnInfo)
+         if(param1  is  NormalSortingBtnInfo)
          {
-            _loc2_ = ProfileSortingBtnInfo(param1);
+            _loc2_ = NormalSortingBtnInfo(param1);
             this.showSeparator = _loc2_.showSeparator;
             bg.gotoAndStop(this.showSeparator?"separator":"empty");
             if(_loc2_.label)
@@ -62,27 +62,7 @@ package net.wg.gui.lobby.profile.pages.technique
                upperBg.width = this.showSeparator?_width - 2:_width;
                upperBg.height = _height;
             }
-            this.labelField.width = _width;
-            this.labelField.height = _height;
          }
-         if(InvalidationType.DATA)
-         {
-            if(!(_label == null) && !(_label == "") && !(this.labelField == null))
-            {
-               this.labelField.text = _label;
-            }
-            else
-            {
-               this.labelField.text = "";
-            }
-         }
-      }
-
-      override protected function updateAfterStateChange() : void {
-         TextFieldEx.setVerticalAlign(this.labelField,TextFieldAutoSize.CENTER);
-         super.updateAfterStateChange();
-         this.labelField.width = _width;
-         this.labelField.height = _height;
       }
    }
 

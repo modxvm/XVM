@@ -23,6 +23,8 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _linkage:String = "";
 
+      private var _showDone:Boolean = false;
+
       public function get vehicleData() : Object {
          return this._vehicleData;
       }
@@ -69,6 +71,14 @@ package net.wg.gui.lobby.questsWindow.data
 
       public function set iconSource(param1:String) : void {
          this._iconSource = param1;
+      }
+
+      public function get showDone() : Boolean {
+         return this._showDone;
+      }
+
+      public function set showDone(param1:Boolean) : void {
+         this._showDone = param1;
       }
    }
 

@@ -24,6 +24,7 @@ package net.wg.gui.lobby.training
    import net.wg.data.constants.Linkages;
    import flash.ui.Keyboard;
    import flash.events.KeyboardEvent;
+   import flash.text.TextFieldAutoSize;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.infrastructure.events.DropEvent;
@@ -303,6 +304,9 @@ package net.wg.gui.lobby.training
          this.battleIconBig.gotoAndStop(TrainingRoom.TRAINING);
          this.description.autoScroll = false;
          App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+         this.timeout.buttonMode = false;
+         this.timeout.autoSize = this.maxPlayers.autoSize = TextFieldAutoSize.LEFT;
+         this.maxPlayers.buttonMode = false;
       }
 
       private function handleEscape(param1:InputEvent) : void {

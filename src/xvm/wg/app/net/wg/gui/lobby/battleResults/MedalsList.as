@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.battleResults
 {
    import scaleform.clik.core.UIComponent;
+   import net.wg.data.constants.Values;
    import scaleform.clik.interfaces.IDataProvider;
    import flash.display.MovieClip;
    import scaleform.clik.data.DataProvider;
@@ -38,6 +39,14 @@ package net.wg.gui.lobby.battleResults
       private static const ALIGN_CENTER:String = "center";
 
       private static const INVALIDATE_FILTERS:String = "invFilt";
+
+      private static function isDisplaySpecial(param1:Object) : Boolean {
+         var _loc2_:* = "isEpic";
+         var _loc3_:Boolean = _loc2_  in  param1 && (param1[_loc2_]);
+         var _loc4_:* = "specialIcon";
+         var _loc5_:Boolean = _loc4_  in  param1 && !(param1[_loc4_] == Values.EMPTY_STR);
+         return (_loc3_) || (_loc5_);
+      }
 
       public var _itemRenderer:String = "";
 
@@ -208,7 +217,7 @@ package net.wg.gui.lobby.battleResults
             }
             _loc2_.y = Math.round((height - _loc2_.height) / 2);
             _loc2_.index = _loc7_;
-            if(!(this._stripeRenderer == "") && (_loc2_.data.isEpic))
+            if(!(this._stripeRenderer == "") && (isDisplaySpecial(_loc2_.data)))
             {
                _loc8_ = this.stripes[_loc7_];
                if(_loc8_)
@@ -253,6 +262,7 @@ package net.wg.gui.lobby.battleResults
       protected function dispatchItemEvent(param1:Event) : Boolean {
          var _loc2_:String = null;
          var _loc8_:Object = null;
+         var _loc9_:String = null;
          switch(param1.type)
          {
             case ButtonEvent.PRESS:
@@ -309,12 +319,20 @@ package net.wg.gui.lobby.battleResults
             _loc8_ = this.dataProvider[_loc3_.index];
             if(_loc8_.type == "markOfMastery")
             {
-               this.showToolTip(Tooltips.TANK_CLASS,_loc8_);
+               _loc9_ = Tooltips.TANK_CLASS;
             }
             else
             {
-               this.showToolTip(Tooltips.BATTLE_STATS_ACHIEVS,_loc8_);
+               if(_loc8_.type == "marksOnGun")
+               {
+                  _loc9_ = Tooltips.BATTLE_STATS_MARKS_ON_GUN_ACHIEVEMENT;
+               }
+               else
+               {
+                  _loc9_ = Tooltips.BATTLE_STATS_ACHIEVS;
+               }
             }
+            this.showToolTip(_loc9_,_loc8_);
          }
          else
          {
@@ -327,7 +345,7 @@ package net.wg.gui.lobby.battleResults
       }
 
       protected function showToolTip(param1:String, param2:Object) : void {
-         App.toolTipMgr.showSpecial(param1,null,param2.type,param2.rank);
+         App.toolTipMgr.showSpecial(param1,null,param2.block,param2.type,param2.rank,param2.customData);
       }
 
       protected function hideTooltip() : void {
@@ -347,7 +365,7 @@ package net.wg.gui.lobby.battleResults
          var _loc3_:MovieClip = null;
          var _loc4_:Object = null;
          var _loc5_:Class = null;
-         var _loc6_:MovieClip = null;
+         var _loc6_:SpecialAchievement = null;
          var _loc2_:Number = 0;
          while(_loc2_ < this.renderers.length)
          {
@@ -357,14 +375,16 @@ package net.wg.gui.lobby.battleResults
             _loc3_.enabled = this.enabled;
             if(this._stripeRenderer != "")
             {
-               if(_loc4_.isEpic)
+               if(isDisplaySpecial(_loc4_))
                {
                   _loc5_ = getDefinitionByName(this._stripeRenderer) as Class;
-                  _loc6_ = new _loc5_() as MovieClip;
-                  this.stripesArea.addChild(_loc6_);
+                  _loc6_ = new _loc5_() as SpecialAchievement;
                   if(_loc6_)
                   {
+                     _loc6_.data = _loc4_;
+                     this.stripesArea.addChild(_loc6_);
                      this.stripes.push(_loc6_);
+                     _loc6_.validateNow();
                      _loc6_.visible = false;
                   }
                }
@@ -379,6 +399,19 @@ package net.wg.gui.lobby.battleResults
 
       private function onDataChange(param1:Event) : void {
          invalidate();
+      }
+
+      override protected function onDispose() : void {
+         var _loc1_:SpecialAchievement = null;
+         while(this.stripes.length > 0)
+         {
+            _loc1_ = SpecialAchievement(this.stripes.splice(0,1)[0]);
+            if(_loc1_)
+            {
+               _loc1_.dispose();
+            }
+         }
+         super.onDispose();
       }
    }
 

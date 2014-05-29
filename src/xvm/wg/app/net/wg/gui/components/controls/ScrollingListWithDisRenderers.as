@@ -5,7 +5,7 @@ package net.wg.gui.components.controls
    import scaleform.clik.constants.InvalidationType;
 
 
-   public class ScrollingListWithDisRenderers extends ScrollingListEx
+   public class ScrollingListWithDisRenderers extends SortableScrollingList
    {
           
       public function ScrollingListWithDisRenderers() {

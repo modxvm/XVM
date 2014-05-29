@@ -1,5 +1,6 @@
 package net.wg.gui.lobby.hangar.tcarousel.data
 {
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
 
 
    public class VehicleCarouselVO extends Object
@@ -55,11 +56,9 @@ package net.wg.gui.lobby.hangar.tcarousel.data
 
       public var buySlot:Boolean = false;
 
+      public var slotPriceActionData:ActionPriceVO = null;
+
       public var slotPrice:Number = 0;
-
-      public var defSlotPrice:Number = 0;
-
-      public var slotPricePrc:Number = 0;
 
       public var availableSlots:Number = 0;
 
@@ -69,7 +68,14 @@ package net.wg.gui.lobby.hangar.tcarousel.data
          {
             if(!(this[_loc2_] == undefined) && typeof this[_loc2_] == typeof param1[_loc2_])
             {
-               this[_loc2_] = param1[_loc2_];
+               if(_loc2_ == "slotPriceActionData" && (param1[_loc2_]))
+               {
+                  this.slotPriceActionData = new ActionPriceVO(param1[_loc2_]);
+               }
+               else
+               {
+                  this[_loc2_] = param1[_loc2_];
+               }
             }
             else
             {

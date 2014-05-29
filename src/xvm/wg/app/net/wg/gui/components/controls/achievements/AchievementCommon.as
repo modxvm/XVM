@@ -55,20 +55,15 @@ package net.wg.gui.components.controls.achievements
       }
 
       private function adjustClassType(param1:String, param2:Number, param3:Number, param4:Number) : void {
-         switch(param1)
+         this.checkReceived(param2,AchievementCounter.BEIGE);
+         counterType = AchievementCounter.BEIGE;
+         if(param4 != param3)
          {
-            case AchievementSection.CLASS:
-               this.checkReceived(param2,AchievementCounter.BEIGE);
-               counterType = AchievementCounter.BEIGE;
-               if(param4 != param3)
-               {
-                  this.showProgress();
-               }
-               else
-               {
-                  hideProgress();
-               }
-               break;
+            this.showProgress();
+         }
+         else
+         {
+            hideProgress();
          }
       }
 
@@ -202,7 +197,7 @@ package net.wg.gui.components.controls.achievements
       }
 
       protected function checkReceived(param1:Number, param2:String) : void {
-         if(param1 <= 0)
+         if(!getDataOwnValue(data,"isInDossier",false))
          {
             counterType = AchievementCounter.NONE;
             this.hideIcon();

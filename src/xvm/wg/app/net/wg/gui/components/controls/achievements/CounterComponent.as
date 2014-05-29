@@ -27,6 +27,11 @@ package net.wg.gui.components.controls.achievements
 
       private var originalBgWidth:uint = 0;
 
+      override protected function onDispose() : void {
+         this.background = null;
+         super.onDispose();
+      }
+
       override protected function draw() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;

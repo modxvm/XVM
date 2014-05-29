@@ -5,6 +5,8 @@ package net.wg.gui.lobby.questsWindow.components
    import net.wg.gui.components.controls.achievements.RedCounter;
    import net.wg.gui.lobby.questsWindow.data.ProgressBlockVO;
    import flash.events.Event;
+   import net.wg.data.constants.QuestsStates;
+   import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.events.ResizableBlockEvent;
 
@@ -36,6 +38,8 @@ package net.wg.gui.lobby.questsWindow.components
 
       protected var data:ProgressBlockVO = null;
 
+      public var statusMC:QuestStatusComponent;
+
       override protected function configUI() : void {
          super.configUI();
          this.progressElementsContainer.addEventListener(Event.RESIZE,this.layoutHandler);
@@ -44,16 +48,23 @@ package net.wg.gui.lobby.questsWindow.components
          this.progressElementsContainer.isNumerated = true;
          this.battlesLeftTF.text = QUESTS.QUESTS_TABLE_BATTLESLEFT;
          this.progressElementsContainer.sortingFunction = this._sortingFunction;
+         this.statusMC.setStatus(QuestsStates.DONE);
+         this.statusMC.textAlign = TextFieldAutoSize.RIGHT;
+         this.statusMC.showTooltip = false;
+         this.statusMC.validateNow();
+         this.statusMC.visible = false;
       }
 
       override protected function onDispose() : void {
          this.progressElementsContainer.removeEventListener(Event.RESIZE,this.layoutHandler);
+         this.progressElementsContainer.dispose();
+         this.progressElementsContainer = null;
          this.description = null;
          this.counter.dispose();
          this.counter = null;
          this.battlesLeftTF = null;
-         this.progressElementsContainer.dispose();
-         this.progressElementsContainer = null;
+         this.statusMC.dispose();
+         this.statusMC = null;
          if(this.data)
          {
             this.data.dispose();
@@ -64,6 +75,10 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       override public function setData(param1:Object) : void {
+         if(this.data)
+         {
+            this.data.dispose();
+         }
          this.data = new ProgressBlockVO(param1);
          invalidateData();
       }
@@ -72,11 +87,12 @@ package net.wg.gui.lobby.questsWindow.components
          if((isInvalid(InvalidationType.DATA)) && (this.data))
          {
             this.description.visible = true;
-            this.counter.visible = this.battlesLeftTF.visible = Boolean(this.data.battlesLeft);
-            this.description.width = this.data.battlesLeft?DEFAULT_WIDTH:availableWidth;
+            this.counter.visible = this.battlesLeftTF.visible = Boolean((this.data.battlesLeft) && (!this.data.showDone));
+            this.description.width = (this.data.battlesLeft) || (this.data.showDone)?DEFAULT_WIDTH:availableWidth;
             this.description.htmlText = this.data.description;
             this.description.height = this.description.textHeight + TEXT_PADDING;
             this.counter.text = this.data.battlesLeft.toString();
+            this.statusMC.visible = this.data.showDone;
             this.progressElementsContainer.isReadyForLayout = false;
             this.progressElementsContainer.setData(this.data.progressElements);
             this.progressElementsContainer.validateNow();

@@ -80,7 +80,12 @@ package net.wg.gui.lobby.hangar.maintenance
                this.actionPrice.visible = false;
                if(this.module.target == 3)
                {
-                  _loc1_ = new ActionPriceVO(this.module.actionPrc,this.module.price,this.module.defPrice,this.module.currency);
+                  _loc1_ = null;
+                  if(this.module.actionPriceData)
+                  {
+                     _loc1_ = new ActionPriceVO(this.module.actionPriceData);
+                     _loc1_.forCredits = this.module.currency == Currencies.CREDITS;
+                  }
                   this.actionPrice.setData(_loc1_);
                   this.priceMC.visible = !this.actionPrice.visible;
                   this.priceMC.text = App.utils.locale.integer(this.module.price);
@@ -162,12 +167,10 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       private function onClick(param1:MouseEvent) : void {
-         var _loc2_:MouseEventEx = null;
          App.toolTipMgr.hide();
          if(param1  is  MouseEventEx)
          {
-            _loc2_ = param1 as MouseEventEx;
-            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+            if(App.utils.commons.isRightButton(param1))
             {
                dispatchEvent(new ModuleInfoEvent(ModuleInfoEvent.SHOW_INFO,this.module.id));
             }

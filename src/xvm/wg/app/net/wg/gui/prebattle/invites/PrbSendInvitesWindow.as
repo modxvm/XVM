@@ -46,6 +46,8 @@ package net.wg.gui.prebattle.invites
 
       private static const userViewsDataProvider:Array;
 
+      private static const INV_CLAN:String = "invClan";
+
       private static function makeRoster(param1:Object) : Object {
          var _loc2_:Object =
             {
@@ -101,6 +103,8 @@ package net.wg.gui.prebattle.invites
 
       private var inviteDefaultTextColor:uint = 4144953;
 
+      private var _showClanOnly:Boolean = false;
+
       public function as_setWindowTitle(param1:String) : void {
          window.title = param1;
       }
@@ -125,6 +129,11 @@ package net.wg.gui.prebattle.invites
          this.onSearchResultReceived = param1;
       }
 
+      public function as_showClanOnly(param1:Boolean) : void {
+         this._showClanOnly = param1;
+         invalidate(INV_CLAN);
+      }
+
       public function as_setDefaultOnlineFlag(param1:Boolean) : void {
          if(this.onlineCheckBox != null)
          {
@@ -144,9 +153,9 @@ package net.wg.gui.prebattle.invites
          showWindowBg = false;
          window.title = "";
          var _loc1_:Padding = window.contentPadding as Padding;
-         _loc1_.bottom = 16;
-         _loc1_.left = 13;
-         _loc1_.right = 12;
+         _loc1_.bottom = 14;
+         _loc1_.left = 12;
+         _loc1_.right = 10;
       }
 
       override protected function draw() : void {
@@ -155,6 +164,32 @@ package net.wg.gui.prebattle.invites
          {
             window.x = 0;
             window.y = 0;
+         }
+         if(isInvalid(INV_CLAN))
+         {
+            if(this._showClanOnly)
+            {
+               this.usersAccordion.dataProvider = new DataProvider([
+                  {
+                     "label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS,
+                     "linkage":Linkages.INVITES_FRIENDS,
+                     "enabled":false
+                  }
+               ,
+                  {
+                     "label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN,
+                     "linkage":Linkages.INVITES_CLAN,
+                     "enabled":true
+                  }
+               ,
+                  {
+                     "label":MESSENGER.DIALOGS_SEARCHCONTACT_TITLE,
+                     "linkage":Linkages.INVITES_SEARCH,
+                     "enabled":false
+                  }
+               ]);
+               this.usersAccordion.selectedIndex = 1;
+            }
          }
       }
 
@@ -284,8 +319,11 @@ package net.wg.gui.prebattle.invites
       }
 
       private function onEndSendInvitesCooldown() : void {
-         this.receiverData.cleanUp();
-         this.receiverData.invalidate();
+         if(this.receiverData)
+         {
+            this.receiverData.cleanUp();
+            this.receiverData.invalidate();
+         }
          clearTimeout(this.coolDownTimerID);
          this.enableManagmentButtons(true);
          this.sendButton.enabled = false;

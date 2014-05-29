@@ -7,12 +7,12 @@ package net.wg.gui.cyberSport.views
    import net.wg.gui.components.controls.SoundButtonEx;
    import flash.text.TextField;
    import net.wg.gui.cyberSport.controls.CSVehicleButton;
-   import net.wg.gui.cyberSport.controls.ButtonDnmIcon;
+   import net.wg.gui.cyberSport.controls.GrayTransparentButton;
    import net.wg.gui.cyberSport.controls.SettingRosterVO;
    import net.wg.gui.cyberSport.controls.VehicleSelector;
    import net.wg.infrastructure.interfaces.IWindow;
    import net.wg.gui.components.windows.WindowEvent;
-   import net.wg.gui.cyberSport.vo.VehicleVO;
+   import net.wg.gui.rally.vo.VehicleVO;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
    import net.wg.gui.cyberSport.vo.VehicleSelectorItemVO;
    import net.wg.gui.components.windows.Window;
@@ -49,7 +49,7 @@ package net.wg.gui.cyberSport.views
 
       public var selectedResultBtn:CSVehicleButton;
 
-      public var refreshBtn:ButtonDnmIcon;
+      public var refreshBtn:GrayTransparentButton;
 
       public var headerText:TextField;
 
@@ -160,6 +160,8 @@ package net.wg.gui.cyberSport.views
          }
          this.selectedResultBtn.mouseEnabled = false;
          this.selectedResultBtn.mouseChildren = false;
+         this.selectedResultBtn.clickableAreaEnable = false;
+         this.selectedResultBtn.enabled = false;
          this.submitBtn.addEventListener(ButtonEvent.CLICK,this.onClickSubmitBtnHandler);
          this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.cancelBtn_buttonClickHandler);
          this.headerText.text = CYBERSPORT.WINDOW_ROSTERSLOTSETTINGS_VEHICLETAB_HEADERTEXT;
@@ -185,7 +187,6 @@ package net.wg.gui.cyberSport.views
          this.buttonBar.dataProvider = new DataProvider(this.viewStackData);
          this.buttonBar.selectedIndex = this.autoSelectTabIndex;
          this.viewStack.show(this.autoSelectTabIndex == 0?CYBER_SPORT_ALIASES.VEHICLE_SELECTOR_VIEW:CYBER_SPORT_ALIASES.RANGE_ROSTER_SETTINGS_VIEW);
-         this.selectedResultBtn.clickableAreaEnable = false;
          this.selectedTxt.mouseEnabled = false;
       }
 
@@ -217,6 +218,7 @@ package net.wg.gui.cyberSport.views
          {
             this.vehicleSelector.removeEventListener(VehicleSelectorEvent.SELECTION_CHANGED,this.vehicleSelectorHandler);
             this.vehicleSelector.removeEventListener(VehicleSelectorFilterEvent.CHANGE,this.onFiltersChanged);
+            this.vehicleSelector.dispose();
             this.vehicleSelector = null;
          }
          if(this.listData)
@@ -314,7 +316,7 @@ package net.wg.gui.cyberSport.views
                this.vehicleSelector = param1.view as VehicleSelector;
                this.vehicleSelector.y = 90;
                this.vehicleSelector.x = 2;
-               this.vehicleSelector.height = 205;
+               this.vehicleSelector.height = 232;
                this.vehicleSelector.validateNow();
                _loc2_ = getFilterDataS();
                _loc3_ = new VehicleSelectorFilterVO(_loc2_);
@@ -330,7 +332,7 @@ package net.wg.gui.cyberSport.views
       }
 
       private function onFiltersChanged(param1:VehicleSelectorFilterEvent) : void {
-         onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain,param1.level);
+         onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain,param1.level,param1.compatibleOnly);
       }
 
       private function rangeChangedHandler(param1:RosterSettingsEvent) : void {

@@ -39,6 +39,10 @@ package net.wg.infrastructure.base.meta
       function as_setPriceDDEnabled(param1:Boolean) : void;
 
       function as_setCloseBtnEnabled(param1:Boolean) : void;
+
+      function as_setDate(param1:String, param2:String, param3:String) : void;
+
+      function as_updateTimer(param1:String, param2:String) : void;
    }
 
 }

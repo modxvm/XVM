@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.hangar.maintenance
 {
    import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.infrastructure.interfaces.IResettable;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.gui.components.controls.DropdownMenu;
@@ -28,7 +29,7 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.data.components.UserContextItem;
 
 
-   public class EquipmentItem extends SoundButtonEx
+   public class EquipmentItem extends SoundButtonEx implements IResettable
    {
           
       public function EquipmentItem() {
@@ -92,8 +93,6 @@ package net.wg.gui.lobby.hangar.maintenance
       private var credits:Number;
 
       private var gold:Number;
-
-      private var actionPrc:Number = 0;
 
       override protected function onDispose() : void {
          var _loc1_:IEventCollector = App.utils.events;
@@ -233,7 +232,6 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       private function update() : void {
-         var _loc2_:ILocale = null;
          var _loc3_:IEventCollector = null;
          var _loc1_:ModuleVO = this.artifactsData[this.select.selectedIndex];
          this.toBuyDropdown.visible = false;
@@ -245,7 +243,7 @@ package net.wg.gui.lobby.hangar.maintenance
          this.actionPrice.setup(this);
          this.price.visible = !this.actionPrice.visible;
          this.countLabel.alpha = _loc1_.count > 0?1:0.3;
-         _loc2_ = App.utils.locale;
+         var _loc2_:ILocale = App.utils.locale;
          this.countLabel.text = _loc2_.integer(_loc1_.count);
          if(_loc1_.prices[1] > 0 && _loc1_.prices[0] > 0 && (_loc1_.goldEqsForCredits))
          {
@@ -278,7 +276,6 @@ package net.wg.gui.lobby.hangar.maintenance
 
       private function updateModulePrice() : void {
          var _loc1_:ModuleVO = this.selectedItem;
-         this.actionPrc = _loc1_.actionPrc;
          this.price.icon = this.toBuy.icon = _loc1_.currency;
          var _loc2_:* = 0;
          var _loc3_:* = 0;
@@ -291,22 +288,24 @@ package net.wg.gui.lobby.hangar.maintenance
          if(this.toBuyDropdown.visible)
          {
             _loc3_ = _loc1_.prices[this.toBuyDropdown.selectedIndex];
-            _loc4_ = _loc1_.defPrices[this.toBuyDropdown.selectedIndex];
          }
          else
          {
             _loc3_ = _loc1_.prices[_loc1_.currency == Currencies.CREDITS?0:1];
-            _loc4_ = _loc1_.defPrices[_loc1_.currency == Currencies.CREDITS?0:1];
          }
          var _loc6_:ILocale = App.utils.locale;
          var _loc7_:Number = _loc3_ * _loc2_;
-         var _loc8_:Number = _loc4_ * _loc2_;
          _loc5_ = _loc1_.currency == Currencies.CREDITS?_loc6_.integer(_loc7_):_loc6_.gold(_loc7_);
          this.toBuy.textColor = Currencies.TEXT_COLORS[_loc1_.currency];
          this.price.textColor = Currencies.TEXT_COLORS[_loc7_ > _loc1_.userCredits[_loc1_.currency]?Currencies.ERROR:_loc1_.currency];
          this.price.text = _loc5_;
-         var _loc9_:ActionPriceVO = new ActionPriceVO(this.actionPrc,_loc7_,_loc8_,_loc1_.currency);
-         this.actionPrice.setData(_loc9_);
+         var _loc8_:ActionPriceVO = null;
+         if(_loc1_.actionPriceData)
+         {
+            _loc8_ = new ActionPriceVO(_loc1_.actionPriceData);
+            _loc8_.forCredits = _loc1_.currency == Currencies.CREDITS;
+         }
+         this.actionPrice.setData(_loc8_);
          this.price.visible = !this.actionPrice.visible;
          if(this.actionPrice.visible)
          {
@@ -402,16 +401,14 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       override public function handleMouseDown(param1:MouseEvent) : void {
-         var _loc2_:MouseEventEx = null;
-         var _loc3_:String = null;
+         var _loc2_:String = null;
          App.toolTipMgr.hide();
          if((this.selectedItem) && param1  is  MouseEventEx)
          {
-            _loc2_ = param1 as MouseEventEx;
-            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+            if(App.utils.commons.isRightButton(param1))
             {
-               _loc3_ = (this.changed) && this.selectedItem.count == 0 && this.installedData.indexOf(this.selectedItem.compactDescr) == -1?CANCEL_BUY:UNLOAD;
-               App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem(MODULE_INFO),new UserContextItem(_loc3_)]),this,this.onContextMenuAction);
+               _loc2_ = (this.changed) && this.selectedItem.count == 0 && this.installedData.indexOf(this.selectedItem.compactDescr) == -1?CANCEL_BUY:UNLOAD;
+               App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem(MODULE_INFO),new UserContextItem(_loc2_)]),this,this.onContextMenuAction);
             }
          }
       }

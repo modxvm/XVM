@@ -69,7 +69,7 @@ package net.wg.gui.lobby.profile.pages.awards
 
       private var _allMedalsData:Array;
 
-      private var blocks:Vector.<AwardsTileListBlock>;
+      protected var blocks:Vector.<AwardsTileListBlock>;
 
       override protected function configUI() : void {
          var _loc2_:AwardsTileListBlock = null;

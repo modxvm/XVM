@@ -8,8 +8,6 @@ package net.wg.gui.lobby.tankman
    import net.wg.gui.components.carousels.PortraitsCarousel;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.ListEvent;
-   import net.wg.gui.components.controls.VO.ActionPriceVO;
-   import net.wg.data.constants.IconsTypes;
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.components.carousels.CarouselBase;
    import net.wg.data.constants.Currencies;
@@ -97,12 +95,8 @@ package net.wg.gui.lobby.tankman
          this.lastnames.searchText.maxChars = this.model.lastNameMaxChars;
          this.gold.text = this.model.priceOfGold.toString();
          this.credits.text = this.model.priceOfCredits.toString();
-         var _loc2_:ActionPriceVO = new ActionPriceVO(this.model.actionPrc,this.model.priceOfGold,this.model.defPriceOfGold,IconsTypes.GOLD);
-         var _loc3_:ActionPriceVO = new ActionPriceVO(this.model.actionPrc,this.model.priceOfCredits,this.model.defPriceOfCredits,IconsTypes.CREDITS);
-         this.actionPriceGold.setData(_loc2_);
-         this.actionPriceCredits.setData(_loc3_);
-         this.actionPriceGold.visible = (this.model.priceOfGold) && (this.model.actionPrc);
-         this.actionPriceCredits.visible = (this.model.priceOfCredits) && (this.model.actionPrc);
+         this.actionPriceGold.setData(this.model.actionPriceDataGoldVo);
+         this.actionPriceCredits.setData(this.model.actionPriceDataCreditsVo);
          this.gold.visible = !this.actionPriceGold.visible;
          this.credits.visible = !this.actionPriceCredits.visible && (this.model.priceOfCredits);
          this.updateTextColor();

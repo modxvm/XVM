@@ -30,6 +30,8 @@ package net.wg.gui.lobby.battleloading
 
       private static const TIP_IS_INVALID:String = "tip_is_invalid";
 
+      private static const TIP_TITLE_IS_INVALID:String = "tip_title_is_invalid";
+
       public var mapBG:UILoaderAlt;
 
       public var form:BattleLoadingForm;
@@ -53,6 +55,8 @@ package net.wg.gui.lobby.battleloading
       private var teamName2:String = "";
 
       private var tip:String = "";
+
+      private var tipTitle:String = "";
 
       override protected function configUI() : void {
          super.configUI();
@@ -96,6 +100,11 @@ package net.wg.gui.lobby.battleloading
          if((isInvalid(TIP_IS_INVALID)) && (this.form))
          {
             this.form.updateTip(this.tip);
+         }
+         if((isInvalid(TIP_TITLE_IS_INVALID)) && (this.form) && (this.isTipTitleInvalid))
+         {
+            this.isTipTitleInvalid = false;
+            this.form.updateTipTitle(this.tipTitle);
          }
       }
 
@@ -183,6 +192,18 @@ package net.wg.gui.lobby.battleloading
          }
          this.tip = param1;
          invalidate(TIP_IS_INVALID);
+      }
+
+      private var isTipTitleInvalid:Boolean = false;
+
+      public function as_setTipTitle(param1:String) : void {
+         if(this.tipTitle == param1)
+         {
+            return;
+         }
+         this.tipTitle = param1;
+         this.isTipTitleInvalid = true;
+         invalidate(TIP_TITLE_IS_INVALID);
       }
 
       public function as_setPlayerData(param1:Number, param2:Number) : void {

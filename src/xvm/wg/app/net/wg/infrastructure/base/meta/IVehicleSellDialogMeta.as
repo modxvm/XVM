@@ -16,6 +16,8 @@ package net.wg.infrastructure.base.meta
 
       function setResultCreditS(param1:Boolean, param2:int) : void;
 
+      function checkControlQuestionS(param1:Boolean) : void;
+
       function as_setData(param1:Object, param2:Object, param3:Object, param4:Object, param5:Number) : void;
 
       function as_checkGold(param1:Number) : void;

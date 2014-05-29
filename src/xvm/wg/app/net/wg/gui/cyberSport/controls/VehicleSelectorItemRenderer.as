@@ -10,6 +10,8 @@ package net.wg.gui.cyberSport.controls
    import flash.geom.Point;
    import net.wg.data.constants.Cursors;
    import flash.events.MouseEvent;
+   import net.wg.gui.utils.ComplexTooltipHelper;
+   import net.wg.data.constants.Values;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.gfx.MouseEventEx;
    import scaleform.clik.constants.InvalidationType;
@@ -110,7 +112,7 @@ package net.wg.gui.cyberSport.controls
                   {
                      App.cursor.setCursor(Cursors.ARROW);
                   }
-                  App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
+                  App.toolTipMgr.show(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
                }
                else
                {
@@ -125,7 +127,7 @@ package net.wg.gui.cyberSport.controls
                }
                else
                {
-                  if((enabled) && !_loc3_)
+                  if(enabled)
                   {
                      App.toolTipMgr.hide();
                   }
@@ -155,12 +157,23 @@ package net.wg.gui.cyberSport.controls
       }
 
       private function onRollOverAlert(param1:MouseEvent) : void {
+         var _loc2_:ComplexTooltipHelper = null;
          this.mouseOverAlert = true;
          if(!enabled)
          {
             App.toolTipMgr.hide();
          }
-         App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
+         if((this.model.state) && !(this.model.state == Values.EMPTY_STR))
+         {
+            _loc2_ = new ComplexTooltipHelper();
+            _loc2_.addHeader(this.model.state);
+            _loc2_.addBody(TOOLTIPS.CYBERSPORT_UNIT_SLOT_VEHICLE_NOTREADY_TEMPORALLY_BODY,true);
+            App.toolTipMgr.showComplex(_loc2_.make());
+         }
+         else
+         {
+            App.toolTipMgr.show(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
+         }
       }
 
       private function onRollOutAlert(param1:MouseEvent) : void {
@@ -196,6 +209,9 @@ package net.wg.gui.cyberSport.controls
             _loc3_ = LAYOUT_CONFIG[_loc2_];
             this.flagLoader.x = _loc3_.flagX;
             this.vehicleTypeIcon.x = _loc3_.vTypeX;
+            this.levelIcon.x = _loc3_.vLevelX;
+            this.tankIcon.x = _loc3_.vImageX;
+            this.vehicleNameTF.x = _loc3_.vNameX;
             this.checkBox.visible = this._multiSelectionMode;
          }
       }
@@ -272,6 +288,7 @@ package net.wg.gui.cyberSport.controls
          if(this.model)
          {
             this.model.dispose();
+            this.model = null;
          }
          this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverAlert);
          this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutAlert);

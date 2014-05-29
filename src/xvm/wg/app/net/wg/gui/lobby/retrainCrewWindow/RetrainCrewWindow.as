@@ -2,7 +2,7 @@ package net.wg.gui.lobby.retrainCrewWindow
 {
    import net.wg.infrastructure.base.meta.impl.RetrainCrewWindowMeta;
    import net.wg.infrastructure.base.meta.IRetrainCrewWindowMeta;
-   import net.wg.gui.lobby.profile.components.DashLine;
+   import net.wg.gui.components.advanced.DashLine;
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
    import scaleform.clik.controls.Button;

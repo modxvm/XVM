@@ -1,6 +1,7 @@
 package net.wg.data.VO
 {
    import net.wg.data.daapi.base.DAAPIDataClass;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.data.constants.Errors;
 
 
@@ -33,7 +34,11 @@ package net.wg.data.VO
 
       private var _price:Array = null;
 
-      private var _defPrice:Array = null;
+      private var _actionPriceDataVo:ActionPriceVO = null;
+
+      private var _alternativePriceDataVo:ActionPriceVO = null;
+
+      private var _actionPriceData:Object = null;
 
       private var _currency:String = "";
 
@@ -60,8 +65,6 @@ package net.wg.data.VO
       private var _goldShellsForCredits:Boolean = false;
 
       private var _goldEqsForCredits:Boolean = false;
-
-      private var _actionPrc:Number = 0;
 
       private var _tableVO:StoreTableVO = null;
 
@@ -153,12 +156,33 @@ package net.wg.data.VO
          this._price = param1;
       }
 
-      public function get defPrice() : Array {
-         return this._defPrice;
+      public function get actionPriceData() : Object {
+         return this._actionPriceData;
       }
 
-      public function set defPrice(param1:Array) : void {
-         this._defPrice = param1;
+      public function set actionPriceData(param1:Object) : void {
+         this._actionPriceData = param1;
+         if(param1)
+         {
+            this.actionPriceDataVo = new ActionPriceVO(param1);
+            this.alternativePriceDataVo = new ActionPriceVO(param1);
+         }
+      }
+
+      public function get actionPriceDataVo() : ActionPriceVO {
+         return this._actionPriceDataVo;
+      }
+
+      public function set actionPriceDataVo(param1:ActionPriceVO) : void {
+         this._actionPriceDataVo = param1;
+      }
+
+      public function get alternativePriceDataVo() : ActionPriceVO {
+         return this._alternativePriceDataVo;
+      }
+
+      public function set alternativePriceDataVo(param1:ActionPriceVO) : void {
+         this._alternativePriceDataVo = param1;
       }
 
       public function get currency() : String {
@@ -255,14 +279,6 @@ package net.wg.data.VO
 
       public function set goldShellsForCredits(param1:Boolean) : void {
          this._goldShellsForCredits = param1;
-      }
-
-      public function get actionPrc() : Number {
-         return this._actionPrc;
-      }
-
-      public function set actionPrc(param1:Number) : void {
-         this._actionPrc = param1;
       }
 
       public function get tableVO() : StoreTableVO {

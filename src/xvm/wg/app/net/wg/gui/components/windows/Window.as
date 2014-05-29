@@ -328,6 +328,9 @@ package net.wg.gui.components.windows
          {
             constraints.addElement("bgForm",this.bgForm,Constraints.ALL);
             this.bgForm.mouseEnabled = false;
+            this.bgForm.mouseChildren = false;
+            this.bgForm.tabEnabled = false;
+            this.bgForm.tabChildren = false;
          }
          if(this.minimizeBtn)
          {
@@ -341,6 +344,9 @@ package net.wg.gui.components.windows
          if(background)
          {
             background.mouseEnabled = false;
+            background.mouseChildren = false;
+            background.tabEnabled = false;
+            background.tabChildren = false;
          }
          if(titleBtn)
          {
@@ -366,7 +372,6 @@ package net.wg.gui.components.windows
                }
                catch(e:Error)
                {
-                  trace(e);
                }
             }
             if(this.windowContent.isSourceTracked)
@@ -424,7 +429,7 @@ package net.wg.gui.components.windows
       override protected function onCloseButtonClick(param1:MouseEvent) : void {
          if(this.windowContent)
          {
-            this.windowContent.onWindowCloseS();
+            this.windowContent.handleWindowClose();
          }
       }
 

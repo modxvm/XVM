@@ -1,11 +1,11 @@
 package net.wg.gui.components.controls.achievements
 {
    import net.wg.gui.lobby.battleResults.CustomAchievement;
-   import net.wg.gui.events.UILoaderEvent;
    import flash.utils.getDefinitionByName;
+   import net.wg.data.constants.Tooltips;
+   import net.wg.gui.events.UILoaderEvent;
    import flash.events.Event;
    import flash.events.MouseEvent;
-   import net.wg.data.constants.Tooltips;
 
 
    public class AchievementCounter extends CustomAchievement
@@ -41,9 +41,27 @@ package net.wg.gui.components.controls.achievements
 
       private var _counterValue:String;
 
-      override protected function onComplete(param1:UILoaderEvent) : void {
-         super.onComplete(param1);
-         invalidate(LAYOUT_INVALID);
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         this.applyData();
+      }
+
+      public function get counterType() : String {
+         return this._counterType;
+      }
+
+      public function set counterType(param1:String) : void {
+         this._counterType = param1;
+         invalidate(COUNTER_TYPE_INVALID);
+      }
+
+      public function get counterValue() : String {
+         return this._counterValue;
+      }
+
+      public function set counterValue(param1:String) : void {
+         this._counterValue = param1;
+         invalidate(COUNTER_VALUE_INVALID);
       }
 
       override protected function configUI() : void {
@@ -114,7 +132,7 @@ package net.wg.gui.components.controls.achievements
          }
          if((isInvalid(COUNTER_VALUE_INVALID)) && (this.counter))
          {
-            this.counter.text = data.hasOwnProperty("value")?data.value:"0";
+            this.counter.text = data.hasOwnProperty("localizedValue")?data.localizedValue:"0";
             this.counter.validateNow();
             invalidate(LAYOUT_INVALID);
          }
@@ -124,6 +142,14 @@ package net.wg.gui.components.controls.achievements
          }
       }
 
+      override protected function onDispose() : void {
+         if((this.counter) && (contains(this.counter)))
+         {
+            removeChild(this.counter);
+         }
+         super.onDispose();
+      }
+
       protected function applyLayoutChanges() : void {
          if((this.counter) && (!(loader.width == 0)) && !(loader.height == 0))
          {
@@ -131,11 +157,6 @@ package net.wg.gui.components.controls.achievements
             this.counter.y = loader.y + loader.originalHeight - this.counter.actualHeight - this.counter.receiveBottomPadding() ^ 0;
             addChild(this.counter);
          }
-      }
-
-      override public function setData(param1:Object) : void {
-         super.setData(param1);
-         this.applyData();
       }
 
       protected function applyData() : void {
@@ -148,22 +169,30 @@ package net.wg.gui.components.controls.achievements
          }
       }
 
-      public function get counterType() : String {
-         return this._counterType;
+      protected function showToolTip() : void {
+         if(data)
+         {
+            if(data.name == "markOfMastery")
+            {
+               App.toolTipMgr.showSpecial(Tooltips.TANK_CLASS,null,data.block,data.name,data.value);
+            }
+            else
+            {
+               if(data.name == "marksOnGun")
+               {
+                  App.toolTipMgr.showSpecial(Tooltips.MARKS_ON_GUN_ACHIEVEMENT,null,data.dossierType,data.dossierCompDescr,data.block,data.name,data.isRare,data.isDossierForCurrentUser);
+               }
+               else
+               {
+                  App.toolTipMgr.showSpecial(Tooltips.ACHIEVEMENT,null,data.dossierType,data.dossierCompDescr,data.block,data.name,data.isRare,data.isDossierForCurrentUser);
+               }
+            }
+         }
       }
 
-      public function set counterType(param1:String) : void {
-         this._counterType = param1;
-         invalidate(COUNTER_TYPE_INVALID);
-      }
-
-      public function get counterValue() : String {
-         return this._counterValue;
-      }
-
-      public function set counterValue(param1:String) : void {
-         this._counterValue = param1;
-         invalidate(COUNTER_VALUE_INVALID);
+      override protected function onComplete(param1:UILoaderEvent) : void {
+         super.onComplete(param1);
+         invalidate(LAYOUT_INVALID);
       }
 
       override protected function handleStageChange(param1:Event) : void {
@@ -184,31 +213,9 @@ package net.wg.gui.components.controls.achievements
          this.showToolTip();
       }
 
-      protected function showToolTip() : void {
-         if(data)
-         {
-            if(data.name == "markOfMastery")
-            {
-               App.toolTipMgr.showSpecial(Tooltips.TANK_CLASS,null,data.name,data.value);
-            }
-            else
-            {
-               App.toolTipMgr.showSpecial(Tooltips.ACHIEVEMENT,null,data.dossierType,data.dossierCompDescr,data.name,data.isRare,data.isDossierForCurrentUser);
-            }
-         }
-      }
-
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          App.toolTipMgr.hide();
-      }
-
-      override protected function onDispose() : void {
-         if((this.counter) && (contains(this.counter)))
-         {
-            removeChild(this.counter);
-         }
-         super.onDispose();
       }
    }
 

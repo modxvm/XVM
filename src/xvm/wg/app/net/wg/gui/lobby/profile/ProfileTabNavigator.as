@@ -36,7 +36,7 @@ package net.wg.gui.lobby.profile
 
       override protected function configUI() : void {
          super.configUI();
-         App.utils.scheduler.envokeInNextFrame(this.disposeImporters);
+         this.disposeImporters();
          this.viewStack.cache = true;
          this.bar.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChanged,false,0,true);
          this.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onSectionViewShowed,false,0,true);
@@ -52,7 +52,6 @@ package net.wg.gui.lobby.profile
             if(_loc1_  is  ProfileSectionsImporter)
             {
                _loc3_ = ProfileSectionsImporter(_loc1_);
-               _loc3_.dispose();
                removeChild(_loc3_);
                _loc3_ = null;
             }
@@ -127,6 +126,9 @@ package net.wg.gui.lobby.profile
       }
 
       override protected function onDispose() : void {
+         this._sectionsDataUtil = null;
+         this.bar.dispose();
+         this.bar = null;
          if(this.initData)
          {
             this.initData.dispose();

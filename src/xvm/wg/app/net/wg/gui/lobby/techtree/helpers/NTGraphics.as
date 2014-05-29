@@ -443,7 +443,6 @@ package net.wg.gui.lobby.techtree.helpers
          this.drawSingleLine(param1,_loc4_,_loc6_,param3);
          if(_loc5_.length > 1)
          {
-            trace("Warning! From top part of node can goes only one line.");
          }
       }
 
@@ -454,7 +453,6 @@ package net.wg.gui.lobby.techtree.helpers
          this.drawSingleLine(param1,_loc4_,_loc6_,param3);
          if(_loc5_.length > 1)
          {
-            trace("Warning! From top part of node can goes only one line.");
          }
       }
 
@@ -468,7 +466,6 @@ package net.wg.gui.lobby.techtree.helpers
          this.drawSingleLine(param1,_loc4_,_loc5_[0],param3);
          if(_loc5_.length > 1)
          {
-            trace("Warning! From bottom part of node can goes only one line.");
          }
       }
 
@@ -479,7 +476,6 @@ package net.wg.gui.lobby.techtree.helpers
          this.drawSingleLine(param1,_loc4_,_loc6_,param3);
          if(_loc5_.length > 1)
          {
-            trace("Warning! From bottom part of node can goes only one line.");
          }
       }
 

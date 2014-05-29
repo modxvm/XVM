@@ -15,10 +15,12 @@ package net.wg.gui.lobby.window
    import scaleform.clik.events.IndexEvent;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.Event;
-   import net.wg.gui.components.advanced.SortingButton;
+   import net.wg.gui.events.SortingEvent;
    import net.wg.data.constants.IconsTypes;
    import net.wg.data.constants.ColorSchemeNames;
    import scaleform.clik.data.DataProvider;
+   import net.wg.gui.components.advanced.SortingButton;
+   import net.wg.data.constants.SortingInfo;
 
 
    public class ExchangeXPWindow extends BaseExchangeWindow implements IExchangeXpWindowMeta
@@ -172,7 +174,7 @@ package net.wg.gui.lobby.window
          this.scrollList.rowCount = 7;
          this.scrollList.columnsData = this.buttonBar.dataProvider;
          this.cbSelectAll.addEventListener(Event.SELECT,this.checkBoxSelectHandler,false,0,true);
-         this.buttonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED,this.sortingDirectionChanged,false,0,true);
+         this.buttonBar.addEventListener(SortingEvent.SORT_DIRECTION_CHANGED,this.sortingDirectionChanged,false,0,true);
          this.buttonBar.selectedIndex = 1;
          this.scrollList.sortByField("vehicleName",true);
          this.itGoldBefore.filters = ExchangeUtils.getGlow(this.itGoldBefore.icon);
@@ -295,7 +297,7 @@ package net.wg.gui.lobby.window
          removeEventListener(ExchangeXPFromVehicleIR.SELECTION_CHANGED,this.selectionIRChanged);
          this.nsXpExchange.removeEventListener(IndexEvent.INDEX_CHANGE,this.nsXpChangeHandler);
          this.nsGoldExchange.removeEventListener(IndexEvent.INDEX_CHANGE,this.nsGoldChangeHandler);
-         this.buttonBar.removeEventListener(SortingButton.SORT_DIRECTION_CHANGED,this.sortingDirectionChanged);
+         this.buttonBar.removeEventListener(SortingEvent.SORT_DIRECTION_CHANGED,this.sortingDirectionChanged);
          this.cancelBtn.dispose();
          this.cancelBtn = null;
          this.submitBtn.dispose();
@@ -326,9 +328,9 @@ package net.wg.gui.lobby.window
          var _loc3_:* = false;
          param1.stopImmediatePropagation();
          var _loc2_:SortingButton = SortingButton(param1.target);
-         if(_loc2_.sortDirection != SortingButton.WITHOUT_SORT)
+         if(_loc2_.sortDirection != SortingInfo.WITHOUT_SORT)
          {
-            _loc3_ = _loc2_.sortDirection == SortingButton.ASCENDING_SORT;
+            _loc3_ = _loc2_.sortDirection == SortingInfo.ASCENDING_SORT;
             this.scrollList.sortByField(_loc2_.id,_loc3_);
          }
       }

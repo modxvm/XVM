@@ -10,6 +10,7 @@ package net.wg.gui.components.controls
    import flash.events.MouseEvent;
    import flash.filters.DropShadowFilter;
    import scaleform.clik.constants.InvalidationType;
+   import flash.text.TextFieldAutoSize;
    import net.wg.data.constants.Values;
 
 
@@ -136,6 +137,9 @@ package net.wg.gui.components.controls
          {
             if(this.userVO)
             {
+               this.textField.autoSize = TextFieldAutoSize.NONE;
+               this.textField.x = 0;
+               this.textField.width = _width;
                _loc2_ = App.utils.commons.formatPlayerName(this.textField,App.utils.commons.getUserProps(this.userVO.userName,this.userVO.clanAbbrev,this.userVO.region,this.userVO.igrType));
                this._showToolTip = _loc2_;
                if(_loc2_)

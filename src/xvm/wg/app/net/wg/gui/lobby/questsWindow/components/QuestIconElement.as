@@ -38,6 +38,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.icon.removeEventListener(MouseEvent.CLICK,hideTooltip);
          this.icon.removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
          this.icon.dispose();
+         this.labelTF = null;
          if(this.dataVO)
          {
             this.dataVO.dispose();
@@ -47,6 +48,10 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       override public function setData(param1:Object) : void {
+         if(this.dataVO)
+         {
+            this.dataVO.dispose();
+         }
          this.dataVO = new QuestIconElementVO(param1);
          invalidateData();
       }
@@ -72,9 +77,9 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       private function showTooltip(param1:MouseEvent) : void {
-         if((this.dataVO.dataType) && (this.dataVO.dataValue))
+         if((this.dataVO.dataType) && (this.dataVO.dataName) && (this.dataVO.dataBlock))
          {
-            App.toolTipMgr.showSpecial(this.dataVO.dataType,null,this.dataVO.dataValue);
+            App.toolTipMgr.showSpecial(this.dataVO.dataType,null,this.dataVO.dataBlock,this.dataVO.dataName);
          }
       }
    }

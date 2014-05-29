@@ -21,6 +21,8 @@ package net.wg.infrastructure.base.meta.impl
 
       public var setResultCredit:Function = null;
 
+      public var checkControlQuestion:Function = null;
+
       public function getDialogSettingsS() : Object {
          App.utils.asserter.assertNotNull(this.getDialogSettings,"getDialogSettings" + Errors.CANT_NULL);
          return this.getDialogSettings();
@@ -44,6 +46,11 @@ package net.wg.infrastructure.base.meta.impl
       public function setResultCreditS(param1:Boolean, param2:int) : void {
          App.utils.asserter.assertNotNull(this.setResultCredit,"setResultCredit" + Errors.CANT_NULL);
          this.setResultCredit(param1,param2);
+      }
+
+      public function checkControlQuestionS(param1:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.checkControlQuestion,"checkControlQuestion" + Errors.CANT_NULL);
+         this.checkControlQuestion(param1);
       }
    }
 

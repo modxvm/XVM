@@ -23,6 +23,8 @@ package
 
       public static const TEAM_MEDALHEADER:String = "#battle_results:team/medalHeader";
 
+      public static const TEAM_RESOURCEHEADER:String = "#battle_results:team/resourceHeader";
+
       public static const NODATA:String = "#battle_results:noData";
 
       public static const FINISH_REASON_0:String = "#battle_results:finish/reason/0";
@@ -119,6 +121,10 @@ package
 
       public static const COMMON_TOOLTIP_CRITS_TOTAL:String = "#battle_results:common/tooltip/crits/total";
 
+      public static const COMMON_CLANABBREV:String = "#battle_results:common/clanAbbrev";
+
+      public static const COMMON_BATTLETYPE_SORTIE:String = "#battle_results:common/battleType/sortie";
+
       public static const COMMON_VEHICLESTATE_ALIVE:String = "#battle_results:common/vehicleState/alive";
 
       public static const COMMON_VEHICLESTATE_DEAD0:String = "#battle_results:common/vehicleState/dead0";
@@ -144,6 +150,8 @@ package
       public static const COMMON_DETAILS_XPTITLE:String = "#battle_results:common/details/xpTitle";
 
       public static const COMMON_DETAILS_XPTITLEFIRSTVICTORY:String = "#battle_results:common/details/xpTitleFirstVictory";
+
+      public static const COMMON_DETAILS_RESOURCE:String = "#battle_results:common/details/resource";
 
       public static const COMMON_DETAILS_DETAILEDREPORTBTN:String = "#battle_results:common/details/detailedReportBtn";
 
@@ -185,15 +193,23 @@ package
 
       public static const TEAM_MEDALHEADER_BODY:String = TEAM_MEDALHEADER + "/body";
 
+      public static const TEAM_RESOURCEHEADER_HEADER:String = TEAM_RESOURCEHEADER + "/header";
+
+      public static const TEAM_RESOURCEHEADER_BODY:String = TEAM_RESOURCEHEADER + "/body";
+
+      public static const TEAM_TEAMRESOURCETOTAL:String = "#battle_results:team/teamResourceTotal";
+
       public static const TEAM_STATS_LABELS_SHOTS:String = "#battle_results:team/stats/labels_shots";
 
-      public static const TEAM_STATS_LABELS_DIRECTHITS:String = "#battle_results:team/stats/labels_directHits";
+      public static const TEAM_STATS_LABELS_HITS:String = "#battle_results:team/stats/labels_hits";
 
       public static const TEAM_STATS_LABELS_EXPLOSIONHITS:String = "#battle_results:team/stats/labels_explosionHits";
 
-      public static const TEAM_STATS_LABELS_PIERCINGS:String = "#battle_results:team/stats/labels_piercings";
-
       public static const TEAM_STATS_LABELS_DAMAGEDEALT:String = "#battle_results:team/stats/labels_damageDealt";
+
+      public static const TEAM_STATS_LABELS_SNIPERDAMAGEDEALT:String = "#battle_results:team/stats/labels_sniperDamageDealt";
+
+      public static const TEAM_STATS_LABELS_DAMAGEDEALTRATIO:String = "#battle_results:team/stats/labels_damageDealtRatio";
 
       public static const TEAM_STATS_LABELS_DIRECTHITSRECEIVED:String = "#battle_results:team/stats/labels_directHitsReceived";
 
@@ -209,17 +225,13 @@ package
 
       public static const TEAM_STATS_LABELS_SPOTTED:String = "#battle_results:team/stats/labels_spotted";
 
-      public static const TEAM_STATS_LABELS_DAMAGED:String = "#battle_results:team/stats/labels_damaged";
-
-      public static const TEAM_STATS_LABELS_KILLS:String = "#battle_results:team/stats/labels_kills";
+      public static const TEAM_STATS_LABELS_DAMAGEDKILLED:String = "#battle_results:team/stats/labels_damagedKilled";
 
       public static const TEAM_STATS_LABELS_DAMAGEASSISTED:String = "#battle_results:team/stats/labels_damageAssisted";
 
       public static const TEAM_STATS_LABELS_DAMAGEASSISTEDSELF:String = "#battle_results:team/stats/labels_damageAssistedSelf";
 
-      public static const TEAM_STATS_LABELS_CAPTUREPOINTS:String = "#battle_results:team/stats/labels_capturePoints";
-
-      public static const TEAM_STATS_LABELS_DROPPEDCAPTUREPOINTS:String = "#battle_results:team/stats/labels_droppedCapturePoints";
+      public static const TEAM_STATS_LABELS_CAPTUREPOINTSVAL:String = "#battle_results:team/stats/labels_capturePointsVal";
 
       public static const TEAM_STATS_LABELS_MILEAGE:String = "#battle_results:team/stats/labels_mileage";
 
@@ -237,6 +249,8 @@ package
 
       public static const DETAILS_XP:String = "#battle_results:details/xp";
 
+      public static const DETAILS_RESOURCE:String = "#battle_results:details/resource";
+
       public static const DETAILS_TIME_LBL_ARENACREATETIMEONLYSTR:String = "#battle_results:details/time/lbl_arenaCreateTimeOnlyStr";
 
       public static const DETAILS_TIME_LBL_DURATION:String = "#battle_results:details/time/lbl_duration";
@@ -244,6 +258,16 @@ package
       public static const DETAILS_TIME_LBL_PLAYERKILLED:String = "#battle_results:details/time/lbl_playerKilled";
 
       public static const DETAILS_TIME_VALUE:String = "#battle_results:details/time/value";
+
+      public static const DETAILS_CALCULATIONS_BATTLEPAYMENTS:String = "#battle_results:details/calculations/battlePayments";
+
+      public static const DETAILS_CALCULATIONS_TACTICALTRAINING:String = "#battle_results:details/calculations/tacticalTraining";
+
+      public static const DETAILS_CALCULATIONS_MILITARYMANEUVERS:String = "#battle_results:details/calculations/militaryManeuvers";
+
+      public static const DETAILS_CALCULATIONS_HEAVYTRUCKS:String = "#battle_results:details/calculations/heavyTrucks";
+
+      public static const DETAILS_CALCULATIONS_INTERMEDIATETOTAL:String = "#battle_results:details/calculations/intermediateTotal";
 
       public static const DETAILS_CALCULATIONS_BASE:String = "#battle_results:details/calculations/base";
 
@@ -270,6 +294,8 @@ package
       public static const DETAILS_CALCULATIONS_FIRSTWIN:String = "#battle_results:details/calculations/firstWin";
 
       public static const DETAILS_CALCULATIONS_IGRBONUS:String = "#battle_results:details/calculations/igrBonus";
+
+      public static const DETAILS_CALCULATIONS_FORTORDER:String = "#battle_results:details/calculations/fortOrder";
 
       public static const TANKSELECTOR_NEXT:String = "#battle_results:tankSelector/next";
 

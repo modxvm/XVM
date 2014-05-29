@@ -197,8 +197,7 @@ package com.xvm
             "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>\n{{l10n:token/notify_xvm_site}}",
             "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>\n{{l10n:token/notify_xvm_site}}",
             "token/active": "Статус:<tab/><font color='#00FF00'>Активен</font>",
-            "token/days_left": "Осталось дней:<tab/><font color='#eeeeee'>{0}</font>",
-            "token/hours_left": "Осталось часов:<tab/><font color='#ffff00'>{0}</font>",
+            "token/time_left": "Осталось:<tab/><font color='#eeeeee'>{0}д. {1}ч. {2}м.</font>",
             "token/cnt": "Количество запросов:<tab/><font color='#eeeeee'>{0}</font>",
             "token/unknown_status": "Неизвестный статус",
             "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете."
@@ -247,8 +246,7 @@ package com.xvm
             "token/blocked": "Status: <font color='#FF0000'>Blocked</font><br>{{l10n:token/notify_xvm_site}}",
             "token/inactive": "Status: <font color='#FFFF00'>Inactive</font><br>{{l10n:token/notify_xvm_site}}",
             "token/active": "Status: <font color='#00FF00'>Active</font>",
-            "token/days_left": "Days left:<tab/><font color='#eeeeee'>{0}</font>",
-            "token/hours_left": "Hours left:<tab/><font color='#ffff00'>{0}</font>",
+            "token/time_left": "Time left:<tab/><font color='#eeeeee'>{0}d. {1}h. {2}m.</font>",
             "token/cnt": "Requests count:<tab/><font color='#eeeeee'>{0}</font>",
             "token/unknown_status": "Unknown status",
             "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet."

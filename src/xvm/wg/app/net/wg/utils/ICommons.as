@@ -11,6 +11,7 @@ package net.wg.utils
    import net.wg.infrastructure.interfaces.IUserProps;
    import flash.events.IEventDispatcher;
    import flash.events.MouseEvent;
+   import flash.display.DisplayObject;
 
 
    public interface ICommons
@@ -19,6 +20,8 @@ package net.wg.utils
       function createMap(param1:Array) : Map;
 
       function createMappedArray(param1:Array) : Array;
+
+      function cleanupDynamicObject(param1:Object) : Object;
 
       function keyToString(param1:Number) : KeyProps;
 
@@ -45,6 +48,10 @@ package net.wg.utils
       function isLeftButton(param1:MouseEvent) : Boolean;
 
       function isRightButton(param1:MouseEvent) : Boolean;
+
+      function initTabIndex(param1:Array) : void;
+
+      function moveIconToEndOfText(param1:DisplayObject, param2:TextField, param3:int=0, param4:int=0) : void;
    }
 
 }

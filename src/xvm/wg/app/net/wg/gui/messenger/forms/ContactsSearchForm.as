@@ -12,6 +12,7 @@ package net.wg.gui.messenger.forms
    import scaleform.clik.events.ListEvent;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.utils.Padding;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.constants.InputValue;
    import net.wg.gui.messenger.evnts.ContactsFormEvent;
@@ -85,6 +86,7 @@ package net.wg.gui.messenger.forms
          this.addToIgnoredButton.addEventListener(ButtonEvent.CLICK,this.onAddToIgnoredClick);
          this.list.addEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
          this.list.addEventListener(ListEvent.INDEX_CHANGE,this.updateButtons);
+         this.list.sbPadding = new Padding(-1,-1,-1,-1);
          this.textInput.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
          this.addToFriendsButton.enabled = false;
          this.addToIgnoredButton.enabled = false;

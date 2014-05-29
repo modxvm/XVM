@@ -45,7 +45,7 @@ package net.wg.gui.components.controls
 
       public var hit:Sprite = null;
 
-      public var alertIco:Sprite = null;
+      public var alertIco:AlertIco = null;
 
       private var _state:String = "";
 

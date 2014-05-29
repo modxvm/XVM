@@ -22,6 +22,8 @@ package net.wg.gui.lobby.settings
 
       public static var MARKER_SETTINGS:String = "MarkerSettings";
 
+      public static var OTHER_SETTINGS:String = "OtherSettings";
+
       public static var tabsDataProvider:Array = [
                                                     {
                                                        "label":SETTINGS.GAMETITLE,
@@ -105,9 +107,11 @@ package net.wg.gui.lobby.settings
 
       public static var TYPE_SLIDER:String = "Slider";
 
-      public static var TYPE_DROPDOWN:String = "DropDown";
-
       public static var TYPE_STEP_SLIDER:String = "StepSlider";
+
+      public static var TYPE_RANGE_SLIDER:String = "RangeSlider";
+
+      public static var TYPE_DROPDOWN:String = "DropDown";
 
       public static var TYPE_BUTTON_BAR:String = "ButtonBar";
 
@@ -162,6 +166,8 @@ package net.wg.gui.lobby.settings
       public static var VERTICAL_SYNC:String = "vertSync";
 
       public static var FOV:String = "fov";
+
+      public static var DYNAMIC_FOV:String = "dynamicFov";
 
       public static var FULL_SCREEN:String = "fullScreen";
 
@@ -271,15 +277,7 @@ package net.wg.gui.lobby.settings
                                                        "replayEnabled":new SettingsControlProp(null,null,TYPE_DROPDOWN),
                                                        "useServerAim":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "showVehiclesCounter":new SettingsControlProp(null,null,TYPE_CHECKBOX),
-                                                       "vibroIsConnected":new SettingsControlProp(null,null,TYPE_CHECKBOX,false,false,null,true),
-                                                       "vibroGain":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
-                                                       "vibroEngine":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
-                                                       "vibroAcceleration":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
-                                                       "vibroShots":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
-                                                       "vibroHits":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
-                                                       "vibroCollisions":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
-                                                       "vibroDamage":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
-                                                       "vibroGUI":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected")
+                                                       "showMarksOnGun":new SettingsControlProp(null,null,TYPE_CHECKBOX)
                                                     }
                                                  ,
                                                  "GraphicSettings":
@@ -295,7 +293,8 @@ package net.wg.gui.lobby.settings
                                                        "resolution":new SettingsControlProp(null,null,TYPE_DROPDOWN,false,false,null,true),
                                                        "refreshRate":new SettingsControlProp(null,null,TYPE_DROPDOWN),
                                                        "dynamicRenderer":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
-                                                       "fov":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
+                                                       "fov":new SettingsControlProp(null,null,TYPE_RANGE_SLIDER),
+                                                       "dynamicFov":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "colorFilterIntensity":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
                                                        "colorFilterImages":null,
                                                        "fullScreen":new SettingsControlProp(null,null,TYPE_CHECKBOX),
@@ -449,16 +448,30 @@ package net.wg.gui.lobby.settings
                                                              "markerAltVehicleName":new SettingsControlProp(null,null,TYPE_CHECKBOX)
                                                           }
                                                     }
+                                                 ,
+                                                 "OtherSettings":
+                                                    {
+                                                       "vibroIsConnected":new SettingsControlProp(null,null,TYPE_CHECKBOX,false,false,null,true),
+                                                       "vibroGain":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
+                                                       "vibroEngine":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
+                                                       "vibroAcceleration":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
+                                                       "vibroShots":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
+                                                       "vibroHits":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
+                                                       "vibroCollisions":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
+                                                       "vibroDamage":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected"),
+                                                       "vibroGUI":new SettingsControlProp(null,null,TYPE_SLIDER,true,true,"vibroIsConnected")
+                                                    }
                                               };
 
-      public static var liveUpdateVideoSettingsOrderData:Array = [MONITOR,FULL_SCREEN,WINDOW_SIZE,RESOLUTION,SIZE,REFRESH_RATE];
+      public static var liveUpdateVideoSettingsOrderData:Array = [MONITOR,FULL_SCREEN,WINDOW_SIZE,RESOLUTION,SIZE,REFRESH_RATE,DYNAMIC_RENDERER];
 
       public static var liveUpdateVideoSettingsData:Object = {
                                                                 "monitor":null,
                                                                 "fullScreen":null,
                                                                 "windowSize":null,
                                                                 "resolution":null,
-                                                                "refreshRate":null
+                                                                "refreshRate":null,
+                                                                "dynamicRenderer":null
                                                              };
 
       public static function getControlId(param1:String, param2:String) : String {
@@ -467,6 +480,12 @@ package net.wg.gui.lobby.settings
 
       public static function get tabsDataProviderWithOther() : Array {
          var _loc1_:Array = tabsDataProvider.concat();
+         _loc1_.push(
+            {
+               "label":SETTINGS.OTHERTITLE,
+               "linkage":OTHER_SETTINGS
+            }
+         );
          return _loc1_;
       }
    }

@@ -14,7 +14,7 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _linkID:String = "";
 
-      private var _isNotDone:Boolean = false;
+      private var _isNotAvailable:Boolean = false;
 
       private var _value:String = "";
 
@@ -36,12 +36,12 @@ package net.wg.gui.lobby.questsWindow.data
          this._linkID = param1;
       }
 
-      public function get isNotDone() : Boolean {
-         return this._isNotDone;
+      public function get isNotAvailable() : Boolean {
+         return this._isNotAvailable;
       }
 
-      public function set isNotDone(param1:Boolean) : void {
-         this._isNotDone = param1;
+      public function set isNotAvailable(param1:Boolean) : void {
+         this._isNotAvailable = param1;
       }
 
       public function get value() : String {

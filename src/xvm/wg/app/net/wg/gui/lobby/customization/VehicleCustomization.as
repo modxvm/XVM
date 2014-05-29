@@ -32,6 +32,7 @@ package net.wg.gui.lobby.customization
    {
           
       public function VehicleCustomization() {
+         this.typeToNewIds = {};
          super();
          _instance = this;
          this._sectionsDataProvider = new DataProvider();
@@ -307,6 +308,8 @@ package net.wg.gui.lobby.customization
          this._sectionsData[param1] = null;
       }
 
+      private var typeToNewIds:Object;
+
       public function setSectionData(param1:String, param2:Boolean, param3:Object) : void {
          var _loc4_:Object = null;
          var _loc5_:Object = null;
@@ -335,15 +338,27 @@ package net.wg.gui.lobby.customization
             _loc5_ = null;
          }
          var _loc11_:Object = null;
+         this.typeToNewIds = {};
          _loc8_ = 0;
          while(_loc8_ < this._priceDataProvider.length)
          {
             _loc10_ = this._priceDataProvider[_loc8_];
-            if(_loc10_.section != param1)
+            if(_loc10_)
             {
+               if(!(_loc10_.type  in  this.typeToNewIds))
+               {
+                  this.typeToNewIds[_loc10_.type] = [];
+               }
                if(this._sectionsData[_loc10_.section])
                {
                   _loc11_ = this._sectionsData[_loc10_.section]._new;
+                  if(((_loc11_) && (_loc11_.price)) && (!(_loc11_.price  is  Array)) && (_loc11_.price.isGold))
+                  {
+                     if((this.typeToNewIds[_loc10_.type]) && this.typeToNewIds[_loc10_.type].indexOf(_loc11_.id) == -1)
+                     {
+                        this.typeToNewIds[_loc10_.type].push(_loc11_.id);
+                     }
+                  }
                }
             }
             _loc8_++;
@@ -557,9 +572,9 @@ package net.wg.gui.lobby.customization
 
       private function calculateTotalPrice() : void {
          var _loc6_:Object = null;
+         var _loc7_:Object = null;
          var _loc8_:Object = null;
-         var _loc9_:Object = null;
-         var _loc10_:* = NaN;
+         var _loc9_:* = 0;
          var _loc11_:Object = null;
          var _loc12_:* = NaN;
          var _loc13_:Object = null;
@@ -568,43 +583,56 @@ package net.wg.gui.lobby.customization
          var _loc3_:* = false;
          var _loc4_:* = true;
          var _loc5_:* = true;
-         var _loc7_:Object = {};
-         _loc10_ = 0;
-         while(_loc10_ < this._priceDataProvider.length)
+         var _loc10_:Object = {};
+         _loc9_ = 0;
+         while(_loc9_ < this._priceDataProvider.length)
          {
-            _loc8_ = this._priceDataProvider[_loc10_];
-            _loc8_.priceOverride = null;
-            if(!(_loc8_.type  in  _loc7_))
+            _loc7_ = this._priceDataProvider[_loc9_];
+            if(_loc7_)
             {
-               _loc7_[_loc8_.type] = [];
-            }
-            if((_loc8_) && (_loc8_.price.isGold))
-            {
-               _loc9_ = this._sectionsData[_loc8_.section]._new;
-               if((_loc9_) && _loc7_[_loc8_.type].indexOf(_loc9_.id) == -1)
+               _loc7_.priceOverride = null;
+               if(!(_loc7_.type  in  _loc10_))
                {
-                  _loc7_[_loc8_.type].push(_loc9_.id);
+                  _loc10_[_loc7_.type] = [];
                }
-               else
+               _loc8_ = this._sectionsData[_loc7_.section]?this._sectionsData[_loc7_.section]._new:null;
+               if(((_loc8_) && (_loc8_.price)) && (!(_loc8_.price  is  Array)) && (this.typeToNewIds[_loc7_.type]) && !(this.typeToNewIds[_loc7_.type].indexOf(_loc8_.id) == -1))
                {
-                  if(_loc9_)
+                  if(_loc8_.price.isGold)
                   {
-                     _loc8_.priceOverride =
+                     if(_loc10_[_loc7_.type].indexOf(_loc8_.id) == -1)
+                     {
+                        _loc10_[_loc7_.type].push(_loc8_.id);
+                     }
+                     else
+                     {
+                        _loc7_.priceOverride =
+                           {
+                              "isGold":true,
+                              "cost":0
+                           }
+                        ;
+                     }
+                  }
+                  else
+                  {
+                     _loc7_.priceOverride =
                         {
-                           "isGold":true,
+                           "isGold":false,
                            "cost":0
                         }
                      ;
                   }
                }
             }
-            _loc10_++;
+            _loc9_++;
          }
+         this._priceDataProvider.invalidate();
          this._selectedSections = [];
-         _loc10_ = 0;
-         while(_loc10_ < this._priceDataProvider.length)
+         _loc9_ = 0;
+         while(_loc9_ < this._priceDataProvider.length)
          {
-            _loc11_ = this._priceDataProvider[_loc10_];
+            _loc11_ = this._priceDataProvider[_loc9_];
             if(_loc11_.selected)
             {
                _loc3_ = false;
@@ -652,7 +680,7 @@ package net.wg.gui.lobby.customization
                   }
                );
             }
-            _loc10_++;
+            _loc9_++;
          }
          if(_loc1_ <= this._accountCredits)
          {

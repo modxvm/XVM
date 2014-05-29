@@ -2,6 +2,7 @@ package net.wg.gui.lobby.window
 {
    import flash.text.TextField;
    import net.wg.infrastructure.interfaces.IWindow;
+   import scaleform.clik.utils.Padding;
    import flash.filters.DropShadowFilter;
    import net.wg.data.constants.ColorSchemeNames;
    import net.wg.data.constants.IconsTypes;
@@ -17,10 +18,17 @@ package net.wg.gui.lobby.window
       public var errorLabel:TextField;
 
       override public function setWindow(param1:IWindow) : void {
+         var _loc2_:Padding = null;
          super.setWindow(param1);
          if(param1)
          {
             window.title = MENU.EXCHANGE_TITLE;
+            _loc2_ = new Padding();
+            _loc2_.top = 33;
+            _loc2_.right = 11;
+            _loc2_.bottom = cancelBtn.height + 20;
+            _loc2_.left = 10;
+            window.formBgPadding = _loc2_;
          }
       }
 

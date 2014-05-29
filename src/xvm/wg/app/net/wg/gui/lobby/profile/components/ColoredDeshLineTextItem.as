@@ -1,5 +1,6 @@
 package net.wg.gui.lobby.profile.components
 {
+   import net.wg.gui.components.advanced.DashLineTextItem;
    import flash.text.TextFormat;
 
 

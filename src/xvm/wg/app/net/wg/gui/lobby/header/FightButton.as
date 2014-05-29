@@ -11,10 +11,8 @@ package net.wg.gui.lobby.header
    import net.wg.data.constants.Directions;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
-   import scaleform.clik.events.ListEvent;
-   import net.wg.gui.events.FightButtonEvent;
-   import scaleform.clik.data.DataProvider;
    import net.wg.data.managers.impl.TooltipProps;
+   import net.wg.gui.events.FightButtonEvent;
 
 
    public class FightButton extends FightButtonMeta implements IHelpLayoutComponent, IFightButtonMeta
@@ -43,8 +41,6 @@ package net.wg.gui.lobby.header
       private var mainButtonLabel:String;
 
       private var dropDownButtonLabel:String;
-
-      private var items:Array;
 
       private var isDataInvalid:Boolean;
 
@@ -81,9 +77,8 @@ package net.wg.gui.lobby.header
          this.button.label = param1;
          this.button.validateNow();
          this.dropDownButtonLabel = param2?param2:MENU.HEADERBUTTONS_BATTLE;
-         this.items = param3;
          this.isDataInvalid = true;
-         this.buttondropdown.enabled = !param4;
+         this.buttondropdown.enabled = param4;
          invalidate();
       }
 
@@ -93,7 +88,7 @@ package net.wg.gui.lobby.header
       }
 
       public function showHelpLayout() : void {
-         this.buttondropdown.close();
+         App.popoverMgr.hide();
          var _loc1_:IHelpLayout = App.utils.helpLayout;
          var _loc2_:Object = _loc1_.getProps(152,37,Directions.LEFT,LOBBY_HELP.HEADER_FIGHT_BUTTON,0,0);
          this._buttonHelpLayout = _loc1_.create(root,_loc2_,this.button);
@@ -117,11 +112,6 @@ package net.wg.gui.lobby.header
             removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          }
          App.utils.scheduler.cancelTask(this.stopReadyCoolDown);
-         if(this.buttondropdown)
-         {
-            this.buttondropdown.removeEventListener(ListEvent.INDEX_CHANGE,this.onFightSelect);
-            this.buttondropdown.removeEventListener(FightButtonEvent.SELECT_TOGGLE,this.onSelectToggle);
-         }
          this.buttondropdown.dispose();
          this.buttondropdown = null;
          this.button.dispose();
@@ -131,8 +121,6 @@ package net.wg.gui.lobby.header
          this.demonstrationButton = null;
          this._buttonHelpLayout = null;
          this._dropDownHelpLayout = null;
-         this.items.splice(0,this.items.length);
-         this.items = null;
       }
 
       override protected function configUI() : void {
@@ -147,8 +135,6 @@ package net.wg.gui.lobby.header
          if(this.buttondropdown)
          {
             this.buttondropdown.visible = false;
-            this.buttondropdown.addEventListener(ListEvent.INDEX_CHANGE,this.onFightSelect,false,0,true);
-            this.buttondropdown.addEventListener(FightButtonEvent.SELECT_TOGGLE,this.onSelectToggle,false,0,true);
          }
          this.demonstrationButton.addEventListener(ButtonEvent.CLICK,this.onDemoClick);
       }
@@ -164,9 +150,6 @@ package net.wg.gui.lobby.header
          {
             this.isDataInvalid = false;
             this.buttondropdown.fightBtnlabel = this.dropDownButtonLabel;
-            this.buttondropdown.menuRowCount = this.items.length;
-            this.buttondropdown.dataProvider = new DataProvider(this.items);
-            this.buttondropdown.selectedIndex = -1;
             this.buttondropdown.validateNow();
             this.buttondropdown.visible = true;
          }
@@ -184,14 +167,6 @@ package net.wg.gui.lobby.header
          if((this.button) && (this.toolTip))
          {
             App.toolTipMgr.showComplex(this.toolTip,TooltipProps.WARNING);
-         }
-      }
-
-      private function onFightSelect(param1:ListEvent) : void {
-         if((this.buttondropdown.enabled) && !(param1.index == -1))
-         {
-            fightSelectClickS(param1.itemData.data);
-            this.buttondropdown.selectedIndex = -1;
          }
       }
 

@@ -44,6 +44,8 @@ package net.wg.gui.lobby.store
 
       private var _myHeight:Number = 0;
 
+      private const MY_HEIGHT_OFFSET:Number = 18;
+
       private var _programUpdating:Boolean = false;
 
       private var closeButton:CloseButton = null;
@@ -134,7 +136,7 @@ package net.wg.gui.lobby.store
          if(isInvalid(InvalidationType.SIZE))
          {
             x = this._myWidth - _originalWidth >> 1;
-            y = this._myHeight - _originalHeight >> 1;
+            y = this._myHeight + this.MY_HEIGHT_OFFSET - _originalHeight >> 1;
          }
       }
 

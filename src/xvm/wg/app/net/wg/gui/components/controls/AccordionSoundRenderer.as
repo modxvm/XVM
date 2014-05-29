@@ -40,6 +40,7 @@ package net.wg.gui.components.controls
 
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
+         this.buttonMode = param1;
          mouseEnabled = true;
       }
 

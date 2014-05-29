@@ -8,6 +8,8 @@ package net.wg.infrastructure.interfaces
           
       function handleWindowMinimize() : void;
 
+      function handleWindowClose() : void;
+
       function setWindow(param1:IWindow) : void;
 
       function get window() : IWindow;

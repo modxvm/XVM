@@ -8,11 +8,11 @@ package net.wg.gui.lobby.sellDialog
    import net.wg.gui.components.controls.DropdownMenu;
    import flash.display.MovieClip;
    import net.wg.utils.ILocale;
+   import net.wg.gui.lobby.sellDialog.VO.SellVehicleVo;
    import flash.text.TextFormat;
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.IconsTypes;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
-   import net.wg.data.constants.FittingTypes;
 
 
    public class SellHeaderComponent extends UIComponent
@@ -67,7 +67,7 @@ package net.wg.gui.lobby.sellDialog
          this.tankIcon.dispose();
       }
 
-      public function setData(param1:Object) : void {
+      public function setData(param1:SellVehicleVo) : void {
          var _loc2_:String = null;
          this.tankNameTF.text = param1.userName;
          if(param1.isElite)
@@ -93,25 +93,15 @@ package net.wg.gui.lobby.sellDialog
          this.tankIcon.nation = param1.nationID;
          var _loc5_:String = this.locale.makeString(DIALOGS.GATHERINGXPFORM_HEADERBUTTONS_CREW);
          this.inBarracsDrop.dataProvider = new DataProvider([{"label":MENU.BARRACKS_BTNUNLOAD},{"label":MENU.BARRACKS_BTNDISSMISS}]);
-         var _loc6_:Number = 0;
-         var _loc7_:Number = 0;
-         while(_loc7_ < param1.crew.length)
-         {
-            if(param1.crew[_loc7_] != (undefined))
-            {
-               _loc6_++;
-            }
-            _loc7_++;
-         }
-         if(_loc6_ == 0)
-         {
-            this.inBarracsDrop.selectedIndex = 1;
-            this.inBarracsDrop.enabled = false;
-         }
-         else
+         if(param1.hasCrew)
          {
             this.inBarracsDrop.selectedIndex = 0;
             this.inBarracsDrop.enabled = true;
+         }
+         else
+         {
+            this.inBarracsDrop.selectedIndex = 1;
+            this.inBarracsDrop.enabled = false;
          }
          this.inBarracsDrop.validateNow();
          this.crewTF.text = App.utils.toUpperOrLowerCase(_loc5_,true) + ": ";
@@ -119,13 +109,21 @@ package net.wg.gui.lobby.sellDialog
          {
             this._tankGoldPrice = param1.sellPrice[1];
             this._tankPrice = 0;
-            this.showPrice(true,this._tankGoldPrice,param1.defSellPrice[1],param1.sellActionPrc);
+            if(param1.actionVo)
+            {
+               param1.actionVo.ico = IconsTypes.GOLD;
+            }
+            this.showPrice(true,this._tankGoldPrice,param1.actionVo);
          }
          else
          {
             this._tankPrice = param1.sellPrice[0];
             this._tankGoldPrice = 0;
-            this.showPrice(false,this._tankPrice,param1.defSellPrice[0],param1.sellActionPrc);
+            if(param1.actionVo)
+            {
+               param1.actionVo.ico = IconsTypes.CREDITS;
+            }
+            this.showPrice(false,this._tankPrice,param1.actionVo);
             this._creditsCommon = this._creditsCommon + this.tankPrice;
          }
       }
@@ -165,7 +163,7 @@ package net.wg.gui.lobby.sellDialog
          this.vehicleActionPrice.textYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
       }
 
-      private function showPrice(param1:Boolean, param2:Number, param3:Number, param4:Number) : void {
+      private function showPrice(param1:Boolean, param2:Number, param3:ActionPriceVO) : void {
          if(param1)
          {
             this.emptySellIT.text = "+ " + this.locale.gold(param2);
@@ -177,8 +175,7 @@ package net.wg.gui.lobby.sellDialog
          this.emptySellIT.icon = param1?IconsTypes.GOLD:IconsTypes.CREDITS;
          this.emptySellIT.textColor = param1?16763253:13556185;
          this.emptySellIT.validateNow();
-         var _loc5_:ActionPriceVO = new ActionPriceVO(param4,param2,param3,param1?IconsTypes.GOLD:IconsTypes.CREDITS,false,FittingTypes.VEHICLE);
-         this.vehicleActionPrice.setData(_loc5_);
+         this.vehicleActionPrice.setData(param3);
          this.emptySellIT.visible = !this.vehicleActionPrice.visible;
       }
    }

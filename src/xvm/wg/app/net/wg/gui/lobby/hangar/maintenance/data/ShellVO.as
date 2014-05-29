@@ -31,7 +31,7 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       public var prices:Array = null;
 
-      public var defPrices:Array = null;
+      public var actionPriceData:Object = null;
 
       public var currency:String = "";
 
@@ -42,8 +42,6 @@ package net.wg.gui.lobby.hangar.maintenance.data
       public var label:String = "";
 
       public var maxAmmo:int;
-
-      public var actionPrc:int = 0;
 
       public var list:Array = null;
 

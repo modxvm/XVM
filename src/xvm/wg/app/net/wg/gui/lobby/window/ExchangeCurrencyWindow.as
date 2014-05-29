@@ -21,7 +21,6 @@ package net.wg.gui.lobby.window
          canResize = false;
          canMinimize = false;
          isCentered = true;
-         showWindowBg = false;
       }
 
       private static const SELECTED_PRIMARY_CURRENCY_INVALID:String = "selectedPrimaryCurrencyInv";

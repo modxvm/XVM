@@ -137,9 +137,9 @@ package net.wg.gui.lobby.tankman
       }
 
       private function updateSavingModes() : void {
-         this.goldButton.setDataForDropSkills(this.model.dropSkillGold.gold,this.gold >= this.model.dropSkillGold.gold,this.model.dropSkillGold.actionPrc,this.model.dropSkillGold.defGold);
-         this.creditsButton.setDataForDropSkills(this.model.dropSkillCredits.credits,this.credits > this.model.dropSkillCredits.credits,this.model.dropSkillCredits.actionPrc,this.model.dropSkillCredits.defCredits);
-         this.freeButton.setDataForDropSkills(NaN,true);
+         this.goldButton.setDataForDropSkills(this.model.dropSkillGold.gold,this.gold >= this.model.dropSkillGold.gold,this.model.dropSkillGold.actionPriceDataVo);
+         this.creditsButton.setDataForDropSkills(this.model.dropSkillCredits.credits,this.credits > this.model.dropSkillCredits.credits,this.model.dropSkillCredits.actionPriceDataVo);
+         this.freeButton.setDataForDropSkills(NaN,true,null);
       }
 
       private function autoSelectSavingMode() : void {

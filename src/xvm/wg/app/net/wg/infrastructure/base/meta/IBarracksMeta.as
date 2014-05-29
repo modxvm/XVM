@@ -24,7 +24,7 @@ package net.wg.infrastructure.base.meta
 
       function openPersonalCaseS(param1:String, param2:uint) : void;
 
-      function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Number, param6:Number, param7:Number, param8:Array) : void;
+      function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Object, param6:Number, param7:Array) : void;
 
       function as_updateTanksList(param1:Array) : void;
 

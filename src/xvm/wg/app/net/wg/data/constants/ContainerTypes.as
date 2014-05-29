@@ -16,6 +16,8 @@ package net.wg.data.constants
 
       public static const WINDOW:String = "window";
 
+      public static const BROWSER:String = "browser";
+
       public static const TOP_WINDOW:String = "topWindow";
 
       public static const CURSOR:String = "cursor";
@@ -24,7 +26,7 @@ package net.wg.data.constants
 
       public static const SERVICE_LAYOUT:String = "serviceLayout";
 
-      public static const CTNR_ORDER:Vector.<String> = Vector.<String>([WAITING,SERVICE_LAYOUT,TOP_WINDOW,WINDOW,LOBBY_SUB_VIEW,VIEW]);
+      public static const CTNR_ORDER:Vector.<String> = Vector.<String>([WAITING,SERVICE_LAYOUT,TOP_WINDOW,BROWSER,WINDOW,LOBBY_SUB_VIEW,VIEW]);
    }
 
 }

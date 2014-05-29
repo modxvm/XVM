@@ -1,15 +1,20 @@
 package net.wg.gui.components.popOvers
 {
    import net.wg.infrastructure.base.BaseViewWrapper;
+   import net.wg.infrastructure.interfaces.IPopoverWrapper;
    import flash.text.TextField;
+   import net.wg.gui.components.controls.CloseButton;
    import flash.display.MovieClip;
    import flash.text.TextFieldAutoSize;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.ComponentEvent;
    import flash.display.DisplayObject;
    import __AS3__.vec.Vector;
+   import net.wg.infrastructure.interfaces.IAbstractWrapperView;
    import flash.geom.Point;
 
 
-   public class PopOver extends BaseViewWrapper
+   public class PopOver extends BaseViewWrapper implements IPopoverWrapper
    {
           
       public function PopOver() {
@@ -21,6 +26,8 @@ package net.wg.gui.components.popOvers
       private static const ARROW_DIRECTION_INV:String = "arrowDirectionInvalid";
 
       private static const ARROW_POSITION_INV:String = "arrowPositionInvalid";
+
+      private static const CLOSE_BTN_VISIBLE_INV:String = "arrowPositionInvalid";
 
       public static const GlowArrowBottom_UI:String = "GlowArrowBottom_UI";
 
@@ -40,6 +47,8 @@ package net.wg.gui.components.popOvers
 
       public var titleTextField:TextField;
 
+      public var closeBtn:CloseButton;
+
       public var bgForm:MovieClip;
 
       public var background:MovieClip;
@@ -53,6 +62,8 @@ package net.wg.gui.components.popOvers
       public var arrowTop:MovieClip;
 
       public var arrowBottom:MovieClip;
+
+      private var _isCloseBtnVisible:Boolean = false;
 
       protected function initLayout() : void {
          layout = new PopoverInternalLayout();
@@ -80,6 +91,23 @@ package net.wg.gui.components.popOvers
          {
             this.applyArrowPositionChanges();
          }
+         if(isInvalid(CLOSE_BTN_VISIBLE_INV))
+         {
+            this.closeBtn.visible = this._isCloseBtnVisible;
+            if(this._isCloseBtnVisible)
+            {
+               this.closeBtn.addEventListener(ButtonEvent.CLICK,this.closeBtnClickHandler,false,0,true);
+               this.closeBtn.toggle = false;
+            }
+            else
+            {
+               this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.closeBtnClickHandler);
+            }
+         }
+      }
+
+      private function closeBtnClickHandler(param1:ButtonEvent) : void {
+         dispatchEvent(new ComponentEvent(ComponentEvent.HIDE));
       }
 
       private function setArrowVisible(param1:int) : void {
@@ -92,6 +120,11 @@ package net.wg.gui.components.popOvers
             _loc3_.visible = _loc4_ == param1;
             _loc4_++;
          }
+      }
+
+      override public function set wrapperContent(param1:IAbstractWrapperView) : void {
+         super.wrapperContent = param1;
+         addChild(this.closeBtn);
       }
 
       protected function applyArrowDirectionChanges() : void {
@@ -154,6 +187,32 @@ package net.wg.gui.components.popOvers
 
       override public function get height() : Number {
          return this.hitMc.height;
+      }
+
+      override protected function onDispose() : void {
+         this.titleTextField = null;
+         this.bgForm = null;
+         this.background = null;
+         this.hitMc = null;
+         this.arrowLeft = null;
+         this.arrowRight = null;
+         this.arrowTop = null;
+         this.arrowBottom = null;
+         this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.closeBtnClickHandler);
+         this.closeBtn = null;
+         super.onDispose();
+      }
+
+      public function get isCloseBtnVisible() : Boolean {
+         return this._isCloseBtnVisible;
+      }
+
+      public function set isCloseBtnVisible(param1:Boolean) : void {
+         if(this._isCloseBtnVisible != param1)
+         {
+            this._isCloseBtnVisible = param1;
+            invalidate(CLOSE_BTN_VISIBLE_INV,LAYOUT_INVALID);
+         }
       }
    }
 

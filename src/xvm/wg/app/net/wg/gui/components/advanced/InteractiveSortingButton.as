@@ -1,5 +1,6 @@
 package net.wg.gui.components.advanced
 {
+   import net.wg.data.constants.SortingInfo;
 
 
    public class InteractiveSortingButton extends SortingButton
@@ -28,17 +29,17 @@ package net.wg.gui.components.advanced
          {
             if(param1 == false)
             {
-               this.sortDirection = WITHOUT_SORT;
+               this.sortDirection = SortingInfo.WITHOUT_SORT;
             }
             else
             {
-               if(!(this._previousSelectedSorDirection == ASCENDING_SORT) && !(this._previousSelectedSorDirection == DESCENDING_SORT))
+               if(!(this._previousSelectedSorDirection == SortingInfo.ASCENDING_SORT) && !(this._previousSelectedSorDirection == SortingInfo.DESCENDING_SORT))
                {
-                  this.sortDirection = defaultSortDirection == WITHOUT_SORT?ASCENDING_SORT:defaultSortDirection;
+                  this.sortDirection = defaultSortDirection == SortingInfo.WITHOUT_SORT?SortingInfo.ASCENDING_SORT:defaultSortDirection;
                }
                else
                {
-                  this.sortDirection = defaultSortDirection == WITHOUT_SORT?this._previousSelectedSorDirection:defaultSortDirection;
+                  this.sortDirection = defaultSortDirection == SortingInfo.WITHOUT_SORT?this._previousSelectedSorDirection:defaultSortDirection;
                }
             }
          }
@@ -62,15 +63,15 @@ package net.wg.gui.components.advanced
       override protected function handleClick(param1:uint=0) : void {
          if(selected)
          {
-            if(sortDirection == ASCENDING_SORT)
+            if(sortDirection == SortingInfo.ASCENDING_SORT)
             {
-               this.sortDirection = DESCENDING_SORT;
+               this.sortDirection = SortingInfo.DESCENDING_SORT;
             }
             else
             {
-               if(sortDirection == DESCENDING_SORT)
+               if(sortDirection == SortingInfo.DESCENDING_SORT)
                {
-                  this.sortDirection = ASCENDING_SORT;
+                  this.sortDirection = SortingInfo.ASCENDING_SORT;
                }
             }
          }

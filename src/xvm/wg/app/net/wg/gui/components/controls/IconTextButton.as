@@ -24,8 +24,6 @@ package net.wg.gui.components.controls
       }
 
       override protected function configUI() : void {
-         iconOffsetTop = 1;
-         iconOffsetLeft = 2;
          if((iconSource) && iconSource.indexOf("../maps/icons/buttons/") == -1)
          {
             iconSource = "../maps/icons/buttons/" + iconSource;

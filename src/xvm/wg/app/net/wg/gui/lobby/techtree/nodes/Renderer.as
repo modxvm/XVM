@@ -16,7 +16,6 @@ package net.wg.gui.lobby.techtree.nodes
    import net.wg.gui.lobby.techtree.MenuHandler;
    import net.wg.gui.lobby.techtree.TechTreeEvent;
    import net.wg.gui.lobby.techtree.constants.ColorIndex;
-   import net.wg.gui.lobby.techtree.data.vo.ActionData;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.gui.lobby.techtree.constants.IconTextResolver;
    import net.wg.gui.lobby.techtree.constants.TTSoundID;
@@ -376,14 +375,16 @@ package net.wg.gui.lobby.techtree.nodes
       }
 
       public function populateUI() : void {
-         var _loc1_:ActionData = null;
-         var _loc2_:ActionPriceVO = null;
+         var _loc1_:ActionPriceVO = null;
          if(!(this.actionPrice == null) && (this.dataInited))
          {
             _loc1_ = this._valueObject.getActionData(this.stateProps.label);
             this.actionPrice.visible = this.isInAction();
-            _loc2_ = new ActionPriceVO(_loc1_.actionPrice,_loc1_.price,_loc1_.defaultPrice,IconTextResolver.getFromNamedLabel(this.stateProps.label));
-            this.actionPrice.setData(_loc2_);
+            if(_loc1_)
+            {
+               _loc1_.ico = IconTextResolver.getFromNamedLabel(this.stateProps.label);
+            }
+            this.actionPrice.setData(_loc1_);
             if(this._doValidateNow)
             {
                this.actionPrice.validateNow();
@@ -535,7 +536,7 @@ package net.wg.gui.lobby.techtree.nodes
 
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          super.handleMouseRelease(param1);
-         if(param1.eventPhase == EventPhase.AT_TARGET && param1  is  MouseEventEx && (param1 as MouseEventEx).buttonIdx == MouseEventEx.RIGHT_BUTTON)
+         if(param1.eventPhase == EventPhase.AT_TARGET && param1  is  MouseEventEx && (App.utils.commons.isRightButton(param1)))
          {
             this.showContextMenu();
          }

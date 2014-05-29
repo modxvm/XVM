@@ -1,7 +1,6 @@
 package net.wg.gui.components.controls
 {
-   import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
-   import net.wg.infrastructure.interfaces.IUIComponentEx;
+   import net.wg.infrastructure.interfaces.ISoundButtonEx;
    import flash.display.DisplayObject;
    import flash.text.TextField;
    import flash.display.MovieClip;
@@ -14,7 +13,7 @@ package net.wg.gui.components.controls
    import flash.text.TextFieldAutoSize;
 
 
-   public class SoundButtonEx extends SoundButton implements IHelpLayoutComponent, IUIComponentEx
+   public class SoundButtonEx extends SoundButton implements ISoundButtonEx
    {
           
       public function SoundButtonEx() {
@@ -23,11 +22,11 @@ package net.wg.gui.components.controls
 
       protected var _tooltip:String = null;
 
-      public var helpText:String = "";
+      private var _helpText:String = "";
 
-      public var helpDirection:String = "T";
+      private var _helpDirection:String = "T";
 
-      public var helpConnectorLength:Number = 12;
+      private var _helpConnectorLength:Number = 12;
 
       public var _fillPadding:Number = 0;
 
@@ -80,6 +79,30 @@ package net.wg.gui.components.controls
          this.bgMc = null;
          this.filtersMC = null;
          super.onDispose();
+      }
+
+      public function get helpText() : String {
+         return this._helpText;
+      }
+
+      public function set helpText(param1:String) : void {
+         this._helpText = param1;
+      }
+
+      public function get helpDirection() : String {
+         return this._helpDirection;
+      }
+
+      public function set helpDirection(param1:String) : void {
+         this._helpDirection = param1;
+      }
+
+      public function get helpConnectorLength() : Number {
+         return this._helpConnectorLength;
+      }
+
+      public function set helpConnectorLength(param1:Number) : void {
+         this._helpConnectorLength = param1;
       }
 
       public function showTooltip(param1:MouseEvent) : void {
@@ -151,17 +174,17 @@ package net.wg.gui.components.controls
 
       public function showHelpLayout() : void {
          var _loc1_:Object = null;
-         if(this.helpText.length > 0)
+         if(this._helpText.length > 0)
          {
             _loc1_ =
                {
                   "borderWidth":width,
                   "borderHeight":height,
-                  "direction":this.helpDirection,
-                  "text":this.helpText,
+                  "direction":this._helpDirection,
+                  "text":this._helpText,
                   "x":0,
                   "y":0,
-                  "connectorLength":this.helpConnectorLength
+                  "connectorLength":this._helpConnectorLength
                }
             ;
             this.setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
@@ -256,14 +279,14 @@ package net.wg.gui.components.controls
                gotoAndPlay(_newFrame);
                _newFrame = null;
             }
-            if(_baseDisposed)
-            {
-               return;
-            }
             if((focusIndicator) && (_newFocusIndicatorFrame))
             {
                focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
                _newFocusIndicatorFrame = null;
+            }
+            if(_baseDisposed)
+            {
+               return;
             }
             this.updateAfterStateChange();
             dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));

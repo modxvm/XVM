@@ -1,9 +1,13 @@
 package net.wg.gui.components.advanced
 {
+   import flash.text.TextField;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.data.constants.SortingInfo;
+   import net.wg.gui.events.SortingEvent;
    import net.wg.gui.events.UILoaderEvent;
-   import flash.events.Event;
+   import scaleform.gfx.TextFieldEx;
+   import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
 
 
@@ -14,19 +18,13 @@ package net.wg.gui.components.advanced
          super();
       }
 
-      public static const ASCENDING_SORT:String = "ascending";
-
-      public static const DESCENDING_SORT:String = "descending";
-
-      public static const WITHOUT_SORT:String = "none";
-
-      public static const SORT_DIRECTION_CHANGED:String = "sortDirectionChanged";
-
       private static const ASCENDING_ICON_INVALID:String = "ascIcon";
 
       private static const DESCENDING_ICON_INVALID:String = "descIcon";
 
       private static const SORT_DIRECTION_INVALID:String = "checkSortDirection";
+
+      public var labelField:TextField;
 
       public var defaultSortDirection:String = "none";
 
@@ -47,17 +45,6 @@ package net.wg.gui.components.advanced
       private var _sortDirection:String;
 
       private var _id:String;
-
-      override protected function onDispose() : void {
-         this.bg = null;
-         this.upperBg = null;
-         this.mcAscendingIcon.removeEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
-         this.mcAscendingIcon.dispose();
-         this.mcAscendingIcon = null;
-         this.mcDescendingIcon.dispose();
-         this.mcDescendingIcon = null;
-         super.onDispose();
-      }
 
       override public function set data(param1:Object) : void {
          var _loc2_:SortingButtonInfo = null;
@@ -87,6 +74,7 @@ package net.wg.gui.components.advanced
             this.descendingIconSource = _loc2_.descendingIconSource;
             iconSource = _loc2_.iconSource;
          }
+         invalidateData();
       }
 
       public function get sortDirection() : String {
@@ -95,7 +83,7 @@ package net.wg.gui.components.advanced
 
       public function set sortDirection(param1:String) : void {
          var value:String = param1;
-         if(!(value == ASCENDING_SORT) && !(value == DESCENDING_SORT) && !(value == WITHOUT_SORT))
+         if(!(value == SortingInfo.ASCENDING_SORT) && !(value == SortingInfo.DESCENDING_SORT) && !(value == SortingInfo.WITHOUT_SORT))
          {
             try
             {
@@ -103,14 +91,13 @@ package net.wg.gui.components.advanced
             }
             catch(e:Error)
             {
-               trace("Flash :: Unknown sorting button state:",value);
             }
-            value = WITHOUT_SORT;
+            value = SortingInfo.WITHOUT_SORT;
          }
          if(this._sortDirection != value)
          {
             this._sortDirection = value;
-            dispatchEvent(new Event(SORT_DIRECTION_CHANGED,true));
+            dispatchEvent(new SortingEvent(SortingEvent.SORT_DIRECTION_CHANGED,true));
             invalidate(SORT_DIRECTION_INVALID);
          }
       }
@@ -141,8 +128,21 @@ package net.wg.gui.components.advanced
          this._id = param1;
       }
 
+      override protected function onDispose() : void {
+         this.bg = null;
+         this.upperBg = null;
+         this.labelField = null;
+         this.mcAscendingIcon.removeEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
+         this.mcAscendingIcon.dispose();
+         this.mcAscendingIcon = null;
+         this.mcDescendingIcon.dispose();
+         this.mcDescendingIcon = null;
+         super.onDispose();
+      }
+
       override protected function configUI() : void {
          super.configUI();
+         TextFieldEx.setVerticalAlign(this.labelField,TextFieldAutoSize.CENTER);
          this.tabEnabled = false;
          this.mcAscendingIcon.addEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
          this.visible = false;
@@ -150,6 +150,18 @@ package net.wg.gui.components.advanced
 
       override protected function draw() : void {
          super.draw();
+         if(((this.labelField) && (isInvalid(InvalidationType.DATA))) && (!(label == null)) && !(label == ""))
+         {
+            if(!iconSource && label.length > 0)
+            {
+               this.labelField.visible = true;
+               this.labelField.text = data.label;
+            }
+            else
+            {
+               this.labelField.visible = false;
+            }
+         }
          if(isInvalid(ASCENDING_ICON_INVALID))
          {
             this.mcAscendingIcon.source = this._ascendingIconSource;
@@ -178,6 +190,19 @@ package net.wg.gui.components.advanced
                this.upperBg.width = _width - 2;
                this.upperBg.height = _height;
             }
+            this.updateTextSize();
+         }
+      }
+
+      private function updateTextSize(param1:Boolean=false) : void {
+         if(param1)
+         {
+            TextFieldEx.setVerticalAlign(this.labelField,TextFieldAutoSize.CENTER);
+         }
+         if((this.labelField) && (this.labelField.visible))
+         {
+            this.labelField.width = _width;
+            this.labelField.height = _height;
          }
       }
 
@@ -190,22 +215,23 @@ package net.wg.gui.components.advanced
             this.upperBg.width = _width - 2;
             this.upperBg.height = _height;
          }
+         this.updateTextSize(true);
       }
 
       protected function applySortDirection() : void {
          var _loc1_:SortingButtonInfo = SortingButtonInfo(data);
          var _loc2_:String = this._sortDirection;
-         if((_loc1_.inverted) && (_loc2_ == ASCENDING_SORT || _loc2_ == DESCENDING_SORT))
+         if((_loc1_.inverted) && (_loc2_ == SortingInfo.ASCENDING_SORT || _loc2_ == SortingInfo.DESCENDING_SORT))
          {
-            _loc2_ = _loc2_ == ASCENDING_SORT?DESCENDING_SORT:ASCENDING_SORT;
+            _loc2_ = _loc2_ == SortingInfo.ASCENDING_SORT?SortingInfo.DESCENDING_SORT:SortingInfo.ASCENDING_SORT;
          }
          if(this.mcAscendingIcon)
          {
-            this.mcAscendingIcon.visible = _loc2_ == ASCENDING_SORT;
+            this.mcAscendingIcon.visible = _loc2_ == SortingInfo.ASCENDING_SORT;
          }
          if(this.mcDescendingIcon)
          {
-            this.mcDescendingIcon.visible = _loc2_ == DESCENDING_SORT;
+            this.mcDescendingIcon.visible = _loc2_ == SortingInfo.DESCENDING_SORT;
          }
       }
 

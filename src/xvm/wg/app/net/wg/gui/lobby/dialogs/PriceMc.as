@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.dialogs
 {
    import scaleform.clik.core.UIComponent;
-   import net.wg.gui.lobby.profile.components.DashLine;
+   import net.wg.gui.components.advanced.DashLine;
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
    import net.wg.gui.components.controls.ActionPrice;
@@ -34,11 +34,9 @@ package net.wg.gui.lobby.dialogs
 
       private var _price:Number = 0;
 
-      private var _defPrice:Number = 0;
+      private var _actionPriceVo:ActionPriceVO = null;
 
       private var _currency:String = "";
-
-      private var _actionPrc:Number = 0;
 
       public function set allowed(param1:Boolean) : void {
          this._allowed = param1;
@@ -54,12 +52,12 @@ package net.wg.gui.lobby.dialogs
          invalidate(IS_INVALID_PRICE);
       }
 
-      public function get defPrice() : Number {
-         return this._defPrice;
+      public function get actionPriceVo() : ActionPriceVO {
+         return this._actionPriceVo;
       }
 
-      public function set defPrice(param1:Number) : void {
-         this._defPrice = param1;
+      public function set actionPriceVo(param1:ActionPriceVO) : void {
+         this._actionPriceVo = param1;
          invalidate(IS_INVALID_PRICE);
       }
 
@@ -72,15 +70,6 @@ package net.wg.gui.lobby.dialogs
          invalidate(IS_INVALID_PRICE);
       }
 
-      public function get actionPrc() : Number {
-         return this._actionPrc;
-      }
-
-      public function set actionPrc(param1:Number) : void {
-         this._actionPrc = param1;
-         invalidate(IS_INVALID_PRICE);
-      }
-
       override protected function configUI() : void {
          super.configUI();
          this.dashLine.width = 305;
@@ -88,7 +77,6 @@ package net.wg.gui.lobby.dialogs
       }
 
       override protected function draw() : void {
-         var _loc1_:ActionPriceVO = null;
          super.draw();
          if(isInvalid(OPERATION_INVALID))
          {
@@ -99,8 +87,11 @@ package net.wg.gui.lobby.dialogs
          {
             this.priceValue.text = this._currency == IconsTypes.GOLD?App.utils.locale.gold(this._price):App.utils.locale.integer(this._price);
             this.priceValue.icon = this._currency;
-            _loc1_ = new ActionPriceVO(this._actionPrc,this._price,this._defPrice,this._currency);
-            this.actionPrice.setData(_loc1_);
+            if(this.actionPriceVo)
+            {
+               this.actionPriceVo.ico = this._currency;
+            }
+            this.actionPrice.setData(this.actionPriceVo);
             this.priceValue.visible = !this.actionPrice.visible;
          }
       }

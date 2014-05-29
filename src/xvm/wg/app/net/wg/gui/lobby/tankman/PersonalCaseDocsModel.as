@@ -1,5 +1,6 @@
 package net.wg.gui.lobby.tankman
 {
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
 
 
    public class PersonalCaseDocsModel extends Object
@@ -26,10 +27,6 @@ package net.wg.gui.lobby.tankman
 
       public var priceOfCredits:Number = 0;
 
-      public var defPriceOfGold:Number = 0;
-
-      public var defPriceOfCredits:Number = 0;
-
       public var useOnlyGold:Boolean = false;
 
       public var currentTankmanFirstName:String = null;
@@ -40,7 +37,9 @@ package net.wg.gui.lobby.tankman
 
       public var originalIconFile:String = null;
 
-      public var actionPrc:Number = 0;
+      public var actionPriceDataGoldVo:ActionPriceVO = null;
+
+      public var actionPriceDataCreditsVo:ActionPriceVO = null;
 
       public var fistNameMaxChars:uint = 0;
 

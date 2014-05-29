@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.battleResults
 {
    import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.entity.IFocusContainer;
    import net.wg.gui.components.controls.ScrollingListEx;
    import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.gui.components.controls.UserNameField;
@@ -12,10 +13,11 @@ package net.wg.gui.lobby.battleResults
    import net.wg.infrastructure.interfaces.IUserProps;
    import net.wg.data.VO.UserVO;
    import scaleform.clik.data.DataProvider;
-   import net.wg.data.constants.Errors;
+   import net.wg.infrastructure.events.FocusRequestEvent;
+   import flash.display.InteractiveObject;
 
 
-   public class TeamMemberStatsView extends UIComponent
+   public class TeamMemberStatsView extends UIComponent implements IFocusContainer
    {
           
       public function TeamMemberStatsView() {
@@ -152,8 +154,7 @@ package net.wg.gui.lobby.battleResults
       private function onCloseClick(param1:ButtonEvent) : void {
          TeamStats(this.parent).changeIndexOnFocus = false;
          this.list.selectedIndex = -1;
-         DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
-         App.utils.focusHandler.setFocus(this.list);
+         dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
       }
 
       protected function handleMouseRollOver(param1:MouseEvent) : void {
@@ -162,6 +163,10 @@ package net.wg.gui.lobby.battleResults
 
       protected function handleMouseRollOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return this.list;
       }
    }
 

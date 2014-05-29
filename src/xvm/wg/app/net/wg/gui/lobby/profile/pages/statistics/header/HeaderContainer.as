@@ -58,15 +58,6 @@ package net.wg.gui.lobby.profile.pages.statistics.header
          this.group.dataProvider = _loc2_;
       }
 
-      override protected function onDispose() : void {
-         this.icon.dispose();
-         this.icon = null;
-         this.group.dispose();
-         this.group = null;
-         this.image = null;
-         super.onDispose();
-      }
-
       public function set battlesType(param1:String) : void {
          var _loc2_:String = null;
          if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_ALL)
@@ -90,11 +81,28 @@ package net.wg.gui.lobby.profile.pages.statistics.header
                }
                else
                {
-                  throw new Error(this + " :: Unknown battle type: " + param1);
+                  if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS)
+                  {
+                     _loc2_ = "fortifications";
+                     this.image.gotoAndStop(4);
+                  }
+                  else
+                  {
+                     throw new Error(this + " :: Unknown battle type: " + param1);
+                  }
                }
             }
          }
          this.icon.type = _loc2_;
+      }
+
+      override protected function onDispose() : void {
+         this.icon.dispose();
+         this.icon = null;
+         this.group.dispose();
+         this.group = null;
+         this.image = null;
+         super.onDispose();
       }
    }
 

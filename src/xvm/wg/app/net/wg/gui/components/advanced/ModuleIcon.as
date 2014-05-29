@@ -76,10 +76,21 @@ package net.wg.gui.components.advanced
             }
             else
             {
-               this.shell.unload();
-               this.artefact.visible = true;
-               this.artefact.source = param2;
-               this.moduleLevel.visible = false;
+               if(param1 == FittingTypes.ORDER)
+               {
+                  this.shell.unload();
+                  this.artefact.visible = true;
+                  this.artefact.source = param2;
+                  this.moduleLevel.gotoAndStop(param3);
+                  this.moduleLevel.visible = true;
+               }
+               else
+               {
+                  this.shell.unload();
+                  this.artefact.visible = true;
+                  this.artefact.source = param2;
+                  this.moduleLevel.visible = false;
+               }
             }
          }
       }

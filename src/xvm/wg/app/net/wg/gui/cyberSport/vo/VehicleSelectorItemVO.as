@@ -1,6 +1,7 @@
 package net.wg.gui.cyberSport.vo
 {
    import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.gui.rally.vo.VehicleVO;
 
 
    public class VehicleSelectorItemVO extends Object implements IDisposable
@@ -21,8 +22,10 @@ package net.wg.gui.cyberSport.vo
                   "nationID":this._vehicle.nationID,
                   "smallIconPath":this._vehicle.smallIconPath,
                   "isReadyToFight":this._vehicle.isReadyToFight,
+                  "typeIndex":this._vehicle.typeIndex,
                   "enabled":this._vehicle.enabled,
-                  "tooltip":this._vehicle.tooltip
+                  "tooltip":this._vehicle.tooltip,
+                  "state":this._vehicle.state
                }
             ;
          }
@@ -57,10 +60,6 @@ package net.wg.gui.cyberSport.vo
          this._selected = param1;
       }
 
-      public function get enabled() : Boolean {
-         return this.getDataSource().enabled;
-      }
-
       public function get shortUserName() : String {
          return this.getDataSource().shortUserName;
       }
@@ -85,12 +84,24 @@ package net.wg.gui.cyberSport.vo
          return this.getDataSource().isReadyToFight;
       }
 
+      public function get typeIndex() : uint {
+         return this.getDataSource().typeIndex;
+      }
+
+      public function get enabled() : Boolean {
+         return this.getDataSource().enabled;
+      }
+
       public function get vehicle() : VehicleVO {
          return this._vehicle;
       }
 
       public function get tooltip() : String {
          return this.getDataSource().tooltip;
+      }
+
+      public function get state() : String {
+         return this.getDataSource().state;
       }
    }
 

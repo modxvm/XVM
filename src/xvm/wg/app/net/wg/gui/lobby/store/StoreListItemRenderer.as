@@ -80,44 +80,40 @@ package net.wg.gui.lobby.store
          var _loc3_:* = 0;
          var _loc4_:* = NaN;
          var _loc5_:* = NaN;
-         var _loc6_:* = NaN;
-         var _loc7_:* = NaN;
+         var _loc6_:String = null;
+         var _loc7_:* = 0;
          var _loc8_:String = null;
-         var _loc9_:* = 0;
-         var _loc10_:String = null;
          if(data)
          {
             if(App.instance)
             {
-               _loc8_ = "data in shopTableItemRenderer must extends StoreTableData class!";
-               App.utils.asserter.assert(data  is  StoreTableData,_loc8_);
+               _loc6_ = "data in shopTableItemRenderer must extends StoreTableData class!";
+               App.utils.asserter.assert(data  is  StoreTableData,_loc6_);
             }
             _loc1_ = StoreTableData(data);
             _loc2_ = 0;
             _loc3_ = 1;
             _loc4_ = _loc1_.price[_loc2_];
             _loc5_ = _loc1_.price[_loc3_];
-            _loc6_ = _loc1_.defPrice[_loc2_];
-            _loc7_ = _loc1_.defPrice[_loc3_];
             visible = true;
             this.onPricesCalculated(_loc5_,_loc4_,_loc1_);
             textField.text = _loc1_.name;
             descField.text = data.desc;
             if(descField.getLineLength(2) != -1)
             {
-               _loc9_ = 0;
-               _loc10_ = data.desc.substr(descField.getLineLength(0) + descField.getLineLength(1)-1,1);
-               if(_loc10_ == "\n")
+               _loc7_ = 0;
+               _loc8_ = data.desc.substr(descField.getLineLength(0) + descField.getLineLength(1)-1,1);
+               if(_loc8_ == "\n")
                {
-                  _loc9_ = -1;
+                  _loc7_ = -1;
                }
                else
                {
-                  _loc9_ = -3;
+                  _loc7_ = -3;
                }
-               descField.text = descField.text.substr(0,descField.getLineLength(0) + descField.getLineLength(1) + _loc9_) + "...";
+               descField.text = descField.text.substr(0,descField.getLineLength(0) + descField.getLineLength(1) + _loc7_) + "...";
             }
-            this.updateTexts(_loc1_,_loc5_,_loc4_,_loc6_,_loc7_);
+            this.updateTexts(_loc1_,_loc5_,_loc4_);
             if(hitTestPoint(App.stage.mouseX,App.stage.mouseY,true))
             {
                this.shopTooltip();
@@ -133,7 +129,7 @@ package net.wg.gui.lobby.store
           
       }
 
-      protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number, param4:Number, param5:Number) : void {
+      protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void {
           
       }
 

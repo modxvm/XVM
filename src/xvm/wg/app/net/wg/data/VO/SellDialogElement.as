@@ -1,5 +1,6 @@
 package net.wg.data.VO
 {
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
 
 
    public class SellDialogElement extends Object
@@ -13,41 +14,27 @@ package net.wg.data.VO
 
       private var _isRemovable:Boolean;
 
-      private var _data:Object;
+      private var _intCD:Number;
+
+      private var _count:Number = 1;
+
+      private var _toInventory:Boolean;
+
+      private var _fromInventory:Boolean = false;
+
+      private var _kind:String = "";
 
       private var _type:String;
 
-      private var _itemInInventory:Boolean = false;
-
-      private var _inInventory:Boolean;
-
       private var _moneyValue:Number;
-
-      private var _defMoneyValue:Number;
 
       private var _removePrice:Number;
 
-      private var _defRemovePrice:Number;
+      private var _removeActionPriceVo:ActionPriceVO = null;
 
-      private var _actionPrc:Number = 0;
+      private var _sellActionPriceVo:ActionPriceVO = null;
 
-      private var _removeActionPrc:Number = 0;
-
-      public function get removeActionPrc() : Number {
-         return this._removeActionPrc;
-      }
-
-      public function set removeActionPrc(param1:Number) : void {
-         this._removeActionPrc = param1;
-      }
-
-      public function get actionPrc() : Number {
-         return this._actionPrc;
-      }
-
-      public function set actionPrc(param1:Number) : void {
-         this._actionPrc = param1;
-      }
+      public var _sellExternalData:Array = null;
 
       public function get removePrice() : Number {
          return this._removePrice;
@@ -57,12 +44,20 @@ package net.wg.data.VO
          this._removePrice = param1;
       }
 
-      public function get defRemovePrice() : Number {
-         return this._defRemovePrice;
+      public function get sellActionPriceVo() : ActionPriceVO {
+         return this._sellActionPriceVo;
       }
 
-      public function set defRemovePrice(param1:Number) : void {
-         this._defRemovePrice = param1;
+      public function set sellActionPriceVo(param1:ActionPriceVO) : void {
+         this._sellActionPriceVo = param1;
+      }
+
+      public function get removeActionPriceVo() : ActionPriceVO {
+         return this._removeActionPriceVo;
+      }
+
+      public function set removeActionPriceVo(param1:ActionPriceVO) : void {
+         this._removeActionPriceVo = param1;
       }
 
       public function get moneyValue() : Number {
@@ -73,22 +68,6 @@ package net.wg.data.VO
          this._moneyValue = param1;
       }
 
-      public function get defMoneyValue() : Number {
-         return this._defMoneyValue;
-      }
-
-      public function set defMoneyValue(param1:Number) : void {
-         this._defMoneyValue = param1;
-      }
-
-      public function get inInventory() : Boolean {
-         return this._inInventory;
-      }
-
-      public function set inInventory(param1:Boolean) : void {
-         this._inInventory = param1;
-      }
-
       public function get type() : String {
          return this._type;
       }
@@ -97,20 +76,36 @@ package net.wg.data.VO
          this._type = param1;
       }
 
-      public function get itemInInventory() : Boolean {
-         return this._itemInInventory;
+      public function get intCD() : Number {
+         return this._intCD;
       }
 
-      public function set itemInInventory(param1:Boolean) : void {
-         this._itemInInventory = param1;
+      public function set intCD(param1:Number) : void {
+         this._intCD = param1;
       }
 
-      public function get data() : Object {
-         return this._data;
+      public function get count() : Number {
+         return this._count;
       }
 
-      public function set data(param1:Object) : void {
-         this._data = param1;
+      public function set count(param1:Number) : void {
+         this._count = param1;
+      }
+
+      public function get toInventory() : Boolean {
+         return this._toInventory;
+      }
+
+      public function set toInventory(param1:Boolean) : void {
+         this._toInventory = param1;
+      }
+
+      public function get fromInventory() : Boolean {
+         return this._fromInventory;
+      }
+
+      public function set fromInventory(param1:Boolean) : void {
+         this._fromInventory = param1;
       }
 
       public function get isRemovable() : Boolean {
@@ -127,6 +122,22 @@ package net.wg.data.VO
 
       public function set id(param1:String) : void {
          this._id = param1;
+      }
+
+      public function get kind() : String {
+         return this._kind;
+      }
+
+      public function set kind(param1:String) : void {
+         this._kind = param1;
+      }
+
+      public function get sellExternalData() : Array {
+         return this._sellExternalData;
+      }
+
+      public function set sellExternalData(param1:Array) : void {
+         this._sellExternalData = param1;
       }
    }
 

@@ -22,7 +22,6 @@ package net.wg.gui.tutorial
 
       override protected function configUI() : void {
          super.configUI();
-         getDataS();
          App.contextMenuMgr.hide();
          this.mapBG.visible = false;
          this.mapBG.addEventListener(UILoaderEvent.COMPLETE,this.onBackgroundLoaded);
@@ -94,6 +93,10 @@ package net.wg.gui.tutorial
       }
 
       public function as_setPlayerStatus(param1:Boolean, param2:Number, param3:uint) : void {
+          
+      }
+
+      public function as_setTipTitle(param1:String) : void {
           
       }
 

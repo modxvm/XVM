@@ -8,6 +8,7 @@ package net.wg.gui.components.controls
    import flash.display.Sprite;
    import flash.events.MouseEvent;
    import flash.events.Event;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import flash.utils.getDefinitionByName;
    import scaleform.clik.controls.ScrollIndicator;
    import scaleform.clik.data.ListData;
@@ -49,6 +50,8 @@ package net.wg.gui.components.controls
       protected var _margin:Number = 0;
 
       protected var _padding:Padding;
+
+      private var _widthAutoResize:Boolean = true;
 
       private var _sbPadding:Padding;
 
@@ -142,7 +145,16 @@ package net.wg.gui.components.controls
          this.updateVisibleScrollBar();
       }
 
-      private function updateVisibleScrollBar() : void {
+      public function getSelectedVO() : Object {
+         var _loc1_:Object = null;
+         if(_selectedIndex > -1)
+         {
+            _loc1_ = _dataProvider.requestItemAt(_selectedIndex);
+         }
+         return _loc1_;
+      }
+
+      protected function updateVisibleScrollBar() : void {
          var _loc1_:DisplayObject = null;
          var _loc2_:* = false;
          var _loc3_:* = NaN;
@@ -160,7 +172,7 @@ package net.wg.gui.components.controls
                {
                   _loc1_.visible = false;
                }
-               if(!_loc1_.visible)
+               if(!_loc1_.visible && (this._widthAutoResize))
                {
                   _loc2_ = isInvalid(InvalidationType.DATA);
                   _loc3_ = Math.round(_width) - this.margin * 2 - this.padding.horizontal;
@@ -418,6 +430,10 @@ package net.wg.gui.components.controls
             this._scrollBar.focusTarget = null;
             if(container.contains(this._scrollBar as DisplayObject))
             {
+               if(this._scrollBar  is  IDisposable)
+               {
+                  this._scrollBar.dispose();
+               }
                container.removeChild(this._scrollBar as DisplayObject);
             }
             this._scrollBar = null;
@@ -682,6 +698,15 @@ package net.wg.gui.components.controls
 
       public function set sbPadding(param1:Padding) : void {
          this._sbPadding = param1;
+         invalidateSize();
+      }
+
+      public function get widthAutoResize() : Boolean {
+         return this._widthAutoResize;
+      }
+
+      public function set widthAutoResize(param1:Boolean) : void {
+         this._widthAutoResize = param1;
       }
    }
 

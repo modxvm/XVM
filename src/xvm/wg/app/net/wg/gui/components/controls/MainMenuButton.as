@@ -7,6 +7,7 @@ package net.wg.gui.components.controls
    import scaleform.clik.utils.ConstrainedElement;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.utils.IHelpLayout;
+   import __AS3__.vec.Vector;
    import net.wg.data.constants.SoundTypes;
 
 
@@ -19,6 +20,8 @@ package net.wg.gui.components.controls
          soundType = SoundTypes.MAIN_MENU;
          this.fxTextField2 = this.fx.fxTextField2;
       }
+
+      public static var SUB_SELECTED:String = "sub_selected_";
 
       private var _caps:Boolean = true;
 
@@ -33,6 +36,8 @@ package net.wg.gui.components.controls
       private var _textColorOver:Number;
 
       private var textColorBeforeBlink:Number = NaN;
+
+      private var _externalState:String = "";
 
       override protected function configUI() : void {
          super.configUI();
@@ -279,6 +284,15 @@ package net.wg.gui.components.controls
 
       private function onBtnOut(param1:MouseEvent) : void {
          this.checkBrowserEffect();
+      }
+
+      public function setExternalState(param1:String) : void {
+         this._externalState = param1;
+         setState(state);
+      }
+
+      override protected function getStatePrefixes() : Vector.<String> {
+         return _selected?statesSelected:this._externalState != ""?Vector.<String>([this._externalState]):statesDefault;
       }
    }
 

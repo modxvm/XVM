@@ -14,7 +14,7 @@ package net.wg.gui.components.advanced
          super();
       }
 
-      private static const ITEMS_GAP:Number = 3;
+      private static const ITEMS_GAP:Number = -7;
 
       protected var data:Array = null;
 

@@ -1,10 +1,11 @@
 package net.wg.gui.cyberSport.controls
 {
    import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.rally.controls.IGrayTransparentButton;
    import flash.display.MovieClip;
 
 
-   public class GrayTransparentButton extends SoundButtonEx
+   public class GrayTransparentButton extends SoundButtonEx implements IGrayTransparentButton
    {
           
       public function GrayTransparentButton() {
@@ -16,6 +17,10 @@ package net.wg.gui.cyberSport.controls
       public static const ICON_CROSS:String = "cross";
 
       public static const ICON_LOCK:String = "lock";
+
+      public static const ICON_UP:String = "up";
+
+      public static const ICON_DOWN:String = "down";
 
       public var iconContainer:MovieClip;
 

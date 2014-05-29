@@ -36,6 +36,7 @@ package net.wg.gui.lobby.questsWindow
          this.rightLabelTF = null;
          this.container.dispose();
          this.container = null;
+         this.indexTF = null;
          if(this.data)
          {
             this.data.dispose();
@@ -45,6 +46,10 @@ package net.wg.gui.lobby.questsWindow
       }
 
       override public function setData(param1:Object) : void {
+         if(this.data)
+         {
+            this.data.dispose();
+         }
          this.data = new ConditionElementVO(param1);
          invalidateData();
       }

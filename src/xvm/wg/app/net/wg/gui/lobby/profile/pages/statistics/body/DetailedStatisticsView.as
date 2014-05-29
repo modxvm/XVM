@@ -1,12 +1,12 @@
 package net.wg.gui.lobby.profile.pages.statistics.body
 {
-   import net.wg.gui.lobby.profile.pages.statistics.detailedStatistics.DetailedStatisticsGroupEx;
+   import net.wg.gui.components.common.containers.GroupEx;
    import net.wg.gui.lobby.profile.components.IResizableContent;
-   import net.wg.gui.components.common.containers.EqualGapsHorizontalLayout;
+   import net.wg.gui.components.common.containers.EqualWidthHorizontalLayout;
    import flash.display.InteractiveObject;
 
 
-   public class DetailedStatisticsView extends DetailedStatisticsGroupEx implements IResizableContent
+   public class DetailedStatisticsView extends GroupEx implements IResizableContent
    {
           
       public function DetailedStatisticsView() {
@@ -15,15 +15,16 @@ package net.wg.gui.lobby.profile.pages.statistics.body
 
       override protected function configUI() : void {
          super.configUI();
-         layout = new EqualGapsHorizontalLayout();
-         unitRendererClass = App.utils.classFactory.getClass("StatisticsDashLineTextItemIRenderer_UI");
+         var _loc1_:EqualWidthHorizontalLayout = new EqualWidthHorizontalLayout();
+         _loc1_.gap = 50;
+         layout = _loc1_;
+         itemRendererClass = DetailedStatisticsRootUnit;
       }
 
       public function update(param1:Object) : void {
-         var _loc2_:* = 0;
-         if((param1) && param1.length > _loc2_)
+         if(param1  is  DetailedLabelDataVO)
          {
-            dataProvider = DetailedLabelDataVO(param1[_loc2_]).detailedInfoList;
+            dataProvider = DetailedLabelDataVO(param1).detailedInfoList;
          }
       }
 
@@ -32,7 +33,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
       }
 
       public function setViewSize(param1:Number, param2:Number) : void {
-         EqualGapsHorizontalLayout(layout).availableSize = param1;
+         EqualWidthHorizontalLayout(layout).availableSize = param1;
          invalidate(LAYOUT_INVALID);
       }
 

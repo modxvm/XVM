@@ -50,6 +50,8 @@ package net.wg.gui.lobby
 
       private var previousFocus:InteractiveObject;
 
+      private const TOP_SUB_VIEW_POSITION:Number = 126;
+
       override public function getSubContainer() : IManagedContainer {
          return this.subViewContainer;
       }
@@ -59,7 +61,7 @@ package net.wg.gui.lobby
          _originalHeight = param2;
          setSize(param1,param2);
          this.vehicleHitArea.x = 0;
-         this.vehicleHitArea.y = 120;
+         this.vehicleHitArea.y = this.TOP_SUB_VIEW_POSITION;
          this.vehicleHitArea.width = param1;
          this.vehicleHitArea.height = param2 - this.vehicleHitArea.y;
          this.messengerBar.updateStage(param1,param2);

@@ -28,6 +28,12 @@ package net.wg.gui.lobby.battleResults
 
       public var premXpLbl:TextField;
 
+      public var resTitleLbl:TextField;
+
+      public var resLbl:TextField;
+
+      public var premResLbl:TextField;
+
       public var detailedReportBtn:SoundButtonEx;
 
       public var progressTF:TextField;
@@ -73,6 +79,14 @@ package net.wg.gui.lobby.battleResults
             this.premTitleLbl.alpha = this.data.isPremium?1:0.25;
             this.premCreditsLbl.alpha = this.data.isPremium?1:0.25;
             this.premXpLbl.alpha = this.data.isPremium?1:0.25;
+            if(this.resTitleLbl)
+            {
+               this.resTitleLbl.text = BATTLE_RESULTS.COMMON_DETAILS_RESOURCE;
+               this.resLbl.alpha = this.data.isPremium?0.25:1;
+               this.premResLbl.alpha = this.data.isPremium?1:0.25;
+               this.resLbl.htmlText = this.data.resStr;
+               this.premResLbl.htmlText = this.data.resPremStr;
+            }
             this.xpTitleLbl.text = this.data.xpTitleStr;
             this.xpLbl.htmlText = this.data.xpNoPremStr;
             this.premXpLbl.htmlText = this.data.xpPremStr;

@@ -18,6 +18,8 @@ package net.wg.infrastructure.base.meta
 
       function as_setDefaultOnlineFlag(param1:Boolean) : void;
 
+      function as_showClanOnly(param1:Boolean) : void;
+
       function as_getFriendsDP() : Object;
 
       function as_getClanDP() : Object;

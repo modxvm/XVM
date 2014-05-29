@@ -48,6 +48,8 @@ package net.wg.gui.lobby.settings
 
       private var _dynamicCursorsData:Object = null;
 
+      private var _setDataInProgress:Boolean = false;
+
       override protected function configUI() : void {
          super.configUI();
          this.cassete = ClipQuantityBar.create(7,1);
@@ -70,6 +72,7 @@ package net.wg.gui.lobby.settings
          var _loc4_:SettingsAimForm = null;
          super.setData(param1);
          this._dynamicCursorsData = {};
+         this._setDataInProgress = true;
          for (_loc2_ in param1)
          {
             if(this[_loc2_ + this.FORM])
@@ -87,12 +90,17 @@ package net.wg.gui.lobby.settings
                this._dynamicCursorsData[_loc2_][_loc3_] = SettingsControlProp(param1[_loc2_][_loc3_]).current?SettingsControlProp(param1[_loc2_][_loc3_]).current:0;
             }
          }
+         this._setDataInProgress = false;
          this.tabs.dataProvider = new DataProvider(SettingsConfig.cursorTabsDataProvider);
          this.tabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
          this.tabs.selectedIndex = this.__currentTab;
       }
 
       private function onControlChange(param1:SettingsSubVewEvent) : void {
+         if(this._setDataInProgress)
+         {
+            return;
+         }
          var _loc2_:String = param1.subViewId;
          var _loc3_:String = param1.controlId;
          var _loc4_:Object = {};

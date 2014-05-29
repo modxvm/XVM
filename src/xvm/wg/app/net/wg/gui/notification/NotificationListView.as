@@ -2,30 +2,20 @@ package net.wg.gui.notification
 {
    import net.wg.infrastructure.base.meta.impl.NotificationsListMeta;
    import net.wg.infrastructure.base.meta.INotificationsListMeta;
-   import net.wg.gui.notification.vo.LayoutInfoVO;
    import net.wg.gui.notification.events.ServiceMessageEvent;
    import net.wg.gui.notification.vo.NotificationInfoVO;
    import net.wg.infrastructure.interfaces.IWrapper;
    import net.wg.gui.components.popOvers.PopOver;
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.Values;
-   import flash.events.Event;
 
 
    public class NotificationListView extends NotificationsListMeta implements INotificationsListMeta
    {
           
       public function NotificationListView() {
-         this.layoutInfo = new LayoutInfoVO(
-            {
-               "paddingRight":0,
-               "paddingBottom":0
-            }
-         );
          super();
       }
-
-      private var layoutInfo:LayoutInfoVO;
 
       public var list:NotificationsList;
 
@@ -126,20 +116,6 @@ package net.wg.gui.notification
 
       public function as_updateMessage(param1:Object) : void {
          this.list.updateData(new NotificationInfoVO(param1));
-      }
-
-      public function as_layoutInfo(param1:Object) : void {
-         this.layoutInfo = new LayoutInfoVO(param1);
-         this.calcKeyPointPosition();
-      }
-
-      override protected function stageResizeHandler(param1:Event) : void {
-         this.calcKeyPointPosition();
-         super.stageResizeHandler(param1);
-      }
-
-      private function calcKeyPointPosition() : void {
-         as_setPositionKeyPoint(stage.stageWidth - this.layoutInfo.paddingRight,stage.stageHeight - this.layoutInfo.paddingBottom);
       }
 
       override protected function onDispose() : void {

@@ -114,7 +114,6 @@ package net.wg.gui.lobby.settings.components
       override protected function drawRenderers(param1:Number) : void {
          if(_itemRenderer == null)
          {
-            trace("Renderer class not defined.");
             return;
          }
          totalHeight = 0;

@@ -27,6 +27,8 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _linkage:String = "";
 
+      private var _showDone:Boolean = false;
+
       public function get headerTitle() : String {
          return this._headerTitle;
       }
@@ -89,6 +91,14 @@ package net.wg.gui.lobby.questsWindow.data
 
       public function set linkage(param1:String) : void {
          this._linkage = param1;
+      }
+
+      public function get showDone() : Boolean {
+         return this._showDone;
+      }
+
+      public function set showDone(param1:Boolean) : void {
+         this._showDone = param1;
       }
    }
 

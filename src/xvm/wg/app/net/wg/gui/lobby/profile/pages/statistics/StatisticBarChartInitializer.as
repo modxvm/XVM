@@ -16,11 +16,14 @@ package net.wg.gui.lobby.profile.pages.statistics
          this.tweenManager = new ExcludeTweenManager();
          super();
          this.chartRef = param1;
-         this.chartRef.alpha = 0;
-         DisplayObject(param1.horizontalAxis).addEventListener(StatisticsBarChartAxis.INITIALIZED,this.initializedHandler,false,0,true);
+         if(param1.horizontalAxis)
+         {
+            this.chartRef.alpha = 0;
+            DisplayObject(param1.horizontalAxis).addEventListener(StatisticsBarChartAxis.INITIALIZED,this.initializedHandler,false,0,true);
+         }
       }
 
-      public var chartRef:AxisChart;
+      private var chartRef:AxisChart;
 
       private var tweenManager:ExcludeTweenManager;
 
@@ -41,7 +44,10 @@ package net.wg.gui.lobby.profile.pages.statistics
       public function dispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
-         DisplayObject(this.chartRef.horizontalAxis).removeEventListener(StatisticsBarChartAxis.INITIALIZED,this.initializedHandler);
+         if(this.chartRef.horizontalAxis)
+         {
+            DisplayObject(this.chartRef.horizontalAxis).removeEventListener(StatisticsBarChartAxis.INITIALIZED,this.initializedHandler);
+         }
          this.chartRef = null;
       }
    }

@@ -33,7 +33,11 @@ package net.wg.gui.components.advanced
       }
 
       override protected function onDispose() : void {
-         this.extraIcon.dispose();
+         if(this.extraIcon)
+         {
+            this.extraIcon.dispose();
+            this.extraIcon = null;
+         }
          super.onDispose();
       }
 

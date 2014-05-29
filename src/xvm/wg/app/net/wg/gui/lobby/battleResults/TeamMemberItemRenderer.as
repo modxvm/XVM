@@ -4,6 +4,7 @@ package net.wg.gui.lobby.battleResults
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UserNameField;
    import flash.text.TextField;
+   import flash.display.Sprite;
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.events.MouseEvent;
    import net.wg.data.components.BattleResultsCIGenerator;
@@ -36,6 +37,10 @@ package net.wg.gui.lobby.battleResults
       public var fragsLbl:TextField;
 
       public var xpLbl:TextField;
+
+      public var resourceLbl:TextField;
+
+      public var resourceIcon:Sprite;
 
       public var medalIcon:EfficiencyIconRenderer;
 
@@ -181,6 +186,8 @@ package net.wg.gui.lobby.battleResults
                this.fragsLbl.textColor = this.damageLbl.textColor = 13413751;
                this.deadBg.visible = false;
                this.medalIcon.visible = false;
+               this.resourceLbl.visible = false;
+               this.resourceIcon.visible = false;
                if(data.killerID > 0)
                {
                   this.damageLbl.textColor = 6381391;
@@ -214,11 +221,20 @@ package net.wg.gui.lobby.battleResults
                   _loc2_ = this.getColorForAlias("teamkiller",65535);
                   this.fragsLbl.htmlText = this.fragsLbl.htmlText + ("(<FONT color=\"#" + _loc2_.toString(16) + "\">" + data.tkills + "</FONT>)");
                }
-               if(data.medalsCount > 0)
+               if((data.hasOwnProperty("medalsCount")) && data.medalsCount > 0)
                {
                   this.medalIcon.value = data.medalsCount;
                   this.medalIcon.validateNow();
                   this.medalIcon.visible = true;
+               }
+               else
+               {
+                  if(data.hasOwnProperty("resourceCount"))
+                  {
+                     this.resourceLbl.visible = true;
+                     this.resourceIcon.visible = true;
+                     this.resourceLbl.text = data.resourceCount;
+                  }
                }
             }
             else

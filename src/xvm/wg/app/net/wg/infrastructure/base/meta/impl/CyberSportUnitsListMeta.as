@@ -1,9 +1,10 @@
 package net.wg.infrastructure.base.meta.impl
 {
+   import net.wg.gui.rally.views.list.BaseRallyListView;
    import net.wg.data.constants.Errors;
 
 
-   public class CyberSportUnitsListMeta extends CyberSportBaseViewMeta
+   public class CyberSportUnitsListMeta extends BaseRallyListView
    {
           
       public function CyberSportUnitsListMeta() {

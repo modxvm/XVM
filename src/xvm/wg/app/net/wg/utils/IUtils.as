@@ -4,6 +4,7 @@ package net.wg.utils
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import net.wg.infrastructure.interfaces.IStrCaseProperties;
    import net.wg.infrastructure.interfaces.entity.ISerializable;
+   import net.wg.infrastructure.interfaces.IImageUrlProperties;
 
 
    public interface IUtils extends IUtilsManagerMeta, IDisposable
@@ -42,6 +43,14 @@ package net.wg.utils
       function get voMgr() : IVOManager;
 
       function get icons() : IIcons;
+
+      function get styleSheetManager() : IStyleSheetManager;
+
+      function get tweenAnimator() : ITweenAnimator;
+
+      function get animBuilder() : IAnimBuilder;
+
+      function getImageUrlProperties(param1:String, param2:int, param3:int, param4:int=-4, param5:int=0) : IImageUrlProperties;
    }
 
 }

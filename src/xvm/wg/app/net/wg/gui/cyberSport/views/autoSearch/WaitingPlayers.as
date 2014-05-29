@@ -1,5 +1,6 @@
 package net.wg.gui.cyberSport.views.autoSearch
 {
+   import net.wg.gui.components.advanced.FieldSet;
    import flash.display.MovieClip;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
@@ -17,6 +18,8 @@ package net.wg.gui.cyberSport.views.autoSearch
          this.buttonsBG.visible = false;
          cancelButton.visible = false;
       }
+
+      public var fieldSet:FieldSet;
 
       public var buttonsBG:MovieClip;
 

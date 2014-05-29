@@ -68,6 +68,10 @@ package net.wg.data.constants
       public static var SECTION_RENDERER:String = "sectionRenderer";
 
       public static var TEXTURE_RENDERER:String = "textureRenderer";
+
+      public static const TIMER_TICK:String = "timerTick";
+
+      public static const CYBERSPORT_AUTO_SEARCH:String = "cybersportAutoSearch";
    }
 
 }

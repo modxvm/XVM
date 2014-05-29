@@ -25,13 +25,13 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             while(_loc3_ < param2.length)
             {
                _loc4_ = param2[_loc3_];
-               if(_loc3_ == 0)
+               if(_loc4_.viewType == StatisticsLabelViewTypeDataVO.VIEW_TYPE_TABLES)
                {
                   this._dataListVO.push(new DetailedLabelDataVO(_loc4_));
                }
                else
                {
-                  if(_loc3_ == 1)
+                  if(_loc4_.viewType == StatisticsLabelViewTypeDataVO.VIEW_TYPE_CHARTS)
                   {
                      this._dataListVO.push(new StatisticsChartsTabDataVO(_loc4_));
                   }

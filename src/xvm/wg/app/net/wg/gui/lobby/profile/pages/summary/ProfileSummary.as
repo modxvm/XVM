@@ -3,7 +3,7 @@ package net.wg.gui.lobby.profile.pages.summary
    import net.wg.infrastructure.base.meta.impl.ProfileSummaryMeta;
    import net.wg.infrastructure.base.meta.IProfileSummaryMeta;
    import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
-   import net.wg.gui.lobby.profile.components.LineDescrIconText;
+   import net.wg.gui.components.advanced.LineDescrIconText;
    import net.wg.gui.lobby.profile.components.LditValued;
    import net.wg.gui.lobby.profile.components.LditBattles;
    import net.wg.gui.lobby.profile.components.LditMarksOfMastery;
@@ -71,9 +71,9 @@ package net.wg.gui.lobby.profile.pages.summary
          layoutManager = new SectionLayoutManager(525,740);
          layoutManager.registerComponents(this.footer,this.tfWins,this.tfHits,this.tfAvgExperience,this.tfAvgDamage,this.tfMaxDestroyed,this.tfMaxExperience,this.tfTotalBattles,this.tfMarksOfMastery,this.tfPersonalScore,this.significantAwards);
          this.lineTextFieldsLayout = new LineTextFieldsLayout(ProfileConstants.WINDOW_WIDTH,140);
-         this.lineTextFieldsLayout.addLeftPair(this.tfWins,this.tfHits);
+         this.lineTextFieldsLayout.addLeftPair(this.tfTotalBattles,this.tfHits);
          this.lineTextFieldsLayout.addRightPair(this.tfAvgExperience,this.tfMaxDestroyed);
-         this.lineTextFieldsLayout.addLeftPair(this.tfTotalBattles,this.tfAvgDamage);
+         this.lineTextFieldsLayout.addLeftPair(this.tfWins,this.tfAvgDamage);
          this.lineTextFieldsLayout.addRightPair(this.tfMaxExperience,this.tfMarksOfMastery);
          this.lineTextFieldsLayout.layout();
       }

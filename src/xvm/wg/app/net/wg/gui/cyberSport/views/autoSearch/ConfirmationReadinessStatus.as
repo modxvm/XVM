@@ -1,6 +1,8 @@
 package net.wg.gui.cyberSport.views.autoSearch
 {
    import flash.text.TextField;
+   import net.wg.data.constants.SoundManagerStates;
+   import net.wg.data.constants.SoundTypes;
    import flash.events.Event;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
 
@@ -30,6 +32,7 @@ package net.wg.gui.cyberSport.views.autoSearch
       public var countDownSec:TextField;
 
       override protected function updateView() : void {
+         App.soundMgr.playControlsSnd(SoundManagerStates.SND_PRESS,SoundTypes.CYBERSPORT_AUTO_SEARCH,null);
          _time = model.countDownSeconds;
          this.contextMessage(String(_time));
          startTimer();

@@ -467,7 +467,7 @@ package net.wg.gui.lobby.tankman
       }
 
       private function __isEnableDropSkillsButton() : Boolean {
-         if((data.currentVehicle) && ((data.currentVehicle.currentVehicleLocked) || (data.currentVehicle.currentVehicleBroken)))
+         if((data.currentVehicle) && (data.currentVehicle.currentVehicleLocked))
          {
             return false;
          }

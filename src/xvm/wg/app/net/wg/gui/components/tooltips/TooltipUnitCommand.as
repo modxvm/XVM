@@ -8,13 +8,15 @@ package net.wg.gui.components.tooltips
    import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.VO.UnitCommandVO;
    import flash.display.MovieClip;
-   import net.wg.gui.cyberSport.vo.VehicleVO;
+   import net.wg.gui.rally.vo.VehicleVO;
+   import net.wg.infrastructure.interfaces.IImageUrlProperties;
 
 
    public class TooltipUnitCommand extends ToolTipSpecial
    {
           
       public function TooltipUnitCommand() {
+         this.TANK_ICON = App.utils.getHtmlIconTextS(App.utils.getImageUrlProperties(RES_ICONS.MAPS_ICONS_LIBRARY_CYBERSPORT_TANKICON,29,12,0) as IImageUrlProperties);
          super();
          this.headerTF = content.headerTF;
          this.notEnoughTF = content.notEnoughTF;
@@ -43,6 +45,8 @@ package net.wg.gui.components.tooltips
 
       private const MARGIN_AFTER_SUBHEADER:Number = 20;
 
+      private const TANK_ICON:String;
+
       override public function toString() : String {
          return "[WG ToolTipUnitCommand " + name + "]";
       }
@@ -59,68 +63,41 @@ package net.wg.gui.components.tooltips
       override protected function redraw() : void {
          var _loc1_:ILocale = null;
          var _loc2_:UnitCommandVO = null;
-         var _loc4_:Separator = null;
-         var _loc6_:TextField = null;
-         var _loc7_:* = 0;
          _loc1_ = App.utils.locale;
          _loc2_ = new UnitCommandVO(_data);
          var _loc3_:Number = 300;
-         _loc4_ = null;
          separators = new Vector.<Separator>();
          topPosition = topPosition + this.setHeader(_loc2_.commanderName);
-         _loc4_ = this.addSeparatorWithMargin(_loc4_);
+         this.addSeparatorWithMargin();
          this.commanderStats.y = topPosition ^ 0;
          this.commanderStats.x = bgShadowMargin.left;
          this.commanderStats.stats.text = _loc2_.commanderRating;
          topPosition = topPosition + (this.commanderStats.height + Utils.instance.MARGIN_AFTER_BLOCK);
-         _loc4_ = this.addSeparatorWithMargin(_loc4_);
+         var _loc4_:Separator = this.addSeparatorWithMargin();
          if(_loc2_.unitComment)
          {
+            this.whiteBg.y = _loc4_.y;
+            this.whiteBg.visible = true;
             this.descriptionTF.y = topPosition ^ 0;
             this.descriptionTF.x = contentMargin.left + bgShadowMargin.left;
             this.descriptionTF.text = _loc2_.unitComment;
             this.descriptionTF.height = this.descriptionTF.textHeight + 10;
             topPosition = topPosition + (this.descriptionTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
-            _loc4_ = this.addSeparatorWithMargin(_loc4_);
+            this.addSeparatorWithMargin();
          }
-         var _loc5_:Number = 0;
-         if((_loc2_.vehiclesList) && _loc2_.vehiclesList.length > 0)
+         this.whiteBg.height = topPosition - this.whiteBg.y - Utils.instance.MARGIN_AFTER_SEPARATE;
+         if((_loc2_.conditions) && (_loc2_.vehiclesList) && _loc2_.vehiclesList.length > 0)
          {
-            this.whiteBg.y = _loc4_.y;
-            this.whiteBg.visible = true;
-            _loc6_ = Utils.instance.addHeader("suitableHeader",contentMargin.left + bgShadowMargin.left,topPosition,_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_SUITABLETITLE));
-            content.addChild(_loc6_);
-            topPosition = topPosition + (_loc6_.textHeight + this.MARGIN_AFTER_SUBHEADER ^ 0);
-            _loc7_ = 0;
-            while(_loc7_ < _loc2_.vehiclesList.length)
-            {
-               topPosition = this.addSuitableVehicleBlockItem(content,_loc2_.vehiclesList[_loc7_],topPosition);
-               _loc7_++;
-            }
-         }
-         topPosition = topPosition + Utils.instance.MARGIN_AFTER_BLOCK;
-         if(_loc2_.leftCount > 0)
-         {
-            this.notEnoughTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_MORE),Utils.instance.COLOR_ADD_INFO,13,"$TitleFont") + " " + Utils.instance.htmlWrapper(_loc2_.leftCount.toString(),Utils.instance.COLOR_NUMBER,13,"$TitleFont");
-            this.notEnoughTF.width = this.notEnoughTF.textWidth + 5;
+            this.notEnoughTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_MATCHES),Utils.instance.COLOR_NORMAL,13,"$FieldFont") + " " + Utils.instance.htmlWrapper((_loc2_.vehiclesList.length + _loc2_.leftCount).toString(),Utils.instance.COLOR_NUMBER,13,"$TitleFont") + " " + this.TANK_ICON;
             this.notEnoughTF.height = this.notEnoughTF.textHeight + 5;
             this.notEnoughTF.y = topPosition ^ 0;
             this.notEnoughTF.x = bgShadowMargin.left + contentMargin.left;
             this.notEnoughTF.visible = true;
             topPosition = topPosition + (this.notEnoughTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
+            this.addSeparatorWithMargin();
          }
-         else
-         {
-            this.notEnoughTF.x = 0;
-            this.notEnoughTF.y = 0;
-            this.notEnoughTF.width = 10;
-            this.notEnoughTF.visible = false;
-         }
-         _loc5_ = this.whiteBg.y - topPosition;
-         this.whiteBg.height = _loc5_;
          if(_loc2_.isPeripheryAnother)
          {
-            _loc4_ = this.addSeparatorWithMargin(_loc4_);
             this.alertSuitable.multiline = true;
             this.alertSuitable.wordWrap = true;
             this.alertSuitable.autoSize = TextFieldAutoSize.CENTER;
@@ -129,8 +106,8 @@ package net.wg.gui.components.tooltips
             this.alertSuitable.x = contentMargin.left + bgShadowMargin.left;
             this.alertSuitable.y = topPosition ^ 0;
             topPosition = topPosition + (this.alertSuitable.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
+            this.addSeparatorWithMargin();
          }
-         _loc4_ = this.addSeparatorWithMargin(_loc4_);
          this.actionTF.y = topPosition ^ 0;
          this.actionTF.x = contentMargin.left + bgShadowMargin.left;
          this.actionTF.text = TOOLTIPS.CYBERSPORT_UNITCOMMAND_ACTION;
@@ -140,12 +117,12 @@ package net.wg.gui.components.tooltips
          super.redraw();
       }
 
-      private function addSeparatorWithMargin(param1:Separator) : Separator {
-         var param1:Separator = Utils.instance.createSeparate(content);
-         param1.y = topPosition ^ 0;
-         separators.push(param1);
+      private function addSeparatorWithMargin() : Separator {
+         var _loc1_:Separator = Utils.instance.createSeparate(content);
+         _loc1_.y = topPosition ^ 0;
+         separators.push(_loc1_);
          topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
-         return param1;
+         return _loc1_;
       }
 
       private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number {

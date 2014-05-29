@@ -154,7 +154,7 @@ package net.wg.infrastructure.managers.utils.impl
           
       function TaskStack() {
          super();
-         this._tasks = new Vector.<TaskStack>();
+         this._tasks = new Vector.<Task>();
       }
 
       private var _tasks:Vector.<Task> = null;

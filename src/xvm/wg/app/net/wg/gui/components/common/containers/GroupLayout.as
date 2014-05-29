@@ -12,7 +12,7 @@ package net.wg.gui.components.common.containers
 
       protected var _target:Group;
 
-      public var gap:int = 0;
+      private var _gap:int = 0;
 
       public function set target(param1:Object) : void {
          this._target = Group(param1);
@@ -28,6 +28,14 @@ package net.wg.gui.components.common.containers
 
       public function get target() : Object {
          return this._target;
+      }
+
+      public function get gap() : int {
+         return this._gap;
+      }
+
+      public function set gap(param1:int) : void {
+         this._gap = param1;
       }
    }
 

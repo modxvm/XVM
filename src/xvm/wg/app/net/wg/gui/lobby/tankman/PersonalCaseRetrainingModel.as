@@ -6,7 +6,6 @@ package net.wg.gui.lobby.tankman
    {
           
       public function PersonalCaseRetrainingModel() {
-         this.actionPrc = [0,0,0];
          this.lightTanks = [];
          this.mediumTanks = [];
          this.heavyTanks = [];
@@ -22,8 +21,6 @@ package net.wg.gui.lobby.tankman
       public var tankmanCost:Array;
 
       public var vehicles:Array;
-
-      public var actionPrc:Array;
 
       public var lightTanks:Array;
 
@@ -48,6 +45,8 @@ package net.wg.gui.lobby.tankman
       public var nationID:int;
 
       public var specializationLevel:Number;
+
+      public var action:Array;
    }
 
 }

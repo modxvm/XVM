@@ -28,7 +28,7 @@ package net.wg.gui.lobby.profile.components
                IResizableContent(currentView).setViewSize(this.availableSize.x,this.availableSize.y);
             }
          }
-         if(isInvalid(AVAILABLE_SIZE_INV))
+         if(isInvalid(OFFSET_INVALID))
          {
             if(currentView)
             {

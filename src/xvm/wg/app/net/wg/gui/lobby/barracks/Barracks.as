@@ -31,6 +31,8 @@ package net.wg.gui.lobby.barracks
 
       private var myHeight:Number = 0;
 
+      private const MY_HEIGHT_OFFSET:Number = 18;
+
       override public function setViewSize(param1:Number, param2:Number) : void {
          this.myWidth = param1;
          this.myHeight = param2;
@@ -41,8 +43,8 @@ package net.wg.gui.lobby.barracks
          this.setViewSize(param1,param2);
       }
 
-      public function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Number, param6:Number, param7:Number, param8:Array) : void {
-         this.form.as_setTankmen(param1,param2,param3,param4,param5,param6,param7,param8);
+      public function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Object, param6:Number, param7:Array) : void {
+         this.form.as_setTankmen(param1,param2,param3,param4,param5,param6,param7);
       }
 
       public function as_updateTanksList(param1:Array) : void {
@@ -92,7 +94,7 @@ package net.wg.gui.lobby.barracks
          if(isInvalid(InvalidationType.SIZE))
          {
             this.x = this.myWidth - _originalWidth >> 1;
-            this.y = this.myHeight - _originalHeight >> 1;
+            this.y = this.myHeight + this.MY_HEIGHT_OFFSET - _originalHeight >> 1;
          }
       }
 
@@ -127,7 +129,6 @@ package net.wg.gui.lobby.barracks
       }
 
       private function showDismissDialog(param1:CrewEvent) : void {
-         trace("showDismissDialog","compact",param1.initProp.compact);
          dismissTankmanS(param1.initProp.compact);
       }
 

@@ -5,6 +5,9 @@ package net.wg.gui.messenger.windows
    import net.wg.gui.components.controls.ScrollingListEx;
    import flash.display.Sprite;
    import net.wg.data.daapi.base.DAAPIDataProvider;
+   import scaleform.clik.utils.Padding;
+   import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
+   import net.wg.gui.events.MessengerBarEvent;
    import scaleform.clik.utils.Constraints;
    import flash.events.Event;
    import net.wg.gui.events.ListEventEx;
@@ -41,11 +44,18 @@ package net.wg.gui.messenger.windows
          invalidate(INVALID_LIST_VISIBILITY);
       }
 
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         window.contentPadding = new Padding(38,10,11,10);
+         geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
+      }
+
       override protected function configUI() : void {
          super.configUI();
          constraints.addElement("background",this.background,Constraints.ALL);
          constraints.addElement("membersList",this.membersList,Constraints.RIGHT | Constraints.TOP | Constraints.BOTTOM);
          this._membersDP.addEventListener(Event.CHANGE,this.onMembersDPChange);
+         this.membersList.sbPadding = new Padding(0,0,0,0);
          this.membersList.addEventListener(ListEventEx.ITEM_CLICK,this.onMemberItemClick);
          this.membersList.dataProvider = this._membersDP;
       }

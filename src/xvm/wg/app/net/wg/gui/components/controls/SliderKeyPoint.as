@@ -1,6 +1,7 @@
 package net.wg.gui.components.controls
 {
    import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
    import flash.events.MouseEvent;
 
 
@@ -12,9 +13,13 @@ package net.wg.gui.components.controls
          buttonMode = useHandCursor = true;
       }
 
+      public var labelTF:TextField;
+
       private var _tooltip:String;
 
       private var _index:int = -1;
+
+      private var _label:String = "";
 
       override protected function configUI() : void {
          super.configUI();
@@ -33,7 +38,10 @@ package net.wg.gui.components.controls
       }
 
       private function onOver(param1:MouseEvent) : void {
-         App.toolTipMgr.show(this._tooltip);
+         if(this._tooltip)
+         {
+            App.toolTipMgr.show(this._tooltip);
+         }
       }
 
       public function get tooltip() : String {
@@ -50,6 +58,18 @@ package net.wg.gui.components.controls
 
       public function set index(param1:int) : void {
          this._index = param1;
+      }
+
+      public function get label() : String {
+         return this._label;
+      }
+
+      public function set label(param1:String) : void {
+         this._label = param1;
+         if(this.labelTF)
+         {
+            this.labelTF.htmlText = this._label;
+         }
       }
    }
 

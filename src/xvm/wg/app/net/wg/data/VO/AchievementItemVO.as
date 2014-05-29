@@ -18,6 +18,8 @@ package net.wg.data.VO
 
       private var _name:String = "";
 
+      private var _block:String = "";
+
       private var _section:String = "";
 
       private var _type:String = "";
@@ -25,6 +27,10 @@ package net.wg.data.VO
       private var _userName:String = "";
 
       private var _value:Number = -1;
+
+      private var _localizedValue:String = "0";
+
+      private var _isInDossier:Boolean = false;
 
       private var _icon:Object;
 
@@ -83,6 +89,14 @@ package net.wg.data.VO
          this._levelUpValue = param1;
       }
 
+      public function get block() : String {
+         return this._block;
+      }
+
+      public function set block(param1:String) : void {
+         this._block = param1;
+      }
+
       public function get name() : String {
          return this._name;
       }
@@ -121,6 +135,22 @@ package net.wg.data.VO
 
       public function set value(param1:int) : void {
          this._value = param1;
+      }
+
+      public function get localizedValue() : String {
+         return this._localizedValue;
+      }
+
+      public function set localizedValue(param1:String) : void {
+         this._localizedValue = param1;
+      }
+
+      public function get isInDossier() : Boolean {
+         return this._isInDossier;
+      }
+
+      public function set isInDossier(param1:Boolean) : void {
+         this._isInDossier = param1;
       }
    }
 

@@ -43,7 +43,9 @@ package net.wg.infrastructure.base.meta.impl
 
       public var copyToClipboard:Function = null;
 
-      public var kickPlayer:Function = null;
+      public var kickPlayerFromPrebattle:Function = null;
+
+      public var kickPlayerFromUnit:Function = null;
 
       public var fortDirection:Function = null;
 
@@ -135,9 +137,14 @@ package net.wg.infrastructure.base.meta.impl
          this.copyToClipboard(param1);
       }
 
-      public function kickPlayerS(param1:Number) : void {
-         App.utils.asserter.assertNotNull(this.kickPlayer,"kickPlayer" + Errors.CANT_NULL);
-         this.kickPlayer(param1);
+      public function kickPlayerFromPrebattleS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.kickPlayerFromPrebattle,"kickPlayerFromPrebattle" + Errors.CANT_NULL);
+         this.kickPlayerFromPrebattle(param1);
+      }
+
+      public function kickPlayerFromUnitS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.kickPlayerFromUnit,"kickPlayerFromUnit" + Errors.CANT_NULL);
+         this.kickPlayerFromUnit(param1);
       }
 
       public function fortDirectionS() : void {
@@ -145,24 +152,24 @@ package net.wg.infrastructure.base.meta.impl
          this.fortDirection();
       }
 
-      public function fortAssignPlayersS() : void {
+      public function fortAssignPlayersS(param1:Object) : void {
          App.utils.asserter.assertNotNull(this.fortAssignPlayers,"fortAssignPlayers" + Errors.CANT_NULL);
-         this.fortAssignPlayers();
+         this.fortAssignPlayers(param1);
       }
 
-      public function fortModernizationS() : void {
+      public function fortModernizationS(param1:Object) : void {
          App.utils.asserter.assertNotNull(this.fortModernization,"fortModernization" + Errors.CANT_NULL);
-         this.fortModernization();
+         this.fortModernization(param1);
       }
 
-      public function fortDestroyS() : void {
+      public function fortDestroyS(param1:Object) : void {
          App.utils.asserter.assertNotNull(this.fortDestroy,"fortDestroy" + Errors.CANT_NULL);
-         this.fortDestroy();
+         this.fortDestroy(param1);
       }
 
-      public function fortPrepareOrderS() : void {
+      public function fortPrepareOrderS(param1:Object) : void {
          App.utils.asserter.assertNotNull(this.fortPrepareOrder,"fortPrepareOrder" + Errors.CANT_NULL);
-         this.fortPrepareOrder();
+         this.fortPrepareOrder(param1);
       }
    }
 

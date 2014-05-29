@@ -11,10 +11,6 @@ package
 
       public static const LANGUAGE_CODE:String = "#settings:LANGUAGE_CODE";
 
-      public static const WRONG_UPPER:String = "#settings:WRONG_UPPER";
-
-      public static const RIGHT_UPPER:String = "#settings:RIGHT_UPPER";
-
       public static const WINDOWTITLE:String = "#settings:windowTitle";
 
       public static const TITLE:String = "#settings:title";
@@ -28,6 +24,8 @@ package
       public static const CURSORTITLE:String = "#settings:cursorTitle";
 
       public static const MARKERTITLE:String = "#settings:markerTitle";
+
+      public static const OTHERTITLE:String = "#settings:otherTitle";
 
       public static const KEYBOARDTITLE:String = "#settings:keyboardTitle";
 
@@ -231,6 +229,10 @@ package
 
       public static const FOV_DESCRIPTION:String = "#settings:fov/description";
 
+      public static const DYNAMICFOV:String = "#settings:dynamicFov";
+
+      public static const DYNAMICFOV_DESCRIPTION:String = "#settings:dynamicFov/description";
+
       public static const GAME_REPLAYENABLED:String = "#settings:game/replayEnabled";
 
       public static const GAME_REPLAYENABLED_NONE:String = "#settings:game/replayEnabled/none";
@@ -398,6 +400,8 @@ package
       public static const GAME_ENABLEDELAYPOSTEFFECT:String = "#settings:game/enableDelayPostEffect";
 
       public static const GAME_SHOWVEHICLESCOUNTER:String = "#settings:game/showVehiclesCounter";
+
+      public static const GAME_SHOWMARKSONGUN:String = "#settings:game/showMarksOnGun";
 
       public static const GAME_FIELDSET_HEADERCHAT:String = "#settings:game/fieldset/headerChat";
 

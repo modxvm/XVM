@@ -43,6 +43,10 @@ package net.wg.gui.lobby.profile.headerBar
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:ProfileTabButtonBg = null;
+         if(_baseDisposed)
+         {
+            return;
+         }
          super.draw();
          if(isInvalid(InvalidationType.SIZE))
          {

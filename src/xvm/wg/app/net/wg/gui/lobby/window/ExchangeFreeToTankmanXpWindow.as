@@ -12,6 +12,7 @@ package net.wg.gui.lobby.window
    import net.wg.gui.components.advanced.SkillsItemRenderer;
    import flash.text.TextField;
    import net.wg.infrastructure.interfaces.IWindow;
+   import scaleform.clik.utils.Padding;
    import flash.events.Event;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
@@ -83,15 +84,19 @@ package net.wg.gui.lobby.window
 
       private var _price:Number = 0;
 
-      private var _defPrice:Number = 0;
+      private var _actionPriceData:Object = null;
 
-      private var _actionPrc:Number = 0;
+      private var _initMax:Boolean = false;
 
       override public function setWindow(param1:IWindow) : void {
+         var _loc2_:Padding = null;
          super.setWindow(param1);
          if(param1)
          {
             window.title = MENU.TEACHINGSKILL_TITLE;
+            _loc2_ = window.contentPadding as Padding;
+            _loc2_.right = _loc2_.right - 4;
+            window.contentPadding = _loc2_;
             addEventListener(Event.ENTER_FRAME,this.calcHeightInNextFrame,false,0,true);
          }
       }
@@ -101,10 +106,9 @@ package net.wg.gui.lobby.window
          invalidate(INIT_DATA_INVALID);
       }
 
-      public function as_setCalcValueResponse(param1:Number, param2:Number, param3:Number) : void {
+      public function as_setCalcValueResponse(param1:Number, param2:Object) : void {
          this._price = param1;
-         this._defPrice = param2;
-         this._actionPrc = param3;
+         this._actionPriceData = param2;
          invalidate(RECALC_VALUE_INVALID);
       }
 
@@ -154,7 +158,18 @@ package net.wg.gui.lobby.window
             {
                this.nsLevel.minimum = this.initData.lastSkillLevel;
                this.nsLevel.maximum = this.initData.nextSkillLevel;
-               this.nsLevel.value = this.nsLevel.maximum;
+               if(!this._initMax)
+               {
+                  this.nsLevel.value = this.nsLevel.maximum;
+                  this._initMax = true;
+               }
+               else
+               {
+                  if(this.nsLevel.value >= this.nsLevel.maximum)
+                  {
+                     this.nsLevel.value = this.nsLevel.maximum;
+                  }
+               }
                this.nsLevel.enabled = !this.isAlertWalletVisible && !(this.initData.lastSkillLevel == this.initData.nextSkillLevel);
                this.skillBefore.data = this.initData.beforeSkill;
                this.skillAfter.data = this.initData.afterSkill;
@@ -210,7 +225,12 @@ package net.wg.gui.lobby.window
             }
             if(!this.isAlertWalletVisible)
             {
-               _loc2_ = new ActionPriceVO(this._actionPrc,this._price,this._defPrice,IconsTypes.FREE_XP);
+               _loc2_ = null;
+               if(this._actionPriceData)
+               {
+                  _loc2_ = new ActionPriceVO(this._actionPriceData);
+                  _loc2_.ico = IconsTypes.FREE_XP;
+               }
                this.actionPrice.setData(_loc2_);
                this.itToPay.visible = !this.actionPrice.visible;
                this.itToPay.text = App.utils.locale.integer(this._price);

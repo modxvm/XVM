@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.hangar.tcarousel.helper
 {
    import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
 
 
    public class VehicleCarouselVOBuilder extends Object
@@ -39,15 +40,14 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
          return _loc2_;
       }
 
-      public function getDataVoForBuySlot(param1:Number, param2:Number, param3:Number) : VehicleCarouselVO {
-         var _loc4_:VehicleCarouselVO = new VehicleCarouselVO();
-         _loc4_.stat = "buySlot";
-         _loc4_.buySlot = true;
-         _loc4_.stateLevel = "buyState";
-         _loc4_.slotPrice = param1;
-         _loc4_.defSlotPrice = param2;
-         _loc4_.slotPricePrc = param3;
-         return _loc4_;
+      public function getDataVoForBuySlot(param1:Number, param2:ActionPriceVO) : VehicleCarouselVO {
+         var _loc3_:VehicleCarouselVO = new VehicleCarouselVO();
+         _loc3_.stat = "buySlot";
+         _loc3_.buySlot = true;
+         _loc3_.stateLevel = "buyState";
+         _loc3_.slotPriceActionData = param2;
+         _loc3_.slotPrice = param1;
+         return _loc3_;
       }
    }
 

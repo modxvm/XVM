@@ -2,10 +2,15 @@ package net.wg.gui.lobby.sellDialog
 {
    import scaleform.clik.core.UIComponent;
    import flash.display.MovieClip;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleShellVo;
    import net.wg.data.VO.SellDialogElement;
    import net.wg.data.VO.SellDialogItem;
    import net.wg.utils.ILocale;
    import net.wg.data.constants.FittingTypes;
+   import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleEquipmentVo;
+   import net.wg.gui.lobby.sellDialog.VO.SellInInventoryModuleVo;
+   import net.wg.gui.lobby.sellDialog.VO.SellInInventoryShellVo;
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.events.VehicleSellDialogEvent;
    import flash.geom.Rectangle;
@@ -42,37 +47,32 @@ package net.wg.gui.lobby.sellDialog
          return this.expandBg.y + this.expandBg.height + PADDING_FOR_NEXT_ELEMENT;
       }
 
-      public function setShells(param1:Object) : void {
-         var _loc5_:SellDialogElement = null;
+      public function setShells(param1:Vector.<SellOnVehicleShellVo>) : void {
+         var _loc7_:SellDialogElement = null;
          var _loc2_:SellDialogItem = new SellDialogItem();
          var _loc3_:ILocale = App.utils.locale;
-         var _loc4_:uint = 0;
-         while(_loc4_ < param1.shells.length)
+         var _loc4_:Number = param1.length;
+         var _loc5_:SellOnVehicleShellVo = null;
+         var _loc6_:uint = 0;
+         while(_loc6_ < _loc4_)
          {
-            if(param1.shells[_loc4_] != undefined)
+            _loc5_ = param1[_loc6_];
+            if(_loc5_.count != 0)
             {
-               if(param1.shells[_loc4_].count != 0)
-               {
-                  _loc5_ = new SellDialogElement();
-                  _loc5_.id = param1.shells[_loc4_].userName + " (" + param1.shells[_loc4_].count + " " + _loc3_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
-                  _loc5_.isRemovable = true;
-                  _loc5_.type = FittingTypes.SHELL;
-                  _loc5_.data = param1.shells[_loc4_];
-                  if(param1.shells[_loc4_].buyPrice[1] > 0)
-                  {
-                     _loc5_.inInventory = true;
-                  }
-                  else
-                  {
-                     _loc5_.inInventory = false;
-                  }
-                  _loc5_.moneyValue = param1.shells[_loc4_].sellPrice[0] * param1.shells[_loc4_].count;
-                  _loc5_.defMoneyValue = param1.shells[_loc4_].defSellPrice[0] * param1.shells[_loc4_].count;
-                  _loc5_.actionPrc = param1.shells[_loc4_].sellActionPrc;
-                  _loc2_.elements.push(_loc5_);
-               }
+               _loc7_ = new SellDialogElement();
+               _loc7_.id = _loc5_.userName + " (" + _loc5_.count + " " + _loc3_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
+               _loc7_.isRemovable = true;
+               _loc7_.type = FittingTypes.SHELL;
+               _loc7_.kind = _loc5_.kind;
+               _loc7_.intCD = _loc5_.intCD;
+               _loc7_.moneyValue = _loc5_.sellPrice[0] * _loc5_.count;
+               _loc7_.fromInventory = false;
+               _loc7_.count = _loc5_.count;
+               _loc7_.sellActionPriceVo = _loc5_.actionVo;
+               _loc7_.toInventory = _loc5_.toInventory;
+               _loc2_.elements.push(_loc7_);
             }
-            _loc4_++;
+            _loc6_++;
          }
          if(_loc2_.elements.length != 0)
          {
@@ -81,26 +81,26 @@ package net.wg.gui.lobby.sellDialog
          }
       }
 
-      public function setEquipment(param1:Object) : void {
-         var _loc4_:SellDialogElement = null;
+      public function setEquipment(param1:Vector.<SellOnVehicleEquipmentVo>) : void {
+         var _loc6_:SellDialogElement = null;
          var _loc2_:SellDialogItem = new SellDialogItem();
-         var _loc3_:uint = 0;
-         while(_loc3_ < param1.eqs.length)
+         var _loc3_:Number = param1.length;
+         var _loc4_:SellOnVehicleEquipmentVo = null;
+         var _loc5_:uint = 0;
+         while(_loc5_ < _loc3_)
          {
-            if(param1.eqs[_loc3_] != undefined)
-            {
-               _loc4_ = new SellDialogElement();
-               _loc4_.id = param1.eqs[_loc3_].userName;
-               _loc4_.type = FittingTypes.EQUIPMENT;
-               _loc4_.moneyValue = param1.eqs[_loc3_].sellPrice[0];
-               _loc4_.defMoneyValue = param1.eqs[_loc3_].defSellPrice[0];
-               _loc4_.actionPrc = param1.eqs[_loc3_].sellActionPrc;
-               _loc4_.inInventory = true;
-               _loc4_.data = param1.eqs[_loc3_];
-               _loc4_.isRemovable = true;
-               _loc2_.elements.push(_loc4_);
-            }
-            _loc3_++;
+            _loc4_ = param1[_loc5_];
+            _loc6_ = new SellDialogElement();
+            _loc6_.id = _loc4_.userName;
+            _loc6_.type = FittingTypes.EQUIPMENT;
+            _loc6_.moneyValue = _loc4_.sellPrice[0] != 0?_loc4_.sellPrice[0]:_loc4_.sellPrice[1];
+            _loc6_.sellActionPriceVo = _loc4_.actionVo;
+            _loc6_.toInventory = _loc4_.toInventory;
+            _loc6_.intCD = _loc4_.intCD;
+            _loc6_.isRemovable = true;
+            _loc6_.count = _loc4_.count;
+            _loc2_.elements.push(_loc6_);
+            _loc5_++;
          }
          if(_loc2_.elements.length != 0)
          {
@@ -126,66 +126,67 @@ package net.wg.gui.lobby.sellDialog
          this.mask_mc.height = 0;
       }
 
-      public function setInventory(param1:Object, param2:Object) : void {
-         var _loc11_:SellDialogElement = null;
+      public function setInventory(param1:Vector.<SellInInventoryModuleVo>, param2:Vector.<SellInInventoryShellVo>) : void {
+         var _loc14_:SellDialogElement = null;
          var _loc3_:SellDialogItem = new SellDialogItem();
          var _loc4_:Number = 0;
-         var _loc5_:Number = 0;
-         var _loc6_:SellDialogElement = new SellDialogElement();
-         _loc6_.inInventory = true;
-         var _loc7_:Number = 0;
-         var _loc8_:uint = 0;
-         while(_loc8_ < param1.length)
-         {
-            _loc4_ = _loc4_ + param1[_loc8_][0].sellPrice[0] * param1[_loc8_][0].inventoryCount;
-            _loc5_ = _loc5_ + param1[_loc8_][0].defSellPrice[0] * param1[_loc8_][0].inventoryCount;
-            _loc7_ = _loc7_ + param1[_loc8_][0].inventoryCount;
-            if(param1[_loc8_][1])
-            {
-               _loc6_.inInventory = true;
-            }
-            _loc8_++;
-         }
-         var _loc9_:ILocale = App.utils.locale;
-         if(param1.length > 0)
-         {
-            _loc6_.moneyValue = _loc4_;
-            _loc6_.defMoneyValue = _loc5_;
-            _loc6_.actionPrc = 0;
-            _loc6_.id = _loc9_.makeString(DIALOGS.VEHICLESELLDIALOG_NOTINSTALLED_MODULES) + " (" + _loc7_ + " " + _loc9_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
-            _loc6_.isRemovable = true;
-            _loc6_.type = FittingTypes.MODULE;
-            _loc6_.data = param1;
-            _loc3_.elements.push(_loc6_);
-         }
+         var _loc5_:SellDialogElement = new SellDialogElement();
+         _loc5_.toInventory = true;
+         var _loc6_:Number = 0;
+         var _loc7_:Number = param1.length;
+         var _loc8_:SellInInventoryModuleVo = null;
+         var _loc9_:Array = new Array();
          var _loc10_:uint = 0;
-         while(_loc10_ < param2.length)
+         while(_loc10_ < _loc7_)
          {
-            if(param2[_loc10_][0] != undefined)
-            {
-               if(param2[_loc10_][0].inventoryCount != 0)
+            _loc8_ = param1[_loc10_];
+            _loc4_ = _loc4_ + _loc8_.sellPrice[0] * _loc8_.count;
+            _loc6_ = _loc6_ + _loc8_.count;
+            _loc5_.toInventory = _loc5_.toInventory;
+            _loc9_.push(
                {
-                  _loc11_ = new SellDialogElement();
-                  _loc11_.id = param2[_loc10_][0].userName + " (" + param2[_loc10_][0].inventoryCount + " " + _loc9_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
-                  _loc11_.isRemovable = true;
-                  _loc11_.data = param2[_loc10_][0];
-                  _loc11_.type = FittingTypes.SHELL;
-                  _loc11_.itemInInventory = true;
-                  if(param2[_loc10_][0].buyPrice[1] > 0 || (param2[_loc10_][1]))
-                  {
-                     _loc11_.inInventory = true;
-                  }
-                  else
-                  {
-                     _loc11_.inInventory = false;
-                  }
-                  _loc11_.moneyValue = param2[_loc10_][0].sellPrice[0] * param2[_loc10_][0].inventoryCount;
-                  _loc11_.defMoneyValue = param2[_loc10_][0].defSellPrice[0] * param2[_loc10_][0].inventoryCount;
-                  _loc11_.actionPrc = param2[_loc10_][0].sellActionPrc;
-                  _loc3_.elements.push(_loc11_);
+                  "intCD":_loc8_.intCD,
+                  "count":_loc8_.count
                }
-            }
+            );
             _loc10_++;
+         }
+         var _loc11_:ILocale = App.utils.locale;
+         if(_loc7_ > 0)
+         {
+            _loc5_.moneyValue = _loc4_;
+            _loc5_.id = _loc11_.makeString(DIALOGS.VEHICLESELLDIALOG_NOTINSTALLED_MODULES) + " (" + _loc6_ + " " + _loc11_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
+            _loc5_.isRemovable = true;
+            _loc5_.type = FittingTypes.MODULE;
+            _loc5_.count = _loc6_;
+            _loc5_.sellExternalData = _loc9_;
+            _loc3_.elements.push(_loc5_);
+         }
+         var _loc12_:SellInInventoryShellVo = null;
+         _loc7_ = param2.length;
+         var _loc13_:uint = 0;
+         while(_loc13_ < _loc7_)
+         {
+            _loc12_ = param2[_loc13_];
+            if(_loc12_.count != 0)
+            {
+               _loc14_ = new SellDialogElement();
+               _loc14_.id = _loc12_.userName + " (" + _loc12_.count + " " + _loc11_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
+               _loc14_.isRemovable = true;
+               _loc14_.kind = _loc12_.kind;
+               _loc14_.type = FittingTypes.SHELL;
+               _loc14_.toInventory = _loc12_.toInventory;
+               _loc14_.fromInventory = true;
+               _loc14_.intCD = _loc12_.intCD;
+               _loc14_.count = _loc12_.count;
+               _loc14_.moneyValue = _loc12_.sellPrice[0] * _loc12_.count;
+               if(_loc12_.actionVo)
+               {
+                  _loc14_.sellActionPriceVo = _loc12_.actionVo;
+               }
+               _loc3_.elements.push(_loc14_);
+            }
+            _loc13_++;
          }
          if(_loc3_.elements.length != 0)
          {

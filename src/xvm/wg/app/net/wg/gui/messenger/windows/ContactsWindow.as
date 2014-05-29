@@ -159,7 +159,7 @@ package net.wg.gui.messenger.windows
       override protected function onPopulate() : void {
          super.onPopulate();
          window.title = MESSENGER.LOBBY_BUTTONS_CONTACTS;
-         window.contentPadding = new Padding(36,15,20,14);
+         window.contentPadding = new Padding(36,13,19,12);
          geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CONTACTS_WINDOW);
       }
 

@@ -8,10 +8,10 @@ package net.wg.gui.lobby.customization.renderers
    import flash.display.Sprite;
    import flash.text.TextField;
    import __AS3__.vec.Vector;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import flash.events.MouseEvent;
    import scaleform.clik.events.InputEvent;
    import net.wg.gui.events.UILoaderEvent;
-   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.IconsTypes;
    import flash.geom.Point;
@@ -59,13 +59,11 @@ package net.wg.gui.lobby.customization.renderers
 
       protected var priceVal:Number = 0;
 
-      protected var defPriceVal:Number = 0;
-
-      protected var actionPrc:Number = 0;
-
       protected var prefixesVector:Vector.<String> = null;
 
       private var costVisible:Boolean = false;
+
+      private var actionPriceVo:ActionPriceVO = null;
 
       private var _current:Boolean = false;
 
@@ -89,12 +87,11 @@ package net.wg.gui.lobby.customization.renderers
             {
                this.costVal = data.price.isGold?App.utils.locale.gold(data.price.cost):App.utils.locale.integer(data.price.cost);
                this.priceVal = data.price.cost;
-               this.defPriceVal = data.defPrice.cost;
                this.isGold = data.price.isGold;
             }
-            if(data.actionPrc != undefined)
+            if(data.action)
             {
-               this.actionPrc = data.actionPrc;
+               this.actionPriceVo = new ActionPriceVO(data.action);
             }
             _loc2_ = data.isNew;
             if(this.uiLoader)
@@ -185,9 +182,8 @@ package net.wg.gui.lobby.customization.renderers
       }
 
       override protected function configUI() : void {
-         var _loc1_:* = false;
          super.configUI();
-         _loc1_ = (this._useHandCursorForce) || this._demoMode == DEMO_OFF;
+         var _loc1_:Boolean = (this._useHandCursorForce) || this._demoMode == DEMO_OFF;
          super.enabled = _loc1_;
          useHandCursor = _loc1_;
          this.uiLoader.addEventListener(UILoaderEvent.COMPLETE,this.onImageLoadComplete);
@@ -213,7 +209,6 @@ package net.wg.gui.lobby.customization.renderers
 
       override protected function draw() : void {
          var _loc1_:* = false;
-         var _loc2_:ActionPriceVO = null;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
@@ -222,17 +217,16 @@ package net.wg.gui.lobby.customization.renderers
             _loc1_ = ((((this.freeTF) && (data)) && (data.id > 0) && data.price) && (data.price.cost == 0)) && !data.current && !data.isInHangar;
             if(this.actionPrice)
             {
-               if(this.costVisible)
+               if((this.actionPriceVo) && (this.costVisible))
                {
-                  _loc2_ = new ActionPriceVO(this.actionPrc,this.priceVal,this.defPriceVal,this.isGold?IconsTypes.GOLD:IconsTypes.CREDITS);
-                  this.actionPrice.setData(_loc2_);
-                  this.costField.visible = !this.actionPrice.visible && !_loc1_;
+                  this.actionPriceVo.ico = this.isGold?IconsTypes.GOLD:IconsTypes.CREDITS;
+                  this.actionPrice.setData(this.actionPriceVo);
                }
                else
                {
                   this.actionPrice.visible = false;
-                  this.costField.visible = false;
                }
+               this.costField.visible = (this.costVisible) && !_loc1_ && !this.actionPrice.visible;
             }
             else
             {

@@ -1,5 +1,5 @@
---- orig\PlayersPanel.xml	2014-04-04 10:44:23.991363800 +0300
-+++ PlayersPanel.xml	2014-04-04 10:44:24.294380600 +0300
+--- orig\PlayersPanel.xml	2014-05-29 23:19:09.087022400 +0300
++++ PlayersPanel.xml	2014-05-29 23:19:09.315035400 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -8,7 +8,7 @@
 +      </ImportAssets2>
        <DefineBitsLossless2 objectID="1" format="5" width="200" height="40">
          <data>
-@@ -55803,6 +55806,6 @@
+@@ -55811,6 +55814,6 @@
                <String value=" "/>
                <String value="\"/>
 -              <String value=""/>
@@ -17,21 +17,21 @@
 +              <String value=" "/>
                <String value="&#10;"/>
                <String value="&#13;"/>
-@@ -67299,5 +67302,5 @@
+@@ -67307,5 +67310,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
 +              <StackString value="wot.wrapper.PlayersPanel.PlayerListItemRenderer"/>
              </items>
            </PushData>
-@@ -67325,5 +67328,5 @@
+@@ -67333,5 +67336,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
 +              <StackString value="wot.wrapper.PlayersPanel.PlayerListItemRenderer"/>
              </items>
            </PushData>
-@@ -67455,5 +67458,5 @@
+@@ -67463,5 +67466,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.PlayersPanel"/>

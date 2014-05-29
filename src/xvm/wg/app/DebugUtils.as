@@ -64,7 +64,6 @@ package
       }
 
       private static function __doLog() : void {
-         trace("[" + arguments[0] + "] " + String(arguments.slice(1)));
          var _loc2_:Array = [LOG];
          while(arguments.length)
          {

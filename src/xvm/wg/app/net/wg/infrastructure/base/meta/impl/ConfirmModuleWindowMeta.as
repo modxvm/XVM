@@ -1,10 +1,10 @@
 package net.wg.infrastructure.base.meta.impl
 {
-   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.infrastructure.base.AbstractConfirmItemDialog;
    import net.wg.data.constants.Errors;
 
 
-   public class ConfirmModuleWindowMeta extends AbstractWindowView
+   public class ConfirmModuleWindowMeta extends AbstractConfirmItemDialog
    {
           
       public function ConfirmModuleWindowMeta() {

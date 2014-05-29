@@ -8,6 +8,7 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.components.controls.Slider;
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.gui.components.controls.RangeSlider;
    import net.wg.gui.lobby.settings.components.RadioButtonBar;
    import net.wg.gui.lobby.settings.components.SettingsStepSlider;
    import flash.utils.Dictionary;
@@ -91,9 +92,9 @@ package net.wg.gui.lobby.settings
 
       public var fovLabel:LabelControl = null;
 
-      public var fovValue:LabelControl = null;
+      public var fovRangeSlider:RangeSlider = null;
 
-      public var fovSlider:Slider = null;
+      public var dynamicFovCheckbox:CheckBox = null;
 
       public var RENDER_PIPELINELabel:LabelControl = null;
 
@@ -224,8 +225,8 @@ package net.wg.gui.lobby.settings
          this.COLOR_GRADING_TECHNIQUELabel = this.screenForm.COLOR_GRADING_TECHNIQUELabel;
          this.COLOR_GRADING_TECHNIQUEDropDown = this.screenForm.COLOR_GRADING_TECHNIQUEDropDown;
          this.fovLabel = this.screenForm.fovLabel;
-         this.fovValue = this.screenForm.fovValue;
-         this.fovSlider = this.screenForm.fovSlider;
+         this.fovRangeSlider = this.screenForm.fovRangeSlider;
+         this.dynamicFovCheckbox = this.screenForm.dynamicFovCheckbox;
          var _loc1_:AdvancedGraphicContentForm = this.advancedForm.scrollPane.target as AdvancedGraphicContentForm;
          this.RENDER_PIPELINELabel = _loc1_.RENDER_PIPELINELabel;
          this.RENDER_PIPELINEButtonBar = _loc1_.RENDER_PIPELINEButtonBar;
@@ -302,9 +303,9 @@ package net.wg.gui.lobby.settings
          this.toolTipMapping[this.isColorBlindCheckbox] = SettingsConfig.IS_COLOR_BLIND;
          this.toolTipMapping[this.gammaSlider] = SettingsConfig.GAMMA;
          this.toolTipMapping[this.gammaLabel] = SettingsConfig.GAMMA;
-         this.toolTipMapping[this.fovSlider] = SettingsConfig.FOV;
+         this.toolTipMapping[this.fovRangeSlider] = SettingsConfig.FOV;
          this.toolTipMapping[this.fovLabel] = SettingsConfig.FOV;
-         this.toolTipMapping[this.fovValue] = SettingsConfig.FOV;
+         this.toolTipMapping[this.dynamicFovCheckbox] = SettingsConfig.DYNAMIC_FOV;
          this.toolTipMapping[this.COLOR_GRADING_TECHNIQUEDropDown] = SettingsConfig.COLOR_GRADING_TECHNIQUE;
          this.toolTipMapping[this.COLOR_GRADING_TECHNIQUELabel] = SettingsConfig.COLOR_GRADING_TECHNIQUE;
          this.toolTipMapping[this.colorFilterIntensitySlider] = SettingsConfig.COLOR_FILTER_INTENSITY;
@@ -399,8 +400,8 @@ package net.wg.gui.lobby.settings
          this.COLOR_GRADING_TECHNIQUELabel = null;
          this.COLOR_GRADING_TECHNIQUEDropDown = null;
          this.fovLabel = null;
-         this.fovValue = null;
-         this.fovSlider = null;
+         this.fovRangeSlider = null;
+         this.dynamicFovCheckbox = null;
          this.RENDER_PIPELINELabel = null;
          this.RENDER_PIPELINEButtonBar = null;
          this.TEXTURE_QUALITYLabel = null;

@@ -17,6 +17,7 @@ package
    import net.wg.infrastructure.interfaces.ICursor;
    import net.wg.infrastructure.managers.IContainerManager;
    import net.wg.utils.IGameInputManager;
+   import net.wg.infrastructure.managers.IEventLogManager;
    import net.wg.data.constants.LobbyMetrics;
    import net.wg.utils.IHelpLayout;
    import flash.display.Stage;
@@ -106,6 +107,10 @@ package
 
       public static function get gameInputMgr() : IGameInputManager {
          return instance.gameInputMgr;
+      }
+
+      public static function get eventLogManager() : IEventLogManager {
+         return instance.eventLogManager;
       }
 
       public static function get appWidth() : Number {

@@ -387,8 +387,7 @@ package net.wg.gui.lobby.customization
       }
 
       private function setNewItemView(param1:int, param2:Object, param3:int) : void {
-         var _loc4_:* = 0;
-         _loc4_ = param2.id;
+         var _loc4_:int = param2.id;
          if(this.currentItemData.id == _loc4_)
          {
             this.newItemData = this.getEmptyDataItem();

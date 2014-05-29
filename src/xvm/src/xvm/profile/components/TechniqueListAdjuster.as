@@ -4,7 +4,9 @@ package xvm.profile.components
     import com.xvm.events.*;
     import com.xvm.types.dossier.*;
     import flash.events.*;
+    import net.wg.data.constants.*;
     import net.wg.gui.components.advanced.*;
+    import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import scaleform.clik.events.*;
@@ -32,7 +34,7 @@ package xvm.profile.components
             selectedId = 0;
 
             list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
-            page.listComponent.sortableButtonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED, sortDirectionChanged);
+            page.listComponent.sortableButtonBar.addEventListener(SortingEvent.SORT_DIRECTION_CHANGED, sortDirectionChanged);
             page.listComponent.addEventListener(ListEvent.INDEX_CHANGE, listComponentIndexChange);
         }
 
@@ -157,7 +159,7 @@ package xvm.profile.components
                 btn = page.listComponent.sortableButtonBar.getButtonAt(page.listComponent.sortableButtonBar.selectedIndex) as SortingButton;
             if (btn == null)
                 return;
-            if (btn.sortDirection == SortingButton.WITHOUT_SORT)
+            if (btn.sortDirection == SortingInfo.WITHOUT_SORT)
                 return;
             if (sortingActive)
                 return;

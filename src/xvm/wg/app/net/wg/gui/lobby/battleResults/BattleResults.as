@@ -6,9 +6,10 @@ package net.wg.gui.lobby.battleResults
    import net.wg.gui.components.advanced.ViewStack;
    import flash.display.Sprite;
    import flash.text.TextField;
+   import scaleform.clik.data.DataProvider;
    import flash.events.FocusEvent;
    import net.wg.gui.events.ViewStackEvent;
-   import scaleform.clik.data.DataProvider;
+   import net.wg.infrastructure.events.FocusRequestEvent;
    import net.wg.gui.events.FinalStatisticEvent;
 
 
@@ -16,11 +17,13 @@ package net.wg.gui.lobby.battleResults
    {
           
       public function BattleResults() {
+         this._clanEmblemCallbacks = {};
          super();
          showWindowBg = false;
          this.visible = false;
          isCentered = true;
          this.noResult.visible = false;
+         addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onFocusRequestHandler,false,0,true);
       }
 
       public var tabs_mc:ButtonBarEx;
@@ -29,11 +32,57 @@ package net.wg.gui.lobby.battleResults
 
       public var line:Sprite;
 
-      private var _wasPopulated:Boolean = false;
-
       public var noResult:TextField;
 
+      private var _wasPopulated:Boolean = false;
+
       private var _data:Object = null;
+
+      private var _clanEmblemCallbacks:Object;
+
+      public function requestClanEmblem(param1:String, param2:Number, param3:Function) : void {
+         this._clanEmblemCallbacks[param1] = param3;
+         getClanEmblemS(param1,param2);
+      }
+
+      public function as_setData(param1:Object) : void {
+         if(param1)
+         {
+            this._data = param1;
+            this.tabs_mc.dataProvider = new DataProvider([
+               {
+                  "label":MENU.FINALSTATISTIC_TABS_COMMONSTATS,
+                  "linkage":"CommonStats"
+               }
+            ,
+               {
+                  "label":MENU.FINALSTATISTIC_TABS_TEAMSTATS,
+                  "linkage":"TeamStats"
+               }
+            ,
+               {
+                  "label":MENU.FINALSTATISTIC_TABS_DETAILSSTATS,
+                  "linkage":"detailsStatsScrollPane"
+               }
+            ]);
+            this.tabs_mc.selectedIndex = 0;
+            this.tabs_mc.validateNow();
+            setFocus(this.tabs_mc);
+         }
+         this._wasPopulated = true;
+         as_hideWaiting();
+         invalidate();
+      }
+
+      public function as_setClanEmblem(param1:String, param2:String) : void {
+         var _loc3_:Function = null;
+         if(this._clanEmblemCallbacks.hasOwnProperty(param1))
+         {
+            _loc3_ = this._clanEmblemCallbacks[param1];
+            _loc3_.apply(null,[param1,param2]);
+            delete this._clanEmblemCallbacks[[param1]];
+         }
+      }
 
       public function get data() : Object {
          return this._data;
@@ -58,6 +107,13 @@ package net.wg.gui.lobby.battleResults
       }
 
       override protected function onDispose() : void {
+         var _loc1_:String = null;
+         removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onFocusRequestHandler);
+         for (_loc1_ in this._clanEmblemCallbacks)
+         {
+            delete this._clanEmblemCallbacks[[_loc1_]];
+         }
+         this._clanEmblemCallbacks = null;
          super.onDispose();
          this.tabs_mc.removeEventListener(FocusEvent.FOCUS_IN,this.handleFocus);
          this.view_mc.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.handleView);
@@ -65,35 +121,6 @@ package net.wg.gui.lobby.battleResults
          this.view_mc.dispose();
          this._data = null;
          App.toolTipMgr.hide();
-      }
-
-      public function as_setData(param1:Object) : void {
-         if(param1)
-         {
-            this._data = param1;
-            this.tabs_mc.dataProvider = new DataProvider([
-               {
-                  "label":MENU.FINALSTATISTIC_TABS_COMMONSTATS,
-                  "linkage":"CommonStats"
-               }
-            ,
-               {
-                  "label":MENU.FINALSTATISTIC_TABS_TEAMSTATS,
-                  "linkage":"TeamStats"
-               }
-            ,
-               {
-                  "label":MENU.FINALSTATISTIC_TABS_DETAILSSTATS,
-                  "linkage":"DetailsStats"
-               }
-            ]);
-            this.tabs_mc.selectedIndex = 0;
-            this.tabs_mc.validateNow();
-            setFocus(this.tabs_mc);
-         }
-         this._wasPopulated = true;
-         as_hideWaiting();
-         invalidate();
       }
 
       override protected function draw() : void {
@@ -112,6 +139,10 @@ package net.wg.gui.lobby.battleResults
             }
             this._wasPopulated = false;
          }
+      }
+
+      private function onFocusRequestHandler(param1:FocusRequestEvent) : void {
+         setFocus(param1.focusContainer.getComponentForFocus());
       }
 
       private function handleFocus(param1:FocusEvent) : void {

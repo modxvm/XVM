@@ -1,16 +1,16 @@
 package net.wg.gui.lobby.battleResults
 {
    import scaleform.clik.core.UIComponent;
-   import net.wg.infrastructure.interfaces.IViewStackContent;
    import flash.text.TextField;
    import flash.display.MovieClip;
+   import flash.display.DisplayObject;
+   import flash.events.Event;
    import net.wg.utils.IUtils;
    import net.wg.utils.ICommons;
    import net.wg.utils.IClassFactory;
-   import flash.display.InteractiveObject;
 
 
-   public class DetailsStats extends UIComponent implements IViewStackContent
+   public class DetailsStats extends UIComponent
    {
           
       public function DetailsStats() {
@@ -26,6 +26,16 @@ package net.wg.gui.lobby.battleResults
          this.xpPremValuesLbl.mouseWheelEnabled = false;
          this.freeXpPremValuesLbl.mouseWheelEnabled = false;
       }
+
+      private static const BLOCK_PADDING:int = 20;
+
+      private static const DOTS_OFFSET:int = 3;
+
+      private static const FADED_ALPHA:Number = 0.25;
+
+      private static const FULL_ALPHA:Number = 1;
+
+      private static const LINE_OFFSET:int = 5;
 
       public var vehicleStats:VehicleDetails;
 
@@ -53,6 +63,8 @@ package net.wg.gui.lobby.battleResults
 
       public var premLbl:TextField;
 
+      public var xpHeader:MovieClip;
+
       public var xpLbl:TextField;
 
       public var xpValuesLbl:TextField;
@@ -65,25 +77,44 @@ package net.wg.gui.lobby.battleResults
 
       public var xpSplitLine:MovieClip;
 
-      private const FADED_ALPHA:Number = 0.25;
+      public var resHeader:MovieClip;
 
-      private const FULL_ALPHA:Number = 1;
+      public var resTitle:TextField;
+
+      public var resLbl:TextField;
+
+      public var resValuesLbl:TextField;
+
+      public var resPremValuesLbl:TextField;
+
+      public var resSplitLine:MovieClip;
+
+      public var fakeBg:MovieClip;
+
+      private var _bonusType:int = 1;
+
+      public function get myParent() : BattleResults {
+         return BattleResults(parent.parent.parent.parent);
+      }
 
       override protected function configUI() : void {
+         var _loc3_:* = NaN;
+         var _loc5_:DisplayObject = null;
          super.configUI();
+         var _loc1_:Object = this.myParent.data;
+         this._bonusType = _loc1_.common.bonusType;
          this.statsTitle.text = BATTLE_RESULTS.DETAILS_STATS;
          this.creditsTitle.text = BATTLE_RESULTS.DETAILS_CREDITS;
          this.timeTitle.text = BATTLE_RESULTS.DETAILS_TIME;
          this.xpTitle.text = BATTLE_RESULTS.DETAILS_XP;
          this.premLbl.text = BATTLE_RESULTS.DETAILS_PREM;
-         var _loc1_:Object = this.myParent.data;
          this.vehicleStats.state = VehicleDetails.STATE_NORMAL;
          this.vehicleStats.data = _loc1_.personal.statValues;
          this.vehicleTimeStats.state = VehicleDetails.STATE_TIME;
          this.vehicleTimeStats.data = _loc1_.common.timeStats;
          var _loc2_:Boolean = _loc1_.personal.isPremium;
-         var _loc3_:Number = _loc2_?this.FADED_ALPHA:this.FULL_ALPHA;
-         var _loc4_:Number = _loc2_?this.FULL_ALPHA:this.FADED_ALPHA;
+         _loc3_ = _loc2_?FADED_ALPHA:FULL_ALPHA;
+         var _loc4_:Number = _loc2_?FULL_ALPHA:FADED_ALPHA;
          this.creditsValuesLbl.alpha = _loc3_;
          this.goldValuesLbl.alpha = _loc3_;
          this.xpValuesLbl.alpha = _loc3_;
@@ -94,7 +125,27 @@ package net.wg.gui.lobby.battleResults
          this.xpPremValuesLbl.alpha = _loc4_;
          this.freeXpPremValuesLbl.alpha = _loc4_;
          this.populateCredits(_loc1_.personal.creditsData);
+         if(this._bonusType == 10)
+         {
+            _loc5_ = this.creditsSplitLine.height > this.vehicleStats.height?this.creditsSplitLine:this.vehicleStats;
+            this.positionBlock(_loc5_,this.xpHeader,[this.xpHeader,this.timeTitle,this.xpTitle,this.vehicleTimeStats,this.xpLbl,this.xpValuesLbl,this.freeXpValuesLbl,this.xpSplitLine,this.xpPremValuesLbl,this.freeXpPremValuesLbl]);
+         }
          this.populateXp(_loc1_.personal.xpData);
+         if(this._bonusType == 10)
+         {
+            gotoAndStop("sortie");
+            this.resTitle.text = BATTLE_RESULTS.DETAILS_RESOURCE;
+            this.resValuesLbl.alpha = _loc3_;
+            this.resPremValuesLbl.alpha = _loc4_;
+            this.positionBlock(this.xpSplitLine,this.resHeader,[this.resHeader,this.resTitle,this.resLbl,this.resValuesLbl,this.resPremValuesLbl,this.resSplitLine]);
+            this.populateResource(_loc1_.personal.resourceData);
+            height = this.fakeBg.height = this.resSplitLine.y + this.resSplitLine.height + BLOCK_PADDING;
+            dispatchEvent(new Event(Event.RESIZE));
+         }
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
       }
 
       private function populateCredits(param1:Array) : void {
@@ -119,8 +170,8 @@ package net.wg.gui.lobby.battleResults
             this.goldPremValuesLbl.htmlText = this.goldPremValuesLbl.htmlText + _loc4_.col4;
             if(_loc4_.lineType)
             {
-               _loc5_ = this.creditsLbl.x + 3;
-               _loc6_ = Math.floor(this.creditsLbl.y + this.creditsLbl.textHeight) + 3;
+               _loc5_ = this.creditsLbl.x + DOTS_OFFSET;
+               _loc6_ = Math.floor(this.creditsLbl.y + this.creditsLbl.textHeight) + DOTS_OFFSET;
                addChild(App.utils.classFactory.getComponent(_loc4_.lineType,MovieClip,
                   {
                      "x":_loc5_,
@@ -130,7 +181,7 @@ package net.wg.gui.lobby.battleResults
             }
             _loc2_++;
          }
-         this.creditsSplitLine.height = this.creditsLbl.textHeight + 5;
+         this.creditsSplitLine.height = this.creditsLbl.textHeight + LINE_OFFSET;
       }
 
       private function populateXp(param1:Array) : void {
@@ -158,8 +209,8 @@ package net.wg.gui.lobby.battleResults
             this.freeXpPremValuesLbl.htmlText = this.freeXpPremValuesLbl.htmlText + _loc4_.col4;
             if(_loc4_.lineType)
             {
-               _loc8_ = this.xpLbl.x + 3;
-               _loc9_ = Math.floor(this.xpLbl.y + this.xpLbl.textHeight) + 3;
+               _loc8_ = this.xpLbl.x + DOTS_OFFSET;
+               _loc9_ = Math.floor(this.xpLbl.y + this.xpLbl.textHeight) + DOTS_OFFSET;
                addChild(_loc7_.getComponent(_loc4_.lineType,MovieClip,
                   {
                      "x":_loc8_,
@@ -169,23 +220,53 @@ package net.wg.gui.lobby.battleResults
             }
             _loc2_++;
          }
-         this.xpSplitLine.height = this.xpLbl.textHeight + 5;
+         this.xpLbl.height = this.xpLbl.textHeight + 4;
+         this.xpSplitLine.height = this.xpLbl.textHeight + LINE_OFFSET;
       }
 
-      public function get myParent() : BattleResults {
-         return BattleResults(parent.parent.parent);
+      private function positionBlock(param1:DisplayObject, param2:DisplayObject, param3:Array) : void {
+         var _loc6_:DisplayObject = null;
+         var _loc4_:Number = param1.y + param1.height + BLOCK_PADDING;
+         var _loc5_:Number = param2.y - _loc4_;
+         for each (_loc6_ in param3)
+         {
+            _loc6_.y = _loc6_.y - _loc5_;
+         }
       }
 
-      override protected function onDispose() : void {
-         super.onDispose();
-      }
-
-      public function update(param1:Object) : void {
-          
-      }
-
-      public function getComponentForFocus() : InteractiveObject {
-         return null;
+      private function populateResource(param1:Array) : void {
+         var _loc4_:Object = null;
+         var _loc8_:* = NaN;
+         var _loc9_:* = NaN;
+         this.resLbl.htmlText = "";
+         this.resValuesLbl.htmlText = "";
+         this.resPremValuesLbl.htmlText = "";
+         var _loc2_:Number = 0;
+         var _loc3_:Number = param1.length;
+         var _loc5_:IUtils = App.utils;
+         var _loc6_:ICommons = _loc5_.commons;
+         var _loc7_:IClassFactory = _loc5_.classFactory;
+         while(_loc2_ < _loc3_)
+         {
+            _loc4_ = param1[_loc2_];
+            _loc6_.addBlankLines(_loc4_.labelStripped,this.resLbl,Vector.<TextField>([this.resValuesLbl,this.resPremValuesLbl]));
+            this.resLbl.htmlText = this.resLbl.htmlText + _loc4_.label;
+            this.resValuesLbl.htmlText = this.resValuesLbl.htmlText + _loc4_.col2;
+            this.resPremValuesLbl.htmlText = this.resPremValuesLbl.htmlText + _loc4_.col4;
+            if(_loc4_.lineType)
+            {
+               _loc8_ = this.resLbl.x + DOTS_OFFSET;
+               _loc9_ = Math.floor(this.resLbl.y + this.resLbl.textHeight) + DOTS_OFFSET;
+               addChild(_loc7_.getComponent(_loc4_.lineType,MovieClip,
+                  {
+                     "x":_loc8_,
+                     "y":_loc9_
+                  }
+               ));
+            }
+            _loc2_++;
+         }
+         this.resSplitLine.height = this.resLbl.textHeight + LINE_OFFSET;
       }
    }
 

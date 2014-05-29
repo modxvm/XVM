@@ -13,18 +13,11 @@ package net.wg.infrastructure.base.meta.impl
 
       public var fightClick:Function = null;
 
-      public var fightSelectClick:Function = null;
-
       public var demoClick:Function = null;
 
       public function fightClickS(param1:Number, param2:String) : void {
          App.utils.asserter.assertNotNull(this.fightClick,"fightClick" + Errors.CANT_NULL);
          this.fightClick(param1,param2);
-      }
-
-      public function fightSelectClickS(param1:String) : void {
-         App.utils.asserter.assertNotNull(this.fightSelectClick,"fightSelectClick" + Errors.CANT_NULL);
-         this.fightSelectClick(param1);
       }
 
       public function demoClickS() : void {

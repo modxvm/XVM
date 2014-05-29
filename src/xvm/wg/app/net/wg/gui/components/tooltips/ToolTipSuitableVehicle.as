@@ -11,7 +11,7 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.tooltips.helpers.Utils;
    import net.wg.data.constants.Tooltips;
    import flash.display.MovieClip;
-   import net.wg.gui.cyberSport.vo.VehicleVO;
+   import net.wg.gui.rally.vo.VehicleVO;
    import net.wg.gui.cyberSport.controls.SettingRosterVO;
 
 
@@ -54,6 +54,7 @@ package net.wg.gui.components.tooltips
          {
             this.conditionCSVehicleButtonList[this.i] = App.utils.classFactory.getComponent("CSVehicleButtonUI",CSVehicleButton);
             this.conditionCSVehicleButtonList[this.i].visible = false;
+            this.conditionCSVehicleButtonList[this.i].enabled = false;
             content.addChild(this.conditionCSVehicleButtonList[this.i]);
             this.i++;
          }
@@ -232,7 +233,7 @@ package net.wg.gui.components.tooltips
          if(_loc5_)
          {
             param4.x = contentMargin.left + bgShadowMargin.left;
-            param4.y = param3 ^ 0;
+            param4.y = (param3 ^ 0) - (_data.isCreator?0:16);
             param1.addChild(param4);
             param4.showRangeRosterBg = false;
             if(_loc6_)
@@ -251,7 +252,8 @@ package net.wg.gui.components.tooltips
       }
 
       private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number {
-         var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
+         var _loc4_:SuitableVehicleBlockItem = null;
+         _loc4_ = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
          _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
          _loc4_.x = contentMargin.left + bgShadowMargin.left;
          _loc4_.y = param3 ^ 0;

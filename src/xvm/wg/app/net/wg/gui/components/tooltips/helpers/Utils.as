@@ -47,7 +47,9 @@ package net.wg.gui.components.tooltips.helpers
 
       public const COLOR_ALERT:String = "#ff0000";
 
-      public const COLOR_NORMAL:String = "#8c8c7c";
+      public const COLOR_NORMAL:String = "#8c8c7e";
+
+      public const COLOR_NORMAL_DARK:String = "#595950";
 
       public const COLOR_SUB_NORMAL:String = "#4a4a3f";
 
@@ -133,7 +135,6 @@ package net.wg.gui.components.tooltips.helpers
       public function createBlock(param1:ToolTipBlockVO, param2:Number) : ToolTipBlockResultVO {
          var _loc4_:TextFormat = null;
          var _loc6_:String = null;
-         var _loc7_:* = false;
          var _loc16_:IconText = null;
          var _loc17_:ToolTipBlockRightListItemVO = null;
          var _loc18_:IconText = null;
@@ -141,7 +142,7 @@ package net.wg.gui.components.tooltips.helpers
          _loc4_ = new TextFormat();
          var _loc5_:uint = 0;
          _loc6_ = "$TextFont";
-         _loc7_ = false;
+         var _loc7_:* = false;
          var _loc8_:Number = 0;
          var _loc9_:Vector.<IconText> = new Vector.<IconText>();
          var _loc10_:Array = [];

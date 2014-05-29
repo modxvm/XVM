@@ -1,9 +1,12 @@
 package net.wg.gui.cyberSport.vo
 {
    import net.wg.data.daapi.base.DAAPIDataClass;
+   import net.wg.gui.rally.interfaces.IRallyListItemVO;
+   import net.wg.gui.rally.vo.RallyCandidateVO;
+   import net.wg.gui.rally.vo.RallyVO;
 
 
-   public class CSCommandVO extends DAAPIDataClass
+   public class CSCommandVO extends DAAPIDataClass implements IRallyListItemVO
    {
           
       public function CSCommandVO(param1:Object) {
@@ -12,7 +15,9 @@ package net.wg.gui.cyberSport.vo
 
       private static const CREATOR_FIELD:String = "creator";
 
-      public var creator:UnitCandidateVO = null;
+      public var creator:RallyCandidateVO = null;
+
+      public var creatorName:String = "";
 
       public var cfdUnitID:Number = 0;
 
@@ -30,17 +35,35 @@ package net.wg.gui.cyberSport.vo
 
       public var isRestricted:Boolean = false;
 
-      public var peripheryID:Number = 0;
-
       public var server:String = "";
 
-      public var unit:UnitVO = null;
+      public var description:String = "";
+
+      public var unit:RallyVO = null;
+
+      private var _peripheryID:Number = 0;
+
+      public function get mgrID() : Number {
+         return this.unitMgrID;
+      }
+
+      public function get rallyIndex() : Number {
+         return this.cfdUnitID;
+      }
+
+      public function get peripheryID() : Number {
+         return this._peripheryID;
+      }
+
+      public function set peripheryID(param1:Number) : void {
+         this._peripheryID = param1;
+      }
 
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          var _loc3_:* = true;
          if(param1 == CREATOR_FIELD)
          {
-            this.creator = new UnitCandidateVO(param2);
+            this.creator = new RallyCandidateVO(param2);
             _loc3_ = false;
          }
          return _loc3_;

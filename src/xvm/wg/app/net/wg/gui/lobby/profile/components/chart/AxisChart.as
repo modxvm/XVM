@@ -38,14 +38,21 @@ package net.wg.gui.lobby.profile.components.chart
 
       public function set horizontalAxis(param1:IChartAxis) : void {
          var _loc2_:DisplayObject = null;
-         if(this._horizontalAxis)
+         if(this._horizontalAxis != param1)
          {
-            _loc2_ = DisplayObject(this._horizontalAxis);
-            _loc2_.parent.removeChild(_loc2_);
+            if(this._horizontalAxis)
+            {
+               _loc2_ = DisplayObject(this._horizontalAxis);
+               this._horizontalAxis.dispose();
+               _loc2_.parent.removeChild(_loc2_);
+            }
+            this._horizontalAxis = param1;
+            if(param1)
+            {
+               addChild(DisplayObject(this._horizontalAxis));
+               this.applyAxisUpdate();
+            }
          }
-         this._horizontalAxis = param1;
-         addChild(DisplayObject(this._horizontalAxis));
-         this.applyAxisUpdate();
       }
 
       public function get horizontalAxisName() : String {

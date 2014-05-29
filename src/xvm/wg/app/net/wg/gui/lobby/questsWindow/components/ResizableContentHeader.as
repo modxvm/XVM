@@ -3,6 +3,8 @@ package net.wg.gui.lobby.questsWindow.components
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.components.controls.CheckBox;
    import flash.text.TextField;
+   import net.wg.data.constants.QuestsStates;
+   import flash.text.TextFieldAutoSize;
    import net.wg.data.VO.ProgressElementVO;
 
 
@@ -19,6 +21,8 @@ package net.wg.gui.lobby.questsWindow.components
 
       private static const INVALIDATE_PROGRESS:String = "invProgress";
 
+      private static const INVALIDATE_SHOW_DONE:String = "invShowDone";
+
       public static const TEXT_PADDING:int = 5;
 
       public var slideCheckBox:CheckBox;
@@ -31,6 +35,8 @@ package net.wg.gui.lobby.questsWindow.components
 
       private var _progrTooltip:Object = null;
 
+      private var _showDone:Boolean = false;
+
       private var _htmlLabel:String = "";
 
       private var _label:String = "";
@@ -39,12 +45,21 @@ package net.wg.gui.lobby.questsWindow.components
 
       public var progressIndicator:ProgressQuestIndicator;
 
+      public var statusMC:QuestStatusComponent;
+
       override protected function configUI() : void {
          super.configUI();
          this.progressIndicator.visible = false;
+         this.statusMC.setStatus(QuestsStates.DONE);
+         this.statusMC.textAlign = TextFieldAutoSize.RIGHT;
+         this.statusMC.showTooltip = false;
+         this.statusMC.validateNow();
+         this.statusMC.visible = false;
       }
 
       override protected function onDispose() : void {
+         this.statusMC.dispose();
+         this.statusMC = null;
          this.slideCheckBox.dispose();
          this.slideCheckBox = null;
          this._progrTooltip = null;
@@ -83,6 +98,11 @@ package net.wg.gui.lobby.questsWindow.components
             this.progressIndicator.setValues(this._progrType,this._currentProgr,this._totalProgr);
             this.progressIndicator.setTooltip(this._progrTooltip);
          }
+         if(isInvalid(INVALIDATE_SHOW_DONE))
+         {
+            this.statusMC.visible = this._showDone;
+            this.progressIndicator.visible = (Boolean(this._progrType)) && !this._showDone;
+         }
       }
 
       public function get htmlLabel() : String {
@@ -101,6 +121,15 @@ package net.wg.gui.lobby.questsWindow.components
       public function set label(param1:String) : void {
          this._label = param1;
          invalidate(INVALIDATE_LABEL);
+      }
+
+      public function get showDone() : Boolean {
+         return this._showDone;
+      }
+
+      public function set showDone(param1:Boolean) : void {
+         this._showDone = param1;
+         invalidate(INVALIDATE_SHOW_DONE);
       }
    }
 

@@ -6,6 +6,7 @@ package xvm.profile.components
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
+    import net.wg.data.constants.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.components.advanced.*;
     import scaleform.clik.events.*;
@@ -118,7 +119,7 @@ package xvm.profile.components
                 }
                 bb.selectedIndex = -1;
                 bb.selectedIndex = btnIndex;
-                b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingButton.DESCENDING_SORT : SortingButton.ASCENDING_SORT;
+                b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingInfo.DESCENDING_SORT : SortingInfo.ASCENDING_SORT;
                 list.selectedIndex = 0;
 
                 // Focus filter

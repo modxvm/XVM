@@ -1,6 +1,6 @@
 package net.wg.gui.lobby.questsWindow.components
 {
-   import net.wg.gui.lobby.profile.components.DashLineTextItem;
+   import net.wg.gui.components.advanced.DashLineTextItem;
    import net.wg.infrastructure.interfaces.IResizableContent;
    import flash.events.MouseEvent;
    import net.wg.gui.components.controls.SoundButton;
@@ -40,7 +40,7 @@ package net.wg.gui.lobby.questsWindow.components
 
       private var _linkID:String = "";
 
-      private var _isNotDone:Boolean = false;
+      private var _isNotAvailable:Boolean = false;
 
       public var naMc:MovieClip;
 
@@ -54,7 +54,7 @@ package net.wg.gui.lobby.questsWindow.components
          var _loc2_:QuestDashlineItemVO = new QuestDashlineItemVO(param1);
          this.label = _loc2_.label;
          this.linkID = _loc2_.linkID;
-         this.isNotDone = _loc2_.isNotDone;
+         this.isNotAvailable = _loc2_.isNotAvailable;
          this.value = _loc2_.value;
       }
 
@@ -72,6 +72,8 @@ package net.wg.gui.lobby.questsWindow.components
       override protected function onDispose() : void {
          this.removeListeners();
          this.linkBtn.dispose();
+         this.naMc = null;
+         this.naTF = null;
          this.linkBtn = null;
          super.onDispose();
       }
@@ -136,7 +138,7 @@ package net.wg.gui.lobby.questsWindow.components
             }
             if(isInvalid(INV_NOT_DONE))
             {
-               this.naMc.visible = this.naTF.visible = this._isNotDone;
+               this.naMc.visible = this.naTF.visible = this._isNotAvailable;
             }
             invalidate(InvalidationType.SIZE);
          }
@@ -153,7 +155,7 @@ package net.wg.gui.lobby.questsWindow.components
                this.linkBtn.y = Math.round(_loc5_ - this.linkBtn.height);
                _loc3_ = Math.round(this.linkBtn.x + this.linkBtn.width);
             }
-            if(this._isNotDone)
+            if(this._isNotAvailable)
             {
                if(_loc3_ + this.naMc.width + this.naTF.textWidth < _loc2_)
                {
@@ -202,12 +204,12 @@ package net.wg.gui.lobby.questsWindow.components
          invalidate(INV_LINK_ID);
       }
 
-      public function get isNotDone() : Boolean {
-         return this._isNotDone;
+      public function get isNotAvailable() : Boolean {
+         return this._isNotAvailable;
       }
 
-      public function set isNotDone(param1:Boolean) : void {
-         this._isNotDone = param1;
+      public function set isNotAvailable(param1:Boolean) : void {
+         this._isNotAvailable = param1;
          invalidate(INV_NOT_DONE);
       }
 

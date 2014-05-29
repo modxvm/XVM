@@ -1,8 +1,8 @@
 package net.wg.gui.lobby.GUIEditor
 {
    import flash.display.DisplayObject;
-   import flash.display.DisplayObjectContainer;
    import flash.utils.getQualifiedClassName;
+   import flash.display.DisplayObjectContainer;
    import flash.text.TextField;
    import flash.display.InteractiveObject;
    import net.wg.gui.lobby.GUIEditor.data.ComponentProperties;
@@ -35,6 +35,32 @@ package net.wg.gui.lobby.GUIEditor
       public static const TYPE_NON_SMART:String = "nonSmart";
 
       public static const TYPE_SMART:String = "smart";
+
+      public static function getLocationForDO(param1:DisplayObject) : String {
+         var _loc2_:String = null;
+         var _loc3_:DisplayObject = param1.parent;
+         var _loc4_:String = param1.name;
+         if(_loc4_ == null)
+         {
+            _loc4_ = "";
+         }
+         _loc2_ = _loc4_ + "(" + getClassName(param1) + "}";
+         while(!(_loc3_ == null) && !(_loc3_.name == null))
+         {
+            _loc2_ = _loc3_.name + "(" + getClassName(_loc3_) + "}" + "\\" + _loc2_;
+            _loc3_ = _loc3_.parent;
+         }
+         return _loc2_;
+      }
+
+      public static function getClassName(param1:*) : String {
+         var _loc2_:String = getQualifiedClassName(param1);
+         if(_loc2_.indexOf("::") >= 0)
+         {
+            _loc2_ = _loc2_.split("::")[1];
+         }
+         return _loc2_;
+      }
 
       public static function get instance() : GUIEditorHelper {
          if(ms_instance == null)
@@ -162,7 +188,6 @@ package net.wg.gui.lobby.GUIEditor
 
 }   import __AS3__.vec.Vector;
    import net.wg.gui.lobby.GUIEditor.ComponentInfoVo;
-   import net.wg.gui.lobby.GUIEditor.GUIEditorHelper;
    import net.wg.infrastructure.exceptions.ArgumentException;
    import flash.display.DisplayObjectContainer;
    import flash.display.DisplayObject;
@@ -180,11 +205,11 @@ package net.wg.gui.lobby.GUIEditor
          this._ADVANCED_CONTROLS_LINKAGES = ["AccordionUI","ViewStack","AccrodionSoundRendererUI","BigAccrodionSoundRenderer","ButtonBarEx","ClanEmblem","CounterEx","DashLine_UI","DashLine","DoubleProgressBar","FieldSet","HelpLayout","InteractiveSortingButton_UI","ModuleIconUI","moduleIconExtra","PortraitsItemRendererUI","ScalableIconButton_UI","ScalableIconWrapper_UI","ShellButton","SkillItemViewMiniUI","SkillsItemRendererUI","SmallTabButton","SortableHeaderButtonBar_UI","SortingIconLoader","TabButton","TankIcon","TextAreaSimple","vehicleTypeButtonUI"];
          this.LINKAGES = {};
          super();
-         this.LINKAGES[GUIEditorHelper.TYPE_SIMPLE] = this._SIMPLE_CONTROLS_LINKAGES;
-         this.LINKAGES[GUIEditorHelper.TYPE_STANDART] = this._CONTROLS_LINKAGES;
-         this.LINKAGES[GUIEditorHelper.TYPE_ADVANCED] = this._ADVANCED_CONTROLS_LINKAGES;
-         this.LINKAGES[GUIEditorHelper.TYPE_NON_SMART] = this._SIMPLE_CONTROLS_LINKAGES.concat(this._CONTROLS_LINKAGES).concat(this._ADVANCED_CONTROLS_LINKAGES);
-         this.LINKAGES[GUIEditorHelper.TYPE_SMART] = [];
+         this.LINKAGES[ComponentsInfoContainer.TYPE_SIMPLE] = this._SIMPLE_CONTROLS_LINKAGES;
+         this.LINKAGES[ComponentsInfoContainer.TYPE_STANDART] = this._CONTROLS_LINKAGES;
+         this.LINKAGES[ComponentsInfoContainer.TYPE_ADVANCED] = this._ADVANCED_CONTROLS_LINKAGES;
+         this.LINKAGES[ComponentsInfoContainer.TYPE_NON_SMART] = this._SIMPLE_CONTROLS_LINKAGES.concat(this._CONTROLS_LINKAGES).concat(this._ADVANCED_CONTROLS_LINKAGES);
+         this.LINKAGES[ComponentsInfoContainer.TYPE_SMART] = [];
          for (_loc1_ in this.LINKAGES)
          {
             this._information[_loc1_] = this.createComponentsInfoByType(_loc1_);
@@ -215,16 +240,16 @@ package net.wg.gui.lobby.GUIEditor
       public function getComponentsList(param1:String) : Vector.<ComponentInfoVo> {
          switch(param1)
          {
-            case GUIEditorHelper.TYPE_ALL:
+            case ComponentsInfoContainer.TYPE_ALL:
                this.updateSmartControls(App.stage);
-               return this._information[GUIEditorHelper.TYPE_NON_SMART].concat(this._information[GUIEditorHelper.TYPE_SMART]);
-            case GUIEditorHelper.TYPE_SMART:
+               return this._information[ComponentsInfoContainer.TYPE_NON_SMART].concat(this._information[ComponentsInfoContainer.TYPE_SMART]);
+            case ComponentsInfoContainer.TYPE_SMART:
                this.updateSmartControls(App.stage);
-               return this._information[GUIEditorHelper.TYPE_SMART];
-            case GUIEditorHelper.TYPE_SIMPLE:
-            case GUIEditorHelper.TYPE_STANDART:
-            case GUIEditorHelper.TYPE_ADVANCED:
-            case GUIEditorHelper.TYPE_NON_SMART:
+               return this._information[ComponentsInfoContainer.TYPE_SMART];
+            case ComponentsInfoContainer.TYPE_SIMPLE:
+            case ComponentsInfoContainer.TYPE_STANDART:
+            case ComponentsInfoContainer.TYPE_ADVANCED:
+            case ComponentsInfoContainer.TYPE_NON_SMART:
                return this._information[param1];
             default:
                throw new ArgumentException("Unknown components type: " + param1);
@@ -241,10 +266,10 @@ package net.wg.gui.lobby.GUIEditor
             _loc4_ = getQualifiedClassName(_loc3_);
             if(_loc4_.indexOf(".app.") == -1)
             {
-               if(this.LINKAGES[GUIEditorHelper.TYPE_NON_SMART].indexOf(_loc4_) == -1 && this.LINKAGES[GUIEditorHelper.TYPE_SMART].indexOf(_loc4_) == -1)
+               if(this.LINKAGES[ComponentsInfoContainer.TYPE_NON_SMART].indexOf(_loc4_) == -1 && this.LINKAGES[ComponentsInfoContainer.TYPE_SMART].indexOf(_loc4_) == -1)
                {
-                  this._information[GUIEditorHelper.TYPE_SMART].push(new ComponentInfoVo(_loc4_));
-                  this.LINKAGES[GUIEditorHelper.TYPE_SMART].push(_loc4_);
+                  this._information[ComponentsInfoContainer.TYPE_SMART].push(new ComponentInfoVo(_loc4_));
+                  this.LINKAGES[ComponentsInfoContainer.TYPE_SMART].push(_loc4_);
                }
             }
             if(_loc3_  is  DisplayObjectContainer)

@@ -35,6 +35,11 @@ package net.wg.gui.lobby.profile.pages.statistics
          super.onLoadingComplete();
       }
 
+      public function setData(param1:Object) : void {
+         this._data = param1;
+         setSource(StatisticChartInfo(this._data).icon);
+      }
+
       public function set tooltip(param1:String) : void {
          this._tooltip = param1;
          this.disposeHandlers();
@@ -102,11 +107,6 @@ package net.wg.gui.lobby.profile.pages.statistics
           
       }
 
-      public function setData(param1:Object) : void {
-         this._data = param1;
-         setSource(StatisticChartInfo(this._data).icon);
-      }
-
       public function getData() : Object {
          return this._data;
       }
@@ -137,6 +137,7 @@ package net.wg.gui.lobby.profile.pages.statistics
 
       override protected function onDispose() : void {
          this.disposeHandlers();
+         this._data = null;
          super.onDispose();
       }
 

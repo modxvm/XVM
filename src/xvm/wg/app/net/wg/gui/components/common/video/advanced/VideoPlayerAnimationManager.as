@@ -87,8 +87,8 @@ package net.wg.gui.components.common.video.advanced
       }
 
       private function onHideTweenComplete(param1:Tween) : void {
-         this.tweenManager.unregister(param1);
          param1.target.visible = false;
+         this.tweenManager.unregister(param1);
       }
 
       private function onShowTweenComplete(param1:Tween) : void {

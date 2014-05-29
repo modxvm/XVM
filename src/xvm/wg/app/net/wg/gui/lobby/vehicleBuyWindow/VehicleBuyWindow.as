@@ -2,9 +2,11 @@ package net.wg.gui.lobby.vehicleBuyWindow
 {
    import net.wg.infrastructure.base.meta.impl.VehicleBuyWindowMeta;
    import net.wg.infrastructure.base.meta.IVehicleBuyWindowMeta;
+   import flash.display.Sprite;
    import flash.display.MovieClip;
    import net.wg.infrastructure.interfaces.IWindow;
    import flash.events.Event;
+   import scaleform.clik.utils.Padding;
    import flash.display.InteractiveObject;
    import net.wg.gui.components.windows.Window;
    import net.wg.utils.ILocale;
@@ -44,7 +46,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
 
       public var headerMc:HeaderMc;
 
-      public var backgroundMc:MovieClip;
+      public var backgroundMc:Sprite;
 
       public var bodyMaskMc:MovieClip;
 
@@ -81,6 +83,10 @@ package net.wg.gui.lobby.vehicleBuyWindow
             }
          }
          super.setWindow(param1);
+         var _loc2_:Padding = window.contentPadding as Padding;
+         _loc2_.right = _loc2_.right - 4;
+         _loc2_.bottom = _loc2_.bottom - 3;
+         window.contentPadding = _loc2_;
       }
 
       public function expand(param1:Boolean, param2:Boolean) : void {
@@ -206,7 +212,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.headerMc.icon.iconLoader.source = this.initInfo.icon;
             this.headerMc.icon.nation = this.initInfo.nation;
             this.headerMc.icon.level = this.initInfo.level;
-            _loc5_ = new ActionPriceVO(this.initInfo.actionPrc,this.initInfo.actualPrice,this.initInfo.defActualPrice,this.initInfo.isPremium?Currencies.GOLD:Currencies.CREDITS);
+            _loc5_ = this.initInfo.actualActionPriceDataVo;
             this.headerMc.tankActionPrice.setData(_loc5_);
             this.headerMc.tankPrice.visible = !this.headerMc.tankActionPrice.visible;
             this.headerMc.tankPrice.icon = this.initInfo.isPremium?Currencies.GOLD:Currencies.CREDITS;
@@ -216,18 +222,18 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.headerMc.icon.isPremium = this.initInfo.isPremium;
             _loc6_ = "<b>" + _loc1_.makeString(DIALOGS.BUYVEHICLEDIALOG_TANKMEN) + " " + this.initInfo.tankmenCount + "</b>";
             this.bodyMc.tankmenLabel.htmlText = _loc1_.makeString(DIALOGS.BUYVEHICLEDIALOG_TANKMENLABEL,{"count":_loc6_});
-            this.bodyMc.scoolBtn.updatePrice(this.initInfo.actionPrcStudyCredits,this.initInfo.studyPriceCredits,this.initInfo.defStudyPriceCredits,IconsTypes.CREDITS);
-            this.bodyMc.academyBtn.updatePrice(this.initInfo.actionPrcStudyGold,this.initInfo.studyPriceGold,this.initInfo.defStudyPriceGold,IconsTypes.GOLD);
-            this.bodyMc.freeBtn.updatePrice(0,0,0,"");
+            this.bodyMc.scoolBtn.updatePrice(this.initInfo.studyPriceCredits,IconsTypes.CREDITS,this.initInfo.studyPriceCreditsActionDataVo);
+            this.bodyMc.academyBtn.updatePrice(this.initInfo.studyPriceGold,IconsTypes.GOLD,this.initInfo.studyPriceGoldActionDataVo);
+            this.bodyMc.freeBtn.updatePrice(0,"");
             this.bodyMc.scoolBtn.data = this.initInfo.studyPriceCredits;
             this.bodyMc.academyBtn.data = this.initInfo.studyPriceGold;
             this.bodyMc.freeBtn.data = 0;
-            _loc7_ = new ActionPriceVO(this.initInfo.ammoActionPrc,this.initInfo.ammoPrice,this.initInfo.defAmmoPrice,IconsTypes.CREDITS);
+            _loc7_ = this.initInfo.ammoActionPriceDataVo;
             this.bodyMc.ammoActionPrice.setData(_loc7_);
             this.bodyMc.ammoPrice.text = _loc1_.integer(this.initInfo.ammoPrice);
             this.bodyMc.ammoPrice.visible = !this.bodyMc.ammoActionPrice.visible;
             this.bodyMc.slotPrice.text = _loc1_.integer(this.initInfo.slotPrice);
-            _loc8_ = new ActionPriceVO(this.initInfo.slotActionPrc,this.initInfo.slotPrice,this.initInfo.defSlotPrice,IconsTypes.GOLD);
+            _loc8_ = this.initInfo.slotActionPriceDataVo;
             this.bodyMc.slotActionPrice.setData(_loc8_);
             this.bodyMc.slotPrice.visible = !this.bodyMc.slotActionPrice.visible;
             this.bodyMc.scoolBtn.nation = this.bodyMc.academyBtn.nation = this.bodyMc.freeBtn.nation = this.initInfo.nation;

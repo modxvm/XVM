@@ -5,6 +5,10 @@ package net.wg.gui.messenger.windows
    import net.wg.gui.components.advanced.TextAreaSimple;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.controls.ScrollBar;
+   import net.wg.gui.utils.TextFieldStyleSheet;
+   import flash.text.TextField;
+   import flash.events.TextEvent;
+   import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
 
 
@@ -22,13 +26,19 @@ package net.wg.gui.messenger.windows
 
       public var scrollBar:ScrollBar;
 
+      private var isLeftButtonClicked:Boolean = false;
+
       public function as_appendText(param1:String) : void {
          this.textArea.appendHtml(param1);
       }
 
       override protected function configUI() : void {
          super.configUI();
-         this.closeButton.addEventListener(ButtonEvent.CLICK,this.onCancelClick);
+         TextFieldStyleSheet.setLinkStyle(this.textArea.textField);
+         var _loc1_:TextField = this.textArea.textField;
+         _loc1_.addEventListener(TextEvent.LINK,this.handleLinkClick,false,0,true);
+         _loc1_.addEventListener(MouseEvent.CLICK,this.handleMouseClick,false,0,true);
+         this.closeButton.addEventListener(ButtonEvent.CLICK,this.handleCancelClick,false,0,true);
       }
 
       override protected function draw() : void {
@@ -43,10 +53,24 @@ package net.wg.gui.messenger.windows
 
       override protected function onDispose() : void {
          super.onDispose();
-         this.closeButton.removeEventListener(ButtonEvent.CLICK,this.onCancelClick);
+         var _loc1_:TextField = this.textArea.textField;
+         _loc1_.removeEventListener(TextEvent.LINK,this.handleLinkClick,false);
+         _loc1_.removeEventListener(MouseEvent.CLICK,this.handleMouseClick,false);
+         this.closeButton.removeEventListener(ButtonEvent.CLICK,this.handleCancelClick,false);
       }
 
-      private function onCancelClick(param1:ButtonEvent) : void {
+      private function handleMouseClick(param1:MouseEvent) : void {
+         this.isLeftButtonClicked = App.utils.commons.isLeftButton(param1);
+      }
+
+      private function handleLinkClick(param1:TextEvent) : void {
+         if(this.isLeftButtonClicked)
+         {
+            onLinkClickedS(param1.text);
+         }
+      }
+
+      private function handleCancelClick(param1:ButtonEvent) : void {
          onWindowCloseS();
       }
    }

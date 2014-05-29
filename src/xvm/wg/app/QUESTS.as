@@ -277,6 +277,8 @@ package
 
       public static const DETAILS_REQUIREMENTS_TOKEN:String = "#quests:details/requirements/token";
 
+      public static const DETAILS_REQUIREMENTS_TOKEN_N:String = "#quests:details/requirements/token/N";
+
       public static const DETAILS_REQUIREMENTS_PREMIUMACCOUNT:String = "#quests:details/requirements/premiumAccount";
 
       public static const DETAILS_REQUIREMENTS_NOTPREMIUMACCOUNT:String = "#quests:details/requirements/notPremiumAccount";
@@ -409,6 +411,22 @@ package
 
       public static const DETAILS_CONDITIONS_NOTSQUAD:String = "#quests:details/conditions/notSquad";
 
+      public static const DETAILS_CONDITIONS_CLANMEMBERSHIP_ANY_FORMATION:String = "#quests:details/conditions/clanMembership/any/formation";
+
+      public static const DETAILS_CONDITIONS_CLANMEMBERSHIP_ANY_SQUAD:String = "#quests:details/conditions/clanMembership/any/squad";
+
+      public static const DETAILS_CONDITIONS_CLANMEMBERSHIP_ANY_TEAM7X7:String = "#quests:details/conditions/clanMembership/any/team7x7";
+
+      public static const DETAILS_CONDITIONS_CLANMEMBERSHIP_ANY_COMPANY:String = "#quests:details/conditions/clanMembership/any/company";
+
+      public static const DETAILS_CONDITIONS_CLANMEMBERSHIP_SAME_FORMATION:String = "#quests:details/conditions/clanMembership/same/formation";
+
+      public static const DETAILS_CONDITIONS_CLANMEMBERSHIP_SAME_SQUAD:String = "#quests:details/conditions/clanMembership/same/squad";
+
+      public static const DETAILS_CONDITIONS_CLANMEMBERSHIP_SAME_TEAM7X7:String = "#quests:details/conditions/clanMembership/same/team7x7";
+
+      public static const DETAILS_CONDITIONS_CLANMEMBERSHIP_SAME_COMPANY:String = "#quests:details/conditions/clanMembership/same/company";
+
       public static const DETAILS_CONDITIONS_FORMATION_CLAN:String = "#quests:details/conditions/formation/clan";
 
       public static const DETAILS_CONDITIONS_HISTORICALBATTLES:String = "#quests:details/conditions/historicalBattles";
@@ -530,6 +548,8 @@ package
       public static const DETAILS_CONDITIONS_GROUPBY_LEVELLABEL:String = "#quests:details/conditions/groupBy/levelLabel";
 
       public static const DETAILS_CONDITIONS_POSTBATTLE_SEPARATOR:String = "#quests:details/conditions/postBattle/separator";
+
+      public static const DETAILS_CONDITIONS_POSTBATTLE_DAILYRESET_TIMEFMT:String = "#quests:details/conditions/postBattle/dailyReset/timeFmt";
 
       public static const DETAILS_CONDITIONS_POSTBATTLE_DAILYRESET:String = "#quests:details/conditions/postBattle/dailyReset";
 
@@ -696,6 +716,8 @@ package
       public static const DETAILS_DOSSIER_MOUSEBANE:String = "#quests:details/dossier/mousebane";
 
       public static const DETAILS_DOSSIER_EVILEYE:String = "#quests:details/dossier/evileye";
+
+      public static const DETAILS_DOSSIER_BATTLECITIZEN:String = "#quests:details/dossier/battleCitizen";
 
       public static const DETAILS_DOSSIER_MEDALRADLEYWALTERS:String = "#quests:details/dossier/medalRadleyWalters";
 

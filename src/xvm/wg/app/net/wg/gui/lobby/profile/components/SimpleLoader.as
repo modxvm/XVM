@@ -20,7 +20,9 @@ package net.wg.gui.lobby.profile.components
 
       public static const LOAD_ERROR:String = "sourceLoadError";
 
-      protected var loader:Loader;
+      private static const CONTENT_TYPE_SWF:String = "application/x-shockwave-flash";
+
+      private var _loader:Loader;
 
       private var currentSourcePath:String;
 
@@ -29,9 +31,9 @@ package net.wg.gui.lobby.profile.components
          {
             return;
          }
-         if(this.loader)
+         if(this._loader)
          {
-            this.loader.unloadAndStop(true);
+            this.unloadLoader();
          }
          this.currentSourcePath = param1;
          if((param1) && !(param1 == ""))
@@ -49,14 +51,14 @@ package net.wg.gui.lobby.profile.components
       }
 
       public function disposeLoader() : void {
-         this.currentSourcePath = null;
-         if(this.loader)
+         if(this._loader)
          {
             this.removeLoaderHandlers();
-            this.loader.unloadAndStop(true);
-            this.loader.parent.removeChild(this.loader);
-            this.loader = null;
+            this.unloadLoader();
+            this._loader.parent.removeChild(this._loader);
+            this._loader = null;
          }
+         this.currentSourcePath = null;
       }
 
       public final function dispose() : void {
@@ -68,13 +70,13 @@ package net.wg.gui.lobby.profile.components
       }
 
       protected function startLoading(param1:String) : void {
-         if(!this.loader)
+         if(!this._loader)
          {
-            this.loader = new Loader();
+            this._loader = new Loader();
             this.addLoaderHandlers();
-            addChild(this.loader);
+            addChild(this._loader);
          }
-         this.loader.load(new URLRequest(param1));
+         this._loader.load(new URLRequest(param1));
       }
 
       protected function onLoadingComplete() : void {
@@ -85,14 +87,29 @@ package net.wg.gui.lobby.profile.components
           
       }
 
+      protected function get loader() : Loader {
+         return this._loader;
+      }
+
+      private function unloadLoader() : void {
+         if(this._loader.contentLoaderInfo.contentType == CONTENT_TYPE_SWF)
+         {
+            this._loader.unloadAndStop(true);
+         }
+         else
+         {
+            this._loader.unload();
+         }
+      }
+
       private function addLoaderHandlers() : void {
-         this.loader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.loadingCompleteHandler,false,0,true);
-         this.loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.loadingErrorHandler,false,0,true);
+         this._loader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.loadingCompleteHandler,false,0,true);
+         this._loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.loadingErrorHandler,false,0,true);
       }
 
       private function removeLoaderHandlers() : void {
-         this.loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.loadingCompleteHandler);
-         this.loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.loadingErrorHandler);
+         this._loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.loadingCompleteHandler);
+         this._loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.loadingErrorHandler);
       }
 
       private function loadingErrorHandler(param1:IOErrorEvent) : void {

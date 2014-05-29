@@ -2,6 +2,8 @@ package net.wg.gui.lobby.profile.components
 {
    import net.wg.gui.components.controls.TileList;
    import scaleform.clik.interfaces.IDataProvider;
+   import scaleform.clik.controls.ScrollIndicator;
+   import scaleform.clik.constants.DirectionMode;
    import scaleform.clik.interfaces.IListItemRenderer;
    import flash.events.Event;
 
@@ -20,6 +22,30 @@ package net.wg.gui.lobby.profile.components
          }
          super.dataProvider = param1;
          invalidate();
+      }
+
+      override protected function drawScrollBar() : void {
+         if(!_autoScrollBar)
+         {
+            return;
+         }
+         var _loc1_:ScrollIndicator = _scrollBar as ScrollIndicator;
+         _loc1_.direction = _direction;
+         if(_direction == DirectionMode.VERTICAL)
+         {
+            _loc1_.rotation = 0;
+            _loc1_.x = _width - _loc1_.width + margin;
+            _loc1_.y = margin;
+            _loc1_.height = availableHeight + padding.vertical;
+         }
+         else
+         {
+            _loc1_.rotation = -90;
+            _loc1_.x = margin;
+            _loc1_.y = _height - margin;
+            _loc1_.width = availableWidth + padding.horizontal;
+         }
+         _scrollBar.validateNow();
       }
 
       override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {

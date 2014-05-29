@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.profile.components
 {
    import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.gui.lobby.profile.pages.technique.data.TechniqueListVehicleVO;
    import flash.events.MouseEvent;
    import net.wg.data.constants.Tooltips;
 
@@ -14,12 +15,12 @@ package net.wg.gui.lobby.profile.components
          this.addEventListener(MouseEvent.ROLL_OUT,this.rollOutHandler,false,0,true);
       }
 
-      private var _data:Object;
+      private var _data:TechniqueListVehicleVO = null;
 
       private function rollOverHandler(param1:MouseEvent) : void {
          if(this._data)
          {
-            App.toolTipMgr.showSpecial(Tooltips.TANK_CLASS,null,"markOfMastery",this._data.markOfMastery);
+            App.toolTipMgr.showSpecial(Tooltips.TANK_CLASS,null,this._data.markOfMasteryBlock,"markOfMastery",this._data.markOfMastery);
          }
       }
 
@@ -27,7 +28,7 @@ package net.wg.gui.lobby.profile.components
          App.toolTipMgr.hide();
       }
 
-      public function set data(param1:Object) : void {
+      public function set data(param1:TechniqueListVehicleVO) : void {
          this._data = param1;
       }
 

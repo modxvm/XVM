@@ -2,17 +2,20 @@ package net.wg.gui.lobby.profile.pages.technique
 {
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.data.DataProvider;
-   import net.wg.gui.components.advanced.SortingButton;
+   import net.wg.gui.components.controls.NormalSortingBtnInfo;
+   import net.wg.data.constants.SortingInfo;
    import flash.display.MovieClip;
    import net.wg.gui.components.advanced.SortableHeaderButtonBar;
    import net.wg.gui.components.controls.ScrollBar;
    import net.wg.gui.utils.ExcludeTweenManager;
    import net.wg.gui.lobby.profile.pages.technique.data.TechniqueListVehicleVO;
+   import net.wg.gui.events.SortingEvent;
    import scaleform.clik.controls.ScrollIndicator;
    import scaleform.clik.constants.InvalidationType;
    import fl.transitions.easing.Strong;
    import scaleform.clik.motion.Tween;
    import flash.events.Event;
+   import net.wg.gui.components.advanced.SortingButton;
    import net.wg.gui.components.controls.SortableScrollingList;
 
 
@@ -36,77 +39,77 @@ package net.wg.gui.lobby.profile.pages.technique
 
       private static function getHeadersProvider() : DataProvider {
          var _loc4_:Array = null;
-         var _loc13_:ProfileSortingBtnInfo = null;
+         var _loc13_:NormalSortingBtnInfo = null;
          var _loc1_:* = "../maps/icons/buttons/tab_sort_button/ascProfileSortArrow.png";
          var _loc2_:* = "../maps/icons/buttons/tab_sort_button/descProfileSortArrow.png";
          var _loc3_:Number = 40;
          _loc4_ = [];
-         var _loc5_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         var _loc5_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
          _loc5_.iconId = TechniqueList.NATION_INDEX;
          _loc5_.iconSource = "../maps/icons/filters/nations/all.png";
          _loc5_.buttonWidth = 36;
          _loc5_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NATION;
-         _loc5_.defaultSortDirection = SortingButton.ASCENDING_SORT;
+         _loc5_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
          _loc5_.sortOrder = 0;
          _loc5_.inverted = true;
          _loc4_.push(_loc5_);
-         var _loc6_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         var _loc6_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
          _loc6_.iconId = TechniqueList.TYPE_INDEX;
          _loc6_.iconSource = "../maps/icons/filters/tanks/all.png";
          _loc6_.buttonWidth = 34;
          _loc6_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE;
-         _loc6_.defaultSortDirection = SortingButton.ASCENDING_SORT;
+         _loc6_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
          _loc6_.sortOrder = 1;
          _loc6_.inverted = true;
          _loc4_.push(_loc6_);
-         var _loc7_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         var _loc7_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
          _loc7_.iconId = TechniqueList.LEVEL;
          _loc7_.iconSource = "../maps/icons/buttons/tab_sort_button/level.png";
          _loc7_.buttonWidth = 28;
          _loc7_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_LVL;
-         _loc7_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         _loc7_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
          _loc7_.sortOrder = 2;
          _loc4_.push(_loc7_);
-         var _loc8_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         var _loc8_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
          _loc8_.iconId = TechniqueList.SHORT_USER_NAME;
          _loc8_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_VEHICLENAME;
          _loc8_.buttonWidth = 158;
          _loc8_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NAME;
-         _loc8_.defaultSortDirection = SortingButton.ASCENDING_SORT;
+         _loc8_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
          _loc8_.sortOrder = 7;
          _loc8_.dataSortType = Array.CASEINSENSITIVE;
          _loc4_.push(_loc8_);
-         var _loc9_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         var _loc9_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
          _loc9_.iconId = TechniqueList.BATTLES_COUNT;
          _loc9_.buttonWidth = 74;
          _loc9_.label = PROFILE.SECTION_SUMMARY_SCORES_TOTALBATTLES;
          _loc9_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT;
-         _loc9_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         _loc9_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
          _loc9_.sortOrder = 3;
          _loc4_.push(_loc9_);
-         var _loc10_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         var _loc10_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
          _loc10_.iconId = TechniqueList.WINS_EFFICIENCY;
          _loc10_.buttonWidth = 74;
          _loc10_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_TOTALWINS;
          _loc10_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_WINS;
-         _loc10_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         _loc10_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
          _loc10_.sortOrder = 4;
          _loc4_.push(_loc10_);
-         var _loc11_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         var _loc11_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
          _loc11_.iconId = TechniqueList.AVG_EXPERIENCE;
          _loc11_.buttonWidth = 90;
          _loc11_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_AVGEXPERIENCE;
          _loc11_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP;
-         _loc11_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         _loc11_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
          _loc11_.sortOrder = 5;
          _loc4_.push(_loc11_);
-         var _loc12_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         var _loc12_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
          _loc12_.iconId = TechniqueList.MARK_OF_MASTERY;
          _loc12_.buttonWidth = 80;
          _loc12_.showSeparator = false;
          _loc12_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_CLASSINESS;
          _loc12_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY;
-         _loc12_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         _loc12_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
          _loc12_.sortOrder = 6;
          _loc4_.push(_loc12_);
          var _loc14_:* = 0;
@@ -178,7 +181,7 @@ package net.wg.gui.lobby.profile.pages.technique
          super.configUI();
          this.lowerShadow.mouseEnabled = this.upperShadow.mouseEnabled = false;
          this.sortableButtonBar.dataProvider = getHeadersProvider();
-         this.sortableButtonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED,this.sortingChangedHandler,false,0,true);
+         this.sortableButtonBar.addEventListener(SortingEvent.SORT_DIRECTION_CHANGED,this.sortingChangedHandler,false,0,true);
          this.techniqueList.columnsData = this.sortableButtonBar.dataProvider;
          this.applyDefaultSorting();
       }
@@ -195,7 +198,7 @@ package net.wg.gui.lobby.profile.pages.technique
          var _loc4_:ScrollIndicator = null;
          var _loc5_:* = NaN;
          var _loc6_:* = 0;
-         var _loc7_:ProfileSortingBtnInfo = null;
+         var _loc7_:NormalSortingBtnInfo = null;
          var _loc8_:* = 0;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -226,7 +229,7 @@ package net.wg.gui.lobby.profile.pages.technique
             _loc8_ = _loc6_-1;
             while(_loc8_ >= 0)
             {
-               _loc7_ = ProfileSortingBtnInfo(this.sortableButtonBar.dataProvider[_loc8_]);
+               _loc7_ = NormalSortingBtnInfo(this.sortableButtonBar.dataProvider[_loc8_]);
                if((_loc7_) && _loc7_.iconId == TechniqueList.MARK_OF_MASTERY)
                {
                   this.sortableButtonBar.enableButtonAt(this.isMarkOfMasteryBtnEnabled,_loc8_);
@@ -249,7 +252,7 @@ package net.wg.gui.lobby.profile.pages.technique
             this._vehicles.splice(0,this._vehicles.length);
             this._vehicles = null;
          }
-         this.sortableButtonBar.removeEventListener(SortingButton.SORT_DIRECTION_CHANGED,this.sortingChangedHandler);
+         this.sortableButtonBar.removeEventListener(SortingEvent.SORT_DIRECTION_CHANGED,this.sortingChangedHandler);
          if(this.techniqueList)
          {
             this.techniqueList.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED,this.selectedDataChangeHandler);
@@ -297,9 +300,9 @@ package net.wg.gui.lobby.profile.pages.technique
       private function sortingChangedHandler(param1:Event) : void {
          param1.stopImmediatePropagation();
          var _loc2_:SortingButton = SortingButton(param1.target);
-         if(_loc2_.sortDirection != SortingButton.WITHOUT_SORT)
+         if(_loc2_.sortDirection != SortingInfo.WITHOUT_SORT)
          {
-            this.techniqueList.sortByField(_loc2_.id,_loc2_.sortDirection == SortingButton.ASCENDING_SORT);
+            this.techniqueList.sortByField(_loc2_.id,_loc2_.sortDirection == SortingInfo.ASCENDING_SORT);
          }
       }
    }

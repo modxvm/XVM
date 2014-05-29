@@ -34,6 +34,8 @@ package net.wg.gui.lobby.header
 
       private var _disableNav:Boolean = false;
 
+      private var _subItemSelectedIndex:Number = -1;
+
       public function showHelpLayout() : void {
          var _loc1_:Number = _renderers.length;
          var _loc2_:Number = 1;
@@ -162,7 +164,7 @@ package net.wg.gui.lobby.header
          this.bg.width = Math.round(_loc1_ - _spacing + this.paddingRight);
          this.bg.height = Math.round(_loc2_ + this.paddingBottom);
          dispatchEvent(new HeaderButtonBarEvent(HeaderButtonBarEvent.RESIZE,this.bg.width));
-         selectedIndex = Math.min(_dataProvider.length-1,_selectedIndex);
+         this.selectedIndex = Math.min(_dataProvider.length-1,_selectedIndex);
       }
 
       override protected function populateRendererData(param1:Button, param2:uint) : void {
@@ -191,6 +193,37 @@ package net.wg.gui.lobby.header
             addChild(container);
             this.updateRenderers();
          }
+      }
+
+      override public function set selectedIndex(param1:int) : void {
+         super.selectedIndex = param1;
+         this.updateSubItem(this.subItemSelectedIndex,"");
+      }
+
+      private function updateSubItem(param1:Number, param2:String) : void {
+         var _loc3_:MainMenuButton = null;
+         if(param1 >= 0)
+         {
+            _loc3_ = _renderers[this.subItemSelectedIndex] as MainMenuButton;
+            if(_loc3_)
+            {
+               _loc3_.setExternalState(param2);
+            }
+            if(param2 == "")
+            {
+               this._subItemSelectedIndex = -1;
+            }
+         }
+      }
+
+      public function get subItemSelectedIndex() : int {
+         return this._subItemSelectedIndex;
+      }
+
+      public function set subItemSelectedIndex(param1:int) : void {
+         this.updateSubItem(this._subItemSelectedIndex,"");
+         this._subItemSelectedIndex = param1;
+         this.updateSubItem(this._subItemSelectedIndex,MainMenuButton.SUB_SELECTED);
       }
    }
 

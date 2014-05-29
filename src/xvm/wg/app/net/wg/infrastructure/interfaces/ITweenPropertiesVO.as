@@ -1,72 +1,44 @@
 package net.wg.infrastructure.interfaces
 {
-   import flash.events.IEventDispatcher;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import flash.display.DisplayObject;
 
 
-   public interface ITweenPropertiesVO extends IEventDispatcher, IDisposable
+   public interface ITweenPropertiesVO extends ISimpleTweenPropertiesVO
    {
           
-      function get position() : int;
+      function setPosition(param1:int) : void;
 
-      function set position(param1:int) : void;
+      function setDuration(param1:int) : void;
 
-      function get duration() : int;
+      function setGlobalDelay(param1:int) : void;
 
-      function set duration(param1:int) : void;
+      function setLocalDelay(param1:int) : void;
 
-      function get delay() : int;
+      function setTarget(param1:DisplayObject) : void;
 
-      function set delay(param1:int) : void;
+      function setActionAfterRemoveFromStage(param1:String) : void;
 
-      function get target() : DisplayObject;
+      function setLoop(param1:Boolean) : void;
 
-      function set target(param1:DisplayObject) : void;
+      function setHandler(param1:ITweenHandler) : void;
 
-      function get actionAfterRemoveFromStage() : String;
+      function setPaused(param1:Boolean) : void;
 
-      function set actionAfterRemoveFromStage(param1:String) : void;
+      function setX(param1:Number) : void;
 
-      function get loop() : Boolean;
+      function setY(param1:Number) : void;
 
-      function set loop(param1:Boolean) : void;
+      function setScaleX(param1:Number) : void;
 
-      function get onComplete() : Function;
+      function setScaleY(param1:Number) : void;
 
-      function set onComplete(param1:Function) : void;
+      function setAlpha(param1:Number) : void;
 
-      function get paused() : Boolean;
+      function setRotation(param1:Number) : void;
 
-      function set paused(param1:Boolean) : void;
+      function setIsOnCodeBased(param1:Boolean) : void;
 
-      function get x() : Number;
-
-      function set x(param1:Number) : void;
-
-      function get y() : Number;
-
-      function set y(param1:Number) : void;
-
-      function get scaleX() : Number;
-
-      function set scaleX(param1:Number) : void;
-
-      function get scaleY() : Number;
-
-      function set scaleY(param1:Number) : void;
-
-      function get alpha() : Number;
-
-      function set alpha(param1:Number) : void;
-
-      function get rotation() : Number;
-
-      function set rotation(param1:Number) : void;
-
-      function get argsForOnComplete() : Object;
-
-      function set argsForOnComplete(param1:Object) : void;
+      function setTweenIdx(param1:int) : void;
    }
 
 }

@@ -80,6 +80,8 @@ package net.wg.gui.lobby.settings
 
       private var _dynamicMarkersData:Object = null;
 
+      private var _setDataInProgress:Boolean = false;
+
       public var markerEnemy:VehicleMarkerEnemy = null;
 
       public var markerEnemyAlt:VehicleMarkerEnemy = null;
@@ -131,6 +133,7 @@ package net.wg.gui.lobby.settings
          var _loc4_:SettingsMarkersForm = null;
          super.setData(param1);
          this._dynamicMarkersData = {};
+         this._setDataInProgress = true;
          for (_loc2_ in param1)
          {
             if(this[_loc2_ + this.FORM])
@@ -148,12 +151,17 @@ package net.wg.gui.lobby.settings
                this._dynamicMarkersData[_loc2_][_loc3_] = SettingsControlProp(param1[_loc2_][_loc3_]).current;
             }
          }
+         this._setDataInProgress = false;
          this.tabs.dataProvider = new DataProvider(SettingsConfig.markerTabsDataProvider);
          this.tabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
          this.tabs.selectedIndex = this.__currentTab;
       }
 
       private function onControlChange(param1:SettingsSubVewEvent) : void {
+         if(this._setDataInProgress)
+         {
+            return;
+         }
          var _loc2_:String = param1.subViewId;
          var _loc3_:String = param1.controlId;
          var _loc4_:Object = {};

@@ -46,10 +46,8 @@ package net.wg.gui.lobby.sellDialog
             }
          }
          var _loc8_:String = _loc5_.join("");
-         trace("result user input : ",_loc8_);
          var _loc9_:* = false;
-         var _loc10_:Array = param3.split("");
-         trace(">>> last char : ",_loc10_[_loc10_.length-1].charCodeAt(0));
+         var _loc10_:* = param3.split("");
          if(_loc10_[_loc10_.length-1].charCodeAt(0) == SPACE_CODE)
          {
             _loc10_.pop();

@@ -96,6 +96,10 @@ package net.wg.gui.lobby.battleloading
          this.tipText.htmlText = param1;
       }
 
+      public function updateTipTitle(param1:String) : void {
+         this.helpTip.text = param1;
+      }
+
       public function setPlayerInfo(param1:Number, param2:Number) : void {
          this.teamDP.setPlayerVehicleID(param1);
          this.teamDP.setPrebattleID(param2);

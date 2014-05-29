@@ -2,6 +2,7 @@ package net.wg.gui.lobby.dialogs
 {
    import net.wg.infrastructure.base.meta.impl.IconPriceDialogMeta;
    import net.wg.infrastructure.base.meta.IIconPriceDialogMeta;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import flash.display.DisplayObjectContainer;
 
 
@@ -28,11 +29,10 @@ package net.wg.gui.lobby.dialogs
          return _loc1_ + PRICE_TEXT_OFFSET + this.priceMc.height + PRICE_BOTTOM_OFFSET;
       }
 
-      public function as_setMessagePrice(param1:Number, param2:Number, param3:String, param4:Number) : void {
-         this.priceMc.currency = param3;
+      public function as_setMessagePrice(param1:Number, param2:String, param3:Object) : void {
+         this.priceMc.currency = param2;
          this.priceMc.price = param1;
-         this.priceMc.defPrice = param2;
-         this.priceMc.actionPrc = param4;
+         this.priceMc.actionPriceVo = param3?new ActionPriceVO(param3):null;
       }
 
       public function as_setPriceLabel(param1:String) : void {

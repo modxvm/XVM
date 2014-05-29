@@ -98,31 +98,30 @@ package net.wg.gui.lobby.barracks
 
       private var _nationID:String = "";
 
-      public function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Number, param6:Number, param7:Number, param8:Array) : void {
-         var _loc9_:* = NaN;
+      public function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Object, param6:Number, param7:Array) : void {
+         var _loc8_:* = NaN;
          this.tankmenCountTF.text = MENU.BARRACKS_TANKMENCOUNT;
-         this.tankmenCountTF.replaceText(this.tankmenCountTF.text.indexOf("{"),this.tankmenCountTF.text.indexOf("}") + 1,String(param8.length));
+         this.tankmenCountTF.replaceText(this.tankmenCountTF.text.indexOf("{"),this.tankmenCountTF.text.indexOf("}") + 1,String(param7.length));
          this.tankmenCountTF.replaceText(this.tankmenCountTF.text.indexOf("{"),this.tankmenCountTF.text.indexOf("}") + 1,String(param1));
          if(param3 < param2)
          {
-            _loc9_ = param2 - param3;
-            param8.push(
+            _loc8_ = param2 - param3;
+            param7.push(
                {
                   "empty":true,
-                  "freePlaces":_loc9_
+                  "freePlaces":_loc8_
                }
             );
          }
-         param8.push(
+         param7.push(
             {
                "buy":true,
                "price":param4,
-               "defPrice":param5,
-               "count":param7,
-               "actionPrc":param6
+               "actionPriceData":param5,
+               "count":param6
             }
          );
-         this.tankmenTileList.dataProvider = new DataProvider(param8);
+         this.tankmenTileList.dataProvider = new DataProvider(param7);
          this.tankmenTileList.validateNow();
          this.tankmenTileList.selectedIndex = -1;
          this.placesCountTF.text = MENU.BARRACKS_PLACESCOUNT;

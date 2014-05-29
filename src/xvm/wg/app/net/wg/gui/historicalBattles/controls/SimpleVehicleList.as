@@ -44,7 +44,7 @@ package net.wg.gui.historicalBattles.controls
                }
                else
                {
-                  if(_selectedIndex > 0)
+                  if(_selectedIndex > this.getFirstSelectablePosition(0,true))
                   {
                      if(_loc4_)
                      {
@@ -80,7 +80,7 @@ package net.wg.gui.historicalBattles.controls
                }
                else
                {
-                  if(_selectedIndex < _dataProvider.length-1)
+                  if(_selectedIndex < this.getFirstSelectablePosition(_dataProvider.length-1,false))
                   {
                      if(_loc4_)
                      {
@@ -136,7 +136,7 @@ package net.wg.gui.historicalBattles.controls
          param1.handled = true;
       }
 
-      protected function getFirstSelectablePosition(param1:int, param2:Boolean=true) : int {
+      public function getFirstSelectablePosition(param1:int, param2:Boolean=true) : int {
          var _loc3_:int = selectedIndex;
          var _loc4_:int = param1;
          var _loc5_:int = _dataProvider?_dataProvider.length:0;

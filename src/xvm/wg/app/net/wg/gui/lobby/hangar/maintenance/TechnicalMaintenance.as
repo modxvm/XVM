@@ -248,6 +248,7 @@ package net.wg.gui.lobby.hangar.maintenance
          window.contentPadding = _loc1_;
          _loc1_ = window.formBgPadding;
          _loc1_.top = _loc1_.top + 585;
+         _loc1_.right = _loc1_.right + 1;
          window.formBgPadding = _loc1_;
          var _loc2_:IEventCollector = App.utils.events;
          _loc2_.addEvent(App.stage,ModuleInfoEvent.SHOW_INFO,this.onShowModuleInfo);

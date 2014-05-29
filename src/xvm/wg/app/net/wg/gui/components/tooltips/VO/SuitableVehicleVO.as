@@ -3,7 +3,7 @@ package net.wg.gui.components.tooltips.VO
    import net.wg.data.daapi.base.DAAPIDataClass;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import __AS3__.vec.Vector;
-   import net.wg.gui.cyberSport.vo.VehicleVO;
+   import net.wg.gui.rally.vo.VehicleVO;
 
 
    public class SuitableVehicleVO extends DAAPIDataClass implements IDisposable
@@ -17,7 +17,7 @@ package net.wg.gui.components.tooltips.VO
 
       public var leftCount:uint = 0;
 
-      public var vehiclesList:Vector.<net.wg.gui.cyberSport.vo.VehicleVO> = null;
+      public var vehiclesList:Vector.<net.wg.gui.rally.vo.VehicleVO> = null;
 
       public var conditions:Array = null;
 
@@ -29,7 +29,7 @@ package net.wg.gui.components.tooltips.VO
          var _loc3_:Array = null;
          var _loc4_:uint = 0;
          var _loc5_:* = false;
-         var _loc6_:net.wg.gui.cyberSport.vo.VehicleVO = null;
+         var _loc6_:net.wg.gui.rally.vo.VehicleVO = null;
          switch(param1)
          {
             case "vehicles":
@@ -52,11 +52,11 @@ package net.wg.gui.components.tooltips.VO
                _loc4_ = 0;
                if((_loc3_) && _loc3_.length > 0)
                {
-                  this.vehiclesList = new Vector.<net.wg.gui.cyberSport.vo.VehicleVO>();
+                  this.vehiclesList = new Vector.<net.wg.gui.rally.vo.VehicleVO>();
                   _loc4_ = 0;
                   while(_loc4_ < this.MAX_VEHICLES && _loc4_ < _loc3_.length)
                   {
-                     _loc6_ = new net.wg.gui.cyberSport.vo.VehicleVO(_loc3_[_loc4_]);
+                     _loc6_ = new net.wg.gui.rally.vo.VehicleVO(_loc3_[_loc4_]);
                      this.vehiclesList.push(_loc6_);
                      _loc4_++;
                   }
@@ -104,7 +104,7 @@ package net.wg.gui.components.tooltips.VO
       }
 
       override protected function onDispose() : void {
-         var _loc1_:net.wg.gui.cyberSport.vo.VehicleVO = null;
+         var _loc1_:net.wg.gui.rally.vo.VehicleVO = null;
          if((this.vehiclesList) && this.vehiclesList.length > 0)
          {
             while(this.vehiclesList.length)

@@ -74,6 +74,7 @@ package net.wg.gui.lobby.questsWindow.components
             _loc1_.paused = true;
             _loc1_ = null;
          }
+         this.tweens.splice(0,this.tweens.length);
          this.tweens = null;
          for each (_loc2_ in this.fadeTweens)
          {
@@ -82,6 +83,7 @@ package net.wg.gui.lobby.questsWindow.components
             _loc2_.paused = true;
             _loc2_ = null;
          }
+         this.fadeTweens.splice(0,this.fadeTweens.length);
          this.fadeTweens = null;
          super.onDispose();
       }
@@ -170,6 +172,7 @@ package net.wg.gui.lobby.questsWindow.components
                {
                   this.header.setProgress(this.data.headerProgress);
                }
+               this.header.showDone = this.data.showDone;
             }
             if(this.data)
             {

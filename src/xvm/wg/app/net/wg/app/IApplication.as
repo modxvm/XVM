@@ -16,6 +16,7 @@ package net.wg.app
    import net.wg.infrastructure.managers.IGuiItemsManager;
    import net.wg.infrastructure.managers.IVoiceChatManager;
    import net.wg.utils.IGameInputManager;
+   import net.wg.infrastructure.managers.IEventLogManager;
    import net.wg.utils.IUtils;
    import net.wg.utils.ITweenManager;
    import net.wg.infrastructure.helpers.ILibraryLoader;
@@ -59,6 +60,8 @@ package net.wg.app
       function get voiceChatMgr() : IVoiceChatManager;
 
       function get gameInputMgr() : IGameInputManager;
+
+      function get eventLogManager() : IEventLogManager;
 
       function get utils() : IUtils;
 

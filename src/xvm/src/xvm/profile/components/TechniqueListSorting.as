@@ -1,6 +1,7 @@
 package xvm.profile.components
 {
     import com.xvm.*;
+    import net.wg.data.constants.*;
     import net.wg.gui.components.advanced.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
 
@@ -40,7 +41,7 @@ package xvm.profile.components
 
         public static function sort(data:Array, btn:SortingButton):void
         {
-            if (btn.sortDirection == SortingButton.WITHOUT_SORT)
+            if (btn.sortDirection == SortingInfo.WITHOUT_SORT)
                 return;
 
             var opt:Array = SORT_OPTIONS[btn.id];
@@ -57,7 +58,7 @@ package xvm.profile.components
                 var sortFields:Object = SORT_FIELDS[opt[i]];
                 fields.push(sortFields.field);
                 var o:uint = sortFields.options;
-                if (btn.sortDirection != SortingButton.ASCENDING_SORT)
+                if (btn.sortDirection != SortingInfo.ASCENDING_SORT)
                 {
                     if ((o & Array.DESCENDING) == 0)
                         o |= Array.DESCENDING;

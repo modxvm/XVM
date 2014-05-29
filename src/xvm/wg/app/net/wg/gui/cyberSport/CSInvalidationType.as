@@ -9,11 +9,7 @@ package net.wg.gui.cyberSport
          super();
       }
 
-      public static const UNIT_DATA:String = "unitData";
-
-      public static const ACTION_BUTTON_DATA:String = "actionButtonData";
-
-      public static const UPDATE_COMMENTS:String = "updateComments";
+      public static const VEHICLE_LABEL:String = "vehicleLabel";
    }
 
 }

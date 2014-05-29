@@ -3,7 +3,7 @@ package net.wg.gui.lobby.profile.pages
    import net.wg.infrastructure.base.meta.impl.ProfileSectionMeta;
    import net.wg.infrastructure.base.meta.IProfileSectionMeta;
    import net.wg.gui.lobby.profile.components.IResizableContent;
-   import net.wg.gui.lobby.profile.components.LineDescrIconText;
+   import net.wg.gui.components.advanced.LineDescrIconText;
    import flash.geom.Point;
    import net.wg.gui.lobby.profile.data.SectionLayoutManager;
    import net.wg.gui.lobby.profile.components.BattlesTypeDropdown;
@@ -25,7 +25,8 @@ package net.wg.gui.lobby.profile.pages
       private static const ANIMATION_INVALID:String = "animInv";
 
       public static function applyInitDataToTextField(param1:String, param2:Object, param3:LineDescrIconText) : void {
-         var _loc4_:Object = param2[param1];
+         var _loc4_:Object = null;
+         _loc4_ = param2[param1];
          param3.description = _loc4_["description"];
          param3.iconSource = _loc4_["icon"];
       }

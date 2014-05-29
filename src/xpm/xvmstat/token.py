@@ -71,7 +71,8 @@ def _getXvmStatTokenData():
         tdata = _tdataPrev
 
     type = SystemMessages.SM_TYPE.Warning
-    msg = '<textformat tabstops="[150]"><a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
+    msg = '<textformat tabstops="[120]"><img src="img://../xvm/res/icons/xvm/16x16.png" width="16" height="16" vspace="-5">'
+    msg += '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
     if tdata is None:
         msg += '{{l10n:token/network_error}}'
     elif tdata['status'] == 'badToken':
@@ -81,17 +82,15 @@ def _getXvmStatTokenData():
     elif tdata['status'] == 'inactive':
         msg += '{{l10n:token/inactive}}'
     elif tdata['status'] == 'active':
-        type = SystemMessages.SM_TYPE.Information
+        type = SystemMessages.SM_TYPE.GameGreeting
         msg += '{{l10n:token/active}}\n'
         s = time.time()
         e = tdata['expires_at']/1000
         days_left = int((e - s) / 86400)
-        if days_left > 0:
-            msg += '{{l10n:token/days_left:%d}}\n' % days_left
-        else:
-            hours_left = int((e - s) / 3600)
-            msg += '{{l10n:token/hours_left:%d}}\n' % hours_left
-        msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
+        hours_left = int((e - s) / 3600) % 24
+        mins_left = int((e - s) / 60) % 60
+        msg += '{{l10n:token/time_left:%d:%02d:%02d}}\n' % (days_left, hours_left, mins_left)
+        #msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
     else:
         type = SystemMessages.SM_TYPE.Error
         msg += '{{l10n:token/unknown_status}}\n%s' % json.dumps(tdata)

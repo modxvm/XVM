@@ -62,7 +62,32 @@ package net.wg.gui.lobby.questsWindow
 
       public var statusMC:MovieClip;
 
+      override protected function onDispose() : void {
+         this.progressIndicator.dispose();
+         this.counter.dispose();
+         if(this.headerData)
+         {
+            this.headerData.dispose();
+            this.headerData = null;
+         }
+         this.contentTabs.dispose();
+         this.contentTabs = null;
+         this.hitArea = null;
+         this.counter = null;
+         this.lableTF = null;
+         this.timeTF = null;
+         this.statusMC = null;
+         this.bg = null;
+         this.maskMC = null;
+         this.progressIndicator = null;
+         super.onDispose();
+      }
+
       public function setData(param1:HeaderDataVO) : void {
+         if(this.headerData)
+         {
+            this.headerData.dispose();
+         }
          this.headerData = param1;
          invalidateData();
       }
@@ -106,27 +131,6 @@ package net.wg.gui.lobby.questsWindow
             }
             dispatchEvent(new Event(Event.RESIZE));
          }
-      }
-
-      override protected function onDispose() : void {
-         this.progressIndicator.dispose();
-         this.counter.dispose();
-         if(this.headerData)
-         {
-            this.headerData.dispose();
-            this.headerData = null;
-         }
-         this.contentTabs.dispose();
-         this.contentTabs = null;
-         this.hitArea = null;
-         this.counter = null;
-         this.lableTF = null;
-         this.timeTF = null;
-         this.statusMC = null;
-         this.bg = null;
-         this.maskMC = null;
-         this.progressIndicator = null;
-         super.onDispose();
       }
 
       private function setTexts() : void {

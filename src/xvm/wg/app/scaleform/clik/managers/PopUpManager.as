@@ -47,7 +47,6 @@ package scaleform.clik.managers
       public static function show(param1:DisplayObject, param2:Number=0, param3:Number=0, param4:DisplayObjectContainer=null) : void {
          if(!_stage)
          {
-            trace("PopUpManager has not been initialized. Automatic initialization has not occured or has failed; call PopUpManager.init() manually.");
             return;
          }
          var _loc5_:IEventCollector = App.utils.events;
@@ -74,7 +73,6 @@ package scaleform.clik.managers
       public static function showModal(param1:Sprite, param2:Number=0, param3:Number=0, param4:Sprite=null, param5:uint=0, param6:Sprite=null) : void {
          if(!_stage)
          {
-            trace("PopUpManager has not been initialized. Automatic initialization has not occured or has failed; call PopUpManager.init() manually.");
             return;
          }
          if(_modalMc)

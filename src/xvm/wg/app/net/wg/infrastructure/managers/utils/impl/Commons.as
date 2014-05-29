@@ -28,6 +28,8 @@ package net.wg.infrastructure.managers.utils.impl
    import flash.events.MouseEvent;
    import scaleform.gfx.MouseEventEx;
    import flash.events.IEventDispatcher;
+   import flash.display.InteractiveObject;
+   import flash.text.TextLineMetrics;
 
 
    public class Commons extends Object implements ICommons
@@ -40,6 +42,10 @@ package net.wg.infrastructure.managers.utils.impl
       private static const IMG_TAG_OPEN:String = "<IMG SRC=\"img://gui/maps/icons/library/igr_32x13.png\" width=\"32\" height=\"13\" vspace=\"";
 
       private static const IMG_TAG_CLOSE:String = "\"/>";
+
+      private static const IMG_TAG_OPEN_BASIC:String = "<IMG SRC=\"img://gui/maps/icons/library/basic_small.png\" width=\"26\" height=\"16\" vspace=\"";
+
+      private static const IMG_TAG_OPEN_PREMIUM:String = "<IMG SRC=\"img://gui/maps/icons/library/premium_small.png\" width=\"34\" height=\"16\" vspace=\"";
 
       private static const CLAN_TAG_OPEN:String = "[";
 
@@ -80,6 +86,21 @@ package net.wg.infrastructure.managers.utils.impl
             _loc3_++;
          }
          return _loc2_;
+      }
+
+      public function cleanupDynamicObject(param1:Object) : Object {
+         var _loc3_:* = undefined;
+         var _loc2_:Array = [];
+         for (_loc3_ in param1)
+         {
+            _loc2_.push(_loc3_);
+         }
+         for each (_loc3_ in _loc2_)
+         {
+            delete param1[[_loc3_]];
+         }
+         _loc2_.splice(0,_loc2_.length);
+         return null;
       }
 
       public function releaseReferences(param1:Object, param2:Boolean=true) : void {
@@ -242,7 +263,7 @@ package net.wg.infrastructure.managers.utils.impl
          var _loc4_:Object = _loc3_.size;
          var _loc5_:String = _loc3_.font;
          var _loc6_:String = _loc3_.align;
-         var _loc7_:String = IMG_TAG_OPEN + param2.igrVspace + IMG_TAG_CLOSE;
+         var _loc7_:String = (param2.igrType == 2?IMG_TAG_OPEN_PREMIUM:IMG_TAG_OPEN_BASIC) + param2.igrVspace + IMG_TAG_CLOSE;
          var _loc8_:String = param2.prefix + param2.userName + (param2.clanAbbrev?CLAN_TAG_OPEN + param2.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
          var _loc9_:* = false;
          this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);
@@ -275,7 +296,7 @@ package net.wg.infrastructure.managers.utils.impl
       }
 
       public function getFullPlayerName(param1:IUserProps) : String {
-         var _loc2_:String = IMG_TAG_OPEN + param1.igrVspace + IMG_TAG_CLOSE;
+         var _loc2_:String = (param1.igrType == 2?IMG_TAG_OPEN_PREMIUM:IMG_TAG_OPEN_BASIC) + param1.igrVspace + IMG_TAG_CLOSE;
          return param1.prefix + param1.userName + (param1.clanAbbrev?CLAN_TAG_OPEN + param1.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param1.region?Values.SPACE_STR + param1.region:Values.EMPTY_STR) + (param1.igrType > 0?Values.SPACE_STR + _loc2_:Values.EMPTY_STR) + param1.suffix;
       }
 
@@ -325,6 +346,42 @@ package net.wg.infrastructure.managers.utils.impl
          {
             _loc4_.removeEventListener(param2,param3);
          }
+      }
+
+      public function initTabIndex(param1:Array) : void {
+         var _loc2_:Number = 0;
+         while(_loc2_ < param1.length)
+         {
+            InteractiveObject(param1[_loc2_]).tabIndex = _loc2_ + 1;
+            _loc2_++;
+         }
+      }
+
+      public function moveIconToEndOfText(param1:DisplayObject, param2:TextField, param3:int=0, param4:int=0) : void {
+         var _loc11_:TextLineMetrics = null;
+         var _loc5_:* = 2;
+         var _loc6_:int = param2.numLines;
+         var _loc7_:* = -1;
+         var _loc8_:int = _loc6_-1;
+         while(_loc8_ >= 0)
+         {
+            if(param2.getLineText(_loc8_))
+            {
+               _loc7_ = _loc8_;
+               break;
+            }
+            _loc8_--;
+         }
+         var _loc9_:int = Math.round(param2.x + param3);
+         var _loc10_:int = Math.round(param2.y + param4);
+         if(_loc7_ > -1)
+         {
+            _loc11_ = param2.getLineMetrics(_loc7_);
+            _loc9_ = Math.round(param2.x + _loc11_.x + _loc11_.width + param3);
+            _loc10_ = Math.round(param2.y + param2.textHeight + _loc5_ - (_loc11_.height - _loc11_.leading) / 2 - param1.height / 2 + param4);
+         }
+         param1.x = _loc9_;
+         param1.y = _loc10_;
       }
    }
 

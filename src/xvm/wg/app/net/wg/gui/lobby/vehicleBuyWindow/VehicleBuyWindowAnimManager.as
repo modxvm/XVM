@@ -4,6 +4,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
    import net.wg.gui.utils.ExcludeTweenManager;
    import flash.display.MovieClip;
    import net.wg.infrastructure.interfaces.IWindow;
+   import flash.display.DisplayObject;
    import scaleform.clik.motion.Tween;
    import fl.transitions.easing.Strong;
 
@@ -38,7 +39,9 @@ package net.wg.gui.lobby.vehicleBuyWindow
 
       private var initialized:Boolean;
 
-      private var margin:uint = 4;
+      private var margin:uint = 0;
+
+      private var windowClosedHeightMargin:uint = 2;
 
       private var excludeTween:ExcludeTweenManager;
 
@@ -89,7 +92,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          this.darkBackgroundOpenHeight = this.animTarget.backgroundMc.height;
          this.darkBackgroundCloseHeight = this.footerClosedY + _loc1_.submitBtn.y - this.margin;
          this.windowOpenedHeight = _loc2_.getBackground().height;
-         this.windowClosedHeight = this.footerClosedY + _loc1_.height + _loc2_.sourceView.y + (_loc2_.getBackground().height - _loc2_.sourceView.y - _loc2_.sourceView.height);
+         this.windowClosedHeight = this.footerClosedY + _loc1_.height + _loc2_.sourceView.y + (_loc2_.getBackground().height - _loc2_.sourceView.y - _loc2_.sourceView.height) + this.windowClosedHeightMargin;
          this.maskCloseHeight = 1;
          this.maskOpenHeight = this.animTarget.bodyMaskMc.height;
          this.excludeTween = new ExcludeTweenManager();
@@ -123,7 +126,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          }
       }
 
-      private function tweenToHeight(param1:MovieClip, param2:Number, param3:Boolean) : void {
+      private function tweenToHeight(param1:DisplayObject, param2:Number, param3:Boolean) : void {
          var _loc4_:Object = null;
          if(param3)
          {

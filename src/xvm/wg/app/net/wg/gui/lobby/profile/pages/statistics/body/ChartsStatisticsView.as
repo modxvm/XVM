@@ -26,12 +26,9 @@ package net.wg.gui.lobby.profile.pages.statistics.body
       }
 
       public function update(param1:Object) : void {
-         var _loc3_:StatisticsChartsTabDataVO = null;
-         var _loc2_:* = 1;
-         if((param1) && param1.length > _loc2_)
+         if(param1  is  StatisticsChartsTabDataVO)
          {
-            _loc3_ = StatisticsChartsTabDataVO(param1[_loc2_]);
-            this.group.setDossierData(_loc3_.chartsData);
+            this.group.setDossierData(StatisticsChartsTabDataVO(param1).chartsData);
          }
       }
 

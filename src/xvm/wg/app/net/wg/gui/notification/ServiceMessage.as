@@ -7,7 +7,7 @@ package net.wg.gui.notification
    import flash.text.TextField;
    import net.wg.gui.notification.vo.NotificationInfoVO;
    import net.wg.gui.components.common.containers.Group;
-   import flash.text.StyleSheet;
+   import net.wg.gui.utils.TextFieldStyleSheet;
    import flash.text.TextFieldAutoSize;
    import flash.events.TextEvent;
    import flash.events.MouseEvent;
@@ -41,10 +41,6 @@ package net.wg.gui.notification
 
       private static const TIMESTAMP_INVALID:String = "tsInv";
 
-      private static const LINK_COLOR_NORMAL:String = "#8C8C7E";
-
-      private static const LINK_COLOR_HOVER:String = "#FF0000";
-
       private static var allowBgFill:Array;
 
       public var background:MovieClip;
@@ -76,20 +72,7 @@ package net.wg.gui.notification
       override protected function configUI() : void {
          super.configUI();
          _focusable = tabEnabled = false;
-         var _loc1_:StyleSheet = new StyleSheet();
-         _loc1_.setStyle("a:link",
-            {
-               "color":LINK_COLOR_NORMAL,
-               "textDecoration":"underline"
-            }
-         );
-         _loc1_.setStyle("a:hover",
-            {
-               "color":LINK_COLOR_HOVER,
-               "textDecoration":"underline"
-            }
-         );
-         this.textField.styleSheet = _loc1_;
+         TextFieldStyleSheet.setLinkStyle(this.textField);
          this.textField.htmlText = "A long time ago, in a galaxy far, far away..." + "It is a period of civil war. Rebel spaceships, striking from a hidden base, " + "have won their first victory against the evil Galactic Empire.";
          this.textField.autoSize = TextFieldAutoSize.LEFT;
          this.textField.multiline = true;

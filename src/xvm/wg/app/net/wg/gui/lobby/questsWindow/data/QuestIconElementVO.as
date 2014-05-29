@@ -18,7 +18,22 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _dataType:String = "";
 
-      private var _dataValue:String = "";
+      private var _dataName:String = "";
+
+      private var _dataBlock:String = "";
+
+      override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+         if(param1 == "dataValue")
+         {
+            if(param2  is  Array)
+            {
+               this.dataBlock = param2[0];
+               this.dataName = param2[1];
+            }
+            return false;
+         }
+         return true;
+      }
 
       public function get label() : String {
          return this._label;
@@ -44,20 +59,28 @@ package net.wg.gui.lobby.questsWindow.data
          this._linkage = param1;
       }
 
-      public function get dataValue() : String {
-         return this._dataValue;
-      }
-
-      public function set dataValue(param1:String) : void {
-         this._dataValue = param1;
-      }
-
       public function get dataType() : String {
          return this._dataType;
       }
 
       public function set dataType(param1:String) : void {
          this._dataType = param1;
+      }
+
+      public function get dataName() : String {
+         return this._dataName;
+      }
+
+      public function set dataName(param1:String) : void {
+         this._dataName = param1;
+      }
+
+      public function get dataBlock() : String {
+         return this._dataBlock;
+      }
+
+      public function set dataBlock(param1:String) : void {
+         this._dataBlock = param1;
       }
    }
 

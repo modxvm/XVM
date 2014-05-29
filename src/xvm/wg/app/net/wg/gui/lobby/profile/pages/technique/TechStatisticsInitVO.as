@@ -1,9 +1,9 @@
 package net.wg.gui.lobby.profile.pages.technique
 {
-   import net.wg.data.daapi.base.DAAPIDataClass;
+   import net.wg.gui.lobby.profile.data.ProfileBattleTypeInitVO;
 
 
-   public class TechStatisticsInitVO extends DAAPIDataClass
+   public class TechStatisticsInitVO extends ProfileBattleTypeInitVO
    {
           
       public function TechStatisticsInitVO(param1:Object) {

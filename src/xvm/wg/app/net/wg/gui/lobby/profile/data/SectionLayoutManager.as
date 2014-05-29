@@ -76,6 +76,7 @@ package net.wg.gui.lobby.profile.data
          {
             this.store.splice(this.store.length-1,1);
          }
+         this.store = null;
       }
    }
 

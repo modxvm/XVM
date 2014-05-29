@@ -12,7 +12,9 @@ package net.wg.infrastructure.interfaces
 
       function setSize(param1:Number, param2:Number) : void;
 
-      function get inInventory() : Boolean;
+      function get toInventory() : Boolean;
+
+      function get fromInventory() : Boolean;
 
       function get isRemovable() : Boolean;
 
@@ -20,9 +22,11 @@ package net.wg.infrastructure.interfaces
 
       function get type() : String;
 
-      function get dataInfo() : Object;
+      function get intCD() : Number;
 
-      function get itemInInventory() : Boolean;
+      function get count() : Number;
+
+      function get sellExternalData() : Array;
    }
 
 }

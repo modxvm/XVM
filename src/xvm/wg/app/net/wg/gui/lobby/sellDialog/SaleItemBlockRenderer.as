@@ -9,14 +9,15 @@ package net.wg.gui.lobby.sellDialog
    import net.wg.gui.components.controls.ActionPrice;
    import scaleform.clik.controls.Button;
    import flash.display.MovieClip;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ListEvent;
    import net.wg.data.VO.SellDialogElement;
    import scaleform.clik.data.DataProvider;
-   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.Currencies;
    import net.wg.data.constants.FittingTypes;
+   import net.wg.data.constants.Values;
    import net.wg.data.managers.impl.TooltipProps;
    import net.wg.data.constants.Tooltips;
    import net.wg.gui.events.VehicleSellDialogEvent;
@@ -45,11 +46,11 @@ package net.wg.gui.lobby.sellDialog
 
       public var itemUnderline:MovieClip;
 
-      private var _inInventory:Boolean;
-
       private var _type:String;
 
-      private var _itemInInventory:Boolean;
+      private var _toInventory:Boolean;
+
+      private var _fromInventory:Boolean;
 
       private var _id:String;
 
@@ -57,17 +58,19 @@ package net.wg.gui.lobby.sellDialog
 
       private var _moneyValue:Number = 0;
 
-      private var _defMoneyValue:Number = 0;
+      private var _intCD:Number = -1;
 
-      private var _dataInfo:Object = null;
+      private var _count:Number = 1;
+
+      public var _kind:String = "";
 
       private var _removePrice:Number = 0;
 
-      private var _defRemovePrice:Number = 0;
+      private var _actionPriceDataVo:ActionPriceVO = null;
 
-      private var _actionPrc:Number = 0;
+      private var _actionPriceRemoveVo:ActionPriceVO = null;
 
-      private var _removeActionPrc:Number = 0;
+      private var _sellExternalData:Array = null;
 
       override protected function onDispose() : void {
          super.onDispose();
@@ -92,10 +95,6 @@ package net.wg.gui.lobby.sellDialog
          this.tfShort = null;
          this.money.dispose();
          this.money = null;
-         if(this._dataInfo)
-         {
-            this._dataInfo = null;
-         }
          this.actionPrice.dispose();
          this.actionPrice = null;
       }
@@ -103,18 +102,19 @@ package net.wg.gui.lobby.sellDialog
       override public function setData(param1:Object) : void {
          this.data = param1;
          var _loc2_:SellDialogElement = SellDialogElement(param1);
-         this._inInventory = _loc2_.inInventory;
+         this._toInventory = _loc2_.toInventory;
+         this._fromInventory = _loc2_.fromInventory;
          this._isRemovable = _loc2_.isRemovable;
          this._moneyValue = _loc2_.moneyValue;
-         this._defMoneyValue = _loc2_.defMoneyValue;
-         this._dataInfo = _loc2_.data;
+         this._intCD = _loc2_.intCD;
+         this._count = _loc2_.count;
+         this._kind = _loc2_.kind;
          this._type = _loc2_.type;
          this._id = _loc2_.id;
          this._removePrice = _loc2_.removePrice;
-         this._defRemovePrice = _loc2_.defRemovePrice;
-         this._actionPrc = _loc2_.actionPrc;
-         this._removeActionPrc = _loc2_.removeActionPrc;
-         this._itemInInventory = _loc2_.itemInInventory;
+         this._actionPriceRemoveVo = _loc2_.removeActionPriceVo;
+         this._actionPriceDataVo = _loc2_.sellActionPriceVo;
+         this._sellExternalData = _loc2_.sellExternalData;
          invalidateData();
       }
 
@@ -132,8 +132,12 @@ package net.wg.gui.lobby.sellDialog
          this.itemUnderline.visible = false;
       }
 
-      public function get inInventory() : Boolean {
-         return this._inInventory;
+      public function get toInventory() : Boolean {
+         return this._toInventory;
+      }
+
+      public function get fromInventory() : Boolean {
+         return this._fromInventory;
       }
 
       public function get isRemovable() : Boolean {
@@ -144,20 +148,20 @@ package net.wg.gui.lobby.sellDialog
          return this._moneyValue;
       }
 
-      public function get defMoneyValue() : Number {
-         return this._defMoneyValue;
-      }
-
       public function get type() : String {
          return this._type;
       }
 
-      public function get itemInInventory() : Boolean {
-         return this._itemInInventory;
+      public function get intCD() : Number {
+         return this._intCD;
       }
 
-      public function get dataInfo() : Object {
-         return this._dataInfo;
+      public function get count() : Number {
+         return this._count;
+      }
+
+      public function get sellExternalData() : Array {
+         return this._sellExternalData;
       }
 
       override protected function configUI() : void {
@@ -185,13 +189,12 @@ package net.wg.gui.lobby.sellDialog
       }
 
       override protected function draw() : void {
-         var _loc1_:ActionPriceVO = null;
-         var _loc2_:String = null;
+         var _loc1_:String = null;
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (data))
          {
             this.ddm.addEventListener(ListEvent.INDEX_CHANGE,this.onChangeHandler);
-            if(this.inInventory)
+            if(this.toInventory)
             {
                this.ddm.selectedIndex = 1;
             }
@@ -209,8 +212,13 @@ package net.wg.gui.lobby.sellDialog
                   this.alertIcon.visible = true;
                   if(this._removePrice != 0)
                   {
-                     _loc1_ = new ActionPriceVO(this._removeActionPrc,this._removePrice,this._defRemovePrice,Currencies.GOLD,true,this._type,"-");
-                     this.actionPrice.setData(_loc1_);
+                     if(this._actionPriceRemoveVo)
+                     {
+                        this._actionPriceRemoveVo.useSign = true;
+                        this._actionPriceRemoveVo.externalSign = "-";
+                        this._actionPriceRemoveVo.forCredits = false;
+                     }
+                     this.actionPrice.setData(this._actionPriceRemoveVo);
                   }
                   else
                   {
@@ -232,18 +240,23 @@ package net.wg.gui.lobby.sellDialog
                this.money.text = this.getSign(this._moneyValue,Currencies.CREDITS);
                this.money.textColor = 13556185;
                this.money.icon = Currencies.CREDITS;
-               _loc1_ = new ActionPriceVO(this._actionPrc,this._moneyValue,this._defMoneyValue,Currencies.CREDITS,true,this._type);
-               this.actionPrice.setData(_loc1_);
+               if(this._actionPriceDataVo)
+               {
+                  this._actionPriceDataVo.useSign = true;
+                  this._actionPriceDataVo.forCredits = true;
+                  this._actionPriceDataVo.newPrice = this.moneyValue;
+               }
+               this.actionPrice.setData(this._actionPriceDataVo);
             }
             this.money.visible = !this.actionPrice.visible;
          }
          if(this._type == FittingTypes.SHELL)
          {
-            if(this._dataInfo.hasOwnProperty("kind"))
+            if(this._kind != Values.EMPTY_STR)
             {
-               _loc2_ = App.utils.locale.makeString(ITEM_TYPES.shell_kindsabbreviation(this._dataInfo.kind));
-               this.tfShort.label = _loc2_ + " " + this._id;
-               this.tfShort.altToolTip = App.utils.locale.makeString(ITEM_TYPES.shell_kinds(this._dataInfo.kind)) + " " + data.id;
+               _loc1_ = App.utils.locale.makeString(ITEM_TYPES.shell_kindsabbreviation(this._kind));
+               this.tfShort.label = _loc1_ + " " + this._id;
+               this.tfShort.altToolTip = App.utils.locale.makeString(ITEM_TYPES.shell_kinds(this._kind)) + " " + data.id;
             }
          }
          else
@@ -275,10 +288,9 @@ package net.wg.gui.lobby.sellDialog
       }
 
       private function onChangeHandler(param1:ListEvent) : void {
-         var _loc2_:ActionPriceVO = null;
          if(param1.index == 1)
          {
-            this._inInventory = true;
+            this._toInventory = true;
             if(!this.isRemovable)
             {
                this.money.text = this.getSign(-this._removePrice,Currencies.GOLD);
@@ -287,8 +299,13 @@ package net.wg.gui.lobby.sellDialog
                this.alertIcon.visible = true;
                if(this._removePrice != 0)
                {
-                  _loc2_ = new ActionPriceVO(this._removeActionPrc,this._removePrice,this._defRemovePrice,Currencies.GOLD,true,this._type,"-");
-                  this.actionPrice.setData(_loc2_);
+                  if(this._actionPriceRemoveVo)
+                  {
+                     this._actionPriceRemoveVo.useSign = true;
+                     this._actionPriceRemoveVo.externalSign = "-";
+                     this._actionPriceRemoveVo.forCredits = false;
+                  }
+                  this.actionPrice.setData(this._actionPriceRemoveVo);
                }
                else
                {
@@ -307,12 +324,17 @@ package net.wg.gui.lobby.sellDialog
          else
          {
             this.alertIcon.visible = false;
-            this._inInventory = false;
+            this._toInventory = false;
             this.money.text = this.getSign(this.moneyValue,Currencies.CREDITS);
             this.money.icon = Currencies.CREDITS;
             this.money.textColor = 13556185;
-            _loc2_ = new ActionPriceVO(this._actionPrc,this.moneyValue,this.defMoneyValue,Currencies.CREDITS,true,this._type);
-            this.actionPrice.setData(_loc2_);
+            if(this._actionPriceDataVo)
+            {
+               this._actionPriceDataVo.useSign = true;
+               this._actionPriceDataVo.forCredits = true;
+               this._actionPriceDataVo.newPrice = this.moneyValue;
+            }
+            this.actionPrice.setData(this._actionPriceDataVo);
          }
          this.money.visible = !this.actionPrice.visible;
          dispatchEvent(new VehicleSellDialogEvent(VehicleSellDialogEvent.UPDATE_RESULT));

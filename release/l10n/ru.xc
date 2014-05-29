@@ -117,8 +117,7 @@
     "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>\n{{l10n:token/notify_xvm_site}}",
     "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>\n{{l10n:token/notify_xvm_site}}",
     "token/active": "Статус:<tab><font color='#00FF00'>Активен</font>",
-    "token/days_left": "Осталось дней:<tab/><font color='#eeeeee'>{0}</font>",
-    "token/hours_left": "Осталось часов:<tab/><font color='#ffff00'>{0}</font>",
+    "token/time_left": "Осталось:<tab/><font color='#eeeeee'>{0}д. {1}ч. {2}м.</font>",
     "token/cnt": "Количество запросов:<tab/><font color='#eeeeee'>{0}</font>",
     "token/unknown_status": "Неизвестный статус",
     "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете."

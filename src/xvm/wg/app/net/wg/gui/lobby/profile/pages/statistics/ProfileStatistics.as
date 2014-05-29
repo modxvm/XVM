@@ -7,6 +7,7 @@ package net.wg.gui.lobby.profile.pages.statistics
    import net.wg.gui.lobby.profile.pages.statistics.body.BodyContainer;
    import flash.display.MovieClip;
    import net.wg.gui.lobby.profile.ProfileConstants;
+   import net.wg.gui.lobby.profile.data.ProfileBattleTypeInitVO;
 
 
    public class ProfileStatistics extends ProfileStatisticsMeta implements IProfileStatisticsMeta
@@ -28,10 +29,6 @@ package net.wg.gui.lobby.profile.pages.statistics
          layoutManager.registerComponents(this.headerContainer);
       }
 
-      override protected function configUI() : void {
-         super.configUI();
-      }
-
       override protected function applyResizing() : void {
          super.applyResizing();
          var _loc1_:* = 100;
@@ -44,7 +41,8 @@ package net.wg.gui.lobby.profile.pages.statistics
       }
 
       override public function as_setInitData(param1:Object) : void {
-          
+         var _loc2_:ProfileBattleTypeInitVO = new ProfileBattleTypeInitVO(param1);
+         battlesDropdown.menuProvider = _loc2_.dropDownProvider;
       }
 
       override protected function applyData(param1:Object) : Object {

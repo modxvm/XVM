@@ -3,7 +3,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
    import scaleform.clik.core.UIComponent;
    import flash.text.TextField;
    import net.wg.gui.components.common.containers.GroupEx;
-   import net.wg.gui.components.common.containers.VerticalGroupLayout;
+   import net.wg.gui.components.common.containers.Vertical100PercWidthLayout;
    import flash.events.Event;
    import scaleform.clik.constants.InvalidationType;
 
@@ -26,12 +26,12 @@ package net.wg.gui.lobby.profile.pages.statistics.body
       private var _itemRendererClass:Class;
 
       override protected function configUI() : void {
-         var _loc1_:VerticalGroupLayout = null;
+         var _loc1_:Vertical100PercWidthLayout = null;
          super.configUI();
          if(!this.group)
          {
             this.group = new GroupEx();
-            _loc1_ = new VerticalGroupLayout();
+            _loc1_ = new Vertical100PercWidthLayout();
             _loc1_.gap = -5;
             this.group.layout = _loc1_;
             this.group.y = Math.round(this.label.y + this.label.height + 5);
@@ -56,6 +56,10 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             this.group.dataProvider = this._data.itemsList;
             this.group.validateNow();
          }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            this.group.width = _width;
+         }
       }
 
       public function set data(param1:DetailedStatisticsUnitVO) : void {
@@ -71,8 +75,13 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          }
       }
 
+      override public function set width(param1:Number) : void {
+         super.width = param1;
+         this.group.width = param1;
+         this.group.invalidateLayout();
+      }
+
       override public function get height() : Number {
-         DebugUtils.LOG_DEBUG(actualHeight,this.group.height,this.group.numChildren);
          return actualHeight;
       }
 

@@ -15,7 +15,6 @@ package net.wg.gui.login.impl
    import net.wg.data.constants.Linkages;
    import net.wg.data.constants.Values;
    import scaleform.clik.data.DataProvider;
-   import flash.text.StyleSheet;
    import net.wg.data.constants.SoundTypes;
    import scaleform.clik.constants.InputValue;
 
@@ -252,32 +251,13 @@ package net.wg.gui.login.impl
 
       override protected function configUI() : void {
          super.configUI();
-         var _loc1_:StyleSheet = new StyleSheet();
-         _loc1_.setStyle("a:link",
-            {
-               "color":"#969687",
-               "textDecoration":"underline"
-            }
-         );
-         _loc1_.setStyle("a:hover",
-            {
-               "color":"#FF0000",
-               "textDecoration":"underline"
-            }
-         );
-         _loc1_.setStyle("a:active",
-            {
-               "color":"#FF0000",
-               "textDecoration":"underline"
-            }
-         );
-         this._message.styleSheet = _loc1_;
+         this._message.styleSheet = App.utils.styleSheetManager.getRedHyperlinkCSS();
          this.server.menuWidth = App.globalVarsMgr.isDevelopmentS()?DEBUG_SERVER_LIST_SIZE:-1;
          this._submit.enabled = false;
          this._submit.soundType = SoundTypes.RED_BTN;
          this.capsLockIndicator.visible = false;
          this.capsLockIndicator.alpha = 1;
-         LoginUtils.instance.initTabIndex([this._login.textField,this._pass.textField,this._submit,this._registerLink,this._recoveryLink,this._rememberPwdCheckbox,this.server]);
+         App.utils.commons.initTabIndex([this._login.textField,this._pass.textField,this._submit,this._registerLink,this._recoveryLink,this._rememberPwdCheckbox,this.server]);
          addEventListener(InputEvent.INPUT,this.handleInput);
       }
 

@@ -40,6 +40,10 @@ package net.wg.data.VO
       public function set isPlayerSpeaking(param1:Boolean) : void {
          this._isPlayerSpeaking = param1;
       }
+
+      public function getToolTip() : String {
+         return fullName;
+      }
    }
 
 }

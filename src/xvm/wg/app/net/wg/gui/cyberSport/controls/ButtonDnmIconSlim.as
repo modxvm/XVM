@@ -1,5 +1,6 @@
 package net.wg.gui.cyberSport.controls
 {
+   import net.wg.gui.components.advanced.ButtonDnmIcon;
    import flash.display.MovieClip;
    import flash.events.Event;
 

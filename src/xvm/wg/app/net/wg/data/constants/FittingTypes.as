@@ -13,6 +13,8 @@ package net.wg.data.constants
 
       public static const EQUIPMENT:String = "equipment";
 
+      public static const ORDER:String = "order";
+
       public static const SHELL:String = "shell";
 
       public static const VEHICLE:String = "vehicle";

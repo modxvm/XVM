@@ -65,6 +65,8 @@ package
 
       public static const WINDOW_VEHICLESELECTOR_FILTERS_ALL:String = "#cyberSport:window/vehicleSelector/filters/all";
 
+      public static const WINDOW_VEHICLESELECTOR_FILTERS_MATCHES:String = "#cyberSport:window/vehicleSelector/filters/matches";
+
       public static const WINDOW_VEHICLESELECTOR_FILTERS_LEVEL:String = "#cyberSport:window/vehicleSelector/filters/level";
 
       public static const WINDOW_VEHICLESELECTOR_FILTERS_ALLLEVELS:String = "#cyberSport:window/vehicleSelector/filters/allLevels";
@@ -99,6 +101,12 @@ package
 
       public static const WINDOW_ROSTERSLOTSETTINGS_VEHICLETAB_CANCELBTN:String = "#cyberSport:window/rosterSlotSettings/vehicleTab/cancelBtn";
 
+      public static const WINDOW_UNIT_UNITNAME:String = "#cyberSport:window/unit/unitName";
+
+      public static const WINDOW_UNIT_DESCRIPTION:String = "#cyberSport:window/unit/description";
+
+      public static const WINDOW_UNIT_LEAVE:String = "#cyberSport:window/unit/leave";
+
       public static const WINDOW_UNIT_AUTORECRUIT:String = "#cyberSport:window/unit/autoRecruit";
 
       public static const WINDOW_UNIT_INVITEFRIEND:String = "#cyberSport:window/unit/inviteFriend";
@@ -120,6 +128,8 @@ package
       public static const WINDOW_UNIT_TEAMMEMBERS:String = "#cyberSport:window/unit/teamMembers";
 
       public static const WINDOW_UNIT_TEAMVEHICLES:String = "#cyberSport:window/unit/teamVehicles";
+
+      public static const WINDOW_UNIT_TEAMVEHICLESSTUB:String = "#cyberSport:window/unit/teamVehiclesStub";
 
       public static const WINDOW_UNIT_CHAT:String = "#cyberSport:window/unit/chat";
 
@@ -155,15 +165,27 @@ package
 
       public static const WINDOW_UNIT_MESSAGE_LEVELERROR:String = "#cyberSport:window/unit/message/levelError";
 
-      public static const WINDOW_UNIT_MESSAGE_OPENSLOTS_LEVELERROR:String = "#cyberSport:window/unit/message/openSlots/levelError";
-
       public static const WINDOW_UNIT_READY:String = "#cyberSport:window/unit/ready";
 
       public static const WINDOW_UNIT_NOTREADY:String = "#cyberSport:window/unit/notReady";
 
       public static const WINDOW_UNIT_FIGHT:String = "#cyberSport:window/unit/fight";
 
+      public static const WINDOW_UNIT_LOCKSLOT:String = "#cyberSport:window/unit/lockSlot";
+
+      public static const WINDOW_UNIT_UNLOCKSLOT:String = "#cyberSport:window/unit/unlockSlot";
+
+      public static const WINDOW_UNIT_DESCRIPTIONDEFAULT:String = "#cyberSport:window/unit/descriptionDefault";
+
+      public static const WINDOW_UNITLISTVIEW_TITLE:String = "#cyberSport:window/unitListView/title";
+
+      public static const WINDOW_UNITLISTVIEW_DESCRIPTION:String = "#cyberSport:window/unitListView/description";
+
       public static const WINDOW_UNITLISTVIEW_FOUNDTEAMS:String = "#cyberSport:window/unitListView/foundTeams";
+
+      public static const WINDOW_UNITLISTVIEW_FOUNDTEAMSDESCRIPTION:String = "#cyberSport:window/unitListView/foundTeamsDescription";
+
+      public static const WINDOW_UNITLISTVIEW_CREATE_BTN:String = "#cyberSport:window/unitListView/create/btn";
 
       public static const WINDOW_UNITLISTVIEW_REFRESHLIST:String = "#cyberSport:window/unitListView/refreshList";
 
@@ -188,6 +210,20 @@ package
       public static const WINDOW_UNITLISTVIEW_RENDERER_NEXT:String = "#cyberSport:window/unitListView/renderer/next";
 
       public static const WINDOW_UNITLISTVIEW_NOUNITSELECTED:String = "#cyberSport:window/unitListView/noUnitSelected";
+
+      public static const WINDOW_UNIT_UNITLISTVIEW_PAGINATIONUP:String = "#cyberSport:window/unit/unitListView/paginationUp";
+
+      public static const WINDOW_UNIT_UNITLISTVIEW_PAGINATIONDOWN:String = "#cyberSport:window/unit/unitListView/paginationDown";
+
+      public static const WINDOW_UNIT_UNITLISTVIEW_PAGINATIONINFO:String = "#cyberSport:window/unit/unitListView/paginationInfo";
+
+      public static const WINDOW_UNIT_UNITLISTVIEW_RATING:String = "#cyberSport:window/unit/unitListView/rating";
+
+      public static const WINDOW_UNIT_UNITLISTVIEW_COMMANDER:String = "#cyberSport:window/unit/unitListView/commander";
+
+      public static const WINDOW_UNIT_UNITLISTVIEW_DESCRIPTION:String = "#cyberSport:window/unit/unitListView/description";
+
+      public static const WINDOW_UNIT_UNITLISTVIEW_PLAYERS:String = "#cyberSport:window/unit/unitListView/players";
 
       public static const WINDOW_UNIT_SLOT_EMPTYSLOT:String = "#cyberSport:window/unit/slot/emptySlot";
 
@@ -232,6 +268,8 @@ package
       public static const WINDOW_AUTOSEARCH_ERRORSTATE_SUBMITLLBL:String = "#cyberSport:window/autoSearch/errorState/submitlLbl";
 
       public static const WINDOW_AUTOSEARCH_ERRORSTATE_CANCELLBL:String = "#cyberSport:window/autoSearch/errorState/cancelLbl";
+
+      public static const WINDOW_BACKBTNLBL:String = "#cyberSport:window/backBtnLbl";
    }
 
 }

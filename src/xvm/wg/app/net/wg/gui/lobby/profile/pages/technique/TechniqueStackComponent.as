@@ -8,6 +8,7 @@ package net.wg.gui.lobby.profile.pages.technique
    import net.wg.gui.lobby.profile.components.ResizableViewStack;
    import scaleform.clik.data.DataProvider;
    import flash.geom.Rectangle;
+   import scaleform.clik.controls.Button;
 
 
    public class TechniqueStackComponent extends UIComponent
@@ -87,6 +88,18 @@ package net.wg.gui.lobby.profile.pages.technique
 
       public function updateTankData(param1:Object) : void {
          this.viewStack.updateData(param1);
+      }
+
+      public function enableAwardsButton(param1:Boolean) : void {
+         if(!param1)
+         {
+            this.buttonBar.selectedIndex = 0;
+         }
+         var _loc2_:Button = this.buttonBar.getButtonAt(1);
+         if(_loc2_)
+         {
+            _loc2_.enabled = param1;
+         }
       }
    }
 

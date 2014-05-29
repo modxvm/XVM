@@ -38,11 +38,36 @@ package org.idmedia.as3commons.util
       }
 
       public static function trim(param1:String) : String {
+         var _loc3_:String = null;
+         var _loc4_:* = 0;
          if(param1 == null)
          {
             return null;
          }
-         return param1.replace(new RegExp("^\\s*"),EMPTY).replace(new RegExp("\\s*$"),EMPTY);
+         var _loc2_:Array = param1.split(" ");
+         _loc4_ = 0;
+         while(_loc4_ < _loc2_.length)
+         {
+            _loc3_ = _loc2_[_loc4_];
+            if(_loc3_ != EMPTY)
+            {
+               _loc2_.splice(0,_loc4_);
+               break;
+            }
+            _loc4_++;
+         }
+         _loc4_ = _loc2_.length-1;
+         while(_loc4_ >= 0)
+         {
+            _loc3_ = _loc2_[_loc4_];
+            if(_loc3_ != EMPTY)
+            {
+               _loc2_.splice(_loc4_ + 1,_loc2_.length - _loc4_);
+               break;
+            }
+            _loc4_--;
+         }
+         return _loc2_.join(" ");
       }
 
       public static function deleteSpaces(param1:String) : String {

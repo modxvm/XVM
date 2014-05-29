@@ -1,5 +1,5 @@
---- orig\VehicleMarkersManager.xml	2014-03-22 17:33:02.089606900 +0400
-+++ VehicleMarkersManager.xml	2014-03-22 17:33:03.013659800 +0400
+--- orig\VehicleMarkersManager.xml	2014-05-29 23:19:10.406097900 +0300
++++ VehicleMarkersManager.xml	2014-05-29 23:19:10.820121500 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -526,21 +526,21 @@
 +          <data>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</data>
          </data>
        </DefineBitsLossless2>
-@@ -88048,5 +88051,5 @@
+@@ -88088,5 +88091,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.VehicleMarkerEnemy"/>
 +              <StackString value="wot.wrapper.VehicleMarkersManager.ingame.VehicleMarkerEnemy"/>
              </items>
            </PushData>
-@@ -88074,5 +88077,5 @@
+@@ -88114,5 +88117,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.VehicleMarkerAlly"/>
 +              <StackString value="wot.wrapper.VehicleMarkersManager.ingame.VehicleMarkerAlly"/>
              </items>
            </PushData>
-@@ -88126,5 +88129,5 @@
+@@ -88166,5 +88169,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.VehicleMarkersCanvas"/>

@@ -25,9 +25,12 @@ package net.wg.infrastructure.base
 
       override protected function draw() : void {
          super.draw();
-         if((isInvalid(LAYOUT_INVALID)) && (this._layout) && (this._content))
+         if(isInvalid(LAYOUT_INVALID))
          {
-            this.invokeLayout();
+            if((this._layout) && (this._content))
+            {
+               this.invokeLayout();
+            }
          }
       }
 
@@ -66,6 +69,10 @@ package net.wg.infrastructure.base
       public function set layout(param1:IBaseLayout) : void {
          if(this._layout != param1)
          {
+            if(this._layout)
+            {
+               this._layout.dispose();
+            }
             this._layout = param1;
             if(this._layout)
             {
@@ -80,6 +87,7 @@ package net.wg.infrastructure.base
       }
 
       override protected function onDispose() : void {
+         this._content = null;
          if(this._layout)
          {
             this._layout.dispose();

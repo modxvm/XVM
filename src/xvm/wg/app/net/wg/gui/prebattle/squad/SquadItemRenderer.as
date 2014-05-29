@@ -5,10 +5,10 @@ package net.wg.gui.prebattle.squad
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.VoiceWave;
    import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
-   import net.wg.data.constants.Values;
    import flash.text.TextFormat;
    import net.wg.infrastructure.events.VoiceChatEvent;
    import scaleform.clik.utils.Constraints;
+   import net.wg.data.constants.Values;
    import net.wg.gui.prebattle.constants.PrebattleStateString;
    import flash.events.MouseEvent;
 
@@ -33,11 +33,9 @@ package net.wg.gui.prebattle.squad
 
       protected var statusString:String = null;
 
-      private var currentDbID:Number = -1;
+      protected var playerNameStr:String = "";
 
-      public function get model() : PlayerPrbInfoVO {
-         return data as PlayerPrbInfoVO;
-      }
+      private var currentDbID:Number = -1;
 
       override public function setData(param1:Object) : void {
          if(param1 == null)
@@ -59,25 +57,19 @@ package net.wg.gui.prebattle.squad
          invalidate(UPDATE_STATUS);
       }
 
-      protected var playerNameStr:String = "";
+      public function onPlayerSpeak(param1:Number, param2:Boolean) : void {
+         if((this.model) && param1 == this.model.dbID)
+         {
+            if((data) && (this.model) && this.currentDbID == data.dbID)
+            {
+               this.model.isPlayerSpeaking = param2;
+            }
+            this.setSpeakers(param2);
+         }
+      }
 
-      protected function updatePlayerName() : void {
-         if((this.model) && !(this.model.dbID == -1))
-         {
-            App.utils.commons.formatPlayerName(textField,App.utils.commons.getUserProps(this.model.userName,this.model.clanAbbrev,this.model.region,this.model.igrType));
-         }
-         else
-         {
-            if(this.model)
-            {
-               textField.text = this.model.fullName;
-            }
-            else
-            {
-               textField.text = Values.EMPTY_STR;
-            }
-         }
-         this.playerNameStr = textField.htmlText;
+      public function get model() : PlayerPrbInfoVO {
+         return data as PlayerPrbInfoVO;
       }
 
       override protected function updateText() : void {
@@ -114,6 +106,50 @@ package net.wg.gui.prebattle.squad
          {
             this.afterSetData();
          }
+      }
+
+      override protected function updateAfterStateChange() : void {
+         super.updateAfterStateChange();
+         if(!initialized)
+         {
+            return;
+         }
+         if((this.model) && (!(this.model.vLevel == null)) && !(this.model.vLevel == Values.EMPTY_STR))
+         {
+            this.vehicleLevelField.text = this.model.vLevel;
+         }
+         else
+         {
+            this.vehicleLevelField.text = Values.EMPTY_STR;
+         }
+         this.vehicleNameField.text = (this.model) && (this.model.vShortName)?this.model.vShortName:Values.EMPTY_STR;
+         this.updateVoiceWave();
+         var _loc1_:Number = this.model?this.model.getCurrentColor():Number.NaN;
+         if(!isNaN(_loc1_))
+         {
+            textField.textColor = _loc1_;
+            this.vehicleNameField.textColor = _loc1_;
+            this.vehicleLevelField.textColor = _loc1_;
+         }
+      }
+
+      protected function updatePlayerName() : void {
+         if((this.model) && !(this.model.dbID == -1))
+         {
+            App.utils.commons.formatPlayerName(textField,App.utils.commons.getUserProps(this.model.userName,this.model.clanAbbrev,this.model.region,this.model.igrType));
+         }
+         else
+         {
+            if(this.model)
+            {
+               textField.text = this.model.fullName;
+            }
+            else
+            {
+               textField.text = Values.EMPTY_STR;
+            }
+         }
+         this.playerNameStr = textField.htmlText;
       }
 
       protected function afterSetData() : void {
@@ -165,36 +201,6 @@ package net.wg.gui.prebattle.squad
          }
       }
 
-      override protected function updateAfterStateChange() : void {
-         super.updateAfterStateChange();
-         if(!initialized)
-         {
-            return;
-         }
-         if((this.model) && (!(this.model.vLevel == null)) && !(this.model.vLevel == Values.EMPTY_STR))
-         {
-            this.vehicleLevelField.text = this.model.vLevel;
-         }
-         else
-         {
-            this.vehicleLevelField.text = Values.EMPTY_STR;
-         }
-         this.vehicleNameField.text = (this.model) && (this.model.vShortName)?this.model.vShortName:Values.EMPTY_STR;
-         this.updateVoiceWave();
-         var _loc1_:Number = this.model?this.model.getCurrentColor():Number.NaN;
-         if(!isNaN(_loc1_))
-         {
-            textField.textColor = _loc1_;
-            this.vehicleNameField.textColor = _loc1_;
-            this.vehicleLevelField.textColor = _loc1_;
-         }
-      }
-
-      override protected function handleMouseRollOver(param1:MouseEvent) : void {
-         super.handleMouseRollOver(param1);
-         this.showToolTips();
-      }
-
       protected function showToolTips() : void {
          var _loc1_:String = this.model.accID == -1?MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_INVITE:this.getToolTipData();
          if((_loc1_) && _loc1_.length > 0)
@@ -203,32 +209,12 @@ package net.wg.gui.prebattle.squad
          }
       }
 
-      override protected function handleMouseRollOut(param1:MouseEvent) : void {
-         super.handleMouseRollOut(param1);
-         App.toolTipMgr.hide();
-      }
-
       protected function getToolTipData() : String {
          if((this.statusString) && this.statusString == PrebattleStateString.OFFLINE_READY)
          {
             this.statusString = PrebattleStateString.OFFLINE;
          }
          return this.statusString != null?"#messenger:dialogs/squadChannel/tooltips/status/" + this.statusString:null;
-      }
-
-      private function speakHandler(param1:VoiceChatEvent) : void {
-         this.onPlayerSpeak(param1.getAccountDBID(),param1.type == VoiceChatEvent.START_SPEAKING);
-      }
-
-      public function onPlayerSpeak(param1:Number, param2:Boolean) : void {
-         if((this.model) && param1 == this.model.dbID)
-         {
-            if((data) && (this.model) && this.currentDbID == data.dbID)
-            {
-               this.model.isPlayerSpeaking = param2;
-            }
-            this.setSpeakers(param2);
-         }
       }
 
       protected function updateVoiceWave() : void {
@@ -245,6 +231,20 @@ package net.wg.gui.prebattle.squad
          {
             this.voiceWave.setSpeaking(param1,param2);
          }
+      }
+
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         super.handleMouseRollOver(param1);
+         this.showToolTips();
+      }
+
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         super.handleMouseRollOut(param1);
+         App.toolTipMgr.hide();
+      }
+
+      private function speakHandler(param1:VoiceChatEvent) : void {
+         this.onPlayerSpeak(param1.getAccountDBID(),param1.type == VoiceChatEvent.START_SPEAKING);
       }
    }
 

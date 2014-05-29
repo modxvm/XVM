@@ -26,6 +26,8 @@ package net.wg.data.VO
 
       private var _progrIndex:int = 0;
 
+      private var _showDone:Boolean = false;
+
       public function get progrTooltip() : Object {
          return this._progrTooltip;
       }
@@ -88,6 +90,14 @@ package net.wg.data.VO
 
       public function set progrIndex(param1:int) : void {
          this._progrIndex = param1;
+      }
+
+      public function get showDone() : Boolean {
+         return this._showDone;
+      }
+
+      public function set showDone(param1:Boolean) : void {
+         this._showDone = param1;
       }
    }
 

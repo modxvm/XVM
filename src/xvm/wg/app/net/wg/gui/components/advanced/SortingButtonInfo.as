@@ -1,12 +1,12 @@
 package net.wg.gui.components.advanced
 {
+   import net.wg.data.constants.SortingInfo;
 
 
    public class SortingButtonInfo extends Object
    {
           
       public function SortingButtonInfo() {
-         this.defaultSortDirection = SortingButton.WITHOUT_SORT;
          super();
       }
 
@@ -32,7 +32,7 @@ package net.wg.gui.components.advanced
 
       public var inverted:Boolean = false;
 
-      public var defaultSortDirection:String;
+      public var defaultSortDirection:String = "none";
 
       public var sortOrder:int = -1;
 
@@ -41,7 +41,7 @@ package net.wg.gui.components.advanced
       public var label:String = "";
 
       public function get defaultSortDir() : uint {
-         return this.defaultSortDirection == SortingButton.DESCENDING_SORT?Array.DESCENDING:0;
+         return this.defaultSortDirection == SortingInfo.DESCENDING_SORT?Array.DESCENDING:0;
       }
 
       public function get dataSortType() : uint {

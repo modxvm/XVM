@@ -16,57 +16,36 @@ package net.wg.infrastructure.managers.utils.impl
    import net.wg.utils.IIME;
    import net.wg.utils.IVOManager;
    import net.wg.utils.IIcons;
+   import net.wg.utils.IStyleSheetManager;
+   import net.wg.utils.ITweenAnimator;
+   import net.wg.utils.IAnimBuilder;
    import net.wg.infrastructure.interfaces.IStrCaseProperties;
    import net.wg.data.StrCaseProperties;
+   import net.wg.infrastructure.interfaces.IImageUrlProperties;
+   import net.wg.data.ImageUrlProperties;
 
 
    public class Utils extends UtilsManagerMeta implements IUtils
    {
           
-      public function Utils(param1:IAssertable, param2:IScheduler, param3:ILocale, param4:ISerializable, param5:IHelpLayout, param6:IClassFactory, param7:IPopUpManager, param8:ICommons, param9:IFocusHandler, param10:IEventCollector, param11:IIME, param12:IVOManager, param13:IIcons) {
-         var asserter:IAssertable = param1;
-         var scheduler:IScheduler = param2;
-         var locale:ILocale = param3;
-         var JSON:ISerializable = param4;
-         var helpLayout:IHelpLayout = param5;
-         var classFactory:IClassFactory = param6;
-         var popupManager:IPopUpManager = param7;
-         var commons:ICommons = param8;
-         var focusHandler:IFocusHandler = param9;
-         var events:IEventCollector = param10;
-         var ime:IIME = param11;
-         var voManager:IVOManager = param12;
-         var icons:IIcons = param13;
+      public function Utils(param1:IAssertable, param2:IScheduler, param3:ILocale, param4:ISerializable, param5:IHelpLayout, param6:IClassFactory, param7:IPopUpManager, param8:ICommons, param9:IFocusHandler, param10:IEventCollector, param11:IIME, param12:IVOManager, param13:IIcons, param14:IStyleSheetManager, param15:ITweenAnimator, param16:IAnimBuilder) {
          super();
-         this._asserter = asserter;
-         this._scheduler = scheduler;
-         this._scheduler.scheduleTask(function():void
-         {
-            
-         },50);
-         this._scheduler.scheduleTask(function():void
-         {
-            
-         },750);
-         this._scheduler.scheduleTask(function():void
-         {
-            
-         },500);
-         this._scheduler.scheduleTask(function():void
-         {
-            
-         },250);
-         this._locale = locale;
-         this._JSON = JSON;
-         this._helpLayout = helpLayout;
-         this._classFactory = classFactory;
-         this._popupManager = popupManager;
-         this._commons = commons;
-         this._focusHandler = focusHandler;
-         this._events = events;
-         this._ime = ime;
-         this._voManager = voManager;
-         this._icons = icons;
+         this._asserter = param1;
+         this._scheduler = param2;
+         this._locale = param3;
+         this._JSON = param4;
+         this._helpLayout = param5;
+         this._classFactory = param6;
+         this._popupManager = param7;
+         this._commons = param8;
+         this._focusHandler = param9;
+         this._events = param10;
+         this._ime = param11;
+         this._voManager = param12;
+         this._icons = param13;
+         this._styleSheetManager = param14;
+         this._tweenAnimator = param15;
+         this._animBuilder = param16;
       }
 
       private var _asserter:IAssertable = null;
@@ -97,6 +76,12 @@ package net.wg.infrastructure.managers.utils.impl
 
       private var _icons:IIcons = null;
 
+      private var _styleSheetManager:IStyleSheetManager = null;
+
+      private var _tweenAnimator:ITweenAnimator = null;
+
+      private var _animBuilder:IAnimBuilder = null;
+
       public function setNations(param1:INations) : void {
          this._nations = param1;
       }
@@ -121,6 +106,10 @@ package net.wg.infrastructure.managers.utils.impl
          this._voManager.dispose();
          this._voManager = null;
          this._icons = null;
+         this._styleSheetManager = null;
+         this._tweenAnimator.dispose();
+         this._tweenAnimator = null;
+         this._animBuilder = null;
       }
 
       public function toUpperOrLowerCase(param1:String, param2:Boolean, param3:IStrCaseProperties=null) : String {
@@ -185,6 +174,22 @@ package net.wg.infrastructure.managers.utils.impl
 
       public function get icons() : IIcons {
          return this._icons;
+      }
+
+      public function get styleSheetManager() : IStyleSheetManager {
+         return this._styleSheetManager;
+      }
+
+      public function getImageUrlProperties(param1:String, param2:int, param3:int, param4:int=-4, param5:int=0) : IImageUrlProperties {
+         return new ImageUrlProperties(param1,param2,param3,param4,param5);
+      }
+
+      public function get tweenAnimator() : ITweenAnimator {
+         return this._tweenAnimator;
+      }
+
+      public function get animBuilder() : IAnimBuilder {
+         return this._animBuilder;
       }
    }
 

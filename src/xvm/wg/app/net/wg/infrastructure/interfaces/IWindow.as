@@ -1,14 +1,13 @@
 package net.wg.infrastructure.interfaces
 {
    import net.wg.infrastructure.interfaces.entity.IDraggable;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.clik.controls.Button;
    import scaleform.clik.utils.Constraints;
    import flash.display.MovieClip;
    import scaleform.clik.utils.Padding;
 
 
-   public interface IWindow extends IWrapper, IDraggable, IDisposable
+   public interface IWindow extends IWrapper, IDraggable
    {
           
       function get windowContent() : IAbstractWindowView;

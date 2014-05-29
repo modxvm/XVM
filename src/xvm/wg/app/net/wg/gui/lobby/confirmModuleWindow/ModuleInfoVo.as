@@ -22,11 +22,9 @@ package net.wg.gui.lobby.confirmModuleWindow
 
       private var _currency:String = "";
 
-      private var _price:Array;
+      private var _price:Array = null;
 
-      private var _defPrice:Array;
-
-      private var _actionPrc:Number;
+      private var _actionPriceData:Object;
 
       private var _maxAvailableCount:Array;
 
@@ -108,20 +106,12 @@ package net.wg.gui.lobby.confirmModuleWindow
          this._price = param1;
       }
 
-      public function get defPrice() : Array {
-         return this._defPrice;
+      public function get actionPriceData() : Object {
+         return this._actionPriceData;
       }
 
-      public function set defPrice(param1:Array) : void {
-         this._defPrice = param1;
-      }
-
-      public function get actionPrc() : Number {
-         return this._actionPrc;
-      }
-
-      public function set actionPrc(param1:Number) : void {
-         this._actionPrc = param1;
+      public function set actionPriceData(param1:Object) : void {
+         this._actionPriceData = param1;
       }
 
       public function get defaultValue() : Number {

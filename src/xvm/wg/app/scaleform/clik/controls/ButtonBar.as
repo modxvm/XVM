@@ -5,15 +5,17 @@ package scaleform.clik.controls
    import flash.display.MovieClip;
    import scaleform.clik.data.DataProvider;
    import flash.events.Event;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.InputEvent;
    import flash.utils.getDefinitionByName;
    import scaleform.clik.events.IndexEvent;
    import scaleform.clik.constants.InvalidationType;
-   import scaleform.clik.events.InputEvent;
    import scaleform.clik.ui.InputDetails;
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.NavigationCode;
-   import scaleform.clik.events.ButtonEvent;
    import net.wg.utils.IEventCollector;
+   import flash.display.DisplayObject;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.events.ButtonBarEvent;
 
@@ -59,6 +61,22 @@ package scaleform.clik.controls
          super.initialize();
          this.dataProvider = new DataProvider();
          this._renderers = [];
+      }
+
+      override protected function onDispose() : void {
+         if(this._dataProvider)
+         {
+            this._dataProvider.cleanUp();
+            this._dataProvider.removeEventListener(Event.CHANGE,this.handleDataChange,false);
+            this._dataProvider = null;
+         }
+         if(this._group)
+         {
+            this._group.removeEventListener(ButtonEvent.CLICK,this.handleButtonGroupChange,false);
+            this._group = null;
+         }
+         removeEventListener(InputEvent.INPUT,this.handleInput,false);
+         super.onDispose();
       }
 
       override public function get enabled() : Boolean {
@@ -376,10 +394,11 @@ package scaleform.clik.controls
 
       protected function updateRenderers() : void {
          var _loc5_:* = 0;
-         var _loc6_:Button = null;
-         var _loc7_:* = false;
-         var _loc8_:* = 0;
-         var _loc9_:Button = null;
+         var _loc6_:DisplayObject = null;
+         var _loc7_:Button = null;
+         var _loc8_:* = false;
+         var _loc9_:* = 0;
+         var _loc10_:Button = null;
          var _loc1_:Number = 0;
          var _loc2_:Number = 0;
          var _loc3_:* = -1;
@@ -390,6 +409,10 @@ package scaleform.clik.controls
                _loc5_ = this._renderers.length-1;
                if(this.container.contains(this._renderers[_loc5_]))
                {
+                  if(this._renderers[_loc5_]  is  IDisposable)
+                  {
+                     IDisposable(this._renderers[_loc5_]).dispose();
+                  }
                   this.container.removeChild(this._renderers[_loc5_]);
                }
                this._renderers.splice(_loc5_--,1);
@@ -399,88 +422,92 @@ package scaleform.clik.controls
          {
             while(this.container.numChildren > 0)
             {
-               this.container.removeChildAt(0);
+               _loc6_ = this.container.removeChildAt(0);
+               if(_loc6_  is  IDisposable)
+               {
+                  IDisposable(_loc6_).dispose();
+               }
             }
             this._renderers.length = 0;
          }
          var _loc4_:uint = 0;
          while(_loc4_ < this._dataProvider.length && _loc3_ == -1)
          {
-            _loc7_ = false;
+            _loc8_ = false;
             if(_loc4_ < this._renderers.length)
             {
-               _loc6_ = this._renderers[_loc4_];
+               _loc7_ = this._renderers[_loc4_];
             }
             else
             {
-               _loc6_ = new this._itemRendererClass();
-               this.setupRenderer(_loc6_,_loc4_);
-               _loc7_ = true;
+               _loc7_ = new this._itemRendererClass();
+               this.setupRenderer(_loc7_,_loc4_);
+               _loc8_ = true;
             }
-            this.populateRendererData(_loc6_,_loc4_);
+            this.populateRendererData(_loc7_,_loc4_);
             if(this._autoSize == TextFieldAutoSize.NONE && this._buttonWidth > 0)
             {
-               _loc6_.width = this._buttonWidth;
+               _loc7_.width = this._buttonWidth;
             }
             else
             {
                if(this._autoSize != TextFieldAutoSize.NONE)
                {
-                  _loc6_.autoSize = this._autoSize;
+                  _loc7_.autoSize = this._autoSize;
                }
             }
-            _loc6_.validateNow();
+            _loc7_.validateNow();
             if(this._direction == DIRECTION_HORIZONTAL)
             {
-               if(_width > _loc6_.width + this._spacing + _loc1_)
+               if(Math.round(_width) >= Math.round(_loc7_.width + this._spacing + _loc1_))
                {
-                  _loc6_.y = 0;
-                  _loc6_.x = _loc1_;
-                  _loc1_ = _loc1_ + (_loc6_.width + this._spacing);
+                  _loc7_.y = 0;
+                  _loc7_.x = _loc1_;
+                  _loc1_ = _loc1_ + (_loc7_.width + this._spacing);
                }
                else
                {
                   _loc3_ = _loc4_;
-                  _loc6_ = null;
+                  _loc7_ = null;
                }
             }
             else
             {
-               if(_height > _loc6_.height + this._spacing + _loc2_)
+               if(_height > _loc7_.height + this._spacing + _loc2_)
                {
-                  _loc6_.x = 0;
-                  _loc6_.y = _loc2_;
-                  _loc2_ = _loc2_ + (_loc6_.height + this._spacing);
+                  _loc7_.x = 0;
+                  _loc7_.y = _loc2_;
+                  _loc2_ = _loc2_ + (_loc7_.height + this._spacing);
                }
                else
                {
                   _loc3_ = _loc4_;
-                  _loc6_ = null;
+                  _loc7_ = null;
                }
             }
-            if((_loc7_) && !(_loc6_ == null))
+            if((_loc8_) && !(_loc7_ == null))
             {
-               _loc6_.group = this._group;
-               this.container.addChild(_loc6_);
-               this._renderers.push(_loc6_);
+               _loc7_.group = this._group;
+               this.container.addChild(_loc7_);
+               this._renderers.push(_loc7_);
             }
             _loc4_++;
          }
          if(_loc3_ > -1)
          {
-            _loc8_ = this._renderers.length-1;
-            while(_loc8_ >= _loc3_)
+            _loc9_ = this._renderers.length-1;
+            while(_loc9_ >= _loc3_)
             {
-               _loc9_ = this._renderers[_loc8_];
-               if(_loc9_)
+               _loc10_ = this._renderers[_loc9_];
+               if(_loc10_)
                {
-                  if(this.container.contains(_loc9_))
+                  if(this.container.contains(_loc10_))
                   {
-                     this.container.removeChild(_loc9_);
+                     this.container.removeChild(_loc10_);
                   }
-                  this._renderers.splice(_loc8_,1);
+                  this._renderers.splice(_loc9_,1);
                }
-               _loc8_--;
+               _loc9_--;
             }
          }
          this.selectedIndex = Math.min(this._dataProvider.length-1,this._selectedIndex);

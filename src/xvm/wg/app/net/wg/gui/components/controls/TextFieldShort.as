@@ -5,6 +5,8 @@ package net.wg.gui.components.controls
    import flash.text.TextFormat;
    import flash.events.MouseEvent;
    import flash.filters.DropShadowFilter;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.text.TextFieldAutoSize;
 
 
    public class TextFieldShort extends ListItemRenderer implements ITextContainer
@@ -57,6 +59,13 @@ package net.wg.gui.components.controls
 
       private var _altToolTip:String = "";
 
+      private var widthAtStart:Number = 0;
+
+      override protected function initialize() : void {
+         super.initialize();
+         this.widthAtStart = _width;
+      }
+
       public function get showToolTip() : Boolean {
          return this._showToolTip;
       }
@@ -100,10 +109,25 @@ package net.wg.gui.components.controls
          var _loc1_:DropShadowFilter = null;
          var _loc2_:* = NaN;
          super.draw();
-         if(textField)
+         if((textField) && (InvalidationType.DATA))
          {
             textField.wordWrap = true;
             textField.selectable = false;
+            if(autoSize != TextFieldAutoSize.NONE)
+            {
+               if(!preventAutosizing)
+               {
+                  _width = this.widthAtStart;
+                  setActualSize(_width,_height);
+               }
+               if(!constraintsDisabled)
+               {
+                  if(constraints)
+                  {
+                     constraints.update(_width,_height);
+                  }
+               }
+            }
             textField.text = _label;
             this._textFormat.size = this._textSize;
             this._textFormat.font = this._textFont;
@@ -123,6 +147,21 @@ package net.wg.gui.components.controls
             _loc1_ = this.getDropShadowFilter(this._shadowColor);
             textField.filters = [_loc1_];
             this._toolTip = _label;
+            if(autoSize != TextFieldAutoSize.NONE)
+            {
+               if(!preventAutosizing)
+               {
+                  alignForAutoSize();
+                  setActualSize(_width,_height);
+               }
+               if(!constraintsDisabled)
+               {
+                  if(constraints)
+                  {
+                     constraints.update(_width,_height);
+                  }
+               }
+            }
          }
       }
 

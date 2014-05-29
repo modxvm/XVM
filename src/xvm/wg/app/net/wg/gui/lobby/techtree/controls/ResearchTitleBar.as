@@ -4,10 +4,12 @@ package net.wg.gui.lobby.techtree.controls
    import flash.text.TextField;
    import net.wg.gui.lobby.techtree.constants.TTInvalidationType;
    import scaleform.clik.events.ButtonEvent;
+   import flash.events.MouseEvent;
    import scaleform.clik.utils.Constraints;
    import scaleform.gfx.TextFieldEx;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.lobby.techtree.TechTreeEvent;
+   import net.wg.data.constants.Tooltips;
    import scaleform.gfx.Extensions;
 
 
@@ -23,7 +25,11 @@ package net.wg.gui.lobby.techtree.controls
 
       private var _nation:String = "";
 
+      private var _hbID:int = -1;
+
       public var titleField:TextField;
+
+      public var infoField:TextField;
 
       public var returnButton:ReturnToTTButton;
 
@@ -45,11 +51,26 @@ package net.wg.gui.lobby.techtree.controls
          invalidate(TTInvalidationType.NATION);
       }
 
+      public function setHBID(param1:int) : void {
+         this._hbID = param1;
+      }
+
+      public function setInfoMessage(param1:String) : void {
+         this.infoField.htmlText = param1;
+         this.infoField.visible = (param1) && param1.length > 0;
+         this.centerInfoField();
+      }
+
       override protected function onDispose() : void {
          if(this.returnButton != null)
          {
             this.returnButton.removeEventListener(ButtonEvent.CLICK,this.handleClickReturnButton,false);
             this.returnButton.dispose();
+         }
+         if(this.infoField != null)
+         {
+            this.infoField.removeEventListener(MouseEvent.ROLL_OVER,this.onInfoFieldRollOver);
+            this.infoField.removeEventListener(MouseEvent.ROLL_OUT,this.onInfoFieldRollOut);
          }
          super.onDispose();
       }
@@ -59,6 +80,11 @@ package net.wg.gui.lobby.techtree.controls
          if(this.titleField != null)
          {
             constraints.addElement(this.titleField.name,this.titleField,Constraints.LEFT | Constraints.RIGHT);
+         }
+         if(this.infoField != null)
+         {
+            this.infoField.addEventListener(MouseEvent.ROLL_OVER,this.onInfoFieldRollOver);
+            this.infoField.addEventListener(MouseEvent.ROLL_OUT,this.onInfoFieldRollOut);
          }
          if(this.returnButton != null)
          {
@@ -90,11 +116,28 @@ package net.wg.gui.lobby.techtree.controls
          if(isInvalid(InvalidationType.SIZE))
          {
             constraints.update(_width,_height);
+            this.centerInfoField();
          }
       }
 
       private function handleClickReturnButton(param1:ButtonEvent) : void {
          dispatchEvent(new TechTreeEvent(TechTreeEvent.RETURN_2_TECHTREE));
+      }
+
+      private function onInfoFieldRollOut(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      private function onInfoFieldRollOver(param1:MouseEvent) : void {
+         if(this._hbID != -1)
+         {
+            App.toolTipMgr.showSpecial(Tooltips.HISTORICAL_MODULES,null,this._hbID);
+         }
+      }
+
+      private function centerInfoField() : void {
+         this.infoField.width = this.infoField.textWidth;
+         this.infoField.x = this.titleField.width - this.infoField.width >> 1;
       }
    }
 

@@ -36,6 +36,7 @@ package net.wg.gui.lobby.questsWindow.components
             _loc1_.paused = true;
             _loc1_ = null;
          }
+         this.tweens.splice(0,this.tweens.length);
          this.tweens = null;
          this._sortingFunction = null;
          super.onDispose();

@@ -21,6 +21,9 @@ package net.wg.app.impl
    import net.wg.infrastructure.managers.utils.impl.IME;
    import net.wg.infrastructure.managers.utils.impl.VOManager;
    import net.wg.infrastructure.managers.utils.impl.Icons;
+   import net.wg.infrastructure.managers.utils.impl.StyleSheetManager;
+   import net.wg.gui.lobby.fortifications.utils.impl.TweenAnimator;
+   import net.wg.infrastructure.managers.utils.impl.AnimBuilder;
    import net.wg.infrastructure.managers.utils.impl.Nations;
    import net.wg.utils.ITweenManager;
    import net.wg.infrastructure.managers.utils.impl.TweenManager;
@@ -50,6 +53,8 @@ package net.wg.app.impl
    import net.wg.infrastructure.managers.impl.VoiceChatManager;
    import net.wg.utils.IGameInputManager;
    import net.wg.infrastructure.managers.impl.GameInputManager;
+   import net.wg.infrastructure.managers.IEventLogManager;
+   import net.wg.infrastructure.managers.impl.EventLogManager;
    import flash.events.Event;
    import scaleform.gfx.Extensions;
    import scaleform.clik.core.CLIK;
@@ -60,7 +65,7 @@ package net.wg.app.impl
           
       public function Application() {
          this.browserBgClassValue = Application_browserBgClassValue;
-         this._librariesList = Vector.<String>(["windows.swf","popovers.swf"]);
+         this._librariesList = Vector.<String>(["windows.swf","popovers.swf","animations.swf"]);
          super();
          Extensions.enabled = true;
          Extensions.noInvisibleAdvance = true;
@@ -83,6 +88,8 @@ package net.wg.app.impl
 
       private var _systemMessages:Sprite;
 
+      private var _browser:ManagedContainer;
+
       private var _dialogs:ManagedContainer;
 
       private var _toolTips:MovieClip;
@@ -104,7 +111,7 @@ package net.wg.app.impl
       }
 
       override protected function getNewUtils() : IUtils {
-         var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new Locale(),new WGJSON(),new HelpLayout(),new ClassFactory(),new PopupManager(),new Commons(),new FocusHandlerEx(),new EventCollector(),new IME(),new VOManager(),new Icons());
+         var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new Locale(),new WGJSON(),new HelpLayout(),new ClassFactory(),new PopupManager(),new Commons(),new FocusHandlerEx(),new EventCollector(),new IME(),new VOManager(),new Icons(),new StyleSheetManager(),new TweenAnimator(),new AnimBuilder());
          _loc1_.setNations(new Nations(_loc1_));
          return _loc1_;
       }
@@ -122,6 +129,8 @@ package net.wg.app.impl
          this._windows = new ManagedContainer();
          this._windows.type = ContainerTypes.WINDOW;
          this._systemMessages = new Sprite();
+         this._browser = new ManagedContainer();
+         this._browser.type = ContainerTypes.BROWSER;
          this._dialogs = new ManagedContainer();
          this._dialogs.type = ContainerTypes.TOP_WINDOW;
          this._toolTips = new MovieClip();
@@ -137,6 +146,8 @@ package net.wg.app.impl
          this._libraries = null;
          this._windows.dispose();
          this._windows = null;
+         this._browser.dispose();
+         this._browser = null;
          this._dialogs.dispose();
          this._dialogs = null;
          this._systemMessages = null;
@@ -154,17 +165,18 @@ package net.wg.app.impl
       }
 
       override protected function getContainers() : Vector.<DisplayObject> {
-         new Vector.<DisplayObject>(10)[0] = this._libraries;
-         new Vector.<DisplayObject>(10)[1] = this._views;
-         new Vector.<DisplayObject>(10)[2] = this._windows;
-         new Vector.<DisplayObject>(10)[3] = this._systemMessages;
-         new Vector.<DisplayObject>(10)[4] = this._dialogs;
-         new Vector.<DisplayObject>(10)[5] = utils.IME.getContainer();
-         new Vector.<DisplayObject>(10)[6] = this._toolTips;
-         new Vector.<DisplayObject>(10)[7] = this._serviceLayout;
-         new Vector.<DisplayObject>(10)[8] = this._cursorCtnr;
-         new Vector.<DisplayObject>(10)[9] = this._waitingCtnr;
-         var _loc1_:Vector.<DisplayObject> = new Vector.<DisplayObject>(10);
+         new Vector.<DisplayObject>(11)[0] = this._libraries;
+         new Vector.<DisplayObject>(11)[1] = this._views;
+         new Vector.<DisplayObject>(11)[2] = this._windows;
+         new Vector.<DisplayObject>(11)[3] = this._systemMessages;
+         new Vector.<DisplayObject>(11)[4] = this._browser;
+         new Vector.<DisplayObject>(11)[5] = this._dialogs;
+         new Vector.<DisplayObject>(11)[6] = utils.IME.getContainer();
+         new Vector.<DisplayObject>(11)[7] = this._toolTips;
+         new Vector.<DisplayObject>(11)[8] = this._serviceLayout;
+         new Vector.<DisplayObject>(11)[9] = this._cursorCtnr;
+         new Vector.<DisplayObject>(11)[10] = this._waitingCtnr;
+         var _loc1_:Vector.<DisplayObject> = new Vector.<DisplayObject>(11);
          return _loc1_;
       }
 
@@ -210,6 +222,10 @@ package net.wg.app.impl
 
       override protected function getNewGameInputManager() : IGameInputManager {
          return new GameInputManager();
+      }
+
+      override protected function getEventLogManager() : IEventLogManager {
+         return new EventLogManager();
       }
 
       override protected function onAfterAppConfiguring() : void {

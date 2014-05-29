@@ -2,6 +2,7 @@ package net.wg.gui.lobby.battleResults
 {
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.interfaces.IListItemRenderer;
+   import flash.filters.ColorMatrixFilter;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UserNameField;
    import net.wg.gui.components.controls.UILoaderAlt;
@@ -9,9 +10,9 @@ package net.wg.gui.lobby.battleResults
    import scaleform.clik.data.ListData;
    import flash.events.MouseEvent;
    import net.wg.gui.events.FinalStatisticEvent;
-   import flash.filters.ColorMatrixFilter;
    import flash.text.TextFormat;
    import net.wg.data.VO.UserVO;
+   import flash.geom.Point;
 
 
    public class EfficiencyRenderer extends UIComponent implements IListItemRenderer
@@ -19,6 +20,21 @@ package net.wg.gui.lobby.battleResults
           
       public function EfficiencyRenderer() {
          super();
+      }
+
+      private static function getDimmFilter() : ColorMatrixFilter {
+         var _loc1_:ColorMatrixFilter = new ColorMatrixFilter();
+         var _loc2_:Array = [0.4,0,0,0,0];
+         var _loc3_:Array = [0,0.4,0,0,0];
+         var _loc4_:Array = [0,0,0.4,0,0];
+         var _loc5_:Array = [0,0,0,1,0];
+         var _loc6_:Array = [];
+         _loc6_ = _loc6_.concat(_loc2_);
+         _loc6_ = _loc6_.concat(_loc3_);
+         _loc6_ = _loc6_.concat(_loc4_);
+         _loc6_ = _loc6_.concat(_loc5_);
+         _loc1_.matrix = _loc6_;
+         return _loc1_;
       }
 
       private var _dataDirty:Boolean = false;
@@ -48,6 +64,8 @@ package net.wg.gui.lobby.battleResults
       public var spottedIcon:EfficiencyIconRenderer;
 
       public var deadBg:MovieClip;
+
+      private var _isMouseOver:Boolean = false;
 
       protected var _index:uint = 0;
 
@@ -104,26 +122,13 @@ package net.wg.gui.lobby.battleResults
             this.data.isDisabled = !param1.target.enabled;
             this.data.hoveredKind = param1.target.kind;
             dispatchEvent(new FinalStatisticEvent(FinalStatisticEvent.EFFENSY_ICON_ROLL_OVER,this.data));
+            this._isMouseOver = true;
          }
          else
          {
             dispatchEvent(new FinalStatisticEvent(FinalStatisticEvent.EFFENSY_ICON_ROLL_OUT));
+            this._isMouseOver = false;
          }
-      }
-
-      private function getDimmFilter() : ColorMatrixFilter {
-         var _loc1_:ColorMatrixFilter = new ColorMatrixFilter();
-         var _loc2_:Array = [0.4,0,0,0,0];
-         var _loc3_:Array = [0,0.4,0,0,0];
-         var _loc4_:Array = [0,0,0.4,0,0];
-         var _loc5_:Array = [0,0,0,1,0];
-         var _loc6_:Array = new Array();
-         _loc6_ = _loc6_.concat(_loc2_);
-         _loc6_ = _loc6_.concat(_loc3_);
-         _loc6_ = _loc6_.concat(_loc4_);
-         _loc6_ = _loc6_.concat(_loc5_);
-         _loc1_.matrix = _loc6_;
-         return _loc1_;
       }
 
       override protected function draw() : void {
@@ -181,7 +186,7 @@ package net.wg.gui.lobby.battleResults
                      this.playerName.textColor = 6381391;
                      this.vehicleName.textColor = 6381391;
                      this.deadBg.visible = true;
-                     this.vehicleIcon.filters = [this.getDimmFilter()];
+                     this.vehicleIcon.filters = [getDimmFilter()];
                   }
                   else
                   {
@@ -206,12 +211,32 @@ package net.wg.gui.lobby.battleResults
                      this.spottedIcon.enabled = true;
                   }
                }
+               this.checkMouseOverOnScroll();
             }
             else
             {
                this.visible = false;
             }
             this._dataDirty = false;
+         }
+      }
+
+      private function checkMouseOverOnScroll() : void {
+         var _loc3_:EfficiencyIconRenderer = null;
+         var _loc1_:Point = new Point(mouseX,mouseY);
+         _loc1_ = this.localToGlobal(_loc1_);
+         var _loc2_:Number = 0;
+         _loc2_ = 0;
+         while(_loc2_ < 5)
+         {
+            _loc3_ = this.icons[_loc2_];
+            if((_loc3_.hitTestPoint(_loc1_.x,_loc1_.y,true)) && (this._isMouseOver))
+            {
+               this.data.isDisabled = !_loc3_.enabled;
+               this.data.hoveredKind = _loc3_.kind;
+               dispatchEvent(new FinalStatisticEvent(FinalStatisticEvent.EFFENSY_ICON_ROLL_OVER,this.data));
+            }
+            _loc2_++;
          }
       }
 

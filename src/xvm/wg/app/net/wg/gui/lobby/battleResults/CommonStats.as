@@ -11,15 +11,15 @@ package net.wg.gui.lobby.battleResults
    import net.wg.gui.lobby.questsWindow.QuestScrollPane;
    import net.wg.gui.components.controls.ScrollBar;
    import net.wg.gui.lobby.questsWindow.SubtasksList;
+   import flash.display.InteractiveObject;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.events.QuestEvent;
    import net.wg.infrastructure.interfaces.IUserProps;
-   import net.wg.utils.ILocale;
    import net.wg.infrastructure.interfaces.IFormattedInt;
+   import net.wg.utils.ILocale;
    import net.wg.data.VO.UserVO;
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.Linkages;
-   import flash.display.InteractiveObject;
 
 
    public class CommonStats extends UIComponent implements IViewStackContent
@@ -28,6 +28,10 @@ package net.wg.gui.lobby.battleResults
       public function CommonStats() {
          super();
       }
+
+      private static const COUNTERS_SCALE:Number = 0.9;
+
+      private static const ARENA_ENEMY_CLAN_EMBLEM:String = "arenaEnemyClanEmblem";
 
       private static function onIconRollOver(param1:FinalStatisticEvent) : void {
          var _loc2_:Array = null;
@@ -103,13 +107,13 @@ package net.wg.gui.lobby.battleResults
 
       public var creditsIcon:MovieClip;
 
+      public var resIcon:MovieClip;
+
       public var creditsCounter:CounterEx;
 
       public var xpCounter:CounterEx;
 
-      private var creditsCounterNumber:Number = NaN;
-
-      private var xpCounterNumber:Number = NaN;
+      public var resCounter:CounterEx;
 
       public var scrollPane:QuestScrollPane;
 
@@ -123,6 +127,36 @@ package net.wg.gui.lobby.battleResults
 
       public var noProgressTF:TextField;
 
+      private var creditsCounterNumber:Number = NaN;
+
+      private var xpCounterNumber:Number = NaN;
+
+      private var resCounterNumber:Number = NaN;
+
+      private var originalArenaStr:String = "";
+
+      public function update(param1:Object) : void {
+         this.medalsListLeft.invalidateFilters();
+         this.medalsListRight.invalidateFilters();
+      }
+
+      public function onEmblemLoaded(param1:String, param2:String) : void {
+         var _loc3_:Object = null;
+         if(param1 == ARENA_ENEMY_CLAN_EMBLEM)
+         {
+            _loc3_ = this.myParent.data;
+            this.arenaNameLbl.htmlText = this.originalArenaStr + param2 + " " + _loc3_.common.clans.enemies.clanAbbrev;
+         }
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
+      }
+
+      public function get myParent() : BattleResults {
+         return BattleResults(parent.parent.parent);
+      }
+
       override protected function onDispose() : void {
          this.detailsMc.detailedReportBtn.removeEventListener(ButtonEvent.CLICK,this.onDetailsClick);
          this.efficiencyList.removeEventListener(FinalStatisticEvent.EFFENSY_ICON_ROLL_OVER,onIconRollOver);
@@ -135,6 +169,7 @@ package net.wg.gui.lobby.battleResults
          this.medalsListRight.dispose();
          this.creditsCounter.dispose();
          this.xpCounter.dispose();
+         this.resCounter.dispose();
          if(this.scrollPane.target == this.questList)
          {
             this.scrollPane.dispose();
@@ -152,18 +187,11 @@ package net.wg.gui.lobby.battleResults
          super.onDispose();
       }
 
-      public function update(param1:Object) : void {
-         this.medalsListLeft.invalidateFilters();
-         this.medalsListRight.invalidateFilters();
-      }
-
-      public function get myParent() : BattleResults {
-         return BattleResults(parent.parent.parent);
-      }
-
       override protected function configUI() : void {
+         var _loc2_:Object = null;
          var _loc8_:IUserProps = null;
          var _loc9_:* = false;
+         var _loc10_:IFormattedInt = null;
          this.width = Math.round(this.width);
          this.height = Math.round(this.height);
          this.upperShadow.mouseEnabled = false;
@@ -173,7 +201,7 @@ package net.wg.gui.lobby.battleResults
          super.configUI();
          var _loc1_:Object = this.myParent.data;
          this.effencyTitle.text = BATTLE_RESULTS.COMMON_BATTLEEFFICIENCY_TITLE;
-         var _loc2_:Object = _loc1_.personal;
+         _loc2_ = _loc1_.personal;
          var _loc3_:Object = _loc1_.common;
          var _loc4_:Array = _loc1_.quests as Array;
          var _loc5_:ILocale = App.utils.locale;
@@ -194,7 +222,7 @@ package net.wg.gui.lobby.battleResults
          this.resultLbl.text = _loc3_.resultStr;
          this.finishReasonLbl.text = _loc3_.finishReasonStr;
          this.imageSwitcher_mc.gotoAndStop(_loc3_.resultShortStr);
-         this.arenaNameLbl.text = _loc3_.arenaStr;
+         this.arenaNameLbl.htmlText = this.originalArenaStr = _loc3_.arenaStr;
          this.tankSlot.areaIcon.source = _loc3_.arenaIcon;
          this.tankSlot.tankIcon.source = _loc3_.tankIcon;
          this.tankSlot.playerNameLbl.userVO = new UserVO(
@@ -226,10 +254,39 @@ package net.wg.gui.lobby.battleResults
             }
          }
          this.tankSlot.vehicleStateLbl.textColor = _loc2_.killerID == 0?13224374:8684674;
+         if(_loc3_.bonusType == 10)
+         {
+            this.arenaNameLbl.htmlText = this.arenaNameLbl.htmlText + (" " + _loc1_.common.clans.enemies.clanAbbrev);
+            this.resCounter.visible = true;
+            this.resIcon.visible = true;
+            _loc10_ = _loc5_.parseFormattedInteger(_loc2_.fortResourceTotal);
+            this.resCounter.formattedNumber = _loc5_.cutCharsBeforeNumber(_loc2_.fortResourceTotal);
+            this.resCounter.localizationSymbol = _loc10_.delimiter;
+            this.resCounter.playAnim = !(this.resCounterNumber == _loc10_.value);
+            this.resCounterNumber = _loc10_.value;
+            this.resCounter.number = _loc10_.value;
+            this.resCounter.x = Math.round((this.imageSwitcher_mc.width + this.resCounter.metricsWidth) / 2) - 17;
+            this.resIcon.x = this.resCounter.x + 8;
+            this.resCounter.scaleX = this.resCounter.scaleY = COUNTERS_SCALE;
+            this.detailsMc.gotoAndStop("sortie");
+            this.creditsCounter.y = this.creditsCounter.y - 10;
+            this.creditsCounter.scaleX = this.creditsCounter.scaleY = COUNTERS_SCALE;
+            this.creditsIcon.y = this.creditsIcon.y - 15;
+            this.xpCounter.y = this.xpCounter.y - 14;
+            this.xpCounter.scaleX = this.xpCounter.scaleY = COUNTERS_SCALE;
+            this.xpIcon.y = this.xpIcon.y - 16;
+            this.myParent.requestClanEmblem(ARENA_ENEMY_CLAN_EMBLEM,_loc1_.common.clans.enemies.clanDBID,this.onEmblemLoaded);
+         }
+         else
+         {
+            this.resCounter.visible = false;
+            this.resIcon.visible = false;
+         }
          this.detailsMc.data = _loc2_;
          this.detailsMc.detailedReportBtn.addEventListener(ButtonEvent.CLICK,this.onDetailsClick);
          this.medalsListLeft.dataProvider = new DataProvider(_loc2_.achievementsLeft);
          this.medalsListRight.dataProvider = new DataProvider(_loc2_.achievementsRight);
+         this.efficiencyList.buttonModeEnabled = false;
          this.efficiencyList.addEventListener(FinalStatisticEvent.EFFENSY_ICON_ROLL_OVER,onIconRollOver);
          this.efficiencyList.addEventListener(FinalStatisticEvent.EFFENSY_ICON_ROLL_OUT,onIconRollOut);
          if((_loc2_.details) && _loc2_.details.length > 0)
@@ -272,6 +329,7 @@ package net.wg.gui.lobby.battleResults
          this.medalsListRight.validateNow();
          this.creditsCounter.validateNow();
          this.xpCounter.validateNow();
+         this.resCounter.validateNow();
       }
 
       private function onDetailsClick(param1:ButtonEvent) : void {
@@ -280,10 +338,6 @@ package net.wg.gui.lobby.battleResults
 
       private function showQuest(param1:QuestEvent) : void {
          this.myParent.showEventsWindow(param1.questID);
-      }
-
-      public function getComponentForFocus() : InteractiveObject {
-         return null;
       }
    }
 

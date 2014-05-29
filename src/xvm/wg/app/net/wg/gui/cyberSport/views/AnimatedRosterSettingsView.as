@@ -8,7 +8,7 @@ package net.wg.gui.cyberSport.views
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import scaleform.clik.constants.InvalidationType;
-   import net.wg.gui.cyberSport.vo.VehicleVO;
+   import net.wg.gui.rally.vo.VehicleVO;
    import net.wg.gui.cyberSport.controls.SettingRosterVO;
    import fl.transitions.easing.Strong;
 
@@ -59,7 +59,7 @@ package net.wg.gui.cyberSport.views
          this.rightBtn.addEventListener(ButtonEvent.CLICK,this.rightBtn_buttonClickHandler);
          this.leftBtn.dispose();
          this.rightBtn.dispose();
-         this.stopPrevioseAnimation();
+         this.stopPreviousAnimation();
          this.tweens.splice(0,this.tweens.length);
       }
 
@@ -142,30 +142,24 @@ package net.wg.gui.cyberSport.views
       }
 
       public function animationIn() : void {
-         this.setAnimationRules({"x":0},{"x":110});
+         this.setAnimationRules({"x":0});
       }
 
       public function animationOut() : void {
-         this.setAnimationRules({"x":this.rightBtn.x},{"x":this._width - this.anmSeparator.width + 3});
+         this.setAnimationRules({"x":this.rightBtn.x});
       }
 
-      private function setAnimationRules(param1:Object, param2:Object) : void {
+      private function setAnimationRules(param1:Object) : void {
          if(param1 == null)
          {
             return;
          }
-         this.stopPrevioseAnimation();
+         this.stopPreviousAnimation();
          this.tweens = Vector.<Tween>([new Tween(this.animationDuration,this.leftBtn,param1,
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":this.callBack
-            }
-         ),new Tween(this.animationDuration,this.anmSeparator,param2,
-            {
-               "paused":false,
-               "ease":Strong.easeOut,
-               "onComplete":null
             }
          )]);
       }
@@ -176,7 +170,7 @@ package net.wg.gui.cyberSport.views
          this.leftBtn.validateNow();
       }
 
-      private function stopPrevioseAnimation() : void {
+      private function stopPreviousAnimation() : void {
          var _loc1_:Tween = null;
          if(this.tweens)
          {

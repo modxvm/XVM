@@ -2,6 +2,7 @@ package net.wg.infrastructure.base
 {
    import net.wg.infrastructure.base.meta.impl.PopOverViewMeta;
    import net.wg.infrastructure.interfaces.IAbstractPopOverView;
+   import scaleform.clik.events.ComponentEvent;
    import net.wg.infrastructure.interfaces.IWrapper;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.components.popOvers.PopOver;
@@ -24,26 +25,30 @@ package net.wg.infrastructure.base
 
       private static const ARROW_POSITION_INV:String = "arrowPositionInvalid";
 
-      private var _wrapper:IWrapper;
-
       private var _arrowDirection:uint = 0;
 
       private var _arrowPosition:int = 0;
 
+      private function hidePopoverHandler(param1:ComponentEvent) : void {
+         param1.stopImmediatePropagation();
+         App.popoverMgr.hide();
+      }
+
       override protected function draw() : void {
          super.draw();
-         if((isInvalid(InvalidationType.SIZE)) && (this._wrapper))
+         var _loc1_:IWrapper = wrapper;
+         if((isInvalid(InvalidationType.SIZE)) && (_loc1_))
          {
-            PopOver(this._wrapper).invalidateLayout();
+            PopOver(wrapper).invalidateLayout();
          }
-         if((isInvalid(ARROW_DIRECTION_INV)) && (this._wrapper))
+         if((isInvalid(ARROW_DIRECTION_INV)) && (_loc1_))
          {
-            PopOver(this._wrapper).arrowDirection = this._arrowDirection;
+            PopOver(_loc1_).arrowDirection = this._arrowDirection;
             invalidate(ARROW_DIRECTION_INV);
          }
-         if((isInvalid(ARROW_POSITION_INV)) && (this._wrapper))
+         if((isInvalid(ARROW_POSITION_INV)) && (_loc1_))
          {
-            PopOver(this._wrapper).arrowPosition = this._arrowPosition;
+            PopOver(_loc1_).arrowPosition = this._arrowPosition;
          }
       }
 
@@ -76,13 +81,12 @@ package net.wg.infrastructure.base
          this.arrowPosition = param1;
       }
 
-      public function get wrapper() : IWrapper {
-         return this._wrapper;
-      }
-
-      public function set wrapper(param1:IWrapper) : void {
-         this._wrapper = param1;
-         invalidateSize();
+      override public function set wrapper(param1:IWrapper) : void {
+         super.wrapper = param1;
+         if(!(param1 == null) && !hasEventListener(ComponentEvent.HIDE))
+         {
+            param1.addEventListener(ComponentEvent.HIDE,this.hidePopoverHandler,false,0,true);
+         }
          invalidate(ARROW_DIRECTION_INV);
       }
 
@@ -105,7 +109,12 @@ package net.wg.infrastructure.base
       }
 
       override public function get containerContent() : IManagedContent {
-         return this._wrapper;
+         return wrapper;
+      }
+
+      override protected function onDispose() : void {
+         removeEventListener(ComponentEvent.HIDE,this.hidePopoverHandler);
+         super.onDispose();
       }
    }
 

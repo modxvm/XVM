@@ -8,6 +8,7 @@ package net.wg.gui.lobby.hangar.tcarousel
    import net.wg.gui.components.controls.SoundButton;
    import net.wg.gui.components.controls.DropDownImageText;
    import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import __AS3__.vec.Vector;
    import scaleform.clik.interfaces.IListItemRenderer;
    import net.wg.gui.lobby.hangar.tcarousel.helper.VehicleCarouselVOManager;
@@ -91,11 +92,9 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       private var checkBoxToMain:CheckBox;
 
-      private var _slotPriceActionPrc:Number = 0;
-
       private var _slotPrice:Number = 0;
 
-      private var _defSlotPrice:Number = 0;
+      private var _slotPriceActionData:ActionPriceVO = null;
 
       private var _selectedVehicleCompactID:Number = -1;
 
@@ -181,7 +180,6 @@ package net.wg.gui.lobby.hangar.tcarousel
          var _loc3_:Number = 0;
          while(_loc3_ < _loc2_.numChildren)
          {
-            trace("child: " + _loc2_.getChildAt(_loc3_).name);
             _loc3_++;
          }
          App.utils.asserter.assert(_loc2_.numChildren == 0,"container is not empty after dispose!");
@@ -207,51 +205,54 @@ package net.wg.gui.lobby.hangar.tcarousel
       }
 
       public function as_setParams(param1:Object) : void {
-         var _loc4_:IListItemRenderer = null;
-         var _loc5_:VehicleCarouselVO = null;
-         var _loc6_:DisplayObject = null;
-         this._slotPrice = param1.slotPrice;
-         this._defSlotPrice = param1.defSlotPrice;
-         this._slotPriceActionPrc = param1.slotPriceActionPrc;
+         var _loc5_:IListItemRenderer = null;
+         var _loc6_:VehicleCarouselVO = null;
+         var _loc7_:DisplayObject = null;
+         this._slotPrice = param1.slotPrice  is  Array?param1.slotPrice[0] > 0?param1.slotPrice[0]:param1.slotPrice[1]:param1.slotPrice;
+         var _loc2_:Object = (param1.hasOwnProperty("slotPriceActionData")) && !(param1.slotPriceActionData == undefined)?param1.slotPriceActionData:null;
+         if(_loc2_)
+         {
+            this._slotPriceActionData = new ActionPriceVO(_loc2_);
+         }
          this._selectedVehicleCompactID = param1.selectedTankID;
-         var _loc2_:Number = param1.freeSlots;
+         var _loc3_:Number = param1.freeSlots;
          if(this._slotForBuySlot != null)
          {
             this.updateSlotForBuySlot(true);
          }
-         var _loc3_:* = !(_loc2_ == this._availableSlotsForBuyVehicle);
+         var _loc4_:* = !(_loc3_ == this._availableSlotsForBuyVehicle);
          if(this._slotForBuyVehicle != null)
          {
-            this._availableSlotsForBuyVehicle = _loc2_;
+            this._availableSlotsForBuyVehicle = _loc3_;
             _totalRenderers = this._availableSlotsForBuyVehicle > 0?this._currentShowRendersByIndex.length + 2:this._currentShowRendersByIndex.length + 1;
-            _loc3_ = (_loc3_) && (this._availableSlotsForBuyVehicle <= 0 || _loc2_ <= 0);
-            if(_loc3_)
+            _loc4_ = (_loc4_) && (this._availableSlotsForBuyVehicle <= 0 || _loc3_ <= 0);
+            if(_loc4_)
             {
                this.removeEmptySlots();
-               _loc4_ = getRendererAt(_renderers.length-1,0);
-               _loc5_ = (_loc4_ as TankCarouselItemRenderer).dataVO;
-               if(_loc5_.buySlot)
+               _loc5_ = getRendererAt(_renderers.length-1,0);
+               _loc6_ = (_loc5_ as TankCarouselItemRenderer).dataVO;
+               if(_loc6_.buySlot)
                {
                   _renderers.splice(_renderers.length-1,1);
                }
                if(this._availableSlotsForBuyVehicle <= 0)
                {
-                  _loc4_ = getRendererAt(_renderers.length-1,0);
-                  _loc5_ = (_loc4_ as TankCarouselItemRenderer).dataVO;
-                  if(_loc5_.buyTank)
+                  _loc5_ = getRendererAt(_renderers.length-1,0);
+                  _loc6_ = (_loc5_ as TankCarouselItemRenderer).dataVO;
+                  if(_loc6_.buyTank)
                   {
                      _renderers.splice(_renderers.length-1,1);
-                     _loc4_.x = 0;
-                     _loc6_ = _loc4_ as DisplayObject;
-                     _loc6_.visible = false;
+                     _loc5_.x = 0;
+                     _loc7_ = _loc5_ as DisplayObject;
+                     _loc7_.visible = false;
                   }
                }
                else
                {
                   this._slotForBuyVehicle.x = padding.horizontal + _renderers.length * slotWidth;
                   _renderers.push(this._slotForBuyVehicle);
-                  _loc6_ = this._slotForBuyVehicle as DisplayObject;
-                  _loc6_.visible = true;
+                  _loc7_ = this._slotForBuyVehicle as DisplayObject;
+                  _loc7_.visible = true;
                }
                this._slotForBuySlot.x = padding.horizontal + _renderers.length * slotWidth;
                _renderers.push(this._slotForBuySlot);
@@ -265,7 +266,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          else
          {
-            this._availableSlotsForBuyVehicle = _loc2_;
+            this._availableSlotsForBuyVehicle = _loc3_;
             if(!_renderers)
             {
                return;
@@ -287,11 +288,11 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          if(this._createdRendersListByCompDescr)
          {
-            _loc4_ = this._createdRendersListByCompDescr[this._selectedVehicleCompactID] as IListItemRenderer;
-            if(_loc4_)
+            _loc5_ = this._createdRendersListByCompDescr[this._selectedVehicleCompactID] as IListItemRenderer;
+            if(_loc5_)
             {
-               _loc4_.selected = true;
-               selectedItemRenderer = _loc4_;
+               _loc5_.selected = true;
+               selectedItemRenderer = _loc5_;
             }
          }
       }
@@ -590,7 +591,7 @@ package net.wg.gui.lobby.hangar.tcarousel
       }
 
       private function updateSlotForBuySlot(param1:Boolean) : void {
-         this.populateRendererData(this._currentShowRendersByIndex.length,this._slotForBuySlot,VehicleCarouselVOBuilder.instance.getDataVoForBuySlot(this._slotPrice,this._defSlotPrice,this._slotPriceActionPrc),param1,true);
+         this.populateRendererData(this._currentShowRendersByIndex.length,this._slotForBuySlot,VehicleCarouselVOBuilder.instance.getDataVoForBuySlot(this._slotPrice,this._slotPriceActionData),param1,true);
       }
 
       private function tryBuyTank(param1:VehicleCarouselVO) : void {

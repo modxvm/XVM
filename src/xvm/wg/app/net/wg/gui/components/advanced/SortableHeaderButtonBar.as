@@ -22,8 +22,17 @@ package net.wg.gui.components.advanced
          }
       }
 
+      override protected function onDispose() : void {
+         this.lastChangedButton = null;
+         super.onDispose();
+      }
+
       override public function get dataProvider() : IDataProvider {
          return super.dataProvider;
+      }
+
+      public function get renderersCount() : int {
+         return _renderers?_renderers.length:-1;
       }
 
       override public function set dataProvider(param1:IDataProvider) : void {

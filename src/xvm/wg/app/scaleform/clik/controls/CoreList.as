@@ -81,10 +81,6 @@ package scaleform.clik.controls
          {
             this.itemRenderer = _loc2_;
          }
-         else
-         {
-            trace("Error: " + this + ", The class " + param1 + " cannot be found in your library. Please ensure it is there.");
-         }
       }
 
       public function get itemRenderer() : Class {
@@ -448,7 +444,6 @@ package scaleform.clik.controls
          var _loc5_:DisplayObject = null;
          if(this._itemRenderer == null)
          {
-            trace("Renderer class not defined.");
             return;
          }
          _loc2_ = this._renderers.length;
@@ -486,7 +481,6 @@ package scaleform.clik.controls
          var _loc2_:IListItemRenderer = new this._itemRenderer() as IListItemRenderer;
          if(_loc2_ == null)
          {
-            trace("Renderer class could not be created.");
             return null;
          }
          this.setupRenderer(_loc2_);

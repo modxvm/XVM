@@ -5,7 +5,7 @@ package net.wg.gui.cyberSport.views
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.cyberSport.controls.RosterSettingsNumerationBlock;
    import __AS3__.vec.Vector;
-   import net.wg.gui.cyberSport.vo.UnitSlotVO;
+   import net.wg.gui.rally.vo.RallySlotVO;
    import scaleform.clik.motion.Tween;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import scaleform.clik.constants.InvalidationType;
@@ -65,7 +65,7 @@ package net.wg.gui.cyberSport.views
 
       private var slotsLength:uint = 0;
 
-      private var _models:Vector.<UnitSlotVO>;
+      private var _models:Vector.<RallySlotVO>;
 
       private var tweens:Vector.<Tween>;
 
@@ -115,12 +115,18 @@ package net.wg.gui.cyberSport.views
          return this._innerAnmDuration;
       }
 
-      public function setData(param1:Vector.<UnitSlotVO>) : void {
+      public function setData(param1:Array) : void {
+         var _loc3_:RallySlotVO = null;
          if(param1 == null)
          {
             return;
          }
-         this._models = param1;
+         var _loc2_:Vector.<RallySlotVO> = new Vector.<RallySlotVO>();
+         for each (_loc3_ in param1)
+         {
+            _loc2_.push(_loc3_);
+         }
+         this._models = _loc2_;
          invalidate(InvalidationType.DATA);
       }
 

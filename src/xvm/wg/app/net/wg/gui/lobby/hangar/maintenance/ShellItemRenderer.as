@@ -174,7 +174,12 @@ package net.wg.gui.lobby.hangar.maintenance
                   this.toBuyDropdown.dataProvider = new DataProvider([_loc1_.htmlTextWithIcon(_loc1_.integer(this.shell.prices[0]),Currencies.CREDITS),_loc1_.htmlTextWithIcon(_loc1_.gold(this.shell.prices[1]),Currencies.GOLD)]);
                   this.toBuyDropdown.selectedIndex = this.shell.currency == Currencies.CREDITS?0:1;
                   this.price.icon = this.shell.currency;
-                  _loc2_ = new ActionPriceVO(this.shell.actionPrc,0,0,this.shell.currency);
+                  _loc2_ = null;
+                  if(this.shell.actionPriceData)
+                  {
+                     _loc2_ = new ActionPriceVO(this.shell.actionPriceData);
+                     _loc2_.forCredits = this.shell.currency == Currencies.CREDITS;
+                  }
                   this.actionPrice.setData(_loc2_);
                   this.actionPrice.setup(this);
                   this.price.visible = !this.actionPrice.visible;
@@ -213,31 +218,43 @@ package net.wg.gui.lobby.hangar.maintenance
       private function updateShellsPrice() : void {
          var _loc1_:int = this.shell.buyShellsCount;
          var _loc2_:* = 0;
-         var _loc3_:* = 0;
-         var _loc4_:* = "";
-         var _loc5_:ILocale = App.utils.locale;
+         var _loc3_:* = "";
+         var _loc4_:ILocale = App.utils.locale;
          if(this.toBuyDropdown.visible)
          {
             _loc2_ = this.shell.prices[this.toBuyDropdown.selectedIndex];
-            _loc3_ = this.shell.defPrices[this.toBuyDropdown.selectedIndex];
          }
          else
          {
             _loc2_ = this.shell.prices[this.shell.currency == Currencies.CREDITS?0:1];
-            _loc3_ = this.shell.defPrices[this.shell.currency == Currencies.CREDITS?0:1];
-            _loc4_ = this.shell.currency == Currencies.CREDITS?_loc5_.integer(_loc2_):_loc5_.gold(_loc2_);
+            _loc3_ = this.shell.currency == Currencies.CREDITS?_loc4_.integer(_loc2_):_loc4_.gold(_loc2_);
          }
-         var _loc6_:Number = _loc2_ * _loc1_;
+         var _loc5_:Number = _loc2_ * _loc1_;
          this.toBuy.icon = this.shell.currency;
          this.price.icon = this.shell.currency;
          this.toBuy.textColor = Currencies.TEXT_COLORS[this.shell.currency];
-         this.price.textColor = Currencies.TEXT_COLORS[_loc6_ > this.shell.userCredits[this.shell.currency]?Currencies.ERROR:this.shell.currency];
+         this.price.textColor = Currencies.TEXT_COLORS[_loc5_ > this.shell.userCredits[this.shell.currency]?Currencies.ERROR:this.shell.currency];
          this.toBuyTf.text = _loc1_ + MULTY_CHARS;
-         this.toBuy.text = _loc1_ + MULTY_CHARS + _loc4_;
-         var _loc7_:Number = _loc3_ * _loc1_;
-         this.price.text = this.shell.currency == Currencies.CREDITS?_loc5_.integer(_loc6_):_loc5_.gold(_loc6_);
-         var _loc8_:ActionPriceVO = new ActionPriceVO(this.shell.actionPrc,_loc6_,_loc7_,this.shell.currency);
-         this.actionPrice.setData(_loc8_);
+         this.toBuy.text = _loc1_ + MULTY_CHARS + _loc3_;
+         this.price.text = this.shell.currency == Currencies.CREDITS?_loc4_.integer(_loc5_):_loc4_.gold(_loc5_);
+         var _loc6_:ActionPriceVO = null;
+         if(this.shell.actionPriceData)
+         {
+            _loc6_ = new ActionPriceVO(this.shell.actionPriceData);
+            _loc6_.forCredits = this.shell.currency == Currencies.CREDITS;
+            if(_loc6_.forCredits)
+            {
+               _loc6_.newPrice = _loc1_ * _loc6_.newPrices[0];
+               _loc6_.oldPrice = _loc1_ * _loc6_.oldPrices[0];
+            }
+            else
+            {
+               _loc6_.newPrice = _loc1_ * _loc6_.newPrices[1];
+               _loc6_.oldPrice = _loc1_ * _loc6_.oldPrices[1];
+            }
+            this.actionPrice.textColorType = _loc5_ > this.shell.userCredits[this.shell.currency]?ActionPrice.TEXT_COLOR_TYPE_ERROR:ActionPrice.TEXT_COLOR_TYPE_ICON;
+         }
+         this.actionPrice.setData(_loc6_);
          this.price.visible = !this.actionPrice.visible;
          this.toBuy.enabled = this.price.enabled = !(_loc1_ == 0);
          this.toBuy.mouseEnabled = this.price.mouseEnabled = false;
@@ -306,7 +323,7 @@ package net.wg.gui.lobby.hangar.maintenance
          if(param1  is  MouseEventEx)
          {
             _loc2_ = param1 as MouseEventEx;
-            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+            if(App.utils.commons.isRightButton(param1))
             {
                dispatchEvent(new ModuleInfoEvent(ModuleInfoEvent.SHOW_INFO,ShellVO(data).id));
             }

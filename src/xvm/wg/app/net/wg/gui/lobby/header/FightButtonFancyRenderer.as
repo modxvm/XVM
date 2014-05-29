@@ -1,9 +1,9 @@
 package net.wg.gui.lobby.header
 {
    import net.wg.gui.components.controls.FightListItemRenderer;
-   import flash.geom.Rectangle;
    import flash.display.MovieClip;
    import flash.text.TextField;
+   import scaleform.clik.utils.Constraints;
 
 
    public class FightButtonFancyRenderer extends FightListItemRenderer
@@ -15,21 +15,18 @@ package net.wg.gui.lobby.header
          this.newIndicator.visible = false;
          this.newIndicator.mouseChildren = false;
          this.hitArea = this.hitAreaA;
-         this._originalTitleY = textField.y;
-         this._originalDescrY = this.descr.y;
-         if(this.descr.text)
-         {
-            this.descrTextColor = this.descr.textColor;
-         }
+         this._originalTitleY = Math.floor(textField.y);
+         this._originalDescrY = Math.floor(this.descr.y);
+         this.descr.visible = false;
       }
 
-      public static const DESCR_ACTIVE_TEXT_COLOR:uint = 16748339;
+      private static const DESCR_TEXT_COLOR:uint = 8092009;
 
-      private static const IS_UNIT_OPENED:String = "isUnitOpened";
+      private static const DESCR_ACTIVE_TEXT_COLOR:uint = 16748339;
 
-      private static const UPDATE_SHOW:String = "openedUnitWindow";
+      private static const TITLE_VERTICAL_PADDING:int = 8;
 
-      private static const VIEW_RECT:Rectangle;
+      private static const INCREASE_TEXT_HEIGHT:int = 3;
 
       public var newIndicator:MovieClip;
 
@@ -39,66 +36,79 @@ package net.wg.gui.lobby.header
 
       public var descr:TextField;
 
-      private var isActive:Boolean = false;
+      private var _originalTitleY:int;
 
-      private var descrTextColor:uint = 8092009;
+      private var _originalDescrY:int;
 
-      private var _originalTitleY:Number;
-
-      private var _originalDescrY:Number;
-
-      private var isShow:Boolean = false;
-
-      override protected function setup() : void {
-         super.setup();
-         if((data.hasOwnProperty(IS_UNIT_OPENED)) && (this.newIndicator))
+      override protected function configUI() : void {
+         super.configUI();
+         if(!constraintsDisabled)
          {
-            this.newIndicator.visible = !data.isUnitOpened;
-            invalidate(UPDATE_SHOW);
+            constraints.addElement(this.icon.name,this.icon,Constraints.LEFT | Constraints.TOP);
          }
-         this.icon.gotoAndStop(data.icon);
-         if(enabled)
+      }
+
+      override protected function applyData(param1:BattleSelectDropDownVO) : void {
+         var _loc3_:BattleSelectDropDownVO = null;
+         super.applyData(param1);
+         if(this.newIndicator)
          {
-            this.descr.textColor = data.active?DESCR_ACTIVE_TEXT_COLOR:this.descrTextColor;
+            if(this.newIndicator.visible != param1.isNew)
+            {
+               this.newIndicator.visible = param1.isNew;
+               this.updateNewAnimation(param1.isNew);
+            }
          }
-         this.descr.text = data.description;
-         if(this.descr.numLines == 1)
+         var _loc2_:String = param1.icon;
+         if(this.icon.currentLabel != _loc2_)
          {
-            textField.y = this._originalTitleY + 6;
-            this.descr.y = this._originalDescrY + 6;
+            this.icon.gotoAndStop(_loc2_);
+         }
+         if(param1.active)
+         {
+            this.descr.text = param1.description;
+            if(this.descr.numLines == 1)
+            {
+               textField.y = this._originalTitleY - TITLE_VERTICAL_PADDING;
+            }
+            else
+            {
+               textField.y = this._originalTitleY - TITLE_VERTICAL_PADDING * 2;
+               this.descr.y = this._originalDescrY - TITLE_VERTICAL_PADDING;
+               this.descr.height = this.descr.height + INCREASE_TEXT_HEIGHT;
+            }
+            if(enabled)
+            {
+               _loc3_ = BattleSelectDropDownVO(data);
+               this.descr.textColor = _loc3_.active?DESCR_ACTIVE_TEXT_COLOR:DESCR_TEXT_COLOR;
+            }
+         }
+         this.descr.visible = param1.active;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         this.icon.alpha = param1?1:0.5;
+      }
+
+      override protected function updateAfterStateChange() : void {
+         super.updateAfterStateChange();
+         if(!constraintsDisabled && (this.icon))
+         {
+            constraints.updateElement(this.icon.name,this.icon);
+         }
+      }
+
+      private function updateNewAnimation(param1:Boolean) : void {
+         preventAutosizing = true;
+         if(param1)
+         {
+            this.newIndicator.gotoAndPlay("shine");
          }
          else
          {
-            textField.y = this._originalTitleY;
-            this.descr.y = this._originalDescrY;
+            this.newIndicator.gotoAndStop(1);
          }
-      }
-
-      override protected function draw() : void {
-         super.draw();
-         scaleX = scaleY = 1;
-         width = VIEW_RECT.width;
-         height = VIEW_RECT.height;
-         if((isInvalid(UPDATE_SHOW)) && (data.hasOwnProperty(IS_UNIT_OPENED)) && this.isShow == false)
-         {
-            this.isShow = true;
-            App.utils.scheduler.envokeInNextFrame(this.updateLabels);
-         }
-      }
-
-      private function updateLabels() : void {
-         if(data.hasOwnProperty(IS_UNIT_OPENED))
-         {
-            if(enabled)
-            {
-               this.newIndicator.gotoAndPlay("shine");
-            }
-         }
-      }
-
-      override protected function onDispose() : void {
-         super.onDispose();
-         App.utils.scheduler.cancelTask(this.updateLabels);
       }
    }
 

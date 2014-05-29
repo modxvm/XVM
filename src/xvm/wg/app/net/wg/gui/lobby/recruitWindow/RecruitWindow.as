@@ -6,10 +6,12 @@ package net.wg.gui.lobby.recruitWindow
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.controls.TankmanTrainingButton;
    import scaleform.clik.controls.ButtonGroup;
+   import net.wg.dev.utils.LocalDebugUtils;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ListEvent;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.IconsTypes;
    import scaleform.clik.utils.Constraints;
@@ -63,6 +65,7 @@ package net.wg.gui.lobby.recruitWindow
       }
 
       public function as_initData(param1:Object) : void {
+         LocalDebugUtils.traceObjectStructure(param1,"  ");
          this.data = param1;
          this.menuEnabled = param1.menuEnabled;
          invalidateData();
@@ -228,20 +231,32 @@ package net.wg.gui.lobby.recruitWindow
       }
 
       override protected function draw() : void {
+         var _loc1_:ActionPriceVO = null;
+         var _loc2_:ActionPriceVO = null;
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.data))
          {
             this.nationDropdown.validateNow();
             this.vehicleClassDropdown.validateNow();
+            _loc1_ = null;
+            if(this.data.academyUpgradeActionPriceData)
+            {
+               _loc1_ = new ActionPriceVO(this.data.academyUpgradeActionPriceData);
+            }
+            this.btnAcademy.updatePrice(this.data.academyUpgradePrice,IconsTypes.GOLD,_loc1_);
             this.vehicleTypeDropdown.validateNow();
             this.roleDropdown.validateNow();
-            this.btnAcademy.updatePrice(this.data.academyUpgradeActionPrc,this.data.academyUpgradePrice,this.data.academyUpgradeDefPrice,IconsTypes.GOLD);
             if(this.data.gold < this.data.academyUpgradePrice)
             {
                this.btnAcademy.enabled = false;
             }
-            this.btnScool.updatePrice(this.data.schoolUpgradeActionPrc,this.data.schoolUpgradePrice,this.data.schoolUpgradeDefPrice,IconsTypes.CREDITS);
-            this.btnCourses.updatePrice(0,0,0,"");
+            _loc2_ = null;
+            if(this.data.schoolUpgradeActionPriceData)
+            {
+               _loc2_ = new ActionPriceVO(this.data.schoolUpgradeActionPriceData);
+            }
+            this.btnScool.updatePrice(this.data.schoolUpgradePrice,IconsTypes.CREDITS,_loc2_);
+            this.btnCourses.updatePrice(0,"");
             if(this.data.credits < this.data.schoolUpgradePrice)
             {
                this.btnScool.enabled = false;

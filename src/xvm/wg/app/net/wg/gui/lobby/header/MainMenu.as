@@ -15,6 +15,7 @@ package net.wg.gui.lobby.header
             {
                "label":MENU.HEADERBUTTONS_HANGAR,
                "value":"hangar",
+               "subValues":[],
                "textColor":16563563,
                "textColorOver":16765319,
                "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_HANGAR
@@ -23,6 +24,7 @@ package net.wg.gui.lobby.header
             {
                "label":MENU.HEADERBUTTONS_INVENTORY,
                "value":"inventory",
+               "subValues":[],
                "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_INVENTORY,
                "helpText":LOBBY_HELP.HEADER_MENU_INVENTORY,
                "helpDirection":"B",
@@ -32,6 +34,7 @@ package net.wg.gui.lobby.header
             {
                "label":MENU.HEADERBUTTONS_SHOP,
                "value":"shop",
+               "subValues":[],
                "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_SHOP,
                "helpText":LOBBY_HELP.HEADER_MENU_SHOP,
                "helpDirection":"B",
@@ -41,6 +44,7 @@ package net.wg.gui.lobby.header
             {
                "label":MENU.HEADERBUTTONS_PROFILE,
                "value":"profile",
+               "subValues":[],
                "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_PROFILE,
                "helpText":LOBBY_HELP.HEADER_MENU_PROFILE,
                "helpDirection":"B",
@@ -50,6 +54,7 @@ package net.wg.gui.lobby.header
             {
                "label":MENU.HEADERBUTTONS_TECHTREE,
                "value":"techtree",
+               "subValues":["research"],
                "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_TECHTREE,
                "helpText":LOBBY_HELP.HEADER_MENU_TECHTREE,
                "helpDirection":"B",
@@ -59,6 +64,7 @@ package net.wg.gui.lobby.header
             {
                "label":MENU.HEADERBUTTONS_BARRACKS,
                "value":"barracks",
+               "subValues":[],
                "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BARRACKS
             }
          ]);
@@ -69,9 +75,10 @@ package net.wg.gui.lobby.header
 
       protected var current:String = "hangar";
 
-      protected var buttonsArr:DataProvider;
+      private var buttonsArr:DataProvider;
 
       public function setCurrent(param1:String) : void {
+         var _loc3_:* = NaN;
          this.current = param1;
          this.bar.selectedIndex = -1;
          this.bar.enabled = !(this.current == "prebattle");
@@ -81,6 +88,18 @@ package net.wg.gui.lobby.header
             if(this.current == this.buttonsArr[_loc2_].value)
             {
                this.bar.selectedIndex = _loc2_;
+            }
+            else
+            {
+               _loc3_ = 0;
+               while(_loc3_ < this.buttonsArr[_loc2_].subValues.length)
+               {
+                  if(this.current == this.buttonsArr[_loc2_].subValues[_loc3_])
+                  {
+                     this.bar.subItemSelectedIndex = _loc2_;
+                  }
+                  _loc3_++;
+               }
             }
             _loc2_++;
          }
@@ -101,7 +120,19 @@ package net.wg.gui.lobby.header
                {
                   "label":MENU.HEADERBUTTONS_BROWSER,
                   "value":"browser",
+                  "subValues":[],
                   "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BROWSER
+               }
+            );
+         }
+         if(App.globalVarsMgr.isFortificationAvailableS())
+         {
+            this.buttonsArr.push(
+               {
+                  "label":MENU.HEADERBUTTONS_FORTS,
+                  "value":"FortificationsView",
+                  "subValues":[],
+                  "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_FORTS
                }
             );
          }

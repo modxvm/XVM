@@ -51,6 +51,7 @@ package net.wg.gui.lobby.questsWindow.components
             _loc1_.paused = true;
             _loc1_ = null;
          }
+         this.tweens.splice(0,this.tweens.length);
          this.tweens = null;
          this.vehicle.dispose();
          this.vehicle = null;
@@ -74,12 +75,20 @@ package net.wg.gui.lobby.questsWindow.components
                this.icon.source = data.iconSource;
                description.visible = true;
                description.x = Math.round(data.iconSource?this.icon.width + ICON_PADDING:0);
-               description.width = (data.battlesLeft?DEFAULT_WIDTH:availableWidth) - description.x;
+               if((data.battlesLeft) || (data.showDone))
+               {
+                  description.width = DEFAULT_WIDTH - description.x;
+               }
+               else
+               {
+                  description.width = availableWidth - description.x;
+               }
                description.htmlText = data.description;
                description.height = description.textHeight + TEXT_PADDING;
             }
             counter.text = data.battlesLeft.toString();
-            counter.visible = battlesLeftTF.visible = Boolean(data.battlesLeft);
+            counter.visible = battlesLeftTF.visible = Boolean((data.battlesLeft) && (!data.showDone));
+            statusMC.visible = data.showDone;
             progressElementsContainer.isReadyForLayout = false;
             progressElementsContainer.setData(data.progressElements);
             progressElementsContainer.validateNow();

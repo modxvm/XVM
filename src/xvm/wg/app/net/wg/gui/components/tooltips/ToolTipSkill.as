@@ -3,8 +3,8 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.tooltips.helpers.Utils;
    import flash.text.TextField;
    import flash.display.Sprite;
-   import flash.text.TextFormat;
    import net.wg.gui.components.tooltips.VO.ToolTipSkillVO;
+   import flash.text.TextFormat;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import flash.text.TextFieldAutoSize;
 
@@ -38,10 +38,11 @@ package net.wg.gui.components.tooltips
       private var maxWidth:Number = 270;
 
       override protected function redraw() : void {
+         var _loc1_:ToolTipSkillVO = null;
          var _loc2_:Separator = null;
          var _loc3_:String = null;
          var _loc4_:TextFormat = null;
-         var _loc1_:ToolTipSkillVO = new ToolTipSkillVO(_data);
+         _loc1_ = new ToolTipSkillVO(_data);
          contentMargin.bottom = 2;
          blockResults = new Vector.<ToolTipBlockResultVO>();
          this.whiteBg.width = 10;

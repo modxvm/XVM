@@ -32,6 +32,10 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       override public function setData(param1:Object) : void {
+         if(this.data)
+         {
+            this.data.dispose();
+         }
          this.data = new ConditionSeparatorVO(param1);
          invalidateData();
       }

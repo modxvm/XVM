@@ -217,9 +217,10 @@ package net.wg.gui.lobby.header
       }
 
       private function checkRoaming() : void {
+         var _loc3_:* = false;
          var _loc1_:Boolean = App.globalVarsMgr.isRoamingEnabledS();
          var _loc2_:Array = getServersS();
-         var _loc3_:Boolean = (_loc1_) && _loc2_.length > 1;
+         _loc3_ = (_loc1_) && _loc2_.length > 1;
          this.regionDD.visible = _loc3_;
          this.serverInfo.visible = !_loc3_;
          if(_loc3_)

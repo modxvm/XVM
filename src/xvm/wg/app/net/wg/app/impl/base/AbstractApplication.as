@@ -9,6 +9,7 @@ package net.wg.app.impl.base
    import net.wg.infrastructure.managers.IContainerManager;
    import net.wg.infrastructure.managers.IGuiItemsManager;
    import net.wg.utils.IGameInputManager;
+   import net.wg.infrastructure.managers.IEventLogManager;
    import net.wg.infrastructure.managers.IWaitingView;
    import net.wg.utils.IUtils;
    import net.wg.utils.ITweenManager;
@@ -78,6 +79,8 @@ package net.wg.app.impl.base
 
       private var _gameInputMgr:IGameInputManager = null;
 
+      private var _eventLogManager:IEventLogManager = null;
+
       private var _waiting:IWaitingView = null;
 
       private var _utils:IUtils = null;
@@ -144,6 +147,10 @@ package net.wg.app.impl.base
 
       public function get gameInputMgr() : IGameInputManager {
          return this._gameInputMgr;
+      }
+
+      public function get eventLogManager() : IEventLogManager {
+         return this._eventLogManager;
       }
 
       public final function get utils() : IUtils {
@@ -306,6 +313,10 @@ package net.wg.app.impl.base
          throw new AbstractException("BaseApp.getNewGameInputManager" + Errors.ABSTRACT_INVOKE);
       }
 
+      protected function getEventLogManager() : IEventLogManager {
+         throw new AbstractException("BaseApp.getEventLogManager" + Errors.ABSTRACT_INVOKE);
+      }
+
       protected function getRegCmdName() : String {
          throw new AbstractException("BaseApp.getRegCmdName" + Errors.ABSTRACT_INVOKE);
       }
@@ -332,6 +343,7 @@ package net.wg.app.impl.base
          setSoundMgrS(this._soundMgr);
          setTooltipMgrS(this._tooltipMgr);
          setColorSchemeMgrS(this._colorSchemeMgr);
+         setEventLogMgrS(this._eventLogManager);
          setGuiItemsMgrS(this._guiItemsMgr);
          setVoiceChatMgrS(this._voiceChatMgr);
          setGameInputMgrS(this._gameInputMgr);
@@ -367,6 +379,7 @@ package net.wg.app.impl.base
          this._guiItemsMgr = this.getNewGuiItemsManager();
          this._voiceChatMgr = this.getNewVoiceChatManager();
          this._gameInputMgr = this.getNewGameInputManager();
+         this._eventLogManager = this.getEventLogManager();
          this._containersMgr.addEventListener(LoaderEvent.CURSOR_LOADED,this.onCursorLoadedHandler);
          this._containersMgr.addEventListener(LoaderEvent.WAITING_LOADED,this.onWaitingLoadedHandler);
       }
@@ -380,6 +393,7 @@ package net.wg.app.impl.base
          this._containersMgr = null;
          this._popoverMgr.dispose();
          this._popoverMgr = null;
+         this._eventLogManager = null;
          this._soundMgr = null;
          this._loaderMgr = null;
          this._varsMgr = null;

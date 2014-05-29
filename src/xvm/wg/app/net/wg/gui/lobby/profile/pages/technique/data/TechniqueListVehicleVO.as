@@ -41,6 +41,8 @@ package net.wg.gui.lobby.profile.pages.technique.data
 
       public var markOfMastery:int;
 
+      public var markOfMasteryBlock:String = "";
+
       public var level:int;
 
       public function get winsEfficiencyStr() : String {

@@ -2,15 +2,25 @@ package net.wg.gui.lobby.sellDialog
 {
    import net.wg.infrastructure.base.meta.impl.VehicleSellDialogMeta;
    import net.wg.infrastructure.base.meta.IVehicleSellDialogMeta;
-   import flash.display.MovieClip;
+   import flash.display.Sprite;
    import net.wg.gui.components.controls.SoundButtonEx;
-   import __AS3__.vec.Vector;
    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
    import scaleform.clik.motion.Tween;
+   import net.wg.gui.lobby.sellDialog.VO.SellVehicleVo;
+   import net.wg.gui.lobby.sellDialog.VO.SellInInventoryModuleVo;
+   import net.wg.gui.lobby.sellDialog.VO.SellInInventoryShellVo;
+   import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleOptionalDeviceVo;
+   import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleShellVo;
+   import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleEquipmentVo;
+   import net.wg.infrastructure.interfaces.IWindow;
+   import scaleform.clik.utils.Padding;
    import org.idmedia.as3commons.util.StringUtils;
+   import __AS3__.vec.*;
    import net.wg.gui.events.VehicleSellDialogEvent;
    import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.ListEvent;
    import flash.events.Event;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.utils.ILocale;
    import fl.transitions.easing.Strong;
@@ -21,9 +31,6 @@ package net.wg.gui.lobby.sellDialog
    {
           
       public function VehicleSellDialog() {
-         this.vehicleData = {};
-         this.modulesData = {};
-         this.shellsData = {};
          this.tweens = new Vector.<Tween>();
          super();
          isModal = true;
@@ -40,6 +47,10 @@ package net.wg.gui.lobby.sellDialog
 
       private static const SLIDING_SPEED:Number = 350;
 
+      private static const INV_CONTROL_QUESTION:String = "invControlQuestion";
+
+      private static const DISSMIS_TANKMEN:int = 1;
+
       public var headerComponent:SellHeaderComponent;
 
       public var slidingComponent:SellSlidingComponent;
@@ -48,7 +59,7 @@ package net.wg.gui.lobby.sellDialog
 
       public var controlQuestion:ControlQuestionComponent;
 
-      public var windBgForm:MovieClip;
+      public var windBgForm:Sprite;
 
       public var cancelBtn:SoundButtonEx;
 
@@ -66,12 +77,6 @@ package net.wg.gui.lobby.sellDialog
 
       private var complexDeviceRenderers:Vector.<ISaleItemBlockRenderer>;
 
-      private var vehicleData:Object;
-
-      private var modulesData:Object;
-
-      private var shellsData:Object;
-
       private var isOpen:Boolean = false;
 
       private var accGold:Number = 0;
@@ -81,6 +86,29 @@ package net.wg.gui.lobby.sellDialog
       private var countTweenObjects:int = 0;
 
       private var countCallBack:int = 0;
+
+      private var vehicleVo:SellVehicleVo = null;
+
+      private var inInventoryModules:Vector.<SellInInventoryModuleVo>;
+
+      private var inInventoryShells:Vector.<SellInInventoryShellVo>;
+
+      private var onVehicleOptionalDevices:Vector.<SellOnVehicleOptionalDeviceVo>;
+
+      private var onVehicleShells:Vector.<SellOnVehicleShellVo>;
+
+      private var onVehicleEquipments:Vector.<SellOnVehicleEquipmentVo>;
+
+      override public function setWindow(param1:IWindow) : void {
+         var _loc2_:Padding = null;
+         super.setWindow(param1);
+         if(param1)
+         {
+            _loc2_ = window.contentPadding as Padding;
+            _loc2_.right = _loc2_.right - 4;
+            window.contentPadding = _loc2_;
+         }
+      }
 
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
@@ -94,8 +122,10 @@ package net.wg.gui.lobby.sellDialog
             if(!param1)
             {
                this.controlQuestion.y = 0;
+               this.as_checkGold(this.accGold);
             }
          }
+         invalidate(INV_CONTROL_QUESTION);
       }
 
       public function as_enableButton(param1:Boolean) : void {
@@ -158,7 +188,7 @@ package net.wg.gui.lobby.sellDialog
          var _loc3_:uint = 0;
          while(_loc3_ < this.complexDeviceRenderers.length)
          {
-            if(this.complexDeviceRenderers[_loc3_].inInventory)
+            if(this.complexDeviceRenderers[_loc3_].toInventory)
             {
                if(!this.complexDeviceRenderers[_loc3_].isRemovable)
                {
@@ -172,15 +202,105 @@ package net.wg.gui.lobby.sellDialog
       }
 
       public function as_setData(param1:Object, param2:Object, param3:Object, param4:Object, param5:Number) : void {
+         var _loc8_:SellInInventoryModuleVo = null;
+         var _loc9_:SellInInventoryShellVo = null;
+         var _loc10_:SellOnVehicleOptionalDeviceVo = null;
+         var _loc11_:SellOnVehicleShellVo = null;
+         var _loc12_:SellOnVehicleEquipmentVo = null;
          this.slidingComponent.sellData = [];
          this.accGold = param5;
+         var _loc6_:Number = 0;
+         var _loc7_:Number = 0;
          this.goldCommon = 0;
-         this.vehicleData = param1;
-         this.modulesData = param2;
-         this.shellsData = param3;
-         this.devicesComponent.removePrice = param4.hasOwnProperty("removePrice")?param4.removePrice:0;
-         this.devicesComponent.defRemovePrice = param4.hasOwnProperty("defRemovePrice")?param4.defRemovePrice:0;
-         this.devicesComponent.removeActionPrc = param4.hasOwnProperty("actionPrc")?param4.actionPrc:0;
+         this.vehicleVo = new SellVehicleVo(param1);
+         this.inInventoryModules = new Vector.<SellInInventoryModuleVo>(0);
+         this.inInventoryShells = new Vector.<SellInInventoryShellVo>(0);
+         this.onVehicleOptionalDevices = new Vector.<SellOnVehicleOptionalDeviceVo>();
+         this.onVehicleShells = new Vector.<SellOnVehicleShellVo>();
+         this.onVehicleEquipments = new Vector.<SellOnVehicleEquipmentVo>();
+         if(param3)
+         {
+            if((param3.hasOwnProperty("modules")) && param3.modules.length > 0)
+            {
+               _loc7_ = param3.modules.length;
+               _loc8_ = null;
+               _loc6_ = 0;
+               while(_loc6_ < _loc7_)
+               {
+                  if(param3.modules[_loc6_])
+                  {
+                     _loc8_ = new SellInInventoryModuleVo(param3.modules[_loc6_]);
+                     this.inInventoryModules.push(_loc8_);
+                  }
+                  _loc6_++;
+               }
+            }
+            if((param3.hasOwnProperty("shells")) && param3.shells.length > 0)
+            {
+               _loc7_ = param3.shells.length;
+               _loc9_ = null;
+               _loc6_ = 0;
+               while(_loc6_ < _loc7_)
+               {
+                  if(param3.shells[_loc6_])
+                  {
+                     _loc9_ = new SellInInventoryShellVo(param3.shells[_loc6_]);
+                     this.inInventoryShells.push(_loc9_);
+                  }
+                  _loc6_++;
+               }
+            }
+         }
+         if(param2)
+         {
+            if((param2.hasOwnProperty("optionalDevices")) && param2.optionalDevices.length > 0)
+            {
+               _loc7_ = param2.optionalDevices.length;
+               _loc10_ = null;
+               _loc6_ = 0;
+               while(_loc6_ < _loc7_)
+               {
+                  if(param2.optionalDevices[_loc6_])
+                  {
+                     _loc10_ = new SellOnVehicleOptionalDeviceVo(param2.optionalDevices[_loc6_]);
+                     this.onVehicleOptionalDevices.push(_loc10_);
+                  }
+                  _loc6_++;
+               }
+            }
+            if((param2.hasOwnProperty("shells")) && param2.shells.length > 0)
+            {
+               _loc7_ = param2.shells.length;
+               _loc11_ = null;
+               _loc6_ = 0;
+               while(_loc6_ < _loc7_)
+               {
+                  if(param2.shells[_loc6_])
+                  {
+                     _loc11_ = new SellOnVehicleShellVo(param2.shells[_loc6_]);
+                     this.onVehicleShells.push(_loc11_);
+                  }
+                  _loc6_++;
+               }
+            }
+            if((param2.hasOwnProperty("equipments")) && param2.equipments.length > 0)
+            {
+               _loc7_ = param2.optionalDevices.length;
+               _loc12_ = null;
+               _loc6_ = 0;
+               while(_loc6_ < _loc7_)
+               {
+                  if(param2.equipments[_loc6_])
+                  {
+                     _loc12_ = new SellOnVehicleEquipmentVo(param2.equipments[_loc6_]);
+                     this.onVehicleEquipments.push(_loc12_);
+                  }
+                  _loc6_++;
+               }
+            }
+         }
+         this.devicesComponent.removePrices = param4.hasOwnProperty("removePrice")?param4.removePrice:null;
+         this.devicesComponent.removeActionPriceData = param4.hasOwnProperty("action")?param4.action:null;
          this.window.title = App.utils.locale.makeString(DIALOGS.VEHICLESELLDIALOG_TITLE,{"name":param1.userName});
          invalidateData();
       }
@@ -203,6 +323,7 @@ package net.wg.gui.lobby.sellDialog
          this.addEventListener(VehicleSellDialogEvent.UPDATE_RESULT,this.updateMoneyResult);
          this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.handleClose);
          this.submitBtn.addEventListener(ButtonEvent.CLICK,this.handleSubmit);
+         this.headerComponent.inBarracsDrop.addEventListener(ListEvent.INDEX_CHANGE,this.handleDissmisClick);
          if(this.controlQuestion.visible)
          {
             App.utils.scheduler.envokeInNextFrame(setFocus,this.controlQuestion.userInput);
@@ -222,6 +343,7 @@ package net.wg.gui.lobby.sellDialog
          this.slidingComponent.settingsBtn.setingsDropBtn.removeEventListener(Event.SELECT,this.playSlidingAnimation);
          this.controlQuestion.removeEventListener(ControlQuestionComponent.USER_INPUT_HANDLER,this.userInputHandler);
          this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.handleClose);
+         this.headerComponent.inBarracsDrop.removeEventListener(ListEvent.INDEX_CHANGE,this.handleDissmisClick);
          for each (_loc1_ in this.tweens)
          {
             _loc1_.paused = true;
@@ -231,9 +353,18 @@ package net.wg.gui.lobby.sellDialog
          this.slidingComponent.dispose();
          this.devicesComponent.dispose();
          this.controlQuestion.dispose();
-         this.vehicleData = null;
-         this.modulesData = null;
-         this.shellsData = null;
+         this.vehicleVo.dispose();
+         this.vehicleVo = null;
+         this.clearVectorWithDisposableVo(this.inInventoryModules as Vector.<IDisposable>);
+         this.clearVectorWithDisposableVo(this.inInventoryShells as Vector.<IDisposable>);
+         this.clearVectorWithDisposableVo(this.onVehicleOptionalDevices as Vector.<IDisposable>);
+         this.clearVectorWithDisposableVo(this.onVehicleShells as Vector.<IDisposable>);
+         this.clearVectorWithDisposableVo(this.onVehicleEquipments as Vector.<IDisposable>);
+         this.inInventoryModules = null;
+         this.inInventoryShells = null;
+         this.onVehicleOptionalDevices = null;
+         this.onVehicleShells = null;
+         this.onVehicleEquipments = null;
          App.toolTipMgr.hide();
       }
 
@@ -248,12 +379,29 @@ package net.wg.gui.lobby.sellDialog
          }
          if(isInvalid(InvalidationType.DATA))
          {
-            this.setHeader(this.vehicleData);
-            this.setDevices(this.vehicleData);
-            this.setShells(this.vehicleData);
-            this.setEquipment(this.vehicleData);
-            this.setInventory(this.modulesData,this.shellsData);
+            this.setHeader(this.vehicleVo);
+            this.setDevices(this.onVehicleOptionalDevices);
+            this.setShells(this.onVehicleShells);
+            this.setEquipment(this.onVehicleEquipments);
+            this.setInventory(this.inInventoryModules,this.inInventoryShells);
             this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
+         }
+         if(isInvalid(INV_CONTROL_QUESTION))
+         {
+            this.updateComponentsPosition();
+         }
+      }
+
+      private function clearVectorWithDisposableVo(param1:Vector.<IDisposable>) : void {
+         var _loc2_:IDisposable = null;
+         if(param1)
+         {
+            while(param1.length > 0)
+            {
+               _loc2_ = param1.pop();
+               _loc2_.dispose();
+               _loc2_ = null;
+            }
          }
       }
 
@@ -359,25 +507,25 @@ package net.wg.gui.lobby.sellDialog
          }
       }
 
-      private function setHeader(param1:Object) : void {
+      private function setHeader(param1:SellVehicleVo) : void {
          this.headerComponent.setData(param1);
       }
 
-      private function setDevices(param1:Object) : void {
+      private function setDevices(param1:Vector.<SellOnVehicleOptionalDeviceVo>) : void {
          this.devicesComponent.setData(param1);
          this.slidingComponent.sellData = this.devicesComponent.sellData;
       }
 
-      private function setShells(param1:Object) : void {
+      private function setShells(param1:Vector.<SellOnVehicleShellVo>) : void {
          this.updateOpenedState();
          this.slidingComponent.setShells(param1);
       }
 
-      private function setEquipment(param1:Object) : void {
+      private function setEquipment(param1:Vector.<SellOnVehicleEquipmentVo>) : void {
          this.slidingComponent.setEquipment(param1);
       }
 
-      private function setInventory(param1:Object, param2:Object) : void {
+      private function setInventory(param1:Vector.<SellInInventoryModuleVo>, param2:Vector.<SellInInventoryShellVo>) : void {
          this.slidingComponent.setInventory(param1,param2);
       }
 
@@ -554,66 +702,84 @@ package net.wg.gui.lobby.sellDialog
       }
 
       private function handleSubmit(param1:ButtonEvent) : void {
-         var _loc9_:uint = 0;
          this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
          this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
          var _loc2_:Array = [];
          var _loc3_:Array = [];
          var _loc4_:Array = [];
          var _loc5_:Array = [];
-         var _loc6_:Array = [];
-         var _loc7_:* = false;
-         var _loc8_:uint = 0;
-         _loc8_ = 0;
-         while(_loc8_ < this.renderersArr.length)
+         var _loc6_:* = false;
+         var _loc7_:uint = 0;
+         _loc7_ = 0;
+         while(_loc7_ < this.renderersArr.length)
          {
-            if(!this.renderersArr[_loc8_].inInventory)
+            if(!this.renderersArr[_loc7_].toInventory)
             {
-               switch(this.renderersArr[_loc8_].type)
+               switch(this.renderersArr[_loc7_].type)
                {
                   case FittingTypes.OPTIONAL_DEVICE:
-                     _loc2_.push(this.renderersArr[_loc8_].dataInfo);
+                     _loc2_.push(
+                        {
+                           "intCD":this.renderersArr[_loc7_].intCD,
+                           "count":this.renderersArr[_loc7_].count
+                        }
+                     );
                      break;
                   case FittingTypes.SHELL:
-                     if(this.renderersArr[_loc8_].itemInInventory)
+                     if(this.renderersArr[_loc7_].fromInventory)
                      {
-                        _loc6_.push(this.renderersArr[_loc8_].dataInfo);
+                        _loc5_.push(
+                           {
+                              "intCD":this.renderersArr[_loc7_].intCD,
+                              "count":this.renderersArr[_loc7_].count
+                           }
+                        );
                      }
                      else
                      {
-                        _loc3_.push(this.renderersArr[_loc8_].dataInfo);
+                        _loc3_.push(
+                           {
+                              "intCD":this.renderersArr[_loc7_].intCD,
+                              "count":this.renderersArr[_loc7_].count
+                           }
+                        );
                      }
                      break;
                   case FittingTypes.EQUIPMENT:
-                     _loc4_.push(this.renderersArr[_loc8_].dataInfo);
+                     _loc4_.push(
+                        {
+                           "intCD":this.renderersArr[_loc7_].intCD,
+                           "count":this.renderersArr[_loc7_].count
+                        }
+                     );
                      break;
                   case FittingTypes.MODULE:
-                     _loc9_ = 0;
-                     while(_loc9_ < this.modulesData.length)
+                     if(this.renderersArr[_loc7_].sellExternalData)
                      {
-                        _loc6_.push(this.modulesData[_loc9_][0]);
-                        _loc9_++;
+                        _loc5_ = _loc5_.splice(_loc5_.length,0,this.renderersArr[_loc7_].sellExternalData);
                      }
                      break;
                }
             }
-            _loc8_++;
+            _loc7_++;
          }
-         _loc8_ = 0;
-         while(_loc8_ < this.complexDeviceRenderers.length)
+         _loc7_ = 0;
+         while(_loc7_ < this.complexDeviceRenderers.length)
          {
-            if(!this.complexDeviceRenderers[_loc8_].inInventory)
+            if(!this.complexDeviceRenderers[_loc7_].toInventory)
             {
-               _loc2_.push(this.complexDeviceRenderers[_loc8_].dataInfo);
+               _loc2_.push(
+                  {
+                     "intCD":this.complexDeviceRenderers[_loc7_].intCD,
+                     "count":this.complexDeviceRenderers[_loc7_].count
+                  }
+               );
             }
-            _loc8_++;
+            _loc7_++;
          }
-         if(this.headerComponent.inBarracsDrop.selectedIndex == 1)
-         {
-            _loc7_ = true;
-         }
+         _loc6_ = this.headerComponent.inBarracsDrop.selectedIndex == 1;
          setDialogSettingsS(this.slidingComponent.settingsBtn.setingsDropBtn.selected);
-         sellS(this.vehicleData,_loc3_,_loc4_,_loc2_,_loc6_,_loc7_);
+         sellS(this.vehicleVo.intCD,_loc3_,_loc4_,_loc2_,_loc5_,_loc6_);
          onWindowCloseS();
       }
 
@@ -630,7 +796,7 @@ package net.wg.gui.lobby.sellDialog
          var _loc2_:uint = 0;
          while(_loc2_ < this.renderersArr.length)
          {
-            if(!this.renderersArr[_loc2_].inInventory)
+            if(!this.renderersArr[_loc2_].toInventory)
             {
                this.headerComponent.creditsCommon = this.headerComponent.creditsCommon + this.renderersArr[_loc2_].moneyValue;
             }
@@ -640,7 +806,7 @@ package net.wg.gui.lobby.sellDialog
          var _loc3_:uint = 0;
          while(_loc3_ < this.complexDeviceRenderers.length)
          {
-            if(this.complexDeviceRenderers[_loc3_].inInventory)
+            if(this.complexDeviceRenderers[_loc3_].toInventory)
             {
                if(!this.complexDeviceRenderers[_loc3_].isRemovable)
                {
@@ -663,6 +829,10 @@ package net.wg.gui.lobby.sellDialog
 
       private function userInputHandler(param1:Event) : void {
          setUserInputS(this.controlQuestion.getUserText());
+      }
+
+      private function handleDissmisClick(param1:ListEvent) : void {
+         checkControlQuestionS(param1.index == DISSMIS_TANKMEN);
       }
    }
 

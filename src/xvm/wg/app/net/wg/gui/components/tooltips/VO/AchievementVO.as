@@ -1,6 +1,7 @@
 package net.wg.gui.components.tooltips.VO
 {
    import net.wg.gui.components.tooltips.helpers.Utils;
+   import net.wg.data.constants.Values;
 
 
    public class AchievementVO extends Object
@@ -24,6 +25,8 @@ package net.wg.gui.components.tooltips.VO
       public var type:String = null;
 
       public var value:Number = NaN;
+
+      public var localizedValue:String = "";
 
       public var icon:String = null;
 
@@ -63,6 +66,7 @@ package net.wg.gui.components.tooltips.VO
          this.section = (param1.hasOwnProperty("section")) && !(param1["section"] == undefined)?param1["section"]:null;
          this.type = (param1.hasOwnProperty("type")) && !(param1["type"] == undefined)?param1["type"]:null;
          this.value = (param1.hasOwnProperty("value")) && !(param1["value"] == undefined)?param1["value"]:NaN;
+         this.localizedValue = (param1.hasOwnProperty("localizedValue")) && !(param1["localizedValue"] == undefined)?param1["localizedValue"]:Values.EMPTY_STR;
          this.icon = (param1.hasOwnProperty("icon")) && !(param1["icon"] == undefined)?param1["icon"]:null;
          this.isInDossier = (param1.hasOwnProperty("isInDossier")) && !(param1["isInDossier"] == undefined)?param1["isInDossier"]:null;
          var _loc3_:Boolean = (param1.hasOwnProperty("params")) && !(param1["params"] == undefined)?true:false;

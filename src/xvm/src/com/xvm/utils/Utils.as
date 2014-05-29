@@ -8,7 +8,7 @@ package com.xvm.utils
     import flash.utils.*;
     import flash.text.*;
     import flash.filters.*;
-    import net.wg.gui.lobby.profile.components.DashLineTextItem;
+    import net.wg.gui.lobby.profile.components.ProfileDashLineTextItem;
     import org.idmedia.as3commons.util.StringUtils;
     import com.xvm.*;
 
@@ -264,9 +264,9 @@ package com.xvm.utils
             return clone;
         }
 
-        public static function cloneDashLineTextItem(dl:DashLineTextItem):DashLineTextItem
+        public static function cloneDashLineTextItem(dl:ProfileDashLineTextItem):ProfileDashLineTextItem
         {
-            var clone:DashLineTextItem = App.utils.classFactory.getComponent("DashLineTextItem_UI", DashLineTextItem,
+            var clone:ProfileDashLineTextItem = App.utils.classFactory.getComponent("DashLineTextItem_UI", ProfileDashLineTextItem,
                 {
                     x:dl.x,
                     y:dl.y,
@@ -302,7 +302,7 @@ package com.xvm.utils
             for (var name:* in handlers)
                 obj.addEventListener(name, target, handlers[name]);
         }
-		
+
         private static function showTooltip(e:Object):void
         {
             var b:* = e.target;

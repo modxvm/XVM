@@ -2,6 +2,7 @@ package scaleform.clik.core
 {
    import flash.display.MovieClip;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.infrastructure.interfaces.entity.IIdentifiable;
    import scaleform.clik.layout.LayoutData;
    import scaleform.clik.utils.Constraints;
    import flash.events.Event;
@@ -16,9 +17,11 @@ package scaleform.clik.core
    import net.wg.infrastructure.events.LifeCycleEvent;
    import net.wg.infrastructure.exceptions.AssertionException;
    import net.wg.infrastructure.exceptions.LifecycleException;
+   import net.wg.data.constants.Values;
+   import net.wg.infrastructure.exceptions.InfrastructureException;
 
 
-   public class UIComponent extends MovieClip implements IDisposable
+   public class UIComponent extends MovieClip implements IDisposable, IIdentifiable
    {
           
       public function UIComponent() {
@@ -77,6 +80,8 @@ package scaleform.clik.core
       protected var _layoutData:LayoutData;
 
       protected var _enableInitCallback:Boolean = false;
+
+      private var _uiid:uint = 4.294967295E9;
 
       public var constraints:Constraints;
 
@@ -639,6 +644,18 @@ package scaleform.clik.core
       private function throwLifeCycleException() : void {
          var _loc1_:* = "\nMay be you can find a custom override method Draw and place after each gotoAnd... " + "method next code block:if (_baseDisposed){return;}";
          this.simpleAssert(!this._baseDisposed,"invoking after dispose!" + _loc1_,LifecycleException);
+      }
+
+      public function set UIID(param1:uint) : void {
+         var _loc2_:String = "you can not set initial UIID value " + Values.EMPTY_UIID;
+         var _loc3_:* = "UIID is unique value and can not be modified.";
+         this.simpleAssert(this._uiid == Values.EMPTY_UIID,_loc3_,InfrastructureException);
+         this.simpleAssert(!(param1 == Values.EMPTY_UIID),_loc2_);
+         this._uiid = param1;
+      }
+
+      public function get UIID() : uint {
+         return this._uiid;
       }
    }
 

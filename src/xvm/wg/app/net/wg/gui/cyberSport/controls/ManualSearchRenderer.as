@@ -1,7 +1,7 @@
 package net.wg.gui.cyberSport.controls
 {
-   import net.wg.gui.components.controls.SoundListItemRenderer;
-   import net.wg.gui.cyberSport.interfaces.IManualSearchRenderer;
+   import net.wg.gui.components.controls.TableRenderer;
+   import net.wg.gui.rally.interfaces.IManualSearchRenderer;
    import flash.text.TextField;
    import flash.display.MovieClip;
    import flash.geom.Point;
@@ -11,7 +11,7 @@ package net.wg.gui.cyberSport.controls
    import net.wg.infrastructure.interfaces.IUserProps;
 
 
-   public class ManualSearchRenderer extends SoundListItemRenderer implements IManualSearchRenderer
+   public class ManualSearchRenderer extends TableRenderer implements IManualSearchRenderer
    {
           
       public function ManualSearchRenderer() {
@@ -21,13 +21,13 @@ package net.wg.gui.cyberSport.controls
 
       public var commander:TextField = null;
 
+      public var commandDescr:TextField = null;
+
       public var commandSize:TextField = null;
 
       public var commandMaxSize:TextField = null;
 
       public var effency:TextField = null;
-
-      public var serverTF:TextField;
 
       public var freezeIcon:MovieClip;
 
@@ -73,7 +73,6 @@ package net.wg.gui.cyberSport.controls
          this.commandMaxSize.mouseEnabled = false;
          this.effency.mouseEnabled = false;
          this.inBattleMC.mouseEnabled = false;
-         this.serverTF.mouseEnabled = false;
          this.freezeIcon.useHandCursor = this.freezeIcon.buttonMode = true;
          this.restrictionIcon.useHandCursor = this.restrictionIcon.buttonMode = true;
          this.freezeIcon.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
@@ -88,6 +87,7 @@ package net.wg.gui.cyberSport.controls
          this.restrictionIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.restrictionIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.commander = null;
+         this.commandDescr = null;
          this.commandSize = null;
          this.commandMaxSize = null;
          this.effency = null;
@@ -121,19 +121,12 @@ package net.wg.gui.cyberSport.controls
                _loc1_ = CSCommandVO(data);
                this.visible = true;
                this.populateUI(_loc1_);
-               if(_loc1_.server)
-               {
-                  this.serverTF.text = _loc1_.server;
-                  this.serverTF.visible = true;
-               }
-               else
-               {
-                  this.serverTF.visible = false;
-               }
+               startSimulationDoubleClick();
             }
             else
             {
                this.visible = false;
+               stopSimulationDoubleClick();
             }
             this.checkTooltip();
          }
@@ -141,12 +134,12 @@ package net.wg.gui.cyberSport.controls
 
       protected function populateUI(param1:CSCommandVO) : void {
          var _loc2_:String = null;
-         var _loc3_:IUserProps = null;
+         var _loc4_:IUserProps = null;
          if(param1.creator)
          {
-            _loc3_ = App.utils.commons.getUserProps(param1.creator.userName,param1.creator.clanAbbrev,param1.creator.region,param1.creator.igrType);
-            _loc3_.rgb = param1.creator.color;
-            App.utils.commons.formatPlayerName(this.commander,_loc3_);
+            _loc4_ = App.utils.commons.getUserProps(param1.creator.userName,param1.creator.clanAbbrev,param1.creator.region,param1.creator.igrType);
+            _loc4_.rgb = param1.creator.color;
+            App.utils.commons.formatPlayerName(this.commander,_loc4_);
             _loc2_ = this.commander.htmlText;
          }
          else
@@ -173,9 +166,19 @@ package net.wg.gui.cyberSport.controls
          {
             this.commandMaxSize.text = _loc2_;
          }
-         this.inBattleMC.visible = param1.inBattle;
+         var _loc3_:int = this.freezeIcon.x;
          this.freezeIcon.visible = param1.isFreezed;
+         _loc3_ = _loc3_ + (this.freezeIcon.visible?this.freezeIcon.width + 6:0);
          this.restrictionIcon.visible = param1.isRestricted;
+         this.restrictionIcon.x = _loc3_;
+         _loc3_ = _loc3_ + (this.restrictionIcon.visible?this.restrictionIcon.width + 6:0);
+         this.inBattleMC.visible = param1.inBattle;
+         this.inBattleMC.x = _loc3_;
+         _loc3_ = _loc3_ + (this.inBattleMC.visible?this.inBattleMC.width + 6:0);
+         this.commandDescr.x = _loc3_;
+         this.commandDescr.width = 473 - _loc3_;
+         _loc4_ = App.utils.commons.getUserProps(param1.description,null,null,0);
+         App.utils.commons.formatPlayerName(this.commandDescr,_loc4_);
       }
    }
 

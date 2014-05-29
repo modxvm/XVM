@@ -8,7 +8,7 @@ package net.wg.gui.cyberSport.controls
    import net.wg.gui.components.controls.VoiceWave;
    import net.wg.infrastructure.events.VoiceChatEvent;
    import flash.events.MouseEvent;
-   import net.wg.gui.cyberSport.vo.UnitCandidateVO;
+   import net.wg.gui.rally.vo.RallyCandidateVO;
    import net.wg.infrastructure.interfaces.IUserProps;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.prebattle.squad.MessengerUtils;
@@ -51,17 +51,17 @@ package net.wg.gui.cyberSport.controls
       }
 
       override protected function draw() : void {
-         var _loc1_:UnitCandidateVO = null;
+         var _loc1_:RallyCandidateVO = null;
          var _loc2_:IUserProps = null;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
-            _loc1_ = UnitCandidateVO(data);
+            _loc1_ = RallyCandidateVO(data);
             visible = !(_loc1_ == null);
             if(_loc1_)
             {
                this.inviteIndicator.visible = _loc1_.isInvite;
-               if(_loc1_.isRatingAvailable())
+               if(_loc1_.isRatingAvailable)
                {
                   this.candidateRating.visible = true;
                   this.candidateRating.text = _loc1_.rating;
@@ -125,7 +125,7 @@ package net.wg.gui.cyberSport.controls
       }
 
       private function onRollOverHandler(param1:MouseEvent) : void {
-         var _loc2_:UnitCandidateVO = UnitCandidateVO(data);
+         var _loc2_:RallyCandidateVO = RallyCandidateVO(data);
          if(_loc2_)
          {
             App.toolTipMgr.show(_loc2_.getToolTip());

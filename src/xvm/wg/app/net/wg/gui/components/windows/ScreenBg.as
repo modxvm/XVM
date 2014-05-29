@@ -60,6 +60,9 @@ package net.wg.gui.components.windows
       }
 
       override protected function onDispose() : void {
+         this.headerBg = null;
+         this.bgFx = null;
+         this.bg = null;
          super.onDispose();
       }
    }

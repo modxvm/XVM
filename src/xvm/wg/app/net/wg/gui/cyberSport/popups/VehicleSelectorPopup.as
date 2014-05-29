@@ -8,6 +8,7 @@ package net.wg.gui.cyberSport.popups
    import net.wg.gui.cyberSport.controls.events.VehicleSelectorFilterEvent;
    import net.wg.gui.cyberSport.controls.events.VehicleSelectorEvent;
    import scaleform.clik.events.ButtonEvent;
+   import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
    import net.wg.gui.cyberSport.vo.VehicleSelectorFilterVO;
    import net.wg.gui.cyberSport.vo.VehicleSelectorItemVO;
 
@@ -20,6 +21,9 @@ package net.wg.gui.cyberSport.popups
          super();
          isModal = true;
          this.infoTF.mouseEnabled = false;
+         this.selectButton.UIID = 68;
+         this.cancelButton.UIID = 69;
+         UIID = 70;
       }
 
       public var selector:VehicleSelector;
@@ -40,6 +44,10 @@ package net.wg.gui.cyberSport.popups
          this.cancelButton.addEventListener(ButtonEvent.CLICK,this.onCancelClick);
       }
 
+      override protected function onClosingApproved() : void {
+         App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_CLOSE,0);
+      }
+
       private function onSelectionChanged(param1:VehicleSelectorEvent) : void {
          this.selectedItems = param1.selectedDescriptors;
          this.selectButton.enabled = this.selectedItems.length > 0;
@@ -50,14 +58,16 @@ package net.wg.gui.cyberSport.popups
       }
 
       private function onFiltersChanged(param1:VehicleSelectorFilterEvent) : void {
-         onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain,param1.level);
+         onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain,param1.level,param1.compatibleOnly);
       }
 
       private function onCancelClick(param1:ButtonEvent) : void {
+         App.eventLogManager.logUIEvent(param1,0);
          onWindowClose();
       }
 
       private function onSelectClick(param1:ButtonEvent) : void {
+         App.eventLogManager.logUIEvent(param1,0);
          onSelectVehiclesS(this.selectedItems);
       }
 
@@ -71,10 +81,12 @@ package net.wg.gui.cyberSport.popups
 
       public function as_setListData(param1:Array, param2:Array) : void {
          var _loc4_:Object = null;
+         var _loc5_:VehicleSelectorItemVO = null;
          var _loc3_:Array = [];
          for each (_loc4_ in param1)
          {
-            _loc3_.push(new VehicleSelectorItemVO(_loc4_,true));
+            _loc5_ = new VehicleSelectorItemVO(_loc4_,true);
+            _loc3_.push(_loc5_);
          }
          this.selector.setupSelectionOverrides(param2);
          this.selector.setListItems(_loc3_);

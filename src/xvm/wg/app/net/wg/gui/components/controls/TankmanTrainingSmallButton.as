@@ -93,17 +93,20 @@ package net.wg.gui.components.controls
 
       private var _priceColors:Object;
 
-      public function setDataForDropSkills(param1:Number, param2:Boolean, param3:Number=0, param4:Number=0) : void {
+      public function setDataForDropSkills(param1:Number, param2:Boolean, param3:ActionPriceVO) : void {
          if(!isNaN(param1))
          {
             this.price = param1.toString();
          }
          this.enabled = this.hasMoney = param2;
-         var _loc5_:String = !param2?"disabled":"normal";
-         this.priceLabel.textColor = this._priceColors[_loc5_];
+         var _loc4_:String = !param2?"disabled":"normal";
+         this.priceLabel.textColor = this._priceColors[_loc4_];
          this.actionPrice.textColorType = param2?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
-         var _loc6_:ActionPriceVO = new ActionPriceVO(param3,param1,param4,this.getIcoOfButtonType());
-         this.actionPrice.setData(_loc6_);
+         if(param3)
+         {
+            param3.ico = this.getIcoOfButtonType();
+         }
+         this.actionPrice.setData(param3);
          this.actionPrice.setup(this);
          this.priceLabel.visible = !this.actionPrice.visible;
       }
@@ -210,7 +213,7 @@ package net.wg.gui.components.controls
          }
       }
 
-      public function setData(param1:Object, param2:Number, param3:Number, param4:Number, param5:Boolean, param6:Boolean, param7:int, param8:Number) : void {
+      public function setData(param1:Object, param2:Number, param3:Number, param4:Number, param5:Boolean, param6:Boolean, param7:int, param8:Object=null) : void {
          if(param1 == null)
          {
             return;
@@ -231,10 +234,14 @@ package net.wg.gui.components.controls
          this.nation = param7;
          this.retraining = !param5;
          var _loc9_:Number = this.model.isPremium?this.model.gold:this.model.credits != 0?this.model.credits:null;
-         var _loc10_:Number = this.model.isPremium?this.model.defGold:this.model.defCredits != 0?this.model.defCredits:null;
          this.price = _loc9_.toString();
-         var _loc11_:ActionPriceVO = new ActionPriceVO(param8,_loc9_,_loc10_,this.getIcoOfButtonType());
-         this.actionPrice.setData(_loc11_);
+         var _loc10_:ActionPriceVO = null;
+         if(param8)
+         {
+            _loc10_ = new ActionPriceVO(param8);
+            _loc10_.ico = this.getIcoOfButtonType();
+         }
+         this.actionPrice.setData(_loc10_);
          this.actionPrice.textColorType = this.hasMoney?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
          this.actionPrice.setup(this);
          this.priceLabel.visible = !this.actionPrice.visible;

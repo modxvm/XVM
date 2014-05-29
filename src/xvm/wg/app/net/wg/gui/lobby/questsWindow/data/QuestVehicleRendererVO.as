@@ -17,6 +17,8 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _htmlLabel:String = "";
 
+      private var _showDone:Boolean = false;
+
       public function get isAvailable() : Boolean {
          return this._isAvailable;
       }
@@ -47,6 +49,14 @@ package net.wg.gui.lobby.questsWindow.data
 
       public function set isDisabled(param1:Boolean) : void {
          this._isDisabled = param1;
+      }
+
+      public function get showDone() : Boolean {
+         return this._showDone;
+      }
+
+      public function set showDone(param1:Boolean) : void {
+         this._showDone = param1;
       }
    }
 

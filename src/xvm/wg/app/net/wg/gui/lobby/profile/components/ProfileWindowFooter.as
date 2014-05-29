@@ -2,10 +2,9 @@ package net.wg.gui.lobby.profile.components
 {
    import flash.text.TextField;
    import flash.display.MovieClip;
+   import net.wg.gui.components.controls.UILoaderAlt;
    import flash.text.TextFieldAutoSize;
    import flash.events.MouseEvent;
-   import scaleform.clik.constants.InvalidationType;
-   import net.wg.gui.lobby.profile.data.ProfileUserVO;
    import net.wg.data.constants.Values;
 
 
@@ -54,42 +53,72 @@ package net.wg.gui.lobby.profile.components
 
       private var _sidesGap:uint = 10;
 
-      public var textUserInfo:TextField;
+      public var txtClanInfo:TextField;
 
-      public var leftTextHitMC:MovieClip;
+      public var txtClanJoin:TextField;
 
       public var background:MovieClip;
 
-      private var _textLeft:String = " ";
+      public var loader:UILoaderAlt;
+
+      private var clanText:String = "";
 
       override protected function configUI() : void {
          super.configUI();
          textDates.autoSize = TextFieldAutoSize.LEFT;
-         this.textUserInfo.selectable = textDates.selectable = false;
-         this.textUserInfo.mouseEnabled = false;
-         this.leftTextHitMC.addEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler,false,0,true);
-         this.leftTextHitMC.addEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler,false,0,true);
+         this.txtClanJoin.selectable = this.txtClanInfo.selectable = textDates.selectable = false;
+         this.txtClanInfo.addEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler,false,0,true);
+         this.txtClanInfo.addEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler,false,0,true);
       }
 
       override protected function draw() : void {
+         var _loc1_:uint = 0;
+         var _loc2_:* = false;
          super.draw();
-         if(isInvalid(InvalidationType.DATA))
-         {
-            this.textUserInfo.htmlText = cutText(this.textUserInfo,this._textLeft);
-            invalidate(LAYOUT_INVALID);
-         }
          if(isInvalid(LAYOUT_INVALID))
          {
-            this.textUserInfo.x = this._sidesGap;
             textDates.x = this.width - this._sidesGap - textDates.width;
-            this.background.width = this.width;
+            _loc1_ = 200;
+            this.background.x = -_loc1_;
+            this.background.width = this.width + 2 * _loc1_;
+            _loc2_ = (initData) && !(initData.clanName == Values.EMPTY_STR);
+            if(_loc2_)
+            {
+               this.loader.x = this._sidesGap;
+               this.txtClanInfo.x = this.txtClanJoin.x = this.loader.x + this.loader.width + this._sidesGap;
+            }
+            else
+            {
+               this.txtClanInfo.x = this.txtClanJoin.x = this._sidesGap;
+            }
          }
       }
 
-      override public function setUserData(param1:ProfileUserVO) : void {
-         var _loc2_:String = param1.clanName != Values.EMPTY_STR?"[" + param1.clanName + "] ":param1.clanName;
-         this._textLeft = param1.clanName != Values.EMPTY_STR?param1.clanPosition + " " + param1.clanLabel + " " + "<b>" + _loc2_ + "</b>" + param1.clanNameDescr + ". ":"";
-         super.setUserData(param1);
+      override protected function applyDataChanges() : void {
+         var _loc2_:String = null;
+         super.applyDataChanges();
+         var _loc1_:* = !(initData.clanName == Values.EMPTY_STR);
+         if(_loc1_)
+         {
+            this.loader.visible = true;
+            this.loader.source = initData.clanEmblem;
+            _loc2_ = "[" + initData.clanName + "] ";
+            this.clanText = "<b>" + _loc2_ + "</b>" + initData.clanNameDescr + ". " + initData.clanPosition + ".";
+            this.txtClanInfo.htmlText = cutText(this.txtClanInfo,this.clanText);
+            this.txtClanJoin.htmlText = getDateWithDot(initData.clanJoinTime);
+         }
+         else
+         {
+            this.loader.visible = false;
+            this.clanText = Values.EMPTY_STR;
+            this.txtClanInfo.htmlText = this.clanText;
+            this.txtClanJoin.htmlText = Values.EMPTY_STR;
+         }
+         invalidate(LAYOUT_INVALID);
+      }
+
+      override protected function getSeparator() : String {
+         return "\n";
       }
 
       public function get sidesGap() : uint {
@@ -102,16 +131,24 @@ package net.wg.gui.lobby.profile.components
       }
 
       private function leftTextMouseOverHandler(param1:MouseEvent) : void {
-         App.toolTipMgr.show(this._textLeft);
+         App.toolTipMgr.show(this.clanText);
       }
 
       private function leftTextMouseOutHandler(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
 
+      override public function get height() : Number {
+         return 48;
+      }
+
       override protected function onDispose() : void {
-         this.leftTextHitMC.removeEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler);
-         this.leftTextHitMC.removeEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler);
+         this.txtClanInfo.removeEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler);
+         this.txtClanInfo.removeEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler);
+         this.txtClanInfo = null;
+         this.txtClanJoin = null;
+         this.background = null;
+         this.loader = null;
          super.onDispose();
       }
    }

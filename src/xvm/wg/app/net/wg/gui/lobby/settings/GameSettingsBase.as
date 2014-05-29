@@ -4,7 +4,6 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.components.controls.CheckBox;
    import flash.text.TextField;
    import net.wg.gui.components.controls.Slider;
-   import net.wg.gui.components.controls.LabelControl;
    import net.wg.gui.components.controls.DropdownMenu;
    import net.wg.gui.components.controls.InfoIcon;
 
@@ -21,8 +20,6 @@ package net.wg.gui.lobby.settings
       public var fieldSetInstructionPanel:FieldSet = null;
 
       public var fieldSetBattleTypes:FieldSet = null;
-
-      public var fieldSetVibro:FieldSet = null;
 
       public var enableOlFilterCheckbox:CheckBox = null;
 
@@ -50,56 +47,6 @@ package net.wg.gui.lobby.settings
 
       public var gameplay_assaultCheckbox:CheckBox = null;
 
-      public var vibroDeviceConnectionStateField:TextField = null;
-
-      public var vibroGainLabel:TextField = null;
-
-      public var vibroGainSlider:Slider = null;
-
-      public var vibroGainValue:LabelControl = null;
-
-      public var vibroEngineLabel:TextField = null;
-
-      public var vibroEngineSlider:Slider = null;
-
-      public var vibroEngineValue:LabelControl = null;
-
-      public var vibroAccelerationLabel:TextField = null;
-
-      public var vibroAccelerationSlider:Slider = null;
-
-      public var vibroAccelerationValue:LabelControl = null;
-
-      public var vibroShotsLabel:TextField = null;
-
-      public var vibroShotsSlider:Slider = null;
-
-      public var vibroShotsValue:LabelControl = null;
-
-      public var vibroHitsLabel:TextField = null;
-
-      public var vibroHitsSlider:Slider = null;
-
-      public var vibroHitsValue:LabelControl = null;
-
-      public var vibroCollisionsLabel:TextField = null;
-
-      public var vibroCollisionsSlider:Slider = null;
-
-      public var vibroCollisionsValue:LabelControl = null;
-
-      public var vibroDamageLabel:TextField = null;
-
-      public var vibroDamageSlider:Slider = null;
-
-      public var vibroDamageValue:LabelControl = null;
-
-      public var vibroGUILabel:TextField = null;
-
-      public var vibroGUISlider:Slider = null;
-
-      public var vibroGUIValue:LabelControl = null;
-
       public var minimapAlphaSliderLabel:TextField = null;
 
       public var minimapAlphaSlider:Slider = null;
@@ -122,11 +69,12 @@ package net.wg.gui.lobby.settings
 
       public var showVehiclesCounterCheckbox:CheckBox = null;
 
+      public var showMarksOnGunCheckbox:CheckBox = null;
+
       override protected function configUI() : void {
          this.fieldSetChat.label = SETTINGS.GAME_FIELDSET_HEADERCHAT;
          this.fieldSetInstructionPanel.label = SETTINGS.GAME_PLAYERPANELSETTINGS;
          this.fieldSetBattleTypes.label = SETTINGS.GAME_FIELDSET_HEADERGAMEPLAY;
-         this.fieldSetVibro.label = SETTINGS.VIBRO_FIELDSET_HEADER;
          this.enableOlFilterCheckbox.label = SETTINGS.CHAT_CENSORSHIPMESSAGES;
          this.enableSpamFilterCheckbox.label = SETTINGS.CHAT_REMOVESPAM;
          this.showDateMessageCheckbox.label = SETTINGS.CHAT_SHOWDATEMESSAGE;
@@ -142,15 +90,6 @@ package net.wg.gui.lobby.settings
          this.gameplay_ctfCheckbox.label = SETTINGS.GAMEPLAY_CTF;
          this.gameplay_dominationCheckbox.label = SETTINGS.GAMEPLAY_DOMINATION;
          this.gameplay_assaultCheckbox.label = SETTINGS.GAMEPLAY_ASSAULT;
-         this.vibroDeviceConnectionStateField.text = SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
-         this.vibroGainLabel.text = SETTINGS.VIBRO_LABELS_GAIN;
-         this.vibroEngineLabel.text = SETTINGS.VIBRO_LABELS_ENGINE;
-         this.vibroAccelerationLabel.text = SETTINGS.VIBRO_LABELS_ACCELERATION;
-         this.vibroShotsLabel.text = SETTINGS.VIBRO_LABELS_SHOTS;
-         this.vibroHitsLabel.text = SETTINGS.VIBRO_LABELS_HITS;
-         this.vibroCollisionsLabel.text = SETTINGS.VIBRO_LABELS_COLLISIONS;
-         this.vibroDamageLabel.text = SETTINGS.VIBRO_LABELS_DAMAGE;
-         this.vibroGUILabel.text = SETTINGS.VIBRO_LABELS_GUI;
          this.minimapAlphaSliderLabel.text = SETTINGS.MINIMAP_LABELS_ALPHA;
          this.enableOpticalSnpEffectCheckbox.label = SETTINGS.GAME_ENABLEOPTICALSNPEFFECT;
          this.enablePostMortemEffectCheckbox.label = SETTINGS.GAME_ENABLEMORTALPOSTEFFECT;
@@ -160,6 +99,9 @@ package net.wg.gui.lobby.settings
          this.replayEnabledLabel.text = SETTINGS.GAME_REPLAYENABLED;
          this.useServerAimCheckbox.label = SETTINGS.CURSOR_SERVERAIM;
          this.showVehiclesCounterCheckbox.label = SETTINGS.GAME_SHOWVEHICLESCOUNTER;
+         this.showMarksOnGunCheckbox.label = SETTINGS.GAME_SHOWMARKSONGUN;
+         this.showMarksOnGunCheckbox.toolTip = TOOLTIPS.SHOWMARKSONGUN;
+         this.showMarksOnGunCheckbox.infoIcoType = InfoIcon.TYPE_INFO;
          super.configUI();
       }
    }

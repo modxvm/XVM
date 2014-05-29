@@ -190,7 +190,7 @@ package net.wg.gui.lobby.tankman
          var _loc3_:* = 0;
          while(_loc3_ < this.retrainingButtons.length)
          {
-            TankmanTrainingSmallButton(this.retrainingButtons[_loc3_]).setData(this.model.tankmanCost[_loc3_],this.model.gold,this.model.credits,this.model.specializationLevel,_loc1_,_loc2_,this.model.nationID,this.model.actionPrc[_loc3_]);
+            TankmanTrainingSmallButton(this.retrainingButtons[_loc3_]).setData(this.model.tankmanCost[_loc3_],this.model.gold,this.model.credits,this.model.specializationLevel,_loc1_,_loc2_,this.model.nationID,this.model.action[_loc3_]);
             _loc3_++;
          }
          this.autoSelectRetrainingButtons();

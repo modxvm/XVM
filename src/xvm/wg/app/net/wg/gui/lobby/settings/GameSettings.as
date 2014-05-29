@@ -22,8 +22,6 @@ package net.wg.gui.lobby.settings
 
       public var bgFrom:Sprite = null;
 
-      private var vibroControlsList:Array = null;
-
       private var missChangeEvent:Boolean = false;
 
       override protected function configUI() : void {
@@ -36,71 +34,55 @@ package net.wg.gui.lobby.settings
 
       override protected function setData(param1:Object) : void {
          var _loc2_:String = null;
-         var _loc3_:* = false;
-         var _loc4_:SettingsControlProp = null;
-         var _loc5_:* = false;
-         var _loc6_:CheckBox = null;
-         var _loc7_:DropdownMenu = null;
-         var _loc8_:Slider = null;
-         var _loc9_:LabelControl = null;
-         var _loc10_:* = false;
+         var _loc3_:SettingsControlProp = null;
+         var _loc4_:* = false;
+         var _loc5_:CheckBox = null;
+         var _loc6_:DropdownMenu = null;
+         var _loc7_:Slider = null;
+         var _loc8_:LabelControl = null;
          super.setData(param1);
-         this.vibroControlsList = [];
          for (_loc2_ in _data)
          {
-            _loc4_ = SettingsControlProp(_data[_loc2_]);
-            if(this[_loc2_ + _loc4_.type])
+            _loc3_ = SettingsControlProp(_data[_loc2_]);
+            if(this[_loc2_ + _loc3_.type])
             {
-               _loc5_ = !(_loc4_.current == null || (_loc4_.readOnly));
-               switch(_loc4_.type)
+               _loc4_ = !(_loc3_.current == null || (_loc3_.readOnly));
+               switch(_loc3_.type)
                {
                   case SettingsConfig.TYPE_CHECKBOX:
-                     _loc6_ = CheckBox(this[_loc2_ + _loc4_.type]);
-                     _loc6_.selected = _loc4_.current;
-                     _loc6_.enabled = _loc5_;
-                     _loc6_.addEventListener(Event.SELECT,this.onCheckBoxSelected);
+                     _loc5_ = CheckBox(this[_loc2_ + _loc3_.type]);
+                     _loc5_.selected = _loc3_.current;
+                     _loc5_.enabled = _loc4_;
+                     _loc5_.addEventListener(Event.SELECT,this.onCheckBoxSelected);
                      break;
                   case SettingsConfig.TYPE_DROPDOWN:
-                     _loc7_ = this[_loc2_ + _loc4_.type];
-                     _loc7_.dataProvider = new DataProvider(_loc4_.options);
-                     _loc7_.menuRowCount = _loc4_.options  is  Array?_loc4_.options.length:0;
-                     _loc7_.selectedIndex = _loc4_.current;
-                     _loc7_.addEventListener(ListEvent.INDEX_CHANGE,this.onDropDownChange);
+                     _loc6_ = this[_loc2_ + _loc3_.type];
+                     _loc6_.dataProvider = new DataProvider(_loc3_.options);
+                     _loc6_.menuRowCount = _loc3_.options  is  Array?_loc3_.options.length:0;
+                     _loc6_.selectedIndex = _loc3_.current;
+                     _loc6_.addEventListener(ListEvent.INDEX_CHANGE,this.onDropDownChange);
                      break;
                   case SettingsConfig.TYPE_SLIDER:
-                     _loc8_ = Slider(this[_loc2_ + _loc4_.type]);
-                     _loc8_.value = _loc4_.current;
-                     _loc8_.enabled = _loc5_;
-                     _loc8_.addEventListener(SliderEvent.VALUE_CHANGE,this.onSliderValueChanged);
-                     if((_loc4_.hasValue) && (this[_loc2_ + SettingsConfig.TYPE_VALUE]))
+                     _loc7_ = Slider(this[_loc2_ + _loc3_.type]);
+                     _loc7_.value = _loc3_.current;
+                     _loc7_.enabled = _loc4_;
+                     _loc7_.addEventListener(SliderEvent.VALUE_CHANGE,this.onSliderValueChanged);
+                     if((_loc3_.hasValue) && (this[_loc2_ + SettingsConfig.TYPE_VALUE]))
                      {
-                        _loc9_ = this[_loc2_ + SettingsConfig.TYPE_VALUE];
-                        _loc9_.text = _loc4_.current;
+                        _loc8_ = this[_loc2_ + SettingsConfig.TYPE_VALUE];
+                        _loc8_.text = _loc3_.current;
                      }
                      break;
-               }
-               if(_loc4_.isDependOn)
-               {
-                  if(_loc4_.isDependOn == SettingsConfig.VIBRO_IS_CONNECTED)
-                  {
-                     this.vibroControlsList.push(_loc2_);
-                  }
-                  _loc10_ = SettingsControlProp(_data[_loc4_.isDependOn]).current;
-                  this.showHideControl(_loc2_,_loc4_,_loc10_);
                }
             }
             else
             {
-               if(!_loc4_.readOnly)
+               if(!_loc3_.readOnly)
                {
-                  DebugUtils.LOG_WARNING("ERROR in" + this + " control " + (_loc2_ + _loc4_.type) + " can not find");
+                  DebugUtils.LOG_WARNING("ERROR in" + this + " control " + (_loc2_ + _loc3_.type) + " can not find");
                }
             }
          }
-         _loc3_ = SettingsControlProp(_data.vibroIsConnected).current;
-         vibroDeviceConnectionStateField.text = _loc3_?SETTINGS.VIBRO_DEVICE_STATE_CONNECTED:SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
-         vibroDeviceConnectionStateField.visible = _loc3_;
-         fieldSetVibro.visible = _loc3_;
          if((horStabilizationSnpCheckbox) && (dynamicCameraCheckbox))
          {
             this.enableHorStabilizationSnp(dynamicCameraCheckbox.selected);
@@ -183,29 +165,6 @@ package net.wg.gui.lobby.settings
          }
       }
 
-      public function onVibroManagerConnect() : void {
-         var _loc2_:uint = 0;
-         var _loc3_:uint = 0;
-         var _loc4_:String = null;
-         var _loc5_:SettingsControlProp = null;
-         var _loc1_:Boolean = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GAME_SETTINGS].vibroIsConnected).current;
-         if(this.vibroControlsList)
-         {
-            _loc2_ = this.vibroControlsList.length;
-            _loc3_ = 0;
-            while(_loc3_ < _loc2_)
-            {
-               _loc4_ = this.vibroControlsList[_loc3_];
-               _loc5_ = SettingsControlProp(_data[_loc4_]);
-               this.showHideControl(_loc4_,_loc5_,_loc1_);
-               _loc3_++;
-            }
-         }
-         vibroDeviceConnectionStateField.text = _loc1_?SETTINGS.VIBRO_DEVICE_STATE_CONNECTED:SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
-         vibroDeviceConnectionStateField.visible = _loc1_;
-         fieldSetVibro.visible = _loc1_;
-      }
-
       private function onDropDownChange(param1:ListEvent) : void {
          var _loc2_:DropdownMenu = DropdownMenu(param1.target);
          var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
@@ -248,10 +207,6 @@ package net.wg.gui.lobby.settings
                   continue;
                }
             }
-         }
-         while((this.vibroControlsList) && this.vibroControlsList.length > 0)
-         {
-            this.vibroControlsList.pop();
          }
          super.onDispose();
       }

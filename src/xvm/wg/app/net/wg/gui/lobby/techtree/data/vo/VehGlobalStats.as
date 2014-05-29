@@ -26,6 +26,10 @@ package net.wg.gui.lobby.techtree.data.vo
 
       public var hasNationTree:Boolean;
 
+      public var warningMessage:String;
+
+      public var historicalBattleID:int = -1;
+
       public function fromArray(param1:Array, param2:ILocale) : void {
          if(param1.length > 4)
          {
@@ -35,6 +39,8 @@ package net.wg.gui.lobby.techtree.data.vo
             this.extraInfo.fromArray(param1[2],param2);
             this.freeXP = !isNaN(param1[3])?param1[3]:0;
             this.hasNationTree = param1[4];
+            this.warningMessage = param1[5];
+            this.historicalBattleID = param1[6];
          }
       }
 
@@ -61,10 +67,18 @@ package net.wg.gui.lobby.techtree.data.vo
          {
             this.hasNationTree = param1.hasNationTree;
          }
+         if(param1.warningMessage != null)
+         {
+            this.warningMessage = param1.warningMessage;
+         }
+         if(param1.historicalBattleID != null)
+         {
+            this.historicalBattleID = param1.historicalBattleID;
+         }
       }
 
       public function toString() : String {
-         return "[VehGlobalStats: enableInstallItems = " + this.enableInstallItems + ", statusString = " + this.statusString + ", extraInfo = " + this.extraInfo + ", freeXP = " + this.freeXP + ", hasNationTree = " + this.hasNationTree + "]";
+         return "[VehGlobalStats: enableInstallItems = " + this.enableInstallItems + ", statusString = " + this.statusString + ", extraInfo = " + this.extraInfo + ", freeXP = " + this.freeXP + ", hasNationTree = " + this.hasNationTree + ", warningMessage = " + this.warningMessage + ", historicalBattleID = " + this.historicalBattleID + "]";
       }
    }
 

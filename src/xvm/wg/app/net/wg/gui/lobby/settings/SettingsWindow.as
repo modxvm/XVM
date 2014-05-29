@@ -35,6 +35,7 @@ package net.wg.gui.lobby.settings
    {
           
       public function SettingsWindow() {
+         this._invalidTabs = {};
          super();
          this.canDrag = false;
          this.canClose = false;
@@ -62,13 +63,15 @@ package net.wg.gui.lobby.settings
 
       public var ddListItemRendererSound:DropDownListItemRendererSound = null;
 
+      private var _invalidTabs:Object;
+
       private var _settingsData:Object = null;
 
       private var changesData:SettingsChangesMap = null;
 
       private var needToUpdateGraphicSettings:Boolean = false;
 
-      private var tabToSelect:int = 0;
+      private var tabToSelect:int = -1;
 
       private var graphicsPresetToSelect:int = -1;
 
@@ -104,12 +107,8 @@ package net.wg.gui.lobby.settings
       }
 
       public function as_onVibroManagerConnect(param1:Boolean) : void {
-         SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GAME_SETTINGS].vibroIsConnected).current = param1;
-         var _loc2_:GameSettings = GameSettings(this.tryGetView(SettingsConfig.GAME_SETTINGS));
-         if(_loc2_ != null)
-         {
-            _loc2_.onVibroManagerConnect();
-         }
+         SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.OTHER_SETTINGS].vibroIsConnected).current = param1;
+         this.updateTabs(param1);
       }
 
       public function as_updateVideoSettings(param1:Object) : void {
@@ -151,6 +150,13 @@ package net.wg.gui.lobby.settings
                      {
                         _loc8_.options = [];
                      }
+                  }
+               }
+               else
+               {
+                  if(_loc7_ == SettingsConfig.DYNAMIC_RENDERER)
+                  {
+                     SettingsConfig.liveUpdateVideoSettingsData[_loc7_] = null;
                   }
                }
                if(_loc2_)
@@ -204,12 +210,13 @@ package net.wg.gui.lobby.settings
       }
 
       public function as_setData(param1:Object) : void {
+         this.invalidateAllTabs();
          this.initializeCommonData(param1);
       }
 
       public function as_openTab(param1:Number) : void {
          this.tabToSelect = param1;
-         if(initialized)
+         if((initialized) && !(param1 == -1))
          {
             this.tabs.selectedIndex = param1;
          }
@@ -225,6 +232,38 @@ package net.wg.gui.lobby.settings
          }
       }
 
+      private function invalidateAllTabs() : void {
+         var _loc2_:Object = null;
+         this._invalidTabs = {};
+         var _loc1_:Array = SettingsConfig.tabsDataProviderWithOther;
+         for each (_loc2_ in _loc1_)
+         {
+            this._invalidTabs[_loc2_.linkage] = true;
+         }
+      }
+
+      private function isTabInvalid(param1:String) : Boolean {
+         var _loc2_:* = false;
+         if((this._invalidTabs.hasOwnProperty(param1)) && (this._invalidTabs[param1]))
+         {
+            _loc2_ = true;
+         }
+         return _loc2_;
+      }
+
+      private function updateTabIfNeeded(param1:String, param2:IViewStackContent) : void {
+         if(this.isTabInvalid(param1))
+         {
+            param2.update(
+               {
+                  "id":param1,
+                  "data":this._settingsData[param1]
+               }
+            );
+            this._invalidTabs[param1] = false;
+         }
+      }
+
       private function initializeCommonData(param1:Object) : void {
          var _loc2_:String = null;
          var _loc3_:IViewStackContent = null;
@@ -233,12 +272,8 @@ package net.wg.gui.lobby.settings
          this.updateApplyBtnState();
          if(this.tabs != null)
          {
-            this.tabs.dataProvider = new DataProvider(SettingsConfig.tabsDataProvider);
-            if(this.tabs.selectedIndex == -1)
-            {
-               this.tabs.selectedIndex = __currentTab;
-            }
-            _loc2_ = SettingsConfig.tabsDataProvider[__currentTab].linkage;
+            this.updateTabs(SettingsControlProp(this._settingsData[SettingsConfig.OTHER_SETTINGS].vibroIsConnected).current);
+            _loc2_ = SettingsConfig.tabsDataProviderWithOther[__currentTab].linkage;
             this.view.show(_loc2_);
             _loc3_ = IViewStackContent(this.view.currentView);
             _loc3_.update(
@@ -248,6 +283,33 @@ package net.wg.gui.lobby.settings
                }
             );
             this.tabs.validateNow();
+         }
+      }
+
+      private function updateTabs(param1:Boolean) : void {
+         var _loc2_:DataProvider = null;
+         var _loc3_:uint = 0;
+         if(param1)
+         {
+            _loc2_ = new DataProvider(SettingsConfig.tabsDataProviderWithOther);
+            this.tabs.dataProvider = _loc2_;
+         }
+         else
+         {
+            _loc2_ = new DataProvider(SettingsConfig.tabsDataProvider);
+            this.tabs.dataProvider = _loc2_;
+         }
+         if(this.tabs.selectedIndex == -1)
+         {
+            _loc3_ = _loc2_.length;
+            if(__currentTab >= _loc3_)
+            {
+               this.tabs.selectedIndex = _loc3_-1;
+            }
+            else
+            {
+               this.tabs.selectedIndex = __currentTab;
+            }
          }
       }
 
@@ -268,7 +330,10 @@ package net.wg.gui.lobby.settings
             this.tabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
             this.view.addEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
             this.view.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChangeHandler);
-            this.tabs.selectedIndex = this.tabToSelect;
+            if(this.tabToSelect != -1)
+            {
+               this.tabs.selectedIndex = this.tabToSelect;
+            }
          }
          this.addEventListener(SettingViewEvent.ON_CONTROL_CHANGED,this.onControlChanged);
          this.addEventListener(SettingViewEvent.ON_PTT_CONTROL_CHANGED,this.onPTTControlChanged);
@@ -312,12 +377,17 @@ package net.wg.gui.lobby.settings
          this.changesData.clear();
          this.changesData = null;
          this._settingsData = null;
+         this._invalidTabs = null;
       }
 
       private function controlDefValEqNewVal(param1:*, param2:*) : Boolean {
          var _loc3_:String = null;
          if(param1  is  SettingsControlProp)
          {
+            if(param2  is  Array)
+            {
+               return (SettingsControlProp(param1).current as Array).join() == (param2 as Array).join();
+            }
             return SettingsControlProp(param1).current == param2;
          }
          if(param1  is  SettingsKeyProp)
@@ -428,58 +498,68 @@ package net.wg.gui.lobby.settings
                         }
                         else
                         {
-                           if(param1[param3][_loc5_]  is  Object && !(param1[param3][_loc5_].current == undefined))
+                           if(param1[param3][_loc5_]  is  Array)
                            {
-                              if(_loc6_.type == SettingsConfig.TYPE_CHECKBOX)
+                              if(_loc6_.type == SettingsConfig.TYPE_RANGE_SLIDER)
                               {
-                                 _loc6_.current = Boolean(param1[param3][_loc5_].current);
-                                 _loc6_.prevVal = _loc6_.current;
-                                 if(param1[param3][_loc5_].hasOwnProperty("options"))
+                                 _loc6_.current = param1[param3][_loc5_];
+                              }
+                           }
+                           else
+                           {
+                              if(param1[param3][_loc5_]  is  Object && !(param1[param3][_loc5_].current == undefined))
+                              {
+                                 if(_loc6_.type == SettingsConfig.TYPE_CHECKBOX)
                                  {
-                                    _loc6_.options = _loc4_.cloneObject(param1[param3][_loc5_].options);
-                                    for (_loc7_ in param1[param3][_loc5_].options)
+                                    _loc6_.current = Boolean(param1[param3][_loc5_].current);
+                                    _loc6_.prevVal = _loc6_.current;
+                                    if(param1[param3][_loc5_].hasOwnProperty("options"))
                                     {
-                                       if((param1[param3][_loc5_].options[_loc7_].hasOwnProperty("advanced")) && param1[param3][_loc5_].options[_loc7_].advanced == true)
+                                       _loc6_.options = _loc4_.cloneObject(param1[param3][_loc5_].options);
+                                       for (_loc7_ in param1[param3][_loc5_].options)
                                        {
-                                          _loc6_.advanced = true;
-                                          break;
+                                          if((param1[param3][_loc5_].options[_loc7_].hasOwnProperty("advanced")) && param1[param3][_loc5_].options[_loc7_].advanced == true)
+                                          {
+                                             _loc6_.advanced = true;
+                                             break;
+                                          }
+                                       }
+                                    }
+                                    if(param3 == SettingsConfig.CONTROLS_SETTINGS)
+                                    {
+                                       if(param1[param3][_loc5_].hasOwnProperty("default"))
+                                       {
+                                          _loc6_._default = param1[param3][_loc5_].default == undefined?false:Boolean(param1[param3][_loc5_].default);
+                                       }
+                                       else
+                                       {
+                                          _loc6_._default = false;
                                        }
                                     }
                                  }
-                                 if(param3 == SettingsConfig.CONTROLS_SETTINGS)
-                                 {
-                                    if(param1[param3][_loc5_].hasOwnProperty("default"))
-                                    {
-                                       _loc6_._default = param1[param3][_loc5_].default == undefined?false:Boolean(param1[param3][_loc5_].default);
-                                    }
-                                    else
-                                    {
-                                       _loc6_._default = false;
-                                    }
-                                 }
-                              }
-                              else
-                              {
-                                 _loc6_.current = Math.max(param1[param3][_loc5_].current,0);
-                                 _loc6_.prevVal = _loc6_.current;
-                                 if(param3 == SettingsConfig.CONTROLS_SETTINGS)
-                                 {
-                                    if(param1[param3][_loc5_].hasOwnProperty("default"))
-                                    {
-                                       _loc6_._default = Math.max(param1[param3][_loc5_].default,0);
-                                    }
-                                    else
-                                    {
-                                       _loc6_._default = 0;
-                                    }
-                                 }
-                                 if(param1[param3][_loc5_].options != undefined)
-                                 {
-                                    _loc6_.options = _loc4_.cloneObject(param1[param3][_loc5_].options);
-                                 }
                                  else
                                  {
-                                    _loc6_.options = [];
+                                    _loc6_.current = Math.max(param1[param3][_loc5_].current,0);
+                                    _loc6_.prevVal = _loc6_.current;
+                                    if(param3 == SettingsConfig.CONTROLS_SETTINGS)
+                                    {
+                                       if(param1[param3][_loc5_].hasOwnProperty("default"))
+                                       {
+                                          _loc6_._default = Math.max(param1[param3][_loc5_].default,0);
+                                       }
+                                       else
+                                       {
+                                          _loc6_._default = 0;
+                                       }
+                                    }
+                                    if(param1[param3][_loc5_].options != undefined)
+                                    {
+                                       _loc6_.options = _loc4_.cloneObject(param1[param3][_loc5_].options);
+                                    }
+                                    else
+                                    {
+                                       _loc6_.options = [];
+                                    }
                                  }
                               }
                            }
@@ -537,6 +617,7 @@ package net.wg.gui.lobby.settings
 
       private function sendData(param1:Boolean) : void {
          var _loc5_:String = null;
+         var _loc6_:GraphicSettings = null;
          this.cancelBtn.enabled = this.applyBtn.enabled = this.submitBtn.enabled = false;
          var _loc2_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
          if(_loc2_)
@@ -553,6 +634,11 @@ package net.wg.gui.lobby.settings
          }
          else
          {
+            _loc6_ = GraphicSettings(this.tryGetView(SettingsConfig.GRAPHIC_SETTINGS));
+            if(_loc6_)
+            {
+               _loc6_.rewriteInitialValues();
+            }
             applySettingsS(this.changesData.getChanges(),param1);
             this.as_ConfirmationOfApplication(false);
          }
@@ -679,16 +765,11 @@ package net.wg.gui.lobby.settings
       }
 
       private function onViewNeedUpdateHandler(param1:ViewStackEvent) : void {
-         var _loc2_:IViewStackContent = param1.view;
-         _loc2_.update(
-            {
-               "id":param1.linkage,
-               "data":this._settingsData[param1.linkage]
-            }
-         );
+         this.updateTabIfNeeded(param1.linkage,param1.view);
       }
 
       private function onViewChangeHandler(param1:ViewStackEvent) : void {
+         this.updateTabIfNeeded(param1.linkage,param1.view);
          var _loc2_:IViewStackContent = param1.view;
          var _loc3_:ISettingsBase = _loc2_ as ISettingsBase;
          if(_loc3_  is  GraphicSettings)

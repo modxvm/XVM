@@ -37,6 +37,8 @@ package net.wg.infrastructure.base.meta.impl
 
       public var getLocaleOverride:Function = null;
 
+      public var isFortificationAvailable:Function = null;
+
       public function isDevelopmentS() : Boolean {
          App.utils.asserter.assertNotNull(this.isDevelopment,"isDevelopment" + Errors.CANT_NULL);
          return this.isDevelopment();
@@ -100,6 +102,11 @@ package net.wg.infrastructure.base.meta.impl
       public function getLocaleOverrideS() : String {
          App.utils.asserter.assertNotNull(this.getLocaleOverride,"getLocaleOverride" + Errors.CANT_NULL);
          return this.getLocaleOverride();
+      }
+
+      public function isFortificationAvailableS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isFortificationAvailable,"isFortificationAvailable" + Errors.CANT_NULL);
+         return this.isFortificationAvailable();
       }
    }
 

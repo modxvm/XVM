@@ -7,11 +7,10 @@ package net.wg.gui.lobby.hangar.tcarousel
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.ActionPrice;
    import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.data.constants.SoundTypes;
    import net.wg.data.constants.SoundManagerStates;
    import flash.text.TextFormat;
-   import net.wg.gui.components.controls.VO.ActionPriceVO;
-   import net.wg.data.constants.IconsTypes;
    import __AS3__.vec.Vector;
    import flash.display.FrameLabel;
    import flash.filters.GlowFilter;
@@ -86,9 +85,7 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       private var _slotPrice:Number = 0;
 
-      private var _defSlotPrice:Number = 0;
-
-      private var _slotActionPricePrc:Number = 0;
+      private var _slotPriceActionData:ActionPriceVO = null;
 
       override protected function onDispose() : void {
          if(this.vehicleIcon)
@@ -145,8 +142,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             this._tankType = this.dataVO.type;
             this._availableSlots = this.dataVO.availableSlots;
             this._slotPrice = this.dataVO.slotPrice;
-            this._defSlotPrice = this.dataVO.defSlotPrice;
-            this._slotActionPricePrc = this.dataVO.hasOwnProperty("slotPricePrc")?this.dataVO.slotPricePrc:0;
+            this._slotPriceActionData = this.dataVO.slotPriceActionData;
             _dataDirty = true;
             invalidate();
          }
@@ -310,7 +306,6 @@ package net.wg.gui.lobby.hangar.tcarousel
          var _loc1_:* = false;
          var _loc2_:TextFormat = null;
          var _loc3_:Object = null;
-         var _loc4_:ActionPriceVO = null;
          if(_baseDisposed)
          {
             return;
@@ -367,9 +362,9 @@ package net.wg.gui.lobby.hangar.tcarousel
                {
                   this.statusText.y = _height - this.statusText.textHeight >> 1;
                }
+               _loc1_ = !(this._stat == "undamaged") && !_empty;
+               this.statusText.visible = _loc1_;
             }
-            _loc1_ = !(this._stat == "undamaged") && !_empty;
-            this.statusText.visible = _loc1_;
             this.emptyInfoTxt.visible = false;
             if(this.buyTank)
             {
@@ -382,8 +377,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                this.slotPrice.text = this._slotPrice.toString();
                if(this.actionPrice)
                {
-                  _loc4_ = new ActionPriceVO(this._slotActionPricePrc,this._slotPrice,this._defSlotPrice,IconsTypes.GOLD);
-                  this.actionPrice.setData(_loc4_);
+                  this.actionPrice.setData(this._slotPriceActionData);
                   this.slotPrice.visible = !this.actionPrice.visible;
                   this.actionPrice.setup(this);
                }

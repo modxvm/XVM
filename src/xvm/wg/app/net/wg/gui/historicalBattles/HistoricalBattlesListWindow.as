@@ -39,6 +39,8 @@ package net.wg.gui.historicalBattles
 
       private static const DESCRIPTION_MAX_HEIGHT:Number = 180;
 
+      private static const RIGHT_MARGIN:Number = 990;
+
       public var carousel:BattlesCarousel;
 
       public var teamsVehicleList:TeamsVehicleList;
@@ -57,7 +59,9 @@ package net.wg.gui.historicalBattles
 
       public var headerTF:TextField;
 
-      public var datesTF:TextField;
+      public var dateTF:TextField;
+
+      public var timerTF:TextField;
 
       public var statusTF:TextField;
 
@@ -89,6 +93,10 @@ package net.wg.gui.historicalBattles
 
       private var fbTTBody:String = "";
 
+      private var dateTTHeader:String = "";
+
+      private var dateTTBody:String = "";
+
       private var _listEnabled:Boolean = true;
 
       private var _priceDDEnabled:Boolean = true;
@@ -105,9 +113,13 @@ package net.wg.gui.historicalBattles
          this.fightButton.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.mapImage.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.priceInfoIcon.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+         this.dateTF.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+         this.timerTF.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.fightButton.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.mapImage.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.priceInfoIcon.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
+         this.dateTF.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
+         this.timerTF.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.updateCarouselSelection();
       }
 
@@ -140,18 +152,15 @@ package net.wg.gui.historicalBattles
          if((isInvalid(InvalidationType.DATA)) && (this.model))
          {
             this.headerTF.text = this.model.name;
-            this.datesTF.htmlText = this.model.datesInfo;
             this.descriptionTF.htmlText = this.model.descriptionText;
             this.mapNameTF.text = this.model.mapName;
             this.mapInfoTF.htmlText = this.model.mapInfo;
             this.mapImage.source = this.model.mapImage;
             this.teamATF.text = this.model.sideA?this.model.sideA:HISTORICAL_BATTLES.LABEL_TEAMA;
             this.teamBTF.text = this.model.sideB?this.model.sideB:HISTORICAL_BATTLES.LABEL_TEAMB;
-            this.remainingTimeTF.text = this.model.remainingTimeInfo;
             this.remainingTimeTF.visible = this.model.isFuture;
             this.priceInfoTF.visible = !this.model.isFuture;
             this.priceDD.visible = !this.model.isFuture;
-            this.datesTF.visible = !this.model.isFuture;
             this.showFullDescrButton.visible = Boolean(this.model.descriptionURL);
             this.updatePriceInfoIcon();
             this.updateListEnabled();
@@ -191,9 +200,13 @@ package net.wg.gui.historicalBattles
          this.fightButton.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.mapImage.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.priceInfoIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+         this.dateTF.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+         this.timerTF.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.fightButton.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.mapImage.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.priceInfoIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
+         this.dateTF.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
+         this.timerTF.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.carousel.removeEventListener(ListEvent.INDEX_CHANGE,this.onCarouselItemSelect);
          this.carousel.dispose();
          this.carousel = null;
@@ -264,6 +277,10 @@ package net.wg.gui.historicalBattles
                break;
             case this.priceInfoIcon:
                App.toolTipMgr.showSpecial(Tooltips.HISTORICAL_AMMO,null,this.model.id,this.selectedVehicleID);
+               break;
+            case this.dateTF:
+            case this.timerTF:
+               this.showComplexTT(this.dateTTHeader,this.dateTTBody);
                break;
          }
       }
@@ -426,6 +443,22 @@ package net.wg.gui.historicalBattles
          {
             this.updateCarouselSelection();
          }
+      }
+
+      public function as_setDate(param1:String, param2:String, param3:String) : void {
+         this.dateTF.htmlText = param1;
+         this.dateTF.width = this.dateTF.textWidth;
+         this.dateTF.x = RIGHT_MARGIN - this.dateTF.width;
+         this.dateTTHeader = param2;
+         this.dateTTBody = param3;
+      }
+
+      public function as_updateTimer(param1:String, param2:String) : void {
+         this.timerTF.htmlText = param1;
+         this.timerTF.width = this.timerTF.textWidth;
+         this.timerTF.x = RIGHT_MARGIN - this.timerTF.width;
+         this.timerTF.visible = (param1) && param1.length > 0;
+         this.remainingTimeTF.htmlText = param2;
       }
    }
 

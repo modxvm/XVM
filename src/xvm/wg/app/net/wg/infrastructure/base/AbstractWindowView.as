@@ -82,6 +82,13 @@ package net.wg.infrastructure.base
          onWindowMinimizeS();
       }
 
+      public function handleWindowClose() : void {
+         if(onTryClosingS())
+         {
+            onWindowCloseS();
+         }
+      }
+
       public function as_showWaiting(param1:String, param2:Object) : void {
          this.waitingMessage = param1;
          this.showWaiting = true;
@@ -244,11 +251,11 @@ package net.wg.infrastructure.base
          return Linkages.WINDOW;
       }
 
-      public function get wrapper() : IWrapper {
+      override public function get wrapper() : IWrapper {
          return this._window;
       }
 
-      public function set wrapper(param1:IWrapper) : void {
+      override public function set wrapper(param1:IWrapper) : void {
          this.setWindow(IWindow(param1));
       }
 
@@ -399,8 +406,24 @@ package net.wg.infrastructure.base
          if(this.canCloseFromInputDetails(_loc2_))
          {
             param1.handled = true;
-            onWindowCloseS();
+            if(onTryClosingS())
+            {
+               this.onClosingApproved();
+               onWindowCloseS();
+            }
+            else
+            {
+               this.onClosingDeclined();
+            }
          }
+      }
+
+      protected function onClosingApproved() : void {
+          
+      }
+
+      protected function onClosingDeclined() : void {
+          
       }
    }
 

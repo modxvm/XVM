@@ -75,11 +75,13 @@ package net.wg.gui.historicalBattles.controls
       }
 
       override public function setData(param1:Object) : void {
+         var _loc3_:* = false;
+         var _loc4_:* = false;
          this.model = param1 as VehicleListItemVO;
          var _loc2_:Point = new Point(mouseX,mouseY);
          _loc2_ = localToGlobal(_loc2_);
-         var _loc3_:Boolean = this.warningIcon.hitTestPoint(_loc2_.x,_loc2_.y,true);
-         var _loc4_:Boolean = this.mouseArea.hitTestPoint(_loc2_.x,_loc2_.y,true);
+         _loc3_ = this.warningIcon.hitTestPoint(_loc2_.x,_loc2_.y,true);
+         _loc4_ = this.mouseArea.hitTestPoint(_loc2_.x,_loc2_.y,true);
          if(this.model)
          {
             enabled = (this.model.enabled) && (this.model.selectable);

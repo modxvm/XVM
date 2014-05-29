@@ -19,8 +19,6 @@ package net.wg.infrastructure.base.meta
       function as_appendMessage(param1:Object) : void;
 
       function as_updateMessage(param1:Object) : void;
-
-      function as_layoutInfo(param1:Object) : void;
    }
 
 }

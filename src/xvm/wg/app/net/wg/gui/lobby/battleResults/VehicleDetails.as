@@ -141,8 +141,7 @@ package net.wg.gui.lobby.battleResults
             }
             _loc2_++;
          }
-         this.statsLbl.height = this.height + 15;
-         this.statsValuesLbl.height = this.height + 15;
+         height = Math.max(this.statsLbl.textHeight,this.statsValuesLbl.textHeight) + 6;
       }
 
       private function clearLines() : void {

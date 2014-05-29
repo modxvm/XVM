@@ -25,6 +25,11 @@ package net.wg.gui.lobby.profile.pages.technique
 
       public var emptyScreen:ProfileTechniqueEmptyScreen;
 
+      override public function as_setInitData(param1:Object) : void {
+         super.as_setInitData(param1);
+         battlesDropdown.menuProvider = param1.dropDownProvider;
+      }
+
       override protected function initialize() : void {
          super.initialize();
          layoutManager = new SectionLayoutManager(525,740);
@@ -43,6 +48,7 @@ package net.wg.gui.lobby.profile.pages.technique
             _loc3_.push(_loc4_);
          }
          this.listComponent.enableMarkOfMasteryBtn(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
+         this.stackComponent.enableAwardsButton(!(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_BATTLES) && !(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES));
          this.listComponent.vehicles = _loc3_;
          _loc6_ = _loc3_.length > 0;
          this.emptyScreen.visible = !_loc6_;
@@ -95,7 +101,21 @@ package net.wg.gui.lobby.profile.pages.technique
                }
                else
                {
-                  DebugUtils.LOG_WARNING("Battle type is not implemented!",battlesType);
+                  if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_BATTLES)
+                  {
+                     this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_FORTBATTLES);
+                  }
+                  else
+                  {
+                     if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES)
+                     {
+                        this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_FORTSORTIES);
+                     }
+                     else
+                     {
+                        throw new Error("Battle type is not implemented! " + battlesType);
+                     }
+                  }
                }
             }
          }

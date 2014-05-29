@@ -179,6 +179,12 @@ package net.wg.gui.components.advanced
          this._centerTabs = param1;
          invalidate(INVALID_LAYOUT);
       }
+
+      override protected function onDispose() : void {
+         this.lineMC = null;
+         this.selectionIndicator = null;
+         super.onDispose();
+      }
    }
 
 }

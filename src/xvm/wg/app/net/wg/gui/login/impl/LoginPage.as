@@ -8,10 +8,13 @@ package net.wg.gui.login.impl
    import net.wg.gui.login.ILoginForm;
    import flash.text.TextField;
    import net.wg.gui.components.common.BaseLogoView;
+   import net.wg.gui.login.impl.components.RssNewsFeed;
    import net.wg.gui.login.ISparksManager;
    import org.idmedia.as3commons.util.Map;
    import flash.display.InteractiveObject;
+   import net.wg.gui.login.impl.components.RssItemEvent;
    import net.wg.gui.events.UILoaderEvent;
+   import net.wg.data.Aliases;
    import flash.ui.Keyboard;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.Event;
@@ -57,6 +60,8 @@ package net.wg.gui.login.impl
       public var copyright:MovieClip = null;
 
       public var bottomLogos:BaseLogoView = null;
+
+      public var rssNewsFeed:RssNewsFeed = null;
 
       private var useWallpaper:Boolean = true;
 
@@ -148,6 +153,7 @@ package net.wg.gui.login.impl
       override protected function configUI() : void {
          super.configUI();
          this.bottomLogos = this.copyright.logos;
+         this.rssNewsFeed.addEventListener(RssItemEvent.ITEM_SIZE_INVALID,this.rssSizeInvalid);
          if(this.bg_image != null)
          {
             this.bg_image.addEventListener(UILoaderEvent.COMPLETE,this.onLoadingImageCompleteHandler,false,0,true);
@@ -162,12 +168,17 @@ package net.wg.gui.login.impl
          this.createSparks();
       }
 
+      private function rssSizeInvalid(param1:RssItemEvent) : void {
+         this.updateRssPositions();
+      }
+
       override protected function draw() : void {
          super.draw();
       }
 
       override protected function onPopulate() : void {
          super.onPopulate();
+         registerComponent(this.rssNewsFeed,Aliases.RSS_NEWS_FEED);
          this.initLoginForm();
          alpha = 1;
          this.keyMappings = App.utils.commons.createMap([Keyboard.ESCAPE,this.onEscapeKeyPress,Keyboard.ENTER,this.onEnterKeyPress]);
@@ -185,6 +196,8 @@ package net.wg.gui.login.impl
          this.sparksMc = null;
          this.shadow = null;
          this.copyright = null;
+         this.rssNewsFeed.removeEventListener(RssItemEvent.ITEM_SIZE_INVALID,this.rssSizeInvalid);
+         this.rssNewsFeed = null;
          this.disposeLoginForm();
          this.enableInputs(false);
          this.keyMappings.clear();
@@ -249,7 +262,13 @@ package net.wg.gui.login.impl
          this.shadow.y = this.form.y - 331;
          this.copyright.x = this.form.x - 2;
          this.copyright.y = App.appHeight - 29;
+         this.updateRssPositions();
          invalidateSize();
+      }
+
+      private function updateRssPositions() : void {
+         this.rssNewsFeed.x = App.appWidth - this.rssNewsFeed.actualWidth;
+         this.rssNewsFeed.y = App.appHeight;
       }
 
       private function set_position_wallpaper() : void {

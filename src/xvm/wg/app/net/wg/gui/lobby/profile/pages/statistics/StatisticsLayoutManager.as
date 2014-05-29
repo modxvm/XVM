@@ -3,7 +3,7 @@ package net.wg.gui.lobby.profile.pages.statistics
    import net.wg.gui.lobby.profile.data.SectionLayoutManager;
    import net.wg.gui.lobby.profile.ProfileConstants;
    import flash.display.DisplayObject;
-   import net.wg.gui.lobby.profile.components.LineDescrIconText;
+   import net.wg.gui.components.advanced.LineDescrIconText;
 
 
    public class StatisticsLayoutManager extends SectionLayoutManager

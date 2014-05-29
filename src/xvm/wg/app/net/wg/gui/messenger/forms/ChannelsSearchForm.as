@@ -13,6 +13,7 @@ package net.wg.gui.messenger.forms
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.utils.Padding;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.messenger.evnts.ChannelsFormEvent;
    import scaleform.clik.ui.InputDetails;
@@ -61,6 +62,7 @@ package net.wg.gui.messenger.forms
          constraints.addElement("searchResultList",this.searchResultList,Constraints.ALL);
          constraints.addElement("bg",this.bg,Constraints.ALL);
          constraints.addElement("joinButton",this.joinButton,Constraints.LEFT | Constraints.BOTTOM);
+         this.searchResultList.sbPadding = new Padding(2,2,2,2);
       }
 
       override public function setSize(param1:Number, param2:Number) : void {

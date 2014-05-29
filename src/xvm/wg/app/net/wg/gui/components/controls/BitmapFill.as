@@ -1,13 +1,13 @@
 package net.wg.gui.components.controls
 {
-   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.base.UIComponentEx;
    import flash.display.MovieClip;
-   import flash.display.BitmapData;
    import flash.geom.Rectangle;
+   import flash.display.BitmapData;
    import flash.utils.getDefinitionByName;
 
 
-   public class BitmapFill extends UIComponent
+   public class BitmapFill extends UIComponentEx
    {
           
       public function BitmapFill() {
@@ -28,28 +28,68 @@ package net.wg.gui.components.controls
 
       public var tempBg:MovieClip;
 
-      private var myBitmapData:BitmapData;
-
-      private var _src:String = "";
-
       public var pos:Rectangle;
 
       public var repeat:String = "none";
 
       public var startPos:String = "TL";
 
+      private var myBitmapData:BitmapData;
+
+      private var _src:String = "";
+
+      override public function setSize(param1:Number, param2:Number) : void {
+         this.createPos();
+         this.pos.width = param1;
+         this.pos.height = param2;
+         this.draw();
+      }
+
+      public function get source() : String {
+         return this._src;
+      }
+
+      public function set source(param1:String) : void {
+         var _loc2_:Class = null;
+         this._src = param1;
+         if(this._src != "")
+         {
+            _loc2_ = getDefinitionByName(this._src) as Class;
+            this.myBitmapData = new _loc2_() as BitmapData;
+            invalidate();
+         }
+      }
+
+      public function get setBitmap() : BitmapData {
+         return this.myBitmapData;
+      }
+
+      public function set setBitmap(param1:BitmapData) : void {
+         this.myBitmapData = param1;
+         invalidate();
+      }
+
+      public function get widthFill() : Number {
+         return this.pos.width;
+      }
+
+      public function set widthFill(param1:Number) : void {
+         this.setSize(param1,this.pos.height);
+      }
+
+      public function get heightFill() : Number {
+         return this.pos.height;
+      }
+
+      public function set heightFill(param1:Number) : void {
+         this.setSize(this.pos.width,param1);
+      }
+
       override protected function onDispose() : void {
          this.tempBg = null;
          this.myBitmapData = null;
          this.pos = null;
          super.onDispose();
-      }
-
-      private function createPos() : void {
-         if(!this.pos)
-         {
-            this.pos = new Rectangle(0,0,0,0);
-         }
       }
 
       override protected function configUI() : void {
@@ -135,51 +175,11 @@ package net.wg.gui.components.controls
          this.graphics.endFill();
       }
 
-      public function get source() : String {
-         return this._src;
-      }
-
-      public function set source(param1:String) : void {
-         var _loc2_:Class = null;
-         this._src = param1;
-         if(this._src != "")
+      private function createPos() : void {
+         if(!this.pos)
          {
-            _loc2_ = getDefinitionByName(this._src) as Class;
-            this.myBitmapData = new _loc2_() as BitmapData;
-            invalidate();
+            this.pos = new Rectangle(0,0,0,0);
          }
-      }
-
-      public function set setBitmap(param1:BitmapData) : void {
-         this.myBitmapData = param1;
-         invalidate();
-      }
-
-      public function get setBitmap() : BitmapData {
-         return this.myBitmapData;
-      }
-
-      public function set widthFill(param1:Number) : void {
-         this.setSize(param1,this.pos.height);
-      }
-
-      public function get widthFill() : Number {
-         return this.pos.width;
-      }
-
-      public function set heightFill(param1:Number) : void {
-         this.setSize(this.pos.width,param1);
-      }
-
-      public function get heightFill() : Number {
-         return this.pos.height;
-      }
-
-      override public function setSize(param1:Number, param2:Number) : void {
-         this.createPos();
-         this.pos.width = param1;
-         this.pos.height = param2;
-         this.draw();
       }
    }
 

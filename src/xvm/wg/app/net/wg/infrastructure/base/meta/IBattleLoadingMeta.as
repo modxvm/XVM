@@ -6,8 +6,6 @@ package net.wg.infrastructure.base.meta
    public interface IBattleLoadingMeta extends IEventDispatcher
    {
           
-      function getDataS() : void;
-
       function as_setMapBG(param1:String) : void;
 
       function as_setProgress(param1:Number) : void;
@@ -25,6 +23,8 @@ package net.wg.infrastructure.base.meta
       function as_setTeams(param1:String, param2:String) : void;
 
       function as_setTip(param1:String) : void;
+
+      function as_setTipTitle(param1:String) : void;
 
       function as_setPlayerData(param1:Number, param2:Number) : void;
 

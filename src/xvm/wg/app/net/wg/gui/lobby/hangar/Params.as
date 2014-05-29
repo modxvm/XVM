@@ -26,10 +26,10 @@ package net.wg.gui.lobby.hangar
       private var _helpLayout:DisplayObject;
 
       public function as_setValues(param1:Array) : void {
+         var _loc2_:Number = 28;
+         this.list.height = _loc2_ * param1.length;
          this.list.visible = Boolean(param1.length);
          this.list.dataProvider = this.setupDataProvider(param1);
-         var _loc2_:Number = 28;
-         this.list.bg.height = _loc2_ * param1.length;
       }
 
       public function as_highlightParams(param1:String) : void {

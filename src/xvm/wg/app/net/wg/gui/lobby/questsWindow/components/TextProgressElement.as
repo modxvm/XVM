@@ -2,6 +2,8 @@ package net.wg.gui.lobby.questsWindow.components
 {
    import flash.text.TextField;
    import net.wg.data.VO.ProgressElementVO;
+   import net.wg.data.constants.QuestsStates;
+   import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
 
 
@@ -26,10 +28,17 @@ package net.wg.gui.lobby.questsWindow.components
 
       public var data:ProgressElementVO = null;
 
+      public var statusMC:QuestStatusComponent;
+
       override protected function configUI() : void {
          super.configUI();
          this.description.width = DEFAULT_WIDTH;
          this.indexTF.visible = false;
+         this.statusMC.setStatus(QuestsStates.DONE);
+         this.statusMC.textAlign = TextFieldAutoSize.RIGHT;
+         this.statusMC.showTooltip = false;
+         this.statusMC.validateNow();
+         this.statusMC.visible = false;
       }
 
       override protected function onDispose() : void {
@@ -37,6 +46,8 @@ package net.wg.gui.lobby.questsWindow.components
          this.indexTF = null;
          this.progress.dispose();
          this.progress = null;
+         this.statusMC.dispose();
+         this.statusMC = null;
          if(this.data)
          {
             this.data.dispose();
@@ -46,6 +57,10 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       override public function setData(param1:Object) : void {
+         if(this.data)
+         {
+            this.data.dispose();
+         }
          this.data = new ProgressElementVO(param1);
          invalidateData();
       }
@@ -55,14 +70,14 @@ package net.wg.gui.lobby.questsWindow.components
          if((isInvalid(InvalidationType.DATA)) && (this.data))
          {
             this.description.htmlText = this.data.description;
+            this.statusMC.visible = this.data.showDone;
             if(this.data.progrIndex)
             {
                this.indexTF.text = this.data.progrIndex.toString();
                this.indexTF.visible = true;
                this.description.x = Math.round(this.indexTF.width);
             }
-            this.description.height = this.description.textHeight + PADDING;
-            if(this.data.progrBarType)
+            if((this.data.progrBarType) && !this.data.showDone)
             {
                this.progress.visible = true;
                this.progress.setValues(this.data.progrBarType,this.data.currentProgrVal,this.data.maxProgrVal);
@@ -77,7 +92,8 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       private function layoutComponents() : void {
-         this.setSize(this.width,this.description.textHeight + PADDING);
+         this.description.height = this.description.textHeight + PADDING;
+         this.setSize(this.width,this.description.height);
          isReadyForLayout = true;
       }
    }

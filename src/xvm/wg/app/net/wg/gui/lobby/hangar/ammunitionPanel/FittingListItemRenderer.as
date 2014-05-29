@@ -240,11 +240,11 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                this.priceMC.icon = data.currency;
                if(data.currency == Currencies.GOLD)
                {
-                  this.priceMC.text = App.utils.locale.gold(data.price);
+                  this.priceMC.text = App.utils.locale.gold(data.price[1]);
                }
                else
                {
-                  this.priceMC.text = App.utils.locale.integer(data.price);
+                  this.priceMC.text = App.utils.locale.integer(data.price[0]);
                }
                if(data.status == MENU.MODULEFITS_CREDIT_ERROR)
                {
@@ -269,7 +269,11 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                if(this.actionPrice)
                {
                   _loc3_ = data.hasOwnProperty("actionPrc")?data.actionPrc:0;
-                  _loc4_ = new ActionPriceVO(_loc3_,data.price,data.defPrice,data.currency);
+                  _loc4_ = null;
+                  if(data.actionPriceData)
+                  {
+                     _loc4_ = new ActionPriceVO(data.actionPriceData);
+                  }
                   this.actionPrice.setData(_loc4_);
                   this.actionPrice.setup(this);
                }
@@ -332,12 +336,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       }
 
       private function onClick(param1:MouseEvent) : void {
-         var _loc2_:MouseEventEx = null;
          App.toolTipMgr.hide();
          if(param1  is  MouseEventEx)
          {
-            _loc2_ = param1 as MouseEventEx;
-            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+            if(App.utils.commons.isRightButton(param1))
             {
                dispatchEvent(new ModuleInfoEvent(ModuleInfoEvent.SHOW_INFO,data.id));
             }

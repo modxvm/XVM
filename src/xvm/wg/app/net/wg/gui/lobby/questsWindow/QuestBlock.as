@@ -30,6 +30,10 @@ package net.wg.gui.lobby.questsWindow
       }
 
       public function setData(param1:QuestDataVO) : void {
+         if(this.questData)
+         {
+            this.questData.dispose();
+         }
          this.questData = param1;
          this.requirementsView.isReadyForLayout = false;
          this.conditionsView.isReadyForLayout = false;

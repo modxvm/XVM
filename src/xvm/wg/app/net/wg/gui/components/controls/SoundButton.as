@@ -2,6 +2,7 @@ package net.wg.gui.components.controls
 {
    import scaleform.clik.controls.Button;
    import net.wg.infrastructure.interfaces.entity.ISoundable;
+   import net.wg.infrastructure.interfaces.IUIComponentEx;
    import flash.display.MovieClip;
    import flash.events.TimerEvent;
    import net.wg.data.constants.SoundManagerStates;
@@ -11,7 +12,7 @@ package net.wg.gui.components.controls
    import scaleform.gfx.MouseEventEx;
 
 
-   public class SoundButton extends Button implements ISoundable
+   public class SoundButton extends Button implements ISoundable, IUIComponentEx
    {
           
       public function SoundButton() {
@@ -22,7 +23,7 @@ package net.wg.gui.components.controls
 
       private var _soundType:String = "normal";
 
-      public var soundId:String = "";
+      private var _soundId:String = "";
 
       public var hitMc:MovieClip;
 
@@ -63,12 +64,20 @@ package net.wg.gui.components.controls
          super.onDispose();
       }
 
+      public function get soundId() : String {
+         return this._soundId;
+      }
+
+      public function set soundId(param1:String) : void {
+         this._soundId = param1;
+      }
+
       public final function getSoundType() : String {
          return this.soundType;
       }
 
       public final function getSoundId() : String {
-         return this.soundId;
+         return this._soundId;
       }
 
       public final function getStateOverSnd() : String {
@@ -102,10 +111,8 @@ package net.wg.gui.components.controls
             this.focused = 0;
          }
          super.enabled = param1;
-         if(!this.hitArea)
-         {
-            mouseChildren = !enabled;
-         }
+         buttonMode = useHandCursor = enabled;
+         mouseEnabled = true;
       }
 
       override protected function configUI() : void {
@@ -114,11 +121,8 @@ package net.wg.gui.components.controls
          {
             this.hitArea = this.hitMc;
          }
-         buttonMode = true;
-         if(!this.hitArea)
-         {
-            mouseChildren = !enabled;
-         }
+         buttonMode = enabled;
+         mouseEnabled = true;
          if(App.soundMgr != null)
          {
             App.soundMgr.addSoundsHdlrs(this);

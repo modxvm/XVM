@@ -3,6 +3,7 @@ package net.wg.gui.lobby.questsWindow
    import net.wg.gui.components.controls.SoundListItemRenderer;
    import flash.events.MouseEvent;
    import flash.display.MovieClip;
+   import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.gui.lobby.questsWindow.components.QuestsCounter;
    import net.wg.gui.lobby.questsWindow.components.QuestStatusComponent;
    import net.wg.gui.lobby.questsWindow.components.ProgressQuestIndicator;
@@ -49,7 +50,7 @@ package net.wg.gui.lobby.questsWindow
 
       public var newIndicator:MovieClip;
 
-      public var indicatorIGR:MovieClip;
+      public var indicatorIGR:UILoaderAlt;
 
       public var counter:QuestsCounter;
 
@@ -267,7 +268,11 @@ package net.wg.gui.lobby.questsWindow
 
       private function checkIGR(param1:QuestRendererVO) : void {
          this.indicatorIGR.visible = param1.IGR;
-         this.indicatorIGR.x = this.taskTF.x + this.taskTF.textWidth + 5;
+         if(this.indicatorIGR.visible)
+         {
+            this.indicatorIGR.source = RES_ICONS.MAPS_ICONS_LIBRARY_PREMIUM_SMALL;
+         }
+         this.indicatorIGR.x = int(this.taskTF.x + this.taskTF.textWidth + 5);
       }
 
       private function checkNew(param1:QuestRendererVO) : void {

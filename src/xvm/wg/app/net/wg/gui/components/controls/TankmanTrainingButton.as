@@ -70,17 +70,19 @@ package net.wg.gui.components.controls
          return "[Wargaming TankmanTrainingButton " + name + "]";
       }
 
-      public function updatePrice(param1:Number, param2:Number, param3:Number, param4:String) : void {
-         var _loc5_:String = null;
-         var _loc6_:ActionPriceVO = null;
-         if(!this._buy && !(this._type == "free") && !(param2 == 0))
+      public function updatePrice(param1:Number, param2:String, param3:ActionPriceVO=null) : void {
+         var _loc4_:String = null;
+         if(!this._buy && !(this._type == "free") && !(param1 == 0))
          {
-            _loc5_ = !enabled?"disabled":"normal";
-            this.priceLabel.textColor = this._priceColors[_loc5_];
-            this.priceLabel.text = this._type == "academy"?App.utils.locale.gold(param2):App.utils.locale.integer(param2);
+            _loc4_ = !enabled?"disabled":"normal";
+            this.priceLabel.textColor = this._priceColors[_loc4_];
+            this.priceLabel.text = this._type == "academy"?App.utils.locale.gold(param1):App.utils.locale.integer(param1);
             this.priceLabel.icon = this._type == "academy"?IconsTypes.GOLD:IconsTypes.CREDITS;
-            _loc6_ = new ActionPriceVO(param1,param2,param3,param4);
-            this.actionPrice.setData(_loc6_);
+            if(param3)
+            {
+               param3.ico = param2;
+            }
+            this.actionPrice.setData(param3);
             this.priceLabel.visible = !this.actionPrice.visible;
          }
          else

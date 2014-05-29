@@ -8,6 +8,8 @@ package net.wg.gui.cyberSport.views.autoSearch
    import flash.display.InteractiveObject;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.InputEvent;
+   import net.wg.data.constants.SoundManagerStates;
+   import net.wg.data.constants.SoundTypes;
    import flash.events.Event;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import scaleform.clik.ui.InputDetails;
@@ -139,6 +141,7 @@ package net.wg.gui.cyberSport.views.autoSearch
 
       protected function onTimer() : void {
          this._time++;
+         App.soundMgr.playControlsSnd(SoundManagerStates.SND_PRESS,SoundTypes.TIMER_TICK,null);
       }
 
       protected function formatTime(param1:int) : Object {

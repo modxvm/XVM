@@ -291,8 +291,8 @@ package net.wg.gui.lobby.questsWindow
          this.questInfo.setAvailableQuests(this._allTasks);
          _loc1_ = this.totalTasks > 0;
          this.sortingPanel.visible = !this._hideSortPanel && (_loc1_) && !this._isInRoaming;
-         this.scrollBar.visible = _loc1_;
          this.questsList.visible = _loc1_;
+         this.scrollBar.visible = _loc1_?this.scrollBar.visible:false;
          this.listHidingBG.visible = _loc1_;
          this.questBG.visible = _loc1_;
          this.notSelected.visible = _loc1_;

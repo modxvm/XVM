@@ -31,6 +31,8 @@ package net.wg.infrastructure.base.meta
       function isFreeXpToTankmanS() : Boolean;
 
       function getLocaleOverrideS() : String;
+
+      function isFortificationAvailableS() : Boolean;
    }
 
 }

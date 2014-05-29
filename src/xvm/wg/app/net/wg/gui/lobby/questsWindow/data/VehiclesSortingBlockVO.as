@@ -39,6 +39,16 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _levelFilterData:Array;
 
+      private var _selectedNation:int = 0;
+
+      private var _selectedVehType:int = 0;
+
+      private var _selectedLvl:int = 0;
+
+      private var _selectedBtnID:String = "";
+
+      private var _sortDirection:String = "";
+
       public function get hasHeader() : Boolean {
          return this._hasHeader;
       }
@@ -133,6 +143,46 @@ package net.wg.gui.lobby.questsWindow.data
 
       public function set showNotInHangarCB(param1:Boolean) : void {
          this._showNotInHangarCB = param1;
+      }
+
+      public function get selectedNation() : int {
+         return this._selectedNation;
+      }
+
+      public function set selectedNation(param1:int) : void {
+         this._selectedNation = param1;
+      }
+
+      public function get selectedVehType() : int {
+         return this._selectedVehType;
+      }
+
+      public function set selectedVehType(param1:int) : void {
+         this._selectedVehType = param1;
+      }
+
+      public function get selectedLvl() : int {
+         return this._selectedLvl;
+      }
+
+      public function set selectedLvl(param1:int) : void {
+         this._selectedLvl = param1;
+      }
+
+      public function get selectedBtnID() : String {
+         return this._selectedBtnID;
+      }
+
+      public function set selectedBtnID(param1:String) : void {
+         this._selectedBtnID = param1;
+      }
+
+      public function get sortDirection() : String {
+         return this._sortDirection;
+      }
+
+      public function set sortDirection(param1:String) : void {
+         this._sortDirection = param1;
       }
    }
 

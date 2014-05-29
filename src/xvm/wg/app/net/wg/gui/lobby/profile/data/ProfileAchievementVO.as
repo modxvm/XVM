@@ -10,8 +10,6 @@ package net.wg.gui.lobby.profile.data
          super(param1);
       }
 
-      public var isInDossier:Boolean;
-
       public var id:Array;
 
       public var rareIconId:String = "";

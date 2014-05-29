@@ -9,17 +9,43 @@ package
          super();
       }
 
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_WFC2014:String = "../maps/icons/achievement/32x32/WFC2014.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_ARMOREDFIST:String = "../maps/icons/achievement/32x32/armoredFist.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_BATTLECITIZEN:String = "../maps/icons/achievement/32x32/battleCitizen.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_BOMBARDIER:String = "../maps/icons/achievement/32x32/bombardier.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_CONQUEROR1:String = "../maps/icons/achievement/32x32/conqueror1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_CONQUEROR2:String = "../maps/icons/achievement/32x32/conqueror2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_CONQUEROR3:String = "../maps/icons/achievement/32x32/conqueror3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_CONQUEROR4:String = "../maps/icons/achievement/32x32/conqueror4.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_COUNTERBLOW:String = "../maps/icons/achievement/32x32/counterblow.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_CRUCIALSHOTMEDAL:String = "../maps/icons/achievement/32x32/crucialShotMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_CRUSHER:String = "../maps/icons/achievement/32x32/crusher.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_DEFENDER:String = "../maps/icons/achievement/32x32/defender.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_EVILEYE:String = "../maps/icons/achievement/32x32/evileye.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_FIGHTINGRECONNAISSANCEMEDAL:String = "../maps/icons/achievement/32x32/fightingReconnaissanceMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_FIREANDSTEELMEDAL:String = "../maps/icons/achievement/32x32/fireAndSteelMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_FIREANDSWORD1:String = "../maps/icons/achievement/32x32/fireAndSword1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_FIREANDSWORD2:String = "../maps/icons/achievement/32x32/fireAndSword2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_FIREANDSWORD3:String = "../maps/icons/achievement/32x32/fireAndSword3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_FIREANDSWORD4:String = "../maps/icons/achievement/32x32/fireAndSword4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_FORTACTICALOPERATIONS1:String = "../maps/icons/achievement/32x32/forTacticalOperations1.png";
 
@@ -40,6 +66,10 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_GUARDSMAN3:String = "../maps/icons/achievement/32x32/guardsman3.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_GUARDSMAN4:String = "../maps/icons/achievement/32x32/guardsman4.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_HANDOFDEATH:String = "../maps/icons/achievement/32x32/handOfDeath.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_HEAVYFIREMEDAL:String = "../maps/icons/achievement/32x32/heavyFireMedal.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_HEROESOFRASSENAY:String = "../maps/icons/achievement/32x32/heroesOfRassenay.png";
 
@@ -63,6 +93,14 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_KAMIKAZE:String = "../maps/icons/achievement/32x32/kamikaze.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_KAMPFER1:String = "../maps/icons/achievement/32x32/kampfer1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_KAMPFER2:String = "../maps/icons/achievement/32x32/kampfer2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_KAMPFER3:String = "../maps/icons/achievement/32x32/kampfer3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_KAMPFER4:String = "../maps/icons/achievement/32x32/kampfer4.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_KINGOFTHEHILL:String = "../maps/icons/achievement/32x32/kingOfTheHill.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_LUCKYDEVIL:String = "../maps/icons/achievement/32x32/luckyDevil.png";
@@ -77,6 +115,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MAKEROFHISTORY4:String = "../maps/icons/achievement/32x32/makerOfHistory4.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALANTISPGFIRE:String = "../maps/icons/achievement/32x32/medalAntiSpgFire.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALBILLOTTE:String = "../maps/icons/achievement/32x32/medalBillotte.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALBROTHERSINARMS:String = "../maps/icons/achievement/32x32/medalBrothersInArms.png";
@@ -84,6 +124,8 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALBRUNOPIETRO:String = "../maps/icons/achievement/32x32/medalBrunoPietro.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALBURDA:String = "../maps/icons/achievement/32x32/medalBurda.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALCOOLBLOOD:String = "../maps/icons/achievement/32x32/medalCoolBlood.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALCRUCIALCONTRIBUTION:String = "../maps/icons/achievement/32x32/medalCrucialContribution.png";
 
@@ -93,6 +135,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALFADIN:String = "../maps/icons/achievement/32x32/medalFadin.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALGORE:String = "../maps/icons/achievement/32x32/medalGore.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALHALONEN:String = "../maps/icons/achievement/32x32/medalHalonen.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALKOLOBANOV:String = "../maps/icons/achievement/32x32/medalKolobanov.png";
@@ -100,6 +144,8 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALLAFAYETTEPOOL:String = "../maps/icons/achievement/32x32/medalLafayettePool.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALLEHVASLAIHO:String = "../maps/icons/achievement/32x32/medalLehvaslaiho.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALMONOLITH:String = "../maps/icons/achievement/32x32/medalMonolith.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALNIKOLAS:String = "../maps/icons/achievement/32x32/medalNikolas.png";
 
@@ -111,13 +157,23 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALRADLEYWALTERS:String = "../maps/icons/achievement/32x32/medalRadleyWalters.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALSTARK:String = "../maps/icons/achievement/32x32/medalStark.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALTAMADAYOSHIO:String = "../maps/icons/achievement/32x32/medalTamadaYoshio.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALTARCZAY:String = "../maps/icons/achievement/32x32/medalTarczay.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_MEDALWITTMANN:String = "../maps/icons/achievement/32x32/medalWittmann.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_NOMANSLAND:String = "../maps/icons/achievement/32x32/noMansLand.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_PROMISINGFIGHTERMEDAL:String = "../maps/icons/achievement/32x32/promisingFighterMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_PYROMANIACMEDAL:String = "../maps/icons/achievement/32x32/pyromaniacMedal.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_RAIDER:String = "../maps/icons/achievement/32x32/raider.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_RANGERMEDAL:String = "../maps/icons/achievement/32x32/rangerMedal.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_RARE100003:String = "../maps/icons/achievement/32x32/rare100003.png";
 
@@ -126,6 +182,14 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_SNIPER:String = "../maps/icons/achievement/32x32/sniper.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_SNIPER2:String = "../maps/icons/achievement/32x32/sniper2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_SOLDIEROFFORTUNE1:String = "../maps/icons/achievement/32x32/soldierOfFortune1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_SOLDIEROFFORTUNE2:String = "../maps/icons/achievement/32x32/soldierOfFortune2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_SOLDIEROFFORTUNE3:String = "../maps/icons/achievement/32x32/soldierOfFortune3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_32X32_SOLDIEROFFORTUNE4:String = "../maps/icons/achievement/32x32/soldierOfFortune4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_STEELWALL:String = "../maps/icons/achievement/32x32/steelwall.png";
 
@@ -141,21 +205,41 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_32X32_WOLFAMONGSHEEPMEDAL:String = "../maps/icons/achievement/32x32/wolfAmongSheepMedal.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_WFC2014:String = "../maps/icons/achievement/WFC2014.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_ARMORPIERCER:String = "../maps/icons/achievement/armorPiercer.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_ARMOREDFIST:String = "../maps/icons/achievement/armoredFist.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_BATTLECITIZEN:String = "../maps/icons/achievement/battleCitizen.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_BEASTHUNTER:String = "../maps/icons/achievement/beasthunter.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_WFC2014:String = "../maps/icons/achievement/big/WFC2014.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_ARMORPIERCER:String = "../maps/icons/achievement/big/armorPiercer.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_ARMOREDFIST:String = "../maps/icons/achievement/big/armoredFist.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_BATTLECITIZEN:String = "../maps/icons/achievement/big/battleCitizen.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_BEASTHUNTER:String = "../maps/icons/achievement/big/beasthunter.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_BOMBARDIER:String = "../maps/icons/achievement/big/bombardier.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_CONQUEROR1:String = "../maps/icons/achievement/big/conqueror1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_CONQUEROR2:String = "../maps/icons/achievement/big/conqueror2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_CONQUEROR3:String = "../maps/icons/achievement/big/conqueror3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_CONQUEROR4:String = "../maps/icons/achievement/big/conqueror4.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_COUNTERBLOW:String = "../maps/icons/achievement/big/counterblow.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_CRUCIALSHOTMEDAL:String = "../maps/icons/achievement/big/crucialShotMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_CRUSHER:String = "../maps/icons/achievement/big/crusher.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_DEFENDER:String = "../maps/icons/achievement/big/defender.png";
 
@@ -164,6 +248,16 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_EVILEYE:String = "../maps/icons/achievement/big/evileye.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_FIGHTINGRECONNAISSANCEMEDAL:String = "../maps/icons/achievement/big/fightingReconnaissanceMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_FIREANDSTEELMEDAL:String = "../maps/icons/achievement/big/fireAndSteelMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_FIREANDSWORD1:String = "../maps/icons/achievement/big/fireAndSword1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_FIREANDSWORD2:String = "../maps/icons/achievement/big/fireAndSword2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_FIREANDSWORD3:String = "../maps/icons/achievement/big/fireAndSword3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_FIREANDSWORD4:String = "../maps/icons/achievement/big/fireAndSword4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_FORTACTICALOPERATIONS1:String = "../maps/icons/achievement/big/forTacticalOperations1.png";
 
@@ -186,6 +280,8 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_GUARDSMAN4:String = "../maps/icons/achievement/big/guardsman4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_HANDOFDEATH:String = "../maps/icons/achievement/big/handOfDeath.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_HEAVYFIREMEDAL:String = "../maps/icons/achievement/big/heavyFireMedal.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_HEROESOFRASSENAY:String = "../maps/icons/achievement/big/heroesOfRassenay.png";
 
@@ -210,6 +306,14 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_IRONMAN:String = "../maps/icons/achievement/big/ironMan.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_KAMIKAZE:String = "../maps/icons/achievement/big/kamikaze.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_KAMPFER1:String = "../maps/icons/achievement/big/kampfer1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_KAMPFER2:String = "../maps/icons/achievement/big/kampfer2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_KAMPFER3:String = "../maps/icons/achievement/big/kampfer3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_KAMPFER4:String = "../maps/icons/achievement/big/kampfer4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_KINGOFTHEHILL:String = "../maps/icons/achievement/big/kingOfTheHill.png";
 
@@ -249,6 +353,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALABRAMS4:String = "../maps/icons/achievement/big/medalAbrams4.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALANTISPGFIRE:String = "../maps/icons/achievement/big/medalAntiSpgFire.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALBILLOTTE:String = "../maps/icons/achievement/big/medalBillotte.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALBROTHERSINARMS:String = "../maps/icons/achievement/big/medalBrothersInArms.png";
@@ -265,6 +371,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALCARIUS4:String = "../maps/icons/achievement/big/medalCarius4.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALCOOLBLOOD:String = "../maps/icons/achievement/big/medalCoolBlood.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALCRUCIALCONTRIBUTION:String = "../maps/icons/achievement/big/medalCrucialContribution.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALDELANGLADE:String = "../maps/icons/achievement/big/medalDeLanglade.png";
@@ -280,6 +388,8 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALEKINS4:String = "../maps/icons/achievement/big/medalEkins4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALFADIN:String = "../maps/icons/achievement/big/medalFadin.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALGORE:String = "../maps/icons/achievement/big/medalGore.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALHALONEN:String = "../maps/icons/achievement/big/medalHalonen.png";
 
@@ -321,6 +431,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALLEHVASLAIHO:String = "../maps/icons/achievement/big/medalLehvaslaiho.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALMONOLITH:String = "../maps/icons/achievement/big/medalMonolith.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALNIKOLAS:String = "../maps/icons/achievement/big/medalNikolas.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALORLIK:String = "../maps/icons/achievement/big/medalOrlik.png";
@@ -339,6 +451,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALRADLEYWALTERS:String = "../maps/icons/achievement/big/medalRadleyWalters.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALSTARK:String = "../maps/icons/achievement/big/medalStark.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALTAMADAYOSHIO:String = "../maps/icons/achievement/big/medalTamadaYoshio.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_MEDALTARCZAY:String = "../maps/icons/achievement/big/medalTarczay.png";
@@ -349,9 +463,17 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_NOIMAGE:String = "../maps/icons/achievement/big/noImage.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_NOMANSLAND:String = "../maps/icons/achievement/big/noMansLand.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_PATTONVALLEY:String = "../maps/icons/achievement/big/pattonValley.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_PROMISINGFIGHTERMEDAL:String = "../maps/icons/achievement/big/promisingFighterMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_PYROMANIACMEDAL:String = "../maps/icons/achievement/big/pyromaniacMedal.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_RAIDER:String = "../maps/icons/achievement/big/raider.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_RANGERMEDAL:String = "../maps/icons/achievement/big/rangerMedal.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_RARE100003:String = "../maps/icons/achievement/big/rare100003.png";
 
@@ -362,6 +484,14 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_SNIPER:String = "../maps/icons/achievement/big/sniper.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_SNIPER2:String = "../maps/icons/achievement/big/sniper2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_SOLDIEROFFORTUNE1:String = "../maps/icons/achievement/big/soldierOfFortune1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_SOLDIEROFFORTUNE2:String = "../maps/icons/achievement/big/soldierOfFortune2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_SOLDIEROFFORTUNE3:String = "../maps/icons/achievement/big/soldierOfFortune3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_BIG_SOLDIEROFFORTUNE4:String = "../maps/icons/achievement/big/soldierOfFortune4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_BIG_STEELWALL:String = "../maps/icons/achievement/big/steelwall.png";
 
@@ -399,7 +529,19 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_BOMBARDIER:String = "../maps/icons/achievement/bombardier.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_CONQUEROR1:String = "../maps/icons/achievement/conqueror1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_CONQUEROR2:String = "../maps/icons/achievement/conqueror2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_CONQUEROR3:String = "../maps/icons/achievement/conqueror3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_CONQUEROR4:String = "../maps/icons/achievement/conqueror4.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_COUNTERBLOW:String = "../maps/icons/achievement/counterblow.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_CRUCIALSHOTMEDAL:String = "../maps/icons/achievement/crucialShotMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_CRUSHER:String = "../maps/icons/achievement/crusher.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_DEFENDER:String = "../maps/icons/achievement/defender.png";
 
@@ -408,6 +550,16 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_EVILEYE:String = "../maps/icons/achievement/evileye.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_FIGHTINGRECONNAISSANCEMEDAL:String = "../maps/icons/achievement/fightingReconnaissanceMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_FIREANDSTEELMEDAL:String = "../maps/icons/achievement/fireAndSteelMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_FIREANDSWORD1:String = "../maps/icons/achievement/fireAndSword1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_FIREANDSWORD2:String = "../maps/icons/achievement/fireAndSword2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_FIREANDSWORD3:String = "../maps/icons/achievement/fireAndSword3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_FIREANDSWORD4:String = "../maps/icons/achievement/fireAndSword4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_FORTACTICALOPERATIONS1:String = "../maps/icons/achievement/forTacticalOperations1.png";
 
@@ -430,6 +582,8 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_GUARDSMAN4:String = "../maps/icons/achievement/guardsman4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_HANDOFDEATH:String = "../maps/icons/achievement/handOfDeath.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_HEAVYFIREMEDAL:String = "../maps/icons/achievement/heavyFireMedal.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_HEROESOFRASSENAY:String = "../maps/icons/achievement/heroesOfRassenay.png";
 
@@ -454,6 +608,14 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_IRONMAN:String = "../maps/icons/achievement/ironMan.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_KAMIKAZE:String = "../maps/icons/achievement/kamikaze.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_KAMPFER1:String = "../maps/icons/achievement/kampfer1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_KAMPFER2:String = "../maps/icons/achievement/kampfer2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_KAMPFER3:String = "../maps/icons/achievement/kampfer3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_KAMPFER4:String = "../maps/icons/achievement/kampfer4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_KINGOFTHEHILL:String = "../maps/icons/achievement/kingOfTheHill.png";
 
@@ -501,6 +663,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALABRAMS4:String = "../maps/icons/achievement/medalAbrams4.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_MEDALANTISPGFIRE:String = "../maps/icons/achievement/medalAntiSpgFire.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALBILLOTTE:String = "../maps/icons/achievement/medalBillotte.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALBROTHERSINARMS:String = "../maps/icons/achievement/medalBrothersInArms.png";
@@ -517,6 +681,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALCARIUS4:String = "../maps/icons/achievement/medalCarius4.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_MEDALCOOLBLOOD:String = "../maps/icons/achievement/medalCoolBlood.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALCRUCIALCONTRIBUTION:String = "../maps/icons/achievement/medalCrucialContribution.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALDELANGLADE:String = "../maps/icons/achievement/medalDeLanglade.png";
@@ -532,6 +698,8 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALEKINS4:String = "../maps/icons/achievement/medalEkins4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALFADIN:String = "../maps/icons/achievement/medalFadin.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_MEDALGORE:String = "../maps/icons/achievement/medalGore.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALHALONEN:String = "../maps/icons/achievement/medalHalonen.png";
 
@@ -573,6 +741,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALLEHVASLAIHO:String = "../maps/icons/achievement/medalLehvaslaiho.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_MEDALMONOLITH:String = "../maps/icons/achievement/medalMonolith.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALNIKOLAS:String = "../maps/icons/achievement/medalNikolas.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALORLIK:String = "../maps/icons/achievement/medalOrlik.png";
@@ -591,6 +761,8 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALRADLEYWALTERS:String = "../maps/icons/achievement/medalRadleyWalters.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_MEDALSTARK:String = "../maps/icons/achievement/medalStark.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALTAMADAYOSHIO:String = "../maps/icons/achievement/medalTamadaYoshio.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_MEDALTARCZAY:String = "../maps/icons/achievement/medalTarczay.png";
@@ -603,9 +775,17 @@ package
 
       public static const MAPS_ICONS_ACHIEVEMENT_NOIMAGEOLD:String = "../maps/icons/achievement/noImageOld.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_NOMANSLAND:String = "../maps/icons/achievement/noMansLand.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_PATTONVALLEY:String = "../maps/icons/achievement/pattonValley.png";
 
+      public static const MAPS_ICONS_ACHIEVEMENT_PROMISINGFIGHTERMEDAL:String = "../maps/icons/achievement/promisingFighterMedal.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_PYROMANIACMEDAL:String = "../maps/icons/achievement/pyromaniacMedal.png";
+
       public static const MAPS_ICONS_ACHIEVEMENT_RAIDER:String = "../maps/icons/achievement/raider.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_RANGERMEDAL:String = "../maps/icons/achievement/rangerMedal.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_RARE100003:String = "../maps/icons/achievement/rare100003.png";
 
@@ -616,6 +796,14 @@ package
       public static const MAPS_ICONS_ACHIEVEMENT_SNIPER:String = "../maps/icons/achievement/sniper.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_SNIPER2:String = "../maps/icons/achievement/sniper2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_SOLDIEROFFORTUNE1:String = "../maps/icons/achievement/soldierOfFortune1.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_SOLDIEROFFORTUNE2:String = "../maps/icons/achievement/soldierOfFortune2.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_SOLDIEROFFORTUNE3:String = "../maps/icons/achievement/soldierOfFortune3.png";
+
+      public static const MAPS_ICONS_ACHIEVEMENT_SOLDIEROFFORTUNE4:String = "../maps/icons/achievement/soldierOfFortune4.png";
 
       public static const MAPS_ICONS_ACHIEVEMENT_STEELWALL:String = "../maps/icons/achievement/steelwall.png";
 
@@ -759,6 +947,8 @@ package
 
       public static const MAPS_ICONS_BATTLETYPES_1:String = "../maps/icons/battleTypes/1.png";
 
+      public static const MAPS_ICONS_BATTLETYPES_10:String = "../maps/icons/battleTypes/10.png";
+
       public static const MAPS_ICONS_BATTLETYPES_2:String = "../maps/icons/battleTypes/2.png";
 
       public static const MAPS_ICONS_BATTLETYPES_3:String = "../maps/icons/battleTypes/3.png";
@@ -831,6 +1021,8 @@ package
 
       public static const MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_NOTAVAILABLE:String = "../maps/icons/buttons/tab_sort_button/notAvailable.png";
 
+      public static const MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_NUT:String = "../maps/icons/buttons/tab_sort_button/nut.png";
+
       public static const MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_OK:String = "../maps/icons/buttons/tab_sort_button/ok.png";
 
       public static const MAPS_ICONS_BUTTONS_TAB_SORT_BUTTON_PLAYER:String = "../maps/icons/buttons/tab_sort_button/player.png";
@@ -850,6 +1042,8 @@ package
       public static const MAPS_ICONS_BUTTONS_TANKMAN_SKILLS_DROP:String = "../maps/icons/buttons/tankman_skills_drop.png";
 
       public static const MAPS_ICONS_BUTTONS_TRANSPORTING:String = "../maps/icons/buttons/transporting.png";
+
+      public static const MAPS_ICONS_BUTTONS_TRANSPORTINGARROW:String = "../maps/icons/buttons/transportingArrow.png";
 
       public static const MAPS_ICONS_BUTTONS_TUNING:String = "../maps/icons/buttons/tuning.png";
 
@@ -1023,6 +1217,8 @@ package
 
       public static const MAPS_ICONS_LIBRARY_INFORMATIONICON_1:String = "../maps/icons/library/InformationIcon-1.png";
 
+      public static const MAPS_ICONS_LIBRARY_INFORMATIONICON:String = "../maps/icons/library/InformationIcon.png";
+
       public static const MAPS_ICONS_LIBRARY_INVOICEICON_1:String = "../maps/icons/library/InvoiceIcon-1.png";
 
       public static const MAPS_ICONS_LIBRARY_MESSAGEICON_1:String = "../maps/icons/library/MessageIcon-1.png";
@@ -1062,6 +1258,16 @@ package
       public static const MAPS_ICONS_LIBRARY_ACTION_1:String = "../maps/icons/library/action-1.png";
 
       public static const MAPS_ICONS_LIBRARY_ALERTICON:String = "../maps/icons/library/alertIcon.png";
+
+      public static const MAPS_ICONS_LIBRARY_ALERTICON1:String = "../maps/icons/library/alertIcon1.png";
+
+      public static const MAPS_ICONS_LIBRARY_ALERTICON2:String = "../maps/icons/library/alertIcon2.png";
+
+      public static const MAPS_ICONS_LIBRARY_BASIC_BIG:String = "../maps/icons/library/basic_big.png";
+
+      public static const MAPS_ICONS_LIBRARY_BASIC_SMALL:String = "../maps/icons/library/basic_small.png";
+
+      public static const MAPS_ICONS_LIBRARY_CALENDAR:String = "../maps/icons/library/calendar.png";
 
       public static const MAPS_ICONS_LIBRARY_COMPANYINVITEICON_1:String = "../maps/icons/library/companyInviteIcon-1.png";
 
@@ -1131,6 +1337,8 @@ package
 
       public static const MAPS_ICONS_LIBRARY_DOSSIER_AVGDAMAGE40X32:String = "../maps/icons/library/dossier/avgDamage40x32.png";
 
+      public static const MAPS_ICONS_LIBRARY_DOSSIER_AVGDEFES40X32:String = "../maps/icons/library/dossier/avgDefes40x32.png";
+
       public static const MAPS_ICONS_LIBRARY_DOSSIER_AVGEXP40X32:String = "../maps/icons/library/dossier/avgExp40x32.png";
 
       public static const MAPS_ICONS_LIBRARY_DOSSIER_BATTLES40X32:String = "../maps/icons/library/dossier/battles40x32.png";
@@ -1147,19 +1355,39 @@ package
 
       public static const MAPS_ICONS_LIBRARY_DOSSIER_MAXEXP40X32:String = "../maps/icons/library/dossier/maxExp40x32.png";
 
+      public static const MAPS_ICONS_LIBRARY_DOSSIER_RESOURCES40X32:String = "../maps/icons/library/dossier/resources40x32.png";
+
       public static const MAPS_ICONS_LIBRARY_DOSSIER_SURVIVAL40X32:String = "../maps/icons/library/dossier/survival40x32.png";
 
       public static const MAPS_ICONS_LIBRARY_DOSSIER_TECHRATIO40X32:String = "../maps/icons/library/dossier/techRatio40x32.png";
 
       public static const MAPS_ICONS_LIBRARY_DOSSIER_WINS40X32:String = "../maps/icons/library/dossier/wins40x32.png";
 
+      public static const MAPS_ICONS_LIBRARY_ERRORICON:String = "../maps/icons/library/errorIcon.png";
+
       public static const MAPS_ICONS_LIBRARY_FLAKE:String = "../maps/icons/library/flake.png";
+
+      public static const MAPS_ICONS_LIBRARY_FORTIFICATION_CHECKMARK:String = "../maps/icons/library/fortification/checkmark.png";
 
       public static const MAPS_ICONS_LIBRARY_FORTIFICATION_CLOCK:String = "../maps/icons/library/fortification/clock.png";
 
+      public static const MAPS_ICONS_LIBRARY_FORTIFICATION_DESTRUCTION:String = "../maps/icons/library/fortification/destruction.png";
+
+      public static const MAPS_ICONS_LIBRARY_FORTIFICATION_FOOTHOLD:String = "../maps/icons/library/fortification/foothold.png";
+
+      public static const MAPS_ICONS_LIBRARY_FORTIFICATION_LEVEL_UP:String = "../maps/icons/library/fortification/level_up.png";
+
       public static const MAPS_ICONS_LIBRARY_FORTIFICATION_NUT:String = "../maps/icons/library/fortification/nut.png";
 
+      public static const MAPS_ICONS_LIBRARY_FORTIFICATION_NUTINACTIVE:String = "../maps/icons/library/fortification/nutInactive.png";
+
       public static const MAPS_ICONS_LIBRARY_FORTIFICATION_ORDER_IN_PROGRESS:String = "../maps/icons/library/fortification/order_in_progress.png";
+
+      public static const MAPS_ICONS_LIBRARY_FORTIFICATION_PROMRES_ICON4POSTBATTLE:String = "../maps/icons/library/fortification/promres-icon4postbattle.png";
+
+      public static const MAPS_ICONS_LIBRARY_FORTIFICATION_PROMRES_ICON4POSTBATTLE_TRANSP:String = "../maps/icons/library/fortification/promres-icon4postbattle_transp.png";
+
+      public static const MAPS_ICONS_LIBRARY_FORTIFICATION_RESERVE_INPROGRESS_24:String = "../maps/icons/library/fortification/reserve_inprogress_24.png";
 
       public static const MAPS_ICONS_LIBRARY_GEAR:String = "../maps/icons/library/gear.png";
 
@@ -1169,9 +1397,15 @@ package
 
       public static const MAPS_ICONS_LIBRARY_MULTYXP:String = "../maps/icons/library/multyXp.png";
 
+      public static const MAPS_ICONS_LIBRARY_OKICON:String = "../maps/icons/library/okIcon.png";
+
       public static const MAPS_ICONS_LIBRARY_PEN:String = "../maps/icons/library/pen.png";
 
       public static const MAPS_ICONS_LIBRARY_PREBATTLEINVITEICON_1:String = "../maps/icons/library/prebattleInviteIcon-1.png";
+
+      public static const MAPS_ICONS_LIBRARY_PREMIUM_BIG:String = "../maps/icons/library/premium_big.png";
+
+      public static const MAPS_ICONS_LIBRARY_PREMIUM_SMALL:String = "../maps/icons/library/premium_small.png";
 
       public static const MAPS_ICONS_LIBRARY_PROFICIENCY_CLASS_ICONS_1:String = "../maps/icons/library/proficiency/class_icons_1.png";
 
@@ -1181,7 +1415,11 @@ package
 
       public static const MAPS_ICONS_LIBRARY_PROFICIENCY_CLASS_ICONS_4:String = "../maps/icons/library/proficiency/class_icons_4.png";
 
+      public static const MAPS_ICONS_LIBRARY_REDNOTAVAILABLE:String = "../maps/icons/library/redNotAvailable.png";
+
       public static const MAPS_ICONS_LIBRARY_SEND:String = "../maps/icons/library/send.png";
+
+      public static const MAPS_ICONS_LIBRARY_SORTIEINVITEICON_1:String = "../maps/icons/library/sortieInviteIcon-1.png";
 
       public static const MAPS_ICONS_LIBRARY_SQUADINVITEICON_1:String = "../maps/icons/library/squadInviteIcon-1.png";
 
@@ -1269,6 +1507,8 @@ package
 
       public static const MAPS_ICONS_MAP_73_ASIA_KOREA:String = "../maps/icons/map/73_asia_korea.png";
 
+      public static const MAPS_ICONS_MAP_83_KHARKIV:String = "../maps/icons/map/83_kharkiv.png";
+
       public static const MAPS_ICONS_MAP_84_WINTER:String = "../maps/icons/map/84_winter.png";
 
       public static const MAPS_ICONS_MAP_85_WINTER:String = "../maps/icons/map/85_winter.png";
@@ -1354,6 +1594,8 @@ package
       public static const MAPS_ICONS_MAP_SCREEN_63_TUNDRA:String = "../maps/icons/map/screen/63_tundra.png";
 
       public static const MAPS_ICONS_MAP_SCREEN_73_ASIA_KOREA:String = "../maps/icons/map/screen/73_Asia_Korea.png";
+
+      public static const MAPS_ICONS_MAP_SCREEN_83_KHARKIV:String = "../maps/icons/map/screen/83_kharkiv.png";
 
       public static const MAPS_ICONS_MAP_SCREEN_84_WINTER:String = "../maps/icons/map/screen/84_winter.png";
 
@@ -1441,6 +1683,8 @@ package
 
       public static const MAPS_ICONS_MAP_SMALL_73_ASIA_KOREA:String = "../maps/icons/map/small/73_asia_korea.png";
 
+      public static const MAPS_ICONS_MAP_SMALL_83_KHARKIV:String = "../maps/icons/map/small/83_kharkiv.png";
+
       public static const MAPS_ICONS_MAP_SMALL_84_WINTER:String = "../maps/icons/map/small/84_winter.png";
 
       public static const MAPS_ICONS_MAP_SMALL_85_WINTER:String = "../maps/icons/map/small/85_winter.png";
@@ -1448,8 +1692,6 @@ package
       public static const MAPS_ICONS_MAP_SMALL_86_HIMMELSDORF_WINTER:String = "../maps/icons/map/small/86_himmelsdorf_winter.png";
 
       public static const MAPS_ICONS_MAP_SMALL_87_RUINBERG_ON_FIRE:String = "../maps/icons/map/small/87_ruinberg_on_fire.png";
-
-      public static const MAPS_ICONS_MAP_SMALL_NOIMAGE:String = "../maps/icons/map/small/noImage.png";
 
       public static const MAPS_ICONS_MAP_STATS_00_TANK_TUTORIAL:String = "../maps/icons/map/stats/00_tank_tutorial.png";
 
@@ -1529,6 +1771,8 @@ package
 
       public static const MAPS_ICONS_MAP_STATS_73_ASIA_KOREA:String = "../maps/icons/map/stats/73_Asia_Korea.png";
 
+      public static const MAPS_ICONS_MAP_STATS_83_KHARKIV:String = "../maps/icons/map/stats/83_kharkiv.png";
+
       public static const MAPS_ICONS_MAP_STATS_84_WINTER:String = "../maps/icons/map/stats/84_winter.png";
 
       public static const MAPS_ICONS_MAP_STATS_85_WINTER:String = "../maps/icons/map/stats/85_winter.png";
@@ -1537,9 +1781,139 @@ package
 
       public static const MAPS_ICONS_MAP_STATS_87_RUINBERG_ON_FIRE:String = "../maps/icons/map/stats/87_ruinberg_on_fire.png";
 
-      public static const MAPS_ICONS_MAP_STATS_NOIMAGE:String = "../maps/icons/map/stats/noImage.png";
-
       public static const MAPS_ICONS_MAP_STATS_OVERLAY:String = "../maps/icons/map/stats/overlay.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_CHINA_1_MARK:String = "../maps/icons/marksOnGun/180x180/china_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_CHINA_2_MARKS:String = "../maps/icons/marksOnGun/180x180/china_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_CHINA_3_MARKS:String = "../maps/icons/marksOnGun/180x180/china_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_FRANCE_1_MARK:String = "../maps/icons/marksOnGun/180x180/france_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_FRANCE_2_MARKS:String = "../maps/icons/marksOnGun/180x180/france_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_FRANCE_3_MARKS:String = "../maps/icons/marksOnGun/180x180/france_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_GERMANY_1_MARK:String = "../maps/icons/marksOnGun/180x180/germany_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_GERMANY_2_MARKS:String = "../maps/icons/marksOnGun/180x180/germany_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_GERMANY_3_MARKS:String = "../maps/icons/marksOnGun/180x180/germany_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_JAPAN_1_MARK:String = "../maps/icons/marksOnGun/180x180/japan_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_JAPAN_2_MARKS:String = "../maps/icons/marksOnGun/180x180/japan_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_JAPAN_3_MARKS:String = "../maps/icons/marksOnGun/180x180/japan_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_UK_1_MARK:String = "../maps/icons/marksOnGun/180x180/uk_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_UK_2_MARKS:String = "../maps/icons/marksOnGun/180x180/uk_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_UK_3_MARKS:String = "../maps/icons/marksOnGun/180x180/uk_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_USA_1_MARK:String = "../maps/icons/marksOnGun/180x180/usa_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_USA_2_MARKS:String = "../maps/icons/marksOnGun/180x180/usa_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_USA_3_MARKS:String = "../maps/icons/marksOnGun/180x180/usa_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_USSR_1_MARK:String = "../maps/icons/marksOnGun/180x180/ussr_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_USSR_2_MARKS:String = "../maps/icons/marksOnGun/180x180/ussr_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_180X180_USSR_3_MARKS:String = "../maps/icons/marksOnGun/180x180/ussr_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_CHINA_1_MARK:String = "../maps/icons/marksOnGun/67x71/china_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_CHINA_2_MARKS:String = "../maps/icons/marksOnGun/67x71/china_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_CHINA_3_MARKS:String = "../maps/icons/marksOnGun/67x71/china_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_FRANCE_1_MARK:String = "../maps/icons/marksOnGun/67x71/france_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_FRANCE_2_MARKS:String = "../maps/icons/marksOnGun/67x71/france_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_FRANCE_3_MARKS:String = "../maps/icons/marksOnGun/67x71/france_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_GERMANY_1_MARK:String = "../maps/icons/marksOnGun/67x71/germany_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_GERMANY_2_MARKS:String = "../maps/icons/marksOnGun/67x71/germany_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_GERMANY_3_MARKS:String = "../maps/icons/marksOnGun/67x71/germany_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_JAPAN_1_MARK:String = "../maps/icons/marksOnGun/67x71/japan_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_JAPAN_2_MARKS:String = "../maps/icons/marksOnGun/67x71/japan_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_JAPAN_3_MARKS:String = "../maps/icons/marksOnGun/67x71/japan_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_UK_1_MARK:String = "../maps/icons/marksOnGun/67x71/uk_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_UK_2_MARKS:String = "../maps/icons/marksOnGun/67x71/uk_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_UK_3_MARKS:String = "../maps/icons/marksOnGun/67x71/uk_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_USA_1_MARK:String = "../maps/icons/marksOnGun/67x71/usa_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_USA_2_MARKS:String = "../maps/icons/marksOnGun/67x71/usa_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_USA_3_MARKS:String = "../maps/icons/marksOnGun/67x71/usa_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_USSR_1_MARK:String = "../maps/icons/marksOnGun/67x71/ussr_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_USSR_2_MARKS:String = "../maps/icons/marksOnGun/67x71/ussr_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_67X71_USSR_3_MARKS:String = "../maps/icons/marksOnGun/67x71/ussr_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_CHINA_1_MARK:String = "../maps/icons/marksOnGun/95x85/china_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_CHINA_2_MARKS:String = "../maps/icons/marksOnGun/95x85/china_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_CHINA_3_MARKS:String = "../maps/icons/marksOnGun/95x85/china_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_FRANCE_1_MARK:String = "../maps/icons/marksOnGun/95x85/france_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_FRANCE_2_MARKS:String = "../maps/icons/marksOnGun/95x85/france_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_FRANCE_3_MARKS:String = "../maps/icons/marksOnGun/95x85/france_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_GERMANY_1_MARK:String = "../maps/icons/marksOnGun/95x85/germany_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_GERMANY_2_MARKS:String = "../maps/icons/marksOnGun/95x85/germany_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_GERMANY_3_MARKS:String = "../maps/icons/marksOnGun/95x85/germany_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_JAPAN_1_MARK:String = "../maps/icons/marksOnGun/95x85/japan_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_JAPAN_2_MARKS:String = "../maps/icons/marksOnGun/95x85/japan_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_JAPAN_3_MARKS:String = "../maps/icons/marksOnGun/95x85/japan_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_UK_1_MARK:String = "../maps/icons/marksOnGun/95x85/uk_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_UK_2_MARKS:String = "../maps/icons/marksOnGun/95x85/uk_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_UK_3_MARKS:String = "../maps/icons/marksOnGun/95x85/uk_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_USA_1_MARK:String = "../maps/icons/marksOnGun/95x85/usa_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_USA_2_MARKS:String = "../maps/icons/marksOnGun/95x85/usa_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_USA_3_MARKS:String = "../maps/icons/marksOnGun/95x85/usa_3_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_USSR_1_MARK:String = "../maps/icons/marksOnGun/95x85/ussr_1_mark.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_USSR_2_MARKS:String = "../maps/icons/marksOnGun/95x85/ussr_2_marks.png";
+
+      public static const MAPS_ICONS_MARKSONGUN_95X85_USSR_3_MARKS:String = "../maps/icons/marksOnGun/95x85/ussr_3_marks.png";
+
+      public static const MAPS_ICONS_MESSENGER_ICONADDCONTACT:String = "../maps/icons/messenger/iconAddContact.png";
+
+      public static const MAPS_ICONS_MESSENGER_ICONADDGROUP:String = "../maps/icons/messenger/iconAddGroup.png";
+
+      public static const MAPS_ICONS_MESSENGER_ICONSETTINGS:String = "../maps/icons/messenger/iconSettings.png";
 
       public static const MAPS_ICONS_MESSENGER_ICONS_ALLDOWN:String = "../maps/icons/messenger/icons/allDown.png";
 
@@ -1590,6 +1964,34 @@ package
       public static const MAPS_ICONS_NATIONS_USA_131X31:String = "../maps/icons/nations/usa_131x31.png";
 
       public static const MAPS_ICONS_NATIONS_USSR_131X31:String = "../maps/icons/nations/ussr_131x31.png";
+
+      public static const MAPS_ICONS_ORDERS_BIG_ADDITIONALBRIEFING:String = "../maps/icons/orders/big/additionalBriefing.png";
+
+      public static const MAPS_ICONS_ORDERS_BIG_COMBATPAYMENTS:String = "../maps/icons/orders/big/combatPayments.png";
+
+      public static const MAPS_ICONS_ORDERS_BIG_EVACUATION:String = "../maps/icons/orders/big/evacuation.png";
+
+      public static const MAPS_ICONS_ORDERS_BIG_HEAVYTRANSPORT:String = "../maps/icons/orders/big/heavyTransport.png";
+
+      public static const MAPS_ICONS_ORDERS_BIG_MILITARYEXERCISES:String = "../maps/icons/orders/big/militaryExercises.png";
+
+      public static const MAPS_ICONS_ORDERS_BIG_REQUISITION:String = "../maps/icons/orders/big/requisition.png";
+
+      public static const MAPS_ICONS_ORDERS_BIG_TACTICALTRAINING:String = "../maps/icons/orders/big/tacticalTraining.png";
+
+      public static const MAPS_ICONS_ORDERS_SMALL_ADDITIONALBRIEFING:String = "../maps/icons/orders/small/additionalBriefing.png";
+
+      public static const MAPS_ICONS_ORDERS_SMALL_COMBATPAYMENTS:String = "../maps/icons/orders/small/combatPayments.png";
+
+      public static const MAPS_ICONS_ORDERS_SMALL_EVACUATION:String = "../maps/icons/orders/small/evacuation.png";
+
+      public static const MAPS_ICONS_ORDERS_SMALL_HEAVYTRANSPORT:String = "../maps/icons/orders/small/heavyTransport.png";
+
+      public static const MAPS_ICONS_ORDERS_SMALL_MILITARYEXERCISES:String = "../maps/icons/orders/small/militaryExercises.png";
+
+      public static const MAPS_ICONS_ORDERS_SMALL_REQUISITION:String = "../maps/icons/orders/small/requisition.png";
+
+      public static const MAPS_ICONS_ORDERS_SMALL_TACTICALTRAINING:String = "../maps/icons/orders/small/tacticalTraining.png";
 
       public static const MAPS_ICONS_SETTINGS_COLOR_GRADING_TECHNIQUE_COLORIZATION:String = "../maps/icons/settings/COLOR_GRADING_TECHNIQUE/Colorization.png";
 
@@ -3531,6 +3933,8 @@ package
 
       public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_G100_GTRAKTOR_KRUPP:String = "../maps/icons/vehicle/contour/germany-G100_Gtraktor_Krupp.png";
 
+      public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_G101_STUG_III:String = "../maps/icons/vehicle/contour/germany-G101_StuG_III.png";
+
       public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_G20_MARDER_II:String = "../maps/icons/vehicle/contour/germany-G20_Marder_II.png";
 
       public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_GW_MK_VIE:String = "../maps/icons/vehicle/contour/germany-GW_Mk_VIe.png";
@@ -3564,6 +3968,8 @@ package
       public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_JAGDTIGER:String = "../maps/icons/vehicle/contour/germany-JagdTiger.png";
 
       public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_JAGDTIGER_SDKFZ_185:String = "../maps/icons/vehicle/contour/germany-JagdTiger_SdKfz_185.png";
+
+      public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_KARL:String = "../maps/icons/vehicle/contour/germany-Karl.png";
 
       public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_LEOPARD1:String = "../maps/icons/vehicle/contour/germany-Leopard1.png";
 
@@ -3636,6 +4042,8 @@ package
       public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PZ_IV_AUSFA:String = "../maps/icons/vehicle/contour/germany-Pz_IV_AusfA.png";
 
       public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PZ_IV_AUSFD:String = "../maps/icons/vehicle/contour/germany-Pz_IV_AusfD.png";
+
+      public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PZ_IV_AUSFH:String = "../maps/icons/vehicle/contour/germany-Pz_IV_AusfH.png";
 
       public static const MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PZ_SFL_IVB:String = "../maps/icons/vehicle/contour/germany-Pz_Sfl_IVb.png";
 
@@ -3712,6 +4120,8 @@ package
       public static const MAPS_ICONS_VEHICLE_CONTOUR_JAPAN_STA_1:String = "../maps/icons/vehicle/contour/japan-STA_1.png";
 
       public static const MAPS_ICONS_VEHICLE_CONTOUR_JAPAN_ST_B1:String = "../maps/icons/vehicle/contour/japan-ST_B1.png";
+
+      public static const MAPS_ICONS_VEHICLE_CONTOUR_JAPAN_TE_KE:String = "../maps/icons/vehicle/contour/japan-Te_Ke.png";
 
       public static const MAPS_ICONS_VEHICLE_CONTOUR_JAPAN_TYPE_61:String = "../maps/icons/vehicle/contour/japan-Type_61.png";
 
@@ -4213,6 +4623,8 @@ package
 
       public static const MAPS_ICONS_VEHICLE_GERMANY_G100_GTRAKTOR_KRUPP:String = "../maps/icons/vehicle/germany-G100_Gtraktor_Krupp.png";
 
+      public static const MAPS_ICONS_VEHICLE_GERMANY_G101_STUG_III:String = "../maps/icons/vehicle/germany-G101_StuG_III.png";
+
       public static const MAPS_ICONS_VEHICLE_GERMANY_G20_MARDER_II:String = "../maps/icons/vehicle/germany-G20_Marder_II.png";
 
       public static const MAPS_ICONS_VEHICLE_GERMANY_GW_MK_VIE:String = "../maps/icons/vehicle/germany-GW_Mk_VIe.png";
@@ -4246,6 +4658,8 @@ package
       public static const MAPS_ICONS_VEHICLE_GERMANY_JAGDTIGER:String = "../maps/icons/vehicle/germany-JagdTiger.png";
 
       public static const MAPS_ICONS_VEHICLE_GERMANY_JAGDTIGER_SDKFZ_185:String = "../maps/icons/vehicle/germany-JagdTiger_SdKfz_185.png";
+
+      public static const MAPS_ICONS_VEHICLE_GERMANY_KARL:String = "../maps/icons/vehicle/germany-Karl.png";
 
       public static const MAPS_ICONS_VEHICLE_GERMANY_LEOPARD1:String = "../maps/icons/vehicle/germany-Leopard1.png";
 
@@ -4312,6 +4726,8 @@ package
       public static const MAPS_ICONS_VEHICLE_GERMANY_PZ_IV_AUSFA:String = "../maps/icons/vehicle/germany-Pz_IV_AusfA.png";
 
       public static const MAPS_ICONS_VEHICLE_GERMANY_PZ_IV_AUSFD:String = "../maps/icons/vehicle/germany-Pz_IV_AusfD.png";
+
+      public static const MAPS_ICONS_VEHICLE_GERMANY_PZ_IV_AUSFH:String = "../maps/icons/vehicle/germany-Pz_IV_AusfH.png";
 
       public static const MAPS_ICONS_VEHICLE_GERMANY_PZ_SFL_IVB:String = "../maps/icons/vehicle/germany-Pz_Sfl_IVb.png";
 
@@ -4388,6 +4804,8 @@ package
       public static const MAPS_ICONS_VEHICLE_JAPAN_STA_1:String = "../maps/icons/vehicle/japan-STA_1.png";
 
       public static const MAPS_ICONS_VEHICLE_JAPAN_ST_B1:String = "../maps/icons/vehicle/japan-ST_B1.png";
+
+      public static const MAPS_ICONS_VEHICLE_JAPAN_TE_KE:String = "../maps/icons/vehicle/japan-Te_Ke.png";
 
       public static const MAPS_ICONS_VEHICLE_JAPAN_TYPE_61:String = "../maps/icons/vehicle/japan-Type_61.png";
 
@@ -4545,6 +4963,8 @@ package
 
       public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_G100_GTRAKTOR_KRUPP:String = "../maps/icons/vehicle/small/germany-G100_Gtraktor_Krupp.png";
 
+      public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_G101_STUG_III:String = "../maps/icons/vehicle/small/germany-G101_StuG_III.png";
+
       public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_G20_MARDER_II:String = "../maps/icons/vehicle/small/germany-G20_Marder_II.png";
 
       public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_GW_MK_VIE:String = "../maps/icons/vehicle/small/germany-GW_Mk_VIe.png";
@@ -4578,6 +4998,8 @@ package
       public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_JAGDTIGER:String = "../maps/icons/vehicle/small/germany-JagdTiger.png";
 
       public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_JAGDTIGER_SDKFZ_185:String = "../maps/icons/vehicle/small/germany-JagdTiger_SdKfz_185.png";
+
+      public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_KARL:String = "../maps/icons/vehicle/small/germany-Karl.png";
 
       public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_LEOPARD1:String = "../maps/icons/vehicle/small/germany-Leopard1.png";
 
@@ -4644,6 +5066,8 @@ package
       public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_PZ_IV_AUSFA:String = "../maps/icons/vehicle/small/germany-Pz_IV_AusfA.png";
 
       public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_PZ_IV_AUSFD:String = "../maps/icons/vehicle/small/germany-Pz_IV_AusfD.png";
+
+      public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_PZ_IV_AUSFH:String = "../maps/icons/vehicle/small/germany-Pz_IV_AusfH.png";
 
       public static const MAPS_ICONS_VEHICLE_SMALL_GERMANY_PZ_SFL_IVB:String = "../maps/icons/vehicle/small/germany-Pz_Sfl_IVb.png";
 
@@ -4720,6 +5144,8 @@ package
       public static const MAPS_ICONS_VEHICLE_SMALL_JAPAN_STA_1:String = "../maps/icons/vehicle/small/japan-STA_1.png";
 
       public static const MAPS_ICONS_VEHICLE_SMALL_JAPAN_ST_B1:String = "../maps/icons/vehicle/small/japan-ST_B1.png";
+
+      public static const MAPS_ICONS_VEHICLE_SMALL_JAPAN_TE_KE:String = "../maps/icons/vehicle/small/japan-Te_Ke.png";
 
       public static const MAPS_ICONS_VEHICLE_SMALL_JAPAN_TYPE_61:String = "../maps/icons/vehicle/small/japan-Type_61.png";
 

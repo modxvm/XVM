@@ -16,19 +16,11 @@ package net.wg.infrastructure.base.meta
 
       function loadNextS() : void;
 
-      function as_setSelectedUnitIdx(param1:int) : void;
-
       function as_setSearchResultText(param1:String) : void;
 
       function as_setSelectedVehiclesInfo(param1:String, param2:int) : void;
 
-      function as_setRefreshCoolDown(param1:Number) : void;
-
-      function as_selectUnitInList(param1:Number) : void;
-
       function as_updateNavigationBlock(param1:Object) : void;
-
-      function as_getSearchDP() : Object;
    }
 
 }

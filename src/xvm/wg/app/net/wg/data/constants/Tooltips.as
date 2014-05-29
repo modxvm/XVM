@@ -19,6 +19,10 @@ package net.wg.data.constants
 
       public static const TANK_CLASS:String = "tankClass";
 
+      public static const MARKS_ON_GUN_ACHIEVEMENT:String = "marksOnGun";
+
+      public static const BATTLE_STATS_MARKS_ON_GUN_ACHIEVEMENT:String = "battleStatsMarksOnGun";
+
       public static const CAROUSEL_VEHICLE:String = "carouselVehicle";
 
       public static const INVENTORY_VEHICLE:String = "inventoryVehicle";
@@ -65,6 +69,8 @@ package net.wg.data.constants
 
       public static const SETTINGS_CONTROL:String = "control";
 
+      public static const CLAN_INFO:String = "clanInfo";
+
       public static const TYPE_WARNING:String = "WARNING";
 
       public static const TYPE_INFO:String = "INFO";
@@ -78,6 +84,12 @@ package net.wg.data.constants
       public static const CYBER_SPORT_SLOT_SELECTED:String = "cyberSportSlotSelected";
 
       public static const CYBER_SPORT_TEAM:String = "cyberSportTeam";
+
+      public static const CYBER_SPORT_VEHICLE_NOT_READY:String = "cyberSportVehicleNotReady";
+
+      public static const SORTIE_DIVISION:String = "sortieDivision";
+
+      public static const ACTION_PRICE:String = "actionPrice";
 
       public static const SIMPLE:String = "simple";
 

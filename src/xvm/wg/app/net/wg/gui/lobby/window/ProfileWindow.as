@@ -11,7 +11,7 @@ package net.wg.gui.lobby.window
    import net.wg.utils.ILocale;
    import net.wg.data.Aliases;
    import net.wg.gui.lobby.profile.ProfileConstants;
-   import flash.events.MouseEvent;
+   import scaleform.clik.events.ButtonEvent;
    import flash.display.Graphics;
    import net.wg.gui.components.windows.Window;
    import scaleform.clik.constants.InvalidationType;
@@ -102,16 +102,15 @@ package net.wg.gui.lobby.window
          }
          catch(e:Error)
          {
-            trace(e);
          }
          this.tabNavigator.centerOffset = ProfileConstants.WINDOW_CENTER_OFFSET;
          var locale:ILocale = App.utils.locale;
          this.btnAddToFriends.label = locale.makeString(MESSENGER.DIALOGS_CONTACTS_CONTACT_ADDTOFRIENDS);
          this.btnAddToIgnore.label = locale.makeString(MESSENGER.DIALOGS_CONTACTS_CONTACT_ADDTOIGNORED);
          this.btnCreatePrivateChannel.label = locale.makeString(MESSENGER.DIALOGS_CONTACTS_CONTACT_CREATEPRIVATECHANNEL);
-         this.btnAddToFriends.addEventListener(MouseEvent.CLICK,this.addToFriendBtnHandler,false,0,true);
-         this.btnAddToIgnore.addEventListener(MouseEvent.CLICK,this.addToIgnoreBtnHandler,false,0,true);
-         this.btnCreatePrivateChannel.addEventListener(MouseEvent.CLICK,this.createPrivateChannelBtnHandler,false,0,true);
+         this.btnAddToFriends.addEventListener(ButtonEvent.CLICK,this.addToFriendBtnHandler,false,0,true);
+         this.btnAddToIgnore.addEventListener(ButtonEvent.CLICK,this.addToIgnoreBtnHandler,false,0,true);
+         this.btnCreatePrivateChannel.addEventListener(ButtonEvent.CLICK,this.createPrivateChannelBtnHandler,false,0,true);
       }
 
       override protected function draw() : void {
@@ -169,9 +168,9 @@ package net.wg.gui.lobby.window
             this.initData = null;
          }
          this.tabNavigator = null;
-         this.btnAddToFriends.removeEventListener(MouseEvent.CLICK,this.addToFriendBtnHandler);
-         this.btnAddToIgnore.removeEventListener(MouseEvent.CLICK,this.addToIgnoreBtnHandler);
-         this.btnCreatePrivateChannel.removeEventListener(MouseEvent.CLICK,this.createPrivateChannelBtnHandler);
+         this.btnAddToFriends.removeEventListener(ButtonEvent.CLICK,this.addToFriendBtnHandler);
+         this.btnAddToIgnore.removeEventListener(ButtonEvent.CLICK,this.addToIgnoreBtnHandler);
+         this.btnCreatePrivateChannel.removeEventListener(ButtonEvent.CLICK,this.createPrivateChannelBtnHandler);
          this.btnAddToFriends.dispose();
          this.btnAddToIgnore.dispose();
          this.btnCreatePrivateChannel.dispose();
@@ -187,15 +186,15 @@ package net.wg.gui.lobby.window
          }
       }
 
-      private function createPrivateChannelBtnHandler(param1:MouseEvent) : void {
+      private function createPrivateChannelBtnHandler(param1:ButtonEvent) : void {
          this.userCreatePrivateChannelS();
       }
 
-      private function addToIgnoreBtnHandler(param1:MouseEvent) : void {
+      private function addToIgnoreBtnHandler(param1:ButtonEvent) : void {
          this.userSetIgnoredS();
       }
 
-      private function addToFriendBtnHandler(param1:MouseEvent) : void {
+      private function addToFriendBtnHandler(param1:ButtonEvent) : void {
          this.userAddFriendS();
       }
    }

@@ -3,6 +3,7 @@ package net.wg.gui.lobby.training
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.components.controls.DropdownMenu;
    import net.wg.gui.components.controls.TextFieldShort;
+   import flash.text.TextFieldAutoSize;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.ListEvent;
    import net.wg.gui.events.ArenaVoipSettingsEvent;
@@ -30,6 +31,8 @@ package net.wg.gui.lobby.training
 
       override protected function configUI() : void {
          super.configUI();
+         this.textField.buttonMode = false;
+         this.textField.autoSize = TextFieldAutoSize.LEFT;
          this.voiceChatDD.dataProvider = new DataProvider([MENU.TRAINING_INFO_USECOMMONVOICECHAT,MENU.TRAINING_INFO_USESEPARATEVOIPCHAT]);
          this.voiceChatDD.selectedIndex = 0;
          this.voiceChatDD.addEventListener(ListEvent.INDEX_CHANGE,this.handleChange,false,0,true);

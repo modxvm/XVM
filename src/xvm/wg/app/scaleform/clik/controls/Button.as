@@ -859,7 +859,6 @@ package scaleform.clik.controls
          this._focusIndicator = null;
          if(this._group)
          {
-            this._group.dispose();
             this._group = null;
          }
          this.statesDefault = null;

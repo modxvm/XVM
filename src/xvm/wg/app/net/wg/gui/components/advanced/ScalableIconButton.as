@@ -19,7 +19,7 @@ package net.wg.gui.components.advanced
 
       private var _iconSource:String;
 
-      private var isIconSourceChanged:Boolean;
+      protected var isIconSourceChanged:Boolean;
 
       private var inv:Boolean;
 
@@ -35,7 +35,7 @@ package net.wg.gui.components.advanced
          this.loader.addEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler);
       }
 
-      private function iconLoadingCompleteHandler(param1:UILoaderEvent) : void {
+      protected function iconLoadingCompleteHandler(param1:UILoaderEvent) : void {
          this.inv = true;
          invalidate();
          this.loader.x = Math.round((_width - this.loader.width) / 2);

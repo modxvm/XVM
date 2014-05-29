@@ -313,7 +313,6 @@ package scaleform.clik.controls
       protected function updateTextField() : void {
          if(this.textField == null)
          {
-            trace(">>> Error :: " + this + ", textField is NULL.");
             return;
          }
          this.updateText();
@@ -331,7 +330,10 @@ package scaleform.clik.controls
       }
 
       protected function handleTextFieldFocusIn(param1:FocusEvent) : void {
-         FocusHandler.getInstance().setFocus(this);
+         if(this.editable)
+         {
+            FocusHandler.getInstance().setFocus(this);
+         }
       }
 
       protected function updateText() : void {

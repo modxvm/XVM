@@ -44,12 +44,13 @@ package net.wg.gui.lobby.profile.pages
 
       private function applyAnimation() : void {
          this.isTargetInitialized = true;
-         this.tweenManager.registerAndLaunch(ANIM_SPEED,this._target,{"alpha":1},
+         var _loc1_:Tween = this.tweenManager.registerAndLaunch(ANIM_SPEED,this._target,{"alpha":1},
             {
                "ease":Strong.easeOut,
                "onComplete":this.onTweenComplete
             }
          );
+         _loc1_.fastTransform = false;
       }
 
       private function onTweenComplete(param1:Tween) : void {

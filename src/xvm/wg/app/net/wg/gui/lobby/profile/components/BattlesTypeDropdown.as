@@ -34,22 +34,24 @@ package net.wg.gui.lobby.profile.components
       private var _isToolTipShowing:Boolean;
 
       override protected function configUI() : void {
-         var _loc4_:String = null;
          super.configUI();
          if(App.utils)
          {
             this.txtLabel.autoSize = TextFieldAutoSize.RIGHT;
             this.txtLabel.text = App.utils.locale.makeString(PROFILE.PROFILE_DROPDOWN_BATTLESTYPE);
          }
-         this.dropdownMenu.addEventListener(ListEvent.INDEX_CHANGE,this.menuIndexChangeHandler,false,0,true);
-         var _loc1_:Array = [];
-         var _loc2_:Array = [PROFILE.PROFILE_DROPDOWN_LABELS_ALL,PROFILE.PROFILE_DROPDOWN_LABELS_TEAM,PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL];
-         var _loc3_:uint = _loc2_.length;
+         this.tooltip = PROFILE.TOOLTIP_DROPDOWN_BATTLETYPE;
+      }
+
+      public function set menuProvider(param1:Array) : void {
+         var _loc4_:String = null;
+         var _loc2_:Array = [];
+         var _loc3_:uint = param1.length;
          var _loc5_:* = 0;
          while(_loc5_ < _loc3_)
          {
-            _loc4_ = _loc2_[_loc5_];
-            _loc1_.push(
+            _loc4_ = param1[_loc5_];
+            _loc2_.push(
                {
                   "label":App.utils.locale.makeString(_loc4_),
                   "key":_loc4_
@@ -57,9 +59,9 @@ package net.wg.gui.lobby.profile.components
             );
             _loc5_++;
          }
-         this.dropdownMenu.dataProvider = new DataProvider(_loc1_);
+         this.dropdownMenu.addEventListener(ListEvent.INDEX_CHANGE,this.menuIndexChangeHandler,false,0,true);
+         this.dropdownMenu.dataProvider = new DataProvider(_loc2_);
          this.dropdownMenu.validateNow();
-         this.tooltip = PROFILE.TOOLTIP_DROPDOWN_BATTLETYPE;
       }
 
       public function get tooltip() : String {
@@ -150,6 +152,9 @@ package net.wg.gui.lobby.profile.components
 
       override protected function onDispose() : void {
          this.disposeHandlers();
+         this.dropdownMenu.dispose();
+         this.dropdownMenu = null;
+         this.txtLabel = null;
          super.onDispose();
       }
    }

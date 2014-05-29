@@ -4,7 +4,7 @@ package net.wg.gui.lobby.profile.pages.statistics
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.gui.lobby.profile.components.LditBattles;
-   import net.wg.gui.lobby.profile.components.LineDescrIconText;
+   import net.wg.gui.components.advanced.LineDescrIconText;
    import net.wg.gui.lobby.profile.components.LditValued;
    import net.wg.gui.lobby.profile.components.LditMarksOfMastery;
    import flash.events.Event;

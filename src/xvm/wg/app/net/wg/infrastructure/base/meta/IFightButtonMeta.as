@@ -8,8 +8,6 @@ package net.wg.infrastructure.base.meta
           
       function fightClickS(param1:Number, param2:String) : void;
 
-      function fightSelectClickS(param1:String) : void;
-
       function demoClickS() : void;
 
       function as_disableFightButton(param1:Boolean, param2:String) : void;

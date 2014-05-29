@@ -7,15 +7,14 @@ package net.wg.gui.lobby.barracks
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.IconText;
    import net.wg.gui.components.controls.ActionPrice;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
    import net.wg.data.constants.SoundTypes;
    import __AS3__.vec.Vector;
    import flash.geom.Point;
-   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ListEvent;
-   import net.wg.data.constants.IconsTypes;
    import net.wg.gui.events.CrewEvent;
 
 
@@ -78,6 +77,8 @@ package net.wg.gui.lobby.barracks
       private var _buy:Boolean = false;
 
       private var _isMouseOver:Boolean = false;
+
+      private var actionPriceVo:ActionPriceVO = null;
 
       override protected function onDispose() : void {
          removeEventListener(ButtonEvent.CLICK,this.onBarracksItemRendererClick,false);
@@ -153,6 +154,7 @@ package net.wg.gui.lobby.barracks
          {
             this.inTank = param1.inTank;
          }
+         this.actionPriceVo = (data.hasOwnProperty("actionPriceData")) && (data.actionPriceData)?new ActionPriceVO(data.actionPriceData):null;
          this.btnDissmiss.enabled = !((param1.locked) || (param1.vehicleBroken));
          this.btnDissmiss.label = MENU.BARRACKS_BTNDISSMISS;
          this.btnDissmiss.soundId = "btnDissmiss";
@@ -272,9 +274,8 @@ package net.wg.gui.lobby.barracks
       override protected function draw() : void {
          var _loc1_:String = null;
          var _loc2_:Point = null;
-         var _loc3_:ActionPriceVO = null;
+         var _loc3_:String = null;
          var _loc4_:String = null;
-         var _loc5_:String = null;
          super.draw();
          if(isInvalid(InvalidationType.STATE))
          {
@@ -323,19 +324,19 @@ package net.wg.gui.lobby.barracks
                   }
                   if(this.actionPrice)
                   {
-                     if(data.hasOwnProperty("actionPrc"))
+                     if(this.actionPriceVo)
                      {
-                        _loc3_ = new ActionPriceVO(data.actionPrc,data.price,data.defPrice,IconsTypes.GOLD);
-                        this.actionPrice.setData(_loc3_);
+                        this.actionPriceVo.forCredits = false;
                      }
-                     else
-                     {
-                        this.actionPrice.visible = false;
-                     }
-                     if(this.price)
-                     {
-                        this.price.visible = !this.actionPrice.visible;
-                     }
+                     this.actionPrice.setData(this.actionPriceVo);
+                  }
+                  else
+                  {
+                     this.actionPrice.visible = false;
+                  }
+                  if(this.price)
+                  {
+                     this.price.visible = !this.actionPrice.visible;
                   }
                   this.countField.text = "+" + data.count;
                   this.descrField.text = App.utils.locale.makeString(MENU.BARRACKS_BTNBUYBERTHDECS);
@@ -351,24 +352,24 @@ package net.wg.gui.lobby.barracks
                }
                if(!((this._buy) || (this.empty)))
                {
-                  _loc4_ = data.specializationLevel + "%";
-                  _loc5_ = App.utils.locale.makeString(MENU.tankmen(data.tankType));
+                  _loc3_ = data.specializationLevel + "%";
+                  _loc4_ = App.utils.locale.makeString(MENU.tankmen(data.tankType));
                   if(!data.isInSelfVehicleClass)
                   {
-                     this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc4_ + "</font>";
-                     this.role.htmlText = this.role.htmlText + (", <font color=\'" + DEBUFF + "\'>" + _loc5_ + " " + data.vehicleType + "</font>");
+                     this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
+                     this.role.htmlText = this.role.htmlText + (", <font color=\'" + DEBUFF + "\'>" + _loc4_ + " " + data.vehicleType + "</font>");
                   }
                   else
                   {
                      if(!data.isInSelfVehicleType)
                      {
-                        this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc4_ + "</font>";
-                        this.role.htmlText = this.role.htmlText + (", " + _loc5_ + " <font color=\'" + DEBUFF + "\'> " + data.vehicleType + "</font>");
+                        this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
+                        this.role.htmlText = this.role.htmlText + (", " + _loc4_ + " <font color=\'" + DEBUFF + "\'> " + data.vehicleType + "</font>");
                      }
                      else
                      {
-                        this.levelSpecializationMain.htmlText = _loc4_;
-                        this.role.htmlText = this.role.htmlText + (", " + _loc5_ + " " + data.vehicleType);
+                        this.levelSpecializationMain.htmlText = _loc3_;
+                        this.role.htmlText = this.role.htmlText + (", " + _loc4_ + " " + data.vehicleType);
                      }
                   }
                   this.tankmanName.text = data.firstname + " " + data.lastname;

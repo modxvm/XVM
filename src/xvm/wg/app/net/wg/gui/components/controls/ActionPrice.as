@@ -7,9 +7,7 @@ package net.wg.gui.components.controls
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
    import flash.events.MouseEvent;
-   import net.wg.utils.ILocale;
-   import net.wg.data.constants.IconsTypes;
-   import net.wg.gui.utils.ComplexTooltipHelper;
+   import net.wg.data.constants.Tooltips;
    import scaleform.clik.controls.ListItemRenderer;
    import net.wg.infrastructure.exceptions.AbstractException;
    import net.wg.data.constants.Errors;
@@ -17,6 +15,8 @@ package net.wg.gui.components.controls
    import flash.display.InteractiveObject;
    import scaleform.clik.constants.InvalidationType;
    import flash.geom.Point;
+   import net.wg.data.constants.IconsTypes;
+   import net.wg.utils.ILocale;
    import flash.text.TextFormat;
    import scaleform.clik.controls.Button;
 
@@ -34,7 +34,6 @@ package net.wg.gui.components.controls
             }
          ;
          super();
-         this._vo = new ActionPriceVO();
          this.alertVisibleInNextStates = [STATE_ALIGN_MIDDLE,STATE_ALIGN_TOP,STATE_ALIGN_MIDDLE_SMALL];
       }
 
@@ -119,6 +118,11 @@ package net.wg.gui.components.controls
          removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
          removeEventListener(MouseEvent.MOUSE_DOWN,this.onPressHandler);
          this._owner = null;
+         if(this._vo)
+         {
+            this._vo.dispose();
+            this._vo = null;
+         }
       }
 
       override public function toString() : String {
@@ -126,38 +130,7 @@ package net.wg.gui.components.controls
       }
 
       public function showTooltip() : void {
-         var _loc3_:String = null;
-         var _loc4_:String = null;
-         var _loc5_:String = null;
-         var _loc6_:String = null;
-         var _loc1_:* = "";
-         var _loc2_:ILocale = App.utils.locale;
-         if(this._vo.actionPrc > 0 && !(this._vo.price == 0))
-         {
-            _loc3_ = App.utils.icons.getIcon16StrPath(this._vo.ico);
-            _loc4_ = this._vo.ico == IconsTypes.GOLD?_loc2_.gold(Math.abs(this._vo.price)):_loc2_.integer(Math.abs(this._vo.price));
-            _loc5_ = this._vo.ico == IconsTypes.GOLD?_loc2_.gold(Math.abs(this._vo.defPrice)):_loc2_.integer(Math.abs(this._vo.defPrice));
-            _loc4_ = _loc4_ + (" " + _loc3_);
-            _loc5_ = _loc5_ + (" " + _loc3_);
-            _loc1_ = new ComplexTooltipHelper().addHeader(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_HEADER)).addBody(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_BODY,
-               {
-                  "oldPrice":_loc5_,
-                  "newPrice":_loc4_
-               }
-            )).make();
-         }
-         else
-         {
-            if(this._vo.actionPrc < 0 && !(this._vo.itemType == ""))
-            {
-               _loc6_ = _loc2_.makeString(TOOLTIPS.actionprice_sell_type(this._vo.itemType));
-               _loc1_ = new ComplexTooltipHelper().addHeader(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_SELL_HEADER)).addBody(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_SELL_BODY,{"deviceName":_loc6_})).make();
-            }
-         }
-         if(_loc1_.length > 0)
-         {
-            App.toolTipMgr.showComplex(_loc1_);
-         }
+         App.toolTipMgr.showSpecial(Tooltips.ACTION_PRICE,null,this._vo.type,this._vo.key,this._vo.newPrices,this._vo.oldPrices,this._vo.isBuying,this._vo.forCredits);
       }
 
       public function hideTooltip() : void {
@@ -178,10 +151,16 @@ package net.wg.gui.components.controls
       public function setData(param1:ActionPriceVO) : void {
          if(param1 == null)
          {
+            this.visible = false;
             return;
          }
+         if(!param1.useAction)
+         {
+            this.visible = false;
+            return;
+         }
+         this.visible = true;
          this._vo = param1;
-         this.visible = !(this._vo.actionPrc == 0) && !(this._vo.price == this._vo.defPrice);
          if(this.visible)
          {
             invalidateData();
@@ -249,11 +228,15 @@ package net.wg.gui.components.controls
       }
 
       public function get ico() : String {
+         if(!this._vo)
+         {
+            return "";
+         }
          return this._vo.ico;
       }
 
       public function set ico(param1:String) : void {
-         if(this._vo.ico == param1)
+         if(!this._vo || this._vo.ico == param1)
          {
             return;
          }
@@ -399,6 +382,10 @@ package net.wg.gui.components.controls
       }
 
       private function updatePositions() : void {
+         if(!this._vo)
+         {
+            return;
+         }
          if(this.defIconPos == 0)
          {
             this.defIconPos = this.iconText.x;
@@ -411,7 +398,7 @@ package net.wg.gui.components.controls
          {
             this.defBgPos = this.bg.x;
          }
-         var _loc1_:Boolean = this._vo.actionPrc < 0 && !(this.alertVisibleInNextStates.indexOf(this._state) == -1);
+         var _loc1_:Boolean = this._vo.state == ActionPriceVO.STATE_PENALTY && !(this.alertVisibleInNextStates.indexOf(this._state) == -1);
          if(this._iconPosition == "left")
          {
             this.iconText.x = 0;
@@ -453,6 +440,10 @@ package net.wg.gui.components.controls
          var _loc2_:ILocale = null;
          var _loc3_:String = null;
          var _loc4_:TextFormat = null;
+         if(!this._vo)
+         {
+            return;
+         }
          if(!(this._vo.ico == "") && (this.iconText))
          {
             this.iconText.icon = this._vo.ico;
@@ -479,14 +470,14 @@ package net.wg.gui.components.controls
             {
                if(this._vo.externalSign == "")
                {
-                  _loc3_ = this._vo.price > 0?"+":"";
+                  _loc3_ = this._vo.newPrice > 0?"+":"";
                }
                else
                {
                   _loc3_ = this._vo.externalSign;
                }
             }
-            this.textField.text = _loc3_ + (this._vo.ico == IconsTypes.GOLD?_loc2_.gold(this._vo.price):_loc2_.integer(this._vo.price));
+            this.textField.text = _loc3_ + (this._vo.ico == IconsTypes.GOLD?_loc2_.gold(this._vo.newPrice):_loc2_.integer(this._vo.newPrice));
             _loc4_ = this.textField.getTextFormat();
             _loc4_.font = this._textFont;
             _loc4_.size = this._textSize;

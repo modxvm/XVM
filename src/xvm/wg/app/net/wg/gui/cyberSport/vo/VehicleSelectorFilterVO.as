@@ -18,6 +18,8 @@ package net.wg.gui.cyberSport.vo
 
       private var _level:int = -1;
 
+      private var _compatibleOnly:Boolean = true;
+
       private var _vehicleTypesDP:Array = null;
 
       private var _levelsDP:Array = null;
@@ -68,6 +70,14 @@ package net.wg.gui.cyberSport.vo
 
       public function set level(param1:int) : void {
          this._level = param1;
+      }
+
+      public function get compatibleOnly() : Boolean {
+         return this._compatibleOnly;
+      }
+
+      public function set compatibleOnly(param1:Boolean) : void {
+         this._compatibleOnly = param1;
       }
    }
 

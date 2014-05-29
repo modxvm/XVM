@@ -5,10 +5,13 @@ package net.wg.gui.lobby.questsWindow.components
    import flash.display.MovieClip;
    import flash.text.TextField;
    import net.wg.gui.components.controls.BitmapFill;
+   import net.wg.data.constants.QuestsStates;
+   import flash.text.TextFieldAutoSize;
    import net.wg.gui.lobby.questsWindow.data.QuestVehicleRendererVO;
    import net.wg.data.VO.ProgressElementVO;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ComponentEvent;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
 
 
    public class VehicleItemRenderer extends ListItemRenderer
@@ -47,6 +50,8 @@ package net.wg.gui.lobby.questsWindow.components
 
       private var isDisabled:Boolean = false;
 
+      public var statusMC:QuestStatusComponent;
+
       override protected function configUI() : void {
          super.configUI();
          this.nationIcon.hideLoader = false;
@@ -54,6 +59,11 @@ package net.wg.gui.lobby.questsWindow.components
          this.tankSmallIcon.hideLoader = false;
          this.disableMc.widthFill = Math.round(this.width);
          this.disableMc.heightFill = Math.round(this.height);
+         this.statusMC.setStatus(QuestsStates.DONE);
+         this.statusMC.textAlign = TextFieldAutoSize.RIGHT;
+         this.statusMC.showTooltip = false;
+         this.statusMC.validateNow();
+         this.statusMC.visible = false;
          this.setNoData();
          this.noVehicle.text = QUESTS.QUESTS_TABLE_NOVEHICLES;
       }
@@ -110,9 +120,11 @@ package net.wg.gui.lobby.questsWindow.components
                }
                this.vehTF.htmlText = _loc1_.vName;
                this.htmlTF.htmlText = _loc1_.htmlLabel;
+               this.htmlTF.visible = !_loc1_.showDone;
                this.levelMC.gotoAndStop(_loc1_.vLevel);
-               this.progress.visible = Boolean(_loc1_.progressData);
-               this.naMC.visible = !_loc1_.isAvailable;
+               this.progress.visible = Boolean((_loc1_.progressData) && (!_loc1_.showDone));
+               this.naMC.visible = !_loc1_.isAvailable && !_loc1_.showDone;
+               this.statusMC.visible = _loc1_.showDone;
                this.isDisabled = _loc1_.isDisabled;
                if(_loc1_.progressData)
                {
@@ -139,6 +151,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.progress.visible = false;
          this.naMC.visible = false;
          this.noVehicle.visible = true;
+         this.statusMC.visible = false;
          this.isDisabled = false;
       }
 
@@ -162,26 +175,39 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       override protected function onDispose() : void {
-         this.disableMc.dispose();
-         this.disableMc = null;
+         this.noVehicle = null;
+         this.htmlTF = null;
+         this.levelMC = null;
+         this.naMC = null;
+         this.vehTF = null;
+         if(this.progress)
+         {
+            this.progress.dispose();
+            this.progress = null;
+         }
+         if(this.disableMc)
+         {
+            this.disableMc.dispose();
+            this.disableMc = null;
+         }
+         if(this.statusMC)
+         {
+            this.statusMC.dispose();
+            this.statusMC = null;
+         }
          if(this.nationIcon)
          {
             this.nationIcon.dispose();
-            removeChild(this.nationIcon);
             this.nationIcon = null;
          }
          if(this.typeIcon)
          {
             this.typeIcon.dispose();
-            removeChild(this.typeIcon);
             this.typeIcon = null;
          }
-         removeChild(this.levelMC);
-         this.levelMC = null;
          if(this.tankSmallIcon)
          {
             this.tankSmallIcon.dispose();
-            removeChild(this.tankSmallIcon);
             this.tankSmallIcon = null;
          }
          if(this.nations)
@@ -189,12 +215,14 @@ package net.wg.gui.lobby.questsWindow.components
             this.nations.splice(0,this.nations.length);
             this.nations = null;
          }
-         if(this.vehTF)
+         if(data)
          {
-            removeChild(this.vehTF);
-            this.vehTF = null;
+            if(data  is  IDisposable)
+            {
+               IDisposable(data).dispose();
+            }
+            data = null;
          }
-         data = null;
          super.onDispose();
       }
 

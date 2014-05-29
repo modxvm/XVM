@@ -24,7 +24,7 @@ import net.wg.gui.lobby.hangar.crew.*; Crew; RecruitRendererVO; CrewItemRenderer
 import net.wg.gui.lobby.battleloading.*; BattleLoading; PlayerItemRenderer;
 import net.wg.gui.lobby.battleResults.*; BattleResults; CommonStats; ProgressElement;
 import net.wg.gui.lobby.profile.*; Profile;
-import net.wg.gui.lobby.profile.components.*; UserDateFooter; DashLineTextItem;
+import net.wg.gui.lobby.profile.components.*; UserDateFooter; ProfileDashLineTextItem;
 import net.wg.gui.lobby.profile.pages.awards.*; ProfileAwards;
 import net.wg.gui.lobby.profile.pages.summary.*; ProfileSummaryPage; ProfileSummaryWindow;
 import net.wg.gui.lobby.profile.pages.technique.*; ProfileTechniquePage; ProfileTechniqueWindow;

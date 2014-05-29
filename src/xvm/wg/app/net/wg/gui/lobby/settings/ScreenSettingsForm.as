@@ -5,6 +5,7 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.components.controls.DropdownMenu;
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.Slider;
+   import net.wg.gui.components.controls.RangeSlider;
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.display.MovieClip;
 
@@ -54,9 +55,9 @@ package net.wg.gui.lobby.settings
 
       public var fovLabel:LabelControl = null;
 
-      public var fovValue:LabelControl = null;
+      public var fovRangeSlider:RangeSlider = null;
 
-      public var fovSlider:Slider = null;
+      public var dynamicFovCheckbox:CheckBox = null;
 
       public var colorFilterDefaultImg:UILoaderAlt = null;
 
@@ -82,6 +83,7 @@ package net.wg.gui.lobby.settings
          this.refreshRateLabel.text = SETTINGS.REFRESHRATE;
          this.colorFilterIntensityLabel.text = SETTINGS.COLORFILTERINTENSITY;
          this.fovLabel.text = SETTINGS.FOV;
+         this.dynamicFovCheckbox.label = SETTINGS.DYNAMICFOV;
       }
 
       override protected function configUI() : void {
@@ -117,8 +119,8 @@ package net.wg.gui.lobby.settings
          this.COLOR_GRADING_TECHNIQUELabel.dispose();
          this.COLOR_GRADING_TECHNIQUEDropDown.dispose();
          this.fovLabel.dispose();
-         this.fovValue.dispose();
-         this.fovSlider.dispose();
+         this.fovRangeSlider.dispose();
+         this.dynamicFovCheckbox.dispose();
          this.monitorLabel = null;
          this.monitorDropDown = null;
          this.fullScreenCheckbox = null;
@@ -142,8 +144,8 @@ package net.wg.gui.lobby.settings
          this.COLOR_GRADING_TECHNIQUELabel = null;
          this.COLOR_GRADING_TECHNIQUEDropDown = null;
          this.fovLabel = null;
-         this.fovValue = null;
-         this.fovSlider = null;
+         this.fovRangeSlider = null;
+         this.dynamicFovCheckbox = null;
          this.topShadow = null;
          this.bottomShadow = null;
          super.onDispose();

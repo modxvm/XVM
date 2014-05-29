@@ -5,6 +5,8 @@ package net.wg.gui.lobby.tankman
    import net.wg.data.VO.AchievementItemVO;
    import net.wg.data.constants.VehicleTypes;
    import scaleform.gfx.Extensions;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
+   import net.wg.data.constants.IconsTypes;
 
 
    public class PersonalCaseBase extends PersonalCaseMeta implements IPersonalCaseMeta
@@ -82,7 +84,7 @@ package net.wg.gui.lobby.tankman
          this.retrainingData.vehicles = param1.vehicles;
          this.retrainingData.testData = this.data;
          this.retrainingData.testStats = this.stats;
-         this.retrainingData.actionPrc = param1.actionPrc;
+         this.retrainingData.action = param1.action;
          var _loc2_:Array = param1.vehicles;
          var _loc3_:* = 0;
          while(_loc3_ < _loc2_.length)
@@ -179,10 +181,16 @@ package net.wg.gui.lobby.tankman
             this.createTestNames(param1.firstnames);
             this.createTestNames(param1.lastnames);
          }
-         this.documentsData.actionPrc = param1.hasOwnProperty("actionPrc")?param1.actionPrc:0;
          this.documentsData.originalIconFile = this.data.iconFile;
          this.documentsData.firstNames = param1.firstnames;
          this.documentsData.lastNames = param1.lastnames;
+         if(param1.action)
+         {
+            this.documentsData.actionPriceDataGoldVo = new ActionPriceVO(param1.action);
+            this.documentsData.actionPriceDataGoldVo.ico = IconsTypes.GOLD;
+            this.documentsData.actionPriceDataCreditsVo = new ActionPriceVO(param1.action);
+            this.documentsData.actionPriceDataCreditsVo.ico = IconsTypes.CREDITS;
+         }
          this.calculateMaxChars(this.documentsData.firstNames,this.documentsData,"firstNames");
          this.calculateMaxChars(this.documentsData.lastNames,this.documentsData,"lastNames");
          this.documentsData.icons = param1.icons;
@@ -198,19 +206,6 @@ package net.wg.gui.lobby.tankman
             if(param1.passportChangeCost  is  int)
             {
                this.documentsData.priceOfGold = param1.passportChangeCost;
-               this.documentsData.useOnlyGold = true;
-            }
-         }
-         if(param1.defPassportChangeCost  is  Array)
-         {
-            this.documentsData.defPriceOfGold = param1.defPassportChangeCost[0];
-            this.documentsData.defPriceOfCredits = param1.defPassportChangeCost[1];
-         }
-         else
-         {
-            if(param1.defPassportChangeCost  is  int)
-            {
-               this.documentsData.defPriceOfGold = param1.defPassportChangeCost;
                this.documentsData.useOnlyGold = true;
             }
          }

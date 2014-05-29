@@ -218,7 +218,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       }
 
       private function onExtraIconLoaded(param1:Event) : void {
-         var _loc2_:uint = 2;
+         var _loc2_:uint = 0;
+         _loc2_ = 2;
          this.extraIcon.x = width - this.extraIcon.width - _loc2_;
          this.extraIcon.y = height - this.extraIcon.height - _loc2_;
       }
@@ -270,11 +271,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       }
 
       private function onMouseDown(param1:MouseEvent) : void {
-         var _loc2_:MouseEventEx = null;
          if(param1  is  MouseEventEx)
          {
-            _loc2_ = param1 as MouseEventEx;
-            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+            if(App.utils.commons.isRightButton(param1))
             {
                this.select.close();
             }

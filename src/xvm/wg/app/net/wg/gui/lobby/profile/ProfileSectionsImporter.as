@@ -1,9 +1,9 @@
 package net.wg.gui.lobby.profile
 {
-   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
 
 
-   public class ProfileSectionsImporter extends UIComponent
+   public class ProfileSectionsImporter extends MovieClip
    {
           
       public function ProfileSectionsImporter() {

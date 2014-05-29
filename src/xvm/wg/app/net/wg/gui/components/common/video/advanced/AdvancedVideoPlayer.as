@@ -91,10 +91,6 @@ package net.wg.gui.components.common.video.advanced
             this.progressBarClass = _loc2_;
             this._progressBarClassName = param1;
          }
-         else
-         {
-            trace("Error: " + this + ", The class " + param1 + " cannot be found in your library. Please ensure it is there.");
-         }
       }
 
       public function set progressBarClass(param1:Class) : void {

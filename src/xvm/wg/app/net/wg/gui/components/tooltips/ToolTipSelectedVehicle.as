@@ -3,7 +3,7 @@ package net.wg.gui.components.tooltips
    import flash.text.TextField;
    import flash.display.Sprite;
    import net.wg.utils.ILocale;
-   import net.wg.gui.cyberSport.vo.VehicleVO;
+   import net.wg.gui.rally.vo.VehicleVO;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
    import flash.display.MovieClip;

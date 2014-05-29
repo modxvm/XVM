@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.techtree.data.vo
 {
    import net.wg.gui.lobby.techtree.interfaces.IValueObject;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.utils.ILocale;
    import net.wg.gui.lobby.techtree.constants.NamedLabels;
 
@@ -24,7 +25,7 @@ package net.wg.gui.lobby.techtree.data.vo
 
       private var _earnedXP:Number = 0;
 
-      private var _defEarnedXP:Number = 0;
+      private var _actionPriceDataVo:ActionPriceVO = null;
 
       private var _earnedXPLabel:String = "";
 
@@ -103,9 +104,9 @@ package net.wg.gui.lobby.techtree.data.vo
          {
             this.earnedXP = param1.earnedXP;
          }
-         if(!isNaN(param1.defEarnedXP))
+         if(param1.actionPriceData)
          {
-            this._defEarnedXP = param1.defEarnedXP;
+            this._actionPriceDataVo = new ActionPriceVO(param1.actionPriceData);
          }
          if(!isNaN(param1.state))
          {
@@ -157,7 +158,7 @@ package net.wg.gui.lobby.techtree.data.vo
          this.primaryClass = null;
          this.level = -1;
          this._earnedXP = 0;
-         this._defEarnedXP = 0;
+         this._actionPriceDataVo = null;
          this._earnedXPLabel = "";
          this.state = 0;
          this.iconPath = "";
@@ -218,36 +219,30 @@ package net.wg.gui.lobby.techtree.data.vo
          return _loc2_;
       }
 
-      public function getActionData(param1:String) : ActionData {
-         var _loc2_:ActionData = new ActionData();
+      public function getActionData(param1:String) : ActionPriceVO {
+         var _loc2_:ActionPriceVO = null;
          switch(param1)
          {
             case NamedLabels.XP_COST:
-               _loc2_.price = this.unlockProps.xpCost;
-               _loc2_.defaultPrice = this.unlockProps.defXpCost;
+               _loc2_ = this.unlockProps.actionPriceDataVo;
                break;
             case NamedLabels.EARNED_XP:
-               _loc2_.price = this._earnedXP;
-               _loc2_.defaultPrice = this._defEarnedXP;
+               _loc2_ = this._actionPriceDataVo;
                break;
             case NamedLabels.CREDITS_PRICE:
-               _loc2_.price = this.shopPrice.credits;
-               _loc2_.defaultPrice = this.shopPrice.defCredits;
-               _loc2_.actionPrice = this.shopPrice.actionPrc;
+               _loc2_ = this.shopPrice.actionPriceDataVo;
                break;
             case NamedLabels.GOLD_PRICE:
-               _loc2_.price = this.shopPrice.gold;
-               _loc2_.defaultPrice = this.shopPrice.defGold;
-               _loc2_.actionPrice = this.shopPrice.actionPrc;
+               _loc2_ = this.shopPrice.actionPriceDataVo;
                break;
             default:
-               _loc2_.price = 0;
+               _loc2_ = null;
          }
          return _loc2_;
       }
 
       public function toString() : String {
-         return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n defEarnedXP = " + this._defEarnedXP + "\n]";
+         return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n actionPriceDataVo = " + this._actionPriceDataVo + "\n]";
       }
    }
 

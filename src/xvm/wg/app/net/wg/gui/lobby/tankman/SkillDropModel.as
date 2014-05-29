@@ -99,7 +99,8 @@ package net.wg.gui.lobby.tankman
       }
    }
 
-}
+}   import net.wg.gui.components.controls.VO.ActionPriceVO;
+
 
    class DropSkillsCost extends Object
    {
@@ -112,24 +113,18 @@ package net.wg.gui.lobby.tankman
          var _loc2_:DropSkillsCost = new DropSkillsCost();
          _loc2_.gold = param1.gold;
          _loc2_.credits = param1.credits;
-         _loc2_.defGold = param1.defGold;
-         _loc2_.defCredits = param1.defCredits;
          _loc2_.xpReuseFraction = param1.xpReuseFraction;
-         _loc2_.actionPrc = param1.actionPrc;
+         _loc2_.actionPriceDataVo = param1.action?new ActionPriceVO(param1.action):null;
          return _loc2_;
       }
 
       public var credits:int;
 
-      public var defCredits:int;
-
       public var gold:int;
-
-      public var defGold:int;
 
       public var xpReuseFraction:Number;
 
       public var id:int;
 
-      public var actionPrc:Number;
+      public var actionPriceDataVo:ActionPriceVO;
    }

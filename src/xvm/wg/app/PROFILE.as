@@ -29,6 +29,8 @@ package
 
       public static const PROFILE_PARAMS_TOOLTIP_MAXDAMAGE:String = "#profile:profile/params/tooltip/maxDamage";
 
+      public static const PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE:String = "#profile:profile/params/tooltip/unavailableMaxDamage";
+
       public static const PROFILE_TABS_TOOLTIP_AWARDS:String = "#profile:profile/tabs/tooltip/awards";
 
       public static const PROFILE_TABS_TOOLTIP_STATISTICS:String = "#profile:profile/tabs/tooltip/statistics";
@@ -105,6 +107,28 @@ package
 
       public static const SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY:String = "#profile:section/technique/sort/tooltip/marksofmastery";
 
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_BATTLES:String = "#profile:profile/params/tooltip/fort/battles";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "WinsEfficiency";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_SORTIE:String = "#profile:profile/params/tooltip/fort/sortie";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE:String = "#profile:profile/params/tooltip/fort/resource";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS:String = "#profile:profile/params/tooltip/fortSortieWins";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS:String = "#profile:profile/params/tooltip/fortBattlesWins";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES:String = "#profile:profile/params/tooltip/fortSorties/avgResources";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES:String = "#profile:profile/params/tooltip/fortSorties/totalResources";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES:String = "#profile:profile/params/tooltip/fortBattles/totalResources";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES:String = "#profile:profile/params/tooltip/fortBattles/maxResources";
+
       public static const SECTION_TECHNIQUE_CHECKBOXHANGARVEHICLES_TOOLTIP:String = "#profile:section/technique/checkBoxHangarVehicles/tooltip";
 
       public static const PROFILE_TITLE:String = "#profile:profile/title";
@@ -167,6 +191,8 @@ package
 
       public static const SECTION_AWARDS_TITLE:String = "#profile:section/awards/title";
 
+      public static const SECTION_AWARDS_LABELS_MARKSONGUN:String = "#profile:section/awards/labels/marksOnGun";
+
       public static const SECTION_AWARDS_LABELS_BATTLEHEROES:String = "#profile:section/awards/labels/battleHeroes";
 
       public static const SECTION_AWARDS_LABELS_HONORARY:String = "#profile:section/awards/labels/honorary";
@@ -203,6 +229,8 @@ package
 
       public static const SECTION_STATISTICS_HEADERTEXT_HISTORICAL:String = "#profile:section/statistics/headerText/historical";
 
+      public static const SECTION_STATISTICS_HEADERTEXT_FORTIFICATIONS:String = "#profile:section/statistics/headerText/fortifications";
+
       public static const SECTION_STATISTICS_CHARTS_BYTYPELABEL:String = "#profile:section/statistics/charts/byTypeLabel";
 
       public static const SECTION_STATISTICS_CHARTS_BYNATIONLABEL:String = "#profile:section/statistics/charts/byNationLabel";
@@ -213,7 +241,23 @@ package
 
       public static const SECTION_STATISTICS_SCORES_TOTALBATTLES:String = "#profile:section/statistics/scores/totalBattles";
 
+      public static const SECTION_STATISTICS_SCORES_FORTTOTALBATTLES:String = "#profile:section/statistics/scores/fortTotalBattles";
+
+      public static const SECTION_STATISTICS_SCORES_FORTSORTIE:String = "#profile:section/statistics/scores/fortSortie";
+
+      public static const SECTION_STATISTICS_SCORES_FORTSORTIES_AVGRESOURCES:String = "#profile:section/statistics/scores/fortSorties/AvgResources";
+
+      public static const SECTION_STATISTICS_SCORES_FORTSORTIES_TOTALRESOURCES:String = "#profile:section/statistics/scores/fortSorties/totalResources";
+
+      public static const SECTION_STATISTICS_SCORES_FORTBATTLES_TOTALRESOURCES:String = "#profile:section/statistics/scores/fortBattles/totalResources";
+
+      public static const SECTION_STATISTICS_SCORES_FORTBATTLES_MAXRESOURCES:String = "#profile:section/statistics/scores/fortBattles/maxResources";
+
       public static const SECTION_STATISTICS_SCORES_TOTALWINS:String = "#profile:section/statistics/scores/totalWins";
+
+      public static const SECTION_STATISTICS_SCORES_FORTBATTLESTOTALWINS:String = "#profile:section/statistics/scores/fortBattlesTotalWins";
+
+      public static const SECTION_STATISTICS_SCORES_FORTSORTIETOTALWINS:String = "#profile:section/statistics/scores/fortSortieTotalWins";
 
       public static const SECTION_STATISTICS_SCORES_ACHIEVEMENTSCOUNT:String = "#profile:section/statistics/scores/achievementsCount";
 
@@ -244,6 +288,16 @@ package
       public static const SECTION_STATISTICS_SCORES_CAPTUREPOINTS:String = "#profile:section/statistics/scores/capturePoints";
 
       public static const SECTION_STATISTICS_SCORES_DROPPEDCAPTUREPOINTS:String = "#profile:section/statistics/scores/droppedCapturePoints";
+
+      public static const SECTION_STATISTICS_SCORES_FORT_BATTLES:String = "#profile:section/statistics/scores/fort/battles";
+
+      public static const SECTION_STATISTICS_SCORES_FORT_BATTLESWINSEFFICIENCY:String = "#profile:section/statistics/scores/fort/battlesWinsEfficiency";
+
+      public static const SECTION_STATISTICS_SCORES_FORT_SORTIE:String = "#profile:section/statistics/scores/fort/sortie";
+
+      public static const SECTION_STATISTICS_SCORES_FORT_SORTIEWINSEFFICIENCY:String = "#profile:section/statistics/scores/fort/sortieWinsEfficiency";
+
+      public static const SECTION_STATISTICS_SCORES_FORT_RESOURCE:String = "#profile:section/statistics/scores/fort/resource";
 
       public static const SECTION_STATISTICS_DETAILED_KILLED:String = "#profile:section/statistics/detailed/killed";
 
@@ -287,17 +341,33 @@ package
 
       public static const SECTION_STATISTICS_BODYBAR_LABEL_CHARTS:String = "#profile:section/statistics/bodyBar/label/charts";
 
+      public static const SECTION_STATISTICS_BODYBAR_LABEL_FORTBATTLES:String = "#profile:section/statistics/bodyBar/label/fortBattles";
+
+      public static const SECTION_STATISTICS_BODYBAR_LABEL_FORTSORTIE:String = "#profile:section/statistics/bodyBar/label/fortSortie";
+
+      public static const SECTION_STATISTICS_BODYBAR_LABEL_SPECIFIC:String = "#profile:section/statistics/bodyBar/label/specific";
+
       public static const SECTION_STATISTICS_BODYPARAMS_LABEL_COMMON:String = "#profile:section/statistics/bodyParams/label/common";
 
       public static const SECTION_STATISTICS_BODYPARAMS_LABEL_AVERAGE:String = "#profile:section/statistics/bodyParams/label/average";
 
       public static const SECTION_STATISTICS_BODYPARAMS_LABEL_RECORD:String = "#profile:section/statistics/bodyParams/label/record";
 
+      public static const SECTION_STATISTICS_BODYPARAMS_LABEL_FORTBATTLES:String = "#profile:section/statistics/bodyParams/label/fortBattles";
+
+      public static const SECTION_STATISTICS_BODYPARAMS_LABEL_FORTSORTIE:String = "#profile:section/statistics/bodyParams/label/fortSortie";
+
+      public static const SECTION_STATISTICS_BODYPARAMS_LABEL_RESOURCE:String = "#profile:section/statistics/bodyParams/label/resource";
+
       public static const SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_TEAM:String = "#profile:section/technique/emptyScreenLabel/battleType/team";
 
       public static const SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_ALL:String = "#profile:section/technique/emptyScreenLabel/battleType/all";
 
       public static const SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_HISTORICAL:String = "#profile:section/technique/emptyScreenLabel/battleType/historical";
+
+      public static const SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_FORTSORTIES:String = "#profile:section/technique/emptyScreenLabel/battleType/fortSorties";
+
+      public static const SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_FORTBATTLES:String = "#profile:section/technique/emptyScreenLabel/battleType/fortBattles";
 
       public static const SECTION_TECHNIQUE_TITLE:String = "#profile:section/technique/title";
 
@@ -417,6 +487,12 @@ package
 
       public static const PROFILE_DROPDOWN_LABELS_HISTORICAL:String = "#profile:profile/dropdown/labels/historical";
 
+      public static const PROFILE_DROPDOWN_LABELS_FORTIFICATIONS:String = "#profile:profile/dropdown/labels/fortifications";
+
+      public static const PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_BATTLES:String = "#profile:profile/dropdown/labels/fortifications/battles";
+
+      public static const PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES:String = "#profile:profile/dropdown/labels/fortifications/sorties";
+
       public static const PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT_HEADER:String = PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT + "/header";
 
       public static const PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT_BODY:String = PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT + "/body";
@@ -424,6 +500,14 @@ package
       public static const PROFILE_PARAMS_TOOLTIP_WINS_HEADER:String = PROFILE_PARAMS_TOOLTIP_WINS + "/header";
 
       public static const PROFILE_PARAMS_TOOLTIP_WINS_BODY:String = PROFILE_PARAMS_TOOLTIP_WINS + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS + "/body";
 
       public static const PROFILE_PARAMS_TOOLTIP_ACHIEVEMENTSCOUNT_HEADER:String = PROFILE_PARAMS_TOOLTIP_ACHIEVEMENTSCOUNT + "/header";
 
@@ -456,6 +540,22 @@ package
       public static const PROFILE_PARAMS_TOOLTIP_AVGEXP_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGEXP + "/header";
 
       public static const PROFILE_PARAMS_TOOLTIP_AVGEXP_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGEXP + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES + "/body";
 
       public static const PROFILE_PARAMS_TOOLTIP_AVGEX_SHORT_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGEX_SHORT + "/header";
 
@@ -520,6 +620,30 @@ package
       public static const PROFILE_PARAMS_TOOLTIP_MAXDAMAGE_HEADER:String = PROFILE_PARAMS_TOOLTIP_MAXDAMAGE + "/header";
 
       public static const PROFILE_PARAMS_TOOLTIP_MAXDAMAGE_BODY:String = PROFILE_PARAMS_TOOLTIP_MAXDAMAGE + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE_HEADER:String = PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE_BODY:String = PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_BATTLES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_BATTLES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "WinsEfficiency/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "WinsEfficiency/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_SORTIE_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_SORTIE_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency/body";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE + "/header";
+
+      public static const PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE + "/body";
    }
 
 }

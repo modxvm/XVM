@@ -1,11 +1,14 @@
 package net.wg.gui.components.controls
 {
    import scaleform.clik.controls.TileList;
+   import flash.display.Sprite;
+   import scaleform.clik.utils.Padding;
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.clik.data.ListData;
    import scaleform.clik.constants.DirectionMode;
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.controls.ScrollIndicator;
    import flash.display.DisplayObject;
    import net.wg.utils.IEventCollector;
 
@@ -20,9 +23,23 @@ package net.wg.gui.components.controls
 
       public var showEmptyItems:Boolean;
 
-      public var paddingBottom:Number;
+      public var showBackground:Boolean = true;
 
-      public var paddingRight:Number;
+      public var background:Sprite = null;
+
+      protected var _scrollBarPadding:Padding;
+
+      public var paddingBottom:Number = 0;
+
+      public var paddingRight:Number = 0;
+
+      override protected function configUI() : void {
+         super.configUI();
+         if(this.scrollBarPadding == null)
+         {
+            this.scrollBarPadding = new Padding();
+         }
+      }
 
       override protected function populateData(param1:Array) : void {
          var _loc5_:IListItemRenderer = null;
@@ -88,7 +105,49 @@ package net.wg.gui.components.controls
             }
             _loc5_++;
          }
-         drawScrollBar();
+         this.drawScrollBar();
+      }
+
+      public function get scrollBarPadding() : Padding {
+         return this._scrollBarPadding;
+      }
+
+      public function set scrollBarPadding(param1:Padding) : void {
+         this._scrollBarPadding = param1;
+         invalidateSize();
+      }
+
+      public function set inspectableScrollBarPadding(param1:Object) : void {
+         if(!componentInspectorSetting)
+         {
+            return;
+         }
+         this.scrollBarPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
+      }
+
+      override protected function drawScrollBar() : void {
+         var _loc1_:ScrollIndicator = null;
+         if(!_autoScrollBar)
+         {
+            return;
+         }
+         _loc1_ = _scrollBar as ScrollIndicator;
+         _loc1_.direction = _direction;
+         if(_direction == DirectionMode.VERTICAL)
+         {
+            _loc1_.rotation = 0;
+            _loc1_.x = _width - _loc1_.width - this.scrollBarPadding.right;
+            _loc1_.y = this.scrollBarPadding.top;
+            _loc1_.height = availableHeight - this.scrollBarPadding.vertical;
+         }
+         else
+         {
+            _loc1_.rotation = -90;
+            _loc1_.x = this.scrollBarPadding.left;
+            _loc1_.y = _height - this.scrollBarPadding.bottom;
+            _loc1_.width = availableWidth + this.scrollBarPadding.horizontal;
+         }
+         _scrollBar.validateNow();
       }
 
       override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
@@ -160,7 +219,7 @@ package net.wg.gui.components.controls
             setActualSize(_width,_height);
             container.scaleX = 1 / scaleX;
             container.scaleY = 1 / scaleY;
-            _totalRenderers = calculateRendererTotal(availableWidth,availableHeight);
+            _totalRenderers = this.calculateRendererTotal(availableWidth,availableHeight);
             addChild(container);
             _loc5_.enableDisposingForObj(container);
             invalidateData();
@@ -175,6 +234,18 @@ package net.wg.gui.components.controls
             refreshData();
             updateScrollBar();
          }
+         if(this.background)
+         {
+            this.background.visible = this.showBackground;
+         }
+      }
+
+      override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
+         super.calculateRendererTotal(param1,param2);
+         _totalRows = availableHeight / (rowHeight + this.paddingBottom) >> 0;
+         _totalColumns = availableWidth / (columnWidth + this.paddingRight) >> 0;
+         _totalRenderers = _totalRows * _totalColumns;
+         return _totalRenderers;
       }
    }
 

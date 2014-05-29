@@ -102,14 +102,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       }
 
       override protected function hideDropdown() : void {
-         var _loc1_:CoreList = null;
          App.toolTipMgr.hide();
-         if(_dropdownRef)
-         {
-            _loc1_ = _dropdownRef as CoreList;
-            _loc1_.dataProvider = null;
-            App.utils.commons.releaseReferences(_loc1_);
-         }
          super.hideDropdown();
       }
 

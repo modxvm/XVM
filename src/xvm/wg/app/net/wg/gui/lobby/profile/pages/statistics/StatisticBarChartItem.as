@@ -101,6 +101,9 @@ package net.wg.gui.lobby.profile.pages.statistics
       }
 
       override protected function onDispose() : void {
+         this.mcMask = null;
+         this.textField = null;
+         this.background = null;
          this.tweenManager.dispose();
          this.animationClient.dispose();
          this.disposeHandlers();

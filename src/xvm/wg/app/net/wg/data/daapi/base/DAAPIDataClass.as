@@ -140,10 +140,10 @@ package net.wg.data.daapi.base
          var _loc3_:Object = null;
          var _loc4_:String = null;
          var _loc1_:Object = {};
-         for (_loc2_ in this)
+         for (_loc2_ in this._hash)
          {
-            _loc3_ = _loc1_[_loc2_];
-            _loc4_ = _loc2_.substr(1);
+            _loc3_ = this._hash[_loc2_];
+            _loc4_ = _loc2_.substr(0);
             if(this.onDataRead(_loc2_,_loc1_))
             {
                _loc1_[_loc4_] = _loc3_;

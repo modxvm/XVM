@@ -59,10 +59,9 @@ package net.wg.gui.lobby.hangar.maintenance
 
       override protected function draw() : void {
          var _loc1_:ILocale = null;
-         var _loc2_:* = NaN;
+         var _loc2_:Object = null;
          var _loc3_:* = NaN;
-         var _loc4_:* = NaN;
-         var _loc5_:ActionPriceVO = null;
+         var _loc4_:ActionPriceVO = null;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
@@ -78,11 +77,15 @@ package net.wg.gui.lobby.hangar.maintenance
                this.actionPrice.textColorType = data.prices[0] < data.userCredits[data.currency]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
                this.price.text = data.currency == Currencies.CREDITS?_loc1_.integer(data.prices[0]):_loc1_.gold(data.prices[1]);
                this.price.validateNow();
-               _loc2_ = data.hasOwnProperty("actionPrc")?data.actionPrc:0;
+               _loc2_ = data.hasOwnProperty("actionPriceData")?data.actionPriceData:null;
                _loc3_ = data.currency == Currencies.CREDITS?data.prices[0]:data.prices[1];
-               _loc4_ = data.currency == Currencies.CREDITS?data.prices[2]:data.prices[3];
-               _loc5_ = new ActionPriceVO(_loc2_,_loc3_,_loc4_,data.currency);
-               this.actionPrice.setData(_loc5_);
+               _loc4_ = null;
+               if(_loc2_)
+               {
+                  _loc4_ = new ActionPriceVO(_loc2_);
+                  _loc4_.forCredits = data.currency == Currencies.CREDITS;
+               }
+               this.actionPrice.setData(_loc4_);
                this.actionPrice.setup(this);
                this.price.visible = !this.actionPrice.visible;
                this.actionPrice.validateNow();
@@ -103,12 +106,10 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       private function onClick(param1:MouseEvent) : void {
-         var _loc2_:MouseEventEx = null;
          App.toolTipMgr.hide();
          if(param1  is  MouseEventEx)
          {
-            _loc2_ = param1 as MouseEventEx;
-            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+            if(App.utils.commons.isRightButton(param1))
             {
                dispatchEvent(new ModuleInfoEvent(ModuleInfoEvent.SHOW_INFO,ShellVO(data).id));
             }

@@ -12,8 +12,6 @@ package net.wg.gui.components.advanced
    import scaleform.clik.ui.InputDetails;
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.NavigationCode;
-   import flash.events.Event;
-   import scaleform.clik.events.ButtonEvent;
 
 
    public class ButtonBarEx extends ButtonBar implements IGroupedControl
@@ -95,7 +93,6 @@ package net.wg.gui.components.advanced
          {
             _dataProvider.cleanUp();
          }
-         _dataProvider = null;
       }
 
       override public function handleInput(param1:InputEvent) : void {
@@ -233,18 +230,7 @@ package net.wg.gui.components.advanced
       }
 
       override protected function onDispose() : void {
-         removeEventListener(InputEvent.INPUT,this.handleInput,false);
-         if(_dataProvider)
-         {
-            _dataProvider.removeEventListener(Event.CHANGE,handleDataChange,false);
-         }
          this.disposeRenderers();
-         if(_group)
-         {
-            _group.removeEventListener(ButtonEvent.CLICK,handleButtonGroupChange,false);
-            _group.dispose();
-            _group = null;
-         }
          super.onDispose();
       }
 

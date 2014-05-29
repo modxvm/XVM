@@ -10,7 +10,6 @@ package net.wg.gui.lobby.store.shop
    import net.wg.utils.ILocale;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.gui.lobby.store.shop.base.ACTION_CREDITS_STATES;
-   import net.wg.data.constants.IconsTypes;
    import net.wg.utils.IAssertable;
    import flash.display.DisplayObject;
    import net.wg.data.constants.Errors;
@@ -69,14 +68,14 @@ package net.wg.gui.lobby.store.shop
          }
       }
 
-      override protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:Number, param4:Number, param5:StoreTableData) : void {
-         var _loc6_:ILocale = null;
-         var _loc7_:ActionPriceVO = null;
+      override protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:StoreTableData) : void {
+         var _loc4_:ILocale = null;
+         var _loc5_:ActionPriceVO = null;
          if(App.instance)
          {
-            super.updateCreditPriceForAction(param1,param2,param3,param4,param5);
-            _loc6_ = App.utils.locale;
-            if(param3 > param5.tableVO.gold)
+            super.updateCreditPriceForAction(param1,param2,param3);
+            _loc4_ = App.utils.locale;
+            if(param2 > param3.tableVO.gold)
             {
                this.actionCredits.gotoAndStop(ACTION_CREDITS_STATES.GOLD_ERROR);
                this.actionPriceLeft.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
@@ -86,11 +85,15 @@ package net.wg.gui.lobby.store.shop
                this.actionCredits.gotoAndStop(ACTION_CREDITS_STATES.GOLD);
                this.actionPriceLeft.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
             }
-            this.actionCredits.price.text = _loc6_.gold(param3);
+            this.actionCredits.price.text = _loc4_.gold(param2);
             if(this.actionPriceLeft)
             {
-               _loc7_ = new ActionPriceVO(param5.actionPrc,param3,param4,IconsTypes.GOLD);
-               this.actionPriceLeft.setData(_loc7_);
+               _loc5_ = param3.alternativePriceDataVo;
+               if(_loc5_)
+               {
+                  _loc5_.forCredits = false;
+               }
+               this.actionPriceLeft.setData(_loc5_);
                this.actionPriceLeft.visible = (isUseGoldAndCredits) && (this.actionPriceLeft.visible);
                this.actionCredits.visible = (isUseGoldAndCredits) && !this.actionPriceLeft.visible;
             }
@@ -98,22 +101,16 @@ package net.wg.gui.lobby.store.shop
       }
 
       private function showHideAction(param1:StoreTableData=null) : void {
-         var _loc2_:* = 0;
-         var _loc3_:* = NaN;
-         var _loc4_:* = NaN;
-         var _loc5_:ActionPriceVO = null;
+         var _loc2_:ActionPriceVO = null;
          this.orTextField.visible = isUseGoldAndCredits;
          if(param1)
          {
-            _loc2_ = 1;
-            _loc3_ = param1.price[_loc2_];
-            _loc4_ = param1.defPrice[_loc2_];
-            _loc5_ = new ActionPriceVO(param1.actionPrc,_loc3_,_loc4_,IconsTypes.GOLD);
-            this.actionPriceLeft.setData(_loc5_);
-         }
-         else
-         {
-            this.actionPriceLeft.visible = false;
+            _loc2_ = param1.alternativePriceDataVo;
+            if(_loc2_)
+            {
+               _loc2_.forCredits = false;
+            }
+            this.actionPriceLeft.setData(_loc2_);
          }
          this.actionPriceLeft.visible = (isUseGoldAndCredits) && (this.actionPriceLeft.visible);
          this.actionCredits.visible = (isUseGoldAndCredits) && !this.actionPriceLeft.visible;

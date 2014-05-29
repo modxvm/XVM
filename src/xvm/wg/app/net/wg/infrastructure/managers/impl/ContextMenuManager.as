@@ -29,8 +29,6 @@ package net.wg.infrastructure.managers.impl
 
       private var _extraHandler:Function = null;
 
-      private var _data:Object = null;
-
       public function show(param1:Vector.<IContextItem>, param2:DisplayObject, param3:Function=null, param4:Object=null) : IContextMenu {
          this.hide();
          this._handler = param3;
@@ -47,8 +45,8 @@ package net.wg.infrastructure.managers.impl
          {
             DisplayObject(this._currentMenu).addEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.onContextMenuAction);
          }
-         DisplayObject(this._currentMenu).addEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.destroy);
-         DisplayObject(this._currentMenu).stage.addEventListener(Event.RESIZE,this.destroy);
+         DisplayObject(this._currentMenu).addEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
+         DisplayObject(this._currentMenu).stage.addEventListener(Event.RESIZE,this.closeEventHandler);
          return this._currentMenu;
       }
 
@@ -61,14 +59,47 @@ package net.wg.infrastructure.managers.impl
             _loc5_ = new PlayerInfo(_getUserInfoS(param2.uid,param2.userName));
             _loc6_ = _getDenunciationsS();
             _loc7_ = param3.generateData(_loc5_,_loc6_);
-            this._extraHandler = param4;
             return this.show(_loc7_,param1,this.handleUserContextMenu,param2);
          }
          return null;
       }
 
-      public function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>) : IContextMenu {
-         return this.show(param2,param1,this.handleUserContextMenu);
+      public function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>, param3:Object=null) : IContextMenu {
+         return this.show(param2,param1,this.handleUserContextMenu,param3);
+      }
+
+      public function vehicleWasInBattle(param1:Number) : Boolean {
+         return isVehicleWasInBattleS(param1);
+      }
+
+      public function hide() : void {
+         if(this._currentMenu != null)
+         {
+            if(!(this._handler == null) && (DisplayObject(this._currentMenu).hasEventListener(ContextMenuEvent.ON_ITEM_SELECT)))
+            {
+               DisplayObject(this._currentMenu).removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.onContextMenuAction);
+               this._handler = null;
+            }
+            if(DisplayObject(this._currentMenu).hasEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE))
+            {
+               DisplayObject(this._currentMenu).removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
+            }
+            if(DisplayObject(this._currentMenu).stage.hasEventListener(Event.RESIZE))
+            {
+               DisplayObject(this._currentMenu).stage.removeEventListener(Event.RESIZE,this.closeEventHandler);
+            }
+            if(this._currentMenu  is  IDisposable)
+            {
+               IDisposable(this._currentMenu).dispose();
+            }
+            App.utils.popupMgr.popupCanvas.removeChild(DisplayObject(this._currentMenu));
+            this._currentMenu = null;
+            this._extraHandler = null;
+         }
+      }
+
+      public function dispose() : void {
+         this.hide();
       }
 
       private function handleUserContextMenu(param1:ContextMenuEvent) : void {
@@ -111,23 +142,26 @@ package net.wg.infrastructure.managers.impl
             case "unsetMuted":
                unsetMutedS(_loc2_.uid);
                break;
-            case "kickPlayer":
-               kickPlayerS(_loc2_.kickId);
+            case "kickPlayerFromPrebattle":
+               kickPlayerFromPrebattleS(_loc2_.kickId);
                break;
-            case "fortDirectionControl":
+            case "kickPlayerFromUnit":
+               kickPlayerFromUnitS(_loc2_.kickId);
+               break;
+            case "ctxActionDirectionControl":
                fortDirectionS();
                break;
-            case "fortAssignPlayers":
-               fortAssignPlayersS();
+            case "ctxActionAssignPlayers":
+               fortAssignPlayersS(_loc2_);
                break;
-            case "fortModernization":
-               fortModernizationS();
+            case "ctxActionModernization":
+               fortModernizationS(_loc2_);
                break;
-            case "fortDestroy":
-               fortDestroyS();
+            case "ctxActionDestroy":
+               fortDestroyS(_loc2_);
                break;
-            case "fortPrepareOrder":
-               fortPrepareOrderS();
+            case "ctxActionPrepareOrder":
+               fortPrepareOrderS(_loc2_);
                break;
          }
          if(this._extraHandler != null)
@@ -137,11 +171,7 @@ package net.wg.infrastructure.managers.impl
          this.hide();
       }
 
-      public function vehicleWasInBattle(param1:Number) : Boolean {
-         return isVehicleWasInBattleS(param1);
-      }
-
-      private function destroy(param1:Event) : void {
+      private function closeEventHandler(param1:Event) : void {
          this.hide();
       }
 
@@ -151,36 +181,6 @@ package net.wg.infrastructure.managers.impl
             this._handler(param1);
             this.hide();
          }
-      }
-
-      public function hide() : void {
-         if(this._currentMenu != null)
-         {
-            if(!(this._handler == null) && (DisplayObject(this._currentMenu).hasEventListener(ContextMenuEvent.ON_ITEM_SELECT)))
-            {
-               DisplayObject(this._currentMenu).removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.onContextMenuAction);
-               this._handler = null;
-            }
-            if(DisplayObject(this._currentMenu).hasEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE))
-            {
-               DisplayObject(this._currentMenu).removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.destroy);
-            }
-            if(DisplayObject(this._currentMenu).stage.hasEventListener(Event.RESIZE))
-            {
-               DisplayObject(this._currentMenu).stage.removeEventListener(Event.RESIZE,this.destroy);
-            }
-            if(this._currentMenu  is  IDisposable)
-            {
-               IDisposable(this._currentMenu).dispose();
-            }
-            App.utils.popupMgr.popupCanvas.removeChild(DisplayObject(this._currentMenu));
-            this._currentMenu = null;
-            this._extraHandler = null;
-         }
-      }
-
-      public function dispose() : void {
-         this.hide();
       }
    }
 

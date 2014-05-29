@@ -9,6 +9,7 @@ package net.wg.gui.components.common.cursor
    import net.wg.infrastructure.interfaces.IView;
    import net.wg.infrastructure.events.LifeCycleEvent;
    import flash.events.EventDispatcher;
+   import net.wg.infrastructure.exceptions.InfrastructureException;
    import net.wg.data.constants.Errors;
    import net.wg.data.constants.DragType;
    import flash.events.MouseEvent;
@@ -31,6 +32,8 @@ package net.wg.gui.components.common.cursor
       private var _dragObjects:Dictionary;
 
       private var _isOnDragging:Boolean = false;
+
+      private var _customLock:Boolean = false;
 
       override public function registerDragging(param1:IDragDropHitArea, param2:String=null) : void {
          if(!(param1  is  IDraggable) && !(param1  is  IDroppable))
@@ -74,6 +77,17 @@ package net.wg.gui.components.common.cursor
          }
       }
 
+      public function lock() : void {
+         App.utils.asserter.assert(this._customLock == false,"Duplicate locking is incorrect!",InfrastructureException);
+         this._customLock = true;
+      }
+
+      public function unlock() : void {
+         App.utils.asserter.assert(this._customLock,"You can lock cursor, if it unlocked only!",InfrastructureException);
+         this._customLock = false;
+         resetCursor();
+      }
+
       public function as_setCursor(param1:String) : void {
          setCursor(param1);
       }
@@ -103,7 +117,7 @@ package net.wg.gui.components.common.cursor
       }
 
       override protected function cursorIsFree() : Boolean {
-         return (super.cursorIsFree()) && !this._isOnDragging;
+         return (super.cursorIsFree()) && !this._isOnDragging && !this._customLock;
       }
 
       private function registerDrag(param1:IDraggable, param2:String=null) : void {

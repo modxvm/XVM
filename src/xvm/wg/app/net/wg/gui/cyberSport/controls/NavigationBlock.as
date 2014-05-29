@@ -15,9 +15,9 @@ package net.wg.gui.cyberSport.controls
          super();
       }
 
-      public var previousButton:ButtonDnmIcon;
+      public var previousButton:GrayTransparentButton;
 
-      public var nextButton:ButtonDnmIcon;
+      public var nextButton:GrayTransparentButton;
 
       public function setup(param1:NavigationBlockVO) : void {
          this.previousButton.visible = param1.previousVisible;

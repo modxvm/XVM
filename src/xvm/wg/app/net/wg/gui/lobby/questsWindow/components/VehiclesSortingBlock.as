@@ -1,23 +1,23 @@
 package net.wg.gui.lobby.questsWindow.components
 {
    import net.wg.infrastructure.interfaces.ISortable;
+   import net.wg.gui.components.controls.DropDownImageText;
    import scaleform.clik.interfaces.IDataProvider;
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.lobby.questsWindow.data.QuestVehicleRendererVO;
    import net.wg.gui.lobby.questsWindow.data.SortedBtnVO;
-   import net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo;
-   import net.wg.gui.components.advanced.SortingButton;
+   import net.wg.gui.components.controls.NormalSortingBtnInfo;
+   import net.wg.data.constants.SortingInfo;
    import net.wg.gui.components.controls.CheckBox;
-   import net.wg.gui.components.controls.DropDownImageText;
    import net.wg.gui.components.controls.ScrollingListEx;
    import net.wg.gui.components.advanced.SortableHeaderButtonBar;
    import net.wg.gui.lobby.questsWindow.data.VehiclesSortingBlockVO;
    import scaleform.clik.utils.Padding;
+   import net.wg.gui.lobby.profile.pages.technique.ProfileSortingButton;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ListEvent;
    import flash.events.Event;
    import scaleform.clik.events.ButtonEvent;
-   import net.wg.gui.lobby.profile.pages.technique.ProfileSortingButton;
    import net.wg.gui.events.ResizableBlockEvent;
 
 
@@ -38,6 +38,21 @@ package net.wg.gui.lobby.questsWindow.components
 
       private static const BOTTOM_PADDING:int = 10;
 
+      private static function updateSelectedIndex(param1:DropDownImageText, param2:Object) : void {
+         var _loc3_:int = param1.dataProvider.length;
+         param1.selectedIndex = 0;
+         var _loc4_:Number = 0;
+         while(_loc4_ < _loc3_)
+         {
+            if(param1.dataProvider[_loc4_].data == param2)
+            {
+               param1.selectedIndex = _loc4_;
+               return;
+            }
+            _loc4_++;
+         }
+      }
+
       private static function setupDataProvider(param1:Array) : IDataProvider {
          var _loc3_:Object = null;
          var _loc2_:DataProvider = new DataProvider();
@@ -52,7 +67,7 @@ package net.wg.gui.lobby.questsWindow.components
 
       private static function getHeadersProvider(param1:Array) : DataProvider {
          var _loc7_:SortedBtnVO = null;
-         var _loc8_:ProfileSortingBtnInfo = null;
+         var _loc8_:NormalSortingBtnInfo = null;
          var _loc2_:* = "../maps/icons/buttons/tab_sort_button/ascProfileSortArrow.png";
          var _loc3_:* = "../maps/icons/buttons/tab_sort_button/descProfileSortArrow.png";
          var _loc4_:Number = 40;
@@ -61,7 +76,7 @@ package net.wg.gui.lobby.questsWindow.components
          while(_loc6_ < param1.length)
          {
             _loc7_ = new SortedBtnVO(param1[_loc6_]);
-            _loc8_ = new ProfileSortingBtnInfo();
+            _loc8_ = new NormalSortingBtnInfo();
             _loc8_.iconId = _loc7_.id;
             _loc8_.label = _loc7_.label;
             _loc8_.iconSource = _loc7_.iconSource;
@@ -71,7 +86,7 @@ package net.wg.gui.lobby.questsWindow.components
             _loc8_.descendingIconSource = _loc3_;
             _loc8_.buttonHeight = _loc4_;
             _loc8_.enabled = true;
-            _loc8_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+            _loc8_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
             if(_loc6_ == param1.length-1)
             {
                _loc8_.showSeparator = false;
@@ -101,6 +116,10 @@ package net.wg.gui.lobby.questsWindow.components
       private var _sortingFunction:Function = null;
 
       override public function setData(param1:Object) : void {
+         if(this.data)
+         {
+            this.data.dispose();
+         }
          this.data = new VehiclesSortingBlockVO(param1);
          invalidateData();
       }
@@ -134,9 +153,11 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       override protected function draw() : void {
-         var _loc1_:Array = null;
-         var _loc2_:* = 0;
-         var _loc3_:* = NaN;
+         var _loc1_:* = 0;
+         var _loc2_:Array = null;
+         var _loc3_:* = 0;
+         var _loc4_:* = NaN;
+         var _loc5_:ProfileSortingButton = null;
          if((isInvalid(InvalidationType.DATA)) && (this.data))
          {
             this.buttonBar.dataProvider = getHeadersProvider(this.data.headerElements);
@@ -153,7 +174,20 @@ package net.wg.gui.lobby.questsWindow.components
             this.nationFilter.dataProvider = new DataProvider(this.data.nationFilterData);
             this.tankFilter.dataProvider = new DataProvider(this.data.tankFilterData);
             this.levelFilter.dataProvider = new DataProvider(this.data.levelFilterData);
-            this.nationFilter.selectedIndex = this.tankFilter.selectedIndex = this.levelFilter.selectedIndex = 0;
+            updateSelectedIndex(this.nationFilter,this.data.selectedNation);
+            updateSelectedIndex(this.tankFilter,this.data.selectedVehType);
+            updateSelectedIndex(this.levelFilter,this.data.selectedLvl);
+            _loc1_ = 0;
+            while(_loc1_ < this.buttonBar.renderersCount)
+            {
+               _loc5_ = this.buttonBar.getButtonAt(_loc1_) as ProfileSortingButton;
+               if(_loc5_.id == this.data.selectedBtnID)
+               {
+                  this.buttonBar.selectedIndex = _loc1_;
+                  _loc5_.sortDirection = this.data.sortDirection;
+               }
+               _loc1_++;
+            }
             this._tableID = this.data.tableID;
             if(this.data.showNotInHangarCB)
             {
@@ -162,13 +196,13 @@ package net.wg.gui.lobby.questsWindow.components
             this.sortCheckBox.visible = (this.data.hasHeader) && ((this.data.showInHangarCB) || (this.data.showNotInHangarCB));
             this.sortCheckBox.selected = this.data.cbSelected;
             this.vehiclesList.y = this.buttonBar.y + this.buttonBar.height;
-            _loc1_ = this._sortingFunction(this.getSortingObject());
-            _loc2_ = _loc1_.length > 0?_loc1_.length:1;
-            this.vehiclesList.height = VEHICLE_RENDERER_HEIGHT * Math.min(MAX_VEHICLE_RENDERERS,_loc2_);
-            this.vehiclesList.dataProvider = setupDataProvider(_loc1_);
+            _loc2_ = this._sortingFunction(this.getSortingObject());
+            _loc3_ = _loc2_.length > 0?_loc2_.length:1;
+            this.vehiclesList.height = VEHICLE_RENDERER_HEIGHT * Math.min(MAX_VEHICLE_RENDERERS,_loc3_);
+            this.vehiclesList.dataProvider = setupDataProvider(_loc2_);
             this.isReadyForLayout = true;
-            _loc3_ = Math.round(this.vehiclesList.y + this.vehiclesList.height);
-            setSize(this.width,_loc3_ + BOTTOM_PADDING);
+            _loc4_ = Math.round(this.vehiclesList.y + this.vehiclesList.height);
+            setSize(this.width,_loc4_ + BOTTOM_PADDING);
          }
          if(isInvalid(INV_AVAILABLE_WIDTH))
          {
@@ -221,7 +255,7 @@ package net.wg.gui.lobby.questsWindow.components
          var _loc3_:Number = this.levelFilter.dataProvider[this.levelFilter.selectedIndex].data;
          var _loc4_:Boolean = this.sortCheckBox.selected;
          var _loc5_:ProfileSortingButton = this.buttonBar.getButtonAt(this.buttonBar.selectedIndex) as ProfileSortingButton;
-         var _loc6_:String = _loc5_?_loc5_.sortDirection:SortingButton.WITHOUT_SORT;
+         var _loc6_:String = _loc5_?_loc5_.sortDirection:SortingInfo.WITHOUT_SORT;
          var _loc7_:String = _loc5_?_loc5_.id:"";
          var _loc8_:Object =
             {

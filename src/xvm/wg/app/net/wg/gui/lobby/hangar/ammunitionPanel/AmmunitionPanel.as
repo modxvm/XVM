@@ -16,6 +16,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
    import net.wg.data.constants.FittingTypes;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.NavigationCode;
+   import scaleform.clik.constants.InputValue;
    import scaleform.gfx.MouseEventEx;
    import flash.text.TextFormat;
 
@@ -228,7 +232,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                shell.enabled = false;
                if(shells.indexOf(shell) < shellsCount)
                {
-                  shell.enabled = !data.vehicleLocked;
+                  shell.enabled = this._panelEnabled;
                   shell.id = data.shells[i].id;
                   shell.ammunitionType = data.shells[i].type;
                   shell.ammunitionIcon = data.shells[i].icon;
@@ -308,19 +312,40 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          for each (_loc2_ in _loc3_)
          {
             this.events.addEvent(_loc2_,ButtonEvent.CLICK,this.onModuleClick);
+            this.events.addEvent(_loc2_,InputEvent.INPUT,this.handleInputTest);
          }
          this.events.addEvent(App.stage,ModuleInfoEvent.SHOW_INFO,this.onShowModuleInfo);
          this.events.addEvent(App.stage,DeviceEvent.DEVICE_REMOVE,this.onDeviceRemove);
       }
 
+      private function handleInputTest(param1:InputEvent) : void {
+         var _loc2_:InputDetails = param1.details;
+         if(_loc2_.navEquivalent == NavigationCode.ENTER)
+         {
+            if(_loc2_.value == InputValue.KEY_DOWN)
+            {
+               showTechnicalMaintenanceS();
+               param1.handled = true;
+            }
+         }
+      }
+
       private function subscribeSlot(param1:DeviceSlot) : void {
          this.events.addEvent(param1,ButtonEvent.CLICK,this.onModuleClick);
          this.events.addEvent(param1,DeviceEvent.DEVICE_CHANGE,this.onDeviceChange);
+         if(param1.type == FittingTypes.EQUIPMENT)
+         {
+            this.events.addEvent(param1,InputEvent.INPUT,this.handleInputTest);
+         }
       }
 
       private function unsubscribeSlot(param1:DeviceSlot) : void {
          this.events.removeEvent(param1,ButtonEvent.CLICK,this.onModuleClick);
          this.events.removeEvent(param1,DeviceEvent.DEVICE_CHANGE,this.onDeviceChange);
+         if(param1.type == FittingTypes.EQUIPMENT)
+         {
+            this.events.removeEvent(param1,InputEvent.INPUT,this.handleInputTest);
+         }
       }
 
       private function onDeviceChange(param1:DeviceEvent) : void {

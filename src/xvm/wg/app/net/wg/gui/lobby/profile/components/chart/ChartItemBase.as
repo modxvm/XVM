@@ -58,6 +58,7 @@ package net.wg.gui.lobby.profile.components.chart
       }
 
       override protected function onDispose() : void {
+         this._data = null;
          super.onDispose();
       }
    }

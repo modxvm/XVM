@@ -103,6 +103,10 @@ package net.wg.gui.components.common.containers
          }
       }
 
+      public function invalidateLayout() : void {
+         invalidate(LAYOUT_INVALID);
+      }
+
       override protected function onDispose() : void {
          if(this._layout)
          {

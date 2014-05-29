@@ -4,8 +4,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
    import net.wg.gui.components.advanced.ContentTabBar;
    import net.wg.gui.lobby.profile.components.ResizableViewStack;
    import flash.geom.Point;
-   import scaleform.clik.events.IndexEvent;
    import __AS3__.vec.Vector;
+   import scaleform.clik.events.IndexEvent;
    import scaleform.clik.data.DataProvider;
 
 
@@ -33,6 +33,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
 
       private var availableSize:Point;
 
+      private var dataList:Vector.<StatisticsLabelDataVO>;
+
       override protected function configUI() : void {
          super.configUI();
          this.viewStack.cache = true;
@@ -46,6 +48,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          if(!(_loc2_ == -1) && (param1.data))
          {
             this.viewStack.show(BodyBarData(param1.data).linkage);
+            this.updateDataAt(_loc2_);
          }
       }
 
@@ -60,32 +63,35 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          {
             this.viewStack.setAvailableSize(this.availableSize.x,this.availableSize.y);
             _loc1_ = this.bar.dataProvider?this.bar.dataProvider.length:0;
-            this.bar.x = (this.availableSize.x - MIN_BTN_WIDTH * _loc1_) / 2;
+            this.bar.x = (this.availableSize.x - this.bar.width) / 2;
          }
       }
 
       public function setDossierData(param1:Object) : void {
-         var _loc4_:String = null;
-         var _loc6_:StatisticsLabelDataVO = null;
+         var _loc3_:String = null;
+         var _loc5_:StatisticsLabelDataVO = null;
          var _loc2_:Array = [];
-         var _loc3_:Vector.<StatisticsLabelDataVO> = new StatisticsBodyVO(param1).dataListVO;
-         var _loc5_:* = 0;
-         while(_loc5_ < _loc3_.length)
+         this.dataList = new StatisticsBodyVO(param1).dataListVO;
+         var _loc4_:* = 0;
+         while(_loc4_ < this.dataList.length)
          {
-            _loc6_ = _loc3_[_loc5_];
-            if(_loc5_ == 0)
+            _loc5_ = this.dataList[_loc4_];
+            if(_loc5_  is  DetailedLabelDataVO)
             {
-               _loc4_ = "DetailedStatisticsView_UI";
+               _loc3_ = "DetailedStatisticsView_UI";
             }
             else
             {
-               _loc4_ = "ChartsStatisticsView_UI";
+               if(_loc5_  is  StatisticsChartsTabDataVO)
+               {
+                  _loc3_ = "ChartsStatisticsView_UI";
+               }
             }
-            _loc2_.push(new BodyBarData(_loc6_.label,_loc4_));
-            _loc5_++;
+            _loc2_.push(new BodyBarData(_loc5_.label,_loc3_));
+            _loc4_++;
          }
          this.bar.dataProvider = new DataProvider(_loc2_);
-         if(_loc5_ > 1)
+         if(_loc4_ > 1)
          {
             this.bar.visible = true;
             if(this.bar.selectedIndex == -1)
@@ -100,8 +106,16 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             this.bar.visible = false;
             this.viewStack.y = this.barStartYPosition;
          }
-         this.viewStack.updateData(_loc3_);
+         this.viewStack.show(BodyBarData(_loc2_[this.bar.selectedIndex]).linkage);
+         this.updateDataAt(this.bar.selectedIndex);
          invalidate(LAYOUT_INVALID);
+      }
+
+      private function updateDataAt(param1:int) : void {
+         if(this.dataList)
+         {
+            this.viewStack.updateData(this.dataList[param1]);
+         }
       }
 
       public function setAvailableSize(param1:Number, param2:Number) : void {

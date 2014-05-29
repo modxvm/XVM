@@ -4,6 +4,8 @@ package net.wg.gui.components.advanced
    import flash.text.TextField;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UILoaderAlt;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.events.CooldownEvent;
    import net.wg.data.constants.Tooltips;
    import net.wg.data.constants.SoundTypes;
 
@@ -12,6 +14,7 @@ package net.wg.gui.components.advanced
    {
           
       public function ShellButton() {
+         this.statesPassive = Vector.<String>(["passive_"]);
          super();
          soundType = SoundTypes.FITTING_BUTTON;
          soundId = "tankShell";
@@ -25,6 +28,10 @@ package net.wg.gui.components.advanced
       private static const INV_LEVEL:String = "invLevel";
 
       private static const INV_COUNTER_INDICATOR:String = "invCounterIndicator";
+
+      public static const INV_PASSIVE:String = "invPassive";
+
+      private static const DISABLED_ALPHA:Number = 0.6;
 
       private static function onOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
@@ -60,9 +67,19 @@ package net.wg.gui.components.advanced
 
       private var _showCounterIndicator:Boolean = false;
 
+      public var activatorMC:MovieClip;
+
+      public var rechargeMc:MovieClip;
+
+      public var cooldownAnimator:CooldownAnimationController;
+
       private var _isDischarging:Boolean = false;
 
       private var _isReloading:Boolean = false;
+
+      private var _isPassive:Boolean = false;
+
+      protected var statesPassive:Vector.<String>;
 
       override protected function configUI() : void {
          super.configUI();
@@ -72,15 +89,72 @@ package net.wg.gui.components.advanced
             this.hitArea = hitMc;
          }
          this.levelMc.visible = false;
+         this.cooldownAnimator.visible = false;
+         this.activatorMC.visible = false;
+         this.cooldownAnimator.addEventListener(CooldownEvent.FINISHED,this.cooldownHandler);
          addEventListener(MouseEvent.MOUSE_OVER,this.onOver);
          addEventListener(MouseEvent.MOUSE_OUT,onOut);
          addEventListener(MouseEvent.CLICK,onOut);
       }
 
+      public function setCooldown(param1:Number) : void {
+         var _loc2_:* = NaN;
+         this.cooldownAnimator.visible = true;
+         if(param1 > 0)
+         {
+            _loc2_ = param1 * 1000;
+            if(this._isReloading)
+            {
+               this.cooldownAnimator.restartCooldownFromCurrentProgress(_loc2_);
+            }
+            else
+            {
+               this._isReloading = true;
+               if(this._isDischarging)
+               {
+                  this.activatorMC.visible = true;
+                  this.activatorMC.gotoAndPlay("activate");
+               }
+               this.cooldownAnimator.startCooldown(_loc2_);
+            }
+         }
+         else
+         {
+            this.clearCoolDownTime();
+         }
+      }
+
+      public function clearCoolDownTime() : void {
+         this._isReloading = false;
+         this.cooldownAnimator.clearCooldown();
+         this.cooldownAnimator.visible = false;
+      }
+
+      public function setCoolDownPosAsPercent(param1:Number) : void {
+         this.cooldownAnimator.visible = true;
+         this.cooldownAnimator.setPositionAsPercent(param1);
+         if((this._isDischarging) && !this._isReloading)
+         {
+            this.activatorMC.visible = true;
+            this.activatorMC.gotoAndPlay("activate");
+         }
+         this._isReloading = true;
+      }
+
+      public function playRechargeAnimation() : void {
+         this.rechargeMc.visible = true;
+         this.rechargeMc.gotoAndPlay("activate");
+      }
+
       override protected function onDispose() : void {
+         this.cooldownAnimator.removeEventListener(CooldownEvent.FINISHED,this.cooldownHandler);
          removeEventListener(MouseEvent.MOUSE_OVER,this.onOver);
          removeEventListener(MouseEvent.MOUSE_OUT,onOut);
          removeEventListener(MouseEvent.CLICK,onOut);
+         this.cooldownAnimator.dispose();
+         this.cooldownAnimator = null;
+         this.rechargeMc = null;
+         this.activatorMC = null;
          this.count_txt = null;
          this.countBg = null;
          this.iconLoader.dispose();
@@ -139,6 +213,11 @@ package net.wg.gui.components.advanced
                }
             }
          }
+         if(isInvalid(INV_PASSIVE))
+         {
+            this.iconLoader.alpha = this._isPassive?DISABLED_ALPHA:1;
+         }
+         this.cooldownAnimator.visible = this._isReloading;
       }
 
       public function highlightCounter(param1:Boolean) : void {
@@ -254,6 +333,23 @@ package net.wg.gui.components.advanced
          this._tooltip = param1;
       }
 
+      public function get isDischarging() : Boolean {
+         return this._isDischarging;
+      }
+
+      public function set isDischarging(param1:Boolean) : void {
+         this.cooldownAnimator.isDischarging = this._isDischarging = param1;
+      }
+
+      private function cooldownHandler(param1:CooldownEvent) : void {
+         if(!this._isDischarging)
+         {
+            this.cooldownAnimator.visible = false;
+            this.activatorMC.visible = true;
+            this.activatorMC.gotoAndPlay("activate");
+         }
+      }
+
       override public function set enabled(param1:Boolean) : void {
          if(param1 == enabled)
          {
@@ -266,6 +362,24 @@ package net.wg.gui.components.advanced
          super.enabled = param1;
          buttonMode = enabled;
          mouseEnabled = enabled;
+      }
+
+      override protected function getStatePrefixes() : Vector.<String> {
+         if(this._isPassive)
+         {
+            return this.statesPassive;
+         }
+         return _selected?statesSelected:statesDefault;
+      }
+
+      public function get isPassive() : Boolean {
+         return this._isPassive;
+      }
+
+      public function set isPassive(param1:Boolean) : void {
+         this._isPassive = param1;
+         setState(_state?_state:"up");
+         invalidate(INV_PASSIVE);
       }
    }
 

@@ -15,9 +15,9 @@ package net.wg.infrastructure.base.meta.impl
 
       public var onSelectVehicles:Function = null;
 
-      public function onFiltersUpdateS(param1:int, param2:String, param3:Boolean, param4:int) : void {
+      public function onFiltersUpdateS(param1:int, param2:String, param3:Boolean, param4:int, param5:Boolean) : void {
          App.utils.asserter.assertNotNull(this.onFiltersUpdate,"onFiltersUpdate" + Errors.CANT_NULL);
-         this.onFiltersUpdate(param1,param2,param3,param4);
+         this.onFiltersUpdate(param1,param2,param3,param4,param5);
       }
 
       public function onSelectVehiclesS(param1:Array) : void {

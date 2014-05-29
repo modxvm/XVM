@@ -103,7 +103,7 @@ package net.wg.gui.messenger.windows
       override protected function onPopulate() : void {
          window.useBottomBtns = false;
          window.title = MESSENGER.LOBBY_BUTTONS_CHANNELS;
-         window.contentPadding = new Padding(40,10,17,9);
+         window.contentPadding = new Padding(40,10,17,8);
          window.setMaxWidth(650);
          window.setMaxHeight(400);
          constraints = new Constraints(this,ConstrainMode.REFLOW);

@@ -43,13 +43,17 @@ package
 
       public static const AMMOSTATUS_VEHICLENOTVALID:String = "#historical_battles:ammoStatus/vehicleNotValid";
 
+      public static const TIMER_TOFINISH:String = "#historical_battles:timer/toFinish";
+
+      public static const TIMER_TOSTART:String = "#historical_battles:timer/toStart";
+
       public static const BATTLESTATUS_REMAININGTIME:String = "#historical_battles:battleStatus/remainingTime";
 
-      public static const BATTLESTATUS_REMAININGTIME_DAYS:String = "#historical_battles:battleStatus/remainingTime/days";
+      public static const REMAININGTIME_DAYS:String = "#historical_battles:remainingTime/days";
 
-      public static const BATTLESTATUS_REMAININGTIME_HOURS:String = "#historical_battles:battleStatus/remainingTime/hours";
+      public static const REMAININGTIME_HOURS:String = "#historical_battles:remainingTime/hours";
 
-      public static const BATTLESTATUS_REMAININGTIME_MIN:String = "#historical_battles:battleStatus/remainingTime/min";
+      public static const REMAININGTIME_MIN:String = "#historical_battles:remainingTime/min";
 
       public static const MAP_ASSAULTINFO:String = "#historical_battles:map/assaultInfo";
 
