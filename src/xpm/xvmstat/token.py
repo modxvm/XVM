@@ -71,7 +71,7 @@ def _getXvmStatTokenData():
         tdata = _tdataPrev
 
     type = SystemMessages.SM_TYPE.Warning
-    msg = '<textformat tabstops="[120]"><img src="img://../xvm/res/icons/xvm/16x16t.png" width="16" height="16" vspace="-5">'
+    msg = '<textformat tabstops="[120]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">'
     msg += '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
     if tdata is None:
         msg += '{{l10n:token/network_error}}'
