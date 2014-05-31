@@ -26,17 +26,16 @@
         //   http://www.koreanrandom.com/forum/topic/15467-/page-5#entry187139
         //   http://www.koreanrandom.com/forum/topic/15467-/page-4#entry186794
         "view": [
-            // Simple model (one dynamic circle for blindarea), for most players
-            { "enabled": true, "distance": "blindarea", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0x3EB5F1" }
-
-            /*
-            // Extended model (5 circles), for experienced players
-            { "enabled": true, "distance": 50, "scale": 1, "thickness": 0.75, "alpha": 60, "color": "0xFFFFFF" },
-            { "enabled": true, "distance": 445, "scale": 1, "thickness": 1.1, "alpha": 45, "color": "0xFFCC66" },
-            { "enabled": true, "distance": "standing", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0xFF0000" },
-            { "enabled": true, "distance": "motion", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x0000FF" },
-            { "enabled": true, "distance": "dynamic", "scale": 1, "thickness": 1.0, "alpha": 60, "color": "0x3EB5F1" }
-            */
+            // Main circles:
+            // Основные круги:
+            { "enabled":  true, "distance": "blindarea", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0x3EB5F1" },
+            { "enabled":  true, "distance": 445,         "scale": 1, "thickness":  1.1, "alpha": 45, "color": "0xFFCC66" },
+            // Additional circles:
+            // Дополнительные круги:
+            { "enabled": false, "distance": 50,          "scale": 1, "thickness": 0.75, "alpha": 60, "color": "0xFFFFFF" },
+            { "enabled": false, "distance": "standing",  "scale": 1, "thickness":  1.0, "alpha": 60, "color": "0xFF0000" },
+            { "enabled": false, "distance": "motion",    "scale": 1, "thickness":  1.0, "alpha": 60, "color": "0x0000FF" },
+            { "enabled": false, "distance": "dynamic",   "scale": 1, "thickness":  1.0, "alpha": 60, "color": "0x3EB5F1" }
         ],
         // Maximum range of fire for artillery
         // Artillery gun fire range may differ depending on vehicle angle relative to ground
