@@ -421,26 +421,41 @@ package com.xvm.misc
 
             c.circles = new CMinimapCircles();
             c.circles.enabled = true;
+
             c.circles.view = [ ];
-            var range:CMinimapCirclesViewRange = new CMinimapCirclesViewRange();
-            range.enabled = true;
-            range.distance = "blindarea";
-            range.scale = 1;
-            range.alpha = 80;
-            range.color = "0x3EB5F1";
-            range.thickness = 0.75;
-            c.circles.view.push(range);
+
+            var range_blind:CMinimapCirclesViewRange = new CMinimapCirclesViewRange();
+            range_blind.enabled = true;
+            range_blind.distance = "blindarea";
+            range_blind.scale = 1;
+            range_blind.alpha = 80;
+            range_blind.color = "0x3EB5F1";
+            range_blind.thickness = 0.75;
+            c.circles.view.push(range_blind);
+
+            var range_445:CMinimapCirclesViewRange = new CMinimapCirclesViewRange();
+            range_445.enabled = true;
+            range_445.distance = 445;
+            range_445.scale = 1;
+            range_445.alpha = 45;
+            range_445.color = "0xFFCC66";
+            range_445.thickness = 1.1;
+            c.circles.view.push(range_445);
+
             c.circles.artillery = new CMinimapCirclesRange();
             c.circles.artillery.enabled = true;
             c.circles.artillery.alpha = 55;
             c.circles.artillery.color = "0xFF6666";
             c.circles.artillery.thickness = 0.5;
+
             c.circles.shell =  new CMinimapCirclesRange();
             c.circles.shell.enabled = true;
             c.circles.shell.alpha = 55;
             c.circles.shell.color = "0xFF6666";
             c.circles.shell.thickness = 0.5;
+
             c.circles.special = [ ];
+
             c.circles._internal = new CMinimapCirclesInternal();
             c.circles._internal.view_distance = 0;
             c.circles._internal.binocular_distance = 0;
