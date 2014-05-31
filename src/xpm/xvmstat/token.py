@@ -89,7 +89,8 @@ def _getXvmStatTokenData():
         days_left = int((e - s) / 86400)
         hours_left = int((e - s) / 3600) % 24
         mins_left = int((e - s) / 60) % 60
-        msg += '{{l10n:token/time_left:%d:%02d:%02d}}\n' % (days_left, hours_left, mins_left)
+        token_name = 'time_left' if days_left >=3 else 'time_left_warn'
+        msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
         #msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
     else:
         type = SystemMessages.SM_TYPE.Error
