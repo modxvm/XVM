@@ -87,7 +87,7 @@ class _Ping(object):
             self.ping(proxy)
 
     def _respond(self):
-        debug("respond: " + json.dumps(self.resp))
+        #debug("respond: " + json.dumps(self.resp))
         try:
             strdata = json.dumps(self.resp)
             for proxy in self.listeners:
