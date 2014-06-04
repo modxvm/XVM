@@ -344,6 +344,10 @@ class com.xvm.Macros
                 pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
                 // {{c:vtype}}
                 pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon);
+                // {{level}}
+                pdata["level"] = vdata.level;
+                // {{rlevel}}
+                pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
             }
         }
 
@@ -352,15 +356,6 @@ class com.xvm.Macros
         {
             // {{squad}}
             pdata["squad"] = data.squad > 10 ? "sq" : null;
-        }
-
-        // level
-        if (!pdata.hasOwnProperty("level") && data.hasOwnProperty("level"))
-        {
-            // {{level}}
-            pdata["level"] = data.level;
-            // {{rlevel}}
-            pdata["rlevel"] = data.level ? Defines.ROMAN_LEVEL[data.level - 1] : "";
         }
 
         // Dynamic macros

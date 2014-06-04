@@ -117,6 +117,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             //wrapper.m_list._visible = true; // _visible == false for "none" mode
             wrapper.m_names.condenseWhite = !Stat.s_loaded;
             wrapper.m_vehicles.condenseWhite = !Stat.s_loaded;
+            wrapper.m_frags.wordWrap = false;
 
             var namesStr:String = "";
             var vehiclesStr:String = "";
