@@ -268,16 +268,21 @@ class com.xvm.Macros
         {
             case "hp":
             case "hp-max":
+                if (Config.config.battle.allowHpInPanelsAndMinimap == false)
+                    break;
                 if (isNaN(value))
                 {
                     var vdata:VehicleData = VehicleInfo.get(pdata["veh-id"]);
-                    if (vdata != null)
-                        value = vdata.hpTop;
+                    if (vdata == null)
+                        break;
+                    value = vdata.hpTop;
                 }
                 res = Math.round(parseInt(norm) * value / Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1]).toString();
                 //Logger.add("res: " + res);
                 break;
             case "hp-ratio":
+                if (Config.config.battle.allowHpInPanelsAndMinimap == false)
+                    break;
                 if (isNaN(value))
                     value = 100;
                 res = Math.round(parseInt(norm) * value / 100).toString();

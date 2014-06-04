@@ -77,20 +77,18 @@ package xvm.autologin
 
         private function confirmOldReplays(page:LoginPage):void
         {
-            App.utils.scheduler.envokeInNextFrame(function():void {
-                App.utils.scheduler.envokeInNextFrame(function():void {
-                    var submit:SoundButton = page.stage.focus as SoundButton;
-                    if (submit == null)
-                        return;
+            App.utils.scheduler.scheduleTask(function():void {
+                var submit:SoundButton = page.stage.focus as SoundButton;
+                if (submit == null)
+                    return;
 
-                    if (submit.label != DIALOGS.REPLAYNOTIFICATION_SUBMIT)
-                        return;
+                if (submit.label != DIALOGS.REPLAYNOTIFICATION_SUBMIT)
+                    return;
 
-                    (page.form as UIComponent).visible = false;
+                (page.form as UIComponent).visible = false;
 
-                    submit.dispatchEvent(new ButtonEvent(ButtonEvent.CLICK));
-                });
-            });
+                submit.dispatchEvent(new ButtonEvent(ButtonEvent.CLICK));
+            }, 500);
         }
     }
 }
