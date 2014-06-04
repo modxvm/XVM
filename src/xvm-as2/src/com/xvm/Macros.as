@@ -395,17 +395,20 @@ class com.xvm.Macros
             pdata["dmg-kind"] = function(o):String { return o.damageType == null ? null : Locale.get(o.damageType); }
             // {{c:dmg}}
             pdata["c:dmg"] = function(o):String
-                {
-                    return isNaN(o.delta) ? null : GraphicsUtil.GetDmgSrcValue(
-                        Utils.damageFlagToDamageSource(o.damageFlag),
-                        o.entityName == 'teamKiller' ? (data.team + "tk") : o.entityName,
-                        o.dead, o.blowedUp);
-                }
+            {
+                return isNaN(o.delta) ? null : GraphicsUtil.GetDmgSrcValue(
+                    Utils.damageFlagToDamageSource(o.damageFlag),
+                    o.entityName == 'teamKiller' ? (data.team + "tk") : o.entityName,
+                    o.dead, o.blowedUp);
+            }
             // {{c:dmg-kind}}
             pdata["c:dmg-kind"] = function(o):String { return o.damageType == null ? null : GraphicsUtil.GetDmgKindValue(o.damageType); }
 
             // {{c:system}}
-            pdata["c:system"] = function(o):String { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
+            pdata["c:system"] = function(o):String
+            {
+                return "#" + Strings.padLeft(ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp).toString(16), 6, "0");
+            }
 
             // hitlog
 

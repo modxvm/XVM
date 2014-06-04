@@ -42,13 +42,13 @@ Legend:
 │ {{a:hp-ratio}}             │   │ X │ X │ X │ X │ X │ X │   │   │ transparency depending on current health ratio (only in vehicle markers)
 │ {{alive}}                  │   │ X │ X │ X │ X │ X │ X │   │   │ 'alive' for alive, '' for dead
 │ {{frags}}                  │   │ X │ X │ X │   │   │   │   │   │ current frags
-│ {{turret}}                 │   │   │   │   │ X │   │   │   │   │ stock turret marker:
+│ {{c:system}}               │   │ X │ X │ X │ X │   │   │   │   │ system color
+│ {{turret}}                 │   │   │   │   │ X │   │   │   │   │ stock turret marker
 │ {{dmg}}                    │   │   │   │   │ X │ X │   │   │   │ damage health points / last hit value
 │ {{dmg-ratio}}              │   │   │   │   │ X │   │   │   │   │ damage health ratio (without '%' sign)
 │ {{dmg-kind}}               │   │   │   │   │ X │ X │   │   │   │ damage kind (attack, fire, ramming, ...)
 │ {{c:dmg}}                  │   │   │   │   │ X │   │   │   │   │ color depending on damage source
 │ {{c:dmg-kind}}             │   │   │   │   │ X │ X │   │   │   │ color depending on damage kind
-│ {{c:system}}               │   │   │   │   │ X │   │   │   │   │ system color (disable override color)
 │ {{n}}                      │   │   │   │   │   │ X │   │   │   │ total number of hits
 │ {{n-player}}               │   │   │   │   │   │ X │   │   │   │ number of hits for each player
 │ {{dmg-total}}              │   │   │   │   │   │ X │   │   │   │ total sum of hits

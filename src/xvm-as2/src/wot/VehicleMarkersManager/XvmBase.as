@@ -85,11 +85,6 @@ class wot.VehicleMarkersManager.XvmBase
         return ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp);
     }
 
-    private static function getSystemColor(o:Object):Number
-    {
-        return ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp);
-    }
-
     /**
      * Text formatting functions
      */
@@ -124,8 +119,7 @@ class wot.VehicleMarkersManager.XvmBase
                 damageType:damageType,
                 entityName:m_entityName,
                 dead:m_isDead,
-                blowedUp:isBlowedUp,
-                getSystemColor:getSystemColor
+                blowedUp:isBlowedUp
             }));
     }
 

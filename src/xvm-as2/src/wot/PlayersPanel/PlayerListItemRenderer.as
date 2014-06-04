@@ -428,7 +428,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         tf.verticalAlign = format.valign != null ? format.valign : "none";
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
 
-        tf.border = format.borderColor != null && format.bgColor != null;
+        tf.border = format.borderColor != null;
         tf.borderColor = format.borderColor != null && !isNaN(format.borderColor) ? format.borderColor : 0xCCCCCC;
         tf.background = format.bgColor != null;
         tf.backgroundColor = format.bgColor != null && !isNaN(format.bgColor) ? format.bgColor : 0x000000;
@@ -530,16 +530,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (format.rotation != null)
             f._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj));
         if (format.borderColor != null)
-            f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj));
+            f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj).split("#").join("0x"));
         if (format.bgColor != null)
-        {
-            f.backgroundColor = parseInt(Macros.Format(m_name, format.bgColor, obj));
-            if (f.background && !f.border)
-            {
-                f.border = true;
-                f.borderColor = f.backgroundColor;
-            }
-        }
+            f.backgroundColor = parseInt(Macros.Format(m_name, format.bgColor, obj).split("#").join("0x"));
 
         if (format.format != null)
         {
@@ -700,6 +693,7 @@ data = {
   "vipKilled": 0,
   "roster": 0,
   "frags": 0,
+  "igrType": 0,
   "vehAction": 0,
   "vehicle": "Об. 261",
   "team": 2,
