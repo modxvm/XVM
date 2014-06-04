@@ -7,7 +7,7 @@ package com.xvm.types.stat
         // received
         public var _id:Number = NaN;           // player account id (long int)
         public var st:String = null;           // status ("ok")
-        public var dt:String = null;           // XVM update date ("2013-09-02T01:21:20.080Z")
+        public var ts:Number = NaN;            // XVM update timestamp (long)
         public var cr:Number = NaN;            // created (int)
         public var up:Number = NaN;            // updated (int)
         public var nm:String = null;           // player name ("sirmax2")
@@ -52,7 +52,8 @@ package com.xvm.types.stat
         public var __v:Number = NaN;
 
         // obsolete
-        public var solo:CommonStatData = null;
-        public var clanstat:CommonStatData = null;
+        //public var solo:CommonStatData = null;
+        //public var clanstat:CommonStatData = null;
+        //public var dt:String = null;
     }
 }

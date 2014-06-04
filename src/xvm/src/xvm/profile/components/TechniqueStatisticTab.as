@@ -414,7 +414,9 @@ package xvm.profile.components
                 ratingTF.htmlText = "";
             else
             {
-                s += size(Locale.get("General stats") + " (" + color(data.stat.dt.substr(0, 10), 0xCCCCCC) + ")", 14) + "\n";
+                var dt:String = isNaN(data.stat.ts) ? Locale.get("unknown") : Utils.FormatDate("Y-m-d", new Date(data.stat.ts));
+
+                s += size(Locale.get("General stats") + " (" + color(dt, 0xCCCCCC) + ")", 14) + "\n";
 
                 s += Locale.get("WN8") + ": " + (!data.stat.wn8 ? "-- (-)" :
                     color((data.stat.xwn8 == 100 ? "XX" : (data.stat.xwn8 < 10 ? "0" : "") + data.stat.xwn8), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8)) + " (" +

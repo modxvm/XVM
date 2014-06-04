@@ -42,7 +42,7 @@ package xvm.company.renderers
                 MessengerUtils.isFriend(data) ? '<font color="#66FF66">' + Locale.get("Friend") + '</font><br>' :
                 MessengerUtils.isIgnored(data) ? '<font color="#FF6666">' + Locale.get("Ignored") + '</font><br>' : "";
 
-            var dt:String = stat.dt ? stat.dt.split("T").join(" ").substr(0, 10) : Locale.get("unknown");
+            var dt:String = isNaN(stat.ts) ? Locale.get("unknown") : Utils.FormatDate("Y-m-d", new Date(stat.ts));
 
             var s:String = "";
 
