@@ -15,7 +15,7 @@ __WN8_EXPECTED_DATA_URL = 'http://stat.modxvm.com/wn8.json'
 from pprint import pprint
 import traceback
 
-import simplejson as json
+import simplejson
 
 from logger import *
 from loadurl import loadUrl
@@ -31,8 +31,8 @@ def _load():
             pass
         else:
             try:
-                data = None if response in ('', '[]') else json.loads(response)
-                res = json.dumps(data)
+                data = None if response in ('', '[]') else simplejson.loads(response)
+                res = simplejson.dumps(data)
             except Exception, ex:
                 err('  Bad answer: ' + response)
                 res = None

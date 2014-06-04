@@ -15,7 +15,7 @@ import os
 import traceback
 import threading
 
-import simplejson as json
+import simplejson
 
 from constants import XVM_DB_DIR
 from logger import *
@@ -53,7 +53,7 @@ class _DB():
             with open(path, 'r') as f:
                 try:
                     try:
-                        data = json.load(f)
+                        data = simplejson.load(f)
                     except:
                         data = {}
                     return data
@@ -65,7 +65,7 @@ class _DB():
             path = os.path.join(XVM_DB_DIR, dbname + '.xdb')
             with open(path, 'w') as f:
                 try:
-                    json.dump(data, f)
+                    simplejson.dump(data, f)
                 finally:
                     f.close()
 

@@ -14,7 +14,7 @@ from pprint import pprint
 from math import sin, radians
 import traceback
 
-import simplejson as json
+import simplejson
 
 import ResMgr
 import nations
@@ -77,7 +77,7 @@ def _init():
 
     #pprint(res[0])
     #pprint(res)
-    return json.dumps(res)
+    return simplejson.dumps(res)
 
 def _getRanges(turret, nation, vclass):
     visionRadius = firingRadius = artyRadius = 0

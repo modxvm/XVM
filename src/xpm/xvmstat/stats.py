@@ -38,7 +38,7 @@ import time
 from random import randint
 import threading
 
-import simplejson as json
+import simplejson
 
 import BigWorld
 from items.vehicles import VEHICLE_CLASS_TAGS
@@ -117,7 +117,7 @@ class _Stat(object):
     def _respond(self):
         debug("respond: " + self.req['method'])
         if self.req['proxy'] and self.req['proxy'].component and self.req['proxy'].movie:
-            strdata = json.dumps(self.resp)
+            strdata = simplejson.dumps(self.resp)
             self.req['proxy'].movie.invoke((self.req['method'], [strdata]))
 
     # Threaded
@@ -273,7 +273,7 @@ class _Stat(object):
                         pass
                     else:
                         try:
-                            data = None if response in ('', '[]') else json.loads(response)[0]
+                            data = None if response in ('', '[]') else simplejson.loads(response)[0]
                         except Exception, ex:
                             err('  Bad answer: ' + response)
 
@@ -344,7 +344,7 @@ class _Stat(object):
                     #err('Empty response or parsing error')
                     return
 
-                data = json.loads(response)
+                data = simplejson.loads(response)
             else:
                 players = []
                 for vehId in self.players:
@@ -359,7 +359,7 @@ class _Stat(object):
                 return
 
             for stat in data['players']:
-                #debug(json.dumps(stat))
+                #debug(simplejson.dumps(stat))
                 self._fix(stat, None)
                 #pprint(stat)
                 if 'nm' not in stat or not stat['nm']:
@@ -416,7 +416,7 @@ class _Stat(object):
         if orig_name is not None:
             stat['name'] = orig_name
 
-        #log(json.dumps(stat))
+        #log(simplejson.dumps(stat))
         return stat
 
 

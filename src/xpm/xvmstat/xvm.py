@@ -4,7 +4,7 @@ import os
 import glob
 import traceback
 
-import simplejson as json
+import simplejson
 
 import BigWorld
 import GUI
@@ -59,9 +59,9 @@ class Xvm(object):
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
-            #debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + json.dumps(args))
+            #debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
             if (cmd not in NO_LOG_COMMANDS):
-                debug("cmd=" + str(cmd) + " args=" + json.dumps(args))
+                debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
             res = None
             if cmd == COMMAND_LOG:
                 log(*args)
@@ -71,10 +71,10 @@ class Xvm(object):
             elif cmd == COMMAND_SET_CONFIG:
                 #debug('setConfig')
                 self.config_str = args[0]
-                self.config = json.loads(self.config_str)
+                self.config = simplejson.loads(self.config_str)
                 if len(args) >= 2:
                     self.lang_str = args[1]
-                    self.lang_data = json.loads(self.lang_str)
+                    self.lang_data = simplejson.loads(self.lang_str)
                 self.sendConfig(self.battleFlashObject)
                 self.sendConfig(self.vmmFlashObject)
             elif cmd == COMMAND_PING:
@@ -85,7 +85,7 @@ class Xvm(object):
                 res = self.getMods()
             elif cmd == COMMAND_GETSCREENSIZE:
                 #return
-                res = json.dumps(list(GUI.screenResolution()))
+                res = simplejson.dumps(list(GUI.screenResolution()))
             elif cmd == COMMAND_GETGAMEREGION:
                 #return
                 res = region
@@ -98,7 +98,7 @@ class Xvm(object):
             elif cmd == COMMAND_GETWN8EXPECTEDDATA:
                 res = getWN8ExpectedData()
             elif cmd == COMMAND_GETXVMSTATTOKENDATA:
-                res = json.dumps(getXvmStatTokenData())
+                res = simplejson.dumps(getXvmStatTokenData())
             elif cmd == COMMAND_LOADBATTLESTAT:
                 getBattleStat(proxy, args)
             elif cmd == COMMAND_LOADBATTLERESULTSSTAT:
@@ -143,7 +143,7 @@ class Xvm(object):
             m = m.replace('\\', '/')
             if not m.lower().endswith("/xvm.swf"):
                 mods.append(m)
-        return json.dumps(mods) if mods else None
+        return simplejson.dumps(mods) if mods else None
 
     def onShowLobby(self, e=None):
         playerId = getCurrentPlayerId()
@@ -161,7 +161,7 @@ class Xvm(object):
 
     def initBattle(self):
         g_minimap_circles.updateConfig(self.config)
-        self.config_str = json.dumps(self.config)
+        self.config_str = simplejson.dumps(self.config)
         self.sendConfig(self.battleFlashObject)
         BigWorld.callback(0, self.invalidateBattleStates)
 
@@ -200,7 +200,7 @@ class Xvm(object):
                 if vdata is not None:
                     movie = self.battleFlashObject.movie
                     if movie is not None:
-                        movie.invoke((RESPOND_BATTLESTATE, [json.dumps(vdata)]))
+                        movie.invoke((RESPOND_BATTLESTATE, [simplejson.dumps(vdata)]))
             except Exception, ex:
                 err('_updateBattleState(): ' + traceback.format_exc())
 

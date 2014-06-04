@@ -14,7 +14,7 @@ from pprint import pprint
 import traceback
 from adisp import process
 
-import simplejson as json
+import simplejson
 
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from helpers.i18n import makeString
@@ -45,7 +45,7 @@ class _Dossier(object):
 
         # respond
         if proxy and proxy.component and proxy.movie:
-            strdata = json.dumps(res)
+            strdata = simplejson.dumps(res)
             proxy.movie.invoke((RESPOND_DOSSIER, [self.playerId, self.vehId, strdata]))
 
         #log(str(args) + " done")

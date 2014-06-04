@@ -17,7 +17,7 @@ import os
 import re
 from subprocess import Popen, PIPE, STARTUPINFO, STARTF_USESHOWWINDOW, SW_HIDE
 
-import simplejson as json
+import simplejson
 
 import BigWorld
 import ResMgr
@@ -77,9 +77,9 @@ class _Ping(object):
                 self.thread = None
 
     def _respond(self):
-        #debug("respond: " + json.dumps(self.resp))
+        #debug("respond: " + simplejson.dumps(self.resp))
         try:
-            strdata = json.dumps(self.resp)
+            strdata = simplejson.dumps(self.resp)
             for proxy in self.listeners:
                 if proxy and hasattr(proxy, 'component') and hasattr(proxy, 'movie') and proxy.movie:
                     proxy.movie.invoke((RESPOND_PINGDATA, [strdata]))

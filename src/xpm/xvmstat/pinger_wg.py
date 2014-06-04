@@ -14,7 +14,7 @@ import threading
 import os
 import re
 
-import simplejson as json
+import simplejson
 
 import BigWorld
 import ResMgr
@@ -87,9 +87,9 @@ class _Ping(object):
             self.ping(proxy)
 
     def _respond(self):
-        #debug("respond: " + json.dumps(self.resp))
+        #debug("respond: " + simplejson.dumps(self.resp))
         try:
-            strdata = json.dumps(self.resp)
+            strdata = simplejson.dumps(self.resp)
             for proxy in self.listeners:
                 if proxy and hasattr(proxy, 'component') and hasattr(proxy, 'movie') and proxy.movie:
                     proxy.movie.invoke((RESPOND_PINGDATA, [strdata]))

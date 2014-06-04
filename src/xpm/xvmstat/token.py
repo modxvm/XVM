@@ -17,7 +17,7 @@ import traceback
 import datetime
 import time
 
-import simplejson as json
+import simplejson
 
 import BigWorld
 from gui import SystemMessages
@@ -94,7 +94,7 @@ def _getXvmStatTokenData():
         #msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
     else:
         type = SystemMessages.SM_TYPE.Error
-        msg += '{{l10n:token/unknown_status}}\n%s' % json.dumps(tdata)
+        msg += '{{l10n:token/unknown_status}}\n%s' % simplejson.dumps(tdata)
     msg += '</textformat>'
 
     if _tdataPrev is None or _tdataPrev['status'] != 'active' or tdata is None or tdata['status'] != 'active':
@@ -132,7 +132,7 @@ def _checkToken(playerId, token):
                 if response is None:
                     return None
                 response = response.strip()
-                data = None if response in ('', '[]') else json.loads(response)
+                data = None if response in ('', '[]') else simplejson.loads(response)
                 log(utils.hide_guid(response))
             except Exception, ex:
                 err('  Bad answer: ' + response)
