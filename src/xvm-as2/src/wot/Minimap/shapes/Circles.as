@@ -258,21 +258,28 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             var radius:Number = 0;
             switch (dc.distance)
             {
-                case "blindarea":
-                    radius = binoculars_exists && binoculars_enabled ? binocular_distance : view_distance;
-                    if (radius < 50)
-                        radius = 50;
-                    if (radius > 445)
-                        radius = 445;
-                    break;
                 case "dynamic":
-                    radius = binoculars_exists && binoculars_enabled ? binocular_distance : view_distance;
+                    radius = (binoculars_exists && binoculars_enabled) ? binocular_distance : view_distance;
                     break;
                 case "motion":
                     radius = view_distance;
                     break;
                 case "standing":
-                    radius = binocular_distance;
+                    if (binoculars_exists)
+                        radius = binocular_distance;
+                    break;
+                case "blindarea":
+                    radius = (binoculars_exists && binoculars_enabled) ? binocular_distance : view_distance;
+                    if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
+                    break;
+                case "blindarea_motion":
+                    radius = view_distance;
+                    if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
+                    break;
+                case "blindarea_standing":
+                    if (binoculars_exists)
+                        radius = binocular_distance;
+                    if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
                     break;
             }
 

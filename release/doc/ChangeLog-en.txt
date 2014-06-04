@@ -1,29 +1,7 @@
-﻿XVM-5.3.0-dev:
-  [NEW FUNCTIONS]
-  * added in-battle macro {{battletier}} - guessed current battle tier
-  * new options in playersPanel for extra text fields
-  * new options in playersPanel for frags formatting
-  * new option playersPanel/startMode for initial players panels mode
-  * macros extended: {{hp:XX}} and {{hp-max:XX}} return value normalized to XX for current battle tier
-    ex.: {{hp:300}} - will return 300 for HP=700 at tier-5 battle, and for HP=3000 at tier-11 battle.
-  * macros extended: value replacement - {{macro?rep}}
-    ex.: "alpha": "{{alive?80|0}}" - set alpha to 80 for alive and 0 for dead
-  * new macros:
-      {{frags}} - current frags
-      {{alive}} - 'alive' for alive, '' for dead
+﻿XVM-5.3.1-dev:
+  * adaptation to WoT 0.9.1
 
-XVM-5.3.0-test2:
-  [NEW FUNCTIONS]
-  * dynamic circles on the minimap. Options:
-      minimap/circles/artillery - maximum range of fire for artillery
-      minimap/circles/shell - maximum range of shooting for autocannon and semi-automatic cannon
-      minimap/circles/view - view distance (dynamically changes when switching binocular telescope)
-      minimap/circles/major - removed, replaced with "view" section
-    Omegaice's code was used for this component.
-  * added macro {{squad-num}} - squad number or null if not in squad
-  * changed value of macro {{squad}} from '1' to 'sq'
-
-XVM-5.3.0-test1:
+XVM-5.3.0:
   [MAJOR UPDATES]
   * new macros formatting (see readme-en.txt)
       {{name[%[flag][width][.prec]type][~suf][|def]}}
@@ -43,31 +21,48 @@ XVM-5.3.0-test1:
   * config version increased to 5.1.0
 
   [NEW FUNCTIONS]
+  * dynamic circles on the minimap. Options:
+      minimap/circles/artillery - maximum range of fire for artillery
+      minimap/circles/shell - maximum range of shooting for autocannon and semi-automatic cannon
+      minimap/circles/view - view distance (dynamically changes when switching binocular telescope)
+      minimap/circles/major - removed, replaced with "view" section
+    Omegaice's code was used for this component
+  * new options in playersPanel for extra text fields
+  * new options in playersPanel for frags formatting
+  * new option playersPanel/startMode for initial players panels mode
   * new option battle/allowHpInPanelsAndMinimap - enable {{hp}}, {{hp-ratio}}, {{hp-max}}
     macros in players panels and minimap. WARNING: performance expensive
 
-  [OTHER]
+  [MACROS]
+  * new macros:
+    {{frags}} - current frags
+    {{alive}} - 'alive' for alive, '' for dead
+    {{battletier}} - guessed current battle tier
+    {{squad-num}} - squad number or null if not in squad
+  * macros extended: {{hp:XX}} and {{hp-max:XX}} return value normalized to XX for current battle tier
+    ex.: {{hp:300}} - will return 300 for HP=700 at tier-5 battle, and for HP=3000 at tier-11 battle.
+  * macros extended: value replacement - {{macro?rep}}
+    ex.: "alpha": "{{alive?80|0}}" - set alpha to 80 for alive and 0 for dead
+  * changed value of macro {{squad}} from '1' to 'sq'
   * removed macro {{vehicle-type}} as duplication of {{vehicle}}
   * removed macro {{vehicle-name}} as duplication of {{vehiclename}}
   * removed macro {{short-nick}} and option minimap/nickShrink as replaced by {{nick%.5s}}
+
+  [OTHER]
   * source code now stored on http://dev.modxvm.com/
 
-XVM-5.2.1-test2:
+XVM-5.2.1:
+  * adaptation to WoT 0.9.0
+
+  [NEW FUNCTIONS]
+  * new option login/saveLastServer - save last server (disabled by default)
+  * localization: New rules for localization submission. Details: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+
   [FIXES]
   * players panels was not shown after battle loading
   * fixed displaying of elements on minimap
 
-  [NEW FUNCTIONS]
-  * new option login/saveLastServer - save last server (disabled by default)
-
-
-XVM-5.2.1-test1:
-  * adaptation to WoT 0.9.0
-
-  [NEW FUNCTIONS]
-  * localization: New rules for localization submission. Details: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
-
-XVM-5.2.0-test1:
+XVM-5.2.0:
   [MAJOR UPDATES]
   * main config file (xvm.xc) moved to res_mods/xvm/configs
   * statistics must be enabled in the personal cabinet on the http://www.modxvm.com/ site
