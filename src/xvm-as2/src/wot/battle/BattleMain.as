@@ -179,7 +179,7 @@ class wot.battle.BattleMain
 
     private function onBattleStateChanged(str:String):Void
     {
-        Logger.add("onBattleStateChanged: " + str);
+        //Logger.add("onBattleStateChanged: " + str);
         var obj = JSONx.parse(str);
         var data:BattleStateData = obj; // as2 type casting is strange
         //Logger.addObject(data);

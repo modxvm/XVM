@@ -91,7 +91,7 @@
     "PutClassCrew": "Put same class crew",
 
     // Vehicle Params
-    "Current view distance": "Current view distance",
+    "Actual view distance": "Actual view distance",
     "with stereoscope": "with stereoscope",
     "(m)": "(m)",
 

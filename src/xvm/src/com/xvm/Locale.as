@@ -171,7 +171,7 @@ package com.xvm
             "PutClassCrew": "Экипаж того же класса",
 
             // Vehicle Params
-            "Current view distance": "Текущий обзор",
+            "Actual view distance": "Расчетный обзор",
             "with stereoscope": "со стереотрубой",
             "(m)": "(м)",
 

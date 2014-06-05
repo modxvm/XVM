@@ -1,6 +1,6 @@
 ﻿XVM-5.3.1-dev:
   * adaptation to WoT 0.9.1
-  * show current view distance in the tank params in hangar
+  * show actual view distance in the tank params in hangar
 
 XVM-5.3.0:
   [MAJOR UPDATES]
