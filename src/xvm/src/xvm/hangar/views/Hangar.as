@@ -45,6 +45,7 @@ package xvm.hangar.views
 
         private function onUpdateCurrentVehicle(event:Event):void
         {
+            VehicleParams.updateVehicleParams(page.params);
             App.utils.scheduler.envokeInNextFrame(function():void
             {
                 VehicleParams.updateVehicleParams(page.params);

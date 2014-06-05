@@ -91,7 +91,7 @@
     "PutClassCrew": "Экипаж того же класса",
 
     // Vehicle Params
-    "View distance": "Дальность обзора",
+    "Current view distance": "Текущий обзор",
     "with stereoscope": "со стереотрубой",
     "(m)": "(м)",
 

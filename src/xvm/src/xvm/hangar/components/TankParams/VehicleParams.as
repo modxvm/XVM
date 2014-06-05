@@ -21,7 +21,7 @@ package xvm.hangar.components.TankParams
 
             var dp:DataProvider = list.dataProvider as DataProvider;
 
-            var label:String = Locale.get("View distance");
+            var label:String = Locale.get("Current view distance");
             var p:String = App.utils.locale.integer(vr.view_distance);
             if (vr.stereoscope_distance > 0)
             {
@@ -31,7 +31,9 @@ package xvm.hangar.components.TankParams
             label = "<font color='#B4A983'>" + label + "</font> <font color='#9F9260'>" + Locale.get("(m)") + "</font>";
 
             list.height += 28;
-            dp.push({ label: label, param: p, selected: false });
+            var lastItem:Object = dp.pop();
+            dp.push( { label: label, param: p, selected: false } );
+            dp.push(lastItem);
             dp.invalidate();
         }
 
