@@ -20,21 +20,25 @@ package xvm.hangar.components.TankParams
             var list:WgScrollingList = params.list;
 
             var dp:DataProvider = list.dataProvider as DataProvider;
-
-            var label:String = Locale.get("Current view distance");
-            var p:String = App.utils.locale.integer(vr.view_distance);
-            if (vr.stereoscope_distance > 0)
+            if (dp[dp.length - 2] is ParamsVO)
             {
-                p += " / " + App.utils.locale.integer(vr.stereoscope_distance);
-                label += " / " + Locale.get("with stereoscope");
-            }
-            label = "<font color='#B4A983'>" + label + "</font> <font color='#9F9260'>" + Locale.get("(m)") + "</font>";
+                var lastItem:Object = dp.pop();
+                var label:String = Locale.get("Actual view distance");
+                var p:String = App.utils.locale.integer(vr.view_distance);
+                if (vr.stereoscope_distance > 0)
+                {
+                    p += " / " + App.utils.locale.integer(vr.stereoscope_distance);
+                    label += " / " + Locale.get("with stereoscope");
+                }
+                label = "<font color='#B4A983'>" + label + "</font> <font color='#9F9260'>" + Locale.get("(m)") + "</font>";
 
-            list.height += 28;
-            var lastItem:Object = dp.pop();
-            dp.push( { label: label, param: p, selected: false } );
-            dp.push(lastItem);
-            dp.invalidate();
+                list.height += 28;
+
+                dp.push( { label: label, param: p, selected: false } );
+
+                dp.push(lastItem);
+                dp.invalidate();
+            }
         }
 
         private static function getViewRanges():Object

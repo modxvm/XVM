@@ -28,21 +28,13 @@ from websock import g_websock
 from minimap_circles import g_minimap_circles
 #from config.default import g_default_config
 
-NO_LOG_COMMANDS = (
-  COMMAND_LOG,
-  COMMAND_LOAD_FILE,
-  COMMAND_SET_CONFIG,
-  COMMAND_PING,
-  COMMAND_GETMODS,
-  COMMAND_GETVEHICLEINFODATA,
-  COMMAND_GETWN8EXPECTEDDATA,
-  COMMAND_GETXVMSTATTOKENDATA,
-  COMMAND_GETSCREENSIZE,
-  COMMAND_GETGAMEREGION,
-  COMMAND_GETLANGUAGE,
-  COMMAND_LOADUSERDATA,
-  COMMAND_GETDOSSIER,
-  COMMAND_OPEN_URL,
+_LOG_COMMANDS = (
+  COMMAND_LOADBATTLESTAT,
+  COMMAND_LOADBATTLERESULTSSTAT,
+  COMMAND_LOGSTAT,
+  COMMAND_LOAD_SETTINGS,
+  COMMAND_SAVE_SETTINGS,
+  COMMAND_TEST,
   )
 
 class Xvm(object):
@@ -52,7 +44,7 @@ class Xvm(object):
         self.config = None
         self.lang_str = None
         self.lang_data = None
-        self.appFlashObject = None
+        self.app = None
         self.battleFlashObject = None
         self.vmmFlashObject = None
         self._battleStateTimersId = dict()
@@ -61,7 +53,7 @@ class Xvm(object):
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
             #debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
-            if (cmd not in NO_LOG_COMMANDS):
+            if (cmd in _LOG_COMMANDS):
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
             res = None
             if cmd == COMMAND_LOG:
@@ -146,22 +138,13 @@ class Xvm(object):
                 mods.append(m)
         return simplejson.dumps(mods) if mods else None
 
-    def onShowLobby(self, e=None):
-        playerId = getCurrentPlayerId()
-        if playerId is not None and self.currentPlayerId != playerId:
-            self.currentPlayerId = playerId
-            g_websock.send('id/%d' % playerId)
+    def initApplication(self):
+        pass
 
-    def onShowLogin(self, e=None):
-        if self.currentPlayerId is not None:
-            self.currentPlayerId = None
-            g_websock.send('id')
-
-    def updateCurrentVehicle(self):
-        g_minimap_circles.updateCurrentVehicle(self.config)
-        if self.appFlashObject is not None:
-            data = simplejson.dumps(self.config['minimap']['circles']['_internal'])
-            self.appFlashObject.movie.invoke((RESPOND_UPDATECURRENTVEHICLE, [data]))
+    def deleteApplication(self):
+        self.hangarDispose()
+        if self.app is not None and self.app.loaderManager is not None:
+           self.app.loaderManager.onViewLoaded -= self.onViewLoaded
 
     def initBattle(self):
         g_minimap_circles.updateConfig(BigWorld.player().vehicleTypeDescriptor, self.config)
@@ -169,14 +152,52 @@ class Xvm(object):
         self.sendConfig(self.battleFlashObject)
         BigWorld.callback(0, self.invalidateBattleStates)
 
+    def initVmm(self):
+        self.sendConfig(self.vmmFlashObject)
+
+    def onShowLogin(self, e=None):
+        if self.currentPlayerId is not None:
+            self.currentPlayerId = None
+            g_websock.send('id')
+
+    def onShowLobby(self, e=None):
+        playerId = getCurrentPlayerId()
+        if playerId is not None and self.currentPlayerId != playerId:
+            self.currentPlayerId = playerId
+            g_websock.send('id/%d' % playerId)
+        if self.app is not None:
+           self.app.loaderManager.onViewLoaded += self.onViewLoaded
+
+    def onViewLoaded(self, e=None):
+        if e.uniqueName == 'hangar':
+            self.hangarInit()
+
+    def hangarInit(self):
+        from CurrentVehicle import g_currentVehicle
+        g_currentVehicle.onChanged += self.updateTankParams
+        BigWorld.callback(0, self.updateTankParams)
+
+    def hangarDispose(self):
+        from CurrentVehicle import g_currentVehicle
+        g_currentVehicle.onChanged -= self.updateTankParams
+
+    def updateTankParams(self):
+        try:
+            self.updateCurrentVehicle()
+            if self.app is not None:
+                data = simplejson.dumps(self.config['minimap']['circles']['_internal'])
+                self.app.movie.invoke((RESPOND_UPDATECURRENTVEHICLE, [data]))
+        except Exception, ex:
+            err('updateTankParams(): ' + traceback.format_exc())
+
+    def updateCurrentVehicle(self):
+        g_minimap_circles.updateCurrentVehicle(self.config)
+
     def invalidateBattleStates(self):
         import Vehicle
         for v in BigWorld.entities.values():
             if isinstance(v, Vehicle.Vehicle) and v.isStarted:
                 self.invalidateBattleState(v)
-
-    def initVmm(self):
-        self.sendConfig(self.vmmFlashObject)
 
     def invalidateBattleState(self, vehicle):
         #log("invalidateBattleState: " + str(vehicle.id))
@@ -205,7 +226,6 @@ class Xvm(object):
                     movie = self.battleFlashObject.movie
                     if movie is not None:
                         movie.invoke((RESPOND_BATTLESTATE, [simplejson.dumps(vdata)]))
-
             except Exception, ex:
                 err('_updateBattleState(): ' + traceback.format_exc())
 

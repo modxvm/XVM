@@ -57,7 +57,8 @@ def FlashInit(self, swf, className = 'Flash', args = None, path = None):
     log("FlashInit: " + self.swf)
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
     if self.swf == _APPLICATION_SWF:
-        g_xvm.appFlashObject = self
+        g_xvm.app = self
+        g_xvm.initApplication()
     if self.swf == _BATTLE_SWF:
         g_xvm.battleFlashObject = self
         g_xvm.initBattle()
@@ -71,7 +72,8 @@ def FlashBeforeDelete(self):
     log("FlashBeforeDelete: " + self.swf)
     self.removeExternalCallback('xvm.cmd')
     if self.swf == _APPLICATION_SWF:
-        g_xvm.appFlashObject = None
+        g_xvm.deleteApplication()
+        g_xvm.app = None
     if self.swf == _BATTLE_SWF:
         g_xvm.battleFlashObject = None
     if self.swf == _VMM_SWF:
@@ -122,10 +124,6 @@ def onArenaCreated():
     #debug('> onArenaCreated')
     g_xvm.updateCurrentVehicle()
 
-def CurrentVehicle_onChanged():
-    #debug('> CurrentVehicle_onChanged')
-    g_xvm.updateCurrentVehicle()
-
 #####################################################################
 # Register events
 
@@ -157,8 +155,5 @@ def _RegisterEvents():
 
     from PlayerEvents import g_playerEvents
     g_playerEvents.onArenaCreated += onArenaCreated
-
-    from CurrentVehicle import g_currentVehicle
-    g_currentVehicle.onChanged += CurrentVehicle_onChanged
 
 BigWorld.callback(0, _RegisterEvents)

@@ -39,17 +39,24 @@ package xvm.hangar.views
 
         private function initVehicleParams():void
         {
+            ExternalInterface.addCallback(Cmd.RESPOND_UPDATECURRENTVEHICLE, onUpdateCurrentVehicle);
             page.params.list.itemRenderer = TankParamItemRenderer;
-            App.stage.addEventListener(Cmd.RESPOND_UPDATECURRENTVEHICLE, onUpdateCurrentVehicle);
         }
 
-        private function onUpdateCurrentVehicle(event:Event):void
+        private function onUpdateCurrentVehicle(json_str:String):void
         {
-            VehicleParams.updateVehicleParams(page.params);
-            App.utils.scheduler.envokeInNextFrame(function():void
+            try
             {
+                var data:Object = JSONx.parse(json_str);
+                for (var n:String in data)
+                    Config.config.minimap.circles._internal[n] = data[n];
+
                 VehicleParams.updateVehicleParams(page.params);
-            });
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
     }
 
