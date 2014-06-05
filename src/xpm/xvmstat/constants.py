@@ -35,6 +35,7 @@ RESPOND_BATTLERESULTSDATA = "xvm.battleresultsdata"
 RESPOND_BATTLESTATE = "xvm.battleState"
 RESPOND_PINGDATA = "xvm.pingdata"
 RESPOND_USERDATA = "xvm.userdata"
+RESPOND_UPDATECURRENTVEHICLE = "xvm.updatecurrentvehicle"
 
 #COMMAND_GETSTAT = "getstat"
 #COMMAND_LOGSTAT = "logstat"

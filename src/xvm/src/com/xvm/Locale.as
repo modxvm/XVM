@@ -170,6 +170,11 @@ package com.xvm
             "PutBestCrew": "Лучший экипаж",
             "PutClassCrew": "Экипаж того же класса",
 
+            // Vehicle Params
+            "View distance": "Дальность обзора",
+            "with stereoscope": "со стереотрубой",
+            "(m)": "(м)",
+
             // Squad
             "Vehicle": "Танк",
             "Battle tiers": "Уровень боёв",

@@ -19,7 +19,7 @@ import net.wg.gui.login.impl.*; LoginPage;
 import net.wg.gui.lobby.*; LobbyPage;
 import net.wg.gui.lobby.dialogs.*; SimpleDialog;
 import net.wg.gui.lobby.header.*; TutorialControl;
-import net.wg.gui.lobby.hangar.*; Hangar;
+import net.wg.gui.lobby.hangar.Hangar; Hangar;
 import net.wg.gui.lobby.hangar.crew.*; Crew; RecruitRendererVO; CrewItemRenderer;
 import net.wg.gui.lobby.battleloading.*; BattleLoading; PlayerItemRenderer;
 import net.wg.gui.lobby.battleResults.*; BattleResults; CommonStats; ProgressElement;
@@ -42,45 +42,48 @@ import net.wg.infrastructure.managers.impl.*; ContainerManager;
  * UIs
  */
 
-// controls.swf
-//ButtonBlack; ButtonCaps; ButtonCapsRed; ButtonIcon; ButtonIconText; ButtonNormal; ButtonRed;
-//CheckBox; CheckBoxFilter; CheckBoxTankers; IconText; LabelControl; NumericStepper;
-//RadioButton; RedButton; Slider; TextFieldShort; TextInput; UILoaderAlt; UILoaderCut;
-ListItemRedererImageText; DropDownImageText;
-
 // battleLoading.swf
 LeftItemRendererUI;
 RightItemRendererUI;
-
-// companiesWindow.swf
-CompanyListItemRendererUI;
-CompanyDropItemRendererUI;
-
-// prebattleComponents.swf
-TeamMemberRendererUI;
-
-// squadWindow.swf
-squadItemRendererUI;
-
-// profileTechnique.swf
-TechniqueRenderer_UI;
-TechniqueStatisticTab_UI;
 
 // battleResults.swf
 BR_SubtaskComponent_UI;
 ProgressElement_UI;
 BattleResultsAwards_UI;
 
-// TankCarousel.swf
-TankCarouselItemRendererUI;
+// companiesWindow.swf
+CompanyListItemRendererUI;
+CompanyDropItemRendererUI;
+
+// controls.swf
+//ButtonBlack; ButtonCaps; ButtonCapsRed; ButtonIcon; ButtonIconText; ButtonNormal; ButtonRed;
+//CheckBox; CheckBoxFilter; CheckBoxTankers; IconText; LabelControl; NumericStepper;
+//RadioButton; RedButton; Slider; TextFieldShort; TextInput; UILoaderAlt; UILoaderCut;
+ListItemRedererImageText; DropDownImageText;
+
+// hangar.swf
+TankParam;
 
 // nodesLib.swf
 NationTreeNodeSkinned;
 ResearchItemNode;
 
+// prebattleComponents.swf
+TeamMemberRendererUI;
+
+// profileTechnique.swf
+TechniqueRenderer_UI;
+TechniqueStatisticTab_UI;
+
 // serviceMessageComponents.swf
 ServiceMessageIR_UI;
 ServiceMessagePopUp_UI;
+
+// squadWindow.swf
+squadItemRendererUI;
+
+// TankCarousel.swf
+TankCarouselItemRendererUI;
 
 }
 

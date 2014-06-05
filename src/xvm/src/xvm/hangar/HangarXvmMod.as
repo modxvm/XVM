@@ -19,6 +19,7 @@ package xvm.hangar
         {
             "login": Login,
             "lobby": Lobby,
+            "hangar": Hangar,
             "battleLoading": BattleLoading,
             "battleResults": BattleResults
         }

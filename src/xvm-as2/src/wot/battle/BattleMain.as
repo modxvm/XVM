@@ -99,7 +99,7 @@ class wot.battle.BattleMain
         _root.consumablesPanel.setCoolDownTime(idx, timeRemaining);
         var renderer = _root.consumablesPanel.getRendererBySlotIdx(idx);
         if (renderer.iconPath.indexOf("/stereoscope.") > 0)
-            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BINOCULAR_TOGGLED, value: timeRemaining != 0 } );
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
     }
 
     private var maxHealth:Number = NaN;
@@ -179,6 +179,7 @@ class wot.battle.BattleMain
 
     private function onBattleStateChanged(str:String):Void
     {
+        Logger.add("onBattleStateChanged: " + str);
         var obj = JSONx.parse(str);
         var data:BattleStateData = obj; // as2 type casting is strange
         //Logger.addObject(data);

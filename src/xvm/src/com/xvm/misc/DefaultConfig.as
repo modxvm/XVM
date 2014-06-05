@@ -457,8 +457,7 @@ package com.xvm.misc
             c.circles.special = [ ];
 
             c.circles._internal = new CMinimapCirclesInternal();
-            c.circles._internal.view_distance = 0;
-            c.circles._internal.binocular_distance = 0;
+            c.circles._internal.view_distance_vehicle = 0;
             c.circles._internal.shell_range = 0;
             c.circles._internal.artillery_range = 0;
 

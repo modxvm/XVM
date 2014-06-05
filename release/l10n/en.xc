@@ -90,6 +90,11 @@
     "PutBestCrew": "Put best crew",
     "PutClassCrew": "Put same class crew",
 
+    // Vehicle Params
+    "View distance": "View distance",
+    "with stereoscope": "with stereoscope",
+    "(m)": "(m)",
+
     // Squad
     "Vehicle": "Vehicle",
     "Battle tiers": "Battle tiers",

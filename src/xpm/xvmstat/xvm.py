@@ -52,6 +52,7 @@ class Xvm(object):
         self.config = None
         self.lang_str = None
         self.lang_data = None
+        self.appFlashObject = None
         self.battleFlashObject = None
         self.vmmFlashObject = None
         self._battleStateTimersId = dict()
@@ -158,9 +159,12 @@ class Xvm(object):
 
     def updateCurrentVehicle(self):
         g_minimap_circles.updateCurrentVehicle(self.config)
+        if self.appFlashObject is not None:
+            data = simplejson.dumps(self.config['minimap']['circles']['_internal'])
+            self.appFlashObject.movie.invoke((RESPOND_UPDATECURRENTVEHICLE, [data]))
 
     def initBattle(self):
-        g_minimap_circles.updateConfig(self.config)
+        g_minimap_circles.updateConfig(BigWorld.player().vehicleTypeDescriptor, self.config)
         self.config_str = simplejson.dumps(self.config)
         self.sendConfig(self.battleFlashObject)
         BigWorld.callback(0, self.invalidateBattleStates)
@@ -201,6 +205,7 @@ class Xvm(object):
                     movie = self.battleFlashObject.movie
                     if movie is not None:
                         movie.invoke((RESPOND_BATTLESTATE, [simplejson.dumps(vdata)]))
+
             except Exception, ex:
                 err('_updateBattleState(): ' + traceback.format_exc())
 

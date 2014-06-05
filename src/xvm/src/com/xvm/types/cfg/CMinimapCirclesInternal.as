@@ -9,6 +9,7 @@ package com.xvm.types.cfg
         public var view_distance_vehicle:Number;
         public var view_base_commander_skill:Number;
         public var view_brothers_in_arms:Boolean;
+        public var view_stereoscope:Boolean;
         public var view_ventilation:Boolean;
         public var view_consumable:Boolean;
         public var view_commander_eagleEye:Number;

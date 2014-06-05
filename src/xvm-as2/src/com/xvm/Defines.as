@@ -142,7 +142,7 @@ class com.xvm.Defines
     public static var E_CONFIG_LOADED = "config_loaded";
     public static var E_STAT_LOADED = "stat_loaded";
     public static var E_BATTLE_STATE_CHANGED = "battle_state_changed";
-    public static var E_BINOCULAR_TOGGLED = "binocular_toggled";
+    public static var E_STEREOSCOPE_TOGGLED = "stereoscope_toggled";
     public static var E_SPOT_STATUS_UPDATED = "spot_status_updated";
     public static var E_PLAYER_DEAD = "player_dead";
     public static var E_SELF_DEAD = "self_dead";

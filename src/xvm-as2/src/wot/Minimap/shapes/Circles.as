@@ -20,8 +20,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     private var destroyedCrew:Object = {};
     private var surveyingDeviceDestroyed:Boolean = false;
-    private var binoculars_exists:Boolean = false;
-    private var binoculars_enabled:Boolean = false;
+    private var stereoscope_exists:Boolean = false;
+    private var stereoscope_enabled:Boolean = false;
     private var moving_state:Number;
 
     public function Circles()
@@ -55,7 +55,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             onViewRangeChanged();
             GlobalEventDispatcher.addEventListener(Defines.E_MODULE_DESTROYED, this, onModuleDestroyed);
             GlobalEventDispatcher.addEventListener(Defines.E_MODULE_REPAIRED, this, onModuleRepaired);
-            GlobalEventDispatcher.addEventListener(Defines.E_BINOCULAR_TOGGLED, this, onBinocularToggled);
+            GlobalEventDispatcher.addEventListener(Defines.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
         }
 
         if (cfg.artillery.enabled)
@@ -200,13 +200,13 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         updateCirclesMovingState(dynamicCircles);
     }
 
-    private function onBinocularToggled(event)
+    private function onStereoscopeToggled(event)
     {
-        // workaround for binoculars
-        if (binoculars_exists == false && event.value == true)
-            binoculars_exists = true;
+        // workaround for stereoscope
+        if (stereoscope_exists == false && event.value == true)
+            stereoscope_exists = true;
 
-        binoculars_enabled = event.value;
+        stereoscope_enabled = event.value;
         onViewRangeChanged();
     }
 
@@ -230,7 +230,6 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         if (destroyedCrew["commander"])
             K = 0;
-            break;
         if (destroyedCrew["radioman1"])
             Krf = 0;
         // TODO radioman2, gunner1, gunner2
@@ -240,7 +239,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         // Calculate final values
         var view_distance:Number = view_distance_vehicle * (K * 0.0043 + 0.57) * (1 + Kn1 * 0.0002 * Kee) * (1 + 0.0003 * Krf) * Kn2;
-        var binocular_distance:Number = view_distance * 1.25;
+        var stereoscope_distance:Number = view_distance * 1.25;
         if (ci.view_coated_optics == true)
             view_distance = view_distance * 1.1
 
@@ -259,17 +258,17 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             switch (dc.distance)
             {
                 case "dynamic":
-                    radius = (binoculars_exists && binoculars_enabled) ? binocular_distance : view_distance;
+                    radius = (stereoscope_exists && stereoscope_enabled) ? stereoscope_distance : view_distance;
                     break;
                 case "motion":
                     radius = view_distance;
                     break;
                 case "standing":
-                    if (binoculars_exists)
-                        radius = binocular_distance;
+                    if (stereoscope_exists)
+                        radius = stereoscope_distance;
                     break;
                 case "blindarea":
-                    radius = (binoculars_exists && binoculars_enabled) ? binocular_distance : view_distance;
+                    radius = (stereoscope_exists && stereoscope_enabled) ? stereoscope_distance : view_distance;
                     if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
                     break;
                 case "blindarea_motion":
@@ -277,8 +276,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
                     if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
                     break;
                 case "blindarea_standing":
-                    if (binoculars_exists)
-                        radius = binocular_distance;
+                    if (stereoscope_exists)
+                        radius = stereoscope_distance;
                     if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
                     break;
             }

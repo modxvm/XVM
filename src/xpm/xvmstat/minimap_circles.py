@@ -20,6 +20,7 @@ class _MinimapCircles(object):
         self.view_distance_vehicle = 0
         self.base_commander_skill = 100.0
         self.brothers_in_arms = False
+        self.stereoscope = False
         self.ventilation = False
         self.consumable = False
         self.commander_eagleEye = 0.0
@@ -83,6 +84,10 @@ class _MinimapCircles(object):
         debug('  camouflage: %s' % str(self.camouflage))
         debug('  brothers_in_arms: %s' % str(self.brothers_in_arms))
 
+        # Check for Stereoscope
+        self.stereoscope = self._isOptionalEquipped('stereoscope')
+        debug('  stereoscope: %s' % str(self.stereoscope))
+
         # Check for Ventilation
         self.ventilation = self._isOptionalEquipped('improvedVentilation')
         debug('  ventilation: %s' % str(self.ventilation))
@@ -102,13 +107,14 @@ class _MinimapCircles(object):
         self.coated_optics = self._isOptionalEquipped('coatedOptics')
         debug('  coated_optics: %s' % str(self.coated_optics))
 
+        self.updateConfig(self.item.descriptor, config)
 
-    def updateConfig(self, config):
+
+    def updateConfig(self, descr, config):
         cfg = config['minimap']['circles']
         if not cfg['enabled']:
             return
 
-        descr = BigWorld.player().vehicleTypeDescriptor
         #debug(vars(descr))
         #debug(vars(descr.type))
 
@@ -134,6 +140,7 @@ class _MinimapCircles(object):
             'view_distance_vehicle': self.view_distance_vehicle,
             'view_base_commander_skill': self.base_commander_skill,
             'view_brothers_in_arms': self.brothers_in_arms,
+            'view_stereoscope': self.stereoscope,
             'view_ventilation': self.ventilation,
             'view_consumable': self.consumable,
             'view_commander_eagleEye': self.commander_eagleEye,
