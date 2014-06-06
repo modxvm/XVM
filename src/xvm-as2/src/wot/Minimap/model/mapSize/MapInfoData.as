@@ -25,7 +25,7 @@ class wot.Minimap.model.mapSize.MapInfoData
 
     private static var _systemMapnameList:Object =
     {
-        //$00_tank_tutorial
+        $00_tank_tutorial:      { size: 100 }, // (Tutorial)
         $01_karelia:            { size: 100 }, // Karelia
         $02_malinovka:          { size: 100 }, // Malinovka
         $03_campania:           { size: 60 },  // Province
@@ -65,10 +65,12 @@ class wot.Minimap.model.mapSize.MapInfoData
         $60_asia_miao:          { size: 100 }, // Pearl River
         $63_tundra:             { size: 80 },  // Tundra
         $73_asia_korea:         { size: 100 }, // Sacred Valley
+        $83_kharkiv:            { size: 80 },  // Kharkiv
         $84_winter:             { size: 100 }, // Windstorm
         $85_winter:             { size: 100 }, // Severogorsk
         $86_himmelsdorf_winter: { size: 70 },  // Winter Himmelsdorf
         $87_ruinberg_on_fire:   { size: 80 },  // Ruinberg on Fire
+        $99_himmelball:         { size: 70 },  //
         __end__: null
     }
 
