@@ -144,7 +144,7 @@ class wot.VehicleMarkersManager.XvmBase
 
     public function formatDynamicAlpha(format:String, curHealth:Number):Number
     {
-        if (!format)
+        if (format == null)
             return 100;
 
         if (isFinite(format))
@@ -153,7 +153,7 @@ class wot.VehicleMarkersManager.XvmBase
         format = formatDynamicText(format, curHealth).split("#").join("0x");
 
         var n = isFinite(format) ? Number(format) : 100;
-        return (n <= 0) ? 1 : (n > 100) ? 100 : n;
+        return (n <= 0) ? 0 : (n > 100) ? 100 : n;
     }
 
     /**
