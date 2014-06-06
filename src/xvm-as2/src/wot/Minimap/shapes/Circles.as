@@ -50,6 +50,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
 
+        stereoscope_exists = stereoscope_enabled = cfg._internal.view_stereoscope == true;
+
         if (dynamicCircles.length > 0)
         {
             onViewRangeChanged();
@@ -217,6 +219,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         // Calculations
         var ci = cfg._internal;
+
         var view_distance_vehicle:Number = ci.view_distance_vehicle;
         var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
         var vent:Number = ci.view_ventilation ? 5 : 0;
