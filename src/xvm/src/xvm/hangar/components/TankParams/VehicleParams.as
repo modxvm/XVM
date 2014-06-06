@@ -20,24 +20,28 @@ package xvm.hangar.components.TankParams
             var list:WgScrollingList = params.list;
 
             var dp:DataProvider = list.dataProvider as DataProvider;
-            if (dp[dp.length - 2] is ParamsVO)
+            if (dp[dp.length - 2].text != "xvm_vr")
             {
                 var lastItem:Object = dp.pop();
                 var label:String = Locale.get("Actual view distance");
-                var p:String = App.utils.locale.integer(vr.view_distance);
+                var param:String = App.utils.locale.integer(vr.view_distance);
                 if (vr.stereoscope_distance > 0)
                 {
-                    p += " / " + App.utils.locale.integer(vr.stereoscope_distance);
+                    param += " / " + App.utils.locale.integer(vr.stereoscope_distance);
                     label += " / " + Locale.get("with stereoscope");
                 }
                 label = "<font color='#B4A983'>" + label + "</font> <font color='#9F9260'>" + Locale.get("(m)") + "</font>";
 
                 list.height += 28;
 
-                dp.push( { label: label, param: p, selected: false } );
+                dp.push(new ParamsVO({ text: "xvm_vr", param: param, selected: true }));
 
                 dp.push(lastItem);
                 dp.invalidate();
+                list.validateNow();
+
+                var renderer:TankParam = list.getRendererAt(list.rowCount - 2) as TankParam;
+                renderer.tfField.htmlText = label;
             }
         }
 

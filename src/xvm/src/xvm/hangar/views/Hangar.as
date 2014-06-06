@@ -40,7 +40,6 @@ package xvm.hangar.views
         private function initVehicleParams():void
         {
             ExternalInterface.addCallback(Cmd.RESPOND_UPDATECURRENTVEHICLE, onUpdateCurrentVehicle);
-            page.params.list.itemRenderer = TankParamItemRenderer;
         }
 
         private function onUpdateCurrentVehicle(json_str:String):void

@@ -19,7 +19,7 @@ import net.wg.gui.login.impl.*; LoginPage;
 import net.wg.gui.lobby.*; LobbyPage;
 import net.wg.gui.lobby.dialogs.*; SimpleDialog;
 import net.wg.gui.lobby.header.*; TutorialControl;
-import net.wg.gui.lobby.hangar.Hangar; Hangar;
+import net.wg.gui.lobby.hangar.*; Hangar; TankParam;
 import net.wg.gui.lobby.hangar.crew.*; Crew; RecruitRendererVO; CrewItemRenderer;
 import net.wg.gui.lobby.battleloading.*; BattleLoading; PlayerItemRenderer;
 import net.wg.gui.lobby.battleResults.*; BattleResults; CommonStats; ProgressElement;
@@ -60,9 +60,6 @@ CompanyDropItemRendererUI;
 //CheckBox; CheckBoxFilter; CheckBoxTankers; IconText; LabelControl; NumericStepper;
 //RadioButton; RedButton; Slider; TextFieldShort; TextInput; UILoaderAlt; UILoaderCut;
 ListItemRedererImageText; DropDownImageText;
-
-// hangar.swf
-TankParam;
 
 // nodesLib.swf
 NationTreeNodeSkinned;

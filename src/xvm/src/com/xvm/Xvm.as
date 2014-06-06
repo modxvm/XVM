@@ -69,7 +69,6 @@ package com.xvm
                     "squadWindow.swf",              // xvm-squad
                     "battleResults.swf",            // xvm-hangar
                     "battleLoading.swf",            // xvm-hangar
-                    "hangar.swf",                   // xvm-hangar
                     "TankCarousel.swf",             // xvm-tcarousel
                     "nodesLib.swf",                 // xvm-treeview
                     "serviceMessageComponents.swf", // xvm-svcmsg
