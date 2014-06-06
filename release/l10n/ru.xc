@@ -93,6 +93,9 @@
     // Vehicle Params
     "Actual view distance": "Расчетный обзор",
     "with stereoscope": "со стереотрубой",
+    "Actual gun reload time": "Расчетное время перезарядки орудия",
+    "Actual radio range": "Расчетная дальность связи",
+    "(sec)": "(сек)",
     "(m)": "(м)",
 
     // Squad

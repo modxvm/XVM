@@ -93,6 +93,9 @@
     // Vehicle Params
     "Actual view distance": "Actual view distance",
     "with stereoscope": "with stereoscope",
+    "Actual gun reload time": "Actual gun reload time",
+    "Actual radio range": "Actual radio range",
+    "(sec)": "(sec)",
     "(m)": "(m)",
 
     // Squad

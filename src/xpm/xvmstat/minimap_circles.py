@@ -19,15 +19,18 @@ class _MinimapCircles(object):
         self.crew = []
         self.view_distance_vehicle = 0
         self.base_commander_skill = 100.0
+        self.base_radioman_skill = 0.0
+        self.base_gunners_skill = 0.0
         self.brothers_in_arms = False
         self.stereoscope = False
         self.ventilation = False
+        self.coated_optics = False
+        self.rammer = False
         self.consumable = False
         self.commander_eagleEye = 0.0
         self.radioman_finder = 0.0
-        self.is_commander_radioman = False
+        self.radioman_inventor = 0.0
         self.camouflage = []
-        self.coated_optics = False
 
     def updateCurrentVehicle(self, config):
         #debug('updateCurrentVehicle')
@@ -52,7 +55,9 @@ class _MinimapCircles(object):
         # Search skills and Brothers In Arms
         self.brothers_in_arms = True
         self.camouflage = []
-        radioman_present = next((True for item in self.crew if item['name'] == 'radioman'), False)
+        radioman_present = next((True for item in self.crew if 'radioman' in item['name']), False)
+        gunners_count = 0
+
         for crew_item in self.crew:
             name = crew_item['name']
             data = crew_item['data']
@@ -60,6 +65,15 @@ class _MinimapCircles(object):
 
             if name == 'commander':
                 self.base_commander_skill = data['level']
+
+            if 'radioman' in name:
+                skill = data['level']
+                if self.base_radioman_skill < skill:
+                    self.base_radioman_skill = skill
+
+            if 'gunner' in name:
+                self.base_gunners_skill += data['level']
+                gunners_count += 1
 
             if 'commander_eagleEye' in skills:
                 skill = skills['commander_eagleEye']
@@ -70,17 +84,25 @@ class _MinimapCircles(object):
                 skill = skills['radioman_finder']
                 if self.radioman_finder < skill:
                     self.radioman_finder = skill
-                    self.is_commander_radioman = name == 'commander'
+
+            if 'radioman_inventor' in skills and (not radioman_present or name != 'commander'):
+                skill = skills['radioman_inventor']
+                if self.radioman_inventor < skill:
+                    self.radioman_inventor = skill
 
             self.camouflage.append({'name':name, 'skill':skills.get('camouflage', 0)})
 
             if 'brotherhood' not in skills or skills['brotherhood'] != 100:
                 self.brothers_in_arms = False
 
+        if gunners_count > 0:
+            self.base_gunners_skill /= gunners_count;
+
         debug('  base_commander_skill: %.0f' % self.base_commander_skill)
+        debug('  base_radioman_skill: %.0f' % self.base_radioman_skill)
+        debug('  base_gunners_skill: %.0f' % self.base_gunners_skill)
         debug('  commander_eagleEye: %d' % self.commander_eagleEye)
         debug('  radioman_finder: %d' % self.radioman_finder)
-        debug('  is_commander_radioman: %s' % str(self.is_commander_radioman))
         debug('  camouflage: %s' % str(self.camouflage))
         debug('  brothers_in_arms: %s' % str(self.brothers_in_arms))
 
@@ -92,6 +114,14 @@ class _MinimapCircles(object):
         self.ventilation = self._isOptionalEquipped('improvedVentilation')
         debug('  ventilation: %s' % str(self.ventilation))
 
+        # Check for Coated Optics
+        self.coated_optics = self._isOptionalEquipped('coatedOptics')
+        debug('  coated_optics: %s' % str(self.coated_optics))
+
+        # Check for rammer
+        self.rammer = self._isOptionalEquipped('Rammer')
+        debug('  rammer: %s' % str(self.rammer))
+
         # Check for Consumable
         self.consumable = self._isConsumableEquipped([
             'chocolate',
@@ -102,10 +132,6 @@ class _MinimapCircles(object):
             'ration_japan',
             'ration_uk'])
         debug('  consumable: %s' % str(self.consumable))
-
-        # Check for Coated Optics
-        self.coated_optics = self._isOptionalEquipped('coatedOptics')
-        debug('  coated_optics: %s' % str(self.coated_optics))
 
         self.updateConfig(self.item.descriptor, config)
 
@@ -137,17 +163,20 @@ class _MinimapCircles(object):
 
         # Set values
         cfg['_internal'] = {
+            'base_commander_skill': self.base_commander_skill,
+            'base_radioman_skill': self.base_radioman_skill,
+            'base_gunners_skill': self.base_gunners_skill,
             'view_distance_vehicle': self.view_distance_vehicle,
-            'view_base_commander_skill': self.base_commander_skill,
             'view_brothers_in_arms': self.brothers_in_arms,
             'view_stereoscope': self.stereoscope,
             'view_ventilation': self.ventilation,
+            'view_coated_optics': self.coated_optics,
+            'view_rammer': self.rammer,
             'view_consumable': self.consumable,
             'view_commander_eagleEye': self.commander_eagleEye,
             'view_radioman_finder': self.radioman_finder,
-            'view_is_commander_radioman': self.is_commander_radioman,
+            'view_radioman_inventor': self.radioman_inventor,
             'view_camouflage': self.camouflage,
-            'view_coated_optics': self.coated_optics,
             'artillery_range': artillery_range,
             'shell_range': shell_range,
         }

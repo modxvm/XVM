@@ -225,11 +225,11 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         var vent:Number = ci.view_ventilation ? 5 : 0;
         var cons:Number = ci.view_consumable ? 10 : 0;
 
-        var K:Number = ci.view_base_commander_skill + bia + vent + cons;
+        var K:Number = ci.base_commander_skill + bia + vent + cons;
         var Kcom:Number = K / 10.0;
         var Kee = ci.view_commander_eagleEye <= 0 ? 0 : ci.view_commander_eagleEye + bia + vent + cons;
-        var Krf = ci.view_radioman_finder <= 0 ? 0 : ci.view_radioman_finder + bia + vent + cons + (ci.view_is_commander_radioman == true ? 0 : Kcom);
-        //var M = ci.view_camouflage <= 0 ? 0 : ci.view_camouflage + bia + vent + cons + (ci.view_is_commander_camouflage == true ? 0 : Kcom);
+        var Krf = ci.view_radioman_finder <= 0 ? 0 : ci.view_radioman_finder + bia + vent + cons + (ci.base_radioman_skill > 0 ? KCom : 0);
+        //var M = ci.view_camouflage <= 0 ? 0 : ci.view_camouflage + bia + vent + cons;
 
         if (destroyedCrew["commander"])
             K = 0;

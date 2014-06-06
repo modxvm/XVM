@@ -51,6 +51,10 @@ package xvm.hangar.views
                     Config.config.minimap.circles._internal[n] = data[n];
 
                 VehicleParams.updateVehicleParams(page.params);
+                App.utils.scheduler.envokeInNextFrame(function():void
+                {
+                    VehicleParams.updateVehicleParams(page.params);
+                });
             }
             catch (ex:Error)
             {
