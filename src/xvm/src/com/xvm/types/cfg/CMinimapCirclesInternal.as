@@ -8,7 +8,7 @@ package com.xvm.types.cfg
     {
         public var base_commander_skill:Number;
         public var base_radioman_skill:Number;
-        public var base_gunners_skill:Number;
+        public var base_loaders_skill:Number;
         public var view_distance_vehicle:Number;
         public var view_brothers_in_arms:Boolean;
         public var view_stereoscope:Boolean;

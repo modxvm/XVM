@@ -20,7 +20,7 @@ class _MinimapCircles(object):
         self.view_distance_vehicle = 0
         self.base_commander_skill = 100.0
         self.base_radioman_skill = 0.0
-        self.base_gunners_skill = 0.0
+        self.base_loaders_skill = 0.0
         self.brothers_in_arms = False
         self.stereoscope = False
         self.ventilation = False
@@ -56,7 +56,7 @@ class _MinimapCircles(object):
         self.brothers_in_arms = True
         self.camouflage = []
         radioman_present = next((True for item in self.crew if 'radioman' in item['name']), False)
-        gunners_count = 0
+        loaders_count = 0
 
         for crew_item in self.crew:
             name = crew_item['name']
@@ -71,9 +71,9 @@ class _MinimapCircles(object):
                 if self.base_radioman_skill < skill:
                     self.base_radioman_skill = skill
 
-            if 'gunner' in name:
-                self.base_gunners_skill += data['level']
-                gunners_count += 1
+            if 'loader' in name:
+                self.base_loaders_skill += data['level']
+                loaders_count += 1
 
             if 'commander_eagleEye' in skills:
                 skill = skills['commander_eagleEye']
@@ -95,12 +95,12 @@ class _MinimapCircles(object):
             if 'brotherhood' not in skills or skills['brotherhood'] != 100:
                 self.brothers_in_arms = False
 
-        if gunners_count > 0:
-            self.base_gunners_skill /= gunners_count;
+        if loaders_count > 0:
+            self.base_loaders_skill /= loaders_count;
 
         debug('  base_commander_skill: %.0f' % self.base_commander_skill)
         debug('  base_radioman_skill: %.0f' % self.base_radioman_skill)
-        debug('  base_gunners_skill: %.0f' % self.base_gunners_skill)
+        debug('  base_loaders_skill: %.0f' % self.base_loaders_skill)
         debug('  commander_eagleEye: %d' % self.commander_eagleEye)
         debug('  radioman_finder: %d' % self.radioman_finder)
         debug('  camouflage: %s' % str(self.camouflage))
@@ -165,7 +165,7 @@ class _MinimapCircles(object):
         cfg['_internal'] = {
             'base_commander_skill': self.base_commander_skill,
             'base_radioman_skill': self.base_radioman_skill,
-            'base_gunners_skill': self.base_gunners_skill,
+            'base_loaders_skill': self.base_loaders_skill,
             'view_distance_vehicle': self.view_distance_vehicle,
             'view_brothers_in_arms': self.brothers_in_arms,
             'view_stereoscope': self.stereoscope,
@@ -192,10 +192,9 @@ class _MinimapCircles(object):
         for tankman in barracks:
             for crewman in self.item.crew:
                 if crewman[1] is not None and crewman[1].invID == tankman.inventoryId:
-                    factor = tankman.descriptor.efficiencyOnVehicle(self.item.descriptor)
-
+                    (factor, addition) = tankman.descriptor.efficiencyOnVehicle(self.item.descriptor)
                     crew_member = {
-                        'level': tankman.descriptor.roleLevel * factor[0],
+                        'level': tankman.roleLevel * factor,
                         'skill': {}
                     }
 
@@ -209,6 +208,7 @@ class _MinimapCircles(object):
                     for skill in skills:
                         crew_member['skill'][skill['name']] = skill['level']
 
+                    #debug(tankman.descriptor.role + " " + str(crew_member['level']))
                     self.crew.append({'name': tankman.descriptor.role, 'data': crew_member})
 
     def _isOptionalEquipped(self, optional_name):

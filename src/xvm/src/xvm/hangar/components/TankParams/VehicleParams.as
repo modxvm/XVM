@@ -119,8 +119,8 @@ package xvm.hangar.components.TankParams
         {
             var ci:CMinimapCirclesInternal = Config.config.minimap.circles._internal;
 
-            var skill:Number = ci.base_gunners_skill > 0 ? ci.base_gunners_skill : ci.base_commander_skill;
-            var cmd:Number = ci.base_gunners_skill > 0 ? ci.base_commander_skill * 0.1 : 0;
+            var skill:Number = ci.base_loaders_skill > 0 ? ci.base_loaders_skill : ci.base_commander_skill;
+            var cmd:Number = ci.base_loaders_skill > 0 ? ci.base_commander_skill * 0.1 : 0;
             var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
             var vent:Number = ci.view_ventilation ? 5 : 0;
             var cons:Number = ci.view_consumable ? 10 : 0;
