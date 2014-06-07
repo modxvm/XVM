@@ -1,6 +1,6 @@
 ﻿XVM-5.3.1-dev:
   * adaptation to WoT 0.9.1
-  * show actual view distance, gun reload time and radio range in the tank params in hangar
+  * show actual view range, gun reload time and signal range in the tank params in hangar
 
 XVM-5.3.0:
   [MAJOR UPDATES]
@@ -25,7 +25,7 @@ XVM-5.3.0:
   * dynamic circles on the minimap. Options:
       minimap/circles/artillery - maximum range of fire for artillery
       minimap/circles/shell - maximum range of shooting for autocannon and semi-automatic cannon
-      minimap/circles/view - view distance (dynamically changes when switching binocular telescope)
+      minimap/circles/view - view range (dynamically changes when switching binocular telescope)
       minimap/circles/major - removed, replaced with "view" section
     Omegaice's code was used for this component
   * new options in playersPanel for extra text fields

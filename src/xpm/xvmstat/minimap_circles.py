@@ -144,7 +144,7 @@ class _MinimapCircles(object):
         #debug(vars(descr))
         #debug(vars(descr.type))
 
-        # View Distance
+        # View Range
         if isReplay():
             self.view_distance_vehicle = descr.turret['circularVisionRadius']
 

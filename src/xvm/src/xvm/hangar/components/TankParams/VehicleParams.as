@@ -28,29 +28,28 @@ package xvm.hangar.components.TankParams
             // Reload time
             idx = getIndex(dp, "reloadTime");
             var v_reloadTime:String = App.utils.locale.float(getReloadTime(parseFloat(dp[idx].param)));
-            var l_reloadTime:String = "<font color='#B4A983'>" + Locale.get("Actual gun reload time") +
-                "</font> <font color='#9F9260'>" + Locale.get("(sec)") + "</font>";
+            var l_reloadTime:String =
+                "<font color='#B4A983'>" + Locale.get("gun_reload_time/actual") + " </font>" +
+                "<font color='#9F9260'>" + Locale.get("(sec)") + "</font>";
             dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_reloadTime", param: v_reloadTime, selected: true } ));
 
             // View range
             idx = getIndex(dp, "circularVisionRadius");
             var vr:Object = getViewRanges();
             var v_viewRange:String = App.utils.locale.integer(vr.view_distance);
-            var l_viewRange:String = Locale.get("Actual view distance");
+            var l_viewRange:String = ": " + Locale.get("view_range/base") + " / " + Locale.get("view_range/actual");
             if (vr.stereoscope_distance > 0)
             {
                 v_viewRange += " / " + App.utils.locale.integer(vr.stereoscope_distance);
-                l_viewRange += " / " + Locale.get("with stereoscope");
+                l_viewRange += " / " + Locale.get("view_range/stereoscope");
             }
-            l_viewRange = "<font color='#B4A983'>" + l_viewRange + "</font> <font color='#9F9260'>" + Locale.get("(m)") + "</font>";
-            dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_viewRange", param: v_viewRange, selected: true } ));
+            //dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_viewRange", param: v_viewRange, selected: true } ));
 
             // Radio range
             idx = getIndex(dp, "radioDistance");
             var v_radioRange:String = App.utils.locale.integer(getRadioRange(parseFloat(dp[idx].param)));
-            var l_radioRange:String = "<font color='#B4A983'>" + Locale.get("Actual radio range") +
-                "</font> <font color='#9F9260'>" + Locale.get("(m)") + "</font>";
-            dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_radioRange", param: v_radioRange, selected: true } ));
+            var l_radioRange:String = ": " + Locale.get("radio_range/base") + " / " + Locale.get("radio_range/actual");
+            //dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_radioRange", param: v_radioRange, selected: true } ));
 
             // draw
             dp.invalidate();
@@ -58,9 +57,21 @@ package xvm.hangar.components.TankParams
             list.validateNow();
 
             // fix text
+            var param:TankParam;
+
             (list.getRendererAt(getIndex(dp, "xvm_reloadTime")) as TankParam).tfField.htmlText = l_reloadTime;
-            (list.getRendererAt(getIndex(dp, "xvm_viewRange")) as TankParam).tfField.htmlText = l_viewRange;
-            (list.getRendererAt(getIndex(dp, "xvm_radioRange")) as TankParam).tfField.htmlText = l_radioRange;
+
+            //(list.getRendererAt(getIndex(dp, "xvm_viewRange")) as TankParam).tfField.htmlText = l_viewRange;
+            param = list.getRendererAt(getIndex(dp, "circularVisionRadius")) as TankParam;
+            param.paramField.htmlText += " / " + v_viewRange;
+            //Logger.add(param.tfField.htmlText);
+            param.tfField.htmlText = param.tfField.htmlText.split(" </FONT><FONT ").join(l_viewRange + " </FONT><FONT ");
+
+            //(list.getRendererAt(getIndex(dp, "xvm_radioRange")) as TankParam).tfField.htmlText = l_radioRange;
+            param = list.getRendererAt(getIndex(dp, "radioDistance")) as TankParam;
+            param.paramField.htmlText += " / " + v_radioRange;
+            //Logger.add(param.tfField.htmlText);
+            param.tfField.htmlText = param.tfField.htmlText.split(" </FONT><FONT ").join(l_radioRange + " </FONT><FONT ");
         }
 
         private static function getIndex(dp:DataProvider, text:String):Number
@@ -85,7 +96,7 @@ package xvm.hangar.components.TankParams
             var cons:Number = ci.view_consumable ? 10 : 0;
 
             var K:Number = ci.base_commander_skill + bia + vent + cons;
-            var Kcom:Number = K / 10.0;
+            var Kcom:Number = K * 0.1;
             var Kee:Number = ci.view_commander_eagleEye <= 0 ? 0 : ci.view_commander_eagleEye + bia + vent + cons;
             var Krf:Number = ci.view_radioman_finder <= 0 ? 0 : ci.view_radioman_finder + bia + vent + cons + (ci.base_radioman_skill > 0 ? Kcom : 0);
 
@@ -109,14 +120,15 @@ package xvm.hangar.components.TankParams
             var ci:CMinimapCirclesInternal = Config.config.minimap.circles._internal;
 
             var skill:Number = ci.base_gunners_skill > 0 ? ci.base_gunners_skill : ci.base_commander_skill;
-            var Kcmd:Number = ci.base_gunners_skill > 0 ? ci.base_commander_skill * 0.001 : 0;
-            var bia:Number = ci.view_brothers_in_arms ? 0.05 : 0;
-            var vent:Number = ci.view_ventilation ? 0.05 : 0;
-            var cons:Number = ci.view_consumable ? 0.1 : 0;
-            var Keq:Number = bia + vent + cons;
-            var Kram:Number = ci.view_rammer ? 0.1 : 0;
+            var cmd:Number = ci.base_gunners_skill > 0 ? ci.base_commander_skill * 0.1 : 0;
+            var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
+            var vent:Number = ci.view_ventilation ? 5 : 0;
+            var cons:Number = ci.view_consumable ? 10 : 0;
 
-            return 60.0 / (base_shoot_rate * skill * (1 + Kcmd) * (1 + Keq) * (1 + Kram) / 100);
+            var K:Number = (skill + cmd + bia + vent + cons) / 100.0;
+            var Kram:Number = ci.view_rammer ? 0.9 : 1.0;
+
+            return Kram * 60.0 / (base_shoot_rate * (0.57 + 0.43 * K));
         }
 
         // http://www.koreanrandom.com/forum/topic/15831-/
@@ -125,14 +137,15 @@ package xvm.hangar.components.TankParams
             var ci:CMinimapCirclesInternal = Config.config.minimap.circles._internal;
 
             var skill:Number = ci.base_radioman_skill > 0 ? ci.base_radioman_skill : ci.base_commander_skill;
-            var Kcmd:Number = ci.base_radioman_skill > 0 ? ci.base_commander_skill * 0.001 : 0;
-            var bia:Number = ci.view_brothers_in_arms ? 0.05 : 0;
-            var vent:Number = ci.view_ventilation ? 0.05 : 0;
-            var cons:Number = ci.view_consumable ? 0.1 : 0;
-            var Keq:Number = bia + vent + cons;
-            var Kinv:Number = ci.view_radioman_inventor * 0.002;
+            var cmd:Number = ci.base_radioman_skill > 0 ? ci.base_commander_skill * 0.1 : 0;
+            var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
+            var vent:Number = ci.view_ventilation ? 5 : 0;
+            var cons:Number = ci.view_consumable ? 10 : 0;
 
-            return base_radio_range * skill * (1 + Kcmd) * (1 + Keq) * (1 + Kinv) / 100;
+            var K:Number = (skill + cmd + bia + vent + cons) / 100.0;
+            var Kinv:Number = 1 + ci.view_radioman_inventor * 0.002;
+
+            return base_radio_range * (0.57 + 0.43 * K) * Kinv;
         }
     }
 
