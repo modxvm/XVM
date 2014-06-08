@@ -124,7 +124,7 @@ package xvm.hangar.components.TankParams
             var cons:Number = ci.view_consumable ? 10 : 0;
 
             var skill:Number = ci.base_loaders_skill > 0 ? ci.base_loaders_skill : ci.base_commander_skill;
-            var cmd:Number = ci.base_loaders_skill > 0 ? Math.round((ci.base_commander_skill + bia + vent) * 0.1) : 0;
+            var cmd:Number = ci.base_loaders_skill > 0 ? (ci.base_commander_skill + bia + vent) * 0.1 : 0;
 
             var K:Number = (skill + cmd + bia + vent + cons) / 100.0;
             var Kram:Number = ci.view_rammer ? 0.9 : 1.0;
@@ -142,7 +142,7 @@ package xvm.hangar.components.TankParams
             var cons:Number = ci.view_consumable ? 10 : 0;
 
             var skill:Number = ci.base_radioman_skill > 0 ? ci.base_radioman_skill : ci.base_commander_skill;
-            var cmd:Number = ci.base_loaders_skill > 0 ? Math.round((ci.base_commander_skill + bia + vent) * 0.1) : 0;
+            var cmd:Number = ci.base_loaders_skill > 0 ? (ci.base_commander_skill + bia + vent) * 0.1 : 0;
 
             var K:Number = (skill + cmd + bia + vent + cons) / 100.0;
             var Kinv:Number = 1 + ci.view_radioman_inventor * 0.002;
