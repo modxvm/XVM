@@ -119,18 +119,17 @@ package xvm.hangar.components.TankParams
         {
             var ci:CMinimapCirclesInternal = Config.config.minimap.circles._internal;
 
+            var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
+            var vent:Number = ci.view_ventilation ? 5 : 0;
+            var cons:Number = ci.view_consumable ? 10 : 0;
+
             var skill:Number = ci.base_loaders_skill > 0 ? ci.base_loaders_skill : ci.base_commander_skill;
-            var cmd:Number = ci.base_loaders_skill > 0 ? ci.base_commander_skill * 0.1 : 0;
+            var cmd:Number = ci.base_loaders_skill > 0 ? Math.round((ci.base_commander_skill + bia + vent) * 0.1) : 0;
 
-            var bia:Number = ci.view_brothers_in_arms ? 0.05 : 0;
-            var vent:Number = ci.view_ventilation ? 0.05 : 0;
-            var cons:Number = ci.view_consumable ? 0.1 : 0;
-
-            var K:Number = (skill + cmd) / 100.0;
-            var Keq:Number = 1 + bia + vent + cons;
+            var K:Number = (skill + cmd + bia + vent + cons) / 100.0;
             var Kram:Number = ci.view_rammer ? 0.9 : 1.0;
 
-            return Kram * 60.0 / (base_shoot_rate * (0.57 + 0.43 * K * Keq));
+            return Kram * 60.0 / (base_shoot_rate * (0.57 + 0.43 * K));
         }
 
         // http://www.koreanrandom.com/forum/topic/15831-/
@@ -138,17 +137,17 @@ package xvm.hangar.components.TankParams
         {
             var ci:CMinimapCirclesInternal = Config.config.minimap.circles._internal;
 
-            var skill:Number = ci.base_radioman_skill > 0 ? ci.base_radioman_skill : ci.base_commander_skill;
-            var cmd:Number = ci.base_radioman_skill > 0 ? ci.base_commander_skill * 0.1 : 0;
-            var bia:Number = ci.view_brothers_in_arms ? 0.05 : 0;
-            var vent:Number = ci.view_ventilation ? 0.05 : 0;
-            var cons:Number = ci.view_consumable ? 0.1 : 0;
+            var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
+            var vent:Number = ci.view_ventilation ? 5 : 0;
+            var cons:Number = ci.view_consumable ? 10 : 0;
 
-            var K:Number = (skill + cmd) / 100.0;
-            var Keq:Number = 1 + bia + vent + cons;
+            var skill:Number = ci.base_radioman_skill > 0 ? ci.base_radioman_skill : ci.base_commander_skill;
+            var cmd:Number = ci.base_loaders_skill > 0 ? Math.round((ci.base_commander_skill + bia + vent) * 0.1) : 0;
+
+            var K:Number = (skill + cmd + bia + vent + cons) / 100.0;
             var Kinv:Number = 1 + ci.view_radioman_inventor * 0.002;
 
-            return base_radio_range * (0.57 + 0.43 * K * Keq) * Kinv;
+            return base_radio_range * (0.57 + 0.43 * K) * Kinv;
         }
     }
 
