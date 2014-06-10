@@ -1,4 +1,4 @@
-﻿XVM-5.3.1-dev:
+﻿XVM-5.3.1:
   * adaptation to WoT 0.9.1
   * show actual view distance, gun reload time and radio range in the tank params in hangar
 
