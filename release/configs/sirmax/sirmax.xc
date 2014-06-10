@@ -1,9 +1,6 @@
 {
   "configVersion": "5.1.0",
   "def": {
-    //"standardMarkers": true,
-    "standardMarkers": false,
-
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
     "formatVehicle": "<font face='Consolas' size='11'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{c:tdv|#666666}}'>{{tdv%0.1f|---}}|<font color='{{c:e|#666666}}'>{{e|-}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
@@ -205,6 +202,11 @@
     "ussr-KV-1s": { "name": "квас", "short": "квс" }
   },
   //"texts": { "vtype": { "LT":  "ЛТ" } },
-  //"colors": ${"sirmax-colors.xc":"colors"},
+  "colors": {
+    "system": {
+      //"ally_alive":          "0x029CF5",
+      //"enemy_alive":         "0xFFBB28"
+    }
+  },
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
 }

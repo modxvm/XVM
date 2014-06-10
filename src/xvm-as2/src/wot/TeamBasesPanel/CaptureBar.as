@@ -1,12 +1,10 @@
 /**
  * @author ilitvinov
  */
-import com.xvm.Utils;
-import flash.filters.DropShadowFilter;
-import wot.TeamBasesPanel.CapBarModel.CapSpeed;
-import wot.TeamBasesPanel.CapBarModel.OneTankSpeed;
-import wot.TeamBasesPanel.CapConfig;
-import wot.TeamBasesPanel.Macro;
+import com.xvm.*;
+import flash.filters.*;
+import wot.TeamBasesPanel.CapBarModel.*;
+import wot.TeamBasesPanel.*;
 
 /**
  * Capture progress bar
@@ -88,6 +86,15 @@ class wot.TeamBasesPanel.CaptureBar
 
         m_oneTankSpeed = new OneTankSpeed();
         m_captured = false;
+
+        // Colorize capture bar
+        var type = wrapper.m_colorFeature == "green" ? "ally" : "enemy";
+        var color = Config.config.markers.useStandardMarkers
+            ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
+            : ColorsManager.getSystemColor(type, false);
+
+        GraphicsUtil.colorize(wrapper.m_bgMC, color, 1);
+        GraphicsUtil.colorize(wrapper.captureProgress.m_barMC, color, 1);
     }
 
    /**
@@ -97,6 +104,8 @@ class wot.TeamBasesPanel.CaptureBar
     */
     public function start(startPoints:Number, capColor:String):Void
     {
+        //Logger.addObject(wrapper, 2);
+
         /** Ugly hack to allow one tick earlier speed calculation */
         m_startPoints = startPoints;
 
