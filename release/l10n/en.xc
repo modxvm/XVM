@@ -91,10 +91,12 @@
     "PutClassCrew": "Put same class crew",
 
     // Vehicle Params
-    "Actual view distance": "Actual view distance",
-    "with stereoscope": "with stereoscope",
-    "Actual gun reload time": "Actual gun reload time",
-    "Actual radio range": "Actual radio range",
+    "gun_reload_time/actual": "Actual gun reload time",
+    "view_range/base": "base",
+    "view_range/actual": "actual",
+    "view_range/stereoscope": "with stereoscope",
+    "radio_range/base": "base",
+    "radio_range/actual": "actual",
     "(sec)": "(sec)",
     "(m)": "(m)",
 
@@ -124,7 +126,7 @@
     "token/bad_token": "Bad token.\n{{l10n:token/notify_xvm_site}}",
     "token/blocked": "Status: <font color='#FF0000'>Blocked</font><br>{{l10n:token/notify_xvm_site}}",
     "token/inactive": "Status: <font color='#FFFF00'>Inactive</font><br>{{l10n:token/notify_xvm_site}}",
-    "token/active": "Status: <font color='#00FF00'>Active</font>",
+    "token/active": "Status:<tab/><font color='#00FF00'>Active</font>",
     "token/time_left": "Time left:<tab/><font color='#EEEEEE'>{0}d. {1}h. {2}m.</font>",
     "token/time_left_warn": "Time left:<tab/><font color='#EEEE00'>{0}d. {1}h. {2}m.</font>",
     "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",

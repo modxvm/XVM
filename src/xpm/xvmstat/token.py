@@ -71,7 +71,7 @@ def _getXvmStatTokenData():
         tdata = _tdataPrev
 
     type = SystemMessages.SM_TYPE.Warning
-    msg = '<textformat tabstops="[120]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">'
+    msg = '<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">'
     msg += '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
     if tdata is None:
         msg += '{{l10n:token/network_error}}'
@@ -91,7 +91,7 @@ def _getXvmStatTokenData():
         mins_left = int((e - s) / 60) % 60
         token_name = 'time_left' if days_left >= 3 else 'time_left_warn'
         msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
-        #msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
+        msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
     else:
         type = SystemMessages.SM_TYPE.Error
         msg += '{{l10n:token/unknown_status}}\n%s' % simplejson.dumps(tdata)

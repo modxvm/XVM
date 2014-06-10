@@ -171,10 +171,12 @@ package com.xvm
             "PutClassCrew": "Экипаж того же класса",
 
             // Vehicle Params
-            "Actual view distance": "Расчетный обзор",
-            "with stereoscope": "со стереотрубой",
-            "Actual gun reload time": "Расчетное время перезарядки орудия",
-            "Actual radio range": "Расчетная дальность связи",
+            "gun_reload_time/actual": "Расчетное время перезарядки орудия",
+            "view_range/base": "базовый",
+            "view_range/actual": "расчетный",
+            "view_range/stereoscope": "со стереотрубой",
+            "radio_range/base": "базовая",
+            "radio_range/actual": "расчетная",
             "(sec)": "(сек)",
             "(m)": "(м)",
 
@@ -237,6 +239,16 @@ package com.xvm
             "PutBestCrew": "Put best crew",
             "PutClassCrew": "Put same class crew",
 
+            // Vehicle Params
+            "gun_reload_time/actual": "Actual gun reload time",
+            "view_range/base": "base",
+            "view_range/actual": "actual",
+            "view_range/stereoscope": "with stereoscope",
+            "radio_range/base": "base",
+            "radio_range/actual": "actual",
+            "(sec)": "(sec)",
+            "(m)": "(m)",
+
             // Squad
             "ussr": "USSR",
             "germany": "Germany",
@@ -254,7 +266,7 @@ package com.xvm
             "token/bad_token": "Bad token.\n{{l10n:token/notify_xvm_site}}",
             "token/blocked": "Status: <font color='#FF0000'>Blocked</font><br>{{l10n:token/notify_xvm_site}}",
             "token/inactive": "Status: <font color='#FFFF00'>Inactive</font><br>{{l10n:token/notify_xvm_site}}",
-            "token/active": "Status: <font color='#00FF00'>Active</font>",
+            "token/active": "Status:<tab/><font color='#00FF00'>Active</font>",
             "token/time_left": "Time left:<tab/><font color='#EEEEEE'>{0}d. {1}h. {2}m.</font>",
             "token/time_left_warn": "Time left:<tab/><font color='#EEEE00'>{0}d. {1}h. {2}m.</font>",
             "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",

@@ -91,10 +91,12 @@
     "PutClassCrew": "Экипаж того же класса",
 
     // Vehicle Params
-    "Actual view distance": "Расчетный обзор",
-    "with stereoscope": "со стереотрубой",
-    "Actual gun reload time": "Расчетное время перезарядки орудия",
-    "Actual radio range": "Расчетная дальность связи",
+    "gun_reload_time/actual": "Расчетное время перезарядки орудия",
+    "view_range/base": "базовый",
+    "view_range/actual": "расчетный",
+    "view_range/stereoscope": "со стереотрубой",
+    "radio_range/base": "базовая",
+    "radio_range/actual": "расчетная",
     "(sec)": "(сек)",
     "(m)": "(м)",
 
@@ -124,7 +126,7 @@
     "token/bad_token": "Неверный токен.\n{{l10n:token/notify_xvm_site}}",
     "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>\n{{l10n:token/notify_xvm_site}}",
     "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>\n{{l10n:token/notify_xvm_site}}",
-    "token/active": "Статус:<tab><font color='#00FF00'>Активен</font>",
+    "token/active": "Статус:<tab/><font color='#00FF00'>Активен</font>",
     "token/time_left": "Осталось:<tab/><font color='#EEEEEE'>{0}д. {1}ч. {2}м.</font>",
     "token/time_left_warn": "Осталось:<tab/><font color='#EEEE00'>{0}д. {1}ч. {2}м.</font>",
     "token/cnt": "Количество запросов:<tab/><font color='#EEEEEE'>{0}</font>",
