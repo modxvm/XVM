@@ -80,9 +80,9 @@ def _getTiers(level, cls, key):
     if level == 4 and cls == 'heavyTank':
         return (4, 5)
 
-    # LT: (=T4 max+4) & (>T4 min+1 max+4) & (>T7 min+1 max=11)
+    # LT: (=T4 max+4) & (>T4 min+1 max+3) & (>T7 min+1 max=11)
     if level >= 4 and cls == 'lightTank':
-        return (level if level == 4 else level + 1, 11 if level > 7 else level + 4)
+        return (level if level == 4 else level + 1, 11 if level > 7 else level + 3)
 
     # default: (<T3 max+1) & (>=T3 max+2) & (>T9 max=11)
     return (level, level + 1 if level < 3 else 11 if level > 9 else level + 2)
