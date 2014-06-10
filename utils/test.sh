@@ -18,7 +18,7 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=test.wotreplay
 #SAMPLE_REPLAY=test1.wotreplay
 #SAMPLE_REPLAY=test2.wotreplay
-SAMPLE_REPLAY=test3.wotreplay
+#SAMPLE_REPLAY=test3.wotreplay
 #SAMPLE_REPLAY=cw.wotreplay
 
 cd "${WOT_DIRECTORY}"
