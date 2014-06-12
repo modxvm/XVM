@@ -70,6 +70,10 @@ package com.xvm
         public static const UICOLOR_GOLD2:uint = 0xCBAD78;
         public static const UICOLOR_BLUE:uint = 0x408CCF;
 
+        public static const UICOLOR_TEXT1:uint = 0xE1DDCE;
+        public static const UICOLOR_TEXT2:uint = 0xB4A983;
+        public static const UICOLOR_TEXT3:uint = 0x9F9260;
+
         // ColorPalette
         public static const C_WHITE:String = "0xFCFCFC";
         public static const C_RED:String = "0xFE0E00";

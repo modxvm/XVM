@@ -40,6 +40,11 @@ package com.xvm.utils
             return defaultValue ? value != "false" : value == "true";
         }
 
+        public static function toHtmlColor(value:Number):String
+        {
+            return "#" + StringUtils.leftPad(value.toString(16), 6, '0');
+        }
+
         /**
          * @param format http://php.net/date
          * https://code.google.com/p/as3-php-date/wiki/Documentation

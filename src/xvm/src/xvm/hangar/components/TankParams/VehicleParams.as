@@ -4,6 +4,7 @@
 package xvm.hangar.components.TankParams
 {
     import com.xvm.*;
+    import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.*;
@@ -13,6 +14,7 @@ package xvm.hangar.components.TankParams
     {
         public static function updateVehicleParams(params:Params):void
         {
+            Logger.add("updateVehicleParams");
             //Logger.addObject(Config.config.minimap.circles._internal);
 
             var list:WgScrollingList = params.list;
@@ -20,18 +22,18 @@ package xvm.hangar.components.TankParams
             //Logger.addObject(dp, 2);
             var len:Number = dp.length;
 
-            if (getIndex(dp, "xvm_reloadTime") >= 0)
-                return;
-
             var idx:Number;
 
             // Reload time
             idx = getIndex(dp, "reloadTime");
             var v_reloadTime:String = App.utils.locale.float(getReloadTime(parseNumber(dp[idx].param)));
+            var reloadTimeColor1:String = Utils.toHtmlColor(dp[idx].selected ? Defines.UICOLOR_TEXT1 : Defines.UICOLOR_TEXT2);
+            var reloadTimeColor2:String = Utils.toHtmlColor(dp[idx].selected ? Defines.UICOLOR_TEXT2 : Defines.UICOLOR_TEXT3);
             var l_reloadTime:String =
-                "<font color='#B4A983'>" + Locale.get("gun_reload_time/actual") + " </font>" +
-                "<font color='#9F9260'>" + Locale.get("(sec)") + "</font>";
-            dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_reloadTime", param: v_reloadTime, selected: true } ));
+                "<font color='" + reloadTimeColor1 + "'>" + Locale.get("gun_reload_time/actual") + " </font>" +
+                "<font color='" + reloadTimeColor2 + "'>" + Locale.get("(sec)") + "</font>";
+            if (getIndex(dp, "xvm_reloadTime") < 0)
+                dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_reloadTime", param: v_reloadTime, selected: false } ));
 
             // View range
             idx = getIndex(dp, "circularVisionRadius");
@@ -52,8 +54,8 @@ package xvm.hangar.components.TankParams
             //dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_radioRange", param: v_radioRange, selected: true } ));
 
             // draw
+            list.height = 28 * dp.length;
             dp.invalidate();
-            list.height += 28 * 1;
             list.validateNow();
 
             // fix text

@@ -138,6 +138,9 @@ def PreDefinedHostList_onPingPerformed(result):
     from predefined_hosts import g_preDefinedHosts
     g_preDefinedHosts._PreDefinedHostList__onPingPerformed(result)
 
+def AmmunitionPanel_highlightParams(self, type):
+    #debug('> AmmunitionPanel_highlightParams')
+    g_xvm.updateTankParams()
 
 #####################################################################
 # Register events
@@ -173,5 +176,8 @@ def _RegisterEvents():
 
     from predefined_hosts import g_preDefinedHosts
     OverrideMethod(g_preDefinedHosts, 'autoLoginQuery', PreDefinedHostList_autoLoginQuery)
+
+    from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
+    RegisterEvent(AmmunitionPanel, 'highlightParams', AmmunitionPanel_highlightParams)
 
 BigWorld.callback(0, _RegisterEvents)
