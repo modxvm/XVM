@@ -49,9 +49,11 @@ class _Ping(object):
     def _do_ping(self):
         global request_sent
         if request_sent:
+            BigWorld.callback(0, self._do_ping)
             return
 
         try:
+            #debug("ping: start")
             request_sent = True
             peripheries = map((lambda host: host['url']), self.hosts)
             BigWorld.WGPinger.setOnPingCallback(self._onPingPerformed)
@@ -62,6 +64,7 @@ class _Ping(object):
     def _onPingPerformed(self, result):
         #log("_onPingPerformed")
         try:
+            #debug("ping: end")
             try:
                 BigWorld.WGPinger.clearOnPingCallback()
             except:
@@ -75,12 +78,11 @@ class _Ping(object):
                 name = next(x['name'] for x in self.hosts if x['url'] == url)
                 res[name] = value if name is not None else '?'
 
-            self._respond(res)
-
             if self.preheat > 0:
                 self.preheat -= 1
-                BigWorld.callback(1, self._do_ping)
+                BigWorld.callback(0, self._do_ping)
             else:
+                self._respond(res)
                 listeners = []
 
         except Exception, ex:

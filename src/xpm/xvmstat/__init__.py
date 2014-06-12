@@ -129,11 +129,13 @@ def PreDefinedHostList_autoLoginQuery(base, callback):
     if pinger_wg.request_sent:
         BigWorld.callback(0, lambda: PreDefinedHostList_autoLoginQuery(base, callback))
     else:
+        #debug('login ping: start')
         pinger_wg.request_sent = True
         BigWorld.WGPinger.setOnPingCallback(PreDefinedHostList_onPingPerformed)
         base(callback)
 
 def PreDefinedHostList_onPingPerformed(result):
+    #debug('login ping: end')
     pinger_wg.request_sent = False
     from predefined_hosts import g_preDefinedHosts
     g_preDefinedHosts._PreDefinedHostList__onPingPerformed(result)
