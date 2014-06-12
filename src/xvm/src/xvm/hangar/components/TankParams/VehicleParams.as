@@ -53,7 +53,7 @@ package xvm.hangar.components.TankParams
 
             // draw
             dp.invalidate();
-            list.height += 28 * 3;
+            list.height += 28 * 1;
             list.validateNow();
 
             // fix text

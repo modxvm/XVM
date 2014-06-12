@@ -14,7 +14,6 @@ from pprint import pprint
 import time
 
 import BigWorld
-import GUI
 from gui.shared import events
 
 from xpm import *
@@ -124,6 +123,22 @@ def onArenaCreated():
     #debug('> onArenaCreated')
     g_xvm.updateCurrentVehicle()
 
+def PreDefinedHostList_autoLoginQuery(base, callback):
+    #debug('> PreDefinedHostList_autoLoginQuery')
+    import pinger_wg
+    if pinger_wg.request_sent:
+        BigWorld.callback(0, lambda: PreDefinedHostList_autoLoginQuery(base, callback))
+    else:
+        pinger_wg.request_sent = True
+        BigWorld.WGPinger.setOnPingCallback(PreDefinedHostList_onPingPerformed)
+        base(callback)
+
+def PreDefinedHostList_onPingPerformed(result):
+    pinger_wg.request_sent = False
+    from predefined_hosts import g_preDefinedHosts
+    g_preDefinedHosts._PreDefinedHostList__onPingPerformed(result)
+
+
 #####################################################################
 # Register events
 
@@ -155,5 +170,8 @@ def _RegisterEvents():
 
     from PlayerEvents import g_playerEvents
     g_playerEvents.onArenaCreated += onArenaCreated
+
+    from predefined_hosts import g_preDefinedHosts
+    OverrideMethod(g_preDefinedHosts, 'autoLoginQuery', PreDefinedHostList_autoLoginQuery)
 
 BigWorld.callback(0, _RegisterEvents)

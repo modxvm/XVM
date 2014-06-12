@@ -28,7 +28,6 @@ from constants import *
 #############################
 
 """
-NOTE: BigWorld.WGPinger can crash client, and it is blocking operation. Don't use it.
 NOTE: ICMP requires root privileges. Don't use it.
 """
 class _Ping(object):

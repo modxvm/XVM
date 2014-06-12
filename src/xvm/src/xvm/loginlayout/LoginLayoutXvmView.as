@@ -16,7 +16,7 @@ package xvm.loginlayout
         {
             super(view);
         }
-        
+
         public function get page():LoginPage
         {
             return super.view as LoginPage;
