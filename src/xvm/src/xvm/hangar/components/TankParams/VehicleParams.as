@@ -27,7 +27,7 @@ package xvm.hangar.components.TankParams
 
             // Reload time
             idx = getIndex(dp, "reloadTime");
-            var v_reloadTime:String = App.utils.locale.float(getReloadTime(parseFloat(dp[idx].param)));
+            var v_reloadTime:String = App.utils.locale.float(getReloadTime(parseNumber(dp[idx].param)));
             var l_reloadTime:String =
                 "<font color='#B4A983'>" + Locale.get("gun_reload_time/actual") + " </font>" +
                 "<font color='#9F9260'>" + Locale.get("(sec)") + "</font>";
@@ -47,7 +47,7 @@ package xvm.hangar.components.TankParams
 
             // Radio range
             idx = getIndex(dp, "radioDistance");
-            var v_radioRange:String = App.utils.locale.integer(getRadioRange(parseFloat(dp[idx].param)));
+            var v_radioRange:String = App.utils.locale.integer(getRadioRange(parseNumber(dp[idx].param)));
             var l_radioRange:String = ": " + Locale.get("radio_range/base") + " / " + Locale.get("radio_range/actual");
             //dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_radioRange", param: v_radioRange, selected: true } ));
 
@@ -83,6 +83,13 @@ package xvm.hangar.components.TankParams
                     return i;
             }
             return -1;
+        }
+
+        private static function parseNumber(str:String):Number
+        {
+            str = str.split(" ").join("");
+            str = str.split(",").join(".");
+            return parseFloat(str);
         }
 
         private static function getViewRanges():Object
