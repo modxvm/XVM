@@ -14,8 +14,8 @@ from xpm import *
 from constants import *
 from logger import *
 from gameregion import *
-#from pinger import *
-from pinger_wg import *
+from pinger import *
+#from pinger_wg import *
 from stats import getBattleStat, getBattleResultsStat, getUserData
 from dossier import getDossier
 from vehinfo import getVehicleInfoDataStr

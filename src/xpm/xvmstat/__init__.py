@@ -176,8 +176,9 @@ def _RegisterEvents():
     from PlayerEvents import g_playerEvents
     g_playerEvents.onArenaCreated += onArenaCreated
 
-    from predefined_hosts import g_preDefinedHosts
-    OverrideMethod(g_preDefinedHosts, 'autoLoginQuery', PreDefinedHostList_autoLoginQuery)
+    # enable for pinger_wg
+    #from predefined_hosts import g_preDefinedHosts
+    #OverrideMethod(g_preDefinedHosts, 'autoLoginQuery', PreDefinedHostList_autoLoginQuery)
 
     from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
     RegisterEvent(AmmunitionPanel, 'highlightParams', AmmunitionPanel_highlightParams)
