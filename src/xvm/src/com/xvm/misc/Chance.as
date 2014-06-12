@@ -328,7 +328,7 @@ package com.xvm.misc
             else
             {
                 var color:Number = GraphicsUtil.brightenColor(MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
-                htmlText += "<font color='#" + StringUtils.leftPad(color.toString(16), 6, '0') + "'>" + chance.percent + "%</font>";
+                htmlText += "<font color='" + Utils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
             }
 
             return htmlText;

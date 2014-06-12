@@ -297,7 +297,7 @@ package com.xvm.utils
             pdata["c:dmg-kind"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDmgKindValue(o.damageType); }
             // {{c:system}}
             pdata["c:system"] = function(o:MacrosFormatOptions):String {
-                return "#" + StringUtils.leftPad(MacrosUtil.GetSystemColor(o.entityName, o.dead, o.blowedUp).toString(16), 6, "0");
+                return Utils.toHtmlColor(MacrosUtil.GetSystemColor(o.entityName, o.dead, o.blowedUp));
             }
 
             // Alpha

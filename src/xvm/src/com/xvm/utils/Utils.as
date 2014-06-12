@@ -198,11 +198,11 @@ package com.xvm.utils
         /**
          * Create CSS
          */
-        public static function createCSS(className:String, color:Object,
+        public static function createCSS(className:String, color:Number,
             fontName:String, fontSize:Object, align:String, bold:Boolean, italic:Boolean):String
         {
             return "." + className + " {" +
-                "color:#" + StringUtils.leftPad(color.toString(16), 6, '0') + ";" +
+                "color:" + Utils.toHtmlColor(color) + ";" +
                 "font-family:\"" + fontName + "\";" +
                 "font-size:" + fontSize + ";" +
                 "text-align:" + align + ";" +
@@ -296,7 +296,7 @@ package com.xvm.utils
 
         public static function createTextStyleSheet(name:String, textFormat:TextFormat):StyleSheet
         {
-            return Utils.createStyleSheet(Utils.createCSS(name, textFormat.color,
+            return Utils.createStyleSheet(Utils.createCSS(name, textFormat.color as Number,
                 textFormat.font, textFormat.size, textFormat.align, textFormat.bold, textFormat.italic));
         }
 
