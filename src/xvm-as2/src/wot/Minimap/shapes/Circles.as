@@ -280,8 +280,10 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
                     break;
                 case "blindarea_standing":
                     if (stereoscope_exists)
+                    {
                         radius = stereoscope_distance;
-                    if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
+                        if (radius < 50) radius = 50; else if (radius > 445) radius = 445;
+                    }
                     break;
             }
 
