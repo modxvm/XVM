@@ -1,7 +1,10 @@
-﻿XVM-5.3.1:
+﻿XVM-5.3.2-dev:
+  * new options: captureBar/allyColor, captureBar/enemyColor
+
+XVM-5.3.1:
   * adaptation to WoT 0.9.1
   * show actual view range, gun reload time and signal range in the tank params in hangar
-
+  
 XVM-5.3.0:
   [MAJOR UPDATES]
   * new macros formatting (see readme-en.txt)

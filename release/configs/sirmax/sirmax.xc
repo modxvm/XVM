@@ -74,7 +74,10 @@
     "hideTeamTextFields": true
   },
   "captureBar": {
-    "enabled": true
+    //"enabled": false,
+    //"allyColor": "0xFFFF00",
+    //"enemyColor": "0x00FFFF",
+    "__stub__": null
   },
   "hotkeys": {
     "minimapZoom": { "enabled": false, "onHold": true, "keyCode": 17 }

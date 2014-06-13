@@ -9,6 +9,16 @@ class wot.TeamBasesPanel.CapConfig
         return Config.config.captureBar.enabled;
     }
 
+    public static function get allyColor():String
+    {
+        return Config.config.captureBar.allyColor;
+    }
+
+    public static function get enemyColor():String
+    {
+        return Config.config.captureBar.enemyColor;
+    }
+
     public static function get primaryTitleOffset():Number
     {
         return Config.config.captureBar.primaryTitleOffset;

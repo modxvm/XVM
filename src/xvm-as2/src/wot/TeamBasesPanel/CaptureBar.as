@@ -88,11 +88,21 @@ class wot.TeamBasesPanel.CaptureBar
         m_captured = false;
 
         // Colorize capture bar
-        var type = wrapper.m_colorFeature == "green" ? "ally" : "enemy";
-        var color = Config.config.markers.useStandardMarkers
-            ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
-            : ColorsManager.getSystemColor(type, false);
+        var color = wrapper.m_colorFeature == "green" ? CapConfig.allyColor : CapConfig.enemyColor;
 
+		//Logger.add("c: " + color);
+
+		if (color != null && isNaN(color))
+			color = parseInt(color);
+
+		if (color == null || isNaN(color))
+		{
+			var type = wrapper.m_colorFeature == "green" ? "ally" : "enemy";
+			color = Config.config.markers.useStandardMarkers
+				? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
+				: ColorsManager.getSystemColor(type, false);
+		}
+		
         GraphicsUtil.colorize(wrapper.m_bgMC, color, 1);
         GraphicsUtil.colorize(wrapper.captureProgress.m_barMC, color, 1);
     }

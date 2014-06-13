@@ -587,6 +587,8 @@ package com.xvm.misc
         {
             var c:CCaptureBar = new CCaptureBar();
             c.enabled = true;
+            c.allyColor = null;
+            c.enemyColor = null;
             c.primaryTitleOffset = 7;
             c.appendPlus = true;
             c.enemy = {

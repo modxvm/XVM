@@ -7,6 +7,10 @@
     // false - Disable.
     // false - отключить.
     "enabled": true,
+    // Ally and enemy bars colors (default: use system color)
+    // Цвета полос захвата союзников и противников (по умолчанию используется системный цвет)
+    "allyColor": null,
+    "enemyColor": null,
     // Upper textfield offset in case of big font size.
     // Смещение верхнего поля вверх на случай больших размеров шрифтов.
     "primaryTitleOffset": 7,
