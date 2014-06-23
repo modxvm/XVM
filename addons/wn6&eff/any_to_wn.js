@@ -17,16 +17,14 @@ if ( rating.indexOf("x")==0 )
     var text_rate   = "{{" + rating + "%2s|--}}"
 else
     var text_rate   = "{{" + rating + "%4d|----}}";
-var text_color      = "{{c:" + rating + "}}";
-var text_alpha      = "{{a:" + rating + "}}";
+var text_param      = "{{$1:" + rating + "$3}}";
 var text_option     = "\"xwnInCompany\": false";
 if ( rating.indexOf("wn")>=0 )
     text_option     = "\"xwnInCompany\": true";
 
 // заменяемый текст
 var find_rate   = /{{x?(wn|eff)[^}]*}}/g;
-var find_color  = /{{c:x?(wn|eff)[^}]*}}/g;
-var find_alpha  = /{{a:x?(wn|eff)[^}]*}}/g;
+var find_param  = /{{(a|c):x?(wn|eff)[^|}]*(|[^}]*)?}}/g;
 var find_option = /"xwnInCompany"[\s\t]*:[\s\t]*(true|false)/g;
 
 var fso = new ActiveXObject("Scripting.FileSystemObject");
@@ -34,15 +32,15 @@ var fileList = "";
 
 // Если не переданы файлы или папки в качестве аргументов, меняем во всех *.xc файлах в папке со скриптом
 if ( WScript.Arguments.length == arg0isRating() )
-	replaceInFolder( WScript.ScriptFullName.substr(0, (WScript.ScriptFullName.length - WScript.ScriptName.length)) )
+    replaceInFolder( WScript.ScriptFullName.substr(0, (WScript.ScriptFullName.length - WScript.ScriptName.length)) )
 else  // если переданы аргументы, кроме рейтинга, меняем в них
     for ( var i=arg0isRating(); i<WScript.Arguments.length; i++)
         // если аргумент- файл, меняем в нем
         if ( fso.FileExists(WScript.Arguments(i)) )
             replaceInFile( WScript.Arguments(i) )
-		// если аргумент- папка, меняем в файлах в ней
+        // если аргумент- папка, меняем в файлах в ней
         else if ( fso.FolderExists(WScript.Arguments(i)) )
-			replaceInFolder( WScript.Arguments(i) )
+            replaceInFolder( WScript.Arguments(i) )
 
 //WScript.Echo(fileList);
 // выходим из программы
@@ -80,8 +78,7 @@ function replaceInFile(file_name) {
 
         // меняем макросы, если они есть в строке
         line = line.replace(find_rate, text_rate);
-        line = line.replace(find_color, text_color);
-        line = line.replace(find_alpha, text_alpha);
+        line = line.replace(find_param, text_param);
         line = line.replace(find_option, text_option);
 
         // пишем строку в новый файл
@@ -97,10 +94,10 @@ function replaceInFile(file_name) {
 
 // функция замены рейтингов в папке
 function replaceInFolder(folder_name) {
-	var folderObj = fso.GetFolder(folder_name);
-	var folderC = new Enumerator(folderObj.files);
-	// меняем во всех *.xc, *.XC, *.xvmconf и *.XVMconf файлах внутри папки
-	for (; !folderC.atEnd(); folderC.moveNext())
-		if ( /(\.xc|\.XC|\.xvmconf|\.XVMconf)$/.test(folderC.item()) )
-			replaceInFile( ""+folderC.item() );
+    var folderObj = fso.GetFolder(folder_name);
+    var folderC = new Enumerator(folderObj.files);
+    // меняем во всех *.xc, *.XC, *.xvmconf и *.XVMconf файлах внутри папки
+    for (; !folderC.atEnd(); folderC.moveNext())
+        if ( /(\.xc|\.XC|\.xvmconf|\.XVMconf)$/.test(folderC.item()) )
+            replaceInFile( ""+folderC.item() );
 }
