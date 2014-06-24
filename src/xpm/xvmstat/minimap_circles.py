@@ -161,6 +161,9 @@ class _MinimapCircles(object):
         if shell_range >= 707:
             shell_range = 0
 
+        #log(descr.gun)
+        #log(descr.radio)
+
         # Set values
         cfg['_internal'] = {
             'base_commander_skill': self.base_commander_skill,
@@ -179,6 +182,8 @@ class _MinimapCircles(object):
             'view_camouflage': self.camouflage,
             'artillery_range': artillery_range,
             'shell_range': shell_range,
+            'base_gun_reload_time': descr.gun['reloadTime'],
+            'base_radio_distance': descr.radio['distance'],
         }
 
     # PRIVATE

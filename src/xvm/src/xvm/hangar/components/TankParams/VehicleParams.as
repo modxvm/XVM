@@ -14,7 +14,7 @@ package xvm.hangar.components.TankParams
     {
         public static function updateVehicleParams(params:Params):void
         {
-            Logger.add("updateVehicleParams");
+            //Logger.add("updateVehicleParams");
             //Logger.addObject(Config.config.minimap.circles._internal);
 
             var list:WgScrollingList = params.list;
@@ -26,7 +26,7 @@ package xvm.hangar.components.TankParams
 
             // Reload time
             idx = getIndex(dp, "reloadTime");
-            var v_reloadTime:String = App.utils.locale.float(getReloadTime(parseNumber(dp[idx].param)));
+            var v_reloadTime:String = App.utils.locale.float(getReloadTime());
             var reloadTimeColor1:String = Utils.toHtmlColor(dp[idx].selected ? Defines.UICOLOR_TEXT1 : Defines.UICOLOR_TEXT2);
             var reloadTimeColor2:String = Utils.toHtmlColor(dp[idx].selected ? Defines.UICOLOR_TEXT2 : Defines.UICOLOR_TEXT3);
             var l_reloadTime:String =
@@ -49,7 +49,7 @@ package xvm.hangar.components.TankParams
 
             // Radio range
             idx = getIndex(dp, "radioDistance");
-            var v_radioRange:String = App.utils.locale.integer(getRadioRange(parseNumber(dp[idx].param)));
+            var v_radioRange:String = App.utils.locale.integer(getRadioRange());
             var l_radioRange:String = ": " + Locale.get("radio_range/base") + " / " + Locale.get("radio_range/actual");
             //dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_radioRange", param: v_radioRange, selected: true } ));
 
@@ -124,7 +124,7 @@ package xvm.hangar.components.TankParams
         }
 
         // http://www.koreanrandom.com/forum/topic/15831-/
-        private static function getReloadTime(base_shoot_rate:Number):Number
+        private static function getReloadTime():Number
         {
             var ci:CMinimapCirclesInternal = Config.config.minimap.circles._internal;
 
@@ -133,16 +133,16 @@ package xvm.hangar.components.TankParams
             var cons:Number = ci.view_consumable ? 10 : 0;
 
             var skill:Number = ci.base_loaders_skill > 0 ? ci.base_loaders_skill : ci.base_commander_skill;
-            var cmd:Number = ci.base_loaders_skill > 0 ? (ci.base_commander_skill + bia + vent) * 0.1 : 0;
+            var cmd:Number = ci.base_loaders_skill > 0 ? (ci.base_commander_skill + bia + vent + cons) * 0.1 : 0;
 
             var K:Number = (skill + cmd + bia + vent + cons) / 100.0;
             var Kram:Number = ci.view_rammer ? 0.9 : 1.0;
 
-            return Kram * 60.0 / (base_shoot_rate * (0.57 + 0.43 * K));
+            return Kram * ci.base_gun_reload_time / (0.57 + 0.43 * K);
         }
 
         // http://www.koreanrandom.com/forum/topic/15831-/
-        private static function getRadioRange(base_radio_range:Number):Number
+        private static function getRadioRange():Number
         {
             var ci:CMinimapCirclesInternal = Config.config.minimap.circles._internal;
 
@@ -151,12 +151,12 @@ package xvm.hangar.components.TankParams
             var cons:Number = ci.view_consumable ? 10 : 0;
 
             var skill:Number = ci.base_radioman_skill > 0 ? ci.base_radioman_skill : ci.base_commander_skill;
-            var cmd:Number = ci.base_loaders_skill > 0 ? (ci.base_commander_skill + bia + vent) * 0.1 : 0;
+            var cmd:Number = ci.base_loaders_skill > 0 ? (ci.base_commander_skill + bia + vent + cons) * 0.1 : 0;
 
             var K:Number = (skill + cmd + bia + vent + cons) / 100.0;
             var Kinv:Number = 1 + ci.view_radioman_inventor * 0.002;
 
-            return base_radio_range * (0.57 + 0.43 * K) * Kinv;
+            return ci.base_radio_distance * (0.57 + 0.43 * K) * Kinv;
         }
     }
 

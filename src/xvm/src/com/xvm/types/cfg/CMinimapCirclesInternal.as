@@ -22,5 +22,7 @@ package com.xvm.types.cfg
         public var view_camouflage:Array;
         public var artillery_range:Number;
         public var shell_range:Number;
+        public var base_gun_reload_time:Number;
+        public var base_radio_distance:Number;
     }
 }
