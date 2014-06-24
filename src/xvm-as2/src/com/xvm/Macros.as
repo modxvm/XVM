@@ -340,6 +340,8 @@ class com.xvm.Macros
                 pdata["vehicle"] = vdata.localizedName;
                 // {{vehiclename}} - usa-M24_Chaffee
                 pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
+                // {{vehicle-short}}
+                pdata["vehicle-short"] = vdata.shortName;
                 // {{vtype}}
                 pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
                 // {{c:vtype}}
@@ -610,22 +612,8 @@ class com.xvm.Macros
             dict[pname] = { };
         var pdata = dict[pname];
 
-        var vdata:VehicleData = VehicleInfo.getByIcon(player.icon);
-
-        // {{level}}
-        pdata["level"] = vdata.level;
-
         // {{vehicle-class}} - returns special symbol depending on class
         pdata["vehicle-class"] = vehicleClassSymbol;
-
-        // {{vehicle}} - Vehicle type readable - Chaffee
-        pdata["vehicle"] = vdata.localizedName;
-
-        // {{vehiclename}} - Vehicle system name - usa-M24_Chaffee
-        pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
-
-        // {{vehicle-short}}
-        pdata["vehicle-short"] = vdata.shortName;
     }
 
     public static function RegisterMarkerData(playerName:String, data:Object)

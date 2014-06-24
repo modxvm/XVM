@@ -25,6 +25,7 @@ Legend:
 │ {{clannb}}                 │ X │ X │ X │ X │ X │ X │ X │   │   │ clan name without brackets
 │ {{vehicle}}                │ X │ X │ X │ X │ X │ X │ X │   │   │ vehicle name
 │ {{vehiclename}}            │ X │ X │ X │ X │ X │ X │ X │   │   │ vehicle system name (usa-M24_Chaffee)
+│ {{vehicle-short}}          │   │ X │ X │ X │ X │ X │ X │   │   │ shortened vehicle name
 │ {{vtype}}                  │ X │ X │ X │ X │ X │ X │ X │   │ X │ vehicle type (text substitution from config)
 │ {{c:vtype}}                │ X │ X │ X │ X │ X │ X │ X │   │   │ color depending on vehicle type
 │ {{veh-id}}                 │ X │ X │ X │ X │ X │ X │ X │   │   │ vehicle id
@@ -63,7 +64,6 @@ Legend:
 │ {{speed}}                  │   │   │   │   │   │   │   │ X │   │ capture speed in points per second;
 │ {{vehicle-class}}          │   │   │   │ X │   │   │   │   │   │ places special symbol depending on subject vehicle class
 │ {{cellsize}}               │   │   │   │ X │   │   │   │   │   │ minimap cell side size
-│ {{vehicle-short}}          │   │   │   │ X │   │   │   │   │   │ shortened vehicle name
 │ {{vtype-l}}                │ X │   │   │   │   │   │   │   │ X │ vehicle class (text substitution from locale)
 │ {{battletier-min}}         │ X │   │   │   │   │   │   │   │ X │ minimal vehicle battle tier
 │ {{battletier-max}}         │ X │   │   │   │   │   │   │   │ X │ maximal vehicle battle tier
