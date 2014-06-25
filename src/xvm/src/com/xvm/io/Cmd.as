@@ -28,6 +28,7 @@ package com.xvm.io
         private static const COMMAND_GETDOSSIER:String = "getDossier";
         private static const COMMAND_OPEN_URL:String = "openUrl";
         private static const COMMAND_LOGSTAT:String = "logstat";
+        private static const COMMAND_RETURN_CREW:String = "returnCrew";
         private static const COMMAND_SAVE_SETTINGS:String = "save_settings";
         private static const COMMAND_LOAD_SETTINGS:String = "load_settings";
         private static const COMMAND_TEST:String = "test";
@@ -125,6 +126,11 @@ package com.xvm.io
         public static function logStat():void
         {
             _call(null, null, [COMMAND_LOGSTAT]);
+        }
+
+        public static function returnCrew():void
+        {
+            _call(null, null, [COMMAND_RETURN_CREW]);
         }
 
         public static function loadSettings(target:Object, callback:Function):void

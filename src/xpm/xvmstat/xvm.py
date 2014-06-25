@@ -8,6 +8,8 @@ import simplejson
 
 import BigWorld
 import GUI
+from gui.shared.utils import decorators
+from gui import SystemMessages
 
 from xpm import *
 
@@ -103,6 +105,8 @@ class Xvm(object):
             elif cmd == COMMAND_OPEN_URL:
                 if len(args[0]) and args[0].lower().startswith('http://www.modxvm.com'):
                     utils.openWebBrowser(args[0], False)
+            elif cmd == COMMAND_RETURN_CREW:
+                self.__processReturnCrew()
             elif cmd == COMMAND_LOAD_SETTINGS:
                 pass # TODO
             elif cmd == COMMAND_SAVE_SETTINGS:
@@ -242,6 +246,17 @@ class Xvm(object):
                     getVehicleInfoDataStr()]))
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
+
+
+    # taken from gui.Scaleform.daapi.view.lobby.crewOperations.CrewOperationsPopOver
+    @decorators.process('crewReturning')
+    def __processReturnCrew(self):
+        from gui.shared.gui_items.processors.tankman import TankmanReturn
+        from CurrentVehicle import g_currentVehicle
+        result = yield TankmanReturn(g_currentVehicle.item).request()
+        if len(result.userMsg):
+            SystemMessages.g_instance.pushI18nMessage(result.userMsg, type = result.sysMsgType)
+
 
 g_xvm = Xvm()
 

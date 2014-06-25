@@ -6,6 +6,7 @@
 package xvm.crew
 {
     import com.xvm.*;
+    import com.xvm.io.*;
     import com.xvm.utils.*;
     import flash.display.*;
     import flash.events.MouseEvent;
@@ -45,23 +46,35 @@ package xvm.crew
 
         private function handleMouseRelease(e:MouseEvent):void
         {
-            var item:CrewItemRenderer = e.target as CrewItemRenderer;
-            if (item == null)
+            var renderer:CrewItemRenderer = e.target as CrewItemRenderer;
+            if (renderer == null)
                 return;
 
-            var renderer:RecruitRendererVO = RecruitRendererVO(item.data);
+            var data:RecruitRendererVO = RecruitRendererVO(renderer.data);
 
-            if (App.utils.commons.isRightButton(e))
+            if (App.utils.commons.isRightButton(e) && renderer.enabled)
             {
-                if (!renderer.tankmanID && item.enabled)
+                if (!data.tankmanID || data.tankmanID < 0)
                 {
                     App.contextMenuMgr.show(Vector.<IContextItem>([
                         new ContextItem("PutOwnCrew", Locale.get("PutOwnCrew")),
                         new SeparateItem(),
                         new ContextItem("PutBestCrew", Locale.get("PutBestCrew")),
                         new SeparateItem(),
-                        new ContextItem("PutClassCrew", Locale.get("PutClassCrew"))
-                    ]), this, this.onContextMenuAction);
+                        new ContextItem("PutClassCrew", Locale.get("PutClassCrew")),
+                        new SeparateItem(),
+                        new ContextItem("PutPreviousCrew", App.utils.locale.makeString(CREW_OPERATIONS.RETURN_TITLE))
+                    ]), this, this.onContextMenuAction, renderer);
+                }
+                else
+                {
+                    App.contextMenuMgr.show(Vector.<IContextItem>([
+                        new UserContextItem("personalCase"),
+                        new SeparateItem(),
+                        new UserContextItem("tankmanUnload"),
+                        new SeparateItem(),
+                        new ContextItem("UnloadAllCrew", App.utils.locale.makeString(CREW_OPERATIONS.DROPINBARRACK_DESCRIPTION))
+                    ]), this, this.onContextMenuAction, renderer);
                 }
             }
         }
@@ -70,8 +83,29 @@ package xvm.crew
         {
             try
             {
+                var renderer:CrewItemRenderer = e.memberItemData as CrewItemRenderer;
+
                 switch (e.id)
                 {
+                    // original
+                    case "personalCase":
+                        renderer.openPersonalCase();
+                        break;
+
+                    case "tankmanUnload":
+                        renderer.dispatchEvent(new CrewEvent(CrewEvent.UNLOAD_TANKMAN, renderer.data));
+                        break;
+
+                    // from crew button
+                    case "PutPreviousCrew":
+                        Cmd.returnCrew();
+                        break;
+
+                    case "UnloadAllCrew":
+                        page.crew.unloadAllTankman();
+                        break;
+
+                    // added by XVM
                     case "PutOwnCrew":
                         GetCrew(CheckOwn);
                         break;
