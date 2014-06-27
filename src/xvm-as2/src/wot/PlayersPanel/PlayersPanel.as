@@ -196,9 +196,9 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var obj = BattleState.getUserData(data.userName);
         obj.frags = data.frags || NaN;
         obj.dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
-        if (obj.dead == true && (isNaN(obj.curHealth) || obj.curHealth > 0))
+        if (obj.dead == true && (!isNaN(obj.curHealth) && obj.curHealth > 0))
             obj.curHealth = 0;
-        obj.blowedUp = obj.dead && obj.curHealth < 0;
+        obj.blowedUp = obj.dead && (!isNaN(obj.curHealth) && obj.curHealth < 0);
         obj.entityName = wrapper.type != "left" ? "enemy" : data.squad > 10 ? "squadman" : data.teamKiller == true ? "teamKiller" : "ally";
         if (data.himself)
             BattleState.setSelfUserName(data.userName);

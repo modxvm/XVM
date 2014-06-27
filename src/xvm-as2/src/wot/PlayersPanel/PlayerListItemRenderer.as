@@ -507,32 +507,32 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var needAlign:Boolean = false;
         if (format.x != null)
         {
-            f.data.x = parseFloat(Macros.Format(m_name, format.x, obj));
+            f.data.x = parseFloat(Macros.Format(m_name, format.x, obj)) || 0;
             needAlign = true;
         }
         if (format.y != null)
         {
-            f.data.y = parseFloat(Macros.Format(m_name, format.y, obj));
+            f.data.y = parseFloat(Macros.Format(m_name, format.y, obj)) || 0;
             needAlign = true;
         }
         if (format.w != null)
         {
-            f.data.w = parseFloat(Macros.Format(m_name, format.w, obj));
+            f.data.w = parseFloat(Macros.Format(m_name, format.w, obj)) || 0;
             needAlign = true;
         }
         if (format.h != null)
         {
-            f.data.h = parseFloat(Macros.Format(m_name, format.h, obj));
+            f.data.h = parseFloat(Macros.Format(m_name, format.h, obj)) || 0;
             needAlign = true;
         }
         if (format.alpha != null)
-            f._alpha = parseFloat(Macros.Format(m_name, format.alpha, obj));
+            f._alpha = parseFloat(Macros.Format(m_name, format.alpha, obj)) || 100;
         if (format.rotation != null)
-            f._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj));
+            f._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj)) || 0;
         if (format.borderColor != null)
-            f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj).split("#").join("0x"));
+            f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj).split("#").join("0x")) || 0;
         if (format.bgColor != null)
-            f.backgroundColor = parseInt(Macros.Format(m_name, format.bgColor, obj).split("#").join("0x"));
+            f.backgroundColor = parseInt(Macros.Format(m_name, format.bgColor, obj).split("#").join("0x")) || 0;
 
         if (format.format != null)
         {
@@ -568,6 +568,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var img:UILoaderAlt = UILoaderAlt(field);
 
         var data:Object = field["data"];
+        Logger.addObject(data);
 
         var x:Number = (isLeftPanel ? data.x : -data.x);
         var y:Number = data.y;
