@@ -82,7 +82,7 @@ package xvm.squad
 
             // Remove clan tag from player name
             if (Config.config.squad.showClan == false)
-                proxy.data.fullName = proxy.data.userName;
+                proxy.data.clanAbbrev = "";
         }
 
         // -- Private

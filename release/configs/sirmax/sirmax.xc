@@ -50,10 +50,10 @@
     "defaultFilterValue": "+all -premium -master -arty"
   },
   "squad": {
-    "enabled": true,
-    "romanNumbers": true,
-    "showClan": true,
-    "leftLvlBorder": ""
+    //"enabled": true,
+    //"romanNumbers": false,
+    //"showClan": false,
+    "formatInfoField": "{{rlevel}}"
   },
   "battle": {
     "mirroredVehicleIcons": false,
