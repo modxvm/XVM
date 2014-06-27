@@ -101,6 +101,7 @@
     "(m)": "(m)",
 
     // Squad
+    "Squad battle tiers": "Squad battle tiers",
     "Vehicle": "Vehicle",
     "Battle tiers": "Battle tiers",
     "Type": "Type",

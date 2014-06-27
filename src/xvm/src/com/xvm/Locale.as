@@ -181,6 +181,7 @@ package com.xvm
             "(m)": "(м)",
 
             // Squad
+            "Squad battle tiers": "Уровень боев взвода",
             "Vehicle": "Танк",
             "Battle tiers": "Уровень боёв",
             "Type": "Тип",

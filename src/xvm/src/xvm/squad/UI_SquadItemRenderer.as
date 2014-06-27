@@ -15,13 +15,13 @@ package xvm.squad
         override protected function configUI():void
         {
             super.configUI();
-            worker.setUIConfigured();
+            worker.configUI();
         }
 
         override protected function afterSetData():void
         {
             super.afterSetData();
-            worker.displayVehicleTier();
+            worker.afterSetData();
         }
 
         override protected function getToolTipData():String
@@ -29,11 +29,11 @@ package xvm.squad
             var data:String = worker.getToolTipData();
             return (data != null ? data : super.getToolTipData());
         }
-        
+
         override protected function draw():void
         {
             super.draw();
-            worker.displayVehicleTier();
+            worker.draw();
         }
     }
 

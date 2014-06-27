@@ -56,10 +56,8 @@ package com.xvm
         public static const WG_CONTOUR_ICON_NOIMAGE:String = WG_CONTOUR_ICON_PATH + "noImage.png";
 
         // Events
-        public static const E_CONFIG_LOADED:String = "config_loaded";
-        public static const E_SET_INFO:String = "set_info";
         public static const E_LOCALE_LOADED:String = "locale_loaded";
-
+        public static const E_ITEM_UPDATED:String = "item_updated";
 
         // UI Colors
         public static const UICOLOR_LABEL:uint = 0xA19D95;

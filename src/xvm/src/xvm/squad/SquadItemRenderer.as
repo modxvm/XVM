@@ -7,6 +7,7 @@ package xvm.squad
     import com.xvm.*;
     import com.xvm.types.veh.*;
     import com.xvm.utils.*;
+    import flash.events.Event;
     import flash.text.*;
     import net.wg.gui.prebattle.squad.SquadItemRenderer;
 
@@ -21,11 +22,11 @@ package xvm.squad
             this.vehicleTierField = null;
         }
 
-        private var configUI:Boolean = false;
+        private var initialized:Boolean = false;
 
-        public function setUIConfigured():void
+        public function configUI():void
         {
-            configUI = true;
+            initialized = true;
             proxy.vehicleLevelField.alpha = 0; // TODO: use this text field
         }
 
@@ -49,7 +50,13 @@ package xvm.squad
                 Locale.get("Nation") + ": " + Locale.get(vdata.nation);
         }
 
-        public function displayVehicleTier():void
+        public function afterSetData():void
+        {
+            draw();
+            proxy.owner.dispatchEvent(new Event(Defines.E_ITEM_UPDATED));
+        }
+
+        public function draw():void
         {
             if (!Config.config.squad.enabled)
                 return;
@@ -66,7 +73,7 @@ package xvm.squad
                 return;
 
             // UI ready
-            if (!configUI)
+            if (!initialized)
                 return;
 
             // Display vehicle info

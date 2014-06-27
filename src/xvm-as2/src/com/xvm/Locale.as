@@ -164,33 +164,6 @@ class com.xvm.Locale
             tr["In hangar"] = "В ангаре";
             tr["Show only tanks in own hangar"] = "Показать только танки в своем ангаре";
 
-            // UserInfo - buttons
-            tr["Level"] = "Уровень";
-            tr["Type"] = "Тип";
-            tr["Nation"] = "Нация";
-            tr["Name"] = "Имя";
-            tr["Fights"] = "Боёв";
-            tr["Wins"] = "Побед";
-
-            // Crew
-            tr["PutOwnCrew"] = "Родной экипаж";
-            tr["PutBestCrew"] = "Лучший экипаж";
-
-            // Squad
-            tr["Vehicle"] = "Танк";
-            tr["Battle tiers"] = "Уровень боёв";
-            tr["ussr"] = "СССР";
-            tr["germany"] = "Германия";
-            tr["usa"] = "США";
-            tr["france"] = "Франция";
-            tr["uk"] = "Великобритания";
-            tr["china"] = "Китай";
-            tr["HT"] = "ТТ";
-            tr["MT"] = "СТ";
-            tr["LT"] = "ЛТ";
-            tr["TD"] = "ПТ";
-            tr["SPG"] = "САУ";
-
             // VehicleMarkersManager
             tr["blownUp"] = "Взрыв БК!";
         }
@@ -224,18 +197,6 @@ class com.xvm.Locale
             tr["TeamRenderersHeaderTip"] =
                 "Xwn (or xeff) rating.\n" +
                 "To see detailed information, move mouse cursor to the player's name.";
-
-            // Crew
-            tr["PutOwnCrew"] = "Put own crew";
-            tr["PutBestCrew"] = "Put best crew";
-
-            // Squad
-            tr["ussr"] = "USSR";
-            tr["germany"] = "Germany";
-            tr["usa"] = "USA";
-            tr["france"] = "France";
-            tr["uk"] = "UK";
-            tr["china"] = "China";
 
             // VehicleMarkersManager
             tr["blownUp"] = "Blown-up!";

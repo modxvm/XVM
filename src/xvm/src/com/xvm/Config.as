@@ -4,14 +4,12 @@
  */
 package com.xvm
 {
-    import flash.display.MovieClip;
-    import flash.events.Event;
-    import flash.events.IEventDispatcher;
-    import com.xvm.types.cfg.CConfig;
-    import com.xvm.events.ObjectEvent;
+    import com.xvm.*;
+    import com.xvm.events.*;
     import com.xvm.io.*;
-    import com.xvm.utils.*;
     import com.xvm.misc.*;
+    import com.xvm.utils.*;
+    import com.xvm.types.cfg.*;
 
     public class Config
     {
