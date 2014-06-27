@@ -392,7 +392,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
                 // create text fields
                 var fields: Array = [];
-                for (var i in cfg.textFields)
+                var len = cfg.textFields.length;
+                for (var i = 0; i < len; ++i)
                 {
                     if (cfg.textFields[i].visible)
                     {
