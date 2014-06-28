@@ -48,7 +48,7 @@
 
     Si vous voulez personnaliser votre configuration, vous devez renommer le 
     fichier de démarrage de la config :
-      \res_mods\xvm\configs\xvm.xc.sample en xvm.xc
+      \res_mods\xvm\xvm.xc.sample en xvm.xc
     Les consignes pour modifier les paramêtres sont à l'intérieur.
 
     Toutes les options de configuration sont localisées dans
@@ -99,7 +99,7 @@
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText (en anglais)
 
   Macros disponibles :
-    Dans les panneaux des joueurs, l'écran de chargement et quand vous faites TAB :
+    Dans les panneaux des joueurs et l'écran de chargement :
       {{nick}}        - pseudo du joueur avec tag du clan
       {{name}}        - pseudo du joueur sans tag du clan
       {{clan}}        - tag du clan avec crochets (vide si pas de clan)
@@ -140,7 +140,7 @@
       {{a:hp}}        - transparence en fonction des points de vie actuels
       {{a:hp-ratio}}  - transparence en fonction du % de points de vie actuel
       {{l10n:blownUp}} - texte traduit pour "Blown-up!" (ammorack), uniquement dans "blowupMessage"
-      + macro statistiques (cf. ci-dessous)
+      + macros statistiques (cf. ci-dessous)
 
     Dans le journal des coups reçus :
       {{n}}           - nombre total de tirs
@@ -199,20 +199,21 @@
       {{l10n:Capturers}}            - traduction pour "Capturers" (capeurs/nb. de tanks dans le rond de capture)
 
     Dans la minimap :
-      {{level}}        - tier du tank
-      {{vehicle}}      - nom complet du tank
+      {{level}}         - tier du tank
+	  {{short-nick}}    - pseudo du joueur raccourci
+      {{vehicle}}       - nom complet du tank
+	  {{vehicle-type}}  - type complet du tank
       {{vehicle-class}} - symbole spécial en fonction du type de tank
-      {{cellsize}}     - taille d'une cellule de la minimap
-      {{vehiclename}}  - retourne le nom interne du tank - usa-M24_Chaffee
-      {{vehicle-short}}  - nom du tank raccourci
+	  {{cellsize}}      - taille des cellules de la minimap
+	  {{vehicle-name}}  - renvoie le nom du tank dans le système - usa-M24_Chaffee
+	  {{vehiclename}}   - renvoie le nom du véhicule dans le système - usa-M24_Chaffee
+	  {{vehicle-short}} - nom du tank raccourci
 
     Macros statistiques ('rating/showPlayersStatistics' doit être activé) :
       {{avglvl}}      - tier moyen des tanks joués
       {{eff}}         - ER du joueur : http://wot-news.com/index.php/stat/calc/en/ 
       {{eff:4}}       - ER du joueur aligné à gauche sur 4 caractères
-      {{teff}}, {{e}} - ER du véhicule : http://www.koreanrandom.com/forum/topic/1643-
-      {{wn6}}         - classement WN6 : http://www.koreanrandom.com/forum/topic/2575-
-      {{wn8}}         - classement WN8 : http://www.koreanrandom.com/forum/topic/2575-   
+      {{teff}}, {{e}} - ER du tank : http://www.koreanrandom.com/forum/topic/1643-
       {{wn}}          - classement WN8 : http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - XVM Scale pour l'ER (de 00 à 99, XX pour les tops serveur)
       {{xwn}}         - XVM Scale pour le WN8 (de 00 à 99, XX pour les tops serveur)
@@ -239,8 +240,6 @@
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - couleurs dynamiques pour ces macros
       {{c:eff}}       - couleur en fonction de l'ER du joueur
       {{c:e}}         - couleur en fonction de l'ER du tank
-      {{c:wn6}}       - couleur en fonction du classement WN6
-      {{c:wn8}}       - couleur en fonction du classement WN8
       {{c:wn}}        - couleur en fonction du classement WN8
       {{c:xeff}}      - couleur en fonction de l'XVM Scale pour l'ER
       {{c:xwn}}       - couleur en fonction de l'XVM Scale pour le WN8
@@ -252,6 +251,28 @@
 
       Vous pouvez changer n'importe quelle macro de couleur en macro de transparence.
       Exemple : {{a:tdb}}
+	  
+	  Utilisation des macros de formattage étendues :
+		{{nom[:norm][%[flag][largeur][.prec]type][~suf][?rep][|def]}}
+		nom   - nom de la macro
+
+		:norm - normalisation de la valeur, par exemple {{hp-ratio:300}} retournera des valeurs dans l'intervalle 0..300
+
+		flag  - "-" pour aligner à gauche, sinon aligne à droite
+				"0" pour remplir avec des zéros
+		width - largeur minimale
+		prec  - largeur maximale des lignes, ou nombre de chiffres max. après la virgule pour les nombres à virgule
+		type  - type (s - chaîne de caractères, d - nombre, f - nombre à virgule, ...)
+	  
+		suf   - suffixe ajouté à la fin
+		rep   - valeur de remplacement, retournée si la donnée n'est pas disponible
+		def   - valeur par défaut, affichée lorsque les données sont absentes
+
+	Plus de détails : http://fr.wikipedia.org/wiki/Printf
+	Par exemple :
+		{{name%-16.16s}}      - tronque les noms plus longs que 10 caractères, rempli les noms plus courts que 10 caractères et aligne à gauche
+		{{kb%4.01f~k|----}}   - largeur 4 caractères, exactement un chiffre après la virgule, alignement à droite
+								si kb==null, affiche "----"
 
     Utilisation des macros traduites : {{l10n:localizationKey}}
       Les macros sont juste des liens vers des traductions présentes dans le 
@@ -270,7 +291,7 @@
         https://code.google.com/p/wot-xvm/wiki/LocalizingXVM (en anglais)
 
   Exemple du champ "format" :
-    1. Affiche le nombre de kilo-batailles, l'échelle WN6/7 et le % de victoires sans couleurs :
+    1. Affiche le nombre de kilo-batailles, l'échelle d'efficacité et le % de victoires sans changer de couleur :
       "{{kb}} {{xwn}} {{rating}}"
     2. La même chose avec chaque valeur et sa couleur correspondante :
       "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
@@ -302,7 +323,7 @@
   Une archive avec TOUS les clans peut être téléchargée séparément :
     http://www.modxvm.com/fr/telecharger-xvm/
     Fichiers : clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
-    clanicons-full-sea-XXX.zip (SEA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
+    clanicons-full-ASIA-XXX.zip (ASIA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
 
   L'image Sixième Sens.
   Pour changer l'image de l'indicateur Sixième Sens, placez votre image PNG 

@@ -1,43 +1,107 @@
-﻿XVM-5.3.0-test1:
-  [CHANGEMENTS MAJEURS]
-  * nouvelle méthode de formattage des macros (cf. readme-fr.txt)
-  * version de la configuration augmentée en 5.1.0
+﻿XVM-5.3.2-test1:
+  * nouvelles options : captureBar/allyColor, captureBar/enemyColor
 
-XVM-5.2.1-test2:
-  [CORRECTIONS]
-  * les panneaux des joueurs n'étaient pas affichés après le chargement de la bataille
-  * les éléments de la minimap s'affichent désormais correctement
+  
+XVM-5.3.1:
+  * adaptation pour WoT 0.9.1
+  * affiche la portée de vue actuelle, le temps de rechargement du canon et la portée radio dans le garage
+  
+  
+XVM-5.3.0:
+  [MISES À JOUR MAJEURES]
+  * nouveau système de formattage des macros (cf. readme-fr.txt pour plus d'infos) :
+	  {{nom[:norm][%[flag][largeur][.prec]type][~suf][?rep][|def]}}
+	  nom   - nom de la macro
+	  :norm - normalisation de la valeur, par exemple {{hp-ratio:300}} retournera des valeurs dans l'intervalle 0..300
+	  flag  - "-" pour aligner à gauche, sinon aligne à droite
+			  "0" pour remplir avec des zéros
+	  width - largeur minimale
+	  prec  - largeur maximale des lignes, ou nombre de chiffres max. après la virgule pour les nombres à virgule
+	  type  - type (s - chaîne de caractères, d - nombre, f - nombre à virgule, ...)
+	  suf   - suffixe ajouté à la fin
+	  rep   - valeur de remplacement, retournée si la donnée n'est pas disponible
+	  def   - valeur par défaut, affichée lorsque les données sont absentes
+	Plus de détails : http://fr.wikipedia.org/wiki/Printf
+	Par exemple :
+		{{name%-16.16s}}      - tronque les noms plus longs que 10 caractères, rempli les noms plus courts que 10 caractères et aligne à gauche
+		{{kb%4.01f~k|----}}   - largeur 4 caractères, exactement un chiffre après la virgule, alignement à droite
+								si kb==null, affiche "----"
+  * version de la configuration passée en 5.1.0
 
   [NOUVEAUTÉS]
-  * nouvelle option login/saveLastServer - sauvegarde le choix du dernier serveur de jeu (désactivé par défaut)
+  * cercles dynamiques sur la minimap. Options:
+      minimap/circles/artillery - portée maximale de feu pour l'artillerie
+      minimap/circles/shell - portée maximale de tir pour les canons automatiques et semi-automatiques
+      minimap/circles/view - portée de vue (change dynamiquement quand les binoculaires s'activent)
+      minimap/circles/major - supprimé, remplacé par la section "view"
+    Le code d'Omegaice a été utilisé pour ce composant
+  * nouvelles options dans playersPanel pour des champs de texte supplémentaires
+  * nouvelles options dans playersPanel pour le formattage des chars détruits
+  * nouvelle option playersPanel/startMode pour le format des panneaux des joueurs initial
+  * nouvelle option battle/allowHpInPanelsAndMinimap - active les macros {{hp}}, {{hp-ratio}}, {{hp-max}}
+    dans les panneaux des joueurs et sur la minimap. ATTENTION : coûteux en performances !
 
+  [MACROS]
+  * nouvelles macros :
+    {{frags}} - nombre de chars détruits
+    {{alive}} - 'alive' si char en vie, '' si char détruit
+    {{battletier}} - tier de bataille calculé par XVM
+    {{squad-num}} - numéro de peloton ou 'null' si pas dans un peloton
+  * macros étendues : {{hp:XX}} et {{hp-max:XX}} retournent une valeur normalisée à XX pour le tier de bataille actuel
+    exemple : {{hp:300}} - va retourner 300 pour PV=700 dans une bataille de tier 5, et pour PV=3000 dans une bataille de tier 11
+  * macros étendues : remplacement de la valeur {{macro?rep}}
+    exemple : "alpha": "{{alive?80|0}}" - défini l'alpha sur 80 quand le char est en vie, et sur 0 si il est détruit
+  * changement de la valeur de la macro {{squad}} de '1' en 'sq'
+  * suppression de la macro {{vehicle-type}} car doublon de {{vehicle}}
+  * suppression de la macro {{vehicle-name}} car doublon de {{vehiclename}}
+  * suppression de la macro {{short-nick}} et de l'option option minimap/nickShrink car remplacées par {{nick%.5s}}
 
-XVM-5.2.1-test1:
+  [AUTRES]
+  * code source désormais stockée sur http://dev.modxvm.com/
+
+  
+XVM-5.2.1:
   * adaptation pour WoT 0.9.0
 
   [NOUVEAUTÉS]
-  * traduction : changement de la manière d'envoyer les traductions. Plus de détails : https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+  * nouvelle option login/saveLastServer - enregistre le dernier serveur utilisé (désactivé par défaut)
+  * traduction : nouvelles modalités pour l'envoi des traductions. Plus de détails : https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
 
+  [CORRECTIONS]
+  * les panneaux des joueurs n'étaient pas affichés après le chargement
+  * correction de l'affichage des éléments sur la minimap
 
-XVM-5.2.0-test1:
-  [CHANGEMENTS MAJEURS]
+  
+XVM-5.2.0:
+  [MISES À JOUR MAJEURES]
   * fichier de configuration principal (xvm.xc) déplacé dans res_mods/xvm/configs
-  * les statistiques doivent désormais être activées dans les paramètres personnels sur http://www.modxvm.com/
+  * les statistiques doivent désormais être activées dans les paramètres personnels sur le site officiel d'XVM http://www.modxvm.com/
 
   [NOUVEAUTÉS]
   * traduction : ajout du Chinois (simplifié)
   * statistiques : utilisation d'une connexion cryptée
-  * ajout d'une nouveau format pour spécifier le chemin d'une image pour le tag <img> : 
-    xvm:// - chemin relatif au dossier res_mods/xvm
-      par exemple : <img src='xvm://configs/perso/icones/exemple.png'>
+  * ajout d'un nouvel alias de nom pour le tag <img> : xvm:// - chemin relatif au dossier res_mods/xvm
+      par exemple : <img src='xvm://configs/mes/icones/image.png'>
 
   [AUTRES]
-  * statistiques : changement de l'adresse du serveur de stats (désormais https://stat.modxvm.com/)
-  * l'option battle/useStandardMarkers changée en markers/useStandardMarkers
-  * l'option battle/removePanelsModeSwitcher changée en playersPanel/removePanelsModeSwitcher
-  * version de la configuration augmentée en 5.0.2
+  * statistiques : changement de l'adresse du serveur (désormais https://stat.modxvm.com/)
+  * option battle/useStandardMarkers changée en markers/useStandardMarkers
+  * option battle/removePanelsModeSwitcher changée en playersPanel/removePanelsModeSwitcher
+  * version de la configuration passée en 5.0.2
 
+  
+XVM-5.1.0:
+  * adaptation pour WoT 0.8.11
 
+  [NOUVEAUTÉS]
+  * nouvelles options :
+      (battleLoading|battleResults|statisticForm)/showBattleTier - affiche le tier de bataille
+
+  [AUTRES]
+  * classement WN par défaut changé en WN8
+  * changement de l'option statisticForm/showChancesExp en showChancesLive
+
+  
 XVM-5.0.2:
   * adaptation pour WoT 0.8.10
 
