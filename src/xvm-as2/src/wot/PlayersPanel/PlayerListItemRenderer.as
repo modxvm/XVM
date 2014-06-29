@@ -568,7 +568,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var img:UILoaderAlt = UILoaderAlt(field);
 
         var data:Object = field["data"];
-        Logger.addObject(data);
+        //Logger.addObject(data);
 
         var x:Number = (isLeftPanel ? data.x : -data.x);
         var y:Number = data.y;
