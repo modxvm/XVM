@@ -259,7 +259,7 @@
         type  - type (s - string, d - decimal, f - float, ...)
 
         suf   - suffix added at the end
-        rep   - value replacement, returns instead of regilar value if value is present
+        rep   - value replacement, returned instead of the regular value if the value is present
         def   - default value, set when value is absent:
 
     Details: http://en.wikipedia.org/wiki/Printf
