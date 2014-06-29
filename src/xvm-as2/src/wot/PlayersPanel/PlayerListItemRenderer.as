@@ -526,7 +526,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
             needAlign = true;
         }
         if (format.alpha != null)
-            f._alpha = parseFloat(Macros.Format(m_name, format.alpha, obj)) || 100;
+        {
+            var alpha = parseFloat(Macros.Format(m_name, format.alpha, obj));
+            f._alpha = isNaN(alpha) ? 100 : alpha;
+        }
         if (format.rotation != null)
             f._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj)) || 0;
         if (format.borderColor != null)
