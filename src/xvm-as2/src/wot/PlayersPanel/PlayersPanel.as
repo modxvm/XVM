@@ -4,7 +4,7 @@
  */
 import com.xvm.*;
 import wot.Minimap.*;
-//import wot.PlayersPanel.*;
+import gfx.controls.ScrollingList;
 
 class wot.PlayersPanel.PlayersPanel extends XvmComponent
 {
@@ -52,9 +52,9 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         Utils.TraceXvmModule("PlayersPanel");
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, wrapper, wrapper.update);
-        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, wrapper, wrapper.update);
-        GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, wrapper, wrapper.update);
+        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, update2);
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, update2);
+        GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, update2);
     }
 
     // PRIVATE
@@ -223,6 +223,16 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     }
 
     // PRIVATE
+
+    // update without hide menu
+    private function update2()
+    {
+        if (wrapper.m_list instanceof ScrollingList)
+        {
+            var p = wrapper.saved_params[wrapper.m_type];
+            wrapper.setData(p.data, p.sel, p.pIdx, p.isCB, p.kPC, p.dPC, p.fragsStr, p.vehiclesStr, p.namesStr);
+        } // end if
+    }
 
     private function getTextValue(fieldType, data, text)
     {
