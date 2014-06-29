@@ -179,8 +179,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 updateExtraFields();
             }
 
-            if (Config.config.playersPanel.removeSquadIcon && (wrapper.squadIcon != null))
-                wrapper.squadIcon._visible = false;
+            if (wrapper.squadIcon != null)
+                wrapper.squadIcon._visible = (panel.state == "large" && !Config.config.playersPanel.removeSquadIcon);
 
             base.update();
 
