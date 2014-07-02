@@ -918,19 +918,19 @@ package com.xvm.misc
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
             c.wn8 = [
-                { value: 310,  color: Defines.C_RED },     // very bad
-                { value: 750,  color: Defines.C_ORANGE },  // bad
-                { value: 1310, color: Defines.C_YELLOW },  // normal
-                { value: 1965, color: Defines.C_GREEN },   // good
-                { value: 2540, color: Defines.C_BLUE },    // very good
+                { value: 315,  color: Defines.C_RED },     // very bad
+                { value: 760,  color: Defines.C_ORANGE },  // bad
+                { value: 1325, color: Defines.C_YELLOW },  // normal
+                { value: 1980, color: Defines.C_GREEN },   // good
+                { value: 2570, color: Defines.C_BLUE },    // very good
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
             c.rating = [
-                { value: 47,  color: Defines.C_RED },      // very bad
-                { value: 49,  color: Defines.C_ORANGE },   // bad
-                { value: 52,  color: Defines.C_YELLOW },   // normal
-                { value: 57,  color: Defines.C_GREEN },    // good
-                { value: 65,  color: Defines.C_BLUE },     // very good
+                { value: 46.5,  color: Defines.C_RED },      // very bad
+                { value: 48.5,  color: Defines.C_ORANGE },   // bad
+                { value: 51.5,  color: Defines.C_YELLOW },   // normal
+                { value: 56.5,  color: Defines.C_GREEN },    // good
+                { value: 64.5,  color: Defines.C_BLUE },     // very good
                 { value: 101, color: Defines.C_PURPLE }    // unique
             ];
             c.e = [
@@ -1034,9 +1034,9 @@ package com.xvm.misc
                 { value: 9999, alpha: 40 }
             ];
             c.wn8 = [
-                { value: 750,  alpha: 100 },
-                { value: 1310, alpha: 80 },
-                { value: 1965, alpha: 60 },
+                { value: 760,  alpha: 100 },
+                { value: 1325, alpha: 80 },
+                { value: 1980, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.rating = [
