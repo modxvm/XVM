@@ -172,7 +172,9 @@ class _Stat(object):
                     self.playersSkip[str(pl.playerId)] = True
                     players[pl.name] = self._get_battle_stub(pl)
                     continue
-            players[pl.name] = self.cache[cacheKey]
+            stat = self.cache[cacheKey]
+            self._fix(stat)
+            players[pl.name] = stat
         #pprint(players)
 
         with self.lock:
@@ -220,7 +222,9 @@ class _Stat(object):
                         self.playersSkip[str(pl.playerId)] = True
                         players[pl.name] = self._get_battle_stub(pl)
                         continue
-                players[pl.name] = self.cache[cacheKey]
+                stat = self.cache[cacheKey]
+                self._fix(stat)
+                players[pl.name] = stat
             #pprint(players)
 
             with self.lock:
@@ -298,7 +302,7 @@ class _Stat(object):
             'nm': pl.name,
             'v': { 'id':pl.vId },
         }
-        return self._fix(s, None)
+        return self._fix(s)
 
 
     def _load_stat(self, playerVehicleID, allowNetwork=True):
@@ -360,7 +364,7 @@ class _Stat(object):
 
             for stat in data['players']:
                 #debug(simplejson.dumps(stat))
-                self._fix(stat, None)
+                self._fix(stat)
                 #pprint(stat)
                 if 'nm' not in stat or not stat['nm']:
                     continue
@@ -372,7 +376,7 @@ class _Stat(object):
         except Exception, ex:
             err('_load_stat() exception: ' + traceback.format_exc())
 
-    def _fix(self, stat, orig_name):
+    def _fix(self, stat, orig_name=None):
         #self._r(stat, 'id', '_id')
         if 'twr' in stat:
             del stat['twr']
@@ -452,6 +456,8 @@ class _Player(object):
         if g_battleContext.arenaDP is not None:
             vInfo = g_battleContext.arenaDP.getVehicleInfo(vID=vehId)
             self.squadnum = vInfo.squadIndex
+            //if self.squadnum > 0:
+            //    log("team=%d, squad=%d %s" % (self.team, self.squadnum, self.name))
 
     def update(self, vData):
         self.vId = vData['vehicleType'].type.compactDescr
