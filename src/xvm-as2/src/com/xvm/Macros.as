@@ -374,19 +374,19 @@ class com.xvm.Macros
             // {{hp}}
             pdata["hp"] = function(o):Number { return isNaN(o.curHealth) ? NaN : o.curHealth; }
             // {{hp-max}}
-            pdata["hp-max"] = function(o):Number { return isNaN(o.maxHealth) ? NaN : o.maxHealth; };
+            pdata["hp-max"] = function(o):Number { return isNaN(o.maxHealth) ? data.maxHealth : o.maxHealth; };
             // {{hp-ratio}}
-            pdata["hp-ratio"] = function(o):Number { return isNaN(o.curHealth) || isNaN(o.maxHealth) ? NaN : Math.round(o.curHealth / o.maxHealth * 100); }
+            pdata["hp-ratio"] = function(o):Number { return isNaN(o.curHealth) ? NaN : Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
             // {{c:hp}}
             pdata["c:hp"] = function(o):String { return (isNaN(o.curHealth) && !o.dead) ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth || 0); }
             // {{c:hp-ratio}}
-            pdata["c:hp-ratio"] = function(o):String { return ((isNaN(o.curHealth) || isNaN(o.maxHealth)) && !o.dead) ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO,
-                (isNaN(o.curHealth) || isNaN(o.maxHealth)) ? 0 : o.curHealth / o.maxHealth * 100); }
+            pdata["c:hp-ratio"] = function(o):String { return (isNaN(o.curHealth) && !o.dead) ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO,
+                isNaN(o.curHealth) ? 0 : o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
             // {{a:hp}}
             pdata["a:hp"] = function(o):Number { return (isNaN(o.curHealth) && !o.dead) ? NaN : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth || 0); }
             // {{a:hp-ratio}}
-            pdata["a:hp-ratio"] = function(o):Number { return ((isNaN(o.curHealth) || isNaN(o.maxHealth)) && !o.dead) ? NaN : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
-                (isNaN(o.curHealth) || isNaN(o.maxHealth)) ? 0 : o.curHealth / o.maxHealth * 100); }
+            pdata["a:hp-ratio"] = function(o):Number { return (isNaN(o.curHealth) && !o.dead) ? NaN : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
+                isNaN(o.curHealth) ? 0 : o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
 
             // dmg
 
