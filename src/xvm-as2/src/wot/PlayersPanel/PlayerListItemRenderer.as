@@ -434,6 +434,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         tf.backgroundColor = format.bgColor != null && !isNaN(format.bgColor) ? format.bgColor : 0x000000;
         if (tf.background && !tf.border)
         {
+            format.borderColor = format.bgColor;
             tf.border = true;
             tf.borderColor = tf.backgroundColor;
         }
