@@ -1,4 +1,4 @@
-﻿XVM-5.3.2-test1:
+﻿XVM-5.3.2:
   * новые опции: captureBar/allyColor, captureBar/enemyColor
 
 XVM-5.3.1:
