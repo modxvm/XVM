@@ -177,14 +177,14 @@ class wot.battle.BattleMain
         }
     }
 
-    private function onBattleStateChanged(str:String):Void
+    private function onBattleStateChanged(playerName:String, playerId:Number, vehId:Number,
+        dead:Boolean, curHealth:Number, maxHealth:Number):Void
     {
-        //Logger.add("onBattleStateChanged: " + str);
-        var obj = JSONx.parse(str);
-        var data:BattleStateData = obj; // as2 type casting is strange
+        var data = new BattleStateData(playerName, playerId, vehId, dead, curHealth, maxHealth);
+
         //Logger.addObject(data);
-        BattleState.setUserData(data.playerName, data);
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED, playerName: data.playerName } );
+        BattleState.setUserData(playerName, data);
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED, playerName: playerName } );
     }
 
     private var debugTextField:TextField = null;

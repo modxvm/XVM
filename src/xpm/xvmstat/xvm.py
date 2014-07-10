@@ -103,7 +103,7 @@ class Xvm(object):
             elif cmd == COMMAND_GETDOSSIER:
                 getDossier(proxy, args)
             elif cmd == COMMAND_OPEN_URL:
-                if len(args[0]) and args[0].lower().startswith('http://www.modxvm.com'):
+                if len(args[0]):
                     utils.openWebBrowser(args[0], False)
             elif cmd == COMMAND_RETURN_CREW:
                 self.__processReturnCrew()
@@ -229,7 +229,14 @@ class Xvm(object):
                 if vdata is not None:
                     movie = self.battleFlashObject.movie
                     if movie is not None:
-                        movie.invoke((RESPOND_BATTLESTATE, [simplejson.dumps(vdata)]))
+                        movie.invoke((RESPOND_BATTLESTATE,
+                            vdata['playerName'],
+                            vdata['playerId'],
+                            vdata['vehId'],
+                            vdata['dead'],
+                            vdata['curHealth'],
+                            vdata['maxHealth'],
+                        ))
             except Exception, ex:
                 err('_updateBattleState(): ' + traceback.format_exc())
 
