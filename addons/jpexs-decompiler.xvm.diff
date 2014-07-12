@@ -1,0 +1,75 @@
+diff -Naur src.orig/com/jpexs/decompiler/flash/abc/avm2/model/NewObjectAVM2Item.java src/com/jpexs/decompiler/flash/abc/avm2/model/NewObjectAVM2Item.java
+--- src.orig/com/jpexs/decompiler/flash/abc/avm2/model/NewObjectAVM2Item.java	2014-07-13 00:53:43.033412100 +0300
++++ src/com/jpexs/decompiler/flash/abc/avm2/model/NewObjectAVM2Item.java	2014-07-12 23:24:01.559977100 +0300
+@@ -41,10 +41,10 @@
+     @Override
+     public GraphTextWriter appendTo(GraphTextWriter writer, LocalData localData) throws InterruptedException {
+         boolean singleLine = pairs.size() < 2;
+-        if (!singleLine) {
+-            writer.newLine();
+-            writer.indent();
+-        }
++        //if (!singleLine) {
++        //    writer.newLine();
++        //    writer.indent();
++        //}
+         writer.append("{");
+         if (!singleLine) {
+             writer.newLine();
+diff -Naur src.orig/com/jpexs/decompiler/flash/abc/types/Namespace.java src/com/jpexs/decompiler/flash/abc/types/Namespace.java
+--- src.orig/com/jpexs/decompiler/flash/abc/types/Namespace.java	2014-07-13 00:53:43.377431800 +0300
++++ src/com/jpexs/decompiler/flash/abc/types/Namespace.java	2014-07-12 23:52:36.493246000 +0300
+@@ -30,7 +30,7 @@
+     public static final int KIND_STATIC_PROTECTED = 26;
+     public static final int[] nameSpaceKinds = new int[]{KIND_NAMESPACE, KIND_PRIVATE, KIND_PACKAGE, KIND_PACKAGE_INTERNAL, KIND_PROTECTED, KIND_EXPLICIT, KIND_STATIC_PROTECTED};
+     public static final String[] nameSpaceKindNames = new String[]{"Namespace", "PrivateNamespace", "PackageNamespace", "PackageInternalNs", "ProtectedNamespace", "ExplicitNamespace", "StaticProtectedNs"};
+-    public static final String[] namePrefixes = new String[]{"", "private", "public", "", "protected", "explicit", "protected"};
++    public static final String[] namePrefixes = new String[]{"", "private", "public", "public", "protected", "explicit", "protected"};
+     public int kind;
+     public int name_index;
+     public boolean deleted;
+diff -Naur src.orig/com/jpexs/decompiler/flash/abc/types/traits/TraitSlotConst.java src/com/jpexs/decompiler/flash/abc/types/traits/TraitSlotConst.java
+--- src.orig/com/jpexs/decompiler/flash/abc/types/traits/TraitSlotConst.java	2014-07-13 00:53:43.400433100 +0300
++++ src/com/jpexs/decompiler/flash/abc/types/traits/TraitSlotConst.java	2014-07-12 22:57:57.794758900 +0300
+@@ -80,7 +80,7 @@
+ 
+         String slotconst = "var";
+         if (kindType == TRAIT_CONST) {
+-            slotconst = "const";
++            slotconst = "var";
+         }
+         if (val != null && val.isNamespace()) {
+             slotconst = "namespace";
+diff -Naur src.orig/com/jpexs/decompiler/flash/configuration/Configuration.java src/com/jpexs/decompiler/flash/configuration/Configuration.java
+--- src.orig/com/jpexs/decompiler/flash/configuration/Configuration.java	2014-07-13 00:53:44.075471700 +0300
++++ src/com/jpexs/decompiler/flash/configuration/Configuration.java	2014-07-12 23:19:37.369607300 +0300
+@@ -253,7 +253,7 @@
+     @ConfigurationName("gui.fontPreviewWindow.posY")
+     public static final ConfigurationItem<Integer> guiFontPreviewPosY = null;
+ 
+-    @ConfigurationDefaultInt(3)
++    @ConfigurationDefaultInt(4)
+     @ConfigurationName("formatting.indent.size")
+     @ConfigurationCategory("format")
+     public static final ConfigurationItem<Integer> indentSize = null;
+diff -Naur src.orig/com/jpexs/helpers/Helper.java src/com/jpexs/helpers/Helper.java
+--- src.orig/com/jpexs/helpers/Helper.java	2014-07-13 00:53:46.141589900 +0300
++++ src/com/jpexs/helpers/Helper.java	2014-07-13 00:24:00.447454000 +0300
+@@ -807,7 +807,7 @@
+         writer.appendNoHilight(" * ").appendNoHilight(AppStrings.translate("decompilationError")).newLine();
+         writer.appendNoHilight(" * ").appendNoHilight(MessageFormat.format(AppStrings.translate("decompilationError.timeout"), Helper.formatTimeToText(timeout))).newLine();
+         writer.appendNoHilight(" */").newLine();
+-        writer.appendNoHilight("throw new flash.errors.IllegalOperationError(\"").
++        writer.appendNoHilight("throw new Error(\"").
+                 appendNoHilight(AppStrings.translate("decompilationError.timeout.description")).
+                 appendNoHilight("\");").newLine();
+     }
+@@ -819,7 +819,7 @@
+         writer.appendNoHilight(" * ").appendNoHilight(AppStrings.translate("decompilationError.errorType")).
+                 appendNoHilight(": " + ex.getClass().getSimpleName()).newLine();
+         writer.appendNoHilight(" */").newLine();
+-        writer.appendNoHilight("throw new flash.errors.IllegalOperationError(\"").
++        writer.appendNoHilight("throw new Error(\"").
+                 appendNoHilight(AppStrings.translate("decompilationError.error.description")).
+                 appendNoHilight("\");").newLine();
+     }
