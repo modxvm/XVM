@@ -5,6 +5,7 @@ package net.wg.gui.cyberSport.controls
    import flash.geom.Rectangle;
    import flash.display.MovieClip;
    import flash.text.TextField;
+   import net.wg.gui.rally.vo.SettingRosterVO;
    import net.wg.utils.IUtils;
    import net.wg.gui.rally.vo.VehicleVO;
    import net.wg.data.daapi.base.DAAPIDataClass;
@@ -15,138 +16,137 @@ package net.wg.gui.cyberSport.controls
    import scaleform.gfx.MouseEventEx;
    import net.wg.data.constants.SoundManagerStates;
    import flash.geom.Point;
-
-
+   
    public class CSVehicleButton extends SoundButtonEx implements IVehicleButton
    {
-          
+      
       public function CSVehicleButton() {
          super();
       }
-
+      
       private static const CUT_RECTANGLE:Rectangle;
-
+      
       public static const SELECTED_VEHICLE:int = 0;
-
+      
       public static const CHOOSE_VEHICLE:int = 1;
-
+      
       public static const COUNT_VEHICLE:int = 2;
-
+      
       public static const DEFAULT_STATE:int = 3;
-
+      
       public static const RANGE_ROSTER:int = 4;
-
+      
       public static const ROSTER_SETTINGS:int = 5;
-
+      
       private static const UPDATE_INIT_DATA:String = "updateInitDFata";
-
+      
       public var cutVehicleIcon:MovieClip;
-
+      
       public var cutVehicleIconEff:MovieClip;
-
+      
       public var vehicleNameEff:MovieClip;
-
+      
       public var vehicleName:MovieClip;
-
+      
       public var vehicleLevel:CSVehicleButtonLevels;
-
+      
       public var vehicleType:MovieClip;
-
+      
       public var vehicleTypeEff:MovieClip;
-
+      
       public var nationTypeEff:MovieClip;
-
+      
       public var nationType:MovieClip;
-
+      
       public var vCountMsg:TextField;
-
+      
       public var defaultMsg:TextField;
-
+      
       public var bgAnimationSelectVehicle:MovieClip;
-
+      
       public var bgAnimationSelectVehicleDef:MovieClip;
-
+      
       public var chooseVhclAnimEffect:MovieClip;
-
+      
       public var chooseVhclAnim:MovieClip;
-
+      
       public var rangeView:RangeViewComponent;
-
+      
       public var defaultBg:MovieClip;
-
+      
       public var rangeBg:MovieClip;
-
+      
       public var btnIconVCount:MovieClip;
-
+      
       public var gearIcon:MovieClip;
-
+      
       public var alertIcon:MovieClip;
-
+      
       public var clickableArea:MovieClip;
-
+      
       public var currentViewType:String = "autoSearch";
-
+      
       private var _showAlertIcon:Boolean = false;
-
+      
       private var rangeModel:SettingRosterVO;
-
+      
       private var utils:IUtils;
-
+      
       private var _currentState:int = 3;
-
+      
       private var _vehicleCount:int = -1;
-
+      
       private var vehicleModel:VehicleVO;
-
+      
       private var _showRangeRosterBg:Boolean = true;
-
+      
       private var _selectSate:Boolean = false;
-
+      
       private var selectedStateText:String = "#cyberSport:button/medallion/chooseVehicle";
-
+      
       private var _forceSoundEnable:Boolean = false;
-
+      
       private var _showCommanderSettings:Boolean = false;
-
+      
       private var _mouseOverAlert:Boolean = false;
-
+      
       public function set forceSoundEnable(param1:Boolean) : void {
          this._forceSoundEnable = param1;
       }
-
+      
       public function get forceSoundEnable() : Boolean {
          return this._forceSoundEnable;
       }
-
+      
       public function set showRangeRosterBg(param1:Boolean) : void {
          this._showRangeRosterBg = param1;
          this.rangeBg.visible = !param1;
       }
-
+      
       public function get showRangeRosterBg() : Boolean {
          return this._showRangeRosterBg;
       }
-
+      
       public function get vehicleCount() : int {
          return this._vehicleCount;
       }
-
+      
       public function set vehicleCount(param1:int) : void {
          this.clearData();
          this._vehicleCount = param1;
          invalidate(UPDATE_INIT_DATA);
       }
-
+      
       public function set showCommanderSettings(param1:Boolean) : void {
          this.clearData();
          this._showCommanderSettings = param1;
          invalidate(UPDATE_INIT_DATA);
       }
-
+      
       public function get showCommanderSettings() : Boolean {
          return this._showCommanderSettings;
       }
-
+      
       public function setRangeData(param1:SettingRosterVO) : void {
          if(param1 == null)
          {
@@ -156,7 +156,7 @@ package net.wg.gui.cyberSport.controls
          this.rangeModel = param1;
          invalidate(UPDATE_INIT_DATA);
       }
-
+      
       public function getModel() : * {
          if(this.vehicleModel)
          {
@@ -164,28 +164,28 @@ package net.wg.gui.cyberSport.controls
          }
          if(this.rangeModel)
          {
-            return {
-               "nationIDRange":this.getNationRange(),
-               "vTypeRange":this.getVType(),
-               "vLevelRange":this.getLevelsRange()
-            }
-         ;
+            return 
+               {
+                  "nationIDRange":this.getNationRange(),
+                  "vTypeRange":this.getVType(),
+                  "vLevelRange":this.getLevelsRange()
+               };
          }
          return null;
       }
-
+      
       public function setVehicle(param1:DAAPIDataClass) : void {
          this.clearData();
          this.vehicleModel = VehicleVO(param1);
          invalidate(UPDATE_INIT_DATA);
       }
-
+      
       public function reset() : void {
          this.selectState(false);
          this.clearData();
          invalidate(UPDATE_INIT_DATA);
       }
-
+      
       override protected function draw() : void {
          if(!(_newFrame == null) && (isInvalid(InvalidationType.STATE)) && (this.vehicleLevel))
          {
@@ -198,24 +198,22 @@ package net.wg.gui.cyberSport.controls
             {
                this.initMedallion();
             }
+            else if(this.rangeModel)
+            {
+               this.updateRange();
+            }
             else
             {
-               if(this.rangeModel)
-               {
-                  this.updateRange();
-               }
-               else
-               {
-                  this.initVehicleCount();
-               }
+               this.initVehicleCount();
             }
+            
             this.changeViewState();
             this.updatedFlag = true;
          }
       }
-
+      
       private var updatedFlag:Boolean = false;
-
+      
       private function clearData() : void {
          this.updatedFlag = false;
          this.vehicleModel = null;
@@ -223,38 +221,36 @@ package net.wg.gui.cyberSport.controls
          this._vehicleCount = -1;
          this._showCommanderSettings = false;
       }
-
+      
       private function updateRange() : void {
          this.currentState = RANGE_ROSTER;
          this.rangeView.setData(this.rangeModel as SettingRosterVO);
       }
-
+      
       private function initVehicleCount() : void {
          var _loc1_:TextFormat = null;
          if(this._showCommanderSettings)
          {
             this.currentState = ROSTER_SETTINGS;
          }
+         else if(this._selectSate)
+         {
+            this.initChooseVehicle();
+         }
          else
          {
-            if(this._selectSate)
+            this.currentState = this.vehicleCount != -1?COUNT_VEHICLE:DEFAULT_STATE;
+            this.vCountMsg.htmlText = this.vehicleCount.toString();
+            if(this._vehicleCount == 0)
             {
-               this.initChooseVehicle();
-            }
-            else
-            {
-               this.currentState = this.vehicleCount != -1?COUNT_VEHICLE:DEFAULT_STATE;
-               this.vCountMsg.htmlText = this.vehicleCount.toString();
-               if(this._vehicleCount == 0)
-               {
-                  _loc1_ = this.vCountMsg.getTextFormat();
-                  _loc1_.color = 16711680;
-                  this.vCountMsg.setTextFormat(_loc1_);
-               }
+               _loc1_ = this.vCountMsg.getTextFormat();
+               _loc1_.color = 16711680;
+               this.vCountMsg.setTextFormat(_loc1_);
             }
          }
+         
       }
-
+      
       private function initMedallion() : void {
          this.currentState = SELECTED_VEHICLE;
          var _loc1_:String = this.utils.nations.getNationName(this.vehicleModel.nationID);
@@ -268,13 +264,13 @@ package net.wg.gui.cyberSport.controls
          this.vehicleType.gotoAndStop(this.vehicleModel.type);
          this.vehicleTypeEff.gotoAndStop(this.vehicleModel.type);
       }
-
+      
       private var _clickableAreaEnable:Boolean = true;
-
+      
       public function set clickableAreaEnable(param1:Boolean) : void {
          this._clickableAreaEnable = param1;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          var _loc2_:* = false;
          if(enabled == false && param1 == true)
@@ -289,16 +285,14 @@ package net.wg.gui.cyberSport.controls
             this.clickableArea.buttonMode = false;
             this.clickableArea.removeEventListener(MouseEvent.CLICK,this.areaOnClickHandler);
          }
-         else
+         else if(_loc2_)
          {
-            if(_loc2_)
-            {
-               mouseChildren = true;
-               this.updateClickableArea();
-            }
+            mouseChildren = true;
+            this.updateClickableArea();
          }
+         
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(enabled)
@@ -342,7 +336,7 @@ package net.wg.gui.cyberSport.controls
          this.clickableArea.addEventListener(MouseEvent.ROLL_OUT,this.rollOutHandler);
          this.clickableArea.addEventListener(MouseEvent.ROLL_OVER,this.rollOverHandler);
       }
-
+      
       private function updateClickableArea() : void {
          this.clickableArea.buttonMode = this._clickableAreaEnable;
          if(this._clickableAreaEnable)
@@ -350,7 +344,7 @@ package net.wg.gui.cyberSport.controls
             this.clickableArea.addEventListener(MouseEvent.CLICK,this.areaOnClickHandler);
          }
       }
-
+      
       private function rollOverHandler(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          this.playSounds(param1.type);
@@ -359,7 +353,7 @@ package net.wg.gui.cyberSport.controls
             dispatchEvent(new RallyViewsEvent(RallyViewsEvent.VEH_BTN_ROLL_OVER));
          }
       }
-
+      
       private function rollOutHandler(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          this.playSounds(param1.type);
@@ -368,7 +362,7 @@ package net.wg.gui.cyberSport.controls
             dispatchEvent(new RallyViewsEvent(RallyViewsEvent.VEH_BTN_ROLL_OUT));
          }
       }
-
+      
       private function areaOnClickHandler(param1:MouseEvent) : void {
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
          var _loc3_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
@@ -387,36 +381,32 @@ package net.wg.gui.cyberSport.controls
             App.soundMgr.playControlsSnd(SoundManagerStates.SND_PRESS,soundType,soundId);
          }
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
-          
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
-          
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
-          
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
-          
       }
-
-      public function selectState(param1:Boolean, param2:String=null) : void {
+      
+      public function selectState(param1:Boolean, param2:String = null) : void {
          this.selectedStateText = param2 == null?CYBERSPORT.BUTTON_MEDALLION_CHOOSEVEHICLE:param2;
          this._selectSate = param1;
          invalidate(UPDATE_INIT_DATA);
       }
-
+      
       private function initChooseVehicle() : void {
          this.currentState = CHOOSE_VEHICLE;
          this.chooseVhclAnim.chooseVehicle.text = this.selectedStateText;
          this.chooseVhclAnimEffect.chooseVehicle.text = this.selectedStateText;
          this.changeViewState();
       }
-
+      
       private function changeViewState() : void {
          if(enabled)
          {
@@ -463,12 +453,12 @@ package net.wg.gui.cyberSport.controls
          }
          this.alertIcon.visible = (this._showAlertIcon) && (this.vehicleModel) && !this.vehicleModel.isReadyToFight;
       }
-
+      
       private function playSounds(param1:String) : void {
          var param1:String = param1 == MouseEvent.ROLL_OVER?SoundManagerStates.SND_OVER:SoundManagerStates.SND_OUT;
          App.soundMgr.playControlsSnd(param1,soundType,soundId);
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          if(this.rangeModel)
@@ -491,11 +481,11 @@ package net.wg.gui.cyberSport.controls
          this.clickableArea.removeEventListener(MouseEvent.ROLL_OVER,this.rollOverHandler);
          this.clickableArea.removeEventListener(MouseEvent.CLICK,this.areaOnClickHandler);
       }
-
+      
       private function dispatchChooseVehicle() : void {
          dispatchEvent(new RallyViewsEvent(RallyViewsEvent.CHOOSE_VEHICLE,this.getModel()));
       }
-
+      
       private function getNationRange() : Array {
          if((this.rangeModel) && (this.rangeModel.nationIDRange))
          {
@@ -503,7 +493,7 @@ package net.wg.gui.cyberSport.controls
          }
          return [];
       }
-
+      
       private function getVType() : Array {
          if((this.rangeModel) && (this.rangeModel.vTypeRange))
          {
@@ -511,7 +501,7 @@ package net.wg.gui.cyberSport.controls
          }
          return [];
       }
-
+      
       private function getLevelsRange() : Array {
          if((this.rangeModel) && (this.rangeModel.vLevelRange))
          {
@@ -519,25 +509,24 @@ package net.wg.gui.cyberSport.controls
          }
          return [];
       }
-
+      
       public function get currentState() : int {
          return this._currentState;
       }
-
+      
       public function set currentState(param1:int) : void {
          this._currentState = param1;
       }
-
+      
       private function onAlertRollOver(param1:MouseEvent) : void {
          this._mouseOverAlert = true;
          dispatchEvent(new RallyViewsEvent(RallyViewsEvent.VEH_BTN_ROLL_OVER,
             {
                "type":"alert",
                "state":this.vehicleModel.state
-            }
-         ));
+            }));
       }
-
+      
       private function onAlertRollOut(param1:MouseEvent) : void {
          this._mouseOverAlert = false;
          dispatchEvent(new RallyViewsEvent(RallyViewsEvent.VEH_BTN_ROLL_OUT));
@@ -548,14 +537,13 @@ package net.wg.gui.cyberSport.controls
             dispatchEvent(new RallyViewsEvent(RallyViewsEvent.VEH_BTN_ROLL_OVER));
          }
       }
-
+      
       public function get showAlertIcon() : Boolean {
          return this._showAlertIcon;
       }
-
+      
       public function set showAlertIcon(param1:Boolean) : void {
          this._showAlertIcon = param1;
       }
    }
-
 }

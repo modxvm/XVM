@@ -4,20 +4,19 @@ package scaleform.clik.data
    import flash.events.IEventDispatcher;
    import flash.events.EventDispatcher;
    import flash.events.Event;
-
-
+   
    public dynamic class DataProvider extends Array implements IDataProvider, IEventDispatcher
    {
-          
-      public function DataProvider(param1:Array=null) {
+      
+      public function DataProvider(param1:Array = null) {
          super();
          this.dispatcher = new EventDispatcher(this);
          this.parseSource(param1);
       }
-
+      
       protected var dispatcher:EventDispatcher;
-
-      public function indexOf(param1:Object, param2:Function=null) : int {
+      
+      public function indexOf(param1:Object, param2:Function = null) : int {
          var _loc3_:int = super.indexOf(param1);
          if(param2 != null)
          {
@@ -25,8 +24,8 @@ package scaleform.clik.data
          }
          return _loc3_;
       }
-
-      public function requestItemAt(param1:uint, param2:Function=null) : Object {
+      
+      public function requestItemAt(param1:uint, param2:Function = null) : Object {
          var _loc3_:Object = this[param1];
          if(param2 != null)
          {
@@ -34,8 +33,8 @@ package scaleform.clik.data
          }
          return _loc3_;
       }
-
-      public function requestItemRange(param1:int, param2:int, param3:Function=null) : Array {
+      
+      public function requestItemRange(param1:int, param2:int, param3:Function = null) : Array {
          var _loc4_:Array = this.slice(param1,param2 + 1);
          if(param3 != null)
          {
@@ -43,23 +42,23 @@ package scaleform.clik.data
          }
          return _loc4_;
       }
-
+      
       public function cleanUp() : void {
          this.splice(0,length);
       }
-
-      public function invalidate(param1:uint=0) : void {
+      
+      public function invalidate(param1:uint = 0) : void {
          this.dispatcher.dispatchEvent(new Event(Event.CHANGE));
       }
-
+      
       public function setSource(param1:Array) : void {
          this.parseSource(param1);
       }
-
+      
       public function toString() : String {
          return "[CLIK DataProvider " + this.join(",") + "]";
       }
-
+      
       protected function parseSource(param1:Array) : void {
          if(param1 == null)
          {
@@ -73,26 +72,25 @@ package scaleform.clik.data
             _loc3_++;
          }
       }
-
-      public function addEventListener(param1:String, param2:Function, param3:Boolean=false, param4:int=0, param5:Boolean=false) : void {
+      
+      public function addEventListener(param1:String, param2:Function, param3:Boolean = false, param4:int = 0, param5:Boolean = false) : void {
          this.dispatcher.addEventListener(param1,param2,param3,param4,param5);
       }
-
-      public function removeEventListener(param1:String, param2:Function, param3:Boolean=false) : void {
+      
+      public function removeEventListener(param1:String, param2:Function, param3:Boolean = false) : void {
          this.dispatcher.removeEventListener(param1,param2,param3);
       }
-
+      
       public function dispatchEvent(param1:Event) : Boolean {
          return this.dispatcher.dispatchEvent(param1);
       }
-
+      
       public function hasEventListener(param1:String) : Boolean {
          return this.dispatcher.hasEventListener(param1);
       }
-
+      
       public function willTrigger(param1:String) : Boolean {
          return this.dispatcher.willTrigger(param1);
       }
    }
-
 }

@@ -5,13 +5,11 @@ package mx.core
    import flash.events.Event;
    import flash.system.ApplicationDomain;
    import flash.display.BitmapData;
-
-   use namespace mx_internal;
-
+   
    public class BitmapAsset extends FlexBitmap implements IFlexAsset, IFlexDisplayObject, ILayoutDirectionElement
    {
-          
-      public function BitmapAsset(param1:BitmapData=null, param2:String=undefined, param3:Boolean=false) {
+      
+      public function BitmapAsset(param1:BitmapData = null, param2:String = "auto", param3:Boolean = false) {
          var _loc4_:ApplicationDomain = null;
          super(param1,param2,param3);
          if(FlexVersionClass == null)
@@ -27,21 +25,21 @@ package mx.core
             this.addEventListener(Event.ADDED,this.addedHandler);
          }
       }
-
-      mx_internal  static const VERSION:String = "4.5.1.21328";
-
+      
+      mx_internal  static const VERSION:String = "4.6.0.23201";
+      
       private static var FlexVersionClass:Class;
-
+      
       private static var MatrixUtilClass:Class;
-
+      
       private var layoutFeaturesClass:Class;
-
+      
       private var layoutFeatures:IAssetLayoutFeatures;
-
+      
       override public function get x() : Number {
          return this.layoutFeatures == null?super.x:this.layoutFeatures.layoutX;
       }
-
+      
       override public function set x(param1:Number) : void {
          if(this.x == param1)
          {
@@ -57,11 +55,11 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get y() : Number {
          return this.layoutFeatures == null?super.y:this.layoutFeatures.layoutY;
       }
-
+      
       override public function set y(param1:Number) : void {
          if(this.y == param1)
          {
@@ -77,11 +75,11 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get z() : Number {
          return this.layoutFeatures == null?super.z:this.layoutFeatures.layoutZ;
       }
-
+      
       override public function set z(param1:Number) : void {
          if(this.z == param1)
          {
@@ -97,7 +95,7 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get width() : Number {
          var _loc1_:Point = null;
          if(this.layoutFeatures == null)
@@ -110,7 +108,7 @@ package mx.core
          }
          return _loc1_?_loc1_.x:super.width;
       }
-
+      
       override public function set width(param1:Number) : void {
          if(this.width == param1)
          {
@@ -127,9 +125,9 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       private var _height:Number;
-
+      
       override public function get height() : Number {
          var _loc1_:Point = null;
          if(this.layoutFeatures == null)
@@ -142,7 +140,7 @@ package mx.core
          }
          return _loc1_?_loc1_.y:super.height;
       }
-
+      
       override public function set height(param1:Number) : void {
          if(this.height == param1)
          {
@@ -159,11 +157,11 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get rotationX() : Number {
          return this.layoutFeatures == null?super.rotationX:this.layoutFeatures.layoutRotationX;
       }
-
+      
       override public function set rotationX(param1:Number) : void {
          if(this.rotationX == param1)
          {
@@ -179,11 +177,11 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get rotationY() : Number {
          return this.layoutFeatures == null?super.rotationY:this.layoutFeatures.layoutRotationY;
       }
-
+      
       override public function set rotationY(param1:Number) : void {
          if(this.rotationY == param1)
          {
@@ -199,11 +197,11 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get rotationZ() : Number {
          return this.layoutFeatures == null?super.rotationZ:this.layoutFeatures.layoutRotationZ;
       }
-
+      
       override public function set rotationZ(param1:Number) : void {
          if(this.rotationZ == param1)
          {
@@ -219,11 +217,11 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get rotation() : Number {
          return this.layoutFeatures == null?super.rotation:this.layoutFeatures.layoutRotationZ;
       }
-
+      
       override public function set rotation(param1:Number) : void {
          if(this.rotation == param1)
          {
@@ -239,11 +237,11 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get scaleX() : Number {
          return this.layoutFeatures == null?super.scaleX:this.layoutFeatures.layoutScaleX;
       }
-
+      
       override public function set scaleX(param1:Number) : void {
          if(this.scaleX == param1)
          {
@@ -260,11 +258,11 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get scaleY() : Number {
          return this.layoutFeatures == null?super.scaleY:this.layoutFeatures.layoutScaleY;
       }
-
+      
       override public function set scaleY(param1:Number) : void {
          if(this.scaleY == param1)
          {
@@ -281,11 +279,11 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       override public function get scaleZ() : Number {
          return this.layoutFeatures == null?super.scaleZ:this.layoutFeatures.layoutScaleZ;
       }
-
+      
       override public function set scaleZ(param1:Number) : void {
          if(this.scaleZ == param1)
          {
@@ -301,13 +299,13 @@ package mx.core
             this.validateTransformMatrix();
          }
       }
-
+      
       private var _layoutDirection:String = "ltr";
-
+      
       public function get layoutDirection() : String {
          return this._layoutDirection;
       }
-
+      
       public function set layoutDirection(param1:String) : void {
          if(param1 == this._layoutDirection)
          {
@@ -316,7 +314,7 @@ package mx.core
          this._layoutDirection = param1;
          this.invalidateLayoutDirection();
       }
-
+      
       public function get measuredHeight() : Number {
          if(bitmapData)
          {
@@ -324,7 +322,7 @@ package mx.core
          }
          return 0;
       }
-
+      
       public function get measuredWidth() : Number {
          if(bitmapData)
          {
@@ -332,13 +330,13 @@ package mx.core
          }
          return 0;
       }
-
+      
       public function invalidateLayoutDirection() : void {
          var _loc2_:* = false;
          var _loc1_:DisplayObjectContainer = parent;
          while(_loc1_)
          {
-            if(_loc1_  is  ILayoutDirectionElement)
+            if(_loc1_ is ILayoutDirectionElement)
             {
                _loc2_ = !(this._layoutDirection == null) && !(ILayoutDirectionElement(_loc1_).layoutDirection == null) && !(this._layoutDirection == ILayoutDirectionElement(_loc1_).layoutDirection);
                if((_loc2_) && this.layoutFeatures == null)
@@ -350,35 +348,33 @@ package mx.core
                      this.validateTransformMatrix();
                   }
                }
-               else
+               else if(!_loc2_ && (this.layoutFeatures))
                {
-                  if(!_loc2_ && (this.layoutFeatures))
-                  {
-                     this.layoutFeatures.mirror = _loc2_;
-                     this.validateTransformMatrix();
-                     this.layoutFeatures = null;
-                  }
+                  this.layoutFeatures.mirror = _loc2_;
+                  this.validateTransformMatrix();
+                  this.layoutFeatures = null;
                }
+               
                break;
             }
             _loc1_ = _loc1_.parent;
          }
       }
-
+      
       public function move(param1:Number, param2:Number) : void {
          this.x = param1;
          this.y = param2;
       }
-
+      
       public function setActualSize(param1:Number, param2:Number) : void {
          this.width = param1;
          this.height = param2;
       }
-
+      
       private function addedHandler(param1:Event) : void {
          this.invalidateLayoutDirection();
       }
-
+      
       private function initAdvancedLayoutFeatures() : void {
          var _loc1_:ApplicationDomain = null;
          var _loc2_:IAssetLayoutFeatures = null;
@@ -414,7 +410,7 @@ package mx.core
             this.layoutFeatures = _loc2_;
          }
       }
-
+      
       private function validateTransformMatrix() : void {
          if(this.layoutFeatures != null)
          {
@@ -429,5 +425,4 @@ package mx.core
          }
       }
    }
-
 }

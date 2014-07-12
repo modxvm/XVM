@@ -3,25 +3,24 @@ package net.wg.gui.components.controls
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.clik.data.ListData;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class ScrollingListWithDisRenderers extends SortableScrollingList
    {
-          
+      
       public function ScrollingListWithDisRenderers() {
          super();
       }
-
+      
       protected var _isFocusedDisabledRenderers:Boolean;
-
+      
       public function set isFocusedDisabledRenderers(param1:Boolean) : void {
          this._isFocusedDisabledRenderers = param1;
       }
-
+      
       public function get isFocusedDisabledRenderers() : Boolean {
          return this._isFocusedDisabledRenderers;
       }
-
+      
       override protected function populateData(param1:Array) : void {
          var _loc5_:IListItemRenderer = null;
          var _loc6_:* = 0;
@@ -41,7 +40,7 @@ package net.wg.gui.components.controls
             _loc4_++;
          }
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.STATE))
@@ -49,20 +48,19 @@ package net.wg.gui.components.controls
             this.updateStatesForVisibleRenderers();
          }
       }
-
+      
       private function updateStatesForVisibleRenderers() : void {
          refreshData();
       }
-
+      
       override protected function selectedRenderer(param1:IListItemRenderer, param2:Boolean) : void {
          var _loc3_:Boolean = this.rendererIsEnabled(param1);
          param1.selected = (param2) && (_loc3_);
          param1.validateNow();
       }
-
+      
       protected function rendererIsEnabled(param1:IListItemRenderer) : Boolean {
          return (this.isFocusedDisabledRenderers) || (param1.enabled);
       }
    }
-
 }

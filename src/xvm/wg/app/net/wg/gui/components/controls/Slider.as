@@ -8,11 +8,10 @@ package net.wg.gui.components.controls
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.SliderEvent;
    import flash.geom.Point;
-
-
+   
    public class Slider extends scaleform.clik.controls.Slider
    {
-          
+      
       public function Slider() {
          this._fillPadding = new Padding(3,6,3,2);
          super();
@@ -32,25 +31,25 @@ package net.wg.gui.components.controls
          }
          buttonMode = true;
       }
-
+      
       private var progress_mask:MovieClip;
-
+      
       protected var _undefined:Boolean = false;
-
+      
       public var hitMc:MovieClip = null;
-
+      
       public var patternMc:BitmapFill = null;
-
+      
       public var disablePatternMc:BitmapFill = null;
-
+      
       private var _fillPaddingX:Number = 11;
-
+      
       private var _fillPaddingY:Number = 4;
-
+      
       private var _fillPadding:Padding;
-
+      
       private var _maxAvailableValue:Number = NaN;
-
+      
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_WHEEL,this.onScrollWheel,false);
          this.progress_mask = null;
@@ -66,7 +65,7 @@ package net.wg.gui.components.controls
          }
          super.onDispose();
       }
-
+      
       override protected function scrollWheel(param1:Number) : void {
          if(!this.enabled)
          {
@@ -75,41 +74,41 @@ package net.wg.gui.components.controls
          this.value = value + _snapInterval * (param1 > 0?1:-1);
          dispatchEvent(new Event(Event.CHANGE));
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          track["progress_mask"].gotoAndStop(0);
          addEventListener(MouseEvent.MOUSE_WHEEL,this.onScrollWheel,false,0,true);
       }
-
+      
       override protected function beginDrag(param1:MouseEvent) : void {
          if(App.utils.commons.isLeftButton(param1))
          {
             super.beginDrag(param1);
          }
       }
-
+      
       override protected function trackPress(param1:MouseEvent) : void {
          if(App.utils.commons.isLeftButton(param1))
          {
             super.trackPress(param1);
          }
       }
-
+      
       protected function onScrollWheel(param1:MouseEvent) : void {
          this.scrollWheel(param1.delta);
          param1.stopPropagation();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          this.updatePatterns();
       }
-
+      
       public function get undefinedDisabled() : Boolean {
          return this._undefined;
       }
-
+      
       public function set undefinedDisabled(param1:Boolean) : void {
          if(this._undefined == param1)
          {
@@ -122,11 +121,11 @@ package net.wg.gui.components.controls
          track["progress_mask"].gotoAndStop(0);
          invalidate(InvalidationType.STATE);
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(param1 == super.enabled)
          {
@@ -140,17 +139,17 @@ package net.wg.gui.components.controls
          }
          invalidate(InvalidationType.STATE);
       }
-
+      
       override public function set value(param1:Number) : void {
          _value = this.lockValue(param1);
          dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,_value));
          this.updateThumb();
       }
-
+      
       public function get maxAvailableValue() : Number {
          return this._maxAvailableValue;
       }
-
+      
       public function set maxAvailableValue(param1:Number) : void {
          if((isNaN(this._maxAvailableValue)) && (isNaN(param1)) || param1 == this._maxAvailableValue)
          {
@@ -163,7 +162,7 @@ package net.wg.gui.components.controls
          }
          invalidate();
       }
-
+      
       override protected function doDrag(param1:MouseEvent) : void {
          var _loc2_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
          var _loc3_:Number = _loc2_.x - _dragOffset.x;
@@ -180,7 +179,7 @@ package net.wg.gui.components.controls
             dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,_value));
          }
       }
-
+      
       override protected function updateThumb() : void {
          var _loc2_:* = NaN;
          var _loc1_:Number = track.width - offsetLeft - offsetRight;
@@ -200,7 +199,7 @@ package net.wg.gui.components.controls
             track["progress_mask"].gotoAndStop(0);
          }
       }
-
+      
       override protected function lockValue(param1:Number) : Number {
          var _loc2_:* = NaN;
          if(!isNaN(this._maxAvailableValue))
@@ -213,17 +212,16 @@ package net.wg.gui.components.controls
          }
          return _loc2_;
       }
-
+      
       protected function updatePatterns() : void {
          var _loc1_:* = NaN;
-         var _loc3_:* = NaN;
          if(!this.patternMc && !this.disablePatternMc)
          {
             return;
          }
          _loc1_ = this.hitMc.width;
          var _loc2_:Number = Math.abs(_maximum - _minimum);
-         _loc3_ = _loc1_;
+         var _loc3_:Number = _loc1_;
          if(!isNaN(this._maxAvailableValue))
          {
             _loc3_ = _loc1_ * Math.abs(this._maxAvailableValue - _minimum) / _loc2_;
@@ -254,5 +252,4 @@ package net.wg.gui.components.controls
          }
       }
    }
-
 }

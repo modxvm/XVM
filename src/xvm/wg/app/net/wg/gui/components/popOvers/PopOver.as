@@ -9,78 +9,76 @@ package net.wg.gui.components.popOvers
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.ComponentEvent;
    import flash.display.DisplayObject;
-   import __AS3__.vec.Vector;
    import net.wg.infrastructure.interfaces.IAbstractWrapperView;
    import flash.geom.Point;
-
-
+   
    public class PopOver extends BaseViewWrapper implements IPopoverWrapper
    {
-          
+      
       public function PopOver() {
          super();
          this.setArrowVisible(PopOverConst.ARROW_NONE);
          this.initLayout();
       }
-
+      
       private static const ARROW_DIRECTION_INV:String = "arrowDirectionInvalid";
-
+      
       private static const ARROW_POSITION_INV:String = "arrowPositionInvalid";
-
+      
       private static const CLOSE_BTN_VISIBLE_INV:String = "arrowPositionInvalid";
-
+      
       public static const GlowArrowBottom_UI:String = "GlowArrowBottom_UI";
-
+      
       public static const GlowArrowLeft_UI:String = "GlowArrowLeft_UI";
-
+      
       public static const GlowArrowRight_UI:String = "GlowArrowRight_UI";
-
+      
       public static const GlowArrowTop_UI:String = "GlowArrowTop_UI";
-
+      
       private static const TITLE_INVALID:String = "titleInv";
-
+      
       protected var _arrowDirection:int = -1;
-
+      
       protected var _arrowPosition:int = 0;
-
+      
       private var _title:String = "";
-
+      
       public var titleTextField:TextField;
-
+      
       public var closeBtn:CloseButton;
-
+      
       public var bgForm:MovieClip;
-
+      
       public var background:MovieClip;
-
+      
       public var hitMc:MovieClip;
-
+      
       public var arrowLeft:MovieClip;
-
+      
       public var arrowRight:MovieClip;
-
+      
       public var arrowTop:MovieClip;
-
+      
       public var arrowBottom:MovieClip;
-
+      
       private var _isCloseBtnVisible:Boolean = false;
-
+      
       protected function initLayout() : void {
          layout = new PopoverInternalLayout();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.titleTextField.autoSize = TextFieldAutoSize.LEFT;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          this.mouseEnabled = false;
          this.bgForm.mouseChildren = this.bgForm.mouseEnabled = false;
          if(isInvalid(TITLE_INVALID))
          {
-            this.titleTextField.text = (this._title) || "";
+            this.titleTextField.text = this._title || "";
          }
          if(isInvalid(ARROW_DIRECTION_INV))
          {
@@ -105,11 +103,11 @@ package net.wg.gui.components.popOvers
             }
          }
       }
-
+      
       private function closeBtnClickHandler(param1:ButtonEvent) : void {
          dispatchEvent(new ComponentEvent(ComponentEvent.HIDE));
       }
-
+      
       private function setArrowVisible(param1:int) : void {
          var _loc3_:DisplayObject = null;
          var _loc2_:Vector.<DisplayObject> = this.getArrowsList();
@@ -121,20 +119,20 @@ package net.wg.gui.components.popOvers
             _loc4_++;
          }
       }
-
+      
       override public function set wrapperContent(param1:IAbstractWrapperView) : void {
          super.wrapperContent = param1;
          addChild(this.closeBtn);
       }
-
+      
       protected function applyArrowDirectionChanges() : void {
          this.setArrowVisible(this._arrowDirection);
       }
-
+      
       protected function applyArrowPositionChanges() : void {
          invalidateLayout();
       }
-
+      
       public function getArrowsList() : Vector.<DisplayObject> {
          var _loc1_:Vector.<DisplayObject> = new Vector.<DisplayObject>(4);
          _loc1_[PopOverConst.ARROW_RIGHT] = this.arrowRight;
@@ -143,11 +141,11 @@ package net.wg.gui.components.popOvers
          _loc1_[PopOverConst.ARROW_LEFT] = this.arrowLeft;
          return _loc1_;
       }
-
+      
       public function get arrowDirection() : uint {
          return this._arrowDirection;
       }
-
+      
       public function set arrowDirection(param1:uint) : void {
          if(this._arrowDirection != param1)
          {
@@ -155,11 +153,11 @@ package net.wg.gui.components.popOvers
             invalidate(ARROW_DIRECTION_INV);
          }
       }
-
+      
       public function get arrowPosition() : int {
          return this._arrowPosition;
       }
-
+      
       public function set arrowPosition(param1:int) : void {
          if(this._arrowPosition != param1)
          {
@@ -167,28 +165,28 @@ package net.wg.gui.components.popOvers
             invalidate(ARROW_POSITION_INV);
          }
       }
-
+      
       public function get title() : String {
          return this._title;
       }
-
+      
       public function set title(param1:String) : void {
          this._title = param1;
          invalidate(TITLE_INVALID);
       }
-
+      
       override public function get width() : Number {
          return this.hitMc.width;
       }
-
+      
       public function get hitAreaTopLeftPaddings() : Point {
          return new Point(this.hitMc.x,this.hitMc.y);
       }
-
+      
       override public function get height() : Number {
          return this.hitMc.height;
       }
-
+      
       override protected function onDispose() : void {
          this.titleTextField = null;
          this.bgForm = null;
@@ -202,11 +200,11 @@ package net.wg.gui.components.popOvers
          this.closeBtn = null;
          super.onDispose();
       }
-
+      
       public function get isCloseBtnVisible() : Boolean {
          return this._isCloseBtnVisible;
       }
-
+      
       public function set isCloseBtnVisible(param1:Boolean) : void {
          if(this._isCloseBtnVisible != param1)
          {
@@ -215,5 +213,4 @@ package net.wg.gui.components.popOvers
          }
       }
    }
-
 }

@@ -1,6 +1,6 @@
 package net.wg.gui.lobby.customization
 {
-   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.base.UIComponentEx;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer;
    import flash.text.TextField;
@@ -11,11 +11,10 @@ package net.wg.gui.lobby.customization
    import scaleform.clik.events.ListEvent;
    import flash.events.MouseEvent;
    import flash.display.InteractiveObject;
-
-
-   public class BaseTimedCustomizationSectionView extends UIComponent implements IViewStackContent
+   
+   public class BaseTimedCustomizationSectionView extends UIComponentEx implements IViewStackContent
    {
-          
+      
       public function BaseTimedCustomizationSectionView() {
          super();
          this.form = VehicleCustomization.instance;
@@ -24,49 +23,49 @@ package net.wg.gui.lobby.customization
          this._groupsDataProvider = this.getGroupsDP();
          this._groupsDataProvider.triggerInvalidation();
       }
-
+      
       public static const CAMOUFLAGE:String = "camouflage";
-
+      
       public static const CAMOUFLAGE_GROUP_VIEW:String = "CamouflageGroupViewUI";
-
+      
       public static const EMBLEM_LEFT:String = "emblemLeft";
-
+      
       public static const EMBLEM_RIGHT:String = "emblemRight";
-
+      
       public static const EMBLEM_GROUP_VIEW:String = "EmblemGroupViewUI";
-
+      
       public static const EMBLEM_GROUP_VIEW_COPY:String = "EmblemGroupViewUICopy";
-
+      
       public static const INSCRIPTION_LEFT:String = "inscriptionLeft";
-
+      
       public static const INSCRIPTION_RIGHT:String = "inscriptionRight";
-
+      
       public static const INSCRIPTION_GROUP_VIEW:String = "InscriptionGroupViewUI";
-
+      
       public static const INSCRIPTION_GROUP_VIEW_COPY:String = "InscriptionGroupViewUICopy";
-
+      
       public var form:VehicleCustomization = null;
-
+      
       public var view:BaseTimedCustomizationGroupView = null;
-
+      
       public var currentItemRenderer:CustomizationItemRenderer = null;
-
+      
       public var newItemRenderer:CustomizationItemRenderer = null;
-
+      
       public var dropButton:CamoDropButton = null;
-
+      
       public var timeLeftField:TextField = null;
-
+      
       public var list:ScrollingListAutoScroll = null;
-
+      
       private var _currentItemData:Object = null;
-
+      
       private var _newItemData:Object = null;
-
+      
       protected var _groupsDataProvider:DAAPIDataProvider = null;
-
+      
       private var _data:Object = null;
-
+      
       public function onCurrentChanged() : void {
          this.requestCurrentItem();
          if(this.view != null)
@@ -74,7 +73,7 @@ package net.wg.gui.lobby.customization
             this.view.invalidateListData();
          }
       }
-
+      
       public function onChangeSuccess() : void {
          if((this.newItemData) && (this.newItemData.id))
          {
@@ -98,7 +97,7 @@ package net.wg.gui.lobby.customization
             }
          }
       }
-
+      
       public function onDropSuccess() : void {
          this.currentItemData = this.getEmptyDataItem();
          this.currentItemRenderer.setData(this.currentItemData);
@@ -117,23 +116,23 @@ package net.wg.gui.lobby.customization
          }
          this.requestCurrentItem();
       }
-
+      
       public function get currentItemData() : Object {
          return this._currentItemData;
       }
-
+      
       public function set currentItemData(param1:Object) : void {
          this._currentItemData = param1;
       }
-
+      
       public function get newItemData() : Object {
          return this._newItemData;
       }
-
+      
       public function set newItemData(param1:Object) : void {
          this._newItemData = param1;
       }
-
+      
       public function requestCurrentItem() : void {
          this.currentItemData = this.form.getCurrentItemS(this.getSectionName());
          if((this.currentItemData) && !(this.timeLeftField == null))
@@ -153,7 +152,7 @@ package net.wg.gui.lobby.customization
             this.dropButton.enabled = !(this.form == null) && !this.form.isActionsLocked();
          }
       }
-
+      
       public function requestItemAt(param1:int) : void {
          var _loc3_:Object = null;
          var _loc2_:Object = this._groupsDataProvider.requestItemAt(param1);
@@ -175,47 +174,47 @@ package net.wg.gui.lobby.customization
             this.view.invalidateListData(false);
          }
       }
-
+      
       public function onGetTimeLeftString(param1:String) : void {
          this.timeLeftField.text = param1;
       }
-
+      
       public function getListLabelFieldName() : String {
          return "userString";
       }
-
+      
       public function getEmptyDataItem() : Object {
          return null;
       }
-
+      
       public function getGroupsDP() : DAAPIDataProvider {
          return null;
       }
-
+      
       public function getItemsDP() : DAAPIItemsDataProvider {
          return null;
       }
-
+      
       public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider {
          return null;
       }
-
+      
       public function getViewLinkage() : String {
          return "";
       }
-
+      
       public function getTimeSectionLabel() : String {
          return "";
       }
-
+      
       public function getDropButtonTooltip() : String {
          return "";
       }
-
+      
       public function getSectionName() : String {
          return "";
       }
-
+      
       override protected function onDispose() : void {
          if(this.form != null)
          {
@@ -261,20 +260,20 @@ package net.wg.gui.lobby.customization
          this._data = null;
          super.onDispose();
       }
-
+      
       public function update(param1:Object) : void {
          this._data = param1;
       }
-
+      
       public function get data() : Object {
          return this._data;
       }
-
+      
       public function lockControls(param1:Boolean) : void {
          this.dropButton.enabled = !param1;
       }
-
-      public function refreshSelection(param1:Boolean=false) : void {
+      
+      public function refreshSelection(param1:Boolean = false) : void {
          var _loc4_:* = 0;
          var _loc6_:Object = null;
          var _loc7_:Object = null;
@@ -307,7 +306,7 @@ package net.wg.gui.lobby.customization
             }
          }
          this.list.selectedIndex = _loc2_;
-         if(((param1) && (this.view)) && (this.view.rentalPackageDP) && (this.view.rentalPackageList))
+         if((param1 && this.view) && (this.view.rentalPackageDP) && (this.view.rentalPackageList))
          {
             _loc7_ = this.view.rentalPackageDP.requestItemAt(this.view.rentalPackageList.selectedIndex);
             if((_loc7_) && !_loc7_.enabled)
@@ -327,7 +326,7 @@ package net.wg.gui.lobby.customization
             }
          }
       }
-
+      
       override protected function configUI() : void {
          var _loc1_:Object = null;
          var _loc2_:String = null;
@@ -381,11 +380,11 @@ package net.wg.gui.lobby.customization
          super.configUI();
          this.requestCurrentItem();
       }
-
+      
       protected function handleChangeGroupSelectedIndex(param1:ListEvent) : void {
          this.requestItemAt(param1.index);
       }
-
+      
       private function setNewItemView(param1:int, param2:Object, param3:int) : void {
          var _loc4_:int = param2.id;
          if(this.currentItemData.id == _loc4_)
@@ -410,26 +409,25 @@ package net.wg.gui.lobby.customization
                "price":this.newItemData.price,
                "_new":this.newItemData,
                "isIGR":this._groupsDataProvider.requestItemAt(this.list.selectedIndex).isIGR
-            }
-         );
+            });
       }
-
+      
       private function onSelectNewItem(param1:CustomizationEvent) : void {
          this.setNewItemView(param1.index,param1.data,0);
       }
-
+      
       private function onRollOverDropButton(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(this.getDropButtonTooltip());
       }
-
+      
       private function onRollOutDropButton(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onChangeActionLock(param1:CustomizationEvent) : void {
          this.dropButton.enabled = !param1.locked;
       }
-
+      
       private function onResetNewItem(param1:CustomizationEvent) : void {
          this.newItemData = this.getEmptyDataItem();
          this.newItemRenderer.setData(this.newItemData);
@@ -439,7 +437,7 @@ package net.wg.gui.lobby.customization
             this.view.list.selectedIndex = -1;
          }
       }
-
+      
       private function onClickDropButton(param1:CustomizationEvent) : void {
          App.toolTipMgr.hide();
          if(this.form)
@@ -447,10 +445,13 @@ package net.wg.gui.lobby.customization
             this.form.dropCurrentItemInSection(this.getSectionName(),param1.kind);
          }
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

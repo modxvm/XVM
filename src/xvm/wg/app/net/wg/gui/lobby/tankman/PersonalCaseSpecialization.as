@@ -4,32 +4,31 @@ package net.wg.gui.lobby.tankman
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.text.TextField;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class PersonalCaseSpecialization extends UIComponent
    {
-          
+      
       public function PersonalCaseSpecialization() {
          super();
       }
-
+      
       public var contourIcon:UILoaderAlt;
-
+      
       public var vehicleType:TextField;
-
+      
       private var _vType:String = "";
-
+      
       private var _vIco:String = "";
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.contourIcon.dispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -38,7 +37,7 @@ package net.wg.gui.lobby.tankman
             this.contourIcon.source = this._vIco;
          }
       }
-
+      
       public function setData(param1:String, param2:String) : void {
          this._vType = param1;
          this._vIco = param2;
@@ -46,5 +45,4 @@ package net.wg.gui.lobby.tankman
          invalidateData();
       }
    }
-
 }

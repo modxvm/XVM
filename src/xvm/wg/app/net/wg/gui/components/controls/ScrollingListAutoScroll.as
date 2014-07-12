@@ -10,15 +10,14 @@ package net.wg.gui.components.controls
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.WrappingMode;
    import scaleform.clik.constants.NavigationCode;
-
-
+   
    public class ScrollingListAutoScroll extends ScrollingList
    {
-          
+      
       public function ScrollingListAutoScroll() {
          super();
       }
-
+      
       override protected function drawLayout() : void {
          var _loc8_:IListItemRenderer = null;
          var _loc1_:uint = _renderers.length;
@@ -43,7 +42,7 @@ package net.wg.gui.components.controls
          }
          this.drawScrollBar();
       }
-
+      
       override protected function drawScrollBar() : void {
          super.drawScrollBar();
          if(_scrollBar)
@@ -55,11 +54,11 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       override public function get availableWidth() : Number {
          return Math.round(_width) - margin * 2;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
@@ -78,7 +77,7 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       override protected function populateData(param1:Array) : void {
          var _loc5_:IListItemRenderer = null;
          var _loc6_:uint = 0;
@@ -98,7 +97,7 @@ package net.wg.gui.components.controls
             _loc4_++;
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          var _loc3_:* = 0;
          if(param1.handled)
@@ -121,38 +120,34 @@ package net.wg.gui.components.controls
             case NavigationCode.UP:
                if(selectedIndex == -1)
                {
-                  if((_loc5_) && (this.canMoveSelectionTo(scrollPosition + _totalRenderers-1)))
+                  if((_loc5_) && (this.canMoveSelectionTo(scrollPosition + _totalRenderers - 1)))
                   {
-                     selectedIndex = scrollPosition + _totalRenderers-1;
+                     selectedIndex = scrollPosition + _totalRenderers - 1;
                   }
                }
-               else
+               else if(_selectedIndex > 0)
                {
-                  if(_selectedIndex > 0)
+                  if((_loc5_) && (this.canMoveSelectionTo(selectedIndex - 1)))
                   {
-                     if((_loc5_) && (this.canMoveSelectionTo(selectedIndex-1)))
+                     selectedIndex--;
+                  }
+               }
+               else if(wrapping != WrappingMode.STICK)
+               {
+                  if(wrapping == WrappingMode.WRAP)
+                  {
+                     if((_loc5_) && (this.canMoveSelectionTo(_dataProvider.length - 1)))
                      {
-                        selectedIndex--;
+                        selectedIndex = _dataProvider.length - 1;
                      }
                   }
                   else
                   {
-                     if(wrapping != WrappingMode.STICK)
-                     {
-                        if(wrapping == WrappingMode.WRAP)
-                        {
-                           if((_loc5_) && (this.canMoveSelectionTo(_dataProvider.length-1)))
-                           {
-                              selectedIndex = _dataProvider.length-1;
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.DOWN:
                if(_selectedIndex == -1)
@@ -162,38 +157,34 @@ package net.wg.gui.components.controls
                      selectedIndex = _scrollPosition;
                   }
                }
-               else
+               else if(_selectedIndex < _dataProvider.length - 1)
                {
-                  if(_selectedIndex < _dataProvider.length-1)
+                  if((_loc5_) && (this.canMoveSelectionTo(selectedIndex + 1)))
                   {
-                     if((_loc5_) && (this.canMoveSelectionTo(selectedIndex + 1)))
+                     selectedIndex++;
+                  }
+               }
+               else if(wrapping != WrappingMode.STICK)
+               {
+                  if(wrapping == WrappingMode.WRAP)
+                  {
+                     if((_loc5_) && (this.canMoveSelectionTo(0)))
                      {
-                        selectedIndex++;
+                        selectedIndex = 0;
                      }
                   }
                   else
                   {
-                     if(wrapping != WrappingMode.STICK)
-                     {
-                        if(wrapping == WrappingMode.WRAP)
-                        {
-                           if((_loc5_) && (this.canMoveSelectionTo(0)))
-                           {
-                              selectedIndex = 0;
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.END:
                if(!_loc5_)
                {
-                  _loc3_ = _dataProvider.length-1;
+                  _loc3_ = _dataProvider.length - 1;
                   while(_loc3_ > selectedIndex)
                   {
                      if(this.canMoveSelectionTo(_loc3_))
@@ -241,9 +232,9 @@ package net.wg.gui.components.controls
                   _loc3_ = _totalRenderers;
                   while(_loc3_ > 0)
                   {
-                     if(this.canMoveSelectionTo(Math.min(_dataProvider.length-1,selectedIndex + _loc3_)))
+                     if(this.canMoveSelectionTo(Math.min(_dataProvider.length - 1,selectedIndex + _loc3_)))
                      {
-                        selectedIndex = Math.min(_dataProvider.length-1,selectedIndex + _loc3_);
+                        selectedIndex = Math.min(_dataProvider.length - 1,selectedIndex + _loc3_);
                         break;
                      }
                      _loc3_--;
@@ -255,7 +246,7 @@ package net.wg.gui.components.controls
          }
          param1.handled = true;
       }
-
+      
       private function canMoveSelectionTo(param1:int) : Boolean {
          var _loc2_:Object = dataProvider.requestItemAt(param1);
          if((_loc2_) && (_loc2_.hasOwnProperty("enabled")))
@@ -265,5 +256,4 @@ package net.wg.gui.components.controls
          return true;
       }
    }
-
 }

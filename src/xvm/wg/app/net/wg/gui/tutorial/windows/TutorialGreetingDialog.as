@@ -4,26 +4,25 @@ package net.wg.gui.tutorial.windows
    import net.wg.gui.tutorial.controls.BattleBonusItem;
    import flash.text.TextField;
    import flash.display.InteractiveObject;
-
-
+   
    public class TutorialGreetingDialog extends TutorialDialog
    {
-          
+      
       public function TutorialGreetingDialog() {
          super();
          canClose = false;
          canDrag = false;
          isModal = true;
       }
-
+      
       public var imageLoader:UILoaderAlt;
-
+      
       public var bonusItem:BattleBonusItem;
-
+      
       public var timeField:TextField;
-
+      
       public var restartHintField:TextField;
-
+      
       override protected function drawData() : void {
          super.drawData();
          this.imageLoader.source = _data.imageUrl;
@@ -31,7 +30,7 @@ package net.wg.gui.tutorial.windows
          this.timeField.htmlText = _data.timeNoteValue;
          this.updateBonuses();
       }
-
+      
       private function updateBonuses() : void {
          var _loc2_:* = NaN;
          var _loc3_:* = NaN;
@@ -64,27 +63,26 @@ package net.wg.gui.tutorial.windows
             this.bonusItem.setBonuses(_loc2_,_loc3_);
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.restartHintField.text = App.utils.locale.makeString(BATTLE_TUTORIAL.DIALOGS_GREETING_RESTART_HINT_TEXT);
       }
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          setFocus(submitBtn);
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          window.useBottomBtns = true;
          window.title = BATTLE_TUTORIAL.DIALOGS_GREETING_TITLE;
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.imageLoader.dispose();
       }
    }
-
 }

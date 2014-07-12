@@ -20,46 +20,45 @@ package net.wg.gui.lobby.techtree
    import scaleform.clik.constants.InvalidationType;
    import flash.display.InteractiveObject;
    import net.wg.data.constants.LobbyMetrics;
-
-
+   
    public class TechTreePage extends TechTreeMeta implements ITechTreePage
    {
-          
+      
       public function TechTreePage() {
          super();
       }
-
+      
       public static const BACKGROUND_ALPHA:Number = 0.9;
-
+      
       private var titleAppearance:TitleAppearance = null;
-
+      
       public var titleField:TextField;
-
+      
       public var nationTree:NationTree;
-
+      
       public var nationsBar:NationsButtonBar;
-
+      
       public var scrollBar:ScrollBar;
-
+      
       public var background:Sprite;
-
+      
       public var treeRightBG:Sprite;
-
+      
       private function handleEscape(param1:InputEvent) : void {
          onCloseTechTreeS();
       }
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          setViewSize(param1,param2);
       }
-
+      
       public function as_setAvailableNations(param1:Array) : void {
          if(this.nationsBar != null)
          {
             this.nationsBar.dataProvider = new DataProvider(param1);
          }
       }
-
+      
       public function as_setSelectedNation(param1:String) : void {
          if(!this.nationsBar)
          {
@@ -71,7 +70,7 @@ package net.wg.gui.lobby.techtree
             this.nationsBar.selectedIndex = _loc2_;
          }
       }
-
+      
       public function as_refreshNationTreeData(param1:String) : void {
          var _loc2_:Object = null;
          if(getNationTreeData != null)
@@ -84,49 +83,49 @@ package net.wg.gui.lobby.techtree
             this.nationTree.invalidateNodesData(param1,_loc2_);
          }
       }
-
+      
       public function as_setNodesStates(param1:Number, param2:Array) : void {
          if(this.nationTree != null)
          {
             this.nationTree.setNodesStates(param1,param2);
          }
       }
-
+      
       public function as_setNext2Unlock(param1:Array) : void {
          if(this.nationTree != null)
          {
             this.nationTree.setNodesStates(NodeState.NEXT_2_UNLOCK,param1,NodeData.UNLOCK_PROPS_FIELD);
          }
       }
-
+      
       public function as_setVehicleTypeXP(param1:Array) : void {
          if(this.nationTree != null)
          {
             this.nationTree.setVehicleTypeXP(param1);
          }
       }
-
+      
       public function as_setInventoryItems(param1:Array) : void {
          if(this.nationTree != null)
          {
             this.nationTree.setNodesStates(NodeState.IN_INVENTORY,param1);
          }
       }
-
+      
       public function as_setUnlockProps(param1:Array) : void {
          if(this.nationTree != null)
          {
             this.nationTree.setItemsField(param1,NodeData.UNLOCK_PROPS_FIELD);
          }
       }
-
+      
       public function as_useXMLDumping() : void {
          if(this.nationTree != null)
          {
             this.nationTree.dataProvider = new NationXMLDataProvider();
          }
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          if(!initialized)
@@ -135,7 +134,7 @@ package net.wg.gui.lobby.techtree
          }
          requestNationTreeDataS();
       }
-
+      
       override protected function onDispose() : void {
          App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
          super.onDispose();
@@ -154,7 +153,7 @@ package net.wg.gui.lobby.techtree
             this.nationTree.dispose();
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.titleAppearance = new TitleAppearance(this.titleField);
@@ -178,7 +177,7 @@ package net.wg.gui.lobby.techtree
          }
          App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.SIZE))
@@ -186,12 +185,12 @@ package net.wg.gui.lobby.techtree
             this.updateLayouts();
          }
       }
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          setFocus(this.nationsBar);
       }
-
+      
       protected function updateLayouts() : void {
          if(this.nationsBar != null)
          {
@@ -213,15 +212,15 @@ package net.wg.gui.lobby.techtree
             this.background.height = _height + LobbyMetrics.LOBBY_MESSENGER_HEIGHT;
          }
       }
-
+      
       override public function get isModal() : Boolean {
          return true;
       }
-
+      
       override public function get modalAlpha() : Number {
          return BACKGROUND_ALPHA;
       }
-
+      
       private function handleIndexChange(param1:IndexEvent) : void {
          var _loc4_:String = null;
          var _loc2_:String = this.nationsBar.itemToLabel(param1.data);
@@ -249,5 +248,4 @@ package net.wg.gui.lobby.techtree
          }
       }
    }
-
 }

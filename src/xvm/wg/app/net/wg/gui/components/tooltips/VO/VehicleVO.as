@@ -3,58 +3,57 @@ package net.wg.gui.components.tooltips.VO
    import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.helpers.Utils;
    import net.wg.gui.components.tooltips.ToolTipSpecial;
-
-
+   
    public class VehicleVO extends VehicleBaseVO
    {
-          
+      
       public function VehicleVO(param1:Object) {
          super();
          this.parsHash(param1);
       }
-
+      
       public var isPremium:Boolean = false;
-
+      
       public var isFavorite:Boolean = false;
-
+      
       public var isElite:Boolean = false;
-
+      
       private const LOCK_ROAMING:String = "ROAMING";
-
+      
       private const LOCK_CLAN:String = "CLAN";
-
+      
       private const LOCK_TOURNAMENT:String = "TOURNAMENT";
-
+      
       private const LOCK_MSG_COLOR:String = "#ff1515";
-
+      
       public var clanLockHeader:String = "";
-
+      
       public var status:Boolean = false;
-
+      
       public var statusHeader:String = null;
-
+      
       public var statusLevel:String = null;
-
+      
       public var statusText:String = null;
-
+      
       public var stats:Array = null;
-
+      
       public var useGold:Boolean = false;
-
+      
       public var useCredits:Boolean = false;
-
+      
       public var isAction:Boolean = false;
-
+      
       public var actionPrc:Number = NaN;
-
+      
       public var characteristics:Array = null;
-
+      
       public var equipments:Array = null;
-
+      
       public var defSellPrice:Array = null;
-
+      
       public var defBuyPrice:Array = null;
-
+      
       private function parsHash(param1:Object) : void {
          var _loc3_:ILocale = null;
          var _loc4_:String = null;
@@ -96,7 +95,7 @@ package net.wg.gui.components.tooltips.VO
                   break;
             }
          }
-         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && param1["stats"]  is  Array?param1["stats"]:null;
+         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && param1["stats"] is Array?param1["stats"]:null;
          if((this.stats) && this.stats.length > 0)
          {
             _loc7_ = this.stats.length;
@@ -108,8 +107,8 @@ package net.wg.gui.components.tooltips.VO
                if(_loc10_ == ToolTipSpecial.ID_BUY_PRICE || _loc10_ == ToolTipSpecial.ID_SELL_PRICE)
                {
                   _loc11_ = _loc9_[1];
-                  _loc12_ = _loc11_[0]  is  Array?_loc11_[0][0]:_loc11_[0];
-                  _loc13_ = _loc11_[0]  is  Array?_loc11_[0][1]:_loc11_[1];
+                  _loc12_ = _loc11_[0] is Array?_loc11_[0][0]:_loc11_[0];
+                  _loc13_ = _loc11_[0] is Array?_loc11_[0][1]:_loc11_[1];
                   if(_loc12_ > 0)
                   {
                      this.useCredits = true;
@@ -119,29 +118,23 @@ package net.wg.gui.components.tooltips.VO
                      this.useGold = true;
                   }
                }
-               else
+               else if(_loc10_ == VehicleBaseVO.DEF_BUY_PRICE)
                {
-                  if(_loc10_ == VehicleBaseVO.DEF_BUY_PRICE)
-                  {
-                     this.defBuyPrice = _loc9_[1];
-                  }
-                  else
-                  {
-                     if(_loc10_ == VehicleBaseVO.DEF_SELL_PRICE)
-                     {
-                        this.defSellPrice = _loc9_[1];
-                     }
-                     else
-                     {
-                        if(_loc10_ == VehicleBaseVO.ACTION_PRC)
-                        {
-                           _loc14_ = _loc9_[1];
-                           this.isAction = !(_loc14_ == 0);
-                           this.actionPrc = _loc14_;
-                        }
-                     }
-                  }
+                  this.defBuyPrice = _loc9_[1];
                }
+               else if(_loc10_ == VehicleBaseVO.DEF_SELL_PRICE)
+               {
+                  this.defSellPrice = _loc9_[1];
+               }
+               else if(_loc10_ == VehicleBaseVO.ACTION_PRC)
+               {
+                  _loc14_ = _loc9_[1];
+                  this.isAction = !(_loc14_ == 0);
+                  this.actionPrc = _loc14_;
+               }
+               
+               
+               
                _loc8_++;
             }
          }
@@ -175,7 +168,7 @@ package net.wg.gui.components.tooltips.VO
             this.status = true;
          }
       }
-
+      
       private function getLockPriority(param1:Object) : String {
          if((param1.hasOwnProperty(this.LOCK_ROAMING)) && (param1[this.LOCK_ROAMING]))
          {
@@ -192,5 +185,4 @@ package net.wg.gui.components.tooltips.VO
          return "";
       }
    }
-
 }

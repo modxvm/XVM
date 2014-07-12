@@ -7,117 +7,118 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.lobby.settings.components.SettingsStepSlider;
    import net.wg.gui.components.controls.CheckBox;
    import flash.events.Event;
-
-
+   
    public class AdvancedGraphicContentForm extends UIComponent
    {
-          
+      
       public function AdvancedGraphicContentForm() {
          super();
          this.initTexts();
          visible = false;
       }
-
+      
       private static const RADIO_BAR_OFFSET:Number = 12;
-
+      
       public var graficsFieldSet:FieldSet = null;
-
+      
       public var RENDER_PIPELINELabel:LabelControl = null;
-
+      
       public var RENDER_PIPELINEButtonBar:RadioButtonBar = null;
-
+      
       public var TEXTURE_QUALITYLabel:LabelControl = null;
-
+      
       public var TEXTURE_QUALITYValue:LabelControl = null;
-
+      
       public var TEXTURE_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var SHADOWS_QUALITYLabel:LabelControl = null;
-
+      
       public var SHADOWS_QUALITYValue:LabelControl = null;
-
+      
       public var SHADOWS_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var DECALS_QUALITYLabel:LabelControl = null;
-
+      
       public var DECALS_QUALITYValue:LabelControl = null;
-
+      
       public var DECALS_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var TERRAIN_QUALITYLabel:LabelControl = null;
-
+      
       public var TERRAIN_QUALITYValue:LabelControl = null;
-
+      
       public var TERRAIN_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var WATER_QUALITYLabel:LabelControl = null;
-
+      
       public var WATER_QUALITYValue:LabelControl = null;
-
+      
       public var WATER_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var LIGHTING_QUALITYLabel:LabelControl = null;
-
+      
       public var LIGHTING_QUALITYValue:LabelControl = null;
-
+      
       public var LIGHTING_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var SPEEDTREE_QUALITYLabel:LabelControl = null;
-
+      
       public var SPEEDTREE_QUALITYValue:LabelControl = null;
-
+      
       public var SPEEDTREE_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var FLORA_QUALITYLabel:LabelControl = null;
-
+      
       public var FLORA_QUALITYValue:LabelControl = null;
-
+      
       public var FLORA_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var EFFECTS_QUALITYLabel:LabelControl = null;
-
+      
       public var EFFECTS_QUALITYValue:LabelControl = null;
-
+      
       public var EFFECTS_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var POST_PROCESSING_QUALITYLabel:LabelControl = null;
-
+      
       public var POST_PROCESSING_QUALITYValue:LabelControl = null;
-
+      
       public var POST_PROCESSING_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var MOTION_BLUR_QUALITYLabel:LabelControl = null;
-
+      
       public var MOTION_BLUR_QUALITYValue:LabelControl = null;
-
+      
       public var MOTION_BLUR_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var FAR_PLANELabel:LabelControl = null;
-
+      
       public var FAR_PLANEValue:LabelControl = null;
-
+      
       public var FAR_PLANEStepSlider:SettingsStepSlider = null;
-
+      
       public var OBJECT_LODLabel:LabelControl = null;
-
+      
       public var OBJECT_LODValue:LabelControl = null;
-
+      
       public var OBJECT_LODStepSlider:SettingsStepSlider = null;
-
+      
       public var SNIPER_MODE_EFFECTS_QUALITYLabel:LabelControl = null;
-
+      
       public var SNIPER_MODE_EFFECTS_QUALITYValue:LabelControl = null;
-
+      
       public var SNIPER_MODE_EFFECTS_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var fpsPerfomancerCheckbox:CheckBox = null;
-
+      
       public var SNIPER_MODE_GRASS_ENABLEDCheckbox:CheckBox = null;
-
+      
       public var VEHICLE_DUST_ENABLEDCheckbox:CheckBox = null;
-
+      
       public var VEHICLE_TRACES_ENABLEDCheckbox:CheckBox = null;
-
+      
+      public var SEMITRANSPARENT_LEAVES_ENABLEDCheckbox:CheckBox = null;
+      
       private function initTexts() : void {
          this.RENDER_PIPELINELabel.text = "";
          this.TEXTURE_QUALITYLabel.text = "";
@@ -138,8 +139,9 @@ package net.wg.gui.lobby.settings
          this.SNIPER_MODE_GRASS_ENABLEDCheckbox.label = "";
          this.VEHICLE_DUST_ENABLEDCheckbox.label = "";
          this.VEHICLE_TRACES_ENABLEDCheckbox.label = "";
+         this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox.label = "";
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.graficsFieldSet.label = SETTINGS.GRAPHICS_SIGNIFICANTLYAFFECTING;
@@ -149,7 +151,7 @@ package net.wg.gui.lobby.settings
          dispatchEvent(new Event(Event.RESIZE));
          visible = true;
       }
-
+      
       override protected function onDispose() : void {
          this.RENDER_PIPELINELabel.dispose();
          this.RENDER_PIPELINEButtonBar.dispose();
@@ -199,6 +201,7 @@ package net.wg.gui.lobby.settings
          this.SNIPER_MODE_GRASS_ENABLEDCheckbox.dispose();
          this.VEHICLE_DUST_ENABLEDCheckbox.dispose();
          this.VEHICLE_TRACES_ENABLEDCheckbox.dispose();
+         this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox.dispose();
          this.RENDER_PIPELINELabel = null;
          this.RENDER_PIPELINEButtonBar = null;
          this.TEXTURE_QUALITYLabel = null;
@@ -247,8 +250,8 @@ package net.wg.gui.lobby.settings
          this.SNIPER_MODE_GRASS_ENABLEDCheckbox = null;
          this.VEHICLE_DUST_ENABLEDCheckbox = null;
          this.VEHICLE_TRACES_ENABLEDCheckbox = null;
+         this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox = null;
          super.onDispose();
       }
    }
-
 }

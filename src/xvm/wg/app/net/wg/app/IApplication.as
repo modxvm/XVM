@@ -20,56 +20,54 @@ package net.wg.app
    import net.wg.utils.IUtils;
    import net.wg.utils.ITweenManager;
    import net.wg.infrastructure.helpers.ILibraryLoader;
-
-
+   
    public interface IApplication extends IApplicationMeta
    {
-          
+      
       function onLangBarResize(param1:Number, param2:Number) : void;
-
+      
       function get appWidth() : Number;
-
+      
       function get appHeight() : Number;
-
+      
       function get stage() : Stage;
-
+      
       function get systemMessages() : DisplayObjectContainer;
-
+      
       function get globalVarsMgr() : IGlobalVarsMgrMeta;
-
+      
       function get soundMgr() : ISoundManager;
-
+      
       function get toolTipMgr() : ITooltipMgr;
-
+      
       function get waiting() : IWaitingView;
-
+      
       function get environment() : IEnvironmentManager;
-
+      
       function get cursor() : ICursor;
-
+      
       function get containerMgr() : IContainerManager;
-
+      
       function get contextMenuMgr() : IContextMenuManager;
-
+      
       function get popoverMgr() : IPopoverManager;
-
+      
       function get colorSchemeMgr() : IColorSchemeManager;
-
+      
       function get itemsMgr() : IGuiItemsManager;
-
+      
       function get voiceChatMgr() : IVoiceChatManager;
-
+      
       function get gameInputMgr() : IGameInputManager;
-
+      
       function get eventLogManager() : IEventLogManager;
-
+      
       function get utils() : IUtils;
-
+      
       function get tweenMgr() : ITweenManager;
-
+      
       function get browserBgClass() : Class;
-
+      
       function get libraryLoader() : ILibraryLoader;
    }
-
 }

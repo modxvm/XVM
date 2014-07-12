@@ -11,20 +11,19 @@ package net.wg.gui.prebattle.invites
    import scaleform.clik.constants.InvalidationType;
    import scaleform.gfx.MouseEventEx;
    import flash.display.InteractiveObject;
-
-
+   
    public class InviteStackContainerBase extends UIComponent implements IViewStackContent
    {
-          
+      
       public function InviteStackContainerBase() {
          this.dataProvider = new DAAPIDataProvider();
          super();
       }
-
+      
       public var rosterList:ScrollingListEx;
-
+      
       public var dataProvider:DAAPIDataProvider;
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.rosterList.removeEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
@@ -34,7 +33,7 @@ package net.wg.gui.prebattle.invites
          this.dataProvider.cleanUp();
          this.dataProvider = null;
       }
-
+      
       public function update(param1:Object) : void {
          if(param1 == null)
          {
@@ -44,7 +43,7 @@ package net.wg.gui.prebattle.invites
          this.rosterList.dataProvider = this.dataProvider;
          this.rosterList.validateNow();
       }
-
+      
       override protected function configUI() : void {
          focusable = true;
          super.configUI();
@@ -57,7 +56,7 @@ package net.wg.gui.prebattle.invites
          this.rosterList.dataProvider = this.dataProvider as IDataProvider;
          this.initDispatcher(SendInvitesEvent.INIT_COMPONENT,this);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((constraints) && (isInvalid(InvalidationType.SIZE)))
@@ -65,20 +64,20 @@ package net.wg.gui.prebattle.invites
             constraints.update(_width,_height);
          }
       }
-
+      
       private function showContextMenu(param1:ListEventEx) : void {
          if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
          {
             this.initDispatcher(SendInvitesEvent.SHOW_CONTEXT_MENU,param1.itemData);
          }
       }
-
+      
       protected function initDispatcher(param1:String, param2:Object) : void {
          var _loc3_:SendInvitesEvent = new SendInvitesEvent(param1,true);
          _loc3_.initItem = param2;
          dispatchEvent(_loc3_);
       }
-
+      
       private function rosterList_itemDoubleClickHandler(param1:ListEventEx) : void {
          if(param1.buttonIdx == MouseEventEx.LEFT_BUTTON)
          {
@@ -88,10 +87,13 @@ package net.wg.gui.prebattle.invites
             }
          }
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

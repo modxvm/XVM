@@ -5,19 +5,18 @@ package net.wg.gui.lobby.fortifications.cmp.impl
    import flash.display.MovieClip;
    import scaleform.clik.constants.InvalidationType;
    import flash.display.InteractiveObject;
-
-
+   
    public class FortWelcomeCommanderView extends UIComponent implements IFocusContainer
    {
-          
+      
       public function FortWelcomeCommanderView() {
          super();
       }
-
+      
       public var background:MovieClip;
-
+      
       public var content:FortWelcomeCommanderContent;
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.SIZE))
@@ -28,11 +27,11 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this.background.height = _height;
          }
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return this.content.button;
       }
-
+      
       override protected function onDispose() : void {
          this.background = null;
          this.content.dispose();
@@ -40,5 +39,4 @@ package net.wg.gui.lobby.fortifications.cmp.impl
          super.onDispose();
       }
    }
-
 }

@@ -8,29 +8,28 @@ package net.wg.gui.lobby.training
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.events.TrainingEvent;
-
-
+   
    public class TrainingListItemRenderer extends ListItemRenderer
    {
-          
+      
       public function TrainingListItemRenderer() {
          super();
       }
-
+      
       public var iconLoader:UILoaderAlt;
-
+      
       public var textOwner:TextField;
-
+      
       public var textArena:TextField;
-
+      
       public var textComment:TextField;
-
+      
       public var textCount:TextField;
-
+      
       private var itemClicked:Boolean = false;
-
+      
       private var dataVO:TrainingFormRendererVO;
-
+      
       override protected function configUI() : void {
          super.configUI();
          focusTarget = owner;
@@ -41,7 +40,7 @@ package net.wg.gui.lobby.training
          this.iconLoader.hideLoader = true;
          this.addEventListener(ButtonEvent.CLICK,this.onSelectItem);
       }
-
+      
       override public function setData(param1:Object) : void {
          this.data = param1;
          this.itemClicked = false;
@@ -51,7 +50,7 @@ package net.wg.gui.lobby.training
          }
          invalidate(InvalidationType.DATA);
       }
-
+      
       override protected function onDispose() : void {
          this.removeEventListener(ButtonEvent.CLICK,this.onSelectItem);
          this.iconLoader.dispose();
@@ -68,13 +67,13 @@ package net.wg.gui.lobby.training
          data = null;
          super.onDispose();
       }
-
+      
       public function onSelectItem(param1:ButtonEvent) : void {
          this.itemClicked = true;
          this.enabled = false;
          dispatchEvent(new TrainingEvent(TrainingEvent.OPEN_TRAINING_ROOM,{"id":this.dataVO.id}));
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (data))
@@ -94,5 +93,4 @@ package net.wg.gui.lobby.training
          }
       }
    }
-
 }

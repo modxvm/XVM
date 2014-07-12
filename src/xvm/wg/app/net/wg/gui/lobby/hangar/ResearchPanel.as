@@ -8,23 +8,22 @@ package net.wg.gui.lobby.hangar
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.IconsTypes;
-
-
+   
    public class ResearchPanel extends ResearchPanelMeta implements IResearchPanelMeta, IHelpLayoutComponent
    {
-          
+      
       public function ResearchPanel() {
          super();
       }
-
+      
       public var xpText:IconText;
-
+      
       public var button:IconTextButton;
-
+      
       private var _earnedXP:Number = 0;
-
+      
       private var _isElite:Boolean = false;
-
+      
       public function as_setEarnedXP(param1:Number) : void {
          if(this._earnedXP == param1)
          {
@@ -33,7 +32,7 @@ package net.wg.gui.lobby.hangar
          this._earnedXP = param1;
          invalidateData();
       }
-
+      
       public function as_setElite(param1:Boolean) : void {
          if(this._isElite == param1)
          {
@@ -42,15 +41,15 @@ package net.wg.gui.lobby.hangar
          this._isElite = param1;
          invalidateData();
       }
-
+      
       public function showHelpLayout() : void {
          this.button.showHelpLayout();
       }
-
+      
       public function closeHelpLayout() : void {
          this.button.closeHelpLayout();
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          this.xpText.focusable = false;
@@ -60,7 +59,7 @@ package net.wg.gui.lobby.hangar
             this.button.addEventListener(ButtonEvent.CLICK,this.handleButtonClick,false,0,true);
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          if(this.button != null)
@@ -72,7 +71,7 @@ package net.wg.gui.lobby.hangar
          this.button.dispose();
          this.button = null;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && !(this.xpText == null))
@@ -81,10 +80,9 @@ package net.wg.gui.lobby.hangar
             this.xpText.icon = this._isElite?IconsTypes.ELITE_XP:IconsTypes.XP;
          }
       }
-
+      
       private function handleButtonClick(param1:ButtonEvent) : void {
          goToResearchS();
       }
    }
-
 }

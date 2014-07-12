@@ -2,27 +2,26 @@ package net.wg.gui.lobby.techtree.data.vo
 {
    import net.wg.gui.lobby.techtree.interfaces.IValueObject;
    import net.wg.utils.ILocale;
-
-
+   
    public class ExtraInformation extends Object implements IValueObject
    {
-          
-      public function ExtraInformation(param1:String=undefined, param2:String=undefined, param3:String=undefined, param4:String=undefined) {
+      
+      public function ExtraInformation(param1:String = "", param2:String = "", param3:String = "", param4:String = "") {
          super();
          this.type = param1;
          this.title = param2;
          this.benefitsHead = param3;
          this.benefitsList = param4;
       }
-
+      
       public var type:String;
-
+      
       public var title:String;
-
+      
       public var benefitsHead:String;
-
+      
       public var benefitsList:String;
-
+      
       public function fromArray(param1:Array, param2:ILocale) : void {
          if(param1.length > 3)
          {
@@ -32,7 +31,7 @@ package net.wg.gui.lobby.techtree.data.vo
             this.benefitsList = param1[3];
          }
       }
-
+      
       public function fromObject(param1:Object, param2:ILocale) : void {
          if(param1 == null)
          {
@@ -55,10 +54,9 @@ package net.wg.gui.lobby.techtree.data.vo
             this.benefitsList = param1.benefitsList;
          }
       }
-
+      
       public function toString() : String {
          return "[ExtraInformation: type = " + this.type + ", title = " + this.title + " benefitsHead = " + this.benefitsHead + " benefitsList = " + this.benefitsList + "]";
       }
    }
-
 }

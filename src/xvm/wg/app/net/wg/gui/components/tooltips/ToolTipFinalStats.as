@@ -2,7 +2,6 @@ package net.wg.gui.components.tooltips
 {
    import flash.text.TextField;
    import net.wg.gui.components.controls.UILoaderAlt;
-   import __AS3__.vec.Vector;
    import net.wg.gui.components.tooltips.finstats.EfficiencyCritsBlock;
    import net.wg.gui.components.tooltips.finstats.EfficiencyBlock;
    import net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO;
@@ -11,52 +10,50 @@ package net.wg.gui.components.tooltips
    import flash.text.TextFormat;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.events.UILoaderEvent;
-
-
+   
    public class ToolTipFinalStats extends ToolTipSpecial
    {
-          
+      
       public function ToolTipFinalStats() {
          super();
          this.headerTF = content.headerTF;
          this.infoTF = content.infoTF;
          this.icon = content.icon;
       }
-
+      
       private static var DEF_ICO_PATH:String = "../maps/icons/tooltip/";
-
+      
       public var headerTF:TextField = null;
-
+      
       public var icon:UILoaderAlt = null;
-
+      
       public var infoTF:TextField = null;
-
+      
       private var disabled:Boolean = true;
-
+      
       private var critBlocks:Vector.<EfficiencyCritsBlock> = null;
-
+      
       private var efficiencyBlock:EfficiencyBlock = null;
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function redraw() : void {
          this.setData();
          updatePositions();
          super.redraw();
       }
-
+      
       private function setData() : void {
          var _loc1_:ToolTipFinalStatsVO = null;
-         var _loc2_:Separator = null;
          var _loc6_:ILocale = null;
          _loc1_ = new ToolTipFinalStatsVO(_data);
          this.disabled = _loc1_.disabled;
          contentMargin.top = 17;
          contentMargin.bottom = 17;
          topPosition = bgShadowMargin.top + contentMargin.top;
-         _loc2_ = null;
+         var _loc2_:Separator = null;
          separators = new Vector.<Separator>();
          this.critBlocks = new Vector.<EfficiencyCritsBlock>();
          var _loc3_:Number = 18;
@@ -174,7 +171,7 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       private function hideInfo() : void {
          if(this.infoTF)
          {
@@ -184,7 +181,7 @@ package net.wg.gui.components.tooltips
             this.infoTF.visible = false;
          }
       }
-
+      
       private function createCritPart(param1:String, param2:String, param3:Number) : Number {
          var _loc4_:EfficiencyCritsBlock = App.utils.classFactory.getComponent("EfficiencyCritsBlockUI",EfficiencyCritsBlock);
          content.addChild(_loc4_);
@@ -199,14 +196,14 @@ package net.wg.gui.components.tooltips
          this.critBlocks.push(_loc4_);
          return param3;
       }
-
+      
       private function onIcoLoaded(param1:UILoaderEvent) : void {
          this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.onIcoLoaded);
          this.headerTF.x = this.icon.x + this.icon.width + contentMargin.left | 0;
          this.icon.alpha = this.disabled?0.3:1;
          updateSize();
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:EfficiencyCritsBlock = null;
          if(this.efficiencyBlock)
@@ -226,5 +223,4 @@ package net.wg.gui.components.tooltips
          super.onDispose();
       }
    }
-
 }

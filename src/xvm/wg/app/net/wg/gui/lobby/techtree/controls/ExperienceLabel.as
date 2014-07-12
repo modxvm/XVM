@@ -2,26 +2,25 @@ package net.wg.gui.lobby.techtree.controls
 {
    import flash.text.TextField;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class ExperienceLabel extends NodeComponent
    {
-          
+      
       public function ExperienceLabel() {
          super();
       }
-
+      
       public var xpLabel:String = "xpCostLabel";
-
+      
       public var textField:TextField;
-
+      
       public var xpIcon:XPIcon;
-
+      
       override protected function configUI() : void {
          mouseEnabled = mouseChildren = false;
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:String = null;
          if(!(_owner == null) && (isInvalid(InvalidationType.DATA)))
@@ -35,7 +34,7 @@ package net.wg.gui.lobby.techtree.controls
          }
          super.draw();
       }
-
+      
       private function setXpField(param1:String) : void {
          if(this.textField != null)
          {
@@ -43,5 +42,4 @@ package net.wg.gui.lobby.techtree.controls
          }
       }
    }
-
 }

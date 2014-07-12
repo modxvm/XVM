@@ -14,28 +14,27 @@ package net.wg.gui.lobby.fortifications.windows.impl
    import net.wg.gui.lobby.fortifications.data.ClanListRendererVO;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.prebattle.invites.PrbSendInviteCIGenerator;
-
-
+   
    public class FortClanListWindow extends FortClanListWindowMeta implements IFortClanListWindowMeta
    {
-          
+      
       public function FortClanListWindow() {
          super();
          isModal = false;
          isCentered = true;
          this.table.addEventListener(SortableTableListEvent.RENDERER_CLICK,this.itemClickHandler);
       }
-
+      
       public static const MEMBER_NAME:String = "userName";
-
+      
       public static const ROLE:String = "playerRole";
-
+      
       public static const WEEK_MINING:String = "intWeekMining";
-
+      
       public static const TOTAL_MINING:String = "intTotalMining";
-
+      
       private static const IS_SELF:String = "himself";
-
+      
       private static function getHeadersProvider() : DataProvider {
          var _loc1_:Array = null;
          var _loc4_:NormalSortingBtnInfo = null;
@@ -82,11 +81,11 @@ package net.wg.gui.lobby.fortifications.windows.impl
          _loc1_.push(_loc7_);
          return new DataProvider(_loc1_);
       }
-
+      
       public var table:SortableTable;
-
+      
       private var data:FortClanListWindowVO = null;
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.data))
@@ -97,16 +96,16 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.table.scrollListToItemByUniqKey(IS_SELF,true);
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.table.headerDP = getHeadersProvider();
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
       }
-
+      
       override protected function onDispose() : void {
          this.table.removeEventListener(SortableTableListEvent.RENDERER_CLICK,this.itemClickHandler);
          this.table.dispose();
@@ -118,12 +117,12 @@ package net.wg.gui.lobby.fortifications.windows.impl
          }
          super.onDispose();
       }
-
+      
       override protected function setData(param1:FortClanListWindowVO) : void {
          this.data = param1;
          invalidateData();
       }
-
+      
       private function itemClickHandler(param1:SortableTableListEvent) : void {
          var _loc2_:ClanListRendererVO = null;
          if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
@@ -137,5 +136,4 @@ package net.wg.gui.lobby.fortifications.windows.impl
          }
       }
    }
-
 }

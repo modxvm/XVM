@@ -4,89 +4,50 @@ package net.wg.gui.cyberSport.data
    import net.wg.gui.cyberSport.interfaces.IManualSearchDataProvider;
    import net.wg.gui.cyberSport.controls.events.ManualSearchEvent;
    import net.wg.gui.cyberSport.vo.CSCommandVO;
-
-
+   
    public class ManualSearchDataProvider extends VoDAAPIDataProvider implements IManualSearchDataProvider
    {
-          
+      
       public function ManualSearchDataProvider() {
          this.indexes = [];
          this.cache = [];
          super(CSCommandVO);
       }
-
+      
       public var requestUpdatedItemsHandler:Function;
-
+      
       private var indexes:Array;
-
+      
       private var cache:Array;
-
+      
       override public function cleanUp() : void {
          this.cache = [];
       }
-
-      override public function requestItemAt(param1:uint, param2:Function=null) : Object {
+      
+      override public function requestItemAt(param1:uint, param2:Function = null) : Object {
          var _loc3_:Object = this.cache[param1];
          if(!_loc3_)
          {
             _loc3_ = super.requestItemAt(param1,param2);
          }
-         else
+         else if(param2 != null)
          {
-            if(param2 != null)
-            {
-               param2(_loc3_);
-            }
+            param2(_loc3_);
          }
+         
          return _loc3_;
       }
-
-      override public function requestItemRange(param1:int, param2:int, param3:Function=null) : Array {
-         var _loc5_:uint = 0;
-         var _loc7_:Object = null;
-         var _loc9_:Object = null;
-         if(!Boolean(requestItemRangeHandler))
-         {
-            return [];
-         }
-         var _loc4_:Array = this.cache.slice(param1,param2 + 1);
-         var _loc6_:uint = _loc4_.length;
-         var _loc8_:Array = [];
-         _loc5_ = 0;
-         while(_loc5_ < _loc6_)
-         {
-            _loc7_ = _loc4_[_loc5_];
-            if(_loc7_)
-            {
-               _loc8_.push(_loc7_);
-               _loc5_++;
-               continue;
-            }
-            param1 = param1 + _loc5_;
-            break;
-         }
-         if(param1 <= param2)
-         {
-            _loc4_ = requestItemRangeHandler(param1,param2);
-            _loc6_ = _loc4_.length;
-            _loc5_ = 0;
-            while(_loc5_ < _loc6_)
-            {
-               _loc7_ = _loc4_[_loc5_];
-               _loc9_ = new voClass(_loc7_);
-               this.cache[param1 + _loc5_] = _loc9_;
-               _loc8_.push(_loc9_);
-               _loc5_++;
-            }
-         }
-         if(param3 != null)
-         {
-            param3(_loc8_);
-         }
-         return _loc8_;
+      
+      override public function requestItemRange(param1:int, param2:int, param3:Function = null) : Array {
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: TranslateException
+          */
+         throw new flash.errors.IllegalOperationError("Not decompiled due to error");
       }
-
-      public function requestUpdatedItems(param1:int, param2:int, param3:Function=null) : Array {
+      
+      public function requestUpdatedItems(param1:int, param2:int, param3:Function = null) : Array {
          var _loc4_:uint = 0;
          var _loc7_:Array = null;
          var _loc8_:Array = null;
@@ -99,7 +60,7 @@ package net.wg.gui.cyberSport.data
          }
          var _loc5_:Array = [];
          var _loc6_:Array = [];
-         for each (_loc4_ in this.indexes)
+         for each(_loc4_ in this.indexes)
          {
             if(param1 <= _loc4_ && _loc4_ <= param2)
             {
@@ -127,21 +88,20 @@ package net.wg.gui.cyberSport.data
          }
          return _loc6_;
       }
-
-      override public function invalidate(param1:uint=0) : void {
+      
+      override public function invalidate(param1:uint = 0) : void {
          this.cache = new Array(param1);
          super.invalidate(param1);
       }
-
+      
       public function update(param1:Array) : void {
          var _loc2_:uint = 0;
          this.indexes = param1;
-         for each (_loc2_ in this.indexes)
+         for each(_loc2_ in this.indexes)
          {
             this.cache[_loc2_] = undefined;
          }
          dispatchEvent(new ManualSearchEvent(ManualSearchEvent.DATA_UPDATED));
       }
    }
-
 }

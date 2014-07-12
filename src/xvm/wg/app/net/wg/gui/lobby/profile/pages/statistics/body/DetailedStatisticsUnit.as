@@ -6,25 +6,24 @@ package net.wg.gui.lobby.profile.pages.statistics.body
    import net.wg.gui.components.common.containers.Vertical100PercWidthLayout;
    import flash.events.Event;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class DetailedStatisticsUnit extends UIComponent
    {
-          
+      
       public function DetailedStatisticsUnit() {
          super();
       }
-
+      
       private static const RENDERER_INVALID:String = "rendererInv";
-
+      
       public var label:TextField;
-
+      
       public var group:GroupEx;
-
+      
       private var _data:DetailedStatisticsUnitVO;
-
+      
       private var _itemRendererClass:Class;
-
+      
       override protected function configUI() : void {
          var _loc1_:Vertical100PercWidthLayout = null;
          super.configUI();
@@ -39,11 +38,11 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             this.addChild(this.group);
          }
       }
-
+      
       private function resizeHandeler(param1:Event) : void {
          dispatchEvent(new Event(Event.RESIZE,true));
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(RENDERER_INVALID))
@@ -61,12 +60,12 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             this.group.width = _width;
          }
       }
-
+      
       public function set data(param1:DetailedStatisticsUnitVO) : void {
          this._data = param1;
          invalidateData();
       }
-
+      
       public function set itemRendererClass(param1:Class) : void {
          if(this._itemRendererClass != param1)
          {
@@ -74,17 +73,17 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             invalidate(RENDERER_INVALID);
          }
       }
-
+      
       override public function set width(param1:Number) : void {
          super.width = param1;
          this.group.width = param1;
          this.group.invalidateLayout();
       }
-
+      
       override public function get height() : Number {
          return actualHeight;
       }
-
+      
       override protected function onDispose() : void {
          this._itemRendererClass = null;
          if(this.group)
@@ -103,5 +102,4 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          super.onDispose();
       }
    }
-
 }

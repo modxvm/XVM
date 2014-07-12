@@ -1,6 +1,6 @@
 package net.wg.gui.lobby.battleResults
 {
-   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.base.UIComponentEx;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import net.wg.gui.events.FinalStatisticEvent;
    import net.wg.data.constants.Tooltips;
@@ -8,7 +8,7 @@ package net.wg.gui.lobby.battleResults
    import net.wg.gui.components.controls.ScrollingListEx;
    import flash.display.MovieClip;
    import net.wg.gui.components.advanced.CounterEx;
-   import net.wg.gui.lobby.questsWindow.QuestScrollPane;
+   import net.wg.gui.components.controls.ResizableScrollPane;
    import net.wg.gui.components.controls.ScrollBar;
    import net.wg.gui.lobby.questsWindow.SubtasksList;
    import flash.display.InteractiveObject;
@@ -20,26 +20,25 @@ package net.wg.gui.lobby.battleResults
    import net.wg.data.VO.UserVO;
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.Linkages;
-
-
-   public class CommonStats extends UIComponent implements IViewStackContent
+   
+   public class CommonStats extends UIComponentEx implements IViewStackContent
    {
-          
+      
       public function CommonStats() {
          super();
       }
-
+      
       private static const COUNTERS_SCALE:Number = 0.9;
-
+      
       private static const ARENA_ENEMY_CLAN_EMBLEM:String = "arenaEnemyClanEmblem";
-
+      
       private static function onIconRollOver(param1:FinalStatisticEvent) : void {
          var _loc2_:Array = null;
          var _loc3_:Object = null;
          if(param1.data.hoveredKind)
          {
             _loc2_ = [];
-            _loc3_ =
+            _loc3_ = 
                {
                   "type":param1.data.hoveredKind,
                   "disabled":param1.data.isDisabled,
@@ -49,8 +48,7 @@ package net.wg.gui.lobby.battleResults
                   "critDamage":null,
                   "critDestruction":null,
                   "critWound":null
-               }
-            ;
+               };
             switch(param1.data.hoveredKind)
             {
                case EfficiencyIconRenderer.DAMAGE:
@@ -76,70 +74,70 @@ package net.wg.gui.lobby.battleResults
             App.toolTipMgr.showSpecial(Tooltips.EFFICIENCY_PARAM,null,param1.data.hoveredKind,_loc3_);
          }
       }
-
+      
       private static function onIconRollOut(param1:FinalStatisticEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       public var resultLbl:TextField;
-
+      
       public var finishReasonLbl:TextField;
-
+      
       public var arenaNameLbl:TextField;
-
+      
       public var noEfficiencyLbl:TextField;
-
+      
       public var effencyTitle:TextField;
-
+      
       public var tankSlot:TankStatsView;
-
+      
       public var efficiencyList:ScrollingListEx;
-
+      
       public var detailsMc:DetailsBlock;
-
+      
       public var imageSwitcher_mc:MovieClip;
-
+      
       public var medalsListLeft:MedalsList;
-
+      
       public var medalsListRight:MedalsList;
-
+      
       public var xpIcon:MovieClip;
-
+      
       public var creditsIcon:MovieClip;
-
+      
       public var resIcon:MovieClip;
-
+      
       public var creditsCounter:CounterEx;
-
+      
       public var xpCounter:CounterEx;
-
+      
       public var resCounter:CounterEx;
-
-      public var scrollPane:QuestScrollPane;
-
+      
+      public var scrollPane:ResizableScrollPane;
+      
       public var subtasksScrollBar:ScrollBar;
-
+      
       public var questList:SubtasksList;
-
+      
       public var upperShadow:MovieClip;
-
+      
       public var lowerShadow:MovieClip;
-
+      
       public var noProgressTF:TextField;
-
+      
       private var creditsCounterNumber:Number = NaN;
-
+      
       private var xpCounterNumber:Number = NaN;
-
+      
       private var resCounterNumber:Number = NaN;
-
+      
       private var originalArenaStr:String = "";
-
+      
       public function update(param1:Object) : void {
          this.medalsListLeft.invalidateFilters();
          this.medalsListRight.invalidateFilters();
       }
-
+      
       public function onEmblemLoaded(param1:String, param2:String) : void {
          var _loc3_:Object = null;
          if(param1 == ARENA_ENEMY_CLAN_EMBLEM)
@@ -148,15 +146,15 @@ package net.wg.gui.lobby.battleResults
             this.arenaNameLbl.htmlText = this.originalArenaStr + param2 + " " + _loc3_.common.clans.enemies.clanAbbrev;
          }
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
-
+      
       public function get myParent() : BattleResults {
          return BattleResults(parent.parent.parent);
       }
-
+      
       override protected function onDispose() : void {
          this.detailsMc.detailedReportBtn.removeEventListener(ButtonEvent.CLICK,this.onDetailsClick);
          this.efficiencyList.removeEventListener(FinalStatisticEvent.EFFENSY_ICON_ROLL_OVER,onIconRollOver);
@@ -186,7 +184,7 @@ package net.wg.gui.lobby.battleResults
          this.subtasksScrollBar.dispose();
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          var _loc2_:Object = null;
          var _loc8_:IUserProps = null;
@@ -231,28 +229,25 @@ package net.wg.gui.lobby.battleResults
                "userName":_loc3_.playerNameStr,
                "clanAbbrev":_loc3_.clanNameStr,
                "region":_loc3_.regionNameStr
-            }
-         );
+            });
          this.tankSlot.tankNameLbl.text = _loc3_.vehicleName;
          this.tankSlot.arenaCreateDateLbl.text = _loc3_.arenaCreateTimeStr;
          if((_loc2_.isPrematureLeave) || _loc2_.killerID <= 0)
          {
             this.tankSlot.vehicleStateLbl.text = _loc3_.vehicleStateStr;
          }
-         else
+         else if(_loc2_.killerID > 0)
          {
-            if(_loc2_.killerID > 0)
+            _loc8_ = App.utils.commons.getUserProps(_loc3_.killerNameStr,_loc3_.killerClanNameStr,_loc3_.killerRegionNameStr);
+            _loc8_.prefix = _loc3_.vehicleStatePrefixStr;
+            _loc8_.suffix = _loc3_.vehicleStateSuffixStr;
+            _loc9_ = App.utils.commons.formatPlayerName(this.tankSlot.vehicleStateLbl,_loc8_);
+            if(_loc9_)
             {
-               _loc8_ = App.utils.commons.getUserProps(_loc3_.killerNameStr,_loc3_.killerClanNameStr,_loc3_.killerRegionNameStr);
-               _loc8_.prefix = _loc3_.vehicleStatePrefixStr;
-               _loc8_.suffix = _loc3_.vehicleStateSuffixStr;
-               _loc9_ = App.utils.commons.formatPlayerName(this.tankSlot.vehicleStateLbl,_loc8_);
-               if(_loc9_)
-               {
-                  this.tankSlot.toolTip = _loc3_.vehicleStatePrefixStr + _loc3_.killerFullNameStr + _loc3_.vehicleStateSuffixStr;
-               }
+               this.tankSlot.toolTip = _loc3_.vehicleStatePrefixStr + _loc3_.killerFullNameStr + _loc3_.vehicleStateSuffixStr;
             }
          }
+         
          this.tankSlot.vehicleStateLbl.textColor = _loc2_.killerID == 0?13224374:8684674;
          if(_loc3_.bonusType == 10)
          {
@@ -319,7 +314,7 @@ package net.wg.gui.lobby.battleResults
             this.noProgressTF.text = BATTLE_RESULTS.COMMON_QUESTS_NOPROGRESS;
          }
       }
-
+      
       override protected function draw() : void {
          this.visible = true;
          this.tankSlot.validateNow();
@@ -331,14 +326,17 @@ package net.wg.gui.lobby.battleResults
          this.xpCounter.validateNow();
          this.resCounter.validateNow();
       }
-
+      
       private function onDetailsClick(param1:ButtonEvent) : void {
          this.myParent.tabs_mc.selectedIndex = 2;
       }
-
+      
       private function showQuest(param1:QuestEvent) : void {
          this.myParent.showEventsWindow(param1.questID);
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

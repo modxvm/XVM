@@ -8,47 +8,46 @@ package net.wg.gui.components.common
    import net.wg.gui.components.controls.NumericStepper;
    import net.wg.gui.components.advanced.ExtraModuleIcon;
    import net.wg.gui.components.controls.DropdownMenu;
-
-
+   
    public class ConfirmItemComponent extends UIComponent
    {
-          
+      
       public function ConfirmItemComponent() {
          super();
       }
-
+      
       public var submitBtn:SoundButtonEx = null;
-
+      
       public var cancelBtn:SoundButtonEx = null;
-
+      
       public var leftResultIT:IconText = null;
-
+      
       public var rightResultIT:IconText = null;
-
+      
       public var countLabel:TextField = null;
-
+      
       public var leftLabel:TextField = null;
-
+      
       public var resultLabel:TextField = null;
-
+      
       public var rightLabel:TextField = null;
-
+      
       public var leftIT:IconText = null;
-
+      
       public var rightIT:IconText = null;
-
+      
       public var actionPrice:ActionPrice = null;
-
+      
       public var nsCount:NumericStepper = null;
-
+      
       public var description:TextField = null;
-
+      
       public var moduleName:TextField = null;
-
+      
       public var moduleIcon:ExtraModuleIcon = null;
-
+      
       public var dropdownMenu:DropdownMenu = null;
-
+      
       override protected function onDispose() : void {
          if(this.submitBtn)
          {
@@ -109,5 +108,4 @@ package net.wg.gui.components.common
          super.onDispose();
       }
    }
-
 }

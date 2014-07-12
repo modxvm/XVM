@@ -5,11 +5,10 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.tooltips.helpers.Utils;
    import net.wg.data.managers.ITooltipProps;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
-
-
+   
    public class ToolTipRSSNews extends ToolTipSpecial
    {
-          
+      
       public function ToolTipRSSNews() {
          super();
          contentMargin.top = 8;
@@ -17,34 +16,33 @@ package net.wg.gui.components.tooltips
          contentMargin.left = 18;
          this.initControls();
       }
-
+      
       private static const MAX_WIDTH:Number = 283;
-
+      
       private static const GAP:Number = 13;
-
+      
       private var headerTF:TextField;
-
+      
       private var descriptionTF:TextField;
-
+      
       private var whiteBg:Sprite;
-
+      
       private var separator:Separator;
-
+      
       public function get utils() : Utils {
          return Utils.instance;
       }
-
+      
       override public function build(param1:Object, param2:ITooltipProps) : void {
          var _loc3_:Array = param1 as Array;
          var _loc4_:Object = {"data":
             {
                "header":_loc3_[0],
                "description":_loc3_[1]
-            }
-         };
+            }};
          super.build(_loc4_,param2);
       }
-
+      
       override protected function redraw() : void {
          var _loc2_:String = null;
          topPosition = bgShadowMargin.top + contentMargin.top;
@@ -81,19 +79,18 @@ package net.wg.gui.components.tooltips
          }
          super.redraw();
       }
-
+      
       override protected function updateSize() : void {
          background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
          background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
          this.whiteBg.width = content.width + bgShadowMargin.horizontal;
          this.whiteBg.height = content.height - this.whiteBg.y + contentMargin.bottom;
       }
-
+      
       private function initControls() : void {
          this.headerTF = content.headerTF;
          this.descriptionTF = content.descriptionTF;
          this.whiteBg = content.whiteBg;
       }
    }
-
 }

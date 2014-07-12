@@ -3,7 +3,6 @@ package net.wg.gui.login.impl.components
    import net.wg.infrastructure.base.meta.impl.RssNewsFeedMeta;
    import net.wg.infrastructure.base.meta.IRssNewsFeedMeta;
    import flash.display.Sprite;
-   import __AS3__.vec.Vector;
    import net.wg.gui.login.impl.components.Vo.RssItemVo;
    import scaleform.clik.utils.Padding;
    import scaleform.clik.motion.Tween;
@@ -13,11 +12,10 @@ package net.wg.gui.login.impl.components
    import scaleform.clik.constants.InvalidationType;
    import fl.transitions.easing.Strong;
    import flash.utils.getDefinitionByName;
-
-
+   
    public class RssNewsFeed extends RssNewsFeedMeta implements IRssNewsFeedMeta
    {
-          
+      
       public function RssNewsFeed() {
          this._padding = new Padding(10,20,10,7);
          this.tweenManager = new ExcludeTweenManager();
@@ -25,30 +23,30 @@ package net.wg.gui.login.impl.components
          this.rssItems = new Vector.<RssNewsFeedRenderer>();
          this.rssItemsVo = new Vector.<RssItemVo>();
       }
-
+      
       public var container:Sprite = null;
-
+      
       public var bg:Sprite = null;
-
+      
       private var rssItems:Vector.<RssNewsFeedRenderer> = null;
-
+      
       private var rssItemsVo:Vector.<RssItemVo> = null;
-
+      
       private const MARGIN_BETWEEN_ITEMS:Number = 13;
-
+      
       private const RENDERER_CLASS_REFERENCE:String = "RssNewsFeedRendererUI";
-
+      
       private var _padding:Padding;
-
+      
       private var moveTween:Tween = null;
-
+      
       private var tweenManager:ExcludeTweenManager;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.bg.height = 0;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -122,7 +120,7 @@ package net.wg.gui.login.impl.components
          }
          this.updateBG();
       }
-
+      
       private function updateRenderersPositions() : void {
          var _loc1_:Number = this.rssItems.length;
          var _loc2_:Number = 0;
@@ -149,7 +147,7 @@ package net.wg.gui.login.impl.components
          }
          this.container.x = this._padding.left;
       }
-
+      
       private function updateBG() : void {
          var _loc1_:* = false;
          var _loc2_:* = NaN;
@@ -192,8 +190,7 @@ package net.wg.gui.login.impl.components
                {
                   "ease":Strong.easeInOut,
                   "onComplete":this.onMoveTweenComplete
-               }
-            );
+               });
             this.moveTween.fastTransform = false;
             this.bg.width = this.container.x + _loc3_ + this._padding.right;
          }
@@ -203,11 +200,11 @@ package net.wg.gui.login.impl.components
          }
          dispatchEvent(new RssItemEvent(RssItemEvent.ITEM_SIZE_INVALID));
       }
-
+      
       private function onMoveTweenComplete(param1:Tween) : void {
          this.tweenManager.unregister(param1);
       }
-
+      
       private function addRenderer(param1:RssItemVo) : IRssNewsFeedRenderer {
          var _loc2_:Class = getDefinitionByName(this.RENDERER_CLASS_REFERENCE) as Class;
          var _loc3_:IRssNewsFeedRenderer = new _loc2_() as IRssNewsFeedRenderer;
@@ -218,7 +215,7 @@ package net.wg.gui.login.impl.components
          this.setupRenderer(_loc3_,param1);
          return _loc3_;
       }
-
+      
       private function setupRenderer(param1:IRssNewsFeedRenderer, param2:RssItemVo) : void {
          param1.setData(param2);
          param1.validateNow();
@@ -226,30 +223,30 @@ package net.wg.gui.login.impl.components
          param1.addEventListener(RssItemEvent.ITEM_SIZE_INVALID,this.onRendererSizeInvalid);
          param1.addEventListener(RssItemEvent.ON_HIDED,this.onRendererHided);
       }
-
+      
       private function onRendererSizeInvalid(param1:RssItemEvent) : void {
          this.updateRenderersPositions();
          this.updateBG();
       }
-
+      
       private function cleanRenderer(param1:IRssNewsFeedRenderer) : void {
          param1.removeEventListener(RssItemEvent.TO_REED_MORE,this.toBrowser);
          param1.removeEventListener(RssItemEvent.ITEM_SIZE_INVALID,this.onRendererSizeInvalid);
          param1.removeEventListener(RssItemEvent.ON_HIDED,this.onRendererHided);
       }
-
+      
       private function onRendererHided(param1:RssItemEvent) : void {
          this.removeRenderer(param1.currentTarget as IRssNewsFeedRenderer);
       }
-
+      
       private function toBrowser(param1:RssItemEvent) : void {
          openBrowserS(param1.rssVo.link);
       }
-
+      
       private function preRemoveRenderer(param1:IRssNewsFeedRenderer) : void {
          param1.hide();
       }
-
+      
       private function removeRenderer(param1:IRssNewsFeedRenderer) : void {
          var _loc2_:DisplayObject = param1 as DisplayObject;
          this.container.removeChild(_loc2_);
@@ -257,7 +254,7 @@ package net.wg.gui.login.impl.components
          param1.dispose();
          var param1:IRssNewsFeedRenderer = null;
       }
-
+      
       override protected function onDispose() : void {
          if(this.tweenManager)
          {
@@ -277,7 +274,7 @@ package net.wg.gui.login.impl.components
          }
          super.onDispose();
       }
-
+      
       public function as_updateFeed(param1:Array) : void {
          var _loc3_:RssItemVo = null;
          this.clearData();
@@ -290,7 +287,7 @@ package net.wg.gui.login.impl.components
          }
          invalidateData();
       }
-
+      
       private function clearData() : void {
          var _loc1_:RssItemVo = null;
          while(this.rssItemsVo.length > 0)
@@ -301,5 +298,4 @@ package net.wg.gui.login.impl.components
          }
       }
    }
-
 }

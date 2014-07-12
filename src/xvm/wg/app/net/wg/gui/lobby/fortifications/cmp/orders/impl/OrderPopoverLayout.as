@@ -4,20 +4,18 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
    import flash.display.DisplayObject;
    import flash.geom.Point;
    import net.wg.gui.components.popOvers.SmartPopOver;
-   import __AS3__.vec.Vector;
    import net.wg.gui.components.popOvers.PopOverConst;
    import net.wg.gui.components.popOvers.SmartPopOverLayoutInfo;
-
-
+   
    public class OrderPopoverLayout extends SmartPopOverExternalLayout
    {
-          
+      
       public function OrderPopoverLayout(param1:Point, param2:Point) {
          super();
          this.stageDimensions = param1;
          this.positionKeyPoint = param2;
       }
-
+      
       override public function invokeLayout() : Object {
          var _loc4_:DisplayObject = null;
          super.invokeLayout();
@@ -44,17 +42,15 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
          {
             _loc12_ = Math.round(_loc8_.x / 2);
          }
+         else if(stageDimensions.x - positionKeyPoint.x < _loc11_)
+         {
+            _loc12_ = Math.round(_loc1_.x - _loc8_.x / 2);
+         }
          else
          {
-            if(stageDimensions.x - positionKeyPoint.x < _loc11_)
-            {
-               _loc12_ = Math.round(_loc1_.x - _loc8_.x / 2);
-            }
-            else
-            {
-               _loc12_ = Math.round(_loc1_.x / 2);
-            }
+            _loc12_ = Math.round(_loc1_.x / 2);
          }
+         
          var _loc13_:SmartPopOverLayoutInfo = new SmartPopOverLayoutInfo(_loc9_,_loc12_,_loc12_,_loc10_);
          _loc2_.arrowDirection = _loc13_.arrowDirection;
          _loc2_.arrowPosition = _loc13_.arrowPosition;
@@ -64,5 +60,4 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
          return _loc13_;
       }
    }
-
 }

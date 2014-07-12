@@ -5,52 +5,51 @@ package net.wg.gui.components.controls
    import scaleform.clik.core.UIComponent;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.events.ListEventEx;
-
-
+   
    public class DragableListItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function DragableListItemRenderer() {
          super();
       }
-
+      
       protected var isDragging:Boolean = false;
-
+      
       private var DRAGGING_DELTA:Number = 10;
-
+      
       private var startDragX:Number = 0;
-
+      
       protected var _empty:Boolean = false;
-
+      
       protected var draggableOwner:IDraggableList = null;
-
+      
       protected var _dataDirty:Boolean = false;
-
+      
       private var _dragEnabled:Boolean = false;
-
+      
       public function imitateMouseOver() : void {
          this.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER,false,false,this.mouseX,this.mouseY));
       }
-
+      
       override public function set owner(param1:UIComponent) : void {
          super.owner = param1;
          this.draggableOwner = param1 as IDraggableList;
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          if((this.draggableOwner) && !this.draggableOwner.isSliding)
          {
             super.handleMouseRollOver(param1);
          }
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          if((this.draggableOwner) && !this.draggableOwner.isSliding)
          {
             super.handleMouseRollOut(param1);
          }
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
          var _loc2_:MouseEventEx = null;
          var _loc3_:uint = 0;
@@ -66,7 +65,7 @@ package net.wg.gui.components.controls
          }
          super.handleMousePress(param1);
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          if((this.isDragging) && (this.dragEnabled))
          {
@@ -79,7 +78,7 @@ package net.wg.gui.components.controls
             return;
          }
       }
-
+      
       override protected function handleReleaseOutside(param1:MouseEvent) : void {
          if((this.isDragging) && (this.dragEnabled))
          {
@@ -92,7 +91,7 @@ package net.wg.gui.components.controls
             return;
          }
       }
-
+      
       public function set dragEnabled(param1:Boolean) : void {
          if(param1 == this._dragEnabled)
          {
@@ -100,22 +99,22 @@ package net.wg.gui.components.controls
          }
          this._dragEnabled = param1;
       }
-
+      
       public function get dragEnabled() : Boolean {
          return this._dragEnabled;
       }
-
+      
       override public function setData(param1:Object) : void {
          if(param1)
          {
             this.empty = param1.empty;
          }
       }
-
+      
       public function get empty() : Boolean {
          return this._empty;
       }
-
+      
       public function set empty(param1:Boolean) : void {
          if(this._empty == param1)
          {
@@ -127,5 +126,4 @@ package net.wg.gui.components.controls
          setState(!enabled?"disabled":"up");
       }
    }
-
 }

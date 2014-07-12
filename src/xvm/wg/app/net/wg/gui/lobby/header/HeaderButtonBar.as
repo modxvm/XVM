@@ -10,64 +10,63 @@ package net.wg.gui.lobby.header
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.controls.MainMenuButton;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class HeaderButtonBar extends ButtonBar implements IHelpLayoutComponent
    {
-          
+      
       public function HeaderButtonBar() {
          super();
          this.visible = false;
       }
-
+      
       private static const MAX_WIDTH:Number = 1024;
-
+      
       public var bg:MovieClip;
-
+      
       public var paddingTop:Number = 0;
-
+      
       public var paddingBottom:Number = 0;
-
+      
       public var paddingLeft:Number = 0;
-
+      
       public var paddingRight:Number = 0;
-
+      
       private var _disableNav:Boolean = false;
-
+      
       private var _subItemSelectedIndex:Number = -1;
-
+      
       public function showHelpLayout() : void {
          var _loc1_:Number = _renderers.length;
          var _loc2_:Number = 1;
-         while(_loc2_ < _loc1_-1)
+         while(_loc2_ < _loc1_ - 1)
          {
             (_renderers[_loc2_] as IHelpLayoutComponent).showHelpLayout();
             _loc2_++;
          }
       }
-
+      
       public function closeHelpLayout() : void {
          var _loc1_:Number = _renderers.length;
          var _loc2_:Number = 1;
-         while(_loc2_ < _loc1_-1)
+         while(_loc2_ < _loc1_ - 1)
          {
             (_renderers[_loc2_] as IHelpLayoutComponent).closeHelpLayout();
             _loc2_++;
          }
       }
-
+      
       public function setDisableNav(param1:Boolean) : void {
          this._disableNav = param1;
          this.enabled = !param1;
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(!this._disableNav)
          {
             super.handleInput(param1);
          }
       }
-
+      
       override protected function updateRenderers() : void {
          var _loc5_:* = 0;
          var _loc6_:Button = null;
@@ -77,11 +76,11 @@ package net.wg.gui.lobby.header
          var _loc1_:Number = this.paddingLeft;
          var _loc2_:Number = this.paddingTop;
          var _loc3_:* = -1;
-         if(_renderers[0]  is  Class(_itemRendererClass))
+         if(_renderers[0] is Class(_itemRendererClass))
          {
             while(_renderers.length > _dataProvider.length)
             {
-               _loc5_ = _renderers.length-1;
+               _loc5_ = _renderers.length - 1;
                if(container.contains(_renderers[_loc5_]))
                {
                   container.removeChild(_renderers[_loc5_]);
@@ -116,13 +115,11 @@ package net.wg.gui.lobby.header
             {
                _loc6_.width = Math.round(_buttonWidth);
             }
-            else
+            else if(_autoSize != TextFieldAutoSize.NONE)
             {
-               if(_autoSize != TextFieldAutoSize.NONE)
-               {
-                  _loc6_.autoSize = _autoSize;
-               }
+               _loc6_.autoSize = _autoSize;
             }
+            
             _loc6_.validateNow();
             if(_loc6_.width + _spacing + _loc1_ < MAX_WIDTH)
             {
@@ -146,7 +143,7 @@ package net.wg.gui.lobby.header
          }
          if(_loc3_ > -1)
          {
-            _loc8_ = _renderers.length-1;
+            _loc8_ = _renderers.length - 1;
             while(_loc8_ >= _loc3_)
             {
                _loc9_ = _renderers[_loc8_];
@@ -164,9 +161,9 @@ package net.wg.gui.lobby.header
          this.bg.width = Math.round(_loc1_ - _spacing + this.paddingRight);
          this.bg.height = Math.round(_loc2_ + this.paddingBottom);
          dispatchEvent(new HeaderButtonBarEvent(HeaderButtonBarEvent.RESIZE,this.bg.width));
-         this.selectedIndex = Math.min(_dataProvider.length-1,_selectedIndex);
+         this.selectedIndex = Math.min(_dataProvider.length - 1,_selectedIndex);
       }
-
+      
       override protected function populateRendererData(param1:Button, param2:uint) : void {
          param1.label = itemToLabel(_dataProvider.requestItemAt(param2));
          param1.data = _dataProvider.requestItemAt(param2);
@@ -184,7 +181,7 @@ package net.wg.gui.lobby.header
             SoundButtonEx(param1).tooltip = _dataProvider[param2].tooltip;
          }
       }
-
+      
       override protected function draw() : void {
          if((isInvalid(InvalidationType.RENDERERS)) || (isInvalid(InvalidationType.DATA)) || (isInvalid(InvalidationType.SETTINGS)) || (isInvalid(InvalidationType.SIZE)))
          {
@@ -194,12 +191,12 @@ package net.wg.gui.lobby.header
             this.updateRenderers();
          }
       }
-
+      
       override public function set selectedIndex(param1:int) : void {
          super.selectedIndex = param1;
          this.updateSubItem(this.subItemSelectedIndex,"");
       }
-
+      
       private function updateSubItem(param1:Number, param2:String) : void {
          var _loc3_:MainMenuButton = null;
          if(param1 >= 0)
@@ -215,16 +212,15 @@ package net.wg.gui.lobby.header
             }
          }
       }
-
+      
       public function get subItemSelectedIndex() : int {
          return this._subItemSelectedIndex;
       }
-
+      
       public function set subItemSelectedIndex(param1:int) : void {
          this.updateSubItem(this._subItemSelectedIndex,"");
          this._subItemSelectedIndex = param1;
          this.updateSubItem(this._subItemSelectedIndex,MainMenuButton.SUB_SELECTED);
       }
    }
-
 }

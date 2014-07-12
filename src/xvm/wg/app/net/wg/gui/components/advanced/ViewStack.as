@@ -4,6 +4,7 @@ package net.wg.gui.components.advanced
    import flash.display.Sprite;
    import net.wg.infrastructure.interfaces.IGroupedControl;
    import flash.display.MovieClip;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
    import scaleform.clik.events.IndexEvent;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
@@ -11,53 +12,54 @@ package net.wg.gui.components.advanced
    import net.wg.utils.IAssertable;
    import net.wg.infrastructure.exceptions.ArgumentException;
    import net.wg.infrastructure.events.LifeCycleEvent;
-   import net.wg.infrastructure.interfaces.IViewStackContent;
    import flash.utils.getDefinitionByName;
    import net.wg.gui.events.ViewStackEvent;
    import net.wg.infrastructure.exceptions.InfrastructureException;
-
-
+   
    public class ViewStack extends UIComponent
    {
-          
+      
       public function ViewStack() {
          super();
          this.cachedViews = {};
          this.container = new Sprite();
          this.addChild(this.container);
       }
-
+      
       public var cache:Boolean = false;
-
+      
       public var cachedViews:Object;
-
+      
       protected var container:Sprite;
-
+      
       private var _targetGroup:IGroupedControl = null;
-
+      
       private var _currentView:MovieClip;
-
+      
       private var _currentLinkage:String;
-
+      
       override public function toString() : String {
          return "[WG ViewStack " + name + "]";
       }
-
+      
       public function show(param1:String) : MovieClip {
          var _loc2_:MovieClip = this.createView(param1);
          this.setCurrentView(_loc2_,param1,true);
          if(_loc2_ != null)
          {
-            _loc2_.visible = true;
+            if(IViewStackContent(_loc2_).canShowAutomatically())
+            {
+               _loc2_.visible = true;
+            }
          }
          invalidate();
          return _loc2_;
       }
-
+      
       public function get targetGroup() : String {
          return this._targetGroup.name;
       }
-
+      
       public function set targetGroup(param1:String) : void {
          if(param1 != "")
          {
@@ -65,7 +67,7 @@ package net.wg.gui.components.advanced
             this.groupRef = IGroupedControl(parent[param1]);
          }
       }
-
+      
       public function set groupRef(param1:IGroupedControl) : void {
          if(this._targetGroup != param1)
          {
@@ -81,20 +83,20 @@ package net.wg.gui.components.advanced
             }
          }
       }
-
+      
       public function get currentLinkage() : String {
          return this._currentLinkage;
       }
-
+      
       public function get currentView() : MovieClip {
          return this._currentView;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          tabEnabled = false;
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.SIZE))
          {
@@ -105,7 +107,7 @@ package net.wg.gui.components.advanced
          this.container.scaleX = 1 / scaleX;
          this.container.scaleY = 1 / scaleY;
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:IDisposable = null;
          var _loc2_:String = null;
@@ -122,13 +124,13 @@ package net.wg.gui.components.advanced
             if(this.cache)
             {
                _loc3_ = [];
-               for (_loc4_ in this.cachedViews)
+               for(_loc4_ in this.cachedViews)
                {
                   _loc3_.push(_loc4_);
                }
-               for each (_loc2_ in _loc3_)
+               for each(_loc2_ in _loc3_)
                {
-                  if(this.cachedViews[_loc2_]  is  IDisposable)
+                  if(this.cachedViews[_loc2_] is IDisposable)
                   {
                      IDisposable(this.cachedViews[_loc2_]).dispose();
                   }
@@ -143,11 +145,11 @@ package net.wg.gui.components.advanced
             }
             if(this.container.numChildren > 0)
             {
-               _loc5_ = this.container.numChildren-1;
+               _loc5_ = this.container.numChildren - 1;
                while(_loc5_ >= 0)
                {
                   _loc1_ = IDisposable(this.container.getChildAt(_loc5_));
-                  if(!(_loc1_  is  IDAAPIEntity))
+                  if(!(_loc1_ is IDAAPIEntity))
                   {
                      _loc1_.dispose();
                   }
@@ -159,7 +161,7 @@ package net.wg.gui.components.advanced
          }
          super.onDispose();
       }
-
+      
       private function assertTargetGroup(param1:String) : void {
          if(!App.utils)
          {
@@ -168,9 +170,9 @@ package net.wg.gui.components.advanced
          var _loc2_:* = "component with instance \'" + param1 + "\'";
          var _loc3_:IAssertable = App.utils.asserter;
          _loc3_.assert(parent.hasOwnProperty(param1),"container \'" + parent + "\' has no " + _loc2_,ArgumentException);
-         _loc3_.assert(parent[param1]  is  IGroupedControl,"container \'" + parent + "\'  must implements IGroupController interface");
+         _loc3_.assert(parent[param1] is IGroupedControl,"container \'" + parent + "\'  must implements IGroupController interface");
       }
-
+      
       private function changeView() : void {
          var _loc1_:Object = null;
          var _loc2_:String = null;
@@ -194,7 +196,7 @@ package net.wg.gui.components.advanced
             }
          }
       }
-
+      
       private function setCurrentView(param1:MovieClip, param2:String, param3:Boolean) : void {
          if(this._currentView != null)
          {
@@ -207,7 +209,7 @@ package net.wg.gui.components.advanced
                this.container.removeChild(this._currentView);
                if(param3)
                {
-                  if(!(param1  is  IDAAPIEntity))
+                  if(!(param1 is IDAAPIEntity))
                   {
                      (this._currentView as IDisposable).dispose();
                   }
@@ -226,7 +228,7 @@ package net.wg.gui.components.advanced
          }
          this._currentLinkage = param2;
       }
-
+      
       private function createView(param1:String) : UIComponent {
          var _loc3_:Class = null;
          var _loc2_:UIComponent = null;
@@ -239,7 +241,7 @@ package net.wg.gui.components.advanced
             if(App.utils)
             {
                _loc2_ = App.utils.classFactory.getComponent(param1,UIComponent);
-               App.utils.asserter.assert(_loc2_  is  IViewStackContent,"view must implements IViewStackContent");
+               App.utils.asserter.assert(_loc2_ is IViewStackContent,"view must implements IViewStackContent");
             }
             else
             {
@@ -260,11 +262,11 @@ package net.wg.gui.components.advanced
          dispatchEvent(new ViewStackEvent(ViewStackEvent.VIEW_CHANGED,IViewStackContent(_loc2_),param1));
          return _loc2_;
       }
-
+      
       private function onChangeViewHandler(param1:IndexEvent) : void {
          this.changeView();
       }
-
+      
       private function onDisposeSubViewHandler(param1:LifeCycleEvent) : void {
          var _loc2_:MovieClip = MovieClip(param1.target);
          if(_loc2_)
@@ -272,7 +274,7 @@ package net.wg.gui.components.advanced
             this.clearSubView(_loc2_);
          }
       }
-
+      
       private function clearSubView(param1:MovieClip) : void {
          var _loc3_:String = null;
          var _loc4_:String = null;
@@ -287,11 +289,11 @@ package net.wg.gui.components.advanced
             this.setCurrentView(null,null,false);
             _loc2_ = true;
          }
-         for (_loc3_ in this.cachedViews)
+         for(_loc3_ in this.cachedViews)
          {
             if(this.cachedViews[_loc3_] == param1)
             {
-               delete this.cachedViews[[_loc3_]];
+               delete this.cachedViews[_loc3_];
                _loc2_ = true;
                break;
             }
@@ -300,5 +302,4 @@ package net.wg.gui.components.advanced
          App.utils.asserter.assert(_loc2_,_loc4_,InfrastructureException);
       }
    }
-
 }

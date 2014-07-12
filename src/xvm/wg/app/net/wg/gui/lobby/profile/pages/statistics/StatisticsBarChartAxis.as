@@ -9,36 +9,35 @@ package net.wg.gui.lobby.profile.pages.statistics
    import net.wg.gui.lobby.profile.components.chart.IChartItem;
    import flash.geom.Point;
    import net.wg.gui.lobby.profile.components.chart.layout.IChartLayout;
-
-
+   
    public class StatisticsBarChartAxis extends AxisBase
    {
-          
+      
       public function StatisticsBarChartAxis() {
          super();
       }
-
+      
       private static const paddingTop:int = 112;
-
+      
       private static const LAYOUT_INV:String = "layoutInv";
-
+      
       public static const INITIALIZED:String = "inited";
-
+      
       public var background:MovieClip;
-
+      
       public var lineText:LineTextComponent;
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function createPoint(param1:Object) : IListItemRenderer {
          var _loc2_:StatisticBarChartAxisPoint = new _pointClass();
          _loc2_.addEventListener(SimpleLoader.LOADED,this.iconLoadingCompleteHandler,false,0,true);
          addChild(_loc2_);
          return _loc2_;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(LAYOUT_INV))
@@ -46,7 +45,7 @@ package net.wg.gui.lobby.profile.pages.statistics
             this.layoutAll(currentLayout);
          }
       }
-
+      
       private function iconLoadingCompleteHandler(param1:Event) : void {
          var _loc6_:StatisticBarChartAxisPoint = null;
          var _loc2_:uint = getData().length;
@@ -73,14 +72,14 @@ package net.wg.gui.lobby.profile.pages.statistics
          }
          invalidate(LAYOUT_INV);
       }
-
+      
       override protected function layoutPoint(param1:IListItemRenderer, param2:IChartItem) : void {
          var _loc3_:StatisticBarChartItem = StatisticBarChartItem(param2);
          var _loc4_:Point = _loc3_.getThumbDimensions();
          param1.y = paddingTop;
          param1.x = Math.round(_loc3_.x + (_loc4_.x - param1.width >> 1));
       }
-
+      
       override protected function layoutAll(param1:IChartLayout) : void {
          var _loc2_:StatisticBarChartItem = null;
          super.layoutAll(param1);
@@ -101,7 +100,7 @@ package net.wg.gui.lobby.profile.pages.statistics
             dispatchEvent(new Event(Event.RESIZE,true));
          }
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:Object = null;
          this.background = null;
@@ -109,7 +108,7 @@ package net.wg.gui.lobby.profile.pages.statistics
          this.lineText = null;
          while(_points.length > 0)
          {
-            _loc1_ = _points.splice(_points.length-1,1)[0];
+            _loc1_ = _points.splice(_points.length - 1,1)[0];
             try
             {
                _loc1_.dispose();
@@ -123,5 +122,4 @@ package net.wg.gui.lobby.profile.pages.statistics
          super.onDispose();
       }
    }
-
 }

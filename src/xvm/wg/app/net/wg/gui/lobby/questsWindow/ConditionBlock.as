@@ -6,25 +6,24 @@ package net.wg.gui.lobby.questsWindow
    import flash.events.Event;
    import net.wg.gui.lobby.questsWindow.data.RequirementBlockVO;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class ConditionBlock extends RequirementBlock
    {
-          
+      
       public function ConditionBlock() {
          super();
       }
-
+      
       private static const SEPARATOR_PADDING:int = 15;
-
+      
       private static const VERTICAL_PADDING:int = 12;
-
+      
       public var topConditions:ResizableContainer;
-
+      
       public var topSeparator:Sprite;
-
+      
       public var lowerSeparator:Sprite;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.topConditions.visible = false;
@@ -36,7 +35,7 @@ package net.wg.gui.lobby.questsWindow
          this.topConditions.bottomPadding = SEPARATOR_PADDING;
          this.topConditions.addEventListener(Event.RESIZE,this.layoutBlocks);
       }
-
+      
       override protected function onDispose() : void {
          this.topConditions.removeEventListener(Event.RESIZE,this.layoutBlocks);
          this.topConditions.dispose();
@@ -45,12 +44,12 @@ package net.wg.gui.lobby.questsWindow
          this.lowerSeparator = null;
          super.onDispose();
       }
-
+      
       override public function setData(param1:Object) : void {
          this.topConditions.isReadyForLayout = false;
          super.setData(param1);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:RequirementBlockVO = null;
          super.draw();
@@ -71,7 +70,7 @@ package net.wg.gui.lobby.questsWindow
             }
          }
       }
-
+      
       override protected function layoutBlocks(param1:Event) : void {
          var _loc2_:* = false;
          var _loc3_:* = NaN;
@@ -100,5 +99,4 @@ package net.wg.gui.lobby.questsWindow
          }
       }
    }
-
 }

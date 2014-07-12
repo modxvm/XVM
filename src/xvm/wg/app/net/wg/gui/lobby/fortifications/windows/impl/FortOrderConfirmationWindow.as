@@ -12,11 +12,10 @@ package net.wg.gui.lobby.fortifications.windows.impl
    import scaleform.clik.events.IndexEvent;
    import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
    import scaleform.clik.events.ButtonEvent;
-
-
+   
    public class FortOrderConfirmationWindow extends FortOrderConfirmationWindowMeta implements IFortOrderConfirmationWindowMeta
    {
-          
+      
       public function FortOrderConfirmationWindow() {
          super();
          isModal = true;
@@ -27,29 +26,29 @@ package net.wg.gui.lobby.fortifications.windows.impl
          content.cancelBtn.UIID = 82;
          UIID = 83;
       }
-
+      
       private static const DATA_INVALID:String = "dataInv";
-
+      
       private static const RESULT_INVALID:String = "resultInv";
-
+      
       private static const SELECTED_CURRENCY_INVALID:String = "currencyInv";
-
+      
       private static const SETTINGS_INVALID:String = "settingsInv";
-
+      
       private static const LABEL_PADDING:int = 155;
-
+      
       private static const TIME_COLOR:int = 9211006;
-
+      
       private static const PURPLE_COLOR:int = 10656624;
-
+      
       private static const TEXT_PADDING:int = 5;
-
+      
       private var orderInfo:ConfirmOrderVO;
-
+      
       private var settings:ItemDialogSettingsVO;
-
+      
       private var selectedCount:Number = 0;
-
+      
       override public function setWindow(param1:IWindow) : void {
          super.setWindow(param1);
          if(param1)
@@ -57,17 +56,17 @@ package net.wg.gui.lobby.fortifications.windows.impl
             invalidate(SETTINGS_INVALID);
          }
       }
-
+      
       public function as_setData(param1:Object) : void {
          this.orderInfo = new ConfirmOrderVO(param1);
          invalidate(DATA_INVALID);
       }
-
+      
       public function as_setSettings(param1:Object) : void {
          this.settings = new ItemDialogSettingsVO(param1);
          invalidate(SETTINGS_INVALID);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          content.dropdownMenu.visible = content.actionPrice.visible = false;
@@ -78,7 +77,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
          content.leftResultIT.textColor = content.leftIT.textColor = TIME_COLOR;
          content.rightResultIT.textColor = content.rightIT.textColor = PURPLE_COLOR;
       }
-
+      
       override protected function onDispose() : void {
          if(this.orderInfo)
          {
@@ -92,7 +91,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
          }
          super.onDispose();
       }
-
+      
       override protected function setLabels() : void {
          var _loc1_:ILocale = App.utils.locale;
          content.countLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_COUNTLABEL);
@@ -100,7 +99,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
          content.rightLabel.text = _loc1_.makeString(FORTIFICATIONS.ORDERS_ORDERCONFIRMATIONWINDOW_COST);
          content.resultLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_TOTALLABEL);
       }
-
+      
       override protected function draw() : void {
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
@@ -174,25 +173,24 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
          }
       }
-
+      
       override protected function selectedCountChangeHandler(param1:IndexEvent) : void {
          this.selectedCount = content.nsCount.value;
          invalidate(RESULT_INVALID);
       }
-
+      
       override protected function onClosingApproved() : void {
          App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_CLOSE,0);
       }
-
+      
       override protected function cancelBtnClickHandler(param1:ButtonEvent) : void {
          App.eventLogManager.logUIEvent(param1,this.selectedCount);
          super.cancelBtnClickHandler(param1);
       }
-
+      
       override protected function submitBtnClickHandler(param1:ButtonEvent) : void {
          App.eventLogManager.logUIEvent(param1,this.selectedCount);
          submitS(this.selectedCount);
       }
    }
-
 }

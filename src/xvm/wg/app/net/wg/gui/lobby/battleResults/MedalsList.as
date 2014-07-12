@@ -17,11 +17,10 @@ package net.wg.gui.lobby.battleResults
    import scaleform.clik.events.ListEvent;
    import scaleform.gfx.MouseEventEx;
    import net.wg.data.constants.Tooltips;
-
-
+   
    public class MedalsList extends UIComponent
    {
-          
+      
       public function MedalsList() {
          super();
          this.renderers = [];
@@ -31,53 +30,53 @@ package net.wg.gui.lobby.battleResults
          this.contentArea = new MovieClip();
          addChild(this.contentArea);
       }
-
+      
       private static const ALIGN_LEFT:String = "left";
-
+      
       private static const ALIGN_RIGHT:String = "right";
-
+      
       private static const ALIGN_CENTER:String = "center";
-
+      
       private static const INVALIDATE_FILTERS:String = "invFilt";
-
+      
       private static function isDisplaySpecial(param1:Object) : Boolean {
          var _loc2_:* = "isEpic";
-         var _loc3_:Boolean = _loc2_  in  param1 && (param1[_loc2_]);
+         var _loc3_:Boolean = _loc2_ in param1 && (param1[_loc2_]);
          var _loc4_:* = "specialIcon";
-         var _loc5_:Boolean = _loc4_  in  param1 && !(param1[_loc4_] == Values.EMPTY_STR);
+         var _loc5_:Boolean = _loc4_ in param1 && !(param1[_loc4_] == Values.EMPTY_STR);
          return (_loc3_) || (_loc5_);
       }
-
+      
       public var _itemRenderer:String = "";
-
+      
       public var _stripeRenderer:String = "";
-
+      
       public var _align:String = "left";
-
+      
       public var _gap:Number = 0;
-
+      
       public var _colorDodgeMulty:Number = 1.3;
-
+      
       protected var _dataProvider:IDataProvider;
-
+      
       private var renderers:Array;
-
+      
       private var stripes:Array;
-
+      
       public var contentArea:MovieClip;
-
+      
       public var stripesArea:MovieClip;
-
+      
       override protected function initialize() : void {
          this.dataProvider = new DataProvider();
          super.initialize();
       }
-
+      
       public function invalidateFilters() : void {
          invalidate(INVALIDATE_FILTERS);
          invalidate(InvalidationType.DATA);
       }
-
+      
       public function updateFilters() : void {
          var _loc1_:Array = [];
          _loc1_ = _loc1_.concat([this._colorDodgeMulty,0,0,0,0]);
@@ -92,11 +91,11 @@ package net.wg.gui.lobby.battleResults
          this.stripesArea.filters = [];
          this.stripesArea.filters = [new DropShadowFilter(2,90,0,0.75,4,4)];
       }
-
+      
       public function get dataProvider() : IDataProvider {
          return this._dataProvider;
       }
-
+      
       public function set dataProvider(param1:IDataProvider) : void {
          if(this._dataProvider == param1)
          {
@@ -114,7 +113,7 @@ package net.wg.gui.lobby.battleResults
          this._dataProvider.addEventListener(Event.CHANGE,this.onDataChange,false,0,true);
          invalidateData();
       }
-
+      
       public function clear() : void {
          while(this.renderers.length)
          {
@@ -125,7 +124,7 @@ package net.wg.gui.lobby.battleResults
             this.stripes.pop().removeMovieClip();
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          initSize();
@@ -137,14 +136,14 @@ package net.wg.gui.lobby.battleResults
          this.stripesArea.scaleX = this.stripesArea.scaleY = 1;
          invalidate(INVALIDATE_FILTERS);
       }
-
+      
       override protected function draw() : void {
          if(this._dataProvider)
          {
             this.drawRenderers(this._dataProvider.length);
             if(isInvalid(InvalidationType.DATA))
             {
-               this._dataProvider.requestItemRange(0,this._dataProvider.length-1,this.populateData);
+               this._dataProvider.requestItemRange(0,this._dataProvider.length - 1,this.populateData);
             }
             if(this.renderers.length)
             {
@@ -156,7 +155,7 @@ package net.wg.gui.lobby.battleResults
             this.updateFilters();
          }
       }
-
+      
       private function drawRenderers(param1:Number) : void {
          var _loc2_:Object = null;
          while(this.renderers.length)
@@ -176,7 +175,7 @@ package net.wg.gui.lobby.battleResults
             this.renderers.push(this.createItemRenderer());
          }
       }
-
+      
       private function drawLayout() : void {
          var _loc8_:MovieClip = null;
          var _loc1_:Number = this.renderers.length;
@@ -185,7 +184,7 @@ package net.wg.gui.lobby.battleResults
          var _loc4_:Number = (_loc3_ + this._gap) * _loc1_;
          if(_loc4_ > width)
          {
-            this._gap = Math.round((width - _loc3_ * _loc1_) / (_loc1_-1));
+            this._gap = Math.round((width - _loc3_ * _loc1_) / (_loc1_ - 1));
          }
          var _loc5_:Number = Math.round(this._gap + _loc3_ + 2);
          var _loc6_:Number = 0;
@@ -193,13 +192,11 @@ package net.wg.gui.lobby.battleResults
          {
             _loc6_ = Math.round(width - _loc5_);
          }
-         else
+         else if(this._align == ALIGN_CENTER)
          {
-            if(this._align == ALIGN_CENTER)
-            {
-               _loc6_ = Math.round((width - _loc5_ * _loc1_) / 2);
-            }
+            _loc6_ = Math.round((width - _loc5_ * _loc1_) / 2);
          }
+         
          var _loc7_:Number = 0;
          while(_loc1_ > _loc7_)
          {
@@ -208,13 +205,11 @@ package net.wg.gui.lobby.battleResults
             {
                _loc2_.x = Math.round(_loc6_ + Math.round(_loc5_ * _loc7_));
             }
-            else
+            else if(this._align == ALIGN_RIGHT)
             {
-               if(this._align == ALIGN_RIGHT)
-               {
-                  _loc2_.x = Math.round(_loc6_ - Math.round(_loc5_ * _loc7_));
-               }
+               _loc2_.x = Math.round(_loc6_ - Math.round(_loc5_ * _loc7_));
             }
+            
             _loc2_.y = Math.round((height - _loc2_.height) / 2);
             _loc2_.index = _loc7_;
             if(!(this._stripeRenderer == "") && (isDisplaySpecial(_loc2_.data)))
@@ -231,7 +226,7 @@ package net.wg.gui.lobby.battleResults
             _loc7_++;
          }
       }
-
+      
       private function createItemRenderer() : IListItemRenderer {
          var _loc1_:Class = getDefinitionByName(this._itemRenderer) as Class;
          var _loc2_:IListItemRenderer = new _loc1_() as IListItemRenderer;
@@ -246,7 +241,7 @@ package net.wg.gui.lobby.battleResults
          this.setupRenderer(_loc2_);
          return _loc2_;
       }
-
+      
       protected function setupRenderer(param1:IListItemRenderer) : void {
          param1.owner = this;
          param1.focusTarget = this;
@@ -258,7 +253,7 @@ package net.wg.gui.lobby.battleResults
          param1.addEventListener(MouseEvent.ROLL_OVER,this.dispatchItemEvent,false,0,true);
          param1.addEventListener(MouseEvent.ROLL_OUT,this.dispatchItemEvent,false,0,true);
       }
-
+      
       protected function dispatchItemEvent(param1:Event) : Boolean {
          var _loc2_:String = null;
          var _loc8_:Object = null;
@@ -285,31 +280,27 @@ package net.wg.gui.lobby.battleResults
          }
          var _loc3_:IListItemRenderer = param1.currentTarget as IListItemRenderer;
          var _loc4_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc4_ = (param1 as ButtonEvent).controllerIdx;
          }
-         else
+         else if(param1 is MouseEventEx)
          {
-            if(param1  is  MouseEventEx)
-            {
-               _loc4_ = (param1 as MouseEventEx).mouseIdx;
-            }
+            _loc4_ = (param1 as MouseEventEx).mouseIdx;
          }
+         
          var _loc5_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc5_ = (param1 as ButtonEvent).buttonIdx;
          }
-         else
+         else if(param1 is MouseEventEx)
          {
-            if(param1  is  MouseEventEx)
-            {
-               _loc5_ = (param1 as MouseEventEx).buttonIdx;
-            }
+            _loc5_ = (param1 as MouseEventEx).buttonIdx;
          }
+         
          var _loc6_:* = false;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc6_ = (param1 as ButtonEvent).isKeyboard;
          }
@@ -321,37 +312,33 @@ package net.wg.gui.lobby.battleResults
             {
                _loc9_ = Tooltips.TANK_CLASS;
             }
+            else if(_loc8_.type == "marksOnGun")
+            {
+               _loc9_ = Tooltips.BATTLE_STATS_MARKS_ON_GUN_ACHIEVEMENT;
+            }
             else
             {
-               if(_loc8_.type == "marksOnGun")
-               {
-                  _loc9_ = Tooltips.BATTLE_STATS_MARKS_ON_GUN_ACHIEVEMENT;
-               }
-               else
-               {
-                  _loc9_ = Tooltips.BATTLE_STATS_ACHIEVS;
-               }
+               _loc9_ = Tooltips.BATTLE_STATS_ACHIEVS;
             }
+            
             this.showToolTip(_loc9_,_loc8_);
          }
-         else
+         else if(_loc2_ == ListEvent.ITEM_ROLL_OUT)
          {
-            if(_loc2_ == ListEvent.ITEM_ROLL_OUT)
-            {
-               this.hideTooltip();
-            }
+            this.hideTooltip();
          }
+         
          return dispatchEvent(_loc7_);
       }
-
+      
       protected function showToolTip(param1:String, param2:Object) : void {
          App.toolTipMgr.showSpecial(param1,null,param2.block,param2.type,param2.rank,param2.customData);
       }
-
+      
       protected function hideTooltip() : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function handleItemClick(param1:Event) : void {
          var _loc2_:Number = param1.target.index;
          if(isNaN(_loc2_))
@@ -360,7 +347,7 @@ package net.wg.gui.lobby.battleResults
          }
          this.dispatchItemEvent(param1);
       }
-
+      
       private function populateData(param1:Array) : void {
          var _loc3_:MovieClip = null;
          var _loc4_:Object = null;
@@ -396,11 +383,11 @@ package net.wg.gui.lobby.battleResults
             _loc2_++;
          }
       }
-
+      
       private function onDataChange(param1:Event) : void {
          invalidate();
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:SpecialAchievement = null;
          while(this.stripes.length > 0)
@@ -414,5 +401,4 @@ package net.wg.gui.lobby.battleResults
          super.onDispose();
       }
    }
-
 }

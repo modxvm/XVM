@@ -13,47 +13,46 @@ package scaleform.clik.controls
    import flash.events.Event;
    import scaleform.clik.events.ResizeEvent;
    import scaleform.clik.events.ComponentEvent;
-
-
+   
    public class Window extends UIComponent
    {
-          
+      
       public function Window() {
          super();
          this._contentPadding = new Padding(0,0,0,0);
          hitArea = this.hit;
       }
-
+      
       public var minWidth:Number = 150;
-
+      
       public var maxWidth:Number = 500;
-
+      
       public var minHeight:Number = 150;
-
+      
       public var maxHeight:Number = 500;
-
+      
       protected var _title:String;
-
+      
       protected var _src:String = "";
-
+      
       protected var _contentPadding:Padding;
-
+      
       protected var _content:DisplayObject;
-
+      
       protected var _dragProps:Array;
-
+      
       public var closeBtn:Button;
-
+      
       public var okBtn:Button;
-
+      
       public var resizeBtn:Button;
-
+      
       public var titleBtn:Button;
-
+      
       public var background:MovieClip;
-
+      
       public var hit:MovieClip;
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this._content = null;
@@ -61,11 +60,11 @@ package scaleform.clik.controls
          this._dragProps = null;
          this.hit = null;
       }
-
+      
       public function get title() : String {
          return this._title;
       }
-
+      
       public function set title(param1:String) : void {
          this._title = param1;
          if(!(this.titleBtn == null) && (this.titleBtn.initialized))
@@ -73,35 +72,35 @@ package scaleform.clik.controls
             this.titleBtn.label = this._title;
          }
       }
-
+      
       public function get source() : String {
          return this._src;
       }
-
+      
       public function set source(param1:String) : void {
          this._src = param1;
          invalidate("source");
       }
-
+      
       public function get contentPadding() : Object {
          return this._contentPadding;
       }
-
+      
       public function set contentPadding(param1:Object) : void {
          this._contentPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
          invalidate("padding");
       }
-
+      
       override protected function preInitialize() : void {
          constraints = new Constraints(this,ConstrainMode.REFLOW);
       }
-
+      
       override protected function initialize() : void {
          tabEnabled = false;
          mouseEnabled = mouseChildren = enabled;
          super.initialize();
       }
-
+      
       override protected function configUI() : void {
          initSize();
          if(hitArea != null)
@@ -114,7 +113,7 @@ package scaleform.clik.controls
          }
          if(this.titleBtn != null)
          {
-            this.titleBtn.label = (this._title) || "My Window";
+            this.titleBtn.label = this._title || "My Window";
             this.titleBtn.addEventListener(MouseEvent.MOUSE_DOWN,this.onWindowStartDrag,false,0,true);
             constraints.addElement("titleBtn",this.titleBtn,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
          }
@@ -134,26 +133,24 @@ package scaleform.clik.controls
             this.okBtn.addEventListener(MouseEvent.CLICK,this.onCloseButtonClick,false,0,true);
          }
       }
-
+      
       override protected function draw() : void {
          if(isInvalid("source"))
          {
             this.loadSource();
             this.reflowContent();
          }
-         else
+         else if(isInvalid("padding"))
          {
-            if(isInvalid("padding"))
-            {
-               this.reflowContent();
-            }
+            this.reflowContent();
          }
+         
          if(isInvalid(InvalidationType.SIZE))
          {
             constraints.update(_width,_height);
          }
       }
-
+      
       protected function loadSource() : void {
          var _loc1_:Class = null;
          if(this._src != "")
@@ -178,7 +175,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function reflowContent() : void {
          var _loc1_:Padding = null;
          if(!this._content)
@@ -195,28 +192,28 @@ package scaleform.clik.controls
          this._content.height = _height - _loc1_.vertical;
          invalidateSize();
       }
-
+      
       protected function onWindowStartDrag(param1:Event) : void {
          stage.addEventListener(MouseEvent.MOUSE_UP,this.onWindowStopDrag,false,0,true);
          startDrag();
       }
-
+      
       protected function onWindowStopDrag(param1:Event) : void {
          stage.removeEventListener(MouseEvent.MOUSE_UP,this.onWindowStopDrag,false);
          stopDrag();
       }
-
+      
       protected function onResizeStartDrag(param1:Event) : void {
          stage.addEventListener(MouseEvent.MOUSE_UP,this.onResizeStopDrag,false,0,true);
          this._dragProps = [parent.mouseX - (x + width),parent.mouseY - (y + height)];
          stage.addEventListener(MouseEvent.MOUSE_MOVE,this.onResizeMouseMove,false,0,true);
       }
-
+      
       protected function onResizeStopDrag(param1:Event) : void {
          stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.onResizeMouseMove,false);
          stage.removeEventListener(MouseEvent.MOUSE_UP,this.onResizeStopDrag,false);
       }
-
+      
       protected function onResizeMouseMove(param1:Event) : void {
          var _loc2_:Number = Math.max(this.minWidth,Math.min(this.maxWidth,parent.mouseX - x - this._dragProps[0]));
          var _loc3_:Number = Math.max(this.minHeight,Math.min(this.maxHeight,parent.mouseY - y - this._dragProps[1]));
@@ -226,11 +223,10 @@ package scaleform.clik.controls
             dispatchEvent(new ResizeEvent(ResizeEvent.RESIZE,scaleX,scaleY));
          }
       }
-
+      
       protected function onCloseButtonClick(param1:MouseEvent) : void {
          parent.removeChild(this);
          dispatchEvent(new ComponentEvent(ComponentEvent.HIDE));
       }
    }
-
 }

@@ -8,11 +8,10 @@ package net.wg.gui.lobby.profile.pages.technique
    import scaleform.clik.motion.Tween;
    import net.wg.data.constants.Linkages;
    import net.wg.gui.components.common.containers.VerticalGroupLayout;
-
-
+   
    public class TechniqueStatisticTab extends ResizableContent
    {
-          
+      
       public function TechniqueStatisticTab() {
          this.tweenManager = new ExcludeTweenManager();
          super();
@@ -27,19 +26,19 @@ package net.wg.gui.lobby.profile.pages.technique
          this.group.y = 50;
          addChild(this.group);
       }
-
+      
       public static const PERCENT_SIGN_GAP:uint = 1;
-
+      
       private static var ANIM_SPEED:Number = 500;
-
+      
       private var _data:ProfileVehicleDossierVO;
-
+      
       private var isDataInitialized:Boolean;
-
+      
       private var tweenManager:ExcludeTweenManager;
-
+      
       private var group:DetailedStatisticsGroupEx;
-
+      
       override public function update(param1:Object) : void {
          var _loc2_:ProfileVehicleDossierVO = ProfileVehicleDossierVO(param1);
          if(this._data != _loc2_)
@@ -54,18 +53,17 @@ package net.wg.gui.lobby.profile.pages.technique
                      {
                         "ease":Strong.easeOut,
                         "onComplete":this.onTweenComplete
-                     }
-                  );
+                     });
                }
                this.group.dataProvider = _loc2_.detailedDataList;
             }
          }
       }
-
+      
       private function onTweenComplete(param1:Tween) : void {
          this.tweenManager.unregister(param1);
       }
-
+      
       override protected function onDispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
@@ -77,5 +75,4 @@ package net.wg.gui.lobby.profile.pages.technique
          super.onDispose();
       }
    }
-
 }

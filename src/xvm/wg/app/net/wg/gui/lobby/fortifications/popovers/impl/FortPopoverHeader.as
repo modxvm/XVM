@@ -1,33 +1,34 @@
 package net.wg.gui.lobby.fortifications.popovers.impl
 {
-   import flash.display.MovieClip;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import scaleform.clik.core.UIComponent;
    import flash.text.TextField;
    import flash.text.TextFormatAlign;
    import net.wg.gui.lobby.fortifications.utils.impl.FortCommonUtils;
    import flash.filters.GlowFilter;
+   import flash.display.MovieClip;
    import net.wg.gui.components.controls.IconTextButton;
    import net.wg.gui.components.advanced.ButtonDnmIcon;
    import net.wg.gui.lobby.fortifications.data.BuildingPopoverHeaderVO;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.data.constants.Values;
    import net.wg.gui.lobby.fortifications.events.FortBuildingCardPopoverEvent;
-
-
-   public class FortPopoverHeader extends MovieClip implements IDisposable
+   
+   public class FortPopoverHeader extends UIComponent
    {
-          
+      
       public function FortPopoverHeader() {
          super();
          this.upgradeBtn.UIID = 75;
          this.destroyBtn.UIID = 79;
       }
-
+      
+      private static const UPGRADE_BTN_ICON_PNG:String = "level_up.png";
+      
       private static function updateTextAlign(param1:Boolean, param2:TextField) : void {
          var _loc3_:String = param1?TextFormatAlign.CENTER:TextFormatAlign.LEFT;
          FortCommonUtils.instance.changeTextAlign(param2,_loc3_);
       }
-
+      
       private static function getGlowFilter(param1:Number) : Array {
          var _loc2_:Array = [];
          var _loc3_:Number = 1;
@@ -41,24 +42,29 @@ package net.wg.gui.lobby.fortifications.popovers.impl
          _loc2_.push(_loc10_);
          return _loc2_;
       }
-
+      
       public var buildingName:TextField = null;
-
+      
       public var buildingIcon:MovieClip = null;
-
+      
       public var titleStatus:TextField = null;
-
+      
       public var bodyStatus:TextField = null;
-
+      
       public var upgradeBtn:IconTextButton = null;
-
+      
       public var destroyBtn:ButtonDnmIcon = null;
-
+      
       public var buildLevel:TextField = null;
-
+      
       private var model:BuildingPopoverHeaderVO = null;
-
-      public function dispose() : void {
+      
+      override protected function configUI() : void {
+         super.configUI();
+         this.upgradeBtn.icon = UPGRADE_BTN_ICON_PNG;
+      }
+      
+      override protected function onDispose() : void {
          this.upgradeBtn.removeEventListener(ButtonEvent.CLICK,this.headerActionHandler);
          this.destroyBtn.removeEventListener(ButtonEvent.CLICK,this.headerActionHandler);
          this.upgradeBtn.dispose();
@@ -71,8 +77,9 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.model.dispose();
             this.model = null;
          }
+         super.onDispose();
       }
-
+      
       public function setData(param1:BuildingPopoverHeaderVO) : void {
          this.model = param1;
          this.buildingName.htmlText = this.model.buildingName;
@@ -112,7 +119,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
          }
          this.updateFilters();
       }
-
+      
       private function updateFilters() : void {
          if(this.model.glowColor == Values.DEFAULT_INT)
          {
@@ -127,21 +134,18 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.bodyStatus.filters = getGlowFilter(this.model.glowColor);
          }
       }
-
+      
       private function headerActionHandler(param1:ButtonEvent) : void {
          App.eventLogManager.logUIEvent(param1,0);
          if(param1.target == this.upgradeBtn)
          {
             dispatchEvent(new FortBuildingCardPopoverEvent(FortBuildingCardPopoverEvent.UPGRADE_BUILDING));
          }
-         else
+         else if(param1.target == this.destroyBtn)
          {
-            if(param1.target == this.destroyBtn)
-            {
-               dispatchEvent(new FortBuildingCardPopoverEvent(FortBuildingCardPopoverEvent.DESTROY_BUILDING));
-            }
+            dispatchEvent(new FortBuildingCardPopoverEvent(FortBuildingCardPopoverEvent.DESTROY_BUILDING));
          }
+         
       }
    }
-
 }

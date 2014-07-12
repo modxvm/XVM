@@ -5,11 +5,10 @@ package net.wg.gui.components.controls
    import flash.geom.Rectangle;
    import flash.display.BitmapData;
    import flash.utils.getDefinitionByName;
-
-
+   
    public class BitmapFill extends UIComponentEx
    {
-          
+      
       public function BitmapFill() {
          super();
          if(!this.pos)
@@ -25,30 +24,30 @@ package net.wg.gui.components.controls
             this.tempBg.visible = false;
          }
       }
-
+      
       public var tempBg:MovieClip;
-
+      
       public var pos:Rectangle;
-
+      
       public var repeat:String = "none";
-
+      
       public var startPos:String = "TL";
-
+      
       private var myBitmapData:BitmapData;
-
+      
       private var _src:String = "";
-
+      
       override public function setSize(param1:Number, param2:Number) : void {
          this.createPos();
          this.pos.width = param1;
          this.pos.height = param2;
          this.draw();
       }
-
+      
       public function get source() : String {
          return this._src;
       }
-
+      
       public function set source(param1:String) : void {
          var _loc2_:Class = null;
          this._src = param1;
@@ -59,43 +58,43 @@ package net.wg.gui.components.controls
             invalidate();
          }
       }
-
+      
       public function get setBitmap() : BitmapData {
          return this.myBitmapData;
       }
-
+      
       public function set setBitmap(param1:BitmapData) : void {
          this.myBitmapData = param1;
          invalidate();
       }
-
+      
       public function get widthFill() : Number {
          return this.pos.width;
       }
-
+      
       public function set widthFill(param1:Number) : void {
          this.setSize(param1,this.pos.height);
       }
-
+      
       public function get heightFill() : Number {
          return this.pos.height;
       }
-
+      
       public function set heightFill(param1:Number) : void {
          this.setSize(this.pos.width,param1);
       }
-
+      
       override protected function onDispose() : void {
          this.tempBg = null;
          this.myBitmapData = null;
          this.pos = null;
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          this.graphics.clear();
@@ -174,7 +173,7 @@ package net.wg.gui.components.controls
          this.graphics.lineTo(_loc1_,_loc2_);
          this.graphics.endFill();
       }
-
+      
       private function createPos() : void {
          if(!this.pos)
          {
@@ -182,5 +181,4 @@ package net.wg.gui.components.controls
          }
       }
    }
-
 }

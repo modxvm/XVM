@@ -32,73 +32,72 @@ package net.wg.gui.prebattle.company
    import flash.geom.Point;
    import net.wg.utils.IEventCollector;
    import scaleform.clik.constants.InputValue;
-
-
+   
    public class CompaniesListWindow extends CompaniesWindowMeta implements ICompaniesWindowMeta
    {
-          
+      
       public function CompaniesListWindow() {
          super();
          isCentered = false;
          this.companiesDP = new DAAPIDataProvider();
       }
-
+      
       public var channelComponent:ChannelComponent;
-
+      
       public var topPanel:MovieClip;
-
+      
       public var groupsScrollBar:ScrollBar;
-
+      
       public var createButton:SoundButtonEx;
-
+      
       public var cmpList:CompaniesScrollingList;
-
+      
       public var refreshButton:IconButton;
-
+      
       public var filterButton:IconButton;
-
+      
       public var filterTextField:TextInput;
-
+      
       public var filterInBattleCheckbox:CheckBox;
-
+      
       public var division:DropdownMenu;
-
+      
       private var companiesDP:DAAPIDataProvider;
-
+      
       private var defaultFilterText:String = "";
-
+      
       private var selectedFilterInBattleCheckbox:Boolean = false;
-
+      
       private var defaultSelectedIndex:int = 0;
-
+      
       public function as_getCompaniesListDP() : Object {
          return this.companiesDP;
       }
-
+      
       public function as_showPlayersList(param1:uint) : void {
          if(this.cmpList)
          {
             this.cmpList.setIndexCompany = param1;
          }
       }
-
+      
       public function as_setRefreshCoolDown(param1:Number) : void {
          this.coolDownProcess(param1 * 1000);
       }
-
+      
       public function as_disableCreateButton(param1:Boolean) : void {
          if(this.createButton != null)
          {
             this.createButton.enabled = !param1;
          }
       }
-
+      
       public function as_setDefaultFilter(param1:String, param2:Boolean, param3:uint) : void {
          this.defaultFilterText = param1;
          this.selectedFilterInBattleCheckbox = param2;
          this.defaultSelectedIndex = param3;
       }
-
+      
       override protected function onPopulate() : void {
          canClose = true;
          enabledCloseBtn = false;
@@ -117,7 +116,7 @@ package net.wg.gui.prebattle.company
          window.title = CHAT.CHANNELS_COMPANY;
          geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = 0;
          var _loc2_:* = 0;
@@ -132,7 +131,7 @@ package net.wg.gui.prebattle.company
             this.channelComponent.invalidate(InvalidationType.SIZE);
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
@@ -173,19 +172,19 @@ package net.wg.gui.prebattle.company
          this.channelComponent.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
          this.cmpList.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
       }
-
+      
       private function onFilterButtonOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onFilterButtonOver(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(TOOLTIPS.PREBATTLE_NAMEFILTERBUTTON);
       }
-
+      
       private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
          setFocus(IFocusContainer(param1.target).getComponentForFocus());
       }
-
+      
       override protected function onDispose() : void {
          this.channelComponent.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
          this.cmpList.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
@@ -212,12 +211,12 @@ package net.wg.gui.prebattle.company
          removeEventListener(CompanyDropDownEvent.SHOW_DROP_DOWN,this.onShowDropwDownHandler);
          super.onDispose();
       }
-
+      
       private function coolDownProcess(param1:Number) : void {
          this.enableFilterButtons(false);
          App.utils.scheduler.scheduleTask(this.enableFilterButtons,param1,true);
       }
-
+      
       private function enableFilterButtons(param1:Boolean) : void {
          if(!param1)
          {
@@ -235,7 +234,7 @@ package net.wg.gui.prebattle.company
          this.filterButton.enabled = (param1) && _loc2_ == 0?!(this.filterTextField.text == ""):false;
          this.division.enabled = param1;
       }
-
+      
       private function getSelectedDivisionData() : Number {
          var _loc2_:Object = null;
          var _loc1_:Number = -1;
@@ -246,46 +245,45 @@ package net.wg.gui.prebattle.company
          }
          return _loc1_;
       }
-
+      
       private function handleDivisionsChange(param1:ListEvent) : void {
          refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
          var _loc2_:Number = this.getSelectedDivisionData();
          this.filterButton.enabled = (this.refreshButton.enabled) && _loc2_ == 0?!(this.filterTextField.text == ""):false;
       }
-
+      
       private function refreshButton_buttonClickHandler(param1:ButtonEvent) : void {
          refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
       }
-
+      
       private function groupsList_listClickHandler(param1:CompanyEvent) : void {
          joinCompanyS(param1.prbID);
          this.cmpList.updateRenderer();
       }
-
+      
       private function handleCreateButtonClick(param1:ButtonEvent) : void {
          createCompanyS();
       }
-
+      
       private function filterTextField_changeHandler(param1:Event) : void {
          var _loc2_:Number = this.getSelectedDivisionData();
          this.filterButton.enabled = (this.refreshButton.enabled) && _loc2_ == 0?!(this.filterTextField.text == ""):false;
       }
-
+      
       private function onFilterButtonPress(param1:ButtonEvent) : void {
          refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
       }
-
+      
       private function selectedItemHandler(param1:CompanyEvent) : void {
          if(param1.prbID > -1)
          {
             requestPlayersListS(param1.prbID);
          }
       }
-
+      
       private function filterTextField_focusInHandler(param1:FocusEvent) : void {
-          
       }
-
+      
       private function filterTextField_inputHandler(param1:InputEvent) : void {
          if(param1.details.code == Keyboard.ENTER)
          {
@@ -295,7 +293,7 @@ package net.wg.gui.prebattle.company
             this.filterTextField.removeEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
          }
       }
-
+      
       private function onShowDropwDownHandler(param1:CompanyDropDownEvent) : void {
          var _loc2_:Point = globalToLocal(new Point(param1.dropDownref.x,param1.dropDownref.y));
          var _loc3_:IEventCollector = App.utils.events;
@@ -305,7 +303,7 @@ package net.wg.gui.prebattle.company
          param1.dropDownref.x = _loc2_.x;
          param1.dropDownref.y = _loc2_.y;
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN)
          {
@@ -329,5 +327,4 @@ package net.wg.gui.prebattle.company
          }
       }
    }
-
 }

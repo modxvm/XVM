@@ -15,7 +15,6 @@ package net.wg.gui.lobby.sellDialog
    import net.wg.infrastructure.interfaces.IWindow;
    import scaleform.clik.utils.Padding;
    import org.idmedia.as3commons.util.StringUtils;
-   import __AS3__.vec.*;
    import net.wg.gui.events.VehicleSellDialogEvent;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.ListEvent;
@@ -25,11 +24,10 @@ package net.wg.gui.lobby.sellDialog
    import net.wg.utils.ILocale;
    import fl.transitions.easing.Strong;
    import net.wg.data.constants.FittingTypes;
-
-
+   
    public class VehicleSellDialog extends VehicleSellDialogMeta implements IVehicleSellDialogMeta
    {
-          
+      
       public function VehicleSellDialog() {
          this.tweens = new Vector.<Tween>();
          super();
@@ -40,65 +38,65 @@ package net.wg.gui.lobby.sellDialog
          scaleX = scaleY = 1;
          this.controlQuestion.visible = false;
       }
-
+      
       public static const ICONS_TEXT_OFFSET:Number = -2;
-
-      private static const WINDOW_PADDING:int = 12;
-
+      
       private static const SLIDING_SPEED:Number = 350;
-
+      
       private static const INV_CONTROL_QUESTION:String = "invControlQuestion";
-
+      
+      private static const INV_BARRACKS_DROP:String = "invBarracksDrop";
+      
       private static const DISSMIS_TANKMEN:int = 1;
-
+      
       public var headerComponent:SellHeaderComponent;
-
+      
       public var slidingComponent:SellSlidingComponent;
-
+      
       public var devicesComponent:SellDevicesComponent;
-
+      
       public var controlQuestion:ControlQuestionComponent;
-
+      
       public var windBgForm:Sprite;
-
+      
       public var cancelBtn:SoundButtonEx;
-
+      
       public var submitBtn:SoundButtonEx;
-
+      
       public var result_mc:TotalResult;
-
+      
       private var goldCommon:Number = 0;
-
+      
       private var listVisibleHight:Number = 0;
-
+      
       private var creditsComplDev:Number = 0;
-
+      
       private var renderersArr:Vector.<ISaleItemBlockRenderer>;
-
+      
       private var complexDeviceRenderers:Vector.<ISaleItemBlockRenderer>;
-
-      private var isOpen:Boolean = false;
-
+      
       private var accGold:Number = 0;
-
+      
       private var tweens:Vector.<Tween>;
-
+      
       private var countTweenObjects:int = 0;
-
+      
       private var countCallBack:int = 0;
-
+      
       private var vehicleVo:SellVehicleVo = null;
-
+      
       private var inInventoryModules:Vector.<SellInInventoryModuleVo>;
-
+      
       private var inInventoryShells:Vector.<SellInInventoryShellVo>;
-
+      
       private var onVehicleOptionalDevices:Vector.<SellOnVehicleOptionalDeviceVo>;
-
+      
       private var onVehicleShells:Vector.<SellOnVehicleShellVo>;
-
+      
       private var onVehicleEquipments:Vector.<SellOnVehicleEquipmentVo>;
-
+      
+      private var _isPopulated:Boolean = false;
+      
       override public function setWindow(param1:IWindow) : void {
          var _loc2_:Padding = null;
          super.setWindow(param1);
@@ -109,12 +107,12 @@ package net.wg.gui.lobby.sellDialog
             window.contentPadding = _loc2_;
          }
       }
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
          this.updateWindowPosition();
       }
-
+      
       public function as_visibleControlBlock(param1:Boolean) : void {
          if(this.controlQuestion.visible != param1)
          {
@@ -127,7 +125,7 @@ package net.wg.gui.lobby.sellDialog
          }
          invalidate(INV_CONTROL_QUESTION);
       }
-
+      
       public function as_enableButton(param1:Boolean) : void {
          var _loc2_:* = false;
          if(this.submitBtn)
@@ -140,7 +138,7 @@ package net.wg.gui.lobby.sellDialog
             }
          }
       }
-
+      
       public function as_setCtrlQuestion(param1:String) : void {
          if(this.controlQuestion)
          {
@@ -150,7 +148,7 @@ package net.wg.gui.lobby.sellDialog
             this.controlQuestion.invalidateData();
          }
       }
-
+      
       public function as_setControlNumber(param1:Boolean, param2:String) : void {
          var _loc3_:String = null;
          if(this.controlQuestion)
@@ -170,7 +168,7 @@ package net.wg.gui.lobby.sellDialog
             this.controlQuestion.invalidateData();
          }
       }
-
+      
       public function as_checkGold(param1:Number) : void {
          var _loc2_:* = NaN;
          this.accGold = param1;
@@ -200,7 +198,7 @@ package net.wg.gui.lobby.sellDialog
          }
          this.result_mc.goldIT.textColor = _loc2_;
       }
-
+      
       public function as_setData(param1:Object, param2:Object, param3:Object, param4:Object, param5:Number) : void {
          var _loc8_:SellInInventoryModuleVo = null;
          var _loc9_:SellInInventoryShellVo = null;
@@ -304,15 +302,19 @@ package net.wg.gui.lobby.sellDialog
          this.window.title = App.utils.locale.makeString(DIALOGS.VEHICLESELLDIALOG_TITLE,{"name":param1.userName});
          invalidateData();
       }
-
+      
       public function motionCallBack(param1:Tween) : void {
          this.countCallBack++;
+         if(this.compCompletedTween())
+         {
+            this.updateComponentsPosition();
+         }
       }
-
+      
       public function compCompletedTween() : Boolean {
          return this.countTweenObjects == this.countCallBack;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.updateOpenedState();
@@ -333,7 +335,7 @@ package net.wg.gui.lobby.sellDialog
             App.utils.scheduler.envokeInNextFrame(setFocus,this.submitBtn);
          }
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:Tween = null;
          super.onDispose();
@@ -344,7 +346,7 @@ package net.wg.gui.lobby.sellDialog
          this.controlQuestion.removeEventListener(ControlQuestionComponent.USER_INPUT_HANDLER,this.userInputHandler);
          this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.handleClose);
          this.headerComponent.inBarracsDrop.removeEventListener(ListEvent.INDEX_CHANGE,this.handleDissmisClick);
-         for each (_loc1_ in this.tweens)
+         for each(_loc1_ in this.tweens)
          {
             _loc1_.paused = true;
             _loc1_ = null;
@@ -367,12 +369,17 @@ package net.wg.gui.lobby.sellDialog
          this.onVehicleEquipments = null;
          App.toolTipMgr.hide();
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
+         this._isPopulated = true;
       }
-
+      
       override protected function draw() : void {
+         if((isInvalid(INV_BARRACKS_DROP)) && (this._isPopulated))
+         {
+            checkControlQuestionS(this.headerComponent.inBarracsDrop.selectedIndex == DISSMIS_TANKMEN);
+         }
          if((isInvalid("updateStage")) && (window))
          {
             this.updateWindowPosition();
@@ -391,7 +398,7 @@ package net.wg.gui.lobby.sellDialog
             this.updateComponentsPosition();
          }
       }
-
+      
       private function clearVectorWithDisposableVo(param1:Vector.<IDisposable>) : void {
          var _loc2_:IDisposable = null;
          if(param1)
@@ -404,18 +411,18 @@ package net.wg.gui.lobby.sellDialog
             }
          }
       }
-
+      
       private function enabledSubmitBtn(param1:Boolean) : void {
          if(this.submitBtn.enabled != param1)
          {
             this.submitBtn.enabled = param1;
          }
       }
-
+      
       private function isHasGold() : Number {
          return this.goldCommon - this.headerComponent.tankGoldPrice;
       }
-
+      
       private function updateWindowPosition() : void {
          var _loc1_:* = 0;
          var _loc2_:* = 0;
@@ -438,7 +445,7 @@ package net.wg.gui.lobby.sellDialog
             }
          }
       }
-
+      
       private function setGoldText(param1:Number, param2:Number) : void {
          var _loc9_:* = false;
          var _loc10_:* = 0;
@@ -448,7 +455,7 @@ package net.wg.gui.lobby.sellDialog
          var _loc6_:Number = this.headerComponent.tankGoldPrice > 0?this.headerComponent.tankGoldPrice - param2:param2;
          if(_loc6_ >= 0)
          {
-            _loc5_ = this.headerComponent.tankGoldPrice > 0?false:true;
+            _loc5_ = !(this.headerComponent.tankGoldPrice > 0);
          }
          else
          {
@@ -506,29 +513,29 @@ package net.wg.gui.lobby.sellDialog
             this.slidingComponent.settingsBtn.creditsIT.validateNow();
          }
       }
-
+      
       private function setHeader(param1:SellVehicleVo) : void {
          this.headerComponent.setData(param1);
       }
-
+      
       private function setDevices(param1:Vector.<SellOnVehicleOptionalDeviceVo>) : void {
          this.devicesComponent.setData(param1);
          this.slidingComponent.sellData = this.devicesComponent.sellData;
       }
-
+      
       private function setShells(param1:Vector.<SellOnVehicleShellVo>) : void {
          this.updateOpenedState();
          this.slidingComponent.setShells(param1);
       }
-
+      
       private function setEquipment(param1:Vector.<SellOnVehicleEquipmentVo>) : void {
          this.slidingComponent.setEquipment(param1);
       }
-
+      
       private function setInventory(param1:Vector.<SellInInventoryModuleVo>, param2:Vector.<SellInInventoryShellVo>) : void {
          this.slidingComponent.setInventory(param1,param2);
       }
-
+      
       private function updateComponentsPosition() : void {
          this.slidingComponent.visible = !(this.listVisibleHight == 0);
          if(this.listVisibleHight != 0)
@@ -566,7 +573,7 @@ package net.wg.gui.lobby.sellDialog
          window.y = App.appHeight - window.height >> 1;
          this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
       }
-
+      
       private function playSlidingAnimation() : void {
          var _loc5_:Tween = null;
          var _loc6_:* = 0;
@@ -586,11 +593,10 @@ package net.wg.gui.lobby.sellDialog
          this.countCallBack = 0;
          var _loc1_:Number = SLIDING_SPEED;
          var _loc2_:int = this.slidingComponent.isOpened?-this.slidingComponent.resultExpand:this.slidingComponent.resultExpand;
-         var _loc3_:int = this.windBgForm.height + window.contentPadding.top + window.contentPadding.bottom;
+         var _loc3_:int = window.height;
          _loc3_ = _loc3_ + _loc2_;
-         var _loc4_:int = Math.floor((App.appHeight - _loc3_) / 2);
-         _loc4_ = _loc4_ - WINDOW_PADDING;
-         for each (_loc5_ in this.tweens)
+         var _loc4_:int = Math.floor((App.appHeight - window.getBackground().height - _loc2_) / 2);
+         for each(_loc5_ in this.tweens)
          {
             _loc5_.paused = true;
             _loc5_ = null;
@@ -612,182 +618,98 @@ package net.wg.gui.lobby.sellDialog
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,this.windBgForm,{"height":_loc9_},
+            }),new Tween(_loc1_,this.windBgForm,{"height":_loc9_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,this.submitBtn,{"y":_loc7_},
+            }),new Tween(_loc1_,this.submitBtn,{"y":_loc7_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,this.cancelBtn,{"y":_loc8_},
+            }),new Tween(_loc1_,this.cancelBtn,{"y":_loc8_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,this.result_mc,{"y":_loc11_},
+            }),new Tween(_loc1_,this.result_mc,{"y":_loc11_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,this.slidingComponent.mask_mc,{"height":_loc12_},
+            }),new Tween(_loc1_,this.slidingComponent.mask_mc,{"height":_loc12_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,this.slidingComponent.expandBg,{"height":_loc13_},
+            }),new Tween(_loc1_,this.slidingComponent.expandBg,{"height":_loc13_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,this.slidingComponent.settingsBtn.creditsIT,{"alpha":_loc15_},
+            }),new Tween(_loc1_,this.slidingComponent.settingsBtn.creditsIT,{"alpha":_loc15_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,this.slidingComponent.settingsBtn.ddLine,{"alpha":_loc16_},
+            }),new Tween(_loc1_,this.slidingComponent.settingsBtn.ddLine,{"alpha":_loc16_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,this.controlQuestion,{"y":_loc14_},
+            }),new Tween(_loc1_,this.controlQuestion,{"y":_loc14_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,window,{"y":_loc4_},
+            }),new Tween(_loc1_,window,{"y":_loc4_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         ),new Tween(_loc1_,window.getBackground(),{"height":_loc10_},
+            }),new Tween(_loc1_,window.getBackground(),{"height":_loc10_},
             {
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         )]);
+            })]);
          this.countTweenObjects = this.tweens.length;
          var _loc17_:* = 0;
          while(_loc17_ < this.countTweenObjects)
          {
-            Tween(this.tweens[_loc17_]).onComplete = this.motionCallBack;
+            this.tweens[_loc17_].onComplete = this.motionCallBack;
+            this.tweens[_loc17_].fastTransform = false;
             _loc17_++;
          }
          this.updateElements();
       }
-
+      
       private function updateElements() : void {
          this.slidingComponent.slidingScrList.y = this.slidingComponent.settingsBtn.y + this.slidingComponent.settingsBtn.height;
          this.slidingComponent.settingsBtn.creditsIT.visible = true;
          this.slidingComponent.slidingScrList.visible = this.slidingComponent.isOpened;
       }
-
+      
       private function updateOpenedState() : void {
          var _loc1_:Object = getDialogSettingsS();
-         this.slidingComponent.isOpened = this.isOpen = _loc1_.isOpened;
+         this.slidingComponent.isOpened = _loc1_.isOpened;
       }
-
+      
       private function handleSubmit(param1:ButtonEvent) : void {
-         this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
-         this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
-         var _loc2_:Array = [];
-         var _loc3_:Array = [];
-         var _loc4_:Array = [];
-         var _loc5_:Array = [];
-         var _loc6_:* = false;
-         var _loc7_:uint = 0;
-         _loc7_ = 0;
-         while(_loc7_ < this.renderersArr.length)
-         {
-            if(!this.renderersArr[_loc7_].toInventory)
-            {
-               switch(this.renderersArr[_loc7_].type)
-               {
-                  case FittingTypes.OPTIONAL_DEVICE:
-                     _loc2_.push(
-                        {
-                           "intCD":this.renderersArr[_loc7_].intCD,
-                           "count":this.renderersArr[_loc7_].count
-                        }
-                     );
-                     break;
-                  case FittingTypes.SHELL:
-                     if(this.renderersArr[_loc7_].fromInventory)
-                     {
-                        _loc5_.push(
-                           {
-                              "intCD":this.renderersArr[_loc7_].intCD,
-                              "count":this.renderersArr[_loc7_].count
-                           }
-                        );
-                     }
-                     else
-                     {
-                        _loc3_.push(
-                           {
-                              "intCD":this.renderersArr[_loc7_].intCD,
-                              "count":this.renderersArr[_loc7_].count
-                           }
-                        );
-                     }
-                     break;
-                  case FittingTypes.EQUIPMENT:
-                     _loc4_.push(
-                        {
-                           "intCD":this.renderersArr[_loc7_].intCD,
-                           "count":this.renderersArr[_loc7_].count
-                        }
-                     );
-                     break;
-                  case FittingTypes.MODULE:
-                     if(this.renderersArr[_loc7_].sellExternalData)
-                     {
-                        _loc5_ = _loc5_.splice(_loc5_.length,0,this.renderersArr[_loc7_].sellExternalData);
-                     }
-                     break;
-               }
-            }
-            _loc7_++;
-         }
-         _loc7_ = 0;
-         while(_loc7_ < this.complexDeviceRenderers.length)
-         {
-            if(!this.complexDeviceRenderers[_loc7_].toInventory)
-            {
-               _loc2_.push(
-                  {
-                     "intCD":this.complexDeviceRenderers[_loc7_].intCD,
-                     "count":this.complexDeviceRenderers[_loc7_].count
-                  }
-               );
-            }
-            _loc7_++;
-         }
-         _loc6_ = this.headerComponent.inBarracsDrop.selectedIndex == 1;
-         setDialogSettingsS(this.slidingComponent.settingsBtn.setingsDropBtn.selected);
-         sellS(this.vehicleVo.intCD,_loc3_,_loc4_,_loc2_,_loc5_,_loc6_);
-         onWindowCloseS();
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: TranslateException
+          */
+         throw new flash.errors.IllegalOperationError("Not decompiled due to error");
       }
-
+      
       private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void {
          this.listVisibleHight = param1.listVisibleHight;
          this.updateComponentsPosition();
       }
-
+      
       private function updateMoneyResult(param1:VehicleSellDialogEvent) : void {
          this.headerComponent.creditsCommon = this.headerComponent.tankPrice;
          this.creditsComplDev = 0;
@@ -822,18 +744,17 @@ package net.wg.gui.lobby.sellDialog
          this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
          this.as_checkGold(this.accGold);
       }
-
+      
       private function handleClose(param1:ButtonEvent) : void {
          onWindowCloseS();
       }
-
+      
       private function userInputHandler(param1:Event) : void {
          setUserInputS(this.controlQuestion.getUserText());
       }
-
+      
       private function handleDissmisClick(param1:ListEvent) : void {
-         checkControlQuestionS(param1.index == DISSMIS_TANKMEN);
+         invalidate(INV_BARRACKS_DROP);
       }
    }
-
 }

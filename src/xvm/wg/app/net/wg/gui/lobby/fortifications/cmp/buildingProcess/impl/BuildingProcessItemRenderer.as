@@ -4,25 +4,27 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
    import flash.display.MovieClip;
    import flash.text.TextField;
    import net.wg.gui.lobby.fortifications.data.buildingProcess.BuildingProcessListItemVO;
-
-
+   import net.wg.data.constants.SoundTypes;
+   
    public class BuildingProcessItemRenderer extends TableRenderer
    {
-          
+      
       public function BuildingProcessItemRenderer() {
          super();
+         soundType = SoundTypes.FORT_PROCESS_RENDERER;
+         doubleClickEnabled = true;
       }
-
+      
       public var smallBuildingsIcon:MovieClip = null;
-
+      
       public var buildingName:TextField = null;
-
+      
       public var shortDescr:TextField = null;
-
+      
       public var statusLbl:TextField = null;
-
+      
       private var _model:BuildingProcessListItemVO = null;
-
+      
       override public function setData(param1:Object) : void {
          if(param1 == null)
          {
@@ -35,11 +37,11 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
          this.shortDescr.htmlText = this._model.shortDescr;
          this.statusLbl.htmlText = this._model.statusLbl;
       }
-
+      
       public function get model() : BuildingProcessListItemVO {
          return this._model;
       }
-
+      
       override protected function onDispose() : void {
          this.smallBuildingsIcon = null;
          this.buildingName = null;
@@ -53,5 +55,4 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
          super.onDispose();
       }
    }
-
 }

@@ -1,6 +1,6 @@
 package net.wg.gui.messenger.forms
 {
-   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.base.UIComponentEx;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import net.wg.gui.components.controls.LabelControl;
    import net.wg.gui.components.controls.SoundButtonEx;
@@ -23,29 +23,28 @@ package net.wg.gui.messenger.forms
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.messenger.meta.IContactsWindowMeta;
    import flash.display.InteractiveObject;
-
-
-   public class ContactsSearchForm extends UIComponent implements IViewStackContent
+   
+   public class ContactsSearchForm extends UIComponentEx implements IViewStackContent
    {
-          
+      
       public function ContactsSearchForm() {
          super();
       }
-
+      
       public var titleLabel:LabelControl;
-
+      
       public var resultsLabel:LabelControl;
-
+      
       public var searchButton:SoundButtonEx;
-
+      
       public var addToFriendsButton:SoundButtonEx;
-
+      
       public var addToIgnoredButton:SoundButtonEx;
-
+      
       public var textInput:TextInput;
-
+      
       public var list:ScrollingListEx;
-
+      
       public function update(param1:Object) : void {
          if(param1)
          {
@@ -55,7 +54,7 @@ package net.wg.gui.messenger.forms
             this.searchButton.enabled = !param1.freezeSearch;
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.searchButton.removeEventListener(ButtonEvent.CLICK,this.onSearchClick);
@@ -70,7 +69,7 @@ package net.wg.gui.messenger.forms
             this.list.dataProvider = null;
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          constraints = new Constraints(this,ConstrainMode.REFLOW);
@@ -91,7 +90,7 @@ package net.wg.gui.messenger.forms
          this.addToFriendsButton.enabled = false;
          this.addToIgnoredButton.enabled = false;
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          super.handleInput(param1);
          if(param1.handled)
@@ -111,12 +110,12 @@ package net.wg.gui.messenger.forms
             }
          }
       }
-
+      
       public function getSelectedItem() : Object {
          return this.list.dataProvider.requestItemAt(this.list.selectedIndex);
       }
-
-      private function updateButtons(param1:Event=null) : void {
+      
+      private function updateButtons(param1:Event = null) : void {
          var _loc3_:* = false;
          var _loc2_:Object = this.getSelectedItem();
          if(_loc2_)
@@ -131,14 +130,14 @@ package net.wg.gui.messenger.forms
             this.addToIgnoredButton.enabled = false;
          }
       }
-
+      
       private function showContextMenu(param1:ListEventEx) : void {
          if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
          {
             App.contextMenuMgr.showUserContextMenu(this,param1.itemData,new ContextItemGenerator());
          }
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((constraints) && (isInvalid(InvalidationType.SIZE)))
@@ -146,19 +145,19 @@ package net.wg.gui.messenger.forms
             constraints.update(_width,_height);
          }
       }
-
+      
       private function onSearchClick(param1:ButtonEvent) : void {
          dispatchEvent(this.generateEvent(ContactsFormEvent.SEARCH));
       }
-
+      
       private function onAddToFriendsClick(param1:ButtonEvent) : void {
          dispatchEvent(this.generateEvent(ContactsFormEvent.ADD_TO_FRIENDS));
       }
-
+      
       private function onAddToIgnoredClick(param1:ButtonEvent) : void {
          dispatchEvent(this.generateEvent(ContactsFormEvent.ADD_TO_IGNORED));
       }
-
+      
       private function generateEvent(param1:String) : ContactsFormEvent {
          var _loc2_:Object = this.getSelectedItem();
          var _loc3_:ContactsFormEvent = new ContactsFormEvent(param1,true,false,this.textInput.text);
@@ -169,14 +168,17 @@ package net.wg.gui.messenger.forms
          }
          return _loc3_;
       }
-
+      
       private function getParent() : IContactsWindowMeta {
          return IContactsWindowMeta(parent.parent.parent);
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return this.textInput;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

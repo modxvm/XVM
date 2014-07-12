@@ -17,31 +17,30 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.lobby.settings.components.evnts.KeyInputEvents;
    import flash.events.MouseEvent;
    import net.wg.gui.lobby.settings.evnts.AlternativeVoiceEvent;
-
-
+   
    public class SoundSettings extends SoundSettingsBase
    {
-          
+      
       public function SoundSettings() {
          super();
       }
-
+      
       private var isVoiceTestStarted:Boolean = false;
-
+      
       private const UNCHECK_VOICE_TEST_BTN_TIMEOUT:Number = 10000.0;
-
+      
       private var voiceTestTimerID:uint = 0;
-
+      
       private var vivoxTestTimeLeft:Number = 0;
-
+      
       private const LOCALIZATION_PREFIX:String = "";
-
+      
       override protected function configUI() : void {
          btnVivoxTest.addEventListener(ButtonEvent.CLICK,this.onBtnVivoxTest);
          btnCaptureDevicesUpdate.addEventListener(ButtonEvent.CLICK,this.onCaptureDevicesBtnClick);
          super.configUI();
       }
-
+      
       private function onBtnVivoxTest(param1:ButtonEvent) : void {
          if(this.isVoiceTestStarted)
          {
@@ -49,18 +48,18 @@ package net.wg.gui.lobby.settings
          }
          dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_VIVOX_TEST,_viewId,"",true));
       }
-
+      
       public function onViewChanged() : void {
          this.breakSoundCheck();
       }
-
+      
       public function breakSoundCheck() : void {
          if(this.isVoiceTestStarted)
          {
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_VIVOX_TEST,_viewId,"",false));
          }
       }
-
+      
       public function setVoiceTestState(param1:Boolean) : void {
          if(this.isVoiceTestStarted == param1)
          {
@@ -79,7 +78,7 @@ package net.wg.gui.lobby.settings
             this.forceFinishVivoxTest();
          }
       }
-
+      
       private function voiceTimerTest(param1:SoundSettings) : void {
          var _loc2_:String = null;
          param1.vivoxTestTimeLeft = param1.vivoxTestTimeLeft - 100;
@@ -93,7 +92,7 @@ package net.wg.gui.lobby.settings
             param1.dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_VIVOX_TEST,param1._viewId,"",false));
          }
       }
-
+      
       private function forceFinishVivoxTest() : void {
          if(this.voiceTestTimerID != 0)
          {
@@ -105,125 +104,52 @@ package net.wg.gui.lobby.settings
          btnVivoxTest.enabled = btnCaptureDevicesUpdate.enabled = !this.isVoiceTestStarted;
          voiceAnimation.speak(this.isVoiceTestStarted);
       }
-
+      
       override public function update(param1:Object) : void {
          super.update(param1);
       }
-
+      
       override protected function setData(param1:Object) : void {
-         var _loc2_:String = null;
-         var _loc3_:SettingsControlProp = null;
-         var _loc4_:* = false;
-         var _loc5_:CheckBox = null;
-         var _loc6_:Slider = null;
-         var _loc7_:DropdownMenu = null;
-         var _loc8_:KeyInput = null;
-         var _loc9_:LabelControl = null;
-         super.setData(param1);
-         this.showHideVoiceSettings();
-         for (_loc2_ in _data)
-         {
-            _loc3_ = SettingsControlProp(_data[_loc2_]);
-            if(this[_loc2_ + _loc3_.type])
-            {
-               _loc4_ = !(_loc3_.current == null || (_loc3_.readOnly));
-               switch(_loc3_.type)
-               {
-                  case SettingsConfig.TYPE_CHECKBOX:
-                     _loc5_ = CheckBox(this[_loc2_ + _loc3_.type]);
-                     _loc5_.selected = _loc3_.current;
-                     _loc5_.addEventListener(Event.SELECT,this.onCheckBoxSelected);
-                     if(_loc2_ == SettingsConfig.ENABLE_VO_IP)
-                     {
-                        _loc5_.enabled = (SettingsControlProp(_data[SettingsConfig.VOICE_CHAT_SUPORTED]).current) && (_loc4_);
-                     }
-                     else
-                     {
-                        _loc5_.enabled = _loc4_;
-                     }
-                     break;
-                  case SettingsConfig.TYPE_SLIDER:
-                     _loc6_ = Slider(this[_loc2_ + _loc3_.type]);
-                     _loc6_.value = _loc3_.current;
-                     _loc6_.addEventListener(SliderEvent.VALUE_CHANGE,this.onSliderValueChanged);
-                     if((_loc3_.hasValue) && (this[_loc2_ + SettingsConfig.TYPE_VALUE]))
-                     {
-                        _loc9_ = this[_loc2_ + SettingsConfig.TYPE_VALUE];
-                        _loc9_.text = _loc3_.current;
-                     }
-                     _loc6_.enabled = _loc4_;
-                     break;
-                  case SettingsConfig.TYPE_DROPDOWN:
-                     _loc7_ = DropdownMenu(this[_loc2_ + _loc3_.type]);
-                     _loc7_.dataProvider = new DataProvider(_loc3_.options);
-                     _loc7_.selectedIndex = _loc3_.current;
-                     _loc7_.addEventListener(ListEvent.INDEX_CHANGE,this.onDropDownChange);
-                     _loc7_.enabled = _loc4_;
-                     if(_loc2_ == SettingsConfig.ALTERNATIVE_VOICES)
-                     {
-                        this.showHideAlternativeVoices((_loc4_) && _loc3_.options.length > 1);
-                     }
-                     break;
-                  case SettingsConfig.TYPE_KEYINPUT:
-                     _loc8_ = KeyInput(this[_loc2_ + _loc3_.type]);
-                     _loc8_.key = _loc3_.current;
-                     _loc8_.validateNow();
-                     break;
-               }
-               trySetLabel(_loc2_,this.LOCALIZATION_PREFIX);
-            }
-            else
-            {
-               if(!_loc3_.readOnly)
-               {
-                  DebugUtils.LOG_WARNING("ERROR in" + this + " control " + (_loc2_ + _loc3_.type) + " can not find");
-               }
-            }
-         }
-         if(PTTKeyInput)
-         {
-            PTTKeyInput.addEventListener(KeyInputEvents.DISABLE_OVER,this.handleMouseRollOverPTTKey);
-            PTTKeyInput.addEventListener(KeyInputEvents.DISABLE_OUT,this.handleMouseRollOutPTTKey);
-            PTTKeyInput.addEventListener(KeyInputEvents.DISABLE_PRESS,this.handleMousePressPTTKey);
-         }
-         this.onVoiceChatEnabledSelect();
-         testAlternativeVoicesButton.addEventListener(ButtonEvent.CLICK,this.onTestAlternativeVoicesButtonClick);
-         testAlternativeVoicesButton.addEventListener(MouseEvent.MOUSE_OVER,this.onTestAlternativeVoicesButtonOver);
-         testAlternativeVoicesButton.addEventListener(MouseEvent.MOUSE_OUT,this.onTestAlternativeVoicesButtonOut);
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: TranslateException
+          */
+         throw new flash.errors.IllegalOperationError("Not decompiled due to error");
       }
-
+      
       private function handleMousePressPTTKey(param1:KeyInputEvents) : void {
          this.hideTooltip();
       }
-
+      
       private function handleMouseRollOutPTTKey(param1:KeyInputEvents) : void {
          this.hideTooltip();
       }
-
+      
       private function handleMouseRollOverPTTKey(param1:KeyInputEvents) : void {
          App.toolTipMgr.showComplex(TOOLTIPS.SETTINGS_DIALOG_SOUND_PTTKEY,null);
       }
-
+      
       private function onTestAlternativeVoicesButtonOut(param1:MouseEvent) : void {
          this.hideTooltip();
       }
-
+      
       private function onTestAlternativeVoicesButtonOver(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(TOOLTIPS.SETTINGS_DIALOG_SOUND_ALTERNATIVEVOICES,null);
       }
-
+      
       private function onTestAlternativeVoicesButtonClick(param1:ButtonEvent) : void {
          dispatchEvent(new AlternativeVoiceEvent(AlternativeVoiceEvent.ON_TEST_ALTERNATIVE_VOICES));
       }
-
+      
       private function hideTooltip() : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onCaptureDevicesBtnClick(param1:ButtonEvent) : void {
          dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_UPDATE_CAPTURE_DEVICE,_viewId));
       }
-
+      
       public function setCaptureDevices(param1:Number, param2:Array) : void {
          var _loc3_:uint = 0;
          while(_loc3_ < param2.length)
@@ -243,7 +169,7 @@ package net.wg.gui.lobby.settings
          dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc4_,param1));
          this.onVoiceChatEnabledSelect();
       }
-
+      
       private function onCheckBoxSelected(param1:Event) : void {
          var _loc2_:CheckBox = CheckBox(param1.target);
          var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
@@ -253,7 +179,7 @@ package net.wg.gui.lobby.settings
          }
          dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.selected));
       }
-
+      
       private function onSliderValueChanged(param1:SliderEvent) : void {
          var _loc5_:LabelControl = null;
          var _loc2_:Slider = Slider(param1.target);
@@ -270,17 +196,16 @@ package net.wg.gui.lobby.settings
          }
          dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.value));
       }
-
+      
       private function onDropDownChange(param1:ListEvent) : void {
          var _loc2_:DropdownMenu = DropdownMenu(param1.target);
          var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
          dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.selectedIndex));
       }
-
+      
       private function setVivoxMicVolume(param1:Number) : void {
-          
       }
-
+      
       private function onVoiceChatEnabledSelect() : void {
          this.breakSoundCheck();
          var _loc1_:Boolean = (enableVoIPCheckbox.selected) && (SettingsControlProp(_data[SettingsConfig.VOICE_CHAT_SUPORTED]).current);
@@ -313,7 +238,7 @@ package net.wg.gui.lobby.settings
             captureDeviceDropDown.enabled = micVivoxVolumeSlider.enabled = btnVivoxTest.enabled = false;
          }
       }
-
+      
       private function showHideVoiceSettings() : void {
          var _loc1_:Boolean = App.voiceChatMgr.isYYS();
          var _loc2_:Boolean = App.voiceChatMgr.isVOIPEnabledS();
@@ -338,7 +263,7 @@ package net.wg.gui.lobby.settings
          masterFadeVivoxVolumeSlider.visible = _loc2_;
          masterFadeVivoxVolumeValue.visible = _loc2_;
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:String = null;
          var _loc2_:SettingsControlProp = null;
@@ -355,7 +280,7 @@ package net.wg.gui.lobby.settings
             btnVivoxTest.removeEventListener(ButtonEvent.CLICK,this.onBtnVivoxTest);
          }
          this.forceFinishVivoxTest();
-         for (_loc1_ in _data)
+         for(_loc1_ in _data)
          {
             _loc2_ = SettingsControlProp(_data[_loc1_]);
             if(this[_loc1_ + _loc2_.type])
@@ -421,21 +346,20 @@ package net.wg.gui.lobby.settings
          }
          super.onDispose();
       }
-
+      
       public function updatePTTControl(param1:Number) : void {
          PTTKeyInput.key = param1;
       }
-
+      
       private function showHideAlternativeVoices(param1:Boolean) : void {
          alternativeVoicesFieldSet.visible = param1;
          alternativeVoicesLabel.visible = param1;
          alternativeVoicesDropDown.visible = param1;
          testAlternativeVoicesButton.visible = param1;
       }
-
+      
       override public function toString() : String {
          return "[WG SoundSettings " + name + "]";
       }
    }
-
 }

@@ -8,21 +8,20 @@ package net.wg.infrastructure.base
    import net.wg.data.constants.Values;
    import net.wg.infrastructure.interfaces.IManagedContent;
    import net.wg.infrastructure.interfaces.IView;
-
-
+   
    public class BaseViewWrapper extends UIComponent implements IWrapper
    {
-          
+      
       public function BaseViewWrapper() {
          super();
       }
-
+      
       public static const LAYOUT_INVALID:String = "layoutInv";
-
+      
       private var _content:IAbstractWrapperView;
-
+      
       protected var _layout:IBaseLayout;
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(LAYOUT_INVALID))
@@ -33,15 +32,15 @@ package net.wg.infrastructure.base
             }
          }
       }
-
+      
       protected function invokeLayout() : void {
          this._layout.invokeLayout();
       }
-
+      
       public function get wrapperContent() : IAbstractWrapperView {
          return this._content;
       }
-
+      
       public function set wrapperContent(param1:IAbstractWrapperView) : void {
          var _loc2_:DisplayObject = null;
          if(this._content != param1)
@@ -61,11 +60,11 @@ package net.wg.infrastructure.base
             this.invalidateLayout();
          }
       }
-
+      
       public function get layout() : IBaseLayout {
          return this._layout;
       }
-
+      
       public function set layout(param1:IBaseLayout) : void {
          if(this._layout != param1)
          {
@@ -81,11 +80,11 @@ package net.wg.infrastructure.base
             this.invalidateLayout();
          }
       }
-
+      
       public function invalidateLayout() : void {
          invalidate(LAYOUT_INVALID);
       }
-
+      
       override protected function onDispose() : void {
          this._content = null;
          if(this._layout)
@@ -94,26 +93,25 @@ package net.wg.infrastructure.base
          }
          super.onDispose();
       }
-
+      
       public function get isModal() : Boolean {
          return false;
       }
-
+      
       public function get modalAlpha() : Number {
          return Values.DEFAULT_ALPHA;
       }
-
+      
       public function get window() : IManagedContent {
          return this;
       }
-
+      
       public function get sourceView() : IView {
          return this._content;
       }
-
+      
       public function get containerContent() : IManagedContent {
          return this;
       }
    }
-
 }

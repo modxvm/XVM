@@ -1,25 +1,24 @@
 package net.wg.gui.components.icons
 {
    import scaleform.clik.core.UIComponent;
-
-
+   
    public class PlayerActionMarker extends UIComponent
    {
-          
+      
       public function PlayerActionMarker() {
          super();
       }
-
+      
       private var _actionBitMask:Number = 0;
-
+      
       private var _team:String = "common";
-
+      
       private const ACTIONS_LABEL:String = "actions";
-
+      
       public function get action() : Number {
          return this._actionBitMask;
       }
-
+      
       public function set action(param1:Number) : void {
          if(this._actionBitMask == param1)
          {
@@ -28,11 +27,11 @@ package net.wg.gui.components.icons
          this._actionBitMask = param1;
          invalidate();
       }
-
+      
       public function get team() : String {
          return this._team;
       }
-
+      
       public function set team(param1:String) : void {
          if(this._team == param1)
          {
@@ -41,7 +40,7 @@ package net.wg.gui.components.icons
          this._team = param1;
          invalidate();
       }
-
+      
       override protected function draw() : void {
          var allActions:Array = null;
          var elName:String = null;
@@ -88,5 +87,4 @@ package net.wg.gui.components.icons
          }
       }
    }
-
 }

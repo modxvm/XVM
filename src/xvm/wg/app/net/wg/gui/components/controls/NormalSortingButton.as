@@ -12,67 +12,65 @@ package net.wg.gui.components.controls
    import flash.text.TextFormat;
    import flash.text.TextFieldAutoSize;
    import scaleform.gfx.TextFieldEx;
-
-
+   
    public class NormalSortingButton extends ScalableIconButton
    {
-          
+      
       public function NormalSortingButton() {
          super();
       }
-
+      
       private static const SORT_DIRECTION_INVALID:String = "checkSortDirection";
-
+      
       private static const SEPARATOR_PADDING:int = 3;
-
+      
       private static const TEXT_PADDING:int = 13;
-
+      
       private static const DESIGN_PADDING:int = 12;
-
+      
       private static const PIXEL_PADDING:int = 1;
-
+      
       private static const SEPARATOR:String = "separator";
-
+      
       private static const EMPTY:String = "empty";
-
+      
       public var labelField:TextField;
-
+      
       public var defaultSortDirection:String = "none";
-
+      
       public var bg:MovieClip;
-
+      
       public var upperBg:MovieClip;
-
+      
       public var sortingArrow:MovieClip;
-
+      
       public var overBg:MovieClip;
-
+      
       public var pressBg:MovieClip;
-
+      
       public var arrowBg:MovieClip;
-
+      
       private var _sortDirection:String;
-
+      
       private var _textAlign:String = "center";
-
+      
       private var _id:String;
-
+      
       private var _showSeparator:Boolean = true;
-
+      
       private var _showDisabledState:Boolean = false;
-
+      
       private var _previousSelectedSorDirection:String;
-
+      
       override public function set data(param1:Object) : void {
          super.data = param1;
          this.checkSortingBtnInfo(param1);
          invalidateData();
       }
-
+      
       override public function set toggle(param1:Boolean) : void {
-          
       }
-
+      
       override public function set selected(param1:Boolean) : void {
          if(selected != param1)
          {
@@ -80,25 +78,23 @@ package net.wg.gui.components.controls
             {
                this.sortDirection = SortingInfo.WITHOUT_SORT;
             }
+            else if(!(this._previousSelectedSorDirection == SortingInfo.ASCENDING_SORT) && !(this._previousSelectedSorDirection == SortingInfo.DESCENDING_SORT))
+            {
+               this.sortDirection = this.defaultSortDirection == SortingInfo.WITHOUT_SORT?SortingInfo.ASCENDING_SORT:this.defaultSortDirection;
+            }
             else
             {
-               if(!(this._previousSelectedSorDirection == SortingInfo.ASCENDING_SORT) && !(this._previousSelectedSorDirection == SortingInfo.DESCENDING_SORT))
-               {
-                  this.sortDirection = this.defaultSortDirection == SortingInfo.WITHOUT_SORT?SortingInfo.ASCENDING_SORT:this.defaultSortDirection;
-               }
-               else
-               {
-                  this.sortDirection = this.defaultSortDirection == SortingInfo.WITHOUT_SORT?this._previousSelectedSorDirection:this.defaultSortDirection;
-               }
+               this.sortDirection = this.defaultSortDirection == SortingInfo.WITHOUT_SORT?this._previousSelectedSorDirection:this.defaultSortDirection;
             }
+            
          }
          super.selected = param1;
       }
-
+      
       public function get sortDirection() : String {
          return this._sortDirection;
       }
-
+      
       public function set sortDirection(param1:String) : void {
          if(!(this._sortDirection == param1) && (selected))
          {
@@ -115,21 +111,21 @@ package net.wg.gui.components.controls
             invalidate(SORT_DIRECTION_INVALID);
          }
       }
-
+      
       public function get id() : String {
          return this._id;
       }
-
+      
       public function set id(param1:String) : void {
          this._id = param1;
       }
-
+      
       override protected function onDispose() : void {
          this.bg = null;
          this.upperBg = null;
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.sortingArrow.visible = false;
@@ -137,7 +133,7 @@ package net.wg.gui.components.controls
          _toggle = true;
          allowDeselect = false;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = 0;
          if(isInvalid(InvalidationType.STATE))
@@ -166,7 +162,7 @@ package net.wg.gui.components.controls
             loader.source = iconSource;
             invalidate(InvalidationType.SIZE);
          }
-         if(((this.labelField) && (isInvalid(InvalidationType.DATA))) && (!(label == null)) && !(label == ""))
+         if((this.labelField && isInvalid(InvalidationType.DATA)) && (!(label == null)) && !(label == ""))
          {
             if(!iconSource && label.length > 0)
             {
@@ -211,7 +207,7 @@ package net.wg.gui.components.controls
          }
          this.updateDisable();
       }
-
+      
       override protected function updateDisable() : void {
          if(disableMc != null)
          {
@@ -223,55 +219,51 @@ package net.wg.gui.components.controls
             disableMc.heightFill = _height - _fillPadding * 2;
          }
       }
-
-      override protected function handleClick(param1:uint=0) : void {
+      
+      override protected function handleClick(param1:uint = 0) : void {
          if(selected)
          {
             if(this.sortDirection == SortingInfo.ASCENDING_SORT)
             {
                this.sortDirection = SortingInfo.DESCENDING_SORT;
             }
-            else
+            else if(this.sortDirection == SortingInfo.DESCENDING_SORT)
             {
-               if(this.sortDirection == SortingInfo.DESCENDING_SORT)
-               {
-                  this.sortDirection = SortingInfo.ASCENDING_SORT;
-               }
+               this.sortDirection = SortingInfo.ASCENDING_SORT;
             }
+            
          }
          else
          {
             super.handleClick(param1);
          }
       }
-
+      
       protected function applySortDirection() : void {
          if(this._sortDirection == SortingInfo.ASCENDING_SORT)
          {
             this.sortingArrow.gotoAndStop(SortingInfo.ASCENDING_SORT);
             this.arrowBg.visible = this.sortingArrow.visible = true;
          }
+         else if(this._sortDirection == SortingInfo.DESCENDING_SORT)
+         {
+            this.sortingArrow.gotoAndStop(SortingInfo.DESCENDING_SORT);
+            this.arrowBg.visible = this.sortingArrow.visible = true;
+         }
          else
          {
-            if(this._sortDirection == SortingInfo.DESCENDING_SORT)
-            {
-               this.sortingArrow.gotoAndStop(SortingInfo.DESCENDING_SORT);
-               this.arrowBg.visible = this.sortingArrow.visible = true;
-            }
-            else
-            {
-               this.arrowBg.visible = this.sortingArrow.visible = false;
-            }
+            this.arrowBg.visible = this.sortingArrow.visible = false;
          }
+         
       }
-
+      
       override protected function iconLoadingCompleteHandler(param1:UILoaderEvent) : void {
          invalidateSize();
       }
-
+      
       private function checkSortingBtnInfo(param1:Object) : void {
          var _loc2_:NormalSortingBtnInfo = null;
-         if(param1  is  SortingButtonInfo)
+         if(param1 is SortingButtonInfo)
          {
             _loc2_ = NormalSortingBtnInfo(param1);
             if(!isNaN(_loc2_.buttonWidth))
@@ -298,8 +290,8 @@ package net.wg.gui.components.controls
             iconSource = _loc2_.iconSource;
          }
       }
-
-      private function updateTextSize(param1:Boolean=false) : void {
+      
+      private function updateTextSize(param1:Boolean = false) : void {
          var _loc2_:TextFormat = null;
          if((this.labelField) && (this.labelField.visible))
          {
@@ -315,17 +307,14 @@ package net.wg.gui.components.controls
             {
                _loc2_.rightMargin = TEXT_PADDING;
             }
-            else
+            else if(this._textAlign == TextFieldAutoSize.LEFT)
             {
-               if(this._textAlign == TextFieldAutoSize.LEFT)
-               {
-                  _loc2_.leftMargin = TEXT_PADDING;
-               }
+               _loc2_.leftMargin = TEXT_PADDING;
             }
+            
             this.labelField.setTextFormat(_loc2_);
             TextFieldEx.setVerticalAlign(this.labelField,TextFieldEx.VAUTOSIZE_BOTTOM);
          }
       }
    }
-
 }

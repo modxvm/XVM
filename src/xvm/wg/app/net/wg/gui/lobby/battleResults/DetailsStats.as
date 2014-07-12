@@ -8,11 +8,10 @@ package net.wg.gui.lobby.battleResults
    import net.wg.utils.IUtils;
    import net.wg.utils.ICommons;
    import net.wg.utils.IClassFactory;
-
-
+   
    public class DetailsStats extends UIComponent
    {
-          
+      
       public function DetailsStats() {
          super();
          this.creditsLbl.mouseWheelEnabled = false;
@@ -26,77 +25,77 @@ package net.wg.gui.lobby.battleResults
          this.xpPremValuesLbl.mouseWheelEnabled = false;
          this.freeXpPremValuesLbl.mouseWheelEnabled = false;
       }
-
+      
       private static const BLOCK_PADDING:int = 20;
-
+      
       private static const DOTS_OFFSET:int = 3;
-
+      
       private static const FADED_ALPHA:Number = 0.25;
-
+      
       private static const FULL_ALPHA:Number = 1;
-
+      
       private static const LINE_OFFSET:int = 5;
-
+      
       public var vehicleStats:VehicleDetails;
-
+      
       public var vehicleTimeStats:VehicleDetails;
-
+      
       public var creditsLbl:TextField;
-
+      
       public var creditsValuesLbl:TextField;
-
+      
       public var goldValuesLbl:TextField;
-
+      
       public var creditsPremValuesLbl:TextField;
-
+      
       public var goldPremValuesLbl:TextField;
-
+      
       public var creditsSplitLine:MovieClip;
-
+      
       public var statsTitle:TextField;
-
+      
       public var creditsTitle:TextField;
-
+      
       public var timeTitle:TextField;
-
+      
       public var xpTitle:TextField;
-
+      
       public var premLbl:TextField;
-
+      
       public var xpHeader:MovieClip;
-
+      
       public var xpLbl:TextField;
-
+      
       public var xpValuesLbl:TextField;
-
+      
       public var freeXpValuesLbl:TextField;
-
+      
       public var xpPremValuesLbl:TextField;
-
+      
       public var freeXpPremValuesLbl:TextField;
-
+      
       public var xpSplitLine:MovieClip;
-
+      
       public var resHeader:MovieClip;
-
+      
       public var resTitle:TextField;
-
+      
       public var resLbl:TextField;
-
+      
       public var resValuesLbl:TextField;
-
+      
       public var resPremValuesLbl:TextField;
-
+      
       public var resSplitLine:MovieClip;
-
+      
       public var fakeBg:MovieClip;
-
+      
       private var _bonusType:int = 1;
-
+      
       public function get myParent() : BattleResults {
          return BattleResults(parent.parent.parent.parent);
       }
-
+      
       override protected function configUI() : void {
          var _loc3_:* = NaN;
          var _loc5_:DisplayObject = null;
@@ -143,11 +142,11 @@ package net.wg.gui.lobby.battleResults
             dispatchEvent(new Event(Event.RESIZE));
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
       }
-
+      
       private function populateCredits(param1:Array) : void {
          var _loc4_:Object = null;
          var _loc5_:* = NaN;
@@ -176,14 +175,13 @@ package net.wg.gui.lobby.battleResults
                   {
                      "x":_loc5_,
                      "y":_loc6_
-                  }
-               ));
+                  }));
             }
             _loc2_++;
          }
          this.creditsSplitLine.height = this.creditsLbl.textHeight + LINE_OFFSET;
       }
-
+      
       private function populateXp(param1:Array) : void {
          var _loc4_:Object = null;
          var _loc8_:* = NaN;
@@ -215,25 +213,24 @@ package net.wg.gui.lobby.battleResults
                   {
                      "x":_loc8_,
                      "y":_loc9_
-                  }
-               ));
+                  }));
             }
             _loc2_++;
          }
          this.xpLbl.height = this.xpLbl.textHeight + 4;
          this.xpSplitLine.height = this.xpLbl.textHeight + LINE_OFFSET;
       }
-
+      
       private function positionBlock(param1:DisplayObject, param2:DisplayObject, param3:Array) : void {
          var _loc6_:DisplayObject = null;
          var _loc4_:Number = param1.y + param1.height + BLOCK_PADDING;
          var _loc5_:Number = param2.y - _loc4_;
-         for each (_loc6_ in param3)
+         for each(_loc6_ in param3)
          {
             _loc6_.y = _loc6_.y - _loc5_;
          }
       }
-
+      
       private function populateResource(param1:Array) : void {
          var _loc4_:Object = null;
          var _loc8_:* = NaN;
@@ -261,13 +258,11 @@ package net.wg.gui.lobby.battleResults
                   {
                      "x":_loc8_,
                      "y":_loc9_
-                  }
-               ));
+                  }));
             }
             _loc2_++;
          }
          this.resSplitLine.height = this.resLbl.textHeight + LINE_OFFSET;
       }
    }
-
 }

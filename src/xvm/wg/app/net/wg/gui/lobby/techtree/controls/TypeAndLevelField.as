@@ -2,22 +2,21 @@ package net.wg.gui.lobby.techtree.controls
 {
    import flash.display.MovieClip;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class TypeAndLevelField extends NodeComponent
    {
-          
+      
       public function TypeAndLevelField() {
          super();
       }
-
+      
       public var levelIcon:MovieClip;
-
+      
       override protected function configUI() : void {
          mouseEnabled = mouseChildren = false;
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:String = null;
          var _loc2_:String = null;
@@ -44,5 +43,4 @@ package net.wg.gui.lobby.techtree.controls
          super.draw();
       }
    }
-
 }

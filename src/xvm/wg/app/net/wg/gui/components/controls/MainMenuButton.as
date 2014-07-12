@@ -7,38 +7,36 @@ package net.wg.gui.components.controls
    import scaleform.clik.utils.ConstrainedElement;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.utils.IHelpLayout;
-   import __AS3__.vec.Vector;
    import net.wg.data.constants.SoundTypes;
-
-
+   
    public class MainMenuButton extends SoundButtonEx
    {
-          
+      
       public function MainMenuButton() {
          super();
          constraintsDisabled = true;
          soundType = SoundTypes.MAIN_MENU;
          this.fxTextField2 = this.fx.fxTextField2;
       }
-
+      
       public static var SUB_SELECTED:String = "sub_selected_";
-
+      
       private var _caps:Boolean = true;
-
+      
       public var fxTextField1:TextField = null;
-
+      
       public var fxTextField2:TextField = null;
-
+      
       public var fx:MovieClip = null;
-
+      
       public var gradient:MovieClip = null;
-
+      
       private var _textColorOver:Number;
-
+      
       private var textColorBeforeBlink:Number = NaN;
-
+      
       private var _externalState:String = "";
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.paddingHorizontal = 0;
@@ -46,20 +44,20 @@ package net.wg.gui.components.controls
          addEventListener(MouseEvent.ROLL_OUT,this.onBtnOut);
          this.checkBrowserEffect();
       }
-
+      
       override public function get paddingHorizontal() : Number {
          return _paddingHorizontal;
       }
-
+      
       override public function set paddingHorizontal(param1:Number) : void {
          _paddingHorizontal = param1;
          invalidate();
       }
-
+      
       public function get caps() : Boolean {
          return this._caps;
       }
-
+      
       public function set caps(param1:Boolean) : void {
          if(this._caps == param1)
          {
@@ -68,7 +66,7 @@ package net.wg.gui.components.controls
          this._caps = param1;
          invalidate();
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          if(param1)
@@ -76,7 +74,7 @@ package net.wg.gui.components.controls
             this.checkBrowserEffect();
          }
       }
-
+      
       override protected function updateText() : void {
          var _loc1_:String = null;
          if(this.gradient)
@@ -143,7 +141,7 @@ package net.wg.gui.components.controls
          }
          this.width = this.actualWidth;
       }
-
+      
       override protected function alignForAutoSize() : void {
          var _loc1_:* = NaN;
          var _loc3_:* = NaN;
@@ -166,7 +164,7 @@ package net.wg.gui.components.controls
                break;
          }
       }
-
+      
       override protected function calculateWidth() : Number {
          var _loc2_:ConstrainedElement = null;
          var _loc3_:TextField = null;
@@ -179,11 +177,11 @@ package net.wg.gui.components.controls
          }
          return _loc1_;
       }
-
+      
       public function get textColorOver() : Number {
          return _textColor;
       }
-
+      
       public function set textColorOver(param1:Number) : void {
          if(this._textColorOver == param1)
          {
@@ -192,22 +190,20 @@ package net.wg.gui.components.controls
          this._textColorOver = param1;
          invalidate();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.STATE))
          {
-            if(((this._textColorOver) && (!selected)) && (state == "over") && !(this.fxTextField1 == null))
+            if((this._textColorOver && !selected) && (state == "over") && !(this.fxTextField1 == null))
             {
                this.fxTextField1.textColor = this._textColorOver;
             }
-            else
+            else if((_textColor) && (enabled) && !(this.fxTextField1 == null))
             {
-               if((_textColor) && (enabled) && !(this.fxTextField1 == null))
-               {
-                  this.fxTextField1.textColor = _textColor;
-               }
+               this.fxTextField1.textColor = _textColor;
             }
+            
             if((selected) && (enabled))
             {
                this.gradient.alpha = 0.4;
@@ -218,10 +214,10 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       override public function showHelpLayout() : void {
          var _loc1_:IHelpLayout = App.utils.helpLayout;
-         var _loc2_:Object =
+         var _loc2_:Object = 
             {
                "borderWidth":width,
                "borderHeight":this.fxTextField1.textHeight + 5,
@@ -230,14 +226,13 @@ package net.wg.gui.components.controls
                "x":0,
                "y":0,
                "connectorLength":data["helpConnectorLength"]
-            }
-         ;
+            };
          if(data["helpText"])
          {
             setHelpLayout(_loc1_.create(root,_loc2_,this));
          }
       }
-
+      
       private function checkBrowserEffect() : void {
          if((data) && data.value == "browser")
          {
@@ -245,9 +240,9 @@ package net.wg.gui.components.controls
             selected = false;
          }
       }
-
+      
       private var _isBlinking:Boolean = false;
-
+      
       private function changeEffectState() : void {
          if((selected) || !enabled)
          {
@@ -273,7 +268,7 @@ package net.wg.gui.components.controls
             App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
          }
       }
-
+      
       private function onBtnOver(param1:MouseEvent) : void {
          if((data) && data.value == "browser")
          {
@@ -281,19 +276,18 @@ package net.wg.gui.components.controls
             filters = [];
          }
       }
-
+      
       private function onBtnOut(param1:MouseEvent) : void {
          this.checkBrowserEffect();
       }
-
+      
       public function setExternalState(param1:String) : void {
          this._externalState = param1;
          setState(state);
       }
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          return _selected?statesSelected:this._externalState != ""?Vector.<String>([this._externalState]):statesDefault;
       }
    }
-
 }

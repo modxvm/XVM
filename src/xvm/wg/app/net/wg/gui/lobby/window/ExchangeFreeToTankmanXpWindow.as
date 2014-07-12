@@ -20,11 +20,10 @@ package net.wg.gui.lobby.window
    import scaleform.clik.events.IndexEvent;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.data.constants.IconsTypes;
-
-
+   
    public class ExchangeFreeToTankmanXpWindow extends ExchangeFreeToTankmanXpWindowMeta implements IExchangeFreeToTankmanXpWindowMeta
    {
-          
+      
       public function ExchangeFreeToTankmanXpWindow() {
          super();
          isModal = false;
@@ -33,61 +32,61 @@ package net.wg.gui.lobby.window
          isCentered = true;
          showWindowBg = false;
       }
-
+      
       public static const INIT_DATA_INVALID:String = "initDataInv";
-
+      
       public static const SELECTED_VALUE_INVALID:String = "selValInvalid";
-
+      
       public static const RECALC_VALUE_INVALID:String = "recalcValueInvalid";
-
+      
       public static const WALLET_STATE_INVALID:String = "walletStateInvalid";
-
+      
       public static const WARNING_INVALID:String = "warningInvalid";
-
+      
       private static const MOVINGCONTAINER_NAME:String = "movingContainer";
-
+      
       public var nsLevel:NumericStepper;
-
+      
       public var form_bg:MovieClip;
-
+      
       public var itToPay:IconText;
-
+      
       public var actionPrice:ActionPrice;
-
+      
       public var walletStatus:WalletResourcesStatus;
-
+      
       public var background:Sprite;
-
+      
       public var warningMc:ExchangeFreeToTankmanXpWarning;
-
+      
       public var submitBtn:SoundButtonEx;
-
+      
       public var cancelBtn:SoundButtonEx;
-
+      
       public var skillAfter:SkillsItemRenderer;
-
+      
       public var skillBefore:SkillsItemRenderer;
-
+      
       public var afterTeachingHeader:TextField;
-
+      
       public var blockMc:MovieClip;
-
+      
       private var initData:ExchangeFreeToTankmanInitVO;
-
+      
       private var selectedValue:uint;
-
+      
       private var originalWindowHeight:Number = NaN;
-
+      
       private var expandedWindowHeight:Number = NaN;
-
+      
       private var isAlertWalletVisible:Boolean = false;
-
+      
       private var _price:Number = 0;
-
+      
       private var _actionPriceData:Object = null;
-
+      
       private var _initMax:Boolean = false;
-
+      
       override public function setWindow(param1:IWindow) : void {
          var _loc2_:Padding = null;
          super.setWindow(param1);
@@ -100,28 +99,28 @@ package net.wg.gui.lobby.window
             addEventListener(Event.ENTER_FRAME,this.calcHeightInNextFrame,false,0,true);
          }
       }
-
+      
       public function as_setInitData(param1:Object) : void {
          this.initData = new ExchangeFreeToTankmanInitVO(param1);
          invalidate(INIT_DATA_INVALID);
       }
-
+      
       public function as_setCalcValueResponse(param1:Number, param2:Object) : void {
          this._price = param1;
          this._actionPriceData = param2;
          invalidate(RECALC_VALUE_INVALID);
       }
-
+      
       public function as_setWalletStatus(param1:Object) : void {
          App.utils.voMgr.walletStatusVO.update(param1);
          this.updateWalletStatus();
       }
-
+      
       override protected function preInitialize() : void {
          super.preInitialize();
          constraints = new Constraints(this,ConstrainMode.REFLOW);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.submitBtn.addEventListener(ButtonEvent.CLICK,this.onClickSubmitButton,false,0,true);
@@ -147,7 +146,7 @@ package net.wg.gui.lobby.window
          constraints.addElement(this.form_bg.name,this.form_bg,Constraints.ALL);
          constraints.addElement(MOVINGCONTAINER_NAME,_loc2_,Constraints.BOTTOM);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = false;
          var _loc2_:ActionPriceVO = null;
@@ -163,13 +162,11 @@ package net.wg.gui.lobby.window
                   this.nsLevel.value = this.nsLevel.maximum;
                   this._initMax = true;
                }
-               else
+               else if(this.nsLevel.value >= this.nsLevel.maximum)
                {
-                  if(this.nsLevel.value >= this.nsLevel.maximum)
-                  {
-                     this.nsLevel.value = this.nsLevel.maximum;
-                  }
+                  this.nsLevel.value = this.nsLevel.maximum;
                }
+               
                this.nsLevel.enabled = !this.isAlertWalletVisible && !(this.initData.lastSkillLevel == this.initData.nextSkillLevel);
                this.skillBefore.data = this.initData.beforeSkill;
                this.skillAfter.data = this.initData.afterSkill;
@@ -246,7 +243,7 @@ package net.wg.gui.lobby.window
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.submitBtn.addEventListener(ButtonEvent.CLICK,this.onClickSubmitButton,false,0,true);
@@ -268,7 +265,7 @@ package net.wg.gui.lobby.window
             this.walletStatus = null;
          }
       }
-
+      
       private function updateWalletStatus() : void {
          if(App.utils)
          {
@@ -276,26 +273,25 @@ package net.wg.gui.lobby.window
             invalidate(WALLET_STATE_INVALID,RECALC_VALUE_INVALID);
          }
       }
-
+      
       private function nsFirstCurrencyChangeHandler(param1:IndexEvent) : void {
          this.selectedValue = this.nsLevel.value;
          invalidate(SELECTED_VALUE_INVALID);
       }
-
+      
       private function calcHeightInNextFrame(param1:Event) : void {
          removeEventListener(Event.ENTER_FRAME,this.calcHeightInNextFrame);
          this.originalWindowHeight = window.height;
          this.expandedWindowHeight = this.originalWindowHeight + this.warningMc.height - 30;
          invalidate(WARNING_INVALID);
       }
-
+      
       private function onClickSubmitButton(param1:ButtonEvent) : void {
          applyS();
       }
-
+      
       private function onClickCancelButton(param1:ButtonEvent) : void {
          onWindowCloseS();
       }
    }
-
 }

@@ -11,41 +11,40 @@ package net.wg.gui.components.controls
    import scaleform.clik.utils.ConstrainedElement;
    import scaleform.clik.constants.InvalidationType;
    import flash.text.TextFieldAutoSize;
-
-
+   
    public class SoundButtonEx extends SoundButton implements ISoundButtonEx
    {
-          
+      
       public function SoundButtonEx() {
          super();
       }
-
+      
       protected var _tooltip:String = null;
-
+      
       private var _helpText:String = "";
-
+      
       private var _helpDirection:String = "T";
-
+      
       private var _helpConnectorLength:Number = 12;
-
+      
       public var _fillPadding:Number = 0;
-
+      
       protected var _paddingHorizontal:Number = 5;
-
+      
       private var _helpLayout:DisplayObject = null;
-
+      
       public var blurTextField:TextField;
-
+      
       public var disableMc:BitmapFill;
-
+      
       public var bgMc:MovieClip;
-
+      
       public var textField1:TextField;
-
+      
       public var filtersMC:MovieClip;
-
+      
       public var _textColor:Number;
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(!constraintsDisabled)
@@ -63,7 +62,7 @@ package net.wg.gui.components.controls
             focusIndicator.visible = false;
          }
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
@@ -80,53 +79,53 @@ package net.wg.gui.components.controls
          this.filtersMC = null;
          super.onDispose();
       }
-
+      
       public function get helpText() : String {
          return this._helpText;
       }
-
+      
       public function set helpText(param1:String) : void {
          this._helpText = param1;
       }
-
+      
       public function get helpDirection() : String {
          return this._helpDirection;
       }
-
+      
       public function set helpDirection(param1:String) : void {
          this._helpDirection = param1;
       }
-
+      
       public function get helpConnectorLength() : Number {
          return this._helpConnectorLength;
       }
-
+      
       public function set helpConnectorLength(param1:Number) : void {
          this._helpConnectorLength = param1;
       }
-
+      
       public function showTooltip(param1:MouseEvent) : void {
          if((this._tooltip) && (App.toolTipMgr))
          {
             App.toolTipMgr.showComplex(this._tooltip);
          }
       }
-
+      
       public function hideTooltip(param1:MouseEvent) : void {
          if(App.toolTipMgr)
          {
             App.toolTipMgr.hide();
          }
       }
-
+      
       public function handleMouseDown(param1:MouseEvent) : void {
          this.hideTooltip(param1);
       }
-
+      
       public function get fillPadding() : Number {
          return this._fillPadding;
       }
-
+      
       public function set fillPadding(param1:Number) : void {
          if(param1 == this._fillPadding)
          {
@@ -134,7 +133,7 @@ package net.wg.gui.components.controls
          }
          this._fillPadding = param1;
       }
-
+      
       override protected function updateText() : void {
          super.updateText();
          if(_label != null)
@@ -145,11 +144,11 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       public function get textColor() : Number {
          return this._textColor;
       }
-
+      
       public function set textColor(param1:Number) : void {
          if(this._textColor == param1)
          {
@@ -158,11 +157,11 @@ package net.wg.gui.components.controls
          this._textColor = param1;
          invalidate();
       }
-
+      
       public function get tooltip() : String {
          return this._tooltip;
       }
-
+      
       public function set tooltip(param1:String) : void {
          if(this._tooltip == param1)
          {
@@ -171,12 +170,12 @@ package net.wg.gui.components.controls
          this._tooltip = param1;
          invalidate();
       }
-
+      
       public function showHelpLayout() : void {
          var _loc1_:Object = null;
          if(this._helpText.length > 0)
          {
-            _loc1_ =
+            _loc1_ = 
                {
                   "borderWidth":width,
                   "borderHeight":height,
@@ -185,27 +184,26 @@ package net.wg.gui.components.controls
                   "x":0,
                   "y":0,
                   "connectorLength":this._helpConnectorLength
-               }
-            ;
+               };
             this.setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
          }
       }
-
+      
       public function closeHelpLayout() : void {
          if(this.getHelpLayout() != null)
          {
             App.utils.helpLayout.destroy(this.getHelpLayout());
          }
       }
-
+      
       protected function getHelpLayout() : DisplayObject {
          return this._helpLayout;
       }
-
+      
       protected function setHelpLayout(param1:DisplayObject) : void {
          this._helpLayout = param1;
       }
-
+      
       override protected function updateAfterStateChange() : void {
          if(!initialized)
          {
@@ -224,7 +222,7 @@ package net.wg.gui.components.controls
          }
          dispatchEvent(new StateManagerEvent(ComponentEvent.STATE_CHANGE,state));
       }
-
+      
       protected function updateDisable() : void {
          if(this.disableMc != null)
          {
@@ -236,11 +234,11 @@ package net.wg.gui.components.controls
             this.disableMc.heightFill = Math.round(this.bgMc.height * this.scaleY) - this._fillPadding * 2;
          }
       }
-
+      
       public function get paddingHorizontal() : Number {
          return this._paddingHorizontal;
       }
-
+      
       public function set paddingHorizontal(param1:Number) : void {
          this._paddingHorizontal = param1;
          if(!(autoSize == "none") && !(textField == null) && (initialized))
@@ -249,7 +247,7 @@ package net.wg.gui.components.controls
          }
          this.updateAfterStateChange();
       }
-
+      
       override protected function calculateWidth() : Number {
          var _loc2_:* = NaN;
          var _loc3_:ConstrainedElement = null;
@@ -266,11 +264,11 @@ package net.wg.gui.components.controls
          }
          return _loc1_;
       }
-
+      
       override public function toString() : String {
          return "[WG SoundButtonEx " + name + "]";
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.STATE))
          {
@@ -315,5 +313,4 @@ package net.wg.gui.components.controls
          this.updateDisable();
       }
    }
-
 }

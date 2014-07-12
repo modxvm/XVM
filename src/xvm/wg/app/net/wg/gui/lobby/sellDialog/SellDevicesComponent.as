@@ -4,47 +4,45 @@ package net.wg.gui.lobby.sellDialog
    import flash.display.MovieClip;
    import net.wg.data.VO.SellDialogItem;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
-   import __AS3__.vec.Vector;
    import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleOptionalDeviceVo;
    import net.wg.data.VO.SellDialogElement;
    import net.wg.data.constants.FittingTypes;
    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
-
-
+   
    public class SellDevicesComponent extends UIComponent
    {
-          
+      
       public function SellDevicesComponent() {
          this._sellData = [];
          super();
       }
-
+      
       private static const PADDING_FOR_NEXT_ELEMENT:uint = 5;
-
+      
       public var complexDevice:SellDialogListItemRenderer;
-
+      
       public var complDevBg:MovieClip;
-
+      
       private var devHeight:Number = 0;
-
+      
       private var complexDevicesArr:SellDialogItem;
-
+      
       private var _removePrices:Array = null;
-
+      
       private var _removePrice:Number = 0;
-
+      
       private var _removeActionPriceData:Object = null;
-
+      
       public var removeActionPriceDataVo:ActionPriceVO = null;
-
+      
       private var _sellData:Array;
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.complexDevice.dispose();
          this.complexDevicesArr.dispose();
       }
-
+      
       public function setData(param1:Vector.<SellOnVehicleOptionalDeviceVo>) : void {
          var _loc6_:SellDialogElement = null;
          var _loc7_:* = NaN;
@@ -101,15 +99,15 @@ package net.wg.gui.lobby.sellDialog
             visible = false;
          }
       }
-
+      
       public function getNextPosition() : int {
          return this.complexDevice.y + this.complexDevice.height + PADDING_FOR_NEXT_ELEMENT;
       }
-
+      
       public function get removePrices() : Array {
          return this._removePrices;
       }
-
+      
       public function set removePrices(param1:Array) : void {
          this._removePrices = param1;
          if((this._removePrices) && this._removePrices.length >= 2)
@@ -117,15 +115,15 @@ package net.wg.gui.lobby.sellDialog
             this.removePrice = this._removePrices[0] > 0?this._removePrices[0]:this._removePrices[1];
          }
       }
-
+      
       public function get removePrice() : Number {
          return this._removePrice;
       }
-
+      
       public function set removePrice(param1:Number) : void {
          this._removePrice = param1;
       }
-
+      
       public function set removeActionPriceData(param1:Object) : void {
          this._removeActionPriceData = param1;
          if(this._removeActionPriceData)
@@ -133,23 +131,22 @@ package net.wg.gui.lobby.sellDialog
             this.removeActionPriceDataVo = new ActionPriceVO(this._removeActionPriceData);
          }
       }
-
+      
       public function get removeActionPriceData() : Object {
          return this._removeActionPriceData;
       }
-
+      
       public function get sellData() : Array {
          return this._sellData;
       }
-
+      
       public function get deviceItemRenderer() : Vector.<ISaleItemBlockRenderer> {
          return this.complexDevice.getRenderers();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.complexDevice.scrollingRenderrBg.visible = false;
       }
    }
-
 }

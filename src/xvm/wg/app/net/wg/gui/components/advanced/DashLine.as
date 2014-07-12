@@ -5,32 +5,31 @@ package net.wg.gui.components.advanced
    import flash.display.Sprite;
    import flash.display.Graphics;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class DashLine extends UIComponent
    {
-          
+      
       public function DashLine() {
          this.maskObj = new Sprite();
          super();
       }
-
+      
       private static const REDRAW_INV:String = "redrawInv";
-
+      
       public var background:MovieClip;
-
+      
       private var maskObj:Sprite;
-
+      
       private var _gap:uint = 2;
-
+      
       private var _dashLength:uint = 1;
-
+      
       override protected function configUI() : void {
          super.configUI();
          addChild(this.maskObj);
          this.background.mask = this.maskObj;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:Graphics = null;
          var _loc2_:uint = 0;
@@ -66,25 +65,25 @@ package net.wg.gui.components.advanced
             }
          }
       }
-
+      
       public function get gap() : uint {
          return this._gap;
       }
-
+      
       public function set gap(param1:uint) : void {
          this._gap = param1;
          invalidate(REDRAW_INV);
       }
-
+      
       public function get dashLength() : uint {
          return this._dashLength;
       }
-
+      
       public function set dashLength(param1:uint) : void {
          this._dashLength = param1;
          invalidate(REDRAW_INV);
       }
-
+      
       override protected function onDispose() : void {
          this.background.mask = null;
          this.background = null;
@@ -92,5 +91,4 @@ package net.wg.gui.components.advanced
          super.onDispose();
       }
    }
-
 }

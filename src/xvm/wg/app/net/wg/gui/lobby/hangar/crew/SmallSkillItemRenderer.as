@@ -7,14 +7,13 @@ package net.wg.gui.lobby.hangar.crew
    import flash.events.MouseEvent;
    import scaleform.clik.events.InputEvent;
    import flash.events.TimerEvent;
-
-
+   
    public class SmallSkillItemRenderer extends ListItemRenderer
    {
-          
+      
       public function SmallSkillItemRenderer() {
          super();
-         _stateMap =
+         _stateMap = 
             {
                "up":["up"],
                "over":["over"],
@@ -29,16 +28,15 @@ package net.wg.gui.lobby.hangar.crew
                "kb_down":["kb_down","down"],
                "in_progress":["in_progress"],
                "new_skill":["new_skill"]
-            }
-         ;
+            };
       }
-
+      
       public var loader:UILoaderAlt;
-
+      
       private var _tooltipID:String = null;
-
+      
       private var _inprogress:Boolean = false;
-
+      
       override public function setData(param1:Object) : void {
          var _loc2_:SkillsVO = null;
          this.data = param1;
@@ -53,23 +51,23 @@ package net.wg.gui.lobby.hangar.crew
             invalidateData();
          }
       }
-
+      
       override public function toString() : String {
          return "[Scaleform RoleItemRenderer " + name + "]";
       }
-
+      
       public function get inprogress() : Boolean {
          return this._inprogress;
       }
-
+      
       public function set inprogress(param1:Boolean) : void {
          this._inprogress = param1;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:SkillsVO = null;
          super.draw();
@@ -99,7 +97,7 @@ package net.wg.gui.lobby.hangar.crew
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(Event.ADDED,addToAutoGroup,false);
          removeEventListener(Event.REMOVED,addToAutoGroup,false);
@@ -123,5 +121,4 @@ package net.wg.gui.lobby.hangar.crew
          super.onDispose();
       }
    }
-
 }

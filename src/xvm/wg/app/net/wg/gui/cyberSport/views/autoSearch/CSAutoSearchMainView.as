@@ -10,11 +10,10 @@ package net.wg.gui.cyberSport.views.autoSearch
    import scaleform.clik.events.InputEvent;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class CSAutoSearchMainView extends UIComponent implements ICSAutoSearchMainView
    {
-          
+      
       public function CSAutoSearchMainView() {
          super();
          this.views = [];
@@ -28,33 +27,33 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
          this.waitingCmp.play();
       }
-
+      
       private static const FRAME_ANIMATION:uint = 7;
-
+      
       public var waitingCmp:WaitingMc;
-
+      
       public var searchCommands:SearchCommands;
-
+      
       public var searchEnemy:SearchEnemy;
-
+      
       public var waitingPlayer:WaitingPlayers;
-
+      
       public var confirmationState:ConfirmationReadinessStatus;
-
+      
       public var errorState:ErrorState;
-
+      
       private var views:Array = null;
-
+      
       private var viewsLength:uint = 0;
-
+      
       private var model:AutoSearchVO;
-
+      
       private var frameCount:Number = 7;
-
+      
       private function csUpdateTimerHandler(param1:Event) : void {
          this.initWheelBehaviour();
       }
-
+      
       public function enableButton(param1:Boolean) : void {
          var _loc2_:* = 0;
          while(_loc2_ < this.viewsLength)
@@ -63,7 +62,7 @@ package net.wg.gui.cyberSport.views.autoSearch
             _loc2_++;
          }
       }
-
+      
       public function set changeState(param1:AutoSearchVO) : void {
          if(param1 == null)
          {
@@ -73,7 +72,7 @@ package net.wg.gui.cyberSport.views.autoSearch
          invalidateData();
          this.initWheelBehaviour();
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          var _loc1_:InteractiveObject = null;
          var _loc2_:InteractiveObject = null;
@@ -89,7 +88,7 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
          return _loc2_;
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          var _loc2_:ICSAutoSearchMainView = null;
          var _loc3_:* = 0;
@@ -103,7 +102,7 @@ package net.wg.gui.cyberSport.views.autoSearch
             _loc3_++;
          }
       }
-
+      
       public function stopTimer() : void {
          var _loc1_:* = 0;
          while(_loc1_ < this.viewsLength)
@@ -112,7 +111,7 @@ package net.wg.gui.cyberSport.views.autoSearch
             _loc1_++;
          }
       }
-
+      
       private function initWheelBehaviour() : void {
          if(this.model.state == CYBER_SPORT_ALIASES.AUTO_SEARCH_CONFIRMATION_STATE)
          {
@@ -120,23 +119,21 @@ package net.wg.gui.cyberSport.views.autoSearch
             this.frameCount = FRAME_ANIMATION;
             this.updateWaiting();
          }
+         else if(this.model.state == CYBER_SPORT_ALIASES.AUTO_SEARCH_ERROR_STATE)
+         {
+            this.waitingCmp.stop();
+         }
          else
          {
-            if(this.model.state == CYBER_SPORT_ALIASES.AUTO_SEARCH_ERROR_STATE)
-            {
-               this.waitingCmp.stop();
-            }
-            else
-            {
-               this.waitingCmp.play();
-            }
+            this.waitingCmp.play();
          }
+         
       }
-
+      
       private function updateWaiting() : void {
          this.addEventListener(Event.ENTER_FRAME,this.wheelReversHandler);
       }
-
+      
       private function wheelReversHandler(param1:Event) : void {
          var _loc2_:* = NaN;
          if(this.frameCount <= 0)
@@ -145,16 +142,16 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
          else
          {
-            _loc2_ = this.waitingCmp.currentFrame-1;
+            _loc2_ = this.waitingCmp.currentFrame - 1;
             if(_loc2_ <= 0)
             {
-               _loc2_ = this.waitingCmp.totalFrames-1;
+               _loc2_ = this.waitingCmp.totalFrames - 1;
             }
             this.waitingCmp.gotoAndStop(_loc2_);
             this.frameCount--;
          }
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:* = 0;
          while(_loc1_ < this.viewsLength)
@@ -165,7 +162,7 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -173,7 +170,7 @@ package net.wg.gui.cyberSport.views.autoSearch
             this.initStates();
          }
       }
-
+      
       private function initStates() : void {
          var _loc1_:uint = 0;
          while(_loc1_ < this.viewsLength)
@@ -183,5 +180,4 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
       }
    }
-
 }

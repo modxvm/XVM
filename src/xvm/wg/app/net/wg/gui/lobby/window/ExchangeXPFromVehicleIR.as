@@ -1,7 +1,6 @@
 package net.wg.gui.lobby.window
 {
    import net.wg.gui.components.controls.SoundListItemRenderer;
-   import __AS3__.vec.Vector;
    import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.IconText;
@@ -19,49 +18,48 @@ package net.wg.gui.lobby.window
    import flash.ui.Keyboard;
    import flash.events.Event;
    import avmplus.getQualifiedClassName;
-
-
+   
    public class ExchangeXPFromVehicleIR extends SoundListItemRenderer
    {
-          
+      
       public function ExchangeXPFromVehicleIR() {
          super();
       }
-
+      
       private static const SELECTION_INVALIDATE:String = "selInv";
-
+      
       private static const DATA_INVALIDATE:String = "dataInv";
-
+      
       public static const SELECTION_CHANGED:String = "IrSelectionChanged";
-
+      
       private static const MY_STATE_PREFIXES:Vector.<String>;
-
+      
       public var vehicleIcon:UILoaderAlt;
-
+      
       public var vehicleTypeIcon:UILoaderAlt;
-
+      
       public var checkboxVehicle:CheckBox;
-
+      
       public var xpLabel:IconText;
-
+      
       public var vehicleName:TextField;
-
+      
       public var vehicleNation:UILoaderAlt;
-
+      
       public var background:MovieClip;
-
+      
       public var clickArea:MovieClip;
-
+      
       public var mcGreyAssets:MovieClip;
-
+      
       private var vehicleData:ExchangeXPVehicleVO;
-
+      
       override protected function preInitialize() : void {
          super.preInitialize();
          constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
          _toggle = false;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          constraints.addElement(focusIndicator.name,focusIndicator,Constraints.ALL);
@@ -72,7 +70,7 @@ package net.wg.gui.lobby.window
          this.vehicleNation.addEventListener(UILoaderEvent.IOERROR,this.nationIconLoadingError,false,0,true);
          setState("up");
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          super.handleMouseRelease(param1);
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
@@ -86,7 +84,7 @@ package net.wg.gui.lobby.window
             this.toggleSelection();
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          super.handleInput(param1);
          var _loc2_:InputDetails = param1.details;
@@ -99,23 +97,23 @@ package net.wg.gui.lobby.window
             param1.handled = true;
          }
       }
-
+      
       private function toggleSelection() : void {
          this.vehicleData.isSelectCandidate = !this.vehicleData.isSelectCandidate;
          invalidate(SELECTION_INVALIDATE);
          dispatchEvent(new Event(SELECTION_CHANGED,true));
       }
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          this.vehicleData = ExchangeXPVehicleVO(param1);
          invalidate(DATA_INVALIDATE);
       }
-
+      
       override public function get data() : Object {
          return this.vehicleData;
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(DATA_INVALIDATE))
          {
@@ -157,16 +155,16 @@ package net.wg.gui.lobby.window
          }
          super.draw();
       }
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          return (this.vehicleData) && (this.vehicleData.isSelectCandidate)?MY_STATE_PREFIXES:statesDefault;
       }
-
+      
       private function nationIconLoadingError(param1:UILoaderEvent) : void {
          var _loc2_:String = "Flash :: Couldn\'t Load Nations Icon, " + getQualifiedClassName(this) + ", Row Number = " + index;
          DebugUtils.LOG_ERROR(_loc2_);
       }
-
+      
       override protected function updateAfterStateChange() : void {
          super.updateAfterStateChange();
          constraints.updateElement(focusIndicator.name,focusIndicator);
@@ -176,5 +174,4 @@ package net.wg.gui.lobby.window
          constraints.updateElement(this.checkboxVehicle.name,this.checkboxVehicle);
       }
    }
-
 }

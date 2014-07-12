@@ -12,59 +12,58 @@ package scaleform.clik.controls
    import flash.events.MouseEvent;
    import flash.geom.Point;
    import flash.events.Event;
-
-
+   
    public class Slider extends UIComponent
    {
-          
+      
       public function Slider() {
          super();
       }
-
+      
       public var liveDragging:Boolean = true;
-
+      
       public var state:String = "default";
-
+      
       public var offsetLeft:Number = 0;
-
+      
       public var offsetRight:Number = 0;
-
+      
       protected var _minimum:Number = 0;
-
+      
       protected var _maximum:Number = 10;
-
+      
       protected var _value:Number = 0;
-
+      
       protected var _snapInterval:Number = 1;
-
+      
       protected var _snapping:Boolean = false;
-
+      
       protected var _dragOffset:Object;
-
+      
       protected var _trackDragMouseIndex:Number;
-
+      
       protected var _trackPressed:Boolean = false;
-
+      
       protected var _thumbPressed:Boolean = false;
-
+      
       public var thumb:Button;
-
+      
       public var track:Button;
-
+      
       override protected function preInitialize() : void {
          constraints = new Constraints(this,ConstrainMode.REFLOW);
       }
-
+      
       override protected function initialize() : void {
          super.initialize();
          tabChildren = false;
          mouseEnabled = mouseChildren = this.enabled;
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(param1 == super.enabled)
          {
@@ -73,72 +72,72 @@ package scaleform.clik.controls
          super.enabled = param1;
          this.thumb.enabled = this.track.enabled = param1;
       }
-
+      
       override public function get focusable() : Boolean {
          return _focusable;
       }
-
+      
       override public function set focusable(param1:Boolean) : void {
          super.focusable = param1;
          tabChildren = false;
       }
-
+      
       public function get value() : Number {
          return this._value;
       }
-
+      
       public function set value(param1:Number) : void {
          this._value = this.lockValue(param1);
          dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,this._value));
          this.draw();
       }
-
+      
       public function get maximum() : Number {
          return this._maximum;
       }
-
+      
       public function set maximum(param1:Number) : void {
          this._maximum = param1;
       }
-
+      
       public function get minimum() : Number {
          return this._minimum;
       }
-
+      
       public function set minimum(param1:Number) : void {
          this._minimum = param1;
       }
-
+      
       public function get position() : Number {
          return this._value;
       }
-
+      
       public function set position(param1:Number) : void {
          this._value = param1;
       }
-
+      
       public function get snapping() : Boolean {
          return this._snapping;
       }
-
+      
       public function set snapping(param1:Boolean) : void {
          this._snapping = param1;
          this.invalidateSettings();
       }
-
+      
       public function get snapInterval() : Number {
          return this._snapInterval;
       }
-
+      
       public function set snapInterval(param1:Number) : void {
          this._snapInterval = param1;
          this.invalidateSettings();
       }
-
+      
       public function invalidateSettings() : void {
          invalidate(InvalidationType.SETTINGS);
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.isDefaultPrevented())
          {
@@ -179,11 +178,11 @@ package scaleform.clik.controls
                break;
          }
       }
-
+      
       override public function toString() : String {
          return "[CLIK Slider " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
          this.thumb.addEventListener(MouseEvent.MOUSE_DOWN,this.beginDrag,false,0,true);
@@ -194,7 +193,7 @@ package scaleform.clik.controls
          this.thumb.lockDragStateChange = true;
          constraints.addElement("track",this.track,Constraints.LEFT | Constraints.RIGHT);
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.STATE))
          {
@@ -207,7 +206,7 @@ package scaleform.clik.controls
          }
          this.updateThumb();
       }
-
+      
       override protected function changeFocus() : void {
          super.changeFocus();
          invalidateState();
@@ -223,7 +222,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function updateThumb() : void {
          if(!this.enabled)
          {
@@ -232,7 +231,7 @@ package scaleform.clik.controls
          var _loc1_:Number = _width - this.offsetLeft - this.offsetRight;
          this.thumb.x = (this._value - this._minimum) / (this._maximum - this._minimum) * _loc1_ - this.thumb.width / 2 + this.offsetLeft;
       }
-
+      
       protected function beginDrag(param1:MouseEvent) : void {
          this._thumbPressed = true;
          var _loc2_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
@@ -240,7 +239,7 @@ package scaleform.clik.controls
          stage.addEventListener(MouseEvent.MOUSE_MOVE,this.doDrag,false,0,true);
          stage.addEventListener(MouseEvent.MOUSE_UP,this.endDrag,false,0,true);
       }
-
+      
       protected function doDrag(param1:MouseEvent) : void {
          var _loc2_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
          var _loc3_:Number = _loc2_.x - this._dragOffset.x;
@@ -257,7 +256,7 @@ package scaleform.clik.controls
             dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,this._value));
          }
       }
-
+      
       protected function endDrag(param1:MouseEvent) : void {
          stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.doDrag,false);
          stage.removeEventListener(MouseEvent.MOUSE_UP,this.endDrag,false);
@@ -269,7 +268,7 @@ package scaleform.clik.controls
          this._thumbPressed = false;
          this._trackPressed = false;
       }
-
+      
       protected function trackPress(param1:MouseEvent) : void {
          this._trackPressed = true;
          this.track.focused = _focused;
@@ -291,7 +290,7 @@ package scaleform.clik.controls
          _loc4_.localY = this.thumb.mouseY;
          this.thumb.dispatchEvent(_loc4_);
       }
-
+      
       protected function lockValue(param1:Number) : Number {
          var param1:Number = Math.max(this._minimum,Math.min(this._maximum,param1));
          if(!this.snapping)
@@ -301,7 +300,7 @@ package scaleform.clik.controls
          var _loc2_:Number = Math.round(param1 / this.snapInterval) * this.snapInterval;
          return _loc2_;
       }
-
+      
       protected function scrollWheel(param1:Number) : void {
          if(_focused)
          {
@@ -310,5 +309,4 @@ package scaleform.clik.controls
          }
       }
    }
-
 }

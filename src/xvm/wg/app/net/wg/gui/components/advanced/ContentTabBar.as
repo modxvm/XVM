@@ -5,32 +5,31 @@ package net.wg.gui.components.advanced
    import scaleform.clik.core.UIComponent;
    import flash.geom.Point;
    import scaleform.clik.controls.Button;
-
-
+   
    public class ContentTabBar extends ButtonBarEx
    {
-          
+      
       public function ContentTabBar() {
          super();
          this.selectionIndicator.visible = false;
       }
-
+      
       private static const INVALID_LAYOUT:String = "invalidLayout";
-
+      
       private static const INVALID_SEPARATOR_VISIBLE:String = "invalidSeparatorVisible";
-
+      
       public var selectionIndicator:MovieClip;
-
+      
       public var lineMC:MovieClip;
-
+      
       private var _textPadding:Number = 20;
-
+      
       private var _minRendererWidth:Number = 40;
-
+      
       private var _showSeparator:Boolean = false;
-
+      
       private var _centerTabs:Boolean = true;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.selectionIndicator.mouseChildren = this.selectionIndicator.mouseEnabled = false;
@@ -39,7 +38,7 @@ package net.wg.gui.components.advanced
             this.selectedIndex = 0;
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:Boolean = (isInvalid(InvalidationType.RENDERERS)) || (isInvalid(InvalidationType.DATA)) || (isInvalid(InvalidationType.SETTINGS)) || (isInvalid(InvalidationType.SIZE));
          if(_loc1_)
@@ -69,16 +68,16 @@ package net.wg.gui.components.advanced
             this.updateSelectionIndicator();
          }
       }
-
+      
       private function doCenterTabs() : void {
          container.x = _originalWidth - container.width >> 1;
       }
-
+      
       override public function set selectedIndex(param1:int) : void {
          super.selectedIndex = param1;
          this.updateSelectionIndicator();
       }
-
+      
       private function updateSelectionIndicator() : void {
          var _loc1_:UIComponent = null;
          var _loc2_:Point = null;
@@ -97,15 +96,15 @@ package net.wg.gui.components.advanced
             this.selectionIndicator.visible = false;
          }
       }
-
+      
       private function moveSelectionIndicatorToTop() : void {
-         if(getChildIndex(this.selectionIndicator) != numChildren-1)
+         if(getChildIndex(this.selectionIndicator) != numChildren - 1)
          {
             removeChild(this.selectionIndicator);
             addChild(this.selectionIndicator);
          }
       }
-
+      
       private function calculateRendererWidth() : void {
          var _loc1_:Button = null;
          var _loc2_:Number = 0;
@@ -122,13 +121,13 @@ package net.wg.gui.components.advanced
          _buttonWidth = _loc2_ + this._textPadding * 2 ^ 0;
          _buttonWidth = Math.max(_buttonWidth,this._minRendererWidth);
       }
-
+      
       override protected function populateRendererData(param1:Button, param2:uint) : void {
          if((param1.hasOwnProperty("isFirst")) && param2 == 0)
          {
             param1["isFirst"] = true;
          }
-         if((param1.hasOwnProperty("isLast")) && (_dataProvider) && param2 == _dataProvider.length-1)
+         if((param1.hasOwnProperty("isLast")) && (_dataProvider) && param2 == _dataProvider.length - 1)
          {
             param1["isLast"] = true;
          }
@@ -139,52 +138,51 @@ package net.wg.gui.components.advanced
          }
          super.populateRendererData(param1,param2);
       }
-
+      
       override protected function updateRenderers() : void {
          super.updateRenderers();
       }
-
+      
       public function get textPadding() : Number {
          return this._textPadding;
       }
-
+      
       public function set textPadding(param1:Number) : void {
          this._textPadding = param1;
          invalidate(InvalidationType.RENDERERS);
       }
-
+      
       public function get minRendererWidth() : Number {
          return this._minRendererWidth;
       }
-
+      
       public function set minRendererWidth(param1:Number) : void {
          this._minRendererWidth = param1;
          invalidate(InvalidationType.RENDERERS);
       }
-
+      
       public function get showSeparator() : Boolean {
          return this._showSeparator;
       }
-
+      
       public function set showSeparator(param1:Boolean) : void {
          this._showSeparator = param1;
          invalidate(INVALID_SEPARATOR_VISIBLE);
       }
-
+      
       public function get centerTabs() : Boolean {
          return this._centerTabs;
       }
-
+      
       public function set centerTabs(param1:Boolean) : void {
          this._centerTabs = param1;
          invalidate(INVALID_LAYOUT);
       }
-
+      
       override protected function onDispose() : void {
          this.lineMC = null;
          this.selectionIndicator = null;
          super.onDispose();
       }
    }
-
 }

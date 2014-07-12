@@ -5,20 +5,19 @@ package net.wg.gui.lobby.moduleInfo
    import flash.text.TextFieldAutoSize;
    import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.helpers.Utils;
-
-
+   
    public class ModuleEffects extends UIComponent
    {
-          
+      
       public function ModuleEffects() {
          super();
       }
-
+      
       public var effectsTF:TextField = null;
-
+      
       protected var _bottomMargin:Number = 20;
-
-      public function setEffects(param1:Object=null) : void {
+      
+      public function setEffects(param1:Object = null) : void {
          if(param1)
          {
             this.effectsTF.multiline = true;
@@ -28,15 +27,15 @@ package net.wg.gui.lobby.moduleInfo
             height = this.effectsTF.y + this.effectsTF.textHeight + this._bottomMargin;
          }
       }
-
+      
       public function get bottomMargin() : Number {
          return this._bottomMargin;
       }
-
+      
       public function set bottomMargin(param1:Number) : void {
          this._bottomMargin = param1;
       }
-
+      
       private function getEffectParams(param1:Object) : String {
          var _loc2_:* = "";
          var _loc3_:Number = 25;
@@ -59,13 +58,12 @@ package net.wg.gui.lobby.moduleInfo
          }
          return _loc2_;
       }
-
-      private function getEquipmentUsageBlock(param1:String, param2:String, param3:int=20) : String {
+      
+      private function getEquipmentUsageBlock(param1:String, param2:String, param3:int = 20) : String {
          var param1:String = param1 == ""?"":Utils.instance.htmlWrapper(param1,"#c1ba9c",13,"$FieldFont",true) + Utils.instance.htmlWrapper(" ","#c1ba9c",param3,"$FieldFont");
          var param2:String = param2 == ""?"":Utils.instance.htmlWrapper(param2,"#95907f",12,"$FieldFont");
          var _loc4_:String = "<br/>" + param1 + "<br/>" + param2;
          return _loc4_;
       }
    }
-
 }

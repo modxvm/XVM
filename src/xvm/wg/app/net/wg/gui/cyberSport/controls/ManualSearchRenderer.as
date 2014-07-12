@@ -9,34 +9,33 @@ package net.wg.gui.cyberSport.controls
    import net.wg.gui.cyberSport.vo.CSCommandVO;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.infrastructure.interfaces.IUserProps;
-
-
+   
    public class ManualSearchRenderer extends TableRenderer implements IManualSearchRenderer
    {
-          
+      
       public function ManualSearchRenderer() {
          super();
          preventAutosizing = true;
       }
-
+      
       public var commander:TextField = null;
-
+      
       public var commandDescr:TextField = null;
-
+      
       public var commandSize:TextField = null;
-
+      
       public var commandMaxSize:TextField = null;
-
+      
       public var effency:TextField = null;
-
+      
       public var freezeIcon:MovieClip;
-
+      
       public var restrictionIcon:MovieClip;
-
+      
       public var inBattleMC:MovieClip;
-
+      
       private var _creatorName:String = null;
-
+      
       protected function checkTooltip() : void {
          var _loc1_:Point = new Point(mouseX,mouseY);
          _loc1_ = localToGlobal(_loc1_);
@@ -52,12 +51,12 @@ package net.wg.gui.cyberSport.controls
             }
          }
       }
-
+      
       override public function setData(param1:Object) : void {
          this.data = param1;
          invalidateData();
       }
-
+      
       public function update(param1:Object) : void {
          this.data = param1;
          if(this.data)
@@ -65,7 +64,7 @@ package net.wg.gui.cyberSport.controls
             this.populateUI(CSCommandVO(param1));
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.commander.mouseEnabled = false;
@@ -80,7 +79,7 @@ package net.wg.gui.cyberSport.controls
          this.restrictionIcon.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.restrictionIcon.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
       }
-
+      
       override protected function onDispose() : void {
          this.freezeIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.freezeIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
@@ -93,22 +92,22 @@ package net.wg.gui.cyberSport.controls
          this.effency = null;
          super.onDispose();
       }
-
+      
       private function onControlRollOver(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(param1.currentTarget == this.freezeIcon?TOOLTIPS.SETTINGSICON_FREEZED:TOOLTIPS.SETTINGSICON_CONDITIONS);
       }
-
-      private function onControlRollOut(param1:MouseEvent=null) : void {
+      
+      private function onControlRollOut(param1:MouseEvent = null) : void {
          App.toolTipMgr.hide();
          dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          mouseEnabled = true;
          mouseChildren = true;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:CSCommandVO = null;
          mouseEnabled = true;
@@ -131,7 +130,7 @@ package net.wg.gui.cyberSport.controls
             this.checkTooltip();
          }
       }
-
+      
       protected function populateUI(param1:CSCommandVO) : void {
          var _loc2_:String = null;
          var _loc4_:IUserProps = null;
@@ -181,5 +180,4 @@ package net.wg.gui.cyberSport.controls
          App.utils.commons.formatPlayerName(this.commandDescr,_loc4_);
       }
    }
-
 }

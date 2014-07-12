@@ -4,15 +4,14 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.tooltips.VO.ToolTipActionPriceVO;
    import net.wg.utils.ILocale;
    import net.wg.gui.utils.ComplexTooltipHelper;
-
-
+   
    public class ToolTipActionPrice extends ToolTipComplex
    {
-          
+      
       public function ToolTipActionPrice() {
          super();
       }
-
+      
       override public function build(param1:Object, param2:ITooltipProps) : void {
          var _loc7_:String = null;
          var _loc8_:String = null;
@@ -31,21 +30,17 @@ package net.wg.gui.components.tooltips
                {
                   "oldPrice":_loc9_,
                   "newPrice":_loc8_
-               }
-            );
+               });
             _loc4_ = new ComplexTooltipHelper().addHeader(_loc5_.makeString(TOOLTIPS.ACTIONPRICE_HEADER)).addBody(_loc6_).make();
          }
-         else
+         else if(_loc3_.actionPrc < 0 && !(_loc3_.itemType == ""))
          {
-            if(_loc3_.actionPrc < 0 && !(_loc3_.itemType == ""))
-            {
-               _loc10_ = _loc5_.makeString(TOOLTIPS.actionprice_sell_type(_loc3_.itemType));
-               _loc6_ = _loc5_.makeString(TOOLTIPS.ACTIONPRICE_SELL_BODY,{"deviceName":_loc10_});
-               _loc4_ = new ComplexTooltipHelper().addHeader(_loc5_.makeString(TOOLTIPS.ACTIONPRICE_SELL_HEADER)).addBody(_loc6_).make();
-            }
+            _loc10_ = _loc5_.makeString(TOOLTIPS.actionprice_sell_type(_loc3_.itemType));
+            _loc6_ = _loc5_.makeString(TOOLTIPS.ACTIONPRICE_SELL_BODY,{"deviceName":_loc10_});
+            _loc4_ = new ComplexTooltipHelper().addHeader(_loc5_.makeString(TOOLTIPS.ACTIONPRICE_SELL_HEADER)).addBody(_loc6_).make();
          }
+         
          super.build(_loc4_,param2);
       }
    }
-
 }

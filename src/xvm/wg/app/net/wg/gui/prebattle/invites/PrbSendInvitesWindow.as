@@ -26,11 +26,10 @@ package net.wg.gui.prebattle.invites
    import org.idmedia.as3commons.util.StringUtils;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import flash.utils.getQualifiedClassName;
-
-
+   
    public class PrbSendInvitesWindow extends PrbSendInvitesWindowMeta implements IPrbSendInvitesWindowMeta
    {
-          
+      
       public function PrbSendInvitesWindow() {
          this.friendMemberDataProvider = new DAAPIDataProvider();
          this.clanMemberDataProvider = new DAAPIDataProvider();
@@ -39,17 +38,17 @@ package net.wg.gui.prebattle.invites
          super();
          this.emptyRenderer.visible = false;
       }
-
+      
       private static const inviteTextColor:uint = 9803143;
-
+      
       private static const UPDATE_DEFAULT_POSITION:String = "updateWindowPosition";
-
+      
       private static const userViewsDataProvider:Array;
-
+      
       private static const INV_CLAN:String = "invClan";
-
+      
       private static function makeRoster(param1:Object) : Object {
-         var _loc2_:Object =
+         var _loc2_:Object = 
             {
                "uid":param1.uid,
                "userName":param1.userName,
@@ -58,95 +57,94 @@ package net.wg.gui.prebattle.invites
                "displayName":param1.displayName,
                "colors":param1.colors,
                "himself":param1.himself
-            }
-         ;
+            };
          return _loc2_;
       }
-
+      
       public var friendMemberDataProvider:DAAPIDataProvider;
-
+      
       public var clanMemberDataProvider:DAAPIDataProvider;
-
+      
       public var searchMemberDataProvider:DAAPIDataProvider;
-
+      
       public var usersAccordion:Accordion;
-
+      
       public var addUserButton:SoundButtonEx;
-
+      
       public var addAllUsersButton:SoundButtonEx;
-
+      
       public var removeUserButton:SoundButtonEx;
-
+      
       public var removeAllUsersButton:SoundButtonEx;
-
+      
       public var receiverList:ScrollingListEx;
-
+      
       public var onlineCheckBox:CheckBox;
-
+      
       public var messageTextInput:TextInput;
-
+      
       public var sendButton:SoundButtonEx;
-
+      
       public var emptyRenderer:UserRosterItemRenderer;
-
+      
       private var coolDownTimerID:uint = 0;
-
+      
       private var wait:Boolean = false;
-
+      
       private var lastToken:String = null;
-
+      
       private var onSearchResultReceived:Boolean = false;
-
+      
       private var lastIsOnlineFlag:Boolean = false;
-
+      
       private var receiverData:DataProvider;
-
+      
       private var inviteDefaultTextColor:uint = 4144953;
-
+      
       private var _showClanOnly:Boolean = false;
-
+      
       public function as_setWindowTitle(param1:String) : void {
          window.title = param1;
       }
-
+      
       public function as_getFriendsDP() : Object {
          return this.friendMemberDataProvider;
       }
-
+      
       public function as_getClanDP() : Object {
          return this.clanMemberDataProvider;
       }
-
+      
       public function as_getSearchDP() : Object {
          return this.searchMemberDataProvider;
       }
-
+      
       public function as_getReceiverDP() : Object {
          return this.receiverData;
       }
-
+      
       public function as_onSearchResultReceived(param1:Boolean) : void {
          this.onSearchResultReceived = param1;
       }
-
+      
       public function as_showClanOnly(param1:Boolean) : void {
          this._showClanOnly = param1;
          invalidate(INV_CLAN);
       }
-
+      
       public function as_setDefaultOnlineFlag(param1:Boolean) : void {
          if(this.onlineCheckBox != null)
          {
             this.onlineCheckBox.selected = param1;
          }
       }
-
+      
       public function as_onReceiveSendInvitesCooldown(param1:uint) : void {
          this.enableManagmentButtons(false);
          this.sendButton.enabled = false;
          this.coolDownTimerID = setTimeout(this.onEndSendInvitesCooldown,param1 * 1000);
       }
-
+      
       override protected function onPopulate() : void {
          this.updateWindowProperties(false);
          super.onPopulate();
@@ -157,7 +155,7 @@ package net.wg.gui.prebattle.invites
          _loc1_.left = 12;
          _loc1_.right = 10;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(UPDATE_DEFAULT_POSITION))
@@ -174,25 +172,22 @@ package net.wg.gui.prebattle.invites
                      "label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS,
                      "linkage":Linkages.INVITES_FRIENDS,
                      "enabled":false
-                  }
-               ,
+                  },
                   {
                      "label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN,
                      "linkage":Linkages.INVITES_CLAN,
                      "enabled":true
-                  }
-               ,
+                  },
                   {
                      "label":MESSENGER.DIALOGS_SEARCHCONTACT_TITLE,
                      "linkage":Linkages.INVITES_SEARCH,
                      "enabled":false
-                  }
-               ]);
+                  }]);
                this.usersAccordion.selectedIndex = 1;
             }
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.usersAccordion.view.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChange);
@@ -226,12 +221,12 @@ package net.wg.gui.prebattle.invites
          App.utils.scheduler.envokeInNextFrame(this.updateFocus);
          invalidate(UPDATE_DEFAULT_POSITION);
       }
-
+      
       private function onUsersListChange(param1:Event) : void {
          var _loc2_:DAAPIDataProvider = param1.target as DAAPIDataProvider;
          _loc2_.requestItemRange(0,_loc2_.length,this.updateReceiverList);
       }
-
+      
       private function updateReceiverList(param1:Array) : void {
          var _loc5_:* = NaN;
          var _loc2_:int = param1.length;
@@ -259,7 +254,7 @@ package net.wg.gui.prebattle.invites
             this.receiverData.invalidate();
          }
       }
-
+      
       private function onViewChange(param1:ViewStackEvent) : void {
          var _loc2_:InteractiveObject = param1.view.getComponentForFocus();
          if(_loc2_)
@@ -267,12 +262,12 @@ package net.wg.gui.prebattle.invites
             setFocus(_loc2_);
          }
       }
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          this.updateFocus();
       }
-
+      
       override protected function onDispose() : void {
          App.utils.scheduler.cancelTask(this.updateFocus);
          this.friendMemberDataProvider.removeEventListener(Event.CHANGE,this.onUsersListChange);
@@ -298,26 +293,26 @@ package net.wg.gui.prebattle.invites
          this.receiverData = null;
          super.onDispose();
       }
-
+      
       private function updateWindowProperties(param1:Boolean) : void {
          if(window)
          {
             Window(window).visible = param1;
          }
       }
-
+      
       private function updateFocus() : void {
          this.updateWindowProperties(true);
          setFocus(this);
       }
-
+      
       private function enableManagmentButtons(param1:Boolean) : void {
          this.addUserButton.enabled = param1;
          this.addAllUsersButton.enabled = param1;
          this.removeAllUsersButton.enabled = param1;
          this.removeUserButton.enabled = param1;
       }
-
+      
       private function onEndSendInvitesCooldown() : void {
          if(this.receiverData)
          {
@@ -329,7 +324,7 @@ package net.wg.gui.prebattle.invites
          this.sendButton.enabled = false;
          this.wait = false;
       }
-
+      
       private function hasUserInReceiverList(param1:Object) : Number {
          var _loc2_:Number = -1;
          var _loc3_:Number = 0;
@@ -344,7 +339,7 @@ package net.wg.gui.prebattle.invites
          }
          return _loc2_;
       }
-
+      
       private function onReceiveUserInfo(param1:Object) : void {
          var _loc2_:Object = makeRoster(param1);
          if(MessengerUtils.isIgnored(_loc2_))
@@ -368,7 +363,7 @@ package net.wg.gui.prebattle.invites
             showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_EXISTSINRECEIVELIST);
          }
       }
-
+      
       private function onReceiveUsersInfo(param1:Array) : void {
          var _loc5_:Object = null;
          var _loc2_:Number = param1.length;
@@ -398,7 +393,7 @@ package net.wg.gui.prebattle.invites
          }
          this.sendButton.enabled = _loc4_;
       }
-
+      
       private function removeReceiveItem() : void {
          if(this.receiverData.length > 0)
          {
@@ -418,7 +413,7 @@ package net.wg.gui.prebattle.invites
             showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_RECEIVERLISTEMPTY);
          }
       }
-
+      
       private function setToken(param1:String) : void {
          if(param1 == null)
          {
@@ -426,7 +421,7 @@ package net.wg.gui.prebattle.invites
          }
          searchTokenS(param1);
       }
-
+      
       private function messageTextInput_CLIK_focusInHandler(param1:FocusHandlerEvent) : void {
          var _loc2_:uint = this.messageTextInput.textField.getTextFormat()["color"];
          if(_loc2_ == this.inviteDefaultTextColor)
@@ -435,18 +430,18 @@ package net.wg.gui.prebattle.invites
             this.messageTextInput.text = "";
          }
       }
-
+      
       private function usersAccordion_listItemDoubleClickHandler(param1:SendInvitesEvent) : void {
          this.onReceiveUserInfo(param1.initItem);
       }
-
+      
       private function receiverList_ClickHandler(param1:ListEvent) : void {
          if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
          {
             App.contextMenuMgr.showUserContextMenu(this,param1.itemData,new PrbSendInviteCIGenerator());
          }
       }
-
+      
       private function receiverList_itemDoubleClickHandler(param1:ListEvent) : void {
          if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
          {
@@ -454,8 +449,8 @@ package net.wg.gui.prebattle.invites
          }
          this.removeReceiveItem();
       }
-
-      private function handleClickAddUserButton(param1:ButtonEvent=null) : void {
+      
+      private function handleClickAddUserButton(param1:ButtonEvent = null) : void {
          var _loc2_:ScrollingListEx = ScrollingListEx(this.usersAccordion.view.currentView.rosterList);
          if(_loc2_.dataProvider.length > 0)
          {
@@ -473,7 +468,7 @@ package net.wg.gui.prebattle.invites
             showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_USERLISTEMPTY);
          }
       }
-
+      
       private function handleClickAddAllUsersButton(param1:ButtonEvent) : void {
          var _loc2_:DAAPIDataProvider = DAAPIDataProvider(this.usersAccordion.view.currentView.rosterList.dataProvider);
          if(_loc2_ == null)
@@ -483,18 +478,18 @@ package net.wg.gui.prebattle.invites
          var _loc3_:uint = _loc2_.length;
          if(_loc3_ > 0)
          {
-            _loc2_.requestItemRange(0,_loc2_.length-1,this.onReceiveUsersInfo);
+            _loc2_.requestItemRange(0,_loc2_.length - 1,this.onReceiveUsersInfo);
          }
          else
          {
             showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_USERLISTEMPTY);
          }
       }
-
-      private function handleClickRemoveUserButton(param1:ButtonEvent=null) : void {
+      
+      private function handleClickRemoveUserButton(param1:ButtonEvent = null) : void {
          this.removeReceiveItem();
       }
-
+      
       private function handleClickRemoveAllUsersButton(param1:ButtonEvent) : void {
          if(this.receiverData.length > 0)
          {
@@ -507,7 +502,7 @@ package net.wg.gui.prebattle.invites
             showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_RECEIVERLISTEMPTY);
          }
       }
-
+      
       private function handleSelectOnlineCheckBox(param1:ButtonEvent) : void {
          var _loc2_:Boolean = param1.currentTarget.selected;
          var _loc3_:* = false;
@@ -522,7 +517,7 @@ package net.wg.gui.prebattle.invites
          }
          this.lastIsOnlineFlag = _loc2_;
       }
-
+      
       private function handleSendInvitations(param1:ButtonEvent) : void {
          var _loc2_:Array = [];
          var _loc3_:* = "";
@@ -541,19 +536,19 @@ package net.wg.gui.prebattle.invites
          this.wait = true;
          sendInvitesS(_loc2_,_loc3_);
       }
-
+      
       private function showContextMenu(param1:SendInvitesEvent) : void {
          if(param1.initItem)
          {
             App.contextMenuMgr.showUserContextMenu(this,param1.initItem,new PrbSendInviteCIGenerator());
          }
       }
-
+      
       private function usersAccordion_searchTokenHandler(param1:SendInvitesEvent) : void {
          this.lastToken = param1.searchString;
          this.setToken(this.lastToken);
       }
-
+      
       private function usersAccordion_initComponentHandler(param1:SendInvitesEvent) : void {
          var _loc3_:String = null;
          var _loc2_:IViewStackContent = param1.initItem as IViewStackContent;
@@ -564,22 +559,17 @@ package net.wg.gui.prebattle.invites
             {
                _loc2_.update(this.friendMemberDataProvider);
             }
-            else
+            else if(_loc3_ == Linkages.INVITES_CLAN)
             {
-               if(_loc3_ == Linkages.INVITES_CLAN)
-               {
-                  _loc2_.update(this.clanMemberDataProvider);
-               }
-               else
-               {
-                  if(_loc3_ == Linkages.INVITES_SEARCH)
-                  {
-                     _loc2_.update(this.searchMemberDataProvider);
-                  }
-               }
+               _loc2_.update(this.clanMemberDataProvider);
             }
+            else if(_loc3_ == Linkages.INVITES_SEARCH)
+            {
+               _loc2_.update(this.searchMemberDataProvider);
+            }
+            
+            
          }
       }
    }
-
 }

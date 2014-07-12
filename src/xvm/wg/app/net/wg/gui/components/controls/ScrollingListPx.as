@@ -14,39 +14,38 @@ package net.wg.gui.components.controls
    import flash.events.Event;
    import flash.utils.getDefinitionByName;
    import flash.events.MouseEvent;
-
-
+   
    public class ScrollingListPx extends CoreListEx
    {
-          
+      
       public function ScrollingListPx() {
          super();
       }
-
+      
       public static const SCROLL_UPDATE_INV:String = "scrollUpdInv";
-
+      
       public static const SCROLL_POSITION_INV:String = "scrollPosInv";
-
+      
       public var _scrollBar:IScrollBar;
-
+      
       protected var _scrollBarValue:Object;
-
+      
       protected var totalHeight:uint;
-
+      
       public var padding:int = 0;
-
+      
       private var _scrollStepFactor:Number = 1.0;
-
+      
       public var wrapping:String = "normal";
-
+      
       public var thumbOffset:Object;
-
+      
       protected var _autoScrollBar:Boolean = false;
-
+      
       protected var _scrollPosition:uint = 0;
-
+      
       public var maskObject:Sprite;
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(!this.maskObject)
@@ -56,7 +55,7 @@ package net.wg.gui.components.controls
          }
          mask = this.maskObject;
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -67,7 +66,7 @@ package net.wg.gui.components.controls
          switch(_loc2_.navEquivalent)
          {
             case NavigationCode.UP:
-               this.scrollPosition = this.scrollPosition-1;
+               this.scrollPosition = this.scrollPosition - 1;
                break;
             case NavigationCode.DOWN:
                this.scrollPosition = this.scrollPosition + 1;
@@ -101,11 +100,11 @@ package net.wg.gui.components.controls
          }
          param1.handled = true;
       }
-
+      
       override protected function scrollList(param1:int) : void {
          this.scrollPosition = this.scrollPosition - param1;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -162,14 +161,14 @@ package net.wg.gui.components.controls
             this.applyScrollBarUpdating();
          }
       }
-
+      
       protected function applyScrollBarUpdating() : void {
          container.y = -(this._scrollStepFactor * this._scrollPosition);
          this.scrollBar.setScrollProperties(this.scrollPageSize,0,this.maxScroll);
          this.scrollBar.position = this.scrollPosition;
          this.scrollBar.trackScrollPageSize = this.scrollPageSize;
       }
-
+      
       protected function drawScrollBar() : void {
          if(!this._autoScrollBar)
          {
@@ -179,7 +178,7 @@ package net.wg.gui.components.controls
          this._scrollBar.height = availableHeight;
          this._scrollBar.validateNow();
       }
-
+      
       override protected function drawRenderers(param1:Number) : void {
          this.totalHeight = 0;
          var _loc2_:* = 0;
@@ -190,7 +189,7 @@ package net.wg.gui.components.controls
          }
          this.scrollPosition = 0;
       }
-
+      
       protected function createRendererByDataIndex(param1:int) : void {
          var _loc2_:IListItemRenderer = this.createRenderer(param1);
          if(_loc2_ == null)
@@ -207,7 +206,7 @@ package net.wg.gui.components.controls
          _loc2_.y = this.totalHeight;
          this.totalHeight = this.totalHeight + (Math.round(_loc2_.height) + this.padding);
       }
-
+      
       public function get maxScroll() : Number {
          if(this.maskObject)
          {
@@ -215,11 +214,11 @@ package net.wg.gui.components.controls
          }
          return 0;
       }
-
+      
       public function get scrollPageSize() : Number {
          return Math.round(this.maskObject.height / this._scrollStepFactor);
       }
-
+      
       protected function createScrollBar() : void {
          var _loc1_:IScrollBar = null;
          var _loc2_:Class = null;
@@ -240,7 +239,7 @@ package net.wg.gui.components.controls
             return;
          }
          this._autoScrollBar = false;
-         if(this._scrollBarValue  is  String)
+         if(this._scrollBarValue is String)
          {
             if(parent != null)
             {
@@ -267,25 +266,23 @@ package net.wg.gui.components.controls
                }
             }
          }
-         else
+         else if(this._scrollBarValue is Class)
          {
-            if(this._scrollBarValue  is  Class)
+            _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
+            _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
+            if(_loc1_ != null)
             {
-               _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
-               _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
-               if(_loc1_ != null)
-               {
-                  this._autoScrollBar = true;
-                  (_loc1_ as Object).offsetTop = this.thumbOffset.top;
-                  (_loc1_ as Object).offsetBottom = this.thumbOffset.bottom;
-                  this.addChild(_loc1_ as DisplayObject);
-               }
-            }
-            else
-            {
-               _loc1_ = this._scrollBarValue as IScrollBar;
+               this._autoScrollBar = true;
+               (_loc1_ as Object).offsetTop = this.thumbOffset.top;
+               (_loc1_ as Object).offsetBottom = this.thumbOffset.bottom;
+               this.addChild(_loc1_ as DisplayObject);
             }
          }
+         else
+         {
+            _loc1_ = this._scrollBarValue as IScrollBar;
+         }
+         
          this._scrollBar = _loc1_;
          invalidateSize();
          if(this._scrollBar == null)
@@ -297,19 +294,19 @@ package net.wg.gui.components.controls
          this._scrollBar.focusTarget = this;
          this._scrollBar.tabEnabled = false;
       }
-
+      
       protected function handleScroll(param1:Event) : void {
          this.scrollPosition = this._scrollBar.position;
       }
-
+      
       protected function blockMouseWheel(param1:MouseEvent) : void {
          param1.stopPropagation();
       }
-
+      
       public function get scrollPosition() : Number {
          return this._scrollPosition;
       }
-
+      
       public function set scrollPosition(param1:Number) : void {
          var param1:Number = Math.max(0,Math.min(this.maxScroll,Math.round(param1)));
          if(this._scrollPosition == param1)
@@ -319,24 +316,22 @@ package net.wg.gui.components.controls
          this._scrollPosition = param1;
          invalidate(SCROLL_UPDATE_INV);
       }
-
+      
       public function get scrollBar() : Object {
          return this._scrollBar;
       }
-
+      
       public function set scrollBar(param1:Object) : void {
          this._scrollBarValue = param1;
          invalidate(InvalidationType.SCROLL_BAR);
       }
-
+      
       protected function populateData(param1:Array) : void {
-          
       }
-
+      
       override protected function drawLayout() : void {
-          
       }
-
+      
       override protected function createRenderer(param1:uint) : IListItemRenderer {
          var _loc3_:IListItemRenderer = null;
          var _loc2_:* = "List Couldn\'t create item renderer, because ";
@@ -358,15 +353,14 @@ package net.wg.gui.components.controls
          }
          return null;
       }
-
+      
       public function get scrollStepFactor() : Number {
          return this._scrollStepFactor;
       }
-
+      
       public function set scrollStepFactor(param1:Number) : void {
          this._scrollStepFactor = param1;
          invalidate(SCROLL_UPDATE_INV);
       }
    }
-
 }

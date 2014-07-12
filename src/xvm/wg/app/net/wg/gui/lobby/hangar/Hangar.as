@@ -19,49 +19,48 @@ package net.wg.gui.lobby.hangar
    import scaleform.clik.events.InputEvent;
    import net.wg.utils.IEventCollector;
    import net.wg.data.constants.Tooltips;
-
-
+   
    public class Hangar extends HangarMeta implements IHangar
    {
-          
+      
       public function Hangar() {
          super();
       }
-
+      
       private static const CAROUSEL_AMMUNITION_PADDING:int = 7;
-
+      
       private static const PARAMS_RIGHT_MARGIN:int = 8;
-
+      
       private static const RESEARCH_PANEL_RIGHT_MARGIN:int = 172;
-
+      
       private static const MESSENGER_BAR_PADDING:int = 45;
-
+      
       private static const INVALIDATE_ENABLED_CREW:String = "InvalidateEnabledCrew";
-
+      
       private static const IGR_LOGO:String = "../maps/icons/library/igrLogo.png";
-
+      
       public var vehResearchPanel:ResearchPanel;
-
+      
       public var tmenXpPanel:TmenXpPanel;
-
+      
       public var crewOperationBtn:IconButton;
-
+      
       public var crew:Crew;
-
+      
       public var params:Params;
-
+      
       public var carousel:TankCarousel;
-
+      
       public var ammunitionPanel:AmmunitionPanel;
-
+      
       public var bottomBg:Sprite;
-
+      
       public var igrLabel:IgrLabel;
-
+      
       private var _isShowHelpLayout:Boolean = false;
-
+      
       private var crewEnabled:Boolean = true;
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          var _loc3_:* = NaN;
          _originalWidth = param1;
@@ -99,22 +98,22 @@ package net.wg.gui.lobby.hangar
             this.as_closeHelpLayout();
          }
       }
-
+      
       public function as_setCrewEnabled(param1:Boolean) : void {
          this.crewEnabled = param1;
          invalidate(INVALIDATE_ENABLED_CREW);
       }
-
+      
       public function as_setCarouselEnabled(param1:Boolean) : void {
          this.carousel.enabled = param1;
       }
-
+      
       public function as_setupAmmunitionPanel(param1:String, param2:String, param3:Boolean, param4:Boolean) : void {
          this.ammunitionPanel.setVehicleStatus(param1,param2);
          this.ammunitionPanel.disableAmmunitionPanel(!param3);
          this.ammunitionPanel.disableTuningButton(!param4);
       }
-
+      
       public function as_setControlsVisible(param1:Boolean) : void {
          this.params.visible = param1;
          this.crew.visible = param1;
@@ -123,7 +122,7 @@ package net.wg.gui.lobby.hangar
          this.bottomBg.visible = param1;
          this.vehResearchPanel.visible = param1;
       }
-
+      
       public function as_showHelpLayout() : void {
          if(!this._isShowHelpLayout)
          {
@@ -150,7 +149,7 @@ package net.wg.gui.lobby.hangar
             }
          }
       }
-
+      
       public function as_closeHelpLayout() : void {
          if(this._isShowHelpLayout)
          {
@@ -163,7 +162,7 @@ package net.wg.gui.lobby.hangar
             this.vehResearchPanel.closeHelpLayout();
          }
       }
-
+      
       public function as_setIsIGR(param1:Boolean, param2:String) : void {
          if(param1)
          {
@@ -177,15 +176,15 @@ package net.wg.gui.lobby.hangar
             this.igrLabel.visible = false;
          }
       }
-
+      
       public function getTargetButton() : DisplayObject {
          return this.crewOperationBtn;
       }
-
+      
       public function getHitArea() : DisplayObject {
          return this.crewOperationBtn;
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          registerComponent(this.crew,Aliases.CREW);
@@ -199,7 +198,7 @@ package net.wg.gui.lobby.hangar
             registerComponent(this.vehResearchPanel,Aliases.RESEARCH_PANEL);
          }
       }
-
+      
       override protected function onDispose() : void {
          App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
          this.igrLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onIgrRollOver);
@@ -224,7 +223,7 @@ package net.wg.gui.lobby.hangar
          this.igrLabel.dispose();
          this.igrLabel = null;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.REGISTER_DRAGGING));
@@ -245,7 +244,7 @@ package net.wg.gui.lobby.hangar
          this.crewOperationBtn.tooltip = CREW_OPERATIONS.CREWOPERATIONS_BTN_TOOLTIP;
          this.crewOperationBtn.addEventListener(ButtonEvent.CLICK,this.retrainBtnClickHandler,false,0,true);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(INVALIDATE_ENABLED_CREW))
@@ -254,27 +253,27 @@ package net.wg.gui.lobby.hangar
             this.crewOperationBtn.enabled = this.crewEnabled;
          }
       }
-
+      
       private function updateIgrPosition() : void {
          if(this.igrLabel)
          {
             this.igrLabel.x = width - this.igrLabel.width >> 1;
          }
       }
-
+      
       private function closeLayoutHandler() : void {
          closeHelpLayoutS();
       }
-
+      
       private function retrainBtnClickHandler(param1:Event) : void {
          var _loc2_:Point = localToGlobal(new Point(this.crewOperationBtn.x + this.crewOperationBtn.width,this.crewOperationBtn.y + this.crewOperationBtn.height / 2));
          App.popoverMgr.show(this,Aliases.CREW_OPERATIONS_POPOVER,_loc2_.x,_loc2_.y);
       }
-
+      
       private function toggleGUIEditorHandler(param1:InputEvent) : void {
          toggleGUIEditorS();
       }
-
+      
       private function handleEscape(param1:InputEvent) : void {
          App.contextMenuMgr.hide();
          if(App.helpLayout.isShowed())
@@ -282,7 +281,7 @@ package net.wg.gui.lobby.hangar
             onEscapeS();
          }
       }
-
+      
       private function onShowCrewDropwDownHandler(param1:CrewDropDownEvent) : void {
          var _loc2_:Point = globalToLocal(new Point(param1.dropDownref.x,param1.dropDownref.y));
          var _loc3_:IEventCollector = App.utils.events;
@@ -292,7 +291,7 @@ package net.wg.gui.lobby.hangar
          param1.dropDownref.x = _loc2_.x;
          param1.dropDownref.y = _loc2_.y;
       }
-
+      
       private function showLayoutHandler(param1:InputEvent) : void {
          if((param1.details.altKey) || (param1.details.ctrlKey) || (param1.details.shiftKey))
          {
@@ -300,14 +299,13 @@ package net.wg.gui.lobby.hangar
          }
          showHelpLayoutS();
       }
-
+      
       private function onIgrRollOver(param1:MouseEvent) : void {
          App.toolTipMgr.showSpecial(Tooltips.IGR_INFO,null);
       }
-
+      
       private function onIgrRollOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
    }
-
 }

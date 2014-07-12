@@ -3,28 +3,27 @@ package net.wg.gui.prebattle.company
    import net.wg.gui.components.controls.ScrollingListEx;
    import flash.text.TextField;
    import flash.events.MouseEvent;
-
-
+   
    public class CompanyDropList extends ScrollingListEx
    {
-          
+      
       public function CompanyDropList() {
          super();
       }
-
+      
       private static const AUTHENTIC_WIDTH:uint = 245;
-
+      
       private static const AUTHENTIC_HEIGHT:uint = 411;
-
+      
       public var topLabel:TextField;
-
+      
       public var bottomLabel:TextField;
-
+      
       override protected function initialize() : void {
          super.initialize();
          setActualSize(AUTHENTIC_WIDTH,AUTHENTIC_HEIGHT);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          buttonMode = true;
@@ -37,7 +36,7 @@ package net.wg.gui.prebattle.company
          this.addEventListener(MouseEvent.MOUSE_OUT,this.mouseOutHandler);
          this.addEventListener(MouseEvent.CLICK,this.clickHandler);
       }
-
+      
       private function mouseOverHandler(param1:MouseEvent) : void {
          if(!enabled)
          {
@@ -48,7 +47,7 @@ package net.wg.gui.prebattle.company
             setState("over");
          }
       }
-
+      
       private function mouseOutHandler(param1:MouseEvent) : void {
          if(!enabled)
          {
@@ -59,7 +58,7 @@ package net.wg.gui.prebattle.company
             setState("out");
          }
       }
-
+      
       private function clickHandler(param1:MouseEvent) : void {
          if(enabled)
          {
@@ -68,5 +67,4 @@ package net.wg.gui.prebattle.company
          setState("down");
       }
    }
-
 }

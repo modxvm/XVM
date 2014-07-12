@@ -6,20 +6,19 @@ package net.wg.gui.lobby.training
    import net.wg.infrastructure.interfaces.IMinimapEntry;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
-
-
+   
    public class MinimapEntity extends MinimapEntityMeta implements IMinimapEntityMeta
    {
-          
+      
       public function MinimapEntity() {
          super();
          constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
       }
-
+      
       public var icons:MovieClip;
-
+      
       public var iconsMask:MovieClip;
-
+      
       public function as_updatePoints() : void {
          var _loc1_:int = this.icons.numChildren;
          var _loc2_:IMinimapEntry = null;
@@ -37,7 +36,7 @@ package net.wg.gui.lobby.training
             _loc3_++;
          }
       }
-
+      
       override protected function onDispose() : void {
          App.utils.commons.releaseReferences(this.icons);
          this.icons = null;
@@ -45,5 +44,4 @@ package net.wg.gui.lobby.training
          super.onDispose();
       }
    }
-
 }

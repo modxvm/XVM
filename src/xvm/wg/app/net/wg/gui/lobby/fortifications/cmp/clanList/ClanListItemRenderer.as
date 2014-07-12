@@ -9,31 +9,30 @@ package net.wg.gui.lobby.fortifications.cmp.clanList
    import net.wg.infrastructure.interfaces.IColorScheme;
    import net.wg.data.constants.ColorSchemeNames;
    import flash.events.MouseEvent;
-
-
+   
    public class ClanListItemRenderer extends TableRenderer
    {
-          
+      
       public function ClanListItemRenderer() {
          super();
          isPassive = false;
       }
-
+      
       public var memeberNameTF:TextField;
-
+      
       public var roleTF:TextField;
-
+      
       public var weekMiningTF:TextField;
-
+      
       public var totalMiningTF:TextField;
-
+      
       private var _isMouseOver:Boolean = false;
-
+      
       override public function setData(param1:Object) : void {
          this.data = param1;
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:ClanListRendererVO = null;
          var _loc2_:IUserProps = null;
@@ -67,13 +66,13 @@ package net.wg.gui.lobby.fortifications.cmp.clanList
             updateDisable();
          }
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          this._isMouseOver = false;
          App.toolTipMgr.hide();
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          this._isMouseOver = true;
@@ -83,5 +82,4 @@ package net.wg.gui.lobby.fortifications.cmp.clanList
          }
       }
    }
-
 }

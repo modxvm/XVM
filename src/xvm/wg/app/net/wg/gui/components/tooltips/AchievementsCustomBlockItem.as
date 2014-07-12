@@ -4,43 +4,42 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.text.TextField;
    import flash.display.MovieClip;
-
-
+   
    public class AchievementsCustomBlockItem extends UIComponent
    {
-          
+      
       public function AchievementsCustomBlockItem() {
          super();
       }
-
+      
       private var _data:Object = null;
-
+      
       public var nationIco:UILoaderAlt;
-
+      
       public var vehicleType:UILoaderAlt;
-
+      
       public var vehicleName:TextField;
-
+      
       public var vehicleIco:UILoaderAlt;
-
+      
       public var levelMc:MovieClip;
-
+      
       private var dataDirty:Boolean = false;
-
+      
       private var _nation:Number = NaN;
-
+      
       private var _name:String = null;
-
+      
       private var _type:String = null;
-
+      
       private var _level:Number = NaN;
-
+      
       private var _ico:String = null;
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:String = null;
          super.draw();
@@ -72,7 +71,7 @@ package net.wg.gui.components.tooltips
             this.dataDirty = false;
          }
       }
-
+      
       public function setData(param1:Object) : void {
          this._data = param1;
          this._nation = this._data.nation;
@@ -83,10 +82,9 @@ package net.wg.gui.components.tooltips
          this.dataDirty = true;
          validateNow();
       }
-
+      
       override public function toString() : String {
          return "[WG AchievementsCustomBlockItem " + name + "]";
       }
    }
-
 }

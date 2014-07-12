@@ -3,23 +3,22 @@ package net.wg.gui.lobby.profile.pages.technique.data
    import net.wg.gui.lobby.profile.data.ProfileCommonInfoVO;
    import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
    import net.wg.gui.lobby.profile.pages.statistics.body.DetailedStatisticsUnitVO;
-
-
+   
    public class ProfileVehicleDossierVO extends ProfileCommonInfoVO
    {
-          
+      
       public function ProfileVehicleDossierVO(param1:Object) {
          super(param1);
       }
-
+      
       public var achievements:Array;
-
+      
       private var _achievementsVOs:Array;
-
+      
       public var detailedData:Object;
-
+      
       private var _detailedDataList:Array;
-
+      
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          var _loc3_:Array = null;
          var _loc4_:uint = 0;
@@ -70,14 +69,13 @@ package net.wg.gui.lobby.profile.pages.technique.data
          }
          return this.hasOwnProperty(param1);
       }
-
+      
       public function get achievementsVOs() : Array {
          return this._achievementsVOs;
       }
-
+      
       public function get detailedDataList() : Array {
          return this._detailedDataList;
       }
    }
-
 }

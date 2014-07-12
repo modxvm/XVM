@@ -14,11 +14,10 @@ package net.wg.gui.lobby.premiumForm
    import scaleform.clik.constants.ConstrainMode;
    import scaleform.clik.constants.InvalidationType;
    import flash.display.InteractiveObject;
-
-
+   
    public class PremiumForm extends PremiumFormMeta implements IPremiumFormMeta
    {
-          
+      
       public function PremiumForm() {
          this.costs = [];
          this.models = [];
@@ -28,59 +27,59 @@ package net.wg.gui.lobby.premiumForm
          canClose = true;
          canDrag = true;
       }
-
+      
       private static const UPDATE_WINDOW:String = "updateWindow";
-
+      
       private static const OFFSET_LEFT:Number = 4;
-
+      
       private static const ADDITIONAL_PADDING:int = 2;
-
+      
       private static const OFFSET_TOP:Number = 124;
-
+      
       private static const PACKET_HEIGHT:Number = 25;
-
+      
       private static const OFFSET_BOTTOM:Number = 7;
-
+      
       private static const PACKET_MARGIN:Number = 27.0;
-
+      
       public var vs:MovieClip;
-
+      
       public var percents:TextField;
-
+      
       public var ofCreditsAndExperience:TextField;
-
+      
       public var perEverButtle:TextField;
-
+      
       public var buyMessage:TextField;
-
+      
       public var scrollingList:ScrollingListEx;
-
+      
       public var applyButton:SoundButtonEx = null;
-
+      
       public var closeButton:SoundButtonEx = null;
-
+      
       private var costs:Array;
-
+      
       private var _userGold:Number;
-
+      
       private var models:Array;
-
+      
       private var dataProvider:DataProvider;
-
+      
       private var selectedItem:PremiumFormModel;
-
+      
       private var isPremiumCalled:Boolean = false;
-
+      
       private var isGoldCalled:Boolean = false;
-
+      
       private var updateDataProvider:Boolean = false;
-
+      
       private var updateWindow:Boolean = false;
-
+      
       private var listHeight:int = 0;
-
+      
       private var isFirstRun:Boolean = false;
-
+      
       override protected function onDispose() : void {
          var _loc1_:IDisposable = null;
          this.applyButton.removeEventListener(ButtonEvent.PRESS,this.applyButtonClickHandler);
@@ -96,7 +95,7 @@ package net.wg.gui.lobby.premiumForm
          }
          if(this.models)
          {
-            for each (_loc1_ in this.models)
+            for each(_loc1_ in this.models)
             {
                _loc1_.dispose();
             }
@@ -119,12 +118,12 @@ package net.wg.gui.lobby.premiumForm
          this.vs = null;
          super.onDispose();
       }
-
+      
       override protected function onPopulate() : void {
          this.updateWindowProperties();
          super.onPopulate();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(UPDATE_WINDOW))
@@ -132,10 +131,10 @@ package net.wg.gui.lobby.premiumForm
             this.updateWindowSize();
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
-         this.scrollingList.width = this.vs.width - OFFSET_LEFT - ADDITIONAL_PADDING-1;
+         this.scrollingList.width = this.vs.width - OFFSET_LEFT - ADDITIONAL_PADDING - 1;
          this.scrollingList.x = OFFSET_LEFT + ADDITIONAL_PADDING * 0.5 + 1;
          this.scrollingList.y = OFFSET_TOP;
          this.applyButton.addEventListener(ButtonEvent.PRESS,this.applyButtonClickHandler);
@@ -147,22 +146,22 @@ package net.wg.gui.lobby.premiumForm
          this.perEverButtle.text = MENU.PREMIUM_PEREVERBUTTLE;
          onPremiumDataRequestS();
       }
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
       }
-
+      
       public function as_setGold(param1:Number) : void {
          this._userGold = param1;
          this.isGoldCalled = true;
          this.onChange();
       }
-
+      
       public function as_setCosts(param1:Array) : void {
          this.costs = param1;
          this.onChange();
       }
-
+      
       public function as_setPremium(param1:Boolean) : void {
          this.isPremiumCalled = true;
          this.buyMessage.text = param1?MENU.PREMIUM_CONTINUEMESSAGE:MENU.PREMIUM_BUYMESSAGE;
@@ -170,14 +169,14 @@ package net.wg.gui.lobby.premiumForm
          window.title = param1?MENU.PREMIUM_CONTINUETITLE:MENU.PREMIUM_BUYTITLE;
          this.onChange();
       }
-
+      
       private function updateWindowProperties() : void {
          window.getConstraints().scaleMode = ConstrainMode.COUNTER_SCALE;
          window.useBottomBtns = true;
          window.title = "";
          this.updateStage(App.appWidth,App.appHeight);
       }
-
+      
       private function onChange() : void {
          if(!this.isAccessData())
          {
@@ -187,7 +186,7 @@ package net.wg.gui.lobby.premiumForm
          this.updateDataProvider = true;
          this.createDataProvider();
       }
-
+      
       private function createDataProvider() : void {
          var isDiscountPackage:Boolean = false;
          var innerCheckDiscount:Function = null;
@@ -234,7 +233,7 @@ package net.wg.gui.lobby.premiumForm
          this.updateWindowSize();
          invalidate(UPDATE_WINDOW);
       }
-
+      
       private function updateScrollingSize() : void {
          this.scrollingList.height = this.listHeight - ADDITIONAL_PADDING * 0.5;
          this.vs.height = Math.round(this.scrollingList.height + this.scrollingList.y + this.applyButton.height + OFFSET_BOTTOM * 0.5 + ADDITIONAL_PADDING);
@@ -242,12 +241,12 @@ package net.wg.gui.lobby.premiumForm
          this.scrollingList.dataProvider = this.dataProvider;
          this.scrollingList.invalidate(InvalidationType.DATA);
       }
-
+      
       private function updateWindowSize() : void {
          window.updateSize(this.vs.width,this.vs.height,true);
          window.validateNow();
       }
-
+      
       private function autoSelectItemsByDiscountPrice(param1:Array) : void {
          var _loc2_:PremiumFormModel = null;
          var _loc4_:PremiumFormModel = null;
@@ -285,33 +284,33 @@ package net.wg.gui.lobby.premiumForm
             this.changeButtonsFocus(false);
          }
       }
-
-      private function changeButtonsFocus(param1:Boolean=false) : void {
+      
+      private function changeButtonsFocus(param1:Boolean = false) : void {
          this.applyButton.enabled = param1;
          setFocus(param1?this.applyButton:this.closeButton);
       }
-
+      
       private function clearPreviousCostControls() : void {
          this.listHeight = 0;
          this.costs = [];
          this.dataProvider = new DataProvider();
       }
-
+      
       private function isAccessData() : Boolean {
          return (this.isPremiumCalled) && this.costs.length > 0 && (this.isGoldCalled);
       }
-
+      
       private function applyButtonClickHandler(param1:ButtonEvent) : void {
          if(this.selectedItem)
          {
             onPremiumBuyS(this.selectedItem.days,this.selectedItem.discountPrice);
          }
       }
-
+      
       private function cancelButtonClickHandler(param1:ButtonEvent) : void {
          onWindowCloseS();
       }
-
+      
       private function onScrollingListItemClickHandler(param1:ListEvent) : void {
          if(param1.itemData == null)
          {
@@ -321,5 +320,4 @@ package net.wg.gui.lobby.premiumForm
          this.selectedItem = param1.itemData as PremiumFormModel;
       }
    }
-
 }

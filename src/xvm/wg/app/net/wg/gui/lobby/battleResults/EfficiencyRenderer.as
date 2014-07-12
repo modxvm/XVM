@@ -13,15 +13,14 @@ package net.wg.gui.lobby.battleResults
    import flash.text.TextFormat;
    import net.wg.data.VO.UserVO;
    import flash.geom.Point;
-
-
+   
    public class EfficiencyRenderer extends UIComponent implements IListItemRenderer
    {
-          
+      
       public function EfficiencyRenderer() {
          super();
       }
-
+      
       private static function getDimmFilter() : ColorMatrixFilter {
          var _loc1_:ColorMatrixFilter = new ColorMatrixFilter();
          var _loc2_:Array = [0.4,0,0,0,0];
@@ -36,48 +35,48 @@ package net.wg.gui.lobby.battleResults
          _loc1_.matrix = _loc6_;
          return _loc1_;
       }
-
+      
       private var _dataDirty:Boolean = false;
-
+      
       private var icons:Array;
-
+      
       public var fakeBg:MovieClip;
-
+      
       protected var data:Object;
-
+      
       protected var _owner:UIComponent = null;
-
+      
       public var playerName:UserNameField;
-
+      
       public var vehicleIcon:UILoaderAlt;
-
+      
       public var vehicleName:TextField;
-
+      
       public var killIcon:EfficiencyIconRenderer;
-
+      
       public var damageIcon:EfficiencyIconRenderer;
-
+      
       public var critsIcon:EfficiencyIconRenderer;
-
+      
       public var evilIcon:EfficiencyIconRenderer;
-
+      
       public var spottedIcon:EfficiencyIconRenderer;
-
+      
       public var deadBg:MovieClip;
-
+      
       private var _isMouseOver:Boolean = false;
-
+      
       protected var _index:uint = 0;
-
+      
       protected var _selectable:Boolean = false;
-
+      
       protected var _selected:Boolean = false;
-
+      
       public function setListData(param1:ListData) : void {
          this.index = param1.index;
          this.selected = param1.selected;
       }
-
+      
       public function setData(param1:Object) : void {
          this.data = param1;
          if(param1)
@@ -90,11 +89,11 @@ package net.wg.gui.lobby.battleResults
          this._dataDirty = true;
          invalidate();
       }
-
+      
       public function getData() : Object {
          return this.data;
       }
-
+      
       override protected function configUI() : void {
          var _loc2_:EfficiencyIconRenderer = null;
          super.configUI();
@@ -115,7 +114,7 @@ package net.wg.gui.lobby.battleResults
             _loc1_++;
          }
       }
-
+      
       private function handleIconRoll(param1:MouseEvent) : void {
          if(param1.type == MouseEvent.ROLL_OVER)
          {
@@ -130,7 +129,7 @@ package net.wg.gui.lobby.battleResults
             this._isMouseOver = false;
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:TextFormat = null;
          super.draw();
@@ -155,8 +154,7 @@ package net.wg.gui.lobby.battleResults
                      "userName":this.data.playerName,
                      "clanAbbrev":this.data.playerClan,
                      "region":this.data.playerRegion
-                  }
-               );
+                  });
                _loc1_ = this.playerName.textField.getTextFormat();
                if(this.data.isFake)
                {
@@ -220,7 +218,7 @@ package net.wg.gui.lobby.battleResults
             this._dataDirty = false;
          }
       }
-
+      
       private function checkMouseOverOnScroll() : void {
          var _loc3_:EfficiencyIconRenderer = null;
          var _loc1_:Point = new Point(mouseX,mouseY);
@@ -239,35 +237,35 @@ package net.wg.gui.lobby.battleResults
             _loc2_++;
          }
       }
-
+      
       public function get index() : uint {
          return this._index;
       }
-
+      
       public function set index(param1:uint) : void {
          this._index = param1;
       }
-
+      
       public function get owner() : UIComponent {
          return this._owner;
       }
-
+      
       public function set owner(param1:UIComponent) : void {
          this._owner = param1;
       }
-
+      
       public function get selectable() : Boolean {
          return this._selectable;
       }
-
+      
       public function set selectable(param1:Boolean) : void {
          this._selectable = param1;
       }
-
+      
       public function get selected() : Boolean {
          return this._selected;
       }
-
+      
       public function set selected(param1:Boolean) : void {
          if(this._selected == param1)
          {
@@ -276,5 +274,4 @@ package net.wg.gui.lobby.battleResults
          this._selected = param1;
       }
    }
-
 }

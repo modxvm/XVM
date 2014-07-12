@@ -2,25 +2,23 @@ package net.wg.gui.lobby.messengerBar.carousel
 {
    import net.wg.gui.components.advanced.BlinkingButton;
    import net.wg.infrastructure.interfaces.IDynamicContent;
-   import __AS3__.vec.Vector;
    import flash.events.MouseEvent;
-
-
+   
    public class ChannelButton extends BlinkingButton implements IDynamicContent
    {
-          
+      
       public function ChannelButton() {
          super();
          constraintsDisabled = true;
          _iconOffsetLeft = 1;
          _iconOffsetTop = 1;
       }
-
+      
       override public function set label(param1:String) : void {
          super.label = param1;
          tooltip = "";
       }
-
+      
       override public function set iconSource(param1:String) : void {
          if(iconSource != param1)
          {
@@ -28,15 +26,15 @@ package net.wg.gui.lobby.messengerBar.carousel
             setState(state);
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          var _loc1_:String = iconSource?"icon_":"";
          if(blinking)
@@ -45,11 +43,11 @@ package net.wg.gui.lobby.messengerBar.carousel
          }
          return Vector.<String>(_selected?["selected_",_loc1_]:[_loc1_]);
       }
-
+      
       override protected function updateAfterStateChange() : void {
          super.updateAfterStateChange();
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          if(tooltip)
@@ -57,12 +55,12 @@ package net.wg.gui.lobby.messengerBar.carousel
             App.toolTipMgr.show(tooltip);
          }
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          App.toolTipMgr.hide();
       }
-
+      
       override protected function updateText() : void {
          if(!(_label == null) && !(textField == null))
          {
@@ -70,7 +68,7 @@ package net.wg.gui.lobby.messengerBar.carousel
             this.truncateText();
          }
       }
-
+      
       private function truncateText() : void {
          var _loc1_:String = null;
          var _loc2_:String = null;
@@ -97,5 +95,4 @@ package net.wg.gui.lobby.messengerBar.carousel
          }
       }
    }
-
 }

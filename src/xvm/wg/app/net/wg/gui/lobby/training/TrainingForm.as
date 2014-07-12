@@ -17,57 +17,56 @@ package net.wg.gui.lobby.training
    import flash.display.InteractiveObject;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.InputEvent;
-
-
+   
    public class TrainingForm extends TrainingFormMeta implements ITrainingFormMeta
    {
-          
+      
       public function TrainingForm() {
          this.provider = [];
          super();
       }
-
+      
       private static const SUB_VIEW_MARGIN:Number = 120;
-
+      
       public var list:WgScrollingList;
-
+      
       public var sb:IScrollBar;
-
+      
       public var battleIcon:BattleTypeIcon;
-
+      
       public var battleIconBig:BattleTypeIcon;
-
+      
       public var createButon:SoundButtonEx;
-
+      
       public var titleField:TextField;
-
+      
       public var descriptionLabel:TextField;
-
+      
       public var listTitle:TextField;
-
+      
       public var ownerTitle:TextField;
-
+      
       public var playersTitle:TextField;
-
+      
       public var roomsLabel:TextField;
-
+      
       public var playersLabel:TextField;
-
+      
       private var provider:Array;
-
+      
       private var totalPlayers:Number = 0;
-
+      
       private var _myWidth:Number = 0;
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          this.setViewSize(param1,param2);
       }
-
+      
       override public final function setViewSize(param1:Number, param2:Number) : void {
          this._myWidth = param1;
          invalidateSize();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.updateStage(App.appWidth,App.appHeight);
@@ -80,7 +79,7 @@ package net.wg.gui.lobby.training
          addEventListener(TrainingEvent.OPEN_TRAINING_ROOM,this.onOpenRoom);
          App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.SIZE))
@@ -98,7 +97,7 @@ package net.wg.gui.lobby.training
             this.playersLabel.htmlText = this.playersLabel.htmlText + (" <font color=\"#FFFFFF\">" + this.totalPlayers + "</font>");
          }
       }
-
+      
       override protected function onDispose() : void {
          App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
          this.createButon.removeEventListener(ButtonEvent.CLICK,this.showCreateTraining);
@@ -127,30 +126,29 @@ package net.wg.gui.lobby.training
          }
          super.onDispose();
       }
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          setFocus(this.createButon);
       }
-
+      
       public function as_setList(param1:Array, param2:Number) : void {
          this.provider = param1;
          this.totalPlayers = param2;
          this.list.dataProvider = new DataProvider(param1);
          invalidate(InvalidationType.DATA);
       }
-
+      
       private function onOpenRoom(param1:TrainingEvent) : void {
          joinTrainingRequestS(param1.initObj.id);
       }
-
+      
       private function showCreateTraining(param1:ButtonEvent) : void {
          createTrainingRequestS();
       }
-
+      
       private function handleEscape(param1:InputEvent) : void {
          onEscapeS();
       }
    }
-
 }

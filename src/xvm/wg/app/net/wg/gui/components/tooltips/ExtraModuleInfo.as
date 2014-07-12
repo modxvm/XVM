@@ -6,12 +6,11 @@ package net.wg.gui.components.tooltips
    import flash.text.TextFormat;
    import flash.text.StyleSheet;
    import flash.text.TextFieldAutoSize;
-
-
+   
    public class ExtraModuleInfo extends SimpleLoader
    {
-          
-      public function ExtraModuleInfo(param1:TextFormat, param2:StyleSheet=null) {
+      
+      public function ExtraModuleInfo(param1:TextFormat, param2:StyleSheet = null) {
          super();
          this._textField = new TextField();
          this._textField.autoSize = TextFieldAutoSize.LEFT;
@@ -22,15 +21,15 @@ package net.wg.gui.components.tooltips
          }
          addChild(this._textField);
       }
-
+      
       private var _textField:TextField;
-
+      
       public function setData(param1:String, param2:String) : void {
          disposeLoader();
          this._textField.htmlText = param2;
          this.startLoading(param1);
       }
-
+      
       override protected function startLoading(param1:String) : void {
          super.startLoading(param1);
          if(loader)
@@ -38,12 +37,12 @@ package net.wg.gui.components.tooltips
             loader.parent.setChildIndex(loader,0);
          }
       }
-
+      
       override protected function onLoadingComplete() : void {
          super.onLoadingComplete();
          this.layoutComponents();
       }
-
+      
       private function layoutComponents() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -61,5 +60,4 @@ package net.wg.gui.components.tooltips
          }
       }
    }
-
 }

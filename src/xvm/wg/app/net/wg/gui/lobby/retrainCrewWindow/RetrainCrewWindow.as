@@ -19,11 +19,10 @@ package net.wg.gui.lobby.retrainCrewWindow
    import net.wg.data.constants.IconsTypes;
    import net.wg.infrastructure.interfaces.IWindow;
    import scaleform.clik.utils.Padding;
-
-
+   
    public class RetrainCrewWindow extends RetrainCrewWindowMeta implements IRetrainCrewWindowMeta
    {
-          
+      
       public function RetrainCrewWindow() {
          super();
          isModal = true;
@@ -31,53 +30,53 @@ package net.wg.gui.lobby.retrainCrewWindow
          canDrag = false;
          canClose = true;
       }
-
+      
       private static const VEHICLE_BLOCK_INVALID:String = "vehBlockInv";
-
+      
       private static const CREW_BLOCK_INVALID:String = "crewBlockInv";
-
+      
       private static const PRICE_INVALID:String = "priceInv";
-
+      
       private static const SIDE_PADDING:uint = 12;
-
+      
       private static const RESULT_ICON_PADDING:uint = 19;
-
+      
       private static const NOT_ENOUGH_MONEY_COLOR:uint = 16711680;
-
+      
       public var btnsGroup:RetrainCrewMainButtons;
-
+      
       public var separator:DashLine;
-
+      
       public var txtCrewMembers:TextField;
-
+      
       public var txtPercent:TextField;
-
+      
       public var txtTechnics:TextField;
-
+      
       public var summIconText:IconText;
-
+      
       public var resultIcon:IconText;
-
+      
       public var submitBtn:Button;
-
+      
       public var cancelBtn:Button;
-
+      
       public var shadowSeparator:MovieClip;
-
+      
       public var result:ColoredDeshLineTextItem;
-
+      
       public var vehicleBlock:VehicleBlock;
-
+      
       private var initVehicleVO:RetrainCrewVehicleVO;
-
+      
       private var initCrewVO:RetrainCrewBlockVO;
-
+      
       private var initCrewOperationVO:RetrainCrewOperationVO;
-
+      
       private var enough_money_color:uint = 16777215;
-
+      
       public var rolesGroup:GroupEx;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.enough_money_color = this.result.valueTextField.textColor;
@@ -98,7 +97,7 @@ package net.wg.gui.lobby.retrainCrewWindow
          this.result.width = _loc2_ - RESULT_ICON_PADDING;
          this.btnsGroup.addEventListener(IndexEvent.INDEX_CHANGE,this.btnsGroupChangeHandler,false,0,true);
       }
-
+      
       override protected function draw() : void {
          var _loc2_:QuestsDashlineItem = null;
          var _loc3_:SelPriceInfo = null;
@@ -147,7 +146,7 @@ package net.wg.gui.lobby.retrainCrewWindow
             this.result.value = _loc1_.integer(_loc6_);
          }
       }
-
+      
       private function btnsGroupChangeHandler(param1:IndexEvent) : void {
          var _loc2_:Object = null;
          if(param1.index != -1)
@@ -164,19 +163,19 @@ package net.wg.gui.lobby.retrainCrewWindow
             this.submitBtn.enabled = false;
          }
       }
-
+      
       private function groupResizeHandler(param1:Event) : void {
          this.rolesGroup.x = _width - this.rolesGroup.width - SIDE_PADDING;
       }
-
+      
       private function submitClickHandler(param1:ButtonEvent) : void {
          submitS({"operationId":this.btnsGroup.selectedId});
       }
-
+      
       private function cancelClickHandler(param1:ButtonEvent) : void {
          onWindowCloseS();
       }
-
+      
       override public function setWindow(param1:IWindow) : void {
          super.setWindow(param1);
          window.title = App.utils.locale.makeString(RETRAIN_CREW.WINDOW_TITLE);
@@ -188,7 +187,7 @@ package net.wg.gui.lobby.retrainCrewWindow
          _loc4_.bottom = _loc4_.bottom + (_loc3_ + 4);
          param1.formBgPadding = _loc4_;
       }
-
+      
       override protected function onDispose() : void {
          if(this.initVehicleVO)
          {
@@ -216,7 +215,7 @@ package net.wg.gui.lobby.retrainCrewWindow
          }
          super.onDispose();
       }
-
+      
       public function as_setCommonData(param1:Object) : void {
          this.initVehicleVO = new RetrainCrewVehicleVO(param1);
          this.vehicleBlock.setData(this.initVehicleVO.vehicleBlockVO);
@@ -228,11 +227,10 @@ package net.wg.gui.lobby.retrainCrewWindow
          this.txtCrewMembers.htmlText = App.utils.locale.makeString(RETRAIN_CREW.LABEL_CREWMEMBERS) + " <font color=\'#E9E2BF\' size=\'15\'>" + this.initCrewVO.crewInfoVO.length.toString() + "</font>";
          invalidate(VEHICLE_BLOCK_INVALID);
       }
-
+      
       public function as_updateData(param1:Object) : void {
          this.initCrewOperationVO = new RetrainCrewOperationVO(param1);
          this.btnsGroup.operationData = this.initCrewOperationVO;
       }
    }
-
 }

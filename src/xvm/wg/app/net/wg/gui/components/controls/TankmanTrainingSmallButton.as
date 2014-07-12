@@ -6,22 +6,20 @@ package net.wg.gui.components.controls
    import net.wg.utils.ILocale;
    import flash.events.Event;
    import net.wg.data.constants.SoundTypes;
-
-
+   
    public class TankmanTrainingSmallButton extends SoundButton
    {
-          
+      
       public function TankmanTrainingSmallButton() {
-         this._priceColors =
+         this._priceColors = 
             {
                "normal":16314069,
                "disabled":16711680,
                "buy":5330004
-            }
-         ;
+            };
          super();
          useFocusedAsSelect = true;
-         _stateMap =
+         _stateMap = 
             {
                "up":["up"],
                "over":["over"],
@@ -35,64 +33,63 @@ package net.wg.gui.components.controls
                "kb_release":["kb_release","out","up"],
                "kb_down":["kb_down","down"],
                "buy":["buy"]
-            }
-         ;
+            };
          soundType = SoundTypes.RNDR_NORMAL;
          soundId = "";
       }
-
+      
       private static const UPDATE_DATA:String = "setDataUpdate";
-
+      
       public var bg:MovieClip;
-
+      
       public var typeSwitcher:MovieClip;
-
+      
       public var actionPrice:ActionPrice;
-
+      
       public var priceLabel:IconText;
-
+      
       public var levelLabel:TextField;
-
+      
       public var labelField:TextField;
-
+      
       public var trainingLabel:TextField;
-
+      
       public var _level:Number = 0;
-
+      
       public var _buy:Boolean = false;
-
+      
       public var _nation:Number = 0;
-
+      
       public var _type:String = "free";
-
+      
       public var _retraining:Boolean = true;
-
+      
       public var _scopeType:String = "";
-
+      
       protected var model:Object;
-
+      
       private var currentMoney:int;
-
+      
       protected var hasMoney:Boolean = false;
-
+      
       private var credits:Number;
-
+      
       private var gold:Number;
-
+      
       private var isPremium:Boolean = false;
-
+      
       private var isNativeVehicle:Boolean = false;
-
+      
       protected var _specializationLevel:int = 0;
-
+      
       private var levelText:Number = 0;
-
+      
       private var isUpdated:Boolean = true;
-
+      
       public var inspectableGroupName:String;
-
+      
       private var _priceColors:Object;
-
+      
       public function setDataForDropSkills(param1:Number, param2:Boolean, param3:ActionPriceVO) : void {
          if(!isNaN(param1))
          {
@@ -110,43 +107,43 @@ package net.wg.gui.components.controls
          this.actionPrice.setup(this);
          this.priceLabel.visible = !this.actionPrice.visible;
       }
-
+      
       public function get scopeType() : String {
          return this._scopeType;
       }
-
+      
       public function set scopeType(param1:String) : void {
          this._scopeType = param1;
          this.draw();
       }
-
+      
       public function get retraining() : Boolean {
          return this._retraining;
       }
-
+      
       public function set retraining(param1:Boolean) : void {
          this._retraining = param1;
          this.typeSwitcher.gotoAndPlay(this._retraining?"retraining_" + this._type:this._type);
          this.trainingLabel.text = this._retraining?MENU.TANKMANTRAININGBUTTON2_RETRAININGTO:MENU.TANKMANTRAININGBUTTON2_TRAININGTO;
       }
-
+      
       public function get nation() : Number {
          return this._nation;
       }
-
+      
       public function set nation(param1:Number) : void {
          this.bg.gotoAndPlay(App.utils.nations.getNationName(param1));
       }
-
+      
       public function get level() : Number {
          return this._level;
       }
-
+      
       public function set level(param1:Number) : void {
          this._level = param1;
          this.levelLabel.text = param1.toString() + "%";
       }
-
+      
       public function set type(param1:String) : void {
          this._type = param1;
          this.labelField.text = MENU.tankmantrainingwindow(this._type);
@@ -165,36 +162,36 @@ package net.wg.gui.components.controls
             this.priceLabel.icon = this._type == "academy"?"gold":"credits";
             this.priceLabel.x = 268;
          }
-         if(this.priceLabel  is  ActionPrice)
+         if(this.priceLabel is ActionPrice)
          {
             this.priceLabel.invalidate();
             this.priceLabel.validateNow();
          }
-         if(this.priceLabel  is  IconText)
+         if(this.priceLabel is IconText)
          {
             this.priceLabel.invalidate();
             this.priceLabel.validateNow();
          }
       }
-
+      
       public function get type() : String {
          return this._type;
       }
-
+      
       public function get price() : String {
          return this.priceLabel.text;
       }
-
+      
       public function set price(param1:String) : void {
          this.setTextColorToPriceLabel();
          var _loc2_:ILocale = App.utils.locale;
          this.priceLabel.text = this._type == "academy"?_loc2_.gold(param1):_loc2_.integer(param1);
       }
-
+      
       public function get buy() : Boolean {
          return this._buy;
       }
-
+      
       public function set buy(param1:Boolean) : void {
          this._buy = param1;
          if(this.isNativeVehicle)
@@ -204,16 +201,14 @@ package net.wg.gui.components.controls
                setState("buy");
             }
          }
-         else
+         else if(currentLabel == "buy")
          {
-            if(currentLabel == "buy")
-            {
-               setState(this.hasMoney?"up":"disabled");
-            }
+            setState(this.hasMoney?"up":"disabled");
          }
+         
       }
-
-      public function setData(param1:Object, param2:Number, param3:Number, param4:Number, param5:Boolean, param6:Boolean, param7:int, param8:Object=null) : void {
+      
+      public function setData(param1:Object, param2:Number, param3:Number, param4:Number, param5:Boolean, param6:Boolean, param7:int, param8:Object = null) : void {
          if(param1 == null)
          {
             return;
@@ -248,12 +243,12 @@ package net.wg.gui.components.controls
          this.type = this._type;
          invalidate(UPDATE_DATA);
       }
-
+      
       private function getIcoOfButtonType() : String {
          var _loc1_:String = this._type == "free"?"":this._type == "academy"?"gold":"credits";
          return _loc1_;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.typeSwitcher.gotoAndPlay(this._retraining?"retraining_" + this._type:this._type);
@@ -269,7 +264,7 @@ package net.wg.gui.components.controls
             this.actionPrice.setup(this);
          }
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(UPDATE_DATA)) && !this.isUpdated)
@@ -287,13 +282,13 @@ package net.wg.gui.components.controls
                this.labelField.text = MENU.tankmantrainingwindow(this._type);
          }
       }
-
+      
       private function refreshData() : void {
          this.isUpdated = true;
          this.level = this.levelText;
          this.retraining = !this.isNativeVehicle;
       }
-
+      
       private function getLabelType(param1:String) : String {
          var _loc2_:* = "";
          switch(param1)
@@ -310,7 +305,7 @@ package net.wg.gui.components.controls
          }
          return _loc2_;
       }
-
+      
       private function setTextColorToPriceLabel() : void {
          var _loc1_:String = null;
          var _loc2_:String = null;
@@ -332,22 +327,20 @@ package net.wg.gui.components.controls
                this.actionPrice.textColorType = this.hasMoney?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
             }
          }
+         else if(!this.hasMoney)
+         {
+            this.priceLabel.textColor = this._priceColors["disabled"];
+            this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
+         }
          else
          {
-            if(!this.hasMoney)
-            {
-               this.priceLabel.textColor = this._priceColors["disabled"];
-               this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
-            }
-            else
-            {
-               _loc2_ = enabled?"normal":"buy";
-               this.priceLabel.textColor = this._priceColors[_loc2_];
-               this.actionPrice.textColorType = enabled?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_DISABLE;
-            }
+            _loc2_ = enabled?"normal":"buy";
+            this.priceLabel.textColor = this._priceColors[_loc2_];
+            this.actionPrice.textColorType = enabled?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_DISABLE;
          }
+         
       }
-
+      
       protected function setEnabled() : void {
          if(this.isNativeVehicle)
          {
@@ -358,7 +351,7 @@ package net.wg.gui.components.controls
             this.enabled = this.hasMoney;
          }
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          if(this.actionPrice)
@@ -366,7 +359,7 @@ package net.wg.gui.components.controls
             this.actionPrice.setup(this);
          }
       }
-
+      
       protected function setBUY() : void {
          if(this.isNativeVehicle)
          {
@@ -377,7 +370,7 @@ package net.wg.gui.components.controls
             this.buy = false;
          }
       }
-
+      
       protected function calculateCurrentLevel(param1:Boolean, param2:Number, param3:Number, param4:Number, param5:Number) : Number {
          var _loc6_:* = NaN;
          var _loc7_:* = NaN;
@@ -393,7 +386,7 @@ package net.wg.gui.components.controls
          _loc6_ = _loc6_ < param5?param5:_loc6_;
          return _loc6_;
       }
-
+      
       override public function set selected(param1:Boolean) : void {
          var _loc2_:* = false;
          var _loc3_:* = false;
@@ -408,17 +401,15 @@ package net.wg.gui.components.controls
             {
                setState("toggle");
             }
+            else if((_pressedByKeyboard) && !(_focusIndicator == null))
+            {
+               setState("kb_selecting");
+            }
             else
             {
-               if((_pressedByKeyboard) && !(_focusIndicator == null))
-               {
-                  setState("kb_selecting");
-               }
-               else
-               {
-                  setState("over");
-               }
+               setState("over");
             }
+            
             if(owner)
             {
                _loc2_ = (_selected) && !(owner == null) && (checkOwnerFocused());
@@ -441,7 +432,7 @@ package net.wg.gui.components.controls
          validateNow();
          dispatchEvent(new Event(Event.SELECT));
       }
-
+      
       private function disposeComponent() : void {
          this.bg = null;
          this.priceLabel.dispose();
@@ -453,11 +444,10 @@ package net.wg.gui.components.controls
          this.trainingLabel = null;
          this.model = null;
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.disposeComponent();
       }
    }
-
 }

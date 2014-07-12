@@ -15,11 +15,10 @@ package net.wg.gui.cyberSport.views.autoSearch
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
-
-
+   
    public class StateViewBase extends Sprite implements ICSAutoSearchMainView
    {
-          
+      
       public function StateViewBase() {
          super();
          if((this.sec) && (this.min) && (this.timerSeparator))
@@ -42,27 +41,27 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
          addEventListener(InputEvent.INPUT,this.handleInput);
       }
-
+      
       public static const UPDATE_TIMER:String = "csUpdateTimer";
-
+      
       public var sec:TextField;
-
+      
       public var min:TextField;
-
+      
       public var timerSeparator:TextField;
-
+      
       public var mainField:TextField;
-
+      
       public var submitButton:SoundButtonEx;
-
+      
       public var cancelButton:SoundButtonEx;
-
+      
       protected var model:AutoSearchVO;
-
+      
       protected var currentState:String;
-
+      
       protected var _time:int = 0;
-
+      
       public function getComponentForFocus() : InteractiveObject {
          if(this.visible)
          {
@@ -77,23 +76,23 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
          return null;
       }
-
+      
       public function enableButton(param1:Boolean) : void {
          if((visible) && (this.cancelButton) && (this.cancelButton.visible))
          {
             this.cancelButton.enabled = param1;
          }
       }
-
+      
       public function stopTimer() : void {
          App.utils.scheduler.cancelTask(this.onTimer);
          this._time = 0;
       }
-
+      
       public final function dispose() : void {
          this.onDispose();
       }
-
+      
       protected function onDispose() : void {
          App.utils.scheduler.cancelTask(this.onTimer);
          if(this.model)
@@ -113,7 +112,7 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
          removeEventListener(InputEvent.INPUT,this.handleInput);
       }
-
+      
       public function set changeState(param1:AutoSearchVO) : void {
          if(param1 == null)
          {
@@ -122,28 +121,28 @@ package net.wg.gui.cyberSport.views.autoSearch
          this.model = param1;
          this.visibleState();
       }
-
+      
       protected function updateView() : void {
          this.stopTimer();
          this._time = this.model.countDownSeconds;
       }
-
+      
       protected function contextMessage(param1:String) : void {
          if(param1 == null || param1 == "")
          {
             DebugUtils.LOG_ERROR(name," contextMessage = NULL");
          }
       }
-
+      
       protected function startTimer() : void {
          App.utils.scheduler.scheduleTask(this.onTimer,1000);
       }
-
+      
       protected function onTimer() : void {
          this._time++;
          App.soundMgr.playControlsSnd(SoundManagerStates.SND_PRESS,SoundTypes.TIMER_TICK,null);
       }
-
+      
       protected function formatTime(param1:int) : Object {
          var _loc2_:uint = Math.floor(param1);
          var _loc3_:uint = Math.floor(_loc2_ / 3600);
@@ -151,14 +150,14 @@ package net.wg.gui.cyberSport.views.autoSearch
          var _loc5_:uint = _loc2_ - _loc3_ * 3600 - _loc4_ * 60;
          var _loc6_:String = (_loc4_ < 10?"0":"") + _loc4_;
          var _loc7_:String = (_loc5_ < 10?"0":"") + _loc5_;
-         return {
-            "hours":String(_loc3_),
-            "minutes":_loc6_,
-            "seconds":_loc7_
-         }
-         ;
+         return 
+            {
+               "hours":String(_loc3_),
+               "minutes":_loc6_,
+               "seconds":_loc7_
+            };
       }
-
+      
       protected function updateTime() : void {
          var _loc1_:Object = null;
          if((this.min) && (this.sec))
@@ -169,7 +168,7 @@ package net.wg.gui.cyberSport.views.autoSearch
             dispatchEvent(new Event(UPDATE_TIMER,true));
          }
       }
-
+      
       private function visibleState() : void {
          visible = this.model.state == this.currentState;
          if(visible)
@@ -178,15 +177,15 @@ package net.wg.gui.cyberSport.views.autoSearch
             this.updateView();
          }
       }
-
+      
       protected function submitButtonOnClick(param1:ButtonEvent) : void {
          dispatchEvent(new CSComponentEvent(CSComponentEvent.AUTO_SEARCH_APPLY_BTN,this.currentState));
       }
-
-      protected function cancelButtonOnClick(param1:ButtonEvent=null) : void {
+      
+      protected function cancelButtonOnClick(param1:ButtonEvent = null) : void {
          dispatchEvent(new CSComponentEvent(CSComponentEvent.AUTO_SEARCH_CANCEL_BTN,this.currentState));
       }
-
+      
       public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -200,5 +199,4 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
       }
    }
-
 }

@@ -7,45 +7,44 @@ package net.wg.gui.lobby.header
    import net.wg.gui.components.controls.UserNameField;
    import net.wg.gui.components.advanced.ClanEmblem;
    import net.wg.data.VO.UserVO;
-
-
+   
    public class TankPanel extends UIComponent
    {
-          
+      
       public function TankPanel() {
          super();
       }
-
+      
       private static const INVALIDATE_CLAN_EMBLEM:String = "ClanEmblem";
-
+      
       private static const INVALIDATE_TANK_ELITE:String = "TankElite";
-
+      
       private static const TEAM_KILLER_COLOR:int = 60159;
-
+      
       private static function showTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(TOOLTIPS.HEADER_ELITEICON);
       }
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       public var elite:MovieClip;
-
+      
       public var tank_name:TextField;
-
+      
       public var tank_type:TextField;
-
+      
       public var account_name:UserNameField;
-
+      
       public var clan_name:TextField;
-
+      
       public var clanEmblem:ClanEmblem;
-
+      
       private var _eliteVisible:Boolean = false;
-
+      
       private var _clanEmblemVisible:Boolean = false;
-
+      
       override protected function configUI() : void {
          this.elite.visible = false;
          this.tank_name.mouseEnabled = false;
@@ -56,7 +55,7 @@ package net.wg.gui.lobby.header
          this.elite.addEventListener(MouseEvent.ROLL_OVER,showTooltip);
          this.elite.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
       }
-
+      
       override protected function onDispose() : void {
          this.elite.removeEventListener(MouseEvent.ROLL_OVER,showTooltip);
          this.elite.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
@@ -69,12 +68,12 @@ package net.wg.gui.lobby.header
          this.clanEmblem = null;
          super.onDispose();
       }
-
+      
       public function setClanEmblem(param1:String) : void {
          this.clanEmblem.setImage(param1);
          this.clanEmblem.visible = true;
       }
-
+      
       public function setTankName(param1:String) : void {
          var _loc2_:String = null;
          if(param1.length != 0)
@@ -87,7 +86,7 @@ package net.wg.gui.lobby.header
             this.tank_name.text = "";
          }
       }
-
+      
       public function setAccountName(param1:String, param2:String, param3:String, param4:Boolean, param5:Boolean) : void {
          if(param4)
          {
@@ -98,12 +97,11 @@ package net.wg.gui.lobby.header
                "fullName":param1,
                "userName":param2,
                "clanAbbrev":param3
-            }
-         );
+            });
          this._clanEmblemVisible = param5;
          invalidate(INVALIDATE_CLAN_EMBLEM);
       }
-
+      
       public function setTankType(param1:String) : void {
          var _loc2_:String = null;
          if(param1.length != 0)
@@ -116,7 +114,7 @@ package net.wg.gui.lobby.header
             this.tank_type.text = "";
          }
       }
-
+      
       public function setTankElite(param1:Boolean) : void {
          if(this._eliteVisible == param1)
          {
@@ -125,7 +123,7 @@ package net.wg.gui.lobby.header
          this._eliteVisible = param1;
          invalidate(INVALIDATE_TANK_ELITE);
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(INVALIDATE_TANK_ELITE))
          {
@@ -137,5 +135,4 @@ package net.wg.gui.lobby.header
          }
       }
    }
-
 }

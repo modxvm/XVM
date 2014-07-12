@@ -4,28 +4,26 @@ package net.wg.gui.lobby.questsWindow
    import net.wg.gui.lobby.questsWindow.components.MovableBlocksContainer;
    import flash.events.Event;
    import net.wg.gui.events.ResizableBlockEvent;
-   import __AS3__.vec.Vector;
    import net.wg.gui.lobby.questsWindow.data.RequirementBlockVO;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class RequirementBlock extends AbstractResizableContent
    {
-          
+      
       public function RequirementBlock() {
          super();
       }
-
+      
       public static const LEFT_PADDING:int = 20;
-
+      
       private static const CONTAINER_PADDING:int = 16;
-
+      
       public var blocksContainer:MovableBlocksContainer;
-
+      
       public var description:DescriptionBlock;
-
+      
       protected var data:Object = null;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.blocksContainer.x = LEFT_PADDING;
@@ -37,18 +35,17 @@ package net.wg.gui.lobby.questsWindow
          this.blocksContainer.addEventListener(ResizableBlockEvent.VALIDATE_SCROLL_BAR,this.layoutBlocks);
          this.description.addEventListener(Event.RESIZE,this.layoutBlocks);
       }
-
+      
       override public function setData(param1:Object) : void {
          this.data = param1;
          this.description.isReadyForLayout = false;
          this.blocksContainer.isReadyForLayout = false;
          invalidateData();
       }
-
+      
       public function setAvailableQuests(param1:Vector.<String>) : void {
-          
       }
-
+      
       override protected function draw() : void {
          var _loc1_:RequirementBlockVO = null;
          super.draw();
@@ -68,7 +65,7 @@ package net.wg.gui.lobby.questsWindow
             }
          }
       }
-
+      
       protected function layoutBlocks(param1:Event) : void {
          var _loc2_:* = NaN;
          if((this.blocksContainer.isReadyForLayout) && (this.description.isReadyForLayout))
@@ -82,7 +79,7 @@ package net.wg.gui.lobby.questsWindow
             dispatchEvent(new Event(Event.RESIZE));
          }
       }
-
+      
       override protected function onDispose() : void {
          this.blocksContainer.removeEventListener(Event.RESIZE,this.layoutBlocks);
          this.blocksContainer.removeEventListener(ResizableBlockEvent.VALIDATE_SCROLL_BAR,this.layoutBlocks);
@@ -95,5 +92,4 @@ package net.wg.gui.lobby.questsWindow
          super.onDispose();
       }
    }
-
 }

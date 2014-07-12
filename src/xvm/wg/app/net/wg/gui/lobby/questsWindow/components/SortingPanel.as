@@ -5,25 +5,24 @@ package net.wg.gui.lobby.questsWindow.components
    import net.wg.gui.components.controls.DropdownMenu;
    import net.wg.gui.components.controls.CheckBox;
    import scaleform.clik.data.DataProvider;
-
-
+   
    public class SortingPanel extends UIComponent
    {
-          
+      
       public function SortingPanel() {
          super();
       }
-
+      
       private static const DD_PADDING:int = 3;
-
+      
       private static const CB_PADDING:int = 13;
-
+      
       public var sortTF:TextField;
-
+      
       public var sortingDD:DropdownMenu;
-
+      
       public var doneCB:CheckBox;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.sortTF.mouseEnabled = false;
@@ -32,13 +31,13 @@ package net.wg.gui.lobby.questsWindow.components
          this.sortingDD.dataProvider = new DataProvider([{"label":QUESTS.QUESTS_CURRENTTAB_HEADER_DROPDOWN_ALL},{"label":QUESTS.QUESTS_CURRENTTAB_HEADER_DROPDOWN_ACTION},{"label":QUESTS.QUESTS_CURRENTTAB_HEADER_DROPDOWN_QUESTS}]);
          this.sortingDD.selectedIndex = 0;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          this.sortingDD.x = this.sortTF.x + this.sortTF.textWidth + DD_PADDING;
          this.doneCB.x = this.sortingDD.x + this.sortingDD.width + CB_PADDING;
       }
-
+      
       override protected function onDispose() : void {
          this.sortingDD.dispose();
          this.sortingDD = null;
@@ -48,5 +47,4 @@ package net.wg.gui.lobby.questsWindow.components
          super.onDispose();
       }
    }
-
 }

@@ -2,23 +2,21 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
 {
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingsContainer;
-   import __AS3__.vec.Vector;
    import net.wg.gui.lobby.fortifications.data.BuildingVO;
    import net.wg.gui.lobby.fortifications.cmp.build.IFortBuilding;
    import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingCmp;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import net.wg.gui.lobby.fortifications.events.FortBuildingEvent;
-
-
+   
    public class FortBuildingsContainer extends UIComponent implements IFortBuildingsContainer
    {
-          
+      
       public function FortBuildingsContainer() {
          var _loc2_:IFortBuilding = null;
          super();
          this._buildings = Vector.<IFortBuilding>([this.baseBuilding,this.building1,this.building2,this.building3,this.building4,this.building5,this.building6,this.building7,this.building8]);
          var _loc1_:Number = 4;
-         for each (_loc2_ in this._buildings)
+         for each(_loc2_ in this._buildings)
          {
             _loc2_.visible = false;
             _loc2_.UIID = _loc1_;
@@ -26,7 +24,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
          addEventListener(FortBuildingEvent.BUILDING_SELECTED,this.buildingSelectedHandler);
       }
-
+      
       public static function updateBuildings(param1:Vector.<BuildingVO>, param2:Vector.<IFortBuilding>, param3:Boolean) : void {
          var _loc6_:BuildingVO = null;
          var _loc7_:IFortBuilding = null;
@@ -43,7 +41,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          {
             _loc6_ = param1[_loc12_];
             _loc8_ = _loc6_.direction;
-            _loc11_ = _loc9_ + (_loc8_-1) * _loc10_ + _loc6_.position;
+            _loc11_ = _loc9_ + (_loc8_ - 1) * _loc10_ + _loc6_.position;
             _loc7_ = _loc5_[_loc11_];
             _loc5_[_loc11_] = null;
             _loc7_.isCommander = param3;
@@ -61,58 +59,58 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             _loc13_++;
          }
       }
-
+      
       public var baseBuilding:IFortBuilding = null;
-
+      
       public var building1:IFortBuilding = null;
-
+      
       public var building2:IFortBuilding = null;
-
+      
       public var building3:IFortBuilding = null;
-
+      
       public var building4:IFortBuilding = null;
-
+      
       public var building5:IFortBuilding = null;
-
+      
       public var building6:IFortBuilding = null;
-
+      
       public var building7:IFortBuilding = null;
-
+      
       public var building8:IFortBuilding = null;
-
+      
       private var _buildings:Vector.<IFortBuilding> = null;
-
+      
       public function updateCommonMode(param1:Boolean, param2:Boolean) : void {
          var _loc3_:IFortBuilding = null;
-         for each (_loc3_ in this._buildings)
+         for each(_loc3_ in this._buildings)
          {
             _loc3_.updateCommonMode(param1,param2);
          }
       }
-
+      
       public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void {
          var _loc3_:IFortBuilding = null;
-         for each (_loc3_ in this._buildings)
+         for each(_loc3_ in this._buildings)
          {
             _loc3_.updateDirectionsMode(param1,param2);
          }
       }
-
+      
       public function update(param1:Vector.<BuildingVO>, param2:Boolean) : void {
          updateBuildings(param1,this.buildings,param2);
       }
-
+      
       public function getBuildingTooltipData(param1:String) : Array {
          return IFortBuildingCmp(parent).getBuildingTooltipDataS(param1);
       }
-
+      
       public function get buildings() : Vector.<IFortBuilding> {
          return this._buildings;
       }
-
+      
       public function setBuildingData(param1:BuildingVO, param2:Boolean) : void {
          var _loc3_:IFortBuilding = null;
-         for each (_loc3_ in this._buildings)
+         for each(_loc3_ in this._buildings)
          {
             if(_loc3_.uid == param1.uid)
             {
@@ -122,11 +120,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:IDisposable = null;
          removeEventListener(FortBuildingEvent.BUILDING_SELECTED,this.buildingSelectedHandler);
-         for each (_loc1_ in this._buildings)
+         for each(_loc1_ in this._buildings)
          {
             _loc1_.dispose();
          }
@@ -134,32 +132,29 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this._buildings = null;
          super.onDispose();
       }
-
+      
       private function buildingSelectedHandler(param1:FortBuildingEvent) : void {
          var _loc3_:IFortBuilding = null;
          var _loc2_:String = IFortBuilding(param1.target).uid;
-         for each (_loc3_ in this._buildings)
+         for each(_loc3_ in this._buildings)
          {
             if(!(_loc3_.uid == _loc2_) && (_loc3_.selected))
             {
                _loc3_.forceSelected = false;
             }
-            else
+            else if(_loc3_.uid == _loc2_)
             {
-               if(_loc3_.uid == _loc2_)
+               if(param1.isOpenedCtxMenu)
                {
-                  if(param1.isOpenedCtxMenu)
-                  {
-                     _loc3_.forceSelected = true;
-                  }
-                  else
-                  {
-                     _loc3_.forceSelected = !_loc3_.selected;
-                  }
+                  _loc3_.forceSelected = true;
+               }
+               else
+               {
+                  _loc3_.forceSelected = !_loc3_.selected;
                }
             }
+            
          }
       }
    }
-
 }

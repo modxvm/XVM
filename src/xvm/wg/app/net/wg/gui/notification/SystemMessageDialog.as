@@ -16,11 +16,10 @@ package net.wg.gui.notification
    import net.wg.gui.notification.constants.MessageMetrics;
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.components.windows.Window;
-
-
+   
    public class SystemMessageDialog extends SystemMessageDialogMeta implements ISystemMessageDialogMeta
    {
-          
+      
       public function SystemMessageDialog() {
          super();
          canResize = false;
@@ -29,29 +28,29 @@ package net.wg.gui.notification
          showWindowBg = false;
          this.visible = false;
       }
-
+      
       private static const DATA_INVALID:String = "dataInv";
-
+      
       private static const DIMENSIONS_INVALID:String = "dimInv";
-
+      
       private static const ICON_POSITION_INV:String = "iconPosInv";
-
+      
       private static const INIT_DATA_INVALID:String = "initDataInv";
-
+      
       public var icon:UILoaderAlt;
-
+      
       public var textField:TextField;
-
+      
       public var bgMc:Sprite;
-
+      
       public var closeBtn:SoundButtonEx;
-
+      
       private var messageData:NotificationInfoVO;
-
+      
       private var initInfo:NotificationDialogInitInfoVO;
-
+      
       private var dimensionsInitialized:Boolean;
-
+      
       override public function setWindow(param1:IWindow) : void {
          super.setWindow(param1);
          if(param1)
@@ -60,21 +59,21 @@ package net.wg.gui.notification
             invalidate(INIT_DATA_INVALID);
          }
       }
-
+      
       public function as_setMessageData(param1:Object) : void {
          this.messageData = new NotificationInfoVO(param1);
          invalidate(DATA_INVALID);
       }
-
+      
       public function as_setInitData(param1:Object) : void {
          this.initInfo = new NotificationDialogInitInfoVO(param1);
          invalidate(INIT_DATA_INVALID);
       }
-
+      
       override public function set visible(param1:Boolean) : void {
          super.visible = this.dimensionsInitialized;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.textField.autoSize = TextFieldAutoSize.LEFT;
@@ -84,7 +83,7 @@ package net.wg.gui.notification
          this.icon.addEventListener(UILoaderEvent.IOERROR,this.iconLoadingErrorHandler,false,0,true);
          this.closeBtn.addEventListener(ButtonEvent.CLICK,this.closeButtonClickHandler,false,0,true);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:MessageInfoVO = null;
          super.draw();
@@ -126,7 +125,7 @@ package net.wg.gui.notification
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          App.utils.scheduler.cancelTask(onWindowCloseS);
          this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler);
@@ -134,27 +133,26 @@ package net.wg.gui.notification
          this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.closeButtonClickHandler);
          super.onDispose();
       }
-
+      
       private function refreshWindowSize() : void {
          UIComponent(window).invalidate(Window.INVALID_SRC_VIEW);
          this.dimensionsInitialized = true;
          this.visible = this.dimensionsInitialized;
          window.validateNow();
       }
-
+      
       private function closeButtonClickHandler(param1:ButtonEvent) : void {
          onWindowCloseS();
       }
-
+      
       private function iconLoadingErrorHandler(param1:UILoaderEvent) : void {
          this.icon.alpha = 0;
       }
-
+      
       private function iconLoadingCompleteHandler(param1:UILoaderEvent) : void {
          var _loc2_:int = MessageMetrics.ICON_DEFAULT_PADDING_X;
          this.icon.x = _loc2_ + Math.max(0,Math.round((this.textField.x - _loc2_ - this.icon.width) / 2));
          invalidate(ICON_POSITION_INV);
       }
    }
-
 }

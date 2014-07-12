@@ -21,14 +21,12 @@ package scaleform.clik.controls
    import scaleform.clik.utils.ConstrainedElement;
    import scaleform.gfx.MouseEventEx;
    import flash.display.DisplayObject;
-   import __AS3__.vec.Vector;
-
-
+   
    public class Button extends UIComponent
    {
-          
+      
       public function Button() {
-         this._stateMap =
+         this._stateMap = 
             {
                "up":["up"],
                "over":["over"],
@@ -41,102 +39,101 @@ package scaleform.clik.controls
                "kb_selecting":["kb_selecting","up"],
                "kb_release":["kb_release","out","up"],
                "kb_down":["kb_down","down"]
-            }
-         ;
+            };
          this.statesDefault = Vector.<String>([""]);
          this.statesSelected = Vector.<String>(["selected_",""]);
          super();
          buttonMode = true;
       }
-
+      
       public var lockDragStateChange:Boolean = false;
-
+      
       public var repeatDelay:Number = 500;
-
+      
       public var repeatInterval:Number = 200;
-
+      
       public var constraintsDisabled:Boolean = false;
-
+      
       public var allowDeselect:Boolean = true;
-
+      
       public var preventAutosizing:Boolean = false;
-
+      
       protected var _toggle:Boolean = false;
-
+      
       protected var _label:String;
-
+      
       protected var _state:String;
-
+      
       protected var _group:ButtonGroup;
-
+      
       protected var _groupName:String;
-
+      
       protected var _selected:Boolean = false;
-
+      
       protected var _data:Object;
-
+      
       protected var _autoRepeat:Boolean = false;
-
+      
       protected var _autoSize:String = "none";
-
+      
       protected var _pressedByKeyboard:Boolean = false;
-
+      
       protected var _isRepeating:Boolean = false;
-
+      
       protected var _owner:UIComponent = null;
-
+      
       protected var _stateMap:Object;
-
+      
       protected var _newFrame:String;
-
+      
       protected var _newFocusIndicatorFrame:String;
-
+      
       protected var _repeatTimer:Timer;
-
+      
       protected var _mouseDown:int = 0;
-
+      
       protected var _focusIndicatorLabelHash:Object;
-
+      
       protected var _autoRepeatEvent:ButtonEvent;
-
+      
       public var textField:TextField;
-
+      
       public var defaultTextFormat:TextFormat;
-
+      
       protected var _focusIndicator:MovieClip;
-
+      
       override protected function preInitialize() : void {
          if(!this.constraintsDisabled)
          {
             constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
          }
       }
-
+      
       override protected function initialize() : void {
          super.initialize();
          tabEnabled = true;
       }
-
+      
       public function get data() : Object {
          return this._data;
       }
-
+      
       public function set data(param1:Object) : void {
          this._data = param1;
       }
-
+      
       public function get autoRepeat() : Boolean {
          return this._autoRepeat;
       }
-
+      
       public function set autoRepeat(param1:Boolean) : void {
          this._autoRepeat = param1;
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          var _loc2_:String = null;
          super.enabled = param1;
@@ -151,39 +148,39 @@ package scaleform.clik.controls
          }
          this.setState(_loc2_);
       }
-
+      
       override public function get focusable() : Boolean {
          return _focusable;
       }
-
+      
       override public function set focusable(param1:Boolean) : void {
          super.focusable = param1;
       }
-
+      
       public function get toggle() : Boolean {
          return this._toggle;
       }
-
+      
       public function set toggle(param1:Boolean) : void {
          this._toggle = param1;
       }
-
+      
       public function get owner() : UIComponent {
          return this._owner;
       }
-
+      
       public function set owner(param1:UIComponent) : void {
          this._owner = param1;
       }
-
+      
       public function get state() : String {
          return this._state;
       }
-
+      
       public function get selected() : Boolean {
          return this._selected;
       }
-
+      
       public function set selected(param1:Boolean) : void {
          var _loc2_:* = false;
          if(this._selected == param1)
@@ -197,17 +194,15 @@ package scaleform.clik.controls
             {
                this.setState("toggle");
             }
+            else if((this._pressedByKeyboard) && !(this._focusIndicator == null))
+            {
+               this.setState("kb_selecting");
+            }
             else
             {
-               if((this._pressedByKeyboard) && !(this._focusIndicator == null))
-               {
-                  this.setState("kb_selecting");
-               }
-               else
-               {
-                  this.setState("selecting");
-               }
+               this.setState("selecting");
             }
+            
             if(this.owner)
             {
                _loc2_ = (this._selected) && !(this.owner == null) && (this.checkOwnerFocused());
@@ -222,11 +217,11 @@ package scaleform.clik.controls
          validateNow();
          dispatchEvent(new Event(Event.SELECT));
       }
-
+      
       public function get group() : ButtonGroup {
          return this._group;
       }
-
+      
       public function set group(param1:ButtonGroup) : void {
          if(this._group != null)
          {
@@ -238,11 +233,11 @@ package scaleform.clik.controls
             this._group.addButton(this);
          }
       }
-
+      
       public function get groupName() : String {
          return this._groupName;
       }
-
+      
       public function set groupName(param1:String) : void {
          if((_inspector) && param1 == "")
          {
@@ -265,11 +260,11 @@ package scaleform.clik.controls
          this._groupName = param1;
          this.addToAutoGroup(null);
       }
-
+      
       public function get label() : String {
          return this._label;
       }
-
+      
       public function set label(param1:String) : void {
          if(this._label == param1)
          {
@@ -278,11 +273,11 @@ package scaleform.clik.controls
          this._label = param1;
          invalidateData();
       }
-
+      
       public function get autoSize() : String {
          return this._autoSize;
       }
-
+      
       public function set autoSize(param1:String) : void {
          if(param1 == this._autoSize)
          {
@@ -291,17 +286,17 @@ package scaleform.clik.controls
          this._autoSize = param1;
          invalidateData();
       }
-
+      
       public function get focusIndicator() : MovieClip {
          return this._focusIndicator;
       }
-
+      
       public function set focusIndicator(param1:MovieClip) : void {
          this._focusIndicatorLabelHash = null;
          this._focusIndicator = param1;
          this._focusIndicatorLabelHash = UIComponent.generateLabelHash(this._focusIndicator);
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.isDefaultPrevented())
          {
@@ -317,21 +312,19 @@ package scaleform.clik.controls
                   this.handlePress(_loc3_);
                   param1.handled = true;
                }
-               else
+               else if(_loc2_.value == InputValue.KEY_UP)
                {
-                  if(_loc2_.value == InputValue.KEY_UP)
+                  if(this._pressedByKeyboard)
                   {
-                     if(this._pressedByKeyboard)
-                     {
-                        this.handleRelease(_loc3_);
-                        param1.handled = true;
-                     }
+                     this.handleRelease(_loc3_);
+                     param1.handled = true;
                   }
                }
+               
                break;
          }
       }
-
+      
       public function clearRepeatInterval() : void {
          if(this._repeatTimer)
          {
@@ -342,11 +335,11 @@ package scaleform.clik.controls
             this._repeatTimer = null;
          }
       }
-
+      
       override public function toString() : String {
          return "[CLIK Button " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          if(!this.constraintsDisabled)
          {
@@ -366,7 +359,7 @@ package scaleform.clik.controls
             this.focusIndicator.visible = false;
          }
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.STATE))
          {
@@ -412,7 +405,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function addToAutoGroup(param1:Event) : void {
          if(parent == null)
          {
@@ -426,7 +419,7 @@ package scaleform.clik.controls
          }
          this.group = _loc2_;
       }
-
+      
       protected function checkOwnerFocused() : Boolean {
          var _loc2_:Object = null;
          var _loc1_:* = false;
@@ -444,7 +437,7 @@ package scaleform.clik.controls
          }
          return _loc1_;
       }
-
+      
       protected function calculateWidth() : Number {
          var _loc2_:ConstrainedElement = null;
          var _loc1_:Number = actualWidth;
@@ -455,7 +448,7 @@ package scaleform.clik.controls
          }
          return _loc1_;
       }
-
+      
       protected function alignForAutoSize() : void {
          var _loc1_:* = NaN;
          var _loc3_:* = NaN;
@@ -478,14 +471,14 @@ package scaleform.clik.controls
                break;
          }
       }
-
+      
       protected function updateText() : void {
          if(!(this._label == null) && !(this.textField == null))
          {
             this.textField.text = this._label;
          }
       }
-
+      
       override protected function changeFocus() : void {
          var _loc1_:String = null;
          if(!this.enabled)
@@ -526,7 +519,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function handleMouseRollOver(param1:MouseEvent) : void {
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
          var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
@@ -569,7 +562,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function handleMouseRollOut(param1:MouseEvent) : void {
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
          var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
@@ -615,7 +608,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function handleMousePress(param1:MouseEvent) : void {
          var _loc5_:ButtonEvent = null;
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
@@ -640,7 +633,7 @@ package scaleform.clik.controls
             dispatchEvent(_loc5_);
          }
       }
-
+      
       protected function handleMouseRelease(param1:MouseEvent) : void {
          var _loc5_:ButtonEvent = null;
          this._autoRepeatEvent = null;
@@ -677,7 +670,7 @@ package scaleform.clik.controls
          }
          this._isRepeating = false;
       }
-
+      
       protected function handleReleaseOutside(param1:MouseEvent) : void {
          this._autoRepeatEvent = null;
          if(contains(param1.target as DisplayObject))
@@ -713,8 +706,8 @@ package scaleform.clik.controls
             }
          }
       }
-
-      protected function handlePress(param1:uint=0) : void {
+      
+      protected function handlePress(param1:uint = 0) : void {
          if(!this.enabled)
          {
             return;
@@ -731,8 +724,8 @@ package scaleform.clik.controls
          var _loc2_:ButtonEvent = new ButtonEvent(ButtonEvent.PRESS,true,false,param1,0,true,false);
          dispatchEvent(_loc2_);
       }
-
-      protected function handleRelease(param1:uint=0) : void {
+      
+      protected function handleRelease(param1:uint = 0) : void {
          var _loc2_:ButtonEvent = null;
          if(!this.enabled)
          {
@@ -756,14 +749,14 @@ package scaleform.clik.controls
          }
          this._isRepeating = false;
       }
-
-      protected function handleClick(param1:uint=0) : void {
+      
+      protected function handleClick(param1:uint = 0) : void {
          if((this.toggle) && (!this.selected || (this.allowDeselect)))
          {
             this.selected = !this.selected;
          }
       }
-
+      
       protected function beginRepeat(param1:TimerEvent) : void {
          this._repeatTimer.delay = this.repeatInterval;
          this._repeatTimer.repeatCount = 0;
@@ -772,7 +765,7 @@ package scaleform.clik.controls
          this._repeatTimer.reset();
          this._repeatTimer.start();
       }
-
+      
       protected function handleRepeat(param1:TimerEvent) : void {
          if(this._mouseDown == 0 && !this._pressedByKeyboard)
          {
@@ -788,7 +781,7 @@ package scaleform.clik.controls
             dispatchEvent(this._autoRepeatEvent);
          }
       }
-
+      
       protected function setState(param1:String) : void {
          var _loc6_:String = null;
          var _loc7_:uint = 0;
@@ -822,15 +815,15 @@ package scaleform.clik.controls
             _loc5_++;
          }
       }
-
+      
       protected var statesDefault:Vector.<String>;
-
+      
       protected var statesSelected:Vector.<String>;
-
+      
       protected function getStatePrefixes() : Vector.<String> {
          return this._selected?this.statesSelected:this.statesDefault;
       }
-
+      
       protected function updateAfterStateChange() : void {
          if(!initialized)
          {
@@ -841,7 +834,7 @@ package scaleform.clik.controls
             constraints.updateElement("textField",this.textField);
          }
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:String = null;
          this.clearRepeatInterval();
@@ -863,14 +856,13 @@ package scaleform.clik.controls
          }
          this.statesDefault = null;
          this.statesSelected = null;
-         for (_loc1_ in this._stateMap)
+         for(_loc1_ in this._stateMap)
          {
-            delete this._stateMap[[_loc1_]];
+            delete this._stateMap[_loc1_];
          }
          this._stateMap = null;
          this._data = null;
          super.onDispose();
       }
    }
-
 }

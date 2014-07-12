@@ -6,11 +6,10 @@ package scaleform.clik.controls
    import flash.display.DisplayObjectContainer;
    import flash.events.Event;
    import scaleform.clik.events.ButtonEvent;
-
-
+   
    public class ButtonGroup extends EventDispatcher implements IDisposable
    {
-          
+      
       public function ButtonGroup(param1:String, param2:DisplayObjectContainer) {
          super();
          this.name = param1;
@@ -18,9 +17,9 @@ package scaleform.clik.controls
          this.weakScope[param2] = null;
          this._children = [];
       }
-
-      public static var groups:Dictionary = new Dictionary(true);
-
+      
+      public static var groups:Dictionary;
+      
       public static function getGroup(param1:String, param2:DisplayObjectContainer) : ButtonGroup {
          var _loc3_:Object = groups[param2];
          if(_loc3_ == null)
@@ -34,37 +33,37 @@ package scaleform.clik.controls
          }
          return _loc4_;
       }
-
+      
       public var name:String;
-
+      
       protected var weakScope:Dictionary;
-
+      
       public var selectedButton:Button;
-
+      
       protected var _children:Array;
-
+      
       public function get length() : uint {
          return this._children.length;
       }
-
+      
       public function get data() : Object {
          return this.selectedButton.data;
       }
-
+      
       public function get selectedIndex() : int {
          return this._children.indexOf(this.selectedButton);
       }
-
+      
       public function get scope() : DisplayObjectContainer {
          var _loc2_:String = null;
          var _loc1_:DisplayObjectContainer = null;
-         for (_loc2_ in this.scope)
+         for(_loc2_ in this.scope)
          {
             _loc1_ = _loc2_ as DisplayObjectContainer;
+            return _loc1_;
          }
-         return _loc1_;
       }
-
+      
       public function addButton(param1:Button) : void {
          this.removeButton(param1);
          this._children.push(param1);
@@ -76,7 +75,7 @@ package scaleform.clik.controls
          param1.addEventListener(ButtonEvent.CLICK,this.handleClick,false,0,true);
          param1.addEventListener(Event.REMOVED,this.handleRemoved,false,0,true);
       }
-
+      
       public function removeButton(param1:Button) : void {
          var _loc2_:int = this._children.indexOf(param1);
          if(_loc2_ == -1)
@@ -88,12 +87,12 @@ package scaleform.clik.controls
          param1.removeEventListener(ButtonEvent.CLICK,this.handleClick,false);
          param1.removeEventListener(Event.REMOVED,this.handleRemoved,false);
       }
-
+      
       public function getButtonAt(param1:int) : Button {
          return this._children[param1] as Button;
       }
-
-      public function setSelectedButtonByIndex(param1:uint, param2:Boolean=true) : Boolean {
+      
+      public function setSelectedButtonByIndex(param1:uint, param2:Boolean = true) : Boolean {
          var _loc3_:* = false;
          var _loc4_:Button = this._children[param1] as Button;
          if(_loc4_ != null)
@@ -103,19 +102,19 @@ package scaleform.clik.controls
          }
          return _loc3_;
       }
-
+      
       public function clearSelectedButton() : void {
          this.updateSelectedButton(null);
       }
-
+      
       public function hasButton(param1:Button) : Boolean {
          return this._children.indexOf(param1) > -1;
       }
-
+      
       override public function toString() : String {
          return "[CLIK ButtonGroup " + this.name + " (" + this._children.length + ")]";
       }
-
+      
       protected function handleSelect(param1:Event) : void {
          var _loc2_:Button = param1.target as Button;
          if(_loc2_.selected)
@@ -127,8 +126,8 @@ package scaleform.clik.controls
             this.updateSelectedButton(_loc2_,false);
          }
       }
-
-      protected function updateSelectedButton(param1:Button, param2:Boolean=true) : void {
+      
+      protected function updateSelectedButton(param1:Button, param2:Boolean = true) : void {
          if((param2) && param1 == this.selectedButton)
          {
             return;
@@ -147,27 +146,25 @@ package scaleform.clik.controls
          {
             this.selectedButton = null;
          }
-         else
+         else if(!param2)
          {
-            if(!param2)
-            {
-               return;
-            }
+            return;
          }
+         
          dispatchEvent(new Event(Event.CHANGE));
       }
-
+      
       protected function handleClick(param1:ButtonEvent) : void {
          dispatchEvent(param1);
       }
-
+      
       protected function handleRemoved(param1:Event) : void {
          this.removeButton(param1.target as Button);
       }
-
+      
       public function dispose() : void {
          var _loc1_:Button = null;
-         for each (_loc1_ in this._children)
+         for each(_loc1_ in this._children)
          {
             _loc1_.removeEventListener(Event.SELECT,this.handleSelect,false);
             _loc1_.removeEventListener(ButtonEvent.CLICK,this.handleClick,false);
@@ -180,5 +177,4 @@ package scaleform.clik.controls
          }
       }
    }
-
 }

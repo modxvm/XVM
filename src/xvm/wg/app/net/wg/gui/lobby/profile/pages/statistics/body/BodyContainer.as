@@ -4,37 +4,35 @@ package net.wg.gui.lobby.profile.pages.statistics.body
    import net.wg.gui.components.advanced.ContentTabBar;
    import net.wg.gui.lobby.profile.components.ResizableViewStack;
    import flash.geom.Point;
-   import __AS3__.vec.Vector;
    import scaleform.clik.events.IndexEvent;
    import scaleform.clik.data.DataProvider;
-
-
+   
    public class BodyContainer extends UIComponent
    {
-          
+      
       public function BodyContainer() {
          this.availableSize = new Point();
          super();
          this.barStartYPosition = this.bar.y;
          this.viewStackStartYPosition = this.viewStack.y;
       }
-
+      
       private static const MIN_BTN_WIDTH:Number = 136;
-
+      
       private static const LAYOUT_INVALID:String = "layoutInv";
-
+      
       public var bar:ContentTabBar;
-
+      
       public var viewStack:ResizableViewStack;
-
+      
       private var barStartYPosition:int;
-
+      
       private var viewStackStartYPosition:int;
-
+      
       private var availableSize:Point;
-
+      
       private var dataList:Vector.<StatisticsLabelDataVO>;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.viewStack.cache = true;
@@ -42,7 +40,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          this.bar.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChanged,false,0,true);
          this.bar.selectedIndex = 0;
       }
-
+      
       private function onTabBarIndexChanged(param1:IndexEvent) : void {
          var _loc2_:int = param1.index;
          if(!(_loc2_ == -1) && (param1.data))
@@ -51,7 +49,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             this.updateDataAt(_loc2_);
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          if(_baseDisposed)
@@ -66,7 +64,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             this.bar.x = (this.availableSize.x - this.bar.width) / 2;
          }
       }
-
+      
       public function setDossierData(param1:Object) : void {
          var _loc3_:String = null;
          var _loc5_:StatisticsLabelDataVO = null;
@@ -76,17 +74,15 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          while(_loc4_ < this.dataList.length)
          {
             _loc5_ = this.dataList[_loc4_];
-            if(_loc5_  is  DetailedLabelDataVO)
+            if(_loc5_ is DetailedLabelDataVO)
             {
                _loc3_ = "DetailedStatisticsView_UI";
             }
-            else
+            else if(_loc5_ is StatisticsChartsTabDataVO)
             {
-               if(_loc5_  is  StatisticsChartsTabDataVO)
-               {
-                  _loc3_ = "ChartsStatisticsView_UI";
-               }
+               _loc3_ = "ChartsStatisticsView_UI";
             }
+            
             _loc2_.push(new BodyBarData(_loc5_.label,_loc3_));
             _loc4_++;
          }
@@ -110,20 +106,20 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          this.updateDataAt(this.bar.selectedIndex);
          invalidate(LAYOUT_INVALID);
       }
-
+      
       private function updateDataAt(param1:int) : void {
          if(this.dataList)
          {
             this.viewStack.updateData(this.dataList[param1]);
          }
       }
-
+      
       public function setAvailableSize(param1:Number, param2:Number) : void {
          this.availableSize.x = param1;
          this.availableSize.y = param2;
          invalidate(LAYOUT_INVALID);
       }
-
+      
       override protected function onDispose() : void {
          this.bar.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChanged);
          this.bar.dispose();
@@ -134,19 +130,17 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          super.onDispose();
       }
    }
-
 }
-
-   class BodyBarData extends Object
-   {
-          
-      function BodyBarData(param1:String, param2:String) {
-         super();
-         this.label = param1;
-         this.linkage = param2;
-      }
-
-      public var label:String;
-
-      public var linkage:String;
+class BodyBarData extends Object
+{
+   
+   function BodyBarData(param1:String, param2:String) {
+      super();
+      this.label = param1;
+      this.linkage = param2;
    }
+   
+   public var label:String;
+   
+   public var linkage:String;
+}

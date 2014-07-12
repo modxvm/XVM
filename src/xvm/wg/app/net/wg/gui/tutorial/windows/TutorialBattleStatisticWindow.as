@@ -16,49 +16,48 @@ package net.wg.gui.tutorial.windows
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.data.DataProvider;
    import net.wg.infrastructure.interfaces.IFormattedInt;
-
-
+   
    public class TutorialBattleStatisticWindow extends TutorialBattleStatisticMeta implements ITutorialBattleStatisticMeta
    {
-          
+      
       public function TutorialBattleStatisticWindow() {
          super();
       }
-
+      
       private static const ICON_OFFSET:Number = 17;
-
+      
       public var totalResultField:TextField;
-
+      
       public var finishReasonField:TextField;
-
+      
       public var bonusReceivedField:TextField;
-
+      
       public var creditsCounter:CounterEx;
-
+      
       public var creditsIcon:Sprite;
-
+      
       public var xpCounter:CounterEx;
-
+      
       public var xpIcon:Sprite;
-
+      
       public var imageLoader:UILoaderAlt;
-
+      
       public var column1Header:TextField;
-
+      
       public var column2Header:TextField;
-
+      
       public var battleHintList:HintList;
-
+      
       public var chaptersList:ScrollingListEx;
-
+      
       public var progressBar:FinalStatisticProgress;
-
+      
       public var restartHintField:TextField;
-
+      
       public var restartButton:SoundButtonEx;
-
+      
       protected var data:Object;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.column1Header.text = App.utils.locale.makeString(BATTLE_TUTORIAL.WINDOWS_RESULT_TABLE_COLUMN_1);
@@ -66,11 +65,11 @@ package net.wg.gui.tutorial.windows
          this.restartButton.addEventListener(ButtonEvent.CLICK,this.onRestartButtonClick);
          this.battleHintList.addEventListener(ListEvent.ITEM_CLICK,this.onHintItemClick);
       }
-
+      
       private function onRestartButtonClick(param1:ButtonEvent) : void {
          restartS();
       }
-
+      
       private function onHintItemClick(param1:ListEvent) : void {
          var _loc2_:Object = param1.itemData;
          if(_loc2_.type == HintItemType.VIDEO_LINK)
@@ -78,12 +77,12 @@ package net.wg.gui.tutorial.windows
             showVideoDialogS();
          }
       }
-
+      
       public function as_setData(param1:Object) : void {
          this.data = param1;
          invalidate(InvalidationType.DATA);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.data))
@@ -101,7 +100,7 @@ package net.wg.gui.tutorial.windows
             this.restartButton.visible = !this.data.finished;
          }
       }
-
+      
       private function showBonuses(param1:Array) : void {
          var _loc5_:Object = null;
          var _loc6_:Object = null;
@@ -167,13 +166,13 @@ package net.wg.gui.tutorial.windows
             this.bonusReceivedField.text = App.utils.locale.makeString(BATTLE_TUTORIAL.LABELS_BONUSES_ALREADY_RECEIVED);
          }
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          window.useBottomBtns = false;
          window.title = BATTLE_TUTORIAL.WINDOWS_RESULT_TITLE;
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.data = null;
@@ -181,5 +180,4 @@ package net.wg.gui.tutorial.windows
          this.battleHintList.removeEventListener(ListEvent.ITEM_CLICK,this.onHintItemClick);
       }
    }
-
 }

@@ -6,15 +6,14 @@ package net.wg.gui.components.advanced
    import scaleform.gfx.MouseEventEx;
    import flash.utils.Timer;
    import flash.events.TimerEvent;
-
-
+   
    public class AmmunitionButton extends SoundButton
    {
-          
+      
       public function AmmunitionButton() {
          super();
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
          var _loc5_:ButtonEvent = null;
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
@@ -35,7 +34,7 @@ package net.wg.gui.components.advanced
             dispatchEvent(_loc5_);
          }
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          var _loc5_:ButtonEvent = null;
          _autoRepeatEvent = null;
@@ -64,8 +63,8 @@ package net.wg.gui.components.advanced
          }
          _isRepeating = false;
       }
-
-      override protected function handleRelease(param1:uint=0) : void {
+      
+      override protected function handleRelease(param1:uint = 0) : void {
          var _loc2_:ButtonEvent = null;
          if(!enabled)
          {
@@ -90,5 +89,4 @@ package net.wg.gui.components.advanced
          _isRepeating = false;
       }
    }
-
 }

@@ -2,40 +2,38 @@ package net.wg.gui.components.tooltips.VO
 {
    import net.wg.data.daapi.base.DAAPIDataClass;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import __AS3__.vec.Vector;
    import net.wg.gui.rally.vo.VehicleVO;
-
-
+   
    public class SuitableVehicleVO extends DAAPIDataClass implements IDisposable
    {
-          
+      
       public function SuitableVehicleVO(param1:Object) {
          super(param1);
       }
-
+      
       public var toolTipType:String = "cyberSportSlot";
-
+      
       public var leftCount:uint = 0;
-
+      
       public var vehiclesList:Vector.<net.wg.gui.rally.vo.VehicleVO> = null;
-
+      
       public var conditions:Array = null;
-
+      
       public var isCreator:Boolean = false;
-
+      
       private const MAX_VEHICLES:uint = 5;
-
+      
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          var _loc3_:Array = null;
          var _loc4_:uint = 0;
          var _loc5_:* = false;
-         var _loc6_:net.wg.gui.rally.vo.VehicleVO = null;
+         var _loc6_:VehicleVO = null;
          switch(param1)
          {
             case "vehicles":
                if(App.instance)
                {
-                  App.utils.asserter.assert(param2  is  Array,"value must extends an Array class.");
+                  App.utils.asserter.assert(param2 is Array,"value must extends an Array class.");
                }
                _loc3_ = null;
                if(param2)
@@ -66,7 +64,7 @@ package net.wg.gui.components.tooltips.VO
             case "conditions":
                if(App.instance)
                {
-                  App.utils.asserter.assert(param2  is  Array,"value must extends an Array class.");
+                  App.utils.asserter.assert(param2 is Array,"value must extends an Array class.");
                }
                if(param2)
                {
@@ -102,9 +100,9 @@ package net.wg.gui.components.tooltips.VO
                return true;
          }
       }
-
+      
       override protected function onDispose() : void {
-         var _loc1_:net.wg.gui.rally.vo.VehicleVO = null;
+         var _loc1_:VehicleVO = null;
          if((this.vehiclesList) && this.vehiclesList.length > 0)
          {
             while(this.vehiclesList.length)
@@ -117,5 +115,4 @@ package net.wg.gui.components.tooltips.VO
          this.conditions = null;
       }
    }
-
 }

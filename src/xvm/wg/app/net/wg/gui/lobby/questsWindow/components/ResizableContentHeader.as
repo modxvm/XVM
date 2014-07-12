@@ -6,47 +6,46 @@ package net.wg.gui.lobby.questsWindow.components
    import net.wg.data.constants.QuestsStates;
    import flash.text.TextFieldAutoSize;
    import net.wg.data.VO.ProgressElementVO;
-
-
+   
    public class ResizableContentHeader extends UIComponent
    {
-          
+      
       public function ResizableContentHeader() {
          super();
       }
-
+      
       private static const INVALIDATE_HTML_LABEL:String = "invHtmlLabel";
-
+      
       private static const INVALIDATE_LABEL:String = "invLabel";
-
+      
       private static const INVALIDATE_PROGRESS:String = "invProgress";
-
+      
       private static const INVALIDATE_SHOW_DONE:String = "invShowDone";
-
+      
       public static const TEXT_PADDING:int = 5;
-
+      
       public var slideCheckBox:CheckBox;
-
+      
       private var _progrType:String = "";
-
+      
       private var _currentProgr:Number = 0;
-
+      
       private var _totalProgr:Number = 0;
-
+      
       private var _progrTooltip:Object = null;
-
+      
       private var _showDone:Boolean = false;
-
+      
       private var _htmlLabel:String = "";
-
+      
       private var _label:String = "";
-
+      
       public var htmlTF:TextField;
-
+      
       public var progressIndicator:ProgressQuestIndicator;
-
+      
       public var statusMC:QuestStatusComponent;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.progressIndicator.visible = false;
@@ -56,7 +55,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.statusMC.validateNow();
          this.statusMC.visible = false;
       }
-
+      
       override protected function onDispose() : void {
          this.statusMC.dispose();
          this.statusMC = null;
@@ -68,7 +67,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.htmlTF = null;
          super.onDispose();
       }
-
+      
       public function setProgress(param1:Object) : void {
          var _loc2_:ProgressElementVO = new ProgressElementVO(param1);
          this._progrType = _loc2_.progrBarType;
@@ -77,7 +76,7 @@ package net.wg.gui.lobby.questsWindow.components
          this._progrTooltip = _loc2_.progrTooltip;
          invalidate(INVALIDATE_PROGRESS);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          super.draw();
@@ -104,33 +103,32 @@ package net.wg.gui.lobby.questsWindow.components
             this.progressIndicator.visible = (Boolean(this._progrType)) && !this._showDone;
          }
       }
-
+      
       public function get htmlLabel() : String {
          return this._htmlLabel;
       }
-
+      
       public function set htmlLabel(param1:String) : void {
          this._htmlLabel = param1;
          invalidate(INVALIDATE_HTML_LABEL);
       }
-
+      
       public function get label() : String {
          return this._label;
       }
-
+      
       public function set label(param1:String) : void {
          this._label = param1;
          invalidate(INVALIDATE_LABEL);
       }
-
+      
       public function get showDone() : Boolean {
          return this._showDone;
       }
-
+      
       public function set showDone(param1:Boolean) : void {
          this._showDone = param1;
          invalidate(INVALIDATE_SHOW_DONE);
       }
    }
-
 }

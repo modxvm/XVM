@@ -10,51 +10,50 @@ package net.wg.gui.lobby.questsWindow.components
    import net.wg.data.constants.QuestsStates;
    import net.wg.data.constants.Linkages;
    import net.wg.gui.utils.ComplexTooltipHelper;
-
-
+   
    public class ProgressQuestIndicator extends UIComponent
    {
-          
+      
       public function ProgressQuestIndicator() {
          super();
          this.container = new Sprite();
       }
-
+      
       public static const MASK_WIDTH:Number = 64;
-
+      
       private static const DEFAULT_VALUE:int = 100;
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       public var textField:TextField;
-
+      
       public var maskMC:MovieClip;
-
+      
       public var lineMC:MovieClip;
-
+      
       public var dotsMC:MovieClip;
-
+      
       public var bgMC:MovieClip;
-
+      
       private var _type:String = "current";
-
+      
       private var _currentValue:Number = 0;
-
+      
       private var _totalValue:Number = 100;
-
+      
       private var _tooltip:ComplexTooltipVO = null;
-
+      
       public var container:Sprite;
-
+      
       override protected function configUI() : void {
          super.configUI();
          addEventListener(MouseEvent.CLICK,hideTooltip);
          addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.CLICK,hideTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
@@ -79,18 +78,18 @@ package net.wg.gui.lobby.questsWindow.components
          this.bgMC = null;
          super.onDispose();
       }
-
+      
       public function setValues(param1:String, param2:Number, param3:Number) : void {
          this._currentValue = param2;
          this._totalValue = param3 > 0?param3:DEFAULT_VALUE;
          this._type = param1;
          invalidateData();
       }
-
+      
       public function setTooltip(param1:Object) : void {
          this._tooltip = param1?new ComplexTooltipVO(param1):null;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -122,7 +121,7 @@ package net.wg.gui.lobby.questsWindow.components
                this.container.scaleX = 1 / scaleX;
                this.container.scaleY = 1 / scaleY;
                this.bgMC.addChild(this.container);
-               _loc1_ = this._totalValue-1;
+               _loc1_ = this._totalValue - 1;
                _loc2_ = MASK_WIDTH / this._totalValue;
                _loc3_ = 0;
                while(_loc3_ < _loc1_)
@@ -135,7 +134,7 @@ package net.wg.gui.lobby.questsWindow.components
             }
          }
       }
-
+      
       private function showTooltip(param1:MouseEvent) : void {
          var _loc2_:String = null;
          if(this._tooltip)
@@ -146,21 +145,16 @@ package net.wg.gui.lobby.questsWindow.components
                App.toolTipMgr.showComplex(_loc2_);
             }
          }
-         else
+         else if(this._type == QuestsStates.STRATEGIC)
          {
-            if(this._type == QuestsStates.STRATEGIC)
-            {
-               App.toolTipMgr.show(TOOLTIPS.QUESTS_PROGRESS_STRATEGIC);
-            }
-            else
-            {
-               if(this._type == QuestsStates.CURRENT)
-               {
-                  App.toolTipMgr.show(TOOLTIPS.QUESTS_PROGRESS_CURRENT);
-               }
-            }
+            App.toolTipMgr.show(TOOLTIPS.QUESTS_PROGRESS_STRATEGIC);
          }
+         else if(this._type == QuestsStates.CURRENT)
+         {
+            App.toolTipMgr.show(TOOLTIPS.QUESTS_PROGRESS_CURRENT);
+         }
+         
+         
       }
    }
-
 }

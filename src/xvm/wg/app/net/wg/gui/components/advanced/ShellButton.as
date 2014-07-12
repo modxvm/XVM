@@ -4,15 +4,13 @@ package net.wg.gui.components.advanced
    import flash.text.TextField;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UILoaderAlt;
-   import __AS3__.vec.Vector;
    import net.wg.gui.events.CooldownEvent;
    import net.wg.data.constants.Tooltips;
    import net.wg.data.constants.SoundTypes;
-
-
+   
    public class ShellButton extends AmmunitionButton
    {
-          
+      
       public function ShellButton() {
          this.statesPassive = Vector.<String>(["passive_"]);
          super();
@@ -20,67 +18,67 @@ package net.wg.gui.components.advanced
          soundId = "tankShell";
          this.count = "";
       }
-
+      
       private static const INV_AMMUN_ICON:String = "invAmmunIcon";
-
+      
       private static const INV_COUNTER:String = "invCounter";
-
+      
       private static const INV_LEVEL:String = "invLevel";
-
+      
       private static const INV_COUNTER_INDICATOR:String = "invCounterIndicator";
-
+      
       public static const INV_PASSIVE:String = "invPassive";
-
+      
       private static const DISABLED_ALPHA:Number = 0.6;
-
+      
       private static function onOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private var _id:String;
-
+      
       private var _historicalBattleID:int = -1;
-
+      
       private var _ammunitionType:String;
-
+      
       private var _ammunitionIcon:String = "";
-
+      
       private var _count:String;
-
+      
       private var _inventoryCount:String;
-
+      
       private var _level:int = -1;
-
+      
       private var _tooltipType:String = "hangarShell";
-
+      
       private var _tooltip:String = "";
-
+      
       public var count_txt:TextField;
-
+      
       public var countBg:MovieClip;
-
+      
       public var iconLoader:UILoaderAlt;
-
+      
       public var levelMc:MovieClip;
-
+      
       public var counterIndicator:MovieClip;
-
+      
       private var _showCounterIndicator:Boolean = false;
-
+      
       public var activatorMC:MovieClip;
-
+      
       public var rechargeMc:MovieClip;
-
+      
       public var cooldownAnimator:CooldownAnimationController;
-
+      
       private var _isDischarging:Boolean = false;
-
+      
       private var _isReloading:Boolean = false;
-
+      
       private var _isPassive:Boolean = false;
-
+      
       protected var statesPassive:Vector.<String>;
-
+      
       override protected function configUI() : void {
          super.configUI();
          mouseEnabled = enabled;
@@ -96,7 +94,7 @@ package net.wg.gui.components.advanced
          addEventListener(MouseEvent.MOUSE_OUT,onOut);
          addEventListener(MouseEvent.CLICK,onOut);
       }
-
+      
       public function setCooldown(param1:Number) : void {
          var _loc2_:* = NaN;
          this.cooldownAnimator.visible = true;
@@ -123,13 +121,13 @@ package net.wg.gui.components.advanced
             this.clearCoolDownTime();
          }
       }
-
+      
       public function clearCoolDownTime() : void {
          this._isReloading = false;
          this.cooldownAnimator.clearCooldown();
          this.cooldownAnimator.visible = false;
       }
-
+      
       public function setCoolDownPosAsPercent(param1:Number) : void {
          this.cooldownAnimator.visible = true;
          this.cooldownAnimator.setPositionAsPercent(param1);
@@ -140,12 +138,12 @@ package net.wg.gui.components.advanced
          }
          this._isReloading = true;
       }
-
+      
       public function playRechargeAnimation() : void {
          this.rechargeMc.visible = true;
          this.rechargeMc.gotoAndPlay("activate");
       }
-
+      
       override protected function onDispose() : void {
          this.cooldownAnimator.removeEventListener(CooldownEvent.FINISHED,this.cooldownHandler);
          removeEventListener(MouseEvent.MOUSE_OVER,this.onOver);
@@ -161,7 +159,7 @@ package net.wg.gui.components.advanced
          this.iconLoader = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(INV_AMMUN_ICON))
@@ -219,7 +217,7 @@ package net.wg.gui.components.advanced
          }
          this.cooldownAnimator.visible = this._isReloading;
       }
-
+      
       public function highlightCounter(param1:Boolean) : void {
          if(this._showCounterIndicator != param1)
          {
@@ -227,41 +225,41 @@ package net.wg.gui.components.advanced
             invalidate(INV_COUNTER_INDICATOR);
          }
       }
-
+      
       public function get ammunitionIcon() : String {
          return this._ammunitionIcon;
       }
-
+      
       public function set ammunitionIcon(param1:String) : void {
          this._ammunitionIcon = param1;
          invalidate(INV_AMMUN_ICON);
       }
-
+      
       public function get ammunitionType() : String {
          return this._ammunitionType;
       }
-
+      
       public function set ammunitionType(param1:String) : void {
          this._ammunitionType = param1;
       }
-
+      
       public function get inventoryCount() : String {
          return this._inventoryCount;
       }
-
+      
       public function set inventoryCount(param1:String) : void {
          this._inventoryCount = param1;
       }
-
+      
       public function get count() : String {
          return this._count;
       }
-
+      
       public function set count(param1:String) : void {
          this._count = param1;
          invalidate(INV_COUNTER);
       }
-
+      
       public function clear() : void {
          this.id = null;
          this.count = "";
@@ -270,7 +268,7 @@ package net.wg.gui.components.advanced
          this.level = -1;
          this._showCounterIndicator = false;
       }
-
+      
       private function onOver(param1:MouseEvent) : void {
          switch(this.tooltipType)
          {
@@ -291,56 +289,56 @@ package net.wg.gui.components.advanced
                break;
          }
       }
-
+      
       public function get level() : int {
          return this._level;
       }
-
+      
       public function set level(param1:int) : void {
          this._level = param1;
          invalidate(INV_LEVEL);
       }
-
+      
       public function get tooltipType() : String {
          return this._tooltipType;
       }
-
+      
       public function set tooltipType(param1:String) : void {
          this._tooltipType = param1;
       }
-
+      
       public function get id() : String {
          return this._id;
       }
-
+      
       public function set id(param1:String) : void {
          this._id = param1;
       }
-
+      
       public function get historicalBattleID() : int {
          return this._historicalBattleID;
       }
-
+      
       public function set historicalBattleID(param1:int) : void {
          this._historicalBattleID = param1;
       }
-
+      
       public function get tooltip() : String {
          return this._tooltip;
       }
-
+      
       public function set tooltip(param1:String) : void {
          this._tooltip = param1;
       }
-
+      
       public function get isDischarging() : Boolean {
          return this._isDischarging;
       }
-
+      
       public function set isDischarging(param1:Boolean) : void {
          this.cooldownAnimator.isDischarging = this._isDischarging = param1;
       }
-
+      
       private function cooldownHandler(param1:CooldownEvent) : void {
          if(!this._isDischarging)
          {
@@ -349,7 +347,7 @@ package net.wg.gui.components.advanced
             this.activatorMC.gotoAndPlay("activate");
          }
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(param1 == enabled)
          {
@@ -363,7 +361,7 @@ package net.wg.gui.components.advanced
          buttonMode = enabled;
          mouseEnabled = enabled;
       }
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          if(this._isPassive)
          {
@@ -371,16 +369,15 @@ package net.wg.gui.components.advanced
          }
          return _selected?statesSelected:statesDefault;
       }
-
+      
       public function get isPassive() : Boolean {
          return this._isPassive;
       }
-
+      
       public function set isPassive(param1:Boolean) : void {
          this._isPassive = param1;
          setState(_state?_state:"up");
          invalidate(INV_PASSIVE);
       }
    }
-
 }

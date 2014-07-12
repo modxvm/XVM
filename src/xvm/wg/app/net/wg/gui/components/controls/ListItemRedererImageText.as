@@ -2,19 +2,18 @@ package net.wg.gui.components.controls
 {
    import flash.display.MovieClip;
    import net.wg.gui.events.UILoaderEvent;
-
-
+   
    public class ListItemRedererImageText extends DropDownListItemRendererSound
    {
-          
+      
       public function ListItemRedererImageText() {
          super();
       }
-
+      
       public var icon:UILoaderAlt;
-
+      
       public var ico_border:MovieClip;
-
+      
       override protected function configUI() : void {
          this.ico_border.visible = false;
          super.configUI();
@@ -23,12 +22,12 @@ package net.wg.gui.components.controls
             this.setup();
          }
       }
-
+      
       override public function setData(param1:Object) : void {
          this.data = param1;
          invalidate("data");
       }
-
+      
       private function setup() : void {
          if(data)
          {
@@ -38,7 +37,7 @@ package net.wg.gui.components.controls
             this.icon.source = data.icon;
          }
       }
-
+      
       protected function completeLoadA(param1:UILoaderEvent) : void {
          this.ico_border.visible = true;
          if(this.icon.hasEventListener(UILoaderEvent.COMPLETE))
@@ -46,7 +45,7 @@ package net.wg.gui.components.controls
             this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.completeLoadA);
          }
       }
-
+      
       override protected function draw() : void {
          if(isInvalid("data"))
          {
@@ -55,5 +54,4 @@ package net.wg.gui.components.controls
          super.draw();
       }
    }
-
 }

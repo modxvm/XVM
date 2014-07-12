@@ -8,63 +8,62 @@ package net.wg.gui.components.advanced
    import flash.text.TextFormat;
    import flash.text.TextFieldAutoSize;
    import flash.text.TextFormatAlign;
-
-
+   
    public class HelpLayoutControl extends UIComponent implements IDynamicContent
    {
-          
+      
       public function HelpLayoutControl() {
          super();
       }
-
+      
       public var textField:TextField;
-
+      
       public var connector:MovieClip;
-
+      
       public var border:MovieClip;
-
+      
       private var _text:String = "";
-
+      
       private var _direction:String = "T";
-
+      
       private var _borderWidth:Number = 256;
-
+      
       private var _borderHeight:Number = 256;
-
+      
       private var _connectorLength:Number = 12;
-
+      
       override protected function onDispose() : void {
          this.textField = null;
          this.connector = null;
          this.border = null;
          super.onDispose();
       }
-
+      
       public function get connectorLength() : Number {
          return this._connectorLength;
       }
-
+      
       public function set connectorLength(param1:Number) : void {
          this._connectorLength = param1;
       }
-
+      
       public function set borderWidth(param1:Number) : void {
          this._borderWidth = param1;
       }
-
+      
       public function set borderHeight(param1:Number) : void {
          this._borderHeight = param1;
       }
-
+      
       public function set direction(param1:String) : void {
          App.utils.asserter.assert(!(Directions.LAYOUT_DIRECTIONS.indexOf(param1) == -1),"invalid direction: " + param1);
          this._direction = param1;
       }
-
+      
       public function set text(param1:String) : void {
          this._text = param1;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          scaleX = scaleY = 1;
@@ -74,7 +73,7 @@ package net.wg.gui.components.advanced
          this.setTextFieldPosition();
          super.draw();
       }
-
+      
       private function setConnectorPosition() : void {
          if(this.connector == null)
          {
@@ -104,7 +103,7 @@ package net.wg.gui.components.advanced
                break;
          }
       }
-
+      
       private function setTextFieldPosition() : void {
          if(this.textField == null)
          {
@@ -146,5 +145,4 @@ package net.wg.gui.components.advanced
          this.textField.setTextFormat(_loc1_);
       }
    }
-
 }

@@ -4,28 +4,27 @@ package net.wg.gui.cyberSport.views.unit
    import net.wg.gui.rally.controls.RallySimpleSlotRenderer;
    import net.wg.gui.rally.interfaces.IRallySlotVO;
    import net.wg.infrastructure.interfaces.IUserProps;
-   import net.wg.gui.rally.vo.RallySlotVO;
    import net.wg.gui.cyberSport.controls.GrayTransparentButton;
    import net.wg.data.constants.Values;
+   import net.wg.gui.rally.vo.RallySlotVO;
    import flash.display.InteractiveObject;
    import net.wg.gui.utils.ComplexTooltipHelper;
    import net.wg.data.constants.Tooltips;
    import net.wg.gui.cyberSport.controls.CSVehicleButton;
-
-
+   
    public class UnitSlotHelper extends BaseRallySlotHelper
    {
-          
+      
       public function UnitSlotHelper() {
          super();
       }
-
+      
       private static const REMOVE_BTN_PROPS:Object;
-
+      
       private static const LOCK_BTN_PROPS:Object;
-
+      
       private static const BTN_PROPS:Object;
-
+      
       override public function initControlsState(param1:RallySimpleSlotRenderer) : void {
          var _loc3_:SlotRenderer = null;
          super.initControlsState(param1);
@@ -50,16 +49,15 @@ package net.wg.gui.cyberSport.views.unit
             _loc3_.lockBackground.visible = false;
          }
       }
-
+      
       override public function updateComponents(param1:RallySimpleSlotRenderer, param2:IRallySlotVO) : void {
-         var _loc5_:SlotRenderer = null;
          var _loc6_:* = false;
          var _loc7_:IUserProps = null;
          var _loc8_:* = false;
          super.updateComponents(param1,param2);
          this.updateCommonControls(param1,param2);
          var _loc3_:RallySimpleSlotRenderer = param1 as RallySimpleSlotRenderer;
-         var _loc4_:RallySlotVO = param2 as RallySlotVO;
+         var _loc4_:IRallySlotVO = param2 as IRallySlotVO;
          if((_loc4_) && (_loc3_))
          {
             if(!_loc4_.isClosed)
@@ -70,28 +68,24 @@ package net.wg.gui.cyberSport.views.unit
                {
                   _loc3_.vehicleBtn.setVehicle(_loc4_.selectedVehicle);
                }
+               else if(_loc4_.isCommanderState)
+               {
+                  _loc3_.vehicleBtn.vehicleCount = -1;
+                  _loc3_.vehicleBtn.showCommanderSettings = !(_loc3_.index == 0) && (_loc4_.hasRestrictions);
+                  _loc3_.vehicleBtn.visible = (Boolean(_loc4_.player)) || (_loc3_.vehicleBtn.showCommanderSettings);
+               }
+               else if(!_loc4_.isCommanderState && !_loc4_.player)
+               {
+                  _loc3_.vehicleBtn.vehicleCount = _loc3_.index == 0 || !_loc4_.hasRestrictions?-1:_loc4_.compatibleVehiclesCount;
+                  _loc3_.vehicleBtn.visible = (Boolean(_loc4_.player)) || _loc3_.vehicleBtn.vehicleCount > -1;
+               }
                else
                {
-                  if(_loc4_.isCommanderState)
-                  {
-                     _loc3_.vehicleBtn.vehicleCount = -1;
-                     _loc3_.vehicleBtn.showCommanderSettings = !(_loc3_.index == 0) && (_loc4_.hasRestrictions);
-                     _loc3_.vehicleBtn.visible = (Boolean(_loc4_.player)) || (_loc3_.vehicleBtn.showCommanderSettings);
-                  }
-                  else
-                  {
-                     if(!_loc4_.isCommanderState && !_loc4_.player)
-                     {
-                        _loc3_.vehicleBtn.vehicleCount = _loc3_.index == 0 || !_loc4_.hasRestrictions?-1:_loc4_.compatibleVehiclesCount;
-                        _loc3_.vehicleBtn.visible = (Boolean(_loc4_.player)) || _loc3_.vehicleBtn.vehicleCount > -1;
-                     }
-                     else
-                     {
-                        _loc3_.vehicleBtn.vehicleCount = -1;
-                        _loc3_.vehicleBtn.visible = Boolean(_loc4_.player);
-                     }
-                  }
+                  _loc3_.vehicleBtn.vehicleCount = -1;
+                  _loc3_.vehicleBtn.visible = Boolean(_loc4_.player);
                }
+               
+               
                _loc3_.vehicleBtn.selectState(!_loc4_.selectedVehicle && (_loc4_.player) && (_loc4_.player.himself));
                if(_loc4_.player)
                {
@@ -132,7 +126,7 @@ package net.wg.gui.cyberSport.views.unit
                _loc3_.takePlaceBtn.visible = (_loc6_) && (_loc4_.isCurrentUserInSlot);
             }
          }
-         _loc5_ = param1 as SlotRenderer;
+         var _loc5_:SlotRenderer = param1 as SlotRenderer;
          if(_loc5_)
          {
             if(_loc4_)
@@ -198,7 +192,7 @@ package net.wg.gui.cyberSport.views.unit
             _loc5_.updateVoiceWave();
          }
       }
-
+      
       private function updateCommonControls(param1:RallySimpleSlotRenderer, param2:IRallySlotVO) : void {
          var _loc3_:RallySlotVO = param2 as RallySlotVO;
          var _loc4_:Object = param1;
@@ -223,8 +217,8 @@ package net.wg.gui.cyberSport.views.unit
             }
          }
       }
-
-      override public function onControlRollOver(param1:InteractiveObject, param2:RallySimpleSlotRenderer, param3:IRallySlotVO, param4:*=null) : void {
+      
+      override public function onControlRollOver(param1:InteractiveObject, param2:RallySimpleSlotRenderer, param3:IRallySlotVO, param4:* = null) : void {
          var _loc7_:ComplexTooltipHelper = null;
          var _loc8_:String = null;
          super.onControlRollOver(param1,param2,param3,param4);
@@ -240,30 +234,26 @@ package net.wg.gui.cyberSport.views.unit
                {
                   App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNIT_SLOTLABELCLOSED);
                }
-               else
+               else if(_loc5_.compatibleVehiclesCount == 0 && !_loc5_.player)
                {
-                  if(_loc5_.compatibleVehiclesCount == 0 && !_loc5_.player)
+                  if(_loc5_.isCommanderState)
                   {
-                     if(_loc5_.isCommanderState)
+                     if((_loc5_.restrictions) && ((_loc5_.restrictions[0]) || (_loc5_.restrictions[1])))
                      {
-                        if((_loc5_.restrictions) && ((_loc5_.restrictions[0]) || (_loc5_.restrictions[1])))
-                        {
-                           App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_SLOT,null,param2.index,_loc5_.rallyIdx);
-                        }
-                     }
-                     else
-                     {
-                        App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNIT_SLOTLABELUNAVAILABLE);
+                        App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_SLOT,null,param2.index,_loc5_.rallyIdx);
                      }
                   }
                   else
                   {
-                     if(_loc5_.player)
-                     {
-                        App.toolTipMgr.show(_loc5_.player.getToolTip());
-                     }
+                     App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNIT_SLOTLABELUNAVAILABLE);
                   }
                }
+               else if(_loc5_.player)
+               {
+                  App.toolTipMgr.show(_loc5_.player.getToolTip());
+               }
+               
+               
                break;
             case param2.takePlaceBtn:
                App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNIT_TAKEPLACEBTN);
@@ -276,34 +266,30 @@ package net.wg.gui.cyberSport.views.unit
                {
                   App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_SELECTVEHICLE);
                }
-               else
+               else if(param2.vehicleBtn.currentState == CSVehicleButton.DEFAULT_STATE)
                {
-                  if(param2.vehicleBtn.currentState == CSVehicleButton.DEFAULT_STATE)
+                  App.toolTipMgr.showComplex(TOOLTIPS.MEDALION_NOVEHICLE);
+               }
+               else if(param2.vehicleBtn.currentState == CSVehicleButton.SELECTED_VEHICLE)
+               {
+                  if((param4) && param4.type == "alert")
                   {
-                     App.toolTipMgr.showComplex(TOOLTIPS.MEDALION_NOVEHICLE);
+                     _loc7_ = new ComplexTooltipHelper();
+                     _loc7_.addHeader(param4.state);
+                     _loc7_.addBody(TOOLTIPS.CYBERSPORT_UNIT_SLOT_VEHICLE_NOTREADY_TEMPORALLY_BODY,true);
+                     App.toolTipMgr.showComplex(_loc7_.make());
                   }
                   else
                   {
-                     if(param2.vehicleBtn.currentState == CSVehicleButton.SELECTED_VEHICLE)
-                     {
-                        if((param4) && param4.type == "alert")
-                        {
-                           _loc7_ = new ComplexTooltipHelper();
-                           _loc7_.addHeader(param4.state);
-                           _loc7_.addBody(TOOLTIPS.CYBERSPORT_UNIT_SLOT_VEHICLE_NOTREADY_TEMPORALLY_BODY,true);
-                           App.toolTipMgr.showComplex(_loc7_.make());
-                        }
-                        else
-                        {
-                           App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_SLOT_SELECTED,null,param2.index,_loc5_.rallyIdx);
-                        }
-                     }
-                     else
-                     {
-                        App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_SLOT,null,param2.index,_loc5_.rallyIdx);
-                     }
+                     App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_SLOT_SELECTED,null,param2.index,_loc5_.rallyIdx);
                   }
                }
+               else
+               {
+                  App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_SLOT,null,param2.index,_loc5_.rallyIdx);
+               }
+               
+               
                break;
          }
          var _loc6_:SlotRenderer = param2 as SlotRenderer;
@@ -317,5 +303,4 @@ package net.wg.gui.cyberSport.views.unit
          }
       }
    }
-
 }

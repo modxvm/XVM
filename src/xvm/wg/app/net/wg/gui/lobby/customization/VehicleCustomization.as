@@ -26,11 +26,10 @@ package net.wg.gui.lobby.customization
    import scaleform.clik.events.IndexEvent;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ListEvent;
-
-
+   
    public class VehicleCustomization extends VehicleCustomizationMeta implements IVehicleCustomizationMeta
    {
-          
+      
       public function VehicleCustomization() {
          this.typeToNewIds = {};
          super();
@@ -54,94 +53,94 @@ package net.wg.gui.lobby.customization
          this.inscriptionRightRentalPackageDP = new RentalPackageDAAPIDataProvider();
          this._sectionsData = {};
       }
-
+      
       private static var _instance:VehicleCustomization = null;
-
+      
       public static function get instance() : VehicleCustomization {
          return _instance;
       }
-
+      
       private static function showToolTip(param1:AccordionRendererEvent) : void {
          if(!param1.target.enabled && (App.globalVarsMgr.isInRoamingS()))
          {
             App.toolTipMgr.show(TOOLTIPS.CUSTOMIZATION_TABS_INROAMING);
          }
       }
-
+      
       private static function hideToolTip(param1:Event) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private const SECTION_VIEW:String = "SectionView";
-
+      
       public var textColor:Number = 16777215;
-
+      
       public var errorColor:Number = 16711680;
-
+      
       public var background:MovieClip = null;
-
+      
       public var titleBtn:TextFieldShort = null;
-
+      
       public var windowCloseButton:CloseButton = null;
-
+      
       public var accordion:Accordion = null;
-
+      
       public var currentView:ViewStack = null;
-
+      
       public var priceList:TileList = null;
-
+      
       public var totalCreditsField:IconText = null;
-
+      
       public var totalGoldField:IconText = null;
-
+      
       public var applyButton:SoundButtonEx = null;
-
+      
       public var closeButton:SoundButtonEx = null;
-
+      
       public var camouflageDP:CamouflagesDataProvider = null;
-
+      
       public var emblemLeftDP:DAAPIItemsDataProvider = null;
-
+      
       public var emblemRightDP:DAAPIItemsDataProvider = null;
-
+      
       public var inscriptionLeftDP:DAAPIItemsDataProvider = null;
-
+      
       public var inscriptionRightDP:DAAPIItemsDataProvider = null;
-
+      
       public var camouflageRentalPackageDP:RentalPackageDAAPIDataProvider = null;
-
+      
       public var emblemLeftRentalPackageDP:RentalPackageDAAPIDataProvider = null;
-
+      
       public var emblemRightRentalPackageDP:RentalPackageDAAPIDataProvider = null;
-
+      
       public var inscriptionLeftRentalPackageDP:RentalPackageDAAPIDataProvider = null;
-
+      
       public var inscriptionRightRentalPackageDP:RentalPackageDAAPIDataProvider = null;
-
+      
       public var camouflageGroupsDataProvider:DAAPIDataProvider = null;
-
+      
       public var emblemLeftGroupsDataProvider:DAAPIDataProvider = null;
-
+      
       public var emblemRightGroupsDataProvider:DAAPIDataProvider = null;
-
+      
       public var inscriptionLeftGroupsDataProvider:DAAPIDataProvider = null;
-
+      
       public var inscriptionRightGroupsDataProvider:DAAPIDataProvider = null;
-
+      
       private var _sectionsDataProvider:DataProvider = null;
-
+      
       private var _priceDataProvider:DataProvider = null;
-
+      
       private var _selectedSections:Array = null;
-
+      
       private var _sectionsData:Object = null;
-
+      
       private var _actionsLocked:Boolean = false;
-
+      
       private var _accountCredits:Number;
-
+      
       private var _accountGold:Number;
-
+      
       override public function handleInput(param1:InputEvent) : void {
          super.handleInput(param1);
          if(param1.handled)
@@ -155,16 +154,16 @@ package net.wg.gui.lobby.customization
             closeWindowS();
          }
       }
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
          y = param2 - this.background.height + 13;
       }
-
+      
       public function showView(param1:String) : MovieClip {
          return this.currentView.show(param1);
       }
-
+      
       public function as_onServerResponsesReceived() : void {
          var _loc1_:Object = null;
          var _loc2_:Number = 0;
@@ -184,7 +183,7 @@ package net.wg.gui.lobby.customization
          this._sectionsData = {};
          this.applyButton.enabled = false;
       }
-
+      
       public function as_onInit(param1:Array) : void {
          var _loc2_:* = NaN;
          var _loc3_:* = NaN;
@@ -205,8 +204,7 @@ package net.wg.gui.lobby.customization
                      "data":_loc5_ + this.SECTION_VIEW,
                      "linkage":_loc4_.linkage,
                      "enabled":_loc4_.enabled
-                  }
-               );
+                  });
                this._priceDataProvider.push(
                   {
                      "label":_loc4_.priceLabel,
@@ -215,21 +213,19 @@ package net.wg.gui.lobby.customization
                         {
                            "isGold":false,
                            "cost":0
-                        }
-                     ,
+                        },
                      "priceOverride":null,
                      "selected":false,
                      "enabled":false,
                      "type":_loc4_.type
-                  }
-               );
+                  });
                _loc2_++;
             }
             this.accordion.invalidate();
             this._priceDataProvider.invalidate();
          }
       }
-
+      
       public function as_setActionsLocked(param1:Boolean) : void {
          if(this._actionsLocked == param1)
          {
@@ -241,37 +237,37 @@ package net.wg.gui.lobby.customization
          _loc2_.locked = param1;
          dispatchEvent(_loc2_);
       }
-
+      
       public function as_onChangeSuccess() : void {
          this.accordion.view.currentView.onChangeSuccess();
       }
-
+      
       public function as_onCurrentChanged(param1:String) : void {
          if(param1 == this._sectionsDataProvider[this.accordion.selectedIndex].section)
          {
             this.accordion.view.currentView.onCurrentChanged();
          }
       }
-
+      
       public function as_onDropSuccess() : void {
          this.accordion.view.currentView.onDropSuccess();
       }
-
+      
       public function as_onResetNewItem() : void {
          this.as_onServerResponsesReceived();
          this.accordion.view.currentView.dispatchEvent(new CustomizationEvent(CustomizationEvent.RESET_NEW_ITEM));
       }
-
+      
       public function as_setCredits(param1:Number) : void {
          this._accountCredits = param1;
          this.calculateTotalPrice();
       }
-
+      
       public function as_setGold(param1:Number) : void {
          this._accountGold = param1;
          this.calculateTotalPrice();
       }
-
+      
       public function as_refreshData() : void {
          this._sectionsData = {};
          this.camouflageRentalPackageDP.invalidate();
@@ -287,7 +283,7 @@ package net.wg.gui.lobby.customization
          this.as_refreshItemsData();
          this.accordion.view.currentView.refreshSelection(true);
       }
-
+      
       public function as_refreshItemsData() : void {
          this.camouflageDP.invalidateRemote(true);
          this.emblemLeftDP.invalidateRemote(true);
@@ -295,156 +291,30 @@ package net.wg.gui.lobby.customization
          this.inscriptionLeftDP.invalidateRemote(true);
          this.inscriptionRightDP.invalidateRemote(true);
       }
-
+      
       public function isActionsLocked() : Boolean {
          return this._actionsLocked;
       }
-
+      
       public function getSectionData(param1:String) : Object {
          return this._sectionsData[param1];
       }
-
+      
       public function resetSectionData(param1:String) : void {
          this._sectionsData[param1] = null;
       }
-
+      
       private var typeToNewIds:Object;
-
+      
       public function setSectionData(param1:String, param2:Boolean, param3:Object) : void {
-         var _loc4_:Object = null;
-         var _loc5_:Object = null;
-         var _loc8_:* = 0;
-         var _loc9_:* = 0;
-         var _loc10_:Object = null;
-         var _loc12_:Object = null;
-         var _loc13_:* = false;
-         this._sectionsData[param1] = param3;
-         var _loc6_:Array = [];
-         var _loc7_:Array = [];
-         _loc8_ = 0;
-         while(_loc8_ < this._priceDataProvider.length)
-         {
-            _loc10_ = this._priceDataProvider[_loc8_];
-            if((_loc10_.hasOwnProperty("fake")) && _loc10_.section == param1)
-            {
-               _loc5_ = _loc10_;
-               break;
-            }
-            _loc8_++;
-         }
-         if(_loc5_ != null)
-         {
-            this._priceDataProvider.splice(_loc8_,1);
-            _loc5_ = null;
-         }
-         var _loc11_:Object = null;
-         this.typeToNewIds = {};
-         _loc8_ = 0;
-         while(_loc8_ < this._priceDataProvider.length)
-         {
-            _loc10_ = this._priceDataProvider[_loc8_];
-            if(_loc10_)
-            {
-               if(!(_loc10_.type  in  this.typeToNewIds))
-               {
-                  this.typeToNewIds[_loc10_.type] = [];
-               }
-               if(this._sectionsData[_loc10_.section])
-               {
-                  _loc11_ = this._sectionsData[_loc10_.section]._new;
-                  if(((_loc11_) && (_loc11_.price)) && (!(_loc11_.price  is  Array)) && (_loc11_.price.isGold))
-                  {
-                     if((this.typeToNewIds[_loc10_.type]) && this.typeToNewIds[_loc10_.type].indexOf(_loc11_.id) == -1)
-                     {
-                        this.typeToNewIds[_loc10_.type].push(_loc11_.id);
-                     }
-                  }
-               }
-            }
-            _loc8_++;
-         }
-         _loc8_ = 0;
-         while(_loc8_ < this._priceDataProvider.length)
-         {
-            _loc10_ = this._priceDataProvider[_loc8_];
-            if(this._sectionsData[_loc10_.section])
-            {
-               _loc11_ = this._sectionsData[_loc10_.section]._new;
-            }
-            if(_loc10_.section == param1)
-            {
-               if(param3.price  is  Array && param3.price.length > 0)
-               {
-                  _loc9_ = 0;
-                  while(_loc9_ < param3.price.length)
-                  {
-                     _loc4_ = param3.price[_loc9_];
-                     if(_loc4_.isGold)
-                     {
-                        _loc6_.push(_loc4_);
-                     }
-                     else
-                     {
-                        _loc7_.push(_loc4_);
-                     }
-                     _loc9_++;
-                  }
-                  if(_loc6_.length > 0 && _loc7_.length > 0)
-                  {
-                     _loc5_ =
-                        {
-                           "label":_loc10_.label,
-                           "section":_loc10_.section,
-                           "price":this.getSumCost(_loc7_),
-                           "priceOverride":null,
-                           "selected":true,
-                           "enabled":true,
-                           "fake":true
-                        }
-                     ;
-                     _loc10_.price = this.getSumCost(_loc6_);
-                  }
-                  else
-                  {
-                     _loc10_.price = this.getSumCost(param3.price);
-                  }
-               }
-               else
-               {
-                  _loc10_.price = param3.price;
-               }
-               _loc10_.selected = param2;
-               if(param3.hasOwnProperty("selectedItems"))
-               {
-                  _loc13_ = false;
-                  for each (_loc12_ in param3.selectedItems)
-                  {
-                     if(_loc12_)
-                     {
-                        _loc13_ = _loc12_.id > 0;
-                     }
-                     if(_loc13_)
-                     {
-                        break;
-                     }
-                  }
-                  _loc10_.enabled = _loc13_;
-               }
-               else
-               {
-                  _loc10_.enabled = param3._new.id > 0;
-               }
-            }
-            _loc8_++;
-         }
-         if(_loc5_ != null)
-         {
-            this._priceDataProvider.splice(0,0,_loc5_);
-         }
-         this._priceDataProvider.invalidate();
-         this.calculateTotalPrice();
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: TranslateException
+          */
+         throw new flash.errors.IllegalOperationError("Not decompiled due to error");
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.REGISTER_DRAGGING));
@@ -464,7 +334,7 @@ package net.wg.gui.lobby.customization
          this.applyButton.addEventListener(ButtonEvent.CLICK,this.onClickApplyButton);
          setFocus(this.closeButton);
       }
-
+      
       override protected function onDispose() : void {
          App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.UNREGISTER_DRAGGING));
          this.windowCloseButton.removeEventListener(ButtonEvent.CLICK,this.onWindowClose);
@@ -506,7 +376,7 @@ package net.wg.gui.lobby.customization
          this._selectedSections = null;
          super.onDispose();
       }
-
+      
       private function onViewChange(param1:IndexEvent) : void {
          if((this.accordion.view.currentView) && (this.accordion.view.currentView.initialized))
          {
@@ -515,11 +385,11 @@ package net.wg.gui.lobby.customization
             this.accordion.view.currentView.requestCurrentItem();
          }
       }
-
+      
       private function onWindowClose(param1:ButtonEvent) : void {
          closeWindowS();
       }
-
+      
       private function handleClickPriceItem(param1:ListEvent) : void {
          var _loc5_:Array = null;
          var _loc6_:Object = null;
@@ -545,20 +415,19 @@ package net.wg.gui.lobby.customization
          }
          this.calculateTotalPrice();
       }
-
+      
       private function onClickApplyButton(param1:ButtonEvent) : void {
          applyCustomizationS(this._selectedSections);
       }
-
+      
       private function getSumCost(param1:Array) : Object {
          var _loc3_:* = 0;
          var _loc4_:Object = null;
-         var _loc2_:Object =
+         var _loc2_:Object = 
             {
                "isGold":false,
                "cost":0
-            }
-         ;
+            };
          _loc3_ = 0;
          while(_loc3_ < param1.length)
          {
@@ -569,7 +438,7 @@ package net.wg.gui.lobby.customization
          }
          return _loc2_;
       }
-
+      
       private function calculateTotalPrice() : void {
          var _loc6_:Object = null;
          var _loc7_:Object = null;
@@ -591,12 +460,12 @@ package net.wg.gui.lobby.customization
             if(_loc7_)
             {
                _loc7_.priceOverride = null;
-               if(!(_loc7_.type  in  _loc10_))
+               if(!(_loc7_.type in _loc10_))
                {
                   _loc10_[_loc7_.type] = [];
                }
                _loc8_ = this._sectionsData[_loc7_.section]?this._sectionsData[_loc7_.section]._new:null;
-               if(((_loc8_) && (_loc8_.price)) && (!(_loc8_.price  is  Array)) && (this.typeToNewIds[_loc7_.type]) && !(this.typeToNewIds[_loc7_.type].indexOf(_loc8_.id) == -1))
+               if((_loc8_ && _loc8_.price) && (!(_loc8_.price is Array)) && (this.typeToNewIds[_loc7_.type]) && !(this.typeToNewIds[_loc7_.type].indexOf(_loc8_.id) == -1))
                {
                   if(_loc8_.price.isGold)
                   {
@@ -606,22 +475,20 @@ package net.wg.gui.lobby.customization
                      }
                      else
                      {
-                        _loc7_.priceOverride =
+                        _loc7_.priceOverride = 
                            {
                               "isGold":true,
                               "cost":0
-                           }
-                        ;
+                           };
                      }
                   }
                   else
                   {
-                     _loc7_.priceOverride =
+                     _loc7_.priceOverride = 
                         {
                            "isGold":false,
                            "cost":0
-                        }
-                     ;
+                        };
                   }
                }
             }
@@ -639,7 +506,7 @@ package net.wg.gui.lobby.customization
                _loc6_ = _loc11_.priceOverride?_loc11_.priceOverride:_loc11_.price;
                if(_loc6_ != null)
                {
-                  if(_loc6_  is  Array)
+                  if(_loc6_ is Array)
                   {
                      _loc12_ = 0;
                      while(_loc12_ < _loc6_.lengh)
@@ -660,25 +527,22 @@ package net.wg.gui.lobby.customization
                         _loc12_++;
                      }
                   }
+                  else if(_loc6_.isGold)
+                  {
+                     _loc3_ = true;
+                     _loc2_ = _loc2_ + _loc6_.cost;
+                  }
                   else
                   {
-                     if(_loc6_.isGold)
-                     {
-                        _loc3_ = true;
-                        _loc2_ = _loc2_ + _loc6_.cost;
-                     }
-                     else
-                     {
-                        _loc1_ = _loc1_ + _loc6_.cost;
-                     }
+                     _loc1_ = _loc1_ + _loc6_.cost;
                   }
+                  
                }
                this._selectedSections.push(
                   {
                      "sectionName":_loc11_.section,
                      "isGold":_loc3_
-                  }
-               );
+                  });
             }
             _loc9_++;
          }
@@ -705,5 +569,4 @@ package net.wg.gui.lobby.customization
          this.applyButton.enabled = !this._actionsLocked && (_loc5_) && (_loc4_) && _loc1_ >= 0 && _loc2_ >= 0 && this._selectedSections.length > 0;
       }
    }
-
 }

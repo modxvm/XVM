@@ -1,10 +1,8 @@
 package net.wg.gui.lobby.fortifications.data
 {
-
-
    public class BuildingCardPopoverVO extends BuildingPopoverBaseVO
    {
-          
+      
       public function BuildingCardPopoverVO(param1:Object) {
          super(param1);
          if((this.buildingHeader) && (this.buildingsIndicators) && (this.defResInfo))
@@ -19,29 +17,31 @@ package net.wg.gui.lobby.fortifications.data
             this.actionData.buildingType = buildingType;
          }
       }
-
+      
       protected static const BUILDING_HEADER:String = "buildingHeader";
-
+      
       protected static const BUILDING_INDICATORS:String = "buildingIndicators";
-
+      
       protected static const DEFRES_INFO:String = "defresInfo";
-
+      
       protected static const ACTION_DATA:String = "actionData";
-
+      
       public var isTutorial:Boolean = false;
-
+      
       public var buildingHeader:BuildingPopoverHeaderVO;
-
+      
       public var buildingsIndicators:BuildingIndicatorsVO;
-
+      
       public var defResInfo:OrderInfoVO;
-
+      
       public var actionData:BuildingPopoverActionVO;
-
+      
       public var assignLbl:String = "";
-
+      
       public var playerCount:int = -1;
-
+      
+      public var maxPlayerCount:int = -1;
+      
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          if(param1 == BUILDING_INDICATORS)
          {
@@ -66,5 +66,4 @@ package net.wg.gui.lobby.fortifications.data
          return super.onDataWrite(param1,param2);
       }
    }
-
 }

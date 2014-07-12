@@ -4,78 +4,77 @@ package net.wg.gui.components.tooltips.VO
    import net.wg.data.constants.ValObject;
    import net.wg.gui.components.tooltips.ToolTipSpecial;
    import net.wg.gui.components.tooltips.helpers.Utils;
-
-
+   
    public class EquipmentVO extends Object
    {
-          
+      
       public function EquipmentVO(param1:Object) {
          super();
          this.parsHash(param1);
       }
-
+      
       public var eName:String = "";
-
+      
       public var type:String = "";
-
+      
       public var icon:String = "";
-
+      
       public var extraModuleInfo:ExtraModuleInfoVO = null;
-
+      
       public var tooHeavy:Boolean = false;
-
+      
       public var level:Number = NaN;
-
+      
       public var complex:Boolean = false;
-
+      
       public var complexHeader:String = "";
-
+      
       public var complexNote:String = "";
-
+      
       public var descr:String = "";
-
+      
       public var gold:Boolean = false;
-
+      
       public var removeable:Boolean = false;
-
+      
       public var haveResearchXP:Boolean = false;
-
+      
       public var stats:Object = null;
-
+      
       public var useGold:Boolean = false;
-
+      
       public var useCredits:Boolean = false;
-
+      
       public var isAction:Boolean = false;
-
+      
       public var params:Array = null;
-
+      
       public var paramsEx:Object = null;
-
+      
       public var paramsAdd:Array = null;
-
+      
       public var status:Boolean = false;
-
+      
       public var statusHeader:String = "";
-
+      
       public var statusText:String = "";
-
+      
       public var statusLevel:String = "";
-
+      
       public var effectOnUse:String = "";
-
+      
       public var effectAlways:String = "";
-
+      
       public var effectRestriction:String = "";
-
+      
       public var actionPrc:Number = NaN;
-
+      
       private var hiddenVehicleCount:Number = 0;
-
+      
       public var defSellPrice:Array = null;
-
+      
       public var defBuyPrice:Array = null;
-
+      
       private function parsHash(param1:Object) : void {
          var _loc2_:* = NaN;
          var _loc3_:* = NaN;
@@ -102,7 +101,7 @@ package net.wg.gui.components.tooltips.VO
          this.gold = (param1.hasOwnProperty("gold")) && !(param1["gold"] == undefined)?param1["gold"]:"";
          this.removeable = (param1.hasOwnProperty("removeable")) && !(param1["removeable"] == undefined)?param1["removeable"]:"";
          this.haveResearchXP = (param1.hasOwnProperty("haveResearchXP")) && !(param1["haveResearchXP"] == undefined)?param1["haveResearchXP"]:"";
-         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && param1["stats"]  is  Array?param1["stats"]:null;
+         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && param1["stats"] is Array?param1["stats"]:null;
          if(this.stats)
          {
             _loc2_ = this.stats.length;
@@ -114,8 +113,8 @@ package net.wg.gui.components.tooltips.VO
                if(_loc5_ == ToolTipSpecial.ID_BUY_PRICE || _loc5_ == ToolTipSpecial.ID_SELL_PRICE)
                {
                   _loc6_ = _loc4_[1];
-                  _loc7_ = _loc6_[0]  is  Array?_loc6_[0][0]:_loc6_[0];
-                  _loc8_ = _loc6_[0]  is  Array?_loc6_[0][1]:_loc6_[1];
+                  _loc7_ = _loc6_[0] is Array?_loc6_[0][0]:_loc6_[0];
+                  _loc8_ = _loc6_[0] is Array?_loc6_[0][1]:_loc6_[1];
                   if(_loc7_ > 0)
                   {
                      this.useCredits = true;
@@ -125,36 +124,28 @@ package net.wg.gui.components.tooltips.VO
                      this.useGold = true;
                   }
                }
-               else
+               else if(_loc5_ == VehicleBaseVO.DEF_BUY_PRICE)
                {
-                  if(_loc5_ == VehicleBaseVO.DEF_BUY_PRICE)
-                  {
-                     this.defBuyPrice = _loc4_[1];
-                  }
-                  else
-                  {
-                     if(_loc5_ == VehicleBaseVO.DEF_SELL_PRICE)
-                     {
-                        this.defSellPrice = _loc4_[1];
-                     }
-                     else
-                     {
-                        if(_loc5_ == VehicleBaseVO.ACTION_PRC)
-                        {
-                           _loc9_ = _loc4_[1];
-                           this.isAction = !(_loc9_ == 0);
-                           this.actionPrc = _loc9_;
-                        }
-                        else
-                        {
-                           if(_loc5_ == "hiddenVehicleCount")
-                           {
-                              this.hiddenVehicleCount = _loc4_[1];
-                           }
-                        }
-                     }
-                  }
+                  this.defBuyPrice = _loc4_[1];
                }
+               else if(_loc5_ == VehicleBaseVO.DEF_SELL_PRICE)
+               {
+                  this.defSellPrice = _loc4_[1];
+               }
+               else if(_loc5_ == VehicleBaseVO.ACTION_PRC)
+               {
+                  _loc9_ = _loc4_[1];
+                  this.isAction = !(_loc9_ == 0);
+                  this.actionPrc = _loc9_;
+               }
+               else if(_loc5_ == "hiddenVehicleCount")
+               {
+                  this.hiddenVehicleCount = _loc4_[1];
+               }
+               
+               
+               
+               
                _loc3_++;
             }
          }
@@ -193,5 +184,4 @@ package net.wg.gui.components.tooltips.VO
          }
       }
    }
-
 }

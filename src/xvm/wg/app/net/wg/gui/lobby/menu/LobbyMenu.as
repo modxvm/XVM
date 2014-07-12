@@ -6,11 +6,10 @@ package net.wg.gui.lobby.menu
    import scaleform.clik.events.ButtonEvent;
    import flash.text.TextFieldAutoSize;
    import flash.display.InteractiveObject;
-
-
+   
    public class LobbyMenu extends LobbyMenuMeta implements ILobbyMenuMeta
    {
-          
+      
       public function LobbyMenu() {
          super();
          isCentered = true;
@@ -19,13 +18,13 @@ package net.wg.gui.lobby.menu
          showWindowBg = false;
          canDrag = false;
       }
-
+      
       public var content:LobbyMenuForm = null;
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
       }
-
+      
       override protected function onPopulate() : void {
          MovieClip(window.getBackground()).tabEnabled = false;
          MovieClip(window.getBackground()).tabChildren = false;
@@ -46,7 +45,7 @@ package net.wg.gui.lobby.menu
          super.onPopulate();
          this.updateStage(App.appWidth,App.appHeight);
       }
-
+      
       override protected function onDispose() : void {
          this.content.logoffBtn.removeEventListener(ButtonEvent.PRESS,this.onLogoffClick);
          this.content.settingsBtn.removeEventListener(ButtonEvent.PRESS,this.onSettingsClick);
@@ -55,12 +54,12 @@ package net.wg.gui.lobby.menu
          this.content = null;
          super.onDispose();
       }
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          setFocus(this.content.cancelBtn);
       }
-
+      
       private function onLogoffClick(param1:ButtonEvent) : void {
          if(App.globalVarsMgr.isTutorialRunningS())
          {
@@ -71,18 +70,17 @@ package net.wg.gui.lobby.menu
             logoffClickS();
          }
       }
-
+      
       private function onSettingsClick(param1:ButtonEvent) : void {
          settingsClickS();
       }
-
+      
       private function onQuitClick(param1:ButtonEvent) : void {
          quitClickS();
       }
-
-      private function onCancelClick(param1:ButtonEvent=null) : void {
+      
+      private function onCancelClick(param1:ButtonEvent = null) : void {
          cancelClickS();
       }
    }
-
 }

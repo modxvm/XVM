@@ -9,20 +9,19 @@ package net.wg.gui.lobby.battleResults
    import scaleform.clik.ui.InputDetails;
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.NavigationCode;
-
-
+   
    public class TeamStatsList extends ScrollingListEx
    {
-          
+      
       public function TeamStatsList() {
          super();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          wrapping = WrappingMode.NORMAL;
       }
-
+      
       override protected function drawLayout() : void {
          var _loc8_:IListItemRenderer = null;
          var _loc1_:uint = _renderers.length;
@@ -46,7 +45,7 @@ package net.wg.gui.lobby.battleResults
          }
          drawScrollBar();
       }
-
+      
       override protected function handleItemClick(param1:ButtonEvent) : void {
          var _loc2_:Number = (param1.currentTarget as IListItemRenderer).index;
          if(isNaN(_loc2_))
@@ -61,7 +60,7 @@ package net.wg.gui.lobby.battleResults
             }
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -88,33 +87,29 @@ package net.wg.gui.lobby.battleResults
                      return;
                   }
                }
-               else
+               else if(_selectedIndex > 0)
                {
-                  if(_selectedIndex > 0)
+                  if(_loc4_)
+                  {
+                     selectedIndex--;
+                  }
+               }
+               else if(wrapping != WrappingMode.STICK)
+               {
+                  if(wrapping == WrappingMode.WRAP)
                   {
                      if(_loc4_)
                      {
-                        selectedIndex--;
+                        selectedIndex = _dataProvider.length - 1;
                      }
                   }
                   else
                   {
-                     if(wrapping != WrappingMode.STICK)
-                     {
-                        if(wrapping == WrappingMode.WRAP)
-                        {
-                           if(_loc4_)
-                           {
-                              selectedIndex = _dataProvider.length-1;
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.DOWN:
                if(_selectedIndex == -1)
@@ -124,38 +119,34 @@ package net.wg.gui.lobby.battleResults
                      selectedIndex = _scrollPosition;
                   }
                }
-               else
+               else if(_selectedIndex < _dataProvider.length - 1)
                {
-                  if(_selectedIndex < _dataProvider.length-1)
+                  if(_loc4_)
+                  {
+                     selectedIndex++;
+                  }
+               }
+               else if(wrapping != WrappingMode.STICK)
+               {
+                  if(wrapping == WrappingMode.WRAP)
                   {
                      if(_loc4_)
                      {
-                        selectedIndex++;
+                        selectedIndex = 0;
                      }
                   }
                   else
                   {
-                     if(wrapping != WrappingMode.STICK)
-                     {
-                        if(wrapping == WrappingMode.WRAP)
-                        {
-                           if(_loc4_)
-                           {
-                              selectedIndex = 0;
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.END:
                if(!_loc4_)
                {
-                  selectedIndex = _dataProvider.length-1;
+                  selectedIndex = _dataProvider.length - 1;
                }
                break;
             case NavigationCode.HOME:
@@ -173,7 +164,7 @@ package net.wg.gui.lobby.battleResults
             case NavigationCode.PAGE_DOWN:
                if(_loc4_)
                {
-                  selectedIndex = Math.min(_dataProvider.length-1,_selectedIndex + _totalRenderers);
+                  selectedIndex = Math.min(_dataProvider.length - 1,_selectedIndex + _totalRenderers);
                }
                break;
             default:
@@ -182,5 +173,4 @@ package net.wg.gui.lobby.battleResults
          param1.handled = true;
       }
    }
-
 }

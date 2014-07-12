@@ -23,33 +23,32 @@ package net.wg.gui.lobby.settings.components
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.ui.InputDetails;
    import scaleform.clik.constants.InputValue;
-
-
+   
    public class KeyInput extends SoundButton
    {
-          
+      
       public function KeyInput() {
          super();
       }
-
+      
       public var alert:UIComponent;
-
+      
       public var bg:MovieClip;
-
+      
       public var border:MovieClip;
-
+      
       private var _keys:Array;
-
+      
       private var _keyCode:Number;
-
+      
       private var _keyString:String;
-
+      
       private var _keyDefault:Number;
-
+      
       override public function toString() : String {
          return "[WG KeyInput " + name + "]";
       }
-
+      
       override protected function onDispose() : void {
          this.clearEventListeners();
          if(this.hasEventListener(Event.SELECT))
@@ -58,7 +57,7 @@ package net.wg.gui.lobby.settings.components
          }
          super.onDispose();
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(param1 == enabled)
          {
@@ -67,27 +66,27 @@ package net.wg.gui.lobby.settings.components
          buttonMode = param1;
          super.enabled = param1;
       }
-
+      
       public function get keyCode() : Number {
          return this._keyCode;
       }
-
+      
       public function get keyString() : String {
          return this._keyString;
       }
-
+      
       public function get keyDefault() : Number {
          return this._keyDefault;
       }
-
+      
       public function set keyDefault(param1:Number) : void {
          this._keyDefault = param1;
       }
-
+      
       public function get key() : Number {
          return this._keyCode;
       }
-
+      
       public function set key(param1:Number) : void {
          if(this._keyCode == param1)
          {
@@ -101,16 +100,16 @@ package net.wg.gui.lobby.settings.components
          this._keyString = App.utils.commons.keyToString(this._keyCode).keyName;
          invalidateData();
       }
-
+      
       public function get keys() : Array {
          return this._keys;
       }
-
+      
       public function set keys(param1:Array) : void {
          this._keys = param1;
          this.__keysToUpperCase();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          stage.doubleClickEnabled = true;
@@ -119,16 +118,16 @@ package net.wg.gui.lobby.settings.components
          buttonMode = enabled;
          mouseEnabled = true;
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.DATA))
          {
-            textField.text = (this._keyString) || "";
+            textField.text = this._keyString || "";
             this.alert.visible = this._keyCode == KeysMap.KEY_NONE && !selected;
          }
          super.draw();
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
          var _loc5_:ButtonEvent = null;
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
@@ -153,7 +152,7 @@ package net.wg.gui.lobby.settings.components
             dispatchEvent(new KeyInputEvents(KeyInputEvents.DISABLE_PRESS,NaN,true,false));
          }
       }
-
+      
       override protected function handleReleaseOutside(param1:MouseEvent) : void {
          _autoRepeatEvent = null;
          if(contains(param1.target as DisplayObject))
@@ -182,7 +181,7 @@ package net.wg.gui.lobby.settings.components
             }
          }
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          if(!enabled)
          {
@@ -190,7 +189,7 @@ package net.wg.gui.lobby.settings.components
          }
          super.handleMouseRollOver(param1);
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          if(!enabled)
          {
@@ -198,7 +197,7 @@ package net.wg.gui.lobby.settings.components
          }
          super.handleMouseRollOut(param1);
       }
-
+      
       private function __keysToUpperCase() : void {
          var _loc1_:uint = 0;
          while(_loc1_ < this._keys.length)
@@ -207,13 +206,13 @@ package net.wg.gui.lobby.settings.components
             _loc1_++;
          }
       }
-
+      
       private function addEventListeners() : void {
          this.addEventListener(ButtonEvent.PRESS,this.onKeyDown);
          App.stage.addEventListener(MouseEvent.MOUSE_DOWN,this.handleReleaseOutside,false,0,true);
          this.addEventListener(ButtonEvent.RELEASE_OUTSIDE,this.onKeyDown);
       }
-
+      
       private function clearEventListeners() : void {
          if(this.hasEventListener(ButtonEvent.PRESS))
          {
@@ -228,7 +227,7 @@ package net.wg.gui.lobby.settings.components
             App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleReleaseOutside,false);
          }
       }
-
+      
       private function __processCode(param1:Number) : void {
          var _loc3_:Point = null;
          var _loc4_:ITooltipProps = null;
@@ -257,16 +256,16 @@ package net.wg.gui.lobby.settings.components
             this.__inputClose();
          }
       }
-
+      
       private function __isInKeySet(param1:String) : Boolean {
          return this._keys.indexOf(param1,0) > -1;
       }
-
+      
       private function __inputClose() : void {
          selected = false;
          invalidate();
       }
-
+      
       private function onButtonSelect(param1:Event) : void {
          if(this.selected)
          {
@@ -277,11 +276,11 @@ package net.wg.gui.lobby.settings.components
             this.clearEventListeners();
          }
       }
-
+      
       private function onKeyDown(param1:ButtonEvent) : void {
          this.__processCode(param1.isKeyboard?param1.controllerIdx:param1.buttonIdx);
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          var _loc2_:InputDetails = null;
          var _loc3_:uint = 0;
@@ -302,5 +301,4 @@ package net.wg.gui.lobby.settings.components
          super.handleInput(param1);
       }
    }
-
 }

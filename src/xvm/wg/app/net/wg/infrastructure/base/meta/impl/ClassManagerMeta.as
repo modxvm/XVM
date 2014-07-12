@@ -96,10 +96,12 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.data.utilData.TwoDimensionalPadding;
    import net.wg.gui.components.advanced.Accordion;
    import net.wg.gui.components.advanced.AmmunitionButton;
+   import net.wg.gui.components.advanced.BackButton;
    import net.wg.gui.components.advanced.BlinkingButton;
    import net.wg.gui.components.advanced.ButtonBarEx;
    import net.wg.gui.components.advanced.ButtonDnmIcon;
    import net.wg.gui.components.advanced.ButtonIconLoader;
+   import net.wg.gui.components.advanced.ButtonToggleIndicator;
    import net.wg.gui.components.advanced.ClanEmblem;
    import net.wg.gui.components.advanced.ContentTabBar;
    import net.wg.gui.components.advanced.ContentTabRenderer;
@@ -115,6 +117,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.components.advanced.LineDescrIconText;
    import net.wg.gui.components.advanced.LineIconText;
    import net.wg.gui.components.advanced.ModuleIcon;
+   import net.wg.gui.components.advanced.NormalButtonToggleWG;
    import net.wg.gui.components.advanced.PortraitItemRenderer;
    import net.wg.gui.components.advanced.ScalableIconButton;
    import net.wg.gui.components.advanced.ScalableIconWrapper;
@@ -129,6 +132,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.components.advanced.TextArea;
    import net.wg.gui.components.advanced.TextAreaSimple;
    import net.wg.gui.components.advanced.ToggleButton;
+   import net.wg.gui.components.advanced.ToggleSoundButton;
    import net.wg.gui.components.advanced.UnClickableShadowBG;
    import net.wg.gui.components.advanced.UnderlinedText;
    import net.wg.gui.components.advanced.ViewStack;
@@ -208,6 +212,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.components.controls.ActionPrice;
    import net.wg.gui.components.controls.AlertIco;
    import net.wg.gui.components.controls.BitmapFill;
+   import net.wg.gui.components.controls.BorderShadowScrollPane;
    import net.wg.gui.components.controls.Carousel;
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.CloseButton;
@@ -244,7 +249,9 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.components.controls.RangeSlider;
    import net.wg.gui.components.controls.ReadOnlyScrollingList;
    import net.wg.gui.components.controls.RegionDropdownMenu;
+   import net.wg.gui.components.controls.ResizableScrollPane;
    import net.wg.gui.components.controls.ScrollBar;
+   import net.wg.gui.components.controls.ScrollPane;
    import net.wg.gui.components.controls.ScrollingListAutoScroll;
    import net.wg.gui.components.controls.ScrollingListEx;
    import net.wg.gui.components.controls.ScrollingListPx;
@@ -340,6 +347,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.components.tooltips.VO.AchievementVO;
    import net.wg.gui.components.tooltips.VO.ClanInfoVO;
    import net.wg.gui.components.tooltips.VO.Dimension;
+   import net.wg.gui.components.tooltips.VO.DivisionVO;
    import net.wg.gui.components.tooltips.VO.EquipmentParamVO;
    import net.wg.gui.components.tooltips.VO.EquipmentVO;
    import net.wg.gui.components.tooltips.VO.ExtraModuleInfoVO;
@@ -398,7 +406,6 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.cyberSport.controls.RosterButtonGroup;
    import net.wg.gui.cyberSport.controls.RosterSettingsNumerationBlock;
    import net.wg.gui.cyberSport.controls.SelectedVehiclesMsg;
-   import net.wg.gui.cyberSport.controls.SettingRosterVO;
    import net.wg.gui.cyberSport.controls.SettingsIcons;
    import net.wg.gui.cyberSport.controls.VehicleSelector;
    import net.wg.gui.cyberSport.controls.VehicleSelectorFilter;
@@ -487,6 +494,9 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.historicalBattles.data.HistoricalBattleVO;
    import net.wg.gui.historicalBattles.data.VehicleListItemVO;
    import net.wg.gui.historicalBattles.events.TeamsVehicleListEvent;
+   import net.wg.gui.interfaces.IExtendedUserVO;
+   import net.wg.gui.interfaces.IRallyCandidateVO;
+   import net.wg.gui.interfaces.IUserVO;
    import net.wg.gui.intro.IntroInfoVO;
    import net.wg.gui.intro.IntroPage;
    import net.wg.gui.lobby.GUIEditor.ChangePropertyEvent;
@@ -855,10 +865,8 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.lobby.profile.components.ProfileWindowFooter;
    import net.wg.gui.lobby.profile.components.ResizableContent;
    import net.wg.gui.lobby.profile.components.ResizableInvalidationTypes;
-   import net.wg.gui.lobby.profile.components.ResizableScrollPane;
    import net.wg.gui.lobby.profile.components.ResizableTileList;
    import net.wg.gui.lobby.profile.components.ResizableViewStack;
-   import net.wg.gui.lobby.profile.components.ScrollPane;
    import net.wg.gui.lobby.profile.components.SimpleLoader;
    import net.wg.gui.lobby.profile.components.TechMasteryIcon;
    import net.wg.gui.lobby.profile.components.TestTrack;
@@ -979,7 +987,6 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.lobby.questsWindow.QuestBlock;
    import net.wg.gui.lobby.questsWindow.QuestContent;
    import net.wg.gui.lobby.questsWindow.QuestRenderer;
-   import net.wg.gui.lobby.questsWindow.QuestScrollPane;
    import net.wg.gui.lobby.questsWindow.QuestsCurrentTab;
    import net.wg.gui.lobby.questsWindow.QuestsFutureTab;
    import net.wg.gui.lobby.questsWindow.QuestsList;
@@ -1080,7 +1087,6 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.lobby.settings.components.KeysItemRenderer;
    import net.wg.gui.lobby.settings.components.KeysScrollingList;
    import net.wg.gui.lobby.settings.components.RadioButtonBar;
-   import net.wg.gui.lobby.settings.components.SettingsScrollPane;
    import net.wg.gui.lobby.settings.components.SettingsStepSlider;
    import net.wg.gui.lobby.settings.components.SoundVoiceWaves;
    import net.wg.gui.lobby.settings.components.evnts.KeyInputEvents;
@@ -1230,7 +1236,10 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.lobby.training.MinimapEntity;
    import net.wg.gui.lobby.training.MinimapEntry;
    import net.wg.gui.lobby.training.MinimapLobby;
+   import net.wg.gui.lobby.training.ObserverButtonComponent;
    import net.wg.gui.lobby.training.PlayerElement;
+   import net.wg.gui.lobby.training.TooltipViewer;
+   import net.wg.gui.lobby.training.TrainingConstants;
    import net.wg.gui.lobby.training.TrainingDragController;
    import net.wg.gui.lobby.training.TrainingDragDelegate;
    import net.wg.gui.lobby.training.TrainingForm;
@@ -1275,6 +1284,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.login.EULA.EULADlg;
    import net.wg.gui.login.EULA.EULAFullDlg;
    import net.wg.gui.login.ILoginForm;
+   import net.wg.gui.login.IRssNewsFeedRenderer;
    import net.wg.gui.login.ISparksManager;
    import net.wg.gui.login.impl.LoginCreateAnAccountWindow;
    import net.wg.gui.login.impl.LoginEvent;
@@ -1283,6 +1293,14 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.login.impl.LoginQueueWindow;
    import net.wg.gui.login.impl.Spark;
    import net.wg.gui.login.impl.SparksManager;
+   import net.wg.gui.login.impl.components.Copyright;
+   import net.wg.gui.login.impl.components.CopyrightEvent;
+   import net.wg.gui.login.impl.components.RssItemEvent;
+   import net.wg.gui.login.impl.components.RssNewsFeed;
+   import net.wg.gui.login.impl.components.RssNewsFeedRenderer;
+   import net.wg.gui.login.impl.components.Vo.RssItemVo;
+   import net.wg.gui.login.legal.LegalContent;
+   import net.wg.gui.login.legal.LegalInfoWindow;
    import net.wg.gui.messenger.ChannelComponent;
    import net.wg.gui.messenger.IChannelComponent;
    import net.wg.gui.messenger.SmileyMap;
@@ -1401,6 +1419,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.rally.controls.ISlotRendererHelper;
    import net.wg.gui.rally.controls.ManualSearchScrollingList;
    import net.wg.gui.rally.controls.RallyInvalidationType;
+   import net.wg.gui.rally.controls.RallyLockableSlotRenderer;
    import net.wg.gui.rally.controls.RallySimpleSlotRenderer;
    import net.wg.gui.rally.controls.RallySlotRenderer;
    import net.wg.gui.rally.controls.ReadyMsg;
@@ -1427,6 +1446,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.rally.vo.RallyShortVO;
    import net.wg.gui.rally.vo.RallySlotVO;
    import net.wg.gui.rally.vo.RallyVO;
+   import net.wg.gui.rally.vo.SettingRosterVO;
    import net.wg.gui.rally.vo.VehicleVO;
    import net.wg.gui.tutorial.TutorialBattleLoading;
    import net.wg.gui.tutorial.constants.HintItemType;
@@ -1536,6 +1556,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.infrastructure.base.meta.IInputCheckerMeta;
    import net.wg.infrastructure.base.meta.IIntroPageMeta;
    import net.wg.infrastructure.base.meta.IInventoryMeta;
+   import net.wg.infrastructure.base.meta.ILegalInfoWindowMeta;
    import net.wg.infrastructure.base.meta.ILobbyHeaderMeta;
    import net.wg.infrastructure.base.meta.ILobbyMenuMeta;
    import net.wg.infrastructure.base.meta.ILobbyMessengerMeta;
@@ -1578,6 +1599,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.infrastructure.base.meta.IResearchViewMeta;
    import net.wg.infrastructure.base.meta.IRetrainCrewWindowMeta;
    import net.wg.infrastructure.base.meta.IRosterSlotSettingsWindowMeta;
+   import net.wg.infrastructure.base.meta.IRssNewsFeedMeta;
    import net.wg.infrastructure.base.meta.ISettingsWindowMeta;
    import net.wg.infrastructure.base.meta.IShopMeta;
    import net.wg.infrastructure.base.meta.ISimpleDialogMeta;
@@ -1637,3556 +1659,3602 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.infrastructure.interfaces.IVehicleButton;
    import net.wg.infrastructure.interfaces.IWindow;
    import net.wg.infrastructure.interfaces.IWindowGeometry;
-
-
+   
    public class ClassManagerMeta extends Object
    {
-          
+      
       public function ClassManagerMeta() {
          super();
       }
-
-      public static const NET_WG_DATA_ALIASES:Class = Aliases;
-
-      public static const NET_WG_DATA_CONTAINERCONSTANTS:Class = ContainerConstants;
-
-      public static const NET_WG_DATA_INSPECTABLEDATAPROVIDER:Class = InspectableDataProvider;
-
-      public static const NET_WG_DATA_VO_ACHIEVEMENTITEMVO:Class = AchievementItemVO;
-
-      public static const NET_WG_DATA_VO_ANIMATIONOBJECT:Class = AnimationObject;
-
-      public static const NET_WG_DATA_VO_BATTLERESULTSQUESTVO:Class = BattleResultsQuestVO;
-
-      public static const NET_WG_DATA_VO_COLORSCHEME:Class = ColorScheme;
-
-      public static const NET_WG_DATA_VO_EXTENDEDUSERVO:Class = ExtendedUserVO;
-
-      public static const NET_WG_DATA_VO_ICONVO:Class = IconVO;
-
-      public static const NET_WG_DATA_VO_ITEMDIALOGSETTINGSVO:Class = ItemDialogSettingsVO;
-
-      public static const NET_WG_DATA_VO_POINTVO:Class = PointVO;
-
-      public static const NET_WG_DATA_VO_PREMIUMFORMMODEL:Class = PremiumFormModel;
-
-      public static const NET_WG_DATA_VO_PROGRESSELEMENTVO:Class = ProgressElementVO;
-
-      public static const NET_WG_DATA_VO_SELLDIALOGELEMENT:Class = SellDialogElement;
-
-      public static const NET_WG_DATA_VO_SELLDIALOGITEM:Class = SellDialogItem;
-
-      public static const NET_WG_DATA_VO_SEPARATEITEM:Class = SeparateItem;
-
-      public static const NET_WG_DATA_VO_SHOPSUBFILTERDATA:Class = ShopSubFilterData;
-
-      public static const NET_WG_DATA_VO_SHOPVEHICLEFILTERELEMENTDATA:Class = ShopVehicleFilterElementData;
-
-      public static const NET_WG_DATA_VO_STORETABLEDATA:Class = StoreTableData;
-
-      public static const NET_WG_DATA_VO_STORETABLEVO:Class = StoreTableVO;
-
-      public static const NET_WG_DATA_VO_TRAININGFORMRENDERERVO:Class = TrainingFormRendererVO;
-
-      public static const NET_WG_DATA_VO_TRAININGROOMINFOVO:Class = TrainingRoomInfoVO;
-
-      public static const NET_WG_DATA_VO_TRAININGROOMLISTVO:Class = TrainingRoomListVO;
-
-      public static const NET_WG_DATA_VO_TRAININGROOMRENDERERVO:Class = TrainingRoomRendererVO;
-
-      public static const NET_WG_DATA_VO_TRAININGWINDOWVO:Class = TrainingWindowVO;
-
-      public static const NET_WG_DATA_VO_TWEENPROPERTIESVO:Class = TweenPropertiesVO;
-
-      public static const NET_WG_DATA_VO_USERVO:Class = UserVO;
-
-      public static const NET_WG_DATA_VO_WALLETSTATUSVO:Class = WalletStatusVO;
-
-      public static const NET_WG_DATA_VO_GENERATED_SHOPNATIONFILTERDATA:Class = ShopNationFilterData;
-
-      public static const NET_WG_DATA_VODAAPIDATAPROVIDER:Class = VoDAAPIDataProvider;
-
-      public static const NET_WG_DATA_COMPONENTS_ABSTRACTCONTEXTITEMGENERATOR:Class = AbstractContextItemGenerator;
-
-      public static const NET_WG_DATA_COMPONENTS_ACCORDIONRENDERERDATA:Class = AccordionRendererData;
-
-      public static const NET_WG_DATA_COMPONENTS_BATTLERESULTSCIGENERATOR:Class = BattleResultsCIGenerator;
-
-      public static const NET_WG_DATA_COMPONENTS_BATTLESESSIONCIGENERATOR:Class = BattleSessionCIGenerator;
-
-      public static const NET_WG_DATA_COMPONENTS_CONTEXTITEM:Class = ContextItem;
-
-      public static const NET_WG_DATA_COMPONENTS_CONTEXTITEMGENERATOR:Class = ContextItemGenerator;
-
-      public static const NET_WG_DATA_COMPONENTS_STOREMENUVIEWDATA:Class = StoreMenuViewData;
-
-      public static const NET_WG_DATA_COMPONENTS_USERCONTEXTITEM:Class = UserContextItem;
-
-      public static const NET_WG_DATA_CONSTANTS_COLORSCHEMENAMES:Class = ColorSchemeNames;
-
-      public static const NET_WG_DATA_CONSTANTS_CONTAINERTYPES:Class = ContainerTypes;
-
-      public static const NET_WG_DATA_CONSTANTS_CONTEXTMENUCONSTANTS:Class = ContextMenuConstants;
-
-      public static const NET_WG_DATA_CONSTANTS_CURRENCIES:Class = Currencies;
-
-      public static const NET_WG_DATA_CONSTANTS_CURSORS:Class = Cursors;
-
-      public static const NET_WG_DATA_CONSTANTS_DIALOGS:Class = Dialogs;
-
-      public static const NET_WG_DATA_CONSTANTS_DIRECTIONS:Class = Directions;
-
-      public static const NET_WG_DATA_CONSTANTS_DRAGTYPE:Class = DragType;
-
-      public static const NET_WG_DATA_CONSTANTS_ENGINEMETHODS:Class = EngineMethods;
-
-      public static const NET_WG_DATA_CONSTANTS_FITTINGTYPES:Class = FittingTypes;
-
-      public static const NET_WG_DATA_CONSTANTS_GUNTYPES:Class = GunTypes;
-
-      public static const NET_WG_DATA_CONSTANTS_ICONTEXTPOSITION:Class = IconTextPosition;
-
-      public static const NET_WG_DATA_CONSTANTS_ITEMTYPES:Class = ItemTypes;
-
-      public static const NET_WG_DATA_CONSTANTS_KEYSMAP:Class = KeysMap;
-
-      public static const NET_WG_DATA_CONSTANTS_LOCALES:Class = Locales;
-
-      public static const NET_WG_DATA_CONSTANTS_QUESTSSTATES:Class = QuestsStates;
-
-      public static const NET_WG_DATA_CONSTANTS_ROLESSTATE:Class = RolesState;
-
-      public static const NET_WG_DATA_CONSTANTS_SORTINGINFO:Class = SortingInfo;
-
-      public static const NET_WG_DATA_CONSTANTS_SOUNDMANAGERSTATES:Class = SoundManagerStates;
-
-      public static const NET_WG_DATA_CONSTANTS_SOUNDTYPES:Class = SoundTypes;
-
-      public static const NET_WG_DATA_CONSTANTS_TOOLTIPTAGS:Class = TooltipTags;
-
-      public static const NET_WG_DATA_CONSTANTS_TOOLTIPS:Class = Tooltips;
-
-      public static const NET_WG_DATA_CONSTANTS_VALOBJECT:Class = ValObject;
-
-      public static const NET_WG_DATA_CONSTANTS_VEHICLESTATE:Class = VehicleState;
-
-      public static const NET_WG_DATA_CONSTANTS_VEHICLETYPES:Class = VehicleTypes;
-
-      public static const NET_WG_DATA_CONSTANTS_GENERATED_CUSTOMIZATION_ITEM_TYPE:Class = CUSTOMIZATION_ITEM_TYPE;
-
-      public static const NET_WG_DATA_CONSTANTS_GENERATED_CYBER_SPORT_ALIASES:Class = CYBER_SPORT_ALIASES;
-
-      public static const NET_WG_DATA_CONSTANTS_GENERATED_EVENT_LOG_CONSTANTS:Class = EVENT_LOG_CONSTANTS;
-
-      public static const NET_WG_DATA_CONSTANTS_GENERATED_FITTING_TYPES:Class = FITTING_TYPES;
-
-      public static const NET_WG_DATA_CONSTANTS_GENERATED_FORTIFICATION_ALIASES:Class = FORTIFICATION_ALIASES;
-
-      public static const NET_WG_DATA_CONSTANTS_GENERATED_GE_ALIASES:Class = GE_ALIASES;
-
-      public static const NET_WG_DATA_CONSTANTS_GENERATED_ORDER_TYPES:Class = ORDER_TYPES;
-
-      public static const NET_WG_DATA_CONSTANTS_GENERATED_STORE_TYPES:Class = STORE_TYPES;
-
-      public static const NET_WG_DATA_GUI_ITEMS_FITTINGITEM:Class = FittingItem;
-
-      public static const NET_WG_DATA_GUI_ITEMS_GUIITEM:Class = GUIItem;
-
-      public static const NET_WG_DATA_GUI_ITEMS_ITEMSUTILS:Class = ItemsUtils;
-
-      public static const NET_WG_DATA_GUI_ITEMS_TANKMAN:Class = Tankman;
-
-      public static const NET_WG_DATA_GUI_ITEMS_TANKMANSKILL:Class = TankmanSkill;
-
-      public static const NET_WG_DATA_GUI_ITEMS_VEHICLE:Class = Vehicle;
-
-      public static const NET_WG_DATA_GUI_ITEMS_VEHICLEPROFILE:Class = VehicleProfile;
-
-      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_ACCOUNTDOSSIER:Class = AccountDossier;
-
-      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_ACHIEVEMENT:Class = Achievement;
-
-      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_DOSSIER:Class = Dossier;
-
-      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_TANKMANDOSSIER:Class = TankmanDossier;
-
-      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_VEHICLEDOSSIER:Class = VehicleDossier;
-
-      public static const NET_WG_DATA_MANAGERS_IMPL_DIALOGDISPATCHER:Class = DialogDispatcher;
-
-      public static const NET_WG_DATA_MANAGERS_IMPL_FLASHTWEEN:Class = FlashTween;
-
-      public static const NET_WG_DATA_MANAGERS_IMPL_NOTIFYPROPERTIES:Class = NotifyProperties;
-
-      public static const NET_WG_DATA_MANAGERS_IMPL_PYTHONTWEEN:Class = PythonTween;
-
-      public static const NET_WG_DATA_MANAGERS_IMPL_TOOLTIPPARAMS:Class = ToolTipParams;
-
-      public static const NET_WG_DATA_MANAGERS_IMPL_TOOLTIPPROPS:Class = TooltipProps;
-
-      public static const NET_WG_DATA_UTILDATA_FORMATTEDINTEGER:Class = FormattedInteger;
-
-      public static const NET_WG_DATA_UTILDATA_ITEMPRICE:Class = ItemPrice;
-
-      public static const NET_WG_DATA_UTILDATA_TANKMANROLELEVEL:Class = TankmanRoleLevel;
-
-      public static const NET_WG_DATA_UTILDATA_TANKMANSLOT:Class = TankmanSlot;
-
-      public static const NET_WG_DATA_UTILDATA_TWODIMENSIONALPADDING:Class = TwoDimensionalPadding;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_ACCORDION:Class = Accordion;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_AMMUNITIONBUTTON:Class = AmmunitionButton;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BLINKINGBUTTON:Class = BlinkingButton;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONBAREX:Class = ButtonBarEx;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONDNMICON:Class = ButtonDnmIcon;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONICONLOADER:Class = ButtonIconLoader;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_CLANEMBLEM:Class = ClanEmblem;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_CONTENTTABBAR:Class = ContentTabBar;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_CONTENTTABRENDERER:Class = ContentTabRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_COOLDOWNANIMATIONCONTROLLER:Class = CooldownAnimationController;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_COUNTEREX:Class = CounterEx;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_DASHLINE:Class = DashLine;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_DASHLINETEXTITEM:Class = DashLineTextItem;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_DOUBLEPROGRESSBAR:Class = DoubleProgressBar;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_EXTRAMODULEICON:Class = ExtraModuleIcon;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_FIELDSET:Class = FieldSet;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_HELPLAYOUTCONTROL:Class = HelpLayoutControl;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_INTERACTIVESORTINGBUTTON:Class = InteractiveSortingButton;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_LINEDESCRICONTEXT:Class = LineDescrIconText;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_LINEICONTEXT:Class = LineIconText;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_MODULEICON:Class = ModuleIcon;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_PORTRAITITEMRENDERER:Class = PortraitItemRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SCALABLEICONBUTTON:Class = ScalableIconButton;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SCALABLEICONWRAPPER:Class = ScalableIconWrapper;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SHELLBUTTON:Class = ShellButton;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SHELLSSET:Class = ShellsSet;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SKILLSITEMRENDERER:Class = SkillsItemRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SORTABLEHEADERBUTTONBAR:Class = SortableHeaderButtonBar;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SORTINGBUTTON:Class = SortingButton;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SORTINGBUTTONINFO:Class = SortingButtonInfo;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TABBUTTON:Class = TabButton;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TANKICON:Class = TankIcon;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TEXTAREA:Class = TextArea;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TEXTAREASIMPLE:Class = TextAreaSimple;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TOGGLEBUTTON:Class = ToggleButton;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_UNCLICKABLESHADOWBG:Class = UnClickableShadowBG;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_UNDERLINEDTEXT:Class = UnderlinedText;
-
-      public static const NET_WG_GUI_COMPONENTS_ADVANCED_VIEWSTACK:Class = ViewStack;
-
-      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_ACHIEVEMENTCAROUSEL:Class = AchievementCarousel;
-
-      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_CAROUSELBASE:Class = CarouselBase;
-
-      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_ICAROUSELITEMRENDERER:Class = ICarouselItemRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_PORTRAITSCAROUSEL:Class = PortraitsCarousel;
-
-      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_SKILLSCAROUSEL:Class = SkillsCarousel;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_BASELOGOVIEW:Class = BaseLogoView;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CONFIRMITEMCOMPONENT:Class = ConfirmItemComponent;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CURSORMANAGEDCONTAINER:Class = CursorManagedContainer;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_INPUTCHECKER:Class = InputChecker;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MAINVIEWCONTAINER:Class = MainViewContainer;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MANAGEDCONTAINER:Class = ManagedContainer;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VEHICLEMARKERALLY:Class = VehicleMarkerAlly;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VEHICLEMARKERENEMY:Class = VehicleMarkerEnemy;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITINGMANAGEDCONTAINER:Class = WaitingManagedContainer;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_EQUALGAPSHORIZONTALLAYOUT:Class = EqualGapsHorizontalLayout;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_EQUALWIDTHHORIZONTALLAYOUT:Class = EqualWidthHorizontalLayout;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUP:Class = Group;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUPEX:Class = GroupEx;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUPLAYOUT:Class = GroupLayout;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_HORIZONTALGROUPLAYOUT:Class = HorizontalGroupLayout;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_VERTICAL100PERCWIDTHLAYOUT:Class = Vertical100PercWidthLayout;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_VERTICALGROUPLAYOUT:Class = VerticalGroupLayout;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CLIPQUANTITYBAR:Class = ClipQuantityBar;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRBASE:Class = CrosshairBase;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELARCADE:Class = CrosshairPanelArcade;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELBASE:Class = CrosshairPanelBase;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELPOSTMORTEM:Class = CrosshairPanelPostmortem;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELSNIPER:Class = CrosshairPanelSniper;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELSTRATEGIC:Class = CrosshairPanelStrategic;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRSNIPER:Class = CrosshairSniper;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRSTRATEGIC:Class = CrosshairStrategic;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_RELOADINGTIMER:Class = ReloadingTimer;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CURSOR_CURSOR:Class = Cursor;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CURSOR_BASE_BASEINFO:Class = BaseInfo;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_CURSOR_BASE_DROPPINGCURSOR:Class = DroppingCursor;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_ANIMATEEXPLOSION:Class = AnimateExplosion;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DAMAGELABEL:Class = DamageLabel;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBAR:Class = HealthBar;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBARANIMATEDLABEL:Class = HealthBarAnimatedLabel;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBARANIMATEDPART:Class = HealthBarAnimatedPart;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_VEHICLEACTIONMARKER:Class = VehicleActionMarker;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_VEHICLEMARKER:Class = VehicleMarker;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_HPDISPLAYMODE:Class = HPDisplayMode;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERFLAGS:Class = VehicleMarkerFlags;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERSETTINGS:Class = VehicleMarkerSettings;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERVO:Class = VehicleMarkerVO;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_TICKER_RSSENTRYVO:Class = RSSEntryVO;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_TICKER_TICKER:Class = Ticker;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_TICKER_TICKERITEM:Class = TickerItem;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_NETSTREAMSTATUSCODE:Class = NetStreamStatusCode;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_NETSTREAMSTATUSLEVEL:Class = NetStreamStatusLevel;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_PLAYERSTATUS:Class = net.wg.gui.components.common.video.PlayerStatus;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_SIMPLEVIDEOPLAYER:Class = SimpleVideoPlayer;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_VIDEOPLAYEREVENT:Class = VideoPlayerEvent;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_VIDEOPLAYERSTATUSEVENT:Class = VideoPlayerStatusEvent;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ABSTRACTPLAYERCONTROLLER:Class = AbstractPlayerController;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ABSTRACTPLAYERPROGRESSBAR:Class = AbstractPlayerProgressBar;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ADVANCEDVIDEOPLAYER:Class = AdvancedVideoPlayer;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_CONTROLBARCONTROLLER:Class = ControlBarController;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_KEYBOARDCONTROLLER:Class = KeyboardController;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBARCONTROLLER:Class = ProgressBarController;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBAREVENT:Class = ProgressBarEvent;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBARSLIDER:Class = ProgressBarSlider;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_SLIDERPLAYERPROGRESSBAR:Class = SliderPlayerProgressBar;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERANIMATIONMANAGER:Class = VideoPlayerAnimationManager;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERCONTROLBAR:Class = VideoPlayerControlBar;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERTITLEBAR:Class = VideoPlayerTitleBar;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITING:Class = Waiting;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGCOMPONENT:Class = WaitingComponent;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGMC:Class = WaitingMc;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGVIEW:Class = WaitingView;
-
-      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_EVENTS_WAITINGCHANGEVISIBILITYEVENT:Class = WaitingChangeVisibilityEvent;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACCORDIONSOUNDRENDERER:Class = AccordionSoundRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACTIONPRICE:Class = ActionPrice;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ALERTICO:Class = AlertIco;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_BITMAPFILL:Class = BitmapFill;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CAROUSEL:Class = Carousel;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CHECKBOX:Class = CheckBox;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CLOSEBUTTON:Class = CloseButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_COMPACTCHECKBOX:Class = CompactCheckBox;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENU:Class = ContextMenu;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENUITEM:Class = ContextMenuItem;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENUITEMSEPARATE:Class = ContextMenuItemSeparate;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CORELISTEX:Class = CoreListEx;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DRAGABLELISTITEMRENDERER:Class = DragableListItemRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNIMAGETEXT:Class = DropDownImageText;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNLISTITEMRENDERERSOUND:Class = DropDownListItemRendererSound;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNMENU:Class = DropdownMenu;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DYNAMICSCROLLINGLISTEX:Class = DynamicScrollingListEx;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_FIGHTBUTTONSELECT:Class = FightButtonSelect;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_FIGHTLISTITEMRENDERER:Class = FightListItemRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_GLOWARROWASSET:Class = GlowArrowAsset;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_HYPERLINK:Class = HyperLink;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_IPROGRESSBAR:Class = IProgressBar;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ITABLERENDERER:Class = ITableRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ICONBUTTON:Class = IconButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ICONTEXT:Class = IconText;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ICONTEXTBUTTON:Class = IconTextButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_INFOICON:Class = InfoIcon;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_LABELCONTROL:Class = LabelControl;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_LISTITEMREDERERIMAGETEXT:Class = ListItemRedererImageText;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_LISTITEMRENDERERWITHFOCUSONDIS:Class = ListItemRendererWithFocusOnDis;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_MAINMENUBUTTON:Class = MainMenuButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_NATIONDROPDOWNMENU:Class = NationDropDownMenu;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_NORMALSORTINGBTNINFO:Class = NormalSortingBtnInfo;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_NORMALSORTINGBUTTON:Class = NormalSortingButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_NUMERICSTEPPER:Class = NumericStepper;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_PROGRESSBAR:Class = ProgressBar;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_RADIOBUTTON:Class = RadioButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_RANGESLIDER:Class = RangeSlider;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_READONLYSCROLLINGLIST:Class = ReadOnlyScrollingList;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_REGIONDROPDOWNMENU:Class = RegionDropdownMenu;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLBAR:Class = ScrollBar;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTAUTOSCROLL:Class = ScrollingListAutoScroll;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTEX:Class = ScrollingListEx;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTPX:Class = ScrollingListPx;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTWITHDISRENDERERS:Class = ScrollingListWithDisRenderers;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SLIDER:Class = Slider;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SLIDERBG:Class = SliderBg;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SLIDERKEYPOINT:Class = SliderKeyPoint;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SORTBUTTON:Class = SortButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLESCROLLINGLIST:Class = SortableScrollingList;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLETABLE:Class = SortableTable;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLETABLELIST:Class = SortableTableList;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDBUTTON:Class = SoundButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDBUTTONEX:Class = SoundButtonEx;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDLISTITEMRENDERER:Class = SoundListItemRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_STEPSLIDER:Class = StepSlider;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TABLERENDERER:Class = TableRenderer;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TANKMANTRAININGBUTTON:Class = TankmanTrainingButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TANKMANTRAININGSMALLBUTTON:Class = TankmanTrainingSmallButton;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TEXTFIELDSHORT:Class = TextFieldShort;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TEXTINPUT:Class = TextInput;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TILELIST:Class = TileList;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_UILOADERALT:Class = UILoaderAlt;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_UILOADERCUT:Class = UILoaderCut;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_UNITCOMMANDERSTATS:Class = UnitCommanderStats;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_USERNAMEFIELD:Class = UserNameField;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_VO_ACTIONPRICEVO:Class = ActionPriceVO;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_VOICE:Class = Voice;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_VOICEWAVE:Class = VoiceWave;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_WALLETRESOURCESSTATUS:Class = WalletResourcesStatus;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_WGSCROLLINGLIST:Class = WgScrollingList;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOMMON:Class = AchievementCommon;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOMMONVEHICLE:Class = AchievementCommonVehicle;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOUNTER:Class = AchievementCounter;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOUNTERSMALL:Class = AchievementCounterSmall;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTDIVISION:Class = AchievementDivision;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTEVENT:Class = AchievementEvent;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESS:Class = AchievementProgress;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESSBAR:Class = AchievementProgressBar;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESSCOMPONENT:Class = AchievementProgressComponent;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_BEIGECOUNTER:Class = BeigeCounter;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_COUNTERCOMPONENT:Class = CounterComponent;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_GREYRIBBONCOUNTER:Class = GreyRibbonCounter;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_REDCOUNTER:Class = RedCounter;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_SMALLCOUNTER:Class = SmallCounter;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_YELLOWRIBBONCOUNTER:Class = YellowRibbonCounter;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_FANCYRENDEREREVENT:Class = FancyRendererEvent;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_RANGESLIDEREVENT:Class = RangeSliderEvent;
-
-      public static const NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_SCROLLBAREVENT:Class = ScrollBarEvent;
-
-      public static const NET_WG_GUI_COMPONENTS_ICONS_BATTLETYPEICON:Class = BattleTypeIcon;
-
-      public static const NET_WG_GUI_COMPONENTS_ICONS_PLAYERACTIONMARKER:Class = PlayerActionMarker;
-
-      public static const NET_WG_GUI_COMPONENTS_ICONS_PLAYERACTIONMARKERCONTROLLER:Class = PlayerActionMarkerController;
-
-      public static const NET_WG_GUI_COMPONENTS_ICONS_SQUADICON:Class = SquadIcon;
-
-      public static const NET_WG_GUI_COMPONENTS_POPOVERS_POPOVER:Class = PopOver;
-
-      public static const NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERCONST:Class = PopOverConst;
-
-      public static const NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERCONTENTPADDING:Class = PopoverContentPadding;
-
-      public static const NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERINTERNALLAYOUT:Class = PopoverInternalLayout;
-
-      public static const NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVER:Class = SmartPopOver;
-
-      public static const NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVEREXTERNALLAYOUT:Class = SmartPopOverExternalLayout;
-
-      public static const NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVERLAYOUTINFO:Class = SmartPopOverLayoutInfo;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_ACHIEVEMENTSCUSTOMBLOCKITEM:Class = AchievementsCustomBlockItem;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_EXTRAMODULEINFO:Class = ExtraModuleInfo;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTBLOCK:Class = IgrQuestBlock;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTPROGRESSBLOCK:Class = IgrQuestProgressBlock;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_MODULEITEM:Class = ModuleItem;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_SEPARATOR:Class = Separator;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_STATUS:Class = Status;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_SUITABLEVEHICLEBLOCKITEM:Class = SuitableVehicleBlockItem;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPACHIEVEMENT:Class = ToolTipAchievement;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPACTIONPRICE:Class = ToolTipActionPrice;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPBASE:Class = ToolTipBase;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPBUYSKILL:Class = ToolTipBuySkill;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPCLANINFO:Class = ToolTipClanInfo;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPCOMPLEX:Class = ToolTipComplex;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPEQUIPMENT:Class = ToolTipEquipment;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPFINALSTATS:Class = ToolTipFinalStats;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPHISTORICALAMMO:Class = ToolTipHistoricalAmmo;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPHISTORICALMODULES:Class = ToolTipHistoricalModules;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPIGR:Class = ToolTipIGR;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPMAP:Class = ToolTipMap;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPMARKSONGUN:Class = ToolTipMarksOnGun;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPRSSNEWS:Class = ToolTipRSSNews;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSELECTEDVEHICLE:Class = ToolTipSelectedVehicle;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSETTINGSCONTROL:Class = ToolTipSettingsControl;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSKILL:Class = ToolTipSkill;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSORTIEDIVISION:Class = ToolTipSortieDivision;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSPECIAL:Class = ToolTipSpecial;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSUITABLEVEHICLE:Class = ToolTipSuitableVehicle;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPTANKCLASS:Class = ToolTipTankClass;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPTANKMEN:Class = ToolTipTankmen;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPUNITLEVEL:Class = ToolTipUnitLevel;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPVEHICLE:Class = ToolTipVehicle;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPUNITCOMMAND:Class = TooltipUnitCommand;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_ACHIEVEMENTVO:Class = AchievementVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_CLANINFOVO:Class = ClanInfoVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_DIMENSION:Class = Dimension;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EQUIPMENTPARAMVO:Class = EquipmentParamVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EQUIPMENTVO:Class = EquipmentVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EXTRAMODULEINFOVO:Class = ExtraModuleInfoVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_HISTORICALMODULESVO:Class = HistoricalModulesVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_IGRVO:Class = IgrVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_MAPVO:Class = MapVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_MODULEVO:Class = net.wg.gui.components.tooltips.VO.ModuleVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SETTINGSCONTROLVO:Class = SettingsControlVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SORTIEDIVISIONVO:Class = SortieDivisionVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SUITABLEVEHICLEVO:Class = SuitableVehicleVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TANKMENVO:Class = TankmenVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPACTIONPRICEVO:Class = ToolTipActionPriceVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKRESULTVO:Class = ToolTipBlockResultVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKRIGHTLISTITEMVO:Class = ToolTipBlockRightListItemVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKVO:Class = ToolTipBlockVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPFINALSTATSVO:Class = ToolTipFinalStatsVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPSKILLVO:Class = ToolTipSkillVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPSTATUSCOLORSVO:Class = ToolTipStatusColorsVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPVEHICLESELECTEDVO:Class = ToolTipVehicleSelectedVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_UNITCOMMANDVO:Class = UnitCommandVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_VEHICLEBASEVO:Class = VehicleBaseVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_VEHICLEVO:Class = net.wg.gui.components.tooltips.VO.VehicleVO;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_FINSTATS_EFFICIENCYBLOCK:Class = EfficiencyBlock;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_FINSTATS_EFFICIENCYCRITSBLOCK:Class = EfficiencyCritsBlock;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_HELPERS_TANKTYPEICO:Class = TankTypeIco;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_HELPERS_UTILS:Class = Utils;
-
-      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_SORTIE_SORTIEDIVISIONBLOCK:Class = SortieDivisionBlock;
-
-      public static const NET_WG_GUI_COMPONENTS_WINDOWS_MODULEINFO:Class = ModuleInfo;
-
-      public static const NET_WG_GUI_COMPONENTS_WINDOWS_SCREENBG:Class = ScreenBg;
-
-      public static const NET_WG_GUI_COMPONENTS_WINDOWS_WINDOW:Class = Window;
-
-      public static const NET_WG_GUI_COMPONENTS_WINDOWS_WINDOWEVENT:Class = WindowEvent;
-
-      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONEVENT:Class = CrewOperationEvent;
-
-      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONINFOVO:Class = CrewOperationInfoVO;
-
-      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONWARNINGVO:Class = CrewOperationWarningVO;
-
-      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSIRFOOTER:Class = CrewOperationsIRFooter;
-
-      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSIRENDERER:Class = CrewOperationsIRenderer;
-
-      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSINITVO:Class = CrewOperationsInitVO;
-
-      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSPOPOVER:Class = CrewOperationsPopOver;
-
-      public static const NET_WG_GUI_CYBERSPORT_CSCONSTANTS:Class = CSConstants;
-
-      public static const NET_WG_GUI_CYBERSPORT_CSINVALIDATIONTYPE:Class = CSInvalidationType;
-
-      public static const NET_WG_GUI_CYBERSPORT_CYBERSPORTMAINWINDOW:Class = CyberSportMainWindow;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_BUTTONDNMICONSLIM:Class = ButtonDnmIconSlim;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_CSCANDIDATESSCROLLINGLIST:Class = CSCandidatesScrollingList;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_CSVEHICLEBUTTON:Class = CSVehicleButton;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_CSVEHICLEBUTTONLEVELS:Class = CSVehicleButtonLevels;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_CANDIDATEITEMRENDERER:Class = CandidateItemRenderer;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_COMMANDRENDERER:Class = CommandRenderer;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_DOUBLESLIDER:Class = DoubleSlider;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_DYNAMICRANGEVEHICLES:Class = DynamicRangeVehicles;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_GRAYBUTTONTEXT:Class = GrayButtonText;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_GRAYTRANSPARENTBUTTON:Class = GrayTransparentButton;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_MANUALSEARCHRENDERER:Class = ManualSearchRenderer;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_MEDALVEHICLEVO:Class = MedalVehicleVO;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_NAVIGATIONBLOCK:Class = NavigationBlock;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_RANGEVIEWCOMPONENT:Class = RangeViewComponent;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_ROSTERBUTTONGROUP:Class = RosterButtonGroup;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_ROSTERSETTINGSNUMERATIONBLOCK:Class = RosterSettingsNumerationBlock;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_SELECTEDVEHICLESMSG:Class = SelectedVehiclesMsg;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_SETTINGROSTERVO:Class = SettingRosterVO;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_SETTINGSICONS:Class = SettingsIcons;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTOR:Class = VehicleSelector;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTORFILTER:Class = VehicleSelectorFilter;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTORITEMRENDERER:Class = VehicleSelectorItemRenderer;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_CSCOMPONENTEVENT:Class = CSComponentEvent;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_MANUALSEARCHEVENT:Class = ManualSearchEvent;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTOREVENT:Class = VehicleSelectorEvent;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTORFILTEREVENT:Class = VehicleSelectorFilterEvent;
-
-      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTORITEMEVENT:Class = VehicleSelectorItemEvent;
-
-      public static const NET_WG_GUI_CYBERSPORT_DATA_CANDIDATESDATAPROVIDER:Class = CandidatesDataProvider;
-
-      public static const NET_WG_GUI_CYBERSPORT_DATA_MANUALSEARCHDATAPROVIDER:Class = net.wg.gui.cyberSport.data.ManualSearchDataProvider;
-
-      public static const NET_WG_GUI_CYBERSPORT_INTERFACES_ICSAUTOSEARCHMAINVIEW:Class = ICSAutoSearchMainView;
-
-      public static const NET_WG_GUI_CYBERSPORT_INTERFACES_ICHANNELCOMPONENTHOLDER:Class = IChannelComponentHolder;
-
-      public static const NET_WG_GUI_CYBERSPORT_INTERFACES_IMANUALSEARCHDATAPROVIDER:Class = IManualSearchDataProvider;
-
-      public static const NET_WG_GUI_CYBERSPORT_POPUPS_VEHICLESELECTORPOPUP:Class = VehicleSelectorPopup;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_ANIMATEDROSTERSETTINGSVIEW:Class = AnimatedRosterSettingsView;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_INTROVIEW:Class = IntroView;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_RANGEROSTERSETTINGSVIEW:Class = RangeRosterSettingsView;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_ROSTERSETTINGSVIEW:Class = RosterSettingsView;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_ROSTERSLOTSETTINGSWINDOW:Class = RosterSlotSettingsWindow;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNITVIEW:Class = UnitView;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNITSLISTVIEW:Class = UnitsListView;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_CSAUTOSEARCHMAINVIEW:Class = CSAutoSearchMainView;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_CONFIRMATIONREADINESSSTATUS:Class = ConfirmationReadinessStatus;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_ERRORSTATE:Class = ErrorState;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_SEARCHCOMMANDS:Class = SearchCommands;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_SEARCHENEMY:Class = SearchEnemy;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_STATEVIEWBASE:Class = StateViewBase;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_WAITINGPLAYERS:Class = WaitingPlayers;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_EVENTS_CYBERSPORTEVENT:Class = CyberSportEvent;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_EVENTS_ROSTERSETTINGSEVENT:Class = RosterSettingsEvent;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_CHATSECTION:Class = ChatSection;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_JOINUNITSECTION:Class = JoinUnitSection;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_SIMPLESLOTRENDERER:Class = SimpleSlotRenderer;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_SLOTRENDERER:Class = SlotRenderer;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_TEAMSECTION:Class = TeamSection;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_UNITSLOTHELPER:Class = UnitSlotHelper;
-
-      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_WAITLISTSECTION:Class = WaitListSection;
-
-      public static const NET_WG_GUI_CYBERSPORT_VO_AUTOSEARCHVO:Class = AutoSearchVO;
-
-      public static const NET_WG_GUI_CYBERSPORT_VO_CSCOMMANDVO:Class = CSCommandVO;
-
-      public static const NET_WG_GUI_CYBERSPORT_VO_IUNIT:Class = IUnit;
-
-      public static const NET_WG_GUI_CYBERSPORT_VO_IUNITSLOT:Class = IUnitSlot;
-
-      public static const NET_WG_GUI_CYBERSPORT_VO_NAVIGATIONBLOCKVO:Class = NavigationBlockVO;
-
-      public static const NET_WG_GUI_CYBERSPORT_VO_VEHICLESELECTORFILTERVO:Class = VehicleSelectorFilterVO;
-
-      public static const NET_WG_GUI_CYBERSPORT_VO_VEHICLESELECTORITEMVO:Class = VehicleSelectorItemVO;
-
-      public static const NET_WG_GUI_EVENTS_ACCORDIONRENDEREREVENT:Class = AccordionRendererEvent;
-
-      public static const NET_WG_GUI_EVENTS_ARENAVOIPSETTINGSEVENT:Class = ArenaVoipSettingsEvent;
-
-      public static const NET_WG_GUI_EVENTS_CONTEXTMENUEVENT:Class = ContextMenuEvent;
-
-      public static const NET_WG_GUI_EVENTS_COOLDOWNEVENT:Class = CooldownEvent;
-
-      public static const NET_WG_GUI_EVENTS_CREWEVENT:Class = CrewEvent;
-
-      public static const NET_WG_GUI_EVENTS_DEVICEEVENT:Class = DeviceEvent;
-
-      public static const NET_WG_GUI_EVENTS_EQUIPMENTEVENT:Class = EquipmentEvent;
-
-      public static const NET_WG_GUI_EVENTS_FIGHTBUTTONEVENT:Class = FightButtonEvent;
-
-      public static const NET_WG_GUI_EVENTS_FINALSTATISTICEVENT:Class = FinalStatisticEvent;
-
-      public static const NET_WG_GUI_EVENTS_HEADERBUTTONBAREVENT:Class = HeaderButtonBarEvent;
-
-      public static const NET_WG_GUI_EVENTS_HEADEREVENT:Class = HeaderEvent;
-
-      public static const NET_WG_GUI_EVENTS_LISTEVENTEX:Class = ListEventEx;
-
-      public static const NET_WG_GUI_EVENTS_LOBBYEVENT:Class = LobbyEvent;
-
-      public static const NET_WG_GUI_EVENTS_LOBBYTDISPATCHEREVENT:Class = LobbyTDispatcherEvent;
-
-      public static const NET_WG_GUI_EVENTS_MANAGEDCONTAINEREVENT:Class = ManagedContainerEvent;
-
-      public static const NET_WG_GUI_EVENTS_MESSENGERBAREVENT:Class = MessengerBarEvent;
-
-      public static const NET_WG_GUI_EVENTS_MODULEINFOEVENT:Class = ModuleInfoEvent;
-
-      public static const NET_WG_GUI_EVENTS_NUMERICSTEPPEREVENT:Class = NumericStepperEvent;
-
-      public static const NET_WG_GUI_EVENTS_PARAMSEVENT:Class = ParamsEvent;
-
-      public static const NET_WG_GUI_EVENTS_PERSONALCASEEVENT:Class = PersonalCaseEvent;
-
-      public static const NET_WG_GUI_EVENTS_QUESTEVENT:Class = QuestEvent;
-
-      public static const NET_WG_GUI_EVENTS_RESIZABLEBLOCKEVENT:Class = ResizableBlockEvent;
-
-      public static const NET_WG_GUI_EVENTS_SHELLRENDEREREVENT:Class = ShellRendererEvent;
-
-      public static const NET_WG_GUI_EVENTS_SHOWDIALOGEVENT:Class = ShowDialogEvent;
-
-      public static const NET_WG_GUI_EVENTS_SORTABLETABLELISTEVENT:Class = SortableTableListEvent;
-
-      public static const NET_WG_GUI_EVENTS_SORTINGEVENT:Class = SortingEvent;
-
-      public static const NET_WG_GUI_EVENTS_STATEMANAGEREVENT:Class = StateManagerEvent;
-
-      public static const NET_WG_GUI_EVENTS_TIMELINEEVENT:Class = TimelineEvent;
-
-      public static const NET_WG_GUI_EVENTS_TRAININGEVENT:Class = TrainingEvent;
-
-      public static const NET_WG_GUI_EVENTS_UILOADEREVENT:Class = UILoaderEvent;
-
-      public static const NET_WG_GUI_EVENTS_VEHICLESELLDIALOGEVENT:Class = VehicleSellDialogEvent;
-
-      public static const NET_WG_GUI_EVENTS_VIEWSTACKEVENT:Class = ViewStackEvent;
-
-      public static const NET_WG_GUI_GAMELOADING_GAMELOADING:Class = GameLoading;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_HISTORICALBATTLESLISTWINDOW:Class = HistoricalBattlesListWindow;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_BATTLECAROUSELITEMRENDERER:Class = BattleCarouselItemRenderer;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_BATTLESCAROUSEL:Class = BattlesCarousel;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_SIMPLEVEHICLELIST:Class = SimpleVehicleList;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_TEAMSVEHICLELIST:Class = TeamsVehicleList;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_VEHICLELISTITEMRENDERER:Class = VehicleListItemRenderer;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_DATA_BATTLELISTITEMVO:Class = BattleListItemVO;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_DATA_HISTORICALBATTLEVO:Class = HistoricalBattleVO;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_DATA_VEHICLELISTITEMVO:Class = VehicleListItemVO;
-
-      public static const NET_WG_GUI_HISTORICALBATTLES_EVENTS_TEAMSVEHICLELISTEVENT:Class = TeamsVehicleListEvent;
-
-      public static const NET_WG_GUI_INTRO_INTROINFOVO:Class = IntroInfoVO;
-
-      public static const NET_WG_GUI_INTRO_INTROPAGE:Class = IntroPage;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_CHANGEPROPERTYEVENT:Class = ChangePropertyEvent;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTCREATEEVENT:Class = ComponentCreateEvent;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTINFOVO:Class = ComponentInfoVo;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTLISTITEMRENDERER:Class = ComponentListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTSPANEL:Class = ComponentsPanel;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_EDITABLEPROPERTYLISTITEMRENDERER:Class = EditablePropertyListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_GECOMPONENTVO:Class = GEComponentVO;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_GEDESIGNERWINDOW:Class = GEDesignerWindow;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_GEINSPECTWINDOW:Class = GEInspectWindow;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_GUIEDITORHELPER:Class = GUIEditorHelper;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_COMPONENTPROPERTIES:Class = ComponentProperties;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_COMPONENTPROPERTYVO:Class = ComponentPropertyVO;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_CONTEXTMENUGENERATORITEMS:Class = ContextMenuGeneratorItems;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_ICONTEXTMENUGENERATORITEMS:Class = IContextMenuGeneratorItems;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_PROPTYPES:Class = PropTypes;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_EVENTS_INSPECTORVIEWEVENT:Class = InspectorViewEvent;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_VIEWS_EVENTSVIEW:Class = EventsView;
-
-      public static const NET_WG_GUI_LOBBY_GUIEDITOR_VIEWS_INSPECTORVIEW:Class = InspectorView;
-
-      public static const NET_WG_GUI_LOBBY_LOBBYPAGE:Class = LobbyPage;
-
-      public static const NET_WG_GUI_LOBBY_BARRACKS_BARRACKS:Class = Barracks;
-
-      public static const NET_WG_GUI_LOBBY_BARRACKS_BARRACKSFORM:Class = BarracksForm;
-
-      public static const NET_WG_GUI_LOBBY_BARRACKS_BARRACKSITEMRENDERER:Class = BarracksItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTS:Class = BattleResults;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTSEVENTRENDERER:Class = BattleResultsEventRenderer;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTSMEDALSLISTVO:Class = BattleResultsMedalsListVO;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_COMMONSTATS:Class = CommonStats;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_CUSTOMACHIEVEMENT:Class = CustomAchievement;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSBLOCK:Class = DetailsBlock;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSSTATS:Class = DetailsStats;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSSTATSSCROLLPANE:Class = DetailsStatsScrollPane;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_EFFICIENCYICONRENDERER:Class = EfficiencyIconRenderer;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_EFFICIENCYRENDERER:Class = EfficiencyRenderer;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_MEDALSLIST:Class = MedalsList;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_PROGRESSELEMENT:Class = ProgressElement;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_SPECIALACHIEVEMENT:Class = SpecialAchievement;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TANKSTATSVIEW:Class = TankStatsView;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMMEMBERITEMRENDERER:Class = TeamMemberItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMMEMBERSTATSVIEW:Class = TeamMemberStatsView;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMSTATS:Class = TeamStats;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMSTATSLIST:Class = TeamStatsList;
-
-      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_VEHICLEDETAILS:Class = VehicleDetails;
-
-      public static const NET_WG_GUI_LOBBY_BATTLELOADING_BATTLELOADING:Class = BattleLoading;
-
-      public static const NET_WG_GUI_LOBBY_BATTLELOADING_BATTLELOADINGFORM:Class = BattleLoadingForm;
-
-      public static const NET_WG_GUI_LOBBY_BATTLELOADING_PLAYERITEMRENDERER:Class = PlayerItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_BATTLELOADING_CONSTANTS_PLAYERSTATUS:Class = net.wg.gui.lobby.battleloading.constants.PlayerStatus;
-
-      public static const NET_WG_GUI_LOBBY_BATTLELOADING_CONSTANTS_VEHICLESTATUS:Class = VehicleStatus;
-
-      public static const NET_WG_GUI_LOBBY_BATTLELOADING_DATA_ENEMYVEHICLESDATAPROVIDER:Class = EnemyVehiclesDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_BATTLELOADING_DATA_TEAMVEHICLESDATAPROVIDER:Class = TeamVehiclesDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_BATTLELOADING_INTERFACES_IVEHICLESDATAPROVIDER:Class = IVehiclesDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_BATTLELOADING_VO_VEHICLEINFOVO:Class = VehicleInfoVO;
-
-      public static const NET_WG_GUI_LOBBY_BATTLEQUEUE_BATTLEQUEUE:Class = BattleQueue;
-
-      public static const NET_WG_GUI_LOBBY_BATTLEQUEUE_BATTLEQUEUEITEMRENDERER:Class = BattleQueueItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_BROWSER_BROWSERACTIONBTN:Class = BrowserActionBtn;
-
-      public static const NET_WG_GUI_LOBBY_BROWSER_BROWSEREVENT:Class = BrowserEvent;
-
-      public static const NET_WG_GUI_LOBBY_BROWSER_BROWSERHITAREA:Class = BrowserHitArea;
-
-      public static const NET_WG_GUI_LOBBY_BROWSER_BROWSERWINDOW:Class = BrowserWindow;
-
-      public static const NET_WG_GUI_LOBBY_CONFIRMMODULEWINDOW_CONFIRMMODULEWINDOW:Class = ConfirmModuleWindow;
-
-      public static const NET_WG_GUI_LOBBY_CONFIRMMODULEWINDOW_MODULEINFOVO:Class = ModuleInfoVo;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_BASETIMEDCUSTOMIZATIONGROUPVIEW:Class = BaseTimedCustomizationGroupView;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_BASETIMEDCUSTOMIZATIONSECTIONVIEW:Class = BaseTimedCustomizationSectionView;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMODROPBUTTON:Class = CamoDropButton;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMOUFLAGEGROUPVIEW:Class = CamouflageGroupView;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMOUFLAGESECTIONVIEW:Class = CamouflageSectionView;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_CUSTOMIZATIONEVENT:Class = CustomizationEvent;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_EMBLEMLEFTSECTIONVIEW:Class = EmblemLeftSectionView;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_EMBLEMRIGHTSECTIONVIEW:Class = EmblemRightSectionView;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_INSCRIPTIONLEFTSECTIONVIEW:Class = InscriptionLeftSectionView;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_INSCRIPTIONRIGHTSECTIONVIEW:Class = InscriptionRightSectionView;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_VEHICLECUSTOMIZATION:Class = VehicleCustomization;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_CAMOUFLAGESDATAPROVIDER:Class = CamouflagesDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_DAAPIITEMSDATAPROVIDER:Class = DAAPIItemsDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_RENTALPACKAGEDAAPIDATAPROVIDER:Class = RentalPackageDAAPIDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CAMODEMORENDERER:Class = CamoDemoRenderer;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CAMOUFLAGEITEMRENDERER:Class = CamouflageItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CUSTOMIZATIONITEMRENDERER:Class = CustomizationItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_INSCRIPTIONITEMRENDERER:Class = InscriptionItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_PRICEITEMRENDERER:Class = PriceItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_RENDERERBORDER:Class = RendererBorder;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_RENTALPACKAGEITEMRENDERER:Class = RentalPackageItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_SECTIONITEMRENDERER:Class = SectionItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_TEXTUREITEMRENDERER:Class = TextureItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_DEMONSTRATION_DEMONSTRATORWINDOW:Class = DemonstratorWindow;
-
-      public static const NET_WG_GUI_LOBBY_DEMONSTRATION_MAPITEMRENDERER:Class = MapItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_DEMONSTRATION_DATA_DEMONSTRATORVO:Class = DemonstratorVO;
-
-      public static const NET_WG_GUI_LOBBY_DEMONSTRATION_DATA_MAPITEMVO:Class = MapItemVO;
-
-      public static const NET_WG_GUI_LOBBY_DIALOGS_DEMOUNTDEVICEDIALOG:Class = DemountDeviceDialog;
-
-      public static const NET_WG_GUI_LOBBY_DIALOGS_DESTROYDEVICEDIALOG:Class = DestroyDeviceDialog;
-
-      public static const NET_WG_GUI_LOBBY_DIALOGS_DISMISSTANKMANDIALOG:Class = DismissTankmanDialog;
-
-      public static const NET_WG_GUI_LOBBY_DIALOGS_FREEXPINFOWINDOW:Class = FreeXPInfoWindow;
-
-      public static const NET_WG_GUI_LOBBY_DIALOGS_ICONDIALOG:Class = IconDialog;
-
-      public static const NET_WG_GUI_LOBBY_DIALOGS_ICONPRICEDIALOG:Class = IconPriceDialog;
-
-      public static const NET_WG_GUI_LOBBY_DIALOGS_ITEMSTATUSDATA:Class = ItemStatusData;
-
-      public static const NET_WG_GUI_LOBBY_DIALOGS_PRICEMC:Class = PriceMc;
-
-      public static const NET_WG_GUI_LOBBY_DIALOGS_SIMPLEDIALOG:Class = SimpleDialog;
-
-      public static const NET_WG_GUI_LOBBY_ELITEWINDOW_ELITEWINDOW:Class = EliteWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTBATTLEROOMWINDOW:Class = FortBattleRoomWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTCHOICEDIVISIONWINDOW:Class = FortChoiceDivisionWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTIFICATIONSVIEW:Class = FortificationsView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTINTROVIEW:Class = FortIntroView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTLISTVIEW:Class = FortListView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTROOMVIEW:Class = FortRoomView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_JOINSORTIESECTION:Class = JoinSortieSection;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIECHATSECTION:Class = SortieChatSection;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIELISTRENDERER:Class = SortieListRenderer;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIESLOTHELPER:Class = SortieSlotHelper;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIETEAMSECTION:Class = SortieTeamSection;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIEWAITLISTSECTION:Class = SortieWaitListSection;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTDISCONNECTVIEW:Class = IFortDisconnectView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTMAINVIEW:Class = IFortMainView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTWELCOMEVIEW:Class = IFortWelcomeView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BASE_IFILLEDBAR:Class = IFilledBar;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BASE_IMPL_FORTBUILDINGBASE:Class = FortBuildingBase;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BATTLEROOM_SORTIESIMPLESLOT:Class = SortieSimpleSlot;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BATTLEROOM_SORTIESLOT:Class = SortieSlot;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IARROWWITHNUT:Class = IArrowWithNut;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGINDICATOR:Class = IBuildingIndicator;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGTEXTURE:Class = IBuildingTexture;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGSWIZARDCMPNT:Class = IBuildingsWizardCmpnt;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_ICOOLDOWNICON:Class = ICooldownIcon;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDING:Class = IFortBuilding;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGCMP:Class = IFortBuildingCmp;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGUIBASE:Class = IFortBuildingUIBase;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGSCONTAINER:Class = IFortBuildingsContainer;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_ITRANSPORTINGSTEPPER:Class = ITransportingStepper;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ARROWWITHNUT:Class = ArrowWithNut;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGBLINKINGBTN:Class = BuildingBlinkingBtn;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGINDICATOR:Class = BuildingIndicator;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGINDICATORSCMP:Class = BuildingIndicatorsCmp;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGORDERPROCESSING:Class = BuildingOrderProcessing;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGTEXTURE:Class = BuildingTexture;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGTHUMBNAIL:Class = BuildingThumbnail;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGSCMPNT:Class = BuildingsCmpnt;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_COOLDOWNICON:Class = CooldownIcon;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_COOLDOWNICONLOADERCTNR:Class = CooldownIconLoaderCtnr;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDING:Class = FortBuilding;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGBTN:Class = FortBuildingBtn;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGUIBASE:Class = FortBuildingUIBase;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGSCONTAINER:Class = FortBuildingsContainer;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_HITAREACONTROL:Class = HitAreaControl;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_INDICATORLABELS:Class = IndicatorLabels;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_MODERNIZATIONCMP:Class = ModernizationCmp;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ORDERINFOCMP:Class = OrderInfoCmp;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ORDERINFOICONCMP:Class = OrderInfoIconCmp;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_PROGRESSTOTALLABELS:Class = ProgressTotalLabels;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_TROWELCMP:Class = TrowelCmp;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BASE_BUILDINGSWIZARDCMPNT:Class = BuildingsWizardCmpnt;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILDINGPROCESS_IMPL_BUILDINGPROCESSINFO:Class = BuildingProcessInfo;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILDINGPROCESS_IMPL_BUILDINGPROCESSITEMRENDERER:Class = BuildingProcessItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANLIST_CLANLISTITEMRENDERER:Class = ClanListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_CLANSTATDASHLINETEXTITEM:Class = ClanStatDashLineTextItem;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_CLANSTATSGROUP:Class = ClanStatsGroup;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_FORTSTATISTICSLDIT:Class = FortStatisticsLDIT;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_SORTIESTATISTICSFORM:Class = SortieStatisticsForm;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DIVISION_IMPL_CHOICEDIVISIONSELECTOR:Class = ChoiceDivisionSelector;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IFORTDIRECTIONSCONTAINER:Class = IFortDirectionsContainer;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_BUILDINGDIRECTION:Class = BuildingDirection;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_DIRECTIONLISTRENDERER:Class = DirectionListRenderer;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_FORTDIRECTIONSCONTAINER:Class = FortDirectionsContainer;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTDISCONNECTVIEW:Class = FortDisconnectView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTMAINVIEW:Class = FortMainView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMECOMMANDERCONTENT:Class = FortWelcomeCommanderContent;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMECOMMANDERVIEW:Class = FortWelcomeCommanderView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMEVIEW:Class = FortWelcomeView;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IFORTHEADERCLANINFO:Class = IFortHeaderClanInfo;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMAINFOOTER:Class = IMainFooter;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMAINHEADER:Class = IMainHeader;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTHEADERCLANINFO:Class = FortHeaderClanInfo;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTMAINFOOTER:Class = FortMainFooter;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTMAINHEADER:Class = FortMainHeader;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_VIGNETTEYELLOW:Class = VignetteYellow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IORDERSPANEL:Class = IOrdersPanel;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IMPL_ORDERPOPOVERLAYOUT:Class = OrderPopoverLayout;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IMPL_ORDERSPANEL:Class = OrdersPanel;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGCARDPOPOVERVO:Class = BuildingCardPopoverVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGCTXMENUVO:Class = BuildingCtxMenuVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGINDICATORSVO:Class = BuildingIndicatorsVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGMODERNIZATIONVO:Class = BuildingModernizationVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERACTIONVO:Class = BuildingPopoverActionVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERBASEVO:Class = BuildingPopoverBaseVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERHEADERVO:Class = BuildingPopoverHeaderVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROGRESSLBLVO:Class = BuildingProgressLblVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGVO:Class = BuildingVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGSCOMPONENTVO:Class = BuildingsComponentVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANLISTRENDERERVO:Class = ClanListRendererVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANSTATITEMVO:Class = ClanStatItemVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANSTATSVO:Class = ClanStatsVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CONFIRMORDERVO:Class = ConfirmOrderVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_DIRECTIONVO:Class = DirectionVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTBUILDINGCONSTANTS:Class = FortBuildingConstants;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCHOICEDIVISIONSELECTORVO:Class = FortChoiceDivisionSelectorVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCHOICEDIVISIONVO:Class = FortChoiceDivisionVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCLANLISTWINDOWVO:Class = FortClanListWindowVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCLANMEMBERVO:Class = FortClanMemberVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCONSTANTS:Class = FortConstants;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTFIXEDPLAYERSVO:Class = FortFixedPlayersVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTINVALIDATIONTYPE:Class = FortInvalidationType;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODEELEMENTPROPERTY:Class = FortModeElementProperty;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODESTATESTRINGSVO:Class = FortModeStateStringsVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODESTATEVO:Class = FortModeStateVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTWELCOMEVIEWVO:Class = FortWelcomeViewVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTIFICATIONVO:Class = FortificationVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FUNCTIONALSTATES:Class = FunctionalStates;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_MODERNIZATIONCMPVO:Class = ModernizationCmpVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERINFOVO:Class = OrderInfoVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERPOPOVERVO:Class = OrderPopoverVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERVO:Class = OrderVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_TRANSPORTINGVO:Class = TransportingVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BASE_BASEFORTIFICATIONVO:Class = BaseFortificationVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BASE_BUILDINGBASEVO:Class = BuildingBaseVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BATTLEROOM_SORTIEVO:Class = SortieVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSINFOVO:Class = BuildingProcessInfoVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSLISTITEMVO:Class = BuildingProcessListItemVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSVO:Class = BuildingProcessVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_DEMOUNTBUILDING_DEMOUNTBUILDINGVO:Class = DemountBuildingVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_SORTIE_SORTIERENDERVO:Class = SortieRenderVO;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_DIRECTIONEVENT:Class = DirectionEvent;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_FORTBUILDINGCARDPOPOVEREVENT:Class = FortBuildingCardPopoverEvent;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_FORTBUILDINGEVENT:Class = FortBuildingEvent;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ICOMMONMODECLIENT:Class = ICommonModeClient;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_IDIRECTIONMODECLIENT:Class = IDirectionModeClient;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ITRANSPORTMODECLIENT:Class = ITransportModeClient;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ITRANSPORTINGHANDLER:Class = ITransportingHandler;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IBUILDINGCARDCMP:Class = IBuildingCardCmp;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTBUILDINGCARDPOPOVER:Class = FortBuildingCardPopover;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTORDERPOPOVER:Class = FortOrderPopover;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERASSIGNPLAYER:Class = FortPopoverAssignPlayer;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERBODY:Class = FortPopoverBody;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERCONTROLPANEL:Class = FortPopoverControlPanel;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERHEADER:Class = FortPopoverHeader;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_ORDERPOPOVER_ORDERINFOBLOCK:Class = OrderInfoBlock;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IBUILDINGSCIGENERATOR:Class = IBuildingsCIGenerator;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTCOMMONUTILS:Class = IFortCommonUtils;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTMODESWITCHER:Class = IFortModeSwitcher;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTSCONTROLSALIGNER:Class = IFortsControlsAligner;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_ITRANSPORTINGHELPER:Class = ITransportingHelper;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_BUILDINGSCIGENERATOR:Class = BuildingsCIGenerator;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTCOMMONUTILS:Class = FortCommonUtils;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTMODESWITCHER:Class = FortModeSwitcher;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTSCONTROLSALIGNER:Class = FortsControlsAligner;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_TRANSPORTINGHELPER:Class = TransportingHelper;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_TWEENANIMATOR:Class = TweenAnimator;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_DEMOUNTBUILDINGWINDOW:Class = DemountBuildingWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTBUILDINGPROCESSWINDOW:Class = FortBuildingProcessWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCLANLISTWINDOW:Class = FortClanListWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCLANSTATISTICSWINDOW:Class = FortClanStatisticsWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCREATEDIRECTIONWINDOW:Class = FortCreateDirectionWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCREATIONCONGRATULATIONSWINDOW:Class = FortCreationCongratulationsWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTFIXEDPLAYERSWINDOW:Class = FortFixedPlayersWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTINTELLIGENCEWINDOW:Class = FortIntelligenceWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTMODERNIZATIONWINDOW:Class = FortModernizationWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTORDERCONFIRMATIONWINDOW:Class = FortOrderConfirmationWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTTRANSPORTCONFIRMATIONWINDOW:Class = FortTransportConfirmationWindow;
-
-      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_PROMOMCCONTAINER:Class = PromoMCContainer;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREWDROPDOWNEVENT:Class = CrewDropDownEvent;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_HANGAR:Class = Hangar;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_IGRLABEL:Class = IgrLabel;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_PARAMS:Class = Params;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_PARAMSLISTENER:Class = ParamsListener;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_PARAMSVO:Class = ParamsVO;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_RESEARCHPANEL:Class = ResearchPanel;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_TANKPARAM:Class = TankParam;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_TMENXPPANEL:Class = TmenXpPanel;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_AMMUNITIONPANEL:Class = AmmunitionPanel;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_DEVICESLOT:Class = DeviceSlot;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_EQUIPMENTSLOT:Class = EquipmentSlot;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_EXTRAICON:Class = ExtraIcon;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_FITTINGLISTITEMRENDERER:Class = FittingListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_FITTINGSELECT:Class = FittingSelect;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_HISTORICALMODULESOVERLAY:Class = HistoricalModulesOverlay;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_MODULESLOT:Class = ModuleSlot;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_CREW:Class = Crew;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_CREWITEMRENDERER:Class = CrewItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_CREWSCROLLINGLIST:Class = CrewScrollingList;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_ICONSPROPS:Class = IconsProps;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_RECRUITITEMRENDERER:Class = RecruitItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_RECRUITRENDERERVO:Class = RecruitRendererVO;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_SKILLSVO:Class = SkillsVO;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_SMALLSKILLITEMRENDERER:Class = SmallSkillItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_TANKMENICONS:Class = TankmenIcons;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_TEXTOBJECT:Class = TextObject;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_AMMOBLOCKOVERLAY:Class = AmmoBlockOverlay;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EQUIPMENTITEM:Class = EquipmentItem;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EQUIPMENTLISTITEMRENDERER:Class = EquipmentListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_MAINTENANCEDROPDOWN:Class = MaintenanceDropDown;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_MAINTENANCESTATUSINDICATOR:Class = MaintenanceStatusIndicator;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_SHELLITEMRENDERER:Class = ShellItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_SHELLLISTITEMRENDERER:Class = ShellListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_TECHNICALMAINTENANCE:Class = TechnicalMaintenance;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_HISTORICALAMMOVO:Class = HistoricalAmmoVO;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_MAINTENANCEVO:Class = MaintenanceVO;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_MODULEVO:Class = net.wg.gui.lobby.hangar.maintenance.data.ModuleVO;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_SHELLVO:Class = ShellVO;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EVENTS_ONEQUIPMENTRENDEREROVER:Class = OnEquipmentRendererOver;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_CLANLOCKUI:Class = ClanLockUI;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSEL:Class = TankCarousel;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSELFILTERS:Class = TankCarouselFilters;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSELITEMRENDERER:Class = TankCarouselItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_DATA_VEHICLECAROUSELVO:Class = VehicleCarouselVO;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_VEHICLECAROUSELVOBUILDER:Class = VehicleCarouselVOBuilder;
-
-      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_VEHICLECAROUSELVOMANAGER:Class = VehicleCarouselVOManager;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_ACCOUNTINFO:Class = AccountInfo;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_BATTLESELECTDROPDOWNVO:Class = BattleSelectDropDownVO;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_BATTLETYPESELECTPOPOVER:Class = BattleTypeSelectPopover;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTON:Class = FightButton;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTONFANCYRENDERER:Class = FightButtonFancyRenderer;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTONFANCYSELECT:Class = FightButtonFancySelect;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_HEADERBUTTONBAR:Class = HeaderButtonBar;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_LOBBYHEADER:Class = LobbyHeader;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_MAINMENU:Class = MainMenu;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_QUESTSCONTROL:Class = QuestsControl;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_SERVERSTATS:Class = ServerStats;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_SERVERVO:Class = ServerVO;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_TANKPANEL:Class = TankPanel;
-
-      public static const NET_WG_GUI_LOBBY_HEADER_TUTORIALCONTROL:Class = TutorialControl;
-
-      public static const NET_WG_GUI_LOBBY_MENU_LOBBYMENU:Class = LobbyMenu;
-
-      public static const NET_WG_GUI_LOBBY_MENU_LOBBYMENUFORM:Class = LobbyMenuForm;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_MESSENGERBAR:Class = MessengerBar;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_NOTIFICATIONLISTBUTTON:Class = NotificationListButton;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_WINDOWGEOMETRYINBAR:Class = WindowGeometryInBar;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_WINDOWOFFSETSINBAR:Class = WindowOffsetsInBar;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELBUTTON:Class = ChannelButton;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELCAROUSEL:Class = ChannelCarousel;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELCAROUSELSCROLLBAR:Class = ChannelCarouselScrollBar;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELLIST:Class = ChannelList;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELRENDERER:Class = ChannelRenderer;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_DATA_CHANNELLISTITEMVO:Class = ChannelListItemVO;
-
-      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_EVENTS_CHANNELLISTEVENT:Class = ChannelListEvent;
-
-      public static const NET_WG_GUI_LOBBY_MODULEINFO_MODULEEFFECTS:Class = ModuleEffects;
-
-      public static const NET_WG_GUI_LOBBY_MODULEINFO_MODULEPARAMETERS:Class = ModuleParameters;
-
-      public static const NET_WG_GUI_LOBBY_PREMIUMFORM_DISCOUNTPRICE:Class = DiscountPrice;
-
-      public static const NET_WG_GUI_LOBBY_PREMIUMFORM_PREMIUMFORM:Class = PremiumForm;
-
-      public static const NET_WG_GUI_LOBBY_PREMIUMFORM_PREMIUMFORMITEMRENDERER:Class = PremiumFormItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILE:Class = Profile;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILECONSTANTS:Class = ProfileConstants;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILEINVALIDATIONTYPES:Class = ProfileInvalidationTypes;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILEMENUINFOVO:Class = ProfileMenuInfoVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILESECTIONSIMPORTER:Class = ProfileSectionsImporter;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILETABNAVIGATOR:Class = ProfileTabNavigator;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_SECTIONINFO:Class = SectionInfo;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_SECTIONVIEWINFO:Class = SectionViewInfo;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_SECTIONSDATAUTIL:Class = SectionsDataUtil;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_USERINFOFORM:Class = UserInfoForm;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ADVANCEDLINEDESCRICONTEXT:Class = AdvancedLineDescrIconText;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_AWARDSTILELISTBLOCK:Class = AwardsTileListBlock;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_BATTLESTYPEDROPDOWN:Class = BattlesTypeDropdown;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CENTEREDLINEICONTEXT:Class = CenteredLineIconText;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_COLOREDDESHLINETEXTITEM:Class = ColoredDeshLineTextItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_DATAVIEWSTACK:Class = DataViewStack;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_GRADIENTLINEBUTTONBAR:Class = GradientLineButtonBar;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_HIDABLESCROLLBAR:Class = HidableScrollBar;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ICOUNTER:Class = ICounter;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ILDITINFO:Class = ILditInfo;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_IRESIZABLECONTENT:Class = net.wg.gui.lobby.profile.components.IResizableContent;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITBATTLES:Class = LditBattles;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITMARKSOFMASTERY:Class = LditMarksOfMastery;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITVALUED:Class = LditValued;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LINEBUTTONBAR:Class = LineButtonBar;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LINETEXTCOMPONENT:Class = LineTextComponent;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PERSONALSCORECOMPONENT:Class = PersonalScoreComponent;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEDASHLINETEXTITEM:Class = ProfileDashLineTextItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEFOOTER:Class = ProfileFooter;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEMEDALSLIST:Class = ProfileMedalsList;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEPAGEFOOTER:Class = ProfilePageFooter;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEWINDOWFOOTER:Class = ProfileWindowFooter;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLECONTENT:Class = ResizableContent;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLEINVALIDATIONTYPES:Class = ResizableInvalidationTypes;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLESCROLLPANE:Class = ResizableScrollPane;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLETILELIST:Class = ResizableTileList;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLEVIEWSTACK:Class = ResizableViewStack;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_SCROLLPANE:Class = ScrollPane;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_SIMPLELOADER:Class = SimpleLoader;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_TECHMASTERYICON:Class = TechMasteryIcon;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_TESTTRACK:Class = TestTrack;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_USERDATEFOOTER:Class = UserDateFooter;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXISCHART:Class = AxisChart;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_BARITEM:Class = BarItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTBASE:Class = ChartBase;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTITEM:Class = ChartItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTITEMBASE:Class = ChartItemBase;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_FRAMECHARTITEM:Class = FrameChartItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_ICHARTITEM:Class = IChartItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXIS_AXISBASE:Class = AxisBase;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXIS_ICHARTAXIS:Class = IChartAxis;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_LAYOUT_ICHARTLAYOUT:Class = IChartLayout;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_LAYOUT_LAYOUTBASE:Class = LayoutBase;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_LAYOUTITEMINFO:Class = LayoutItemInfo;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEACHIEVEMENTVO:Class = ProfileAchievementVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEBASEINFOVO:Class = ProfileBaseInfoVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEBATTLETYPEINITVO:Class = ProfileBattleTypeInitVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILECOMMONINFOVO:Class = ProfileCommonInfoVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEDOSSIERINFOVO:Class = ProfileDossierInfoVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEUSERVO:Class = ProfileUserVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_SECTIONLAYOUTMANAGER:Class = SectionLayoutManager;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILEHEADERBUTTONBAR:Class = ProfileHeaderButtonBar;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILETABBUTTON:Class = ProfileTabButton;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILETABBUTTONBG:Class = ProfileTabButtonBg;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILEACHIEVEMENTSSECTION:Class = ProfileAchievementsSection;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILESECTION:Class = ProfileSection;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILETABINFO:Class = ProfiletabInfo;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SECTIONSSHOWANIMATIONMANAGER:Class = SectionsShowAnimationManager;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_AWARDSBLOCK:Class = AwardsBlock;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_AWARDSMAINCONTAINER:Class = AwardsMainContainer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_PROFILEAWARDS:Class = ProfileAwards;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_STAGEAWARDSBLOCK:Class = StageAwardsBlock;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_ACHIEVEMENTFILTERVO:Class = AchievementFilterVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_AWARDSBLOCKDATAVO:Class = AwardsBlockDataVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_PROFILEAWARDSINITVO:Class = ProfileAwardsInitVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTLEVELS:Class = AxisPointLevels;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTNATIONS:Class = AxisPointNations;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTTYPES:Class = AxisPointTypes;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_COMMONSTATISTICS:Class = CommonStatistics;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_LEVELBARCHARTITEM:Class = LevelBarChartItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_LEVELSSTATISTICCHART:Class = LevelsStatisticChart;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_NATIONBARCHARTITEM:Class = NationBarChartItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_NATIONSSTATISTICSCHART:Class = NationsStatisticsChart;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_PROFILESTATISTICS:Class = ProfileStatistics;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_PROFILESTATISTICSVO:Class = ProfileStatisticsVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTAXISPOINT:Class = StatisticBarChartAxisPoint;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTINITIALIZER:Class = StatisticBarChartInitializer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTITEM:Class = StatisticBarChartItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTLAYOUT:Class = StatisticBarChartLayout;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICCHARTINFO:Class = StatisticChartInfo;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSBARCHART:Class = StatisticsBarChart;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSBARCHARTAXIS:Class = StatisticsBarChartAxis;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSCHARTITEMANIMCLIENT:Class = StatisticsChartItemAnimClient;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSCHARTSUTILS:Class = StatisticsChartsUtils;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSLAYOUTMANAGER:Class = StatisticsLayoutManager;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSTOOLTIPDATAVO:Class = StatisticsTooltipDataVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TFCONTAINER:Class = TfContainer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TYPEBARCHARTITEM:Class = TypeBarChartItem;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TYPESSTATISTICSCHART:Class = TypesStatisticsChart;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_BODYCONTAINER:Class = BodyContainer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_CHARTSSTATISTICSGROUP:Class = ChartsStatisticsGroup;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_CHARTSSTATISTICSVIEW:Class = ChartsStatisticsView;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDLABELDATAVO:Class = DetailedLabelDataVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSLABELDATAVO:Class = DetailedStatisticsLabelDataVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSROOTUNIT:Class = DetailedStatisticsRootUnit;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSUNIT:Class = DetailedStatisticsUnit;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSUNITVO:Class = DetailedStatisticsUnitVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSVIEW:Class = DetailedStatisticsView;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_PROFILESTATISTICSDETAILEDVO:Class = ProfileStatisticsDetailedVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICCHARTSINITDATAVO:Class = StatisticChartsInitDataVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSBODYVO:Class = StatisticsBodyVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSCHARTSTABDATAVO:Class = StatisticsChartsTabDataVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSDASHLINETEXTITEMIRENDERER:Class = StatisticsDashLineTextItemIRenderer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSLABELDATAVO:Class = StatisticsLabelDataVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSLABELVIEWTYPEDATAVO:Class = StatisticsLabelViewTypeDataVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_DETAILEDSTATISTICS_DETAILEDSTATISTICSGROUPEX:Class = DetailedStatisticsGroupEx;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERBGIMAGE:Class = HeaderBGImage;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERCONTAINER:Class = HeaderContainer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERITEMSTYPES:Class = HeaderItemsTypes;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_STATISTICSHEADERVO:Class = StatisticsHeaderVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_AWARDSLISTCOMPONENT:Class = AwardsListComponent;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_LINETEXTFIELDSLAYOUT:Class = LineTextFieldsLayout;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARY:Class = ProfileSummary;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYPAGE:Class = ProfileSummaryPage;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYVO:Class = ProfileSummaryVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYWINDOW:Class = ProfileSummaryWindow;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYINITVO:Class = SummaryInitVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYPAGEINITVO:Class = SummaryPageInitVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYVO:Class = SummaryVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_ACHIEVEMENTSMALL:Class = AchievementSmall;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILESORTINGBUTTON:Class = ProfileSortingButton;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUE:Class = ProfileTechnique;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEEMPTYSCREEN:Class = ProfileTechniqueEmptyScreen;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEPAGE:Class = ProfileTechniquePage;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEWINDOW:Class = ProfileTechniqueWindow;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHAWARDSMAINCONTAINER:Class = TechAwardsMainContainer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHSTATISTICSINITVO:Class = TechStatisticsInitVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNICSDASHLINETEXTITEMIRENDERER:Class = TechnicsDashLineTextItemIRenderer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUEACHIEVEMENTTAB:Class = TechniqueAchievementTab;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUEACHIEVEMENTSBLOCK:Class = TechniqueAchievementsBlock;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUELIST:Class = TechniqueList;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUELISTCOMPONENT:Class = TechniqueListComponent;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUERENDERER:Class = TechniqueRenderer;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUESTACKCOMPONENT:Class = TechniqueStackComponent;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUESTATISTICTAB:Class = TechniqueStatisticTab;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_PROFILEVEHICLEDOSSIERVO:Class = ProfileVehicleDossierVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_SORTINGSETTINGVO:Class = SortingSettingVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_TECHNIQUELISTVEHICLEVO:Class = TechniqueListVehicleVO;
-
-      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_TECHNIQUESTATISTICVO:Class = TechniqueStatisticVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_CONDITIONBLOCK:Class = ConditionBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_CONDITIONELEMENT:Class = ConditionElement;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DESCRIPTIONBLOCK:Class = DescriptionBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_HEADERBLOCK:Class = HeaderBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_IQUESTSTAB:Class = IQuestsTab;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTAWARDSBLOCK:Class = QuestAwardsBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTBLOCK:Class = QuestBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTCONTENT:Class = QuestContent;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTRENDERER:Class = QuestRenderer;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSCROLLPANE:Class = QuestScrollPane;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSCURRENTTAB:Class = QuestsCurrentTab;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSFUTURETAB:Class = QuestsFutureTab;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSLIST:Class = QuestsList;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSWINDOW:Class = QuestsWindow;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_REQUIREMENTBLOCK:Class = RequirementBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_SUBTASKCOMPONENT:Class = SubtaskComponent;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_SUBTASKSLIST:Class = SubtasksList;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_VEHICLEBLOCK:Class = VehicleBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_ABSTRACTRESIZABLECONTENT:Class = AbstractResizableContent;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_ALERTMESSAGE:Class = AlertMessage;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_COMMONCONDITIONSBLOCK:Class = CommonConditionsBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_CONDITIONSEPARATOR:Class = ConditionSeparator;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_COUNTERTEXTELEMENT:Class = CounterTextElement;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_EVENTSRESIZABLECONTENT:Class = EventsResizableContent;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_INNERRESIZABLECONTENT:Class = InnerResizableContent;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_MOVABLEBLOCKSCONTAINER:Class = MovableBlocksContainer;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_PROGRESSBLOCK:Class = ProgressBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_PROGRESSQUESTINDICATOR:Class = ProgressQuestIndicator;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTICONELEMENT:Class = QuestIconElement;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSTATUSCOMPONENT:Class = QuestStatusComponent;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSCOUNTER:Class = QuestsCounter;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSDASHLINEITEM:Class = QuestsDashlineItem;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_RESIZABLECONTAINER:Class = ResizableContainer;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_RESIZABLECONTENTHEADER:Class = ResizableContentHeader;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_SORTINGPANEL:Class = SortingPanel;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_TEXTPROGRESSELEMENT:Class = TextProgressElement;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_VEHICLEITEMRENDERER:Class = VehicleItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_VEHICLESSORTINGBLOCK:Class = VehiclesSortingBlock;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_COMPLEXTOOLTIPVO:Class = ComplexTooltipVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_CONDITIONELEMENTVO:Class = ConditionElementVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_CONDITIONSEPARATORVO:Class = ConditionSeparatorVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_COUNTERTEXTELEMENTVO:Class = CounterTextElementVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_DESCRIPTIONVO:Class = DescriptionVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_EVENTSRESIZABLECONTENTVO:Class = EventsResizableContentVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_HEADERDATAVO:Class = HeaderDataVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_INFODATAVO:Class = InfoDataVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_PROGRESSBLOCKVO:Class = ProgressBlockVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTDASHLINEITEMVO:Class = QuestDashlineItemVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTDATAVO:Class = QuestDataVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTICONELEMENTVO:Class = QuestIconElementVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTRENDERERVO:Class = QuestRendererVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTVEHICLERENDERERVO:Class = QuestVehicleRendererVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_REQUIREMENTBLOCKVO:Class = RequirementBlockVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_SORTEDBTNVO:Class = SortedBtnVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_SUBTASKVO:Class = SubtaskVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_VEHICLEBLOCKVO:Class = VehicleBlockVO;
-
-      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_VEHICLESSORTINGBLOCKVO:Class = VehiclesSortingBlockVO;
-
-      public static const NET_WG_GUI_LOBBY_RECRUITWINDOW_RECRUITWINDOW:Class = RecruitWindow;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWBLOCKVO:Class = RetrainCrewBlockVO;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWMAINBUTTONS:Class = RetrainCrewMainButtons;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWOPERATIONVO:Class = RetrainCrewOperationVO;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWROLEIR:Class = RetrainCrewRoleIR;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWVEHICLEVO:Class = RetrainCrewVehicleVO;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWWINDOW:Class = RetrainCrewWindow;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINTANKMANVO:Class = RetrainTankmanVO;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINVEHICLEBLOCKVO:Class = RetrainVehicleBlockVO;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_SELPRICEINFO:Class = SelPriceInfo;
-
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_TANKMANCREWRETRAININGSMALLBUTTON:Class = TankmanCrewRetrainingSmallButton;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_CONTROLQUESTIONCOMPONENT:Class = ControlQuestionComponent;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_MOVINGRESULT:Class = MovingResult;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SALEITEMBLOCKRENDERER:Class = SaleItemBlockRenderer;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SELLDEVICESCOMPONENT:Class = SellDevicesComponent;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SELLDIALOGLISTITEMRENDERER:Class = SellDialogListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SELLHEADERCOMPONENT:Class = SellHeaderComponent;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SELLSLIDINGCOMPONENT:Class = SellSlidingComponent;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SETTINGSBUTTON:Class = SettingsButton;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SLIDINGSCROLLINGLIST:Class = SlidingScrollingList;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_TOTALRESULT:Class = TotalResult;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_USERINPUTCONTROL:Class = UserInputControl;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLININVENTORYMODULEVO:Class = SellInInventoryModuleVo;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLININVENTORYSHELLVO:Class = SellInInventoryShellVo;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLEEQUIPMENTVO:Class = SellOnVehicleEquipmentVo;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLEOPTIONALDEVICEVO:Class = SellOnVehicleOptionalDeviceVo;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLESHELLVO:Class = SellOnVehicleShellVo;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLVEHICLEITEMBASEVO:Class = SellVehicleItemBaseVo;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLVEHICLEVO:Class = SellVehicleVo;
-
-      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VEHICLESELLDIALOG:Class = VehicleSellDialog;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_ADVANCEDGRAPHICCONTENTFORM:Class = AdvancedGraphicContentForm;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_ADVANCEDGRAPHICSETTINGSFORM:Class = AdvancedGraphicSettingsForm;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_AIMSETTINGS:Class = AimSettings;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_CONTROLSSETTINGS:Class = ControlsSettings;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_GAMESETTINGS:Class = GameSettings;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_GAMESETTINGSBASE:Class = GameSettingsBase;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_GRAPHICSETTINGS:Class = GraphicSettings;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_GRAPHICSETTINGSBASE:Class = GraphicSettingsBase;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_MARKERSETTINGS:Class = MarkerSettings;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_OTHERSETTINGS:Class = OtherSettings;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_SCREENSETTINGSFORM:Class = ScreenSettingsForm;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSAIMFORM:Class = SettingsAimForm;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSBASEVIEW:Class = SettingsBaseView;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSCHANGESMAP:Class = SettingsChangesMap;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSCONFIG:Class = SettingsConfig;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSMARKERSFORM:Class = SettingsMarkersForm;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSWINDOW:Class = SettingsWindow;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_SOUNDSETTINGS:Class = SoundSettings;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_SOUNDSETTINGSBASE:Class = SoundSettingsBase;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYINPUT:Class = KeyInput;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSITEMRENDERER:Class = KeysItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSSCROLLINGLIST:Class = KeysScrollingList;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_RADIOBUTTONBAR:Class = RadioButtonBar;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SETTINGSSCROLLPANE:Class = SettingsScrollPane;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SETTINGSSTEPSLIDER:Class = SettingsStepSlider;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SOUNDVOICEWAVES:Class = SoundVoiceWaves;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_EVNTS_KEYINPUTEVENTS:Class = KeyInputEvents;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_EVNTS_ALTERNATIVEVOICEEVENT:Class = AlternativeVoiceEvent;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_EVNTS_SETTINGVIEWEVENT:Class = SettingViewEvent;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_EVNTS_SETTINGSSUBVEWEVENT:Class = SettingsSubVewEvent;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_VO_SETTINGSCONTROLPROP:Class = SettingsControlProp;
-
-      public static const NET_WG_GUI_LOBBY_SETTINGS_VO_SETTINGSKEYPROP:Class = SettingsKeyProp;
-
-      public static const NET_WG_GUI_LOBBY_STORE_COMPLEXLISTITEMRENDERER:Class = ComplexListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_STORE_MODULERENDERERCREDITS:Class = ModuleRendererCredits;
-
-      public static const NET_WG_GUI_LOBBY_STORE_NATIONFILTER:Class = NationFilter;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STORE_STATUS_COLOR:Class = STORE_STATUS_COLOR;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STORE:Class = Store;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STOREEVENT:Class = StoreEvent;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STOREFORM:Class = StoreForm;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STOREHELPER:Class = StoreHelper;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STORELISTITEMRENDERER:Class = StoreListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STORETABLE:Class = StoreTable;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STORETABLEDATAPROVIDER:Class = StoreTableDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STORETOOLTIPMAPVO:Class = StoreTooltipMapVO;
-
-      public static const NET_WG_GUI_LOBBY_STORE_STOREVIEWSEVENT:Class = StoreViewsEvent;
-
-      public static const NET_WG_GUI_LOBBY_STORE_TABLEHEADER:Class = TableHeader;
-
-      public static const NET_WG_GUI_LOBBY_STORE_TABLEHEADERINFO:Class = TableHeaderInfo;
-
-      public static const NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORY:Class = Inventory;
-
-      public static const NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORYMODULELISTITEMRENDERER:Class = InventoryModuleListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORYVEHICLELISTITEMRDR:Class = InventoryVehicleListItemRdr;
-
-      public static const NET_WG_GUI_LOBBY_STORE_INVENTORY_BASE_INVENTORYLISTITEMRENDERER:Class = InventoryListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_STORE_SHOP_SHOP:Class = Shop;
-
-      public static const NET_WG_GUI_LOBBY_STORE_SHOP_SHOPMODULELISTITEMRENDERER:Class = ShopModuleListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_STORE_SHOP_SHOPVEHICLELISTITEMRENDERER:Class = ShopVehicleListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_STORE_SHOP_BASE_ACTION_CREDITS_STATES:Class = ACTION_CREDITS_STATES;
-
-      public static const NET_WG_GUI_LOBBY_STORE_SHOP_BASE_SHOPTABLEITEMRENDERER:Class = ShopTableItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_EQUIPMENTVIEW:Class = EquipmentView;
-
-      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_MODULEVIEW:Class = ModuleView;
-
-      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_OPTIONALDEVICEVIEW:Class = OptionalDeviceView;
-
-      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_SHELLVIEW:Class = ShellView;
-
-      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_VEHICLEVIEW:Class = VehicleView;
-
-      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_BASESTOREMENUVIEW:Class = BaseStoreMenuView;
-
-      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_FITSSELECTABLESTOREMENUVIEW:Class = FitsSelectableStoreMenuView;
-
-      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_SIMPLESTOREMENUVIEW:Class = SimpleStoreMenuView;
-
-      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_VIEWUIELEMENTVO:Class = ViewUIElementVO;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_CAROUSELTANKMANSKILLSMODEL:Class = CarouselTankmanSkillsModel;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_CREWTANKMANRETRAINING:Class = CrewTankmanRetraining;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASE:Class = PersonalCase;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBASE:Class = PersonalCaseBase;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBLOCKITEM:Class = PersonalCaseBlockItem;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBLOCKSAREA:Class = PersonalCaseBlocksArea;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASECURRENTVEHICLE:Class = PersonalCaseCurrentVehicle;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEDOCS:Class = PersonalCaseDocs;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEDOCSMODEL:Class = PersonalCaseDocsModel;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEINPUTLIST:Class = PersonalCaseInputList;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEMODEL:Class = PersonalCaseModel;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASERETRAININGMODEL:Class = PersonalCaseRetrainingModel;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLS:Class = PersonalCaseSkills;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLSITEMRENDERER:Class = PersonalCaseSkillsItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLSMODEL:Class = PersonalCaseSkillsModel;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESPECIALIZATION:Class = PersonalCaseSpecialization;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESTATS:Class = PersonalCaseStats;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_RANKELEMENT:Class = RankElement;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_SKILLDROPMODEL:Class = SkillDropModel;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_SKILLDROPWINDOW:Class = SkillDropWindow;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_SKILLITEMVIEWMINI:Class = SkillItemViewMini;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_SKILLSITEMSRENDERERRANKICON:Class = SkillsItemsRendererRankIcon;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_TANKMANSKILLSINFOBLOCK:Class = TankmanSkillsInfoBlock;
-
-      public static const NET_WG_GUI_LOBBY_TANKMAN_VEHICLETYPEBUTTON:Class = VehicleTypeButton;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_MENUHANDLER:Class = MenuHandler;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_RESEARCHPAGE:Class = ResearchPage;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_TECHTREEEVENT:Class = TechTreeEvent;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_TECHTREEPAGE:Class = TechTreePage;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_ACTIONNAME:Class = ActionName;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_COLORINDEX:Class = ColorIndex;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_ICONTEXTRESOLVER:Class = IconTextResolver;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NAMEDLABELS:Class = NamedLabels;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NAVINDICATOR:Class = NavIndicator;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NODEENTITYTYPE:Class = NodeEntityType;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NODESTATE:Class = NodeState;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_OUTLITERAL:Class = OutLiteral;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_TTINVALIDATIONTYPE:Class = TTInvalidationType;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_TTSOUNDID:Class = TTSoundID;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_XPTYPESTRINGS:Class = XpTypeStrings;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_ACTIONBUTTON:Class = ActionButton;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_EXPERIENCEINFORMATION:Class = ExperienceInformation;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_EXPERIENCELABEL:Class = ExperienceLabel;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_LEVELDELIMITER:Class = LevelDelimiter;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_LEVELSCONTAINER:Class = LevelsContainer;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NAMEANDXPFIELD:Class = NameAndXpField;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NATIONBUTTON:Class = NationButton;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NATIONSBUTTONBAR:Class = NationsButtonBar;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NODECOMPONENT:Class = NodeComponent;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_PREMIUMDESCRIPTION:Class = PremiumDescription;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_PREMIUMLAYOUT:Class = PremiumLayout;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_RESEARCHTITLEBAR:Class = ResearchTitleBar;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_RETURNTOTTBUTTON:Class = ReturnToTTButton;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_TYPEANDLEVELFIELD:Class = TypeAndLevelField;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_XPICON:Class = XPIcon;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_ABSTRACTDATAPROVIDER:Class = AbstractDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_NATIONVODATAPROVIDER:Class = NationVODataProvider;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_NATIONXMLDATAPROVIDER:Class = NationXMLDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_RESEARCHVODATAPROVIDER:Class = ResearchVODataProvider;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_RESEARCHXMLDATAPROVIDER:Class = ResearchXMLDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_ANIMATIONPROPERTIES:Class = AnimationProperties;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_INVENTORYSTATEITEM:Class = InventoryStateItem;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_NODESTATECOLLECTION:Class = NodeStateCollection;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_NODESTATEITEM:Class = NodeStateItem;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_RESEARCHSTATEITEM:Class = ResearchStateItem;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_STATEPROPERTIES:Class = StateProperties;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_UNLOCKEDSTATEITEM:Class = UnlockedStateItem;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_EXTRAINFORMATION:Class = ExtraInformation;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NTDISPLAYINFO:Class = NTDisplayInfo;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NATIONDISPLAYSETTINGS:Class = NationDisplaySettings;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NODEDATA:Class = NodeData;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_PRIMARYCLASS:Class = PrimaryClass;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_RESEARCHDISPLAYINFO:Class = ResearchDisplayInfo;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_SHOPPRICE:Class = ShopPrice;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_UNLOCKPROPS:Class = UnlockProps;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_VEHGLOBALSTATS:Class = VehGlobalStats;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_DISTANCE:Class = Distance;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_LINESGRAPHICS:Class = LinesGraphics;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_NTGRAPHICS:Class = NTGraphics;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_NODEINDEXFILTER:Class = NodeIndexFilter;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_RESEARCHGRAPHICS:Class = ResearchGraphics;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_TITLEAPPEARANCE:Class = TitleAppearance;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IHASRENDERERASOWNER:Class = IHasRendererAsOwner;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INATIONTREEDATAPROVIDER:Class = INationTreeDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INODESCONTAINER:Class = INodesContainer;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INODESDATAPROVIDER:Class = INodesDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRENDERER:Class = IRenderer;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHCONTAINER:Class = IResearchContainer;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHDATAPROVIDER:Class = IResearchDataProvider;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHPAGE:Class = IResearchPage;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_ITECHTREEPAGE:Class = ITechTreePage;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IVALUEOBJECT:Class = IValueObject;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_MATH_ADG_ITEMLEVELSBUILDER:Class = ADG_ItemLevelsBuilder;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_MATH_HUNGARIANALGORITHM:Class = HungarianAlgorithm;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_MATH_MATRIXPOSITION:Class = MatrixPosition;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_MATH_MATRIXUTILS:Class = MatrixUtils;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_FAKENODE:Class = FakeNode;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_NATIONTREENODE:Class = NationTreeNode;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_RENDERER:Class = Renderer;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_RESEARCHITEM:Class = ResearchItem;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_RESEARCHROOT:Class = ResearchRoot;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_SUB_NATIONTREE:Class = NationTree;
-
-      public static const NET_WG_GUI_LOBBY_TECHTREE_SUB_RESEARCHITEMS:Class = ResearchItems;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_ARENAVOIPSETTINGS:Class = ArenaVoipSettings;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_DROPLIST:Class = DropList;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_DROPTILELIST:Class = DropTileList;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_MINIMAPENTITY:Class = MinimapEntity;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_MINIMAPENTRY:Class = MinimapEntry;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_MINIMAPLOBBY:Class = MinimapLobby;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_PLAYERELEMENT:Class = PlayerElement;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGDRAGCONTROLLER:Class = TrainingDragController;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGDRAGDELEGATE:Class = TrainingDragDelegate;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGFORM:Class = TrainingForm;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGLISTITEMRENDERER:Class = TrainingListItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGPLAYERITEMRENDERER:Class = TrainingPlayerItemRenderer;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGROOM:Class = TrainingRoom;
-
-      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGWINDOW:Class = TrainingWindow;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_BODYMC:Class = BodyMc;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_BUYINGVEHICLEVO:Class = BuyingVehicleVO;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_EXPANDBUTTON:Class = ExpandButton;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_FOOTERMC:Class = FooterMc;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_HEADERMC:Class = HeaderMc;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_VEHICLEBUYWINDOW:Class = VehicleBuyWindow;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_VEHICLEBUYWINDOWANIMMANAGER:Class = VehicleBuyWindowAnimManager;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_BASEBLOCK:Class = BaseBlock;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_CREWBLOCK:Class = CrewBlock;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_PROPBLOCK:Class = PropBlock;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFO:Class = VehicleInfo;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOBASE:Class = VehicleInfoBase;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOCREW:Class = VehicleInfoCrew;
-
-      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOPROPS:Class = VehicleInfoProps;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_BASEEXCHANGEWINDOW:Class = BaseExchangeWindow;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGECURRENCYWINDOW:Class = ExchangeCurrencyWindow;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANINITVO:Class = ExchangeFreeToTankmanInitVO;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANXPWARNING:Class = ExchangeFreeToTankmanXpWarning;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANXPWINDOW:Class = ExchangeFreeToTankmanXpWindow;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEHEADER:Class = ExchangeHeader;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEUTILS:Class = ExchangeUtils;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEVCOINWARNINGMC:Class = ExchangeVcoinWarningMC;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEVCOINWINDOW:Class = ExchangeVcoinWindow;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEWINDOW:Class = ExchangeWindow;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPFROMVEHICLEIR:Class = ExchangeXPFromVehicleIR;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPLIST:Class = ExchangeXPList;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPTANKMANSKILLSMODEL:Class = ExchangeXPTankmanSkillsModel;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPVEHICLEVO:Class = ExchangeXPVehicleVO;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPWARNINGSCREEN:Class = ExchangeXPWarningScreen;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPWINDOW:Class = ExchangeXPWindow;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_EXTENDEDICONTEXT:Class = ExtendedIconText;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_PROFILEWINDOW:Class = ProfileWindow;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_PROFILEWINDOWINITVO:Class = ProfileWindowInitVO;
-
-      public static const NET_WG_GUI_LOBBY_WINDOW_VCOINEXCHANGEDATAVO:Class = VcoinExchangeDataVO;
-
-      public static const NET_WG_GUI_LOGIN_EULA_EULADLG:Class = EULADlg;
-
-      public static const NET_WG_GUI_LOGIN_EULA_EULAFULLDLG:Class = EULAFullDlg;
-
-      public static const NET_WG_GUI_LOGIN_ILOGINFORM:Class = ILoginForm;
-
-      public static const NET_WG_GUI_LOGIN_ISPARKSMANAGER:Class = ISparksManager;
-
-      public static const NET_WG_GUI_LOGIN_IMPL_LOGINCREATEANACCOUNTWINDOW:Class = LoginCreateAnAccountWindow;
-
-      public static const NET_WG_GUI_LOGIN_IMPL_LOGINEVENT:Class = LoginEvent;
-
-      public static const NET_WG_GUI_LOGIN_IMPL_LOGINFORM:Class = LoginForm;
-
-      public static const NET_WG_GUI_LOGIN_IMPL_LOGINPAGE:Class = LoginPage;
-
-      public static const NET_WG_GUI_LOGIN_IMPL_LOGINQUEUEWINDOW:Class = LoginQueueWindow;
-
-      public static const NET_WG_GUI_LOGIN_IMPL_SPARK:Class = Spark;
-
-      public static const NET_WG_GUI_LOGIN_IMPL_SPARKSMANAGER:Class = SparksManager;
-
-      public static const NET_WG_GUI_MESSENGER_CHANNELCOMPONENT:Class = ChannelComponent;
-
-      public static const NET_WG_GUI_MESSENGER_ICHANNELCOMPONENT:Class = IChannelComponent;
-
-      public static const NET_WG_GUI_MESSENGER_SMILEYMAP:Class = SmileyMap;
-
-      public static const NET_WG_GUI_MESSENGER_CONTROLS_CHANNELITEMRENDERER:Class = ChannelItemRenderer;
-
-      public static const NET_WG_GUI_MESSENGER_CONTROLS_MEMBERITEMRENDERER:Class = MemberItemRenderer;
-
-      public static const NET_WG_GUI_MESSENGER_DATA_CHANNELMEMBERVO:Class = ChannelMemberVO;
-
-      public static const NET_WG_GUI_MESSENGER_EVNTS_CHANNELSFORMEVENT:Class = ChannelsFormEvent;
-
-      public static const NET_WG_GUI_MESSENGER_EVNTS_CONTACTSFORMEVENT:Class = ContactsFormEvent;
-
-      public static const NET_WG_GUI_MESSENGER_FORMS_CHANNELSCREATEFORM:Class = ChannelsCreateForm;
-
-      public static const NET_WG_GUI_MESSENGER_FORMS_CHANNELSSEARCHFORM:Class = ChannelsSearchForm;
-
-      public static const NET_WG_GUI_MESSENGER_FORMS_CONTACTSLISTFORM:Class = ContactsListForm;
-
-      public static const NET_WG_GUI_MESSENGER_FORMS_CONTACTSSEARCHFORM:Class = ContactsSearchForm;
-
-      public static const NET_WG_GUI_MESSENGER_META_IBASECHANNELWINDOWMETA:Class = IBaseChannelWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_ICHANNELCOMPONENTMETA:Class = net.wg.gui.messenger.meta.IChannelComponentMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_ICHANNELSMANAGEMENTWINDOWMETA:Class = IChannelsManagementWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_ICONNECTTOSECURECHANNELWINDOWMETA:Class = IConnectToSecureChannelWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_ICONTACTSWINDOWMETA:Class = IContactsWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_IFAQWINDOWMETA:Class = IFAQWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_ILOBBYCHANNELWINDOWMETA:Class = ILobbyChannelWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_IMPL_BASECHANNELWINDOWMETA:Class = BaseChannelWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_IMPL_CHANNELCOMPONENTMETA:Class = ChannelComponentMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_IMPL_CHANNELSMANAGEMENTWINDOWMETA:Class = ChannelsManagementWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_IMPL_CONNECTTOSECURECHANNELWINDOWMETA:Class = ConnectToSecureChannelWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_IMPL_CONTACTSWINDOWMETA:Class = ContactsWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_IMPL_FAQWINDOWMETA:Class = FAQWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_META_IMPL_LOBBYCHANNELWINDOWMETA:Class = LobbyChannelWindowMeta;
-
-      public static const NET_WG_GUI_MESSENGER_WINDOWS_BASECHANNELWINDOW:Class = BaseChannelWindow;
-
-      public static const NET_WG_GUI_MESSENGER_WINDOWS_CHANNELSMANAGEMENTWINDOW:Class = ChannelsManagementWindow;
-
-      public static const NET_WG_GUI_MESSENGER_WINDOWS_CONNECTTOSECURECHANNELWINDOW:Class = ConnectToSecureChannelWindow;
-
-      public static const NET_WG_GUI_MESSENGER_WINDOWS_CONTACTSWINDOW:Class = ContactsWindow;
-
-      public static const NET_WG_GUI_MESSENGER_WINDOWS_FAQWINDOW:Class = FAQWindow;
-
-      public static const NET_WG_GUI_MESSENGER_WINDOWS_LAZYCHANNELWINDOW:Class = LazyChannelWindow;
-
-      public static const NET_WG_GUI_MESSENGER_WINDOWS_LOBBYCHANNELWINDOW:Class = LobbyChannelWindow;
-
-      public static const NET_WG_GUI_NOTIFICATION_CAPTCHA:Class = CAPTCHA;
-
-      public static const NET_WG_GUI_NOTIFICATION_NOTIFICATIONLISTVIEW:Class = NotificationListView;
-
-      public static const NET_WG_GUI_NOTIFICATION_NOTIFICATIONPOPUPVIEWER:Class = NotificationPopUpViewer;
-
-      public static const NET_WG_GUI_NOTIFICATION_NOTIFICATIONTIMECOMPONENT:Class = NotificationTimeComponent;
-
-      public static const NET_WG_GUI_NOTIFICATION_NOTIFICATIONSLIST:Class = NotificationsList;
-
-      public static const NET_WG_GUI_NOTIFICATION_SERVICEMESSAGE:Class = ServiceMessage;
-
-      public static const NET_WG_GUI_NOTIFICATION_SERVICEMESSAGEITEMRENDERER:Class = ServiceMessageItemRenderer;
-
-      public static const NET_WG_GUI_NOTIFICATION_SERVICEMESSAGEPOPUP:Class = ServiceMessagePopUp;
-
-      public static const NET_WG_GUI_NOTIFICATION_SYSTEMMESSAGEDIALOG:Class = SystemMessageDialog;
-
-      public static const NET_WG_GUI_NOTIFICATION_CONSTANTS_BUTTONSTATE:Class = ButtonState;
-
-      public static const NET_WG_GUI_NOTIFICATION_CONSTANTS_BUTTONTYPE:Class = ButtonType;
-
-      public static const NET_WG_GUI_NOTIFICATION_CONSTANTS_MESSAGEMETRICS:Class = MessageMetrics;
-
-      public static const NET_WG_GUI_NOTIFICATION_EVENTS_NOTIFICATIONLISTEVENT:Class = NotificationListEvent;
-
-      public static const NET_WG_GUI_NOTIFICATION_EVENTS_SERVICEMESSAGEEVENT:Class = ServiceMessageEvent;
-
-      public static const NET_WG_GUI_NOTIFICATION_VO_BUTTONVO:Class = ButtonVO;
-
-      public static const NET_WG_GUI_NOTIFICATION_VO_LAYOUTINFOVO:Class = LayoutInfoVO;
-
-      public static const NET_WG_GUI_NOTIFICATION_VO_MESSAGEINFOVO:Class = MessageInfoVO;
-
-      public static const NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONDIALOGINITINFOVO:Class = NotificationDialogInitInfoVO;
-
-      public static const NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONINFOVO:Class = NotificationInfoVO;
-
-      public static const NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONSETTINGSVO:Class = NotificationSettingsVO;
-
-      public static const NET_WG_GUI_NOTIFICATION_VO_POPUPNOTIFICATIONINFOVO:Class = PopUpNotificationInfoVO;
-
-      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_BSLISTRENDERERVO:Class = BSListRendererVO;
-
-      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONLIST:Class = BattleSessionList;
-
-      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONLISTRENDERER:Class = BattleSessionListRenderer;
-
-      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONWINDOW:Class = BattleSessionWindow;
-
-      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_FLAGSLIST:Class = FlagsList;
-
-      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_REQUIREMENTINFO:Class = RequirementInfo;
-
-      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_TOPINFO:Class = TopInfo;
-
-      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_TOPSTATS:Class = TopStats;
-
-      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANIESLISTWINDOW:Class = CompaniesListWindow;
-
-      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANIESSCROLLINGLIST:Class = CompaniesScrollingList;
-
-      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPDOWNEVENT:Class = CompanyDropDownEvent;
-
-      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPITEMRENDERER:Class = CompanyDropItemRenderer;
-
-      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPLIST:Class = CompanyDropList;
-
-      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYEVENT:Class = CompanyEvent;
-
-      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYLISTITEMRENDERER:Class = CompanyListItemRenderer;
-
-      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYWINDOW:Class = CompanyWindow;
-
-      public static const NET_WG_GUI_PREBATTLE_COMPANY_GROUPPLAYERSDROPDOWNMENU:Class = GroupPlayersDropDownMenu;
-
-      public static const NET_WG_GUI_PREBATTLE_CONSTANTS_PREBATTLESTATEFLAGS:Class = PrebattleStateFlags;
-
-      public static const NET_WG_GUI_PREBATTLE_CONSTANTS_PREBATTLESTATESTRING:Class = PrebattleStateString;
-
-      public static const NET_WG_GUI_PREBATTLE_CONTROLS_TEAMMEMBERRENDERER:Class = TeamMemberRenderer;
-
-      public static const NET_WG_GUI_PREBATTLE_DATA_PLAYERPRBINFOVO:Class = PlayerPrbInfoVO;
-
-      public static const NET_WG_GUI_PREBATTLE_DATA_RECEIVEDINVITEVO:Class = ReceivedInviteVO;
-
-      public static const NET_WG_GUI_PREBATTLE_INVITES_INVITESTACKCONTAINERBASE:Class = InviteStackContainerBase;
-
-      public static const NET_WG_GUI_PREBATTLE_INVITES_PRBINVITESEARCHUSERSFORM:Class = PrbInviteSearchUsersForm;
-
-      public static const NET_WG_GUI_PREBATTLE_INVITES_PRBSENDINVITECIGENERATOR:Class = PrbSendInviteCIGenerator;
-
-      public static const NET_WG_GUI_PREBATTLE_INVITES_PRBSENDINVITESWINDOW:Class = PrbSendInvitesWindow;
-
-      public static const NET_WG_GUI_PREBATTLE_INVITES_RECEIVEDINVITEWINDOW:Class = ReceivedInviteWindow;
-
-      public static const NET_WG_GUI_PREBATTLE_INVITES_SENDINVITESEVENT:Class = SendInvitesEvent;
-
-      public static const NET_WG_GUI_PREBATTLE_INVITES_USERROSTERITEMRENDERER:Class = UserRosterItemRenderer;
-
-      public static const NET_WG_GUI_PREBATTLE_INVITES_USERROSTERVIEW:Class = UserRosterView;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IBATTLESESSIONLISTMETA:Class = IBattleSessionListMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IBATTLESESSIONWINDOWMETA:Class = IBattleSessionWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_ICHANNELWINDOWMETA:Class = IChannelWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_ICOMPANIESWINDOWMETA:Class = ICompaniesWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_ICOMPANYWINDOWMETA:Class = ICompanyWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IPREBATTLEWINDOWMETA:Class = IPrebattleWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IPREQUEUEWINDOWMETA:Class = IPrequeueWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IRECEIVEDINVITEWINDOWMETA:Class = IReceivedInviteWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_ABSTRACT_PREBATTLEWINDOWABSTRACT:Class = PrebattleWindowAbstract;
-
-      public static const NET_WG_GUI_PREBATTLE_META_ABSTRACT_PREQUEUEWINDOW:Class = PrequeueWindow;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IMPL_BATTLESESSIONLISTMETA:Class = BattleSessionListMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IMPL_BATTLESESSIONWINDOWMETA:Class = BattleSessionWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IMPL_CHANNELWINDOWMETA:Class = ChannelWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IMPL_COMPANIESWINDOWMETA:Class = CompaniesWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IMPL_COMPANYWINDOWMETA:Class = CompanyWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IMPL_PREBATTLEWINDOWMETA:Class = PrebattleWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IMPL_PREQUEUEWINDOWMETA:Class = PrequeueWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_META_IMPL_RECEIVEDINVITEWINDOWMETA:Class = ReceivedInviteWindowMeta;
-
-      public static const NET_WG_GUI_PREBATTLE_PAGES_CHANNELWINDOW:Class = ChannelWindow;
-
-      public static const NET_WG_GUI_PREBATTLE_PAGES_LAZYWINDOW:Class = LazyWindow;
-
-      public static const NET_WG_GUI_PREBATTLE_PAGES_MEMBERDATAPROVIDER:Class = MemberDataProvider;
-
-      public static const NET_WG_GUI_PREBATTLE_SQUAD_MESSENGERUTILS:Class = MessengerUtils;
-
-      public static const NET_WG_GUI_PREBATTLE_SQUAD_SQUADITEMRENDERER:Class = SquadItemRenderer;
-
-      public static const NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOW:Class = SquadWindow;
-
-      public static const NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOWCIGENERATOR:Class = SquadWindowCIGenerator;
-
-      public static const NET_WG_GUI_PREBATTLE_SQUAD_USERDATAFLAGS:Class = UserDataFlags;
-
-      public static const NET_WG_GUI_RALLY_BASERALLYMAINWINDOW:Class = BaseRallyMainWindow;
-
-      public static const NET_WG_GUI_RALLY_BASERALLYVIEW:Class = BaseRallyView;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_BASERALLYSLOTHELPER:Class = BaseRallySlotHelper;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_CANDIDATESSCROLLINGLIST:Class = CandidatesScrollingList;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_IGRAYTRANSPARENTBUTTON:Class = IGrayTransparentButton;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_ISLOTRENDERERHELPER:Class = ISlotRendererHelper;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_MANUALSEARCHSCROLLINGLIST:Class = ManualSearchScrollingList;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_RALLYINVALIDATIONTYPE:Class = RallyInvalidationType;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_RALLYSIMPLESLOTRENDERER:Class = RallySimpleSlotRenderer;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_RALLYSLOTRENDERER:Class = RallySlotRenderer;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_READYMSG:Class = ReadyMsg;
-
-      public static const NET_WG_GUI_RALLY_CONTROLS_SLOTDROPINDICATOR:Class = SlotDropIndicator;
-
-      public static const NET_WG_GUI_RALLY_DATA_MANUALSEARCHDATAPROVIDER:Class = net.wg.gui.rally.data.ManualSearchDataProvider;
-
-      public static const NET_WG_GUI_RALLY_EVENTS_RALLYVIEWSEVENT:Class = RallyViewsEvent;
-
-      public static const NET_WG_GUI_RALLY_HELPERS_PLAYERCIGENERATOR:Class = PlayerCIGenerator;
-
-      public static const NET_WG_GUI_RALLY_HELPERS_RALLYDRAGDROPDELEGATE:Class = RallyDragDropDelegate;
-
-      public static const NET_WG_GUI_RALLY_HELPERS_RALLYDRAGDROPLISTDELEGATECONTROLLER:Class = RallyDragDropListDelegateController;
-
-      public static const NET_WG_GUI_RALLY_INTERFACES_IMANUALSEARCHRENDERER:Class = IManualSearchRenderer;
-
-      public static const NET_WG_GUI_RALLY_INTERFACES_IMANUALSEARCHSCROLLINGLIST:Class = IManualSearchScrollingList;
-
-      public static const NET_WG_GUI_RALLY_INTERFACES_IRALLYLISTITEMVO:Class = IRallyListItemVO;
-
-      public static const NET_WG_GUI_RALLY_INTERFACES_IRALLYSLOTVO:Class = IRallySlotVO;
-
-      public static const NET_WG_GUI_RALLY_INTERFACES_IRALLYVO:Class = IRallyVO;
-
-      public static const NET_WG_GUI_RALLY_VIEWS_INTRO_BASERALLYINTROVIEW:Class = BaseRallyIntroView;
-
-      public static const NET_WG_GUI_RALLY_VIEWS_LIST_BASERALLYDETAILSSECTION:Class = BaseRallyDetailsSection;
-
-      public static const NET_WG_GUI_RALLY_VIEWS_LIST_BASERALLYLISTVIEW:Class = BaseRallyListView;
-
-      public static const NET_WG_GUI_RALLY_VIEWS_ROOM_BASECHATSECTION:Class = BaseChatSection;
-
-      public static const NET_WG_GUI_RALLY_VIEWS_ROOM_BASERALLYROOMVIEW:Class = BaseRallyRoomView;
-
-      public static const NET_WG_GUI_RALLY_VIEWS_ROOM_BASETEAMSECTION:Class = BaseTeamSection;
-
-      public static const NET_WG_GUI_RALLY_VIEWS_ROOM_BASEWAITLISTSECTION:Class = BaseWaitListSection;
-
-      public static const NET_WG_GUI_RALLY_VO_ACTIONBUTTONVO:Class = ActionButtonVO;
-
-      public static const NET_WG_GUI_RALLY_VO_RALLYCANDIDATEVO:Class = RallyCandidateVO;
-
-      public static const NET_WG_GUI_RALLY_VO_RALLYSHORTVO:Class = RallyShortVO;
-
-      public static const NET_WG_GUI_RALLY_VO_RALLYSLOTVO:Class = RallySlotVO;
-
-      public static const NET_WG_GUI_RALLY_VO_RALLYVO:Class = RallyVO;
-
-      public static const NET_WG_GUI_RALLY_VO_VEHICLEVO:Class = net.wg.gui.rally.vo.VehicleVO;
-
-      public static const NET_WG_GUI_TUTORIAL_TUTORIALBATTLELOADING:Class = TutorialBattleLoading;
-
-      public static const NET_WG_GUI_TUTORIAL_CONSTANTS_HINTITEMTYPE:Class = HintItemType;
-
-      public static const NET_WG_GUI_TUTORIAL_CONSTANTS_PLAYERXPLEVEL:Class = PlayerXPLevel;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_BATTLEBONUSITEM:Class = BattleBonusItem;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_BATTLEPROGRESS:Class = BattleProgress;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_CHAPTERPROGRESSITEMRENDERER:Class = ChapterProgressItemRenderer;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_FINALSTATISTICPROGRESS:Class = FinalStatisticProgress;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_HINTBASEITEMRENDERER:Class = HintBaseItemRenderer;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_HINTLIST:Class = HintList;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_HINTTEXTITEMRENDERER:Class = HintTextItemRenderer;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_HINTVIDEOITEMRENDERER:Class = HintVideoItemRenderer;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_PROGRESSITEM:Class = ProgressItem;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_PROGRESSSEPARATOR:Class = ProgressSeparator;
-
-      public static const NET_WG_GUI_TUTORIAL_CONTROLS_TUTORIALBATTLELOADINGFORM:Class = TutorialBattleLoadingForm;
-
-      public static const NET_WG_GUI_TUTORIAL_META_ITUTORIALBATTLENORESULTSMETA:Class = ITutorialBattleNoResultsMeta;
-
-      public static const NET_WG_GUI_TUTORIAL_META_ITUTORIALBATTLESTATISTICMETA:Class = ITutorialBattleStatisticMeta;
-
-      public static const NET_WG_GUI_TUTORIAL_META_ITUTORIALDIALOGMETA:Class = ITutorialDialogMeta;
-
-      public static const NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLENORESULTSMETA:Class = TutorialBattleNoResultsMeta;
-
-      public static const NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLESTATISTICMETA:Class = TutorialBattleStatisticMeta;
-
-      public static const NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALDIALOGMETA:Class = TutorialDialogMeta;
-
-      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLENORESULTSWINDOW:Class = TutorialBattleNoResultsWindow;
-
-      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLESTATISTICWINDOW:Class = TutorialBattleStatisticWindow;
-
-      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALDIALOG:Class = TutorialDialog;
-
-      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALGREETINGDIALOG:Class = TutorialGreetingDialog;
-
-      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALQUEUEDIALOG:Class = TutorialQueueDialog;
-
-      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALVIDEODIALOG:Class = TutorialVideoDialog;
-
-      public static const NET_WG_GUI_UTILS_COMPLEXTOOLTIPHELPER:Class = ComplexTooltipHelper;
-
-      public static const NET_WG_GUI_UTILS_EXCLUDETWEENMANAGER:Class = ExcludeTweenManager;
-
-      public static const NET_WG_GUI_UTILS_FRAMEWALKER:Class = FrameWalker;
-
-      public static const NET_WG_GUI_UTILS_IMAGESUBSTITUTION:Class = ImageSubstitution;
-
-      public static const NET_WG_GUI_UTILS_TEXTFIELDSTYLESHEET:Class = TextFieldStyleSheet;
-
-      public static const NET_WG_GUI_UTILS_VEHICLESTATESTRING:Class = VehicleStateString;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_ABSTRACTCONFIRMITEMDIALOG:Class = AbstractConfirmItemDialog;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_ABSTRACTPOPOVERVIEW:Class = AbstractPopOverView;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_ABSTRACTWINDOWVIEW:Class = AbstractWindowView;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_ABSTRACTWRAPPERVIEW:Class = AbstractWrapperView;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_BASELAYOUT:Class = BaseLayout;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_BASEVIEWWRAPPER:Class = BaseViewWrapper;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_DEFAULTWINDOWGEOMETRY:Class = DefaultWindowGeometry;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_SMARTPOPOVERVIEW:Class = SmartPopOverView;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_STOREDWINDOWGEOMETRY:Class = StoredWindowGeometry;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IAMMUNITIONPANELMETA:Class = IAmmunitionPanelMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBARRACKSMETA:Class = IBarracksMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASEEXCHANGEWINDOWMETA:Class = IBaseExchangeWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYINTROVIEWMETA:Class = IBaseRallyIntroViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYLISTVIEWMETA:Class = IBaseRallyListViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYMAINWINDOWMETA:Class = IBaseRallyMainWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYROOMVIEWMETA:Class = IBaseRallyRoomViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYVIEWMETA:Class = IBaseRallyViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLELOADINGMETA:Class = IBattleLoadingMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLEQUEUEMETA:Class = IBattleQueueMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLERESULTSMETA:Class = IBattleResultsMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLETYPESELECTPOPOVERMETA:Class = IBattleTypeSelectPopoverMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBROWSERMETA:Class = IBrowserMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICAPTCHAMETA:Class = ICAPTCHAMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICHANNELCAROUSELMETA:Class = IChannelCarouselMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICHANNELCOMPONENTMETA:Class = net.wg.infrastructure.base.meta.IChannelComponentMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICONFIRMMODULEWINDOWMETA:Class = IConfirmModuleWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICREWMETA:Class = ICrewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICREWOPERATIONSPOPOVERMETA:Class = ICrewOperationsPopOverMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICURSORMETA:Class = ICursorMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTBASEVIEWMETA:Class = ICyberSportBaseViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTINTROMETA:Class = ICyberSportIntroMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTMAINWINDOWMETA:Class = ICyberSportMainWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTUNITMETA:Class = ICyberSportUnitMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTUNITSLISTMETA:Class = ICyberSportUnitsListMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IDEMONSTRATORWINDOWMETA:Class = IDemonstratorWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IDEMOUNTBUILDINGWINDOWMETA:Class = IDemountBuildingWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IDISMISSTANKMANDIALOGMETA:Class = IDismissTankmanDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEULAMETA:Class = IEULAMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IELITEWINDOWMETA:Class = IEliteWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEFREETOTANKMANXPWINDOWMETA:Class = IExchangeFreeToTankmanXpWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEVCOINWINDOWMETA:Class = IExchangeVcoinWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEWINDOWMETA:Class = IExchangeWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEXPWINDOWMETA:Class = IExchangeXpWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFIGHTBUTTONMETA:Class = IFightButtonMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTBATTLEROOMWINDOWMETA:Class = IFortBattleRoomWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGCARDPOPOVERMETA:Class = IFortBuildingCardPopoverMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGCOMPONENTMETA:Class = IFortBuildingComponentMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGPROCESSWINDOWMETA:Class = IFortBuildingProcessWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCHOICEDIVISIONWINDOWMETA:Class = IFortChoiceDivisionWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCLANLISTWINDOWMETA:Class = IFortClanListWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCLANSTATISTICSWINDOWMETA:Class = IFortClanStatisticsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCREATEDIRECTIONWINDOWMETA:Class = IFortCreateDirectionWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCREATIONCONGRATULATIONSWINDOWMETA:Class = IFortCreationCongratulationsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTDISCONNECTVIEWMETA:Class = IFortDisconnectViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTFIXEDPLAYERSWINDOWMETA:Class = IFortFixedPlayersWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTINTELLIGENCEWINDOWMETA:Class = IFortIntelligenceWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTINTROMETA:Class = IFortIntroMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTLISTMETA:Class = IFortListMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTMAINVIEWMETA:Class = IFortMainViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTMODERNIZATIONWINDOWMETA:Class = IFortModernizationWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTORDERCONFIRMATIONWINDOWMETA:Class = IFortOrderConfirmationWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTORDERPOPOVERMETA:Class = IFortOrderPopoverMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTROOMMETA:Class = IFortRoomMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTTRANSPORTCONFIRMATIONWINDOWMETA:Class = IFortTransportConfirmationWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTWELCOMEVIEWMETA:Class = IFortWelcomeViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTIFICATIONSVIEWMETA:Class = IFortificationsViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFREEXPINFOWINDOWMETA:Class = IFreeXPInfoWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IGEDESIGNERWINDOWMETA:Class = IGEDesignerWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IGEINSPECTWINDOWMETA:Class = IGEInspectWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IHANGARMETA:Class = IHangarMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IHISTORICALBATTLESLISTWINDOWMETA:Class = IHistoricalBattlesListWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IICONDIALOGMETA:Class = IIconDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IICONPRICEDIALOGMETA:Class = IIconPriceDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IINPUTCHECKERMETA:Class = IInputCheckerMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IINTROPAGEMETA:Class = IIntroPageMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IINVENTORYMETA:Class = IInventoryMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYHEADERMETA:Class = ILobbyHeaderMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMENUMETA:Class = ILobbyMenuMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMESSENGERMETA:Class = ILobbyMessengerMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMINIMAPMETA:Class = ILobbyMinimapMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYPAGEMETA:Class = ILobbyPageMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOGINCREATEANACCOUNTWINDOWMETA:Class = ILoginCreateAnAccountWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOGINPAGEMETA:Class = ILoginPageMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOGINQUEUEWINDOWMETA:Class = ILoginQueueWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMESSENGERBARMETA:Class = IMessengerBarMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMINIMAPENTITYMETA:Class = IMinimapEntityMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMINIMAPLOBBYMETA:Class = IMinimapLobbyMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMODULEINFOMETA:Class = IModuleInfoMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONLISTBUTTONMETA:Class = INotificationListButtonMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONPOPUPVIEWERMETA:Class = INotificationPopUpViewerMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONSLISTMETA:Class = INotificationsListMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IORDERSPANELMETA:Class = IOrdersPanelMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPARAMSMETA:Class = IParamsMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPERSONALCASEMETA:Class = IPersonalCaseMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPOPOVERVIEWMETA:Class = IPopOverViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPRBSENDINVITESWINDOWMETA:Class = IPrbSendInvitesWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPREMIUMFORMMETA:Class = IPremiumFormMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEACHIEVEMENTSECTIONMETA:Class = IProfileAchievementSectionMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEAWARDSMETA:Class = IProfileAwardsMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEMETA:Class = IProfileMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESECTIONMETA:Class = IProfileSectionMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESTATISTICSMETA:Class = IProfileStatisticsMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESUMMARYMETA:Class = IProfileSummaryMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETABNAVIGATORMETA:Class = IProfileTabNavigatorMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETECHNIQUEMETA:Class = IProfileTechniqueMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETECHNIQUEPAGEMETA:Class = IProfileTechniquePageMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEWINDOWMETA:Class = IProfileWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSCONTROLMETA:Class = IQuestsControlMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSCURRENTTABMETA:Class = IQuestsCurrentTabMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSFUTURETABMETA:Class = IQuestsFutureTabMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSWINDOWMETA:Class = IQuestsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRALLYBASEVIEWMETA:Class = IRallyBaseViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRECRUITWINDOWMETA:Class = IRecruitWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHMETA:Class = IResearchMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHPANELMETA:Class = IResearchPanelMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHVIEWMETA:Class = IResearchViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRETRAINCREWWINDOWMETA:Class = IRetrainCrewWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IROSTERSLOTSETTINGSWINDOWMETA:Class = IRosterSlotSettingsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISETTINGSWINDOWMETA:Class = ISettingsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISHOPMETA:Class = IShopMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISIMPLEDIALOGMETA:Class = ISimpleDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISKILLDROPMETA:Class = ISkillDropMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISMARTPOPOVERVIEWMETA:Class = ISmartPopOverViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISTOREMETA:Class = IStoreMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISTORETABLEMETA:Class = IStoreTableMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISYSTEMMESSAGEDIALOGMETA:Class = ISystemMessageDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITANKCAROUSELMETA:Class = ITankCarouselMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITECHTREEMETA:Class = ITechTreeMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITECHNICALMAINTENANCEMETA:Class = ITechnicalMaintenanceMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITICKERMETA:Class = ITickerMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITMENXPPANELMETA:Class = ITmenXpPanelMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGFORMMETA:Class = ITrainingFormMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGROOMMETA:Class = ITrainingRoomMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGWINDOWMETA:Class = ITrainingWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITUTORIALCONTROLMETA:Class = ITutorialControlMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITUTORIALLAYOUTMETA:Class = ITutorialLayoutMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLEBUYWINDOWMETA:Class = IVehicleBuyWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLECUSTOMIZATIONMETA:Class = IVehicleCustomizationMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLEINFOMETA:Class = IVehicleInfoMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLESELECTORPOPUPMETA:Class = IVehicleSelectorPopupMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLESELLDIALOGMETA:Class = IVehicleSellDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IWAITINGVIEWMETA:Class = IWaitingViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IWINDOWVIEWMETA:Class = IWindowViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IWRAPPERVIEWMETA:Class = IWrapperViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_AMMUNITIONPANELMETA:Class = AmmunitionPanelMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BARRACKSMETA:Class = BarracksMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASEEXCHANGEWINDOWMETA:Class = BaseExchangeWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYINTROVIEWMETA:Class = BaseRallyIntroViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYLISTVIEWMETA:Class = BaseRallyListViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYMAINWINDOWMETA:Class = BaseRallyMainWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYROOMVIEWMETA:Class = BaseRallyRoomViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYVIEWMETA:Class = BaseRallyViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLELOADINGMETA:Class = BattleLoadingMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLEQUEUEMETA:Class = BattleQueueMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLERESULTSMETA:Class = BattleResultsMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLETYPESELECTPOPOVERMETA:Class = BattleTypeSelectPopoverMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BROWSERMETA:Class = BrowserMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CAPTCHAMETA:Class = CAPTCHAMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CHANNELCAROUSELMETA:Class = ChannelCarouselMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CLASSMANAGERMETA:Class = ClassManagerMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CONFIRMMODULEWINDOWMETA:Class = ConfirmModuleWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CREWMETA:Class = CrewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CREWOPERATIONSPOPOVERMETA:Class = CrewOperationsPopOverMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CURSORMETA:Class = CursorMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTBASEVIEWMETA:Class = CyberSportBaseViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTINTROMETA:Class = CyberSportIntroMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTMAINWINDOWMETA:Class = CyberSportMainWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTUNITMETA:Class = CyberSportUnitMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTUNITSLISTMETA:Class = CyberSportUnitsListMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMONSTRATORWINDOWMETA:Class = DemonstratorWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMOUNTBUILDINGWINDOWMETA:Class = DemountBuildingWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DISMISSTANKMANDIALOGMETA:Class = DismissTankmanDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EULAMETA:Class = EULAMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ELITEWINDOWMETA:Class = EliteWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEFREETOTANKMANXPWINDOWMETA:Class = ExchangeFreeToTankmanXpWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEVCOINWINDOWMETA:Class = ExchangeVcoinWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEWINDOWMETA:Class = ExchangeWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEXPWINDOWMETA:Class = ExchangeXpWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FIGHTBUTTONMETA:Class = FightButtonMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBATTLEROOMWINDOWMETA:Class = FortBattleRoomWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGCARDPOPOVERMETA:Class = FortBuildingCardPopoverMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGCOMPONENTMETA:Class = FortBuildingComponentMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGPROCESSWINDOWMETA:Class = FortBuildingProcessWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCHOICEDIVISIONWINDOWMETA:Class = FortChoiceDivisionWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCLANLISTWINDOWMETA:Class = FortClanListWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCLANSTATISTICSWINDOWMETA:Class = FortClanStatisticsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCREATEDIRECTIONWINDOWMETA:Class = FortCreateDirectionWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCREATIONCONGRATULATIONSWINDOWMETA:Class = FortCreationCongratulationsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTDISCONNECTVIEWMETA:Class = FortDisconnectViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTFIXEDPLAYERSWINDOWMETA:Class = FortFixedPlayersWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTINTELLIGENCEWINDOWMETA:Class = FortIntelligenceWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTINTROMETA:Class = FortIntroMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTLISTMETA:Class = FortListMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTMAINVIEWMETA:Class = FortMainViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTMODERNIZATIONWINDOWMETA:Class = FortModernizationWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTORDERCONFIRMATIONWINDOWMETA:Class = FortOrderConfirmationWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTORDERPOPOVERMETA:Class = FortOrderPopoverMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTROOMMETA:Class = FortRoomMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTTRANSPORTCONFIRMATIONWINDOWMETA:Class = FortTransportConfirmationWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTWELCOMEVIEWMETA:Class = FortWelcomeViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTIFICATIONSVIEWMETA:Class = FortificationsViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FREEXPINFOWINDOWMETA:Class = FreeXPInfoWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_HANGARMETA:Class = HangarMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_HISTORICALBATTLESLISTWINDOWMETA:Class = HistoricalBattlesListWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ICONDIALOGMETA:Class = IconDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ICONPRICEDIALOGMETA:Class = IconPriceDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INPUTCHECKERMETA:Class = InputCheckerMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INTROPAGEMETA:Class = IntroPageMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INVENTORYMETA:Class = InventoryMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYHEADERMETA:Class = LobbyHeaderMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMENUMETA:Class = LobbyMenuMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMESSENGERMETA:Class = LobbyMessengerMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMINIMAPMETA:Class = LobbyMinimapMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYPAGEMETA:Class = LobbyPageMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINCREATEANACCOUNTWINDOWMETA:Class = LoginCreateAnAccountWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINPAGEMETA:Class = LoginPageMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINQUEUEWINDOWMETA:Class = LoginQueueWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MESSENGERBARMETA:Class = MessengerBarMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MINIMAPENTITYMETA:Class = MinimapEntityMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MINIMAPLOBBYMETA:Class = MinimapLobbyMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MODULEINFOMETA:Class = ModuleInfoMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONLISTBUTTONMETA:Class = NotificationListButtonMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONPOPUPVIEWERMETA:Class = NotificationPopUpViewerMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONSLISTMETA:Class = NotificationsListMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ORDERSPANELMETA:Class = OrdersPanelMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PARAMSMETA:Class = ParamsMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PERSONALCASEMETA:Class = PersonalCaseMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_POPOVERVIEWMETA:Class = PopOverViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PRBSENDINVITESWINDOWMETA:Class = PrbSendInvitesWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PREMIUMFORMMETA:Class = PremiumFormMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEACHIEVEMENTSECTIONMETA:Class = ProfileAchievementSectionMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEAWARDSMETA:Class = ProfileAwardsMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEMETA:Class = ProfileMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESECTIONMETA:Class = ProfileSectionMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESTATISTICSMETA:Class = ProfileStatisticsMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESUMMARYMETA:Class = ProfileSummaryMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETABNAVIGATORMETA:Class = ProfileTabNavigatorMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETECHNIQUEMETA:Class = ProfileTechniqueMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETECHNIQUEPAGEMETA:Class = ProfileTechniquePageMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEWINDOWMETA:Class = ProfileWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSCONTROLMETA:Class = QuestsControlMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSCURRENTTABMETA:Class = QuestsCurrentTabMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSFUTURETABMETA:Class = QuestsFutureTabMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSWINDOWMETA:Class = QuestsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RECRUITWINDOWMETA:Class = RecruitWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHMETA:Class = ResearchMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHPANELMETA:Class = ResearchPanelMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHVIEWMETA:Class = ResearchViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RETRAINCREWWINDOWMETA:Class = RetrainCrewWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ROSTERSLOTSETTINGSWINDOWMETA:Class = RosterSlotSettingsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SETTINGSWINDOWMETA:Class = SettingsWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SHOPMETA:Class = ShopMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SIMPLEDIALOGMETA:Class = SimpleDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SKILLDROPMETA:Class = SkillDropMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SMARTPOPOVERVIEWMETA:Class = SmartPopOverViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STATSSTORAGEMETA:Class = StatsStorageMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STOREMETA:Class = StoreMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STORETABLEMETA:Class = StoreTableMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SYSTEMMESSAGEDIALOGMETA:Class = SystemMessageDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TANKCAROUSELMETA:Class = TankCarouselMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHTREEMETA:Class = TechTreeMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHNICALMAINTENANCEMETA:Class = TechnicalMaintenanceMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TICKERMETA:Class = TickerMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TMENXPPANELMETA:Class = TmenXpPanelMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGFORMMETA:Class = TrainingFormMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGROOMMETA:Class = TrainingRoomMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGWINDOWMETA:Class = TrainingWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TUTORIALCONTROLMETA:Class = TutorialControlMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TUTORIALLAYOUTMETA:Class = TutorialLayoutMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLEBUYWINDOWMETA:Class = VehicleBuyWindowMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLECUSTOMIZATIONMETA:Class = VehicleCustomizationMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLEINFOMETA:Class = VehicleInfoMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLESELECTORPOPUPMETA:Class = VehicleSelectorPopupMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLESELLDIALOGMETA:Class = VehicleSellDialogMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VIEWPRESENTERMETA:Class = ViewPresenterMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WAITINGVIEWMETA:Class = WaitingViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WINDOWVIEWMETA:Class = WindowViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WRAPPERVIEWMETA:Class = WrapperViewMeta;
-
-      public static const NET_WG_INFRASTRUCTURE_CONSTANTS_WINDOWVIEWINVALIDATIONTYPE:Class = WindowViewInvalidationType;
-
-      public static const NET_WG_INFRASTRUCTURE_EVENTS_COLORSCHEMEEVENT:Class = ColorSchemeEvent;
-
-      public static const NET_WG_INFRASTRUCTURE_EVENTS_DRAGEVENT:Class = DragEvent;
-
-      public static const NET_WG_INFRASTRUCTURE_EVENTS_DROPEVENT:Class = DropEvent;
-
-      public static const NET_WG_INFRASTRUCTURE_EVENTS_ENVIRONMENTEVENT:Class = EnvironmentEvent;
-
-      public static const NET_WG_INFRASTRUCTURE_EVENTS_FOCUSEDVIEWEVENT:Class = FocusedViewEvent;
-
-      public static const NET_WG_INFRASTRUCTURE_EVENTS_GAMEEVENT:Class = GameEvent;
-
-      public static const NET_WG_INFRASTRUCTURE_EVENTS_LIBRARYLOADEREVENT:Class = LibraryLoaderEvent;
-
-      public static const NET_WG_INFRASTRUCTURE_EVENTS_LOADEREVENT:Class = LoaderEvent;
-
-      public static const NET_WG_INFRASTRUCTURE_EVENTS_VOICECHATEVENT:Class = VoiceChatEvent;
-
-      public static const NET_WG_INFRASTRUCTURE_HELPERS_DRAGDELEGATE:Class = DragDelegate;
-
-      public static const NET_WG_INFRASTRUCTURE_HELPERS_DRAGDELEGATECONTROLLER:Class = DragDelegateController;
-
-      public static const NET_WG_INFRASTRUCTURE_HELPERS_DROPLISTDELEGATE:Class = DropListDelegate;
-
-      public static const NET_WG_INFRASTRUCTURE_HELPERS_DROPLISTDELEGATECTRLR:Class = DropListDelegateCtrlr;
-
-      public static const NET_WG_INFRASTRUCTURE_HELPERS_LIBRARYLOADER:Class = LibraryLoader;
-
-      public static const NET_WG_INFRASTRUCTURE_HELPERS_LOADEREX:Class = LoaderEx;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IABSTRACTPOPOVERVIEW:Class = IAbstractPopOverView;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IABSTRACTWINDOWVIEW:Class = IAbstractWindowView;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IBASELAYOUT:Class = IBaseLayout;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ICOUNTERCOMPONENT:Class = ICounterComponent;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IDRAGDELEGATE:Class = IDragDelegate;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IDRAGGABLELIST:Class = IDraggableList;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IDROPLISTDELEGATE:Class = IDropListDelegate;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IHANGAR:Class = IHangar;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_INOTIFICATIONLISTBUTTON:Class = INotificationListButton;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IRESIZABLECONTENT:Class = net.wg.infrastructure.interfaces.IResizableContent;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ISORTABLE:Class = ISortable;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ISTOREMENUVIEW:Class = IStoreMenuView;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ISTORETABLE:Class = IStoreTable;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ISUBTASKCOMPONENT:Class = ISubtaskComponent;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IVEHICLEBUTTON:Class = IVehicleButton;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IWINDOW:Class = IWindow;
-
-      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IWINDOWGEOMETRY:Class = IWindowGeometry;
+      
+      public static const NET_WG_DATA_ALIASES:Class;
+      
+      public static const NET_WG_DATA_CONTAINERCONSTANTS:Class;
+      
+      public static const NET_WG_DATA_INSPECTABLEDATAPROVIDER:Class;
+      
+      public static const NET_WG_DATA_VO_ACHIEVEMENTITEMVO:Class;
+      
+      public static const NET_WG_DATA_VO_ANIMATIONOBJECT:Class;
+      
+      public static const NET_WG_DATA_VO_BATTLERESULTSQUESTVO:Class;
+      
+      public static const NET_WG_DATA_VO_COLORSCHEME:Class;
+      
+      public static const NET_WG_DATA_VO_EXTENDEDUSERVO:Class;
+      
+      public static const NET_WG_DATA_VO_ICONVO:Class;
+      
+      public static const NET_WG_DATA_VO_ITEMDIALOGSETTINGSVO:Class;
+      
+      public static const NET_WG_DATA_VO_POINTVO:Class;
+      
+      public static const NET_WG_DATA_VO_PREMIUMFORMMODEL:Class;
+      
+      public static const NET_WG_DATA_VO_PROGRESSELEMENTVO:Class;
+      
+      public static const NET_WG_DATA_VO_SELLDIALOGELEMENT:Class;
+      
+      public static const NET_WG_DATA_VO_SELLDIALOGITEM:Class;
+      
+      public static const NET_WG_DATA_VO_SEPARATEITEM:Class;
+      
+      public static const NET_WG_DATA_VO_SHOPSUBFILTERDATA:Class;
+      
+      public static const NET_WG_DATA_VO_SHOPVEHICLEFILTERELEMENTDATA:Class;
+      
+      public static const NET_WG_DATA_VO_STORETABLEDATA:Class;
+      
+      public static const NET_WG_DATA_VO_STORETABLEVO:Class;
+      
+      public static const NET_WG_DATA_VO_TRAININGFORMRENDERERVO:Class;
+      
+      public static const NET_WG_DATA_VO_TRAININGROOMINFOVO:Class;
+      
+      public static const NET_WG_DATA_VO_TRAININGROOMLISTVO:Class;
+      
+      public static const NET_WG_DATA_VO_TRAININGROOMRENDERERVO:Class;
+      
+      public static const NET_WG_DATA_VO_TRAININGWINDOWVO:Class;
+      
+      public static const NET_WG_DATA_VO_TWEENPROPERTIESVO:Class;
+      
+      public static const NET_WG_DATA_VO_USERVO:Class;
+      
+      public static const NET_WG_DATA_VO_WALLETSTATUSVO:Class;
+      
+      public static const NET_WG_DATA_VO_GENERATED_SHOPNATIONFILTERDATA:Class;
+      
+      public static const NET_WG_DATA_VODAAPIDATAPROVIDER:Class;
+      
+      public static const NET_WG_DATA_COMPONENTS_ABSTRACTCONTEXTITEMGENERATOR:Class;
+      
+      public static const NET_WG_DATA_COMPONENTS_ACCORDIONRENDERERDATA:Class;
+      
+      public static const NET_WG_DATA_COMPONENTS_BATTLERESULTSCIGENERATOR:Class;
+      
+      public static const NET_WG_DATA_COMPONENTS_BATTLESESSIONCIGENERATOR:Class;
+      
+      public static const NET_WG_DATA_COMPONENTS_CONTEXTITEM:Class;
+      
+      public static const NET_WG_DATA_COMPONENTS_CONTEXTITEMGENERATOR:Class;
+      
+      public static const NET_WG_DATA_COMPONENTS_STOREMENUVIEWDATA:Class;
+      
+      public static const NET_WG_DATA_COMPONENTS_USERCONTEXTITEM:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_COLORSCHEMENAMES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_CONTAINERTYPES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_CONTEXTMENUCONSTANTS:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_CURRENCIES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_CURSORS:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_DIALOGS:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_DIRECTIONS:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_DRAGTYPE:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_ENGINEMETHODS:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_FITTINGTYPES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_GUNTYPES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_ICONTEXTPOSITION:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_ITEMTYPES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_KEYSMAP:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_LOCALES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_QUESTSSTATES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_ROLESSTATE:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_SORTINGINFO:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_SOUNDMANAGERSTATES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_SOUNDTYPES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_TOOLTIPTAGS:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_TOOLTIPS:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_VALOBJECT:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_VEHICLESTATE:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_VEHICLETYPES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_GENERATED_CUSTOMIZATION_ITEM_TYPE:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_GENERATED_CYBER_SPORT_ALIASES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_GENERATED_EVENT_LOG_CONSTANTS:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_GENERATED_FITTING_TYPES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_GENERATED_FORTIFICATION_ALIASES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_GENERATED_GE_ALIASES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_GENERATED_ORDER_TYPES:Class;
+      
+      public static const NET_WG_DATA_CONSTANTS_GENERATED_STORE_TYPES:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_FITTINGITEM:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_GUIITEM:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_ITEMSUTILS:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_TANKMAN:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_TANKMANSKILL:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_VEHICLE:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_VEHICLEPROFILE:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_ACCOUNTDOSSIER:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_ACHIEVEMENT:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_DOSSIER:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_TANKMANDOSSIER:Class;
+      
+      public static const NET_WG_DATA_GUI_ITEMS_DOSSIER_VEHICLEDOSSIER:Class;
+      
+      public static const NET_WG_DATA_MANAGERS_IMPL_DIALOGDISPATCHER:Class;
+      
+      public static const NET_WG_DATA_MANAGERS_IMPL_FLASHTWEEN:Class;
+      
+      public static const NET_WG_DATA_MANAGERS_IMPL_NOTIFYPROPERTIES:Class;
+      
+      public static const NET_WG_DATA_MANAGERS_IMPL_PYTHONTWEEN:Class;
+      
+      public static const NET_WG_DATA_MANAGERS_IMPL_TOOLTIPPARAMS:Class;
+      
+      public static const NET_WG_DATA_MANAGERS_IMPL_TOOLTIPPROPS:Class;
+      
+      public static const NET_WG_DATA_UTILDATA_FORMATTEDINTEGER:Class;
+      
+      public static const NET_WG_DATA_UTILDATA_ITEMPRICE:Class;
+      
+      public static const NET_WG_DATA_UTILDATA_TANKMANROLELEVEL:Class;
+      
+      public static const NET_WG_DATA_UTILDATA_TANKMANSLOT:Class;
+      
+      public static const NET_WG_DATA_UTILDATA_TWODIMENSIONALPADDING:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_ACCORDION:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_AMMUNITIONBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BACKBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BLINKINGBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONBAREX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONDNMICON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONICONLOADER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONTOGGLEINDICATOR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_CLANEMBLEM:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_CONTENTTABBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_CONTENTTABRENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_COOLDOWNANIMATIONCONTROLLER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_COUNTEREX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_DASHLINE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_DASHLINETEXTITEM:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_DOUBLEPROGRESSBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_EXTRAMODULEICON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_FIELDSET:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_HELPLAYOUTCONTROL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_INTERACTIVESORTINGBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_LINEDESCRICONTEXT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_LINEICONTEXT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_MODULEICON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_NORMALBUTTONTOGGLEWG:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_PORTRAITITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SCALABLEICONBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SCALABLEICONWRAPPER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SHELLBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SHELLSSET:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SKILLSITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SORTABLEHEADERBUTTONBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SORTINGBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_SORTINGBUTTONINFO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TABBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TANKICON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TEXTAREA:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TEXTAREASIMPLE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TOGGLEBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_TOGGLESOUNDBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_UNCLICKABLESHADOWBG:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_UNDERLINEDTEXT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ADVANCED_VIEWSTACK:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_ACHIEVEMENTCAROUSEL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_CAROUSELBASE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_ICAROUSELITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_PORTRAITSCAROUSEL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CAROUSELS_SKILLSCAROUSEL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_BASELOGOVIEW:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CONFIRMITEMCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CURSORMANAGEDCONTAINER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_INPUTCHECKER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MAINVIEWCONTAINER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MANAGEDCONTAINER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VEHICLEMARKERALLY:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VEHICLEMARKERENEMY:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITINGMANAGEDCONTAINER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_EQUALGAPSHORIZONTALLAYOUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_EQUALWIDTHHORIZONTALLAYOUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUP:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUPEX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUPLAYOUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_HORIZONTALGROUPLAYOUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_VERTICAL100PERCWIDTHLAYOUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_VERTICALGROUPLAYOUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CLIPQUANTITYBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRBASE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELARCADE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELBASE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELPOSTMORTEM:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELSNIPER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELSTRATEGIC:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRSNIPER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRSTRATEGIC:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_RELOADINGTIMER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CURSOR_CURSOR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CURSOR_BASE_BASEINFO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_CURSOR_BASE_DROPPINGCURSOR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_ANIMATEEXPLOSION:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DAMAGELABEL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBARANIMATEDLABEL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBARANIMATEDPART:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_VEHICLEACTIONMARKER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_VEHICLEMARKER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_HPDISPLAYMODE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERFLAGS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERSETTINGS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_TICKER_RSSENTRYVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_TICKER_TICKER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_TICKER_TICKERITEM:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_NETSTREAMSTATUSCODE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_NETSTREAMSTATUSLEVEL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_PLAYERSTATUS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_SIMPLEVIDEOPLAYER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_VIDEOPLAYEREVENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_VIDEOPLAYERSTATUSEVENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ABSTRACTPLAYERCONTROLLER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ABSTRACTPLAYERPROGRESSBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ADVANCEDVIDEOPLAYER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_CONTROLBARCONTROLLER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_KEYBOARDCONTROLLER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBARCONTROLLER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBAREVENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBARSLIDER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_SLIDERPLAYERPROGRESSBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERANIMATIONMANAGER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERCONTROLBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERTITLEBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITING:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGMC:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGVIEW:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_COMMON_WAITING_EVENTS_WAITINGCHANGEVISIBILITYEVENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACCORDIONSOUNDRENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACTIONPRICE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ALERTICO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_BITMAPFILL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_BORDERSHADOWSCROLLPANE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CAROUSEL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CHECKBOX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CLOSEBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_COMPACTCHECKBOX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENU:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENUITEM:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENUITEMSEPARATE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_CORELISTEX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DRAGABLELISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNIMAGETEXT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNLISTITEMRENDERERSOUND:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNMENU:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_DYNAMICSCROLLINGLISTEX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_FIGHTBUTTONSELECT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_FIGHTLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_GLOWARROWASSET:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_HYPERLINK:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_IPROGRESSBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ITABLERENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ICONBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ICONTEXT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ICONTEXTBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_INFOICON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_LABELCONTROL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_LISTITEMREDERERIMAGETEXT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_LISTITEMRENDERERWITHFOCUSONDIS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_MAINMENUBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_NATIONDROPDOWNMENU:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_NORMALSORTINGBTNINFO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_NORMALSORTINGBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_NUMERICSTEPPER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_PROGRESSBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_RADIOBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_RANGESLIDER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_READONLYSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_REGIONDROPDOWNMENU:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_RESIZABLESCROLLPANE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLPANE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTAUTOSCROLL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTEX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTPX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTWITHDISRENDERERS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SLIDER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SLIDERBG:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SLIDERKEYPOINT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SORTBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLESCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLETABLE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLETABLELIST:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDBUTTONEX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_STEPSLIDER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TABLERENDERER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TANKMANTRAININGBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TANKMANTRAININGSMALLBUTTON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TEXTFIELDSHORT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TEXTINPUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_TILELIST:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_UILOADERALT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_UILOADERCUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_UNITCOMMANDERSTATS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_USERNAMEFIELD:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_VO_ACTIONPRICEVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_VOICE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_VOICEWAVE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_WALLETRESOURCESSTATUS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_WGSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOMMON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOMMONVEHICLE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOUNTER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOUNTERSMALL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTDIVISION:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTEVENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESSBAR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESSCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_BEIGECOUNTER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_COUNTERCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_GREYRIBBONCOUNTER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_REDCOUNTER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_SMALLCOUNTER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_YELLOWRIBBONCOUNTER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_FANCYRENDEREREVENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_RANGESLIDEREVENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_SCROLLBAREVENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ICONS_BATTLETYPEICON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ICONS_PLAYERACTIONMARKER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ICONS_PLAYERACTIONMARKERCONTROLLER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_ICONS_SQUADICON:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_POPOVERS_POPOVER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERCONST:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERCONTENTPADDING:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERINTERNALLAYOUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVER:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVEREXTERNALLAYOUT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVERLAYOUTINFO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_ACHIEVEMENTSCUSTOMBLOCKITEM:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_EXTRAMODULEINFO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTBLOCK:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTPROGRESSBLOCK:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_MODULEITEM:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_SEPARATOR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_STATUS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_SUITABLEVEHICLEBLOCKITEM:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPACHIEVEMENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPACTIONPRICE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPBASE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPBUYSKILL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPCLANINFO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPCOMPLEX:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPEQUIPMENT:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPFINALSTATS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPHISTORICALAMMO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPHISTORICALMODULES:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPIGR:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPMAP:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPMARKSONGUN:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPRSSNEWS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSELECTEDVEHICLE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSETTINGSCONTROL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSKILL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSORTIEDIVISION:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSPECIAL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSUITABLEVEHICLE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPTANKCLASS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPTANKMEN:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPUNITLEVEL:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPVEHICLE:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPUNITCOMMAND:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_ACHIEVEMENTVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_CLANINFOVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_DIMENSION:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_DIVISIONVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EQUIPMENTPARAMVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EQUIPMENTVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EXTRAMODULEINFOVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_HISTORICALMODULESVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_IGRVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_MAPVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_MODULEVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SETTINGSCONTROLVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SORTIEDIVISIONVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SUITABLEVEHICLEVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TANKMENVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPACTIONPRICEVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKRESULTVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKRIGHTLISTITEMVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPFINALSTATSVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPSKILLVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPSTATUSCOLORSVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPVEHICLESELECTEDVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_UNITCOMMANDVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_VEHICLEBASEVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_VEHICLEVO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_FINSTATS_EFFICIENCYBLOCK:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_FINSTATS_EFFICIENCYCRITSBLOCK:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_HELPERS_TANKTYPEICO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_HELPERS_UTILS:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_TOOLTIPS_SORTIE_SORTIEDIVISIONBLOCK:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_WINDOWS_MODULEINFO:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_WINDOWS_SCREENBG:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_WINDOWS_WINDOW:Class;
+      
+      public static const NET_WG_GUI_COMPONENTS_WINDOWS_WINDOWEVENT:Class;
+      
+      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONEVENT:Class;
+      
+      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONINFOVO:Class;
+      
+      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONWARNINGVO:Class;
+      
+      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSIRFOOTER:Class;
+      
+      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSIRENDERER:Class;
+      
+      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSINITVO:Class;
+      
+      public static const NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSPOPOVER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CSCONSTANTS:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CSINVALIDATIONTYPE:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CYBERSPORTMAINWINDOW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_BUTTONDNMICONSLIM:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_CSCANDIDATESSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_CSVEHICLEBUTTON:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_CSVEHICLEBUTTONLEVELS:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_CANDIDATEITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_COMMANDRENDERER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_DOUBLESLIDER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_DYNAMICRANGEVEHICLES:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_GRAYBUTTONTEXT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_GRAYTRANSPARENTBUTTON:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_MANUALSEARCHRENDERER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_MEDALVEHICLEVO:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_NAVIGATIONBLOCK:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_RANGEVIEWCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_ROSTERBUTTONGROUP:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_ROSTERSETTINGSNUMERATIONBLOCK:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_SELECTEDVEHICLESMSG:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_SETTINGSICONS:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTOR:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTORFILTER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTORITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_CSCOMPONENTEVENT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_MANUALSEARCHEVENT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTOREVENT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTORFILTEREVENT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTORITEMEVENT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_DATA_CANDIDATESDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_DATA_MANUALSEARCHDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_INTERFACES_ICSAUTOSEARCHMAINVIEW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_INTERFACES_ICHANNELCOMPONENTHOLDER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_INTERFACES_IMANUALSEARCHDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_POPUPS_VEHICLESELECTORPOPUP:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_ANIMATEDROSTERSETTINGSVIEW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_INTROVIEW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_RANGEROSTERSETTINGSVIEW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_ROSTERSETTINGSVIEW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_ROSTERSLOTSETTINGSWINDOW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNITVIEW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNITSLISTVIEW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_CSAUTOSEARCHMAINVIEW:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_CONFIRMATIONREADINESSSTATUS:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_ERRORSTATE:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_SEARCHCOMMANDS:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_SEARCHENEMY:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_STATEVIEWBASE:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_WAITINGPLAYERS:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_EVENTS_CYBERSPORTEVENT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_EVENTS_ROSTERSETTINGSEVENT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_CHATSECTION:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_JOINUNITSECTION:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_SIMPLESLOTRENDERER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_SLOTRENDERER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_TEAMSECTION:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_UNITSLOTHELPER:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_WAITLISTSECTION:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VO_AUTOSEARCHVO:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VO_CSCOMMANDVO:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VO_IUNIT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VO_IUNITSLOT:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VO_NAVIGATIONBLOCKVO:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VO_VEHICLESELECTORFILTERVO:Class;
+      
+      public static const NET_WG_GUI_CYBERSPORT_VO_VEHICLESELECTORITEMVO:Class;
+      
+      public static const NET_WG_GUI_EVENTS_ACCORDIONRENDEREREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_ARENAVOIPSETTINGSEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_CONTEXTMENUEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_COOLDOWNEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_CREWEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_DEVICEEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_EQUIPMENTEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_FIGHTBUTTONEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_FINALSTATISTICEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_HEADERBUTTONBAREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_HEADEREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_LISTEVENTEX:Class;
+      
+      public static const NET_WG_GUI_EVENTS_LOBBYEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_LOBBYTDISPATCHEREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_MANAGEDCONTAINEREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_MESSENGERBAREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_MODULEINFOEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_NUMERICSTEPPEREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_PARAMSEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_PERSONALCASEEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_QUESTEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_RESIZABLEBLOCKEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_SHELLRENDEREREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_SHOWDIALOGEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_SORTABLETABLELISTEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_SORTINGEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_STATEMANAGEREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_TIMELINEEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_TRAININGEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_UILOADEREVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_VEHICLESELLDIALOGEVENT:Class;
+      
+      public static const NET_WG_GUI_EVENTS_VIEWSTACKEVENT:Class;
+      
+      public static const NET_WG_GUI_GAMELOADING_GAMELOADING:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_HISTORICALBATTLESLISTWINDOW:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_BATTLECAROUSELITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_BATTLESCAROUSEL:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_SIMPLEVEHICLELIST:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_TEAMSVEHICLELIST:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_CONTROLS_VEHICLELISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_DATA_BATTLELISTITEMVO:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_DATA_HISTORICALBATTLEVO:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_DATA_VEHICLELISTITEMVO:Class;
+      
+      public static const NET_WG_GUI_HISTORICALBATTLES_EVENTS_TEAMSVEHICLELISTEVENT:Class;
+      
+      public static const NET_WG_GUI_INTERFACES_IEXTENDEDUSERVO:Class;
+      
+      public static const NET_WG_GUI_INTERFACES_IRALLYCANDIDATEVO:Class;
+      
+      public static const NET_WG_GUI_INTERFACES_IUSERVO:Class;
+      
+      public static const NET_WG_GUI_INTRO_INTROINFOVO:Class;
+      
+      public static const NET_WG_GUI_INTRO_INTROPAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_CHANGEPROPERTYEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTCREATEEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTINFOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTSPANEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_EDITABLEPROPERTYLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_GECOMPONENTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_GEDESIGNERWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_GEINSPECTWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_GUIEDITORHELPER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_COMPONENTPROPERTIES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_COMPONENTPROPERTYVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_CONTEXTMENUGENERATORITEMS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_ICONTEXTMENUGENERATORITEMS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_DATA_PROPTYPES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_EVENTS_INSPECTORVIEWEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_VIEWS_EVENTSVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_GUIEDITOR_VIEWS_INSPECTORVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_LOBBYPAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BARRACKS_BARRACKS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BARRACKS_BARRACKSFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BARRACKS_BARRACKSITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTSEVENTRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTSMEDALSLISTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_COMMONSTATS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_CUSTOMACHIEVEMENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSSTATS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSSTATSSCROLLPANE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_EFFICIENCYICONRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_EFFICIENCYRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_MEDALSLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_PROGRESSELEMENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_SPECIALACHIEVEMENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TANKSTATSVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMMEMBERITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMMEMBERSTATSVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMSTATS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMSTATSLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLERESULTS_VEHICLEDETAILS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLELOADING_BATTLELOADING:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLELOADING_BATTLELOADINGFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLELOADING_PLAYERITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLELOADING_CONSTANTS_PLAYERSTATUS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLELOADING_CONSTANTS_VEHICLESTATUS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLELOADING_DATA_ENEMYVEHICLESDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLELOADING_DATA_TEAMVEHICLESDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLELOADING_INTERFACES_IVEHICLESDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLELOADING_VO_VEHICLEINFOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLEQUEUE_BATTLEQUEUE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BATTLEQUEUE_BATTLEQUEUEITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BROWSER_BROWSERACTIONBTN:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BROWSER_BROWSEREVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BROWSER_BROWSERHITAREA:Class;
+      
+      public static const NET_WG_GUI_LOBBY_BROWSER_BROWSERWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CONFIRMMODULEWINDOW_CONFIRMMODULEWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CONFIRMMODULEWINDOW_MODULEINFOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_BASETIMEDCUSTOMIZATIONGROUPVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_BASETIMEDCUSTOMIZATIONSECTIONVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMODROPBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMOUFLAGEGROUPVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMOUFLAGESECTIONVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_CUSTOMIZATIONEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_EMBLEMLEFTSECTIONVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_EMBLEMRIGHTSECTIONVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_INSCRIPTIONLEFTSECTIONVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_INSCRIPTIONRIGHTSECTIONVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_VEHICLECUSTOMIZATION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_CAMOUFLAGESDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_DAAPIITEMSDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_RENTALPACKAGEDAAPIDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CAMODEMORENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CAMOUFLAGEITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CUSTOMIZATIONITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_INSCRIPTIONITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_PRICEITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_RENDERERBORDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_RENTALPACKAGEITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_SECTIONITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_TEXTUREITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DEMONSTRATION_DEMONSTRATORWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DEMONSTRATION_MAPITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DEMONSTRATION_DATA_DEMONSTRATORVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DEMONSTRATION_DATA_MAPITEMVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DIALOGS_DEMOUNTDEVICEDIALOG:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DIALOGS_DESTROYDEVICEDIALOG:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DIALOGS_DISMISSTANKMANDIALOG:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DIALOGS_FREEXPINFOWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DIALOGS_ICONDIALOG:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DIALOGS_ICONPRICEDIALOG:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DIALOGS_ITEMSTATUSDATA:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DIALOGS_PRICEMC:Class;
+      
+      public static const NET_WG_GUI_LOBBY_DIALOGS_SIMPLEDIALOG:Class;
+      
+      public static const NET_WG_GUI_LOBBY_ELITEWINDOW_ELITEWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTBATTLEROOMWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTCHOICEDIVISIONWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTIFICATIONSVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTINTROVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTLISTVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTROOMVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_JOINSORTIESECTION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIECHATSECTION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIELISTRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIESLOTHELPER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIETEAMSECTION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIEWAITLISTSECTION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTDISCONNECTVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTMAINVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTWELCOMEVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BASE_IFILLEDBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BASE_IMPL_FORTBUILDINGBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BATTLEROOM_SORTIESIMPLESLOT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BATTLEROOM_SORTIESLOT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IARROWWITHNUT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGINDICATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGTEXTURE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGSWIZARDCMPNT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_ICOOLDOWNICON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDING:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGCMP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGUIBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGSCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_ITRANSPORTINGSTEPPER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ARROWWITHNUT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGBLINKINGBTN:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGINDICATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGINDICATORSCMP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGORDERPROCESSING:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGTEXTURE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGTHUMBNAIL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGSCMPNT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_COOLDOWNICON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_COOLDOWNICONLOADERCTNR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDING:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGBTN:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGUIBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGSCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_HITAREACONTROL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_INDICATORLABELS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_MODERNIZATIONCMP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ORDERINFOCMP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ORDERINFOICONCMP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_PROGRESSTOTALLABELS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_TROWELCMP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BASE_BUILDINGSWIZARDCMPNT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILDINGPROCESS_IMPL_BUILDINGPROCESSINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILDINGPROCESS_IMPL_BUILDINGPROCESSITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANLIST_CLANLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_CLANSTATDASHLINETEXTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_CLANSTATSGROUP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_FORTSTATISTICSLDIT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_SORTIESTATISTICSFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DIVISION_IMPL_CHOICEDIVISIONSELECTOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IFORTDIRECTIONSCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_BUILDINGDIRECTION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_DIRECTIONLISTRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_FORTDIRECTIONSCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTDISCONNECTVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTMAINVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMECOMMANDERCONTENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMECOMMANDERVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMEVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IFORTHEADERCLANINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMAINFOOTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMAINHEADER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTHEADERCLANINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTMAINFOOTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTMAINHEADER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_VIGNETTEYELLOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IORDERSPANEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IMPL_ORDERPOPOVERLAYOUT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IMPL_ORDERSPANEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGCARDPOPOVERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGCTXMENUVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGINDICATORSVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGMODERNIZATIONVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERACTIONVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERBASEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERHEADERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROGRESSLBLVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGSCOMPONENTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANLISTRENDERERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANSTATITEMVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANSTATSVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CONFIRMORDERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_DIRECTIONVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTBUILDINGCONSTANTS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCHOICEDIVISIONSELECTORVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCHOICEDIVISIONVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCLANLISTWINDOWVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCLANMEMBERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCONSTANTS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTFIXEDPLAYERSVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTINVALIDATIONTYPE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODEELEMENTPROPERTY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODESTATESTRINGSVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODESTATEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTWELCOMEVIEWVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTIFICATIONVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FUNCTIONALSTATES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_MODERNIZATIONCMPVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERINFOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERPOPOVERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_TRANSPORTINGVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BASE_BASEFORTIFICATIONVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BASE_BUILDINGBASEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BATTLEROOM_SORTIEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSINFOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSLISTITEMVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_DEMOUNTBUILDING_DEMOUNTBUILDINGVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_SORTIE_SORTIERENDERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_DIRECTIONEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_FORTBUILDINGCARDPOPOVEREVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_FORTBUILDINGEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ICOMMONMODECLIENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_IDIRECTIONMODECLIENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ITRANSPORTMODECLIENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ITRANSPORTINGHANDLER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IBUILDINGCARDCMP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTBUILDINGCARDPOPOVER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTORDERPOPOVER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERASSIGNPLAYER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERBODY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERCONTROLPANEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERHEADER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_ORDERPOPOVER_ORDERINFOBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IBUILDINGSCIGENERATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTCOMMONUTILS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTMODESWITCHER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTSCONTROLSALIGNER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_ITRANSPORTINGHELPER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_BUILDINGSCIGENERATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTCOMMONUTILS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTMODESWITCHER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTSCONTROLSALIGNER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_TRANSPORTINGHELPER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_TWEENANIMATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_DEMOUNTBUILDINGWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTBUILDINGPROCESSWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCLANLISTWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCLANSTATISTICSWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCREATEDIRECTIONWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCREATIONCONGRATULATIONSWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTFIXEDPLAYERSWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTINTELLIGENCEWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTMODERNIZATIONWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTORDERCONFIRMATIONWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTTRANSPORTCONFIRMATIONWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_PROMOMCCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREWDROPDOWNEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_HANGAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_IGRLABEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_PARAMS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_PARAMSLISTENER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_PARAMSVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_RESEARCHPANEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_TANKPARAM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_TMENXPPANEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_AMMUNITIONPANEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_DEVICESLOT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_EQUIPMENTSLOT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_EXTRAICON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_FITTINGLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_FITTINGSELECT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_HISTORICALMODULESOVERLAY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_MODULESLOT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_CREW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_CREWITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_CREWSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_ICONSPROPS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_RECRUITITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_RECRUITRENDERERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_SKILLSVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_SMALLSKILLITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_TANKMENICONS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_CREW_TEXTOBJECT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_AMMOBLOCKOVERLAY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EQUIPMENTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EQUIPMENTLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_MAINTENANCEDROPDOWN:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_MAINTENANCESTATUSINDICATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_SHELLITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_SHELLLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_TECHNICALMAINTENANCE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_HISTORICALAMMOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_MAINTENANCEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_MODULEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_SHELLVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EVENTS_ONEQUIPMENTRENDEREROVER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_CLANLOCKUI:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSELFILTERS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSELITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_DATA_VEHICLECAROUSELVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_VEHICLECAROUSELVOBUILDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_VEHICLECAROUSELVOMANAGER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_ACCOUNTINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_BATTLESELECTDROPDOWNVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_BATTLETYPESELECTPOPOVER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTONFANCYRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTONFANCYSELECT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_HEADERBUTTONBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_LOBBYHEADER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_MAINMENU:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_QUESTSCONTROL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_SERVERSTATS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_SERVERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_TANKPANEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_HEADER_TUTORIALCONTROL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MENU_LOBBYMENU:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MENU_LOBBYMENUFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_MESSENGERBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_NOTIFICATIONLISTBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_WINDOWGEOMETRYINBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_WINDOWOFFSETSINBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELCAROUSEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELCAROUSELSCROLLBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_DATA_CHANNELLISTITEMVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_EVENTS_CHANNELLISTEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MODULEINFO_MODULEEFFECTS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_MODULEINFO_MODULEPARAMETERS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PREMIUMFORM_DISCOUNTPRICE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PREMIUMFORM_PREMIUMFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PREMIUMFORM_PREMIUMFORMITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILECONSTANTS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILEINVALIDATIONTYPES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILEMENUINFOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILESECTIONSIMPORTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PROFILETABNAVIGATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_SECTIONINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_SECTIONVIEWINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_SECTIONSDATAUTIL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_USERINFOFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ADVANCEDLINEDESCRICONTEXT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_AWARDSTILELISTBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_BATTLESTYPEDROPDOWN:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CENTEREDLINEICONTEXT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_COLOREDDESHLINETEXTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_DATAVIEWSTACK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_GRADIENTLINEBUTTONBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_HIDABLESCROLLBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ICOUNTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ILDITINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_IRESIZABLECONTENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITBATTLES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITMARKSOFMASTERY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITVALUED:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LINEBUTTONBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LINETEXTCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PERSONALSCORECOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEDASHLINETEXTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEFOOTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEMEDALSLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEPAGEFOOTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEWINDOWFOOTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLECONTENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLEINVALIDATIONTYPES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLETILELIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLEVIEWSTACK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_SIMPLELOADER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_TECHMASTERYICON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_TESTTRACK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_USERDATEFOOTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXISCHART:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_BARITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTITEMBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_FRAMECHARTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_ICHARTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXIS_AXISBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXIS_ICHARTAXIS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_LAYOUT_ICHARTLAYOUT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_LAYOUT_LAYOUTBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_LAYOUTITEMINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEACHIEVEMENTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEBASEINFOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEBATTLETYPEINITVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILECOMMONINFOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEDOSSIERINFOVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEUSERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_DATA_SECTIONLAYOUTMANAGER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILEHEADERBUTTONBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILETABBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILETABBUTTONBG:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILEACHIEVEMENTSSECTION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILESECTION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILETABINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SECTIONSSHOWANIMATIONMANAGER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_AWARDSBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_AWARDSMAINCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_PROFILEAWARDS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_STAGEAWARDSBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_ACHIEVEMENTFILTERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_AWARDSBLOCKDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_PROFILEAWARDSINITVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTLEVELS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTNATIONS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTTYPES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_COMMONSTATISTICS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_LEVELBARCHARTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_LEVELSSTATISTICCHART:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_NATIONBARCHARTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_NATIONSSTATISTICSCHART:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_PROFILESTATISTICS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_PROFILESTATISTICSVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTAXISPOINT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTINITIALIZER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTLAYOUT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICCHARTINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSBARCHART:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSBARCHARTAXIS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSCHARTITEMANIMCLIENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSCHARTSUTILS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSLAYOUTMANAGER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSTOOLTIPDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TFCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TYPEBARCHARTITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TYPESSTATISTICSCHART:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_BODYCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_CHARTSSTATISTICSGROUP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_CHARTSSTATISTICSVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDLABELDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSLABELDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSROOTUNIT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSUNIT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSUNITVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_PROFILESTATISTICSDETAILEDVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICCHARTSINITDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSBODYVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSCHARTSTABDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSDASHLINETEXTITEMIRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSLABELDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSLABELVIEWTYPEDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_DETAILEDSTATISTICS_DETAILEDSTATISTICSGROUPEX:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERBGIMAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERITEMSTYPES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_STATISTICSHEADERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_AWARDSLISTCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_LINETEXTFIELDSLAYOUT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYPAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYINITVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYPAGEINITVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_ACHIEVEMENTSMALL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILESORTINGBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEEMPTYSCREEN:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEPAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHAWARDSMAINCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHSTATISTICSINITVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNICSDASHLINETEXTITEMIRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUEACHIEVEMENTTAB:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUEACHIEVEMENTSBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUELIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUELISTCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUERENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUESTACKCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUESTATISTICTAB:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_PROFILEVEHICLEDOSSIERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_SORTINGSETTINGVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_TECHNIQUELISTVEHICLEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_TECHNIQUESTATISTICVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_CONDITIONBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_CONDITIONELEMENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DESCRIPTIONBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_HEADERBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_IQUESTSTAB:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTAWARDSBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTCONTENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSCURRENTTAB:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSFUTURETAB:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_REQUIREMENTBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_SUBTASKCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_SUBTASKSLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_VEHICLEBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_ABSTRACTRESIZABLECONTENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_ALERTMESSAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_COMMONCONDITIONSBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_CONDITIONSEPARATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_COUNTERTEXTELEMENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_EVENTSRESIZABLECONTENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_INNERRESIZABLECONTENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_MOVABLEBLOCKSCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_PROGRESSBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_PROGRESSQUESTINDICATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTICONELEMENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSTATUSCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSCOUNTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSDASHLINEITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_RESIZABLECONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_RESIZABLECONTENTHEADER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_SORTINGPANEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_TEXTPROGRESSELEMENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_VEHICLEITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_VEHICLESSORTINGBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_COMPLEXTOOLTIPVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_CONDITIONELEMENTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_CONDITIONSEPARATORVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_COUNTERTEXTELEMENTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_DESCRIPTIONVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_EVENTSRESIZABLECONTENTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_HEADERDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_INFODATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_PROGRESSBLOCKVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTDASHLINEITEMVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTICONELEMENTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTRENDERERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTVEHICLERENDERERVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_REQUIREMENTBLOCKVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_SORTEDBTNVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_SUBTASKVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_VEHICLEBLOCKVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_VEHICLESSORTINGBLOCKVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RECRUITWINDOW_RECRUITWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWBLOCKVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWMAINBUTTONS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWOPERATIONVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWROLEIR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWVEHICLEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINTANKMANVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINVEHICLEBLOCKVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_SELPRICEINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_TANKMANCREWRETRAININGSMALLBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_CONTROLQUESTIONCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_MOVINGRESULT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SALEITEMBLOCKRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SELLDEVICESCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SELLDIALOGLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SELLHEADERCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SELLSLIDINGCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SETTINGSBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_SLIDINGSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_TOTALRESULT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_USERINPUTCONTROL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLININVENTORYMODULEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLININVENTORYSHELLVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLEEQUIPMENTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLEOPTIONALDEVICEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLESHELLVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLVEHICLEITEMBASEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLVEHICLEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SELLDIALOG_VEHICLESELLDIALOG:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_ADVANCEDGRAPHICCONTENTFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_ADVANCEDGRAPHICSETTINGSFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_AIMSETTINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_CONTROLSSETTINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_GAMESETTINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_GAMESETTINGSBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_GRAPHICSETTINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_GRAPHICSETTINGSBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_MARKERSETTINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_OTHERSETTINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_SCREENSETTINGSFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSAIMFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSBASEVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSCHANGESMAP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSCONFIG:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSMARKERSFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_SETTINGSWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_SOUNDSETTINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_SOUNDSETTINGSBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYINPUT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_RADIOBUTTONBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SETTINGSSTEPSLIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SOUNDVOICEWAVES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_EVNTS_KEYINPUTEVENTS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_EVNTS_ALTERNATIVEVOICEEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_EVNTS_SETTINGVIEWEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_EVNTS_SETTINGSSUBVEWEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_VO_SETTINGSCONTROLPROP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_SETTINGS_VO_SETTINGSKEYPROP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_COMPLEXLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_MODULERENDERERCREDITS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_NATIONFILTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STORE_STATUS_COLOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STORE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STOREEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STOREFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STOREHELPER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STORELISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STORETABLE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STORETABLEDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STORETOOLTIPMAPVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_STOREVIEWSEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_TABLEHEADER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_TABLEHEADERINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORYMODULELISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORYVEHICLELISTITEMRDR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_INVENTORY_BASE_INVENTORYLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_SHOP_SHOP:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_SHOP_SHOPMODULELISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_SHOP_SHOPVEHICLELISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_SHOP_BASE_ACTION_CREDITS_STATES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_SHOP_BASE_SHOPTABLEITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_EQUIPMENTVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_MODULEVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_OPTIONALDEVICEVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_SHELLVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_VEHICLEVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_BASESTOREMENUVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_FITSSELECTABLESTOREMENUVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_SIMPLESTOREMENUVIEW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_VIEWUIELEMENTVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_CAROUSELTANKMANSKILLSMODEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_CREWTANKMANRETRAINING:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBLOCKITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBLOCKSAREA:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASECURRENTVEHICLE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEDOCS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEDOCSMODEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEINPUTLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEMODEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASERETRAININGMODEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLSITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLSMODEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESPECIALIZATION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESTATS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_RANKELEMENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_SKILLDROPMODEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_SKILLDROPWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_SKILLITEMVIEWMINI:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_SKILLSITEMSRENDERERRANKICON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_TANKMANSKILLSINFOBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TANKMAN_VEHICLETYPEBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_MENUHANDLER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_RESEARCHPAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_TECHTREEEVENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_TECHTREEPAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_ACTIONNAME:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_COLORINDEX:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_ICONTEXTRESOLVER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NAMEDLABELS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NAVINDICATOR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NODEENTITYTYPE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NODESTATE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_OUTLITERAL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_TTINVALIDATIONTYPE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_TTSOUNDID:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_XPTYPESTRINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_ACTIONBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_EXPERIENCEINFORMATION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_EXPERIENCELABEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_LEVELDELIMITER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_LEVELSCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NAMEANDXPFIELD:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NATIONBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NATIONSBUTTONBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NODECOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_PREMIUMDESCRIPTION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_PREMIUMLAYOUT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_RESEARCHTITLEBAR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_RETURNTOTTBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_TYPEANDLEVELFIELD:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_XPICON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_ABSTRACTDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_NATIONVODATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_NATIONXMLDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_RESEARCHVODATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_RESEARCHXMLDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_ANIMATIONPROPERTIES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_INVENTORYSTATEITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_NODESTATECOLLECTION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_NODESTATEITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_RESEARCHSTATEITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_STATEPROPERTIES:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_UNLOCKEDSTATEITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_EXTRAINFORMATION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NTDISPLAYINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NATIONDISPLAYSETTINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NODEDATA:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_PRIMARYCLASS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_RESEARCHDISPLAYINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_SHOPPRICE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_UNLOCKPROPS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_VEHGLOBALSTATS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_DISTANCE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_LINESGRAPHICS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_NTGRAPHICS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_NODEINDEXFILTER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_RESEARCHGRAPHICS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_HELPERS_TITLEAPPEARANCE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IHASRENDERERASOWNER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INATIONTREEDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INODESCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INODESDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHCONTAINER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHPAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_ITECHTREEPAGE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IVALUEOBJECT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_MATH_ADG_ITEMLEVELSBUILDER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_MATH_HUNGARIANALGORITHM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_MATH_MATRIXPOSITION:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_MATH_MATRIXUTILS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_FAKENODE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_NATIONTREENODE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_RENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_RESEARCHITEM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_NODES_RESEARCHROOT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_SUB_NATIONTREE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TECHTREE_SUB_RESEARCHITEMS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_ARENAVOIPSETTINGS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_DROPLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_DROPTILELIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_MINIMAPENTITY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_MINIMAPENTRY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_MINIMAPLOBBY:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_OBSERVERBUTTONCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_PLAYERELEMENT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_TOOLTIPVIEWER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGCONSTANTS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGDRAGCONTROLLER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGDRAGDELEGATE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGFORM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGPLAYERITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGROOM:Class;
+      
+      public static const NET_WG_GUI_LOBBY_TRAINING_TRAININGWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_BODYMC:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_BUYINGVEHICLEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_EXPANDBUTTON:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_FOOTERMC:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_HEADERMC:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_VEHICLEBUYWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_VEHICLEBUYWINDOWANIMMANAGER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_BASEBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_CREWBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_PROPBLOCK:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOBASE:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOCREW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOPROPS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_BASEEXCHANGEWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGECURRENCYWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANINITVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANXPWARNING:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANXPWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEHEADER:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEUTILS:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEVCOINWARNINGMC:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEVCOINWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPFROMVEHICLEIR:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPLIST:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPTANKMANSKILLSMODEL:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPVEHICLEVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPWARNINGSCREEN:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_EXTENDEDICONTEXT:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_PROFILEWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_PROFILEWINDOWINITVO:Class;
+      
+      public static const NET_WG_GUI_LOBBY_WINDOW_VCOINEXCHANGEDATAVO:Class;
+      
+      public static const NET_WG_GUI_LOGIN_EULA_EULADLG:Class;
+      
+      public static const NET_WG_GUI_LOGIN_EULA_EULAFULLDLG:Class;
+      
+      public static const NET_WG_GUI_LOGIN_ILOGINFORM:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IRSSNEWSFEEDRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOGIN_ISPARKSMANAGER:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_LOGINCREATEANACCOUNTWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_LOGINEVENT:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_LOGINFORM:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_LOGINPAGE:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_LOGINQUEUEWINDOW:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_SPARK:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_SPARKSMANAGER:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_COMPONENTS_COPYRIGHT:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_COMPONENTS_COPYRIGHTEVENT:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_COMPONENTS_RSSITEMEVENT:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_COMPONENTS_RSSNEWSFEED:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_COMPONENTS_RSSNEWSFEEDRENDERER:Class;
+      
+      public static const NET_WG_GUI_LOGIN_IMPL_COMPONENTS_VO_RSSITEMVO:Class;
+      
+      public static const NET_WG_GUI_LOGIN_LEGAL_LEGALCONTENT:Class;
+      
+      public static const NET_WG_GUI_LOGIN_LEGAL_LEGALINFOWINDOW:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_CHANNELCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_ICHANNELCOMPONENT:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_SMILEYMAP:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_CONTROLS_CHANNELITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_CONTROLS_MEMBERITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_DATA_CHANNELMEMBERVO:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_EVNTS_CHANNELSFORMEVENT:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_EVNTS_CONTACTSFORMEVENT:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_FORMS_CHANNELSCREATEFORM:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_FORMS_CHANNELSSEARCHFORM:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_FORMS_CONTACTSLISTFORM:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_FORMS_CONTACTSSEARCHFORM:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_IBASECHANNELWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_ICHANNELCOMPONENTMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_ICHANNELSMANAGEMENTWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_ICONNECTTOSECURECHANNELWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_ICONTACTSWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_IFAQWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_ILOBBYCHANNELWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_IMPL_BASECHANNELWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_IMPL_CHANNELCOMPONENTMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_IMPL_CHANNELSMANAGEMENTWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_IMPL_CONNECTTOSECURECHANNELWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_IMPL_CONTACTSWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_IMPL_FAQWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_META_IMPL_LOBBYCHANNELWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_WINDOWS_BASECHANNELWINDOW:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_WINDOWS_CHANNELSMANAGEMENTWINDOW:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_WINDOWS_CONNECTTOSECURECHANNELWINDOW:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_WINDOWS_CONTACTSWINDOW:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_WINDOWS_FAQWINDOW:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_WINDOWS_LAZYCHANNELWINDOW:Class;
+      
+      public static const NET_WG_GUI_MESSENGER_WINDOWS_LOBBYCHANNELWINDOW:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_CAPTCHA:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_NOTIFICATIONLISTVIEW:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_NOTIFICATIONPOPUPVIEWER:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_NOTIFICATIONTIMECOMPONENT:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_NOTIFICATIONSLIST:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_SERVICEMESSAGE:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_SERVICEMESSAGEITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_SERVICEMESSAGEPOPUP:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_SYSTEMMESSAGEDIALOG:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_CONSTANTS_BUTTONSTATE:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_CONSTANTS_BUTTONTYPE:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_CONSTANTS_MESSAGEMETRICS:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_EVENTS_NOTIFICATIONLISTEVENT:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_EVENTS_SERVICEMESSAGEEVENT:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_VO_BUTTONVO:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_VO_LAYOUTINFOVO:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_VO_MESSAGEINFOVO:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONDIALOGINITINFOVO:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONINFOVO:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONSETTINGSVO:Class;
+      
+      public static const NET_WG_GUI_NOTIFICATION_VO_POPUPNOTIFICATIONINFOVO:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_BSLISTRENDERERVO:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONLIST:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONLISTRENDERER:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONWINDOW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_FLAGSLIST:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_REQUIREMENTINFO:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_TOPINFO:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_BATTLESESSION_TOPSTATS:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANIESLISTWINDOW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANIESSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPDOWNEVENT:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPLIST:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYEVENT:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYLISTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_COMPANY_COMPANYWINDOW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_COMPANY_GROUPPLAYERSDROPDOWNMENU:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_CONSTANTS_PREBATTLESTATEFLAGS:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_CONSTANTS_PREBATTLESTATESTRING:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_CONTROLS_TEAMMEMBERRENDERER:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_DATA_PLAYERPRBINFOVO:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_DATA_RECEIVEDINVITEVO:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_INVITES_INVITESTACKCONTAINERBASE:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_INVITES_PRBINVITESEARCHUSERSFORM:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_INVITES_PRBSENDINVITECIGENERATOR:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_INVITES_PRBSENDINVITESWINDOW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_INVITES_RECEIVEDINVITEWINDOW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_INVITES_SENDINVITESEVENT:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_INVITES_USERROSTERITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_INVITES_USERROSTERVIEW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IBATTLESESSIONLISTMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IBATTLESESSIONWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_ICHANNELWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_ICOMPANIESWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_ICOMPANYWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IPREBATTLEWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IPREQUEUEWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IRECEIVEDINVITEWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_ABSTRACT_PREBATTLEWINDOWABSTRACT:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_ABSTRACT_PREQUEUEWINDOW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IMPL_BATTLESESSIONLISTMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IMPL_BATTLESESSIONWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IMPL_CHANNELWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IMPL_COMPANIESWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IMPL_COMPANYWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IMPL_PREBATTLEWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IMPL_PREQUEUEWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_META_IMPL_RECEIVEDINVITEWINDOWMETA:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_PAGES_CHANNELWINDOW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_PAGES_LAZYWINDOW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_PAGES_MEMBERDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_SQUAD_MESSENGERUTILS:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_SQUAD_SQUADITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOW:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOWCIGENERATOR:Class;
+      
+      public static const NET_WG_GUI_PREBATTLE_SQUAD_USERDATAFLAGS:Class;
+      
+      public static const NET_WG_GUI_RALLY_BASERALLYMAINWINDOW:Class;
+      
+      public static const NET_WG_GUI_RALLY_BASERALLYVIEW:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_BASERALLYSLOTHELPER:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_CANDIDATESSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_IGRAYTRANSPARENTBUTTON:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_ISLOTRENDERERHELPER:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_MANUALSEARCHSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_RALLYINVALIDATIONTYPE:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_RALLYLOCKABLESLOTRENDERER:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_RALLYSIMPLESLOTRENDERER:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_RALLYSLOTRENDERER:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_READYMSG:Class;
+      
+      public static const NET_WG_GUI_RALLY_CONTROLS_SLOTDROPINDICATOR:Class;
+      
+      public static const NET_WG_GUI_RALLY_DATA_MANUALSEARCHDATAPROVIDER:Class;
+      
+      public static const NET_WG_GUI_RALLY_EVENTS_RALLYVIEWSEVENT:Class;
+      
+      public static const NET_WG_GUI_RALLY_HELPERS_PLAYERCIGENERATOR:Class;
+      
+      public static const NET_WG_GUI_RALLY_HELPERS_RALLYDRAGDROPDELEGATE:Class;
+      
+      public static const NET_WG_GUI_RALLY_HELPERS_RALLYDRAGDROPLISTDELEGATECONTROLLER:Class;
+      
+      public static const NET_WG_GUI_RALLY_INTERFACES_IMANUALSEARCHRENDERER:Class;
+      
+      public static const NET_WG_GUI_RALLY_INTERFACES_IMANUALSEARCHSCROLLINGLIST:Class;
+      
+      public static const NET_WG_GUI_RALLY_INTERFACES_IRALLYLISTITEMVO:Class;
+      
+      public static const NET_WG_GUI_RALLY_INTERFACES_IRALLYSLOTVO:Class;
+      
+      public static const NET_WG_GUI_RALLY_INTERFACES_IRALLYVO:Class;
+      
+      public static const NET_WG_GUI_RALLY_VIEWS_INTRO_BASERALLYINTROVIEW:Class;
+      
+      public static const NET_WG_GUI_RALLY_VIEWS_LIST_BASERALLYDETAILSSECTION:Class;
+      
+      public static const NET_WG_GUI_RALLY_VIEWS_LIST_BASERALLYLISTVIEW:Class;
+      
+      public static const NET_WG_GUI_RALLY_VIEWS_ROOM_BASECHATSECTION:Class;
+      
+      public static const NET_WG_GUI_RALLY_VIEWS_ROOM_BASERALLYROOMVIEW:Class;
+      
+      public static const NET_WG_GUI_RALLY_VIEWS_ROOM_BASETEAMSECTION:Class;
+      
+      public static const NET_WG_GUI_RALLY_VIEWS_ROOM_BASEWAITLISTSECTION:Class;
+      
+      public static const NET_WG_GUI_RALLY_VO_ACTIONBUTTONVO:Class;
+      
+      public static const NET_WG_GUI_RALLY_VO_RALLYCANDIDATEVO:Class;
+      
+      public static const NET_WG_GUI_RALLY_VO_RALLYSHORTVO:Class;
+      
+      public static const NET_WG_GUI_RALLY_VO_RALLYSLOTVO:Class;
+      
+      public static const NET_WG_GUI_RALLY_VO_RALLYVO:Class;
+      
+      public static const NET_WG_GUI_RALLY_VO_SETTINGROSTERVO:Class;
+      
+      public static const NET_WG_GUI_RALLY_VO_VEHICLEVO:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_TUTORIALBATTLELOADING:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONSTANTS_HINTITEMTYPE:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONSTANTS_PLAYERXPLEVEL:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_BATTLEBONUSITEM:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_BATTLEPROGRESS:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_CHAPTERPROGRESSITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_FINALSTATISTICPROGRESS:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_HINTBASEITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_HINTLIST:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_HINTTEXTITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_HINTVIDEOITEMRENDERER:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_PROGRESSITEM:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_PROGRESSSEPARATOR:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_CONTROLS_TUTORIALBATTLELOADINGFORM:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_META_ITUTORIALBATTLENORESULTSMETA:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_META_ITUTORIALBATTLESTATISTICMETA:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_META_ITUTORIALDIALOGMETA:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLENORESULTSMETA:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLESTATISTICMETA:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALDIALOGMETA:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLENORESULTSWINDOW:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLESTATISTICWINDOW:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALDIALOG:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALGREETINGDIALOG:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALQUEUEDIALOG:Class;
+      
+      public static const NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALVIDEODIALOG:Class;
+      
+      public static const NET_WG_GUI_UTILS_COMPLEXTOOLTIPHELPER:Class;
+      
+      public static const NET_WG_GUI_UTILS_EXCLUDETWEENMANAGER:Class;
+      
+      public static const NET_WG_GUI_UTILS_FRAMEWALKER:Class;
+      
+      public static const NET_WG_GUI_UTILS_IMAGESUBSTITUTION:Class;
+      
+      public static const NET_WG_GUI_UTILS_TEXTFIELDSTYLESHEET:Class;
+      
+      public static const NET_WG_GUI_UTILS_VEHICLESTATESTRING:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_ABSTRACTCONFIRMITEMDIALOG:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_ABSTRACTPOPOVERVIEW:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_ABSTRACTWINDOWVIEW:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_ABSTRACTWRAPPERVIEW:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_BASELAYOUT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_BASEVIEWWRAPPER:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_DEFAULTWINDOWGEOMETRY:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_SMARTPOPOVERVIEW:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_STOREDWINDOWGEOMETRY:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IAMMUNITIONPANELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBARRACKSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASEEXCHANGEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYINTROVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYLISTVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYMAINWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYROOMVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLELOADINGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLEQUEUEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLERESULTSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBATTLETYPESELECTPOPOVERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IBROWSERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICAPTCHAMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICHANNELCAROUSELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICHANNELCOMPONENTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICONFIRMMODULEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICREWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICREWOPERATIONSPOPOVERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICURSORMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTBASEVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTINTROMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTMAINWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTUNITMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTUNITSLISTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IDEMONSTRATORWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IDEMOUNTBUILDINGWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IDISMISSTANKMANDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEULAMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IELITEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEFREETOTANKMANXPWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEVCOINWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEXPWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFIGHTBUTTONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTBATTLEROOMWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGCARDPOPOVERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGCOMPONENTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGPROCESSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCHOICEDIVISIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCLANLISTWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCLANSTATISTICSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCREATEDIRECTIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTCREATIONCONGRATULATIONSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTDISCONNECTVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTFIXEDPLAYERSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTINTELLIGENCEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTINTROMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTLISTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTMAINVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTMODERNIZATIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTORDERCONFIRMATIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTORDERPOPOVERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTROOMMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTTRANSPORTCONFIRMATIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTWELCOMEVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFORTIFICATIONSVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IFREEXPINFOWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IGEDESIGNERWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IGEINSPECTWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IHANGARMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IHISTORICALBATTLESLISTWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IICONDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IICONPRICEDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IINPUTCHECKERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IINTROPAGEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IINVENTORYMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILEGALINFOWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYHEADERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMENUMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMESSENGERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMINIMAPMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYPAGEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOGINCREATEANACCOUNTWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOGINPAGEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ILOGINQUEUEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMESSENGERBARMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMINIMAPENTITYMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMINIMAPLOBBYMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMODULEINFOMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONLISTBUTTONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONPOPUPVIEWERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONSLISTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IORDERSPANELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPARAMSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPERSONALCASEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPOPOVERVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPRBSENDINVITESWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPREMIUMFORMMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEACHIEVEMENTSECTIONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEAWARDSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESECTIONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESTATISTICSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESUMMARYMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETABNAVIGATORMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETECHNIQUEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETECHNIQUEPAGEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSCONTROLMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSCURRENTTABMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSFUTURETABMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRALLYBASEVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRECRUITWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHPANELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRETRAINCREWWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IROSTERSLOTSETTINGSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IRSSNEWSFEEDMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISETTINGSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISHOPMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISIMPLEDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISKILLDROPMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISMARTPOPOVERVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISTOREMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISTORETABLEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ISYSTEMMESSAGEDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITANKCAROUSELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITECHTREEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITECHNICALMAINTENANCEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITICKERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITMENXPPANELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGFORMMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGROOMMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITUTORIALCONTROLMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_ITUTORIALLAYOUTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLEBUYWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLECUSTOMIZATIONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLEINFOMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLESELECTORPOPUPMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLESELLDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IWAITINGVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IWINDOWVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IWRAPPERVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_AMMUNITIONPANELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BARRACKSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASEEXCHANGEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYINTROVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYLISTVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYMAINWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYROOMVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLELOADINGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLEQUEUEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLERESULTSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLETYPESELECTPOPOVERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BROWSERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CAPTCHAMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CHANNELCAROUSELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CLASSMANAGERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CONFIRMMODULEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CREWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CREWOPERATIONSPOPOVERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CURSORMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTBASEVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTINTROMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTMAINWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTUNITMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTUNITSLISTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMONSTRATORWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMOUNTBUILDINGWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DISMISSTANKMANDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EULAMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ELITEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEFREETOTANKMANXPWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEVCOINWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEXPWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FIGHTBUTTONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBATTLEROOMWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGCARDPOPOVERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGCOMPONENTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGPROCESSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCHOICEDIVISIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCLANLISTWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCLANSTATISTICSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCREATEDIRECTIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCREATIONCONGRATULATIONSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTDISCONNECTVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTFIXEDPLAYERSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTINTELLIGENCEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTINTROMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTLISTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTMAINVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTMODERNIZATIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTORDERCONFIRMATIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTORDERPOPOVERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTROOMMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTTRANSPORTCONFIRMATIONWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTWELCOMEVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTIFICATIONSVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FREEXPINFOWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_HANGARMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_HISTORICALBATTLESLISTWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ICONDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ICONPRICEDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INPUTCHECKERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INTROPAGEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INVENTORYMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LEGALINFOWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYHEADERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMENUMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMESSENGERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMINIMAPMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYPAGEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINCREATEANACCOUNTWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINPAGEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINQUEUEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MESSENGERBARMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MINIMAPENTITYMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MINIMAPLOBBYMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MODULEINFOMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONLISTBUTTONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONPOPUPVIEWERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONSLISTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ORDERSPANELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PARAMSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PERSONALCASEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_POPOVERVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PRBSENDINVITESWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PREMIUMFORMMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEACHIEVEMENTSECTIONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEAWARDSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESECTIONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESTATISTICSMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESUMMARYMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETABNAVIGATORMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETECHNIQUEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETECHNIQUEPAGEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSCONTROLMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSCURRENTTABMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSFUTURETABMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RECRUITWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHPANELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RETRAINCREWWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ROSTERSLOTSETTINGSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RSSNEWSFEEDMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SETTINGSWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SHOPMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SIMPLEDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SKILLDROPMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SMARTPOPOVERVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STATSSTORAGEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STOREMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STORETABLEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SYSTEMMESSAGEDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TANKCAROUSELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHTREEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHNICALMAINTENANCEMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TICKERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TMENXPPANELMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGFORMMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGROOMMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TUTORIALCONTROLMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TUTORIALLAYOUTMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLEBUYWINDOWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLECUSTOMIZATIONMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLEINFOMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLESELECTORPOPUPMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLESELLDIALOGMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VIEWPRESENTERMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WAITINGVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WINDOWVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WRAPPERVIEWMETA:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_CONSTANTS_WINDOWVIEWINVALIDATIONTYPE:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_EVENTS_COLORSCHEMEEVENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_EVENTS_DRAGEVENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_EVENTS_DROPEVENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_EVENTS_ENVIRONMENTEVENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_EVENTS_FOCUSEDVIEWEVENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_EVENTS_GAMEEVENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_EVENTS_LIBRARYLOADEREVENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_EVENTS_LOADEREVENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_EVENTS_VOICECHATEVENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_HELPERS_DRAGDELEGATE:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_HELPERS_DRAGDELEGATECONTROLLER:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_HELPERS_DROPLISTDELEGATE:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_HELPERS_DROPLISTDELEGATECTRLR:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_HELPERS_LIBRARYLOADER:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_HELPERS_LOADEREX:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IABSTRACTPOPOVERVIEW:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IABSTRACTWINDOWVIEW:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IBASELAYOUT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ICOUNTERCOMPONENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IDRAGDELEGATE:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IDRAGGABLELIST:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IDROPLISTDELEGATE:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IHANGAR:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_INOTIFICATIONLISTBUTTON:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IRESIZABLECONTENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ISORTABLE:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ISTOREMENUVIEW:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ISTORETABLE:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_ISUBTASKCOMPONENT:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IVEHICLEBUTTON:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IWINDOW:Class;
+      
+      public static const NET_WG_INFRASTRUCTURE_INTERFACES_IWINDOWGEOMETRY:Class;
    }
-
 }

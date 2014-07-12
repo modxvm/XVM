@@ -1,30 +1,28 @@
 package net.wg.gui.lobby.techtree.math
 {
-
-
    public final class HungarianAlgorithm extends Object
    {
-          
+      
       public function HungarianAlgorithm() {
          super();
       }
-
+      
       private var C:Array;
-
+      
       private var rowCovered:Array;
-
+      
       private var columnCovered:Array;
-
+      
       private var n:Number;
-
+      
       private var Z0Row:Number;
-
+      
       private var Z0Column:Number;
-
+      
       private var marked:Array;
-
+      
       private var path:Array;
-
+      
       public function makeCostMatrix(param1:Array, param2:Function) : Array {
          var _loc5_:Array = null;
          var _loc6_:Array = null;
@@ -46,82 +44,17 @@ package net.wg.gui.lobby.techtree.math
          }
          return _loc3_;
       }
-
+      
       public function compute(param1:Array) : Array {
-         var _loc4_:* = NaN;
-         var _loc8_:* = NaN;
-         this.C = this.padMatrix(param1);
-         this.n = this.C.length;
-         var _loc2_:Number = param1.length;
-         var _loc3_:Number = param1[0].length;
-         this.rowCovered = [];
-         _loc4_ = 0;
-         while(_loc4_ < this.n)
-         {
-            this.rowCovered.push(false);
-            _loc4_++;
-         }
-         this.columnCovered = [];
-         _loc4_ = 0;
-         while(_loc4_ < this.n)
-         {
-            this.columnCovered.push(false);
-            _loc4_++;
-         }
-         this.Z0Row = 0;
-         this.Z0Column = 0;
-         this.path = this.makeMatrix(this.n * 2,0);
-         this.marked = this.makeMatrix(this.n,0);
-         var _loc5_:Number = 1;
-         var _loc6_:* = false;
-         while(!_loc6_)
-         {
-            switch(_loc5_)
-            {
-               case 1:
-                  _loc5_ = this.step1();
-                  continue;
-               case 2:
-                  _loc5_ = this.step2();
-                  continue;
-               case 3:
-                  _loc5_ = this.step3();
-                  continue;
-               case 4:
-                  _loc5_ = this.step4();
-                  continue;
-               case 5:
-                  _loc5_ = this.step5();
-                  continue;
-               case 6:
-                  _loc5_ = this.step6();
-                  continue;
-               case 7:
-                  _loc6_ = true;
-                  continue;
-               default:
-                  continue;
-            }
-         }
-         var _loc7_:Array = [];
-         _loc4_ = 0;
-         while(_loc4_ < _loc2_)
-         {
-            _loc8_ = 0;
-            while(_loc8_ < _loc3_)
-            {
-               if(this.marked[_loc4_][_loc8_] == 1)
-               {
-                  _loc7_.push(new MatrixPosition(_loc4_,_loc8_));
-               }
-               _loc8_++;
-            }
-            _loc4_++;
-         }
-         return _loc7_;
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: TranslateException
+          */
+         throw new flash.errors.IllegalOperationError("Not decompiled due to error");
       }
-
-      private function padMatrix(param1:Array, param2:Number=0) : Array {
+      
+      private function padMatrix(param1:Array, param2:Number = 0) : Array {
          var _loc5_:* = NaN;
          var _loc6_:* = NaN;
          var _loc7_:Array = null;
@@ -163,7 +96,7 @@ package net.wg.gui.lobby.techtree.math
          }
          return _loc8_;
       }
-
+      
       private function makeMatrix(param1:Number, param2:Number) : Array {
          var _loc4_:Array = null;
          var _loc6_:* = NaN;
@@ -183,7 +116,7 @@ package net.wg.gui.lobby.techtree.math
          }
          return _loc3_;
       }
-
+      
       private function clearCovers() : void {
          var _loc1_:Number = 0;
          while(_loc1_ < this.n)
@@ -193,7 +126,7 @@ package net.wg.gui.lobby.techtree.math
             _loc1_++;
          }
       }
-
+      
       private function findZero() : Object {
          var _loc5_:* = NaN;
          var _loc1_:Number = -1;
@@ -214,19 +147,20 @@ package net.wg.gui.lobby.techtree.math
                _loc5_ = _loc5_ + 1;
             }
             while(_loc5_ < this.n);
+            
             _loc3_ = _loc3_ + 1;
             if(_loc3_ >= this.n)
             {
                _loc4_ = true;
             }
          }
-         return {
-            "row":_loc1_,
-            "col":_loc2_
-         }
-         ;
+         return 
+            {
+               "row":_loc1_,
+               "col":_loc2_
+            };
       }
-
+      
       private function findSmallest() : Number {
          var _loc3_:* = NaN;
          var _loc1_:Number = Number.MAX_VALUE;
@@ -249,7 +183,7 @@ package net.wg.gui.lobby.techtree.math
          }
          return _loc1_;
       }
-
+      
       private function findStarInRow(param1:Number) : Number {
          var _loc2_:Number = -1;
          var _loc3_:Number = 0;
@@ -264,7 +198,7 @@ package net.wg.gui.lobby.techtree.math
          }
          return _loc2_;
       }
-
+      
       private function findStarInCol(param1:Number) : Number {
          var _loc2_:Number = -1;
          var _loc3_:Number = 0;
@@ -279,7 +213,7 @@ package net.wg.gui.lobby.techtree.math
          }
          return _loc2_;
       }
-
+      
       private function findPrimeInRow(param1:Number) : Number {
          var _loc2_:Number = -1;
          var _loc3_:Number = 0;
@@ -294,7 +228,7 @@ package net.wg.gui.lobby.techtree.math
          }
          return _loc2_;
       }
-
+      
       private function convertPath(param1:Array, param2:Number) : void {
          var _loc3_:Number = 0;
          while(_loc3_ < param2 + 1)
@@ -310,7 +244,7 @@ package net.wg.gui.lobby.techtree.math
             _loc3_++;
          }
       }
-
+      
       private function erasePrimes() : void {
          var _loc2_:* = NaN;
          var _loc1_:Number = 0;
@@ -328,7 +262,7 @@ package net.wg.gui.lobby.techtree.math
             _loc1_++;
          }
       }
-
+      
       private function step1() : Number {
          var _loc2_:Array = null;
          var _loc3_:* = NaN;
@@ -354,7 +288,7 @@ package net.wg.gui.lobby.techtree.math
          }
          return 2;
       }
-
+      
       private function step2() : Number {
          var _loc2_:Array = null;
          var _loc3_:* = NaN;
@@ -378,7 +312,7 @@ package net.wg.gui.lobby.techtree.math
          this.clearCovers();
          return 3;
       }
-
+      
       private function step3() : Number {
          var _loc3_:* = NaN;
          var _loc1_:Number = 0;
@@ -399,7 +333,7 @@ package net.wg.gui.lobby.techtree.math
          }
          return _loc1_ >= this.n?7:4;
       }
-
+      
       private function step4() : Number {
          var _loc6_:Object = null;
          var _loc1_:Number = 0;
@@ -438,7 +372,7 @@ package net.wg.gui.lobby.techtree.math
          }
          return _loc1_;
       }
-
+      
       private function step5() : Number {
          var _loc3_:* = NaN;
          var _loc4_:* = NaN;
@@ -453,7 +387,7 @@ package net.wg.gui.lobby.techtree.math
             {
                _loc1_ = _loc1_ + 1;
                this.path[_loc1_][0] = _loc3_;
-               this.path[_loc1_][1] = this.path[_loc1_-1][1];
+               this.path[_loc1_][1] = this.path[_loc1_ - 1][1];
             }
             else
             {
@@ -463,7 +397,7 @@ package net.wg.gui.lobby.techtree.math
             {
                _loc4_ = this.findPrimeInRow(this.path[_loc1_][0]);
                _loc1_ = _loc1_ + 1;
-               this.path[_loc1_][0] = this.path[_loc1_-1][0];
+               this.path[_loc1_][0] = this.path[_loc1_ - 1][0];
                this.path[_loc1_][1] = _loc4_;
             }
          }
@@ -472,7 +406,7 @@ package net.wg.gui.lobby.techtree.math
          this.erasePrimes();
          return 3;
       }
-
+      
       private function step6() : Number {
          var _loc3_:* = NaN;
          var _loc1_:Number = this.findSmallest();
@@ -497,5 +431,4 @@ package net.wg.gui.lobby.techtree.math
          return 4;
       }
    }
-
 }

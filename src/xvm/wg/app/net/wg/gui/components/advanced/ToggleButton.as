@@ -4,11 +4,10 @@ package net.wg.gui.components.advanced
    import flash.display.MovieClip;
    import scaleform.clik.constants.InvalidationType;
    import flash.events.Event;
-
-
+   
    public class ToggleButton extends ButtonIconLoader
    {
-          
+      
       public function ToggleButton() {
          super();
          this.rFlagsFrame.visible = false;
@@ -16,34 +15,34 @@ package net.wg.gui.components.advanced
          _data = {};
          this.hightLight.visible = false;
       }
-
+      
       public static const FLAGS_SOURCE:String = "../maps/icons/filters/nations/";
-
+      
       public var rFlagsFrame:Sprite;
-
+      
       public var vType:MovieClip;
-
+      
       public var sizeArea:MovieClip;
-
+      
       public var hightLight:MovieClip;
-
+      
       public var toggleBg:MovieClip;
-
+      
       private var _vehicleType:String = null;
-
+      
       private var _nationFlag:String = null;
-
+      
       private var _buttonCursor:Boolean = false;
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          this.alpha = param1?1:0.5;
       }
-
+      
       public function get vehicleType() : String {
          return this._vehicleType;
       }
-
+      
       public function set vehicleType(param1:String) : void {
          if((param1) && !(param1 == "") && !(param1 == "none"))
          {
@@ -52,11 +51,11 @@ package net.wg.gui.components.advanced
             this.changeViewState(true);
          }
       }
-
+      
       public function get nationFlag() : String {
          return this._nationFlag;
       }
-
+      
       public function set nationFlag(param1:String) : void {
          if((param1) && !(param1 == "") && !(param1 == "none"))
          {
@@ -68,7 +67,7 @@ package net.wg.gui.components.advanced
             this.changeViewState(false);
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.sizeArea.visible = false;
@@ -76,7 +75,7 @@ package net.wg.gui.components.advanced
          this._buttonCursor = false;
          mouseChildren = true;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.STATE)) && (this.hightLight))
@@ -84,7 +83,7 @@ package net.wg.gui.components.advanced
             this.hightLight.visible = selected;
          }
       }
-
+      
       protected function changeViewState(param1:Boolean) : void {
          if(externalSource)
          {
@@ -97,7 +96,7 @@ package net.wg.gui.components.advanced
             _data = this.vehicleType;
          }
       }
-
+      
       override protected function completeHandler(param1:Event) : void {
          if((loader) && (this.toggleBg.contains(loader)))
          {
@@ -110,5 +109,4 @@ package net.wg.gui.components.advanced
          this.toggleBg.addChild(loader);
       }
    }
-
 }

@@ -7,23 +7,22 @@ package net.wg.gui.lobby.tankman
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.components.carousels.CarouselBase;
    import flash.display.InteractiveObject;
-
-
+   
    public class PersonalCaseStats extends UIComponent implements IViewStackContent
    {
-          
+      
       public function PersonalCaseStats() {
          super();
       }
-
+      
       public var blocksArea:PersonalCaseBlocksArea;
-
+      
       public var achievements:AchievementCarousel;
-
+      
       public var achivsBg:MovieClip;
-
+      
       private var data:Object;
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          if(this.achievements)
@@ -37,7 +36,7 @@ package net.wg.gui.lobby.tankman
             this.blocksArea = null;
          }
       }
-
+      
       public function update(param1:Object) : void {
          if(param1 == null)
          {
@@ -52,15 +51,18 @@ package net.wg.gui.lobby.tankman
          }
          this.blocksArea.setData(param1.stats);
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.achievements.visible = false;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

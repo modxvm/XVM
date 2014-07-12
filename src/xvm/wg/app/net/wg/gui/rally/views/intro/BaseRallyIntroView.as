@@ -6,28 +6,27 @@ package net.wg.gui.rally.views.intro
    import flash.text.TextField;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
-
-
+   
    public class BaseRallyIntroView extends BaseRallyIntroViewMeta implements IBaseRallyIntroViewMeta
    {
-          
+      
       public function BaseRallyIntroView() {
          super();
       }
-
+      
       public var listRoomBtn:SoundButtonEx;
-
+      
       public var listRoomTitleLbl:TextField;
-
+      
       public var listRoomDescrLbl:TextField;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.listRoomBtn.addEventListener(ButtonEvent.CLICK,this.onListRoomBtnClick);
          this.listRoomBtn.addEventListener(MouseEvent.ROLL_OVER,onControlRollOver);
          this.listRoomBtn.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
       }
-
+      
       override protected function onDispose() : void {
          if(this.listRoomBtn)
          {
@@ -39,10 +38,8 @@ package net.wg.gui.rally.views.intro
          }
          super.onDispose();
       }
-
+      
       protected function onListRoomBtnClick(param1:ButtonEvent) : void {
-          
       }
    }
-
 }

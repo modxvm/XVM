@@ -1,22 +1,21 @@
 package org.idmedia.as3commons.util
 {
    import org.idmedia.as3commons.lang.NullPointerException;
-
-
+   
    public class AbstractSet extends AbstractCollection implements Set
    {
-          
+      
       public function AbstractSet() {
          super();
       }
-
+      
       override public function equals(param1:*) : Boolean {
          var o:* = param1;
          if(o === this)
          {
             return true;
          }
-         if(!(o  is  Set))
+         if(!(o is Set))
          {
             return false;
          }
@@ -36,5 +35,4 @@ package org.idmedia.as3commons.util
          return false;
       }
    }
-
 }

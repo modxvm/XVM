@@ -11,57 +11,56 @@ package net.wg.gui.lobby.questsWindow
    import net.wg.data.constants.QuestsStates;
    import scaleform.clik.constants.InvalidationType;
    import flash.events.Event;
-
-
+   
    public class HeaderBlock extends UIComponent
    {
-          
+      
       public function HeaderBlock() {
          super();
          this.counter.visible = false;
          this.progressIndicator.visible = false;
       }
-
+      
       private static const VERTICAL_PADDING:int = 20;
-
+      
       private static const MIDDLE_PADDING:int = 12;
-
+      
       private static const TEXT_MARGIN:int = 10;
-
+      
       private static const COUNTER_NO_DATA:int = -1;
-
+      
       private static const COUNTER_X:int = 347;
-
+      
       private static const STATUS_MARGIN:int = 18;
-
+      
       public static const CONTENT_TABS_PADDING:int = 30;
-
+      
       public static const LOWER_TABS_PADDING:int = 45;
-
+      
       private static const TIME_TF_PADDING:int = 6;
-
+      
       private static const COUNTER_PADDING:int = 5;
-
+      
       public var lableTF:TextField;
-
+      
       public var timeTF:TextField;
-
+      
       public var counter:QuestsCounter;
-
+      
       public var bg:MovieClip;
-
+      
       public var maskMC:MovieClip;
-
+      
       public var progressIndicator:ProgressQuestIndicator;
-
+      
       public var contentTabs:ContentTabBar;
-
+      
       private var headerData:HeaderDataVO = null;
-
+      
       private var _noProgress:Boolean = true;
-
+      
       public var statusMC:MovieClip;
-
+      
       override protected function onDispose() : void {
          this.progressIndicator.dispose();
          this.counter.dispose();
@@ -82,7 +81,7 @@ package net.wg.gui.lobby.questsWindow
          this.progressIndicator = null;
          super.onDispose();
       }
-
+      
       public function setData(param1:HeaderDataVO) : void {
          if(this.headerData)
          {
@@ -91,7 +90,7 @@ package net.wg.gui.lobby.questsWindow
          this.headerData = param1;
          invalidateData();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.maskMC.height = 0;
@@ -103,16 +102,14 @@ package net.wg.gui.lobby.questsWindow
                "label":QUESTS.QUESTS_CONDITIONS,
                "data":QuestsStates.CONDITIONS,
                "tooltip":""
-            }
-         ,
+            },
             {
                "label":QUESTS.QUESTS_REQUIREMENTS,
                "data":QuestsStates.REQUIREMENTS,
                "tooltip":""
-            }
-         ]);
+            }]);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -132,12 +129,12 @@ package net.wg.gui.lobby.questsWindow
             dispatchEvent(new Event(Event.RESIZE));
          }
       }
-
+      
       private function setTexts() : void {
          this.lableTF.htmlText = this.headerData.title;
          this.timeTF.htmlText = this.headerData.date;
       }
-
+      
       private function layoutComponents() : void {
          this.lableTF.height = this.lableTF.textHeight + TEXT_MARGIN;
          this.timeTF.height = this.timeTF.textHeight + TEXT_MARGIN;
@@ -152,14 +149,12 @@ package net.wg.gui.lobby.questsWindow
             _loc4_ = false;
             this.contentTabs.selectedIndex = 0;
          }
-         else
+         else if(!this.headerData.hasConditions)
          {
-            if(!this.headerData.hasConditions)
-            {
-               _loc4_ = false;
-               this.contentTabs.selectedIndex = 1;
-            }
+            _loc4_ = false;
+            this.contentTabs.selectedIndex = 1;
          }
+         
          this.contentTabs.visible = _loc4_;
          this.contentTabs.y = Math.round(_loc3_ + CONTENT_TABS_PADDING);
          this.bg.y = _loc4_?this.contentTabs.y + LOWER_TABS_PADDING:_loc3_ + VERTICAL_PADDING;
@@ -167,7 +162,7 @@ package net.wg.gui.lobby.questsWindow
          var _loc5_:Number = Math.round(this.bg.y);
          setSize(this.width,_loc5_);
       }
-
+      
       private function checkProgress() : void {
          this.progressIndicator.visible = (Boolean(this.headerData.progrBarType)) && !this._noProgress;
          if(this.headerData.progrBarType)
@@ -177,7 +172,7 @@ package net.wg.gui.lobby.questsWindow
             this.progressIndicator.validateNow();
          }
       }
-
+      
       private function checkCounter() : void {
          this.counter.textField.text = this.headerData.tasksCount.toString();
          if(this.headerData.tasksCount > COUNTER_NO_DATA && !this._noProgress)
@@ -191,7 +186,7 @@ package net.wg.gui.lobby.questsWindow
             this.progressIndicator.y = Math.round(this.counter.y + this.counter.height / 2);
          }
       }
-
+      
       private function checkStatus() : void {
          this._noProgress = false;
          if(this.headerData.status == QuestsStates.NOT_AVAILABLE)
@@ -201,25 +196,22 @@ package net.wg.gui.lobby.questsWindow
             this.counter.x = COUNTER_X + STATUS_MARGIN;
             this.lableTF.textColor = QuestsStates.CLR_TASK_TF_WITH_STATUS;
          }
+         else if(this.headerData.status == QuestsStates.DONE)
+         {
+            this.statusMC.gotoAndStop("done");
+            this.counter.x = COUNTER_X + STATUS_MARGIN;
+            this.lableTF.textColor = QuestsStates.CLR_TASK_TF_WITH_STATUS;
+         }
          else
          {
-            if(this.headerData.status == QuestsStates.DONE)
-            {
-               this.statusMC.gotoAndStop("done");
-               this.counter.x = COUNTER_X + STATUS_MARGIN;
-               this.lableTF.textColor = QuestsStates.CLR_TASK_TF_WITH_STATUS;
-            }
-            else
-            {
-               this.statusMC.gotoAndStop("another");
-               this.lableTF.textColor = QuestsStates.CLR_TASK_TF_NORMAL;
-               this.counter.x = COUNTER_X + STATUS_MARGIN;
-            }
+            this.statusMC.gotoAndStop("another");
+            this.lableTF.textColor = QuestsStates.CLR_TASK_TF_NORMAL;
+            this.counter.x = COUNTER_X + STATUS_MARGIN;
          }
+         
          TextField(this.statusMC.textField).text = this.headerData.statusDescription;
          TextField(this.statusMC.textField).height = TextField(this.statusMC.textField).textHeight + TEXT_MARGIN;
          this.statusMC.visible = Boolean(this.headerData.statusDescription);
       }
    }
-
 }

@@ -3,35 +3,33 @@ package net.wg.gui.lobby.settings.components
    import scaleform.clik.controls.ListItemRenderer;
    import flash.display.Sprite;
    import net.wg.gui.lobby.settings.components.evnts.KeyInputEvents;
-   import __AS3__.vec.Vector;
    import net.wg.data.constants.KeysMap;
    import scaleform.clik.interfaces.IDataProvider;
-
-
+   
    public class KeysItemRenderer extends ListItemRenderer
    {
-          
+      
       public function KeysItemRenderer() {
          super();
       }
-
+      
       public var keyInput:KeyInput;
-
+      
       public var bg:Sprite;
-
+      
       public var underline:Sprite;
-
+      
       private var _header:Boolean;
-
+      
       private const INVALID_DATA:String = "invalid_data";
-
+      
       private const INVALID_TEXT:String = "invalid_text";
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          invalidate(this.INVALID_DATA);
       }
-
+      
       override protected function onDispose() : void {
          if(data)
          {
@@ -44,19 +42,19 @@ package net.wg.gui.lobby.settings.components
          }
          super.onDispose();
       }
-
+      
       override public function toString() : String {
          return "[WG KeysItemRenderer " + name + "]";
       }
-
+      
       public function isSelected() : Boolean {
          return this.keyInput.selected;
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          var _loc2_:String = null;
          super.enabled = param1;
@@ -71,11 +69,11 @@ package net.wg.gui.lobby.settings.components
          }
          setState(_loc2_);
       }
-
+      
       override public function get label() : String {
          return _label;
       }
-
+      
       override public function set label(param1:String) : void {
          if(_label == param1)
          {
@@ -84,11 +82,11 @@ package net.wg.gui.lobby.settings.components
          _label = param1;
          invalidate(this.INVALID_TEXT);
       }
-
+      
       public function get header() : Boolean {
          return this._header;
       }
-
+      
       public function set header(param1:Boolean) : void {
          if(param1 == this._header)
          {
@@ -97,7 +95,7 @@ package net.wg.gui.lobby.settings.components
          this._header = param1;
          setState("up");
       }
-
+      
       override protected function configUI() : void {
          constraintsDisabled = true;
          super.configUI();
@@ -110,7 +108,7 @@ package net.wg.gui.lobby.settings.components
             this.keyInput.buttonMode = true;
          }
       }
-
+      
       override protected function draw() : void {
          if(data)
          {
@@ -134,14 +132,14 @@ package net.wg.gui.lobby.settings.components
          }
          super.draw();
       }
-
+      
       override protected function updateText() : void {
          if(this._header)
          {
             super.updateText();
          }
       }
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          if(this._header)
          {
@@ -149,7 +147,7 @@ package net.wg.gui.lobby.settings.components
          }
          return _selected?statesSelected:statesDefault;
       }
-
+      
       private function keyCodeWasUsed(param1:Number) : Object {
          if(param1 == KeysMap.KEY_NONE)
          {
@@ -171,7 +169,7 @@ package net.wg.gui.lobby.settings.components
          }
          return null;
       }
-
+      
       private function setText() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -191,7 +189,7 @@ package net.wg.gui.lobby.settings.components
             this.underline.y = this.actualHeight - this.underline.height | 0;
          }
       }
-
+      
       private function onKeyChange(param1:KeyInputEvents) : void {
          var _loc2_:Object = this.keyCodeWasUsed(param1.keyCode);
          if(_loc2_)
@@ -205,5 +203,4 @@ package net.wg.gui.lobby.settings.components
          dispatchEvent(new KeyInputEvents(KeyInputEvents.CHANGE,param1.keyCode));
       }
    }
-
 }

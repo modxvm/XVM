@@ -6,43 +6,42 @@ package net.wg.gui.lobby.store.views
    import net.wg.utils.IAssertable;
    import net.wg.data.constants.generated.STORE_TYPES;
    import scaleform.clik.data.DataProvider;
-
-
+   
    public class ModuleView extends SimpleStoreMenuView
    {
-          
+      
       public function ModuleView() {
          super();
       }
-
+      
       public var vehicleGunChkBx:CheckBox = null;
-
+      
       public var vehicleTurretChkBx:CheckBox = null;
-
+      
       public var vehicleEngineChkBx:CheckBox = null;
-
+      
       public var vehicleChassisChkBx:CheckBox = null;
-
+      
       public var vehicleRadioChkBx:CheckBox = null;
-
+      
       public var lockedChkBx:CheckBox = null;
-
+      
       public var inHangarChkBx:CheckBox = null;
-
+      
       private var _kindsArr:Array = null;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.inHangarChkBx.enableDynamicFrameUpdating();
          this.lockedChkBx.enableDynamicFrameUpdating();
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:ViewUIElementVO = null;
          super.onDispose();
          if(this._kindsArr != null)
          {
-            for each (_loc1_ in this._kindsArr)
+            for each(_loc1_ in this._kindsArr)
             {
                _loc1_.dispose();
             }
@@ -50,12 +49,12 @@ package net.wg.gui.lobby.store.views
             this._kindsArr = null;
          }
       }
-
+      
       override public function resetTemporaryHandlers() : void {
          resetHandlers(this.getKindsArray(),null);
          resetHandlers(getTagsArray(),null);
       }
-
+      
       override public function setViewData(param1:Array) : void {
          var _loc2_:* = NaN;
          var _loc3_:Array = null;
@@ -74,7 +73,7 @@ package net.wg.gui.lobby.store.views
             this.dispatchViewChange();
          }
       }
-
+      
       override public function getFilter() : Array {
          var _loc2_:IAssertable = null;
          var _loc1_:Array = getSelectedFilters(this.getKindsArray(),true,null);
@@ -89,12 +88,12 @@ package net.wg.gui.lobby.store.views
          _loc1_ = _loc1_.concat(getSelectedFilters(getTagsArray(),true,null));
          return _loc1_;
       }
-
+      
       override protected function onKindChanged() : void {
          initializeControlsByHash(fittingType,this.getKindsArray(),"kindsMap","types");
          super.onKindChanged();
       }
-
+      
       override protected function onTagsArrayRequest() : Array {
          if(getUIName() == STORE_TYPES.SHOP)
          {
@@ -102,7 +101,7 @@ package net.wg.gui.lobby.store.views
          }
          return [new ViewUIElementVO("onVehicle",onVehicleChkBx)];
       }
-
+      
       override protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void {
          super.onVehicleFilterUpdated(param1,param2,param3);
          if(param1.length == 0)
@@ -116,7 +115,7 @@ package net.wg.gui.lobby.store.views
             myVehiclesRadioBtn.enabled = true;
          }
       }
-
+      
       private function getKindsArray() : Array {
          if(this._kindsArr == null)
          {
@@ -125,5 +124,4 @@ package net.wg.gui.lobby.store.views
          return this._kindsArr;
       }
    }
-
 }

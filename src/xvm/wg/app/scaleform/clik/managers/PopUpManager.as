@@ -9,17 +9,16 @@ package scaleform.clik.managers
    import net.wg.utils.IEventCollector;
    import flash.geom.Point;
    import scaleform.gfx.FocusManager;
-
-
+   
    public class PopUpManager extends Object
    {
-          
+      
       public function PopUpManager() {
          super();
       }
-
+      
       protected static var initialized:Boolean = false;
-
+      
       public static function init(param1:Stage) : void {
          if(initialized)
          {
@@ -31,20 +30,20 @@ package scaleform.clik.managers
          _stage.addChild(_defaultPopupCanvas);
          initialized = true;
       }
-
+      
       protected static var _stage:Stage;
-
+      
       protected static var _defaultPopupCanvas:MovieClip;
-
+      
       public static function get popupCanvas() : MovieClip {
          return _defaultPopupCanvas;
       }
-
+      
       protected static var _modalMc:Sprite;
-
+      
       protected static var _modalBg:Sprite;
-
-      public static function show(param1:DisplayObject, param2:Number=0, param3:Number=0, param4:DisplayObjectContainer=null) : void {
+      
+      public static function show(param1:DisplayObject, param2:Number = 0, param3:Number = 0, param4:DisplayObjectContainer = null) : void {
          if(!_stage)
          {
             return;
@@ -66,11 +65,11 @@ package scaleform.clik.managers
          _loc6_ = param4.localToGlobal(_loc6_);
          param1.x = _loc6_.x;
          param1.y = _loc6_.y;
-         _stage.setChildIndex(_defaultPopupCanvas,_stage.numChildren-1);
+         _stage.setChildIndex(_defaultPopupCanvas,_stage.numChildren - 1);
          _stage.addEventListener(Event.ADDED,PopUpManager.handleStageAddedEvent,false,0,true);
       }
-
-      public static function showModal(param1:Sprite, param2:Number=0, param3:Number=0, param4:Sprite=null, param5:uint=0, param6:Sprite=null) : void {
+      
+      public static function showModal(param1:Sprite, param2:Number = 0, param3:Number = 0, param4:Sprite = null, param5:uint = 0, param6:Sprite = null) : void {
          if(!_stage)
          {
             return;
@@ -102,15 +101,15 @@ package scaleform.clik.managers
          _modalMc.addEventListener(Event.REMOVED_FROM_STAGE,handleRemoveModalMc,false,0,true);
          _stage.addEventListener(Event.ADDED,PopUpManager.handleStageAddedEvent,false,0,true);
       }
-
+      
       protected static function handleStageAddedEvent(param1:Event) : void {
-         _stage.setChildIndex(_defaultPopupCanvas,_stage.numChildren-1);
+         _stage.setChildIndex(_defaultPopupCanvas,_stage.numChildren - 1);
       }
-
+      
       protected static function handleRemovePopup(param1:Event) : void {
          removeAddedToStageListener();
       }
-
+      
       protected static function handleRemoveModalMc(param1:Event) : void {
          _modalBg.removeEventListener(Event.REMOVED_FROM_STAGE,handleRemoveModalMc,false);
          if(_modalBg)
@@ -122,7 +121,7 @@ package scaleform.clik.managers
          FocusManager.setModalClip(null);
          removeAddedToStageListener();
       }
-
+      
       protected static function removeAddedToStageListener() : void {
          if(_defaultPopupCanvas.numChildren == 0 && _modalMc == null)
          {
@@ -130,5 +129,4 @@ package scaleform.clik.managers
          }
       }
    }
-
 }

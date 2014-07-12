@@ -7,11 +7,10 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.gui.lobby.hangar.maintenance.data.HistoricalAmmoVO;
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class AmmoBlockOverlay extends UIComponent
    {
-          
+      
       public function AmmoBlockOverlay() {
          super();
          this.priceLabelTF = this.priceBlockMC.priceLabelTF;
@@ -19,32 +18,32 @@ package net.wg.gui.lobby.hangar.maintenance
          this.priceTF = this.priceBlockMC.priceTF;
          this.shellsSet = this.priceBlockMC.shellsSet;
       }
-
+      
       private static const TEXT_OFFSET:Number = 10;
-
+      
       public var headerTF:TextField;
-
+      
       public var descriptionTF:TextField;
-
+      
       public var noteTF:TextField;
-
+      
       public var priceLabelTF:TextField;
-
+      
       public var priceTF:TextField;
-
+      
       public var priceNoteTF:TextField;
-
+      
       public var shellsSet:ShellsSet;
-
+      
       public var priceBlockMC:MovieClip;
-
+      
       protected var model:HistoricalAmmoVO;
-
+      
       public function setData(param1:HistoricalAmmoVO) : void {
          this.model = param1;
          invalidateData();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.priceLabelTF.autoSize = TextFieldAutoSize.LEFT;
@@ -56,7 +55,7 @@ package net.wg.gui.lobby.hangar.maintenance
          this.priceLabelTF.text = HISTORICAL_BATTLES.AMMOPRESET_PRICELABEL;
          this.priceNoteTF.text = HISTORICAL_BATTLES.AMMOPRESET_PRICENOTE;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.model))
@@ -69,7 +68,7 @@ package net.wg.gui.lobby.hangar.maintenance
             this.priceBlockMC.x = width - this.priceBlockMC.width >> 1;
          }
       }
-
+      
       override protected function onDispose() : void {
          if(this.model)
          {
@@ -81,5 +80,4 @@ package net.wg.gui.lobby.hangar.maintenance
          super.onDispose();
       }
    }
-
 }

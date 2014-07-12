@@ -5,11 +5,10 @@ package net.wg.gui.components.controls
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.components.advanced.SortingButtonInfo;
-
-
+   
    public class SortableScrollingList extends ScrollingListEx
    {
-          
+      
       public function SortableScrollingList() {
          this._optionsDict = {};
          this._sortProps = [];
@@ -18,50 +17,50 @@ package net.wg.gui.components.controls
          this._sortingDefaults = {};
          super();
       }
-
+      
       public static const DATA_INVALIDATED:String = "dataInvalidated";
-
+      
       protected static const SORTING_INVALID:String = "sortingInv";
-
+      
       protected static const COLUMNS_INVALID:String = "columnsInv";
-
+      
       private var _columnsData:IDataProvider;
-
+      
       private var _oldSortField:String;
-
+      
       private var _optionsDict:Object;
-
+      
       private var _sortProps:Array;
-
+      
       private var _sortingOrder:Array;
-
+      
       private var _sortingTypes:Object;
-
+      
       private var _sortingDefaults:Object;
-
+      
       private var _isRowHeightFixed:Boolean = false;
-
+      
       override public function invalidateData() : void {
          super.invalidateData();
          dispatchEvent(new Event(DATA_INVALIDATED,true));
       }
-
-      public function sortByField(param1:String, param2:Boolean=true) : void {
+      
+      public function sortByField(param1:String, param2:Boolean = true) : void {
          this.setFieldOption(param1,param2);
          this._oldSortField = param1;
          this.invalidateSorting(param1);
       }
-
+      
       override public function set dataProvider(param1:IDataProvider) : void {
          this.invalidateSorting(this._sortProps);
          super.dataProvider = param1;
       }
-
+      
       public function set columnsData(param1:IDataProvider) : void {
          this._columnsData = param1;
          invalidate(COLUMNS_INVALID);
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(COLUMNS_INVALID))
          {
@@ -73,7 +72,7 @@ package net.wg.gui.components.controls
          }
          super.draw();
       }
-
+      
       override protected function drawLayout() : void {
          var _loc8_:IListItemRenderer = null;
          var _loc1_:uint = _renderers.length;
@@ -101,7 +100,7 @@ package net.wg.gui.components.controls
          }
          drawScrollBar();
       }
-
+      
       override protected function onDispose() : void {
          if(this._columnsData)
          {
@@ -118,11 +117,11 @@ package net.wg.gui.components.controls
          this._optionsDict = null;
          super.onDispose();
       }
-
+      
       protected function invalidateSorting(param1:Object) : void {
          var _loc2_:Array = null;
          var _loc3_:* = 0;
-         if(param1  is  Array)
+         if(param1 is Array)
          {
             this._sortProps = param1 as Array;
          }
@@ -139,7 +138,7 @@ package net.wg.gui.components.controls
          }
          invalidate(SORTING_INVALID);
       }
-
+      
       protected function applySorting(param1:Array) : void {
          var _loc2_:Array = null;
          var _loc3_:String = null;
@@ -147,7 +146,7 @@ package net.wg.gui.components.controls
          if(dataProvider)
          {
             _loc2_ = [];
-            for each (_loc3_ in param1)
+            for each(_loc3_ in param1)
             {
                if(_loc2_.length == 0)
                {
@@ -159,20 +158,20 @@ package net.wg.gui.components.controls
                }
             }
             _loc4_ = dataProvider as Array;
-            if((((_loc4_ && param1) && (param1.length > 0)) && (_loc2_)) && (_loc2_.length > 0) && param1.length == _loc2_.length)
+            if((_loc4_ && param1 && param1.length > 0 && _loc2_) && (_loc2_.length > 0) && param1.length == _loc2_.length)
             {
                _loc4_.sortOn(param1,_loc2_);
             }
             this.invalidateData();
          }
       }
-
+      
       private function setFieldOption(param1:String, param2:Boolean) : void {
          var _loc3_:uint = param2?0:Array.DESCENDING;
          this._optionsDict = App.utils.commons.cloneObject(this._sortingTypes);
          this._optionsDict[param1] = (this._sortingTypes.hasOwnProperty(param1)?this._sortingTypes[param1]:0) | _loc3_;
       }
-
+      
       private function invalidateColumnsData() : void {
          var _loc3_:Object = null;
          var _loc4_:SortingButtonInfo = null;
@@ -187,7 +186,7 @@ package net.wg.gui.components.controls
          if(this._columnsData)
          {
             _loc9_ = 0;
-            for each (_loc3_ in this._columnsData)
+            for each(_loc3_ in this._columnsData)
             {
                _loc4_ = _loc3_ as SortingButtonInfo;
                if(_loc4_)
@@ -231,14 +230,13 @@ package net.wg.gui.components.controls
             this._optionsDict[_loc2_] = _loc1_ | this._sortingTypes[_loc2_];
          }
       }
-
+      
       public function get isRowHeightFixed() : Boolean {
          return this._isRowHeightFixed;
       }
-
+      
       public function set isRowHeightFixed(param1:Boolean) : void {
          this._isRowHeightFixed = param1;
       }
    }
-
 }

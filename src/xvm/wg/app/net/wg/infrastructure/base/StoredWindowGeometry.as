@@ -2,11 +2,10 @@ package net.wg.infrastructure.base
 {
    import net.wg.infrastructure.interfaces.IWindowGeometry;
    import net.wg.infrastructure.interfaces.IWindow;
-
-
+   
    public class StoredWindowGeometry extends Object implements IWindowGeometry
    {
-          
+      
       public function StoredWindowGeometry(param1:Number, param2:Number, param3:Number, param4:Number) {
          super();
          this._x = param1;
@@ -15,21 +14,21 @@ package net.wg.infrastructure.base
          this._height = param4;
          this.doPositionOnce = false;
       }
-
+      
       private var _x:Number;
-
+      
       private var _y:Number;
-
+      
       private var _width:Number;
-
+      
       private var _height:Number;
-
+      
       private var doPositionOnce:Boolean;
-
+      
       public function canOverwrite() : Boolean {
          return false;
       }
-
+      
       public function setSize(param1:IWindow) : Boolean {
          if(this._width > 0 && this._height > 0)
          {
@@ -41,7 +40,7 @@ package net.wg.infrastructure.base
          }
          return true;
       }
-
+      
       public function setPosition(param1:IWindow) : Boolean {
          var _loc2_:* = false;
          if(!this.doPositionOnce && (param1))
@@ -54,5 +53,4 @@ package net.wg.infrastructure.base
          return _loc2_;
       }
    }
-
 }

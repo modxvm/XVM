@@ -9,19 +9,18 @@ package net.wg.infrastructure.managers.utils.impl
    import net.wg.utils.IPopUpManager;
    import net.wg.data.constants.Linkages;
    import flash.display.Stage;
-
-
+   
    public class HelpLayout extends Object implements IHelpLayout
    {
-          
+      
       public function HelpLayout() {
          super();
       }
-
+      
       private static const HL_MAIN_SOURCE:String = "HelpLayout";
-
+      
       private var _modalBackground:DisplayObject = null;
-
+      
       public function create(param1:DisplayObject, param2:Object, param3:DisplayObjectContainer) : DisplayObject {
          var _loc4_:IUtils = App.utils;
          var _loc5_:IAssertable = _loc4_.asserter;
@@ -32,7 +31,7 @@ package net.wg.infrastructure.managers.utils.impl
          _loc6_.show(_loc7_,param2.x,param2.y,param3);
          return _loc7_;
       }
-
+      
       public function createBackground() : void {
          this.destroyBackground();
          this._modalBackground = App.utils.popupMgr.create(Linkages.POPUP_MODAL,
@@ -40,8 +39,7 @@ package net.wg.infrastructure.managers.utils.impl
                "x":0,
                "y":0,
                "alpha":0.5
-            }
-         );
+            });
          var _loc1_:Stage = App.instance.stage;
          if(this._modalBackground != null)
          {
@@ -49,7 +47,7 @@ package net.wg.infrastructure.managers.utils.impl
             this._modalBackground.height = _loc1_.height;
          }
       }
-
+      
       public function destroyBackground() : void {
          if(this._modalBackground != null)
          {
@@ -60,11 +58,11 @@ package net.wg.infrastructure.managers.utils.impl
             this._modalBackground = null;
          }
       }
-
+      
       public function isShowed() : Boolean {
          return this._modalBackground == null;
       }
-
+      
       public function destroy(param1:DisplayObject) : void {
          var _loc2_:IUtils = App.utils;
          var _loc3_:Function = _loc2_.asserter.assertNotNull;
@@ -74,22 +72,21 @@ package net.wg.infrastructure.managers.utils.impl
             _loc2_.popupMgr.remove(param1);
          }
       }
-
+      
       public function dispose() : void {
          this.destroyBackground();
       }
-
+      
       public function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number) : Object {
-         return {
-            "borderWidth":param1,
-            "borderHeight":param2,
-            "direction":param3,
-            "text":param4,
-            "x":param5,
-            "y":param6
-         }
-         ;
+         return 
+            {
+               "borderWidth":param1,
+               "borderHeight":param2,
+               "direction":param3,
+               "text":param4,
+               "x":param5,
+               "y":param6
+            };
       }
    }
-
 }

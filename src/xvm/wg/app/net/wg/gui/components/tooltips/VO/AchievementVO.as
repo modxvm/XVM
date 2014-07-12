@@ -2,50 +2,49 @@ package net.wg.gui.components.tooltips.VO
 {
    import net.wg.gui.components.tooltips.helpers.Utils;
    import net.wg.data.constants.Values;
-
-
+   
    public class AchievementVO extends Object
    {
-          
+      
       public function AchievementVO(param1:Object) {
          super();
          this.parsHash(param1);
       }
-
+      
       public var aName:String = null;
-
+      
       public var description:String = null;
-
+      
       public var inactive:Boolean = false;
-
+      
       public var historyDescr:String = null;
-
+      
       public var section:String = null;
-
+      
       public var type:String = null;
-
+      
       public var value:Number = NaN;
-
+      
       public var localizedValue:String = "";
-
+      
       public var icon:String = null;
-
+      
       public var params:Array = null;
-
+      
       public var stats:Object = null;
-
+      
       public var vehicles:Array = null;
-
+      
       public var vehiclesLeft:Number = 0;
-
+      
       public var isInDossier:Boolean = false;
-
+      
       public var classParams:Array = null;
-
+      
       public var achievedOn:String = null;
-
+      
       public var closeToRecord:Array = null;
-
+      
       private function parsHash(param1:Object) : void {
          var _loc4_:Array = null;
          var _loc5_:uint = 0;
@@ -72,7 +71,7 @@ package net.wg.gui.components.tooltips.VO
          var _loc3_:Boolean = (param1.hasOwnProperty("params")) && !(param1["params"] == undefined)?true:false;
          if(_loc3_)
          {
-            if(param1["params"]  is  Array && param1["params"][0]  is  Array)
+            if(param1["params"] is Array && param1["params"][0] is Array)
             {
                _loc4_ = param1["params"][0];
                this.params = [];
@@ -84,7 +83,7 @@ package net.wg.gui.components.tooltips.VO
                {
                   _loc9_ = _loc4_[_loc8_];
                   _loc6_ = _loc9_[0];
-                  if(_loc9_[1]  is  Array)
+                  if(_loc9_[1] is Array)
                   {
                      this.vehicles = _loc9_[1];
                      _loc7_ = _loc9_[2];
@@ -102,8 +101,7 @@ package net.wg.gui.components.tooltips.VO
                      {
                         "id":_loc6_,
                         "val":_loc7_
-                     }
-                  );
+                     });
                   _loc8_++;
                }
             }
@@ -117,9 +115,8 @@ package net.wg.gui.components.tooltips.VO
          {
             _loc10_ = param1["records"];
             this.achievedOn = (_loc10_.hasOwnProperty("current")) && !(_loc10_["current"] == undefined) && !(_loc10_["current"] == null)?_loc10_["current"]:null;
-            this.closeToRecord = (_loc10_.hasOwnProperty("nearest")) && !(_loc10_["nearest"] == undefined) && !(_loc10_["nearest"] == null) && _loc10_["nearest"]  is  Array && _loc10_["nearest"].length > 0?_loc10_["nearest"]:null;
+            this.closeToRecord = (_loc10_.hasOwnProperty("nearest")) && !(_loc10_["nearest"] == undefined) && !(_loc10_["nearest"] == null) && _loc10_["nearest"] is Array && _loc10_["nearest"].length > 0?_loc10_["nearest"]:null;
          }
       }
    }
-
 }

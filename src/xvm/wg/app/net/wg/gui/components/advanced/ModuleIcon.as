@@ -4,23 +4,22 @@ package net.wg.gui.components.advanced
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.display.MovieClip;
    import net.wg.data.constants.FittingTypes;
-
-
+   
    public class ModuleIcon extends UIComponent
    {
-          
+      
       public function ModuleIcon() {
          super();
       }
-
+      
       public var moduleType:UIComponent;
-
+      
       public var artefact:UILoaderAlt;
-
+      
       public var shell:UILoaderAlt;
-
+      
       public var moduleLevel:MovieClip;
-
+      
       override protected function onDispose() : void {
          this.moduleType.dispose();
          this.moduleType = null;
@@ -31,7 +30,7 @@ package net.wg.gui.components.advanced
          this.moduleLevel = null;
          super.onDispose();
       }
-
+      
       public function setValues(param1:String, param2:String) : void {
          this.moduleType.visible = this.moduleLevel.visible = FittingTypes.MANDATORY_SLOTS.indexOf(param1) > -1;
          this.artefact.visible = FittingTypes.ARTEFACT_SLOTS.indexOf(param1) > -1;
@@ -40,20 +39,18 @@ package net.wg.gui.components.advanced
          {
             this.artefact.source = param2;
          }
+         else if(param1 == FittingTypes.SHELL)
+         {
+            this.shell.source = param2;
+         }
          else
          {
-            if(param1 == FittingTypes.SHELL)
-            {
-               this.shell.source = param2;
-            }
-            else
-            {
-               this.moduleType.gotoAndPlay(param1);
-               this.moduleLevel.gotoAndStop(param2);
-            }
+            this.moduleType.gotoAndPlay(param1);
+            this.moduleLevel.gotoAndStop(param2);
          }
+         
       }
-
+      
       public function setValuesWithType(param1:String, param2:String, param3:int) : void {
          this.moduleType.gotoAndStop(1);
          this.moduleLevel.gotoAndStop(1);
@@ -65,35 +62,30 @@ package net.wg.gui.components.advanced
             this.moduleLevel.visible = true;
             this.moduleLevel.gotoAndStop(param3);
          }
+         else if(param1 == FittingTypes.SHELL)
+         {
+            this.artefact.unload();
+            this.shell.visible = true;
+            this.shell.source = param2;
+            this.moduleLevel.visible = false;
+         }
+         else if(param1 == FittingTypes.ORDER)
+         {
+            this.shell.unload();
+            this.artefact.visible = true;
+            this.artefact.source = param2;
+            this.moduleLevel.gotoAndStop(param3);
+            this.moduleLevel.visible = true;
+         }
          else
          {
-            if(param1 == FittingTypes.SHELL)
-            {
-               this.artefact.unload();
-               this.shell.visible = true;
-               this.shell.source = param2;
-               this.moduleLevel.visible = false;
-            }
-            else
-            {
-               if(param1 == FittingTypes.ORDER)
-               {
-                  this.shell.unload();
-                  this.artefact.visible = true;
-                  this.artefact.source = param2;
-                  this.moduleLevel.gotoAndStop(param3);
-                  this.moduleLevel.visible = true;
-               }
-               else
-               {
-                  this.shell.unload();
-                  this.artefact.visible = true;
-                  this.artefact.source = param2;
-                  this.moduleLevel.visible = false;
-               }
-            }
+            this.shell.unload();
+            this.artefact.visible = true;
+            this.artefact.source = param2;
+            this.moduleLevel.visible = false;
          }
+         
+         
       }
    }
-
 }

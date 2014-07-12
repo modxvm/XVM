@@ -11,47 +11,46 @@ package net.wg.gui.prebattle.company
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.data.DataProvider;
    import net.wg.infrastructure.events.FocusRequestEvent;
-
-
+   
    public class CompanyListItemRenderer extends SoundListItemRenderer implements IFocusContainer
    {
-          
+      
       public function CompanyListItemRenderer() {
          super();
          tabEnabled = true;
          focusable = true;
       }
-
+      
       public var descriptionField:TextField;
-
+      
       public var pCountField:TextField;
-
+      
       public var divisionField:TextField;
-
+      
       public var dd:GroupPlayersDropDownMenu;
-
+      
       public var bg:MovieClip;
-
+      
       public var mainTextField:TextField;
-
+      
       public var emtyFocusIndicator:MovieClip;
-
+      
       private var dropDownState:int = 1;
-
+      
       private var _showPlayers:Boolean = false;
-
+      
       private var listRefreshData:Function;
-
+      
       private var pressEvent:MouseEvent;
-
+      
       public function showPlayersList(param1:Boolean) : void {
          this._showPlayers = param1;
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return this;
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.removeEventListener(ButtonEvent.CLICK,this.clickHandler);
@@ -64,7 +63,7 @@ package net.wg.gui.prebattle.company
             this.listRefreshData = null;
          }
       }
-
+      
       override protected function configUI() : void {
          focusIndicator = this.emtyFocusIndicator;
          toggle = true;
@@ -75,7 +74,7 @@ package net.wg.gui.prebattle.company
          constraints.addElement(this.mainTextField.name,this.mainTextField,Constraints.ALL);
          this.addEventListener(ButtonEvent.CLICK,this.clickHandler);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (data))
@@ -83,7 +82,7 @@ package net.wg.gui.prebattle.company
             this.afterSetData();
          }
       }
-
+      
       private function afterSetData() : void {
          this.pCountField.text = data.playersCount;
          this.divisionField.text = data.division;
@@ -91,7 +90,7 @@ package net.wg.gui.prebattle.company
          App.utils.commons.formatPlayerName(this.mainTextField,App.utils.commons.getUserProps(data.creatorName,data.creatorClan,data.creatorRegion,data.creatorIgrType));
          this.updateTextFieldWidth();
       }
-
+      
       private function cutText(param1:TextField, param2:String) : void {
          var _loc3_:String = null;
          var _loc4_:* = 0;
@@ -105,7 +104,7 @@ package net.wg.gui.prebattle.company
             param1.text = _loc3_;
          }
       }
-
+      
       override public function setData(param1:Object) : void {
          if(param1 == null)
          {
@@ -126,8 +125,7 @@ package net.wg.gui.prebattle.company
                   {
                      "label":"",
                      "color":null
-                  }
-               );
+                  });
             }
             this.dd.dataProvider = new DataProvider(param1.players);
          }
@@ -138,17 +136,15 @@ package net.wg.gui.prebattle.company
                this.dd.open();
             }
          }
-         else
+         else if(this.dd.isOpen())
          {
-            if(this.dd.isOpen())
-            {
-               this.dd.close();
-            }
+            this.dd.close();
          }
+         
          this.afterSetData();
          invalidate(InvalidationType.DATA);
       }
-
+      
       private function clickHandler(param1:ButtonEvent) : void {
          if(param1.isKeyboard)
          {
@@ -162,43 +158,39 @@ package net.wg.gui.prebattle.company
             {
                this.dd.close();
             }
-            else
+            else if(selected)
             {
-               if(selected)
-               {
-                  this.dd.open();
-               }
+               this.dd.open();
             }
+            
+         }
+         else if(this.dd.isOpen())
+         {
+            this.dropDownState = -1;
          }
          else
          {
-            if(this.dd.isOpen())
-            {
-               this.dropDownState = -1;
-            }
-            else
-            {
-               this.dropDownState = 1;
-            }
+            this.dropDownState = 1;
          }
+         
       }
-
+      
       private function dispatchIsSelectedItem(param1:Boolean) : void {
          var _loc2_:CompanyEvent = new CompanyEvent(CompanyEvent.SELECTED_ITEM,true);
          _loc2_.isSelected = param1;
          _loc2_.prbID = data.prbID;
          dispatchEvent(_loc2_);
       }
-
+      
       private function isPlayersData() : Boolean {
          return (data.hasOwnProperty("players")) && !(data.players == null);
       }
-
+      
       private function updateTextFieldWidth() : void {
          this.divisionField.x = Math.round(this.mainTextField.x + this.mainTextField.textWidth + 12);
          this.divisionField.width = Math.round(this.pCountField.x - this.divisionField.x - 8);
       }
-
+      
       override public function set selected(param1:Boolean) : void {
          if(!param1 && (this.dd.isOpen()))
          {
@@ -206,25 +198,25 @@ package net.wg.gui.prebattle.company
          }
          super.selected = param1;
       }
-
+      
       public function refreshPopulateData(param1:Function) : void {
          this.listRefreshData = param1;
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          App.toolTipMgr.show(App.utils.commons.getFullPlayerName(App.utils.commons.getUserProps(data.creatorName,data.creatorClan,data.creatorRegion,data.creatorIgrType)));
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          App.toolTipMgr.hide();
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
          this.pressEvent = param1;
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          if(this.pressEvent)
          {
@@ -233,5 +225,4 @@ package net.wg.gui.prebattle.company
          super.handleMouseRelease(param1);
       }
    }
-
 }

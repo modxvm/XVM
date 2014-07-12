@@ -3,23 +3,22 @@ package net.wg.gui.lobby.vehicleInfo
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import flash.display.InteractiveObject;
-
-
+   
    public class VehicleInfoCrew extends UIComponent implements IViewStackContent
    {
-          
+      
       public function VehicleInfoCrew() {
          super();
       }
-
+      
       private var _data:Array;
-
+      
       private var yOffset:Number = 19;
-
+      
       private var startY:Number = 10;
-
+      
       private var startX:Number = 10;
-
+      
       public function update(param1:Object) : void {
          var _loc3_:CrewBlock = null;
          this._data = param1 as Array;
@@ -34,7 +33,7 @@ package net.wg.gui.lobby.vehicleInfo
             _loc2_++;
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          while(this.numChildren > 0)
@@ -42,14 +41,17 @@ package net.wg.gui.lobby.vehicleInfo
             this.removeChildAt(0);
          }
       }
-
+      
       override public function toString() : String {
          return "[WG VehicleInfoCrew " + name + "]";
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

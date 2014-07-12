@@ -2,19 +2,18 @@ package net.wg.gui.components.controls.achievements
 {
    import net.wg.gui.components.controls.ProgressBar;
    import flash.display.MovieClip;
-
-
+   
    public class AchievementProgressBar extends ProgressBar
    {
-          
+      
       public function AchievementProgressBar() {
          super();
       }
-
+      
       public var mcMask:MovieClip;
-
+      
       public var dot:MovieClip;
-
+      
       override protected function applyDataChanges() : void {
          super.applyDataChanges();
          var _loc1_:Number = (value - minimum) / (maximum - minimum);
@@ -32,5 +31,4 @@ package net.wg.gui.components.controls.achievements
          }
       }
    }
-
 }

@@ -1,11 +1,10 @@
 package net.wg.gui.lobby.hangar
 {
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-
-
+   
    public class ParamsListener extends Object implements IDisposable
    {
-          
+      
       public function ParamsListener() {
          this.vehicleGun = [];
          this.vehicleTurret = [];
@@ -21,19 +20,19 @@ package net.wg.gui.lobby.hangar
          this.vehicleRadio = ["weight","radioDistance"];
          this.empty = [];
       }
-
+      
       private var vehicleGun:Array;
-
+      
       private var vehicleTurret:Array;
-
+      
       private var vehicleEngine:Array;
-
+      
       private var vehicleChassis:Array;
-
+      
       private var vehicleRadio:Array;
-
+      
       private var empty:Array;
-
+      
       public function getParams(param1:String) : Array {
          switch(param1)
          {
@@ -53,7 +52,7 @@ package net.wg.gui.lobby.hangar
                return this.empty;
          }
       }
-
+      
       public function dispose() : void {
          this.vehicleGun.splice(0,this.vehicleGun.length);
          this.vehicleGun = null;
@@ -67,5 +66,4 @@ package net.wg.gui.lobby.hangar
          this.empty = null;
       }
    }
-
 }

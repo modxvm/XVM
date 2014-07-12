@@ -5,38 +5,37 @@ package net.wg.gui.lobby.store.inventory
    import net.wg.data.constants.Linkages;
    import net.wg.gui.lobby.store.StoreEvent;
    import net.wg.infrastructure.interfaces.IStoreMenuView;
-
-
+   
    public class Inventory extends InventoryMeta implements IInventoryMeta
    {
-          
+      
       public function Inventory() {
          super();
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          form.storeTable.setModuleRendererLinkage(Linkages.INVENTORY_MODULE_ITEM_RENDERER);
          form.storeTable.setVehicleRendererLinkage(Linkages.INVENTORY_VEHICLE_ITEM_RENDERER);
          form.storeTable.addEventListener(StoreEvent.SELL,this.onSellItemHandler);
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          form.storeTable.removeEventListener(StoreEvent.SELL,this.onSellItemHandler);
       }
-
+      
       override protected function onMenuChangeType() : void {
          var _loc1_:IStoreMenuView = null;
          if(!initializing)
          {
             _loc1_ = getCurrentView();
             assertNotNull(_loc1_,"currentView");
-            _loc1_.setSubFilterData(form.nationFilter.nation.selectedIndex-1,subFilterData);
+            _loc1_.setSubFilterData(form.nationFilter.nation.selectedIndex - 1,subFilterData);
          }
          super.onMenuChangeType();
       }
-
+      
       override protected function onMenuChange() : void {
          if(!initializing)
          {
@@ -44,11 +43,11 @@ package net.wg.gui.lobby.store.inventory
          }
          super.onMenuChange();
       }
-
+      
       override protected function getLocalizator() : Function {
          return MENU.inventory_menu;
       }
-
+      
       override protected function onViewNeedUpdate(param1:IStoreMenuView, param2:String) : void {
          super.onViewNeedUpdate(param1,param2);
          if(!initializing)
@@ -58,11 +57,10 @@ package net.wg.gui.lobby.store.inventory
          param1.update(getViewData(param2));
          form.storeTable.updateHeaderCountTitle(MENU.shop_table_header_count(param1.fittingType));
       }
-
+      
       private function onSellItemHandler(param1:StoreEvent) : void {
          sellItemS(param1.data);
          param1.stopImmediatePropagation();
       }
    }
-
 }

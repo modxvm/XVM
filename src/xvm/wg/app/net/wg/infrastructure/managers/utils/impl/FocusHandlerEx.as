@@ -13,27 +13,26 @@ package net.wg.infrastructure.managers.utils.impl
    import net.wg.data.constants.Errors;
    import net.wg.infrastructure.interfaces.IAbstractWrapperView;
    import net.wg.infrastructure.interfaces.IWindow;
-
-
+   
    public class FocusHandlerEx extends Object implements IFocusHandler
    {
-          
+      
       public function FocusHandlerEx() {
          super();
          this._focusHandler = FocusHandler.getInstance();
       }
-
+      
       private var _focusHandler:FocusHandler = null;
-
+      
       public function getFocus(param1:uint) : InteractiveObject {
          return this._focusHandler.getFocus(param1);
       }
-
-      public function setFocus(param1:InteractiveObject, param2:uint=0, param3:Boolean=false) : void {
+      
+      public function setFocus(param1:InteractiveObject, param2:uint = 0, param3:Boolean = false) : void {
          this.assertIfParentHasNoModalFocus(param1);
          this._focusHandler.setFocus(param1,param2,param3);
       }
-
+      
       public function setModalFocus(param1:IManagedContent) : void {
          if(param1 != null)
          {
@@ -45,34 +44,34 @@ package net.wg.infrastructure.managers.utils.impl
             this.setFocus(null);
          }
       }
-
+      
       public function getModalFocus() : IView {
          var _loc1_:Sprite = FocusManager.getModalClip();
          if(_loc1_ != null)
          {
-            App.utils.asserter.assert(_loc1_  is  IManagedContent,"modal focus must be on ManagedContent only!",InfrastructureException);
+            App.utils.asserter.assert(_loc1_ is IManagedContent,"modal focus must be on ManagedContent only!",InfrastructureException);
             return IManagedContent(_loc1_).sourceView;
          }
          return null;
       }
-
+      
       public function hasModalFocus(param1:IView) : Boolean {
          return this.getModalFocus() == param1;
       }
-
+      
       public function input(param1:InputDetails) : void {
          this._focusHandler.input(param1);
       }
-
+      
       public function dispose() : void {
          this._focusHandler.setFocus(null);
          this._focusHandler = null;
       }
-
+      
       public function set stage(param1:Stage) : void {
          this._focusHandler.stage = param1;
       }
-
+      
       private function assertIfParentHasNoModalFocus(param1:InteractiveObject) : void {
          var _loc3_:* = false;
          var _loc4_:IManagedContent = null;
@@ -85,11 +84,11 @@ package net.wg.infrastructure.managers.utils.impl
             _loc4_ = null;
             while(_loc2_ != null)
             {
-               if(_loc2_  is  IAbstractWrapperView)
+               if(_loc2_ is IAbstractWrapperView)
                {
                   _loc4_ = IAbstractWrapperView(_loc2_).wrapper;
                }
-               if(_loc2_  is  IWindow)
+               if(_loc2_ is IWindow)
                {
                   _loc4_ = IWindow(_loc2_);
                }
@@ -109,5 +108,4 @@ package net.wg.infrastructure.managers.utils.impl
          }
       }
    }
-
 }

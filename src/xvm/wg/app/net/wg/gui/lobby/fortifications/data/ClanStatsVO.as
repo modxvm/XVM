@@ -1,39 +1,38 @@
 package net.wg.gui.lobby.fortifications.data
 {
    import net.wg.data.daapi.base.DAAPIDataClass;
-
-
+   
    public class ClanStatsVO extends DAAPIDataClass
    {
-          
+      
       public function ClanStatsVO(param1:Object) {
          this.sortieBattlesStats = [];
          this.sortieDefresStats = [];
          super(param1);
       }
-
+      
       private static const FIELD_SORTIE_BATTLES_COUNT:String = "sortieBattlesCount";
-
+      
       private static const FIELD_SORTIE_WINS:String = "sortieWins";
-
+      
       private static const FIELD_SORTIE_AVG_DEFRES:String = "sortieAvgDefres";
-
+      
       private static const FIELD_SORTIE_BATTLES_STATS:String = "sortieBattlesStats";
-
+      
       private static const FIELD_SORTIE_DEFRES_STATS:String = "sortieDefresStats";
-
+      
       public var clanName:String = "";
-
+      
       public var sortieBattlesCount:ClanStatItemVO;
-
+      
       public var sortieWins:ClanStatItemVO;
-
+      
       public var sortieAvgDefres:ClanStatItemVO;
-
+      
       public var sortieBattlesStats:Array;
-
+      
       public var sortieDefresStats:Array;
-
+      
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          var _loc3_:ClanStatItemVO = null;
          var _loc4_:Array = null;
@@ -49,7 +48,7 @@ package net.wg.gui.lobby.fortifications.data
             case FIELD_SORTIE_BATTLES_STATS:
             case FIELD_SORTIE_DEFRES_STATS:
                _loc4_ = param2 as Array;
-               for each (_loc5_ in _loc4_)
+               for each(_loc5_ in _loc4_)
                {
                   (this[param1] as Array).push(new ClanStatItemVO(_loc5_));
                }
@@ -58,7 +57,7 @@ package net.wg.gui.lobby.fortifications.data
                return true;
          }
       }
-
+      
       override protected function onDispose() : void {
          var _loc2_:ClanStatItemVO = null;
          var _loc3_:Array = null;
@@ -78,11 +77,11 @@ package net.wg.gui.lobby.fortifications.data
             this.sortieAvgDefres = null;
          }
          var _loc1_:Array = [this.sortieBattlesStats,this.sortieDefresStats];
-         for each (_loc3_ in _loc1_)
+         for each(_loc3_ in _loc1_)
          {
             if(_loc3_)
             {
-               for each (_loc2_ in _loc3_)
+               for each(_loc2_ in _loc3_)
                {
                   if(_loc2_)
                   {
@@ -97,5 +96,4 @@ package net.wg.gui.lobby.fortifications.data
          super.onDispose();
       }
    }
-
 }

@@ -5,58 +5,57 @@ package net.wg.gui.components.advanced
    import flash.display.Sprite;
    import flash.text.TextFieldAutoSize;
    import flash.geom.Rectangle;
-
-
+   
    public class FieldSet extends UIComponent
    {
-          
+      
       public function FieldSet() {
          super();
       }
-
+      
       public var textField:TextField;
-
+      
       public var bg:Sprite;
-
+      
       public var line:Sprite;
-
+      
       private var startScale:Object;
-
+      
       private var _margin:Number = 8;
-
+      
       private var _showLabel:Boolean = true;
-
+      
       override protected function onDispose() : void {
          var _loc1_:String = null;
          this.textField = null;
          this.bg = null;
          this.line = null;
-         for (_loc1_ in this.startScale)
+         for(_loc1_ in this.startScale)
          {
-            delete this.startScale[[_loc1_]];
+            delete this.startScale[_loc1_];
          }
          this.startScale = null;
          super.onDispose();
       }
-
+      
       override public function toString() : String {
          return "[WG FieldSet " + name + "]";
       }
-
+      
       public function get label() : String {
          return this.textField.text;
       }
-
+      
       public function set label(param1:String) : void {
          this.textField.text = param1;
          this.textField.autoSize = TextFieldAutoSize.LEFT;
          invalidate();
       }
-
+      
       public function get showLabel() : Boolean {
          return this._showLabel;
       }
-
+      
       public function set showLabel(param1:Boolean) : void {
          if(this._showLabel == param1)
          {
@@ -66,11 +65,11 @@ package net.wg.gui.components.advanced
          this.textField.visible = this._showLabel;
          invalidate();
       }
-
+      
       public function get margin() : Number {
          return this._margin;
       }
-
+      
       public function set margin(param1:Number) : void {
          if(this._margin == param1)
          {
@@ -79,15 +78,15 @@ package net.wg.gui.components.advanced
          this._margin = param1;
          invalidate();
       }
-
+      
       override protected function preInitialize() : void {
          super.preInitialize();
       }
-
+      
       override protected function initialize() : void {
          super.initialize();
       }
-
+      
       override protected function configUI() : void {
          this.startScale = new Object();
          this.startScale.sX = this.scaleX;
@@ -103,7 +102,7 @@ package net.wg.gui.components.advanced
          super.configUI();
          invalidateSize();
       }
-
+      
       override protected function draw() : void {
          if(this.showLabel)
          {
@@ -116,5 +115,4 @@ package net.wg.gui.components.advanced
          this.line.width = this.bg.width - 10 - this.line.x + 1;
       }
    }
-
 }

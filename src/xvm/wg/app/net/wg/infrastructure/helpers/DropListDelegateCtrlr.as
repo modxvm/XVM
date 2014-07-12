@@ -1,7 +1,6 @@
 package net.wg.infrastructure.helpers
 {
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import __AS3__.vec.Vector;
    import net.wg.infrastructure.interfaces.IDropListDelegate;
    import flash.display.InteractiveObject;
    import flash.events.IEventDispatcher;
@@ -10,11 +9,10 @@ package net.wg.infrastructure.helpers
    import net.wg.infrastructure.exceptions.ArgumentException;
    import net.wg.data.constants.Errors;
    import net.wg.data.constants.Cursors;
-
-
+   
    public class DropListDelegateCtrlr extends Object implements IDisposable
    {
-          
+      
       public function DropListDelegateCtrlr(param1:Vector.<InteractiveObject>, param2:Class, param3:String) {
          var _loc4_:InteractiveObject = null;
          var _loc5_:IDropListDelegate = null;
@@ -23,7 +21,7 @@ package net.wg.infrastructure.helpers
          {
             this.assertLinkage(param3);
             this._delegates = new Vector.<IDropListDelegate>();
-            for each (_loc4_ in param1)
+            for each(_loc4_ in param1)
             {
                _loc5_ = new param2(_loc4_,param3);
                _loc5_.setPairedDropLists(this.getPairedElementsFromVector(_loc4_,param1));
@@ -35,19 +33,19 @@ package net.wg.infrastructure.helpers
             }
          }
       }
-
+      
       protected var _delegates:Vector.<IDropListDelegate> = null;
-
+      
       private var _currentDroppedItem:InteractiveObject = null;
-
+      
       public final function dispose() : void {
          this.onDispose();
       }
-
+      
       protected function onDispose() : void {
          var _loc1_:IDropListDelegate = null;
          var _loc2_:IEventDispatcher = null;
-         for each (_loc1_ in this._delegates)
+         for each(_loc1_ in this._delegates)
          {
             _loc2_ = _loc1_.getHitArea();
             _loc2_.removeEventListener(DropEvent.BEFORE_DROP,this.onControllerBeforeDropHandler);
@@ -60,15 +58,14 @@ package net.wg.infrastructure.helpers
          this._delegates.splice(0,this._delegates.length);
          this._delegates = null;
       }
-
+      
       protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void {
-          
       }
-
+      
       protected final function getDelegates() : Vector.<IDropListDelegate> {
          return this._delegates;
       }
-
+      
       protected function getPairedElementsFromVector(param1:InteractiveObject, param2:Vector.<InteractiveObject>) : Vector.<InteractiveObject> {
          var checker:Function = null;
          var pairsFor:InteractiveObject = param1;
@@ -79,31 +76,29 @@ package net.wg.infrastructure.helpers
          };
          return vector.filter(checker,null);
       }
-
+      
       private function assertLinkage(param1:String) : void {
          var _loc2_:* = "dropElementLinkage must has correct linkage value!";
          App.utils.asserter.assert(!(param1 == Values.EMPTY_STR),_loc2_,ArgumentException);
          this.assertNotNull(param1,"linkage");
       }
-
+      
       private function assertNotNull(param1:Object, param2:String) : void {
          App.utils.asserter.assertNotNull(param1,param2 + Errors.CANT_EMPTY);
       }
-
+      
       private function onControllerBeforeDropHandler(param1:DropEvent) : void {
          this._currentDroppedItem = param1.draggedItem;
          this.onHighlightHitAreas(true,this._currentDroppedItem);
       }
-
+      
       private function onControllerAfterDropHandler(param1:DropEvent) : void {
          this.assertNotNull(this._currentDroppedItem,"_currentDroppedItem");
          this.onHighlightHitAreas(false,this._currentDroppedItem);
          this._currentDroppedItem = null;
       }
-
+      
       private function onControllerStartDropHandler(param1:DropEvent) : void {
-          
       }
    }
-
 }

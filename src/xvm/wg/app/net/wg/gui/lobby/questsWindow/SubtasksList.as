@@ -1,54 +1,52 @@
 package net.wg.gui.lobby.questsWindow
 {
    import scaleform.clik.core.UIComponent;
-   import __AS3__.vec.Vector;
    import net.wg.infrastructure.interfaces.ISubtaskComponent;
    import scaleform.clik.constants.InvalidationType;
    import flash.events.Event;
    import flash.display.DisplayObject;
-
-
+   
    public class SubtasksList extends UIComponent
    {
-          
+      
       public function SubtasksList() {
          this.data = [];
          super();
          this._tasks = new Vector.<ISubtaskComponent>();
          this._availableQuests = new Vector.<String>();
       }
-
+      
       private static const DISABLED_QUESTS:String = "disabledQuests";
-
+      
       private var data:Array;
-
+      
       private var _tasks:Vector.<ISubtaskComponent> = null;
-
+      
       private var _availableQuests:Vector.<String> = null;
-
+      
       private var _linkage:String = "SubtaskComponent_UI";
-
+      
       private var _needCheck:Boolean = false;
-
+      
       public function get linkage() : String {
          return this._linkage;
       }
-
+      
       public function set linkage(param1:String) : void {
          this._linkage = param1;
       }
-
+      
       public function setData(param1:Array) : void {
          this.data = param1;
          invalidateData();
       }
-
+      
       public function checkDisabledQuests(param1:Vector.<String>) : void {
          this._availableQuests = param1;
          this.needCheck = true;
          invalidate(DISABLED_QUESTS);
       }
-
+      
       override protected function onDispose() : void {
          if(this._tasks)
          {
@@ -67,7 +65,7 @@ package net.wg.gui.lobby.questsWindow
          }
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -81,31 +79,31 @@ package net.wg.gui.lobby.questsWindow
             this.disableInvalidQuests();
          }
       }
-
+      
       private function disableInvalidQuests() : void {
          var _loc1_:ISubtaskComponent = null;
          if(this._needCheck)
          {
-            for each (_loc1_ in this._tasks)
+            for each(_loc1_ in this._tasks)
             {
                _loc1_.disableLinkBtns(this._availableQuests);
             }
          }
       }
-
+      
       private function layoutTasks() : void {
          var _loc1_:* = 1;
          while(_loc1_ < this._tasks.length)
          {
-            this._tasks[_loc1_].y = this._tasks[_loc1_-1].y + this._tasks[_loc1_-1].height;
+            this._tasks[_loc1_].y = this._tasks[_loc1_ - 1].y + this._tasks[_loc1_ - 1].height;
             _loc1_++;
          }
-         var _loc2_:ISubtaskComponent = this._tasks.length?this._tasks[this._tasks.length-1]:null;
+         var _loc2_:ISubtaskComponent = this._tasks.length?this._tasks[this._tasks.length - 1]:null;
          var _loc3_:Number = _loc2_?_loc2_.y + _loc2_.height:0;
          setSize(this.width,_loc3_);
          dispatchEvent(new Event(Event.RESIZE));
       }
-
+      
       private function clearTasks() : void {
          var _loc1_:* = 0;
          while(_loc1_ < this._tasks.length)
@@ -116,7 +114,7 @@ package net.wg.gui.lobby.questsWindow
          }
          this._tasks.splice(0,this._tasks.length);
       }
-
+      
       private function createTasks() : void {
          var _loc1_:* = 0;
          var _loc2_:* = 0;
@@ -139,18 +137,16 @@ package net.wg.gui.lobby.questsWindow
                   _loc4_++;
                }
             }
-            else
+            else if(this._tasks.length > _loc1_)
             {
-               if(this._tasks.length > _loc1_)
+               while(this._tasks.length > _loc1_)
                {
-                  while(this._tasks.length > _loc1_)
-                  {
-                     _loc6_ = this._tasks.pop();
-                     _loc6_.dispose();
-                     removeChild(DisplayObject(_loc6_));
-                  }
+                  _loc6_ = this._tasks.pop();
+                  _loc6_.dispose();
+                  removeChild(DisplayObject(_loc6_));
                }
             }
+            
             _loc2_ = 0;
             while(_loc2_ < this.data.length)
             {
@@ -164,14 +160,13 @@ package net.wg.gui.lobby.questsWindow
             this.clearTasks();
          }
       }
-
+      
       public function get needCheck() : Boolean {
          return this._needCheck;
       }
-
+      
       public function set needCheck(param1:Boolean) : void {
          this._needCheck = param1;
       }
    }
-
 }

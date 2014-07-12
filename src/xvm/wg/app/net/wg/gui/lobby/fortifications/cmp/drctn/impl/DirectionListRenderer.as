@@ -9,35 +9,34 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.lobby.fortifications.events.DirectionEvent;
-
-
+   
    public class DirectionListRenderer extends UIComponent
    {
-          
+      
       public function DirectionListRenderer() {
          super();
       }
-
+      
       public var textField:TextField;
-
+      
       public var closeBtn:SoundButtonEx;
-
+      
       public var roadPic:Sprite;
-
+      
       public var building1:BuildingThumbnail;
-
+      
       public var building2:BuildingThumbnail;
-
+      
       public var statusTF:TextField;
-
+      
       private var model:DirectionVO;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.closeBtn.label = FORTIFICATIONS.FORTDIRECTIONSWINDOW_BUTTON_CLOSEDIRECTION;
          this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onCloseClick);
       }
-
+      
       override protected function onDispose() : void {
          this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.onCloseClick);
          this.closeBtn.dispose();
@@ -54,7 +53,7 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
          }
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -94,16 +93,16 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             }
          }
       }
-
+      
       public function setData(param1:DirectionVO) : void {
          this.model = param1;
          invalidateData();
       }
-
+      
       private function onCloseClick(param1:ButtonEvent) : void {
          dispatchEvent(new DirectionEvent(DirectionEvent.CLOSE_DIRECTION,this.model.uid));
       }
-
+      
       private function setControlsVisible(param1:Boolean) : void {
          this.textField.visible = param1;
          this.closeBtn.visible = param1;
@@ -112,5 +111,4 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
          this.building2.visible = param1;
       }
    }
-
 }

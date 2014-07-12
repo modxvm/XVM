@@ -6,15 +6,14 @@ package net.wg.gui.lobby.profile.components
    import scaleform.clik.constants.DirectionMode;
    import scaleform.clik.interfaces.IListItemRenderer;
    import flash.events.Event;
-
-
+   
    public class ResizableTileList extends TileList
    {
-          
+      
       public function ResizableTileList() {
          super();
       }
-
+      
       override public function set dataProvider(param1:IDataProvider) : void {
          if(_dataProvider == param1)
          {
@@ -23,7 +22,7 @@ package net.wg.gui.lobby.profile.components
          super.dataProvider = param1;
          invalidate();
       }
-
+      
       override protected function drawScrollBar() : void {
          if(!_autoScrollBar)
          {
@@ -47,7 +46,7 @@ package net.wg.gui.lobby.profile.components
          }
          _scrollBar.validateNow();
       }
-
+      
       override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
          var _loc5_:IListItemRenderer = null;
          var _loc3_:Boolean = (isNaN(_rowHeight)) && (isNaN(_autoRowHeight));
@@ -70,17 +69,16 @@ package net.wg.gui.lobby.profile.components
          _totalRows = Math.ceil(_totalRenderers / _totalColumns);
          return _totalRenderers;
       }
-
+      
       override protected function drawLayout() : void {
          var _loc1_:IListItemRenderer = null;
          super.drawLayout();
          if((_renderers) && _renderers.length > 0)
          {
-            _loc1_ = getRendererAt(_renderers.length-1);
+            _loc1_ = getRendererAt(_renderers.length - 1);
             _height = _loc1_.height + _loc1_.y + margin + paddingBottom;
          }
          dispatchEvent(new Event(Event.RESIZE,true));
       }
    }
-
 }

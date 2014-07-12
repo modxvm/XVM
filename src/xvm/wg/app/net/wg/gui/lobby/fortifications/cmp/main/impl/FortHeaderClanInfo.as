@@ -8,31 +8,30 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
    import net.wg.gui.lobby.fortifications.data.FortificationVO;
    import flash.events.MouseEvent;
    import net.wg.data.constants.Tooltips;
-
-
+   
    public class FortHeaderClanInfo extends UIComponentEx implements IFortHeaderClanInfo
    {
-          
+      
       public function FortHeaderClanInfo() {
          super();
          this.toolTipArea.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
          this.toolTipArea.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
       }
-
+      
       public var levelText:TextField = null;
-
+      
       public var clanName:TextField = null;
-
+      
       public var clanEmblem:ClanEmblem = null;
-
+      
       public var toolTipArea:MovieClip = null;
-
+      
       public function applyClanData(param1:FortificationVO) : void {
          this.clanName.htmlText = param1.clanName;
          this.clanEmblem.setImage(param1.clanIconId);
          this.levelText.text = param1.levelTitle;
       }
-
+      
       override protected function onDispose() : void {
          this.levelText = null;
          this.toolTipArea.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
@@ -43,14 +42,13 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
          this.clanEmblem = null;
          super.onDispose();
       }
-
+      
       private function onRollOverHandler(param1:MouseEvent) : void {
          App.toolTipMgr.showSpecial(Tooltips.CLAN_INFO,null);
       }
-
+      
       private function onRollOutHandler(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
    }
-
 }

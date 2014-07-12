@@ -1,6 +1,6 @@
 package net.wg.gui.lobby.customization
 {
-   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.base.UIComponentEx;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import flash.text.TextField;
    import net.wg.gui.components.controls.TileList;
@@ -10,48 +10,47 @@ package net.wg.gui.lobby.customization
    import scaleform.clik.events.ListEvent;
    import flash.events.Event;
    import flash.display.InteractiveObject;
-
-
-   public class BaseTimedCustomizationGroupView extends UIComponent implements IViewStackContent
+   
+   public class BaseTimedCustomizationGroupView extends UIComponentEx implements IViewStackContent
    {
-          
+      
       public function BaseTimedCustomizationGroupView() {
          super();
       }
-
+      
       public var timeSectionLabel:TextField = null;
-
+      
       public var list:TileList = null;
-
+      
       public var rentalPackageList:ScrollingListAutoScroll = null;
-
+      
       public var itemsDP:DAAPIItemsDataProvider = null;
-
+      
       public var rentalPackageDP:RentalPackageDAAPIDataProvider = null;
-
+      
       public var timeLabel:String = null;
-
+      
       private var _selectedItemIdx:int = -1;
-
+      
       private var _selectedPriceIdx:int = -1;
-
+      
       public function update(param1:Object) : void {
          DebugUtils.LOG_DEBUG("BaseTimedCustomizationGroupView.update",param1);
       }
-
+      
       override protected function onDispose() : void {
          this.clearData();
          super.onDispose();
       }
-
-      public function invalidateListData(param1:Boolean=false) : void {
+      
+      public function invalidateListData(param1:Boolean = false) : void {
          if((this.list.initialized) && !param1)
          {
             this.list.scrollPosition = 0;
          }
          this.itemsDP.invalidateRemote(param1);
       }
-
+      
       public function setListSelectedIndex(param1:String, param2:Boolean, param3:Object) : void {
          if(initialized)
          {
@@ -60,42 +59,40 @@ package net.wg.gui.lobby.customization
             {
                this.rentalPackageList.selectedIndex = param3.priceIndex;
             }
-            else
+            else if(param2)
             {
-               if(param2)
-               {
-                  this.rentalPackageList.selectedIndex = 0;
-               }
+               this.rentalPackageList.selectedIndex = 0;
             }
+            
             this.rentalPackageList.enabled = !param2;
             this.list.selectedIndex = this.selectedItemIdx;
          }
       }
-
+      
       public function get selectedGroupName() : String {
          return this.itemsDP.groupName;
       }
-
+      
       public function set selectedGroupName(param1:String) : void {
          this.itemsDP.groupName = param1;
       }
-
+      
       public function get selectedItemIdx() : int {
          return this._selectedItemIdx;
       }
-
+      
       public function set selectedItemIdx(param1:int) : void {
          this._selectedItemIdx = param1;
       }
-
+      
       public function get selectedPriceIdx() : int {
          return this._selectedPriceIdx;
       }
-
+      
       public function set selectedPriceIdx(param1:int) : void {
          this._selectedPriceIdx = param1;
       }
-
+      
       public function initData() : void {
          if(this.rentalPackageList != null)
          {
@@ -116,7 +113,7 @@ package net.wg.gui.lobby.customization
          }
          this.itemsDP.addEventListener(Event.CHANGE,this.handleItemDataChanged);
       }
-
+      
       public function clearData() : void {
          this.selectedItemIdx = -1;
          this.selectedPriceIdx = -1;
@@ -141,8 +138,8 @@ package net.wg.gui.lobby.customization
          this.itemsDP = null;
          this.rentalPackageDP = null;
       }
-
-      protected function handleItemDataChanged(param1:Event=null) : void {
+      
+      protected function handleItemDataChanged(param1:Event = null) : void {
          var _loc2_:Object = null;
          var _loc3_:CustomizationEvent = null;
          if(this.selectedItemIdx > -1)
@@ -157,7 +154,7 @@ package net.wg.gui.lobby.customization
             }
          }
       }
-
+      
       protected function handlePeriodDaysItemChange(param1:ListEvent) : void {
          this.selectedPriceIdx = param1.index;
          if(param1.index > -1)
@@ -165,15 +162,18 @@ package net.wg.gui.lobby.customization
             this.rentalPackageDP.setSelectedPackageIndex(param1.index);
          }
       }
-
+      
       protected function handleItemChange(param1:ListEvent) : void {
          this.selectedItemIdx = param1.index;
          this.handleItemDataChanged();
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

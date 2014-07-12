@@ -8,15 +8,14 @@ package net.wg.gui.lobby.profile.pages.technique
    import flash.display.DisplayObject;
    import net.wg.gui.lobby.profile.pages.technique.data.TechniqueListVehicleVO;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class TechniqueRenderer extends SoundListItemRenderer
    {
-          
+      
       public function TechniqueRenderer() {
          super();
       }
-
+      
       private static function getSmallMasteryIconPath(param1:int) : String {
          if(param1 > 0)
          {
@@ -24,7 +23,7 @@ package net.wg.gui.lobby.profile.pages.technique
          }
          return null;
       }
-
+      
       private static function getString(param1:Number) : String {
          if(App.utils)
          {
@@ -32,29 +31,29 @@ package net.wg.gui.lobby.profile.pages.technique
          }
          return param1.toString();
       }
-
+      
       public var vehicleTF:TextField;
-
+      
       public var battlesTF:TextField;
-
+      
       public var winsTF:TextField;
-
+      
       public var avgExpTF:TextField;
-
+      
       public var nationIcon:UILoaderAlt;
-
+      
       public var typeIcon:UILoaderAlt;
-
+      
       public var tankSmallIcon:UILoaderAlt;
-
+      
       public var masteryIcon:TechMasteryIcon;
-
+      
       public var levelMC:MovieClip;
-
+      
       public var background:MovieClip;
-
+      
       public var hit:MovieClip;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.mouseChildren = true;
@@ -63,11 +62,11 @@ package net.wg.gui.lobby.profile.pages.technique
          buttonMode = true;
          hitArea = this.hit;
       }
-
+      
       override public function set mouseChildren(param1:Boolean) : void {
          super.mouseChildren = true;
       }
-
+      
       override public function setData(param1:Object) : void {
          if(_baseDisposed)
          {
@@ -76,7 +75,7 @@ package net.wg.gui.lobby.profile.pages.technique
          this.data = param1;
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = false;
          var _loc2_:DisplayObject = null;
@@ -136,5 +135,4 @@ package net.wg.gui.lobby.profile.pages.technique
          }
       }
    }
-
 }

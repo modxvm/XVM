@@ -12,22 +12,21 @@ package net.wg.gui.cyberSport
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
    import net.wg.gui.cyberSport.views.UnitView;
-
-
+   
    public class CyberSportMainWindow extends CyberSportMainWindowMeta implements ICyberSportMainWindowMeta
    {
-          
+      
       public function CyberSportMainWindow() {
          super();
          showWindowBg = false;
          canMinimize = true;
          visible = true;
       }
-
+      
       override protected function getWindowTitle() : String {
          return CYBERSPORT.WINDOW_TITLE;
       }
-
+      
       override protected function updateFocus() : void {
          var _loc1_:IChannelComponentHolder = getCurrentView() as IChannelComponentHolder;
          if((_loc1_) && (isChatFocusNeeded()))
@@ -35,33 +34,27 @@ package net.wg.gui.cyberSport
             setFocus(_loc1_.getChannelComponent().messageInput);
             resetChatFocusRequirement();
          }
+         else if(autoSearch.visible)
+         {
+            autoSearchUpdateFocus();
+         }
+         else if(getCurrentView() is UnitsListView)
+         {
+            setFocus((getCurrentView() as UnitsListView).rallyTable);
+         }
+         else if(getCurrentView() is IntroView)
+         {
+            setFocus((getCurrentView() as IntroView).autoMatchBtn);
+         }
          else
          {
-            if(autoSearch.visible)
-            {
-               autoSearchUpdateFocus();
-            }
-            else
-            {
-               if(getCurrentView()  is  UnitsListView)
-               {
-                  setFocus((getCurrentView() as UnitsListView).rallyTable);
-               }
-               else
-               {
-                  if(getCurrentView()  is  IntroView)
-                  {
-                     setFocus((getCurrentView() as IntroView).autoMatchBtn);
-                  }
-                  else
-                  {
-                     setFocus(lastFocusedElement);
-                  }
-               }
-            }
+            setFocus(lastFocusedElement);
          }
+         
+         
+         
       }
-
+      
       override protected function onViewLoadRequest(param1:RallyViewsEvent) : void {
          if(!param1.data)
          {
@@ -84,7 +77,7 @@ package net.wg.gui.cyberSport
                break;
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -97,31 +90,26 @@ package net.wg.gui.cyberSport
             {
                autoSearch.handleInput(param1);
             }
-            else
+            else if(canGoBackS())
             {
-               if(canGoBackS())
+               param1.handled = true;
+               if(getCurrentView() is UnitView && (UnitView(getCurrentView()).rosterTeamContext))
                {
-                  param1.handled = true;
-                  if(getCurrentView()  is  UnitView && (UnitView(getCurrentView()).rosterTeamContext))
-                  {
-                     UnitView(getCurrentView()).preInitFadeAnimationCancel();
-                  }
-                  else
-                  {
-                     onBackClickS();
-                  }
+                  UnitView(getCurrentView()).preInitFadeAnimationCancel();
                }
                else
                {
-                  if(window.getCloseBtn().enabled)
-                  {
-                     param1.handled = true;
-                     onWindowCloseS();
-                  }
+                  onBackClickS();
                }
             }
+            else if(window.getCloseBtn().enabled)
+            {
+               param1.handled = true;
+               onWindowCloseS();
+            }
+            
+            
          }
       }
    }
-
 }

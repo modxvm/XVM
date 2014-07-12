@@ -9,7 +9,6 @@ package net.wg.gui.lobby.techtree.nodes
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.lobby.techtree.TechTreeEvent;
    import net.wg.gui.utils.VehicleStateString;
-   import __AS3__.vec.Vector;
    import flash.display.DisplayObjectContainer;
    import net.wg.gui.lobby.techtree.MenuHandler;
    import net.wg.gui.lobby.techtree.interfaces.IRenderer;
@@ -18,34 +17,33 @@ package net.wg.gui.lobby.techtree.nodes
    import net.wg.gui.lobby.techtree.constants.TTSoundID;
    import net.wg.data.constants.Tooltips;
    import flash.events.MouseEvent;
-
-
+   
    public class ResearchRoot extends Renderer
    {
-          
+      
       public function ResearchRoot() {
          super();
       }
-
+      
       private var statusString:String = "";
-
+      
       public var vIconLoader:UILoaderAlt;
-
+      
       public var nameAndXp:NameAndXpField;
-
+      
       public var typeAndLevel:TypeAndLevelField;
-
+      
       public var statusField:TextField;
-
+      
       public var flag:MovieClip;
-
+      
       public var btnShowInHangar:SoundButtonEx;
-
+      
       public function setupEx(param1:String) : void {
          this.statusString = param1;
          invalidateData();
       }
-
+      
       override public function cleanUp() : void {
          if(this.btnShowInHangar != null)
          {
@@ -66,15 +64,15 @@ package net.wg.gui.lobby.techtree.nodes
          }
          super.cleanUp();
       }
-
+      
       override public function click2Info() : void {
          dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_VEHICLE_INFO,0,_index,_entityType));
       }
-
+      
       override public function isParentUnlocked(param1:Number) : Boolean {
          return (dataInited) && !(_valueObject.unlockProps == null) && (_valueObject.unlockProps.hasID(param1));
       }
-
+      
       override public function populateUI() : void {
          var _loc2_:String = null;
          var _loc1_:String = _container.getNation();
@@ -120,7 +118,7 @@ package net.wg.gui.lobby.techtree.nodes
          }
          super.populateUI();
       }
-
+      
       override protected function getMouseEnabledChildren() : Vector.<DisplayObjectContainer> {
          var _loc1_:Vector.<DisplayObjectContainer> = super.getMouseEnabledChildren();
          if(this.btnShowInHangar)
@@ -129,11 +127,11 @@ package net.wg.gui.lobby.techtree.nodes
          }
          return _loc1_;
       }
-
+      
       private function btnShowInHangarClickHandler(param1:ButtonEvent) : void {
          dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SELECT_IN_HANGAR,0,_index,_entityType));
       }
-
+      
       override public function showContextMenu() : void {
          if(button != null)
          {
@@ -141,7 +139,7 @@ package net.wg.gui.lobby.techtree.nodes
          }
          MenuHandler.getInstance().showResearchRootMenu(this);
       }
-
+      
       override public function getColorIdxEx(param1:IRenderer) : Number {
          var _loc2_:Number = ColorIndex.LOCKED;
          if(isUnlocked())
@@ -151,23 +149,21 @@ package net.wg.gui.lobby.techtree.nodes
                _loc2_ = ColorIndex.UNLOCKED;
             }
          }
-         else
+         else if(isNext2Unlock())
          {
-            if(isNext2Unlock())
+            if(param1 == null || (this.isParentUnlocked(param1.getID())))
             {
-               if(param1 == null || (this.isParentUnlocked(param1.getID())))
-               {
-                  _loc2_ = ColorIndex.NEXT2UNLOCK;
-               }
+               _loc2_ = ColorIndex.NEXT2UNLOCK;
             }
          }
+         
          return _loc2_;
       }
-
+      
       override public function toString() : String {
          return "[ResearchRoot " + index + ", " + name + "]";
       }
-
+      
       override protected function preInitialize() : void {
          super.preInitialize();
          _entityType = NodeEntityType.RESEARCH_ROOT;
@@ -175,11 +171,11 @@ package net.wg.gui.lobby.techtree.nodes
          _tooltipID = Tooltips.TECHTREE_VEHICLE;
          isDelegateEvents = true;
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          if(button != null)
@@ -187,7 +183,7 @@ package net.wg.gui.lobby.techtree.nodes
             button.startAnimation();
          }
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          if(button != null)
@@ -195,8 +191,8 @@ package net.wg.gui.lobby.techtree.nodes
             button.endAnimation(false);
          }
       }
-
-      override protected function handleClick(param1:uint=0) : void {
+      
+      override protected function handleClick(param1:uint = 0) : void {
          super.handleClick(param1);
          MenuHandler.getInstance().hideMenu();
          if(button != null)
@@ -206,5 +202,4 @@ package net.wg.gui.lobby.techtree.nodes
          dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_OPEN,0,_index,_entityType));
       }
    }
-
 }

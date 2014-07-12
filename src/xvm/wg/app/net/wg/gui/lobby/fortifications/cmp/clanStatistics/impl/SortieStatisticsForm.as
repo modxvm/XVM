@@ -5,40 +5,39 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
    import net.wg.gui.components.common.containers.GroupEx;
    import net.wg.gui.lobby.fortifications.data.ClanStatsVO;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class SortieStatisticsForm extends UIComponent
    {
-          
+      
       public function SortieStatisticsForm() {
          super();
       }
-
+      
       private static const STATS_GROUP_WIDTH:Number = 580;
-
+      
       private static const ICON_STATS_WIDTH_CORRECTION:Number = 3;
-
+      
       public var battlesField:FortStatisticsLDIT;
-
+      
       public var winsField:FortStatisticsLDIT;
-
+      
       public var avgDefresField:FortStatisticsLDIT;
-
+      
       public var battlesLabelTF:TextField;
-
+      
       public var battlesStatsGroup:GroupEx;
-
+      
       public var defresStatsGroup:GroupEx;
-
+      
       private var _model:ClanStatsVO;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.battlesLabelTF.text = FORTIFICATIONS.FORTCLANSTATISTICSWINDOW_SORTIE_BATTLESHEADER;
          this.battlesStatsGroup.width = STATS_GROUP_WIDTH;
          this.defresStatsGroup.width = STATS_GROUP_WIDTH + ICON_STATS_WIDTH_CORRECTION;
       }
-
+      
       override protected function onDispose() : void {
          this.battlesField.dispose();
          this.winsField.dispose();
@@ -52,7 +51,7 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
          this.defresStatsGroup = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this._model))
@@ -64,15 +63,14 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
             this.defresStatsGroup.dataProvider = this._model.sortieDefresStats;
          }
       }
-
+      
       public function get model() : ClanStatsVO {
          return this._model;
       }
-
+      
       public function set model(param1:ClanStatsVO) : void {
          this._model = param1;
          invalidateData();
       }
    }
-
 }

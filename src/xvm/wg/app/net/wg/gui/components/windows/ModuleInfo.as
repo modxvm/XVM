@@ -17,47 +17,46 @@ package net.wg.gui.components.windows
    import scaleform.clik.utils.Padding;
    import flash.display.DisplayObject;
    import scaleform.clik.core.UIComponent;
-
-
+   
    public class ModuleInfo extends ModuleInfoMeta implements IModuleInfoMeta
    {
-          
+      
       public function ModuleInfo() {
          super();
          this.addedChildren = [];
       }
-
+      
       private static const BOTTOM_PADDING:uint = 15;
-
+      
       private static const MIDDLE_PADDING:uint = 5;
-
+      
       protected static const TF_GUTTER:int = 4;
-
+      
       public var moduleIcon:ExtraModuleIcon;
-
+      
       public var moduleName:TextField;
-
+      
       public var moduleDescription:TextField;
-
+      
       public var moduleParams:ModuleParameters;
-
+      
       public var moduleEffects:ModuleEffects;
-
+      
       public var closeBottomBtn:SoundButtonEx;
-
+      
       private var addedChildren:Array;
-
+      
       private var _moduleInfo:Object;
-
+      
       public function get moduleInfo() : Object {
          return this._moduleInfo;
       }
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          setFocus(this.closeBottomBtn);
       }
-
+      
       public function set moduleInfo(param1:Object) : void {
          var _loc2_:String = null;
          var _loc3_:* = NaN;
@@ -129,7 +128,7 @@ package net.wg.gui.components.windows
             if(_loc5_ > 0)
             {
                _loc14_ = App.utils.classFactory;
-               for each (_loc13_ in this.moduleInfo.compatible)
+               for each(_loc13_ in this.moduleInfo.compatible)
                {
                   _loc15_ = _loc14_.getObject("ModuleCompatibilityMC") as MovieClip;
                   _loc15_.x = this.moduleParams.x;
@@ -165,11 +164,11 @@ package net.wg.gui.components.windows
             height = _loc4_ + this.closeBottomBtn.height + MIDDLE_PADDING;
          }
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          this.closeBottomBtn.addEventListener(ButtonEvent.CLICK,this.onClose);
@@ -178,15 +177,15 @@ package net.wg.gui.components.windows
          _loc1_.right = _loc1_.right + 10;
          window.contentPadding = _loc1_;
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:DisplayObject = null;
          this._moduleInfo = null;
          this.closeBottomBtn.removeEventListener(ButtonEvent.CLICK,this.onClose);
-         for each (_loc1_ in this.addedChildren)
+         for each(_loc1_ in this.addedChildren)
          {
             removeChild(_loc1_);
-            if(_loc1_  is  UIComponent)
+            if(_loc1_ is UIComponent)
             {
                (_loc1_ as UIComponent).dispose();
             }
@@ -195,15 +194,14 @@ package net.wg.gui.components.windows
          this.addedChildren = null;
          super.onDispose();
       }
-
+      
       private function onClose(param1:ButtonEvent) : void {
          onCancelClickS();
       }
-
+      
       public function as_setModuleInfo(param1:Object) : void {
          window.title = param1.windowTitle;
          this.moduleInfo = param1;
       }
    }
-
 }

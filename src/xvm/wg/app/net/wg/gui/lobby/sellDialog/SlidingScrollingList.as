@@ -3,7 +3,6 @@ package net.wg.gui.lobby.sellDialog
    import scaleform.clik.controls.ScrollingList;
    import flash.display.MovieClip;
    import flash.geom.Rectangle;
-   import __AS3__.vec.Vector;
    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
    import scaleform.clik.interfaces.IListItemRenderer;
    import flash.display.Sprite;
@@ -20,81 +19,80 @@ package net.wg.gui.lobby.sellDialog
    import scaleform.clik.interfaces.IScrollBar;
    import flash.utils.getDefinitionByName;
    import net.wg.gui.components.controls.DropdownMenu;
-
-
+   
    public class SlidingScrollingList extends ScrollingList
    {
-          
+      
       public function SlidingScrollingList() {
          super();
       }
-
+      
       public var lowerContainer:MovieClip;
-
+      
       public var upperContainer:MovieClip;
-
+      
       private var _defaultListHeight:Number;
-
+      
       private var listVisibleHight:Number = 0;
-
+      
       private var scrollingListHeigth:Number = 0;
-
+      
       private var autoScrollBar:Boolean = true;
-
+      
       private var wasResized:Boolean = false;
-
+      
       private var eventLengs:Number = 0;
-
+      
       private var scrRect:Rectangle;
-
+      
       private var downMargin:Number = 9;
-
+      
       private var sbPadding:Number = 5;
-
+      
       private var stepSize:Number = 5;
-
+      
       private var totalHeight:Number = 0;
-
+      
       public function getRenderers() : Vector.<ISaleItemBlockRenderer> {
          var _loc2_:IListItemRenderer = null;
          var _loc3_:Vector.<ISaleItemBlockRenderer> = null;
          var _loc4_:ISaleItemBlockRenderer = null;
          var _loc1_:Vector.<ISaleItemBlockRenderer> = new Vector.<ISaleItemBlockRenderer>();
-         for each (_loc2_ in _renderers)
+         for each(_loc2_ in _renderers)
          {
             _loc3_ = SellDialogListItemRenderer(_loc2_).getRenderers();
-            for each (_loc4_ in _loc3_)
+            for each(_loc4_ in _loc3_)
             {
                _loc1_.push(_loc4_);
             }
          }
          return _loc1_;
       }
-
+      
       override public function get availableWidth() : Number {
          return Math.round(_width) - margin * 2 - (_autoScrollBar?Math.round(_scrollBar.width + this.sbPadding):0);
       }
-
+      
       override public function get scrollPosition() : Number {
          return _scrollPosition;
       }
-
+      
       override public function set scrollPosition(param1:Number) : void {
          var _loc3_:IListItemRenderer = null;
          var _loc4_:Vector.<ISaleItemBlockRenderer> = null;
          var _loc5_:ISaleItemBlockRenderer = null;
          var _loc2_:Number = Math.round((this.totalHeight - this._height) / 100 * param1);
          container.y = -_loc2_;
-         for each (_loc3_ in _renderers)
+         for each(_loc3_ in _renderers)
          {
             _loc4_ = SellDialogListItemRenderer(_loc3_).getRenderers();
-            for each (_loc5_ in _loc4_)
+            for each(_loc5_ in _loc4_)
             {
                SaleItemBlockRenderer(_loc5_).ddm.close();
             }
          }
       }
-
+      
       override protected function configUI() : void {
          if(container == null)
          {
@@ -120,7 +118,7 @@ package net.wg.gui.lobby.sellDialog
          this.upperContainer.mouseEnabled = false;
          this.listVisibleHight = _height + this.downMargin;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -187,7 +185,7 @@ package net.wg.gui.lobby.sellDialog
             this.updateScrollBar();
          }
       }
-
+      
       override protected function updateScrollBar() : void {
          var _loc2_:ScrollIndicator = null;
          this.stepSize = Math.round(20 * this.height / this.totalHeight);
@@ -196,7 +194,7 @@ package net.wg.gui.lobby.sellDialog
          {
             return;
          }
-         if(_scrollBar  is  ScrollIndicator)
+         if(_scrollBar is ScrollIndicator)
          {
             _loc2_ = _scrollBar as ScrollIndicator;
             _loc2_.setScrollProperties(_loc1_,0,100,this.stepSize);
@@ -204,7 +202,7 @@ package net.wg.gui.lobby.sellDialog
          _scrollBar.position = _scrollPosition;
          _scrollBar.validateNow();
       }
-
+      
       override protected function populateData(param1:Array) : void {
          var _loc5_:IListItemRenderer = null;
          var _loc6_:uint = 0;
@@ -225,7 +223,7 @@ package net.wg.gui.lobby.sellDialog
          }
          this.drawLayout();
       }
-
+      
       override protected function drawLayout() : void {
          var _loc6_:IListItemRenderer = null;
          var _loc1_:uint = _renderers.length;
@@ -245,7 +243,7 @@ package net.wg.gui.lobby.sellDialog
             }
             else
             {
-               _loc6_.y = getRendererAt(_loc7_-1).y + getRendererAt(_loc7_-1).height + _loc2_;
+               _loc6_.y = getRendererAt(_loc7_ - 1).y + getRendererAt(_loc7_ - 1).height + _loc2_;
             }
             this.totalHeight = _loc6_.y + _loc6_.height;
             if(!_loc5_)
@@ -295,7 +293,7 @@ package net.wg.gui.lobby.sellDialog
          this.upperContainer.height = this.listVisibleHight;
          dispatchEvent(new VehicleSellDialogEvent(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.listVisibleHight));
       }
-
+      
       override protected function createScrollBar() : void {
          var _loc1_:IScrollBar = null;
          var _loc2_:Class = null;
@@ -316,7 +314,7 @@ package net.wg.gui.lobby.sellDialog
             return;
          }
          _autoScrollBar = false;
-         if(_scrollBarValue  is  String)
+         if(_scrollBarValue is String)
          {
             if(parent != null)
             {
@@ -343,25 +341,23 @@ package net.wg.gui.lobby.sellDialog
                }
             }
          }
-         else
+         else if(_scrollBarValue is Class)
          {
-            if(_scrollBarValue  is  Class)
+            _loc1_ = new (_scrollBarValue as Class)() as IScrollBar;
+            _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,blockMouseWheel,false,0,true);
+            if(_loc1_ != null)
             {
-               _loc1_ = new _scrollBarValue as Class() as IScrollBar;
-               _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,blockMouseWheel,false,0,true);
-               if(_loc1_ != null)
-               {
-                  _autoScrollBar = true;
-                  (_loc1_ as Object).offsetTop = thumbOffset.top;
-                  (_loc1_ as Object).offsetBottom = thumbOffset.bottom;
-                  this.upperContainer.addChild(_loc1_ as DisplayObject);
-               }
-            }
-            else
-            {
-               _loc1_ = _scrollBarValue as IScrollBar;
+               _autoScrollBar = true;
+               (_loc1_ as Object).offsetTop = thumbOffset.top;
+               (_loc1_ as Object).offsetBottom = thumbOffset.bottom;
+               this.upperContainer.addChild(_loc1_ as DisplayObject);
             }
          }
+         else
+         {
+            _loc1_ = _scrollBarValue as IScrollBar;
+         }
+         
          _scrollBar = _loc1_;
          invalidateSize();
          if(_scrollBar == null)
@@ -373,7 +369,7 @@ package net.wg.gui.lobby.sellDialog
          _scrollBar.focusTarget = this;
          _scrollBar.tabEnabled = false;
       }
-
+      
       override protected function drawScrollBar() : void {
          if(!_autoScrollBar)
          {
@@ -384,19 +380,18 @@ package net.wg.gui.lobby.sellDialog
          _scrollBar.height = availableHeight - this.sbPadding * 2;
          _scrollBar.validateNow();
       }
-
+      
       override protected function scrollList(param1:int) : void {
          _scrollBar.position = _scrollBar.position - param1 * this.stepSize;
          _scrollBar.validateNow();
       }
-
+      
       override protected function handleMouseWheel(param1:MouseEvent) : void {
-         if(!(param1.target  is  DropdownMenu))
+         if(!(param1.target is DropdownMenu))
          {
             this.scrollList(param1.delta > 0?1:-1);
             param1.stopImmediatePropagation();
          }
       }
    }
-
 }

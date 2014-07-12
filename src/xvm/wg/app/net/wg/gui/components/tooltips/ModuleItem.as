@@ -5,31 +5,30 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.tooltips.VO.ModuleVO;
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class ModuleItem extends UIComponent
    {
-          
+      
       public function ModuleItem() {
          super();
       }
-
+      
       public var icon:UIComponent;
-
+      
       public var textField:TextField;
-
+      
       private var model:ModuleVO;
-
+      
       public function setData(param1:ModuleVO) : void {
          this.model = param1;
          invalidateData();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.textField.autoSize = TextFieldAutoSize.LEFT;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.model))
@@ -38,7 +37,7 @@ package net.wg.gui.components.tooltips
             this.textField.htmlText = this.model.label;
          }
       }
-
+      
       override protected function onDispose() : void {
          if(this.model)
          {
@@ -50,5 +49,4 @@ package net.wg.gui.components.tooltips
          super.onDispose();
       }
    }
-
 }

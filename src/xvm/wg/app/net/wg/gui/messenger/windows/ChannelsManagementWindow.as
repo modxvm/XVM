@@ -20,23 +20,20 @@ package net.wg.gui.messenger.windows
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import net.wg.gui.messenger.forms.ChannelsSearchForm;
    import flash.display.MovieClip;
-
-
+   
    public class ChannelsManagementWindow extends ChannelsManagementWindowMeta
    {
-          
+      
       public function ChannelsManagementWindow() {
          this.tabsDataProvider = [
             {
                "label":MESSENGER.DIALOGS_CHANNELS_BUTTONS_SEARCHANDJOIN,
                "linkage":this.SEARCH_CHANNEL_FORM_ID
-            }
-         ,
+            },
             {
                "label":MESSENGER.DIALOGS_CHANNELS_BUTTONS_CREATE,
                "linkage":this.CREATE_CHANNEL_FORM_ID
-            }
-         ];
+            }];
          super();
          isModal = false;
          isCentered = false;
@@ -46,34 +43,34 @@ package net.wg.gui.messenger.windows
          showWindowBg = false;
          this._searchResDataProvider = new DAAPIDataProvider();
       }
-
+      
       public var tabs:ButtonBarEx = null;
-
+      
       public var tabLine:Sprite = null;
-
+      
       public var view:ViewStack = null;
-
+      
       private const SEARCH_CHANNEL_FORM_ID:String = "searchChannelFormUI";
-
+      
       private const CREATE_CHANNEL_FORM_ID:String = "createChannelFormUI";
-
+      
       private var searchLimitLabel:String = null;
-
+      
       private const tabsDataProvider:Array;
-
+      
       private var __currentTab:Number = 0;
-
+      
       protected var _searchResDataProvider:DAAPIDataProvider;
-
+      
       override protected function onSetModalFocus(param1:InteractiveObject) : void {
          super.onSetModalFocus(param1);
          this.onViewChangeHandler();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          if(this.tabs.selectedIndex == -1)
          {
@@ -85,13 +82,13 @@ package net.wg.gui.messenger.windows
          }
          super.draw();
       }
-
+      
       private function updateViewSize() : void {
          var _loc1_:String = null;
          var _loc2_:UIComponent = null;
          if(this.view)
          {
-            for (_loc1_ in this.view.cachedViews)
+            for(_loc1_ in this.view.cachedViews)
             {
                _loc2_ = UIComponent(this.view.cachedViews[_loc1_]);
                _loc2_.setSize(width,height - this.view.y);
@@ -99,7 +96,7 @@ package net.wg.gui.messenger.windows
             }
          }
       }
-
+      
       override protected function onPopulate() : void {
          window.useBottomBtns = false;
          window.title = MESSENGER.LOBBY_BUTTONS_CHANNELS;
@@ -115,11 +112,11 @@ package net.wg.gui.messenger.windows
          this.searchLimitLabel = getSearchLimitLabelS();
          geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CHANNELS_WINDOW);
       }
-
+      
       public function as_getDataProvider() : Object {
          return this._searchResDataProvider;
       }
-
+      
       private function initTabs() : void {
          if(this.tabs != null)
          {
@@ -135,7 +132,7 @@ package net.wg.gui.messenger.windows
             this.view.addEventListener(ChannelsFormEvent.ON_CREATE_CHANNEL,this.onCreateChannel);
          }
       }
-
+      
       private function onViewChange(param1:ViewStackEvent) : void {
          var _loc2_:IViewStackContent = param1.view;
          switch(param1.linkage)
@@ -151,37 +148,35 @@ package net.wg.gui.messenger.windows
          this.updateView(_loc2_);
          this.updateViewSize();
       }
-
-      private function updateView(param1:IViewStackContent, param2:Object=null) : void {
+      
+      private function updateView(param1:IViewStackContent, param2:Object = null) : void {
          param1.update(param2);
          if(param1.getComponentForFocus())
          {
             this.setFocus(param1.getComponentForFocus());
          }
       }
-
-      private function onViewChangeHandler(param1:ViewStackEvent=null) : void {
+      
+      private function onViewChangeHandler(param1:ViewStackEvent = null) : void {
          var _loc2_:IViewStackContent = null;
          if((this.view) && (this.view.currentView) && param1 == null)
          {
             _loc2_ = this.view.currentView as IViewStackContent;
             this.updateView(_loc2_);
          }
-         else
+         else if(param1 != null)
          {
-            if(param1 != null)
-            {
-               _loc2_ = param1.view;
-               this.updateView(_loc2_);
-            }
+            _loc2_ = param1.view;
+            this.updateView(_loc2_);
          }
+         
       }
-
+      
       private function onTabChange(param1:IndexEvent) : void {
          this.__currentTab = param1.index;
          this.updateViewSize();
       }
-
+      
       override protected function onDispose() : void {
          if(this.view)
          {
@@ -199,20 +194,20 @@ package net.wg.gui.messenger.windows
          }
          super.onDispose();
       }
-
+      
       private function onSearchCkick(param1:ChannelsFormEvent) : void {
          searchTokenS(param1.channelName);
       }
-
+      
       private function onJoinHandler(param1:ChannelsFormEvent) : void {
          joinToChannelS(param1.index);
       }
-
+      
       private function onCreateChannel(param1:ChannelsFormEvent) : void {
          var _loc2_:* = !(param1.channelPass == null && param1.channelRetypePass == null);
          createChannelS(param1.channelName,_loc2_,param1.channelPass,param1.channelRetypePass);
       }
-
+      
       public function as_freezSearchButton(param1:Boolean) : void {
          var _loc2_:ChannelsSearchForm = ChannelsSearchForm(this.tryGetView(this.SEARCH_CHANNEL_FORM_ID));
          if(_loc2_)
@@ -220,7 +215,7 @@ package net.wg.gui.messenger.windows
             _loc2_.lockSearchButton(!param1);
          }
       }
-
+      
       private function tryGetView(param1:String) : MovieClip {
          var _loc2_:MovieClip = null;
          if(!this.view)
@@ -234,5 +229,4 @@ package net.wg.gui.messenger.windows
          return _loc2_;
       }
    }
-
 }

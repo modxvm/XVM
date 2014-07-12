@@ -12,22 +12,21 @@ package net.wg.gui.lobby.profile.pages.summary
    import net.wg.gui.lobby.profile.data.ProfileUserVO;
    import net.wg.gui.lobby.profile.data.SectionLayoutManager;
    import net.wg.gui.lobby.profile.ProfileConstants;
-
-
+   
    public class ProfileSummary extends ProfileSummaryMeta implements IProfileSummaryMeta
    {
-          
+      
       public function ProfileSummary() {
          super();
       }
-
+      
       private static const INIT_DATA_INVALID:String = "idInv";
-
-      protected static function getAchievementVector(param1:Array, param2:Boolean=false) : Array {
+      
+      protected static function getAchievementVector(param1:Array, param2:Boolean = false) : Array {
          var _loc4_:ProfileAchievementVO = null;
          var _loc5_:Object = null;
          var _loc3_:Array = [];
-         for each (_loc5_ in param1)
+         for each(_loc5_ in param1)
          {
             _loc4_ = new ProfileAchievementVO(_loc5_);
             if(param2)
@@ -38,33 +37,33 @@ package net.wg.gui.lobby.profile.pages.summary
          }
          return _loc3_;
       }
-
+      
       public var tfWins:LineDescrIconText;
-
+      
       public var tfAvgExperience:LineDescrIconText;
-
+      
       public var tfHits:LineDescrIconText;
-
+      
       public var tfAvgDamage:LineDescrIconText;
-
+      
       public var tfMaxDestroyed:LditValued;
-
+      
       public var tfMaxExperience:LditValued;
-
+      
       public var tfTotalBattles:LditBattles;
-
+      
       public var tfMarksOfMastery:LditMarksOfMastery;
-
+      
       public var tfPersonalScore:PersonalScoreComponent;
-
+      
       public var footer:ProfileFooter;
-
+      
       private var initData:ProfileUserVO;
-
+      
       public var significantAwards:AwardsListComponent;
-
+      
       private var lineTextFieldsLayout:LineTextFieldsLayout;
-
+      
       override protected function initialize() : void {
          super.initialize();
          this.significantAwards.titleToolTip = PROFILE.PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP;
@@ -77,7 +76,7 @@ package net.wg.gui.lobby.profile.pages.summary
          this.lineTextFieldsLayout.addRightPair(this.tfMaxExperience,this.tfMarksOfMastery);
          this.lineTextFieldsLayout.layout();
       }
-
+      
       override protected function applyResizing() : void {
          if(layoutManager)
          {
@@ -86,7 +85,7 @@ package net.wg.gui.lobby.profile.pages.summary
          this.footer.width = currentDimension.x;
          this.x = Math.round(currentDimension.x / 2 - _centerOffset);
       }
-
+      
       override protected function draw() : void {
          if(_baseDisposed)
          {
@@ -98,7 +97,7 @@ package net.wg.gui.lobby.profile.pages.summary
             this.footer.setUserData(this.initData);
          }
       }
-
+      
       override protected function applyData(param1:Object) : Object {
          var _loc2_:ProfileSummaryVO = new ProfileSummaryVO(param1);
          if(_loc2_.battlesCount != 0)
@@ -151,11 +150,11 @@ package net.wg.gui.lobby.profile.pages.summary
          this.significantAchievementProvider = getAchievementVector(_loc2_.significantAchievements,true);
          return _loc2_;
       }
-
+      
       override public function as_setInitData(param1:Object) : void {
          this.applyInitData(new SummaryInitVO(param1));
       }
-
+      
       protected function applyInitData(param1:SummaryInitVO) : void {
          var _loc2_:Object = param1.commonScores;
          this.tfWins.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_WINS;
@@ -178,11 +177,11 @@ package net.wg.gui.lobby.profile.pages.summary
          this.significantAwards.label = param1.significantAwardsLabel;
          this.significantAwards.errorText = param1.significantAwardsErrorText;
       }
-
+      
       public function set significantAchievementProvider(param1:Array) : void {
          this.significantAwards.dataProvider = param1;
       }
-
+      
       override protected function onDispose() : void {
          this.tfWins.dispose();
          this.tfHits.dispose();
@@ -204,11 +203,10 @@ package net.wg.gui.lobby.profile.pages.summary
          }
          super.onDispose();
       }
-
+      
       public function as_setUserData(param1:Object) : void {
          this.initData = new ProfileUserVO(param1);
          invalidate(INIT_DATA_INVALID);
       }
    }
-
 }

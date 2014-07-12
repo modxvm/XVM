@@ -3,19 +3,18 @@ package net.wg.gui.components.tooltips
    import flash.display.MovieClip;
    import flash.text.TextField;
    import net.wg.gui.components.tooltips.finstats.EfficiencyBlock;
-
-
+   
    public class IgrQuestProgressBlock extends MovieClip
    {
-          
+      
       public function IgrQuestProgressBlock() {
          super();
       }
-
+      
       public var headerTF:TextField;
-
+      
       public var valuesBlock:EfficiencyBlock;
-
+      
       public function setData(param1:String, param2:Array) : void {
          var _loc4_:* = 0;
          this.headerTF.htmlText = param1;
@@ -39,5 +38,4 @@ package net.wg.gui.components.tooltips
          this.valuesBlock.setData(_loc5_,_loc6_);
       }
    }
-
 }

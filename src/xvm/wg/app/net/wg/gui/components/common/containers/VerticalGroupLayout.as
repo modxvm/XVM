@@ -2,15 +2,14 @@ package net.wg.gui.components.common.containers
 {
    import flash.display.DisplayObject;
    import flash.geom.Point;
-
-
+   
    public class VerticalGroupLayout extends GroupLayout
    {
-          
+      
       public function VerticalGroupLayout() {
          super();
       }
-
+      
       override public function invokeLayout() : Object {
          var _loc1_:DisplayObject = null;
          var _loc2_:int = _target.numChildren;
@@ -35,5 +34,4 @@ package net.wg.gui.components.common.containers
          return new Point(_loc3_,_loc4_);
       }
    }
-
 }

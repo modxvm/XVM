@@ -7,39 +7,38 @@ package net.wg.gui.lobby.tankman
    import scaleform.gfx.Extensions;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.data.constants.IconsTypes;
-
-
+   
    public class PersonalCaseBase extends PersonalCaseMeta implements IPersonalCaseMeta
    {
-          
+      
       public function PersonalCaseBase() {
          this.skillsModel = [];
          super();
       }
-
+      
       private static const templateS:Array;
-
+      
       protected var isFirtsRun:Boolean = true;
-
+      
       protected var autoSelectTab:int = 0;
-
+      
       protected var data:PersonalCaseModel;
-
+      
       protected var stats:Object;
-
+      
       protected var retrainingData:PersonalCaseRetrainingModel;
-
+      
       protected var skillsModel:Array;
-
+      
       protected var documentsData:PersonalCaseDocsModel;
-
+      
       protected var rentainingTabUpdated:Boolean = true;
-
+      
       public function as_setCommonData(param1:Object) : void {
          this.parsePersonalCaseModel(param1);
          this.updateCommonElements();
       }
-
+      
       public function as_setDossierData(param1:Object) : void {
          var _loc5_:Array = null;
          var _loc6_:* = 0;
@@ -59,22 +58,22 @@ package net.wg.gui.lobby.tankman
                _loc2_.push(_loc8_);
                _loc7_++;
             }
-            if(_loc4_ < _loc3_-1 && _loc2_.length > 0)
+            if(_loc4_ < _loc3_ - 1 && _loc2_.length > 0)
             {
-               _loc2_[_loc2_.length-1].showSeparator = true;
+               _loc2_[_loc2_.length - 1].showSeparator = true;
             }
             _loc4_++;
          }
          if(_loc2_.length > 0)
          {
-            _loc2_[_loc2_.length-1].showSeparator = false;
+            _loc2_[_loc2_.length - 1].showSeparator = false;
          }
          this.stats = {};
          this.stats.achievements = _loc2_;
          this.stats.stats = param1.stats;
          this.runtimeUpdateByModel(PersonalCaseStats,this.stats);
       }
-
+      
       public function as_setRetrainingData(param1:Object) : void {
          var _loc4_:Object = null;
          this.retrainingData = new PersonalCaseRetrainingModel();
@@ -119,7 +118,7 @@ package net.wg.gui.lobby.tankman
          this.retrainingData.specializationLevel = this.data.specializationLevel;
          this.runtimeUpdateByModel(CrewTankmanRetraining,this.retrainingData);
       }
-
+      
       public function as_setSkillsData(param1:Array) : void {
          var _loc4_:PersonalCaseSkillsModel = null;
          var _loc5_:String = null;
@@ -130,7 +129,7 @@ package net.wg.gui.lobby.tankman
          var _loc3_:* = 0;
          while(_loc3_ < param1.length)
          {
-            if(!(!param1[_loc3_].hasOwnProperty("skills") || !param1[_loc3_].skills  is  Array || param1[_loc3_].skills.length <= 0))
+            if(!(!param1[_loc3_].hasOwnProperty("skills") || !param1[_loc3_].skills is Array || param1[_loc3_].skills.length <= 0))
             {
                _loc4_ = new PersonalCaseSkillsModel();
                _loc5_ = param1[_loc3_].id;
@@ -139,7 +138,7 @@ package net.wg.gui.lobby.tankman
                _loc4_.isHeader = true;
                _loc4_.selfSkill = this.data.roleType == _loc5_;
                this.skillsModel.push(_loc4_);
-               if((param1[_loc3_].hasOwnProperty("skills")) && param1[_loc3_].skills  is  Array)
+               if((param1[_loc3_].hasOwnProperty("skills")) && param1[_loc3_].skills is Array)
                {
                   _loc6_ = 0;
                   while(_loc6_ < param1[_loc3_].skills.length)
@@ -173,7 +172,7 @@ package net.wg.gui.lobby.tankman
          }
          this.runtimeUpdateByModel(PersonalCaseSkills,this.skillsModel);
       }
-
+      
       public function as_setDocumentsData(param1:Object) : void {
          this.documentsData = new PersonalCaseDocsModel();
          if(!Extensions.isScaleform)
@@ -196,19 +195,17 @@ package net.wg.gui.lobby.tankman
          this.documentsData.icons = param1.icons;
          this.documentsData.userCredits = param1.money[0];
          this.documentsData.userGold = param1.money[1];
-         if(param1.passportChangeCost  is  Array)
+         if(param1.passportChangeCost is Array)
          {
             this.documentsData.priceOfGold = param1.passportChangeCost[0];
             this.documentsData.priceOfCredits = param1.passportChangeCost[1];
          }
-         else
+         else if(param1.passportChangeCost is int)
          {
-            if(param1.passportChangeCost  is  int)
-            {
-               this.documentsData.priceOfGold = param1.passportChangeCost;
-               this.documentsData.useOnlyGold = true;
-            }
+            this.documentsData.priceOfGold = param1.passportChangeCost;
+            this.documentsData.useOnlyGold = true;
          }
+         
          this.documentsData.currentTankmanFirstName = this.data.firstname;
          this.documentsData.currentTankmanLastName = this.data.lastname;
          this.documentsData.currentTankmanIcon = this.data.iconFile;
@@ -220,7 +217,7 @@ package net.wg.gui.lobby.tankman
          this.runtimeUpdateByModel(PersonalCaseDocs,this.documentsData);
          this.rentainingTabUpdated = true;
       }
-
+      
       protected function parsePersonalCaseModel(param1:Object) : void {
          var _loc9_:PersonalCaseCurrentVehicle = null;
          var _loc2_:PersonalCaseModel = new PersonalCaseModel();
@@ -267,15 +264,13 @@ package net.wg.gui.lobby.tankman
          this.autoSelectTab = parseInt(param1.tabIndex);
          this.data = _loc2_;
       }
-
+      
       protected function updateCommonElements() : void {
-          
       }
-
+      
       protected function runtimeUpdateByModel(param1:Class, param2:Object) : void {
-          
       }
-
+      
       private function parseCarouselTankmanSkills(param1:Array, param2:int, param3:int, param4:int) : Array {
          var _loc7_:CarouselTankmanSkillsModel = null;
          var _loc8_:Object = null;
@@ -311,7 +306,7 @@ package net.wg.gui.lobby.tankman
          }
          return _loc5_;
       }
-
+      
       private function calculateMaxChars(param1:Array, param2:PersonalCaseDocsModel, param3:String) : void {
          var _loc6_:uint = 0;
          var _loc4_:uint = param1.length;
@@ -323,17 +318,15 @@ package net.wg.gui.lobby.tankman
             {
                param2.fistNameMaxChars = _loc6_;
             }
-            else
+            else if(param3 == "lastNames" && _loc6_ > param2.lastNameMaxChars)
             {
-               if(param3 == "lastNames" && _loc6_ > param2.lastNameMaxChars)
-               {
-                  param2.lastNameMaxChars = _loc6_;
-               }
+               param2.lastNameMaxChars = _loc6_;
             }
+            
             _loc5_++;
          }
       }
-
+      
       private function createTestNames(param1:Array) : void {
          var _loc3_:Object = null;
          var _loc4_:* = 0;
@@ -356,5 +349,4 @@ package net.wg.gui.lobby.tankman
          }
       }
    }
-
 }

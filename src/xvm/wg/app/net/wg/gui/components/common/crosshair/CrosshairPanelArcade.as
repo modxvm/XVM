@@ -1,24 +1,21 @@
 package net.wg.gui.components.common.crosshair
 {
-
-
    public class CrosshairPanelArcade extends CrosshairPanelBase
    {
-          
+      
       public function CrosshairPanelArcade() {
          super();
       }
-
+      
       private static const CASSETE_POSITION_ARCADE:Number = -1;
-
+      
       private static const CASSETE_POSITION_SNIPER:Number = 13;
-
+      
       private static const CASSETE_POSITION_PANZER:Number = -11;
-
+      
       override protected function initCallbacks() : void {
-          
       }
-
+      
       override protected function onSetNetType(param1:Number, param2:Number) : void {
          super.onSetNetType(param1,param2);
          var _loc3_:Number = 0;
@@ -37,5 +34,4 @@ package net.wg.gui.components.common.crosshair
          g_modeMC.cassette.y = _loc3_;
       }
    }
-
 }

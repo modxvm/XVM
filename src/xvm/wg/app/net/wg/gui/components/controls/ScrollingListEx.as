@@ -17,50 +17,49 @@ package net.wg.gui.components.controls
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.WrappingMode;
    import scaleform.clik.constants.NavigationCode;
-
-
+   
    public class ScrollingListEx extends CoreListEx
    {
-          
+      
       public function ScrollingListEx() {
          super();
          this._sbPadding = new Padding(0,0,0,0);
       }
-
+      
       public var wrapping:String = "normal";
-
+      
       public var thumbOffset:Object;
-
+      
       public var thumbSizeFactor:Number = 1;
-
+      
       public var _gap:Number = 0;
-
+      
       protected var _rowHeight:Number = NaN;
-
+      
       protected var _autoRowHeight:Number = NaN;
-
+      
       protected var _rowCount:Number = NaN;
-
+      
       protected var _scrollPosition:uint = 0;
-
+      
       protected var _autoScrollBar:Boolean = false;
-
+      
       protected var _scrollBarValue:Object;
-
+      
       protected var _margin:Number = 0;
-
+      
       protected var _padding:Padding;
-
+      
       private var _widthAutoResize:Boolean = true;
-
+      
       private var _sbPadding:Padding;
-
+      
       protected var _buttonModeEnabled:Boolean = true;
-
+      
       protected var _scrollBar:IScrollBar;
-
+      
       private var _smartScrollBar:Boolean = false;
-
+      
       override public function scrollToIndex(param1:uint) : void {
          if(_totalRenderers == 0)
          {
@@ -76,14 +75,14 @@ package net.wg.gui.components.controls
          }
          else
          {
-            this.scrollPosition = param1 - (_totalRenderers-1);
+            this.scrollPosition = param1 - (_totalRenderers - 1);
          }
       }
-
+      
       override public function toString() : String {
          return "[WG ScrollingListEx " + name + "]";
       }
-
+      
       override public function set selectedIndex(param1:int) : void {
          if(param1 == _selectedIndex || param1 == _newSelectedIndex)
          {
@@ -92,33 +91,33 @@ package net.wg.gui.components.controls
          _newSelectedIndex = param1;
          invalidateSelectedIndex();
       }
-
+      
       override public function get availableWidth() : Number {
          return Math.round(_width) - this.margin * 2 - (this._autoScrollBar?Math.round(this._scrollBar.width) + this.sbPadding.horizontal:0);
       }
-
+      
       override public function get availableHeight() : Number {
          return Math.round(_height) - this.margin * 2;
       }
-
+      
       public function get margin() : Number {
          return this._margin;
       }
-
+      
       public function set margin(param1:Number) : void {
          this._margin = param1;
          invalidateSize();
       }
-
+      
       public function get padding() : Padding {
          return this._padding;
       }
-
+      
       public function set padding(param1:Padding) : void {
          this._padding = param1;
          invalidateSize();
       }
-
+      
       public function set inspectablePadding(param1:Object) : void {
          if(!componentInspectorSetting)
          {
@@ -126,25 +125,25 @@ package net.wg.gui.components.controls
          }
          this.padding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
       }
-
+      
       public function get scrollBar() : Object {
          return this._scrollBar;
       }
-
+      
       public function set scrollBar(param1:Object) : void {
          this._scrollBarValue = param1;
          invalidate(InvalidationType.SCROLL_BAR);
       }
-
+      
       public function get smartScrollBar() : Boolean {
          return this._smartScrollBar;
       }
-
+      
       public function set smartScrollBar(param1:Boolean) : void {
          this._smartScrollBar = param1;
          this.updateVisibleScrollBar();
       }
-
+      
       public function getSelectedVO() : Object {
          var _loc1_:Object = null;
          if(_selectedIndex > -1)
@@ -153,7 +152,7 @@ package net.wg.gui.components.controls
          }
          return _loc1_;
       }
-
+      
       protected function updateVisibleScrollBar() : void {
          var _loc1_:DisplayObject = null;
          var _loc2_:* = false;
@@ -172,11 +171,15 @@ package net.wg.gui.components.controls
                {
                   _loc1_.visible = false;
                }
-               if(!_loc1_.visible && (this._widthAutoResize))
+               if(this._widthAutoResize)
                {
                   _loc2_ = isInvalid(InvalidationType.DATA);
                   _loc3_ = Math.round(_width) - this.margin * 2 - this.padding.horizontal;
-                  for each (_loc4_ in _renderers)
+                  if(_loc1_.visible)
+                  {
+                     _loc3_ = this.availableWidth;
+                  }
+                  for each(_loc4_ in _renderers)
                   {
                      _loc4_.width = _loc3_;
                      if(!_loc2_)
@@ -187,7 +190,7 @@ package net.wg.gui.components.controls
                }
                if((_loc1_) && (container.contains(_loc1_)))
                {
-                  container.setChildIndex(_loc1_,container.numChildren-1);
+                  container.setChildIndex(_loc1_,container.numChildren - 1);
                }
             }
             else
@@ -196,11 +199,11 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       public function get scrollPosition() : Number {
          return this._scrollPosition;
       }
-
+      
       public function set scrollPosition(param1:Number) : void {
          var param1:Number = Math.max(0,Math.min(_dataProvider.length - _totalRenderers,Math.round(param1)));
          if(this._scrollPosition == param1)
@@ -210,11 +213,11 @@ package net.wg.gui.components.controls
          this._scrollPosition = param1;
          invalidateData();
       }
-
+      
       public function get rowCount() : uint {
          return _totalRenderers;
       }
-
+      
       public function set rowCount(param1:uint) : void {
          var _loc2_:Number = this.rowHeight;
          if(isNaN(this.rowHeight))
@@ -224,11 +227,11 @@ package net.wg.gui.components.controls
          _loc2_ = this.rowHeight;
          height = _loc2_ * param1 + this.margin * 2 + this.padding.vertical;
       }
-
+      
       public function get rowHeight() : Number {
          return isNaN(this._autoRowHeight)?this._rowHeight:this._autoRowHeight;
       }
-
+      
       public function set rowHeight(param1:Number) : void {
          if(param1 == 0)
          {
@@ -242,11 +245,11 @@ package net.wg.gui.components.controls
          this._autoRowHeight = NaN;
          invalidateSize();
       }
-
+      
       public function get buttonModeEnabled() : Boolean {
          return this._buttonModeEnabled;
       }
-
+      
       public function set buttonModeEnabled(param1:Boolean) : void {
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
@@ -270,15 +273,15 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       public function get renderersCount() : int {
          return _renderers?_renderers.length:-1;
       }
-
+      
       override protected function initialize() : void {
          super.initialize();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(this.padding == null)
@@ -290,8 +293,12 @@ package net.wg.gui.components.controls
             itemRendererName = _itemRendererName;
          }
       }
-
+      
       override protected function draw() : void {
+         if(_baseDisposed)
+         {
+            return;
+         }
          if(isInvalid(InvalidationType.SCROLL_BAR))
          {
             this.createScrollBar();
@@ -302,12 +309,16 @@ package net.wg.gui.components.controls
             this._autoRowHeight = NaN;
          }
          super.draw();
+         if(_baseDisposed)
+         {
+            return;
+         }
          if(isInvalid(InvalidationType.DATA))
          {
             this.updateScrollBar();
          }
       }
-
+      
       override protected function drawLayout() : void {
          var _loc8_:IListItemRenderer = null;
          var _loc1_:uint = _renderers.length;
@@ -335,7 +346,7 @@ package net.wg.gui.components.controls
          }
          this.drawScrollBar();
       }
-
+      
       override protected function changeFocus() : void {
          super.changeFocus();
          var _loc1_:IListItemRenderer = getRendererAt(_selectedIndex,this._scrollPosition);
@@ -345,14 +356,14 @@ package net.wg.gui.components.controls
             _loc1_.validateNow();
          }
       }
-
+      
       override protected function refreshData() : void {
          this._scrollPosition = Math.min(Math.max(0,_dataProvider.length - _totalRenderers),this._scrollPosition);
-         this.selectedIndex = Math.min(_dataProvider.length-1,_selectedIndex);
+         this.selectedIndex = Math.min(_dataProvider.length - 1,_selectedIndex);
          this.updateSelectedIndex();
-         _dataProvider.requestItemRange(this._scrollPosition,Math.min(_dataProvider.length-1,this._scrollPosition + _totalRenderers-1),this.populateData);
+         _dataProvider.requestItemRange(this._scrollPosition,Math.min(_dataProvider.length - 1,this._scrollPosition + _totalRenderers - 1),this.populateData);
       }
-
+      
       override protected function updateSelectedIndex() : void {
          if(_selectedIndex == _newSelectedIndex)
          {
@@ -384,7 +395,7 @@ package net.wg.gui.components.controls
             this.selectedRenderer(_loc1_,true);
          }
       }
-
+      
       override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
          var _loc3_:IListItemRenderer = null;
          if((isNaN(this._rowHeight)) && (isNaN(this._autoRowHeight)))
@@ -395,7 +406,7 @@ package net.wg.gui.components.controls
          }
          return (this.availableHeight - this.padding.vertical) / this.rowHeight >> 0;
       }
-
+      
       override protected function handleMouseWheel(param1:MouseEvent) : void {
          var _loc2_:DisplayObject = null;
          super.handleMouseWheel(param1);
@@ -408,17 +419,17 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       override protected function scrollList(param1:int) : void {
          this.scrollPosition = this.scrollPosition - param1;
       }
-
+      
       override protected function onDispose() : void {
          this._scrollBarValue = null;
          this._sbPadding = null;
          super.onDispose();
       }
-
+      
       protected function createScrollBar() : void {
          var _loc1_:IScrollBar = null;
          var _loc2_:Class = null;
@@ -430,7 +441,7 @@ package net.wg.gui.components.controls
             this._scrollBar.focusTarget = null;
             if(container.contains(this._scrollBar as DisplayObject))
             {
-               if(this._scrollBar  is  IDisposable)
+               if(this._scrollBar is IDisposable)
                {
                   this._scrollBar.dispose();
                }
@@ -443,7 +454,7 @@ package net.wg.gui.components.controls
             return;
          }
          this._autoScrollBar = false;
-         if(this._scrollBarValue  is  String)
+         if(this._scrollBarValue is String)
          {
             if(parent != null)
             {
@@ -470,25 +481,23 @@ package net.wg.gui.components.controls
                }
             }
          }
-         else
+         else if(this._scrollBarValue is Class)
          {
-            if(this._scrollBarValue  is  Class)
+            _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
+            _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
+            if(_loc1_ != null)
             {
-               _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
-               _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
-               if(_loc1_ != null)
-               {
-                  this._autoScrollBar = true;
-                  (_loc1_ as Object).offsetTop = this.thumbOffset.top;
-                  (_loc1_ as Object).offsetBottom = this.thumbOffset.bottom;
-                  container.addChild(_loc1_ as DisplayObject);
-               }
-            }
-            else
-            {
-               _loc1_ = this._scrollBarValue as IScrollBar;
+               this._autoScrollBar = true;
+               (_loc1_ as Object).offsetTop = this.thumbOffset.top;
+               (_loc1_ as Object).offsetBottom = this.thumbOffset.bottom;
+               container.addChild(_loc1_ as DisplayObject);
             }
          }
+         else
+         {
+            _loc1_ = this._scrollBarValue as IScrollBar;
+         }
+         
          this._scrollBar = _loc1_;
          invalidateSize();
          if(this._scrollBar == null)
@@ -500,7 +509,7 @@ package net.wg.gui.components.controls
          this._scrollBar.focusTarget = this;
          this._scrollBar.tabEnabled = false;
       }
-
+      
       protected function drawScrollBar() : void {
          if(!this._autoScrollBar)
          {
@@ -512,14 +521,14 @@ package net.wg.gui.components.controls
          this._scrollBar.validateNow();
          this.updateVisibleScrollBar();
       }
-
+      
       protected function updateScrollBar() : void {
          var _loc1_:ScrollIndicator = null;
          if(this._scrollBar == null)
          {
             return;
          }
-         if(this._scrollBar  is  ScrollIndicator)
+         if(this._scrollBar is ScrollIndicator)
          {
             _loc1_ = this._scrollBar as ScrollIndicator;
             if(_dataProvider.length > _totalRenderers)
@@ -535,26 +544,34 @@ package net.wg.gui.components.controls
          this._scrollBar.validateNow();
          this.updateVisibleScrollBar();
       }
-
+      
       protected function selectedRenderer(param1:IListItemRenderer, param2:Boolean) : void {
          param1.selected = param2;
          param1.validateNow();
       }
-
+      
       protected function populateData(param1:Array) : void {
          var _loc5_:IListItemRenderer = null;
          var _loc6_:* = 0;
          var _loc7_:ListData = null;
          var _loc8_:Sprite = null;
+         if(_baseDisposed)
+         {
+            return;
+         }
          var _loc2_:int = param1.length;
          var _loc3_:int = _renderers.length;
          var _loc4_:* = 0;
          while(_loc4_ < _loc3_)
          {
+            if(_baseDisposed)
+            {
+               return;
+            }
             _loc5_ = getRendererAt(_loc4_);
             _loc6_ = this._scrollPosition + _loc4_;
             _loc7_ = new ListData(_loc6_,itemToLabel(param1[_loc4_]),_selectedIndex == _loc6_);
-            _loc5_.enabled = _loc4_ >= _loc2_?false:true;
+            _loc5_.enabled = !(_loc4_ >= _loc2_);
             _loc5_.setListData(_loc7_);
             _loc5_.setData(param1[_loc4_]);
             _loc5_.validateNow();
@@ -563,7 +580,7 @@ package net.wg.gui.components.controls
             _loc4_++;
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -587,36 +604,32 @@ package net.wg.gui.components.controls
                {
                   if(_loc4_)
                   {
-                     this.selectedIndex = this.scrollPosition + _totalRenderers-1;
+                     this.selectedIndex = this.scrollPosition + _totalRenderers - 1;
                   }
                }
-               else
+               else if(_selectedIndex > 0)
                {
-                  if(_selectedIndex > 0)
+                  if(_loc4_)
+                  {
+                     selectedIndex--;
+                  }
+               }
+               else if(this.wrapping != WrappingMode.STICK)
+               {
+                  if(this.wrapping == WrappingMode.WRAP)
                   {
                      if(_loc4_)
                      {
-                        selectedIndex--;
+                        this.selectedIndex = _dataProvider.length - 1;
                      }
                   }
                   else
                   {
-                     if(this.wrapping != WrappingMode.STICK)
-                     {
-                        if(this.wrapping == WrappingMode.WRAP)
-                        {
-                           if(_loc4_)
-                           {
-                              this.selectedIndex = _dataProvider.length-1;
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.DOWN:
                if(_selectedIndex == -1)
@@ -626,38 +639,34 @@ package net.wg.gui.components.controls
                      this.selectedIndex = this._scrollPosition;
                   }
                }
-               else
+               else if(_selectedIndex < _dataProvider.length - 1)
                {
-                  if(_selectedIndex < _dataProvider.length-1)
+                  if(_loc4_)
+                  {
+                     selectedIndex++;
+                  }
+               }
+               else if(this.wrapping != WrappingMode.STICK)
+               {
+                  if(this.wrapping == WrappingMode.WRAP)
                   {
                      if(_loc4_)
                      {
-                        selectedIndex++;
+                        this.selectedIndex = 0;
                      }
                   }
                   else
                   {
-                     if(this.wrapping != WrappingMode.STICK)
-                     {
-                        if(this.wrapping == WrappingMode.WRAP)
-                        {
-                           if(_loc4_)
-                           {
-                              this.selectedIndex = 0;
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.END:
                if(!_loc4_)
                {
-                  this.selectedIndex = _dataProvider.length-1;
+                  this.selectedIndex = _dataProvider.length - 1;
                }
                break;
             case NavigationCode.HOME:
@@ -675,7 +684,7 @@ package net.wg.gui.components.controls
             case NavigationCode.PAGE_DOWN:
                if(_loc4_)
                {
-                  this.selectedIndex = Math.min(_dataProvider.length-1,_selectedIndex + _totalRenderers);
+                  this.selectedIndex = Math.min(_dataProvider.length - 1,_selectedIndex + _totalRenderers);
                }
                break;
             default:
@@ -683,31 +692,30 @@ package net.wg.gui.components.controls
          }
          param1.handled = true;
       }
-
+      
       protected function handleScroll(param1:Event) : void {
          this.scrollPosition = this._scrollBar.position;
       }
-
+      
       protected function blockMouseWheel(param1:MouseEvent) : void {
          param1.stopPropagation();
       }
-
+      
       public function get sbPadding() : Padding {
          return this._sbPadding;
       }
-
+      
       public function set sbPadding(param1:Padding) : void {
          this._sbPadding = param1;
          invalidateSize();
       }
-
+      
       public function get widthAutoResize() : Boolean {
          return this._widthAutoResize;
       }
-
+      
       public function set widthAutoResize(param1:Boolean) : void {
          this._widthAutoResize = param1;
       }
    }
-
 }

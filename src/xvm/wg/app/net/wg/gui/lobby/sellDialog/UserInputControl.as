@@ -1,20 +1,18 @@
 package net.wg.gui.lobby.sellDialog
 {
-
-
    public class UserInputControl extends Object
    {
-          
+      
       public function UserInputControl() {
          super();
       }
-
+      
       private static const DELIMITER_CHAR:String = " ";
-
+      
       private static const NONE_BREAK_SPACE_CODE:uint = 160;
-
+      
       private static const SPACE_CODE:uint = 32;
-
+      
       public function cmpFormatUserInputString(param1:String, param2:String, param3:String, param4:String) : Boolean {
          var _loc11_:* = 0;
          if(param1 == param4)
@@ -48,7 +46,7 @@ package net.wg.gui.lobby.sellDialog
          var _loc8_:String = _loc5_.join("");
          var _loc9_:* = false;
          var _loc10_:* = param3.split("");
-         if(_loc10_[_loc10_.length-1].charCodeAt(0) == SPACE_CODE)
+         if(_loc10_[_loc10_.length - 1].charCodeAt(0) == SPACE_CODE)
          {
             _loc10_.pop();
             _loc9_ = _loc10_.join("") == _loc8_;
@@ -60,5 +58,4 @@ package net.wg.gui.lobby.sellDialog
          return _loc9_;
       }
    }
-
 }

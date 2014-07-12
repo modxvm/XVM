@@ -21,54 +21,52 @@ package net.wg.gui.notification
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.notification.vo.ButtonVO;
-   import __AS3__.vec.Vector;
    import net.wg.gui.components.common.containers.HorizontalGroupLayout;
    import net.wg.gui.notification.constants.ButtonType;
-
-
+   
    public class ServiceMessage extends UIComponent
    {
-          
+      
       public function ServiceMessage() {
          super();
       }
-
+      
       public static const RESIZED:String = "resized";
-
+      
       private static const DATA_INVALID:String = "dataInv";
-
+      
       private static const LAYOUT_INVALID:String = "layoutInv";
-
+      
       private static const TIMESTAMP_INVALID:String = "tsInv";
-
+      
       private static var allowBgFill:Array;
-
+      
       public var background:MovieClip;
-
+      
       public var icon:UILoaderAlt;
-
+      
       public var bgIcon:UILoaderAlt;
-
+      
       public var bmpFill:BitmapFill;
-
+      
       public var textField:TextField;
-
+      
       private var _messageTopOffset:int = 17;
-
+      
       private var _messageBottomOffset:int = 18;
-
+      
       private var _buttonPadding:int = 10;
-
+      
       private var _isTFClickedByMBR:Boolean = false;
-
+      
       private var _data:NotificationInfoVO;
-
+      
       private var timeComponent:NotificationTimeComponent;
-
+      
       private var _btnsGroup:Group;
-
+      
       private var _timeStamp:String = "";
-
+      
       override protected function configUI() : void {
          super.configUI();
          _focusable = tabEnabled = false;
@@ -83,37 +81,36 @@ package net.wg.gui.notification
          this.textField.addEventListener(MouseEvent.CLICK,this.onMessageMouseClick,false,0,true);
          this.icon.addEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler,false,0,true);
          this.icon.addEventListener(UILoaderEvent.IOERROR,this.iconLoadingErrorHandler,false,0,true);
-         addEventListener(MouseEvent.CLICK,this.componentClickHandler,false,0,true);
       }
-
+      
       private function onMessageLinkClick(param1:TextEvent) : void {
          if(!this._isTFClickedByMBR)
          {
             dispatchEvent(new ServiceMessageEvent(ServiceMessageEvent.MESSAGE_LINK_CLICKED,this._data.typeID,this._data.entityID,true,false,param1.text));
          }
       }
-
+      
       private function onMessageMouseClick(param1:MouseEvent) : void {
          this._isTFClickedByMBR = App.utils.commons.isRightButton(param1);
       }
-
+      
       private function iconLoadingErrorHandler(param1:UILoaderEvent) : void {
          this.icon.visible = false;
       }
-
+      
       private function iconLoadingCompleteHandler(param1:UILoaderEvent) : void {
          invalidate(LAYOUT_INVALID);
       }
-
+      
       public function set data(param1:Object) : void {
          this._data = param1 as NotificationInfoVO;
          invalidate(DATA_INVALID);
       }
-
+      
       public function get data() : Object {
          return this._data;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:MessageInfoVO = null;
          var _loc2_:String = null;
@@ -221,56 +218,52 @@ package net.wg.gui.notification
             dispatchEvent(new Event(RESIZED));
          }
       }
-
+      
       override public function get height() : Number {
          return this.background.height;
       }
-
-      protected function componentClickHandler(param1:MouseEvent) : void {
-         dispatchEvent(new ServiceMessageEvent(ServiceMessageEvent.MESSAGE_AREA_CLICKED,this._data.typeID,this._data.entityID,true));
-      }
-
+      
       protected function btnClickHandler(param1:ButtonEvent) : void {
          var _loc2_:ServiceMessageEvent = new ServiceMessageEvent(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this._data.typeID,this._data.entityID,true);
          _loc2_.action = param1.target.data;
          dispatchEvent(_loc2_);
       }
-
+      
       protected function updateAfterStateChange() : void {
          isInvalid(LAYOUT_INVALID);
       }
-
+      
       public function get messageTopOffset() : Number {
          return this._messageTopOffset;
       }
-
+      
       public function set messageTopOffset(param1:Number) : void {
          this._messageTopOffset = param1;
          invalidate(LAYOUT_INVALID);
       }
-
+      
       public function get messageBottomOffset() : Number {
          return this._messageBottomOffset;
       }
-
+      
       public function set messageBottomOffset(param1:Number) : void {
          this._messageBottomOffset = param1;
          invalidate(LAYOUT_INVALID);
       }
-
+      
       public function get buttonPadding() : int {
          return this._buttonPadding;
       }
-
+      
       public function set buttonPadding(param1:int) : void {
          this._buttonPadding = param1;
          invalidate(LAYOUT_INVALID);
       }
-
+      
       override public function get width() : Number {
          return Math.ceil(actualWidth);
       }
-
+      
       override protected function onDispose() : void {
          if(this.timeComponent)
          {
@@ -280,7 +273,6 @@ package net.wg.gui.notification
          this.textField.removeEventListener(MouseEvent.CLICK,this.onMessageMouseClick);
          this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler);
          this.icon.removeEventListener(UILoaderEvent.IOERROR,this.iconLoadingErrorHandler);
-         removeEventListener(MouseEvent.CLICK,this.componentClickHandler);
          this.background = null;
          this.icon.dispose();
          this.bgIcon.dispose();
@@ -289,15 +281,15 @@ package net.wg.gui.notification
          this.textField = null;
          super.onDispose();
       }
-
+      
       public function get btnsGroup() : Group {
          return this._btnsGroup;
       }
-
+      
       public function get timeStamp() : String {
          return this._timeStamp;
       }
-
+      
       public function set timeStamp(param1:String) : void {
          if(this._timeStamp != param1)
          {
@@ -305,8 +297,8 @@ package net.wg.gui.notification
             invalidate(TIMESTAMP_INVALID);
          }
       }
-
-      private function createButtonsGroup(param1:MessageInfoVO) : void {
+      
+      protected function createButtonsGroup(param1:MessageInfoVO) : void {
          var _loc4_:SoundButtonEx = null;
          var _loc6_:ButtonVO = null;
          var _loc7_:Object = null;
@@ -360,7 +352,7 @@ package net.wg.gui.notification
          }
          this._btnsGroup.validateNow();
       }
-
+      
       private function updateButtonsGroup(param1:MessageInfoVO) : void {
          var _loc4_:ButtonVO = null;
          var _loc5_:String = null;
@@ -390,7 +382,7 @@ package net.wg.gui.notification
             _loc7_++;
          }
       }
-
+      
       private function removeButtonsGroup() : void {
          var _loc1_:Object = null;
          var _loc2_:* = 0;
@@ -408,5 +400,4 @@ package net.wg.gui.notification
          }
       }
    }
-
 }

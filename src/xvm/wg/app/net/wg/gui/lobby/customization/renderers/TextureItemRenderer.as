@@ -1,17 +1,15 @@
 package net.wg.gui.lobby.customization.renderers
 {
-   import __AS3__.vec.Vector;
    import net.wg.data.constants.SoundTypes;
-
-
+   
    public class TextureItemRenderer extends CustomizationItemRenderer
    {
-          
+      
       public function TextureItemRenderer() {
          super();
          soundId = SoundTypes.TEXTURE_RENDERER;
       }
-
+      
       override protected function setState(param1:String) : void {
          var _loc4_:String = null;
          var _loc5_:* = NaN;
@@ -29,7 +27,7 @@ package net.wg.gui.lobby.customization.renderers
          do
          {
             _loc4_ = _loc2_.pop().toString();
-            _loc5_ = _loc3_.length-1;
+            _loc5_ = _loc3_.length - 1;
             while(_loc5_ >= 0)
             {
                border.state = _loc4_ + _loc3_[_loc5_];
@@ -37,7 +35,7 @@ package net.wg.gui.lobby.customization.renderers
             }
          }
          while(_loc2_.length > 0);
+         
       }
    }
-
 }

@@ -3,7 +3,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
    import net.wg.gui.lobby.fortifications.cmp.build.IFortBuilding;
    import net.wg.gui.lobby.fortifications.data.BuildingVO;
    import net.wg.utils.ICommons;
-   import __AS3__.vec.Vector;
    import net.wg.infrastructure.interfaces.IContextItem;
    import net.wg.infrastructure.interfaces.IContextMenu;
    import flash.display.InteractiveObject;
@@ -33,11 +32,10 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
    import scaleform.gfx.MouseEventEx;
    import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
    import net.wg.gui.lobby.fortifications.utils.impl.BuildingsCIGenerator;
-
-
+   
    public class FortBuilding extends FortBuildingUIBase implements IFortBuilding
    {
-          
+      
       public function FortBuilding() {
          super();
          this.updateInteractionEnabling(false);
@@ -49,63 +47,63 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          hitAreaControl.alpha = 0;
          this.addCommonBuildingListeners();
       }
-
+      
       private static const ALPHA_DISABLED:Number = 0.33;
-
+      
       private static const ALPHA_ENABLED:Number = 1;
-
+      
       private static const SATURATION_DISABLED:Number = 100;
-
+      
       private static const SATURATION_ENABLED:Number = 0;
-
+      
       private static const HALF_TURN_SCHEDULER_TIME:int = 2000;
-
+      
       private var model:BuildingVO = null;
-
+      
       private var _isCommander:Boolean = false;
-
+      
       private var _uid:String = "";
-
+      
       private var isShowCtxMenu:Boolean = false;
-
+      
       private var _selected:Boolean = false;
-
+      
       private var mouseOverTrigger:Boolean = true;
-
+      
       private var requestOpenPopOver:Boolean = false;
-
+      
       private var requestOpenCtxMenu:Boolean = false;
-
+      
       private var commons:ICommons = null;
-
+      
       private var isInExporting:Boolean = false;
-
+      
       private var isInImporting:Boolean = false;
-
+      
       private var inDirectionMode:Boolean = false;
-
+      
       private var toolTipHeader:String;
-
+      
       private var toolTipBody:String;
-
+      
       private var isDisableCursor:Boolean = false;
-
+      
       private var _lastState:Number = -1;
-
+      
       private var isTutorial:Boolean = false;
-
+      
       private var data:Vector.<IContextItem>;
-
+      
       private var frameCount:int = 0;
-
+      
       private var actionType:int = 0;
-
+      
       private var _contextMenu:IContextMenu = null;
-
+      
       public function getCustomHitArea() : InteractiveObject {
          return hitAreaControl;
       }
-
+      
       public function setData(param1:BuildingVO) : void {
          var _loc2_:String = null;
          if(this.model != null)
@@ -144,11 +142,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.updateEnabling();
          }
       }
-
+      
       public function updateCommonMode(param1:Boolean, param2:Boolean) : void {
          this.isTutorial = param2;
       }
-
+      
       public function updateTransportMode(param1:Boolean, param2:Boolean) : void {
          switch(FortCommonUtils.instance.getFunctionalState(param1,param2))
          {
@@ -159,8 +157,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                if(this.isExportAvailable())
                {
                   this.addTransportingListeners();
-                  this.showIndicators(true);
                }
+               this.showIndicators(true);
                this.updateEnabling();
                break;
             case FunctionalStates.LEAVE:
@@ -190,12 +188,12 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.removeTransportingListeners();
          }
       }
-
+      
       public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void {
          this.inDirectionMode = param1;
          this.updateEnabling();
       }
-
+      
       public function nextTransportingStep(param1:Boolean) : void {
          this.isInExporting = false;
          this.isInImporting = true;
@@ -209,19 +207,19 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
          this.updateEnabling();
       }
-
+      
       public function isAvailable() : Boolean {
          return !(this.model == null);
       }
-
+      
       public function isExportAvailable() : Boolean {
          return (this.isAvailable()) && (this.model.isExportAvailable);
       }
-
+      
       public function isImportAvailable() : Boolean {
          return (this.isAvailable()) && (this.model.isImportAvailable);
       }
-
+      
       public function onPopoverClose() : void {
          this.requestOpenPopOver = false;
          if(!this.mouseOverTrigger)
@@ -229,23 +227,22 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.forceSelected = false;
          }
       }
-
+      
       public function onComplete() : void {
-          
       }
-
+      
       public function getTargetButton() : DisplayObject {
          return buildingMc.getBuildingShape();
       }
-
+      
       public function getHitArea() : DisplayObject {
          return hitAreaControl;
       }
-
+      
       public function get selected() : Boolean {
          return this._selected;
       }
-
+      
       public function set selected(param1:Boolean) : void {
          if(this._selected == param1)
          {
@@ -274,7 +271,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
          this.updateBlinkingBtn();
       }
-
+      
       public function set forceSelected(param1:Boolean) : void {
          if(this._selected == param1)
          {
@@ -284,7 +281,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.actionType = 0;
          this.selected = param1;
       }
-
+      
       public function set isCommander(param1:Boolean) : void {
          this._isCommander = param1;
          if(this.model != null)
@@ -292,19 +289,18 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.setState(this.model.progress);
          }
       }
-
+      
       public function get uid() : String {
          return this._uid;
       }
-
+      
       public function set uid(param1:String) : void {
          this._uid = param1;
       }
-
+      
       public function set levelUpState(param1:Boolean) : void {
-          
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.STATE))
@@ -314,7 +310,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             trowel.mouseEnabled = trowel.mouseChildren = false;
          }
       }
-
+      
       override protected function onDispose() : void {
          this.removeAllListeners();
          App.stage.removeEventListener(Event.ENTER_FRAME,this.enterFrameHandlerA);
@@ -338,7 +334,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
          super.onDispose();
       }
-
+      
       protected function showToolTip(param1:String, param2:String) : void {
          var _loc3_:String = new ComplexTooltipHelper().addHeader(param1).addBody(param2).addNote("",false).make();
          if(_loc3_.length > 0)
@@ -346,72 +342,68 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             App.toolTipMgr.showComplex(_loc3_);
          }
       }
-
+      
       private function getTweenAnimator() : ITweenAnimator {
          return TweenAnimator.instance;
       }
-
+      
       private function getScheduler() : IScheduler {
          return App.utils.scheduler;
       }
-
+      
       private function isInNormalMode() : Boolean {
          return !this.isInExporting && !this.isInImporting && !this.inDirectionMode;
       }
-
+      
       private function updateEnabling() : void {
          var _loc1_:* = false;
          if(this.isInNormalMode())
          {
             this.enableForAll();
          }
-         else
+         else if(this.inDirectionMode)
          {
-            if(this.inDirectionMode)
+            this.disableForDirectionMode();
+         }
+         else if(this.isNotInCooldown())
+         {
+            _loc1_ = ((this.isExportAvailable()) && (this.isInExporting) || (this.isImportAvailable()) && (this.isInImporting)) && (this.isNotTrowelState());
+            if(_loc1_)
             {
-               this.disableForDirectionMode();
+               this.enableForTransporting();
             }
             else
             {
-               if(this.isNotInCooldown())
-               {
-                  _loc1_ = ((this.isExportAvailable()) && (this.isInExporting) || (this.isImportAvailable()) && (this.isInImporting)) && (this.isNotTrowelState());
-                  if(_loc1_)
-                  {
-                     this.enableForTransporting();
-                  }
-                  else
-                  {
-                     this.disableForTransporting();
-                  }
-               }
-               else
-               {
-                  cooldownIcon.timeTextField.text = String(this.model.cooldown);
-                  this.disableForCooldown();
-               }
+               this.disableForTransporting();
             }
          }
+         else
+         {
+            cooldownIcon.timeTextField.text = String(this.model.cooldown);
+            this.disableForCooldown();
+         }
+         
+         
          this.updateOrderTime();
          this.updateBlinkingBtn();
       }
-
+      
       private function isInCooldown() : Boolean {
          return !(this.model == null) && !(this.model.cooldown == null);
       }
-
+      
       private function isNotInCooldown() : Boolean {
          return !this.isInCooldown();
       }
-
+      
       private function isTrowelState() : Boolean {
          return (this.model) && this.model.progress == FORTIFICATION_ALIASES.STATE_TROWEL;
       }
-
+      
       private function isNotTrowelState() : Boolean {
          return !this.isTrowelState();
       }
-
+      
       private function enableForAll() : void {
          buildingMc.building.alpha = ALPHA_ENABLED;
          buildingMc.blinkingButton.alpha = ALPHA_ENABLED;
@@ -422,7 +414,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          indicators.visible = this.isNotTrowelState();
          this.addCommonBuildingListeners();
       }
-
+      
       private function disableForDirectionMode() : void {
          buildingMc.building.alpha = ALPHA_DISABLED;
          buildingMc.blinkingButton.alpha = ALPHA_DISABLED;
@@ -433,7 +425,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          indicators.visible = false;
          this.removeCommonBuildingListeners();
       }
-
+      
       private function enableForTransporting() : void {
          buildingMc.building.alpha = ALPHA_ENABLED;
          buildingMc.blinkingButton.alpha = ALPHA_ENABLED;
@@ -444,7 +436,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.updateIndicatorsVisibility();
          this.removeCommonBuildingListeners();
       }
-
+      
       private function disableForTransporting() : void {
          buildingMc.building.alpha = ALPHA_DISABLED;
          buildingMc.blinkingButton.alpha = ALPHA_DISABLED;
@@ -455,7 +447,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.updateIndicatorsVisibility();
          this.removeCommonBuildingListeners();
       }
-
+      
       private function disableForCooldown() : void {
          buildingMc.building.alpha = ALPHA_DISABLED;
          buildingMc.blinkingButton.alpha = ALPHA_DISABLED;
@@ -465,7 +457,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.updateIndicatorsVisibility();
          this.removeCommonBuildingListeners();
       }
-
+      
       private function showCooldown(param1:Boolean) : void {
          var _loc2_:ITweenAnimator = null;
          if(cooldownIcon.visible != param1)
@@ -483,13 +475,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
          }
       }
-
+      
       private function applySaturationForBuilding(param1:Boolean) : void {
          var _loc2_:Number = param1?SATURATION_ENABLED:SATURATION_DISABLED;
          App.utils.commons.setSaturation(Sprite(buildingMc.building),_loc2_);
          App.utils.commons.setSaturation(trowel,_loc2_);
       }
-
+      
       private function updateInteractionEnabling(param1:Boolean) : void {
          hitAreaControl.buttonMode = param1;
          hitAreaControl.useHandCursor = param1;
@@ -499,7 +491,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          buildingMc.buttonMode = param1;
          buildingMc.useHandCursor = param1;
       }
-
+      
       private function setOutState() : void {
          if(!this._selected)
          {
@@ -514,7 +506,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
          }
       }
-
+      
       private function setOverState() : void {
          if(!this._selected)
          {
@@ -529,7 +521,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
          }
       }
-
+      
       private function updateSelectedState(param1:Boolean) : void {
          this.showIndicators(param1);
          if(buildingMc.selected != param1)
@@ -541,7 +533,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             trowel.updatePressState = param1;
          }
       }
-
+      
       private function showIndicators(param1:Boolean) : void {
          if(!(indicators == null) && !(this.getTweenAnimator() == null))
          {
@@ -550,16 +542,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             {
                this.getTweenAnimator().addFadeInAnim(DisplayObject(indicators.labels),this);
             }
-            else
+            else if(indicators.labels.visible)
             {
-               if(indicators.labels.visible)
-               {
-                  this.getTweenAnimator().addFadeOutAnim(DisplayObject(indicators.labels),this);
-               }
+               this.getTweenAnimator().addFadeOutAnim(DisplayObject(indicators.labels),this);
             }
+            
          }
       }
-
+      
       private function updateIndicatorsVisibility() : void {
          indicators.visible = this.isNotTrowelState();
          if(indicators.labels.visible != this.isNotTrowelState())
@@ -567,47 +557,47 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.showIndicators(indicators.visible);
          }
       }
-
+      
       private function addCommonBuildingListeners() : void {
          hitAreaControl.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHitAreaHandler);
          hitAreaControl.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHitAreaHandler);
          hitAreaControl.addEventListener(MouseEvent.CLICK,this.onDownHitAreaHandler);
       }
-
+      
       private function removeCommonBuildingListeners() : void {
          hitAreaControl.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHitAreaHandler);
          hitAreaControl.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHitAreaHandler);
          hitAreaControl.removeEventListener(MouseEvent.CLICK,this.onDownHitAreaHandler);
       }
-
+      
       private function addTransportingListeners() : void {
          hitAreaControl.addEventListener(MouseEvent.MOUSE_OVER,this.onTransportMouseOutOverHandler);
          hitAreaControl.addEventListener(MouseEvent.MOUSE_OUT,this.onTransportMouseOutOverHandler);
       }
-
+      
       private function removeTransportingListeners() : void {
          hitAreaControl.removeEventListener(MouseEvent.MOUSE_OVER,this.onTransportMouseOutOverHandler);
          hitAreaControl.removeEventListener(MouseEvent.MOUSE_OUT,this.onTransportMouseOutOverHandler);
       }
-
+      
       private function addTransportingTooltipListener() : void {
          hitAreaControl.addEventListener(MouseEvent.MOUSE_OVER,this.onTransportTooltipMouseOutOverHandler);
       }
-
+      
       private function removeTransportingTooltipListener() : void {
          hitAreaControl.removeEventListener(MouseEvent.MOUSE_OVER,this.onTransportTooltipMouseOutOverHandler);
       }
-
+      
       private function removeAllListeners() : void {
          this.removeCommonBuildingListeners();
          this.removeTransportingListeners();
          this.removeTransportingTooltipListener();
       }
-
+      
       private function buildingCtxMenu() : void {
          this.isShowCtxMenu = this.model.progress >= FORTIFICATION_ALIASES.STATE_TROWEL && (this.model.isOpenCtxMenu);
       }
-
+      
       private function updateOrderTime() : void {
          var _loc1_:Boolean = this.canShowOrderTime();
          var _loc2_:Boolean = orderProcess.visible;
@@ -618,15 +608,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             orderProcess.rotation = 0;
             this.doHalfTurnHourglasses();
          }
-         else
+         else if(!_loc1_)
          {
-            if(!_loc1_)
-            {
-               _loc3_.removeAnims(orderProcess.hourglasses);
-            }
+            _loc3_.removeAnims(orderProcess.hourglasses);
          }
+         
       }
-
+      
       private function doHalfTurnHourglasses() : void {
          var _loc1_:ITweenAnimator = null;
          if(orderProcess != null)
@@ -641,11 +629,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.getTweenAnimator().addHalfTurnAnim(orderProcess.hourglasses);
          }
       }
-
+      
       private function canShowOrderTime() : Boolean {
-         return ((this.model) && (this.model.orderTime)) && !(this.model.orderTime == Values.EMPTY_STR) && (this.isInNormalMode());
+         return (this.model && this.model.orderTime) && !(this.model.orderTime == Values.EMPTY_STR) && (this.isInNormalMode());
       }
-
+      
       private function setAdvancedTooltipData() : void {
          this.updateOrderTime();
          var _loc1_:Array = this.getBuildingTooltipData(this.model.uid);
@@ -653,11 +641,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.toolTipHeader = App.utils.locale.makeString(_loc2_);
          this.toolTipBody = _loc1_[1].toString();
       }
-
+      
       private function getBuildingTooltipData(param1:String) : Array {
          return IFortBuildingsContainer(parent).getBuildingTooltipData(param1);
       }
-
+      
       private function createSimpleTooltipData() : void {
          var _loc1_:String = null;
          var _loc2_:String = null;
@@ -674,7 +662,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.toolTipHeader = App.utils.locale.makeString(_loc1_);
          this.toolTipBody = App.utils.locale.makeString(_loc2_);
       }
-
+      
       private function setState(param1:Number) : void {
          App.utils.asserter.assert(!(FORTIFICATION_ALIASES.STATES.indexOf(param1) == -1),"Unknown build state:" + param1,InfrastructureException);
          if(this._lastState != param1)
@@ -690,20 +678,16 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             ground.visible = true;
             this.createSimpleTooltipData();
          }
-         else
+         else if(this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION)
          {
-            if(this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION)
-            {
-               this.setAdvancedTooltipData();
-            }
-            else
-            {
-               if(this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION_DEF || this.model.progress == FORTIFICATION_ALIASES.STATE_BUILDING)
-               {
-                  this.setAdvancedTooltipData();
-               }
-            }
+            this.setAdvancedTooltipData();
          }
+         else if(this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION_DEF || this.model.progress == FORTIFICATION_ALIASES.STATE_BUILDING)
+         {
+            this.setAdvancedTooltipData();
+         }
+         
+         
          if(this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION_DEF || this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION)
          {
             buildingMc.setCurrentState(FORTIFICATION_ALIASES.FORT_FOUNDATION);
@@ -717,11 +701,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
          }
       }
-
+      
       private function updateBlinkingBtn() : void {
          buildingMc.setLevelUpState(this.canBlinking());
       }
-
+      
       private function canBlinking() : Boolean {
          var _loc1_:* = false;
          if(this.model != null)
@@ -736,11 +720,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
          return false;
       }
-
+      
       private function getRequiredBuildingState(param1:Number) : String {
          return FortBuildingConstants.BUILD_CODE_TO_NAME_MAP[param1];
       }
-
+      
       private function callPopOver() : void {
          if(!this.model || this.model.uid == FortBuildingConstants.FORT_UNKNOWN)
          {
@@ -750,12 +734,12 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          var _loc2_:Point = hitAreaControl.absPosition;
          App.popoverMgr.show(this,FORTIFICATION_ALIASES.FORT_BUILDING_CARD_POPOVER_EVENT,_loc2_.x,_loc2_.y,_loc1_,this);
       }
-
+      
       private function updateExternalRequest(param1:Boolean) : void {
          this.requestOpenCtxMenu = param1;
          this.requestOpenPopOver = !param1;
       }
-
+      
       private function onTransportMouseOutOverHandler(param1:MouseEvent) : void {
          var _loc2_:* = "onTransportMouseOutOverHandler can be invoked in transporting mode only!";
          App.utils.asserter.assert((this.isInImporting) || (this.isInExporting),_loc2_,InfrastructureException);
@@ -764,51 +748,45 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          {
             _loc3_ = importArrow;
          }
-         else
+         else if(this.isInExporting)
          {
-            if(this.isInExporting)
-            {
-               _loc3_ = exportArrow;
-            }
+            _loc3_ = exportArrow;
          }
+         
          if(param1.type == MouseEvent.MOUSE_OUT)
          {
             _loc3_.hide();
          }
+         else if(param1.type == MouseEvent.MOUSE_OVER)
+         {
+            _loc3_.show();
+         }
          else
          {
-            if(param1.type == MouseEvent.MOUSE_OVER)
-            {
-               _loc3_.show();
-            }
-            else
-            {
-               throw new InfrastructureException("onTransportMouseOutOverHandler can not be handle \"" + param1.type + "\" event.");
-            }
+            throw new InfrastructureException("onTransportMouseOutOverHandler can not be handle \"" + param1.type + "\" event.");
          }
+         
       }
-
+      
       private function onTransportTooltipMouseOutOverHandler(param1:MouseEvent) : void {
          if(param1.type == MouseEvent.MOUSE_OUT)
          {
             App.toolTipMgr.hide();
          }
-         else
+         else if(param1.type == MouseEvent.MOUSE_OVER)
          {
-            if(param1.type == MouseEvent.MOUSE_OVER)
+            if(this.model.transportTooltipData != null)
             {
-               if(this.model.transportTooltipData != null)
-               {
-                  this.showToolTip(this.model.transportTooltipData[0],this.model.transportTooltipData[1]);
-               }
-               else
-               {
-                  this.showToolTip(this.toolTipHeader,this.toolTipBody);
-               }
+               this.showToolTip(this.model.transportTooltipData[0],this.model.transportTooltipData[1]);
+            }
+            else
+            {
+               this.showToolTip(this.toolTipHeader,this.toolTipBody);
             }
          }
+         
       }
-
+      
       private function onRollOutHitAreaHandler(param1:MouseEvent) : void {
          this.mouseOverTrigger = false;
          App.toolTipMgr.hide();
@@ -821,7 +799,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.setOutState();
          }
       }
-
+      
       private function onRollOverHitAreaHandler(param1:MouseEvent) : void {
          if(this.isDisableCursor)
          {
@@ -842,7 +820,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
          this.showToolTip(this.toolTipHeader,this.toolTipBody);
       }
-
+      
       private function onDownHitAreaHandler(param1:MouseEvent) : void {
          var _loc3_:FortBuildingEvent = null;
          var _loc4_:IBuildingsCIGenerator = null;
@@ -871,16 +849,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.actionType = 1;
             App.stage.addEventListener(Event.ENTER_FRAME,this.enterFrameHandlerA);
          }
-         else
+         else if(this.commons.isLeftButton(_loc2_))
          {
-            if(this.commons.isLeftButton(_loc2_))
-            {
-               this.actionType = 2;
-               App.stage.addEventListener(Event.ENTER_FRAME,this.enterFrameHandlerA);
-            }
+            this.actionType = 2;
+            App.stage.addEventListener(Event.ENTER_FRAME,this.enterFrameHandlerA);
          }
+         
       }
-
+      
       private function enterFrameHandlerA(param1:Event) : void {
          var _loc2_:FortBuildingEvent = null;
          if(this.frameCount >= 2)
@@ -900,14 +876,12 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                DisplayObject(this._contextMenu).addEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
                DisplayObject(this._contextMenu).addEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.closeEventHandler);
             }
-            else
+            else if(this.actionType == 2)
             {
-               if(this.actionType == 2)
-               {
-                  this.updateExternalRequest(false);
-                  App.contextMenuMgr.hide();
-               }
+               this.updateExternalRequest(false);
+               App.contextMenuMgr.hide();
             }
+            
             if(this.actionType > 0)
             {
                this.actionType = 0;
@@ -920,7 +894,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
          this.frameCount = this.frameCount + 1;
       }
-
+      
       private function closeEventHandler(param1:ContextMenuEvent) : void {
          this.requestOpenCtxMenu = false;
          if(!this.mouseOverTrigger)
@@ -932,5 +906,4 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this._contextMenu = null;
       }
    }
-
 }

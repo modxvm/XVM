@@ -12,11 +12,10 @@ package net.wg.gui.lobby.confirmModuleWindow
    import net.wg.gui.components.controls.ActionPrice;
    import scaleform.clik.events.IndexEvent;
    import scaleform.clik.events.ButtonEvent;
-
-
+   
    public class ConfirmModuleWindow extends ConfirmModuleWindowMeta implements IConfirmModuleWindowMeta
    {
-          
+      
       public function ConfirmModuleWindow() {
          super();
          isModal = true;
@@ -24,27 +23,27 @@ package net.wg.gui.lobby.confirmModuleWindow
          canDrag = false;
          showWindowBg = false;
       }
-
+      
       private static const NORMAL_COLOR:uint = 6447189;
-
+      
       private static const ACTION_COLOR:uint = 16777215;
-
+      
       private static const DATA_INVALID:String = "dataInv";
-
+      
       private static const RESULT_INVALID:String = "resultInv";
-
+      
       private static const SELECTED_CURRENCY_INVALID:String = "currencyInv";
-
+      
       private static const SETTINGS_INVALID:String = "settingsInv";
-
+      
       private var moduleInfo:ModuleInfoVo;
-
+      
       private var settings:ItemDialogSettingsVO;
-
+      
       private var currency:String;
-
+      
       private var selectedCount:Number = 0;
-
+      
       override public function setWindow(param1:IWindow) : void {
          super.setWindow(param1);
          if(param1)
@@ -52,17 +51,17 @@ package net.wg.gui.lobby.confirmModuleWindow
             invalidate(SETTINGS_INVALID);
          }
       }
-
+      
       public function as_setData(param1:Object) : void {
          this.moduleInfo = new ModuleInfoVo(param1);
          invalidate(DATA_INVALID);
       }
-
+      
       public function as_setSettings(param1:Object) : void {
          this.settings = new ItemDialogSettingsVO(param1);
          invalidate(SETTINGS_INVALID);
       }
-
+      
       override protected function setLabels() : void {
          var _loc1_:ILocale = App.utils.locale;
          content.countLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_COUNTLABEL);
@@ -70,7 +69,7 @@ package net.wg.gui.lobby.confirmModuleWindow
          content.rightLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_TOTALLABEL);
          content.resultLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_TOTALLABEL);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:ILocale = null;
          var _loc2_:uint = 0;
@@ -147,17 +146,15 @@ package net.wg.gui.lobby.confirmModuleWindow
                      _loc5_ = this.moduleInfo.maxAvailableCount[1];
                   }
                }
+               else if(this.moduleInfo.currency == Currencies.GOLD)
+               {
+                  _loc5_ = this.moduleInfo.maxAvailableCount[1];
+               }
                else
                {
-                  if(this.moduleInfo.currency == Currencies.GOLD)
-                  {
-                     _loc5_ = this.moduleInfo.maxAvailableCount[1];
-                  }
-                  else
-                  {
-                     _loc5_ = this.moduleInfo.maxAvailableCount[0];
-                  }
+                  _loc5_ = this.moduleInfo.maxAvailableCount[0];
                }
+               
                _loc6_ = Math.min(1,_loc5_);
                content.nsCount.minimum = _loc6_;
                content.nsCount.maximum = _loc5_;
@@ -247,7 +244,7 @@ package net.wg.gui.lobby.confirmModuleWindow
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          if(content)
          {
@@ -255,19 +252,18 @@ package net.wg.gui.lobby.confirmModuleWindow
          }
          super.onDispose();
       }
-
+      
       override protected function selectedCountChangeHandler(param1:IndexEvent) : void {
          this.selectedCount = content.nsCount.value;
          invalidate(RESULT_INVALID);
       }
-
+      
       override protected function submitBtnClickHandler(param1:ButtonEvent) : void {
          submitS(this.selectedCount,this.currency);
       }
-
+      
       protected function currencyChangedHandler(param1:ListEvent) : void {
          invalidate(SELECTED_CURRENCY_INVALID);
       }
    }
-
 }

@@ -13,19 +13,17 @@ package net.wg.gui.lobby.fortifications.utils.impl
    import net.wg.data.VO.TweenPropertiesVO;
    import net.wg.infrastructure.interfaces.ITweenPropertiesVO;
    import net.wg.utils.ITweenManager;
-   import __AS3__.vec.*;
-
-
+   
    public class TweenAnimator extends Object implements ITweenAnimator
    {
-          
+      
       public function TweenAnimator() {
-         this.tweensData = new Vector.<TweenAnimator>(0);
+         this.tweensData = new Vector.<TweenLinkedObjects>(0);
          super();
       }
-
+      
       private static var ms_instance:ITweenAnimator = null;
-
+      
       public static function get instance() : ITweenAnimator {
          if(ms_instance == null)
          {
@@ -33,9 +31,9 @@ package net.wg.gui.lobby.fortifications.utils.impl
          }
          return ms_instance;
       }
-
+      
       private var tweensData:Vector.<TweenLinkedObjects>;
-
+      
       public function blinkInfinity(param1:DisplayObject) : void {
          var _loc2_:IAssertable = this.getAsserter();
          var _loc3_:String = "element for blinking" + Errors.CANT_NULL;
@@ -45,7 +43,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          this.createDirectAnim(param1);
          this.createReverseAnim(param1);
       }
-
+      
       public function addFadeInAnim(param1:DisplayObject, param2:ITweenAnimatorHandler) : void {
          param1.visible = true;
          var _loc3_:ITween = this.addAlphaAnim(param1,TweenConstraints.FADE_DURATION,TweenConstraints.FADE_ALPHA_MIN,TweenConstraints.FADE_ALPHA_MAX,true);
@@ -54,13 +52,13 @@ package net.wg.gui.lobby.fortifications.utils.impl
          this.getAsserter().assert(this.checkTweenTypeInStack(TweenTypes.FADE_IN,param1),_loc4_);
          this.tweensData.push(new TweenLinkedObjects(_loc3_,param1,param2));
       }
-
+      
       public function addFadeInAnimEx(param1:DisplayObject) : ITween {
          var _loc2_:ITween = this.addAlphaAnim(param1,TweenConstraints.FADE_DURATION,TweenConstraints.FADE_ALPHA_MIN,TweenConstraints.FADE_ALPHA_MAX);
          _loc2_.memberData = {"type":TweenTypes.FADE_IN};
          return _loc2_;
       }
-
+      
       public function addFadeOutAnim(param1:DisplayObject, param2:ITweenAnimatorHandler) : void {
          var _loc3_:ITween = this.addAlphaAnim(param1,TweenConstraints.FADE_DURATION,TweenConstraints.FADE_ALPHA_MAX,TweenConstraints.FADE_ALPHA_MIN,true);
          _loc3_.memberData = {"type":TweenTypes.FADE_OUT};
@@ -68,16 +66,16 @@ package net.wg.gui.lobby.fortifications.utils.impl
          this.getAsserter().assert(this.checkTweenTypeInStack(TweenTypes.FADE_OUT,param1),_loc4_);
          this.tweensData.push(new TweenLinkedObjects(_loc3_,param1,param2));
       }
-
+      
       public function addFadeOutAnimEx(param1:DisplayObject) : ITween {
          var _loc2_:ITween = this.addAlphaAnim(param1,TweenConstraints.FADE_DURATION,TweenConstraints.FADE_ALPHA_MAX,TweenConstraints.FADE_ALPHA_MIN);
          _loc2_.memberData = {"type":TweenTypes.FADE_OUT};
          return _loc2_;
       }
-
+      
       public function removeAnims(param1:DisplayObject) : void {
          var _loc3_:TweenLinkedObjects = null;
-         var _loc2_:int = this.tweensData.length-1;
+         var _loc2_:int = this.tweensData.length - 1;
          while(_loc2_ >= 0)
          {
             _loc3_ = this.tweensData[_loc2_];
@@ -85,12 +83,12 @@ package net.wg.gui.lobby.fortifications.utils.impl
             {
                this.getTweenManager().disposeTweenS(_loc3_.tween);
                _loc3_.dispose();
-               delete this.tweensData[[_loc2_]];
+               delete this.tweensData[_loc2_];
             }
             _loc2_--;
          }
       }
-
+      
       public function addMoveUpAnim(param1:DisplayObject, param2:Number, param3:ITweenAnimatorHandler) : void {
          var _loc4_:* = "Moving for \'" + param1.name + "\' already exists!";
          var _loc5_:Point = new Point(param1.x,param2 + TweenConstraints.TRANSLATION_LENGTH);
@@ -100,7 +98,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          this.getAsserter().assert(this.checkTweenTypeInStack(TweenTypes.MOVE_UP,param1),_loc4_);
          this.tweensData.push(new TweenLinkedObjects(_loc7_,param1,param3));
       }
-
+      
       public function addMoveUpAnimEx(param1:DisplayObject, param2:Number) : ITween {
          var _loc3_:Point = new Point(param1.x,param2 + TweenConstraints.TRANSLATION_LENGTH);
          var _loc4_:Point = new Point(param1.x,param2);
@@ -108,7 +106,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          _loc5_.memberData = {"type":TweenTypes.MOVE_UP};
          return _loc5_;
       }
-
+      
       public function addMoveDownAnim(param1:DisplayObject, param2:Number, param3:ITweenAnimatorHandler) : void {
          var _loc4_:* = "Moving for \'" + param1.name + "\' already exists!";
          var _loc5_:Point = new Point(param1.x,param2);
@@ -118,7 +116,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          this.getAsserter().assert(this.checkTweenTypeInStack(TweenTypes.MOVE_DOWN,param1),_loc4_);
          this.tweensData.push(new TweenLinkedObjects(_loc7_,param1,param3));
       }
-
+      
       public function addMoveDownAnimEx(param1:DisplayObject, param2:Number) : ITween {
          var _loc3_:Point = new Point(param1.x,param2);
          var _loc4_:Point = new Point(param1.x,param2 + TweenConstraints.TRANSLATION_LENGTH);
@@ -126,7 +124,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          _loc5_.memberData = {"type":TweenTypes.MOVE_DOWN};
          return _loc5_;
       }
-
+      
       public function addHalfTurnAnim(param1:DisplayObject) : void {
          var _loc2_:* = "Tween for \'" + param1.name + "\' already exists!";
          var _loc3_:ITween = this.addHalfTurnAnimEx(param1);
@@ -134,7 +132,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          this.getAsserter().assert(this.checkTweenTypeInStack(TweenTypes.TURN_HALF,param1),_loc2_);
          this.tweensData.push(new TweenLinkedObjects(_loc3_,param1,null));
       }
-
+      
       public function addHalfTurnAnimEx(param1:DisplayObject) : ITween {
          var _loc2_:ITweenPropertiesVO = new TweenPropertiesVO(
             {
@@ -144,13 +142,12 @@ package net.wg.gui.lobby.fortifications.utils.impl
                "paused":false,
                "rotation":param1.rotation + 180,
                "position":0
-            }
-         );
+            });
          var _loc3_:ITween = this.getTweenManager().createNewTween(_loc2_);
          _loc3_.memberData = {"type":TweenTypes.TURN_HALF};
          return _loc3_;
       }
-
+      
       public function onComplete(param1:ITween) : void {
          var _loc4_:TweenLinkedObjects = null;
          var _loc2_:Object = param1.memberData;
@@ -169,11 +166,10 @@ package net.wg.gui.lobby.fortifications.utils.impl
             _loc3_.onComplete();
          }
       }
-
+      
       public function onStart(param1:ITween) : void {
-          
       }
-
+      
       public function dispose() : void {
          var _loc1_:TweenLinkedObjects = null;
          while(this.tweensData.length > 0)
@@ -185,8 +181,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
          ms_instance = null;
          this.tweensData = null;
       }
-
-      public function createPropsForAlpha(param1:DisplayObject, param2:uint, param3:Number, param4:uint=0) : ITweenPropertiesVO {
+      
+      public function createPropsForAlpha(param1:DisplayObject, param2:uint, param3:Number, param4:uint = 0) : ITweenPropertiesVO {
          var _loc5_:ITweenPropertiesVO = new TweenPropertiesVO(
             {
                "target":param1,
@@ -195,11 +191,10 @@ package net.wg.gui.lobby.fortifications.utils.impl
                "alpha":param3,
                "loop":false,
                "paused":true
-            }
-         );
+            });
          return _loc5_;
       }
-
+      
       public function createPropsForFrameBasedAnim(param1:DisplayObject, param2:int, param3:int) : ITweenPropertiesVO {
          var _loc4_:ITweenPropertiesVO = new TweenPropertiesVO(
             {
@@ -209,19 +204,18 @@ package net.wg.gui.lobby.fortifications.utils.impl
                "loop":false,
                "paused":true,
                "isOnCodeBased":false
-            }
-         );
+            });
          return _loc4_;
       }
-
+      
       private function getAsserter() : IAssertable {
          return App.utils.asserter;
       }
-
+      
       private function getTweenManager() : ITweenManager {
          return App.tweenMgr;
       }
-
+      
       private function removeTween(param1:ITween) : void {
          var _loc3_:TweenLinkedObjects = null;
          var _loc2_:* = 0;
@@ -232,13 +226,13 @@ package net.wg.gui.lobby.fortifications.utils.impl
             {
                this.getTweenManager().disposeTweenS(param1);
                _loc3_.dispose();
-               delete this.tweensData[[_loc2_]];
+               delete this.tweensData[_loc2_];
             }
             _loc2_++;
          }
       }
-
-      private function addAlphaAnim(param1:DisplayObject, param2:int, param3:Number, param4:Number, param5:Boolean=false) : ITween {
+      
+      private function addAlphaAnim(param1:DisplayObject, param2:int, param3:Number, param4:Number, param5:Boolean = false) : ITween {
          var _loc6_:Number = param1.alpha;
          param1.alpha = param3;
          var _loc7_:ITweenManager = this.getTweenManager();
@@ -252,8 +246,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
          param1.alpha = _loc6_;
          return _loc9_;
       }
-
-      private function addMoveAnim(param1:DisplayObject, param2:int, param3:Point, param4:Point, param5:Boolean=false) : ITween {
+      
+      private function addMoveAnim(param1:DisplayObject, param2:int, param3:Point, param4:Point, param5:Boolean = false) : ITween {
          var _loc6_:Point = new Point(param1.x,param1.y);
          param1.x = param3.x;
          param1.y = param3.y;
@@ -264,8 +258,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
                "x":param4.x,
                "y":param4.y,
                "loop":false
-            }
-         );
+            });
          if(param5)
          {
             _loc7_.setHandler(this);
@@ -276,7 +269,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          param1.y = _loc6_.y;
          return _loc8_;
       }
-
+      
       private function checkTweenTypeInStack(param1:String, param2:DisplayObject) : Boolean {
          var _loc6_:Vector.<String> = null;
          var _loc7_:TweenLinkedObjects = null;
@@ -316,7 +309,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          }
          return true;
       }
-
+      
       private function createDirectAnim(param1:DisplayObject) : ITween {
          var _loc2_:ITween = this.createBlinkingAlpha(param1,TweenConstraints.FADE_ALPHA_MIN,TweenConstraints.FADE_ALPHA_MAX);
          if(param1.alpha == 0)
@@ -326,7 +319,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          _loc2_.memberData = {"type":TweenTypes.BLINK_IN};
          return _loc2_;
       }
-
+      
       private function createReverseAnim(param1:DisplayObject) : ITween {
          var _loc2_:ITween = this.createBlinkingAlpha(param1,TweenConstraints.FADE_ALPHA_MAX,TweenConstraints.FADE_ALPHA_MIN);
          if(param1.alpha > 0)
@@ -336,7 +329,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          _loc2_.memberData = {"type":TweenTypes.BLINK_OUT};
          return _loc2_;
       }
-
+      
       private function createBlinkingAlpha(param1:DisplayObject, param2:Number, param3:Number) : ITween {
          var _loc4_:ITween = this.addAlphaAnim(param1,TweenConstraints.BLINKING_DURATION,param2,param3);
          _loc4_.setDelayS(TweenConstraints.BLINKING_DURATION);
@@ -345,7 +338,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
          this.tweensData.push(new TweenLinkedObjects(_loc4_,param1,null));
          return _loc4_;
       }
-
+      
       private function getIdxOfTweenDataByTween(param1:ITween) : int {
          var _loc2_:uint = param1.getTweenIdxS();
          var _loc3_:* = 0;
@@ -360,60 +353,59 @@ package net.wg.gui.lobby.fortifications.utils.impl
          return -1;
       }
    }
+}
+import net.wg.infrastructure.interfaces.entity.IDisposable;
+import net.wg.infrastructure.interfaces.ITween;
+import flash.display.DisplayObject;
+import net.wg.infrastructure.interfaces.ITweenAnimatorHandler;
 
-}   import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import net.wg.infrastructure.interfaces.ITween;
-   import flash.display.DisplayObject;
-   import net.wg.infrastructure.interfaces.ITweenAnimatorHandler;
-
-
-   class TweenLinkedObjects extends Object implements IDisposable
-   {
-          
-      function TweenLinkedObjects(param1:ITween, param2:DisplayObject, param3:ITweenAnimatorHandler) {
-         super();
-         this._tween = param1;
-         this._target = param2;
-         this._handler = param3;
-      }
-
-      private var _tween:ITween;
-
-      private var _target:DisplayObject;
-
-      private var _handler:ITweenAnimatorHandler;
-
-      public function get tween() : ITween {
-         return this._tween;
-      }
-
-      public function set tween(param1:ITween) : void {
-         this._tween = param1;
-      }
-
-      public function get target() : DisplayObject {
-         return this._target;
-      }
-
-      public function set target(param1:DisplayObject) : void {
-         this._target = param1;
-      }
-
-      public function get handler() : ITweenAnimatorHandler {
-         return this._handler;
-      }
-
-      public function set handler(param1:ITweenAnimatorHandler) : void {
-         this._handler = param1;
-      }
-
-      public function getTweenId() : int {
-         return this._tween.getTweenIdxS();
-      }
-
-      public function dispose() : void {
-         this._tween = null;
-         this._target = null;
-         this._handler = null;
-      }
+class TweenLinkedObjects extends Object implements IDisposable
+{
+   
+   function TweenLinkedObjects(param1:ITween, param2:DisplayObject, param3:ITweenAnimatorHandler) {
+      super();
+      this._tween = param1;
+      this._target = param2;
+      this._handler = param3;
    }
+   
+   private var _tween:ITween;
+   
+   private var _target:DisplayObject;
+   
+   private var _handler:ITweenAnimatorHandler;
+   
+   public function get tween() : ITween {
+      return this._tween;
+   }
+   
+   public function set tween(param1:ITween) : void {
+      this._tween = param1;
+   }
+   
+   public function get target() : DisplayObject {
+      return this._target;
+   }
+   
+   public function set target(param1:DisplayObject) : void {
+      this._target = param1;
+   }
+   
+   public function get handler() : ITweenAnimatorHandler {
+      return this._handler;
+   }
+   
+   public function set handler(param1:ITweenAnimatorHandler) : void {
+      this._handler = param1;
+   }
+   
+   public function getTweenId() : int {
+      return this._tween.getTweenIdxS();
+   }
+   
+   public function dispose() : void {
+      this._tween = null;
+      this._target = null;
+      this._handler = null;
+   }
+}

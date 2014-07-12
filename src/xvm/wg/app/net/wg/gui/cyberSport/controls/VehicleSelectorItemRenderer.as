@@ -6,7 +6,6 @@ package net.wg.gui.cyberSport.controls
    import flash.display.MovieClip;
    import flash.text.TextField;
    import net.wg.gui.cyberSport.vo.VehicleSelectorItemVO;
-   import __AS3__.vec.Vector;
    import flash.geom.Point;
    import net.wg.data.constants.Cursors;
    import flash.events.MouseEvent;
@@ -20,11 +19,10 @@ package net.wg.gui.cyberSport.controls
    import scaleform.clik.ui.InputDetails;
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.NavigationCode;
-
-
+   
    public class VehicleSelectorItemRenderer extends ListItemRendererWithFocusOnDis
    {
-          
+      
       public function VehicleSelectorItemRenderer() {
          this.statesSelectedNotReady = Vector.<String>(["notReady_selected_",""]);
          this.statesNotReady = Vector.<String>(["notReady_",""]);
@@ -34,41 +32,41 @@ package net.wg.gui.cyberSport.controls
          this.notReadyAlert.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverAlert);
          this.notReadyAlert.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutAlert);
       }
-
+      
       private static const MODE_MULTI:String = "multiSelection";
-
+      
       private static const MODE_SINGLE:String = "singleSelection";
-
+      
       private static const LAYOUT_CONFIG:Object;
-
+      
       public var checkBox:CheckBox;
-
+      
       public var flagLoader:UILoaderAlt;
-
+      
       public var tankIcon:UILoaderAlt;
-
+      
       public var vehicleTypeIcon:MovieClip;
-
+      
       public var levelIcon:MovieClip;
-
+      
       public var vehicleNameTF:TextField;
-
+      
       public var notReadyAlert:MovieClip;
-
+      
       public var bg:MovieClip;
-
+      
       protected var model:VehicleSelectorItemVO;
-
+      
       private var _multiSelectionMode:Boolean = false;
-
+      
       private var _userVehiclesMode:Boolean = false;
-
+      
       private var _isVehicleReady:Boolean = true;
-
+      
       protected var statesSelectedNotReady:Vector.<String>;
-
+      
       protected var statesNotReady:Vector.<String>;
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          var _loc2_:Vector.<String> = null;
          var _loc1_:Boolean = this.model?this.model.selected:false;
@@ -84,7 +82,7 @@ package net.wg.gui.cyberSport.controls
          this.notReadyAlert.mouseEnabled = true;
          return _loc2_;
       }
-
+      
       override public function setData(param1:Object) : void {
          var _loc2_:Point = null;
          var _loc3_:* = false;
@@ -121,17 +119,15 @@ package net.wg.gui.cyberSport.controls
             }
             if((_loc4_) && !_loc3_)
             {
-               if(((this.model) && (this.model.tooltip)) && (!enabled) && !this.mouseOverAlert)
+               if((this.model && this.model.tooltip) && (!enabled) && !this.mouseOverAlert)
                {
                   App.toolTipMgr.showComplex(this.model.tooltip);
                }
-               else
+               else if(enabled)
                {
-                  if(enabled)
-                  {
-                     App.toolTipMgr.hide();
-                  }
+                  App.toolTipMgr.hide();
                }
+               
             }
             invalidateData();
          }
@@ -140,14 +136,14 @@ package net.wg.gui.cyberSport.controls
             visible = false;
          }
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          this.showDisabledToolTip();
       }
-
+      
       private var mouseOverAlert:Boolean = false;
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          if(!enabled)
@@ -155,7 +151,7 @@ package net.wg.gui.cyberSport.controls
             App.toolTipMgr.hide();
          }
       }
-
+      
       private function onRollOverAlert(param1:MouseEvent) : void {
          var _loc2_:ComplexTooltipHelper = null;
          this.mouseOverAlert = true;
@@ -175,20 +171,20 @@ package net.wg.gui.cyberSport.controls
             App.toolTipMgr.show(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
          }
       }
-
+      
       private function onRollOutAlert(param1:MouseEvent) : void {
          this.mouseOverAlert = false;
          App.toolTipMgr.hide();
          this.showDisabledToolTip();
       }
-
+      
       private function showDisabledToolTip() : void {
-         if(((this.model) && (this.model.tooltip)) && (!enabled) && !this.mouseOverAlert)
+         if((this.model && this.model.tooltip) && (!enabled) && !this.mouseOverAlert)
          {
             App.toolTipMgr.showComplex(this.model.tooltip);
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.checkBox.label = "";
@@ -196,7 +192,7 @@ package net.wg.gui.cyberSport.controls
          addEventListener(MouseEvent.DOUBLE_CLICK,this.onDoubleClick);
          this.updateModeLayout();
       }
-
+      
       private function updateModeLayout() : void {
          var _loc2_:String = null;
          var _loc3_:Object = null;
@@ -215,11 +211,11 @@ package net.wg.gui.cyberSport.controls
             this.checkBox.visible = this._multiSelectionMode;
          }
       }
-
+      
       private function onClick(param1:ButtonEvent) : void {
          this.dispatchVehicleSelector(false);
       }
-
+      
       private function onDoubleClick(param1:MouseEvent) : void {
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
          var _loc3_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
@@ -232,8 +228,8 @@ package net.wg.gui.cyberSport.controls
             this.dispatchVehicleSelector(true);
          }
       }
-
-      private function dispatchVehicleSelector(param1:Boolean=false) : void {
+      
+      private function dispatchVehicleSelector(param1:Boolean = false) : void {
          this.model.selected = this._multiSelectionMode?!this.model.selected:true;
          setState(state);
          invalidate(InvalidationType.DATA);
@@ -243,7 +239,7 @@ package net.wg.gui.cyberSport.controls
             owner.invalidate(InvalidationType.STATE);
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          super.handleInput(param1);
          var _loc2_:InputDetails = param1.details;
@@ -261,7 +257,7 @@ package net.wg.gui.cyberSport.controls
                break;
          }
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.STATE))
@@ -281,7 +277,7 @@ package net.wg.gui.cyberSport.controls
             this.tankIcon.source = this.model.smallIconPath;
          }
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(ButtonEvent.CLICK,this.onClick);
          removeEventListener(MouseEvent.DOUBLE_CLICK,this.onDoubleClick);
@@ -298,5 +294,4 @@ package net.wg.gui.cyberSport.controls
          super.onDispose();
       }
    }
-
 }

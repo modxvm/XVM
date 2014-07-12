@@ -9,43 +9,39 @@ package net.wg.gui.login.EULA
    import net.wg.data.constants.Errors;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.utils.Padding;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.TextEvent;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.constants.InputValue;
    import flash.ui.Keyboard;
-
-
+   
    public class EULADlg extends EULAMeta implements IEULAMeta
    {
-          
+      
       public function EULADlg() {
          super();
          isModal = true;
          isCentered = true;
          canDrag = false;
       }
-
+      
       public var applyButton:SoundButtonEx = null;
-
+      
       public var textArea:TextAreaSimple = null;
-
-      private var _myHeight:Number = 0;
-
-      private var _myWidth:Number = 0;
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          setFocus(this.applyButton);
       }
-
+      
       override public final function setViewSize(param1:Number, param2:Number) : void {
          _originalWidth = width;
          _originalHeight = height;
          setActualSize(width,height);
          setActualScale(1,1);
       }
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          if(this.isAutoResize())
          {
@@ -56,7 +52,7 @@ package net.wg.gui.login.EULA
             super.updateStage(param1,param2);
          }
       }
-
+      
       public function as_setEULAText(param1:String) : void {
          var _loc5_:* = NaN;
          var _loc2_:* = "Incorrect invoking as_setEULAText!" + "Method must be call once time only!";
@@ -73,18 +69,22 @@ package net.wg.gui.login.EULA
                this.textArea.height = this.textArea.textField.textHeight + 5;
                this.textArea.validateNow();
                _loc5_ = _loc4_ + this.textArea.height;
-               this.dynamicUpdateSize(width,_loc5_);
+               this.height = Math.round(_loc5_);
+               this.updatePosition();
             }
          }
       }
-
+      
       override protected function preInitialize() : void {
          constraints = new Constraints(this,ConstrainMode.REFLOW);
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          window.useBottomBtns = true;
+         var _loc1_:Padding = window.contentPadding as Padding;
+         _loc1_.bottom = _loc1_.bottom - 1;
+         window.contentPadding = _loc1_;
          this.applyButton.addEventListener(ButtonEvent.CLICK,this.onApplyBtnClickHandler);
          this.textArea.addEventListener(TextEvent.LINK,this.onLinkClickHandler);
          addEventListener(InputEvent.INPUT,this.handleInput);
@@ -93,7 +93,7 @@ package net.wg.gui.login.EULA
          this.updateStage(App.appWidth,App.appHeight);
          requestEULATextS();
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.applyButton.removeEventListener(ButtonEvent.CLICK,this.onApplyBtnClickHandler);
@@ -104,37 +104,23 @@ package net.wg.gui.login.EULA
          this.applyButton = null;
          removeEventListener(InputEvent.INPUT,this.handleInput);
       }
-
+      
       protected function isAutoResize() : Boolean {
          return true;
       }
-
-      private function dynamicUpdateSize(param1:Number, param2:Number) : void {
-         App.utils.scheduler.envokeInNextFrame(this.dynamicUpdateSizePostponed,param1,param2);
-         visible = false;
-      }
-
-      private function dynamicUpdateSizePostponed(param1:Number, param2:Number) : void {
-         this._myWidth = param1;
-         this._myHeight = param2;
-         window.updateSize(param1,param2,true);
-         this.updatePosition();
-         visible = true;
-      }
-
+      
       private function updatePosition() : void {
-         window.x = App.appWidth - this._myWidth >> 1;
-         window.y = App.appHeight - this._myHeight >> 1;
+         geometry.setPosition(window);
       }
-
+      
       private function onApplyBtnClickHandler(param1:ButtonEvent) : void {
          onApplyS();
       }
-
+      
       private function onLinkClickHandler(param1:TextEvent) : void {
          onLinkClickS(param1.text);
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          super.handleInput(param1);
          if(param1.handled)
@@ -147,5 +133,4 @@ package net.wg.gui.login.EULA
          }
       }
    }
-
 }

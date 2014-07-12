@@ -4,18 +4,16 @@ package net.wg.gui.cyberSport.views
    import flash.text.TextField;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.cyberSport.controls.RosterSettingsNumerationBlock;
-   import __AS3__.vec.Vector;
    import net.wg.gui.rally.vo.RallySlotVO;
    import scaleform.clik.motion.Tween;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ButtonEvent;
    import fl.transitions.easing.Strong;
-
-
+   
    public class RosterSettingsView extends UIComponent
    {
-          
+      
       public function RosterSettingsView() {
          this.tweens = new Vector.<Tween>();
          super();
@@ -36,47 +34,47 @@ package net.wg.gui.cyberSport.views
             _loc1_++;
          }
       }
-
+      
       public var headerText:TextField;
-
+      
       public var secondText:TextField;
-
+      
       public var slot1:AnimatedRosterSettingsView;
-
+      
       public var slot2:AnimatedRosterSettingsView;
-
+      
       public var slot3:AnimatedRosterSettingsView;
-
+      
       public var slot4:AnimatedRosterSettingsView;
-
+      
       public var slot5:AnimatedRosterSettingsView;
-
+      
       public var slot6:AnimatedRosterSettingsView;
-
+      
       public var slot7:AnimatedRosterSettingsView;
-
+      
       public var submitBtn:SoundButtonEx;
-
+      
       public var cancelBtn:SoundButtonEx;
-
+      
       public var numerationBlock:RosterSettingsNumerationBlock;
-
+      
       private var slots:Vector.<AnimatedRosterSettingsView>;
-
+      
       private var slotsLength:uint = 0;
-
+      
       private var _models:Vector.<RallySlotVO>;
-
+      
       private var tweens:Vector.<Tween>;
-
+      
       private var _animationDuration:Number = 1000;
-
+      
       private var _innerAnmDuration:Number = 1000;
-
+      
       private var _buttonYOffset:int = 490;
-
+      
       private var _setSelectedSettings:Array = null;
-
+      
       private function clickRosterSettingsBtnHandler(param1:CSComponentEvent) : void {
          var _loc2_:Array = [];
          var _loc3_:* = 0;
@@ -90,31 +88,31 @@ package net.wg.gui.cyberSport.views
          }
          dispatchEvent(new CSComponentEvent(CSComponentEvent.SHOW_SETTINGS_ROSTER_WND,_loc2_));
       }
-
+      
       public function set buttonYOffset(param1:Number) : void {
          this._buttonYOffset = param1;
       }
-
+      
       public function get buttonYOffset() : Number {
          return this._buttonYOffset;
       }
-
+      
       public function set animationDuration(param1:Number) : void {
          this._animationDuration = param1;
       }
-
+      
       public function get animationDuration() : Number {
          return this._animationDuration;
       }
-
+      
       public function set innerAnmDuration(param1:Number) : void {
          this._innerAnmDuration = param1;
       }
-
+      
       public function get innerAnmDuration() : Number {
          return this._innerAnmDuration;
       }
-
+      
       public function setData(param1:Array) : void {
          var _loc3_:RallySlotVO = null;
          if(param1 == null)
@@ -122,18 +120,18 @@ package net.wg.gui.cyberSport.views
             return;
          }
          var _loc2_:Vector.<RallySlotVO> = new Vector.<RallySlotVO>();
-         for each (_loc3_ in param1)
+         for each(_loc3_ in param1)
          {
             _loc2_.push(_loc3_);
          }
          this._models = _loc2_;
          invalidate(InvalidationType.DATA);
       }
-
+      
       public function get chooseRoster() : Array {
          return [];
       }
-
+      
       private function afterSetData() : void {
          var _loc1_:* = 0;
          while(_loc1_ < this._models.length)
@@ -149,7 +147,7 @@ package net.wg.gui.cyberSport.views
             _loc1_++;
          }
       }
-
+      
       public function set setSelectedSettings(param1:Array) : void {
          this._setSelectedSettings = param1;
          var _loc2_:* = 0;
@@ -162,7 +160,7 @@ package net.wg.gui.cyberSport.views
             _loc2_++;
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
@@ -180,7 +178,7 @@ package net.wg.gui.cyberSport.views
             this.slots.shift();
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.submitBtn.y = this.buttonYOffset;
@@ -194,7 +192,7 @@ package net.wg.gui.cyberSport.views
          this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
          this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.cancelBtn_buttonClickHandler);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this._models))
@@ -202,17 +200,17 @@ package net.wg.gui.cyberSport.views
             this.afterSetData();
          }
       }
-
+      
       public function animationIn() : void {
          this.setAnimationProperties(true);
          this.setAnimationRules({"alpha":1});
       }
-
+      
       public function animationOut() : void {
          this.setAnimationProperties(false);
          this.setAnimationRules({"alpha":0});
       }
-
+      
       private function setAnimationRules(param1:Object) : void {
          if(param1 == null)
          {
@@ -224,23 +222,22 @@ package net.wg.gui.cyberSport.views
                "paused":false,
                "ease":Strong.easeOut,
                "onComplete":null
-            }
-         )]);
+            })]);
       }
-
+      
       private function stopPrevioseAnimation() : void {
          var _loc1_:Tween = null;
          if(this.tweens)
          {
-            for each (_loc1_ in this.tweens)
+            for each(_loc1_ in this.tweens)
             {
                _loc1_.paused = true;
                _loc1_ = null;
             }
          }
       }
-
-      private function setAnimationProperties(param1:Boolean=false) : void {
+      
+      private function setAnimationProperties(param1:Boolean = false) : void {
          var _loc2_:* = 0;
          while(_loc2_ < this.slotsLength)
          {
@@ -256,11 +253,11 @@ package net.wg.gui.cyberSport.views
             _loc2_++;
          }
       }
-
+      
       private function submitBtn_buttonClickHandler(param1:ButtonEvent) : void {
          dispatchEvent(new CSComponentEvent(CSComponentEvent.APPLY_ROSTER_SETTINGS));
       }
-
+      
       public function getSettingsResults() : Array {
          var _loc1_:Array = [];
          var _loc2_:* = 0;
@@ -271,11 +268,10 @@ package net.wg.gui.cyberSport.views
          }
          return _loc1_;
       }
-
+      
       private function cancelBtn_buttonClickHandler(param1:ButtonEvent) : void {
          invalidate(InvalidationType.DATA);
          dispatchEvent(new CSComponentEvent(CSComponentEvent.CANCEL_ROSTER_SETTINGS));
       }
    }
-
 }

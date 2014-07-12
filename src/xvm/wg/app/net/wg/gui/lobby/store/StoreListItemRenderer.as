@@ -15,23 +15,22 @@ package net.wg.gui.lobby.store
    import net.wg.data.constants.Tooltips;
    import net.wg.data.constants.Currencies;
    import net.wg.data.constants.FittingTypes;
-
-
+   
    public class StoreListItemRenderer extends ComplexListItemRenderer
    {
-          
+      
       public function StoreListItemRenderer() {
          super();
       }
-
+      
       public var credits:ModuleRendererCredits = null;
-
+      
       public var actionPrice:ActionPrice = null;
-
+      
       public var errorField:TextField = null;
-
+      
       public var hitMc:Sprite;
-
+      
       override protected function onDispose() : void {
          this.actionPrice.dispose();
          this.actionPrice = null;
@@ -39,7 +38,7 @@ package net.wg.gui.lobby.store
          this.credits = null;
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          TextFieldEx.setVerticalAlign(this.errorField,TextFieldEx.VALIGN_CENTER);
@@ -50,7 +49,7 @@ package net.wg.gui.lobby.store
          addEventListener(MouseEvent.MOUSE_DOWN,this.onMouseClickHandler);
          hitArea = this.hitMc;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:Point = null;
          if(isInvalid(InvalidationType.DATA))
@@ -73,7 +72,7 @@ package net.wg.gui.lobby.store
             this.actionPrice.setup(this);
          }
       }
-
+      
       protected function update() : void {
          var _loc1_:StoreTableData = null;
          var _loc2_:* = 0;
@@ -88,7 +87,7 @@ package net.wg.gui.lobby.store
             if(App.instance)
             {
                _loc6_ = "data in shopTableItemRenderer must extends StoreTableData class!";
-               App.utils.asserter.assert(data  is  StoreTableData,_loc6_);
+               App.utils.asserter.assert(data is StoreTableData,_loc6_);
             }
             _loc1_ = StoreTableData(data);
             _loc2_ = 0;
@@ -102,7 +101,7 @@ package net.wg.gui.lobby.store
             if(descField.getLineLength(2) != -1)
             {
                _loc7_ = 0;
-               _loc8_ = data.desc.substr(descField.getLineLength(0) + descField.getLineLength(1)-1,1);
+               _loc8_ = data.desc.substr(descField.getLineLength(0) + descField.getLineLength(1) - 1,1);
                if(_loc8_ == "\n")
                {
                   _loc7_ = -1;
@@ -124,35 +123,32 @@ package net.wg.gui.lobby.store
             visible = false;
          }
       }
-
+      
       protected function onPricesCalculated(param1:Number, param2:Number, param3:StoreTableData) : void {
-          
       }
-
+      
       protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void {
-          
       }
-
+      
       protected function getTooltipMapping() : StoreTooltipMapVO {
          throw new AbstractException("InventoryListItemRenderer::getTooltipMapping" + Errors.ABSTRACT_INVOKE);
       }
-
+      
       protected final function infoItem() : void {
          dispatchEvent(new StoreEvent(StoreEvent.INFO,StoreTableData(data)));
       }
-
+      
       protected final function getHelper() : StoreHelper {
          return StoreHelper.getInstance();
       }
-
+      
       protected function onLeftButtonClick() : void {
-          
       }
-
+      
       protected function onRightButtonClick() : void {
          this.infoItem();
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          if(App.instance)
          {
@@ -166,7 +162,7 @@ package net.wg.gui.lobby.store
             }
          }
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
          if(App.instance)
          {
@@ -174,12 +170,12 @@ package net.wg.gui.lobby.store
          }
          super.handleMousePress(param1);
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          this.shopTooltip();
       }
-
+      
       private function shopTooltip() : void {
          var _loc1_:ITooltipMgr = null;
          var _loc2_:StoreTableData = null;
@@ -211,20 +207,17 @@ package net.wg.gui.lobby.store
             }
          }
       }
-
+      
       private function onMouseClickHandler(param1:MouseEvent) : void {
          if(App.utils.commons.isRightButton(param1))
          {
             this.onRightButtonClick();
          }
-         else
+         else if((App.utils.commons.isLeftButton(param1)) && (enabled))
          {
-            if((App.utils.commons.isLeftButton(param1)) && (enabled))
-            {
-               this.onLeftButtonClick();
-            }
+            this.onLeftButtonClick();
          }
+         
       }
    }
-
 }

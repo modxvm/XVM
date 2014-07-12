@@ -20,11 +20,10 @@ package net.wg.gui.lobby.fortifications.windows.impl
    import flash.display.InteractiveObject;
    import net.wg.utils.ITweenAnimator;
    import net.wg.gui.lobby.fortifications.utils.impl.TweenAnimator;
-
-
+   
    public class FortTransportConfirmationWindow extends FortTransportConfirmationWindowMeta implements IFortTransportConfirmationWindowMeta
    {
-          
+      
       public function FortTransportConfirmationWindow() {
          super();
          isModal = true;
@@ -34,47 +33,47 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.transportButton.UIID = 25;
          this.cancelButton.UIID = 26;
       }
-
+      
       public var transportButton:SoundButtonEx = null;
-
+      
       public var cancelButton:SoundButtonEx = null;
-
+      
       public var resourceNumericStepper:NumericStepper = null;
-
+      
       public var transportingText:TextField = null;
-
+      
       public var maxTransportingSizeLabel:TextField = null;
-
+      
       public var footerFadingText:TextField = null;
-
+      
       public var sourceTextField:TextField = null;
-
+      
       public var targetTextField:TextField = null;
-
+      
       public var nutLoader:UILoaderAlt = null;
-
+      
       public var sourceIndicator:IBuildingIndicator = null;
-
+      
       public var targetIndicator:IBuildingIndicator = null;
-
+      
       public var transportingLoader:UILoaderAlt = null;
-
+      
       public var arrowLoader:UILoaderAlt = null;
-
+      
       public var separator:MovieClip = null;
-
+      
       private var _initialTargetBaseVO:BuildingBaseVO = null;
-
+      
       private var _initialSourceBaseVO:BuildingBaseVO = null;
-
+      
       public function as_setMaxTransportingSize(param1:String) : void {
          this.maxTransportingSizeLabel.htmlText = param1;
       }
-
+      
       public function as_setFooterText(param1:String) : void {
          this.footerFadingText.htmlText = param1;
       }
-
+      
       public function as_enableForFirstTransporting(param1:Boolean) : void {
          App.utils.asserter.assertNotNull(this._initialSourceBaseVO,"_initialSourceBaseVO" + Errors.CANT_NULL);
          App.utils.asserter.assertNotNull(this._initialTargetBaseVO,"_initialTargetBaseVO" + Errors.CANT_NULL);
@@ -92,7 +91,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
          }
          invalidate(FortInvalidationType.INVALID_ENABLING);
       }
-
+      
       private function updateFocus() : void {
          if(!this.resourceNumericStepper.enabled)
          {
@@ -103,7 +102,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             setFocus(this.cancelButton);
          }
       }
-
+      
       private function updateTargetData(param1:Number) : void {
          var _loc4_:* = NaN;
          var _loc2_:BuildingBaseVO = new BuildingBaseVO(this._initialTargetBaseVO.toHash());
@@ -118,18 +117,18 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.targetIndicator.applyVOData(_loc2_);
          _loc2_.dispose();
       }
-
+      
       private function updateSourceData(param1:Number) : void {
          var _loc2_:BuildingBaseVO = new BuildingBaseVO(this._initialSourceBaseVO.toHash());
          _loc2_.defResVal = _loc2_.defResVal - param1;
          this.sourceIndicator.applyVOData(_loc2_);
          _loc2_.dispose();
       }
-
+      
       override protected function onClosingApproved() : void {
          App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_CLOSE,0);
       }
-
+      
       override protected function setData(param1:TransportingVO) : void {
          this.resourceNumericStepper.maximum = param1.maxTransportingSize;
          this.sourceIndicator.applyVOData(param1.sourceBaseVO);
@@ -141,14 +140,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.targetTextField.text = FORTIFICATIONS.buildings_buildingname(param1.targetBaseVO.uid);
          this.resourceNumericStepper.stepSize = param1.defResTep;
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          window.title = FORTIFICATIONS.FORTTRANSPORTCONFIRMATIONWINDOW_TITLE;
          window.useBottomBtns = true;
          App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_OPEN,0);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.footerFadingText.alpha = 0;
@@ -163,17 +162,17 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.getTweenAnimator().addFadeInAnim(this.sourceIndicator.labels,null);
          this.getTweenAnimator().addFadeInAnim(this.targetIndicator.labels,null);
       }
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          setFocus(this.cancelButton);
          this.updateFocus();
       }
-
+      
       private function getTweenAnimator() : ITweenAnimator {
          return TweenAnimator.instance;
       }
-
+      
       override protected function onDispose() : void {
          this.getTweenAnimator().removeAnims(this.footerFadingText);
          this.getTweenAnimator().removeAnims(this.sourceIndicator.labels);
@@ -208,7 +207,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.targetTextField = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = false;
          super.draw();
@@ -219,17 +218,15 @@ package net.wg.gui.lobby.fortifications.windows.impl
             {
                this.getTweenAnimator().addFadeInAnim(this.footerFadingText,null);
             }
-            else
+            else if(!_loc1_ && this.footerFadingText.alpha > 0)
             {
-               if(!_loc1_ && this.footerFadingText.alpha > 0)
-               {
-                  this.getTweenAnimator().addFadeOutAnim(this.footerFadingText,null);
-               }
+               this.getTweenAnimator().addFadeOutAnim(this.footerFadingText,null);
             }
+            
             this.transportButton.enabled = _loc1_;
          }
       }
-
+      
       private function onResourceNumericStepperIndexChangeHandler(param1:IndexEvent) : void {
          if(this.resourceNumericStepper.value == this.resourceNumericStepper.maximum)
          {
@@ -239,16 +236,15 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.updateTargetData(this.resourceNumericStepper.value);
          invalidate(FortInvalidationType.INVALID_ENABLING);
       }
-
+      
       private function onTransportingButtonClickHandler(param1:ButtonEvent) : void {
          App.eventLogManager.logUIEvent(param1,0);
          onTransportingS(this.resourceNumericStepper.value);
       }
-
+      
       private function onCancelButtonClickHandler(param1:ButtonEvent) : void {
          App.eventLogManager.logUIEvent(param1,0);
          onCancelS();
       }
    }
-
 }

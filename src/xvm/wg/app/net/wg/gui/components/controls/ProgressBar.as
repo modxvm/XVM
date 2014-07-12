@@ -2,21 +2,20 @@ package net.wg.gui.components.controls
 {
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class ProgressBar extends UIComponent implements IProgressBar
    {
-          
+      
       public function ProgressBar() {
          super();
       }
-
+      
       private var _minimum:Number = 0;
-
+      
       private var _maximum:Number = 1;
-
+      
       private var _value:Number = 0;
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -24,11 +23,10 @@ package net.wg.gui.components.controls
             this.applyDataChanges();
          }
       }
-
+      
       protected function applyDataChanges() : void {
-          
       }
-
+      
       public function set minimum(param1:Number) : void {
          if(this._minimum != param1)
          {
@@ -36,11 +34,11 @@ package net.wg.gui.components.controls
             invalidateData();
          }
       }
-
+      
       public function get minimum() : Number {
          return this._minimum;
       }
-
+      
       public function set maximum(param1:Number) : void {
          if(this._maximum != param1)
          {
@@ -48,11 +46,11 @@ package net.wg.gui.components.controls
             invalidateData();
          }
       }
-
+      
       public function get maximum() : Number {
          return this._maximum;
       }
-
+      
       public function set value(param1:Number) : void {
          if(this._value != param1)
          {
@@ -60,10 +58,9 @@ package net.wg.gui.components.controls
             invalidateData();
          }
       }
-
+      
       public function get value() : Number {
          return this._value;
       }
    }
-
 }

@@ -1,23 +1,23 @@
 package net.wg.gui.cyberSport.controls
 {
    import scaleform.clik.core.UIComponent;
+   import net.wg.gui.rally.vo.SettingRosterVO;
    import net.wg.utils.IUtils;
    import flash.display.Sprite;
    import net.wg.data.constants.Linkages;
    import flash.display.MovieClip;
-
-
+   
    public class DynamicRangeVehicles extends UIComponent
    {
-          
+      
       public function DynamicRangeVehicles() {
          super();
       }
-
+      
       private var model:SettingRosterVO;
-
+      
       private const UPDATE_DYNAMIC_DATA:String = "updateDynamicData";
-
+      
       public function setData(param1:SettingRosterVO) : void {
          if(param1 == null)
          {
@@ -26,7 +26,7 @@ package net.wg.gui.cyberSport.controls
          this.model = param1;
          invalidate(this.UPDATE_DYNAMIC_DATA);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((this.model) && (isInvalid(this.UPDATE_DYNAMIC_DATA)))
@@ -34,14 +34,14 @@ package net.wg.gui.cyberSport.controls
             this.redrawComponents();
          }
       }
-
+      
       private var utils:IUtils;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.utils = App.utils;
       }
-
+      
       private function redrawComponents() : void {
          var _loc4_:uint = 0;
          var _loc5_:* = 0;
@@ -85,37 +85,35 @@ package net.wg.gui.cyberSport.controls
             }
          }
       }
-
-      private function initSeparator(param1:Boolean=false) : void {
+      
+      private function initSeparator(param1:Boolean = false) : void {
          if(param1)
          {
             this.addChild(this.createSeparators());
          }
       }
-
+      
       private function createNationsElements(param1:int) : Sprite {
          var _loc2_:Sprite = new Sprite();
          return _loc2_;
       }
-
+      
       private function createSeparators() : Sprite {
          var _loc1_:Sprite = new Sprite();
          this.classFactory(Linkages.PERSONAL_CASE_BLOCK_ITEM);
          return _loc1_;
       }
-
+      
       private function createVehicleTypes(param1:String) : Sprite {
          var _loc2_:Sprite = new Sprite();
          return _loc2_;
       }
-
+      
       private function createVehiclesLevels() : void {
-          
       }
-
+      
       private function classFactory(param1:String) : * {
          return App.utils.classFactory.getComponent(param1,MovieClip);
       }
    }
-
 }

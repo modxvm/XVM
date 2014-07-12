@@ -11,52 +11,51 @@ package net.wg.gui.cyberSport.views.unit
    import net.wg.gui.rally.interfaces.IRallyVO;
    import net.wg.data.constants.Values;
    import net.wg.infrastructure.interfaces.IUserProps;
-
-
+   
    public class JoinUnitSection extends BaseRallyDetailsSection
    {
-          
+      
       public function JoinUnitSection() {
          super();
       }
-
+      
       public var headerRatingTF:TextField;
-
+      
       public var freezeIcon:MovieClip;
-
+      
       public var restrictionIcon:MovieClip;
-
+      
       public var joinUnitButton:GrayButtonText;
-
+      
       public var slot0:SimpleSlotRenderer;
-
+      
       public var slot1:SimpleSlotRenderer;
-
+      
       public var slot2:SimpleSlotRenderer;
-
+      
       public var slot3:SimpleSlotRenderer;
-
+      
       public var slot4:SimpleSlotRenderer;
-
+      
       public var slot5:SimpleSlotRenderer;
-
+      
       public var slot6:SimpleSlotRenderer;
-
+      
       public function get unitModel() : RallyShortVO {
          return model as RallyShortVO;
       }
-
+      
       override protected function getSlots() : Array {
          var _loc2_:SimpleSlotRenderer = null;
          var _loc1_:Array = [this.slot0,this.slot1,this.slot2,this.slot3,this.slot4,this.slot5,this.slot6];
          var _loc3_:UnitSlotHelper = new UnitSlotHelper();
-         for each (_loc2_ in _loc1_)
+         for each(_loc2_ in _loc1_)
          {
             _loc2_.helper = _loc3_;
          }
          return _loc1_;
       }
-
+      
       override protected function configUI() : void {
          joinButton = this.joinUnitButton;
          super.configUI();
@@ -69,7 +68,7 @@ package net.wg.gui.cyberSport.views.unit
          this.restrictionIcon.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.restrictionIcon.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -82,7 +81,7 @@ package net.wg.gui.cyberSport.views.unit
             rallyInfoTF.htmlText = BaseRallyMainWindow.getTeamHeader(CYBERSPORT.WINDOW_UNIT_TEAMMEMBERS,model);
          }
       }
-
+      
       override protected function updateTitle(param1:IRallyVO) : void {
          super.updateTitle(param1);
          if((this.unitModel) && (this.unitModel.commander))
@@ -94,7 +93,7 @@ package net.wg.gui.cyberSport.views.unit
             this.headerRatingTF.text = Values.EMPTY_STR;
          }
       }
-
+      
       override protected function updateDescription(param1:IRallyVO) : void {
          super.updateDescription(param1);
          var _loc2_:IUserProps = App.utils.commons.getUserProps(param1.description,null,null,0);
@@ -105,7 +104,7 @@ package net.wg.gui.cyberSport.views.unit
             descriptionTF.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
          }
       }
-
+      
       override protected function onDispose() : void {
          this.freezeIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.freezeIcon.removeEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
@@ -113,7 +112,7 @@ package net.wg.gui.cyberSport.views.unit
          this.restrictionIcon.removeEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
          super.onDispose();
       }
-
+      
       override protected function onControlRollOver(param1:MouseEvent) : void {
          switch(param1.currentTarget)
          {
@@ -138,5 +137,4 @@ package net.wg.gui.cyberSport.views.unit
          }
       }
    }
-
 }

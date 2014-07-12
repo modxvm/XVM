@@ -5,11 +5,10 @@ package net.wg.gui.components.tooltips
    import flash.display.Sprite;
    import net.wg.gui.components.tooltips.VO.MapVO;
    import net.wg.gui.components.tooltips.helpers.Utils;
-
-
+   
    public class ToolTipMap extends ToolTipSpecial
    {
-          
+      
       public function ToolTipMap() {
          super();
          this.headerTF = content.headerTF;
@@ -20,19 +19,19 @@ package net.wg.gui.components.tooltips
          contentMargin.bottom = 18;
          contentMargin.right = 8;
       }
-
+      
       private static const RIGHT_TF_VERTICAL_OFFSET:Number = 6;
-
+      
       private var headerTF:TextField;
-
+      
       private var headerRightTF:TextField;
-
+      
       private var descriptionTF:TextField;
-
+      
       private var image:UILoaderAlt;
-
+      
       private var whiteBg:Sprite;
-
+      
       override protected function redraw() : void {
          var _loc1_:MapVO = null;
          var _loc2_:Separator = null;
@@ -68,12 +67,11 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       override protected function onDispose() : void {
          this.image.dispose();
          this.image = null;
          super.onDispose();
       }
    }
-
 }

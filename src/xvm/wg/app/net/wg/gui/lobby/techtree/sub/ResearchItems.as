@@ -7,7 +7,6 @@ package net.wg.gui.lobby.techtree.sub
    import net.wg.gui.lobby.techtree.helpers.TitleAppearance;
    import net.wg.gui.lobby.techtree.interfaces.IResearchDataProvider;
    import net.wg.gui.lobby.techtree.math.ADG_ItemLevelsBuilder;
-   import __AS3__.vec.Vector;
    import net.wg.gui.lobby.techtree.interfaces.IRenderer;
    import net.wg.gui.lobby.techtree.interfaces.IResearchPage;
    import net.wg.gui.lobby.techtree.controls.ResearchTitleBar;
@@ -32,15 +31,14 @@ package net.wg.gui.lobby.techtree.sub
    import net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo;
    import net.wg.infrastructure.events.FocusRequestEvent;
    import net.wg.gui.lobby.techtree.data.vo.UnlockProps;
-
-
+   
    public class ResearchItems extends UIComponent implements IResearchContainer, IFocusContainer
    {
-          
+      
       public function ResearchItems() {
          super();
       }
-
+      
       private static function getNodeDefinitionByName(param1:String) : Class {
          var name:String = param1;
          if(name == "")
@@ -58,51 +56,51 @@ package net.wg.gui.lobby.techtree.sub
          }
          return classRef;
       }
-
+      
       private var titleAppearance:TitleAppearance = null;
-
+      
       private var drawEnabled:Boolean = false;
-
+      
       private var requestInCoolDown:Boolean = false;
-
+      
       private var _vehicleNodeClass:Class = null;
-
+      
       private var _itemNodeClass:Class = null;
-
+      
       private var _fakeNodeClass:Class = null;
-
+      
       private var _dataProvider:IResearchDataProvider;
-
+      
       private var _levelsBuilder:ADG_ItemLevelsBuilder;
-
+      
       private var positionByID:Object;
-
+      
       private var renderers:Vector.<Vector.<IRenderer>>;
-
+      
       private var topRenderers:Vector.<IRenderer>;
-
+      
       public var yRatio:Number = 90;
-
+      
       public var xRatio:Number = 90;
-
+      
       public var topLevelX:Number = 10;
-
+      
       public var nextLevelX:Number = 800;
-
+      
       public var maxNodesOnLevel:Number = 10;
-
+      
       public var titleDefaultY:Number = 0;
-
+      
       public var view:IResearchPage;
-
+      
       public var titleBar:ResearchTitleBar;
-
+      
       public var rGraphics:ResearchGraphics;
-
+      
       public var premiumLayout:PremiumLayout;
-
+      
       public var background:Sprite;
-
+      
       public function set vehicleNodeName(param1:String) : void {
          var _loc2_:Class = getNodeDefinitionByName(param1);
          if(_loc2_ != null)
@@ -111,7 +109,7 @@ package net.wg.gui.lobby.techtree.sub
             invalidate();
          }
       }
-
+      
       public function set itemNodeName(param1:String) : void {
          var _loc2_:Class = getNodeDefinitionByName(param1);
          if(_loc2_ != null)
@@ -120,7 +118,7 @@ package net.wg.gui.lobby.techtree.sub
             invalidate();
          }
       }
-
+      
       public function set fakeNodeName(param1:String) : void {
          var _loc2_:Class = getNodeDefinitionByName(param1);
          if(_loc2_ != null)
@@ -129,19 +127,19 @@ package net.wg.gui.lobby.techtree.sub
             invalidate();
          }
       }
-
+      
       public function get rootRenderer() : ResearchRoot {
          return this.rGraphics != null?this.rGraphics.rootRenderer:null;
       }
-
+      
       public function get xpInfo() : ExperienceInformation {
          return this.rGraphics != null?this.rGraphics.xpInfo:null;
       }
-
+      
       public function get dataProvider() : IResearchDataProvider {
          return this._dataProvider;
       }
-
+      
       public function set dataProvider(param1:IResearchDataProvider) : void {
          if(this._dataProvider != null)
          {
@@ -153,11 +151,11 @@ package net.wg.gui.lobby.techtree.sub
             this._dataProvider.addEventListener(TechTreeEvent.DATA_BUILD_COMPLETE,this.handleDataComplete,false,0,true);
          }
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return this;
       }
-
+      
       override protected function onDispose() : void {
          visible = false;
          this.removeItemRenderers();
@@ -189,13 +187,13 @@ package net.wg.gui.lobby.techtree.sub
          }
          super.onDispose();
       }
-
+      
       public function invalidateNodesData(param1:String, param2:Object) : void {
          this.drawEnabled = false;
          this._dataProvider.invalidate(param1,param2);
       }
-
-      public function setNodesStates(param1:Number, param2:Array, param3:String=null) : void {
+      
+      public function setNodesStates(param1:Number, param2:Array, param3:String = null) : void {
          var _loc5_:Array = null;
          var _loc6_:* = false;
          var _loc7_:IRenderer = null;
@@ -239,7 +237,7 @@ package net.wg.gui.lobby.techtree.sub
             _loc10_++;
          }
       }
-
+      
       public function setVehicleTypeXP(param1:Array) : void {
          var _loc3_:Array = null;
          var _loc4_:IRenderer = null;
@@ -274,29 +272,29 @@ package net.wg.gui.lobby.techtree.sub
             _loc7_++;
          }
       }
-
+      
       public function setFreeXP(param1:Number) : void {
          if(this.xpInfo != null)
          {
             this.xpInfo.setFreeXP(param1);
          }
       }
-
+      
       public function setWalletStatus() : void {
          if(this.xpInfo != null)
          {
             this.xpInfo.setWalletStatus();
          }
       }
-
+      
       public function getRootState() : Number {
          return this._dataProvider.length > 0?this._dataProvider.getItemAt(0).state:0;
       }
-
+      
       public function getRootNode() : IRenderer {
          return this.rootRenderer;
       }
-
+      
       public function hasUnlockedParent(param1:Number, param2:Number) : Boolean {
          var _loc4_:IRenderer = null;
          var _loc3_:Array = this._levelsBuilder.getParentLevelIdxs(param2);
@@ -312,7 +310,7 @@ package net.wg.gui.lobby.techtree.sub
          }
          return false;
       }
-
+      
       public function isParentUnlocked(param1:Number, param2:Number) : Boolean {
          var _loc3_:Number = 0;
          var _loc4_:Number = this._dataProvider.getIndexByID(param1);
@@ -330,15 +328,15 @@ package net.wg.gui.lobby.techtree.sub
          }
          return (_loc3_ & NodeState.UNLOCKED) > 0;
       }
-
+      
       public function getNation() : String {
          return this._dataProvider.nation;
       }
-
+      
       public function canInstallItems() : Boolean {
          return (this.rootRenderer.inInventory()) && (this._dataProvider.getGlobalStats().enableInstallItems);
       }
-
+      
       public function getNodeByID(param1:Number) : IRenderer {
          var _loc2_:MatrixPosition = this.positionByID[param1];
          var _loc3_:IRenderer = null;
@@ -352,11 +350,11 @@ package net.wg.gui.lobby.techtree.sub
          }
          return _loc3_;
       }
-
+      
       public function getTopLevel() : Vector.<IRenderer> {
          return this.topRenderers;
       }
-
+      
       public function getChildren(param1:IRenderer) : Vector.<IRenderer> {
          var _loc2_:Vector.<IRenderer> = null;
          var _loc4_:NodeIndexFilter = null;
@@ -372,11 +370,11 @@ package net.wg.gui.lobby.techtree.sub
          }
          return _loc2_;
       }
-
+      
       public function getParents(param1:IRenderer) : Vector.<IRenderer> {
          var _loc2_:Vector.<IRenderer> = null;
          var _loc4_:NodeIndexFilter = null;
-         var _loc3_:Number = param1.matrixPosition.row-1;
+         var _loc3_:Number = param1.matrixPosition.row - 1;
          if(_loc3_ > 0 && _loc3_ < this.renderers.length)
          {
             _loc4_ = new NodeIndexFilter(this._levelsBuilder.getParentLevelIdxs(param1.index));
@@ -388,11 +386,11 @@ package net.wg.gui.lobby.techtree.sub
          }
          return _loc2_;
       }
-
+      
       public function isRootUnlocked() : Boolean {
          return this.rootRenderer != null?this.rootRenderer.isUnlocked():false;
       }
-
+      
       public function cleanUpRenderer(param1:IRenderer) : void {
          if(param1 == null)
          {
@@ -409,7 +407,7 @@ package net.wg.gui.lobby.techtree.sub
          param1.removeEventListener(TechTreeEvent.CLICK_2_VEHICLE_INFO,this.handleRequestVehicleInfo);
          param1.removeEventListener(TechTreeEvent.CLICK_2_MODULE_INFO,this.handleRequestModuleInfo);
       }
-
+      
       override protected function initialize() : void {
          super.initialize();
          this._dataProvider = new ResearchVODataProvider();
@@ -423,7 +421,7 @@ package net.wg.gui.lobby.techtree.sub
             this.rGraphics.container = this;
          }
       }
-
+      
       override protected function configUI() : void {
          this.titleAppearance = new TitleAppearance(this.titleBar);
          this.setupVehicleRenderer(this.rootRenderer,true);
@@ -437,7 +435,7 @@ package net.wg.gui.lobby.techtree.sub
          }
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.SIZE))
          {
@@ -465,7 +463,7 @@ package net.wg.gui.lobby.techtree.sub
             }
          }
       }
-
+      
       protected function updateLayouts() : void {
          if(this.titleAppearance != null)
          {
@@ -473,7 +471,7 @@ package net.wg.gui.lobby.techtree.sub
          }
          if(this.rGraphics != null)
          {
-            this.rGraphics.y = this.titleDefaultY-1 + (_height >> 1);
+            this.rGraphics.y = this.titleDefaultY - 1 + (_height >> 1);
          }
          if(this.premiumLayout != null)
          {
@@ -484,7 +482,7 @@ package net.wg.gui.lobby.techtree.sub
             this.background.height = _height;
          }
       }
-
+      
       private function updateRootData() : Boolean {
          var _loc2_:NodeData = null;
          var _loc3_:VehGlobalStats = null;
@@ -533,7 +531,7 @@ package net.wg.gui.lobby.techtree.sub
          }
          return _loc1_;
       }
-
+      
       private function createRenderersMatrix() : Vector.<Vector.<IRenderer>> {
          var _loc1_:MatrixPosition = this._levelsBuilder.levelDimension;
          var _loc2_:Vector.<Vector.<IRenderer>> = new Vector.<Vector.<IRenderer>>(_loc1_.row);
@@ -545,7 +543,7 @@ package net.wg.gui.lobby.techtree.sub
          }
          return _loc2_;
       }
-
+      
       private function flushRenderersOnScene() : RenderersOnScene {
          var _loc1_:Vector.<IRenderer> = null;
          var _loc2_:IRenderer = null;
@@ -571,7 +569,7 @@ package net.wg.gui.lobby.techtree.sub
          }
          return _loc3_;
       }
-
+      
       private function createItemRenderer(param1:uint) : IRenderer {
          var _loc2_:IRenderer = null;
          switch(param1)
@@ -591,7 +589,7 @@ package net.wg.gui.lobby.techtree.sub
          }
          return _loc2_;
       }
-
+      
       private function setupItemRenderer(param1:IRenderer) : void {
          if(param1 == null)
          {
@@ -604,8 +602,8 @@ package net.wg.gui.lobby.techtree.sub
          param1.addEventListener(TechTreeEvent.CLICK_2_INSTALL,this.handleInstallItem,false,0,true);
          param1.addEventListener(TechTreeEvent.CLICK_2_MODULE_INFO,this.handleRequestModuleInfo,false,0,true);
       }
-
-      private function setupVehicleRenderer(param1:IRenderer, param2:Boolean=false) : void {
+      
+      private function setupVehicleRenderer(param1:IRenderer, param2:Boolean = false) : void {
          if(param1 == null)
          {
             return;
@@ -622,7 +620,7 @@ package net.wg.gui.lobby.techtree.sub
             param1.addEventListener(TechTreeEvent.CLICK_2_OPEN,this.handleOpenVehicle,false,0,true);
          }
       }
-
+      
       private function removeItemRenderers() : void {
          var _loc1_:Vector.<IRenderer> = null;
          while(this.topRenderers.length > 0)
@@ -643,7 +641,7 @@ package net.wg.gui.lobby.techtree.sub
          }
          this.positionByID = {};
       }
-
+      
       private function updateTopRenderers() : void {
          var _loc2_:IRenderer = null;
          var _loc3_:MatrixPosition = null;
@@ -693,7 +691,7 @@ package net.wg.gui.lobby.techtree.sub
             _loc6_++;
          }
       }
-
+      
       private function updateRenderers(param1:RenderersOnScene) : void {
          var _loc2_:IRenderer = null;
          var _loc3_:MatrixPosition = null;
@@ -787,7 +785,7 @@ package net.wg.gui.lobby.techtree.sub
             _loc12_ = 0;
             while(_loc12_ < _loc18_.length)
             {
-               _loc21_ = this.renderers[_loc19_.matrixPosition.row-1][_loc18_[_loc12_]];
+               _loc21_ = this.renderers[_loc19_.matrixPosition.row - 1][_loc18_[_loc12_]];
                if(_loc21_ != null)
                {
                   _loc16_.push(_loc21_);
@@ -798,7 +796,7 @@ package net.wg.gui.lobby.techtree.sub
             _loc11_++;
          }
       }
-
+      
       private function drawRenderers() : Boolean {
          if(this._levelsBuilder == null || this.rGraphics == null)
          {
@@ -817,7 +815,7 @@ package net.wg.gui.lobby.techtree.sub
          }
          return _loc1_;
       }
-
+      
       private function drawLayout() : void {
          var _loc5_:* = NaN;
          var _loc6_:* = NaN;
@@ -829,7 +827,7 @@ package net.wg.gui.lobby.techtree.sub
          var _loc1_:Object = this._levelsBuilder.levelDimension;
          var _loc2_:Number = this.rootRenderer.getY();
          var _loc3_:Number = this.rootRenderer.getOutX();
-         var _loc4_:Number = (this.topRenderers.length-1) * this.yRatio;
+         var _loc4_:Number = (this.topRenderers.length - 1) * this.yRatio;
          _loc5_ = 0;
          _loc6_ = _loc2_ - (_loc4_ >> 1);
          while(_loc5_ < this.topRenderers.length)
@@ -841,12 +839,12 @@ package net.wg.gui.lobby.techtree.sub
             _loc6_ = _loc6_ + this.yRatio;
          }
          var _loc8_:Array = new Array(_loc1_.column);
-         _loc4_ = (_loc1_.column-1) * this.yRatio;
+         _loc4_ = (_loc1_.column - 1) * this.yRatio;
          _loc8_[0] = _loc2_ - (_loc4_ >> 1);
          var _loc9_:Number = 1;
          while(_loc9_ < _loc1_.column)
          {
-            _loc8_[_loc9_] = _loc8_[_loc9_-1] + this.yRatio;
+            _loc8_[_loc9_] = _loc8_[_loc9_ - 1] + this.yRatio;
             _loc9_++;
          }
          var _loc12_:Number = _loc3_ + this.xRatio;
@@ -879,7 +877,7 @@ package net.wg.gui.lobby.techtree.sub
             _loc5_++;
          }
       }
-
+      
       private function drawLines() : void {
          var _loc1_:IRenderer = null;
          var _loc2_:Vector.<IRenderer> = null;
@@ -890,7 +888,7 @@ package net.wg.gui.lobby.techtree.sub
          var _loc3_:Boolean = this.isRootUnlocked();
          this.rGraphics.drawTopLevelLines(this.rootRenderer,this.topRenderers,false);
          var _loc7_:Number = 0;
-         while(_loc7_ < this.renderers.length-1)
+         while(_loc7_ < this.renderers.length - 1)
          {
             _loc2_ = this.renderers[_loc7_];
             _loc8_ = 0;
@@ -909,7 +907,7 @@ package net.wg.gui.lobby.techtree.sub
             _loc7_++;
          }
       }
-
+      
       private function getNodeDataByEvent(param1:TechTreeEvent) : NodeData {
          var _loc2_:NodeData = null;
          if(param1.entityType == NodeEntityType.TOP_VEHICLE)
@@ -923,16 +921,16 @@ package net.wg.gui.lobby.techtree.sub
          App.utils.asserter.assertNotNull(_loc2_,"Data of node not found by event = " + param1);
          return _loc2_;
       }
-
+      
       private function activateCoolDown() : void {
          this.requestInCoolDown = true;
          App.utils.scheduler.scheduleTask(this.deactivateCoolDown,250);
       }
-
+      
       private function deactivateCoolDown() : void {
          this.requestInCoolDown = false;
       }
-
+      
       private function handleDataComplete(param1:TechTreeEvent) : void {
          this._levelsBuilder = new ADG_ItemLevelsBuilder(this._dataProvider.length,this.maxNodesOnLevel);
          this._dataProvider.populate(this._levelsBuilder);
@@ -954,14 +952,14 @@ package net.wg.gui.lobby.techtree.sub
          this.drawEnabled = true;
          invalidateData();
       }
-
+      
       private function handleReturn2TechTree(param1:TechTreeEvent) : void {
          if(this.view != null)
          {
             this.view.goToTechTreeS(this._dataProvider.nation);
          }
       }
-
+      
       private function handleRequestModuleInfo(param1:TechTreeEvent) : void {
          if(this.view != null)
          {
@@ -969,7 +967,7 @@ package net.wg.gui.lobby.techtree.sub
             this.view.requestModuleInfoS(this.getNodeDataByEvent(param1).id);
          }
       }
-
+      
       private function handleRequestVehicleInfo(param1:TechTreeEvent) : void {
          if(this.view != null)
          {
@@ -977,7 +975,7 @@ package net.wg.gui.lobby.techtree.sub
             this.view.requestVehicleInfoS(this.getNodeDataByEvent(param1).id);
          }
       }
-
+      
       private function handleOpenVehicle(param1:TechTreeEvent) : void {
          dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
          if(this.view != null)
@@ -986,7 +984,7 @@ package net.wg.gui.lobby.techtree.sub
             this.invalidateNodesData(this._dataProvider.nation,this.view.getResearchItemsDataS(this.getNodeDataByEvent(param1).id,true));
          }
       }
-
+      
       private function handleUnlockItem(param1:TechTreeEvent) : void {
          var _loc2_:NodeData = null;
          var _loc3_:UnlockProps = null;
@@ -999,7 +997,7 @@ package net.wg.gui.lobby.techtree.sub
             this.activateCoolDown();
          }
       }
-
+      
       private function handleBuyItem(param1:TechTreeEvent) : void {
          if(!this.requestInCoolDown && !(this.view == null))
          {
@@ -1007,7 +1005,7 @@ package net.wg.gui.lobby.techtree.sub
             this.activateCoolDown();
          }
       }
-
+      
       private function handleSellItem(param1:TechTreeEvent) : void {
          if(!this.requestInCoolDown && !(this.view == null))
          {
@@ -1015,7 +1013,7 @@ package net.wg.gui.lobby.techtree.sub
             this.activateCoolDown();
          }
       }
-
+      
       private function handleSelectVehicleInHangar(param1:TechTreeEvent) : void {
          if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
          {
@@ -1023,7 +1021,7 @@ package net.wg.gui.lobby.techtree.sub
             this.activateCoolDown();
          }
       }
-
+      
       private function handleShowVehicleInStats(param1:TechTreeEvent) : void {
          if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
          {
@@ -1031,7 +1029,7 @@ package net.wg.gui.lobby.techtree.sub
             this.activateCoolDown();
          }
       }
-
+      
       private function handleInstallItem(param1:Object) : void {
          var _loc2_:NodeData = null;
          if(!this.requestInCoolDown && !(this.view == null))
@@ -1044,82 +1042,80 @@ package net.wg.gui.lobby.techtree.sub
          }
       }
    }
+}
+import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+import net.wg.gui.lobby.techtree.constants.NodeEntityType;
+import net.wg.gui.lobby.techtree.sub.ResearchItems;
 
-}   import __AS3__.vec.Vector;
-   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
-   import net.wg.gui.lobby.techtree.constants.NodeEntityType;
-   import net.wg.gui.lobby.techtree.sub.ResearchItems;
-
-
-   class RenderersOnScene extends Object
-   {
-          
-      function RenderersOnScene() {
-         super();
-         this.items = new Vector.<IRenderer>();
-         this.vehicles = new Vector.<IRenderer>();
-         this.fakes = new Vector.<IRenderer>();
-      }
-
-      private var items:Vector.<IRenderer>;
-
-      private var vehicles:Vector.<IRenderer>;
-
-      private var fakes:Vector.<IRenderer>;
-
-      public function addRenderer(param1:IRenderer) : void {
-         switch(param1.getEntityType())
-         {
-            case NodeEntityType.NEXT_VEHICLE:
-               this.vehicles.push(param1);
-               break;
-            case NodeEntityType.RESEARCH_ITEM:
-               this.items.push(param1);
-               break;
-            case NodeEntityType.UNDEFINED:
-               this.fakes.push(param1);
-               break;
-         }
-      }
-
-      public function getRenderer(param1:uint) : IRenderer {
-         var _loc2_:IRenderer = null;
-         switch(param1)
-         {
-            case NodeEntityType.NEXT_VEHICLE:
-               if(this.vehicles.length > 0)
-               {
-                  _loc2_ = this.vehicles.pop();
-               }
-               break;
-            case NodeEntityType.RESEARCH_ITEM:
-               if(this.items.length > 0)
-               {
-                  _loc2_ = this.items.pop();
-               }
-               break;
-            case NodeEntityType.UNDEFINED:
-               if(this.fakes.length > 0)
-               {
-                  _loc2_ = this.fakes.pop();
-               }
-         }
-         return _loc2_;
-      }
-
-      public function clearUp(param1:ResearchItems) : void {
-         this.clearVector(param1,this.items);
-         this.clearVector(param1,this.vehicles);
-         this.clearVector(param1,this.fakes);
-      }
-
-      private function clearVector(param1:ResearchItems, param2:Vector.<IRenderer>) : void {
-         var _loc3_:IRenderer = null;
-         while(param2.length > 0)
-         {
-            _loc3_ = param2.pop();
-            param1.cleanUpRenderer(_loc3_);
-            param1.rGraphics.removeRenderer(_loc3_);
-         }
+class RenderersOnScene extends Object
+{
+   
+   function RenderersOnScene() {
+      super();
+      this.items = new Vector.<IRenderer>();
+      this.vehicles = new Vector.<IRenderer>();
+      this.fakes = new Vector.<IRenderer>();
+   }
+   
+   private var items:Vector.<IRenderer>;
+   
+   private var vehicles:Vector.<IRenderer>;
+   
+   private var fakes:Vector.<IRenderer>;
+   
+   public function addRenderer(param1:IRenderer) : void {
+      switch(param1.getEntityType())
+      {
+         case NodeEntityType.NEXT_VEHICLE:
+            this.vehicles.push(param1);
+            break;
+         case NodeEntityType.RESEARCH_ITEM:
+            this.items.push(param1);
+            break;
+         case NodeEntityType.UNDEFINED:
+            this.fakes.push(param1);
+            break;
       }
    }
+   
+   public function getRenderer(param1:uint) : IRenderer {
+      var _loc2_:IRenderer = null;
+      switch(param1)
+      {
+         case NodeEntityType.NEXT_VEHICLE:
+            if(this.vehicles.length > 0)
+            {
+               _loc2_ = this.vehicles.pop();
+            }
+            break;
+         case NodeEntityType.RESEARCH_ITEM:
+            if(this.items.length > 0)
+            {
+               _loc2_ = this.items.pop();
+            }
+            break;
+         case NodeEntityType.UNDEFINED:
+            if(this.fakes.length > 0)
+            {
+               _loc2_ = this.fakes.pop();
+            }
+      }
+      return _loc2_;
+   }
+   
+   public function clearUp(param1:ResearchItems) : void {
+      this.clearVector(param1,this.items);
+      this.clearVector(param1,this.vehicles);
+      this.clearVector(param1,this.fakes);
+   }
+   
+   private function clearVector(param1:ResearchItems, param2:Vector.<IRenderer>) : void {
+      var _loc3_:IRenderer = null;
+      while(param2.length > 0)
+      {
+         _loc3_ = param2.pop();
+         param1.cleanUpRenderer(_loc3_);
+         param1.rGraphics.removeRenderer(_loc3_);
+      }
+   }
+}

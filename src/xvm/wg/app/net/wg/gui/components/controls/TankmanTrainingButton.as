@@ -7,20 +7,18 @@ package net.wg.gui.components.controls
    import flash.events.MouseEvent;
    import flash.events.Event;
    import net.wg.data.constants.SoundTypes;
-
-
+   
    public class TankmanTrainingButton extends SoundButton
    {
-          
+      
       public function TankmanTrainingButton() {
-         this._priceColors =
+         this._priceColors = 
             {
                "normal":16314069,
                "disabled":16711680
-            }
-         ;
+            };
          useFocusedAsSelect = true;
-         _stateMap =
+         _stateMap = 
             {
                "up":["up"],
                "over":["over"],
@@ -34,43 +32,42 @@ package net.wg.gui.components.controls
                "kb_release":["kb_release","out","up"],
                "kb_down":["kb_down","down"],
                "buy":["buy"]
-            }
-         ;
+            };
          soundType = SoundTypes.RNDR_NORMAL;
          super();
       }
-
+      
       public static const TYPE_INVALID:String = "typeInvalid";
-
+      
       public var bg:MovieClip;
-
+      
       public var typeSwitcher:MovieClip;
-
+      
       public var priceLabel:IconText = null;
-
+      
       public var actionPrice:ActionPrice;
-
+      
       public var typeLabel:TextField;
-
+      
       private var _buy:Boolean = false;
-
+      
       private var _nation:Number;
-
+      
       private var _type:String = "free";
-
+      
       private var _priceColors:Object;
-
+      
       override protected function onDispose() : void {
          this.actionPrice.dispose();
          this.actionPrice = null;
          super.onDispose();
       }
-
+      
       override public function toString() : String {
          return "[Wargaming TankmanTrainingButton " + name + "]";
       }
-
-      public function updatePrice(param1:Number, param2:String, param3:ActionPriceVO=null) : void {
+      
+      public function updatePrice(param1:Number, param2:String, param3:ActionPriceVO = null) : void {
          var _loc4_:String = null;
          if(!this._buy && !(this._type == "free") && !(param1 == 0))
          {
@@ -91,11 +88,11 @@ package net.wg.gui.components.controls
             this.actionPrice.visible = false;
          }
       }
-
+      
       public function get buy() : Boolean {
          return this._buy;
       }
-
+      
       public function set buy(param1:Boolean) : void {
          if(this._buy == param1)
          {
@@ -110,20 +107,20 @@ package net.wg.gui.components.controls
          clearRepeatInterval();
          setState(this._buy?"buy":"up");
       }
-
+      
       public function get nation() : Number {
          return this._nation;
       }
-
+      
       public function set nation(param1:Number) : void {
          this._nation = param1;
          invalidate("_nation");
       }
-
+      
       public function get type() : String {
          return this._type;
       }
-
+      
       public function set type(param1:String) : void {
          if(this._type != param1)
          {
@@ -131,29 +128,29 @@ package net.wg.gui.components.controls
             invalidate(TYPE_INVALID);
          }
       }
-
-      override protected function handlePress(param1:uint=0) : void {
+      
+      override protected function handlePress(param1:uint = 0) : void {
          if(this._buy == true)
          {
             return;
          }
          super.handlePress(param1);
       }
-
-      override protected function handleRelease(param1:uint=0) : void {
+      
+      override protected function handleRelease(param1:uint = 0) : void {
          if(this._buy == true)
          {
             return;
          }
          super.handleRelease(param1);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.hitArea = hitMc;
          this.actionPrice.setup(this);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid("_nation"))
@@ -170,22 +167,20 @@ package net.wg.gui.components.controls
                   this.actionPrice.visible = false;
                }
             }
+            else if(this.actionPrice)
+            {
+               this.priceLabel.visible = !this.actionPrice.visible;
+            }
             else
             {
-               if(this.actionPrice)
-               {
-                  this.priceLabel.visible = !this.actionPrice.visible;
-               }
-               else
-               {
-                  this.priceLabel.visible = true;
-               }
+               this.priceLabel.visible = true;
             }
+            
             this.typeLabel.text = MENU.tankmantrainingwindow(this._type);
             this.typeSwitcher.gotoAndPlay(this._type);
          }
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          if(this._buy == true)
          {
@@ -193,7 +188,7 @@ package net.wg.gui.components.controls
          }
          super.handleMouseRollOver(param1);
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          if(this._buy == true)
          {
@@ -201,7 +196,7 @@ package net.wg.gui.components.controls
          }
          super.handleMouseRollOut(param1);
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
          if(this._buy == true)
          {
@@ -209,7 +204,7 @@ package net.wg.gui.components.controls
          }
          super.handleMousePress(param1);
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          if(this._buy == true)
          {
@@ -217,7 +212,7 @@ package net.wg.gui.components.controls
          }
          super.handleMouseRelease(param1);
       }
-
+      
       override protected function handleReleaseOutside(param1:MouseEvent) : void {
          if(this._buy == true)
          {
@@ -225,7 +220,7 @@ package net.wg.gui.components.controls
          }
          super.handleReleaseOutside(param1);
       }
-
+      
       override public function set selected(param1:Boolean) : void {
          var _loc2_:* = false;
          if(_selected == param1)
@@ -239,17 +234,15 @@ package net.wg.gui.components.controls
             {
                setState("toggle");
             }
+            else if((_pressedByKeyboard) && !(_focusIndicator == null))
+            {
+               setState("kb_selecting");
+            }
             else
             {
-               if((_pressedByKeyboard) && !(_focusIndicator == null))
-               {
-                  setState("kb_selecting");
-               }
-               else
-               {
-                  setState("over");
-               }
+               setState("over");
             }
+            
             if(owner)
             {
                _loc2_ = (_selected) && !(owner == null) && (checkOwnerFocused());
@@ -265,5 +258,4 @@ package net.wg.gui.components.controls
          dispatchEvent(new Event(Event.SELECT));
       }
    }
-
 }

@@ -11,43 +11,42 @@ package net.wg.gui.lobby.vehicleBuyWindow
    import net.wg.utils.ILocale;
    import flash.events.Event;
    import net.wg.data.constants.SoundTypes;
-
-
+   
    public class BodyMc extends UIComponent
    {
-          
+      
       public function BodyMc() {
          super();
       }
-
+      
       public static const BUTTONS_GROUP_SELECTION_CHANGED:String = "selChanged";
-
+      
       public var slotCheckbox:CheckBox;
-
+      
       public var ammoCheckbox:CheckBox;
-
+      
       public var crewCheckbox:CheckBox;
-
+      
       public var tankmenLabel:TextField;
-
+      
       public var slotPrice:IconText;
-
+      
       public var ammoPrice:IconText;
-
+      
       public var slotActionPrice:ActionPrice;
-
+      
       public var ammoActionPrice:ActionPrice;
-
+      
       public var academyBtn:TankmanTrainingButton;
-
+      
       public var scoolBtn:TankmanTrainingButton;
-
+      
       public var freeBtn:TankmanTrainingButton;
-
+      
       private var btnGroup:ButtonGroup;
-
+      
       private var lastSelectedButton:Button;
-
+      
       public function get selectedPrice() : Number {
          if((this.btnGroup) && (this.btnGroup.selectedButton))
          {
@@ -55,7 +54,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          }
          return NaN;
       }
-
+      
       public function get isGoldPriceSelected() : Boolean {
          if((this.btnGroup) && (this.btnGroup.selectedButton))
          {
@@ -63,7 +62,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          }
          return false;
       }
-
+      
       public function get groupEnabled() : Boolean {
          if(this.lastSelectedButton)
          {
@@ -71,7 +70,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          }
          return false;
       }
-
+      
       public function set groupEnabled(param1:Boolean) : void {
          if(this.groupEnabled == param1)
          {
@@ -86,7 +85,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.btnGroup.selectedButton = null;
          }
       }
-
+      
       public function get crewType() : int {
          var _loc1_:TankmanTrainingButton = null;
          if((this.btnGroup) && (this.btnGroup.selectedButton))
@@ -107,7 +106,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          }
          return -1;
       }
-
+      
       override protected function configUI() : void {
          var _loc2_:ILocale = null;
          super.configUI();
@@ -135,7 +134,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          this.scoolBtn.soundType = SoundTypes.RNDR_NORMAL;
          this.freeBtn.soundType = SoundTypes.RNDR_NORMAL;
       }
-
+      
       private function groupChangeHandler(param1:Event) : void {
          if(this.btnGroup.selectedButton)
          {
@@ -143,7 +142,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          }
          dispatchEvent(new Event(BUTTONS_GROUP_SELECTION_CHANGED));
       }
-
+      
       override protected function onDispose() : void {
          this.slotActionPrice.dispose();
          this.slotActionPrice = null;
@@ -155,5 +154,4 @@ package net.wg.gui.lobby.vehicleBuyWindow
          super.onDispose();
       }
    }
-
 }

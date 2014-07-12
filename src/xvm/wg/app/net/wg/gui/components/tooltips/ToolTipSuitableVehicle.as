@@ -2,7 +2,6 @@ package net.wg.gui.components.tooltips
 {
    import flash.text.TextField;
    import flash.display.Sprite;
-   import __AS3__.vec.Vector;
    import net.wg.gui.cyberSport.controls.CSVehicleButton;
    import net.wg.data.managers.ITooltipProps;
    import net.wg.gui.components.tooltips.VO.SuitableVehicleVO;
@@ -12,12 +11,11 @@ package net.wg.gui.components.tooltips
    import net.wg.data.constants.Tooltips;
    import flash.display.MovieClip;
    import net.wg.gui.rally.vo.VehicleVO;
-   import net.wg.gui.cyberSport.controls.SettingRosterVO;
-
-
+   import net.wg.gui.rally.vo.SettingRosterVO;
+   
    public class ToolTipSuitableVehicle extends ToolTipSpecial
    {
-          
+      
       public function ToolTipSuitableVehicle() {
          super();
          this.headerTF = content.headerTF;
@@ -27,27 +25,27 @@ package net.wg.gui.components.tooltips
          this.conditionCSVehicleButtonList = new Vector.<CSVehicleButton>();
          this.addVehicleButtons();
       }
-
+      
       public var headerTF:TextField = null;
-
+      
       public var notEnoughTF:TextField = null;
-
+      
       public var whiteBg:Sprite = null;
-
+      
       public var alertSuitable:TextField = null;
-
+      
       private const MARGIN_BEETWEEN_BLOCKS:Number = 3;
-
+      
       private const MARGIN_AFTER_SUBHEADER:Number = 20;
-
+      
       private var i:uint = 0;
-
+      
       private const MIN_CONTENT_WIDTH:Number = 275;
-
+      
       private var conditionCSVehicleButtonList:Vector.<CSVehicleButton> = null;
-
+      
       private const MAX_CONDITIONS_CS_VEHICLES_BUTTONS:Number = 2;
-
+      
       private function addVehicleButtons() : void {
          this.i = 0;
          while(this.i < this.MAX_CONDITIONS_CS_VEHICLES_BUTTONS)
@@ -59,7 +57,7 @@ package net.wg.gui.components.tooltips
             this.i++;
          }
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:CSVehicleButton = null;
          if(this.conditionCSVehicleButtonList)
@@ -74,19 +72,19 @@ package net.wg.gui.components.tooltips
          }
          super.onDispose();
       }
-
+      
       override public function build(param1:Object, param2:ITooltipProps) : void {
          super.build(param1,param2);
       }
-
+      
       override public function toString() : String {
          return "[WG ToolTipSuitableVehicle " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function redraw() : void {
          var _loc2_:SuitableVehicleVO = null;
          var _loc5_:TextField = null;
@@ -151,33 +149,31 @@ package net.wg.gui.components.tooltips
             this.alertSuitable.width = this.alertSuitable.height = 1;
             this.alertSuitable.visible = false;
          }
+         else if(!_loc2_.isCreator)
+         {
+            _loc4_ = Utils.instance.createSeparate(content);
+            _loc4_.y = topPosition ^ 0;
+            separators.push(_loc4_);
+            this.whiteBg.y = _loc4_.y;
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            this.alertSuitable.multiline = true;
+            this.alertSuitable.wordWrap = true;
+            this.alertSuitable.autoSize = TextFieldAutoSize.CENTER;
+            this.alertSuitable.text = _loc2_.toolTipType == Tooltips.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_UNSUITABLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_UNSUITABLE;
+            this.alertSuitable.textColor = 16719904;
+            this.alertSuitable.visible = true;
+            this.alertSuitable.x = contentMargin.left + bgShadowMargin.left;
+            this.alertSuitable.y = topPosition ^ 0;
+            topPosition = topPosition + (this.alertSuitable.textHeight + this.MARGIN_AFTER_SUBHEADER);
+         }
          else
          {
-            if(!_loc2_.isCreator)
-            {
-               _loc4_ = Utils.instance.createSeparate(content);
-               _loc4_.y = topPosition ^ 0;
-               separators.push(_loc4_);
-               this.whiteBg.y = _loc4_.y;
-               topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
-               this.alertSuitable.multiline = true;
-               this.alertSuitable.wordWrap = true;
-               this.alertSuitable.autoSize = TextFieldAutoSize.CENTER;
-               this.alertSuitable.text = _loc2_.toolTipType == Tooltips.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_UNSUITABLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_UNSUITABLE;
-               this.alertSuitable.textColor = 16719904;
-               this.alertSuitable.visible = true;
-               this.alertSuitable.x = contentMargin.left + bgShadowMargin.left;
-               this.alertSuitable.y = topPosition ^ 0;
-               topPosition = topPosition + (this.alertSuitable.textHeight + this.MARGIN_AFTER_SUBHEADER);
-            }
-            else
-            {
-               this.alertSuitable.x = this.alertSuitable.y = 0;
-               this.alertSuitable.width = this.alertSuitable.height = 1;
-               this.alertSuitable.visible = false;
-               this.whiteBg.visible = false;
-            }
+            this.alertSuitable.x = this.alertSuitable.y = 0;
+            this.alertSuitable.width = this.alertSuitable.height = 1;
+            this.alertSuitable.visible = false;
+            this.whiteBg.visible = false;
          }
+         
          if(!_loc2_.isCreator && _loc2_.leftCount > 0)
          {
             this.notEnoughTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(_loc2_.toolTipType == Tooltips.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_MORE:TOOLTIPS.CSAUTOSEARCHVEHICLE_MORE),Utils.instance.COLOR_ADD_INFO,13,"$TitleFont") + " " + Utils.instance.htmlWrapper(_loc2_.leftCount.toString(),Utils.instance.COLOR_NUMBER,13,"$TitleFont");
@@ -199,7 +195,7 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       override protected function updateSize() : void {
          var _loc1_:Separator = null;
          if(content.width < this.MIN_CONTENT_WIDTH)
@@ -209,12 +205,12 @@ package net.wg.gui.components.tooltips
          super.updateSize();
          if(this.whiteBg.visible)
          {
-            _loc1_ = separators[separators.length-1];
+            _loc1_ = separators[separators.length - 1];
             this.whiteBg.width = contentWidth + bgShadowMargin.horizontal;
             this.whiteBg.height = content.height + contentMargin.bottom - _loc1_.y;
          }
       }
-
+      
       private function addCondition(param1:MovieClip, param2:Object, param3:Number, param4:CSVehicleButton) : Number {
          var _loc5_:* = false;
          var _loc6_:* = false;
@@ -223,13 +219,11 @@ package net.wg.gui.components.tooltips
             _loc5_ = true;
             _loc6_ = true;
          }
-         else
+         else if((param2.hasOwnProperty("nationIDRange")) && (param2["nationIDRange"]) || (param2.hasOwnProperty("vLevelRange")) && (param2["vLevelRange"]) || (param2.hasOwnProperty("vTypeRange")) && (param2["vTypeRange"]))
          {
-            if((param2.hasOwnProperty("nationIDRange")) && (param2["nationIDRange"]) || (param2.hasOwnProperty("vLevelRange")) && (param2["vLevelRange"]) || (param2.hasOwnProperty("vTypeRange")) && (param2["vTypeRange"]))
-            {
-               _loc5_ = true;
-            }
+            _loc5_ = true;
          }
+         
          if(_loc5_)
          {
             param4.x = contentMargin.left + bgShadowMargin.left;
@@ -250,10 +244,9 @@ package net.wg.gui.components.tooltips
          }
          return param3;
       }
-
+      
       private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number {
-         var _loc4_:SuitableVehicleBlockItem = null;
-         _loc4_ = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
+         var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
          _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
          _loc4_.x = contentMargin.left + bgShadowMargin.left;
          _loc4_.y = param3 ^ 0;
@@ -262,5 +255,4 @@ package net.wg.gui.components.tooltips
          return param3;
       }
    }
-
 }

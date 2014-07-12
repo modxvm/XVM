@@ -12,16 +12,15 @@ package net.wg.gui.lobby.settings.components
    import flash.events.Event;
    import net.wg.gui.events.ListEventEx;
    import scaleform.gfx.MouseEventEx;
-
-
+   
    public class KeysScrollingList extends ScrollingListPx
    {
-          
+      
       public function KeysScrollingList() {
          super();
          scrollPosition = 0;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -62,7 +61,7 @@ package net.wg.gui.lobby.settings.components
             applyScrollBarUpdating();
          }
       }
-
+      
       public function updateDataProvider() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -82,7 +81,7 @@ package net.wg.gui.lobby.settings.components
             }
          }
       }
-
+      
       override protected function createRendererByDataIndex(param1:int) : void {
          var _loc2_:IListItemRenderer = this.createRenderer(param1);
          if(_loc2_ == null)
@@ -100,7 +99,7 @@ package net.wg.gui.lobby.settings.components
          _loc2_.y = totalHeight;
          totalHeight = totalHeight + Math.round(_loc2_.height);
       }
-
+      
       override protected function createRenderer(param1:uint) : IListItemRenderer {
          var _loc2_:IListItemRenderer = super.createRenderer(param1);
          if(_loc2_ != null)
@@ -110,7 +109,7 @@ package net.wg.gui.lobby.settings.components
          }
          return null;
       }
-
+      
       override protected function drawRenderers(param1:Number) : void {
          if(_itemRenderer == null)
          {
@@ -124,7 +123,7 @@ package net.wg.gui.lobby.settings.components
             _loc2_++;
          }
       }
-
+      
       override protected function setupRenderer(param1:IListItemRenderer) : void {
          param1.owner = this;
          param1.focusTarget = this;
@@ -141,7 +140,7 @@ package net.wg.gui.lobby.settings.components
             param1.addEventListener(MouseEvent.MOUSE_WHEEL,handleMouseWheel,false,0,true);
          }
       }
-
+      
       override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
          param1.owner = null;
          param1.focusTarget = null;
@@ -154,7 +153,7 @@ package net.wg.gui.lobby.settings.components
          param1.removeEventListener(MouseEvent.MOUSE_WHEEL,handleMouseWheel);
          param1.removeEventListener(KeyInputEvents.CHANGE,this.dispatchItemEvent);
       }
-
+      
       override protected function dispatchItemEvent(param1:Event) : Boolean {
          var _loc2_:String = null;
          switch(param1.type)
@@ -182,45 +181,39 @@ package net.wg.gui.lobby.settings.components
          }
          var _loc3_:IListItemRenderer = param1.currentTarget as IListItemRenderer;
          var _loc4_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc4_ = (param1 as ButtonEvent).controllerIdx;
          }
-         else
+         else if(param1 is KeyInputEvents)
          {
-            if(param1  is  KeyInputEvents)
-            {
-               _loc4_ = KeyInputEvents(param1).keyCode;
-            }
-            else
-            {
-               if(param1  is  MouseEventEx)
-               {
-                  _loc4_ = (param1 as MouseEventEx).mouseIdx;
-               }
-            }
+            _loc4_ = KeyInputEvents(param1).keyCode;
          }
+         else if(param1 is MouseEventEx)
+         {
+            _loc4_ = (param1 as MouseEventEx).mouseIdx;
+         }
+         
+         
          var _loc5_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc5_ = (param1 as ButtonEvent).buttonIdx;
          }
-         else
+         else if(param1 is MouseEventEx)
          {
-            if(param1  is  MouseEventEx)
-            {
-               _loc5_ = (param1 as MouseEventEx).buttonIdx;
-            }
+            _loc5_ = (param1 as MouseEventEx).buttonIdx;
          }
+         
          var _loc6_:* = false;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc6_ = (param1 as ButtonEvent).isKeyboard;
          }
          var _loc7_:ListEventEx = new ListEventEx(_loc2_,false,true,_loc3_.index,0,_loc3_.index,_loc3_,dataProvider[_loc3_.index],_loc4_,_loc5_,_loc6_);
          return dispatchEvent(_loc7_);
       }
-
+      
       override protected function scrollList(param1:int) : void {
          if(this.isSelected())
          {
@@ -228,7 +221,7 @@ package net.wg.gui.lobby.settings.components
          }
          super.scrollList(param1);
       }
-
+      
       override public function scrollToIndex(param1:uint) : void {
          if(this.isSelected())
          {
@@ -236,7 +229,7 @@ package net.wg.gui.lobby.settings.components
          }
          super.scrollToIndex(param1);
       }
-
+      
       private function isSelected() : Boolean {
          var _loc3_:KeysItemRenderer = null;
          var _loc1_:uint = _renderers.length;
@@ -252,7 +245,7 @@ package net.wg.gui.lobby.settings.components
          }
          return false;
       }
-
+      
       public function restoreDefault() : void {
          var _loc3_:ListEventEx = null;
          var _loc1_:uint = dataProvider.length;
@@ -269,7 +262,7 @@ package net.wg.gui.lobby.settings.components
          }
          dataProvider.invalidate();
       }
-
+      
       public function keysWasChanged() : Boolean {
          var _loc1_:* = false;
          var _loc2_:uint = dataProvider.length;
@@ -285,15 +278,14 @@ package net.wg.gui.lobby.settings.components
          }
          return _loc1_;
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          _renderers = new Vector.<IListItemRenderer>();
       }
-
+      
       override public function toString() : String {
          return "[Wargaming KeysScrollingList " + name + "]";
       }
    }
-
 }

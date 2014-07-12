@@ -3,14 +3,11 @@ package net.wg.gui.lobby.fortifications.cmp.drctn
    import net.wg.infrastructure.interfaces.IUIComponentEx;
    import net.wg.gui.lobby.fortifications.interfaces.ITransportModeClient;
    import net.wg.gui.lobby.fortifications.interfaces.IDirectionModeClient;
-   import __AS3__.vec.Vector;
    import net.wg.gui.lobby.fortifications.data.BuildingVO;
-
-
+   
    public interface IFortDirectionsContainer extends IUIComponentEx, ITransportModeClient, IDirectionModeClient
    {
-          
+      
       function update(param1:Vector.<BuildingVO>) : void;
    }
-
 }

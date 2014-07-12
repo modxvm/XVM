@@ -13,45 +13,44 @@ package net.wg.gui.lobby.store.shop
    import net.wg.utils.IAssertable;
    import flash.display.DisplayObject;
    import net.wg.data.constants.Errors;
-
-
+   
    public class ShopModuleListItemRenderer extends ShopTableItemRenderer
    {
-          
+      
       public function ShopModuleListItemRenderer() {
          super();
          this.showHideAction();
       }
-
+      
       public var moduleIcon:ExtraModuleIcon = null;
-
+      
       public var orTextField:TextField = null;
-
+      
       public var actionCredits:ModuleRendererCredits = null;
-
+      
       public var actionPriceLeft:ActionPrice = null;
-
+      
       public var vehCount:TextField = null;
-
+      
       public var count:TextField = null;
-
+      
       override protected function onDispose() : void {
          this.actionPriceLeft.dispose();
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          constraints.addElement(this.moduleIcon.name,this.moduleIcon,Constraints.LEFT);
          constraints.addElement(this.count.name,this.count,Constraints.RIGHT);
          this.orTextField.text = MENU.SHOP_TABLE_BUYACTIONOR;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          this.actionPriceLeft.setup(this);
       }
-
+      
       override protected function update() : void {
          var _loc1_:StoreTableData = null;
          super.update();
@@ -67,7 +66,7 @@ package net.wg.gui.lobby.store.shop
             getHelper().initModuleIconAsDefault(this.moduleIcon);
          }
       }
-
+      
       override protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:StoreTableData) : void {
          var _loc4_:ILocale = null;
          var _loc5_:ActionPriceVO = null;
@@ -99,8 +98,8 @@ package net.wg.gui.lobby.store.shop
             }
          }
       }
-
-      private function showHideAction(param1:StoreTableData=null) : void {
+      
+      private function showHideAction(param1:StoreTableData = null) : void {
          var _loc2_:ActionPriceVO = null;
          this.orTextField.visible = isUseGoldAndCredits;
          if(param1)
@@ -115,7 +114,7 @@ package net.wg.gui.lobby.store.shop
          this.actionPriceLeft.visible = (isUseGoldAndCredits) && (this.actionPriceLeft.visible);
          this.actionCredits.visible = (isUseGoldAndCredits) && !this.actionPriceLeft.visible;
       }
-
+      
       private function updateModuleIcon(param1:StoreTableData) : void {
          var _loc2_:IAssertable = null;
          var _loc3_:Array = null;
@@ -124,7 +123,7 @@ package net.wg.gui.lobby.store.shop
          {
             _loc2_ = App.utils.asserter;
             _loc3_ = [this.moduleIcon,this.moduleIcon.moduleType,this.moduleIcon.moduleType,this.moduleIcon.moduleLevel,this.moduleIcon.artefact,this.moduleIcon.shell];
-            for each (_loc4_ in _loc3_)
+            for each(_loc4_ in _loc3_)
             {
                _loc2_.assertNotNull(_loc4_,_loc4_.name + Errors.CANT_NULL);
             }
@@ -133,5 +132,4 @@ package net.wg.gui.lobby.store.shop
          this.moduleIcon.extraIconSource = param1.extraModuleInfo;
       }
    }
-
 }

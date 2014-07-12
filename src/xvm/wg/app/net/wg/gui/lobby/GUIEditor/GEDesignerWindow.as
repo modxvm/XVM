@@ -4,28 +4,27 @@ package net.wg.gui.lobby.GUIEditor
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
    import flash.display.Sprite;
-
-
+   
    public class GEDesignerWindow extends GEDesignerWindowMeta
    {
-          
+      
       public function GEDesignerWindow() {
          super();
       }
-
+      
       public var bg:MovieClip = null;
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          this.bg.addEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
       }
-
+      
       override protected function onDispose() : void {
          this.bg.removeEventListener(MouseEvent.CLICK,this.onMouseClickHandler);
          this.bg = null;
          super.onDispose();
       }
-
+      
       private function onMouseClickHandler(param1:MouseEvent) : void {
          var _loc2_:Sprite = App.cursor.getAttachedSprite();
          if(_loc2_ != null)
@@ -37,5 +36,4 @@ package net.wg.gui.lobby.GUIEditor
          }
       }
    }
-
 }

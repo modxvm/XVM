@@ -27,11 +27,10 @@ package net.wg.gui.lobby.tankman
    import flash.text.TextFormat;
    import flash.events.EventDispatcher;
    import flash.events.Event;
-
-
+   
    public class PersonalCase extends PersonalCaseBase
    {
-          
+      
       public function PersonalCase() {
          super();
          isModal = false;
@@ -39,85 +38,85 @@ package net.wg.gui.lobby.tankman
          canClose = true;
          showWindowBg = false;
       }
-
+      
       private static const UPDATE_SCROLLING_LIST:String = "updateScrollingList";
-
+      
       private static const SKILLS_CAROUSEL_ITEM_SIDE:uint = 60;
-
+      
       private static const SKILLS_CAROUSEL_ITEM_MARGIN:uint = 3;
-
+      
       private static const SKILLS_CAROUSEL_POSITION:Point;
-
+      
       private static const SPECIALIZATION_MARGIN:Number = 4;
-
+      
       public var tabButtonVisibleFalse:TabButton;
-
+      
       public var drop_skills_button_bg_line:Sprite;
-
+      
       public var s_tab_line:Sprite;
-
+      
       public var _name:TextField;
-
+      
       public var rank:TextField;
-
+      
       public var role:TextField;
-
+      
       public var levelValue:TextField;
-
+      
       public var inTankLabel:TextField;
-
+      
       public var inTankValue:TextField;
-
+      
       public var tabs:ButtonBarEx;
-
+      
       public var view:ViewStack;
-
+      
       public var skills_mc:SkillsCarousel;
-
+      
       public var specialization:PersonalCaseSpecialization;
-
+      
       public var modifiersHeaders:TextField;
-
+      
       public var modifiersValues:TextField;
-
+      
       public var modifiersNames:TextField;
-
+      
       private const MODIFIER_COLOR_NORMAL:String = "#FFFFFF";
-
+      
       private const MODIFIER_COLOR_ALERT:String = "#b70000";
-
+      
       public var unloadBtn:SoundButtonEx;
-
+      
       public var dismissBtn:SoundButtonEx;
-
+      
       public var closeBtn:SoundButtonEx;
-
+      
       public var bg_switcher:MovieClip;
-
+      
       public var icon1:UILoaderAlt;
-
+      
       public var rankIcon:UILoaderAlt;
-
+      
       public var accTeachingOfSkillBtn:SoundButtonEx;
-
+      
       public var usingLevelLoadingBar:StatusIndicator;
-
+      
       public var roleIcon:MovieClip;
-
+      
       public var skillsBtn:MovieClip;
-
+      
       public var dropSkillsButton:IconTextButton;
-
+      
       public var descrSkillButton:TextField;
-
+      
       private var currentView:IViewStackContent;
-
+      
       private var currentNation:String = "";
-
+      
       private var isUpdateList:Boolean = false;
-
+      
       private var tankmanInBattle:Boolean = false;
-
+      
       override protected function onDispose() : void {
          App.toolTipMgr.hide();
          this.unloadBtn.removeEventListener(ButtonEvent.CLICK,this.unloadBtnClick);
@@ -152,7 +151,7 @@ package net.wg.gui.lobby.tankman
          documentsData = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(UPDATE_SCROLLING_LIST)) && (this.isUpdateList))
@@ -162,7 +161,7 @@ package net.wg.gui.lobby.tankman
             this.isUpdateList = false;
          }
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          var _loc1_:Padding = window.contentPadding as Padding;
@@ -172,7 +171,7 @@ package net.wg.gui.lobby.tankman
          window.contentPadding = _loc1_;
          window.useBottomBtns = true;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.tabButtonVisibleFalse.visible = false;
@@ -201,7 +200,7 @@ package net.wg.gui.lobby.tankman
          getSkillsDataS();
          getDocumentsDataS();
       }
-
+      
       override public function as_setCommonData(param1:Object) : void {
          super.as_setCommonData(param1);
          if(isFirtsRun)
@@ -211,15 +210,15 @@ package net.wg.gui.lobby.tankman
             isFirtsRun = false;
          }
       }
-
+      
       override public function as_setDossierData(param1:Object) : void {
          super.as_setDossierData(param1);
       }
-
+      
       override public function as_setRetrainingData(param1:Object) : void {
          super.as_setRetrainingData(param1);
       }
-
+      
       private function initSkillsCarousel() : void {
          if(!this.skills_mc.visible)
          {
@@ -238,7 +237,7 @@ package net.wg.gui.lobby.tankman
          this.isUpdateList = true;
          invalidate(UPDATE_SCROLLING_LIST);
       }
-
+      
       override protected function updateCommonElements() : void {
          var _loc1_:IUtils = App.utils;
          this.currentNation = _loc1_.nations.getNationName(data.nationID);
@@ -273,11 +272,11 @@ package net.wg.gui.lobby.tankman
          this.initializeTabButton();
          validateNow();
       }
-
+      
       private function onTeachSkillBtnClick(param1:ButtonEvent) : void {
          openExchangeFreeToTankmanXpWindowS();
       }
-
+      
       private function initializeTabButton() : void {
          var _loc2_:IViewStackContent = null;
          var _loc1_:Array = [];
@@ -289,23 +288,19 @@ package net.wg.gui.lobby.tankman
                   {
                      "label":MENU.TANKMANPERSONALCASE_TABBATTLEINFO,
                      "linkage":Linkages.PERSONAL_CASE_STATS
-                  }
-               ,
+                  },
                   {
                      "label":MENU.TANKMANPERSONALCASE_TABTRAINING,
                      "linkage":Linkages.PERSONAL_CASE_RETRAINING
-                  }
-               ,
+                  },
                   {
                      "label":MENU.TANKMANPERSONALCASE_TABSKILLS,
                      "linkage":Linkages.PERSONAL_CASE_SKILLS
-                  }
-               ,
+                  },
                   {
                      "label":MENU.TANKMANPERSONALCASE_TABDOCS,
                      "linkage":Linkages.PERSONAL_CASE_DOCS
-                  }
-               ];
+                  }];
                this.tabs.dataProvider = new DataProvider(_loc1_);
             }
          }
@@ -315,8 +310,7 @@ package net.wg.gui.lobby.tankman
                {
                   "label":MENU.TANKMANPERSONALCASE_TABBATTLEINFO,
                   "linkage":Linkages.PERSONAL_CASE_STATS
-               }
-            ];
+               }];
             this.tabs.dataProvider = new DataProvider(_loc1_);
          }
          if(this.tabs.selectedIndex == -1)
@@ -332,7 +326,7 @@ package net.wg.gui.lobby.tankman
             this.runtimeUpdateByInstance(_loc2_);
          }
       }
-
+      
       private function initializeGeneralProperties() : void {
          if(!(data.iconFile == null) && !(data.iconFile == this.icon1.source))
          {
@@ -377,7 +371,7 @@ package net.wg.gui.lobby.tankman
          }
          this.updateModifiers();
       }
-
+      
       private function updateModifiers() : void {
          var _loc5_:String = null;
          var _loc6_:* = false;
@@ -411,7 +405,7 @@ package net.wg.gui.lobby.tankman
                      _loc6_ = true;
                   }
                   _loc2_ = _loc2_ + data.modifiers[_loc7_].val;
-                  if(_loc7_ != data.modifiers.length-1)
+                  if(_loc7_ != data.modifiers.length - 1)
                   {
                      this.modifiersHeaders.htmlText = this.modifiersHeaders.htmlText + "<br/>";
                   }
@@ -445,7 +439,7 @@ package net.wg.gui.lobby.tankman
          this.modifiersNames.height = this.modifiersHeaders.height;
          this.specialization.y = Math.round(this.modifiersHeaders.y + this.modifiersHeaders.height + SPECIALIZATION_MARGIN);
       }
-
+      
       private function addNoModifiersInfo() : void {
          this.modifiersValues.htmlText = "-";
          this.modifiersNames.htmlText = MENU.TANKMANPERSONALCASE_NOMODIFIERS;
@@ -453,7 +447,7 @@ package net.wg.gui.lobby.tankman
          _loc1_.leading = 0;
          this.modifiersNames.setTextFormat(_loc1_);
       }
-
+      
       private function enableButtons(param1:Boolean, param2:Boolean) : Boolean {
          if(param1)
          {
@@ -465,7 +459,7 @@ package net.wg.gui.lobby.tankman
          }
          return true;
       }
-
+      
       private function __isEnableDropSkillsButton() : Boolean {
          if((data.currentVehicle) && (data.currentVehicle.currentVehicleLocked))
          {
@@ -482,169 +476,155 @@ package net.wg.gui.lobby.tankman
          }
          return false;
       }
-
+      
       private function initializeDropSkillsButton(param1:Boolean) : void {
          this.dropSkillsButton.enabled = param1;
       }
-
+      
       private function initializeSkillBtn(param1:Boolean) : void {
          this.skillsBtn.visible = data.skills.length == 0;
          this.skillsBtn.enabled = !param1;
          this.skillsBtn.bg.flag_switcher.gotoAndPlay(this.currentNation);
          this.skillsBtn.addEventListener(ButtonEvent.CLICK,this.onSkillsBtnClick);
       }
-
+      
       private function onViewNeedUpdate(param1:ViewStackEvent) : void {
          var _loc2_:IViewStackContent = param1.view;
-         if(_loc2_  is  PersonalCaseStats && !EventDispatcher(_loc2_).hasEventListener(PersonalCaseEvent.CHANGE_TAB_ON_TWO))
+         if(_loc2_ is PersonalCaseStats && !EventDispatcher(_loc2_).hasEventListener(PersonalCaseEvent.CHANGE_TAB_ON_TWO))
          {
             EventDispatcher(_loc2_).addEventListener(PersonalCaseEvent.CHANGE_TAB_ON_TWO,this.changeTabToTwoHandler);
             EventDispatcher(_loc2_).addEventListener(PersonalCaseEvent.GET_TANKMAN_ID,this.getTankmanIDHandler);
          }
-         else
+         else if(_loc2_ is CrewTankmanRetraining && !EventDispatcher(_loc2_).hasEventListener(PersonalCaseEvent.APPLY_RETRAINING))
          {
-            if(_loc2_  is  CrewTankmanRetraining && !EventDispatcher(_loc2_).hasEventListener(PersonalCaseEvent.APPLY_RETRAINING))
-            {
-               EventDispatcher(_loc2_).addEventListener(PersonalCaseEvent.APPLY_RETRAINING,this.applyRetrainingHandler);
-            }
-            else
-            {
-               if(_loc2_  is  PersonalCaseSkills && !EventDispatcher(_loc2_).hasEventListener(PersonalCaseEvent.TRAINING_SKILL))
-               {
-                  EventDispatcher(_loc2_).addEventListener(PersonalCaseEvent.TRAINING_SKILL,this.trainingSkillHandler);
-               }
-               else
-               {
-                  if(_loc2_  is  PersonalCaseDocs && !EventDispatcher(_loc2_).hasEventListener(PersonalCaseEvent.CHANGE_PASSPORT))
-                  {
-                     EventDispatcher(_loc2_).addEventListener(PersonalCaseEvent.CHANGE_PASSPORT,this.changePassportHandler);
-                  }
-               }
-            }
+            EventDispatcher(_loc2_).addEventListener(PersonalCaseEvent.APPLY_RETRAINING,this.applyRetrainingHandler);
          }
+         else if(_loc2_ is PersonalCaseSkills && !EventDispatcher(_loc2_).hasEventListener(PersonalCaseEvent.TRAINING_SKILL))
+         {
+            EventDispatcher(_loc2_).addEventListener(PersonalCaseEvent.TRAINING_SKILL,this.trainingSkillHandler);
+         }
+         else if(_loc2_ is PersonalCaseDocs && !EventDispatcher(_loc2_).hasEventListener(PersonalCaseEvent.CHANGE_PASSPORT))
+         {
+            EventDispatcher(_loc2_).addEventListener(PersonalCaseEvent.CHANGE_PASSPORT,this.changePassportHandler);
+         }
+         
+         
+         
          this.currentView = param1.view;
          this.runtimeUpdateByInstance(this.currentView);
       }
-
+      
       override protected function runtimeUpdateByModel(param1:Class, param2:Object) : void {
-         if(this.currentView  is  param1)
+         if(this.currentView is param1)
          {
             this.currentView.update(param2);
          }
       }
-
-      private function runtimeUpdateByInstance(param1:IViewStackContent=null) : void {
+      
+      private function runtimeUpdateByInstance(param1:IViewStackContent = null) : void {
          if(param1 == null)
          {
             return;
          }
-         if(param1  is  PersonalCaseStats && (stats))
+         if(param1 is PersonalCaseStats && (stats))
          {
             param1.update(stats);
          }
-         if((param1  is  CrewTankmanRetraining) && (retrainingData) && (rentainingTabUpdated))
+         if((param1 is CrewTankmanRetraining) && (retrainingData) && (rentainingTabUpdated))
          {
             param1.update(retrainingData);
             rentainingTabUpdated = false;
          }
-         if(param1  is  PersonalCaseSkills && (skillsModel))
+         if(param1 is PersonalCaseSkills && (skillsModel))
          {
             param1.update(skillsModel);
          }
-         if(param1  is  PersonalCaseDocs && (documentsData))
+         if(param1 is PersonalCaseDocs && (documentsData))
          {
             param1.update(documentsData);
          }
       }
-
-      private function runtimeShowByIndex(param1:int=0) : void {
+      
+      private function runtimeShowByIndex(param1:int = 0) : void {
          var _loc2_:Boolean = (data.inTank) && !data.currentVehicle.currentVehicleLocked;
          if(param1 == 0)
          {
             this.view.show(Linkages.PERSONAL_CASE_STATS);
          }
-         else
+         else if(param1 == 1 && (_loc2_))
          {
-            if(param1 == 1 && (_loc2_))
-            {
-               this.view.show(Linkages.PERSONAL_CASE_RETRAINING);
-            }
-            else
-            {
-               if(param1 == 2 && (_loc2_))
-               {
-                  this.view.show(Linkages.PERSONAL_CASE_SKILLS);
-               }
-               else
-               {
-                  if(param1 == 3 && (_loc2_))
-                  {
-                     this.view.show(Linkages.PERSONAL_CASE_DOCS);
-                  }
-               }
-            }
+            this.view.show(Linkages.PERSONAL_CASE_RETRAINING);
          }
+         else if(param1 == 2 && (_loc2_))
+         {
+            this.view.show(Linkages.PERSONAL_CASE_SKILLS);
+         }
+         else if(param1 == 3 && (_loc2_))
+         {
+            this.view.show(Linkages.PERSONAL_CASE_DOCS);
+         }
+         
+         
+         
          this.currentView = this.view.currentView as IViewStackContent;
          this.runtimeUpdateByInstance(this.currentView);
       }
-
+      
       private function applyRetrainingHandler(param1:PersonalCaseEvent) : void {
          retrainingTankmanS(param1.retrainingTankmanData.inventoryID,param1.retrainingTankmanData.innaitonID,param1.retrainingTankmanData.tankmanCostTypeIndex);
       }
-
+      
       private function trainingSkillHandler(param1:PersonalCaseEvent) : void {
          addTankmanSkillS(data.inventoryID,param1.trainingSkillName);
       }
-
+      
       private function tabs_clikIndexChangeHandler(param1:IndexEvent) : void {
          this.runtimeShowByIndex(param1.index);
       }
-
+      
       private function onDropSkillsButtonClick(param1:ButtonEvent) : void {
          dropSkillsS();
       }
-
+      
       private function onClose(param1:ButtonEvent) : void {
          onWindowCloseS();
       }
-
+      
       private function hideTooltip(param1:Event) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function showTooltip(param1:MouseEvent) : void {
          var _loc2_:* = "";
          if(param1.target == this.unloadBtn)
          {
             _loc2_ = TOOLTIPS.BARRACKS_TANKMEN_UNLOAD;
          }
-         else
+         else if(param1.target == this.dismissBtn)
          {
-            if(param1.target == this.dismissBtn)
-            {
-               _loc2_ = TOOLTIPS.BARRACKS_TANKMEN_DISMISS;
-            }
+            _loc2_ = TOOLTIPS.BARRACKS_TANKMEN_DISMISS;
          }
+         
          App.toolTipMgr.showComplex(_loc2_);
       }
-
+      
       private function unloadBtnClick(param1:ButtonEvent) : void {
          unloadTankmanS(data.inventoryID,data.currentVehicle.inventoryID);
       }
-
+      
       private function dismissBtnClick(param1:ButtonEvent) : void {
          dismissTankmanS(data.inventoryID);
       }
-
+      
       private function onSkillsBtnClick(param1:ButtonEvent) : void {
          this.changeTabToTwoHandler();
       }
-
+      
       private function changePassportHandler(param1:PersonalCaseEvent) : void {
          changeTankmanPassportS(data.inventoryID,param1.newTankmanFirstName.id,param1.newTankmanLastName.id,param1.newIcon.id);
       }
-
-      private function changeTabToTwoHandler(param1:PersonalCaseEvent=null) : void {
+      
+      private function changeTabToTwoHandler(param1:PersonalCaseEvent = null) : void {
          var _loc2_:Boolean = !data.currentVehicle || (data.currentVehicle) && !data.currentVehicle.currentVehicleLocked;
          if(!(this.tabs.selectedIndex == 2) && (_loc2_) && this.tabs.dataProvider.length > 1)
          {
@@ -652,11 +632,11 @@ package net.wg.gui.lobby.tankman
             this.runtimeShowByIndex(this.tabs.selectedIndex);
          }
       }
-
+      
       private function getTankmanIDHandler(param1:PersonalCaseEvent) : void {
          if(data.skills.length > 0)
          {
-            param1.tankmanIdDelegate(data.inventoryID,data.skills[data.skills.length-1].name);
+            param1.tankmanIdDelegate(data.inventoryID,data.skills[data.skills.length - 1].name);
          }
          else
          {
@@ -664,5 +644,4 @@ package net.wg.gui.lobby.tankman
          }
       }
    }
-
 }

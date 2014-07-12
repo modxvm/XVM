@@ -8,30 +8,29 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
-
-
+   
    public class ToolTipIGR extends ToolTipSpecial
    {
-          
+      
       public function ToolTipIGR() {
          super();
          this.headerTF = content.headerTF;
          this.discrTF = content.discrTF;
          this.whiteBg = content.whiteBg;
       }
-
+      
       public var headerTF:TextField = null;
-
+      
       public var discrTF:TextField = null;
-
+      
       public var whiteBg:Sprite = null;
-
+      
       private var progressBlock:IgrQuestProgressBlock = null;
-
+      
       override public function build(param1:Object, param2:ITooltipProps) : void {
          super.build(param1,param2);
       }
-
+      
       override protected function onDispose() : void {
          if(this.progressBlock)
          {
@@ -40,15 +39,15 @@ package net.wg.gui.components.tooltips
          }
          super.onDispose();
       }
-
+      
       override public function toString() : String {
          return "[WG ToolTipIGR " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function redraw() : void {
          var _loc4_:* = NaN;
          var _loc5_:IgrVO = null;
@@ -132,11 +131,10 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       override protected function updateSize() : void {
          super.updateSize();
          this.whiteBg.width = content.width + bgShadowMargin.horizontal;
       }
    }
-
 }

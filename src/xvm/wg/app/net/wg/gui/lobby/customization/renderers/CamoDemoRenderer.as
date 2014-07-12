@@ -5,55 +5,53 @@ package net.wg.gui.lobby.customization.renderers
    import net.wg.gui.components.controls.IconText;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.SoundTypes;
-
-
+   
    public class CamoDemoRenderer extends CamouflageItemRenderer
    {
-          
+      
       public function CamoDemoRenderer() {
          super();
          soundId = SoundTypes.CAMOUFLAGE_DEMO_RENDERER;
          useHandCursorForce = true;
       }
-
+      
       public static const WINTER:String = "winter";
-
+      
       public static const SUMMER:String = "summer";
-
+      
       public static const DESERT:String = "desert";
-
+      
       public static const OFF:String = "off";
-
-      public static var KINDS:Array = [WINTER,SUMMER,DESERT];
-
+      
+      public static var KINDS:Array;
+      
       public var kindMc:MovieClip;
-
+      
       public var timeLeftFld:TextField;
-
+      
       public var costFieldNew:IconText;
-
+      
       private var _kind:String;
-
+      
       private var _kindDirty:Boolean = false;
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          this.showKind(!data || !data.id);
       }
-
+      
       public function get kind() : String {
          return this._kind;
       }
-
+      
       public function set kind(param1:String) : void {
          this._kind = param1;
          this._kindDirty = true;
       }
-
+      
       override protected function checkTooltip() : void {
-          
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = false;
@@ -82,7 +80,7 @@ package net.wg.gui.lobby.customization.renderers
          }
          if(isInvalid(InvalidationType.DATA))
          {
-            _loc2_ = ((((freeTF) && (data)) && (data.id > 0) && data.price) && (data.price.cost == 0)) && !data.current && !data.isInHangar;
+            _loc2_ = (freeTF && data && data.id > 0 && data.price && data.price.cost == 0) && !data.current && !data.isInHangar;
             if(_loc2_)
             {
                costFrame.x = 1;
@@ -113,13 +111,13 @@ package net.wg.gui.lobby.customization.renderers
             costField.text = "";
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.timeLeftFld.mouseEnabled = false;
          freeTF.text = VEHICLE_CUSTOMIZATION.IGR_FREE_CUT;
       }
-
+      
       override protected function onDispose() : void {
          this.kindMc = null;
          this.timeLeftFld = null;
@@ -130,7 +128,7 @@ package net.wg.gui.lobby.customization.renderers
          }
          super.onDispose();
       }
-
+      
       override protected function setState(param1:String) : void {
          super.setState(param1);
          if(!current && !selected)
@@ -138,10 +136,9 @@ package net.wg.gui.lobby.customization.renderers
             border.state = "up";
          }
       }
-
+      
       private function showKind(param1:Boolean) : void {
          this.kindMc.visible = !(this.kind == OFF) && (param1);
       }
    }
-
 }

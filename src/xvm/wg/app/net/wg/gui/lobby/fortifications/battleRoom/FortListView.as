@@ -12,7 +12,6 @@ package net.wg.gui.lobby.fortifications.battleRoom
    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
    import scaleform.clik.events.ListEvent;
    import flash.events.MouseEvent;
-   import flash.events.Event;
    import net.wg.gui.events.SortableTableListEvent;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.components.controls.NormalSortingBtnInfo;
@@ -21,49 +20,41 @@ package net.wg.gui.lobby.fortifications.battleRoom
    import net.wg.data.constants.SortingInfo;
    import net.wg.gui.rally.data.ManualSearchDataProvider;
    import net.wg.gui.lobby.fortifications.data.sortie.SortieRenderVO;
-
-
+   
    public class FortListView extends FortListMeta implements IFortListMeta
    {
-          
+      
       public function FortListView() {
          super();
          backBtn.UIID = 31;
          createBtn.UIID = 32;
          this.filterDivision.UIID = 50;
          listDataProvider = new ManualSearchDataProvider(SortieRenderVO);
-         listDataProvider.addEventListener(Event.CHANGE,this.onUpdateDataProviderHandler);
          this.divisionsDP = new DAAPIDataProvider();
       }
-
-      private static const MAX_LENGTH:uint = 7;
-
-      private static const MIN_PADDING:uint = 0;
-
-      private static const MAX_PADDING:uint = 6;
-
+      
       public var searchResultsTF:TextField;
-
+      
       public var filterTF:TextField;
-
+      
       public var filterDivision:DropdownMenu;
-
+      
       public var filterInfo:InfoIcon;
-
+      
       private var divisionsDP:DAAPIDataProvider = null;
-
+      
       private var filterIndexChanging:Boolean = false;
-
+      
       public function as_getDivisionsDP() : Object {
          return this.divisionsDP;
       }
-
+      
       public function as_setSelectedDivision(param1:int) : void {
          this.filterIndexChanging = true;
          this.filterDivision.selectedIndex = param1;
          this.filterIndexChanging = false;
       }
-
+      
       public function as_setDetails(param1:Object) : void {
          if(param1 == null)
          {
@@ -71,23 +62,23 @@ package net.wg.gui.lobby.fortifications.battleRoom
          }
          detailsSection.setData(this.convertToRallyVO(param1));
       }
-
+      
       public function as_setCreationEnabled(param1:Boolean) : void {
          createBtn.enabled = param1;
       }
-
+      
       override protected function convertToRallyVO(param1:Object) : IRallyVO {
          return new RallyShortVO(param1);
       }
-
+      
       override protected function getRallyTooltipLinkage() : String {
          return Tooltips.CYBER_SPORT_TEAM;
       }
-
+      
       override protected function getRallyViewAlias() : String {
          return FORTIFICATION_ALIASES.FORT_BATTLE_ROOM_VIEW_UI;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.initListColumns();
@@ -104,10 +95,9 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.filterInfo.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
          }
       }
-
+      
       override protected function onDispose() : void {
          this.filterDivision.removeEventListener(ListEvent.INDEX_CHANGE,this.onFilterChange);
-         listDataProvider.removeEventListener(Event.CHANGE,this.onUpdateDataProviderHandler);
          if(this.filterInfo)
          {
             this.filterInfo.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
@@ -116,25 +106,25 @@ package net.wg.gui.lobby.fortifications.battleRoom
          this.divisionsDP = null;
          super.onDispose();
       }
-
+      
       override protected function coolDownControls(param1:Boolean, param2:int) : void {
          super.coolDownControls(param1,param2);
       }
-
+      
       override protected function onItemRollOver(param1:SortableTableListEvent) : void {
          App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_RENDERERINFO);
       }
-
+      
       override protected function onBackClickHandler(param1:ButtonEvent) : void {
          super.onBackClickHandler(param1);
          App.eventLogManager.logUIEvent(param1,0);
       }
-
+      
       override protected function onCreateClick(param1:ButtonEvent) : void {
          super.onCreateClick(param1);
          App.eventLogManager.logUIEvent(param1,0);
       }
-
+      
       override protected function onControlRollOver(param1:MouseEvent) : void {
          switch(param1.currentTarget)
          {
@@ -149,7 +139,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
                break;
          }
       }
-
+      
       private function initListColumns() : void {
          var _loc1_:NormalSortingBtnInfo = null;
          var _loc2_:Array = [];
@@ -172,7 +162,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
          rallyTable.headerDP = new DataProvider(_loc2_);
          rallyTable.sortByField("creatorName",SortingInfo.ASCENDING_SORT);
       }
-
+      
       private function onFilterChange(param1:ListEvent) : void {
          if(!this.filterIndexChanging)
          {
@@ -180,17 +170,5 @@ package net.wg.gui.lobby.fortifications.battleRoom
          }
          changeDivisionIndex(param1.index);
       }
-
-      private function onUpdateDataProviderHandler(param1:Event) : void {
-         if(listDataProvider.length > MAX_LENGTH)
-         {
-            rallyTable.x = MIN_PADDING;
-         }
-         else
-         {
-            rallyTable.x = MAX_PADDING;
-         }
-      }
    }
-
 }

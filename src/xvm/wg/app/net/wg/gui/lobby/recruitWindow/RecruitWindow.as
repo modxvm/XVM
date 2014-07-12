@@ -18,11 +18,10 @@ package net.wg.gui.lobby.recruitWindow
    import scaleform.clik.constants.ConstrainMode;
    import flash.events.Event;
    import flash.events.IEventDispatcher;
-
-
+   
    public class RecruitWindow extends RecruitWindowMeta implements IRecruitWindowMeta
    {
-          
+      
       public function RecruitWindow() {
          super();
          isModal = false;
@@ -30,47 +29,47 @@ package net.wg.gui.lobby.recruitWindow
          canMinimize = false;
          isCentered = true;
       }
-
+      
       public var nationDropdown:DropdownMenu;
-
+      
       public var roleDropdown:DropdownMenu;
-
+      
       public var vehicleClassDropdown:DropdownMenu;
-
+      
       public var vehicleTypeDropdown:DropdownMenu;
-
+      
       public var btnRecruit:SoundButtonEx;
-
+      
       public var btnCancel:SoundButtonEx;
-
+      
       public var btnAcademy:TankmanTrainingButton;
-
+      
       public var btnScool:TankmanTrainingButton;
-
+      
       public var btnCourses:TankmanTrainingButton;
-
+      
       protected var btnGroup:ButtonGroup;
-
+      
       private var data:Object;
-
+      
       private var studyType:Number = 0;
-
+      
       private var menuEnabled:Boolean = false;
-
+      
       public function as_setAllDropdowns(param1:Array, param2:Array, param3:Array, param4:Array) : void {
          this.as_setNations(param1);
          this.as_setVehicleClassDropdown(param2);
          this.as_setVehicleTypeDropdown(param3);
          this.as_setRoleDropdown(param4);
       }
-
+      
       public function as_initData(param1:Object) : void {
          LocalDebugUtils.traceObjectStructure(param1,"  ");
          this.data = param1;
          this.menuEnabled = param1.menuEnabled;
          invalidateData();
       }
-
+      
       public function as_setNations(param1:Array) : void {
          var _loc2_:String = null;
          this.nationDropdown.dataProvider = new DataProvider(param1);
@@ -78,7 +77,7 @@ package net.wg.gui.lobby.recruitWindow
          if(!this.menuEnabled)
          {
             this.nationDropdown.enabled = false;
-            for (_loc2_ in this.nationDropdown.dataProvider)
+            for(_loc2_ in this.nationDropdown.dataProvider)
             {
                if(this.nationDropdown.dataProvider[_loc2_].id == this.data.data.nationID)
                {
@@ -95,7 +94,7 @@ package net.wg.gui.lobby.recruitWindow
             this.roleDropdown.enabled = false;
          }
       }
-
+      
       public function as_setVehicleClassDropdown(param1:Array) : void {
          var _loc2_:String = null;
          this.vehicleClassDropdown.dataProvider = new DataProvider(param1);
@@ -109,7 +108,7 @@ package net.wg.gui.lobby.recruitWindow
          this.roleDropdown.enabled = !(this.vehicleClassDropdown.selectedIndex == 0);
          if(!this.menuEnabled)
          {
-            for (_loc2_ in this.vehicleClassDropdown.dataProvider)
+            for(_loc2_ in this.vehicleClassDropdown.dataProvider)
             {
                if(this.vehicleClassDropdown.dataProvider[_loc2_].id == this.data.data.tankType)
                {
@@ -120,7 +119,7 @@ package net.wg.gui.lobby.recruitWindow
             this.vehicleClassDropdown.enabled = false;
          }
       }
-
+      
       public function as_setVehicleTypeDropdown(param1:Array) : void {
          var _loc2_:String = null;
          this.vehicleTypeDropdown.dataProvider = new DataProvider(param1);
@@ -132,7 +131,7 @@ package net.wg.gui.lobby.recruitWindow
          this.roleDropdown.enabled = !(this.vehicleTypeDropdown.selectedIndex == 0);
          if(!this.data.menuEnabled)
          {
-            for (_loc2_ in this.vehicleTypeDropdown.dataProvider)
+            for(_loc2_ in this.vehicleTypeDropdown.dataProvider)
             {
                if(this.vehicleTypeDropdown.dataProvider[_loc2_].id == this.data.data.typeID)
                {
@@ -143,14 +142,14 @@ package net.wg.gui.lobby.recruitWindow
             this.vehicleTypeDropdown.enabled = false;
          }
       }
-
+      
       public function as_setRoleDropdown(param1:Array) : void {
          var _loc2_:String = null;
          this.roleDropdown.dataProvider = new DataProvider(param1);
          this.roleDropdown.selectedIndex = 0;
          if(!this.menuEnabled)
          {
-            for (_loc2_ in this.roleDropdown.dataProvider)
+            for(_loc2_ in this.roleDropdown.dataProvider)
             {
                if(this.roleDropdown.dataProvider[_loc2_].id == this.data.data.roleType)
                {
@@ -161,15 +160,15 @@ package net.wg.gui.lobby.recruitWindow
             this.roleDropdown.enabled = false;
          }
       }
-
+      
       public function as_setCreditsChanged(param1:Number) : void {
          this.btnScool.enabled = param1 > this.data.schoolUpgradePrice;
       }
-
+      
       public function as_setGoldChanged(param1:Number) : void {
          this.btnAcademy.enabled = param1 > this.data.academyUpgradePrice;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          var _loc1_:* = "recruitTypeGroup";
@@ -199,26 +198,22 @@ package net.wg.gui.lobby.recruitWindow
             {
                "label":MENU.NATIONS_ALL,
                "data":null
-            }
-         ]);
+            }]);
          this.vehicleClassDropdown.dataProvider = new DataProvider([
             {
                "label":DIALOGS.RECRUITWINDOW_MENUEMPTYROW,
                "data":null
-            }
-         ]);
+            }]);
          this.vehicleTypeDropdown.dataProvider = new DataProvider([
             {
                "label":DIALOGS.RECRUITWINDOW_MENUEMPTYROW,
                "data":null
-            }
-         ]);
+            }]);
          this.roleDropdown.dataProvider = new DataProvider([
             {
                "label":DIALOGS.RECRUITWINDOW_MENUEMPTYROW,
                "data":null
-            }
-         ]);
+            }]);
          this.nationDropdown.selectedIndex = 0;
          this.vehicleClassDropdown.selectedIndex = 0;
          this.vehicleTypeDropdown.selectedIndex = 0;
@@ -229,7 +224,7 @@ package net.wg.gui.lobby.recruitWindow
          this.roleDropdown.addEventListener(ListEvent.INDEX_CHANGE,this.recruitButtonCheck);
          this.setDefaultSelection();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:ActionPriceVO = null;
          var _loc2_:ActionPriceVO = null;
@@ -281,17 +276,17 @@ package net.wg.gui.lobby.recruitWindow
             }
          }
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          window.useBottomBtns = true;
          this.window.title = DIALOGS.RECRUITWINDOW_TITLE;
       }
-
+      
       override protected function preInitialize() : void {
          constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.btnAcademy.removeEventListener(ButtonEvent.CLICK,this.onButtonStudyTypeClick);
@@ -319,46 +314,40 @@ package net.wg.gui.lobby.recruitWindow
          this.btnCancel.removeEventListener(ButtonEvent.CLICK,this.onClose);
          this.btnRecruit.removeEventListener(ButtonEvent.CLICK,this.onRecruitTankman);
       }
-
+      
       private function setDefaultSelection() : void {
          if((this.nationDropdown.enabled) && (this.nationDropdown.visible))
          {
             setFocus(this.nationDropdown);
          }
+         else if((this.vehicleClassDropdown.enabled) && (this.vehicleClassDropdown.visible))
+         {
+            setFocus(this.vehicleClassDropdown);
+         }
+         else if((this.vehicleTypeDropdown.enabled) && (this.vehicleTypeDropdown.visible))
+         {
+            setFocus(this.vehicleTypeDropdown);
+         }
+         else if((this.roleDropdown.enabled) && (this.roleDropdown.visible))
+         {
+            setFocus(this.roleDropdown);
+         }
          else
          {
-            if((this.vehicleClassDropdown.enabled) && (this.vehicleClassDropdown.visible))
-            {
-               setFocus(this.vehicleClassDropdown);
-            }
-            else
-            {
-               if((this.vehicleTypeDropdown.enabled) && (this.vehicleTypeDropdown.visible))
-               {
-                  setFocus(this.vehicleTypeDropdown);
-               }
-               else
-               {
-                  if((this.roleDropdown.enabled) && (this.roleDropdown.visible))
-                  {
-                     setFocus(this.roleDropdown);
-                  }
-                  else
-                  {
-                     setFocus(this.btnCourses);
-                  }
-               }
-            }
+            setFocus(this.btnCourses);
          }
+         
+         
+         
       }
-
+      
       private function onChangeNation(param1:ListEvent) : void {
          var _loc2_:Number = this.nationDropdown.dataProvider[this.nationDropdown.selectedIndex].id;
          this.vehicleClassDropdown.enabled = !((isNaN(_loc2_)) || !this.menuEnabled);
          this.btnAcademy.nation = this.btnScool.nation = this.btnCourses.nation = _loc2_;
          this.updateVehicleClassDropdownS(_loc2_);
       }
-
+      
       private function onChangeVehicleClass(param1:ListEvent) : void {
          var _loc2_:Number = this.nationDropdown.dataProvider[this.nationDropdown.selectedIndex].id;
          var _loc3_:String = this.vehicleClassDropdown.dataProvider[this.vehicleClassDropdown.selectedIndex].id;
@@ -369,7 +358,7 @@ package net.wg.gui.lobby.recruitWindow
          }
          this.updateVehicleTypeDropdownS(_loc2_,_loc3_);
       }
-
+      
       private function onChangeVehicleType(param1:ListEvent) : void {
          var _loc2_:Number = this.nationDropdown.dataProvider[this.nationDropdown.selectedIndex].id;
          var _loc3_:String = this.vehicleClassDropdown.dataProvider[this.vehicleClassDropdown.selectedIndex].id;
@@ -381,11 +370,11 @@ package net.wg.gui.lobby.recruitWindow
          }
          this.updateRoleDropdownS(_loc2_,_loc3_,_loc4_);
       }
-
+      
       private function onClose(param1:ButtonEvent) : void {
          onWindowCloseS();
       }
-
+      
       private function onRecruitTankman(param1:Event) : void {
          var _loc2_:Number = this.nationDropdown.dataProvider[this.nationDropdown.selectedIndex].id;
          var _loc3_:Number = this.vehicleTypeDropdown.dataProvider[this.vehicleTypeDropdown.selectedIndex].id;
@@ -396,11 +385,11 @@ package net.wg.gui.lobby.recruitWindow
             buyTankmanS(_loc2_,_loc3_,_loc4_,this.studyType,_loc5_);
          }
       }
-
+      
       private function recruitButtonCheck(param1:ListEvent) : void {
          this.btnRecruit.enabled = !(this.nationDropdown.selectedIndex == 0 || this.vehicleClassDropdown.selectedIndex == 0 || this.vehicleTypeDropdown.selectedIndex == 0 || this.roleDropdown.selectedIndex == 0);
       }
-
+      
       public function onButtonStudyTypeClick(param1:ButtonEvent) : void {
          switch(param1.target)
          {
@@ -417,11 +406,10 @@ package net.wg.gui.lobby.recruitWindow
                this.studyType = 0;
          }
       }
-
+      
       public function onButtonStudyTypeDoubleClick(param1:MouseEvent) : void {
          (param1.target as IEventDispatcher).dispatchEvent(new ButtonEvent(ButtonEvent.CLICK));
          this.onRecruitTankman(param1);
       }
    }
-
 }

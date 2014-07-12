@@ -19,6 +19,7 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.events.ViewStackEvent;
    import net.wg.gui.lobby.settings.evnts.SettingViewEvent;
    import net.wg.gui.lobby.settings.evnts.AlternativeVoiceEvent;
+   import net.wg.gui.components.windows.WindowEvent;
    import net.wg.gui.lobby.settings.vo.SettingsKeyProp;
    import flash.display.MovieClip;
    import scaleform.clik.interfaces.IDataProvider;
@@ -29,11 +30,11 @@ package net.wg.gui.lobby.settings
    import net.wg.data.managers.impl.TooltipProps;
    import net.wg.data.constants.Tooltips;
    import net.wg.gui.components.tooltips.helpers.Utils;
-
-
+   import net.wg.infrastructure.constants.WindowViewInvalidationType;
+   
    public class SettingsWindow extends SettingsWindowMeta implements ISettingsWindowMeta
    {
-          
+      
       public function SettingsWindow() {
          this._invalidTabs = {};
          super();
@@ -44,45 +45,45 @@ package net.wg.gui.lobby.settings
          this.isModal = true;
          this.isCentered = true;
       }
-
+      
       private static var __currentTab:Number = 0;
-
+      
       public var tabs:ButtonBarEx = null;
-
+      
       public var tabLine:Sprite = null;
-
+      
       public var view:ViewStack = null;
-
+      
       public var submitBtn:SoundButtonEx = null;
-
+      
       public var cancelBtn:SoundButtonEx = null;
-
+      
       public var applyBtn:SoundButtonEx = null;
-
+      
       public var ddMenu_ScrollingList:ScrollingList = null;
-
+      
       public var ddListItemRendererSound:DropDownListItemRendererSound = null;
-
+      
       private var _invalidTabs:Object;
-
+      
       private var _settingsData:Object = null;
-
+      
       private var changesData:SettingsChangesMap = null;
-
+      
       private var needToUpdateGraphicSettings:Boolean = false;
-
+      
       private var tabToSelect:int = -1;
-
+      
       private var graphicsPresetToSelect:int = -1;
-
+      
       private const CONTROLS_WARNING:String = "controlsWrongNotification";
-
+      
       private const SOUND_MODE_WARNING:String = "soundModeInvalid";
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
       }
-
+      
       override public function setWindow(param1:IWindow) : void {
          var _loc2_:Padding = null;
          super.setWindow(param1);
@@ -97,7 +98,7 @@ package net.wg.gui.lobby.settings
             window.contentPadding = _loc2_;
          }
       }
-
+      
       public function as_setCaptureDevices(param1:Number, param2:Array) : void {
          var _loc3_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
          if(_loc3_ != null)
@@ -105,12 +106,12 @@ package net.wg.gui.lobby.settings
             _loc3_.setCaptureDevices(param1,param2);
          }
       }
-
+      
       public function as_onVibroManagerConnect(param1:Boolean) : void {
          SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.OTHER_SETTINGS].vibroIsConnected).current = param1;
          this.updateTabs(param1);
       }
-
+      
       public function as_updateVideoSettings(param1:Object) : void {
          var _loc4_:uint = 0;
          var _loc5_:ICommons = null;
@@ -130,14 +131,14 @@ package net.wg.gui.lobby.settings
                _loc8_ = new SettingsControlProp();
                if(param1[_loc7_] != null)
                {
-                  if(param1[_loc7_]  is  Boolean || param1[_loc7_]  is  String || param1[_loc7_]  is  Number)
+                  if(param1[_loc7_] is Boolean || param1[_loc7_] is String || param1[_loc7_] is Number)
                   {
                      _loc8_.current = param1[_loc7_];
                      _loc2_ = true;
                   }
                   else
                   {
-                     if(param1[_loc7_].current  is  Object && !(param1[_loc7_].current == undefined))
+                     if(param1[_loc7_].current is Object && !(param1[_loc7_].current == undefined))
                      {
                         _loc8_.current = param1[_loc7_].real != null?param1[_loc7_].real:param1[_loc7_].current;
                      }
@@ -152,13 +153,11 @@ package net.wg.gui.lobby.settings
                      }
                   }
                }
-               else
+               else if(_loc7_ == SettingsConfig.DYNAMIC_RENDERER)
                {
-                  if(_loc7_ == SettingsConfig.DYNAMIC_RENDERER)
-                  {
-                     SettingsConfig.liveUpdateVideoSettingsData[_loc7_] = null;
-                  }
+                  SettingsConfig.liveUpdateVideoSettingsData[_loc7_] = null;
                }
+               
                if(_loc2_)
                {
                   SettingsConfig.liveUpdateVideoSettingsData[_loc7_] = _loc8_;
@@ -177,7 +176,7 @@ package net.wg.gui.lobby.settings
             this.needToUpdateGraphicSettings = true;
          }
       }
-
+      
       public function as_confirmWarningDialog(param1:Boolean, param2:String) : void {
          var _loc3_:Object = null;
          var _loc4_:SettingsControlProp = null;
@@ -208,12 +207,12 @@ package net.wg.gui.lobby.settings
             this.tabs.selectedIndex = _loc6_;
          }
       }
-
+      
       public function as_setData(param1:Object) : void {
          this.invalidateAllTabs();
          this.initializeCommonData(param1);
       }
-
+      
       public function as_openTab(param1:Number) : void {
          this.tabToSelect = param1;
          if((initialized) && !(param1 == -1))
@@ -221,7 +220,7 @@ package net.wg.gui.lobby.settings
             this.tabs.selectedIndex = param1;
          }
       }
-
+      
       public function as_setGraphicsPreset(param1:Number) : void {
          this.graphicsPresetToSelect = param1;
          var _loc2_:GraphicSettings = GraphicSettings(this.tryGetView(SettingsConfig.GRAPHIC_SETTINGS));
@@ -231,17 +230,17 @@ package net.wg.gui.lobby.settings
             this.graphicsPresetToSelect = -1;
          }
       }
-
+      
       private function invalidateAllTabs() : void {
          var _loc2_:Object = null;
          this._invalidTabs = {};
          var _loc1_:Array = SettingsConfig.tabsDataProviderWithOther;
-         for each (_loc2_ in _loc1_)
+         for each(_loc2_ in _loc1_)
          {
             this._invalidTabs[_loc2_.linkage] = true;
          }
       }
-
+      
       private function isTabInvalid(param1:String) : Boolean {
          var _loc2_:* = false;
          if((this._invalidTabs.hasOwnProperty(param1)) && (this._invalidTabs[param1]))
@@ -250,7 +249,7 @@ package net.wg.gui.lobby.settings
          }
          return _loc2_;
       }
-
+      
       private function updateTabIfNeeded(param1:String, param2:IViewStackContent) : void {
          if(this.isTabInvalid(param1))
          {
@@ -258,12 +257,11 @@ package net.wg.gui.lobby.settings
                {
                   "id":param1,
                   "data":this._settingsData[param1]
-               }
-            );
+               });
             this._invalidTabs[param1] = false;
          }
       }
-
+      
       private function initializeCommonData(param1:Object) : void {
          var _loc2_:String = null;
          var _loc3_:IViewStackContent = null;
@@ -280,12 +278,11 @@ package net.wg.gui.lobby.settings
                {
                   "id":_loc2_,
                   "data":this._settingsData[_loc2_]
-               }
-            );
+               });
             this.tabs.validateNow();
          }
       }
-
+      
       private function updateTabs(param1:Boolean) : void {
          var _loc2_:DataProvider = null;
          var _loc3_:uint = 0;
@@ -304,7 +301,7 @@ package net.wg.gui.lobby.settings
             _loc3_ = _loc2_.length;
             if(__currentTab >= _loc3_)
             {
-               this.tabs.selectedIndex = _loc3_-1;
+               this.tabs.selectedIndex = _loc3_ - 1;
             }
             else
             {
@@ -312,11 +309,11 @@ package net.wg.gui.lobby.settings
             }
          }
       }
-
+      
       public function as_ConfirmationOfApplication(param1:Boolean) : void {
          this.updateSettingsConfig(param1);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.submitBtn.label = SETTINGS.OK_BUTTON;
@@ -342,18 +339,19 @@ package net.wg.gui.lobby.settings
          this.addEventListener(SettingViewEvent.ON_UPDATE_CAPTURE_DEVICE,this.onUpdateCaptureDevices);
          this.addEventListener(AlternativeVoiceEvent.ON_TEST_ALTERNATIVE_VOICES,this.onAlternativeVoice);
          this.updateStage(App.appWidth,App.appHeight);
+         window.addEventListener(WindowEvent.SCALE_Y_CHANGED,this.window_scaleYChangedHandler);
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       override protected function onDispose() : void {
-         super.onDispose();
+         window.removeEventListener(WindowEvent.SCALE_Y_CHANGED,this.window_scaleYChangedHandler);
          this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.cancelBtnClickHandler);
          this.applyBtn.removeEventListener(ButtonEvent.CLICK,this.applyBtnClickHandler);
          this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler);
@@ -378,33 +376,34 @@ package net.wg.gui.lobby.settings
          this.changesData = null;
          this._settingsData = null;
          this._invalidTabs = null;
+         super.onDispose();
       }
-
+      
       private function controlDefValEqNewVal(param1:*, param2:*) : Boolean {
          var _loc3_:String = null;
-         if(param1  is  SettingsControlProp)
+         if(param1 is SettingsControlProp)
          {
-            if(param2  is  Array)
+            if(param2 is Array)
             {
                return (SettingsControlProp(param1).current as Array).join() == (param2 as Array).join();
             }
             return SettingsControlProp(param1).current == param2;
          }
-         if(param1  is  SettingsKeyProp)
+         if(param1 is SettingsKeyProp)
          {
             return SettingsKeyProp(param1).key == param2;
          }
-         if(!(param2  is  String) && !(param2  is  Number) && !(param2  is  Boolean))
+         if(!(param2 is String) && !(param2 is Number) && !(param2 is Boolean))
          {
-            for (_loc3_ in param2)
+            for(_loc3_ in param2)
             {
                if(param1[_loc3_] != null)
                {
-                  if(param1[_loc3_]  is  SettingsControlProp)
+                  if(param1[_loc3_] is SettingsControlProp)
                   {
                      return SettingsControlProp(param1[_loc3_]).current == param2[_loc3_];
                   }
-                  if(param1[_loc3_]  is  SettingsKeyProp)
+                  if(param1[_loc3_] is SettingsKeyProp)
                   {
                      return SettingsKeyProp(param1[_loc3_]).key == param2[_loc3_];
                   }
@@ -414,7 +413,7 @@ package net.wg.gui.lobby.settings
          }
          return false;
       }
-
+      
       private function checkChanges(param1:Boolean, param2:String, param3:*) : void {
          if(param1)
          {
@@ -426,11 +425,11 @@ package net.wg.gui.lobby.settings
          }
          this.updateApplyBtnState();
       }
-
+      
       private function updateApplyBtnState() : void {
          this.applyBtn.enabled = (this.changesData) && this.changesData.length > 0;
       }
-
+      
       private function tryGetView(param1:String) : MovieClip {
          var _loc2_:MovieClip = null;
          if(!this.view)
@@ -443,12 +442,12 @@ package net.wg.gui.lobby.settings
          }
          return _loc2_;
       }
-
+      
       private function normalize(param1:Object) : Object {
          var _loc2_:String = null;
          var _loc3_:SettingsControlProp = null;
          var _loc4_:SettingsKeyProp = null;
-         for (_loc2_ in SettingsConfig.settingsData)
+         for(_loc2_ in SettingsConfig.settingsData)
          {
             if(param1[_loc2_] != undefined)
             {
@@ -464,117 +463,16 @@ package net.wg.gui.lobby.settings
          SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GAME_SETTINGS][SettingsConfig.ENABLE_OL_FILTER]).readOnly = App.globalVarsMgr.isChinaS();
          return SettingsConfig.settingsData;
       }
-
+      
       private function normalizeInside(param1:Object, param2:Object, param3:String) : void {
-         var _loc5_:String = null;
-         var _loc6_:SettingsControlProp = null;
-         var _loc7_:String = null;
-         var _loc4_:ICommons = App.utils.commons;
-         for (_loc5_ in param2)
-         {
-            if(param1[param3][_loc5_] != undefined)
-            {
-               if(_loc5_ == SettingsConfig.PRESETS || _loc5_ == SettingsConfig.QUALITY_ORDER || _loc5_ == SettingsConfig.COLOR_FILTER_IMAGES)
-               {
-                  param2[_loc5_] = _loc4_.cloneObject(param1[param3][_loc5_]);
-               }
-               else
-               {
-                  if(_loc5_ == SettingsConfig.KEYBOARD)
-                  {
-                     param2[_loc5_] = {};
-                     param2[SettingsConfig.KEYS_LAYOUT_ORDER] = [];
-                     this.normalizeKeys(param1[param3][_loc5_],param1[param3][_loc5_][SettingsConfig.KEYS_LAYOUT],param2[_loc5_],param2[SettingsConfig.KEYS_LAYOUT_ORDER]);
-                  }
-                  else
-                  {
-                     if(param2[_loc5_]  is  SettingsControlProp)
-                     {
-                        _loc6_ = SettingsControlProp(param2[_loc5_]);
-                        if(param1[param3][_loc5_]  is  Boolean || param1[param3][_loc5_]  is  String || param1[param3][_loc5_]  is  Number)
-                        {
-                           _loc6_.current = _loc6_.type == SettingsConfig.TYPE_CHECKBOX?Boolean(param1[param3][_loc5_]):param1[param3][_loc5_];
-                           _loc6_.prevVal = _loc6_.current;
-                        }
-                        else
-                        {
-                           if(param1[param3][_loc5_]  is  Array)
-                           {
-                              if(_loc6_.type == SettingsConfig.TYPE_RANGE_SLIDER)
-                              {
-                                 _loc6_.current = param1[param3][_loc5_];
-                              }
-                           }
-                           else
-                           {
-                              if(param1[param3][_loc5_]  is  Object && !(param1[param3][_loc5_].current == undefined))
-                              {
-                                 if(_loc6_.type == SettingsConfig.TYPE_CHECKBOX)
-                                 {
-                                    _loc6_.current = Boolean(param1[param3][_loc5_].current);
-                                    _loc6_.prevVal = _loc6_.current;
-                                    if(param1[param3][_loc5_].hasOwnProperty("options"))
-                                    {
-                                       _loc6_.options = _loc4_.cloneObject(param1[param3][_loc5_].options);
-                                       for (_loc7_ in param1[param3][_loc5_].options)
-                                       {
-                                          if((param1[param3][_loc5_].options[_loc7_].hasOwnProperty("advanced")) && param1[param3][_loc5_].options[_loc7_].advanced == true)
-                                          {
-                                             _loc6_.advanced = true;
-                                             break;
-                                          }
-                                       }
-                                    }
-                                    if(param3 == SettingsConfig.CONTROLS_SETTINGS)
-                                    {
-                                       if(param1[param3][_loc5_].hasOwnProperty("default"))
-                                       {
-                                          _loc6_._default = param1[param3][_loc5_].default == undefined?false:Boolean(param1[param3][_loc5_].default);
-                                       }
-                                       else
-                                       {
-                                          _loc6_._default = false;
-                                       }
-                                    }
-                                 }
-                                 else
-                                 {
-                                    _loc6_.current = Math.max(param1[param3][_loc5_].current,0);
-                                    _loc6_.prevVal = _loc6_.current;
-                                    if(param3 == SettingsConfig.CONTROLS_SETTINGS)
-                                    {
-                                       if(param1[param3][_loc5_].hasOwnProperty("default"))
-                                       {
-                                          _loc6_._default = Math.max(param1[param3][_loc5_].default,0);
-                                       }
-                                       else
-                                       {
-                                          _loc6_._default = 0;
-                                       }
-                                    }
-                                    if(param1[param3][_loc5_].options != undefined)
-                                    {
-                                       _loc6_.options = _loc4_.cloneObject(param1[param3][_loc5_].options);
-                                    }
-                                    else
-                                    {
-                                       _loc6_.options = [];
-                                    }
-                                 }
-                              }
-                           }
-                        }
-                     }
-                     else
-                     {
-                        this.normalizeInside(param1[param3],param2[_loc5_],_loc5_);
-                     }
-                  }
-               }
-            }
-         }
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: TranslateException
+          */
+         throw new flash.errors.IllegalOperationError("Not decompiled due to error");
       }
-
+      
       private function normalizeKeys(param1:Object, param2:Array, param3:Object, param4:Array) : void {
          var _loc6_:uint = 0;
          var _loc7_:String = null;
@@ -614,7 +512,7 @@ package net.wg.gui.lobby.settings
             _loc6_++;
          }
       }
-
+      
       private function sendData(param1:Boolean) : void {
          var _loc5_:String = null;
          var _loc6_:GraphicSettings = null;
@@ -643,7 +541,7 @@ package net.wg.gui.lobby.settings
             this.as_ConfirmationOfApplication(false);
          }
       }
-
+      
       private function checkControlsWrong() : Boolean {
          var _loc3_:IDataProvider = null;
          var _loc4_:uint = 0;
@@ -671,7 +569,7 @@ package net.wg.gui.lobby.settings
          else
          {
             _loc6_ = SettingsConfig.settingsData[SettingsConfig.CONTROLS_SETTINGS][SettingsConfig.KEYBOARD];
-            for (_loc7_ in _loc6_)
+            for(_loc7_ in _loc6_)
             {
                _loc8_ = SettingsKeyProp(_loc6_[_loc7_]);
                if(_loc8_.key == KeysMap.KEY_NONE)
@@ -683,7 +581,7 @@ package net.wg.gui.lobby.settings
          }
          return _loc1_;
       }
-
+      
       private function updateSettingsConfig(param1:Boolean) : void {
          var _loc2_:Object = null;
          if((param1) && (this.changesData))
@@ -695,14 +593,14 @@ package net.wg.gui.lobby.settings
          this.cancelBtn.enabled = this.submitBtn.enabled = true;
          this.updateApplyBtnState();
       }
-
+      
       private function searchAndOverride(param1:uint, param2:Object, param3:Object) : void {
          var _loc4_:String = null;
          var _loc5_:Object = null;
          var _loc6_:Object = null;
-         for (_loc4_ in param3)
+         for(_loc4_ in param3)
          {
-            if(!(param3[_loc4_]  is  Boolean || param3[_loc4_]  is  Number || param3[_loc4_]  is  String))
+            if(!(param3[_loc4_] is Boolean || param3[_loc4_] is Number || param3[_loc4_] is String))
             {
                _loc5_ = null;
                if(param1 == 0)
@@ -726,24 +624,22 @@ package net.wg.gui.lobby.settings
                {
                   _loc6_ = param2[_loc4_];
                }
-               if(!(_loc6_ == null) && _loc6_  is  SettingsControlProp)
+               if(!(_loc6_ == null) && _loc6_ is SettingsControlProp)
                {
                   SettingsControlProp(_loc6_).current = param3[_loc4_];
                }
-               else
+               else if(!(_loc6_ == null) && _loc6_ is SettingsKeyProp)
                {
-                  if(!(_loc6_ == null) && _loc6_  is  SettingsKeyProp)
-                  {
-                     SettingsKeyProp(_loc6_).key = param3[_loc4_];
-                  }
+                  SettingsKeyProp(_loc6_).key = param3[_loc4_];
                }
+               
             }
          }
       }
-
+      
       private function getPropObj(param1:Object, param2:String) : Object {
          var _loc3_:String = null;
-         for (_loc3_ in param1)
+         for(_loc3_ in param1)
          {
             if(param1[_loc3_].hasOwnProperty(param2))
             {
@@ -752,7 +648,7 @@ package net.wg.gui.lobby.settings
          }
          return null;
       }
-
+      
       private function onTabChange(param1:IndexEvent) : void {
          __currentTab = param1.index;
          App.toolTipMgr.hide();
@@ -763,16 +659,16 @@ package net.wg.gui.lobby.settings
          }
          onTabSelectedS(SettingsConfig.tabsDataProviderWithOther[__currentTab].label);
       }
-
+      
       private function onViewNeedUpdateHandler(param1:ViewStackEvent) : void {
          this.updateTabIfNeeded(param1.linkage,param1.view);
       }
-
+      
       private function onViewChangeHandler(param1:ViewStackEvent) : void {
          this.updateTabIfNeeded(param1.linkage,param1.view);
          var _loc2_:IViewStackContent = param1.view;
          var _loc3_:ISettingsBase = _loc2_ as ISettingsBase;
-         if(_loc3_  is  GraphicSettings)
+         if(_loc3_ is GraphicSettings)
          {
             if(this.needToUpdateGraphicSettings)
             {
@@ -790,7 +686,7 @@ package net.wg.gui.lobby.settings
             _loc3_.updateDependentData();
          }
       }
-
+      
       private function onPTTControlChanged(param1:SettingViewEvent) : void {
          var _loc2_:SettingsControlProp = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.SOUND_SETTINGS][SettingsConfig.PTT]);
          _loc2_.current = param1.controlValue;
@@ -800,7 +696,7 @@ package net.wg.gui.lobby.settings
             _loc3_.updatePTTControl(_loc2_.current);
          }
       }
-
+      
       private function onControlChanged(param1:SettingViewEvent) : void {
          var _loc2_:String = param1.viewId;
          var _loc3_:String = param1.controlId;
@@ -809,7 +705,7 @@ package net.wg.gui.lobby.settings
          var _loc5_:Boolean = this.controlDefValEqNewVal(this._settingsData[_loc2_][_loc3_],_loc4_);
          this.checkChanges(_loc5_,_loc3_,_loc4_);
       }
-
+      
       private function onVivoxTest(param1:SettingViewEvent) : void {
          var _loc2_:Boolean = Boolean(param1.controlValue);
          var _loc3_:Boolean = startVOIPTestS(_loc2_);
@@ -819,7 +715,7 @@ package net.wg.gui.lobby.settings
             _loc4_.setVoiceTestState(!((_loc3_) || !_loc2_));
          }
       }
-
+      
       private function onAutodetectQuality(param1:SettingViewEvent) : void {
          var _loc2_:Number = autodetectQualityS();
          var _loc3_:GraphicSettings = GraphicSettings(this.tryGetView(SettingsConfig.GRAPHIC_SETTINGS));
@@ -828,11 +724,11 @@ package net.wg.gui.lobby.settings
             _loc3_.setPresetAfterAutoDetect(_loc2_);
          }
       }
-
+      
       private function onUpdateCaptureDevices(param1:SettingViewEvent) : void {
          updateCaptureDevicesS();
       }
-
+      
       private function onAlternativeVoice(param1:AlternativeVoiceEvent) : void {
          var _loc2_:SoundSettings = null;
          var _loc3_:* = NaN;
@@ -855,7 +751,7 @@ package net.wg.gui.lobby.settings
             App.toolTipMgr.show(_loc7_,_loc6_);
          }
       }
-
+      
       private function cancelBtnClickHandler(param1:ButtonEvent) : void {
          var _loc2_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
          if(_loc2_)
@@ -864,14 +760,17 @@ package net.wg.gui.lobby.settings
          }
          onWindowCloseS();
       }
-
+      
       private function applyBtnClickHandler(param1:ButtonEvent) : void {
          this.sendData(false);
       }
-
+      
       private function submitBtnClickHandler(param1:ButtonEvent) : void {
          this.sendData(true);
       }
+      
+      private function window_scaleYChangedHandler(param1:WindowEvent) : void {
+         invalidate(WindowViewInvalidationType.POSITION_INVALID);
+      }
    }
-
 }

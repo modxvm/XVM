@@ -6,17 +6,16 @@ package net.wg.gui.lobby.techtree.controls
    import flash.display.Sprite;
    import net.wg.gui.lobby.techtree.constants.TTInvalidationType;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class PremiumLayout extends UIComponent
    {
-          
+      
       public function PremiumLayout() {
          super();
       }
-
+      
       public static const PREMIUM_LAYOUT_SOURCE:String = "PremiumLayoutSkinned";
-
+      
       public static function show(param1:ResearchItems) : PremiumLayout {
          var _loc2_:PremiumLayout = App.utils.classFactory.getComponent(PREMIUM_LAYOUT_SOURCE,PremiumLayout);
          if(_loc2_ != null)
@@ -30,19 +29,19 @@ package net.wg.gui.lobby.techtree.controls
          }
          return _loc2_;
       }
-
+      
       private var _context:ResearchItems = null;
-
+      
       public var flags:MovieClip;
-
+      
       public var description:PremiumDescription;
-
+      
       public var background:Sprite;
-
+      
       public function get context() : ResearchItems {
          return this._context;
       }
-
+      
       public function set context(param1:ResearchItems) : void {
          if(this._context == param1)
          {
@@ -51,16 +50,16 @@ package net.wg.gui.lobby.techtree.controls
          this._context = param1;
          invalidate(TTInvalidationType.NATION,TTInvalidationType.DESCRIPTION);
       }
-
+      
       override protected function onDispose() : void {
          this._context = null;
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -104,5 +103,4 @@ package net.wg.gui.lobby.techtree.controls
          }
       }
    }
-
 }

@@ -21,11 +21,10 @@ package net.wg.gui.lobby.window
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.components.advanced.SortingButton;
    import net.wg.data.constants.SortingInfo;
-
-
+   
    public class ExchangeXPWindow extends BaseExchangeWindow implements IExchangeXpWindowMeta
    {
-          
+      
       public function ExchangeXPWindow() {
          super();
          isModal = false;
@@ -33,63 +32,63 @@ package net.wg.gui.lobby.window
          canMinimize = false;
          isCentered = true;
       }
-
+      
       private static const VEHICLES_DATA_INVALID:String = "listInv";
-
+      
       private static const TOTAL_AVAILABLE_XP_INVALID:String = "totalAvailXP";
-
+      
       private static const TOTAL_RESULT_INVALID:String = "resAll";
-
+      
       public var buttonBar:SortableHeaderButtonBar;
-
+      
       public var lblTotalAvailableXp:TextField;
-
+      
       public var itTotalAvailableXp:IconText;
-
+      
       public var cbSelectAll:CompactCheckBox;
-
+      
       public var nsXpExchange:NumericStepper;
-
+      
       public var nsGoldExchange:NumericStepper;
-
+      
       public var itIconXp:IconText;
-
+      
       public var itIconGold:IconText;
-
+      
       public var warningScreen:ExchangeXPWarningScreen;
-
+      
       public var itExperienceResult:IconText;
-
+      
       public var itGoldResult:IconText;
-
+      
       public var itGoldBefore:IconText;
-
+      
       public var itExperienceBefore:IconText;
-
+      
       public var scrollList:ExchangeXPList;
-
+      
       public var submitBtn:SoundButtonEx;
-
+      
       public var cancelBtn:SoundButtonEx;
-
+      
       public var headerMC:ExchangeHeader;
-
+      
       public var onHandHaveNotMoney:WalletResourcesStatus = null;
-
+      
       public var resultHaveNotMoney:WalletResourcesStatus = null;
-
+      
       public var onHandHaveNotFreeXp:WalletResourcesStatus = null;
-
+      
       public var resultHaveNotFreeXp:WalletResourcesStatus = null;
-
+      
       private var scrollListProvider:Array;
-
+      
       private var isHaveEliteVehicles:Boolean;
-
+      
       private var totalXP:Number = 0;
-
+      
       private var selectedGold:int;
-
+      
       override public function setWindow(param1:IWindow) : void {
          var _loc2_:Padding = null;
          super.setWindow(param1);
@@ -104,14 +103,14 @@ package net.wg.gui.lobby.window
             window.formBgPadding = _loc2_;
          }
       }
-
+      
       public function as_totalExperienceChanged(param1:Number) : void {
          this.totalXP = param1;
          var _loc2_:ILocale = App.utils?App.utils.locale:null;
          this.itExperienceBefore.text = _loc2_?_loc2_.gold(this.totalXP):this.totalXP.toString();
          invalidate(TOTAL_RESULT_INVALID);
       }
-
+      
       public function as_vehiclesDataChanged(param1:Boolean, param2:Array) : void {
          var vehicleInfo:ExchangeXPVehicleVO = null;
          var object:Object = null;
@@ -142,7 +141,7 @@ package net.wg.gui.lobby.window
             DebugUtils.LOG_DEBUG("Flash \'as_vehiclesDataChanged\' method ERROR:  ",e.message,e.getStackTrace());
          }
       }
-
+      
       public function as_setWalletStatus(param1:Object) : void {
          var _loc2_:* = false;
          var _loc3_:* = false;
@@ -159,7 +158,7 @@ package net.wg.gui.lobby.window
          this.itExperienceResult.visible = _loc3_;
          this.submitBtn.enabled = _loc4_;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.lblTotalAvailableXp.autoSize = TextFieldAutoSize.RIGHT;
@@ -198,7 +197,7 @@ package net.wg.gui.lobby.window
          this.itGoldBefore.filters = ExchangeUtils.getGlow(this.itGoldBefore.icon);
          this.itTotalAvailableXp.textColor = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_CREDITS);
       }
-
+      
       override protected function draw() : void {
          var _loc2_:* = NaN;
          var _loc3_:* = NaN;
@@ -279,18 +278,18 @@ package net.wg.gui.lobby.window
             this.lblTotalAvailableXp.x = this.itTotalAvailableXp.x + this.itTotalAvailableXp.width - this.itTotalAvailableXp.iconClip.width - this.itTotalAvailableXp.textField.textWidth - this.lblTotalAvailableXp.width - 13;
          }
       }
-
+      
       override protected function applyPrimaryCurrencyChange() : void {
          var _loc1_:ILocale = App.utils?App.utils.locale:null;
          this.itGoldBefore.text = _loc1_?_loc1_.gold(totalPrimaryCurrency):totalPrimaryCurrency.toString();
          invalidate(TOTAL_AVAILABLE_XP_INVALID);
       }
-
+      
       override protected function applyRatesChanges() : void {
          this.headerMC.setRates(rate,actionRate);
          invalidate(TOTAL_RESULT_INVALID);
       }
-
+      
       override protected function onDispose() : void {
          this.cancelBtn.removeEventListener(ButtonEvent.CLICK,cancelBtnClickHandler);
          this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler);
@@ -318,12 +317,12 @@ package net.wg.gui.lobby.window
          this.resultHaveNotMoney = null;
          super.onDispose();
       }
-
+      
       private function checkBoxSelectHandler(param1:Event) : void {
          this.scrollList.applySelection(this.cbSelectAll.selected);
          invalidate(TOTAL_AVAILABLE_XP_INVALID);
       }
-
+      
       private function sortingDirectionChanged(param1:Event) : void {
          var _loc3_:* = false;
          param1.stopImmediatePropagation();
@@ -334,22 +333,22 @@ package net.wg.gui.lobby.window
             this.scrollList.sortByField(_loc2_.id,_loc3_);
          }
       }
-
+      
       private function nsGoldChangeHandler(param1:IndexEvent) : void {
          this.selectedGold = this.nsGoldExchange.value;
          invalidate(TOTAL_RESULT_INVALID);
       }
-
+      
       private function nsXpChangeHandler(param1:IndexEvent) : void {
          this.selectedGold = Math.floor(this.nsXpExchange.value / actualRate);
          invalidate(TOTAL_RESULT_INVALID);
       }
-
+      
       private function selectionIRChanged(param1:Event) : void {
          param1.stopImmediatePropagation();
          invalidate(TOTAL_AVAILABLE_XP_INVALID);
       }
-
+      
       private function submitBtnClickHandler(param1:ButtonEvent) : void {
          var _loc3_:ExchangeXPVehicleVO = null;
          var _loc2_:Array = [];
@@ -366,14 +365,12 @@ package net.wg.gui.lobby.window
             _loc6_++;
          }
          App.utils.asserter.assert(_loc2_.length > 0,"Flash Asserter warning: Exchange XP Window submit method have empty data array");
-         var _loc7_:Object =
+         var _loc7_:Object = 
             {
                "exchangeXp":this.nsXpExchange.value,
                "selectedVehicles":_loc2_
-            }
-         ;
+            };
          exchangeS(_loc7_);
       }
    }
-
 }

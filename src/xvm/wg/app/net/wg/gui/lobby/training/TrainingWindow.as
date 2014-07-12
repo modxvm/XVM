@@ -17,54 +17,53 @@ package net.wg.gui.lobby.training
    import flash.display.InteractiveObject;
    import net.wg.data.Aliases;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class TrainingWindow extends TrainingWindowMeta implements ITrainingWindowMeta
    {
-          
+      
       public function TrainingWindow() {
          super();
       }
-
+      
       private static function showTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(TOOLTIPS.TRAINING_CREATE_INVITES_CHECKBOX);
       }
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       public var mapName:TextField;
-
+      
       public var battleType:TextField;
-
+      
       public var maxPlayers:TextField;
-
+      
       public var maps:ScrollingListEx;
-
+      
       public var battleTime:NumericStepper;
-
+      
       public var isPrivate:CheckBox;
-
+      
       public var description:TextAreaSimple;
-
+      
       public var createButon:SoundButtonEx;
-
+      
       public var closeButon:SoundButtonEx;
-
+      
       public var minimap:MinimapLobby;
-
+      
       private var mapsData:Array;
-
+      
       private var paramsVO:TrainingWindowVO;
-
+      
       private var _dataWasSetted:Boolean = false;
-
+      
       public function populateMaps(param1:Array) : void {
          this.mapsData = param1;
          this.maps.dataProvider = new DataProvider(param1);
       }
-
+      
       public function setInfo(param1:Object) : void {
          var _loc2_:* = NaN;
          this.paramsVO = new TrainingWindowVO(param1);
@@ -92,7 +91,7 @@ package net.wg.gui.lobby.training
             invalidateData();
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.createButon.addEventListener(ButtonEvent.CLICK,this.createTraining);
@@ -104,12 +103,12 @@ package net.wg.gui.lobby.training
          this.maps.wrapping = WrappingMode.STICK;
          this.description.text = "";
       }
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          setFocus(this.createButon);
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          this.battleTime.maximum = App.globalVarsMgr.isDevelopmentS()?9999:30;
@@ -119,7 +118,7 @@ package net.wg.gui.lobby.training
          this.populateMaps(getMapsDataS());
          this.setInfo(getInfoS());
       }
-
+      
       override protected function onDispose() : void {
          this.createButon.removeEventListener(ButtonEvent.CLICK,this.createTraining);
          this.closeButon.removeEventListener(ButtonEvent.CLICK,this.onClose);
@@ -151,7 +150,7 @@ package net.wg.gui.lobby.training
          this.paramsVO = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.paramsVO))
@@ -165,11 +164,11 @@ package net.wg.gui.lobby.training
             this.description.enabled = this.paramsVO.canChangeComment;
          }
       }
-
+      
       private function onClose(param1:ButtonEvent) : void {
          onWindowCloseS();
       }
-
+      
       private function createTraining(param1:ButtonEvent) : void {
          var _loc2_:Number = this.mapsData[this.maps.selectedIndex].key;
          var _loc3_:Number = this.battleTime.value;
@@ -178,7 +177,7 @@ package net.wg.gui.lobby.training
          updateTrainingRoomS(_loc2_,_loc3_,_loc4_,_loc5_);
          this.onClose(null);
       }
-
+      
       private function onMapChange(param1:ListEvent) : void {
          if(param1.index < this.mapsData.length)
          {
@@ -195,5 +194,4 @@ package net.wg.gui.lobby.training
          }
       }
    }
-
 }

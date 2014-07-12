@@ -4,20 +4,18 @@ package mx.utils
    import flash.utils.getQualifiedClassName;
    import flash.display.DisplayObject;
    import mx.core.IRepeaterClient;
-
-   use namespace mx_internal;
-
+   
    public class NameUtil extends Object
    {
-          
+      
       public function NameUtil() {
          super();
       }
-
-      mx_internal  static const VERSION:String = "4.5.1.21328";
-
+      
+      mx_internal  static const VERSION:String = "4.6.0.23201";
+      
       private static var counter:int = 0;
-
+      
       public static function createUniqueName(param1:Object) : String {
          if(!param1)
          {
@@ -29,14 +27,14 @@ package mx.utils
          {
             _loc2_ = _loc2_.substr(_loc3_ + 2);
          }
-         var _loc4_:int = _loc2_.charCodeAt(_loc2_.length-1);
+         var _loc4_:int = _loc2_.charCodeAt(_loc2_.length - 1);
          if(_loc4_ >= 48 && _loc4_ <= 57)
          {
             _loc2_ = _loc2_ + "_";
          }
          return _loc2_ + counter++;
       }
-
+      
       public static function displayObjectToString(param1:DisplayObject) : String {
          var _loc2_:String = null;
          var _loc3_:DisplayObject = null;
@@ -51,8 +49,8 @@ package mx.utils
                {
                   break;
                }
-               _loc4_ = "id"  in  _loc3_ && (_loc3_["id"])?_loc3_["id"]:_loc3_.name;
-               if(_loc3_  is  IRepeaterClient)
+               _loc4_ = "id" in _loc3_ && (_loc3_["id"])?_loc3_["id"]:_loc3_.name;
+               if(_loc3_ is IRepeaterClient)
                {
                   _loc5_ = IRepeaterClient(_loc3_).instanceIndices;
                   if(_loc5_)
@@ -69,10 +67,10 @@ package mx.utils
          }
          return _loc2_;
       }
-
+      
       public static function getUnqualifiedClassName(param1:Object) : String {
          var _loc2_:String = null;
-         if(param1  is  String)
+         if(param1 is String)
          {
             _loc2_ = param1 as String;
          }
@@ -88,5 +86,4 @@ package mx.utils
          return _loc2_;
       }
    }
-
 }

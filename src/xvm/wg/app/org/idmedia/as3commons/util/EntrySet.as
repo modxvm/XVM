@@ -1,27 +1,26 @@
 package org.idmedia.as3commons.util
 {
    import org.idmedia.as3commons.lang.IllegalArgumentException;
-
-
+   
    class EntrySet extends AbstractSet
    {
-          
+      
       function EntrySet() {
          super();
          this.table = new Array();
          this.tableSize = 0;
       }
-
+      
       private var table:Array;
-
+      
       private var tableSize:int;
-
+      
       override public function iterator() : Iterator {
          return new EntrySetIterator(this);
       }
-
+      
       override public function add(param1:*) : Boolean {
-         if(!(param1  is  Entry))
+         if(!(param1 is Entry))
          {
             throw new IllegalArgumentException();
          }
@@ -36,8 +35,8 @@ package org.idmedia.as3commons.util
             return false;
          }
       }
-
-      override public function remove(param1:*=null) : Boolean {
+      
+      override public function remove(param1:* = null) : Boolean {
          var _loc2_:* = 0;
          while(_loc2_ < this.tableSize)
          {
@@ -51,11 +50,11 @@ package org.idmedia.as3commons.util
          }
          return false;
       }
-
+      
       public function get(param1:int) : * {
          return this.table[param1];
       }
-
+      
       public function removeEntryForKey(param1:*) : Entry {
          var _loc2_:Entry = null;
          var _loc3_:* = 0;
@@ -72,10 +71,9 @@ package org.idmedia.as3commons.util
          }
          return _loc2_;
       }
-
+      
       override public function size() : int {
          return this.tableSize;
       }
    }
-
 }

@@ -10,30 +10,29 @@ package net.wg.gui.lobby.profile
    import net.wg.infrastructure.interfaces.IDAAPIModule;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class ProfileTabNavigator extends ProfileTabNavigatorMeta implements IProfileTabNavigatorMeta
    {
-          
+      
       public function ProfileTabNavigator() {
          this._sectionsDataUtil = new SectionsDataUtil();
          super();
       }
-
+      
       private static const OFFSET_INVALID:String = "layoutInv";
-
+      
       private static const INIT_DATA_INV:String = "initDataInv";
-
+      
       public var bar:ButtonBarEx;
-
+      
       public var viewStack:ResizableViewStack;
-
-      public var initData:ProfileMenuInfoVO;
-
+      
+      private var initData:ProfileMenuInfoVO;
+      
       private var _sectionsDataUtil:SectionsDataUtil;
-
+      
       private var _centerOffset:int = 0;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.disposeImporters();
@@ -41,15 +40,15 @@ package net.wg.gui.lobby.profile
          this.bar.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChanged,false,0,true);
          this.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onSectionViewShowed,false,0,true);
       }
-
+      
       private function disposeImporters() : void {
          var _loc1_:DisplayObject = null;
          var _loc3_:ProfileSectionsImporter = null;
-         var _loc2_:int = numChildren-1;
+         var _loc2_:int = numChildren - 1;
          while(_loc2_ >= 0)
          {
             _loc1_ = getChildAt(_loc2_);
-            if(_loc1_  is  ProfileSectionsImporter)
+            if(_loc1_ is ProfileSectionsImporter)
             {
                _loc3_ = ProfileSectionsImporter(_loc1_);
                removeChild(_loc3_);
@@ -58,7 +57,7 @@ package net.wg.gui.lobby.profile
             _loc2_--;
          }
       }
-
+      
       private function onSectionViewShowed(param1:ViewStackEvent) : void {
          var _loc2_:String = this._sectionsDataUtil.getAliasByLinkage(param1.linkage);
          if(!isFlashComponentRegisteredS(_loc2_))
@@ -66,7 +65,7 @@ package net.wg.gui.lobby.profile
             registerFlashComponentS(IDAAPIModule(param1.view),_loc2_);
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:Array = null;
          var _loc2_:uint = 0;
@@ -112,19 +111,19 @@ package net.wg.gui.lobby.profile
             this.viewStack.centerOffset = this._centerOffset;
          }
       }
-
+      
       private function onTabBarIndexChanged(param1:IndexEvent) : void {
          if(param1.index != -1)
          {
             this.viewStack.show(this._sectionsDataUtil.getLinkageByAlias(SectionInfo(param1.data).alias));
          }
       }
-
+      
       public function as_setInitData(param1:Object) : void {
          this.initData = new ProfileMenuInfoVO(param1);
          invalidate(INIT_DATA_INV);
       }
-
+      
       override protected function onDispose() : void {
          this._sectionsDataUtil = null;
          this.bar.dispose();
@@ -138,16 +137,15 @@ package net.wg.gui.lobby.profile
          this.viewStack = null;
          super.onDispose();
       }
-
+      
       public function setAvailableSize(param1:Number, param2:Number) : void {
          this.viewStack.setAvailableSize(param1,param2 - this.viewStack.y);
          setSize(param1,param2);
       }
-
+      
       public function set centerOffset(param1:int) : void {
          this._centerOffset = param1;
          invalidate(OFFSET_INVALID);
       }
    }
-
 }

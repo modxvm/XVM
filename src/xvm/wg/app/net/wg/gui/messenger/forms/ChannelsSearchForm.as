@@ -1,6 +1,6 @@
 package net.wg.gui.messenger.forms
 {
-   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.base.UIComponentEx;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import net.wg.gui.components.controls.LabelControl;
    import net.wg.gui.components.controls.TextInput;
@@ -21,31 +21,30 @@ package net.wg.gui.messenger.forms
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.NavigationCode;
    import flash.display.InteractiveObject;
-
-
-   public class ChannelsSearchForm extends UIComponent implements IViewStackContent
+   
+   public class ChannelsSearchForm extends UIComponentEx implements IViewStackContent
    {
-          
+      
       public function ChannelsSearchForm() {
          super();
       }
-
+      
       public var searchLabel:LabelControl = null;
-
+      
       public var searchResultLabel:LabelControl = null;
-
+      
       public var searchNameInput:TextInput = null;
-
+      
       public var searchButton:SoundButtonEx = null;
-
+      
       public var searchResultList:ScrollingListEx = null;
-
+      
       public var joinButton:SoundButtonEx = null;
-
+      
       public var bg:Sprite = null;
-
+      
       private var _data:Object = null;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.joinButton.enabled = false;
@@ -64,15 +63,15 @@ package net.wg.gui.messenger.forms
          constraints.addElement("joinButton",this.joinButton,Constraints.LEFT | Constraints.BOTTOM);
          this.searchResultList.sbPadding = new Padding(2,2,2,2);
       }
-
+      
       override public function setSize(param1:Number, param2:Number) : void {
          super.setSize(param1,param2);
       }
-
-      private function onIndexChange(param1:ListEvent=null) : void {
+      
+      private function onIndexChange(param1:ListEvent = null) : void {
          this.joinButton.enabled = this.searchResultList.selectedIndex > -1;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((constraints) && (isInvalid(InvalidationType.SIZE)))
@@ -80,7 +79,7 @@ package net.wg.gui.messenger.forms
             constraints.update(_width,_height);
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.searchButton.removeEventListener(ButtonEvent.CLICK,this.onSearchClick);
@@ -89,34 +88,33 @@ package net.wg.gui.messenger.forms
          this.searchResultList.removeEventListener(ListEventEx.INDEX_CHANGE,this.onIndexChange);
          this.searchNameInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
       }
-
+      
       public function update(param1:Object) : void {
-          
       }
-
+      
       public function set searchResultText(param1:String) : void {
          this.searchResultLabel.text = param1;
       }
-
+      
       private function onItemDoobleClick(param1:ListEventEx) : void {
          this.tryJoin();
       }
-
+      
       private function onJoinButtonClick(param1:ButtonEvent) : void {
          this.tryJoin();
       }
-
+      
       private function tryJoin() : void {
          if(this.searchResultList.selectedIndex >= 0)
          {
             dispatchEvent(new ChannelsFormEvent(ChannelsFormEvent.ON_JOIN,true,false,"","","",this.searchResultList.selectedIndex));
          }
       }
-
+      
       private function onSearchClick(param1:ButtonEvent) : void {
          this.dispatchSearchEv();
       }
-
+      
       private function dispatchSearchEv() : void {
          var _loc1_:String = null;
          _loc1_ = this.searchNameInput.text;
@@ -124,11 +122,11 @@ package net.wg.gui.messenger.forms
          this.searchButton.enabled = this.joinButton.enabled = false;
          dispatchEvent(new ChannelsFormEvent(ChannelsFormEvent.ON_SEARCH_CHANNEL_CLICK,true,false,_loc1_));
       }
-
+      
       public function lockSearchButton(param1:Boolean) : void {
          this.searchButton.enabled = param1;
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.isDefaultPrevented())
          {
@@ -144,35 +142,36 @@ package net.wg.gui.messenger.forms
                param1.handled = true;
             }
          }
-         else
+         else if(_loc2_.code != Keyboard.SPACE)
          {
-            if(_loc2_.code != Keyboard.SPACE)
+            switch(_loc2_.navEquivalent)
             {
-               switch(_loc2_.navEquivalent)
-               {
-                  case NavigationCode.ENTER:
-                     if(_loc2_.value == InputValue.KEY_DOWN)
-                     {
-                        this.handlePress(_loc3_);
-                        param1.handled = true;
-                     }
-                     break;
-               }
+               case NavigationCode.ENTER:
+                  if(_loc2_.value == InputValue.KEY_DOWN)
+                  {
+                     this.handlePress(_loc3_);
+                     param1.handled = true;
+                  }
+                  break;
             }
          }
+         
       }
-
+      
       private function handlePress(param1:uint) : void {
          this.dispatchSearchEv();
       }
-
+      
       override public function toString() : String {
          return "[WG ChannelsSearchForm " + name + "]";
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return this.searchNameInput;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

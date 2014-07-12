@@ -7,31 +7,30 @@ package net.wg.gui.components.tooltips
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
    import flash.display.MovieClip;
-
-
+   
    public class ToolTipSelectedVehicle extends ToolTipSpecial
    {
-          
+      
       public function ToolTipSelectedVehicle() {
          super();
          this.headerTF = content.headerTF;
          this.whiteBg = content.whiteBg;
       }
-
+      
       public var headerTF:TextField = null;
-
+      
       public var whiteBg:Sprite = null;
-
+      
       public var vehicle:SuitableVehicleBlockItem = null;
-
+      
       private const MIN_CONTENT_WIDTH:Number = 275;
-
+      
       private const MARGIN_BEETWEEN_BLOCKS:Number = 3;
-
+      
       override public function toString() : String {
          return "[WG ToolTipSelectedVehicle " + name + "]";
       }
-
+      
       override protected function updateSize() : void {
          var _loc1_:Separator = null;
          if(content.width < this.MIN_CONTENT_WIDTH)
@@ -41,12 +40,12 @@ package net.wg.gui.components.tooltips
          super.updateSize();
          if(this.whiteBg.visible)
          {
-            _loc1_ = separators[separators.length-1];
+            _loc1_ = separators[separators.length - 1];
             this.whiteBg.width = contentWidth + bgShadowMargin.horizontal;
             this.whiteBg.height = content.height + contentMargin.bottom - _loc1_.y;
          }
       }
-
+      
       override protected function redraw() : void {
          var _loc1_:ILocale = null;
          var _loc2_:VehicleVO = null;
@@ -72,7 +71,7 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number {
          var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
          _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
@@ -83,5 +82,4 @@ package net.wg.gui.components.tooltips
          return param3;
       }
    }
-
 }

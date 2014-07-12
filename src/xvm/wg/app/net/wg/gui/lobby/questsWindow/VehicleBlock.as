@@ -5,34 +5,33 @@ package net.wg.gui.lobby.questsWindow
    import flash.display.MovieClip;
    import net.wg.gui.lobby.questsWindow.components.QuestsDashlineItem;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class VehicleBlock extends UIComponent
    {
-          
+      
       public function VehicleBlock() {
          this.nations = [];
          super();
          this.levelMC.visible = false;
          this.nations = App.utils.getNationNamesS();
       }
-
+      
       private static const DEFAULT_WIDTH:int = 205;
-
+      
       public var nationIcon:UILoaderAlt;
-
+      
       public var typeIcon:UILoaderAlt;
-
+      
       public var levelMC:MovieClip;
-
+      
       public var tankSmallIcon:UILoaderAlt;
-
+      
       public var discountDL:QuestsDashlineItem;
-
+      
       private var nations:Array;
-
+      
       public var data:Object = null;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.discountDL.width = DEFAULT_WIDTH;
@@ -40,12 +39,12 @@ package net.wg.gui.lobby.questsWindow
          this.typeIcon.hideLoader = false;
          this.tankSmallIcon.hideLoader = false;
       }
-
+      
       public function setData(param1:Object) : void {
          this.data = param1;
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:String = null;
          var _loc2_:String = null;
@@ -71,15 +70,15 @@ package net.wg.gui.lobby.questsWindow
             this.levelMC.visible = true;
          }
       }
-
+      
       public function getNationIconPath(param1:int) : String {
          return "../maps/icons/filters/nations/" + this.nations[param1] + ".png";
       }
-
+      
       public function getTypeIconPath(param1:String) : String {
          return "../maps/icons/filters/tanks/" + param1 + ".png";
       }
-
+      
       override protected function onDispose() : void {
          if(this.nationIcon)
          {
@@ -116,5 +115,4 @@ package net.wg.gui.lobby.questsWindow
          super.onDispose();
       }
    }
-
 }

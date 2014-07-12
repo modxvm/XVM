@@ -5,24 +5,23 @@ package net.wg.gui.lobby.profile.components
    import flash.display.DisplayObject;
    import flash.display.Graphics;
    import flash.display.DisplayObjectContainer;
-
-
+   
    public class LineButtonBar extends ButtonBarEx
    {
-          
+      
       public function LineButtonBar() {
          this.line = new Sprite();
          super();
       }
-
+      
       protected static const LINE_INVALID:String = "lineInv";
-
+      
       protected var line:Sprite;
-
+      
       public var mcBG:Sprite;
-
+      
       protected var lineColor:int = 6710617;
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(this.mcBG)
@@ -31,7 +30,7 @@ package net.wg.gui.lobby.profile.components
          }
          addChild(this.line);
       }
-
+      
       override public function set selectedIndex(param1:int) : void {
          if(param1 == _selectedIndex)
          {
@@ -41,11 +40,11 @@ package net.wg.gui.lobby.profile.components
          var _loc2_:DisplayObject = _renderers[_selectedIndex];
          if(_loc2_)
          {
-            _loc2_.parent.setChildIndex(_loc2_,_loc2_.parent.numChildren-1);
+            _loc2_.parent.setChildIndex(_loc2_,_loc2_.parent.numChildren - 1);
          }
          invalidate(LINE_INVALID);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(LINE_INVALID))
@@ -53,7 +52,7 @@ package net.wg.gui.lobby.profile.components
             this.drawLine();
          }
       }
-
+      
       protected function drawLine() : void {
          var _loc3_:DisplayObject = null;
          var _loc4_:uint = 0;
@@ -76,14 +75,13 @@ package net.wg.gui.lobby.profile.components
          var _loc2_:DisplayObjectContainer = this.line.parent;
          if(_loc2_)
          {
-            _loc2_.setChildIndex(this.line,_loc2_.numChildren-1);
+            _loc2_.setChildIndex(this.line,_loc2_.numChildren - 1);
          }
       }
-
+      
       override protected function updateRenderers() : void {
          super.updateRenderers();
          this.drawLine();
       }
    }
-
 }

@@ -7,11 +7,10 @@ package net.wg.gui.lobby.profile.pages.statistics
    import fl.transitions.easing.Strong;
    import flash.display.DisplayObject;
    import scaleform.clik.motion.Tween;
-
-
+   
    public class StatisticBarChartInitializer extends Object implements IDisposable
    {
-          
+      
       public function StatisticBarChartInitializer(param1:AxisChart) {
          this.tweenManager = new ExcludeTweenManager();
          super();
@@ -22,25 +21,24 @@ package net.wg.gui.lobby.profile.pages.statistics
             DisplayObject(param1.horizontalAxis).addEventListener(StatisticsBarChartAxis.INITIALIZED,this.initializedHandler,false,0,true);
          }
       }
-
+      
       private var chartRef:AxisChart;
-
+      
       private var tweenManager:ExcludeTweenManager;
-
+      
       private function initializedHandler(param1:Event) : void {
          this.tweenManager.registerAndLaunch(500,this.chartRef,{"alpha":1},
             {
                "ease":Strong.easeOut,
                "onComplete":this.onTweenComplete
-            }
-         );
+            });
          DisplayObject(this.chartRef.horizontalAxis).removeEventListener(StatisticsBarChartAxis.INITIALIZED,this.initializedHandler);
       }
-
+      
       private function onTweenComplete(param1:Tween) : void {
          this.tweenManager.unregister(param1);
       }
-
+      
       public function dispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
@@ -51,5 +49,4 @@ package net.wg.gui.lobby.profile.pages.statistics
          this.chartRef = null;
       }
    }
-
 }

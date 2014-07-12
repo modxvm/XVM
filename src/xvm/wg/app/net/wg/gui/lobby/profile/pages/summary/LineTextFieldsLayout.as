@@ -1,13 +1,11 @@
 package net.wg.gui.lobby.profile.pages.summary
 {
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import __AS3__.vec.Vector;
    import flash.display.DisplayObject;
-
-
+   
    public class LineTextFieldsLayout extends Object implements IDisposable
    {
-          
+      
       public function LineTextFieldsLayout(param1:uint, param2:int) {
          this.leftPairs = new Vector.<Array>();
          this.rightPairs = new Vector.<Array>();
@@ -15,21 +13,21 @@ package net.wg.gui.lobby.profile.pages.summary
          this._maxWidth = param1;
          this._centerAreaWidth = param2;
       }
-
+      
       private var _maxWidth:uint;
-
+      
       private var _centerAreaWidth:int;
-
+      
       private var leftPairs:Vector.<Array>;
-
+      
       private var rightPairs:Vector.<Array>;
-
+      
       public function layout() : void {
          this.applyGap(this.leftPairs);
          this.applyGap(this.rightPairs,(this._maxWidth + this._centerAreaWidth) / 2);
       }
-
-      private function applyGap(param1:Vector.<Array>, param2:int=0) : void {
+      
+      private function applyGap(param1:Vector.<Array>, param2:int = 0) : void {
          var _loc6_:Array = null;
          var _loc8_:DisplayObject = null;
          var _loc9_:uint = 0;
@@ -56,35 +54,34 @@ package net.wg.gui.lobby.profile.pages.summary
             _loc7_++;
          }
       }
-
+      
       public function addLeftPair(param1:DisplayObject, param2:DisplayObject) : void {
          this.leftPairs.push([param1,param2]);
       }
-
+      
       public function addRightPair(param1:DisplayObject, param2:DisplayObject) : void {
          this.rightPairs.push([param1,param2]);
       }
-
+      
       public function set maxWidth(param1:uint) : void {
          this._maxWidth = param1;
       }
-
+      
       public function set centerAreaWidth(param1:int) : void {
          this._centerAreaWidth = param1;
       }
-
+      
       public function dispose() : void {
          while(this.leftPairs.length > 0)
          {
-            this.leftPairs.splice(this.leftPairs.length-1,1);
+            this.leftPairs.splice(this.leftPairs.length - 1,1);
          }
          this.leftPairs = null;
          while(this.rightPairs.length > 0)
          {
-            this.rightPairs.splice(this.rightPairs.length-1,1);
+            this.rightPairs.splice(this.rightPairs.length - 1,1);
          }
          this.rightPairs = null;
       }
    }
-
 }

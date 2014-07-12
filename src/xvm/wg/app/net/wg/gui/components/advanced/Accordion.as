@@ -9,58 +9,57 @@ package net.wg.gui.components.advanced
    import scaleform.clik.controls.Button;
    import net.wg.infrastructure.interfaces.IAccordionItemRenderer;
    import scaleform.clik.events.InputEvent;
-
-
+   
    public class Accordion extends ButtonBarEx implements IDynamicContent
    {
-          
+      
       public function Accordion() {
          super();
          tabEnabled = focusable = true;
          itemRendererName = DEFAULT_ITEM_RNDR;
          _direction = DIRECTION_VERTICAL;
       }
-
+      
       private static const DEFAULT_ITEM_RNDR:String = "AccrodionSoundRendererUI";
-
+      
       private static const INVALID_BORDER:String = "border";
-
+      
       public var view:ViewStack = null;
-
+      
       public var border:MovieClip = null;
-
+      
       public var texture:BitmapFill = null;
-
+      
       private var _rowHeight:Number = 33;
-
+      
       private var _margin:Number = 1;
-
+      
       private var _paddingTop:Number = 0;
-
+      
       private var _paddingBottom:Number = 0;
-
+      
       private var _paddingLeft:Number = 0;
-
+      
       private var _paddingRight:Number = 0;
-
+      
       private var _enableHeaderConstraints:Boolean = false;
-
+      
       private var _showBgForm:Boolean = true;
-
+      
       private var _backgroundType:String = "gray";
-
+      
       private var _actualViewWidth:Number;
-
+      
       private var _actualViewHeight:Number;
-
+      
       public function get actualViewWidth() : Number {
          return this._actualViewWidth;
       }
-
+      
       public function get actualViewHeight() : Number {
          return this._actualViewHeight;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.view.groupRef = this;
@@ -69,7 +68,7 @@ package net.wg.gui.components.advanced
             this.border.visible = this._showBgForm;
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.view.groupRef = null;
@@ -86,7 +85,7 @@ package net.wg.gui.components.advanced
          removeChild(container);
          container = null;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:IEventCollector = null;
          if((isInvalid(InvalidationType.RENDERERS)) || (isInvalid(InvalidationType.DATA)) || (isInvalid(InvalidationType.SETTINGS)) || (isInvalid(InvalidationType.SIZE)))
@@ -123,16 +122,16 @@ package net.wg.gui.components.advanced
          this.drawLayout(width,this.rowHeight);
          this.view.alpha = 1;
       }
-
+      
       override protected function setupRenderer(param1:Button, param2:uint) : void {
          super.setupRenderer(param1,param2);
-         if(param1  is  IAccordionItemRenderer)
+         if(param1 is IAccordionItemRenderer)
          {
             IAccordionItemRenderer(param1).enableConstraints = this.enableHeaderConstraints;
          }
          param1.tabEnabled = false;
       }
-
+      
       override protected function populateRendererData(param1:Button, param2:uint) : void {
          super.populateRendererData(param1,param2);
          var _loc3_:Object = _dataProvider.requestItemAt(param2);
@@ -141,13 +140,13 @@ package net.wg.gui.components.advanced
             param1.enabled = _loc3_.enabled;
          }
       }
-
+      
       override public function set selectedIndex(param1:int) : void {
          this.view.alpha = 0;
          super.selectedIndex = param1;
          invalidate();
       }
-
+      
       private function drawLayout(param1:Number, param2:Number) : void {
          var _loc5_:IAccordionItemRenderer = null;
          var _loc6_:* = NaN;
@@ -155,7 +154,7 @@ package net.wg.gui.components.advanced
          var _loc3_:Number = this.paddingLeft + this.paddingRight + this.margin * 2;
          var param1:Number = param1 - _loc3_;
          var _loc4_:Number = this.margin + this.paddingTop;
-         for each (_loc5_ in _renderers)
+         for each(_loc5_ in _renderers)
          {
             _loc5_.x = Math.round(this.margin + this.paddingLeft);
             _loc5_.y = Math.round(_loc4_);
@@ -175,83 +174,81 @@ package net.wg.gui.components.advanced
             _loc5_.setSize(param1,param2);
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
-          
       }
-
+      
       public function get rowHeight() : Number {
          return this._rowHeight;
       }
-
+      
       public function set rowHeight(param1:Number) : void {
          this._rowHeight = param1;
       }
-
+      
       public function get margin() : Number {
          return this._margin;
       }
-
+      
       public function set margin(param1:Number) : void {
          this._margin = param1;
       }
-
+      
       public function get paddingTop() : Number {
          return this._paddingTop;
       }
-
+      
       public function set paddingTop(param1:Number) : void {
          this._paddingTop = param1;
       }
-
+      
       public function get paddingBottom() : Number {
          return this._paddingBottom;
       }
-
+      
       public function set paddingBottom(param1:Number) : void {
          this._paddingBottom = param1;
       }
-
+      
       public function get paddingLeft() : Number {
          return this._paddingLeft;
       }
-
+      
       public function set paddingLeft(param1:Number) : void {
          this._paddingLeft = param1;
       }
-
+      
       public function get paddingRight() : Number {
          return this._paddingRight;
       }
-
+      
       public function set paddingRight(param1:Number) : void {
          this._paddingRight = param1;
       }
-
+      
       public function get enableHeaderConstraints() : Boolean {
          return this._enableHeaderConstraints;
       }
-
+      
       public function set enableHeaderConstraints(param1:Boolean) : void {
          this._enableHeaderConstraints = param1;
       }
-
+      
       public function get showBackground() : Boolean {
          return this._showBgForm;
       }
-
+      
       public function set showBackground(param1:Boolean) : void {
          this._showBgForm = param1;
       }
-
+      
       public function get backgroundType() : String {
          return this._backgroundType;
       }
-
+      
       public function set backgroundType(param1:String) : void {
          this.border.gotoAndStop(param1);
          this._backgroundType = param1;
       }
    }
-
 }

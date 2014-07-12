@@ -12,36 +12,35 @@ package net.wg.gui.intro
    import scaleform.clik.ui.InputDetails;
    import scaleform.clik.constants.InputValue;
    import flash.ui.Keyboard;
-
-
+   
    public class IntroPage extends IntroPageMeta implements IIntroPageMeta
    {
-          
+      
       public function IntroPage() {
          super();
          focusable = true;
       }
-
+      
       private static const INTRO_INFO_CHANGED:String = "infoChanged";
-
+      
       private static const STAGE_RESIZED:String = "stageResized";
-
+      
       private static function imitateNoBorderScaleMode(param1:DisplayObject, param2:Number, param3:Number, param4:Number, param5:Number) : void {
          param1.scaleX = param1.scaleY = Math.max(param2 / param4,param3 / param5);
          param1.x = param2 - param1.width >> 1;
          param1.y = param3 - param1.height >> 1;
       }
-
+      
       public var videoPlayer:SimpleVideoPlayer;
-
+      
       private var introInfo:IntroInfoVO;
-
+      
       private var playerOriginalWidth:Number;
-
+      
       private var playerOriginalHeight:Number;
-
+      
       private var stageDimensions:Point;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.videoPlayer.addEventListener(VideoPlayerEvent.PLAYBACK_STOPPED,this.videoPlayerStopHandler,false,0,true);
@@ -50,11 +49,11 @@ package net.wg.gui.intro
          this.playerOriginalWidth = this.videoPlayer.width;
          this.playerOriginalHeight = this.videoPlayer.height;
       }
-
+      
       private function clickMainHandler(param1:MouseEvent) : void {
          this.videoPlayer.stopPlayback();
       }
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          if(!this.stageDimensions)
          {
@@ -64,19 +63,18 @@ package net.wg.gui.intro
          this.stageDimensions.y = param2;
          invalidate(STAGE_RESIZED);
       }
-
+      
       private function videoPlayerStopHandler(param1:VideoPlayerEvent) : void {
          stopVideoS();
       }
-
+      
       private function videoPlayerErrorHandler(param1:VideoPlayerStatusEvent) : void {
          handleErrorS(param1.errorCode);
       }
-
+      
       override public function setViewSize(param1:Number, param2:Number) : void {
-          
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          var _loc3_:* = NaN;
          super.handleInput(param1);
@@ -91,12 +89,12 @@ package net.wg.gui.intro
             }
          }
       }
-
+      
       public function as_playVideo(param1:Object) : void {
          this.introInfo = new IntroInfoVO(param1);
          invalidate(INTRO_INFO_CHANGED);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(INTRO_INFO_CHANGED))
@@ -115,7 +113,7 @@ package net.wg.gui.intro
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          if(this.videoPlayer)
          {
@@ -135,5 +133,4 @@ package net.wg.gui.intro
          super.onDispose();
       }
    }
-
 }

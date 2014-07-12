@@ -1,8 +1,7 @@
 package net.wg.gui.components.controls
 {
    import scaleform.clik.controls.Button;
-   import net.wg.infrastructure.interfaces.entity.ISoundable;
-   import net.wg.infrastructure.interfaces.IUIComponentEx;
+   import net.wg.infrastructure.interfaces.ISoundButton;
    import flash.display.MovieClip;
    import flash.events.TimerEvent;
    import net.wg.data.constants.SoundManagerStates;
@@ -10,44 +9,43 @@ package net.wg.gui.components.controls
    import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.gfx.MouseEventEx;
-
-
-   public class SoundButton extends Button implements ISoundable, IUIComponentEx
+   
+   public class SoundButton extends Button implements ISoundButton
    {
-          
+      
       public function SoundButton() {
          super();
       }
-
+      
       private static const INPUT_LOCK_DURATION:Number = 20;
-
+      
       private var _soundType:String = "normal";
-
+      
       private var _soundId:String = "";
-
+      
       public var hitMc:MovieClip;
-
+      
       protected var mouseHandlingLocked:Boolean = false;
-
+      
       protected var keyboardHandlingLocked:Boolean = false;
-
+      
       protected var useFocusedAsSelect:Boolean = false;
-
+      
       public function get soundType() : String {
          return this._soundType;
       }
-
+      
       public function set soundType(param1:String) : void {
          if((param1) && !(param1 == this._soundType))
          {
             this._soundType = param1;
          }
       }
-
+      
       override public function toString() : String {
          return "[WG SoundButton " + name + "]";
       }
-
+      
       override protected function onDispose() : void {
          this.hitMc = null;
          if(_repeatTimer != null)
@@ -63,35 +61,35 @@ package net.wg.gui.components.controls
          App.utils.scheduler.cancelTask(this.unlockMouseHandling);
          super.onDispose();
       }
-
+      
       public function get soundId() : String {
          return this._soundId;
       }
-
+      
       public function set soundId(param1:String) : void {
          this._soundId = param1;
       }
-
+      
       public final function getSoundType() : String {
          return this.soundType;
       }
-
+      
       public final function getSoundId() : String {
          return this._soundId;
       }
-
+      
       public final function getStateOverSnd() : String {
          return SoundManagerStates.SND_OVER;
       }
-
+      
       public final function getStateOutSnd() : String {
          return SoundManagerStates.SND_OUT;
       }
-
+      
       public final function getStatePressSnd() : String {
          return SoundManagerStates.SND_PRESS;
       }
-
+      
       public function beginButtonRepeat() : void {
          if((autoRepeat) && _repeatTimer == null)
          {
@@ -100,7 +98,7 @@ package net.wg.gui.components.controls
             _repeatTimer.start();
          }
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(param1 == enabled)
          {
@@ -114,7 +112,7 @@ package net.wg.gui.components.controls
          buttonMode = useHandCursor = enabled;
          mouseEnabled = true;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(this.hitMc != null)
@@ -132,11 +130,11 @@ package net.wg.gui.components.controls
             textField.mouseEnabled = false;
          }
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          var _loc5_:ButtonEvent = null;
          _autoRepeatEvent = null;
@@ -171,8 +169,8 @@ package net.wg.gui.components.controls
          }
          _isRepeating = false;
       }
-
-      override protected function handleRelease(param1:uint=0) : void {
+      
+      override protected function handleRelease(param1:uint = 0) : void {
          var _loc2_:ButtonEvent = null;
          if(!enabled)
          {
@@ -198,15 +196,15 @@ package net.wg.gui.components.controls
          }
          _isRepeating = false;
       }
-
+      
       private function unlockMouseHandling() : void {
          this.mouseHandlingLocked = false;
       }
-
+      
       private function unlockKeyboardHandling() : void {
          this.keyboardHandlingLocked = false;
       }
-
+      
       override protected function changeFocus() : void {
          var _loc1_:String = null;
          if(!enabled)
@@ -217,7 +215,7 @@ package net.wg.gui.components.controls
          {
             if((group) && (groupName))
             {
-               if((this.useFocusedAsSelect) && ((_focused) || (_displayFocus)) && !this.selected)
+               if((this.useFocusedAsSelect) && (_focused || _displayFocus) && !this.selected)
                {
                   this.selected = true;
                }
@@ -258,5 +256,4 @@ package net.wg.gui.components.controls
          }
       }
    }
-
 }

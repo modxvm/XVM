@@ -11,22 +11,21 @@ package net.wg.gui.lobby.header
    import flash.display.InteractiveObject;
    import net.wg.infrastructure.interfaces.entity.IIdentifiable;
    import flash.events.MouseEvent;
-
-
+   
    public class BattleTypeSelectPopover extends BattleTypeSelectPopoverMeta implements IBattleTypeSelectPopoverMeta
    {
-          
+      
       public function BattleTypeSelectPopover() {
          super();
          UIID = 97;
       }
-
+      
       public var list:SimpleVehicleList;
-
+      
       private var items:Array;
-
+      
       private const PREBATTLE_ACTION_NAME_SORTIE:String = "sortie";
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(!hasEventListener(ListEvent.INDEX_CHANGE))
@@ -34,12 +33,12 @@ package net.wg.gui.lobby.header
             addEventListener(FancyRendererEvent.RENDERER_CLICK,this.onFightSelect,false,0,true);
          }
       }
-
+      
       override protected function initLayout() : void {
          popoverLayout.preferredLayout = PopOverConst.ARROW_TOP;
          super.initLayout();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:Array = null;
          var _loc2_:* = 0;
@@ -60,30 +59,28 @@ package net.wg.gui.lobby.header
             setSize(this.list.width,this.list.height);
          }
       }
-
+      
       private function updateSelectedItem() : void {
          if(this.list.selectedIndex == -1)
          {
             this.list.selectedIndex = this.list.getFirstSelectablePosition(0,true);
          }
+         else if(this.list.selectedIndex < this.list.getFirstSelectablePosition(this.list.dataProvider.length - 1,false))
+         {
+            this.list.selectedIndex = this.list.getFirstSelectablePosition(this.list.selectedIndex,true);
+         }
          else
          {
-            if(this.list.selectedIndex < this.list.getFirstSelectablePosition(this.list.dataProvider.length-1,false))
-            {
-               this.list.selectedIndex = this.list.getFirstSelectablePosition(this.list.selectedIndex,true);
-            }
-            else
-            {
-               this.list.selectedIndex = this.list.getFirstSelectablePosition(0,true);
-            }
+            this.list.selectedIndex = this.list.getFirstSelectablePosition(0,true);
          }
+         
       }
-
+      
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          setFocus(this.list);
       }
-
+      
       private function onFightSelect(param1:FancyRendererEvent) : void {
          param1.stopImmediatePropagation();
          var _loc2_:String = BattleSelectDropDownVO(param1.target.data).data;
@@ -94,12 +91,12 @@ package net.wg.gui.lobby.header
          selectFightS(BattleSelectDropDownVO(param1.target.data).data);
          App.popoverMgr.hide();
       }
-
+      
       public function as_update(param1:Array) : void {
          this.items = param1;
          invalidateData();
       }
-
+      
       override protected function onDispose() : void {
          if(this.items)
          {
@@ -110,5 +107,4 @@ package net.wg.gui.lobby.header
          super.onDispose();
       }
    }
-
 }

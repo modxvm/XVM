@@ -10,11 +10,10 @@ package net.wg.gui.components.tooltips
    import flash.display.MovieClip;
    import net.wg.gui.rally.vo.VehicleVO;
    import net.wg.infrastructure.interfaces.IImageUrlProperties;
-
-
+   
    public class TooltipUnitCommand extends ToolTipSpecial
    {
-          
+      
       public function TooltipUnitCommand() {
          this.TANK_ICON = App.utils.getHtmlIconTextS(App.utils.getImageUrlProperties(RES_ICONS.MAPS_ICONS_LIBRARY_CYBERSPORT_TANKICON,29,12,0) as IImageUrlProperties);
          super();
@@ -26,31 +25,31 @@ package net.wg.gui.components.tooltips
          this.descriptionTF = content.descriptionTF;
          this.actionTF = content.actionTF;
       }
-
+      
       public var headerTF:TextField = null;
-
+      
       public var notEnoughTF:TextField = null;
-
+      
       public var whiteBg:Sprite = null;
-
+      
       public var alertSuitable:TextField = null;
-
+      
       public var descriptionTF:TextField = null;
-
+      
       public var actionTF:TextField = null;
-
+      
       public var commanderStats:UnitCommanderStats = null;
-
+      
       private const MARGIN_BEETWEEN_BLOCKS:Number = 3;
-
+      
       private const MARGIN_AFTER_SUBHEADER:Number = 20;
-
+      
       private const TANK_ICON:String;
-
+      
       override public function toString() : String {
          return "[WG ToolTipUnitCommand " + name + "]";
       }
-
+      
       private function setHeader(param1:String) : Number {
          this.headerTF.autoSize = TextFieldAutoSize.LEFT;
          this.headerTF.htmlText = Utils.instance.htmlWrapper(App.utils.locale.makeString(TOOLTIPS.CYBERSPORT_UNIT_COMMAND) + " " + param1,Utils.instance.COLOR_HEADER,18,"$TitleFont");
@@ -59,7 +58,7 @@ package net.wg.gui.components.tooltips
          this.headerTF.y = topPosition ^ 0;
          return this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK;
       }
-
+      
       override protected function redraw() : void {
          var _loc1_:ILocale = null;
          var _loc2_:UnitCommandVO = null;
@@ -116,7 +115,7 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       private function addSeparatorWithMargin() : Separator {
          var _loc1_:Separator = Utils.instance.createSeparate(content);
          _loc1_.y = topPosition ^ 0;
@@ -124,7 +123,7 @@ package net.wg.gui.components.tooltips
          topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
          return _loc1_;
       }
-
+      
       private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number {
          var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
          _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
@@ -134,7 +133,7 @@ package net.wg.gui.components.tooltips
          var param3:Number = param3 + (_loc4_.height + this.MARGIN_BEETWEEN_BLOCKS);
          return param3;
       }
-
+      
       override protected function updateSize() : void {
          super.updateSize();
          if(this.whiteBg.visible)
@@ -143,5 +142,4 @@ package net.wg.gui.components.tooltips
          }
       }
    }
-
 }

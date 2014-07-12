@@ -11,23 +11,21 @@ package net.wg.gui.lobby.profile.pages.statistics.body
    import net.wg.gui.lobby.profile.pages.statistics.AxisPointLevels;
    import net.wg.utils.ILocale;
    import net.wg.gui.lobby.profile.pages.statistics.StatisticsBarChart;
-   import __AS3__.vec.Vector;
-
-
+   
    public class ChartsStatisticsGroup extends Group
    {
-          
+      
       public function ChartsStatisticsGroup() {
          super();
       }
-
+      
       private static function formTypeChartItem(param1:Object, param2:String) : StatisticChartInfo {
          var _loc3_:StatisticChartInfo = new StatisticChartInfo();
          _loc3_.xField = param2;
          _loc3_.yField = param1[param2];
          return _loc3_;
       }
-
+      
       private static function formChartItemProvider(param1:Array) : DataProvider {
          var _loc3_:StatisticChartInfo = null;
          var _loc5_:Object = null;
@@ -37,7 +35,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          while(_loc4_ < param1.length)
          {
             _loc5_ = param1[_loc4_];
-            for (_loc6_ in _loc5_)
+            for(_loc6_ in _loc5_)
             {
                _loc3_ = new StatisticChartInfo();
                _loc3_.xField = _loc6_;
@@ -48,13 +46,13 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          }
          return new DataProvider(_loc2_);
       }
-
+      
       public var typeChart:TypesStatisticsChart;
-
+      
       public var nationChart:NationsStatisticsChart;
-
+      
       public var levelChart:LevelsStatisticChart;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.typeChart.mainHorizontalAxis.pointClass = AxisPointTypes;
@@ -65,7 +63,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          this.nationChart.mainHorizontalAxis.lineText.text = _loc1_.makeString(PROFILE.SECTION_STATISTICS_CHARTS_BYNATIONLABEL);
          this.levelChart.mainHorizontalAxis.lineText.text = _loc1_.makeString(PROFILE.SECTION_STATISTICS_CHARTS_BYLEVELLABEL);
       }
-
+      
       public function setDossierData(param1:Array) : void {
          var _loc2_:Vector.<StatisticsBarChart> = new Vector.<StatisticsBarChart>();
          _loc2_.push(this.typeChart);
@@ -78,7 +76,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             _loc3_++;
          }
       }
-
+      
       override protected function onDispose() : void {
          this.typeChart = null;
          this.nationChart = null;
@@ -86,5 +84,4 @@ package net.wg.gui.lobby.profile.pages.statistics.body
          super.onDispose();
       }
    }
-
 }

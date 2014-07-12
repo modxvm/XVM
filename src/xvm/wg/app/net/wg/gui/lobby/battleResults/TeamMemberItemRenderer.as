@@ -11,53 +11,54 @@ package net.wg.gui.lobby.battleResults
    import flash.filters.ColorMatrixFilter;
    import net.wg.infrastructure.interfaces.IColorScheme;
    import net.wg.data.VO.UserVO;
-
-
+   
    public class TeamMemberItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function TeamMemberItemRenderer() {
          super();
       }
-
+      
       public var selfBg:MovieClip;
-
+      
       public var teamKillBg:MovieClip;
-
+      
       public var deadBg:MovieClip;
-
+      
       public var selectionBg:MovieClip;
-
+      
       public var playerName:UserNameField;
-
+      
       public var vehicleName:TextField;
-
+      
       public var damageLbl:TextField;
-
+      
       public var fragsLbl:TextField;
-
+      
       public var xpLbl:TextField;
-
+      
+      public var xpIcon:Sprite;
+      
       public var resourceLbl:TextField;
-
+      
       public var resourceIcon:Sprite;
-
+      
       public var medalIcon:EfficiencyIconRenderer;
-
+      
       public var fakeFocusIndicator:MovieClip;
-
+      
       public var sqadIcon:MovieClip;
-
+      
       public var vehicleIcon:UILoaderAlt;
-
+      
       private var _dataDirty:Boolean = false;
-
+      
       override public function setData(param1:Object) : void {
          this.data = param1;
          this._dataDirty = true;
          invalidate();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.mouseChildren = true;
@@ -65,7 +66,7 @@ package net.wg.gui.lobby.battleResults
          this.medalIcon.addEventListener(MouseEvent.ROLL_OUT,this.onMedalRollOut);
          this.medalIcon.addEventListener(MouseEvent.CLICK,this.onMedalClick);
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.medalIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onMedalRollOver);
@@ -74,7 +75,7 @@ package net.wg.gui.lobby.battleResults
          this.medalIcon.dispose();
          this.vehicleIcon.dispose();
       }
-
+      
       private function onMedalRollOver(param1:MouseEvent) : void {
          var _loc2_:Array = null;
          var _loc3_:uint = 0;
@@ -90,41 +91,40 @@ package net.wg.gui.lobby.battleResults
             App.toolTipMgr.show(_loc2_.join("\n"));
          }
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          this.fakeFocusIndicator.gotoAndPlay("over");
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          this.fakeFocusIndicator.gotoAndPlay("out");
       }
-
+      
       private function onMedalRollOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onMedalClick(param1:MouseEvent) : void {
          this.handleMouseRelease(param1);
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          var _loc2_:Object = null;
          if((App.utils.commons.isRightButton(param1)) && (this.data))
          {
-            _loc2_ =
+            _loc2_ = 
                {
                   "uid":data.playerId,
                   "userName":data.userName,
                   "himself":data.isSelf
-               }
-            ;
+               };
             App.contextMenuMgr.showUserContextMenu(this,_loc2_,new BattleResultsCIGenerator(data.isOwnSquad));
          }
          super.handleMouseRelease(param1);
       }
-
+      
       private function getDimmFilter() : ColorMatrixFilter {
          var _loc1_:ColorMatrixFilter = new ColorMatrixFilter();
          var _loc2_:Array = [0.4,0,0,0,0];
@@ -139,10 +139,11 @@ package net.wg.gui.lobby.battleResults
          _loc1_.matrix = _loc6_;
          return _loc1_;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:IColorScheme = null;
-         var _loc2_:* = NaN;
+         var _loc2_:* = 0;
+         var _loc3_:* = NaN;
          super.draw();
          if(this._dataDirty)
          {
@@ -151,21 +152,41 @@ package net.wg.gui.lobby.battleResults
                this.visible = true;
                this.selfBg.visible = data.isSelf;
                this.sqadIcon.visible = false;
+               this.deadBg.visible = false;
+               this.medalIcon.visible = false;
+               this.resourceLbl.visible = false;
+               this.resourceIcon.visible = false;
                _loc1_ = null;
                if(data.isTeamKiller)
                {
                   _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"teamkiller_dead":"teamkiller");
                }
+               else if(data.isOwnSquad)
+               {
+                  _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"selected_dead":"selected");
+               }
                else
                {
-                  if(data.isOwnSquad)
-                  {
-                     _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"selected_dead":"selected");
-                  }
-                  else
-                  {
-                     _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"normal_dead":"normal");
-                  }
+                  _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"normal_dead":"normal");
+               }
+               
+               _loc2_ = this.sqadIcon.x == 2?0:9;
+               if(data.showResources)
+               {
+                  this.sqadIcon.visible = false;
+                  this.playerName.width = 108;
+                  this.playerName.x = _loc2_ + 2;
+                  this.vehicleIcon.x = _loc2_ + 105;
+                  this.vehicleName.x = _loc2_ + 162;
+                  this.damageLbl.x = _loc2_ + 230;
+                  this.fragsLbl.x = _loc2_ + 286;
+                  this.xpLbl.x = _loc2_ + 325;
+                  this.xpIcon.x = _loc2_ + 368;
+                  this.resourceLbl.x = _loc2_ + 384;
+                  this.resourceIcon.x = _loc2_ + 429;
+                  this.resourceLbl.visible = true;
+                  this.resourceIcon.visible = true;
+                  this.resourceLbl.text = data.resourceCount;
                }
                this.playerName.userVO = new UserVO(
                   {
@@ -174,8 +195,7 @@ package net.wg.gui.lobby.battleResults
                      "clanAbbrev":data.playerClan,
                      "region":data.playerRegion,
                      "igrType":data.playerIgrType
-                  }
-               );
+                  });
                this.playerName.textColor = _loc1_.rgb;
                this.vehicleIcon.source = data.tankIcon?data.tankIcon:this.vehicleIcon.sourceAlt;
                this.vehicleName.text = data.vehicleName;
@@ -184,10 +204,6 @@ package net.wg.gui.lobby.battleResults
                this.fragsLbl.text = " ";
                this.vehicleName.textColor = _loc1_.rgb;
                this.fragsLbl.textColor = this.damageLbl.textColor = 13413751;
-               this.deadBg.visible = false;
-               this.medalIcon.visible = false;
-               this.resourceLbl.visible = false;
-               this.resourceIcon.visible = false;
                if(data.killerID > 0)
                {
                   this.damageLbl.textColor = 6381391;
@@ -202,7 +218,7 @@ package net.wg.gui.lobby.battleResults
                {
                   this.damageLbl.text = App.utils.locale.integer(data.damageDealt);
                }
-               if(data.squadID > 0)
+               if(!data.showResources && data.squadID > 0)
                {
                   this.sqadIcon.visible = true;
                   this.sqadIcon.gotoAndStop(data.isOwnSquad?"own":"other");
@@ -218,23 +234,14 @@ package net.wg.gui.lobby.battleResults
                }
                if(data.tkills > 0)
                {
-                  _loc2_ = this.getColorForAlias("teamkiller",65535);
-                  this.fragsLbl.htmlText = this.fragsLbl.htmlText + ("(<FONT color=\"#" + _loc2_.toString(16) + "\">" + data.tkills + "</FONT>)");
+                  _loc3_ = this.getColorForAlias("teamkiller",65535);
+                  this.fragsLbl.htmlText = this.fragsLbl.htmlText + ("(<FONT color=\"#" + _loc3_.toString(16) + "\">" + data.tkills + "</FONT>)");
                }
-               if((data.hasOwnProperty("medalsCount")) && data.medalsCount > 0)
+               if(data.medalsCount > 0)
                {
                   this.medalIcon.value = data.medalsCount;
                   this.medalIcon.validateNow();
                   this.medalIcon.visible = true;
-               }
-               else
-               {
-                  if(data.hasOwnProperty("resourceCount"))
-                  {
-                     this.resourceLbl.visible = true;
-                     this.resourceIcon.visible = true;
-                     this.resourceLbl.text = data.resourceCount;
-                  }
                }
             }
             else
@@ -246,7 +253,7 @@ package net.wg.gui.lobby.battleResults
          }
          this.mouseChildren = true;
       }
-
+      
       private function getColorForAlias(param1:String, param2:Number) : Number {
          var alias:String = param1;
          var defaultColor:Number = param2;
@@ -261,5 +268,4 @@ package net.wg.gui.lobby.battleResults
          }
       }
    }
-
 }

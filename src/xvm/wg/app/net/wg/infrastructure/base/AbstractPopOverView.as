@@ -12,28 +12,27 @@ package net.wg.infrastructure.base
    import scaleform.clik.constants.InputValue;
    import net.wg.data.constants.Linkages;
    import net.wg.infrastructure.interfaces.IManagedContent;
-
-
+   
    public class AbstractPopOverView extends PopOverViewMeta implements IAbstractPopOverView
    {
-          
+      
       public function AbstractPopOverView() {
          super();
       }
-
+      
       private static const ARROW_DIRECTION_INV:String = "arrowDirectionInvalid";
-
+      
       private static const ARROW_POSITION_INV:String = "arrowPositionInvalid";
-
+      
       private var _arrowDirection:uint = 0;
-
+      
       private var _arrowPosition:int = 0;
-
+      
       private function hidePopoverHandler(param1:ComponentEvent) : void {
          param1.stopImmediatePropagation();
          App.popoverMgr.hide();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          var _loc1_:IWrapper = wrapper;
@@ -51,11 +50,11 @@ package net.wg.infrastructure.base
             PopOver(_loc1_).arrowPosition = this._arrowPosition;
          }
       }
-
+      
       public function get arrowDirection() : uint {
          return this._arrowDirection;
       }
-
+      
       public function set arrowDirection(param1:uint) : void {
          if(this._arrowDirection != param1)
          {
@@ -63,24 +62,24 @@ package net.wg.infrastructure.base
             invalidate(ARROW_DIRECTION_INV);
          }
       }
-
+      
       public function get arrowPosition() : int {
          return this._arrowPosition;
       }
-
+      
       public function set arrowPosition(param1:int) : void {
          this._arrowPosition = param1;
          invalidate(ARROW_POSITION_INV);
       }
-
+      
       public function as_setArrowDirection(param1:Number) : void {
          this.arrowDirection = param1;
       }
-
+      
       public function as_setArrowPosition(param1:Number) : void {
          this.arrowPosition = param1;
       }
-
+      
       override public function set wrapper(param1:IWrapper) : void {
          super.wrapper = param1;
          if(!(param1 == null) && !hasEventListener(ComponentEvent.HIDE))
@@ -89,7 +88,7 @@ package net.wg.infrastructure.base
          }
          invalidate(ARROW_DIRECTION_INV);
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          super.handleInput(param1);
          if(param1.handled)
@@ -103,19 +102,18 @@ package net.wg.infrastructure.base
             App.popoverMgr.hide();
          }
       }
-
+      
       public function get wrapperLinkage() : String {
          return Linkages.SMART_POPOVER;
       }
-
+      
       override public function get containerContent() : IManagedContent {
          return wrapper;
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(ComponentEvent.HIDE,this.hidePopoverHandler);
          super.onDispose();
       }
    }
-
 }

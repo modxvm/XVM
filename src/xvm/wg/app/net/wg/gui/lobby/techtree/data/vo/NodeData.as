@@ -4,59 +4,58 @@ package net.wg.gui.lobby.techtree.data.vo
    import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.utils.ILocale;
    import net.wg.gui.lobby.techtree.constants.NamedLabels;
-
-
+   
    public class NodeData extends Object implements IValueObject
    {
-          
+      
       public function NodeData() {
          super();
       }
-
+      
       private static var displayInfoClass:Class = null;
-
+      
       public static const NODE_DUMP_FIELD:String = "nodeDump";
-
+      
       public static const UNLOCK_PROPS_FIELD:String = "unlockProps";
-
+      
       public static function setDisplayInfoClass(param1:Class) : void {
          displayInfoClass = param1;
       }
-
+      
       private var _earnedXP:Number = 0;
-
+      
       private var _actionPriceDataVo:ActionPriceVO = null;
-
+      
       private var _earnedXPLabel:String = "";
-
+      
       public var id:Number = 0;
-
+      
       public var nameString:String = "";
-
+      
       public var primaryClass:PrimaryClass = null;
-
+      
       public var level:int = -1;
-
+      
       public var state:Number = 0;
-
+      
       public var unlockProps:UnlockProps = null;
-
+      
       public var smallIconPath:String = "";
-
+      
       public var iconPath:String = "";
-
+      
       public var longName:String = "";
-
+      
       public var shopPrice:ShopPrice = null;
-
+      
       public var displayInfo:Object = null;
-
+      
       public var extraInfo:String = null;
-
+      
       public function get earnedXP() : Number {
          return this._earnedXP;
       }
-
+      
       public function set earnedXP(param1:Number) : void {
          if(this._earnedXP == param1)
          {
@@ -72,11 +71,11 @@ package net.wg.gui.lobby.techtree.data.vo
             this._earnedXPLabel = "";
          }
       }
-
+      
       public function fromArray(param1:Array, param2:ILocale) : void {
          throw new Error("Does not call method NodeData.fromArray.");
       }
-
+      
       public function fromObject(param1:Object, param2:ILocale) : void {
          var _loc3_:String = null;
          if(param1 == null)
@@ -146,12 +145,12 @@ package net.wg.gui.lobby.techtree.data.vo
          {
             this.displayInfo = new displayInfoClass();
          }
-         if(!(param1.displayInfo == null) && !(this.displayInfo == null  is  IValueObject))
+         if(!(param1.displayInfo == null) && !(this.displayInfo == null is IValueObject))
          {
             (this.displayInfo as IValueObject).fromObject(param1.displayInfo,param2);
          }
       }
-
+      
       public function clearUp() : void {
          this.id = 0;
          this.nameString = "";
@@ -174,7 +173,7 @@ package net.wg.gui.lobby.techtree.data.vo
             this.displayInfo.clearUp();
          }
       }
-
+      
       public function getNamedLabel(param1:String) : String {
          var _loc2_:String = null;
          switch(param1)
@@ -196,7 +195,7 @@ package net.wg.gui.lobby.techtree.data.vo
          }
          return _loc2_;
       }
-
+      
       public function getNamedValue(param1:String) : Number {
          var _loc2_:* = NaN;
          switch(param1)
@@ -218,7 +217,7 @@ package net.wg.gui.lobby.techtree.data.vo
          }
          return _loc2_;
       }
-
+      
       public function getActionData(param1:String) : ActionPriceVO {
          var _loc2_:ActionPriceVO = null;
          switch(param1)
@@ -240,10 +239,9 @@ package net.wg.gui.lobby.techtree.data.vo
          }
          return _loc2_;
       }
-
+      
       public function toString() : String {
          return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n actionPriceDataVo = " + this._actionPriceDataVo + "\n]";
       }
    }
-
 }

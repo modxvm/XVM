@@ -33,138 +33,137 @@ package net.wg.gui.prebattle.company
    import net.wg.data.components.BattleSessionCIGenerator;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
-
-
+   
    public class CompanyWindow extends CompanyWindowMeta implements ICompanyWindowMeta
    {
-          
+      
       public function CompanyWindow() {
          this.unassignedDataProvider = new DataProvider();
          this.assignedDataProvider = new DataProvider();
          this.invalidVehicles = [];
          super();
       }
-
+      
       public var hiddenItemRenderer:TeamMemberRenderer;
-
+      
       public var levelTooltip:String;
-
+      
       public var upAllButton:IconButton;
-
+      
       public var downAllButton:IconButton;
-
+      
       public var limitsLabel:TextField;
-
+      
       public var levelSPGTooltip:String;
-
+      
       public var levelTotalTooltip:String;
-
+      
       public var addToAssignBtn:IconButton;
-
+      
       public var removeFromAssignBtn:IconButton;
-
+      
       public var commitEditButton:IconButton;
-
+      
       public var topBG:MovieClip;
-
+      
       public var listTitle:MovieClip;
-
+      
       public var commentInput:TextInput;
-
+      
       public var commentText:TextField;
-
+      
       public var crewStuffField:TextField;
-
+      
       public var sumLevelLimitField:TextField;
-
+      
       public var queueLabel:TextField;
-
+      
       public var totalCurrentLevelField:TextField;
-
+      
       public var heavyLevelField:TextField;
-
+      
       public var mediumLevelField:TextField;
-
+      
       public var lightLevelField:TextField;
-
+      
       public var atspgLevelField:TextField;
-
+      
       public var spgLevelField:TextField;
-
+      
       public var topButtonsBG:MovieClip;
-
+      
       public var leaveButton:SoundButtonEx;
-
+      
       public var readyButton:SoundButtonEx;
-
+      
       public var inviteButton:SoundButtonEx;
-
+      
       public var division:DropdownMenu;
-
+      
       public var editButton:IconButton;
-
+      
       public var unassignedList:ScrollingListEx;
-
+      
       public var assignedList:ScrollingListEx;
-
+      
       public var unassignedDataProvider:DataProvider;
-
+      
       public var assignedDataProvider:DataProvider;
-
+      
       public var isOpenCheckbox:CheckBox;
-
+      
       public var _commentDefaultTextColor:uint = 4473918;
-
+      
       private var _commentNormalTextColor:Number;
-
+      
       private var _canSendInvite:Boolean;
-
+      
       private var _canKickPlayer:Boolean;
-
+      
       private var _canAssignPlayer:Boolean;
-
+      
       private var _canChangeComment:Boolean;
-
+      
       private var _canMakeOpenedClosed:Boolean;
-
+      
       private var _canUnassignPlayer:Boolean = false;
-
+      
       private var _isReadyBtnEnabled:Boolean = false;
-
+      
       private var _isPlayerReady:Boolean = false;
-
+      
       private var _isLeaveBtnEnabled:Boolean = false;
-
+      
       private var _canChangeDivision:Boolean = false;
-
+      
       private var editState:Boolean = false;
-
+      
       private var isDefaultComment:Boolean = false;
-
+      
       private var invalidVehicles:Array;
-
+      
       private var _isPlayerCreator:Boolean = false;
-
+      
       private var lastComment:String = "";
-
+      
       private var buttonsUpdated:Boolean = false;
-
+      
       override public function as_refreshPermissions() : void {
          this.updatePermissions();
       }
-
+      
       override public function as_enableLeaveBtn(param1:Boolean) : void {
          this.updateLeaveBtn(param1);
       }
-
+      
       override public function as_enableReadyBtn(param1:Boolean) : void {
          this.enableReadyButton(param1);
       }
-
+      
       override public function as_toggleReadyBtn(param1:Boolean) : void {
          this.readyButton.label = param1?PREBATTLE.DIALOGS_BUTTONS_READY:PREBATTLE.DIALOGS_BUTTONS_NOTREADY;
       }
-
+      
       override public function as_setPlayerState(param1:int, param2:Boolean, param3:Object) : void {
          var _loc8_:Object = null;
          var _loc4_:Array = [];
@@ -195,12 +194,12 @@ package net.wg.gui.prebattle.company
             this.updateUnassignList(_loc4_);
          }
       }
-
+      
       override public function as_setCoolDownForReadyButton(param1:uint) : void {
          this.enableReadyButton(false);
          App.utils.scheduler.scheduleTask(this.enableReadyButton,param1 * 1000,true);
       }
-
+      
       override public function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void {
          var _loc5_:* = 0;
          var _loc6_:Object = null;
@@ -228,7 +227,7 @@ package net.wg.gui.prebattle.company
          }
          this.updateMoveButtons();
       }
-
+      
       public function as_setComment(param1:String) : void {
          var param1:String = StringUtils.trim(param1);
          this.lastComment = param1;
@@ -254,13 +253,11 @@ package net.wg.gui.prebattle.company
             this.commentText.text = "";
             this.commentText.visible = false;
          }
-         else
+         else if(param1 != "")
          {
-            if(param1 != "")
-            {
-               this.commentText.visible = true;
-            }
+            this.commentText.visible = true;
          }
+         
          if(param1 == "")
          {
             param1 = PREBATTLE.LABELS_COMPANY_DEFAULTCOMMENT;
@@ -278,7 +275,7 @@ package net.wg.gui.prebattle.company
             this.commentInput.enabled = _loc2_;
          }
       }
-
+      
       public function as_setDivisionsList(param1:Array, param2:uint) : void {
          if(!this.division)
          {
@@ -291,11 +288,11 @@ package net.wg.gui.prebattle.company
          this.leaveButton.label = isPlayerCreatorS()?MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_DISMISS:MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_LEAVE;
          this.updateReadyButton();
       }
-
+      
       public function as_setDivision(param1:uint) : void {
          this.autoSelectDivision(param1);
       }
-
+      
       public function as_setOpened(param1:Boolean) : void {
          if(this.isOpenCheckbox)
          {
@@ -305,19 +302,19 @@ package net.wg.gui.prebattle.company
             this.isOpenCheckbox.addEventListener(ButtonEvent.CLICK,this.handleIsOpenChange);
          }
       }
-
+      
       public function as_setTotalLimitLabels(param1:String, param2:String) : void {
          this.sumLevelLimitField.htmlText = param2;
          this.totalCurrentLevelField.htmlText = param1;
       }
-
+      
       public function as_setMaxCountLimitLabel(param1:String) : void {
          if(this.crewStuffField)
          {
             this.crewStuffField.htmlText = param1;
          }
       }
-
+      
       public function as_setClassesLimits(param1:Array) : void {
          var _loc4_:Object = null;
          var _loc2_:uint = param1.length;
@@ -329,47 +326,39 @@ package net.wg.gui.prebattle.company
             {
                this.heavyLevelField.htmlText = _loc4_.limit;
             }
-            else
+            else if(_loc4_.vehClass == VehicleTypes.MEDIUM_TANK)
             {
-               if(_loc4_.vehClass == VehicleTypes.MEDIUM_TANK)
-               {
-                  this.mediumLevelField.htmlText = _loc4_.limit;
-               }
-               else
-               {
-                  if(_loc4_.vehClass == VehicleTypes.LIGHT_TANK)
-                  {
-                     this.lightLevelField.htmlText = _loc4_.limit;
-                  }
-                  else
-                  {
-                     if(_loc4_.vehClass == VehicleTypes.AT_SPG)
-                     {
-                        this.atspgLevelField.htmlText = _loc4_.limit;
-                     }
-                     else
-                     {
-                        if(_loc4_.vehClass == VehicleTypes.SPG)
-                        {
-                           this.spgLevelField.htmlText = _loc4_.limit;
-                        }
-                     }
-                  }
-               }
+               this.mediumLevelField.htmlText = _loc4_.limit;
             }
+            else if(_loc4_.vehClass == VehicleTypes.LIGHT_TANK)
+            {
+               this.lightLevelField.htmlText = _loc4_.limit;
+            }
+            else if(_loc4_.vehClass == VehicleTypes.AT_SPG)
+            {
+               this.atspgLevelField.htmlText = _loc4_.limit;
+            }
+            else if(_loc4_.vehClass == VehicleTypes.SPG)
+            {
+               this.spgLevelField.htmlText = _loc4_.limit;
+            }
+            
+            
+            
+            
             _loc3_++;
          }
       }
-
+      
       public function as_setInvalidVehicles(param1:Array) : void {
          this.invalidVehicles = param1;
          this.refreshInvalidVehicles();
       }
-
+      
       public function as_setChangeSettingCoolDown(param1:uint) : void {
          this.disableSettings(param1 * 1000);
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          registerComponent(channelComponent,Aliases.CHANNEL_COMPONENT);
@@ -385,7 +374,7 @@ package net.wg.gui.prebattle.company
          this.updatePermissions();
          geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.hiddenItemRenderer.visible = false;
@@ -414,7 +403,7 @@ package net.wg.gui.prebattle.company
          this.limitsLabel.text = PREBATTLE.LABELS_COMPANY_LIMITS;
          this.addEventListener(InputEvent.INPUT,this.escInputHandler);
       }
-
+      
       override protected function onDispose() : void {
          this.removeEventListener(InputEvent.INPUT,this.escInputHandler);
          this.commentInput.removeEventListener(FocusHandlerEvent.FOCUS_IN,this.handleFocusInCommentInput);
@@ -464,26 +453,26 @@ package net.wg.gui.prebattle.company
          App.utils.scheduler.cancelTask(this.changeVisibleState);
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       private function updateLeaveBtn(param1:Boolean) : void {
          this.leaveButton.enabled = param1;
       }
-
+      
       private function updateDivision() : void {
          this.division.enabled = this._canChangeDivision;
       }
-
+      
       private function changeAlign(param1:Boolean) : void {
          var _loc2_:TextFormat = this.commentText.getTextFormat();
          _loc2_.align = param1?TextFormatAlign.RIGHT:TextFormatAlign.CENTER;
          this.commentText.setTextFormat(_loc2_);
       }
-
-      private function updateCommentedStates(param1:Boolean=true) : void {
+      
+      private function updateCommentedStates(param1:Boolean = true) : void {
          var _loc3_:String = null;
          this.editState = !this.editState;
          var _loc2_:String = this.commentText.text;
@@ -524,15 +513,15 @@ package net.wg.gui.prebattle.company
          }
          this.changeEditIcon(this.editState);
       }
-
+      
       private function changeVisibleState() : void {
          if(this.commentInput.visible != this.editState)
          {
             this.commentInput.visible = this.editState;
          }
       }
-
-      private function forseSetTextToTextInput(param1:String="") : void {
+      
+      private function forseSetTextToTextInput(param1:String = "") : void {
          var _loc2_:uint = this.commentInput.textField.getTextFormat()["color"];
          if(_loc2_ == this._commentDefaultTextColor)
          {
@@ -540,12 +529,12 @@ package net.wg.gui.prebattle.company
             this.commentInput.text = param1;
          }
       }
-
+      
       private function refreshInvalidVehicles() : void {
          this.updateVehicles(this.invalidVehicles,this.assignedList);
          this.updateVehicles(this.invalidVehicles,this.unassignedList);
       }
-
+      
       private function updateVehicles(param1:Array, param2:ScrollingListEx) : void {
          var _loc5_:TeamMemberRenderer = null;
          var _loc3_:uint = param2.dataProvider.length;
@@ -560,13 +549,13 @@ package net.wg.gui.prebattle.company
             _loc4_++;
          }
       }
-
+      
       private function disableSettings(param1:uint) : void {
          this.enableChangeSettings(false);
          App.utils.scheduler.scheduleTask(this.enableChangeSettings,param1,true);
       }
-
-      private function enableChangeSettings(param1:Boolean=false) : void {
+      
+      private function enableChangeSettings(param1:Boolean = false) : void {
          if(_baseDisposed)
          {
             return;
@@ -593,27 +582,27 @@ package net.wg.gui.prebattle.company
             this.division.enabled = param1;
          }
       }
-
+      
       private function requestToAssignImp(param1:Object) : void {
          if(this._canAssignPlayer)
          {
             requestToAssignS(param1.accID);
          }
       }
-
+      
       private function requestToUnassignImp(param1:Object) : void {
          if(this._canUnassignPlayer)
          {
             requestToUnassignS(param1.accID);
          }
       }
-
+      
       private function changeEditIcon(param1:Boolean) : void {
          var _loc2_:Boolean = this._canChangeComment;
          this.editButton.visible = (_loc2_) && !param1;
          this.commitEditButton.visible = (_loc2_) && (param1);
       }
-
+      
       private function updateWindowProperties() : void {
          window.getIconMovie().gotoAndStop("team");
          var _loc1_:Padding = window.contentPadding as Padding;
@@ -622,7 +611,7 @@ package net.wg.gui.prebattle.company
          _loc1_.right = 10;
          _loc1_.bottom = 15;
       }
-
+      
       private function initComponentProperties() : void {
          this._canSendInvite = false;
          this._canKickPlayer = false;
@@ -630,36 +619,36 @@ package net.wg.gui.prebattle.company
          this._canChangeComment = false;
          this._canMakeOpenedClosed = false;
       }
-
+      
       private function handleOverVehicleStats() : void {
          if(this.levelTooltip.length > 0)
          {
             App.toolTipMgr.showSpecial(this.levelTooltip,null);
          }
       }
-
+      
       private function handleOutToolTip() : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function handleOverVehicleSPGStats() : void {
          if(this.levelSPGTooltip.length > 0)
          {
             App.toolTipMgr.showSpecial(this.levelSPGTooltip,null);
          }
       }
-
+      
       private function handleOverTotalStats() : void {
          if(this.levelTotalTooltip.length > 0)
          {
             App.toolTipMgr.showSpecial(this.levelTotalTooltip,null);
          }
       }
-
+      
       private function enableReadyButton(param1:Boolean) : void {
          this.readyButton.enabled = param1;
       }
-
+      
       private function autoSelectDivision(param1:uint) : void {
          var _loc4_:Object = null;
          this.division.removeEventListener(ListEvent.INDEX_CHANGE,this.handleDivisionChange);
@@ -676,7 +665,7 @@ package net.wg.gui.prebattle.company
          }
          this.division.addEventListener(ListEvent.INDEX_CHANGE,this.handleDivisionChange);
       }
-
+      
       private function updateMoveButtons() : void {
          if(this.addToAssignBtn)
          {
@@ -684,7 +673,7 @@ package net.wg.gui.prebattle.company
             this.removeFromAssignBtn.enabled = this.assignedList.dataProvider.length > 0 && (this._canUnassignPlayer);
          }
       }
-
+      
       private function updateAssignList(param1:Array) : void {
          this.assignedDataProvider = new DataProvider(param1);
          this.assignedList.dataProvider = this.assignedDataProvider;
@@ -694,7 +683,7 @@ package net.wg.gui.prebattle.company
          }
          this.assignedList.validateNow();
       }
-
+      
       private function updateUnassignList(param1:Array) : void {
          this.unassignedDataProvider = new DataProvider(param1);
          this.unassignedList.dataProvider = this.unassignedDataProvider;
@@ -704,11 +693,11 @@ package net.wg.gui.prebattle.company
          }
          this.unassignedList.validateNow();
       }
-
+      
       private function udpateOpenedCompany() : void {
          this.isOpenCheckbox.enabled = this._canMakeOpenedClosed;
       }
-
+      
       private function updateCommentBtns() : void {
          if(this._canChangeComment)
          {
@@ -727,7 +716,7 @@ package net.wg.gui.prebattle.company
             this.commentText.visible = true;
          }
       }
-
+      
       private function clearCommentEditState() : void {
          this.editState = false;
          this.commentInput.visible = false;
@@ -746,7 +735,7 @@ package net.wg.gui.prebattle.company
             this.commentText.visible = true;
          }
       }
-
+      
       private function updateAssignUnassignBtns() : void {
          if(this._canAssignPlayer)
          {
@@ -762,19 +751,17 @@ package net.wg.gui.prebattle.company
          }
          this.updateMoveButtons();
       }
-
+      
       private function updateInviteBtn() : void {
          if(this._canSendInvite)
          {
             this.inviteButton.addEventListener(ButtonEvent.CLICK,this.onInviteBtnClick);
          }
-         else
+         else if(this.inviteButton.hasEventListener(ButtonEvent.CLICK))
          {
-            if(this.inviteButton.hasEventListener(ButtonEvent.CLICK))
-            {
-               this.inviteButton.removeEventListener(ButtonEvent.CLICK,this.onInviteBtnClick);
-            }
+            this.inviteButton.removeEventListener(ButtonEvent.CLICK,this.onInviteBtnClick);
          }
+         
          if(this._isPlayerCreator)
          {
             this.inviteButton.enabled = this._canSendInvite;
@@ -784,7 +771,7 @@ package net.wg.gui.prebattle.company
             this.inviteButton.visible = this._canSendInvite;
          }
       }
-
+      
       private function updatePermissions() : void {
          this._canAssignPlayer = canMoveToAssignedS();
          this._canUnassignPlayer = canMoveToUnassignedS();
@@ -812,20 +799,20 @@ package net.wg.gui.prebattle.company
          this.updateDivision();
          this.udpateOpenedCompany();
       }
-
+      
       private function updateReadyButton() : void {
          this.readyButton.label = this._isPlayerReady?PREBATTLE.DIALOGS_BUTTONS_NOTREADY:PREBATTLE.DIALOGS_BUTTONS_READY;
       }
-
-      private function handleCommitEditClick(param1:ButtonEvent=null) : void {
+      
+      private function handleCommitEditClick(param1:ButtonEvent = null) : void {
          this.updateCommentedStates();
       }
-
-      private function handleFocusInCommentInput(param1:FocusHandlerEvent=null) : void {
+      
+      private function handleFocusInCommentInput(param1:FocusHandlerEvent = null) : void {
          this.forseSetTextToTextInput();
       }
-
-      private function handleUpClick(param1:ButtonEvent=null) : void {
+      
+      private function handleUpClick(param1:ButtonEvent = null) : void {
          var _loc2_:Object = null;
          if(this.unassignedList.dataProvider.length > 0)
          {
@@ -837,8 +824,8 @@ package net.wg.gui.prebattle.company
             }
          }
       }
-
-      private function handleDownClick(param1:Event=null) : void {
+      
+      private function handleDownClick(param1:Event = null) : void {
          var _loc2_:Object = null;
          if(this.assignedList.dataProvider.length > 0)
          {
@@ -850,7 +837,7 @@ package net.wg.gui.prebattle.company
             }
          }
       }
-
+      
       private function handleMember17ItemDoubleClick(param1:ListEventEx) : void {
          if(this.unassignedList.useRightButtonForSelect == false && param1.buttonIdx == 1)
          {
@@ -858,7 +845,7 @@ package net.wg.gui.prebattle.company
          }
          this.handleUpClick();
       }
-
+      
       private function assignedList_itemDoubleClickHandler(param1:ListEventEx) : void {
          if(this.assignedList.useRightButtonForSelect == false && param1.buttonIdx == 1)
          {
@@ -866,7 +853,7 @@ package net.wg.gui.prebattle.company
          }
          this.handleDownClick();
       }
-
+      
       private function showUnassignContextMenu(param1:ListEventEx) : void {
          var _loc2_:PlayerPrbInfoVO = null;
          var _loc3_:* = false;
@@ -886,7 +873,7 @@ package net.wg.gui.prebattle.company
             }
          }
       }
-
+      
       private function showAssignContextMenu(param1:ListEventEx) : void {
          var _loc2_:* = false;
          var _loc3_:Object = null;
@@ -919,7 +906,7 @@ package net.wg.gui.prebattle.company
             }
          }
       }
-
+      
       private function handleDivisionChange(param1:ListEvent) : void {
          if((this.division.enabled) && (param1.itemData))
          {
@@ -927,25 +914,25 @@ package net.wg.gui.prebattle.company
             this.clearCommentEditState();
          }
       }
-
+      
       private function handleLeaveClick(param1:ButtonEvent) : void {
          requestToLeaveS();
       }
-
+      
       private function handleReadyClick(param1:ButtonEvent) : void {
          requestToReadyS(this.readyButton.label == PREBATTLE.DIALOGS_BUTTONS_READY);
          this.clearCommentEditState();
       }
-
+      
       private function handleIsOpenChange(param1:ButtonEvent) : void {
          requestToChangeOpenedS(param1.target.selected);
          this.clearCommentEditState();
       }
-
+      
       private function onInviteBtnClick(param1:ButtonEvent) : void {
          showPrebattleSendInvitesWindowS();
       }
-
+      
       private function commentInput_inputHandler(param1:InputEvent) : void {
          if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN && (this.editState))
          {
@@ -959,7 +946,7 @@ package net.wg.gui.prebattle.company
             this.updateCommentedStates(true);
          }
       }
-
+      
       private function escInputHandler(param1:InputEvent) : void {
          if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN && (this.editState) && (this.commentInput.focused))
          {
@@ -968,7 +955,7 @@ package net.wg.gui.prebattle.company
             this.updateCommentedStates(false);
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.details.code == Keyboard.F1 && param1.details.value == InputValue.KEY_UP && (this.editState) && (this.commentInput.focused))
          {
@@ -977,5 +964,4 @@ package net.wg.gui.prebattle.company
          super.handleInput(param1);
       }
    }
-
 }

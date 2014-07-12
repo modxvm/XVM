@@ -7,15 +7,14 @@ package net.wg.gui.components.tooltips
    import flash.display.Sprite;
    import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
    import flash.filters.DropShadowFilter;
-
-
+   
    public class ToolTipUnitLevel extends ToolTipBase
    {
-          
+      
       public function ToolTipUnitLevel() {
          super();
       }
-
+      
       private function setHeader(param1:String) : Number {
          var _loc2_:TextField = content.headerTF;
          _loc2_.autoSize = TextFieldAutoSize.LEFT;
@@ -25,7 +24,7 @@ package net.wg.gui.components.tooltips
          _loc2_.y = topPosition ^ 0;
          return _loc2_.textHeight + Utils.instance.MARGIN_AFTER_BLOCK;
       }
-
+      
       private function addSeparatorWithMargin() : Separator {
          var _loc1_:Separator = Utils.instance.createSeparate(content);
          _loc1_.y = topPosition ^ 0;
@@ -33,7 +32,7 @@ package net.wg.gui.components.tooltips
          topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
          return _loc1_;
       }
-
+      
       override protected function redraw() : void {
          var _loc1_:* = 0;
          var _loc4_:MovieClip = null;
@@ -91,27 +90,25 @@ package net.wg.gui.components.tooltips
                _loc11_ = 11;
                _loc12_ = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_NOTRECOMMENDEDSTATUS;
             }
+            else if(_loc1_ > 42)
+            {
+               _loc7_.textColor = 16717591;
+               _loc8_ = 16711680;
+               _loc9_ = 0.5;
+               _loc10_ = 0.27;
+               _loc11_ = 11;
+               _loc12_ = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_ERRORSTATUS;
+            }
             else
             {
-               if(_loc1_ > 42)
-               {
-                  _loc7_.textColor = 16717591;
-                  _loc8_ = 16711680;
-                  _loc9_ = 0.5;
-                  _loc10_ = 0.27;
-                  _loc11_ = 11;
-                  _loc12_ = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_ERRORSTATUS;
-               }
-               else
-               {
-                  _loc7_.textColor = 8041216;
-                  _loc8_ = 3997440;
-                  _loc9_ = 0.5;
-                  _loc10_ = 0.27;
-                  _loc11_ = 11;
-                  _loc12_ = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_RECOMMENDEDSTATUS;
-               }
+               _loc7_.textColor = 8041216;
+               _loc8_ = 3997440;
+               _loc9_ = 0.5;
+               _loc10_ = 0.27;
+               _loc11_ = 11;
+               _loc12_ = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_RECOMMENDEDSTATUS;
             }
+            
             _loc7_.filters = [];
             _loc13_ = new DropShadowFilter();
             _loc13_.distance = 0;
@@ -140,7 +137,7 @@ package net.wg.gui.components.tooltips
          contentMargin.bottom = 0;
          super.redraw();
       }
-
+      
       override protected function updateSize() : void {
          super.updateSize();
          var _loc1_:Sprite = content.whiteBg;
@@ -150,5 +147,4 @@ package net.wg.gui.components.tooltips
          }
       }
    }
-
 }

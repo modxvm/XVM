@@ -7,11 +7,10 @@ package net.wg.gui.components.tooltips
    import flash.text.TextFormat;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import flash.text.TextFieldAutoSize;
-
-
+   
    public class ToolTipSkill extends ToolTipSpecial
    {
-          
+      
       public function ToolTipSkill() {
          super();
          this.headerTF = content.headerTF;
@@ -20,26 +19,25 @@ package net.wg.gui.components.tooltips
          this.whiteBg = content.whiteBg;
          separators = new Vector.<Separator>();
       }
-
+      
       private static function getInfoText(param1:String) : String {
          var _loc2_:* = "";
          _loc2_ = Utils.instance.htmlWrapper(App.utils.locale.makeString(ITEM_TYPES.tankman_skills_type(param1),{}),Utils.instance.COLOR_NORMAL,14,"$FieldFont",true);
          return _loc2_;
       }
-
+      
       private var headerTF:TextField = null;
-
+      
       private var discrTF:TextField = null;
-
+      
       private var infoTF:TextField = null;
-
+      
       private var whiteBg:Sprite = null;
-
+      
       private var maxWidth:Number = 270;
-
+      
       override protected function redraw() : void {
          var _loc1_:ToolTipSkillVO = null;
-         var _loc2_:Separator = null;
          var _loc3_:String = null;
          var _loc4_:TextFormat = null;
          _loc1_ = new ToolTipSkillVO(_data);
@@ -54,7 +52,7 @@ package net.wg.gui.components.tooltips
          this.headerTF.y = topPosition;
          topPosition = topPosition + (this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
          this.maxWidth = Math.max(this.maxWidth,this.headerTF.width + bgShadowMargin.horizontal + contentMargin.horizontal);
-         _loc2_ = Utils.instance.createSeparate(content);
+         var _loc2_:Separator = Utils.instance.createSeparate(content);
          _loc2_.y = topPosition | 0;
          separators.push(_loc2_);
          topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
@@ -106,16 +104,15 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       override protected function updateSize() : void {
          background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
          background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
          this.whiteBg.width = content.width + contentMargin.bottom + bgShadowMargin.bottom | 0;
       }
-
+      
       override public function toString() : String {
          return "[SkillToolTip]";
       }
    }
-
 }

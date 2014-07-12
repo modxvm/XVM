@@ -4,11 +4,10 @@ package net.wg.gui.components.tooltips
    import flash.display.Sprite;
    import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.infrastructure.interfaces.ICounterComponent;
-   import __AS3__.vec.Vector;
    import net.wg.data.managers.ITooltipProps;
    import flash.display.DisplayObject;
-   import net.wg.gui.components.tooltips.VO.AchievementVO;
    import net.wg.utils.ILocale;
+   import net.wg.gui.components.tooltips.VO.AchievementVO;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
@@ -20,11 +19,10 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.controls.achievements.BeigeCounter;
    import net.wg.gui.components.controls.achievements.RedCounter;
    import net.wg.data.constants.Values;
-
-
+   
    public class ToolTipAchievement extends ToolTipSpecial
    {
-          
+      
       public function ToolTipAchievement() {
          super();
          this.headerTF = content.headerTF;
@@ -44,53 +42,53 @@ package net.wg.gui.components.tooltips
          this.whiteBg1.visible = false;
          this.defaultBottomPadding = contentMargin.bottom;
       }
-
+      
       private var headerTF:TextField = null;
-
+      
       private var descrTF:TextField = null;
-
+      
       private var historyTF:TextField = null;
-
+      
       private var historyHeaderTF:TextField = null;
-
+      
       private var vLeftTF:TextField = null;
-
+      
       private var notEnoughTF:TextField = null;
-
+      
       private var isInDossierTF:TextField = null;
-
+      
       private var addInfoTF:TextField = null;
-
+      
       private var whiteBg:Sprite = null;
-
+      
       private var whiteBg1:Sprite = null;
-
+      
       private var icon:UILoaderAlt = null;
-
+      
       private var counter:ICounterComponent = null;
-
+      
       private var flagsBlocks:Vector.<AchievementsCustomBlockItem> = null;
-
+      
       private const TYPE_CLASS:String = "class";
-
+      
       private const TYPE_SERIES:String = "series";
-
+      
       private const TYPE_CUSTOM:String = "custom";
-
+      
       private const TYPE_REPEATABLE:String = "repeatable";
-
+      
       private var defaultBottomPadding:Number = 0;
-
+      
       private const ICO_DIMENSION:Number = 180;
-
+      
       private const ICO_SHADOW:Number = 16;
-
+      
       private var isSeparateLast:Boolean = false;
-
+      
       override public function build(param1:Object, param2:ITooltipProps) : void {
          super.build(param1,param2);
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:AchievementsCustomBlockItem = null;
          if(content)
@@ -118,22 +116,23 @@ package net.wg.gui.components.tooltips
          }
          super.onDispose();
       }
-
+      
       override public function toString() : String {
          return "[WG ToolTipAchievement " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function redraw() : void {
+         var _loc1_:ILocale = null;
          var _loc4_:* = NaN;
          var _loc5_:AchievementVO = null;
          var _loc8_:String = null;
          var _loc9_:String = null;
          var _loc10_:String = null;
-         var _loc1_:ILocale = App.utils.locale;
+         _loc1_ = App.utils.locale;
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
          _loc4_ = 300;
@@ -350,11 +349,11 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       protected function getNotAvailableText() : String {
          return TOOLTIPS.ACHIEVEMENT_ISNOTINDOSSIER;
       }
-
+      
       protected function applyDescriptionParams(param1:String, param2:Number, param3:Number) : void {
          if(param1)
          {
@@ -373,7 +372,7 @@ package net.wg.gui.components.tooltips
             this.descrTF.visible = false;
          }
       }
-
+      
       protected function applyClassParams(param1:AchievementVO, param2:Number) : void {
          var _loc3_:ToolTipBlockResultVO = null;
          var _loc4_:ToolTipBlockVO = null;
@@ -407,7 +406,7 @@ package net.wg.gui.components.tooltips
             leftPartMaxW = _loc3_.leftPartMaxW > leftPartMaxW?_loc3_.leftPartMaxW:leftPartMaxW;
          }
       }
-
+      
       override protected function updateSize() : void {
          super.updateSize();
          if(this.icon.visible)
@@ -426,7 +425,7 @@ package net.wg.gui.components.tooltips
             this.whiteBg1.width = _loc1_;
          }
       }
-
+      
       private function addCustomBlock(param1:MovieClip, param2:Object, param3:Number) : Number {
          var _loc4_:AchievementsCustomBlockItem = App.utils.classFactory.getComponent("AchievementsCustomBlockItem",AchievementsCustomBlockItem);
          _loc4_.setData(param2);
@@ -437,8 +436,8 @@ package net.wg.gui.components.tooltips
          var param3:Number = param3 + 34;
          return param3;
       }
-
-      private function getInfoText(param1:String, param2:Array, param3:Number, param4:String, param5:String=null, param6:Array=null) : String {
+      
+      private function getInfoText(param1:String, param2:Array, param3:Number, param4:String, param5:String = null, param6:Array = null) : String {
          var _loc11_:String = null;
          var _loc12_:String = null;
          var _loc13_:String = null;
@@ -492,7 +491,7 @@ package net.wg.gui.components.tooltips
          }
          return _loc7_;
       }
-
+      
       protected function getClassInfoText(param1:Number, param2:String, param3:Array) : String {
          var _loc4_:* = "";
          var _loc5_:ILocale = App.utils.locale;
@@ -508,12 +507,12 @@ package net.wg.gui.components.tooltips
             {
                _loc4_ = _loc4_ + "<br/><font size=\"7\"></font><br/>";
             }
-            _loc4_ = _loc4_ + (Utils.instance.htmlWrapper(_loc5_.makeString(TOOLTIPS.achievement_params("left" + (param1-1))) + " " + _loc5_.makeString(TOOLTIPS.achievement_params(param3[_loc7_].id)),Utils.instance.COLOR_ADD_INFO,12,"$TextFont") + ": " + Utils.instance.htmlWrapper(_loc5_.numberWithoutZeros(param3[_loc7_].val),Utils.instance.COLOR_NUMBER,12,"$TextFont"));
+            _loc4_ = _loc4_ + (Utils.instance.htmlWrapper(_loc5_.makeString(TOOLTIPS.achievement_params("left" + (param1 - 1))) + " " + _loc5_.makeString(TOOLTIPS.achievement_params(param3[_loc7_].id)),Utils.instance.COLOR_ADD_INFO,12,"$TextFont") + ": " + Utils.instance.htmlWrapper(_loc5_.numberWithoutZeros(param3[_loc7_].val),Utils.instance.COLOR_NUMBER,12,"$TextFont"));
             _loc7_++;
          }
          return _loc4_;
       }
-
+      
       protected function getInfoCounter(param1:String, param2:Number, param3:String, param4:String) : ICounterComponent {
          var _loc5_:ICounterComponent = null;
          if(param3)
@@ -550,5 +549,4 @@ package net.wg.gui.components.tooltips
          return _loc5_;
       }
    }
-
 }

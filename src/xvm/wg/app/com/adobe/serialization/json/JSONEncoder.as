@@ -1,46 +1,45 @@
 package com.adobe.serialization.json
 {
    import flash.utils.describeType;
-
-
+   
    public class JSONEncoder extends Object
    {
-          
+      
       public function JSONEncoder(param1:*) {
          super();
          this.jsonString = this.convertToString(param1);
       }
-
+      
       private var jsonString:String;
-
+      
       public function getString() : String {
          return this.jsonString;
       }
-
+      
       private function convertToString(param1:*) : String {
-         if(param1  is  String)
+         if(param1 is String)
          {
             return this.escapeString(param1 as String);
          }
-         if(param1  is  Number)
+         if(param1 is Number)
          {
             return isFinite(param1 as Number)?param1.toString():"null";
          }
-         if(param1  is  Boolean)
+         if(param1 is Boolean)
          {
             return param1?"true":"false";
          }
-         if(param1  is  Array)
+         if(param1 is Array)
          {
             return this.arrayToString(param1 as Array);
          }
-         if(param1  is  Object && !(param1 == null))
+         if(param1 is Object && !(param1 == null))
          {
             return this.objectToString(param1);
          }
          return "null";
       }
-
+      
       private function escapeString(param1:String) : String {
          var _loc3_:String = null;
          var _loc6_:String = null;
@@ -90,7 +89,7 @@ package com.adobe.serialization.json
          }
          return "\"" + _loc2_ + "\"";
       }
-
+      
       private function arrayToString(param1:Array) : String {
          var _loc2_:* = "";
          var _loc3_:int = param1.length;
@@ -106,45 +105,14 @@ package com.adobe.serialization.json
          }
          return "[" + _loc2_ + "]";
       }
-
+      
       private function objectToString(param1:Object) : String {
-         var value:Object = null;
-         var key:String = null;
-         var v:XML = null;
-         var o:Object = param1;
-         var s:String = "";
-         var classInfo:XML = describeType(o);
-         if(classInfo.@name.toString() == "Object")
-         {
-            for (key in o)
-            {
-               value = o[key];
-               if(!(value  is  Function))
-               {
-                  if(s.length > 0)
-                  {
-                     s = s + ",";
-                  }
-                  s = s + (this.escapeString(key) + ":" + this.convertToString(value));
-               }
-            }
-         }
-         else
-         {
-            for each (v in classInfo..*.(name() == "variable" || name() == "accessor" && attribute("access").charAt(0) == "r"))
-            {
-               if(!((v.metadata) && v.metadata.(@name == "Transient").length() > 0))
-               {
-                  if(s.length > 0)
-                  {
-                     s = s + ",";
-                  }
-                  s = s + (this.escapeString(v.@name.toString()) + ":" + this.convertToString(o[v.@name]));
-               }
-            }
-         }
-         return "{" + s + "}";
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: TranslateException
+          */
+         throw new flash.errors.IllegalOperationError("Not decompiled due to error");
       }
    }
-
 }

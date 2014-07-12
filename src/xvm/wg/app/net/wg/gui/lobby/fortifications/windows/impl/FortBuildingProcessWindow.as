@@ -14,11 +14,10 @@ package net.wg.gui.lobby.fortifications.windows.impl
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.Errors;
    import flash.events.Event;
-
-
+   
    public class FortBuildingProcessWindow extends FortBuildingProcessWindowMeta implements IFortBuildingProcessWindowMeta
    {
-          
+      
       public function FortBuildingProcessWindow() {
          super();
          isModal = false;
@@ -28,33 +27,37 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.textInfo.alpha = ALPHA_VALUE;
          this.buildingInfo.visible = false;
          this.buildingList.addEventListener(SortableTableListEvent.LIST_INDEX_CHANGE,this.onClickItemHandler);
+         this.buildingList.addEventListener(SortableTableListEvent.RENDERER_DOUBLE_CLICK,this.onDoubleClickItemHandler);
          this.buildingList.uniqKeyForAutoSelect = "buildingID";
          this.buildingInfo.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.requestFocusHandler);
       }
-
+      
       private static const ALPHA_VALUE:Number = 0.33;
-
+      
+      private static const BUILDING_STATUS_AVAILABLE:uint = 3;
+      
       public var separator:MovieClip;
-
+      
       public var availableCount:TextField = null;
-
+      
       public var buildingList:SortableTable = null;
-
+      
       public var buildingInfo:BuildingProcessInfo = null;
-
+      
       public var model:BuildingProcessVO = null;
-
+      
       public var textInfo:TextField;
-
+      
       override protected function responseBuildingInfo(param1:BuildingProcessInfoVO) : void {
          this.buildingInfo.addEventListener(BuildingProcessInfo.BUY_BUILDING,this.buyBuildingHandler);
          this.buildingInfo.visible = true;
          this.textInfo.visible = false;
          this.buildingInfo.setData(param1);
       }
-
+      
       override protected function onDispose() : void {
          this.buildingList.removeEventListener(SortableTableListEvent.LIST_INDEX_CHANGE,this.onClickItemHandler);
+         this.buildingList.removeEventListener(SortableTableListEvent.RENDERER_DOUBLE_CLICK,this.onDoubleClickItemHandler);
          this.buildingList.dispose();
          this.buildingList = null;
          this.buildingInfo.removeEventListener(BuildingProcessInfo.BUY_BUILDING,this.buyBuildingHandler);
@@ -64,7 +67,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.availableCount = null;
          super.onDispose();
       }
-
+      
       override protected function setData(param1:BuildingProcessVO) : void {
          var _loc2_:BuildingProcessListItemVO = null;
          if(this.buildingList)
@@ -83,7 +86,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             requestBuildingInfoS(_loc2_.buildingID);
          }
       }
-
+      
       private function findFirstAvailableBuilding() : void {
          var _loc3_:BuildingProcessListItemVO = null;
          var _loc1_:int = this.model.listItems.length;
@@ -91,7 +94,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
          while(_loc2_ < _loc1_)
          {
             _loc3_ = BuildingProcessListItemVO(this.model.listItems[_loc2_]);
-            if(_loc3_.buildingStatus == 3)
+            if(_loc3_.buildingStatus == BUILDING_STATUS_AVAILABLE)
             {
                this.buildingList.selectListItemByUniqKey("buildingID",_loc3_.buildingID);
                requestBuildingInfoS(_loc3_.buildingID);
@@ -100,13 +103,13 @@ package net.wg.gui.lobby.fortifications.windows.impl
             _loc2_++;
          }
       }
-
+      
       private function onClickItemHandler(param1:SortableTableListEvent) : void {
          var _loc2_:BuildingProcessListItemVO = this.buildingList.getListSelectedItem() as BuildingProcessListItemVO;
          App.utils.asserter.assertNotNull(_loc2_," [selectItem] buildingId can\'t be NULL " + Errors.CANT_NULL);
          requestBuildingInfoS(_loc2_.buildingID);
       }
-
+      
       private function buyBuildingHandler(param1:Event) : void {
          var _loc2_:String = BuildingProcessInfo(param1.target).getBuildingId();
          App.utils.asserter.assertNotNull(_loc2_," [buyBuilding] buildingId can\'t be NULL " + Errors.CANT_NULL);
@@ -115,11 +118,19 @@ package net.wg.gui.lobby.fortifications.windows.impl
             applyBuildingProcessS(_loc2_);
          }
       }
-
+      
       private function requestFocusHandler(param1:FocusRequestEvent) : void {
          setFocus(param1.focusContainer.getComponentForFocus());
          this.buildingInfo.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.requestFocusHandler);
       }
+      
+      private function onDoubleClickItemHandler(param1:SortableTableListEvent) : void {
+         var _loc2_:BuildingProcessListItemVO = this.buildingList.getListSelectedItem() as BuildingProcessListItemVO;
+         App.utils.asserter.assertNotNull(_loc2_," [doubleCLICK on buildingItem] BuildingProcessListItemVO can\'t be NULL " + Errors.CANT_NULL);
+         if((_loc2_.buildingID) && _loc2_.buildingStatus == BUILDING_STATUS_AVAILABLE)
+         {
+            applyBuildingProcessS(_loc2_.buildingID);
+         }
+      }
    }
-
 }

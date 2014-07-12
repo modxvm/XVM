@@ -31,7 +31,6 @@ package net.wg.app.impl
    import net.wg.gui.components.common.CursorManagedContainer;
    import net.wg.gui.components.common.WaitingManagedContainer;
    import flash.display.DisplayObject;
-   import __AS3__.vec.*;
    import net.wg.infrastructure.managers.IEnvironmentManager;
    import net.wg.infrastructure.managers.impl.EnvironmentManager;
    import net.wg.infrastructure.managers.ISoundManager;
@@ -58,11 +57,10 @@ package net.wg.app.impl
    import flash.events.Event;
    import scaleform.gfx.Extensions;
    import scaleform.clik.core.CLIK;
-
-
+   
    public final class Application extends AbstractApplication
    {
-          
+      
       public function Application() {
          this.browserBgClassValue = Application_browserBgClassValue;
          this._librariesList = Vector.<String>(["windows.swf","popovers.swf","animations.swf"]);
@@ -71,55 +69,55 @@ package net.wg.app.impl
          Extensions.noInvisibleAdvance = true;
          CLIK.disableNullFocusMoves = true;
       }
-
+      
       public static const APP_REG_CMD:String = "registerApplication";
-
+      
       public var browserBgClassValue:Class;
-
+      
       private var _librariesList:Vector.<String>;
-
+      
       private var _libraries:MovieClip;
-
+      
       private var _serviceLayout:ManagedContainer;
-
+      
       private var _views:MainViewContainer;
-
+      
       private var _windows:ManagedContainer;
-
+      
       private var _systemMessages:Sprite;
-
+      
       private var _browser:ManagedContainer;
-
+      
       private var _dialogs:ManagedContainer;
-
+      
       private var _toolTips:MovieClip;
-
+      
       private var _cursorCtnr:ManagedContainer;
-
+      
       private var _waitingCtnr:ManagedContainer;
-
+      
       public function as_traceObject(param1:*) : void {
          DebugUtils.LOG_DEBUG("traceObject",param1);
       }
-
+      
       override public function get browserBgClass() : Class {
          return this.browserBgClassValue;
       }
-
+      
       override public function get systemMessages() : DisplayObjectContainer {
          return this._systemMessages;
       }
-
+      
       override protected function getNewUtils() : IUtils {
          var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new Locale(),new WGJSON(),new HelpLayout(),new ClassFactory(),new PopupManager(),new Commons(),new FocusHandlerEx(),new EventCollector(),new IME(),new VOManager(),new Icons(),new StyleSheetManager(),new TweenAnimator(),new AnimBuilder());
          _loc1_.setNations(new Nations(_loc1_));
          return _loc1_;
       }
-
+      
       override protected function getNewTweenManager() : ITweenManager {
          return new TweenManager();
       }
-
+      
       override protected function createContainers() : void {
          this._libraries = new MovieClip();
          this._serviceLayout = new ManagedContainer();
@@ -138,7 +136,7 @@ package net.wg.app.impl
          this._waitingCtnr = new WaitingManagedContainer();
          super.createContainers();
       }
-
+      
       override protected function disposeContainers() : void {
          super.disposeContainers();
          this._views.dispose();
@@ -159,102 +157,90 @@ package net.wg.app.impl
          this._waitingCtnr.dispose();
          this._waitingCtnr = null;
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
       }
-
+      
       override protected function getContainers() : Vector.<DisplayObject> {
-         new Vector.<DisplayObject>(11)[0] = this._libraries;
-         new Vector.<DisplayObject>(11)[1] = this._views;
-         new Vector.<DisplayObject>(11)[2] = this._windows;
-         new Vector.<DisplayObject>(11)[3] = this._systemMessages;
-         new Vector.<DisplayObject>(11)[4] = this._browser;
-         new Vector.<DisplayObject>(11)[5] = this._dialogs;
-         new Vector.<DisplayObject>(11)[6] = utils.IME.getContainer();
-         new Vector.<DisplayObject>(11)[7] = this._toolTips;
-         new Vector.<DisplayObject>(11)[8] = this._serviceLayout;
-         new Vector.<DisplayObject>(11)[9] = this._cursorCtnr;
-         new Vector.<DisplayObject>(11)[10] = this._waitingCtnr;
-         var _loc1_:Vector.<DisplayObject> = new Vector.<DisplayObject>(11);
+         var _loc1_:Vector.<DisplayObject> = new <DisplayObject>[this._libraries,this._views,this._windows,this._systemMessages,this._browser,this._dialogs,utils.IME.getContainer(),this._toolTips,this._serviceLayout,this._cursorCtnr,this._waitingCtnr];
          return _loc1_;
       }
-
+      
       override protected function getNewEnvironment() : IEnvironmentManager {
          return EnvironmentManager.getInstance();
       }
-
+      
       override protected function getNewSoundManager() : ISoundManager {
          return new SoundManager();
       }
-
+      
       override protected function getNewTooltipManager() : ITooltipMgr {
          return new ToolTipManager(this._toolTips);
       }
-
+      
       override protected function getNewContainerManager() : IContainerManager {
          return new ContainerManager();
       }
-
+      
       override protected function getNewColorSchemeManager() : IColorSchemeManager {
          return new ColorSchemeManager();
       }
-
+      
       override protected function getNewContextMenuManager() : IContextMenuManager {
          return new ContextMenuManager();
       }
-
+      
       override protected function getNewPopoverManager() : IPopoverManager {
          return new PopoverManager(stage);
       }
-
+      
       override protected function getNewClassManager() : Object {
          return new ClassManager();
       }
-
+      
       override protected function getNewGuiItemsManager() : IGuiItemsManager {
          return new GuiItemsManager();
       }
-
+      
       override protected function getNewVoiceChatManager() : IVoiceChatManager {
          return new VoiceChatManager();
       }
-
+      
       override protected function getNewGameInputManager() : IGameInputManager {
          return new GameInputManager();
       }
-
+      
       override protected function getEventLogManager() : IEventLogManager {
          return new EventLogManager();
       }
-
+      
       override protected function onAfterAppConfiguring() : void {
          super.onAfterAppConfiguring();
          libraryLoader.load(this._librariesList);
       }
-
+      
       override protected function onBeforeAppConfiguring() : void {
          super.onBeforeAppConfiguring();
          libraryLoader.init(this._libraries);
       }
-
+      
       override protected function onPopUpManagerInit() : void {
          super.onPopUpManagerInit();
          addChildAt(utils.popupMgr.popupCanvas,this.getTooltipsLayerIndex());
       }
-
+      
       override protected function getRegCmdName() : String {
          return APP_REG_CMD;
       }
-
-      override protected function initStage(param1:Event=null) : void {
+      
+      override protected function initStage(param1:Event = null) : void {
          gameInputMgr.initStage(this.stage);
          super.initStage(param1);
       }
-
+      
       private function getTooltipsLayerIndex() : Number {
          return getChildIndex(this._toolTips);
       }
    }
-
 }

@@ -3,48 +3,47 @@ package net.wg.gui.components.controls
    import scaleform.clik.core.UIComponent;
    import flash.display.MovieClip;
    import flash.events.Event;
-
-
+   
    public class VoiceWave extends UIComponent
    {
-          
+      
       public function VoiceWave() {
          super();
       }
-
+      
       private static const INVALIDATE_SPEAKING:String = "invSpeaking";
-
+      
       public var cross_x:int;
-
+      
       public var cross_y:int;
-
+      
       public var mutedClip:MovieClip;
-
+      
       private var _speak:Boolean = false;
-
+      
       private var _muted:Boolean = false;
-
+      
       private var _farcedStop:Boolean;
-
+      
       private var _speakVisible:Boolean;
-
+      
       override protected function onDispose() : void {
          this.mutedClip = null;
          removeEventListener(Event.ENTER_FRAME,this.frameHandler);
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.mutedClip.cross.x = this.cross_x;
          this.mutedClip.cross.y = this.cross_y;
       }
-
+      
       public function isSpeak() : Boolean {
          return this._speak;
       }
-
-      public function setSpeaking(param1:Boolean, param2:Boolean=false) : void {
+      
+      public function setSpeaking(param1:Boolean, param2:Boolean = false) : void {
          this._speakVisible = App.voiceChatMgr.isVOIPEnabledS();
          if(param1 == this._speak || (this._muted))
          {
@@ -56,7 +55,7 @@ package net.wg.gui.components.controls
          addEventListener(Event.ENTER_FRAME,this.frameHandler);
          invalidate(INVALIDATE_SPEAKING);
       }
-
+      
       protected function frameHandler(param1:Event) : void {
          if(this._speak)
          {
@@ -82,11 +81,11 @@ package net.wg.gui.components.controls
             this.removeEventListener(Event.ENTER_FRAME,this.frameHandler);
          }
       }
-
+      
       public function isMuted() : Boolean {
          return this._muted;
       }
-
+      
       public function setMuted(param1:Boolean) : void {
          if(this._muted == param1)
          {
@@ -98,7 +97,7 @@ package net.wg.gui.components.controls
          }
          this.mutedClip.visible = this._muted = param1;
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(INVALIDATE_SPEAKING))
          {
@@ -106,5 +105,4 @@ package net.wg.gui.components.controls
          }
       }
    }
-
 }

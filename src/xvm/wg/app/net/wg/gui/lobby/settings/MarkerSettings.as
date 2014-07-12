@@ -10,13 +10,12 @@ package net.wg.gui.lobby.settings
    import scaleform.clik.events.IndexEvent;
    import net.wg.gui.lobby.settings.evnts.SettingViewEvent;
    import net.wg.gui.components.common.markers.VehicleMarker;
-
-
+   
    public class MarkerSettings extends SettingsBaseView
    {
-          
+      
       public function MarkerSettings() {
-         this.markerAllyData =
+         this.markerAllyData = 
             {
                "vClass":"heavyTank",
                "vIconSource":"../maps/icons/vehicle/contour/usa-T32.png",
@@ -29,9 +28,8 @@ package net.wg.gui.lobby.settings
                "speaking":false,
                "hunt":false,
                "entityType":"ally"
-            }
-         ;
-         this.markerEnemyData =
+            };
+         this.markerEnemyData = 
             {
                "vClass":"heavyTank",
                "vIconSource":"../maps/icons/vehicle/contour/germany-PzVI.png",
@@ -44,9 +42,8 @@ package net.wg.gui.lobby.settings
                "speaking":false,
                "hunt":false,
                "entityType":"enemy"
-            }
-         ;
-         this.markerDeadData =
+            };
+         this.markerDeadData = 
             {
                "vClass":"heavyTank",
                "vIconSource":"../maps/icons/vehicle/contour/germany-E-75.png",
@@ -59,52 +56,51 @@ package net.wg.gui.lobby.settings
                "speaking":false,
                "hunt":false,
                "entityType":"ally"
-            }
-         ;
+            };
          super();
       }
-
+      
       public var tabs:ButtonBarEx = null;
-
+      
       public var bg:MovieClip = null;
-
+      
       public var enemyForm:SettingsMarkersForm = null;
-
+      
       public var allyForm:SettingsMarkersForm = null;
-
+      
       public var deadForm:SettingsMarkersForm = null;
-
+      
       private const FORM:String = "Form";
-
+      
       private var __currentTab:uint = 0;
-
+      
       private var _dynamicMarkersData:Object = null;
-
+      
       private var _setDataInProgress:Boolean = false;
-
+      
       public var markerEnemy:VehicleMarkerEnemy = null;
-
+      
       public var markerEnemyAlt:VehicleMarkerEnemy = null;
-
+      
       public var markerAlly:VehicleMarkerAlly = null;
-
+      
       public var markerAllyAlt:VehicleMarkerAlly = null;
-
+      
       public var markerDead:VehicleMarkerAlly = null;
-
+      
       public var markerDeadAlt:VehicleMarkerAlly = null;
-
+      
       private var markerAllyData:Object;
-
+      
       private var markerEnemyData:Object;
-
+      
       private var markerDeadData:Object;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.initMarkers();
       }
-
+      
       private function initMarkers() : void {
          this.markerAlly.init(this.markerAllyData);
          this.markerAllyAlt.init(this.markerAllyData);
@@ -122,11 +118,11 @@ package net.wg.gui.lobby.settings
          this.markerEnemyAlt.exInfo = true;
          this.markerDeadAlt.exInfo = true;
       }
-
+      
       override public function update(param1:Object) : void {
          super.update(param1);
       }
-
+      
       override protected function setData(param1:Object) : void {
          var _loc2_:String = null;
          var _loc3_:String = null;
@@ -134,7 +130,7 @@ package net.wg.gui.lobby.settings
          super.setData(param1);
          this._dynamicMarkersData = {};
          this._setDataInProgress = true;
-         for (_loc2_ in param1)
+         for(_loc2_ in param1)
          {
             if(this[_loc2_ + this.FORM])
             {
@@ -142,7 +138,7 @@ package net.wg.gui.lobby.settings
                _loc4_.setData(_loc2_,param1[_loc2_]);
                _loc4_.addEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE,this.onControlChange);
             }
-            for (_loc3_ in param1[_loc2_])
+            for(_loc3_ in param1[_loc2_])
             {
                if(!this._dynamicMarkersData.hasOwnProperty(_loc2_))
                {
@@ -156,7 +152,7 @@ package net.wg.gui.lobby.settings
          this.tabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
          this.tabs.selectedIndex = this.__currentTab;
       }
-
+      
       private function onControlChange(param1:SettingsSubVewEvent) : void {
          if(this._setDataInProgress)
          {
@@ -173,11 +169,11 @@ package net.wg.gui.lobby.settings
          dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc2_,_loc4_));
          this.updateShowContent();
       }
-
+      
       override public function updateDependentData() : void {
          this.updateShowContent();
       }
-
+      
       override protected function onDispose() : void {
          this.tabs.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
          if(this.enemyForm.hasEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE))
@@ -198,16 +194,16 @@ package net.wg.gui.lobby.settings
          this._dynamicMarkersData = null;
          super.onDispose();
       }
-
+      
       override public function toString() : String {
          return "[WG MarkerSettings " + name + "]";
       }
-
+      
       private function onTabChange(param1:IndexEvent) : void {
          this.__currentTab = param1.index;
          this.updateShowContent();
       }
-
+      
       private function updateShowContent() : void {
          var _loc2_:String = null;
          var _loc3_:String = null;
@@ -247,5 +243,4 @@ package net.wg.gui.lobby.settings
          this.bg.gotoAndStop(SettingsConfig.markerTabsDataProvider[this.__currentTab].id);
       }
    }
-
 }

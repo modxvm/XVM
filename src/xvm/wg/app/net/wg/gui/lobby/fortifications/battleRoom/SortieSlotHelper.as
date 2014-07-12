@@ -2,59 +2,69 @@ package net.wg.gui.lobby.fortifications.battleRoom
 {
    import net.wg.gui.rally.controls.BaseRallySlotHelper;
    import net.wg.gui.rally.controls.RallySimpleSlotRenderer;
+   import net.wg.gui.rally.controls.RallySlotRenderer;
+   import net.wg.gui.rally.controls.RallyLockableSlotRenderer;
    import net.wg.gui.lobby.fortifications.cmp.battleRoom.SortieSimpleSlot;
-   import net.wg.gui.lobby.fortifications.cmp.battleRoom.SortieSlot;
    import net.wg.gui.rally.interfaces.IRallySlotVO;
+   import net.wg.gui.lobby.fortifications.cmp.battleRoom.SortieSlot;
    import net.wg.gui.rally.vo.RallySlotVO;
    import net.wg.infrastructure.interfaces.IUserProps;
    import net.wg.gui.cyberSport.controls.GrayTransparentButton;
    import net.wg.data.constants.Values;
    import flash.display.InteractiveObject;
    import net.wg.gui.utils.ComplexTooltipHelper;
-   import net.wg.gui.rally.controls.RallySlotRenderer;
    import net.wg.gui.cyberSport.controls.CSVehicleButton;
    import net.wg.data.constants.Tooltips;
-
-
+   
    public class SortieSlotHelper extends BaseRallySlotHelper
    {
-          
+      
       public function SortieSlotHelper() {
          super();
       }
-
+      
       private static const REMOVE_BTN_PROPS:Object;
-
+      
       private static const LOCK_BTN_PROPS:Object;
-
+      
       private static const BTN_PROPS:Object;
-
+      
       override public function initControlsState(param1:RallySimpleSlotRenderer) : void {
+         var _loc4_:RallySlotRenderer = null;
+         var _loc5_:RallyLockableSlotRenderer = null;
          super.initControlsState(param1);
-         if(param1.takePlaceBtn)
-         {
-            param1.takePlaceBtn.visible = false;
-         }
          var _loc2_:* = param1.index == 0;
          param1.orderNo.visible = !_loc2_;
+         param1.vehicleBtn.visible = false;
+         param1.takePlaceBtn.visible = false;
+         param1.slotLabel.htmlText = FORTIFICATIONS.SORTIE_LISTVIEW_SLOT_CLOSED;
+         param1.takePlaceFirstTimeBtn.visible = false;
+         param1.commander.visible = false;
          var _loc3_:SortieSimpleSlot = param1 as SortieSimpleSlot;
          if(_loc3_)
          {
             _loc3_.commander.visible = _loc2_;
          }
-         var _loc4_:SortieSlot = param1 as SortieSlot;
-         if(_loc4_)
+         if(param1 is RallySlotRenderer)
          {
-            _loc4_.commander.visible = _loc2_;
+            _loc4_ = RallySlotRenderer(param1);
+            _loc4_.removeBtn.visible = false;
+            _loc4_.selfBg.visible = false;
+         }
+         if(param1 is RallyLockableSlotRenderer)
+         {
+            _loc5_ = RallyLockableSlotRenderer(param1);
+            _loc5_.lockBackground.visible = true;
          }
       }
-
+      
       override public function updateComponents(param1:RallySimpleSlotRenderer, param2:IRallySlotVO) : void {
          var _loc4_:SortieSlot = null;
          var _loc5_:RallySlotVO = null;
          var _loc7_:* = false;
-         var _loc8_:IUserProps = null;
-         var _loc9_:* = false;
+         var _loc8_:RallyLockableSlotRenderer = null;
+         var _loc9_:IUserProps = null;
+         var _loc10_:* = false;
          super.updateComponents(param1,_loc5_);
          if(param1.takePlaceBtn)
          {
@@ -76,15 +86,21 @@ package net.wg.gui.lobby.fortifications.battleRoom
                param1.takePlaceBtn.visible = (_loc6_) && (_loc7_) && (_loc5_.isCurrentUserInSlot);
             }
             param1.slotLabel.visible = !((_loc6_) && (_loc7_));
+            if(param1 is RallyLockableSlotRenderer)
+            {
+               _loc8_ = RallyLockableSlotRenderer(param1);
+               _loc8_.lockBackground.visible = true;
+            }
+            param1.vehicleBtn.visible = true;
             param1.vehicleBtn.selectState(!_loc5_.selectedVehicle && (_loc5_.playerObj) && (_loc5_.playerObj.himself));
             if(_loc5_.playerObj)
             {
-               _loc8_ = App.utils.commons.getUserProps(_loc5_.playerObj.userName,null,_loc5_.playerObj.region,_loc5_.playerObj.igrType);
+               _loc9_ = App.utils.commons.getUserProps(_loc5_.playerObj.userName,null,_loc5_.playerObj.region,_loc5_.playerObj.igrType);
                if(!_loc5_.playerObj.himself)
                {
-                  _loc8_.rgb = _loc5_.playerObj.color;
+                  _loc9_.rgb = _loc5_.playerObj.color;
                }
-               App.utils.commons.formatPlayerName(param1.slotLabel,_loc8_);
+               App.utils.commons.formatPlayerName(param1.slotLabel,_loc9_);
                if(_loc5_.selectedVehicle)
                {
                   param1.vehicleBtn.setVehicle(_loc5_.selectedVehicle);
@@ -123,9 +139,9 @@ package net.wg.gui.lobby.fortifications.battleRoom
                   }
                   else
                   {
-                     _loc9_ = (_loc5_.player) && (_loc5_.player.himself);
-                     _loc4_.removeBtn.visible = _loc9_;
-                     if(_loc9_)
+                     _loc10_ = (_loc5_.player) && (_loc5_.player.himself);
+                     _loc4_.removeBtn.visible = _loc10_;
+                     if(_loc10_)
                      {
                         _loc4_.removeBtn.icon = GrayTransparentButton.ICON_CROSS;
                         _loc4_.removeBtn.width = BTN_PROPS.remove.width;
@@ -158,8 +174,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             _loc4_.updateVoiceWave();
          }
       }
-
-      override public function onControlRollOver(param1:InteractiveObject, param2:RallySimpleSlotRenderer, param3:IRallySlotVO, param4:*=null) : void {
+      
+      override public function onControlRollOver(param1:InteractiveObject, param2:RallySimpleSlotRenderer, param3:IRallySlotVO, param4:* = null) : void {
          var _loc6_:ComplexTooltipHelper = null;
          super.onControlRollOver(param1,param2,param3,param4);
          switch(param1)
@@ -172,18 +188,19 @@ package net.wg.gui.lobby.fortifications.battleRoom
                {
                   App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_SORTIE_BATTLEROOM_STATUS_ISREADY);
                }
-               else
+               else if(param2.statusIndicator.currentFrameLabel == RallySlotRenderer.STATUS_NORMAL)
                {
-                  if(param2.statusIndicator.currentFrameLabel == RallySlotRenderer.STATUS_NORMAL)
-                  {
-                     App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_SORTIE_BATTLEROOM_STATUS_NOTREADY);
-                  }
+                  App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_SORTIE_BATTLEROOM_STATUS_NOTREADY);
                }
+               
                break;
             case param2.slotLabel:
-               if(param3.playerObj)
+               if(param3 != null)
                {
-                  App.toolTipMgr.show(param3.playerObj.getToolTip());
+                  if(param3.playerObj)
+                  {
+                     App.toolTipMgr.show(param3.playerObj.getToolTip());
+                  }
                }
                break;
             case param2.takePlaceFirstTimeBtn:
@@ -197,51 +214,43 @@ package net.wg.gui.lobby.fortifications.battleRoom
                {
                   App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_SORTIE_SELECTVEHICLE);
                }
-               else
+               else if(param2.vehicleBtn.currentState == CSVehicleButton.DEFAULT_STATE)
                {
-                  if(param2.vehicleBtn.currentState == CSVehicleButton.DEFAULT_STATE)
+                  App.toolTipMgr.showComplex(TOOLTIPS.MEDALION_NOVEHICLE);
+               }
+               else if(param2.vehicleBtn.currentState == CSVehicleButton.SELECTED_VEHICLE)
+               {
+                  if((param4) && param4.type == "alert")
                   {
-                     App.toolTipMgr.showComplex(TOOLTIPS.MEDALION_NOVEHICLE);
+                     _loc6_ = new ComplexTooltipHelper();
+                     _loc6_.addHeader(param4.state);
+                     _loc6_.addBody(TOOLTIPS.FORTIFICATION_SORTIE_SLOT_VEHICLE_NOTREADY_TEMPORALLY_BODY,true);
+                     App.toolTipMgr.showComplex(_loc6_.make());
                   }
-                  else
+                  else if(param3.playerObj)
                   {
-                     if(param2.vehicleBtn.currentState == CSVehicleButton.SELECTED_VEHICLE)
+                     if(!param3.playerObj.himself)
                      {
-                        if((param4) && param4.type == "alert")
-                        {
-                           _loc6_ = new ComplexTooltipHelper();
-                           _loc6_.addHeader(param4.state);
-                           _loc6_.addBody(TOOLTIPS.FORTIFICATION_SORTIE_SLOT_VEHICLE_NOTREADY_TEMPORALLY_BODY,true);
-                           App.toolTipMgr.showComplex(_loc6_.make());
-                        }
-                        else
-                        {
-                           if(param3.playerObj)
-                           {
-                              if(!param3.playerObj.himself)
-                              {
-                                 App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_SORTIE_PLAYER_VEHICLE);
-                              }
-                              else
-                              {
-                                 if(param3.playerStatus != IS_READY)
-                                 {
-                                    App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_SORTIE_PLAYER_CHANGEVEHICLE);
-                                 }
-                                 else
-                                 {
-                                    App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_SORTIE_PLAYER_CANCELREADY);
-                                 }
-                              }
-                           }
-                        }
+                        App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_SORTIE_PLAYER_VEHICLE);
+                     }
+                     else if(param3.playerStatus != IS_READY)
+                     {
+                        App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_SORTIE_PLAYER_CHANGEVEHICLE);
                      }
                      else
                      {
-                        App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_SLOT,null,param2.index,param3.rallyIdx);
+                        App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_SORTIE_PLAYER_CANCELREADY);
                      }
+                     
                   }
+                  
                }
+               else
+               {
+                  App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_SLOT,null,param2.index,param3.rallyIdx);
+               }
+               
+               
                break;
          }
          var _loc5_:SortieSlot = param2 as SortieSlot;
@@ -251,5 +260,4 @@ package net.wg.gui.lobby.fortifications.battleRoom
          }
       }
    }
-
 }

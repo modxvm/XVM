@@ -6,11 +6,10 @@ package net.wg.gui.components.tooltips
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
    import net.wg.data.constants.Linkages;
-
-
+   
    public class ToolTipHistoricalModules extends ToolTipSpecial
    {
-          
+      
       public function ToolTipHistoricalModules() {
          this.moduleItems = [];
          super();
@@ -18,15 +17,15 @@ package net.wg.gui.components.tooltips
          this.descriptionTF = content.descriptionTF;
          contentMargin.bottom = 17;
       }
-
+      
       public var headerTF:TextField;
-
+      
       public var descriptionTF:TextField;
-
+      
       private var model:HistoricalModulesVO;
-
+      
       private var moduleItems:Array;
-
+      
       override protected function redraw() : void {
          var _loc1_:Separator = null;
          var _loc3_:ModuleItem = null;
@@ -64,25 +63,25 @@ package net.wg.gui.components.tooltips
          }
          super.redraw();
       }
-
+      
       override protected function onDispose() : void {
          this.disposeModel();
          this.clearModules();
          super.onDispose();
       }
-
+      
       private function clearModules() : void {
          var _loc1_:ModuleItem = null;
          if(this.moduleItems)
          {
-            for each (_loc1_ in this.moduleItems)
+            for each(_loc1_ in this.moduleItems)
             {
                _loc1_.dispose();
                _loc1_ = null;
             }
          }
       }
-
+      
       private function disposeModel() : void {
          if(this.model)
          {
@@ -91,5 +90,4 @@ package net.wg.gui.components.tooltips
          }
       }
    }
-
 }

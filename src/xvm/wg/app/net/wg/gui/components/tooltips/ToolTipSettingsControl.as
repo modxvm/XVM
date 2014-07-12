@@ -4,11 +4,10 @@ package net.wg.gui.components.tooltips
    import flash.display.Sprite;
    import net.wg.gui.components.tooltips.VO.SettingsControlVO;
    import net.wg.gui.components.tooltips.helpers.Utils;
-
-
+   
    public class ToolTipSettingsControl extends ToolTipSpecial
    {
-          
+      
       public function ToolTipSettingsControl() {
          super();
          this.headerTF = content.headerTF;
@@ -20,23 +19,23 @@ package net.wg.gui.components.tooltips
          contentMargin.bottom = 18;
          contentMargin.right = 0;
       }
-
+      
       private static const MAX_WIDTH:Number = 283;
-
+      
       public var headerTF:TextField;
-
+      
       public var descriptionTF:TextField;
-
+      
       public var recommendedTF:TextField;
-
+      
       public var warningTF:TextField;
-
+      
       public var warnIcon:Sprite;
-
+      
       public var whiteBg:Sprite;
-
+      
       private var model:SettingsControlVO;
-
+      
       override protected function redraw() : void {
          var _loc1_:Separator = null;
          var _loc2_:String = null;
@@ -95,7 +94,7 @@ package net.wg.gui.components.tooltips
          }
          super.redraw();
       }
-
+      
       override protected function updateSize() : void {
          super.updateSize();
          if((this.whiteBg) && (this.whiteBg.visible))
@@ -103,12 +102,12 @@ package net.wg.gui.components.tooltips
             this.whiteBg.width = bgShadowMargin.left + contentWidth;
          }
       }
-
+      
       override protected function onDispose() : void {
          this.disposeModel();
          super.onDispose();
       }
-
+      
       private function disposeModel() : void {
          if(this.model)
          {
@@ -117,5 +116,4 @@ package net.wg.gui.components.tooltips
          }
       }
    }
-
 }

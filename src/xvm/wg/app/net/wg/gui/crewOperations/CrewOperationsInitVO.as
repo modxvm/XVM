@@ -1,23 +1,22 @@
 package net.wg.gui.crewOperations
 {
    import net.wg.data.daapi.base.DAAPIDataClass;
-
-
+   
    public class CrewOperationsInitVO extends DAAPIDataClass
    {
-          
+      
       public function CrewOperationsInitVO(param1:Object) {
          super(param1);
       }
-
+      
       public var operationsArray:Array;
-
+      
       private var _castedOperations:Array;
-
+      
       public function get castedOperations() : Array {
          return this._castedOperations;
       }
-
+      
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          var _loc3_:* = 0;
          var _loc4_:* = 0;
@@ -36,5 +35,4 @@ package net.wg.gui.crewOperations
          return this.hasOwnProperty(param1);
       }
    }
-
 }

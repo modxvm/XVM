@@ -1,21 +1,19 @@
 package net.wg.gui.lobby.profile.pages.statistics
 {
-
-
    public class AxisPointLevels extends StatisticBarChartAxisPoint
    {
-          
+      
       public function AxisPointLevels() {
          super();
       }
-
+      
       override protected function showToolTip() : void {
          if(tooltip)
          {
             StatisticsChartsUtils.showLevelTooltip(_data,tooltip);
          }
       }
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          var _loc2_:StatisticChartInfo = StatisticChartInfo(_data);
@@ -31,5 +29,4 @@ package net.wg.gui.lobby.profile.pages.statistics
          }
       }
    }
-
 }

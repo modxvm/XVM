@@ -4,11 +4,10 @@ package net.wg.gui.tutorial.windows
    import net.wg.gui.components.common.video.VideoPlayerEvent;
    import flash.events.Event;
    import scaleform.clik.utils.Padding;
-
-
+   
    public class TutorialVideoDialog extends TutorialDialog
    {
-          
+      
       public function TutorialVideoDialog() {
          super();
          showWindowBg = false;
@@ -17,28 +16,28 @@ package net.wg.gui.tutorial.windows
          isModal = true;
          isCentered = true;
       }
-
+      
       public var videoPlayer:AdvancedVideoPlayer;
-
+      
       private var _isPopulated:Boolean = false;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.videoPlayer.addEventListener(AdvancedVideoPlayer.PLAYER_CLOSED,this.onVideoClosed);
          this.videoPlayer.addEventListener(VideoPlayerEvent.PLAYBACK_STOPPED,this.onVideoStopped);
       }
-
+      
       private function onVideoStopped(param1:VideoPlayerEvent) : void {
          if(this._isPopulated)
          {
             onWindowCloseS();
          }
       }
-
+      
       private function onVideoClosed(param1:Event) : void {
          onWindowCloseS();
       }
-
+      
       override protected function drawData() : void {
          super.drawData();
          this.videoPlayer.source = _data.message;
@@ -48,7 +47,7 @@ package net.wg.gui.tutorial.windows
          this.videoPlayer.play();
          this._isPopulated = true;
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          window.getBackground().visible = false;
@@ -59,7 +58,7 @@ package net.wg.gui.tutorial.windows
          _loc1_.left = 0;
          _loc1_.right = 0;
       }
-
+      
       override protected function onDispose() : void {
          if(this.videoPlayer)
          {
@@ -75,5 +74,4 @@ package net.wg.gui.tutorial.windows
          super.onDispose();
       }
    }
-
 }

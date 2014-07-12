@@ -6,71 +6,70 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.components.controls.Slider;
    import net.wg.gui.components.controls.DropdownMenu;
    import net.wg.gui.components.controls.InfoIcon;
-
-
+   
    public class GameSettingsBase extends SettingsBaseView
    {
-          
+      
       public function GameSettingsBase() {
          super();
       }
-
+      
       public var fieldSetChat:FieldSet = null;
-
+      
       public var fieldSetInstructionPanel:FieldSet = null;
-
+      
       public var fieldSetBattleTypes:FieldSet = null;
-
+      
       public var enableOlFilterCheckbox:CheckBox = null;
-
+      
       public var enableSpamFilterCheckbox:CheckBox = null;
-
+      
       public var showDateMessageCheckbox:CheckBox = null;
-
+      
       public var showTimeMessageCheckbox:CheckBox = null;
-
+      
       public var invitesFromFriendsOnlyCheckbox:CheckBox = null;
-
+      
       public var enableStoreCwsCheckbox:CheckBox = null;
-
+      
       public var enableStoreMwsCheckbox:CheckBox = null;
-
+      
       public var storeReceiverInBattleCheckbox:CheckBox = null;
-
+      
       public var disableBattleChatCheckbox:CheckBox = null;
-
+      
       public var ppShowLevelsCheckbox:CheckBox = null;
-
+      
       public var gameplay_ctfCheckbox:CheckBox = null;
-
+      
       public var gameplay_dominationCheckbox:CheckBox = null;
-
+      
       public var gameplay_assaultCheckbox:CheckBox = null;
-
+      
       public var minimapAlphaSliderLabel:TextField = null;
-
+      
       public var minimapAlphaSlider:Slider = null;
-
+      
       public var enableOpticalSnpEffectCheckbox:CheckBox = null;
-
+      
       public var enablePostMortemEffectCheckbox:CheckBox = null;
-
+      
       public var enablePostMortemDelayCheckbox:CheckBox = null;
-
+      
       public var dynamicCameraCheckbox:CheckBox = null;
-
+      
       public var horStabilizationSnpCheckbox:CheckBox = null;
-
+      
       public var replayEnabledLabel:TextField = null;
-
+      
       public var replayEnabledDropDown:DropdownMenu = null;
-
+      
       public var useServerAimCheckbox:CheckBox = null;
-
+      
       public var showVehiclesCounterCheckbox:CheckBox = null;
-
+      
       public var showMarksOnGunCheckbox:CheckBox = null;
-
+      
       override protected function configUI() : void {
          this.fieldSetChat.label = SETTINGS.GAME_FIELDSET_HEADERCHAT;
          this.fieldSetInstructionPanel.label = SETTINGS.GAME_PLAYERPANELSETTINGS;
@@ -105,5 +104,4 @@ package net.wg.gui.lobby.settings
          super.configUI();
       }
    }
-
 }

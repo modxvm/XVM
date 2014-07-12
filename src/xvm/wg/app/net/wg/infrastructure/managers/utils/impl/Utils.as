@@ -23,11 +23,10 @@ package net.wg.infrastructure.managers.utils.impl
    import net.wg.data.StrCaseProperties;
    import net.wg.infrastructure.interfaces.IImageUrlProperties;
    import net.wg.data.ImageUrlProperties;
-
-
+   
    public class Utils extends UtilsManagerMeta implements IUtils
    {
-          
+      
       public function Utils(param1:IAssertable, param2:IScheduler, param3:ILocale, param4:ISerializable, param5:IHelpLayout, param6:IClassFactory, param7:IPopUpManager, param8:ICommons, param9:IFocusHandler, param10:IEventCollector, param11:IIME, param12:IVOManager, param13:IIcons, param14:IStyleSheetManager, param15:ITweenAnimator, param16:IAnimBuilder) {
          super();
          this._asserter = param1;
@@ -47,45 +46,45 @@ package net.wg.infrastructure.managers.utils.impl
          this._tweenAnimator = param15;
          this._animBuilder = param16;
       }
-
+      
       private var _asserter:IAssertable = null;
-
+      
       private var _scheduler:IScheduler = null;
-
+      
       private var _locale:ILocale = null;
-
+      
       private var _JSON:ISerializable = null;
-
+      
       private var _helpLayout:IHelpLayout = null;
-
+      
       private var _classFactory:IClassFactory = null;
-
+      
       private var _popupManager:IPopUpManager = null;
-
+      
       private var _commons:ICommons = null;
-
+      
       private var _nations:INations = null;
-
+      
       private var _focusHandler:IFocusHandler = null;
-
+      
       private var _events:IEventCollector = null;
-
+      
       private var _ime:IIME = null;
-
+      
       private var _voManager:IVOManager = null;
-
+      
       private var _icons:IIcons = null;
-
+      
       private var _styleSheetManager:IStyleSheetManager = null;
-
+      
       private var _tweenAnimator:ITweenAnimator = null;
-
+      
       private var _animBuilder:IAnimBuilder = null;
-
+      
       public function setNations(param1:INations) : void {
          this._nations = param1;
       }
-
+      
       public function dispose() : void {
          this._events.dispose();
          this._events = null;
@@ -111,86 +110,85 @@ package net.wg.infrastructure.managers.utils.impl
          this._tweenAnimator = null;
          this._animBuilder = null;
       }
-
-      public function toUpperOrLowerCase(param1:String, param2:Boolean, param3:IStrCaseProperties=null) : String {
+      
+      public function toUpperOrLowerCase(param1:String, param2:Boolean, param3:IStrCaseProperties = null) : String {
          return changeStringCasingS(param1,param2,param3);
       }
-
+      
       public function getStrCaseProperties() : IStrCaseProperties {
          return new StrCaseProperties();
       }
-
+      
       public function get asserter() : IAssertable {
          return this._asserter;
       }
-
+      
       public function get scheduler() : IScheduler {
          return this._scheduler;
       }
-
+      
       public function get locale() : ILocale {
          return this._locale;
       }
-
+      
       public function get JSON() : ISerializable {
          return this._JSON;
       }
-
+      
       public function get helpLayout() : IHelpLayout {
          return this._helpLayout;
       }
-
+      
       public function get classFactory() : IClassFactory {
          return this._classFactory;
       }
-
+      
       public function get popupMgr() : IPopUpManager {
          return this._popupManager;
       }
-
+      
       public function get commons() : ICommons {
          return this._commons;
       }
-
+      
       public function get nations() : INations {
          return this._nations;
       }
-
+      
       public function get focusHandler() : IFocusHandler {
          return this._focusHandler;
       }
-
+      
       public function get events() : IEventCollector {
          return this._events;
       }
-
+      
       public function get IME() : IIME {
          return this._ime;
       }
-
+      
       public function get voMgr() : IVOManager {
          return this._voManager;
       }
-
+      
       public function get icons() : IIcons {
          return this._icons;
       }
-
+      
       public function get styleSheetManager() : IStyleSheetManager {
          return this._styleSheetManager;
       }
-
-      public function getImageUrlProperties(param1:String, param2:int, param3:int, param4:int=-4, param5:int=0) : IImageUrlProperties {
+      
+      public function getImageUrlProperties(param1:String, param2:int, param3:int, param4:int = -4, param5:int = 0) : IImageUrlProperties {
          return new ImageUrlProperties(param1,param2,param3,param4,param5);
       }
-
+      
       public function get tweenAnimator() : ITweenAnimator {
          return this._tweenAnimator;
       }
-
+      
       public function get animBuilder() : IAnimBuilder {
          return this._animBuilder;
       }
    }
-
 }

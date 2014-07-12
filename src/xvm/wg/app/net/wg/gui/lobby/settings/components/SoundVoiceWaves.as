@@ -2,19 +2,18 @@ package net.wg.gui.lobby.settings.components
 {
    import scaleform.clik.core.UIComponent;
    import flash.events.Event;
-
-
+   
    public class SoundVoiceWaves extends UIComponent
    {
-          
+      
       public function SoundVoiceWaves() {
          super();
       }
-
+      
       private var step:Number = 0;
-
+      
       private var finishFrame:uint;
-
+      
       public function speak(param1:Boolean) : void {
          if(param1)
          {
@@ -32,7 +31,7 @@ package net.wg.gui.lobby.settings.components
          }
          this.addEventListener(Event.ENTER_FRAME,this.anim);
       }
-
+      
       private function anim(param1:Event) : void {
          this.gotoAndStop(this.currentFrame + this.step);
          if(this.currentFrame == this.finishFrame)
@@ -41,5 +40,4 @@ package net.wg.gui.lobby.settings.components
          }
       }
    }
-
 }

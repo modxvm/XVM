@@ -13,11 +13,10 @@ package net.wg.gui.lobby.questsWindow
    import net.wg.gui.lobby.questsWindow.data.QuestRendererVO;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ComponentEvent;
-
-
+   
    public class QuestRenderer extends SoundListItemRenderer
    {
-          
+      
       public function QuestRenderer() {
          super();
          this.newIndicator.visible = false;
@@ -27,57 +26,57 @@ package net.wg.gui.lobby.questsWindow
          this.progressIndicator.visible = false;
          this.actionMC.visible = false;
       }
-
+      
       private static const DEF_COUNTER_Y:int = 27;
-
+      
       private static const COMPLEX_COUNTER_Y:int = 18;
-
+      
       private static function showLockTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.show(TOOLTIPS.QUESTS_COMPLEXTASK_LABEL);
       }
-
+      
       private static function showIGRTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.show(TOOLTIPS.QUESTS_IGR);
       }
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private static function showTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.show(TOOLTIPS.QUESTS_RENDERER_LABEL);
       }
-
+      
       public var newIndicator:MovieClip;
-
+      
       public var indicatorIGR:UILoaderAlt;
-
+      
       public var counter:QuestsCounter;
-
+      
       public var statusMC:QuestStatusComponent;
-
+      
       public var lockUpMC:MovieClip;
-
+      
       public var lockDownMC:MovieClip;
-
+      
       public var actionMC:MovieClip;
-
+      
       public var progressIndicator:ProgressQuestIndicator;
-
+      
       public var taskTF:TextField;
-
+      
       public var descrTF:TextFieldShort;
-
+      
       public var timerTF:TextField;
-
+      
       public var hitMc:MovieClip;
-
+      
       public var hitTooltipMc:MovieClip;
-
+      
       private var _status:String = "";
-
+      
       private var wasAnimated:Boolean = false;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.mouseChildren = true;
@@ -91,7 +90,7 @@ package net.wg.gui.lobby.questsWindow
          this.descrTF.textColor = QuestsStates.CLR_TASK_TF_NORMAL;
          this.descrTF.validateNow();
       }
-
+      
       private function addListeners() : void {
          this.hitTooltipMc.addEventListener(MouseEvent.CLICK,hideTooltip);
          this.hitTooltipMc.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
@@ -109,7 +108,7 @@ package net.wg.gui.lobby.questsWindow
          this.lockDownMC.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.lockDownMC.addEventListener(MouseEvent.ROLL_OVER,showLockTooltip);
       }
-
+      
       override protected function onDispose() : void {
          this.hitArea = null;
          this.newIndicator.hitArea = null;
@@ -132,7 +131,7 @@ package net.wg.gui.lobby.questsWindow
          this.progressIndicator.dispose();
          super.onDispose();
       }
-
+      
       private function removeListeners() : void {
          this.hitTooltipMc.removeEventListener(MouseEvent.CLICK,hideTooltip);
          this.hitTooltipMc.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
@@ -150,21 +149,21 @@ package net.wg.gui.lobby.questsWindow
          this.lockDownMC.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.lockDownMC.removeEventListener(MouseEvent.ROLL_OVER,showLockTooltip);
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          mouseChildren = true;
       }
-
+      
       override public function setData(param1:Object) : void {
          this.data = param1;
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:QuestRendererVO = null;
          if(isInvalid(InvalidationType.STATE))
@@ -205,7 +204,7 @@ package net.wg.gui.lobby.questsWindow
          this.mouseEnabled = true;
          this.newIndicator.mouseChildren = false;
       }
-
+      
       private function checkData(param1:QuestRendererVO) : void {
          this.setTexts(param1);
          this.checkStatus(param1);
@@ -215,27 +214,27 @@ package net.wg.gui.lobby.questsWindow
          this.checkIGR(param1);
          this.checkAction(param1);
       }
-
+      
       private function checkAction(param1:QuestRendererVO) : void {
          this.actionMC.visible = param1.eventType == QuestsStates.ACTION;
       }
-
+      
       private function checkLock(param1:QuestRendererVO) : void {
          this.lockUpMC.visible = param1.isLocked;
          this.lockDownMC.visible = param1.isLock;
       }
-
+      
       public function hideNew() : void {
          this.newIndicator.gotoAndStop("pause");
          this.newIndicator.newLabel.gotoAndPlay("hide");
       }
-
+      
       private function setTexts(param1:QuestRendererVO) : void {
          this.taskTF.text = param1.taskType;
          this.descrTF.label = param1.description;
          this.timerTF.htmlText = param1.timerDescr;
       }
-
+      
       private function checkProgress(param1:QuestRendererVO) : void {
          if((param1.progrBarType) && !param1.status)
          {
@@ -252,7 +251,7 @@ package net.wg.gui.lobby.questsWindow
             this.counter.y = COMPLEX_COUNTER_Y;
          }
       }
-
+      
       private function checkCounter(param1:QuestRendererVO) : void {
          if(param1.tasksCount >= 0 && !param1.status)
          {
@@ -265,7 +264,7 @@ package net.wg.gui.lobby.questsWindow
             this.counter.visible = false;
          }
       }
-
+      
       private function checkIGR(param1:QuestRendererVO) : void {
          this.indicatorIGR.visible = param1.IGR;
          if(this.indicatorIGR.visible)
@@ -274,7 +273,7 @@ package net.wg.gui.lobby.questsWindow
          }
          this.indicatorIGR.x = int(this.taskTF.x + this.taskTF.textWidth + 5);
       }
-
+      
       private function checkNew(param1:QuestRendererVO) : void {
          if(param1.isNew)
          {
@@ -290,7 +289,7 @@ package net.wg.gui.lobby.questsWindow
             this.newIndicator.gotoAndStop("pause");
          }
       }
-
+      
       private function checkStatus(param1:QuestRendererVO) : void {
          if(this._status != param1.status)
          {
@@ -300,11 +299,10 @@ package net.wg.gui.lobby.questsWindow
             this.descrTF.validateNow();
          }
       }
-
+      
       private function showNewTooltip(param1:MouseEvent) : void {
          var _loc2_:QuestRendererVO = QuestRendererVO(data);
          App.toolTipMgr.show(_loc2_.eventType == QuestsStates.ACTION?TOOLTIPS.QUESTS_NEWLABEL_ACTION:TOOLTIPS.QUESTS_NEWLABEL_TASK);
       }
    }
-
 }

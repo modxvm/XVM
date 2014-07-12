@@ -6,24 +6,23 @@ package net.wg.gui.historicalBattles.controls
    import scaleform.clik.interfaces.IDataProvider;
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.clik.controls.Button;
-
-
+   
    public class BattlesCarousel extends CarouselBase
    {
-          
+      
       public function BattlesCarousel() {
          super();
       }
-
+      
       public var carouselBG:MovieClip;
-
+      
       private var buttonGroup:ButtonGroup;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.buttonGroup = ButtonGroup.getGroup("renderersGroup",this);
       }
-
+      
       override protected function initPosition() : void {
          super.initPosition();
          if(this.carouselBG)
@@ -34,17 +33,17 @@ package net.wg.gui.historicalBattles.controls
             this.carouselBG.height = leftArrow.height;
          }
       }
-
+      
       override public function set dataProvider(param1:IDataProvider) : void {
          super.dataProvider = param1;
          invalidate(INIT_CAROUSEL);
       }
-
+      
       override protected function updateContainerPosition() : void {
          super.updateContainerPosition();
          this.carouselBG.visible = leftArrow.visible;
       }
-
+      
       override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void {
          super.updateRenderPosition(param1,param2,param3,param4);
          if(!this.buttonGroup.hasButton(Button(param1)))
@@ -53,5 +52,4 @@ package net.wg.gui.historicalBattles.controls
          }
       }
    }
-
 }

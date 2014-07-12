@@ -11,28 +11,27 @@ package net.wg.gui.lobby.techtree.controls
    import net.wg.gui.lobby.techtree.TechTreeEvent;
    import net.wg.data.constants.Tooltips;
    import scaleform.gfx.Extensions;
-
-
+   
    public class ResearchTitleBar extends UIComponent
    {
-          
+      
       public function ResearchTitleBar() {
          super();
          Extensions.enabled = true;
       }
-
+      
       private var _title:String = "";
-
+      
       private var _nation:String = "";
-
+      
       private var _hbID:int = -1;
-
+      
       public var titleField:TextField;
-
+      
       public var infoField:TextField;
-
+      
       public var returnButton:ReturnToTTButton;
-
+      
       public function setTitle(param1:String) : void {
          if(this._title == param1)
          {
@@ -41,7 +40,7 @@ package net.wg.gui.lobby.techtree.controls
          this._title = param1;
          invalidate(TTInvalidationType.TITLE);
       }
-
+      
       public function setNation(param1:String) : void {
          if(this._nation == param1)
          {
@@ -50,17 +49,17 @@ package net.wg.gui.lobby.techtree.controls
          this._nation = param1;
          invalidate(TTInvalidationType.NATION);
       }
-
+      
       public function setHBID(param1:int) : void {
          this._hbID = param1;
       }
-
+      
       public function setInfoMessage(param1:String) : void {
          this.infoField.htmlText = param1;
          this.infoField.visible = (param1) && param1.length > 0;
          this.centerInfoField();
       }
-
+      
       override protected function onDispose() : void {
          if(this.returnButton != null)
          {
@@ -74,7 +73,7 @@ package net.wg.gui.lobby.techtree.controls
          }
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          constraints = new Constraints(this);
          if(this.titleField != null)
@@ -93,7 +92,7 @@ package net.wg.gui.lobby.techtree.controls
          }
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(TTInvalidationType.TITLE)) && !(this.titleField == null))
@@ -119,26 +118,25 @@ package net.wg.gui.lobby.techtree.controls
             this.centerInfoField();
          }
       }
-
+      
       private function handleClickReturnButton(param1:ButtonEvent) : void {
          dispatchEvent(new TechTreeEvent(TechTreeEvent.RETURN_2_TECHTREE));
       }
-
+      
       private function onInfoFieldRollOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onInfoFieldRollOver(param1:MouseEvent) : void {
          if(this._hbID != -1)
          {
             App.toolTipMgr.showSpecial(Tooltips.HISTORICAL_MODULES,null,this._hbID);
          }
       }
-
+      
       private function centerInfoField() : void {
          this.infoField.width = this.infoField.textWidth;
          this.infoField.x = this.titleField.width - this.infoField.width >> 1;
       }
    }
-
 }

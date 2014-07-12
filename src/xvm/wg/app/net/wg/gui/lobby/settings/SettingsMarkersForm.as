@@ -9,63 +9,62 @@ package net.wg.gui.lobby.settings
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.ListEvent;
    import net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent;
-
-
+   
    public class SettingsMarkersForm extends UIComponent
    {
-          
+      
       public function SettingsMarkersForm() {
          super();
       }
-
+      
       private var _id:String = null;
-
+      
       private var _data:Object = null;
-
+      
       public var markerHeader:TextField = null;
-
+      
       public var markerHP:TextField = null;
-
+      
       public var markerHeaderAlt:TextField = null;
-
+      
       public var markerHPAlt:TextField = null;
-
+      
       public var markerBaseIconCheckbox:CheckBox = null;
-
+      
       public var markerBaseLevelCheckbox:CheckBox = null;
-
+      
       public var markerBaseVehicleNameCheckbox:CheckBox = null;
-
+      
       public var markerBasePlayerNameCheckbox:CheckBox = null;
-
+      
       public var markerBaseHpIndicatorCheckbox:CheckBox = null;
-
+      
       public var markerBaseHpDropDown:DropdownMenu = null;
-
+      
       public var markerBaseDamageCheckbox:CheckBox = null;
-
+      
       public var markerAltIconCheckbox:CheckBox = null;
-
+      
       public var markerAltLevelCheckbox:CheckBox = null;
-
+      
       public var markerAltVehicleNameCheckbox:CheckBox = null;
-
+      
       public var markerAltPlayerNameCheckbox:CheckBox = null;
-
+      
       public var markerAltHpIndicatorCheckbox:CheckBox = null;
-
+      
       public var markerAltHpDropDown:DropdownMenu = null;
-
+      
       public var markerAltDamageCheckbox:CheckBox = null;
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       public function setData(param1:String, param2:Object) : void {
          var _loc3_:String = null;
          var _loc4_:SettingsControlProp = null;
@@ -75,7 +74,7 @@ package net.wg.gui.lobby.settings
          if(param2 != null)
          {
             this._data = param2;
-            for (_loc3_ in this._data)
+            for(_loc3_ in this._data)
             {
                _loc4_ = SettingsControlProp(this._data[_loc3_]);
                if(this[_loc3_ + _loc4_.type])
@@ -110,25 +109,25 @@ package net.wg.gui.lobby.settings
             this.disableAllControls();
          }
       }
-
+      
       private function onDropDownChange(param1:ListEvent) : void {
          var _loc2_:DropdownMenu = DropdownMenu(param1.target);
          var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
          var _loc4_:String = this.getAltPrefix(_loc3_);
          dispatchEvent(new SettingsSubVewEvent(SettingsSubVewEvent.ON_CONTROL_CHANGE,this._id,_loc3_,_loc2_.selectedIndex,_loc4_));
       }
-
+      
       private function onCheckBoxSelected(param1:Event) : void {
          var _loc2_:CheckBox = CheckBox(param1.target);
          var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
          var _loc4_:String = this.getAltPrefix(_loc3_);
          dispatchEvent(new SettingsSubVewEvent(SettingsSubVewEvent.ON_CONTROL_CHANGE,this._id,_loc3_,_loc2_.selected,_loc4_));
       }
-
+      
       private function getAltPrefix(param1:String) : String {
          return param1.indexOf("Alt",0) >= 0?"Alt":"";
       }
-
+      
       private function disableAllControls() : void {
          this.markerBaseIconCheckbox.enabled = false;
          this.markerBaseLevelCheckbox.enabled = false;
@@ -145,7 +144,7 @@ package net.wg.gui.lobby.settings
          this.markerAltHpDropDown.enabled = false;
          this.markerAltDamageCheckbox.enabled = false;
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:String = null;
          var _loc2_:SettingsControlProp = null;
@@ -153,7 +152,7 @@ package net.wg.gui.lobby.settings
          var _loc4_:DropdownMenu = null;
          if(this._data != null)
          {
-            for (_loc1_ in this._data)
+            for(_loc1_ in this._data)
             {
                _loc2_ = SettingsControlProp(this._data[_loc1_]);
                if(this[_loc1_ + _loc2_.type])
@@ -188,5 +187,4 @@ package net.wg.gui.lobby.settings
          super.onDispose();
       }
    }
-
 }

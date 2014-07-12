@@ -6,18 +6,17 @@ package net.wg.gui.cyberSport.views
    import net.wg.gui.components.advanced.ToggleButton;
    import net.wg.gui.cyberSport.controls.DoubleSlider;
    import net.wg.gui.cyberSport.controls.RosterButtonGroup;
-   import net.wg.gui.cyberSport.controls.SettingRosterVO;
+   import net.wg.gui.rally.vo.SettingRosterVO;
    import flash.events.Event;
    import scaleform.clik.events.SliderEvent;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.clik.controls.Button;
    import net.wg.gui.cyberSport.views.events.RosterSettingsEvent;
    import flash.display.InteractiveObject;
-
-
+   
    public class RangeRosterSettingsView extends UIComponent implements IViewStackContent
    {
-          
+      
       public function RangeRosterSettingsView() {
          this.selectedNations = [];
          this.selectedTypes = [];
@@ -25,61 +24,61 @@ package net.wg.gui.cyberSport.views
          super();
          this.guiNations = App.utils.nations.getNations();
       }
-
+      
       private static const NATION_TYPE_GROUP:String = "rosterGroup";
-
+      
       private static const VEHICLE_TYPE_GROUP:String = "vehicleTypeGroup";
-
+      
       private static const UPDATE_ROSTER_DATA:String = "updateRosterData";
-
+      
       public var flagsField:FieldSet;
-
+      
       public var vTypeField:FieldSet;
-
+      
       public var sliderField:FieldSet;
-
+      
       public var usaFlag:ToggleButton;
-
+      
       public var japanFlag:ToggleButton;
-
+      
       public var germanyFlag:ToggleButton;
-
+      
       public var ukFlag:ToggleButton;
-
+      
       public var franceFlag:ToggleButton;
-
+      
       public var chinaFlag:ToggleButton;
-
+      
       public var ussrFlag:ToggleButton;
-
+      
       public var heavyBtn:ToggleButton;
-
+      
       public var mediumBtn:ToggleButton;
-
+      
       public var lightBtn:ToggleButton;
-
+      
       public var atSpgBtn:ToggleButton;
-
+      
       public var spgBtn:ToggleButton;
-
+      
       public var doubleSlider:DoubleSlider;
-
+      
       private var nationButtonGroup:RosterButtonGroup;
-
+      
       private var vTypeButtonGroup:RosterButtonGroup;
-
+      
       private var flagsButtons:Array;
-
+      
       private var vTypesButtons:Array;
-
+      
       private var model:SettingRosterVO;
-
+      
       private var selectedNations:Array;
-
+      
       private var selectedTypes:Array;
-
+      
       private var guiNations:Array;
-
+      
       public function update(param1:Object) : void {
          if(param1 == null)
          {
@@ -88,21 +87,21 @@ package net.wg.gui.cyberSport.views
          this.model = param1 as SettingRosterVO;
          invalidate(UPDATE_ROSTER_DATA);
       }
-
+      
       private function addListeners() : void {
          this.nationButtonGroup.addEventListener(Event.CHANGE,this.nationButtonGroup_changeHandler);
          this.doubleSlider.addEventListener(SliderEvent.FIRST_VALUE_CHANGE,this.doubleSlider_firstValueChangeHandler);
          this.doubleSlider.addEventListener(SliderEvent.VALUE_CHANGE,this.doubleSlider_firstValueChangeHandler);
          this.vTypeButtonGroup.addEventListener(Event.CHANGE,this.vTypeButtonGroup_changeHandler);
       }
-
+      
       public function removeListeners() : void {
          this.nationButtonGroup.removeEventListener(Event.CHANGE,this.nationButtonGroup_changeHandler);
          this.doubleSlider.removeEventListener(SliderEvent.FIRST_VALUE_CHANGE,this.doubleSlider_firstValueChangeHandler);
          this.doubleSlider.removeEventListener(SliderEvent.VALUE_CHANGE,this.doubleSlider_firstValueChangeHandler);
          this.vTypeButtonGroup.removeEventListener(Event.CHANGE,this.vTypeButtonGroup_changeHandler);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.nationButtonGroup = RosterButtonGroup.getGroup(NATION_TYPE_GROUP,this);
@@ -116,7 +115,7 @@ package net.wg.gui.cyberSport.views
          this.updateGroups(this.vTypesButtons,VEHICLE_TYPE_GROUP);
          this.addListeners();
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.removeListeners();
@@ -132,7 +131,7 @@ package net.wg.gui.cyberSport.views
          this.vTypesButtons.splice(0,this.vTypesButtons.length);
          this.guiNations.splice(0,this.guiNations.length);
       }
-
+      
       private function disposeItems(param1:Array) : void {
          var _loc2_:uint = param1.length;
          var _loc3_:* = 0;
@@ -142,7 +141,7 @@ package net.wg.gui.cyberSport.views
             _loc3_++;
          }
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(UPDATE_ROSTER_DATA)) && (this.model))
@@ -150,7 +149,7 @@ package net.wg.gui.cyberSport.views
             this.autoSelect();
          }
       }
-
+      
       private function updateGroups(param1:Array, param2:String) : void {
          var _loc3_:uint = param1.length;
          var _loc4_:* = 0;
@@ -164,7 +163,7 @@ package net.wg.gui.cyberSport.views
             _loc4_++;
          }
       }
-
+      
       private function autoSelect() : void {
          var _loc3_:Array = null;
          var _loc8_:* = 0;
@@ -210,22 +209,20 @@ package net.wg.gui.cyberSport.views
          }
          if(_loc3_.length > 1)
          {
-            this.doubleSlider.leftValue = _loc3_[0]-1;
-            this.doubleSlider.value = _loc3_[1]-1;
+            this.doubleSlider.leftValue = _loc3_[0] - 1;
+            this.doubleSlider.value = _loc3_[1] - 1;
          }
-         else
+         else if(_loc3_.length == 0)
          {
-            if(_loc3_.length == 0)
-            {
-               this.doubleSlider.leftValue = 0;
-               this.doubleSlider.value = 7;
-            }
+            this.doubleSlider.leftValue = 0;
+            this.doubleSlider.value = 7;
          }
+         
          this.addListeners();
          this.dispatchChangeRoster();
       }
-
-      public function setDefaultState(param1:Boolean=true) : void {
+      
+      public function setDefaultState(param1:Boolean = true) : void {
          this.removeListeners();
          var _loc2_:int = this.flagsButtons.length;
          var _loc3_:* = 0;
@@ -249,19 +246,19 @@ package net.wg.gui.cyberSport.views
             this.dispatchChangeRoster();
          }
       }
-
+      
       private function nationButtonGroup_changeHandler(param1:Event) : void {
          this.selectedNations = this.nationButtonGroup.rangeData;
          this.model.nationIDRange = this.selectedNations;
          this.dispatchChangeRoster();
       }
-
+      
       private function vTypeButtonGroup_changeHandler(param1:Event) : void {
          this.selectedTypes = this.vTypeButtonGroup.rangeData;
          this.model.vTypeRange = this.selectedTypes;
          this.dispatchChangeRoster();
       }
-
+      
       private function doubleSlider_firstValueChangeHandler(param1:SliderEvent) : void {
          if(param1.type == SliderEvent.FIRST_VALUE_CHANGE)
          {
@@ -271,20 +268,18 @@ package net.wg.gui.cyberSport.views
                this.model.vLevelRange[1] = 8;
             }
          }
-         else
+         else if(param1.type == SliderEvent.VALUE_CHANGE)
          {
-            if(param1.type == SliderEvent.VALUE_CHANGE)
+            this.model.vLevelRange[1] = param1.value + 1;
+            if(this.model.vLevelRange[0] == null)
             {
-               this.model.vLevelRange[1] = param1.value + 1;
-               if(this.model.vLevelRange[0] == null)
-               {
-                  this.model.vLevelRange[0] = 1;
-               }
+               this.model.vLevelRange[0] = 1;
             }
          }
+         
          this.dispatchChangeRoster();
       }
-
+      
       private function checkSliderValues() : void {
          var _loc1_:int = this.doubleSlider.leftValue + 1;
          var _loc2_:int = this.doubleSlider.value + 1;
@@ -293,15 +288,18 @@ package net.wg.gui.cyberSport.views
             this.model.vLevelRange = [];
          }
       }
-
+      
       private function dispatchChangeRoster() : void {
          this.checkSliderValues();
          dispatchEvent(new RosterSettingsEvent(RosterSettingsEvent.RANGE_ROSTER_CHANGED,this.model));
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

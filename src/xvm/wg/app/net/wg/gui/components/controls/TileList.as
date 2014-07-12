@@ -11,28 +11,27 @@ package net.wg.gui.components.controls
    import scaleform.clik.controls.ScrollIndicator;
    import flash.display.DisplayObject;
    import net.wg.utils.IEventCollector;
-
-
+   
    public class TileList extends scaleform.clik.controls.TileList
    {
-          
+      
       public function TileList() {
          super();
          componentInspectorSetting = true;
       }
-
+      
       public var showEmptyItems:Boolean;
-
+      
       public var showBackground:Boolean = true;
-
+      
       public var background:Sprite = null;
-
+      
       protected var _scrollBarPadding:Padding;
-
+      
       public var paddingBottom:Number = 0;
-
+      
       public var paddingRight:Number = 0;
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(this.scrollBarPadding == null)
@@ -40,16 +39,24 @@ package net.wg.gui.components.controls
             this.scrollBarPadding = new Padding();
          }
       }
-
+      
       override protected function populateData(param1:Array) : void {
          var _loc5_:IListItemRenderer = null;
          var _loc6_:uint = 0;
          var _loc7_:ListData = null;
+         if(_baseDisposed)
+         {
+            return;
+         }
          var _loc2_:uint = param1.length;
          var _loc3_:uint = _renderers.length;
          var _loc4_:uint = 0;
          while(_loc4_ < _loc3_)
          {
+            if(_baseDisposed)
+            {
+               return;
+            }
             _loc5_ = getRendererAt(_loc4_);
             _loc6_ = _scrollPosition * (_direction == DirectionMode.HORIZONTAL?_totalRows:_totalColumns) + _loc4_;
             _loc7_ = new ListData(_loc6_,itemToLabel(param1[_loc4_]),_selectedIndex == _loc6_);
@@ -59,17 +66,15 @@ package net.wg.gui.components.controls
             {
                _loc5_.enabled = false;
             }
+            else if(param1[_loc4_].hasOwnProperty("enabled"))
+            {
+               _loc5_.enabled = param1[_loc4_].enabled;
+            }
             else
             {
-               if(param1[_loc4_].hasOwnProperty("enabled"))
-               {
-                  _loc5_.enabled = param1[_loc4_].enabled;
-               }
-               else
-               {
-                  _loc5_.enabled = true;
-               }
+               _loc5_.enabled = true;
             }
+            
             _loc5_.validateNow();
             if(!this.showEmptyItems)
             {
@@ -78,7 +83,7 @@ package net.wg.gui.components.controls
             _loc4_++;
          }
       }
-
+      
       override protected function drawLayout() : void {
          var _loc6_:IListItemRenderer = null;
          var _loc1_:uint = _renderers.length;
@@ -107,16 +112,16 @@ package net.wg.gui.components.controls
          }
          this.drawScrollBar();
       }
-
+      
       public function get scrollBarPadding() : Padding {
          return this._scrollBarPadding;
       }
-
+      
       public function set scrollBarPadding(param1:Padding) : void {
          this._scrollBarPadding = param1;
          invalidateSize();
       }
-
+      
       public function set inspectableScrollBarPadding(param1:Object) : void {
          if(!componentInspectorSetting)
          {
@@ -124,7 +129,7 @@ package net.wg.gui.components.controls
          }
          this.scrollBarPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
       }
-
+      
       override protected function drawScrollBar() : void {
          var _loc1_:ScrollIndicator = null;
          if(!_autoScrollBar)
@@ -149,15 +154,15 @@ package net.wg.gui.components.controls
          }
          _scrollBar.validateNow();
       }
-
+      
       override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
          super.cleanUpRenderer(param1);
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -188,6 +193,10 @@ package net.wg.gui.components.controls
             {
                gotoAndPlay(_newFrame);
                _newFrame = null;
+            }
+            if(_baseDisposed)
+            {
+               return;
             }
          }
          if(!_usingExternalRenderers && (isInvalid(InvalidationType.RENDERERS)))
@@ -239,7 +248,7 @@ package net.wg.gui.components.controls
             this.background.visible = this.showBackground;
          }
       }
-
+      
       override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
          super.calculateRendererTotal(param1,param2);
          _totalRows = availableHeight / (rowHeight + this.paddingBottom) >> 0;
@@ -248,5 +257,4 @@ package net.wg.gui.components.controls
          return _totalRenderers;
       }
    }
-
 }

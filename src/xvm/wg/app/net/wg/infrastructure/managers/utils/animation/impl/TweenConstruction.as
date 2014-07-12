@@ -3,7 +3,6 @@ package net.wg.infrastructure.managers.utils.animation.impl
    import net.wg.utils.animation.ITweenConstruction;
    import net.wg.data.TweenDataByType;
    import net.wg.infrastructure.interfaces.ITweenTypesDuration;
-   import __AS3__.vec.*;
    import net.wg.data.constants.TweenTypes;
    import net.wg.data.constants.TweenConstraints;
    import org.idmedia.as3commons.util.Map;
@@ -20,11 +19,10 @@ package net.wg.infrastructure.managers.utils.animation.impl
    import flash.display.MovieClip;
    import net.wg.infrastructure.interfaces.ITweenPropertiesVO;
    import net.wg.data.constants.DelayTypes;
-
-
+   
    public class TweenConstruction extends Object implements ITweenConstruction
    {
-          
+      
       public function TweenConstruction(param1:DisplayObject, param2:ITweenConstructionHandler) {
          this.tweensData = new Vector.<TweenLinkedObjects>(0);
          this.startStateTarget = {};
@@ -39,13 +37,13 @@ package net.wg.infrastructure.managers.utils.animation.impl
          this.tweenWrapper = new TweenWrapper(param1.parent,param1);
          this._tweenConstructionHandler = param2;
       }
-
-      public static const IDENTICAL_TYPES:Vector.<TweenDataByType> = new Vector.<TweenDataByType>(5);
-
+      
+      public static const IDENTICAL_TYPES:Vector.<TweenDataByType>;
+      
       private static const GLOBAL_DELAY_IDX:int = 0;
-
+      
       private static const LOCAL_DELAY_IDX:int = 1;
-
+      
       private static function getTweenSettingByType(param1:String) : ITweenTypesDuration {
          var _loc2_:* = 0;
          while(_loc2_ < IDENTICAL_TYPES.length)
@@ -58,88 +56,88 @@ package net.wg.infrastructure.managers.utils.animation.impl
          }
          return null;
       }
-
+      
       private var tweenTypesMap:Map = null;
-
+      
       private var pythonTweenCreators:Map = null;
-
+      
       private var _target:DisplayObject = null;
-
+      
       private var tweensData:Vector.<TweenLinkedObjects>;
-
+      
       private var _tweenConstructionHandler:ITweenConstructionHandler = null;
-
+      
       private var firstPlayingElement:TweenLinkedObjects = null;
-
+      
       private var lastPlayingElement:TweenLinkedObjects = null;
-
+      
       private var tweenWrapper:TweenWrapper = null;
-
+      
       private var startStateTarget:Object;
-
+      
       private var stateTargetAfterAnim:Object;
-
-      public function addFadeIn(param1:int, param2:String="global") : ITweenConstruction {
+      
+      public function addFadeIn(param1:int, param2:String = "global") : ITweenConstruction {
          this.createPythonTween(TweenTypes.FADE_IN,param1,param2);
          return this;
       }
-
-      public function addFadeOut(param1:int, param2:String="global") : ITweenConstruction {
+      
+      public function addFadeOut(param1:int, param2:String = "global") : ITweenConstruction {
          this.createPythonTween(TweenTypes.FADE_OUT,param1,param2);
          return this;
       }
-
-      public function addMoveUp(param1:int, param2:String="global") : ITweenConstruction {
+      
+      public function addMoveUp(param1:int, param2:String = "global") : ITweenConstruction {
          this.createPythonTween(TweenTypes.MOVE_UP,param1,param2);
          return this;
       }
-
-      public function addMoveDown(param1:int, param2:String="global") : ITweenConstruction {
+      
+      public function addMoveDown(param1:int, param2:String = "global") : ITweenConstruction {
          this.createPythonTween(TweenTypes.MOVE_DOWN,param1,param2);
          return this;
       }
-
-      public function addHalfTurn(param1:int, param2:String="global") : ITweenConstruction {
+      
+      public function addHalfTurn(param1:int, param2:String = "global") : ITweenConstruction {
          this.createPythonTween(TweenTypes.TURN_HALF,param1,param2);
          return this;
       }
-
-      public function addGlowIn(param1:int, param2:String="global") : ITweenConstruction {
+      
+      public function addGlowIn(param1:int, param2:String = "global") : ITweenConstruction {
          this.createFlashTween(Linkages.GLOW_IN_ANIM,param1,param2);
          return this;
       }
-
-      public function addGlowOut(param1:int, param2:String="global") : ITweenConstruction {
+      
+      public function addGlowOut(param1:int, param2:String = "global") : ITweenConstruction {
          this.createFlashTween(Linkages.GLOW_OUT_ANIM,param1,param2);
          return this;
       }
-
-      public function addShadowIn(param1:int, param2:String="global") : ITweenConstruction {
+      
+      public function addShadowIn(param1:int, param2:String = "global") : ITweenConstruction {
          this.createFlashTween(Linkages.SHADOW_IN_ANIM,param1,param2);
          return this;
       }
-
-      public function addShadowOut(param1:int, param2:String="global") : ITweenConstruction {
+      
+      public function addShadowOut(param1:int, param2:String = "global") : ITweenConstruction {
          this.createFlashTween(Linkages.SHADOW_OUT_ANIM,param1,param2);
          return this;
       }
-
-      public function addTween(param1:ITween, param2:int, param3:String="global") : ITweenConstruction {
+      
+      public function addTween(param1:ITween, param2:int, param3:String = "global") : ITweenConstruction {
          this.addInStack(new TweenLinkedObjects(param1,param2,param3));
          return this;
       }
-
+      
       public function start() : void {
          var _loc1_:TweenLinkedObjects = null;
          var _loc2_:ITween = null;
-         for each (_loc1_ in this.tweensData)
+         for each(_loc1_ in this.tweensData)
          {
             _loc2_ = _loc1_.tween;
             _loc2_.resetAnimS();
             _loc2_.setPausedS(false);
          }
       }
-
+      
       public function onComplete(param1:ITween) : void {
          var _loc3_:TweenLinkedObjects = null;
          var _loc2_:ISimpleTweenPropertiesVO = ISimpleTweenPropertiesVO(param1.props);
@@ -147,7 +145,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
          {
             this._tweenConstructionHandler.onComplete(_loc2_);
          }
-         for each (_loc3_ in this.tweensData)
+         for each(_loc3_ in this.tweensData)
          {
             if(_loc3_ == this.lastPlayingElement && _loc3_.tween == param1)
             {
@@ -158,11 +156,11 @@ package net.wg.infrastructure.managers.utils.animation.impl
             }
          }
       }
-
+      
       public function onStart(param1:ITween) : void {
          var _loc3_:TweenLinkedObjects = null;
          var _loc2_:ISimpleTweenPropertiesVO = ISimpleTweenPropertiesVO(param1.props);
-         for each (_loc3_ in this.tweensData)
+         for each(_loc3_ in this.tweensData)
          {
             if(_loc3_ == this.firstPlayingElement && _loc3_.tween == param1)
             {
@@ -178,7 +176,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
             this._tweenConstructionHandler.onStart(_loc2_);
          }
       }
-
+      
       public function dispose() : void {
          var _loc1_:TweenLinkedObjects = null;
          while(this.tweensData.length > 0)
@@ -195,7 +193,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
          this._target = null;
          this._tweenConstructionHandler = null;
       }
-
+      
       public function removeTween(param1:int) : void {
          var _loc8_:String = null;
          var _loc9_:Iterator = null;
@@ -229,11 +227,11 @@ package net.wg.infrastructure.managers.utils.animation.impl
          this.firstPlayingElement = this.findFirstPlayingElement();
          this.lastPlayingElement = this.findLastPlayingElement();
       }
-
+      
       public function countTweens() : int {
          return this.tweensData.length;
       }
-
+      
       public function getAllTweens() : Vector.<ISimpleTweenPropertiesVO> {
          var _loc1_:Vector.<ISimpleTweenPropertiesVO> = new Vector.<ISimpleTweenPropertiesVO>(0);
          var _loc2_:* = 0;
@@ -244,48 +242,42 @@ package net.wg.infrastructure.managers.utils.animation.impl
          }
          return _loc1_;
       }
-
+      
       public function getTweenByIdx(param1:int) : ISimpleTweenPropertiesVO {
          var _loc2_:* = "Not element with such index!";
          this.getAsserter().assert(param1 < this.tweensData.length,_loc2_);
          return this.tweensData[param1].tween.props;
       }
-
+      
       private function createStartParams() : void {
          var _loc2_:String = null;
-         new Vector.<String>(6)[0] = "x";
-         new Vector.<String>(6)[1] = "y";
-         new Vector.<String>(6)[2] = "alpha";
-         new Vector.<String>(6)[3] = "rotation";
-         new Vector.<String>(6)[4] = "scaleX";
-         new Vector.<String>(6)[5] = "scaleY";
-         var _loc1_:Vector.<String> = new Vector.<String>(6);
-         for each (_loc2_ in _loc1_)
+         var _loc1_:Vector.<String> = new <String>["x","y","alpha","rotation","scaleX","scaleY"];
+         for each(_loc2_ in _loc1_)
          {
-            if(_loc2_  in  this._target)
+            if(_loc2_ in this._target)
             {
                this.stateTargetAfterAnim[_loc2_] = this.startStateTarget[_loc2_] = this._target[_loc2_];
             }
          }
       }
-
+      
       private function createFlashTween(param1:String, param2:int, param3:String) : void {
          var _loc4_:ITween = this.createFrameBasedTween(param1);
          this.addInStack(new TweenLinkedObjects(_loc4_,param2,param3));
       }
-
+      
       private function getAsserter() : IAssertable {
          return App.utils.asserter;
       }
-
+      
       private function getAnimator() : ITweenAnimator {
          return App.utils.tweenAnimator;
       }
-
+      
       private function getCommon() : ICommons {
          return App.utils.commons;
       }
-
+      
       private function findTweenDataByType(param1:String) : Vector.<int> {
          var _loc2_:Vector.<int> = new Vector.<int>(0);
          var _loc3_:* = 0;
@@ -299,7 +291,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
          }
          return _loc2_;
       }
-
+      
       private function createPythonTween(param1:String, param2:int, param3:String) : void {
          var _loc4_:ITween = null;
          this.setParamsToTarget(this.stateTargetAfterAnim);
@@ -312,32 +304,30 @@ package net.wg.infrastructure.managers.utils.animation.impl
             _loc4_ = this.pythonTweenCreators.get(param1)(this.tweenWrapper);
          }
          var _loc5_:Object = TweenDataByType.getPropertyChanges(param1);
-         if(_loc5_.propertyName  in  this.stateTargetAfterAnim)
+         if(_loc5_.propertyName in this.stateTargetAfterAnim)
          {
             if(_loc5_.type == TweenDataByType.TYPE_ADD)
             {
                this.stateTargetAfterAnim[_loc5_.propertyName] = this.stateTargetAfterAnim[_loc5_.propertyName] + _loc5_.value;
             }
-            else
+            else if(_loc5_.type == TweenDataByType.TYPE_SET)
             {
-               if(_loc5_.type == TweenDataByType.TYPE_SET)
-               {
-                  this.stateTargetAfterAnim[_loc5_.propertyName] = _loc5_.value;
-               }
+               this.stateTargetAfterAnim[_loc5_.propertyName] = _loc5_.value;
             }
+            
          }
          this.addInStack(new TweenLinkedObjects(_loc4_,param2,param3));
          this.setParamsToTarget(this.startStateTarget);
       }
-
+      
       private function setParamsToTarget(param1:Object) : void {
          var _loc2_:String = null;
-         for (_loc2_ in param1)
+         for(_loc2_ in param1)
          {
             this.tweenWrapper[_loc2_] = this.stateTargetAfterAnim[_loc2_];
          }
       }
-
+      
       private function createFrameBasedTween(param1:String) : ITween {
          var _loc2_:* = "Didn\'t found class " + param1 + " in list of frame based tweens!";
          var _loc3_:String = this.tweenTypesMap.get(param1);
@@ -350,8 +340,8 @@ package net.wg.infrastructure.managers.utils.animation.impl
          _loc7_.memberData = {"type":_loc3_};
          return _loc7_;
       }
-
-      private function getDelays(param1:int, param2:String="global") : Array {
+      
+      private function getDelays(param1:int, param2:String = "global") : Array {
          var _loc5_:TweenLinkedObjects = null;
          var _loc3_:* = 0;
          var _loc4_:* = 0;
@@ -360,18 +350,16 @@ package net.wg.infrastructure.managers.utils.animation.impl
             _loc3_ = param1;
             _loc4_ = param1;
          }
-         else
+         else if(param2 == DelayTypes.LOCAL)
          {
-            if(param2 == DelayTypes.LOCAL)
-            {
-               _loc5_ = this.tweensData[this.tweensData.length-1];
-               _loc3_ = _loc5_.delay + _loc5_.tween.props.getDuration() + param1;
-               _loc4_ = param1;
-            }
+            _loc5_ = this.tweensData[this.tweensData.length - 1];
+            _loc3_ = _loc5_.delay + _loc5_.tween.props.getDuration() + param1;
+            _loc4_ = param1;
          }
+         
          return [_loc3_,_loc4_];
       }
-
+      
       private function addInStack(param1:TweenLinkedObjects) : void {
          var _loc2_:* = "Tweens with identical type will not be executed in at one time!";
          this.getAsserter().assert(this.tweensAreNotCrossedInTime(param1),_loc2_);
@@ -385,7 +373,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
          this.firstPlayingElement = this.findFirstPlayingElement();
          this.lastPlayingElement = this.findLastPlayingElement();
       }
-
+      
       private function findFirstPlayingElement() : TweenLinkedObjects {
          var _loc3_:TweenLinkedObjects = null;
          var _loc1_:TweenLinkedObjects = null;
@@ -408,7 +396,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
          }
          return _loc1_;
       }
-
+      
       private function findLastPlayingElement() : TweenLinkedObjects {
          var _loc3_:TweenLinkedObjects = null;
          var _loc4_:* = 0;
@@ -435,7 +423,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
             }
             else
             {
-               _loc6_ = this.tweensData[_loc2_-1];
+               _loc6_ = this.tweensData[_loc2_ - 1];
                _loc7_ = _loc6_.tween.props.getGlobalDelay() + _loc6_.tween.props.getDuration();
                if(_loc1_.tween.props.getGlobalDelay() <= _loc7_)
                {
@@ -446,7 +434,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
          }
          return _loc1_;
       }
-
+      
       private function tweensAreNotCrossedInTime(param1:TweenLinkedObjects) : Boolean {
          var _loc4_:Object = null;
          var _loc5_:* = 0;
@@ -487,59 +475,58 @@ package net.wg.infrastructure.managers.utils.animation.impl
          return true;
       }
    }
+}
+import net.wg.infrastructure.interfaces.entity.IDisposable;
+import net.wg.infrastructure.interfaces.ITween;
+import net.wg.data.constants.Errors;
+import net.wg.utils.IAssertable;
 
-}   import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import net.wg.infrastructure.interfaces.ITween;
-   import net.wg.data.constants.Errors;
-   import net.wg.utils.IAssertable;
-
-
-   class TweenLinkedObjects extends Object implements IDisposable
-   {
-          
-      function TweenLinkedObjects(param1:ITween, param2:int, param3:String) {
-         super();
-         var _loc4_:String = "curTween" + Errors.CANT_NULL;
-         var _loc5_:String = "curDelayType" + Errors.CANT_NULL;
-         var _loc6_:IAssertable = App.utils.asserter;
-         _loc6_.assertNotNull(param1,_loc4_);
-         _loc6_.assertNotNull(param3,_loc5_);
-         this._tween = param1;
-         this._type = param3;
-         this._delay = param2;
-      }
-
-      private var _tween:ITween = null;
-
-      private var _type:String = null;
-
-      private var _delay:int;
-
-      public function get tween() : ITween {
-         return this._tween;
-      }
-
-      public function set tween(param1:ITween) : void {
-         this._tween = param1;
-      }
-
-      public function get type() : String {
-         return this._type;
-      }
-
-      public function set type(param1:String) : void {
-         this._type = param1;
-      }
-
-      public function dispose() : void {
-         this._tween = null;
-      }
-
-      public function get delay() : int {
-         return this._delay;
-      }
-
-      public function set delay(param1:int) : void {
-         this._delay = param1;
-      }
+class TweenLinkedObjects extends Object implements IDisposable
+{
+   
+   function TweenLinkedObjects(param1:ITween, param2:int, param3:String) {
+      super();
+      var _loc4_:String = "curTween" + Errors.CANT_NULL;
+      var _loc5_:String = "curDelayType" + Errors.CANT_NULL;
+      var _loc6_:IAssertable = App.utils.asserter;
+      _loc6_.assertNotNull(param1,_loc4_);
+      _loc6_.assertNotNull(param3,_loc5_);
+      this._tween = param1;
+      this._type = param3;
+      this._delay = param2;
    }
+   
+   private var _tween:ITween = null;
+   
+   private var _type:String = null;
+   
+   private var _delay:int;
+   
+   public function get tween() : ITween {
+      return this._tween;
+   }
+   
+   public function set tween(param1:ITween) : void {
+      this._tween = param1;
+   }
+   
+   public function get type() : String {
+      return this._type;
+   }
+   
+   public function set type(param1:String) : void {
+      this._type = param1;
+   }
+   
+   public function dispose() : void {
+      this._tween = null;
+   }
+   
+   public function get delay() : int {
+      return this._delay;
+   }
+   
+   public function set delay(param1:int) : void {
+      this._delay = param1;
+   }
+}

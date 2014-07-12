@@ -11,32 +11,31 @@ package net.wg.gui.prebattle.squad
    import net.wg.data.constants.Values;
    import net.wg.gui.prebattle.constants.PrebattleStateString;
    import flash.events.MouseEvent;
-
-
+   
    public class SquadItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function SquadItemRenderer() {
          super();
          soundType = "squad";
       }
-
+      
       private static var UPDATE_STATUS:String = "updateStatus";
-
+      
       public var vehicleLevelField:TextField;
-
+      
       public var status:MovieClip;
-
+      
       public var vehicleNameField:TextField;
-
+      
       public var voiceWave:VoiceWave;
-
+      
       protected var statusString:String = null;
-
+      
       protected var playerNameStr:String = "";
-
+      
       private var currentDbID:Number = -1;
-
+      
       override public function setData(param1:Object) : void {
          if(param1 == null)
          {
@@ -56,7 +55,7 @@ package net.wg.gui.prebattle.squad
          this.data = param1;
          invalidate(UPDATE_STATUS);
       }
-
+      
       public function onPlayerSpeak(param1:Number, param2:Boolean) : void {
          if((this.model) && param1 == this.model.dbID)
          {
@@ -67,11 +66,11 @@ package net.wg.gui.prebattle.squad
             this.setSpeakers(param2);
          }
       }
-
+      
       public function get model() : PlayerPrbInfoVO {
          return data as PlayerPrbInfoVO;
       }
-
+      
       override protected function updateText() : void {
          var _loc1_:TextFormat = textField.getTextFormat();
          var _loc2_:Object = _loc1_.size;
@@ -83,7 +82,7 @@ package net.wg.gui.prebattle.squad
          _loc1_.align = _loc4_;
          textField.setTextFormat(_loc1_);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
@@ -92,14 +91,14 @@ package net.wg.gui.prebattle.squad
          constraints.addElement("status",this.status,Constraints.ALL);
          constraints.addElement("vehicleNameField",this.vehicleNameField,Constraints.ALL);
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
          this.voiceWave.dispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(UPDATE_STATUS))
@@ -107,7 +106,7 @@ package net.wg.gui.prebattle.squad
             this.afterSetData();
          }
       }
-
+      
       override protected function updateAfterStateChange() : void {
          super.updateAfterStateChange();
          if(!initialized)
@@ -132,26 +131,24 @@ package net.wg.gui.prebattle.squad
             this.vehicleLevelField.textColor = _loc1_;
          }
       }
-
+      
       protected function updatePlayerName() : void {
          if((this.model) && !(this.model.dbID == -1))
          {
             App.utils.commons.formatPlayerName(textField,App.utils.commons.getUserProps(this.model.userName,this.model.clanAbbrev,this.model.region,this.model.igrType));
          }
+         else if(this.model)
+         {
+            textField.text = this.model.fullName;
+         }
          else
          {
-            if(this.model)
-            {
-               textField.text = this.model.fullName;
-            }
-            else
-            {
-               textField.text = Values.EMPTY_STR;
-            }
+            textField.text = Values.EMPTY_STR;
          }
+         
          this.playerNameStr = textField.htmlText;
       }
-
+      
       protected function afterSetData() : void {
          this.updatePlayerName();
          if(this.status)
@@ -163,7 +160,7 @@ package net.wg.gui.prebattle.squad
             }
             this.setSpeakers(this.model.isPlayerSpeaking,true);
             textField.alpha = this.vehicleNameField.alpha = 1;
-            var _loc1_:* = this.model.getStateString();
+            _loc1_ = this.model.getStateString();
             if(_loc1_ != PrebattleStateString.UNKNOWN)
             {
                this.statusString = _loc1_;
@@ -178,8 +175,8 @@ package net.wg.gui.prebattle.squad
                   this.showToolTips();
                }
             }
-            var _loc2_:* = 4.290295975E9;
-            var _loc3_:* = _loc2_;
+            _loc2_ = 4.290295975E9;
+            _loc3_ = _loc2_;
             this.updateVoiceWave();
             _loc3_ = this.model.getCurrentColor();
             if(!isNaN(_loc3_))
@@ -200,7 +197,7 @@ package net.wg.gui.prebattle.squad
             return;
          }
       }
-
+      
       protected function showToolTips() : void {
          var _loc1_:String = this.model.accID == -1?MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_INVITE:this.getToolTipData();
          if((_loc1_) && _loc1_.length > 0)
@@ -208,7 +205,7 @@ package net.wg.gui.prebattle.squad
             App.toolTipMgr.show(_loc1_);
          }
       }
-
+      
       protected function getToolTipData() : String {
          if((this.statusString) && this.statusString == PrebattleStateString.OFFLINE_READY)
          {
@@ -216,36 +213,35 @@ package net.wg.gui.prebattle.squad
          }
          return this.statusString != null?"#messenger:dialogs/squadChannel/tooltips/status/" + this.statusString:null;
       }
-
+      
       protected function updateVoiceWave() : void {
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
          this.voiceWave.setMuted(this.model?MessengerUtils.isMuted(this.model):false);
       }
-
-      protected function setSpeakers(param1:Boolean, param2:Boolean=false) : void {
+      
+      protected function setSpeakers(param1:Boolean, param2:Boolean = false) : void {
          if(param1)
          {
             param2 = false;
          }
-         if(this.voiceWave  is  VoiceWave)
+         if(this.voiceWave is VoiceWave)
          {
             this.voiceWave.setSpeaking(param1,param2);
          }
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          this.showToolTips();
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          App.toolTipMgr.hide();
       }
-
+      
       private function speakHandler(param1:VoiceChatEvent) : void {
          this.onPlayerSpeak(param1.getAccountDBID(),param1.type == VoiceChatEvent.START_SPEAKING);
       }
    }
-
 }

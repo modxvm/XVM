@@ -3,48 +3,46 @@ package net.wg.gui.lobby.questsWindow.components
    import flash.display.MovieClip;
    import net.wg.gui.lobby.questsWindow.VehicleBlock;
    import net.wg.gui.components.controls.UILoaderAlt;
-   import __AS3__.vec.Vector;
    import scaleform.clik.motion.Tween;
    import net.wg.gui.events.ResizableBlockEvent;
    import scaleform.clik.constants.InvalidationType;
    import fl.transitions.easing.Strong;
-
-
+   
    public class ProgressBlock extends CommonConditionsBlock
    {
-          
+      
       public function ProgressBlock() {
          this.tweens = new Vector.<Tween>();
          super();
       }
-
+      
       private static const BOTTOM_PADDING:int = 15;
-
+      
       private static const ICON_PADDING:int = 2;
-
+      
       private static const ANIMATION_DURATION:int = 500;
-
+      
       public var line:MovieClip;
-
+      
       public var vehicle:VehicleBlock;
-
+      
       public var icon:UILoaderAlt;
-
+      
       private var tweens:Vector.<Tween>;
-
+      
       override protected function configUI() : void {
          super.configUI();
          progressElementsContainer.bottomPadding = BOTTOM_PADDING;
          progressElementsContainer.addEventListener(ResizableBlockEvent.READY_FOR_ANIMATION,this.containerAnimationHandler);
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:Tween = null;
          progressElementsContainer.removeEventListener(ResizableBlockEvent.READY_FOR_ANIMATION,this.containerAnimationHandler);
          this.line = null;
          this.icon.dispose();
          this.icon = null;
-         for each (_loc1_ in this.tweens)
+         for each(_loc1_ in this.tweens)
          {
             _loc1_.onComplete = null;
             _loc1_.onChange = null;
@@ -57,7 +55,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.vehicle = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          if((isInvalid(InvalidationType.DATA)) && (data))
          {
@@ -87,7 +85,7 @@ package net.wg.gui.lobby.questsWindow.components
                description.height = description.textHeight + TEXT_PADDING;
             }
             counter.text = data.battlesLeft.toString();
-            counter.visible = battlesLeftTF.visible = Boolean((data.battlesLeft) && (!data.showDone));
+            counter.visible = battlesLeftTF.visible = Boolean(data.battlesLeft && !data.showDone);
             statusMC.visible = data.showDone;
             progressElementsContainer.isReadyForLayout = false;
             progressElementsContainer.setData(data.progressElements);
@@ -95,7 +93,7 @@ package net.wg.gui.lobby.questsWindow.components
             this.layoutBlocks();
          }
       }
-
+      
       override protected function layoutBlocks() : void {
          var _loc1_:Number = 0;
          if(description.visible)
@@ -112,16 +110,16 @@ package net.wg.gui.lobby.questsWindow.components
          setSize(this.width,_loc2_ + BOTTOM_PADDING);
          isReadyForLayout = true;
       }
-
+      
       private function containerAnimationHandler(param1:ResizableBlockEvent) : void {
          var _loc2_:Number = this.line.y + param1.heightDiff;
          this.playResizeAnimation(_loc2_,ANIMATION_DURATION,this.onEndAnimation);
       }
-
-      private function playResizeAnimation(param1:Number, param2:Number, param3:Function=null) : void {
+      
+      private function playResizeAnimation(param1:Number, param2:Number, param3:Function = null) : void {
          var _loc4_:Tween = null;
          var _loc5_:Tween = null;
-         for each (_loc4_ in this.tweens)
+         for each(_loc4_ in this.tweens)
          {
             _loc4_.onComplete = null;
             _loc4_.paused = true;
@@ -132,18 +130,16 @@ package net.wg.gui.lobby.questsWindow.components
                "paused":false,
                "ease":Strong.easeInOut,
                "onComplete":param3
-            }
-         )]);
-         for each (_loc5_ in this.tweens)
+            })]);
+         for each(_loc5_ in this.tweens)
          {
             _loc5_.fastTransform = false;
          }
       }
-
+      
       private function onEndAnimation() : void {
          this.layoutBlocks();
          dispatchEvent(new ResizableBlockEvent(ResizableBlockEvent.CONTETNT_WAS_CHANGED));
       }
    }
-
 }

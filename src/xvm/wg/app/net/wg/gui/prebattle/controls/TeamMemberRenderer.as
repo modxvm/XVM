@@ -7,28 +7,27 @@ package net.wg.gui.prebattle.controls
    import net.wg.gui.prebattle.constants.PrebattleStateString;
    import scaleform.gfx.TextFieldEx;
    import net.wg.data.constants.Values;
-
-
+   
    public class TeamMemberRenderer extends SquadItemRenderer
    {
-          
+      
       public function TeamMemberRenderer() {
          useRightButton = true;
          super();
       }
-
+      
       public var numberField:TextField;
-
+      
       public var commander_icon:UIComponent;
-
+      
       public var status_icon:UIComponent;
-
+      
       public var wrong_limits:UIComponent;
-
+      
       public var vehicle_type_icon:UIComponent;
-
+      
       private var _isVehicleValid:Boolean = true;
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.commander_icon.dispose();
@@ -36,13 +35,13 @@ package net.wg.gui.prebattle.controls
          this.wrong_limits.dispose();
          this.vehicle_type_icon.dispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override public function setData(param1:Object) : void {
-         if(!(param1 == null) && !(param1  is  PlayerPrbInfoVO))
+         if(!(param1 == null) && !(param1 is PlayerPrbInfoVO))
          {
             param1 = new PlayerPrbInfoVO(param1);
          }
@@ -52,7 +51,7 @@ package net.wg.gui.prebattle.controls
             setSpeakers(model.isPlayerSpeaking,true);
          }
       }
-
+      
       override protected function showToolTips() : void {
          var _loc1_:String = model.accID == -1?MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_INVITE:this.isVehicleValid?getToolTipData():model.himself?TOOLTIPS.MEMBERS_VEHICLELEVELLIMITS_BODY:getToolTipData();
          if((_loc1_) && _loc1_.length > 0)
@@ -60,7 +59,7 @@ package net.wg.gui.prebattle.controls
             App.toolTipMgr.show(_loc1_);
          }
       }
-
+      
       override protected function afterSetData() : void {
          var _loc1_:String = null;
          var _loc3_:String = null;
@@ -135,7 +134,7 @@ package net.wg.gui.prebattle.controls
          }
          this.updateAfterStateChange();
       }
-
+      
       override protected function updateAfterStateChange() : void {
          super.updateAfterStateChange();
          if(!initialized)
@@ -173,16 +172,16 @@ package net.wg.gui.prebattle.controls
          constraints.updateElement("status",status);
          constraints.updateElement("vehicleNameField",vehicleNameField);
       }
-
+      
       public function get isVehicleValid() : Boolean {
          return this._isVehicleValid;
       }
-
+      
       public function set isVehicleValid(param1:Boolean) : void {
          this._isVehicleValid = param1;
          this.updateValidVehicleState(param1);
       }
-
+      
       private function updateValidVehicleState(param1:Boolean) : void {
          if((model) && (isNaN(model.accID)))
          {
@@ -201,5 +200,4 @@ package net.wg.gui.prebattle.controls
          }
       }
    }
-
 }

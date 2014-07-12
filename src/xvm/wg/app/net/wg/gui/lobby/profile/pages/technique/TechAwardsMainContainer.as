@@ -3,17 +3,16 @@ package net.wg.gui.lobby.profile.pages.technique
    import net.wg.gui.lobby.profile.pages.awards.AwardsMainContainer;
    import net.wg.gui.lobby.profile.components.AwardsTileListBlock;
    import net.wg.utils.ILocale;
-
-
+   
    public class TechAwardsMainContainer extends AwardsMainContainer
    {
-          
+      
       public function TechAwardsMainContainer() {
          super();
       }
-
+      
       public var blockMarksOnGun:AwardsTileListBlock;
-
+      
       override protected function configUI() : void {
          super.configUI();
          var _loc1_:ILocale = App.utils.locale;
@@ -21,5 +20,4 @@ package net.wg.gui.lobby.profile.pages.technique
          blocks.unshift(this.blockMarksOnGun);
       }
    }
-
 }

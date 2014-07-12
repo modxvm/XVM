@@ -5,27 +5,26 @@ package net.wg.gui.components.common.waiting
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class WaitingComponent extends UIComponent
    {
-          
+      
       public function WaitingComponent() {
          super();
       }
-
+      
       private static const TEXT_INVALID:String = "textInv";
-
+      
       private static const ANIMATION_STATUS_INVALID:String = "animStatusInv";
-
+      
       public var waitingMc:WaitingMc;
-
+      
       public var backgroundMc:Sprite;
-
+      
       private var text:String = "";
-
+      
       private var _isStopped:Boolean;
-
+      
       public function setAnimationStatus(param1:Boolean) : void {
          if(this._isStopped != param1)
          {
@@ -33,18 +32,18 @@ package net.wg.gui.components.common.waiting
             invalidate(ANIMATION_STATUS_INVALID);
          }
       }
-
+      
       override protected function preInitialize() : void {
          super.preInitialize();
          constraints = new Constraints(this,ConstrainMode.REFLOW);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          constraints.addElement(this.waitingMc.name,this.waitingMc,Constraints.CENTER_H | Constraints.CENTER_V);
          constraints.addElement(this.backgroundMc.name,this.backgroundMc,Constraints.ALL);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.SIZE))
@@ -71,11 +70,10 @@ package net.wg.gui.components.common.waiting
             }
          }
       }
-
+      
       public function setMessage(param1:String) : void {
          this.text = param1;
          invalidate(TEXT_INVALID);
       }
    }
-
 }

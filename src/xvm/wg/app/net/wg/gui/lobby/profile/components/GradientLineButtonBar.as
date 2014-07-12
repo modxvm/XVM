@@ -6,17 +6,16 @@ package net.wg.gui.lobby.profile.components
    import flash.display.GradientType;
    import flash.geom.Matrix;
    import flash.display.SpreadMethod;
-
-
+   
    public class GradientLineButtonBar extends LineButtonBar
    {
-          
+      
       public function GradientLineButtonBar() {
          super();
       }
-
+      
       private static var color:uint = 3749680;
-
+      
       override protected function drawLine() : void {
          var _loc1_:Number = 1;
          var _loc2_:DisplayObject = _renderers[selectedIndex] as DisplayObject;
@@ -34,10 +33,10 @@ package net.wg.gui.lobby.profile.components
          var _loc5_:DisplayObjectContainer = line.parent;
          if(_loc5_)
          {
-            _loc5_.setChildIndex(line,_loc5_.numChildren-1);
+            _loc5_.setChildIndex(line,_loc5_.numChildren - 1);
          }
       }
-
+      
       private function drawGradientLine(param1:Graphics, param2:Number, param3:Number, param4:Number, param5:Number, param6:Array, param7:Array) : void {
          var _loc8_:String = GradientType.LINEAR;
          var _loc9_:Array = [125,255];
@@ -49,5 +48,4 @@ package net.wg.gui.lobby.profile.components
          param1.endFill();
       }
    }
-
 }

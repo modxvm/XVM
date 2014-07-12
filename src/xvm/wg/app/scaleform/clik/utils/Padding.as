@@ -1,10 +1,8 @@
 package scaleform.clik.utils
 {
-
-
    public class Padding extends Object
    {
-          
+      
       public function Padding(... rest) {
          super();
          switch(rest.length)
@@ -28,26 +26,25 @@ package scaleform.clik.utils
                throw new Error("Padding can not have " + rest.length + " values");
          }
       }
-
+      
       public var top:Number = 0;
-
+      
       public var bottom:Number = 0;
-
+      
       public var left:Number = 0;
-
+      
       public var right:Number = 0;
-
+      
       public function get vertical() : Number {
          return this.top + this.bottom;
       }
-
+      
       public function get horizontal() : Number {
          return this.left + this.right;
       }
-
+      
       public function toString() : String {
          return "[Padding top=" + this.top + " bottom=" + this.bottom + " left=" + this.left + " right=" + this.right + "]";
       }
    }
-
 }

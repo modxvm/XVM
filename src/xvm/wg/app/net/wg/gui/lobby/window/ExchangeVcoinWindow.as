@@ -16,11 +16,10 @@ package net.wg.gui.lobby.window
    import flash.events.Event;
    import scaleform.clik.motion.Tween;
    import fl.transitions.easing.Strong;
-
-
+   
    public class ExchangeVcoinWindow extends ExchangeCurrencyWindow implements IExchangeVcoinWindowMeta
    {
-          
+      
       public function ExchangeVcoinWindow() {
          this.animationManager = new ExcludeTweenManager();
          super();
@@ -28,31 +27,31 @@ package net.wg.gui.lobby.window
          this.tweenSet.ease = Strong.easeOut;
          this.tweenSet.onComplete = this.onTweenComplete;
       }
-
+      
       private static var tweenObj:Object;
-
+      
       private static const tweenDuration:uint = 350;
-
+      
       private static function rateLabelFunction(param1:Number) : String {
          return App.utils.locale.float(param1);
       }
-
+      
       public var warningMc:ExchangeVcoinWarningMC;
-
+      
       public var mainBackgroundMc:MovieClip;
-
+      
       public var buyVcoinBtn:SoundButtonEx;
-
+      
       public var buyVcoin:Function = null;
-
+      
       private var animationManager:ExcludeTweenManager;
-
+      
       private var windowOriginalHeight:Number = NaN;
-
+      
       private var tweenSet:Object;
-
+      
       private var exchangeData:VcoinExchangeDataVO;
-
+      
       override public function setWindow(param1:IWindow) : void {
          super.setWindow(param1);
          if(param1)
@@ -62,28 +61,28 @@ package net.wg.gui.lobby.window
             invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
          }
       }
-
+      
       public function buyVcoinS() : void {
          App.utils.asserter.assertNotNull(this.buyVcoin,"exchange" + Errors.CANT_NULL);
          this.buyVcoin();
       }
-
+      
       public function as_setTargetCurrencyData(param1:Object) : void {
          this.exchangeData = new VcoinExchangeDataVO(param1);
          selectedPrimaryCurrency = this.exchangeData.minTransactVal;
          exchangeStep = this.exchangeData.countStep;
       }
-
+      
       override protected function preInitialize() : void {
          super.preInitialize();
          constraints = new Constraints(this,ConstrainMode.REFLOW);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.buyVcoinBtn.label = App.utils.locale.makeString(MENU.EXCHANGEVCOIN_BUYVCOINBTNNAME);
          this.warningMc.visible = false;
-         var _loc1_:int = this.warningMc.parent.getChildIndex(this.warningMc)-1;
+         var _loc1_:int = this.warningMc.parent.getChildIndex(this.warningMc) - 1;
          var _loc2_:Sprite = new Sprite();
          addChildAt(_loc2_,_loc1_);
          _loc2_.addChild(lblToExchange);
@@ -132,7 +131,7 @@ package net.wg.gui.lobby.window
          this.warningMc.buyVcoinBtn.addEventListener(ButtonEvent.CLICK,this.buyVcoinBtnHandler,false,0,true);
          headerMC.rateLabelFunction = rateLabelFunction;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          super.draw();
@@ -157,7 +156,7 @@ package net.wg.gui.lobby.window
             }
          }
       }
-
+      
       override protected function applyWaitingChanges() : void {
          var _loc1_:DisplayObject = null;
          super.applyWaitingChanges();
@@ -173,7 +172,7 @@ package net.wg.gui.lobby.window
             _loc3_++;
          }
       }
-
+      
       override protected function isSubmitOperationAllowed() : Boolean {
          var _loc1_:Number = -1;
          if(this.exchangeData)
@@ -182,7 +181,7 @@ package net.wg.gui.lobby.window
          }
          return totalPrimaryCurrency >= _loc1_;
       }
-
+      
       override protected function applyResultUpdating() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -199,7 +198,7 @@ package net.wg.gui.lobby.window
             invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          if(this.animationManager)
@@ -210,25 +209,25 @@ package net.wg.gui.lobby.window
          this.buyVcoinBtn.removeEventListener(ButtonEvent.CLICK,this.buyVcoinBtnHandler);
          this.warningMc.buyVcoinBtn.removeEventListener(ButtonEvent.CLICK,this.buyVcoinBtnHandler);
       }
-
+      
       override protected function submitBtnClickHandler(param1:Event) : void {
          if(!showWaiting)
          {
             super.submitBtnClickHandler(param1);
          }
       }
-
+      
       override protected function cancelBtnClickHandler(param1:Event) : void {
          if(!showWaiting)
          {
             super.cancelBtnClickHandler(param1);
          }
       }
-
+      
       private function onTweenComplete(param1:Tween) : void {
          this.animationManager.unregister(param1);
       }
-
+      
       private function buyVcoinBtnHandler(param1:ButtonEvent) : void {
          if(!showWaiting)
          {
@@ -236,5 +235,4 @@ package net.wg.gui.lobby.window
          }
       }
    }
-
 }

@@ -11,35 +11,34 @@ package net.wg.infrastructure.managers.utils.impl
    import scaleform.gfx.IMECandidateListStyle;
    import scaleform.gfx.IMEEx;
    import flash.display.LoaderInfo;
-
-
+   
    public class IME extends Object implements IIME
    {
-          
+      
       public function IME() {
          super();
          this._container = new Sprite();
          this._container.visible = false;
       }
-
+      
       private var _container:Sprite = null;
-
+      
       private var langBar:MovieClip = null;
-
+      
       private var statusWinContainer:MovieClip = null;
-
+      
       private var _langBarLoader:Loader = null;
-
+      
       private var _statusWindowLoader:Loader = null;
-
+      
       private const BGColor:Number = 4145200;
-
+      
       private const BGColorOnOver:Number = 6448204;
-
+      
       private const TextColor:Number = 16774371;
-
+      
       private const TextColorSelected:Number = 16777215;
-
+      
       public function init(param1:Boolean) : void {
          var _loc2_:LoaderContext = null;
          var _loc3_:URLRequest = null;
@@ -62,7 +61,7 @@ package net.wg.infrastructure.managers.utils.impl
          }
          this.initStyle();
       }
-
+      
       private function initStyle() : void {
          var _loc1_:IMECandidateListStyle = new IMECandidateListStyle();
          _loc1_.textColor = 0;
@@ -77,7 +76,7 @@ package net.wg.infrastructure.managers.utils.impl
          _loc1_.readingWindowFontSize = 30;
          IMEEx.setIMECandidateListStyle(_loc1_);
       }
-
+      
       private function langBarLoaded(param1:Event) : void {
          var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
          _loc2_.removeEventListener(Event.COMPLETE,this.langBarLoaded);
@@ -85,14 +84,14 @@ package net.wg.infrastructure.managers.utils.impl
          this.langBar.setOwner(this);
          this.updateStyle();
       }
-
+      
       private function statusWindowLoaded(param1:Event) : void {
          var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
          _loc2_.removeEventListener(Event.COMPLETE,this.statusWindowLoaded);
          this.statusWinContainer = param1.currentTarget.content;
          this.updateStyle();
       }
-
+      
       private function updateStyle() : void {
          if(!(this.langBar == null) && !(this.statusWinContainer == null))
          {
@@ -110,18 +109,18 @@ package net.wg.infrastructure.managers.utils.impl
             this.statusWinContainer.SetBackgroundColor(this.BGColor,this.BGColorOnOver);
          }
       }
-
+      
       public function setVisible(param1:Boolean) : void {
          if(App.globalVarsMgr.isShowLangaugeBarS())
          {
             this._container.visible = param1;
          }
       }
-
+      
       public function getContainer() : Sprite {
          return this._container;
       }
-
+      
       public function dispose() : void {
          if(this._container)
          {
@@ -148,7 +147,7 @@ package net.wg.infrastructure.managers.utils.impl
             this._statusWindowLoader = null;
          }
       }
-
+      
       public function onLangBarResize(param1:Number, param2:Number) : void {
          if(this.statusWinContainer != null)
          {
@@ -156,10 +155,8 @@ package net.wg.infrastructure.managers.utils.impl
             this.statusWinContainer.y = param2;
          }
       }
-
+      
       public function onSwitchLanguage() : void {
-          
       }
    }
-
 }

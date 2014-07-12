@@ -5,9 +5,9 @@ package net.wg.gui.lobby.questsWindow
    import net.wg.gui.lobby.questsWindow.components.AlertMessage;
    import net.wg.gui.components.controls.ScrollBar;
    import flash.display.MovieClip;
+   import net.wg.gui.components.controls.ResizableScrollPane;
    import net.wg.gui.components.common.waiting.Waiting;
    import net.wg.gui.lobby.questsWindow.data.QuestDataVO;
-   import __AS3__.vec.Vector;
    import scaleform.clik.motion.Tween;
    import scaleform.clik.events.IndexEvent;
    import flash.events.Event;
@@ -21,104 +21,103 @@ package net.wg.gui.lobby.questsWindow
    import net.wg.gui.lobby.questsWindow.data.QuestRendererVO;
    import scaleform.clik.data.DataProvider;
    import net.wg.infrastructure.base.meta.IQuestsCurrentTabMeta;
-
-
+   
    public class QuestContent extends UIComponent
    {
-          
+      
       public function QuestContent() {
          this.tweens = new Vector.<Tween>();
          super();
          this._allTasks = new Vector.<String>();
          this.noQuestsMC.visible = false;
       }
-
+      
       private static const INVALIDATE_QUEST_INFO:String = "invQuestInfo";
-
+      
       private static const INVALIDATE_QUEST_ID:String = "invQuestID";
-
+      
       private static const INVALIDATE_SORTING_FUNC:String = "invSortFunc";
-
+      
       private static const INVALIDATE_NODATA_LABEL:String = "invNodataLabel";
-
+      
       private static const AVAILABLE_HEIGHT:int = 583;
-
+      
       private static const WAITING_SIZE:int = 400;
-
+      
       private static const AWARDS_PADDING:int = 1;
-
+      
       private static const WAITING_TOP_PADDING:int = 10;
-
+      
       public var sortingPanel:SortingPanel;
-
+      
       public var alertMsg:AlertMessage;
-
+      
       public var scrollBar:ScrollBar;
-
+      
       public var questsList:QuestsList;
-
+      
       public var notSelected:MovieClip;
-
+      
       public var noQuestsMC:MovieClip;
-
+      
       public var listHidingBG:MovieClip;
-
+      
       public var questBG:MovieClip;
-
+      
       public var questInfo:QuestBlock = null;
-
-      public var scrollPane:QuestScrollPane;
-
+      
+      public var scrollPane:ResizableScrollPane;
+      
       private var currentQuest:String = "";
-
+      
       private var questForUpdate:String = "";
-
+      
       private var lastUpdatedQuest:String = "";
-
+      
       private var totalTasks:Number = 0;
-
+      
       private var _waiting:Waiting = null;
-
+      
       private var questData:QuestDataVO = null;
-
+      
       public var header:HeaderBlock;
-
+      
       public var awards:QuestAwardsBlock;
-
+      
       private var _allTasks:Vector.<String> = null;
-
+      
       private var _sortingFunction:Function = null;
-
+      
       private var _hideSortPanel:Boolean = false;
-
+      
       private var _noDataLael:String = "";
-
+      
       private var _showWaiting:Boolean = false;
-
+      
       private var awardsResized:Boolean = false;
-
+      
       private var questInfoResized:Boolean = false;
-
+      
       private var headerResized:Boolean = false;
-
+      
       private var _isInRoaming:Boolean = false;
-
+      
       private var questInFade:Boolean = false;
-
+      
       private var tweens:Vector.<Tween>;
-
+      
       public function setQuestsData(param1:Array, param2:Number) : void {
          this.questsList.dataProvider = this.setupDataProvider(param1);
          this.totalTasks = param2;
          invalidateData();
       }
-
+      
       public function setSelectedQuest(param1:String) : void {
          this.sortingPanel.doneCB.selected = false;
          this.currentQuest = param1;
          invalidateData();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.questInfo = QuestBlock(this.scrollPane.target);
@@ -134,7 +133,7 @@ package net.wg.gui.lobby.questsWindow
          this.sortingPanel.validateNow();
          this.addListeners();
       }
-
+      
       private function addListeners() : void {
          this.header.contentTabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
          this.header.addEventListener(Event.RESIZE,this.layoutBlocks);
@@ -147,7 +146,7 @@ package net.wg.gui.lobby.questsWindow
          this.questInfo.addEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
          this.awards.addEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
       }
-
+      
       private function removeListeners() : void {
          this.header.contentTabs.removeEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
          this.awards.removeEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
@@ -160,7 +159,7 @@ package net.wg.gui.lobby.questsWindow
          this.sortingPanel.sortingDD.removeEventListener(ListEvent.INDEX_CHANGE,this.handleSortingDD);
          this.questInfo.removeEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:Tween = null;
          this.removeListeners();
@@ -180,7 +179,7 @@ package net.wg.gui.lobby.questsWindow
             removeChild(this._waiting);
             this._waiting = null;
          }
-         for each (_loc1_ in this.tweens)
+         for each(_loc1_ in this.tweens)
          {
             _loc1_.onComplete = null;
             _loc1_.onChange = null;
@@ -210,7 +209,7 @@ package net.wg.gui.lobby.questsWindow
          this._sortingFunction = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -256,7 +255,7 @@ package net.wg.gui.lobby.questsWindow
             }
          }
       }
-
+      
       private function invalidateWaiting() : void {
          if(!this._waiting)
          {
@@ -285,7 +284,7 @@ package net.wg.gui.lobby.questsWindow
             }
          }
       }
-
+      
       private function invalidateCommonData() : void {
          var _loc1_:* = false;
          this.questInfo.setAvailableQuests(this._allTasks);
@@ -309,17 +308,17 @@ package net.wg.gui.lobby.questsWindow
             this.awards.visible = false;
          }
       }
-
+      
       private function updateQuest(param1:String) : void {
          this.showWaiting = true;
          this.questForUpdate = param1;
          invalidate(INVALIDATE_QUEST_ID);
       }
-
+      
       private function playFadeAnimation(param1:Number, param2:Number, param3:Function) : void {
          var _loc4_:Tween = null;
          var _loc5_:Tween = null;
-         for each (_loc4_ in this.tweens)
+         for each(_loc4_ in this.tweens)
          {
             _loc4_.onComplete = null;
             _loc4_.paused = true;
@@ -330,49 +329,45 @@ package net.wg.gui.lobby.questsWindow
                "paused":false,
                "ease":Strong.easeInOut,
                "onComplete":null
-            }
-         ),new Tween(param2,this.awards,{"alpha":param1},
+            }),new Tween(param2,this.awards,{"alpha":param1},
             {
                "paused":false,
                "ease":Strong.easeInOut,
                "onComplete":null
-            }
-         ),new Tween(param2,this.notSelected,{"alpha":param1},
+            }),new Tween(param2,this.notSelected,{"alpha":param1},
             {
                "paused":false,
                "ease":Strong.easeInOut,
                "onComplete":null
-            }
-         ),new Tween(param2,this.scrollPane,{"alpha":param1},
+            }),new Tween(param2,this.scrollPane,{"alpha":param1},
             {
                "paused":false,
                "ease":Strong.easeInOut,
                "onComplete":param3
-            }
-         )]);
-         for each (_loc5_ in this.tweens)
+            })]);
+         for each(_loc5_ in this.tweens)
          {
             _loc5_.fastTransform = false;
          }
       }
-
+      
       private function tweenFadeOutCallback(param1:Tween) : void {
          this.questInFade = true;
          invalidate(INVALIDATE_QUEST_ID);
       }
-
+      
       private function showQuestInfo(param1:Boolean) : void {
          this.notSelected.visible = !param1;
          this.scrollPane.visible = param1;
          this.header.visible = param1;
       }
-
+      
       private function setupDataProvider(param1:Array) : IDataProvider {
          var _loc3_:Object = null;
          var _loc4_:QuestRendererVO = null;
          var _loc2_:DataProvider = new DataProvider();
          this._allTasks.splice(0,this._allTasks.length);
-         for each (_loc3_ in param1)
+         for each(_loc3_ in param1)
          {
             _loc4_ = new QuestRendererVO(_loc3_);
             this._allTasks.push(_loc4_.questID);
@@ -380,16 +375,16 @@ package net.wg.gui.lobby.questsWindow
          }
          return _loc2_;
       }
-
+      
       public function hideSortPanel(param1:Boolean) : void {
          this._hideSortPanel = param1;
       }
-
+      
       public function setNodataLabel(param1:String) : void {
          this._noDataLael = param1;
          invalidate(INVALIDATE_NODATA_LABEL);
       }
-
+      
       private function checkSelectedQuest() : void {
          var _loc1_:IDataProvider = this.questsList.dataProvider;
          var _loc2_:Number = _loc1_.length;
@@ -421,7 +416,7 @@ package net.wg.gui.lobby.questsWindow
             this.questsList.selectedIndex = -1;
          }
       }
-
+      
       public function set showWaiting(param1:Boolean) : void {
          if(this._showWaiting != param1)
          {
@@ -429,17 +424,17 @@ package net.wg.gui.lobby.questsWindow
             invalidate(WindowViewInvalidationType.WAITING_INVALID);
          }
       }
-
+      
       private function get myParent() : IQuestsCurrentTabMeta {
          return IQuestsCurrentTabMeta(parent);
       }
-
+      
       private function setNotSelected() : void {
          this.showQuestInfo(false);
          this.awards.visible = false;
          this.currentQuest = "";
       }
-
+      
       private function handleItemClick(param1:ListEvent) : void {
          var _loc2_:QuestRendererVO = null;
          if(param1.type == ListEventEx.ITEM_CLICK)
@@ -449,30 +444,28 @@ package net.wg.gui.lobby.questsWindow
                this.questsList.selectedIndex = -1;
             }
          }
+         else if(param1.index >= 0)
+         {
+            _loc2_ = QuestRendererVO(param1.itemData);
+            this.currentQuest = _loc2_.questID;
+            this.updateQuest(this.currentQuest);
+         }
          else
          {
-            if(param1.index >= 0)
-            {
-               _loc2_ = QuestRendererVO(param1.itemData);
-               this.currentQuest = _loc2_.questID;
-               this.updateQuest(this.currentQuest);
-            }
-            else
-            {
-               this.setNotSelected();
-            }
+            this.setNotSelected();
          }
+         
       }
-
+      
       private function handleCheckBox(param1:Event) : void {
          this.myParent.sortS(this.sortingPanel.sortingDD.selectedIndex,this.sortingPanel.doneCB.selected);
       }
-
+      
       private function handleSortingDD(param1:ListEvent) : void {
          this.questsList.questsType = param1.index;
          this.myParent.sortS(param1.index,this.sortingPanel.doneCB.selected);
       }
-
+      
       private function changeQuest(param1:QuestEvent) : void {
          var _loc2_:IDataProvider = this.questsList.dataProvider;
          var _loc3_:int = _loc2_.length;
@@ -496,15 +489,15 @@ package net.wg.gui.lobby.questsWindow
             _loc5_++;
          }
       }
-
+      
       public function get allTasks() : Vector.<String> {
          return this._allTasks;
       }
-
+      
       public function set allTasks(param1:Vector.<String>) : void {
          this._allTasks = param1;
       }
-
+      
       private function layoutBlocks(param1:Event) : void {
          if(this.questData)
          {
@@ -523,7 +516,7 @@ package net.wg.gui.lobby.questsWindow
             if((this.awardsResized) && (this.headerResized) && (this.questInfoResized))
             {
                this.awardsResized = this.headerResized = this.questInfoResized = false;
-               this.awards.visible = Boolean((this.questData.award) && (this.questData.award.length));
+               this.awards.visible = Boolean(this.questData.award && this.questData.award.length);
                this.awards.y = Math.round(AVAILABLE_HEIGHT - this.awards.height - AWARDS_PADDING);
                this.scrollPane.y = Math.round(this.header.height);
                this.scrollPane.height = Math.round(AVAILABLE_HEIGHT - this.header.height - this.awards.height - AWARDS_PADDING);
@@ -548,7 +541,7 @@ package net.wg.gui.lobby.questsWindow
             }
          }
       }
-
+      
       private function getQuestData() : void {
          var _loc6_:QuestRenderer = null;
          var _loc1_:Object = this.myParent.getQuestInfoS(this.questForUpdate);
@@ -575,19 +568,18 @@ package net.wg.gui.lobby.questsWindow
          }
          invalidate(INVALIDATE_QUEST_INFO);
       }
-
+      
       private function onChangeViewHandler(param1:IndexEvent) : void {
          this.questInfo.changeView(this.header.contentTabs.selectedItem.data);
       }
-
+      
       public function get sortingFunction() : Function {
          return this._sortingFunction;
       }
-
+      
       public function set sortingFunction(param1:Function) : void {
          this._sortingFunction = param1;
          invalidate(INVALIDATE_SORTING_FUNC);
       }
    }
-
 }

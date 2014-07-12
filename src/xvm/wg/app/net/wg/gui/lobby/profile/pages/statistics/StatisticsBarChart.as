@@ -2,11 +2,10 @@ package net.wg.gui.lobby.profile.pages.statistics
 {
    import net.wg.gui.lobby.profile.components.chart.AxisChart;
    import scaleform.clik.interfaces.IDataProvider;
-
-
+   
    public class StatisticsBarChart extends AxisChart
    {
-          
+      
       public function StatisticsBarChart() {
          super();
          var _loc1_:StatisticBarChartLayout = new StatisticBarChartLayout();
@@ -17,13 +16,13 @@ package net.wg.gui.lobby.profile.pages.statistics
          horizontalAxis = this.mainHorizontalAxis;
          this.initializer = new StatisticBarChartInitializer(this);
       }
-
+      
       private static const percent100:uint = 100;
-
+      
       public var mainHorizontalAxis:StatisticsBarChartAxis;
-
+      
       private var initializer:StatisticBarChartInitializer;
-
+      
       override public function set dataProvider(param1:IDataProvider) : void {
          var _loc3_:StatisticChartInfo = null;
          var _loc6_:* = NaN;
@@ -57,21 +56,19 @@ package net.wg.gui.lobby.profile.pages.statistics
          }
          super.dataProvider = param1;
       }
-
+      
       protected function adjustProviderItem(param1:StatisticChartInfo, param2:int) : void {
-          
       }
-
+      
       override protected function onDispose() : void {
          this.mainHorizontalAxis = null;
          this.initializer.dispose();
          this.initializer = null;
          super.onDispose();
       }
-
+      
       override public function get width() : Number {
          return this.actualWidth;
       }
    }
-
 }

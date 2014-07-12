@@ -6,14 +6,14 @@ package net.wg.gui.components.popOvers
    import scaleform.clik.interfaces.IUIComponent;
    import flash.text.TextField;
    import flash.display.MovieClip;
-
-
+   
    public class PopoverInternalLayout extends BaseLayout
    {
-          
+      
       public function PopoverInternalLayout() {
          this._buttonPadding = new Point(5,5);
          this._bgFormPadding = new Padding();
+         this._bgInternalPadding = new Padding(59);
          this._bgFormInternalPadding = new Padding(16,0,20,0);
          super();
          this._contentPadding = new PopoverContentPadding();
@@ -23,17 +23,17 @@ package net.wg.gui.components.popOvers
          this._contentPadding.left = 0;
          this._contentPadding.titleTop = 2;
       }
-
+      
       private var _buttonPadding:Point;
-
+      
       private var _contentPadding:PopoverContentPadding;
-
+      
       private var _bgFormPadding:Padding;
-
-      protected const _bgInternalPadding:Padding = new Padding(59);
-
+      
+      protected const _bgInternalPadding:Padding;
+      
       protected var _bgFormInternalPadding:Padding;
-
+      
       override public function invokeLayout() : Object {
          var _loc1_:PopOver = null;
          var _loc2_:IUIComponent = null;
@@ -91,68 +91,61 @@ package net.wg.gui.components.popOvers
          }
          return null;
       }
-
+      
       protected function updateArrowPosition(param1:PopOver, param2:int, param3:int) : void {
          if(param2 == PopOverConst.ARROW_LEFT)
          {
             param1.arrowLeft.y = param3 + this._bgInternalPadding.top;
          }
-         else
+         else if(param2 == PopOverConst.ARROW_RIGHT)
          {
-            if(param2 == PopOverConst.ARROW_RIGHT)
-            {
-               param1.arrowRight.y = param3 + this._bgInternalPadding.top;
-               param1.arrowRight.x = this._bgInternalPadding.left + param1.width;
-            }
-            else
-            {
-               if(param2 == PopOverConst.ARROW_TOP)
-               {
-                  param1.arrowTop.x = param3 + this._bgInternalPadding.left;
-               }
-               else
-               {
-                  if(param2 == PopOverConst.ARROW_BOTTOM)
-                  {
-                     param1.arrowBottom.x = param3 + this._bgInternalPadding.left;
-                     param1.arrowBottom.y = this._bgInternalPadding.top + param1.height;
-                  }
-               }
-            }
+            param1.arrowRight.y = param3 + this._bgInternalPadding.top;
+            param1.arrowRight.x = this._bgInternalPadding.left + param1.width;
          }
+         else if(param2 == PopOverConst.ARROW_TOP)
+         {
+            param1.arrowTop.x = param3 + this._bgInternalPadding.left;
+         }
+         else if(param2 == PopOverConst.ARROW_BOTTOM)
+         {
+            param1.arrowBottom.x = param3 + this._bgInternalPadding.left;
+            param1.arrowBottom.y = this._bgInternalPadding.top + param1.height;
+         }
+         
+         
+         
       }
-
+      
       public function get contentPadding() : PopoverContentPadding {
          return this._contentPadding;
       }
-
+      
       public function set contentPadding(param1:PopoverContentPadding) : void {
          this._contentPadding = param1;
       }
-
+      
       public function get bgInternalPadding() : Padding {
          return this._bgInternalPadding;
       }
-
+      
       public function get bgFormInternalPadding() : Padding {
          return this._bgFormInternalPadding;
       }
-
+      
       public function get bgFormPadding() : Padding {
          return this._bgFormPadding;
       }
-
+      
       public function set bgFormPadding(param1:Padding) : void {
          this._bgFormPadding = param1;
       }
-
+      
       public function get buttonPadding() : Point {
          return this._buttonPadding;
       }
-
+      
       public function set buttonPadding(param1:Point) : void {
          this._buttonPadding = param1;
       }
    }
-
 }

@@ -4,25 +4,24 @@ package net.wg.gui.components.common.waiting
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.Linkages;
-
-
+   
    public class Waiting extends UIComponent implements IDisposable
    {
-          
+      
       public function Waiting() {
          super();
       }
-
+      
       private static var TEXT_INVALID:String = "txtInv";
-
+      
       private static const BG_ALPHA_INVALID:String = "bgInv";
-
+      
       private var waitingComponent:WaitingComponent;
-
+      
       private var _text:String;
-
+      
       private var _backgroundAlpha:Number = 1;
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.SIZE))
@@ -44,12 +43,12 @@ package net.wg.gui.components.common.waiting
             this.waitingComponent.backgroundMc.alpha = this._backgroundAlpha;
          }
       }
-
+      
       public function setMessage(param1:String) : void {
          this._text = param1;
          invalidate(TEXT_INVALID);
       }
-
+      
       public function show() : void {
          visible = true;
          if(!this.waitingComponent)
@@ -60,11 +59,11 @@ package net.wg.gui.components.common.waiting
             invalidate(TEXT_INVALID,InvalidationType.SIZE);
          }
       }
-
+      
       public function hide() : void {
          visible = false;
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          if(this.waitingComponent)
@@ -85,7 +84,7 @@ package net.wg.gui.components.common.waiting
             }
          }
       }
-
+      
       public function set backgroundAlpha(param1:Number) : void {
          if(this._backgroundAlpha != param1)
          {
@@ -94,5 +93,4 @@ package net.wg.gui.components.common.waiting
          }
       }
    }
-
 }

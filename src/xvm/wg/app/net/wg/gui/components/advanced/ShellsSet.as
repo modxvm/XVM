@@ -4,30 +4,29 @@ package net.wg.gui.components.advanced
    import net.wg.gui.lobby.hangar.maintenance.data.ShellVO;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.Linkages;
-
-
+   
    public class ShellsSet extends UIComponent
    {
-          
+      
       public function ShellsSet() {
          this.shellViews = [];
          super();
       }
-
+      
       private static const ITEMS_GAP:Number = -7;
-
+      
       protected var data:Array = null;
-
+      
       protected var historicalBattleID:int = -1;
-
+      
       private var shellViews:Array;
-
-      public function setData(param1:Array, param2:int=-1) : void {
+      
+      public function setData(param1:Array, param2:int = -1) : void {
          this.data = param1;
          this.historicalBattleID = param2;
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:ShellButton = null;
          var _loc2_:ShellVO = null;
@@ -75,7 +74,7 @@ package net.wg.gui.components.advanced
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          if(this.data)
          {
@@ -85,10 +84,10 @@ package net.wg.gui.components.advanced
          this.clearRenderers();
          super.onDispose();
       }
-
+      
       private function clearRenderers() : void {
          var _loc1_:ShellButton = null;
-         for each (_loc1_ in this.shellViews)
+         for each(_loc1_ in this.shellViews)
          {
             removeChild(_loc1_);
             _loc1_.dispose();
@@ -98,5 +97,4 @@ package net.wg.gui.components.advanced
          this.shellViews = null;
       }
    }
-
 }

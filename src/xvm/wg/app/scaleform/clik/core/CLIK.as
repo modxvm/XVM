@@ -2,41 +2,39 @@ package scaleform.clik.core
 {
    import flash.display.Stage;
    import flash.utils.Dictionary;
-   import __AS3__.vec.Vector;
    import scaleform.gfx.Extensions;
    import scaleform.clik.managers.FocusHandler;
    import scaleform.clik.managers.PopUpManager;
    import flash.display.DisplayObjectContainer;
    import flash.events.Event;
-
-
+   
    public dynamic class CLIK extends Object
    {
-          
+      
       public function CLIK() {
          super();
       }
-
+      
       public static var stage:Stage;
-
+      
       public static var initialized:Boolean = false;
-
+      
       public static var disableNullFocusMoves:Boolean = false;
-
+      
       public static var disableDynamicTextFieldFocus:Boolean = false;
-
+      
       public static var disableTextFieldToNullFocusMoves:Boolean = true;
-
+      
       public static var useImmediateCallbacks:Boolean = false;
-
+      
       protected static var isInitListenerActive:Boolean = false;
-
+      
       protected static var firingInitCallbacks:Boolean = false;
-
+      
       protected static var initQueue:Dictionary;
-
+      
       protected static var validDictIndices:Vector.<uint>;
-
+      
       public static function initialize(param1:Stage, param2:UIComponent) : void {
          if(initialized)
          {
@@ -50,7 +48,7 @@ package scaleform.clik.core
          initQueue = new Dictionary(true);
          validDictIndices = new Vector.<uint>();
       }
-
+      
       public static function getTargetPathFor(param1:DisplayObjectContainer) : String {
          var _loc2_:String = null;
          if(!param1.parent)
@@ -60,7 +58,7 @@ package scaleform.clik.core
          _loc2_ = param1.name;
          return getTargetPathImpl(param1.parent as DisplayObjectContainer,_loc2_);
       }
-
+      
       public static function queueInitCallback(param1:UIComponent) : void {
          var _loc3_:Array = null;
          var _loc4_:uint = 0;
@@ -73,7 +71,7 @@ package scaleform.clik.core
          else
          {
             _loc3_ = _loc2_.split(".");
-            _loc4_ = _loc3_.length-1;
+            _loc4_ = _loc3_.length - 1;
             _loc5_ = initQueue[_loc4_];
             if(_loc5_ == null)
             {
@@ -93,7 +91,7 @@ package scaleform.clik.core
             }
          }
       }
-
+      
       protected static function fireInitCallback(param1:Event) : void {
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
@@ -107,7 +105,7 @@ package scaleform.clik.core
          {
             _loc3_ = validDictIndices[_loc2_];
             _loc4_ = initQueue[_loc3_] as Dictionary;
-            for (_loc5_ in _loc4_)
+            for(_loc5_ in _loc4_)
             {
                _loc6_ = _loc5_ as UIComponent;
                Extensions.CLIK_addedToStageCallback(_loc6_.name,_loc4_[_loc6_],_loc6_);
@@ -119,15 +117,15 @@ package scaleform.clik.core
          clearQueue();
          firingInitCallbacks = false;
       }
-
+      
       protected static function clearQueue() : void {
          var _loc1_:* = undefined;
-         for (_loc1_ in initQueue)
+         for(_loc1_ in initQueue)
          {
             initQueue[_loc1_] = null;
          }
       }
-
+      
       protected static function sortFunc(param1:uint, param2:uint) : Number {
          if(param1 < param2)
          {
@@ -139,8 +137,8 @@ package scaleform.clik.core
          }
          return 0;
       }
-
-      protected static function getTargetPathImpl(param1:DisplayObjectContainer, param2:String="") : String {
+      
+      protected static function getTargetPathImpl(param1:DisplayObjectContainer, param2:String = "") : String {
          var _loc3_:String = null;
          if(!param1)
          {
@@ -151,5 +149,4 @@ package scaleform.clik.core
          return getTargetPathImpl(param1.parent as DisplayObjectContainer,param2);
       }
    }
-
 }

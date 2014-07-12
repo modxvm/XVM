@@ -1,21 +1,19 @@
 package net.wg.gui.lobby.techtree.constants
 {
-   import __AS3__.vec.Vector;
    import net.wg.data.constants.Values;
    import net.wg.data.constants.IconsTypes;
-
-
+   
    public class IconTextResolver extends Object
    {
-          
+      
       public function IconTextResolver() {
          super();
       }
-
-      private static var namedLabels:Vector.<String>;
-
-      private static var iconTexts:Vector.<String>;
-
+      
+      private static const namedLabels:Vector.<String>;
+      
+      private static const iconTexts:Vector.<String>;
+      
       public static function getFromNamedLabel(param1:String) : String {
          var _loc2_:String = Values.EMPTY_STR;
          var _loc3_:Number = namedLabels.indexOf(param1);
@@ -26,5 +24,4 @@ package net.wg.gui.lobby.techtree.constants
          return _loc2_;
       }
    }
-
 }

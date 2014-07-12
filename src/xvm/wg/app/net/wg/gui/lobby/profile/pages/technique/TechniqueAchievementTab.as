@@ -1,24 +1,23 @@
 package net.wg.gui.lobby.profile.pages.technique
 {
    import net.wg.gui.lobby.profile.components.ResizableContent;
-   import net.wg.gui.lobby.profile.components.ResizableScrollPane;
+   import net.wg.gui.components.controls.ResizableScrollPane;
    import flash.text.TextField;
    import net.wg.gui.lobby.profile.pages.technique.data.ProfileVehicleDossierVO;
    import flash.display.MovieClip;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.lobby.profile.pages.awards.AwardsMainContainer;
-
-
+   
    public class TechniqueAchievementTab extends ResizableContent
    {
-          
+      
       public function TechniqueAchievementTab() {
          super();
       }
-
+      
       private static function isHasAchievements(param1:Array) : Boolean {
          var _loc2_:Array = null;
-         for each (_loc2_ in param1)
+         for each(_loc2_ in param1)
          {
             if(_loc2_.length > 0)
             {
@@ -27,15 +26,15 @@ package net.wg.gui.lobby.profile.pages.technique
          }
          return false;
       }
-
+      
       public var scrollPane:ResizableScrollPane;
-
+      
       public var warningTextField:TextField;
-
+      
       private var _data:ProfileVehicleDossierVO;
-
+      
       public var listBg:MovieClip;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.warningTextField.autoSize = TextFieldAutoSize.LEFT;
@@ -44,13 +43,13 @@ package net.wg.gui.lobby.profile.pages.technique
          this.scrollPane.visible = false;
          this.getPaneContent().gapBetweenBlocks = 6;
       }
-
+      
       override protected function applyResizing() : void {
          super.applyResizing();
          this.scrollPane.setSize(currentDimension.x - this.scrollPane.x,currentDimension.y - this.scrollPane.y);
          this.listBg.height = currentDimension.y - this.listBg.y;
       }
-
+      
       override public function update(param1:Object) : void {
          var _loc3_:Array = null;
          var _loc2_:ProfileVehicleDossierVO = ProfileVehicleDossierVO(param1);
@@ -79,11 +78,11 @@ package net.wg.gui.lobby.profile.pages.technique
             this.getPaneContent().data = _loc3_;
          }
       }
-
+      
       private function getPaneContent() : AwardsMainContainer {
          return AwardsMainContainer(this.scrollPane.target);
       }
-
+      
       override protected function onDispose() : void {
          if(this.scrollPane)
          {
@@ -93,5 +92,4 @@ package net.wg.gui.lobby.profile.pages.technique
          super.onDispose();
       }
    }
-
 }

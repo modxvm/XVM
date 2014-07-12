@@ -5,7 +5,6 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
    import net.wg.gui.components.advanced.ShellButton;
    import net.wg.gui.lobby.fortifications.data.OrderVO;
    import flash.events.MouseEvent;
-   import __AS3__.vec.Vector;
    import flash.display.DisplayObject;
    import net.wg.data.constants.Errors;
    import net.wg.data.constants.Tooltips;
@@ -16,11 +15,10 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
    import net.wg.utils.ILocale;
    import net.wg.gui.utils.ComplexTooltipHelper;
-
-
+   
    public class OrdersPanel extends OrdersPanelMeta implements IOrdersPanel
    {
-          
+      
       public function OrdersPanel() {
          this.ordersData = [];
          super();
@@ -32,9 +30,9 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             _loc1_++;
          }
       }
-
+      
       private static const INV_ORDER:String = "invString";
-
+      
       private static function setOrderData(param1:ShellButton, param2:OrderVO) : void {
          param1.data = param2;
          param1.level = param2.level;
@@ -60,52 +58,52 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             param1.clearCoolDownTime();
          }
       }
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       public var order1:ShellButton;
-
+      
       public var order2:ShellButton;
-
+      
       public var order3:ShellButton;
-
+      
       public var order4:ShellButton;
-
+      
       public var order5:ShellButton;
-
+      
       public var order6:ShellButton;
-
+      
       public var order7:ShellButton;
-
+      
       private var orders:Vector.<ShellButton> = null;
-
+      
       private var ordersData:Array;
-
+      
       private var invalidData:OrderVO = null;
-
+      
       private var lastClickedBtn:ShellButton = null;
-
+      
       public function as_setOrders(param1:Array) : void {
          this.ordersData = param1;
          invalidateData();
       }
-
+      
       public function getTargetButton() : DisplayObject {
          App.utils.asserter.assertNotNull(this.lastClickedBtn,"lastClickedBtn" + Errors.CANT_NULL);
          return this.lastClickedBtn;
       }
-
+      
       public function getHitArea() : DisplayObject {
          App.utils.asserter.assertNotNull(this.lastClickedBtn,"lastClickedBtn" + Errors.CANT_NULL);
          return this.lastClickedBtn;
       }
-
+      
       override protected function configUI() : void {
          var _loc1_:ShellButton = null;
          super.configUI();
-         for each (_loc1_ in this.orders)
+         for each(_loc1_ in this.orders)
          {
             _loc1_.isDischarging = true;
             _loc1_.tooltipType = Tooltips.COMPLEX;
@@ -114,17 +112,17 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             _loc1_.addEventListener(ButtonEvent.CLICK,this.handleBtnSelect);
          }
       }
-
+      
       override protected function updateOrder(param1:OrderVO) : void {
          this.invalidData = param1;
          invalidate(INV_ORDER);
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:ShellButton = null;
          if(this.orders)
          {
-            for each (_loc1_ in this.orders)
+            for each(_loc1_ in this.orders)
             {
                _loc1_.removeEventListener(MouseEvent.MOUSE_OVER,this.showTooltip);
                _loc1_.removeEventListener(MouseEvent.MOUSE_OUT,hideTooltip);
@@ -143,7 +141,7 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
          }
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = 0;
          var _loc2_:OrderVO = null;
@@ -168,10 +166,10 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             this.invalidateOrder(this.invalidData);
          }
       }
-
+      
       private function invalidateOrder(param1:OrderVO) : void {
          var _loc2_:ShellButton = null;
-         for each (_loc2_ in this.orders)
+         for each(_loc2_ in this.orders)
          {
             if(_loc2_.id == param1.orderID)
             {
@@ -180,7 +178,7 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             }
          }
       }
-
+      
       private function handleBtnSelect(param1:ButtonEvent) : void {
          var _loc2_:ShellButton = null;
          var _loc3_:* = NaN;
@@ -200,7 +198,7 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             }
          }
       }
-
+      
       private function showTooltip(param1:MouseEvent) : void {
          var _loc2_:ShellButton = ShellButton(param1.target);
          var _loc3_:ILocale = App.utils.locale;
@@ -213,5 +211,4 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
          }
       }
    }
-
 }

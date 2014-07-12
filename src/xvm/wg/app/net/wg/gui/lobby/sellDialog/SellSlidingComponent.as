@@ -2,7 +2,6 @@ package net.wg.gui.lobby.sellDialog
 {
    import scaleform.clik.core.UIComponent;
    import flash.display.MovieClip;
-   import __AS3__.vec.Vector;
    import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleShellVo;
    import net.wg.data.VO.SellDialogElement;
    import net.wg.data.VO.SellDialogItem;
@@ -14,39 +13,38 @@ package net.wg.gui.lobby.sellDialog
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.events.VehicleSellDialogEvent;
    import flash.geom.Rectangle;
-
-
+   
    public class SellSlidingComponent extends UIComponent
    {
-          
+      
       public function SellSlidingComponent() {
          this.sellData = [];
          super();
          scrollRect = new Rectangle(0,0,480,270);
       }
-
+      
       private static const PADDING_FOR_NEXT_ELEMENT:uint = 10;
-
+      
       public var settingsBtn:SettingsButton;
-
+      
       public var mask_mc:MovieClip;
-
+      
       public var slidingScrList:SlidingScrollingList;
-
+      
       public var expandBg:MovieClip;
-
+      
       public var sellData:Array;
-
+      
       public var resultExpand:int = 0;
-
+      
       private var _isOpened:Boolean = false;
-
+      
       private var listHeight:int = 0;
-
+      
       public function getNextPosition() : int {
          return this.expandBg.y + this.expandBg.height + PADDING_FOR_NEXT_ELEMENT;
       }
-
+      
       public function setShells(param1:Vector.<SellOnVehicleShellVo>) : void {
          var _loc7_:SellDialogElement = null;
          var _loc2_:SellDialogItem = new SellDialogItem();
@@ -80,7 +78,7 @@ package net.wg.gui.lobby.sellDialog
             this.sellData.push(_loc2_);
          }
       }
-
+      
       public function setEquipment(param1:Vector.<SellOnVehicleEquipmentVo>) : void {
          var _loc6_:SellDialogElement = null;
          var _loc2_:SellDialogItem = new SellDialogItem();
@@ -108,16 +106,16 @@ package net.wg.gui.lobby.sellDialog
             this.sellData.push(_loc2_);
          }
       }
-
+      
       public function calculateOpenedState() : void {
          this.settingsBtn.y = 0;
          this.slidingScrList.y = this.settingsBtn.y + this.settingsBtn.height;
          this.slidingScrList.height = this.listHeight;
-         this.expandBg.height = this.slidingScrList.y + this.listHeight-1;
+         this.expandBg.height = this.slidingScrList.y + this.listHeight - 1;
          this.mask_mc.y = this.slidingScrList.y;
          this.mask_mc.height = this.listHeight;
       }
-
+      
       public function calculateClosedState() : void {
          this.settingsBtn.y = 0;
          this.slidingScrList.height = this.listHeight;
@@ -125,7 +123,7 @@ package net.wg.gui.lobby.sellDialog
          this.mask_mc.y = this.settingsBtn.y + this.settingsBtn.height;
          this.mask_mc.height = 0;
       }
-
+      
       public function setInventory(param1:Vector.<SellInInventoryModuleVo>, param2:Vector.<SellInInventoryShellVo>) : void {
          var _loc14_:SellDialogElement = null;
          var _loc3_:SellDialogItem = new SellDialogItem();
@@ -147,8 +145,7 @@ package net.wg.gui.lobby.sellDialog
                {
                   "intCD":_loc8_.intCD,
                   "count":_loc8_.count
-               }
-            );
+               });
             _loc10_++;
          }
          var _loc11_:ILocale = App.utils.locale;
@@ -195,27 +192,27 @@ package net.wg.gui.lobby.sellDialog
          }
          this.slidingScrList.dataProvider = new DataProvider(this.sellData);
       }
-
+      
       public function preInitStates() : void {
-         this.resultExpand = this.settingsBtn.height + this.listHeight-1 - this.expandBg.height;
+         this.resultExpand = this.settingsBtn.height + this.listHeight - 1 - this.expandBg.height;
       }
-
+      
       public function get isOpened() : Boolean {
          return this._isOpened;
       }
-
+      
       public function set isOpened(param1:Boolean) : void {
          this._isOpened = param1;
          this.settingsBtn.setingsDropBtn.selected = this.isOpened;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.settingsBtn.visible = false;
          this.expandBg.visible = false;
          this.slidingScrList.addEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.wasDrawnHandler,false,5);
       }
-
+      
       private function updateElements() : void {
          this.preInitStates();
          if(this.isOpened)
@@ -235,11 +232,10 @@ package net.wg.gui.lobby.sellDialog
             this.settingsBtn.ddLine.alpha = 0;
          }
       }
-
+      
       private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void {
          this.listHeight = param1.listVisibleHight;
          this.updateElements();
       }
    }
-
 }

@@ -34,42 +34,41 @@ package net.wg.gui.lobby.hangar.crew
    import net.wg.gui.events.ContextMenuEvent;
    import flash.events.Event;
    import scaleform.clik.events.InputEvent;
-
-
+   
    public class CrewItemRenderer extends DropdownMenu implements IListItemRenderer
    {
-          
+      
       public function CrewItemRenderer() {
          super();
       }
-
+      
       private static const MAX_ICONS:Number = 5;
-
+      
       private static const MENU_WIDTH:Number = 368;
-
+      
       private static const SCROLLBAR_PADDING:Number = 13;
-
+      
       private static const BUFF:String = "#00FF00";
-
+      
       private static const DEBUFF:String = "#FF0000";
-
+      
       private static function setupDataProvider(param1:Array) : IDataProvider {
          var _loc3_:Object = null;
          var _loc2_:DataProvider = new DataProvider();
-         for each (_loc3_ in param1)
+         for each(_loc3_ in param1)
          {
             _loc2_.push(new RecruitRendererVO(_loc3_));
          }
          return _loc2_;
       }
-
+      
       private static function createSkillObj(param1:RecruitRendererVO, param2:Number) : SkillsVO {
          var _loc3_:SkillsVO = new SkillsVO({});
          var _loc4_:SkillsVO = SkillsVO(param1.skills[param2]);
          if(!_loc4_.buy)
          {
             _loc3_.icon = "../maps/icons/tankmen/skills/small/" + _loc4_.icon;
-            _loc3_.inprogress = param2 == param1.skills.length-1 && !(param1.lastSkillLevel == 100);
+            _loc3_.inprogress = param2 == param1.skills.length - 1 && !(param1.lastSkillLevel == 100);
             _loc3_.name = _loc4_.name;
             _loc3_.desc = _loc4_.desc;
             _loc3_.active = _loc4_.active;
@@ -83,55 +82,55 @@ package net.wg.gui.lobby.hangar.crew
          }
          return _loc3_;
       }
-
+      
       public var soundType:String = "rendererNormal";
-
+      
       public var soundId:String = "";
-
+      
       public var icon:UILoaderAlt;
-
+      
       public var iconRole:TankmenIcons;
-
+      
       public var iconRank:TankmenIcons;
-
+      
       public var bg:MovieClip;
-
+      
       public var roles:TileList;
-
+      
       public var skills:TileList;
-
+      
       public var goups_icons:MovieClip;
-
+      
       public var speed_xp_bg:UIComponent;
-
+      
       public var new_skill_anim:MovieClip;
-
+      
       public var levelSpecializationMain:MovieClip;
-
+      
       public var tankmenName:MovieClip;
-
+      
       public var rank:MovieClip;
-
+      
       public var role:MovieClip;
-
+      
       public var vehicleType:TextField;
-
+      
       public var lastSkillLevel:TextField;
-
+      
       public var closeOnlyClickItem:Boolean = false;
-
+      
       protected var _index:uint = 0;
-
+      
       protected var _selectable:Boolean = true;
-
+      
       private var itemClicked:Boolean = false;
-
+      
       public function setListData(param1:ListData) : void {
          this.index = param1.index;
          selected = param1.selected;
-         label = (param1.label) || "empty";
+         label = param1.label || "empty";
       }
-
+      
       public function setData(param1:Object) : void {
          var rendererData:RecruitRendererVO = null;
          var listHeight:Number = NaN;
@@ -219,34 +218,30 @@ package net.wg.gui.lobby.hangar.crew
             this.levelSpecializationMain.textfield.htmlText = "";
             this.role.textfield.htmlText = this.role.textfield.htmlText + (", " + ttype + " " + rendererData.vehicleType);
          }
-         else
+         else if(rendererData.curVehicleType != rendererData.tankType)
          {
-            if(rendererData.curVehicleType != rendererData.tankType)
+            this.levelSpecializationMain.textfield.htmlText = " <font color=\'" + DEBUFF + "\'>" + levelText + "</font>";
+            this.role.textfield.htmlText = this.role.textfield.htmlText + (", <font color=\'" + DEBUFF + "\'>" + ttype + " " + rendererData.vehicleType + "</font>");
+         }
+         else if(rendererData.curVehicleName != rendererData.vehicleType)
+         {
+            if(!rendererData.vehicleElite)
             {
                this.levelSpecializationMain.textfield.htmlText = " <font color=\'" + DEBUFF + "\'>" + levelText + "</font>";
-               this.role.textfield.htmlText = this.role.textfield.htmlText + (", <font color=\'" + DEBUFF + "\'>" + ttype + " " + rendererData.vehicleType + "</font>");
             }
             else
             {
-               if(rendererData.curVehicleName != rendererData.vehicleType)
-               {
-                  if(!rendererData.vehicleElite)
-                  {
-                     this.levelSpecializationMain.textfield.htmlText = " <font color=\'" + DEBUFF + "\'>" + levelText + "</font>";
-                  }
-                  else
-                  {
-                     this.levelSpecializationMain.textfield.htmlText = levelText;
-                  }
-                  this.role.textfield.htmlText = this.role.textfield.htmlText + (", " + ttype + " <font color=\'" + DEBUFF + "\'> " + rendererData.vehicleType + "</font>");
-               }
-               else
-               {
-                  this.levelSpecializationMain.textfield.htmlText = rendererData.isLessMastered?"<font color=\'#ffd387\'>" + levelText + "</font>":levelText;
-                  this.role.textfield.htmlText = this.role.textfield.htmlText + (", " + ttype + " " + rendererData.vehicleType);
-               }
+               this.levelSpecializationMain.textfield.htmlText = levelText;
             }
+            this.role.textfield.htmlText = this.role.textfield.htmlText + (", " + ttype + " <font color=\'" + DEBUFF + "\'> " + rendererData.vehicleType + "</font>");
          }
+         else
+         {
+            this.levelSpecializationMain.textfield.htmlText = rendererData.isLessMastered?"<font color=\'#ffd387\'>" + levelText + "</font>":levelText;
+            this.role.textfield.htmlText = this.role.textfield.htmlText + (", " + ttype + " " + rendererData.vehicleType);
+         }
+         
+         
          var rls:Array = [];
          var len:int = rendererData.roles.length;
          var i:int = 0;
@@ -261,11 +256,11 @@ package net.wg.gui.lobby.hangar.crew
          selected = false;
          visible = true;
       }
-
+      
       public function getData() : Object {
          return this.data;
       }
-
+      
       public function updateSkills(param1:RecruitRendererVO) : void {
          var _loc2_:Array = null;
          var _loc3_:* = 0;
@@ -294,13 +289,13 @@ package net.wg.gui.lobby.hangar.crew
                this.goups_icons.alpha = 1;
                this.goups_icons.visible = true;
                _loc5_ = 0;
-               if(param1.lastSkillLevel == 100 && param1.availableSkillsCount == param1.skills.length && !param1.skills[param1.skills.length-1].buy)
+               if(param1.lastSkillLevel == 100 && param1.availableSkillsCount == param1.skills.length && !param1.skills[param1.skills.length - 1].buy)
                {
                   _loc5_ = 1;
                }
                _loc6_ = param1.skills.length - 2;
                this.goups_icons.skillsGroupNum.text = "x" + (_loc6_ + 1 + _loc5_);
-               _loc7_ = param1.skills.length-1 - _loc5_;
+               _loc7_ = param1.skills.length - 1 - _loc5_;
                while(_loc7_ >= _loc6_)
                {
                   if(_loc7_ == _loc6_)
@@ -329,23 +324,23 @@ package net.wg.gui.lobby.hangar.crew
             this.goups_icons.visible = false;
          }
       }
-
-      public function openPersonalCase(param1:uint=0) : void {
+      
+      public function openPersonalCase(param1:uint = 0) : void {
          dispatchEvent(new CrewEvent(CrewEvent.OPEN_PERSONAL_CASE,this.data,false,param1));
       }
-
+      
       public function playSound(param1:String) : void {
          App.soundMgr.playControlsSnd(param1,this.soundType,this.soundId);
       }
-
+      
       override public function get data() : Object {
          return _data;
       }
-
+      
       override public function set data(param1:Object) : void {
          _data = param1;
       }
-
+      
       override public function set dataProvider(param1:IDataProvider) : void {
          dropdown = param1.length > 1?"RecruitScrollingList":"RecruitScrollingList2";
          menuRowCount = param1.length < 5?param1.length:5;
@@ -359,28 +354,28 @@ package net.wg.gui.lobby.hangar.crew
          }
          super.dataProvider = param1;
       }
-
+      
       public function get index() : uint {
          return this._index;
       }
-
+      
       public function set index(param1:uint) : void {
          this._index = param1;
       }
-
+      
       public function get selectable() : Boolean {
          return this._selectable;
       }
-
+      
       public function set selectable(param1:Boolean) : void {
          this._selectable = param1;
       }
-
+      
       public function get hasData() : Boolean {
          var _loc1_:* = !isNaN(RecruitRendererVO(this.data).tankmanID);
          return _loc1_;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          buttonMode = true;
@@ -390,16 +385,15 @@ package net.wg.gui.lobby.hangar.crew
          menuPadding = new Padding(4,3,3,4);
          menuMargin = 0;
          this.new_skill_anim.alpha = 0;
-         menuOffset.left = width-1;
-         this.inspectableThumbOffset =
+         menuOffset.left = width - 1;
+         this.inspectableThumbOffset = 
             {
                "top":0,
                "bottom":0
-            }
-         ;
+            };
          this.visible = false;
       }
-
+      
       override protected function showDropdown() : void {
          var _loc1_:MovieClip = null;
          var _loc2_:Class = null;
@@ -407,7 +401,7 @@ package net.wg.gui.lobby.hangar.crew
          {
             return;
          }
-         if(dropdown  is  String && !(dropdown == ""))
+         if(dropdown is String && !(dropdown == ""))
          {
             _loc2_ = getDefinitionByName(dropdown.toString()) as Class;
             if(_loc2_ != null)
@@ -417,40 +411,35 @@ package net.wg.gui.lobby.hangar.crew
          }
          if(_loc1_)
          {
-            if(itemRenderer  is  String && !(itemRenderer == ""))
+            if(itemRenderer is String && !(itemRenderer == ""))
             {
                _loc1_.itemRenderer = getDefinitionByName(itemRenderer.toString()) as Class;
             }
-            else
+            else if(itemRenderer is Class)
             {
-               if(itemRenderer  is  Class)
-               {
-                  _loc1_.itemRenderer = itemRenderer as Class;
-               }
+               _loc1_.itemRenderer = itemRenderer as Class;
             }
-            if(scrollBar  is  String && !(scrollBar == ""))
+            
+            if(scrollBar is String && !(scrollBar == ""))
             {
                _loc1_.scrollBar = getDefinitionByName(scrollBar.toString()) as Class;
             }
-            else
+            else if(scrollBar is Class)
             {
-               if(scrollBar  is  Class)
-               {
-                  _loc1_.scrollBar = scrollBar as Class;
-               }
+               _loc1_.scrollBar = scrollBar as Class;
             }
+            
             _loc1_.selectedIndex = RecruitRendererVO(this.data).tankmanID?1:0;
             _loc1_.width = menuWidth == -1?width + menuOffset.left + menuOffset.right:menuWidth;
             _loc1_.dataProvider = _dataProvider;
             _loc1_.padding = menuPadding;
             _loc1_.wrapping = menuWrapping;
             _loc1_.margin = menuMargin;
-            _loc1_.thumbOffset =
+            _loc1_.thumbOffset = 
                {
                   "top":thumbOffsetTop,
                   "bottom":thumbOffsetBottom
-               }
-            ;
+               };
             _loc1_.focusTarget = this;
             _loc1_.rowCount = menuRowCount < 1?5:menuRowCount;
             _loc1_.labelField = _labelField;
@@ -465,13 +454,13 @@ package net.wg.gui.lobby.hangar.crew
             dispatchEvent(new CrewDropDownEvent(CrewDropDownEvent.SHOW_DROP_DOWN,_dropdownRef));
          }
       }
-
+      
       override protected function hideDropdown() : void {
          App.toolTipMgr.hide();
          if(_dropdownRef)
          {
             _dropdownRef.removeEventListener(ListEvent.ITEM_CLICK,handleMenuItemClick,false);
-            if(_dropdownRef  is  IDisposable)
+            if(_dropdownRef is IDisposable)
             {
                IDisposable(_dropdownRef).dispose();
             }
@@ -480,7 +469,7 @@ package net.wg.gui.lobby.hangar.crew
             _dropdownRef = null;
          }
       }
-
+      
       override protected function updateAfterStateChange() : void {
          var _loc1_:RecruitRendererVO = null;
          super.updateAfterStateChange();
@@ -494,7 +483,7 @@ package net.wg.gui.lobby.hangar.crew
             }
          }
       }
-
+      
       override protected function draw() : void {
          if((isInvalid(InvalidationType.SELECTED_INDEX)) || (isInvalid(InvalidationType.DATA)))
          {
@@ -550,7 +539,7 @@ package net.wg.gui.lobby.hangar.crew
             }
          }
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          var _loc4_:* = 0;
          var _loc5_:DisplayObject = null;
@@ -588,7 +577,7 @@ package net.wg.gui.lobby.hangar.crew
             }
             if(dataProvider)
             {
-               for each (_loc7_ in _dataProvider)
+               for each(_loc7_ in _dataProvider)
                {
                   _loc7_.slot = this.data.slot;
                   _loc7_.parentTankmanID = _loc3_.tankmanID;
@@ -608,17 +597,17 @@ package net.wg.gui.lobby.hangar.crew
          }
          super.handleMouseRelease(param1);
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          this.playSound("over");
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          this.playSound("out");
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
          var _loc5_:ButtonEvent = null;
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
@@ -643,7 +632,7 @@ package net.wg.gui.lobby.hangar.crew
             }
          }
       }
-
+      
       private function onContextMenuAction(param1:ContextMenuEvent) : void {
          switch(param1.id)
          {
@@ -655,7 +644,7 @@ package net.wg.gui.lobby.hangar.crew
                break;
          }
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(Event.ADDED,addToAutoGroup,false);
          removeEventListener(Event.REMOVED,addToAutoGroup,false);
@@ -673,14 +662,14 @@ package net.wg.gui.lobby.hangar.crew
          if(_dropdownRef)
          {
             _dropdownRef.removeEventListener(ListEvent.ITEM_CLICK,handleMenuItemClick,false);
-            if(_dropdownRef  is  IDisposable)
+            if(_dropdownRef is IDisposable)
             {
                IDisposable(_dropdownRef).dispose();
             }
             _dropdownRef.parent.removeChild(_dropdownRef);
             _dropdownRef = null;
          }
-         if((scrollBar) && scrollBar  is  IDisposable)
+         if((scrollBar) && scrollBar is IDisposable)
          {
             IDisposable(scrollBar).dispose();
          }
@@ -719,7 +708,7 @@ package net.wg.gui.lobby.hangar.crew
             this.speed_xp_bg.dispose();
             this.speed_xp_bg = null;
          }
-         if((_data) && _data  is  IDisposable)
+         if((_data) && _data is IDisposable)
          {
             IDisposable(_data).dispose();
             _data = null;
@@ -734,5 +723,4 @@ package net.wg.gui.lobby.hangar.crew
          super.onDispose();
       }
    }
-
 }

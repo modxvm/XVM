@@ -7,34 +7,32 @@ package net.wg.gui.lobby.vehicleBuyWindow
    import net.wg.gui.components.controls.IconText;
    import net.wg.gui.components.controls.ActionPrice;
    import net.wg.gui.components.controls.ScrollBar;
-
-
+   
    public class HeaderMc extends UIComponent
    {
-          
+      
       public function HeaderMc() {
          super();
       }
-
+      
       public var tankName:TextField;
-
+      
       public var icon:TankIcon;
-
+      
       public var tankDescr:TextAreaSimple;
-
+      
       public var tankPriceLabel:TextField;
-
+      
       public var tankPrice:IconText;
-
+      
       public var tankActionPrice:ActionPrice;
-
+      
       public var descriptionScrollBar:ScrollBar;
-
+      
       override protected function onDispose() : void {
          this.tankActionPrice.dispose();
          this.tankActionPrice = null;
          super.onDispose();
       }
    }
-
 }

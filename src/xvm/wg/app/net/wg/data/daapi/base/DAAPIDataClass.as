@@ -6,16 +6,15 @@ package net.wg.data.daapi.base
    import net.wg.data.constants.Errors;
    import net.wg.infrastructure.exceptions.DAAPIBindException;
    import avmplus.getQualifiedClassName;
-
-
+   
    public class DAAPIDataClass extends EventDispatcher implements IDAAPIDataClass
    {
-          
+      
       public function DAAPIDataClass(param1:Object) {
          super();
          this.fromHash(param1);
       }
-
+      
       public static function compare(param1:Object, param2:Object) : Boolean {
          var _loc4_:Array = null;
          var _loc5_:uint = 0;
@@ -24,10 +23,10 @@ package net.wg.data.daapi.base
          var _loc3_:* = typeof param1;
          if(_loc3_ == "object")
          {
-            if(param1  is  Array)
+            if(param1 is Array)
             {
                _loc4_ = param1 as Array;
-               if(param2  is  Array)
+               if(param2 is Array)
                {
                   _loc5_ = _loc4_.length;
                   if(_loc5_ == param2.length)
@@ -54,7 +53,7 @@ package net.wg.data.daapi.base
             }
             else
             {
-               for (_loc7_ in param1)
+               for(_loc7_ in param1)
                {
                   if(param2.hasOwnProperty(_loc7_.toString()))
                   {
@@ -68,18 +67,16 @@ package net.wg.data.daapi.base
                }
             }
          }
-         else
+         else if(param1 !== param2)
          {
-            if(param1 !== param2)
-            {
-               return false;
-            }
+            return false;
          }
+         
          return true;
       }
-
+      
       private var _hash:Object = null;
-
+      
       public function fromHash(param1:Object) : void {
          var _loc4_:String = null;
          var _loc5_:* = undefined;
@@ -91,7 +88,7 @@ package net.wg.data.daapi.base
          _loc2_.assertNotNull(param1,"Hash" + Errors.CANT_NULL);
          this._hash = param1;
          var _loc3_:* = "can\'t find property for DAAPI data binding: ";
-         for (_loc4_ in param1)
+         for(_loc4_ in param1)
          {
             _loc5_ = param1[_loc4_];
             _loc6_ = _loc4_;
@@ -116,31 +113,30 @@ package net.wg.data.daapi.base
             }
          }
       }
-
+      
       public final function dispose() : void {
          var _loc1_:String = null;
          var _loc2_:* = undefined;
          var _loc3_:String = null;
          this.onDispose();
-         for (_loc1_ in this._hash)
+         for(_loc1_ in this._hash)
          {
             _loc2_ = this._hash[_loc1_];
             _loc3_ = _loc1_;
-            delete this[[_loc1_]];
+            delete this[_loc1_];
          }
          this._hash = null;
       }
-
+      
       protected function onDispose() : void {
-          
       }
-
+      
       public function toHash() : Object {
          var _loc2_:String = null;
          var _loc3_:Object = null;
          var _loc4_:String = null;
          var _loc1_:Object = {};
-         for (_loc2_ in this._hash)
+         for(_loc2_ in this._hash)
          {
             _loc3_ = this._hash[_loc2_];
             _loc4_ = _loc2_.substr(0);
@@ -151,22 +147,21 @@ package net.wg.data.daapi.base
          }
          return _loc1_;
       }
-
+      
       protected function onDataWrite(param1:String, param2:Object) : Boolean {
          return true;
       }
-
+      
       protected function onDataRead(param1:String, param2:Object) : Boolean {
          return true;
       }
-
+      
       public function getHash() : Object {
          return this._hash;
       }
-
+      
       public function isEquals(param1:DAAPIDataClass) : Boolean {
          return compare(this._hash,param1.getHash());
       }
    }
-
 }

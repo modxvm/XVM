@@ -11,26 +11,25 @@ package net.wg.gui.historicalBattles.controls
    import net.wg.data.constants.Cursors;
    import net.wg.data.constants.Tooltips;
    import net.wg.gui.utils.ComplexTooltipHelper;
-
-
+   
    public class VehicleListItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function VehicleListItemRenderer() {
          super();
          preventAutosizing = true;
       }
-
+      
       public var image:UILoaderAlt;
-
+      
       public var warningIcon:Sprite;
-
+      
       public var mouseArea:Sprite;
-
+      
       public var disableFill:BitmapFill;
-
+      
       protected var model:VehicleListItemVO;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.warningIcon.buttonMode = this.warningIcon.useHandCursor = true;
@@ -39,7 +38,7 @@ package net.wg.gui.historicalBattles.controls
          this.mouseArea.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.mouseArea.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
       }
-
+      
       override protected function onDispose() : void {
          this.warningIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.warningIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
@@ -58,7 +57,7 @@ package net.wg.gui.historicalBattles.controls
          }
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.model))
@@ -73,7 +72,7 @@ package net.wg.gui.historicalBattles.controls
          }
          mouseChildren = true;
       }
-
+      
       override public function setData(param1:Object) : void {
          var _loc3_:* = false;
          var _loc4_:* = false;
@@ -93,14 +92,12 @@ package net.wg.gui.historicalBattles.controls
                this.showWarnTT();
                App.cursor.setCursor(Cursors.BUTTON);
             }
-            else
+            else if(_loc4_)
             {
-               if(_loc4_)
-               {
-                  this.showBodyTT();
-                  App.cursor.setCursor(enabled?Cursors.BUTTON:Cursors.ARROW);
-               }
+               this.showBodyTT();
+               App.cursor.setCursor(enabled?Cursors.BUTTON:Cursors.ARROW);
             }
+            
          }
          else
          {
@@ -117,11 +114,11 @@ package net.wg.gui.historicalBattles.controls
          }
          invalidateData();
       }
-
+      
       private function onControlRollOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onControlRollOver(param1:MouseEvent) : void {
          switch(param1.currentTarget)
          {
@@ -133,11 +130,11 @@ package net.wg.gui.historicalBattles.controls
                break;
          }
       }
-
+      
       private function showWarnTT() : void {
          this.showComplexTT(this.model.warnTTHeader,this.model.warnTTBody);
       }
-
+      
       private function showBodyTT() : void {
          if(this.model)
          {
@@ -151,8 +148,8 @@ package net.wg.gui.historicalBattles.controls
             }
          }
       }
-
-      private function showComplexTT(param1:String, param2:String="") : void {
+      
+      private function showComplexTT(param1:String, param2:String = "") : void {
          var _loc3_:String = new ComplexTooltipHelper().addHeader(param1).addBody(param2).make();
          if(_loc3_.length > 0)
          {
@@ -160,5 +157,4 @@ package net.wg.gui.historicalBattles.controls
          }
       }
    }
-
 }

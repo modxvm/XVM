@@ -7,7 +7,6 @@ package net.wg.gui.lobby.customization.renderers
    import net.wg.gui.components.controls.IconText;
    import flash.display.Sprite;
    import flash.text.TextField;
-   import __AS3__.vec.Vector;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
    import flash.events.MouseEvent;
    import scaleform.clik.events.InputEvent;
@@ -17,62 +16,61 @@ package net.wg.gui.lobby.customization.renderers
    import flash.geom.Point;
    import flash.events.Event;
    import net.wg.data.constants.SoundTypes;
-
-
+   
    public class CustomizationItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function CustomizationItemRenderer() {
          super();
          soundType = SoundTypes.CUSTOMIZATION_ITEM_RENDERER;
       }
-
+      
       public static const DEMO_OFF:String = "off";
-
+      
       public static const DEMO_NEW:String = "new";
-
+      
       public static const DEMO_CURRENT:String = "current";
-
+      
       public var newMarker:MovieClip;
-
+      
       public var uiLoader:UILoaderAlt;
-
+      
       public var actionPrice:ActionPrice;
-
+      
       public var costField:IconText;
-
+      
       public var costFrame:MovieClip;
-
+      
       public var border:RendererBorder;
-
+      
       public var hitMc:Sprite;
-
+      
       public var targetIcon:MovieClip;
-
+      
       public var freeTF:TextField;
-
+      
       protected var isNew:Boolean = false;
-
+      
       protected var isGold:Boolean = false;
-
+      
       protected var costVal:String = "";
-
+      
       protected var priceVal:Number = 0;
-
+      
       protected var prefixesVector:Vector.<String> = null;
-
+      
       private var costVisible:Boolean = false;
-
+      
       private var actionPriceVo:ActionPriceVO = null;
-
+      
       private var _current:Boolean = false;
-
+      
       private var _isMouseOver:Boolean = false;
-
+      
       private var _demoMode:String = "off";
-
+      
       private var _useHandCursorForce:Boolean = false;
-
+      
       override public function setData(param1:Object) : void {
          var _loc2_:Boolean = this.isNew;
          data = param1;
@@ -105,7 +103,7 @@ package net.wg.gui.lobby.customization.renderers
          }
          invalidateData();
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
@@ -138,16 +136,16 @@ package net.wg.gui.lobby.customization.renderers
          this.freeTF = null;
          data = null;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          mouseChildren = true;
       }
-
+      
       public function get current() : Boolean {
          return this._current;
       }
-
+      
       public function set current(param1:Boolean) : void {
          if(this._current == param1)
          {
@@ -156,11 +154,11 @@ package net.wg.gui.lobby.customization.renderers
          this._current = param1;
          setState(state);
       }
-
+      
       public function get demoMode() : String {
          return this._demoMode;
       }
-
+      
       public function set demoMode(param1:String) : void {
          if(this._demoMode == param1)
          {
@@ -172,18 +170,19 @@ package net.wg.gui.lobby.customization.renderers
          useHandCursor = _loc2_;
          setState(state);
       }
-
+      
       public function get useHandCursorForce() : Boolean {
          return this._useHandCursorForce;
       }
-
+      
       public function set useHandCursorForce(param1:Boolean) : void {
          this._useHandCursorForce = param1;
       }
-
+      
       override protected function configUI() : void {
+         var _loc1_:* = false;
          super.configUI();
-         var _loc1_:Boolean = (this._useHandCursorForce) || this._demoMode == DEMO_OFF;
+         _loc1_ = (this._useHandCursorForce) || this._demoMode == DEMO_OFF;
          super.enabled = _loc1_;
          useHandCursor = _loc1_;
          this.uiLoader.addEventListener(UILoaderEvent.COMPLETE,this.onImageLoadComplete);
@@ -206,7 +205,7 @@ package net.wg.gui.lobby.customization.renderers
             this.actionPrice.setup(this);
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = false;
          super.draw();
@@ -214,7 +213,7 @@ package net.wg.gui.lobby.customization.renderers
          {
             this.visible = !(this.data == null);
             this.costFrame.visible = this.costVisible;
-            _loc1_ = ((((this.freeTF) && (data)) && (data.id > 0) && data.price) && (data.price.cost == 0)) && !data.current && !data.isInHangar;
+            _loc1_ = (this.freeTF && data && data.id > 0 && data.price && data.price.cost == 0) && !data.current && !data.isInHangar;
             if(this.actionPrice)
             {
                if((this.actionPriceVo) && (this.costVisible))
@@ -260,7 +259,7 @@ package net.wg.gui.lobby.customization.renderers
             this.checkTooltip();
          }
       }
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          if(this.prefixesVector)
          {
@@ -274,20 +273,18 @@ package net.wg.gui.lobby.customization.renderers
          {
             this.prefixesVector.push("current_");
          }
+         else if((enabled) && (_selected))
+         {
+            this.prefixesVector.push("selected_");
+         }
          else
          {
-            if((enabled) && (_selected))
-            {
-               this.prefixesVector.push("selected_");
-            }
-            else
-            {
-               this.prefixesVector.push("");
-            }
+            this.prefixesVector.push("");
          }
+         
          return this.prefixesVector;
       }
-
+      
       protected function checkTooltip() : void {
          if(this.demoMode == DEMO_NEW || this.demoMode == DEMO_CURRENT)
          {
@@ -300,7 +297,7 @@ package net.wg.gui.lobby.customization.renderers
             this.showTooltip();
          }
       }
-
+      
       protected function showIsNew(param1:Boolean) : void {
          this.isNew = param1;
          if(param1)
@@ -313,15 +310,13 @@ package net.wg.gui.lobby.customization.renderers
             }
             this.newMarker.visible = param1;
          }
-         else
+         else if(this.newMarker)
          {
-            if(this.newMarker)
-            {
-               this.newMarker.visible = param1;
-            }
+            this.newMarker.visible = param1;
          }
+         
       }
-
+      
       private function loadTexture(param1:String) : void {
          if(!(param1 == null) && !(param1.length == 0))
          {
@@ -332,24 +327,23 @@ package net.wg.gui.lobby.customization.renderers
             this.uiLoader.unload();
          }
       }
-
-      private function showTooltip(param1:MouseEvent=null) : void {
+      
+      private function showTooltip(param1:MouseEvent = null) : void {
          this._isMouseOver = true;
          if((data) && data.description.length > 0)
          {
             App.toolTipMgr.showComplex(data.description);
          }
       }
-
-      private function hideTooltip(param1:MouseEvent=null) : void {
+      
+      private function hideTooltip(param1:MouseEvent = null) : void {
          this._isMouseOver = false;
          App.toolTipMgr.hide();
       }
-
+      
       protected function onImageLoadComplete(param1:Event) : void {
          invalidateSize();
          validateNow();
       }
    }
-
 }

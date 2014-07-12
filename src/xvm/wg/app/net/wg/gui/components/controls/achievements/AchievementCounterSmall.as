@@ -1,14 +1,12 @@
 package net.wg.gui.components.controls.achievements
 {
-
-
    public class AchievementCounterSmall extends AchievementCounter
    {
-          
+      
       public function AchievementCounterSmall() {
          super();
       }
-
+      
       override protected function applyData() : void {
          super.applyData();
          if((data) && (data.hasOwnProperty("value")) && data.value == 0)
@@ -20,7 +18,7 @@ package net.wg.gui.components.controls.achievements
             counterType = AchievementCounter.SMALL;
          }
       }
-
+      
       override protected function applyLayoutChanges() : void {
          if((counter) && (!(loader.width == 0)) && !(loader.height == 0))
          {
@@ -30,5 +28,4 @@ package net.wg.gui.components.controls.achievements
          }
       }
    }
-
 }

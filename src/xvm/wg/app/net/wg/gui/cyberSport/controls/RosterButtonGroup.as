@@ -4,15 +4,14 @@ package net.wg.gui.cyberSport.controls
    import flash.display.DisplayObjectContainer;
    import scaleform.clik.controls.Button;
    import flash.events.Event;
-
-
+   
    public class RosterButtonGroup extends ButtonGroup
    {
-          
+      
       public function RosterButtonGroup(param1:String, param2:DisplayObjectContainer) {
          super(param1,param2);
       }
-
+      
       public static function getGroup(param1:String, param2:DisplayObjectContainer) : RosterButtonGroup {
          var _loc3_:Object = groups[param2];
          if(_loc3_ == null)
@@ -26,10 +25,10 @@ package net.wg.gui.cyberSport.controls
          }
          return _loc4_;
       }
-
+      
       protected var olderSelectedButton:Button;
-
-      override protected function updateSelectedButton(param1:Button, param2:Boolean=true) : void {
+      
+      override protected function updateSelectedButton(param1:Button, param2:Boolean = true) : void {
          if((param2) && param1 == selectedButton)
          {
             return;
@@ -54,23 +53,19 @@ package net.wg.gui.cyberSport.controls
          {
             selectedButton = null;
          }
-         else
+         else if(_loc4_)
          {
-            if(_loc4_)
-            {
-               this.olderSelectedButton = null;
-            }
-            else
-            {
-               if(!param2)
-               {
-                  return;
-               }
-            }
+            this.olderSelectedButton = null;
          }
+         else if(!param2)
+         {
+            return;
+         }
+         
+         
          dispatchEvent(new Event(Event.CHANGE));
       }
-
+      
       public function get rangeData() : Array {
          var _loc1_:Array = [];
          if(selectedButton)
@@ -84,5 +79,4 @@ package net.wg.gui.cyberSport.controls
          return _loc1_;
       }
    }
-
 }

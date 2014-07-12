@@ -4,19 +4,17 @@ package net.wg.gui.lobby.profile.pages.awards
    import net.wg.gui.lobby.profile.components.AwardsTileListBlock;
    import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
    import net.wg.utils.ILocale;
-   import __AS3__.vec.*;
    import flash.events.Event;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class AwardsMainContainer extends UIComponent
    {
-          
+      
       public function AwardsMainContainer() {
          super();
          addEventListener(Event.RESIZE,this.blockResizeHandler,false,0,true);
       }
-
+      
       private static function applyBlockData(param1:AwardsTileListBlock, param2:Array) : Boolean {
          var _loc6_:* = false;
          var _loc7_:ProfileAchievementVO = null;
@@ -50,27 +48,27 @@ package net.wg.gui.lobby.profile.pages.awards
          }
          return _loc6_;
       }
-
+      
       private var _gapBetweenBlocks:uint = 20;
-
+      
       public var blockBattleHeroes:AwardsTileListBlock;
-
+      
       public var blockHonors:AwardsTileListBlock;
-
+      
       public var blockEpicAwards:AwardsTileListBlock;
-
+      
       public var blockGroupAwards:AwardsTileListBlock;
-
+      
       public var blockCommemoratives:AwardsTileListBlock;
-
+      
       public var blockStageAwards:AwardsTileListBlock;
-
+      
       public var blockSpecialAwards:AwardsTileListBlock;
-
+      
       private var _allMedalsData:Array;
-
+      
       protected var blocks:Vector.<AwardsTileListBlock>;
-
+      
       override protected function configUI() : void {
          var _loc2_:AwardsTileListBlock = null;
          super.configUI();
@@ -82,26 +80,19 @@ package net.wg.gui.lobby.profile.pages.awards
          this.blockCommemoratives.labelText = _loc1_.makeString(PROFILE.SECTION_AWARDS_LABELS_MEMORY);
          this.blockStageAwards.labelText = _loc1_.makeString(PROFILE.SECTION_AWARDS_LABELS_STAGE);
          this.blockSpecialAwards.labelText = _loc1_.makeString(PROFILE.SECTION_AWARDS_LABELS_SPECIAL);
-         new Vector.<AwardsTileListBlock>(7)[0] = this.blockBattleHeroes;
-         new Vector.<AwardsTileListBlock>(7)[1] = this.blockHonors;
-         new Vector.<AwardsTileListBlock>(7)[2] = this.blockEpicAwards;
-         new Vector.<AwardsTileListBlock>(7)[3] = this.blockGroupAwards;
-         new Vector.<AwardsTileListBlock>(7)[4] = this.blockCommemoratives;
-         new Vector.<AwardsTileListBlock>(7)[5] = this.blockStageAwards;
-         new Vector.<AwardsTileListBlock>(7)[6] = this.blockSpecialAwards;
-         this.blocks = new Vector.<AwardsTileListBlock>(7);
-         for each (_loc2_ in this.blocks)
+         this.blocks = new <AwardsTileListBlock>[this.blockBattleHeroes,this.blockHonors,this.blockEpicAwards,this.blockGroupAwards,this.blockCommemoratives,this.blockStageAwards,this.blockSpecialAwards];
+         for each(_loc2_ in this.blocks)
          {
             _loc2_.visible = false;
             _loc2_.addEventListener(Event.RESIZE,this.blockResizeHandler,false,0,true);
          }
       }
-
+      
       private function blockResizeHandler(param1:Event) : void {
          param1.stopPropagation();
          invalidate(InvalidationType.SIZE);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:* = 0;
@@ -148,17 +139,17 @@ package net.wg.gui.lobby.profile.pages.awards
             dispatchEvent(new Event(Event.RESIZE));
          }
       }
-
+      
       public function set data(param1:Array) : void {
          this._allMedalsData = param1;
          invalidateData();
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:AwardsTileListBlock = null;
          while(this.blocks.length > 0)
          {
-            _loc1_ = this.blocks.splice(this.blocks.length-1,1)[0];
+            _loc1_ = this.blocks.splice(this.blocks.length - 1,1)[0];
             _loc1_.removeEventListener(Event.RESIZE,this.blockResizeHandler);
             _loc1_.dispose();
             if(_loc1_.parent)
@@ -170,11 +161,10 @@ package net.wg.gui.lobby.profile.pages.awards
          this._allMedalsData = null;
          super.onDispose();
       }
-
+      
       public function set gapBetweenBlocks(param1:uint) : void {
          this._gapBetweenBlocks = param1;
          invalidateSize();
       }
    }
-
 }

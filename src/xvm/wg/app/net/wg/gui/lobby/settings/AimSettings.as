@@ -9,47 +9,46 @@ package net.wg.gui.lobby.settings
    import scaleform.clik.events.IndexEvent;
    import net.wg.gui.lobby.settings.evnts.SettingViewEvent;
    import net.wg.gui.components.common.crosshair.ReloadingTimer;
-
-
+   
    public class AimSettings extends SettingsBaseView
    {
-          
+      
       public function AimSettings() {
          super();
       }
-
+      
       public var tabs:ButtonBarEx = null;
-
+      
       public var arcadeForm:SettingsAimForm = null;
-
+      
       public var sniperForm:SettingsAimForm = null;
-
+      
       public var crosshairMC:MovieClip = null;
-
+      
       public var arcadeCursor:MovieClip = null;
-
+      
       public var snipperCursor:MovieClip = null;
-
+      
       private var __currentTab:uint = 0;
-
+      
       private const FORM:String = "Form";
-
+      
       private const GUN_TAG_TYPE:String = "gunTagType";
-
+      
       private const GUN_TAG:String = "gunTag";
-
+      
       private const MIXING_TYPE:String = "mixingType";
-
+      
       private const MIXING:String = "mixing";
-
+      
       private var cassete:ClipQuantityBar = null;
-
+      
       private var snpCassete:ClipQuantityBar = null;
-
+      
       private var _dynamicCursorsData:Object = null;
-
+      
       private var _setDataInProgress:Boolean = false;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.cassete = ClipQuantityBar.create(7,1);
@@ -61,11 +60,11 @@ package net.wg.gui.lobby.settings
          MovieClip(this.arcadeCursor.cassette).addChild(this.cassete);
          MovieClip(this.snipperCursor.cassette).addChild(this.snpCassete);
       }
-
+      
       override public function update(param1:Object) : void {
          super.update(param1);
       }
-
+      
       override protected function setData(param1:Object) : void {
          var _loc2_:String = null;
          var _loc3_:String = null;
@@ -73,7 +72,7 @@ package net.wg.gui.lobby.settings
          super.setData(param1);
          this._dynamicCursorsData = {};
          this._setDataInProgress = true;
-         for (_loc2_ in param1)
+         for(_loc2_ in param1)
          {
             if(this[_loc2_ + this.FORM])
             {
@@ -81,7 +80,7 @@ package net.wg.gui.lobby.settings
                _loc4_.setData(_loc2_,param1[_loc2_]);
                _loc4_.addEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE,this.onControlChange);
             }
-            for (_loc3_ in param1[_loc2_])
+            for(_loc3_ in param1[_loc2_])
             {
                if(!this._dynamicCursorsData.hasOwnProperty(_loc2_))
                {
@@ -95,7 +94,7 @@ package net.wg.gui.lobby.settings
          this.tabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
          this.tabs.selectedIndex = this.__currentTab;
       }
-
+      
       private function onControlChange(param1:SettingsSubVewEvent) : void {
          if(this._setDataInProgress)
          {
@@ -112,12 +111,12 @@ package net.wg.gui.lobby.settings
          dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc2_,_loc4_));
          this.updateCrosshairs(this.__currentTab);
       }
-
+      
       private function onTabChange(param1:IndexEvent) : void {
          this.__currentTab = param1.index;
          this.updateShowContent();
       }
-
+      
       private function updateShowContent() : void {
          var _loc3_:SettingsAimForm = null;
          var _loc4_:MovieClip = null;
@@ -133,7 +132,7 @@ package net.wg.gui.lobby.settings
          }
          this.updateCrosshairs(this.__currentTab);
       }
-
+      
       private function updateCrosshairs(param1:Number) : void {
          var _loc14_:ReloadingTimer = null;
          var _loc2_:String = SettingsConfig.cursorTabsDataProvider[param1].id;
@@ -193,7 +192,7 @@ package net.wg.gui.lobby.settings
          }
          this.setCrossHair(this._dynamicCursorsData[_loc2_][this.GUN_TAG_TYPE],this._dynamicCursorsData[_loc2_][this.GUN_TAG],this._dynamicCursorsData[_loc2_][this.MIXING_TYPE],this._dynamicCursorsData[_loc2_][this.MIXING]);
       }
-
+      
       private function setCrossHair(param1:String, param2:Number, param3:String, param4:Number) : void {
          this.crosshairMC.gotoAndStop(50);
          this.crosshairMC.markerMC.gotoAndStop("type" + param1);
@@ -203,7 +202,7 @@ package net.wg.gui.lobby.settings
          this.crosshairMC.radiusMC.mixingMC.alpha = param4 / 100;
          this.crosshairMC.markerMC.tag.gotoAndStop("normal");
       }
-
+      
       override protected function onDispose() : void {
          this._dynamicCursorsData = null;
          if((this.cassete) && (this.arcadeCursor))
@@ -225,10 +224,9 @@ package net.wg.gui.lobby.settings
          }
          super.onDispose();
       }
-
+      
       override public function toString() : String {
          return "[WG AimSettings " + name + "]";
       }
    }
-
 }

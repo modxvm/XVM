@@ -1,20 +1,18 @@
 package net.wg.gui.components.controls
 {
-
-
    public class DropDownImageText extends DropdownMenu
    {
-          
+      
       public function DropDownImageText() {
          super();
       }
-
+      
       public var icon:UILoaderAlt;
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function onDispose() : void {
          if(this.icon)
          {
@@ -23,7 +21,7 @@ package net.wg.gui.components.controls
          }
          super.onDispose();
       }
-
+      
       override protected function populateText(param1:Object) : void {
          super.populateText(param1);
          this.icon.visible = true;
@@ -32,10 +30,9 @@ package net.wg.gui.components.controls
             this.icon.source = param1.icon;
          }
       }
-
+      
       override public function toString() : String {
          return "[WG DropDownImageText " + name + "]";
       }
    }
-
 }

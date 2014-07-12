@@ -10,21 +10,20 @@ package net.wg.gui.prebattle.invites
    import flash.utils.setTimeout;
    import flash.utils.clearTimeout;
    import flash.display.InteractiveObject;
-
-
+   
    public class PrbInviteSearchUsersForm extends InviteStackContainerBase
    {
-          
+      
       public function PrbInviteSearchUsersForm() {
          super();
       }
-
+      
       public var nameInput:TextInput;
-
+      
       public var searchButton:SoundButtonEx;
-
+      
       private var searchButtonIntervalID:uint = 0;
-
+      
       override protected function configUI() : void {
          this.nameInput.focusable = true;
          if(this.searchButton != null)
@@ -38,7 +37,7 @@ package net.wg.gui.prebattle.invites
          }
          super.configUI();
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.details.code == Keyboard.ENTER && param1.details.value == InputValue.KEY_UP)
          {
@@ -49,8 +48,8 @@ package net.wg.gui.prebattle.invites
             }
          }
       }
-
-      private function handleSearchUsers(param1:ButtonEvent=null) : void {
+      
+      private function handleSearchUsers(param1:ButtonEvent = null) : void {
          var _loc2_:String = null;
          _loc2_ = StringUtils.trim(this.nameInput.text);
          if(_loc2_ == null)
@@ -63,24 +62,24 @@ package net.wg.gui.prebattle.invites
          _loc3_.searchString = _loc2_;
          dispatchEvent(_loc3_);
       }
-
+      
       private function coolDownButton() : void {
          this.enableButton(false);
          this.searchButtonIntervalID = setTimeout(this.enableButton,1000,true);
       }
-
-      private function enableButton(param1:Boolean=false) : void {
+      
+      private function enableButton(param1:Boolean = false) : void {
          this.searchButton.enabled = param1;
          if(this.searchButtonIntervalID != 0)
          {
             clearTimeout(this.searchButtonIntervalID);
          }
       }
-
+      
       override public function getComponentForFocus() : InteractiveObject {
          return this.nameInput;
       }
-
+      
       override protected function onDispose() : void {
          if(this.searchButton != null)
          {
@@ -90,5 +89,4 @@ package net.wg.gui.prebattle.invites
          super.onDispose();
       }
    }
-
 }

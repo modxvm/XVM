@@ -13,35 +13,34 @@ package net.wg.gui.messenger.forms
    import net.wg.gui.prebattle.invites.PrbSendInviteCIGenerator;
    import flash.utils.getQualifiedClassName;
    import flash.display.InteractiveObject;
-
-
+   
    public class ContactsListForm extends UIComponent implements IViewStackContent
    {
-          
+      
       public function ContactsListForm() {
          super();
       }
-
+      
       private static const FRIENDS_ROSTER:String = "ContactsFriendsRosterUI";
-
+      
       private static const CLAN_ROSTER:String = "ContactsClanRosterUI";
-
+      
       private static const IGNORED_ROSTER:String = "ContactsIgnoredRosterUI";
-
+      
       private static const MUTED_ROSTER:String = "ContactsMutedRosterUI";
-
+      
       private static const INVALIDATE_VIEW:String = "invalidateView";
-
+      
       public var accordion:Accordion;
-
+      
       public var friendsDP:DAAPIDataProvider;
-
+      
       public var clanDP:DAAPIDataProvider;
-
+      
       public var ignoredDP:DAAPIDataProvider;
-
+      
       public var mutedDP:DAAPIDataProvider;
-
+      
       public function update(param1:Object) : void {
          if(param1)
          {
@@ -52,7 +51,7 @@ package net.wg.gui.messenger.forms
             this.updateViewData();
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.accordion.removeEventListener(SendInvitesEvent.SHOW_CONTEXT_MENU,this.showContextMenu);
@@ -83,7 +82,7 @@ package net.wg.gui.messenger.forms
             this.accordion.dataProvider = null;
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          constraints = new Constraints(this,ConstrainMode.REFLOW);
@@ -92,7 +91,7 @@ package net.wg.gui.messenger.forms
          this.accordion.addEventListener(IndexEvent.INDEX_CHANGE,this.onViewChanged);
          this.initAccordion();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((constraints) && (isInvalid(InvalidationType.SIZE)))
@@ -106,49 +105,45 @@ package net.wg.gui.messenger.forms
             this.updateViewSize();
          }
       }
-
+      
       private function initAccordion() : void {
          var _loc1_:Array = [
             {
                "label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS,
                "linkage":FRIENDS_ROSTER
-            }
-         ,
+            },
             {
                "label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN,
                "linkage":CLAN_ROSTER
-            }
-         ,
+            },
             {
                "label":MESSENGER.DIALOGS_CONTACTS_TREE_IGNORED,
                "linkage":IGNORED_ROSTER
-            }
-         ];
+            }];
          if(App.voiceChatMgr.isVOIPEnabledS())
          {
             _loc1_.push(
                {
                   "label":MESSENGER.DIALOGS_CONTACTS_TREE_MUTED,
                   "linkage":MUTED_ROSTER
-               }
-            );
+               });
          }
          this.accordion.view.cache = true;
          this.accordion.dataProvider = new DataProvider(_loc1_);
          this.accordion.selectedIndex = 0;
       }
-
+      
       private function onViewChanged(param1:IndexEvent) : void {
          invalidate(INVALIDATE_VIEW);
       }
-
+      
       private function showContextMenu(param1:SendInvitesEvent) : void {
          if(param1.initItem)
          {
             App.contextMenuMgr.showUserContextMenu(this,param1.initItem,new PrbSendInviteCIGenerator());
          }
       }
-
+      
       private function updateViewData() : void {
          var _loc2_:String = null;
          var _loc3_:DAAPIDataProvider = null;
@@ -177,11 +172,11 @@ package net.wg.gui.messenger.forms
             }
          }
       }
-
+      
       private function updateViewSize() : void {
          var _loc1_:String = null;
          var _loc2_:UIComponent = null;
-         for (_loc1_ in this.accordion.view.cachedViews)
+         for(_loc1_ in this.accordion.view.cachedViews)
          {
             _loc2_ = this.accordion.view.cachedViews[_loc1_] as UIComponent;
             _loc2_.setSize(this.accordion.actualViewWidth,this.accordion.actualViewHeight);
@@ -191,10 +186,13 @@ package net.wg.gui.messenger.forms
             }
          }
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

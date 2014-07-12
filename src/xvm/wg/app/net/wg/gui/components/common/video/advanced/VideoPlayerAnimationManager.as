@@ -3,37 +3,36 @@ package net.wg.gui.components.common.video.advanced
    import net.wg.gui.utils.ExcludeTweenManager;
    import fl.transitions.easing.Strong;
    import scaleform.clik.motion.Tween;
-
-
+   
    public class VideoPlayerAnimationManager extends Object
    {
-          
+      
       public function VideoPlayerAnimationManager(param1:AdvancedVideoPlayer) {
          this.tweenManager = new ExcludeTweenManager();
          super();
          this.advancedVideoPlayer = param1;
       }
-
+      
       private static const animationTweenObect:Object;
-
+      
       private static const showAlphaFinalValue:Number = 1;
-
+      
       private static const hideAlphaFinalValue:Number = 0;
-
+      
       private var advancedVideoPlayer:AdvancedVideoPlayer;
-
+      
       private var tweenManager:ExcludeTweenManager;
-
+      
       public function show(param1:Number) : void {
          this.tweenManager.unregisterAll();
          this.applyAnimation(param1,showAlphaFinalValue,this.getShowAnimTweenSet);
       }
-
+      
       public function hide(param1:Number) : void {
          this.tweenManager.unregisterAll();
          this.applyAnimation(param1,hideAlphaFinalValue,this.getHideAnimTweenSet);
       }
-
+      
       private function applyAnimation(param1:Number, param2:Number, param3:Function) : void {
          var _loc5_:VideoPlayerControlBar = null;
          var _loc6_:AbstractPlayerProgressBar = null;
@@ -69,32 +68,32 @@ package net.wg.gui.components.common.video.advanced
             _loc6_.visible = _loc7_;
          }
       }
-
+      
       private function getShowAnimTweenSet() : Object {
-         return {
-            "ease":Strong.easeOut,
-            "onComplete":this.onShowTweenComplete
-         }
-         ;
+         return 
+            {
+               "ease":Strong.easeOut,
+               "onComplete":this.onShowTweenComplete
+            };
       }
-
+      
       private function getHideAnimTweenSet() : Object {
-         return {
-            "ease":Strong.easeOut,
-            "onComplete":this.onHideTweenComplete
-         }
-         ;
+         return 
+            {
+               "ease":Strong.easeOut,
+               "onComplete":this.onHideTweenComplete
+            };
       }
-
+      
       private function onHideTweenComplete(param1:Tween) : void {
          param1.target.visible = false;
          this.tweenManager.unregister(param1);
       }
-
+      
       private function onShowTweenComplete(param1:Tween) : void {
          this.tweenManager.unregister(param1);
       }
-
+      
       public function dispose() : void {
          this.advancedVideoPlayer = null;
          if(this.tweenManager)
@@ -104,5 +103,4 @@ package net.wg.gui.components.common.video.advanced
          }
       }
    }
-
 }

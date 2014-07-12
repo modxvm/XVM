@@ -9,7 +9,6 @@ package net.wg.gui.lobby.hangar.tcarousel
    import net.wg.gui.components.controls.DropDownImageText;
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
-   import __AS3__.vec.Vector;
    import scaleform.clik.interfaces.IListItemRenderer;
    import net.wg.gui.lobby.hangar.tcarousel.helper.VehicleCarouselVOManager;
    import flash.display.DisplayObject;
@@ -30,14 +29,12 @@ package net.wg.gui.lobby.hangar.tcarousel
    import net.wg.infrastructure.interfaces.IContextItem;
    import net.wg.data.components.UserContextItem;
    import net.wg.data.VO.SeparateItem;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.clik.data.ListData;
    import net.wg.gui.events.ContextMenuEvent;
-
-
+   
    public class TankCarousel extends TankCarouselMeta implements ITankCarouselMeta, IDAAPIModule, IHelpLayoutComponent
    {
-          
+      
       public function TankCarousel() {
          this.filterData = {};
          super();
@@ -63,82 +60,81 @@ package net.wg.gui.lobby.hangar.tcarousel
          bg = this.bg1;
          this._currentShowByCompactDescription = [];
       }
-
+      
       public static const FILTERS_CAROUSEL_OFFSET:Number = 15;
-
+      
       public static const SHOW_VEHICLE_STATS:String = "showVehicleStatistics";
-
+      
       public static const VO_VEHICLES_IS_INVALID:String = "vo_vehicles_is_invalid";
-
+      
       public var vehicleFilters:TankCarouselFilters;
-
+      
       public var dragHitArea1:MovieClip;
-
+      
       public var leftArrow1:SoundButton;
-
+      
       public var rightArrow1:SoundButton;
-
+      
       public var renderersMask1:MovieClip;
-
+      
       public var bg1:MovieClip;
-
+      
       private var filterData:Object;
-
+      
       private var filterDataInvalid:Boolean = false;
-
-      private var nationFilter:net.wg.gui.components.controls.DropDownImageText;
-
-      private var tankFilter:net.wg.gui.components.controls.DropDownImageText;
-
+      
+      private var nationFilter:DropDownImageText;
+      
+      private var tankFilter:DropDownImageText;
+      
       private var checkBoxToMain:CheckBox;
-
+      
       private var _slotPrice:Number = 0;
-
+      
       private var _slotPriceActionData:ActionPriceVO = null;
-
+      
       private var _selectedVehicleCompactID:Number = -1;
-
+      
       private var _availableSlotsForBuyVehicle:Number = 0;
-
+      
       private var _updateShowByCompactDescription:Array = null;
-
+      
       private var _currentShowByCompactDescription:Array = null;
-
+      
       private var _currentShowRendersByIndex:Vector.<IListItemRenderer> = null;
-
+      
       private var _createdRendersListByCompDescr:Object = null;
-
+      
       private var _createdRendersListByCompDescrLength:Number = 0;
-
+      
       private var _vehiclesVOManager:VehicleCarouselVOManager = null;
-
+      
       private var _slotForBuySlot:IListItemRenderer = null;
-
+      
       private var _slotForBuyVehicle:IListItemRenderer = null;
-
+      
       private var _updateInProgress:Boolean = false;
-
+      
       private var _rendererHelpLayout:DisplayObject;
-
+      
       private var _isShowHelpLayout:Boolean = false;
-
+      
       private var skipScrollToIndex:Boolean = false;
-
+      
       override public function scrollToIndex(param1:uint) : void {
          var _loc2_:uint = 0;
          if((container) && (_renderers))
          {
             _loc2_ = Math.floor(_visibleSlots / 2);
-            _loc2_ = _visibleSlots % 2 == 1?_loc2_:_loc2_-1;
+            _loc2_ = _visibleSlots % 2 == 1?_loc2_:_loc2_ - 1;
             currentFirstRenderer = Math.min(_renderers.length - _visibleSlots,Math.max(0,param1 - _loc2_));
             goToFirstRenderer();
          }
       }
-
+      
       public function as_populate() : void {
-          
       }
-
+      
       public function as_dispose() : void {
          var _loc1_:String = null;
          this.tankFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.onVehicleTypeFilterChanged);
@@ -152,9 +148,9 @@ package net.wg.gui.lobby.hangar.tcarousel
          this.rightArrow1 = null;
          this.renderersMask1 = null;
          this.bg1 = null;
-         for (_loc1_ in this.filterData)
+         for(_loc1_ in this.filterData)
          {
-            delete this.filterData[[_loc1_]];
+            delete this.filterData[_loc1_];
          }
          this.filterData = null;
          this.nationFilter = null;
@@ -184,7 +180,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          App.utils.asserter.assert(_loc2_.numChildren == 0,"container is not empty after dispose!");
       }
-
+      
       override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
          var _loc2_:Number = _renderers.indexOf(param1);
          if(_loc2_ != -1)
@@ -197,18 +193,18 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          super.cleanUpRenderer(param1);
       }
-
+      
       public function as_setCarouselFilter(param1:Object) : void {
          this.filterData = param1;
          this.filterDataInvalid = true;
          this.updateFiltersData();
       }
-
+      
       public function as_setParams(param1:Object) : void {
          var _loc5_:IListItemRenderer = null;
          var _loc6_:VehicleCarouselVO = null;
          var _loc7_:DisplayObject = null;
-         this._slotPrice = param1.slotPrice  is  Array?param1.slotPrice[0] > 0?param1.slotPrice[0]:param1.slotPrice[1]:param1.slotPrice;
+         this._slotPrice = param1.slotPrice is Array?param1.slotPrice[0] > 0?param1.slotPrice[0]:param1.slotPrice[1]:param1.slotPrice;
          var _loc2_:Object = (param1.hasOwnProperty("slotPriceActionData")) && !(param1.slotPriceActionData == undefined)?param1.slotPriceActionData:null;
          if(_loc2_)
          {
@@ -229,19 +225,19 @@ package net.wg.gui.lobby.hangar.tcarousel
             if(_loc4_)
             {
                this.removeEmptySlots();
-               _loc5_ = getRendererAt(_renderers.length-1,0);
+               _loc5_ = getRendererAt(_renderers.length - 1,0);
                _loc6_ = (_loc5_ as TankCarouselItemRenderer).dataVO;
                if(_loc6_.buySlot)
                {
-                  _renderers.splice(_renderers.length-1,1);
+                  _renderers.splice(_renderers.length - 1,1);
                }
                if(this._availableSlotsForBuyVehicle <= 0)
                {
-                  _loc5_ = getRendererAt(_renderers.length-1,0);
+                  _loc5_ = getRendererAt(_renderers.length - 1,0);
                   _loc6_ = (_loc5_ as TankCarouselItemRenderer).dataVO;
                   if(_loc6_.buyTank)
                   {
-                     _renderers.splice(_renderers.length-1,1);
+                     _renderers.splice(_renderers.length - 1,1);
                      _loc5_.x = 0;
                      _loc7_ = _loc5_ as DisplayObject;
                      _loc7_.visible = false;
@@ -296,7 +292,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
          }
       }
-
+      
       public function as_updateVehicles(param1:Object, param2:Boolean) : void {
          this._updateInProgress = true;
          if(!this._vehiclesVOManager)
@@ -313,7 +309,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          invalidate(VO_VEHICLES_IS_INVALID);
       }
-
+      
       public function as_showVehicles(param1:Array) : void {
          this._updateShowByCompactDescription = param1;
          if(!this._updateInProgress)
@@ -321,7 +317,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             invalidate(InvalidationType.RENDERERS);
          }
       }
-
+      
       public function showHelpLayout() : void {
          var _loc1_:IHelpLayout = null;
          var _loc2_:Object = null;
@@ -333,21 +329,21 @@ package net.wg.gui.lobby.hangar.tcarousel
             this._rendererHelpLayout = _loc1_.create(root,_loc2_,this);
          }
       }
-
+      
       public function closeHelpLayout() : void {
          this._isShowHelpLayout = false;
          var _loc1_:IHelpLayout = App.utils.helpLayout;
          _loc1_.destroy(this._rendererHelpLayout);
       }
-
+      
       public function onFilterChanged() : void {
          setVehiclesFilterS(this.filterData.nation,this.filterData.tankType,this.filterData.ready);
       }
-
+      
       override public function get selectedIndex() : int {
          return _selectedIndex;
       }
-
+      
       override public function set selectedIndex(param1:int) : void {
          var _loc2_:IListItemRenderer = null;
          if(selectedItemRenderer)
@@ -373,14 +369,14 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          _selectedIndex = param1;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          var _loc2_:String = null;
          var _loc3_:IListItemRenderer = null;
          super.enabled = param1;
          if(this._createdRendersListByCompDescr != null)
          {
-            for (_loc2_ in this._createdRendersListByCompDescr)
+            for(_loc2_ in this._createdRendersListByCompDescr)
             {
                _loc3_ = this._createdRendersListByCompDescr[_loc2_];
                if(_loc3_ != null)
@@ -390,16 +386,16 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
          }
       }
-
+      
       public function get disposed() : Boolean {
          return false;
       }
-
+      
       override protected function configUI() : void {
          this.initFilters();
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -407,6 +403,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          if(isInvalid(VO_VEHICLES_IS_INVALID))
          {
             this.rebuildRenderers();
+            this._vehiclesVOManager.clearAndInitDynamicData();
             this._updateInProgress = false;
          }
          if((isInvalid(InvalidationType.RENDERERS)) && !(this._updateShowByCompactDescription == null))
@@ -472,28 +469,28 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          super.draw();
       }
-
+      
       override protected function initUIStartPosition() : void {
          this.vehicleFilters.x = contentMargin;
          this.vehicleFilters.y = contentMargin;
          super.initUIStartPosition();
       }
-
+      
       override protected function updateArrowsState() : void {
          super.updateArrowsState();
       }
-
+      
       override protected function setupRenderer(param1:IListItemRenderer) : void {
          super.setupRenderer(param1);
       }
-
+      
       override protected function handleMouseWheel(param1:MouseEvent) : void {
          if((enabled) && (allowDrag) && (dragHitArea.hitTestPoint(stage.mouseX,stage.mouseY)) && !isPreDragging)
          {
             super.handleMouseWheel(param1);
          }
       }
-
+      
       override protected function onItemRollOver(param1:ListEventEx) : void {
          super.onItemRollOver(param1);
          if(isSliding)
@@ -517,17 +514,17 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          App.toolTipMgr.showSpecial(Tooltips.CAROUSEL_VEHICLE,null,_loc2_.inventoryId);
       }
-
+      
       override protected function onItemRollOut(param1:ListEventEx) : void {
          super.onItemRollOut(param1);
          App.toolTipMgr.hide();
       }
-
+      
       override protected function onItemStartDrag(param1:ListEventEx) : void {
          App.toolTipMgr.hide();
          super.onItemStartDrag(param1);
       }
-
+      
       override protected function handleItemClick(param1:ButtonEvent) : void {
          App.toolTipMgr.hide();
          if(isMoving)
@@ -551,7 +548,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
          }
       }
-
+      
       override protected function onItemClick(param1:ListEventEx) : void {
          var _loc2_:VehicleCarouselVO = param1.itemData as VehicleCarouselVO;
          if(_loc2_.empty)
@@ -577,35 +574,33 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.skipScrollToIndex = true;
             this.selectItem(_loc2_.id);
          }
-         else
+         else if(param1.buttonIdx == 1 && !_loc2_.buyTank && !_loc2_.buySlot)
          {
-            if(param1.buttonIdx == 1 && !_loc2_.buyTank && !_loc2_.buySlot)
-            {
-               this.showContextMenu(_loc2_);
-            }
+            this.showContextMenu(_loc2_);
          }
+         
       }
-
+      
       private function updateSlotForBuyVehicle(param1:Boolean) : void {
          this.populateRendererData(this._currentShowRendersByIndex.length,this._slotForBuyVehicle,VehicleCarouselVOBuilder.instance.getDataVoForBuyVehicle(this._availableSlotsForBuyVehicle),param1,true);
       }
-
+      
       private function updateSlotForBuySlot(param1:Boolean) : void {
          this.populateRendererData(this._currentShowRendersByIndex.length,this._slotForBuySlot,VehicleCarouselVOBuilder.instance.getDataVoForBuySlot(this._slotPrice,this._slotPriceActionData),param1,true);
       }
-
+      
       private function tryBuyTank(param1:VehicleCarouselVO) : void {
          buyTankClickS();
       }
-
+      
       private function tryBuySlot(param1:VehicleCarouselVO) : void {
          buySlotS();
       }
-
+      
       private function selectItem(param1:Number) : void {
          vehicleChangeS(param1.toString());
       }
-
+      
       private function clearArrays(param1:Boolean) : void {
          var _loc2_:IListItemRenderer = null;
          var _loc3_:Array = null;
@@ -616,11 +611,11 @@ package net.wg.gui.lobby.hangar.tcarousel
             if(this._createdRendersListByCompDescr)
             {
                _loc3_ = [];
-               for (_loc4_ in this._createdRendersListByCompDescr)
+               for(_loc4_ in this._createdRendersListByCompDescr)
                {
                   _loc3_.push(_loc4_);
                }
-               for each (_loc4_ in _loc3_)
+               for each(_loc4_ in _loc3_)
                {
                   _loc2_ = IListItemRenderer(this._createdRendersListByCompDescr[_loc4_]);
                   _loc5_ = this._currentShowRendersByIndex.indexOf(_loc2_);
@@ -629,7 +624,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                      this._currentShowRendersByIndex.splice(_loc5_,1);
                   }
                   this.cleanUpRenderer(_loc2_);
-                  delete this._createdRendersListByCompDescr[[_loc4_]];
+                  delete this._createdRendersListByCompDescr[_loc4_];
                }
                _loc3_.splice(0,_loc3_.length);
                this._createdRendersListByCompDescr = null;
@@ -637,7 +632,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             this._createdRendersListByCompDescrLength = 0;
             if(this._currentShowRendersByIndex)
             {
-               for each (_loc2_ in this._currentShowRendersByIndex)
+               for each(_loc2_ in this._currentShowRendersByIndex)
                {
                   this.cleanUpRenderer(_loc2_);
                }
@@ -657,7 +652,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          this._currentShowByCompactDescription.splice(0,this._currentShowByCompactDescription.length);
       }
-
+      
       private function initFilters() : void {
          this.tankFilter.dataProvider = new DataProvider(getVehicleTypeProviderS());
          this.tankFilter.menuRowCount = this.tankFilter.dataProvider.length;
@@ -668,8 +663,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                "label":MENU.NATIONS_ALL,
                "data":TankCarouselFilters.FILTER_ALL_NATION,
                "icon":"../maps/icons/filters/nations/all.png"
-            }
-         ];
+            }];
          var _loc4_:uint = 0;
          while(_loc4_ < _loc2_.length)
          {
@@ -691,7 +685,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          this.nationFilter.addEventListener(ListEvent.INDEX_CHANGE,this.onNationFilterChanged);
          this.checkBoxToMain.addEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
       }
-
+      
       private function showHideFilters() : void {
          updateVisibleSlotsCount();
          var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);
@@ -701,14 +695,12 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.vehicleFilters.visible = false;
             this.vehicleFilters.close();
          }
-         else
+         else if(_loc1_)
          {
-            if(_loc1_)
-            {
-               leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
-               this.vehicleFilters.visible = true;
-            }
+            leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
+            this.vehicleFilters.visible = true;
          }
+         
          updateDefContainerPos();
          if((container) && (slidingIntervalId == 0) && !isTween)
          {
@@ -718,7 +710,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          updateVisibleSlotsCount();
       }
-
+      
       private function updateFiltersData() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -753,39 +745,38 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.checkBoxToMain.selected = this.filterData.ready;
          }
       }
-
+      
       private function showContextMenu(param1:VehicleCarouselVO) : void {
          var _loc2_:String = !param1.favorite?"vehicleCheck":"vehicleUncheck";
          App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("vehicleInfo"),new UserContextItem(SHOW_VEHICLE_STATS,{"enabled":App.contextMenuMgr.vehicleWasInBattle(param1.compactDescr)}),new SeparateItem(),new UserContextItem("vehicleSell",{"enabled":param1.canSell}),new SeparateItem(),new UserContextItem("vehicleResearch"),new UserContextItem(_loc2_)]),this,this.onContectMenuItemSelect,param1);
       }
-
+      
       private function rebuildRenderers() : void {
          var _loc1_:* = 0;
          var _loc2_:* = 0;
          var _loc3_:IListItemRenderer = null;
-         var _loc4_:IDisposable = null;
-         var _loc5_:Vector.<VehicleCarouselVO> = null;
+         var _loc4_:Vector.<VehicleCarouselVO> = null;
          if(this._createdRendersListByCompDescr == null)
          {
             this._createdRendersListByCompDescr = {};
          }
-         _loc5_ = this._vehiclesVOManager.getRemoved();
-         _loc2_ = _loc5_.length;
-         var _loc6_:VehicleCarouselVO = null;
+         _loc4_ = this._vehiclesVOManager.getRemoved();
+         _loc2_ = _loc4_.length;
+         var _loc5_:VehicleCarouselVO = null;
          _loc1_ = 0;
          while(_loc1_ < _loc2_)
          {
-            _loc6_ = _loc5_[_loc1_];
-            if(this._createdRendersListByCompDescr[_loc6_.compactDescr])
+            _loc5_ = _loc4_[_loc1_];
+            if(this._createdRendersListByCompDescr[_loc5_.compactDescr])
             {
-               _loc3_ = this._createdRendersListByCompDescr[_loc6_.compactDescr];
+               _loc3_ = this._createdRendersListByCompDescr[_loc5_.compactDescr];
                this.cleanUpRenderer(_loc3_);
-               delete this._createdRendersListByCompDescr[[_loc6_.compactDescr]];
+               delete this._createdRendersListByCompDescr[_loc5_.compactDescr];
             }
             _loc1_++;
          }
-         _loc5_ = this._vehiclesVOManager.getAdded();
-         _loc2_ = _loc5_.length;
+         _loc4_ = this._vehiclesVOManager.getAdded();
+         _loc2_ = _loc4_.length;
          _loc1_ = 0;
          while(_loc1_ < _loc2_)
          {
@@ -794,46 +785,46 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                break;
             }
-            _loc6_ = _loc5_[_loc1_];
-            if(!this._createdRendersListByCompDescr[_loc6_.compactDescr])
+            _loc5_ = _loc4_[_loc1_];
+            if(!this._createdRendersListByCompDescr[_loc5_.compactDescr])
             {
-               this._createdRendersListByCompDescr[_loc6_.compactDescr] = _loc3_;
+               this._createdRendersListByCompDescr[_loc5_.compactDescr] = _loc3_;
                container.addChild(_loc3_ as DisplayObject);
-               this.populateRendererData(_loc1_,_loc3_,_loc6_);
+               this.populateRendererData(_loc1_,_loc3_,_loc5_);
             }
             _loc1_++;
          }
-         _loc5_ = this._vehiclesVOManager.getUpdated();
-         _loc2_ = _loc5_.length;
+         _loc4_ = this._vehiclesVOManager.getUpdated();
+         _loc2_ = _loc4_.length;
          _loc1_ = 0;
          while(_loc1_ < _loc2_)
          {
-            _loc6_ = _loc5_[_loc1_];
-            if(this._createdRendersListByCompDescr[_loc6_.compactDescr])
+            _loc5_ = _loc4_[_loc1_];
+            if(this._createdRendersListByCompDescr[_loc5_.compactDescr])
             {
-               _loc3_ = this._createdRendersListByCompDescr[_loc6_.compactDescr];
-               this.populateRendererData(_loc1_,_loc3_,_loc6_,true);
+               _loc3_ = this._createdRendersListByCompDescr[_loc5_.compactDescr];
+               this.populateRendererData(_loc1_,_loc3_,_loc5_,true);
             }
             _loc1_++;
          }
          this.updateCreatedRenderersLength();
          invalidate(InvalidationType.RENDERERS);
       }
-
+      
       private function updateCreatedRenderersLength() : void {
          var _loc2_:String = null;
          var _loc1_:Number = 0;
          if(this._createdRendersListByCompDescr)
          {
-            for (_loc2_ in this._createdRendersListByCompDescr)
+            for(_loc2_ in this._createdRendersListByCompDescr)
             {
                _loc1_++;
             }
          }
          this._createdRendersListByCompDescrLength = _loc1_;
       }
-
-      private function populateRendererData(param1:Number, param2:IListItemRenderer, param3:VehicleCarouselVO, param4:Boolean=false, param5:Boolean=false) : void {
+      
+      private function populateRendererData(param1:Number, param2:IListItemRenderer, param3:VehicleCarouselVO, param4:Boolean = false, param5:Boolean = false) : void {
          var _loc8_:ListData = null;
          var _loc6_:DisplayObject = param2 as DisplayObject;
          var _loc7_:TankCarouselItemRenderer = param2 as TankCarouselItemRenderer;
@@ -851,20 +842,18 @@ package net.wg.gui.lobby.hangar.tcarousel
                selectedItemRenderer = param2;
             }
          }
-         else
+         else if(param5)
          {
-            if(param5)
-            {
-               _loc6_.visible = true;
-            }
+            _loc6_.visible = true;
          }
+         
       }
-
+      
       private function getRendererByCompactDescr(param1:Number) : IListItemRenderer {
          var _loc2_:IListItemRenderer = this._createdRendersListByCompDescr[param1];
          return _loc2_;
       }
-
+      
       private function removeRendererFromShowByCompactDescr(param1:Number) : void {
          var _loc3_:DisplayObject = null;
          var _loc2_:IListItemRenderer = this.getRendererByCompactDescr(param1);
@@ -874,7 +863,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             _loc3_.visible = false;
          }
       }
-
+      
       private function insertRendererToShowByNum(param1:Number, param2:Number) : void {
          var _loc3_:IListItemRenderer = this.getRendererByCompactDescr(param2);
          if(_loc3_)
@@ -883,7 +872,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             _renderers.push(_loc3_);
          }
       }
-
+      
       private function updateEmptySlots() : void {
          if(!_renderers)
          {
@@ -892,24 +881,24 @@ package net.wg.gui.lobby.hangar.tcarousel
          this.removeEmptySlots();
          this.addEmptySlots();
       }
-
+      
       private function removeEmptySlots() : void {
          var _loc1_:IListItemRenderer = null;
          var _loc2_:VehicleCarouselVO = null;
          while(_renderers.length)
          {
-            _loc1_ = getRendererAt(_renderers.length-1,0);
+            _loc1_ = getRendererAt(_renderers.length - 1,0);
             _loc2_ = (_loc1_ as TankCarouselItemRenderer).dataVO;
             if(_loc2_.empty)
             {
-               _renderers.splice(_renderers.length-1,1);
+               _renderers.splice(_renderers.length - 1,1);
                this.cleanUpRenderer(_loc1_);
                continue;
             }
             break;
          }
       }
-
+      
       private function addEmptySlots() : void {
          var _loc1_:DisplayObject = null;
          var _loc2_:IListItemRenderer = null;
@@ -928,13 +917,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             _loc1_.visible = true;
          }
       }
-
+      
       private function removeAdvancedSlots() : void {
          var _loc1_:IListItemRenderer = null;
          var _loc2_:VehicleCarouselVO = null;
          while(_renderers.length)
          {
-            _loc1_ = getRendererAt(_renderers.length-1,0);
+            _loc1_ = getRendererAt(_renderers.length - 1,0);
             if(!_loc1_)
             {
                break;
@@ -942,7 +931,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             _loc2_ = (_loc1_ as TankCarouselItemRenderer).dataVO;
             if((_loc2_.buySlot) || (_loc2_.buyTank))
             {
-               _renderers.splice(_renderers.length-1,1);
+               _renderers.splice(_renderers.length - 1,1);
                if(this._availableSlotsForBuyVehicle <= 0 && (_loc2_.buyTank))
                {
                   this.cleanUpRenderer(_loc1_);
@@ -956,7 +945,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             break;
          }
       }
-
+      
       private function addAdvancedSlots() : void {
          var _loc1_:DisplayObject = null;
          if(this._availableSlotsForBuyVehicle > 0)
@@ -1001,7 +990,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          _loc1_.visible = true;
       }
-
+      
       private function repositionRenderers() : void {
          var _loc2_:IListItemRenderer = null;
          var _loc3_:DisplayObject = null;
@@ -1024,22 +1013,22 @@ package net.wg.gui.lobby.hangar.tcarousel
          _loc4_ = _loc4_ == -1?0:_loc4_;
          this.scrollToIndex(_loc4_);
       }
-
+      
       private function onFilterCheckBoxChanged(param1:Event) : void {
          this.filterData.ready = this.checkBoxToMain.selected;
          this.onFilterChanged();
       }
-
+      
       private function onVehicleTypeFilterChanged(param1:ListEvent) : void {
          this.filterData.tankType = param1.itemData.data;
          this.onFilterChanged();
       }
-
+      
       private function onNationFilterChanged(param1:ListEvent) : void {
          this.filterData.nation = param1.itemData.data;
          this.onFilterChanged();
       }
-
+      
       private function onContectMenuItemSelect(param1:ContextMenuEvent) : void {
          var _loc2_:Object = param1.memberItemData;
          switch(param1.id)
@@ -1064,10 +1053,9 @@ package net.wg.gui.lobby.hangar.tcarousel
                break;
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
       }
    }
-
 }

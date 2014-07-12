@@ -8,11 +8,10 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
    import net.wg.gui.lobby.fortifications.data.OrderInfoVO;
    import net.wg.data.constants.Values;
    import net.wg.gui.utils.ComplexTooltipHelper;
-
-
+   
    public class OrderInfoCmp extends MovieClip implements IDisposable
    {
-          
+      
       public function OrderInfoCmp() {
          super();
          this._descrRightMargin = this.description.x + this.description.width;
@@ -21,41 +20,35 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.alertIcon.addEventListener(MouseEvent.ROLL_OVER,showAlertTooltip);
          this.alertIcon.addEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
       }
-
+      
       private static const TEXT_OFFSET_NO_ICON:int = 10;
-
+      
       private static const TEXT_OFFSET_ICON:int = 6;
-
+      
       private static function onRollOutHandler(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private static function showAlertTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE);
       }
-
+      
       public var infoIcon:UILoaderAlt;
-
+      
       public var title:TextField;
-
+      
       public var resourceIcon:OrderInfoIconCmp;
-
+      
       public var description:TextField;
-
+      
       public var alertIcon:MovieClip;
-
+      
       private var model:OrderInfoVO;
-
+      
       private var _tooltipText:String = "";
-
-      private var _firtCharToUpper:Boolean = false;
-
+      
       private var _descrRightMargin:Number;
-
-      public function set firtCharToUpper(param1:Boolean) : void {
-         this._firtCharToUpper = param1;
-      }
-
+      
       public function dispose() : void {
          this.resourceIcon.dispose();
          this.resourceIcon = null;
@@ -73,14 +66,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.model = null;
          }
       }
-
+      
       public function setData(param1:OrderInfoVO) : void {
-         var _loc2_:String = null;
-         var _loc3_:String = null;
-         var _loc4_:* = 0;
-         var _loc5_:String = null;
-         var _loc6_:String = null;
-         var _loc7_:String = null;
          this.model = param1;
          if(this.model.iconSource != Values.EMPTY_STR)
          {
@@ -99,17 +86,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.description.width = this._descrRightMargin - this.description.x;
          this.description.htmlText = this.model.description;
          this.alertIcon.visible = this.model.isPermanent;
-         if(this._firtCharToUpper)
-         {
-            _loc2_ = this.description.htmlText;
-            _loc3_ = this.description.text;
-            _loc4_ = _loc2_.indexOf(_loc3_);
-            _loc5_ = _loc2_.substr(0,_loc4_);
-            _loc6_ = _loc2_.substr(_loc4_ + 1,_loc2_.length);
-            _loc7_ = App.utils.toUpperOrLowerCase(_loc3_.charAt(0),true);
-            _loc2_ = _loc5_ + _loc7_ + _loc6_;
-            this.description.htmlText = _loc2_;
-         }
          if(!(this.model.infoIconSource == Values.EMPTY_STR) && !(this.model.infoIconSource == null))
          {
             this.infoIcon.source = this.model.infoIconSource;
@@ -124,14 +100,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
          App.utils.commons.moveIconToEndOfText(this.alertIcon,this.title);
       }
-
+      
       protected function prepareToolTipMessage() : void {
          this._tooltipText = new ComplexTooltipHelper().addHeader(this.model.infoIconToolTipData["header"]).addBody(this.model.infoIconToolTipData["body"]).addNote("",false).make();
       }
-
+      
       private function onRollOverHandler(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(this._tooltipText);
       }
    }
-
 }

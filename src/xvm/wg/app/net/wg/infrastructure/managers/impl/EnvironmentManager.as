@@ -6,18 +6,17 @@ package net.wg.infrastructure.managers.impl
    import flash.external.ExternalInterface;
    import net.wg.infrastructure.exceptions.EnvironmentException;
    import flash.system.fscommand;
-
-
+   
    public final class EnvironmentManager extends EventDispatcher implements IEnvironmentManager
    {
-          
+      
       public function EnvironmentManager() {
          super();
          ms_instance = this;
       }
-
+      
       private static var ms_instance:EnvironmentManager = null;
-
+      
       public static function getInstance() : IEnvironmentManager {
          if(ms_instance == null)
          {
@@ -25,27 +24,27 @@ package net.wg.infrastructure.managers.impl
          }
          return ms_instance;
       }
-
+      
       private var _useEventSystem:Boolean = false;
-
+      
       private var _result:Object = null;
-
+      
       public function quit() : void {
          this.dofsCommand(EnvironmentEvent.QIUT);
       }
-
+      
       public function logoff() : void {
          this.dofsCommand(EnvironmentEvent.LOGOFF);
       }
-
+      
       public final function useEventSystem() : void {
          this._useEventSystem = true;
       }
-
+      
       public final function useExternallInterface() : void {
          this._useEventSystem = false;
       }
-
+      
       public final function addCallback(param1:String, param2:Function) : void {
          if(this._useEventSystem)
          {
@@ -56,7 +55,7 @@ package net.wg.infrastructure.managers.impl
             ExternalInterface.addCallback(param1,param2);
          }
       }
-
+      
       public final function call(... rest) : * {
          var _loc2_:String = null;
          var _loc3_:String = null;
@@ -89,7 +88,7 @@ package net.wg.infrastructure.managers.impl
             return ExternalInterface.call.apply(this,rest);
          }
       }
-
+      
       public final function envoke(param1:String) : * {
          this._result = null;
          if(this._useEventSystem)
@@ -99,11 +98,11 @@ package net.wg.infrastructure.managers.impl
          }
          return ExternalInterface.call(param1);
       }
-
+      
       public function setLastResult(param1:Object) : void {
          this._result = param1;
       }
-
+      
       private function dofsCommand(param1:String) : void {
          if(this._useEventSystem)
          {
@@ -115,5 +114,4 @@ package net.wg.infrastructure.managers.impl
          }
       }
    }
-
 }

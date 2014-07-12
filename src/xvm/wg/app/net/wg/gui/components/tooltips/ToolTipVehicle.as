@@ -6,20 +6,19 @@ package net.wg.gui.components.tooltips
    import net.wg.data.managers.ITooltipProps;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import net.wg.gui.components.tooltips.VO.VehicleVO;
+   import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
    import flash.text.TextFormat;
    import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
-   import net.wg.utils.ILocale;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
    import flash.text.StyleSheet;
    import net.wg.data.constants.IconsTypes;
-
-
+   
    public class ToolTipVehicle extends ToolTipSpecial
    {
-          
+      
       public function ToolTipVehicle() {
          super();
          this.favoriteTextField = this.vehicleFavorite.textFied;
@@ -30,42 +29,43 @@ package net.wg.gui.components.tooltips
          this.tooltipStatus = content.tooltipStatus;
          this.vehicleLockText = this.vehicleLock.textField;
       }
-
+      
       public var vehicleFavorite:MovieClip = null;
-
+      
       public var favoriteTextField:TextField = null;
-
+      
       public var headerTF:TextField = null;
-
+      
       public var tankTypeIco:TankTypeIco = null;
-
+      
       public var eliteGlow:MovieClip = null;
-
+      
       public var vehicleLock:MovieClip = null;
-
+      
       public var vehicleLockText:TextField = null;
-
+      
       public var tooltipStatus:Status = null;
-
+      
       override public function build(param1:Object, param2:ITooltipProps) : void {
          super.build(param1,param2);
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
       }
-
+      
       override public function toString() : String {
          return "[WG ToolTipVehicle " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function redraw() : void {
          var _loc2_:ToolTipBlockResultVO = null;
          var _loc5_:VehicleVO = null;
+         var _loc6_:ILocale = null;
          var _loc11_:ToolTipBlockVO = null;
          var _loc12_:String = null;
          var _loc13_:String = null;
@@ -98,7 +98,7 @@ package net.wg.gui.components.tooltips
          this.vehicleFavorite.visible = _loc5_.isFavorite;
          this.eliteGlow.gotoAndStop(_loc5_.isElite?"elite":"normal");
          this.tankTypeIco.type = _loc5_.isElite?_loc5_.vType + "_elite":_loc5_.vType;
-         var _loc6_:ILocale = App.utils.locale;
+         _loc6_ = App.utils.locale;
          if(!_loc6_)
          {
             return;
@@ -143,16 +143,14 @@ package net.wg.gui.components.tooltips
                   "fontSize":"11px",
                   "fontFamily":"$TextFont",
                   "leading":"2px"
-               }
-            );
+               });
             _loc11_.rightTextCSS.setStyle("p",
                {
                   "color":Utils.instance.COLOR_ALERT,
                   "fontSize":"11px",
                   "fontFamily":"$TextFont",
                   "leading":"2px"
-               }
-            );
+               });
             _loc12_ = "";
             _loc13_ = _loc6_?_loc6_.makeString(TOOLTIPS.ITEMSTATUS_NOTENOUGH,{}):TOOLTIPS.ITEMSTATUS_NOTENOUGH;
             _loc14_ = "";
@@ -291,16 +289,14 @@ package net.wg.gui.components.tooltips
                   "fontSize":"11px",
                   "fontFamily":"$TextFont",
                   "leading":"2px"
-               }
-            );
+               });
             _loc25_.rightTextCSS.setStyle("p",
                {
                   "color":Utils.instance.COLOR_SUB_NORMAL,
                   "fontSize":"11px",
                   "fontFamily":"$TextFont",
                   "leading":"2px"
-               }
-            );
+               });
             _loc3_ = _loc5_.characteristics.length;
             _loc4_ = 0;
             while(_loc4_ < _loc3_)
@@ -341,17 +337,15 @@ package net.wg.gui.components.tooltips
                {
                   _loc27_.leftText = _loc27_.leftText + (Utils.instance.htmlWrapper(_loc28_.toString(),Utils.instance.COLOR_ALERT) + Utils.instance.htmlWrapper("/" + _loc29_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
                }
+               else if(_loc30_ == "crew" && _component == COMPONENT_SHOP)
+               {
+                  _loc27_.leftText = _loc27_.leftText + Utils.instance.htmlWrapper(_loc29_.toString(),Utils.instance.COLOR_NUMBER);
+               }
                else
                {
-                  if(_loc30_ == "crew" && _component == COMPONENT_SHOP)
-                  {
-                     _loc27_.leftText = _loc27_.leftText + Utils.instance.htmlWrapper(_loc29_.toString(),Utils.instance.COLOR_NUMBER);
-                  }
-                  else
-                  {
-                     _loc27_.leftText = _loc27_.leftText + (Utils.instance.htmlWrapper(_loc28_.toString(),Utils.instance.COLOR_NUMBER) + Utils.instance.htmlWrapper("/" + _loc29_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
-                  }
+                  _loc27_.leftText = _loc27_.leftText + (Utils.instance.htmlWrapper(_loc28_.toString(),Utils.instance.COLOR_NUMBER) + Utils.instance.htmlWrapper("/" + _loc29_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
                }
+               
                _loc27_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(_loc30_));
                _loc4_++;
             }
@@ -413,12 +407,11 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       override protected function updateSize() : void {
          background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
          background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
          this.vehicleFavorite.x = background.width - bgShadowMargin.right;
       }
    }
-
 }

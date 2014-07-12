@@ -2,15 +2,14 @@ package net.wg.infrastructure.managers.utils.impl
 {
    import net.wg.utils.IIcons;
    import net.wg.data.constants.IconsTypes;
-
-
+   
    public class Icons extends Object implements IIcons
    {
-          
+      
       public function Icons() {
          super();
       }
-
+      
       public function getIcon16StrPath(param1:String) : String {
          if(IconsTypes.ALLOW_ICONS.indexOf(param1) < 0)
          {
@@ -50,5 +49,4 @@ package net.wg.infrastructure.managers.utils.impl
          return _loc2_;
       }
    }
-
 }

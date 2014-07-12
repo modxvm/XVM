@@ -1,40 +1,38 @@
 package net.wg.gui.components.tooltips
 {
    import net.wg.gui.components.tooltips.VO.VehicleBaseVO;
-   import __AS3__.vec.Vector;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
    import net.wg.gui.components.tooltips.helpers.Utils;
    import net.wg.utils.ILocale;
    import net.wg.data.constants.IconsTypes;
-
-
+   
    public class ToolTipSpecial extends ToolTipBase
    {
-          
+      
       public function ToolTipSpecial() {
          super();
       }
-
+      
       public static var ID_BUY_PRICE:String = "buy_price";
-
+      
       public static var ID_SELL_PRICE:String = "sell_price";
-
+      
       public static var ID_DAILY_XP_FACTOR:String = "dailyXPFactor";
-
+      
       public static var ID_ACTION_XP_FACTOR:String = "actionXPFactor";
-
+      
       public static var ID_DOUBLE_XP_FACTOR:String = "doubleXPFactor";
-
+      
       public static var ID_UNLOCK_PRICE:String = "unlock_price";
-
+      
       public static var ID_HIDDEN_VEHICLE_COUNT:String = "hiddenVehicleCount";
-
-      public static var SKIP_FIELDS:Array = [VehicleBaseVO.DEF_BUY_PRICE,VehicleBaseVO.DEF_SELL_PRICE,VehicleBaseVO.ACTION_PRC];
-
+      
+      public static var SKIP_FIELDS:Array;
+      
       protected var blockResults:Vector.<ToolTipBlockResultVO> = null;
-
+      
       override protected function onDispose() : void {
          var _loc1_:ToolTipBlockResultVO = null;
          var _loc2_:TextField = null;
@@ -73,7 +71,7 @@ package net.wg.gui.components.tooltips
          }
          super.onDispose();
       }
-
+      
       override protected function updateSize() : void {
          if(contentWidth == 0 || contentWidth < content.width)
          {
@@ -82,7 +80,7 @@ package net.wg.gui.components.tooltips
          background.width = contentWidth + contentMargin.right + bgShadowMargin.right | 0;
          background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
       }
-
+      
       protected function updatePositions() : void {
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
@@ -122,7 +120,7 @@ package net.wg.gui.components.tooltips
             }
          }
       }
-
+      
       protected function getAlertInfo(param1:ILocale, param2:Number, param3:String, param4:String) : String {
          if(param2 == 0)
          {
@@ -133,7 +131,7 @@ package net.wg.gui.components.tooltips
          _loc5_ = _loc5_ + (this.getIcoForText(param4) + ")");
          return _loc5_;
       }
-
+      
       protected function getIcoForText(param1:String) : String {
          switch(param1)
          {
@@ -144,7 +142,7 @@ package net.wg.gui.components.tooltips
          }
          return App.utils.icons.getIcon16StrPath(param1);
       }
-
+      
       protected function getActionInfo(param1:ILocale, param2:Number, param3:Number, param4:String) : String {
          var _loc5_:String = Utils.instance.htmlWrapper(param2.toString() + "%",Utils.instance.COLOR_HEADER);
          var _loc6_:String = param4 == IconsTypes.GOLD?param1.gold(param3):param1.integer(param3);
@@ -152,10 +150,8 @@ package net.wg.gui.components.tooltips
             {
                "actionPrc":_loc5_,
                "oldPrice":_loc6_
-            }
-         ) + this.getIcoForText(param4);
+            }) + this.getIcoForText(param4);
          return _loc7_;
       }
    }
-
 }

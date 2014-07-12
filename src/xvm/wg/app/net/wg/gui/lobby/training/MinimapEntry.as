@@ -4,64 +4,63 @@ package net.wg.gui.lobby.training
    import net.wg.infrastructure.interfaces.IMinimapEntry;
    import flash.display.MovieClip;
    import flash.filters.BitmapFilter;
-
-
+   
    public class MinimapEntry extends UIComponent implements IMinimapEntry
    {
-          
+      
       public function MinimapEntry() {
          super();
       }
-
+      
       private static var ms_lastLitEntry:MinimapEntry = null;
-
+      
       public static function unhighlightLastEntry() : void {
          if(ms_lastLitEntry)
          {
             ms_lastLitEntry.lightPlayer(false);
          }
       }
-
+      
       public var player:MovieClip;
-
+      
       public var selfIcon:MovieClip;
-
+      
       public var markMC:MovieClip;
-
+      
       public var teamPoint:MovieClip;
-
+      
       public var hover:MovieClip;
-
+      
       public var backMarker:MovieClip;
-
+      
       public var m_type:String = "";
-
+      
       private var entryName:String = "";
-
+      
       private var vehicleClass:String = "";
-
+      
       private var markLabel:String = "";
-
+      
       private var isTeamKiller:Boolean = false;
-
+      
       private var isDead:Boolean = false;
-
+      
       private var isDeadPermanent:Boolean = false;
-
+      
       private var isPostmortem:Boolean = false;
-
+      
       private var isMarketLit:Boolean = false;
-
+      
       private var playingTimeoutId:Number = NaN;
-
+      
       public function update(param1:Object) : void {
          invalidate();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       public function init(param1:String, param2:String, param3:String, param4:String) : void {
          this.m_type = param1;
          this.entryName = param2;
@@ -69,7 +68,7 @@ package net.wg.gui.lobby.training
          this.markLabel = param4;
          this.validateNow();
       }
-
+      
       public function showAction(param1:String) : void {
          if(this.markMC != null)
          {
@@ -78,7 +77,7 @@ package net.wg.gui.lobby.training
          this.markLabel = param1;
          validateNow();
       }
-
+      
       public function lightPlayer(param1:Boolean) : void {
          var _loc2_:* = NaN;
          var _loc3_:* = NaN;
@@ -118,16 +117,16 @@ package net.wg.gui.lobby.training
             }
          }
       }
-
+      
       private function playPlayer() : void {
          this.player.litIcon.play();
          App.utils.scheduler.cancelTask(this.playPlayer);
       }
-
+      
       public function get colorSchemeName() : String {
          return "vm_" + (this.entryName != null?this.entryName:this.m_type);
       }
-
+      
       public function setEntryName(param1:String) : void {
          if(param1 != this.entryName)
          {
@@ -135,33 +134,33 @@ package net.wg.gui.lobby.training
             invalidate();
          }
       }
-
+      
       public function setDead(param1:Boolean) : void {
          this.isDead = true;
          this.isDeadPermanent = param1;
          invalidate();
       }
-
+      
       public function setPostmortem(param1:Boolean) : void {
          this.isPostmortem = param1;
          invalidate();
       }
-
+      
       public function isTeamPoint() : Boolean {
          return this.m_type == "points" && !(this.teamPoint == null);
       }
-
+      
       private function isBackMarker() : Boolean {
          return this.m_type == "backgroundMarker" && !(this.backMarker == null);
       }
-
+      
       private function updateType() : void {
          if(this.m_type != null)
          {
             gotoAndStop(this.m_type);
          }
       }
-
+      
       private function updateIfEntryIsPlayer() : void {
          var _loc1_:String = null;
          if(this.player != null)
@@ -192,7 +191,7 @@ package net.wg.gui.lobby.training
             }
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:String = null;
          var _loc2_:String = null;
@@ -228,32 +227,27 @@ package net.wg.gui.lobby.training
                this.teamPoint.pointType.teamColor.filters = [];
             }
          }
-         else
+         else if(this.isBackMarker())
          {
-            if(this.isBackMarker())
+            this.backMarker.gotoAndStop(this.entryName);
+            _loc5_ = "backMarker";
+            _loc6_ = App.colorSchemeMgr.getAliasColor(_loc5_ + this.entryName + this.markLabel);
+            this.backMarker.marker.gotoAndStop(_loc6_);
+         }
+         else if(this.markMC != null)
+         {
+            if(this.markLabel != null)
             {
-               this.backMarker.gotoAndStop(this.entryName);
-               _loc5_ = "backMarker";
-               _loc6_ = App.colorSchemeMgr.getAliasColor(_loc5_ + this.entryName + this.markLabel);
-               this.backMarker.marker.gotoAndStop(_loc6_);
-            }
-            else
-            {
-               if(this.markMC != null)
-               {
-                  if(this.markLabel != null)
-                  {
-                     this.markMC.gotoAndStop(this.markLabel);
-                  }
-               }
+               this.markMC.gotoAndStop(this.markLabel);
             }
          }
+         
+         
          super.draw();
       }
-
+      
       private function getMinimap() : MovieClip {
          return MovieClip(this.parent);
       }
    }
-
 }

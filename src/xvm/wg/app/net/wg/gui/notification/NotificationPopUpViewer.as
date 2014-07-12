@@ -4,7 +4,6 @@ package net.wg.gui.notification
    import net.wg.infrastructure.base.meta.INotificationPopUpViewerMeta;
    import net.wg.gui.notification.vo.LayoutInfoVO;
    import flash.geom.Point;
-   import __AS3__.vec.Vector;
    import net.wg.gui.notification.vo.PopUpNotificationInfoVO;
    import net.wg.gui.utils.ExcludeTweenManager;
    import flash.display.DisplayObjectContainer;
@@ -14,62 +13,60 @@ package net.wg.gui.notification
    import fl.transitions.easing.Strong;
    import scaleform.clik.motion.Tween;
    import flash.events.Event;
-
-
+   
    public class NotificationPopUpViewer extends NotificationPopUpViewerMeta implements INotificationPopUpViewerMeta
    {
-          
+      
       public function NotificationPopUpViewer(param1:Class) {
          this.layoutInfo = new LayoutInfoVO(
             {
                "paddingRight":0,
                "paddingBottom":0
-            }
-         );
+            });
          this.pendingForDisplay = new Vector.<PopUpNotificationInfoVO>();
          this.displayingNowPopUps = new Vector.<ServiceMessagePopUp>();
          this.animationManager = new ExcludeTweenManager();
          super();
          this.popupClass = param1;
       }
-
+      
       private var layoutInfo:LayoutInfoVO;
-
+      
       private var stageDimensions:Point;
-
+      
       private var pendingForDisplay:Vector.<PopUpNotificationInfoVO>;
-
+      
       private var displayingNowPopUps:Vector.<ServiceMessagePopUp>;
-
+      
       private var popupPadding:uint = 0;
-
+      
       private var isMessagesCountInvalid:Boolean;
-
+      
       private var arrangeLayout:Boolean;
-
+      
       private var maxAvailaleMessagesCount:uint = 5;
-
-      public var popupClass:Class;
-
+      
+      private var popupClass:Class;
+      
       private var animationManager:ExcludeTweenManager;
-
+      
       private const TWEEN_DURATION:uint = 500;
-
+      
       override protected function configUI() : void {
          super.configUI();
          var _loc1_:DisplayObjectContainer = App.instance.systemMessages;
          _loc1_.addEventListener(MouseEvent.MOUSE_OVER,this.mouseOverHandler,false,0,true);
          _loc1_.addEventListener(MouseEvent.MOUSE_OUT,this.mouseOutHandler,false,0,true);
       }
-
+      
       private function mouseOverHandler(param1:MouseEvent) : void {
          this.applyHiding(true);
       }
-
+      
       private function mouseOutHandler(param1:MouseEvent) : void {
          this.applyHiding(false);
       }
-
+      
       private function applyHiding(param1:Boolean) : void {
          var _loc4_:ServiceMessagePopUp = null;
          var _loc2_:uint = this.displayingNowPopUps.length;
@@ -81,7 +78,7 @@ package net.wg.gui.notification
             _loc3_++;
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -125,7 +122,7 @@ package net.wg.gui.notification
             }
             while(this.displayingNowPopUps.length > this.maxAvailaleMessagesCount)
             {
-               this.removePopupAt(this.displayingNowPopUps.length-1,true);
+               this.removePopupAt(this.displayingNowPopUps.length - 1,true);
             }
          }
          if((this.arrangeLayout) && (this.stageDimensions))
@@ -151,44 +148,43 @@ package net.wg.gui.notification
                      "y":_loc11_,
                      "alpha":1,
                      "x":Math.round(this.stageDimensions.x - _loc6_.width - this.layoutInfo.paddingRight)
-                  }
-               ,this.getDefaultTweenSet());
+                  },this.getDefaultTweenSet());
                _loc7_ = _loc7_ + _loc10_;
                _loc9_++;
             }
          }
       }
-
+      
       private function getDefaultTweenSet() : Object {
          var _loc1_:Object = {};
          _loc1_.ease = Strong.easeOut;
          _loc1_.onComplete = this.onTweenComplete;
          return _loc1_;
       }
-
+      
       private function onTweenComplete(param1:Tween) : void {
          this.animationManager.unregister(param1);
       }
-
+      
       private function messageClickHandler(param1:Event) : void {
          param1.stopImmediatePropagation();
          App.utils.scheduler.scheduleTask(this.postponedPopupRemoving,50,param1.target,false,true);
       }
-
-      private function postponedPopupRemoving(param1:ServiceMessagePopUp, param2:Boolean, param3:Boolean=true) : void {
+      
+      private function postponedPopupRemoving(param1:ServiceMessagePopUp, param2:Boolean, param3:Boolean = true) : void {
          var _loc4_:int = this.displayingNowPopUps.indexOf(param1);
          if(_loc4_ != -1)
          {
             this.removePopupAt(_loc4_,param2,param3);
          }
       }
-
+      
       private function mouseButtonClickHandler(param1:ServiceMessageEvent) : void {
          param1.stopImmediatePropagation();
          onClickActionS(param1.typeID,param1.entityID,param1.action);
          this.messageClickHandler(param1);
       }
-
+      
       private function messageLinkClickHandler(param1:ServiceMessageEvent) : void {
          param1.stopImmediatePropagation();
          switch(param1.linkType)
@@ -198,20 +194,20 @@ package net.wg.gui.notification
                break;
          }
       }
-
+      
       private function removePopupHandler(param1:Event) : void {
          var _loc2_:ServiceMessagePopUp = ServiceMessagePopUp(param1.target);
          this.removePopupAt(this.displayingNowPopUps.indexOf(_loc2_),true);
       }
-
+      
       public function as_removeAllMessages() : void {
          while(this.displayingNowPopUps.length > 0)
          {
             this.removePopupAt(0,false);
          }
       }
-
-      private function removePopupAt(param1:int, param2:Boolean, param3:Boolean=true) : void {
+      
+      private function removePopupAt(param1:int, param2:Boolean, param3:Boolean = true) : void {
          this.applyHiding(false);
          var _loc4_:ServiceMessagePopUp = this.displayingNowPopUps.splice(param1,1)[0];
          if(_loc4_.parent)
@@ -241,14 +237,14 @@ package net.wg.gui.notification
             this.arrangeLayout = false;
          }
       }
-
+      
       public function as_appendMessage(param1:Object) : void {
          var _loc2_:PopUpNotificationInfoVO = new PopUpNotificationInfoVO(param1);
          this.pendingForDisplay.push(_loc2_);
          this.isMessagesCountInvalid = true;
          invalidate();
       }
-
+      
       public function as_getPopUpIndex(param1:uint, param2:Number) : int {
          var _loc3_:PopUpNotificationInfoVO = null;
          var _loc4_:int = this.displayingNowPopUps.length;
@@ -264,7 +260,7 @@ package net.wg.gui.notification
          }
          return -1;
       }
-
+      
       public function as_updateMessage(param1:Object) : void {
          var _loc4_:ServiceMessagePopUp = null;
          var _loc2_:PopUpNotificationInfoVO = new PopUpNotificationInfoVO(param1);
@@ -280,7 +276,7 @@ package net.wg.gui.notification
             }
          }
       }
-
+      
       public function as_removeMessage(param1:uint, param2:Number) : void {
          var _loc3_:int = this.as_getPopUpIndex(param1,param2);
          if(_loc3_ > -1 && this.displayingNowPopUps.length > _loc3_)
@@ -288,26 +284,26 @@ package net.wg.gui.notification
             this.removePopupAt(_loc3_,false,false);
          }
       }
-
+      
       public function as_initInfo(param1:Number, param2:Number) : void {
          this.maxAvailaleMessagesCount = param1;
          this.popupPadding = param2;
          this.isMessagesCountInvalid = true;
          invalidate();
       }
-
+      
       public function as_layoutInfo(param1:Object) : void {
          this.layoutInfo = new LayoutInfoVO(param1);
          this.arrangeLayout = true;
          invalidate();
       }
-
+      
       public function updateStage(param1:Number, param2:Number) : void {
          this.stageDimensions = new Point(param1,param2);
          this.arrangeLayout = true;
          invalidate();
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:DisplayObjectContainer = App.instance.systemMessages;
          _loc1_.removeEventListener(MouseEvent.ROLL_OVER,this.mouseOverHandler);
@@ -327,5 +323,4 @@ package net.wg.gui.notification
          super.onDispose();
       }
    }
-
 }

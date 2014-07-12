@@ -2,7 +2,7 @@ package net.wg.gui.lobby.profile.pages.awards
 {
    import net.wg.infrastructure.base.meta.impl.ProfileAwardsMeta;
    import net.wg.infrastructure.base.meta.IProfileAwardsMeta;
-   import net.wg.gui.lobby.profile.components.ResizableScrollPane;
+   import net.wg.gui.components.controls.ResizableScrollPane;
    import flash.text.TextField;
    import net.wg.gui.components.controls.DropdownMenu;
    import flash.events.MouseEvent;
@@ -11,34 +11,32 @@ package net.wg.gui.lobby.profile.pages.awards
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.ListEvent;
    import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
-   import __AS3__.vec.Vector;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.lobby.profile.ProfileConstants;
-
-
+   
    public class ProfileAwards extends ProfileAwardsMeta implements IProfileAwardsMeta
    {
-          
+      
       public function ProfileAwards() {
          super();
       }
-
+      
       private static const INVOKE_UPD_INVALID:String = "invokeUpdInv";
-
+      
       private static function generateDropdownItem(param1:String) : Object {
          return {"label":App.utils.locale.makeString(param1)};
       }
-
+      
       public var mainScrollPane:ResizableScrollPane;
-
+      
       public var txtLabel:TextField;
-
+      
       public var dropdownMenu:DropdownMenu;
-
+      
       private var daapiInitialized:Boolean;
-
+      
       private var startMenuX:int;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.startMenuX = this.dropdownMenu.x;
@@ -47,15 +45,15 @@ package net.wg.gui.lobby.profile.pages.awards
          this.dropdownMenu.addEventListener(MouseEvent.MOUSE_OVER,this.checkBoxMouseOverHandler,false,0,true);
          this.dropdownMenu.addEventListener(MouseEvent.MOUSE_OUT,this.checkBoxMouseOutHandler,false,0,true);
       }
-
+      
       private function checkBoxMouseOverHandler(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(PROFILE.SECTION_AWARDS_DROPDOWN_TOOLTIP);
       }
-
+      
       private function checkBoxMouseOutHandler(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       override public function as_setInitData(param1:Object) : void {
          var _loc9_:Object = null;
          super.as_setInitData(param1);
@@ -84,11 +82,11 @@ package net.wg.gui.lobby.profile.pages.awards
          this.daapiInitialized = true;
          invalidate(INVOKE_UPD_INVALID);
       }
-
+      
       private function menuIndexChangeHandler(param1:ListEvent) : void {
          setFilterS(param1.itemData.key);
       }
-
+      
       override protected function applyData(param1:Object) : Object {
          var _loc7_:AwardsBlock = null;
          var _loc11_:ProfileAchievementVO = null;
@@ -153,7 +151,7 @@ package net.wg.gui.lobby.profile.pages.awards
          _loc2_.data = _loc9_;
          return param1;
       }
-
+      
       override protected function applyResizing() : void {
          var _loc1_:* = NaN;
          _loc1_ = Math.round(currentDimension.x / 2 - centerOffset);
@@ -164,24 +162,23 @@ package net.wg.gui.lobby.profile.pages.awards
          this.mainScrollPane.target.x = _loc1_ + (_loc2_ - this.mainScrollPane.target.width >> 1) + 6;
          this.mainScrollPane.setSize(currentDimension.x,currentDimension.y);
       }
-
+      
       protected function getMainContainer() : AwardsMainContainer {
          return AwardsMainContainer(this.mainScrollPane.target);
       }
-
+      
       public function setBattlesHeroesData(param1:Array) : void {
          this.getMainContainer().blockBattleHeroes.dataProvider = param1;
       }
-
+      
       public function setHonorsData(param1:String, param2:Array) : void {
          this.getMainContainer().blockHonors.dataProvider = new DataProvider(param2);
       }
-
+      
       override protected function onDispose() : void {
          this.dropdownMenu.removeEventListener(MouseEvent.MOUSE_OVER,this.checkBoxMouseOverHandler);
          this.dropdownMenu.removeEventListener(MouseEvent.MOUSE_OUT,this.checkBoxMouseOutHandler);
          super.onDispose();
       }
    }
-
 }

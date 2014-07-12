@@ -1,42 +1,41 @@
 package net.wg.gui.components.tooltips.VO
 {
    import net.wg.gui.components.tooltips.helpers.Utils;
-
-
+   
    public class TankmenVO extends Object
    {
-          
+      
       public function TankmenVO(param1:Object) {
          super();
          this.parsHash(param1);
       }
-
+      
       public var vName:String = "";
-
+      
       public var rank:String = "";
-
+      
       public var vehicleContour:String = "";
-
+      
       public var currentVehicleType:String = "";
-
+      
       public var params:Array = null;
-
+      
       public var vehicleName:String = "";
-
+      
       public var currentVehicleName:String = "";
-
+      
       public var isCurrentVehiclePremium:Boolean = false;
-
+      
       public var newSkillsCount:Number = 0;
-
+      
       public var status:Boolean = false;
-
+      
       public var statusHeader:String = null;
-
+      
       public var statusLevel:String = null;
-
+      
       public var statusText:String = null;
-
+      
       private function parsHash(param1:Object) : void {
          var _loc10_:uint = 0;
          this.vName = (param1.hasOwnProperty("name")) && !(param1["name"] == undefined)?param1["name"]:"";
@@ -100,10 +99,9 @@ package net.wg.gui.components.tooltips.VO
             this.status = true;
          }
       }
-
+      
       private function getSign(param1:Number) : String {
          return param1 >= 0?"+":"";
       }
    }
-
 }

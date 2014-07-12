@@ -1,19 +1,18 @@
 package net.wg.data
 {
    import net.wg.data.daapi.base.DAAPIDataProvider;
-
-
+   
    public class VoDAAPIDataProvider extends DAAPIDataProvider
    {
-          
+      
       public function VoDAAPIDataProvider(param1:Class) {
          this.voClass = param1;
          super();
       }
-
+      
       protected var voClass:Class;
-
-      override public function requestItemAt(param1:uint, param2:Function=null) : Object {
+      
+      override public function requestItemAt(param1:uint, param2:Function = null) : Object {
          var _loc3_:Object = requestItemAtHandler(param1);
          if(_loc3_ != null)
          {
@@ -25,8 +24,8 @@ package net.wg.data
          }
          return _loc3_;
       }
-
-      override public function requestItemRange(param1:int, param2:int, param3:Function=null) : Array {
+      
+      override public function requestItemRange(param1:int, param2:int, param3:Function = null) : Array {
          var _loc6_:Object = null;
          if(!Boolean(requestItemRangeHandler))
          {
@@ -34,7 +33,7 @@ package net.wg.data
          }
          var _loc4_:Array = requestItemRangeHandler(param1,param2);
          var _loc5_:Array = [];
-         for each (_loc6_ in _loc4_)
+         for each(_loc6_ in _loc4_)
          {
             _loc5_.push(new this.voClass(_loc6_));
          }
@@ -45,5 +44,4 @@ package net.wg.data
          return _loc5_;
       }
    }
-
 }

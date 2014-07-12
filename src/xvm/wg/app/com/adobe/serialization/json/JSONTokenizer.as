@@ -1,10 +1,8 @@
 package com.adobe.serialization.json
 {
-
-
    public class JSONTokenizer extends Object
    {
-          
+      
       public function JSONTokenizer(param1:String, param2:Boolean) {
          this.controlCharsRegExp = new RegExp("[\\x00-\\x1F]");
          super();
@@ -13,19 +11,19 @@ package com.adobe.serialization.json
          this.loc = 0;
          this.nextChar();
       }
-
+      
       private var strict:Boolean;
-
+      
       private var obj:Object;
-
+      
       private var jsonString:String;
-
+      
       private var loc:int;
-
+      
       private var ch:String;
-
+      
       private const controlCharsRegExp:RegExp;
-
+      
       public function getNextToken() : JSONToken {
          var _loc2_:String = null;
          var _loc3_:String = null;
@@ -115,21 +113,19 @@ package com.adobe.serialization.json
                {
                   _loc1_ = this.readNumber();
                }
+               else if(this.ch == "")
+               {
+                  _loc1_ = null;
+               }
                else
                {
-                  if(this.ch == "")
-                  {
-                     _loc1_ = null;
-                  }
-                  else
-                  {
-                     this.parseError("Unexpected " + this.ch + " encountered");
-                  }
+                  this.parseError("Unexpected " + this.ch + " encountered");
                }
+               
          }
          return _loc1_;
       }
-
+      
       private final function readString() : JSONToken {
          var _loc3_:* = 0;
          var _loc4_:* = 0;
@@ -140,7 +136,7 @@ package com.adobe.serialization.json
             if(_loc1_ >= 0)
             {
                _loc3_ = 0;
-               _loc4_ = _loc1_-1;
+               _loc4_ = _loc1_ - 1;
                while(this.jsonString.charAt(_loc4_) == "\\")
                {
                   _loc3_++;
@@ -162,7 +158,7 @@ package com.adobe.serialization.json
          this.nextChar();
          return _loc2_;
       }
-
+      
       public function unescapeString(param1:String) : String {
          var _loc4_:* = 0;
          var _loc6_:String = null;
@@ -247,7 +243,7 @@ package com.adobe.serialization.json
          }
          return _loc2_;
       }
-
+      
       private final function readNumber() : JSONToken {
          var _loc1_:* = "";
          if(this.ch == "-")
@@ -267,28 +263,26 @@ package com.adobe.serialization.json
             {
                this.parseError("A digit cannot immediately follow 0");
             }
-            else
+            else if(!this.strict && this.ch == "x")
             {
-               if(!this.strict && this.ch == "x")
+               _loc1_ = _loc1_ + this.ch;
+               this.nextChar();
+               if(this.isHexDigit(this.ch))
                {
                   _loc1_ = _loc1_ + this.ch;
                   this.nextChar();
-                  if(this.isHexDigit(this.ch))
-                  {
-                     _loc1_ = _loc1_ + this.ch;
-                     this.nextChar();
-                  }
-                  else
-                  {
-                     this.parseError("Number in hex format require at least one hex digit after \"0x\"");
-                  }
-                  while(this.isHexDigit(this.ch))
-                  {
-                     _loc1_ = _loc1_ + this.ch;
-                     this.nextChar();
-                  }
+               }
+               else
+               {
+                  this.parseError("Number in hex format require at least one hex digit after \"0x\"");
+               }
+               while(this.isHexDigit(this.ch))
+               {
+                  _loc1_ = _loc1_ + this.ch;
+                  this.nextChar();
                }
             }
+            
          }
          else
          {
@@ -339,11 +333,11 @@ package com.adobe.serialization.json
          this.parseError("Number " + _loc2_ + " is not valid!");
          return null;
       }
-
+      
       private final function nextChar() : String {
          return this.ch = this.jsonString.charAt(this.loc++);
       }
-
+      
       private final function skipIgnored() : void {
          var _loc1_:* = 0;
          do
@@ -353,8 +347,9 @@ package com.adobe.serialization.json
             this.skipComments();
          }
          while(_loc1_ != this.loc);
+         
       }
-
+      
       private function skipComments() : void {
          if(this.ch == "/")
          {
@@ -367,6 +362,7 @@ package com.adobe.serialization.json
                      this.nextChar();
                   }
                   while(!(this.ch == "\n") && !(this.ch == ""));
+                  
                   this.nextChar();
                   break;
                case "*":
@@ -397,14 +393,14 @@ package com.adobe.serialization.json
             }
          }
       }
-
+      
       private final function skipWhite() : void {
          while(this.isWhiteSpace(this.ch))
          {
             this.nextChar();
          }
       }
-
+      
       private final function isWhiteSpace(param1:String) : Boolean {
          if(param1 == " " || param1 == "\t" || param1 == "\n" || param1 == "\r")
          {
@@ -416,18 +412,17 @@ package com.adobe.serialization.json
          }
          return false;
       }
-
+      
       private final function isDigit(param1:String) : Boolean {
          return param1 >= "0" && param1 <= "9";
       }
-
+      
       private final function isHexDigit(param1:String) : Boolean {
          return (this.isDigit(param1)) || param1 >= "A" && param1 <= "F" || param1 >= "a" && param1 <= "f";
       }
-
+      
       public final function parseError(param1:String) : void {
          throw new JSONParseError(param1,this.loc,this.jsonString);
       }
    }
-
 }

@@ -14,11 +14,10 @@ package net.wg.gui.messenger.windows
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
-
-
+   
    public class BaseChannelWindow extends BaseChannelWindowMeta implements IBaseChannelWindowMeta
    {
-          
+      
       public function BaseChannelWindow() {
          super();
          showWindowBg = false;
@@ -27,17 +26,17 @@ package net.wg.gui.messenger.windows
          canDrag = true;
          isCentered = false;
       }
-
+      
       public var channelComponent:ChannelComponent;
-
+      
       public function as_setTitle(param1:String) : void {
          window.title = param1;
       }
-
+      
       public function as_setCloseEnabled(param1:Boolean) : void {
          enabledCloseBtn = param1;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          constraints = new Constraints(this,ConstrainMode.REFLOW);
@@ -46,18 +45,18 @@ package net.wg.gui.messenger.windows
          constraints.addElement("sendButton",this.channelComponent.sendButton,Constraints.RIGHT | Constraints.BOTTOM);
          this.channelComponent.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
          window.contentPadding = new Padding(40,12,16,9);
          geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          var _loc2_:InputDetails = param1.details;
          if(_loc2_.code == Keyboard.F1 && _loc2_.value == InputValue.KEY_UP)
@@ -72,15 +71,14 @@ package net.wg.gui.messenger.windows
          }
          super.handleInput(param1);
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.channelComponent.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
       }
-
+      
       private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
          setFocus(this.channelComponent.getComponentForFocus());
       }
    }
-
 }

@@ -16,32 +16,31 @@ package net.wg.gui.lobby.GUIEditor
    import scaleform.clik.events.SliderEvent;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.ListEvent;
-
-
+   
    public class EditablePropertyListItemRenderer extends ListItemRenderer
    {
-          
+      
       public function EditablePropertyListItemRenderer() {
          super();
       }
-
+      
       public var valueField:TextField = null;
-
+      
       public var flag:CheckBox = null;
-
+      
       public var value:NumericStepper = null;
-
+      
       public var valueSlider:NumericStepper = null;
-
+      
       public var slider:Slider = null;
-
+      
       public var statesDropDn:DropdownMenu = null;
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          invalidateData();
       }
-
+      
       override protected function onDispose() : void {
          this.removeInputHandlers();
          if(this.valueField)
@@ -73,7 +72,7 @@ package net.wg.gui.lobby.GUIEditor
          }
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:Point = null;
          var _loc2_:ComponentPropertyVO = null;
@@ -124,18 +123,18 @@ package net.wg.gui.lobby.GUIEditor
             }
          }
       }
-
+      
       private function customizeStringType(param1:ComponentPropertyVO) : void {
          this.valueField.text = param1.value;
          this.valueField.addEventListener(Event.CHANGE,this.onTextInputHandler);
       }
-
+      
       private function customizeFlagType(param1:ComponentPropertyVO) : void {
          this.flag.selected = param1.value;
          this.flag.label = "";
          this.flag.addEventListener(Event.SELECT,this.onFlagChangedHandler);
       }
-
+      
       private function customizeNumberType(param1:ComponentPropertyVO) : void {
          if(param1.allowedValues.length == 2)
          {
@@ -150,7 +149,7 @@ package net.wg.gui.lobby.GUIEditor
          this.value.validateNow();
          this.value.addEventListener(IndexEvent.INDEX_CHANGE,this.onValueChangeHandler);
       }
-
+      
       private function customizeConstrainedNumberType(param1:ComponentPropertyVO) : void {
          this.slider.minimum = param1.allowedValues[0];
          this.slider.maximum = param1.allowedValues[1];
@@ -169,13 +168,13 @@ package net.wg.gui.lobby.GUIEditor
          this.valueSlider.validateNow();
          this.valueSlider.addEventListener(IndexEvent.INDEX_CHANGE,this.onValueForSliderChangeHandler);
       }
-
+      
       private function customizeStateType(param1:ComponentPropertyVO) : void {
          this.statesDropDn.dataProvider = new DataProvider(param1.allowedValues);
          this.statesDropDn.selectedIndex = param1.allowedValues.indexOf(param1.value);
          this.statesDropDn.addEventListener(ListEvent.INDEX_CHANGE,this.onStateChangeHandler);
       }
-
+      
       private function removeInputHandlers() : void {
          if(this.valueField)
          {
@@ -202,26 +201,26 @@ package net.wg.gui.lobby.GUIEditor
             this.statesDropDn.removeEventListener(ListEvent.INDEX_CHANGE,this.onStateChangeHandler);
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          _focusable = tabEnabled = tabChildren = mouseChildren = true;
          mouseEnabled = true;
       }
-
+      
       private function onTextInputHandler(param1:Event) : void {
          this.dispatchChangeProperty(this.valueField.text);
       }
-
+      
       private function onFlagChangedHandler(param1:Event) : void {
          this.dispatchChangeProperty(this.flag.selected);
       }
-
+      
       private function onValueForSliderChangeHandler(param1:Event) : void {
          this.slider.value = this.valueSlider.value;
          this.dispatchChangeProperty(this.slider.value);
       }
-
+      
       private function onSliderValueChangeHandler(param1:SliderEvent) : void {
          if(this.valueSlider != null)
          {
@@ -229,18 +228,17 @@ package net.wg.gui.lobby.GUIEditor
          }
          this.dispatchChangeProperty(this.slider.value);
       }
-
+      
       private function onValueChangeHandler(param1:IndexEvent) : void {
          this.dispatchChangeProperty(this.value.value);
       }
-
+      
       private function onStateChangeHandler(param1:ListEvent) : void {
          this.dispatchChangeProperty(this.statesDropDn.dataProvider[this.statesDropDn.selectedIndex]);
       }
-
+      
       private function dispatchChangeProperty(param1:*) : void {
          dispatchEvent(new ChangePropertyEvent(ChangePropertyEvent.CHANGE_PROPERTY,ComponentPropertyVO(data),param1));
       }
    }
-
 }

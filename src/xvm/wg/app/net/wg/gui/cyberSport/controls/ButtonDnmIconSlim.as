@@ -3,17 +3,16 @@ package net.wg.gui.cyberSport.controls
    import net.wg.gui.components.advanced.ButtonDnmIcon;
    import flash.display.MovieClip;
    import flash.events.Event;
-
-
+   
    public class ButtonDnmIconSlim extends ButtonDnmIcon
    {
-          
+      
       public function ButtonDnmIconSlim() {
          super();
       }
-
+      
       public var btnBorder:MovieClip;
-
+      
       override protected function completeHandler(param1:Event) : void {
          if((loader) && (this.btnBorder.contains(loader)))
          {
@@ -26,5 +25,4 @@ package net.wg.gui.cyberSport.controls
          loader.y = Math.floor((this.btnBorder.height - loader.height) / 2);
       }
    }
-
 }

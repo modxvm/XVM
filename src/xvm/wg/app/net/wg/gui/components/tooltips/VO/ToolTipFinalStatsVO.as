@@ -1,51 +1,49 @@
 package net.wg.gui.components.tooltips.VO
 {
-
-
    public class ToolTipFinalStatsVO extends Object
    {
-          
+      
       public function ToolTipFinalStatsVO(param1:Object) {
          super();
          this.parseHash(param1);
       }
-
+      
       public static var TYPE_STOTTED:String = "spotted";
-
+      
       public static var TYPE_ASSIST:String = "assist";
-
+      
       public static var TYPE_CRITS:String = "crits";
-
+      
       public static var TYPE_DAMAGE:String = "damage";
-
+      
       public static var TYPE_KILL:String = "kill";
-
+      
       public static var TYPE_TEAM_KILL:String = "teamKill";
-
+      
       public static var CRIT_TYPE_DAMAGE:String = "critDamage";
-
+      
       public static var CRIT_TYPE_DISTRUCTION:String = "critDestruction";
-
+      
       public static var CRIT_TYPE_WOUND:String = "critWound";
-
+      
       private var valideTypes:Array = null;
-
+      
       public var type:String = null;
-
+      
       public var values:String = null;
-
+      
       public var discript:String = null;
-
+      
       public var value:Number = NaN;
-
+      
       public var disabled:Boolean = true;
-
+      
       public var critDamage:String = null;
-
+      
       public var critDestruction:String = null;
-
+      
       public var critWound:String = null;
-
+      
       private function parseHash(param1:Object) : void {
          this.valideTypes = [TYPE_STOTTED,TYPE_ASSIST,TYPE_CRITS,TYPE_DAMAGE,TYPE_KILL,TYPE_TEAM_KILL];
          this.type = (param1.hasOwnProperty("type")) && !(param1["type"] == undefined) && this.valideTypes.indexOf(param1["type"],0) >= 0?param1["type"]:null;
@@ -61,5 +59,4 @@ package net.wg.gui.components.tooltips.VO
          }
       }
    }
-
 }

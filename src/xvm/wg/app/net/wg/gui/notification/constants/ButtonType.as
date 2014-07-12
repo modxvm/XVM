@@ -1,19 +1,18 @@
 package net.wg.gui.notification.constants
 {
    import net.wg.data.constants.Linkages;
-
-
+   
    public class ButtonType extends Object
    {
-          
+      
       public function ButtonType() {
          super();
       }
-
+      
       public static const SUBMIT:String = "submit";
-
+      
       public static const CANCEL:String = "cancel";
-
+      
       public static function getLinkageByType(param1:String) : String {
          var _loc2_:String = null;
          switch(param1)
@@ -30,5 +29,4 @@ package net.wg.gui.notification.constants
          return _loc2_;
       }
    }
-
 }

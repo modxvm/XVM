@@ -3,19 +3,18 @@ package net.wg.gui.lobby.store.views
    import net.wg.gui.lobby.store.views.base.SimpleStoreMenuView;
    import net.wg.data.constants.generated.STORE_TYPES;
    import scaleform.clik.data.DataProvider;
-
-
+   
    public class OptionalDeviceView extends SimpleStoreMenuView
    {
-          
+      
       public function OptionalDeviceView() {
          super();
       }
-
+      
       override public function resetTemporaryHandlers() : void {
          resetHandlers(getTagsArray(),myVehicleRadioBtn);
       }
-
+      
       override public function setViewData(param1:Array) : void {
          super.setViewData(param1);
          if(getUIName() == STORE_TYPES.SHOP)
@@ -33,14 +32,14 @@ package net.wg.gui.lobby.store.views
          selectFilter(getTagsArray(),param1,true,false);
          dispatchViewChange();
       }
-
+      
       override public function getFilter() : Array {
          var _loc1_:Array = [myVehicleRadioBtn.group.data];
          _loc1_.push(getFilterData().current);
          _loc1_ = _loc1_.concat(getSelectedFilters(getTagsArray(),false,null));
          return _loc1_;
       }
-
+      
       override protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void {
          super.onVehicleFilterUpdated(param1,param2,param3);
          if(param1.length == 0)
@@ -56,5 +55,4 @@ package net.wg.gui.lobby.store.views
          otherVehiclesRadioBtn.enabled = true;
       }
    }
-
 }

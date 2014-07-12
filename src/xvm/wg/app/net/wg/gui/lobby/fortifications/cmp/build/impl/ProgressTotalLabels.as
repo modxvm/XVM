@@ -4,23 +4,22 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import flash.text.TextField;
    import net.wg.gui.lobby.fortifications.data.BuildingProgressLblVO;
-
-
+   
    public class ProgressTotalLabels extends MovieClip implements IDisposable
    {
-          
+      
       public function ProgressTotalLabels() {
          super();
       }
-
+      
       public var currentValue:TextField;
-
+      
       public var totalValue:TextField;
-
+      
       public var separator:TextField;
-
+      
       private var model:BuildingProgressLblVO;
-
+      
       public function dispose() : void {
          if(this.model)
          {
@@ -28,7 +27,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.model = null;
          }
       }
-
+      
       public function set setData(param1:BuildingProgressLblVO) : void {
          this.model = param1;
          this.currentValue.htmlText = this.model.currentValue;
@@ -36,5 +35,4 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.separator.htmlText = this.model.separator;
       }
    }
-
 }

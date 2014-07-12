@@ -7,19 +7,18 @@ package net.wg.gui.lobby.settings
    import flash.text.TextField;
    import net.wg.gui.components.controls.CheckBox;
    import flash.display.InteractiveObject;
-
-
+   
    public class SettingsBaseView extends UIComponent implements IViewStackContent, ISettingsBase
    {
-          
+      
       public function SettingsBaseView() {
          super();
       }
-
+      
       protected var _data:Object = null;
-
+      
       protected var _viewId:String = "";
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(this._data)
@@ -27,8 +26,8 @@ package net.wg.gui.lobby.settings
             this.setData(this._data);
          }
       }
-
-      protected function trySetLabel(param1:String, param2:String="") : void {
+      
+      protected function trySetLabel(param1:String, param2:String = "") : void {
          var _loc3_:String = null;
          var _loc4_:LabelControl = null;
          var _loc5_:TextField = null;
@@ -42,7 +41,7 @@ package net.wg.gui.lobby.settings
             }
             if((this._data[param1].hasLabel) && (this[param1 + SettingsConfig.TYPE_LABEL]))
             {
-               if(this[param1 + SettingsConfig.TYPE_LABEL]  is  LabelControl)
+               if(this[param1 + SettingsConfig.TYPE_LABEL] is LabelControl)
                {
                   _loc4_ = this[param1 + SettingsConfig.TYPE_LABEL];
                   _loc4_.text = _loc3_;
@@ -53,17 +52,15 @@ package net.wg.gui.lobby.settings
                   _loc5_.text = _loc3_;
                }
             }
-            else
+            else if((this[param1 + SettingsConfig.TYPE_CHECKBOX]) && this[param1 + SettingsConfig.TYPE_CHECKBOX].label == "")
             {
-               if((this[param1 + SettingsConfig.TYPE_CHECKBOX]) && this[param1 + SettingsConfig.TYPE_CHECKBOX].label == "")
-               {
-                  _loc6_ = this[param1 + SettingsConfig.TYPE_CHECKBOX];
-                  _loc6_.label = _loc3_;
-               }
+               _loc6_ = this[param1 + SettingsConfig.TYPE_CHECKBOX];
+               _loc6_.label = _loc3_;
             }
+            
          }
       }
-
+      
       public function update(param1:Object) : void {
          this._viewId = param1.id;
          this._data = param1.data;
@@ -72,24 +69,25 @@ package net.wg.gui.lobby.settings
             this.setData(this._data);
          }
       }
-
+      
       protected function setData(param1:Object) : void {
-          
       }
-
+      
       public function updateDependentData() : void {
-          
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this._data = null;
          this._viewId = null;
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

@@ -1,6 +1,6 @@
---- orig\TeamBasesPanel.xml	2014-05-29 23:19:09.858066500 +0300
-+++ TeamBasesPanel.xml	2014-05-29 23:19:09.965072600 +0300
-@@ -15,4 +15,7 @@
+--- orig\TeamBasesPanel.xml	2014-07-12 13:13:04.191536100 +0300
++++ TeamBasesPanel.xml	2014-07-12 13:13:04.291536200 +0300
+@@ -15,7 +15,10 @@
          </color>
        </SetBackgroundColor>
 +      <ImportAssets2 url="xvm.swf" reserved1="1" reserved2="0">
@@ -8,60 +8,45 @@
 +      </ImportAssets2>
        <DefineBitsLossless2 objectID="1" format="5" width="320" height="11">
          <data>
-@@ -16,7 +16,7 @@
-       </SetBackgroundColor>
-       <DefineBitsLossless2 objectID="1" format="5" width="320" height="11">
-         <data>
 -          <data>eNrt20EOwUAUh/GntFU0iKSEsrEQrEQiVq7hYs5j3Y1DcBLvn4xD6HyLX9rm7b9MZqZmZl2XuszlrnADNwSAFhiEruWhc2noXjd8a1a6mSVWuaVPVm4NAH9MHVPP1DX1rQy9+3VQ72Pr2MJnW+vZ0ScnL+XF+p0rAPwxdUw9U9fUN3VOvfs1UD1UGx9JkXyyUQoAbaXOVWEdqP5NvIV77+I7K7PX/Fw19a0GgLZR39Q59U7d037g1J+H0L9mc6ufh/sOANpGfVPn1Dt1j/UfgFjXf+z/AYh1/4/zXwCxnv9y/w9ArPf/jP8/AET6/8cXlVgy9A==</data>
 +          <data>eNrt201qhEAUReHSsm2sIK0EpEmTUQaSZKCZhCzAJWY9PXbSi+isJO/CC2QLWmfwgVLzw6N+QgghmoOpzdE0JpkHANiB5F07eucO3r3o/1przWNRFIN5MhfzDAAbdvGeqWvqW+u9++ugvk/mbGsvZVm+xxg/qqr6NF8AsGHqmHqmrqlv6tzpXwPVQ7Xxu67rn6ZpAGCv1LnB50D1rzOv1sV7Suk2juM6TRMA7I36ps6pd53vB/bmzfu3zvN8XZYFAPZGfVPn1Lue+Q9AxvMf+38Act3/4/wXQK7nv9z/A5Dr/b/A+w8Amb7/+AV/76h8</data>
          </data>
        </DefineBitsLossless2>
-       <DefineShape objectID="2">
-@@ -50,7 +50,7 @@
-       </DefineShape>
+@@ -51,5 +54,5 @@
        <DefineBitsLossless2 objectID="3" format="5" width="320" height="11">
          <data>
 -          <data>eNrt20tqwlAUh/Fj2tw0PvBRItIiBDpqOxJBHAnuwoW5HsdOuoh2JZ4/nEK2kNxv8CMJd/5xcx9mZk+udMlVrnZjNwGAnhtH06poXBnNs3imGJ+5Vyts7d585N1tAaCn1DC1TE1T22bRutSZ9+l7biPb+PiHPdu3j+68lgd7GR0BoKfUMLVMTVPb1Di1ru7886qJ6uO1qIu/NC0BYIjUuHXMA1NYeA8/vY2/1TT97Fer+6lpAGBI1DY1Tq1T8/73O5b+/hX9u5+b5nZpWwAYErVNjVPr1LyK+R+AjOd/rP8ByHX9j/1fALnu/3L+D0Cu5/+M+x8AMr3/8QBtm/bi</data>
 +          <data>eNrt201qhEAUReHSsm2sIK0EpEmTUQaSZKCZhCzAJWY9PXbSi+isJO/CC2QLWmfwgVLzw6N+QgghmoOpzdE0JpkHANiB5F07eucO3r3o/1przWNRFIN5MhfzDAAbdvGeqWvqW+u9++ugvk/mbGsvZVm+xxg/qqr6NF8AsGHqmHqmrqlv6tzpXwPVQ7Xxu67rn6ZpAGCv1LnB50D1rzOv1sV7Suk2juM6TRMA7I36ps6pd53vB/bmzfu3zvN8XZYFAPZGfVPn1Lue+Q9AxvMf+38Act3/4/wXQK7nv9z/A5Dr/b/A+w8Amb7/+AV/76h8</data>
          </data>
        </DefineBitsLossless2>
-       <DefineShape objectID="4">
-@@ -84,7 +84,7 @@
-       </DefineShape>
+@@ -85,5 +88,5 @@
        <DefineBitsLossless2 objectID="5" format="5" width="320" height="11">
          <data>
 -          <data>eNrt2ztOw0AARdE3k2RMfgpRTARxUqUiVGkiFkDHfiigZQmshzoNi4CVME+yF2HPLY4s2/3VfCVplE2yJIUqm0pxlj/PAaDn3DI3zW1z4yZt89Q+U9u8Zc7gRrrZSrOdtGiCFoegJQD0kRvmlrlpbpsb59a5ed24z++rnMF7aX4MYf0UdXce6eESY/M8DnsA6CM3zC1z09w2N86tc/O6Oa+b6D5+jXX+S3oBgCFy49w6Ny+18+HbnMHHqM1v0utPvXq7NvU7AAyJ2+bGuXVuXrffsQ6qTkG1/1339cf36fgJAEPitrlxbp2bVzH+A1Dw+I/1PwClrv+x/wug1P1fzv8BKPX8n7j/AaDQ+x//q9S2eA==</data>
 +          <data>eNrt201qhEAUReHSsm2sIK0EpEmTUQaSZKCZhCzAJWY9PXbSi+isJO/CC2QLWmfwgVLzw6N+QgghmoOpzdE0JpkHANiB5F07eucO3r3o/1przWNRFIN5MhfzDAAbdvGeqWvqW+u9++ugvk/mbGsvZVm+xxg/qqr6NF8AsGHqmHqmrqlv6tzpXwPVQ7Xxu67rn6ZpAGCv1LnB50D1rzOv1sV7Suk2juM6TRMA7I36ps6pd53vB/bmzfu3zvN8XZYFAPZGfVPn1Lue+Q9AxvMf+38Act3/4/wXQK7nv9z/A5Dr/b/A+w8Amb7/+AV/76h8</data>
          </data>
        </DefineBitsLossless2>
-       <DefineShape objectID="6">
-@@ -187,7 +187,7 @@
-       </DefineSprite>
+@@ -188,5 +191,5 @@
        <DefineBitsLossless2 objectID="8" format="5" width="313" height="7">
          <data>
 -          <data>eNrt2bEJhFAQBFAFwVhEfnwGh4oNCApXt4GRybViYguC2W9hecFrYZjdSWVbJIAgurLJzNUAEMZUfTO/egUIY6uXzPHZAUK5x+v170+5D4Tuce53IPI/zg4DRN5VH1G8dXI=</data>
 +          <data>eNrt2TENwDAMBEAUUThEpRCpyLsXTSG4SyZDeN1wFF5v/6yqCRBiNBdAkNXcAEF28wCE+Y5X5gPhPc79DiT/4+wwQPKu+gO/5L3C</data>
          </data>
        </DefineBitsLossless2>
-       <DefineShape objectID="9">
-@@ -221,7 +221,7 @@
-       </DefineShape>
+@@ -222,5 +225,5 @@
        <DefineBitsLossless2 objectID="10" format="5" width="313" height="7">
          <data>
 -          <data>eNrt2aENACAUQ0GmQOCxCBwDINh/oM8ezYlb4SVNR29tAITaCyDXuwC5qs4ESKXzQDJ7HUjmdwGSfT45niQ=</data>
 +          <data>eNrt2TENwDAMBEAUUThEpRCpyLsXTSG4SyZDeN1wFF5v/6yqCRBiNBdAkNXcAEF28wCE+Y5X5gPhPc79DiT/4+wwQPKu+gO/5L3C</data>
          </data>
        </DefineBitsLossless2>
-       <DefineShape objectID="11">
-@@ -255,7 +255,7 @@
-       </DefineShape>
+@@ -256,5 +259,5 @@
        <DefineBitsLossless2 objectID="12" format="5" width="313" height="7">
          <data>
 -          <data>eNrt2aENgDAARFEPGppUNcEj2KGCidBdvHSPyxNvhZ9cru7bWQFCPeW4AVK9V+sAqf7xTYBUOg8ks9eBZH4XINkCzTmcGw==</data>
 +          <data>eNrt2TENwDAMBEAUUThEpRCpyLsXTSG4SyZDeN1wFF5v/6yqCRBiNBdAkNXcAEF28wCE+Y5X5gPhPc79DiT/4+wwQPKu+gO/5L3C</data>
          </data>
        </DefineBitsLossless2>
-       <DefineShape objectID="13">
 @@ -19625,5 +19628,5 @@
            <PushData>
              <items>

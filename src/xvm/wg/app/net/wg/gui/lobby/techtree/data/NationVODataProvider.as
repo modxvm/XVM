@@ -5,28 +5,27 @@ package net.wg.gui.lobby.techtree.data
    import net.wg.gui.lobby.techtree.data.vo.NodeData;
    import net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo;
    import net.wg.utils.ILocale;
-
-
+   
    public class NationVODataProvider extends AbstractDataProvider implements INationTreeDataProvider
    {
-          
+      
       public function NationVODataProvider() {
          this._displaySettings = new NationDisplaySettings();
          super();
       }
-
+      
       protected var _scrollIndex:Number = -1;
-
+      
       protected var _displaySettings:NationDisplaySettings;
-
+      
       public function get scrollIndex() : Number {
          return this._scrollIndex;
       }
-
+      
       public function get displaySettings() : NationDisplaySettings {
          return this._displaySettings;
       }
-
+      
       override public function parse(param1:Object) : void {
          var _loc5_:NodeData = null;
          clearUp();
@@ -53,5 +52,4 @@ package net.wg.gui.lobby.techtree.data
          }
       }
    }
-
 }

@@ -2,22 +2,21 @@ package net.wg.gui.lobby.profile.components
 {
    import net.wg.gui.components.advanced.LineDescrIconText;
    import flash.text.TextFieldAutoSize;
-
-
+   
    public class CenteredLineIconText extends LineDescrIconText
    {
-          
+      
       public function CenteredLineIconText() {
          super();
       }
-
+      
       private var isLayoutChanged:Boolean;
-
+      
       override protected function configUI() : void {
          super.configUI();
          textField.autoSize = TextFieldAutoSize.CENTER;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          super.draw();
@@ -32,22 +31,20 @@ package net.wg.gui.lobby.profile.components
             textField.x = _loc1_ - textField.width >> 1;
          }
       }
-
+      
       override public function set description(param1:String) : void {
          super.description = param1;
          this.isLayoutChanged = true;
          invalidate();
       }
-
+      
       override public function set text(param1:String) : void {
          super.text = param1;
          this.isLayoutChanged = true;
          invalidate();
       }
-
+      
       override public function set iconSource(param1:String) : void {
-          
       }
    }
-
 }

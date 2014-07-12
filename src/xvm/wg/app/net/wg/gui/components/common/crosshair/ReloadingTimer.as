@@ -4,34 +4,33 @@ package net.wg.gui.components.common.crosshair
    import flash.display.MovieClip;
    import flash.text.TextField;
    import net.wg.infrastructure.interfaces.IFormattedInt;
-
-
+   
    public class ReloadingTimer extends UIComponent
    {
-          
+      
       public function ReloadingTimer() {
          super();
          this.leftTF = this.contentContainer.leftTF;
          this.delimiterTF = this.contentContainer.delimiterTF;
          this.rightTF = this.contentContainer.rightTF;
       }
-
+      
       private static const FRACTIONAL_SIGNS:Number = 2;
-
+      
       public var contentContainer:MovieClip;
-
+      
       private var leftTF:TextField;
-
+      
       private var delimiterTF:TextField;
-
+      
       private var rightTF:TextField;
-
+      
       private var _time:Number = 0;
-
+      
       public function setup(param1:Number) : void {
          this.contentContainer.alpha = param1;
       }
-
+      
       public function updateTime(param1:Number, param2:Boolean) : void {
          var _loc3_:String = null;
          var _loc4_:IFormattedInt = null;
@@ -57,5 +56,4 @@ package net.wg.gui.components.common.crosshair
          }
       }
    }
-
 }

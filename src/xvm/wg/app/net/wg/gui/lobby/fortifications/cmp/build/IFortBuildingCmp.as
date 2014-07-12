@@ -8,16 +8,14 @@ package net.wg.gui.lobby.fortifications.cmp.build
    import net.wg.gui.lobby.fortifications.interfaces.ICommonModeClient;
    import net.wg.gui.lobby.fortifications.interfaces.ITransportModeClient;
    import net.wg.gui.lobby.fortifications.interfaces.IDirectionModeClient;
-
-
+   
    public interface IFortBuildingCmp extends IDAAPIModule, IFortBuildingComponentMeta, IDAAPIComponent, ITransportingHandler, IUIComponentEx, ICommonModeClient, ITransportModeClient, IDirectionModeClient
    {
-          
+      
       function updateControlPositions() : void;
-
+      
       function get buildingContainer() : IFortBuildingsContainer;
-
+      
       function set buildingContainer(param1:IFortBuildingsContainer) : void;
    }
-
 }

@@ -4,24 +4,23 @@ package net.wg.gui.messenger.controls
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ComponentEvent;
    import flash.text.TextFieldAutoSize;
-
-
+   
    public class ChannelItemRenderer extends TextFieldShort
    {
-          
+      
       public function ChannelItemRenderer() {
          super();
       }
-
+      
       override public function setData(param1:Object) : void {
          visible = !(param1 == null);
          super.setData(param1);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          visible = !(data == null);
@@ -74,5 +73,4 @@ package net.wg.gui.messenger.controls
          _toolTip = _label;
       }
    }
-
 }

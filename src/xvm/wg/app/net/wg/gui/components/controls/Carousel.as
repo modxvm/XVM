@@ -16,106 +16,105 @@ package net.wg.gui.components.controls
    import flash.utils.clearInterval;
    import flash.utils.setTimeout;
    import flash.utils.clearTimeout;
-
-
+   
    public class Carousel extends CoreListEx implements IDraggableList
    {
-          
+      
       public function Carousel() {
          this._padding = new Padding([0,0,0,0]);
          super();
       }
-
+      
       public static var contentMargin:Number = 0;
-
+      
       public static const CAROUSEL_BUTTON_ARROW_OFFSET:Number = 0;
-
+      
       public var margin:Number = 0;
-
+      
       public var slotImageWidth:Number = 0;
-
+      
       public var slotImageHeight:Number = 0;
-
+      
       public var leftArrow:SoundButton;
-
+      
       public var rightArrow:SoundButton;
-
+      
       public var renderersMask:MovieClip;
-
+      
       public var dragHitArea:MovieClip;
-
+      
       public var bg:MovieClip;
-
+      
       protected var _padding:Padding;
-
+      
       protected var _visibleSlots:Number = 0;
-
+      
       protected var slotWidth:Number = 0;
-
+      
       protected var _allowW:Number = 0;
-
+      
       protected var _allowH:Number = 0;
-
+      
       protected var _defContainerPos:Number = 0;
-
+      
       protected var isPreDragging:Boolean = false;
-
+      
       protected var isDragging:Boolean = false;
-
+      
       protected var draggingIntervalId:Number = 0;
-
+      
       protected var slidingIntervalId:Number = 0;
-
+      
       protected var arrowSlideIntervalId:Number = 0;
-
+      
       protected var isTween:Boolean = false;
-
+      
       protected var tween:Tween = null;
-
+      
       protected var _isMoving:Boolean = false;
-
+      
       protected var _isSliding:Boolean = false;
-
+      
       protected var _currentFirstRenderer:uint = 0;
-
+      
       protected var _currentFirstRendererOnAnim:uint = 0;
-
+      
       protected var distanceOfDragDelay:uint = 10;
-
+      
       protected var lastDx:Number = 0;
-
+      
       protected var allowDrag:Boolean = false;
-
+      
       protected var selectedItemRenderer:IListItemRenderer = null;
-
+      
       private var scopeWidth:Number = 0;
-
+      
       private var courseFactor:Number = 0;
-
+      
       private var slideAcceleratorAfterDrag:Number = 16;
-
+      
       private var slideAcceleratorByArrow:Number = 7;
-
+      
       private var slideToPosAccelerator:Number = 7;
-
+      
       private var dragAccelerator:Number = 3;
-
+      
       private var maxDx:Number = 20;
-
+      
       private var lastContainerXPos:Number = 0;
-
+      
       private var maxDragOffset:Number = 100;
-
+      
       private var _dragEnabled:Boolean = true;
-
+      
       private var _isMouseOver:Boolean = false;
-
+      
       private const SLIDE_COURSE_LEFT:String = "left";
-
+      
       private const SLIDE_COURSE_RIGHT:String = "right";
-
+      
       private const INTERVAL_SPEED:Number = 16.666666666666668;
-
+      
       override protected function onDispose() : void {
          this.clearAllAnimIntervals();
          this.clearWheelTimeout();
@@ -145,7 +144,7 @@ package net.wg.gui.components.controls
          this.bg = null;
          super.onDispose();
       }
-
+      
       public function updateSize(param1:int, param2:int) : void {
          this._allowW = param1;
          this._allowH = param2;
@@ -153,16 +152,16 @@ package net.wg.gui.components.controls
          _originalHeight = param2;
          setSize(param1,param2);
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          this.updateArrowsState();
       }
-
+      
       public function get dragEnabled() : Boolean {
          return this._dragEnabled;
       }
-
+      
       public function set dragEnabled(param1:Boolean) : void {
          var _loc2_:uint = 0;
          var _loc3_:DragableListItemRenderer = null;
@@ -182,15 +181,15 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       public function get padding() : Padding {
          return this._padding;
       }
-
+      
       public function set padding(param1:Padding) : void {
          this._padding = param1;
       }
-
+      
       public function set inspectablePadding(param1:Object) : void {
          if(!componentInspectorSetting)
          {
@@ -198,15 +197,15 @@ package net.wg.gui.components.controls
          }
          this.padding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
       }
-
+      
       public function get isSliding() : Boolean {
          return this._isSliding;
       }
-
+      
       public function set isSliding(param1:Boolean) : void {
          var _loc2_:DragableListItemRenderer = null;
          this._isSliding = param1;
-         if((((!this._isSliding) && (this.dragHitArea)) && (stage)) && (this.dragHitArea.hitTestPoint(stage.mouseX,stage.mouseY,true)) && (this._isMouseOver))
+         if((!this._isSliding && this.dragHitArea && stage) && (this.dragHitArea.hitTestPoint(stage.mouseX,stage.mouseY,true)) && (this._isMouseOver))
          {
             _loc2_ = this.findHitTestRenderer();
             if(_loc2_)
@@ -215,15 +214,15 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       public function get isMoving() : Boolean {
          return this._isMoving;
       }
-
+      
       public function set isMoving(param1:Boolean) : void {
          this._isMoving = param1;
       }
-
+      
       override protected function configUI() : void {
          contentMargin = this.margin;
          super.configUI();
@@ -248,19 +247,18 @@ package net.wg.gui.components.controls
          this.addEventListener(ListEventEx.ITEM_ROLL_OVER,this.onItemRollOver);
          this.addEventListener(ListEventEx.ITEM_ROLL_OUT,this.onItemRollOut);
       }
-
+      
       override protected function draw() : void {
-          
       }
-
+      
       protected function goToFirstRenderer() : void {
          container.x = this._defContainerPos - this.currentFirstRenderer * this.slotWidth ^ 0;
       }
-
+      
       protected function initUIStartPosition() : void {
          if(this.renderersMask)
          {
-            this.setChildIndex(this.renderersMask,this.numChildren-1);
+            this.setChildIndex(this.renderersMask,this.numChildren - 1);
             container.mask = this.renderersMask;
          }
          this.leftArrow.x = contentMargin;
@@ -278,7 +276,7 @@ package net.wg.gui.components.controls
             container.y = contentMargin;
          }
       }
-
+      
       protected function updateArrowsState() : void {
          if(_totalRenderers <= this._visibleSlots || !enabled)
          {
@@ -286,32 +284,28 @@ package net.wg.gui.components.controls
             this.leftArrow.enabled = false;
             this.rightArrow.enabled = false;
          }
+         else if(this.currentFirstRenderer == 0)
+         {
+            this.leftArrow.enabled = false;
+            this.rightArrow.enabled = true;
+            this.allowDrag = true;
+         }
+         else if(this.currentFirstRenderer >= _totalRenderers - this._visibleSlots)
+         {
+            this.leftArrow.enabled = true;
+            this.rightArrow.enabled = false;
+            this.allowDrag = true;
+         }
          else
          {
-            if(this.currentFirstRenderer == 0)
-            {
-               this.leftArrow.enabled = false;
-               this.rightArrow.enabled = true;
-               this.allowDrag = true;
-            }
-            else
-            {
-               if(this.currentFirstRenderer >= _totalRenderers - this._visibleSlots)
-               {
-                  this.leftArrow.enabled = true;
-                  this.rightArrow.enabled = false;
-                  this.allowDrag = true;
-               }
-               else
-               {
-                  this.leftArrow.enabled = true;
-                  this.rightArrow.enabled = true;
-                  this.allowDrag = true;
-               }
-            }
+            this.leftArrow.enabled = true;
+            this.rightArrow.enabled = true;
+            this.allowDrag = true;
          }
+         
+         
       }
-
+      
       protected function updateDefContainerPos() : Number {
          if((this.leftArrow) && (this.leftArrow.visible))
          {
@@ -323,11 +317,11 @@ package net.wg.gui.components.controls
          }
          return this._defContainerPos;
       }
-
+      
       protected function updateSlotWidth() : void {
          this.slotWidth = this.slotImageWidth + this.padding.horizontal;
       }
-
+      
       protected function updateLayout() : void {
          if((initialized) && (_renderers))
          {
@@ -338,12 +332,12 @@ package net.wg.gui.components.controls
             this.x = this._allowW - (this.rightArrow.x + contentMargin) >> 1;
          }
       }
-
+      
       protected function updateVisibleSlotsCount() : Number {
          this._visibleSlots = Math.floor((this._allowW - (this.leftArrow.x + this.leftArrow.width + this.rightArrow.width + CAROUSEL_BUTTON_ARROW_OFFSET * 2 + contentMargin + this.padding.horizontal)) / this.slotWidth);
          return this._visibleSlots;
       }
-
+      
       protected function updateUIPosition() : void {
          if((container) && (this.rightArrow))
          {
@@ -358,7 +352,7 @@ package net.wg.gui.components.controls
             this.bg.x = -(this._allowW - (this.rightArrow.x + contentMargin) >> 1);
          }
       }
-
+      
       protected function startDragging() : void {
          var _loc1_:Object = null;
          this.isDragging = false;
@@ -369,32 +363,30 @@ package net.wg.gui.components.controls
             {
                this.clearArrowSlide();
                this.tryClearTween();
-               _loc1_ =
+               _loc1_ = 
                   {
                      "scopeStartX":container.x,
                      "startMouseX":mouseX,
                      "allowDragDistance":this._defContainerPos - (this.scopeWidth - this.renderersMask.width),
                      "scopeDefPosition":this._defContainerPos
-                  }
-               ;
+                  };
                this.isPreDragging = true;
                this.lastContainerXPos = container.x;
                this.draggingIntervalId = setInterval(this.updateDrugPosition,this.INTERVAL_SPEED,this,_loc1_);
             }
          }
       }
-
+      
       protected function stopDragging() : void {
          var _loc1_:Object = null;
          this.clearDraggingIntervalId();
          if(this.slidingIntervalId == 0)
          {
-            _loc1_ =
+            _loc1_ = 
                {
                   "scopeDefPosition":this._defContainerPos,
                   "allowDragDistance":this._defContainerPos - (this.scopeWidth - this.renderersMask.width)
-               }
-            ;
+               };
             this.tryClearTween();
             this.isSliding = true;
             this.slidingFn(_loc1_);
@@ -402,14 +394,14 @@ package net.wg.gui.components.controls
          }
          this.isPreDragging = false;
       }
-
+      
       protected function clearAllAnimIntervals() : void {
          this.clearSlidingIntervalId();
          this.clearArrowSlide();
          this.tryClearTween();
          this.clearDraggingIntervalId();
       }
-
+      
       protected function tryClearTween() : void {
          if(this.tween)
          {
@@ -419,15 +411,15 @@ package net.wg.gui.components.controls
             this.isMoving = false;
          }
       }
-
+      
       protected function updateScopeWidth() : void {
          this.scopeWidth = _renderers.length * this.slotWidth + this.margin * 2;
       }
-
+      
       protected function get currentFirstRenderer() : uint {
          return this._currentFirstRenderer;
       }
-
+      
       protected function set currentFirstRenderer(param1:uint) : void {
          if(param1 == this._currentFirstRenderer)
          {
@@ -436,7 +428,7 @@ package net.wg.gui.components.controls
          this._currentFirstRenderer = param1;
          this.updateArrowsState();
       }
-
+      
       override protected function onItemStartDrag(param1:ListEventEx) : void {
          if(param1.buttonIdx == 0)
          {
@@ -444,7 +436,7 @@ package net.wg.gui.components.controls
             this.startDragging();
          }
       }
-
+      
       override protected function dispatchItemEvent(param1:Event) : Boolean {
          var _loc2_:String = null;
          switch(param1.type)
@@ -478,31 +470,27 @@ package net.wg.gui.components.controls
          }
          var _loc3_:IListItemRenderer = param1.currentTarget as IListItemRenderer;
          var _loc4_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc4_ = (param1 as ButtonEvent).controllerIdx;
          }
-         else
+         else if(param1 is MouseEventEx)
          {
-            if(param1  is  MouseEventEx)
-            {
-               _loc4_ = (param1 as MouseEventEx).mouseIdx;
-            }
+            _loc4_ = (param1 as MouseEventEx).mouseIdx;
          }
+         
          var _loc5_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc5_ = (param1 as ButtonEvent).buttonIdx;
          }
-         else
+         else if(param1 is MouseEventEx)
          {
-            if(param1  is  MouseEventEx)
-            {
-               _loc5_ = (param1 as MouseEventEx).buttonIdx;
-            }
+            _loc5_ = (param1 as MouseEventEx).buttonIdx;
          }
+         
          var _loc6_:* = false;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc6_ = (param1 as ButtonEvent).isKeyboard;
          }
@@ -510,7 +498,7 @@ package net.wg.gui.components.controls
          var _loc8_:ListEventEx = new ListEventEx(_loc2_,false,true,_loc3_.index,0,_loc3_.index,_loc3_,_loc7_.dataVO,_loc4_,_loc5_,_loc6_);
          return dispatchEvent(_loc8_);
       }
-
+      
       private function updateDrugPosition(param1:Carousel, param2:Object) : void {
          var _loc3_:* = NaN;
          if(this.isPreDragging)
@@ -527,13 +515,11 @@ package net.wg.gui.components.controls
                {
                   _loc3_ = param2.scopeDefPosition + this.maxDragOffset;
                }
-               else
+               else if(_loc3_ < param2.allowDragDistance - this.maxDragOffset)
                {
-                  if(_loc3_ < param2.allowDragDistance - this.maxDragOffset)
-                  {
-                     _loc3_ = param2.allowDragDistance - this.maxDragOffset;
-                  }
+                  _loc3_ = param2.allowDragDistance - this.maxDragOffset;
                }
+               
                container.x = container.x + (_loc3_ - container.x) / this.dragAccelerator;
                container.x = container.x ^ 0;
                this.lastDx = container.x - this.lastContainerXPos;
@@ -541,7 +527,7 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       private function slidingFn(param1:Object) : void {
          var _loc2_:Number = container.x + this.lastDx;
          this.lastDx = this.lastDx + -this.lastDx / this.slideAcceleratorAfterDrag;
@@ -556,34 +542,32 @@ package net.wg.gui.components.controls
                this.isMoving = false;
             }
          }
-         else
+         else if(_loc2_ < param1.allowDragDistance)
          {
-            if(_loc2_ < param1.allowDragDistance)
+            _loc2_ = param1.allowDragDistance - container.x + this.lastDx;
+            container.x = container.x + _loc2_ / this.slideToPosAccelerator;
+            if(Math.abs(_loc2_) < 1 && Math.abs(this.lastDx) < 1)
             {
-               _loc2_ = param1.allowDragDistance - container.x + this.lastDx;
-               container.x = container.x + _loc2_ / this.slideToPosAccelerator;
-               if(Math.abs(_loc2_) < 1 && Math.abs(this.lastDx) < 1)
-               {
-                  container.x = param1.allowDragDistance;
-                  this.clearSlidingIntervalId();
-                  this.currentFirstRenderer = _renderers.length-1;
-                  this.isMoving = false;
-               }
-            }
-            else
-            {
-               container.x = _loc2_;
-               if(Math.abs(this.lastDx) < 1)
-               {
-                  this.currentFirstRenderer = this.getCurrentFirstRendererOnAnim();
-                  container.x = container.x ^ 0;
-                  this.clearSlidingIntervalId();
-                  this.beginSlideToPos();
-               }
+               container.x = param1.allowDragDistance;
+               this.clearSlidingIntervalId();
+               this.currentFirstRenderer = _renderers.length - 1;
+               this.isMoving = false;
             }
          }
+         else
+         {
+            container.x = _loc2_;
+            if(Math.abs(this.lastDx) < 1)
+            {
+               this.currentFirstRenderer = this.getCurrentFirstRendererOnAnim();
+               container.x = container.x ^ 0;
+               this.clearSlidingIntervalId();
+               this.beginSlideToPos();
+            }
+         }
+         
       }
-
+      
       private function getCurrentFirstRendererOnAnim() : Number {
          var _loc1_:* = NaN;
          if(!container || !_renderers)
@@ -597,23 +581,21 @@ package net.wg.gui.components.controls
             {
                _loc1_ = 0;
             }
-            else
+            else if(_loc1_ >= _renderers.length - this._visibleSlots)
             {
-               if(_loc1_ >= _renderers.length - this._visibleSlots)
-               {
-                  _loc1_ = _renderers.length - this._visibleSlots;
-               }
+               _loc1_ = _renderers.length - this._visibleSlots;
             }
+            
             this._currentFirstRendererOnAnim = _loc1_;
          }
          return this._currentFirstRendererOnAnim;
       }
-
+      
       private function beginSlideToPos() : void {
          var _loc1_:Number = this.getCurrentFirstRendererOnAnim();
          this.slideToRenderer(_loc1_);
       }
-
+      
       private function slideToRenderer(param1:Number) : void {
          this.currentFirstRenderer = param1;
          var _loc2_:Number = -param1 * this.slotWidth + this._defContainerPos;
@@ -626,16 +608,15 @@ package net.wg.gui.components.controls
                   "paused":false,
                   "onComplete":this.onTweenComplete,
                   "ease":Strong.easeInOut
-               }
-            );
+               });
          }
       }
-
+      
       private function onTweenComplete() : void {
          this.isTween = false;
          this.tryClearTween();
       }
-
+      
       private function clearDraggingIntervalId() : void {
          if(this.draggingIntervalId)
          {
@@ -643,7 +624,7 @@ package net.wg.gui.components.controls
             this.draggingIntervalId = 0;
          }
       }
-
+      
       private function clearSlidingIntervalId() : void {
          if(this.slidingIntervalId)
          {
@@ -653,7 +634,7 @@ package net.wg.gui.components.controls
             this.lastDx = 0;
          }
       }
-
+      
       private function clearArrowSlide() : void {
          if(this.arrowSlideIntervalId)
          {
@@ -663,11 +644,11 @@ package net.wg.gui.components.controls
             this.arrowSlideIntervalId = 0;
          }
       }
-
+      
       private function startSlideByArrow(param1:String) : void {
          this.clearSlidingIntervalId();
          this.currentFirstRenderer = this.getCurrentFirstRendererOnAnim();
-         this.currentFirstRenderer = param1 == "left"?Math.max(0,this.currentFirstRenderer-1):Math.min(_renderers.length - this._visibleSlots,this.currentFirstRenderer + 1);
+         this.currentFirstRenderer = param1 == "left"?Math.max(0,this.currentFirstRenderer - 1):Math.min(_renderers.length - this._visibleSlots,this.currentFirstRenderer + 1);
          if(this.currentFirstRenderer == 0 || this.currentFirstRenderer == _renderers.length - this._visibleSlots)
          {
             this.courseFactor = 0;
@@ -684,7 +665,7 @@ package net.wg.gui.components.controls
             this.arrowSlideIntervalId = setInterval(this.arrowSlide,this.INTERVAL_SPEED);
          }
       }
-
+      
       private function stopSlideByArrow(param1:String) : void {
          var _loc2_:Number = -this.currentFirstRenderer * this.slotWidth - (container.x - this._defContainerPos);
          var _loc3_:Number = this.padding.horizontal + 10;
@@ -693,28 +674,24 @@ package net.wg.gui.components.controls
          {
             _loc4_ = this.currentFirstRenderer + Math.round(_loc2_ / this.slotWidth) + 1;
          }
-         else
+         else if(param1 == "left" && _loc2_ < -_loc3_)
          {
-            if(param1 == "left" && _loc2_ < -_loc3_)
-            {
-               _loc4_ = this.currentFirstRenderer - Math.floor(-_loc2_ / this.slotWidth)-1;
-            }
+            _loc4_ = this.currentFirstRenderer - Math.floor(-_loc2_ / this.slotWidth) - 1;
          }
+         
          if(_loc4_ < 0)
          {
             _loc4_ = 0;
          }
-         else
+         else if(_loc4_ > _renderers.length - this._visibleSlots)
          {
-            if(_loc4_ > _renderers.length - this._visibleSlots)
-            {
-               _loc4_ = _renderers.length - this._visibleSlots;
-            }
+            _loc4_ = _renderers.length - this._visibleSlots;
          }
+         
          this.currentFirstRenderer = _loc4_;
          this.courseFactor = 0;
       }
-
+      
       private function arrowSlide() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -742,17 +719,15 @@ package net.wg.gui.components.controls
                this.currentFirstRenderer = 0;
                this.courseFactor = 0;
             }
-            else
+            else if(this._currentFirstRendererOnAnim == _renderers.length - this._visibleSlots && this.courseFactor == -1)
             {
-               if(this._currentFirstRendererOnAnim == _renderers.length - this._visibleSlots && this.courseFactor == -1)
-               {
-                  this.currentFirstRenderer = _renderers.length - this._visibleSlots;
-                  this.courseFactor = 0;
-               }
+               this.currentFirstRenderer = _renderers.length - this._visibleSlots;
+               this.courseFactor = 0;
             }
+            
          }
       }
-
+      
       private function correctContainerPosition() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -767,7 +742,7 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       private function findHitTestRenderer() : DragableListItemRenderer {
          var _loc2_:* = NaN;
          var _loc3_:* = NaN;
@@ -783,7 +758,7 @@ package net.wg.gui.components.controls
          }
          return _loc1_;
       }
-
+      
       private function onDragAreaMouseDown(param1:MouseEvent) : void {
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
          var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
@@ -795,19 +770,19 @@ package net.wg.gui.components.controls
          stage.addEventListener(MouseEvent.MOUSE_UP,this.onStageMouseUp);
          this.startDragging();
       }
-
+      
       private function arrowUp(param1:MouseEvent) : void {
          param1.target.dispatchEvent(new ButtonEvent(ButtonEvent.RELEASE_OUTSIDE));
       }
-
+      
       private function arrowRelease(param1:ButtonEvent) : void {
          this.stopSlideByArrow(param1.target == this.leftArrow?this.SLIDE_COURSE_LEFT:this.SLIDE_COURSE_RIGHT);
       }
-
+      
       private function arrowPress(param1:ButtonEvent) : void {
          this.startSlideByArrow(param1.target == this.leftArrow?this.SLIDE_COURSE_LEFT:this.SLIDE_COURSE_RIGHT);
       }
-
+      
       private function onStageMouseUp(param1:MouseEvent) : void {
          if(stage.hasEventListener(MouseEvent.MOUSE_UP))
          {
@@ -815,11 +790,11 @@ package net.wg.gui.components.controls
          }
          this.stopDragging();
       }
-
+      
       private var wheelStopTimeoutId:Number = 0;
-
+      
       private var wheelPrevCourse:String = "";
-
+      
       override protected function handleMouseWheel(param1:MouseEvent) : void {
          if(!enabled)
          {
@@ -837,19 +812,17 @@ package net.wg.gui.components.controls
             this.startSlideByArrow(_loc2_);
             _loc3_ = 200;
          }
-         else
+         else if(this.wheelPrevCourse != _loc2_)
          {
-            if(this.wheelPrevCourse != _loc2_)
-            {
-               this.stopSlideByArrow(this.wheelPrevCourse);
-               this.startSlideByArrow(_loc2_);
-            }
+            this.stopSlideByArrow(this.wheelPrevCourse);
+            this.startSlideByArrow(_loc2_);
          }
+         
          this.wheelPrevCourse = _loc2_;
          this.clearWheelTimeout();
          this.wheelStopTimeoutId = setTimeout(this.wheelStop,_loc3_,_loc2_);
       }
-
+      
       private function clearWheelTimeout() : void {
          if(this.wheelStopTimeoutId != 0)
          {
@@ -857,24 +830,22 @@ package net.wg.gui.components.controls
             this.wheelStopTimeoutId = 0;
          }
       }
-
+      
       private function wheelStop(param1:String) : void {
          this.clearWheelTimeout();
          this.wheelPrevCourse = "";
          this.stopSlideByArrow(param1);
       }
-
+      
       protected function onItemClick(param1:ListEventEx) : void {
-          
       }
-
+      
       protected function onItemRollOut(param1:ListEventEx) : void {
          this._isMouseOver = false;
       }
-
+      
       protected function onItemRollOver(param1:ListEventEx) : void {
          this._isMouseOver = true;
       }
    }
-
 }

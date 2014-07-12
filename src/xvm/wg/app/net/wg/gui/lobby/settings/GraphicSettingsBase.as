@@ -15,192 +15,193 @@ package net.wg.gui.lobby.settings
    import flash.display.DisplayObject;
    import flash.events.MouseEvent;
    import net.wg.data.constants.Tooltips;
-
-
+   
    public class GraphicSettingsBase extends SettingsBaseView
    {
-          
+      
       public function GraphicSettingsBase() {
          super();
          this.initControls();
          this.initToolTipMapping();
       }
-
+      
       public var tabs:ContentTabBar;
-
+      
       public var screenForm:ScreenSettingsForm;
-
+      
       public var advancedForm:AdvancedGraphicSettingsForm;
-
+      
       public var lip:MovieClip;
-
+      
       public var graphicsQualityLabel:LabelControl = null;
-
+      
       public var graphicsQualityDropDown:DropdownMenu = null;
-
+      
       public var autodetectQuality:SoundButtonEx = null;
-
+      
       public var dynamicRendererLabel:LabelControl = null;
-
+      
       public var dynamicRendererSlider:Slider = null;
-
+      
       public var dynamicRendererValue:LabelControl = null;
-
+      
       public var monitorLabel:LabelControl = null;
-
+      
       public var monitorDropDown:DropdownMenu = null;
-
+      
       public var fullScreenCheckbox:CheckBox = null;
-
+      
       public var sizesLabel:LabelControl = null;
-
+      
       public var sizesDropDown:DropdownMenu = null;
-
+      
       public var refreshRateLabel:LabelControl = null;
-
+      
       public var refreshRateDropDown:DropdownMenu = null;
-
+      
       public var vertSyncCheckbox:CheckBox = null;
-
+      
       public var aspectRatioLabel:LabelControl = null;
-
+      
       public var aspectRatioDropDown:DropdownMenu = null;
-
+      
       public var smoothingLabel:LabelControl = null;
-
+      
       public var smoothingDropDown:DropdownMenu = null;
-
+      
       public var gammaLabel:LabelControl = null;
-
+      
       public var gammaSlider:Slider = null;
-
+      
       public var colorFilterIntensityLabel:LabelControl = null;
-
+      
       public var colorFilterIntensitySlider:Slider = null;
-
+      
       public var colorFilterIntensityValue:LabelControl = null;
-
+      
       public var isColorBlindCheckbox:CheckBox = null;
-
+      
       public var colorFilterDefaultImg:UILoaderAlt = null;
-
+      
       public var colorFilterOverlayImg:UILoaderAlt = null;
-
+      
       public var COLOR_GRADING_TECHNIQUELabel:LabelControl = null;
-
+      
       public var COLOR_GRADING_TECHNIQUEDropDown:DropdownMenu = null;
-
+      
       public var fovLabel:LabelControl = null;
-
+      
       public var fovRangeSlider:RangeSlider = null;
-
+      
       public var dynamicFovCheckbox:CheckBox = null;
-
+      
       public var RENDER_PIPELINELabel:LabelControl = null;
-
+      
       public var RENDER_PIPELINEButtonBar:RadioButtonBar = null;
-
+      
       public var TEXTURE_QUALITYLabel:LabelControl = null;
-
+      
       public var TEXTURE_QUALITYValue:LabelControl = null;
-
+      
       public var TEXTURE_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var SHADOWS_QUALITYLabel:LabelControl = null;
-
+      
       public var SHADOWS_QUALITYValue:LabelControl = null;
-
+      
       public var SHADOWS_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var DECALS_QUALITYLabel:LabelControl = null;
-
+      
       public var DECALS_QUALITYValue:LabelControl = null;
-
+      
       public var DECALS_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var TERRAIN_QUALITYLabel:LabelControl = null;
-
+      
       public var TERRAIN_QUALITYValue:LabelControl = null;
-
+      
       public var TERRAIN_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var WATER_QUALITYLabel:LabelControl = null;
-
+      
       public var WATER_QUALITYValue:LabelControl = null;
-
+      
       public var WATER_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var LIGHTING_QUALITYLabel:LabelControl = null;
-
+      
       public var LIGHTING_QUALITYValue:LabelControl = null;
-
+      
       public var LIGHTING_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var SPEEDTREE_QUALITYLabel:LabelControl = null;
-
+      
       public var SPEEDTREE_QUALITYValue:LabelControl = null;
-
+      
       public var SPEEDTREE_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var FLORA_QUALITYLabel:LabelControl = null;
-
+      
       public var FLORA_QUALITYValue:LabelControl = null;
-
+      
       public var FLORA_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var EFFECTS_QUALITYLabel:LabelControl = null;
-
+      
       public var EFFECTS_QUALITYValue:LabelControl = null;
-
+      
       public var EFFECTS_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var POST_PROCESSING_QUALITYLabel:LabelControl = null;
-
+      
       public var POST_PROCESSING_QUALITYValue:LabelControl = null;
-
+      
       public var POST_PROCESSING_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var MOTION_BLUR_QUALITYLabel:LabelControl = null;
-
+      
       public var MOTION_BLUR_QUALITYValue:LabelControl = null;
-
+      
       public var MOTION_BLUR_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var FAR_PLANELabel:LabelControl = null;
-
+      
       public var FAR_PLANEValue:LabelControl = null;
-
+      
       public var FAR_PLANEStepSlider:SettingsStepSlider = null;
-
+      
       public var OBJECT_LODLabel:LabelControl = null;
-
+      
       public var OBJECT_LODValue:LabelControl = null;
-
+      
       public var OBJECT_LODStepSlider:SettingsStepSlider = null;
-
+      
       public var SNIPER_MODE_EFFECTS_QUALITYLabel:LabelControl = null;
-
+      
       public var SNIPER_MODE_EFFECTS_QUALITYValue:LabelControl = null;
-
+      
       public var SNIPER_MODE_EFFECTS_QUALITYStepSlider:SettingsStepSlider = null;
-
+      
       public var fpsPerfomancerCheckbox:CheckBox = null;
-
+      
       public var SNIPER_MODE_GRASS_ENABLEDCheckbox:CheckBox = null;
-
+      
       public var VEHICLE_DUST_ENABLEDCheckbox:CheckBox = null;
-
+      
       public var VEHICLE_TRACES_ENABLEDCheckbox:CheckBox = null;
-
+      
+      public var SEMITRANSPARENT_LEAVES_ENABLEDCheckbox:CheckBox = null;
+      
       protected var toolTipMapping:Dictionary = null;
-
+      
       protected var _isFullScreen:Boolean = false;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.lip.mouseChildren = this.lip.mouseEnabled = false;
       }
-
+      
       private function initControls() : void {
          this.monitorLabel = this.screenForm.monitorLabel;
          this.monitorDropDown = this.screenForm.monitorDropDown;
@@ -276,8 +277,9 @@ package net.wg.gui.lobby.settings
          this.SNIPER_MODE_GRASS_ENABLEDCheckbox = _loc1_.SNIPER_MODE_GRASS_ENABLEDCheckbox;
          this.VEHICLE_DUST_ENABLEDCheckbox = _loc1_.VEHICLE_DUST_ENABLEDCheckbox;
          this.VEHICLE_TRACES_ENABLEDCheckbox = _loc1_.VEHICLE_TRACES_ENABLEDCheckbox;
+         this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox = _loc1_.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox;
       }
-
+      
       private function initToolTipMapping() : void {
          var _loc1_:DisplayObject = null;
          var _loc2_:Object = null;
@@ -345,18 +347,19 @@ package net.wg.gui.lobby.settings
          this.toolTipMapping[this.SNIPER_MODE_GRASS_ENABLEDCheckbox] = SettingsConfig.SNIPER_MODE_GRASS_ENABLED;
          this.toolTipMapping[this.VEHICLE_DUST_ENABLEDCheckbox] = SettingsConfig.VEHICLE_DUST_ENABLED;
          this.toolTipMapping[this.VEHICLE_TRACES_ENABLEDCheckbox] = SettingsConfig.VEHICLE_TRACES_ENABLED;
-         for (_loc2_ in this.toolTipMapping)
+         this.toolTipMapping[this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox] = SettingsConfig.SEMITRANSPARENT_LEAVES_ENABLED;
+         for(_loc2_ in this.toolTipMapping)
          {
             _loc1_ = _loc2_ as DisplayObject;
             _loc1_.addEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
             _loc1_.addEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
          }
       }
-
+      
       private function onControlOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onControlOver(param1:MouseEvent) : void {
          var _loc2_:String = this.toolTipMapping[param1.currentTarget];
          if(_loc2_ == SettingsConfig.SIZE)
@@ -365,16 +368,16 @@ package net.wg.gui.lobby.settings
          }
          App.toolTipMgr.showSpecial(Tooltips.SETTINGS_CONTROL,null,_loc2_);
       }
-
+      
       override protected function onDispose() : void {
          var _loc1_:DisplayObject = null;
          var _loc2_:Object = null;
-         for (_loc2_ in this.toolTipMapping)
+         for(_loc2_ in this.toolTipMapping)
          {
             _loc1_ = _loc2_ as DisplayObject;
             _loc1_.removeEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
             _loc1_.removeEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
-            delete this.toolTipMapping[[_loc2_]];
+            delete this.toolTipMapping[_loc2_];
          }
          this.toolTipMapping = null;
          this.monitorLabel = null;
@@ -450,6 +453,7 @@ package net.wg.gui.lobby.settings
          this.SNIPER_MODE_GRASS_ENABLEDCheckbox = null;
          this.VEHICLE_DUST_ENABLEDCheckbox = null;
          this.VEHICLE_TRACES_ENABLEDCheckbox = null;
+         this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox = null;
          this.tabs.dispose();
          this.tabs = null;
          this.screenForm.dispose();
@@ -472,5 +476,4 @@ package net.wg.gui.lobby.settings
          super.onDispose();
       }
    }
-
 }

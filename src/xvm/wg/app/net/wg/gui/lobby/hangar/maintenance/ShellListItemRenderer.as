@@ -17,32 +17,31 @@ package net.wg.gui.lobby.hangar.maintenance
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.events.ModuleInfoEvent;
    import net.wg.gui.lobby.hangar.maintenance.data.ShellVO;
-
-
+   
    public class ShellListItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function ShellListItemRenderer() {
          super();
       }
-
+      
       public var icon:UILoaderAlt;
-
+      
       public var title:TextField;
-
+      
       public var desc:TextField;
-
+      
       public var price:IconText;
-
+      
       public var actionPrice:ActionPrice;
-
+      
       public var hitMc:MovieClip;
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          invalidate(InvalidationType.DATA);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.desc.text = MENU.SHELLLISTITEMRENDERER_REPLACE;
@@ -56,7 +55,7 @@ package net.wg.gui.lobby.hangar.maintenance
             hitArea = this.hitMc;
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:ILocale = null;
          var _loc2_:Object = null;
@@ -96,18 +95,18 @@ package net.wg.gui.lobby.hangar.maintenance
             }
          }
       }
-
+      
       private function onRollOver(param1:MouseEvent) : void {
          App.toolTipMgr.showSpecial(Tooltips.TECH_MAIN_SHELL,null,data.id,data.prices,data.inventoryCount,data.count);
       }
-
+      
       private function onRollOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onClick(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
-         if(param1  is  MouseEventEx)
+         if(param1 is MouseEventEx)
          {
             if(App.utils.commons.isRightButton(param1))
             {
@@ -116,5 +115,4 @@ package net.wg.gui.lobby.hangar.maintenance
          }
       }
    }
-
 }

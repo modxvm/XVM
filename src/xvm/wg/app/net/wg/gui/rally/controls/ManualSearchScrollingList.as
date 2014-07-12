@@ -10,18 +10,17 @@ package net.wg.gui.rally.controls
    import net.wg.gui.rally.interfaces.IManualSearchRenderer;
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class ManualSearchScrollingList extends ScrollingListEx implements IManualSearchScrollingList
    {
-          
+      
       public function ManualSearchScrollingList() {
          super();
          this._asserter = App.utils.asserter;
       }
-
+      
       private var _asserter:IAssertable = null;
-
+      
       override public function set dataProvider(param1:IDataProvider) : void {
          if(_dataProvider == param1)
          {
@@ -29,7 +28,7 @@ package net.wg.gui.rally.controls
          }
          if(_dataProvider != null)
          {
-            this._asserter.assert(param1  is  IManualSearchDataProvider,String(param1));
+            this._asserter.assert(param1 is IManualSearchDataProvider,String(param1));
             _dataProvider.removeEventListener(Event.CHANGE,handleDataChange,false);
             _dataProvider.removeEventListener(ManualSearchEvent.DATA_UPDATED,this.handleDataUpdated,false);
          }
@@ -42,13 +41,13 @@ package net.wg.gui.rally.controls
          _dataProvider.addEventListener(ManualSearchEvent.DATA_UPDATED,this.handleDataUpdated,false,0,true);
          invalidateData();
       }
-
+      
       override protected function onDispose() : void {
          this._asserter = null;
          super.onDispose();
       }
-
-      public function getManualSearchRendererAt(param1:uint, param2:int=0) : IManualSearchRenderer {
+      
+      public function getManualSearchRendererAt(param1:uint, param2:int = 0) : IManualSearchRenderer {
          if(_renderers == null)
          {
             return null;
@@ -60,7 +59,7 @@ package net.wg.gui.rally.controls
          }
          return _renderers[_loc3_] as IManualSearchRenderer;
       }
-
+      
       override protected function cleanUpDataProvider() : void {
          if(_dataProvider)
          {
@@ -68,7 +67,7 @@ package net.wg.gui.rally.controls
          }
          super.cleanUpDataProvider();
       }
-
+      
       override protected function drawLayout() : void {
          var _loc8_:IListItemRenderer = null;
          var _loc1_:uint = _renderers.length;
@@ -92,12 +91,12 @@ package net.wg.gui.rally.controls
          }
          drawScrollBar();
       }
-
+      
       private function handleDataUpdated(param1:ManualSearchEvent) : void {
          _scrollPosition = Math.min(Math.max(0,_dataProvider.length - _totalRenderers),_scrollPosition);
-         IManualSearchDataProvider(_dataProvider).requestUpdatedItems(_scrollPosition,Math.min(_dataProvider.length-1,_scrollPosition + _totalRenderers-1),this.updateData);
+         IManualSearchDataProvider(_dataProvider).requestUpdatedItems(_scrollPosition,Math.min(_dataProvider.length - 1,_scrollPosition + _totalRenderers - 1),this.updateData);
       }
-
+      
       private function updateData(param1:Array) : void {
          var _loc3_:* = 0;
          var _loc4_:Array = null;
@@ -117,5 +116,4 @@ package net.wg.gui.rally.controls
          }
       }
    }
-
 }

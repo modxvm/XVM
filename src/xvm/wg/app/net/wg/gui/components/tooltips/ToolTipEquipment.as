@@ -16,11 +16,10 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
    import net.wg.data.constants.IconsTypes;
-
-
+   
    public class ToolTipEquipment extends ToolTipSpecial
    {
-          
+      
       public function ToolTipEquipment() {
          super();
          this.headerTF = content.headerTF;
@@ -31,43 +30,43 @@ package net.wg.gui.components.tooltips
          this.complexHeader = content.complexStatus.complexHeader;
          this.complexNote = content.complexStatus.complexNote;
       }
-
+      
       public var headerTF:TextField = null;
-
+      
       public var discrTF:TextField = null;
-
+      
       public var whiteBg:Sprite = null;
-
+      
       public var tooltipStatus:Status = null;
-
+      
       public var complexStatus:Sprite = null;
-
+      
       public var complexHeader:TextField = null;
-
+      
       public var complexNote:TextField = null;
-
+      
       private var _defContentMarginBottom:Number = 0;
-
+      
       private var _defBGShadowMarginBottom:Number = 0;
-
+      
       private var maxWidth:Number = 250;
-
+      
       override public function build(param1:Object, param2:ITooltipProps) : void {
          super.build(param1,param2);
       }
-
+      
       override public function toString() : String {
          return "[WG ToolTipEquipment " + name + "]";
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function redraw() : void {
          var _loc3_:EquipmentVO = null;
          var _loc7_:ILocale = null;
@@ -151,16 +150,14 @@ package net.wg.gui.components.tooltips
                   "fontSize":"11px",
                   "fontFamily":"$TextFont",
                   "leading":"2px"
-               }
-            );
+               });
             _loc19_.setStyle("p",
                {
                   "color":Utils.instance.COLOR_SUB_NORMAL,
                   "fontSize":"11px",
                   "fontFamily":"$TextFont",
                   "leading":"2px"
-               }
-            );
+               });
             _loc20_ = new ExtraModuleInfo(_loc18_,_loc19_);
             _loc20_.y = topPosition;
             _loc20_.x = _loc10_;
@@ -332,16 +329,14 @@ package net.wg.gui.components.tooltips
                   "fontSize":"11px",
                   "fontFamily":"$TextFont",
                   "leading":"2px"
-               }
-            );
+               });
             _loc13_.rightTextCSS.setStyle("p",
                {
                   "color":Utils.instance.COLOR_ALERT,
                   "fontSize":"11px",
                   "fontFamily":"$TextFont",
                   "leading":"2px"
-               }
-            );
+               });
             _loc5_ = Utils.instance.createBlock(_loc13_,contentMargin.left + bgShadowMargin.left);
             this.maxWidth = Math.max(this.maxWidth,_loc5_.blockWidth);
             blockResults.push(_loc5_);
@@ -376,14 +371,12 @@ package net.wg.gui.components.tooltips
                _loc15_ = _loc15_ + this.getEquipmentUsageBlock("",_loc7_.makeString(_loc3_.effectRestriction),_loc38_);
             }
          }
-         else
+         else if(_loc3_.descr)
          {
-            if(_loc3_.descr)
-            {
-               _loc14_ = true;
-               _loc15_ = Utils.instance.htmlWrapper(_loc3_.descr,Utils.instance.COLOR_NORMAL,11,"$TextFont");
-            }
+            _loc14_ = true;
+            _loc15_ = Utils.instance.htmlWrapper(_loc3_.descr,Utils.instance.COLOR_NORMAL,11,"$TextFont");
          }
+         
          if(_loc14_)
          {
             _loc39_ = new TextFormat();
@@ -401,7 +394,7 @@ package net.wg.gui.components.tooltips
             this.discrTF.y = topPosition | 0;
             this.discrTF.x = _loc10_;
             topPosition = topPosition + (this.discrTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
-            this.whiteBg.height = topPosition - this.whiteBg.y-1 | 0;
+            this.whiteBg.height = topPosition - this.whiteBg.y - 1 | 0;
             _loc4_ = Utils.instance.createSeparate(content);
             _loc4_.y = this.whiteBg.y + this.whiteBg.height;
             separators.push(_loc4_);
@@ -495,13 +488,13 @@ package net.wg.gui.components.tooltips
          updatePositions();
          super.redraw();
       }
-
+      
       override protected function updateSize() : void {
          background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
          background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
          this.whiteBg.width = content.width + bgShadowMargin.horizontal;
       }
-
+      
       private function formParamsBlockData(param1:Array, param2:String, param3:Boolean) : ToolTipBlockVO {
          var _loc8_:String = null;
          var _loc9_:String = null;
@@ -521,16 +514,14 @@ package net.wg.gui.components.tooltips
                "fontSize":"11px",
                "fontFamily":"$TextFont",
                "leading":"2px"
-            }
-         );
+            });
          _loc4_.rightTextCSS.setStyle("p",
             {
                "color":Utils.instance.COLOR_SUB_NORMAL,
                "fontSize":"11px",
                "fontFamily":"$TextFont",
                "leading":"2px"
-            }
-         );
+            });
          var _loc5_:* = "";
          var _loc6_:int = param1.length;
          var _loc7_:uint = 0;
@@ -552,14 +543,14 @@ package net.wg.gui.components.tooltips
          }
          return _loc4_;
       }
-
-      private function getEquipmentUsageBlock(param1:String, param2:String, param3:int=18) : String {
+      
+      private function getEquipmentUsageBlock(param1:String, param2:String, param3:int = 18) : String {
          var param1:String = param1 == ""?"":Utils.instance.htmlWrapper(param1,Utils.instance.COLOR_ADD_INFO,13,"$TitleFont",true) + Utils.instance.htmlWrapper(" ",Utils.instance.COLOR_ADD_INFO,param3,"$TextFont");
          var param2:String = param2 == ""?"":Utils.instance.htmlWrapper(param2,Utils.instance.COLOR_NORMAL,12,"$FieldFont");
          var _loc4_:String = "<br/>" + param1 + param2;
          return _loc4_;
       }
-
+      
       private function updateContentWidth() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -625,5 +616,4 @@ package net.wg.gui.components.tooltips
          }
       }
    }
-
 }

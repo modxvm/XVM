@@ -6,35 +6,34 @@ package net.wg.gui.lobby.premiumForm
    import flash.display.MovieClip;
    import net.wg.data.constants.SoundTypes;
    import flash.events.MouseEvent;
-
-
+   
    public class PremiumFormItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function PremiumFormItemRenderer() {
          super();
          buttonMode = true;
          enabled = false;
       }
-
+      
       private static const PRICE_POSITION:String = "pricePosition";
-
+      
       private static const NORMAL_PRICE_WIDTH:Number = 190;
-
+      
       private static const ACTION_PRICE_POS:Number = 79;
-
+      
       public var pdays:RadioButton;
-
+      
       public var discount:DiscountPrice;
-
+      
       public var price:IconText;
-
+      
       public var radioSelection:MovieClip;
-
+      
       public var _userGold:Number;
-
+      
       private var days:String = null;
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(PRICE_POSITION)) && !(data == null))
@@ -49,7 +48,7 @@ package net.wg.gui.lobby.premiumForm
             }
          }
       }
-
+      
       override protected function configUI() : void {
          soundType = SoundTypes.RNDR_NORMAL;
          this.price.text = "";
@@ -65,7 +64,7 @@ package net.wg.gui.lobby.premiumForm
          super.configUI();
          this.updateData();
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.removeEventListener(MouseEvent.CLICK,this.onClickHandler);
@@ -82,7 +81,7 @@ package net.wg.gui.lobby.premiumForm
          this.removeChild(this.radioSelection);
          this.radioSelection = null;
       }
-
+      
       override public function setData(param1:Object) : void {
          if(param1 == null)
          {
@@ -92,26 +91,25 @@ package net.wg.gui.lobby.premiumForm
          this.days = MENU.premium_periods("days" + String(param1.days));
          this.updateData();
       }
-
+      
       private function updateData() : void {
          this.updateDiscountPercent(this.getDiscountPercent(data.price,data.discountPrice));
          this.price.text = App.utils.locale.gold(data.discountPrice);
          this.price.toolTip = this.days;
          this.pdays.label = this.days;
-         this.pdays.data =
+         this.pdays.data = 
             {
                "isUserSelected":false,
                "days":data.days,
                "price":data.discountPrice
-            }
-         ;
+            };
          this.pdays.visible = this.price.visible = true;
          this.pdays.validateNow();
          this.gold = data.userGold;
          this.selected = data.isUserSelected;
          invalidate(PRICE_POSITION);
       }
-
+      
       private function updateDiscountPercent(param1:Number) : void {
          var _loc2_:* = false;
          _loc2_ = param1 > 0;
@@ -119,7 +117,7 @@ package net.wg.gui.lobby.premiumForm
          this.discount.quantity.text = _loc2_?"-" + param1 + "%":this.discount.quantity.text;
          this.price.icon = _loc2_?"goldDiscount":"gold";
       }
-
+      
       private function getDiscountPercent(param1:Number, param2:Number) : Number {
          var _loc3_:Number = 0;
          if(param2 > 0)
@@ -132,7 +130,7 @@ package net.wg.gui.lobby.premiumForm
          }
          return _loc3_;
       }
-
+      
       override public function set selected(param1:Boolean) : void {
          super.selected = param1;
          this.pdays.selected = param1;
@@ -142,31 +140,31 @@ package net.wg.gui.lobby.premiumForm
          }
          this.updateSelection();
       }
-
+      
       private function updateSelection() : void {
          this.radioSelection.visible = this.pdays.selected;
       }
-
+      
       public function set gold(param1:Number) : void {
          this._userGold = param1;
          this.pdays.enabled = enabled = focusable = this._userGold >= data.discountPrice;
       }
-
+      
       private function onClickHandler(param1:MouseEvent) : void {
          data.isUserSelected = true;
          this.updateSelection();
          invalidateData();
       }
-
+      
       private function onMouseOverHandler(param1:MouseEvent) : void {
          App.toolTipMgr.showSpecial(this.price.toolTip,null);
       }
-
+      
       private function onMouseOutHandler(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
-      override protected function handlePress(param1:uint=0) : void {
+      
+      override protected function handlePress(param1:uint = 0) : void {
          if(enabled == false)
          {
             return;
@@ -174,5 +172,4 @@ package net.wg.gui.lobby.premiumForm
          super.handlePress(param1);
       }
    }
-
 }

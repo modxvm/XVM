@@ -7,38 +7,37 @@ package net.wg.gui.components.tooltips
    import flash.text.TextFormat;
    import flash.text.TextFieldAutoSize;
    import flash.text.TextFormatAlign;
-
-
+   
    public class Status extends UIComponent
    {
-          
+      
       public function Status() {
          super();
          this.init();
       }
-
+      
       public static var ICO_NEWSKILL:String = "newskill";
-
+      
       public var textFieldHeader:TextField = null;
-
+      
       public var textField:TextField = null;
-
+      
       public var icon:MovieClip = null;
-
+      
       private var _statusColors:ToolTipStatusColorsVO;
-
+      
       private var _header:String;
-
+      
       private var _text:String;
-
+      
       private var _textColor:uint = 0;
-
+      
       private const ICO_DEF:String = "none";
-
+      
       private var _ico:String = "none";
-
+      
       private var textFormat:TextFormat = null;
-
+      
       private function init() : void {
          this.textFieldHeader.multiline = true;
          this.textFieldHeader.autoSize = TextFieldAutoSize.LEFT;
@@ -48,8 +47,8 @@ package net.wg.gui.components.tooltips
          this.textField.wordWrap = true;
          this.textFormat = new TextFormat();
       }
-
-      public function setData(param1:String=null, param2:String=null, param3:ToolTipStatusColorsVO=null, param4:String="none") : Number {
+      
+      public function setData(param1:String = null, param2:String = null, param3:ToolTipStatusColorsVO = null, param4:String = "none") : Number {
          var _loc5_:Number = 0;
          this._header = param1;
          this._text = param2;
@@ -81,11 +80,11 @@ package net.wg.gui.components.tooltips
          invalidate();
          return _loc5_;
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       public function updateWidth(param1:Number) : void {
          if(this._ico != this.ICO_DEF)
          {
@@ -100,10 +99,9 @@ package net.wg.gui.components.tooltips
             this.textField.y = this._header?this.textFieldHeader.textHeight + 4 | 0:0;
          }
       }
-
+      
       override public function get height() : Number {
          return _originalHeight;
       }
    }
-
 }

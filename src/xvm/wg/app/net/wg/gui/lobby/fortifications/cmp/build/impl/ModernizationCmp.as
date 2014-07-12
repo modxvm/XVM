@@ -5,17 +5,16 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
    import flash.filters.GlowFilter;
    import flash.text.TextField;
    import net.wg.gui.lobby.fortifications.data.ModernizationCmpVO;
-
-
+   
    public class ModernizationCmp extends MovieClip implements IDisposable
    {
-          
+      
       public function ModernizationCmp() {
          super();
       }
-
+      
       private static const GLOW_COLOR:uint = 12273152;
-
+      
       private static function getGlowFilter(param1:Number) : Array {
          var _loc2_:Array = [];
          var _loc3_:Number = 1;
@@ -29,19 +28,19 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          _loc2_.push(_loc10_);
          return _loc2_;
       }
-
+      
       public var buildingIcon:MovieClip = null;
-
+      
       public var buildingLevel:MovieClip = null;
-
+      
       public var buildingIndicators:BuildingIndicatorsCmp = null;
-
+      
       public var orderInfo:OrderInfoCmp = null;
-
+      
       public var titleText:TextField = null;
-
+      
       private var model:ModernizationCmpVO = null;
-
+      
       public function setData(param1:ModernizationCmpVO) : void {
          this.model = param1;
          this.buildingIndicators.setData(this.model.buildingIndicators);
@@ -50,7 +49,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.buildingIcon.gotoAndStop(this.model.buildingType);
          this.titleText.htmlText = this.model.titleText;
       }
-
+      
       public function dispose() : void {
          this.buildingIcon = null;
          this.buildingLevel = null;
@@ -60,10 +59,9 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          this.orderInfo = null;
          this.titleText = null;
       }
-
+      
       public function applyGlowFilter() : void {
          this.buildingIcon.filters = getGlowFilter(GLOW_COLOR);
       }
    }
-
 }

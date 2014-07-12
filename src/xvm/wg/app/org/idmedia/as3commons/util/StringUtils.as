@@ -2,21 +2,20 @@ package org.idmedia.as3commons.util
 {
    import org.idmedia.as3commons.lang.IllegalArgumentException;
    import org.idmedia.as3commons.lang.NullPointerException;
-
-
+   
    public class StringUtils extends Object
    {
-          
+      
       public function StringUtils() {
          super();
       }
-
+      
       private static const EMPTY:String = "";
-
+      
       private static const INDEX_NOT_FOUND:int = -1;
-
+      
       private static const PAD_LIMIT:uint = 8192;
-
+      
       public static function toInitials(param1:String) : String {
          if(isEmpty(param1))
          {
@@ -24,11 +23,11 @@ package org.idmedia.as3commons.util
          }
          return param1.match(new RegExp("[A-Z]","g")).join(EMPTY).toLowerCase();
       }
-
+      
       public static function chomp(param1:String) : String {
          return chompString(param1,"(\r\n|\r|\n)");
       }
-
+      
       public static function chompString(param1:String, param2:String) : String {
          if((isEmpty(param1)) || param2 == null)
          {
@@ -36,7 +35,7 @@ package org.idmedia.as3commons.util
          }
          return param1.replace(new RegExp(param2 + "$",EMPTY),EMPTY);
       }
-
+      
       public static function trim(param1:String) : String {
          var _loc3_:String = null;
          var _loc4_:* = 0;
@@ -56,7 +55,7 @@ package org.idmedia.as3commons.util
             }
             _loc4_++;
          }
-         _loc4_ = _loc2_.length-1;
+         _loc4_ = _loc2_.length - 1;
          while(_loc4_ >= 0)
          {
             _loc3_ = _loc2_[_loc4_];
@@ -69,15 +68,15 @@ package org.idmedia.as3commons.util
          }
          return _loc2_.join(" ");
       }
-
+      
       public static function deleteSpaces(param1:String) : String {
          return deleteFromString(param1,new RegExp("\\t|\\r|\\n|\\b","g"));
       }
-
+      
       public static function deleteWhitespace(param1:String) : String {
          return deleteFromString(param1,new RegExp("\\s","g"));
       }
-
+      
       private static function deleteFromString(param1:String, param2:RegExp) : String {
          if(isEmpty(param1))
          {
@@ -85,7 +84,7 @@ package org.idmedia.as3commons.util
          }
          return param1.replace(param2,EMPTY);
       }
-
+      
       public static function left(param1:String, param2:int) : String {
          if(param1 == null)
          {
@@ -101,7 +100,7 @@ package org.idmedia.as3commons.util
          }
          return param1.substring(0,param2);
       }
-
+      
       public static function center(param1:String, param2:int, param3:String) : String {
          if(param1 == null || param2 <= 0)
          {
@@ -121,7 +120,7 @@ package org.idmedia.as3commons.util
          param1 = rightPad(param1,param2,param3);
          return param1;
       }
-
+      
       public static function leftPad(param1:String, param2:int, param3:String) : String {
          var _loc7_:Array = null;
          var _loc8_:Array = null;
@@ -163,7 +162,7 @@ package org.idmedia.as3commons.util
          }
          return _loc7_.join("").concat(param1);
       }
-
+      
       public static function leftPadChar(param1:String, param2:int, param3:String) : String {
          if(param1 == null)
          {
@@ -180,7 +179,7 @@ package org.idmedia.as3commons.util
          }
          return padding(_loc4_,param3).concat(param1);
       }
-
+      
       public static function rightPad(param1:String, param2:int, param3:String) : String {
          var _loc7_:Array = null;
          var _loc8_:Array = null;
@@ -222,7 +221,7 @@ package org.idmedia.as3commons.util
          }
          return param1.concat(_loc7_.join(""));
       }
-
+      
       public static function rightPadChar(param1:String, param2:int, param3:String) : String {
          if(param1 == null)
          {
@@ -239,7 +238,7 @@ package org.idmedia.as3commons.util
          }
          return param1.concat(padding(_loc4_,param3));
       }
-
+      
       private static function padding(param1:int, param2:String) : String {
          var _loc3_:String = EMPTY;
          var _loc4_:* = 0;
@@ -250,7 +249,7 @@ package org.idmedia.as3commons.util
          }
          return _loc3_;
       }
-
+      
       public static function replace(param1:String, param2:String, param3:String) : String {
          if(param1 == null || (isEmpty(param2)) || param3 == null)
          {
@@ -258,7 +257,7 @@ package org.idmedia.as3commons.util
          }
          return param1.replace(new RegExp(param2,"g"),param3);
       }
-
+      
       public static function replaceTo(param1:String, param2:String, param3:String, param4:int) : String {
          if(param1 == null || (isEmpty(param2)) || param3 == null || param4 == 0)
          {
@@ -278,7 +277,7 @@ package org.idmedia.as3commons.util
          }
          return _loc5_ = _loc5_ + param1.substring(_loc6_);
       }
-
+      
       public static function replaceOnce(param1:String, param2:String, param3:String) : String {
          if(param1 == null || (isEmpty(param2)) || param3 == null)
          {
@@ -286,11 +285,11 @@ package org.idmedia.as3commons.util
          }
          return param1.replace(new RegExp(param2,EMPTY),param3);
       }
-
+      
       public static function defaultIfEmpty(param1:String, param2:String) : String {
          return isEmpty(param1)?param2:param1;
       }
-
+      
       public static function isEmpty(param1:String) : Boolean {
          if(param1 == null)
          {
@@ -298,28 +297,28 @@ package org.idmedia.as3commons.util
          }
          return param1.length == 0;
       }
-
+      
       public static function isNotEmpty(param1:String) : Boolean {
          return !isEmpty(param1);
       }
-
+      
       public static function isBlank(param1:String) : Boolean {
          return isEmpty(trimToEmpty(param1));
       }
-
+      
       public static function isNotBlank(param1:String) : Boolean {
          return !isBlank(param1);
       }
-
+      
       public static function trimToNull(param1:String) : String {
          var _loc2_:String = trim(param1);
          return isEmpty(_loc2_)?null:_loc2_;
       }
-
+      
       public static function trimToEmpty(param1:String) : String {
          return param1 == null?EMPTY:trim(param1);
       }
-
+      
       public static function capitalize(param1:String) : String {
          if(isEmpty(param1))
          {
@@ -327,7 +326,7 @@ package org.idmedia.as3commons.util
          }
          return param1.charAt(0).toUpperCase() + param1.substring(1);
       }
-
+      
       public static function uncapitalize(param1:String) : String {
          if(isEmpty(param1))
          {
@@ -335,7 +334,7 @@ package org.idmedia.as3commons.util
          }
          return param1.charAt(0).toLowerCase() + param1.substring(1);
       }
-
+      
       public static function titleize(param1:String) : String {
          if(isEmpty(param1))
          {
@@ -350,7 +349,7 @@ package org.idmedia.as3commons.util
          }
          return _loc2_.join(" ");
       }
-
+      
       public static function substringAfter(param1:String, param2:String) : String {
          if(isEmpty(param1))
          {
@@ -367,7 +366,7 @@ package org.idmedia.as3commons.util
          }
          return param1.substring(_loc3_ + param2.length);
       }
-
+      
       public static function substringAfterLast(param1:String, param2:String) : String {
          if(isEmpty(param1))
          {
@@ -384,7 +383,7 @@ package org.idmedia.as3commons.util
          }
          return param1.substring(_loc3_ + param2.length);
       }
-
+      
       public static function substringBefore(param1:String, param2:String) : String {
          if((isEmpty(param1)) || param2 == null)
          {
@@ -401,7 +400,7 @@ package org.idmedia.as3commons.util
          }
          return param1.substring(0,_loc3_);
       }
-
+      
       public static function substringBeforeLast(param1:String, param2:String) : String {
          if((isEmpty(param1)) || (isEmpty(param2)))
          {
@@ -414,7 +413,7 @@ package org.idmedia.as3commons.util
          }
          return param1.substring(0,_loc3_);
       }
-
+      
       public static function substringBetween(param1:String, param2:String, param3:String) : String {
          var _loc5_:* = 0;
          if(param1 == null || param2 == null || param3 == null)
@@ -432,7 +431,7 @@ package org.idmedia.as3commons.util
          }
          return null;
       }
-
+      
       public static function strip(param1:String, param2:String) : String {
          if(isEmpty(param1))
          {
@@ -440,25 +439,25 @@ package org.idmedia.as3commons.util
          }
          return stripEnd(stripStart(param1,param2),param2);
       }
-
+      
       public static function stripStart(param1:String, param2:String) : String {
          if(isEmpty(param1))
          {
             return param1;
          }
-         var _loc3_:RegExp = new RegExp("^[" + ((param2) || (" ")) + "]*",EMPTY);
+         var _loc3_:RegExp = new RegExp("^[" + (param2 || " ") + "]*",EMPTY);
          return param1.replace(_loc3_,EMPTY);
       }
-
+      
       public static function stripEnd(param1:String, param2:String) : String {
          if(isEmpty(param1))
          {
             return param1;
          }
-         var _loc3_:RegExp = new RegExp("[" + ((param2) || (" ")) + "]*$",EMPTY);
+         var _loc3_:RegExp = new RegExp("[" + (param2 || " ") + "]*$",EMPTY);
          return param1.replace(_loc3_,EMPTY);
       }
-
+      
       public static function abbreviate(param1:String, param2:int, param3:int) : String {
          if(param1 == null)
          {
@@ -500,7 +499,7 @@ package org.idmedia.as3commons.util
             }
          }
       }
-
+      
       public static function ordinalIndexOf(param1:String, param2:String, param3:int) : int {
          if(param1 == null || param2 == null || param3 <= 0)
          {
@@ -527,7 +526,7 @@ package org.idmedia.as3commons.util
          }
          return _loc5_;
       }
-
+      
       public static function countMatches(param1:String, param2:String) : int {
          if((isEmpty(param1)) || (isEmpty(param2)))
          {
@@ -535,7 +534,7 @@ package org.idmedia.as3commons.util
          }
          return param1.match(new RegExp("(" + param2 + ")","g")).length;
       }
-
+      
       public static function contains(param1:String, param2:String) : Boolean {
          if(param1 == null || param2 == null)
          {
@@ -543,7 +542,7 @@ package org.idmedia.as3commons.util
          }
          return new RegExp("(" + param2 + ")","g").test(param1);
       }
-
+      
       public static function containsNone(param1:String, param2:String) : Boolean {
          if((isEmpty(param1)) || param2 == null)
          {
@@ -551,7 +550,7 @@ package org.idmedia.as3commons.util
          }
          return new RegExp("^[^" + param2 + "]*$",EMPTY).test(param1);
       }
-
+      
       public static function containsOnly(param1:String, param2:String) : Boolean {
          if(param1 == null || (isEmpty(param2)))
          {
@@ -563,7 +562,7 @@ package org.idmedia.as3commons.util
          }
          return new RegExp("^[" + param2 + "]*$","g").test(param1);
       }
-
+      
       public static function indexOfAny(param1:String, param2:String) : int {
          if((isEmpty(param1)) || (isEmpty(param2)))
          {
@@ -571,7 +570,7 @@ package org.idmedia.as3commons.util
          }
          return param1.search(new RegExp("[" + param2 + "]",EMPTY));
       }
-
+      
       public static function indexOfAnyBut(param1:String, param2:String) : int {
          if((isEmpty(param1)) || (isEmpty(param2)))
          {
@@ -579,7 +578,7 @@ package org.idmedia.as3commons.util
          }
          return param1.search(new RegExp("[^" + param2 + "]",EMPTY));
       }
-
+      
       public static function difference(param1:String, param2:String) : String {
          if(param1 == null)
          {
@@ -596,7 +595,7 @@ package org.idmedia.as3commons.util
          }
          return param2.substring(_loc3_);
       }
-
+      
       public static function indexOfDifference(param1:String, param2:String) : int {
          var _loc3_:* = 0;
          if(param1 == param2)
@@ -622,51 +621,51 @@ package org.idmedia.as3commons.util
          }
          return INDEX_NOT_FOUND;
       }
-
+      
       public static function equals(param1:String, param2:String) : Boolean {
          return new RegExp(param1,EMPTY).test(param2);
       }
-
+      
       public static function equalsIgnoreCase(param1:String, param2:String) : Boolean {
          return new RegExp(param1,"i").test(param2);
       }
-
+      
       public static function isAlpha(param1:String) : Boolean {
          return testString(param1,new RegExp("^[a-zA-Z]*$"));
       }
-
+      
       public static function isAlphaSpace(param1:String) : Boolean {
          return testString(param1,new RegExp("^[a-zA-Z\\s]*$"));
       }
-
+      
       public static function isAlphanumeric(param1:String) : Boolean {
          return testString(param1,new RegExp("^[a-zA-Z0-9]*$"));
       }
-
+      
       public static function isAlphanumericSpace(param1:String) : Boolean {
          return testString(param1,new RegExp("^[a-zA-Z0-9\\s]*$"));
       }
-
+      
       public static function isNumeric(param1:String) : Boolean {
          return testString(param1,new RegExp("^[0-9]*$"));
       }
-
+      
       public static function isDigit(param1:String) : Boolean {
          return testString(param1,new RegExp("\\d+"));
       }
-
+      
       public static function isNumericSpace(param1:String) : Boolean {
          return testString(param1,new RegExp("^[0-9\\s]*$"));
       }
-
+      
       public static function isWhitespace(param1:String) : Boolean {
          return testString(param1,new RegExp("^[\\s]*$"));
       }
-
+      
       private static function testString(param1:String, param2:RegExp) : Boolean {
          return !(param1 == null) && (param2.test(param1));
       }
-
+      
       public static function overlay(param1:String, param2:String, param3:int, param4:int) : String {
          var _loc6_:* = 0;
          if(param1 == null)
@@ -702,19 +701,19 @@ package org.idmedia.as3commons.util
          }
          return param1.substring(0,param3).concat(param2).concat(param1.substring(param4));
       }
-
+      
       public static function remove(param1:String, param2:String) : String {
          return safeRemove(param1,new RegExp(param2,"g"));
       }
-
+      
       public static function removeEnd(param1:String, param2:String) : String {
          return safeRemove(param1,new RegExp(param2 + "$",EMPTY));
       }
-
+      
       public static function removeStart(param1:String, param2:String) : String {
          return safeRemove(param1,new RegExp("^" + param2,EMPTY));
       }
-
+      
       private static function safeRemove(param1:String, param2:RegExp) : String {
          if(isEmpty(param1))
          {
@@ -722,15 +721,15 @@ package org.idmedia.as3commons.util
          }
          return param1.replace(param2,EMPTY);
       }
-
+      
       public static function endsWith(param1:String, param2:String) : Boolean {
          return testString(param1,new RegExp(param2 + "$",EMPTY));
       }
-
+      
       public static function startsWith(param1:String, param2:String) : Boolean {
          return testString(param1,new RegExp("^" + param2,EMPTY));
       }
-
+      
       public static function compareToIgnoreCase(param1:String, param2:String) : int {
          if(param1 == null || param2 == null)
          {
@@ -741,7 +740,7 @@ package org.idmedia.as3commons.util
             return compareTo(param1.toLowerCase(),param2.toLowerCase());
          }
       }
-
+      
       public static function compareTo(param1:String, param2:String) : int {
          if(param1 == null || param2 == null)
          {
@@ -753,5 +752,4 @@ package org.idmedia.as3commons.util
          }
       }
    }
-
 }

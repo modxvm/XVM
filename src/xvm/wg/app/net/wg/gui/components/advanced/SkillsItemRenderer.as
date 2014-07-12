@@ -12,21 +12,20 @@ package net.wg.gui.components.advanced
    import net.wg.data.constants.Tooltips;
    import flash.geom.ColorTransform;
    import net.wg.gui.events.PersonalCaseEvent;
-
-
+   
    public class SkillsItemRenderer extends ListItemRenderer
    {
-          
+      
       public function SkillsItemRenderer() {
          super();
       }
-
+      
       private static const PROGRESS_BAR_WIDTH:uint = 54;
-
+      
       private static const PROGRESS_BAR_HEIGHT:uint = 18;
-
+      
       protected static const DATA_CHANGED:String = "dataChanged";
-
+      
       private static function getRankGlowFilter() : Array {
          var _loc1_:Array = [];
          var _loc2_:Number = 16724246;
@@ -41,25 +40,25 @@ package net.wg.gui.components.advanced
          _loc1_.push(_loc10_);
          return _loc1_;
       }
-
+      
       public var loader:UILoaderAlt;
-
+      
       public var loadingBar:StatusIndicator;
-
+      
       public var _titleLabel:TextField;
-
+      
       public var bg:MovieClip;
-
+      
       public var level_mc:MovieClip;
-
+      
       public var rank_mc:RankElement;
-
+      
       public var notActive:MovieClip;
-
+      
       public var roleIco:UILoaderAlt;
-
+      
       public var role_ico_path:String = "";
-
+      
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
          removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
@@ -78,19 +77,19 @@ package net.wg.gui.components.advanced
          this._titleLabel = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(DATA_CHANGED))
          {
             this.setup(this.data);
          }
       }
-
+      
       override public function set data(param1:Object) : void {
          super.data = param1;
          invalidate(DATA_CHANGED);
       }
-
+      
       override public function setData(param1:Object) : void {
          if(param1 == null)
          {
@@ -99,13 +98,13 @@ package net.wg.gui.components.advanced
          super.setData(param1);
          invalidate(DATA_CHANGED);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          addEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
          addEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
       }
-
+      
       private function onRollOver(param1:MouseEvent) : void {
          if(!data.hasOwnProperty("name") && !data.hasOwnProperty("tankmanID") && !(data.name == null))
          {
@@ -120,11 +119,11 @@ package net.wg.gui.components.advanced
             App.toolTipMgr.showSpecial(Tooltips.TANKMAN_SKILL,null,data.name,data.tankmanID);
          }
       }
-
+      
       private function onRollOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       public function setup(param1:Object) : void {
          var c:ColorTransform = null;
          var data:Object = param1;
@@ -174,13 +173,13 @@ package net.wg.gui.components.advanced
                this.level_mc.visible = false;
                if(data.level == 100)
                {
-                  if(this.loadingBar  is  StatusIndicator)
+                  if(this.loadingBar is StatusIndicator)
                   {
                      this.loadingBar.visible = false;
                   }
                   this._titleLabel.visible = false;
                }
-               if(this.loadingBar  is  StatusIndicator)
+               if(this.loadingBar is StatusIndicator)
                {
                   this.loadingBar.position = Number(data.level);
                   if(Number(data.level) != 0)
@@ -197,7 +196,7 @@ package net.wg.gui.components.advanced
                if(data.skillsCountForLearn > 1)
                {
                   this.level_mc.visible = true;
-                  this.level_mc.rankTf.text = (data.skillsCountForLearn-1).toString();
+                  this.level_mc.rankTf.text = (data.skillsCountForLearn - 1).toString();
                   this.level_mc.rankTf.filters = null;
                   this.level_mc.rankTf.filters = getRankGlowFilter();
                }
@@ -217,10 +216,9 @@ package net.wg.gui.components.advanced
             DebugUtils.LOG_DEBUG(" ERROR setup");
          }
       }
-
+      
       public function onShowSkillTab(param1:ButtonEvent) : void {
          dispatchEvent(new PersonalCaseEvent(PersonalCaseEvent.CHANGE_TAB_ON_TWO,true));
       }
    }
-
 }

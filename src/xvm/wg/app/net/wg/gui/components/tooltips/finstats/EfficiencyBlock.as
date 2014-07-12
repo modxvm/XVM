@@ -3,29 +3,28 @@ package net.wg.gui.components.tooltips.finstats
    import scaleform.clik.core.UIComponent;
    import flash.text.TextField;
    import flash.text.TextFieldAutoSize;
-
-
+   
    public class EfficiencyBlock extends UIComponent
    {
-          
+      
       public function EfficiencyBlock() {
          super();
       }
-
+      
       public var leftTF:TextField;
-
+      
       public var rightTF:TextField;
-
+      
       private var dirtyData:Boolean = false;
-
+      
       private var _leftStr:String = "";
-
+      
       private var _rightStr:String = "";
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(this.dirtyData)
@@ -45,7 +44,7 @@ package net.wg.gui.components.tooltips.finstats
             this.rightTF.height = this.rightTF.textHeight + 4;
          }
       }
-
+      
       public function setData(param1:String, param2:String) : void {
          this._leftStr = param1;
          this._rightStr = param2;
@@ -53,5 +52,4 @@ package net.wg.gui.components.tooltips.finstats
          validateNow();
       }
    }
-
 }

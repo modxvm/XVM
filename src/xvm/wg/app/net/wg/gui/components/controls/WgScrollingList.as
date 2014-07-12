@@ -5,19 +5,18 @@ package net.wg.gui.components.controls
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.clik.data.ListData;
    import scaleform.clik.core.UIComponent;
-
-
+   
    public class WgScrollingList extends ScrollingList
    {
-          
+      
       public function WgScrollingList() {
          super();
       }
-
+      
       public var showEmptyItems:Boolean;
-
+      
       public var bg:MovieClip;
-
+      
       override protected function populateData(param1:Array) : void {
          var _loc5_:IListItemRenderer = null;
          var _loc6_:uint = 0;
@@ -42,5 +41,4 @@ package net.wg.gui.components.controls
          }
       }
    }
-
 }

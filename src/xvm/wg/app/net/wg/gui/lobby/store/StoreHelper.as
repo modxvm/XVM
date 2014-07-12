@@ -7,11 +7,10 @@ package net.wg.gui.lobby.store
    import net.wg.gui.components.advanced.ModuleIcon;
    import net.wg.gui.components.advanced.TankIcon;
    import net.wg.infrastructure.exceptions.LifecycleException;
-
-
+   
    public class StoreHelper extends Object
    {
-          
+      
       public function StoreHelper() {
          super();
          if(App.instance)
@@ -19,11 +18,11 @@ package net.wg.gui.lobby.store
             App.utils.asserter.assertNull(ms_instance,"StoreHelper already created.",LifecycleException);
          }
       }
-
+      
       private static var ms_instance:StoreHelper = null;
-
+      
       private static const DEFAULT_FRAME_IDX:uint = 1;
-
+      
       public static function getInstance() : StoreHelper {
          if(ms_instance == null)
          {
@@ -31,7 +30,7 @@ package net.wg.gui.lobby.store
          }
          return ms_instance;
       }
-
+      
       public function updateCountFields(param1:TextField, param2:TextField, param3:StoreTableData) : void {
          var _loc4_:ILocale = null;
          if(App.instance)
@@ -42,22 +41,20 @@ package net.wg.gui.lobby.store
                param1.text = _loc4_.integer(param3.inventoryCount);
                param2.text = "";
             }
+            else if(param3.requestType != FittingTypes.VEHICLE)
+            {
+               param1.text = _loc4_.integer(param3.inventoryCount);
+               param2.text = _loc4_.integer(param3.vehicleCount);
+            }
             else
             {
-               if(param3.requestType != FittingTypes.VEHICLE)
-               {
-                  param1.text = _loc4_.integer(param3.inventoryCount);
-                  param2.text = _loc4_.integer(param3.vehicleCount);
-               }
-               else
-               {
-                  param2.text = "";
-                  param1.text = "";
-               }
+               param2.text = "";
+               param1.text = "";
             }
+            
          }
       }
-
+      
       public function initModuleIconAsDefault(param1:ModuleIcon) : void {
          if(param1)
          {
@@ -65,7 +62,7 @@ package net.wg.gui.lobby.store
             param1.moduleLevel.gotoAndStop(DEFAULT_FRAME_IDX);
          }
       }
-
+      
       public function initVehicleIcon(param1:TankIcon, param2:StoreTableData) : void {
          if(param1)
          {
@@ -86,5 +83,4 @@ package net.wg.gui.lobby.store
          }
       }
    }
-
 }

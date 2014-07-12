@@ -1,21 +1,19 @@
 package fl.motion
 {
-
-
    public class ColorMatrix extends DynamicMatrix
    {
-          
+      
       public function ColorMatrix() {
          super(5,5);
          LoadIdentity();
       }
-
+      
       protected static const LUMINANCER:Number = 0.3086;
-
+      
       protected static const LUMINANCEG:Number = 0.6094;
-
+      
       protected static const LUMINANCEB:Number = 0.082;
-
+      
       public function SetBrightnessMatrix(param1:Number) : void {
          if(!m_matrix)
          {
@@ -25,7 +23,7 @@ package fl.motion
          m_matrix[1][4] = param1;
          m_matrix[2][4] = param1;
       }
-
+      
       public function SetContrastMatrix(param1:Number) : void {
          if(!m_matrix)
          {
@@ -40,7 +38,7 @@ package fl.motion
          m_matrix[1][4] = _loc2_;
          m_matrix[2][4] = _loc2_;
       }
-
+      
       public function SetSaturationMatrix(param1:Number) : void {
          if(!m_matrix)
          {
@@ -60,7 +58,7 @@ package fl.motion
          m_matrix[1][2] = _loc3_;
          m_matrix[2][2] = _loc3_ + param1;
       }
-
+      
       public function SetHueMatrix(param1:Number) : void {
          var _loc11_:* = 0;
          if(!m_matrix)
@@ -119,7 +117,7 @@ package fl.motion
             _loc10_++;
          }
       }
-
+      
       public function GetFlatArray() : Array {
          var _loc4_:* = 0;
          if(!m_matrix)
@@ -143,19 +141,17 @@ package fl.motion
          return _loc1_;
       }
    }
-
 }
-
-   class XFormData extends Object
-   {
-          
-      function XFormData() {
-         super();
-      }
-
-      public var ox:Number;
-
-      public var oy:Number;
-
-      public var oz:Number;
+class XFormData extends Object
+{
+   
+   function XFormData() {
+      super();
    }
+   
+   public var ox:Number;
+   
+   public var oy:Number;
+   
+   public var oz:Number;
+}

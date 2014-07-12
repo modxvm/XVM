@@ -2,20 +2,19 @@ package net.wg.gui.lobby.window
 {
    import flash.filters.DropShadowFilter;
    import net.wg.data.constants.IconsTypes;
-
-
+   
    public class ExchangeUtils extends Object
    {
-          
+      
       public function ExchangeUtils() {
          super();
       }
-
+      
       public static const STATE_SMALL_MONEY:String = "small_money";
-
+      
       public static const ICON_TYPE_BLACK:String = "black";
-
-      public static function getGlow(param1:String, param2:Number=NaN) : Array {
+      
+      public static function getGlow(param1:String, param2:Number = undefined) : Array {
          var _loc3_:* = NaN;
          var _loc4_:DropShadowFilter = new DropShadowFilter();
          _loc4_.distance = 0;
@@ -57,5 +56,4 @@ package net.wg.gui.lobby.window
          return [_loc4_];
       }
    }
-
 }

@@ -4,29 +4,28 @@ package net.wg.gui.components.common.waiting
    import net.wg.infrastructure.managers.IWaitingView;
    import scaleform.clik.events.InputEvent;
    import net.wg.gui.components.common.waiting.events.WaitingChangeVisibilityEvent;
-
-
+   
    public class WaitingView extends WaitingViewMeta implements IWaitingView
    {
-          
+      
       public function WaitingView() {
          super();
          focusRect = false;
       }
-
+      
       public var waitingComponent:WaitingComponent;
-
+      
       private var frameOnShow:uint = 0;
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
          this.waitingComponent.setSize(param1,param2);
       }
-
+      
       public function get isOnStage() : Boolean {
          return !(stage == null);
       }
-
+      
       public function show(param1:Object) : void {
          this.frameOnShow = this.waitingComponent.waitingMc.currentFrame;
          App.utils.scheduler.cancelTask(this.performHide);
@@ -35,7 +34,7 @@ package net.wg.gui.components.common.waiting
          this.waitingComponent.setMessage(param1.toString());
          this.setAnimationStatus(true);
       }
-
+      
       public function hide(param1:Object) : void {
          removeEventListener(InputEvent.INPUT,this.handleInput);
          if(this.frameOnShow == this.waitingComponent.waitingMc.currentFrame)
@@ -47,7 +46,7 @@ package net.wg.gui.components.common.waiting
             App.utils.scheduler.envokeInNextFrame(this.performHide);
          }
       }
-
+      
       public function setAnimationStatus(param1:Boolean) : void {
          var _loc2_:String = null;
          if(!(param1 == this.isOnStage) && (initialized))
@@ -60,18 +59,18 @@ package net.wg.gui.components.common.waiting
             this.waitingComponent.validateNow();
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          assertNotNull(this.waitingComponent,"waitingComponent");
          this.waitingComponent.setAnimationStatus(true);
       }
-
+      
       override protected function nextFrameAfterPopulateHandler() : void {
          super.nextFrameAfterPopulateHandler();
          this.setAnimationStatus(false);
       }
-
+      
       override protected function onDispose() : void {
          App.utils.scheduler.cancelTask(this.performHide);
          if(this.waitingComponent)
@@ -82,15 +81,14 @@ package net.wg.gui.components.common.waiting
          }
          super.onDispose();
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          param1.handled = true;
          super.handleInput(param1);
       }
-
+      
       private function performHide() : void {
          this.setAnimationStatus(false);
       }
    }
-
 }

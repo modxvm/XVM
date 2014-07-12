@@ -4,19 +4,18 @@ package net.wg.gui.components.common.containers
    import scaleform.clik.constants.InvalidationType;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.clik.core.UIComponent;
-
-
+   
    public class GroupEx extends Group
    {
-          
+      
       public function GroupEx() {
          super();
       }
-
+      
       private var _dataProvider:Array;
-
+      
       private var _itemRendererClass:Class;
-
+      
       override protected function draw() : void {
          var _loc1_:* = 0;
          var _loc2_:DisplayObject = null;
@@ -28,8 +27,8 @@ package net.wg.gui.components.common.containers
             _loc1_ = this._dataProvider?this._dataProvider.length:0;
             while(_loc1_ < numChildren)
             {
-               _loc2_ = removeChildAt(numChildren-1);
-               if(_loc2_  is  IDisposable)
+               _loc2_ = removeChildAt(numChildren - 1);
+               if(_loc2_ is IDisposable)
                {
                   IDisposable(_loc2_).dispose();
                }
@@ -50,7 +49,7 @@ package net.wg.gui.components.common.containers
                }
                if(_loc5_)
                {
-                  if(_loc5_  is  UIComponent)
+                  if(_loc5_ is UIComponent)
                   {
                      _loc5_.validateNow();
                   }
@@ -60,20 +59,20 @@ package net.wg.gui.components.common.containers
          }
          super.draw();
       }
-
+      
       public function get dataProvider() : Array {
          return this._dataProvider;
       }
-
+      
       public function set dataProvider(param1:Array) : void {
          this._dataProvider = param1;
          invalidateData();
       }
-
+      
       public function get itemRendererClass() : Class {
          return this._itemRendererClass;
       }
-
+      
       public function set itemRendererClass(param1:Class) : void {
          if(this._itemRendererClass != param1)
          {
@@ -81,12 +80,11 @@ package net.wg.gui.components.common.containers
             invalidateData();
          }
       }
-
+      
       override protected function onDispose() : void {
          this._dataProvider = null;
          this._itemRendererClass = null;
          super.onDispose();
       }
    }
-
 }

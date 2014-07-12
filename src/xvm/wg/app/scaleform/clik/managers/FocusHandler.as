@@ -1,5 +1,6 @@
 package scaleform.clik.managers
 {
+   import flash.errors.*;
    import flash.display.Stage;
    import scaleform.clik.core.UIComponent;
    import scaleform.gfx.FocusManager;
@@ -22,21 +23,20 @@ package scaleform.clik.managers
    import flash.display.DisplayObjectContainer;
    import scaleform.clik.constants.FocusMode;
    import scaleform.gfx.FocusEventEx;
-
-
+   
    public class FocusHandler extends Object
    {
-          
+      
       public function FocusHandler() {
          super();
          this.currentFocusLookup = new Dictionary();
          this.actualFocusLookup = new Dictionary();
       }
-
+      
       protected static var initialized:Boolean = false;
-
+      
       public static var instance:FocusHandler;
-
+      
       public static function getInstance() : FocusHandler {
          if(instance == null)
          {
@@ -44,7 +44,7 @@ package scaleform.clik.managers
          }
          return instance;
       }
-
+      
       public static function init(param1:Stage, param2:UIComponent) : void {
          if(initialized)
          {
@@ -56,17 +56,17 @@ package scaleform.clik.managers
          FocusManager.disableFocusKeys = true;
          initialized = true;
       }
-
+      
       protected var _stage:Stage;
-
+      
       protected var currentFocusLookup:Dictionary;
-
+      
       protected var actualFocusLookup:Dictionary;
-
+      
       protected var preventStageFocusChanges:Boolean = false;
-
+      
       protected var mouseDown:Boolean = false;
-
+      
       public function set stage(param1:Stage) : void {
          if(this._stage == null)
          {
@@ -86,108 +86,20 @@ package scaleform.clik.managers
          _loc2_.initialize(this._stage);
          _loc2_.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
       }
-
+      
       public function getFocus(param1:uint) : InteractiveObject {
          return this.getCurrentFocusDisplayObject(param1);
       }
-
-      public function setFocus(param1:InteractiveObject, param2:uint=0, param3:Boolean=false) : void {
-         var _loc5_:UIComponent = null;
-         var _loc11_:* = NaN;
-         var _loc12_:uint = 0;
-         var _loc13_:uint = 0;
-         var _loc14_:* = false;
-         var _loc4_:InteractiveObject = param1;
-         if(param1 != null)
-         {
-            while(true)
-            {
-               _loc5_ = param1 as UIComponent;
-               if(_loc5_ == null)
-               {
-                  break;
-               }
-               if(_loc5_.focusTarget != null)
-               {
-                  param1 = _loc5_.focusTarget;
-                  continue;
-               }
-               break;
-            }
-         }
-         if(_loc5_ != null)
-         {
-            if(_loc5_.focusable == false)
-            {
-               param1 = null;
-            }
-         }
-         var _loc6_:Sprite = param1 as Sprite;
-         if((_loc6_) && (param3) && _loc6_.tabEnabled == false)
-         {
-            param1 = null;
-         }
-         if((CLIK.disableNullFocusMoves) && (param1 == null || param1 == this._stage))
-         {
-            return;
-         }
-         var _loc7_:DisplayObject = this.getActualFocusDisplayObject(param2);
-         var _loc8_:DisplayObject = this.getCurrentFocusDisplayObject(param2);
-         if(_loc8_ != param1)
-         {
-            _loc5_ = _loc8_ as UIComponent;
-            if(_loc5_ != null)
-            {
-               _loc5_.focused = _loc5_.focused & ~(1 << param2);
-            }
-            if(_loc8_ != null)
-            {
-               _loc8_.dispatchEvent(new FocusHandlerEvent(FocusHandlerEvent.FOCUS_OUT,true,false,param2));
-            }
-            _loc8_ = param1;
-            this.setCurrentFocusDisplayObject(param2,param1);
-            _loc5_ = _loc8_ as UIComponent;
-            if(_loc5_ != null)
-            {
-               _loc5_.focused = _loc5_.focused | 1 << param2;
-            }
-            if(_loc8_ != null)
-            {
-               _loc8_.dispatchEvent(new FocusHandlerEvent(FocusHandlerEvent.FOCUS_IN,true,false,param2));
-            }
-         }
-         var _loc9_:* = _loc7_  is  TextField;
-         var _loc10_:* = _loc8_  is  UIComponent;
-         if(!(_loc7_ == _loc8_) && (!_loc9_ || (_loc9_) && !_loc10_))
-         {
-            if(_loc4_  is  TextField && !(_loc4_ == param1) && param1 == null)
-            {
-               param1 = _loc4_;
-            }
-            this.preventStageFocusChanges = true;
-            if(Extensions.isScaleform)
-            {
-               _loc11_ = FocusManager.getControllerMaskByFocusGroup(param2);
-               _loc12_ = Extensions.numControllers;
-               _loc13_ = 0;
-               while(_loc13_ < _loc12_)
-               {
-                  _loc14_ = !((_loc11_ >> _loc13_ & 1) == 0);
-                  if(_loc14_)
-                  {
-                     this.setSystemFocus(param1 as InteractiveObject,_loc13_);
-                  }
-                  _loc13_++;
-               }
-            }
-            else
-            {
-               this.setSystemFocus(param1 as InteractiveObject);
-            }
-            this._stage.addEventListener(Event.ENTER_FRAME,this.clearFocusPrevention,false,0,true);
-         }
+      
+      public function setFocus(param1:InteractiveObject, param2:uint = 0, param3:Boolean = false) : void {
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: TranslateException
+          */
+         throw new flash.errors.IllegalOperationError("Not decompiled due to error");
       }
-
+      
       protected function getCurrentFocusDisplayObject(param1:uint) : InteractiveObject {
          var _loc2_:WeakReference = this.currentFocusLookup[param1] as WeakReference;
          if(_loc2_)
@@ -196,11 +108,11 @@ package scaleform.clik.managers
          }
          return null;
       }
-
+      
       protected function setCurrentFocusDisplayObject(param1:uint, param2:InteractiveObject) : void {
          this.currentFocusLookup[param1] = new WeakReference(param2);
       }
-
+      
       protected function getActualFocusDisplayObject(param1:uint) : InteractiveObject {
          var _loc2_:WeakReference = this.actualFocusLookup[param1] as WeakReference;
          if(_loc2_)
@@ -209,12 +121,12 @@ package scaleform.clik.managers
          }
          return null;
       }
-
+      
       protected function setActualFocusDisplayObject(param1:uint, param2:InteractiveObject) : void {
          this.actualFocusLookup[param1] = new WeakReference(param2);
       }
-
-      protected function setSystemFocus(param1:InteractiveObject, param2:uint=0) : void {
+      
+      protected function setSystemFocus(param1:InteractiveObject, param2:uint = 0) : void {
          if(Extensions.isScaleform)
          {
             FocusManager.setFocus(param1,param2);
@@ -224,29 +136,29 @@ package scaleform.clik.managers
             this._stage.focus = param1;
          }
       }
-
-      protected function getSystemFocus(param1:uint=0) : InteractiveObject {
+      
+      protected function getSystemFocus(param1:uint = 0) : InteractiveObject {
          if(Extensions.isScaleform)
          {
             return FocusManager.getFocus(param1);
          }
          return this._stage.focus;
       }
-
+      
       protected function clearFocusPrevention(param1:Event) : void {
          this.preventStageFocusChanges = false;
          this._stage.removeEventListener(Event.ENTER_FRAME,this.clearFocusPrevention,false);
       }
-
+      
       public function input(param1:InputDetails) : void {
          var _loc2_:InputEvent = new InputEvent(InputEvent.INPUT,param1);
          this.handleInput(_loc2_);
       }
-
+      
       public function trackMouseDown(param1:MouseEvent) : void {
          this.mouseDown = param1.buttonDown;
       }
-
+      
       protected function handleInput(param1:InputEvent) : void {
          var _loc16_:String = null;
          var _loc2_:Number = param1.details.controllerIndex;
@@ -274,11 +186,11 @@ package scaleform.clik.managers
          var _loc8_:InteractiveObject = this.getCurrentFocusDisplayObject(_loc3_);
          var _loc9_:InteractiveObject = this.getActualFocusDisplayObject(_loc3_);
          var _loc10_:InteractiveObject = this.getSystemFocus(_loc3_);
-         if(_loc9_  is  TextField && _loc9_ == _loc8_ && (this.handleTextFieldInput(_loc7_,_loc2_)))
+         if(_loc9_ is TextField && _loc9_ == _loc8_ && (this.handleTextFieldInput(_loc7_,_loc2_)))
          {
             return;
          }
-         if(_loc9_  is  TextField && (this.handleTextFieldInput(_loc7_,_loc2_)))
+         if(_loc9_ is TextField && (this.handleTextFieldInput(_loc7_,_loc2_)))
          {
             return;
          }
@@ -286,14 +198,14 @@ package scaleform.clik.managers
          var _loc12_:Boolean = _loc7_ == NavigationCode.UP || (NavigationCode.DOWN);
          if(_loc8_ == null)
          {
-            if((_loc10_) && _loc10_  is  UIComponent)
+            if((_loc10_) && _loc10_ is UIComponent)
             {
                _loc8_ = _loc10_ as UIComponent;
             }
          }
          if(_loc8_ == null)
          {
-            if((_loc9_) && _loc9_  is  UIComponent)
+            if((_loc9_) && _loc9_ is UIComponent)
             {
                _loc8_ = _loc9_ as UIComponent;
             }
@@ -309,7 +221,7 @@ package scaleform.clik.managers
             _loc16_ = _loc11_?FocusMode.HORIZONTAL:FocusMode.VERTICAL;
             while(_loc13_ != null)
             {
-               if(_loc16_  in  _loc13_)
+               if(_loc16_ in _loc13_)
                {
                   _loc14_ = _loc13_[_loc16_];
                   if(!(_loc14_ == null) && !(_loc14_ == FocusMode.DEFAULT))
@@ -326,7 +238,7 @@ package scaleform.clik.managers
          {
             _loc13_ = null;
          }
-         if(_loc9_  is  TextField && _loc9_.parent == _loc8_)
+         if(_loc9_ is TextField && _loc9_.parent == _loc8_)
          {
             _loc8_ = this.getSystemFocus(_loc2_);
          }
@@ -336,19 +248,19 @@ package scaleform.clik.managers
             this.setFocus(_loc15_,_loc3_);
          }
       }
-
+      
       protected function handleMouseFocusChange(param1:FocusEvent) : void {
          this.handleFocusChange(param1.target as InteractiveObject,param1.relatedObject as InteractiveObject,param1);
       }
-
+      
       protected function handleFocusChange(param1:InteractiveObject, param2:InteractiveObject, param3:FocusEvent) : void {
          var _loc7_:TextField = null;
-         if((this.mouseDown) && param2  is  TextField)
+         if((this.mouseDown) && param2 is TextField)
          {
             param3.preventDefault();
             return;
          }
-         if((CLIK.disableDynamicTextFieldFocus) && param2  is  TextField)
+         if((CLIK.disableDynamicTextFieldFocus) && param2 is TextField)
          {
             _loc7_ = param2 as TextField;
             if(_loc7_.type == "dynamic")
@@ -359,11 +271,11 @@ package scaleform.clik.managers
                return;
             }
          }
-         if(param2  is  UIComponent)
+         if(param2 is UIComponent)
          {
             param3.preventDefault();
          }
-         if(param1  is  TextField && param2 == null && (CLIK.disableTextFieldToNullFocusMoves))
+         if(param1 is TextField && param2 == null && (CLIK.disableTextFieldToNullFocusMoves))
          {
             param3.preventDefault();
             return;
@@ -374,7 +286,7 @@ package scaleform.clik.managers
          this.setActualFocusDisplayObject(_loc6_,param2);
          this.setFocus(param2,_loc6_,param3.type == FocusEvent.MOUSE_FOCUS_CHANGE);
       }
-
+      
       protected function updateActualFocus(param1:FocusEvent) : void {
          var _loc2_:InteractiveObject = null;
          var _loc3_:InteractiveObject = null;
@@ -401,12 +313,12 @@ package scaleform.clik.managers
          var _loc6_:uint = FocusManager.getControllerFocusGroup(_loc5_);
          this.setActualFocusDisplayObject(_loc6_,_loc3_);
          var _loc7_:InteractiveObject = this.getCurrentFocusDisplayObject(_loc6_);
-         if(!(_loc3_ == null) && _loc3_  is  TextField && !(_loc3_.parent == null) && _loc7_ == _loc3_.parent && _loc7_ == _loc2_)
+         if(!(_loc3_ == null) && _loc3_ is TextField && !(_loc3_.parent == null) && _loc7_ == _loc3_.parent && _loc7_ == _loc2_)
          {
             return;
          }
-         var _loc8_:* = _loc3_  is  TextField;
-         var _loc9_:* = _loc7_  is  UIComponent;
+         var _loc8_:* = _loc3_ is TextField;
+         var _loc9_:* = _loc7_ is UIComponent;
          if(_loc3_ != _loc7_)
          {
             if(!((_loc8_) && (_loc9_)) || _loc3_ == null)
@@ -418,7 +330,7 @@ package scaleform.clik.managers
             }
          }
       }
-
+      
       protected function handleTextFieldInput(param1:String, param2:uint) : Boolean {
          var _loc3_:TextField = this.getActualFocusDisplayObject(param2) as TextField;
          if(_loc3_ == null)
@@ -448,5 +360,4 @@ package scaleform.clik.managers
          }
       }
    }
-
 }

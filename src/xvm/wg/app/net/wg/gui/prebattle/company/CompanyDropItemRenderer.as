@@ -6,23 +6,22 @@ package net.wg.gui.prebattle.company
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.Values;
-
-
+   
    public class CompanyDropItemRenderer extends ListItemRenderer
    {
-          
+      
       public function CompanyDropItemRenderer() {
          super();
          buttonMode = true;
          mouseEnabled = true;
       }
-
+      
       public var numberField:TextField;
-
+      
       public var bg:MovieClip;
-
+      
       private var isUpdated:Boolean = false;
-
+      
       override public function setData(param1:Object) : void {
          if(param1 == null)
          {
@@ -35,13 +34,13 @@ package net.wg.gui.prebattle.company
          super.setData(param1);
          invalidateData();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          constraints.addElement(this.numberField.name,this.numberField,Constraints.LEFT);
          constraints.addElement(this.bg.name,this.bg,Constraints.ALL);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && !this.isUpdated)
@@ -50,7 +49,7 @@ package net.wg.gui.prebattle.company
             this.afterSetData();
          }
       }
-
+      
       override protected function updateText() : void {
          if((data) && (data.userName))
          {
@@ -65,11 +64,10 @@ package net.wg.gui.prebattle.company
             textField.text = Values.EMPTY_STR;
          }
       }
-
+      
       private function afterSetData() : void {
          this.numberField.text = String(index + 1);
          this.bg.visible = !Boolean(index % 2);
       }
    }
-
 }

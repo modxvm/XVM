@@ -3,78 +3,77 @@ package net.wg.gui.lobby.battleResults
    import scaleform.clik.core.UIComponent;
    import flash.display.MovieClip;
    import flash.filters.ColorMatrixFilter;
-
-
+   
    public class EfficiencyIconRenderer extends UIComponent
    {
-          
+      
       public function EfficiencyIconRenderer() {
          super();
          buttonMode = true;
       }
-
+      
       public static const EVIL:String = "evil";
-
+      
       public static const SPOTTED:String = "spotted";
-
+      
       public static const DAMAGE:String = "damage";
-
+      
       public static const CRITS:String = "crits";
-
+      
       public static const TEAMKILL:String = "teamKill";
-
+      
       public static const KILL:String = "kill";
-
+      
       public static const MEDAL:String = "medal";
-
+      
       public static const ASSIST:String = "assist";
-
+      
       private var _kind:String = "kill";
-
+      
       private var _kindDirty:Boolean = true;
-
+      
       private var _value:Number = 0;
-
+      
       private var _valueDirty:Boolean = true;
-
+      
       private var _disabledDirty:Boolean = true;
-
+      
       public var iconMc:MovieClip;
-
+      
       public var iconLabelMc:MovieClip;
-
+      
       public function get kind() : String {
          return this._kind;
       }
-
+      
       public function set kind(param1:String) : void {
          this._kind = param1;
          this._kindDirty = true;
          invalidate();
       }
-
+      
       public function get value() : Number {
          return this._value;
       }
-
+      
       public function set value(param1:Number) : void {
          this._value = param1;
          this._valueDirty = true;
          invalidate();
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          this._disabledDirty = true;
          super.enabled = param1;
          mouseEnabled = true;
          invalidate();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          mouseChildren = false;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:ColorMatrixFilter = null;
          var _loc2_:Array = null;
@@ -122,5 +121,4 @@ package net.wg.gui.lobby.battleResults
          this.iconLabelMc.visible = (enabled) && this.value > 1;
       }
    }
-
 }

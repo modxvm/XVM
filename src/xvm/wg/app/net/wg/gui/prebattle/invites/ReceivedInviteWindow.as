@@ -8,51 +8,50 @@ package net.wg.gui.prebattle.invites
    import net.wg.gui.prebattle.data.ReceivedInviteVO;
    import scaleform.clik.utils.Padding;
    import scaleform.clik.events.ButtonEvent;
-
-
+   
    public class ReceivedInviteWindow extends ReceivedInviteWindowMeta implements IReceivedInviteWindowMeta
    {
-          
+      
       public function ReceivedInviteWindow() {
          super();
       }
-
+      
       private static const UPDATE_DATA:String = "updateData";
-
+      
       private static const SIMPLE_INVITE_LABEL:String = "simple";
-
+      
       private static const INVITE_WITH_NOTE_LABEL:String = "withNote";
-
+      
       public var inviteTextArea:TextAreaSimple;
-
+      
       public var messageTextArea:TextAreaSimple;
-
+      
       public var noteTextField:TextField;
-
+      
       public var inviteMessageLabel:TextField;
-
+      
       public var inviteAddMessageLabel:TextField;
-
+      
       public var acceptButton:SoundButtonEx;
-
+      
       public var declineButton:SoundButtonEx;
-
+      
       public var cancelButton:SoundButtonEx;
-
+      
       private var inviteVO:ReceivedInviteVO = null;
-
+      
       private var isUpdatedData:Boolean = true;
-
+      
       public function as_setTitle(param1:String) : void {
          window.title = param1;
       }
-
+      
       public function as_setReceivedInviteInfo(param1:Object) : void {
          this.inviteVO = new ReceivedInviteVO(param1);
          this.isUpdatedData = false;
          invalidate(UPDATE_DATA);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(UPDATE_DATA)) && !this.isUpdatedData)
@@ -61,7 +60,7 @@ package net.wg.gui.prebattle.invites
             this.updateComponents();
          }
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          canClose = true;
@@ -73,7 +72,7 @@ package net.wg.gui.prebattle.invites
          this.inviteMessageLabel.text = INVITES.GUI_LABELS_INVITETEXT;
          this.inviteAddMessageLabel.text = INVITES.GUI_LABELS_ADDITIONALTEXT;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.acceptButton.addEventListener(ButtonEvent.CLICK,this.acceptButton_buttonClickHandler);
@@ -82,7 +81,7 @@ package net.wg.gui.prebattle.invites
          this.isUpdatedData = false;
          invalidate(UPDATE_DATA);
       }
-
+      
       private function updateComponents() : void {
          if(!this.inviteVO)
          {
@@ -127,25 +126,24 @@ package net.wg.gui.prebattle.invites
          window.validateNow();
          window.updateSize(width,height,true);
       }
-
+      
       override protected function onDispose() : void {
          this.acceptButton.removeEventListener(ButtonEvent.CLICK,this.acceptButton_buttonClickHandler);
          this.declineButton.removeEventListener(ButtonEvent.CLICK,this.declineButton_buttonClickHandler);
          this.cancelButton.removeEventListener(ButtonEvent.CLICK,this.cancelButton_buttonClickHandler);
          super.onDispose();
       }
-
+      
       private function acceptButton_buttonClickHandler(param1:ButtonEvent) : void {
          acceptInviteS();
       }
-
+      
       private function declineButton_buttonClickHandler(param1:ButtonEvent) : void {
          declineInviteS();
       }
-
+      
       private function cancelButton_buttonClickHandler(param1:ButtonEvent) : void {
          cancelInviteS();
       }
    }
-
 }

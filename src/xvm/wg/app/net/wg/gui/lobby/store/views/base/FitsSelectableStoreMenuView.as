@@ -7,35 +7,34 @@ package net.wg.gui.lobby.store.views.base
    import net.wg.data.VO.ShopVehicleFilterElementData;
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.Linkages;
-
-
+   
    public class FitsSelectableStoreMenuView extends BaseStoreMenuView
    {
-          
+      
       public function FitsSelectableStoreMenuView() {
          super();
       }
-
+      
       private static const MIN_ITEMS_FOR_SCROLL:uint = 13;
-
+      
       public var myVehicleRadioBtn:RadioButton = null;
-
+      
       public var fitsSelectDropDn:DropdownMenu = null;
-
+      
       private var _currentVehicle:Object = null;
-
+      
       private var _programUpdating:Boolean = false;
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          resetTemporaryHandlers();
          this.fitsSelectDropDn.removeEventListener(ListEvent.INDEX_CHANGE,this.fitsSelectDropDnChangeHandler);
       }
-
+      
       override public function setViewData(param1:Array) : void {
          this.fitsSelectDropDn.addEventListener(ListEvent.INDEX_CHANGE,this.fitsSelectDropDnChangeHandler);
       }
-
+      
       override public final function setSubFilterData(param1:int, param2:ShopSubFilterData) : void {
          if(param2)
          {
@@ -47,7 +46,7 @@ package net.wg.gui.lobby.store.views.base
             this.updateSubFilter(param1);
          }
       }
-
+      
       override public function updateSubFilter(param1:int) : void {
          var _loc5_:ShopVehicleFilterElementData = null;
          var _loc2_:Number = 0;
@@ -66,8 +65,7 @@ package net.wg.gui.lobby.store.views.base
                   {
                      "label":_loc5_.name,
                      "data":_loc5_.id
-                  }
-               );
+                  });
             }
             _loc4_++;
          }
@@ -77,7 +75,7 @@ package net.wg.gui.lobby.store.views.base
          this.fitsSelectDropDn.scrollBar = _loc3_.length > MIN_ITEMS_FOR_SCROLL?Linkages.SCROLL_BAR:"";
          this.onVehicleFilterUpdated(_loc3_,_loc2_,param1);
       }
-
+      
       protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void {
          if(param1.length == 0)
          {
@@ -92,15 +90,15 @@ package net.wg.gui.lobby.store.views.base
             this._programUpdating = false;
          }
       }
-
+      
       protected function getCurrentVehicle() : Object {
          return this._currentVehicle;
       }
-
+      
       protected function setCurrentVehicle(param1:Object) : void {
          this._currentVehicle = param1;
       }
-
+      
       private function fitsSelectDropDnChangeHandler(param1:ListEvent) : void {
          if((this.fitsSelectDropDn.enabled) && !(getFilterData().current == param1.itemData) && !this._programUpdating)
          {
@@ -116,5 +114,4 @@ package net.wg.gui.lobby.store.views.base
          }
       }
    }
-
 }

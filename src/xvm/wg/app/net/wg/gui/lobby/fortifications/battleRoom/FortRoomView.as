@@ -15,67 +15,64 @@ package net.wg.gui.lobby.fortifications.battleRoom
    import flash.events.MouseEvent;
    import net.wg.gui.rally.controls.RallyInvalidationType;
    import net.wg.data.constants.Tooltips;
-
-
+   
    public class FortRoomView extends FortRoomMeta implements IFortRoomMeta
    {
-          
+      
       public function FortRoomView() {
          super();
          backBtn.UIID = 51;
       }
-
+      
       private static const CHANGE_UNIT_STATE:int = 24;
-
+      
       private static const SET_PLAYER_STATE:int = 6;
-
+      
       public var changeDivisionBtn:SoundButton;
-
+      
       public var filterInfo:InfoIcon;
-
+      
       public var divisionInfoText:TextField;
-
+      
       public function get unitTeamSection() : SortieTeamSection {
          return teamSection as SortieTeamSection;
       }
-
+      
       override protected function getRallyVO(param1:Object) : IRallyVO {
          return new SortieVO(param1);
       }
-
+      
       override protected function onToggleReadyStateRequest(param1:RallyViewsEvent) : void {
          App.eventLogManager.logSubSystem(EVENT_LOG_CONSTANTS.SST_UI_FORT,EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,param1.data.uiid,param1.data.arg);
          super.onToggleReadyStateRequest(param1);
       }
-
+      
       override protected function onChooseVehicleRequest(param1:RallyViewsEvent) : void {
          App.eventLogManager.logUIElement(IIdentifiable(param1.target.vehicleBtn),EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,0);
          super.onChooseVehicleRequest(param1);
       }
-
+      
       override protected function getTitleStr() : String {
          return FORTIFICATIONS.SORTIE_ROOM_TITLE;
       }
-
+      
       override protected function getRallyViewAlias() : String {
          return FORTIFICATION_ALIASES.FORT_BATTLE_ROOM_VIEW_UI;
       }
-
+      
       override protected function coolDownControls(param1:Boolean, param2:int) : void {
          if(param2 == CHANGE_UNIT_STATE)
          {
             chatSection.enableEditCommitButton(param1);
          }
-         else
+         else if(param2 == SET_PLAYER_STATE)
          {
-            if(param2 == SET_PLAYER_STATE)
-            {
-               teamSection.enableFightButton(param1);
-            }
+            teamSection.enableFightButton(param1);
          }
+         
          super.coolDownControls(param1,param2);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.changeDivisionBtn.visible = false;
@@ -89,7 +86,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
          this.filterInfo.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.filterInfo.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
       }
-
+      
       override protected function onDispose() : void {
          this.changeDivisionBtn.removeEventListener(ButtonEvent.CLICK,this.changeDivisionHandler);
          this.changeDivisionBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
@@ -102,7 +99,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
          this.filterInfo = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(RallyInvalidationType.RALLY_DATA)) && (rallyData))
@@ -111,12 +108,12 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.changeDivisionBtn.visible = false;
          }
       }
-
+      
       override protected function onBackClickHandler(param1:ButtonEvent) : void {
          super.onBackClickHandler(param1);
          App.eventLogManager.logUIEvent(param1,0);
       }
-
+      
       override protected function onControlRollOver(param1:MouseEvent) : void {
          super.onControlRollOver(param1);
          switch(param1.target)
@@ -132,10 +129,9 @@ package net.wg.gui.lobby.fortifications.battleRoom
                break;
          }
       }
-
+      
       private function changeDivisionHandler(param1:ButtonEvent) : void {
          showChangeDivisionWindowS();
       }
    }
-
 }

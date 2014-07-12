@@ -11,75 +11,73 @@ package net.wg.gui.lobby.barracks
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
    import net.wg.data.constants.SoundTypes;
-   import __AS3__.vec.Vector;
    import flash.geom.Point;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ListEvent;
    import net.wg.gui.events.CrewEvent;
-
-
+   
    public class BarracksItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function BarracksItemRenderer() {
          super();
          buttonMode = true;
          this.soundType = SoundTypes.BARRACKS_TANKMAN_SOUND_TYPE;
          this.btnDissmiss.soundType = SoundTypes.NORMAL_BTN;
       }
-
+      
       private static const INVALIDATE_PARAMS:String = "params";
-
+      
       private static const INVALIDATE_IN_TANK:String = "inTank";
-
+      
       private static const DEBUFF:String = "#FF0000";
-
+      
       public var countField:TextField = null;
-
+      
       public var btnDissmiss:SoundButtonEx;
-
+      
       public var icon:UILoaderAlt;
-
+      
       public var iconRole:UILoaderAlt;
-
+      
       public var iconRank:UILoaderAlt;
-
+      
       public var clickArea:MovieClip = null;
-
+      
       public var selection:MovieClip = null;
-
+      
       public var emptyPlacesTF:TextField;
-
+      
       public var levelSpecializationMain:TextField = null;
-
+      
       public var tankmanName:TextField = null;
-
+      
       public var rank:TextField = null;
-
+      
       public var role:TextField = null;
-
+      
       public var lockMsg:TextField = null;
-
+      
       public var vehicleType:TextField = null;
-
+      
       public var price:IconText = null;
-
+      
       public var actionPrice:ActionPrice = null;
-
+      
       public var descrField:TextField = null;
-
+      
       private var _inTank:Boolean = false;
-
+      
       private var _inCurrentTank:Boolean = false;
-
+      
       private var _empty:Boolean = false;
-
+      
       private var _buy:Boolean = false;
-
+      
       private var _isMouseOver:Boolean = false;
-
+      
       private var actionPriceVo:ActionPriceVO = null;
-
+      
       override protected function onDispose() : void {
          removeEventListener(ButtonEvent.CLICK,this.onBarracksItemRendererClick,false);
          removeEventListener(MouseEvent.CLICK,this.onBarracksItemRendererRightClick,false);
@@ -127,7 +125,7 @@ package net.wg.gui.lobby.barracks
          this.descrField = null;
          super.onDispose();
       }
-
+      
       override public function setData(param1:Object) : void {
          if(!param1)
          {
@@ -169,20 +167,20 @@ package net.wg.gui.lobby.barracks
          invalidate(INVALIDATE_PARAMS);
          validateNow();
       }
-
+      
       override public function toString() : String {
          return "[Scaleform BarracksItemRenderer " + name + "]";
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          mouseChildren = param1;
       }
-
+      
       public function set useHandCursorOnClickArea(param1:Boolean) : void {
          if(this.clickArea)
          {
@@ -190,11 +188,11 @@ package net.wg.gui.lobby.barracks
             this.tabEnabled = param1;
          }
       }
-
+      
       public function get inTank() : Boolean {
          return this._inTank;
       }
-
+      
       public function set inTank(param1:Boolean) : void {
          if(this._inTank == param1)
          {
@@ -203,11 +201,11 @@ package net.wg.gui.lobby.barracks
          this._inTank = param1;
          invalidate(INVALIDATE_IN_TANK);
       }
-
+      
       public function get inCurrentTank() : Boolean {
          return this._inCurrentTank;
       }
-
+      
       public function set inCurrentTank(param1:Boolean) : void {
          if(this._inCurrentTank == param1)
          {
@@ -216,27 +214,27 @@ package net.wg.gui.lobby.barracks
          this._inCurrentTank = param1;
          invalidate(INVALIDATE_IN_TANK);
       }
-
+      
       public function get buy() : Boolean {
          return this._buy;
       }
-
+      
       public function set buy(param1:Boolean) : void {
          this._buy = param1;
          this.updateControlsState();
          setState("up");
       }
-
+      
       public function get empty() : Boolean {
          return this._empty;
       }
-
+      
       public function set empty(param1:Boolean) : void {
          this._empty = param1;
          this.updateControlsState();
          setState("up");
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          tabChildren = false;
@@ -254,7 +252,7 @@ package net.wg.gui.lobby.barracks
          mouseChildren = true;
          this.clickArea.buttonMode = true;
       }
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          if(this._empty)
          {
@@ -270,7 +268,7 @@ package net.wg.gui.lobby.barracks
          }
          return Vector.<String>([""]);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:String = null;
          var _loc2_:Point = null;
@@ -359,19 +357,17 @@ package net.wg.gui.lobby.barracks
                      this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
                      this.role.htmlText = this.role.htmlText + (", <font color=\'" + DEBUFF + "\'>" + _loc4_ + " " + data.vehicleType + "</font>");
                   }
+                  else if(!data.isInSelfVehicleType)
+                  {
+                     this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
+                     this.role.htmlText = this.role.htmlText + (", " + _loc4_ + " <font color=\'" + DEBUFF + "\'> " + data.vehicleType + "</font>");
+                  }
                   else
                   {
-                     if(!data.isInSelfVehicleType)
-                     {
-                        this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
-                        this.role.htmlText = this.role.htmlText + (", " + _loc4_ + " <font color=\'" + DEBUFF + "\'> " + data.vehicleType + "</font>");
-                     }
-                     else
-                     {
-                        this.levelSpecializationMain.htmlText = _loc3_;
-                        this.role.htmlText = this.role.htmlText + (", " + _loc4_ + " " + data.vehicleType);
-                     }
+                     this.levelSpecializationMain.htmlText = _loc3_;
+                     this.role.htmlText = this.role.htmlText + (", " + _loc4_ + " " + data.vehicleType);
                   }
+                  
                   this.tankmanName.text = data.firstname + " " + data.lastname;
                   this.rank.text = data.rank;
                   this.lockMsg.text = data.lockMessage;
@@ -379,17 +375,17 @@ package net.wg.gui.lobby.barracks
             }
          }
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          this._isMouseOver = true;
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          this._isMouseOver = false;
       }
-
+      
       private function updateControlsState() : void {
          var _loc1_:* = !((this._buy) || (this._empty));
          this.icon.visible = this.iconRank.visible = this.iconRole.visible = _loc1_;
@@ -398,19 +394,17 @@ package net.wg.gui.lobby.barracks
          {
             soundType = SoundTypes.BARRACKS_BUY_SOUND_TYPE;
          }
+         else if(this.empty)
+         {
+            soundType = SoundTypes.BARRACKS_EMPTY_SOUND_TYPE;
+         }
          else
          {
-            if(this.empty)
-            {
-               soundType = SoundTypes.BARRACKS_EMPTY_SOUND_TYPE;
-            }
-            else
-            {
-               soundType = SoundTypes.BARRACKS_TANKMAN_SOUND_TYPE;
-            }
+            soundType = SoundTypes.BARRACKS_TANKMAN_SOUND_TYPE;
          }
+         
       }
-
+      
       private function showTooltip(param1:MouseEvent) : void {
          setState("out");
          if((this._inTank) || (this._inCurrentTank))
@@ -422,21 +416,21 @@ package net.wg.gui.lobby.barracks
             App.toolTipMgr.showComplex(TOOLTIPS.BARRACKS_TANKMEN_DISMISS);
          }
       }
-
+      
       private function hideTooltip(param1:MouseEvent) : void {
          setState("over");
          App.toolTipMgr.hide();
          dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
       }
-
+      
       private function rendererRollOver(param1:MouseEvent) : void {
          dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
       }
-
+      
       private function rendererRollOut(param1:MouseEvent) : void {
          dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OUT,true,true,-1,-1,-1,null,data));
       }
-
+      
       public function onBtnDissmissClick(param1:ButtonEvent) : void {
          if((this._inTank) || (this._inCurrentTank))
          {
@@ -447,7 +441,7 @@ package net.wg.gui.lobby.barracks
             dispatchEvent(new CrewEvent(CrewEvent.DISMISS_TANKMAN,data));
          }
       }
-
+      
       public function onBarracksItemRendererClick(param1:ButtonEvent) : void {
          if(param1.target == this.btnDissmiss)
          {
@@ -457,15 +451,13 @@ package net.wg.gui.lobby.barracks
          {
             dispatchEvent(new CrewEvent(CrewEvent.SHOW_RECRUIT_WINDOW,null,true));
          }
-         else
+         else if(this._buy)
          {
-            if(this._buy)
-            {
-               dispatchEvent(new CrewEvent(CrewEvent.SHOW_BERTH_BUY_DIALOG));
-            }
+            dispatchEvent(new CrewEvent(CrewEvent.SHOW_BERTH_BUY_DIALOG));
          }
+         
       }
-
+      
       private function onBarracksItemRendererRightClick(param1:MouseEvent) : void {
          if(param1.target == this.btnDissmiss)
          {
@@ -477,5 +469,4 @@ package net.wg.gui.lobby.barracks
          }
       }
    }
-
 }

@@ -7,19 +7,19 @@ package scaleform.clik.motion
    import flash.utils.getTimer;
    import flash.geom.Transform;
    import flash.display.DisplayObject;
-
-
+   
    public class Tween extends Object implements IDisposable
    {
+      
       {
          ticker.addEventListener(Event.ENTER_FRAME,Tween.tick,false,0,true);
       }
-
-      public function Tween(param1:Number, param2:Object=null, param3:Object=null, param4:Object=null) {
+      
+      public function Tween(param1:Number, param2:Object = null, param3:Object = null, param4:Object = null) {
          super();
          this.duration = param1;
          this.target = param2;
-         if(param2  is  DisplayObject)
+         if(param2 is DisplayObject)
          {
             this.targetDO = DisplayObject(param2);
             this.transform = this.targetDO.transform;
@@ -34,30 +34,23 @@ package scaleform.clik.motion
             this.paused = false;
          }
       }
-
-      public static var propsDO:Object = {
-                                            "x":true,
-                                            "y":true,
-                                            "rotation":true,
-                                            "scaleX":true,
-                                            "scaleY":true,
-                                            "alpha":true
-                                         };
-
-      protected static var ticker:Shape = new Shape();
-
-      protected static var workingMatrix:Matrix = new Matrix();
-
+      
+      public static var propsDO:Object;
+      
+      protected static var ticker:Shape;
+      
+      protected static var workingMatrix:Matrix;
+      
       protected static var firstTween:Tween;
-
-      protected static var lastTime:uint = getTimer();
-
-      protected static var degToRad:Number = 1 / 180 * Math.PI;
-
+      
+      protected static var lastTime:uint;
+      
+      protected static var degToRad:Number = 0.017453292519943295;
+      
       public static function removeAllTweens() : void {
          firstTween = null;
       }
-
+      
       protected static function removeTween(param1:Tween) : void {
          if(param1.prev)
          {
@@ -73,7 +66,7 @@ package scaleform.clik.motion
          }
          param1.prev = param1.next = null;
       }
-
+      
       protected static function tick(param1:Event) : void {
          var _loc5_:Tween = null;
          var _loc2_:Number = getTimer();
@@ -87,65 +80,65 @@ package scaleform.clik.motion
             _loc4_ = _loc5_;
          }
       }
-
+      
       public var target:Object;
-
+      
       public var duration:Number;
-
+      
       public var ease:Function;
-
+      
       public var easeParam:Object;
-
+      
       public var onComplete:Function;
-
+      
       public var onChange:Function;
-
+      
       public var data:Object;
-
+      
       public var nextTween:Tween;
-
+      
       public var frameBased:Boolean = false;
-
+      
       public var delay:Number = 0;
-
+      
       public var loop:Boolean = false;
-
+      
       public var fastTransform:Boolean = true;
-
+      
       protected var invalid:Boolean;
-
+      
       protected var next:Tween;
-
+      
       protected var prev:Tween;
-
+      
       protected var _position:Number = 0;
-
+      
       protected var _paused:Boolean = true;
-
+      
       protected var startMatrix:Matrix;
-
+      
       protected var deltaMatrix:Matrix;
-
+      
       protected var transform:Transform;
-
+      
       protected var targetDO:DisplayObject;
-
+      
       protected var firstProp:Prop;
-
+      
       protected var props:Object;
-
+      
       public function dispose() : void {
          var _loc1_:String = null;
          this.target = null;
          this.ease = null;
-         for (_loc1_ in this.easeParam)
+         for(_loc1_ in this.easeParam)
          {
-            delete this.easeParam[[_loc1_]];
+            delete this.easeParam[_loc1_];
          }
          this.easeParam = null;
-         for (_loc1_ in this.data)
+         for(_loc1_ in this.data)
          {
-            delete this.data[[_loc1_]];
+            delete this.data[_loc1_];
          }
          this.data = null;
          this.onComplete = null;
@@ -163,37 +156,37 @@ package scaleform.clik.motion
             this.firstProp.prev = null;
             this.firstProp = null;
          }
-         for (_loc1_ in this.props)
+         for(_loc1_ in this.props)
          {
-            delete this.props[[_loc1_]];
+            delete this.props[_loc1_];
          }
          this.props = null;
       }
-
+      
       public function reset() : void {
          this._position = 0;
       }
-
+      
       public function quickSet(param1:Object) : void {
          var _loc2_:String = null;
-         for (_loc2_ in param1)
+         for(_loc2_ in param1)
          {
             this[_loc2_] = param1[_loc2_];
          }
       }
-
+      
       public function get position() : Number {
          return this._position - this.delay;
       }
-
+      
       public function set position(param1:Number) : void {
          this.updatePosition(param1 + this.delay - this._position);
       }
-
+      
       public function get paused() : Boolean {
          return this._paused;
       }
-
+      
       public function set paused(param1:Boolean) : void {
          if(param1 == this._paused)
          {
@@ -218,7 +211,7 @@ package scaleform.clik.motion
             }
          }
       }
-
+      
       protected function constructProp(param1:String) : Prop {
          var _loc2_:Prop = new Prop();
          _loc2_.name = param1;
@@ -230,31 +223,16 @@ package scaleform.clik.motion
          _loc2_.next = this.firstProp;
          return this.firstProp = _loc2_;
       }
-
+      
       protected function init() : void {
-         var _loc2_:String = null;
-         var _loc3_:Prop = null;
-         var _loc1_:* = false;
-         for (_loc2_ in this.props)
-         {
-            if((this.fastTransform) && (this.transform) && (propsDO[_loc2_]))
-            {
-               _loc1_ = true;
-            }
-            else
-            {
-               _loc3_ = this.constructProp(_loc2_);
-               _loc3_.delta = this.props[_loc2_] - (_loc3_.start = this.target[_loc2_]);
-            }
-         }
-         if(_loc1_)
-         {
-            this.startMatrix = new Matrix(this.targetDO.scaleX,this.targetDO.rotation * degToRad,this.targetDO.alpha,this.targetDO.scaleY,this.targetDO.x,this.targetDO.y);
-            this.deltaMatrix = new Matrix(isNaN(this.props.scaleX)?0:this.props.scaleX - this.startMatrix.a,isNaN(this.props.rotation)?0:(this.props.rotation - this.targetDO.rotation) * degToRad,isNaN(this.props.alpha)?0:this.props.alpha - this.startMatrix.c,isNaN(this.props.scaleY)?0:this.props.scaleY - this.startMatrix.d,isNaN(this.props.x)?0:this.props.x - this.startMatrix.tx,isNaN(this.props.y)?0:this.props.y - this.startMatrix.ty);
-         }
-         this.props = null;
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: TranslateException
+          */
+         throw new flash.errors.IllegalOperationError("Not decompiled due to error");
       }
-
+      
       protected function updatePosition(param1:Number) : void {
          var _loc5_:* = NaN;
          var _loc6_:* = NaN;
@@ -341,23 +319,21 @@ package scaleform.clik.motion
          }
       }
    }
-
 }
-
-   final class Prop extends Object
-   {
-          
-      function Prop() {
-         super();
-      }
-
-      public var next:Prop;
-
-      public var prev:Prop;
-
-      public var name:String;
-
-      public var start:Number;
-
-      public var delta:Number;
+final class Prop extends Object
+{
+   
+   function Prop() {
+      super();
    }
+   
+   public var next:Prop;
+   
+   public var prev:Prop;
+   
+   public var name:String;
+   
+   public var start:Number;
+   
+   public var delta:Number;
+}

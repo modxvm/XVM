@@ -18,54 +18,53 @@ package scaleform.clik.controls
    import scaleform.gfx.Extensions;
    import scaleform.gfx.FocusManager;
    import scaleform.gfx.MouseEventEx;
-
-
+   
    public class TextInput extends UIComponent
    {
-          
+      
       public function TextInput() {
          super();
       }
-
+      
       public var defaultTextFormat:TextFormat;
-
+      
       public var constraintsDisabled:Boolean = false;
-
+      
       protected var _text:String = "";
-
+      
       protected var _displayAsPassword:Boolean = false;
-
+      
       protected var _maxChars:uint = 0;
-
+      
       protected var _editable:Boolean = true;
-
+      
       protected var _actAsButton:Boolean = false;
-
+      
       protected var _alwaysShowSelection:Boolean = false;
-
+      
       protected var _isHtml:Boolean = false;
-
+      
       protected var _state:String = "default";
-
+      
       protected var _newFrame:String;
-
+      
       protected var _textFormat:TextFormat;
-
+      
       protected var _usingDefaultTextFormat:Boolean = true;
-
+      
       protected var _defaultText:String = "";
-
+      
       private var hscroll:Number = 0;
-
+      
       public var textField:TextField;
-
+      
       override protected function preInitialize() : void {
          if(!this.constraintsDisabled)
          {
             constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
          }
       }
-
+      
       override protected function initialize() : void {
          super.tabEnabled = false;
          mouseEnabled = mouseChildren = this.enabled;
@@ -75,11 +74,11 @@ package scaleform.clik.controls
          this.defaultTextFormat.italic = true;
          this.defaultTextFormat.color = 11184810;
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          mouseChildren = param1;
@@ -87,11 +86,11 @@ package scaleform.clik.controls
          tabChildren = _focusable;
          this.setState(this.defaultState);
       }
-
+      
       override public function get focusable() : Boolean {
          return _focusable;
       }
-
+      
       override public function set focusable(param1:Boolean) : void {
          _focusable = param1;
          if(!_focusable && (this.enabled))
@@ -108,40 +107,40 @@ package scaleform.clik.controls
             removeEventListener(MouseEvent.MOUSE_DOWN,this.handleMouseDown,false);
          }
       }
-
+      
       public function get text() : String {
          return this._text;
       }
-
+      
       public function set text(param1:String) : void {
          this._isHtml = false;
          this._text = param1;
          invalidateData();
       }
-
+      
       public function get htmlText() : String {
          return this._text;
       }
-
+      
       public function set htmlText(param1:String) : void {
          this._isHtml = true;
          this._text = param1;
          invalidateData();
       }
-
+      
       public function get defaultText() : String {
          return this._defaultText;
       }
-
+      
       public function set defaultText(param1:String) : void {
          this._defaultText = param1;
          invalidateData();
       }
-
+      
       public function get displayAsPassword() : Boolean {
          return this._displayAsPassword;
       }
-
+      
       public function set displayAsPassword(param1:Boolean) : void {
          this._displayAsPassword = param1;
          if(this.textField != null)
@@ -149,11 +148,11 @@ package scaleform.clik.controls
             this.textField.displayAsPassword = param1;
          }
       }
-
+      
       public function get maxChars() : uint {
          return this._maxChars;
       }
-
+      
       public function set maxChars(param1:uint) : void {
          this._maxChars = param1;
          if(this.textField != null)
@@ -161,11 +160,11 @@ package scaleform.clik.controls
             this.textField.maxChars = param1;
          }
       }
-
+      
       public function get editable() : Boolean {
          return this._editable;
       }
-
+      
       public function set editable(param1:Boolean) : void {
          this._editable = param1;
          if(this.textField != null)
@@ -174,27 +173,27 @@ package scaleform.clik.controls
          }
          this.focusable = param1;
       }
-
+      
       override public function get tabEnabled() : Boolean {
          return this.textField.tabEnabled;
       }
-
+      
       override public function set tabEnabled(param1:Boolean) : void {
          this.textField.tabEnabled = param1;
       }
-
+      
       override public function get tabIndex() : int {
          return this.textField.tabIndex;
       }
-
+      
       override public function set tabIndex(param1:int) : void {
          this.textField.tabIndex = param1;
       }
-
+      
       public function get actAsButton() : Boolean {
          return this._actAsButton;
       }
-
+      
       public function set actAsButton(param1:Boolean) : void {
          if(this._actAsButton == param1)
          {
@@ -212,11 +211,11 @@ package scaleform.clik.controls
             removeEventListener(MouseEvent.ROLL_OUT,this.handleRollOut,false);
          }
       }
-
+      
       public function get alwaysShowSelection() : Boolean {
          return this._alwaysShowSelection;
       }
-
+      
       public function set alwaysShowSelection(param1:Boolean) : void {
          this._alwaysShowSelection = param1;
          if(this.textField != null)
@@ -224,27 +223,27 @@ package scaleform.clik.controls
             this.textField.alwaysShowSelection = param1;
          }
       }
-
+      
       public function get length() : uint {
          return this.textField.length;
       }
-
+      
       public function get defaultState() : String {
          return !this.enabled?"disabled":focused?"focused":"default";
       }
-
+      
       public function appendText(param1:String) : void {
          this._text = this._text + param1;
          this._isHtml = false;
          invalidateData();
       }
-
+      
       public function appendHtml(param1:String) : void {
          this._text = this._text + param1;
          this._isHtml = true;
          invalidateData();
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -256,11 +255,11 @@ package scaleform.clik.controls
             return;
          }
       }
-
+      
       override public function toString() : String {
          return "[CLIK TextInput " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(!this.constraintsDisabled)
@@ -275,7 +274,7 @@ package scaleform.clik.controls
          }
          this.setState(this.defaultState,"default");
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.STATE))
          {
@@ -289,13 +288,11 @@ package scaleform.clik.controls
             dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
             invalidate(InvalidationType.SIZE);
          }
-         else
+         else if(isInvalid(InvalidationType.DATA))
          {
-            if(isInvalid(InvalidationType.DATA))
-            {
-               this.updateText();
-            }
+            this.updateText();
          }
+         
          if(isInvalid(InvalidationType.SIZE))
          {
             setActualSize(_width,_height);
@@ -305,11 +302,11 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       override protected function changeFocus() : void {
          this.setState(this.defaultState);
       }
-
+      
       protected function updateTextField() : void {
          if(this.textField == null)
          {
@@ -328,14 +325,14 @@ package scaleform.clik.controls
          }
          this.textField.addEventListener(FocusEvent.FOCUS_IN,this.handleTextFieldFocusIn,false,0,true);
       }
-
+      
       protected function handleTextFieldFocusIn(param1:FocusEvent) : void {
          if(this.editable)
          {
             FocusHandler.getInstance().setFocus(this);
          }
       }
-
+      
       protected function updateText() : void {
          if((_focused) && (this._usingDefaultTextFormat))
          {
@@ -375,7 +372,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function setState(... rest) : void {
          var _loc4_:String = null;
          var _loc5_:String = null;
@@ -403,7 +400,7 @@ package scaleform.clik.controls
             _loc3_++;
          }
       }
-
+      
       protected function updateAfterStateChange() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -433,7 +430,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function handleRollOver(param1:MouseEvent) : void {
          if((focused) || !this.enabled)
          {
@@ -441,7 +438,7 @@ package scaleform.clik.controls
          }
          this.setState("over");
       }
-
+      
       protected function handleRollOut(param1:MouseEvent) : void {
          if((focused) || !this.enabled)
          {
@@ -449,13 +446,13 @@ package scaleform.clik.controls
          }
          this.setState("out","default");
       }
-
+      
       protected function handleMouseDown(param1:MouseEvent) : void {
          if((focused) || !this.enabled)
          {
             return;
          }
-         if(param1  is  MouseEventEx)
+         if(param1 is MouseEventEx)
          {
             FocusManager.setFocus(this.textField,(param1 as MouseEventEx).mouseIdx);
          }
@@ -464,7 +461,7 @@ package scaleform.clik.controls
             stage.focus = this.textField;
          }
       }
-
+      
       protected function handleTextChange(param1:Event) : void {
          if(!_focused)
          {
@@ -473,7 +470,7 @@ package scaleform.clik.controls
          this._text = this._isHtml?this.textField.htmlText:this.textField.text;
          dispatchEvent(new Event(Event.CHANGE));
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_DOWN,this.handleMouseDown,false);
          removeEventListener(MouseEvent.ROLL_OVER,this.handleRollOver,false);
@@ -486,5 +483,4 @@ package scaleform.clik.controls
          super.onDispose();
       }
    }
-
 }

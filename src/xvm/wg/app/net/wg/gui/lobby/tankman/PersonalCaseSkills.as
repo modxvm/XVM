@@ -13,37 +13,36 @@ package net.wg.gui.lobby.tankman
    import flash.events.Event;
    import net.wg.gui.events.PersonalCaseEvent;
    import flash.display.InteractiveObject;
-
-
+   
    public class PersonalCaseSkills extends UIComponent implements IViewStackContent
    {
-          
+      
       public function PersonalCaseSkills() {
          super();
       }
-
+      
       private const UPDATE_DATA_PROVIDER:String = "updateDataProvider";
-
+      
       public var windowDescr:TextField;
-
+      
       public var modifiers:ScrollingListEx;
-
+      
       public var scrollBar:ScrollBar;
-
+      
       public var selectBtn:SoundButtonEx;
-
+      
       public var emptySkillsBG:MovieClip;
-
+      
       public var emptySkillsMessage:TextField;
-
+      
       private var model:Array;
-
+      
       private var hasNewSkill:Boolean = false;
-
+      
       private var selectedSkillName:String = null;
-
+      
       private var lastSelectedIndex:int = -1;
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          if(this.modifiers)
@@ -60,7 +59,7 @@ package net.wg.gui.lobby.tankman
          }
          this.model = null;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.modifiers.addEventListener(ListEvent.INDEX_CHANGE,this.modifiers_listIndexChangeHandler);
@@ -68,7 +67,7 @@ package net.wg.gui.lobby.tankman
          this.modifiers.addEventListener(PersonalCaseSkillsItemRenderer.SKILL_DOUBLE_CLICK,this.modifiers_eventHandler);
          this.emptySkillsMessage.text = MENU.TANKMSNPERSONALCASE_LACKOFSKILLSFORLEARN;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(this.UPDATE_DATA_PROVIDER)) && (this.model))
@@ -95,31 +94,31 @@ package net.wg.gui.lobby.tankman
             }
          }
       }
-
+      
       private function autoSelectIndex() : void {
          if(this.lastSelectedIndex == -1)
          {
             this.lastSelectedIndex = 1;
          }
-         var _loc1_:int = Math.min(this.lastSelectedIndex,this.model.length-1);
+         var _loc1_:int = Math.min(this.lastSelectedIndex,this.model.length - 1);
          if(this.model[_loc1_].isHeader)
          {
             _loc1_--;
          }
          this.updateIndexies(_loc1_);
       }
-
+      
       private function updateIndexies(param1:int) : void {
          this.modifiers.selectedIndex = param1;
          this.modifiers.invalidateSelectedIndex();
          this.selectedSkillName = this.model[param1].title;
          this.updateSelectBtn();
       }
-
+      
       private function updateSelectBtn() : void {
          this.selectBtn.enabled = !(this.selectedSkillName == null);
       }
-
+      
       private function checkForNewSkills() : Boolean {
          if(!this.model)
          {
@@ -137,13 +136,13 @@ package net.wg.gui.lobby.tankman
          }
          return false;
       }
-
+      
       public function update(param1:Object) : void {
          this.model = param1 as Array;
          this.hasNewSkill = false;
          invalidate(this.UPDATE_DATA_PROVIDER);
       }
-
+      
       private function modifiers_itemPressHandler(param1:ListEvent) : void {
          if(!param1.itemData)
          {
@@ -153,7 +152,7 @@ package net.wg.gui.lobby.tankman
          this.lastSelectedIndex = param1.index;
          this.updateSelectBtn();
       }
-
+      
       private function modifiers_listIndexChangeHandler(param1:ListEvent) : void {
          if(!param1.itemData)
          {
@@ -163,15 +162,15 @@ package net.wg.gui.lobby.tankman
          this.lastSelectedIndex = param1.index;
          this.updateSelectBtn();
       }
-
+      
       private function modifiers_eventHandler(param1:Event) : void {
          this.learnSkillDispatchEvent();
       }
-
+      
       private function selectBtn_buttonClickHandler(param1:ButtonEvent) : void {
          this.learnSkillDispatchEvent();
       }
-
+      
       private function learnSkillDispatchEvent() : void {
          if(!this.hasNewSkill)
          {
@@ -187,10 +186,13 @@ package net.wg.gui.lobby.tankman
          this.selectedSkillName = null;
          this.updateSelectBtn();
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return null;
       }
+      
+      public function canShowAutomatically() : Boolean {
+         return true;
+      }
    }
-
 }

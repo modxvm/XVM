@@ -4,11 +4,10 @@ package net.wg.gui.lobby.header
    import flash.display.MovieClip;
    import net.wg.utils.ILocale;
    import flash.events.MouseEvent;
-
-
+   
    public class ServerStats extends UIComponent
    {
-          
+      
       public function ServerStats() {
          super();
          visible = false;
@@ -16,25 +15,25 @@ package net.wg.gui.lobby.header
          this.players_online.addEventListener(MouseEvent.ROLL_OVER,this.showPlayersTooltip);
          this.players_online.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
       }
-
+      
       private static const TYPE_CLUSTER:String = "clusterCCU";
-
+      
       private static const TYPE_FULL:String = "regionCCU/clusterCCU";
-
+      
       public var players_online:MovieClip;
-
+      
       public var tooltipType:String = "regionCCU/clusterCCU";
-
+      
       public var tooltipFullData:String = "";
-
+      
       private var locale:ILocale;
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.players_online.removeEventListener(MouseEvent.ROLL_OVER,this.showPlayersTooltip);
          this.players_online.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
       }
-
+      
       public function setValues(param1:Object) : void {
          var _loc2_:Number = param1.regionCCU != undefined?param1.regionCCU:0;
          var _loc3_:Number = param1.clusterCCU != undefined?param1.clusterCCU:0;
@@ -53,16 +52,16 @@ package net.wg.gui.lobby.header
          this.players_online.pCount.text = _loc4_;
          this.visible = !(_loc4_ == "");
       }
-
+      
       public function hideTooltip(param1:Object) : void {
          App.toolTipMgr.hide();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          visible = App.instance.globalVarsMgr.isShowServerStatsS();
       }
-
+      
       public function showPlayersTooltip(param1:MouseEvent) : void {
          switch(this.tooltipType)
          {
@@ -77,5 +76,4 @@ package net.wg.gui.lobby.header
          }
       }
    }
-
 }

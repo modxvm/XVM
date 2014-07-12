@@ -6,15 +6,14 @@ package net.wg.infrastructure.managers.utils.impl
    import net.wg.infrastructure.interfaces.ITweenPropertiesVO;
    import net.wg.utils.IClassFactory;
    import net.wg.data.constants.Linkages;
-
-
+   
    public class TweenManager extends TweenManagerMeta implements ITweenManager
    {
-          
+      
       public function TweenManager() {
          super();
       }
-
+      
       public function createNewTween(param1:ITweenPropertiesVO) : ITween {
          var _loc2_:Class = null;
          var _loc3_:IClassFactory = App.utils.classFactory;
@@ -31,5 +30,4 @@ package net.wg.infrastructure.managers.utils.impl
          return _loc4_;
       }
    }
-
 }

@@ -7,49 +7,48 @@ package net.wg.gui.components.common.video.advanced
    import flash.events.MouseEvent;
    import flash.utils.getDefinitionByName;
    import flash.events.Event;
-
-
+   
    public class AdvancedVideoPlayer extends SimpleVideoPlayer
    {
-          
+      
       public function AdvancedVideoPlayer() {
          super();
       }
-
+      
       private static const PROGRESS_BAR_INVALID:String = "prBaeInv";
-
+      
       private static const HIDE_DELAY_INVALID:String = "hideDelayInv";
-
+      
       public static const PLAYER_CLOSED:String = "playerClosed";
-
+      
       public var titleBar:VideoPlayerTitleBar;
-
+      
       public var controlBar:VideoPlayerControlBar;
-
+      
       public var messageField:TextField;
-
+      
       private var controlBarController:ControlBarController;
-
+      
       private var keyboardController:KeyboardController;
-
+      
       private var _progressBar:AbstractPlayerProgressBar;
-
+      
       private var _progressBarClassName:String;
-
+      
       private var _progressBarClass:Class;
-
+      
       private var progressBarController:ProgressBarController;
-
+      
       private var _animationSpeed:uint = 0;
-
+      
       private var _hideDelay:uint = 0;
-
+      
       private const ANIM_SHOW_INVALID:String = "animShowInv";
-
+      
       private const ANIM_HIDE_INVALID:String = "animHideInv";
-
+      
       private var animationManager:VideoPlayerAnimationManager;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.titleBar.closeBtn.addEventListener(ButtonEvent.CLICK,this.closeButtonClickHandler,false,0,true);
@@ -60,18 +59,18 @@ package net.wg.gui.components.common.video.advanced
          this.messageField.text = currentSubtitle;
          this.animationManager = new VideoPlayerAnimationManager(this);
       }
-
+      
       private function mouseMoveHandler(param1:MouseEvent) : void {
          if(App.utils.commons.isLeftButton(param1))
          {
             invalidate(this.ANIM_SHOW_INVALID);
          }
       }
-
+      
       public function get progressBarClassName() : String {
          return this._progressBarClassName;
       }
-
+      
       public function set progressBarClassName(param1:String) : void {
          var _loc2_:Class = null;
          if(param1 == "" || param1 == this._progressBarClassName)
@@ -92,7 +91,7 @@ package net.wg.gui.components.common.video.advanced
             this._progressBarClassName = param1;
          }
       }
-
+      
       public function set progressBarClass(param1:Class) : void {
          if(this._progressBarClass != param1)
          {
@@ -100,7 +99,7 @@ package net.wg.gui.components.common.video.advanced
             invalidate(PROGRESS_BAR_INVALID);
          }
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(PROGRESS_BAR_INVALID))
@@ -128,11 +127,11 @@ package net.wg.gui.components.common.video.advanced
             }
          }
       }
-
+      
       private function hideDelayTimerCompleteHandler() : void {
          invalidate(this.ANIM_HIDE_INVALID);
       }
-
+      
       protected function applyProgressBarRefreshing() : void {
          this.disposeProgressBar();
          if(this.progressBarClass)
@@ -142,7 +141,7 @@ package net.wg.gui.components.common.video.advanced
             addChild(this._progressBar);
          }
       }
-
+      
       private function disposeProgressBar() : void {
          if(this._progressBar)
          {
@@ -156,48 +155,48 @@ package net.wg.gui.components.common.video.advanced
             this._progressBar = null;
          }
       }
-
+      
       public function get progressBarClass() : Class {
          return this._progressBarClass;
       }
-
+      
       private function subtitleChangeHandler(param1:Event) : void {
          this.messageField.text = currentSubtitle;
       }
-
+      
       protected function closeButtonClickHandler(param1:ButtonEvent) : void {
          dispatchEvent(new Event(PLAYER_CLOSED));
       }
-
+      
       public function get animationSpeed() : uint {
          return this._animationSpeed;
       }
-
+      
       public function set animationSpeed(param1:uint) : void {
          this._animationSpeed = param1;
          invalidate(this.ANIM_SHOW_INVALID);
       }
-
+      
       public function get hideDelay() : uint {
          return this._hideDelay;
       }
-
+      
       public function set hideDelay(param1:uint) : void {
          this._hideDelay = param1;
          invalidate(this.ANIM_SHOW_INVALID);
       }
-
+      
       private function cancelHideDelay() : void {
          if(App.utils)
          {
             App.utils.scheduler.cancelTask(this.hideDelayTimerCompleteHandler);
          }
       }
-
+      
       public function get progressBar() : AbstractPlayerProgressBar {
          return this._progressBar;
       }
-
+      
       override protected function onDispose() : void {
          this.disposeProgressBar();
          this.cancelHideDelay();
@@ -241,5 +240,4 @@ package net.wg.gui.components.common.video.advanced
          super.onDispose();
       }
    }
-
 }

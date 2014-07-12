@@ -9,37 +9,36 @@ package net.wg.gui.lobby.questsWindow.components
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.events.ResizableBlockEvent;
-
-
+   
    public class CommonConditionsBlock extends AbstractResizableContent implements ISortable
    {
-          
+      
       public function CommonConditionsBlock() {
          super();
       }
-
+      
       public static const TEXT_PADDING:int = 5;
-
+      
       public static const HEADER_PADDING:int = 10;
-
+      
       public static const DEFAULT_WIDTH:int = 250;
-
+      
       private static const VERTICAL_PADDING:int = 3;
-
+      
       public var description:TextField;
-
+      
       public var counter:RedCounter;
-
+      
       public var battlesLeftTF:TextField;
-
+      
       public var progressElementsContainer:MovableBlocksContainer;
-
+      
       private var _sortingFunction:Function = null;
-
+      
       protected var data:ProgressBlockVO = null;
-
+      
       public var statusMC:QuestStatusComponent;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.progressElementsContainer.addEventListener(Event.RESIZE,this.layoutHandler);
@@ -54,7 +53,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.statusMC.validateNow();
          this.statusMC.visible = false;
       }
-
+      
       override protected function onDispose() : void {
          this.progressElementsContainer.removeEventListener(Event.RESIZE,this.layoutHandler);
          this.progressElementsContainer.dispose();
@@ -73,7 +72,7 @@ package net.wg.gui.lobby.questsWindow.components
          this._sortingFunction = null;
          super.onDispose();
       }
-
+      
       override public function setData(param1:Object) : void {
          if(this.data)
          {
@@ -82,12 +81,12 @@ package net.wg.gui.lobby.questsWindow.components
          this.data = new ProgressBlockVO(param1);
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          if((isInvalid(InvalidationType.DATA)) && (this.data))
          {
             this.description.visible = true;
-            this.counter.visible = this.battlesLeftTF.visible = Boolean((this.data.battlesLeft) && (!this.data.showDone));
+            this.counter.visible = this.battlesLeftTF.visible = Boolean(this.data.battlesLeft && !this.data.showDone);
             this.description.width = (this.data.battlesLeft) || (this.data.showDone)?DEFAULT_WIDTH:availableWidth;
             this.description.htmlText = this.data.description;
             this.description.height = this.description.textHeight + TEXT_PADDING;
@@ -100,7 +99,7 @@ package net.wg.gui.lobby.questsWindow.components
          }
          super.draw();
       }
-
+      
       protected function layoutBlocks() : void {
          var _loc1_:Number = this.data.description?Math.round(this.description.height + HEADER_PADDING):0;
          this.progressElementsContainer.y = _loc1_;
@@ -108,7 +107,7 @@ package net.wg.gui.lobby.questsWindow.components
          setSize(this.width,_loc2_);
          isReadyForLayout = true;
       }
-
+      
       private function layoutHandler(param1:Event) : void {
          if(this.progressElementsContainer.isReadyForLayout)
          {
@@ -116,14 +115,13 @@ package net.wg.gui.lobby.questsWindow.components
             dispatchEvent(new ResizableBlockEvent(ResizableBlockEvent.CONTETNT_WAS_CHANGED));
          }
       }
-
+      
       public function get sortingFunction() : Function {
          return this._sortingFunction;
       }
-
+      
       public function set sortingFunction(param1:Function) : void {
          this._sortingFunction = param1;
       }
    }
-
 }

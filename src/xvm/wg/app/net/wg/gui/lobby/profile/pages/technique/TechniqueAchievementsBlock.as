@@ -4,17 +4,16 @@ package net.wg.gui.lobby.profile.pages.technique
    import net.wg.data.constants.Linkages;
    import flash.utils.getDefinitionByName;
    import scaleform.clik.constants.DirectionMode;
-
-
+   
    public class TechniqueAchievementsBlock extends AwardsTileListBlock
    {
-          
+      
       public function TechniqueAchievementsBlock() {
          super();
       }
-
+      
       private static var defaultIR_smallWidth:int = -1;
-
+      
       public static function getBigRendererWidth() : Number {
          if(defaultIR_smallWidth == -1)
          {
@@ -22,13 +21,13 @@ package net.wg.gui.lobby.profile.pages.technique
          }
          return defaultIR_smallWidth;
       }
-
+      
       private static function getDefaultWidth(param1:String) : uint {
          var _loc2_:Class = getClass(param1);
          var _loc3_:Object = new _loc2_();
          return _loc3_.width;
       }
-
+      
       private static function getClass(param1:String) : Class {
          if(App.utils)
          {
@@ -36,9 +35,9 @@ package net.wg.gui.lobby.profile.pages.technique
          }
          return getDefinitionByName(param1) as Class;
       }
-
+      
       private const MIN_ITEMS_COUNT:uint = 5;
-
+      
       override protected function configUI() : void {
          super.configUI();
          tileList.direction = DirectionMode.VERTICAL;
@@ -46,10 +45,9 @@ package net.wg.gui.lobby.profile.pages.technique
          tileList.columnCount = this.MIN_ITEMS_COUNT;
          tileList.itemRenderer = getClass(Linkages.ACHIEVEMENT_COMMON_VEHICLE);
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
       }
    }
-
 }

@@ -6,17 +6,16 @@ package net.wg.gui.lobby.profile.components
    import flash.text.TextFieldAutoSize;
    import flash.events.MouseEvent;
    import net.wg.data.constants.Values;
-
-
+   
    public class ProfileWindowFooter extends UserDateFooter
    {
-          
+      
       public function ProfileWindowFooter() {
          super();
       }
-
+      
       private static const LAYOUT_INVALID:String = "layInv";
-
+      
       private static function cutText(param1:TextField, param2:String) : String {
          var _loc4_:* = 0;
          param1.htmlText = param2;
@@ -36,12 +35,12 @@ package net.wg.gui.lobby.profile.components
          }
          return param1.htmlText;
       }
-
+      
       private static function processCutText(param1:TextField, param2:String) : void {
          var _loc3_:String = null;
          if(param1.getLineLength(1) != -1)
          {
-            _loc3_ = param2.substr(0,param2.length-1);
+            _loc3_ = param2.substr(0,param2.length - 1);
             _loc3_ = _loc3_ + "...";
             param1.htmlText = _loc3_;
             if(param1.getLineLength(1) != -1)
@@ -50,19 +49,19 @@ package net.wg.gui.lobby.profile.components
             }
          }
       }
-
+      
       private var _sidesGap:uint = 10;
-
+      
       public var txtClanInfo:TextField;
-
+      
       public var txtClanJoin:TextField;
-
+      
       public var background:MovieClip;
-
+      
       public var loader:UILoaderAlt;
-
+      
       private var clanText:String = "";
-
+      
       override protected function configUI() : void {
          super.configUI();
          textDates.autoSize = TextFieldAutoSize.LEFT;
@@ -70,7 +69,7 @@ package net.wg.gui.lobby.profile.components
          this.txtClanInfo.addEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler,false,0,true);
          this.txtClanInfo.addEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler,false,0,true);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:* = false;
@@ -93,7 +92,7 @@ package net.wg.gui.lobby.profile.components
             }
          }
       }
-
+      
       override protected function applyDataChanges() : void {
          var _loc2_:String = null;
          super.applyDataChanges();
@@ -116,32 +115,32 @@ package net.wg.gui.lobby.profile.components
          }
          invalidate(LAYOUT_INVALID);
       }
-
+      
       override protected function getSeparator() : String {
          return "\n";
       }
-
+      
       public function get sidesGap() : uint {
          return this._sidesGap;
       }
-
+      
       public function set sidesGap(param1:uint) : void {
          this._sidesGap = param1;
          invalidate(LAYOUT_INVALID);
       }
-
+      
       private function leftTextMouseOverHandler(param1:MouseEvent) : void {
          App.toolTipMgr.show(this.clanText);
       }
-
+      
       private function leftTextMouseOutHandler(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       override public function get height() : Number {
          return 48;
       }
-
+      
       override protected function onDispose() : void {
          this.txtClanInfo.removeEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler);
          this.txtClanInfo.removeEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler);
@@ -152,5 +151,4 @@ package net.wg.gui.lobby.profile.components
          super.onDispose();
       }
    }
-
 }

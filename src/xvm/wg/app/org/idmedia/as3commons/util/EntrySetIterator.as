@@ -2,26 +2,25 @@ package org.idmedia.as3commons.util
 {
    import org.idmedia.as3commons.lang.NoSuchElementException;
    import org.idmedia.as3commons.lang.IllegalStateException;
-
-
+   
    class EntrySetIterator extends Object implements Iterator
    {
-          
-      function EntrySetIterator(param1:EntrySet=null) {
+      
+      function EntrySetIterator(param1:EntrySet = null) {
          super();
          this.s = param1;
       }
-
+      
       private var cursor:int = 0;
-
+      
       private var current:Entry = null;
-
+      
       private var s:EntrySet = null;
-
+      
       public function hasNext() : Boolean {
          return this.cursor < this.s.size();
       }
-
+      
       public function next() : * {
          var _loc1_:int = this.s.size();
          this.current = this.s.get(this.cursor++) as Entry;
@@ -34,7 +33,7 @@ package org.idmedia.as3commons.util
             return this.current;
          }
       }
-
+      
       public function remove() : void {
          if(this.current == null)
          {
@@ -49,5 +48,4 @@ package org.idmedia.as3commons.util
          }
       }
    }
-
 }

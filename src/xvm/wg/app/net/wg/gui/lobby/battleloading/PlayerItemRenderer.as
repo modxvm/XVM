@@ -14,28 +14,27 @@ package net.wg.gui.lobby.battleloading
    import flash.geom.ColorTransform;
    import net.wg.infrastructure.interfaces.IColorScheme;
    import net.wg.infrastructure.managers.IColorSchemeManager;
-
-
+   
    public class PlayerItemRenderer extends ListItemRenderer
    {
-          
+      
       public function PlayerItemRenderer() {
          super();
          this.visible = false;
       }
-
+      
       public var selfBg:Sprite;
-
+      
       public var vehicleField:TextField;
-
+      
       public var iconLoader:UILoaderAlt;
-
+      
       public var squad:SquadIcon;
-
+      
       public var voiceWave:VoiceWave;
-
+      
       public var playerActionMarker:PlayerActionMarker;
-
+      
       override protected function configUI() : void {
          super.configUI();
          App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
@@ -65,34 +64,34 @@ package net.wg.gui.lobby.battleloading
             removeEventListener(InputEvent.INPUT,handleInput);
          }
       }
-
+      
       private function speakHandler(param1:VoiceChatEvent) : void {
          this.onPlayerSpeak(param1.getAccountDBID(),param1.type == VoiceChatEvent.START_SPEAKING);
       }
-
+      
       public function onPlayerSpeak(param1:Number, param2:Boolean) : void {
          if((data) && (param1 == VehicleInfoVO(data).accountDBID) && (this.voiceWave))
          {
             this.voiceWave.setSpeaking(param2);
          }
       }
-
+      
       override protected function onDispose() : void {
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          this.update();
          super.draw();
       }
-
+      
       override public function setData(param1:Object) : void {
          this.data = param1;
          invalidate();
       }
-
+      
       private function update() : void {
          var _loc1_:VehicleInfoVO = null;
          if((data) && (initialized))
@@ -166,53 +165,56 @@ package net.wg.gui.lobby.battleloading
             }
          }
       }
-
+      
       override protected function setState(param1:String) : void {
-          
       }
-
+      
       override protected function updateText() : void {
-          
       }
-
+      
       private function updateState(param1:VehicleInfoVO) : void {
-         var _loc7_:* = NaN;
-         var _loc8_:ColorTransform = null;
+         var _loc10_:* = NaN;
+         var _loc11_:ColorTransform = null;
          var _loc2_:IColorScheme = null;
          var _loc3_:IColorScheme = null;
-         var _loc4_:IColorSchemeManager = App.colorSchemeMgr;
-         var _loc5_:* = true;
-         var _loc6_:Boolean = param1.isAlive();
+         var _loc4_:* = "";
+         var _loc5_:* = "";
+         var _loc6_:IColorSchemeManager = App.colorSchemeMgr;
+         var _loc7_:* = true;
+         var _loc8_:Boolean = param1.isAlive();
+         var _loc9_:* = false;
          if(!param1.isNotAvailable())
          {
-            _loc5_ = (_loc6_) && (param1.isReady());
+            _loc7_ = (_loc8_) && (param1.isReady());
          }
          if(param1.isCurrentPlayer)
          {
-            _loc2_ = _loc4_.getScheme(_loc5_?"selected":"selected_dead");
-            _loc3_ = _loc4_.getScheme(_loc6_?"selected":"selected_dead");
+            _loc4_ = _loc7_?"selected":"selected_dead";
+         }
+         else if(param1.isCurrentSquad)
+         {
+            _loc4_ = _loc7_?"squad":"squad_dead";
+         }
+         else if(param1.isTeamKiller())
+         {
+            _loc4_ = _loc7_?"teamkiller":"teamkiller_dead";
          }
          else
          {
-            if(param1.isCurrentSquad)
+            _loc4_ = _loc7_?"normal":"normal_dead";
+         }
+         
+         
+         _loc4_ = _loc4_ + (!param1.isCurrentPlayer && (!param1.isAlive() || !param1.isReady())?"_offline":"");
+         _loc5_ = _loc4_;
+         if(param1.isTeamKiller())
+         {
+            if(param1.isAlive())
             {
-               _loc2_ = _loc4_.getScheme(_loc5_?"squad":"squad_dead");
-               _loc3_ = _loc4_.getScheme(_loc6_?"squad":"squad_dead");
-            }
-            else
-            {
-               if(param1.isTeamKiller())
-               {
-                  _loc2_ = _loc4_.getScheme(_loc5_?"teamkiller":"teamkiller_dead");
-                  _loc3_ = _loc4_.getScheme(_loc6_?"teamkiller":"teamkiller_dead");
-               }
-               else
-               {
-                  _loc2_ = _loc4_.getScheme(_loc5_?"normal":"normal_dead");
-                  _loc3_ = _loc4_.getScheme(_loc6_?"normal":"normal_dead");
-               }
             }
          }
+         _loc2_ = _loc6_.getScheme(_loc4_);
+         _loc3_ = _loc6_.getScheme(_loc5_);
          if(_loc2_)
          {
             textField.textColor = _loc2_.rgb;
@@ -221,9 +223,9 @@ package net.wg.gui.lobby.battleloading
          else
          {
             DebugUtils.LOG_ERROR("Color of text not found",param1);
-            _loc7_ = _loc5_?16777215:5130300;
-            textField.textColor = _loc7_;
-            this.vehicleField.textColor = _loc7_;
+            _loc10_ = _loc7_?16777215:5130300;
+            textField.textColor = _loc10_;
+            this.vehicleField.textColor = _loc10_;
          }
          if(_loc3_)
          {
@@ -232,18 +234,17 @@ package net.wg.gui.lobby.battleloading
          else
          {
             DebugUtils.LOG_ERROR("Color of icon not found",param1);
-            _loc8_ = _loc5_?new ColorTransform(1,1,1,1,0,0,0,0):new ColorTransform(0.8,0.8,0.8,0.5,0,0,0,0);
-            this.iconLoader.transform.colorTransform = _loc8_;
+            _loc11_ = _loc7_?new ColorTransform(1,1,1,1,0,0,0,0):new ColorTransform(0.8,0.8,0.8,0.5,0,0,0,0);
+            this.iconLoader.transform.colorTransform = _loc11_;
          }
       }
-
+      
       override protected function updateAfterStateChange() : void {
          invalidate();
       }
-
+      
       override public function toString() : String {
          return "[WG PlayerItemRenderer " + name;
       }
    }
-
 }

@@ -1,15 +1,14 @@
 package net.wg.gui.components.controls
 {
    import flash.events.Event;
-
-
+   
    public class ListItemRendererWithFocusOnDis extends SoundListItemRenderer
    {
-          
+      
       public function ListItemRendererWithFocusOnDis() {
          super();
       }
-
+      
       override protected function changeFocus() : void {
          var _loc1_:String = null;
          if(_focusIndicator == null)
@@ -46,7 +45,7 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       override public function set selected(param1:Boolean) : void {
          var _loc2_:* = false;
          if(_selected == param1)
@@ -60,17 +59,15 @@ package net.wg.gui.components.controls
             {
                setState("toggle");
             }
+            else if((_pressedByKeyboard) && !(_focusIndicator == null))
+            {
+               setState("kb_selecting");
+            }
             else
             {
-               if((_pressedByKeyboard) && !(_focusIndicator == null))
-               {
-                  setState("kb_selecting");
-               }
-               else
-               {
-                  setState("selecting");
-               }
+               setState("selecting");
             }
+            
          }
          else
          {
@@ -89,5 +86,4 @@ package net.wg.gui.components.controls
          dispatchEvent(new Event(Event.SELECT));
       }
    }
-
 }

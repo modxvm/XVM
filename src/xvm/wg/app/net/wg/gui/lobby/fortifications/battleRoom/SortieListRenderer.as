@@ -9,27 +9,26 @@ package net.wg.gui.lobby.fortifications.battleRoom
    import net.wg.infrastructure.interfaces.IUserProps;
    import flash.events.MouseEvent;
    import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
-
-
+   
    public class SortieListRenderer extends TableRenderer implements IManualSearchRenderer
    {
-          
+      
       public function SortieListRenderer() {
          super();
          UIID = 33;
          preventAutosizing = true;
       }
-
+      
       public var commander:TextField = null;
-
+      
       public var divisionName:TextField = null;
-
+      
       public var commandSize:TextField = null;
-
+      
       public var commandMaxSize:TextField = null;
-
+      
       private var _creatorName:String = null;
-
+      
       override public function setData(param1:Object) : void {
          var _loc2_:Array = null;
          this.data = param1;
@@ -51,7 +50,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
          }
          invalidateData();
       }
-
+      
       public function update(param1:Object) : void {
          this.data = param1;
          if(this.data)
@@ -59,13 +58,13 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.populateUI(SortieRenderVO(param1));
          }
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          mouseEnabled = true;
          mouseChildren = true;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.commander.mouseEnabled = false;
@@ -73,7 +72,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
          this.commandSize.mouseEnabled = false;
          this.commandMaxSize.mouseEnabled = false;
       }
-
+      
       override protected function onDispose() : void {
          this.commander = null;
          this.divisionName = null;
@@ -81,7 +80,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
          this.commandMaxSize = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:SortieRenderVO = null;
          mouseEnabled = true;
@@ -101,13 +100,13 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
          }
       }
-
+      
       protected function populateUI(param1:SortieRenderVO) : void {
          var _loc2_:String = null;
          var _loc3_:IUserProps = null;
          if(param1.creatorName)
          {
-            _loc3_ = App.utils.commons.getUserProps(param1.creatorName,"","",0);
+            _loc3_ = App.utils.commons.getUserProps(param1.creatorName,"","",param1.igrType);
             _loc3_.rgb = param1.color;
             App.utils.commons.formatPlayerName(this.commander,_loc3_);
             _loc2_ = this.commander.htmlText;
@@ -133,12 +132,11 @@ package net.wg.gui.lobby.fortifications.battleRoom
          }
          this.divisionName.text = param1.divisionName;
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          super.handleMouseRelease(param1);
          var _loc2_:uint = 0;
          App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,_loc2_);
       }
    }
-
 }

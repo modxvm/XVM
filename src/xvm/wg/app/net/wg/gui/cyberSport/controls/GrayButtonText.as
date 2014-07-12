@@ -4,29 +4,28 @@ package net.wg.gui.cyberSport.controls
    import flash.text.TextFormat;
    import scaleform.clik.constants.InvalidationType;
    import flash.filters.DropShadowFilter;
-
-
+   
    public class GrayButtonText extends SoundButtonEx
    {
-          
+      
       public function GrayButtonText() {
          super();
       }
-
+      
       private var _applyTextFilter:Boolean = false;
-
+      
       public function get applyTextFilter() : Boolean {
          return this._applyTextFilter;
       }
-
+      
       public function set applyTextFilter(param1:Boolean) : void {
          this._applyTextFilter = param1;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:TextFormat = null;
          super.draw();
@@ -38,12 +37,12 @@ package net.wg.gui.cyberSport.controls
             textField.filters = [this.getDropShadowFilter()];
          }
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          this.alpha = param1?1:0.5;
       }
-
+      
       private function getDropShadowFilter() : DropShadowFilter {
          var _loc1_:DropShadowFilter = new DropShadowFilter();
          _loc1_.color = 14787651;
@@ -59,5 +58,4 @@ package net.wg.gui.cyberSport.controls
          return _loc1_;
       }
    }
-
 }

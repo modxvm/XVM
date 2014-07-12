@@ -4,35 +4,33 @@ package net.wg.gui.lobby.techtree.helpers
    import net.wg.gui.lobby.techtree.controls.ExperienceInformation;
    import net.wg.gui.lobby.techtree.interfaces.IResearchContainer;
    import net.wg.gui.lobby.techtree.interfaces.IRenderer;
-   import __AS3__.vec.Vector;
    import flash.geom.Point;
    import net.wg.gui.lobby.techtree.constants.ColorIndex;
    import flash.display.DisplayObject;
    import net.wg.gui.lobby.techtree.TechTreeEvent;
    import net.wg.gui.lobby.techtree.data.state.NodeStateCollection;
-
-
+   
    public class ResearchGraphics extends LinesGraphics
    {
-          
+      
       public function ResearchGraphics() {
          super();
       }
-
+      
       private static const OUTGOING_LINES_LITERAL:String = "lines";
-
+      
       private static const TOP_LINES_LITERAL:String = "topLines";
-
+      
       public var xRatio:Number = 0;
-
+      
       public var rootRenderer:ResearchRoot;
-
+      
       public var xpInfo:ExperienceInformation;
-
+      
       public function get containerEx() : IResearchContainer {
          return _container as IResearchContainer;
       }
-
+      
       public function drawOutgoingLines(param1:IRenderer, param2:Vector.<IRenderer>, param3:Boolean, param4:Boolean) : void {
          var _loc12_:Point = null;
          var _loc13_:IRenderer = null;
@@ -60,20 +58,16 @@ package net.wg.gui.lobby.techtree.helpers
                {
                   _loc8_.push(_loc11_);
                }
-               else
+               else if(_loc6_.y < _loc12_.y)
                {
-                  if(_loc6_.y < _loc12_.y)
-                  {
-                     _loc9_.push(_loc11_);
-                  }
-                  else
-                  {
-                     if(_loc6_.y == _loc12_.y)
-                     {
-                        _loc10_ = _loc11_;
-                     }
-                  }
+                  _loc9_.push(_loc11_);
                }
+               else if(_loc6_.y == _loc12_.y)
+               {
+                  _loc10_ = _loc11_;
+               }
+               
+               
             }
             _loc14_++;
          }
@@ -114,7 +108,7 @@ package net.wg.gui.lobby.techtree.helpers
             drawLine(param1,colorIdxs[Math.min(_loc16_,_loc17_)],_loc6_,_loc7_,OUTGOING_LINES_LITERAL);
          }
       }
-
+      
       public function drawTopLevelLines(param1:IRenderer, param2:Vector.<IRenderer>, param3:Boolean) : void {
          var _loc5_:Point = null;
          var _loc8_:IRenderer = null;
@@ -148,21 +142,17 @@ package net.wg.gui.lobby.techtree.helpers
                {
                   _loc9_.push(_loc12_);
                }
-               else
+               else if(_loc5_.y > _loc6_.y)
                {
-                  if(_loc5_.y > _loc6_.y)
-                  {
-                     _loc10_.push(_loc12_);
-                  }
-                  else
-                  {
-                     if(_loc5_.y == _loc6_.y)
-                     {
-                        _loc12_.drawArrow = true;
-                        _loc11_ = _loc12_;
-                     }
-                  }
+                  _loc10_.push(_loc12_);
                }
+               else if(_loc5_.y == _loc6_.y)
+               {
+                  _loc12_.drawArrow = true;
+                  _loc11_ = _loc12_;
+               }
+               
+               
             }
             _loc13_++;
          }
@@ -198,7 +188,7 @@ package net.wg.gui.lobby.techtree.helpers
             }
          }
       }
-
+      
       override public function setup() : void {
          super.setup();
          if(this.xpInfo != null)
@@ -206,7 +196,7 @@ package net.wg.gui.lobby.techtree.helpers
             this.xpInfo.setOwner(this.rootRenderer);
          }
       }
-
+      
       override public function clearUp() : void {
          var _loc3_:DisplayObject = null;
          super.clearUp();
@@ -225,7 +215,7 @@ package net.wg.gui.lobby.techtree.helpers
             _loc3_ = getChildAt(_loc1_);
             if(!(_loc3_ == this.rootRenderer) && !(_loc3_ == this.xpInfo))
             {
-               if(_loc3_  is  IRenderer)
+               if(_loc3_ is IRenderer)
                {
                   this.clearUpRenderer(IRenderer(_loc3_));
                }
@@ -237,12 +227,12 @@ package net.wg.gui.lobby.techtree.helpers
             }
          }
       }
-
+      
       override public function clearUpRenderer(param1:IRenderer) : void {
          param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleTopLevelStatesChanged);
          param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleNodesStatesChanged);
       }
-
+      
       public function removeReferences() : void {
          container = null;
          if(this.xpInfo != null)
@@ -250,7 +240,7 @@ package net.wg.gui.lobby.techtree.helpers
             this.xpInfo.dispose();
          }
       }
-
+      
       private function drawUpLines(param1:Array, param2:Point, param3:Boolean, param4:Boolean, param5:Boolean) : Number {
          var _loc7_:IRenderer = null;
          var _loc8_:IRenderer = null;
@@ -273,7 +263,7 @@ package net.wg.gui.lobby.techtree.helpers
                _loc9_ = Math.min(_loc9_,_loc10_);
             }
             _loc11_ = new Point(param2.x,_loc13_.point.y);
-            _loc12_ = new Point(param2.x,(_loc14_ == _loc6_-1?param2.y:param1[_loc14_ + 1].point.y) - lineThickness);
+            _loc12_ = new Point(param2.x,(_loc14_ == _loc6_ - 1?param2.y:param1[_loc14_ + 1].point.y) - lineThickness);
             drawLine(_loc7_,colorIdxs[_loc10_],_loc11_,_loc13_.point,OUTGOING_LINES_LITERAL);
             if(_loc13_.drawArrow)
             {
@@ -295,7 +285,7 @@ package net.wg.gui.lobby.techtree.helpers
          }
          return _loc9_;
       }
-
+      
       private function drawDownLines(param1:Array, param2:Point, param3:Boolean, param4:Boolean, param5:Boolean) : Number {
          var _loc7_:IRenderer = null;
          var _loc8_:IRenderer = null;
@@ -318,7 +308,7 @@ package net.wg.gui.lobby.techtree.helpers
                _loc9_ = Math.min(_loc9_,_loc10_);
             }
             _loc11_ = new Point(param2.x,_loc13_.point.y);
-            _loc12_ = new Point(param2.x,(_loc14_ == _loc6_-1?param2.y:param1[_loc14_ + 1].point.y) + lineThickness);
+            _loc12_ = new Point(param2.x,(_loc14_ == _loc6_ - 1?param2.y:param1[_loc14_ + 1].point.y) + lineThickness);
             drawLine(_loc7_,colorIdxs[_loc9_],_loc11_,_loc12_,OUTGOING_LINES_LITERAL);
             drawLine(_loc7_,colorIdxs[_loc10_],_loc11_,_loc13_.point,OUTGOING_LINES_LITERAL);
             if(_loc13_.drawArrow)
@@ -340,22 +330,22 @@ package net.wg.gui.lobby.techtree.helpers
          }
          return _loc9_;
       }
-
+      
       private function addNodeStateChangedListener(param1:IRenderer) : void {
          param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleNodesStatesChanged,false,0,true);
       }
-
+      
       private function addTopStateChangedListener(param1:IRenderer) : void {
          param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleTopLevelStatesChanged,false,0,true);
       }
-
+      
       private function handleTopLevelStatesChanged(param1:TechTreeEvent) : void {
          if(NodeStateCollection.isRedrawResearchLines(param1.primary))
          {
             this.drawTopLevelLines(this.rootRenderer,this.containerEx.getTopLevel(),true);
          }
       }
-
+      
       private function handleNodesStatesChanged(param1:TechTreeEvent) : void {
          var _loc2_:IRenderer = null;
          var _loc3_:* = false;
@@ -381,31 +371,30 @@ package net.wg.gui.lobby.techtree.helpers
          }
       }
    }
+}
+import flash.geom.Point;
+import net.wg.gui.lobby.techtree.interfaces.IRenderer;
 
-}   import flash.geom.Point;
-   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
-
-
-   class ResearchLineInfo extends Object
-   {
-          
-      function ResearchLineInfo(param1:IRenderer, param2:IRenderer, param3:Point, param4:Boolean) {
-         super();
-         this.parent = param1;
-         this.child = param2;
-         this.point = param3;
-         this.drawArrow = param4;
-      }
-
-      public var point:Point;
-
-      public var parent:IRenderer;
-
-      public var child:IRenderer;
-
-      public var drawArrow:Boolean;
-
-      public function get y() : Number {
-         return this.point.y;
-      }
+class ResearchLineInfo extends Object
+{
+   
+   function ResearchLineInfo(param1:IRenderer, param2:IRenderer, param3:Point, param4:Boolean) {
+      super();
+      this.parent = param1;
+      this.child = param2;
+      this.point = param3;
+      this.drawArrow = param4;
    }
+   
+   public var point:Point;
+   
+   public var parent:IRenderer;
+   
+   public var child:IRenderer;
+   
+   public var drawArrow:Boolean;
+   
+   public function get y() : Number {
+      return this.point.y;
+   }
+}

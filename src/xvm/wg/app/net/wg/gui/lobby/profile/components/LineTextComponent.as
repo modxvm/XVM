@@ -5,29 +5,28 @@ package net.wg.gui.lobby.profile.components
    import flash.text.TextField;
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class LineTextComponent extends UIComponent
    {
-          
+      
       public function LineTextComponent() {
          super();
       }
-
+      
       private static const TEXT_INV:String = "textInv";
-
+      
       public var leftLine:MovieClip;
-
+      
       public var rightLine:MovieClip;
-
+      
       public var textField:TextField;
-
+      
       private var _text:String = "";
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          super.draw();
@@ -45,16 +44,16 @@ package net.wg.gui.lobby.profile.components
             this.rightLine.x = _width - _loc1_;
          }
       }
-
+      
       public function get text() : String {
          return this._text;
       }
-
+      
       public function set text(param1:String) : void {
          this._text = param1;
          invalidate(TEXT_INV);
       }
-
+      
       override protected function onDispose() : void {
          this.leftLine = null;
          this.rightLine = null;
@@ -62,5 +61,4 @@ package net.wg.gui.lobby.profile.components
          super.onDispose();
       }
    }
-
 }

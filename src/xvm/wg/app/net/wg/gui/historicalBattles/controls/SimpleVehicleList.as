@@ -7,15 +7,14 @@ package net.wg.gui.historicalBattles.controls
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.WrappingMode;
    import scaleform.clik.constants.NavigationCode;
-
-
+   
    public class SimpleVehicleList extends ScrollingListEx
    {
-          
+      
       public function SimpleVehicleList() {
          super();
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -39,36 +38,32 @@ package net.wg.gui.historicalBattles.controls
                {
                   if(_loc4_)
                   {
-                     selectedIndex = this.getFirstSelectablePosition(scrollPosition + _totalRenderers-1,false);
+                     selectedIndex = this.getFirstSelectablePosition(scrollPosition + _totalRenderers - 1,false);
                   }
                }
-               else
+               else if(_selectedIndex > this.getFirstSelectablePosition(0,true))
                {
-                  if(_selectedIndex > this.getFirstSelectablePosition(0,true))
+                  if(_loc4_)
+                  {
+                     selectedIndex = this.getFirstSelectablePosition(selectedIndex - 1,false);
+                  }
+               }
+               else if(wrapping != WrappingMode.STICK)
+               {
+                  if(wrapping == WrappingMode.WRAP)
                   {
                      if(_loc4_)
                      {
-                        selectedIndex = this.getFirstSelectablePosition(selectedIndex-1,false);
+                        selectedIndex = this.getFirstSelectablePosition(_dataProvider.length - 1,false);
                      }
                   }
                   else
                   {
-                     if(wrapping != WrappingMode.STICK)
-                     {
-                        if(wrapping == WrappingMode.WRAP)
-                        {
-                           if(_loc4_)
-                           {
-                              selectedIndex = this.getFirstSelectablePosition(_dataProvider.length-1,false);
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.DOWN:
                if(_selectedIndex == -1)
@@ -78,38 +73,34 @@ package net.wg.gui.historicalBattles.controls
                      selectedIndex = this.getFirstSelectablePosition(_scrollPosition,true);
                   }
                }
-               else
+               else if(_selectedIndex < this.getFirstSelectablePosition(_dataProvider.length - 1,false))
                {
-                  if(_selectedIndex < this.getFirstSelectablePosition(_dataProvider.length-1,false))
+                  if(_loc4_)
+                  {
+                     selectedIndex = this.getFirstSelectablePosition(selectedIndex + 1,true);
+                  }
+               }
+               else if(wrapping != WrappingMode.STICK)
+               {
+                  if(wrapping == WrappingMode.WRAP)
                   {
                      if(_loc4_)
                      {
-                        selectedIndex = this.getFirstSelectablePosition(selectedIndex + 1,true);
+                        selectedIndex = this.getFirstSelectablePosition(0,true);
                      }
                   }
                   else
                   {
-                     if(wrapping != WrappingMode.STICK)
-                     {
-                        if(wrapping == WrappingMode.WRAP)
-                        {
-                           if(_loc4_)
-                           {
-                              selectedIndex = this.getFirstSelectablePosition(0,true);
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.END:
                if(!_loc4_)
                {
-                  selectedIndex = this.getFirstSelectablePosition(_dataProvider.length-1,false);
+                  selectedIndex = this.getFirstSelectablePosition(_dataProvider.length - 1,false);
                }
                break;
             case NavigationCode.HOME:
@@ -127,7 +118,7 @@ package net.wg.gui.historicalBattles.controls
             case NavigationCode.PAGE_DOWN:
                if(_loc4_)
                {
-                  selectedIndex = this.getFirstSelectablePosition(Math.min(_dataProvider.length-1,_selectedIndex + _totalRenderers),false);
+                  selectedIndex = this.getFirstSelectablePosition(Math.min(_dataProvider.length - 1,_selectedIndex + _totalRenderers),false);
                }
                break;
             default:
@@ -135,8 +126,8 @@ package net.wg.gui.historicalBattles.controls
          }
          param1.handled = true;
       }
-
-      public function getFirstSelectablePosition(param1:int, param2:Boolean=true) : int {
+      
+      public function getFirstSelectablePosition(param1:int, param2:Boolean = true) : int {
          var _loc3_:int = selectedIndex;
          var _loc4_:int = param1;
          var _loc5_:int = _dataProvider?_dataProvider.length:0;
@@ -152,7 +143,7 @@ package net.wg.gui.historicalBattles.controls
          }
          return _loc3_;
       }
-
+      
       protected function checkIsItemDisabled(param1:Object) : Boolean {
          var _loc2_:* = false;
          if(!param1 || (param1.hasOwnProperty("enabled")) && !param1["enabled"])
@@ -162,5 +153,4 @@ package net.wg.gui.historicalBattles.controls
          return _loc2_;
       }
    }
-
 }

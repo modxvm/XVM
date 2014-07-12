@@ -2,30 +2,29 @@ package net.wg.gui.lobby.retrainCrewWindow
 {
    import net.wg.gui.components.controls.TankmanTrainingSmallButton;
    import flash.text.TextFormat;
-
-
+   
    public class TankmanCrewRetrainingSmallButton extends TankmanTrainingSmallButton
    {
-          
+      
       public function TankmanCrewRetrainingSmallButton() {
          super();
       }
-
+      
       private static const SMALL_TEXT_VAL:uint = 24;
-
+      
       private static const BIG_TEXT_VAL:uint = 30;
-
+      
       private var _crewInfo:Array;
-
+      
       private var _currentVehicleType:String;
-
+      
       private var _currentVehicleIntCD:int;
-
+      
       override public function set level(param1:Number) : void {
          _level = param1;
          this.updateLevelLabel();
       }
-
+      
       override protected function setEnabled() : void {
          var _loc1_:* = false;
          var _loc2_:RetrainTankmanVO = null;
@@ -49,7 +48,7 @@ package net.wg.gui.lobby.retrainCrewWindow
          }
          enabled = _loc1_;
       }
-
+      
       private function updateLevelLabel() : void {
          var _loc3_:* = 0;
          var _loc4_:RetrainTankmanVO = null;
@@ -81,18 +80,17 @@ package net.wg.gui.lobby.retrainCrewWindow
          levelLabel.setTextFormat(_loc8_);
          levelLabel.text = _loc7_ + "%";
       }
-
+      
       public function set currentVehicleType(param1:String) : void {
          this._currentVehicleType = param1;
       }
-
+      
       public function set crewInfo(param1:Array) : void {
          this._crewInfo = param1;
       }
-
+      
       public function set currentVehicleIntCD(param1:int) : void {
          this._currentVehicleIntCD = param1;
       }
    }
-
 }

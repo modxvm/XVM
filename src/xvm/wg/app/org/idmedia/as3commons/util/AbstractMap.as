@@ -1,19 +1,18 @@
 package org.idmedia.as3commons.util
 {
    import org.idmedia.as3commons.lang.UnsupportedOperationException;
-
-
+   
    public class AbstractMap extends Object implements Map
    {
-          
+      
       public function AbstractMap() {
          super();
       }
-
+      
       public function put(param1:*, param2:*) : * {
          throw new UnsupportedOperationException();
       }
-
+      
       public function get(param1:*) : * {
          var _loc4_:Entry = null;
          if(param1 === undefined)
@@ -32,10 +31,10 @@ package org.idmedia.as3commons.util
          }
          return null;
       }
-
+      
       public function containsKey(param1:*) : Boolean {
          var _loc4_:Entry = null;
-         var _loc2_:* = (param1) || (null);
+         var _loc2_:* = param1 || null;
          var _loc3_:Iterator = this.entrySet().iterator();
          while(_loc3_.hasNext())
          {
@@ -47,10 +46,10 @@ package org.idmedia.as3commons.util
          }
          return false;
       }
-
+      
       public function containsValue(param1:*) : Boolean {
          var _loc4_:Entry = null;
-         var _loc2_:* = (param1) || (null);
+         var _loc2_:* = param1 || null;
          var _loc3_:Iterator = this.entrySet().iterator();
          while(_loc3_.hasNext())
          {
@@ -62,10 +61,10 @@ package org.idmedia.as3commons.util
          }
          return false;
       }
-
+      
       public function remove(param1:*) : * {
          var _loc6_:Entry = null;
-         var _loc2_:* = (param1) || (null);
+         var _loc2_:* = param1 || null;
          var _loc3_:Iterator = this.entrySet().iterator();
          var _loc4_:Entry = null;
          while(_loc4_ == null && (_loc3_.hasNext()))
@@ -84,17 +83,17 @@ package org.idmedia.as3commons.util
          }
          return _loc5_;
       }
-
+      
       public function clear() : void {
          this.entrySet().clear();
       }
-
+      
       public function size() : int {
          return this.entrySet().size();
       }
-
+      
       private var v:Collection = null;
-
+      
       public function values() : Collection {
          if(this.v == null)
          {
@@ -102,9 +101,9 @@ package org.idmedia.as3commons.util
          }
          return this.v;
       }
-
+      
       private var k:Set = null;
-
+      
       public function keySet() : Set {
          if(this.k == null)
          {
@@ -112,15 +111,15 @@ package org.idmedia.as3commons.util
          }
          return this.k;
       }
-
+      
       public function entrySet() : Set {
          throw new UnsupportedOperationException();
       }
-
+      
       public function isEmpty() : Boolean {
          return this.size() == 0;
       }
-
+      
       public function putAll(param1:Map) : void {
          var _loc3_:Entry = null;
          var _loc2_:Iterator = param1.entrySet().iterator();
@@ -130,100 +129,96 @@ package org.idmedia.as3commons.util
             this.put(_loc3_.getKey(),_loc3_.getValue());
          }
       }
-
+      
       public function equals(param1:*) : Boolean {
          return param1 === this;
       }
    }
+}
+import org.idmedia.as3commons.util.AbstractSet;
+import org.idmedia.as3commons.util.Map;
+import org.idmedia.as3commons.util.Iterator;
 
-}   import org.idmedia.as3commons.util.AbstractSet;
-   import org.idmedia.as3commons.util.Map;
-   import org.idmedia.as3commons.util.Iterator;
-
-
-   class AbstractEntrySet extends AbstractSet
-   {
-          
-      function AbstractEntrySet(param1:Map) {
-         super();
-         this.m = param1;
-      }
-
-      private var m:Map = null;
-
-      override public function iterator() : Iterator {
-         return new KeyIterator(this.m.entrySet().iterator());
-      }
-
-      override public function size() : int {
-         return this.m.size();
-      }
-
-      override public function contains(param1:*) : Boolean {
-         return this.m.containsKey(param1);
-      }
+class AbstractEntrySet extends AbstractSet
+{
+   
+   function AbstractEntrySet(param1:Map) {
+      super();
+      this.m = param1;
    }
-   import org.idmedia.as3commons.util.AbstractCollection;
-   import org.idmedia.as3commons.util.Map;
-   import org.idmedia.as3commons.util.Iterator;
-
-
-   final class CollectionImpl extends AbstractCollection
-   {
-          
-      function CollectionImpl(param1:Map) {
-         super();
-         this.map = param1;
-      }
-
-      private var map:Map;
-
-      override public function iterator() : Iterator {
-         return new ValueIterator(this.map.entrySet().iterator());
-      }
-
-      override public function size() : int {
-         return this.map.size();
-      }
+   
+   private var m:Map = null;
+   
+   override public function iterator() : Iterator {
+      return new KeyIterator(this.m.entrySet().iterator());
    }
-   import org.idmedia.as3commons.util.Iterator;
-   import org.idmedia.as3commons.util.Entry;
-
-
-   class KeyIterator extends Object implements Iterator
-   {
-          
-      function KeyIterator(param1:Iterator) {
-         super();
-         this.iter = param1;
-      }
-
-      protected var iter:Iterator;
-
-      public function hasNext() : Boolean {
-         return this.iter.hasNext();
-      }
-
-      public function next() : * {
-         return Entry(this.iter.next()).getKey();
-      }
-
-      public function remove() : void {
-         this.iter.remove();
-      }
+   
+   override public function size() : int {
+      return this.m.size();
    }
-   import org.idmedia.as3commons.util.Entry;
-   import org.idmedia.as3commons.util.Iterator;
-
-
-   final class ValueIterator extends KeyIterator
-   {
-          
-      function ValueIterator(param1:Iterator) {
-         super(param1);
-      }
-
-      override public function next() : * {
-         return Entry(iter.next()).getValue();
-      }
+   
+   override public function contains(param1:*) : Boolean {
+      return this.m.containsKey(param1);
    }
+}
+import org.idmedia.as3commons.util.AbstractCollection;
+import org.idmedia.as3commons.util.Map;
+import org.idmedia.as3commons.util.Iterator;
+
+final class CollectionImpl extends AbstractCollection
+{
+   
+   function CollectionImpl(param1:Map) {
+      super();
+      this.map = param1;
+   }
+   
+   private var map:Map;
+   
+   override public function iterator() : Iterator {
+      return new ValueIterator(this.map.entrySet().iterator());
+   }
+   
+   override public function size() : int {
+      return this.map.size();
+   }
+}
+import org.idmedia.as3commons.util.Iterator;
+import org.idmedia.as3commons.util.Entry;
+
+class KeyIterator extends Object implements Iterator
+{
+   
+   function KeyIterator(param1:Iterator) {
+      super();
+      this.iter = param1;
+   }
+   
+   protected var iter:Iterator;
+   
+   public function hasNext() : Boolean {
+      return this.iter.hasNext();
+   }
+   
+   public function next() : * {
+      return Entry(this.iter.next()).getKey();
+   }
+   
+   public function remove() : void {
+      this.iter.remove();
+   }
+}
+import org.idmedia.as3commons.util.Entry;
+import org.idmedia.as3commons.util.Iterator;
+
+final class ValueIterator extends KeyIterator
+{
+   
+   function ValueIterator(param1:Iterator) {
+      super(param1);
+   }
+   
+   override public function next() : * {
+      return Entry(iter.next()).getValue();
+   }
+}

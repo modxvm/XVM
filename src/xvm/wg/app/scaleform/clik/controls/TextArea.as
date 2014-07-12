@@ -16,48 +16,46 @@ package scaleform.clik.controls
    import flash.events.MouseEvent;
    import scaleform.clik.utils.ConstrainedElement;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-
-
+   
    public class TextArea extends TextInput
    {
-          
+      
       public function TextArea() {
-         this._thumbOffset =
+         this._thumbOffset = 
             {
                "top":0,
                "bottom":0
-            }
-         ;
+            };
          super();
       }
-
+      
       protected var _scrollPolicy:String = "auto";
-
+      
       protected var _position:int = 1;
-
+      
       protected var _maxScroll:Number = 1;
-
+      
       protected var _resetScrollPosition:Boolean = false;
-
+      
       protected var _scrollBarValue:Object;
-
+      
       protected var _autoScrollBar:Boolean = false;
-
+      
       protected var _thumbOffset:Object;
-
+      
       protected var _minThumbSize:uint = 1;
-
+      
       protected var _scrollBar:IScrollBar;
-
+      
       public var container:Sprite;
-
+      
       override protected function preInitialize() : void {
          if(!constraintsDisabled)
          {
             constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
          }
       }
-
+      
       override protected function initialize() : void {
          super.initialize();
          if(this.container == null)
@@ -66,38 +64,38 @@ package scaleform.clik.controls
             addChild(this.container);
          }
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          this.updateScrollBar();
       }
-
+      
       public function get position() : int {
          return this._position;
       }
-
+      
       public function set position(param1:int) : void {
          this._position = param1;
          textField.scrollV = this._position;
       }
-
+      
       public function get scrollBar() : Object {
          return this._scrollBar;
       }
-
+      
       public function set scrollBar(param1:Object) : void {
          this._scrollBarValue = param1;
          invalidate(InvalidationType.SCROLL_BAR);
       }
-
+      
       public function get minThumbSize() : uint {
          return this._minThumbSize;
       }
-
+      
       public function set minThumbSize(param1:uint) : void {
          this._minThumbSize = param1;
          if(!this._autoScrollBar)
@@ -107,11 +105,11 @@ package scaleform.clik.controls
          var _loc2_:ScrollIndicator = this._scrollBar as ScrollIndicator;
          _loc2_.minThumbSize = param1;
       }
-
+      
       public function get thumbOffset() : Object {
          return this._thumbOffset;
       }
-
+      
       public function set thumbOffset(param1:Object) : void {
          this._thumbOffset = param1;
          if(!this._autoScrollBar)
@@ -122,19 +120,19 @@ package scaleform.clik.controls
          _loc2_.offsetTop = this._thumbOffset.top;
          _loc2_.offsetBottom = this._thumbOffset.bottom;
       }
-
+      
       public function get availableWidth() : Number {
          return Math.round(_width) - ((this._autoScrollBar) && ((this._scrollBar as MovieClip).visible)?Math.round(this._scrollBar.width):0);
       }
-
+      
       public function get availableHeight() : Number {
          return Math.round(_height);
       }
-
+      
       override public function toString() : String {
          return "[CLIK TextArea " + name + "]";
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          var _loc2_:String = null;
          var _loc3_:* = NaN;
@@ -156,7 +154,7 @@ package scaleform.clik.controls
                {
                   return;
                }
-               this.position = Math.max(1,this.position-1);
+               this.position = Math.max(1,this.position - 1);
                param1.handled = true;
                break;
             case NavigationCode.DOWN:
@@ -187,7 +185,7 @@ package scaleform.clik.controls
                break;
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(textField != null)
@@ -195,7 +193,7 @@ package scaleform.clik.controls
             textField.addEventListener(Event.SCROLL,this.onScroller,false,0,true);
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          if(isInvalid(InvalidationType.SCROLL_BAR))
@@ -214,13 +212,11 @@ package scaleform.clik.controls
             dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
             invalidate(InvalidationType.SIZE);
          }
-         else
+         else if(isInvalid(InvalidationType.DATA))
          {
-            if(isInvalid(InvalidationType.DATA))
-            {
-               this.updateText();
-            }
+            this.updateText();
          }
+         
          if(isInvalid(InvalidationType.SIZE))
          {
             removeChild(this.container);
@@ -242,7 +238,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function createScrollBar() : void {
          var _loc1_:IScrollBar = null;
          var _loc2_:Class = null;
@@ -263,7 +259,7 @@ package scaleform.clik.controls
             return;
          }
          this._autoScrollBar = false;
-         if(this._scrollBarValue  is  String)
+         if(this._scrollBarValue is String)
          {
             if(parent != null)
             {
@@ -291,26 +287,24 @@ package scaleform.clik.controls
                }
             }
          }
-         else
+         else if(this._scrollBarValue is Class)
          {
-            if(this._scrollBarValue  is  Class)
+            _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
+            _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
+            if(_loc1_ != null)
             {
-               _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
-               _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
-               if(_loc1_ != null)
-               {
-                  this._autoScrollBar = true;
-                  (_loc1_ as Object).offsetTop = this._thumbOffset.top;
-                  (_loc1_ as Object).offsetBottom = this._thumbOffset.bottom;
-                  (_loc1_ as Object).minThumbSize = this._minThumbSize;
-                  this.container.addChild(_loc1_ as DisplayObject);
-               }
-            }
-            else
-            {
-               _loc1_ = this._scrollBarValue as IScrollBar;
+               this._autoScrollBar = true;
+               (_loc1_ as Object).offsetTop = this._thumbOffset.top;
+               (_loc1_ as Object).offsetBottom = this._thumbOffset.bottom;
+               (_loc1_ as Object).minThumbSize = this._minThumbSize;
+               this.container.addChild(_loc1_ as DisplayObject);
             }
          }
+         else
+         {
+            _loc1_ = this._scrollBarValue as IScrollBar;
+         }
+         
          this._scrollBar = _loc1_;
          invalidateSize();
          if(this._scrollBar != null)
@@ -322,7 +316,7 @@ package scaleform.clik.controls
             this._scrollBar.tabEnabled = false;
          }
       }
-
+      
       protected function drawScrollBar() : void {
          if(!this._autoScrollBar)
          {
@@ -332,7 +326,7 @@ package scaleform.clik.controls
          this._scrollBar.height = this.availableHeight;
          this._scrollBar.validateNow();
       }
-
+      
       protected function updateScrollBar() : void {
          this._maxScroll = textField.maxScrollV;
          var _loc1_:ScrollIndicator = this._scrollBar as ScrollIndicator;
@@ -371,25 +365,25 @@ package scaleform.clik.controls
             _loc1_.enabled = this.enabled;
          }
       }
-
+      
       override protected function updateText() : void {
          super.updateText();
          this.updateScrollBar();
       }
-
+      
       override protected function updateTextField() : void {
          this._resetScrollPosition = true;
          super.updateTextField();
       }
-
+      
       protected function handleScroll(param1:Event) : void {
          this.position = this._scrollBar.position;
       }
-
+      
       protected function blockMouseWheel(param1:MouseEvent) : void {
          param1.stopPropagation();
       }
-
+      
       override protected function handleTextChange(param1:Event) : void {
          if(this._maxScroll != textField.maxScrollV)
          {
@@ -397,7 +391,7 @@ package scaleform.clik.controls
          }
          super.handleTextChange(param1);
       }
-
+      
       protected function onScroller(param1:Event) : void {
          if(this._resetScrollPosition)
          {
@@ -409,7 +403,7 @@ package scaleform.clik.controls
          }
          this._resetScrollPosition = false;
       }
-
+      
       override protected function onDispose() : void {
          textField.removeEventListener(Event.SCROLL,this.onScroller,false);
          if(this._scrollBar)
@@ -419,7 +413,7 @@ package scaleform.clik.controls
             this._scrollBar.removeEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false);
             this._scrollBar.focusTarget = null;
             (this._scrollBar as Object).scrollTarget = null;
-            if(this._scrollBar  is  IDisposable)
+            if(this._scrollBar is IDisposable)
             {
                IDisposable(this._scrollBar).dispose();
             }
@@ -442,5 +436,4 @@ package scaleform.clik.controls
          super.onDispose();
       }
    }
-
 }

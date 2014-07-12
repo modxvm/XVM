@@ -1,46 +1,44 @@
 package net.wg.gui.notification.vo
 {
    import net.wg.data.daapi.base.DAAPIDataClass;
-   import __AS3__.vec.Vector;
    import net.wg.gui.notification.constants.ButtonState;
-
-
+   
    public class MessageInfoVO extends DAAPIDataClass
    {
-          
+      
       public function MessageInfoVO(param1:Object) {
          this._buttonsLayout = new Vector.<ButtonVO>();
          this._buttonsStates = {};
          super(param1);
       }
-
+      
       public var type:String = "";
-
+      
       public var message:String = "";
-
+      
       public var icon:String = "";
-
+      
       public var defaultIcon:String = "";
-
+      
       private var _buttonsLayout:Vector.<ButtonVO>;
-
+      
       private var _buttonsStates:Object;
-
+      
       public var savedID:Number = -1;
-
+      
       public var timestamp:Number = -1;
-
+      
       public var timestampStr:String = "";
-
+      
       public var filters:Array;
-
+      
       public var bgIcon:String = "";
-
+      
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          var _loc3_:Object = null;
          if(param1 == "buttonsLayout")
          {
-            for each (_loc3_ in param2)
+            for each(_loc3_ in param2)
             {
                this._buttonsLayout.push(new ButtonVO(_loc3_));
             }
@@ -53,11 +51,11 @@ package net.wg.gui.notification.vo
          }
          return this.hasOwnProperty(param1);
       }
-
+      
       public function get buttonsLayout() : Vector.<ButtonVO> {
          return this._buttonsLayout;
       }
-
+      
       public function isButtonVisible(param1:String) : Boolean {
          var _loc2_:* = true;
          if(this._buttonsStates.hasOwnProperty(param1))
@@ -66,7 +64,7 @@ package net.wg.gui.notification.vo
          }
          return _loc2_;
       }
-
+      
       public function areButtonsVisible() : Boolean {
          var _loc1_:* = 0;
          while(_loc1_ < this._buttonsLayout.length)
@@ -79,7 +77,7 @@ package net.wg.gui.notification.vo
          }
          return false;
       }
-
+      
       public function isButtonEnabled(param1:String) : Boolean {
          var _loc2_:* = true;
          if(this._buttonsStates.hasOwnProperty(param1))
@@ -89,5 +87,4 @@ package net.wg.gui.notification.vo
          return _loc2_;
       }
    }
-
 }

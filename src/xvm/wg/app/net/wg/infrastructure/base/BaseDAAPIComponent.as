@@ -4,17 +4,16 @@ package net.wg.infrastructure.base
    import net.wg.infrastructure.interfaces.IDAAPIComponent;
    import net.wg.infrastructure.exceptions.base.WGGUIException;
    import net.wg.infrastructure.events.LifeCycleEvent;
-
-
+   
    public class BaseDAAPIComponent extends BaseDAAPIComponentMeta implements IDAAPIComponent
    {
-          
+      
       public function BaseDAAPIComponent() {
          super();
       }
-
+      
       private var _disposed:Boolean = false;
-
+      
       public final function as_populate() : void {
          try
          {
@@ -27,7 +26,7 @@ package net.wg.infrastructure.base
             DebugUtils.LOG_WARNING(error.getStackTrace());
          }
       }
-
+      
       public final function as_dispose() : void {
          try
          {
@@ -41,14 +40,12 @@ package net.wg.infrastructure.base
             DebugUtils.LOG_WARNING(error.getStackTrace());
          }
       }
-
+      
       public function get disposed() : Boolean {
          return this._disposed;
       }
-
+      
       protected function onPopulate() : void {
-          
       }
    }
-
 }

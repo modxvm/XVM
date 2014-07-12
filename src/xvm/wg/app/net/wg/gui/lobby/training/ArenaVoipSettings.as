@@ -8,27 +8,26 @@ package net.wg.gui.lobby.training
    import scaleform.clik.events.ListEvent;
    import net.wg.gui.events.ArenaVoipSettingsEvent;
    import net.wg.utils.IScheduler;
-
-
+   
    public class ArenaVoipSettings extends UIComponent
    {
-          
+      
       public function ArenaVoipSettings() {
          super();
       }
-
+      
       private static const CHANGE_ARENA_VOIP:String = "changeArenaVOIP";
-
+      
       private static const USE_ARENA_VOIP:String = "useArenaVOIP";
-
+      
       private var canChangeArenaVOIP:Boolean = false;
-
+      
       private var useArenaVoip:Number = 0;
-
+      
       public var voiceChatDD:DropdownMenu;
-
+      
       public var textField:TextFieldShort;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.textField.buttonMode = false;
@@ -37,7 +36,7 @@ package net.wg.gui.lobby.training
          this.voiceChatDD.selectedIndex = 0;
          this.voiceChatDD.addEventListener(ListEvent.INDEX_CHANGE,this.handleChange,false,0,true);
       }
-
+      
       override protected function onDispose() : void {
          App.utils.scheduler.cancelTask(this.stopCoolDownUseCommonVoiceChat);
          this.voiceChatDD.removeEventListener(ListEvent.INDEX_CHANGE,this.handleChange,false);
@@ -47,7 +46,7 @@ package net.wg.gui.lobby.training
          this.textField = null;
          super.onDispose();
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(param1 == super.enabled)
          {
@@ -57,7 +56,7 @@ package net.wg.gui.lobby.training
          this.voiceChatDD.enabled = param1;
          this.textField.enabled = param1;
       }
-
+      
       public function setCanChangeArenaVOIP(param1:Boolean) : void {
          if(this.canChangeArenaVOIP == param1)
          {
@@ -66,19 +65,19 @@ package net.wg.gui.lobby.training
          this.canChangeArenaVOIP = param1;
          invalidate(ArenaVoipSettings.CHANGE_ARENA_VOIP);
       }
-
+      
       public function setUseArenaVoip(param1:Number) : void {
          this.useArenaVoip = param1;
          invalidate(ArenaVoipSettings.USE_ARENA_VOIP);
       }
-
+      
       private function handleChange(param1:ListEvent) : void {
          if(this.canChangeArenaVOIP)
          {
             dispatchEvent(new ArenaVoipSettingsEvent(ArenaVoipSettingsEvent.SELECT_USE_COMMON_VOICE_CHAT,this.voiceChatDD.selectedIndex));
          }
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(ArenaVoipSettings.CHANGE_ARENA_VOIP))
@@ -98,33 +97,31 @@ package net.wg.gui.lobby.training
                {
                   this.textField.label = MENU.TRAINING_INFO_NOTUSECHAT;
                }
+               else if(this.useArenaVoip == 0)
+               {
+                  this.textField.label = MENU.TRAINING_INFO_USECOMMONVOICECHAT;
+               }
                else
                {
-                  if(this.useArenaVoip == 0)
-                  {
-                     this.textField.label = MENU.TRAINING_INFO_USECOMMONVOICECHAT;
-                  }
-                  else
-                  {
-                     this.textField.label = MENU.TRAINING_INFO_USESEPARATEVOIPCHAT;
-                  }
+                  this.textField.label = MENU.TRAINING_INFO_USESEPARATEVOIPCHAT;
                }
+               
                this.textField.validateNow();
             }
          }
       }
-
+      
       public function startCoolDownUseCommonVoiceChat(param1:Number) : void {
          this.voiceChatDD.enabled = false;
          var _loc2_:IScheduler = App.utils.scheduler;
          _loc2_.cancelTask(this.stopCoolDownUseCommonVoiceChat);
          _loc2_.scheduleTask(this.stopCoolDownUseCommonVoiceChat,param1 * 1000);
       }
-
+      
       private function stopCoolDownUseCommonVoiceChat() : void {
          this.voiceChatDD.enabled = true;
       }
-
+      
       public function changeUseArenaVoipFailed(param1:Number) : void {
          App.utils.scheduler.cancelTask(this.stopCoolDownUseCommonVoiceChat);
          if(this.canChangeArenaVOIP)
@@ -134,5 +131,4 @@ package net.wg.gui.lobby.training
          }
       }
    }
-
 }

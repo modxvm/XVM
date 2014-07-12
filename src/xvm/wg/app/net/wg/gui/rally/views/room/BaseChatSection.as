@@ -6,14 +6,13 @@ package net.wg.gui.rally.views.room
    import flash.text.TextField;
    import net.wg.gui.components.advanced.ButtonDnmIcon;
    import net.wg.gui.messenger.ChannelComponent;
-   import net.wg.gui.components.advanced.TextAreaSimple;
+   import net.wg.gui.components.controls.TextInput;
    import net.wg.gui.rally.interfaces.IRallyVO;
    import scaleform.clik.constants.InvalidationType;
    import flash.display.InteractiveObject;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.InputEvent;
    import flash.text.TextFormat;
-   import net.wg.data.constants.Values;
    import net.wg.infrastructure.events.FocusRequestEvent;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
@@ -21,51 +20,52 @@ package net.wg.gui.rally.views.room
    import net.wg.gui.rally.events.RallyViewsEvent;
    import org.idmedia.as3commons.util.StringUtils;
    import net.wg.infrastructure.interfaces.IUserProps;
-
-
+   import net.wg.data.constants.Values;
+   import flash.text.TextFormatAlign;
+   
    public class BaseChatSection extends UIComponent implements IFocusContainer
    {
-          
+      
       public function BaseChatSection() {
          super();
          this.channelComponent.externalButton = this.chatSubmitButton;
          this.channelComponent.messageArea.bgForm.visible = false;
       }
-
+      
       protected static const INVALID_EDIT_MODE:String = "invalidEditMode";
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       public var lblChatHeader:TextField;
-
+      
       public var chatSubmitButton:ButtonDnmIcon;
-
+      
       public var editDescriptionButton:ButtonDnmIcon;
-
+      
       public var editCommitButton:ButtonDnmIcon;
-
+      
       public var channelComponent:ChannelComponent;
-
-      public var descriptionInput:TextAreaSimple;
-
+      
+      public var descriptionInput:TextInput;
+      
       protected var _rallyData:IRallyVO;
-
+      
       protected var _inEditMode:Boolean = false;
-
+      
       protected var _previousComment:String = "";
-
+      
       public var descriptionTF:TextField;
-
+      
       protected function getHeader() : String {
          return "";
       }
-
+      
       public function get rallyData() : IRallyVO {
          return this._rallyData;
       }
-
+      
       public function set rallyData(param1:IRallyVO) : void {
          if(param1 == null)
          {
@@ -74,11 +74,11 @@ package net.wg.gui.rally.views.room
          this._rallyData = param1;
          invalidate(InvalidationType.DATA,INVALID_EDIT_MODE);
       }
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return this.descriptionInput;
       }
-
+      
       public function enableEditCommitButton(param1:Boolean) : void {
          if((this.editCommitButton) && (this.editDescriptionButton))
          {
@@ -86,12 +86,12 @@ package net.wg.gui.rally.views.room
             this.editCommitButton.enabled = param1;
          }
       }
-
+      
       public function setDescription(param1:String) : void {
          this.descriptionInput.text = param1;
          this.updateDescriptionTF(param1);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.lblChatHeader.text = this.getHeader();
@@ -114,7 +114,7 @@ package net.wg.gui.rally.views.room
          this.descriptionTF.addEventListener(MouseEvent.ROLL_OVER,this.onDescriptionOver);
          this.descriptionTF.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:String = null;
          var _loc2_:* = false;
@@ -128,10 +128,6 @@ package net.wg.gui.rally.views.room
                this._previousComment = _loc1_;
                this.updateDescriptionTF(this._previousComment);
             }
-            if(this.rallyData)
-            {
-               this.descriptionInput.defaultText = this.rallyData.isCommander?CYBERSPORT.WINDOW_UNIT_DESCRIPTIONDEFAULT:Values.EMPTY_STR;
-            }
          }
          if(isInvalid(INVALID_EDIT_MODE))
          {
@@ -142,7 +138,7 @@ package net.wg.gui.rally.views.room
             this.descriptionTF.visible = !this.descriptionInput.visible;
          }
       }
-
+      
       override protected function onDispose() : void {
          this.editDescriptionButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
          this.editCommitButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
@@ -162,21 +158,21 @@ package net.wg.gui.rally.views.room
          this.descriptionInput = null;
          super.onDispose();
       }
-
+      
       private function updateFocus() : void {
          dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
       }
-
+      
       private function onEditCommitClick(param1:ButtonEvent) : void {
          this.updateDescription(true);
       }
-
+      
       private function onEditClick(param1:ButtonEvent) : void {
          this._inEditMode = true;
          invalidate(INVALID_EDIT_MODE);
          App.utils.scheduler.envokeInNextFrame(this.updateFocus);
       }
-
+      
       private function descriptionInputHandler(param1:InputEvent) : void {
          if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN && (this._inEditMode))
          {
@@ -190,7 +186,7 @@ package net.wg.gui.rally.views.room
             this.updateDescription(true);
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          var _loc2_:InputDetails = param1.details;
          if(_loc2_.code == Keyboard.F1 && _loc2_.value == InputValue.KEY_UP)
@@ -203,7 +199,7 @@ package net.wg.gui.rally.views.room
          }
          super.handleInput(param1);
       }
-
+      
       private function onDescriptionOver(param1:MouseEvent) : void {
          var _loc2_:String = this._rallyData?this._rallyData.description:"";
          if(_loc2_)
@@ -211,8 +207,8 @@ package net.wg.gui.rally.views.room
             App.toolTipMgr.show(_loc2_);
          }
       }
-
-      protected function updateDescription(param1:Boolean=false) : void {
+      
+      protected function updateDescription(param1:Boolean = false) : void {
          if(param1)
          {
             this._previousComment = this.descriptionInput.text = StringUtils.trim(this.descriptionInput.text);
@@ -227,15 +223,25 @@ package net.wg.gui.rally.views.room
          this._inEditMode = false;
          invalidate(INVALID_EDIT_MODE);
       }
-
+      
       private function updateDescriptionTF(param1:String) : void {
          var _loc2_:IUserProps = App.utils.commons.getUserProps(param1);
          App.utils.commons.formatPlayerName(this.descriptionTF,_loc2_);
          if(!this.descriptionTF.text && (this.rallyData))
          {
             this.descriptionTF.text = this.rallyData.isCommander?CYBERSPORT.WINDOW_UNIT_DESCRIPTIONDEFAULT:Values.EMPTY_STR;
+            this.changeAlign(true);
+         }
+         else
+         {
+            this.changeAlign(false);
          }
       }
+      
+      private function changeAlign(param1:Boolean) : void {
+         var _loc2_:TextFormat = this.descriptionTF.getTextFormat();
+         _loc2_.align = param1?TextFormatAlign.RIGHT:TextFormatAlign.LEFT;
+         this.descriptionTF.setTextFormat(_loc2_);
+      }
    }
-
 }

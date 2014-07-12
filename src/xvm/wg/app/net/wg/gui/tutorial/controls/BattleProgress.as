@@ -4,11 +4,10 @@ package net.wg.gui.tutorial.controls
    import flash.display.MovieClip;
    import flash.display.Sprite;
    import flash.display.DisplayObjectContainer;
-
-
+   
    public class BattleProgress extends UIComponent
    {
-          
+      
       public function BattleProgress() {
          this.separatorItems = [];
          this.taskItems = [];
@@ -16,66 +15,66 @@ package net.wg.gui.tutorial.controls
          super();
          this._bodyWidth = this.background.width - BODY_WIDTH_CORRECTION;
       }
-
+      
       private static const PHASE_DONE:String = "done";
-
+      
       private static const PHASE_FAIL:String = "fail";
-
+      
       private static const PHASE_NONE:String = "none";
-
+      
       private static const MASK:uint = 3;
-
+      
       private static const BODY_WIDTH_CORRECTION:Number = 8;
-
+      
       public var progressItemRenderer:String = "BattleProgressItem";
-
+      
       public var separatorRenderer:String = "BattleSeparator";
-
+      
       private var _curPhase:Number = -1;
-
+      
       private var _allPhases:Number = 0;
-
+      
       private var _phaseStatusMask:Number = NaN;
-
+      
       private var _allTasks:Number = 0;
-
+      
       private var _tasksStatusMask:Number = NaN;
-
+      
       public var background:MovieClip;
-
+      
       public var phasesContainer:Sprite;
-
+      
       public var tasksContainer:Sprite;
-
+      
       public var separatorsContainer:Sprite;
-
+      
       private var separatorItems:Array;
-
+      
       private var taskItems:Array;
-
+      
       private var phaseItems:Array;
-
+      
       private var _phaseWidth:Number;
-
+      
       private var _bodyWidth:Number;
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          this.setupPhases();
          this.setupTasks();
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.clearItems(this.separatorsContainer,this.separatorItems);
          this.clearItems(this.phasesContainer,this.phaseItems);
          this.clearItems(this.tasksContainer,this.taskItems);
       }
-
+      
       public function populateUI(param1:Number, param2:Number) : void {
          if(this._allPhases != param2)
          {
@@ -91,12 +90,12 @@ package net.wg.gui.tutorial.controls
             invalidate();
          }
       }
-
+      
       public function setPhases(param1:Number) : void {
          this._phaseStatusMask = param1;
          invalidate();
       }
-
+      
       public function setTasks(param1:Number, param2:Number) : void {
          if(this._allTasks != param1)
          {
@@ -109,7 +108,7 @@ package net.wg.gui.tutorial.controls
             invalidate();
          }
       }
-
+      
       private function rebuildPhases() : void {
          var _loc2_:* = NaN;
          var _loc3_:ProgressSeparator = null;
@@ -132,7 +131,7 @@ package net.wg.gui.tutorial.controls
             _loc1_++;
          }
       }
-
+      
       private function setupPhases() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = 0;
@@ -156,7 +155,7 @@ package net.wg.gui.tutorial.controls
             }
          }
       }
-
+      
       private function setupTasks() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = 0;
@@ -177,7 +176,7 @@ package net.wg.gui.tutorial.controls
             }
          }
       }
-
+      
       private function rebuildTasks() : void {
          var _loc4_:ProgressItem = null;
          this.clearItems(this.tasksContainer,this.taskItems);
@@ -188,12 +187,12 @@ package net.wg.gui.tutorial.controls
          {
             _loc4_ = this.createInstance(this.tasksContainer,this.progressItemRenderer) as ProgressItem;
             _loc4_.x = _loc1_ + _loc3_ * _loc2_;
-            _loc4_.width = _loc3_ == this._allTasks-1?(this._phaseWidth % this._allTasks ^ 0) + _loc2_:_loc2_;
+            _loc4_.width = _loc3_ == this._allTasks - 1?(this._phaseWidth % this._allTasks ^ 0) + _loc2_:_loc2_;
             this.taskItems.push(_loc4_);
             _loc3_++;
          }
       }
-
+      
       private function getLineStatus(param1:Number) : String {
          var _loc2_:String = PHASE_NONE;
          switch(param1)
@@ -213,7 +212,7 @@ package net.wg.gui.tutorial.controls
          }
          return _loc2_;
       }
-
+      
       public function createInstance(param1:DisplayObjectContainer, param2:String) : MovieClip {
          var _loc3_:MovieClip = null;
          _loc3_ = App.utils.classFactory.getObject(param2) as MovieClip;
@@ -223,7 +222,7 @@ package net.wg.gui.tutorial.controls
          }
          return _loc3_;
       }
-
+      
       private function clearItems(param1:Sprite, param2:Array) : void {
          while(param1.numChildren)
          {
@@ -232,5 +231,4 @@ package net.wg.gui.tutorial.controls
          param2.splice(0,param2.legth);
       }
    }
-
 }

@@ -22,11 +22,10 @@ package net.wg.gui.lobby.fortifications.windows.impl
    import net.wg.gui.lobby.fortifications.data.ClanListRendererVO;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.prebattle.invites.PrbSendInviteCIGenerator;
-
-
+   
    public class FortFixedPlayersWindow extends FortFixedPlayersWindowMeta implements IFortFixedPlayersWindowMeta
    {
-          
+      
       public function FortFixedPlayersWindow() {
          super();
          this.assignPlayer.UIID = 86;
@@ -39,17 +38,17 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.toolTipArea.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutToolTipAreaHandler);
          this.playersList.addEventListener(SortableTableListEvent.RENDERER_CLICK,this.itemClickHandler);
       }
-
+      
       public static const MEMBER_NAME:String = "userName";
-
+      
       public static const ROLE:String = "playerRole";
-
+      
       public static const WEEK_MINING:String = "intWeekMining";
-
+      
       public static const TOTAL_MINING:String = "intTotalMining";
-
+      
       private static const UPDATE_TABLE:String = "updateTable";
-
+      
       private static function getHeadersProvider() : DataProvider {
          var _loc1_:Array = [];
          var _loc2_:IImageUrlProperties = App.utils.getImageUrlProperties(RES_ICONS.MAPS_ICONS_LIBRARY_FORTIFICATION_NUT,16,16) as IImageUrlProperties;
@@ -94,35 +93,35 @@ package net.wg.gui.lobby.fortifications.windows.impl
          _loc1_.push(_loc7_);
          return new DataProvider(_loc1_);
       }
-
+      
       public var playersList:SortableTable = null;
-
+      
       public var infoIcon:UILoaderAlt = null;
-
+      
       public var soldierIcon:UILoaderAlt = null;
-
+      
       public var assignPlayer:SoundButtonEx = null;
-
+      
       public var playersCounts:TextField = null;
-
+      
       public var playerIsAssigned:TextField = null;
-
+      
       public var toolTipArea:MovieClip = null;
-
+      
       private var model:FortFixedPlayersVO = null;
-
+      
       override protected function onClosingApproved() : void {
          App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_CLOSE,this.model.buildingId);
       }
-
+      
       public function as_setWindowTitle(param1:String) : void {
          window.title = param1;
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
       }
-
+      
       override protected function onDispose() : void {
          this.playersList.removeEventListener(SortableTableListEvent.RENDERER_CLICK,this.itemClickHandler);
          this.playersList.dispose();
@@ -139,7 +138,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.soldierIcon = null;
          super.onDispose();
       }
-
+      
       override protected function setData(param1:FortFixedPlayersVO) : void {
          this.model = param1;
          window.title = this.model.windowTitle;
@@ -169,7 +168,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
          this.playersCounts.htmlText = this.model.countLabel;
          invalidate(UPDATE_TABLE);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(UPDATE_TABLE)) && (this.model))
@@ -177,19 +176,20 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.updateTableList();
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.playersList.headerDP = getHeadersProvider();
          this.playersList.uniqKeyForAutoSelect = "intTotalMining";
+         this.soldierIcon.source = RES_ICONS.MAPS_ICONS_BUTTONS_FOOTHOLD;
       }
-
+      
       private function updateTableList() : void {
          this.playersList.listDP = new DataProvider(this.model.rosters);
          this.playersList.sortByField("intTotalMining",SortingInfo.DESCENDING_SORT);
          this.playersList.scrollListToItemByUniqKey("himself",true);
       }
-
+      
       override protected function onSetModalFocus(param1:InteractiveObject) : void {
          super.onSetModalFocus(param1);
          if(this.assignPlayer.visible)
@@ -201,7 +201,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             setFocus(window.getCloseBtn());
          }
       }
-
+      
       private function itemClickHandler(param1:SortableTableListEvent) : void {
          var _loc2_:ClanListRendererVO = null;
          if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
@@ -214,20 +214,19 @@ package net.wg.gui.lobby.fortifications.windows.impl
             App.contextMenuMgr.hide();
          }
       }
-
+      
       private function onClickBtnHandler(param1:ButtonEvent) : void {
          App.eventLogManager.logUIEvent(param1,this.model.buildingId);
          assignToBuildingS();
       }
-
+      
       private function onRollOverToolTipAreaHandler(param1:MouseEvent) : void {
          App.eventLogManager.logSubSystem(EVENT_LOG_CONSTANTS.SST_TOOLTIP,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_OPEN,0,this.model.buildingId);
          App.toolTipMgr.showComplex(this.model.generalTooltipData);
       }
-
+      
       private function onRollOutToolTipAreaHandler(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
    }
-
 }

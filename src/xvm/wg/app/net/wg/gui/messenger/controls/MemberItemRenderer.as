@@ -9,33 +9,32 @@ package net.wg.gui.messenger.controls
    import net.wg.gui.prebattle.squad.MessengerUtils;
    import flash.events.MouseEvent;
    import net.wg.infrastructure.events.VoiceChatEvent;
-
-
+   
    public class MemberItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function MemberItemRenderer() {
          super();
       }
-
+      
       private static const TEXT_WIDTH_CORRECTION:Number = 12;
-
+      
       private static const STATUS_ONLINE:String = "online";
-
+      
       private static const STATUS_OFFLINE:String = "offline";
-
+      
       private static const STATUS_IGNORED:String = "ignored";
-
+      
       private static const STATUS_HIMSELF:String = "himself";
-
+      
       public var status:MovieClip;
-
+      
       public var voiceWave:VoiceWave;
-
+      
       protected var model:ChannelMemberVO;
-
+      
       protected var tooltip:String;
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          if(!param1)
@@ -50,7 +49,7 @@ package net.wg.gui.messenger.controls
          this.tooltip = this.model.userName;
          invalidateData();
       }
-
+      
       override protected function onDispose() : void {
          if(this.model)
          {
@@ -59,13 +58,13 @@ package net.wg.gui.messenger.controls
          }
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
          setState("out");
       }
-
+      
       override protected function draw() : void {
          var _loc1_:Point = null;
          if((isInvalid(InvalidationType.DATA)) && (this.model))
@@ -87,7 +86,7 @@ package net.wg.gui.messenger.controls
          }
          super.draw();
       }
-
+      
       override protected function updateAfterStateChange() : void {
          super.updateAfterStateChange();
          if(this.model)
@@ -95,12 +94,12 @@ package net.wg.gui.messenger.controls
             textField.textColor = this.model.color;
          }
       }
-
+      
       private function getStatusFrame() : String {
          var _loc1_:String = MessengerUtils.isIgnored(this.model)?STATUS_IGNORED:this.model.himself?STATUS_HIMSELF:STATUS_ONLINE;
          return _loc1_;
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          if(this.tooltip)
@@ -108,7 +107,7 @@ package net.wg.gui.messenger.controls
             App.toolTipMgr.show(this.tooltip);
          }
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          App.toolTipMgr.hide();
@@ -120,7 +119,7 @@ package net.wg.gui.messenger.controls
             }
          }
       }
-
+      
       override protected function updateText() : void {
          if(!(_label == null) && !(textField == null))
          {
@@ -132,7 +131,7 @@ package net.wg.gui.messenger.controls
             this.truncateText();
          }
       }
-
+      
       private function truncateText() : void {
          var _loc1_:String = null;
          var _loc2_:String = null;
@@ -157,7 +156,7 @@ package net.wg.gui.messenger.controls
             }
          }
       }
-
+      
       private function speakHandler(param1:VoiceChatEvent) : void {
          var _loc2_:uint = param1.getAccountDBID();
          var _loc3_:* = param1.type == VoiceChatEvent.START_SPEAKING;
@@ -166,17 +165,16 @@ package net.wg.gui.messenger.controls
             this.setSpeaking(_loc3_,false);
          }
       }
-
-      private function setSpeaking(param1:Boolean, param2:Boolean=false) : void {
+      
+      private function setSpeaking(param1:Boolean, param2:Boolean = false) : void {
          if(param1)
          {
             param2 = false;
          }
-         if(this.voiceWave  is  VoiceWave)
+         if(this.voiceWave is VoiceWave)
          {
             this.voiceWave.setSpeaking(param1,param2);
          }
       }
    }
-
 }

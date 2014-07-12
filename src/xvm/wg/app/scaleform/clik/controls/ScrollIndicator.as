@@ -12,49 +12,48 @@ package scaleform.clik.controls
    import flash.text.TextField;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-
-
+   
    public class ScrollIndicator extends UIComponent implements IScrollBar
    {
-          
+      
       public function ScrollIndicator() {
          super();
       }
-
+      
       public var direction:String = "vertical";
-
+      
       public var offsetTop:Number = 0;
-
+      
       public var offsetBottom:Number = 0;
-
+      
       protected var _isDragging:Boolean = false;
-
+      
       protected var _maxPosition:Number = 10;
-
+      
       protected var _minPosition:Number = 0;
-
+      
       protected var _minThumbSize:Number = 10;
-
+      
       protected var _pageScrollSize:Number = 1;
-
+      
       protected var _pageSize:Number;
-
+      
       protected var _position:Number = 5;
-
+      
       protected var _scrollTarget:Object;
-
+      
       public var thumb:MovieClip;
-
+      
       public var track:MovieClip;
-
+      
       override protected function initialize() : void {
          super.initialize();
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(param1 == super.enabled)
          {
@@ -63,11 +62,11 @@ package scaleform.clik.controls
          super.enabled = param1;
          gotoAndPlay(this.enabled?"default":"disabled");
       }
-
+      
       public function get position() : Number {
          return this._position;
       }
-
+      
       public function set position(param1:Number) : void {
          var param1:Number = Math.max(this._minPosition,Math.min(this._maxPosition,param1));
          if(param1 == this._position)
@@ -78,27 +77,27 @@ package scaleform.clik.controls
          dispatchEvent(new Event(Event.SCROLL));
          invalidateData();
       }
-
+      
       public function get minThumbSize() : Number {
          return this._minThumbSize;
       }
-
+      
       public function set minThumbSize(param1:Number) : void {
          var param1:Number = Math.max(1,param1);
          this._minThumbSize = param1;
          invalidateSize();
       }
-
+      
       public function get isHorizontal() : Boolean {
          return this.direction == ScrollBarDirection.HORIZONTAL;
       }
-
+      
       public function get scrollTarget() : Object {
          return this._scrollTarget;
       }
-
+      
       public function set scrollTarget(param1:Object) : void {
-         if(param1  is  String)
+         if(param1 is String)
          {
             if(!componentInspectorSetting || param1.toString() == "" || parent == null)
             {
@@ -120,7 +119,7 @@ package scaleform.clik.controls
                _loc2_.scrollBar = null;
             }
          }
-         if(param1  is  UIComponent && "scrollBar"  in  param1)
+         if(param1 is UIComponent && "scrollBar" in param1)
          {
             param1.scrollBar = this;
             return;
@@ -131,7 +130,7 @@ package scaleform.clik.controls
             return;
          }
          this._scrollTarget.addEventListener(Event.SCROLL,this.handleTargetScroll,false,0,true);
-         if(this._scrollTarget  is  UIComponent)
+         if(this._scrollTarget is UIComponent)
          {
             focusTarget = this._scrollTarget as UIComponent;
          }
@@ -139,13 +138,13 @@ package scaleform.clik.controls
          this.handleTargetScroll(null);
          invalidate();
       }
-
+      
       public function get availableHeight() : Number {
          var _loc1_:Number = isNaN(this.thumb.height)?0:this.thumb.height;
          return (this.isHorizontal?_width:_height) - _loc1_ + this.offsetBottom + this.offsetTop;
       }
-
-      public function setScrollProperties(param1:Number, param2:Number, param3:Number, param4:Number=NaN) : void {
+      
+      public function setScrollProperties(param1:Number, param2:Number, param3:Number, param4:Number = undefined) : void {
          this._pageSize = param1;
          if(!isNaN(param4))
          {
@@ -155,7 +154,7 @@ package scaleform.clik.controls
          this._maxPosition = param3;
          invalidateSize();
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -174,7 +173,7 @@ package scaleform.clik.controls
                {
                   return;
                }
-               this.position = this.position-1;
+               this.position = this.position - 1;
                break;
             case NavigationCode.DOWN:
                if(_loc3_)
@@ -188,7 +187,7 @@ package scaleform.clik.controls
                {
                   return;
                }
-               this.position = this.position-1;
+               this.position = this.position - 1;
                break;
             case NavigationCode.RIGHT:
                if(!_loc3_)
@@ -208,11 +207,11 @@ package scaleform.clik.controls
          }
          param1.handled = true;
       }
-
+      
       override public function toString() : String {
          return "[CLIK ScrollIndicator " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          focusable = false;
@@ -225,7 +224,7 @@ package scaleform.clik.controls
          initSize();
          this.direction = !(rotation == 0) && !(rotation == 180)?ScrollBarDirection.HORIZONTAL:ScrollBarDirection.VERTICAL;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:TextField = null;
          if(isInvalid(InvalidationType.SIZE))
@@ -234,39 +233,37 @@ package scaleform.clik.controls
             this.drawLayout();
             this.updateThumb();
          }
-         else
+         else if(isInvalid(InvalidationType.DATA))
          {
-            if(isInvalid(InvalidationType.DATA))
+            if(this._scrollTarget is TextField)
             {
-               if(this._scrollTarget  is  TextField)
-               {
-                  _loc1_ = this._scrollTarget as TextField;
-                  this.setScrollProperties(_loc1_.bottomScrollV - _loc1_.scrollV,1,_loc1_.maxScrollV);
-               }
-               this.updateThumbPosition();
+               _loc1_ = this._scrollTarget as TextField;
+               this.setScrollProperties(_loc1_.bottomScrollV - _loc1_.scrollV,1,_loc1_.maxScrollV);
             }
+            this.updateThumbPosition();
          }
+         
       }
-
+      
       protected function drawLayout() : void {
          this.track.height = this.isHorizontal?_width:_height;
-         if(this.track  is  UIComponent)
+         if(this.track is UIComponent)
          {
             this.track.validateNow();
          }
       }
-
+      
       protected function updateThumb() : void {
          var _loc1_:Number = Math.max(1,this._maxPosition - this._minPosition + this._pageSize);
          var _loc2_:Number = (this.isHorizontal?_width:_height) + this.offsetTop + this.offsetBottom;
          this.thumb.height = Math.max(this._minThumbSize,Math.min(_height,this._pageSize / _loc1_ * _loc2_));
-         if(this.thumb  is  UIComponent)
+         if(this.thumb is UIComponent)
          {
             (this.thumb as UIComponent).validateNow();
          }
          this.updateThumbPosition();
       }
-
+      
       protected function updateThumbPosition() : void {
          var _loc1_:Number = (this._position - this._minPosition) / (this._maxPosition - this._minPosition);
          if(isNaN(_loc1_))
@@ -277,7 +274,7 @@ package scaleform.clik.controls
          this.thumb.y = Math.max(-this.offsetTop,Math.min(this.availableHeight - this.offsetTop,_loc2_));
          this.thumb.visible = !(this._maxPosition == this._minPosition || (isNaN(this._pageSize)) || this._maxPosition == 0);
       }
-
+      
       protected function handleTargetScroll(param1:Event) : void {
          if(this._isDragging)
          {
@@ -290,19 +287,19 @@ package scaleform.clik.controls
             this.position = _loc2_.scrollV;
          }
       }
-
+      
       override protected function onDispose() : void {
          if(this._scrollTarget)
          {
             this._scrollTarget.removeEventListener(Event.SCROLL,this.handleTargetScroll,false);
             this._scrollTarget = null;
          }
-         if((this.thumb) && this.thumb  is  IDisposable)
+         if((this.thumb) && this.thumb is IDisposable)
          {
             IDisposable(this.thumb).dispose();
          }
          this.thumb = null;
-         if((this.track) && this.track  is  IDisposable)
+         if((this.track) && this.track is IDisposable)
          {
             IDisposable(this.track).dispose();
          }
@@ -310,5 +307,4 @@ package scaleform.clik.controls
          super.onDispose();
       }
    }
-
 }

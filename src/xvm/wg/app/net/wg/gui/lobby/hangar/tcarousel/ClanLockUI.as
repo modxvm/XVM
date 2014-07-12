@@ -2,38 +2,37 @@ package net.wg.gui.lobby.hangar.tcarousel
 {
    import scaleform.clik.core.UIComponent;
    import flash.text.TextField;
-
-
+   
    public class ClanLockUI extends UIComponent
    {
-          
+      
       public function ClanLockUI() {
          super();
       }
-
+      
       public var textField:TextField;
-
+      
       private var _timer:Number;
-
+      
       override protected function onDispose() : void {
          this.textField = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          this.textField.text = this.updateClanLock();
       }
-
+      
       public function set timer(param1:Number) : void {
          this._timer = param1;
          invalidate();
       }
-
+      
       public function get timer() : Number {
          return this._timer;
       }
-
+      
       private function updateClanLock() : String {
          var _loc1_:* = "";
          var _loc2_:Date = new Date();
@@ -49,7 +48,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          return _loc1_;
       }
-
+      
       private function calcLockTime(param1:Number) : String {
          var _loc2_:* = "";
          var param1:Number = Math.ceil(param1 / 60);
@@ -60,10 +59,9 @@ package net.wg.gui.lobby.hangar.tcarousel
          _loc2_ = _loc5_ + ":" + _loc6_;
          return _loc2_;
       }
-
+      
       override public function toString() : String {
          return "[WG ClanLockUi " + name + "]";
       }
    }
-
 }

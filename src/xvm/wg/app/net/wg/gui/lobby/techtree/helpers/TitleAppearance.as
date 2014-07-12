@@ -2,25 +2,24 @@ package net.wg.gui.lobby.techtree.helpers
 {
    import flash.display.DisplayObject;
    import flash.geom.Point;
-
-
+   
    public class TitleAppearance extends Object
    {
-          
-      public function TitleAppearance(param1:DisplayObject=null) {
+      
+      public function TitleAppearance(param1:DisplayObject = null) {
          super();
          this.title = param1;
       }
-
+      
       public static const TITLE_SHOW_FACTOR:Number = 864;
-
+      
       public static const TITLE_FIX_POSITION_FACTOR:Number = 1007;
-
+      
       public static const TITLE_FIX_POSITION_Y:Number = 174;
-
+      
       private var title:DisplayObject;
-
-      public function updateInTT(param1:Number=1024, param2:Number=768) : void {
+      
+      public function updateInTT(param1:Number = 1024, param2:Number = 768) : void {
          if(this.title == null)
          {
             return;
@@ -32,8 +31,8 @@ package net.wg.gui.lobby.techtree.helpers
             this.update(param1,param2);
          }
       }
-
-      public function updateInResearch(param1:Number=1024, param2:Number=768, param3:Number=0) : void {
+      
+      public function updateInResearch(param1:Number = 1024, param2:Number = 768, param3:Number = 0) : void {
          if(this.title == null)
          {
             return;
@@ -48,8 +47,8 @@ package net.wg.gui.lobby.techtree.helpers
             this.title.y = param3;
          }
       }
-
-      public function update(param1:Number=1024, param2:Number=768) : void {
+      
+      public function update(param1:Number = 1024, param2:Number = 768) : void {
          var _loc4_:* = NaN;
          if(this.title == null)
          {
@@ -68,10 +67,9 @@ package net.wg.gui.lobby.techtree.helpers
          this.title.y = _loc5_.y;
          this.title.width = param1;
       }
-
+      
       public function clearUp() : void {
          this.title = null;
       }
    }
-
 }

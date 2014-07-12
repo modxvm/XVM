@@ -3,47 +3,46 @@ package net.wg.data.managers.impl
    import net.wg.infrastructure.interfaces.IDialogDispatcher;
    import net.wg.data.constants.Errors;
    import net.wg.infrastructure.exceptions.ArgumentException;
-
-
+   
    public class DialogDispatcher extends Object implements IDialogDispatcher
    {
-          
+      
       public function DialogDispatcher() {
          super();
       }
-
+      
       private var _onClose:Function = null;
-
+      
       private var _onSubmit:Function = null;
-
+      
       private var _onButtonClick:Function = null;
-
+      
       private var _handlersInfo:Array = null;
-
+      
       public function set onClose(param1:Function) : void {
          this._onClose = param1;
       }
-
+      
       public function get onClose() : Function {
          return this._onClose;
       }
-
+      
       public function set onButtonClick(param1:Function) : void {
          this._onButtonClick = param1;
       }
-
+      
       public function get onButtonClick() : Function {
          return this._onButtonClick;
       }
-
+      
       public function set onSubmit(param1:Function) : void {
          this._onSubmit = param1;
       }
-
+      
       public function get onSubmit() : Function {
          return this._onSubmit;
       }
-
+      
       public function set handlersInfo(param1:Array) : void {
          var _loc3_:String = null;
          var _loc2_:Number = 0;
@@ -63,19 +62,19 @@ package net.wg.data.managers.impl
          }
          this._handlersInfo = param1;
       }
-
+      
       private function assertType(param1:Object, param2:Class, param3:String) : void {
          var _loc4_:* = param3 + " must be " + param2 + "!";
          if(param1 != null)
          {
-            App.utils.asserter.assert(param1  is  param2,_loc4_,ArgumentException);
+            App.utils.asserter.assert(param1 is param2,_loc4_,ArgumentException);
          }
       }
-
+      
       public function get handlersInfo() : Array {
          return this._handlersInfo;
       }
-
+      
       public function dispose() : void {
          this._handlersInfo = null;
          this._onSubmit = null;
@@ -83,5 +82,4 @@ package net.wg.data.managers.impl
          this._onClose = null;
       }
    }
-
 }

@@ -4,41 +4,40 @@ package net.wg.gui.components.tooltips
    import flash.text.TextField;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UILoaderAlt;
-
-
+   
    public class SuitableVehicleBlockItem extends UIComponent
    {
-          
+      
       public function SuitableVehicleBlockItem() {
          super();
       }
-
+      
       public var vehicleName:TextField = null;
-
+      
       public var levelMc:MovieClip = null;
-
+      
       public var vehicleType:UILoaderAlt = null;
-
+      
       public var nationIco:UILoaderAlt = null;
-
+      
       public var vehicleIco:UILoaderAlt = null;
-
+      
       private var _vName:String = null;
-
+      
       private var _lNum:Number = NaN;
-
+      
       private var _vType:String = null;
-
+      
       private var _nIco:String = null;
-
+      
       private var _vIco:String = null;
-
+      
       private var dataDirty:Boolean = false;
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(this.dataDirty)
@@ -52,7 +51,7 @@ package net.wg.gui.components.tooltips
             this.dataDirty = false;
          }
       }
-
+      
       public function setData(param1:String, param2:uint, param3:String, param4:String, param5:String) : void {
          this._nIco = param1;
          this._lNum = param2;
@@ -63,5 +62,4 @@ package net.wg.gui.components.tooltips
          validateNow();
       }
    }
-
 }

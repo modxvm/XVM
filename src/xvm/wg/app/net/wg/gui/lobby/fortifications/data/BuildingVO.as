@@ -3,43 +3,42 @@ package net.wg.gui.lobby.fortifications.data
    import net.wg.gui.lobby.fortifications.data.base.BuildingBaseVO;
    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
    import net.wg.utils.IAssertable;
-
-
+   
    public class BuildingVO extends BuildingBaseVO
    {
-          
+      
       public function BuildingVO(param1:Object) {
          super(param1);
       }
-
+      
       private static const CTX_MENU_DATA:String = "ctxMenuData";
-
+      
       public var toolTipData:Array = null;
-
+      
       public var transportTooltipData:Array = null;
-
+      
       public var orderTime:String = "";
-
+      
       public var direction:int = -1;
-
+      
       public var position:int = 0;
-
+      
       public var cooldown:String = "";
-
+      
       public var progress:int = -1;
-
+      
       public var isAvailable:Boolean = false;
-
+      
       public var isExportAvailable:Boolean = false;
-
+      
       public var isImportAvailable:Boolean = false;
-
+      
       public var isLevelUp:Boolean = false;
-
+      
       public var ctxMenuData:Array = null;
-
+      
       public var isOpenCtxMenu:Boolean = false;
-
+      
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          var _loc3_:Array = null;
          var _loc4_:Object = null;
@@ -48,7 +47,7 @@ package net.wg.gui.lobby.fortifications.data
          {
             _loc3_ = param2 as Array;
             this.ctxMenuData = [];
-            for each (_loc4_ in _loc3_)
+            for each(_loc4_ in _loc3_)
             {
                _loc5_ = new BuildingCtxMenuVO(_loc4_);
                this.ctxMenuData.push(_loc5_);
@@ -57,11 +56,11 @@ package net.wg.gui.lobby.fortifications.data
          }
          return super.onDataWrite(param1,param2);
       }
-
+      
       public function get isInFoundationState() : Boolean {
          return this.progress > FORTIFICATION_ALIASES.STATE_TROWEL && this.progress < FORTIFICATION_ALIASES.STATE_BUILDING;
       }
-
+      
       public final function validate() : void {
          var _loc1_:IAssertable = App.utils.asserter;
          var _loc2_:* = this.progress == FORTIFICATION_ALIASES.STATE_BUILDING;
@@ -72,5 +71,4 @@ package net.wg.gui.lobby.fortifications.data
          }
       }
    }
-
 }

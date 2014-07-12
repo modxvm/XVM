@@ -2,12 +2,11 @@ package net.wg.gui.lobby.techtree.data.vo
 {
    import net.wg.gui.lobby.techtree.interfaces.IValueObject;
    import net.wg.utils.ILocale;
-
-
+   
    public class VehGlobalStats extends Object implements IValueObject
    {
-          
-      public function VehGlobalStats(param1:Boolean=false, param2:String=undefined, param3:ExtraInformation=null, param4:Number=undefined, param5:Boolean=false) {
+      
+      public function VehGlobalStats(param1:Boolean = false, param2:String = "", param3:ExtraInformation = null, param4:Number = 0, param5:Boolean = false) {
          super();
          this.enableInstallItems = param1;
          this.statusString = param2;
@@ -15,21 +14,21 @@ package net.wg.gui.lobby.techtree.data.vo
          this.freeXP = param4;
          this.hasNationTree = param5;
       }
-
+      
       public var enableInstallItems:Boolean;
-
+      
       public var statusString:String;
-
+      
       public var extraInfo:ExtraInformation;
-
+      
       public var freeXP:Number;
-
+      
       public var hasNationTree:Boolean;
-
+      
       public var warningMessage:String;
-
+      
       public var historicalBattleID:int = -1;
-
+      
       public function fromArray(param1:Array, param2:ILocale) : void {
          if(param1.length > 4)
          {
@@ -43,7 +42,7 @@ package net.wg.gui.lobby.techtree.data.vo
             this.historicalBattleID = param1[6];
          }
       }
-
+      
       public function fromObject(param1:Object, param2:ILocale) : void {
          if(param1 == null)
          {
@@ -76,10 +75,9 @@ package net.wg.gui.lobby.techtree.data.vo
             this.historicalBattleID = param1.historicalBattleID;
          }
       }
-
+      
       public function toString() : String {
          return "[VehGlobalStats: enableInstallItems = " + this.enableInstallItems + ", statusString = " + this.statusString + ", extraInfo = " + this.extraInfo + ", freeXP = " + this.freeXP + ", hasNationTree = " + this.hasNationTree + ", warningMessage = " + this.warningMessage + ", historicalBattleID = " + this.historicalBattleID + "]";
       }
    }
-
 }

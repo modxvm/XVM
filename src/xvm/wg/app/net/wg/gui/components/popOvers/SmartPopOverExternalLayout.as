@@ -1,22 +1,20 @@
 package net.wg.gui.components.popOvers
 {
    import flash.geom.Point;
-   import __AS3__.vec.Vector;
    import flash.geom.Rectangle;
    import net.wg.data.utilData.TwoDimensionalPadding;
    import flash.display.DisplayObject;
    import net.wg.infrastructure.interfaces.IAbstractWrapperView;
-
-
+   
    public class SmartPopOverExternalLayout extends PopoverInternalLayout
    {
-          
+      
       public function SmartPopOverExternalLayout() {
          this._positionKeyPointPadding = new TwoDimensionalPadding();
          super();
       }
-
-      public static function getLayoutOptions(param1:Point, param2:Vector.<Point>, param3:Point, param4:Point, param5:Rectangle, param6:TwoDimensionalPadding=null, param7:int=-1) : SmartPopOverLayoutInfo {
+      
+      public static function getLayoutOptions(param1:Point, param2:Vector.<Point>, param3:Point, param4:Point, param5:Rectangle, param6:TwoDimensionalPadding = null, param7:int = -1) : SmartPopOverLayoutInfo {
          var _loc18_:Point = null;
          var _loc19_:* = NaN;
          if(param6 == null)
@@ -52,16 +50,14 @@ package net.wg.gui.components.popOvers
             _loc17_ = -Math.round(_loc9_.y + param6.bottom.y);
             _loc18_ = param6.bottom;
          }
-         else
+         else if(param7 == PopOverConst.ARROW_BOTTOM || param3.y - param4.y - _loc11_.y <= _loc14_)
          {
-            if(param7 == PopOverConst.ARROW_BOTTOM || param3.y - param4.y - _loc11_.y <= _loc14_)
-            {
-               _loc9_ = param2[PopOverConst.ARROW_BOTTOM];
-               _loc8_ = PopOverConst.ARROW_BOTTOM;
-               _loc17_ = Math.round(param1.y + _loc9_.y - param6.top.y);
-               _loc18_ = param6.top;
-            }
+            _loc9_ = param2[PopOverConst.ARROW_BOTTOM];
+            _loc8_ = PopOverConst.ARROW_BOTTOM;
+            _loc17_ = Math.round(param1.y + _loc9_.y - param6.top.y);
+            _loc18_ = param6.top;
          }
+         
          if(_loc8_ == PopOverConst.ARROW_BOTTOM || _loc8_ == PopOverConst.ARROW_TOP)
          {
             _loc19_ = param1.x / 2;
@@ -69,33 +65,30 @@ package net.wg.gui.components.popOvers
             {
                _loc16_ = Math.round(_loc9_.x / 2);
             }
+            else if(param3.x - param4.x < _loc19_)
+            {
+               _loc16_ = Math.round(param1.x - _loc9_.x / 2);
+            }
             else
             {
-               if(param3.x - param4.x < _loc19_)
-               {
-                  _loc16_ = Math.round(param1.x - _loc9_.x / 2);
-               }
-               else
-               {
-                  _loc16_ = Math.round(param1.x / 2);
-               }
+               _loc16_ = Math.round(param1.x / 2);
             }
+            
             _loc10_ = _loc16_ - _loc18_.x;
          }
          return new SmartPopOverLayoutInfo(_loc8_,_loc16_,_loc10_,_loc17_);
       }
-
+      
       private var _stageDimensions:Point;
-
+      
       private var _positionKeyPoint:Point;
-
+      
       private var _positionKeyPointPadding:TwoDimensionalPadding;
-
+      
       private var _preferredLayout:int = -1;
-
+      
       override public function invokeLayout() : Object {
          var _loc4_:DisplayObject = null;
-         var _loc10_:SmartPopOverLayoutInfo = null;
          super.invokeLayout();
          if(this._positionKeyPoint == null || this._stageDimensions == null)
          {
@@ -117,7 +110,7 @@ package net.wg.gui.components.popOvers
          }
          var _loc8_:IAbstractWrapperView = _loc2_.wrapperContent;
          var _loc9_:Rectangle = new Rectangle(_loc8_.x - _loc2_.hitMc.x,_loc8_.y - _loc2_.hitMc.y,_loc8_.width - bgFormPadding.horizontal,_loc8_.height - bgFormPadding.vertical);
-         _loc10_ = getLayoutOptions(_loc1_,_loc3_,this._stageDimensions,this._positionKeyPoint,_loc9_,this._positionKeyPointPadding,this._preferredLayout);
+         var _loc10_:SmartPopOverLayoutInfo = getLayoutOptions(_loc1_,_loc3_,this._stageDimensions,this._positionKeyPoint,_loc9_,this._positionKeyPointPadding,this._preferredLayout);
          _loc2_.arrowDirection = _loc10_.arrowDirection;
          _loc2_.arrowPosition = _loc10_.arrowPosition;
          _loc2_.x = Math.round(this.positionKeyPoint.x - _loc10_.popupPaddingLeft - _bgInternalPadding.left);
@@ -125,45 +118,44 @@ package net.wg.gui.components.popOvers
          updateArrowPosition(_loc2_,_loc10_.arrowDirection,_loc10_.arrowPosition);
          return _loc10_;
       }
-
+      
       public function set stageDimensions(param1:Point) : void {
          this._stageDimensions = param1;
       }
-
+      
       public function set positionKeyPoint(param1:Point) : void {
          this._positionKeyPoint = param1;
       }
-
+      
       public function get stageDimensions() : Point {
          return this._stageDimensions;
       }
-
+      
       public function get positionKeyPoint() : Point {
          return this._positionKeyPoint;
       }
-
+      
       public function get positionKeyPointPadding() : TwoDimensionalPadding {
          return this._positionKeyPointPadding;
       }
-
+      
       public function set positionKeyPointPadding(param1:TwoDimensionalPadding) : void {
          this._positionKeyPointPadding = param1;
       }
-
+      
       override public function dispose() : void {
          this._stageDimensions = null;
          this._positionKeyPoint = null;
          this._positionKeyPointPadding = null;
          super.dispose();
       }
-
+      
       public function get preferredLayout() : int {
          return this._preferredLayout;
       }
-
+      
       public function set preferredLayout(param1:int) : void {
          this._preferredLayout = param1;
       }
    }
-
 }

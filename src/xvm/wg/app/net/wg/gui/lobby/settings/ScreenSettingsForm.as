@@ -8,69 +8,68 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.components.controls.RangeSlider;
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.display.MovieClip;
-
-
+   
    public class ScreenSettingsForm extends UIComponent
    {
-          
+      
       public function ScreenSettingsForm() {
          super();
       }
-
+      
       public var monitorLabel:LabelControl = null;
-
+      
       public var monitorDropDown:DropdownMenu = null;
-
+      
       public var fullScreenCheckbox:CheckBox = null;
-
+      
       public var sizesLabel:LabelControl = null;
-
+      
       public var sizesDropDown:DropdownMenu = null;
-
+      
       public var refreshRateLabel:LabelControl = null;
-
+      
       public var refreshRateDropDown:DropdownMenu = null;
-
+      
       public var vertSyncCheckbox:CheckBox = null;
-
+      
       public var aspectRatioLabel:LabelControl = null;
-
+      
       public var aspectRatioDropDown:DropdownMenu = null;
-
+      
       public var smoothingLabel:LabelControl = null;
-
+      
       public var smoothingDropDown:DropdownMenu = null;
-
+      
       public var gammaLabel:LabelControl = null;
-
+      
       public var gammaSlider:Slider = null;
-
+      
       public var colorFilterIntensityLabel:LabelControl = null;
-
+      
       public var colorFilterIntensitySlider:Slider = null;
-
+      
       public var colorFilterIntensityValue:LabelControl = null;
-
+      
       public var isColorBlindCheckbox:CheckBox = null;
-
+      
       public var fovLabel:LabelControl = null;
-
+      
       public var fovRangeSlider:RangeSlider = null;
-
+      
       public var dynamicFovCheckbox:CheckBox = null;
-
+      
       public var colorFilterDefaultImg:UILoaderAlt = null;
-
+      
       public var colorFilterOverlayImg:UILoaderAlt = null;
-
+      
       public var COLOR_GRADING_TECHNIQUELabel:LabelControl = null;
-
+      
       public var COLOR_GRADING_TECHNIQUEDropDown:DropdownMenu = null;
-
+      
       public var topShadow:MovieClip;
-
+      
       public var bottomShadow:MovieClip;
-
+      
       private function initTexts() : void {
          this.monitorLabel.text = SETTINGS.MONITOR;
          this.fullScreenCheckbox.label = SETTINGS.FULLSCREEN;
@@ -85,7 +84,7 @@ package net.wg.gui.lobby.settings
          this.fovLabel.text = SETTINGS.FOV;
          this.dynamicFovCheckbox.label = SETTINGS.DYNAMICFOV;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.initTexts();
@@ -94,7 +93,7 @@ package net.wg.gui.lobby.settings
          this.topShadow.mouseChildren = this.topShadow.mouseEnabled = false;
          this.bottomShadow.mouseChildren = this.bottomShadow.mouseEnabled = false;
       }
-
+      
       override protected function onDispose() : void {
          this.monitorLabel.dispose();
          this.monitorDropDown.dispose();
@@ -151,5 +150,4 @@ package net.wg.gui.lobby.settings
          super.onDispose();
       }
    }
-
 }

@@ -12,39 +12,38 @@ package net.wg.gui.messenger.windows
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
-
-
+   
    public class ConnectToSecureChannelWindow extends ConnectToSecureChannelWindowMeta implements IConnectToSecureChannelWindowMeta
    {
-          
+      
       public function ConnectToSecureChannelWindow() {
          super();
       }
-
+      
       private static const UPDATE_COMPONENTS:String = "update_components";
-
+      
       public var titleLabel:TextField;
-
+      
       public var channelInfoLabel:TextField;
-
+      
       public var passwordLabel:TextField;
-
+      
       public var passwordInput:TextInput;
-
+      
       public var connectButton:SoundButtonEx;
-
+      
       public var cancelButton:SoundButtonEx;
-
+      
       private var isUpdated:Boolean = true;
-
+      
       private var channelInfoText:String = "";
-
+      
       public function as_infoMessage(param1:String) : void {
          this.channelInfoText = param1;
          this.isUpdated = false;
          invalidate(UPDATE_COMPONENTS);
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          showWindowBg = false;
@@ -56,7 +55,7 @@ package net.wg.gui.messenger.windows
          _loc1_.right = 8;
          _loc1_.bottom = 18;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(UPDATE_COMPONENTS)) && !this.isUpdated)
@@ -65,7 +64,7 @@ package net.wg.gui.messenger.windows
             this.updateData();
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.connectButton.addEventListener(ButtonEvent.CLICK,this.connectButtonClickHandler);
@@ -75,30 +74,30 @@ package net.wg.gui.messenger.windows
          this.passwordInput.addEventListener(InputEvent.INPUT,this.passwordInputHandler);
          App.utils.scheduler.envokeInNextFrame(this.onSetModalFocus);
       }
-
+      
       override protected function onSetModalFocus(param1:InteractiveObject) : void {
          this.passwordInput.validateNow();
          setFocus(this.passwordInput);
       }
-
+      
       override protected function onDispose() : void {
          this.connectButton.removeEventListener(ButtonEvent.CLICK,this.connectButtonClickHandler);
          this.cancelButton.removeEventListener(ButtonEvent.CLICK,this.cancelButtonClickHandler);
          super.onDispose();
       }
-
+      
       private function connectButtonClickHandler(param1:ButtonEvent) : void {
          this.prepareSendPassword();
       }
-
+      
       private function prepareSendPassword() : void {
          sendPasswordS(this.passwordInput.text);
       }
-
+      
       private function cancelButtonClickHandler(param1:ButtonEvent) : void {
          cancelPasswordS();
       }
-
+      
       private function passwordInputHandler(param1:InputEvent) : void {
          var _loc2_:InputDetails = param1.details;
          if(param1.details.code == Keyboard.ENTER && _loc2_.value == InputValue.KEY_UP)
@@ -107,10 +106,9 @@ package net.wg.gui.messenger.windows
             this.prepareSendPassword();
          }
       }
-
+      
       private function updateData() : void {
          this.channelInfoLabel.text = this.channelInfoText;
       }
    }
-
 }

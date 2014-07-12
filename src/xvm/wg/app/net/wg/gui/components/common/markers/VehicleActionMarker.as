@@ -3,23 +3,22 @@ package net.wg.gui.components.common.markers
    import scaleform.clik.core.UIComponent;
    import flash.display.MovieClip;
    import scaleform.clik.motion.Tween;
-
-
+   
    public class VehicleActionMarker extends UIComponent
    {
-          
+      
       public function VehicleActionMarker() {
          super();
       }
-
+      
       private static const HIDE_DURATION:Number = 1000;
-
+      
       private var _actionRendererMap:Object;
-
+      
       private var currentRenderer:MovieClip;
-
+      
       private var hideTween:Tween;
-
+      
       public function showAction(param1:String) : void {
          var _loc2_:String = this._actionRendererMap[param1];
          if(_loc2_)
@@ -27,18 +26,18 @@ package net.wg.gui.components.common.markers
             this.currentRenderer = this.createActionRenderer(_loc2_);
          }
       }
-
+      
       public function stopAction() : void {
          if(this.currentRenderer)
          {
             this.hideTween = new Tween(HIDE_DURATION,this.currentRenderer,{"alpha":0.0});
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       private function removeActionRenderer() : void {
          if(!this.currentRenderer)
          {
@@ -47,7 +46,7 @@ package net.wg.gui.components.common.markers
          removeChild(this.currentRenderer);
          this.currentRenderer = null;
       }
-
+      
       private function createActionRenderer(param1:String) : MovieClip {
          var _loc2_:MovieClip = null;
          this.removeActionRenderer();
@@ -58,15 +57,15 @@ package net.wg.gui.components.common.markers
          }
          return _loc2_;
       }
-
+      
       public function get actionRenderers() : Object {
          return this._actionRendererMap;
       }
-
+      
       public function set actionRenderers(param1:Object) : void {
          this._actionRendererMap = param1;
       }
-
+      
       override protected function onDispose() : void {
          this.removeActionRenderer();
          this._actionRendererMap = null;
@@ -74,5 +73,4 @@ package net.wg.gui.components.common.markers
          super.onDispose();
       }
    }
-
 }

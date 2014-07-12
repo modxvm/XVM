@@ -4,11 +4,10 @@ package net.wg.gui.cyberSport.views.autoSearch
    import flash.display.MovieClip;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
-
-
+   
    public class WaitingPlayers extends StateViewBase
    {
-          
+      
       public function WaitingPlayers() {
          super();
          currentState = CYBER_SPORT_ALIASES.AUTO_SEARCH_WAITING_PLAYERS_STATE;
@@ -18,27 +17,27 @@ package net.wg.gui.cyberSport.views.autoSearch
          this.buttonsBG.visible = false;
          cancelButton.visible = false;
       }
-
+      
       public var fieldSet:FieldSet;
-
+      
       public var buttonsBG:MovieClip;
-
+      
       public var player1:MovieClip = null;
-
+      
       public var player2:MovieClip = null;
-
+      
       public var player3:MovieClip = null;
-
+      
       public var player4:MovieClip = null;
-
+      
       public var player5:MovieClip = null;
-
+      
       public var player6:MovieClip = null;
-
+      
       public var player7:MovieClip = null;
-
+      
       private var players:Array = null;
-
+      
       override protected function updateView() : void {
          super.updateView();
          this.buttonsBG.visible = cancelButton.visible = model.canInvokeAutoSearch;
@@ -46,7 +45,7 @@ package net.wg.gui.cyberSport.views.autoSearch
          startTimer();
          this.initPlayersState(model.playersReadiness);
       }
-
+      
       private function initPlayersState(param1:Array) : void {
          var _loc4_:String = null;
          var _loc2_:uint = param1.length;
@@ -65,13 +64,13 @@ package net.wg.gui.cyberSport.views.autoSearch
             _loc3_++;
          }
       }
-
+      
       override protected function onTimer() : void {
          super.onTimer();
          updateTime();
          startTimer();
       }
-
+      
       override protected function onDispose() : void {
          if(this.players)
          {
@@ -80,11 +79,10 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
          super.onDispose();
       }
-
-      override protected function cancelButtonOnClick(param1:ButtonEvent=null) : void {
+      
+      override protected function cancelButtonOnClick(param1:ButtonEvent = null) : void {
          super.cancelButtonOnClick(param1);
          cancelButton.enabled = false;
       }
    }
-
 }

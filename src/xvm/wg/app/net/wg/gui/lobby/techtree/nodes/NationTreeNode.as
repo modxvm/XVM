@@ -17,32 +17,31 @@ package net.wg.gui.lobby.techtree.nodes
    import flash.display.BitmapData;
    import net.wg.gui.lobby.techtree.constants.NavIndicator;
    import flash.display.Bitmap;
-
-
+   
    public class NationTreeNode extends Renderer
    {
-          
+      
       public function NationTreeNode() {
          super();
       }
-
+      
       private var isNavContainerAdded:Boolean = false;
-
+      
       private var isMouseMoved:Boolean = false;
-
+      
       public var nameAndXp:NameAndXpField;
-
+      
       public var typeAndLevel:TypeAndLevelField;
-
+      
       public var vIconLoader:UILoaderAlt;
-
+      
       public var navContainer:Sprite;
-
-      override public function setup(param1:uint, param2:NodeData, param3:uint=0, param4:MatrixPosition=null) : void {
+      
+      override public function setup(param1:uint, param2:NodeData, param3:uint = 0, param4:MatrixPosition = null) : void {
          super.setup(param1,param2,param3,param4);
          this.drawNavIndicator();
       }
-
+      
       override public function cleanUp() : void {
          removeEventListener(MouseEvent.MOUSE_MOVE,this.handleMouseMove,false);
          if(this.typeAndLevel != null)
@@ -59,12 +58,12 @@ package net.wg.gui.lobby.techtree.nodes
          }
          super.cleanUp();
       }
-
+      
       override public function getIconPath() : String {
          return dataInited?_valueObject.smallIconPath:"";
       }
-
-      override public function hitTestPoint(param1:Number, param2:Number, param3:Boolean=false) : Boolean {
+      
+      override public function hitTestPoint(param1:Number, param2:Number, param3:Boolean = false) : Boolean {
          var _loc4_:* = false;
          if(hit != null)
          {
@@ -76,11 +75,11 @@ package net.wg.gui.lobby.techtree.nodes
          }
          return (_loc4_) && (button == null || !button.visible || !button.hitTestPoint(param1,param2,param3));
       }
-
+      
       override public function click2Info() : void {
          dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_VEHICLE_INFO,0,_index,_entityType));
       }
-
+      
       override public function showContextMenu() : void {
          if(button != null)
          {
@@ -89,7 +88,7 @@ package net.wg.gui.lobby.techtree.nodes
          this.stopDragNode();
          MenuHandler.getInstance().showNationTreeMenu(this);
       }
-
+      
       override public function populateUI() : void {
          var _loc1_:String = null;
          if(this.vIconLoader != null)
@@ -123,11 +122,11 @@ package net.wg.gui.lobby.techtree.nodes
          }
          super.populateUI();
       }
-
+      
       override public function toString() : String {
          return "[NationTreeNode " + index + ", " + name + "]";
       }
-
+      
       override protected function preInitialize() : void {
          super.preInitialize();
          _entityType = NodeEntityType.NATION_TREE;
@@ -135,7 +134,7 @@ package net.wg.gui.lobby.techtree.nodes
          _tooltipID = Tooltips.TECHTREE_VEHICLE;
          isDelegateEvents = true;
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          if(button != null)
@@ -143,7 +142,7 @@ package net.wg.gui.lobby.techtree.nodes
             button.startAnimation();
          }
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          if(button != null)
@@ -151,12 +150,12 @@ package net.wg.gui.lobby.techtree.nodes
             button.endAnimation(false);
          }
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
          super.handleMousePress(param1);
          this.startDragNode(param1);
       }
-
+      
       override protected function handleReleaseOutside(param1:MouseEvent) : void {
          super.handleReleaseOutside(param1);
          if(button != null)
@@ -168,8 +167,8 @@ package net.wg.gui.lobby.techtree.nodes
             this.stopDragNode();
          }
       }
-
-      override protected function handleClick(param1:uint=0) : void {
+      
+      override protected function handleClick(param1:uint = 0) : void {
          MenuHandler.getInstance().hideMenu();
          if(button != null)
          {
@@ -182,18 +181,18 @@ package net.wg.gui.lobby.techtree.nodes
          }
          this.stopDragNode();
       }
-
+      
       private function startDragNode(param1:MouseEvent) : void {
-         if(container  is  IDraggable && (App.utils.commons.isLeftButton(param1)))
+         if(container is IDraggable && (App.utils.commons.isLeftButton(param1)))
          {
             addEventListener(MouseEvent.MOUSE_MOVE,this.handleMouseMove,false,0,true);
          }
       }
-
+      
       private function stopDragNode() : void {
          var _loc1_:IDraggable = null;
          var _loc2_:InteractiveObject = null;
-         if(container  is  IDraggable)
+         if(container is IDraggable)
          {
             removeEventListener(MouseEvent.MOUSE_MOVE,this.handleMouseMove,false);
             _loc1_ = IDraggable(container);
@@ -202,7 +201,7 @@ package net.wg.gui.lobby.techtree.nodes
             _loc2_.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
          }
       }
-
+      
       private function handleMouseMove(param1:MouseEvent) : void {
          var _loc2_:IDraggable = null;
          var _loc3_:InteractiveObject = null;
@@ -218,7 +217,7 @@ package net.wg.gui.lobby.techtree.nodes
             _loc3_.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_MOVE));
          }
       }
-
+      
       private function drawNavIndicator() : void {
          var _loc1_:BitmapData = null;
          if(this.navContainer != null)
@@ -236,5 +235,4 @@ package net.wg.gui.lobby.techtree.nodes
          }
       }
    }
-
 }

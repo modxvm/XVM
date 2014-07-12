@@ -7,52 +7,51 @@ package net.wg.gui.lobby.questsWindow
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
    import flash.events.Event;
-
-
+   
    public class QuestAwardsBlock extends UIComponent
    {
-          
+      
       public function QuestAwardsBlock() {
          this._data = [];
          super();
       }
-
+      
       private static const INVALIDATE_MASK_WIDTH:String = "invMaskWidth";
-
+      
       private static const INVALIDATE_ALIGN:String = "invAlign";
-
+      
       private static const VERTICAL_PADDING:int = 5;
-
+      
       public static const TEXT_PADDING:int = 10;
-
+      
       private static const RIGHT_PADDING:int = 40;
-
+      
       private static const BOTTOM_PADDING:int = 13;
-
+      
       private static const PIXEL_PADDING:int = 1;
-
+      
       private static const CONTAINER_AVAILABLE_WIDTH:int = 350;
-
+      
       public var awardTF:TextField;
-
+      
       public var flagBottom:MovieClip;
-
+      
       public var flagBody:MovieClip;
-
+      
       public var maskMC:MovieClip;
-
+      
       public var bobyBg:MovieClip;
-
+      
       public var container:ResizableContainer;
-
+      
       private var _data:Array;
-
+      
       private var _maskWidth:Number = NaN;
-
+      
       private var _contentAlign:String = "left";
-
+      
       public var hasFixedHeight:Boolean = true;
-
+      
       override protected function onDispose() : void {
          if(this._data)
          {
@@ -68,7 +67,7 @@ package net.wg.gui.lobby.questsWindow
          this.container = null;
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.container.verticalPadding = VERTICAL_PADDING;
@@ -86,12 +85,12 @@ package net.wg.gui.lobby.questsWindow
             this.flagBottom.mouseEnabled = false;
          }
       }
-
+      
       public function setData(param1:Array) : void {
          this._data = param1;
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -155,20 +154,19 @@ package net.wg.gui.lobby.questsWindow
             dispatchEvent(new Event(Event.RESIZE));
          }
       }
-
+      
       public function setActualWidth(param1:Number) : void {
          this._maskWidth = param1;
          invalidate(INVALIDATE_MASK_WIDTH);
       }
-
+      
       public function get contentAlign() : String {
          return this._contentAlign;
       }
-
+      
       public function set contentAlign(param1:String) : void {
          invalidate(INVALIDATE_ALIGN);
          this._contentAlign = param1;
       }
    }
-
 }

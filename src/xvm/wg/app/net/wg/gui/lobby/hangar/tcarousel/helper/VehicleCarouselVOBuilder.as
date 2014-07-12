@@ -2,19 +2,18 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
 {
    import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
-
-
+   
    public class VehicleCarouselVOBuilder extends Object
    {
-          
+      
       public function VehicleCarouselVOBuilder() {
          super();
       }
-
+      
       private static var __instance:VehicleCarouselVOBuilder;
-
+      
       private static var __allowInstantiation:Boolean = false;
-
+      
       public static function get instance() : VehicleCarouselVOBuilder {
          if(!__instance)
          {
@@ -24,13 +23,13 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
          }
          return __instance;
       }
-
+      
       public function getDataVoForEmptySlot() : VehicleCarouselVO {
          var _loc1_:VehicleCarouselVO = new VehicleCarouselVO();
          _loc1_.empty = true;
          return _loc1_;
       }
-
+      
       public function getDataVoForBuyVehicle(param1:Number) : VehicleCarouselVO {
          var _loc2_:VehicleCarouselVO = new VehicleCarouselVO();
          _loc2_.stat = "buyTank";
@@ -39,7 +38,7 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
          _loc2_.availableSlots = param1;
          return _loc2_;
       }
-
+      
       public function getDataVoForBuySlot(param1:Number, param2:ActionPriceVO) : VehicleCarouselVO {
          var _loc3_:VehicleCarouselVO = new VehicleCarouselVO();
          _loc3_.stat = "buySlot";
@@ -50,5 +49,4 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
          return _loc3_;
       }
    }
-
 }

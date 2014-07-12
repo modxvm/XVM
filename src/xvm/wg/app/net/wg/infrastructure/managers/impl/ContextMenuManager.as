@@ -3,7 +3,6 @@ package net.wg.infrastructure.managers.impl
    import net.wg.infrastructure.base.meta.impl.ContextMenuManagerMeta;
    import net.wg.infrastructure.managers.IContextMenuManager;
    import net.wg.infrastructure.interfaces.IContextMenu;
-   import __AS3__.vec.Vector;
    import net.wg.infrastructure.interfaces.IContextItem;
    import flash.display.DisplayObject;
    import net.wg.utils.IClassFactory;
@@ -14,22 +13,21 @@ package net.wg.infrastructure.managers.impl
    import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
    import net.wg.data.daapi.PlayerInfo;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-
-
+   
    public class ContextMenuManager extends ContextMenuManagerMeta implements IContextMenuManager
    {
-          
+      
       public function ContextMenuManager() {
          super();
       }
-
+      
       private var _currentMenu:IContextMenu = null;
-
+      
       private var _handler:Function = null;
-
+      
       private var _extraHandler:Function = null;
-
-      public function show(param1:Vector.<IContextItem>, param2:DisplayObject, param3:Function=null, param4:Object=null) : IContextMenu {
+      
+      public function show(param1:Vector.<IContextItem>, param2:DisplayObject, param3:Function = null, param4:Object = null) : IContextMenu {
          this.hide();
          this._handler = param3;
          var _loc5_:IClassFactory = App.utils.classFactory;
@@ -49,8 +47,8 @@ package net.wg.infrastructure.managers.impl
          DisplayObject(this._currentMenu).stage.addEventListener(Event.RESIZE,this.closeEventHandler);
          return this._currentMenu;
       }
-
-      public function showUserContextMenu(param1:DisplayObject, param2:Object, param3:IUserContextMenuGenerator, param4:Function=null) : IContextMenu {
+      
+      public function showUserContextMenu(param1:DisplayObject, param2:Object, param3:IUserContextMenuGenerator, param4:Function = null) : IContextMenu {
          var _loc5_:PlayerInfo = null;
          var _loc6_:* = NaN;
          var _loc7_:Vector.<IContextItem> = null;
@@ -63,15 +61,15 @@ package net.wg.infrastructure.managers.impl
          }
          return null;
       }
-
-      public function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>, param3:Object=null) : IContextMenu {
+      
+      public function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>, param3:Object = null) : IContextMenu {
          return this.show(param2,param1,this.handleUserContextMenu,param3);
       }
-
+      
       public function vehicleWasInBattle(param1:Number) : Boolean {
          return isVehicleWasInBattleS(param1);
       }
-
+      
       public function hide() : void {
          if(this._currentMenu != null)
          {
@@ -84,11 +82,11 @@ package net.wg.infrastructure.managers.impl
             {
                DisplayObject(this._currentMenu).removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.closeEventHandler);
             }
-            if(DisplayObject(this._currentMenu).stage.hasEventListener(Event.RESIZE))
+            if((DisplayObject(this._currentMenu).stage) && (DisplayObject(this._currentMenu).stage.hasEventListener(Event.RESIZE)))
             {
                DisplayObject(this._currentMenu).stage.removeEventListener(Event.RESIZE,this.closeEventHandler);
             }
-            if(this._currentMenu  is  IDisposable)
+            if(this._currentMenu is IDisposable)
             {
                IDisposable(this._currentMenu).dispose();
             }
@@ -97,11 +95,11 @@ package net.wg.infrastructure.managers.impl
             this._extraHandler = null;
          }
       }
-
+      
       public function dispose() : void {
          this.hide();
       }
-
+      
       private function handleUserContextMenu(param1:ContextMenuEvent) : void {
          var _loc2_:Object = param1.memberItemData;
          switch(param1.id)
@@ -170,11 +168,11 @@ package net.wg.infrastructure.managers.impl
          }
          this.hide();
       }
-
+      
       private function closeEventHandler(param1:Event) : void {
          this.hide();
       }
-
+      
       private function onContextMenuAction(param1:ContextMenuEvent) : void {
          if(this._handler != null)
          {
@@ -183,5 +181,4 @@ package net.wg.infrastructure.managers.impl
          }
       }
    }
-
 }

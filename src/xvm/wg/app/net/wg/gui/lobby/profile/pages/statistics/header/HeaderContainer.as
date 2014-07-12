@@ -8,23 +8,22 @@ package net.wg.gui.lobby.profile.pages.statistics.header
    import net.wg.data.managers.impl.ToolTipParams;
    import net.wg.gui.components.common.containers.HorizontalGroupLayout;
    import net.wg.data.constants.Linkages;
-
-
+   
    public class HeaderContainer extends UIComponent implements IDisposable
    {
-          
+      
       public function HeaderContainer() {
          super();
          this.group.layout = new HorizontalGroupLayout();
          this.group.itemRendererClass = App.utils.classFactory.getClass(Linkages.ADVANCED_LINE_DESCR_ICON_TEXT_UI);
       }
-
+      
       public var icon:BattleTypeIcon;
-
+      
       public var group:GroupEx;
-
+      
       public var image:HeaderBGImage;
-
+      
       public function setDossierData(param1:Array) : void {
          var _loc3_:StatisticsHeaderVO = null;
          var _loc5_:Object = null;
@@ -57,7 +56,7 @@ package net.wg.gui.lobby.profile.pages.statistics.header
          }
          this.group.dataProvider = _loc2_;
       }
-
+      
       public function set battlesType(param1:String) : void {
          var _loc2_:String = null;
          if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_ALL)
@@ -65,37 +64,31 @@ package net.wg.gui.lobby.profile.pages.statistics.header
             _loc2_ = "random";
             this.image.gotoAndStop(1);
          }
+         else if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM)
+         {
+            _loc2_ = "team7x7";
+            this.image.gotoAndStop(2);
+         }
+         else if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL)
+         {
+            _loc2_ = "historical";
+            this.image.gotoAndStop(3);
+         }
+         else if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS)
+         {
+            _loc2_ = "fortifications";
+            this.image.gotoAndStop(4);
+         }
          else
          {
-            if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM)
-            {
-               _loc2_ = "team7x7";
-               this.image.gotoAndStop(2);
-            }
-            else
-            {
-               if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL)
-               {
-                  _loc2_ = "historical";
-                  this.image.gotoAndStop(3);
-               }
-               else
-               {
-                  if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS)
-                  {
-                     _loc2_ = "fortifications";
-                     this.image.gotoAndStop(4);
-                  }
-                  else
-                  {
-                     throw new Error(this + " :: Unknown battle type: " + param1);
-                  }
-               }
-            }
+            throw new Error(this + " :: Unknown battle type: " + param1);
          }
+         
+         
+         
          this.icon.type = _loc2_;
       }
-
+      
       override protected function onDispose() : void {
          this.icon.dispose();
          this.icon = null;
@@ -105,5 +98,4 @@ package net.wg.gui.lobby.profile.pages.statistics.header
          super.onDispose();
       }
    }
-
 }

@@ -4,11 +4,10 @@ package net.wg.gui.lobby.header
    import flash.display.MovieClip;
    import flash.text.TextField;
    import scaleform.clik.utils.Constraints;
-
-
+   
    public class FightButtonFancyRenderer extends FightListItemRenderer
    {
-          
+      
       public function FightButtonFancyRenderer() {
          super();
          scaleX = scaleY = 1;
@@ -19,27 +18,27 @@ package net.wg.gui.lobby.header
          this._originalDescrY = Math.floor(this.descr.y);
          this.descr.visible = false;
       }
-
+      
       private static const DESCR_TEXT_COLOR:uint = 8092009;
-
+      
       private static const DESCR_ACTIVE_TEXT_COLOR:uint = 16748339;
-
+      
       private static const TITLE_VERTICAL_PADDING:int = 8;
-
+      
       private static const INCREASE_TEXT_HEIGHT:int = 3;
-
+      
       public var newIndicator:MovieClip;
-
+      
       public var hitAreaA:MovieClip;
-
+      
       public var icon:MovieClip;
-
+      
       public var descr:TextField;
-
+      
       private var _originalTitleY:int;
-
+      
       private var _originalDescrY:int;
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(!constraintsDisabled)
@@ -47,9 +46,9 @@ package net.wg.gui.lobby.header
             constraints.addElement(this.icon.name,this.icon,Constraints.LEFT | Constraints.TOP);
          }
       }
-
+      
       override protected function applyData(param1:BattleSelectDropDownVO) : void {
-         var _loc3_:BattleSelectDropDownVO = null;
+         var _loc2_:BattleSelectDropDownVO = null;
          super.applyData(param1);
          if(this.newIndicator)
          {
@@ -59,11 +58,7 @@ package net.wg.gui.lobby.header
                this.updateNewAnimation(param1.isNew);
             }
          }
-         var _loc2_:String = param1.icon;
-         if(this.icon.currentLabel != _loc2_)
-         {
-            this.icon.gotoAndStop(_loc2_);
-         }
+         this.icon.gotoAndStop(param1.icon);
          if(param1.active)
          {
             this.descr.text = param1.description;
@@ -79,18 +74,18 @@ package net.wg.gui.lobby.header
             }
             if(enabled)
             {
-               _loc3_ = BattleSelectDropDownVO(data);
-               this.descr.textColor = _loc3_.active?DESCR_ACTIVE_TEXT_COLOR:DESCR_TEXT_COLOR;
+               _loc2_ = BattleSelectDropDownVO(data);
+               this.descr.textColor = _loc2_.active?DESCR_ACTIVE_TEXT_COLOR:DESCR_TEXT_COLOR;
             }
          }
          this.descr.visible = param1.active;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          this.icon.alpha = param1?1:0.5;
       }
-
+      
       override protected function updateAfterStateChange() : void {
          super.updateAfterStateChange();
          if(!constraintsDisabled && (this.icon))
@@ -98,7 +93,7 @@ package net.wg.gui.lobby.header
             constraints.updateElement(this.icon.name,this.icon);
          }
       }
-
+      
       private function updateNewAnimation(param1:Boolean) : void {
          preventAutosizing = true;
          if(param1)
@@ -111,5 +106,4 @@ package net.wg.gui.lobby.header
          }
       }
    }
-
 }

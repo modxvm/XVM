@@ -5,26 +5,25 @@ package net.wg.gui.lobby.profile.pages.technique
    import net.wg.infrastructure.constants.WindowViewInvalidationType;
    import fl.transitions.easing.Strong;
    import scaleform.clik.motion.Tween;
-
-
+   
    public class ProfileTechniqueWindow extends ProfileTechnique
    {
-          
+      
       public function ProfileTechniqueWindow() {
          this.tweenManager = new ExcludeTweenManager();
          super();
       }
-
+      
       public static const WAITING_SIDES_PADDING:uint = 1;
-
+      
       private static const ANIM_SPEED:uint = 500;
-
+      
       private var _showWaiting:Boolean;
-
+      
       private var _waiting:Waiting;
-
+      
       private var tweenManager:ExcludeTweenManager;
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(WindowViewInvalidationType.WAITING_INVALID))
@@ -52,8 +51,7 @@ package net.wg.gui.lobby.profile.pages.technique
                      {
                         "ease":Strong.easeOut,
                         "onComplete":this.onTweenComplete
-                     }
-                  );
+                     });
                }
                else
                {
@@ -62,17 +60,16 @@ package net.wg.gui.lobby.profile.pages.technique
                      {
                         "ease":Strong.easeOut,
                         "onComplete":this.onTweenComplete
-                     }
-                  );
+                     });
                }
             }
          }
       }
-
+      
       private function onTweenComplete(param1:Tween) : void {
          this.tweenManager.unregister(param1);
       }
-
+      
       public function set showWaiting(param1:Boolean) : void {
          if(this._showWaiting != param1)
          {
@@ -80,7 +77,7 @@ package net.wg.gui.lobby.profile.pages.technique
             invalidate(WindowViewInvalidationType.WAITING_INVALID);
          }
       }
-
+      
       override protected function onDispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
@@ -91,11 +88,10 @@ package net.wg.gui.lobby.profile.pages.technique
          }
          super.onDispose();
       }
-
+      
       override public function as_responseVehicleDossier(param1:Object) : void {
          this.showWaiting = param1 == null;
          super.as_responseVehicleDossier(param1);
       }
    }
-
 }

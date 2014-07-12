@@ -10,25 +10,24 @@ package net.wg.gui.historicalBattles.controls
    import net.wg.gui.utils.ComplexTooltipHelper;
    import flash.filters.ColorMatrixFilter;
    import fl.motion.AdjustColor;
-
-
+   
    public class BattleCarouselItemRenderer extends SoundListItemRenderer implements ICarouselItemRenderer
    {
-          
+      
       public function BattleCarouselItemRenderer() {
          super();
          toggle = true;
          allowDeselect = false;
       }
-
+      
       public var infoField:TextField;
-
+      
       public var image:UILoaderAlt;
-
+      
       protected var model:BattleListItemVO;
-
+      
       private var _canBeSelected:Boolean = true;
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          this.model = param1 as BattleListItemVO;
@@ -38,13 +37,13 @@ package net.wg.gui.historicalBattles.controls
          }
          invalidateData();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.infoField.text = HISTORICAL_BATTLES.LABEL_SOON;
          this.infoField.visible = false;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.model))
@@ -54,7 +53,7 @@ package net.wg.gui.historicalBattles.controls
             this.image.filters = this.model.isFuture?[this.getBWFilter()]:[];
          }
       }
-
+      
       override protected function onDispose() : void {
          if(this.model)
          {
@@ -65,7 +64,7 @@ package net.wg.gui.historicalBattles.controls
          this.image = null;
          super.onDispose();
       }
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          var _loc2_:String = null;
          super.handleMouseRollOver(param1);
@@ -78,32 +77,32 @@ package net.wg.gui.historicalBattles.controls
             }
          }
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          App.toolTipMgr.hide();
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          if(this._canBeSelected)
          {
             super.handleMouseRelease(param1);
          }
       }
-
+      
       override protected function handleMousePress(param1:MouseEvent) : void {
          super.handleMousePress(param1);
          App.toolTipMgr.hide();
       }
-
+      
       public function set canBeSelected(param1:Boolean) : void {
          this._canBeSelected = param1;
       }
-
+      
       public function get canBeSelected() : Boolean {
          return this._canBeSelected;
       }
-
+      
       private function getBWFilter() : ColorMatrixFilter {
          var _loc1_:AdjustColor = new AdjustColor();
          _loc1_.brightness = 0;
@@ -113,5 +112,4 @@ package net.wg.gui.historicalBattles.controls
          return new ColorMatrixFilter(_loc1_.CalculateFinalFlatArray());
       }
    }
-
 }

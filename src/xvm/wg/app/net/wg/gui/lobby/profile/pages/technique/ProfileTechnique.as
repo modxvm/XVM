@@ -7,42 +7,41 @@ package net.wg.gui.lobby.profile.pages.technique
    import flash.events.Event;
    import net.wg.gui.lobby.profile.ProfileConstants;
    import net.wg.gui.lobby.profile.pages.technique.data.ProfileVehicleDossierVO;
-
-
+   
    public class ProfileTechnique extends ProfileTechniqueMeta implements IProfileTechniqueMeta
    {
-          
+      
       public function ProfileTechnique() {
          super();
          this.listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED,this.listDataChangeHandler,false,0,true);
       }
-
+      
       private static const CURRENT_DIMENSION_INVALID:String = "cdInv";
-
+      
       public var listComponent:TechniqueListComponent;
-
+      
       public var stackComponent:TechniqueStackComponent;
-
+      
       public var emptyScreen:ProfileTechniqueEmptyScreen;
-
+      
       override public function as_setInitData(param1:Object) : void {
          super.as_setInitData(param1);
          battlesDropdown.menuProvider = param1.dropDownProvider;
       }
-
+      
       override protected function initialize() : void {
          super.initialize();
          layoutManager = new SectionLayoutManager(525,740);
          layoutManager.registerComponents(this.listComponent,this.stackComponent);
       }
-
+      
       override protected function applyData(param1:Object) : Object {
          var _loc4_:TechniqueListVehicleVO = null;
          var _loc5_:Object = null;
          var _loc6_:* = false;
          var _loc2_:Array = param1 as Array;
          var _loc3_:Array = [];
-         for each (_loc5_ in _loc2_)
+         for each(_loc5_ in _loc2_)
          {
             _loc4_ = new TechniqueListVehicleVO(_loc5_);
             _loc3_.push(_loc4_);
@@ -55,7 +54,7 @@ package net.wg.gui.lobby.profile.pages.technique
          this.listComponent.visible = this.stackComponent.visible = _loc6_;
          return param1;
       }
-
+      
       private function listDataChangeHandler(param1:Event) : void {
          var _loc2_:TechniqueListVehicleVO = this.listComponent.selectedItem;
          if(_loc2_)
@@ -68,7 +67,7 @@ package net.wg.gui.lobby.profile.pages.technique
             this.stackComponent.updateLabel("",null);
          }
       }
-
+      
       override protected function applyResizing() : void {
          if(layoutManager)
          {
@@ -80,47 +79,39 @@ package net.wg.gui.lobby.profile.pages.technique
          this.listComponent.setSize(currentDimension.x,currentDimension.y - this.listComponent.y);
          this.stackComponent.setViewSize(_loc1_ - this.stackComponent.x,currentDimension.y - this.stackComponent.y);
       }
-
+      
       override public function as_responseDossier(param1:String, param2:Object) : void {
          super.as_responseDossier(param1,param2);
          if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_ALL)
          {
             this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_ALL);
          }
+         else if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM)
+         {
+            this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_TEAM);
+         }
+         else if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL)
+         {
+            this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_HISTORICAL);
+         }
+         else if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_BATTLES)
+         {
+            this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_FORTBATTLES);
+         }
+         else if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES)
+         {
+            this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_FORTSORTIES);
+         }
          else
          {
-            if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM)
-            {
-               this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_TEAM);
-            }
-            else
-            {
-               if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL)
-               {
-                  this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_HISTORICAL);
-               }
-               else
-               {
-                  if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_BATTLES)
-                  {
-                     this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_FORTBATTLES);
-                  }
-                  else
-                  {
-                     if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES)
-                     {
-                        this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_FORTSORTIES);
-                     }
-                     else
-                     {
-                        throw new Error("Battle type is not implemented! " + battlesType);
-                     }
-                  }
-               }
-            }
+            throw new Error("Battle type is not implemented! " + battlesType);
          }
+         
+         
+         
+         
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(CURRENT_DIMENSION_INVALID)) && (currentDimension))
@@ -128,7 +119,7 @@ package net.wg.gui.lobby.profile.pages.technique
             this.applyResizing();
          }
       }
-
+      
       public function as_responseVehicleDossier(param1:Object) : void {
          if(param1 != null)
          {
@@ -139,7 +130,7 @@ package net.wg.gui.lobby.profile.pages.technique
             this.stackComponent.updateTankData(new ProfileVehicleDossierVO({}));
          }
       }
-
+      
       override protected function onDispose() : void {
          if(this.listComponent)
          {
@@ -163,5 +154,4 @@ package net.wg.gui.lobby.profile.pages.technique
          super.onDispose();
       }
    }
-
 }

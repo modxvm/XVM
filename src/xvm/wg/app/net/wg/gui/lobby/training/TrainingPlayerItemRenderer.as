@@ -16,37 +16,36 @@ package net.wg.gui.lobby.training
    import flash.geom.Point;
    import net.wg.gui.prebattle.squad.MessengerUtils;
    import scaleform.clik.data.ListData;
-
-
+   
    public class TrainingPlayerItemRenderer extends ListItemRenderer implements IDropItem
    {
-          
+      
       public function TrainingPlayerItemRenderer() {
          super();
       }
-
+      
       private static const GOLD_COLOR:Number = 16761699;
-
+      
       private static const NAME_COLOR:Number = 13224374;
-
+      
       private static const VEHICLE_COLOR:Number = 8092009;
-
+      
       public var nameField:UserNameField;
-
+      
       public var vehicleField:TextField;
-
+      
       public var vehicleLevelField:TextField;
-
+      
       public var stateField:TextField;
-
+      
       private var defColorTrans:ColorTransform;
-
+      
       public var iconLoader:UILoaderAlt;
-
+      
       public var voiceWave:VoiceWave;
-
+      
       private var _isMouseOver:Boolean = false;
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(!constraintsDisabled)
@@ -60,7 +59,7 @@ package net.wg.gui.lobby.training
          addEventListener(MouseEvent.ROLL_OUT,this.hideToolTip,false,0,true);
          addEventListener(MouseEvent.ROLL_OVER,this.showToolTip,false,0,true);
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_DOWN,this.hideToolTip,false);
          removeEventListener(MouseEvent.ROLL_OUT,this.hideToolTip,false);
@@ -84,14 +83,14 @@ package net.wg.gui.lobby.training
             this.voiceWave.dispose();
             this.voiceWave = null;
          }
-         if((_data) && _data  is  IDisposable)
+         if((_data) && _data is IDisposable)
          {
             IDisposable(_data).dispose();
          }
          _data = null;
          super.onDispose();
       }
-
+      
       private function showToolTip(param1:MouseEvent) : void {
          this._isMouseOver = true;
          if(data)
@@ -99,7 +98,7 @@ package net.wg.gui.lobby.training
             App.toolTipMgr.show(TrainingRoomRendererVO(data).fullName);
          }
       }
-
+      
       private function hideToolTip(param1:MouseEvent) : void {
          if(param1.type == MouseEvent.ROLL_OUT)
          {
@@ -107,7 +106,7 @@ package net.wg.gui.lobby.training
          }
          App.toolTipMgr.hide();
       }
-
+      
       public function speak(param1:Boolean, param2:Boolean) : void {
          if(param1)
          {
@@ -118,14 +117,14 @@ package net.wg.gui.lobby.training
             this.voiceWave.setSpeaking(param1,param2);
          }
       }
-
+      
       override public function set selected(param1:Boolean) : void {
          if(_selectable)
          {
             super.selected = param1;
          }
       }
-
+      
       override protected function handleMouseRelease(param1:MouseEvent) : void {
          if((App.utils.commons.isRightButton(param1)) && (data))
          {
@@ -134,7 +133,7 @@ package net.wg.gui.lobby.training
          }
          super.handleMouseRelease(param1);
       }
-
+      
       override public function setData(param1:Object) : void {
          var _loc2_:TrainingRoomRendererVO = null;
          this.data = param1;
@@ -149,11 +148,10 @@ package net.wg.gui.lobby.training
          }
          invalidate(InvalidationType.DATA);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:TrainingRoomRendererVO = null;
          var _loc2_:Point = null;
-         var _loc3_:ColorTransform = null;
          super.draw();
          if(_baseDisposed)
          {
@@ -172,12 +170,7 @@ package net.wg.gui.lobby.training
                {
                   this.nameField.textColor = GOLD_COLOR;
                   this.vehicleField.textColor = GOLD_COLOR;
-                  _loc3_ = new ColorTransform();
-                  _loc3_.redOffset = 21;
-                  _loc3_.greenOffset = 9;
-                  _loc3_.blueMultiplier = 0.51;
-                  _loc3_.greenMultiplier = 0.87;
-                  this.iconLoader.transform.colorTransform = _loc3_;
+                  this.iconLoader.transform.colorTransform = App.colorSchemeMgr.getTransform(TrainingConstants.VEHICLE_YELLOW_COLOR_SCHEME_ALIAS);
                }
                else
                {
@@ -229,11 +222,10 @@ package net.wg.gui.lobby.training
             }
          }
       }
-
+      
       override public function setListData(param1:ListData) : void {
          index = param1.index;
          this.selected = param1.selected;
       }
    }
-
 }

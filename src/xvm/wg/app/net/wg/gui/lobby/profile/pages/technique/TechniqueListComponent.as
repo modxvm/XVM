@@ -17,26 +17,25 @@ package net.wg.gui.lobby.profile.pages.technique
    import flash.events.Event;
    import net.wg.gui.components.advanced.SortingButton;
    import net.wg.gui.components.controls.SortableScrollingList;
-
-
+   
    public class TechniqueListComponent extends UIComponent
    {
-          
+      
       public function TechniqueListComponent() {
          this.tweenManager = new ExcludeTweenManager();
          super();
          this.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED,this.selectedDataChangeHandler,false,0,true);
          this.techniqueList.addEventListener(SortableScrollingList.DATA_INVALIDATED,this.listDataInvalidateHandler,false,0,true);
       }
-
+      
       public static const DATA_CHANGED:String = "dataChanged";
-
+      
       private static const LIST_DATA_INVALIDATED:String = "ldInv";
-
+      
       private static const ANIM_SPEED:uint = 1000;
-
+      
       private static const MASTERY_TAB_ENABLING_CHANGED:String = "mTabEnablingChanged";
-
+      
       private static function getHeadersProvider() : DataProvider {
          var _loc4_:Array = null;
          var _loc13_:NormalSortingBtnInfo = null;
@@ -124,27 +123,27 @@ package net.wg.gui.lobby.profile.pages.technique
          }
          return new DataProvider(_loc4_);
       }
-
+      
       public var lowerShadow:MovieClip;
-
+      
       public var upperShadow:MovieClip;
-
+      
       public var sortableButtonBar:SortableHeaderButtonBar;
-
+      
       public var techniqueList:TechniqueList;
-
+      
       public var scrollBar:ScrollBar;
-
+      
       public var bg:MovieClip;
-
+      
       private var sortFunctions:Object;
-
+      
       private var isMarkOfMasteryBtnEnabled:Boolean = true;
-
+      
       private var tweenManager:ExcludeTweenManager;
-
+      
       private var _vehicles:Array;
-
+      
       override public function setSize(param1:Number, param2:Number) : void {
          super.setSize(param1,param2);
          var _loc3_:Number = this.techniqueList.rowHeight;
@@ -159,12 +158,12 @@ package net.wg.gui.lobby.profile.pages.technique
          this.scrollBar.validateNow();
          this.lowerShadow.y = _loc5_ - this.lowerShadow.height;
       }
-
+      
       public function set vehicles(param1:Array) : void {
          this._vehicles = param1;
          invalidateData();
       }
-
+      
       public function enableMarkOfMasteryBtn(param1:Boolean) : void {
          if(this.isMarkOfMasteryBtnEnabled != param1)
          {
@@ -172,11 +171,11 @@ package net.wg.gui.lobby.profile.pages.technique
             invalidate(MASTERY_TAB_ENABLING_CHANGED);
          }
       }
-
+      
       public function get selectedItem() : TechniqueListVehicleVO {
          return TechniqueListVehicleVO(this.techniqueList.selectedItem);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.lowerShadow.mouseEnabled = this.upperShadow.mouseEnabled = false;
@@ -185,12 +184,12 @@ package net.wg.gui.lobby.profile.pages.technique
          this.techniqueList.columnsData = this.sortableButtonBar.dataProvider;
          this.applyDefaultSorting();
       }
-
+      
       private function applyDefaultSorting() : void {
          this.sortableButtonBar.selectedIndex = 4;
          this.techniqueList.sortByField(TechniqueList.BATTLES_COUNT,false);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:* = 0;
@@ -226,7 +225,7 @@ package net.wg.gui.lobby.profile.pages.technique
          if(isInvalid(MASTERY_TAB_ENABLING_CHANGED))
          {
             _loc6_ = this.sortableButtonBar.dataProvider?this.sortableButtonBar.dataProvider.length:0;
-            _loc8_ = _loc6_-1;
+            _loc8_ = _loc6_ - 1;
             while(_loc8_ >= 0)
             {
                _loc7_ = NormalSortingBtnInfo(this.sortableButtonBar.dataProvider[_loc8_]);
@@ -243,7 +242,7 @@ package net.wg.gui.lobby.profile.pages.technique
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
@@ -273,30 +272,30 @@ package net.wg.gui.lobby.profile.pages.technique
          this.lowerShadow = null;
          super.onDispose();
       }
-
+      
       private function getAnimTweenSet() : Object {
-         return {
-            "ease":Strong.easeOut,
-            "onComplete":this.onTweenComplete
-         }
-         ;
+         return 
+            {
+               "ease":Strong.easeOut,
+               "onComplete":this.onTweenComplete
+            };
       }
-
+      
       private function onTweenComplete(param1:Tween) : void {
          if(this.tweenManager)
          {
             this.tweenManager.unregister(param1);
          }
       }
-
+      
       private function listDataInvalidateHandler(param1:Event) : void {
          invalidate(LIST_DATA_INVALIDATED);
       }
-
+      
       private function selectedDataChangeHandler(param1:Event) : void {
          dispatchEvent(new Event(DATA_CHANGED));
       }
-
+      
       private function sortingChangedHandler(param1:Event) : void {
          param1.stopImmediatePropagation();
          var _loc2_:SortingButton = SortingButton(param1.target);
@@ -306,5 +305,4 @@ package net.wg.gui.lobby.profile.pages.technique
          }
       }
    }
-
 }

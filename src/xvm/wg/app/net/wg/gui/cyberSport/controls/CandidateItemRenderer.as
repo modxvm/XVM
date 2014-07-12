@@ -12,23 +12,22 @@ package net.wg.gui.cyberSport.controls
    import net.wg.infrastructure.interfaces.IUserProps;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.prebattle.squad.MessengerUtils;
-
-
+   
    public class CandidateItemRenderer extends SoundListItemRenderer implements IDropItem, IUpdatable
    {
-          
+      
       public function CandidateItemRenderer() {
          super();
       }
-
+      
       public var inviteIndicator:MovieClip = null;
-
+      
       public var candidateName:TextField = null;
-
+      
       public var candidateRating:TextField = null;
-
+      
       public var voiceWave:VoiceWave = null;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
@@ -37,7 +36,7 @@ package net.wg.gui.cyberSport.controls
          addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
          addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
       }
-
+      
       override protected function onDispose() : void {
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
@@ -49,7 +48,7 @@ package net.wg.gui.cyberSport.controls
          this.candidateName = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:RallyCandidateVO = null;
          var _loc2_:IUserProps = null;
@@ -83,27 +82,27 @@ package net.wg.gui.cyberSport.controls
             this.updateVoiceWave();
          }
       }
-
+      
       public function update(param1:Object) : void {
          this.setData(param1);
       }
-
+      
       override public function setData(param1:Object) : void {
          this.data = param1;
          invalidateData();
       }
-
+      
       protected function updateVoiceWave() : void {
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
          this.voiceWave.setMuted(data?MessengerUtils.isMuted(data):false);
       }
-
-      protected function setSpeakers(param1:Boolean, param2:Boolean=false) : void {
+      
+      protected function setSpeakers(param1:Boolean, param2:Boolean = false) : void {
          if(param1)
          {
             param2 = false;
          }
-         if(this.voiceWave  is  VoiceWave)
+         if(this.voiceWave is VoiceWave)
          {
             this.voiceWave.setSpeaking(param1,param2);
          }
@@ -112,18 +111,18 @@ package net.wg.gui.cyberSport.controls
             data.isPlayerSpeaking = param1;
          }
       }
-
+      
       private function speakHandler(param1:VoiceChatEvent) : void {
          this.onPlayerSpeak(param1.getAccountDBID(),param1.type == VoiceChatEvent.START_SPEAKING);
       }
-
+      
       public function onPlayerSpeak(param1:Number, param2:Boolean) : void {
          if((data) && param1 == data.uid)
          {
             this.setSpeakers(param2);
          }
       }
-
+      
       private function onRollOverHandler(param1:MouseEvent) : void {
          var _loc2_:RallyCandidateVO = RallyCandidateVO(data);
          if(_loc2_)
@@ -131,10 +130,9 @@ package net.wg.gui.cyberSport.controls
             App.toolTipMgr.show(_loc2_.getToolTip());
          }
       }
-
+      
       private function onRollOutHandler(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
    }
-
 }

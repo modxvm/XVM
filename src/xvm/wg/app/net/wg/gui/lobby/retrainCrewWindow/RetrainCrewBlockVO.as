@@ -2,23 +2,22 @@ package net.wg.gui.lobby.retrainCrewWindow
 {
    import net.wg.data.daapi.base.DAAPIDataClass;
    import net.wg.data.constants.Currencies;
-
-
+   
    public class RetrainCrewBlockVO extends DAAPIDataClass
    {
-          
+      
       public function RetrainCrewBlockVO(param1:Object) {
          super(param1);
       }
-
+      
       public var crew:Object;
-
+      
       public var price:Object;
-
+      
       private var _crewInfoVO:Array;
-
+      
       private var _priceInfo:SelPriceInfo;
-
+      
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          var _loc3_:Array = null;
          var _loc4_:uint = 0;
@@ -52,14 +51,13 @@ package net.wg.gui.lobby.retrainCrewWindow
          }
          return this.hasOwnProperty(param1);
       }
-
+      
       public function get crewInfoVO() : Array {
          return this._crewInfoVO;
       }
-
+      
       public function get priceInfo() : SelPriceInfo {
          return this._priceInfo;
       }
    }
-
 }

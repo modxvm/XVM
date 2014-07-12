@@ -5,34 +5,33 @@ package net.wg.gui.lobby.questsWindow.components
    import flash.text.TextField;
    import net.wg.gui.lobby.questsWindow.data.QuestIconElementVO;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class QuestIconElement extends AbstractResizableContent
    {
-          
+      
       public function QuestIconElement() {
          super();
       }
-
+      
       public static const TEXT_PADDING:int = 5;
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       public var icon:UILoaderAlt;
-
+      
       public var labelTF:TextField;
-
+      
       private var dataVO:QuestIconElementVO = null;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.icon.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.icon.addEventListener(MouseEvent.CLICK,hideTooltip);
          this.icon.addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
       }
-
+      
       override protected function onDispose() : void {
          this.icon.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.icon.removeEventListener(MouseEvent.CLICK,hideTooltip);
@@ -46,7 +45,7 @@ package net.wg.gui.lobby.questsWindow.components
          }
          super.onDispose();
       }
-
+      
       override public function setData(param1:Object) : void {
          if(this.dataVO)
          {
@@ -55,7 +54,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.dataVO = new QuestIconElementVO(param1);
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          super.draw();
@@ -75,7 +74,7 @@ package net.wg.gui.lobby.questsWindow.components
             setSize(this.width,_loc1_);
          }
       }
-
+      
       private function showTooltip(param1:MouseEvent) : void {
          if((this.dataVO.dataType) && (this.dataVO.dataName) && (this.dataVO.dataBlock))
          {
@@ -83,5 +82,4 @@ package net.wg.gui.lobby.questsWindow.components
          }
       }
    }
-
 }

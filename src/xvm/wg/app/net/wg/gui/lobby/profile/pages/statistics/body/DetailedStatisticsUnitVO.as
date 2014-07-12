@@ -1,16 +1,14 @@
 package net.wg.gui.lobby.profile.pages.statistics.body
 {
-
-
    public class DetailedStatisticsUnitVO extends StatisticsLabelDataVO
    {
-          
+      
       public function DetailedStatisticsUnitVO(param1:Object) {
          super(param1);
       }
-
+      
       private var _itemsList:Array;
-
+      
       override protected function parceData(param1:Object) : void {
          var _loc4_:* = undefined;
          var _loc2_:uint = param1?param1.length:0;
@@ -30,10 +28,9 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             _loc3_++;
          }
       }
-
+      
       public function get itemsList() : Array {
          return this._itemsList;
       }
    }
-
 }

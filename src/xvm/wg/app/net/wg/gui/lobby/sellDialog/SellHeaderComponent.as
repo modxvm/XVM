@@ -13,52 +13,51 @@ package net.wg.gui.lobby.sellDialog
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.IconsTypes;
    import net.wg.gui.components.controls.VO.ActionPriceVO;
-
-
+   
    public class SellHeaderComponent extends UIComponent
    {
-          
+      
       public function SellHeaderComponent() {
          super();
          this.locale = App.utils.locale;
       }
-
+      
       private static const VEHICLE_LEVELS:Array;
-
+      
       private static const PADDING_FOR_NEXT_ELEMENT:int = 8;
-
+      
       private static function showLevel(param1:Number) : String {
-         return VEHICLE_LEVELS[param1-1].toString();
+         return VEHICLE_LEVELS[param1 - 1].toString();
       }
-
+      
       public var emptySellIT:IconText;
-
+      
       public var vehicleActionPrice:ActionPrice;
-
+      
       public var tankLevelTF:TextField;
-
+      
       public var tankNameTF:TextField;
-
+      
       public var tankPriceTF:TextField;
-
+      
       public var tankDescribeTF:TextField;
-
+      
       public var tankIcon:TankIcon;
-
+      
       public var crewTF:TextField;
-
+      
       public var inBarracsDrop:DropdownMenu;
-
+      
       public var crewBG:MovieClip;
-
+      
       private var _tankPrice:Number = 0;
-
+      
       private var _tankGoldPrice:Number = 0;
-
+      
       private var _creditsCommon:Number = 0;
-
+      
       private var locale:ILocale;
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.vehicleActionPrice.dispose();
@@ -66,7 +65,7 @@ package net.wg.gui.lobby.sellDialog
          this.inBarracsDrop.dispose();
          this.tankIcon.dispose();
       }
-
+      
       public function setData(param1:SellVehicleVo) : void {
          var _loc2_:String = null;
          this.tankNameTF.text = param1.userName;
@@ -127,42 +126,42 @@ package net.wg.gui.lobby.sellDialog
             this._creditsCommon = this._creditsCommon + this.tankPrice;
          }
       }
-
+      
       public function getNextPosition() : int {
          return this.crewBG.y + this.crewBG.height + PADDING_FOR_NEXT_ELEMENT;
       }
-
+      
       public function get tankGoldPrice() : Number {
          return this._tankGoldPrice;
       }
-
+      
       public function set tankGoldPrice(param1:Number) : void {
          this._tankGoldPrice = param1;
       }
-
+      
       public function get tankPrice() : Number {
          return this._tankPrice;
       }
-
+      
       public function set tankPrice(param1:Number) : void {
          this._tankPrice = param1;
       }
-
+      
       public function get creditsCommon() : Number {
          return this._creditsCommon;
       }
-
+      
       public function set creditsCommon(param1:Number) : void {
          this._creditsCommon = param1;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.tankPriceTF.text = DIALOGS.VEHICLESELLDIALOG_VEHICLE_EMPTYSELLPRICE;
          this.emptySellIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
          this.vehicleActionPrice.textYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
       }
-
+      
       private function showPrice(param1:Boolean, param2:Number, param3:ActionPriceVO) : void {
          if(param1)
          {
@@ -179,5 +178,4 @@ package net.wg.gui.lobby.sellDialog
          this.emptySellIT.visible = !this.vehicleActionPrice.visible;
       }
    }
-
 }

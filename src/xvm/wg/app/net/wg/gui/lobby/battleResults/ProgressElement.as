@@ -8,37 +8,35 @@ package net.wg.gui.lobby.battleResults
    import net.wg.gui.lobby.questsWindow.components.ProgressQuestIndicator;
    import net.wg.data.VO.ProgressElementVO;
    import scaleform.clik.constants.InvalidationType;
-   import __AS3__.vec.Vector;
-
-
+   
    public class ProgressElement extends UIComponent implements ISubtaskComponent
    {
-          
+      
       public function ProgressElement() {
          super();
       }
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       public var progressTF:TextFieldShort;
-
+      
       public var progressDiff:MovieClip;
-
+      
       public var progressIndicator:ProgressQuestIndicator;
-
+      
       public var data:ProgressElementVO = null;
-
+      
       private var _showProgressDiffTooltip:Boolean = false;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.progressDiff.addEventListener(MouseEvent.CLICK,hideTooltip);
          this.progressDiff.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.progressDiff.addEventListener(MouseEvent.ROLL_OVER,this.showDiffTooltip);
       }
-
+      
       override protected function onDispose() : void {
          this.progressDiff.removeEventListener(MouseEvent.CLICK,hideTooltip);
          this.progressDiff.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
@@ -55,12 +53,12 @@ package net.wg.gui.lobby.battleResults
          }
          super.onDispose();
       }
-
+      
       public function setData(param1:Object) : void {
          this.data = new ProgressElementVO(param1);
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -81,7 +79,7 @@ package net.wg.gui.lobby.battleResults
             }
          }
       }
-
+      
       private function checkProgressIndicator() : void {
          if(this.data.progrBarType)
          {
@@ -95,11 +93,10 @@ package net.wg.gui.lobby.battleResults
             this.progressIndicator.visible = false;
          }
       }
-
+      
       public function disableLinkBtns(param1:Vector.<String>) : void {
-          
       }
-
+      
       private function showDiffTooltip(param1:MouseEvent) : void {
          if(this._showProgressDiffTooltip)
          {
@@ -107,5 +104,4 @@ package net.wg.gui.lobby.battleResults
          }
       }
    }
-
 }

@@ -8,48 +8,46 @@ package net.wg.gui.lobby.questsWindow.components
    import flash.text.TextField;
    import net.wg.gui.lobby.questsWindow.data.QuestDashlineItemVO;
    import scaleform.clik.events.ButtonEvent;
-   import __AS3__.vec.Vector;
    import net.wg.gui.events.QuestEvent;
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class QuestsDashlineItem extends DashLineTextItem implements IResizableContent
    {
-          
+      
       public function QuestsDashlineItem() {
          super();
          dashLine.visible = false;
       }
-
+      
       private static const INV_NOT_DONE:String = "invNotDone";
-
+      
       private static const INV_LINK_ID:String = "invLinkID";
-
+      
       public static const MIN_DASHLINE_WIDTH:int = 20;
-
+      
       public static const TEXT_PADDING:int = 5;
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private var _isReadyForLayout:Boolean = false;
-
+      
       public var linkBtn:SoundButton;
-
+      
       private var _linkID:String = "";
-
+      
       private var _isNotAvailable:Boolean = false;
-
+      
       public var naMc:MovieClip;
-
+      
       public var naTF:TextField;
-
+      
       private var _contentAlign:String = "left";
-
+      
       private var _isNumerated:Boolean = false;
-
+      
       public function setData(param1:Object) : void {
          var _loc2_:QuestDashlineItemVO = new QuestDashlineItemVO(param1);
          this.label = _loc2_.label;
@@ -57,7 +55,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.isNotAvailable = _loc2_.isNotAvailable;
          this.value = _loc2_.value;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          dashLine.visible = false;
@@ -68,7 +66,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.naTF.visible = false;
          this.addListeners();
       }
-
+      
       override protected function onDispose() : void {
          this.removeListeners();
          this.linkBtn.dispose();
@@ -77,33 +75,33 @@ package net.wg.gui.lobby.questsWindow.components
          this.linkBtn = null;
          super.onDispose();
       }
-
+      
       private function addListeners() : void {
          this.linkBtn.addEventListener(ButtonEvent.CLICK,this.linkBtnHandler);
          this.linkBtn.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.linkBtn.addEventListener(MouseEvent.ROLL_OVER,this.showLinkBtnTooltip);
       }
-
+      
       private function showLinkBtnTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.show(this.linkBtn.enabled?TOOLTIPS.QUESTS_LINKBTN_TASK:TOOLTIPS.QUESTS_DISABLELINKBTN_TASK);
       }
-
+      
       public function disableLinkBtns(param1:Vector.<String>) : void {
          this.linkBtn.enabled = !(param1.indexOf(this._linkID) == -1);
          this.linkBtn.mouseEnabled = true;
       }
-
+      
       private function removeListeners() : void {
          this.linkBtn.removeEventListener(ButtonEvent.CLICK,this.linkBtnHandler);
          this.linkBtn.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.linkBtn.removeEventListener(MouseEvent.ROLL_OVER,this.showLinkBtnTooltip);
       }
-
+      
       private function linkBtnHandler(param1:ButtonEvent) : void {
          App.toolTipMgr.hide();
          dispatchEvent(new QuestEvent(QuestEvent.SELECT_QUEST,this._linkID));
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -144,7 +142,7 @@ package net.wg.gui.lobby.questsWindow.components
          }
          if(isInvalid(InvalidationType.SIZE))
          {
-            _loc1_ = Math.round(labelTextField.getLineMetrics(labelTextField.numLines-1).width);
+            _loc1_ = Math.round(labelTextField.getLineMetrics(labelTextField.numLines - 1).width);
             _loc2_ = Math.round(labelTextField.width);
             _loc3_ = _loc1_;
             _loc4_ = labelTextField.numLines > 1?dashLinePadding:0;
@@ -186,56 +184,55 @@ package net.wg.gui.lobby.questsWindow.components
             this._isReadyForLayout = true;
          }
       }
-
+      
       public function get isReadyForLayout() : Boolean {
          return this._isReadyForLayout;
       }
-
+      
       public function set isReadyForLayout(param1:Boolean) : void {
          this._isReadyForLayout = param1;
       }
-
+      
       public function get linkID() : String {
          return this._linkID;
       }
-
+      
       public function set linkID(param1:String) : void {
          this._linkID = param1;
          invalidate(INV_LINK_ID);
       }
-
+      
       public function get isNotAvailable() : Boolean {
          return this._isNotAvailable;
       }
-
+      
       public function set isNotAvailable(param1:Boolean) : void {
          this._isNotAvailable = param1;
          invalidate(INV_NOT_DONE);
       }
-
+      
       public function get availableWidth() : Number {
          return this.width;
       }
-
+      
       public function set availableWidth(param1:Number) : void {
          this.width = param1;
       }
-
+      
       public function get contentAlign() : String {
          return this._contentAlign;
       }
-
+      
       public function set contentAlign(param1:String) : void {
          this._contentAlign = param1;
       }
-
+      
       public function get isNumerated() : Boolean {
          return this._isNumerated;
       }
-
+      
       public function set isNumerated(param1:Boolean) : void {
          this._isNumerated = param1;
       }
    }
-
 }

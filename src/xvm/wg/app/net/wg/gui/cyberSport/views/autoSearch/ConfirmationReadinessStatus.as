@@ -5,11 +5,10 @@ package net.wg.gui.cyberSport.views.autoSearch
    import net.wg.data.constants.SoundTypes;
    import flash.events.Event;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
-
-
+   
    public class ConfirmationReadinessStatus extends StateViewBase
    {
-          
+      
       public function ConfirmationReadinessStatus() {
          super();
          currentState = CYBER_SPORT_ALIASES.AUTO_SEARCH_CONFIRMATION_STATE;
@@ -22,22 +21,22 @@ package net.wg.gui.cyberSport.views.autoSearch
          this.countDown.mouseEnabled = this.countDownSec.mouseEnabled = false;
          this.headerField.mouseEnabled = this.ctxText.mouseEnabled = false;
       }
-
+      
       public var headerField:TextField;
-
+      
       public var ctxText:TextField;
-
+      
       public var countDown:TextField;
-
+      
       public var countDownSec:TextField;
-
+      
       override protected function updateView() : void {
          App.soundMgr.playControlsSnd(SoundManagerStates.SND_PRESS,SoundTypes.CYBERSPORT_AUTO_SEARCH,null);
          _time = model.countDownSeconds;
          this.contextMessage(String(_time));
          startTimer();
       }
-
+      
       override protected function onTimer() : void {
          _time--;
          if(_time > 0)
@@ -46,11 +45,10 @@ package net.wg.gui.cyberSport.views.autoSearch
             startTimer();
          }
       }
-
+      
       override protected function contextMessage(param1:String) : void {
          this.countDown.text = param1;
          dispatchEvent(new Event(UPDATE_TIMER,true));
       }
    }
-
 }

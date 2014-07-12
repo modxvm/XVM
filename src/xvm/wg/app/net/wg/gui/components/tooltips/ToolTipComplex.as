@@ -3,20 +3,18 @@ package net.wg.gui.components.tooltips
    import flash.text.TextField;
    import flash.text.TextFormat;
    import net.wg.gui.components.tooltips.helpers.Utils;
-   import __AS3__.vec.Vector;
    import net.wg.data.managers.ITooltipProps;
-
-
+   
    public class ToolTipComplex extends ToolTipBase
    {
-          
+      
       public function ToolTipComplex() {
          super();
          this.contentList = new Vector.<TextField>();
       }
-
+      
       private static const COLOR_HEADER:String = "#fdf4ce";
-
+      
       private static function setTextProp(param1:TextField, param2:String, param3:TextFormat, param4:String) : void {
          param3.align = param4;
          param3.leading = 2;
@@ -44,25 +42,25 @@ package net.wg.gui.components.tooltips
          }
          param1.setTextFormat(param3);
       }
-
+      
       private var _minWidth:Number;
-
+      
       private var _maxWidth:Number;
-
+      
       private var _leftMargin:Number = 10;
-
+      
       private var _rightMargin:Number = 10;
-
+      
       private var _topMargin:Number = 6;
-
+      
       private var _bottomMargin:Number = 11;
-
+      
       private var contTopMargin:Number = 10;
-
+      
       private var contLeftMargin:Number = 13;
-
+      
       private var contentList:Vector.<TextField>;
-
+      
       override protected function onDispose() : void {
          var _loc1_:TextField = null;
          if(this.contentList)
@@ -79,26 +77,26 @@ package net.wg.gui.components.tooltips
          }
          super.onDispose();
       }
-
+      
       override public function build(param1:Object, param2:ITooltipProps) : void {
          this.setProp(param2);
          this.setContent(param1);
          redraw();
       }
-
+      
       private function setProp(param1:ITooltipProps) : void {
          _props = param1;
          this._minWidth = param1.minWidth;
          this._maxWidth = param1.maxWidth;
       }
-
+      
       override protected function updateSize() : void {
          var _loc1_:Object = this.calcDimension();
          background.x = background.y = 0;
          background.width = Math.round(_loc1_.w) + this._leftMargin + this._rightMargin;
          background.height = Math.round(_loc1_.h) + this._topMargin + this._bottomMargin;
       }
-
+      
       private function calcDimension() : Object {
          var _loc7_:TextField = null;
          var _loc8_:* = NaN;
@@ -121,13 +119,11 @@ package net.wg.gui.components.tooltips
                   _loc3_ = _loc3_ + (_loc7_.textHeight - _loc8_);
                }
             }
-            else
+            else if(_loc1_ < _loc7_.width)
             {
-               if(_loc1_ < _loc7_.width)
-               {
-                  _loc1_ = this.contentList[_loc5_].width;
-               }
+               _loc1_ = this.contentList[_loc5_].width;
             }
+            
             if(_loc2_ < _loc7_.y + _loc7_.textHeight)
             {
                _loc2_ = _loc7_.y + _loc7_.textHeight;
@@ -135,16 +131,16 @@ package net.wg.gui.components.tooltips
             _loc5_++;
          }
          _loc1_ = _loc1_ + 5;
-         var _loc6_:Object =
+         var _loc6_:Object = 
             {
                "w":_loc1_,
                "h":_loc2_
-            }
-         ;
+            };
          return _loc6_;
       }
-
+      
       private function setContent(param1:Object) : void {
+         var _loc6_:* = NaN;
          this._leftMargin = 10;
          this._rightMargin = 10;
          this._topMargin = 6;
@@ -153,7 +149,7 @@ package net.wg.gui.components.tooltips
          var _loc3_:Number = this.contTopMargin;
          var _loc4_:Number = 0;
          var _loc5_:TextFormat = new TextFormat();
-         var _loc6_:Number = 10;
+         _loc6_ = 10;
          var _loc7_:Number = this._minWidth == 0?500:this._minWidth;
          var _loc8_:TextField = new TextField();
          _loc8_.x = this.contLeftMargin;
@@ -167,5 +163,4 @@ package net.wg.gui.components.tooltips
          addChild(_loc8_);
       }
    }
-
 }

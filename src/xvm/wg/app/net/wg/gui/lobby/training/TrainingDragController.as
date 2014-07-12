@@ -2,30 +2,28 @@ package net.wg.gui.lobby.training
 {
    import net.wg.infrastructure.helpers.DropListDelegateCtrlr;
    import flash.display.InteractiveObject;
-   import __AS3__.vec.Vector;
    import net.wg.infrastructure.interfaces.IDropListDelegate;
    import net.wg.data.VO.TrainingRoomRendererVO;
    import net.wg.infrastructure.interfaces.entity.IDroppable;
    import net.wg.infrastructure.interfaces.entity.IDropItem;
    import net.wg.infrastructure.interfaces.IDropList;
-
-
+   
    public class TrainingDragController extends DropListDelegateCtrlr
    {
-          
+      
       public function TrainingDragController(param1:Vector.<InteractiveObject>, param2:Class, param3:String, param4:Function) {
          this._isSlotDroppable = param4;
          super(param1,param2,param3);
       }
-
+      
       private var _isSlotDroppable:Function = null;
-
+      
       override protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void {
          var _loc3_:Vector.<IDropListDelegate> = null;
          var _loc4_:TrainingRoomRendererVO = null;
          var _loc5_:* = 0;
          var _loc6_:IDroppable = null;
-         if(param2  is  IDropItem)
+         if(param2 is IDropItem)
          {
             if(param1)
             {
@@ -48,18 +46,17 @@ package net.wg.gui.lobby.training
                {
                   param2.alpha = 1;
                }
-               for each (_loc6_ in getDelegates())
+               for each(_loc6_ in getDelegates())
                {
                   IDropList(_loc6_.getHitArea()).hideHighLight();
                }
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          this._isSlotDroppable = null;
          super.onDispose();
       }
    }
-
 }

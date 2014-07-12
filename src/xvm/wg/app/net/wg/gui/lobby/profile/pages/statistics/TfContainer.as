@@ -8,41 +8,39 @@ package net.wg.gui.lobby.profile.pages.statistics
    import net.wg.gui.lobby.profile.components.LditValued;
    import net.wg.gui.lobby.profile.components.LditMarksOfMastery;
    import flash.events.Event;
-   import __AS3__.vec.Vector;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class TfContainer extends UIComponent implements IDisposable
    {
-          
+      
       public function TfContainer() {
          super();
          addEventListener(Event.RESIZE,this.resizeComponentsHandler,false,0,true);
       }
-
+      
       public static const LAYOUT_INVALID:String = "layoutInv";
-
+      
       public var icon:UILoaderAlt;
-
+      
       public var tfTotalBattles:LditBattles;
-
+      
       public var tfWins:LineDescrIconText;
-
+      
       public var tfSurvival:LineDescrIconText;
-
+      
       public var tfHits:LineDescrIconText;
-
+      
       public var tfAvgExperience:LineDescrIconText;
-
+      
       public var tfMaxExperience:LditValued;
-
+      
       public var tfMarksOfMastery:LditMarksOfMastery;
-
+      
       private function resizeComponentsHandler(param1:Event) : void {
          param1.stopImmediatePropagation();
          invalidate(LAYOUT_INVALID);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:Vector.<UIComponent> = null;
          var _loc2_:* = NaN;
@@ -89,7 +87,7 @@ package net.wg.gui.lobby.profile.pages.statistics
             }
          }
       }
-
+      
       public function setDossierData(param1:Object) : void {
          var _loc2_:ProfileStatisticsVO = new ProfileStatisticsVO(param1);
          this.tfTotalBattles.text = _loc2_.getBattlesCountStr();
@@ -124,11 +122,10 @@ package net.wg.gui.lobby.profile.pages.statistics
             this.tfMarksOfMastery.enabled = false;
          }
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(Event.RESIZE,this.resizeComponentsHandler);
          super.onDispose();
       }
    }
-
 }

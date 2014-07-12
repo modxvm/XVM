@@ -1,14 +1,12 @@
 package net.wg.gui.lobby.techtree.math
 {
-
-
    public class MatrixUtils extends Object
    {
-          
+      
       public function MatrixUtils() {
          super();
       }
-
+      
       public static function printMatrixDump(param1:Array) : void {
          var _loc3_:* = NaN;
          var _loc4_:String = null;
@@ -53,7 +51,7 @@ package net.wg.gui.lobby.techtree.math
             _loc3_++;
          }
       }
-
+      
       public static function printLevelsDump(param1:Array) : void {
          var _loc3_:Array = null;
          var _loc4_:String = null;
@@ -80,5 +78,4 @@ package net.wg.gui.lobby.techtree.math
          }
       }
    }
-
 }

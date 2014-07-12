@@ -5,25 +5,24 @@ package net.wg.gui.notification
    import scaleform.clik.data.DataProvider;
    import flash.events.Event;
    import net.wg.gui.notification.events.NotificationListEvent;
-
-
+   
    public class NotificationsList extends ScrollingListPx
    {
-          
+      
       public function NotificationsList() {
          this.pendingDataList = [];
          super();
       }
-
+      
       public static const PENDING_DATA_INV:String = "pendingDataInv";
-
+      
       private var pendingDataList:Array;
-
+      
       public function appendData(param1:NotificationInfoVO) : void {
          this.pendingDataList.push(param1);
          invalidate(PENDING_DATA_INV);
       }
-
+      
       public function updateData(param1:NotificationInfoVO) : void {
          var _loc5_:* = 0;
          var _loc2_:uint = _dataProvider.length;
@@ -45,7 +44,7 @@ package net.wg.gui.notification
             invalidate();
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = false;
          super.draw();
@@ -60,7 +59,7 @@ package net.wg.gui.notification
             {
                _dataProvider.removeEventListener(Event.CHANGE,handleDataChange);
                DataProvider(_dataProvider).push(this.pendingDataList.shift());
-               createRendererByDataIndex(_dataProvider.length-1);
+               createRendererByDataIndex(_dataProvider.length - 1);
                _dataProvider.addEventListener(Event.CHANGE,handleDataChange,false,0,true);
             }
             if(_loc1_)
@@ -74,7 +73,7 @@ package net.wg.gui.notification
             dispatchEvent(new NotificationListEvent(NotificationListEvent.UPDATE_INDEXES,_dataProvider.length));
          }
       }
-
+      
       override protected function drawRenderers(param1:Number) : void {
          super.drawRenderers(param1);
          if(totalHeight > maskObject.height)
@@ -84,5 +83,4 @@ package net.wg.gui.notification
          dispatchEvent(new NotificationListEvent(NotificationListEvent.UPDATE_INDEXES,_dataProvider.length));
       }
    }
-
 }

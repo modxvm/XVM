@@ -6,31 +6,30 @@ package net.wg.gui.lobby.questsWindow
    import net.wg.gui.lobby.questsWindow.data.ConditionElementVO;
    import scaleform.clik.constants.InvalidationType;
    import flash.text.TextFieldAutoSize;
-
-
+   
    public class ConditionElement extends AbstractResizableContent
    {
-          
+      
       public function ConditionElement() {
          super();
       }
-
+      
       private static const TEXT_PADDING:int = 5;
-
+      
       private static const LEFT_POSITION:int = 140;
-
+      
       private static const VERTICAL_PADDING:int = 10;
-
+      
       public var leftLabelTF:TextField;
-
+      
       public var rightLabelTF:TextField;
-
+      
       public var container:ResizableContainer;
-
+      
       public var indexTF:TextField;
-
+      
       public var data:ConditionElementVO = null;
-
+      
       override protected function onDispose() : void {
          this.leftLabelTF = null;
          this.rightLabelTF = null;
@@ -44,7 +43,7 @@ package net.wg.gui.lobby.questsWindow
          }
          super.onDispose();
       }
-
+      
       override public function setData(param1:Object) : void {
          if(this.data)
          {
@@ -53,13 +52,13 @@ package net.wg.gui.lobby.questsWindow
          this.data = new ConditionElementVO(param1);
          invalidateData();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.container.verticalPadding = VERTICAL_PADDING;
          this.indexTF.visible = false;
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -88,7 +87,7 @@ package net.wg.gui.lobby.questsWindow
             this.layoutComponents();
          }
       }
-
+      
       private function layoutComponents() : void {
          if(contentAlign == TextFieldAutoSize.LEFT)
          {
@@ -106,5 +105,4 @@ package net.wg.gui.lobby.questsWindow
          isReadyForLayout = true;
       }
    }
-
 }

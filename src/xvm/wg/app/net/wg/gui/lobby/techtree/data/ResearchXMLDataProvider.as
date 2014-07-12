@@ -7,15 +7,14 @@ package net.wg.gui.lobby.techtree.data
    import net.wg.gui.lobby.techtree.data.vo.PrimaryClass;
    import net.wg.gui.lobby.techtree.data.vo.UnlockProps;
    import net.wg.gui.lobby.techtree.data.vo.ShopPrice;
-
-
+   
    public class ResearchXMLDataProvider extends ResearchVODataProvider
    {
-          
+      
       public function ResearchXMLDataProvider() {
          super();
       }
-
+      
       override public function parse(param1:Object) : void {
          var _loc5_:* = NaN;
          var _loc6_:XML = null;
@@ -27,7 +26,7 @@ package net.wg.gui.lobby.techtree.data
          var _loc3_:XML = new XML(_loc2_);
          _loc3_.ignoreWhite = true;
          var _loc4_:XML = _loc3_.children()[0];
-         for each (_loc6_ in _loc4_.children())
+         for each(_loc6_ in _loc4_.children())
          {
             _loc7_ = this.getNodeData(_loc6_);
             _loc5_ = topData.length;
@@ -38,7 +37,7 @@ package net.wg.gui.lobby.techtree.data
             }
          }
          _loc4_ = _loc3_.children()[1];
-         for each (_loc6_ in _loc4_.children())
+         for each(_loc6_ in _loc4_.children())
          {
             _loc7_ = this.getNodeData(_loc6_);
             _loc5_ = nodeData.length;
@@ -53,23 +52,23 @@ package net.wg.gui.lobby.techtree.data
          _loc4_ = _loc3_.children()[2];
          global = new VehGlobalStats(Number(_loc4_.child("enableInstallItems").text()) == 1?true:false,_loc4_.child("statusString").text(),new ExtraInformation(_loc4_.child("extraInfo").child("type").text(),_loc4_.child("extraInfo").child("title").text(),_loc4_.child("extraInfo").child("benefitsHead").text(),_loc4_.child("extraInfo").child("benefitsList").text()),_loc4_.child("freeXP").text(),Number(_loc4_.child("hasNationTree").text()) == 1?true:false);
       }
-
+      
       private function getNodeDisplayInfo(param1:XML) : ResearchDisplayInfo {
          var _loc3_:XML = null;
          var _loc2_:Array = [];
-         for each (_loc3_ in param1.child("path").children())
+         for each(_loc3_ in param1.child("path").children())
          {
             _loc2_.push(_loc3_.text());
          }
          return new ResearchDisplayInfo(_loc2_,param1.child("renderer").text(),param1.child("level").text());
       }
-
+      
       private function getNodeData(param1:XML) : NodeData {
          var _loc2_:NodeData = null;
          var _loc4_:XML = null;
          _loc2_ = new NodeData();
          var _loc3_:Array = [];
-         for each (_loc4_ in param1.child("unlockProps").child("required").children())
+         for each(_loc4_ in param1.child("unlockProps").child("required").children())
          {
             _loc3_.push(Number(_loc4_.toString()));
          }
@@ -88,5 +87,4 @@ package net.wg.gui.lobby.techtree.data
          return _loc2_;
       }
    }
-
 }

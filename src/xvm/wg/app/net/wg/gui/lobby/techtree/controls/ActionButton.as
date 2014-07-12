@@ -16,37 +16,36 @@ package net.wg.gui.lobby.techtree.controls
    import net.wg.gui.lobby.techtree.interfaces.IRenderer;
    import net.wg.gui.lobby.techtree.TechTreeEvent;
    import net.wg.gui.lobby.techtree.constants.ActionName;
-
-
+   
    public class ActionButton extends SoundButton
    {
-          
+      
       public function ActionButton() {
          super();
       }
-
+      
       private var animProps:AnimationProperties = null;
-
+      
       private var animID:Number = -1;
-
+      
       private var animTween:Tween = null;
-
+      
       private var _action:String = "unlock";
-
+      
       private var _imgSubstitution:ImageSubstitution;
-
+      
       public var icon:MovieClip;
-
+      
       public var disableIndicator:BitmapFill;
-
+      
       public function set imgSubstitution(param1:Object) : void {
          this._imgSubstitution = new ImageSubstitution(param1.subString,param1.source,param1.baseLineY,param1.width,param1.height,true);
       }
-
+      
       public function get action() : String {
          return this._action;
       }
-
+      
       public function set action(param1:String) : void {
          if(this._action == param1)
          {
@@ -56,8 +55,8 @@ package net.wg.gui.lobby.techtree.controls
          this.makeStatesPrefixes();
          setState(this.state);
       }
-
-      public function setOwner(param1:UIComponent, param2:Boolean=false) : void {
+      
+      public function setOwner(param1:UIComponent, param2:Boolean = false) : void {
          if(_owner != param1)
          {
             _owner = param1;
@@ -68,7 +67,7 @@ package net.wg.gui.lobby.techtree.controls
             validateNow();
          }
       }
-
+      
       public function setAnimation(param1:Number, param2:AnimationProperties) : Boolean {
          if(this.animID == param1)
          {
@@ -90,7 +89,7 @@ package net.wg.gui.lobby.techtree.controls
          }
          return true;
       }
-
+      
       public function startAnimation() : void {
          if(this.animProps != null)
          {
@@ -100,11 +99,10 @@ package net.wg.gui.lobby.techtree.controls
                   "ease":Strong.easeOut,
                   "onComplete":this.onTweenComplete,
                   "paused":false
-               }
-            );
+               });
          }
       }
-
+      
       public function endAnimation(param1:Boolean) : void {
          var _loc2_:DisplayObject = null;
          var _loc3_:* = false;
@@ -136,16 +134,15 @@ package net.wg.gui.lobby.techtree.controls
                      "ease":Strong.easeOut,
                      "onComplete":this.onTweenComplete,
                      "paused":false
-                  }
-               );
+                  });
             }
          }
       }
-
-      override public function hitTestPoint(param1:Number, param2:Number, param3:Boolean=false) : Boolean {
+      
+      override public function hitTestPoint(param1:Number, param2:Number, param3:Boolean = false) : Boolean {
          return hitArea != null?hitArea.hitTestPoint(param1,param2,param3):super.hitTestPoint(param1,param2,param3);
       }
-
+      
       public function onTweenComplete() : void {
          if(alpha == 0)
          {
@@ -156,22 +153,22 @@ package net.wg.gui.lobby.techtree.controls
             mouseEnabled = enabled;
          }
       }
-
+      
       override protected function onDispose() : void {
          owner = null;
          super.onDispose();
       }
-
+      
       override protected function preInitialize() : void {
          super.preInitialize();
          _state = "up";
       }
-
+      
       override protected function initialize() : void {
          this.makeStatesPrefixes();
          super.initialize();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(_baseDisposed)
@@ -183,7 +180,7 @@ package net.wg.gui.lobby.techtree.controls
             this.disableIndicator.visible = state == "disabled";
          }
       }
-
+      
       override protected function updateText() : void {
          if(!(_label == null) && !(textField == null))
          {
@@ -198,22 +195,22 @@ package net.wg.gui.lobby.techtree.controls
             }
          }
       }
-
-      override protected function handleClick(param1:uint=0) : void {
+      
+      override protected function handleClick(param1:uint = 0) : void {
          super.handleClick(param1);
          this.doAction();
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          this.endAnimation(false);
       }
-
+      
       override protected function handleReleaseOutside(param1:MouseEvent) : void {
          super.handleReleaseOutside(param1);
          this.endAnimation(false);
       }
-
+      
       private function resetTween() : void {
          if(this.animTween)
          {
@@ -221,7 +218,7 @@ package net.wg.gui.lobby.techtree.controls
             this.animTween = null;
          }
       }
-
+      
       private function doAction() : void {
          var _loc2_:IRenderer = null;
          var _loc1_:String = null;
@@ -243,12 +240,11 @@ package net.wg.gui.lobby.techtree.controls
             }
          }
       }
-
+      
       private function makeStatesPrefixes() : void {
          var _loc1_:* = this._action + "_";
          statesSelected = Vector.<String>(["selected_",_loc1_]);
          statesDefault = Vector.<String>([_loc1_]);
       }
    }
-
 }

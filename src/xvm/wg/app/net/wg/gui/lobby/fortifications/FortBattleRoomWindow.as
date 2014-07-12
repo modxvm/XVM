@@ -12,27 +12,26 @@ package net.wg.gui.lobby.fortifications
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
-
-
+   
    public class FortBattleRoomWindow extends FortBattleRoomWindowMeta implements IFortBattleRoomWindowMeta
    {
-          
+      
       public function FortBattleRoomWindow() {
          super();
          showWindowBg = false;
          canMinimize = true;
          UIID = 29;
       }
-
+      
       override public function onWindowMinimizeS() : void {
          super.onWindowMinimizeS();
          App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_MINIMIZE,0);
       }
-
+      
       override protected function getWindowTitle() : String {
          return FORTIFICATIONS.SORTIE_INTROVIEW_TITLE;
       }
-
+      
       override protected function onViewLoadRequest(param1:RallyViewsEvent) : void {
          if(!param1.data)
          {
@@ -55,41 +54,35 @@ package net.wg.gui.lobby.fortifications
                break;
          }
       }
-
+      
       override protected function updateFocus() : void {
          var _loc1_:IChannelComponentHolder = getCurrentView() as IChannelComponentHolder;
          if(autoSearch.visible)
          {
             autoSearchUpdateFocus();
          }
+         else if((_loc1_) && (isChatFocusNeeded()))
+         {
+            setFocus(_loc1_.getChannelComponent().messageInput);
+            resetChatFocusRequirement();
+         }
+         else if(getCurrentView() is FortListView)
+         {
+            setFocus(FortListView(getCurrentView()).rallyTable);
+         }
+         else if(getCurrentView() is FortIntroView)
+         {
+            setFocus(FortIntroView(getCurrentView()).listRoomBtn);
+         }
          else
          {
-            if((_loc1_) && (isChatFocusNeeded()))
-            {
-               setFocus(_loc1_.getChannelComponent().messageInput);
-               resetChatFocusRequirement();
-            }
-            else
-            {
-               if(getCurrentView()  is  FortListView)
-               {
-                  setFocus(FortListView(getCurrentView()).rallyTable);
-               }
-               else
-               {
-                  if(getCurrentView()  is  FortIntroView)
-                  {
-                     setFocus(FortIntroView(getCurrentView()).listRoomBtn);
-                  }
-                  else
-                  {
-                     setFocus(lastFocusedElement);
-                  }
-               }
-            }
+            setFocus(lastFocusedElement);
          }
+         
+         
+         
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -102,25 +95,22 @@ package net.wg.gui.lobby.fortifications
             {
                autoSearch.handleInput(param1);
             }
-            else
+            else if(window.getCloseBtn().enabled)
             {
-               if(window.getCloseBtn().enabled)
-               {
-                  param1.handled = true;
-                  onWindowCloseS();
-               }
+               param1.handled = true;
+               onWindowCloseS();
             }
+            
          }
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
       }
-
+      
       override protected function onDispose() : void {
          App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_CLOSE,0);
          super.onDispose();
       }
    }
-
 }

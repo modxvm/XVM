@@ -7,15 +7,14 @@ package net.wg.gui.prebattle.battleSession
    import flash.events.MouseEvent;
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.gfx.MouseEventEx;
-
-
+   
    public class FlagsList extends MedalsList
    {
-          
+      
       public function FlagsList() {
          super();
       }
-
+      
       override protected function dispatchItemEvent(param1:Event) : Boolean {
          var _loc2_:String = null;
          switch(param1.type)
@@ -40,31 +39,27 @@ package net.wg.gui.prebattle.battleSession
          }
          var _loc3_:IListItemRenderer = param1.currentTarget as IListItemRenderer;
          var _loc4_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc4_ = (param1 as ButtonEvent).controllerIdx;
          }
-         else
+         else if(param1 is MouseEventEx)
          {
-            if(param1  is  MouseEventEx)
-            {
-               _loc4_ = (param1 as MouseEventEx).mouseIdx;
-            }
+            _loc4_ = (param1 as MouseEventEx).mouseIdx;
          }
+         
          var _loc5_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc5_ = (param1 as ButtonEvent).buttonIdx;
          }
-         else
+         else if(param1 is MouseEventEx)
          {
-            if(param1  is  MouseEventEx)
-            {
-               _loc5_ = (param1 as MouseEventEx).buttonIdx;
-            }
+            _loc5_ = (param1 as MouseEventEx).buttonIdx;
          }
+         
          var _loc6_:* = false;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc6_ = (param1 as ButtonEvent).isKeyboard;
          }
@@ -73,15 +68,12 @@ package net.wg.gui.prebattle.battleSession
          {
             App.toolTipMgr.show(dataProvider[_loc3_.index].tooltip);
          }
-         else
+         else if(_loc2_ == ListEvent.ITEM_ROLL_OUT)
          {
-            if(_loc2_ == ListEvent.ITEM_ROLL_OUT)
-            {
-               App.toolTipMgr.hide();
-            }
+            App.toolTipMgr.hide();
          }
+         
          return dispatchEvent(_loc7_);
       }
    }
-
 }

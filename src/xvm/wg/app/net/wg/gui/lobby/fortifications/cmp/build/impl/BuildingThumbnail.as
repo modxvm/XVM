@@ -6,26 +6,25 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
    import flash.events.MouseEvent;
    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
    import net.wg.gui.utils.ComplexTooltipHelper;
-
-
+   
    public class BuildingThumbnail extends MovieClip implements IDisposable
    {
-          
+      
       public function BuildingThumbnail() {
          super();
          this.init();
       }
-
+      
       private var _model:BuildingVO;
-
+      
       private var _ttHeader:String;
-
+      
       private var _ttBody:String;
-
+      
       public function get model() : BuildingVO {
          return this._model;
       }
-
+      
       public function set model(param1:BuildingVO) : void {
          this._model = param1;
          if((this._model) && (this._model.toolTipData) && this._model.toolTipData.length > 0)
@@ -40,12 +39,12 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
          this.updateView();
       }
-
+      
       private function init() : void {
          addEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
          addEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
       }
-
+      
       public function dispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
          removeEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
@@ -55,7 +54,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this._model = null;
          }
       }
-
+      
       private function updateView() : void {
          if(this._model)
          {
@@ -69,11 +68,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
          }
       }
-
+      
       private function onControlOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onControlOver(param1:MouseEvent) : void {
          var _loc2_:String = new ComplexTooltipHelper().addHeader(this._ttHeader).addBody(this._ttBody).make();
          if(_loc2_.length > 0)
@@ -82,5 +81,4 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
          }
       }
    }
-
 }

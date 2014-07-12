@@ -19,128 +19,129 @@ package net.wg.gui.lobby.header
    import scaleform.clik.events.ListEvent;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class LobbyHeader extends LobbyHeaderMeta implements ILobbyHeaderMeta, IHelpLayoutComponent
    {
-          
+      
       public function LobbyHeader() {
          super();
          this.visible = false;
       }
-
+      
       private static const INVALIDATE_SERVER_STATS:String = "serverStats";
-
+      
+      private static const MAIN_MENU_ICON:String = "mainMenu.png";
+      
       public var logo:MovieClip;
-
+      
       public var serverStats:ServerStats;
-
+      
       public var serverInfo:TextField;
-
+      
       public var regionDD:RegionDropdownMenu;
-
+      
       public var tankPanel:TankPanel;
-
+      
       public var ticker:Ticker;
-
+      
       public var buttonsBlock:MainMenu;
-
+      
       public var fightBtn:FightButton;
-
+      
       public var voiceWave:VoiceWave;
-
+      
       public var tutorialControl:TutorialControl;
-
+      
       public var questsControl:QuestsControl;
-
+      
       public var MenuButton:IconTextButton;
-
+      
       public var account:AccountInfo;
-
+      
       public var header_bg:MovieClip;
-
+      
       public var bg:MovieClip;
-
+      
       private var _isAccountNameSet:Boolean = false;
-
+      
       private var _serverStats:Object = null;
-
+      
       private var _isShowHelpLayout:Boolean = false;
-
+      
       public function as_doDisableNavigation() : void {
          this.buttonsBlock.bar.setDisableNav(true);
       }
-
+      
       public function as_setScreen(param1:String) : void {
          this.buttonsBlock.bar.setDisableNav(false);
          this.buttonsBlock.setCurrent(param1);
       }
-
+      
       public function as_setProfileType(param1:String) : void {
          this.account.setProfileType(param1);
       }
-
+      
       public function as_disableRoamingDD(param1:Boolean) : void {
          this.regionDD.enabled = !param1;
       }
-
+      
       public function as_setPremiumParams(param1:String, param2:String, param3:Boolean) : void {
          this.account.setPremiumParams(param1,param2,param3);
       }
-
+      
       public function as_setFreeXP(param1:String, param2:Boolean) : void {
          this.account.setExp(param1,param2);
       }
-
+      
       public function as_creditsResponse(param1:String) : void {
          this.account.setCredits(param1);
       }
-
+      
       public function as_goldResponse(param1:String) : void {
          this.account.setGold(param1);
       }
-
+      
       public function as_setWalletStatus(param1:Object) : void {
          App.utils.voMgr.walletStatusVO.update(param1);
          this.account.updateWalletStatus();
       }
-
+      
       public function as_premiumResponse(param1:Boolean) : void {
          this.account.onPremiumChange(param1);
       }
-
+      
       public function as_setServerStats(param1:Object) : void {
          this._serverStats = param1;
          invalidate(INVALIDATE_SERVER_STATS);
       }
-
+      
       public function as_setServerInfo(param1:String, param2:String) : void {
          this.serverInfo.htmlText = param1;
          this.serverStats.tooltipFullData = param2;
       }
-
+      
       public function as_nameResponse(param1:String, param2:String, param3:String, param4:Boolean, param5:Boolean) : void {
          this.tankPanel.setAccountName(param1,param2,param3,param4,param5);
          this._isAccountNameSet = true;
          this.visible = true;
       }
-
+      
       public function as_setClanEmblem(param1:String) : void {
          this.tankPanel.setClanEmblem(param1);
       }
-
+      
       public function as_setTankName(param1:String) : void {
          this.tankPanel.setTankName(param1);
       }
-
+      
       public function as_setTankType(param1:String) : void {
          this.tankPanel.setTankType(param1);
       }
-
+      
       public function as_setTankElite(param1:Boolean) : void {
          this.tankPanel.setTankElite(param1);
       }
-
+      
       public function showHelpLayout() : void {
          if(!this._isShowHelpLayout)
          {
@@ -155,7 +156,7 @@ package net.wg.gui.lobby.header
             this.buttonsBlock.bar.showHelpLayout();
          }
       }
-
+      
       public function closeHelpLayout() : void {
          if(this._isShowHelpLayout)
          {
@@ -169,15 +170,15 @@ package net.wg.gui.lobby.header
             this.buttonsBlock.bar.closeHelpLayout();
          }
       }
-
+      
       override public function get visible() : Boolean {
          return super.visible;
       }
-
+      
       override public function set visible(param1:Boolean) : void {
          super.visible = (param1) && (this._isAccountNameSet);
       }
-
+      
       override protected function configUI() : void {
          constraints = new Constraints(this,ConstrainMode.REFLOW);
          constraints.addElement("serverStats",this.serverStats,Constraints.TOP | Constraints.LEFT);
@@ -190,11 +191,12 @@ package net.wg.gui.lobby.header
          constraints.addElement("voiceWave",this.voiceWave,Constraints.CENTER_H);
          constraints.addElement("tankPanel",this.tankPanel,Constraints.CENTER_H);
          constraints.addElement("serverInfo",this.serverInfo,Constraints.CENTER_H);
+         this.MenuButton.iconSource = MAIN_MENU_ICON;
          this.addListeners();
          this.serverStats.focusable = false;
          this.serverInfo.mouseEnabled = false;
       }
-
+      
       private function addListeners() : void {
          addEventListener(HeaderEvent.SHOW_EXCHANGE,this.onShowExchangeWindow,false,0,true);
          addEventListener(HeaderEvent.SHOW_XP_EXCHANGE,this.onShowExchangeXPWindow,false,0,true);
@@ -206,7 +208,7 @@ package net.wg.gui.lobby.header
          App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.setSpeaking);
          App.voiceChatMgr.addEventListener(VoiceChatEvent.STOP_SPEAKING,this.setSpeaking);
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          this.checkRoaming();
@@ -215,7 +217,7 @@ package net.wg.gui.lobby.header
          registerFlashComponentS(this.ticker,Aliases.TICKER);
          registerFlashComponentS(this.fightBtn,Aliases.FIGHT_BUTTON);
       }
-
+      
       private function checkRoaming() : void {
          var _loc3_:* = false;
          var _loc1_:Boolean = App.globalVarsMgr.isRoamingEnabledS();
@@ -235,7 +237,7 @@ package net.wg.gui.lobby.header
             this.serverStats.x = 155;
          }
       }
-
+      
       public function as_setPeripheryChanging(param1:Boolean) : void {
          if(!param1)
          {
@@ -244,7 +246,7 @@ package net.wg.gui.lobby.header
             this.regionDD.addEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
          }
       }
-
+      
       private function setupServersData(param1:Array) : void {
          var _loc5_:ServerVO = null;
          var _loc2_:DataProvider = new DataProvider();
@@ -263,14 +265,14 @@ package net.wg.gui.lobby.header
          this.regionDD.dataProvider = _loc2_;
          this.regionDD.selectedIndex = _loc3_;
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.removeListeners();
          this.disposeComponents();
          this.cleanRefs();
       }
-
+      
       private function cleanRefs() : void {
          var _loc1_:String = null;
          this.header_bg = null;
@@ -287,14 +289,14 @@ package net.wg.gui.lobby.header
          this.tutorialControl = null;
          this.regionDD = null;
          this.questsControl = null;
-         for (_loc1_ in this._serverStats)
+         for(_loc1_ in this._serverStats)
          {
-            delete this._serverStats[[_loc1_]];
+            delete this._serverStats[_loc1_];
          }
          this._serverStats = null;
          this.logo = null;
       }
-
+      
       private function disposeComponents() : void {
          this.MenuButton.dispose();
          this.regionDD.dispose();
@@ -304,7 +306,7 @@ package net.wg.gui.lobby.header
          this.voiceWave.dispose();
          this.account.dispose();
       }
-
+      
       private function removeListeners() : void {
          removeEventListener(HeaderEvent.SHOW_EXCHANGE,this.onShowExchangeWindow);
          removeEventListener(HeaderEvent.SHOW_XP_EXCHANGE,this.onShowExchangeXPWindow);
@@ -316,7 +318,7 @@ package net.wg.gui.lobby.header
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.setSpeaking);
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.setSpeaking);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          if((isInvalid(INVALIDATE_SERVER_STATS)) && (this._serverStats))
@@ -340,37 +342,37 @@ package net.wg.gui.lobby.header
             this.fightBtn.x = this.fightBtn.x ^ 0;
          }
       }
-
+      
       private function resizeBtnsBlock(param1:HeaderButtonBarEvent) : void {
          this.buttonsBlock.x = Math.round((App.appWidth - param1.width) / 2);
       }
-
+      
       private function onPaymentClick(param1:HeaderEvent) : void {
          onPaymentS();
       }
-
+      
       private function onMenuButtonClick(param1:ButtonEvent) : void {
          showLobbyMenuS();
       }
-
+      
       private function onShowExchangeWindow(param1:HeaderEvent) : void {
          param1.stopImmediatePropagation();
          showExchangeWindow({});
       }
-
+      
       private function onShowExchangeXPWindow(param1:HeaderEvent) : void {
          param1.stopImmediatePropagation();
          showExchangeXPWindow({});
       }
-
+      
       private function onMenuItemClick(param1:HeaderEvent) : void {
          menuItemClickS(param1.id);
       }
-
+      
       private function onShowPremiumHandler(param1:HeaderEvent) : void {
          showPremiumDialogS(param1);
       }
-
+      
       private function setSpeaking(param1:VoiceChatEvent) : void {
          if(param1.isHimself())
          {
@@ -384,10 +386,9 @@ package net.wg.gui.lobby.header
             }
          }
       }
-
+      
       private function changeRegion(param1:ListEvent) : void {
          reloginS(ServerVO(param1.itemData).id);
       }
    }
-
 }

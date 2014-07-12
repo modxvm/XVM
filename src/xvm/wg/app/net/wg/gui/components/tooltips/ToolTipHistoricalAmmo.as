@@ -6,11 +6,10 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.lobby.hangar.maintenance.data.HistoricalAmmoVO;
    import net.wg.gui.components.tooltips.helpers.Utils;
    import flash.text.TextFieldAutoSize;
-
-
+   
    public class ToolTipHistoricalAmmo extends ToolTipSpecial
    {
-          
+      
       public function ToolTipHistoricalAmmo() {
          super();
          this.headerTF = content.headerTF;
@@ -23,27 +22,27 @@ package net.wg.gui.components.tooltips
          contentMargin.bottom = 18;
          contentMargin.right = 0;
       }
-
+      
       private static const AMMO_BLOCK_PADDING:Number = 20;
-
+      
       private static const PRICE_GAP:Number = 8;
-
+      
       public var headerTF:TextField;
-
+      
       public var descriptionTF:TextField;
-
+      
       public var noteTF:TextField;
-
+      
       public var priceLabelTF:TextField;
-
+      
       public var priceTF:TextField;
-
+      
       public var shellsSet:ShellsSet;
-
+      
       private var whiteBg:Sprite;
-
+      
       private var model:HistoricalAmmoVO;
-
+      
       override protected function redraw() : void {
          var _loc1_:Separator = null;
          this.disposeModel();
@@ -82,7 +81,7 @@ package net.wg.gui.components.tooltips
          this.updatePositions();
          super.redraw();
       }
-
+      
       override protected function updatePositions() : void {
          super.updatePositions();
          this.shellsSet.x = content.width - this.shellsSet.actualWidth >> 1;
@@ -90,14 +89,14 @@ package net.wg.gui.components.tooltips
          this.priceLabelTF.x = content.width - _loc1_ >> 1;
          this.priceTF.x = this.priceLabelTF.x + this.priceLabelTF.width + PRICE_GAP;
       }
-
+      
       override protected function onDispose() : void {
          this.disposeModel();
          this.shellsSet.dispose();
          this.shellsSet = null;
          super.onDispose();
       }
-
+      
       private function disposeModel() : void {
          if(this.model)
          {
@@ -105,7 +104,7 @@ package net.wg.gui.components.tooltips
             this.model = null;
          }
       }
-
+      
       private function updateStaticTexts() : void {
          this.priceLabelTF.autoSize = TextFieldAutoSize.LEFT;
          this.headerTF.htmlText = Utils.instance.htmlWrapper(App.utils.locale.makeString(HISTORICAL_BATTLES.AMMOPRESET_HEADER),Utils.instance.COLOR_HEADER,18,"$TitleFont");
@@ -114,5 +113,4 @@ package net.wg.gui.components.tooltips
          this.priceLabelTF.htmlText = Utils.instance.htmlWrapper(App.utils.locale.makeString(HISTORICAL_BATTLES.AMMOPRESET_PRICELABEL),Utils.instance.COLOR_LABEL,13,"$TitleFont");
       }
    }
-
 }

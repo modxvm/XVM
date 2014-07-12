@@ -16,41 +16,39 @@ package net.wg.gui.lobby.hangar.crew
    import scaleform.clik.data.ListData;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.Tooltips;
-   import __AS3__.vec.Vector;
-
-
+   
    public class RecruitItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function RecruitItemRenderer() {
          super();
          soundType = "rendererRecruit";
          this.goups_icons_prop = new IconsProps();
       }
-
+      
       private static const BUFF:String = "#00FF00";
-
+      
       private static const DEBUFF:String = "#FF0000";
-
+      
       private static const INVALIDATE_GROUP_PROPS:String = "groups_icons_prop";
-
+      
       public static var MAX_ICONS:Number = 5;
-
+      
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private static function createSkillObj(param1:RecruitRendererVO, param2:Number) : SkillsVO {
          var _loc3_:SkillsVO = new SkillsVO({});
          var _loc4_:SkillsVO = SkillsVO(param1.skills[param2]);
          if(!_loc4_.buy)
          {
             _loc3_.icon = "../maps/icons/tankmen/skills/small/" + _loc4_.icon;
-            _loc3_.inprogress = param2 == param1.skills.length-1 && !(param1.lastSkillLevel == 100);
+            _loc3_.inprogress = param2 == param1.skills.length - 1 && !(param1.lastSkillLevel == 100);
             _loc3_.name = _loc4_.name;
             _loc3_.desc = _loc4_.desc;
             _loc3_.active = _loc4_.active;
-            _loc3_.selected = param2 == param1.skills.length-1;
+            _loc3_.selected = param2 == param1.skills.length - 1;
          }
          else
          {
@@ -61,41 +59,41 @@ package net.wg.gui.lobby.hangar.crew
          }
          return _loc3_;
       }
-
+      
       public var icon:TankmenIcons;
-
+      
       public var iconRole:TankmenIcons;
-
+      
       public var iconRank:TankmenIcons;
-
+      
       public var skills:TileList;
-
+      
       public var bg:MovieClip;
-
+      
       public var goups_icons:MovieClip;
-
+      
       public var levelSpecializationMain:TextField;
-
+      
       public var nameTF:TextField;
-
+      
       public var rank:TextField;
-
+      
       public var role:TextField;
-
+      
       public var vehicleType:TextField;
-
+      
       public var lastSkillLevel:TextField;
-
+      
       private var _recruit:Boolean = false;
-
+      
       private var _personalCase:Boolean = false;
-
+      
       private var goups_icons_prop:IconsProps = null;
-
+      
       private var textObj:TextObject;
-
+      
       public var focusIndicatorUI:MovieClip;
-
+      
       override protected function configUI() : void {
          this.visible = false;
          addEventListener(MouseEvent.CLICK,this.onItemClick);
@@ -105,7 +103,7 @@ package net.wg.gui.lobby.hangar.crew
          this.focusIndicator = this.focusIndicatorUI;
          super.configUI();
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.CLICK,this.onItemClick);
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
@@ -148,11 +146,11 @@ package net.wg.gui.lobby.hangar.crew
          _data = null;
          super.onDispose();
       }
-
+      
       private function showTooltip(param1:MouseEvent) : void {
          this.checkToolTipData(data);
       }
-
+      
       public function onItemClick(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
          if(App.utils.commons.isLeftButton(param1))
@@ -160,7 +158,7 @@ package net.wg.gui.lobby.hangar.crew
             this.checkClick();
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.isDefaultPrevented())
          {
@@ -177,44 +175,40 @@ package net.wg.gui.lobby.hangar.crew
                   this.checkClick();
                   param1.handled = true;
                }
-               else
+               else if(_loc2_.value == InputValue.KEY_UP)
                {
-                  if(_loc2_.value == InputValue.KEY_UP)
+                  if(_pressedByKeyboard)
                   {
-                     if(_pressedByKeyboard)
-                     {
-                        handleRelease(_loc3_);
-                        param1.handled = true;
-                     }
+                     handleRelease(_loc3_);
+                     param1.handled = true;
                   }
                }
+               
                break;
          }
       }
-
+      
       private function checkClick() : void {
          var _loc1_:RecruitRendererVO = null;
          if(this._recruit == true)
          {
             dispatchEvent(new CrewEvent(CrewEvent.SHOW_RECRUIT_WINDOW,data));
          }
-         else
+         else if(data)
          {
-            if(data)
+            _loc1_ = RecruitRendererVO(data);
+            if(_loc1_.tankmanID == _loc1_.parentTankmanID)
             {
-               _loc1_ = RecruitRendererVO(data);
-               if(_loc1_.tankmanID == _loc1_.parentTankmanID)
-               {
-                  return;
-               }
-               if(_loc1_.tankmanID != _loc1_.parentTankmanID)
-               {
-                  dispatchEvent(new CrewEvent(CrewEvent.EQUIP_TANKMAN,data));
-               }
+               return;
+            }
+            if(_loc1_.tankmanID != _loc1_.parentTankmanID)
+            {
+               dispatchEvent(new CrewEvent(CrewEvent.EQUIP_TANKMAN,data));
             }
          }
+         
       }
-
+      
       override public function setData(param1:Object) : void {
          var _loc6_:Array = null;
          var _loc7_:* = 0;
@@ -266,14 +260,14 @@ package net.wg.gui.lobby.hangar.crew
                   this.goups_icons_prop.alpha = 1;
                   this.goups_icons_prop.visible = true;
                   _loc8_ = 0;
-                  if(_loc2_.lastSkillLevel == 100 && _loc2_.availableSkillsCount == _loc2_.skills.length && !_loc2_.skills[_loc2_.skills.length-1].buy)
+                  if(_loc2_.lastSkillLevel == 100 && _loc2_.availableSkillsCount == _loc2_.skills.length && !_loc2_.skills[_loc2_.skills.length - 1].buy)
                   {
                      _loc8_ = 1;
                   }
                   _loc9_ = _loc2_.skills.length - 2;
                   this.goups_icons_prop.autoSize = TextFieldAutoSize.LEFT;
                   this.goups_icons_prop.text = "x" + (_loc9_ + 1 + _loc8_);
-                  _loc10_ = _loc2_.skills.length-1 - _loc8_;
+                  _loc10_ = _loc2_.skills.length - 1 - _loc8_;
                   while(_loc10_ >= _loc9_)
                   {
                      if(_loc10_ == _loc9_)
@@ -301,37 +295,33 @@ package net.wg.gui.lobby.hangar.crew
             this.textObj.levelSpecializationMainHtml = "";
             this.textObj.roleHtml = this.textObj.roleHtml + (", " + _loc4_ + " " + _loc2_.vehicleType);
          }
-         else
+         else if(_loc2_.curVehicleType != _loc2_.tankType)
          {
-            if(_loc2_.curVehicleType != _loc2_.tankType)
+            this.textObj.levelSpecializationMainHtml = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
+            this.textObj.roleHtml = this.textObj.roleHtml + (", <font color=\'" + DEBUFF + "\'>" + _loc4_ + " " + _loc2_.vehicleType + "</font>");
+         }
+         else if(_loc2_.curVehicleName != _loc2_.vehicleType)
+         {
+            if(!_loc2_.vehicleElite)
             {
                this.textObj.levelSpecializationMainHtml = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
-               this.textObj.roleHtml = this.textObj.roleHtml + (", <font color=\'" + DEBUFF + "\'>" + _loc4_ + " " + _loc2_.vehicleType + "</font>");
             }
             else
             {
-               if(_loc2_.curVehicleName != _loc2_.vehicleType)
-               {
-                  if(!_loc2_.vehicleElite)
-                  {
-                     this.textObj.levelSpecializationMainHtml = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
-                  }
-                  else
-                  {
-                     this.textObj.levelSpecializationMainHtml = _loc3_;
-                  }
-                  this.textObj.roleHtml = this.textObj.roleHtml + (", " + _loc4_ + " <font color=\'" + DEBUFF + "\'> " + _loc2_.vehicleType + "</font>");
-               }
-               else
-               {
-                  this.textObj.levelSpecializationMainHtml = _loc3_;
-                  this.textObj.roleHtml = this.textObj.roleHtml + (", " + _loc4_ + " " + _loc2_.vehicleType);
-               }
+               this.textObj.levelSpecializationMainHtml = _loc3_;
             }
+            this.textObj.roleHtml = this.textObj.roleHtml + (", " + _loc4_ + " <font color=\'" + DEBUFF + "\'> " + _loc2_.vehicleType + "</font>");
          }
+         else
+         {
+            this.textObj.levelSpecializationMainHtml = _loc3_;
+            this.textObj.roleHtml = this.textObj.roleHtml + (", " + _loc4_ + " " + _loc2_.vehicleType);
+         }
+         
+         
          this.lastSkillLevel.text = "";
          this.lastSkillLevel.autoSize = TextFieldAutoSize.LEFT;
-         if((((_loc2_.skills) && (_loc2_.skills.length > 0)) && (!_loc2_.skills[0].buy)) && (!isNaN(_loc2_.lastSkillLevel)) && !(_loc2_.lastSkillLevel == 100))
+         if((_loc2_.skills && _loc2_.skills.length > 0 && !_loc2_.skills[0].buy) && (!isNaN(_loc2_.lastSkillLevel)) && !(_loc2_.lastSkillLevel == 100))
          {
             this.lastSkillLevel.visible = true;
             this.lastSkillLevel.text = _loc2_.lastSkillLevel + "%";
@@ -349,13 +339,13 @@ package net.wg.gui.lobby.hangar.crew
             this.checkToolTipData(_loc2_);
          }
       }
-
+      
       override public function setListData(param1:ListData) : void {
          index = param1.index;
          selected = param1.selected;
          setState("up");
       }
-
+      
       override protected function draw() : void {
          var _loc2_:Point = null;
          super.draw();
@@ -406,7 +396,7 @@ package net.wg.gui.lobby.hangar.crew
             }
          }
       }
-
+      
       private function checkToolTipData(param1:Object) : void {
          if(owner.visible)
          {
@@ -420,7 +410,7 @@ package net.wg.gui.lobby.hangar.crew
             }
          }
       }
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          if(this._recruit)
          {
@@ -432,28 +422,27 @@ package net.wg.gui.lobby.hangar.crew
          }
          return _selected?statesSelected:statesDefault;
       }
-
+      
       public function get recruit() : Boolean {
          return this._recruit;
       }
-
+      
       public function set recruit(param1:Boolean) : void {
          this._recruit = param1;
          setState("up");
       }
-
+      
       public function get personalCase() : Boolean {
          return this._personalCase;
       }
-
+      
       public function set personalCase(param1:Boolean) : void {
          this._personalCase = param1;
          setState("up");
       }
-
+      
       override public function toString() : String {
          return "[Scaleform RecruitItemRenderer " + name + "]";
       }
    }
-
 }

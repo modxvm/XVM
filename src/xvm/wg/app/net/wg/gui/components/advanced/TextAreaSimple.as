@@ -15,91 +15,90 @@ package net.wg.gui.components.advanced
    import scaleform.clik.ui.InputDetails;
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.NavigationCode;
-
-
+   
    public class TextAreaSimple extends scaleform.clik.controls.TextArea
    {
-          
+      
       public function TextAreaSimple() {
          this._textPadding = new Padding(0,0,0,0);
          super();
       }
-
+      
       private static const PADDING_FOR_BG:Number = 7;
-
+      
       public var bgForm:Sprite;
-
+      
       private var _safePosition:Boolean = false;
-
+      
       private var _autoScroll:Boolean = false;
-
+      
       private var _showBgForm:Boolean = false;
-
+      
       private var _selectable:Boolean = false;
-
+      
       private var _textPadding:Padding;
-
+      
       private var _selectionTextColor:uint = 1973787;
-
+      
       private var _selectionBgColor:uint = 9868935;
-
+      
       public function get showBgForm() : Boolean {
          return this._showBgForm;
       }
-
+      
       public function set showBgForm(param1:Boolean) : void {
          this._showBgForm = param1;
       }
-
+      
       public function get textPadding() : Object {
          return this._textPadding;
       }
-
+      
       public function set textPadding(param1:Object) : void {
          this._textPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
       }
-
+      
       public function get autoScroll() : Boolean {
          return this._autoScroll;
       }
-
+      
       public function set autoScroll(param1:Boolean) : void {
          this._autoScroll = param1;
       }
-
+      
       public function get selectable() : Boolean {
          return this._selectable;
       }
-
+      
       public function set selectable(param1:Boolean) : void {
          this._selectable = param1;
          this.focusable = _editable?_editable:this._selectable;
       }
-
+      
       public function get selectionTextColor() : uint {
          return this._selectionTextColor;
       }
-
+      
       public function set selectionTextColor(param1:uint) : void {
          this._selectionTextColor = this.rgbToArgb(param1);
          TextFieldEx.setSelectionTextColor(textField,this._selectionTextColor);
          TextFieldEx.setInactiveSelectionTextColor(textField,this.rgbToArgb(textField.textColor));
       }
-
+      
       public function get selectionBgColor() : uint {
          return this._selectionBgColor;
       }
-
+      
       public function set selectionBgColor(param1:uint) : void {
          this._selectionBgColor = this.rgbToArgb(param1);
          TextFieldEx.setSelectionBkgColor(textField,this._selectionBgColor);
          TextFieldEx.setInactiveSelectionBkgColor(textField,0);
       }
-
+      
       private function rgbToArgb(param1:uint) : uint {
          return 4.27819008E9 + param1;
       }
-
+      
       override protected function onDispose() : void {
          this._textPadding = null;
          this.bgForm = null;
@@ -111,11 +110,11 @@ package net.wg.gui.components.advanced
          removeEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheel);
          super.onDispose();
       }
-
+      
       override public function get focusable() : Boolean {
          return _focusable;
       }
-
+      
       override public function set focusable(param1:Boolean) : void {
          _focusable = param1;
          if(!_focusable && (enabled))
@@ -132,11 +131,11 @@ package net.wg.gui.components.advanced
             removeEventListener(MouseEvent.MOUSE_DOWN,handleMouseDown,false);
          }
       }
-
+      
       override public function get editable() : Boolean {
          return _editable;
       }
-
+      
       override public function set editable(param1:Boolean) : void {
          _editable = param1;
          if(textField != null)
@@ -145,7 +144,7 @@ package net.wg.gui.components.advanced
          }
          this.focusable = _editable?_editable:this.selectable;
       }
-
+      
       override protected function configUI() : void {
          if(this._showBgForm)
          {
@@ -176,7 +175,7 @@ package net.wg.gui.components.advanced
          textField.selectable = enabled?(this.editable) || (this._selectable):false;
          this.bgForm.visible = this.showBgForm;
       }
-
+      
       override protected function updateTextField() : void {
          _resetScrollPosition = true;
          if(textField == null)
@@ -205,15 +204,15 @@ package net.wg.gui.components.advanced
          }
          textField.selectable = enabled?(this.editable) || (this._selectable):enabled;
       }
-
+      
       private function onSetFocusHdlr(param1:FocusEvent) : void {
          App.utils.IME.setVisible(true);
       }
-
+      
       private function onKillFocusHdlr(param1:FocusEvent) : void {
          App.utils.IME.setVisible(false);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = NaN;
          super.draw();
@@ -237,13 +236,13 @@ package net.wg.gui.components.advanced
             else
             {
                _scrollBar.y = 1;
-               _scrollBar.x = width - _scrollBar.width-1;
+               _scrollBar.x = width - _scrollBar.width - 1;
                _scrollBar.height = height - 2;
             }
          }
          this.updateText();
       }
-
+      
       override protected function updateText() : void {
          super.updateText();
          if(this.autoScroll)
@@ -255,25 +254,25 @@ package net.wg.gui.components.advanced
             constraints.update(availableWidth,_height);
          }
       }
-
+      
       override protected function handleScroll(param1:Event) : void {
          super.handleScroll(param1);
          this._safePosition = _scrollBar.position < textField.maxScrollV;
       }
-
+      
       public function get safePosition() : Boolean {
          return this._safePosition;
       }
-
+      
       public function set safePosition(param1:Boolean) : void {
          this._safePosition = param1;
       }
-
+      
       public function appendHtmlResetPosition(param1:String) : void {
          this.safePosition = false;
          appendHtml(param1);
       }
-
+      
       private function onMouseWheel(param1:MouseEvent) : void {
          var _loc2_:Point = null;
          var _loc3_:Object = null;
@@ -286,7 +285,7 @@ package net.wg.gui.components.advanced
             }
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          var _loc3_:String = null;
          var _loc4_:* = NaN;
@@ -312,7 +311,7 @@ package net.wg.gui.components.advanced
                {
                   return;
                }
-               position = Math.max(1,position-1);
+               position = Math.max(1,position - 1);
                param1.handled = true;
                break;
             case NavigationCode.DOWN:
@@ -344,5 +343,4 @@ package net.wg.gui.components.advanced
          }
       }
    }
-
 }

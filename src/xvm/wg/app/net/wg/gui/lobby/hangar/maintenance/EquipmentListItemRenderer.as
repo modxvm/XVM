@@ -16,36 +16,35 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.events.ModuleInfoEvent;
-
-
+   
    public class EquipmentListItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function EquipmentListItemRenderer() {
          super();
       }
-
+      
       public var icon:UILoaderAlt;
-
+      
       public var titleField:TextField;
-
+      
       public var descField:TextField;
-
+      
       public var errorField:TextField;
-
+      
       public var priceMC:IconText;
-
+      
       public var actionPrice:ActionPrice;
-
+      
       public var targetMC:MovieClip;
-
+      
       public var hitMc:MovieClip;
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          invalidate(InvalidationType.DATA);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          var _loc1_:IEventCollector = App.utils.events;
@@ -58,7 +57,7 @@ package net.wg.gui.lobby.hangar.maintenance
             hitArea = this.hitMc;
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:ActionPriceVO = null;
          if(isInvalid(InvalidationType.DATA))
@@ -94,17 +93,15 @@ package net.wg.gui.lobby.hangar.maintenance
                   {
                      this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_DISABLE;
                   }
+                  else if(this.module.price < this.module.userCredits[this.module.currency])
+                  {
+                     this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
+                  }
                   else
                   {
-                     if(this.module.price < this.module.userCredits[this.module.currency])
-                     {
-                        this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
-                     }
-                     else
-                     {
-                        this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
-                     }
+                     this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
                   }
+                  
                   if(this.module.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT)
                   {
                      this.priceMC.textColor = 6710886;
@@ -113,31 +110,25 @@ package net.wg.gui.lobby.hangar.maintenance
                   this.priceMC.validateNow();
                   this.targetMC.gotoAndStop("shop");
                }
-               else
+               else if(this.module.target == 2)
                {
-                  if(this.module.target == 2)
+                  if(this.module.status == "")
                   {
-                     if(this.module.status == "")
-                     {
-                        this.targetMC.gotoAndPlay("hangar");
-                     }
-                     else
-                     {
-                        if(!(this.module.status == MENU.MODULEFITS_CREDIT_ERROR) && this.module.status == MENU.MODULEFITS_GOLD_ERROR)
-                        {
-                           this.targetMC.gotoAndPlay("hangarCantInstall");
-                        }
-                     }
+                     this.targetMC.gotoAndPlay("hangar");
                   }
-                  else
+                  else if(!(this.module.status == MENU.MODULEFITS_CREDIT_ERROR) && this.module.status == MENU.MODULEFITS_GOLD_ERROR)
                   {
-                     if(this.module.target == 1)
-                     {
-                        this.targetMC.gotoAndPlay("vehicle");
-                        this.targetMC.textField.text = this.module.status == ""?"":MENU.FITTINGLISTITEMRENDERER_REPLACE;
-                     }
+                     this.targetMC.gotoAndPlay("hangarCantInstall");
                   }
+                  
                }
+               else if(this.module.target == 1)
+               {
+                  this.targetMC.gotoAndPlay("vehicle");
+                  this.targetMC.textField.text = this.module.status == ""?"":MENU.FITTINGLISTITEMRENDERER_REPLACE;
+               }
+               
+               
                this.errorField.text = this.module.status;
                enabled = !(this.module.status == MENU.MODULEFITS_UNLOCK_ERROR) && !(this.module.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT);
                mouseEnabled = true;
@@ -153,22 +144,22 @@ package net.wg.gui.lobby.hangar.maintenance
             this.actionPrice.setup(this);
          }
       }
-
+      
       private function get module() : ModuleVO {
          return data as ModuleVO;
       }
-
+      
       private function onRollOver(param1:MouseEvent) : void {
          owner.dispatchEvent(new OnEquipmentRendererOver(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.module.id,this.module.prices,this.module.inventoryCount,this.module.vehicleCount,this.module.slotIndex));
       }
-
+      
       private function onRollOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onClick(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
-         if(param1  is  MouseEventEx)
+         if(param1 is MouseEventEx)
          {
             if(App.utils.commons.isRightButton(param1))
             {
@@ -177,5 +168,4 @@ package net.wg.gui.lobby.hangar.maintenance
          }
       }
    }
-
 }

@@ -1,6 +1,8 @@
 package net.wg.gui.prebattle.company
 {
    import net.wg.gui.components.controls.ScrollingListEx;
+   import net.wg.gui.events.ListEventEx;
+   import scaleform.gfx.MouseEventEx;
    import flash.events.FocusEvent;
    import flash.events.MouseEvent;
    import net.wg.gui.components.controls.ScrollBar;
@@ -11,11 +13,10 @@ package net.wg.gui.prebattle.company
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.WrappingMode;
    import scaleform.clik.constants.NavigationCode;
-
-
+   
    public class CompaniesScrollingList extends ScrollingListEx
    {
-          
+      
       public function CompaniesScrollingList() {
          super();
          tabEnabled = true;
@@ -23,15 +24,26 @@ package net.wg.gui.prebattle.company
          this.addEventListener(FocusEvent.FOCUS_OUT,this.focusOutHandler);
          this.addEventListener(CompanyEvent.SELECTED_ITEM,this.selectedItemHandler);
          this.addEventListener(MouseEvent.CLICK,this.buttonClickHandler);
+         this.addEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.buttonDoubleClickHandler);
          App.stage.addEventListener(MouseEvent.MOUSE_DOWN,this.clickHandler);
       }
-
+      
       private var _setIndexCompany:int = -1;
-
+      
       private var showPlayersList:Boolean = false;
-
+      
       private var isItemSelected:Boolean = false;
-
+      
+      private function buttonDoubleClickHandler(param1:ListEventEx) : void {
+         var _loc2_:CompanyEvent = null;
+         if(param1.buttonIdx == MouseEventEx.LEFT_BUTTON)
+         {
+            _loc2_ = new CompanyEvent(CompanyEvent.DROP_LIST_CLICK,true);
+            _loc2_.prbID = param1.itemData.prbID;
+            dispatchEvent(_loc2_);
+         }
+      }
+      
       public function get isOpenedState() : Boolean {
          var _loc3_:CompanyListItemRenderer = null;
          var _loc1_:int = _renderers.length;
@@ -47,20 +59,21 @@ package net.wg.gui.prebattle.company
          }
          return false;
       }
-
+      
       public function updateRenderer() : void {
          refreshData();
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          App.utils.scheduler.cancelTask(this.updateRenderer);
          this.removeEventListener(FocusEvent.FOCUS_OUT,this.focusOutHandler);
          this.removeEventListener(CompanyEvent.SELECTED_ITEM,this.selectedItemHandler);
          this.removeEventListener(MouseEvent.CLICK,this.buttonClickHandler);
+         this.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.buttonDoubleClickHandler);
          App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.clickHandler);
       }
-
+      
       private function clickHandler(param1:MouseEvent) : void {
          var _loc2_:ScrollBar = null;
          if((scrollBar) && (scrollBar.hitTestPoint(param1.stageX,param1.stageY)))
@@ -76,7 +89,7 @@ package net.wg.gui.prebattle.company
             }
          }
       }
-
+      
       public function unselectedRenderers() : void {
          var _loc3_:CompanyListItemRenderer = null;
          this.isItemSelected = false;
@@ -89,32 +102,32 @@ package net.wg.gui.prebattle.company
             _loc2_++;
          }
       }
-
+      
       private function buttonClickHandler(param1:MouseEvent) : void {
-         if(param1.target  is  CompaniesScrollingList)
+         if(param1.target is CompaniesScrollingList)
          {
             this.isItemSelected = false;
             App.utils.scheduler.scheduleTask(this.updateRenderer,110);
          }
       }
-
+      
       private function selectedItemHandler(param1:CompanyEvent) : void {
          this.isItemSelected = param1.isSelected;
       }
-
+      
       public function set setIndexCompany(param1:uint) : void {
          this._setIndexCompany = int(param1);
       }
-
+      
       private function isShowPlayersList() : Boolean {
          return !(this._setIndexCompany == -1) && this._setIndexCompany >= _scrollPosition && this._setIndexCompany <= _scrollPosition + _totalRenderers;
       }
-
+      
       private function focusOutHandler(param1:FocusEvent) : void {
          this.isItemSelected = false;
          App.utils.scheduler.scheduleTask(this.updateRenderer,110);
       }
-
+      
       override protected function populateData(param1:Array) : void {
          var _loc5_:CompanyListItemRenderer = null;
          var _loc6_:* = 0;
@@ -148,7 +161,7 @@ package net.wg.gui.prebattle.company
             _loc4_++;
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -172,36 +185,32 @@ package net.wg.gui.prebattle.company
                {
                   if(_loc4_)
                   {
-                     scrollPosition = scrollPosition + _totalRenderers-1;
+                     scrollPosition = scrollPosition + _totalRenderers - 1;
                   }
                }
-               else
+               else if(_selectedIndex > 0)
                {
-                  if(_selectedIndex > 0)
+                  if(_loc4_)
+                  {
+                     scrollPosition--;
+                  }
+               }
+               else if(wrapping != WrappingMode.STICK)
+               {
+                  if(wrapping == WrappingMode.WRAP)
                   {
                      if(_loc4_)
                      {
-                        scrollPosition--;
+                        scrollPosition = _dataProvider.length - 1;
                      }
                   }
                   else
                   {
-                     if(wrapping != WrappingMode.STICK)
-                     {
-                        if(wrapping == WrappingMode.WRAP)
-                        {
-                           if(_loc4_)
-                           {
-                              scrollPosition = _dataProvider.length-1;
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.DOWN:
                if(_selectedIndex == -1)
@@ -211,38 +220,34 @@ package net.wg.gui.prebattle.company
                      scrollPosition = _scrollPosition;
                   }
                }
-               else
+               else if(_selectedIndex < _dataProvider.length - 1)
                {
-                  if(_selectedIndex < _dataProvider.length-1)
+                  if(_loc4_)
+                  {
+                     scrollPosition++;
+                  }
+               }
+               else if(wrapping != WrappingMode.STICK)
+               {
+                  if(wrapping == WrappingMode.WRAP)
                   {
                      if(_loc4_)
                      {
-                        scrollPosition++;
+                        scrollPosition = 0;
                      }
                   }
                   else
                   {
-                     if(wrapping != WrappingMode.STICK)
-                     {
-                        if(wrapping == WrappingMode.WRAP)
-                        {
-                           if(_loc4_)
-                           {
-                              scrollPosition = 0;
-                           }
-                        }
-                        else
-                        {
-                           return;
-                        }
-                     }
+                     return;
                   }
                }
+               
+               
                break;
             case NavigationCode.END:
                if(!_loc4_)
                {
-                  scrollPosition = _dataProvider.length-1;
+                  scrollPosition = _dataProvider.length - 1;
                }
                break;
             case NavigationCode.HOME:
@@ -269,5 +274,4 @@ package net.wg.gui.prebattle.company
          param1.handled = true;
       }
    }
-
 }

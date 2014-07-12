@@ -7,28 +7,27 @@ package net.wg.gui.lobby.customization.renderers
    import net.wg.gui.lobby.customization.CustomizationEvent;
    import net.wg.data.constants.IconsTypes;
    import net.wg.data.constants.SoundTypes;
-
-
+   
    public class PriceItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function PriceItemRenderer() {
          super();
          soundType = SoundTypes.RNDR_NORMAL;
          soundId = SoundTypes.PRICE_RENDERER;
       }
-
+      
       public var checkBox:CheckBox;
-
+      
       public var costField:IconText;
-
+      
       private var _lock:Boolean = false;
-
+      
       override public function setData(param1:Object) : void {
          super.setData(param1);
          invalidateData();
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(this.lock)
          {
@@ -37,11 +36,11 @@ package net.wg.gui.lobby.customization.renderers
          super.enabled = param1;
          invalidateData();
       }
-
+      
       public function get lock() : Boolean {
          return this._lock;
       }
-
+      
       public function set lock(param1:Boolean) : void {
          if(this._lock == param1)
          {
@@ -50,11 +49,11 @@ package net.wg.gui.lobby.customization.renderers
          this._lock = param1;
          this.enabled = !param1;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(InvalidationType.DATA))
@@ -70,8 +69,8 @@ package net.wg.gui.lobby.customization.renderers
             }
          }
       }
-
-      override protected function handleClick(param1:uint=0) : void {
+      
+      override protected function handleClick(param1:uint = 0) : void {
          if(toggle)
          {
             selected = !_selected;
@@ -80,7 +79,7 @@ package net.wg.gui.lobby.customization.renderers
          data.selected = this.checkBox.selected;
          dispatchEvent(new CustomizationEvent(CustomizationEvent.PRICE_ITEM_CLICK));
       }
-
+      
       private function populateData() : void {
          var _loc1_:Object = null;
          this.checkBox.enabled = enabled;
@@ -111,5 +110,4 @@ package net.wg.gui.lobby.customization.renderers
          }
       }
    }
-
 }

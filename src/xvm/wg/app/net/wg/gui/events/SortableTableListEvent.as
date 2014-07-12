@@ -1,11 +1,10 @@
 package net.wg.gui.events
 {
    import scaleform.clik.events.ListEvent;
-
-
+   
    public class SortableTableListEvent extends ListEventEx
    {
-          
+      
       public function SortableTableListEvent(param1:ListEvent) {
          var _loc2_:* = "";
          switch(param1.type)
@@ -31,18 +30,17 @@ package net.wg.gui.events
          }
          super(_loc2_,param1.bubbles,param1.cancelable,param1.index,param1.columnIndex,param1.rowIndex,param1.itemRenderer,param1.itemData,param1.controllerIdx,param1.buttonIdx,param1.isKeyboard);
       }
-
+      
       public static const RENDERER_CLICK:String = "tableRendererClick";
-
+      
       public static const RENDERER_PRESS:String = "tableRendererPress";
-
+      
       public static const RENDERER_ROLL_OVER:String = "tableRendererRollOver";
-
+      
       public static const RENDERER_ROLL_OUT:String = "tableRendererRollOut";
-
+      
       public static const RENDERER_DOUBLE_CLICK:String = "tableRendererDoubleClick";
-
+      
       public static const LIST_INDEX_CHANGE:String = "tablelistIndexChange";
    }
-
 }

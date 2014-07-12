@@ -18,56 +18,45 @@ package net.wg.gui.lobby.GUIEditor
    import net.wg.infrastructure.interfaces.IContextMenu;
    import flash.geom.Point;
    import net.wg.gui.events.ContextMenuEvent;
-
-
+   
    public class GEInspectWindow extends GEInspectWindowMeta implements IGEInspectWindowMeta
    {
-          
+      
       public function GEInspectWindow() {
          super();
          showWindowBg = false;
          canClose = false;
       }
-
-      public static const CONTENT_TABS:Array = [
-                                                  {
-                                                     "label":"Application",
-                                                     "linkage":""
-                                                  }
-                                               ,
-                                                  {
-                                                     "label":"EditingWindow",
-                                                     "linkage":""
-                                                  }
-                                               ];
-
+      
+      public static const CONTENT_TABS:Array;
+      
       private static const TABS_DATA:Array;
-
+      
       private static function onComponentCreateHandler(param1:ComponentCreateEvent) : void {
          var _loc2_:Sprite = Sprite(param1.component);
          App.cursor.attachToCursor(_loc2_,0,0);
       }
-
+      
       public var viewStack:ViewStack = null;
-
+      
       public var tabs:ButtonBarEx = null;
-
+      
       public var contentTabs:ButtonBarEx = null;
-
+      
       public var componentsPanel:ComponentsPanel = null;
-
+      
       public var fileBtn:SoundButtonEx = null;
-
+      
       public var editBtn:SoundButtonEx = null;
-
+      
       public var tfLocation:TextField = null;
-
+      
       public var btnCopyLocation:SoundButtonEx = null;
-
+      
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.tabs.dataProvider = new DataProvider(TABS_DATA);
@@ -77,7 +66,7 @@ package net.wg.gui.lobby.GUIEditor
          this.tfLocation.autoSize = TextFieldAutoSize.LEFT;
          this.btnCopyLocation.visible = false;
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
          addEventListener(ComponentCreateEvent.COMPONENT_CREATE,onComponentCreateHandler);
@@ -85,7 +74,7 @@ package net.wg.gui.lobby.GUIEditor
          InteractiveObject(window).mouseEnabled = false;
          window.title = "";
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(ComponentCreateEvent.COMPONENT_CREATE,onComponentCreateHandler);
          this.removeListeners();
@@ -105,14 +94,14 @@ package net.wg.gui.lobby.GUIEditor
          this.btnCopyLocation = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          window.x = -window.formBgPadding.left - 322;
          window.y = -window.formBgPadding.top - 102;
          invalidateSize();
       }
-
+      
       private function addListeners() : void {
          this.viewStack.addEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
          this.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChangeHandler);
@@ -121,7 +110,7 @@ package net.wg.gui.lobby.GUIEditor
          this.editBtn.addEventListener(MouseEvent.CLICK,this.showContextMenu);
          this.btnCopyLocation.addEventListener(MouseEvent.MOUSE_DOWN,this.copyLocation);
       }
-
+      
       private function removeListeners() : void {
          this.viewStack.removeEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
          this.viewStack.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChangeHandler);
@@ -130,15 +119,13 @@ package net.wg.gui.lobby.GUIEditor
          this.editBtn.removeEventListener(MouseEvent.CLICK,this.showContextMenu);
          this.btnCopyLocation.removeEventListener(MouseEvent.MOUSE_DOWN,this.copyLocation);
       }
-
+      
       private function onViewNeedUpdateHandler(param1:ViewStackEvent) : void {
-          
       }
-
+      
       private function onViewChangeHandler(param1:ViewStackEvent) : void {
-          
       }
-
+      
       private function showContextMenu(param1:MouseEvent) : void {
          var _loc8_:String = null;
          var _loc2_:DisplayObject = DisplayObject(param1.target);
@@ -158,7 +145,7 @@ package net.wg.gui.lobby.GUIEditor
          _loc5_.x = _loc7_.x;
          _loc5_.y = _loc7_.y + _loc2_.height;
       }
-
+      
       private function onContextMenuHandler(param1:ContextMenuEvent) : void {
          switch(param1.id)
          {
@@ -178,7 +165,7 @@ package net.wg.gui.lobby.GUIEditor
          }
          App.contextMenuMgr.hide();
       }
-
+      
       private function onElementSelected(param1:InspectorViewEvent) : void {
          var _loc3_:* = 0;
          var _loc4_:DisplayObject = null;
@@ -202,10 +189,9 @@ package net.wg.gui.lobby.GUIEditor
             this.btnCopyLocation.visible = false;
          }
       }
-
+      
       private function copyLocation(param1:MouseEvent) : void {
          copyToClipboardS(this.tfLocation.text);
       }
    }
-
 }

@@ -3,20 +3,19 @@ package net.wg.gui.lobby.profile.pages.statistics.body
    import net.wg.gui.lobby.profile.components.ProfileDashLineTextItem;
    import net.wg.gui.lobby.profile.pages.statistics.StatisticsTooltipDataVO;
    import net.wg.data.managers.impl.ToolTipParams;
-
-
+   
    public class StatisticsDashLineTextItemIRenderer extends ProfileDashLineTextItem
    {
-          
+      
       public function StatisticsDashLineTextItemIRenderer() {
          super();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          width = 280;
       }
-
+      
       public function set data(param1:DetailedStatisticsLabelDataVO) : void {
          var _loc2_:StatisticsTooltipDataVO = null;
          if(param1)
@@ -40,11 +39,10 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             visible = false;
          }
       }
-
+      
       override protected function applySizeChanges() : void {
          super.applySizeChanges();
          dashLine.validateNow();
       }
    }
-
 }

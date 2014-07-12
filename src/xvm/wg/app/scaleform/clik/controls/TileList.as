@@ -15,68 +15,67 @@ package scaleform.clik.controls
    import flash.utils.getDefinitionByName;
    import flash.events.MouseEvent;
    import scaleform.clik.data.ListData;
-
-
+   
    public class TileList extends CoreList
    {
-          
+      
       public function TileList() {
          super();
       }
-
+      
       public var wrapping:String = "normal";
-
+      
       public var thumbOffset:Object;
-
+      
       public var thumbSizeFactor:Number = 1;
-
+      
       public var externalColumnCount:Number = 0;
-
+      
       protected var _rowHeight:Number = NaN;
-
+      
       protected var _autoRowHeight:Number = NaN;
-
+      
       protected var _totalRows:Number = 0;
-
+      
       protected var _columnWidth:Number = NaN;
-
+      
       protected var _autoColumnWidth:Number = NaN;
-
+      
       protected var _totalColumns:uint = 0;
-
+      
       protected var _scrollPosition:uint = 0;
-
+      
       protected var _autoScrollBar:Boolean = false;
-
+      
       protected var _scrollBarValue:Object;
-
+      
       protected var _margin:Number = 0;
-
+      
       protected var _padding:Padding;
-
+      
       protected var _direction:String = "horizontal";
-
+      
       protected var _siWidth:Number = 0;
-
+      
       protected var _scrollBar:IScrollBar;
-
+      
       override protected function initialize() : void {
          super.initialize();
       }
-
+      
       public function get scrollBar() : Object {
          return this._scrollBar;
       }
-
+      
       public function set scrollBar(param1:Object) : void {
          this._scrollBarValue = param1;
          invalidate(InvalidationType.SCROLL_BAR);
       }
-
+      
       public function get rowHeight() : Number {
          return isNaN(this._autoRowHeight)?this._rowHeight:this._autoRowHeight;
       }
-
+      
       public function set rowHeight(param1:Number) : void {
          if(param1 == 0)
          {
@@ -90,11 +89,11 @@ package scaleform.clik.controls
          this._autoRowHeight = NaN;
          invalidateSize();
       }
-
+      
       public function get columnWidth() : Number {
          return isNaN(this._autoColumnWidth)?this._columnWidth:this._autoColumnWidth;
       }
-
+      
       public function set columnWidth(param1:Number) : void {
          if(param1 == 0)
          {
@@ -108,11 +107,11 @@ package scaleform.clik.controls
          this._autoColumnWidth = NaN;
          invalidateSize();
       }
-
+      
       public function get rowCount() : uint {
          return this._totalRows;
       }
-
+      
       public function set rowCount(param1:uint) : void {
          var _loc2_:Number = this.rowHeight;
          if(isNaN(_loc2_))
@@ -122,11 +121,11 @@ package scaleform.clik.controls
          }
          height = _loc2_ * param1 + this.margin * 2 + this.padding.vertical + (this._direction == DirectionMode.HORIZONTAL && (this._autoScrollBar)?Math.round(this._siWidth):0);
       }
-
+      
       public function get columnCount() : uint {
          return this._totalColumns;
       }
-
+      
       public function set columnCount(param1:uint) : void {
          var _loc2_:Number = this.columnWidth;
          if(isNaN(_loc2_))
@@ -136,11 +135,11 @@ package scaleform.clik.controls
          }
          width = _loc2_ * param1 + this.margin * 2 + this.padding.horizontal + (this._direction == DirectionMode.VERTICAL && (this._autoScrollBar)?Math.round(this._siWidth):0);
       }
-
+      
       public function get direction() : String {
          return this._direction;
       }
-
+      
       public function set direction(param1:String) : void {
          if(param1 == this._direction)
          {
@@ -149,7 +148,7 @@ package scaleform.clik.controls
          this._direction = param1;
          invalidate();
       }
-
+      
       override public function set selectedIndex(param1:int) : void {
          if(param1 == _selectedIndex || param1 == _newSelectedIndex)
          {
@@ -158,25 +157,25 @@ package scaleform.clik.controls
          _newSelectedIndex = param1;
          invalidateSelectedIndex();
       }
-
+      
       public function get margin() : Number {
          return this._margin;
       }
-
+      
       public function set margin(param1:Number) : void {
          this._margin = param1;
          invalidateSize();
       }
-
+      
       public function get padding() : Padding {
          return this._padding;
       }
-
+      
       public function set padding(param1:Padding) : void {
          this._padding = param1;
          invalidateSize();
       }
-
+      
       public function set inspectablePadding(param1:Object) : void {
          if(!componentInspectorSetting)
          {
@@ -184,19 +183,19 @@ package scaleform.clik.controls
          }
          this.padding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
       }
-
+      
       override public function get availableWidth() : Number {
          return Math.round(_width) - this.padding.horizontal - this.margin * 2 - (this._direction == DirectionMode.VERTICAL && (this._autoScrollBar)?Math.round(this._siWidth):0);
       }
-
+      
       override public function get availableHeight() : Number {
          return Math.round(_height) - this.padding.vertical - this.margin * 2 - (this._direction == DirectionMode.HORIZONTAL && (this._autoScrollBar)?Math.round(this._siWidth):0);
       }
-
+      
       public function get scrollPosition() : Number {
          return this._scrollPosition;
       }
-
+      
       public function set scrollPosition(param1:Number) : void {
          var _loc2_:Number = Math.ceil((_dataProvider.length - this._totalRows * this._totalColumns) / (this._direction == DirectionMode.HORIZONTAL?this._totalRows:this._totalColumns));
          var param1:Number = Math.max(0,Math.min(_loc2_,Math.round(param1)));
@@ -207,8 +206,8 @@ package scaleform.clik.controls
          this._scrollPosition = param1;
          invalidateData();
       }
-
-      override public function getRendererAt(param1:uint, param2:int=0) : IListItemRenderer {
+      
+      override public function getRendererAt(param1:uint, param2:int = 0) : IListItemRenderer {
          if(_renderers == null)
          {
             return null;
@@ -220,7 +219,7 @@ package scaleform.clik.controls
          }
          return _renderers[_loc3_] as IListItemRenderer;
       }
-
+      
       override public function scrollToIndex(param1:uint) : void {
          if(_totalRenderers == 0)
          {
@@ -245,7 +244,7 @@ package scaleform.clik.controls
             this.scrollPosition = Math.floor(param1 / _loc2_) - (this._direction == DirectionMode.HORIZONTAL?this._totalColumns:this._totalRows) + 1;
          }
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.handled)
          {
@@ -275,7 +274,7 @@ package scaleform.clik.controls
                   _loc5_ = _selectedIndex - this._totalRows;
                   break;
                case NavigationCode.UP:
-                  _loc5_ = _selectedIndex-1;
+                  _loc5_ = _selectedIndex - 1;
                   break;
                case NavigationCode.DOWN:
                   _loc5_ = _selectedIndex + 1;
@@ -293,7 +292,7 @@ package scaleform.clik.controls
                   _loc5_ = _selectedIndex - this._totalColumns;
                   break;
                case NavigationCode.LEFT:
-                  _loc5_ = _selectedIndex-1;
+                  _loc5_ = _selectedIndex - 1;
                   break;
                case NavigationCode.RIGHT:
                   _loc5_ = _selectedIndex + 1;
@@ -308,10 +307,10 @@ package scaleform.clik.controls
                   _loc5_ = 0;
                   break;
                case NavigationCode.END:
-                  _loc5_ = _dataProvider.length-1;
+                  _loc5_ = _dataProvider.length - 1;
                   break;
                case NavigationCode.PAGE_DOWN:
-                  _loc5_ = Math.min(_dataProvider.length-1,_selectedIndex + this._totalColumns * this._totalRows);
+                  _loc5_ = Math.min(_dataProvider.length - 1,_selectedIndex + this._totalColumns * this._totalRows);
                   break;
                case NavigationCode.PAGE_UP:
                   _loc5_ = Math.max(0,_selectedIndex - this._totalColumns * this._totalRows);
@@ -327,36 +326,32 @@ package scaleform.clik.controls
             }
             if(_loc5_ >= 0 && _loc5_ < dataProvider.length)
             {
-               this.selectedIndex = Math.max(0,Math.min(_dataProvider.length-1,_loc5_));
+               this.selectedIndex = Math.max(0,Math.min(_dataProvider.length - 1,_loc5_));
                param1.handled = true;
             }
-            else
+            else if(this.wrapping == WrappingMode.STICK)
             {
-               if(this.wrapping == WrappingMode.STICK)
+               _loc5_ = Math.max(0,Math.min(_dataProvider.length - 1,_loc5_));
+               if(selectedIndex != _loc5_)
                {
-                  _loc5_ = Math.max(0,Math.min(_dataProvider.length-1,_loc5_));
-                  if(selectedIndex != _loc5_)
-                  {
-                     this.selectedIndex = _loc5_;
-                  }
-                  param1.handled = true;
+                  this.selectedIndex = _loc5_;
                }
-               else
-               {
-                  if(this.wrapping == WrappingMode.WRAP)
-                  {
-                     this.selectedIndex = _loc5_ < 0?_dataProvider.length-1:selectedIndex < _dataProvider.length-1?_dataProvider.length-1:0;
-                     param1.handled = true;
-                  }
-               }
+               param1.handled = true;
             }
+            else if(this.wrapping == WrappingMode.WRAP)
+            {
+               this.selectedIndex = _loc5_ < 0?_dataProvider.length - 1:selectedIndex < _dataProvider.length - 1?_dataProvider.length - 1:0;
+               param1.handled = true;
+            }
+            
+            
          }
       }
-
+      
       override public function toString() : String {
          return "[CLIK TileList " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(this.padding == null)
@@ -368,7 +363,7 @@ package scaleform.clik.controls
             itemRendererName = _itemRendererName;
          }
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.SCROLL_BAR))
          {
@@ -385,12 +380,16 @@ package scaleform.clik.controls
             }
          }
          super.draw();
+         if(_baseDisposed)
+         {
+            return;
+         }
          if(isInvalid(InvalidationType.DATA))
          {
             this.updateScrollBar();
          }
       }
-
+      
       protected function createScrollBar() : void {
          var _loc1_:IScrollBar = null;
          var _loc2_:Class = null;
@@ -411,7 +410,7 @@ package scaleform.clik.controls
             return;
          }
          this._autoScrollBar = false;
-         if(this._scrollBarValue  is  String)
+         if(this._scrollBarValue is String)
          {
             if(parent != null)
             {
@@ -438,25 +437,23 @@ package scaleform.clik.controls
                }
             }
          }
-         else
+         else if(this._scrollBarValue is Class)
          {
-            if(this._scrollBarValue  is  Class)
+            _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
+            _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
+            if(_loc1_ != null)
             {
-               _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
-               _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
-               if(_loc1_ != null)
-               {
-                  this._autoScrollBar = true;
-                  (_loc1_ as Object).offsetTop = this.thumbOffset.top;
-                  (_loc1_ as Object).offsetBottom = this.thumbOffset.bottom;
-                  container.addChild(_loc1_ as DisplayObject);
-               }
-            }
-            else
-            {
-               _loc1_ = this._scrollBarValue as IScrollBar;
+               this._autoScrollBar = true;
+               (_loc1_ as Object).offsetTop = this.thumbOffset.top;
+               (_loc1_ as Object).offsetBottom = this.thumbOffset.bottom;
+               container.addChild(_loc1_ as DisplayObject);
             }
          }
+         else
+         {
+            _loc1_ = this._scrollBarValue as IScrollBar;
+         }
+         
          this._scrollBar = _loc1_;
          this._siWidth = this._scrollBar.width;
          invalidateSize();
@@ -469,7 +466,7 @@ package scaleform.clik.controls
          this._scrollBar.focusTarget = this;
          this._scrollBar.tabEnabled = false;
       }
-
+      
       override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
          var _loc5_:IListItemRenderer = null;
          var _loc3_:Boolean = (isNaN(this._rowHeight)) && (isNaN(this._autoRowHeight));
@@ -492,7 +489,7 @@ package scaleform.clik.controls
          _totalRenderers = this._totalRows * this._totalColumns;
          return _totalRenderers;
       }
-
+      
       override protected function updateSelectedIndex() : void {
          if(_selectedIndex == _newSelectedIndex)
          {
@@ -530,19 +527,19 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       override protected function refreshData() : void {
          var _loc1_:Number = this._direction == DirectionMode.HORIZONTAL?this._totalRows:this._totalColumns;
          var _loc2_:Number = Math.ceil(_dataProvider.length / _loc1_);
          var _loc3_:Number = _loc2_ - (this._direction == DirectionMode.HORIZONTAL?this._totalColumns:this._totalRows);
          this._scrollPosition = Math.max(0,Math.min(_loc3_,this._scrollPosition));
          var _loc4_:Number = this._scrollPosition * _loc1_;
-         var _loc5_:Number = _loc4_ + this._totalColumns * this._totalRows-1;
-         this.selectedIndex = Math.min(_dataProvider.length-1,_selectedIndex);
+         var _loc5_:Number = _loc4_ + this._totalColumns * this._totalRows - 1;
+         this.selectedIndex = Math.min(_dataProvider.length - 1,_selectedIndex);
          this.updateSelectedIndex();
          _dataProvider.requestItemRange(_loc4_,_loc5_,this.populateData);
       }
-
+      
       override protected function drawLayout() : void {
          var _loc8_:IListItemRenderer = null;
          var _loc1_:uint = _renderers.length;
@@ -575,7 +572,7 @@ package scaleform.clik.controls
          }
          this.drawScrollBar();
       }
-
+      
       override protected function changeFocus() : void {
          super.changeFocus();
          var _loc1_:IListItemRenderer = this.getRendererAt(_selectedIndex,this._scrollPosition);
@@ -585,7 +582,7 @@ package scaleform.clik.controls
             _loc1_.validateNow();
          }
       }
-
+      
       protected function populateData(param1:Array) : void {
          var _loc5_:IListItemRenderer = null;
          var _loc6_:uint = 0;
@@ -605,7 +602,7 @@ package scaleform.clik.controls
             _loc4_++;
          }
       }
-
+      
       protected function drawScrollBar() : void {
          if(!this._autoScrollBar)
          {
@@ -629,7 +626,7 @@ package scaleform.clik.controls
          }
          this._scrollBar.validateNow();
       }
-
+      
       protected function updateScrollBar() : void {
          var _loc1_:* = NaN;
          var _loc2_:ScrollIndicator = null;
@@ -645,7 +642,7 @@ package scaleform.clik.controls
          {
             _loc1_ = Math.ceil(_dataProvider.length / this._totalColumns) - this._totalRows;
          }
-         if(this._scrollBar  is  ScrollIndicator)
+         if(this._scrollBar is ScrollIndicator)
          {
             _loc2_ = this._scrollBar as ScrollIndicator;
             _loc2_.setScrollProperties(this._direction == DirectionMode.HORIZONTAL?this._totalColumns:this._totalRows,0,_loc1_);
@@ -653,18 +650,17 @@ package scaleform.clik.controls
          this._scrollBar.position = this._scrollPosition;
          this._scrollBar.validateNow();
       }
-
+      
       protected function handleScroll(param1:Event) : void {
          this.scrollPosition = this._scrollBar.position;
       }
-
+      
       override protected function scrollList(param1:int) : void {
          this.scrollPosition = this.scrollPosition - param1;
       }
-
+      
       protected function blockMouseWheel(param1:MouseEvent) : void {
          param1.stopPropagation();
       }
    }
-
 }

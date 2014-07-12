@@ -11,82 +11,80 @@ package net.wg.gui.lobby.hangar.tcarousel
    import net.wg.data.constants.SoundTypes;
    import net.wg.data.constants.SoundManagerStates;
    import flash.text.TextFormat;
-   import __AS3__.vec.Vector;
    import flash.display.FrameLabel;
    import flash.filters.GlowFilter;
    import flash.filters.DropShadowFilter;
-
-
+   
    public class TankCarouselItemRenderer extends DragableListItemRenderer
    {
-          
+      
       public function TankCarouselItemRenderer() {
          super();
          focusIndicator = this.focusIndicator1;
       }
-
+      
       public var vehicleIcon:TankIcon;
-
+      
       public var slotPrice:IconText;
-
+      
       public var statusText:TextField;
-
+      
       public var emptyInfoTxt:TextField;
-
+      
       public var bg_switcher:MovieClip;
-
+      
       public var hitMC:MovieClip;
-
+      
       public var clanLockUI:ClanLockUI;
-
+      
       public var actionPrice:ActionPrice;
-
+      
       public var focusIndicator1:MovieClip = null;
-
+      
       private var _id:Number = 0;
-
+      
       private var _image:String = "";
-
+      
       private var _nation:Number = -1;
-
+      
       private var _level:Number = -1;
-
+      
       private var _stat:String = "";
-
+      
       private var _current:Number = -1;
-
+      
       private var _stateLevel:String = "";
-
+      
       private var _doubleXPReceived:Number = 0;
-
+      
       private var _compactDescr:Number = -1;
-
+      
       private var _favorite:Boolean = false;
-
+      
       private var _canSell:Boolean = false;
-
+      
       private var _clanLock:Number = -1;
-
+      
       private var _elite:Boolean = false;
-
+      
       public var dataVO:VehicleCarouselVO = null;
-
+      
       private var _premium:Boolean = false;
-
+      
       private var _tankType:String = "";
-
+      
       private var _exp:Number = 0;
-
+      
       private var _buyTank:Boolean = false;
-
+      
       private var _buySlot:Boolean = false;
-
+      
       private var _availableSlots:Number = 0;
-
+      
       private var _slotPrice:Number = 0;
-
+      
       private var _slotPriceActionData:ActionPriceVO = null;
-
+      
       override protected function onDispose() : void {
          if(this.vehicleIcon)
          {
@@ -114,7 +112,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          this.focusIndicator1 = null;
          super.onDispose();
       }
-
+      
       public function setDataVO(param1:VehicleCarouselVO) : void {
          if(param1)
          {
@@ -147,11 +145,11 @@ package net.wg.gui.lobby.hangar.tcarousel
             invalidate();
          }
       }
-
+      
       override public function toString() : String {
          return "[WG TankCarouselItemRenderer]";
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          useHandCursor = param1;
@@ -160,11 +158,11 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.mouseChildren = param1;
          }
       }
-
+      
       override public function get displayFocus() : Boolean {
          return _displayFocus;
       }
-
+      
       override public function set displayFocus(param1:Boolean) : void {
          if(param1 == _displayFocus)
          {
@@ -173,11 +171,11 @@ package net.wg.gui.lobby.hangar.tcarousel
          _displayFocus = param1;
          changeFocus();
       }
-
+      
       public function get favorite() : Boolean {
          return this._favorite;
       }
-
+      
       public function set favorite(param1:Boolean) : void {
          if(this._favorite == param1)
          {
@@ -187,11 +185,11 @@ package net.wg.gui.lobby.hangar.tcarousel
          _dataDirty = true;
          invalidate();
       }
-
+      
       public function get buyTank() : Boolean {
          return this._buyTank;
       }
-
+      
       public function set buyTank(param1:Boolean) : void {
          if(this._buyTank == param1)
          {
@@ -202,11 +200,11 @@ package net.wg.gui.lobby.hangar.tcarousel
          focusable = tabEnabled = this._buyTank?false:!this._buyTank;
          setState(!enabled?"disabled":"up");
       }
-
+      
       public function get buySlot() : Boolean {
          return this._buySlot;
       }
-
+      
       public function set buySlot(param1:Boolean) : void {
          if(this._buySlot == param1)
          {
@@ -217,22 +215,22 @@ package net.wg.gui.lobby.hangar.tcarousel
          focusable = tabEnabled = this._buySlot?false:!this._buySlot;
          setState(!enabled?"disabled":"up");
       }
-
+      
       public function get id() : Number {
          return this._id;
       }
-
+      
       public function set id(param1:Number) : void {
          if(!isNaN(param1))
          {
             this._id = param1;
          }
       }
-
+      
       public function get image() : String {
          return this._image;
       }
-
+      
       public function set image(param1:String) : void {
          if(param1)
          {
@@ -241,11 +239,11 @@ package net.wg.gui.lobby.hangar.tcarousel
             invalidate();
          }
       }
-
+      
       public function get nation() : Number {
          return this._nation;
       }
-
+      
       public function set nation(param1:Number) : void {
          if(param1 >= 0)
          {
@@ -254,11 +252,11 @@ package net.wg.gui.lobby.hangar.tcarousel
             invalidate();
          }
       }
-
+      
       public function get level() : Number {
          return this._level;
       }
-
+      
       public function set level(param1:Number) : void {
          if(param1 >= 1)
          {
@@ -267,11 +265,11 @@ package net.wg.gui.lobby.hangar.tcarousel
             invalidate();
          }
       }
-
+      
       public function get stat() : String {
          return this._stat;
       }
-
+      
       public function set stat(param1:String) : void {
          if(param1 != "")
          {
@@ -280,18 +278,18 @@ package net.wg.gui.lobby.hangar.tcarousel
          _dataDirty = true;
          invalidate();
       }
-
+      
       public function get current() : Number {
          return this._current;
       }
-
+      
       public function set current(param1:Number) : void {
          if(param1 >= 0)
          {
             this._current = param1;
          }
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.soundType = SoundTypes.CAROUSEL_BTN;
@@ -301,7 +299,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.hitArea = this.hitMC;
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = false;
          var _loc2_:TextFormat = null;
@@ -313,7 +311,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          super.draw();
          if(_dataDirty)
          {
-            if(((this.vehicleIcon) && (!empty)) && (!this.buyTank) && !this.buySlot)
+            if((this.vehicleIcon && !empty) && (!this.buyTank) && !this.buySlot)
             {
                this.vehicleIcon.image = this._image;
                this.vehicleIcon.showName = true;
@@ -390,7 +388,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          this.scaleX = this.scaleY = 1;
       }
-
+      
       override protected function getStatePrefixes() : Vector.<String> {
          if((_selected) && !_empty && !this._buyTank && !this._buySlot)
          {
@@ -410,7 +408,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          return Vector.<String>([""]);
       }
-
+      
       private function getBgLable(param1:String) : String {
          var _loc5_:FrameLabel = null;
          var _loc2_:* = "ready";
@@ -428,7 +426,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          return _loc2_;
       }
-
+      
       private function getStatColor(param1:String) : Object {
          var _loc15_:GlowFilter = null;
          var _loc16_:DropShadowFilter = null;
@@ -530,5 +528,4 @@ package net.wg.gui.lobby.hangar.tcarousel
          return _loc2_;
       }
    }
-
 }

@@ -10,28 +10,27 @@ package net.wg.gui.components.tooltips
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
-
-
+   
    public class ToolTipTankClass extends ToolTipSpecial
    {
-          
+      
       public function ToolTipTankClass() {
          super();
          this.initControls();
       }
-
+      
       private var headerTF:TextField;
-
+      
       private var descriptionTF:TextField;
-
+      
       private var whiteBg:Sprite;
-
+      
       private var separator:Separator;
-
+      
       public function get utils() : Utils {
          return Utils.instance;
       }
-
+      
       override protected function redraw() : void {
          var _loc1_:String = null;
          var _loc12_:String = null;
@@ -93,19 +92,18 @@ package net.wg.gui.components.tooltips
          blockResults.push(_loc11_);
          super.redraw();
       }
-
+      
       override protected function updateSize() : void {
          background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
          background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
          this.whiteBg.width = content.width + bgShadowMargin.horizontal;
          this.whiteBg.height = content.height - this.whiteBg.y + contentMargin.bottom;
       }
-
+      
       private function initControls() : void {
          this.headerTF = content.headerTF;
          this.descriptionTF = content.descriptionTF;
          this.whiteBg = content.whiteBg;
       }
    }
-
 }

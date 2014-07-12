@@ -4,26 +4,25 @@ package net.wg.gui.lobby.battleResults
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UILoaderAlt;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class SpecialAchievement extends UIComponent
    {
-          
+      
       public function SpecialAchievement() {
          super();
       }
-
+      
       public var stripe:MovieClip;
-
+      
       public var loader:UILoaderAlt;
-
+      
       private var _data:Object;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.stripe.visible = this.loader.visible = false;
       }
-
+      
       override protected function draw() : void {
          var _loc1_:BattleResultsMedalsListVO = null;
          super.draw();
@@ -34,26 +33,24 @@ package net.wg.gui.lobby.battleResults
             {
                this.stripe.visible = true;
             }
+            else if(_loc1_.specialIcon)
+            {
+               this.loader.visible = true;
+               this.loader.source = _loc1_.specialIcon;
+            }
             else
             {
-               if(_loc1_.specialIcon)
-               {
-                  this.loader.visible = true;
-                  this.loader.source = _loc1_.specialIcon;
-               }
-               else
-               {
-                  this.stripe.visible = this.loader.visible = false;
-               }
+               this.stripe.visible = this.loader.visible = false;
             }
+            
          }
       }
-
+      
       public function set data(param1:Object) : void {
          this._data = param1;
          invalidateData();
       }
-
+      
       override protected function onDispose() : void {
          this.stripe = null;
          this.loader.dispose();
@@ -62,5 +59,4 @@ package net.wg.gui.lobby.battleResults
          super.onDispose();
       }
    }
-
 }

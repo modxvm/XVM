@@ -3,17 +3,16 @@ package net.wg.gui.components.controls.achievements
    import net.wg.data.constants.AchievementType;
    import net.wg.data.constants.AchievementSection;
    import net.wg.gui.events.UILoaderEvent;
-
-
+   
    public class AchievementCommon extends AchievementProgress
    {
-          
+      
       public function AchievementCommon() {
          super();
       }
-
+      
       private static const MIN_PROGRESS_PERCENT:Number = 0.9;
-
+      
       override protected function applyData() : void {
          var _loc1_:String = null;
          if(data == null)
@@ -53,7 +52,7 @@ package net.wg.gui.components.controls.achievements
          }
          super.applyData();
       }
-
+      
       private function adjustClassType(param1:String, param2:Number, param3:Number, param4:Number) : void {
          this.checkReceived(param2,AchievementCounter.BEIGE);
          counterType = AchievementCounter.BEIGE;
@@ -66,12 +65,12 @@ package net.wg.gui.components.controls.achievements
             hideProgress();
          }
       }
-
+      
       private function adjustSingleType(param1:Number) : void {
          this.checkReceived(param1,AchievementCounter.NONE);
          hideProgress();
       }
-
+      
       private function adjustCustomType(param1:String, param2:Number, param3:Number) : void {
          var _loc4_:* = false;
          switch(param1)
@@ -100,7 +99,7 @@ package net.wg.gui.components.controls.achievements
                this.showProgress();
          }
       }
-
+      
       private function adjustRepeatableType(param1:String, param2:Number, param3:Number) : void {
          var _loc4_:* = false;
          switch(param1)
@@ -134,7 +133,7 @@ package net.wg.gui.components.controls.achievements
                hideProgress();
          }
       }
-
+      
       private function adjustSpecialType(param1:String, param2:Number, param3:Number, param4:Number, param5:Number) : void {
          var _loc6_:* = 0;
          switch(param1)
@@ -157,7 +156,7 @@ package net.wg.gui.components.controls.achievements
                hideProgress();
          }
       }
-
+      
       override protected function showProgress() : void {
          if(!getDataOwnValue(data,"showProgress",null))
          {
@@ -165,7 +164,7 @@ package net.wg.gui.components.controls.achievements
          }
          super.showProgress();
       }
-
+      
       override protected function tryToLoadRareAchievement() : void {
          var _loc1_:* = getDataOwnValue(data,"rareIconId",null);
          if(_loc1_)
@@ -179,11 +178,11 @@ package net.wg.gui.components.controls.achievements
             dispatchEvent(new AchievementEvent(AchievementEvent.REQUEST_RARE_ACHIEVEMENT,true));
          }
       }
-
+      
       override protected function onComplete(param1:UILoaderEvent) : void {
          super.onComplete(param1);
       }
-
+      
       protected function setRecordRepeatable(param1:String) : void {
          if(getDataOwnValue(data,"isInDossier",false))
          {
@@ -195,7 +194,7 @@ package net.wg.gui.components.controls.achievements
          }
          this.counterType = param1;
       }
-
+      
       protected function checkReceived(param1:Number, param2:String) : void {
          if(!getDataOwnValue(data,"isInDossier",false))
          {
@@ -209,15 +208,15 @@ package net.wg.gui.components.controls.achievements
          }
          hideProgress();
       }
-
+      
       private function hideIcon() : void {
          loader.alpha = 0.2;
       }
-
+      
       private function showIcon() : void {
          loader.alpha = 1;
       }
-
+      
       override protected function onDispose() : void {
          if((counter) && (contains(counter)))
          {
@@ -226,5 +225,4 @@ package net.wg.gui.components.controls.achievements
          super.onDispose();
       }
    }
-
 }

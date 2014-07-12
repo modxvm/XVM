@@ -14,56 +14,55 @@ package scaleform.clik.controls
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ComponentEvent;
    import flash.events.Event;
-
-
+   
    public class NumericStepper extends UIComponent
    {
-          
+      
       public function NumericStepper() {
          super();
       }
-
+      
       public var stepSize:Number = 1;
-
+      
       public var constraintsDisabled:Boolean = false;
-
+      
       protected var _maximum:Number = 10;
-
+      
       protected var _minimum:Number = 0;
-
+      
       protected var _stepSize:Number;
-
+      
       protected var _value:Number = 0;
-
+      
       protected var _labelFunction:Function;
-
+      
       protected var state:String = "default";
-
+      
       protected var _newFrame:String;
-
+      
       public var textField:TextField;
-
+      
       public var nextBtn:Button;
-
+      
       public var prevBtn:Button;
-
+      
       public var container:MovieClip;
-
+      
       override protected function preInitialize() : void {
          if(!this.constraintsDisabled)
          {
             constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
          }
       }
-
+      
       override protected function initialize() : void {
          super.initialize();
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(param1 == super.enabled)
          {
@@ -79,37 +78,37 @@ package scaleform.clik.controls
          this.updateAfterStateChange();
          this.prevBtn.enabled = this.nextBtn.enabled = param1;
       }
-
+      
       override public function get focusable() : Boolean {
          return _focusable;
       }
-
+      
       override public function set focusable(param1:Boolean) : void {
          super.focusable = param1;
       }
-
+      
       public function get maximum() : Number {
          return this._maximum;
       }
-
+      
       public function set maximum(param1:Number) : void {
          this._maximum = param1;
          var param1:Number = this._value;
       }
-
+      
       public function get minimum() : Number {
          return this._minimum;
       }
-
+      
       public function set minimum(param1:Number) : void {
          this._minimum = param1;
          var param1:Number = this._value;
       }
-
+      
       public function get value() : Number {
          return this._value;
       }
-
+      
       public function set value(param1:Number) : void {
          var param1:Number = this.lockValue(param1);
          if(param1 == this._value)
@@ -124,24 +123,24 @@ package scaleform.clik.controls
          }
          invalidate();
       }
-
+      
       public function get labelFunction() : Function {
          return this._labelFunction;
       }
-
+      
       public function set labelFunction(param1:Function) : void {
          this._labelFunction = param1;
          this.updateLabel();
       }
-
+      
       public function increment() : void {
          this.onNext(null);
       }
-
+      
       public function decrement() : void {
          this.onPrev(null);
       }
-
+      
       override public function handleInput(param1:InputEvent) : void {
          if(param1.isDefaultPrevented())
          {
@@ -188,11 +187,11 @@ package scaleform.clik.controls
                break;
          }
       }
-
+      
       override public function toString() : String {
          return "[CLIK NumericStepper " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          if(!this.constraintsDisabled)
          {
@@ -218,7 +217,7 @@ package scaleform.clik.controls
          this.prevBtn.tabEnabled = this.nextBtn.tabEnabled = false;
          this.prevBtn.mouseEnabled = this.nextBtn.mouseEnabled = true;
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.STATE))
          {
@@ -243,7 +242,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       override protected function changeFocus() : void {
          if((_focused) || (_displayFocus))
          {
@@ -256,11 +255,11 @@ package scaleform.clik.controls
          this.updateAfterStateChange();
          this.prevBtn.displayFocus = this.nextBtn.displayFocus = _focused > 0;
       }
-
+      
       protected function handleDataChange(param1:Event) : void {
          invalidate(InvalidationType.DATA);
       }
-
+      
       protected function updateAfterStateChange() : void {
          invalidateSize();
          this.updateLabel();
@@ -277,7 +276,7 @@ package scaleform.clik.controls
             constraints.updateElement("textField",this.textField);
          }
       }
-
+      
       protected function updateLabel() : void {
          var _loc1_:String = this._value.toString();
          if(this._labelFunction != null)
@@ -286,15 +285,15 @@ package scaleform.clik.controls
          }
          this.textField.text = _loc1_;
       }
-
+      
       protected function onNext(param1:ButtonEvent) : void {
          this.value = this._value + this.stepSize;
       }
-
+      
       protected function onPrev(param1:ButtonEvent) : void {
          this.value = this._value - this.stepSize;
       }
-
+      
       protected function setState(... rest) : void {
          var _loc4_:String = null;
          var _loc5_:String = null;
@@ -322,11 +321,10 @@ package scaleform.clik.controls
             _loc3_++;
          }
       }
-
+      
       protected function lockValue(param1:Number) : Number {
          var _loc2_:Number = Math.max(this._minimum,Math.min(this._maximum,this.stepSize * Math.round(param1 / this.stepSize)));
          return _loc2_;
       }
    }
-
 }

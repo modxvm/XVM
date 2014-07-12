@@ -5,11 +5,10 @@ package net.wg.gui.lobby.header
    import scaleform.clik.events.IndexEvent;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.events.HeaderEvent;
-
-
+   
    public class MainMenu extends UIComponent
    {
-          
+      
       public function MainMenu() {
          this.buttonsArr = new DataProvider([
             {
@@ -19,8 +18,7 @@ package net.wg.gui.lobby.header
                "textColor":16563563,
                "textColorOver":16765319,
                "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_HANGAR
-            }
-         ,
+            },
             {
                "label":MENU.HEADERBUTTONS_INVENTORY,
                "value":"inventory",
@@ -29,8 +27,7 @@ package net.wg.gui.lobby.header
                "helpText":LOBBY_HELP.HEADER_MENU_INVENTORY,
                "helpDirection":"B",
                "helpConnectorLength":12
-            }
-         ,
+            },
             {
                "label":MENU.HEADERBUTTONS_SHOP,
                "value":"shop",
@@ -39,8 +36,7 @@ package net.wg.gui.lobby.header
                "helpText":LOBBY_HELP.HEADER_MENU_SHOP,
                "helpDirection":"B",
                "helpConnectorLength":62
-            }
-         ,
+            },
             {
                "label":MENU.HEADERBUTTONS_PROFILE,
                "value":"profile",
@@ -49,8 +45,7 @@ package net.wg.gui.lobby.header
                "helpText":LOBBY_HELP.HEADER_MENU_PROFILE,
                "helpDirection":"B",
                "helpConnectorLength":12
-            }
-         ,
+            },
             {
                "label":MENU.HEADERBUTTONS_TECHTREE,
                "value":"techtree",
@@ -59,24 +54,22 @@ package net.wg.gui.lobby.header
                "helpText":LOBBY_HELP.HEADER_MENU_TECHTREE,
                "helpDirection":"B",
                "helpConnectorLength":12
-            }
-         ,
+            },
             {
                "label":MENU.HEADERBUTTONS_BARRACKS,
                "value":"barracks",
                "subValues":[],
                "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BARRACKS
-            }
-         ]);
+            }]);
          super();
       }
-
+      
       public var bar:HeaderButtonBar;
-
+      
       protected var current:String = "hangar";
-
+      
       private var buttonsArr:DataProvider;
-
+      
       public function setCurrent(param1:String) : void {
          var _loc3_:* = NaN;
          this.current = param1;
@@ -104,13 +97,13 @@ package net.wg.gui.lobby.header
             _loc2_++;
          }
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          this.bar.removeEventListener(IndexEvent.INDEX_CHANGE,this.buttonClickHandler);
          this.buttonsArr = null;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.bar.selectedIndex = -1;
@@ -122,8 +115,7 @@ package net.wg.gui.lobby.header
                   "value":"browser",
                   "subValues":[],
                   "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BROWSER
-               }
-            );
+               });
          }
          if(App.globalVarsMgr.isFortificationAvailableS())
          {
@@ -133,18 +125,17 @@ package net.wg.gui.lobby.header
                   "value":"FortificationsView",
                   "subValues":[],
                   "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_FORTS
-               }
-            );
+               });
          }
          this.bar.validateNow();
          this.bar.dataProvider = this.buttonsArr;
          this.bar.addEventListener(ButtonEvent.CLICK,this.buttonClickHandler,false,0,true);
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       protected function buttonClickHandler(param1:ButtonEvent) : void {
          if(param1.target.data != null)
          {
@@ -152,5 +143,4 @@ package net.wg.gui.lobby.header
          }
       }
    }
-
 }

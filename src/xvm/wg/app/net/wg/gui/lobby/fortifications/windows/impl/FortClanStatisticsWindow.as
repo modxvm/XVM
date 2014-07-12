@@ -5,25 +5,24 @@ package net.wg.gui.lobby.fortifications.windows.impl
    import net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl.SortieStatisticsForm;
    import net.wg.gui.lobby.fortifications.data.ClanStatsVO;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class FortClanStatisticsWindow extends FortClanStatisticsWindowMeta implements IFortClanStatisticsWindowMeta
    {
-          
+      
       public function FortClanStatisticsWindow() {
          super();
          isModal = false;
          isCentered = true;
       }
-
+      
       public var sortieForm:SortieStatisticsForm;
-
+      
       private var model:ClanStatsVO;
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.model))
@@ -32,7 +31,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.sortieForm.model = this.model;
          }
       }
-
+      
       override protected function onDispose() : void {
          this.sortieForm.dispose();
          this.sortieForm = null;
@@ -43,15 +42,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
          }
          super.onDispose();
       }
-
+      
       override protected function onPopulate() : void {
          super.onPopulate();
       }
-
+      
       public function as_setData(param1:Object) : void {
          this.model = new ClanStatsVO(param1);
          invalidateData();
       }
    }
-
 }

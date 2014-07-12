@@ -7,54 +7,53 @@ package net.wg.gui.components.common.video
    import flash.events.NetStatusEvent;
    import flash.media.SoundTransform;
    import flash.events.Event;
-
-
+   
    public class SimpleVideoPlayer extends UIComponent
    {
-          
+      
       public function SimpleVideoPlayer() {
          this._status = PlayerStatus.STOP;
          super();
       }
-
+      
       private static const BUFFER_TIME:uint = 8;
-
+      
       private static const VIDEO_SOURCE_INVALID:String = "loadVideo";
-
+      
       private static const SELECTED_SUBTITLE_TRACK_INVALID:String = "selSubTitleInv";
-
+      
       private static const SELECTED_AUDIO_TRACK_INVALID:String = "selAudioInv";
-
+      
       private static const SOUND_LEVEL_INVALID:String = "soundLvlChanged";
-
+      
       private static const AUDIO_TRACK_PROP_NAME:String = "audioTrack";
-
+      
       private static const SUBTITLE_TRACK_PROP_NAME:String = "subtitleTrack";
-
+      
       public var video:Video;
-
+      
       private var nsStream:NetStream;
-
+      
       private var ncConnection:NetConnection;
-
+      
       private var _source:String = "";
-
+      
       private var _status:uint;
-
+      
       private var _volume:Number = 0;
-
+      
       private var _metaData:Object;
-
+      
       private var _currentSubtitle:String = "";
-
+      
       private var _subtitleTrack:int = 0;
-
+      
       private var _subtitleTotalTracks:int = -1;
-
+      
       private var _audioTotalTracks:int = -1;
-
+      
       private var _audioTrack:int = 0;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.ncConnection = new NetConnection();
@@ -62,16 +61,15 @@ package net.wg.gui.components.common.video
          this.ncConnection.connect(null);
          this.nsStream = new NetStream(this.ncConnection);
          this.nsStream.addEventListener(NetStatusEvent.NET_STATUS,this.netStatusHandler,false,0,true);
-         this.nsStream.client =
+         this.nsStream.client = 
             {
                "onMetaData":this.onMetaDataHandler,
                "onSubtitle":this.onSubtitleHandler
-            }
-         ;
+            };
          this.nsStream.bufferTime = BUFFER_TIME;
          this.video.attachNetStream(this.nsStream);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(VIDEO_SOURCE_INVALID))
@@ -114,7 +112,7 @@ package net.wg.gui.components.common.video
             }
          }
       }
-
+      
       private function applyVideoLoading() : void {
          if(!(this._source == null) || !(this._source == ""))
          {
@@ -124,7 +122,7 @@ package net.wg.gui.components.common.video
             invalidate(SOUND_LEVEL_INVALID);
          }
       }
-
+      
       protected function setStatus(param1:uint) : void {
          if(this._status != param1)
          {
@@ -132,7 +130,7 @@ package net.wg.gui.components.common.video
             dispatchEvent(new VideoPlayerStatusEvent(VideoPlayerStatusEvent.STATUS_CHANGED));
          }
       }
-
+      
       private function onMetaDataHandler(param1:Object) : void {
          this._metaData = param1;
          if(this.nsStream.hasOwnProperty(SUBTITLE_TRACK_PROP_NAME))
@@ -147,16 +145,16 @@ package net.wg.gui.components.common.video
          }
          dispatchEvent(new Event(VideoPlayerEvent.META_DATA_CHANGED));
       }
-
+      
       private function onSubtitleHandler(param1:String) : void {
          this.setSubtitle(param1);
       }
-
+      
       private function setSubtitle(param1:String) : void {
          this._currentSubtitle = param1;
          dispatchEvent(new Event(VideoPlayerEvent.SUBTITLE_CHANGED));
       }
-
+      
       protected function netStatusHandler(param1:NetStatusEvent) : void {
          var _loc4_:VideoPlayerStatusEvent = null;
          var _loc2_:Object = param1.info;
@@ -183,15 +181,15 @@ package net.wg.gui.components.common.video
                }
          }
       }
-
+      
       public function runPlayback() : void {
          invalidate(VIDEO_SOURCE_INVALID);
       }
-
+      
       public function stopPlayback() : void {
          this.nsStream.close();
       }
-
+      
       private function onPlaybackStopped() : void {
          if(this._status == PlayerStatus.PLAYING || this._status == PlayerStatus.PAUSE)
          {
@@ -199,76 +197,74 @@ package net.wg.gui.components.common.video
          }
          dispatchEvent(new VideoPlayerEvent(VideoPlayerEvent.PLAYBACK_STOPPED));
       }
-
+      
       public function resumePlayback() : void {
          if(this._status == PlayerStatus.PAUSE)
          {
             this.setPlay();
          }
       }
-
+      
       public function pausePlayback() : void {
          if(this._status == PlayerStatus.PLAYING)
          {
             this.setPause();
          }
       }
-
+      
       public function togglePlayback() : void {
          if(this._status == PlayerStatus.PLAYING)
          {
             this.setPause();
          }
-         else
+         else if(this._status == PlayerStatus.PAUSE)
          {
-            if(this._status == PlayerStatus.PAUSE)
-            {
-               this.setPlay();
-            }
+            this.setPlay();
          }
+         
       }
-
+      
       private function setPause() : void {
          this.nsStream.pause();
          this.setStatus(PlayerStatus.PAUSE);
       }
-
+      
       private function setPlay() : void {
          this.nsStream.resume();
          this.setStatus(PlayerStatus.PLAYING);
       }
-
+      
       public function seek(param1:Number) : void {
          dispatchEvent(new Event(VideoPlayerEvent.SEEK_START));
          this.nsStream.seek(param1);
       }
-
+      
       public function get status() : uint {
          return this._status;
       }
-
+      
       public function get subtitleTrack() : Number {
          return this._subtitleTrack;
       }
-
+      
       public function set subtitleTrack(param1:Number) : void {
          this._subtitleTrack = param1;
          invalidate(SELECTED_SUBTITLE_TRACK_INVALID);
       }
-
+      
       public function get audioTrack() : Number {
          return this._audioTrack;
       }
-
+      
       public function set audioTrack(param1:Number) : void {
          this._audioTrack = param1;
          invalidate(SELECTED_AUDIO_TRACK_INVALID);
       }
-
+      
       public function get source() : String {
          return this._source;
       }
-
+      
       public function set source(param1:String) : void {
          if(this._source != param1)
          {
@@ -276,11 +272,11 @@ package net.wg.gui.components.common.video
             invalidate(VIDEO_SOURCE_INVALID);
          }
       }
-
+      
       public function get volume() : Number {
          return this._volume;
       }
-
+      
       public function set volume(param1:Number) : void {
          if(this._volume != param1)
          {
@@ -289,11 +285,11 @@ package net.wg.gui.components.common.video
             dispatchEvent(new Event(VideoPlayerEvent.VOLUME_CHANGED));
          }
       }
-
+      
       public function get metaData() : Object {
          return this._metaData;
       }
-
+      
       public function get currentTime() : Number {
          if(this.nsStream)
          {
@@ -301,11 +297,11 @@ package net.wg.gui.components.common.video
          }
          return NaN;
       }
-
+      
       public function get currentSubtitle() : String {
          return this._currentSubtitle;
       }
-
+      
       override protected function onDispose() : void {
          super.onDispose();
          App.utils.scheduler.cancelTask(invalidate);
@@ -332,5 +328,4 @@ package net.wg.gui.components.common.video
          }
       }
    }
-
 }

@@ -10,77 +10,76 @@ package net.wg.gui.lobby.window
    import net.wg.utils.ILocale;
    import net.wg.data.constants.IconsTypes;
    import net.wg.gui.utils.ComplexTooltipHelper;
-
-
+   
    public class ExchangeHeader extends UIComponent
    {
-          
+      
       public function ExchangeHeader() {
          this.infoContainer = new Sprite();
          super();
       }
-
+      
       private static const CENTER_PADDING:uint = 20;
-
+      
       private static const ACTION_CENTER_OFFSET:int = -8;
-
+      
       private static const EQUALS_SIGN_PADDING:int = -2;
-
+      
       private static const DISCOUNT_MC_PADDING:int = -5;
-
+      
       public var rateFrom:IconText;
-
+      
       public var rateTo:IconText;
-
+      
       public var sign_mc:MovieClip;
-
+      
       public var rateLabel:TextField;
-
+      
       public var action_decor:MovieClip;
-
+      
       public var usual_decor:MovieClip;
-
+      
       public var discountMc:MovieClip;
-
+      
       public var actionHitMc:Sprite;
-
+      
       private var actionRate:uint;
-
+      
       private var rate:uint;
-
+      
       private var actionPrc:Number = 0;
-
+      
       private var isRatesDataChanged:Boolean;
-
+      
       private var isApplyRates:Boolean;
-
+      
       private var _rateLabelFunction:Function;
-
+      
       private var actualRate:uint;
-
+      
       private var infoContainer:Sprite;
-
+      
       private var isLayoutChanged:Boolean;
-
+      
       override protected function onDispose() : void {
          this.actionHitMc.removeEventListener(MouseEvent.MOUSE_OVER,this.onOverHandler);
          this.actionHitMc.removeEventListener(MouseEvent.MOUSE_OUT,this.onOutHandler);
          this.actionHitMc.removeEventListener(MouseEvent.MOUSE_DOWN,this.onPressHandler);
       }
-
+      
       public function setRates(param1:uint, param2:uint) : void {
          this.actionRate = param2;
          this.rate = param1;
          this.isRatesDataChanged = true;
          invalidate();
       }
-
+      
       public function set rateLabelFunction(param1:Function) : void {
          this._rateLabelFunction = param1;
          this.isApplyRates = true;
          invalidate();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.rateLabel.autoSize = TextFieldAutoSize.LEFT;
@@ -97,9 +96,9 @@ package net.wg.gui.lobby.window
          this.actionHitMc.addEventListener(MouseEvent.MOUSE_OVER,this.onOverHandler);
          this.actionHitMc.addEventListener(MouseEvent.MOUSE_OUT,this.onOutHandler);
          this.actionHitMc.addEventListener(MouseEvent.MOUSE_DOWN,this.onPressHandler);
-         this.setChildIndex(this.actionHitMc,this.numChildren-1);
+         this.setChildIndex(this.actionHitMc,this.numChildren - 1);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = false;
          var _loc2_:* = NaN;
@@ -143,11 +142,11 @@ package net.wg.gui.lobby.window
             }
          }
       }
-
+      
       private function hideTooltip() : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function showTooltip() : void {
          var _loc4_:String = null;
          var _loc5_:String = null;
@@ -174,21 +173,18 @@ package net.wg.gui.lobby.window
                {
                   "oldPrice":_loc10_,
                   "newPrice":_loc9_
-               }
-            )).make();
+               })).make();
             if(_loc1_.length > 0)
             {
                App.toolTipMgr.showComplex(_loc1_);
             }
          }
-         else
+         else if(this.actionPrc < 0)
          {
-            if(this.actionPrc < 0)
-            {
-            }
          }
+         
       }
-
+      
       private function applyRateText() : void {
          var _loc1_:ILocale = App.utils.locale;
          if(this._rateLabelFunction != null)
@@ -201,18 +197,17 @@ package net.wg.gui.lobby.window
          }
          this.rateTo.validateNow();
       }
-
+      
       private function onOverHandler(param1:MouseEvent) : void {
          this.showTooltip();
       }
-
+      
       private function onOutHandler(param1:MouseEvent) : void {
          this.hideTooltip();
       }
-
+      
       private function onPressHandler(param1:MouseEvent) : void {
          this.hideTooltip();
       }
    }
-
 }

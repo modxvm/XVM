@@ -2,7 +2,6 @@ package scaleform.clik.controls
 {
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.interfaces.IDataProvider;
-   import __AS3__.vec.Vector;
    import scaleform.clik.interfaces.IListItemRenderer;
    import flash.display.Sprite;
    import scaleform.clik.data.DataProvider;
@@ -17,60 +16,59 @@ package scaleform.clik.controls
    import scaleform.clik.events.ButtonEvent;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.gfx.MouseEventEx;
-
-
+   
    public class CoreList extends UIComponent
    {
-          
+      
       public function CoreList() {
          super();
       }
-
+      
       protected var _selectedIndex:int = -1;
-
+      
       protected var _newSelectedIndex:int = -1;
-
+      
       protected var _dataProvider:IDataProvider;
-
+      
       protected var _labelField:String = "label";
-
+      
       protected var _labelFunction:Function;
-
+      
       protected var _itemRenderer:Class;
-
+      
       protected var _itemRendererName:String = "DefaultListItemRenderer";
-
+      
       protected var _renderers:Vector.<IListItemRenderer>;
-
+      
       protected var _usingExternalRenderers:Boolean = false;
-
+      
       protected var _totalRenderers:uint = 0;
-
+      
       protected var _state:String = "default";
-
+      
       protected var _newFrame:String;
-
+      
       public var canCleanDataProvider:Boolean = true;
-
+      
       public var container:Sprite;
-
+      
       override protected function initialize() : void {
          this.dataProvider = new DataProvider();
          super.initialize();
       }
-
+      
       override public function get focusable() : Boolean {
          return _focusable;
       }
-
+      
       override public function set focusable(param1:Boolean) : void {
          super.focusable = param1;
       }
-
+      
       public function get itemRendererName() : String {
          return this._itemRendererName;
       }
-
+      
       public function set itemRendererName(param1:String) : void {
          if((_inspector) && param1 == "" || param1 == "")
          {
@@ -82,16 +80,16 @@ package scaleform.clik.controls
             this.itemRenderer = _loc2_;
          }
       }
-
+      
       public function get itemRenderer() : Class {
          return this._itemRenderer;
       }
-
+      
       public function set itemRenderer(param1:Class) : void {
          this._itemRenderer = param1;
          this.invalidateRenderers();
       }
-
+      
       public function set itemRendererInstanceName(param1:String) : void {
          var _loc4_:IListItemRenderer = null;
          if(param1 == null || param1 == "" || parent == null)
@@ -123,7 +121,7 @@ package scaleform.clik.controls
          }
          this.itemRendererList = _loc3_;
       }
-
+      
       public function set itemRendererList(param1:Vector.<IListItemRenderer>) : void {
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
@@ -152,11 +150,11 @@ package scaleform.clik.controls
          }
          this.invalidateRenderers();
       }
-
+      
       public function get selectedIndex() : int {
          return this._selectedIndex;
       }
-
+      
       public function set selectedIndex(param1:int) : void {
          if(this._selectedIndex == param1)
          {
@@ -166,11 +164,11 @@ package scaleform.clik.controls
          this.invalidateSelectedIndex();
          dispatchEvent(new ListEvent(ListEvent.INDEX_CHANGE,true,false,this._selectedIndex,-1,-1,this.getRendererAt(this._selectedIndex),this.dataProvider.requestItemAt(this._selectedIndex)));
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
@@ -189,11 +187,11 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       public function get dataProvider() : IDataProvider {
          return this._dataProvider;
       }
-
+      
       public function set dataProvider(param1:IDataProvider) : void {
          if(this._dataProvider == param1)
          {
@@ -211,41 +209,40 @@ package scaleform.clik.controls
          this._dataProvider.addEventListener(Event.CHANGE,this.handleDataChange,false,0,true);
          invalidateData();
       }
-
+      
       public function get labelField() : String {
          return this._labelField;
       }
-
+      
       public function set labelField(param1:String) : void {
          this._labelField = param1;
          invalidateData();
       }
-
+      
       public function get labelFunction() : Function {
          return this._labelFunction;
       }
-
+      
       public function set labelFunction(param1:Function) : void {
          this._labelFunction = param1;
          invalidateData();
       }
-
+      
       public function get availableWidth() : Number {
          return _width;
       }
-
+      
       public function get availableHeight() : Number {
          return _height;
       }
-
+      
       public function scrollToIndex(param1:uint) : void {
-          
       }
-
+      
       public function scrollToSelected() : void {
          this.scrollToIndex(this._selectedIndex);
       }
-
+      
       public function itemToLabel(param1:Object) : String {
          if(param1 == null)
          {
@@ -255,14 +252,14 @@ package scaleform.clik.controls
          {
             return this._labelFunction(param1);
          }
-         if(!(this._labelField == null) && this._labelField  in  param1 && !(param1[this._labelField] == null))
+         if(!(this._labelField == null) && this._labelField in param1 && !(param1[this._labelField] == null))
          {
             return param1[this._labelField];
          }
          return param1.toString();
       }
-
-      public function getRendererAt(param1:uint, param2:int=0) : IListItemRenderer {
+      
+      public function getRendererAt(param1:uint, param2:int = 0) : IListItemRenderer {
          if(this._renderers == null)
          {
             return null;
@@ -274,15 +271,15 @@ package scaleform.clik.controls
          }
          return this._renderers[_loc3_] as IListItemRenderer;
       }
-
+      
       public function invalidateRenderers() : void {
          invalidate(InvalidationType.RENDERERS);
       }
-
+      
       public function invalidateSelectedIndex() : void {
          invalidate(InvalidationType.SELECTED_INDEX);
       }
-
+      
       public function disposeRenderers() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -291,7 +288,7 @@ package scaleform.clik.controls
          if(this._renderers != null)
          {
             _loc1_ = this._renderers.length;
-            _loc2_ = _loc1_-1;
+            _loc2_ = _loc1_ - 1;
             while(_loc2_ >= 0)
             {
                _loc3_ = this.getRendererAt(_loc2_);
@@ -317,11 +314,11 @@ package scaleform.clik.controls
             this.container = null;
          }
       }
-
+      
       override public function toString() : String {
          return "[CLIK CoreList " + name + "]";
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel,false);
          removeEventListener(InputEvent.INPUT,handleInput,false);
@@ -329,7 +326,7 @@ package scaleform.clik.controls
          this.cleanUpDataProvider();
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(this.container == null)
@@ -342,7 +339,7 @@ package scaleform.clik.controls
          addEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel,false,0,true);
          addEventListener(InputEvent.INPUT,handleInput,false,0,true);
       }
-
+      
       override protected function draw() : void {
          var _loc1_:uint = 0;
          var _loc2_:uint = 0;
@@ -360,10 +357,10 @@ package scaleform.clik.controls
                gotoAndPlay(this._newFrame);
                this._newFrame = null;
             }
-            if(_baseDisposed)
-            {
-               return;
-            }
+         }
+         if(_baseDisposed)
+         {
+            return;
          }
          if(!this._usingExternalRenderers && (isInvalid(InvalidationType.RENDERERS)))
          {
@@ -404,12 +401,16 @@ package scaleform.clik.controls
             this.drawRenderers(this._totalRenderers);
             this.drawLayout();
          }
+         if(_baseDisposed)
+         {
+            return;
+         }
          if(isInvalid(InvalidationType.DATA))
          {
             this.refreshData();
          }
       }
-
+      
       override protected function changeFocus() : void {
          if((_focused) || (_displayFocus))
          {
@@ -420,23 +421,20 @@ package scaleform.clik.controls
             this.setState("default");
          }
       }
-
+      
       protected function refreshData() : void {
-          
       }
-
+      
       protected function updateSelectedIndex() : void {
-          
       }
-
+      
       protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
          return param2 / 20 >> 0;
       }
-
+      
       protected function drawLayout() : void {
-          
       }
-
+      
       protected function drawRenderers(param1:Number) : void {
          var _loc2_:* = 0;
          var _loc3_:* = 0;
@@ -459,7 +457,7 @@ package scaleform.clik.controls
             _loc2_++;
          }
          _loc3_ = this._renderers.length;
-         _loc2_ = _loc3_-1;
+         _loc2_ = _loc3_ - 1;
          while(_loc2_ >= this._totalRenderers)
          {
             _loc4_ = this.getRendererAt(_loc2_);
@@ -476,7 +474,7 @@ package scaleform.clik.controls
             _loc2_--;
          }
       }
-
+      
       protected function createRenderer(param1:uint) : IListItemRenderer {
          var _loc2_:IListItemRenderer = new this._itemRenderer() as IListItemRenderer;
          if(_loc2_ == null)
@@ -486,7 +484,7 @@ package scaleform.clik.controls
          this.setupRenderer(_loc2_);
          return _loc2_;
       }
-
+      
       protected function setupRenderer(param1:IListItemRenderer) : void {
          param1.owner = this;
          param1.focusTarget = this;
@@ -502,7 +500,7 @@ package scaleform.clik.controls
             param1.addEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel,false,0,true);
          }
       }
-
+      
       protected function cleanUpRenderer(param1:IListItemRenderer) : void {
          param1.owner = null;
          param1.focusTarget = null;
@@ -515,7 +513,7 @@ package scaleform.clik.controls
          param1.removeEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel);
          this.disposeRenderer(param1);
       }
-
+      
       protected function disposeRenderer(param1:IListItemRenderer) : void {
          var _loc2_:IDisposable = param1 as IDisposable;
          if(_loc2_)
@@ -523,7 +521,7 @@ package scaleform.clik.controls
             _loc2_.dispose();
          }
       }
-
+      
       protected function cleanUpDataProvider() : void {
          if(this._dataProvider)
          {
@@ -535,7 +533,7 @@ package scaleform.clik.controls
             this._dataProvider = null;
          }
       }
-
+      
       protected function dispatchItemEvent(param1:Event) : Boolean {
          var _loc2_:String = null;
          switch(param1.type)
@@ -560,42 +558,38 @@ package scaleform.clik.controls
          }
          var _loc3_:IListItemRenderer = param1.currentTarget as IListItemRenderer;
          var _loc4_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc4_ = (param1 as ButtonEvent).controllerIdx;
          }
-         else
+         else if(param1 is MouseEventEx)
          {
-            if(param1  is  MouseEventEx)
-            {
-               _loc4_ = (param1 as MouseEventEx).mouseIdx;
-            }
+            _loc4_ = (param1 as MouseEventEx).mouseIdx;
          }
+         
          var _loc5_:uint = 0;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc5_ = (param1 as ButtonEvent).buttonIdx;
          }
-         else
+         else if(param1 is MouseEventEx)
          {
-            if(param1  is  MouseEventEx)
-            {
-               _loc5_ = (param1 as MouseEventEx).buttonIdx;
-            }
+            _loc5_ = (param1 as MouseEventEx).buttonIdx;
          }
+         
          var _loc6_:* = false;
-         if(param1  is  ButtonEvent)
+         if(param1 is ButtonEvent)
          {
             _loc6_ = (param1 as ButtonEvent).isKeyboard;
          }
          var _loc7_:ListEvent = new ListEvent(_loc2_,false,true,_loc3_.index,0,_loc3_.index,_loc3_,this.dataProvider.requestItemAt(_loc3_.index),_loc4_,_loc5_,_loc6_);
          return dispatchEvent(_loc7_);
       }
-
+      
       protected function handleDataChange(param1:Event) : void {
          invalidate(InvalidationType.DATA);
       }
-
+      
       protected function handleItemClick(param1:ButtonEvent) : void {
          var _loc2_:Number = (param1.currentTarget as IListItemRenderer).index;
          if(isNaN(_loc2_))
@@ -607,15 +601,14 @@ package scaleform.clik.controls
             this.selectedIndex = _loc2_;
          }
       }
-
+      
       protected function handleMouseWheel(param1:MouseEvent) : void {
          this.scrollList(param1.delta > 0?1:-1);
       }
-
+      
       protected function scrollList(param1:int) : void {
-          
       }
-
+      
       protected function setState(... rest) : void {
          var _loc4_:String = null;
          var _loc5_:String = null;
@@ -644,5 +637,4 @@ package scaleform.clik.controls
          }
       }
    }
-
 }

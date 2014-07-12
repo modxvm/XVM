@@ -8,44 +8,43 @@ package scaleform.clik.controls
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ComponentEvent;
-
-
+   
    public class Label extends UIComponent
    {
-          
+      
       public function Label() {
          super();
       }
-
+      
       public var constraintsDisabled:Boolean = false;
-
+      
       protected var _text:String;
-
+      
       protected var _autoSize:String = "none";
-
+      
       protected var isHtml:Boolean;
-
+      
       protected var state:String = "default";
-
+      
       protected var _newFrame:String;
-
+      
       public var textField:TextField;
-
+      
       override protected function preInitialize() : void {
          if(!this.constraintsDisabled)
          {
             constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
          }
       }
-
+      
       override protected function initialize() : void {
          super.initialize();
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(param1 == super.enabled)
          {
@@ -55,11 +54,11 @@ package scaleform.clik.controls
          mouseEnabled = mouseChildren = param1;
          this.setState(this.defaultState);
       }
-
+      
       public function get text() : String {
          return this._text;
       }
-
+      
       public function set text(param1:String) : void {
          if(param1 == null)
          {
@@ -68,11 +67,11 @@ package scaleform.clik.controls
          this._text = param1;
          invalidateData();
       }
-
+      
       public function get htmlText() : String {
          return this._text;
       }
-
+      
       public function set htmlText(param1:String) : void {
          if(param1 == null)
          {
@@ -81,11 +80,11 @@ package scaleform.clik.controls
          this._text = param1;
          invalidateData();
       }
-
+      
       public function get autoSize() : String {
          return this._autoSize;
       }
-
+      
       public function set autoSize(param1:String) : void {
          if(param1 == this._autoSize)
          {
@@ -94,31 +93,31 @@ package scaleform.clik.controls
          this._autoSize = param1;
          invalidateData();
       }
-
+      
       public function get length() : uint {
          return this.textField.length;
       }
-
+      
       public function get defaultState() : String {
          return !this.enabled?"disabled":focused?"focused":"default";
       }
-
+      
       public function appendText(param1:String) : void {
          this._text = this._text + param1;
          this.isHtml = false;
          invalidateData();
       }
-
+      
       public function appendHtml(param1:String) : void {
          this._text = this._text + param1;
          this.isHtml = true;
          invalidateData();
       }
-
+      
       override public function toString() : String {
          return "[CLIK Label " + name + "]";
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(!this.constraintsDisabled)
@@ -127,7 +126,7 @@ package scaleform.clik.controls
          }
          focusable = false;
       }
-
+      
       protected function calculateWidth() : Number {
          var _loc2_:ConstrainedElement = null;
          if(constraints == null || this.textField == null)
@@ -141,7 +140,7 @@ package scaleform.clik.controls
          var _loc1_:Number = Math.ceil(this.textField.textWidth + _loc2_.left + _loc2_.right + 5);
          return _loc1_;
       }
-
+      
       protected function alignForAutoSize() : void {
          var _loc1_:* = NaN;
          var _loc3_:* = NaN;
@@ -164,7 +163,7 @@ package scaleform.clik.controls
                break;
          }
       }
-
+      
       override protected function draw() : void {
          if(isInvalid(InvalidationType.STATE))
          {
@@ -195,7 +194,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function updateText() : void {
          if(!(this._text == null) && !(this.textField == null))
          {
@@ -209,7 +208,7 @@ package scaleform.clik.controls
             }
          }
       }
-
+      
       protected function updateAfterStateChange() : void {
          if(!initialized)
          {
@@ -222,7 +221,7 @@ package scaleform.clik.controls
          this.updateText();
          dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
       }
-
+      
       protected function setState(... rest) : void {
          var _loc4_:String = null;
          var _loc5_:String = null;
@@ -251,5 +250,4 @@ package scaleform.clik.controls
          }
       }
    }
-
 }

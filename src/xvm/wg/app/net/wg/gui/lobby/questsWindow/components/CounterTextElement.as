@@ -6,27 +6,26 @@ package net.wg.gui.lobby.questsWindow.components
    import net.wg.data.constants.QuestsStates;
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
-
-
+   
    public class CounterTextElement extends AbstractResizableContent
    {
-          
+      
       public function CounterTextElement() {
          super();
       }
-
+      
       public static const DEFAULT_WIDTH:int = 270;
-
+      
       public var description:QuestsDashlineItem;
-
+      
       public var counter:RedCounter;
-
+      
       public var battlesLeftTF:TextField;
-
+      
       protected var data:CounterTextElementVO = null;
-
+      
       public var statusMC:QuestStatusComponent;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.battlesLeftTF.text = QUESTS.QUESTS_TABLE_BATTLESLEFT;
@@ -37,7 +36,7 @@ package net.wg.gui.lobby.questsWindow.components
          this.statusMC.validateNow();
          this.statusMC.visible = false;
       }
-
+      
       override protected function onDispose() : void {
          this.description.dispose();
          this.description = null;
@@ -53,12 +52,12 @@ package net.wg.gui.lobby.questsWindow.components
          }
          super.onDispose();
       }
-
+      
       override public function setData(param1:Object) : void {
          this.data = new CounterTextElementVO(param1);
          invalidateData();
       }
-
+      
       override protected function draw() : void {
          if((isInvalid(InvalidationType.DATA)) && (this.data))
          {
@@ -75,7 +74,7 @@ package net.wg.gui.lobby.questsWindow.components
             this.layoutBlocks();
          }
       }
-
+      
       protected function layoutBlocks() : void {
          var _loc1_:Number = this.data.label?Math.round(this.description.height):0;
          var _loc2_:Number = Boolean(this.data.battlesLeft > 0)?Math.round(this.counter.height + this.counter.y):0;
@@ -84,5 +83,4 @@ package net.wg.gui.lobby.questsWindow.components
          isReadyForLayout = true;
       }
    }
-
 }

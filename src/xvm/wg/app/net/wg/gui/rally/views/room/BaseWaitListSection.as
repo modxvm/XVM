@@ -14,52 +14,49 @@ package net.wg.gui.rally.views.room
    import net.wg.data.VO.ExtendedUserVO;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.rally.helpers.PlayerCIGenerator;
-
-
+   
    public class BaseWaitListSection extends UIComponent
    {
-          
+      
       public function BaseWaitListSection() {
          super();
       }
-
+      
       public var lblCandidatesHeader:TextField;
-
+      
       public var btnInviteFriend:SoundButtonEx;
-
+      
       public var candidates:CandidatesScrollingList;
-
+      
       protected var candidatesDP:VoDAAPIDataProvider;
-
+      
       protected var _rallyData:IRallyVO;
-
+      
       protected function updateControls() : void {
-          
       }
-
+      
       protected function onControlRollOver(param1:MouseEvent) : void {
-          
       }
-
+      
       public function updateRallyStatus(param1:Boolean, param2:String) : void {
          this._rallyData.statusLbl = param2;
          this._rallyData.statusValue = param1;
          this.updateControls();
       }
-
+      
       public function get rallyData() : IRallyVO {
          return this._rallyData;
       }
-
+      
       public function set rallyData(param1:IRallyVO) : void {
          this._rallyData = param1;
          invalidateData();
       }
-
+      
       public function getCandidatesDP() : VoDAAPIDataProvider {
          return this.candidatesDP;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          if(this.candidates)
@@ -74,7 +71,7 @@ package net.wg.gui.rally.views.room
             this.btnInviteFriend.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          }
       }
-
+      
       override protected function draw() : void {
          var _loc1_:* = false;
          super.draw();
@@ -88,7 +85,7 @@ package net.wg.gui.rally.views.room
             }
          }
       }
-
+      
       override protected function onDispose() : void {
          if(this.btnInviteFriend)
          {
@@ -112,16 +109,15 @@ package net.wg.gui.rally.views.room
          this.candidatesDP = null;
          super.onDispose();
       }
-
+      
       protected function onInviteFriendClick() : void {
-          
       }
-
+      
       private function onInviteFriendClickHandler(param1:ButtonEvent) : void {
          this.onInviteFriendClick();
          dispatchEvent(new RallyViewsEvent(RallyViewsEvent.INVITE_FRIEND_REQUEST));
       }
-
+      
       protected function onListItemClick(param1:ListEventEx) : void {
          var _loc2_:ExtendedUserVO = param1.itemData as ExtendedUserVO;
          if((param1.buttonIdx == MouseEventEx.RIGHT_BUTTON) && (_loc2_) && !_loc2_.himself)
@@ -129,10 +125,9 @@ package net.wg.gui.rally.views.room
             App.contextMenuMgr.showUserContextMenu(this,_loc2_,new PlayerCIGenerator(this._rallyData.isCommander));
          }
       }
-
+      
       protected function onControlRollOut(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
    }
-
 }

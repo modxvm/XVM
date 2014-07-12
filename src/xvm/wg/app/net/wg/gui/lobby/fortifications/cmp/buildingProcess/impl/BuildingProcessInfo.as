@@ -15,46 +15,44 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
    import net.wg.gui.utils.ComplexTooltipHelper;
    import flash.events.Event;
    import scaleform.gfx.TextFieldEx;
-
-
+   
    public class BuildingProcessInfo extends MovieClip implements IDisposable, IFocusContainer
    {
-          
+      
       public function BuildingProcessInfo() {
          super();
          TextFieldEx.setVerticalAlign(this.builtMessage,TextFieldEx.VALIGN_CENTER);
          this.builtMessage.mouseEnabled = false;
          this.dashLine.x = DASH_LINE_PADDING;
          this.dashLine.width = this.width - DASH_LINE_PADDING * 2;
-         this.orderInfo.firtCharToUpper = true;
       }
-
+      
       public static const BUY_BUILDING:String = "buyBuilding";
-
+      
       private static const DASH_LINE_PADDING:uint = 18;
-
+      
       public var buildingName:TextField = null;
-
+      
       public var statusMsg:TextField = null;
-
+      
       public var builtMessage:TextField = null;
-
+      
       public var buildingImg:MovieClip = null;
-
+      
       public var longDescription:TextField = null;
-
+      
       public var orderInfo:OrderInfoCmp = null;
-
+      
       public var applyButton:SoundButtonEx = null;
-
+      
       public var dashLine:DashLine = null;
-
+      
       private var model:BuildingProcessInfoVO = null;
-
+      
       public function getComponentForFocus() : InteractiveObject {
          return this.applyButton;
       }
-
+      
       public function dispose() : void {
          this.buildingName = null;
          this.statusMsg.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
@@ -75,7 +73,7 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
             this.model = null;
          }
       }
-
+      
       public function getBuildingId() : String {
          if(!this.model)
          {
@@ -83,7 +81,7 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
          }
          return this.model.buildingID;
       }
-
+      
       public function setData(param1:BuildingProcessInfoVO) : void {
          var _loc2_:* = false;
          this.model = param1;
@@ -114,23 +112,22 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
          }
          this.orderInfo.setData(this.model.orderInfo);
       }
-
+      
       private function makeTooltipData() : String {
          var _loc1_:String = new ComplexTooltipHelper().addHeader(this.model.buttonTooltip["header"]).addBody(this.model.buttonTooltip["body"]).make();
          return _loc1_;
       }
-
+      
       private function onRollOverHandler(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(this.model.statusIconTooltip);
       }
-
+      
       private function onRollOutHandler(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
-
+      
       private function onClickHandler(param1:ButtonEvent) : void {
          dispatchEvent(new Event(BUY_BUILDING));
       }
    }
-
 }

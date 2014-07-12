@@ -6,11 +6,10 @@ package net.wg.gui.prebattle.invites
    import flash.events.MouseEvent;
    import flash.geom.Point;
    import net.wg.gui.prebattle.squad.MessengerUtils;
-
-
+   
    public class UserRosterItemRenderer extends SoundListItemRenderer
    {
-          
+      
       public function UserRosterItemRenderer() {
          super();
          toggle = true;
@@ -19,23 +18,23 @@ package net.wg.gui.prebattle.invites
          this.visible = false;
          _state = "up";
       }
-
+      
       public var focusIndicatorA:MovieClip;
-
+      
       public var status:MovieClip;
-
+      
       public var voiceWave:VoiceWave;
-
+      
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
          App.toolTipMgr.show(data.displayName);
       }
-
+      
       override protected function handleMouseRollOut(param1:MouseEvent) : void {
          super.handleMouseRollOut(param1);
          App.toolTipMgr.hide();
       }
-
+      
       override protected function configUI() : void {
          if(this.focusIndicatorA)
          {
@@ -45,7 +44,7 @@ package net.wg.gui.prebattle.invites
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
          this.voiceWave.validateNow();
       }
-
+      
       override protected function draw() : void {
          var _loc2_:Point = null;
          var _loc1_:Boolean = (isInvalid("update_data")) && (data);
@@ -66,7 +65,7 @@ package net.wg.gui.prebattle.invites
             this.afterSetData();
          }
       }
-
+      
       override public function setData(param1:Object) : void {
          if(param1 == null)
          {
@@ -80,12 +79,12 @@ package net.wg.gui.prebattle.invites
             invalidate("update_data");
          }
       }
-
+      
       override public function set label(param1:String) : void {
          var param1:String = this.cutText(param1);
          super.label = param1;
       }
-
+      
       private function afterSetData() : void {
          if(this.status == null)
          {
@@ -116,25 +115,23 @@ package net.wg.gui.prebattle.invites
                }
                this.status.gotoAndPlay("himself");
             }
+            else if((data.hasOwnProperty("online")) && (data.online))
+            {
+               if(data.colors[0] != null)
+               {
+                  textField.textColor = data.colors[0];
+               }
+               this.status.gotoAndPlay("online");
+            }
             else
             {
-               if((data.hasOwnProperty("online")) && (data.online))
+               if((data.hasOwnProperty("colors")) && !(data.colors[1] == null))
                {
-                  if(data.colors[0] != null)
-                  {
-                     textField.textColor = data.colors[0];
-                  }
-                  this.status.gotoAndPlay("online");
+                  textField.textColor = data.colors[1];
                }
-               else
-               {
-                  if((data.hasOwnProperty("colors")) && !(data.colors[1] == null))
-                  {
-                     textField.textColor = data.colors[1];
-                  }
-                  this.status.gotoAndPlay("offline");
-               }
+               this.status.gotoAndPlay("offline");
             }
+            
             this.status.visible = true;
          }
          if(data.hasOwnProperty("chatRoster"))
@@ -143,7 +140,7 @@ package net.wg.gui.prebattle.invites
          }
          invalidate();
       }
-
+      
       override protected function updateAfterStateChange() : void {
          if(data == null)
          {
@@ -170,33 +167,29 @@ package net.wg.gui.prebattle.invites
                   textField.textColor = data.colors[1];
                }
             }
-            else
+            else if(data.online)
             {
-               if(data.online)
+               if(data.colors[0] != null)
                {
-                  if(data.colors[0] != null)
-                  {
-                     textField.textColor = data.colors[0];
-                  }
-               }
-               else
-               {
-                  if(data.colors[1] != null)
-                  {
-                     textField.textColor = data.colors[1];
-                  }
+                  textField.textColor = data.colors[0];
                }
             }
+            else if(data.colors[1] != null)
+            {
+               textField.textColor = data.colors[1];
+            }
+            
+            
          }
          super.updateAfterStateChange();
       }
-
+      
       protected function updateVoiceWave() : void {
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
          this.voiceWave.setMuted(MessengerUtils.isMuted(data));
          this.voiceWave.validateNow();
       }
-
+      
       private function cutText(param1:String) : String {
          var _loc2_:String = null;
          var _loc3_:* = 0;
@@ -212,5 +205,4 @@ package net.wg.gui.prebattle.invites
          return textField.text;
       }
    }
-
 }

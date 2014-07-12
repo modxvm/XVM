@@ -14,74 +14,72 @@ package net.wg.gui.cyberSport.views.unit
    import flash.events.MouseEvent;
    import net.wg.gui.utils.ComplexTooltipHelper;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
-
-
+   
    public class TeamSection extends BaseTeamSection
    {
-          
+      
       public function TeamSection() {
          super();
          this.btnFreeze.externalSource = true;
       }
-
+      
       private static const LABEL_ICON_GAP:Number = 20;
-
+      
       public var btnFreeze:ToggleButton;
-
+      
       public var btnConfigure:ButtonDnmIcon;
-
+      
       public var lblTeamPoints:TextField;
-
+      
       public var slot0:SlotRenderer;
-
+      
       public var slot1:SlotRenderer;
-
+      
       public var slot2:SlotRenderer;
-
+      
       public var slot3:SlotRenderer;
-
+      
       public var slot4:SlotRenderer;
-
+      
       public var slot5:SlotRenderer;
-
+      
       public var slot6:SlotRenderer;
-
+      
       public var dropTargerIndicator0:SlotDropIndicator;
-
+      
       public var dropTargerIndicator1:SlotDropIndicator;
-
+      
       public var dropTargerIndicator2:SlotDropIndicator;
-
+      
       public var dropTargerIndicator3:SlotDropIndicator;
-
+      
       public var dropTargerIndicator4:SlotDropIndicator;
-
+      
       public var dropTargerIndicator5:SlotDropIndicator;
-
+      
       public var dropTargerIndicator6:SlotDropIndicator;
-
+      
       public var settingsIcons:SettingsIcons;
-
+      
       override public function updateMembers(param1:Boolean, param2:Array) : void {
          super.updateMembers(param1,param2);
          this.unitData.hasRestrictions = param1;
          this.updateSettingsIcon();
       }
-
+      
       public function enableFreezeButton(param1:Boolean) : void {
          if(this.btnFreeze)
          {
             this.btnFreeze.enabled = param1;
          }
       }
-
+      
       public function updateLockedUnit(param1:Boolean, param2:Array) : void {
-         var _loc4_:* = 0;
          var _loc5_:RallySlotVO = null;
          var _loc3_:int = this.unitData.slots.length;
          this.unitData.isFreezed = param1;
          this.updateSettingsIcon();
-         _loc4_ = 0;
+         var _loc4_:* = 0;
          while(_loc4_ < _loc3_)
          {
             _loc5_ = getSlotModel(_loc4_) as RallySlotVO;
@@ -91,7 +89,7 @@ package net.wg.gui.cyberSport.views.unit
             _loc4_++;
          }
       }
-
+      
       public function closeSlot(param1:uint, param2:Boolean, param3:uint, param4:String, param5:Boolean, param6:int) : void {
          var _loc7_:RallySlotVO = getSlotModel(param1) as RallySlotVO;
          _loc7_.selectedVehicleLevel = param3;
@@ -104,51 +102,51 @@ package net.wg.gui.cyberSport.views.unit
          lblTeamMembers.htmlText = BaseRallyMainWindow.getTeamHeader(CYBERSPORT.WINDOW_UNIT_TEAMMEMBERS,rallyData);
          this.updateSettingsIcon();
       }
-
+      
       public function updateTotalLabel(param1:Boolean, param2:String, param3:int) : void {
          this.updateLevelLabels(param2);
          this.unitData.sumLevelsError = param1;
          this.unitData.sumLevelsInt = param3;
       }
-
+      
       public function get unitData() : RallyVO {
          return rallyData as RallyVO;
       }
-
+      
       override protected function getMembersStr() : String {
          return CYBERSPORT.WINDOW_UNIT_TEAMMEMBERS;
       }
-
+      
       override protected function getVehiclesStr() : String {
          return CYBERSPORT.WINDOW_UNIT_TEAMVEHICLES;
       }
-
+      
       override protected function getVehiclesStaticStr() : String {
          return CYBERSPORT.WINDOW_UNIT_TEAMVEHICLESSTUB;
       }
-
+      
       override protected function getSlotsUI() : Array {
          var _loc2_:SlotRenderer = null;
          var _loc1_:Array = [this.slot0,this.slot1,this.slot2,this.slot3,this.slot4,this.slot5,this.slot6];
          var _loc3_:UnitSlotHelper = new UnitSlotHelper();
-         for each (_loc2_ in _loc1_)
+         for each(_loc2_ in _loc1_)
          {
             _loc2_.helper = _loc3_;
          }
          return _loc1_;
       }
-
+      
       override protected function getIndicatorsUI() : Array {
          return [this.dropTargerIndicator0,this.dropTargerIndicator1,this.dropTargerIndicator2,this.dropTargerIndicator3,this.dropTargerIndicator4,this.dropTargerIndicator5,this.dropTargerIndicator6];
       }
-
+      
       override protected function onDispose() : void {
          this.settingsIcons.dispose();
          this.btnFreeze.removeEventListener(ButtonEvent.CLICK,this.onStatusToggle);
          tooltipSubscribe([this.btnFreeze,this.btnConfigure,this.lblTeamPoints],false);
          super.onDispose();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.btnConfigure.addEventListener(ButtonEvent.CLICK,this.onConfigureClick);
@@ -160,7 +158,7 @@ package net.wg.gui.cyberSport.views.unit
          this.btnFreeze.addEventListener(ButtonEvent.CLICK,this.onStatusToggle);
          tooltipSubscribe([this.btnFreeze,this.btnConfigure,this.lblTeamPoints]);
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(CSInvalidationType.VEHICLE_LABEL))
@@ -168,7 +166,7 @@ package net.wg.gui.cyberSport.views.unit
             this.btnConfigure.x = lblTeamVehicles.x + lblTeamVehicles.textWidth + LABEL_ICON_GAP;
          }
       }
-
+      
       override protected function updateComponents() : void {
          super.updateComponents();
          var _loc1_:Boolean = this.unitData?this.unitData.isCommander:false;
@@ -177,7 +175,7 @@ package net.wg.gui.cyberSport.views.unit
          this.updateSettingsIcon();
          this.updateLevelLabels(this.unitData.sumLevels);
       }
-
+      
       override protected function onControlRollOver(param1:MouseEvent) : void {
          var _loc2_:* = "";
          var _loc3_:* = "";
@@ -197,16 +195,15 @@ package net.wg.gui.cyberSport.views.unit
                      "type":"",
                      "component":"",
                      "data":{"level":this.unitData.sumLevelsInt}
-                  }
-               ,null);
+                  },null);
                break;
          }
       }
-
+      
       private function updateLevelLabels(param1:String) : void {
          this.lblTeamPoints.htmlText = param1;
       }
-
+      
       private function updateSettingsIcon() : void {
          if((this.unitData) && !this.unitData.isCommander)
          {
@@ -219,7 +216,7 @@ package net.wg.gui.cyberSport.views.unit
             this.settingsIcons.visible = false;
          }
       }
-
+      
       private function showTooltip(param1:String, param2:String) : void {
          var _loc3_:String = new ComplexTooltipHelper().addHeader(param1,true).addBody(param2,true).make();
          if(_loc3_.length > 0)
@@ -227,14 +224,13 @@ package net.wg.gui.cyberSport.views.unit
             App.toolTipMgr.showComplex(_loc3_);
          }
       }
-
+      
       private function onStatusToggle(param1:ButtonEvent) : void {
          dispatchEvent(new CSComponentEvent(CSComponentEvent.TOGGLE_FREEZE_REQUEST));
       }
-
+      
       private function onConfigureClick(param1:ButtonEvent) : void {
          dispatchEvent(new CSComponentEvent(CSComponentEvent.CLICK_CONFIGURE_BUTTON));
       }
    }
-
 }

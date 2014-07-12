@@ -17,64 +17,63 @@ package net.wg.gui.components.controls
    import scaleform.clik.events.InputEvent;
    import flash.events.TimerEvent;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-
-
+   
    public class DropdownMenu extends scaleform.clik.controls.DropdownMenu implements ISoundable
    {
-          
+      
       public function DropdownMenu() {
          super();
       }
-
+      
       private static const HANDLE_SCROLL_INV:String = "handleScrolInv";
-
+      
       public var showEmptyItems:Boolean;
-
+      
       private var _soundType:String = "dropDownMenu";
-
+      
       public var soundId:String = "";
-
+      
       private var _handleScroll:Boolean = true;
-
+      
       private const SHADOW_WIDTH:Number = 6;
-
+      
       public var hitMc:MovieClip;
-
+      
       private var _maxRowCount:int = -1;
-
+      
       private var allowScrolling:Boolean = true;
-
+      
       public function get soundType() : String {
          return this._soundType;
       }
-
+      
       public function set soundType(param1:String) : void {
          if((param1) && !(param1 == this._soundType))
          {
             this._soundType = param1;
          }
       }
-
+      
       public final function getSoundType() : String {
          return this.soundType;
       }
-
+      
       public final function getSoundId() : String {
          return this.soundId;
       }
-
+      
       public final function getStateOverSnd() : String {
          return SoundManagerStates.SND_OVER;
       }
-
+      
       public final function getStateOutSnd() : String {
          return SoundManagerStates.SND_OUT;
       }
-
+      
       public final function getStatePressSnd() : String {
          return SoundManagerStates.SND_PRESS;
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.hitArea = this.hitMc;
@@ -85,7 +84,7 @@ package net.wg.gui.components.controls
          }
          this.calcMenuAvailableRowCount();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          if(isInvalid(HANDLE_SCROLL_INV))
@@ -97,13 +96,13 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       override public function open() : void {
          super.open();
          App.stage.addEventListener(MouseEvent.MOUSE_WHEEL,this.mouseWheelHandlerGlobal,false,0,true);
          App.stage.addEventListener(ScrollBarEvent.ON_MOUSE_WHEEL_INSIDE,this.onMouseWheelInside,false);
       }
-
+      
       override public function close() : void {
          selected = false;
          App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleStageClick,false);
@@ -111,7 +110,7 @@ package net.wg.gui.components.controls
          App.stage.removeEventListener(ScrollBarEvent.ON_MOUSE_WHEEL_INSIDE,this.onMouseWheelInside,false);
          this.hideDropdown();
       }
-
+      
       override protected function showDropdown() : void {
          var _loc1_:MovieClip = null;
          var _loc2_:Class = null;
@@ -123,7 +122,7 @@ package net.wg.gui.components.controls
          {
             menuWidth = width - this.SHADOW_WIDTH;
          }
-         if(dropdown  is  String && !(dropdown == ""))
+         if(dropdown is String && !(dropdown == ""))
          {
             _loc2_ = getDefinitionByName(dropdown.toString()) as Class;
             if(_loc2_ != null)
@@ -133,30 +132,26 @@ package net.wg.gui.components.controls
          }
          if(_loc1_)
          {
-            if(itemRenderer  is  String && !(itemRenderer == ""))
+            if(itemRenderer is String && !(itemRenderer == ""))
             {
                _loc1_.itemRenderer = getDefinitionByName(itemRenderer.toString()) as Class;
             }
-            else
+            else if(itemRenderer is Class)
             {
-               if(itemRenderer  is  Class)
-               {
-                  _loc1_.itemRenderer = itemRenderer as Class;
-               }
+               _loc1_.itemRenderer = itemRenderer as Class;
             }
+            
             if(this.allowScrolling)
             {
-               if(scrollBar  is  String && !(scrollBar == ""))
+               if(scrollBar is String && !(scrollBar == ""))
                {
                   _loc1_.scrollBar = getDefinitionByName(scrollBar.toString()) as Class;
                }
-               else
+               else if(scrollBar is Class)
                {
-                  if(scrollBar  is  Class)
-                  {
-                     _loc1_.scrollBar = scrollBar as Class;
-                  }
+                  _loc1_.scrollBar = scrollBar as Class;
                }
+               
             }
             _loc1_.selectedIndex = _selectedIndex;
             _loc1_.width = menuWidth == -1?width + menuOffset.left + menuOffset.right:menuWidth;
@@ -164,12 +159,11 @@ package net.wg.gui.components.controls
             _loc1_.padding = menuPadding;
             _loc1_.wrapping = menuWrapping;
             _loc1_.margin = menuMargin;
-            _loc1_.thumbOffset =
+            _loc1_.thumbOffset = 
                {
                   "top":thumbOffsetTop,
                   "bottom":thumbOffsetBottom
-               }
-            ;
+               };
             _loc1_.focusTarget = this;
             _loc1_.rowCount = menuRowCount < 1?5:menuRowCount;
             _loc1_.labelField = _labelField;
@@ -180,15 +174,15 @@ package net.wg.gui.components.controls
          }
          stage.addEventListener(Event.RESIZE,this.updateDDPosition);
       }
-
+      
       private function mouseWheelHandlerGlobal(param1:MouseEvent) : void {
          this.tryClosedDropDown();
       }
-
+      
       private function onMouseWheelInside(param1:ScrollBarEvent) : void {
          this.tryClosedDropDown();
       }
-
+      
       private function tryClosedDropDown() : void {
          var _loc1_:Point = null;
          var _loc2_:* = false;
@@ -203,7 +197,7 @@ package net.wg.gui.components.controls
             }
          }
       }
-
+      
       private function mouseWheelHandler(param1:MouseEvent) : void {
          var _loc4_:ScrollingList = null;
          param1.stopPropagation();
@@ -217,13 +211,11 @@ package net.wg.gui.components.controls
          {
             _loc3_ = 0;
          }
-         else
+         else if(_loc3_ >= _dataProvider.length)
          {
-            if(_loc3_ >= _dataProvider.length)
-            {
-               _loc3_ = _dataProvider.length-1;
-            }
+            _loc3_ = _dataProvider.length - 1;
          }
+         
          if((_dropdownRef) && !(_loc3_ == _selectedIndex))
          {
             _loc4_ = _dropdownRef as ScrollingList;
@@ -234,7 +226,7 @@ package net.wg.gui.components.controls
          }
          this.selectedIndex = _loc3_;
       }
-
+      
       override public function set selectedIndex(param1:int) : void {
          var _loc2_:CoreList = null;
          var _loc3_:uint = 0;
@@ -247,7 +239,7 @@ package net.wg.gui.components.controls
          if(_dropdownRef != null)
          {
             _loc2_ = _dropdownRef as CoreList;
-            _loc3_ = _loc2_  is  ScrollingList?(_loc2_ as ScrollingList).scrollPosition:0;
+            _loc3_ = _loc2_ is ScrollingList?(_loc2_ as ScrollingList).scrollPosition:0;
             dispatchEvent(new ListEvent(ListEvent.INDEX_CHANGE,true,false,_selectedIndex,-1,-1,_loc2_.getRendererAt(_selectedIndex,_loc3_),_dataProvider[_selectedIndex]));
          }
          else
@@ -255,12 +247,12 @@ package net.wg.gui.components.controls
             dispatchEvent(new ListEvent(ListEvent.INDEX_CHANGE,true,false,_selectedIndex,-1,-1,null,_dataProvider[_selectedIndex]));
          }
       }
-
+      
       override protected function hideDropdown() : void {
          super.hideDropdown();
          App.stage.removeEventListener(Event.RESIZE,this.updateDDPosition);
       }
-
+      
       protected function updateDDPosition(param1:Event) : void {
          var _loc2_:Number = x + menuOffset.left;
          var _loc3_:Number = menuDirection == "down"?y + height + menuOffset.top:y - _dropdownRef.height + menuOffset.bottom;
@@ -268,11 +260,11 @@ package net.wg.gui.components.controls
          _dropdownRef.x = _loc4_.x;
          _dropdownRef.y = _loc4_.y;
       }
-
+      
       override public function get enabled() : Boolean {
          return super.enabled;
       }
-
+      
       override public function set enabled(param1:Boolean) : void {
          if(super.enabled == param1)
          {
@@ -284,14 +276,14 @@ package net.wg.gui.components.controls
             this.close();
          }
       }
-
+      
       override protected function updateText() : void {
          if(!(_label == null) && !(textField == null))
          {
             textField.htmlText = _label;
          }
       }
-
+      
       override protected function handleStageClick(param1:MouseEvent) : void {
          if(this.contains(param1.target as DisplayObject))
          {
@@ -303,7 +295,7 @@ package net.wg.gui.components.controls
          }
          this.close();
       }
-
+      
       override public function set dataProvider(param1:IDataProvider) : void {
          if(_dataProvider == param1)
          {
@@ -326,7 +318,7 @@ package net.wg.gui.components.controls
          _dataProvider.addEventListener(Event.CHANGE,handleDataChange,false,0,true);
          invalidateData();
       }
-
+      
       private function calcMenuAvailableRowCount() : void {
          var _loc1_:uint = _dataProvider?_dataProvider.length:0;
          if(!menuRowsFixed)
@@ -336,19 +328,17 @@ package net.wg.gui.components.controls
                menuRowCount = _loc1_;
                this.allowScrolling = false;
             }
+            else if(this._maxRowCount < _loc1_)
+            {
+               menuRowCount = this._maxRowCount;
+               this.allowScrolling = true;
+            }
             else
             {
-               if(this._maxRowCount < _loc1_)
-               {
-                  menuRowCount = this._maxRowCount;
-                  this.allowScrolling = true;
-               }
-               else
-               {
-                  menuRowCount = _loc1_;
-                  this.allowScrolling = false;
-               }
+               menuRowCount = _loc1_;
+               this.allowScrolling = false;
             }
+            
          }
          else
          {
@@ -356,21 +346,21 @@ package net.wg.gui.components.controls
             this.allowScrolling = true;
          }
       }
-
+      
       public function get rowCount() : int {
          return this._maxRowCount;
       }
-
+      
       public function set rowCount(param1:int) : void {
          this._maxRowCount = param1;
          this.calcMenuAvailableRowCount();
          invalidateData();
       }
-
+      
       public function get handleScroll() : Boolean {
          return this._handleScroll;
       }
-
+      
       public function set handleScroll(param1:Boolean) : void {
          if(this._handleScroll != param1)
          {
@@ -378,7 +368,7 @@ package net.wg.gui.components.controls
             invalidate(HANDLE_SCROLL_INV);
          }
       }
-
+      
       override protected function onDispose() : void {
          removeEventListener(Event.ADDED,addToAutoGroup,false);
          removeEventListener(Event.REMOVED,addToAutoGroup,false);
@@ -399,7 +389,7 @@ package net.wg.gui.components.controls
          if(_dropdownRef)
          {
             _dropdownRef.removeEventListener(ListEvent.ITEM_CLICK,handleMenuItemClick,false);
-            if(_dropdownRef  is  IDisposable)
+            if(_dropdownRef is IDisposable)
             {
                IDisposable(_dropdownRef).dispose();
             }
@@ -412,7 +402,7 @@ package net.wg.gui.components.controls
             _dataProvider.cleanUp();
             _dataProvider = null;
          }
-         if((scrollBar) && scrollBar  is  IDisposable)
+         if((scrollBar) && scrollBar is IDisposable)
          {
             IDisposable(scrollBar).dispose();
          }
@@ -425,5 +415,4 @@ package net.wg.gui.components.controls
          super.onDispose();
       }
    }
-
 }

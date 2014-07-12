@@ -7,44 +7,43 @@ package net.wg.gui.lobby.vehicleBuyWindow
    import flash.display.DisplayObject;
    import scaleform.clik.motion.Tween;
    import fl.transitions.easing.Strong;
-
-
+   
    public class VehicleBuyWindowAnimManager extends Object implements IDisposable
    {
-          
+      
       public function VehicleBuyWindowAnimManager(param1:VehicleBuyWindow) {
          super();
          this.animTarget = param1;
       }
-
+      
       private var animTarget:VehicleBuyWindow;
-
+      
       private var footerOpenedY:int;
-
+      
       private var footerClosedY:int;
-
+      
       private var windowClosedHeight:uint;
-
+      
       private var windowOpenedHeight:uint;
-
+      
       private var darkBackgroundCloseHeight:uint;
-
+      
       private var darkBackgroundOpenHeight:uint;
-
+      
       private var maskCloseHeight:uint;
-
+      
       private var maskOpenHeight:uint;
-
+      
       private var _duration:uint = 400;
-
+      
       private var initialized:Boolean;
-
+      
       private var margin:uint = 0;
-
+      
       private var windowClosedHeightMargin:uint = 2;
-
+      
       private var excludeTween:ExcludeTweenManager;
-
+      
       public function launch(param1:Boolean, param2:Boolean) : void {
          var _loc3_:* = 0;
          var _loc4_:* = NaN;
@@ -74,7 +73,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.tweenToHeight(this.animTarget.bodyMaskMc,this.maskCloseHeight,param2);
          }
       }
-
+      
       public function dispose() : void {
          this.animTarget = null;
          if(this.excludeTween)
@@ -83,7 +82,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.excludeTween = null;
          }
       }
-
+      
       private function initialize() : void {
          var _loc1_:FooterMc = this.animTarget.footerMc;
          this.footerOpenedY = _loc1_.y;
@@ -97,7 +96,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          this.maskOpenHeight = this.animTarget.bodyMaskMc.height;
          this.excludeTween = new ExcludeTweenManager();
       }
-
+      
       private function tweenToY(param1:MovieClip, param2:int, param3:Boolean) : void {
          var _loc4_:Object = null;
          if(param3)
@@ -111,7 +110,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.excludeTween.registerAndLaunch(this._duration,param1,_loc4_,this.getDefaultTweenSet());
          }
       }
-
+      
       private function tweenToAlpha(param1:MovieClip, param2:Number, param3:Boolean) : void {
          var _loc4_:Object = null;
          if(param3)
@@ -125,7 +124,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.excludeTween.registerAndLaunch(this._duration,param1,_loc4_,this.getDefaultTweenSet());
          }
       }
-
+      
       private function tweenToHeight(param1:DisplayObject, param2:Number, param3:Boolean) : void {
          var _loc4_:Object = null;
          if(param3)
@@ -139,11 +138,11 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.excludeTween.registerAndLaunch(this._duration,param1,_loc4_,this.getDefaultTweenSet());
          }
       }
-
+      
       private function onTweenComplete(param1:Tween) : void {
          this.excludeTween.unregister(param1);
       }
-
+      
       private function getDefaultTweenSet() : Object {
          var _loc1_:Object = {};
          _loc1_.ease = Strong.easeOut;
@@ -151,5 +150,4 @@ package net.wg.gui.lobby.vehicleBuyWindow
          return _loc1_;
       }
    }
-
 }

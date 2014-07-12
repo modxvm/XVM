@@ -1,15 +1,14 @@
 package net.wg.gui.lobby.window
 {
    import net.wg.gui.components.controls.SortableScrollingList;
-
-
+   
    public class ExchangeXPList extends SortableScrollingList
    {
-          
+      
       public function ExchangeXPList() {
          super();
       }
-
+      
       public function applySelection(param1:Boolean) : void {
          var _loc2_:ExchangeXPVehicleVO = null;
          var _loc3_:* = 0;
@@ -22,5 +21,4 @@ package net.wg.gui.lobby.window
          invalidateData();
       }
    }
-
 }

@@ -1,12 +1,11 @@
 package net.wg.data.utilData
 {
    import flash.geom.Point;
-
-
+   
    public class TwoDimensionalPadding extends Object
    {
-          
-      public function TwoDimensionalPadding(param1:Point=null, param2:Point=null, param3:Point=null, param4:Point=null) {
+      
+      public function TwoDimensionalPadding(param1:Point = null, param2:Point = null, param3:Point = null, param4:Point = null) {
          this.top = new Point();
          this.bottom = new Point();
          this.left = new Point();
@@ -29,14 +28,13 @@ package net.wg.data.utilData
             this.left = param4;
          }
       }
-
+      
       public var top:Point;
-
+      
       public var bottom:Point;
-
+      
       public var left:Point;
-
+      
       public var right:Point;
    }
-
 }

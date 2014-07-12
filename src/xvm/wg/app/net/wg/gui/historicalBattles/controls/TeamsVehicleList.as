@@ -8,23 +8,22 @@ package net.wg.gui.historicalBattles.controls
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.historicalBattles.events.TeamsVehicleListEvent;
    import net.wg.gui.components.controls.ScrollingListEx;
-
-
+   
    public class TeamsVehicleList extends UIComponent
    {
-          
+      
       public function TeamsVehicleList() {
          super();
       }
-
+      
       public var teamListA:SimpleVehicleList;
-
+      
       public var teamListB:SimpleVehicleList;
-
+      
       public var scrollBar:ScrollBar;
-
+      
       private var _selectable:Boolean = true;
-
+      
       override protected function configUI() : void {
          super.configUI();
          this.teamListA.smartScrollBar = true;
@@ -33,7 +32,7 @@ package net.wg.gui.historicalBattles.controls
          this.teamListB.addEventListener(ListEvent.INDEX_CHANGE,this.onListItemSelected);
          this.teamListB.enabled = false;
       }
-
+      
       override protected function onDispose() : void {
          this.teamListA.removeEventListener(ListEvent.INDEX_CHANGE,this.onListItemSelected);
          this.teamListB.removeEventListener(ListEvent.INDEX_CHANGE,this.onListItemSelected);
@@ -45,24 +44,24 @@ package net.wg.gui.historicalBattles.controls
          this.scrollBar = null;
          super.onDispose();
       }
-
+      
       override protected function draw() : void {
          super.draw();
       }
-
+      
       public function setTeamsData(param1:Array, param2:Array) : void {
          var _loc3_:int = Math.max(param1.length,param2.length);
          this.teamListA.dataProvider = this.generateListDP(param1,_loc3_);
          this.teamListB.dataProvider = this.generateListDP(param2,_loc3_);
       }
-
+      
       public function selectVehicleByCD(param1:int) : Boolean {
          var _loc3_:CoreListEx = null;
          var _loc4_:VehicleListItemVO = null;
          var _loc2_:Array = [this.teamListA,this.teamListB];
-         for each (_loc3_ in _loc2_)
+         for each(_loc3_ in _loc2_)
          {
-            for each (_loc4_ in _loc3_.dataProvider)
+            for each(_loc4_ in _loc3_.dataProvider)
             {
                if((_loc4_) && _loc4_.intCD == param1)
                {
@@ -79,7 +78,7 @@ package net.wg.gui.historicalBattles.controls
          this.teamListB.selectedIndex = -1;
          return false;
       }
-
+      
       private function generateListDP(param1:Array, param2:int) : DataProvider {
          var _loc4_:VehicleListItemVO = null;
          var _loc3_:Array = [];
@@ -98,14 +97,14 @@ package net.wg.gui.historicalBattles.controls
          }
          return new DataProvider(_loc3_);
       }
-
+      
       private function updateListSelectable() : void {
          var _loc2_:CoreListEx = null;
          var _loc3_:VehicleListItemVO = null;
          var _loc1_:Array = [this.teamListA,this.teamListB];
-         for each (_loc2_ in _loc1_)
+         for each(_loc2_ in _loc1_)
          {
-            for each (_loc3_ in _loc2_.dataProvider)
+            for each(_loc3_ in _loc2_.dataProvider)
             {
                if(_loc3_)
                {
@@ -116,7 +115,7 @@ package net.wg.gui.historicalBattles.controls
          this.teamListA.invalidateData();
          this.teamListB.invalidateData();
       }
-
+      
       private function onListItemSelected(param1:ListEvent) : void {
          if(param1.index == -1)
          {
@@ -132,15 +131,14 @@ package net.wg.gui.historicalBattles.controls
          var _loc4_:VehicleListItemVO = _loc2_.dataProvider.requestItemAt(_loc2_.selectedIndex) as VehicleListItemVO;
          dispatchEvent(new TeamsVehicleListEvent(TeamsVehicleListEvent.VEHICLE_SELECTED,_loc4_.intCD));
       }
-
+      
       public function get selectable() : Boolean {
          return this._selectable;
       }
-
+      
       public function set selectable(param1:Boolean) : void {
          this._selectable = param1;
          this.updateListSelectable();
       }
    }
-
 }

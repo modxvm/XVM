@@ -7,92 +7,91 @@ package net.wg.gui.components.advanced
    import flash.filters.BitmapFilter;
    import flash.filters.DropShadowFilter;
    import flash.filters.GlowFilter;
-
-
+   
    public class TankIcon extends UIComponent
    {
-          
+      
       public function TankIcon() {
          this.DIRTY_FLAGS = [this._showMultyXpDirty,this._showXpDirty,this._showNameDirty,this._nationDirty,this._imageDirty,this._tankTypeDirty,this._levelDirty,this._multyXpValDirty,this._xpValDirty,this._tankNameDirty,this._isEliteDirty,this._isPremiumDirty];
          super();
       }
-
+      
       public var flag:MovieClip;
-
+      
       public var iconLoader:UILoaderAlt;
-
+      
       public var tankTypeMc:MovieClip;
-
+      
       public var levelMc:MovieClip;
-
+      
       public var multyXp:MovieClip;
-
+      
       public var xp:MovieClip;
-
+      
       public var tankNameField:TextField;
-
+      
       public var tankNameBg:MovieClip;
-
+      
       public var favoriteMc:MovieClip;
-
+      
       private var _favorite:Boolean = false;
-
+      
       private var _favoriteDirty:Boolean = true;
-
+      
       private var _showMultyXp:Boolean = false;
-
+      
       private var _showMultyXpDirty:Boolean = true;
-
+      
       private var _showXp:Boolean = false;
-
+      
       private var _showXpDirty:Boolean = true;
-
+      
       private var _showName:Boolean = false;
-
+      
       private var _showNameDirty:Boolean = true;
-
+      
       private var _nation:Number;
-
+      
       private var _nationDirty:Boolean = true;
-
+      
       private var _nationName:String;
-
+      
       private var _nationNameDirty:Boolean = true;
-
+      
       private var _image:String;
-
+      
       private var _imageDirty:Boolean = true;
-
+      
       private var _tankType:String;
-
+      
       private var _tankTypeDirty:Boolean = true;
-
+      
       private var _level:Number;
-
+      
       private var _levelDirty:Boolean = true;
-
+      
       private var _multyXpVal:Number;
-
+      
       private var _multyXpValDirty:Boolean = true;
-
+      
       private var _xpVal:Number = 0;
-
+      
       private var _xpValDirty:Boolean = true;
-
+      
       private var _tankName:String;
-
+      
       private var _tankNameDirty:Boolean = true;
-
+      
       private var _isElite:Boolean;
-
+      
       private var _isEliteDirty:Boolean = true;
-
+      
       private var _isPremium:Boolean;
-
+      
       private var _isPremiumDirty:Boolean = true;
-
-      private var DIRTY_FLAGS:Array;
-
+      
+      private const DIRTY_FLAGS:Array;
+      
       override protected function onDispose() : void {
          this.flag = null;
          this.iconLoader.dispose();
@@ -107,11 +106,11 @@ package net.wg.gui.components.advanced
          this.favoriteMc = null;
          super.onDispose();
       }
-
+      
       public function get favorite() : Boolean {
          return this._favorite;
       }
-
+      
       public function set favorite(param1:Boolean) : void {
          if(this._favorite == param1)
          {
@@ -121,41 +120,41 @@ package net.wg.gui.components.advanced
          this._favoriteDirty = true;
          invalidate();
       }
-
+      
       public function get showMultyXp() : Boolean {
          return this._showMultyXp;
       }
-
+      
       public function set showMultyXp(param1:Boolean) : void {
          this._showMultyXp = param1;
          this._showMultyXpDirty = true;
          invalidate();
       }
-
+      
       public function get showXp() : Boolean {
          return this._showXp;
       }
-
+      
       public function set showXp(param1:Boolean) : void {
          this._showXp = param1;
          this._showXpDirty = true;
          invalidate();
       }
-
+      
       public function get showName() : Boolean {
          return this._showName;
       }
-
+      
       public function set showName(param1:Boolean) : void {
          this._showName = param1;
          this._showNameDirty = true;
          invalidate();
       }
-
+      
       public function get nation() : Number {
          return this._nation;
       }
-
+      
       public function set nation(param1:Number) : void {
          if(param1 < 0 || param1 == this._nation)
          {
@@ -166,11 +165,11 @@ package net.wg.gui.components.advanced
          this._nationNameDirty = false;
          invalidate();
       }
-
+      
       public function get nationName() : String {
          return this._nationName;
       }
-
+      
       public function set nationName(param1:String) : void {
          if(!param1 || param1 == this._nationName)
          {
@@ -181,11 +180,11 @@ package net.wg.gui.components.advanced
          this._nationDirty = false;
          invalidate();
       }
-
+      
       public function get image() : String {
          return this._image;
       }
-
+      
       public function set image(param1:String) : void {
          if(!param1 || param1 == this._image)
          {
@@ -195,11 +194,11 @@ package net.wg.gui.components.advanced
          this._imageDirty = true;
          invalidate();
       }
-
+      
       public function get tankType() : String {
          return this._tankType;
       }
-
+      
       public function set tankType(param1:String) : void {
          if(!param1 || param1 == this._tankType)
          {
@@ -209,11 +208,11 @@ package net.wg.gui.components.advanced
          this._tankTypeDirty = true;
          invalidate();
       }
-
+      
       public function get level() : Number {
          return this._level;
       }
-
+      
       public function set level(param1:Number) : void {
          if(param1 == this._level)
          {
@@ -223,11 +222,11 @@ package net.wg.gui.components.advanced
          this._levelDirty = true;
          invalidate();
       }
-
+      
       public function get multyXpVal() : Number {
          return this._multyXpVal;
       }
-
+      
       public function set multyXpVal(param1:Number) : void {
          if(param1 == this._multyXpVal)
          {
@@ -237,11 +236,11 @@ package net.wg.gui.components.advanced
          this._multyXpValDirty = true;
          invalidate();
       }
-
+      
       public function get xpVal() : Number {
          return this._xpVal;
       }
-
+      
       public function set xpVal(param1:Number) : void {
          if(param1 == this._xpVal)
          {
@@ -251,11 +250,11 @@ package net.wg.gui.components.advanced
          this._xpValDirty = true;
          invalidate();
       }
-
+      
       public function get tankName() : String {
          return this._tankName;
       }
-
+      
       public function set tankName(param1:String) : void {
          if(param1 == this._tankName)
          {
@@ -265,11 +264,11 @@ package net.wg.gui.components.advanced
          this._tankNameDirty = true;
          invalidate();
       }
-
+      
       public function get isElite() : Boolean {
          return this._isElite;
       }
-
+      
       public function set isElite(param1:Boolean) : void {
          if(param1 == this._isElite)
          {
@@ -279,11 +278,11 @@ package net.wg.gui.components.advanced
          this._isEliteDirty = true;
          invalidate();
       }
-
+      
       public function get isPremium() : Boolean {
          return this._isPremium;
       }
-
+      
       public function set isPremium(param1:Boolean) : void {
          if(param1 == this._isPremium)
          {
@@ -293,11 +292,11 @@ package net.wg.gui.components.advanced
          this._isPremiumDirty = true;
          invalidate();
       }
-
+      
       override protected function configUI() : void {
          super.configUI();
       }
-
+      
       override protected function draw() : void {
          super.draw();
          this.flag.visible = true;
@@ -361,7 +360,7 @@ package net.wg.gui.components.advanced
             invalidate();
          }
       }
-
+      
       private function updateTankType() : void {
          if(this.tankType)
          {
@@ -376,7 +375,7 @@ package net.wg.gui.components.advanced
             this.levelMc.x = Math.round(this.tankTypeMc.x + this.tankTypeMc.width + 3);
          }
       }
-
+      
       private function updateMultyXp() : void {
          if(this.showMultyXp)
          {
@@ -387,22 +386,20 @@ package net.wg.gui.components.advanced
                this.multyXp.textField.text = this.multyXpVal;
                this.multyXp.textField.visible = true;
             }
-            else
+            else if(this.multyXp.visible)
             {
-               if(this.multyXp.visible)
-               {
-                  this.multyXp.gotoAndStop("standart");
-                  this.multyXp.textField.text = "";
-                  this.multyXp.textField.visible = false;
-               }
+               this.multyXp.gotoAndStop("standart");
+               this.multyXp.textField.text = "";
+               this.multyXp.textField.visible = false;
             }
+            
          }
          else
          {
             this.multyXp.visible = false;
          }
       }
-
+      
       private function updateTankName() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -470,5 +467,4 @@ package net.wg.gui.components.advanced
          }
       }
    }
-
 }
