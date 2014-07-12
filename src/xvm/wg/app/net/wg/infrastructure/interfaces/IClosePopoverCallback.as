@@ -1,8 +1,8 @@
 package net.wg.infrastructure.interfaces
 {
-   public interface IClosePopoverCallback
-   {
-      
-      function onPopoverClose() : void;
-   }
+    public interface IClosePopoverCallback
+    {
+        
+        function onPopoverClose() : void;
+    }
 }

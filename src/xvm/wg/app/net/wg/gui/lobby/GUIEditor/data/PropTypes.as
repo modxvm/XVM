@@ -1,20 +1,20 @@
 package net.wg.gui.lobby.GUIEditor.data
 {
-   public class PropTypes extends Object
-   {
-      
-      public function PropTypes() {
-         super();
-      }
-      
-      public static const STRING:String = "string";
-      
-      public static const FLAG:String = "flag";
-      
-      public static const NUMBER:String = "number";
-      
-      public static const CONSTRAINED_NUMBER:String = "constrainedNumber";
-      
-      public static const STATES:String = "states";
-   }
+    public class PropTypes extends Object
+    {
+        
+        public function PropTypes() {
+            super();
+        }
+        
+        public static var STRING:String = "string";
+        
+        public static var FLAG:String = "flag";
+        
+        public static var NUMBER:String = "number";
+        
+        public static var CONSTRAINED_NUMBER:String = "constrainedNumber";
+        
+        public static var STATES:String = "states";
+    }
 }

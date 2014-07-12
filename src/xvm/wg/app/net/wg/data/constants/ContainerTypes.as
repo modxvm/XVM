@@ -1,28 +1,28 @@
 package net.wg.data.constants
 {
-   public class ContainerTypes extends Object
-   {
-      
-      public function ContainerTypes() {
-         super();
-      }
-      
-      public static const VIEW:String = "view";
-      
-      public static const LOBBY_SUB_VIEW:String = "lobbySubView";
-      
-      public static const WINDOW:String = "window";
-      
-      public static const BROWSER:String = "browser";
-      
-      public static const TOP_WINDOW:String = "topWindow";
-      
-      public static const CURSOR:String = "cursor";
-      
-      public static const WAITING:String = "waiting";
-      
-      public static const SERVICE_LAYOUT:String = "serviceLayout";
-      
-      public static const CTNR_ORDER:Vector.<String>;
-   }
+    public class ContainerTypes extends Object
+    {
+        
+        public function ContainerTypes() {
+            super();
+        }
+        
+        public static var VIEW:String = "view";
+        
+        public static var LOBBY_SUB_VIEW:String = "lobbySubView";
+        
+        public static var WINDOW:String = "window";
+        
+        public static var BROWSER:String = "browser";
+        
+        public static var TOP_WINDOW:String = "topWindow";
+        
+        public static var CURSOR:String = "cursor";
+        
+        public static var WAITING:String = "waiting";
+        
+        public static var SERVICE_LAYOUT:String = "serviceLayout";
+        
+        public static var CTNR_ORDER:Vector.<String>;
+    }
 }

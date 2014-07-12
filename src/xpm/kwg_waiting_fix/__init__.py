@@ -6,7 +6,7 @@
 XPM_MOD_VERSION    = "0.3"
 XPM_MOD_URL        = "http://www.koreanrandom.com/forum/topic/11630-/#entry151768"
 XPM_MOD_UPDATE_URL = ""
-XPM_GAME_VERSIONS  = ["0.8.11","0.9.0","0.9.1"]
+XPM_GAME_VERSIONS  = ["0.8.11","0.9.0","0.9.1","0.9.2"]
 
 #####################################################################
 

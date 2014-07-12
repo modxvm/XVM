@@ -1,6 +1,6 @@
 package net.wg.gui.lobby.fortifications.popovers
 {
-   public interface IBuildingCardCmp
-   {
-   }
+    public interface IBuildingCardCmp
+    {
+    }
 }

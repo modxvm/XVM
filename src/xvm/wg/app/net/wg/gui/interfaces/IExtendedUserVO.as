@@ -1,12 +1,12 @@
 package net.wg.gui.interfaces
 {
-   public interface IExtendedUserVO extends IUserVO
-   {
-      
-      function toHash() : Object;
-      
-      function getToolTip() : String;
-      
-      function get himself() : Boolean;
-   }
+    public interface IExtendedUserVO extends IUserVO
+    {
+        
+        function toHash() : Object;
+        
+        function getToolTip() : String;
+        
+        function get himself() : Boolean;
+    }
 }

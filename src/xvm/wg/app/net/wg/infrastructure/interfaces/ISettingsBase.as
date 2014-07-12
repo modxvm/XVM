@@ -1,8 +1,8 @@
 package net.wg.infrastructure.interfaces
 {
-   public interface ISettingsBase
-   {
-      
-      function updateDependentData() : void;
-   }
+    public interface ISettingsBase
+    {
+        
+        function updateDependentData() : void;
+    }
 }

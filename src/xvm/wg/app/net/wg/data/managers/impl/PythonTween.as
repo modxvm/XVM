@@ -1,16 +1,16 @@
 package net.wg.data.managers.impl
 {
-   import net.wg.infrastructure.base.meta.impl.PythonTweenMeta;
-   import net.wg.infrastructure.interfaces.ITween;
-   import net.wg.infrastructure.base.meta.IPythonMeta;
-   import net.wg.infrastructure.interfaces.ITweenPropertiesVO;
-   
-   public class PythonTween extends PythonTweenMeta implements ITween, IPythonMeta
-   {
-      
-      public function PythonTween(param1:ITweenPropertiesVO) {
-         super();
-         props = param1;
-      }
-   }
+    import net.wg.infrastructure.base.meta.impl.PythonTweenMeta;
+    import net.wg.infrastructure.interfaces.ITween;
+    import net.wg.infrastructure.base.meta.IPythonMeta;
+    import net.wg.infrastructure.interfaces.ITweenPropertiesVO;
+    
+    public class PythonTween extends PythonTweenMeta implements ITween, IPythonMeta
+    {
+        
+        public function PythonTween(param1:ITweenPropertiesVO) {
+            super();
+            props = param1;
+        }
+    }
 }

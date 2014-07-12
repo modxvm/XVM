@@ -1,55 +1,150 @@
 diff -Naur app.orig/App.as app/App.as
---- app.orig/App.as	2014-07-12 13:59:31.472880400 +0300
-+++ app/App.as	2014-07-11 00:25:26.476656100 +0300
-@@ -1,6 +1,5 @@
+--- app.orig/App.as	2014-07-13 00:24:25.036860400 +0300
++++ app/App.as	2014-07-13 00:37:07.636478600 +0300
+@@ -1,5 +1,6 @@
  package 
  {
--   $AppLinks;
-    import net.wg.app.IApplication;
-    import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
-    import net.wg.infrastructure.managers.ISoundManager;
-diff -Naur app.orig/net/wg/data/constants/Errors.as app/net/wg/data/constants/Errors.as
---- app.orig/net/wg/data/constants/Errors.as	2014-07-11 00:25:26.186655700 +0300
-+++ app/net/wg/data/constants/Errors.as	2014-07-12 14:01:47.943071400 +0300
-@@ -29,6 +29,6 @@
-       
-       public static const MTHD_CORRUPT_INVOKE:String = "method invoking after object destruction";
-       
--      public static const INVALID_FOCUS_USING:String;
-+      public static const INVALID_FOCUS_USING:String = "";
-    }
- }
-diff -Naur app.orig/net/wg/data/daapi/base/DAAPIDataClass.as app/net/wg/data/daapi/base/DAAPIDataClass.as
---- app.orig/net/wg/data/daapi/base/DAAPIDataClass.as	2014-07-11 00:26:18.268729800 +0300
-+++ app/net/wg/data/daapi/base/DAAPIDataClass.as	2014-07-12 14:02:19.923116200 +0300
-@@ -156,7 +156,7 @@
-          return true;
-       }
-       
--      function getHash() : Object {
-+      public function getHash() : Object {
-          return this._hash;
-       }
-       
-diff -Naur app.orig/scaleform/clik/managers/FocusHandler.as app/scaleform/clik/managers/FocusHandler.as
---- app.orig/scaleform/clik/managers/FocusHandler.as	2014-07-11 00:26:11.368720200 +0300
-+++ app/scaleform/clik/managers/FocusHandler.as	2014-07-12 14:01:09.443017500 +0300
-@@ -1,5 +1,6 @@
- package scaleform.clik.managers
- {
-+   import flash.errors.*;
-    import flash.display.Stage;
-    import scaleform.clik.core.UIComponent;
-    import scaleform.gfx.FocusManager;
++    $AppLinks;
+     import net.wg.app.IApplication;
+     import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
+     import net.wg.infrastructure.managers.ISoundManager;
+diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/net/wg/gui/components/common/video/SimpleVideoPlayer.as
+--- app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-07-13 00:27:07.371145400 +0300
++++ app/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-07-13 00:37:07.643479000 +0300
+@@ -285,9 +285,9 @@
+         }
+     }
+     
+-    public function get metaData() : Object {
+-        return this._metaData;
+-    }
++    //public function get metaData() : Object {
++    //    return this._metaData;
++    //}
+     
+     public function get currentTime() : Number {
+         if(this.nsStream)
+diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-07-13 00:31:54.849588200 +0300
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-07-13 00:37:07.651479500 +0300
+@@ -83,9 +83,9 @@
+         
+         private var filterDataInvalid:Boolean = false;
+         
+-        private var nationFilter:DropDownImageText;
++        private var nationFilter:net.wg.gui.components.controls.DropDownImageText;
+         
+-        private var tankFilter:DropDownImageText;
++        private var tankFilter:net.wg.gui.components.controls.DropDownImageText;
+         
+         private var checkBoxToMain:CheckBox;
+         
+diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-07-13 00:32:19.562001700 +0300
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-07-13 00:37:07.656479800 +0300
+@@ -21,9 +21,9 @@
+         
+         public static var FILTER_READY:String = "ready";
+         
+-        public var nationFilter:DropDownImageText;
++        public var nationFilter:net.wg.gui.components.controls.DropDownImageText;
+         
+-        public var tankFilter:DropDownImageText;
++        public var tankFilter:net.wg.gui.components.controls.DropDownImageText;
+         
+         public var checkBoxToMain:CheckBox;
+         
+diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/gui/lobby/profile/ProfileTabNavigator.as
+--- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-07-13 00:29:30.894354500 +0300
++++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-07-13 00:43:33.618555500 +0300
+@@ -27,7 +27,7 @@
+         
+         public var viewStack:ResizableViewStack;
+         
+-        private var initData:ProfileMenuInfoVO;
++        public var initData:ProfileMenuInfoVO;
+         
+         private var _sectionsDataUtil:SectionsDataUtil;
+         
+diff -Naur app.orig/net/wg/gui/notification/NotificationPopUpViewer.as app/net/wg/gui/notification/NotificationPopUpViewer.as
+--- app.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2014-07-13 00:33:25.719785700 +0300
++++ app/net/wg/gui/notification/NotificationPopUpViewer.as	2014-07-13 00:42:23.987572900 +0300
+@@ -45,7 +45,7 @@
+     
+     private var maxAvailaleMessagesCount:uint = 5;
+     
+-    private var popupClass:Class;
++    public var popupClass:Class;
+     
+     private var animationManager:ExcludeTweenManager;
+     
+diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/gui/prebattle/squad/SquadItemRenderer.as
+--- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-07-13 00:26:09.692846400 +0300
++++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-07-13 00:37:07.662480100 +0300
+@@ -160,7 +160,7 @@
+                 }
+                 this.setSpeakers(this.model.isPlayerSpeaking,true);
+                 textField.alpha = this.vehicleNameField.alpha = 1;
+-                _loc1_ = this.model.getStateString();
++                var _loc1_:* = this.model.getStateString();
+                 if(_loc1_ != PrebattleStateString.UNKNOWN)
+                 {
+                     this.statusString = _loc1_;
+@@ -175,8 +175,8 @@
+                         this.showToolTips();
+                     }
+                 }
+-                _loc2_ = 4.290295975E9;
+-                _loc3_ = _loc2_;
++                var _loc2_:* = 4.290295975E9;
++                var _loc3_:* = _loc2_;
+                 this.updateVoiceWave();
+                 _loc3_ = this.model.getCurrentColor();
+                 if(!isNaN(_loc3_))
+diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadWindow.as app/net/wg/gui/prebattle/squad/SquadWindow.as
+--- app.orig/net/wg/gui/prebattle/squad/SquadWindow.as	2014-07-13 00:29:57.052850700 +0300
++++ app/net/wg/gui/prebattle/squad/SquadWindow.as	2014-07-13 00:37:07.668480500 +0300
+@@ -63,7 +63,7 @@
+             if(param3)
+             {
+                 _loc4_ = new PlayerPrbInfoVO(param3);
+-                _loc5_ = 0;
++                var _loc5_:* = 0;
+                 while(_loc5_ < this.memberList.dataProvider.length)
+                 {
+                     _loc6_ = this.memberList.dataProvider.requestItemAt(_loc5_) as PlayerPrbInfoVO;
+diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/wg/infrastructure/managers/IContainerManager.as
+--- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2014-07-13 00:24:24.831848700 +0300
++++ app/net/wg/infrastructure/managers/IContainerManager.as	2014-07-13 00:40:18.329385600 +0300
+@@ -15,6 +15,8 @@
+         
+         function isModalViewsExisting() : Boolean;
+         
++        function get loader() : ILoaderManager;
++
+         function set loader(param1:ILoaderManager) : void;
+         
+         function get lastFocusedView() : IView;
+diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/controls/ButtonGroup.as
+--- app.orig/scaleform/clik/controls/ButtonGroup.as	2014-07-13 00:32:32.863762500 +0300
++++ app/scaleform/clik/controls/ButtonGroup.as	2014-07-13 00:37:07.673480700 +0300
+@@ -62,6 +62,7 @@
+                 _loc1_ = _loc2_ as DisplayObjectContainer;
+                 return _loc1_;
+             }
++            return null;
+         }
+         
+         public function addButton(param1:Button) : void {
 diff -Naur app.orig/scaleform/clik/ui/InputDetails.as app/scaleform/clik/ui/InputDetails.as
---- app.orig/scaleform/clik/ui/InputDetails.as	2014-07-11 00:39:55.823415200 +0300
-+++ app/scaleform/clik/ui/InputDetails.as	2014-07-12 14:00:22.332951600 +0300
+--- app.orig/scaleform/clik/ui/InputDetails.as	2014-07-13 00:33:26.758845100 +0300
++++ app/scaleform/clik/ui/InputDetails.as	2014-07-13 00:37:07.678481000 +0300
 @@ -19,7 +19,7 @@
-       
-       public var code:Number;
-       
--      public var value;
-+      public var value:*;
-       
-       public var navEquivalent:String;
-       
+         
+         public var code:Number;
+         
+-        public var value;
++        public var value:*;
+         
+         public var navEquivalent:String;
+         

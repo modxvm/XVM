@@ -1,22 +1,22 @@
 package net.wg.data.constants
 {
-   public class VehicleTypes extends Object
-   {
-      
-      public function VehicleTypes() {
-         super();
-      }
-      
-      public static const LIGHT_TANK:String = "lightTank";
-      
-      public static const MEDIUM_TANK:String = "mediumTank";
-      
-      public static const HEAVY_TANK:String = "heavyTank";
-      
-      public static const SPG:String = "SPG";
-      
-      public static const AT_SPG:String = "AT-SPG";
-      
-      public static const ALL:String = "None";
-   }
+    public class VehicleTypes extends Object
+    {
+        
+        public function VehicleTypes() {
+            super();
+        }
+        
+        public static var LIGHT_TANK:String = "lightTank";
+        
+        public static var MEDIUM_TANK:String = "mediumTank";
+        
+        public static var HEAVY_TANK:String = "heavyTank";
+        
+        public static var SPG:String = "SPG";
+        
+        public static var AT_SPG:String = "AT-SPG";
+        
+        public static var ALL:String = "None";
+    }
 }

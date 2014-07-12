@@ -1,48 +1,48 @@
 package net.wg.data.constants
 {
-   public class TweenTypes extends Object
-   {
-      
-      public function TweenTypes() {
-         super();
-      }
-      
-      public static const FADE_IN:String = "fadeIn";
-      
-      public static const FADE_OUT:String = "fadeOut";
-      
-      public static const BLINK_IN:String = "blinkIn";
-      
-      public static const BLINK_OUT:String = "blinkOut";
-      
-      public static const MOVE_UP:String = "moveUp";
-      
-      public static const MOVE_DOWN:String = "moveDown";
-      
-      public static const GLOW_IN:String = "glowIn";
-      
-      public static const GLOW_OUT:String = "glowOut";
-      
-      public static const SHADOW_IN:String = "shadowIn";
-      
-      public static const SHADOW_OUT:String = "shadowOut";
-      
-      public static const TURN_HALF:String = "turnHalf";
-      
-      public static const SIMPLE_ANIM_TYPES:Vector.<String>;
-      
-      public static const FADE_TYPES:Vector.<String>;
-      
-      public static const BLINKING_TYPES:Vector.<String>;
-      
-      public static const MOVE_TYPES:Vector.<String>;
-      
-      public static const TURN_TYPES:Vector.<String>;
-      
-      public static const GLOW_TYPES:Vector.<String>;
-      
-      public static const SHADOW_TYPES:Vector.<String>;
-      
-      public static const DURATIONS_BY_TYPES:Vector.<Object>;
-   }
+    public class TweenTypes extends Object
+    {
+        
+        public function TweenTypes() {
+            super();
+        }
+        
+        public static var FADE_IN:String = "fadeIn";
+        
+        public static var FADE_OUT:String = "fadeOut";
+        
+        public static var BLINK_IN:String = "blinkIn";
+        
+        public static var BLINK_OUT:String = "blinkOut";
+        
+        public static var MOVE_UP:String = "moveUp";
+        
+        public static var MOVE_DOWN:String = "moveDown";
+        
+        public static var GLOW_IN:String = "glowIn";
+        
+        public static var GLOW_OUT:String = "glowOut";
+        
+        public static var SHADOW_IN:String = "shadowIn";
+        
+        public static var SHADOW_OUT:String = "shadowOut";
+        
+        public static var TURN_HALF:String = "turnHalf";
+        
+        public static var SIMPLE_ANIM_TYPES:Vector.<String>;
+        
+        public static var FADE_TYPES:Vector.<String>;
+        
+        public static var BLINKING_TYPES:Vector.<String>;
+        
+        public static var MOVE_TYPES:Vector.<String>;
+        
+        public static var TURN_TYPES:Vector.<String>;
+        
+        public static var GLOW_TYPES:Vector.<String>;
+        
+        public static var SHADOW_TYPES:Vector.<String>;
+        
+        public static var DURATIONS_BY_TYPES:Vector.<Object>;
+    }
 }
