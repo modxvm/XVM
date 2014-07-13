@@ -464,15 +464,66 @@ package com.xvm.misc
             c.lines = new CMinimapLines();
             c.lines.enabled = true;
             c.lines.vehicle = [
-                { enabled: false, from: 20,  to: 300, inmeters: false, thickness: 0.4, alpha: 35, color: 0xFFCC66 }
+                { enabled: true, inmeters: true, color: 0x60FF00, from: 50,  to: 97,   thickness: 1.5,  alpha: 45 },
+                { enabled: true, inmeters: true, color: 0x60FF00, from: 100, to: 147,  thickness: 1.4,  alpha: 40 },
+                { enabled: true, inmeters: true, color: 0x60FF00, from: 150, to: 197,  thickness: 1.3,  alpha: 35 },
+                { enabled: true, inmeters: true, color: 0x60FF00, from: 200, to: 248,  thickness: 1.2,  alpha: 33 },
+                { enabled: true, inmeters: true, color: 0x60FF00, from: 250, to: 298,  thickness: 1.1,  alpha: 30 },
+                { enabled: true, inmeters: true, color: 0x60FF00, from: 300, to: 398,  thickness: 1,    alpha: 30 },
+                { enabled: true, inmeters: true, color: 0x60FF00, from: 400, to: 498,  thickness: 0.9,  alpha: 30 },
+                { enabled: true, inmeters: true, color: 0x60FF00, from: 500, to: 2000, thickness: 0.75, alpha: 30 }
             ];
             c.lines.camera = [
-                { enabled: false, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xEE0044},
-                { enabled: false, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xEE0044},
-                { enabled: false, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xEE0044}
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 50,   to: 80,   thickness: 1.3,  alpha: 50 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 120,  to: 180,  thickness: 1.2,  alpha: 45 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 220,  to: 280,  thickness: 1.1,  alpha: 40 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 320,  to: 380,  thickness: 1,    alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 420,  to: 480,  thickness: 0.9,  alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 520,  to: 580,  thickness: 0.8,  alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 620,  to: 680,  thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 720,  to: 780,  thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 820,  to: 880,  thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 920,  to: 980,  thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1020, to: 1080, thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1120, to: 1180, thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1220, to: 1280, thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1320, to: 1380, thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1420, to: 1480, thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1520, to: 1580, thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1620, to: 1680, thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1720, to: 1780, thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1820, to: 1880, thickness: 0.75, alpha: 35 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1920, to: 2000, thickness: 0.75, alpha: 35 },
+                //Dots
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 99,   to: 100,  thickness: 2.2, alpha: 70 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 199,  to: 200,  thickness: 2.1, alpha: 65 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 299,  to: 300,  thickness: 2,   alpha: 60 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 399,  to: 400,  thickness: 1.9, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 499,  to: 500,  thickness: 1.8, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 599,  to: 600,  thickness: 1.7, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 699,  to: 700,  thickness: 1.6, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 799,  to: 800,  thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 899,  to: 900,  thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 999,  to: 1000, thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1099, to: 1100, thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1199, to: 1200, thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1299, to: 1300, thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1399, to: 1400, thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1499, to: 1500, thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1599, to: 1600, thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1699, to: 1700, thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1799, to: 1800, thickness: 1.5, alpha: 55 },
+                { enabled: true, inmeters: true, color: 0xFFCC66, from: 1899, to: 1900, thickness: 1.5, alpha: 55 }
             ];
             c.lines.traverseAngle = [
-                { enabled: true, from: 20,  to: 300, inmeters: false, thickness: 0.4, alpha: 35, color: 0xFFCC66 }
+                { enabled: true, inmeters: true, color: 0xCCCCCC, from: 50,  to: 97,   thickness: 1.5,  alpha: 50 },
+                { enabled: true, inmeters: true, color: 0xCCCCCC, from: 100, to: 147,  thickness: 1.4,  alpha: 48 },
+                { enabled: true, inmeters: true, color: 0xCCCCCC, from: 150, to: 197,  thickness: 1.3,  alpha: 46 },
+                { enabled: true, inmeters: true, color: 0xCCCCCC, from: 200, to: 248,  thickness: 1.2,  alpha: 44 },
+                { enabled: true, inmeters: true, color: 0xCCCCCC, from: 250, to: 298,  thickness: 1.1,  alpha: 42 },
+                { enabled: true, inmeters: true, color: 0xCCCCCC, from: 300, to: 398,  thickness: 1,    alpha: 40 },
+                { enabled: true, inmeters: true, color: 0xCCCCCC, from: 400, to: 498,  thickness: 0.9,  alpha: 40 },
+                { enabled: true, inmeters: true, color: 0xCCCCCC, from: 500, to: 2000, thickness: 0.75, alpha: 40 }
             ];
 
             c.labels = new CMinimapLabels();
