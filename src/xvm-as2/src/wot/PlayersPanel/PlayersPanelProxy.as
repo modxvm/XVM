@@ -77,7 +77,7 @@ class wot.PlayersPanel.PlayersPanelProxy
     {
         //Logger.add("PlayersPanelProxy.isDead()");
         var player:Object = getPlayerInfo(uid);
-        return (player.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
+        return (player.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
     }
 
     public static function get self():Player

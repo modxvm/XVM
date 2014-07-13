@@ -50,7 +50,7 @@ class wot.PlayersPanel.SpotStatusModel
     {
         //Logger.add("SpotStatusModel.defineStatus()");
 
-        if ((vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0)
+        if ((vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0)
             return DEAD;
 
         var status = revealed[uid.toString()];

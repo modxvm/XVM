@@ -195,7 +195,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         // fix battlestate
         var obj = BattleState.getUserData(data.userName);
         obj.frags = data.frags || NaN;
-        obj.dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
+        //Logger.addObject(data);
+        obj.dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
         if (obj.dead == true && (!isNaN(obj.curHealth) && obj.curHealth > 0))
             obj.curHealth = 0;
         obj.blowedUp = obj.dead && (!isNaN(obj.curHealth) && obj.curHealth < 0);

@@ -125,7 +125,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         //Logger.addObject(wrapper.data);
         if (Config.config.rating.showPlayersStatistics) {
             if (Stat.s_data[name] && Stat.s_data[name].stat)
-                Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & VehicleStateInBattle.IS_AVIVE) != 0;
+                Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & VehicleStateInBattle.IS_ALIVE) != 0;
         }
         // Chance
         if (!Stat.s_empty && (Config.config.statisticForm.showChances || Config.config.statisticForm.showBattleTier) && wrapper.selected == true)
@@ -175,7 +175,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         {
             var tr = new flash.geom.Transform(wrapper.iconLoader);
             tr.colorTransform = net.wargaming.managers.ColorSchemeManager.instance.getScheme(
-                (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0 ? "normal" : "normal_dead").transform;
+                (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) != 0 ? "normal" : "normal_dead").transform;
         }
     }
 
@@ -195,7 +195,7 @@ class wot.StatisticForm.BattleStatItemRenderer
                 team);
         }
         PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(data.userName), data.clanAbbrev);
-        m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
+        m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) != 0) ? 100 : 50;
     }
 }
 /*data: {
