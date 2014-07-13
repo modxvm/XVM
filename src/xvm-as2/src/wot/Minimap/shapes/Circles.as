@@ -91,7 +91,11 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             {
                 var c = spec[i][vehicleType];
                 if (c.enabled)
+                {
+                    if (c.state == null)
+                        c.state = Defines.MOVING_STATE_ALL;
                     cfg.push(c);
+                }
             }
         }
 

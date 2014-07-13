@@ -126,6 +126,9 @@
             { "enabled": true, "distance": "motion", "scale": 1, "thickness": 0.5, "alpha": 50, "color": "0x3EB5F1" },
             { "enabled": true, "distance": "standing", "scale": 1, "thickness": 0.5, "alpha": 50, "color": "0x3EB5F1" },
             {}
+        ],
+        "special": [
+//            { "uk-GB01_Medium_Mark_I": { "alpha": 60, "color": "0xEE4444", "distance": 100, "enabled": true, "thickness": 0.5 } }
         ]
     },
     "lines": {
