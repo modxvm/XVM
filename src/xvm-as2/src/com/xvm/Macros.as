@@ -393,7 +393,7 @@ class com.xvm.Macros
             // {{dmg}}
             pdata["dmg"] = function(o):Number { return isNaN(o.delta) ? NaN : o.delta; }
             // {{dmg-ratio}}
-            pdata["dmg-ratio"] = function(o):Number { return isNaN(o.delta) || isNaN(o.maxHealth) ? NaN : Math.round(o.delta / o.maxHealth * 100); }
+            pdata["dmg-ratio"] = function(o):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / data.maxHealth * 100); }
             // {{dmg-kind}}
             pdata["dmg-kind"] = function(o):String { return o.damageType == null ? null : Locale.get(o.damageType); }
             // {{c:dmg}}
