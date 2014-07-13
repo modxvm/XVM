@@ -679,7 +679,7 @@ package com.xvm.misc
                 format: "<textformat leading='-4' tabstops='[50,90,190]'><font color='{{c:hp-ratio}}'>     {{hp}}</font><tab><font color='#FFFFFF'>/ </font>{{hp-max}}<tab><font color='#FFFFFF'>|</font><font color='{{c:vtype}}'>{{vehicle}}</font><tab><font color='#FFFFFF'>|{{nick}}</font></textformat>"
             };
             c.x = 270;
-            c.y = 5;
+            c.y = 40;
             c.w = 500;
             c.h = 1000;
             c.lines = 0;
