@@ -2,23 +2,10 @@
  * Base xvm class with varous basic functions (like macros substitutions).
  * Class don't contain any workflow logic.
  */
-//import com.xvm.Cache;
-import com.xvm.ColorsManager;
-import com.xvm.GraphicsUtil;
-import com.xvm.Macros;
-import com.xvm.Strings;
-import com.xvm.Utils;
-import wot.VehicleMarkersManager.components.ActionMarkerComponent;
-import wot.VehicleMarkersManager.components.ClanIconComponent;
-import wot.VehicleMarkersManager.components.ContourIconComponent;
-import wot.VehicleMarkersManager.components.damage.DamageTextComponent;
-import wot.VehicleMarkersManager.components.HealthBarComponent;
-import wot.VehicleMarkersManager.components.LevelIconComponent;
-import wot.VehicleMarkersManager.components.TurretStatusComponent;
-import wot.VehicleMarkersManager.components.VehicleTypeComponent;
-import wot.VehicleMarkersManager.ErrorHandler;
-import wot.VehicleMarkersManager.VehicleMarkerProxy;
-import wot.VehicleMarkersManager.VehicleState;
+import com.xvm.*;
+import wot.VehicleMarkersManager.*;
+import wot.VehicleMarkersManager.components.*;
+import wot.VehicleMarkersManager.components.damage.*;
 
 class wot.VehicleMarkersManager.XvmBase
 {
@@ -119,7 +106,8 @@ class wot.VehicleMarkersManager.XvmBase
                 damageType:damageType,
                 entityName:m_entityName,
                 dead:m_isDead,
-                blowedUp:isBlowedUp
+                blowedUp:isBlowedUp,
+                teamKiller:m_entityName == "teamKiller"
             }));
     }
 

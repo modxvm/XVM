@@ -368,6 +368,8 @@ class com.xvm.Macros
             pdata["frags"] = function(o):Number { return isNaN(o.frags) ? NaN : o.frags; }
             // {{alive}}
             pdata["alive"] = function(o):String { return o.dead == true ? null : 'alive'; }
+            // {{tk}}
+            pdata["tk"] = function(o):String { return o.teamKiller == true ? 'tk' : null; }
 
             // hp
 

@@ -43,6 +43,7 @@ Legend:
 │ {{a:hp-ratio}}             │   │ X │ X │ X │ X │ X │ X │   │   │ transparency depending on current health ratio (only in vehicle markers)
 │ {{alive}}                  │   │ X │ X │ X │ X │ X │ X │   │   │ 'alive' for alive, '' for dead
 │ {{frags}}                  │   │ X │ X │ X │   │   │   │   │   │ current frags
+│ {{tk}}                     │   │ X │ X │ X │ X │   │   │   │   │ value 'tk' for teamkiller, empty for others
 │ {{c:system}}               │   │ X │ X │ X │ X │   │   │   │   │ system color
 │ {{turret}}                 │   │   │   │   │ X │   │   │   │   │ stock turret marker
 │ {{dmg}}                    │   │   │   │   │ X │ X │   │   │   │ damage health points / last hit value

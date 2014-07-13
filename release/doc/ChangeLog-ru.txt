@@ -1,4 +1,7 @@
-﻿XVM-5.3.2:
+﻿XVM-5.3.3-dev:
+  * новый макрос {{tk}}, возвращает "tk" для тимкиллеров и пустую строку для остальных
+
+XVM-5.3.2:
   * новые опции: captureBar/allyColor, captureBar/enemyColor
 
 XVM-5.3.1:

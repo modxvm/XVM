@@ -1,4 +1,7 @@
-﻿XVM-5.3.2:
+﻿XVM-5.3.3-dev:
+  * new macro {{tk}}, returns "tk" for teamkiller and empty string for others
+
+XVM-5.3.2:
   * new options: captureBar/allyColor, captureBar/enemyColor
 
 XVM-5.3.1:

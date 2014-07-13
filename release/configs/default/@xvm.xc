@@ -66,7 +66,7 @@
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
-    "modMinVersion": "5.3.2"
+    "modMinVersion": "5.3.3"
   },
 
   // Parameters for login screen.
