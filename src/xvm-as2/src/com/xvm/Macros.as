@@ -325,6 +325,8 @@ class com.xvm.Macros
             pdata["clan"] = clan;
             // {{clannb}}
             pdata["clannb"] = Utils.GetClanName(fname);
+            // {{player}}
+            pdata["player"] = data.himself == true ? "pl" : null;
         }
 
         // vehicle

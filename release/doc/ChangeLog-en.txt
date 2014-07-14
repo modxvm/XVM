@@ -1,5 +1,7 @@
 ﻿XVM-5.3.3-dev:
-  * new macro {{tk}}, returns "tk" for teamkiller and empty string for others
+  * new macros:
+      {{player}}, returns "pl" for current player and empty string for others
+      {{tk}}, returns "tk" for teamkiller and empty string for others
 
 XVM-5.3.2:
   * new options: captureBar/allyColor, captureBar/enemyColor
