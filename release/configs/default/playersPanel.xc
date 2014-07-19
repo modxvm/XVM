@@ -19,6 +19,9 @@
     // Start panels mode. Possible values: "none", "short", "medium", "medium2", "large".
     // Начальный режим ушей. Возможные значения: "none", "short", "medium", "medium2", "large".
     "startMode": "large",
+    // Alternative panels mode. Possible values: null, "none", "short", "medium", "medium2", "large".
+    // Альтернативный режим ушей. Возможные значения: null, "none", "short", "medium", "medium2", "large".
+    "altMode": null,
     // Display options for Team/Clan logos (see battleLoading.xc).
     // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
     "clanIcon": {

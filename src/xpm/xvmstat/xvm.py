@@ -10,6 +10,7 @@ import BigWorld
 import GUI
 from gui.shared.utils import decorators
 from gui import SystemMessages
+import CommandMapping
 
 from xpm import *
 
@@ -124,7 +125,14 @@ class Xvm(object):
         #from messenger import MessengerEntry
         #if MessengerEntry.g_instance.gui.isFocused():
         #    return False
-        #key = event.key
+        cmdMap = CommandMapping.g_instance
+        key = event.key
+        isDown = event.isKeyDown()
+        isRepeated = event.isRepeatedEvent()
+        if not isRepeated:
+            if cmdMap.isFired(CommandMapping.CMD_VEHICLE_MARKERS_SHOW_INFO, key):
+                self.setAltMode(isDown)
+                return True
         #if event.isKeyDown() and not event.isRepeatedEvent():
         #    #debug("key=" + str(key))
         #    #return True
@@ -254,6 +262,14 @@ class Xvm(object):
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 
+    def setAltMode(self, isDown):
+        #debug('setAltMode: ' + str(isDown))
+        try:
+            movie = self.battleFlashObject.movie
+            if movie is not None:
+                movie.invoke((RESPOND_ALT_MODE, isDown))
+        except Exception, ex:
+            err('setAltMode(): ' + traceback.format_exc())
 
     # taken from gui.Scaleform.daapi.view.lobby.crewOperations.CrewOperationsPopOver
     @decorators.process('crewReturning')

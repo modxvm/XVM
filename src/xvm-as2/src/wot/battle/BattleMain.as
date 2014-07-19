@@ -44,6 +44,7 @@ class wot.battle.BattleMain
 
         BattleInputHandler.upgrade();
 
+        ExternalInterface.addCallback(Cmd.RESPOND_ALT_MODE, instance, instance.setAltMode);
         ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATE, instance, instance.onBattleStateChanged);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
     }
@@ -175,6 +176,11 @@ class wot.battle.BattleMain
         {
             _root.minimap.sizeUp();
         }
+    }
+
+    private function setAltMode(isDown:Boolean):Void
+    {
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_ALT_MODE, isDown: isDown } );
     }
 
     private function onBattleStateChanged(playerName:String, playerId:Number, vehId:Number,

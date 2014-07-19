@@ -1,5 +1,6 @@
 ﻿{
   //"startMode": "none",
+  //"altMode": "short",
   "def": {
     "c1": "0x13C313",
     "c2": "0xFF0F0F"

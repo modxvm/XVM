@@ -15,6 +15,8 @@ class com.xvm.Cmd
     private static var COMMAND_LOGSTAT:String = "logstat";
 
     public static var RESPOND_CONFIG = "xvm.config";
+    public static var RESPOND_ALT_MODE = "xvm.altmode";
+
     public static var RESPOND_BATTLEDATA = "xvm.battledata";
     public static var RESPOND_BATTLESTATE = "xvm.battleState";
 

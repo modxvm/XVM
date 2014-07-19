@@ -2,6 +2,8 @@
   * new macros:
       {{player}}, returns "pl" for current player and empty string for others
       {{tk}}, returns "tk" for teamkiller and empty string for others
+  * new option:
+      playersPanel/altMode - mode with Alt key pressed
 
 XVM-5.3.2:
   * new options: captureBar/allyColor, captureBar/enemyColor

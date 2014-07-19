@@ -30,6 +30,7 @@ COMMAND_SAVE_SETTINGS = "save_settings"
 COMMAND_TEST = "test"
 
 RESPOND_CONFIG = "xvm.config"
+RESPOND_ALT_MODE = "xvm.altmode"
 RESPOND_DOSSIER = "xvm.dossier"
 RESPOND_BATTLEDATA = "xvm.battledata"
 RESPOND_BATTLERESULTSDATA = "xvm.battleresultsdata"

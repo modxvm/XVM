@@ -8,6 +8,7 @@ package com.xvm.types.cfg
     {
         public var removePanelsModeSwitcher:Boolean;  // Set true to hide mouse modes switcher.
         public var startMode:String;
+        public var altMode:String;
         //playersPanel: {
             //alpha: 60,              // Side panel transparency. 0 - transparent, 100 - opaque.
             //iconAlpha: 100,         // Side panel icons transparency. 0 - transparent, 100 - opaque.

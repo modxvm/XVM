@@ -54,6 +54,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, update2);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, update2);
+        GlobalEventDispatcher.addEventListener(Defines.E_ALT_MODE, this, setAltMode);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, update2);
     }
 
@@ -64,9 +65,25 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private var leadingNames:Number;
     private var leadingVehicles:Number;
 
+    private var m_altMode:String = null;
+    private var m_savedState:String = null;
+
     private function onConfigLoaded()
     {
         setStartMode(Config.config.playersPanel.startMode, wrapper);
+        m_altMode = String(Config.config.playersPanel.altMode);
+        switch (m_altMode)
+        {
+            case "none":
+            case "short":
+            case "medium":
+            case "medium2":
+            case "large":
+                break;
+            default:
+                m_altMode = null;
+        }
+        m_savedState = null;
     }
 
     private function setStartMode(mode:String, wrapper:net.wargaming.ingame.PlayersPanel)
@@ -87,6 +104,30 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         wrapper.m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
 
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
+    }
+
+
+    private function setAltMode(e:Object)
+    {
+        //Logger.add("setAltMode: " + e.isDown + " " + m_altMode + " " + wrapper.state);
+
+        if (m_altMode == null)
+            return;
+        if (m_altMode == wrapper.state && e.isDown)
+            return;
+
+        if (e.isDown)
+        {
+            if (m_savedState == null)
+                m_savedState = wrapper.state;
+            wrapper.state = m_altMode;
+        }
+        else
+        {
+            if (m_savedState != null)
+                wrapper.state = m_savedState;
+            m_savedState = null;
+        }
     }
 
     private function setDataImpl()

@@ -141,6 +141,7 @@ class com.xvm.Defines
     // Events
     public static var E_CONFIG_LOADED = "config_loaded";
     public static var E_STAT_LOADED = "stat_loaded";
+    public static var E_ALT_MODE = "alt_mode";
     public static var E_BATTLE_STATE_CHANGED = "battle_state_changed";
     public static var E_STEREOSCOPE_TOGGLED = "stereoscope_toggled";
     public static var E_SPOT_STATUS_UPDATED = "spot_status_updated";
