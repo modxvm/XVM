@@ -17,15 +17,15 @@
 
 			import utils.*;
 			
-            [Embed(source="images/bg/hills-1.jpg")]
+            [Embed(source="../images/bg/hills-1.jpg")]
             private const IMG1 : Class;
-            [Embed(source="images/bg/hills-2.jpg")]
+            [Embed(source="../images/bg/hills-2.jpg")]
             private const IMG2 : Class;
-            [Embed(source="images/bg/mannerheim-1.jpg")]
+            [Embed(source="../images/bg/mannerheim-1.jpg")]
             private const IMG3 : Class;
-            [Embed(source="images/bg/mannerheim-2.jpg")]
+            [Embed(source="../images/bg/mannerheim-2.jpg")]
             private const IMG4 : Class;
-            [Embed(source="images/bg/mannerheim-3.jpg")]
+            [Embed(source="../images/bg/mannerheim-3.jpg")]
             private const IMG5 : Class;
 
             private const settings: Array = [
@@ -150,5 +150,5 @@
             <s:TextArea right="0" width="476" height="100%" id="taDebug" visible="true" fontFamily="Consolas"/>
         </s:NavigatorContent>
     </mx:ViewStack>
-    <mx:Image right="10" top="5" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="Debug Window" useHandCursor="true" buttonMode="true" click="switchLayout(event)"/>
+    <mx:Image right="10" top="5" width="16" height="16" source="@Embed(source='../images/revert.png')" toolTip="Debug Window" useHandCursor="true" buttonMode="true" click="switchLayout(event)"/>
 </s:BorderContainer>

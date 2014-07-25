@@ -17,7 +17,7 @@ package controls
 
     public class CheckTreeRenderer extends TreeItemRenderer
     {
-        [Embed(source="images/inner.png")] 
+        [Embed(source="../images/inner.png")] 
         private var innerImageClass:Class;
 
         protected var myImage:Image;

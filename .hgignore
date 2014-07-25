@@ -12,6 +12,7 @@ release/mods
 src/xvm-as2/include
 src/xvm/lib
 src/xvm/obj
-utils/replays/*.wotreplay 
+utils/replays/*.wotreplay
 *~
 *.*~
+src/xvm-editor/obj/
