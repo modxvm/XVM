@@ -69,17 +69,7 @@ Legend:
 │ {{vtype-l}}                │ X │   │   │   │   │   │   │   │ X │ vehicle class (text substitution from locale)
 │ {{battletier-min}}         │ X │   │   │   │   │   │   │   │ X │ minimal vehicle battle tier
 │ {{battletier-max}}         │ X │   │   │   │   │   │   │   │ X │ maximal vehicle battle tier
-│ {{l10n:blownUp}}           │   │   │   │   │ X │   │   │   │   │ localizated text "Blown-up!", only in "blowupMessage"
-│ {{l10n:Hits}}              │   │   │   │   │   │ X │   │   │   │ localizated text "Hits"
-│ {{l10n:Total}}             │   │   │   │   │   │ X │   │   │   │ localizated text "Total"
-│ {{l10n:Last}}              │   │   │   │   │   │ X │   │   │   │ localizated text "Last"
-│ {{l10n:hpLeftTitle}}       │   │   │   │   │   │   │ X │   │   │ localizated text "Hitpoints left:", only in "header"
-│ {{l10n:enemyBaseCapture}}  │   │   │   │   │   │   │   │ X │   │ localizated text "Base capture by allies!"
-│ {{l10n:enemyBaseCaptured}} │   │   │   │   │   │   │   │ X │   │ localizated text "Base captured by allies!"
-│ {{l10n:allyBaseCapture}}   │   │   │   │   │   │   │   │ X │   │ localizated text "Base capture by enemies!"
-│ {{l10n:allyBaseCaptured}}  │   │   │   │   │   │   │   │ X │   │ localizated text "Base captured by enemies!"
-│ {{l10n:Timeleft}}          │   │   │   │   │   │   │   │ X │   │ localizated text "Timeleft"
-│ {{l10n:Capturers}}         │   │   │   │   │   │   │   │ X │   │ localizated text "Capturers"
+│ {{l10n:ID}}                │   │ X │   │   │ X │ X │ X │ X │   │ localizated text, see en.xc for id
 └────────────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────
 
   Statistic macros
