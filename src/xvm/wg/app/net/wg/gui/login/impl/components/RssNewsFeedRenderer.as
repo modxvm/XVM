@@ -16,7 +16,8 @@ package net.wg.gui.login.impl.components
     public class RssNewsFeedRenderer extends UIComponent implements IRssNewsFeedRenderer
     {
         
-        public function RssNewsFeedRenderer() {
+        public function RssNewsFeedRenderer()
+        {
             this.tweenManager = new ExcludeTweenManager();
             super();
         }
@@ -43,16 +44,19 @@ package net.wg.gui.login.impl.components
         
         private var _dataVo:RssItemVo = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.hyperLink.addEventListener(ButtonEvent.CLICK,this.onReedMoreClick);
         }
         
-        private function onReedMoreClick(param1:ButtonEvent) : void {
+        private function onReedMoreClick(param1:ButtonEvent) : void
+        {
             dispatchEvent(new RssItemEvent(RssItemEvent.TO_REED_MORE,false,false,this._dataVo));
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.hyperLink.removeEventListener(ButtonEvent.CLICK,this.onReedMoreClick);
             this._dataVo = null;
             if(this.tweenManager)
@@ -67,12 +71,14 @@ package net.wg.gui.login.impl.components
             super.onDispose();
         }
         
-        public function setData(param1:RssItemVo) : void {
+        public function setData(param1:RssItemVo) : void
+        {
             this._isUsed = true;
             this.itemDataVo = param1;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.DATA))
             {
                 this.alertIco.icoType = AlertIco.ALERT_ICO_SMALL;
@@ -90,7 +96,8 @@ package net.wg.gui.login.impl.components
             super.draw();
         }
         
-        private function updatePosition() : void {
+        private function updatePosition() : void
+        {
             if(this.hyperLink.visible)
             {
                 this.hyperLink.x = this.description.x + this.description.width - this.hyperLink.width;
@@ -103,65 +110,73 @@ package net.wg.gui.login.impl.components
             dispatchEvent(new RssItemEvent(RssItemEvent.ITEM_SIZE_INVALID));
         }
         
-        public function get itemId() : String {
+        public function get itemId() : String
+        {
             return this._dataVo?this._dataVo.id:Values.EMPTY_STR;
         }
         
-        public function get itemHeight() : Number {
+        public function get itemHeight() : Number
+        {
             return Math.round(this.actualHeight);
         }
         
-        public function get itemWidth() : Number {
+        public function get itemWidth() : Number
+        {
             return Math.round(this.actualWidth);
         }
         
-        public function set itemDataVo(param1:RssItemVo) : void {
+        public function set itemDataVo(param1:RssItemVo) : void
+        {
             this._dataVo = param1;
             invalidateData();
         }
         
-        public function get itemDataVo() : RssItemVo {
+        public function get itemDataVo() : RssItemVo
+        {
             return this._dataVo;
         }
         
-        public function moveToY(param1:Number) : void {
+        public function moveToY(param1:Number) : void
+        {
             if(alpha == 0)
             {
                 this.y = param1 + this.ANIM_DISTANCE;
             }
-            this.moveTween = this.tweenManager.registerAndLaunch(MOOVING_ANIMATION_SPEED,this,{
-                "y":param1,
-                "alpha":1
-            },{
-            "ease":Strong.easeInOut,
-            "onComplete":this.onMoveTweenComplete
-        });
+            this.moveTween = this.tweenManager.registerAndLaunch(MOOVING_ANIMATION_SPEED,this,{"y":param1,
+            "alpha":1
+        },{"ease":Strong.easeInOut,
+        "onComplete":this.onMoveTweenComplete
+    });
     this.moveTween.fastTransform = false;
 }
 
-private function onMoveTweenComplete(param1:Tween) : void {
+private function onMoveTweenComplete(param1:Tween) : void
+{
     this.unregisterTweeen(param1);
 }
 
-private function unregisterTweeen(param1:Tween) : void {
+private function unregisterTweeen(param1:Tween) : void
+{
     this.tweenManager.unregister(param1);
 }
 
-public function hide() : void {
+public function hide() : void
+{
     this._isUsed = false;
-    this.moveTween = this.tweenManager.registerAndLaunch(this._hideAnimationSpeed,this,{"alpha":0},{
-        "ease":Strong.easeIn,
-        "onComplete":this.onHideTweenComplete
-    });
+    this.moveTween = this.tweenManager.registerAndLaunch(this._hideAnimationSpeed,this,{"alpha":0},{"ease":Strong.easeIn,
+    "onComplete":this.onHideTweenComplete
+});
 this.moveTween.fastTransform = false;
 }
 
-private function onHideTweenComplete(param1:Tween) : void {
+private function onHideTweenComplete(param1:Tween) : void
+{
 this.unregisterTweeen(param1);
 dispatchEvent(new RssItemEvent(RssItemEvent.ON_HIDED));
 }
 
-public function get isUsed() : Boolean {
+public function get isUsed() : Boolean
+{
 return this._isUsed;
 }
 }

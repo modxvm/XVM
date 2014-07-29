@@ -13,14 +13,16 @@ package scaleform.clik.managers
     public class InputDelegate extends EventDispatcher
     {
         
-        public function InputDelegate() {
+        public function InputDelegate()
+        {
             super();
             this.keyHash = [];
         }
         
         private static var instance:InputDelegate;
         
-        public static function getInstance() : InputDelegate {
+        public static function getInstance() : InputDelegate
+        {
             if(instance == null)
             {
                 instance = new InputDelegate();
@@ -40,13 +42,15 @@ package scaleform.clik.managers
         
         protected var keyHash:Array;
         
-        public function initialize(param1:Stage) : void {
+        public function initialize(param1:Stage) : void
+        {
             this.stage = param1;
             param1.addEventListener(KeyboardEvent.KEY_DOWN,this.handleKeyDown,false,0,true);
             param1.addEventListener(KeyboardEvent.KEY_UP,this.handleKeyUp,false,0,true);
         }
         
-        public function setKeyRepeat(param1:Number, param2:Boolean, param3:uint = 0) : void {
+        public function setKeyRepeat(param1:Number, param2:Boolean, param3:uint = 0) : void
+        {
             var _loc4_:uint = param3 * MAX_KEY_CODES + param1;
             if(param2)
             {
@@ -58,7 +62,8 @@ package scaleform.clik.managers
             }
         }
         
-        public function inputToNav(param1:String, param2:Number, param3:Boolean = false, param4:* = null) : String {
+        public function inputToNav(param1:String, param2:Number, param3:Boolean = false, param4:* = null) : String
+        {
             if(this.externalInputHandler != null)
             {
                 return this.externalInputHandler(param1,param2,param4);
@@ -101,11 +106,13 @@ package scaleform.clik.managers
             return null;
         }
         
-        public function readInput(param1:String, param2:int, param3:Function) : Object {
+        public function readInput(param1:String, param2:int, param3:Function) : Object
+        {
             return null;
         }
         
-        protected function handleKeyDown(param1:KeyboardEvent) : void {
+        protected function handleKeyDown(param1:KeyboardEvent) : void
+        {
             var _loc2_:KeyboardEventEx = param1 as KeyboardEventEx;
             var _loc3_:uint = _loc2_ == null?0:_loc2_.controllerIdx;
             var _loc4_:Number = param1.keyCode;
@@ -125,7 +132,8 @@ package scaleform.clik.managers
             }
         }
         
-        protected function handleKeyUp(param1:KeyboardEvent) : void {
+        protected function handleKeyUp(param1:KeyboardEvent) : void
+        {
             var _loc2_:KeyboardEventEx = param1 as KeyboardEventEx;
             var _loc3_:uint = _loc2_ == null?0:_loc2_.controllerIdx;
             var _loc4_:Number = param1.keyCode;
@@ -134,7 +142,8 @@ package scaleform.clik.managers
             this.handleKeyPress(InputValue.KEY_UP,_loc4_,_loc3_,param1.ctrlKey,param1.altKey,param1.shiftKey);
         }
         
-        protected function handleKeyPress(param1:String, param2:Number, param3:Number, param4:Boolean, param5:Boolean, param6:Boolean) : void {
+        protected function handleKeyPress(param1:String, param2:Number, param3:Number, param4:Boolean, param5:Boolean, param6:Boolean) : void
+        {
             var _loc7_:InputDetails = new InputDetails("key",param2,param1,this.inputToNav("key",param2,param6),param3,param4,param5,param6);
             dispatchEvent(new InputEvent(InputEvent.INPUT,_loc7_));
         }

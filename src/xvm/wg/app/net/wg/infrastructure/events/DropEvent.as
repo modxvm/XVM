@@ -6,7 +6,8 @@ package net.wg.infrastructure.events
     public class DropEvent extends Event
     {
         
-        public function DropEvent(param1:String, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) {
+        public function DropEvent(param1:String, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject)
+        {
             super(param1,bubbles,cancelable);
             this._sender = param2;
             this._receiver = param3;
@@ -27,15 +28,18 @@ package net.wg.infrastructure.events
         
         private var _draggedItem:InteractiveObject = null;
         
-        public function get draggedItem() : InteractiveObject {
+        public function get draggedItem() : InteractiveObject
+        {
             return this._draggedItem;
         }
         
-        public function get sender() : InteractiveObject {
+        public function get sender() : InteractiveObject
+        {
             return this._sender;
         }
         
-        public function get receiver() : InteractiveObject {
+        public function get receiver() : InteractiveObject
+        {
             return this._receiver;
         }
     }

@@ -5,7 +5,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
     public class HistoricalAmmoVO extends DAAPIDataClass
     {
         
-        public function HistoricalAmmoVO(param1:Object) {
+        public function HistoricalAmmoVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -17,7 +18,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
         
         public var battleID:int = -1;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:Object = null;
             var _loc5_:ShellVO = null;
@@ -35,12 +37,14 @@ package net.wg.gui.lobby.hangar.maintenance.data
             return true;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeShells();
             super.onDispose();
         }
         
-        private function disposeShells() : void {
+        private function disposeShells() : void
+        {
             var _loc1_:ShellVO = null;
             if(this.shells)
             {

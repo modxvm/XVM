@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.constants
     public class NamedLabels extends Object
     {
         
-        public function NamedLabels() {
+        public function NamedLabels()
+        {
             super();
         }
         

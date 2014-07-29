@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile
     public class ProfileSectionsImporter extends MovieClip
     {
         
-        public function ProfileSectionsImporter() {
+        public function ProfileSectionsImporter()
+        {
             super();
         }
     }

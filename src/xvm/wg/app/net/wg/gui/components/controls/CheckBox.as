@@ -13,7 +13,8 @@ package net.wg.gui.components.controls
     public class CheckBox extends scaleform.clik.controls.CheckBox implements ISoundable, ITextContainer
     {
         
-        public function CheckBox() {
+        public function CheckBox()
+        {
             super();
         }
         
@@ -41,7 +42,8 @@ package net.wg.gui.components.controls
         
         private var _infoIco:InfoIcon = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(App.soundMgr)
             {
                 App.soundMgr.removeSoundHdlrs(this);
@@ -53,64 +55,77 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        public final function getSoundType() : String {
+        public final function getSoundType() : String
+        {
             return this.soundType;
         }
         
-        public final function getSoundId() : String {
+        public final function getSoundId() : String
+        {
             return this.soundId;
         }
         
-        public function enableDynamicFrameUpdating() : void {
+        public function enableDynamicFrameUpdating() : void
+        {
             this._dynamicFrameUpdating = true;
         }
         
-        public final function getStateOverSnd() : String {
+        public final function getStateOverSnd() : String
+        {
             return SoundManagerStates.SND_OVER;
         }
         
-        public final function getStateOutSnd() : String {
+        public final function getStateOutSnd() : String
+        {
             return SoundManagerStates.SND_OUT;
         }
         
-        public final function getStatePressSnd() : String {
+        public final function getStatePressSnd() : String
+        {
             return SoundManagerStates.SND_PRESS;
         }
         
-        override public function set label(param1:String) : void {
+        override public function set label(param1:String) : void
+        {
             if(!this._dynamicFrameUpdating || param1.length > 0)
             {
                 super.label = param1;
             }
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             if(!(_label == null) && !(textField == null))
             {
                 textField.text = _label;
             }
         }
         
-        override public function set data(param1:Object) : void {
+        override public function set data(param1:Object) : void
+        {
             if(!this._dynamicFrameUpdating || param1.length > 0)
             {
                 super.data = param1;
             }
         }
         
-        public function set textAlign(param1:String) : void {
+        public function set textAlign(param1:String) : void
+        {
             throw new AbstractException("setter CheckBox::textAlign" + Errors.ABSTRACT_INVOKE);
         }
         
-        public function get textAlign() : String {
+        public function get textAlign() : String
+        {
             return textField.getTextFormat().align;
         }
         
-        public function get textFont() : String {
+        public function get textFont() : String
+        {
             return this._textFont;
         }
         
-        public function set textFont(param1:String) : void {
+        public function set textFont(param1:String) : void
+        {
             if(this._textFont == param1)
             {
                 return;
@@ -119,11 +134,13 @@ package net.wg.gui.components.controls
             invalidate(this.TEXT_FORMAT_INV);
         }
         
-        public function get textSize() : Number {
+        public function get textSize() : Number
+        {
             return this._textSize;
         }
         
-        public function set textSize(param1:Number) : void {
+        public function set textSize(param1:Number) : void
+        {
             if(this._textSize == param1)
             {
                 return;
@@ -132,11 +149,13 @@ package net.wg.gui.components.controls
             invalidate(this.TEXT_FORMAT_INV);
         }
         
-        public function get textColor() : Number {
+        public function get textColor() : Number
+        {
             return this._textColor;
         }
         
-        public function set textColor(param1:Number) : void {
+        public function set textColor(param1:Number) : void
+        {
             if(this._textColor == param1)
             {
                 return;
@@ -145,11 +164,13 @@ package net.wg.gui.components.controls
             invalidate(this.TEXT_FORMAT_INV);
         }
         
-        public function get disabledTextAlpha() : Number {
+        public function get disabledTextAlpha() : Number
+        {
             return this._disabledTextAlpha;
         }
         
-        public function set disabledTextAlpha(param1:Number) : void {
+        public function set disabledTextAlpha(param1:Number) : void
+        {
             if(this._disabledTextAlpha == param1)
             {
                 return;
@@ -158,18 +179,21 @@ package net.wg.gui.components.controls
             invalidate(this.TEXT_FORMAT_INV);
         }
         
-        public function get soundType() : String {
+        public function get soundType() : String
+        {
             return this._soundType;
         }
         
-        public function set soundType(param1:String) : void {
+        public function set soundType(param1:String) : void
+        {
             if((param1) && !(param1 == this._soundType))
             {
                 this._soundType = param1;
             }
         }
         
-        public function set infoIcoType(param1:String) : void {
+        public function set infoIcoType(param1:String) : void
+        {
             if(param1 == this._infoIcoType)
             {
                 return;
@@ -178,11 +202,13 @@ package net.wg.gui.components.controls
             invalidate(this.INFO_INV);
         }
         
-        public function get infoIcoType() : String {
+        public function get infoIcoType() : String
+        {
             return this._infoIcoType;
         }
         
-        public function set toolTip(param1:String) : void {
+        public function set toolTip(param1:String) : void
+        {
             if((param1) && !(param1 == this._toolTip))
             {
                 this._toolTip = param1;
@@ -190,17 +216,20 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get toolTip() : String {
+        public function get toolTip() : String
+        {
             return this._toolTip;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             buttonMode = enabled;
             mouseEnabled = true;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             buttonMode = enabled;
             mouseEnabled = true;
@@ -210,7 +239,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:TextFormat = null;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
@@ -248,7 +278,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function repositionInfoIcon() : void {
+        private function repositionInfoIcon() : void
+        {
             if(this._infoIco)
             {
                 this._infoIco.x = this.x + textField.x + textField.textWidth + InfoIcon.CHECK_BOX_MARGIN;
@@ -256,7 +287,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function createInfoIco() : void {
+        private function createInfoIco() : void
+        {
             if(!owner && (parent))
             {
                 owner = parent as UIComponent;
@@ -265,7 +297,8 @@ package net.wg.gui.components.controls
             owner.addChild(this._infoIco);
         }
         
-        private function removeInfoIco() : void {
+        private function removeInfoIco() : void
+        {
             if(this._infoIco)
             {
                 this._infoIco.dispose();
@@ -274,7 +307,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             super.updateAfterStateChange();
             invalidate(this.TEXT_FORMAT_INV);
         }

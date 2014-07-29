@@ -5,7 +5,8 @@ package net.wg.gui.lobby.techtree.data.state
     public class UnlockedStateItem extends ResearchStateItem
     {
         
-        public function UnlockedStateItem(param1:StateProperties, param2:StateProperties, param3:StateProperties, param4:StateProperties) {
+        public function UnlockedStateItem(param1:StateProperties, param2:StateProperties, param3:StateProperties, param4:StateProperties)
+        {
             super(NodeState.UNLOCKED,param1);
             this.autoUnlocked = param2;
             this.rootNotInventory = param3;
@@ -18,7 +19,8 @@ package net.wg.gui.lobby.techtree.data.state
         
         private var rootInInventory:StateProperties;
         
-        override public function resolveProps(param1:Number, param2:Number, param3:Boolean = false) : StateProperties {
+        override public function resolveProps(param1:Number, param2:Number, param3:Boolean = false) : StateProperties
+        {
             var _loc4_:StateProperties = super.resolveProps(param1,param2,param3);
             if((param2 & NodeState.UNLOCKED) > 0)
             {

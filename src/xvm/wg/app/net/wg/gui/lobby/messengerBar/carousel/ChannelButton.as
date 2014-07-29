@@ -7,19 +7,22 @@ package net.wg.gui.lobby.messengerBar.carousel
     public class ChannelButton extends BlinkingButton implements IDynamicContent
     {
         
-        public function ChannelButton() {
+        public function ChannelButton()
+        {
             super();
             constraintsDisabled = true;
             _iconOffsetLeft = 1;
             _iconOffsetTop = 1;
         }
         
-        override public function set label(param1:String) : void {
+        override public function set label(param1:String) : void
+        {
             super.label = param1;
             tooltip = "";
         }
         
-        override public function set iconSource(param1:String) : void {
+        override public function set iconSource(param1:String) : void
+        {
             if(iconSource != param1)
             {
                 super.iconSource = param1;
@@ -27,15 +30,18 @@ package net.wg.gui.lobby.messengerBar.carousel
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             var _loc1_:String = iconSource?"icon_":"";
             if(blinking)
             {
@@ -44,11 +50,13 @@ package net.wg.gui.lobby.messengerBar.carousel
             return Vector.<String>(_selected?["selected_",_loc1_]:[_loc1_]);
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             super.updateAfterStateChange();
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             if(tooltip)
             {
@@ -56,12 +64,14 @@ package net.wg.gui.lobby.messengerBar.carousel
             }
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             super.handleMouseRollOut(param1);
             App.toolTipMgr.hide();
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             if(!(_label == null) && !(textField == null))
             {
                 textField.text = _label;
@@ -69,7 +79,8 @@ package net.wg.gui.lobby.messengerBar.carousel
             }
         }
         
-        private function truncateText() : void {
+        private function truncateText() : void
+        {
             var _loc1_:String = null;
             var _loc2_:String = null;
             var _loc3_:uint = 0;

@@ -3,7 +3,8 @@ package net.wg.gui.lobby.fortifications.data
     public class FortInvalidationType extends Object
     {
         
-        public function FortInvalidationType() {
+        public function FortInvalidationType()
+        {
             super();
         }
         

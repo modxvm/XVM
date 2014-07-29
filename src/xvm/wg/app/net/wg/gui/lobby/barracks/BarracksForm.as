@@ -22,7 +22,8 @@ package net.wg.gui.lobby.barracks
     public class BarracksForm extends UIComponent
     {
         
-        public function BarracksForm() {
+        public function BarracksForm()
+        {
             super();
         }
         
@@ -34,7 +35,8 @@ package net.wg.gui.lobby.barracks
         
         private static var LOCATIONFILTER_ALL:String = "None";
         
-        private static function showTooltip(param1:ListEvent) : void {
+        private static function showTooltip(param1:ListEvent) : void
+        {
             App.toolTipMgr.hide();
             if(param1.itemData.empty)
             {
@@ -51,7 +53,8 @@ package net.wg.gui.lobby.barracks
             
         }
         
-        private static function hideTooltip(param1:ListEvent) : void {
+        private static function hideTooltip(param1:ListEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -95,7 +98,8 @@ package net.wg.gui.lobby.barracks
         
         private var _nationID:String = "";
         
-        public function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Object, param6:Number, param7:Array) : void {
+        public function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Object, param6:Number, param7:Array) : void
+        {
             var _loc8_:* = NaN;
             this.tankmenCountTF.text = MENU.BARRACKS_TANKMENCOUNT;
             this.tankmenCountTF.replaceText(this.tankmenCountTF.text.indexOf("{"),this.tankmenCountTF.text.indexOf("}") + 1,String(param7.length));
@@ -103,17 +107,15 @@ package net.wg.gui.lobby.barracks
             if(param3 < param2)
             {
                 _loc8_ = param2 - param3;
-                param7.push({
-                    "empty":true,
-                    "freePlaces":_loc8_
-                });
+                param7.push({"empty":true,
+                "freePlaces":_loc8_
+            });
         }
-        param7.push({
-            "buy":true,
-            "price":param4,
-            "actionPriceData":param5,
-            "count":param6
-        });
+        param7.push({"buy":true,
+        "price":param4,
+        "actionPriceData":param5,
+        "count":param6
+    });
     this.tankmenTileList.dataProvider = new DataProvider(param7);
     this.tankmenTileList.validateNow();
     this.tankmenTileList.selectedIndex = -1;
@@ -122,7 +124,8 @@ package net.wg.gui.lobby.barracks
     this.placesCountTF.replaceText(this.placesCountTF.text.indexOf("{"),this.placesCountTF.text.indexOf("}") + 1,String(param2));
 }
 
-public function as_updateTanksList(param1:Array) : void {
+public function as_updateTanksList(param1:Array) : void
+{
     this.tank.dataProvider = new DataProvider(param1);
     this.tank.selectedIndex = 0;
     if(param1.length > 0)
@@ -137,7 +140,8 @@ public function as_updateTanksList(param1:Array) : void {
     this.tank.enabled = param1.length > 0;
 }
 
-public function as_setTankmenFilter(param1:Number, param2:String, param3:String, param4:String, param5:String) : void {
+public function as_setTankmenFilter(param1:Number, param2:String, param3:String, param4:String, param5:String) : void
+{
     this._nation = param1;
     this._role = param2;
     this._tankType = param3;
@@ -146,61 +150,46 @@ public function as_setTankmenFilter(param1:Number, param2:String, param3:String,
     invalidate(INVALIDATE_TANKMEN_FILTRER);
 }
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
     super.configUI();
     this.tank.addEventListener(ListEvent.INDEX_CHANGE,this.onFilterTankChange);
     this.roleTF.text = MENU.BARRACKS_MENU_ROLEFILTER_TEXTFIELD;
-    this.roleButtonBar.dataProvider = new DataProvider([{
-        "label":MENU.BARRACKS_MENU_ROLEFILTER_ALL,
-        "data":RolesState.ALL
-    },{
-    "label":MENU.BARRACKS_MENU_ROLEFILTER_COMMANDER,
-    "data":RolesState.COMANDER
-},{
-"label":MENU.BARRACKS_MENU_ROLEFILTER_GUNNER,
+    this.roleButtonBar.dataProvider = new DataProvider([{"label":MENU.BARRACKS_MENU_ROLEFILTER_ALL,
+    "data":RolesState.ALL
+},{"label":MENU.BARRACKS_MENU_ROLEFILTER_COMMANDER,
+"data":RolesState.COMANDER
+},{"label":MENU.BARRACKS_MENU_ROLEFILTER_GUNNER,
 "data":RolesState.GUNNER
-},{
-"label":MENU.BARRACKS_MENU_ROLEFILTER_LOADER,
+},{"label":MENU.BARRACKS_MENU_ROLEFILTER_LOADER,
 "data":RolesState.LOADER
-},{
-"label":MENU.BARRACKS_MENU_ROLEFILTER_DRIVER,
+},{"label":MENU.BARRACKS_MENU_ROLEFILTER_DRIVER,
 "data":RolesState.DRIVER
-},{
-"label":MENU.BARRACKS_MENU_ROLEFILTER_RADIOMAN,
+},{"label":MENU.BARRACKS_MENU_ROLEFILTER_RADIOMAN,
 "data":RolesState.RADIOMAN
 }]);
 this.tankTypeTF.text = MENU.BARRACKS_MENU_TANKTYPEFILTER_TEXTFIELD;
-this.tankTypeButtonBar.dataProvider = new DataProvider([{
-"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_ALL,
+this.tankTypeButtonBar.dataProvider = new DataProvider([{"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_ALL,
 "data":VehicleTypes.ALL
-},{
-"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_LIGHTTANK,
+},{"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_LIGHTTANK,
 "data":VehicleTypes.LIGHT_TANK
-},{
-"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_MEDIUMTANK,
+},{"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_MEDIUMTANK,
 "data":VehicleTypes.MEDIUM_TANK
-},{
-"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_HEAVYTANK,
+},{"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_HEAVYTANK,
 "data":VehicleTypes.HEAVY_TANK
-},{
-"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_AT_SPG,
+},{"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_AT_SPG,
 "data":VehicleTypes.AT_SPG
-},{
-"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_SPG,
+},{"label":DIALOGS.RECRUITWINDOW_VEHICLECLASSDROPDOWN_SPG,
 "data":VehicleTypes.SPG
 }]);
 this.locationTF.text = MENU.BARRACKS_MENU_LOCATIONFILTER_TEXTFIELD;
-this.locationButtonBar.dataProvider = new DataProvider([{
-"label":"",
+this.locationButtonBar.dataProvider = new DataProvider([{"label":"",
 "data":""
-},{
-"label":MENU.BARRACKS_MENU_LOCATIONFILTER_TANKS,
+},{"label":MENU.BARRACKS_MENU_LOCATIONFILTER_TANKS,
 "data":LOCATIONFILTER_TANKS
-},{
-"label":MENU.BARRACKS_MENU_LOCATIONFILTER_BARRACKS,
+},{"label":MENU.BARRACKS_MENU_LOCATIONFILTER_BARRACKS,
 "data":LOCATIONFILTER_BARRACKS
-},{
-"label":MENU.BARRACKS_MENU_LOCATIONFILTER_ALL,
+},{"label":MENU.BARRACKS_MENU_LOCATIONFILTER_ALL,
 "data":LOCATIONFILTER_ALL
 }]);
 this.tankmenTileList.addEventListener(ListEvent.ITEM_ROLL_OVER,showTooltip);
@@ -208,7 +197,8 @@ this.tankmenTileList.addEventListener(ListEvent.ITEM_ROLL_OUT,hideTooltip);
 this.tankmenTileList.addEventListener(ListEvent.ITEM_PRESS,hideTooltip);
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
 App.toolTipMgr.hide();
 this.tankmenTileList.removeEventListener(ListEvent.ITEM_ROLL_OVER,showTooltip);
 this.tankmenTileList.removeEventListener(ListEvent.ITEM_ROLL_OUT,hideTooltip);
@@ -248,14 +238,15 @@ this._nationID = null;
 super.onDispose();
 }
 
-public function onPopulate() : void {
-this.nationDDM.dataProvider = new DataProvider([{
-"label":MENU.NATIONS_ALL,
+public function onPopulate() : void
+{
+this.nationDDM.dataProvider = new DataProvider([{"label":MENU.NATIONS_ALL,
 "data":-1
 }].concat(App.utils.nations.getNationsData()));
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
 var _loc1_:* = NaN;
 var _loc2_:* = 0;
 var _loc3_:* = NaN;
@@ -321,7 +312,8 @@ this.checkFilters();
 }
 }
 
-private function updateSelectedIndex(param1:Object, param2:Object) : void {
+private function updateSelectedIndex(param1:Object, param2:Object) : void
+{
 var _loc5_:* = false;
 var _loc6_:String = null;
 if(App.instance)
@@ -344,11 +336,13 @@ _loc4_++;
 }
 }
 
-private function onFilterChange(param1:Event) : void {
+private function onFilterChange(param1:Event) : void
+{
 this.checkFilters();
 }
 
-private function checkFilters() : void {
+private function checkFilters() : void
+{
 var _loc1_:Number = this.nationDDM.dataProvider[this.nationDDM.selectedIndex].data;
 var _loc2_:String = this.roleButtonBar.dataProvider[this.roleButtonBar.selectedIndex].data;
 var _loc3_:String = this.tankTypeButtonBar.dataProvider[this.tankTypeButtonBar.selectedIndex].data;
@@ -364,8 +358,7 @@ else
 _loc6_ = _loc4_.typeID;
 _loc5_ = _loc4_.nationID;
 }
-var _loc7_:Object = {
-"nation":_loc1_,
+var _loc7_:Object = {"nation":_loc1_,
 "role":_loc2_,
 "tankType":_loc3_,
 "location":_loc6_,
@@ -374,17 +367,20 @@ var _loc7_:Object = {
 dispatchEvent(new CrewEvent(CrewEvent.ON_CHANGE_BARRACKS_FILTER,_loc7_));
 }
 
-private function tankListInvalidate(param1:Event) : void {
+private function tankListInvalidate(param1:Event) : void
+{
 this.checkFilters();
 this.onInvalidateTanksList();
 this.checkFilters();
 }
 
-private function onInvalidateTanksList() : void {
+private function onInvalidateTanksList() : void
+{
 dispatchEvent(new CrewEvent(CrewEvent.ON_INVALID_TANK_LIST));
 }
 
-private function onFilterTankChange(param1:Event) : void {
+private function onFilterTankChange(param1:Event) : void
+{
 this.locationButtonBar.selectedIndex = 0;
 this.locationButtonBar.dataProvider[0].data = this.tank.dataProvider[this.tank.selectedIndex].data;
 this.checkFilters();

@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class HistoricalBattlesListWindowMeta extends PrequeueWindow
     {
         
-        public function HistoricalBattlesListWindowMeta() {
+        public function HistoricalBattlesListWindowMeta()
+        {
             super();
         }
         
@@ -18,22 +19,26 @@ package net.wg.infrastructure.base.meta.impl
         
         public var showFullDescription:Function = null;
         
-        public function onBattleSelectedS(param1:Number) : void {
+        public function onBattleSelectedS(param1:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.onBattleSelected,"onBattleSelected" + Errors.CANT_NULL);
             this.onBattleSelected(param1);
         }
         
-        public function onVehicleSelectedS(param1:Number) : void {
+        public function onVehicleSelectedS(param1:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.onVehicleSelected,"onVehicleSelected" + Errors.CANT_NULL);
             this.onVehicleSelected(param1);
         }
         
-        public function onPriceSelectedS(param1:Number) : void {
+        public function onPriceSelectedS(param1:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.onPriceSelected,"onPriceSelected" + Errors.CANT_NULL);
             this.onPriceSelected(param1);
         }
         
-        public function showFullDescriptionS() : void {
+        public function showFullDescriptionS() : void
+        {
             App.utils.asserter.assertNotNull(this.showFullDescription,"showFullDescription" + Errors.CANT_NULL);
             this.showFullDescription();
         }

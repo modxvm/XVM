@@ -7,7 +7,8 @@ package net.wg.infrastructure.base
     public class DefaultWindowGeometry extends Object implements IWindowGeometry
     {
         
-        public function DefaultWindowGeometry(param1:int = 0) {
+        public function DefaultWindowGeometry(param1:int = 0)
+        {
             super();
             this.minY = param1;
         }
@@ -16,16 +17,19 @@ package net.wg.infrastructure.base
         
         private var minY:int = 0;
         
-        public function canOverwrite() : Boolean {
+        public function canOverwrite() : Boolean
+        {
             return true;
         }
         
-        public function setSize(param1:IWindow) : Boolean {
+        public function setSize(param1:IWindow) : Boolean
+        {
             param1.updateSize(param1.getMinWidth(),param1.getMinHeight());
             return true;
         }
         
-        public function setPosition(param1:IWindow) : Boolean {
+        public function setPosition(param1:IWindow) : Boolean
+        {
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
             var _loc2_:IAbstractWindowView = param1.windowContent;

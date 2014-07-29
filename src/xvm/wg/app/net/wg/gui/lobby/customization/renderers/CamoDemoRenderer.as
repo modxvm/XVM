@@ -9,7 +9,8 @@ package net.wg.gui.lobby.customization.renderers
     public class CamoDemoRenderer extends CamouflageItemRenderer
     {
         
-        public function CamoDemoRenderer() {
+        public function CamoDemoRenderer()
+        {
             super();
             soundId = SoundTypes.CAMOUFLAGE_DEMO_RENDERER;
             useHandCursorForce = true;
@@ -23,7 +24,7 @@ package net.wg.gui.lobby.customization.renderers
         
         public static var OFF:String = "off";
         
-        public static var KINDS:Array;
+        public static var KINDS:Array = [WINTER,SUMMER,DESERT];
         
         public var kindMc:MovieClip;
         
@@ -35,24 +36,29 @@ package net.wg.gui.lobby.customization.renderers
         
         private var _kindDirty:Boolean = false;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             this.showKind(!data || !data.id);
         }
         
-        public function get kind() : String {
+        public function get kind() : String
+        {
             return this._kind;
         }
         
-        public function set kind(param1:String) : void {
+        public function set kind(param1:String) : void
+        {
             this._kind = param1;
             this._kindDirty = true;
         }
         
-        override protected function checkTooltip() : void {
+        override protected function checkTooltip() : void
+        {
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = false;
             super.draw();
@@ -112,13 +118,15 @@ package net.wg.gui.lobby.customization.renderers
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.timeLeftFld.mouseEnabled = false;
             freeTF.text = VEHICLE_CUSTOMIZATION.IGR_FREE_CUT;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.kindMc = null;
             this.timeLeftFld = null;
             if(this.costFieldNew)
@@ -129,7 +137,8 @@ package net.wg.gui.lobby.customization.renderers
             super.onDispose();
         }
         
-        override protected function setState(param1:String) : void {
+        override protected function setState(param1:String) : void
+        {
             super.setState(param1);
             if(!current && !selected)
             {
@@ -137,7 +146,8 @@ package net.wg.gui.lobby.customization.renderers
             }
         }
         
-        private function showKind(param1:Boolean) : void {
+        private function showKind(param1:Boolean) : void
+        {
             this.kindMc.visible = !(this.kind == OFF) && (param1);
         }
     }

@@ -6,7 +6,8 @@ package net.wg.gui.components.controls
     public class IconTextButton extends IconButton
     {
         
-        public function IconTextButton() {
+        public function IconTextButton()
+        {
             super();
             soundType = SoundTypes.ICON_TXT_BTN;
         }
@@ -15,14 +16,16 @@ package net.wg.gui.components.controls
         
         protected var _caps:Boolean = true;
         
-        public function set icon(param1:String) : void {
+        public function set icon(param1:String) : void
+        {
             if(iconSource != "../maps/icons/buttons/" + param1)
             {
                 iconSource = "../maps/icons/buttons/" + param1;
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if((iconSource) && iconSource.indexOf("../maps/icons/buttons/") == -1)
             {
                 iconSource = "../maps/icons/buttons/" + iconSource;
@@ -30,7 +33,8 @@ package net.wg.gui.components.controls
             super.configUI();
         }
         
-        override protected function configIcon() : void {
+        override protected function configIcon() : void
+        {
             if(loader)
             {
                 loader.x = _iconOffsetLeft;
@@ -40,11 +44,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get caps() : Boolean {
+        public function get caps() : Boolean
+        {
             return this._caps;
         }
         
-        public function set caps(param1:Boolean) : void {
+        public function set caps(param1:Boolean) : void
+        {
             if(this._caps == param1)
             {
                 return;
@@ -53,13 +59,15 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.alertMC.dispose();
             this.alertMC = null;
             super.onDispose();
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             var _loc1_:String = null;
             if(this.caps)
             {

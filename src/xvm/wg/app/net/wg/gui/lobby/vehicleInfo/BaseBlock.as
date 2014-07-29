@@ -6,13 +6,15 @@ package net.wg.gui.lobby.vehicleInfo
     public class BaseBlock extends Sprite
     {
         
-        public function BaseBlock() {
+        public function BaseBlock()
+        {
             super();
         }
         
         public var baseName:TextField;
         
-        public function setData(param1:String) : void {
+        public function setData(param1:String) : void
+        {
             this.baseName.text = param1;
         }
     }

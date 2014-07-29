@@ -9,7 +9,8 @@ package net.wg.gui.lobby.fortifications.cmp.impl
     public class FortWelcomeCommanderContent extends UIComponent
     {
         
-        public function FortWelcomeCommanderContent() {
+        public function FortWelcomeCommanderContent()
+        {
             super();
             var _loc1_:ILocale = App.utils.locale;
             this.title1.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION1_TITLE);
@@ -37,13 +38,15 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         
         public var button:SoundButtonEx;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             var _loc1_:ILocale = App.utils.locale;
             this.windowTitle.label = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_TITLE);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.windowTitle = null;
             this.title1 = null;
             this.title2 = null;

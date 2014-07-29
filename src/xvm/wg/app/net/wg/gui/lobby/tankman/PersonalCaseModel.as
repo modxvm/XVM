@@ -3,7 +3,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseModel extends Object
     {
         
-        public function PersonalCaseModel() {
+        public function PersonalCaseModel()
+        {
             this.nativeVehicle = new NativeVehicle();
             this.skills = [];
             super();
@@ -51,7 +52,8 @@ package net.wg.gui.lobby.tankman
 class NativeVehicle extends Object
 {
     
-    function NativeVehicle() {
+    function NativeVehicle()
+    {
         super();
     }
     

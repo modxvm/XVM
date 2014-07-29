@@ -16,18 +16,21 @@ package net.wg.gui.cyberSport
     public class CyberSportMainWindow extends CyberSportMainWindowMeta implements ICyberSportMainWindowMeta
     {
         
-        public function CyberSportMainWindow() {
+        public function CyberSportMainWindow()
+        {
             super();
             showWindowBg = false;
             canMinimize = true;
             visible = true;
         }
         
-        override protected function getWindowTitle() : String {
+        override protected function getWindowTitle() : String
+        {
             return CYBERSPORT.WINDOW_TITLE;
         }
         
-        override protected function updateFocus() : void {
+        override protected function updateFocus() : void
+        {
             var _loc1_:IChannelComponentHolder = getCurrentView() as IChannelComponentHolder;
             if((_loc1_) && (isChatFocusNeeded()))
             {
@@ -55,7 +58,8 @@ package net.wg.gui.cyberSport
             
         }
         
-        override protected function onViewLoadRequest(param1:RallyViewsEvent) : void {
+        override protected function onViewLoadRequest(param1:RallyViewsEvent) : void
+        {
             if(!param1.data)
             {
                 return;
@@ -78,7 +82,8 @@ package net.wg.gui.cyberSport
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.handled)
             {
                 return;

@@ -10,10 +10,10 @@ package net.wg.gui.components.popOvers
     public class PopoverInternalLayout extends BaseLayout
     {
         
-        public function PopoverInternalLayout() {
+        public function PopoverInternalLayout()
+        {
             this._buttonPadding = new Point(5,5);
             this._bgFormPadding = new Padding();
-            this._bgInternalPadding = new Padding(59);
             this._bgFormInternalPadding = new Padding(16,0,20,0);
             super();
             this._contentPadding = new PopoverContentPadding();
@@ -30,11 +30,12 @@ package net.wg.gui.components.popOvers
         
         private var _bgFormPadding:Padding;
         
-        protected var _bgInternalPadding:Padding;
+        protected var _bgInternalPadding:Padding = new Padding(59);
         
         protected var _bgFormInternalPadding:Padding;
         
-        override public function invokeLayout() : Object {
+        override public function invokeLayout() : Object
+        {
             var _loc1_:PopOver = null;
             var _loc2_:IUIComponent = null;
             var _loc3_:TextField = null;
@@ -92,7 +93,8 @@ package net.wg.gui.components.popOvers
             return null;
         }
         
-        protected function updateArrowPosition(param1:PopOver, param2:int, param3:int) : void {
+        protected function updateArrowPosition(param1:PopOver, param2:int, param3:int) : void
+        {
             if(param2 == PopOverConst.ARROW_LEFT)
             {
                 param1.arrowLeft.y = param3 + this._bgInternalPadding.top;
@@ -116,35 +118,43 @@ package net.wg.gui.components.popOvers
             
         }
         
-        public function get contentPadding() : PopoverContentPadding {
+        public function get contentPadding() : PopoverContentPadding
+        {
             return this._contentPadding;
         }
         
-        public function set contentPadding(param1:PopoverContentPadding) : void {
+        public function set contentPadding(param1:PopoverContentPadding) : void
+        {
             this._contentPadding = param1;
         }
         
-        public function get bgInternalPadding() : Padding {
+        public function get bgInternalPadding() : Padding
+        {
             return this._bgInternalPadding;
         }
         
-        public function get bgFormInternalPadding() : Padding {
+        public function get bgFormInternalPadding() : Padding
+        {
             return this._bgFormInternalPadding;
         }
         
-        public function get bgFormPadding() : Padding {
+        public function get bgFormPadding() : Padding
+        {
             return this._bgFormPadding;
         }
         
-        public function set bgFormPadding(param1:Padding) : void {
+        public function set bgFormPadding(param1:Padding) : void
+        {
             this._bgFormPadding = param1;
         }
         
-        public function get buttonPadding() : Point {
+        public function get buttonPadding() : Point
+        {
             return this._buttonPadding;
         }
         
-        public function set buttonPadding(param1:Point) : void {
+        public function set buttonPadding(param1:Point) : void
+        {
             this._buttonPadding = param1;
         }
     }

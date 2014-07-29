@@ -7,16 +7,19 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class StatisticsDashLineTextItemIRenderer extends ProfileDashLineTextItem
     {
         
-        public function StatisticsDashLineTextItemIRenderer() {
+        public function StatisticsDashLineTextItemIRenderer()
+        {
             super();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             width = 280;
         }
         
-        public function set data(param1:DetailedStatisticsLabelDataVO) : void {
+        public function set data(param1:DetailedStatisticsLabelDataVO) : void
+        {
             var _loc2_:StatisticsTooltipDataVO = null;
             if(param1)
             {
@@ -40,7 +43,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             }
         }
         
-        override protected function applySizeChanges() : void {
+        override protected function applySizeChanges() : void
+        {
             super.applySizeChanges();
             dashLine.validateNow();
         }

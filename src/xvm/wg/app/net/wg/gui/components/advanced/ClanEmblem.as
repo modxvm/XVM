@@ -7,7 +7,8 @@ package net.wg.gui.components.advanced
     public class ClanEmblem extends UIComponent
     {
         
-        public function ClanEmblem() {
+        public function ClanEmblem()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.components.advanced
         
         public var loader:UILoaderAlt = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.loader)
             {
                 this.loader.dispose();
@@ -29,7 +31,8 @@ package net.wg.gui.components.advanced
             super.onDispose();
         }
         
-        public function setImage(param1:String) : void {
+        public function setImage(param1:String) : void
+        {
             if(param1)
             {
                 this.loader.source = "img://" + param1;
@@ -44,7 +47,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.default_icon_mc.visible = false;
         }

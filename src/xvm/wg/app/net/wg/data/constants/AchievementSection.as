@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class AchievementSection extends Object
     {
         
-        public function AchievementSection() {
+        public function AchievementSection()
+        {
             super();
         }
         

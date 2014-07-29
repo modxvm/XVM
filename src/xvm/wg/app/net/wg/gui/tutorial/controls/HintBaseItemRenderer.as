@@ -6,31 +6,37 @@ package net.wg.gui.tutorial.controls
     public class HintBaseItemRenderer extends UIComponent
     {
         
-        public function HintBaseItemRenderer() {
+        public function HintBaseItemRenderer()
+        {
             super();
         }
         
         protected var _data:Object;
         
-        public function get data() : Object {
+        public function get data() : Object
+        {
             return this._data;
         }
         
-        public function set data(param1:Object) : void {
+        public function set data(param1:Object) : void
+        {
             this._data = param1;
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this._data = null;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this._data))
             {
@@ -38,7 +44,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        protected function drawData() : void {
+        protected function drawData() : void
+        {
         }
     }
 }

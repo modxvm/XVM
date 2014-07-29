@@ -13,7 +13,8 @@ package net.wg.infrastructure.managers.utils.impl
     public class HelpLayout extends Object implements IHelpLayout
     {
         
-        public function HelpLayout() {
+        public function HelpLayout()
+        {
             super();
         }
         
@@ -21,7 +22,8 @@ package net.wg.infrastructure.managers.utils.impl
         
         private var _modalBackground:DisplayObject = null;
         
-        public function create(param1:DisplayObject, param2:Object, param3:DisplayObjectContainer) : DisplayObject {
+        public function create(param1:DisplayObject, param2:Object, param3:DisplayObjectContainer) : DisplayObject
+        {
             var _loc4_:IUtils = App.utils;
             var _loc5_:IAssertable = _loc4_.asserter;
             _loc5_.assertNotNull(param2.text,"initproperties.text" + Errors.CANT_NULL);
@@ -32,13 +34,13 @@ package net.wg.infrastructure.managers.utils.impl
             return _loc7_;
         }
         
-        public function createBackground() : void {
+        public function createBackground() : void
+        {
             this.destroyBackground();
-            this._modalBackground = App.utils.popupMgr.create(Linkages.POPUP_MODAL,{
-                "x":0,
-                "y":0,
-                "alpha":0.5
-            });
+            this._modalBackground = App.utils.popupMgr.create(Linkages.POPUP_MODAL,{"x":0,
+            "y":0,
+            "alpha":0.5
+        });
         var _loc1_:Stage = App.instance.stage;
         if(this._modalBackground != null)
         {
@@ -47,7 +49,8 @@ package net.wg.infrastructure.managers.utils.impl
         }
     }
     
-    public function destroyBackground() : void {
+    public function destroyBackground() : void
+    {
         if(this._modalBackground != null)
         {
             if(this._modalBackground.parent)
@@ -58,11 +61,13 @@ package net.wg.infrastructure.managers.utils.impl
         }
     }
     
-    public function isShowed() : Boolean {
+    public function isShowed() : Boolean
+    {
         return this._modalBackground == null;
     }
     
-    public function destroy(param1:DisplayObject) : void {
+    public function destroy(param1:DisplayObject) : void
+    {
         var _loc2_:IUtils = App.utils;
         var _loc3_:Function = _loc2_.asserter.assertNotNull;
         _loc3_(param1,"helpLayoutControl" + Errors.CANT_NULL);
@@ -72,19 +77,20 @@ package net.wg.infrastructure.managers.utils.impl
         }
     }
     
-    public function dispose() : void {
+    public function dispose() : void
+    {
         this.destroyBackground();
     }
     
-    public function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number) : Object {
-        return {
-            "borderWidth":param1,
-            "borderHeight":param2,
-            "direction":param3,
-            "text":param4,
-            "x":param5,
-            "y":param6
-        };
+    public function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number) : Object
+    {
+        return {"borderWidth":param1,
+        "borderHeight":param2,
+        "direction":param3,
+        "text":param4,
+        "x":param5,
+        "y":param6
+    };
 }
 }
 }

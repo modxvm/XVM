@@ -5,7 +5,8 @@ package net.wg.data.VO
     public class ItemDialogSettingsVO extends DAAPIDataClass
     {
         
-        public function ItemDialogSettingsVO(param1:Object) {
+        public function ItemDialogSettingsVO(param1:Object)
+        {
             super(param1);
         }
         

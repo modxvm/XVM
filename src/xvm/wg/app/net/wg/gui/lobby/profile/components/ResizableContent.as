@@ -7,7 +7,8 @@ package net.wg.gui.lobby.profile.components
     public class ResizableContent extends UIComponent implements IResizableContent
     {
         
-        public function ResizableContent() {
+        public function ResizableContent()
+        {
             super();
         }
         
@@ -17,7 +18,8 @@ package net.wg.gui.lobby.profile.components
         
         private var isActive:Boolean;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID)) && (this.currentDimension))
             {
@@ -29,13 +31,16 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        protected function applyActivation() : void {
+        protected function applyActivation() : void
+        {
         }
         
-        protected function applyResizing() : void {
+        protected function applyResizing() : void
+        {
         }
         
-        public function setViewSize(param1:Number, param2:Number) : void {
+        public function setViewSize(param1:Number, param2:Number) : void
+        {
             if(!this.currentDimension)
             {
                 this.currentDimension = new Point();
@@ -45,32 +50,39 @@ package net.wg.gui.lobby.profile.components
             invalidate(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
         }
         
-        public function set active(param1:Boolean) : void {
+        public function set active(param1:Boolean) : void
+        {
             this.isActive = param1;
             invalidate(ResizableInvalidationTypes.ACTIVE_INVALID);
         }
         
-        public function get active() : Boolean {
+        public function get active() : Boolean
+        {
             return this.isActive;
         }
         
-        public function set centerOffset(param1:int) : void {
+        public function set centerOffset(param1:int) : void
+        {
             this._centerOffset = param1;
             invalidate(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
         }
         
-        public function get centerOffset() : int {
+        public function get centerOffset() : int
+        {
             return this._centerOffset;
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

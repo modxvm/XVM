@@ -14,7 +14,8 @@ package net.wg.gui.lobby.dialogs
     public class DismissTankmanDialog extends DismissTankmanDialogMeta implements IDismissTankmanDialogMeta
     {
         
-        public function DismissTankmanDialog() {
+        public function DismissTankmanDialog()
+        {
             super();
         }
         
@@ -36,7 +37,8 @@ package net.wg.gui.lobby.dialogs
         
         private var PROTECTED_MODE_PADDING:int = 15;
         
-        public function as_tankMan(param1:Object) : void {
+        public function as_tankMan(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -57,7 +59,8 @@ package net.wg.gui.lobby.dialogs
             invalidate(UPDATE_BLOCK);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((this.model) && (isInvalid(UPDATE_BLOCK)))
             {
@@ -65,7 +68,8 @@ package net.wg.gui.lobby.dialogs
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             registerComponent(this.inputChecker,Aliases.INPUT_CHECKER_COMPONENT);
             this.inputChecker.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
@@ -75,14 +79,16 @@ package net.wg.gui.lobby.dialogs
             App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.inputChecker.getComponentForFocus());
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.model.dispose();
             this.mainBlock.dispose();
             App.utils.scheduler.cancelTask(this.updateFocus);
         }
         
-        override protected function getBackgroundActualHeight() : Number {
+        override protected function getBackgroundActualHeight() : Number
+        {
             if(this.protectedState)
             {
                 return this.inputChecker.y + this.inputChecker.height + this.PROTECTED_MODE_PADDING;
@@ -90,11 +96,13 @@ package net.wg.gui.lobby.dialogs
             return this.questionTf.y + this.questionTf.height + this.NONE_PROTECTED_MODE_PADDING;
         }
         
-        private function updateFocus(param1:UIComponent) : void {
+        private function updateFocus(param1:UIComponent) : void
+        {
             setFocus(param1);
         }
         
-        private function setData() : void {
+        private function setData() : void
+        {
             this.mainBlock.nation = this.model.nation;
             this.mainBlock.tankmanName = this.model.tankmanName;
             this.mainBlock.portraitSource = this.model.tankmanIcon;
@@ -103,7 +111,8 @@ package net.wg.gui.lobby.dialogs
             this.mainBlock.setRoleLevel(this.model.roleLevel);
         }
         
-        private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
+        private function onRequestFocusHandler(param1:FocusRequestEvent) : void
+        {
             if(this.inputChecker.isInvalidUserText)
             {
                 secondBtn.enabled = true;

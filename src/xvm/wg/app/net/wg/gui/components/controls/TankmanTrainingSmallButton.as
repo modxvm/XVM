@@ -10,28 +10,27 @@ package net.wg.gui.components.controls
     public class TankmanTrainingSmallButton extends SoundButton
     {
         
-        public function TankmanTrainingSmallButton() {
-            this._priceColors = {
-                "normal":16314069,
-                "disabled":16711680,
-                "buy":5330004
-            };
+        public function TankmanTrainingSmallButton()
+        {
+            this._priceColors = {"normal":16314069,
+            "disabled":16711680,
+            "buy":5330004
+        };
         super();
         useFocusedAsSelect = true;
-        _stateMap = {
-            "up":["up"],
-            "over":["over"],
-            "down":["down"],
-            "release":["release","over"],
-            "out":["out","up"],
-            "disabled":["disabled"],
-            "selecting":["selecting","over"],
-            "toggle":["toggle","up"],
-            "kb_selecting":["kb_selecting","up"],
-            "kb_release":["kb_release","out","up"],
-            "kb_down":["kb_down","down"],
-            "buy":["buy"]
-        };
+        _stateMap = {"up":["up"],
+        "over":["over"],
+        "down":["down"],
+        "release":["release","over"],
+        "out":["out","up"],
+        "disabled":["disabled"],
+        "selecting":["selecting","over"],
+        "toggle":["toggle","up"],
+        "kb_selecting":["kb_selecting","up"],
+        "kb_release":["kb_release","out","up"],
+        "kb_down":["kb_down","down"],
+        "buy":["buy"]
+    };
     soundType = SoundTypes.RNDR_NORMAL;
     soundId = "";
 }
@@ -88,7 +87,8 @@ public var inspectableGroupName:String;
 
 private var _priceColors:Object;
 
-public function setDataForDropSkills(param1:Number, param2:Boolean, param3:ActionPriceVO) : void {
+public function setDataForDropSkills(param1:Number, param2:Boolean, param3:ActionPriceVO) : void
+{
     if(!isNaN(param1))
     {
         this.price = param1.toString();
@@ -106,43 +106,52 @@ public function setDataForDropSkills(param1:Number, param2:Boolean, param3:Actio
     this.priceLabel.visible = !this.actionPrice.visible;
 }
 
-public function get scopeType() : String {
+public function get scopeType() : String
+{
     return this._scopeType;
 }
 
-public function set scopeType(param1:String) : void {
+public function set scopeType(param1:String) : void
+{
     this._scopeType = param1;
     this.draw();
 }
 
-public function get retraining() : Boolean {
+public function get retraining() : Boolean
+{
     return this._retraining;
 }
 
-public function set retraining(param1:Boolean) : void {
+public function set retraining(param1:Boolean) : void
+{
     this._retraining = param1;
     this.typeSwitcher.gotoAndPlay(this._retraining?"retraining_" + this._type:this._type);
     this.trainingLabel.text = this._retraining?MENU.TANKMANTRAININGBUTTON2_RETRAININGTO:MENU.TANKMANTRAININGBUTTON2_TRAININGTO;
 }
 
-public function get nation() : Number {
+public function get nation() : Number
+{
     return this._nation;
 }
 
-public function set nation(param1:Number) : void {
+public function set nation(param1:Number) : void
+{
     this.bg.gotoAndPlay(App.utils.nations.getNationName(param1));
 }
 
-public function get level() : Number {
+public function get level() : Number
+{
     return this._level;
 }
 
-public function set level(param1:Number) : void {
+public function set level(param1:Number) : void
+{
     this._level = param1;
     this.levelLabel.text = param1.toString() + "%";
 }
 
-public function set type(param1:String) : void {
+public function set type(param1:String) : void
+{
     this._type = param1;
     this.labelField.text = MENU.tankmantrainingwindow(this._type);
     this.typeSwitcher.gotoAndPlay(this._retraining?"retraining_" + this._type:this._type);
@@ -172,25 +181,30 @@ public function set type(param1:String) : void {
     }
 }
 
-public function get type() : String {
+public function get type() : String
+{
     return this._type;
 }
 
-public function get price() : String {
+public function get price() : String
+{
     return this.priceLabel.text;
 }
 
-public function set price(param1:String) : void {
+public function set price(param1:String) : void
+{
     this.setTextColorToPriceLabel();
     var _loc2_:ILocale = App.utils.locale;
     this.priceLabel.text = this._type == "academy"?_loc2_.gold(param1):_loc2_.integer(param1);
 }
 
-public function get buy() : Boolean {
+public function get buy() : Boolean
+{
     return this._buy;
 }
 
-public function set buy(param1:Boolean) : void {
+public function set buy(param1:Boolean) : void
+{
     this._buy = param1;
     if(this.isNativeVehicle)
     {
@@ -206,7 +220,8 @@ public function set buy(param1:Boolean) : void {
     
 }
 
-public function setData(param1:Object, param2:Number, param3:Number, param4:Number, param5:Boolean, param6:Boolean, param7:int, param8:Object = null) : void {
+public function setData(param1:Object, param2:Number, param3:Number, param4:Number, param5:Boolean, param6:Boolean, param7:int, param8:Object = null) : void
+{
     if(param1 == null)
     {
         return;
@@ -242,12 +257,14 @@ public function setData(param1:Object, param2:Number, param3:Number, param4:Numb
     invalidate(UPDATE_DATA);
 }
 
-private function getIcoOfButtonType() : String {
+private function getIcoOfButtonType() : String
+{
     var _loc1_:String = this._type == "free"?"":this._type == "academy"?"gold":"credits";
     return _loc1_;
 }
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
     super.configUI();
     this.typeSwitcher.gotoAndPlay(this._retraining?"retraining_" + this._type:this._type);
     this.trainingLabel.text = this._retraining?MENU.TANKMANTRAININGBUTTON2_RETRAININGTO:MENU.TANKMANTRAININGBUTTON2_TRAININGTO;
@@ -263,7 +280,8 @@ override protected function configUI() : void {
     }
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
     super.draw();
     if((isInvalid(UPDATE_DATA)) && !this.isUpdated)
     {
@@ -281,13 +299,15 @@ override protected function draw() : void {
     }
 }
 
-private function refreshData() : void {
+private function refreshData() : void
+{
     this.isUpdated = true;
     this.level = this.levelText;
     this.retraining = !this.isNativeVehicle;
 }
 
-private function getLabelType(param1:String) : String {
+private function getLabelType(param1:String) : String
+{
     var _loc2_:* = "";
     switch(param1)
     {
@@ -304,7 +324,8 @@ private function getLabelType(param1:String) : String {
     return _loc2_;
 }
 
-private function setTextColorToPriceLabel() : void {
+private function setTextColorToPriceLabel() : void
+{
     var _loc1_:String = null;
     var _loc2_:String = null;
     if(this.model == null || this._specializationLevel == 0 || !this.priceLabel)
@@ -339,7 +360,8 @@ private function setTextColorToPriceLabel() : void {
     
 }
 
-protected function setEnabled() : void {
+protected function setEnabled() : void
+{
     if(this.isNativeVehicle)
     {
         this.enabled = this._specializationLevel < this.level && (this.hasMoney);
@@ -350,7 +372,8 @@ protected function setEnabled() : void {
     }
 }
 
-override public function set enabled(param1:Boolean) : void {
+override public function set enabled(param1:Boolean) : void
+{
     super.enabled = param1;
     if(this.actionPrice)
     {
@@ -358,7 +381,8 @@ override public function set enabled(param1:Boolean) : void {
     }
 }
 
-protected function setBUY() : void {
+protected function setBUY() : void
+{
     if(this.isNativeVehicle)
     {
         this.buy = this._specializationLevel >= this.level;
@@ -369,7 +393,8 @@ protected function setBUY() : void {
     }
 }
 
-protected function calculateCurrentLevel(param1:Boolean, param2:Number, param3:Number, param4:Number, param5:Number) : Number {
+protected function calculateCurrentLevel(param1:Boolean, param2:Number, param3:Number, param4:Number, param5:Number) : Number
+{
     var _loc6_:* = NaN;
     var _loc7_:* = NaN;
     if(param1)
@@ -385,7 +410,8 @@ protected function calculateCurrentLevel(param1:Boolean, param2:Number, param3:N
     return _loc6_;
 }
 
-override public function set selected(param1:Boolean) : void {
+override public function set selected(param1:Boolean) : void
+{
     var _loc2_:* = false;
     var _loc3_:* = false;
     if(_selected == param1)
@@ -431,7 +457,8 @@ override public function set selected(param1:Boolean) : void {
     dispatchEvent(new Event(Event.SELECT));
 }
 
-private function disposeComponent() : void {
+private function disposeComponent() : void
+{
     this.bg = null;
     this.priceLabel.dispose();
     this.priceLabel = null;
@@ -443,7 +470,8 @@ private function disposeComponent() : void {
     this.model = null;
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
     super.onDispose();
     this.disposeComponent();
 }

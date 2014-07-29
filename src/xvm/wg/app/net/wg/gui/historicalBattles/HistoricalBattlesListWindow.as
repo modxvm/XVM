@@ -29,7 +29,8 @@ package net.wg.gui.historicalBattles
     public class HistoricalBattlesListWindow extends HistoricalBattlesListWindowMeta implements IHistoricalBattlesListWindowMeta
     {
         
-        public function HistoricalBattlesListWindow() {
+        public function HistoricalBattlesListWindow()
+        {
             super();
             canMinimize = true;
         }
@@ -100,7 +101,8 @@ package net.wg.gui.historicalBattles
         
         private var _priceDDEnabled:Boolean = true;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.descriptionTitleTF.text = HISTORICAL_BATTLES.LABEL_DESCRIPTIONTITLE;
             this.priceInfoIcon.visible = false;
@@ -122,31 +124,37 @@ package net.wg.gui.historicalBattles
             this.updateCarouselSelection();
         }
         
-        private function onPriceItemSelect(param1:ListEvent) : void {
+        private function onPriceItemSelect(param1:ListEvent) : void
+        {
             onPriceSelectedS(this.priceDD.selectedIndex);
         }
         
-        private function onVehicleChanged(param1:TeamsVehicleListEvent) : void {
+        private function onVehicleChanged(param1:TeamsVehicleListEvent) : void
+        {
             this.selectedVehicleID = param1.vehicleID;
             this.updatePriceInfoIcon();
             onVehicleSelectedS(param1.vehicleID != -1?this.selectedVehicleID:this.vehicleIDFromPy);
         }
         
-        private function onFightButtonClick(param1:ButtonEvent) : void {
+        private function onFightButtonClick(param1:ButtonEvent) : void
+        {
             requestToEnqueueS();
         }
         
-        private function onShowFullDescrClick(param1:ButtonEvent) : void {
+        private function onShowFullDescrClick(param1:ButtonEvent) : void
+        {
             showFullDescriptionS();
         }
         
-        private function onCarouselItemSelect(param1:ListEvent) : void {
+        private function onCarouselItemSelect(param1:ListEvent) : void
+        {
             var _loc2_:BattleListItemVO = param1.itemData as BattleListItemVO;
             this.selectedBattleID = _loc2_.id;
             onBattleSelectedS(this.selectedBattleID);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.model))
             {
@@ -168,13 +176,15 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             window.title = HISTORICAL_BATTLES.WINDOW_MAIN_TITLE;
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.handled)
             {
                 return;
@@ -194,7 +204,8 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeModel();
             this.fightButton.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
             this.mapImage.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
@@ -226,7 +237,8 @@ package net.wg.gui.historicalBattles
             super.onDispose();
         }
         
-        private function disposeCarouselDP() : void {
+        private function disposeCarouselDP() : void
+        {
             if(this.carousel.dataProvider)
             {
                 this.carousel.dataProvider.cleanUp();
@@ -234,7 +246,8 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        private function disposeModel() : void {
+        private function disposeModel() : void
+        {
             if(this.model)
             {
                 this.model.dispose();
@@ -242,7 +255,8 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        private function updatePriceInfoIcon() : void {
+        private function updatePriceInfoIcon() : void
+        {
             if(this.model)
             {
                 this.priceInfoIcon.visible = !this.model.isFuture && !(this.selectedVehicleID == -1);
@@ -253,19 +267,23 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        private function updateListEnabled() : void {
+        private function updateListEnabled() : void
+        {
             this.teamsVehicleList.selectable = this.model?!this.model.isFuture && (this._listEnabled):false;
         }
         
-        private function updatePriceDDEnabled() : void {
+        private function updatePriceDDEnabled() : void
+        {
             this.priceDD.enabled = !(this.selectedVehicleID == -1) && (this._priceDDEnabled);
         }
         
-        private function onControlRollOut(param1:MouseEvent) : void {
+        private function onControlRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onControlRollOver(param1:MouseEvent) : void {
+        private function onControlRollOver(param1:MouseEvent) : void
+        {
             switch(param1.currentTarget)
             {
                 case this.fightButton:
@@ -284,7 +302,8 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        private function showComplexTT(param1:String, param2:String = "") : void {
+        private function showComplexTT(param1:String, param2:String = "") : void
+        {
             var _loc3_:String = new ComplexTooltipHelper().addHeader(param1).addBody(param2).make();
             if(_loc3_.length > 0)
             {
@@ -292,7 +311,8 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        private function updateCarouselSelection() : void {
+        private function updateCarouselSelection() : void
+        {
             var _loc2_:BattleListItemVO = null;
             var _loc3_:* = 0;
             var _loc1_:* = -1;
@@ -321,7 +341,8 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        override public function as_getGeometry() : Array {
+        override public function as_getGeometry() : Array
+        {
             if(window)
             {
                 return [window.x,window.y,-1,-1];
@@ -329,7 +350,8 @@ package net.wg.gui.historicalBattles
             return null;
         }
         
-        public function as_setCarouselData(param1:Array) : void {
+        public function as_setCarouselData(param1:Array) : void
+        {
             var _loc2_:BattleListItemVO = null;
             this.disposeCarouselDP();
             var _loc3_:Array = [];
@@ -347,13 +369,15 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        public function as_setBattleData(param1:Object) : void {
+        public function as_setBattleData(param1:Object) : void
+        {
             this.disposeModel();
             this.model = new HistoricalBattleVO(param1);
             invalidateData();
         }
         
-        public function as_setTeamsData(param1:Array, param2:Array) : void {
+        public function as_setTeamsData(param1:Array, param2:Array) : void
+        {
             var _loc3_:* = false;
             this.teamsVehicleList.setTeamsData(param1,param2);
             if(!this.model.isFuture)
@@ -370,11 +394,13 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        public function as_setStatusMessage(param1:String) : void {
+        public function as_setStatusMessage(param1:String) : void
+        {
             this.statusTF.htmlText = param1;
         }
         
-        public function as_selectVehicle(param1:Number) : void {
+        public function as_selectVehicle(param1:Number) : void
+        {
             var _loc2_:* = false;
             this.vehicleIDFromPy = param1;
             if((this.model) && !this.model.isFuture)
@@ -391,49 +417,59 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        public function as_setPrices(param1:Array, param2:Number) : void {
+        public function as_setPrices(param1:Array, param2:Number) : void
+        {
             this.priceDD.dataProvider = new DataProvider(param1);
             this.priceDD.selectedIndex = param2;
             this.updatePriceDDEnabled();
         }
         
-        public function as_setPriceInfo(param1:String) : void {
+        public function as_setPriceInfo(param1:String) : void
+        {
             this.priceInfoTF.htmlText = param1;
         }
         
-        public function as_updateFightButton(param1:Boolean, param2:String, param3:String, param4:Boolean) : void {
+        public function as_updateFightButton(param1:Boolean, param2:String, param3:String, param4:Boolean) : void
+        {
             this.fightButton.enabled = param1;
             this.fightButtonWarnIco.visible = param4;
             this.fbTTHeader = param2;
             this.fbTTBody = param3;
         }
         
-        override public function as_enableEnqueueBtn(param1:Boolean) : void {
+        override public function as_enableEnqueueBtn(param1:Boolean) : void
+        {
             this.fightButton.enabled = param1;
         }
         
-        override public function as_enableLeaveBtn(param1:Boolean) : void {
+        override public function as_enableLeaveBtn(param1:Boolean) : void
+        {
         }
         
-        public function as_setCarouselEnabled(param1:Boolean) : void {
+        public function as_setCarouselEnabled(param1:Boolean) : void
+        {
             this.carousel.enabled = param1;
         }
         
-        public function as_setListEnabled(param1:Boolean) : void {
+        public function as_setListEnabled(param1:Boolean) : void
+        {
             this._listEnabled = param1;
             this.updateListEnabled();
         }
         
-        public function as_setPriceDDEnabled(param1:Boolean) : void {
+        public function as_setPriceDDEnabled(param1:Boolean) : void
+        {
             this._priceDDEnabled = param1;
             this.updatePriceDDEnabled();
         }
         
-        public function as_setCloseBtnEnabled(param1:Boolean) : void {
+        public function as_setCloseBtnEnabled(param1:Boolean) : void
+        {
             enabledCloseBtn = param1;
         }
         
-        public function as_selectBattle(param1:Number) : void {
+        public function as_selectBattle(param1:Number) : void
+        {
             this.selectedBattleID = param1;
             if(initialized)
             {
@@ -441,7 +477,8 @@ package net.wg.gui.historicalBattles
             }
         }
         
-        public function as_setDate(param1:String, param2:String, param3:String) : void {
+        public function as_setDate(param1:String, param2:String, param3:String) : void
+        {
             this.dateTF.htmlText = param1;
             this.dateTF.width = this.dateTF.textWidth;
             this.dateTF.x = RIGHT_MARGIN - this.dateTF.width;
@@ -449,7 +486,8 @@ package net.wg.gui.historicalBattles
             this.dateTTBody = param3;
         }
         
-        public function as_updateTimer(param1:String, param2:String) : void {
+        public function as_updateTimer(param1:String, param2:String) : void
+        {
             this.timerTF.htmlText = param1;
             this.timerTF.width = this.timerTF.textWidth;
             this.timerTF.x = RIGHT_MARGIN - this.timerTF.width;

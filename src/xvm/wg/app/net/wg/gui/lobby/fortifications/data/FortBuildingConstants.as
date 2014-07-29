@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class FortBuildingConstants extends Object
     {
         
-        public function FortBuildingConstants() {
+        public function FortBuildingConstants()
+        {
             super();
         }
         
@@ -15,7 +16,7 @@ package net.wg.gui.lobby.fortifications.data
         
         public static var DEFAULT_FOUNDATION_STATE:String = "defaultFoundation_state";
         
-        public static var BUILD_CODE_TO_NAME_MAP:Object;
+        public static var BUILD_CODE_TO_NAME_MAP:Object = {};
         
         public static var BASE_BUILDING:String = "base_building";
         

@@ -3,7 +3,8 @@ package net.wg.gui.components.popOvers
     public class PopOverConst extends Object
     {
         
-        public function PopOverConst() {
+        public function PopOverConst()
+        {
             super();
         }
         

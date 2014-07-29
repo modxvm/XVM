@@ -11,11 +11,13 @@ package net.wg.gui.lobby.techtree.data
     public class ResearchXMLDataProvider extends ResearchVODataProvider
     {
         
-        public function ResearchXMLDataProvider() {
+        public function ResearchXMLDataProvider()
+        {
             super();
         }
         
-        override public function parse(param1:Object) : void {
+        override public function parse(param1:Object) : void
+        {
             var _loc5_:* = NaN;
             var _loc6_:XML = null;
             var _loc7_:NodeData = null;
@@ -53,7 +55,8 @@ package net.wg.gui.lobby.techtree.data
             global = new VehGlobalStats(Number(_loc4_.child("enableInstallItems").text()) == 1?true:false,_loc4_.child("statusString").text(),new ExtraInformation(_loc4_.child("extraInfo").child("type").text(),_loc4_.child("extraInfo").child("title").text(),_loc4_.child("extraInfo").child("benefitsHead").text(),_loc4_.child("extraInfo").child("benefitsList").text()),_loc4_.child("freeXP").text(),Number(_loc4_.child("hasNationTree").text()) == 1?true:false);
         }
         
-        private function getNodeDisplayInfo(param1:XML) : ResearchDisplayInfo {
+        private function getNodeDisplayInfo(param1:XML) : ResearchDisplayInfo
+        {
             var _loc3_:XML = null;
             var _loc2_:Array = [];
             for each(_loc3_ in param1.child("path").children())
@@ -63,7 +66,8 @@ package net.wg.gui.lobby.techtree.data
             return new ResearchDisplayInfo(_loc2_,param1.child("renderer").text(),param1.child("level").text());
         }
         
-        private function getNodeData(param1:XML) : NodeData {
+        private function getNodeData(param1:XML) : NodeData
+        {
             var _loc2_:NodeData = null;
             var _loc4_:XML = null;
             _loc2_ = new NodeData();

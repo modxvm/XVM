@@ -8,13 +8,15 @@ package net.wg.infrastructure.base
     public class BaseDAAPIComponent extends BaseDAAPIComponentMeta implements IDAAPIComponent
     {
         
-        public function BaseDAAPIComponent() {
+        public function BaseDAAPIComponent()
+        {
             super();
         }
         
         private var _disposed:Boolean = false;
         
-        public final function as_populate() : void {
+        public final function as_populate() : void
+        {
             try
             {
                 dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_POPULATE));
@@ -27,7 +29,8 @@ package net.wg.infrastructure.base
             }
         }
         
-        public final function as_dispose() : void {
+        public final function as_dispose() : void
+        {
             try
             {
                 dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_DISPOSE));
@@ -41,11 +44,13 @@ package net.wg.infrastructure.base
             }
         }
         
-        public function get disposed() : Boolean {
+        public function get disposed() : Boolean
+        {
             return this._disposed;
         }
         
-        protected function onPopulate() : void {
+        protected function onPopulate() : void
+        {
         }
     }
 }

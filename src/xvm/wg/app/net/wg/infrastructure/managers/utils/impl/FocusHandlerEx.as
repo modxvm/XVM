@@ -17,23 +17,27 @@ package net.wg.infrastructure.managers.utils.impl
     public class FocusHandlerEx extends Object implements IFocusHandler
     {
         
-        public function FocusHandlerEx() {
+        public function FocusHandlerEx()
+        {
             super();
             this._focusHandler = FocusHandler.getInstance();
         }
         
         private var _focusHandler:FocusHandler = null;
         
-        public function getFocus(param1:uint) : InteractiveObject {
+        public function getFocus(param1:uint) : InteractiveObject
+        {
             return this._focusHandler.getFocus(param1);
         }
         
-        public function setFocus(param1:InteractiveObject, param2:uint = 0, param3:Boolean = false) : void {
+        public function setFocus(param1:InteractiveObject, param2:uint = 0, param3:Boolean = false) : void
+        {
             this.assertIfParentHasNoModalFocus(param1);
             this._focusHandler.setFocus(param1,param2,param3);
         }
         
-        public function setModalFocus(param1:IManagedContent) : void {
+        public function setModalFocus(param1:IManagedContent) : void
+        {
             if(param1 != null)
             {
                 FocusManager.setModalClip(Sprite(param1.containerContent));
@@ -45,7 +49,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function getModalFocus() : IView {
+        public function getModalFocus() : IView
+        {
             var _loc1_:Sprite = FocusManager.getModalClip();
             if(_loc1_ != null)
             {
@@ -55,24 +60,29 @@ package net.wg.infrastructure.managers.utils.impl
             return null;
         }
         
-        public function hasModalFocus(param1:IView) : Boolean {
+        public function hasModalFocus(param1:IView) : Boolean
+        {
             return this.getModalFocus() == param1;
         }
         
-        public function input(param1:InputDetails) : void {
+        public function input(param1:InputDetails) : void
+        {
             this._focusHandler.input(param1);
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._focusHandler.setFocus(null);
             this._focusHandler = null;
         }
         
-        public function set stage(param1:Stage) : void {
+        public function set stage(param1:Stage) : void
+        {
             this._focusHandler.stage = param1;
         }
         
-        private function assertIfParentHasNoModalFocus(param1:InteractiveObject) : void {
+        private function assertIfParentHasNoModalFocus(param1:InteractiveObject) : void
+        {
             var _loc3_:* = false;
             var _loc4_:IManagedContent = null;
             var _loc5_:String = null;

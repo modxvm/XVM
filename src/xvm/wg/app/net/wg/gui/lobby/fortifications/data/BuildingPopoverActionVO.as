@@ -3,7 +3,8 @@ package net.wg.gui.lobby.fortifications.data
     public class BuildingPopoverActionVO extends BuildingPopoverBaseVO
     {
         
-        public function BuildingPopoverActionVO(param1:Object) {
+        public function BuildingPopoverActionVO(param1:Object)
+        {
             super(param1);
         }
         

@@ -8,7 +8,8 @@ package net.wg.gui.components.advanced
     public class ModuleIcon extends UIComponent
     {
         
-        public function ModuleIcon() {
+        public function ModuleIcon()
+        {
             super();
         }
         
@@ -20,7 +21,8 @@ package net.wg.gui.components.advanced
         
         public var moduleLevel:MovieClip;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.moduleType.dispose();
             this.moduleType = null;
             this.artefact.dispose();
@@ -31,7 +33,8 @@ package net.wg.gui.components.advanced
             super.onDispose();
         }
         
-        public function setValues(param1:String, param2:String) : void {
+        public function setValues(param1:String, param2:String) : void
+        {
             this.moduleType.visible = this.moduleLevel.visible = FittingTypes.MANDATORY_SLOTS.indexOf(param1) > -1;
             this.artefact.visible = FittingTypes.ARTEFACT_SLOTS.indexOf(param1) > -1;
             this.shell.visible = param1 == FittingTypes.SHELL;
@@ -51,7 +54,8 @@ package net.wg.gui.components.advanced
             
         }
         
-        public function setValuesWithType(param1:String, param2:String, param3:int) : void {
+        public function setValuesWithType(param1:String, param2:String, param3:int) : void
+        {
             this.moduleType.gotoAndStop(1);
             this.moduleLevel.gotoAndStop(1);
             if(param1 == FittingTypes.MODULE)

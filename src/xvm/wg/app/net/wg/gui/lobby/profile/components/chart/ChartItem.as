@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.components.chart
     public class ChartItem extends ChartItemBase
     {
         
-        public function ChartItem() {
+        public function ChartItem()
+        {
             super();
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.lobby.profile.components.chart
         
         private var _value:Number = 0;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             invalidate(InvalidationType.DATA);
             var _loc2_:* = "percentValue";
@@ -28,7 +30,8 @@ package net.wg.gui.lobby.profile.components.chart
             
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -41,17 +44,21 @@ package net.wg.gui.lobby.profile.components.chart
             }
         }
         
-        protected function applyDataChange() : void {
+        protected function applyDataChange() : void
+        {
         }
         
-        protected function applyValueChange() : void {
+        protected function applyValueChange() : void
+        {
         }
         
-        public function get value() : Number {
+        public function get value() : Number
+        {
             return this._value;
         }
         
-        public function set value(param1:Number) : void {
+        public function set value(param1:Number) : void
+        {
             this._value = param1;
             invalidate(VALUE_INV);
         }

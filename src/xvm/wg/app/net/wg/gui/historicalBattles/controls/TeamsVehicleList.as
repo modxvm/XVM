@@ -12,7 +12,8 @@ package net.wg.gui.historicalBattles.controls
     public class TeamsVehicleList extends UIComponent
     {
         
-        public function TeamsVehicleList() {
+        public function TeamsVehicleList()
+        {
             super();
         }
         
@@ -24,7 +25,8 @@ package net.wg.gui.historicalBattles.controls
         
         private var _selectable:Boolean = true;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.teamListA.smartScrollBar = true;
             this.teamListB.smartScrollBar = true;
@@ -33,7 +35,8 @@ package net.wg.gui.historicalBattles.controls
             this.teamListB.enabled = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.teamListA.removeEventListener(ListEvent.INDEX_CHANGE,this.onListItemSelected);
             this.teamListB.removeEventListener(ListEvent.INDEX_CHANGE,this.onListItemSelected);
             this.teamListA.dispose();
@@ -45,17 +48,20 @@ package net.wg.gui.historicalBattles.controls
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        public function setTeamsData(param1:Array, param2:Array) : void {
+        public function setTeamsData(param1:Array, param2:Array) : void
+        {
             var _loc3_:int = Math.max(param1.length,param2.length);
             this.teamListA.dataProvider = this.generateListDP(param1,_loc3_);
             this.teamListB.dataProvider = this.generateListDP(param2,_loc3_);
         }
         
-        public function selectVehicleByCD(param1:int) : Boolean {
+        public function selectVehicleByCD(param1:int) : Boolean
+        {
             var _loc3_:CoreListEx = null;
             var _loc4_:VehicleListItemVO = null;
             var _loc2_:Array = [this.teamListA,this.teamListB];
@@ -79,7 +85,8 @@ package net.wg.gui.historicalBattles.controls
             return false;
         }
         
-        private function generateListDP(param1:Array, param2:int) : DataProvider {
+        private function generateListDP(param1:Array, param2:int) : DataProvider
+        {
             var _loc4_:VehicleListItemVO = null;
             var _loc3_:Array = [];
             var _loc5_:* = 0;
@@ -98,7 +105,8 @@ package net.wg.gui.historicalBattles.controls
             return new DataProvider(_loc3_);
         }
         
-        private function updateListSelectable() : void {
+        private function updateListSelectable() : void
+        {
             var _loc2_:CoreListEx = null;
             var _loc3_:VehicleListItemVO = null;
             var _loc1_:Array = [this.teamListA,this.teamListB];
@@ -116,7 +124,8 @@ package net.wg.gui.historicalBattles.controls
             this.teamListB.invalidateData();
         }
         
-        private function onListItemSelected(param1:ListEvent) : void {
+        private function onListItemSelected(param1:ListEvent) : void
+        {
             if(param1.index == -1)
             {
                 if(this.teamListA.selectedIndex == -1 && this.teamListB.selectedIndex == -1)
@@ -132,11 +141,13 @@ package net.wg.gui.historicalBattles.controls
             dispatchEvent(new TeamsVehicleListEvent(TeamsVehicleListEvent.VEHICLE_SELECTED,_loc4_.intCD));
         }
         
-        public function get selectable() : Boolean {
+        public function get selectable() : Boolean
+        {
             return this._selectable;
         }
         
-        public function set selectable(param1:Boolean) : void {
+        public function set selectable(param1:Boolean) : void
+        {
             this._selectable = param1;
             this.updateListSelectable();
         }

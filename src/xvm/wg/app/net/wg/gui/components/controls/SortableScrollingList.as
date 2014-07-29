@@ -9,7 +9,8 @@ package net.wg.gui.components.controls
     public class SortableScrollingList extends ScrollingListEx
     {
         
-        public function SortableScrollingList() {
+        public function SortableScrollingList()
+        {
             this._optionsDict = {};
             this._sortProps = [];
             this._sortingOrder = [];
@@ -40,28 +41,33 @@ package net.wg.gui.components.controls
         
         private var _isRowHeightFixed:Boolean = false;
         
-        override public function invalidateData() : void {
+        override public function invalidateData() : void
+        {
             super.invalidateData();
             dispatchEvent(new Event(DATA_INVALIDATED,true));
         }
         
-        public function sortByField(param1:String, param2:Boolean = true) : void {
+        public function sortByField(param1:String, param2:Boolean = true) : void
+        {
             this.setFieldOption(param1,param2);
             this._oldSortField = param1;
             this.invalidateSorting(param1);
         }
         
-        override public function set dataProvider(param1:IDataProvider) : void {
+        override public function set dataProvider(param1:IDataProvider) : void
+        {
             this.invalidateSorting(this._sortProps);
             super.dataProvider = param1;
         }
         
-        public function set columnsData(param1:IDataProvider) : void {
+        public function set columnsData(param1:IDataProvider) : void
+        {
             this._columnsData = param1;
             invalidate(COLUMNS_INVALID);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(COLUMNS_INVALID))
             {
                 this.invalidateColumnsData();
@@ -73,7 +79,8 @@ package net.wg.gui.components.controls
             super.draw();
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc8_:IListItemRenderer = null;
             var _loc1_:uint = _renderers.length;
             var _loc2_:Number = rowHeight;
@@ -101,7 +108,8 @@ package net.wg.gui.components.controls
             drawScrollBar();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._columnsData)
             {
                 this._columnsData.cleanUp();
@@ -118,7 +126,8 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        protected function invalidateSorting(param1:Object) : void {
+        protected function invalidateSorting(param1:Object) : void
+        {
             var _loc2_:Array = null;
             var _loc3_:* = 0;
             if(param1 is Array)
@@ -139,7 +148,8 @@ package net.wg.gui.components.controls
             invalidate(SORTING_INVALID);
         }
         
-        protected function applySorting(param1:Array) : void {
+        protected function applySorting(param1:Array) : void
+        {
             var _loc2_:Array = null;
             var _loc3_:String = null;
             var _loc4_:Array = null;
@@ -166,13 +176,15 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function setFieldOption(param1:String, param2:Boolean) : void {
+        private function setFieldOption(param1:String, param2:Boolean) : void
+        {
             var _loc3_:uint = param2?0:Array.DESCENDING;
             this._optionsDict = App.utils.commons.cloneObject(this._sortingTypes);
             this._optionsDict[param1] = (this._sortingTypes.hasOwnProperty(param1)?this._sortingTypes[param1]:0) | _loc3_;
         }
         
-        private function invalidateColumnsData() : void {
+        private function invalidateColumnsData() : void
+        {
             var _loc3_:Object = null;
             var _loc4_:SortingButtonInfo = null;
             var _loc5_:String = null;
@@ -231,11 +243,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get isRowHeightFixed() : Boolean {
+        public function get isRowHeightFixed() : Boolean
+        {
             return this._isRowHeightFixed;
         }
         
-        public function set isRowHeightFixed(param1:Boolean) : void {
+        public function set isRowHeightFixed(param1:Boolean) : void
+        {
             this._isRowHeightFixed = param1;
         }
     }

@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.data
     public class ProfileAchievementVO extends AchievementItemVO
     {
         
-        public function ProfileAchievementVO(param1:Object) {
+        public function ProfileAchievementVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -29,7 +30,8 @@ package net.wg.gui.lobby.profile.data
         
         public var hasCounter:Boolean;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "isDossierForCurrentUser")
             {
                 this.showProgress = param2;

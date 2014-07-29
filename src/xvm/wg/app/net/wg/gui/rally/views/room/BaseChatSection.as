@@ -26,7 +26,8 @@ package net.wg.gui.rally.views.room
     public class BaseChatSection extends UIComponent implements IFocusContainer
     {
         
-        public function BaseChatSection() {
+        public function BaseChatSection()
+        {
             super();
             this.channelComponent.externalButton = this.chatSubmitButton;
             this.channelComponent.messageArea.bgForm.visible = false;
@@ -34,7 +35,8 @@ package net.wg.gui.rally.views.room
         
         protected static var INVALID_EDIT_MODE:String = "invalidEditMode";
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -58,15 +60,18 @@ package net.wg.gui.rally.views.room
         
         public var descriptionTF:TextField;
         
-        protected function getHeader() : String {
+        protected function getHeader() : String
+        {
             return "";
         }
         
-        public function get rallyData() : IRallyVO {
+        public function get rallyData() : IRallyVO
+        {
             return this._rallyData;
         }
         
-        public function set rallyData(param1:IRallyVO) : void {
+        public function set rallyData(param1:IRallyVO) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -75,11 +80,13 @@ package net.wg.gui.rally.views.room
             invalidate(InvalidationType.DATA,INVALID_EDIT_MODE);
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this.descriptionInput;
         }
         
-        public function enableEditCommitButton(param1:Boolean) : void {
+        public function enableEditCommitButton(param1:Boolean) : void
+        {
             if((this.editCommitButton) && (this.editDescriptionButton))
             {
                 this.editDescriptionButton.enabled = param1;
@@ -87,12 +94,14 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        public function setDescription(param1:String) : void {
+        public function setDescription(param1:String) : void
+        {
             this.descriptionInput.text = param1;
             this.updateDescriptionTF(param1);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.lblChatHeader.text = this.getHeader();
             this.descriptionInput.editable = false;
@@ -115,7 +124,8 @@ package net.wg.gui.rally.views.room
             this.descriptionTF.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:String = null;
             var _loc2_:* = false;
             super.draw();
@@ -139,7 +149,8 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.editDescriptionButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
             this.editCommitButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
             this.descriptionInput.removeEventListener(InputEvent.INPUT,this.descriptionInputHandler);
@@ -159,21 +170,25 @@ package net.wg.gui.rally.views.room
             super.onDispose();
         }
         
-        private function updateFocus() : void {
+        private function updateFocus() : void
+        {
             dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
         }
         
-        private function onEditCommitClick(param1:ButtonEvent) : void {
+        private function onEditCommitClick(param1:ButtonEvent) : void
+        {
             this.updateDescription(true);
         }
         
-        private function onEditClick(param1:ButtonEvent) : void {
+        private function onEditClick(param1:ButtonEvent) : void
+        {
             this._inEditMode = true;
             invalidate(INVALID_EDIT_MODE);
             App.utils.scheduler.envokeInNextFrame(this.updateFocus);
         }
         
-        private function descriptionInputHandler(param1:InputEvent) : void {
+        private function descriptionInputHandler(param1:InputEvent) : void
+        {
             if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN && (this._inEditMode))
             {
                 param1.preventDefault();
@@ -187,7 +202,8 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             var _loc2_:InputDetails = param1.details;
             if(_loc2_.code == Keyboard.F1 && _loc2_.value == InputValue.KEY_UP)
             {
@@ -200,7 +216,8 @@ package net.wg.gui.rally.views.room
             super.handleInput(param1);
         }
         
-        private function onDescriptionOver(param1:MouseEvent) : void {
+        private function onDescriptionOver(param1:MouseEvent) : void
+        {
             var _loc2_:String = this._rallyData?this._rallyData.description:"";
             if(_loc2_)
             {
@@ -208,7 +225,8 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        protected function updateDescription(param1:Boolean = false) : void {
+        protected function updateDescription(param1:Boolean = false) : void
+        {
             if(param1)
             {
                 this._previousComment = this.descriptionInput.text = StringUtils.trim(this.descriptionInput.text);
@@ -224,7 +242,8 @@ package net.wg.gui.rally.views.room
             invalidate(INVALID_EDIT_MODE);
         }
         
-        private function updateDescriptionTF(param1:String) : void {
+        private function updateDescriptionTF(param1:String) : void
+        {
             var _loc2_:IUserProps = App.utils.commons.getUserProps(param1);
             App.utils.commons.formatPlayerName(this.descriptionTF,_loc2_);
             if(!this.descriptionTF.text && (this.rallyData))
@@ -238,7 +257,8 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        private function changeAlign(param1:Boolean) : void {
+        private function changeAlign(param1:Boolean) : void
+        {
             var _loc2_:TextFormat = this.descriptionTF.getTextFormat();
             _loc2_.align = param1?TextFormatAlign.RIGHT:TextFormatAlign.LEFT;
             this.descriptionTF.setTextFormat(_loc2_);

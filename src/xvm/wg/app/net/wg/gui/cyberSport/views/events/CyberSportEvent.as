@@ -5,7 +5,8 @@ package net.wg.gui.cyberSport.views.events
     public class CyberSportEvent extends Event
     {
         
-        public function CyberSportEvent(param1:String, param2:String, param3:Number = undefined, param4:Number = 0, param5:int = -1) {
+        public function CyberSportEvent(param1:String, param2:String, param3:Number = undefined, param4:Number = 0, param5:int = -1)
+        {
             super(param1,true,false);
             this.alias = param2;
             this.itemId = param3;
@@ -23,7 +24,8 @@ package net.wg.gui.cyberSport.views.events
         
         public var slotIndex:int = -1;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new CyberSportEvent(type,this.alias,this.itemId);
         }
     }

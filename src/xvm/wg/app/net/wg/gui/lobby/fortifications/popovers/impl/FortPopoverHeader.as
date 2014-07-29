@@ -16,7 +16,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     public class FortPopoverHeader extends UIComponent
     {
         
-        public function FortPopoverHeader() {
+        public function FortPopoverHeader()
+        {
             super();
             this.upgradeBtn.UIID = 75;
             this.destroyBtn.UIID = 79;
@@ -24,12 +25,14 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private static var UPGRADE_BTN_ICON_PNG:String = "level_up.png";
         
-        private static function updateTextAlign(param1:Boolean, param2:TextField) : void {
+        private static function updateTextAlign(param1:Boolean, param2:TextField) : void
+        {
             var _loc3_:String = param1?TextFormatAlign.CENTER:TextFormatAlign.LEFT;
             FortCommonUtils.instance.changeTextAlign(param2,_loc3_);
         }
         
-        private static function getGlowFilter(param1:Number) : Array {
+        private static function getGlowFilter(param1:Number) : Array
+        {
             var _loc2_:Array = [];
             var _loc3_:Number = 1;
             var _loc4_:Number = 10;
@@ -59,12 +62,14 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var model:BuildingPopoverHeaderVO = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.upgradeBtn.icon = UPGRADE_BTN_ICON_PNG;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.upgradeBtn.removeEventListener(ButtonEvent.CLICK,this.headerActionHandler);
             this.destroyBtn.removeEventListener(ButtonEvent.CLICK,this.headerActionHandler);
             this.upgradeBtn.dispose();
@@ -80,7 +85,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             super.onDispose();
         }
         
-        public function setData(param1:BuildingPopoverHeaderVO) : void {
+        public function setData(param1:BuildingPopoverHeaderVO) : void
+        {
             this.model = param1;
             this.buildingName.htmlText = this.model.buildingName;
             this.buildingIcon.gotoAndStop(this.model.buildingIcon);
@@ -120,7 +126,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.updateFilters();
         }
         
-        private function updateFilters() : void {
+        private function updateFilters() : void
+        {
             if(this.model.glowColor == Values.DEFAULT_INT)
             {
                 return;
@@ -135,7 +142,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
         }
         
-        private function headerActionHandler(param1:ButtonEvent) : void {
+        private function headerActionHandler(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,0);
             if(param1.target == this.upgradeBtn)
             {

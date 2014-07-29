@@ -11,7 +11,8 @@ package net.wg.gui.components.advanced
     public class PortraitItemRenderer extends SoundListItemRenderer implements ICarouselItemRenderer
     {
         
-        public function PortraitItemRenderer() {
+        public function PortraitItemRenderer()
+        {
             super();
             useHandCursor = true;
             allowDeselect = false;
@@ -24,7 +25,8 @@ package net.wg.gui.components.advanced
         
         private var _canBeSelected:Boolean = true;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.loader)
             {
@@ -35,7 +37,8 @@ package net.wg.gui.components.advanced
             _data = null;
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -44,7 +47,8 @@ package net.wg.gui.components.advanced
             this.loader.source = "../maps/icons/tankmen/icons/barracks/" + param1.value;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(this.emptyFocusIndicator)
             {
                 focusIndicator = this.emptyFocusIndicator;
@@ -54,26 +58,31 @@ package net.wg.gui.components.advanced
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function handleMouseReleaseEx(param1:MouseEvent) : void {
+        override protected function handleMouseReleaseEx(param1:MouseEvent) : void
+        {
             super.handleMouseReleaseEx(param1);
         }
         
-        override protected function handleMouseRelease(param1:MouseEvent) : void {
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
             if(this._canBeSelected)
             {
                 super.handleMouseRelease(param1);
             }
         }
         
-        public function set canBeSelected(param1:Boolean) : void {
+        public function set canBeSelected(param1:Boolean) : void
+        {
             this._canBeSelected = param1;
         }
         
-        public function get canBeSelected() : Boolean {
+        public function get canBeSelected() : Boolean
+        {
             return this._canBeSelected;
         }
     }

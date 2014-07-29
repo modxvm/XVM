@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.awards.data
     public class AwardsBlockDataVO extends DAAPIDataClass
     {
         
-        public function AwardsBlockDataVO(param1:Object) {
+        public function AwardsBlockDataVO(param1:Object)
+        {
             super(param1);
         }
         

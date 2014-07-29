@@ -7,7 +7,8 @@ package net.wg.gui.lobby.profile.pages.statistics.header
     public class StatisticsHeaderVO extends ProfileBaseInfoVO implements ILditInfo
     {
         
-        public function StatisticsHeaderVO(param1:Object) {
+        public function StatisticsHeaderVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -25,47 +26,58 @@ package net.wg.gui.lobby.profile.pages.statistics.header
         
         private var _iconPath:String = "";
         
-        public function get description() : String {
+        public function get description() : String
+        {
             return this._description;
         }
         
-        public function set description(param1:String) : void {
+        public function set description(param1:String) : void
+        {
             this._description = param1;
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
         }
         
-        public function get tooltip() : String {
+        public function get tooltip() : String
+        {
             return this._tooltip;
         }
         
-        public function set tooltip(param1:String) : void {
+        public function set tooltip(param1:String) : void
+        {
             this._tooltip = param1;
         }
         
-        public function set toolTipParams(param1:IToolTipParams) : void {
+        public function set toolTipParams(param1:IToolTipParams) : void
+        {
             this._toolTipParams = param1;
         }
         
-        public function get toolTipParams() : IToolTipParams {
+        public function get toolTipParams() : IToolTipParams
+        {
             return this._toolTipParams;
         }
         
-        public function get iconPath() : String {
+        public function get iconPath() : String
+        {
             return this._iconPath;
         }
         
-        public function set iconPath(param1:String) : void {
+        public function set iconPath(param1:String) : void
+        {
             this._iconPath = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.additionalData = null;
             this._toolTipParams = null;
             super.onDispose();

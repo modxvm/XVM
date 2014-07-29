@@ -5,7 +5,8 @@ package net.wg.gui.lobby.settings.evnts
     public class SettingViewEvent extends Event
     {
         
-        public function SettingViewEvent(param1:String, param2:String, param3:String = "", param4:* = null, param5:Boolean = true, param6:Boolean = false) {
+        public function SettingViewEvent(param1:String, param2:String, param3:String = "", param4:* = null, param5:Boolean = true, param6:Boolean = false)
+        {
             super(param1,param5,param6);
             this.viewId = param2;
             this.controlId = param3;
@@ -30,11 +31,13 @@ package net.wg.gui.lobby.settings.evnts
         
         public var controlValue;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new SettingViewEvent(type,this.viewId,this.controlId,this.controlValue,bubbles,cancelable);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("SettingViewEvent","type","viewId","controlId","controlValue","bubbles","cancelable","eventPhase");
         }
     }

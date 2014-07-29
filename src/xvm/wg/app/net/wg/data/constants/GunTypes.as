@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class GunTypes extends Object
     {
         
-        public function GunTypes() {
+        public function GunTypes()
+        {
             super();
         }
         

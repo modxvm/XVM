@@ -8,7 +8,8 @@ package net.wg.gui.components.tooltips.VO
     public class EquipmentVO extends Object
     {
         
-        public function EquipmentVO(param1:Object) {
+        public function EquipmentVO(param1:Object)
+        {
             super();
             this.parsHash(param1);
         }
@@ -75,7 +76,8 @@ package net.wg.gui.components.tooltips.VO
         
         public var defBuyPrice:Array = null;
         
-        private function parsHash(param1:Object) : void {
+        private function parsHash(param1:Object) : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:Array = null;

@@ -6,14 +6,16 @@ package net.wg.gui.lobby.profile.components
     public class ColoredDeshLineTextItem extends DashLineTextItem
     {
         
-        public function ColoredDeshLineTextItem() {
+        public function ColoredDeshLineTextItem()
+        {
             super();
             this._valueTextColor = valueTextField.textColor;
         }
         
         private var _valueTextColor:uint = 0;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:TextFormat = null;
             super.draw();
             if(isInvalid(VALUE_INV))
@@ -24,11 +26,13 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        public function get valueTextColor() : uint {
+        public function get valueTextColor() : uint
+        {
             return this._valueTextColor;
         }
         
-        public function set valueTextColor(param1:uint) : void {
+        public function set valueTextColor(param1:uint) : void
+        {
             if(this._valueTextColor != param1)
             {
                 this._valueTextColor = param1;

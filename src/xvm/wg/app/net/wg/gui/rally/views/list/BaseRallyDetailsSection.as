@@ -16,7 +16,8 @@ package net.wg.gui.rally.views.list
     public class BaseRallyDetailsSection extends UIComponent
     {
         
-        public function BaseRallyDetailsSection() {
+        public function BaseRallyDetailsSection()
+        {
             super();
             this.slots = this.getSlots();
         }
@@ -41,24 +42,29 @@ package net.wg.gui.rally.views.list
         
         private var _vehiclesLabel:String = "";
         
-        protected function getSlots() : Array {
+        protected function getSlots() : Array
+        {
             return [];
         }
         
-        protected function onControlRollOver(param1:MouseEvent) : void {
+        protected function onControlRollOver(param1:MouseEvent) : void
+        {
         }
         
-        public function setData(param1:IRallyVO) : void {
+        public function setData(param1:IRallyVO) : void
+        {
             this.model = param1;
             invalidateData();
         }
         
-        public function set vehiclesLabel(param1:String) : void {
+        public function set vehiclesLabel(param1:String) : void
+        {
             this._vehiclesLabel = param1;
             invalidate(RallyInvalidationType.VEHICLE_LABEL);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.noRallyScreen.visible = false;
             if(this.joinButton)
@@ -79,7 +85,8 @@ package net.wg.gui.rally.views.list
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(RallyInvalidationType.VEHICLE_LABEL))
             {
@@ -101,7 +108,8 @@ package net.wg.gui.rally.views.list
             }
         }
         
-        protected function updateTitle(param1:IRallyVO) : void {
+        protected function updateTitle(param1:IRallyVO) : void
+        {
             if((param1) && (param1.commanderVal))
             {
                 App.utils.commons.formatPlayerName(this.headerTF,App.utils.commons.getUserProps(param1.commanderVal.userName,param1.commanderVal.clanAbbrev,param1.commanderVal.region));
@@ -112,11 +120,13 @@ package net.wg.gui.rally.views.list
             }
         }
         
-        protected function updateDescription(param1:IRallyVO) : void {
+        protected function updateDescription(param1:IRallyVO) : void
+        {
             this.descriptionTF.text = param1.description;
         }
         
-        protected function updateSlots(param1:IRallyVO) : void {
+        protected function updateSlots(param1:IRallyVO) : void
+        {
             var _loc3_:RallySimpleSlotRenderer = null;
             var _loc2_:Array = param1.slotsArray;
             for each(_loc3_ in this.slots)
@@ -125,11 +135,13 @@ package net.wg.gui.rally.views.list
             }
         }
         
-        protected function onControlRollOut(param1:MouseEvent = null) : void {
+        protected function onControlRollOut(param1:MouseEvent = null) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:RallySimpleSlotRenderer = null;
             if(this.joinButton)
             {
@@ -160,7 +172,8 @@ package net.wg.gui.rally.views.list
             super.onDispose();
         }
         
-        protected function onJoinClick(param1:ButtonEvent) : void {
+        protected function onJoinClick(param1:ButtonEvent) : void
+        {
             dispatchEvent(new RallyViewsEvent(RallyViewsEvent.JOIN_RALLY_REQUEST));
         }
     }

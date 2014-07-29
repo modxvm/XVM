@@ -5,7 +5,8 @@ package net.wg.gui.crewOperations
     public class CrewOperationWarningVO extends DAAPIDataClass
     {
         
-        public function CrewOperationWarningVO(param1:Object) {
+        public function CrewOperationWarningVO(param1:Object)
+        {
             super(param1);
         }
         

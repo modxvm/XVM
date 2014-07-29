@@ -10,11 +10,13 @@ package net.wg.gui.lobby.profile.components
     public class ResizableTileList extends TileList
     {
         
-        public function ResizableTileList() {
+        public function ResizableTileList()
+        {
             super();
         }
         
-        override public function set dataProvider(param1:IDataProvider) : void {
+        override public function set dataProvider(param1:IDataProvider) : void
+        {
             if(_dataProvider == param1)
             {
                 return;
@@ -23,7 +25,8 @@ package net.wg.gui.lobby.profile.components
             invalidate();
         }
         
-        override protected function drawScrollBar() : void {
+        override protected function drawScrollBar() : void
+        {
             if(!_autoScrollBar)
             {
                 return;
@@ -47,7 +50,8 @@ package net.wg.gui.lobby.profile.components
             _scrollBar.validateNow();
         }
         
-        override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
+        override protected function calculateRendererTotal(param1:Number, param2:Number) : uint
+        {
             var _loc5_:IListItemRenderer = null;
             var _loc3_:Boolean = (isNaN(_rowHeight)) && (isNaN(_autoRowHeight));
             var _loc4_:Boolean = (isNaN(_columnWidth)) && (isNaN(_autoColumnWidth));
@@ -70,7 +74,8 @@ package net.wg.gui.lobby.profile.components
             return _totalRenderers;
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc1_:IListItemRenderer = null;
             super.drawLayout();
             if((_renderers) && _renderers.length > 0)

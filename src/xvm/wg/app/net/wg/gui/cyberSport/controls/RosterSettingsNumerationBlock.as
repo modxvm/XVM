@@ -6,7 +6,8 @@ package net.wg.gui.cyberSport.controls
     public class RosterSettingsNumerationBlock extends UIComponent
     {
         
-        public function RosterSettingsNumerationBlock() {
+        public function RosterSettingsNumerationBlock()
+        {
             super();
         }
         
@@ -22,7 +23,8 @@ package net.wg.gui.cyberSport.controls
         
         public var tf7:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.tf2.text = this.tf3.text = this.tf4.text = this.tf5.text = this.tf6.text = this.tf7.text = CYBERSPORT.WINDOW_UNIT_ROSTERSETTINGSVIEW_OR;
         }

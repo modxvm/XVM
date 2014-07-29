@@ -7,7 +7,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class AlertMessage extends UIComponent
     {
         
-        public function AlertMessage() {
+        public function AlertMessage()
+        {
             super();
         }
         
@@ -17,18 +18,21 @@ package net.wg.gui.lobby.questsWindow.components
         
         public var alertTF:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.alertTF.text = QUESTS.QUESTS_CONTENT_NOQUESTSINROAMING;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.alertIcon = null;
             this.alertTF = null;
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.alertIcon.x = Math.round((this.alertTF.width - this.alertTF.textWidth) / 2 - this.alertIcon.width + ICON_PADDING);
         }

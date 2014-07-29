@@ -19,7 +19,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipVehicle extends ToolTipSpecial
     {
         
-        public function ToolTipVehicle() {
+        public function ToolTipVehicle()
+        {
             super();
             this.favoriteTextField = this.vehicleFavorite.textFied;
             this.headerTF = content.headerTF;
@@ -46,23 +47,28 @@ package net.wg.gui.components.tooltips
         
         public var tooltipStatus:Status = null;
         
-        override public function build(param1:Object, param2:ITooltipProps) : void {
+        override public function build(param1:Object, param2:ITooltipProps) : void
+        {
             super.build(param1,param2);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ToolTipVehicle " + name + "]";
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc2_:ToolTipBlockResultVO = null;
             var _loc5_:VehicleVO = null;
             var _loc6_:ILocale = null;
@@ -101,6 +107,7 @@ package net.wg.gui.components.tooltips
             _loc6_ = App.utils.locale;
             if(!_loc6_)
             {
+                trace("WARNING: locale is undefined" + this);
                 return;
             }
             var _loc7_:* = "";
@@ -137,18 +144,16 @@ package net.wg.gui.components.tooltips
                 _loc11_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
                 _loc11_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
                 _loc11_.rightTextCSS = new StyleSheet();
-                _loc11_.rightTextCSS.setStyle("h1",{
-                    "color":Utils.instance.COLOR_NORMAL,
-                    "fontSize":"11px",
-                    "fontFamily":"$TextFont",
-                    "leading":"2px"
-                });
-            _loc11_.rightTextCSS.setStyle("p",{
-                "color":Utils.instance.COLOR_ALERT,
+                _loc11_.rightTextCSS.setStyle("h1",{"color":Utils.instance.COLOR_NORMAL,
                 "fontSize":"11px",
                 "fontFamily":"$TextFont",
                 "leading":"2px"
             });
+            _loc11_.rightTextCSS.setStyle("p",{"color":Utils.instance.COLOR_ALERT,
+            "fontSize":"11px",
+            "fontFamily":"$TextFont",
+            "leading":"2px"
+        });
         _loc12_ = "";
         _loc13_ = _loc6_?_loc6_.makeString(TOOLTIPS.ITEMSTATUS_NOTENOUGH,{}):TOOLTIPS.ITEMSTATUS_NOTENOUGH;
         _loc14_ = "";
@@ -281,18 +286,16 @@ package net.wg.gui.components.tooltips
         _loc25_.childrenNamePrefix = "characteristics";
         _loc25_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
         _loc25_.rightTextCSS = new StyleSheet();
-        _loc25_.rightTextCSS.setStyle("h1",{
-            "color":Utils.instance.COLOR_NORMAL,
-            "fontSize":"11px",
-            "fontFamily":"$TextFont",
-            "leading":"2px"
-        });
-    _loc25_.rightTextCSS.setStyle("p",{
-        "color":Utils.instance.COLOR_SUB_NORMAL,
+        _loc25_.rightTextCSS.setStyle("h1",{"color":Utils.instance.COLOR_NORMAL,
         "fontSize":"11px",
         "fontFamily":"$TextFont",
         "leading":"2px"
     });
+    _loc25_.rightTextCSS.setStyle("p",{"color":Utils.instance.COLOR_SUB_NORMAL,
+    "fontSize":"11px",
+    "fontFamily":"$TextFont",
+    "leading":"2px"
+});
 _loc3_ = _loc5_.characteristics.length;
 _loc4_ = 0;
 while(_loc4_ < _loc3_)
@@ -404,7 +407,8 @@ updatePositions();
 super.redraw();
 }
 
-override protected function updateSize() : void {
+override protected function updateSize() : void
+{
 background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
 background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
 this.vehicleFavorite.x = background.width - bgShadowMargin.right;

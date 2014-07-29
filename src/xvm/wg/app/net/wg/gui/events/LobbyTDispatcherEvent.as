@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class LobbyTDispatcherEvent extends Event
     {
         
-        public function LobbyTDispatcherEvent(param1:String, param2:Boolean = false, param3:Boolean = false) {
+        public function LobbyTDispatcherEvent(param1:String, param2:Boolean = false, param3:Boolean = false)
+        {
             super(param1,param2,param3);
         }
         

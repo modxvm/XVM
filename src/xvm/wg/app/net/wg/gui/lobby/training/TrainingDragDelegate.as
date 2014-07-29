@@ -10,11 +10,13 @@ package net.wg.gui.lobby.training
     public class TrainingDragDelegate extends DropListDelegate
     {
         
-        public function TrainingDragDelegate(param1:InteractiveObject, param2:String) {
+        public function TrainingDragDelegate(param1:InteractiveObject, param2:String)
+        {
             super(param1,param2);
         }
         
-        override public function onStartDrop(param1:InteractiveObject, param2:InteractiveObject, param3:Number, param4:Number) : Boolean {
+        override public function onStartDrop(param1:InteractiveObject, param2:InteractiveObject, param3:Number, param4:Number) : Boolean
+        {
             var _loc5_:IUpdatable = null;
             if(super.onStartDrop(param1,param2,param3,param4))
             {

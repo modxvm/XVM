@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class TweenConstraints extends Object
     {
         
-        public function TweenConstraints() {
+        public function TweenConstraints()
+        {
             super();
         }
         

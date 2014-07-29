@@ -12,7 +12,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipBuySkill extends ToolTipBase
     {
         
-        public function ToolTipBuySkill() {
+        public function ToolTipBuySkill()
+        {
             super();
             this._maxWidth = 283 - (this._leftMargin + this._rightMargin);
             this._bottomMargin = 5;
@@ -41,16 +42,19 @@ package net.wg.gui.components.tooltips
         
         private var _topMargin:Number = 12;
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[BuySkillToolTip]";
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             this.setContent();
             super.redraw();
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             var _loc1_:Dimension = null;
             _loc1_ = this.getContDimension();
             background.x = background.y = 0;
@@ -59,7 +63,8 @@ package net.wg.gui.components.tooltips
             background.height = _loc1_.height + this._topMargin + this._bottomMargin;
         }
         
-        private function setContent() : void {
+        private function setContent() : void
+        {
             var _loc1_:Number = this._topMargin;
             this.header.x = this._leftMargin;
             this.header.y = _loc1_;
@@ -108,7 +113,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        private function getContDimension() : Dimension {
+        private function getContDimension() : Dimension
+        {
             var _loc1_:Dimension = new Dimension();
             _loc1_.width = this.separate_mc.width - (this._leftMargin + this._rightMargin);
             _loc1_.width = _loc1_.width > this.header.textWidth?_loc1_.width:this.header.textWidth;

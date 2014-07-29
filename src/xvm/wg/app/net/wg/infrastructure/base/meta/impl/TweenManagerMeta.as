@@ -7,7 +7,8 @@ package net.wg.infrastructure.base.meta.impl
     public class TweenManagerMeta extends BaseDAAPIComponent
     {
         
-        public function TweenManagerMeta() {
+        public function TweenManagerMeta()
+        {
             super();
         }
         
@@ -17,17 +18,20 @@ package net.wg.infrastructure.base.meta.impl
         
         public var disposeAll:Function = null;
         
-        public function createTweenS(param1:ITween) : void {
+        public function createTweenS(param1:ITween) : void
+        {
             App.utils.asserter.assertNotNull(this.createTween,"createTween" + Errors.CANT_NULL);
             this.createTween(param1);
         }
         
-        public function disposeTweenS(param1:ITween) : void {
+        public function disposeTweenS(param1:ITween) : void
+        {
             App.utils.asserter.assertNotNull(this.disposeTween,"disposeTween" + Errors.CANT_NULL);
             this.disposeTween(param1);
         }
         
-        public function disposeAllS() : void {
+        public function disposeAllS() : void
+        {
             App.utils.asserter.assertNotNull(this.disposeAll,"disposeAll" + Errors.CANT_NULL);
             this.disposeAll();
         }

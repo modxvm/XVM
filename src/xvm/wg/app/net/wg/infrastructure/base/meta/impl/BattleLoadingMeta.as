@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class BattleLoadingMeta extends AbstractView
     {
         
-        public function BattleLoadingMeta() {
+        public function BattleLoadingMeta()
+        {
             super();
         }
         
         public var onLoadComplete:Function = null;
         
-        public function onLoadCompleteS() : Boolean {
+        public function onLoadCompleteS() : Boolean
+        {
             App.utils.asserter.assertNotNull(this.onLoadComplete,"onLoadComplete" + Errors.CANT_NULL);
             return this.onLoadComplete();
         }

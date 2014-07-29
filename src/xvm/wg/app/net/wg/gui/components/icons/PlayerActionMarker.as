@@ -5,7 +5,8 @@ package net.wg.gui.components.icons
     public class PlayerActionMarker extends UIComponent
     {
         
-        public function PlayerActionMarker() {
+        public function PlayerActionMarker()
+        {
             super();
         }
         
@@ -15,11 +16,13 @@ package net.wg.gui.components.icons
         
         private var ACTIONS_LABEL:String = "actions";
         
-        public function get action() : Number {
+        public function get action() : Number
+        {
             return this._actionBitMask;
         }
         
-        public function set action(param1:Number) : void {
+        public function set action(param1:Number) : void
+        {
             if(this._actionBitMask == param1)
             {
                 return;
@@ -28,11 +31,13 @@ package net.wg.gui.components.icons
             invalidate();
         }
         
-        public function get team() : String {
+        public function get team() : String
+        {
             return this._team;
         }
         
-        public function set team(param1:String) : void {
+        public function set team(param1:String) : void
+        {
             if(this._team == param1)
             {
                 return;
@@ -41,7 +46,8 @@ package net.wg.gui.components.icons
             invalidate();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var allActions:Array = null;
             var elName:String = null;
             var i:uint = 0;

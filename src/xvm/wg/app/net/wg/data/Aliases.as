@@ -3,7 +3,8 @@ package net.wg.data
     public class Aliases extends Object
     {
         
-        public function Aliases() {
+        public function Aliases()
+        {
             super();
         }
         
@@ -165,24 +166,24 @@ package net.wg.data
         
         public static var PROFILE_TECHNIQUE_PAGE:String = "profileTechniquePage";
         
-        public static var DEBUG_CONTROLS:String = "controls";
+        public static var DEBUG_CONTROLS:String = LIB_CONTROLS;
         
-        public static var DEBUG_ADVANCED:String = "advanced";
+        public static var DEBUG_ADVANCED:String = LIB_ADVANCED;
         
-        public static var DEBUG_WINDOWS:String = "windows";
+        public static var DEBUG_WINDOWS:String = LIB_WINDOWS;
         
         public static var DEBUG_CREW:String = "debugCrew";
         
         public static var PRESENTER:String = "presenter";
         
-        public static var CLIENT_VIEWS:Array;
+        public static var CLIENT_VIEWS:Array = [LOGIN,LOBBY,TEST_WINDOW,EULA,BATTLE_SESSION_WINDOW,BATTLE_SESSION_LIST,LOBBY_HANGAR,ELITE_WINDOW,LOBBY_SHOP,LOBBY_PROFILE,LOBBY_BARRACKS,BATTLE_RESULTS,RECRUIT_WINDOW,EXCHANGE_WINDOW,EXCHANGE_VCOIN_WINDOW,EXCHANGE_FREE_TO_TANKMAN_XP_WINDOW,EXCHANGE_XP_WINDOW,VEHICLE_BUY_WINDOW,SIMPLE_DLG,ICON_PRICE_DLG,ICON_DLG,LOBBY_TRAINING_FORM,TRAINING_WINDOW,TEAM_LIST_WINDOW,TEAM_WINDOW,PROFILE_WINDOW,CONFIRM_MODULE_WINDOW,LOBBY_TRAINING_ROOM,VEHICLE_SELL_DIALOG,PREMIUM_FORM,PERSONAL_CASE,SKILL_DROP_WINDOW,SQUAD_MESSENGER,PRB_SEND_INVITE_WINDOW,NOTIFICATIONS_LIST,RETRAIN_CREW,CREW_OPERATIONS_POPOVER,BATTLE_TYPE_SELECT_POPOVER,SYSTEM_MESSAGE_DIALOG,SECURE_CHANNEL_WINDOW,DISMISS_TANKMAN_DIALOG];
         
-        public static var DEBUG_VIEWS:Array;
+        public static var DEBUG_VIEWS:Array = [DEBUG_CONTROLS,DEBUG_ADVANCED,DEBUG_WINDOWS,DEBUG_CREW,INTRO];
         
-        public static var ALL_VIEWS:Array;
+        public static var ALL_VIEWS:Array = CLIENT_VIEWS.concat(DEBUG_VIEWS);
         
-        public static var SYSTEM_VIEWS:Array;
+        public static var SYSTEM_VIEWS:Array = [PRESENTER,CURSOR];
         
-        public static var DEFAULT_VIEWS:Array;
+        public static var DEFAULT_VIEWS:Array = [RETRAIN_CREW];
     }
 }

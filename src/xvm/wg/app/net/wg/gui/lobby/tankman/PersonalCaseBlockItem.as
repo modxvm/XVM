@@ -14,7 +14,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseBlockItem extends UIComponent
     {
         
-        public function PersonalCaseBlockItem() {
+        public function PersonalCaseBlockItem()
+        {
             super();
         }
         
@@ -34,7 +35,8 @@ package net.wg.gui.lobby.tankman
         
         private var _skillName:String = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.skills.removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
             this.skills.removeEventListener(MouseEvent.MOUSE_MOVE,this.onMouseOver);
@@ -49,7 +51,8 @@ package net.wg.gui.lobby.tankman
             this._skillName = null;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.skills.buttonMode = true;
             super.configUI();
             var _loc1_:PersonalCaseEvent = new PersonalCaseEvent(PersonalCaseEvent.GET_TANKMAN_ID,true);
@@ -57,7 +60,8 @@ package net.wg.gui.lobby.tankman
             dispatchEvent(_loc1_);
         }
         
-        public function set setData(param1:Object) : void {
+        public function set setData(param1:Object) : void
+        {
             var _loc3_:String = null;
             this.model = param1;
             var _loc2_:String = Extensions.isScaleform?MENU.profile_stats_items(this.model.name):this.model.name;
@@ -100,7 +104,8 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        private function addListenersToIcon() : void {
+        private function addListenersToIcon() : void
+        {
             this.skills.buttonMode = true;
             this.skills.addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
             this.skills.addEventListener(MouseEvent.MOUSE_MOVE,this.onMouseOver);
@@ -108,7 +113,8 @@ package net.wg.gui.lobby.tankman
             this.skills.addEventListener(ButtonEvent.CLICK,this.skills_buttonClickHandler);
         }
         
-        private function onMouseOver(param1:MouseEvent) : void {
+        private function onMouseOver(param1:MouseEvent) : void
+        {
             App.cursor.setCursor(Cursors.BUTTON);
             if(!this.model.hasOwnProperty("name") && !this.model.hasOwnProperty("tankmanID") && !(this.model.name == null))
             {
@@ -124,25 +130,30 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        public function getTankmanID(param1:int, param2:String) : void {
+        public function getTankmanID(param1:int, param2:String) : void
+        {
             this._tankmanID = param1;
             this._skillName = param2;
         }
         
-        private function onMouseOut(param1:MouseEvent) : void {
+        private function onMouseOut(param1:MouseEvent) : void
+        {
             App.cursor.setCursor(Cursors.ARROW);
             App.toolTipMgr.hide();
         }
         
-        private function skills_buttonClickHandler(param1:ButtonEvent) : void {
+        private function skills_buttonClickHandler(param1:ButtonEvent) : void
+        {
             this.dispatchPersonalCaseEvent();
         }
         
-        private function skills_mouseClickHandler(param1:MouseEvent) : void {
+        private function skills_mouseClickHandler(param1:MouseEvent) : void
+        {
             this.dispatchPersonalCaseEvent();
         }
         
-        private function dispatchPersonalCaseEvent() : void {
+        private function dispatchPersonalCaseEvent() : void
+        {
             dispatchEvent(new PersonalCaseEvent(PersonalCaseEvent.CHANGE_TAB_ON_TWO,true));
         }
     }

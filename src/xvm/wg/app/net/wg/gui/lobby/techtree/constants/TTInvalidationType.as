@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.constants
     public class TTInvalidationType extends Object
     {
         
-        public function TTInvalidationType() {
+        public function TTInvalidationType()
+        {
             super();
         }
         

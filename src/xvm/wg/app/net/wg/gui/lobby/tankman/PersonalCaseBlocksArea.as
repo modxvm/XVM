@@ -10,7 +10,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseBlocksArea extends UIComponent
     {
         
-        public function PersonalCaseBlocksArea() {
+        public function PersonalCaseBlocksArea()
+        {
             super();
         }
         
@@ -26,12 +27,14 @@ package net.wg.gui.lobby.tankman
         
         private var paddingY:int = 17;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.removeElements();
         }
         
-        private function removeElements() : void {
+        private function removeElements() : void
+        {
             var _loc1_:uint = this.numChildren;
             var _loc2_:int = _loc1_ - 1;
             while(_loc2_ >= 0)
@@ -45,7 +48,8 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        public function setData(param1:Array) : void {
+        public function setData(param1:Array) : void
+        {
             if(!App.instance || param1 == null)
             {
                 return;
@@ -61,7 +65,8 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        private function updateBlocks() : void {
+        private function updateBlocks() : void
+        {
             var _loc3_:Object = null;
             this.paddingY = Y_START_POSITION;
             var _loc1_:int = this.numChildren;
@@ -78,7 +83,8 @@ package net.wg.gui.lobby.tankman
             this.initializeBlocks();
         }
         
-        private function initializeBlocks() : void {
+        private function initializeBlocks() : void
+        {
             var _loc2_:Object = null;
             var _loc1_:* = 0;
             while(_loc1_ < this.data.length)
@@ -90,7 +96,8 @@ package net.wg.gui.lobby.tankman
             this.isElementsCreated = true;
         }
         
-        private function createTitles(param1:Object) : void {
+        private function createTitles(param1:Object) : void
+        {
             var _loc2_:MovieClip = this.classFactory(Linkages.PERSONAL_CASE_TITLE_BLOCK);
             if(Extensions.isScaleform)
             {
@@ -106,7 +113,8 @@ package net.wg.gui.lobby.tankman
             this.creteRows(param1.stats);
         }
         
-        private function creteRows(param1:Array) : void {
+        private function creteRows(param1:Array) : void
+        {
             var _loc3_:Object = null;
             var _loc4_:PersonalCaseBlockItem = null;
             var _loc2_:* = 0;
@@ -123,7 +131,8 @@ package net.wg.gui.lobby.tankman
             this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCK_TITLE;
         }
         
-        private function classFactory(param1:String) : * {
+        private function classFactory(param1:String) : *
+        {
             return App.utils.classFactory.getComponent(param1,MovieClip);
         }
     }

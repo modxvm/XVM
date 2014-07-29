@@ -15,7 +15,8 @@ package net.wg.gui.prebattle.invites
     public class InviteStackContainerBase extends UIComponent implements IViewStackContent
     {
         
-        public function InviteStackContainerBase() {
+        public function InviteStackContainerBase()
+        {
             this.dataProvider = new DAAPIDataProvider();
             super();
         }
@@ -24,7 +25,8 @@ package net.wg.gui.prebattle.invites
         
         public var dataProvider:DAAPIDataProvider;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.rosterList.removeEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
             this.rosterList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.rosterList_itemDoubleClickHandler);
@@ -34,7 +36,8 @@ package net.wg.gui.prebattle.invites
             this.dataProvider = null;
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -44,7 +47,8 @@ package net.wg.gui.prebattle.invites
             this.rosterList.validateNow();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             focusable = true;
             super.configUI();
             constraints = new Constraints(this,ConstrainMode.REFLOW);
@@ -57,7 +61,8 @@ package net.wg.gui.prebattle.invites
             this.initDispatcher(SendInvitesEvent.INIT_COMPONENT,this);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((constraints) && (isInvalid(InvalidationType.SIZE)))
             {
@@ -65,20 +70,23 @@ package net.wg.gui.prebattle.invites
             }
         }
         
-        private function showContextMenu(param1:ListEventEx) : void {
+        private function showContextMenu(param1:ListEventEx) : void
+        {
             if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
             {
                 this.initDispatcher(SendInvitesEvent.SHOW_CONTEXT_MENU,param1.itemData);
             }
         }
         
-        protected function initDispatcher(param1:String, param2:Object) : void {
+        protected function initDispatcher(param1:String, param2:Object) : void
+        {
             var _loc3_:SendInvitesEvent = new SendInvitesEvent(param1,true);
             _loc3_.initItem = param2;
             dispatchEvent(_loc3_);
         }
         
-        private function rosterList_itemDoubleClickHandler(param1:ListEventEx) : void {
+        private function rosterList_itemDoubleClickHandler(param1:ListEventEx) : void
+        {
             if(param1.buttonIdx == MouseEventEx.LEFT_BUTTON)
             {
                 if(param1.itemData)
@@ -88,11 +96,13 @@ package net.wg.gui.prebattle.invites
             }
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

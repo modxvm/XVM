@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class ColorSchemeNames extends Object
     {
         
-        public function ColorSchemeNames() {
+        public function ColorSchemeNames()
+        {
             super();
         }
         

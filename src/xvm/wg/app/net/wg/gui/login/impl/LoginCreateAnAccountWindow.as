@@ -13,7 +13,8 @@ package net.wg.gui.login.impl
     public class LoginCreateAnAccountWindow extends LoginCreateAnAccountWindowMeta implements ILoginCreateAnAccountWindowMeta
     {
         
-        public function LoginCreateAnAccountWindow() {
+        public function LoginCreateAnAccountWindow()
+        {
             super();
             canClose = false;
             showWindowBg = false;
@@ -35,7 +36,8 @@ package net.wg.gui.login.impl
         
         private var _firstUpdate:Boolean = true;
         
-        public function as_updateTexts(param1:String, param2:String, param3:String, param4:String) : void {
+        public function as_updateTexts(param1:String, param2:String, param3:String, param4:String) : void
+        {
             this.inputNick.text = param1;
             this.titleField.htmlText = param2;
             if(this._firstUpdate)
@@ -50,7 +52,8 @@ package net.wg.gui.login.impl
             this.createBtn.label = param4;
         }
         
-        public function as_registerResponse(param1:Boolean, param2:String) : void {
+        public function as_registerResponse(param1:Boolean, param2:String) : void
+        {
             if(param1)
             {
                 onWindowCloseS();
@@ -63,7 +66,8 @@ package net.wg.gui.login.impl
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.getBackground().alpha = 0;
             this.noteField.htmlText = DIALOGS.CREATEANACCOUNT_NOTE;
@@ -72,7 +76,8 @@ package net.wg.gui.login.impl
             this.enableInputs(true);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(InputEvent.INPUT,this.handleInput);
             this.createBtn.removeEventListener(ButtonEvent.CLICK,this.onCreateBtnClickHandler);
             this.createBtn.dispose();
@@ -86,7 +91,8 @@ package net.wg.gui.login.impl
             super.onDispose();
         }
         
-        private function enableInputs(param1:Boolean) : void {
+        private function enableInputs(param1:Boolean) : void
+        {
             if(param1)
             {
                 addEventListener(InputEvent.INPUT,this.handleInput);
@@ -99,16 +105,19 @@ package net.wg.gui.login.impl
             this.inputNick.enabled = param1;
         }
         
-        private function doRegister() : void {
+        private function doRegister() : void
+        {
             this.enableInputs(false);
             onRegisterS(this.inputNick.text);
         }
         
-        private function onCreateBtnClickHandler(param1:ButtonEvent) : void {
+        private function onCreateBtnClickHandler(param1:ButtonEvent) : void
+        {
             this.doRegister();
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             super.handleInput(param1);
             if(param1.handled)
             {

@@ -6,7 +6,8 @@ package net.wg.gui.components.common.video.advanced
     public class SliderPlayerProgressBar extends AbstractPlayerProgressBar
     {
         
-        public function SliderPlayerProgressBar() {
+        public function SliderPlayerProgressBar()
+        {
             super();
             this.x = 362;
             this.y = 682;
@@ -14,17 +15,20 @@ package net.wg.gui.components.common.video.advanced
         
         public var slider:ProgressBarSlider;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.slider.addEventListener(SliderEvent.VALUE_CHANGE,this.sliderChangeHandler,false,0,true);
             this.slider.addEventListener(ProgressBarSlider.THUMB_DRUGGING_STATE,this.thumbDrugStateChangeHandler,false,0,true);
         }
         
-        private function thumbDrugStateChangeHandler(param1:Event) : void {
+        private function thumbDrugStateChangeHandler(param1:Event) : void
+        {
             setUnderUsingState(this.slider.isSliderThumbDruggingNow());
         }
         
-        private function sliderChangeHandler(param1:SliderEvent) : void {
+        private function sliderChangeHandler(param1:SliderEvent) : void
+        {
             param1.stopImmediatePropagation();
             if(_position != this.slider.value)
             {
@@ -32,11 +36,13 @@ package net.wg.gui.components.common.video.advanced
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function applyTimeUpdating() : void {
+        override protected function applyTimeUpdating() : void
+        {
             super.applyTimeUpdating();
             if(this.slider.value != _position)
             {
@@ -44,7 +50,8 @@ package net.wg.gui.components.common.video.advanced
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.slider.removeEventListener(SliderEvent.VALUE_CHANGE,this.sliderChangeHandler);
             this.slider.removeEventListener(ProgressBarSlider.THUMB_DRUGGING_STATE,this.thumbDrugStateChangeHandler);
             super.onDispose();

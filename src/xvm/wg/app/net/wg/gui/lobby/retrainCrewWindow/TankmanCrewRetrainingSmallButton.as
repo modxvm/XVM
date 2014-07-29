@@ -6,7 +6,8 @@ package net.wg.gui.lobby.retrainCrewWindow
     public class TankmanCrewRetrainingSmallButton extends TankmanTrainingSmallButton
     {
         
-        public function TankmanCrewRetrainingSmallButton() {
+        public function TankmanCrewRetrainingSmallButton()
+        {
             super();
         }
         
@@ -20,12 +21,14 @@ package net.wg.gui.lobby.retrainCrewWindow
         
         private var _currentVehicleIntCD:int;
         
-        override public function set level(param1:Number) : void {
+        override public function set level(param1:Number) : void
+        {
             _level = param1;
             this.updateLevelLabel();
         }
         
-        override protected function setEnabled() : void {
+        override protected function setEnabled() : void
+        {
             var _loc1_:* = false;
             var _loc2_:RetrainTankmanVO = null;
             var _loc3_:* = 0;
@@ -49,7 +52,8 @@ package net.wg.gui.lobby.retrainCrewWindow
             enabled = _loc1_;
         }
         
-        private function updateLevelLabel() : void {
+        private function updateLevelLabel() : void
+        {
             var _loc3_:* = 0;
             var _loc4_:RetrainTankmanVO = null;
             var _loc6_:uint = 0;
@@ -81,15 +85,18 @@ package net.wg.gui.lobby.retrainCrewWindow
             levelLabel.text = _loc7_ + "%";
         }
         
-        public function set currentVehicleType(param1:String) : void {
+        public function set currentVehicleType(param1:String) : void
+        {
             this._currentVehicleType = param1;
         }
         
-        public function set crewInfo(param1:Array) : void {
+        public function set crewInfo(param1:Array) : void
+        {
             this._crewInfo = param1;
         }
         
-        public function set currentVehicleIntCD(param1:int) : void {
+        public function set currentVehicleIntCD(param1:int) : void
+        {
             this._currentVehicleIntCD = param1;
         }
     }

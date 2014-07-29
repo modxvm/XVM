@@ -6,7 +6,8 @@ package net.wg.gui.cyberSport.views.autoSearch
     public class SearchCommands extends StateViewBase
     {
         
-        public function SearchCommands() {
+        public function SearchCommands()
+        {
             super();
             currentState = CYBER_SPORT_ALIASES.AUTO_SEARCH_COMMANDS_STATE;
             mainField.text = CYBERSPORT.WINDOW_AUTOSEARCH_SEARCHCOMMAND_MAINTEXT;
@@ -19,20 +20,23 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         public var dynamicCtxText:TextField;
         
-        override protected function updateView() : void {
+        override protected function updateView() : void
+        {
             super.updateView();
             updateTime();
             startTimer();
             this.contextMessage(model.contextMessage);
         }
         
-        override protected function onTimer() : void {
+        override protected function onTimer() : void
+        {
             super.onTimer();
             updateTime();
             startTimer();
         }
         
-        override protected function contextMessage(param1:String) : void {
+        override protected function contextMessage(param1:String) : void
+        {
             super.contextMessage(param1);
             this.dynamicCtxText.htmlText = param1;
         }

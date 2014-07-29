@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class FortClanListWindowVO extends DAAPIDataClass
     {
         
-        public function FortClanListWindowVO(param1:Object) {
+        public function FortClanListWindowVO(param1:Object)
+        {
             this._members = [];
             super(param1);
         }
@@ -16,15 +17,18 @@ package net.wg.gui.lobby.fortifications.data
         
         private var _members:Array;
         
-        public function get windowTitle() : String {
+        public function get windowTitle() : String
+        {
             return this._windowTitle;
         }
         
-        public function set windowTitle(param1:String) : void {
+        public function set windowTitle(param1:String) : void
+        {
             this._windowTitle = param1;
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Object = null;
             var _loc4_:ClanListRendererVO = null;
             if(param1 == MEMBERS)
@@ -39,7 +43,8 @@ package net.wg.gui.lobby.fortifications.data
             return super.onDataWrite(param1,param2);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:FortClanMemberVO = null;
             for each(_loc1_ in this._members)
             {
@@ -49,11 +54,13 @@ package net.wg.gui.lobby.fortifications.data
             super.onDispose();
         }
         
-        public function get members() : Array {
+        public function get members() : Array
+        {
             return this._members;
         }
         
-        public function set members(param1:Array) : void {
+        public function set members(param1:Array) : void
+        {
             this._members = param1;
         }
     }

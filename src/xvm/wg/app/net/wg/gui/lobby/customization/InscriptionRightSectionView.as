@@ -7,39 +7,48 @@ package net.wg.gui.lobby.customization
     public class InscriptionRightSectionView extends BaseTimedCustomizationSectionView
     {
         
-        public function InscriptionRightSectionView() {
+        public function InscriptionRightSectionView()
+        {
             super();
         }
         
-        override public function getEmptyDataItem() : Object {
+        override public function getEmptyDataItem() : Object
+        {
             return DAAPIItemsDataProvider.getEmptyItem();
         }
         
-        override public function getItemsDP() : DAAPIItemsDataProvider {
+        override public function getItemsDP() : DAAPIItemsDataProvider
+        {
             return form.inscriptionRightDP;
         }
         
-        override public function getGroupsDP() : DAAPIDataProvider {
+        override public function getGroupsDP() : DAAPIDataProvider
+        {
             return form.inscriptionRightGroupsDataProvider;
         }
         
-        override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider {
+        override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider
+        {
             return form.inscriptionRightRentalPackageDP;
         }
         
-        override public function getViewLinkage() : String {
+        override public function getViewLinkage() : String
+        {
             return BaseTimedCustomizationSectionView.INSCRIPTION_GROUP_VIEW_COPY;
         }
         
-        override public function getTimeSectionLabel() : String {
+        override public function getTimeSectionLabel() : String
+        {
             return MENU.CUSTOMIZATION_LABELS_INSCRIPTION_PERIOD;
         }
         
-        override public function getDropButtonTooltip() : String {
+        override public function getDropButtonTooltip() : String
+        {
             return TOOLTIPS.CUSTOMIZATION_INSCRIPTIONRIGHT_CURRENT_DROP;
         }
         
-        override public function getSectionName() : String {
+        override public function getSectionName() : String
+        {
             return BaseTimedCustomizationSectionView.INSCRIPTION_RIGHT;
         }
     }

@@ -11,11 +11,13 @@ package net.wg.gui.lobby.techtree.data
     public class NationXMLDataProvider extends NationVODataProvider
     {
         
-        public function NationXMLDataProvider() {
+        public function NationXMLDataProvider()
+        {
             super();
         }
         
-        override public function parse(param1:Object) : void {
+        override public function parse(param1:Object) : void
+        {
             var _loc5_:* = NaN;
             var _loc6_:XML = null;
             var _loc8_:NodeData = null;
@@ -43,7 +45,8 @@ package net.wg.gui.lobby.techtree.data
             _displaySettings = new NationDisplaySettings(_loc7_.child("nodeRendererName").text(),_loc7_.child("isLevelDisplayed").text());
         }
         
-        private function getNodeDisplayInfo(param1:XML) : NTDisplayInfo {
+        private function getNodeDisplayInfo(param1:XML) : NTDisplayInfo
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -52,7 +55,8 @@ package net.wg.gui.lobby.techtree.data
             throw new Error("Not decompiled due to error");
         }
         
-        private function getNodeData(param1:XML) : NodeData {
+        private function getNodeData(param1:XML) : NodeData
+        {
             var _loc4_:XML = null;
             var _loc2_:NodeData = new NodeData();
             var _loc3_:Array = [];

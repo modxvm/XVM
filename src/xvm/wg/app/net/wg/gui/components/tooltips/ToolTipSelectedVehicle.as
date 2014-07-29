@@ -11,7 +11,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipSelectedVehicle extends ToolTipSpecial
     {
         
-        public function ToolTipSelectedVehicle() {
+        public function ToolTipSelectedVehicle()
+        {
             super();
             this.headerTF = content.headerTF;
             this.whiteBg = content.whiteBg;
@@ -27,11 +28,13 @@ package net.wg.gui.components.tooltips
         
         private var MARGIN_BEETWEEN_BLOCKS:Number = 3;
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ToolTipSelectedVehicle " + name + "]";
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             var _loc1_:Separator = null;
             if(content.width < this.MIN_CONTENT_WIDTH)
             {
@@ -46,7 +49,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc1_:ILocale = null;
             var _loc2_:VehicleVO = null;
             var _loc3_:Separator = null;
@@ -72,7 +76,8 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number {
+        private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number
+        {
             var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
             _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
             _loc4_.x = contentMargin.left + bgShadowMargin.left;

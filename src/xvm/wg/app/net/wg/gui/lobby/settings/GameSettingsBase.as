@@ -10,7 +10,8 @@ package net.wg.gui.lobby.settings
     public class GameSettingsBase extends SettingsBaseView
     {
         
-        public function GameSettingsBase() {
+        public function GameSettingsBase()
+        {
             super();
         }
         
@@ -70,7 +71,8 @@ package net.wg.gui.lobby.settings
         
         public var showMarksOnGunCheckbox:CheckBox = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.fieldSetChat.label = SETTINGS.GAME_FIELDSET_HEADERCHAT;
             this.fieldSetInstructionPanel.label = SETTINGS.GAME_PLAYERPANELSETTINGS;
             this.fieldSetBattleTypes.label = SETTINGS.GAME_FIELDSET_HEADERGAMEPLAY;

@@ -10,7 +10,8 @@ package net.wg.gui.components.controls.achievements
     public class AchievementCounter extends CustomAchievement
     {
         
-        public function AchievementCounter() {
+        public function AchievementCounter()
+        {
             super();
         }
         
@@ -40,37 +41,44 @@ package net.wg.gui.components.controls.achievements
         
         private var _counterValue:String;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             this.applyData();
         }
         
-        public function get counterType() : String {
+        public function get counterType() : String
+        {
             return this._counterType;
         }
         
-        public function set counterType(param1:String) : void {
+        public function set counterType(param1:String) : void
+        {
             this._counterType = param1;
             invalidate(COUNTER_TYPE_INVALID);
         }
         
-        public function get counterValue() : String {
+        public function get counterValue() : String
+        {
             return this._counterValue;
         }
         
-        public function set counterValue(param1:String) : void {
+        public function set counterValue(param1:String) : void
+        {
             this._counterValue = param1;
             invalidate(COUNTER_VALUE_INVALID);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             loader.mouseChildren = false;
             loader.buttonMode = false;
             this.buttonMode = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:String = null;
             super.draw();
             if(isInvalid(COUNTER_TYPE_INVALID))
@@ -133,7 +141,8 @@ package net.wg.gui.components.controls.achievements
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if((this.counter) && (contains(this.counter)))
             {
                 removeChild(this.counter);
@@ -141,7 +150,8 @@ package net.wg.gui.components.controls.achievements
             super.onDispose();
         }
         
-        protected function applyLayoutChanges() : void {
+        protected function applyLayoutChanges() : void
+        {
             if((this.counter) && (!(loader.width == 0)) && !(loader.height == 0))
             {
                 this.counter.x = loader.x + loader.originalWidth - this.counter.actualWidth ^ 0;
@@ -150,7 +160,8 @@ package net.wg.gui.components.controls.achievements
             }
         }
         
-        protected function applyData() : void {
+        protected function applyData() : void
+        {
             if(data)
             {
                 if(data.hasOwnProperty("counterType"))
@@ -160,7 +171,8 @@ package net.wg.gui.components.controls.achievements
             }
         }
         
-        protected function showToolTip() : void {
+        protected function showToolTip() : void
+        {
             if(data)
             {
                 if(data.name == "markOfMastery")
@@ -179,12 +191,14 @@ package net.wg.gui.components.controls.achievements
             }
         }
         
-        override protected function onComplete(param1:UILoaderEvent) : void {
+        override protected function onComplete(param1:UILoaderEvent) : void
+        {
             super.onComplete(param1);
             invalidate(LAYOUT_INVALID);
         }
         
-        override protected function handleStageChange(param1:Event) : void {
+        override protected function handleStageChange(param1:Event) : void
+        {
             if(param1.type == Event.ADDED_TO_STAGE)
             {
                 removeEventListener(Event.ADDED_TO_STAGE,this.handleStageChange,false);
@@ -197,12 +211,14 @@ package net.wg.gui.components.controls.achievements
             }
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             this.showToolTip();
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             super.handleMouseRollOut(param1);
             App.toolTipMgr.hide();
         }

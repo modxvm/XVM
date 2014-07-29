@@ -7,7 +7,8 @@ package net.wg.gui.components.advanced
     public class ContentTabRenderer extends SoundButtonEx
     {
         
-        public function ContentTabRenderer() {
+        public function ContentTabRenderer()
+        {
             super();
         }
         
@@ -21,7 +22,8 @@ package net.wg.gui.components.advanced
         
         private var _isLast:Boolean = false;
         
-        override public function showTooltip(param1:MouseEvent) : void {
+        override public function showTooltip(param1:MouseEvent) : void
+        {
             if(!enabled)
             {
                 App.cursor.setCursor(Cursors.ARROW);
@@ -33,21 +35,25 @@ package net.wg.gui.components.advanced
             super.showTooltip(param1);
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             mouseEnabled = true;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             setState(_state);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function updateDisable() : void {
+        override protected function updateDisable() : void
+        {
             if(disableMc != null)
             {
                 disableMc.visible = !enabled;
@@ -60,7 +66,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             var _loc1_:* = "";
             if(this._isFirst)
             {
@@ -78,20 +85,24 @@ package net.wg.gui.components.advanced
             return Vector.<String>([_loc1_]);
         }
         
-        public function get isFirst() : Boolean {
+        public function get isFirst() : Boolean
+        {
             return this._isFirst;
         }
         
-        public function set isFirst(param1:Boolean) : void {
+        public function set isFirst(param1:Boolean) : void
+        {
             this._isFirst = param1;
             invalidateState();
         }
         
-        public function get isLast() : Boolean {
+        public function get isLast() : Boolean
+        {
             return this._isLast;
         }
         
-        public function set isLast(param1:Boolean) : void {
+        public function set isLast(param1:Boolean) : void
+        {
             this._isLast = param1;
             invalidateState();
         }

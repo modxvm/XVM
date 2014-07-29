@@ -6,7 +6,8 @@ package net.wg.gui.lobby.fortifications.events
     public class FortBuildingEvent extends Event
     {
         
-        public function FortBuildingEvent(param1:String) {
+        public function FortBuildingEvent(param1:String)
+        {
             super(param1,true,true);
         }
         
@@ -14,9 +15,9 @@ package net.wg.gui.lobby.fortifications.events
         
         public static var BUILDING_SELECTED:String = "buildingSelected";
         
-        public static var FIRST_TRANSPORTING_STEP:String = "step1";
+        public static var FIRST_TRANSPORTING_STEP:String = EVENT_LOG_CONSTANTS.EVENT_TYPE_STEP_1;
         
-        public static var NEXT_TRANSPORTING_STEP:String = "step2";
+        public static var NEXT_TRANSPORTING_STEP:String = EVENT_LOG_CONSTANTS.EVENT_TYPE_STEP_2;
         
         public var isOpenedCtxMenu:Boolean = false;
         
@@ -26,27 +27,33 @@ package net.wg.gui.lobby.fortifications.events
         
         private var _uid:String = "";
         
-        public function get uid() : String {
+        public function get uid() : String
+        {
             return this._uid;
         }
         
-        public function set uid(param1:String) : void {
+        public function set uid(param1:String) : void
+        {
             this._uid = param1;
         }
         
-        public function get position() : int {
+        public function get position() : int
+        {
             return this._position;
         }
         
-        public function set position(param1:int) : void {
+        public function set position(param1:int) : void
+        {
             this._position = param1;
         }
         
-        public function get direction() : int {
+        public function get direction() : int
+        {
             return this._direction;
         }
         
-        public function set direction(param1:int) : void {
+        public function set direction(param1:int) : void
+        {
             this._direction = param1;
         }
     }

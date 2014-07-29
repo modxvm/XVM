@@ -5,14 +5,17 @@ package net.wg.gui.components.controls
     public class ReadOnlyScrollingList extends ScrollingListEx
     {
         
-        public function ReadOnlyScrollingList() {
+        public function ReadOnlyScrollingList()
+        {
             super();
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ReadOnlyScrollingList " + name + "]";
         }
     }

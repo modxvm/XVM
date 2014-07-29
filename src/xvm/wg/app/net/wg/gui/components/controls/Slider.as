@@ -12,7 +12,8 @@ package net.wg.gui.components.controls
     public class Slider extends scaleform.clik.controls.Slider
     {
         
-        public function Slider() {
+        public function Slider()
+        {
             this._fillPadding = new Padding(3,6,3,2);
             super();
             offsetLeft = 3;
@@ -50,7 +51,8 @@ package net.wg.gui.components.controls
         
         private var _maxAvailableValue:Number = NaN;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.MOUSE_WHEEL,this.onScrollWheel,false);
             this.progress_mask = null;
             if(this.patternMc)
@@ -66,7 +68,8 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        override protected function scrollWheel(param1:Number) : void {
+        override protected function scrollWheel(param1:Number) : void
+        {
             if(!this.enabled)
             {
                 return;
@@ -75,41 +78,48 @@ package net.wg.gui.components.controls
             dispatchEvent(new Event(Event.CHANGE));
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             track["progress_mask"].gotoAndStop(0);
             addEventListener(MouseEvent.MOUSE_WHEEL,this.onScrollWheel,false,0,true);
         }
         
-        override protected function beginDrag(param1:MouseEvent) : void {
+        override protected function beginDrag(param1:MouseEvent) : void
+        {
             if(App.utils.commons.isLeftButton(param1))
             {
                 super.beginDrag(param1);
             }
         }
         
-        override protected function trackPress(param1:MouseEvent) : void {
+        override protected function trackPress(param1:MouseEvent) : void
+        {
             if(App.utils.commons.isLeftButton(param1))
             {
                 super.trackPress(param1);
             }
         }
         
-        protected function onScrollWheel(param1:MouseEvent) : void {
+        protected function onScrollWheel(param1:MouseEvent) : void
+        {
             this.scrollWheel(param1.delta);
             param1.stopPropagation();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.updatePatterns();
         }
         
-        public function get undefinedDisabled() : Boolean {
+        public function get undefinedDisabled() : Boolean
+        {
             return this._undefined;
         }
         
-        public function set undefinedDisabled(param1:Boolean) : void {
+        public function set undefinedDisabled(param1:Boolean) : void
+        {
             if(this._undefined == param1)
             {
                 return;
@@ -122,11 +132,13 @@ package net.wg.gui.components.controls
             invalidate(InvalidationType.STATE);
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return super.enabled;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(param1 == super.enabled)
             {
                 return;
@@ -140,17 +152,20 @@ package net.wg.gui.components.controls
             invalidate(InvalidationType.STATE);
         }
         
-        override public function set value(param1:Number) : void {
+        override public function set value(param1:Number) : void
+        {
             _value = this.lockValue(param1);
             dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,_value));
             this.updateThumb();
         }
         
-        public function get maxAvailableValue() : Number {
+        public function get maxAvailableValue() : Number
+        {
             return this._maxAvailableValue;
         }
         
-        public function set maxAvailableValue(param1:Number) : void {
+        public function set maxAvailableValue(param1:Number) : void
+        {
             if((isNaN(this._maxAvailableValue)) && (isNaN(param1)) || param1 == this._maxAvailableValue)
             {
                 return;
@@ -163,7 +178,8 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        override protected function doDrag(param1:MouseEvent) : void {
+        override protected function doDrag(param1:MouseEvent) : void
+        {
             var _loc2_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
             var _loc3_:Number = _loc2_.x - _dragOffset.x;
             var _loc4_:Number = track.width - offsetLeft - offsetRight;
@@ -180,7 +196,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function updateThumb() : void {
+        override protected function updateThumb() : void
+        {
             var _loc2_:* = NaN;
             var _loc1_:Number = track.width - offsetLeft - offsetRight;
             thumb.x = (_value - _minimum) / (_maximum - _minimum) * _loc1_ - thumb.width / 2 + offsetLeft ^ 0;
@@ -200,7 +217,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function lockValue(param1:Number) : Number {
+        override protected function lockValue(param1:Number) : Number
+        {
             var _loc2_:* = NaN;
             if(!isNaN(this._maxAvailableValue))
             {
@@ -213,7 +231,8 @@ package net.wg.gui.components.controls
             return _loc2_;
         }
         
-        protected function updatePatterns() : void {
+        protected function updatePatterns() : void
+        {
             var _loc1_:* = NaN;
             if(!this.patternMc && !this.disablePatternMc)
             {

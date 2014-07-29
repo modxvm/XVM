@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.technique
     public class AchievementSmall extends SoundListItemRenderer
     {
         
-        public function AchievementSmall() {
+        public function AchievementSmall()
+        {
             super();
         }
     }

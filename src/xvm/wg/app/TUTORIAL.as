@@ -1,9 +1,10 @@
-package 
+package
 {
     public class TUTORIAL extends Object
     {
         
-        public function TUTORIAL() {
+        public function TUTORIAL()
+        {
             super();
         }
         

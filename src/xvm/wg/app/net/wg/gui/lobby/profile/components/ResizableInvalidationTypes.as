@@ -3,7 +3,8 @@ package net.wg.gui.lobby.profile.components
     public class ResizableInvalidationTypes extends Object
     {
         
-        public function ResizableInvalidationTypes() {
+        public function ResizableInvalidationTypes()
+        {
             super();
         }
         

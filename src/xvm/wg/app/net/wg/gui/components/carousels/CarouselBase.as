@@ -22,7 +22,8 @@ package net.wg.gui.components.carousels
     public class CarouselBase extends CoreList implements IDraggable
     {
         
-        public function CarouselBase() {
+        public function CarouselBase()
+        {
             this._padding = new Padding(0);
             super();
             this.visible = false;
@@ -94,7 +95,8 @@ package net.wg.gui.components.carousels
         
         private var lastDx:Number = 0;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.leftArrow.removeEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
             this.rightArrow.removeEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
             this.leftArrow.removeEventListener(ButtonEvent.PRESS,this.arrowPress);
@@ -117,7 +119,8 @@ package net.wg.gui.components.carousels
             super.onDispose();
         }
         
-        override public function set dataProvider(param1:IDataProvider) : void {
+        override public function set dataProvider(param1:IDataProvider) : void
+        {
             if(_dataProvider == param1)
             {
                 return;
@@ -134,11 +137,13 @@ package net.wg.gui.components.carousels
             _dataProvider.addEventListener(Event.CHANGE,handleDataChange,false,0,true);
         }
         
-        public function get padding() : Object {
+        public function get padding() : Object
+        {
             return this._padding;
         }
         
-        public function set padding(param1:Object) : void {
+        public function set padding(param1:Object) : void
+        {
             if(!param1)
             {
                 return;
@@ -146,15 +151,18 @@ package net.wg.gui.components.carousels
             this._padding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
         }
         
-        public function get carouselType() : String {
+        public function get carouselType() : String
+        {
             return this._carouselType;
         }
         
-        public function set carouselType(param1:String) : void {
+        public function set carouselType(param1:String) : void
+        {
             this._carouselType = param1;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(!_usingExternalRenderers && (isInvalid(InvalidationType.SIZE)) && (this.useShadow))
             {
@@ -168,7 +176,8 @@ package net.wg.gui.components.carousels
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.leftArrow.x = 0;
             this.rightArrow.width = 21;
@@ -192,7 +201,8 @@ package net.wg.gui.components.carousels
             this.rightArrow.addEventListener(ButtonEvent.RELEASE_OUTSIDE,this.arrowRelease);
         }
         
-        override protected function drawRenderers(param1:Number) : void {
+        override protected function drawRenderers(param1:Number) : void
+        {
             var _loc2_:* = 0;
             var _loc3_:* = 0;
             var _loc4_:IListItemRenderer = null;
@@ -233,11 +243,13 @@ package net.wg.gui.components.carousels
             }
         }
         
-        override protected function refreshData() : void {
+        override protected function refreshData() : void
+        {
             _dataProvider.requestItemRange(0,_dataProvider.length,this.populateData);
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc1_:uint = 0;
             var _loc2_:* = NaN;
             var _loc3_:* = 0;
@@ -272,7 +284,8 @@ package net.wg.gui.components.carousels
             }
         }
         
-        private function tryToDisableHandCursorForRenderer(param1:IListItemRenderer) : void {
+        private function tryToDisableHandCursorForRenderer(param1:IListItemRenderer) : void
+        {
             var _loc2_:Button = null;
             if(param1 is Button)
             {
@@ -281,11 +294,13 @@ package net.wg.gui.components.carousels
             }
         }
         
-        override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
+        override protected function calculateRendererTotal(param1:Number, param2:Number) : uint
+        {
             return dataProvider.length;
         }
         
-        protected function getScopeWidth() : Number {
+        protected function getScopeWidth() : Number
+        {
             var _loc1_:Number = 0;
             if(_renderers)
             {
@@ -295,7 +310,8 @@ package net.wg.gui.components.carousels
             return _loc1_;
         }
         
-        protected function populateData(param1:Array) : void {
+        protected function populateData(param1:Array) : void
+        {
             var _loc5_:IListItemRenderer = null;
             var _loc6_:uint = 0;
             var _loc7_:ListData = null;
@@ -319,12 +335,14 @@ package net.wg.gui.components.carousels
             }
         }
         
-        protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void {
+        protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void
+        {
             param1.x = param2 == 0?this._padding.left:param3 + (this.slotImageWidth + param4);
             param1.y = this._padding.top;
         }
         
-        protected function updateContainerPosition() : void {
+        protected function updateContainerPosition() : void
+        {
             var _loc1_:* = 0;
             if(_renderers.length <= this.countVisibleSlots)
             {
@@ -339,7 +357,8 @@ package net.wg.gui.components.carousels
             this.updateArrowsState();
         }
         
-        protected function initPosition() : void {
+        protected function initPosition() : void
+        {
             this.isInitSize = true;
             container.x = this.getDefContainerPos();
             this.renderersMask.x = this.leftArrow.x + this.leftArrow.width;
@@ -359,11 +378,13 @@ package net.wg.gui.components.carousels
             this.updateArrowsState();
         }
         
-        protected function getSlotWidth() : Number {
+        protected function getSlotWidth() : Number
+        {
             return this.slotImageWidth + this._padding.left + this._padding.right;
         }
         
-        protected function getDefContainerPos() : Number {
+        protected function getDefContainerPos() : Number
+        {
             if((this.leftArrow) && (this.leftArrow.visible))
             {
                 return this.leftArrow.x + this.leftArrow.width ^ 0;
@@ -371,7 +392,8 @@ package net.wg.gui.components.carousels
             return 0;
         }
         
-        protected function updateArrowsState() : void {
+        protected function updateArrowsState() : void
+        {
             var _loc1_:Number = this.calculateRendererTotal(0,0);
             if(_loc1_ <= this.countVisibleSlots)
             {
@@ -404,7 +426,8 @@ package net.wg.gui.components.carousels
             
         }
         
-        protected function enableLeftArrow(param1:Boolean = false) : void {
+        protected function enableLeftArrow(param1:Boolean = false) : void
+        {
             if(this.leftArrow.enabled != param1)
             {
                 this.leftArrow.enabled = param1;
@@ -412,7 +435,8 @@ package net.wg.gui.components.carousels
             }
         }
         
-        protected function enableRightArrow(param1:Boolean = false) : void {
+        protected function enableRightArrow(param1:Boolean = false) : void
+        {
             if(this.rightArrow.enabled != param1)
             {
                 this.rightArrow.enabled = param1;
@@ -420,11 +444,13 @@ package net.wg.gui.components.carousels
             }
         }
         
-        private function get currentFirstRenderer() : uint {
+        private function get currentFirstRenderer() : uint
+        {
             return this._currentFirstRenderer;
         }
         
-        private function set currentFirstRenderer(param1:uint) : void {
+        private function set currentFirstRenderer(param1:uint) : void
+        {
             if(param1 == this._currentFirstRenderer)
             {
                 return;
@@ -433,7 +459,8 @@ package net.wg.gui.components.carousels
             this.updateArrowsState();
         }
         
-        override protected function handleMouseWheel(param1:MouseEvent) : void {
+        override protected function handleMouseWheel(param1:MouseEvent) : void
+        {
             if(_renderers.length > this.countVisibleSlots)
             {
                 this.startSlideByArrow(param1.delta > 0?ARROW_LEFT:ARROW_RIGHT,false);
@@ -441,7 +468,8 @@ package net.wg.gui.components.carousels
             }
         }
         
-        private function renderersMouseEnabled(param1:Boolean = false) : void {
+        private function renderersMouseEnabled(param1:Boolean = false) : void
+        {
             var _loc2_:int = _renderers?_renderers.length:0;
             var _loc3_:* = 0;
             while(_loc3_ < _loc2_)
@@ -456,7 +484,8 @@ package net.wg.gui.components.carousels
             }
         }
         
-        private function updateDragPosition(param1:DisplayObject, param2:Object) : void {
+        private function updateDragPosition(param1:DisplayObject, param2:Object) : void
+        {
             var _loc3_:Number = param2.scopeStartX + (param1.mouseX - param2.startMouseX);
             if(_loc3_ > param2.scopeDefPosition + MAX_DRAG_OFFSET)
             {
@@ -474,7 +503,8 @@ package net.wg.gui.components.carousels
             App.utils.scheduler.scheduleTask(this.updateDragPosition,30,this,param2);
         }
         
-        private function startOrStopSlidingFn(param1:Boolean, param2:Object) : void {
+        private function startOrStopSlidingFn(param1:Boolean, param2:Object) : void
+        {
             if(param1)
             {
                 App.utils.scheduler.scheduleTask(this.slidingFn,30,param2);
@@ -488,7 +518,8 @@ package net.wg.gui.components.carousels
             this.slidingScheduled = param1;
         }
         
-        private function slidingFn(param1:Object) : void {
+        private function slidingFn(param1:Object) : void
+        {
             this.startOrStopSlidingFn(true,param1);
             var _loc2_:Number = container.x + this.lastDx;
             this.lastDx = this.lastDx + -this.lastDx / this.slideSelfAcceleratorDynamic;
@@ -527,195 +558,212 @@ package net.wg.gui.components.carousels
             
         }
         
-        private function beginSlideToPos() : void {
+        private function beginSlideToPos() : void
+        {
             var _loc1_:Number = this.getCurrentFirstRendererOnAnim();
             this.slideToRenderer(_loc1_);
         }
         
-        private function slideToRenderer(param1:Number) : void {
+        private function slideToRenderer(param1:Number) : void
+        {
             this.currentFirstRenderer = param1;
             var _loc2_:Number = -param1 * this.getSlotWidth() + this.getDefContainerPos();
+            new Tween(300,container,{"x":_loc2_},{"paused":false,
+            "onComplete":null
+        });
+    }
+    
+    private function stopSlideByArrow(param1:String) : void
+    {
+        var _loc2_:Number = -this.currentFirstRenderer * this.getSlotWidth() - (container.x - this.getDefContainerPos());
+        var _loc3_:Number = this._padding.left + this._padding.right + 10;
+        var _loc4_:Number = this.currentFirstRenderer;
+        if(param1 == ARROW_RIGHT && _loc2_ > _loc3_)
+        {
+            _loc4_ = this.currentFirstRenderer + Math.round(_loc2_ / this.getSlotWidth()) + 1;
+        }
+        else if(param1 == ARROW_LEFT && _loc2_ < -_loc3_)
+        {
+            _loc4_ = this.currentFirstRenderer - Math.floor(-_loc2_ / this.getSlotWidth()) - 1;
         }
         
-        private function stopSlideByArrow(param1:String) : void {
-            var _loc2_:Number = -this.currentFirstRenderer * this.getSlotWidth() - (container.x - this.getDefContainerPos());
-            var _loc3_:Number = this._padding.left + this._padding.right + 10;
-            var _loc4_:Number = this.currentFirstRenderer;
-            if(param1 == ARROW_RIGHT && _loc2_ > _loc3_)
-            {
-                _loc4_ = this.currentFirstRenderer + Math.round(_loc2_ / this.getSlotWidth()) + 1;
-            }
-            else if(param1 == ARROW_LEFT && _loc2_ < -_loc3_)
-            {
-                _loc4_ = this.currentFirstRenderer - Math.floor(-_loc2_ / this.getSlotWidth()) - 1;
-            }
-            
-            if(_loc4_ < 0)
-            {
-                _loc4_ = 0;
-            }
-            else if(_loc4_ > _renderers.length - this.countVisibleSlots)
-            {
-                _loc4_ = _renderers.length - this.countVisibleSlots;
-            }
-            
-            this.currentFirstRenderer = _loc4_;
-            this.sourceFactor = 0;
+        if(_loc4_ < 0)
+        {
+            _loc4_ = 0;
+        }
+        else if(_loc4_ > _renderers.length - this.countVisibleSlots)
+        {
+            _loc4_ = _renderers.length - this.countVisibleSlots;
         }
         
-        private function startSlideByArrow(param1:String, param2:Boolean) : void {
-            this.startOrStopSlidingFn(false,null);
-            if(!this.skippCall)
+        this.currentFirstRenderer = _loc4_;
+        this.sourceFactor = 0;
+    }
+    
+    private function startSlideByArrow(param1:String, param2:Boolean) : void
+    {
+        this.startOrStopSlidingFn(false,null);
+        if(!this.skippCall)
+        {
+            this.skippCall = param2;
+            this.currentFirstRenderer = param1 == ARROW_LEFT?Math.max(0,this.currentFirstRenderer - 1):Math.min(_renderers.length - this.countVisibleSlots,this.currentFirstRenderer + 1);
+            if(this.currentFirstRenderer == 0 || this.currentFirstRenderer == _renderers.length - this.countVisibleSlots)
             {
-                this.skippCall = param2;
-                this.currentFirstRenderer = param1 == ARROW_LEFT?Math.max(0,this.currentFirstRenderer - 1):Math.min(_renderers.length - this.countVisibleSlots,this.currentFirstRenderer + 1);
-                if(this.currentFirstRenderer == 0 || this.currentFirstRenderer == _renderers.length - this.countVisibleSlots)
-                {
-                    this.sourceFactor = 0;
-                }
-                else
-                {
-                    this.sourceFactor = param1 == ARROW_LEFT?1:-1;
-                }
-                if(!this.arrowSlideScheduled && (container))
-                {
-                    this.slideSelfAcceleratorDynamic = SLIDE_SELF_ACCELERATOR;
-                    this.startOrStopInvokingArrowSlide(true);
-                }
+                this.sourceFactor = 0;
             }
             else
             {
-                this.skippCall = param2;
+                this.sourceFactor = param1 == ARROW_LEFT?1:-1;
+            }
+            if(!this.arrowSlideScheduled && (container))
+            {
+                this.slideSelfAcceleratorDynamic = SLIDE_SELF_ACCELERATOR;
+                this.startOrStopInvokingArrowSlide(true);
             }
         }
-        
-        private function arrowSlide() : void {
-            var _loc1_:* = NaN;
-            var _loc2_:* = NaN;
-            this.startOrStopInvokingArrowSlide(true);
-            this.lastDx = this.lastDx + (MAX_DX * this.sourceFactor - this.lastDx) / SLIDE_SELF_ACCELERATOR;
-            if(this.sourceFactor == 0)
-            {
-                this.slideSelfAcceleratorDynamic = SLIDE_TO_POS_ACCELERATOR;
-                this.lastDx = this.lastDx + -this.lastDx / this.slideSelfAcceleratorDynamic;
-                _loc1_ = this.getDefContainerPos() - this.currentFirstRenderer * this.getSlotWidth();
-                _loc2_ = (_loc1_ - container.x) / SLIDE_SELF_ACCELERATOR + this.lastDx;
-                _loc2_ = _loc2_ >= 0?Math.min(MAX_DX,_loc2_):-Math.min(-_loc2_,MAX_DX);
-                container.x = container.x + _loc2_;
-                if(Math.abs(container.x + this.lastDx - _loc1_) < 1)
-                {
-                    container.x = _loc1_;
-                    this.startOrStopInvokingArrowSlide(false);
-                }
-            }
-            else
-            {
-                this.countFactor++;
-                container.x = container.x + this.lastDx;
-                if(this.getCurrentFirstRendererOnAnim() == 0 && this.sourceFactor == 1)
-                {
-                    this.currentFirstRenderer = 0;
-                    this.sourceFactor = 0;
-                }
-                else if(this.getCurrentFirstRendererOnAnim() == _renderers.length - this.countVisibleSlots && this.sourceFactor == -1)
-                {
-                    this.currentFirstRenderer = _renderers.length - this.countVisibleSlots;
-                    this.sourceFactor = 0;
-                }
-                
-            }
-        }
-        
-        private function startOrStopInvokingArrowSlide(param1:Boolean) : void {
-            if(param1)
-            {
-                App.utils.scheduler.scheduleTask(this.arrowSlide,30);
-            }
-            else
-            {
-                App.utils.scheduler.cancelTask(this.arrowSlide);
-            }
-            this.arrowSlideScheduled = param1;
-        }
-        
-        private function getCurrentFirstRendererOnAnim() : Number {
-            var _loc1_:Number = -Math.round((container.x - this.getDefContainerPos()) / this.getSlotWidth());
-            if(_loc1_ < 0)
-            {
-                _loc1_ = 0;
-            }
-            else if(_loc1_ > _renderers.length - this.countVisibleSlots)
-            {
-                _loc1_ = _renderers.length - this.countVisibleSlots;
-            }
-            
-            return _loc1_;
-        }
-        
-        private function arrowRelease(param1:ButtonEvent) : void {
-            this.stopSlideByArrow(param1.target == this.leftArrow?ARROW_LEFT:ARROW_RIGHT);
-        }
-        
-        private function arrowClick(param1:ButtonEvent) : void {
-            this.startSlideByArrow(param1.target == this.leftArrow?ARROW_LEFT:ARROW_RIGHT,false);
-        }
-        
-        private function arrowPress(param1:ButtonEvent) : void {
-            this.startSlideByArrow(param1.target == this.leftArrow?ARROW_LEFT:ARROW_RIGHT,true);
-        }
-        
-        private function arrowUp(param1:MouseEvent) : void {
-            param1.target.dispatchEvent(new ButtonEvent(ButtonEvent.RELEASE_OUTSIDE));
-        }
-        
-        public function getHitArea() : InteractiveObject {
-            return container;
-        }
-        
-        public function onStartDrag() : void {
-            var _loc1_:Object = null;
-            if(this.allowDrag)
-            {
-                this.startOrStopSlidingFn(false,null);
-                _loc1_ = {
-                    "scopeStartX":container.x,
-                    "startMouseX":mouseX,
-                    "allowDragDistance":this.getScopeWidth() - this.renderersMask.width,
-                    "scopeDefPosition":this.getDefContainerPos()
-                };
-            this.lastContainerXPos = container.x;
-            this.startOrStopInvokingArrowSlide(false);
-            App.utils.scheduler.scheduleTask(this.updateDragPosition,30,this,_loc1_);
+        else
+        {
+            this.skippCall = param2;
         }
     }
     
-    public function onDragging(param1:Number, param2:Number) : void {
-        this.renderersMouseEnabled(false);
+    private function arrowSlide() : void
+    {
+        var _loc1_:* = NaN;
+        var _loc2_:* = NaN;
+        this.startOrStopInvokingArrowSlide(true);
+        this.lastDx = this.lastDx + (MAX_DX * this.sourceFactor - this.lastDx) / SLIDE_SELF_ACCELERATOR;
+        if(this.sourceFactor == 0)
+        {
+            this.slideSelfAcceleratorDynamic = SLIDE_TO_POS_ACCELERATOR;
+            this.lastDx = this.lastDx + -this.lastDx / this.slideSelfAcceleratorDynamic;
+            _loc1_ = this.getDefContainerPos() - this.currentFirstRenderer * this.getSlotWidth();
+            _loc2_ = (_loc1_ - container.x) / SLIDE_SELF_ACCELERATOR + this.lastDx;
+            _loc2_ = _loc2_ >= 0?Math.min(MAX_DX,_loc2_):-Math.min(-_loc2_,MAX_DX);
+            container.x = container.x + _loc2_;
+            if(Math.abs(container.x + this.lastDx - _loc1_) < 1)
+            {
+                container.x = _loc1_;
+                this.startOrStopInvokingArrowSlide(false);
+            }
+        }
+        else
+        {
+            this.countFactor++;
+            container.x = container.x + this.lastDx;
+            if(this.getCurrentFirstRendererOnAnim() == 0 && this.sourceFactor == 1)
+            {
+                this.currentFirstRenderer = 0;
+                this.sourceFactor = 0;
+            }
+            else if(this.getCurrentFirstRendererOnAnim() == _renderers.length - this.countVisibleSlots && this.sourceFactor == -1)
+            {
+                this.currentFirstRenderer = _renderers.length - this.countVisibleSlots;
+                this.sourceFactor = 0;
+            }
+            
+        }
     }
     
-    public function onEndDrag() : void {
+    private function startOrStopInvokingArrowSlide(param1:Boolean) : void
+    {
+        if(param1)
+        {
+            App.utils.scheduler.scheduleTask(this.arrowSlide,30);
+        }
+        else
+        {
+            App.utils.scheduler.cancelTask(this.arrowSlide);
+        }
+        this.arrowSlideScheduled = param1;
+    }
+    
+    private function getCurrentFirstRendererOnAnim() : Number
+    {
+        var _loc1_:Number = -Math.round((container.x - this.getDefContainerPos()) / this.getSlotWidth());
+        if(_loc1_ < 0)
+        {
+            _loc1_ = 0;
+        }
+        else if(_loc1_ > _renderers.length - this.countVisibleSlots)
+        {
+            _loc1_ = _renderers.length - this.countVisibleSlots;
+        }
+        
+        return _loc1_;
+    }
+    
+    private function arrowRelease(param1:ButtonEvent) : void
+    {
+        this.stopSlideByArrow(param1.target == this.leftArrow?ARROW_LEFT:ARROW_RIGHT);
+    }
+    
+    private function arrowClick(param1:ButtonEvent) : void
+    {
+        this.startSlideByArrow(param1.target == this.leftArrow?ARROW_LEFT:ARROW_RIGHT,false);
+    }
+    
+    private function arrowPress(param1:ButtonEvent) : void
+    {
+        this.startSlideByArrow(param1.target == this.leftArrow?ARROW_LEFT:ARROW_RIGHT,true);
+    }
+    
+    private function arrowUp(param1:MouseEvent) : void
+    {
+        param1.target.dispatchEvent(new ButtonEvent(ButtonEvent.RELEASE_OUTSIDE));
+    }
+    
+    public function getHitArea() : InteractiveObject
+    {
+        return container;
+    }
+    
+    public function onStartDrag() : void
+    {
         var _loc1_:Object = null;
         if(this.allowDrag)
         {
-            this.slideSelfAcceleratorDynamic = SLIDE_SELF_ACCELERATOR;
-            if(!this.slidingScheduled)
-            {
-                _loc1_ = {
-                    "scopeDefPosition":this.getDefContainerPos(),
-                    "allowDragDistance":this.getScopeWidth() - this.renderersMask.width
-                };
-            this.startOrStopSlidingFn(true,_loc1_);
-        }
+            this.startOrStopSlidingFn(false,null);
+            _loc1_ = {"scopeStartX":container.x,
+            "startMouseX":mouseX,
+            "allowDragDistance":this.getScopeWidth() - this.renderersMask.width,
+            "scopeDefPosition":this.getDefContainerPos()
+        };
+        this.lastContainerXPos = container.x;
+        this.startOrStopInvokingArrowSlide(false);
+        App.utils.scheduler.scheduleTask(this.updateDragPosition,30,this,_loc1_);
     }
-    else
-    {
-        this.renderersMouseEnabled(true);
-    }
-    App.utils.scheduler.cancelTask(this.updateDragPosition);
 }
 
-public function getDragType() : String {
-    return DragType.SOFT;
+public function onDragging(param1:Number, param2:Number) : void
+{
+    this.renderersMouseEnabled(false);
+}
+
+public function onEndDrag() : void
+{
+    var _loc1_:Object = null;
+    if(this.allowDrag)
+    {
+        this.slideSelfAcceleratorDynamic = SLIDE_SELF_ACCELERATOR;
+        if(!this.slidingScheduled)
+        {
+            _loc1_ = {"scopeDefPosition":this.getDefContainerPos(),
+            "allowDragDistance":this.getScopeWidth() - this.renderersMask.width
+        };
+        this.startOrStopSlidingFn(true,_loc1_);
+    }
+}
+else
+{
+    this.renderersMouseEnabled(true);
+}
+App.utils.scheduler.cancelTask(this.updateDragPosition);
+}
+
+public function getDragType() : String
+{
+return DragType.SOFT;
 }
 }
 }

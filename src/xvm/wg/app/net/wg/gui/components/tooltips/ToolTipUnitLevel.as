@@ -11,11 +11,13 @@ package net.wg.gui.components.tooltips
     public class ToolTipUnitLevel extends ToolTipBase
     {
         
-        public function ToolTipUnitLevel() {
+        public function ToolTipUnitLevel()
+        {
             super();
         }
         
-        private function setHeader(param1:String) : Number {
+        private function setHeader(param1:String) : Number
+        {
             var _loc2_:TextField = content.headerTF;
             _loc2_.autoSize = TextFieldAutoSize.LEFT;
             _loc2_.htmlText = Utils.instance.htmlWrapper(param1,Utils.instance.COLOR_HEADER,18,"$TitleFont");
@@ -25,7 +27,8 @@ package net.wg.gui.components.tooltips
             return _loc2_.textHeight + Utils.instance.MARGIN_AFTER_BLOCK;
         }
         
-        private function addSeparatorWithMargin() : Separator {
+        private function addSeparatorWithMargin() : Separator
+        {
             var _loc1_:Separator = Utils.instance.createSeparate(content);
             _loc1_.y = topPosition ^ 0;
             separators.push(_loc1_);
@@ -33,7 +36,8 @@ package net.wg.gui.components.tooltips
             return _loc1_;
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc1_:* = 0;
             var _loc4_:MovieClip = null;
             var _loc5_:Status = null;
@@ -138,7 +142,8 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             super.updateSize();
             var _loc1_:Sprite = content.whiteBg;
             if((_loc1_) && (_loc1_.visible))

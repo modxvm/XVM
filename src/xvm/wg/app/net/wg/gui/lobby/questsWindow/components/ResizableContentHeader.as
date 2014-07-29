@@ -10,7 +10,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class ResizableContentHeader extends UIComponent
     {
         
-        public function ResizableContentHeader() {
+        public function ResizableContentHeader()
+        {
             super();
         }
         
@@ -46,7 +47,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         public var statusMC:QuestStatusComponent;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.progressIndicator.visible = false;
             this.statusMC.setStatus(QuestsStates.DONE);
@@ -56,7 +58,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.statusMC.visible = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.statusMC.dispose();
             this.statusMC = null;
             this.slideCheckBox.dispose();
@@ -68,7 +71,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        public function setProgress(param1:Object) : void {
+        public function setProgress(param1:Object) : void
+        {
             var _loc2_:ProgressElementVO = new ProgressElementVO(param1);
             this._progrType = _loc2_.progrBarType;
             this._currentProgr = _loc2_.currentProgrVal;
@@ -77,7 +81,8 @@ package net.wg.gui.lobby.questsWindow.components
             invalidate(INVALIDATE_PROGRESS);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             super.draw();
             if(isInvalid(INVALIDATE_LABEL))
@@ -104,29 +109,35 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        public function get htmlLabel() : String {
+        public function get htmlLabel() : String
+        {
             return this._htmlLabel;
         }
         
-        public function set htmlLabel(param1:String) : void {
+        public function set htmlLabel(param1:String) : void
+        {
             this._htmlLabel = param1;
             invalidate(INVALIDATE_HTML_LABEL);
         }
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this._label = param1;
             invalidate(INVALIDATE_LABEL);
         }
         
-        public function get showDone() : Boolean {
+        public function get showDone() : Boolean
+        {
             return this._showDone;
         }
         
-        public function set showDone(param1:Boolean) : void {
+        public function set showDone(param1:Boolean) : void
+        {
             this._showDone = param1;
             invalidate(INVALIDATE_SHOW_DONE);
         }

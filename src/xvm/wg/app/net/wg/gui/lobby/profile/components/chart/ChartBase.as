@@ -12,7 +12,8 @@ package net.wg.gui.lobby.profile.components.chart
     public class ChartBase extends UIComponent
     {
         
-        public function ChartBase() {
+        public function ChartBase()
+        {
             this._renderers = new Vector.<IChartItem>();
             super();
         }
@@ -31,7 +32,8 @@ package net.wg.gui.lobby.profile.components.chart
         
         private var _currentLayout:IChartLayout;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             super.draw();
             if(isInvalid(RENDERER_CLASS_INV))
@@ -58,7 +60,8 @@ package net.wg.gui.lobby.profile.components.chart
             }
         }
         
-        protected function updateRenderers() : void {
+        protected function updateRenderers() : void
+        {
             var _loc1_:IChartItem = null;
             var _loc3_:Object = null;
             while(this._renderers.length > this.getDataProviderLength())
@@ -79,6 +82,7 @@ package net.wg.gui.lobby.profile.components.chart
                     }
                     else
                     {
+                        trace("Class of item renderer in Chart has not been defined! Please Define it!");
                         return;
                     }
                 }
@@ -91,7 +95,8 @@ package net.wg.gui.lobby.profile.components.chart
             }
         }
         
-        private function removeRendererAt(param1:uint) : void {
+        private function removeRendererAt(param1:uint) : void
+        {
             var _loc2_:IChartItem = this._renderers.splice(param1,1)[0];
             var _loc3_:DisplayObject = DisplayObject(_loc2_);
             _loc3_.parent.removeChild(_loc3_);
@@ -102,14 +107,16 @@ package net.wg.gui.lobby.profile.components.chart
             _loc2_ = null;
         }
         
-        private function createRenderer() : IChartItem {
+        private function createRenderer() : IChartItem
+        {
             var _loc1_:IChartItem = new this._itemRenderer();
             this._renderers.push(_loc1_);
             addChild(DisplayObject(_loc1_));
             return _loc1_;
         }
         
-        private function getDataProviderLength() : int {
+        private function getDataProviderLength() : int
+        {
             if(this._dataProvider)
             {
                 return this._dataProvider.length;
@@ -117,20 +124,24 @@ package net.wg.gui.lobby.profile.components.chart
             return 0;
         }
         
-        public function get itemRenderer() : Class {
+        public function get itemRenderer() : Class
+        {
             return this._itemRenderer;
         }
         
-        public function set itemRenderer(param1:Class) : void {
+        public function set itemRenderer(param1:Class) : void
+        {
             this._itemRenderer = param1;
             invalidate(RENDERER_CLASS_INV);
         }
         
-        public function get itemRendererName() : String {
+        public function get itemRendererName() : String
+        {
             return this._itemRendererName;
         }
         
-        public function set itemRendererName(param1:String) : void {
+        public function set itemRendererName(param1:String) : void
+        {
             var _loc2_:Class = null;
             if((_inspector) && param1 == "" || param1 == "")
             {
@@ -149,13 +160,19 @@ package net.wg.gui.lobby.profile.components.chart
             {
                 this.itemRenderer = _loc2_;
             }
+            else
+            {
+                trace("Error: " + this + ", The class " + param1 + " cannot be found in your library. Please ensure it is there.");
+            }
         }
         
-        public function get dataProvider() : IDataProvider {
+        public function get dataProvider() : IDataProvider
+        {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:IDataProvider) : void {
+        public function set dataProvider(param1:IDataProvider) : void
+        {
             if(this._dataProvider == param1)
             {
                 return;
@@ -173,20 +190,24 @@ package net.wg.gui.lobby.profile.components.chart
             invalidateData();
         }
         
-        protected function handleDataChange(param1:Event) : void {
+        protected function handleDataChange(param1:Event) : void
+        {
             invalidate(InvalidationType.DATA);
         }
         
-        public function get currentLayout() : IChartLayout {
+        public function get currentLayout() : IChartLayout
+        {
             return this._currentLayout;
         }
         
-        public function set currentLayout(param1:IChartLayout) : void {
+        public function set currentLayout(param1:IChartLayout) : void
+        {
             this._currentLayout = param1;
             invalidate(LAYOUT_INV);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:Object = null;
             if(this._currentLayout)
             {

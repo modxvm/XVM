@@ -3,7 +3,8 @@ package scaleform.clik.constants
     public class InvalidationType extends Object
     {
         
-        public function InvalidationType() {
+        public function InvalidationType()
+        {
             super();
         }
         

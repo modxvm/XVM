@@ -11,7 +11,8 @@ package scaleform.clik.core
     public dynamic class CLIK extends Object
     {
         
-        public function CLIK() {
+        public function CLIK()
+        {
             super();
         }
         
@@ -35,7 +36,8 @@ package scaleform.clik.core
         
         protected static var validDictIndices:Vector.<uint>;
         
-        public static function initialize(param1:Stage, param2:UIComponent) : void {
+        public static function initialize(param1:Stage, param2:UIComponent) : void
+        {
             if(initialized)
             {
                 return;
@@ -49,7 +51,8 @@ package scaleform.clik.core
             validDictIndices = new Vector.<uint>();
         }
         
-        public static function getTargetPathFor(param1:DisplayObjectContainer) : String {
+        public static function getTargetPathFor(param1:DisplayObjectContainer) : String
+        {
             var _loc2_:String = null;
             if(!param1.parent)
             {
@@ -59,7 +62,8 @@ package scaleform.clik.core
             return getTargetPathImpl(param1.parent as DisplayObjectContainer,_loc2_);
         }
         
-        public static function queueInitCallback(param1:UIComponent) : void {
+        public static function queueInitCallback(param1:UIComponent) : void
+        {
             var _loc3_:Array = null;
             var _loc4_:uint = 0;
             var _loc5_:Dictionary = null;
@@ -92,7 +96,8 @@ package scaleform.clik.core
             }
         }
         
-        protected static function fireInitCallback(param1:Event) : void {
+        protected static function fireInitCallback(param1:Event) : void
+        {
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
             var _loc4_:Dictionary = null;
@@ -118,7 +123,8 @@ package scaleform.clik.core
             firingInitCallbacks = false;
         }
         
-        protected static function clearQueue() : void {
+        protected static function clearQueue() : void
+        {
             var _loc1_:* = undefined;
             for(_loc1_ in initQueue)
             {
@@ -126,7 +132,8 @@ package scaleform.clik.core
             }
         }
         
-        protected static function sortFunc(param1:uint, param2:uint) : Number {
+        protected static function sortFunc(param1:uint, param2:uint) : Number
+        {
             if(param1 < param2)
             {
                 return -1;
@@ -138,7 +145,8 @@ package scaleform.clik.core
             return 0;
         }
         
-        protected static function getTargetPathImpl(param1:DisplayObjectContainer, param2:String = "") : String {
+        protected static function getTargetPathImpl(param1:DisplayObjectContainer, param2:String = "") : String
+        {
             var _loc3_:String = null;
             if(!param1)
             {

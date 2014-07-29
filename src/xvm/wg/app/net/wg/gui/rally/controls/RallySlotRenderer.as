@@ -12,7 +12,8 @@ package net.wg.gui.rally.controls
     public class RallySlotRenderer extends RallySimpleSlotRenderer
     {
         
-        public function RallySlotRenderer() {
+        public function RallySlotRenderer()
+        {
             super();
         }
         
@@ -28,7 +29,7 @@ package net.wg.gui.rally.controls
         
         public static var STATUS_COMMANDER:String = "commander";
         
-        public static var STATUSES:Array;
+        public static var STATUSES:Array = [STATUS_NORMAL,STATUS_CANCELED,STATUS_READY,STATUS_BATTLE,STATUS_LOCKED,STATUS_COMMANDER];
         
         public var selfBg:MovieClip;
         
@@ -36,7 +37,8 @@ package net.wg.gui.rally.controls
         
         public var voiceWave:VoiceWave = null;
         
-        public function setStatus(param1:int) : String {
+        public function setStatus(param1:int) : String
+        {
             var _loc2_:String = STATUS_NORMAL;
             if(index == 0 && !(param1 == STATUSES.indexOf(STATUS_BATTLE)))
             {
@@ -51,12 +53,14 @@ package net.wg.gui.rally.controls
             return _loc2_;
         }
         
-        public function updateVoiceWave() : void {
+        public function updateVoiceWave() : void
+        {
             this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
             this.voiceWave.setMuted((slotData) && (slotData.playerObj)?MessengerUtils.isMuted(slotData.playerObj):false);
         }
         
-        public function setSpeakers(param1:Boolean, param2:Boolean = false) : void {
+        public function setSpeakers(param1:Boolean, param2:Boolean = false) : void
+        {
             if(param1)
             {
                 param2 = false;
@@ -71,19 +75,22 @@ package net.wg.gui.rally.controls
             }
         }
         
-        public function onPlayerSpeak(param1:Number, param2:Boolean) : void {
+        public function onPlayerSpeak(param1:Number, param2:Boolean) : void
+        {
             if((slotData) && (slotData.playerObj) && param1 == slotData.playerObj.dbID)
             {
                 this.setSpeakers(param2);
             }
         }
         
-        override public function cooldown(param1:Boolean) : void {
+        override public function cooldown(param1:Boolean) : void
+        {
             super.cooldown(param1);
             this.removeBtn.enabled = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
             App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
@@ -101,7 +108,8 @@ package net.wg.gui.rally.controls
             vehicleBtn.addEventListener(RallyViewsEvent.CHOOSE_VEHICLE,this.onChooseVehicleClick);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.removeBtn.removeEventListener(ButtonEvent.CLICK,this.onRemoveClick);
             this.removeBtn.removeEventListener(MouseEvent.ROLL_OVER,onControlRollOver);
             this.removeBtn.removeEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
@@ -122,14 +130,16 @@ package net.wg.gui.rally.controls
             super.onDispose();
         }
         
-        protected function onRemoveClick(param1:ButtonEvent) : void {
+        protected function onRemoveClick(param1:ButtonEvent) : void
+        {
             if((slotData) && (slotData.playerObj))
             {
                 dispatchEvent(new RallyViewsEvent(RallyViewsEvent.LEAVE_SLOT_REQUEST,slotData.playerObj.dbID));
             }
         }
         
-        protected function onChooseVehicleClick(param1:RallyViewsEvent) : void {
+        protected function onChooseVehicleClick(param1:RallyViewsEvent) : void
+        {
             param1.preventDefault();
             param1.stopImmediatePropagation();
             if((slotData) && (slotData.playerObj) && (slotData.playerObj.himself))
@@ -138,7 +148,8 @@ package net.wg.gui.rally.controls
             }
         }
         
-        protected function speakHandler(param1:VoiceChatEvent) : void {
+        protected function speakHandler(param1:VoiceChatEvent) : void
+        {
             this.onPlayerSpeak(param1.getAccountDBID(),param1.type == VoiceChatEvent.START_SPEAKING);
         }
     }

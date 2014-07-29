@@ -14,7 +14,8 @@ package net.wg.gui.lobby.techtree.helpers
     public class NTGraphics extends LinesGraphics
     {
         
-        public function NTGraphics() {
+        public function NTGraphics()
+        {
             this.parentIDs = {};
             super();
         }
@@ -29,7 +30,8 @@ package net.wg.gui.lobby.techtree.helpers
         
         public var outButtonOffset:Number = 0;
         
-        public function hide() : void {
+        public function hide() : void
+        {
             if(this.tween != null)
             {
                 this.tween.reset();
@@ -38,14 +40,15 @@ package net.wg.gui.lobby.techtree.helpers
             alpha = 0;
         }
         
-        public function show() : void {
-            this.tween = new Tween(150,this,{"alpha":1},{
-                "paused":false,
-                "ease":Strong.easeIn
-            });
+        public function show() : void
+        {
+            this.tween = new Tween(150,this,{"alpha":1},{"paused":false,
+            "ease":Strong.easeIn
+        });
     }
     
-    public function drawTopLines(param1:IRenderer, param2:Boolean) : void {
+    public function drawTopLines(param1:IRenderer, param2:Boolean) : void
+    {
         var _loc9_:Point = null;
         var _loc11_:* = NaN;
         var _loc13_:* = NaN;
@@ -149,7 +152,8 @@ package net.wg.gui.lobby.techtree.helpers
         drawLine(param1,colorIdxs[Math.min(_loc19_,_loc20_)],_loc8_,_loc18_);
     }
     
-    public function drawLineSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+    public function drawLineSet(param1:IRenderer, param2:Object, param3:Boolean) : void
+    {
         if(param1 == null || param2 == null)
         {
             return;
@@ -176,7 +180,8 @@ package net.wg.gui.lobby.techtree.helpers
         }
     }
     
-    public function drawNodeLines(param1:IRenderer, param2:Boolean) : void {
+    public function drawNodeLines(param1:IRenderer, param2:Boolean) : void
+    {
         var _loc5_:Object = null;
         var _loc3_:Object = param1.getDisplayInfo();
         if(_loc3_ == null)
@@ -202,7 +207,8 @@ package net.wg.gui.lobby.techtree.helpers
         }
     }
     
-    public function drawLevelsDelimiters(param1:Vector.<Distance>, param2:Number, param3:Number) : Number {
+    public function drawLevelsDelimiters(param1:Vector.<Distance>, param2:Number, param3:Number) : Number
+    {
         if(this.levels == null)
         {
             return 0;
@@ -210,13 +216,15 @@ package net.wg.gui.lobby.techtree.helpers
         return this.levels.updateLevels(param1,param2,param3);
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         this.tween = null;
         this.clearUp();
         super.onDispose();
     }
     
-    override public function clearUp() : void {
+    override public function clearUp() : void
+    {
         var _loc3_:DisplayObject = null;
         super.clearUp();
         var _loc1_:Number = 0;
@@ -245,16 +253,19 @@ package net.wg.gui.lobby.techtree.helpers
         this.parentIDs = {};
     }
     
-    override public function clearUpRenderer(param1:IRenderer) : void {
+    override public function clearUpRenderer(param1:IRenderer) : void
+    {
         param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleRootChildStateChanged);
         param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleNodeStateChanged);
     }
     
-    public function clearCache() : void {
+    public function clearCache() : void
+    {
         this.parentIDs = {};
     }
     
-    private function addParentID(param1:IRenderer, param2:IRenderer) : void {
+    private function addParentID(param1:IRenderer, param2:IRenderer) : void
+    {
         var _loc3_:Number = param2.getID();
         if(this.parentIDs[_loc3_] == undefined)
         {
@@ -268,7 +279,8 @@ package net.wg.gui.lobby.techtree.helpers
         }
     }
     
-    private function drawSingleLine(param1:IRenderer, param2:Array, param3:Object, param4:Boolean) : void {
+    private function drawSingleLine(param1:IRenderer, param2:Array, param3:Object, param4:Boolean) : void
+    {
         var _loc10_:Point = null;
         var _loc11_:Array = null;
         var _loc12_:* = NaN;
@@ -308,7 +320,8 @@ package net.wg.gui.lobby.techtree.helpers
         }
     }
     
-    private function drawLineRSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+    private function drawLineRSet(param1:IRenderer, param2:Object, param3:Boolean) : void
+    {
         var _loc8_:Point = null;
         var _loc9_:Point = null;
         var _loc10_:Array = null;
@@ -415,36 +428,40 @@ package net.wg.gui.lobby.techtree.helpers
         }
     }
     
-    private function drawLineTMSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+    private function drawLineTMSet(param1:IRenderer, param2:Object, param3:Boolean) : void
+    {
         var _loc4_:Array = param2.outPin;
         var _loc5_:Array = param2.inPins;
         var _loc6_:Object = _loc5_[0];
         var _loc7_:IRenderer = container.getNodeByID(_loc6_.childID);
         if(!(_loc7_ == null) && (_loc7_.isButtonVisible()) && this.inButtonOffset > 0)
         {
-            _loc6_ = {
-                "childID":_loc6_.childID,
-                "inPin":[Number(_loc6_.inPin[0]),Number(_loc6_.inPin[1]) + this.inButtonOffset],
-                "viaPins":_loc6_.viaPins
-            };
+            _loc6_ = {"childID":_loc6_.childID,
+            "inPin":[Number(_loc6_.inPin[0]),Number(_loc6_.inPin[1]) + this.inButtonOffset],
+            "viaPins":_loc6_.viaPins
+        };
     }
     this.drawSingleLine(param1,_loc4_,_loc6_,param3);
     if(_loc5_.length > 1)
     {
+        trace("Warning! From top part of node can goes only one line.");
     }
 }
 
-private function drawLineTRSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+private function drawLineTRSet(param1:IRenderer, param2:Object, param3:Boolean) : void
+{
     var _loc4_:Array = param2.outPin;
     var _loc5_:Array = param2.inPins;
     var _loc6_:Object = _loc5_[0];
     this.drawSingleLine(param1,_loc4_,_loc6_,param3);
     if(_loc5_.length > 1)
     {
+        trace("Warning! From top part of node can goes only one line.");
     }
 }
 
-private function drawLineBMSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+private function drawLineBMSet(param1:IRenderer, param2:Object, param3:Boolean) : void
+{
     var _loc4_:Array = param2.outPin;
     var _loc5_:Array = param2.inPins;
     if((param1.isButtonVisible()) && this.outButtonOffset > 0)
@@ -454,20 +471,24 @@ private function drawLineBMSet(param1:IRenderer, param2:Object, param3:Boolean) 
     this.drawSingleLine(param1,_loc4_,_loc5_[0],param3);
     if(_loc5_.length > 1)
     {
+        trace("Warning! From bottom part of node can goes only one line.");
     }
 }
 
-private function drawLineBRSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+private function drawLineBRSet(param1:IRenderer, param2:Object, param3:Boolean) : void
+{
     var _loc4_:Array = param2.outPin;
     var _loc5_:Array = param2.inPins;
     var _loc6_:Object = _loc5_[0];
     this.drawSingleLine(param1,_loc4_,_loc6_,param3);
     if(_loc5_.length > 1)
     {
+        trace("Warning! From bottom part of node can goes only one line.");
     }
 }
 
-private function handleRootChildStateChanged(param1:TechTreeEvent) : void {
+private function handleRootChildStateChanged(param1:TechTreeEvent) : void
+{
     var _loc2_:IRenderer = container.getRootNode();
     if(!(_loc2_ == null) && (NodeStateCollection.isRedrawNTLines(param1.primary)))
     {
@@ -475,7 +496,8 @@ private function handleRootChildStateChanged(param1:TechTreeEvent) : void {
     }
 }
 
-private function handleNodeStateChanged(param1:TechTreeEvent) : void {
+private function handleNodeStateChanged(param1:TechTreeEvent) : void
+{
     var _loc2_:IRenderer = null;
     var _loc3_:Array = null;
     var _loc4_:* = NaN;
@@ -512,7 +534,8 @@ import flash.geom.Point;
 class TopLineInfo extends Object
 {
 
-function TopLineInfo(param1:Number, param2:Point = null) {
+function TopLineInfo(param1:Number, param2:Point = null)
+{
 super();
 this.id = param1;
 this.point = param2;
@@ -522,14 +545,16 @@ public var id:Number;
 
 public var point:Point;
 
-public function get y() : Number {
+public function get y() : Number
+{
 return this.point.y;
 }
 }
 class RSetLineInfo extends Object
 {
 
-function RSetLineInfo(param1:Number, param2:Number, param3:Boolean, param4:Number) {
+function RSetLineInfo(param1:Number, param2:Number, param3:Boolean, param4:Number)
+{
 super();
 this.idx = param1;
 this.x = param2;

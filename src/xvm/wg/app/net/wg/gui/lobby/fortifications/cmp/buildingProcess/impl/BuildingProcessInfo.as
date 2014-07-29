@@ -19,7 +19,8 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
     public class BuildingProcessInfo extends MovieClip implements IDisposable, IFocusContainer
     {
         
-        public function BuildingProcessInfo() {
+        public function BuildingProcessInfo()
+        {
             super();
             TextFieldEx.setVerticalAlign(this.builtMessage,TextFieldEx.VALIGN_CENTER);
             this.builtMessage.mouseEnabled = false;
@@ -49,11 +50,13 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
         
         private var model:BuildingProcessInfoVO = null;
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this.applyButton;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.buildingName = null;
             this.statusMsg.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             this.statusMsg.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
@@ -74,7 +77,8 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
             }
         }
         
-        public function getBuildingId() : String {
+        public function getBuildingId() : String
+        {
             if(!this.model)
             {
                 return null;
@@ -82,7 +86,8 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
             return this.model.buildingID;
         }
         
-        public function setData(param1:BuildingProcessInfoVO) : void {
+        public function setData(param1:BuildingProcessInfoVO) : void
+        {
             var _loc2_:* = false;
             this.model = param1;
             this.buildingName.htmlText = this.model.buildingName;
@@ -113,20 +118,24 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
             this.orderInfo.setData(this.model.orderInfo);
         }
         
-        private function makeTooltipData() : String {
+        private function makeTooltipData() : String
+        {
             var _loc1_:String = new ComplexTooltipHelper().addHeader(this.model.buttonTooltip["header"]).addBody(this.model.buttonTooltip["body"]).make();
             return _loc1_;
         }
         
-        private function onRollOverHandler(param1:MouseEvent) : void {
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(this.model.statusIconTooltip);
         }
         
-        private function onRollOutHandler(param1:MouseEvent) : void {
+        private function onRollOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onClickHandler(param1:ButtonEvent) : void {
+        private function onClickHandler(param1:ButtonEvent) : void
+        {
             dispatchEvent(new Event(BUY_BUILDING));
         }
     }

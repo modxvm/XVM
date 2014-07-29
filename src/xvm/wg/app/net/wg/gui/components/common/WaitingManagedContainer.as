@@ -10,7 +10,8 @@ package net.wg.gui.components.common
     public class WaitingManagedContainer extends ManagedContainer
     {
         
-        public function WaitingManagedContainer() {
+        public function WaitingManagedContainer()
+        {
             super();
             enabled = false;
             mouseEnabled = true;
@@ -21,7 +22,8 @@ package net.wg.gui.components.common
         
         private var _managedChildAdding:Boolean = false;
         
-        override public function addChild(param1:DisplayObject) : DisplayObject {
+        override public function addChild(param1:DisplayObject) : DisplayObject
+        {
             var _loc2_:String = null;
             var _loc3_:IAssertable = null;
             if(this._managedChildAdding)
@@ -39,19 +41,22 @@ package net.wg.gui.components.common
             return param1;
         }
         
-        private function onWaitingShownHandler(param1:WaitingChangeVisibilityEvent) : void {
+        private function onWaitingShownHandler(param1:WaitingChangeVisibilityEvent) : void
+        {
             App.utils.asserter.assertNotNull(this._waiting,"_waiting" + Errors.CANT_NULL);
             this._managedChildAdding = true;
             this.addChild(this._waiting);
             this._managedChildAdding = false;
         }
         
-        private function onWaitingHiddenHandler(param1:WaitingChangeVisibilityEvent) : void {
+        private function onWaitingHiddenHandler(param1:WaitingChangeVisibilityEvent) : void
+        {
             App.utils.asserter.assertNotNull(this._waiting,"_waiting" + Errors.CANT_NULL);
             removeChild(this._waiting);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._waiting = null;
             super.onDispose();
         }

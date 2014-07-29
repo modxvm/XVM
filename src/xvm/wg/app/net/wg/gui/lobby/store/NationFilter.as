@@ -7,7 +7,8 @@ package net.wg.gui.lobby.store
     public class NationFilter extends UIComponent
     {
         
-        public function NationFilter() {
+        public function NationFilter()
+        {
             super();
         }
         

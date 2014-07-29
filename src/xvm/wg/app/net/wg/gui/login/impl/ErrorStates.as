@@ -3,7 +3,8 @@ package net.wg.gui.login.impl
     public class ErrorStates extends Object
     {
         
-        public function ErrorStates() {
+        public function ErrorStates()
+        {
             super();
         }
         
@@ -13,6 +14,6 @@ package net.wg.gui.login.impl
         
         public static var PASSWORD_INVALID:int = 2;
         
-        public static var LOGIN_PASSWORD_INVALID:int;
+        public static var LOGIN_PASSWORD_INVALID:int = LOGIN_INVALID | PASSWORD_INVALID;
     }
 }

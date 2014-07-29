@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class BuildingModernizationVO extends DAAPIDataClass
     {
         
-        public function BuildingModernizationVO(param1:Object) {
+        public function BuildingModernizationVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -31,7 +32,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var conditionIcon:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == BEFORE_UPGRADE)
             {
                 this.beforeUpgradeData = new ModernizationCmpVO(param2);

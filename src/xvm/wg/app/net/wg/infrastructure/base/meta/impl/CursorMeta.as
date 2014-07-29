@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class CursorMeta extends AbstractView
     {
         
-        public function CursorMeta() {
+        public function CursorMeta()
+        {
             super();
         }
     }

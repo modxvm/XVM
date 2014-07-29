@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class HyperLink extends Button
     {
         
-        public function HyperLink() {
+        public function HyperLink()
+        {
             this._linkType = LINK_TYPE_NORMAL;
             super();
             buttonMode = true;
@@ -19,16 +20,19 @@ package net.wg.gui.components.controls
         
         private var _linkType:String;
         
-        public function get linkType() : String {
+        public function get linkType() : String
+        {
             return this._linkType;
         }
         
-        public function set linkType(param1:String) : void {
+        public function set linkType(param1:String) : void
+        {
             this._linkType = param1;
             setState(_state);
         }
         
-        override protected function changeFocus() : void {
+        override protected function changeFocus() : void
+        {
             if(!enabled)
             {
                 return;
@@ -40,7 +44,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             if(!(_label == null) && !(textField == null))
             {
                 textField.text = _label;
@@ -51,7 +56,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             return this.linkType == LINK_TYPE_NORMAL?statesDefault:Vector.<String>([this.linkType,""]);
         }
     }

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.GUIEditor.data
     public class ContextMenuGeneratorItems extends Object implements IContextMenuGeneratorItems
     {
         
-        public function ContextMenuGeneratorItems() {
+        public function ContextMenuGeneratorItems()
+        {
             this.labelsForFileMenu = new <String>[DEVELOPMENT.EDITOR_CONTEXTMENU_NEW,DEVELOPMENT.EDITOR_CONTEXTMENU_OPEN,DEVELOPMENT.EDITOR_CONTEXTMENU_SAVE,DEVELOPMENT.EDITOR_CONTEXTMENU_SAVE_AS,DEVELOPMENT.EDITOR_CONTEXTMENU_CLOSE_EDITOR];
             this.labelsForEditMenu = new <String>[DEVELOPMENT.EDITOR_CONTEXTMENU_UNDO,DEVELOPMENT.EDITOR_CONTEXTMENU_CUT,DEVELOPMENT.EDITOR_CONTEXTMENU_COPY,DEVELOPMENT.EDITOR_CONTEXTMENU_PASTE];
             super();
@@ -20,7 +21,8 @@ package net.wg.gui.lobby.GUIEditor.data
         
         private var labelsForEditMenu:Vector.<String>;
         
-        public function generateItemsContextMenu(param1:String) : Vector.<IContextItem> {
+        public function generateItemsContextMenu(param1:String) : Vector.<IContextItem>
+        {
             var _loc4_:Vector.<String> = null;
             var _loc2_:Vector.<IContextItem> = new Vector.<IContextItem>();
             if(param1 == FILE_TYPE)

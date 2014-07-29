@@ -11,7 +11,8 @@ package net.wg.gui.lobby.questsWindow
     public class QuestAwardsBlock extends UIComponent
     {
         
-        public function QuestAwardsBlock() {
+        public function QuestAwardsBlock()
+        {
             this._data = [];
             super();
         }
@@ -52,7 +53,8 @@ package net.wg.gui.lobby.questsWindow
         
         public var hasFixedHeight:Boolean = true;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._data)
             {
                 this._data.splice(0,this._data.length);
@@ -68,7 +70,8 @@ package net.wg.gui.lobby.questsWindow
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.container.verticalPadding = VERTICAL_PADDING;
             this.container.availableWidth = CONTAINER_AVAILABLE_WIDTH;
@@ -86,12 +89,14 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        public function setData(param1:Array) : void {
+        public function setData(param1:Array) : void
+        {
             this._data = param1;
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
@@ -155,16 +160,19 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        public function setActualWidth(param1:Number) : void {
+        public function setActualWidth(param1:Number) : void
+        {
             this._maskWidth = param1;
             invalidate(INVALIDATE_MASK_WIDTH);
         }
         
-        public function get contentAlign() : String {
+        public function get contentAlign() : String
+        {
             return this._contentAlign;
         }
         
-        public function set contentAlign(param1:String) : void {
+        public function set contentAlign(param1:String) : void
+        {
             invalidate(INVALIDATE_ALIGN);
             this._contentAlign = param1;
         }

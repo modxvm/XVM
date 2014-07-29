@@ -14,7 +14,8 @@ package net.wg.gui.lobby.header
     public class TutorialControl extends TutorialControlMeta implements ITutorialControlMeta, IDAAPIModule
     {
         
-        public function TutorialControl() {
+        public function TutorialControl()
+        {
             this._level = PlayerXPLevel.NEWBIE;
             super();
         }
@@ -51,58 +52,68 @@ package net.wg.gui.lobby.header
         
         private var _disposed:Boolean = false;
         
-        public function get disposed() : Boolean {
+        public function get disposed() : Boolean
+        {
             return this._disposed;
         }
         
-        public function as_setup(param1:Object) : void {
+        public function as_setup(param1:Object) : void
+        {
             this._visibleIfRun = param1.visibleIfRun;
             this._restartStatus = param1.restartStatus;
             this._refuseStatus = param1.refuseStatus;
         }
         
-        public function as_setPlayerXPLevel(param1:int) : void {
+        public function as_setPlayerXPLevel(param1:int) : void
+        {
             this._level = param1;
             invalidate();
         }
         
-        public function as_setChapterInfo(param1:String, param2:String) : void {
+        public function as_setChapterInfo(param1:String, param2:String) : void
+        {
             this._visibleTD = this._isRunning?this._visibleIfRun:true;
             this._title = param1;
             this._description = param2;
             invalidate();
         }
         
-        public function as_clearChapterInfo() : void {
+        public function as_clearChapterInfo() : void
+        {
             this._visibleTD = false;
             this._title = "";
             this._description = "";
             invalidate();
         }
         
-        public function as_setRunMode() : void {
+        public function as_setRunMode() : void
+        {
             this._isRunning = true;
             this._visibleTD = this._visibleIfRun;
             setState(state);
         }
         
-        public function as_setRestartMode() : void {
+        public function as_setRestartMode() : void
+        {
             this._isRunning = false;
             this._visibleTD = true;
             setState(state);
         }
         
-        public function as_setDisabled(param1:Boolean) : void {
+        public function as_setDisabled(param1:Boolean) : void
+        {
             App.globalVarsMgr.setTutorialDisabledS(param1);
             enabled = !param1;
             this.hideToolTip();
             setState(state);
         }
         
-        public function as_populate() : void {
+        public function as_populate() : void
+        {
         }
         
-        public function as_dispose() : void {
+        public function as_dispose() : void
+        {
             try
             {
                 dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_DISPOSE));
@@ -116,7 +127,8 @@ package net.wg.gui.lobby.header
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             preventAutosizing = true;
             addEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
@@ -125,7 +137,8 @@ package net.wg.gui.lobby.header
             setState("out");
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             visible = this._visibleTD;
             if((this.titleField) && (this._title))
@@ -139,7 +152,8 @@ package net.wg.gui.lobby.header
             }
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             if(!enabled)
             {
                 return Vector.<String>([this.getLevelPrefix()]);
@@ -148,11 +162,13 @@ package net.wg.gui.lobby.header
             return Vector.<String>([_loc1_]);
         }
         
-        private function getLevelPrefix() : String {
+        private function getLevelPrefix() : String
+        {
             return this._level == PlayerXPLevel.NORMAL?PREFIX_NORMAL:PREFIX_NEWBIE;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
             removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
             removeEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
@@ -161,15 +177,18 @@ package net.wg.gui.lobby.header
             super.onDispose();
         }
         
-        private function onRollOver(param1:MouseEvent) : void {
+        private function onRollOver(param1:MouseEvent) : void
+        {
             this.showToolTip();
         }
         
-        private function onRollOut(param1:MouseEvent) : void {
+        private function onRollOut(param1:MouseEvent) : void
+        {
             this.hideToolTip();
         }
         
-        private function onPress(param1:MouseEvent) : void {
+        private function onPress(param1:MouseEvent) : void
+        {
             this.hideToolTip();
             if(App.utils.commons.isLeftButton(param1))
             {
@@ -186,7 +205,8 @@ package net.wg.gui.lobby.header
             }
         }
         
-        private function showToolTip() : void {
+        private function showToolTip() : void
+        {
             var _loc1_:String = new ComplexTooltipHelper().addHeader(this._title).addBody(this._description).addNote(!this._isRunning?TUTORIAL.TOOLTIP_NOTES_RESTART:null,true).make();
             if(_loc1_.length > 0)
             {
@@ -194,7 +214,8 @@ package net.wg.gui.lobby.header
             }
         }
         
-        private function hideToolTip() : void {
+        private function hideToolTip() : void
+        {
             App.toolTipMgr.hide();
         }
     }

@@ -8,7 +8,8 @@ package net.wg.gui.tutorial.windows
     public class TutorialBattleNoResultsWindow extends TutorialBattleNoResultsMeta implements ITutorialBattleNoResultsMeta
     {
         
-        public function TutorialBattleNoResultsWindow() {
+        public function TutorialBattleNoResultsWindow()
+        {
             super();
         }
         
@@ -16,11 +17,13 @@ package net.wg.gui.tutorial.windows
         
         protected var data:Object;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.data))
             {
@@ -28,17 +31,20 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.data = null;
         }
         
-        public function as_setData(param1:Object) : void {
+        public function as_setData(param1:Object) : void
+        {
             this.data = param1;
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = false;
             window.title = BATTLE_TUTORIAL.WINDOWS_RESULT_TITLE;

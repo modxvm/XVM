@@ -8,7 +8,8 @@ package net.wg.gui.tutorial.controls
     public class ChapterProgressItemRenderer extends ListItemRenderer
     {
         
-        public function ChapterProgressItemRenderer() {
+        public function ChapterProgressItemRenderer()
+        {
             super();
         }
         
@@ -22,13 +23,15 @@ package net.wg.gui.tutorial.controls
         
         public var textDelimeter:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             textField.autoSize = TextFieldAutoSize.LEFT;
             buttonMode = useHandCursor = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
@@ -47,7 +50,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.data = param1;
             invalidate(InvalidationType.DATA);
         }

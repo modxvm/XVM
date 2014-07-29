@@ -8,7 +8,8 @@ package net.wg.gui.lobby.header
     public class ServerStats extends UIComponent
     {
         
-        public function ServerStats() {
+        public function ServerStats()
+        {
             super();
             visible = false;
             this.players_online.useHandCursor = false;
@@ -28,13 +29,15 @@ package net.wg.gui.lobby.header
         
         private var locale:ILocale;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.players_online.removeEventListener(MouseEvent.ROLL_OVER,this.showPlayersTooltip);
             this.players_online.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
         }
         
-        public function setValues(param1:Object) : void {
+        public function setValues(param1:Object) : void
+        {
             var _loc2_:Number = param1.regionCCU != undefined?param1.regionCCU:0;
             var _loc3_:Number = param1.clusterCCU != undefined?param1.clusterCCU:0;
             var _loc4_:* = "";
@@ -53,16 +56,19 @@ package net.wg.gui.lobby.header
             this.visible = !(_loc4_ == "");
         }
         
-        public function hideTooltip(param1:Object) : void {
+        public function hideTooltip(param1:Object) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             visible = App.instance.globalVarsMgr.isShowServerStatsS();
         }
         
-        public function showPlayersTooltip(param1:MouseEvent) : void {
+        public function showPlayersTooltip(param1:MouseEvent) : void
+        {
             switch(this.tooltipType)
             {
                 case TYPE_CLUSTER:

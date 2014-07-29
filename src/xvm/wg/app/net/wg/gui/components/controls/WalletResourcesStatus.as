@@ -9,7 +9,8 @@ package net.wg.gui.components.controls
     public class WalletResourcesStatus extends UIComponent implements IDisposable
     {
         
-        public function WalletResourcesStatus() {
+        public function WalletResourcesStatus()
+        {
             super();
             this.alertIco.visible = false;
             this.alertIco.alpha = 1;
@@ -50,11 +51,13 @@ package net.wg.gui.components.controls
         
         private var _icoType:String = "";
         
-        private function onOut(param1:MouseEvent) : void {
+        private function onOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onOver(param1:MouseEvent) : void {
+        private function onOver(param1:MouseEvent) : void
+        {
             var _loc2_:String = this.getToolTipId();
             if(_loc2_ != "")
             {
@@ -62,13 +65,15 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.hit.removeEventListener(MouseEvent.ROLL_OVER,this.onOver);
             this.hit.removeEventListener(MouseEvent.ROLL_OUT,this.onOut);
             App.toolTipMgr.hide();
         }
         
-        public function set state(param1:String) : void {
+        public function set state(param1:String) : void
+        {
             if(param1 == this._state)
             {
                 return;
@@ -78,11 +83,13 @@ package net.wg.gui.components.controls
             invalidateState();
         }
         
-        public function get state() : String {
+        public function get state() : String
+        {
             return this._state;
         }
         
-        public function set icoType(param1:String) : void {
+        public function set icoType(param1:String) : void
+        {
             if(param1 == this._icoType)
             {
                 return;
@@ -91,17 +98,20 @@ package net.wg.gui.components.controls
             invalidateData();
         }
         
-        public function get icoType() : String {
+        public function get icoType() : String
+        {
             return this._icoType;
         }
         
-        public function updateStatus(param1:uint) : Boolean {
+        public function updateStatus(param1:uint) : Boolean
+        {
             this.visible = !(param1 == AVAILABLE);
             this.alertIco.visible = param1 == NOT_AVAILABLE;
             return this.visible;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.STATE)) && !(this._state == STATE_EMPTY))
             {
@@ -114,7 +124,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function getToolTipId() : String {
+        private function getToolTipId() : String
+        {
             var _loc1_:* = "";
             switch(this.icoType)
             {

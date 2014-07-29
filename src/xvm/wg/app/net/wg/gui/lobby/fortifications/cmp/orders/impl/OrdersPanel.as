@@ -19,7 +19,8 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
     public class OrdersPanel extends OrdersPanelMeta implements IOrdersPanel
     {
         
-        public function OrdersPanel() {
+        public function OrdersPanel()
+        {
             this.ordersData = [];
             super();
             this.orders = Vector.<ShellButton>([this.order1,this.order2,this.order3,this.order4,this.order5,this.order6,this.order7]);
@@ -33,7 +34,8 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
         
         private static var INV_ORDER:String = "invString";
         
-        private static function setOrderData(param1:ShellButton, param2:OrderVO) : void {
+        private static function setOrderData(param1:ShellButton, param2:OrderVO) : void
+        {
             param1.data = param2;
             param1.level = param2.level;
             param1.count = param2.count.toString();
@@ -59,7 +61,8 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             }
         }
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -85,22 +88,26 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
         
         private var lastClickedBtn:ShellButton = null;
         
-        public function as_setOrders(param1:Array) : void {
+        public function as_setOrders(param1:Array) : void
+        {
             this.ordersData = param1;
             invalidateData();
         }
         
-        public function getTargetButton() : DisplayObject {
+        public function getTargetButton() : DisplayObject
+        {
             App.utils.asserter.assertNotNull(this.lastClickedBtn,"lastClickedBtn" + Errors.CANT_NULL);
             return this.lastClickedBtn;
         }
         
-        public function getHitArea() : DisplayObject {
+        public function getHitArea() : DisplayObject
+        {
             App.utils.asserter.assertNotNull(this.lastClickedBtn,"lastClickedBtn" + Errors.CANT_NULL);
             return this.lastClickedBtn;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc1_:ShellButton = null;
             super.configUI();
             for each(_loc1_ in this.orders)
@@ -113,12 +120,14 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             }
         }
         
-        override protected function updateOrder(param1:OrderVO) : void {
+        override protected function updateOrder(param1:OrderVO) : void
+        {
             this.invalidData = param1;
             invalidate(INV_ORDER);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:ShellButton = null;
             if(this.orders)
             {
@@ -142,7 +151,8 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:OrderVO = null;
             var _loc3_:ShellButton = null;
@@ -167,7 +177,8 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             }
         }
         
-        private function invalidateOrder(param1:OrderVO) : void {
+        private function invalidateOrder(param1:OrderVO) : void
+        {
             var _loc2_:ShellButton = null;
             for each(_loc2_ in this.orders)
             {
@@ -179,7 +190,8 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             }
         }
         
-        private function handleBtnSelect(param1:ButtonEvent) : void {
+        private function handleBtnSelect(param1:ButtonEvent) : void
+        {
             var _loc2_:ShellButton = null;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
@@ -199,7 +211,8 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
             }
         }
         
-        private function showTooltip(param1:MouseEvent) : void {
+        private function showTooltip(param1:MouseEvent) : void
+        {
             var _loc2_:ShellButton = ShellButton(param1.target);
             var _loc3_:ILocale = App.utils.locale;
             var _loc4_:String = _loc3_.makeString(FORTIFICATIONS.orders_orderpopover_ordertype(_loc2_.id));

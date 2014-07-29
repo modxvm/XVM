@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class LobbyMinimapMeta extends MinimapEntity
     {
         
-        public function LobbyMinimapMeta() {
+        public function LobbyMinimapMeta()
+        {
             super();
         }
     }

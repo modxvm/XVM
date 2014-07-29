@@ -6,7 +6,8 @@ package scaleform.clik.events
     public class ListEvent extends Event
     {
         
-        public function ListEvent(param1:String, param2:Boolean = false, param3:Boolean = true, param4:int = -1, param5:int = -1, param6:int = -1, param7:IListItemRenderer = null, param8:Object = null, param9:uint = 0, param10:uint = 0, param11:Boolean = false) {
+        public function ListEvent(param1:String, param2:Boolean = false, param3:Boolean = true, param4:int = -1, param5:int = -1, param6:int = -1, param7:IListItemRenderer = null, param8:Object = null, param9:uint = 0, param10:uint = 0, param11:Boolean = false)
+        {
             super(param1,param2,param3);
             this.itemRenderer = param7;
             this.itemData = param8;
@@ -46,11 +47,13 @@ package scaleform.clik.events
         
         public var isKeyboard:Boolean = false;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new ListEvent(type,bubbles,cancelable,this.index,this.columnIndex,this.rowIndex,this.itemRenderer,this.itemData,this.controllerIdx,this.buttonIdx,this.isKeyboard);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("ListEvent","type","bubbles","cancelable","index","columnIndex","rowIndex","itemRenderer","itemData","controllerIdx","buttonIdx","isKeyboard");
         }
     }

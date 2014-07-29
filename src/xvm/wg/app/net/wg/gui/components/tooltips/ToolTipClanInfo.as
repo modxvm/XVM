@@ -10,7 +10,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipClanInfo extends ToolTipSpecial
     {
         
-        public function ToolTipClanInfo() {
+        public function ToolTipClanInfo()
+        {
             super();
             this.headerTF = content.headerTF;
             this.infoTF = content.infoTF;
@@ -36,14 +37,16 @@ package net.wg.gui.components.tooltips
         
         private var texts:Vector.<TextField>;
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             separators = new Vector.<Separator>();
             this.setData();
             this.updatePositions();
             super.redraw();
         }
         
-        override protected function updatePositions() : void {
+        override protected function updatePositions() : void
+        {
             var _loc5_:TextField = null;
             var _loc1_:int = this.texts.length;
             var _loc2_:Separator = null;
@@ -51,6 +54,7 @@ package net.wg.gui.components.tooltips
             var _loc4_:* = 0;
             while(_loc4_ < _loc1_)
             {
+                _loc4_;
                 _loc5_ = this.texts[_loc4_];
                 _loc5_.autoSize = TextFieldAutoSize.LEFT;
                 TextFieldEx.setVerticalAlign(_loc5_,TextFieldEx.VALIGN_TOP);
@@ -62,12 +66,14 @@ package net.wg.gui.components.tooltips
             super.updatePositions();
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             super.updateSize();
             background.height = background.height + 3;
         }
         
-        private function calculatePaddings(param1:int) : int {
+        private function calculatePaddings(param1:int) : int
+        {
             var _loc2_:* = 0;
             switch(param1)
             {
@@ -89,7 +95,8 @@ package net.wg.gui.components.tooltips
             return _loc2_;
         }
         
-        private function setData() : void {
+        private function setData() : void
+        {
             var _loc1_:ClanInfoVO = new ClanInfoVO(_data);
             this.headerTF.htmlText = _loc1_.headerText;
             this.fullClanNameTF.htmlText = _loc1_.fullClanName;

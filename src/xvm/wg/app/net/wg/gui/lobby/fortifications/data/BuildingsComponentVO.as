@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class BuildingsComponentVO extends DAAPIDataClass
     {
         
-        public function BuildingsComponentVO(param1:Object) {
+        public function BuildingsComponentVO(param1:Object)
+        {
             this.buildingData = new Vector.<BuildingVO>();
             super(param1);
         }
@@ -16,7 +17,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var buildingData:Vector.<BuildingVO>;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Object = null;
             var _loc4_:BuildingVO = null;
             if(param1 == BUILDING_DATA)
@@ -31,7 +33,8 @@ package net.wg.gui.lobby.fortifications.data
             return super.onDataWrite(param1,param2);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:BuildingVO = null;
             for each(_loc1_ in this.buildingData)
             {

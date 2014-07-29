@@ -5,7 +5,8 @@ package net.wg.gui.messenger.meta.impl
     public class LobbyChannelWindowMeta extends BaseChannelWindow
     {
         
-        public function LobbyChannelWindowMeta() {
+        public function LobbyChannelWindowMeta()
+        {
             super();
         }
     }

@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class FightButtonEvent extends Event
     {
         
-        public function FightButtonEvent(param1:String, param2:String = null, param3:int = 0) {
+        public function FightButtonEvent(param1:String, param2:String = null, param3:int = 0)
+        {
             super(param1,true,true);
             this.option = param2;
             this.mapID = param3;
@@ -21,7 +22,8 @@ package net.wg.gui.events
         
         public var mapID:Number;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new FightButtonEvent(type,this.option);
         }
     }

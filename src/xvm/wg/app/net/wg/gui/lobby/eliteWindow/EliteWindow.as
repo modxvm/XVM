@@ -14,7 +14,8 @@ package net.wg.gui.lobby.eliteWindow
     public class EliteWindow extends EliteWindowMeta implements IEliteWindowMeta
     {
         
-        public function EliteWindow() {
+        public function EliteWindow()
+        {
             super();
             isCentered = true;
         }
@@ -33,13 +34,15 @@ package net.wg.gui.lobby.eliteWindow
         
         private var INVALIDATE_TANK_DATA:String = "invTankData";
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             window.title = DIALOGS.ELITE_TITLE;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.icon.dispose();
             this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.onClose);
             this.closeBtn.dispose();
@@ -52,7 +55,8 @@ package net.wg.gui.lobby.eliteWindow
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints = new Constraints(this);
             this.infoTF.text = DIALOGS.ELITE_MESSAGE;
@@ -62,7 +66,8 @@ package net.wg.gui.lobby.eliteWindow
             constraints.addElement("closeBtn",this.closeBtn,Constraints.CENTER_H);
         }
         
-        public function as_setVehicle(param1:Object) : void {
+        public function as_setVehicle(param1:Object) : void
+        {
             var _loc2_:VehicleVO = new VehicleVO(param1);
             this.vName = _loc2_.userName;
             this.vType = _loc2_.type;
@@ -70,7 +75,8 @@ package net.wg.gui.lobby.eliteWindow
             invalidate(this.INVALIDATE_TANK_DATA);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(this.INVALIDATE_TANK_DATA))
             {
@@ -85,12 +91,14 @@ package net.wg.gui.lobby.eliteWindow
             }
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.closeBtn);
         }
         
-        private function onClose(param1:ButtonEvent) : void {
+        private function onClose(param1:ButtonEvent) : void
+        {
             onWindowCloseS();
         }
     }

@@ -9,7 +9,8 @@ package net.wg.gui.components.advanced
     public class FieldSet extends UIComponent
     {
         
-        public function FieldSet() {
+        public function FieldSet()
+        {
             super();
         }
         
@@ -25,7 +26,8 @@ package net.wg.gui.components.advanced
         
         private var _showLabel:Boolean = true;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:String = null;
             this.textField = null;
             this.bg = null;
@@ -33,30 +35,36 @@ package net.wg.gui.components.advanced
             for(_loc1_ in this.startScale)
             {
                 delete this.startScale[_loc1_];
+                true;
             }
             this.startScale = null;
             super.onDispose();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG FieldSet " + name + "]";
         }
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this.textField.text;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this.textField.text = param1;
             this.textField.autoSize = TextFieldAutoSize.LEFT;
             invalidate();
         }
         
-        public function get showLabel() : Boolean {
+        public function get showLabel() : Boolean
+        {
             return this._showLabel;
         }
         
-        public function set showLabel(param1:Boolean) : void {
+        public function set showLabel(param1:Boolean) : void
+        {
             if(this._showLabel == param1)
             {
                 return;
@@ -66,11 +74,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get margin() : Number {
+        public function get margin() : Number
+        {
             return this._margin;
         }
         
-        public function set margin(param1:Number) : void {
+        public function set margin(param1:Number) : void
+        {
             if(this._margin == param1)
             {
                 return;
@@ -79,15 +89,18 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             super.preInitialize();
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.startScale = new Object();
             this.startScale.sX = this.scaleX;
             this.startScale.sY = this.scaleY;
@@ -103,7 +116,8 @@ package net.wg.gui.components.advanced
             invalidateSize();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(this.showLabel)
             {
                 this.line.x = this.textField.x + this.textField.textWidth + this.margin;

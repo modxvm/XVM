@@ -15,7 +15,8 @@ package net.wg.gui.historicalBattles.controls
     public class VehicleListItemRenderer extends SoundListItemRenderer
     {
         
-        public function VehicleListItemRenderer() {
+        public function VehicleListItemRenderer()
+        {
             super();
             preventAutosizing = true;
         }
@@ -30,7 +31,8 @@ package net.wg.gui.historicalBattles.controls
         
         protected var model:VehicleListItemVO;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.warningIcon.buttonMode = this.warningIcon.useHandCursor = true;
             this.warningIcon.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
@@ -39,7 +41,8 @@ package net.wg.gui.historicalBattles.controls
             this.mouseArea.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.warningIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
             this.warningIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
             this.warningIcon = null;
@@ -58,7 +61,8 @@ package net.wg.gui.historicalBattles.controls
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.model))
             {
@@ -73,7 +77,8 @@ package net.wg.gui.historicalBattles.controls
             mouseChildren = true;
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             var _loc3_:* = false;
             var _loc4_:* = false;
             this.model = param1 as VehicleListItemVO;
@@ -115,11 +120,13 @@ package net.wg.gui.historicalBattles.controls
             invalidateData();
         }
         
-        private function onControlRollOut(param1:MouseEvent) : void {
+        private function onControlRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onControlRollOver(param1:MouseEvent) : void {
+        private function onControlRollOver(param1:MouseEvent) : void
+        {
             switch(param1.currentTarget)
             {
                 case this.warningIcon:
@@ -131,11 +138,13 @@ package net.wg.gui.historicalBattles.controls
             }
         }
         
-        private function showWarnTT() : void {
+        private function showWarnTT() : void
+        {
             this.showComplexTT(this.model.warnTTHeader,this.model.warnTTBody);
         }
         
-        private function showBodyTT() : void {
+        private function showBodyTT() : void
+        {
             if(this.model)
             {
                 if(this.model.enabled)
@@ -149,7 +158,8 @@ package net.wg.gui.historicalBattles.controls
             }
         }
         
-        private function showComplexTT(param1:String, param2:String = "") : void {
+        private function showComplexTT(param1:String, param2:String = "") : void
+        {
             var _loc3_:String = new ComplexTooltipHelper().addHeader(param1).addBody(param2).make();
             if(_loc3_.length > 0)
             {

@@ -5,7 +5,8 @@ package scaleform.clik.layout
     public class LayoutData extends Object
     {
         
-        public function LayoutData(param1:String = "none", param2:String = "none", param3:int = -1, param4:int = -1, param5:String = null, param6:String = null, param7:int = -1, param8:String = null) {
+        public function LayoutData(param1:String = "none", param2:String = "none", param3:int = -1, param4:int = -1, param5:String = null, param6:String = null, param7:int = -1, param8:String = null)
+        {
             super();
             this.alignH = param1;
             this.alignV = param2;
@@ -45,7 +46,8 @@ package scaleform.clik.layout
         
         public var layoutIdentifier:String = null;
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[LayoutData, h: " + this.alignH + ", v: " + this.alignV + ", oh: " + this.offsetH + ", ov: " + this.offsetV + ", relh: " + this.relativeToH + ", relv: " + this.relativeToV + ", idx: " + this.layoutIndex + "]";
         }
     }

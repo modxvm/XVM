@@ -7,15 +7,15 @@ package net.wg.gui.prebattle.battleSession
     public class RequirementInfo extends UIComponent
     {
         
-        public function RequirementInfo() {
+        public function RequirementInfo()
+        {
             super();
-            this._textFields = {
-                "lightTank":this.lightLevelField,
-                "mediumTank":this.mediumLevelField,
-                "heavyTank":this.heavyLevelField,
-                "SPG":this.spgLevelField,
-                "AT-SPG":this.atspgLevelField
-            };
+            this._textFields = {"lightTank":this.lightLevelField,
+            "mediumTank":this.mediumLevelField,
+            "heavyTank":this.heavyLevelField,
+            "SPG":this.spgLevelField,
+            "AT-SPG":this.atspgLevelField
+        };
     }
     
     public var flagList:FlagsList;
@@ -38,7 +38,8 @@ package net.wg.gui.prebattle.battleSession
     
     private var _textFields:Object;
     
-    public function get textFields() : Object {
+    public function get textFields() : Object
+    {
         return this._textFields;
     }
 }

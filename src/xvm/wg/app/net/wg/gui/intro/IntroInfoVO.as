@@ -5,7 +5,8 @@ package net.wg.gui.intro
     public class IntroInfoVO extends DAAPIDataClass
     {
         
-        public function IntroInfoVO(param1:Object) {
+        public function IntroInfoVO(param1:Object)
+        {
             super(param1);
         }
         

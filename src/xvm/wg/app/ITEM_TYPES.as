@@ -1,9 +1,10 @@
-package 
+package
 {
     public class ITEM_TYPES extends Object
     {
         
-        public function ITEM_TYPES() {
+        public function ITEM_TYPES()
+        {
             super();
         }
         
@@ -247,25 +248,28 @@ package
         
         public static var SHELL_DIMENSION_MM:String = "#item_types:shell/dimension/mm";
         
-        public static var TANKMAN_SKILLS_TYPE_ENUM:Array;
+        public static var TANKMAN_SKILLS_TYPE_ENUM:Array = [TANKMAN_SKILLS_TYPE_SKILL,TANKMAN_SKILLS_TYPE_PERK,TANKMAN_SKILLS_TYPE_PERK_COMMON];
         
-        public static var SHELL_KINDS_ENUM:Array;
+        public static var SHELL_KINDS_ENUM:Array = [SHELL_KINDS_ARMOR_PIERCING,SHELL_KINDS_ARMOR_PIERCING_CR,SHELL_KINDS_ARMOR_PIERCING_HE,SHELL_KINDS_HOLLOW_CHARGE,SHELL_KINDS_HIGH_EXPLOSIVE];
         
-        public static var SHELL_KINDSABBREVIATION_ENUM:Array;
+        public static var SHELL_KINDSABBREVIATION_ENUM:Array = [SHELL_KINDSABBREVIATION_ARMOR_PIERCING,SHELL_KINDSABBREVIATION_ARMOR_PIERCING_CR,SHELL_KINDSABBREVIATION_ARMOR_PIERCING_HE,SHELL_KINDSABBREVIATION_HOLLOW_CHARGE,SHELL_KINDSABBREVIATION_HIGH_EXPLOSIVE];
         
-        public static function tankman_skills_type(param1:String) : String {
+        public static function tankman_skills_type(param1:String) : String
+        {
             var _loc2_:String = "#item_types:tankman/skills/type/" + param1;
             App.utils.asserter.assert(!(TANKMAN_SKILLS_TYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function shell_kinds(param1:String) : String {
+        public static function shell_kinds(param1:String) : String
+        {
             var _loc2_:String = "#item_types:shell/kinds/" + param1;
             App.utils.asserter.assert(!(SHELL_KINDS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function shell_kindsabbreviation(param1:String) : String {
+        public static function shell_kindsabbreviation(param1:String) : String
+        {
             var _loc2_:String = "#item_types:shell/kindsAbbreviation/" + param1;
             App.utils.asserter.assert(!(SHELL_KINDSABBREVIATION_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;

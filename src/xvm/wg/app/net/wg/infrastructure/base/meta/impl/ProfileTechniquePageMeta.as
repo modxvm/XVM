@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class ProfileTechniquePageMeta extends ProfileTechnique
     {
         
-        public function ProfileTechniquePageMeta() {
+        public function ProfileTechniquePageMeta()
+        {
             super();
         }
         
         public var setIsInHangarSelected:Function = null;
         
-        public function setIsInHangarSelectedS(param1:Boolean) : void {
+        public function setIsInHangarSelectedS(param1:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.setIsInHangarSelected,"setIsInHangarSelected" + Errors.CANT_NULL);
             this.setIsInHangarSelected(param1);
         }

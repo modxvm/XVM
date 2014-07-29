@@ -3,7 +3,8 @@ package net.wg.data.constants.generated
     public class CUSTOMIZATION_ITEM_TYPE extends Object
     {
         
-        public function CUSTOMIZATION_ITEM_TYPE() {
+        public function CUSTOMIZATION_ITEM_TYPE()
+        {
             super();
         }
         

@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class LobbyMetrics extends Object
     {
         
-        public function LobbyMetrics() {
+        public function LobbyMetrics()
+        {
             super();
         }
         

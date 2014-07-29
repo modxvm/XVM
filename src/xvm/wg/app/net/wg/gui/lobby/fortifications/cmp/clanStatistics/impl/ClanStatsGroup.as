@@ -7,13 +7,15 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
     public class ClanStatsGroup extends GroupEx
     {
         
-        public function ClanStatsGroup() {
+        public function ClanStatsGroup()
+        {
             super();
         }
         
         private static var VERTICAL_GAP:Number = 6;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             var _loc1_:Class = App.utils.classFactory.getClass(Linkages.CLAN_STAT_DASH_LINE_TEXT_ITEM);
             var _loc2_:Vertical100PercWidthLayout = new Vertical100PercWidthLayout();

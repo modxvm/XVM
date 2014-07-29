@@ -9,7 +9,8 @@ package net.wg.gui.lobby.store
     public class StoreForm extends UIComponent
     {
         
-        public function StoreForm() {
+        public function StoreForm()
+        {
             super();
         }
         

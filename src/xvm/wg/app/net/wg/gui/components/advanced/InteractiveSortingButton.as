@@ -5,16 +5,19 @@ package net.wg.gui.components.advanced
     public class InteractiveSortingButton extends SortingButton
     {
         
-        public function InteractiveSortingButton() {
+        public function InteractiveSortingButton()
+        {
             super();
         }
         
         private var _previousSelectedSorDirection:String;
         
-        override public function set toggle(param1:Boolean) : void {
+        override public function set toggle(param1:Boolean) : void
+        {
         }
         
-        override public function set sortDirection(param1:String) : void {
+        override public function set sortDirection(param1:String) : void
+        {
             if(!(sortDirection == param1) && (selected))
             {
                 this._previousSelectedSorDirection = sortDirection;
@@ -22,7 +25,8 @@ package net.wg.gui.components.advanced
             super.sortDirection = param1;
         }
         
-        override public function set selected(param1:Boolean) : void {
+        override public function set selected(param1:Boolean) : void
+        {
             if(selected != param1)
             {
                 if(param1 == false)
@@ -42,21 +46,25 @@ package net.wg.gui.components.advanced
             super.selected = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             _toggle = true;
             allowDeselect = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function handleRelease(param1:uint = 0) : void {
+        override protected function handleRelease(param1:uint = 0) : void
+        {
             super.handleRelease(param1);
         }
         
-        override protected function handleClick(param1:uint = 0) : void {
+        override protected function handleClick(param1:uint = 0) : void
+        {
             if(selected)
             {
                 if(sortDirection == SortingInfo.ASCENDING_SORT)

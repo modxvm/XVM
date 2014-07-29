@@ -6,7 +6,8 @@ package net.wg.gui.components.common.markers
     public class DamageLabel extends UIComponent
     {
         
-        public function DamageLabel() {
+        public function DamageLabel()
+        {
             super();
         }
         
@@ -20,7 +21,8 @@ package net.wg.gui.components.common.markers
         
         private var _text:String;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INVALIDATE_COLOR))
             {
@@ -32,25 +34,30 @@ package net.wg.gui.components.common.markers
             }
         }
         
-        public function get color() : String {
+        public function get color() : String
+        {
             return this._color;
         }
         
-        public function set color(param1:String) : void {
+        public function set color(param1:String) : void
+        {
             this._color = param1;
             invalidate(INVALIDATE_COLOR);
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
             invalidate(INVALIDATE_TEXT);
         }
         
-        public function get textWidth() : Number {
+        public function get textWidth() : Number
+        {
             return this.label.textWidth;
         }
     }

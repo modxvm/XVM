@@ -11,7 +11,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
     public class HeaderMc extends UIComponent
     {
         
-        public function HeaderMc() {
+        public function HeaderMc()
+        {
             super();
         }
         
@@ -29,7 +30,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         public var descriptionScrollBar:ScrollBar;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.tankActionPrice.dispose();
             this.tankActionPrice = null;
             super.onDispose();

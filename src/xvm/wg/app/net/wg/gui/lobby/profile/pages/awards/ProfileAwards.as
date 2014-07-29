@@ -17,13 +17,15 @@ package net.wg.gui.lobby.profile.pages.awards
     public class ProfileAwards extends ProfileAwardsMeta implements IProfileAwardsMeta
     {
         
-        public function ProfileAwards() {
+        public function ProfileAwards()
+        {
             super();
         }
         
         private static var INVOKE_UPD_INVALID:String = "invokeUpdInv";
         
-        private static function generateDropdownItem(param1:String) : Object {
+        private static function generateDropdownItem(param1:String) : Object
+        {
             return {"label":App.utils.locale.makeString(param1)};
         }
         
@@ -37,7 +39,8 @@ package net.wg.gui.lobby.profile.pages.awards
         
         private var startMenuX:int;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.startMenuX = this.dropdownMenu.x;
             var _loc1_:AwardsMainContainer = this.getMainContainer();
@@ -46,15 +49,18 @@ package net.wg.gui.lobby.profile.pages.awards
             this.dropdownMenu.addEventListener(MouseEvent.MOUSE_OUT,this.checkBoxMouseOutHandler,false,0,true);
         }
         
-        private function checkBoxMouseOverHandler(param1:MouseEvent) : void {
+        private function checkBoxMouseOverHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(PROFILE.SECTION_AWARDS_DROPDOWN_TOOLTIP);
         }
         
-        private function checkBoxMouseOutHandler(param1:MouseEvent) : void {
+        private function checkBoxMouseOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        override public function as_setInitData(param1:Object) : void {
+        override public function as_setInitData(param1:Object) : void
+        {
             var _loc9_:Object = null;
             super.as_setInitData(param1);
             var _loc2_:ProfileAwardsInitVO = new ProfileAwardsInitVO(param1);
@@ -83,11 +89,13 @@ package net.wg.gui.lobby.profile.pages.awards
             invalidate(INVOKE_UPD_INVALID);
         }
         
-        private function menuIndexChangeHandler(param1:ListEvent) : void {
+        private function menuIndexChangeHandler(param1:ListEvent) : void
+        {
             setFilterS(param1.itemData.key);
         }
         
-        override protected function applyData(param1:Object) : Object {
+        override protected function applyData(param1:Object) : Object
+        {
             var _loc7_:AwardsBlock = null;
             var _loc11_:ProfileAchievementVO = null;
             var _loc12_:Array = null;
@@ -152,7 +160,8 @@ package net.wg.gui.lobby.profile.pages.awards
             return param1;
         }
         
-        override protected function applyResizing() : void {
+        override protected function applyResizing() : void
+        {
             var _loc1_:* = NaN;
             _loc1_ = Math.round(currentDimension.x / 2 - centerOffset);
             this.dropdownMenu.x = this.startMenuX + _loc1_;
@@ -163,19 +172,23 @@ package net.wg.gui.lobby.profile.pages.awards
             this.mainScrollPane.setSize(currentDimension.x,currentDimension.y);
         }
         
-        protected function getMainContainer() : AwardsMainContainer {
+        protected function getMainContainer() : AwardsMainContainer
+        {
             return AwardsMainContainer(this.mainScrollPane.target);
         }
         
-        public function setBattlesHeroesData(param1:Array) : void {
+        public function setBattlesHeroesData(param1:Array) : void
+        {
             this.getMainContainer().blockBattleHeroes.dataProvider = param1;
         }
         
-        public function setHonorsData(param1:String, param2:Array) : void {
+        public function setHonorsData(param1:String, param2:Array) : void
+        {
             this.getMainContainer().blockHonors.dataProvider = new DataProvider(param2);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.dropdownMenu.removeEventListener(MouseEvent.MOUSE_OVER,this.checkBoxMouseOverHandler);
             this.dropdownMenu.removeEventListener(MouseEvent.MOUSE_OUT,this.checkBoxMouseOutHandler);
             super.onDispose();

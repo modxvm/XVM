@@ -10,7 +10,8 @@ package net.wg.gui.lobby.profile.components
     public class AwardsTileListBlock extends UIComponent
     {
         
-        public function AwardsTileListBlock() {
+        public function AwardsTileListBlock()
+        {
             super();
         }
         
@@ -26,14 +27,16 @@ package net.wg.gui.lobby.profile.components
         
         protected var _dataProvider:Array;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(Event.RESIZE,this.tileResizeHandler,false,0,true);
             this.tileList.direction = DirectionMode.VERTICAL;
             this.tileList.columnCount = 12;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(DATA_PROVIDER_INV))
             {
@@ -49,38 +52,46 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        protected function applyLabel() : void {
+        protected function applyLabel() : void
+        {
             this.textField.text = this._labelText;
         }
         
-        protected function applySizeChanges() : void {
+        protected function applySizeChanges() : void
+        {
             _height = this.tileList.y + this.tileList.height;
         }
         
-        protected function applyDataChanges() : void {
+        protected function applyDataChanges() : void
+        {
             this.tileList.dataProvider = new DataProvider(this._dataProvider);
             invalidate(LABEL_INV);
         }
         
-        private function tileResizeHandler(param1:Event) : void {
+        private function tileResizeHandler(param1:Event) : void
+        {
             this.applySizeChanges();
         }
         
-        public function set labelText(param1:String) : void {
+        public function set labelText(param1:String) : void
+        {
             this._labelText = param1;
             invalidate(LABEL_INV);
         }
         
-        public function get dataProvider() : Array {
+        public function get dataProvider() : Array
+        {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:Array) : void {
+        public function set dataProvider(param1:Array) : void
+        {
             this._dataProvider = param1;
             invalidate(DATA_PROVIDER_INV);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.tileList)
             {
                 this.tileList.dispose();
@@ -93,7 +104,8 @@ package net.wg.gui.lobby.profile.components
             super.onDispose();
         }
         
-        public function get labelText() : String {
+        public function get labelText() : String
+        {
             return this._labelText;
         }
     }

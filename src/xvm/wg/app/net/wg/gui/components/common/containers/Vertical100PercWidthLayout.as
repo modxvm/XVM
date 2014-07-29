@@ -5,11 +5,13 @@ package net.wg.gui.components.common.containers
     public class Vertical100PercWidthLayout extends VerticalGroupLayout
     {
         
-        public function Vertical100PercWidthLayout() {
+        public function Vertical100PercWidthLayout()
+        {
             super();
         }
         
-        override public function invokeLayout() : Object {
+        override public function invokeLayout() : Object
+        {
             var _loc1_:UIComponent = null;
             var _loc2_:int = _target.numChildren;
             var _loc3_:* = 0;
@@ -23,7 +25,8 @@ package net.wg.gui.components.common.containers
             return super.invokeLayout();
         }
         
-        override public function dispose() : void {
+        override public function dispose() : void
+        {
             super.dispose();
         }
     }

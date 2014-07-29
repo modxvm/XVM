@@ -10,7 +10,8 @@ package net.wg.gui.lobby.questsWindow
     public class RequirementBlock extends AbstractResizableContent
     {
         
-        public function RequirementBlock() {
+        public function RequirementBlock()
+        {
             super();
         }
         
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.questsWindow
         
         protected var data:Object = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.blocksContainer.x = LEFT_PADDING;
             this.blocksContainer.verticalPadding = CONTAINER_PADDING;
@@ -36,17 +38,20 @@ package net.wg.gui.lobby.questsWindow
             this.description.addEventListener(Event.RESIZE,this.layoutBlocks);
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             this.description.isReadyForLayout = false;
             this.blocksContainer.isReadyForLayout = false;
             invalidateData();
         }
         
-        public function setAvailableQuests(param1:Vector.<String>) : void {
+        public function setAvailableQuests(param1:Vector.<String>) : void
+        {
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:RequirementBlockVO = null;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
@@ -66,7 +71,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        protected function layoutBlocks(param1:Event) : void {
+        protected function layoutBlocks(param1:Event) : void
+        {
             var _loc2_:* = NaN;
             if((this.blocksContainer.isReadyForLayout) && (this.description.isReadyForLayout))
             {
@@ -80,7 +86,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.blocksContainer.removeEventListener(Event.RESIZE,this.layoutBlocks);
             this.blocksContainer.removeEventListener(ResizableBlockEvent.VALIDATE_SCROLL_BAR,this.layoutBlocks);
             this.description.removeEventListener(Event.RESIZE,this.layoutBlocks);

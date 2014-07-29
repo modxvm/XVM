@@ -14,7 +14,8 @@ package net.wg.gui.messenger.windows
     public class FAQWindow extends FAQWindowMeta implements IFAQWindowMeta
     {
         
-        public function FAQWindow() {
+        public function FAQWindow()
+        {
             super();
             isCentered = false;
         }
@@ -27,11 +28,13 @@ package net.wg.gui.messenger.windows
         
         private var isLeftButtonClicked:Boolean = false;
         
-        public function as_appendText(param1:String) : void {
+        public function as_appendText(param1:String) : void
+        {
             this.textArea.appendHtml(param1);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             TextFieldStyleSheet.setLinkStyle(this.textArea.textField);
             var _loc1_:TextField = this.textArea.textField;
@@ -40,17 +43,20 @@ package net.wg.gui.messenger.windows
             this.closeButton.addEventListener(ButtonEvent.CLICK,this.handleCancelClick,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             window.title = MESSENGER.LOBBY_FAQ_TITLE;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             var _loc1_:TextField = this.textArea.textField;
             _loc1_.removeEventListener(TextEvent.LINK,this.handleLinkClick,false);
@@ -58,18 +64,21 @@ package net.wg.gui.messenger.windows
             this.closeButton.removeEventListener(ButtonEvent.CLICK,this.handleCancelClick,false);
         }
         
-        private function handleMouseClick(param1:MouseEvent) : void {
+        private function handleMouseClick(param1:MouseEvent) : void
+        {
             this.isLeftButtonClicked = App.utils.commons.isLeftButton(param1);
         }
         
-        private function handleLinkClick(param1:TextEvent) : void {
+        private function handleLinkClick(param1:TextEvent) : void
+        {
             if(this.isLeftButtonClicked)
             {
                 onLinkClickedS(param1.text);
             }
         }
         
-        private function handleCancelClick(param1:ButtonEvent) : void {
+        private function handleCancelClick(param1:ButtonEvent) : void
+        {
             onWindowCloseS();
         }
     }

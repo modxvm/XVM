@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips.VO
     public class ToolTipSkillVO extends DAAPIDataClass
     {
         
-        public function ToolTipSkillVO(param1:Object) {
+        public function ToolTipSkillVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -19,43 +20,53 @@ package net.wg.gui.components.tooltips.VO
         
         private var _level:Number = 0;
         
-        public function get level() : Number {
+        public function get level() : Number
+        {
             return this._level;
         }
         
-        public function set level(param1:Number) : void {
+        public function set level(param1:Number) : void
+        {
             this._level = param1;
         }
         
-        public function get shortDescr() : String {
+        public function get shortDescr() : String
+        {
             return this._shortDescr;
         }
         
-        public function set shortDescr(param1:String) : void {
+        public function set shortDescr(param1:String) : void
+        {
             this._shortDescr = param1;
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             this._type = param1;
         }
         
-        public function get descr() : String {
+        public function get descr() : String
+        {
             return this._descr;
         }
         
-        public function set descr(param1:String) : void {
+        public function set descr(param1:String) : void
+        {
             this._descr = param1;
         }
         
-        public function get name() : String {
+        public function get name() : String
+        {
             return this._name;
         }
         
-        public function set name(param1:String) : void {
+        public function set name(param1:String) : void
+        {
             this._name = param1;
         }
     }

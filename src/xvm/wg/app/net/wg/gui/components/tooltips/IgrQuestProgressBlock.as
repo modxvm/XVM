@@ -7,7 +7,8 @@ package net.wg.gui.components.tooltips
     public class IgrQuestProgressBlock extends MovieClip
     {
         
-        public function IgrQuestProgressBlock() {
+        public function IgrQuestProgressBlock()
+        {
             super();
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.components.tooltips
         
         public var valuesBlock:EfficiencyBlock;
         
-        public function setData(param1:String, param2:Array) : void {
+        public function setData(param1:String, param2:Array) : void
+        {
             var _loc4_:* = 0;
             this.headerTF.htmlText = param1;
             var _loc3_:int = param2.length;

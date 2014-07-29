@@ -20,11 +20,12 @@ package net.wg.gui.cyberSport.controls
     public class CSVehicleButton extends SoundButtonEx implements IVehicleButton
     {
         
-        public function CSVehicleButton() {
+        public function CSVehicleButton()
+        {
             super();
         }
         
-        private static var CUT_RECTANGLE:Rectangle;
+        private static var CUT_RECTANGLE:Rectangle = new Rectangle(0,2,70,20);
         
         public static var SELECTED_VEHICLE:int = 0;
         
@@ -110,44 +111,53 @@ package net.wg.gui.cyberSport.controls
         
         private var _mouseOverAlert:Boolean = false;
         
-        public function set forceSoundEnable(param1:Boolean) : void {
+        public function set forceSoundEnable(param1:Boolean) : void
+        {
             this._forceSoundEnable = param1;
         }
         
-        public function get forceSoundEnable() : Boolean {
+        public function get forceSoundEnable() : Boolean
+        {
             return this._forceSoundEnable;
         }
         
-        public function set showRangeRosterBg(param1:Boolean) : void {
+        public function set showRangeRosterBg(param1:Boolean) : void
+        {
             this._showRangeRosterBg = param1;
             this.rangeBg.visible = !param1;
         }
         
-        public function get showRangeRosterBg() : Boolean {
+        public function get showRangeRosterBg() : Boolean
+        {
             return this._showRangeRosterBg;
         }
         
-        public function get vehicleCount() : int {
+        public function get vehicleCount() : int
+        {
             return this._vehicleCount;
         }
         
-        public function set vehicleCount(param1:int) : void {
+        public function set vehicleCount(param1:int) : void
+        {
             this.clearData();
             this._vehicleCount = param1;
             invalidate(UPDATE_INIT_DATA);
         }
         
-        public function set showCommanderSettings(param1:Boolean) : void {
+        public function set showCommanderSettings(param1:Boolean) : void
+        {
             this.clearData();
             this._showCommanderSettings = param1;
             invalidate(UPDATE_INIT_DATA);
         }
         
-        public function get showCommanderSettings() : Boolean {
+        public function get showCommanderSettings() : Boolean
+        {
             return this._showCommanderSettings;
         }
         
-        public function setRangeData(param1:SettingRosterVO) : void {
+        public function setRangeData(param1:SettingRosterVO) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -157,35 +167,38 @@ package net.wg.gui.cyberSport.controls
             invalidate(UPDATE_INIT_DATA);
         }
         
-        public function getModel() : * {
+        public function getModel() : *
+        {
             if(this.vehicleModel)
             {
                 return this.vehicleModel.intCD;
             }
             if(this.rangeModel)
             {
-                return {
-                    "nationIDRange":this.getNationRange(),
-                    "vTypeRange":this.getVType(),
-                    "vLevelRange":this.getLevelsRange()
-                };
+                return {"nationIDRange":this.getNationRange(),
+                "vTypeRange":this.getVType(),
+                "vLevelRange":this.getLevelsRange()
+            };
         }
         return null;
     }
     
-    public function setVehicle(param1:DAAPIDataClass) : void {
+    public function setVehicle(param1:DAAPIDataClass) : void
+    {
         this.clearData();
         this.vehicleModel = VehicleVO(param1);
         invalidate(UPDATE_INIT_DATA);
     }
     
-    public function reset() : void {
+    public function reset() : void
+    {
         this.selectState(false);
         this.clearData();
         invalidate(UPDATE_INIT_DATA);
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         if(!(_newFrame == null) && (isInvalid(InvalidationType.STATE)) && (this.vehicleLevel))
         {
             this.vehicleLevel.setState(_newFrame);
@@ -213,7 +226,8 @@ package net.wg.gui.cyberSport.controls
     
     private var updatedFlag:Boolean = false;
     
-    private function clearData() : void {
+    private function clearData() : void
+    {
         this.updatedFlag = false;
         this.vehicleModel = null;
         this.rangeModel = null;
@@ -221,12 +235,14 @@ package net.wg.gui.cyberSport.controls
         this._showCommanderSettings = false;
     }
     
-    private function updateRange() : void {
+    private function updateRange() : void
+    {
         this.currentState = RANGE_ROSTER;
         this.rangeView.setData(this.rangeModel as SettingRosterVO);
     }
     
-    private function initVehicleCount() : void {
+    private function initVehicleCount() : void
+    {
         var _loc1_:TextFormat = null;
         if(this._showCommanderSettings)
         {
@@ -250,7 +266,8 @@ package net.wg.gui.cyberSport.controls
         
     }
     
-    private function initMedallion() : void {
+    private function initMedallion() : void
+    {
         this.currentState = SELECTED_VEHICLE;
         var _loc1_:String = this.utils.nations.getNationName(this.vehicleModel.nationID);
         this.nationType.gotoAndStop(_loc1_);
@@ -266,11 +283,13 @@ package net.wg.gui.cyberSport.controls
     
     private var _clickableAreaEnable:Boolean = true;
     
-    public function set clickableAreaEnable(param1:Boolean) : void {
+    public function set clickableAreaEnable(param1:Boolean) : void
+    {
         this._clickableAreaEnable = param1;
     }
     
-    override public function set enabled(param1:Boolean) : void {
+    override public function set enabled(param1:Boolean) : void
+    {
         var _loc2_:* = false;
         if(enabled == false && param1 == true)
         {
@@ -292,7 +311,8 @@ package net.wg.gui.cyberSport.controls
         
     }
     
-    override protected function configUI() : void {
+    override protected function configUI() : void
+    {
         super.configUI();
         if(enabled)
         {
@@ -336,7 +356,8 @@ package net.wg.gui.cyberSport.controls
         this.clickableArea.addEventListener(MouseEvent.ROLL_OVER,this.rollOverHandler);
     }
     
-    private function updateClickableArea() : void {
+    private function updateClickableArea() : void
+    {
         this.clickableArea.buttonMode = this._clickableAreaEnable;
         if(this._clickableAreaEnable)
         {
@@ -344,7 +365,8 @@ package net.wg.gui.cyberSport.controls
         }
     }
     
-    private function rollOverHandler(param1:MouseEvent) : void {
+    private function rollOverHandler(param1:MouseEvent) : void
+    {
         super.handleMouseRollOver(param1);
         this.playSounds(param1.type);
         if(!this._mouseOverAlert)
@@ -353,7 +375,8 @@ package net.wg.gui.cyberSport.controls
         }
     }
     
-    private function rollOutHandler(param1:MouseEvent) : void {
+    private function rollOutHandler(param1:MouseEvent) : void
+    {
         super.handleMouseRollOut(param1);
         this.playSounds(param1.type);
         if(!this._mouseOverAlert)
@@ -362,7 +385,8 @@ package net.wg.gui.cyberSport.controls
         }
     }
     
-    private function areaOnClickHandler(param1:MouseEvent) : void {
+    private function areaOnClickHandler(param1:MouseEvent) : void
+    {
         var _loc2_:MouseEventEx = param1 as MouseEventEx;
         var _loc3_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
         if(_loc3_ != MouseEventEx.LEFT_BUTTON)
@@ -381,32 +405,39 @@ package net.wg.gui.cyberSport.controls
         }
     }
     
-    override protected function handleMousePress(param1:MouseEvent) : void {
+    override protected function handleMousePress(param1:MouseEvent) : void
+    {
     }
     
-    override protected function handleMouseRelease(param1:MouseEvent) : void {
+    override protected function handleMouseRelease(param1:MouseEvent) : void
+    {
     }
     
-    override protected function handleMouseRollOver(param1:MouseEvent) : void {
+    override protected function handleMouseRollOver(param1:MouseEvent) : void
+    {
     }
     
-    override protected function handleMouseRollOut(param1:MouseEvent) : void {
+    override protected function handleMouseRollOut(param1:MouseEvent) : void
+    {
     }
     
-    public function selectState(param1:Boolean, param2:String = null) : void {
+    public function selectState(param1:Boolean, param2:String = null) : void
+    {
         this.selectedStateText = param2 == null?CYBERSPORT.BUTTON_MEDALLION_CHOOSEVEHICLE:param2;
         this._selectSate = param1;
         invalidate(UPDATE_INIT_DATA);
     }
     
-    private function initChooseVehicle() : void {
+    private function initChooseVehicle() : void
+    {
         this.currentState = CHOOSE_VEHICLE;
         this.chooseVhclAnim.chooseVehicle.text = this.selectedStateText;
         this.chooseVhclAnimEffect.chooseVehicle.text = this.selectedStateText;
         this.changeViewState();
     }
     
-    private function changeViewState() : void {
+    private function changeViewState() : void
+    {
         if(enabled)
         {
             if(this.currentState == COUNT_VEHICLE || this.currentState == DEFAULT_STATE || this.currentState == ROSTER_SETTINGS)
@@ -453,12 +484,14 @@ package net.wg.gui.cyberSport.controls
         this.alertIcon.visible = (this._showAlertIcon) && (this.vehicleModel) && !this.vehicleModel.isReadyToFight;
     }
     
-    private function playSounds(param1:String) : void {
+    private function playSounds(param1:String) : void
+    {
         var param1:String = param1 == MouseEvent.ROLL_OVER?SoundManagerStates.SND_OVER:SoundManagerStates.SND_OUT;
         App.soundMgr.playControlsSnd(param1,soundType,soundId);
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         super.onDispose();
         if(this.rangeModel)
         {
@@ -481,11 +514,13 @@ package net.wg.gui.cyberSport.controls
         this.clickableArea.removeEventListener(MouseEvent.CLICK,this.areaOnClickHandler);
     }
     
-    private function dispatchChooseVehicle() : void {
+    private function dispatchChooseVehicle() : void
+    {
         dispatchEvent(new RallyViewsEvent(RallyViewsEvent.CHOOSE_VEHICLE,this.getModel()));
     }
     
-    private function getNationRange() : Array {
+    private function getNationRange() : Array
+    {
         if((this.rangeModel) && (this.rangeModel.nationIDRange))
         {
             return this.rangeModel.nationIDRange.slice();
@@ -493,7 +528,8 @@ package net.wg.gui.cyberSport.controls
         return [];
     }
     
-    private function getVType() : Array {
+    private function getVType() : Array
+    {
         if((this.rangeModel) && (this.rangeModel.vTypeRange))
         {
             return this.rangeModel.vTypeRange.slice();
@@ -501,7 +537,8 @@ package net.wg.gui.cyberSport.controls
         return [];
     }
     
-    private function getLevelsRange() : Array {
+    private function getLevelsRange() : Array
+    {
         if((this.rangeModel) && (this.rangeModel.vLevelRange))
         {
             return this.rangeModel.vLevelRange.slice();
@@ -509,23 +546,26 @@ package net.wg.gui.cyberSport.controls
         return [];
     }
     
-    public function get currentState() : int {
+    public function get currentState() : int
+    {
         return this._currentState;
     }
     
-    public function set currentState(param1:int) : void {
+    public function set currentState(param1:int) : void
+    {
         this._currentState = param1;
     }
     
-    private function onAlertRollOver(param1:MouseEvent) : void {
+    private function onAlertRollOver(param1:MouseEvent) : void
+    {
         this._mouseOverAlert = true;
-        dispatchEvent(new RallyViewsEvent(RallyViewsEvent.VEH_BTN_ROLL_OVER,{
-            "type":"alert",
-            "state":this.vehicleModel.state
-        }));
+        dispatchEvent(new RallyViewsEvent(RallyViewsEvent.VEH_BTN_ROLL_OVER,{"type":"alert",
+        "state":this.vehicleModel.state
+    }));
 }
 
-private function onAlertRollOut(param1:MouseEvent) : void {
+private function onAlertRollOut(param1:MouseEvent) : void
+{
     this._mouseOverAlert = false;
     dispatchEvent(new RallyViewsEvent(RallyViewsEvent.VEH_BTN_ROLL_OUT));
     var _loc2_:Point = new Point(mouseX,mouseY);
@@ -536,11 +576,13 @@ private function onAlertRollOut(param1:MouseEvent) : void {
     }
 }
 
-public function get showAlertIcon() : Boolean {
+public function get showAlertIcon() : Boolean
+{
     return this._showAlertIcon;
 }
 
-public function set showAlertIcon(param1:Boolean) : void {
+public function set showAlertIcon(param1:Boolean) : void
+{
     this._showAlertIcon = param1;
 }
 }

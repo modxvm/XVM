@@ -3,7 +3,8 @@ package com.adobe.serialization.json
     public class JSONDecoder extends Object
     {
         
-        public function JSONDecoder(param1:String, param2:Boolean) {
+        public function JSONDecoder(param1:String, param2:Boolean)
+        {
             super();
             this.strict = param2;
             this.tokenizer = new JSONTokenizer(param1,param2);
@@ -23,28 +24,33 @@ package com.adobe.serialization.json
         
         private var token:JSONToken;
         
-        public function getValue() : * {
+        public function getValue() : *
+        {
             return this.value;
         }
         
-        private final function nextToken() : JSONToken {
+        private final function nextToken() : JSONToken
+        {
             return this.token = this.tokenizer.getNextToken();
         }
         
-        private final function nextValidToken() : JSONToken {
+        private final function nextValidToken() : JSONToken
+        {
             this.token = this.tokenizer.getNextToken();
             this.checkValidToken();
             return this.token;
         }
         
-        private final function checkValidToken() : void {
+        private final function checkValidToken() : void
+        {
             if(this.token == null)
             {
                 this.tokenizer.parseError("Unexpected end of input");
             }
         }
         
-        private final function parseArray() : Array {
+        private final function parseArray() : Array
+        {
             var _loc1_:Array = new Array();
             this.nextValidToken();
             if(this.token.type == JSONTokenType.RIGHT_BRACKET)
@@ -88,7 +94,8 @@ package com.adobe.serialization.json
             return _loc1_;
         }
         
-        private final function parseObject() : Object {
+        private final function parseObject() : Object
+        {
             var _loc2_:String = null;
             var _loc1_:Object = new Object();
             this.nextValidToken();
@@ -150,7 +157,8 @@ package com.adobe.serialization.json
             return _loc1_;
         }
         
-        private final function parseValue() : Object {
+        private final function parseValue() : Object
+        {
             this.checkValidToken();
             switch(this.token.type)
             {

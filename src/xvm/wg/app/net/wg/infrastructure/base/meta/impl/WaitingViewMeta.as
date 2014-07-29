@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class WaitingViewMeta extends AbstractView
     {
         
-        public function WaitingViewMeta() {
+        public function WaitingViewMeta()
+        {
             super();
         }
     }

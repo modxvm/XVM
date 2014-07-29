@@ -5,14 +5,16 @@ package net.wg.gui.lobby.tankman
     public class SkillDropModel extends Object implements IDisposable
     {
         
-        public function SkillDropModel() {
+        public function SkillDropModel()
+        {
             this.dropSkillFree = new DropSkillsCost();
             this.dropSkillCredits = new DropSkillsCost();
             this.dropSkillGold = new DropSkillsCost();
             super();
         }
         
-        public static function parseFromObject(param1:Object) : SkillDropModel {
+        public static function parseFromObject(param1:Object) : SkillDropModel
+        {
             var _loc4_:Object = null;
             var _loc2_:SkillDropModel = new SkillDropModel();
             _loc2_.credits = param1.money[0];
@@ -39,11 +41,11 @@ package net.wg.gui.lobby.tankman
             _loc2_.hasNewSkill = param1.hasNewSkills;
             _loc2_.newSkillsCount = param1.newSkills[0];
             _loc2_.lastNewSkillLevel = param1.newSkills[1];
-            _loc2_.dropSkillFree = DropSkillsCost.parseFromObject(param1.dropSkillsCost[0]);
+            _loc2_.dropSkillFree = SkillDropModel.parseFromObject(param1.dropSkillsCost[0]);
             _loc2_.dropSkillFree.id = 0;
-            _loc2_.dropSkillCredits = DropSkillsCost.parseFromObject(param1.dropSkillsCost[1]);
+            _loc2_.dropSkillCredits = SkillDropModel.parseFromObject(param1.dropSkillsCost[1]);
             _loc2_.dropSkillCredits.id = 1;
-            _loc2_.dropSkillGold = DropSkillsCost.parseFromObject(param1.dropSkillsCost[2]);
+            _loc2_.dropSkillGold = SkillDropModel.parseFromObject(param1.dropSkillsCost[2]);
             _loc2_.dropSkillGold.id = 2;
             _loc2_.defaultSavingMode = param1.defaultSavingMode;
             return _loc2_;
@@ -87,11 +89,13 @@ package net.wg.gui.lobby.tankman
         
         public var defaultSavingMode:int;
         
-        public function get nation() : String {
+        public function get nation() : String
+        {
             return App.utils.nations.getNationName(this.nationID);
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.dropSkillFree = null;
             this.dropSkillCredits = null;
             this.dropSkillGold = null;
@@ -103,11 +107,13 @@ import net.wg.gui.components.controls.VO.ActionPriceVO;
 class DropSkillsCost extends Object
 {
     
-    function DropSkillsCost() {
+    function DropSkillsCost()
+    {
         super();
     }
     
-    public static function parseFromObject(param1:Object) : DropSkillsCost {
+    public static function parseFromObject(param1:Object) : DropSkillsCost
+    {
         var _loc2_:DropSkillsCost = new DropSkillsCost();
         _loc2_.gold = param1.gold;
         _loc2_.credits = param1.credits;

@@ -23,7 +23,8 @@ package net.wg.infrastructure.base
     public class AbstractWindowView extends WindowViewMeta implements IAbstractWindowView
     {
         
-        public function AbstractWindowView() {
+        public function AbstractWindowView()
+        {
             super();
             this._geometry = new DefaultWindowGeometry();
         }
@@ -60,43 +61,52 @@ package net.wg.infrastructure.base
         
         private var _isSourceTracked:Boolean = false;
         
-        override public function setViewSize(param1:Number, param2:Number) : void {
+        override public function setViewSize(param1:Number, param2:Number) : void
+        {
         }
         
-        override public function playShowTween(param1:DisplayObject, param2:Function = null) : Boolean {
+        override public function playShowTween(param1:DisplayObject, param2:Function = null) : Boolean
+        {
             return false;
         }
         
-        override public function playHideTween(param1:DisplayObject, param2:Function = null) : Boolean {
+        override public function playHideTween(param1:DisplayObject, param2:Function = null) : Boolean
+        {
             return false;
         }
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             super.updateStage(param1,param2);
             invalidate(WindowViewInvalidationType.POSITION_INVALID);
         }
         
-        public function handleWindowMinimize() : void {
+        public function handleWindowMinimize() : void
+        {
             onWindowMinimizeS();
         }
         
-        public function handleWindowClose() : void {
+        public function handleWindowClose() : void
+        {
             if(onTryClosingS())
             {
                 onWindowCloseS();
             }
         }
         
-        public function as_showWaiting(param1:String, param2:Object) : void {
+        public function as_showWaiting(param1:String, param2:Object) : void
+        {
             this.waitingMessage = param1;
             this.showWaiting = true;
         }
         
-        public function as_hideWaiting() : void {
+        public function as_hideWaiting() : void
+        {
             this.showWaiting = false;
         }
         
-        public function as_getGeometry() : Array {
+        public function as_getGeometry() : Array
+        {
             if(this._window)
             {
                 return [this._window.x,this._window.y,this._window.width,this._window.height];
@@ -104,40 +114,49 @@ package net.wg.infrastructure.base
             return null;
         }
         
-        public function as_setGeometry(param1:Number, param2:Number, param3:Number, param4:Number) : void {
+        public function as_setGeometry(param1:Number, param2:Number, param3:Number, param4:Number) : void
+        {
             this._geometry = new StoredWindowGeometry(param1,param2,param3,param4);
             invalidate(WindowViewInvalidationType.POSITION_INVALID);
         }
         
-        public function as_isModal() : Boolean {
+        public function as_isModal() : Boolean
+        {
             return this._isModal;
         }
         
-        public function setWindow(param1:IWindow) : void {
+        public function setWindow(param1:IWindow) : void
+        {
             this._window = param1;
         }
         
-        override public function get isModal() : Boolean {
+        override public function get isModal() : Boolean
+        {
             return this._isModal;
         }
         
-        public function set isModal(param1:Boolean) : void {
+        public function set isModal(param1:Boolean) : void
+        {
             this._isModal = param1;
         }
         
-        override public function get containerContent() : IManagedContent {
+        override public function get containerContent() : IManagedContent
+        {
             return this._window;
         }
         
-        public function get window() : IWindow {
+        public function get window() : IWindow
+        {
             return this._window;
         }
         
-        public function get canMinimize() : Boolean {
+        public function get canMinimize() : Boolean
+        {
             return this._canMinimize;
         }
         
-        public function set canMinimize(param1:Boolean) : void {
+        public function set canMinimize(param1:Boolean) : void
+        {
             if(param1 != this._canMinimize)
             {
                 this._canMinimize = param1;
@@ -145,11 +164,13 @@ package net.wg.infrastructure.base
             }
         }
         
-        public function get enabledCloseBtn() : Boolean {
+        public function get enabledCloseBtn() : Boolean
+        {
             return this._enabledCloseBtn;
         }
         
-        public function set enabledCloseBtn(param1:Boolean) : void {
+        public function set enabledCloseBtn(param1:Boolean) : void
+        {
             if(param1 != this._enabledCloseBtn)
             {
                 this._enabledCloseBtn = param1;
@@ -157,11 +178,13 @@ package net.wg.infrastructure.base
             }
         }
         
-        public function get canDrag() : Boolean {
+        public function get canDrag() : Boolean
+        {
             return this._canDrag;
         }
         
-        public function set canDrag(param1:Boolean) : void {
+        public function set canDrag(param1:Boolean) : void
+        {
             if(param1 != this._canDrag)
             {
                 this._canDrag = param1;
@@ -169,11 +192,13 @@ package net.wg.infrastructure.base
             }
         }
         
-        public function get canClose() : Boolean {
+        public function get canClose() : Boolean
+        {
             return this._canClose;
         }
         
-        public function set canClose(param1:Boolean) : void {
+        public function set canClose(param1:Boolean) : void
+        {
             if(param1 != this._canClose)
             {
                 this._canClose = param1;
@@ -181,11 +206,13 @@ package net.wg.infrastructure.base
             }
         }
         
-        public function get canResize() : Boolean {
+        public function get canResize() : Boolean
+        {
             return this._canResize;
         }
         
-        public function set canResize(param1:Boolean) : void {
+        public function set canResize(param1:Boolean) : void
+        {
             if(param1 != this._canResize)
             {
                 this._canResize = param1;
@@ -193,27 +220,33 @@ package net.wg.infrastructure.base
             }
         }
         
-        public function get isCentered() : Boolean {
+        public function get isCentered() : Boolean
+        {
             return this._isCentered;
         }
         
-        public function set isCentered(param1:Boolean) : void {
+        public function set isCentered(param1:Boolean) : void
+        {
             this._isCentered = param1;
         }
         
-        public function get showWindowBg() : Boolean {
+        public function get showWindowBg() : Boolean
+        {
             return this._showWindowBg;
         }
         
-        public function set showWindowBg(param1:Boolean) : void {
+        public function set showWindowBg(param1:Boolean) : void
+        {
             this._showWindowBg = param1;
         }
         
-        public function get showWaiting() : Boolean {
+        public function get showWaiting() : Boolean
+        {
             return this._showWaiting;
         }
         
-        public function set showWaiting(param1:Boolean) : void {
+        public function set showWaiting(param1:Boolean) : void
+        {
             if(this._showWaiting != param1)
             {
                 this._showWaiting = param1;
@@ -221,11 +254,13 @@ package net.wg.infrastructure.base
             }
         }
         
-        public function get geometry() : IWindowGeometry {
+        public function get geometry() : IWindowGeometry
+        {
             return this._geometry;
         }
         
-        public function set geometry(param1:IWindowGeometry) : void {
+        public function set geometry(param1:IWindowGeometry) : void
+        {
             if(!this._geometry.canOverwrite())
             {
                 return;
@@ -233,45 +268,55 @@ package net.wg.infrastructure.base
             this._geometry = param1;
         }
         
-        public function get isSourceTracked() : Boolean {
+        public function get isSourceTracked() : Boolean
+        {
             return this._isSourceTracked;
         }
         
-        public function set isSourceTracked(param1:Boolean) : void {
+        public function set isSourceTracked(param1:Boolean) : void
+        {
             this._isSourceTracked = param1;
         }
         
-        public function get waiting() : Waiting {
+        public function get waiting() : Waiting
+        {
             return this._waiting;
         }
         
-        public function get wrapperLinkage() : String {
+        public function get wrapperLinkage() : String
+        {
             return Linkages.WINDOW;
         }
         
-        override public function get wrapper() : IWrapper {
+        override public function get wrapper() : IWrapper
+        {
             return this._window;
         }
         
-        override public function set wrapper(param1:IWrapper) : void {
+        override public function set wrapper(param1:IWrapper) : void
+        {
             this.setWindow(IWindow(param1));
         }
         
-        override protected function onSetModalFocus(param1:InteractiveObject) : void {
+        override protected function onSetModalFocus(param1:InteractiveObject) : void
+        {
             super.onSetModalFocus(param1);
             App.utils.scheduler.envokeInNextFrame(this.changeBackgroundLabel,BG_ENABLED);
         }
         
-        override protected function onLeaveModalFocus() : void {
+        override protected function onLeaveModalFocus() : void
+        {
             super.onLeaveModalFocus();
             App.utils.scheduler.envokeInNextFrame(this.changeBackgroundLabel,BG_DISABLED);
         }
         
-        override protected function getViewContainer() : DisplayObjectContainer {
+        override protected function getViewContainer() : DisplayObjectContainer
+        {
             return DisplayObjectContainer(this.window);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(this.window)
             {
                 this.window.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
@@ -279,7 +324,8 @@ package net.wg.infrastructure.base
             initSize();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._waiting)
             {
                 this._waiting.dispose();
@@ -300,7 +346,8 @@ package net.wg.infrastructure.base
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(WindowViewInvalidationType.WAITING_INVALID))
             {
                 this.applyWaitingChanges();
@@ -313,7 +360,8 @@ package net.wg.infrastructure.base
             }
         }
         
-        protected function applyWaitingChanges() : void {
+        protected function applyWaitingChanges() : void
+        {
             if(this._showWaiting)
             {
                 if(!this._waiting)
@@ -338,11 +386,13 @@ package net.wg.infrastructure.base
             }
         }
         
-        protected final function canCloseFromInputDetails(param1:InputDetails) : Boolean {
+        protected final function canCloseFromInputDetails(param1:InputDetails) : Boolean
+        {
             return param1.code == Keyboard.ESCAPE && param1.value == InputValue.KEY_DOWN && this._window.getBackground().currentLabel == BG_ENABLED;
         }
         
-        private function checkAppBounds() : void {
+        private function checkAppBounds() : void
+        {
             if(this._window.width > App.appWidth)
             {
                 this._window.x = Math.round((App.appWidth - this._window.width) / 2);
@@ -375,14 +425,16 @@ package net.wg.infrastructure.base
             }
         }
         
-        private function validateView() : void {
+        private function validateView() : void
+        {
             if(this._window != null)
             {
                 UIComponent(this._window).invalidate(Window.INVALID_SRC_VIEW);
             }
         }
         
-        private function changeBackgroundLabel(param1:String) : void {
+        private function changeBackgroundLabel(param1:String) : void
+        {
             var _loc2_:MovieClip = null;
             if(this.window)
             {
@@ -394,7 +446,8 @@ package net.wg.infrastructure.base
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             super.handleInput(param1);
             if(param1.handled)
             {
@@ -416,10 +469,12 @@ package net.wg.infrastructure.base
             }
         }
         
-        protected function onClosingApproved() : void {
+        protected function onClosingApproved() : void
+        {
         }
         
-        protected function onClosingDeclined() : void {
+        protected function onClosingDeclined() : void
+        {
         }
     }
 }

@@ -3,7 +3,8 @@ package net.wg.gui.tutorial.constants
     public class HintItemType extends Object
     {
         
-        public function HintItemType() {
+        public function HintItemType()
+        {
             super();
         }
         

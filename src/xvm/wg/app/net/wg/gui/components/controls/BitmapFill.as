@@ -9,7 +9,8 @@ package net.wg.gui.components.controls
     public class BitmapFill extends UIComponentEx
     {
         
-        public function BitmapFill() {
+        public function BitmapFill()
+        {
             super();
             if(!this.pos)
             {
@@ -37,18 +38,21 @@ package net.wg.gui.components.controls
         
         private var _src:String = "";
         
-        override public function setSize(param1:Number, param2:Number) : void {
+        override public function setSize(param1:Number, param2:Number) : void
+        {
             this.createPos();
             this.pos.width = param1;
             this.pos.height = param2;
             this.draw();
         }
         
-        public function get source() : String {
+        public function get source() : String
+        {
             return this._src;
         }
         
-        public function set source(param1:String) : void {
+        public function set source(param1:String) : void
+        {
             var _loc2_:Class = null;
             this._src = param1;
             if(this._src != "")
@@ -59,43 +63,52 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get setBitmap() : BitmapData {
+        public function get setBitmap() : BitmapData
+        {
             return this.myBitmapData;
         }
         
-        public function set setBitmap(param1:BitmapData) : void {
+        public function set setBitmap(param1:BitmapData) : void
+        {
             this.myBitmapData = param1;
             invalidate();
         }
         
-        public function get widthFill() : Number {
+        public function get widthFill() : Number
+        {
             return this.pos.width;
         }
         
-        public function set widthFill(param1:Number) : void {
+        public function set widthFill(param1:Number) : void
+        {
             this.setSize(param1,this.pos.height);
         }
         
-        public function get heightFill() : Number {
+        public function get heightFill() : Number
+        {
             return this.pos.height;
         }
         
-        public function set heightFill(param1:Number) : void {
+        public function set heightFill(param1:Number) : void
+        {
             this.setSize(this.pos.width,param1);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.tempBg = null;
             this.myBitmapData = null;
             this.pos = null;
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.graphics.clear();
             if(!this.myBitmapData)
@@ -174,7 +187,8 @@ package net.wg.gui.components.controls
             this.graphics.endFill();
         }
         
-        private function createPos() : void {
+        private function createPos() : void
+        {
             if(!this.pos)
             {
                 this.pos = new Rectangle(0,0,0,0);

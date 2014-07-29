@@ -13,7 +13,8 @@ package net.wg.gui.lobby.techtree.helpers
     public class ResearchGraphics extends LinesGraphics
     {
         
-        public function ResearchGraphics() {
+        public function ResearchGraphics()
+        {
             super();
         }
         
@@ -27,11 +28,13 @@ package net.wg.gui.lobby.techtree.helpers
         
         public var xpInfo:ExperienceInformation;
         
-        public function get containerEx() : IResearchContainer {
+        public function get containerEx() : IResearchContainer
+        {
             return _container as IResearchContainer;
         }
         
-        public function drawOutgoingLines(param1:IRenderer, param2:Vector.<IRenderer>, param3:Boolean, param4:Boolean) : void {
+        public function drawOutgoingLines(param1:IRenderer, param2:Vector.<IRenderer>, param3:Boolean, param4:Boolean) : void
+        {
             var _loc12_:Point = null;
             var _loc13_:IRenderer = null;
             var _loc5_:Number = param2.length;
@@ -109,7 +112,8 @@ package net.wg.gui.lobby.techtree.helpers
             }
         }
         
-        public function drawTopLevelLines(param1:IRenderer, param2:Vector.<IRenderer>, param3:Boolean) : void {
+        public function drawTopLevelLines(param1:IRenderer, param2:Vector.<IRenderer>, param3:Boolean) : void
+        {
             var _loc5_:Point = null;
             var _loc8_:IRenderer = null;
             var _loc16_:* = NaN;
@@ -189,7 +193,8 @@ package net.wg.gui.lobby.techtree.helpers
             }
         }
         
-        override public function setup() : void {
+        override public function setup() : void
+        {
             super.setup();
             if(this.xpInfo != null)
             {
@@ -197,7 +202,8 @@ package net.wg.gui.lobby.techtree.helpers
             }
         }
         
-        override public function clearUp() : void {
+        override public function clearUp() : void
+        {
             var _loc3_:DisplayObject = null;
             super.clearUp();
             var _loc1_:Number = 0;
@@ -228,12 +234,14 @@ package net.wg.gui.lobby.techtree.helpers
             }
         }
         
-        override public function clearUpRenderer(param1:IRenderer) : void {
+        override public function clearUpRenderer(param1:IRenderer) : void
+        {
             param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleTopLevelStatesChanged);
             param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleNodesStatesChanged);
         }
         
-        public function removeReferences() : void {
+        public function removeReferences() : void
+        {
             container = null;
             if(this.xpInfo != null)
             {
@@ -241,7 +249,8 @@ package net.wg.gui.lobby.techtree.helpers
             }
         }
         
-        private function drawUpLines(param1:Array, param2:Point, param3:Boolean, param4:Boolean, param5:Boolean) : Number {
+        private function drawUpLines(param1:Array, param2:Point, param3:Boolean, param4:Boolean, param5:Boolean) : Number
+        {
             var _loc7_:IRenderer = null;
             var _loc8_:IRenderer = null;
             var _loc11_:Point = null;
@@ -286,7 +295,8 @@ package net.wg.gui.lobby.techtree.helpers
             return _loc9_;
         }
         
-        private function drawDownLines(param1:Array, param2:Point, param3:Boolean, param4:Boolean, param5:Boolean) : Number {
+        private function drawDownLines(param1:Array, param2:Point, param3:Boolean, param4:Boolean, param5:Boolean) : Number
+        {
             var _loc7_:IRenderer = null;
             var _loc8_:IRenderer = null;
             var _loc11_:Point = null;
@@ -331,22 +341,26 @@ package net.wg.gui.lobby.techtree.helpers
             return _loc9_;
         }
         
-        private function addNodeStateChangedListener(param1:IRenderer) : void {
+        private function addNodeStateChangedListener(param1:IRenderer) : void
+        {
             param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleNodesStatesChanged,false,0,true);
         }
         
-        private function addTopStateChangedListener(param1:IRenderer) : void {
+        private function addTopStateChangedListener(param1:IRenderer) : void
+        {
             param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleTopLevelStatesChanged,false,0,true);
         }
         
-        private function handleTopLevelStatesChanged(param1:TechTreeEvent) : void {
+        private function handleTopLevelStatesChanged(param1:TechTreeEvent) : void
+        {
             if(NodeStateCollection.isRedrawResearchLines(param1.primary))
             {
                 this.drawTopLevelLines(this.rootRenderer,this.containerEx.getTopLevel(),true);
             }
         }
         
-        private function handleNodesStatesChanged(param1:TechTreeEvent) : void {
+        private function handleNodesStatesChanged(param1:TechTreeEvent) : void
+        {
             var _loc2_:IRenderer = null;
             var _loc3_:* = false;
             var _loc4_:Vector.<IRenderer> = null;
@@ -378,7 +392,8 @@ import net.wg.gui.lobby.techtree.interfaces.IRenderer;
 class ResearchLineInfo extends Object
 {
     
-    function ResearchLineInfo(param1:IRenderer, param2:IRenderer, param3:Point, param4:Boolean) {
+    function ResearchLineInfo(param1:IRenderer, param2:IRenderer, param3:Point, param4:Boolean)
+    {
         super();
         this.parent = param1;
         this.child = param2;
@@ -394,7 +409,8 @@ class ResearchLineInfo extends Object
     
     public var drawArrow:Boolean;
     
-    public function get y() : Number {
+    public function get y() : Number
+    {
         return this.point.y;
     }
 }

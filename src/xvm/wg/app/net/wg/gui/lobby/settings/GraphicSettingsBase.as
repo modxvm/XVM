@@ -19,7 +19,8 @@ package net.wg.gui.lobby.settings
     public class GraphicSettingsBase extends SettingsBaseView
     {
         
-        public function GraphicSettingsBase() {
+        public function GraphicSettingsBase()
+        {
             super();
             this.initControls();
             this.initToolTipMapping();
@@ -197,12 +198,14 @@ package net.wg.gui.lobby.settings
         
         protected var _isFullScreen:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.lip.mouseChildren = this.lip.mouseEnabled = false;
         }
         
-        private function initControls() : void {
+        private function initControls() : void
+        {
             this.monitorLabel = this.screenForm.monitorLabel;
             this.monitorDropDown = this.screenForm.monitorDropDown;
             this.fullScreenCheckbox = this.screenForm.fullScreenCheckbox;
@@ -280,7 +283,8 @@ package net.wg.gui.lobby.settings
             this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox = _loc1_.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox;
         }
         
-        private function initToolTipMapping() : void {
+        private function initToolTipMapping() : void
+        {
             var _loc1_:DisplayObject = null;
             var _loc2_:Object = null;
             this.toolTipMapping = new Dictionary(true);
@@ -356,11 +360,13 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function onControlOut(param1:MouseEvent) : void {
+        private function onControlOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onControlOver(param1:MouseEvent) : void {
+        private function onControlOver(param1:MouseEvent) : void
+        {
             var _loc2_:String = this.toolTipMapping[param1.currentTarget];
             if(_loc2_ == SettingsConfig.SIZE)
             {
@@ -369,7 +375,8 @@ package net.wg.gui.lobby.settings
             App.toolTipMgr.showSpecial(Tooltips.SETTINGS_CONTROL,null,_loc2_);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:DisplayObject = null;
             var _loc2_:Object = null;
             for(_loc2_ in this.toolTipMapping)
@@ -378,6 +385,7 @@ package net.wg.gui.lobby.settings
                 _loc1_.removeEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
                 _loc1_.removeEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
                 delete this.toolTipMapping[_loc2_];
+                true;
             }
             this.toolTipMapping = null;
             this.monitorLabel = null;

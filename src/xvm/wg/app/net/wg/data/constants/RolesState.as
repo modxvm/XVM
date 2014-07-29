@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class RolesState extends Object
     {
         
-        public function RolesState() {
+        public function RolesState()
+        {
             super();
         }
         

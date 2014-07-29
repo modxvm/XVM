@@ -16,7 +16,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class VehicleItemRenderer extends ListItemRenderer
     {
         
-        public function VehicleItemRenderer() {
+        public function VehicleItemRenderer()
+        {
             this.nations = [];
             super();
             this.levelMC.visible = false;
@@ -51,7 +52,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         public var statusMC:QuestStatusComponent;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.nationIcon.hideLoader = false;
             this.typeIcon.hideLoader = false;
@@ -67,12 +69,14 @@ package net.wg.gui.lobby.questsWindow.components
             this.noVehicle.text = QUESTS.QUESTS_TABLE_NOVEHICLES;
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:QuestVehicleRendererVO = null;
             var _loc2_:String = null;
             var _loc3_:String = null;
@@ -140,7 +144,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function setNoData() : void {
+        private function setNoData() : void
+        {
             this.nationIcon.visible = false;
             this.typeIcon.visible = false;
             this.levelMC.visible = false;
@@ -154,7 +159,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.isDisabled = false;
         }
         
-        private function resetVisible() : void {
+        private function resetVisible() : void
+        {
             this.nationIcon.visible = true;
             this.typeIcon.visible = true;
             this.levelMC.visible = true;
@@ -165,15 +171,18 @@ package net.wg.gui.lobby.questsWindow.components
             this.levelMC.visible = true;
         }
         
-        public function getNationIconPath(param1:int) : String {
+        public function getNationIconPath(param1:int) : String
+        {
             return "../maps/icons/filters/nations/" + this.nations[param1] + ".png";
         }
         
-        public function getTypeIconPath(param1:String) : String {
+        public function getTypeIconPath(param1:String) : String
+        {
             return "../maps/icons/filters/tanks/" + param1 + ".png";
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.noVehicle = null;
             this.htmlTF = null;
             this.levelMC = null;
@@ -225,7 +234,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        protected function updateDisable() : void {
+        protected function updateDisable() : void
+        {
             if(this.disableMc != null)
             {
                 this.disableMc.visible = this.isDisabled;

@@ -11,7 +11,8 @@ package net.wg.gui.lobby.profile.components
     public class SimpleLoader extends Sprite implements IDisposable
     {
         
-        public function SimpleLoader() {
+        public function SimpleLoader()
+        {
             super();
         }
         
@@ -25,7 +26,8 @@ package net.wg.gui.lobby.profile.components
         
         private var currentSourcePath:String;
         
-        public function setSource(param1:String) : void {
+        public function setSource(param1:String) : void
+        {
             if(this.currentSourcePath == param1)
             {
                 return;
@@ -45,11 +47,13 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        public function clear() : void {
+        public function clear() : void
+        {
             this.disposeLoader();
         }
         
-        public function disposeLoader() : void {
+        public function disposeLoader() : void
+        {
             if(this._loader)
             {
                 this.removeLoaderHandlers();
@@ -60,15 +64,18 @@ package net.wg.gui.lobby.profile.components
             this.currentSourcePath = null;
         }
         
-        public final function dispose() : void {
+        public final function dispose() : void
+        {
             this.onDispose();
         }
         
-        protected function onDispose() : void {
+        protected function onDispose() : void
+        {
             this.disposeLoader();
         }
         
-        protected function startLoading(param1:String) : void {
+        protected function startLoading(param1:String) : void
+        {
             if(!this._loader)
             {
                 this._loader = new Loader();
@@ -78,17 +85,21 @@ package net.wg.gui.lobby.profile.components
             this._loader.load(new URLRequest(param1));
         }
         
-        protected function onLoadingComplete() : void {
+        protected function onLoadingComplete() : void
+        {
         }
         
-        protected function onLoadingError() : void {
+        protected function onLoadingError() : void
+        {
         }
         
-        protected function get loader() : Loader {
+        protected function get loader() : Loader
+        {
             return this._loader;
         }
         
-        private function unloadLoader() : void {
+        private function unloadLoader() : void
+        {
             if(this._loader.contentLoaderInfo.contentType == CONTENT_TYPE_SWF)
             {
                 this._loader.unloadAndStop(true);
@@ -99,23 +110,27 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        private function addLoaderHandlers() : void {
+        private function addLoaderHandlers() : void
+        {
             this._loader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.loadingCompleteHandler,false,0,true);
             this._loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.loadingErrorHandler,false,0,true);
         }
         
-        private function removeLoaderHandlers() : void {
+        private function removeLoaderHandlers() : void
+        {
             this._loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.loadingCompleteHandler);
             this._loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.loadingErrorHandler);
         }
         
-        private function loadingErrorHandler(param1:IOErrorEvent) : void {
+        private function loadingErrorHandler(param1:IOErrorEvent) : void
+        {
             this.onLoadingError();
             DebugUtils.LOG_DEBUG(getQualifiedClassName(this) + " : couldn\'t load extra icon!",this.currentSourcePath);
             dispatchEvent(new Event(LOAD_ERROR));
         }
         
-        private function loadingCompleteHandler(param1:Event) : void {
+        private function loadingCompleteHandler(param1:Event) : void
+        {
             this.onLoadingComplete();
             dispatchEvent(new Event(LOADED));
         }

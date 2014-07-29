@@ -5,7 +5,8 @@ package net.wg.gui.prebattle.battleSession
     public class BSListRendererVO extends DAAPIDataClass
     {
         
-        public function BSListRendererVO(param1:Object) {
+        public function BSListRendererVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -19,43 +20,53 @@ package net.wg.gui.prebattle.battleSession
         
         private var _startTime:String = "";
         
-        public function get prbID() : Number {
+        public function get prbID() : Number
+        {
             return this._prbID;
         }
         
-        public function set prbID(param1:Number) : void {
+        public function set prbID(param1:Number) : void
+        {
             this._prbID = param1;
         }
         
-        public function get prbType() : Number {
+        public function get prbType() : Number
+        {
             return this._prbType;
         }
         
-        public function set prbType(param1:Number) : void {
+        public function set prbType(param1:Number) : void
+        {
             this._prbType = param1;
         }
         
-        public function get descr() : String {
+        public function get descr() : String
+        {
             return this._descr;
         }
         
-        public function set descr(param1:String) : void {
+        public function set descr(param1:String) : void
+        {
             this._descr = param1;
         }
         
-        public function get opponents() : String {
+        public function get opponents() : String
+        {
             return this._opponents;
         }
         
-        public function set opponents(param1:String) : void {
+        public function set opponents(param1:String) : void
+        {
             this._opponents = param1;
         }
         
-        public function get startTime() : String {
+        public function get startTime() : String
+        {
             return this._startTime;
         }
         
-        public function set startTime(param1:String) : void {
+        public function set startTime(param1:String) : void
+        {
             this._startTime = param1;
         }
     }

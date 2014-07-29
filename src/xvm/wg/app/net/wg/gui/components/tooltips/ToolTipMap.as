@@ -9,7 +9,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipMap extends ToolTipSpecial
     {
         
-        public function ToolTipMap() {
+        public function ToolTipMap()
+        {
             super();
             this.headerTF = content.headerTF;
             this.headerRightTF = content.headerRightTF;
@@ -32,7 +33,8 @@ package net.wg.gui.components.tooltips
         
         private var whiteBg:Sprite;
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc1_:MapVO = null;
             var _loc2_:Separator = null;
             _loc1_ = new MapVO(_data);
@@ -68,7 +70,8 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.image.dispose();
             this.image = null;
             super.onDispose();

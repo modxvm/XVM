@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class Errors extends Object
     {
         
-        public function Errors() {
+        public function Errors()
+        {
             super();
         }
         
@@ -29,6 +30,6 @@ package net.wg.data.constants
         
         public static var MTHD_CORRUPT_INVOKE:String = "method invoking after object destruction";
         
-        public static var INVALID_FOCUS_USING:String;
+        public static var INVALID_FOCUS_USING:String = "Unsafe using App.utils.focusHandler.setFocus. \n\"" + "It can damage the focus system functionality. Please, use in view, as like as:\n" + "\tthis.setFocus(form.header.closeButton). ";
     }
 }

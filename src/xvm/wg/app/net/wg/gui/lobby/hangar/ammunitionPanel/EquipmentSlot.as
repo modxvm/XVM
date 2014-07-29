@@ -8,7 +8,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     public class EquipmentSlot extends DeviceSlot
     {
         
-        public function EquipmentSlot() {
+        public function EquipmentSlot()
+        {
             super();
             this.events = App.utils.events;
         }
@@ -17,7 +18,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         private var events:IEventCollector;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.events = App.utils.events;
             this.events.addEvent(App.stage,ModuleInfoEvent.SHOW_INFO,this.onShowModuleInfoHandler);
@@ -27,18 +29,21 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.icon.dispose();
             this.events.removeEvent(App.stage,ModuleInfoEvent.SHOW_INFO,this.onShowModuleInfoHandler);
             super.onDispose();
         }
         
-        public function setIcon(param1:String, param2:Boolean) : void {
+        public function setIcon(param1:String, param2:Boolean) : void
+        {
             this.icon.source = param1;
             locked.visible = !param2;
         }
         
-        override protected function applyIconData(param1:*) : void {
+        override protected function applyIconData(param1:*) : void
+        {
             if(param1)
             {
                 this.setIcon(param1.icon,param1.removable);
@@ -49,7 +54,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        private function onShowModuleInfoHandler(param1:ModuleInfoEvent) : void {
+        private function onShowModuleInfoHandler(param1:ModuleInfoEvent) : void
+        {
             select.close();
         }
     }

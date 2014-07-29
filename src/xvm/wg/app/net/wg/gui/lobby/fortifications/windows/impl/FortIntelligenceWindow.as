@@ -9,7 +9,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
     public class FortIntelligenceWindow extends FortIntelligenceWindowMeta implements IFortIntelligenceWindowMeta
     {
         
-        public function FortIntelligenceWindow() {
+        public function FortIntelligenceWindow()
+        {
             super();
             isModal = false;
             isCentered = true;
@@ -39,12 +40,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private var texts:Array = null;
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             super.updateStage(param1,param2);
             this.updatePosition();
         }
         
-        public function as_setData(param1:Array) : void {
+        public function as_setData(param1:Array) : void
+        {
             var _loc3_:* = 0;
             var _loc2_:int = this.texts.length;
             _loc3_ = 0;
@@ -58,23 +61,27 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.comingSoon.htmlText = param1[_loc3_];
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.title = FORTIFICATIONS.FORTINTELLIGENCE_WINDOWTITLE;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.updatePosition();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.texts.splice(0,this.texts.length);
             this.texts = null;
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -83,12 +90,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        private function updatePosition() : void {
+        private function updatePosition() : void
+        {
             window.x = Math.floor((App.appWidth - window.width) / 2);
             window.y = Math.floor((App.appHeight - window.height) / 2);
         }
         
-        private function updateHeaderPosition() : void {
+        private function updateHeaderPosition() : void
+        {
             this.headerBody.x = Math.floor((this.width - this.headerBody.width) / 2);
             this.headerTitle.x = Math.floor((this.width - this.headerTitle.width) / 2);
         }

@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class AlertIco extends Button
     {
         
-        public function AlertIco() {
+        public function AlertIco()
+        {
             this._icoType = ALERT_ICO_BIG;
             super();
         }
@@ -18,7 +19,8 @@ package net.wg.gui.components.controls
         
         private var _icoType:String;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(this.INVALID_ICON))
             {
                 gotoAndStop(this._icoType);
@@ -27,11 +29,13 @@ package net.wg.gui.components.controls
             super.draw();
         }
         
-        public function get icoType() : String {
+        public function get icoType() : String
+        {
             return this._icoType;
         }
         
-        public function set icoType(param1:String) : void {
+        public function set icoType(param1:String) : void
+        {
             this._icoType = param1;
             invalidate(this.INVALID_ICON);
         }

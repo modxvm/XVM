@@ -21,7 +21,8 @@ package net.wg.gui.components.windows
     public class ModuleInfo extends ModuleInfoMeta implements IModuleInfoMeta
     {
         
-        public function ModuleInfo() {
+        public function ModuleInfo()
+        {
             super();
             this.addedChildren = [];
         }
@@ -48,16 +49,19 @@ package net.wg.gui.components.windows
         
         private var _moduleInfo:Object;
         
-        public function get moduleInfo() : Object {
+        public function get moduleInfo() : Object
+        {
             return this._moduleInfo;
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.closeBottomBtn);
         }
         
-        public function set moduleInfo(param1:Object) : void {
+        public function set moduleInfo(param1:Object) : void
+        {
             var _loc2_:String = null;
             var _loc3_:* = NaN;
             var _loc4_:uint = 0;
@@ -165,11 +169,13 @@ package net.wg.gui.components.windows
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             this.closeBottomBtn.addEventListener(ButtonEvent.CLICK,this.onClose);
             window.useBottomBtns = true;
@@ -178,7 +184,8 @@ package net.wg.gui.components.windows
             window.contentPadding = _loc1_;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:DisplayObject = null;
             this._moduleInfo = null;
             this.closeBottomBtn.removeEventListener(ButtonEvent.CLICK,this.onClose);
@@ -195,11 +202,13 @@ package net.wg.gui.components.windows
             super.onDispose();
         }
         
-        private function onClose(param1:ButtonEvent) : void {
+        private function onClose(param1:ButtonEvent) : void
+        {
             onCancelClickS();
         }
         
-        public function as_setModuleInfo(param1:Object) : void {
+        public function as_setModuleInfo(param1:Object) : void
+        {
             window.title = param1.windowTitle;
             this.moduleInfo = param1;
         }

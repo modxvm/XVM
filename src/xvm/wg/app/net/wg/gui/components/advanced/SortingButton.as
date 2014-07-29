@@ -13,7 +13,8 @@ package net.wg.gui.components.advanced
     public class SortingButton extends ScalableIconButton
     {
         
-        public function SortingButton() {
+        public function SortingButton()
+        {
             super();
         }
         
@@ -45,7 +46,8 @@ package net.wg.gui.components.advanced
         
         private var _id:String;
         
-        override public function set data(param1:Object) : void {
+        override public function set data(param1:Object) : void
+        {
             var _loc2_:SortingButtonInfo = null;
             super.data = param1;
             if(param1 is SortingButtonInfo)
@@ -76,11 +78,13 @@ package net.wg.gui.components.advanced
             invalidateData();
         }
         
-        public function get sortDirection() : String {
+        public function get sortDirection() : String
+        {
             return this._sortDirection;
         }
         
-        public function set sortDirection(param1:String) : void {
+        public function set sortDirection(param1:String) : void
+        {
             var value:String = param1;
             if(!(value == SortingInfo.ASCENDING_SORT) && !(value == SortingInfo.DESCENDING_SORT) && !(value == SortingInfo.WITHOUT_SORT))
             {
@@ -90,6 +94,7 @@ package net.wg.gui.components.advanced
                 }
                 catch(e:Error)
                 {
+                    trace("Flash :: Unknown sorting button state:",value);
                 }
                 value = SortingInfo.WITHOUT_SORT;
             }
@@ -101,33 +106,40 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get ascendingIconSource() : String {
+        public function get ascendingIconSource() : String
+        {
             return this._ascendingIconSource;
         }
         
-        public function set ascendingIconSource(param1:String) : void {
+        public function set ascendingIconSource(param1:String) : void
+        {
             this._ascendingIconSource = param1;
             invalidate(ASCENDING_ICON_INVALID);
         }
         
-        public function get descendingIconSource() : String {
+        public function get descendingIconSource() : String
+        {
             return this._descendingIconSource;
         }
         
-        public function set descendingIconSource(param1:String) : void {
+        public function set descendingIconSource(param1:String) : void
+        {
             this._descendingIconSource = param1;
             invalidate(DESCENDING_ICON_INVALID);
         }
         
-        public function get id() : String {
+        public function get id() : String
+        {
             return this._id;
         }
         
-        public function set id(param1:String) : void {
+        public function set id(param1:String) : void
+        {
             this._id = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.bg = null;
             this.upperBg = null;
             this.labelField = null;
@@ -139,7 +151,8 @@ package net.wg.gui.components.advanced
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             TextFieldEx.setVerticalAlign(this.labelField,TextFieldAutoSize.CENTER);
             this.tabEnabled = false;
@@ -147,7 +160,8 @@ package net.wg.gui.components.advanced
             this.visible = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((this.labelField && isInvalid(InvalidationType.DATA)) && (!(label == null)) && !(label == ""))
             {
@@ -193,7 +207,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function updateTextSize(param1:Boolean = false) : void {
+        private function updateTextSize(param1:Boolean = false) : void
+        {
             if(param1)
             {
                 TextFieldEx.setVerticalAlign(this.labelField,TextFieldAutoSize.CENTER);
@@ -205,7 +220,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             super.updateAfterStateChange();
             this.bg.width = _width;
             this.bg.height = _height;
@@ -217,7 +233,8 @@ package net.wg.gui.components.advanced
             this.updateTextSize(true);
         }
         
-        protected function applySortDirection() : void {
+        protected function applySortDirection() : void
+        {
             var _loc1_:SortingButtonInfo = SortingButtonInfo(data);
             var _loc2_:String = this._sortDirection;
             if((_loc1_.inverted) && (_loc2_ == SortingInfo.ASCENDING_SORT || _loc2_ == SortingInfo.DESCENDING_SORT))
@@ -234,7 +251,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        protected function sortingIconLoadingCompleteHandler(param1:UILoaderEvent) : void {
+        protected function sortingIconLoadingCompleteHandler(param1:UILoaderEvent) : void
+        {
             this.mcAscendingIcon.y = Math.round(_height - this.mcAscendingIcon.height);
             this.isSortIconLoadingCompete = true;
             invalidate();

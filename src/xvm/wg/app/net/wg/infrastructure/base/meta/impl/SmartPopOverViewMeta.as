@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class SmartPopOverViewMeta extends AbstractPopOverView
     {
         
-        public function SmartPopOverViewMeta() {
+        public function SmartPopOverViewMeta()
+        {
             super();
         }
     }

@@ -16,7 +16,8 @@ package net.wg.gui.rally
     public class BaseRallyView extends BaseRallyViewMeta implements IBaseRallyViewMeta, IViewStackContent
     {
         
-        public function BaseRallyView() {
+        public function BaseRallyView()
+        {
             this._coolDownRequests = [];
             super();
         }
@@ -33,19 +34,23 @@ package net.wg.gui.rally
         
         private var _coolDownRequests:Array;
         
-        public function isInCoolDown(param1:int) : Boolean {
+        public function isInCoolDown(param1:int) : Boolean
+        {
             return this._coolDownRequests.indexOf(param1) > -1;
         }
         
-        public function as_setPyAlias(param1:String) : void {
+        public function as_setPyAlias(param1:String) : void
+        {
             this._pyAlias = param1;
         }
         
-        public function as_getPyAlias() : String {
+        public function as_getPyAlias() : String
+        {
             return this._pyAlias;
         }
         
-        public function as_setCoolDown(param1:Number, param2:int) : void {
+        public function as_setCoolDown(param1:Number, param2:int) : void
+        {
             if(!this.isInCoolDown(param2))
             {
                 this.coolDownControls(false,param2);
@@ -53,14 +58,17 @@ package net.wg.gui.rally
             }
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.createBtn)
             {
@@ -76,7 +84,8 @@ package net.wg.gui.rally
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.utils.scheduler.cancelTask(this.coolDownControls);
             if(this.backBtn)
             {
@@ -97,7 +106,8 @@ package net.wg.gui.rally
             super.onDispose();
         }
         
-        protected function coolDownControls(param1:Boolean, param2:int) : void {
+        protected function coolDownControls(param1:Boolean, param2:int) : void
+        {
             var _loc3_:int = this._coolDownRequests.indexOf(param2);
             if(param1)
             {
@@ -113,11 +123,13 @@ package net.wg.gui.rally
             
         }
         
-        protected function getRallyViewAlias() : String {
+        protected function getRallyViewAlias() : String
+        {
             return "";
         }
         
-        protected function showComplexTooltip(param1:String, param2:String) : void {
+        protected function showComplexTooltip(param1:String, param2:String) : void
+        {
             var _loc3_:String = new ComplexTooltipHelper().addHeader(param1,true).addBody(param2,true).make();
             if(_loc3_.length > 0)
             {
@@ -125,29 +137,33 @@ package net.wg.gui.rally
             }
         }
         
-        protected function onControlRollOver(param1:MouseEvent) : void {
+        protected function onControlRollOver(param1:MouseEvent) : void
+        {
         }
         
-        protected function onCreateClick(param1:ButtonEvent) : void {
-            var _loc2_:Object = {
-                "alias":this.getRallyViewAlias(),
-                "itemId":Number.NaN,
-                "peripheryID":0,
-                "slotIndex":-1
-            };
+        protected function onCreateClick(param1:ButtonEvent) : void
+        {
+            var _loc2_:Object = {"alias":this.getRallyViewAlias(),
+            "itemId":Number.NaN,
+            "peripheryID":0,
+            "slotIndex":-1
+        };
         dispatchEvent(new RallyViewsEvent(RallyViewsEvent.LOAD_VIEW_REQUEST,_loc2_));
     }
     
-    protected function onBackClickHandler(param1:ButtonEvent) : void {
+    protected function onBackClickHandler(param1:ButtonEvent) : void
+    {
         this.onControlRollOut();
         dispatchEvent(new RallyViewsEvent(RallyViewsEvent.BACK_NAVIGATION_REQUEST));
     }
     
-    protected function onControlRollOut(param1:Event = null) : void {
+    protected function onControlRollOut(param1:Event = null) : void
+    {
         App.toolTipMgr.hide();
     }
     
-    public function canShowAutomatically() : Boolean {
+    public function canShowAutomatically() : Boolean
+    {
         return true;
     }
 }

@@ -5,7 +5,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseDocsModel extends Object
     {
         
-        public function PersonalCaseDocsModel() {
+        public function PersonalCaseDocsModel()
+        {
             this.firstNames = [];
             this.lastNames = [];
             this.icons = [];

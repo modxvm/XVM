@@ -19,7 +19,8 @@ package net.wg.gui.lobby.barracks
     public class BarracksItemRenderer extends SoundListItemRenderer
     {
         
-        public function BarracksItemRenderer() {
+        public function BarracksItemRenderer()
+        {
             super();
             buttonMode = true;
             this.soundType = SoundTypes.BARRACKS_TANKMAN_SOUND_TYPE;
@@ -78,7 +79,8 @@ package net.wg.gui.lobby.barracks
         
         private var actionPriceVo:ActionPriceVO = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(ButtonEvent.CLICK,this.onBarracksItemRendererClick,false);
             removeEventListener(MouseEvent.CLICK,this.onBarracksItemRendererRightClick,false);
             this.btnDissmiss.removeEventListener(ButtonEvent.CLICK,this.onBtnDissmissClick);
@@ -126,7 +128,8 @@ package net.wg.gui.lobby.barracks
             super.onDispose();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(!param1)
             {
                 return;
@@ -168,20 +171,24 @@ package net.wg.gui.lobby.barracks
             validateNow();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[Scaleform BarracksItemRenderer " + name + "]";
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return super.enabled;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             mouseChildren = param1;
         }
         
-        public function set useHandCursorOnClickArea(param1:Boolean) : void {
+        public function set useHandCursorOnClickArea(param1:Boolean) : void
+        {
             if(this.clickArea)
             {
                 this.useHandCursor = param1;
@@ -189,11 +196,13 @@ package net.wg.gui.lobby.barracks
             }
         }
         
-        public function get inTank() : Boolean {
+        public function get inTank() : Boolean
+        {
             return this._inTank;
         }
         
-        public function set inTank(param1:Boolean) : void {
+        public function set inTank(param1:Boolean) : void
+        {
             if(this._inTank == param1)
             {
                 return;
@@ -202,11 +211,13 @@ package net.wg.gui.lobby.barracks
             invalidate(INVALIDATE_IN_TANK);
         }
         
-        public function get inCurrentTank() : Boolean {
+        public function get inCurrentTank() : Boolean
+        {
             return this._inCurrentTank;
         }
         
-        public function set inCurrentTank(param1:Boolean) : void {
+        public function set inCurrentTank(param1:Boolean) : void
+        {
             if(this._inCurrentTank == param1)
             {
                 return;
@@ -215,27 +226,32 @@ package net.wg.gui.lobby.barracks
             invalidate(INVALIDATE_IN_TANK);
         }
         
-        public function get buy() : Boolean {
+        public function get buy() : Boolean
+        {
             return this._buy;
         }
         
-        public function set buy(param1:Boolean) : void {
+        public function set buy(param1:Boolean) : void
+        {
             this._buy = param1;
             this.updateControlsState();
             setState("up");
         }
         
-        public function get empty() : Boolean {
+        public function get empty() : Boolean
+        {
             return this._empty;
         }
         
-        public function set empty(param1:Boolean) : void {
+        public function set empty(param1:Boolean) : void
+        {
             this._empty = param1;
             this.updateControlsState();
             setState("up");
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             tabChildren = false;
             this.btnDissmiss.focusTarget = this;
@@ -253,7 +269,8 @@ package net.wg.gui.lobby.barracks
             this.clickArea.buttonMode = true;
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             if(this._empty)
             {
                 return Vector.<String>(["empty_"]);
@@ -269,7 +286,8 @@ package net.wg.gui.lobby.barracks
             return Vector.<String>([""]);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:String = null;
             var _loc2_:Point = null;
             var _loc3_:String = null;
@@ -376,17 +394,20 @@ package net.wg.gui.lobby.barracks
             }
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             this._isMouseOver = true;
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             super.handleMouseRollOut(param1);
             this._isMouseOver = false;
         }
         
-        private function updateControlsState() : void {
+        private function updateControlsState() : void
+        {
             var _loc1_:* = !((this._buy) || (this._empty));
             this.icon.visible = this.iconRank.visible = this.iconRole.visible = _loc1_;
             this.btnDissmiss.visible = _loc1_;
@@ -405,7 +426,8 @@ package net.wg.gui.lobby.barracks
             
         }
         
-        private function showTooltip(param1:MouseEvent) : void {
+        private function showTooltip(param1:MouseEvent) : void
+        {
             setState("out");
             if((this._inTank) || (this._inCurrentTank))
             {
@@ -417,21 +439,25 @@ package net.wg.gui.lobby.barracks
             }
         }
         
-        private function hideTooltip(param1:MouseEvent) : void {
+        private function hideTooltip(param1:MouseEvent) : void
+        {
             setState("over");
             App.toolTipMgr.hide();
             dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
         }
         
-        private function rendererRollOver(param1:MouseEvent) : void {
+        private function rendererRollOver(param1:MouseEvent) : void
+        {
             dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
         }
         
-        private function rendererRollOut(param1:MouseEvent) : void {
+        private function rendererRollOut(param1:MouseEvent) : void
+        {
             dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OUT,true,true,-1,-1,-1,null,data));
         }
         
-        public function onBtnDissmissClick(param1:ButtonEvent) : void {
+        public function onBtnDissmissClick(param1:ButtonEvent) : void
+        {
             if((this._inTank) || (this._inCurrentTank))
             {
                 dispatchEvent(new CrewEvent(CrewEvent.UNLOAD_TANKMAN,data));
@@ -442,7 +468,8 @@ package net.wg.gui.lobby.barracks
             }
         }
         
-        public function onBarracksItemRendererClick(param1:ButtonEvent) : void {
+        public function onBarracksItemRendererClick(param1:ButtonEvent) : void
+        {
             if(param1.target == this.btnDissmiss)
             {
                 return;
@@ -458,7 +485,8 @@ package net.wg.gui.lobby.barracks
             
         }
         
-        private function onBarracksItemRendererRightClick(param1:MouseEvent) : void {
+        private function onBarracksItemRendererRightClick(param1:MouseEvent) : void
+        {
             if(param1.target == this.btnDissmiss)
             {
                 return;

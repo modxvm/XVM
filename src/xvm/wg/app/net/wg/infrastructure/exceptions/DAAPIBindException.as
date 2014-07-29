@@ -5,7 +5,8 @@ package net.wg.infrastructure.exceptions
     public class DAAPIBindException extends WGGUIException
     {
         
-        public function DAAPIBindException(param1:* = "", param2:* = 0) {
+        public function DAAPIBindException(param1:* = "", param2:* = 0)
+        {
             super(param1,param2);
         }
     }

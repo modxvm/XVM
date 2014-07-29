@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class ContextMenuConstants extends Object
     {
         
-        public function ContextMenuConstants() {
+        public function ContextMenuConstants()
+        {
             super();
         }
         

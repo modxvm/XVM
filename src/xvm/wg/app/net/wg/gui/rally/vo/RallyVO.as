@@ -3,7 +3,8 @@ package net.wg.gui.rally.vo
     public class RallyVO extends RallyShortVO
     {
         
-        public function RallyVO(param1:Object) {
+        public function RallyVO(param1:Object)
+        {
             super(param1);
         }
         

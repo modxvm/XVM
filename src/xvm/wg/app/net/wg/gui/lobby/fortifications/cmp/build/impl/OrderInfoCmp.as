@@ -12,7 +12,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class OrderInfoCmp extends MovieClip implements IDisposable
     {
         
-        public function OrderInfoCmp() {
+        public function OrderInfoCmp()
+        {
             super();
             this._descrRightMargin = this.description.x + this.description.width;
             this.infoIcon.visible = false;
@@ -25,11 +26,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private static var TEXT_OFFSET_ICON:int = 6;
         
-        private static function onRollOutHandler(param1:MouseEvent) : void {
+        private static function onRollOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private static function showAlertTooltip(param1:MouseEvent) : void {
+        private static function showAlertTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE);
         }
         
@@ -49,7 +52,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _descrRightMargin:Number;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.resourceIcon.dispose();
             this.resourceIcon = null;
             this.alertIcon.removeEventListener(MouseEvent.ROLL_OVER,showAlertTooltip);
@@ -67,7 +71,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function setData(param1:OrderInfoVO) : void {
+        public function setData(param1:OrderInfoVO) : void
+        {
             this.model = param1;
             if(this.model.iconSource != Values.EMPTY_STR)
             {
@@ -101,11 +106,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             App.utils.commons.moveIconToEndOfText(this.alertIcon,this.title);
         }
         
-        protected function prepareToolTipMessage() : void {
+        protected function prepareToolTipMessage() : void
+        {
             this._tooltipText = new ComplexTooltipHelper().addHeader(this.model.infoIconToolTipData["header"]).addBody(this.model.infoIconToolTipData["body"]).addNote("",false).make();
         }
         
-        private function onRollOverHandler(param1:MouseEvent) : void {
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(this._tooltipText);
         }
     }

@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ProfileSectionMeta extends BaseDAAPIComponent
     {
         
-        public function ProfileSectionMeta() {
+        public function ProfileSectionMeta()
+        {
             super();
         }
         
@@ -16,17 +17,20 @@ package net.wg.infrastructure.base.meta.impl
         
         public var requestDossier:Function = null;
         
-        public function setActiveS(param1:Boolean) : void {
+        public function setActiveS(param1:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.setActive,"setActive" + Errors.CANT_NULL);
             this.setActive(param1);
         }
         
-        public function requestDataS(param1:Object) : void {
+        public function requestDataS(param1:Object) : void
+        {
             App.utils.asserter.assertNotNull(this.requestData,"requestData" + Errors.CANT_NULL);
             this.requestData(param1);
         }
         
-        public function requestDossierS(param1:String) : void {
+        public function requestDossierS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.requestDossier,"requestDossier" + Errors.CANT_NULL);
             this.requestDossier(param1);
         }

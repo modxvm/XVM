@@ -6,7 +6,8 @@ package net.wg.gui.components.common.ticker
     public class TickerItem extends Button
     {
         
-        public function TickerItem() {
+        public function TickerItem()
+        {
             super();
             autoSize = TextFieldAutoSize.LEFT;
         }
@@ -15,16 +16,19 @@ package net.wg.gui.components.common.ticker
         
         private var _model:RSSEntryVO;
         
-        public function get model() : RSSEntryVO {
+        public function get model() : RSSEntryVO
+        {
             return this._model;
         }
         
-        public function set model(param1:RSSEntryVO) : void {
+        public function set model(param1:RSSEntryVO) : void
+        {
             this._model = param1;
             invalidate(INVALID_MODEL);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this._model)
             {
@@ -33,7 +37,8 @@ package net.wg.gui.components.common.ticker
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if((isInvalid(INVALID_MODEL)) && (this._model))
             {
                 label = this._model.title;

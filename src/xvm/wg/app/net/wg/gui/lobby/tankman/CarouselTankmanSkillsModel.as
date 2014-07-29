@@ -3,7 +3,8 @@ package net.wg.gui.lobby.tankman
     public class CarouselTankmanSkillsModel extends Object
     {
         
-        public function CarouselTankmanSkillsModel() {
+        public function CarouselTankmanSkillsModel()
+        {
             super();
         }
         
@@ -37,11 +38,13 @@ package net.wg.gui.lobby.tankman
         
         public var tankmanID:int = -1;
         
-        public function get level() : int {
+        public function get level() : int
+        {
             return this._level;
         }
         
-        public function set level(param1:int) : void {
+        public function set level(param1:int) : void
+        {
             this._level = param1;
         }
     }

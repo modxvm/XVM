@@ -5,7 +5,8 @@ package net.wg.data.utilData
     public class FormattedInteger extends Object implements IFormattedInt
     {
         
-        public function FormattedInteger(param1:Number, param2:String) {
+        public function FormattedInteger(param1:Number, param2:String)
+        {
             super();
             this._value = param1;
             this._delimitier = param2;
@@ -15,11 +16,13 @@ package net.wg.data.utilData
         
         private var _delimitier:String = null;
         
-        public function get value() : Number {
+        public function get value() : Number
+        {
             return this._value;
         }
         
-        public function get delimiter() : String {
+        public function get delimiter() : String
+        {
             return this._delimitier;
         }
     }

@@ -6,13 +6,15 @@ package net.wg.gui.messenger.meta.impl
     public class FAQWindowMeta extends AbstractWindowView
     {
         
-        public function FAQWindowMeta() {
+        public function FAQWindowMeta()
+        {
             super();
         }
         
         public var onLinkClicked:Function = null;
         
-        public function onLinkClickedS(param1:String) : void {
+        public function onLinkClickedS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.onLinkClicked,"onLinkClicked" + Errors.CANT_NULL);
             this.onLinkClicked(param1);
         }

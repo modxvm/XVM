@@ -7,7 +7,8 @@ package net.wg.gui.components.controls.VO
     public class ActionPriceVO extends DAAPIDataClass
     {
         
-        public function ActionPriceVO(param1:Object) {
+        public function ActionPriceVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -49,12 +50,14 @@ package net.wg.gui.components.controls.VO
         
         public var useAction:Boolean = false;
         
-        override public function fromHash(param1:Object) : void {
+        override public function fromHash(param1:Object) : void
+        {
             super.fromHash(param1);
             this.data = param1;
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "newPrice")
             {
                 this.newPrices = param2 as Array;
@@ -75,24 +78,29 @@ package net.wg.gui.components.controls.VO
             return this.hasOwnProperty(param1);
         }
         
-        public function get state() : String {
+        public function get state() : String
+        {
             return this._state;
         }
         
-        public function set state(param1:String) : void {
+        public function set state(param1:String) : void
+        {
             this._state = param1;
         }
         
-        public function get states() : Array {
+        public function get states() : Array
+        {
             return this._states;
         }
         
-        public function set states(param1:Array) : void {
+        public function set states(param1:Array) : void
+        {
             this._states = param1;
             this.updateState();
         }
         
-        private function updateState() : void {
+        private function updateState() : void
+        {
             if((this._states) && (this.ico))
             {
                 this.state = this.ico == IconsTypes.CREDITS && (this._states[0])?this._states[0]:this._states[1];
@@ -100,73 +108,87 @@ package net.wg.gui.components.controls.VO
             this.useAction = (this.state) && !(this._newPrice == this._oldPrice);
         }
         
-        public function get newPrices() : Array {
+        public function get newPrices() : Array
+        {
             return this._newPrices;
         }
         
-        public function set newPrices(param1:Array) : void {
+        public function set newPrices(param1:Array) : void
+        {
             this._newPrices = param1;
             this.ico = this._newPrices[0] != 0?IconsTypes.CREDITS:IconsTypes.GOLD;
             this.updateNewPrice();
         }
         
-        public function get newPrice() : Number {
+        public function get newPrice() : Number
+        {
             return this._newPrice;
         }
         
-        public function set newPrice(param1:Number) : void {
+        public function set newPrice(param1:Number) : void
+        {
             this._newPrice = param1;
             this.updateState();
         }
         
-        public function get oldPrices() : Array {
+        public function get oldPrices() : Array
+        {
             return this._oldPrices;
         }
         
-        public function set oldPrices(param1:Array) : void {
+        public function set oldPrices(param1:Array) : void
+        {
             this._oldPrices = param1;
             this.updateOldPrice();
         }
         
-        private function updateOldPrice() : void {
+        private function updateOldPrice() : void
+        {
             if((this._oldPrices) && this._oldPrices.length == 2)
             {
                 this.oldPrice = this.ico == IconsTypes.CREDITS?this._oldPrices[0]:this._oldPrices[1];
             }
         }
         
-        private function updateNewPrice() : void {
+        private function updateNewPrice() : void
+        {
             if((this._newPrices) && this._newPrices.length == 2)
             {
                 this.newPrice = this.ico == IconsTypes.CREDITS?this._newPrices[0]:this._newPrices[1];
             }
         }
         
-        public function get oldPrice() : Number {
+        public function get oldPrice() : Number
+        {
             return this._oldPrice;
         }
         
-        public function set oldPrice(param1:Number) : void {
+        public function set oldPrice(param1:Number) : void
+        {
             this._oldPrice = param1;
             this.updateState();
         }
         
-        public function get ico() : String {
+        public function get ico() : String
+        {
             return this._ico;
         }
         
-        public function set ico(param1:String) : void {
+        public function set ico(param1:String) : void
+        {
             this._ico = param1;
             this._forCredits = this._ico == IconsTypes.CREDITS;
             this.updateNewPrice();
             this.updateOldPrice();
         }
         
-        public function get useSign() : Boolean {
+        public function get useSign() : Boolean
+        {
             return this._useSign;
         }
         
-        public function set useSign(param1:Boolean) : void {
+        public function set useSign(param1:Boolean) : void
+        {
             if(param1 == this._useSign)
             {
                 return;
@@ -174,11 +196,13 @@ package net.wg.gui.components.controls.VO
             this._useSign = param1;
         }
         
-        public function get forCredits() : Boolean {
+        public function get forCredits() : Boolean
+        {
             return this._forCredits;
         }
         
-        public function set forCredits(param1:Boolean) : void {
+        public function set forCredits(param1:Boolean) : void
+        {
             var _loc2_:IAssertable = App.utils.asserter;
             _loc2_.assertNotNull(this.data,"forCredits must be set after parse data for VO",ActionPriceVO);
             this._forCredits = param1;
@@ -188,11 +212,13 @@ package net.wg.gui.components.controls.VO
             this.updateState();
         }
         
-        public function get externalSign() : String {
+        public function get externalSign() : String
+        {
             return this._externalSign;
         }
         
-        public function set externalSign(param1:String) : void {
+        public function set externalSign(param1:String) : void
+        {
             if(param1 == this._externalSign)
             {
                 return;

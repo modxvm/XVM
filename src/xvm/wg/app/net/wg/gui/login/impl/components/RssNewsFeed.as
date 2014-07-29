@@ -16,8 +16,9 @@ package net.wg.gui.login.impl.components
     public class RssNewsFeed extends RssNewsFeedMeta implements IRssNewsFeedMeta
     {
         
-        public function RssNewsFeed() {
-            this._padding = new Padding(10,20,10,7);
+        public function RssNewsFeed()
+        {
+            this._padding = new Padding(10,20,40,7);
             this.tweenManager = new ExcludeTweenManager();
             super();
             this.rssItems = new Vector.<RssNewsFeedRenderer>();
@@ -42,12 +43,14 @@ package net.wg.gui.login.impl.components
         
         private var tweenManager:ExcludeTweenManager;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.bg.height = 0;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:IRssNewsFeedRenderer = null;
@@ -121,7 +124,8 @@ package net.wg.gui.login.impl.components
             this.updateBG();
         }
         
-        private function updateRenderersPositions() : void {
+        private function updateRenderersPositions() : void
+        {
             var _loc1_:Number = this.rssItems.length;
             var _loc2_:Number = 0;
             var _loc3_:Number = 0;
@@ -148,7 +152,8 @@ package net.wg.gui.login.impl.components
             this.container.x = this._padding.left;
         }
         
-        private function updateBG() : void {
+        private function updateBG() : void
+        {
             var _loc1_:* = false;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
@@ -186,10 +191,9 @@ package net.wg.gui.login.impl.components
                 {
                     _loc2_ = 0;
                 }
-                this.moveTween = this.tweenManager.registerAndLaunch(RssNewsFeedRenderer.MOOVING_ANIMATION_SPEED,this.bg,{"height":_loc2_},{
-                    "ease":Strong.easeInOut,
-                    "onComplete":this.onMoveTweenComplete
-                });
+                this.moveTween = this.tweenManager.registerAndLaunch(RssNewsFeedRenderer.MOOVING_ANIMATION_SPEED,this.bg,{"height":_loc2_},{"ease":Strong.easeInOut,
+                "onComplete":this.onMoveTweenComplete
+            });
             this.moveTween.fastTransform = false;
             this.bg.width = this.container.x + _loc3_ + this._padding.right;
         }
@@ -200,11 +204,13 @@ package net.wg.gui.login.impl.components
         dispatchEvent(new RssItemEvent(RssItemEvent.ITEM_SIZE_INVALID));
     }
     
-    private function onMoveTweenComplete(param1:Tween) : void {
+    private function onMoveTweenComplete(param1:Tween) : void
+    {
         this.tweenManager.unregister(param1);
     }
     
-    private function addRenderer(param1:RssItemVo) : IRssNewsFeedRenderer {
+    private function addRenderer(param1:RssItemVo) : IRssNewsFeedRenderer
+    {
         var _loc2_:Class = getDefinitionByName(this.RENDERER_CLASS_REFERENCE) as Class;
         var _loc3_:IRssNewsFeedRenderer = new _loc2_() as IRssNewsFeedRenderer;
         var _loc4_:DisplayObject = _loc3_ as DisplayObject;
@@ -215,7 +221,8 @@ package net.wg.gui.login.impl.components
         return _loc3_;
     }
     
-    private function setupRenderer(param1:IRssNewsFeedRenderer, param2:RssItemVo) : void {
+    private function setupRenderer(param1:IRssNewsFeedRenderer, param2:RssItemVo) : void
+    {
         param1.setData(param2);
         param1.validateNow();
         param1.addEventListener(RssItemEvent.TO_REED_MORE,this.toBrowser);
@@ -223,30 +230,36 @@ package net.wg.gui.login.impl.components
         param1.addEventListener(RssItemEvent.ON_HIDED,this.onRendererHided);
     }
     
-    private function onRendererSizeInvalid(param1:RssItemEvent) : void {
+    private function onRendererSizeInvalid(param1:RssItemEvent) : void
+    {
         this.updateRenderersPositions();
         this.updateBG();
     }
     
-    private function cleanRenderer(param1:IRssNewsFeedRenderer) : void {
+    private function cleanRenderer(param1:IRssNewsFeedRenderer) : void
+    {
         param1.removeEventListener(RssItemEvent.TO_REED_MORE,this.toBrowser);
         param1.removeEventListener(RssItemEvent.ITEM_SIZE_INVALID,this.onRendererSizeInvalid);
         param1.removeEventListener(RssItemEvent.ON_HIDED,this.onRendererHided);
     }
     
-    private function onRendererHided(param1:RssItemEvent) : void {
+    private function onRendererHided(param1:RssItemEvent) : void
+    {
         this.removeRenderer(param1.currentTarget as IRssNewsFeedRenderer);
     }
     
-    private function toBrowser(param1:RssItemEvent) : void {
+    private function toBrowser(param1:RssItemEvent) : void
+    {
         openBrowserS(param1.rssVo.link);
     }
     
-    private function preRemoveRenderer(param1:IRssNewsFeedRenderer) : void {
+    private function preRemoveRenderer(param1:IRssNewsFeedRenderer) : void
+    {
         param1.hide();
     }
     
-    private function removeRenderer(param1:IRssNewsFeedRenderer) : void {
+    private function removeRenderer(param1:IRssNewsFeedRenderer) : void
+    {
         var _loc2_:DisplayObject = param1 as DisplayObject;
         this.container.removeChild(_loc2_);
         this.cleanRenderer(param1);
@@ -254,7 +267,8 @@ package net.wg.gui.login.impl.components
         var param1:IRssNewsFeedRenderer = null;
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         if(this.tweenManager)
         {
             this.tweenManager.dispose();
@@ -274,7 +288,8 @@ package net.wg.gui.login.impl.components
         super.onDispose();
     }
     
-    public function as_updateFeed(param1:Array) : void {
+    public function as_updateFeed(param1:Array) : void
+    {
         var _loc3_:RssItemVo = null;
         this.clearData();
         var _loc2_:Number = 0;
@@ -287,7 +302,8 @@ package net.wg.gui.login.impl.components
         invalidateData();
     }
     
-    private function clearData() : void {
+    private function clearData() : void
+    {
         var _loc1_:RssItemVo = null;
         while(this.rssItemsVo.length > 0)
         {

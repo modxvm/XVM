@@ -13,7 +13,8 @@ package net.wg.gui.messenger.controls
     public class MemberItemRenderer extends SoundListItemRenderer
     {
         
-        public function MemberItemRenderer() {
+        public function MemberItemRenderer()
+        {
             super();
         }
         
@@ -35,7 +36,8 @@ package net.wg.gui.messenger.controls
         
         protected var tooltip:String;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             if(!param1)
             {
@@ -50,7 +52,8 @@ package net.wg.gui.messenger.controls
             invalidateData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.model)
             {
                 this.model.dispose();
@@ -59,13 +62,15 @@ package net.wg.gui.messenger.controls
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
             setState("out");
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Point = null;
             if((isInvalid(InvalidationType.DATA)) && (this.model))
             {
@@ -87,7 +92,8 @@ package net.wg.gui.messenger.controls
             super.draw();
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             super.updateAfterStateChange();
             if(this.model)
             {
@@ -95,12 +101,14 @@ package net.wg.gui.messenger.controls
             }
         }
         
-        private function getStatusFrame() : String {
+        private function getStatusFrame() : String
+        {
             var _loc1_:String = MessengerUtils.isIgnored(this.model)?STATUS_IGNORED:this.model.himself?STATUS_HIMSELF:STATUS_ONLINE;
             return _loc1_;
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             if(this.tooltip)
             {
@@ -108,7 +116,8 @@ package net.wg.gui.messenger.controls
             }
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             super.handleMouseRollOut(param1);
             App.toolTipMgr.hide();
             if(enabled)
@@ -120,7 +129,8 @@ package net.wg.gui.messenger.controls
             }
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             if(!(_label == null) && !(textField == null))
             {
                 textField.text = _label;
@@ -132,7 +142,8 @@ package net.wg.gui.messenger.controls
             }
         }
         
-        private function truncateText() : void {
+        private function truncateText() : void
+        {
             var _loc1_:String = null;
             var _loc2_:String = null;
             var _loc3_:uint = 0;
@@ -157,7 +168,8 @@ package net.wg.gui.messenger.controls
             }
         }
         
-        private function speakHandler(param1:VoiceChatEvent) : void {
+        private function speakHandler(param1:VoiceChatEvent) : void
+        {
             var _loc2_:uint = param1.getAccountDBID();
             var _loc3_:* = param1.type == VoiceChatEvent.START_SPEAKING;
             if((this.model) && this.model.uid == _loc2_)
@@ -166,7 +178,8 @@ package net.wg.gui.messenger.controls
             }
         }
         
-        private function setSpeaking(param1:Boolean, param2:Boolean = false) : void {
+        private function setSpeaking(param1:Boolean, param2:Boolean = false) : void
+        {
             if(param1)
             {
                 param2 = false;

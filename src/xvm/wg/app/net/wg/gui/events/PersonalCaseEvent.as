@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class PersonalCaseEvent extends Event
     {
         
-        public function PersonalCaseEvent(param1:String, param2:Boolean = false, param3:Boolean = false) {
+        public function PersonalCaseEvent(param1:String, param2:Boolean = false, param3:Boolean = false)
+        {
             this.newTankmanFirstName = {};
             this.newTankmanLastName = {};
             this.newIcon = {};

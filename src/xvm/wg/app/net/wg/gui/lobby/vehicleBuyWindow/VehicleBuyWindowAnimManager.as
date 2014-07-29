@@ -11,7 +11,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
     public class VehicleBuyWindowAnimManager extends Object implements IDisposable
     {
         
-        public function VehicleBuyWindowAnimManager(param1:VehicleBuyWindow) {
+        public function VehicleBuyWindowAnimManager(param1:VehicleBuyWindow)
+        {
             super();
             this.animTarget = param1;
         }
@@ -44,7 +45,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         private var excludeTween:ExcludeTweenManager;
         
-        public function launch(param1:Boolean, param2:Boolean) : void {
+        public function launch(param1:Boolean, param2:Boolean) : void
+        {
             var _loc3_:* = 0;
             var _loc4_:* = NaN;
             if(!this.initialized)
@@ -74,7 +76,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             }
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.animTarget = null;
             if(this.excludeTween)
             {
@@ -83,7 +86,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             }
         }
         
-        private function initialize() : void {
+        private function initialize() : void
+        {
             var _loc1_:FooterMc = this.animTarget.footerMc;
             this.footerOpenedY = _loc1_.y;
             this.footerClosedY = this.animTarget.bodyMc.y;
@@ -97,7 +101,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.excludeTween = new ExcludeTweenManager();
         }
         
-        private function tweenToY(param1:MovieClip, param2:int, param3:Boolean) : void {
+        private function tweenToY(param1:MovieClip, param2:int, param3:Boolean) : void
+        {
             var _loc4_:Object = null;
             if(param3)
             {
@@ -111,7 +116,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             }
         }
         
-        private function tweenToAlpha(param1:MovieClip, param2:Number, param3:Boolean) : void {
+        private function tweenToAlpha(param1:MovieClip, param2:Number, param3:Boolean) : void
+        {
             var _loc4_:Object = null;
             if(param3)
             {
@@ -125,7 +131,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             }
         }
         
-        private function tweenToHeight(param1:DisplayObject, param2:Number, param3:Boolean) : void {
+        private function tweenToHeight(param1:DisplayObject, param2:Number, param3:Boolean) : void
+        {
             var _loc4_:Object = null;
             if(param3)
             {
@@ -139,11 +146,13 @@ package net.wg.gui.lobby.vehicleBuyWindow
             }
         }
         
-        private function onTweenComplete(param1:Tween) : void {
+        private function onTweenComplete(param1:Tween) : void
+        {
             this.excludeTween.unregister(param1);
         }
         
-        private function getDefaultTweenSet() : Object {
+        private function getDefaultTweenSet() : Object
+        {
             var _loc1_:Object = {};
             _loc1_.ease = Strong.easeOut;
             _loc1_.onComplete = this.onTweenComplete;

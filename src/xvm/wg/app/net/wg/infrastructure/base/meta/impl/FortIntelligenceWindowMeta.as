@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class FortIntelligenceWindowMeta extends AbstractWindowView
     {
         
-        public function FortIntelligenceWindowMeta() {
+        public function FortIntelligenceWindowMeta()
+        {
             super();
         }
     }

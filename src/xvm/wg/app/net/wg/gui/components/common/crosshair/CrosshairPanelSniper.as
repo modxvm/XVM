@@ -3,7 +3,8 @@ package net.wg.gui.components.common.crosshair
     public class CrosshairPanelSniper extends CrosshairPanelBase
     {
         
-        public function CrosshairPanelSniper() {
+        public function CrosshairPanelSniper()
+        {
             super();
         }
         
@@ -13,10 +14,12 @@ package net.wg.gui.components.common.crosshair
         
         private static var CASSETE_POSITION_PANZER:Number = -1;
         
-        override protected function initCallbacks() : void {
+        override protected function initCallbacks() : void
+        {
         }
         
-        override protected function onSetNetType(param1:Number, param2:Number) : void {
+        override protected function onSetNetType(param1:Number, param2:Number) : void
+        {
             super.onSetNetType(param1,param2);
             var _loc3_:Number = 0;
             switch(g_modeMC.currentframe)

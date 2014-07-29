@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class HeaderEvent extends Event
     {
         
-        public function HeaderEvent(param1:String, param2:String = "") {
+        public function HeaderEvent(param1:String, param2:String = "")
+        {
             super(param1,true,true);
             this.id = param2;
         }
@@ -38,7 +39,8 @@ package net.wg.gui.events
         
         public var id:String;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new HeaderEvent(type,this.id);
         }
     }

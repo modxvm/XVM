@@ -17,7 +17,8 @@ package scaleform.clik.controls
     public class Window extends UIComponent
     {
         
-        public function Window() {
+        public function Window()
+        {
             super();
             this._contentPadding = new Padding(0,0,0,0);
             hitArea = this.hit;
@@ -53,7 +54,8 @@ package scaleform.clik.controls
         
         public var hit:MovieClip;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this._content = null;
             this._contentPadding = null;
@@ -61,11 +63,13 @@ package scaleform.clik.controls
             this.hit = null;
         }
         
-        public function get title() : String {
+        public function get title() : String
+        {
             return this._title;
         }
         
-        public function set title(param1:String) : void {
+        public function set title(param1:String) : void
+        {
             this._title = param1;
             if(!(this.titleBtn == null) && (this.titleBtn.initialized))
             {
@@ -73,35 +77,42 @@ package scaleform.clik.controls
             }
         }
         
-        public function get source() : String {
+        public function get source() : String
+        {
             return this._src;
         }
         
-        public function set source(param1:String) : void {
+        public function set source(param1:String) : void
+        {
             this._src = param1;
             invalidate("source");
         }
         
-        public function get contentPadding() : Object {
+        public function get contentPadding() : Object
+        {
             return this._contentPadding;
         }
         
-        public function set contentPadding(param1:Object) : void {
+        public function set contentPadding(param1:Object) : void
+        {
             this._contentPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
             invalidate("padding");
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             constraints = new Constraints(this,ConstrainMode.REFLOW);
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             tabEnabled = false;
             mouseEnabled = mouseChildren = enabled;
             super.initialize();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             initSize();
             if(hitArea != null)
             {
@@ -134,7 +145,8 @@ package scaleform.clik.controls
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid("source"))
             {
                 this.loadSource();
@@ -151,7 +163,8 @@ package scaleform.clik.controls
             }
         }
         
-        protected function loadSource() : void {
+        protected function loadSource() : void
+        {
             var _loc1_:Class = null;
             if(this._src != "")
             {
@@ -171,12 +184,14 @@ package scaleform.clik.controls
                 else
                 {
                     this._content = null;
+                    trace("Error: Cannot load content for " + name + "; symbol " + this._src + " not found!");
                     return;
                 }
             }
         }
         
-        protected function reflowContent() : void {
+        protected function reflowContent() : void
+        {
             var _loc1_:Padding = null;
             if(!this._content)
             {
@@ -193,28 +208,33 @@ package scaleform.clik.controls
             invalidateSize();
         }
         
-        protected function onWindowStartDrag(param1:Event) : void {
+        protected function onWindowStartDrag(param1:Event) : void
+        {
             stage.addEventListener(MouseEvent.MOUSE_UP,this.onWindowStopDrag,false,0,true);
             startDrag();
         }
         
-        protected function onWindowStopDrag(param1:Event) : void {
+        protected function onWindowStopDrag(param1:Event) : void
+        {
             stage.removeEventListener(MouseEvent.MOUSE_UP,this.onWindowStopDrag,false);
             stopDrag();
         }
         
-        protected function onResizeStartDrag(param1:Event) : void {
+        protected function onResizeStartDrag(param1:Event) : void
+        {
             stage.addEventListener(MouseEvent.MOUSE_UP,this.onResizeStopDrag,false,0,true);
             this._dragProps = [parent.mouseX - (x + width),parent.mouseY - (y + height)];
             stage.addEventListener(MouseEvent.MOUSE_MOVE,this.onResizeMouseMove,false,0,true);
         }
         
-        protected function onResizeStopDrag(param1:Event) : void {
+        protected function onResizeStopDrag(param1:Event) : void
+        {
             stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.onResizeMouseMove,false);
             stage.removeEventListener(MouseEvent.MOUSE_UP,this.onResizeStopDrag,false);
         }
         
-        protected function onResizeMouseMove(param1:Event) : void {
+        protected function onResizeMouseMove(param1:Event) : void
+        {
             var _loc2_:Number = Math.max(this.minWidth,Math.min(this.maxWidth,parent.mouseX - x - this._dragProps[0]));
             var _loc3_:Number = Math.max(this.minHeight,Math.min(this.maxHeight,parent.mouseY - y - this._dragProps[1]));
             if(!(_loc2_ == _width) || !(_loc3_ == _height))
@@ -224,7 +244,8 @@ package scaleform.clik.controls
             }
         }
         
-        protected function onCloseButtonClick(param1:MouseEvent) : void {
+        protected function onCloseButtonClick(param1:MouseEvent) : void
+        {
             parent.removeChild(this);
             dispatchEvent(new ComponentEvent(ComponentEvent.HIDE));
         }

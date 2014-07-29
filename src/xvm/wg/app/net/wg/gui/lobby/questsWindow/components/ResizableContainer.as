@@ -12,7 +12,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class ResizableContainer extends UIComponent
     {
         
-        public function ResizableContainer() {
+        public function ResizableContainer()
+        {
             this._data = [];
             super();
             this._blocks = new Vector.<IResizableContent>();
@@ -40,78 +41,96 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var _isNumerated:Boolean = false;
         
-        public function setData(param1:Array) : void {
+        public function setData(param1:Array) : void
+        {
             this._data = param1;
             invalidateData();
         }
         
-        public function cleanContainer() : void {
+        public function cleanContainer() : void
+        {
             this.clearBlocks();
             this.layoutBlocks();
         }
         
-        public function get isReadyForLayout() : Boolean {
+        public function get isReadyForLayout() : Boolean
+        {
             return this._isReadyForLayout;
         }
         
-        public function set isReadyForLayout(param1:Boolean) : void {
+        public function set isReadyForLayout(param1:Boolean) : void
+        {
             this._isReadyForLayout = param1;
         }
         
-        public function get data() : Array {
+        public function get data() : Array
+        {
             return this._data;
         }
         
-        public function set data(param1:Array) : void {
+        public function set data(param1:Array) : void
+        {
             this._data = param1;
         }
         
-        public function get verticalPadding() : int {
+        public function get verticalPadding() : int
+        {
             return this._verticalPadding;
         }
         
-        public function set verticalPadding(param1:int) : void {
+        public function set verticalPadding(param1:int) : void
+        {
             this._verticalPadding = param1;
         }
         
-        public function get availableWidth() : Number {
+        public function get availableWidth() : Number
+        {
             return this._availableWidth;
         }
         
-        public function set availableWidth(param1:Number) : void {
+        public function set availableWidth(param1:Number) : void
+        {
             this._availableWidth = param1;
         }
         
-        public function get bottomPadding() : int {
+        public function get bottomPadding() : int
+        {
             return this._bottomPadding;
         }
         
-        public function set bottomPadding(param1:int) : void {
+        public function set bottomPadding(param1:int) : void
+        {
             this._bottomPadding = param1;
         }
         
-        public function get contentAlign() : String {
+        public function get contentAlign() : String
+        {
             return this._contentAlign;
         }
         
-        public function set contentAlign(param1:String) : void {
+        public function set contentAlign(param1:String) : void
+        {
             this._contentAlign = param1;
         }
         
-        public function get isNumerated() : Boolean {
+        public function get isNumerated() : Boolean
+        {
             return this._isNumerated;
         }
         
-        public function set isNumerated(param1:Boolean) : void {
+        public function set isNumerated(param1:Boolean) : void
+        {
             this._isNumerated = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(ResizableBlockEvent.CONTETNT_WAS_CHANGED,this.componentsResizeHandler);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(ResizableBlockEvent.CONTETNT_WAS_CHANGED,this.componentsResizeHandler);
             if(this._blocks)
             {
@@ -126,7 +145,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -138,7 +158,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function invalidateAvailableHeight() : void {
+        private function invalidateAvailableHeight() : void
+        {
             var _loc4_:IResizableContent = null;
             var _loc1_:* = -1;
             this.totalBlocks = this._blocks.length;
@@ -166,7 +187,8 @@ package net.wg.gui.lobby.questsWindow.components
             setSize(this.width,_loc3_);
         }
         
-        protected function clearBlocks() : void {
+        protected function clearBlocks() : void
+        {
             var _loc1_:* = 0;
             while(_loc1_ < this._blocks.length)
             {
@@ -177,7 +199,8 @@ package net.wg.gui.lobby.questsWindow.components
             this._blocks.splice(0,this._blocks.length);
         }
         
-        protected function createBlocks() : void {
+        protected function createBlocks() : void
+        {
             var _loc2_:* = 0;
             var _loc1_:IAssertable = App.utils.asserter;
             if((this._data) && (this._data.length))
@@ -200,7 +223,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        protected function addBlock(param1:Object) : void {
+        protected function addBlock(param1:Object) : void
+        {
             var _loc2_:IResizableContent = App.utils.classFactory.getComponent(param1.linkage,IResizableContent);
             _loc2_.isReadyForLayout = false;
             _loc2_.availableWidth = this.availableWidth;
@@ -212,11 +236,13 @@ package net.wg.gui.lobby.questsWindow.components
             addChild(DisplayObject(_loc2_));
         }
         
-        protected function layoutBlocks() : void {
+        protected function layoutBlocks() : void
+        {
             this.totalBlocks = this._blocks.length;
             var _loc1_:* = 0;
             while(_loc1_ < this.totalBlocks)
             {
+                _loc1_;
                 _loc1_++;
             }
             var _loc2_:Number = Math.round(this.totalBlocks > 0?this._blocks[this.totalBlocks - 1].height + this._blocks[this.totalBlocks - 1].y + this.bottomPadding:0);
@@ -225,18 +251,21 @@ package net.wg.gui.lobby.questsWindow.components
             dispatchEvent(new Event(Event.RESIZE));
         }
         
-        protected function componentsResizeHandler(param1:ResizableBlockEvent) : void {
+        protected function componentsResizeHandler(param1:ResizableBlockEvent) : void
+        {
             if(this.isReadyForLayout)
             {
                 this.layoutBlocks();
             }
         }
         
-        public function get availableHeight() : Number {
+        public function get availableHeight() : Number
+        {
             return this._availableHeight;
         }
         
-        public function set availableHeight(param1:Number) : void {
+        public function set availableHeight(param1:Number) : void
+        {
             this._availableHeight = param1;
             invalidate(INV_AVAILABLE_HEIGHT);
         }

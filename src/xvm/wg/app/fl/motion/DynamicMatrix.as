@@ -3,7 +3,8 @@ package fl.motion
     public class DynamicMatrix extends Object
     {
         
-        public function DynamicMatrix(param1:int, param2:int) {
+        public function DynamicMatrix(param1:int, param2:int)
+        {
             super();
             this.Create(param1,param2);
         }
@@ -18,7 +19,8 @@ package fl.motion
         
         protected var m_matrix:Array;
         
-        protected function Create(param1:int, param2:int) : void {
+        protected function Create(param1:int, param2:int) : void
+        {
             var _loc3_:* = 0;
             var _loc4_:* = 0;
             if(param1 > 0 && param2 > 0)
@@ -41,19 +43,23 @@ package fl.motion
             }
         }
         
-        protected function Destroy() : void {
+        protected function Destroy() : void
+        {
             this.m_matrix = null;
         }
         
-        public function GetWidth() : Number {
+        public function GetWidth() : Number
+        {
             return this.m_width;
         }
         
-        public function GetHeight() : Number {
+        public function GetHeight() : Number
+        {
             return this.m_height;
         }
         
-        public function GetValue(param1:int, param2:int) : Number {
+        public function GetValue(param1:int, param2:int) : Number
+        {
             var _loc3_:Number = 0;
             if(param1 >= 0 && param1 < this.m_height && param2 >= 0 && param2 <= this.m_width)
             {
@@ -62,14 +68,16 @@ package fl.motion
             return _loc3_;
         }
         
-        public function SetValue(param1:int, param2:int, param3:Number) : void {
+        public function SetValue(param1:int, param2:int, param3:Number) : void
+        {
             if(param1 >= 0 && param1 < this.m_height && param2 >= 0 && param2 <= this.m_width)
             {
                 this.m_matrix[param1][param2] = param3;
             }
         }
         
-        public function LoadIdentity() : void {
+        public function LoadIdentity() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
             if(this.m_matrix)
@@ -95,7 +103,8 @@ package fl.motion
             }
         }
         
-        public function LoadZeros() : void {
+        public function LoadZeros() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
             if(this.m_matrix)
@@ -114,7 +123,8 @@ package fl.motion
             }
         }
         
-        public function Multiply(param1:DynamicMatrix, param2:int = 0) : Boolean {
+        public function Multiply(param1:DynamicMatrix, param2:int = 0) : Boolean
+        {
             var _loc5_:DynamicMatrix = null;
             var _loc6_:* = 0;
             var _loc7_:* = 0;
@@ -212,7 +222,8 @@ package fl.motion
             return true;
         }
         
-        public function MultiplyNumber(param1:Number) : Boolean {
+        public function MultiplyNumber(param1:Number) : Boolean
+        {
             var _loc3_:* = 0;
             var _loc4_:* = NaN;
             if(!this.m_matrix)
@@ -235,7 +246,8 @@ package fl.motion
             return true;
         }
         
-        public function Add(param1:DynamicMatrix) : Boolean {
+        public function Add(param1:DynamicMatrix) : Boolean
+        {
             var _loc5_:* = 0;
             var _loc6_:* = NaN;
             if(!this.m_matrix || !param1)

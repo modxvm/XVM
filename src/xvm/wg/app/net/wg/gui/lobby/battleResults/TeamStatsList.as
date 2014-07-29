@@ -13,16 +13,19 @@ package net.wg.gui.lobby.battleResults
     public class TeamStatsList extends ScrollingListEx
     {
         
-        public function TeamStatsList() {
+        public function TeamStatsList()
+        {
             super();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             wrapping = WrappingMode.NORMAL;
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc8_:IListItemRenderer = null;
             var _loc1_:uint = _renderers.length;
             var _loc2_:Number = rowHeight;
@@ -46,7 +49,8 @@ package net.wg.gui.lobby.battleResults
             drawScrollBar();
         }
         
-        override protected function handleItemClick(param1:ButtonEvent) : void {
+        override protected function handleItemClick(param1:ButtonEvent) : void
+        {
             var _loc2_:Number = (param1.currentTarget as IListItemRenderer).index;
             if(isNaN(_loc2_))
             {
@@ -61,7 +65,8 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.handled)
             {
                 return;

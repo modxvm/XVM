@@ -5,7 +5,8 @@ package scaleform.gfx
     public final class KeyboardEventEx extends KeyboardEvent
     {
         
-        public function KeyboardEventEx(param1:String) {
+        public function KeyboardEventEx(param1:String)
+        {
             super(param1);
         }
         

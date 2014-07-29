@@ -5,7 +5,8 @@ package net.wg.gui.lobby.hangar.maintenance.events
     public class OnEquipmentRendererOver extends Event
     {
         
-        public function OnEquipmentRendererOver(param1:String, param2:String = "", param3:Array = null, param4:int = 0, param5:int = 0, param6:uint = 0, param7:Boolean = true, param8:Boolean = false) {
+        public function OnEquipmentRendererOver(param1:String, param2:String = "", param3:Array = null, param4:int = 0, param5:int = 0, param6:uint = 0, param7:Boolean = true, param8:Boolean = false)
+        {
             super(param1,param7,param8);
             this.moduleID = param2;
             this.modulePrices = param3;
@@ -26,11 +27,13 @@ package net.wg.gui.lobby.hangar.maintenance.events
         
         public var moduleIndex:uint = 0;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new OnEquipmentRendererOver(type,this.moduleID,this.modulePrices,this.inventoryCount,this.vehicleCount,this.moduleIndex,bubbles,cancelable);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("OnEquipmentRendererOver","type","moduleID","modulePrices","inventoryCount","vehicleCount","moduleIndex","bubbles","cancelable","eventPhase");
         }
     }

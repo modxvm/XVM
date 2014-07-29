@@ -12,7 +12,8 @@ package net.wg.gui.components.advanced
     public class HelpLayoutControl extends UIComponent implements IDynamicContent
     {
         
-        public function HelpLayoutControl() {
+        public function HelpLayoutControl()
+        {
             super();
         }
         
@@ -32,39 +33,47 @@ package net.wg.gui.components.advanced
         
         private var _connectorLength:Number = 12;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.textField = null;
             this.connector = null;
             this.border = null;
             super.onDispose();
         }
         
-        public function get connectorLength() : Number {
+        public function get connectorLength() : Number
+        {
             return this._connectorLength;
         }
         
-        public function set connectorLength(param1:Number) : void {
+        public function set connectorLength(param1:Number) : void
+        {
             this._connectorLength = param1;
         }
         
-        public function set borderWidth(param1:Number) : void {
+        public function set borderWidth(param1:Number) : void
+        {
             this._borderWidth = param1;
         }
         
-        public function set borderHeight(param1:Number) : void {
+        public function set borderHeight(param1:Number) : void
+        {
             this._borderHeight = param1;
         }
         
-        public function set direction(param1:String) : void {
+        public function set direction(param1:String) : void
+        {
             App.utils.asserter.assert(!(Directions.LAYOUT_DIRECTIONS.indexOf(param1) == -1),"invalid direction: " + param1);
             this._direction = param1;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             scaleX = scaleY = 1;
             this.border.width = this._borderWidth;
@@ -74,7 +83,8 @@ package net.wg.gui.components.advanced
             super.draw();
         }
         
-        private function setConnectorPosition() : void {
+        private function setConnectorPosition() : void
+        {
             if(this.connector == null)
             {
                 return;
@@ -104,7 +114,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function setTextFieldPosition() : void {
+        private function setTextFieldPosition() : void
+        {
             if(this.textField == null)
             {
                 return;

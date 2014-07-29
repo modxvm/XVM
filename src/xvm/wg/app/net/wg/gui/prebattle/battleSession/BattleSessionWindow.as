@@ -31,7 +31,8 @@ package net.wg.gui.prebattle.battleSession
     public class BattleSessionWindow extends BattleSessionWindowMeta implements IBattleSessionWindowMeta
     {
         
-        public function BattleSessionWindow() {
+        public function BattleSessionWindow()
+        {
             super();
             this._canKickPlayer = false;
             this._isReady = false;
@@ -44,7 +45,8 @@ package net.wg.gui.prebattle.battleSession
         
         private static var INVALIDATE_TEAMS:String = "InvalidateTeams";
         
-        private static function checkStatus(param1:CoreList, param2:Object) : void {
+        private static function checkStatus(param1:CoreList, param2:Object) : void
+        {
             var _loc5_:IListItemRenderer = null;
             var _loc8_:Object = null;
             var _loc9_:String = null;
@@ -132,7 +134,8 @@ package net.wg.gui.prebattle.battleSession
         
         private var firstLength:Number = 0;
         
-        override public function as_refreshPermissions() : void {
+        override public function as_refreshPermissions() : void
+        {
             this._isReady = isPlayerReadyS();
             this.readyButton.label = this._isReady?PREBATTLE.DIALOGS_BUTTONS_NOTREADY:PREBATTLE.DIALOGS_BUTTONS_READY;
             this.readyButton.enabled = isReadyBtnEnabledS();
@@ -142,7 +145,8 @@ package net.wg.gui.prebattle.battleSession
             this.upButton.enabled = (canMoveToAssignedS()) && this.memberStackList.dataProvider.length > 0;
         }
         
-        override public function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void {
+        override public function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void
+        {
             this.firstLength = param2?param3.length:this.firstLength;
             var _loc4_:* = 0;
             while(_loc4_ < param3.length)
@@ -161,15 +165,18 @@ package net.wg.gui.prebattle.battleSession
             invalidate(INVALIDATE_TEAMS);
         }
         
-        override public function as_enableLeaveBtn(param1:Boolean) : void {
+        override public function as_enableLeaveBtn(param1:Boolean) : void
+        {
             this.leaveButton.enabled = param1;
         }
         
-        override public function as_enableReadyBtn(param1:Boolean) : void {
+        override public function as_enableReadyBtn(param1:Boolean) : void
+        {
             this.readyButton.enabled = param1;
         }
         
-        override public function as_setPlayerState(param1:int, param2:Boolean, param3:Object) : void {
+        override public function as_setPlayerState(param1:int, param2:Boolean, param3:Object) : void
+        {
             if(param2)
             {
                 checkStatus(this.memberList,param3);
@@ -180,18 +187,21 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        override public function as_setCoolDownForReadyButton(param1:uint) : void {
+        override public function as_setCoolDownForReadyButton(param1:uint) : void
+        {
             App.utils.scheduler.cancelTask(this.stopReadyButtonCoolDown);
             this.readyButton.enabled = false;
             App.utils.scheduler.scheduleTask(this.stopReadyButtonCoolDown,param1 * 1000);
         }
         
-        override public function as_toggleReadyBtn(param1:Boolean) : void {
+        override public function as_toggleReadyBtn(param1:Boolean) : void
+        {
             this._isReady = !param1;
             this.readyButton.label = this._isReady?PREBATTLE.DIALOGS_BUTTONS_NOTREADY:PREBATTLE.DIALOGS_BUTTONS_READY;
         }
         
-        public function as_setInfo(param1:String, param2:String, param3:String, param4:String, param5:String, param6:String, param7:String) : void {
+        public function as_setInfo(param1:String, param2:String, param3:String, param4:String, param5:String, param6:String, param7:String) : void
+        {
             this.winsValue.text = param1;
             this.mapValue.text = param2;
             this.topInfo.firstTeamText.text = param3;
@@ -201,7 +211,8 @@ package net.wg.gui.prebattle.battleSession
             this.commentValue.text = param7;
         }
         
-        public function as_setCommonLimits(param1:Number, param2:Number, param3:Number, param4:Number) : void {
+        public function as_setCommonLimits(param1:Number, param2:Number, param3:Number, param4:Number) : void
+        {
             if(param2 <= param1 && param1 <= param3)
             {
                 this.topStats.valueTF.text = String(param1);
@@ -214,7 +225,8 @@ package net.wg.gui.prebattle.battleSession
             invalidate(INVALIDATE_TEAMS);
         }
         
-        public function as_setNationsLimits(param1:Array) : void {
+        public function as_setNationsLimits(param1:Array) : void
+        {
             if(param1)
             {
                 this.requirementInfo.flagList.visible = true;
@@ -230,7 +242,8 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        public function as_setClassesLimits(param1:Object, param2:Boolean) : void {
+        public function as_setClassesLimits(param1:Object, param2:Boolean) : void
+        {
             var _loc3_:String = null;
             if(param2)
             {
@@ -249,7 +262,8 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        public function as_setStartTime(param1:Number) : void {
+        public function as_setStartTime(param1:Number) : void
+        {
             this._startTime = param1;
             if(this.timer)
             {
@@ -263,7 +277,8 @@ package net.wg.gui.prebattle.battleSession
             this.setTimeValue();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             registerComponent(channelComponent,Aliases.CHANNEL_COMPONENT);
             this._isReady = isPlayerReadyS();
@@ -275,7 +290,8 @@ package net.wg.gui.prebattle.battleSession
             geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.hiddenRenderer.visible = false;
             this.hiddenRenderer.data = null;
@@ -298,7 +314,8 @@ package net.wg.gui.prebattle.battleSession
             this.commentValue.textField.selectable = true;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.memberList.removeEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
             this.memberStackList.removeEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
@@ -308,7 +325,8 @@ package net.wg.gui.prebattle.battleSession
             this.leaveButton.removeEventListener(ButtonEvent.CLICK,this.handleLeaveClick);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -324,11 +342,13 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        private function stopReadyButtonCoolDown() : void {
+        private function stopReadyButtonCoolDown() : void
+        {
             this.readyButton.enabled = true;
         }
         
-        private function redrawList() : void {
+        private function redrawList() : void
+        {
             var _loc1_:Number = this.firstLength >= 5?this.firstLength:5;
             this.memberList.height = 20 * _loc1_ + 2;
             var _loc2_:Number = this.memberList.y + this.memberList.height + 5;
@@ -350,7 +370,8 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        private function setConstraints() : void {
+        private function setConstraints() : void
+        {
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             constraints.addElement("upButton",this.upButton,Constraints.RIGHT);
             constraints.addElement("upAllButton",this.upAllButton,Constraints.RIGHT);
@@ -373,7 +394,8 @@ package net.wg.gui.prebattle.battleSession
             constraints.addElement("memberStackList",this.memberStackList,Constraints.RIGHT);
         }
         
-        private function setControlsLabels() : void {
+        private function setControlsLabels() : void
+        {
             this.topStats.titleTF.text = PREBATTLE.LABELS_STATS_LEVEL;
             this.playersStats.titleTF.text = PREBATTLE.LABELS_STATS_MAXPLAYERS;
             this.listTitle.player.text = PREBATTLE.LABELS_PLAYER;
@@ -389,7 +411,8 @@ package net.wg.gui.prebattle.battleSession
             this.leaveButton.label = PREBATTLE.BUTTONS_BATTLESESSION_LEAVE;
         }
         
-        private function setTimeValue() : void {
+        private function setTimeValue() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
@@ -410,7 +433,8 @@ package net.wg.gui.prebattle.battleSession
             
         }
         
-        private function showContextMenu(param1:ListEventEx) : void {
+        private function showContextMenu(param1:ListEventEx) : void
+        {
             var _loc2_:PlayerPrbInfoVO = null;
             var _loc3_:* = false;
             var _loc4_:IUserContextMenuGenerator = null;
@@ -431,15 +455,18 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        private function handleReadyClick(param1:ButtonEvent) : void {
+        private function handleReadyClick(param1:ButtonEvent) : void
+        {
             requestToReadyS(!this._isReady);
         }
         
-        private function handleLeaveClick(param1:ButtonEvent) : void {
+        private function handleLeaveClick(param1:ButtonEvent) : void
+        {
             requestToLeaveS();
         }
         
-        private function handleUpClick(param1:ButtonEvent) : void {
+        private function handleUpClick(param1:ButtonEvent) : void
+        {
             var _loc2_:PlayerPrbInfoVO = null;
             if(this.memberStackList.dataProvider.length > 0)
             {
@@ -451,7 +478,8 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        private function handleDoubleClick(param1:ListEventEx) : void {
+        private function handleDoubleClick(param1:ListEventEx) : void
+        {
             if(param1.target == this.memberList)
             {
                 if(canMoveToUnassignedS())
@@ -468,7 +496,8 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        private function handleDownClick(param1:ButtonEvent) : void {
+        private function handleDownClick(param1:ButtonEvent) : void
+        {
             var _loc2_:PlayerPrbInfoVO = null;
             if(this.memberList.dataProvider.length > 0)
             {
@@ -480,7 +509,8 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        private function onTimerChange(param1:TimerEvent) : void {
+        private function onTimerChange(param1:TimerEvent) : void
+        {
             this.setTimeValue();
         }
     }

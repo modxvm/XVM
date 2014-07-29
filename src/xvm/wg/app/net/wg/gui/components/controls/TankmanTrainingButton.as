@@ -11,26 +11,25 @@ package net.wg.gui.components.controls
     public class TankmanTrainingButton extends SoundButton
     {
         
-        public function TankmanTrainingButton() {
-            this._priceColors = {
-                "normal":16314069,
-                "disabled":16711680
-            };
-        useFocusedAsSelect = true;
-        _stateMap = {
-            "up":["up"],
-            "over":["over"],
-            "down":["down"],
-            "release":["release","over"],
-            "out":["out","up"],
-            "disabled":["disabled"],
-            "selecting":["selecting","over"],
-            "toggle":["toggle","up"],
-            "kb_selecting":["kb_selecting","up"],
-            "kb_release":["kb_release","out","up"],
-            "kb_down":["kb_down","down"],
-            "buy":["buy"]
+        public function TankmanTrainingButton()
+        {
+            this._priceColors = {"normal":16314069,
+            "disabled":16711680
         };
+        useFocusedAsSelect = true;
+        _stateMap = {"up":["up"],
+        "over":["over"],
+        "down":["down"],
+        "release":["release","over"],
+        "out":["out","up"],
+        "disabled":["disabled"],
+        "selecting":["selecting","over"],
+        "toggle":["toggle","up"],
+        "kb_selecting":["kb_selecting","up"],
+        "kb_release":["kb_release","out","up"],
+        "kb_down":["kb_down","down"],
+        "buy":["buy"]
+    };
     soundType = SoundTypes.RNDR_NORMAL;
     super();
 }
@@ -55,18 +54,22 @@ private var _type:String = "free";
 
 private var _priceColors:Object;
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
     this.actionPrice.dispose();
     this.actionPrice = null;
     super.onDispose();
 }
 
-override public function toString() : String {
+override public function toString() : String
+{
     return "[Wargaming TankmanTrainingButton " + name + "]";
 }
 
-public function updatePrice(param1:Number, param2:String, param3:ActionPriceVO = null) : void {
+public function updatePrice(param1:Number, param2:String, param3:ActionPriceVO = null) : void
+{
     var _loc4_:String = null;
+    trace("updatePrice",this,this.name,param3);
     if(!this._buy && !(this._type == "free") && !(param1 == 0))
     {
         _loc4_ = !enabled?"disabled":"normal";
@@ -87,11 +90,13 @@ public function updatePrice(param1:Number, param2:String, param3:ActionPriceVO =
     }
 }
 
-public function get buy() : Boolean {
+public function get buy() : Boolean
+{
     return this._buy;
 }
 
-public function set buy(param1:Boolean) : void {
+public function set buy(param1:Boolean) : void
+{
     if(this._buy == param1)
     {
         return;
@@ -106,20 +111,24 @@ public function set buy(param1:Boolean) : void {
     setState(this._buy?"buy":"up");
 }
 
-public function get nation() : Number {
+public function get nation() : Number
+{
     return this._nation;
 }
 
-public function set nation(param1:Number) : void {
+public function set nation(param1:Number) : void
+{
     this._nation = param1;
     invalidate("_nation");
 }
 
-public function get type() : String {
+public function get type() : String
+{
     return this._type;
 }
 
-public function set type(param1:String) : void {
+public function set type(param1:String) : void
+{
     if(this._type != param1)
     {
         this._type = param1;
@@ -127,7 +136,8 @@ public function set type(param1:String) : void {
     }
 }
 
-override protected function handlePress(param1:uint = 0) : void {
+override protected function handlePress(param1:uint = 0) : void
+{
     if(this._buy == true)
     {
         return;
@@ -135,7 +145,8 @@ override protected function handlePress(param1:uint = 0) : void {
     super.handlePress(param1);
 }
 
-override protected function handleRelease(param1:uint = 0) : void {
+override protected function handleRelease(param1:uint = 0) : void
+{
     if(this._buy == true)
     {
         return;
@@ -143,13 +154,15 @@ override protected function handleRelease(param1:uint = 0) : void {
     super.handleRelease(param1);
 }
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
     super.configUI();
     this.hitArea = hitMc;
     this.actionPrice.setup(this);
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
     super.draw();
     if(isInvalid("_nation"))
     {
@@ -179,7 +192,8 @@ override protected function draw() : void {
     }
 }
 
-override protected function handleMouseRollOver(param1:MouseEvent) : void {
+override protected function handleMouseRollOver(param1:MouseEvent) : void
+{
     if(this._buy == true)
     {
         return;
@@ -187,7 +201,8 @@ override protected function handleMouseRollOver(param1:MouseEvent) : void {
     super.handleMouseRollOver(param1);
 }
 
-override protected function handleMouseRollOut(param1:MouseEvent) : void {
+override protected function handleMouseRollOut(param1:MouseEvent) : void
+{
     if(this._buy == true)
     {
         return;
@@ -195,7 +210,8 @@ override protected function handleMouseRollOut(param1:MouseEvent) : void {
     super.handleMouseRollOut(param1);
 }
 
-override protected function handleMousePress(param1:MouseEvent) : void {
+override protected function handleMousePress(param1:MouseEvent) : void
+{
     if(this._buy == true)
     {
         return;
@@ -203,7 +219,8 @@ override protected function handleMousePress(param1:MouseEvent) : void {
     super.handleMousePress(param1);
 }
 
-override protected function handleMouseRelease(param1:MouseEvent) : void {
+override protected function handleMouseRelease(param1:MouseEvent) : void
+{
     if(this._buy == true)
     {
         return;
@@ -211,7 +228,8 @@ override protected function handleMouseRelease(param1:MouseEvent) : void {
     super.handleMouseRelease(param1);
 }
 
-override protected function handleReleaseOutside(param1:MouseEvent) : void {
+override protected function handleReleaseOutside(param1:MouseEvent) : void
+{
     if(this._buy == true)
     {
         return;
@@ -219,7 +237,8 @@ override protected function handleReleaseOutside(param1:MouseEvent) : void {
     super.handleReleaseOutside(param1);
 }
 
-override public function set selected(param1:Boolean) : void {
+override public function set selected(param1:Boolean) : void
+{
     var _loc2_:* = false;
     if(_selected == param1)
     {

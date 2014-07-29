@@ -10,28 +10,34 @@ package net.wg.infrastructure.managers.impl
     public class ColorSchemeManager extends ColorSchemeManagerMeta implements IColorSchemeManager
     {
         
-        public function ColorSchemeManager() {
+        public function ColorSchemeManager()
+        {
             super();
         }
         
-        public function getScheme(param1:String) : IColorScheme {
+        public function getScheme(param1:String) : IColorScheme
+        {
             var _loc2_:Class = App.utils.classFactory.getClass(Linkages.CLR_CSS);
             return new _loc2_(getColorSchemeS(param1));
         }
         
-        public function getAliasColor(param1:String) : String {
+        public function getAliasColor(param1:String) : String
+        {
             return this.getScheme(param1).aliasColor;
         }
         
-        public function getRGB(param1:String) : Number {
+        public function getRGB(param1:String) : Number
+        {
             return this.getScheme(param1).rgb;
         }
         
-        public function getTransform(param1:String) : ColorTransform {
+        public function getTransform(param1:String) : ColorTransform
+        {
             return this.getScheme(param1).colorTransform;
         }
         
-        public function as_update() : void {
+        public function as_update() : void
+        {
             dispatchEvent(new ColorSchemeEvent(ColorSchemeEvent.SCHEMAS_UPDATED));
         }
     }

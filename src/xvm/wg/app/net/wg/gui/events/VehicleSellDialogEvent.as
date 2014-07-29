@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class VehicleSellDialogEvent extends Event
     {
         
-        public function VehicleSellDialogEvent(param1:String, param2:Number = 0) {
+        public function VehicleSellDialogEvent(param1:String, param2:Number = 0)
+        {
             super(param1,true,true);
             this.listVisibleHight = param2;
         }
@@ -16,7 +17,8 @@ package net.wg.gui.events
         
         public var listVisibleHight:Number;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new VehicleSellDialogEvent(type,this.listVisibleHight);
         }
     }

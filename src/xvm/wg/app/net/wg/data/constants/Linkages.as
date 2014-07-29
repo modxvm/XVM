@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class Linkages extends Object
     {
         
-        public function Linkages() {
+        public function Linkages()
+        {
             super();
         }
         

@@ -8,7 +8,8 @@ package net.wg.gui.lobby.tankman
     public class TankmanSkillsInfoBlock extends UIComponent
     {
         
-        public function TankmanSkillsInfoBlock() {
+        public function TankmanSkillsInfoBlock()
+        {
             super();
         }
         
@@ -34,7 +35,8 @@ package net.wg.gui.lobby.tankman
         
         private var _nation:String;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.roleIcon.dispose();
             this.roleIcon = null;
             this.nameField = null;
@@ -52,11 +54,13 @@ package net.wg.gui.lobby.tankman
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        private function setTestViewData() : void {
+        private function setTestViewData() : void
+        {
             this.tankmanPic.source = "../maps/icons/tankmen/icons/big/germany-13.png";
             this.roleIcon.source = "../maps/icons/tankmen/roles/small/commander.png";
             this.nameField.text = "Казимир Внуков";
@@ -71,40 +75,49 @@ package net.wg.gui.lobby.tankman
             this.additionalSkillItem.level = 87;
         }
         
-        public function get portraitSource() : String {
+        public function get portraitSource() : String
+        {
             return this.tankmanPic.source;
         }
         
-        public function set portraitSource(param1:String) : void {
+        public function set portraitSource(param1:String) : void
+        {
             this.tankmanPic.source = param1;
         }
         
-        public function get roleSource() : String {
+        public function get roleSource() : String
+        {
             return this.roleIcon.source;
         }
         
-        public function set roleSource(param1:String) : void {
+        public function set roleSource(param1:String) : void
+        {
             this.roleIcon.source = param1;
         }
         
-        public function get tankmanName() : String {
+        public function get tankmanName() : String
+        {
             return this.nameField.text;
         }
         
-        public function set tankmanName(param1:String) : void {
+        public function set tankmanName(param1:String) : void
+        {
             this.nameField.text = param1;
         }
         
-        public function get nation() : String {
+        public function get nation() : String
+        {
             return this._nation;
         }
         
-        public function set nation(param1:String) : void {
+        public function set nation(param1:String) : void
+        {
             this._nation = param1;
             this.backgroundSwitcher.gotoAndPlay(this._nation);
         }
         
-        public function setRoleLevel(param1:Number, param2:Number = undefined) : void {
+        public function setRoleLevel(param1:Number, param2:Number = undefined) : void
+        {
             var _loc3_:String = param1.toString();
             if(!isNaN(param2) && !(param2 - param1 == 0))
             {
@@ -119,7 +132,8 @@ package net.wg.gui.lobby.tankman
             this.specLevelBar.backPosition = param2;
         }
         
-        public function setSkills(param1:int, param2:String, param3:String, param4:Number, param5:Boolean, param6:int = 0, param7:int = 0) : void {
+        public function setSkills(param1:int, param2:String, param3:String, param4:Number, param5:Boolean, param6:int = 0, param7:int = 0) : void
+        {
             this.mainSkillItem.visible = false;
             this.additionalSkillItem.visible = false;
             this.freeSkillItem1.visible = false;
@@ -166,7 +180,8 @@ package net.wg.gui.lobby.tankman
             
         }
         
-        private function buildCurrentSkill(param1:SkillItemViewMini, param2:String, param3:Number) : void {
+        private function buildCurrentSkill(param1:SkillItemViewMini, param2:String, param3:Number) : void
+        {
             if(param2 == SkillItemViewMini.TYPE_NEW_SKILL)
             {
                 param1.type = SkillItemViewMini.TYPE_CURRENT_NEW_SKILL;
@@ -180,7 +195,8 @@ package net.wg.gui.lobby.tankman
             param1.visible = true;
         }
         
-        private function buildSkillsPack(param1:SkillItemViewMini, param2:String, param3:int) : void {
+        private function buildSkillsPack(param1:SkillItemViewMini, param2:String, param3:int) : void
+        {
             if(param2 == SkillItemViewMini.TYPE_NEW_SKILL)
             {
                 param1.type = param3 > 2?SkillItemViewMini.TYPE_NEW_SKILLS:SkillItemViewMini.TYPE_NEW_SKILL;

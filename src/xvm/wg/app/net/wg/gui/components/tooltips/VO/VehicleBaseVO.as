@@ -3,7 +3,8 @@ package net.wg.gui.components.tooltips.VO
     public class VehicleBaseVO extends Object
     {
         
-        public function VehicleBaseVO() {
+        public function VehicleBaseVO()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.components.tooltips.VO
         
         public var vType:String = null;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
         }
     }
 }

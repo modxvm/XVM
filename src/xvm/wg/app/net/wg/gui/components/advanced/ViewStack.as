@@ -19,7 +19,8 @@ package net.wg.gui.components.advanced
     public class ViewStack extends UIComponent
     {
         
-        public function ViewStack() {
+        public function ViewStack()
+        {
             super();
             this.cachedViews = {};
             this.container = new Sprite();
@@ -38,11 +39,13 @@ package net.wg.gui.components.advanced
         
         private var _currentLinkage:String;
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ViewStack " + name + "]";
         }
         
-        public function show(param1:String) : MovieClip {
+        public function show(param1:String) : MovieClip
+        {
             var _loc2_:MovieClip = this.createView(param1);
             this.setCurrentView(_loc2_,param1,true);
             if(_loc2_ != null)
@@ -56,11 +59,13 @@ package net.wg.gui.components.advanced
             return _loc2_;
         }
         
-        public function get targetGroup() : String {
+        public function get targetGroup() : String
+        {
             return this._targetGroup.name;
         }
         
-        public function set targetGroup(param1:String) : void {
+        public function set targetGroup(param1:String) : void
+        {
             if(param1 != "")
             {
                 this.assertTargetGroup(param1);
@@ -68,7 +73,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function set groupRef(param1:IGroupedControl) : void {
+        public function set groupRef(param1:IGroupedControl) : void
+        {
             if(this._targetGroup != param1)
             {
                 if(this._targetGroup != null)
@@ -84,20 +90,24 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get currentLinkage() : String {
+        public function get currentLinkage() : String
+        {
             return this._currentLinkage;
         }
         
-        public function get currentView() : MovieClip {
+        public function get currentView() : MovieClip
+        {
             return this._currentView;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             tabEnabled = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.SIZE))
             {
                 this.container.width = this.container.height = 5;
@@ -108,7 +118,8 @@ package net.wg.gui.components.advanced
             this.container.scaleY = 1 / scaleY;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:IDisposable = null;
             var _loc2_:String = null;
             var _loc3_:Array = null;
@@ -162,7 +173,8 @@ package net.wg.gui.components.advanced
             super.onDispose();
         }
         
-        private function assertTargetGroup(param1:String) : void {
+        private function assertTargetGroup(param1:String) : void
+        {
             if(!App.utils)
             {
                 return;
@@ -173,7 +185,8 @@ package net.wg.gui.components.advanced
             _loc3_.assert(parent[param1] is IGroupedControl,"container \'" + parent + "\'  must implements IGroupController interface");
         }
         
-        private function changeView() : void {
+        private function changeView() : void
+        {
             var _loc1_:Object = null;
             var _loc2_:String = null;
             if(this._targetGroup.selectedItem != null)
@@ -197,7 +210,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function setCurrentView(param1:MovieClip, param2:String, param3:Boolean) : void {
+        private function setCurrentView(param1:MovieClip, param2:String, param3:Boolean) : void
+        {
             if(this._currentView != null)
             {
                 if(this._currentView["__cached__"] == true)
@@ -229,7 +243,8 @@ package net.wg.gui.components.advanced
             this._currentLinkage = param2;
         }
         
-        private function createView(param1:String) : UIComponent {
+        private function createView(param1:String) : UIComponent
+        {
             var _loc3_:Class = null;
             var _loc2_:UIComponent = null;
             if(this.cachedViews[param1] != null)
@@ -263,11 +278,13 @@ package net.wg.gui.components.advanced
             return _loc2_;
         }
         
-        private function onChangeViewHandler(param1:IndexEvent) : void {
+        private function onChangeViewHandler(param1:IndexEvent) : void
+        {
             this.changeView();
         }
         
-        private function onDisposeSubViewHandler(param1:LifeCycleEvent) : void {
+        private function onDisposeSubViewHandler(param1:LifeCycleEvent) : void
+        {
             var _loc2_:MovieClip = MovieClip(param1.target);
             if(_loc2_)
             {
@@ -275,7 +292,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function clearSubView(param1:MovieClip) : void {
+        private function clearSubView(param1:MovieClip) : void
+        {
             var _loc3_:String = null;
             var _loc4_:String = null;
             param1.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeSubViewHandler);
@@ -294,6 +312,7 @@ package net.wg.gui.components.advanced
                 if(this.cachedViews[_loc3_] == param1)
                 {
                     delete this.cachedViews[_loc3_];
+                    true;
                     _loc2_ = true;
                     break;
                 }

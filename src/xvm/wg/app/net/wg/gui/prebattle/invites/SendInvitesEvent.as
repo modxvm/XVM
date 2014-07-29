@@ -5,7 +5,8 @@ package net.wg.gui.prebattle.invites
     public class SendInvitesEvent extends Event
     {
         
-        public function SendInvitesEvent(param1:String, param2:Boolean = false, param3:Boolean = false) {
+        public function SendInvitesEvent(param1:String, param2:Boolean = false, param3:Boolean = false)
+        {
             super(param1,param2,param3);
         }
         

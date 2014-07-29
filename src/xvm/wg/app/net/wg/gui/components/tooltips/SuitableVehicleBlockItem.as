@@ -8,7 +8,8 @@ package net.wg.gui.components.tooltips
     public class SuitableVehicleBlockItem extends UIComponent
     {
         
-        public function SuitableVehicleBlockItem() {
+        public function SuitableVehicleBlockItem()
+        {
             super();
         }
         
@@ -34,11 +35,13 @@ package net.wg.gui.components.tooltips
         
         private var dataDirty:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(this.dataDirty)
             {
@@ -52,7 +55,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        public function setData(param1:String, param2:uint, param3:String, param4:String, param5:String) : void {
+        public function setData(param1:String, param2:uint, param3:String, param4:String, param5:String) : void
+        {
             this._nIco = param1;
             this._lNum = param2;
             this._vIco = param3;

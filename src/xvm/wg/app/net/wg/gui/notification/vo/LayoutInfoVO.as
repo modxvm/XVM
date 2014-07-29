@@ -5,7 +5,8 @@ package net.wg.gui.notification.vo
     public class LayoutInfoVO extends DAAPIDataClass
     {
         
-        public function LayoutInfoVO(param1:Object) {
+        public function LayoutInfoVO(param1:Object)
+        {
             super(param1);
         }
         

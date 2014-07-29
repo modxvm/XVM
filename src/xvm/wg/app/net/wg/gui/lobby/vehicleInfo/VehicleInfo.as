@@ -20,7 +20,8 @@ package net.wg.gui.lobby.vehicleInfo
     public class VehicleInfo extends VehicleInfoMeta implements IVehicleInfoMeta
     {
         
-        public function VehicleInfo() {
+        public function VehicleInfo()
+        {
             super();
             isModal = false;
             canResize = false;
@@ -53,7 +54,8 @@ package net.wg.gui.lobby.vehicleInfo
         
         private var uiInited:Boolean = false;
         
-        public function as_setVehicleInfo(param1:Object) : void {
+        public function as_setVehicleInfo(param1:Object) : void
+        {
             var _loc2_:String = param1.vehicleName;
             this.window.title = _loc2_;
             this.moduleName.text = _loc2_;
@@ -69,11 +71,13 @@ package net.wg.gui.lobby.vehicleInfo
             this.initUI();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(this.tabs.selectedIndex == -1 && (this.uiInited))
             {
                 this.tabs.selectedIndex = 0;
@@ -81,14 +85,16 @@ package net.wg.gui.lobby.vehicleInfo
             super.draw();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             getVehicleInfoS();
             var _loc1_:Padding = new Padding(window.formBgPadding.top,window.formBgPadding.right,window.formBgPadding.bottom + 1,window.formBgPadding.left);
             window.contentPadding = _loc1_;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.view.removeEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdate);
             this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.onClose);
@@ -98,35 +104,36 @@ package net.wg.gui.lobby.vehicleInfo
             this.view = null;
         }
         
-        private function initUI() : void {
+        private function initUI() : void
+        {
             this.view.addEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdate);
-            this.tabs.dataProvider = new DataProvider([{
-                "label":MENU.VEHICLEINFO_TABS_PROPERTIES,
-                "linkage":"VehicleInfoProps"
-            },{
-            "label":MENU.VEHICLEINFO_TABS_BASE,
-            "linkage":"VehicleInfoBase"
-        },{
-        "label":MENU.VEHICLEINFO_TABS_CREW,
-        "linkage":"VehicleInfoCrew"
-    }]);
+            this.tabs.dataProvider = new DataProvider([{"label":MENU.VEHICLEINFO_TABS_PROPERTIES,
+            "linkage":"VehicleInfoProps"
+        },{"label":MENU.VEHICLEINFO_TABS_BASE,
+        "linkage":"VehicleInfoBase"
+    },{"label":MENU.VEHICLEINFO_TABS_CREW,
+    "linkage":"VehicleInfoCrew"
+}]);
 this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onClose);
 this.uiInited = true;
 invalidate();
 }
 
-override protected function onInitModalFocus(param1:InteractiveObject) : void {
+override protected function onInitModalFocus(param1:InteractiveObject) : void
+{
 super.onInitModalFocus(param1);
 setFocus(this.closeBtn);
 }
 
-private function onViewNeedUpdate(param1:ViewStackEvent) : void {
+private function onViewNeedUpdate(param1:ViewStackEvent) : void
+{
 var _loc2_:IViewStackContent = param1.view;
 var _loc3_:String = param1.linkage;
 _loc2_.update(this[_loc3_ + "Data"]);
 }
 
-private function onClose(param1:ButtonEvent) : void {
+private function onClose(param1:ButtonEvent) : void
+{
 onCancelClickS();
 }
 }

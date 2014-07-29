@@ -20,7 +20,8 @@ package net.wg.gui.lobby.hangar.crew
     public class RecruitItemRenderer extends SoundListItemRenderer
     {
         
-        public function RecruitItemRenderer() {
+        public function RecruitItemRenderer()
+        {
             super();
             soundType = "rendererRecruit";
             this.goups_icons_prop = new IconsProps();
@@ -34,11 +35,13 @@ package net.wg.gui.lobby.hangar.crew
         
         public static var MAX_ICONS:Number = 5;
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private static function createSkillObj(param1:RecruitRendererVO, param2:Number) : SkillsVO {
+        private static function createSkillObj(param1:RecruitRendererVO, param2:Number) : SkillsVO
+        {
             var _loc3_:SkillsVO = new SkillsVO({});
             var _loc4_:SkillsVO = SkillsVO(param1.skills[param2]);
             if(!_loc4_.buy)
@@ -94,7 +97,8 @@ package net.wg.gui.lobby.hangar.crew
         
         public var focusIndicatorUI:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.visible = false;
             addEventListener(MouseEvent.CLICK,this.onItemClick);
             addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
@@ -104,7 +108,8 @@ package net.wg.gui.lobby.hangar.crew
             super.configUI();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.CLICK,this.onItemClick);
             removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
             removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
@@ -147,11 +152,13 @@ package net.wg.gui.lobby.hangar.crew
             super.onDispose();
         }
         
-        private function showTooltip(param1:MouseEvent) : void {
+        private function showTooltip(param1:MouseEvent) : void
+        {
             this.checkToolTipData(data);
         }
         
-        public function onItemClick(param1:MouseEvent) : void {
+        public function onItemClick(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
             if(App.utils.commons.isLeftButton(param1))
             {
@@ -159,7 +166,8 @@ package net.wg.gui.lobby.hangar.crew
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.isDefaultPrevented())
             {
                 return;
@@ -188,7 +196,8 @@ package net.wg.gui.lobby.hangar.crew
             }
         }
         
-        private function checkClick() : void {
+        private function checkClick() : void
+        {
             var _loc1_:RecruitRendererVO = null;
             if(this._recruit == true)
             {
@@ -209,7 +218,8 @@ package net.wg.gui.lobby.hangar.crew
             
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             var _loc6_:Array = null;
             var _loc7_:* = 0;
             var _loc8_:* = NaN;
@@ -340,13 +350,15 @@ package net.wg.gui.lobby.hangar.crew
             }
         }
         
-        override public function setListData(param1:ListData) : void {
+        override public function setListData(param1:ListData) : void
+        {
             index = param1.index;
             selected = param1.selected;
             setState("up");
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc2_:Point = null;
             super.draw();
             this.skills.validateNow();
@@ -397,7 +409,8 @@ package net.wg.gui.lobby.hangar.crew
             }
         }
         
-        private function checkToolTipData(param1:Object) : void {
+        private function checkToolTipData(param1:Object) : void
+        {
             if(owner.visible)
             {
                 if((param1) && (param1.tankmanID))
@@ -411,7 +424,8 @@ package net.wg.gui.lobby.hangar.crew
             }
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             if(this._recruit)
             {
                 return Vector.<String>(["recruit_"]);
@@ -423,25 +437,30 @@ package net.wg.gui.lobby.hangar.crew
             return _selected?statesSelected:statesDefault;
         }
         
-        public function get recruit() : Boolean {
+        public function get recruit() : Boolean
+        {
             return this._recruit;
         }
         
-        public function set recruit(param1:Boolean) : void {
+        public function set recruit(param1:Boolean) : void
+        {
             this._recruit = param1;
             setState("up");
         }
         
-        public function get personalCase() : Boolean {
+        public function get personalCase() : Boolean
+        {
             return this._personalCase;
         }
         
-        public function set personalCase(param1:Boolean) : void {
+        public function set personalCase(param1:Boolean) : void
+        {
             this._personalCase = param1;
             setState("up");
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[Scaleform RecruitItemRenderer " + name + "]";
         }
     }

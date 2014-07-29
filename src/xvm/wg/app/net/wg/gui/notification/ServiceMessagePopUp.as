@@ -12,7 +12,8 @@ package net.wg.gui.notification
     public class ServiceMessagePopUp extends ServiceMessage
     {
         
-        public function ServiceMessagePopUp() {
+        public function ServiceMessagePopUp()
+        {
             this.tweenManager = new ExcludeTweenManager();
             super();
         }
@@ -43,7 +44,8 @@ package net.wg.gui.notification
         
         private var livingTimeComplete:Boolean;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             textField.selectable = false;
             if(!isNaN(this._livingTime))
@@ -53,7 +55,8 @@ package net.wg.gui.notification
             addEventListener(MouseEvent.CLICK,this.componentClickHandler,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(HIDING_INVALID))
             {
@@ -70,7 +73,8 @@ package net.wg.gui.notification
             }
         }
         
-        protected function componentClickHandler(param1:MouseEvent) : void {
+        protected function componentClickHandler(param1:MouseEvent) : void
+        {
             var _loc2_:MessageInfoVO = null;
             if(App.utils.commons.isLeftButton(param1))
             {
@@ -93,18 +97,21 @@ package net.wg.gui.notification
             }
         }
         
-        private function fireAreaClickEvent() : void {
+        private function fireAreaClickEvent() : void
+        {
             dispatchEvent(new ServiceMessageEvent(ServiceMessageEvent.MESSAGE_AREA_CLICKED,data.typeID,data.entityID,true));
         }
         
-        override public function set data(param1:Object) : void {
+        override public function set data(param1:Object) : void
+        {
             super.data = param1;
             var _loc2_:PopUpNotificationInfoVO = PopUpNotificationInfoVO(param1);
             this.livingTime = _loc2_.lifeTime;
             this.hidingAnimationSpeed = _loc2_.hidingAnimationSpeed;
         }
         
-        private function hideTask() : void {
+        private function hideTask() : void
+        {
             this.livingTimeComplete = true;
             if(!isNaN(this._hidingAnimationSpeed))
             {
@@ -119,37 +126,45 @@ package net.wg.gui.notification
             }
         }
         
-        private function launchHideAnimation() : void {
+        private function launchHideAnimation() : void
+        {
             this.hideTween = this.tweenManager.registerAndLaunch(this._hidingAnimationSpeed,this,{"alpha":0},{"onComplete":this.onHideTweenComplete});
             this.hideTween.fastTransform = false;
         }
         
-        private function onHideTweenComplete(param1:Tween) : void {
+        private function onHideTweenComplete(param1:Tween) : void
+        {
             this.tweenManager.unregister(param1);
             dispatchEvent(new Event(HIDED));
         }
         
-        private function onShowTweenComplete(param1:Tween) : void {
+        private function onShowTweenComplete(param1:Tween) : void
+        {
             this.tweenManager.unregister(param1);
         }
         
-        public function get livingTime() : Number {
+        public function get livingTime() : Number
+        {
             return this._livingTime;
         }
         
-        public function set livingTime(param1:Number) : void {
+        public function set livingTime(param1:Number) : void
+        {
             this._livingTime = param1;
         }
         
-        public function set hidingAnimationSpeed(param1:Number) : void {
+        public function set hidingAnimationSpeed(param1:Number) : void
+        {
             this._hidingAnimationSpeed = param1;
         }
         
-        public function get hidingAnimationSpeed() : Number {
+        public function get hidingAnimationSpeed() : Number
+        {
             return this._hidingAnimationSpeed;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.utils.scheduler.cancelTask(this.hideTask);
             removeEventListener(MouseEvent.CLICK,this.componentClickHandler);
             if(this.tweenManager)
@@ -164,7 +179,8 @@ package net.wg.gui.notification
             super.onDispose();
         }
         
-        public function set allowHiding(param1:Boolean) : void {
+        public function set allowHiding(param1:Boolean) : void
+        {
             if(!(this._allowHiding == SHOW) || !(this._allowHiding == HIDE))
             {
                 this._allowHiding = param1?SHOW:HIDE;

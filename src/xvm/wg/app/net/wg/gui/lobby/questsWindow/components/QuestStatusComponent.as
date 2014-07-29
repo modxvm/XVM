@@ -11,13 +11,15 @@ package net.wg.gui.lobby.questsWindow.components
     public class QuestStatusComponent extends UIComponent
     {
         
-        public function QuestStatusComponent() {
+        public function QuestStatusComponent()
+        {
             super();
         }
         
         private static var TEXT_PADDING:int = 5;
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -37,26 +39,30 @@ package net.wg.gui.lobby.questsWindow.components
         
         public var iconMC:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(MouseEvent.CLICK,hideTooltip);
             addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             addEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.CLICK,hideTooltip);
             removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             removeEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
             super.onDispose();
         }
         
-        public function setStatus(param1:String) : void {
+        public function setStatus(param1:String) : void
+        {
             this._status = param1;
             invalidate(this.INV_STATUS);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:TextFormat = null;
             super.draw();
             if(isInvalid(this.INV_STATUS))
@@ -96,26 +102,31 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function showStatusTooltip(param1:MouseEvent) : void {
+        private function showStatusTooltip(param1:MouseEvent) : void
+        {
             if(this._showTooltip)
             {
                 App.toolTipMgr.show(this._statusTooltip);
             }
         }
         
-        public function get showTooltip() : Boolean {
+        public function get showTooltip() : Boolean
+        {
             return this._showTooltip;
         }
         
-        public function set showTooltip(param1:Boolean) : void {
+        public function set showTooltip(param1:Boolean) : void
+        {
             this._showTooltip = param1;
         }
         
-        public function get textAlign() : String {
+        public function get textAlign() : String
+        {
             return this._textAlign;
         }
         
-        public function set textAlign(param1:String) : void {
+        public function set textAlign(param1:String) : void
+        {
             this._textAlign = param1;
             invalidate(this.INV_ALIGN);
         }

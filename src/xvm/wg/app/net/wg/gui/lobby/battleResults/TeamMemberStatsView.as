@@ -19,7 +19,8 @@ package net.wg.gui.lobby.battleResults
     public class TeamMemberStatsView extends UIComponent implements IFocusContainer
     {
         
-        public function TeamMemberStatsView() {
+        public function TeamMemberStatsView()
+        {
             super();
         }
         
@@ -57,30 +58,35 @@ package net.wg.gui.lobby.battleResults
         
         private var _toolTip:String = null;
         
-        public function get data() : Object {
+        public function get data() : Object
+        {
             return this._data;
         }
         
-        public function set data(param1:Object) : void {
+        public function set data(param1:Object) : void
+        {
             this._data = param1;
             this._dataDirty = true;
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.initialStatsY = this.vehicleStats.y;
             this.initialCloseBtnY = this.closeBtn.y;
             this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onCloseClick);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.vehicleStateLbl.removeEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver);
             this.vehicleStateLbl.removeEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut);
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:IUserProps = null;
             var _loc2_:* = false;
             super.draw();
@@ -93,12 +99,11 @@ package net.wg.gui.lobby.battleResults
                 if(this.data)
                 {
                     this.tankIcon.source = this.data.bigTankIcon;
-                    this.playerNameLbl.userVO = new UserVO({
-                        "fullName":this.data.playerFullName,
-                        "userName":this.data.playerName,
-                        "clanAbbrev":this.data.playerClan,
-                        "region":this.data.playerRegion
-                    });
+                    this.playerNameLbl.userVO = new UserVO({"fullName":this.data.playerFullName,
+                    "userName":this.data.playerName,
+                    "clanAbbrev":this.data.playerClan,
+                    "region":this.data.playerRegion
+                });
                 this.vehicleName.text = this.data.vehicleFullName;
                 this.vehicleStateLbl.text = this.data.vehicleStateStr;
                 if((this.data.isPrematureLeave) || this.data.killerID <= 0)
@@ -146,21 +151,25 @@ package net.wg.gui.lobby.battleResults
         }
     }
     
-    private function onCloseClick(param1:ButtonEvent) : void {
+    private function onCloseClick(param1:ButtonEvent) : void
+    {
         TeamStats(this.parent).changeIndexOnFocus = false;
         this.list.selectedIndex = -1;
         dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
     }
     
-    protected function handleMouseRollOver(param1:MouseEvent) : void {
+    protected function handleMouseRollOver(param1:MouseEvent) : void
+    {
         App.toolTipMgr.show(this._toolTip);
     }
     
-    protected function handleMouseRollOut(param1:MouseEvent) : void {
+    protected function handleMouseRollOut(param1:MouseEvent) : void
+    {
         App.toolTipMgr.hide();
     }
     
-    public function getComponentForFocus() : InteractiveObject {
+    public function getComponentForFocus() : InteractiveObject
+    {
         return this.list;
     }
 }

@@ -7,7 +7,8 @@ package net.wg.gui.lobby.fortifications.data.sortie
     public class SortieRenderVO extends DAAPIDataClass implements IRallyListItemVO
     {
         
-        public function SortieRenderVO(param1:Object) {
+        public function SortieRenderVO(param1:Object)
+        {
             this.sortieID = [Values.DEFAULT_INT,Values.DEFAULT_INT];
             super(param1);
         }
@@ -28,19 +29,23 @@ package net.wg.gui.lobby.fortifications.data.sortie
         
         public var igrType:int = -1;
         
-        public function set rallyIndex(param1:Number) : void {
+        public function set rallyIndex(param1:Number) : void
+        {
             this._rallyIndex = param1;
         }
         
-        public function get peripheryID() : Number {
+        public function get peripheryID() : Number
+        {
             return this.sortieID[1];
         }
         
-        public function get mgrID() : Number {
+        public function get mgrID() : Number
+        {
             return this.sortieID[0];
         }
         
-        public function get rallyIndex() : Number {
+        public function get rallyIndex() : Number
+        {
             return this._rallyIndex;
         }
     }

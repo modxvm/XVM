@@ -20,7 +20,8 @@ package net.wg.gui.lobby.training
     public class TrainingPlayerItemRenderer extends ListItemRenderer implements IDropItem
     {
         
-        public function TrainingPlayerItemRenderer() {
+        public function TrainingPlayerItemRenderer()
+        {
             super();
         }
         
@@ -46,7 +47,8 @@ package net.wg.gui.lobby.training
         
         private var _isMouseOver:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(!constraintsDisabled)
             {
@@ -60,7 +62,8 @@ package net.wg.gui.lobby.training
             addEventListener(MouseEvent.ROLL_OVER,this.showToolTip,false,0,true);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.MOUSE_DOWN,this.hideToolTip,false);
             removeEventListener(MouseEvent.ROLL_OUT,this.hideToolTip,false);
             removeEventListener(MouseEvent.ROLL_OVER,this.showToolTip,false);
@@ -91,7 +94,8 @@ package net.wg.gui.lobby.training
             super.onDispose();
         }
         
-        private function showToolTip(param1:MouseEvent) : void {
+        private function showToolTip(param1:MouseEvent) : void
+        {
             this._isMouseOver = true;
             if(data)
             {
@@ -99,7 +103,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        private function hideToolTip(param1:MouseEvent) : void {
+        private function hideToolTip(param1:MouseEvent) : void
+        {
             if(param1.type == MouseEvent.ROLL_OUT)
             {
                 this._isMouseOver = false;
@@ -107,7 +112,8 @@ package net.wg.gui.lobby.training
             App.toolTipMgr.hide();
         }
         
-        public function speak(param1:Boolean, param2:Boolean) : void {
+        public function speak(param1:Boolean, param2:Boolean) : void
+        {
             if(param1)
             {
                 param2 = false;
@@ -118,14 +124,16 @@ package net.wg.gui.lobby.training
             }
         }
         
-        override public function set selected(param1:Boolean) : void {
+        override public function set selected(param1:Boolean) : void
+        {
             if(_selectable)
             {
                 super.selected = param1;
             }
         }
         
-        override protected function handleMouseRelease(param1:MouseEvent) : void {
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
             if((App.utils.commons.isRightButton(param1)) && (data))
             {
                 App.toolTipMgr.hide();
@@ -134,7 +142,8 @@ package net.wg.gui.lobby.training
             super.handleMouseRelease(param1);
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             var _loc2_:TrainingRoomRendererVO = null;
             this.data = param1;
             if(param1)
@@ -149,7 +158,8 @@ package net.wg.gui.lobby.training
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:TrainingRoomRendererVO = null;
             var _loc2_:Point = null;
             super.draw();
@@ -223,7 +233,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        override public function setListData(param1:ListData) : void {
+        override public function setListData(param1:ListData) : void
+        {
             index = param1.index;
             this.selected = param1.selected;
         }

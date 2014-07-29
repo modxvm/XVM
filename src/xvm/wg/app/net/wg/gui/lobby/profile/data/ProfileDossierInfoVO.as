@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.data
     public class ProfileDossierInfoVO extends ProfileCommonInfoVO
     {
         
-        public function ProfileDossierInfoVO(param1:Object) {
+        public function ProfileDossierInfoVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.lobby.profile.data
         
         public var totalUserVehiclesCount:uint;
         
-        public function getMarksOfMasteryCountStr() : String {
+        public function getMarksOfMasteryCountStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.marksOfMastery);
         }
     }

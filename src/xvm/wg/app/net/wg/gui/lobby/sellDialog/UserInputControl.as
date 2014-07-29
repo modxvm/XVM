@@ -3,7 +3,8 @@ package net.wg.gui.lobby.sellDialog
     public class UserInputControl extends Object
     {
         
-        public function UserInputControl() {
+        public function UserInputControl()
+        {
             super();
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.lobby.sellDialog
         
         private static var SPACE_CODE:uint = 32;
         
-        public function cmpFormatUserInputString(param1:String, param2:String, param3:String, param4:String) : Boolean {
+        public function cmpFormatUserInputString(param1:String, param2:String, param3:String, param4:String) : Boolean
+        {
             var _loc11_:* = 0;
             if(param1 == param4)
             {
@@ -44,8 +46,10 @@ package net.wg.gui.lobby.sellDialog
                 }
             }
             var _loc8_:String = _loc5_.join("");
+            trace("result user input : ",_loc8_);
             var _loc9_:* = false;
-            var _loc10_:* = param3.split("");
+            var _loc10_:Array = param3.split("");
+            trace(">>> last char : ",_loc10_[_loc10_.length - 1].charCodeAt(0));
             if(_loc10_[_loc10_.length - 1].charCodeAt(0) == SPACE_CODE)
             {
                 _loc10_.pop();

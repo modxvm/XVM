@@ -8,15 +8,17 @@ package mx.utils
     public class NameUtil extends Object
     {
         
-        public function NameUtil() {
+        public function NameUtil()
+        {
             super();
         }
         
-        mx_internal  static var VERSION:String = "4.6.0.23201";
+        mx_internal  static var VERSION:String = "4.5.1.21328";
         
         private static var counter:int = 0;
         
-        public static function createUniqueName(param1:Object) : String {
+        public static function createUniqueName(param1:Object) : String
+        {
             if(!param1)
             {
                 return null;
@@ -35,7 +37,8 @@ package mx.utils
             return _loc2_ + counter++;
         }
         
-        public static function displayObjectToString(param1:DisplayObject) : String {
+        public static function displayObjectToString(param1:DisplayObject) : String
+        {
             var _loc2_:String = null;
             var _loc3_:DisplayObject = null;
             var _loc4_:String = null;
@@ -68,7 +71,8 @@ package mx.utils
             return _loc2_;
         }
         
-        public static function getUnqualifiedClassName(param1:Object) : String {
+        public static function getUnqualifiedClassName(param1:Object) : String
+        {
             var _loc2_:String = null;
             if(param1 is String)
             {

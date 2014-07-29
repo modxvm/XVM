@@ -16,7 +16,8 @@ package net.wg.gui.components.tooltips.helpers
     public class Utils extends Object
     {
         
-        public function Utils() {
+        public function Utils()
+        {
             super();
             if(__allowInstantiation)
             {
@@ -27,7 +28,8 @@ package net.wg.gui.components.tooltips.helpers
         
         private static var __allowInstantiation:Boolean = false;
         
-        public static function get instance() : Utils {
+        public static function get instance() : Utils
+        {
             if(!__instance)
             {
                 __allowInstantiation = true;
@@ -77,7 +79,8 @@ package net.wg.gui.components.tooltips.helpers
         
         private var LEFT_TEXTFIELD_MIN_WIDTH:Number = 54;
         
-        public function getIcon(param1:String, param2:String = "", param3:Boolean = false, param4:Boolean = false) : String {
+        public function getIcon(param1:String, param2:String = "", param3:Boolean = false, param4:Boolean = false) : String
+        {
             var _loc5_:String = IconsTypes.EMPTY;
             switch(param1)
             {
@@ -113,7 +116,8 @@ package net.wg.gui.components.tooltips.helpers
             return _loc5_;
         }
         
-        public function htmlWrapper(param1:String, param2:String = "#ffffff", param3:Number = 12, param4:String = "$TextFont", param5:Boolean = false, param6:String = "") : String {
+        public function htmlWrapper(param1:String, param2:String = "#ffffff", param3:Number = 12, param4:String = "$TextFont", param5:Boolean = false, param6:String = "") : String
+        {
             var _loc7_:* = "";
             _loc7_ = _loc7_ + (param4 == ""?"":" face=\"" + param4 + "\"");
             _loc7_ = _loc7_ + (param2 == ""?"":" color=\"" + param2 + "\"");
@@ -126,11 +130,13 @@ package net.wg.gui.components.tooltips.helpers
             return param1 + param6;
         }
         
-        public function convertStringColorToNumber(param1:String) : Number {
+        public function convertStringColorToNumber(param1:String) : Number
+        {
             return Number("0x" + param1.slice(1));
         }
         
-        public function createBlock(param1:ToolTipBlockVO, param2:Number) : ToolTipBlockResultVO {
+        public function createBlock(param1:ToolTipBlockVO, param2:Number) : ToolTipBlockResultVO
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -139,7 +145,8 @@ package net.wg.gui.components.tooltips.helpers
             throw new Error("Not decompiled due to error");
         }
         
-        public function addHeader(param1:String, param2:Number, param3:Number, param4:String) : TextField {
+        public function addHeader(param1:String, param2:Number, param3:Number, param4:String) : TextField
+        {
             var _loc5_:TextField = null;
             var _loc6_:TextFormat = new TextFormat();
             _loc5_ = new TextField();
@@ -158,7 +165,8 @@ package net.wg.gui.components.tooltips.helpers
             return _loc5_;
         }
         
-        public function getStatusColor(param1:String) : ToolTipStatusColorsVO {
+        public function getStatusColor(param1:String) : ToolTipStatusColorsVO
+        {
             var _loc2_:ToolTipStatusColorsVO = new ToolTipStatusColorsVO();
             var _loc3_:uint = 0;
             var _loc4_:Number = 0;
@@ -209,7 +217,8 @@ package net.wg.gui.components.tooltips.helpers
             return _loc2_;
         }
         
-        public function createSeparate(param1:MovieClip) : Separator {
+        public function createSeparate(param1:MovieClip) : Separator
+        {
             var _loc2_:Separator = App.utils.classFactory.getComponent("SeparatorUI",Separator);
             param1.addChild(_loc2_);
             return _loc2_;

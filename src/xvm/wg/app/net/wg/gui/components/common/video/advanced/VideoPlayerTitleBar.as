@@ -6,13 +6,15 @@ package net.wg.gui.components.common.video.advanced
     public class VideoPlayerTitleBar extends UIComponent
     {
         
-        public function VideoPlayerTitleBar() {
+        public function VideoPlayerTitleBar()
+        {
             super();
         }
         
         public var closeBtn:SoundButtonEx;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.closeBtn)
             {

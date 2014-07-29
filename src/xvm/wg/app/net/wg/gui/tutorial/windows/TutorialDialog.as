@@ -11,7 +11,8 @@ package net.wg.gui.tutorial.windows
     public class TutorialDialog extends TutorialDialogMeta implements ITutorialDialogMeta
     {
         
-        public function TutorialDialog() {
+        public function TutorialDialog()
+        {
             super();
         }
         
@@ -25,17 +26,20 @@ package net.wg.gui.tutorial.windows
         
         protected var _data:Object;
         
-        public function as_setContent(param1:Object) : void {
+        public function as_setContent(param1:Object) : void
+        {
             this._data = param1;
             invalidate(InvalidationType.DATA);
         }
         
-        public function as_updateContent(param1:Object) : void {
+        public function as_updateContent(param1:Object) : void
+        {
             this._data = param1;
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.cancelBtn)
             {
@@ -47,7 +51,8 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this._data))
             {
@@ -55,7 +60,8 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this._data = null;
             if(this.cancelBtn)
@@ -80,14 +86,17 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        protected function drawData() : void {
+        protected function drawData() : void
+        {
         }
         
-        protected function onSubmitClick(param1:Event) : void {
+        protected function onSubmitClick(param1:Event) : void
+        {
             submitS();
         }
         
-        protected function onCancelClick(param1:Event) : void {
+        protected function onCancelClick(param1:Event) : void
+        {
             cancelS();
         }
     }

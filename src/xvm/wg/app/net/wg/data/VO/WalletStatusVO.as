@@ -5,7 +5,8 @@ package net.wg.data.VO
     public class WalletStatusVO extends Object implements IWalletStatusVO
     {
         
-        public function WalletStatusVO() {
+        public function WalletStatusVO()
+        {
             super();
         }
         
@@ -13,26 +14,32 @@ package net.wg.data.VO
         
         private var _freeXpStatus:uint;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
         }
         
-        public function set goldStatus(param1:uint) : void {
+        public function set goldStatus(param1:uint) : void
+        {
             this._goldStatus = param1;
         }
         
-        public function get goldStatus() : uint {
+        public function get goldStatus() : uint
+        {
             return this._goldStatus;
         }
         
-        public function set freeXpStatus(param1:uint) : void {
+        public function set freeXpStatus(param1:uint) : void
+        {
             this._freeXpStatus = param1;
         }
         
-        public function get freeXpStatus() : uint {
+        public function get freeXpStatus() : uint
+        {
             return this._freeXpStatus;
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             if(param1 != null)
             {
                 if(param1.hasOwnProperty("gold"))

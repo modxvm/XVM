@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.summary
     public class SummaryInitVO extends DAAPIDataClass
     {
         
-        public function SummaryInitVO(param1:Object) {
+        public function SummaryInitVO(param1:Object)
+        {
             super(param1);
         }
         

@@ -17,7 +17,8 @@ package net.wg.gui.lobby.store.shop
     public class ShopModuleListItemRenderer extends ShopTableItemRenderer
     {
         
-        public function ShopModuleListItemRenderer() {
+        public function ShopModuleListItemRenderer()
+        {
             super();
             this.showHideAction();
         }
@@ -34,24 +35,28 @@ package net.wg.gui.lobby.store.shop
         
         public var count:TextField = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.actionPriceLeft.dispose();
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints.addElement(this.moduleIcon.name,this.moduleIcon,Constraints.LEFT);
             constraints.addElement(this.count.name,this.count,Constraints.RIGHT);
             this.orTextField.text = MENU.SHOP_TABLE_BUYACTIONOR;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.actionPriceLeft.setup(this);
         }
         
-        override protected function update() : void {
+        override protected function update() : void
+        {
             var _loc1_:StoreTableData = null;
             super.update();
             if(data)
@@ -67,7 +72,8 @@ package net.wg.gui.lobby.store.shop
             }
         }
         
-        override protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:StoreTableData) : void {
+        override protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:StoreTableData) : void
+        {
             var _loc4_:ILocale = null;
             var _loc5_:ActionPriceVO = null;
             if(App.instance)
@@ -99,7 +105,8 @@ package net.wg.gui.lobby.store.shop
             }
         }
         
-        private function showHideAction(param1:StoreTableData = null) : void {
+        private function showHideAction(param1:StoreTableData = null) : void
+        {
             var _loc2_:ActionPriceVO = null;
             this.orTextField.visible = isUseGoldAndCredits;
             if(param1)
@@ -115,7 +122,8 @@ package net.wg.gui.lobby.store.shop
             this.actionCredits.visible = (isUseGoldAndCredits) && !this.actionPriceLeft.visible;
         }
         
-        private function updateModuleIcon(param1:StoreTableData) : void {
+        private function updateModuleIcon(param1:StoreTableData) : void
+        {
             var _loc2_:IAssertable = null;
             var _loc3_:Array = null;
             var _loc4_:DisplayObject = null;

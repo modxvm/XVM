@@ -5,15 +5,18 @@ package net.wg.gui.lobby.profile.components
     public class TestTrack extends Button
     {
         
-        public function TestTrack() {
+        public function TestTrack()
+        {
             super();
         }
         
-        override public function set visible(param1:Boolean) : void {
+        override public function set visible(param1:Boolean) : void
+        {
             super.visible = param1;
         }
         
-        override public function get visible() : Boolean {
+        override public function get visible() : Boolean
+        {
             return super.visible;
         }
     }

@@ -3,8 +3,8 @@ package com.adobe.serialization.json
     public class JSONTokenizer extends Object
     {
         
-        public function JSONTokenizer(param1:String, param2:Boolean) {
-            this.controlCharsRegExp = new RegExp("[\\x00-\\x1F]");
+        public function JSONTokenizer(param1:String, param2:Boolean)
+        {
             super();
             this.jsonString = param1;
             this.strict = param2;
@@ -22,9 +22,10 @@ package com.adobe.serialization.json
         
         private var ch:String;
         
-        private var controlCharsRegExp:RegExp;
+        private var controlCharsRegExp:RegExp = new RegExp("[\\x00-\\x1F]");
         
-        public function getNextToken() : JSONToken {
+        public function getNextToken() : JSONToken
+        {
             var _loc2_:String = null;
             var _loc3_:String = null;
             var _loc4_:String = null;
@@ -126,7 +127,8 @@ package com.adobe.serialization.json
             return _loc1_;
         }
         
-        private final function readString() : JSONToken {
+        private final function readString() : JSONToken
+        {
             var _loc3_:* = 0;
             var _loc4_:* = 0;
             var _loc1_:int = this.loc;
@@ -159,7 +161,8 @@ package com.adobe.serialization.json
             return _loc2_;
         }
         
-        public function unescapeString(param1:String) : String {
+        public function unescapeString(param1:String) : String
+        {
             var _loc4_:* = 0;
             var _loc6_:String = null;
             var _loc7_:String = null;
@@ -244,7 +247,8 @@ package com.adobe.serialization.json
             return _loc2_;
         }
         
-        private final function readNumber() : JSONToken {
+        private final function readNumber() : JSONToken
+        {
             var _loc1_:* = "";
             if(this.ch == "-")
             {
@@ -334,11 +338,13 @@ package com.adobe.serialization.json
             return null;
         }
         
-        private final function nextChar() : String {
+        private final function nextChar() : String
+        {
             return this.ch = this.jsonString.charAt(this.loc++);
         }
         
-        private final function skipIgnored() : void {
+        private final function skipIgnored() : void
+        {
             var _loc1_:* = 0;
             do
             {
@@ -350,7 +356,8 @@ package com.adobe.serialization.json
             
         }
         
-        private function skipComments() : void {
+        private function skipComments() : void
+        {
             if(this.ch == "/")
             {
                 this.nextChar();
@@ -394,14 +401,16 @@ package com.adobe.serialization.json
             }
         }
         
-        private final function skipWhite() : void {
+        private final function skipWhite() : void
+        {
             while(this.isWhiteSpace(this.ch))
             {
                 this.nextChar();
             }
         }
         
-        private final function isWhiteSpace(param1:String) : Boolean {
+        private final function isWhiteSpace(param1:String) : Boolean
+        {
             if(param1 == " " || param1 == "\t" || param1 == "\n" || param1 == "\r")
             {
                 return true;
@@ -413,15 +422,18 @@ package com.adobe.serialization.json
             return false;
         }
         
-        private final function isDigit(param1:String) : Boolean {
+        private final function isDigit(param1:String) : Boolean
+        {
             return param1 >= "0" && param1 <= "9";
         }
         
-        private final function isHexDigit(param1:String) : Boolean {
+        private final function isHexDigit(param1:String) : Boolean
+        {
             return (this.isDigit(param1)) || param1 >= "A" && param1 <= "F" || param1 >= "a" && param1 <= "f";
         }
         
-        public final function parseError(param1:String) : void {
+        public final function parseError(param1:String) : void
+        {
             throw new JSONParseError(param1,this.loc,this.jsonString);
         }
     }

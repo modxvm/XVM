@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class HangarMeta extends AbstractView
     {
         
-        public function HangarMeta() {
+        public function HangarMeta()
+        {
             super();
         }
         
@@ -20,27 +21,32 @@ package net.wg.infrastructure.base.meta.impl
         
         public var toggleGUIEditor:Function = null;
         
-        public function onEscapeS() : void {
+        public function onEscapeS() : void
+        {
             App.utils.asserter.assertNotNull(this.onEscape,"onEscape" + Errors.CANT_NULL);
             this.onEscape();
         }
         
-        public function checkMoneyS() : void {
+        public function checkMoneyS() : void
+        {
             App.utils.asserter.assertNotNull(this.checkMoney,"checkMoney" + Errors.CANT_NULL);
             this.checkMoney();
         }
         
-        public function showHelpLayoutS() : void {
+        public function showHelpLayoutS() : void
+        {
             App.utils.asserter.assertNotNull(this.showHelpLayout,"showHelpLayout" + Errors.CANT_NULL);
             this.showHelpLayout();
         }
         
-        public function closeHelpLayoutS() : void {
+        public function closeHelpLayoutS() : void
+        {
             App.utils.asserter.assertNotNull(this.closeHelpLayout,"closeHelpLayout" + Errors.CANT_NULL);
             this.closeHelpLayout();
         }
         
-        public function toggleGUIEditorS() : void {
+        public function toggleGUIEditorS() : void
+        {
             App.utils.asserter.assertNotNull(this.toggleGUIEditor,"toggleGUIEditor" + Errors.CANT_NULL);
             this.toggleGUIEditor();
         }

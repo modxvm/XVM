@@ -10,7 +10,8 @@ package net.wg.gui.components.tooltips
     public class ExtraModuleInfo extends SimpleLoader
     {
         
-        public function ExtraModuleInfo(param1:TextFormat, param2:StyleSheet = null) {
+        public function ExtraModuleInfo(param1:TextFormat, param2:StyleSheet = null)
+        {
             super();
             this._textField = new TextField();
             this._textField.autoSize = TextFieldAutoSize.LEFT;
@@ -24,13 +25,15 @@ package net.wg.gui.components.tooltips
         
         private var _textField:TextField;
         
-        public function setData(param1:String, param2:String) : void {
+        public function setData(param1:String, param2:String) : void
+        {
             disposeLoader();
             this._textField.htmlText = param2;
             this.startLoading(param1);
         }
         
-        override protected function startLoading(param1:String) : void {
+        override protected function startLoading(param1:String) : void
+        {
             super.startLoading(param1);
             if(loader)
             {
@@ -38,17 +41,17 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        override protected function onLoadingComplete() : void {
+        override protected function onLoadingComplete() : void
+        {
             super.onLoadingComplete();
             this.layoutComponents();
         }
         
-        private function layoutComponents() : void {
-            var _loc1_:uint = 0;
-            var _loc2_:uint = 0;
+        private function layoutComponents() : void
+        {
             var _loc4_:DisplayObject = null;
-            _loc1_ = 0;
-            _loc2_ = 5;
+            var _loc1_:uint = 0;
+            var _loc2_:uint = 5;
             var _loc3_:* = 0;
             while(_loc3_ < numChildren)
             {

@@ -15,7 +15,8 @@ package net.wg.gui.lobby.sellDialog
     public class SellDialogListItemRenderer extends ListItemRenderer
     {
         
-        public function SellDialogListItemRenderer() {
+        public function SellDialogListItemRenderer()
+        {
             this.elements = new Vector.<SellDialogElement>();
             this.renderers = new Vector.<ISaleItemBlockRenderer>();
             super();
@@ -39,7 +40,8 @@ package net.wg.gui.lobby.sellDialog
         
         public var scrollingRenderrBg:MovieClip;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.elements.splice(0,this.elements.length);
             var _loc1_:int = this.renderers.length;
@@ -52,7 +54,8 @@ package net.wg.gui.lobby.sellDialog
             this.renderers.splice(0,_loc1_);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.buttonMode = false;
             this.clickArea.buttonMode = false;
             this.mouseChildren = true;
@@ -67,7 +70,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1)
             {
                 this.header.text = SellDialogItem(param1).header;
@@ -77,7 +81,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        private function createItemRenderers(param1:Number) : Vector.<ISaleItemBlockRenderer> {
+        private function createItemRenderers(param1:Number) : Vector.<ISaleItemBlockRenderer>
+        {
             var _loc2_:Array = [];
             var _loc3_:Number = 0;
             while(_loc3_ < param1)
@@ -92,17 +97,20 @@ package net.wg.gui.lobby.sellDialog
             return Vector.<ISaleItemBlockRenderer>(_loc2_);
         }
         
-        private function createItemRenderer(param1:Number) : ISaleItemBlockRenderer {
+        private function createItemRenderer(param1:Number) : ISaleItemBlockRenderer
+        {
             var _loc2_:ISaleItemBlockRenderer = App.utils.classFactory.getComponent(Linkages.SALE_ITEM_BLOCK_RENDERER,ISaleItemBlockRenderer);
             this.container.addChild(DisplayObject(_loc2_));
             return _loc2_;
         }
         
-        public function getRenderers() : Vector.<ISaleItemBlockRenderer> {
+        public function getRenderers() : Vector.<ISaleItemBlockRenderer>
+        {
             return this.renderers;
         }
         
-        private function drawLayout() : void {
+        private function drawLayout() : void
+        {
             var _loc1_:Number = 41;
             var _loc2_:Number = 27;
             var _loc3_:Number = _loc1_;
@@ -122,7 +130,8 @@ package net.wg.gui.lobby.sellDialog
             this.height = this.clickArea.height = _loc3_;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if((isInvalid(InvalidationType.DATA)) && (data))
             {
                 this.renderers = this.createItemRenderers(this.elements.length);
@@ -130,7 +139,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        override public function setSize(param1:Number, param2:Number) : void {
+        override public function setSize(param1:Number, param2:Number) : void
+        {
             this.scrollingRenderrBg.width = param1;
             var _loc3_:uint = 0;
             while(_loc3_ < this.renderers.length)

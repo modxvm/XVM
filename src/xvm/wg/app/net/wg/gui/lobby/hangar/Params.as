@@ -13,7 +13,8 @@ package net.wg.gui.lobby.hangar
     public class Params extends ParamsMeta implements IParamsMeta, IHelpLayoutComponent
     {
         
-        public function Params() {
+        public function Params()
+        {
             super();
             this.paramsListeners = new ParamsListener();
         }
@@ -24,14 +25,16 @@ package net.wg.gui.lobby.hangar
         
         private var _helpLayout:DisplayObject;
         
-        public function as_setValues(param1:Array) : void {
+        public function as_setValues(param1:Array) : void
+        {
             var _loc2_:Number = 28;
             this.list.height = _loc2_ * param1.length;
             this.list.visible = Boolean(param1.length);
             this.list.dataProvider = this.setupDataProvider(param1);
         }
         
-        public function as_highlightParams(param1:String) : void {
+        public function as_highlightParams(param1:String) : void
+        {
             var _loc4_:ParamsVO = null;
             var _loc2_:IDataProvider = this.list.dataProvider;
             var _loc3_:uint = _loc2_.length;
@@ -42,24 +45,28 @@ package net.wg.gui.lobby.hangar
             this.list.invalidateData();
         }
         
-        public function showHelpLayout() : void {
+        public function showHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             var _loc2_:Object = _loc1_.getProps(_width,_height,Directions.LEFT,LOBBY_HELP.HANGAR_VEHICLE_PARAMETERS,0,0);
             this._helpLayout = _loc1_.create(root,_loc2_,this);
         }
         
-        public function closeHelpLayout() : void {
+        public function closeHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             _loc1_.destroy(this._helpLayout);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             mouseChildren = false;
             mouseEnabled = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.list.dispose();
             this.list = null;
             this.paramsListeners.dispose();
@@ -72,7 +79,8 @@ package net.wg.gui.lobby.hangar
             super.onDispose();
         }
         
-        private function setupDataProvider(param1:Array) : IDataProvider {
+        private function setupDataProvider(param1:Array) : IDataProvider
+        {
             var _loc3_:Object = null;
             var _loc2_:DataProvider = new DataProvider();
             for each(_loc3_ in param1)

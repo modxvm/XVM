@@ -9,7 +9,8 @@ package net.wg.gui.lobby.techtree.nodes
     public class FakeNode extends Renderer
     {
         
-        public function FakeNode() {
+        public function FakeNode()
+        {
             super();
         }
         
@@ -19,28 +20,34 @@ package net.wg.gui.lobby.techtree.nodes
         
         private var lastPrimary:Number = NaN;
         
-        override public function setup(param1:uint, param2:NodeData, param3:uint = 0, param4:MatrixPosition = null) : void {
+        override public function setup(param1:uint, param2:NodeData, param3:uint = 0, param4:MatrixPosition = null) : void
+        {
             this.lastPrimary = NaN;
             super.setup(param1,param2,param3,param4);
         }
         
-        override public function isFake() : Boolean {
+        override public function isFake() : Boolean
+        {
             return true;
         }
         
-        override public function isUnlocked() : Boolean {
+        override public function isUnlocked() : Boolean
+        {
             return this.hasUnlockedParent();
         }
         
-        override public function getInX() : Number {
+        override public function getInX() : Number
+        {
             return x + Math.round(_width);
         }
         
-        override public function getOutX() : Number {
+        override public function getOutX() : Number
+        {
             return x + Math.round(_width);
         }
         
-        override public function getColorIdx(param1:Number = -1) : Number {
+        override public function getColorIdx(param1:Number = -1) : Number
+        {
             var _loc2_:Number = ColorIndex.LOCKED;
             if(this.hasUnlockedChild())
             {
@@ -60,7 +67,8 @@ package net.wg.gui.lobby.techtree.nodes
             return _loc2_;
         }
         
-        override public function getColorIdxEx(param1:IRenderer) : Number {
+        override public function getColorIdxEx(param1:IRenderer) : Number
+        {
             var _loc2_:Number = ColorIndex.LOCKED;
             if(this.hasUnlockedChild())
             {
@@ -80,7 +88,8 @@ package net.wg.gui.lobby.techtree.nodes
             return _loc2_;
         }
         
-        override public function invalidateNodeState(param1:Number) : void {
+        override public function invalidateNodeState(param1:Number) : void
+        {
             if(param1 > -1 && !(this.lastPrimary == param1))
             {
                 this.lastPrimary = param1;
@@ -88,14 +97,16 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        override public function cleanUp() : void {
+        override public function cleanUp() : void
+        {
             this.clearChildren();
             this.clearParents();
             this.lastPrimary = NaN;
             super.cleanUp();
         }
         
-        public function setChildren(param1:Vector.<IRenderer>) : void {
+        public function setChildren(param1:Vector.<IRenderer>) : void
+        {
             this.clearChildren();
             this.children = param1;
             var _loc2_:Number = this.children.length;
@@ -107,7 +118,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        public function setParents(param1:Vector.<IRenderer>) : void {
+        public function setParents(param1:Vector.<IRenderer>) : void
+        {
             this.clearParents();
             this.parents = param1;
             var _loc2_:Number = this.parents.length;
@@ -119,17 +131,20 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[FakeNode " + index + ", " + name + "]";
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             super.preInitialize();
             this.parents = new Vector.<IRenderer>();
             this.children = new Vector.<IRenderer>();
         }
         
-        private function clearParents() : void {
+        private function clearParents() : void
+        {
             var _loc1_:IRenderer = null;
             while(this.parents.length > 0)
             {
@@ -141,7 +156,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        private function clearChildren() : void {
+        private function clearChildren() : void
+        {
             var _loc1_:IRenderer = null;
             while(this.children.length > 0)
             {
@@ -153,7 +169,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        private function hasUnlockedParent() : Boolean {
+        private function hasUnlockedParent() : Boolean
+        {
             var _loc1_:IRenderer = null;
             var _loc2_:Number = this.parents.length;
             var _loc3_:Number = 0;
@@ -169,7 +186,8 @@ package net.wg.gui.lobby.techtree.nodes
             return false;
         }
         
-        private function hasUnlockedChild() : Boolean {
+        private function hasUnlockedChild() : Boolean
+        {
             var _loc1_:IRenderer = null;
             var _loc2_:Number = this.children.length;
             var _loc3_:Number = 0;
@@ -193,7 +211,8 @@ package net.wg.gui.lobby.techtree.nodes
             return false;
         }
         
-        private function hasNext2UnlockChild() : Boolean {
+        private function hasNext2UnlockChild() : Boolean
+        {
             var _loc1_:IRenderer = null;
             var _loc2_:Number = this.children.length;
             var _loc3_:Number = 0;
@@ -217,11 +236,13 @@ package net.wg.gui.lobby.techtree.nodes
             return false;
         }
         
-        private function handleParentStateChanged(param1:TechTreeEvent) : void {
+        private function handleParentStateChanged(param1:TechTreeEvent) : void
+        {
             this.invalidateNodeState(param1.primary);
         }
         
-        private function handleChildStateChanged(param1:TechTreeEvent) : void {
+        private function handleChildStateChanged(param1:TechTreeEvent) : void
+        {
             this.invalidateNodeState(param1.primary);
         }
     }

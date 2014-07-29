@@ -7,7 +7,8 @@ package net.wg.gui.lobby.store.views.base
     public class SimpleStoreMenuView extends FitsSelectableStoreMenuView
     {
         
-        public function SimpleStoreMenuView() {
+        public function SimpleStoreMenuView()
+        {
             super();
         }
         
@@ -19,15 +20,18 @@ package net.wg.gui.lobby.store.views.base
         
         public var vehChBxHeader:TextField;
         
-        override protected function onTagsArrayRequest() : Array {
+        override protected function onTagsArrayRequest() : Array
+        {
             return [new ViewUIElementVO("onVehicle",this.onVehicleChkBx)];
         }
         
-        override protected function onFitsArrayRequest() : Array {
+        override protected function onFitsArrayRequest() : Array
+        {
             return [new ViewUIElementVO("myVehicle",myVehicleRadioBtn),new ViewUIElementVO("myVehicles",this.myVehiclesRadioBtn),new ViewUIElementVO("otherVehicles",this.otherVehiclesRadioBtn)];
         }
         
-        override protected function getTagsName() : String {
+        override protected function getTagsName() : String
+        {
             return "extra";
         }
     }

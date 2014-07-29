@@ -5,7 +5,8 @@ package net.wg.gui.components.popOvers
     public class PopoverContentPadding extends Padding
     {
         
-        public function PopoverContentPadding() {
+        public function PopoverContentPadding()
+        {
             super();
         }
         

@@ -11,14 +11,16 @@ package net.wg.gui.lobby.training
     public class TrainingDragController extends DropListDelegateCtrlr
     {
         
-        public function TrainingDragController(param1:Vector.<InteractiveObject>, param2:Class, param3:String, param4:Function) {
+        public function TrainingDragController(param1:Vector.<InteractiveObject>, param2:Class, param3:String, param4:Function)
+        {
             this._isSlotDroppable = param4;
             super(param1,param2,param3);
         }
         
         private var _isSlotDroppable:Function = null;
         
-        override protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void {
+        override protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void
+        {
             var _loc3_:Vector.<IDropListDelegate> = null;
             var _loc4_:TrainingRoomRendererVO = null;
             var _loc5_:* = 0;
@@ -54,7 +56,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._isSlotDroppable = null;
             super.onDispose();
         }

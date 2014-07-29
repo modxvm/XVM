@@ -5,25 +5,30 @@ package net.wg.infrastructure.base
     public class BaseLayout extends Object implements IBaseLayout
     {
         
-        public function BaseLayout() {
+        public function BaseLayout()
+        {
             super();
         }
         
         private var _target:Object;
         
-        public function set target(param1:Object) : void {
+        public function set target(param1:Object) : void
+        {
             this._target = param1;
         }
         
-        public function get target() : Object {
+        public function get target() : Object
+        {
             return this._target;
         }
         
-        public function invokeLayout() : Object {
+        public function invokeLayout() : Object
+        {
             return null;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._target = null;
         }
     }

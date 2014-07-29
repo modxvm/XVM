@@ -5,7 +5,8 @@ package net.wg.gui.lobby.header
     public class ServerVO extends DAAPIDataClass
     {
         
-        public function ServerVO(param1:Object) {
+        public function ServerVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,27 +16,33 @@ package net.wg.gui.lobby.header
         
         private var _selected:Boolean = false;
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this._label = param1;
         }
         
-        public function get id() : int {
+        public function get id() : int
+        {
             return this._id;
         }
         
-        public function set id(param1:int) : void {
+        public function set id(param1:int) : void
+        {
             this._id = param1;
         }
         
-        public function get selected() : Boolean {
+        public function get selected() : Boolean
+        {
             return this._selected;
         }
         
-        public function set selected(param1:Boolean) : void {
+        public function set selected(param1:Boolean) : void
+        {
             this._selected = param1;
         }
     }

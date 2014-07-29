@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class SettingsWindowMeta extends AbstractWindowView
     {
         
-        public function SettingsWindowMeta() {
+        public function SettingsWindowMeta()
+        {
             super();
         }
         
@@ -28,47 +29,56 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onTabSelected:Function = null;
         
-        public function applySettingsS(param1:Object, param2:Boolean) : void {
+        public function applySettingsS(param1:Object, param2:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.applySettings,"applySettings" + Errors.CANT_NULL);
             this.applySettings(param1,param2);
         }
         
-        public function autodetectQualityS() : Number {
+        public function autodetectQualityS() : Number
+        {
             App.utils.asserter.assertNotNull(this.autodetectQuality,"autodetectQuality" + Errors.CANT_NULL);
             return this.autodetectQuality();
         }
         
-        public function startVOIPTestS(param1:Boolean) : Boolean {
+        public function startVOIPTestS(param1:Boolean) : Boolean
+        {
             App.utils.asserter.assertNotNull(this.startVOIPTest,"startVOIPTest" + Errors.CANT_NULL);
             return this.startVOIPTest(param1);
         }
         
-        public function updateCaptureDevicesS() : void {
+        public function updateCaptureDevicesS() : void
+        {
             App.utils.asserter.assertNotNull(this.updateCaptureDevices,"updateCaptureDevices" + Errors.CANT_NULL);
             this.updateCaptureDevices();
         }
         
-        public function onSettingsChangeS(param1:String, param2:Object) : void {
+        public function onSettingsChangeS(param1:String, param2:Object) : void
+        {
             App.utils.asserter.assertNotNull(this.onSettingsChange,"onSettingsChange" + Errors.CANT_NULL);
             this.onSettingsChange(param1,param2);
         }
         
-        public function altVoicesPreviewS() : void {
+        public function altVoicesPreviewS() : void
+        {
             App.utils.asserter.assertNotNull(this.altVoicesPreview,"altVoicesPreview" + Errors.CANT_NULL);
             this.altVoicesPreview();
         }
         
-        public function isSoundModeValidS() : Boolean {
+        public function isSoundModeValidS() : Boolean
+        {
             App.utils.asserter.assertNotNull(this.isSoundModeValid,"isSoundModeValid" + Errors.CANT_NULL);
             return this.isSoundModeValid();
         }
         
-        public function showWarningDialogS(param1:String, param2:Object, param3:Boolean) : void {
+        public function showWarningDialogS(param1:String, param2:Object, param3:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.showWarningDialog,"showWarningDialog" + Errors.CANT_NULL);
             this.showWarningDialog(param1,param2,param3);
         }
         
-        public function onTabSelectedS(param1:String) : void {
+        public function onTabSelectedS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.onTabSelected,"onTabSelected" + Errors.CANT_NULL);
             this.onTabSelected(param1);
         }

@@ -3,7 +3,8 @@ package net.wg.gui.lobby.battleloading.constants
     public class PlayerStatus extends Object
     {
         
-        public function PlayerStatus() {
+        public function PlayerStatus()
+        {
             super();
         }
         

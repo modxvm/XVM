@@ -5,7 +5,8 @@ package net.wg.gui.components.common.containers
     public class GroupLayout extends Object implements IBaseLayout
     {
         
-        public function GroupLayout() {
+        public function GroupLayout()
+        {
             super();
         }
         
@@ -13,27 +14,33 @@ package net.wg.gui.components.common.containers
         
         private var _gap:int = 0;
         
-        public function set target(param1:Object) : void {
+        public function set target(param1:Object) : void
+        {
             this._target = Group(param1);
         }
         
-        public function invokeLayout() : Object {
+        public function invokeLayout() : Object
+        {
             return null;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._target = null;
         }
         
-        public function get target() : Object {
+        public function get target() : Object
+        {
             return this._target;
         }
         
-        public function get gap() : int {
+        public function get gap() : int
+        {
             return this._gap;
         }
         
-        public function set gap(param1:int) : void {
+        public function set gap(param1:int) : void
+        {
             this._gap = param1;
         }
     }

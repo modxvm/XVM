@@ -12,14 +12,16 @@ package net.wg.gui.lobby.techtree
     public class MenuHandler extends Object
     {
         
-        public function MenuHandler() {
+        public function MenuHandler()
+        {
             super();
             this.currentMenu = null;
         }
         
         private static var instance:MenuHandler;
         
-        public static function getInstance() : MenuHandler {
+        public static function getInstance() : MenuHandler
+        {
             if(instance == null)
             {
                 instance = new MenuHandler();
@@ -29,7 +31,8 @@ package net.wg.gui.lobby.techtree
         
         private var currentMenu:ContextMenu;
         
-        public function hideMenu() : void {
+        public function hideMenu() : void
+        {
             if(this.currentMenu)
             {
                 this.currentMenu.removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.handleMenuReleaseOutside);
@@ -43,7 +46,8 @@ package net.wg.gui.lobby.techtree
             this.currentMenu = null;
         }
         
-        public function showNationTreeMenu(param1:Renderer) : void {
+        public function showNationTreeMenu(param1:Renderer) : void
+        {
             var _loc2_:Vector.<IContextItem> = Vector.<IContextItem>([new ContextItem(ActionName.VEHICLE_INFO,MENU.CONTEXTMENU_VEHICLEINFOEX),new ContextItem(ActionName.SHOW_VEHICLE_STATS,MENU.CONTEXTMENU_SHOWVEHICLESTATISTICS,{"enabled":param1.isWasInBattle()}),new SeparateItem(),new ContextItem(ActionName.UNLOCK,MENU.CONTEXTMENU_UNLOCK,{"enabled":!param1.isPremium() && param1.isAvailable4Unlock()}),new ContextItem(ActionName.BUY,MENU.CONTEXTMENU_BUY,{"enabled":param1.isAvailable4Buy()}),new ContextItem(ActionName.SELL,MENU.CONTEXTMENU_SELL,{"enabled":param1.isAvailable4Sell()}),new SeparateItem(),new ContextItem(ActionName.SELECT_VEHICLE,MENU.CONTEXTMENU_SELECTVEHICLEINHANGAR,{"enabled":param1.inInventory() && param1.isVehicleCanBeChanged()})]);
             var _loc3_:ContextMenu = this.showMenu(param1,_loc2_);
             if(_loc3_ != null)
@@ -54,11 +58,13 @@ package net.wg.gui.lobby.techtree
             }
         }
         
-        public function showResearchRootMenu(param1:Renderer) : void {
+        public function showResearchRootMenu(param1:Renderer) : void
+        {
             this.showNationTreeMenu(param1);
         }
         
-        public function showResearchItemMenu(param1:ResearchItem) : void {
+        public function showResearchItemMenu(param1:ResearchItem) : void
+        {
             var _loc2_:Vector.<IContextItem> = Vector.<IContextItem>([new ContextItem(ActionName.MODULE_INFO,MENU.CONTEXTMENU_MODULEINFO),new SeparateItem(),new ContextItem(ActionName.UNLOCK,MENU.CONTEXTMENU_UNLOCK,{"enabled":param1.isAvailable4Unlock()})]);
             if(param1.isUnlocked())
             {
@@ -84,16 +90,19 @@ package net.wg.gui.lobby.techtree
             }
         }
         
-        private function showMenu(param1:Renderer, param2:Vector.<IContextItem>) : ContextMenu {
+        private function showMenu(param1:Renderer, param2:Vector.<IContextItem>) : ContextMenu
+        {
             this.hideMenu();
             return App.contextMenuMgr != null?ContextMenu(App.contextMenuMgr.show(param2,param1)):null;
         }
         
-        private function handleMenuReleaseOutside(param1:ContextMenuEvent) : void {
+        private function handleMenuReleaseOutside(param1:ContextMenuEvent) : void
+        {
             this.hideMenu();
         }
         
-        private function handleVehicleMenuAction(param1:ContextMenuEvent) : void {
+        private function handleVehicleMenuAction(param1:ContextMenuEvent) : void
+        {
             var _loc2_:String = param1.id;
             var _loc3_:Renderer = param1.memberItemData as Renderer;
             if(_loc3_ != null)
@@ -123,7 +132,8 @@ package net.wg.gui.lobby.techtree
             this.hideMenu();
         }
         
-        private function handleItemMenuAction(param1:ContextMenuEvent) : void {
+        private function handleItemMenuAction(param1:ContextMenuEvent) : void
+        {
             var _loc2_:String = param1.id;
             var _loc3_:ResearchItem = param1.memberItemData as ResearchItem;
             if(_loc3_ != null)

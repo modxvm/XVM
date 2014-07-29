@@ -21,7 +21,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ApplicationMeta extends MovieClip
     {
         
-        public function ApplicationMeta() {
+        public function ApplicationMeta()
+        {
             super();
         }
         
@@ -59,87 +60,104 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onAsInitializationCompleted:Function = null;
         
-        public function setLoaderMgrS(param1:ILoaderManagerMeta) : void {
+        public function setLoaderMgrS(param1:ILoaderManagerMeta) : void
+        {
             App.utils.asserter.assertNotNull(this.setLoaderMgr,"setLoaderMgr" + Errors.CANT_NULL);
             this.setLoaderMgr(param1);
         }
         
-        public function setGlobalVarsMgrS(param1:IGlobalVarsMgrMeta) : void {
+        public function setGlobalVarsMgrS(param1:IGlobalVarsMgrMeta) : void
+        {
             App.utils.asserter.assertNotNull(this.setGlobalVarsMgr,"setGlobalVarsMgr" + Errors.CANT_NULL);
             this.setGlobalVarsMgr(param1);
         }
         
-        public function setSoundMgrS(param1:ISoundManager) : void {
+        public function setSoundMgrS(param1:ISoundManager) : void
+        {
             App.utils.asserter.assertNotNull(this.setSoundMgr,"setSoundMgr" + Errors.CANT_NULL);
             this.setSoundMgr(param1);
         }
         
-        public function setContainerMgrS(param1:IContainerManager) : void {
+        public function setContainerMgrS(param1:IContainerManager) : void
+        {
             App.utils.asserter.assertNotNull(this.setContainerMgr,"setContainerMgr" + Errors.CANT_NULL);
             this.setContainerMgr(param1);
         }
         
-        public function setContextMenuMgrS(param1:IContextMenuManager) : void {
+        public function setContextMenuMgrS(param1:IContextMenuManager) : void
+        {
             App.utils.asserter.assertNotNull(this.setContextMenuMgr,"setContextMenuMgr" + Errors.CANT_NULL);
             this.setContextMenuMgr(param1);
         }
         
-        public function setPopoverMgrS(param1:IPopoverManager) : void {
+        public function setPopoverMgrS(param1:IPopoverManager) : void
+        {
             App.utils.asserter.assertNotNull(this.setPopoverMgr,"setPopoverMgr" + Errors.CANT_NULL);
             this.setPopoverMgr(param1);
         }
         
-        public function setColorSchemeMgrS(param1:IColorSchemeManager) : void {
+        public function setColorSchemeMgrS(param1:IColorSchemeManager) : void
+        {
             App.utils.asserter.assertNotNull(this.setColorSchemeMgr,"setColorSchemeMgr" + Errors.CANT_NULL);
             this.setColorSchemeMgr(param1);
         }
         
-        public function setEventLogMgrS(param1:IEventLogManager) : void {
+        public function setEventLogMgrS(param1:IEventLogManager) : void
+        {
             App.utils.asserter.assertNotNull(this.setEventLogMgr,"setEventLogMgr" + Errors.CANT_NULL);
             this.setEventLogMgr(param1);
         }
         
-        public function setTooltipMgrS(param1:ITooltipMgr) : void {
+        public function setTooltipMgrS(param1:ITooltipMgr) : void
+        {
             App.utils.asserter.assertNotNull(this.setTooltipMgr,"setTooltipMgr" + Errors.CANT_NULL);
             this.setTooltipMgr(param1);
         }
         
-        public function setStatsStorageS(param1:IStatsStorageMeta) : void {
+        public function setStatsStorageS(param1:IStatsStorageMeta) : void
+        {
             App.utils.asserter.assertNotNull(this.setStatsStorage,"setStatsStorage" + Errors.CANT_NULL);
             this.setStatsStorage(param1);
         }
         
-        public function setGuiItemsMgrS(param1:IGuiItemsManagerMeta) : void {
+        public function setGuiItemsMgrS(param1:IGuiItemsManagerMeta) : void
+        {
             App.utils.asserter.assertNotNull(this.setGuiItemsMgr,"setGuiItemsMgr" + Errors.CANT_NULL);
             this.setGuiItemsMgr(param1);
         }
         
-        public function setVoiceChatMgrS(param1:IVoiceChatManager) : void {
+        public function setVoiceChatMgrS(param1:IVoiceChatManager) : void
+        {
             App.utils.asserter.assertNotNull(this.setVoiceChatMgr,"setVoiceChatMgr" + Errors.CANT_NULL);
             this.setVoiceChatMgr(param1);
         }
         
-        public function setUtilsMgrS(param1:IUtilsManagerMeta) : void {
+        public function setUtilsMgrS(param1:IUtilsManagerMeta) : void
+        {
             App.utils.asserter.assertNotNull(this.setUtilsMgr,"setUtilsMgr" + Errors.CANT_NULL);
             this.setUtilsMgr(param1);
         }
         
-        public function setTweenMgrS(param1:ITweenManager) : void {
+        public function setTweenMgrS(param1:ITweenManager) : void
+        {
             App.utils.asserter.assertNotNull(this.setTweenMgr,"setTweenMgr" + Errors.CANT_NULL);
             this.setTweenMgr(param1);
         }
         
-        public function setGameInputMgrS(param1:IGameInputManagerMeta) : void {
+        public function setGameInputMgrS(param1:IGameInputManagerMeta) : void
+        {
             App.utils.asserter.assertNotNull(this.setGameInputMgr,"setGameInputMgr" + Errors.CANT_NULL);
             this.setGameInputMgr(param1);
         }
         
-        public function handleGlobalKeyEventS(param1:String) : void {
+        public function handleGlobalKeyEventS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.handleGlobalKeyEvent,"handleGlobalKeyEvent" + Errors.CANT_NULL);
             this.handleGlobalKeyEvent(param1);
         }
         
-        public function onAsInitializationCompletedS() : void {
+        public function onAsInitializationCompletedS() : void
+        {
             App.utils.asserter.assertNotNull(this.onAsInitializationCompleted,"onAsInitializationCompleted" + Errors.CANT_NULL);
             this.onAsInitializationCompleted();
         }

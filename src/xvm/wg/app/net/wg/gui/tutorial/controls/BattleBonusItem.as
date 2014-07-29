@@ -9,7 +9,8 @@ package net.wg.gui.tutorial.controls
     public class BattleBonusItem extends UIComponent
     {
         
-        public function BattleBonusItem() {
+        public function BattleBonusItem()
+        {
             super();
         }
         
@@ -33,34 +34,41 @@ package net.wg.gui.tutorial.controls
         
         public var valueField:TextField;
         
-        public function get hasBonusesTitle() : String {
+        public function get hasBonusesTitle() : String
+        {
             return this._hasBonusesTitle;
         }
         
-        public function set hasBonusesTitle(param1:String) : void {
+        public function set hasBonusesTitle(param1:String) : void
+        {
             this._hasBonusesTitle = param1;
             invalidate();
         }
         
-        public function get noBonusesTitle() : String {
+        public function get noBonusesTitle() : String
+        {
             return this._noBonusesTitle;
         }
         
-        public function set noBonusesTitle(param1:String) : void {
+        public function set noBonusesTitle(param1:String) : void
+        {
             this._noBonusesTitle = param1;
             invalidate();
         }
         
-        public function get noBonusesDescription() : String {
+        public function get noBonusesDescription() : String
+        {
             return this._noBonusesDescription;
         }
         
-        public function set noBonusesDescription(param1:String) : void {
+        public function set noBonusesDescription(param1:String) : void
+        {
             this._noBonusesDescription = param1;
             invalidate();
         }
         
-        public function setBonuses(param1:Number, param2:Number) : void {
+        public function setBonuses(param1:Number, param2:Number) : void
+        {
             if(this._credits == param1 && this._freeXP == param2)
             {
                 return;
@@ -70,7 +78,8 @@ package net.wg.gui.tutorial.controls
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.titleField.wordWrap = true;
             this.descriptionField.wordWrap = true;
@@ -78,7 +87,8 @@ package net.wg.gui.tutorial.controls
             this.valueField.autoSize = TextFieldAutoSize.RIGHT;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             var _loc1_:Boolean = this._credits > 0 || this._freeXP > 0;
             if(_loc1_)
@@ -93,7 +103,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        private function setBonusesTextFields() : void {
+        private function setBonusesTextFields() : void
+        {
             this.titleField.autoSize = TextFieldAutoSize.RIGHT;
             this.titleField.text = this._hasBonusesTitle;
             var _loc1_:ILocale = App.utils.locale;
@@ -105,7 +116,8 @@ package net.wg.gui.tutorial.controls
             TextFieldEx.setVerticalAlign(this.descriptionField,TextFieldEx.VALIGN_CENTER);
         }
         
-        private function setNoBonusesTextFields() : void {
+        private function setNoBonusesTextFields() : void
+        {
             this.titleField.autoSize = TextFieldAutoSize.CENTER;
             this.titleField.text = this._noBonusesTitle;
             TextFieldEx.setVerticalAlign(this.titleField,TextFieldEx.VALIGN_CENTER);

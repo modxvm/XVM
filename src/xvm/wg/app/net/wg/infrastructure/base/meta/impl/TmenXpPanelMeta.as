@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class TmenXpPanelMeta extends BaseDAAPIComponent
     {
         
-        public function TmenXpPanelMeta() {
+        public function TmenXpPanelMeta()
+        {
             super();
         }
         
         public var accelerateTmenXp:Function = null;
         
-        public function accelerateTmenXpS(param1:Boolean) : void {
+        public function accelerateTmenXpS(param1:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.accelerateTmenXp,"accelerateTmenXp" + Errors.CANT_NULL);
             this.accelerateTmenXp(param1);
         }

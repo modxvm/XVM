@@ -3,7 +3,8 @@ package scaleform.clik.ui
     public class InputDetails extends Object
     {
         
-        public function InputDetails(param1:String, param2:Number, param3:*, param4:String = null, param5:uint = 0, param6:Boolean = false, param7:Boolean = false, param8:Boolean = false) {
+        public function InputDetails(param1:String, param2:Number, param3:*, param4:String = null, param5:uint = 0, param6:Boolean = false, param7:Boolean = false, param8:Boolean = false)
+        {
             super();
             this.type = param1;
             this.code = param2;
@@ -31,7 +32,8 @@ package scaleform.clik.ui
         
         public var shiftKey:Boolean;
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[InputDetails code=" + this.code + ", type=" + this.type + " value=" + this.value + ", navEquivalent=" + this.navEquivalent + ", controllerIndex=" + this.controllerIndex + ", ctrlKey=" + this.ctrlKey + ", altKey=" + this.altKey + ", shiftKey=" + this.shiftKey + "]";
         }
     }

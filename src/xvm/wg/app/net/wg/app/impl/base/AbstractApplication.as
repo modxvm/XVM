@@ -39,7 +39,8 @@ package net.wg.app.impl.base
     public class AbstractApplication extends ApplicationMeta implements IApplication
     {
         
-        public function AbstractApplication() {
+        public function AbstractApplication()
+        {
             super();
             App.instance = this;
             this._utils = this.getNewUtils();
@@ -103,24 +104,29 @@ package net.wg.app.impl.base
         
         private var _appHeight:Number = 0;
         
-        public final function as_dispose() : void {
+        public final function as_dispose() : void
+        {
             this.onDispose();
         }
         
-        public final function as_populate() : void {
+        public final function as_populate() : void
+        {
         }
         
-        public function as_registerManagers() : void {
+        public function as_registerManagers() : void
+        {
             this.registerManagers();
             this.utils.events.setEnabled(false);
             this.utils.IME.init(this.globalVarsMgr.isShowLangaugeBarS());
         }
         
-        public function onLangBarResize(param1:Number, param2:Number) : void {
+        public function onLangBarResize(param1:Number, param2:Number) : void
+        {
             this.utils.IME.onLangBarResize(param1,param2);
         }
         
-        public function as_updateStage(param1:Number, param2:Number) : void {
+        public function as_updateStage(param1:Number, param2:Number) : void
+        {
             var w:Number = param1;
             var h:Number = param2;
             try
@@ -142,117 +148,145 @@ package net.wg.app.impl.base
             }
         }
         
-        public function get gameInputMgr() : IGameInputManager {
+        public function get gameInputMgr() : IGameInputManager
+        {
             return this._gameInputMgr;
         }
         
-        public function get eventLogManager() : IEventLogManager {
+        public function get eventLogManager() : IEventLogManager
+        {
             return this._eventLogManager;
         }
         
-        public final function get utils() : IUtils {
+        public final function get utils() : IUtils
+        {
             return this._utils;
         }
         
-        public final function get tweenMgr() : ITweenManager {
+        public final function get tweenMgr() : ITweenManager
+        {
             return this._tweenMgr;
         }
         
-        public function get libraryLoader() : ILibraryLoader {
+        public function get libraryLoader() : ILibraryLoader
+        {
             return this._loader;
         }
         
-        public function get soundMgr() : ISoundManager {
+        public function get soundMgr() : ISoundManager
+        {
             return this._soundMgr;
         }
         
-        public function get popoverMgr() : IPopoverManager {
+        public function get popoverMgr() : IPopoverManager
+        {
             return this._popoverMgr;
         }
         
-        public function get contextMenuMgr() : IContextMenuManager {
+        public function get contextMenuMgr() : IContextMenuManager
+        {
             return this._contextMenuMgr;
         }
         
-        public function get colorSchemeMgr() : IColorSchemeManager {
+        public function get colorSchemeMgr() : IColorSchemeManager
+        {
             return this._colorSchemeMgr;
         }
         
-        public function get voiceChatMgr() : IVoiceChatManager {
+        public function get voiceChatMgr() : IVoiceChatManager
+        {
             return this._voiceChatMgr;
         }
         
-        public final function get cursor() : ICursor {
+        public final function get cursor() : ICursor
+        {
             return this._cursor;
         }
         
-        public function get appWidth() : Number {
+        public function get appWidth() : Number
+        {
             return this._appWidth;
         }
         
-        public function set appWidth(param1:Number) : void {
+        public function set appWidth(param1:Number) : void
+        {
             this._appWidth = param1;
         }
         
-        public function get appHeight() : Number {
+        public function get appHeight() : Number
+        {
             return this._appHeight;
         }
         
-        public function set appHeight(param1:Number) : void {
+        public function set appHeight(param1:Number) : void
+        {
             this._appHeight = param1;
         }
         
-        public function get globalVarsMgr() : IGlobalVarsMgrMeta {
+        public function get globalVarsMgr() : IGlobalVarsMgrMeta
+        {
             return this._varsMgr;
         }
         
-        public function get toolTipMgr() : ITooltipMgr {
+        public function get toolTipMgr() : ITooltipMgr
+        {
             return this._tooltipMgr;
         }
         
-        public function get waiting() : IWaitingView {
+        public function get waiting() : IWaitingView
+        {
             return this._waiting;
         }
         
-        public function get environment() : IEnvironmentManager {
+        public function get environment() : IEnvironmentManager
+        {
             return this._environmentMgr;
         }
         
-        public function get containerMgr() : IContainerManager {
+        public function get containerMgr() : IContainerManager
+        {
             return this._containersMgr;
         }
         
-        public function get itemsMgr() : IGuiItemsManager {
+        public function get itemsMgr() : IGuiItemsManager
+        {
             return this._guiItemsMgr;
         }
         
-        public function get browserBgClass() : Class {
+        public function get browserBgClass() : Class
+        {
             return null;
         }
         
-        public function get systemMessages() : DisplayObjectContainer {
+        public function get systemMessages() : DisplayObjectContainer
+        {
             throw new AbstractException("AbstractApplication.systemMessages" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function onDispose() : void {
+        protected function onDispose() : void
+        {
             this._loader.dispose();
             this.disposeManagers();
             this.disposeContainers();
             this._utils.dispose();
         }
         
-        protected function getNewUtils() : IUtils {
+        protected function getNewUtils() : IUtils
+        {
             throw new AbstractException("BaseApp.getNewUtils" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewTweenManager() : ITweenManager {
+        protected function getNewTweenManager() : ITweenManager
+        {
             throw new AbstractException("BaseApp.getNewTween" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function createContainers() : void {
+        protected function createContainers() : void
+        {
         }
         
-        protected function disposeContainers() : void {
+        protected function disposeContainers() : void
+        {
             var _loc2_:DisplayObject = null;
             var _loc1_:Vector.<DisplayObject> = this.getContainers();
             for each(_loc2_ in _loc1_)
@@ -261,73 +295,91 @@ package net.wg.app.impl.base
             }
         }
         
-        protected function getContainers() : Vector.<DisplayObject> {
+        protected function getContainers() : Vector.<DisplayObject>
+        {
             throw new AbstractException("BaseApp.getContainers" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewEnvironment() : IEnvironmentManager {
+        protected function getNewEnvironment() : IEnvironmentManager
+        {
             throw new AbstractException("BaseApp.getNewEnvironment" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewContextMenuManager() : IContextMenuManager {
+        protected function getNewContextMenuManager() : IContextMenuManager
+        {
             throw new AbstractException("BaseApp.getNewContextMenuManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewPopoverManager() : IPopoverManager {
+        protected function getNewPopoverManager() : IPopoverManager
+        {
             throw new AbstractException("BaseApp.getNewContextMenuManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewContainerManager() : IContainerManager {
+        protected function getNewContainerManager() : IContainerManager
+        {
             throw new AbstractException("BaseApp.getNewContainerManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewColorSchemeManager() : IColorSchemeManager {
+        protected function getNewColorSchemeManager() : IColorSchemeManager
+        {
             throw new AbstractException("BaseApp.getNewColorSchemeManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewClassManager() : Object {
+        protected function getNewClassManager() : Object
+        {
             throw new AbstractException("BaseApp.getNewClassManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewSoundManager() : ISoundManager {
+        protected function getNewSoundManager() : ISoundManager
+        {
             throw new AbstractException("BaseApp.getNewSoundManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewTooltipManager() : ITooltipMgr {
+        protected function getNewTooltipManager() : ITooltipMgr
+        {
             throw new AbstractException("BaseApp.getNewTooltipManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewGuiItemsManager() : IGuiItemsManager {
+        protected function getNewGuiItemsManager() : IGuiItemsManager
+        {
             throw new AbstractException("BaseApp.getNewGuiItemsManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewVoiceChatManager() : IVoiceChatManager {
+        protected function getNewVoiceChatManager() : IVoiceChatManager
+        {
             throw new AbstractException("BaseApp.getNewVoiceChatManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getNewGameInputManager() : IGameInputManager {
+        protected function getNewGameInputManager() : IGameInputManager
+        {
             throw new AbstractException("BaseApp.getNewGameInputManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getEventLogManager() : IEventLogManager {
+        protected function getEventLogManager() : IEventLogManager
+        {
             throw new AbstractException("BaseApp.getEventLogManager" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function getRegCmdName() : String {
+        protected function getRegCmdName() : String
+        {
             throw new AbstractException("BaseApp.getRegCmdName" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected function onAfterAppConfiguring() : void {
+        protected function onAfterAppConfiguring() : void
+        {
             onAsInitializationCompletedS();
         }
         
-        protected function onBeforeAppConfiguring() : void {
+        protected function onBeforeAppConfiguring() : void
+        {
         }
         
-        protected function onPopUpManagerInit() : void {
+        protected function onPopUpManagerInit() : void
+        {
         }
         
-        protected final function registerManagers() : void {
+        protected final function registerManagers() : void
+        {
             this._containersMgr.loader = this._loaderMgr;
             setGlobalVarsMgrS(this._varsMgr);
             setLoaderMgrS(this._loaderMgr);
@@ -345,7 +397,8 @@ package net.wg.app.impl.base
             setTweenMgrS(this._tweenMgr);
         }
         
-        private function populateContainers() : void {
+        private function populateContainers() : void
+        {
             var _loc2_:DisplayObject = null;
             var _loc1_:Vector.<DisplayObject> = this.getContainers();
             for each(_loc2_ in _loc1_)
@@ -359,7 +412,8 @@ package net.wg.app.impl.base
             }
         }
         
-        private function createManagers() : void {
+        private function createManagers() : void
+        {
             this._containersMgr = this.getNewContainerManager();
             this._classLoaderMgr = this.getNewClassManager();
             this._loaderMgr = new LoaderManager();
@@ -378,7 +432,8 @@ package net.wg.app.impl.base
             this._containersMgr.addEventListener(LoaderEvent.WAITING_LOADED,this.onWaitingLoadedHandler);
         }
         
-        private function disposeManagers() : void {
+        private function disposeManagers() : void
+        {
             this._classLoaderMgr = null;
             this._contextMenuMgr.dispose();
             this._contextMenuMgr = null;
@@ -397,24 +452,28 @@ package net.wg.app.impl.base
             this._colorSchemeMgr = null;
         }
         
-        private function configure() : void {
+        private function configure() : void
+        {
             Extensions.enabled = true;
             Extensions.noInvisibleAdvance = true;
             DebugUtils.LOG_DEBUG("complete App configuring. Under scaleform:" + Extensions.isScaleform + "; Under gfx:" + Extensions.isGFxPlayer);
         }
         
-        private function onCursorLoadedHandler(param1:LoaderEvent) : void {
+        private function onCursorLoadedHandler(param1:LoaderEvent) : void
+        {
             this._cursor = param1.view as ICursor;
             this._utils.asserter.assertNotNull(this._cursor,"cursor initialization problem");
         }
         
-        private function onWaitingLoadedHandler(param1:LoaderEvent) : void {
+        private function onWaitingLoadedHandler(param1:LoaderEvent) : void
+        {
             this._waiting = param1.view as IWaitingView;
             this._utils.asserter.assertNotNull(this._waiting,"waiting initialization problem");
             this._waiting.updateStage(this._appWidth,this._appHeight);
         }
         
-        private function onFirstFrame(param1:Event) : void {
+        private function onFirstFrame(param1:Event) : void
+        {
             removeEventListener(Event.ENTER_FRAME,this.onFirstFrame);
             this.onBeforeAppConfiguring();
             this._environmentMgr.envoke(this.getRegCmdName());
@@ -422,12 +481,14 @@ package net.wg.app.impl.base
             this.onAfterAppConfiguring();
         }
         
-        private function onPopUpManagerInitHandler(param1:Event) : void {
+        private function onPopUpManagerInitHandler(param1:Event) : void
+        {
             stage.removeEventListener(POPUP_MGR_INIT_EVENT,this.onPopUpManagerInitHandler);
             this.onPopUpManagerInit();
         }
         
-        protected function initStage(param1:Event = null) : void {
+        protected function initStage(param1:Event = null) : void
+        {
             if(!CLIK.initialized)
             {
                 stage.addEventListener(POPUP_MGR_INIT_EVENT,this.onPopUpManagerInitHandler,false,0,true);

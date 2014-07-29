@@ -31,7 +31,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCase extends PersonalCaseBase
     {
         
-        public function PersonalCase() {
+        public function PersonalCase()
+        {
             super();
             isModal = false;
             isCentered = true;
@@ -45,7 +46,7 @@ package net.wg.gui.lobby.tankman
         
         private static var SKILLS_CAROUSEL_ITEM_MARGIN:uint = 3;
         
-        private static var SKILLS_CAROUSEL_POSITION:Point;
+        private static var SKILLS_CAROUSEL_POSITION:Point = new Point(21,380);
         
         private static var SPECIALIZATION_MARGIN:Number = 4;
         
@@ -117,7 +118,8 @@ package net.wg.gui.lobby.tankman
         
         private var tankmanInBattle:Boolean = false;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.toolTipMgr.hide();
             this.unloadBtn.removeEventListener(ButtonEvent.CLICK,this.unloadBtnClick);
             this.unloadBtn.removeEventListener(MouseEvent.MOUSE_OVER,this.showTooltip);
@@ -152,7 +154,8 @@ package net.wg.gui.lobby.tankman
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(UPDATE_SCROLLING_LIST)) && (this.isUpdateList))
             {
@@ -162,7 +165,8 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             var _loc1_:Padding = window.contentPadding as Padding;
             _loc1_.top = 32;
@@ -172,7 +176,8 @@ package net.wg.gui.lobby.tankman
             window.useBottomBtns = true;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.tabButtonVisibleFalse.visible = false;
             this.view.targetGroup = "tabs";
@@ -201,7 +206,8 @@ package net.wg.gui.lobby.tankman
             getDocumentsDataS();
         }
         
-        override public function as_setCommonData(param1:Object) : void {
+        override public function as_setCommonData(param1:Object) : void
+        {
             super.as_setCommonData(param1);
             if(isFirtsRun)
             {
@@ -211,15 +217,18 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        override public function as_setDossierData(param1:Object) : void {
+        override public function as_setDossierData(param1:Object) : void
+        {
             super.as_setDossierData(param1);
         }
         
-        override public function as_setRetrainingData(param1:Object) : void {
+        override public function as_setRetrainingData(param1:Object) : void
+        {
             super.as_setRetrainingData(param1);
         }
         
-        private function initSkillsCarousel() : void {
+        private function initSkillsCarousel() : void
+        {
             if(!this.skills_mc.visible)
             {
                 this.skills_mc.visible = true;
@@ -238,7 +247,8 @@ package net.wg.gui.lobby.tankman
             invalidate(UPDATE_SCROLLING_LIST);
         }
         
-        override protected function updateCommonElements() : void {
+        override protected function updateCommonElements() : void
+        {
             var _loc1_:IUtils = App.utils;
             this.currentNation = _loc1_.nations.getNationName(data.nationID);
             data.wg_freeXpToTankman = App.globalVarsMgr.isFreeXpToTankmanS();
@@ -273,38 +283,35 @@ package net.wg.gui.lobby.tankman
             validateNow();
         }
         
-        private function onTeachSkillBtnClick(param1:ButtonEvent) : void {
+        private function onTeachSkillBtnClick(param1:ButtonEvent) : void
+        {
             openExchangeFreeToTankmanXpWindowS();
         }
         
-        private function initializeTabButton() : void {
+        private function initializeTabButton() : void
+        {
             var _loc2_:IViewStackContent = null;
             var _loc1_:Array = [];
             if(data.currentVehicle == null || !data.currentVehicle.currentVehicleLocked)
             {
                 if(this.tabs.dataProvider.length <= 1)
                 {
-                    _loc1_ = [{
-                        "label":MENU.TANKMANPERSONALCASE_TABBATTLEINFO,
-                        "linkage":Linkages.PERSONAL_CASE_STATS
-                    },{
-                    "label":MENU.TANKMANPERSONALCASE_TABTRAINING,
-                    "linkage":Linkages.PERSONAL_CASE_RETRAINING
-                },{
-                "label":MENU.TANKMANPERSONALCASE_TABSKILLS,
-                "linkage":Linkages.PERSONAL_CASE_SKILLS
-            },{
-            "label":MENU.TANKMANPERSONALCASE_TABDOCS,
-            "linkage":Linkages.PERSONAL_CASE_DOCS
-        }];
+                    _loc1_ = [{"label":MENU.TANKMANPERSONALCASE_TABBATTLEINFO,
+                    "linkage":Linkages.PERSONAL_CASE_STATS
+                },{"label":MENU.TANKMANPERSONALCASE_TABTRAINING,
+                "linkage":Linkages.PERSONAL_CASE_RETRAINING
+            },{"label":MENU.TANKMANPERSONALCASE_TABSKILLS,
+            "linkage":Linkages.PERSONAL_CASE_SKILLS
+        },{"label":MENU.TANKMANPERSONALCASE_TABDOCS,
+        "linkage":Linkages.PERSONAL_CASE_DOCS
+    }];
     this.tabs.dataProvider = new DataProvider(_loc1_);
 }
 }
 else
 {
-_loc1_ = [{
-    "label":MENU.TANKMANPERSONALCASE_TABBATTLEINFO,
-    "linkage":Linkages.PERSONAL_CASE_STATS
+_loc1_ = [{"label":MENU.TANKMANPERSONALCASE_TABBATTLEINFO,
+"linkage":Linkages.PERSONAL_CASE_STATS
 }];
 this.tabs.dataProvider = new DataProvider(_loc1_);
 }
@@ -322,7 +329,8 @@ this.runtimeUpdateByInstance(_loc2_);
 }
 }
 
-private function initializeGeneralProperties() : void {
+private function initializeGeneralProperties() : void
+{
 if(!(data.iconFile == null) && !(data.iconFile == this.icon1.source))
 {
 this.icon1.visible = true;
@@ -367,7 +375,8 @@ this.dismissBtn.enabled = true;
 this.updateModifiers();
 }
 
-private function updateModifiers() : void {
+private function updateModifiers() : void
+{
 var _loc5_:String = null;
 var _loc6_:* = false;
 var _loc7_:uint = 0;
@@ -435,7 +444,8 @@ this.modifiersNames.height = this.modifiersHeaders.height;
 this.specialization.y = Math.round(this.modifiersHeaders.y + this.modifiersHeaders.height + SPECIALIZATION_MARGIN);
 }
 
-private function addNoModifiersInfo() : void {
+private function addNoModifiersInfo() : void
+{
 this.modifiersValues.htmlText = "-";
 this.modifiersNames.htmlText = MENU.TANKMANPERSONALCASE_NOMODIFIERS;
 var _loc1_:TextFormat = this.modifiersNames.getTextFormat();
@@ -443,7 +453,8 @@ _loc1_.leading = 0;
 this.modifiersNames.setTextFormat(_loc1_);
 }
 
-private function enableButtons(param1:Boolean, param2:Boolean) : Boolean {
+private function enableButtons(param1:Boolean, param2:Boolean) : Boolean
+{
 if(param1)
 {
 return false;
@@ -455,7 +466,8 @@ return false;
 return true;
 }
 
-private function __isEnableDropSkillsButton() : Boolean {
+private function __isEnableDropSkillsButton() : Boolean
+{
 if((data.currentVehicle) && (data.currentVehicle.currentVehicleLocked))
 {
 return false;
@@ -472,18 +484,21 @@ _loc1_++;
 return false;
 }
 
-private function initializeDropSkillsButton(param1:Boolean) : void {
+private function initializeDropSkillsButton(param1:Boolean) : void
+{
 this.dropSkillsButton.enabled = param1;
 }
 
-private function initializeSkillBtn(param1:Boolean) : void {
+private function initializeSkillBtn(param1:Boolean) : void
+{
 this.skillsBtn.visible = data.skills.length == 0;
 this.skillsBtn.enabled = !param1;
 this.skillsBtn.bg.flag_switcher.gotoAndPlay(this.currentNation);
 this.skillsBtn.addEventListener(ButtonEvent.CLICK,this.onSkillsBtnClick);
 }
 
-private function onViewNeedUpdate(param1:ViewStackEvent) : void {
+private function onViewNeedUpdate(param1:ViewStackEvent) : void
+{
 var _loc2_:IViewStackContent = param1.view;
 if(_loc2_ is PersonalCaseStats && !EventDispatcher(_loc2_).hasEventListener(PersonalCaseEvent.CHANGE_TAB_ON_TWO))
 {
@@ -509,14 +524,16 @@ this.currentView = param1.view;
 this.runtimeUpdateByInstance(this.currentView);
 }
 
-override protected function runtimeUpdateByModel(param1:Class, param2:Object) : void {
+override protected function runtimeUpdateByModel(param1:Class, param2:Object) : void
+{
 if(this.currentView is param1)
 {
 this.currentView.update(param2);
 }
 }
 
-private function runtimeUpdateByInstance(param1:IViewStackContent = null) : void {
+private function runtimeUpdateByInstance(param1:IViewStackContent = null) : void
+{
 if(param1 == null)
 {
 return;
@@ -540,7 +557,8 @@ param1.update(documentsData);
 }
 }
 
-private function runtimeShowByIndex(param1:int = 0) : void {
+private function runtimeShowByIndex(param1:int = 0) : void
+{
 var _loc2_:Boolean = (data.inTank) && !data.currentVehicle.currentVehicleLocked;
 if(param1 == 0)
 {
@@ -565,31 +583,38 @@ this.currentView = this.view.currentView as IViewStackContent;
 this.runtimeUpdateByInstance(this.currentView);
 }
 
-private function applyRetrainingHandler(param1:PersonalCaseEvent) : void {
+private function applyRetrainingHandler(param1:PersonalCaseEvent) : void
+{
 retrainingTankmanS(param1.retrainingTankmanData.inventoryID,param1.retrainingTankmanData.innaitonID,param1.retrainingTankmanData.tankmanCostTypeIndex);
 }
 
-private function trainingSkillHandler(param1:PersonalCaseEvent) : void {
+private function trainingSkillHandler(param1:PersonalCaseEvent) : void
+{
 addTankmanSkillS(data.inventoryID,param1.trainingSkillName);
 }
 
-private function tabs_clikIndexChangeHandler(param1:IndexEvent) : void {
+private function tabs_clikIndexChangeHandler(param1:IndexEvent) : void
+{
 this.runtimeShowByIndex(param1.index);
 }
 
-private function onDropSkillsButtonClick(param1:ButtonEvent) : void {
+private function onDropSkillsButtonClick(param1:ButtonEvent) : void
+{
 dropSkillsS();
 }
 
-private function onClose(param1:ButtonEvent) : void {
+private function onClose(param1:ButtonEvent) : void
+{
 onWindowCloseS();
 }
 
-private function hideTooltip(param1:Event) : void {
+private function hideTooltip(param1:Event) : void
+{
 App.toolTipMgr.hide();
 }
 
-private function showTooltip(param1:MouseEvent) : void {
+private function showTooltip(param1:MouseEvent) : void
+{
 var _loc2_:* = "";
 if(param1.target == this.unloadBtn)
 {
@@ -603,23 +628,28 @@ _loc2_ = TOOLTIPS.BARRACKS_TANKMEN_DISMISS;
 App.toolTipMgr.showComplex(_loc2_);
 }
 
-private function unloadBtnClick(param1:ButtonEvent) : void {
+private function unloadBtnClick(param1:ButtonEvent) : void
+{
 unloadTankmanS(data.inventoryID,data.currentVehicle.inventoryID);
 }
 
-private function dismissBtnClick(param1:ButtonEvent) : void {
+private function dismissBtnClick(param1:ButtonEvent) : void
+{
 dismissTankmanS(data.inventoryID);
 }
 
-private function onSkillsBtnClick(param1:ButtonEvent) : void {
+private function onSkillsBtnClick(param1:ButtonEvent) : void
+{
 this.changeTabToTwoHandler();
 }
 
-private function changePassportHandler(param1:PersonalCaseEvent) : void {
+private function changePassportHandler(param1:PersonalCaseEvent) : void
+{
 changeTankmanPassportS(data.inventoryID,param1.newTankmanFirstName.id,param1.newTankmanLastName.id,param1.newIcon.id);
 }
 
-private function changeTabToTwoHandler(param1:PersonalCaseEvent = null) : void {
+private function changeTabToTwoHandler(param1:PersonalCaseEvent = null) : void
+{
 var _loc2_:Boolean = !data.currentVehicle || (data.currentVehicle) && !data.currentVehicle.currentVehicleLocked;
 if(!(this.tabs.selectedIndex == 2) && (_loc2_) && this.tabs.dataProvider.length > 1)
 {
@@ -628,7 +658,8 @@ this.runtimeShowByIndex(this.tabs.selectedIndex);
 }
 }
 
-private function getTankmanIDHandler(param1:PersonalCaseEvent) : void {
+private function getTankmanIDHandler(param1:PersonalCaseEvent) : void
+{
 if(data.skills.length > 0)
 {
 param1.tankmanIdDelegate(data.inventoryID,data.skills[data.skills.length - 1].name);

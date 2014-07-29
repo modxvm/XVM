@@ -5,7 +5,8 @@ package net.wg.data.gui_items.dossier
     public class VehicleDossier extends Dossier
     {
         
-        public function VehicleDossier(param1:uint, param2:* = null) {
+        public function VehicleDossier(param1:uint, param2:* = null)
+        {
             super(ItemTypes.VEHICLE_DOSSIER,[param1,param2]);
         }
     }

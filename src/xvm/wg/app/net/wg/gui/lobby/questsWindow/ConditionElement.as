@@ -10,7 +10,8 @@ package net.wg.gui.lobby.questsWindow
     public class ConditionElement extends AbstractResizableContent
     {
         
-        public function ConditionElement() {
+        public function ConditionElement()
+        {
             super();
         }
         
@@ -30,7 +31,8 @@ package net.wg.gui.lobby.questsWindow
         
         public var data:ConditionElementVO = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.leftLabelTF = null;
             this.rightLabelTF = null;
             this.container.dispose();
@@ -44,7 +46,8 @@ package net.wg.gui.lobby.questsWindow
             super.onDispose();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(this.data)
             {
                 this.data.dispose();
@@ -53,13 +56,15 @@ package net.wg.gui.lobby.questsWindow
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.container.verticalPadding = VERTICAL_PADDING;
             this.indexTF.visible = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -88,7 +93,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        private function layoutComponents() : void {
+        private function layoutComponents() : void
+        {
             if(contentAlign == TextFieldAutoSize.LEFT)
             {
                 this.container.x = LEFT_POSITION;

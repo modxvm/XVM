@@ -5,7 +5,8 @@ package net.wg.gui.lobby.sellDialog.VO
     public class SellInInventoryShellVo extends SellVehicleItemBaseVo
     {
         
-        public function SellInInventoryShellVo(param1:Object) {
+        public function SellInInventoryShellVo(param1:Object)
+        {
             super(param1);
         }
         
@@ -17,7 +18,8 @@ package net.wg.gui.lobby.sellDialog.VO
         
         public var kind:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "action")
             {
                 this.action = param2;
@@ -37,7 +39,8 @@ package net.wg.gui.lobby.sellDialog.VO
             return this.hasOwnProperty(param1);
         }
         
-        private function updateActionPrice() : void {
+        private function updateActionPrice() : void
+        {
             if(this.actionVo)
             {
                 this.actionVo.newPrices = [this.actionVo.newPriceBases[0] * count,this.actionVo.newPriceBases[1] * count];

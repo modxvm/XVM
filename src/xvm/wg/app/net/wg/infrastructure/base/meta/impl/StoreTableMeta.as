@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class StoreTableMeta extends BaseDAAPIComponent
     {
         
-        public function StoreTableMeta() {
+        public function StoreTableMeta()
+        {
             super();
         }
         
         public var refreshStoreTableDataProvider:Function = null;
         
-        public function refreshStoreTableDataProviderS() : void {
+        public function refreshStoreTableDataProviderS() : void
+        {
             App.utils.asserter.assertNotNull(this.refreshStoreTableDataProvider,"refreshStoreTableDataProvider" + Errors.CANT_NULL);
             this.refreshStoreTableDataProvider();
         }

@@ -5,7 +5,8 @@ package net.wg.infrastructure.managers.impl
     public class ClassManager extends ClassManagerMeta
     {
         
-        public function ClassManager() {
+        public function ClassManager()
+        {
             super();
         }
     }

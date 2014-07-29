@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.events
     public class FortBuildingCardPopoverEvent extends Event
     {
         
-        public function FortBuildingCardPopoverEvent(param1:String) {
+        public function FortBuildingCardPopoverEvent(param1:String)
+        {
             super(param1,true,true);
         }
         

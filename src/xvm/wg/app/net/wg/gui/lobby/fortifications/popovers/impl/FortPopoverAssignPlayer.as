@@ -11,7 +11,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     public class FortPopoverAssignPlayer extends UIComponent
     {
         
-        public function FortPopoverAssignPlayer() {
+        public function FortPopoverAssignPlayer()
+        {
             super();
             this.assignBtn.UIID = 85;
             this.assignBtn.textField.x = this.assignBtn.textField.x + TEXT_PADDING;
@@ -32,12 +33,14 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var maxPlayerCount:int = -1;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.assignBtn.icon = FOOTHOLD_BTN_PNG;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.assignBtn.removeEventListener(ButtonEvent.CLICK,this.onClickAssignPlayerHandler);
             this.assignBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             this.assignBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
@@ -46,7 +49,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             super.onDispose();
         }
         
-        public function setData(param1:String, param2:int, param3:Boolean, param4:int) : void {
+        public function setData(param1:String, param2:int, param3:Boolean, param4:int) : void
+        {
             this.maxPlayerCount = param4;
             this.playerCount = param2;
             this.assignBtn.label = param2.toString();
@@ -58,23 +62,25 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
         }
         
-        private function onClickAssignPlayerHandler(param1:ButtonEvent) : void {
+        private function onClickAssignPlayerHandler(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,0);
             dispatchEvent(new FortBuildingCardPopoverEvent(FortBuildingCardPopoverEvent.ASSIGN_PLAYERS));
         }
         
-        private function onRollOverHandler(param1:MouseEvent) : void {
-            var _loc2_:String = new ComplexTooltipHelper().addHeader(App.utils.locale.makeString(TOOLTIPS.FORTIFICATION_POPOVER_FIXEDPLAYERSBTN_HEADER)).addBody(App.utils.locale.makeString(TOOLTIPS.FORTIFICATION_POPOVER_FIXEDPLAYERSBTN_BODY,{
-                "count":this.playerCount.toString(),
-                "maxCount":this.maxPlayerCount.toString()
-            })).addNote("",false).make();
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
+            var _loc2_:String = new ComplexTooltipHelper().addHeader(App.utils.locale.makeString(TOOLTIPS.FORTIFICATION_POPOVER_FIXEDPLAYERSBTN_HEADER)).addBody(App.utils.locale.makeString(TOOLTIPS.FORTIFICATION_POPOVER_FIXEDPLAYERSBTN_BODY,{"count":this.playerCount.toString(),
+            "maxCount":this.maxPlayerCount.toString()
+        })).addNote("",false).make();
         if(_loc2_.length > 0)
         {
             App.toolTipMgr.showComplex(_loc2_);
         }
     }
     
-    private function onRollOutHandler(param1:MouseEvent) : void {
+    private function onRollOutHandler(param1:MouseEvent) : void
+    {
         App.toolTipMgr.hide();
     }
 }

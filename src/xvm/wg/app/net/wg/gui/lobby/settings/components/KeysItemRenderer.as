@@ -9,7 +9,8 @@ package net.wg.gui.lobby.settings.components
     public class KeysItemRenderer extends ListItemRenderer
     {
         
-        public function KeysItemRenderer() {
+        public function KeysItemRenderer()
+        {
             super();
         }
         
@@ -25,12 +26,14 @@ package net.wg.gui.lobby.settings.components
         
         private var INVALID_TEXT:String = "invalid_text";
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             invalidate(this.INVALID_DATA);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(data)
             {
                 data = null;
@@ -43,19 +46,23 @@ package net.wg.gui.lobby.settings.components
             super.onDispose();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG KeysItemRenderer " + name + "]";
         }
         
-        public function isSelected() : Boolean {
+        public function isSelected() : Boolean
+        {
             return this.keyInput.selected;
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return super.enabled;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             var _loc2_:String = null;
             super.enabled = param1;
             mouseChildren = true;
@@ -70,11 +77,13 @@ package net.wg.gui.lobby.settings.components
             setState(_loc2_);
         }
         
-        override public function get label() : String {
+        override public function get label() : String
+        {
             return _label;
         }
         
-        override public function set label(param1:String) : void {
+        override public function set label(param1:String) : void
+        {
             if(_label == param1)
             {
                 return;
@@ -83,11 +92,13 @@ package net.wg.gui.lobby.settings.components
             invalidate(this.INVALID_TEXT);
         }
         
-        public function get header() : Boolean {
+        public function get header() : Boolean
+        {
             return this._header;
         }
         
-        public function set header(param1:Boolean) : void {
+        public function set header(param1:Boolean) : void
+        {
             if(param1 == this._header)
             {
                 return;
@@ -96,7 +107,8 @@ package net.wg.gui.lobby.settings.components
             setState("up");
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             constraintsDisabled = true;
             super.configUI();
             mouseChildren = true;
@@ -109,7 +121,8 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(data)
             {
                 if(isInvalid(this.INVALID_DATA))
@@ -133,14 +146,16 @@ package net.wg.gui.lobby.settings.components
             super.draw();
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             if(this._header)
             {
                 super.updateText();
             }
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             if(this._header)
             {
                 return Vector.<String>(["header_",""]);
@@ -148,7 +163,8 @@ package net.wg.gui.lobby.settings.components
             return _selected?statesSelected:statesDefault;
         }
         
-        private function keyCodeWasUsed(param1:Number) : Object {
+        private function keyCodeWasUsed(param1:Number) : Object
+        {
             if(param1 == KeysMap.KEY_NONE)
             {
                 return null;
@@ -170,7 +186,8 @@ package net.wg.gui.lobby.settings.components
             return null;
         }
         
-        private function setText() : void {
+        private function setText() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
@@ -190,7 +207,8 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        private function onKeyChange(param1:KeyInputEvents) : void {
+        private function onKeyChange(param1:KeyInputEvents) : void
+        {
             var _loc2_:Object = this.keyCodeWasUsed(param1.keyCode);
             if(_loc2_)
             {

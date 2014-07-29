@@ -18,7 +18,8 @@ package net.wg.gui.cyberSport.views.unit
     public class TeamSection extends BaseTeamSection
     {
         
-        public function TeamSection() {
+        public function TeamSection()
+        {
             super();
             this.btnFreeze.externalSource = true;
         }
@@ -61,20 +62,23 @@ package net.wg.gui.cyberSport.views.unit
         
         public var settingsIcons:SettingsIcons;
         
-        override public function updateMembers(param1:Boolean, param2:Array) : void {
+        override public function updateMembers(param1:Boolean, param2:Array) : void
+        {
             super.updateMembers(param1,param2);
             this.unitData.hasRestrictions = param1;
             this.updateSettingsIcon();
         }
         
-        public function enableFreezeButton(param1:Boolean) : void {
+        public function enableFreezeButton(param1:Boolean) : void
+        {
             if(this.btnFreeze)
             {
                 this.btnFreeze.enabled = param1;
             }
         }
         
-        public function updateLockedUnit(param1:Boolean, param2:Array) : void {
+        public function updateLockedUnit(param1:Boolean, param2:Array) : void
+        {
             var _loc5_:RallySlotVO = null;
             var _loc3_:int = this.unitData.slots.length;
             this.unitData.isFreezed = param1;
@@ -90,7 +94,8 @@ package net.wg.gui.cyberSport.views.unit
             }
         }
         
-        public function closeSlot(param1:uint, param2:Boolean, param3:uint, param4:String, param5:Boolean, param6:int) : void {
+        public function closeSlot(param1:uint, param2:Boolean, param3:uint, param4:String, param5:Boolean, param6:int) : void
+        {
             var _loc7_:RallySlotVO = getSlotModel(param1) as RallySlotVO;
             _loc7_.selectedVehicleLevel = param3;
             _loc7_.compatibleVehiclesCount = param6;
@@ -103,29 +108,35 @@ package net.wg.gui.cyberSport.views.unit
             this.updateSettingsIcon();
         }
         
-        public function updateTotalLabel(param1:Boolean, param2:String, param3:int) : void {
+        public function updateTotalLabel(param1:Boolean, param2:String, param3:int) : void
+        {
             this.updateLevelLabels(param2);
             this.unitData.sumLevelsError = param1;
             this.unitData.sumLevelsInt = param3;
         }
         
-        public function get unitData() : RallyVO {
+        public function get unitData() : RallyVO
+        {
             return rallyData as RallyVO;
         }
         
-        override protected function getMembersStr() : String {
+        override protected function getMembersStr() : String
+        {
             return CYBERSPORT.WINDOW_UNIT_TEAMMEMBERS;
         }
         
-        override protected function getVehiclesStr() : String {
+        override protected function getVehiclesStr() : String
+        {
             return CYBERSPORT.WINDOW_UNIT_TEAMVEHICLES;
         }
         
-        override protected function getVehiclesStaticStr() : String {
+        override protected function getVehiclesStaticStr() : String
+        {
             return CYBERSPORT.WINDOW_UNIT_TEAMVEHICLESSTUB;
         }
         
-        override protected function getSlotsUI() : Array {
+        override protected function getSlotsUI() : Array
+        {
             var _loc2_:SlotRenderer = null;
             var _loc1_:Array = [this.slot0,this.slot1,this.slot2,this.slot3,this.slot4,this.slot5,this.slot6];
             var _loc3_:UnitSlotHelper = new UnitSlotHelper();
@@ -136,18 +147,21 @@ package net.wg.gui.cyberSport.views.unit
             return _loc1_;
         }
         
-        override protected function getIndicatorsUI() : Array {
+        override protected function getIndicatorsUI() : Array
+        {
             return [this.dropTargerIndicator0,this.dropTargerIndicator1,this.dropTargerIndicator2,this.dropTargerIndicator3,this.dropTargerIndicator4,this.dropTargerIndicator5,this.dropTargerIndicator6];
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.settingsIcons.dispose();
             this.btnFreeze.removeEventListener(ButtonEvent.CLICK,this.onStatusToggle);
             tooltipSubscribe([this.btnFreeze,this.btnConfigure,this.lblTeamPoints],false);
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.btnConfigure.addEventListener(ButtonEvent.CLICK,this.onConfigureClick);
             lblTeamHeader.text = CYBERSPORT.WINDOW_UNIT_TEAM;
@@ -159,7 +173,8 @@ package net.wg.gui.cyberSport.views.unit
             tooltipSubscribe([this.btnFreeze,this.btnConfigure,this.lblTeamPoints]);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(CSInvalidationType.VEHICLE_LABEL))
             {
@@ -167,7 +182,8 @@ package net.wg.gui.cyberSport.views.unit
             }
         }
         
-        override protected function updateComponents() : void {
+        override protected function updateComponents() : void
+        {
             super.updateComponents();
             var _loc1_:Boolean = this.unitData?this.unitData.isCommander:false;
             this.btnConfigure.visible = this.btnFreeze.visible = _loc1_;
@@ -176,7 +192,8 @@ package net.wg.gui.cyberSport.views.unit
             this.updateLevelLabels(this.unitData.sumLevels);
         }
         
-        override protected function onControlRollOver(param1:MouseEvent) : void {
+        override protected function onControlRollOver(param1:MouseEvent) : void
+        {
             var _loc2_:* = "";
             var _loc3_:* = "";
             switch(param1.currentTarget)
@@ -190,20 +207,21 @@ package net.wg.gui.cyberSport.views.unit
                     App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNIT_CONFIGURE);
                     break;
                 case this.lblTeamPoints:
-                    App.toolTipMgr.showLocal("ToolTipUnitLevelUI",{
-                        "type":"",
-                        "component":"",
-                        "data":{"level":this.unitData.sumLevelsInt}
-                    },null);
+                    App.toolTipMgr.showLocal("ToolTipUnitLevelUI",{"type":"",
+                    "component":"",
+                    "data":{"level":this.unitData.sumLevelsInt}
+                },null);
                 break;
         }
     }
     
-    private function updateLevelLabels(param1:String) : void {
+    private function updateLevelLabels(param1:String) : void
+    {
         this.lblTeamPoints.htmlText = param1;
     }
     
-    private function updateSettingsIcon() : void {
+    private function updateSettingsIcon() : void
+    {
         if((this.unitData) && !this.unitData.isCommander)
         {
             this.settingsIcons.visible = true;
@@ -216,7 +234,8 @@ package net.wg.gui.cyberSport.views.unit
         }
     }
     
-    private function showTooltip(param1:String, param2:String) : void {
+    private function showTooltip(param1:String, param2:String) : void
+    {
         var _loc3_:String = new ComplexTooltipHelper().addHeader(param1,true).addBody(param2,true).make();
         if(_loc3_.length > 0)
         {
@@ -224,11 +243,13 @@ package net.wg.gui.cyberSport.views.unit
         }
     }
     
-    private function onStatusToggle(param1:ButtonEvent) : void {
+    private function onStatusToggle(param1:ButtonEvent) : void
+    {
         dispatchEvent(new CSComponentEvent(CSComponentEvent.TOGGLE_FREEZE_REQUEST));
     }
     
-    private function onConfigureClick(param1:ButtonEvent) : void {
+    private function onConfigureClick(param1:ButtonEvent) : void
+    {
         dispatchEvent(new CSComponentEvent(CSComponentEvent.CLICK_CONFIGURE_BUTTON));
     }
 }

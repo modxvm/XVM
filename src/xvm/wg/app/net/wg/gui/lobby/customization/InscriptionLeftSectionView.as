@@ -7,39 +7,48 @@ package net.wg.gui.lobby.customization
     public class InscriptionLeftSectionView extends BaseTimedCustomizationSectionView
     {
         
-        public function InscriptionLeftSectionView() {
+        public function InscriptionLeftSectionView()
+        {
             super();
         }
         
-        override public function getEmptyDataItem() : Object {
+        override public function getEmptyDataItem() : Object
+        {
             return DAAPIItemsDataProvider.getEmptyItem();
         }
         
-        override public function getItemsDP() : DAAPIItemsDataProvider {
+        override public function getItemsDP() : DAAPIItemsDataProvider
+        {
             return form.inscriptionLeftDP;
         }
         
-        override public function getGroupsDP() : DAAPIDataProvider {
+        override public function getGroupsDP() : DAAPIDataProvider
+        {
             return form.inscriptionLeftGroupsDataProvider;
         }
         
-        override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider {
+        override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider
+        {
             return form.inscriptionLeftRentalPackageDP;
         }
         
-        override public function getViewLinkage() : String {
+        override public function getViewLinkage() : String
+        {
             return BaseTimedCustomizationSectionView.INSCRIPTION_GROUP_VIEW;
         }
         
-        override public function getTimeSectionLabel() : String {
+        override public function getTimeSectionLabel() : String
+        {
             return MENU.CUSTOMIZATION_LABELS_INSCRIPTION_PERIOD;
         }
         
-        override public function getDropButtonTooltip() : String {
+        override public function getDropButtonTooltip() : String
+        {
             return TOOLTIPS.CUSTOMIZATION_INSCRIPTIONLEFT_CURRENT_DROP;
         }
         
-        override public function getSectionName() : String {
+        override public function getSectionName() : String
+        {
             return BaseTimedCustomizationSectionView.INSCRIPTION_LEFT;
         }
     }

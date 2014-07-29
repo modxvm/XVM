@@ -5,7 +5,8 @@ package net.wg.gui.lobby.questsWindow.data
     public class EventsResizableContentVO extends DAAPIDataClass
     {
         
-        public function EventsResizableContentVO(param1:Object) {
+        public function EventsResizableContentVO(param1:Object)
+        {
             this._containerElements = [];
             super(param1);
         }
@@ -28,75 +29,93 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _showDone:Boolean = false;
         
-        public function get headerTitle() : String {
+        public function get headerTitle() : String
+        {
             return this._headerTitle;
         }
         
-        public function set headerTitle(param1:String) : void {
+        public function set headerTitle(param1:String) : void
+        {
             this._headerTitle = param1;
         }
         
-        public function get isOpened() : Boolean {
+        public function get isOpened() : Boolean
+        {
             return this._isOpened;
         }
         
-        public function set isOpened(param1:Boolean) : void {
+        public function set isOpened(param1:Boolean) : void
+        {
             this._isOpened = param1;
         }
         
-        public function get containerElements() : Array {
+        public function get containerElements() : Array
+        {
             return this._containerElements;
         }
         
-        public function set containerElements(param1:Array) : void {
+        public function set containerElements(param1:Array) : void
+        {
             this._containerElements = param1;
         }
         
-        public function get headerHtmlPart() : String {
+        public function get headerHtmlPart() : String
+        {
             return this._headerHtmlPart;
         }
         
-        public function set headerHtmlPart(param1:String) : void {
+        public function set headerHtmlPart(param1:String) : void
+        {
             this._headerHtmlPart = param1;
         }
         
-        public function get headerProgress() : Object {
+        public function get headerProgress() : Object
+        {
             return this._headerProgress;
         }
         
-        public function set headerProgress(param1:Object) : void {
+        public function set headerProgress(param1:Object) : void
+        {
             this._headerProgress = param1;
         }
         
-        public function get isResizable() : Boolean {
+        public function get isResizable() : Boolean
+        {
             return this._isResizable;
         }
         
-        public function set isResizable(param1:Boolean) : void {
+        public function set isResizable(param1:Boolean) : void
+        {
             this._isResizable = param1;
         }
         
-        public function get tablePadding() : int {
+        public function get tablePadding() : int
+        {
             return this._tablePadding;
         }
         
-        public function set tablePadding(param1:int) : void {
+        public function set tablePadding(param1:int) : void
+        {
             this._tablePadding = param1;
         }
         
-        public function get linkage() : String {
+        public function get linkage() : String
+        {
             return this._linkage;
         }
         
-        public function set linkage(param1:String) : void {
+        public function set linkage(param1:String) : void
+        {
             this._linkage = param1;
         }
         
-        public function get showDone() : Boolean {
+        public function get showDone() : Boolean
+        {
             return this._showDone;
         }
         
-        public function set showDone(param1:Boolean) : void {
+        public function set showDone(param1:Boolean) : void
+        {
             this._showDone = param1;
         }
     }

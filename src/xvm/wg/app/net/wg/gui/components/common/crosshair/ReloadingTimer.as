@@ -8,7 +8,8 @@ package net.wg.gui.components.common.crosshair
     public class ReloadingTimer extends UIComponent
     {
         
-        public function ReloadingTimer() {
+        public function ReloadingTimer()
+        {
             super();
             this.leftTF = this.contentContainer.leftTF;
             this.delimiterTF = this.contentContainer.delimiterTF;
@@ -27,11 +28,13 @@ package net.wg.gui.components.common.crosshair
         
         private var _time:Number = 0;
         
-        public function setup(param1:Number) : void {
+        public function setup(param1:Number) : void
+        {
             this.contentContainer.alpha = param1;
         }
         
-        public function updateTime(param1:Number, param2:Boolean) : void {
+        public function updateTime(param1:Number, param2:Boolean) : void
+        {
             var _loc3_:String = null;
             var _loc4_:IFormattedInt = null;
             var _loc5_:String = null;

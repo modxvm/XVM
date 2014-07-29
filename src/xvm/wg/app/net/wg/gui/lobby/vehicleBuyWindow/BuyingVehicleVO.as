@@ -6,7 +6,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
     public class BuyingVehicleVO extends DAAPIDataClass
     {
         
-        public function BuyingVehicleVO(param1:Object) {
+        public function BuyingVehicleVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -52,7 +53,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         public var _slotActionPriceDataVo:ActionPriceVO;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "studyPriceCreditsActionData")
             {
                 if(param2)
@@ -101,31 +103,37 @@ package net.wg.gui.lobby.vehicleBuyWindow
             return super.onDataWrite(param1,param2);
         }
         
-        public function get isPremium() : Boolean {
+        public function get isPremium() : Boolean
+        {
             return this._isPremium;
         }
         
-        public function set isPremium(param1:Boolean) : void {
+        public function set isPremium(param1:Boolean) : void
+        {
             this._isPremium = param1;
             this.updateVehicleActionPrice();
         }
         
-        private function updateVehicleActionPrice() : void {
+        private function updateVehicleActionPrice() : void
+        {
             if(this._vehiclePricesActionDataVo)
             {
                 this._vehiclePricesActionDataVo.forCredits = !this._isPremium;
             }
         }
         
-        public function get actualPrice() : uint {
+        public function get actualPrice() : uint
+        {
             return this._actualPrice;
         }
         
-        public function get vehiclePrices() : Array {
+        public function get vehiclePrices() : Array
+        {
             return this._vehiclePrices;
         }
         
-        public function set vehiclePrices(param1:Array) : void {
+        public function set vehiclePrices(param1:Array) : void
+        {
             this._vehiclePrices = param1;
             if(this._vehiclePrices[1] != 0)
             {
@@ -139,43 +147,53 @@ package net.wg.gui.lobby.vehicleBuyWindow
             }
         }
         
-        public function get actualActionPriceDataVo() : ActionPriceVO {
+        public function get actualActionPriceDataVo() : ActionPriceVO
+        {
             return this._vehiclePricesActionDataVo;
         }
         
-        public function set actualActionPriceData(param1:Object) : void {
+        public function set actualActionPriceData(param1:Object) : void
+        {
             this._vehiclePricesActionDataVo = new ActionPriceVO(param1);
         }
         
-        public function get studyPriceCreditsActionDataVo() : ActionPriceVO {
+        public function get studyPriceCreditsActionDataVo() : ActionPriceVO
+        {
             return this._studyPriceCreditsActionDataVo;
         }
         
-        public function set studyPriceCreditsActionData(param1:Object) : void {
+        public function set studyPriceCreditsActionData(param1:Object) : void
+        {
             this._studyPriceCreditsActionDataVo = new ActionPriceVO(param1);
         }
         
-        public function get studyPriceGoldActionDataVo() : ActionPriceVO {
+        public function get studyPriceGoldActionDataVo() : ActionPriceVO
+        {
             return this._studyPriceGoldActionDataVo;
         }
         
-        public function set studyPriceGoldActionData(param1:Object) : void {
+        public function set studyPriceGoldActionData(param1:Object) : void
+        {
             this._studyPriceGoldActionDataVo = new ActionPriceVO(param1);
         }
         
-        public function get ammoActionPriceDataVo() : ActionPriceVO {
+        public function get ammoActionPriceDataVo() : ActionPriceVO
+        {
             return this._ammoActionPriceDataVo;
         }
         
-        public function set ammoActionPriceData(param1:Object) : void {
+        public function set ammoActionPriceData(param1:Object) : void
+        {
             this._ammoActionPriceDataVo = new ActionPriceVO(param1);
         }
         
-        public function get slotActionPriceDataVo() : ActionPriceVO {
+        public function get slotActionPriceDataVo() : ActionPriceVO
+        {
             return this._slotActionPriceDataVo;
         }
         
-        public function set slotActionPriceData(param1:Object) : void {
+        public function set slotActionPriceData(param1:Object) : void
+        {
             this._slotActionPriceDataVo = new ActionPriceVO(param1);
         }
     }

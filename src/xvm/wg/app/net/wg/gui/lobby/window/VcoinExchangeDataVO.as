@@ -5,7 +5,8 @@ package net.wg.gui.lobby.window
     public class VcoinExchangeDataVO extends DAAPIDataClass
     {
         
-        public function VcoinExchangeDataVO(param1:Object) {
+        public function VcoinExchangeDataVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,27 +16,33 @@ package net.wg.gui.lobby.window
         
         private var _countStep:uint;
         
-        public function set minTransactVal(param1:uint) : void {
+        public function set minTransactVal(param1:uint) : void
+        {
             this._minTransactVal = param1;
         }
         
-        public function set maxTransactVal(param1:uint) : void {
+        public function set maxTransactVal(param1:uint) : void
+        {
             this._maxTransactVal = param1;
         }
         
-        public function set countStep(param1:uint) : void {
+        public function set countStep(param1:uint) : void
+        {
             this._countStep = param1;
         }
         
-        public function get minTransactVal() : uint {
+        public function get minTransactVal() : uint
+        {
             return this._minTransactVal;
         }
         
-        public function get maxTransactVal() : uint {
+        public function get maxTransactVal() : uint
+        {
             return this._maxTransactVal;
         }
         
-        public function get countStep() : uint {
+        public function get countStep() : uint
+        {
             return this._countStep;
         }
     }

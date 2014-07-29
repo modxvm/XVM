@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class ItemTypes extends Object
     {
         
-        public function ItemTypes() {
+        public function ItemTypes()
+        {
             super();
         }
         
@@ -29,7 +30,7 @@ package net.wg.data.constants
         
         public static var EQUIPMENT:uint = 11;
         
-        public static var SERVER_ITEMS:Vector.<uint>;
+        public static var SERVER_ITEMS:Vector.<uint> = Vector.<uint>([VEHICLE,CHASSIS,TURRET,GUN,ENGINE,FUEL_TANK,RADIO,TANKMAN,OPT_DEVS,SHELL,EQUIPMENT]);
         
         public static var ACCOUNT_DOSSIER:uint = 16;
         
@@ -41,9 +42,10 @@ package net.wg.data.constants
         
         public static var TANKMAN_SKILL:uint = 20;
         
-        public static var CLIENT_ITEMS:Vector.<uint>;
+        public static var CLIENT_ITEMS:Vector.<uint> = Vector.<uint>([ACCOUNT_DOSSIER,VEHICLE_DOSSIER,TANKMAN_DOSSIER,ACHIEVEMENT,TANKMAN_SKILL]);
         
-        public static function getItemTypeName(param1:uint) : String {
+        public static function getItemTypeName(param1:uint) : String
+        {
             switch(param1)
             {
                 case VEHICLE:

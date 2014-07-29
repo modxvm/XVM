@@ -5,12 +5,14 @@ package net.wg.gui.lobby.customization.renderers
     public class TextureItemRenderer extends CustomizationItemRenderer
     {
         
-        public function TextureItemRenderer() {
+        public function TextureItemRenderer()
+        {
             super();
             soundId = SoundTypes.TEXTURE_RENDERER;
         }
         
-        override protected function setState(param1:String) : void {
+        override protected function setState(param1:String) : void
+        {
             var _loc4_:String = null;
             var _loc5_:* = NaN;
             if(demoMode == CustomizationItemRenderer.DEMO_NEW)

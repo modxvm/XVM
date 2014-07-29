@@ -8,7 +8,8 @@ package net.wg.gui.tutorial.controls
     public class TutorialBattleLoadingForm extends UIComponent
     {
         
-        public function TutorialBattleLoadingForm() {
+        public function TutorialBattleLoadingForm()
+        {
             super();
         }
         
@@ -20,19 +21,23 @@ package net.wg.gui.tutorial.controls
         
         public var battleIcon:BattleTypeIcon = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        public function updateProgress(param1:Number) : void {
+        public function updateProgress(param1:Number) : void
+        {
             this.loadingBar.position = param1;
         }
         
-        public function updateMapName(param1:String) : void {
+        public function updateMapName(param1:String) : void
+        {
             this.mapText.text = param1?App.utils.toUpperOrLowerCase(param1,true):"";
         }
         
-        public function updateBattleType(param1:String) : void {
+        public function updateBattleType(param1:String) : void
+        {
             this.battleText.text = param1;
         }
     }

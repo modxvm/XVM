@@ -5,7 +5,8 @@ package scaleform.gfx
     public final class FocusEventEx extends FocusEvent
     {
         
-        public function FocusEventEx(param1:String) {
+        public function FocusEventEx(param1:String)
+        {
             super(param1);
         }
         

@@ -6,11 +6,13 @@ package net.wg.gui.components.common.containers
     public class HorizontalGroupLayout extends GroupLayout
     {
         
-        public function HorizontalGroupLayout() {
+        public function HorizontalGroupLayout()
+        {
             super();
         }
         
-        override public function invokeLayout() : Object {
+        override public function invokeLayout() : Object
+        {
             var _loc1_:DisplayObject = null;
             var _loc2_:int = _target.numChildren;
             var _loc3_:* = 0;

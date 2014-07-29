@@ -5,7 +5,8 @@ package net.wg.data.VO
     public class ExtendedUserVO extends UserVO implements IExtendedUserVO
     {
         
-        public function ExtendedUserVO(param1:Object) {
+        public function ExtendedUserVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -17,39 +18,48 @@ package net.wg.data.VO
         
         protected var _colors:Array;
         
-        public function get himself() : Boolean {
+        public function get himself() : Boolean
+        {
             return this._himself;
         }
         
-        public function set himself(param1:Boolean) : void {
+        public function set himself(param1:Boolean) : void
+        {
             this._himself = param1;
         }
         
-        public function get colors() : Array {
+        public function get colors() : Array
+        {
             return this._colors;
         }
         
-        public function set colors(param1:Array) : void {
+        public function set colors(param1:Array) : void
+        {
             this._colors = param1;
         }
         
-        public function get chatRoster() : Number {
+        public function get chatRoster() : Number
+        {
             return this._chatRoster;
         }
         
-        public function set chatRoster(param1:Number) : void {
+        public function set chatRoster(param1:Number) : void
+        {
             this._chatRoster = param1;
         }
         
-        public function get isPlayerSpeaking() : Boolean {
+        public function get isPlayerSpeaking() : Boolean
+        {
             return this._isPlayerSpeaking;
         }
         
-        public function set isPlayerSpeaking(param1:Boolean) : void {
+        public function set isPlayerSpeaking(param1:Boolean) : void
+        {
             this._isPlayerSpeaking = param1;
         }
         
-        public function getToolTip() : String {
+        public function getToolTip() : String
+        {
             return fullName;
         }
     }

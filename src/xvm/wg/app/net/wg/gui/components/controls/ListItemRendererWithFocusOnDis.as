@@ -5,11 +5,13 @@ package net.wg.gui.components.controls
     public class ListItemRendererWithFocusOnDis extends SoundListItemRenderer
     {
         
-        public function ListItemRendererWithFocusOnDis() {
+        public function ListItemRendererWithFocusOnDis()
+        {
             super();
         }
         
-        override protected function changeFocus() : void {
+        override protected function changeFocus() : void
+        {
             var _loc1_:String = null;
             if(_focusIndicator == null)
             {
@@ -46,7 +48,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function set selected(param1:Boolean) : void {
+        override public function set selected(param1:Boolean) : void
+        {
             var _loc2_:* = false;
             if(_selected == param1)
             {

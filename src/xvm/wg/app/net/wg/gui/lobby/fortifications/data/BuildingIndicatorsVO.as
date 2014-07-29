@@ -3,7 +3,8 @@ package net.wg.gui.lobby.fortifications.data
     public class BuildingIndicatorsVO extends BuildingPopoverBaseVO
     {
         
-        public function BuildingIndicatorsVO(param1:Object) {
+        public function BuildingIndicatorsVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -27,7 +28,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var defResProgressLabels:BuildingProgressLblVO;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == HP_PROGRESS_LABELS)
             {
                 this.hpProgressLabels = new BuildingProgressLblVO(param2);

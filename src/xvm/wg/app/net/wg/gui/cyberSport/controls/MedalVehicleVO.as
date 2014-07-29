@@ -5,7 +5,8 @@ package net.wg.gui.cyberSport.controls
     public class MedalVehicleVO extends DAAPIDataClass
     {
         
-        public function MedalVehicleVO(param1:Object = null) {
+        public function MedalVehicleVO(param1:Object = null)
+        {
             super(param1);
         }
         

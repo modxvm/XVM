@@ -6,7 +6,8 @@ package net.wg.gui.lobby.menu
     public class LobbyMenuForm extends UIComponent
     {
         
-        public function LobbyMenuForm() {
+        public function LobbyMenuForm()
+        {
             super();
         }
         

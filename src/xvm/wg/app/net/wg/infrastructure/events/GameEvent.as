@@ -5,7 +5,8 @@ package net.wg.infrastructure.events
     public class GameEvent extends Event
     {
         
-        public function GameEvent(param1:String, param2:Boolean = false, param3:Boolean = true) {
+        public function GameEvent(param1:String, param2:Boolean = false, param3:Boolean = true)
+        {
             super(param1,param2,param3);
         }
         

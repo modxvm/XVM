@@ -3,7 +3,8 @@ package net.wg.data
     public class ContainerConstants extends Object
     {
         
-        public function ContainerConstants() {
+        public function ContainerConstants()
+        {
             super();
         }
         

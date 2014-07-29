@@ -6,7 +6,8 @@ package net.wg.gui.components.tooltips.VO
     public class ToolTipBlockVO extends Object
     {
         
-        public function ToolTipBlockVO() {
+        public function ToolTipBlockVO()
+        {
             super();
         }
         

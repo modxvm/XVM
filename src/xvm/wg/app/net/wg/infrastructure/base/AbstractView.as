@@ -26,7 +26,8 @@ package net.wg.infrastructure.base
     public class AbstractView extends AbstractViewMeta implements IView, IAbstractViewMeta
     {
         
-        public function AbstractView() {
+        public function AbstractView()
+        {
             visible = false;
             super();
         }
@@ -51,7 +52,8 @@ package net.wg.infrastructure.base
         
         private var _firstModalFocusUpdating:Boolean = true;
         
-        public final function as_populate() : void {
+        public final function as_populate() : void
+        {
             try
             {
                 dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_POPULATE));
@@ -65,7 +67,8 @@ package net.wg.infrastructure.base
             }
         }
         
-        public final function as_dispose() : void {
+        public final function as_dispose() : void
+        {
             try
             {
                 this.assert(!this._disposed,"view " + this.as_alias + " can not to dispose, because it already disposed.");
@@ -85,112 +88,138 @@ package net.wg.infrastructure.base
             }
         }
         
-        public function getSubContainer() : IManagedContainer {
+        public function getSubContainer() : IManagedContainer
+        {
             return null;
         }
         
-        public function setViewSize(param1:Number, param2:Number) : void {
+        public function setViewSize(param1:Number, param2:Number) : void
+        {
             _originalWidth = param1;
             _originalHeight = param2;
             setActualSize(param1,param2);
             setActualScale(1,1);
         }
         
-        public function playShowTween(param1:DisplayObject, param2:Function = null) : Boolean {
+        public function playShowTween(param1:DisplayObject, param2:Function = null) : Boolean
+        {
             return false;
         }
         
-        public function playHideTween(param1:DisplayObject, param2:Function = null) : Boolean {
+        public function playHideTween(param1:DisplayObject, param2:Function = null) : Boolean
+        {
             return false;
         }
         
-        public function updateStage(param1:Number, param2:Number) : void {
+        public function updateStage(param1:Number, param2:Number) : void
+        {
         }
         
-        public function registerComponent(param1:IDAAPIModule, param2:String) : void {
+        public function registerComponent(param1:IDAAPIModule, param2:String) : void
+        {
             registerFlashComponent(param1,param2);
         }
         
-        public function unregisterComponent(param1:String) : void {
+        public function unregisterComponent(param1:String) : void
+        {
             this.assertLifeCycle();
             unregisterFlashComponent(param1);
         }
         
-        public final function setModalFocus() : void {
+        public final function setModalFocus() : void
+        {
             invalidate(INVALID_MODAL_FOCUS);
         }
         
-        public final function leaveModalFocus() : void {
+        public final function leaveModalFocus() : void
+        {
             cancelValidation(INVALID_MODAL_FOCUS);
             this.onLeaveModalFocus();
         }
         
-        override public final function get hasFocus() : Boolean {
+        override public final function get hasFocus() : Boolean
+        {
             return App.utils.focusHandler.hasModalFocus(this);
         }
         
-        public function get isModal() : Boolean {
+        public function get isModal() : Boolean
+        {
             return false;
         }
         
-        public function get modalAlpha() : Number {
+        public function get modalAlpha() : Number
+        {
             return Values.DEFAULT_ALPHA;
         }
         
-        public function get sourceView() : IView {
+        public function get sourceView() : IView
+        {
             return this;
         }
         
-        public function get containerContent() : IManagedContent {
+        public function get containerContent() : IManagedContent
+        {
             return this;
         }
         
-        public function get disposed() : Boolean {
+        public function get disposed() : Boolean
+        {
             return this._disposed;
         }
         
-        public function get as_token() : String {
+        public function get as_token() : String
+        {
             return this._token;
         }
         
-        public function set as_token(param1:String) : void {
+        public function set as_token(param1:String) : void
+        {
             this._token = param1;
         }
         
-        public function get as_alias() : String {
+        public function get as_alias() : String
+        {
             return this._alias;
         }
         
-        public function set as_alias(param1:String) : void {
+        public function set as_alias(param1:String) : void
+        {
             this._alias = param1;
         }
         
-        public function get as_name() : String {
+        public function get as_name() : String
+        {
             return this._name;
         }
         
-        public function set as_name(param1:String) : void {
+        public function set as_name(param1:String) : void
+        {
             this._name = param1;
         }
         
-        public function get as_config() : Object {
+        public function get as_config() : Object
+        {
             return this._config;
         }
         
-        public function set as_config(param1:Object) : void {
+        public function set as_config(param1:Object) : void
+        {
             this._config = param1;
         }
         
-        public function get loader() : Loader {
+        public function get loader() : Loader
+        {
             return this._loader;
         }
         
-        public function set loader(param1:Loader) : void {
+        public function set loader(param1:Loader) : void
+        {
             this.assertNotNull(param1,"value");
             this._loader = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.allowHandleInput())
             {
@@ -199,7 +228,8 @@ package net.wg.infrastructure.base
             initSize();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:InteractiveObject = null;
             super.draw();
             if((constraints) && (isInvalid(InvalidationType.SIZE)))
@@ -222,14 +252,17 @@ package net.wg.infrastructure.base
             }
         }
         
-        protected function getViewContainer() : DisplayObjectContainer {
+        protected function getViewContainer() : DisplayObjectContainer
+        {
             return this;
         }
         
-        protected function onInitModalFocus(param1:InteractiveObject) : void {
+        protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
         }
         
-        protected function onSetModalFocus(param1:InteractiveObject) : void {
+        protected function onSetModalFocus(param1:InteractiveObject) : void
+        {
             var _loc2_:String = null;
             if(!(this._lastFocusedElement == null) && (param1 == this._lastFocusedElement || param1 == null))
             {
@@ -243,7 +276,8 @@ package net.wg.infrastructure.base
             }
         }
         
-        protected function onLeaveModalFocus() : void {
+        protected function onLeaveModalFocus() : void
+        {
             var _loc1_:InteractiveObject = this.getManualFocus();
             if(_loc1_ != null)
             {
@@ -251,7 +285,8 @@ package net.wg.infrastructure.base
             }
         }
         
-        protected final function setFocus(param1:InteractiveObject) : void {
+        protected final function setFocus(param1:InteractiveObject) : void
+        {
             this.assertNotNull(param1,"element");
             this.assert(!(param1.stage == null),"focus must be set to object in display list only.");
             App.utils.scheduler.cancelTask(this.setFocus);
@@ -271,27 +306,32 @@ package net.wg.infrastructure.base
             this.setLastFocusedElement(param1);
         }
         
-        protected function nextFrameAfterPopulateHandler() : void {
+        protected function nextFrameAfterPopulateHandler() : void
+        {
             if(this.canAutoShowView())
             {
                 visible = true;
             }
         }
         
-        protected function canAutoShowView() : Boolean {
+        protected function canAutoShowView() : Boolean
+        {
             return true;
         }
         
-        protected function allowHandleInput() : Boolean {
+        protected function allowHandleInput() : Boolean
+        {
             return true;
         }
         
-        protected function onPopulate() : void {
+        protected function onPopulate() : void
+        {
             App.toolTipMgr.hide();
             App.contextMenuMgr.hide();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             var _loc1_:IUtils = App.utils;
             App.toolTipMgr.hide();
@@ -300,36 +340,42 @@ package net.wg.infrastructure.base
             removeEventListener(InputEvent.INPUT,handleInput);
         }
         
-        protected final function assert(param1:Boolean, param2:String = "failed assert", param3:Class = null) : void {
+        protected final function assert(param1:Boolean, param2:String = "failed assert", param3:Class = null) : void
+        {
             if(App.instance)
             {
                 App.utils.asserter.assert(param1,param2,param3);
             }
         }
         
-        protected final function assertLifeCycle() : void {
+        protected final function assertLifeCycle() : void
+        {
             this.assert(!this.disposed,Errors.MTHD_CORRUPT_INVOKE,LifecycleException);
         }
         
-        protected final function assertNotNull(param1:Object, param2:String = "object", param3:Class = null) : void {
+        protected final function assertNotNull(param1:Object, param2:String = "object", param3:Class = null) : void
+        {
             if(App.instance)
             {
                 App.utils.asserter.assertNotNull(param1,param2 + Errors.CANT_NULL,param3);
             }
         }
         
-        protected final function assertNull(param1:Object, param2:String = "object", param3:Class = null) : void {
+        protected final function assertNull(param1:Object, param2:String = "object", param3:Class = null) : void
+        {
             if(App.instance)
             {
                 App.utils.asserter.assertNull(param1,param2 + Errors.MUST_NULL,param3);
             }
         }
         
-        protected function get lastFocusedElement() : InteractiveObject {
+        protected function get lastFocusedElement() : InteractiveObject
+        {
             return this._lastFocusedElement;
         }
         
-        private function getManualFocus() : InteractiveObject {
+        private function getManualFocus() : InteractiveObject
+        {
             var _loc2_:InteractiveObject = null;
             var _loc1_:InteractiveObject = App.utils.focusHandler.getFocus(0);
             if(!(_loc1_ == null) && !(_loc1_.stage == null))
@@ -354,7 +400,8 @@ package net.wg.infrastructure.base
             return null;
         }
         
-        private function setLastFocusedElement(param1:InteractiveObject) : void {
+        private function setLastFocusedElement(param1:InteractiveObject) : void
+        {
             if(this._lastFocusedElement != null)
             {
                 this._lastFocusedElement.removeEventListener(FocusHandlerEvent.FOCUS_OUT,this.onFocusOutFromLastFocusedElementHandler);
@@ -366,7 +413,8 @@ package net.wg.infrastructure.base
             }
         }
         
-        private function onFocusOutFromLastFocusedElementHandler(param1:FocusHandlerEvent) : void {
+        private function onFocusOutFromLastFocusedElementHandler(param1:FocusHandlerEvent) : void
+        {
             var _loc5_:String = null;
             var _loc2_:InteractiveObject = this.getManualFocus();
             var _loc3_:* = false;

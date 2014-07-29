@@ -12,7 +12,8 @@ package net.wg.gui.components.controls
     public class IconButton extends SoundButtonEx
     {
         
-        public function IconButton() {
+        public function IconButton()
+        {
             super();
             soundType = SoundTypes.ICON_BTN;
         }
@@ -31,7 +32,8 @@ package net.wg.gui.components.controls
         
         private var updateNestedChild:Boolean = false;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.loader)
             {
                 this.removeIconListeners(this.loader.contentLoaderInfo);
@@ -43,16 +45,19 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             this.updateNestedChild = true;
         }
         
-        public function get iconSource() : String {
+        public function get iconSource() : String
+        {
             return this._iconSource;
         }
         
-        public function set iconSource(param1:String) : void {
+        public function set iconSource(param1:String) : void
+        {
             if(this._iconSource != param1)
             {
                 this._iconSource = param1;
@@ -61,27 +66,32 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get iconOffsetTop() : Number {
+        public function get iconOffsetTop() : Number
+        {
             return this._iconOffsetTop;
         }
         
-        public function set iconOffsetTop(param1:Number) : void {
+        public function set iconOffsetTop(param1:Number) : void
+        {
             this._iconOffsetTop = param1;
             this.arrangeLayout = true;
             invalidate();
         }
         
-        public function get iconOffsetLeft() : Number {
+        public function get iconOffsetLeft() : Number
+        {
             return this._iconOffsetLeft;
         }
         
-        public function set iconOffsetLeft(param1:Number) : void {
+        public function set iconOffsetLeft(param1:Number) : void
+        {
             this._iconOffsetLeft = param1;
             this.arrangeLayout = true;
             invalidate();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:URLRequest = null;
             super.draw();
             if(this.isIconSourceChanged)
@@ -116,12 +126,14 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function addIconListeners(param1:LoaderInfo) : void {
+        protected function addIconListeners(param1:LoaderInfo) : void
+        {
             param1.addEventListener(Event.COMPLETE,this.iconLoadingCompleteHandler);
             param1.addEventListener(IOErrorEvent.IO_ERROR,this.iconLoadingIOErrorHandler);
         }
         
-        protected function configIcon() : void {
+        protected function configIcon() : void
+        {
             if(this.loader)
             {
                 this.loader.x = this._iconOffsetLeft;
@@ -133,18 +145,21 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function removeIconListeners(param1:LoaderInfo) : void {
+        private function removeIconListeners(param1:LoaderInfo) : void
+        {
             param1.removeEventListener(Event.COMPLETE,this.iconLoadingCompleteHandler);
             param1.removeEventListener(IOErrorEvent.IO_ERROR,this.iconLoadingIOErrorHandler);
         }
         
-        protected function iconLoadingIOErrorHandler(param1:IOErrorEvent) : void {
+        protected function iconLoadingIOErrorHandler(param1:IOErrorEvent) : void
+        {
             DebugUtils.LOG_WARNING("Flash :: Icon Loading IO Error!",getQualifiedClassName(this),param1.toString());
             dispatchEvent(this.getNewLoadingEvent(LibraryLoaderEvent.ICON_LOADING_FAILED,loaderInfo.loader,loaderInfo.url));
             this.removeIconListeners(LoaderInfo(param1.target));
         }
         
-        protected function iconLoadingCompleteHandler(param1:Event) : void {
+        protected function iconLoadingCompleteHandler(param1:Event) : void
+        {
             var _loc2_:LoaderInfo = LoaderInfo(param1.target);
             this.removeIconListeners(_loc2_);
             dispatchEvent(this.getNewLoadingEvent(LibraryLoaderEvent.ICON_LOADED,_loc2_.loader,_loc2_.url));
@@ -152,7 +167,8 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        private function getNewLoadingEvent(param1:String, param2:Loader, param3:String) : LibraryLoaderEvent {
+        private function getNewLoadingEvent(param1:String, param2:Loader, param3:String) : LibraryLoaderEvent
+        {
             return new LibraryLoaderEvent(param1,param2,param3,true,true);
         }
     }

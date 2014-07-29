@@ -6,7 +6,8 @@ package net.wg.gui.lobby.window
     public class ExchangeUtils extends Object
     {
         
-        public function ExchangeUtils() {
+        public function ExchangeUtils()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.lobby.window
         
         public static var ICON_TYPE_BLACK:String = "black";
         
-        public static function getGlow(param1:String, param2:Number = undefined) : Array {
+        public static function getGlow(param1:String, param2:Number = undefined) : Array
+        {
             var _loc3_:* = NaN;
             var _loc4_:DropShadowFilter = new DropShadowFilter();
             _loc4_.distance = 0;

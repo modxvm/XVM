@@ -8,11 +8,13 @@ package net.wg.gui.cyberSport.controls
     public class RosterButtonGroup extends ButtonGroup
     {
         
-        public function RosterButtonGroup(param1:String, param2:DisplayObjectContainer) {
+        public function RosterButtonGroup(param1:String, param2:DisplayObjectContainer)
+        {
             super(param1,param2);
         }
         
-        public static function getGroup(param1:String, param2:DisplayObjectContainer) : RosterButtonGroup {
+        public static function getGroup(param1:String, param2:DisplayObjectContainer) : RosterButtonGroup
+        {
             var _loc3_:Object = groups[param2];
             if(_loc3_ == null)
             {
@@ -28,7 +30,8 @@ package net.wg.gui.cyberSport.controls
         
         protected var olderSelectedButton:Button;
         
-        override protected function updateSelectedButton(param1:Button, param2:Boolean = true) : void {
+        override protected function updateSelectedButton(param1:Button, param2:Boolean = true) : void
+        {
             if((param2) && param1 == selectedButton)
             {
                 return;
@@ -66,7 +69,8 @@ package net.wg.gui.cyberSport.controls
             dispatchEvent(new Event(Event.CHANGE));
         }
         
-        public function get rangeData() : Array {
+        public function get rangeData() : Array
+        {
             var _loc1_:Array = [];
             if(selectedButton)
             {

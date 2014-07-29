@@ -7,7 +7,8 @@ package net.wg.infrastructure.managers.utils.impl
     public class Scheduler extends Object implements IScheduler
     {
         
-        public function Scheduler() {
+        public function Scheduler()
+        {
             super();
             this._taskStack = new TaskStack();
             this._timer = new Timer(CONCURRENT_FRAME_TICK);
@@ -16,7 +17,7 @@ package net.wg.infrastructure.managers.utils.impl
         
         public static var GLOBAL_FRAME_TICK:Number = 50;
         
-        public static var CONCURRENT_FRAME_TICK:Number;
+        public static var CONCURRENT_FRAME_TICK:Number = Math.floor(GLOBAL_FRAME_TICK / 2);
         
         private var _timer:Timer = null;
         
@@ -24,31 +25,36 @@ package net.wg.infrastructure.managers.utils.impl
         
         private var _disposed:Boolean = false;
         
-        public function scheduleTask(param1:Function, param2:Number, ... rest) : void {
+        public function scheduleTask(param1:Function, param2:Number, ... rest) : void
+        {
             var _loc4_:Number = new Date().time + param2;
             var _loc5_:Task = new Task(_loc4_,param1,rest);
             this._taskStack.pushTask(_loc5_);
             this.updateTimer();
         }
         
-        public function scheduleNonCancelableTask(param1:Function, param2:Number, ... rest) : void {
+        public function scheduleNonCancelableTask(param1:Function, param2:Number, ... rest) : void
+        {
             var _loc4_:Number = new Date().time + param2;
             var _loc5_:Task = new Task(_loc4_,param1,rest);
             this._taskStack.pushTask(_loc5_,true);
             this.updateTimer();
         }
         
-        public function envokeInNextFrame(param1:Function, ... rest) : void {
+        public function envokeInNextFrame(param1:Function, ... rest) : void
+        {
             var rest:Array = [param1,CONCURRENT_FRAME_TICK].concat(rest);
             this.scheduleTask.apply(this,rest);
         }
         
-        public function cancelTask(param1:Function) : void {
+        public function cancelTask(param1:Function) : void
+        {
             this._taskStack.removeTaskByHandler(param1);
             this.updateTimer();
         }
         
-        public function cancelAll() : void {
+        public function cancelAll() : void
+        {
             var _loc1_:Task = null;
             while(!this._taskStack.isEmpty())
             {
@@ -58,11 +64,13 @@ package net.wg.infrastructure.managers.utils.impl
             this.updateTimer();
         }
         
-        public function isEmpty() : Boolean {
+        public function isEmpty() : Boolean
+        {
             return this._taskStack.isEmpty();
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.cancelAll();
             this._taskStack = null;
             this._timer.removeEventListener(TimerEvent.TIMER,this.onFrame);
@@ -71,11 +79,13 @@ package net.wg.infrastructure.managers.utils.impl
             this._disposed = true;
         }
         
-        private function onFrame(param1:TimerEvent) : void {
+        private function onFrame(param1:TimerEvent) : void
+        {
             this.processFrame();
         }
         
-        private function processFrame() : void {
+        private function processFrame() : void
+        {
             var _loc1_:Task = this._taskStack.popTask();
             _loc1_.invoke();
             _loc1_.dispose();
@@ -85,7 +95,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        private function updateTimer() : void {
+        private function updateTimer() : void
+        {
             var _loc1_:* = NaN;
             if(this._taskStack.isEmpty())
             {
@@ -114,7 +125,8 @@ import net.wg.infrastructure.interfaces.entity.IDisposable;
 class Task extends Object implements ICallable, IDisposable
 {
     
-    function Task(param1:Number, param2:Function, param3:Array) {
+    function Task(param1:Number, param2:Function, param3:Array)
+    {
         super();
         this._finishTime = param1;
         this._handler = param2;
@@ -127,15 +139,18 @@ class Task extends Object implements ICallable, IDisposable
     
     private var _args:Array = null;
     
-    public function get finishTime() : Number {
+    public function get finishTime() : Number
+    {
         return this._finishTime;
     }
     
-    public function get handler() : Function {
+    public function get handler() : Function
+    {
         return this._handler;
     }
     
-    public function invoke() : void {
+    public function invoke() : void
+    {
         if(this._args.length > 0)
         {
             this._handler.apply(null,this._args);
@@ -146,7 +161,8 @@ class Task extends Object implements ICallable, IDisposable
         }
     }
     
-    public function dispose() : void {
+    public function dispose() : void
+    {
         this._handler = null;
         this._args = null;
     }
@@ -154,14 +170,16 @@ class Task extends Object implements ICallable, IDisposable
 class TaskStack extends Object
 {
     
-    function TaskStack() {
+    function TaskStack()
+    {
         super();
         this._tasks = new Vector.<Task>();
     }
     
     private var _tasks:Vector.<Task> = null;
     
-    private function pushTask(param1:Task, param2:Boolean = false) : void {
+    private function pushTask(param1:Task, param2:Boolean = false) : void
+    {
         var _loc3_:Number = this._tasks.length - 1;
         var _loc4_:Number = -1;
         var _loc5_:Number = -1;
@@ -196,7 +214,8 @@ class TaskStack extends Object
         this._tasks.splice(_loc4_,0,param1);
     }
     
-    private function removeTaskByHandler(param1:Function) : void {
+    private function removeTaskByHandler(param1:Function) : void
+    {
         var _loc4_:Task = null;
         var _loc2_:Task = null;
         var _loc3_:Number = 0;
@@ -213,15 +232,18 @@ class TaskStack extends Object
         }
     }
     
-    private function popTask() : Task {
+    private function popTask() : Task
+    {
         return this._tasks.pop();
     }
     
-    private function top() : Task {
+    private function top() : Task
+    {
         return this._tasks[this._tasks.length - 1];
     }
     
-    private function isEmpty() : Boolean {
+    private function isEmpty() : Boolean
+    {
         return this._tasks.length == 0;
     }
 }

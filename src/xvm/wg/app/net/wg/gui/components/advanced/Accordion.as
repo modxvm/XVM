@@ -13,14 +13,15 @@ package net.wg.gui.components.advanced
     public class Accordion extends ButtonBarEx implements IDynamicContent
     {
         
-        public function Accordion() {
+        public function Accordion()
+        {
             super();
             tabEnabled = focusable = true;
             itemRendererName = DEFAULT_ITEM_RNDR;
             _direction = DIRECTION_VERTICAL;
         }
         
-        private static var DEFAULT_ITEM_RNDR:String = "AccrodionSoundRendererUI";
+        private static var DEFAULT_ITEM_RNDR:String = Linkages.ACCORDION_RDR_UI;
         
         private static var INVALID_BORDER:String = "border";
         
@@ -52,15 +53,18 @@ package net.wg.gui.components.advanced
         
         private var _actualViewHeight:Number;
         
-        public function get actualViewWidth() : Number {
+        public function get actualViewWidth() : Number
+        {
             return this._actualViewWidth;
         }
         
-        public function get actualViewHeight() : Number {
+        public function get actualViewHeight() : Number
+        {
             return this._actualViewHeight;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.view.groupRef = this;
             if(this.border)
@@ -69,7 +73,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.view.groupRef = null;
             this.view.dispose();
@@ -86,7 +91,8 @@ package net.wg.gui.components.advanced
             container = null;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:IEventCollector = null;
             if((isInvalid(InvalidationType.RENDERERS)) || (isInvalid(InvalidationType.DATA)) || (isInvalid(InvalidationType.SETTINGS)) || (isInvalid(InvalidationType.SIZE)))
             {
@@ -123,7 +129,8 @@ package net.wg.gui.components.advanced
             this.view.alpha = 1;
         }
         
-        override protected function setupRenderer(param1:Button, param2:uint) : void {
+        override protected function setupRenderer(param1:Button, param2:uint) : void
+        {
             super.setupRenderer(param1,param2);
             if(param1 is IAccordionItemRenderer)
             {
@@ -132,7 +139,8 @@ package net.wg.gui.components.advanced
             param1.tabEnabled = false;
         }
         
-        override protected function populateRendererData(param1:Button, param2:uint) : void {
+        override protected function populateRendererData(param1:Button, param2:uint) : void
+        {
             super.populateRendererData(param1,param2);
             var _loc3_:Object = _dataProvider.requestItemAt(param2);
             if(_loc3_.hasOwnProperty("enabled"))
@@ -141,13 +149,15 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override public function set selectedIndex(param1:int) : void {
+        override public function set selectedIndex(param1:int) : void
+        {
             this.view.alpha = 0;
             super.selectedIndex = param1;
             invalidate();
         }
         
-        private function drawLayout(param1:Number, param2:Number) : void {
+        private function drawLayout(param1:Number, param2:Number) : void
+        {
             var _loc5_:IAccordionItemRenderer = null;
             var _loc6_:* = NaN;
             var _loc7_:* = NaN;
@@ -175,78 +185,97 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
         }
         
-        public function get rowHeight() : Number {
+        public function get rowHeight() : Number
+        {
             return this._rowHeight;
         }
         
-        public function set rowHeight(param1:Number) : void {
+        public function set rowHeight(param1:Number) : void
+        {
             this._rowHeight = param1;
         }
         
-        public function get margin() : Number {
+        public function get margin() : Number
+        {
             return this._margin;
         }
         
-        public function set margin(param1:Number) : void {
+        public function set margin(param1:Number) : void
+        {
             this._margin = param1;
         }
         
-        public function get paddingTop() : Number {
+        public function get paddingTop() : Number
+        {
             return this._paddingTop;
         }
         
-        public function set paddingTop(param1:Number) : void {
+        public function set paddingTop(param1:Number) : void
+        {
             this._paddingTop = param1;
         }
         
-        public function get paddingBottom() : Number {
+        public function get paddingBottom() : Number
+        {
             return this._paddingBottom;
         }
         
-        public function set paddingBottom(param1:Number) : void {
+        public function set paddingBottom(param1:Number) : void
+        {
             this._paddingBottom = param1;
         }
         
-        public function get paddingLeft() : Number {
+        public function get paddingLeft() : Number
+        {
             return this._paddingLeft;
         }
         
-        public function set paddingLeft(param1:Number) : void {
+        public function set paddingLeft(param1:Number) : void
+        {
             this._paddingLeft = param1;
         }
         
-        public function get paddingRight() : Number {
+        public function get paddingRight() : Number
+        {
             return this._paddingRight;
         }
         
-        public function set paddingRight(param1:Number) : void {
+        public function set paddingRight(param1:Number) : void
+        {
             this._paddingRight = param1;
         }
         
-        public function get enableHeaderConstraints() : Boolean {
+        public function get enableHeaderConstraints() : Boolean
+        {
             return this._enableHeaderConstraints;
         }
         
-        public function set enableHeaderConstraints(param1:Boolean) : void {
+        public function set enableHeaderConstraints(param1:Boolean) : void
+        {
             this._enableHeaderConstraints = param1;
         }
         
-        public function get showBackground() : Boolean {
+        public function get showBackground() : Boolean
+        {
             return this._showBgForm;
         }
         
-        public function set showBackground(param1:Boolean) : void {
+        public function set showBackground(param1:Boolean) : void
+        {
             this._showBgForm = param1;
         }
         
-        public function get backgroundType() : String {
+        public function get backgroundType() : String
+        {
             return this._backgroundType;
         }
         
-        public function set backgroundType(param1:String) : void {
+        public function set backgroundType(param1:String) : void
+        {
             this.border.gotoAndStop(param1);
             this._backgroundType = param1;
         }

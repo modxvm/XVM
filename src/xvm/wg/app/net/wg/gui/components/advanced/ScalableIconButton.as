@@ -8,7 +8,8 @@ package net.wg.gui.components.advanced
     public class ScalableIconButton extends SoundButtonEx
     {
         
-        public function ScalableIconButton() {
+        public function ScalableIconButton()
+        {
             super();
         }
         
@@ -22,26 +23,30 @@ package net.wg.gui.components.advanced
         
         private var inv:Boolean;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.loader.removeEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler);
             this.loader.dispose();
             this.loader = null;
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.loader.addEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler);
         }
         
-        protected function iconLoadingCompleteHandler(param1:UILoaderEvent) : void {
+        protected function iconLoadingCompleteHandler(param1:UILoaderEvent) : void
+        {
             this.inv = true;
             invalidate();
             this.loader.x = Math.round((_width - this.loader.width) / 2);
             this.loader.y = Math.round((_height - this.loader.height) / 2);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(this.isIconSourceChanged)
             {
                 this.isIconSourceChanged = false;
@@ -51,11 +56,13 @@ package net.wg.gui.components.advanced
             super.draw();
         }
         
-        public function get iconSource() : String {
+        public function get iconSource() : String
+        {
             return this._iconSource;
         }
         
-        public function set iconSource(param1:String) : void {
+        public function set iconSource(param1:String) : void
+        {
             if(this._iconSource != param1)
             {
                 this._iconSource = param1;

@@ -1,9 +1,10 @@
-package 
+package
 {
     public class BATTLE_RESULTS extends Object
     {
         
-        public function BATTLE_RESULTS() {
+        public function BATTLE_RESULTS()
+        {
             super();
         }
         
@@ -159,41 +160,41 @@ package
         
         public static var TEAM_STATS_ENEMYTEAM:String = "#battle_results:team/stats/enemyTeam";
         
-        public static var TEAM_SQUADHEADER_HEADER:String;
+        public static var TEAM_SQUADHEADER_HEADER:String = TEAM_SQUADHEADER + "/header";
         
-        public static var TEAM_SQUADHEADER_BODY:String;
+        public static var TEAM_SQUADHEADER_BODY:String = TEAM_SQUADHEADER + "/body";
         
-        public static var TEAM_PLAYERHEADER_HEADER:String;
+        public static var TEAM_PLAYERHEADER_HEADER:String = TEAM_PLAYERHEADER + "/header";
         
-        public static var TEAM_PLAYERHEADER_BODY:String;
+        public static var TEAM_PLAYERHEADER_BODY:String = TEAM_PLAYERHEADER + "/body";
         
-        public static var TEAM_TANKHEADER_HEADER:String;
+        public static var TEAM_TANKHEADER_HEADER:String = TEAM_TANKHEADER + "/header";
         
-        public static var TEAM_TANKHEADER_BODY:String;
+        public static var TEAM_TANKHEADER_BODY:String = TEAM_TANKHEADER + "/body";
         
         public static var TEAM_HEALTHHEADER_HEADER:String = "#battle_results:team/healthHeader/header";
         
         public static var TEAM_HEALTHHEADER_BODY:String = "#battle_results:team/healthHeader/body";
         
-        public static var TEAM_DAMAGEHEADER_HEADER:String;
+        public static var TEAM_DAMAGEHEADER_HEADER:String = TEAM_DAMAGEHEADER + "/header";
         
-        public static var TEAM_DAMAGEHEADER_BODY:String;
+        public static var TEAM_DAMAGEHEADER_BODY:String = TEAM_DAMAGEHEADER + "/body";
         
-        public static var TEAM_FRAGHEADER_HEADER:String;
+        public static var TEAM_FRAGHEADER_HEADER:String = TEAM_FRAGHEADER + "/header";
         
-        public static var TEAM_FRAGHEADER_BODY:String;
+        public static var TEAM_FRAGHEADER_BODY:String = TEAM_FRAGHEADER + "/body";
         
-        public static var TEAM_XPHEADER_HEADER:String;
+        public static var TEAM_XPHEADER_HEADER:String = TEAM_XPHEADER + "/header";
         
-        public static var TEAM_XPHEADER_BODY:String;
+        public static var TEAM_XPHEADER_BODY:String = TEAM_XPHEADER + "/body";
         
-        public static var TEAM_MEDALHEADER_HEADER:String;
+        public static var TEAM_MEDALHEADER_HEADER:String = TEAM_MEDALHEADER + "/header";
         
-        public static var TEAM_MEDALHEADER_BODY:String;
+        public static var TEAM_MEDALHEADER_BODY:String = TEAM_MEDALHEADER + "/body";
         
-        public static var TEAM_RESOURCEHEADER_HEADER:String;
+        public static var TEAM_RESOURCEHEADER_HEADER:String = TEAM_RESOURCEHEADER + "/header";
         
-        public static var TEAM_RESOURCEHEADER_BODY:String;
+        public static var TEAM_RESOURCEHEADER_BODY:String = TEAM_RESOURCEHEADER + "/body";
         
         public static var TEAM_TEAMRESOURCETOTAL:String = "#battle_results:team/teamResourceTotal";
         
@@ -297,9 +298,10 @@ package
         
         public static var TANKSELECTOR_NEXT:String = "#battle_results:tankSelector/next";
         
-        public static var COMMON_TOOLTIP_ENUM:Array;
+        public static var COMMON_TOOLTIP_ENUM:Array = [COMMON_TOOLTIP_ASSIST_HEADER,COMMON_TOOLTIP_ASSIST_DESCRIPTION,COMMON_TOOLTIP_ASSIST_PART1,COMMON_TOOLTIP_ASSIST_PART2,COMMON_TOOLTIP_ASSIST_TOTAL,COMMON_TOOLTIP_DAMAGE_HEADER,COMMON_TOOLTIP_DAMAGE_DESCRIPTION,COMMON_TOOLTIP_DAMAGE_PART1,COMMON_TOOLTIP_DAMAGE_PART2,COMMON_TOOLTIP_SPOTTED_HEADER,COMMON_TOOLTIP_SPOTTED_DESCRIPTION,COMMON_TOOLTIP_KILL_HEADER,COMMON_TOOLTIP_KILL_1_DESCRIPTION,COMMON_TOOLTIP_KILL0_DESCRIPTION,COMMON_TOOLTIP_KILL1_DESCRIPTION,COMMON_TOOLTIP_KILL2_DESCRIPTION,COMMON_TOOLTIP_KILL3_DESCRIPTION,COMMON_TOOLTIP_KILL4_DESCRIPTION,COMMON_TOOLTIP_KILL5_DESCRIPTION,COMMON_TOOLTIP_TEAMKILL_HEADER,COMMON_TOOLTIP_TEAMKILL_1_DESCRIPTION,COMMON_TOOLTIP_TEAMKILL0_DESCRIPTION,COMMON_TOOLTIP_TEAMKILL1_DESCRIPTION,COMMON_TOOLTIP_TEAMKILL2_DESCRIPTION,COMMON_TOOLTIP_TEAMKILL3_DESCRIPTION,COMMON_TOOLTIP_TEAMKILL4_DESCRIPTION,COMMON_TOOLTIP_TEAMKILL5_DESCRIPTION,COMMON_TOOLTIP_CRITS_HEADER,COMMON_TOOLTIP_CRITS_DESCRIPTION,COMMON_TOOLTIP_CRITS_CRITDAMAGE,COMMON_TOOLTIP_CRITS_CRITDESTRUCTION,COMMON_TOOLTIP_CRITS_CRITWOUND,COMMON_TOOLTIP_CRITS_TOTAL];
         
-        public static function common_tooltip(param1:String) : String {
+        public static function common_tooltip(param1:String) : String
+        {
             var _loc2_:String = "#battle_results:common/tooltip/" + param1;
             App.utils.asserter.assert(!(COMMON_TOOLTIP_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;

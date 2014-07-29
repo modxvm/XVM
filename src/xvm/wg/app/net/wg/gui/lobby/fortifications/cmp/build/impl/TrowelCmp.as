@@ -6,7 +6,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class TrowelCmp extends FortBuildingBase
     {
         
-        public function TrowelCmp() {
+        public function TrowelCmp()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _label:String = "";
         
-        override public function setState(param1:String) : void {
+        override public function setState(param1:String) : void
+        {
             super.setState(param1);
             this.trowelLbl.text = this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this._label = App.utils.locale.makeString(param1);
         }
     }

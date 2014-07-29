@@ -5,7 +5,8 @@ package net.wg.gui.lobby.window
     public class ExchangeXPVehicleVO extends DAAPIDataClass
     {
         
-        public function ExchangeXPVehicleVO(param1:Object) {
+        public function ExchangeXPVehicleVO(param1:Object)
+        {
             super(param1);
         }
         

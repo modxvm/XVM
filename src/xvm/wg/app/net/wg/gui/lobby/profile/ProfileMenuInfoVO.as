@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile
     public class ProfileMenuInfoVO extends DAAPIDataClass
     {
         
-        public function ProfileMenuInfoVO(param1:Object) {
+        public function ProfileMenuInfoVO(param1:Object)
+        {
             super(param1);
         }
         

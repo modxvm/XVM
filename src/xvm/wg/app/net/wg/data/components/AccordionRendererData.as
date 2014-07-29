@@ -5,7 +5,8 @@ package net.wg.data.components
     public class AccordionRendererData extends DAAPIDataClass
     {
         
-        public function AccordionRendererData(param1:Object) {
+        public function AccordionRendererData(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,27 +16,33 @@ package net.wg.data.components
         
         private var _enabled:Boolean = false;
         
-        public function get enabled() : Boolean {
+        public function get enabled() : Boolean
+        {
             return this._enabled;
         }
         
-        public function set enabled(param1:Boolean) : void {
+        public function set enabled(param1:Boolean) : void
+        {
             this._enabled = param1;
         }
         
-        public function get linkage() : String {
+        public function get linkage() : String
+        {
             return this._linkage;
         }
         
-        public function set linkage(param1:String) : void {
+        public function set linkage(param1:String) : void
+        {
             this._linkage = param1;
         }
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this._label = param1;
         }
     }

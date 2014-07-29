@@ -1,9 +1,10 @@
-package 
+package
 {
     public class PROFILE extends Object
     {
         
-        public function PROFILE() {
+        public function PROFILE()
+        {
             super();
         }
         
@@ -59,13 +60,13 @@ package
         
         public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY:String = "#profile:profile/params/tooltip/markOfMastery";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERYDISABLED:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERYDISABLED:String = PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY + "Disabled";
         
         public static var PROFILE_PARAMS_TOOLTIP_MAXDESTROYED:String = "#profile:profile/params/tooltip/maxDestroyed";
         
         public static var PROFILE_PARAMS_TOOLTIP_MAXEXP:String = "#profile:profile/params/tooltip/maxExp";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MAXEXPDISABLED:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MAXEXPDISABLED:String = PROFILE_PARAMS_TOOLTIP_MAXEXP + "Disabled";
         
         public static var PROFILE_PARAMS_TOOLTIP_AVGEXP:String = "#profile:profile/params/tooltip/avgExp";
         
@@ -77,7 +78,7 @@ package
         
         public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE:String = "#profile:profile/params/tooltip/avgAssistedDamage";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_SHORT:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_SHORT:String = PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE + "/short";
         
         public static var PROFILE_PARAMS_TOOLTIP_ARMORUSING:String = "#profile:profile/params/tooltip/armorUsing";
         
@@ -107,11 +108,11 @@ package
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLES:String = "#profile:profile/params/tooltip/fort/battles";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "WinsEfficiency";
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIE:String = "#profile:profile/params/tooltip/fort/sortie";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency";
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE:String = "#profile:profile/params/tooltip/fort/resource";
         
@@ -131,21 +132,21 @@ package
         
         public static var PROFILE_TITLE:String = "#profile:profile/title";
         
-        public static var PROFILE_TABS_TOOLTIP_SUMMARY_HEADER:String;
+        public static var PROFILE_TABS_TOOLTIP_SUMMARY_HEADER:String = PROFILE_TABS_TOOLTIP_SUMMARY + "/header";
         
-        public static var PROFILE_TABS_TOOLTIP_SUMMARY_BODY:String;
+        public static var PROFILE_TABS_TOOLTIP_SUMMARY_BODY:String = PROFILE_TABS_TOOLTIP_SUMMARY + "/body";
         
-        public static var PROFILE_TABS_TOOLTIP_AWARDS_HEADER:String;
+        public static var PROFILE_TABS_TOOLTIP_AWARDS_HEADER:String = PROFILE_TABS_TOOLTIP_AWARDS + "/header";
         
-        public static var PROFILE_TABS_TOOLTIP_AWARDS_BODY:String;
+        public static var PROFILE_TABS_TOOLTIP_AWARDS_BODY:String = PROFILE_TABS_TOOLTIP_AWARDS + "/body";
         
-        public static var PROFILE_TABS_TOOLTIP_STATISTICS_HEADER:String;
+        public static var PROFILE_TABS_TOOLTIP_STATISTICS_HEADER:String = PROFILE_TABS_TOOLTIP_STATISTICS + "/header";
         
-        public static var PROFILE_TABS_TOOLTIP_STATISTICS_BODY:String;
+        public static var PROFILE_TABS_TOOLTIP_STATISTICS_BODY:String = PROFILE_TABS_TOOLTIP_STATISTICS + "/body";
         
-        public static var PROFILE_TABS_TOOLTIP_TECHNIQUE_HEADER:String;
+        public static var PROFILE_TABS_TOOLTIP_TECHNIQUE_HEADER:String = PROFILE_TABS_TOOLTIP_TECHNIQUE + "/header";
         
-        public static var PROFILE_TABS_TOOLTIP_TECHNIQUE_BODY:String;
+        public static var PROFILE_TABS_TOOLTIP_TECHNIQUE_BODY:String = PROFILE_TABS_TOOLTIP_TECHNIQUE + "/body";
         
         public static var SECTION_SUMMARY_TITLE:String = "#profile:section/summary/title";
         
@@ -169,15 +170,15 @@ package
         
         public static var SECTION_SUMMARY_LABELS_SIGNIFICANTAWARDS:String = "#profile:section/summary/labels/significantAwards";
         
-        public static var PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP_HEADER:String;
+        public static var PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP_HEADER:String = PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP + "/header";
         
-        public static var PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP_BODY:String;
+        public static var PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP_BODY:String = PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP + "/body";
         
         public static var SECTION_SUMMARY_LABELS_NEXTAWARDS:String = "#profile:section/summary/labels/nextAwards";
         
-        public static var PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP_HEADER:String;
+        public static var PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP_HEADER:String = PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP + "/header";
         
-        public static var PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP_BODY:String;
+        public static var PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP_BODY:String = PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP + "/body";
         
         public static var SECTION_SUMMARY_ERRORTEXT_SIGNIFICANTAWARDS:String = "#profile:section/summary/errorText/significantAwards";
         
@@ -211,13 +212,13 @@ package
         
         public static var SECTION_AWARDS_DROPDOWN_LABELS_NONE:String = "#profile:section/awards/dropdown/labels/none";
         
-        public static var SECTION_AWARDS_DROPDOWN_TOOLTIP_HEADER:String;
+        public static var SECTION_AWARDS_DROPDOWN_TOOLTIP_HEADER:String = SECTION_AWARDS_DROPDOWN_TOOLTIP + "/header";
         
-        public static var SECTION_AWARDS_DROPDOWN_TOOLTIP_BODY:String;
+        public static var SECTION_AWARDS_DROPDOWN_TOOLTIP_BODY:String = SECTION_AWARDS_DROPDOWN_TOOLTIP + "/body";
         
-        public static var TOOLTIP_DROPDOWN_BATTLETYPE_HEADER:String;
+        public static var TOOLTIP_DROPDOWN_BATTLETYPE_HEADER:String = TOOLTIP_DROPDOWN_BATTLETYPE + "/header";
         
-        public static var TOOLTIP_DROPDOWN_BATTLETYPE_BODY:String;
+        public static var TOOLTIP_DROPDOWN_BATTLETYPE_BODY:String = TOOLTIP_DROPDOWN_BATTLETYPE + "/body";
         
         public static var SECTION_STATISTICS_TITLE:String = "#profile:section/statistics/title";
         
@@ -319,21 +320,21 @@ package
         
         public static var SECTION_STATISTICS_DETAILED_AVGDETECTEDENEMIES:String = "#profile:section/statistics/detailed/avgDetectedEnemies";
         
-        public static var SECTION_STATISTICS_CHART_TYPE_TOOLTIP_HEADER:String;
+        public static var SECTION_STATISTICS_CHART_TYPE_TOOLTIP_HEADER:String = SECTION_STATISTICS_CHART_TYPE_TOOLTIP + "/header";
         
-        public static var SECTION_STATISTICS_CHART_TYPE_TOOLTIP_BODY:String;
+        public static var SECTION_STATISTICS_CHART_TYPE_TOOLTIP_BODY:String = SECTION_STATISTICS_CHART_TYPE_TOOLTIP + "/body";
         
-        public static var SECTION_STATISTICS_CHART_NATION_TOOLTIP_HEADER:String;
+        public static var SECTION_STATISTICS_CHART_NATION_TOOLTIP_HEADER:String = SECTION_STATISTICS_CHART_NATION_TOOLTIP + "/header";
         
-        public static var SECTION_STATISTICS_CHART_NATION_TOOLTIP_BODY:String;
+        public static var SECTION_STATISTICS_CHART_NATION_TOOLTIP_BODY:String = SECTION_STATISTICS_CHART_NATION_TOOLTIP + "/body";
         
-        public static var SECTION_STATISTICS_CHART_LEVEL_TOOLTIP_HEADER:String;
+        public static var SECTION_STATISTICS_CHART_LEVEL_TOOLTIP_HEADER:String = SECTION_STATISTICS_CHART_LEVEL_TOOLTIP + "/header";
         
-        public static var SECTION_STATISTICS_CHART_LEVEL_TOOLTIP_BODY:String;
+        public static var SECTION_STATISTICS_CHART_LEVEL_TOOLTIP_BODY:String = SECTION_STATISTICS_CHART_LEVEL_TOOLTIP + "/body";
         
-        public static var SECTION_STATISTICS_CHART_LEVELDISABLED_TOOLTIP_HEADER:String;
+        public static var SECTION_STATISTICS_CHART_LEVELDISABLED_TOOLTIP_HEADER:String = SECTION_STATISTICS_CHART_LEVELDISABLED_TOOLTIP + "/header";
         
-        public static var SECTION_STATISTICS_CHART_LEVELDISABLED_TOOLTIP_BODY:String;
+        public static var SECTION_STATISTICS_CHART_LEVELDISABLED_TOOLTIP_BODY:String = SECTION_STATISTICS_CHART_LEVELDISABLED_TOOLTIP + "/body";
         
         public static var SECTION_STATISTICS_BODYBAR_LABEL_DETAILED:String = "#profile:section/statistics/bodyBar/label/detailed";
         
@@ -383,13 +384,13 @@ package
         
         public static var SECTION_TECHNIQUE_TABBTN_ACHIEVEMENTS:String = "#profile:section/technique/tabBtn/achievements";
         
-        public static var SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP_HEADER:String;
+        public static var SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP_HEADER:String = SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP + "/header";
         
-        public static var SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP_BODY:String;
+        public static var SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP_BODY:String = SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP + "/body";
         
-        public static var SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP_HEADER:String;
+        public static var SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP_HEADER:String = SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP + "/header";
         
-        public static var SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP_BODY:String;
+        public static var SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP_BODY:String = SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP + "/body";
         
         public static var SECTION_TECHNIQUE_WINDOW_HANGARVEHICLESLABEL:String = "#profile:section/technique/window/hangarVehiclesLabel";
         
@@ -433,41 +434,41 @@ package
         
         public static var SECTION_TECHNIQUE_AWARDS_NOACHIEVEMENTS:String = "#profile:section/technique/awards/noAchievements";
         
-        public static var SECTION_TECHNIQUE_CHECKBOXHANGARVEHICLES_TOOLTIP_HEADER:String;
+        public static var SECTION_TECHNIQUE_CHECKBOXHANGARVEHICLES_TOOLTIP_HEADER:String = SECTION_TECHNIQUE_CHECKBOXHANGARVEHICLES_TOOLTIP + "/header";
         
-        public static var SECTION_TECHNIQUE_CHECKBOXHANGARVEHICLES_TOOLTIP_BODY:String;
+        public static var SECTION_TECHNIQUE_CHECKBOXHANGARVEHICLES_TOOLTIP_BODY:String = SECTION_TECHNIQUE_CHECKBOXHANGARVEHICLES_TOOLTIP + "/body";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_NATION_HEADER:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_NATION_HEADER:String = SECTION_TECHNIQUE_SORT_TOOLTIP_NATION + "/header";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_NATION_BODY:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_NATION_BODY:String = SECTION_TECHNIQUE_SORT_TOOLTIP_NATION + "/body";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE_HEADER:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE_HEADER:String = SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE + "/header";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE_BODY:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE_BODY:String = SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE + "/body";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_LVL_HEADER:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_LVL_HEADER:String = SECTION_TECHNIQUE_SORT_TOOLTIP_LVL + "/header";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_LVL_BODY:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_LVL_BODY:String = SECTION_TECHNIQUE_SORT_TOOLTIP_LVL + "/body";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_NAME_HEADER:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_NAME_HEADER:String = SECTION_TECHNIQUE_SORT_TOOLTIP_NAME + "/header";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_NAME_BODY:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_NAME_BODY:String = SECTION_TECHNIQUE_SORT_TOOLTIP_NAME + "/body";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT_HEADER:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT_HEADER:String = SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT + "/header";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT_BODY:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT_BODY:String = SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT + "/body";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_WINS_HEADER:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_WINS_HEADER:String = SECTION_TECHNIQUE_SORT_TOOLTIP_WINS + "/header";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_WINS_BODY:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_WINS_BODY:String = SECTION_TECHNIQUE_SORT_TOOLTIP_WINS + "/body";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP_HEADER:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP_HEADER:String = SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP + "/header";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP_BODY:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP_BODY:String = SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP + "/body";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY_HEADER:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY_HEADER:String = SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY + "/header";
         
-        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY_BODY:String;
+        public static var SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY_BODY:String = SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY + "/body";
         
         public static var PROFILE_DROPDOWN_BATTLESTYPE:String = "#profile:profile/dropdown/battlesType";
         
@@ -491,156 +492,156 @@ package
         
         public static var PROFILE_DROPDOWN_LABELS_FORTIFICATIONS_SORTIES:String = "#profile:profile/dropdown/labels/fortifications/sorties";
         
-        public static var PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT_HEADER:String = PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT_BODY:String = PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_WINS_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_WINS_HEADER:String = PROFILE_PARAMS_TOOLTIP_WINS + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_WINS_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_WINS_BODY:String = PROFILE_PARAMS_TOOLTIP_WINS + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLESWINS + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIEWINS + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_ACHIEVEMENTSCOUNT_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_ACHIEVEMENTSCOUNT_HEADER:String = PROFILE_PARAMS_TOOLTIP_ACHIEVEMENTSCOUNT + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_ACHIEVEMENTSCOUNT_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_ACHIEVEMENTSCOUNT_BODY:String = PROFILE_PARAMS_TOOLTIP_ACHIEVEMENTSCOUNT + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_USEDTECHNICS_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_USEDTECHNICS_HEADER:String = PROFILE_PARAMS_TOOLTIP_USEDTECHNICS + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_USEDTECHNICS_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_USEDTECHNICS_BODY:String = PROFILE_PARAMS_TOOLTIP_USEDTECHNICS + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY_HEADER:String = PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY_BODY:String = PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERYDISABLED_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERYDISABLED_HEADER:String = PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY + "Disabled/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERYDISABLED_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MARKOFMASTERYDISABLED_BODY:String = PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY + "Disabled/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MAXDESTROYED_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MAXDESTROYED_HEADER:String = PROFILE_PARAMS_TOOLTIP_MAXDESTROYED + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MAXDESTROYED_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MAXDESTROYED_BODY:String = PROFILE_PARAMS_TOOLTIP_MAXDESTROYED + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MAXEXP_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MAXEXP_HEADER:String = PROFILE_PARAMS_TOOLTIP_MAXEXP + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MAXEXP_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MAXEXP_BODY:String = PROFILE_PARAMS_TOOLTIP_MAXEXP + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MAXEXPDISABLED_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MAXEXPDISABLED_HEADER:String = PROFILE_PARAMS_TOOLTIP_MAXEXP + "Disabled/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MAXEXPDISABLED_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MAXEXPDISABLED_BODY:String = PROFILE_PARAMS_TOOLTIP_MAXEXP + "Disabled/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGEXP_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGEXP_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGEXP + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGEXP_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGEXP_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGEXP + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIES_AVGRESOURCES + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTSORTIES_TOTALRESOURCES + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_TOTALRESOURCES + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGEX_SHORT_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGEX_SHORT_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGEX_SHORT + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGEX_SHORT_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGEX_SHORT_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGEX_SHORT + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGDAMAGE_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGDAMAGE_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGDAMAGE + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGDAMAGE_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGDAMAGE_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGDAMAGE + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGDMG_SHORT_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGDMG_SHORT_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGDMG_SHORT + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGDMG_SHORT_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGDMG_SHORT_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGDMG_SHORT + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_SHORT_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_SHORT_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE + "/short/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_SHORT_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE_SHORT_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGASSISTEDDAMAGE + "/short/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_ARMORUSING_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_ARMORUSING_HEADER:String = PROFILE_PARAMS_TOOLTIP_ARMORUSING + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_ARMORUSING_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_ARMORUSING_BODY:String = PROFILE_PARAMS_TOOLTIP_ARMORUSING + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_HITS_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_HITS_HEADER:String = PROFILE_PARAMS_TOOLTIP_HITS + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_HITS_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_HITS_BODY:String = PROFILE_PARAMS_TOOLTIP_HITS + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_SURVIVAL_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_SURVIVAL_HEADER:String = PROFILE_PARAMS_TOOLTIP_SURVIVAL + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_SURVIVAL_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_SURVIVAL_BODY:String = PROFILE_PARAMS_TOOLTIP_SURVIVAL + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_DESTROYCOEFF_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_DESTROYCOEFF_HEADER:String = PROFILE_PARAMS_TOOLTIP_DESTROYCOEFF + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_DESTROYCOEFF_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_DESTROYCOEFF_BODY:String = PROFILE_PARAMS_TOOLTIP_DESTROYCOEFF + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_DAMAGECOEFF_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_DAMAGECOEFF_HEADER:String = PROFILE_PARAMS_TOOLTIP_DAMAGECOEFF + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_DAMAGECOEFF_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_DAMAGECOEFF_BODY:String = PROFILE_PARAMS_TOOLTIP_DAMAGECOEFF + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_CAPTUREPOINTS_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_CAPTUREPOINTS_HEADER:String = PROFILE_PARAMS_TOOLTIP_CAPTUREPOINTS + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_CAPTUREPOINTS_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_CAPTUREPOINTS_BODY:String = PROFILE_PARAMS_TOOLTIP_CAPTUREPOINTS + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_DROPPEDCAPTUREPOINTS_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_DROPPEDCAPTUREPOINTS_HEADER:String = PROFILE_PARAMS_TOOLTIP_DROPPEDCAPTUREPOINTS + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_DROPPEDCAPTUREPOINTS_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_DROPPEDCAPTUREPOINTS_BODY:String = PROFILE_PARAMS_TOOLTIP_DROPPEDCAPTUREPOINTS + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGRECEIVEDDAMAGE_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGRECEIVEDDAMAGE_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGRECEIVEDDAMAGE + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGRECEIVEDDAMAGE_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGRECEIVEDDAMAGE_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGRECEIVEDDAMAGE + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGDETECTEDENEMIES_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGDETECTEDENEMIES_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGDETECTEDENEMIES + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGDETECTEDENEMIES_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGDETECTEDENEMIES_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGDETECTEDENEMIES + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGDESTROYEDVEHICLES_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGDESTROYEDVEHICLES_HEADER:String = PROFILE_PARAMS_TOOLTIP_AVGDESTROYEDVEHICLES + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_AVGDESTROYEDVEHICLES_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_AVGDESTROYEDVEHICLES_BODY:String = PROFILE_PARAMS_TOOLTIP_AVGDESTROYEDVEHICLES + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MAXDAMAGE_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MAXDAMAGE_HEADER:String = PROFILE_PARAMS_TOOLTIP_MAXDAMAGE + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_MAXDAMAGE_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_MAXDAMAGE_BODY:String = PROFILE_PARAMS_TOOLTIP_MAXDAMAGE + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE_HEADER:String = PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE_BODY:String = PROFILE_PARAMS_TOOLTIP_UNAVAILABLEMAXDAMAGE + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLES_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLES_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "WinsEfficiency/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "WinsEfficiency/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIE_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIE_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIE_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIE_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE_HEADER:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE_BODY:String;
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_RESOURCE + "/body";
     }
 }

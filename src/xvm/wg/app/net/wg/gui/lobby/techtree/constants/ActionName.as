@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.constants
     public class ActionName extends Object
     {
         
-        public function ActionName() {
+        public function ActionName()
+        {
             super();
         }
         

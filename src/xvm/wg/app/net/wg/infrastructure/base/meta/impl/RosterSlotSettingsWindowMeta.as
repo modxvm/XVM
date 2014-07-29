@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class RosterSlotSettingsWindowMeta extends AbstractWindowView
     {
         
-        public function RosterSlotSettingsWindowMeta() {
+        public function RosterSlotSettingsWindowMeta()
+        {
             super();
         }
         
@@ -18,22 +19,26 @@ package net.wg.infrastructure.base.meta.impl
         
         public var cancelButtonHandler:Function = null;
         
-        public function onFiltersUpdateS(param1:int, param2:String, param3:Boolean, param4:int, param5:Boolean) : void {
+        public function onFiltersUpdateS(param1:int, param2:String, param3:Boolean, param4:int, param5:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.onFiltersUpdate,"onFiltersUpdate" + Errors.CANT_NULL);
             this.onFiltersUpdate(param1,param2,param3,param4,param5);
         }
         
-        public function getFilterDataS() : Object {
+        public function getFilterDataS() : Object
+        {
             App.utils.asserter.assertNotNull(this.getFilterData,"getFilterData" + Errors.CANT_NULL);
             return this.getFilterData();
         }
         
-        public function submitButtonHandlerS(param1:Object) : void {
+        public function submitButtonHandlerS(param1:Object) : void
+        {
             App.utils.asserter.assertNotNull(this.submitButtonHandler,"submitButtonHandler" + Errors.CANT_NULL);
             this.submitButtonHandler(param1);
         }
         
-        public function cancelButtonHandlerS() : void {
+        public function cancelButtonHandlerS() : void
+        {
             App.utils.asserter.assertNotNull(this.cancelButtonHandler,"cancelButtonHandler" + Errors.CANT_NULL);
             this.cancelButtonHandler();
         }

@@ -9,12 +9,14 @@ package net.wg.gui.components.popOvers
     public class SmartPopOverExternalLayout extends PopoverInternalLayout
     {
         
-        public function SmartPopOverExternalLayout() {
+        public function SmartPopOverExternalLayout()
+        {
             this._positionKeyPointPadding = new TwoDimensionalPadding();
             super();
         }
         
-        public static function getLayoutOptions(param1:Point, param2:Vector.<Point>, param3:Point, param4:Point, param5:Rectangle, param6:TwoDimensionalPadding = null, param7:int = -1) : SmartPopOverLayoutInfo {
+        public static function getLayoutOptions(param1:Point, param2:Vector.<Point>, param3:Point, param4:Point, param5:Rectangle, param6:TwoDimensionalPadding = null, param7:int = -1) : SmartPopOverLayoutInfo
+        {
             var _loc18_:Point = null;
             var _loc19_:* = NaN;
             if(param6 == null)
@@ -87,7 +89,8 @@ package net.wg.gui.components.popOvers
         
         private var _preferredLayout:int = -1;
         
-        override public function invokeLayout() : Object {
+        override public function invokeLayout() : Object
+        {
             var _loc4_:DisplayObject = null;
             super.invokeLayout();
             if(this._positionKeyPoint == null || this._stageDimensions == null)
@@ -119,42 +122,51 @@ package net.wg.gui.components.popOvers
             return _loc10_;
         }
         
-        public function set stageDimensions(param1:Point) : void {
+        public function set stageDimensions(param1:Point) : void
+        {
             this._stageDimensions = param1;
         }
         
-        public function set positionKeyPoint(param1:Point) : void {
+        public function set positionKeyPoint(param1:Point) : void
+        {
             this._positionKeyPoint = param1;
         }
         
-        public function get stageDimensions() : Point {
+        public function get stageDimensions() : Point
+        {
             return this._stageDimensions;
         }
         
-        public function get positionKeyPoint() : Point {
+        public function get positionKeyPoint() : Point
+        {
             return this._positionKeyPoint;
         }
         
-        public function get positionKeyPointPadding() : TwoDimensionalPadding {
+        public function get positionKeyPointPadding() : TwoDimensionalPadding
+        {
             return this._positionKeyPointPadding;
         }
         
-        public function set positionKeyPointPadding(param1:TwoDimensionalPadding) : void {
+        public function set positionKeyPointPadding(param1:TwoDimensionalPadding) : void
+        {
             this._positionKeyPointPadding = param1;
         }
         
-        override public function dispose() : void {
+        override public function dispose() : void
+        {
             this._stageDimensions = null;
             this._positionKeyPoint = null;
             this._positionKeyPointPadding = null;
             super.dispose();
         }
         
-        public function get preferredLayout() : int {
+        public function get preferredLayout() : int
+        {
             return this._preferredLayout;
         }
         
-        public function set preferredLayout(param1:int) : void {
+        public function set preferredLayout(param1:int) : void
+        {
             this._preferredLayout = param1;
         }
     }

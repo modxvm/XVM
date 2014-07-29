@@ -5,15 +5,18 @@ package net.wg.gui.lobby.messengerBar.carousel
     public class ChannelCarouselScrollBar extends ScrollBar
     {
         
-        public function ChannelCarouselScrollBar() {
+        public function ChannelCarouselScrollBar()
+        {
             super();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             constraints.update(_height,_width);
             downArrow.y = _width;
         }

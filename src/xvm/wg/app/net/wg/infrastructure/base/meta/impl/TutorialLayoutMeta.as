@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class TutorialLayoutMeta extends AbstractView
     {
         
-        public function TutorialLayoutMeta() {
+        public function TutorialLayoutMeta()
+        {
             super();
         }
     }

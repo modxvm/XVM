@@ -18,7 +18,8 @@ package net.wg.gui.components.controls
     public class SortableTable extends UIComponent
     {
         
-        public function SortableTable() {
+        public function SortableTable()
+        {
             super();
         }
         
@@ -98,108 +99,134 @@ package net.wg.gui.components.controls
         
         private var hitMc:Sprite = null;
         
-        public function get isListSelectable() : Boolean {
+        public function get isListSelectable() : Boolean
+        {
             return this._isListSelectable;
         }
         
-        public function set isListSelectable(param1:Boolean) : void {
+        public function set isListSelectable(param1:Boolean) : void
+        {
             this._isListSelectable = param1;
         }
         
-        public function set scrollbarPadding(param1:Object) : void {
+        public function set scrollbarPadding(param1:Object) : void
+        {
             this._scrollbarPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
         }
         
-        public function get rowHeight() : Number {
+        public function get rowHeight() : Number
+        {
             return this._rowHeight;
         }
         
-        public function set rowHeight(param1:Number) : void {
+        public function set rowHeight(param1:Number) : void
+        {
             this._rowHeight = param1;
         }
         
-        public function get rowHeightFixed() : Boolean {
+        public function get rowHeightFixed() : Boolean
+        {
             return this._rowHeightFixed;
         }
         
-        public function set rowHeightFixed(param1:Boolean) : void {
+        public function set rowHeightFixed(param1:Boolean) : void
+        {
             this._rowHeightFixed = param1;
         }
         
-        public function get headerHeight() : int {
+        public function get headerHeight() : int
+        {
             return this._headerHeight;
         }
         
-        public function set headerHeight(param1:int) : void {
+        public function set headerHeight(param1:int) : void
+        {
             this._headerHeight = param1;
         }
         
-        public function get rowWidthAutoResize() : Boolean {
+        public function get rowWidthAutoResize() : Boolean
+        {
             return this._rowWidthAutoResize;
         }
         
-        public function set rowWidthAutoResize(param1:Boolean) : void {
+        public function set rowWidthAutoResize(param1:Boolean) : void
+        {
             this._rowWidthAutoResize = param1;
         }
         
-        public function get listLinkage() : String {
+        public function get listLinkage() : String
+        {
             return this._listLinkage;
         }
         
-        public function set listLinkage(param1:String) : void {
+        public function set listLinkage(param1:String) : void
+        {
             this._listLinkage = param1;
         }
         
-        public function get rendererLinkage() : String {
+        public function get rendererLinkage() : String
+        {
             return this._rendererLinkage;
         }
         
-        public function set rendererLinkage(param1:String) : void {
+        public function set rendererLinkage(param1:String) : void
+        {
             this._rendererLinkage = param1;
         }
         
-        public function get isSortable() : Boolean {
+        public function get isSortable() : Boolean
+        {
             return this._isSortable;
         }
         
-        public function set isSortable(param1:Boolean) : void {
+        public function set isSortable(param1:Boolean) : void
+        {
             this._isSortable = param1;
         }
         
-        public function get useRightBtn() : Boolean {
+        public function get useRightBtn() : Boolean
+        {
             return this._useRightBtn;
         }
         
-        public function set useRightBtn(param1:Boolean) : void {
+        public function set useRightBtn(param1:Boolean) : void
+        {
             this._useRightBtn = param1;
         }
         
-        public function get useSmartScrollbar() : Boolean {
+        public function get useSmartScrollbar() : Boolean
+        {
             return this._useSmartScrollbar;
         }
         
-        public function set useSmartScrollbar(param1:Boolean) : void {
+        public function set useSmartScrollbar(param1:Boolean) : void
+        {
             this._useSmartScrollbar = param1;
         }
         
-        public function get headerDP() : IDataProvider {
+        public function get headerDP() : IDataProvider
+        {
             return this._headerDP;
         }
         
-        public function set headerDP(param1:IDataProvider) : void {
+        public function set headerDP(param1:IDataProvider) : void
+        {
             this._headerDP = this.setAdditionalOptions(param1);
             invalidate(INV_HEADER_DATA);
         }
         
-        public function get isRendererToggle() : Boolean {
+        public function get isRendererToggle() : Boolean
+        {
             return this._isRendererToggle;
         }
         
-        public function set isRendererToggle(param1:Boolean) : void {
+        public function set isRendererToggle(param1:Boolean) : void
+        {
             this._isRendererToggle = param1;
         }
         
-        private function setAdditionalOptions(param1:IDataProvider) : IDataProvider {
+        private function setAdditionalOptions(param1:IDataProvider) : IDataProvider
+        {
             var _loc4_:NormalSortingBtnInfo = null;
             var _loc2_:int = param1.length;
             var _loc3_:* = 0;
@@ -224,16 +251,19 @@ package net.wg.gui.components.controls
             return param1;
         }
         
-        public function get listDP() : IDataProvider {
+        public function get listDP() : IDataProvider
+        {
             return this._listDP;
         }
         
-        public function set listDP(param1:IDataProvider) : void {
+        public function set listDP(param1:IDataProvider) : void
+        {
             this._listDP = param1;
             invalidate(INV_LIST_DATA);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.container == null)
             {
@@ -245,14 +275,16 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             this._headerDP = new DataProvider();
             this._listDP = new DataProvider();
             this._scrollbarPadding = new Padding(0);
             super.initialize();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.cleanUpListHandlers();
             if(this.header)
             {
@@ -291,7 +323,8 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:NormalSortingButton = null;
             var _loc3_:* = NaN;
@@ -389,13 +422,15 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function sortByField(param1:String, param2:String) : void {
+        public function sortByField(param1:String, param2:String) : void
+        {
             this._sortingID = param1;
             this._sortDir = param2;
             invalidate(INV_SORTING);
         }
         
-        private function initComponents() : void {
+        private function initComponents() : void
+        {
             removeChild(this.container);
             setActualSize(_width,_height);
             this.container.scaleX = 1 / scaleX;
@@ -408,7 +443,8 @@ package net.wg.gui.components.controls
             invalidate(INV_HANDLERS);
         }
         
-        private function initShadows() : void {
+        private function initShadows() : void
+        {
             this.upperShadow = App.utils.classFactory.getComponent(Linkages.TABLE_SHADDOW_UI,MovieClip);
             this.lowerShadow = App.utils.classFactory.getComponent(Linkages.ROTATED_TABLE_SHADDOW_UI,MovieClip);
             this.lowerShadow.mouseEnabled = this.upperShadow.mouseEnabled = false;
@@ -420,7 +456,8 @@ package net.wg.gui.components.controls
             this.lowerShadow.y = _height;
         }
         
-        private function initHeaderButtonBar() : void {
+        private function initHeaderButtonBar() : void
+        {
             this.header = App.utils.classFactory.getComponent(Linkages.SORTABLE_BUTTON_BAR_UI,SortableHeaderButtonBar);
             this.header.itemRendererName = Linkages.NORMAL_SORT_BTN_UI;
             this.header.x = LEFT_PADDING;
@@ -435,7 +472,8 @@ package net.wg.gui.components.controls
             this.header.validateNow();
         }
         
-        private function initLists() : void {
+        private function initLists() : void
+        {
             var _loc1_:Number = _height - this._headerHeight;
             this.list = App.utils.classFactory.getComponent(Linkages.SORTABLE_SCROLLING_LIST_UI,SortableTableList);
             this.list.itemRendererName = this._rendererLinkage;
@@ -454,7 +492,8 @@ package net.wg.gui.components.controls
             this.list.validateNow();
         }
         
-        private function setupListHandlers() : void {
+        private function setupListHandlers() : void
+        {
             if(this.header)
             {
                 this.header.addEventListener(SortingEvent.SORT_DIRECTION_CHANGED,this.sortingChangedHandler,false,0,true);
@@ -471,7 +510,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function cleanUpListHandlers() : void {
+        private function cleanUpListHandlers() : void
+        {
             if(this.header)
             {
                 this.header.removeEventListener(SortingEvent.SORT_DIRECTION_CHANGED,this.sortingChangedHandler,false);
@@ -488,7 +528,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function sortingChangedHandler(param1:SortingEvent) : void {
+        private function sortingChangedHandler(param1:SortingEvent) : void
+        {
             var _loc2_:NormalSortingButton = NormalSortingButton(param1.target);
             if(_loc2_.sortDirection != SortingInfo.WITHOUT_SORT)
             {
@@ -496,7 +537,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function dispatchTableEvent(param1:ListEvent) : void {
+        private function dispatchTableEvent(param1:ListEvent) : void
+        {
             if((this._isRendererToggle) && param1.type == ListEvent.ITEM_CLICK)
             {
                 if(this.listSelectedIndex == param1.index)
@@ -508,19 +550,22 @@ package net.wg.gui.components.controls
             param1.stopImmediatePropagation();
         }
         
-        public function set headerSelectedIndex(param1:int) : void {
+        public function set headerSelectedIndex(param1:int) : void
+        {
             this._headerSelectedIndex = param1;
             this.invHeaderIndx = true;
             invalidate();
         }
         
-        public function set listSelectedIndex(param1:int) : void {
+        public function set listSelectedIndex(param1:int) : void
+        {
             this._listSelectedIndex = param1;
             this.invListIndx = true;
             invalidate();
         }
         
-        public function get headerSelectedIndex() : int {
+        public function get headerSelectedIndex() : int
+        {
             if(this.header)
             {
                 return this.header.selectedIndex;
@@ -528,7 +573,8 @@ package net.wg.gui.components.controls
             return -1;
         }
         
-        public function get listSelectedIndex() : int {
+        public function get listSelectedIndex() : int
+        {
             if(this.list)
             {
                 return this.list.selectedIndex;
@@ -536,7 +582,8 @@ package net.wg.gui.components.controls
             return -1;
         }
         
-        public function getListSelectedItem() : Object {
+        public function getListSelectedItem() : Object
+        {
             if(this.list)
             {
                 return this.list.selectedItem;
@@ -544,7 +591,8 @@ package net.wg.gui.components.controls
             return null;
         }
         
-        public function get scrollPosition() : Number {
+        public function get scrollPosition() : Number
+        {
             if(this.list)
             {
                 return this.list.scrollPosition;
@@ -552,7 +600,8 @@ package net.wg.gui.components.controls
             return 0;
         }
         
-        public function get totalRenderers() : int {
+        public function get totalRenderers() : int
+        {
             if(this.list)
             {
                 return this.list.renderersCount;
@@ -560,7 +609,8 @@ package net.wg.gui.components.controls
             return 0;
         }
         
-        public function getRendererAt(param1:int, param2:int) : IListItemRenderer {
+        public function getRendererAt(param1:int, param2:int) : IListItemRenderer
+        {
             if(this.list)
             {
                 return this.list.getRendererAt(param1,param2);
@@ -568,7 +618,8 @@ package net.wg.gui.components.controls
             return null;
         }
         
-        public function getHeaderBtnByID(param1:String) : NormalSortingButton {
+        public function getHeaderBtnByID(param1:String) : NormalSortingButton
+        {
             var _loc2_:* = 0;
             var _loc3_:NormalSortingButton = null;
             if((this.header) && this.header.renderersCount > 0)
@@ -587,30 +638,35 @@ package net.wg.gui.components.controls
             return null;
         }
         
-        public function selectListItemByUniqKey(param1:String, param2:Object) : void {
+        public function selectListItemByUniqKey(param1:String, param2:Object) : void
+        {
             this._key = param1;
             this._value = param2;
             this.invSelKey = true;
             invalidate();
         }
         
-        public function scrollListToItemByUniqKey(param1:String, param2:Object) : void {
+        public function scrollListToItemByUniqKey(param1:String, param2:Object) : void
+        {
             this._key = param1;
             this._value = param2;
             this.invScrollKey = true;
             invalidate();
         }
         
-        public function get uniqKeyForAutoSelect() : String {
+        public function get uniqKeyForAutoSelect() : String
+        {
             return this._uniqKeyForAutoSelect;
         }
         
-        public function set uniqKeyForAutoSelect(param1:String) : void {
+        public function set uniqKeyForAutoSelect(param1:String) : void
+        {
             this._uniqKeyForAutoSelect = param1;
             invalidate(INV_UNIQ_KEY);
         }
         
-        private function dataChangeHandler(param1:SortingEvent) : void {
+        private function dataChangeHandler(param1:SortingEvent) : void
+        {
             param1.stopImmediatePropagation();
             dispatchEvent(new SortingEvent(SortingEvent.SELECTED_DATA_CHANGED));
         }

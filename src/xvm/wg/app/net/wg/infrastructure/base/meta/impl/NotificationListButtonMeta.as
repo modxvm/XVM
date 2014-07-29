@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class NotificationListButtonMeta extends BaseDAAPIComponent
     {
         
-        public function NotificationListButtonMeta() {
+        public function NotificationListButtonMeta()
+        {
             super();
         }
         
         public var handleClick:Function = null;
         
-        public function handleClickS() : void {
+        public function handleClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.handleClick,"handleClick" + Errors.CANT_NULL);
             this.handleClick();
         }

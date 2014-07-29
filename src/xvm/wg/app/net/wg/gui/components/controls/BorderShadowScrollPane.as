@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class BorderShadowScrollPane extends ResizableScrollPane
     {
         
-        public function BorderShadowScrollPane() {
+        public function BorderShadowScrollPane()
+        {
             super();
         }
         
@@ -13,19 +14,22 @@ package net.wg.gui.components.controls
         
         public var bottomShadow:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.topShadow.mouseChildren = this.topShadow.mouseEnabled = false;
             this.bottomShadow.mouseChildren = this.bottomShadow.mouseEnabled = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.topShadow = null;
             this.bottomShadow = null;
         }
         
-        override protected function applyTargetChanges() : void {
+        override protected function applyTargetChanges() : void
+        {
             super.applyTargetChanges();
             if(target)
             {

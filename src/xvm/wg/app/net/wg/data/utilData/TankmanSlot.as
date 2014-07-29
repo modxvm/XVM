@@ -5,7 +5,8 @@ package net.wg.data.utilData
     public class TankmanSlot extends Object
     {
         
-        public function TankmanSlot(param1:uint, param2:uint = 1.0) {
+        public function TankmanSlot(param1:uint, param2:uint = 1.0)
+        {
             super();
             this._roleName = param1;
             this._tankmanInvID = param2;
@@ -15,11 +16,13 @@ package net.wg.data.utilData
         
         private var _tankmanInvID:uint;
         
-        public function get roleName() : uint {
+        public function get roleName() : uint
+        {
             return this._roleName;
         }
         
-        public function get tankman() : Tankman {
+        public function get tankman() : Tankman
+        {
             if(this._tankmanInvID != -1)
             {
                 return new Tankman(this._tankmanInvID);

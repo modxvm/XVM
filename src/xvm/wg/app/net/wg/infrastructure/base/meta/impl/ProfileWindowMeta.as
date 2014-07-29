@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ProfileWindowMeta extends AbstractWindowView
     {
         
-        public function ProfileWindowMeta() {
+        public function ProfileWindowMeta()
+        {
             super();
         }
         
@@ -16,17 +17,20 @@ package net.wg.infrastructure.base.meta.impl
         
         public var userCreatePrivateChannel:Function = null;
         
-        public function userAddFriendS() : void {
+        public function userAddFriendS() : void
+        {
             App.utils.asserter.assertNotNull(this.userAddFriend,"userAddFriend" + Errors.CANT_NULL);
             this.userAddFriend();
         }
         
-        public function userSetIgnoredS() : void {
+        public function userSetIgnoredS() : void
+        {
             App.utils.asserter.assertNotNull(this.userSetIgnored,"userSetIgnored" + Errors.CANT_NULL);
             this.userSetIgnored();
         }
         
-        public function userCreatePrivateChannelS() : void {
+        public function userCreatePrivateChannelS() : void
+        {
             App.utils.asserter.assertNotNull(this.userCreatePrivateChannel,"userCreatePrivateChannel" + Errors.CANT_NULL);
             this.userCreatePrivateChannel();
         }

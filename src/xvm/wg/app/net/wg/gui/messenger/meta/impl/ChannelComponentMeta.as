@@ -6,7 +6,8 @@ package net.wg.gui.messenger.meta.impl
     public class ChannelComponentMeta extends BaseDAAPIComponent
     {
         
-        public function ChannelComponentMeta() {
+        public function ChannelComponentMeta()
+        {
             super();
         }
         
@@ -18,22 +19,26 @@ package net.wg.gui.messenger.meta.impl
         
         public var getMessageMaxLength:Function = null;
         
-        public function isJoinedS() : Boolean {
+        public function isJoinedS() : Boolean
+        {
             App.utils.asserter.assertNotNull(this.isJoined,"isJoined" + Errors.CANT_NULL);
             return this.isJoined();
         }
         
-        public function sendMessageS(param1:String) : Boolean {
+        public function sendMessageS(param1:String) : Boolean
+        {
             App.utils.asserter.assertNotNull(this.sendMessage,"sendMessage" + Errors.CANT_NULL);
             return this.sendMessage(param1);
         }
         
-        public function getHistoryS() : String {
+        public function getHistoryS() : String
+        {
             App.utils.asserter.assertNotNull(this.getHistory,"getHistory" + Errors.CANT_NULL);
             return this.getHistory();
         }
         
-        public function getMessageMaxLengthS() : int {
+        public function getMessageMaxLengthS() : int
+        {
             App.utils.asserter.assertNotNull(this.getMessageMaxLength,"getMessageMaxLength" + Errors.CANT_NULL);
             return this.getMessageMaxLength();
         }

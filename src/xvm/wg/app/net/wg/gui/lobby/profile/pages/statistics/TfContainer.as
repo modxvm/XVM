@@ -13,7 +13,8 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class TfContainer extends UIComponent implements IDisposable
     {
         
-        public function TfContainer() {
+        public function TfContainer()
+        {
             super();
             addEventListener(Event.RESIZE,this.resizeComponentsHandler,false,0,true);
         }
@@ -36,12 +37,14 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         public var tfMarksOfMastery:LditMarksOfMastery;
         
-        private function resizeComponentsHandler(param1:Event) : void {
+        private function resizeComponentsHandler(param1:Event) : void
+        {
             param1.stopImmediatePropagation();
             invalidate(LAYOUT_INVALID);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Vector.<UIComponent> = null;
             var _loc2_:* = NaN;
             var _loc3_:* = 0;
@@ -88,7 +91,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             }
         }
         
-        public function setDossierData(param1:Object) : void {
+        public function setDossierData(param1:Object) : void
+        {
             var _loc2_:ProfileStatisticsVO = new ProfileStatisticsVO(param1);
             this.tfTotalBattles.text = _loc2_.getBattlesCountStr();
             this.tfTotalBattles.setValues(_loc2_.getWinsCountStr(),_loc2_.getLossesCountStr(),_loc2_.getDrawsCountStr());
@@ -123,7 +127,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(Event.RESIZE,this.resizeComponentsHandler);
             super.onDispose();
         }

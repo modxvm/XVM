@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data.base
     public class BuildingBaseVO extends DAAPIDataClass
     {
         
-        public function BuildingBaseVO(param1:Object) {
+        public function BuildingBaseVO(param1:Object)
+        {
             super(param1);
         }
         

@@ -5,13 +5,15 @@ package net.wg.infrastructure.base.meta.impl
     public class ExchangeVcoinWindowMeta extends BaseExchangeWindowMeta
     {
         
-        public function ExchangeVcoinWindowMeta() {
+        public function ExchangeVcoinWindowMeta()
+        {
             super();
         }
         
         public var buyVcoin:Function = null;
         
-        public function buyVcoinS() : void {
+        public function buyVcoinS() : void
+        {
             App.utils.asserter.assertNotNull(this.buyVcoin,"buyVcoin" + Errors.CANT_NULL);
             this.buyVcoin();
         }

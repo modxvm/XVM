@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ProfileTabNavigatorMeta extends BaseDAAPIComponent
     {
         
-        public function ProfileTabNavigatorMeta() {
+        public function ProfileTabNavigatorMeta()
+        {
             super();
         }
     }

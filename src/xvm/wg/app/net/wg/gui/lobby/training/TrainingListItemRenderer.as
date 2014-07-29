@@ -12,7 +12,8 @@ package net.wg.gui.lobby.training
     public class TrainingListItemRenderer extends ListItemRenderer
     {
         
-        public function TrainingListItemRenderer() {
+        public function TrainingListItemRenderer()
+        {
             super();
         }
         
@@ -30,7 +31,8 @@ package net.wg.gui.lobby.training
         
         private var dataVO:TrainingFormRendererVO;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             focusTarget = owner;
             constraints.addElement("textComment",this.textComment,Constraints.ALL);
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.training
             this.addEventListener(ButtonEvent.CLICK,this.onSelectItem);
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             this.itemClicked = false;
             if(param1)
@@ -51,7 +54,8 @@ package net.wg.gui.lobby.training
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.removeEventListener(ButtonEvent.CLICK,this.onSelectItem);
             this.iconLoader.dispose();
             this.iconLoader = null;
@@ -68,13 +72,15 @@ package net.wg.gui.lobby.training
             super.onDispose();
         }
         
-        public function onSelectItem(param1:ButtonEvent) : void {
+        public function onSelectItem(param1:ButtonEvent) : void
+        {
             this.itemClicked = true;
             this.enabled = false;
             dispatchEvent(new TrainingEvent(TrainingEvent.OPEN_TRAINING_ROOM,{"id":this.dataVO.id}));
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (data))
             {

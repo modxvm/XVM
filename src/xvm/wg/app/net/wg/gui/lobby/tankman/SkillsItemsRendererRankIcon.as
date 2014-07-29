@@ -6,7 +6,8 @@ package net.wg.gui.lobby.tankman
     public class SkillsItemsRendererRankIcon extends UIComponent
     {
         
-        public function SkillsItemsRendererRankIcon() {
+        public function SkillsItemsRendererRankIcon()
+        {
             super();
         }
         
@@ -18,18 +19,21 @@ package net.wg.gui.lobby.tankman
         
         private var UPDATE_DATA:String = "updateData";
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.iconRank.dispose();
         }
         
-        public function setData(param1:String, param2:*) : void {
+        public function setData(param1:String, param2:*) : void
+        {
             this.imageUrl = param1;
             this.isEnabled = param2;
             invalidate(this.UPDATE_DATA);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(this.UPDATE_DATA))
             {

@@ -31,7 +31,8 @@ package net.wg.gui.lobby.techtree.nodes
     public class Renderer extends SoundListItemRenderer implements IRenderer
     {
         
-        public function Renderer() {
+        public function Renderer()
+        {
             Extensions.enabled = true;
             super();
             if(this.actionPrice)
@@ -66,7 +67,8 @@ package net.wg.gui.lobby.techtree.nodes
         
         protected var _doValidateNow:Boolean = false;
         
-        public function setup(param1:uint, param2:NodeData, param3:uint = 0, param4:MatrixPosition = null) : void {
+        public function setup(param1:uint, param2:NodeData, param3:uint = 0, param4:MatrixPosition = null) : void
+        {
             var _loc6_:Point = null;
             if(param3 != 0)
             {
@@ -93,7 +95,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        public function cleanUp() : void {
+        public function cleanUp() : void
+        {
             this.container = null;
             if(this.button != null)
             {
@@ -114,67 +117,83 @@ package net.wg.gui.lobby.techtree.nodes
             super.onDispose();
         }
         
-        public function getEntityType() : uint {
+        public function getEntityType() : uint
+        {
             return this._entityType;
         }
         
-        public function getID() : Number {
+        public function getID() : Number
+        {
             return this.dataInited?this._valueObject.id:0;
         }
         
-        public function getItemName() : String {
+        public function getItemName() : String
+        {
             return this.dataInited?this._valueObject.nameString:"";
         }
         
-        public function getItemType() : String {
+        public function getItemType() : String
+        {
             return this.dataInited?this._valueObject.primaryClass.name:"";
         }
         
-        public function getGraphicsName() : String {
+        public function getGraphicsName() : String
+        {
             return LINES_AND_ARROWS_NAME + this._entityType.toString() + _index.toString();
         }
         
-        public function getLevel() : int {
+        public function getLevel() : int
+        {
             return this.dataInited?this._valueObject.level:-1;
         }
         
-        public function getIconPath() : String {
+        public function getIconPath() : String
+        {
             return this.dataInited?this._valueObject.iconPath:"";
         }
         
-        public function getDisplayInfo() : Object {
+        public function getDisplayInfo() : Object
+        {
             return this.dataInited?this._valueObject.displayInfo:null;
         }
         
-        public function isNext2Unlock() : Boolean {
+        public function isNext2Unlock() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.NEXT_2_UNLOCK) > 0;
         }
         
-        public function isUnlocked() : Boolean {
+        public function isUnlocked() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.UNLOCKED) > 0;
         }
         
-        public function isElite() : Boolean {
+        public function isElite() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.ELITE) > 0;
         }
         
-        public function isPremium() : Boolean {
+        public function isPremium() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.PREMIUM) > 0;
         }
         
-        public function inInventory() : Boolean {
+        public function inInventory() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.IN_INVENTORY) > 0;
         }
         
-        public function isWasInBattle() : Boolean {
+        public function isWasInBattle() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.WAS_IN_BATTLE) > 0;
         }
         
-        public function isVehicleCanBeChanged() : Boolean {
+        public function isVehicleCanBeChanged() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.VEHICLE_CAN_BE_CHANGED) > 0;
         }
         
-        public function isAvailable4Unlock() : Boolean {
+        public function isAvailable4Unlock() : Boolean
+        {
             if(!this.dataInited)
             {
                 return false;
@@ -183,7 +202,8 @@ package net.wg.gui.lobby.techtree.nodes
             return (_loc1_ & NodeState.NEXT_2_UNLOCK) > 0 && (_loc1_ & NodeState.ENOUGH_XP) > 0;
         }
         
-        public function isAvailable4Buy() : Boolean {
+        public function isAvailable4Buy() : Boolean
+        {
             if(!this.dataInited)
             {
                 return false;
@@ -192,11 +212,13 @@ package net.wg.gui.lobby.techtree.nodes
             return (_loc1_ & NodeState.UNLOCKED) > 0 && (_loc1_ & NodeState.ENOUGH_MONEY) > 0 && (_loc1_ & NodeState.IN_INVENTORY) == 0;
         }
         
-        public function isAvailable4Sell() : Boolean {
+        public function isAvailable4Sell() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.CAN_SELL) > 0;
         }
         
-        public function isActionEnabled() : Boolean {
+        public function isActionEnabled() : Boolean
+        {
             if(!this.dataInited)
             {
                 return false;
@@ -204,31 +226,38 @@ package net.wg.gui.lobby.techtree.nodes
             return this.stateProps.enough == 0 || (this._valueObject.state & this.stateProps.enough) > 0;
         }
         
-        public function isButtonVisible() : Boolean {
+        public function isButtonVisible() : Boolean
+        {
             return (this.stateProps.visible) && this.stateProps.animation == null;
         }
         
-        public function isSelected() : Boolean {
+        public function isSelected() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.SELECTED) > 0;
         }
         
-        public function isFake() : Boolean {
+        public function isFake() : Boolean
+        {
             return false;
         }
         
-        public function isShopAction() : Boolean {
+        public function isShopAction() : Boolean
+        {
             return (this.dataInited) && (this._valueObject.state & NodeState.SHOP_ACTION) > 0;
         }
         
-        public function isInAction() : Boolean {
+        public function isInAction() : Boolean
+        {
             return (this.isShopAction()) && !(this.button == null) && (this.stateProps.visible);
         }
         
-        public function getEarnedXP() : Number {
+        public function getEarnedXP() : Number
+        {
             return this.dataInited?this._valueObject.earnedXP:0;
         }
         
-        public function getNamedLabel(param1:String) : String {
+        public function getNamedLabel(param1:String) : String
+        {
             if(!this.dataInited)
             {
                 return "";
@@ -236,7 +265,8 @@ package net.wg.gui.lobby.techtree.nodes
             return this._valueObject.getNamedLabel(param1);
         }
         
-        public function getNamedValue(param1:String) : Number {
+        public function getNamedValue(param1:String) : Number
+        {
             if(!this.dataInited)
             {
                 return 0;
@@ -244,12 +274,14 @@ package net.wg.gui.lobby.techtree.nodes
             return this._valueObject.getNamedValue(param1);
         }
         
-        public function validateNowEx() : void {
+        public function validateNowEx() : void
+        {
             this._doValidateNow = true;
             super.validateNow();
         }
         
-        public function invalidateNodeState(param1:Number) : void {
+        public function invalidateNodeState(param1:Number) : void
+        {
             this.updateStatesProps();
             setState(state);
             if(param1 > -1)
@@ -259,7 +291,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        public function getColorIdx(param1:Number = -1) : Number {
+        public function getColorIdx(param1:Number = -1) : Number
+        {
             var _loc2_:Number = ColorIndex.LOCKED;
             if(this.isUnlocked())
             {
@@ -279,7 +312,8 @@ package net.wg.gui.lobby.techtree.nodes
             return _loc2_;
         }
         
-        public function getColorIdxEx(param1:IRenderer) : Number {
+        public function getColorIdxEx(param1:IRenderer) : Number
+        {
             var _loc2_:Number = ColorIndex.LOCKED;
             if(this.isUnlocked())
             {
@@ -299,51 +333,63 @@ package net.wg.gui.lobby.techtree.nodes
             return _loc2_;
         }
         
-        public function click2Unlock() : void {
+        public function click2Unlock() : void
+        {
             dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_UNLOCK,0,_index,this._entityType));
         }
         
-        public function click2Buy() : void {
+        public function click2Buy() : void
+        {
             dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_BUY,0,_index,this._entityType));
         }
         
-        public function click2Sell() : void {
+        public function click2Sell() : void
+        {
             dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SELL,0,_index,this._entityType));
         }
         
-        public function click2SelectInHangar() : void {
+        public function click2SelectInHangar() : void
+        {
             dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SELECT_IN_HANGAR,0,_index,this._entityType));
         }
         
-        public function click2ShowVehicleStats() : void {
+        public function click2ShowVehicleStats() : void
+        {
             dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SHOW_VEHICLE_STATS,0,_index,this._entityType));
         }
         
-        public function click2Info() : void {
+        public function click2Info() : void
+        {
             dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_MODULE_INFO,0,_index,this._entityType));
         }
         
-        public function getInX() : Number {
+        public function getInX() : Number
+        {
             return Math.round(x + (this.hit != null?this.hit.x:0));
         }
         
-        public function getOutX() : Number {
+        public function getOutX() : Number
+        {
             return x + (this.hit != null?this.hit.x + Math.round(this.hit.width):Math.round(_width));
         }
         
-        public function getY() : Number {
+        public function getY() : Number
+        {
             return y + (this.hit != null?this.hit.y + (Math.round(this.hit.height) >> 1):Math.round(_height) >> 1);
         }
         
-        public function getRatioY() : Number {
+        public function getRatioY() : Number
+        {
             return this.hit != null?Math.round(this.hit.height) >> 1:Math.round(_height) >> 1;
         }
         
-        public function getActualWidth() : Number {
+        public function getActualWidth() : Number
+        {
             return this.hit != null?this.hit.width:_width;
         }
         
-        public function setPosition(param1:Point) : void {
+        public function setPosition(param1:Point) : void
+        {
             if(this.hit != null)
             {
                 this.x = Math.round(param1.x - this.hit.x);
@@ -356,18 +402,22 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        public function getExtraState() : Object {
+        public function getExtraState() : Object
+        {
             return null;
         }
         
-        public function showContextMenu() : void {
+        public function showContextMenu() : void
+        {
         }
         
-        public function isParentUnlocked(param1:Number) : Boolean {
+        public function isParentUnlocked(param1:Number) : Boolean
+        {
             return this._container != null?this._container.isParentUnlocked(param1,this._valueObject.id):true;
         }
         
-        public function populateUI() : void {
+        public function populateUI() : void
+        {
             var _loc1_:ActionPriceVO = null;
             if(!(this.actionPrice == null) && (this.dataInited))
             {
@@ -391,19 +441,23 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        public function get container() : INodesContainer {
+        public function get container() : INodesContainer
+        {
             return this._container;
         }
         
-        public function set container(param1:INodesContainer) : void {
+        public function set container(param1:INodesContainer) : void
+        {
             this._container = param1;
         }
         
-        public function get matrixPosition() : MatrixPosition {
+        public function get matrixPosition() : MatrixPosition
+        {
             return this._matrixPosition;
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             preventAutosizing = false;
             constraintsDisabled = true;
             super.preInitialize();
@@ -413,12 +467,14 @@ package net.wg.gui.lobby.techtree.nodes
             soundId = TTSoundID.UNDEFINED;
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             this.updateStatesProps();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if((this.isDelegateEvents) && !(this.hit == null))
             {
                 this.delegateEventsHandlers();
@@ -433,7 +489,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(!_baseDisposed)
             {
@@ -452,7 +509,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             if(this.isDelegateEvents)
             {
                 this.disableMouseChildren();
@@ -460,7 +518,8 @@ package net.wg.gui.lobby.techtree.nodes
             super.updateAfterStateChange();
         }
         
-        protected function getMouseEnabledChildren() : Vector.<DisplayObjectContainer> {
+        protected function getMouseEnabledChildren() : Vector.<DisplayObjectContainer>
+        {
             var _loc1_:Vector.<DisplayObjectContainer> = new Vector.<DisplayObjectContainer>();
             if(this.hit != null)
             {
@@ -473,7 +532,8 @@ package net.wg.gui.lobby.techtree.nodes
             return _loc1_;
         }
         
-        protected function disableMouseChildren() : void {
+        protected function disableMouseChildren() : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -482,7 +542,8 @@ package net.wg.gui.lobby.techtree.nodes
             throw new Error("Not decompiled due to error");
         }
         
-        protected function delegateEventsHandlers() : void {
+        protected function delegateEventsHandlers() : void
+        {
             mouseEnabled = false;
             this.disableMouseChildren();
             this.hit.buttonMode = this.hit.mouseEnabled = true;
@@ -494,7 +555,8 @@ package net.wg.gui.lobby.techtree.nodes
             this.hit.addEventListener(InputEvent.INPUT,handleInput,false,0,true);
         }
         
-        protected function removeEventsHandlers() : void {
+        protected function removeEventsHandlers() : void
+        {
             this.hit.removeEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver,false);
             this.hit.removeEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut,false);
             this.hit.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleMousePress,false);
@@ -503,7 +565,8 @@ package net.wg.gui.lobby.techtree.nodes
             this.hit.removeEventListener(InputEvent.INPUT,handleInput,false);
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             if((this._tooltipID) && !(App.toolTipMgr == null))
             {
                 App.toolTipMgr.showSpecial(this._tooltipID,null,this._valueObject,this._container != null?this._container.getRootNode().getID():null);
@@ -511,7 +574,8 @@ package net.wg.gui.lobby.techtree.nodes
             super.handleMouseRollOver(param1);
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             if(App.toolTipMgr != null)
             {
                 App.toolTipMgr.hide();
@@ -519,7 +583,8 @@ package net.wg.gui.lobby.techtree.nodes
             super.handleMouseRollOut(param1);
         }
         
-        override protected function handleMouseRelease(param1:MouseEvent) : void {
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
             super.handleMouseRelease(param1);
             if(param1.eventPhase == EventPhase.AT_TARGET && param1 is MouseEventEx && (App.utils.commons.isRightButton(param1)))
             {
@@ -527,7 +592,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        override protected function handleMousePress(param1:MouseEvent) : void {
+        override protected function handleMousePress(param1:MouseEvent) : void
+        {
             if(App.toolTipMgr != null)
             {
                 App.toolTipMgr.hide();
@@ -535,21 +601,24 @@ package net.wg.gui.lobby.techtree.nodes
             super.handleMousePress(param1);
         }
         
-        private function updateStatesProps() : void {
+        private function updateStatesProps() : void
+        {
             this.stateProps = NodeStateCollection.getStateProps(this._entityType,this.dataInited?this._valueObject.state:0,this.getExtraState());
             var _loc1_:String = NodeStateCollection.getStatePrefix(this.stateProps.index);
             statesSelected = Vector.<String>(["selected_",_loc1_]);
             statesDefault = Vector.<String>([_loc1_]);
         }
         
-        private function buttonOut(param1:MouseEvent) : void {
+        private function buttonOut(param1:MouseEvent) : void
+        {
             if(this.actionPrice != null)
             {
                 this.actionPrice.hideTooltip();
             }
         }
         
-        private function buttonOver(param1:MouseEvent) : void {
+        private function buttonOver(param1:MouseEvent) : void
+        {
             if(!(this.actionPrice == null) && (this.actionPrice.visible))
             {
                 this.actionPrice.showTooltip();

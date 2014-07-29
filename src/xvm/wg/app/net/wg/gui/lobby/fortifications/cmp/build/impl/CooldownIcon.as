@@ -9,7 +9,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class CooldownIcon extends UIComponentEx implements ICooldownIcon
     {
         
-        public function CooldownIcon() {
+        public function CooldownIcon()
+        {
             super();
             mouseChildren = false;
             mouseEnabled = false;
@@ -19,11 +20,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _timeTextField:TextField = null;
         
-        private function getTweenAnimator() : ITweenAnimator {
+        private function getTweenAnimator() : ITweenAnimator
+        {
             return TweenAnimator.instance;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.getTweenAnimator().removeAnims(this);
             this._timeTextField = null;
             this.loader.dispose();
@@ -31,11 +34,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             super.onDispose();
         }
         
-        public function get timeTextField() : TextField {
+        public function get timeTextField() : TextField
+        {
             return this._timeTextField;
         }
         
-        public function set timeTextField(param1:TextField) : void {
+        public function set timeTextField(param1:TextField) : void
+        {
             this._timeTextField = param1;
         }
     }

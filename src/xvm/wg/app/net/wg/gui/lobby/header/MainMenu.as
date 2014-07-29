@@ -9,48 +9,43 @@ package net.wg.gui.lobby.header
     public class MainMenu extends UIComponent
     {
         
-        public function MainMenu() {
-            this.buttonsArr = new DataProvider([{
-                "label":MENU.HEADERBUTTONS_HANGAR,
-                "value":"hangar",
-                "subValues":[],
-                "textColor":16563563,
-                "textColorOver":16765319,
-                "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_HANGAR
-            },{
-            "label":MENU.HEADERBUTTONS_INVENTORY,
-            "value":"inventory",
+        public function MainMenu()
+        {
+            this.buttonsArr = new DataProvider([{"label":MENU.HEADERBUTTONS_HANGAR,
+            "value":"hangar",
             "subValues":[],
-            "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_INVENTORY,
-            "helpText":LOBBY_HELP.HEADER_MENU_INVENTORY,
-            "helpDirection":"B",
-            "helpConnectorLength":12
-        },{
-        "label":MENU.HEADERBUTTONS_SHOP,
-        "value":"shop",
+            "textColor":16563563,
+            "textColorOver":16765319,
+            "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_HANGAR
+        },{"label":MENU.HEADERBUTTONS_INVENTORY,
+        "value":"inventory",
         "subValues":[],
-        "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_SHOP,
-        "helpText":LOBBY_HELP.HEADER_MENU_SHOP,
+        "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_INVENTORY,
+        "helpText":LOBBY_HELP.HEADER_MENU_INVENTORY,
         "helpDirection":"B",
-        "helpConnectorLength":62
-    },{
-    "label":MENU.HEADERBUTTONS_PROFILE,
-    "value":"profile",
+        "helpConnectorLength":12
+    },{"label":MENU.HEADERBUTTONS_SHOP,
+    "value":"shop",
     "subValues":[],
-    "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_PROFILE,
-    "helpText":LOBBY_HELP.HEADER_MENU_PROFILE,
+    "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_SHOP,
+    "helpText":LOBBY_HELP.HEADER_MENU_SHOP,
     "helpDirection":"B",
-    "helpConnectorLength":12
-},{
-"label":MENU.HEADERBUTTONS_TECHTREE,
+    "helpConnectorLength":62
+},{"label":MENU.HEADERBUTTONS_PROFILE,
+"value":"profile",
+"subValues":[],
+"tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_PROFILE,
+"helpText":LOBBY_HELP.HEADER_MENU_PROFILE,
+"helpDirection":"B",
+"helpConnectorLength":12
+},{"label":MENU.HEADERBUTTONS_TECHTREE,
 "value":"techtree",
 "subValues":["research"],
 "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_TECHTREE,
 "helpText":LOBBY_HELP.HEADER_MENU_TECHTREE,
 "helpDirection":"B",
 "helpConnectorLength":12
-},{
-"label":MENU.HEADERBUTTONS_BARRACKS,
+},{"label":MENU.HEADERBUTTONS_BARRACKS,
 "value":"barracks",
 "subValues":[],
 "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BARRACKS
@@ -64,7 +59,8 @@ protected var current:String = "hangar";
 
 private var buttonsArr:DataProvider;
 
-public function setCurrent(param1:String) : void {
+public function setCurrent(param1:String) : void
+{
 var _loc3_:* = NaN;
 this.current = param1;
 this.bar.selectedIndex = -1;
@@ -92,19 +88,20 @@ _loc2_++;
 }
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
 super.onDispose();
 this.bar.removeEventListener(IndexEvent.INDEX_CHANGE,this.buttonClickHandler);
 this.buttonsArr = null;
 }
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
 super.configUI();
 this.bar.selectedIndex = -1;
 if(App.globalVarsMgr.isChinaS())
 {
-this.buttonsArr.push({
-"label":MENU.HEADERBUTTONS_BROWSER,
+this.buttonsArr.push({"label":MENU.HEADERBUTTONS_BROWSER,
 "value":"browser",
 "subValues":[],
 "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BROWSER
@@ -112,8 +109,7 @@ this.buttonsArr.push({
 }
 if(App.globalVarsMgr.isFortificationAvailableS())
 {
-this.buttonsArr.push({
-"label":MENU.HEADERBUTTONS_FORTS,
+this.buttonsArr.push({"label":MENU.HEADERBUTTONS_FORTS,
 "value":"FortificationsView",
 "subValues":[],
 "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_FORTS
@@ -124,11 +120,13 @@ this.bar.dataProvider = this.buttonsArr;
 this.bar.addEventListener(ButtonEvent.CLICK,this.buttonClickHandler,false,0,true);
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
 super.draw();
 }
 
-protected function buttonClickHandler(param1:ButtonEvent) : void {
+protected function buttonClickHandler(param1:ButtonEvent) : void
+{
 if(param1.target.data != null)
 {
 dispatchEvent(new HeaderEvent(HeaderEvent.LOAD_VIEW,param1.target.data.value));

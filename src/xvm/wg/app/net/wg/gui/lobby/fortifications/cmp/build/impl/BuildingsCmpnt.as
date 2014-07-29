@@ -16,7 +16,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class BuildingsCmpnt extends FortBuildingComponentMeta implements IFortBuildingCmp
     {
         
-        public function BuildingsCmpnt() {
+        public function BuildingsCmpnt()
+        {
             super();
             UIID = 1;
         }
@@ -35,16 +36,19 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _transportingHelper:ITransportingHelper = null;
         
-        public function updateCommonMode(param1:Boolean, param2:Boolean) : void {
+        public function updateCommonMode(param1:Boolean, param2:Boolean) : void
+        {
             this._buildingContainer.updateCommonMode(param1,param2);
         }
         
-        public function as_refreshTransporting() : void {
+        public function as_refreshTransporting() : void
+        {
             this._transportingHelper.updateTransportMode(false,false);
             this._transportingHelper.updateTransportMode(true,false);
         }
         
-        public function updateTransportMode(param1:Boolean, param2:Boolean) : void {
+        public function updateTransportMode(param1:Boolean, param2:Boolean) : void
+        {
             var _loc3_:Class = null;
             if(!param2)
             {
@@ -62,40 +66,48 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function updateControlPositions() : void {
+        public function updateControlPositions() : void
+        {
             this.bgFore.x = this.shadowMC.x = globalToLocal(new Point(0,0)).x;
             this.bgFore.y = this.shadowMC.y = -y;
             this.bgFore.setActualSize(App.appWidth,App.appHeight);
             this.shadowMC.setActualSize(App.appWidth,App.appHeight);
         }
         
-        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void {
+        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void
+        {
             this.directionsContainer.updateDirectionsMode(param1,param2);
             this._buildingContainer.updateDirectionsMode(param1,param2);
             this.toggleBackground(param1);
         }
         
-        public function onTransportingSuccess(param1:IFortBuilding, param2:IFortBuilding) : void {
+        public function onTransportingSuccess(param1:IFortBuilding, param2:IFortBuilding) : void
+        {
             onTransportingRequestS(param1.uid,param2.uid);
         }
         
-        public function onStartExporting() : void {
+        public function onStartExporting() : void
+        {
             dispatchEvent(new FortBuildingEvent(FortBuildingEvent.FIRST_TRANSPORTING_STEP));
         }
         
-        public function onStartImporting() : void {
+        public function onStartImporting() : void
+        {
             dispatchEvent(new FortBuildingEvent(FortBuildingEvent.NEXT_TRANSPORTING_STEP));
         }
         
-        public function get buildingContainer() : IFortBuildingsContainer {
+        public function get buildingContainer() : IFortBuildingsContainer
+        {
             return this._buildingContainer;
         }
         
-        public function set buildingContainer(param1:IFortBuildingsContainer) : void {
+        public function set buildingContainer(param1:IFortBuildingsContainer) : void
+        {
             this._buildingContainer = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this._buildingContainer.addEventListener(FortBuildingEvent.BUY_BUILDINGS,this.onByuBuildingsHandler);
             this._buildingContainer.addEventListener(FortBuildingEvent.BUILDING_SELECTED,this.buildingSelectedHandler);
@@ -103,20 +115,24 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.shadowMC.mouseEnabled = false;
         }
         
-        override protected function setData(param1:BuildingsComponentVO) : void {
+        override protected function setData(param1:BuildingsComponentVO) : void
+        {
             this.model = param1;
             this.update();
         }
         
-        override protected function setBuildingData(param1:BuildingVO) : void {
-            this._buildingContainer.setBuildingData(param1,true);
+        override protected function setBuildingData(param1:BuildingVO) : void
+        {
+            this._buildingContainer.setBuildingData(param1,this.model.isCommander);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._transportingHelper)
             {
                 this._transportingHelper.dispose();
@@ -142,24 +158,28 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             super.onDispose();
         }
         
-        private function toggleBackground(param1:Boolean) : void {
+        private function toggleBackground(param1:Boolean) : void
+        {
             this.landscape.alpha = !param1?1:0.4;
         }
         
-        private function update() : void {
+        private function update() : void
+        {
             var _loc1_:Vector.<BuildingVO> = this.model.buildingData;
-            this._buildingContainer.update(_loc1_,true);
+            this._buildingContainer.update(_loc1_,this.model.isCommander);
             this.directionsContainer.update(_loc1_);
         }
         
-        private function buildingSelectedHandler(param1:FortBuildingEvent) : void {
+        private function buildingSelectedHandler(param1:FortBuildingEvent) : void
+        {
             if(param1.uid)
             {
                 upgradeVisitedBuildingS(param1.uid);
             }
         }
         
-        private function onByuBuildingsHandler(param1:FortBuildingEvent) : void {
+        private function onByuBuildingsHandler(param1:FortBuildingEvent) : void
+        {
             requestBuildingProcessS(param1.direction,param1.position);
         }
     }

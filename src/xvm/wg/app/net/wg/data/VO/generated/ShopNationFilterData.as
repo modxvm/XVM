@@ -5,7 +5,8 @@ package net.wg.data.VO.generated
     public class ShopNationFilterData extends DAAPIDataClass
     {
         
-        public function ShopNationFilterData(param1:Object) {
+        public function ShopNationFilterData(param1:Object)
+        {
             super(param1);
         }
         
@@ -13,19 +14,23 @@ package net.wg.data.VO.generated
         
         private var _type:String = "";
         
-        public function get language() : Number {
+        public function get language() : Number
+        {
             return this._language;
         }
         
-        public function set language(param1:Number) : void {
+        public function set language(param1:Number) : void
+        {
             this._language = param1;
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             this._type = param1;
         }
     }

@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class PremiumFormMeta extends AbstractWindowView
     {
         
-        public function PremiumFormMeta() {
+        public function PremiumFormMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onPremiumDataRequest:Function = null;
         
-        public function onPremiumBuyS(param1:Number, param2:Number) : void {
+        public function onPremiumBuyS(param1:Number, param2:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.onPremiumBuy,"onPremiumBuy" + Errors.CANT_NULL);
             this.onPremiumBuy(param1,param2);
         }
         
-        public function onPremiumDataRequestS() : void {
+        public function onPremiumDataRequestS() : void
+        {
             App.utils.asserter.assertNotNull(this.onPremiumDataRequest,"onPremiumDataRequest" + Errors.CANT_NULL);
             this.onPremiumDataRequest();
         }

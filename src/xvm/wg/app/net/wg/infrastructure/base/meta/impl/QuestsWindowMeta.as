@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class QuestsWindowMeta extends AbstractWindowView
     {
         
-        public function QuestsWindowMeta() {
+        public function QuestsWindowMeta()
+        {
             super();
         }
     }

@@ -6,41 +6,47 @@ package net.wg.infrastructure.base.meta.impl
     public class LobbyMessengerMeta extends AbstractWindowView
     {
         
-        public function LobbyMessengerMeta() {
+        public function LobbyMessengerMeta()
+        {
             super();
         }
         
         public var requestOnRefreshMemberList:Function = null;
         
-        public function requestOnRefreshMemberListS() : void {
+        public function requestOnRefreshMemberListS() : void
+        {
             App.utils.asserter.assertNotNull(this.requestOnRefreshMemberList,"requestOnRefreshMemberList" + Errors.CANT_NULL);
             this.requestOnRefreshMemberList();
         }
         
         public var requestRolePlayer:Function = null;
         
-        public function requestRolePlayerS() : void {
+        public function requestRolePlayerS() : void
+        {
             App.utils.asserter.assertNotNull(this.requestRolePlayer,"requestRolePlayer" + Errors.CANT_NULL);
             this.requestRolePlayer();
         }
         
         public var requestToReadyBtn:Function = null;
         
-        public function requestToReadyBtnS(param1:Boolean) : void {
+        public function requestToReadyBtnS(param1:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.requestToReadyBtn,"requestToReadyBtn" + Errors.CANT_NULL);
             this.requestToReadyBtn(param1);
         }
         
         public var requestToLeaveBtn:Function = null;
         
-        public function requestToLeaveBtnS() : void {
+        public function requestToLeaveBtnS() : void
+        {
             App.utils.asserter.assertNotNull(this.requestToLeaveBtn,"requestToLeaveBtn" + Errors.CANT_NULL);
             this.requestToLeaveBtn();
         }
         
         public var showPrebattleSendInvitesWindow:Function = null;
         
-        public function showPrebattleSendInvitesWindowS() : void {
+        public function showPrebattleSendInvitesWindowS() : void
+        {
             App.utils.asserter.assertNotNull(this.showPrebattleSendInvitesWindow,"showPrebattleSendInvitesWindow" + Errors.CANT_NULL);
             this.showPrebattleSendInvitesWindow();
         }

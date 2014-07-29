@@ -5,7 +5,8 @@ package net.wg.gui.cyberSport.vo
     public class NavigationBlockVO extends DAAPIDataClass
     {
         
-        public function NavigationBlockVO(param1:Object) {
+        public function NavigationBlockVO(param1:Object)
+        {
             super(param1);
         }
         

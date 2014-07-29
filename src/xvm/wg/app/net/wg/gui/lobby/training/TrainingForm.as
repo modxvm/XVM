@@ -21,7 +21,8 @@ package net.wg.gui.lobby.training
     public class TrainingForm extends TrainingFormMeta implements ITrainingFormMeta
     {
         
-        public function TrainingForm() {
+        public function TrainingForm()
+        {
             this.provider = [];
             super();
         }
@@ -58,16 +59,19 @@ package net.wg.gui.lobby.training
         
         private var _myWidth:Number = 0;
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             this.setViewSize(param1,param2);
         }
         
-        override public final function setViewSize(param1:Number, param2:Number) : void {
+        override public final function setViewSize(param1:Number, param2:Number) : void
+        {
             this._myWidth = param1;
             invalidateSize();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.updateStage(App.appWidth,App.appHeight);
             this.ownerTitle.text = MENU.TRAINING_OWNERTITLE;
@@ -80,7 +84,8 @@ package net.wg.gui.lobby.training
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -98,7 +103,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
             this.createButon.removeEventListener(ButtonEvent.CLICK,this.showCreateTraining);
             removeEventListener(TrainingEvent.OPEN_TRAINING_ROOM,this.onOpenRoom);
@@ -127,27 +133,32 @@ package net.wg.gui.lobby.training
             super.onDispose();
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.createButon);
         }
         
-        public function as_setList(param1:Array, param2:Number) : void {
+        public function as_setList(param1:Array, param2:Number) : void
+        {
             this.provider = param1;
             this.totalPlayers = param2;
             this.list.dataProvider = new DataProvider(param1);
             invalidate(InvalidationType.DATA);
         }
         
-        private function onOpenRoom(param1:TrainingEvent) : void {
+        private function onOpenRoom(param1:TrainingEvent) : void
+        {
             joinTrainingRequestS(param1.initObj.id);
         }
         
-        private function showCreateTraining(param1:ButtonEvent) : void {
+        private function showCreateTraining(param1:ButtonEvent) : void
+        {
             createTrainingRequestS();
         }
         
-        private function handleEscape(param1:InputEvent) : void {
+        private function handleEscape(param1:InputEvent) : void
+        {
             onEscapeS();
         }
     }

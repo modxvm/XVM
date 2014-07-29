@@ -6,7 +6,8 @@ package net.wg.gui.lobby.profile.components
     public class AdvancedLineDescrIconText extends LineDescrIconText
     {
         
-        public function AdvancedLineDescrIconText() {
+        public function AdvancedLineDescrIconText()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.lobby.profile.components
         
         private var _data:ILditInfo;
         
-        override protected function showToolTip(param1:IToolTipParams) : void {
+        override protected function showToolTip(param1:IToolTipParams) : void
+        {
             if((tooltip) && (this._toolTipParams))
             {
                 App.toolTipMgr.showComplexWithParams(tooltip,this._toolTipParams);
@@ -25,15 +27,18 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        public function set toolTipParams(param1:IToolTipParams) : void {
+        public function set toolTipParams(param1:IToolTipParams) : void
+        {
             this._toolTipParams = param1;
         }
         
-        public function get data() : ILditInfo {
+        public function get data() : ILditInfo
+        {
             return this._data;
         }
         
-        public function set data(param1:ILditInfo) : void {
+        public function set data(param1:ILditInfo) : void
+        {
             this._data = param1;
             description = param1.description;
             if(param1.text != "-1")
@@ -50,7 +55,8 @@ package net.wg.gui.lobby.profile.components
             iconSource = param1.iconPath;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._data)
             {
                 this._data.dispose();

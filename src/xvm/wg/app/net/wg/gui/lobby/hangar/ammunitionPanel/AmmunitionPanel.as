@@ -26,7 +26,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     public class AmmunitionPanel extends AmmunitionPanelMeta implements IHelpLayoutComponent, IAmmunitionPanelMeta
     {
         
-        public function AmmunitionPanel() {
+        public function AmmunitionPanel()
+        {
             this.events = App.utils.events;
             super();
         }
@@ -89,7 +90,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         private var storeData:Object;
         
-        public function showHelpLayout() : void {
+        public function showHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             var _loc2_:Number = this.radio.x + this.radio.width - this.gun.x;
             var _loc3_:Object = _loc1_.getProps(_loc2_,this.gun.height,Directions.TOP,LOBBY_HELP.HANGAR_MODULES,this.gun.x,this.gun.y);
@@ -101,7 +103,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.tuningBtn.showHelpLayout();
         }
         
-        public function closeHelpLayout() : void {
+        public function closeHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             _loc1_.destroy(this._modulesHL);
             _loc1_.destroy(this._devicesHL);
@@ -109,7 +112,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.tuningBtn.closeHelpLayout();
         }
         
-        public function disableAmmunitionPanel(param1:Boolean) : void {
+        public function disableAmmunitionPanel(param1:Boolean) : void
+        {
             this._panelEnabled = !param1;
             this.maitenanceBtn.enabled = !param1;
             if(this.storeData)
@@ -120,11 +124,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.setItemsEnabled(_loc2_,!param1);
         }
         
-        public function disableTuningButton(param1:Boolean) : void {
+        public function disableTuningButton(param1:Boolean) : void
+        {
             this.tuningBtn.enabled = !param1;
         }
         
-        public function updateStage(param1:Number, param2:Number) : void {
+        public function updateStage(param1:Number, param2:Number) : void
+        {
             var _loc3_:DeviceSlot = null;
             var _loc4_:Array = [this.gun,this.turret,this.engine,this.chassis,this.radio,this.optionalDevice1,this.optionalDevice2,this.optionalDevice3];
             for each(_loc3_ in _loc4_)
@@ -133,7 +139,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:DeviceSlot = null;
             var _loc2_:ShellButton = null;
             super.onDispose();
@@ -167,7 +174,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.historicalOverlay = null;
         }
         
-        public function as_setData(param1:Array, param2:String) : void {
+        public function as_setData(param1:Array, param2:String) : void
+        {
             var data:Array = param1;
             var type:String = param2;
             try
@@ -207,7 +215,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        public function as_setAmmo(param1:Object) : void {
+        public function as_setAmmo(param1:Object) : void
+        {
             var loaded:int = 0;
             var shell:ShellButton = null;
             var i:int = 0;
@@ -251,23 +260,27 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        public function as_setVehicleHasTurret(param1:Boolean) : void {
+        public function as_setVehicleHasTurret(param1:Boolean) : void
+        {
             this._hasTurret = param1;
             this.turret.enabled = (this._hasTurret) && (this._panelEnabled);
         }
         
-        public function as_setHistoricalBattle(param1:Number) : void {
+        public function as_setHistoricalBattle(param1:Number) : void
+        {
             this._inHistoricalMode = !(param1 == -1);
             this.historicalOverlay.historicalBattleID = param1;
             this.historicalOverlay.visible = this._inHistoricalMode;
         }
         
-        public function as_setModulesEnabled(param1:Boolean) : void {
+        public function as_setModulesEnabled(param1:Boolean) : void
+        {
             var _loc2_:Array = [this.gun,this.turret,this.engine,this.chassis,this.radio];
             this.setItemsEnabled(_loc2_,(param1) && (this._panelEnabled));
         }
         
-        public function setVehicleStatus(param1:String, param2:String) : void {
+        public function setVehicleStatus(param1:String, param2:String) : void
+        {
             var param1:String = App.utils.locale.makeString(param1);
             if((initialized) && param1.length > 0)
             {
@@ -275,7 +288,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc1_:DeviceSlot = null;
             var _loc2_:ShellButton = null;
             super.configUI();
@@ -317,7 +331,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.events.addEvent(App.stage,DeviceEvent.DEVICE_REMOVE,this.onDeviceRemove);
         }
         
-        private function handleInputTest(param1:InputEvent) : void {
+        private function handleInputTest(param1:InputEvent) : void
+        {
             var _loc2_:InputDetails = param1.details;
             if(_loc2_.navEquivalent == NavigationCode.ENTER)
             {
@@ -329,7 +344,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        private function subscribeSlot(param1:DeviceSlot) : void {
+        private function subscribeSlot(param1:DeviceSlot) : void
+        {
             this.events.addEvent(param1,ButtonEvent.CLICK,this.onModuleClick);
             this.events.addEvent(param1,DeviceEvent.DEVICE_CHANGE,this.onDeviceChange);
             if(param1.type == FittingTypes.EQUIPMENT)
@@ -338,7 +354,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        private function unsubscribeSlot(param1:DeviceSlot) : void {
+        private function unsubscribeSlot(param1:DeviceSlot) : void
+        {
             this.events.removeEvent(param1,ButtonEvent.CLICK,this.onModuleClick);
             this.events.removeEvent(param1,DeviceEvent.DEVICE_CHANGE,this.onDeviceChange);
             if(param1.type == FittingTypes.EQUIPMENT)
@@ -347,17 +364,20 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        private function onDeviceChange(param1:DeviceEvent) : void {
+        private function onDeviceChange(param1:DeviceEvent) : void
+        {
             var _loc2_:String = param1.oldDevice?param1.oldDevice.id:null;
             setVehicleModuleS(param1.newDevice.id,(param1.target as DeviceSlot).slotIndex,_loc2_,false);
         }
         
-        private function onDeviceRemove(param1:DeviceEvent) : void {
+        private function onDeviceRemove(param1:DeviceEvent) : void
+        {
             var _loc2_:String = param1.useGold?param1.oldDevice.id:null;
             setVehicleModuleS(param1.newDevice.id,param1.newDevice.slotIndex,_loc2_,true);
         }
         
-        public function onModuleClick(param1:ButtonEvent) : void {
+        public function onModuleClick(param1:ButtonEvent) : void
+        {
             var _loc2_:Array = null;
             var _loc3_:* = 0;
             App.toolTipMgr.hide();
@@ -381,26 +401,31 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             
         }
         
-        private function onShowModuleInfo(param1:ModuleInfoEvent) : void {
+        private function onShowModuleInfo(param1:ModuleInfoEvent) : void
+        {
             showModuleInfoS(param1.id);
         }
         
-        private function onMaintenanceClick(param1:ButtonEvent) : void {
+        private function onMaintenanceClick(param1:ButtonEvent) : void
+        {
             showTechnicalMaintenanceS();
         }
         
-        private function onHighlightParams(param1:ParamsEvent) : void {
+        private function onHighlightParams(param1:ParamsEvent) : void
+        {
             if([this.gun,this.turret,this.engine,this.chassis,this.radio].indexOf(param1.target) > -1)
             {
                 highlightParamsS(param1.paramsType);
             }
         }
         
-        private function onCustomizationClick(param1:ButtonEvent) : void {
+        private function onCustomizationClick(param1:ButtonEvent) : void
+        {
             showCustomizationS();
         }
         
-        private function showTooltip(param1:MouseEvent) : void {
+        private function showTooltip(param1:MouseEvent) : void
+        {
             var _loc2_:String = null;
             if(param1.target == this.maitenanceBtn)
             {
@@ -414,11 +439,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             App.toolTipMgr.showComplex(_loc2_);
         }
         
-        private function hideTooltip(param1:MouseEvent) : void {
+        private function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function __setVehicleStatus(param1:String, param2:uint) : void {
+        private function __setVehicleStatus(param1:String, param2:uint) : void
+        {
             var _loc3_:TextFormat = null;
             if(this.vehicleStateMsg)
             {
@@ -431,7 +458,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        private function __stateLevelToColor(param1:String) : uint {
+        private function __stateLevelToColor(param1:String) : uint
+        {
             switch(param1)
             {
                 case "info":
@@ -445,7 +473,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        public function setItemsEnabled(param1:Array, param2:Boolean) : void {
+        public function setItemsEnabled(param1:Array, param2:Boolean) : void
+        {
             var _loc3_:DeviceSlot = null;
             for each(_loc3_ in param1)
             {

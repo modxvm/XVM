@@ -28,7 +28,8 @@ package net.wg.gui.cyberSport.views
     public class RosterSlotSettingsWindow extends RosterSlotSettingsWindowMeta implements IRosterSlotSettingsWindowMeta
     {
         
-        public function RosterSlotSettingsWindow() {
+        public function RosterSlotSettingsWindow()
+        {
             this.viewStackData = [];
             super();
             isModal = true;
@@ -66,7 +67,8 @@ package net.wg.gui.cyberSport.views
         
         private var autoSelectTabIndex:int = 1;
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             if(window)
             {
                 window.removeEventListener(WindowEvent.SCALE_X_CHANGED,this.onScaleChanged);
@@ -80,7 +82,8 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        public function as_setDefaultData(param1:Array) : void {
+        public function as_setDefaultData(param1:Array) : void
+        {
             this.defaultModel = param1;
             var _loc2_:Object = this.defaultModel[MODEL_INDEX];
             if((_loc2_) && (_loc2_.hasOwnProperty("shortUserName")))
@@ -118,7 +121,8 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        public function as_setListData(param1:Array) : void {
+        public function as_setListData(param1:Array) : void
+        {
             var _loc2_:Object = null;
             var _loc3_:VehicleSelectorItemVO = null;
             var _loc4_:Array = null;
@@ -143,14 +147,16 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             Window(window).visible = false;
             showWindowBg = false;
             window.title = CYBERSPORT.WINDOW_ROSTERSLOTSETTINGS_TITLE;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(!this.rangeModel)
             {
@@ -171,20 +177,19 @@ package net.wg.gui.cyberSport.views
             this.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED,this.viewStackChangedHandler);
             this.viewStack.targetGroup = "buttonBar";
             this.viewStack.cache = true;
-            this.viewStackData = [{
-                "label":CYBERSPORT.WINDOW_ROSTERSLOTSETTINGS_TABBTNLBL_VEHICLE,
-                "linkage":CYBER_SPORT_ALIASES.VEHICLE_SELECTOR_VIEW
-            },{
-            "label":CYBERSPORT.WINDOW_ROSTERSLOTSETTINGS_TABBTNLBL_RANGE,
-            "linkage":CYBER_SPORT_ALIASES.RANGE_ROSTER_SETTINGS_VIEW
-        }];
+            this.viewStackData = [{"label":CYBERSPORT.WINDOW_ROSTERSLOTSETTINGS_TABBTNLBL_VEHICLE,
+            "linkage":CYBER_SPORT_ALIASES.VEHICLE_SELECTOR_VIEW
+        },{"label":CYBERSPORT.WINDOW_ROSTERSLOTSETTINGS_TABBTNLBL_RANGE,
+        "linkage":CYBER_SPORT_ALIASES.RANGE_ROSTER_SETTINGS_VIEW
+    }];
     this.buttonBar.dataProvider = new DataProvider(this.viewStackData);
     this.buttonBar.selectedIndex = this.autoSelectTabIndex;
     this.viewStack.show(this.autoSelectTabIndex == 0?CYBER_SPORT_ALIASES.VEHICLE_SELECTOR_VIEW:CYBER_SPORT_ALIASES.RANGE_ROSTER_SETTINGS_VIEW);
     this.selectedTxt.mouseEnabled = false;
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
     this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.onClickSubmitBtnHandler);
     this.submitBtn.dispose();
     this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.cancelBtn_buttonClickHandler);
@@ -240,7 +245,8 @@ override protected function onDispose() : void {
     super.onDispose();
 }
 
-private function createDefaultRangeModel() : void {
+private function createDefaultRangeModel() : void
+{
     var _loc1_:Object = {};
     _loc1_.nationIDRange = [];
     _loc1_.vLevelRange = [];
@@ -248,20 +254,23 @@ private function createDefaultRangeModel() : void {
     this.rangeModel = new SettingRosterVO(_loc1_);
 }
 
-private function updateWindow(param1:Boolean) : void {
+private function updateWindow(param1:Boolean) : void
+{
     if(Window(window).visible != param1)
     {
         Window(window).visible = param1;
     }
 }
 
-private function setDefaultRange() : void {
+private function setDefaultRange() : void
+{
     this.rangeModel.vLevelRange = [];
     this.rangeModel.nationIDRange = [];
     this.rangeModel.vTypeRange = [];
 }
 
-private function isDefaultRange() : Boolean {
+private function isDefaultRange() : Boolean
+{
     if(this.rangeModel.nationIDRange.length == 0 && this.rangeModel.vTypeRange.length == 0)
     {
         if(this.rangeModel.vLevelRange.length == 0)
@@ -272,14 +281,16 @@ private function isDefaultRange() : Boolean {
     return false;
 }
 
-private function refreshBtnState(param1:Boolean) : void {
+private function refreshBtnState(param1:Boolean) : void
+{
     if(this.selectedResultBtn.visible != param1)
     {
         this.selectedResultBtn.visible = param1;
     }
 }
 
-private function onScaleChanged(param1:WindowEvent) : void {
+private function onScaleChanged(param1:WindowEvent) : void
+{
     if(param1.type == WindowEvent.SCALE_X_CHANGED)
     {
         window.width = param1.prevValue;
@@ -290,7 +301,8 @@ private function onScaleChanged(param1:WindowEvent) : void {
     }
 }
 
-private function viewStackUpdateHandler(param1:ViewStackEvent) : void {
+private function viewStackUpdateHandler(param1:ViewStackEvent) : void
+{
     var _loc2_:Object = null;
     var _loc3_:VehicleSelectorFilterVO = null;
     if(param1.linkage == CYBER_SPORT_ALIASES.RANGE_ROSTER_SETTINGS_VIEW)
@@ -323,11 +335,13 @@ private function viewStackUpdateHandler(param1:ViewStackEvent) : void {
     
 }
 
-private function onFiltersChanged(param1:VehicleSelectorFilterEvent) : void {
+private function onFiltersChanged(param1:VehicleSelectorFilterEvent) : void
+{
     onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain,param1.level,param1.compatibleOnly);
 }
 
-private function rangeChangedHandler(param1:RosterSettingsEvent) : void {
+private function rangeChangedHandler(param1:RosterSettingsEvent) : void
+{
     this.rangeModel = param1.data as SettingRosterVO;
     this.refreshBtnState(!this.isDefaultRange());
     var _loc2_:Object = param1.data;
@@ -335,10 +349,12 @@ private function rangeChangedHandler(param1:RosterSettingsEvent) : void {
     this.updateWindow(true);
 }
 
-private function viewStackChangedHandler(param1:ViewStackEvent) : void {
+private function viewStackChangedHandler(param1:ViewStackEvent) : void
+{
 }
 
-private function onClickrefreshBtnHandler(param1:ButtonEvent) : void {
+private function onClickrefreshBtnHandler(param1:ButtonEvent) : void
+{
     if(this.selectedResultBtn.visible)
     {
         this.refreshBtnState(false);
@@ -351,7 +367,8 @@ private function onClickrefreshBtnHandler(param1:ButtonEvent) : void {
     }
 }
 
-private function vehicleSelectorHandler(param1:VehicleSelectorEvent) : void {
+private function vehicleSelectorHandler(param1:VehicleSelectorEvent) : void
+{
     if((param1.selectedDescriptors) && param1.selectedDescriptors.length > 0)
     {
         this.refreshBtnState(true);
@@ -368,12 +385,14 @@ private function vehicleSelectorHandler(param1:VehicleSelectorEvent) : void {
     }
 }
 
-private function onClickSubmitBtnHandler(param1:ButtonEvent = null) : void {
+private function onClickSubmitBtnHandler(param1:ButtonEvent = null) : void
+{
     this.defaultModel[MODEL_INDEX] = this.selectedResultBtn.getModel();
     submitButtonHandlerS(this.defaultModel);
 }
 
-private function cancelBtn_buttonClickHandler(param1:ButtonEvent) : void {
+private function cancelBtn_buttonClickHandler(param1:ButtonEvent) : void
+{
     cancelButtonHandlerS();
 }
 }

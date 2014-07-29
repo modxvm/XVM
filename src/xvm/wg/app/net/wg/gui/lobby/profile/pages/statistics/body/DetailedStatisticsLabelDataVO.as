@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class DetailedStatisticsLabelDataVO extends StatisticsLabelDataVO
     {
         
-        public function DetailedStatisticsLabelDataVO(param1:Object) {
+        public function DetailedStatisticsLabelDataVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
         
         private var _tooltipDataVO:StatisticsTooltipDataVO;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "data")
             {
                 parceData(param2);
@@ -29,7 +31,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             return this.hasOwnProperty(param1);
         }
         
-        public function get tooltipDataVO() : StatisticsTooltipDataVO {
+        public function get tooltipDataVO() : StatisticsTooltipDataVO
+        {
             return this._tooltipDataVO;
         }
     }

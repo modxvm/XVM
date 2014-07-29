@@ -7,7 +7,8 @@ package net.wg.gui.components.common.markers
     public class VehicleActionMarker extends UIComponent
     {
         
-        public function VehicleActionMarker() {
+        public function VehicleActionMarker()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.components.common.markers
         
         private var hideTween:Tween;
         
-        public function showAction(param1:String) : void {
+        public function showAction(param1:String) : void
+        {
             var _loc2_:String = this._actionRendererMap[param1];
             if(_loc2_)
             {
@@ -27,18 +29,21 @@ package net.wg.gui.components.common.markers
             }
         }
         
-        public function stopAction() : void {
+        public function stopAction() : void
+        {
             if(this.currentRenderer)
             {
                 this.hideTween = new Tween(HIDE_DURATION,this.currentRenderer,{"alpha":0.0});
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        private function removeActionRenderer() : void {
+        private function removeActionRenderer() : void
+        {
             if(!this.currentRenderer)
             {
                 return;
@@ -47,7 +52,8 @@ package net.wg.gui.components.common.markers
             this.currentRenderer = null;
         }
         
-        private function createActionRenderer(param1:String) : MovieClip {
+        private function createActionRenderer(param1:String) : MovieClip
+        {
             var _loc2_:MovieClip = null;
             this.removeActionRenderer();
             _loc2_ = App.utils.classFactory.getObject(param1) as MovieClip;
@@ -58,15 +64,18 @@ package net.wg.gui.components.common.markers
             return _loc2_;
         }
         
-        public function get actionRenderers() : Object {
+        public function get actionRenderers() : Object
+        {
             return this._actionRendererMap;
         }
         
-        public function set actionRenderers(param1:Object) : void {
+        public function set actionRenderers(param1:Object) : void
+        {
             this._actionRendererMap = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.removeActionRenderer();
             this._actionRendererMap = null;
             this.hideTween = null;

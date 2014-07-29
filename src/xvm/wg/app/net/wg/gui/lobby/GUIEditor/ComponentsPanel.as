@@ -11,7 +11,8 @@ package net.wg.gui.lobby.GUIEditor
     public class ComponentsPanel extends UIComponent implements IViewStackContent
     {
         
-        public function ComponentsPanel() {
+        public function ComponentsPanel()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.lobby.GUIEditor
         
         public var componentsType:DropdownMenu = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.componentsType.selectedIndex = 0;
             this.componentsType.addEventListener(ListEvent.INDEX_CHANGE,this.onComponentsTypeIndexChangeHandler);
@@ -27,7 +29,8 @@ package net.wg.gui.lobby.GUIEditor
             this.updateComponentsList();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.componentsType.removeEventListener(ListEvent.INDEX_CHANGE,this.onComponentsTypeIndexChangeHandler);
             this.componentsType.dispose();
             this.componentsType = null;
@@ -36,24 +39,29 @@ package net.wg.gui.lobby.GUIEditor
             super.onDispose();
         }
         
-        private function updateComponentsList() : void {
+        private function updateComponentsList() : void
+        {
             var _loc1_:String = this.componentsType.dataProvider[this.componentsType.selectedIndex].label;
             var _loc2_:Array = GUIEditorHelper.instance.getComponentsList(_loc1_);
             this.componentsList.dataProvider = new DataProvider(_loc2_);
         }
         
-        private function onComponentsTypeIndexChangeHandler(param1:ListEvent) : void {
+        private function onComponentsTypeIndexChangeHandler(param1:ListEvent) : void
+        {
             this.updateComponentsList();
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

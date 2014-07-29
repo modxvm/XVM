@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data.buildingProcess
     public class BuildingProcessListItemVO extends DAAPIDataClass
     {
         
-        public function BuildingProcessListItemVO(param1:Object) {
+        public function BuildingProcessListItemVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.lobby.fortifications.data.buildingProcess
         
         public var buildingStatus:int = -1;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.buildingID = null;
             this.buildingName = null;
             this.shortDescr = null;

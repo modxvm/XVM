@@ -6,18 +6,21 @@ package net.wg.gui.tutorial.controls
     public class HintTextItemRenderer extends HintBaseItemRenderer
     {
         
-        public function HintTextItemRenderer() {
+        public function HintTextItemRenderer()
+        {
             super();
         }
         
         public var textField:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.textField.autoSize = TextFieldAutoSize.LEFT;
         }
         
-        override protected function drawData() : void {
+        override protected function drawData() : void
+        {
             super.drawData();
             this.textField.htmlText = _data.label;
             setActualSize(width,this.textField.height);

@@ -5,11 +5,13 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class StatisticsChartsUtils extends Object
     {
         
-        public function StatisticsChartsUtils() {
+        public function StatisticsChartsUtils()
+        {
             super();
         }
         
-        public static function showTypeTooltip(param1:Object, param2:String) : void {
+        public static function showTypeTooltip(param1:Object, param2:String) : void
+        {
             var _loc3_:Object = {};
             if((param1) && (param1.hasOwnProperty("xField")))
             {
@@ -18,7 +20,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             App.toolTipMgr.showComplexWithParams(param2,new ToolTipParams(_loc3_,{}));
         }
         
-        public static function showNationTooltip(param1:Object, param2:String) : void {
+        public static function showNationTooltip(param1:Object, param2:String) : void
+        {
             var _loc4_:Array = null;
             var _loc5_:uint = 0;
             var _loc6_:Object = null;
@@ -39,7 +42,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             App.toolTipMgr.showComplexWithParams(param2,new ToolTipParams(_loc3_,{}));
         }
         
-        public static function showLevelTooltip(param1:Object, param2:String) : void {
+        public static function showLevelTooltip(param1:Object, param2:String) : void
+        {
             var _loc3_:Object = null;
             if(param2)
             {

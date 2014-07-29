@@ -5,13 +5,15 @@ package net.wg.gui.tutorial.controls
     public class HintVideoItemRenderer extends HintBaseItemRenderer
     {
         
-        public function HintVideoItemRenderer() {
+        public function HintVideoItemRenderer()
+        {
             super();
         }
         
         public var button:SoundButton;
         
-        override protected function drawData() : void {
+        override protected function drawData() : void
+        {
             super.drawData();
             this.button.label = _data.label;
             this.button.validateNow();

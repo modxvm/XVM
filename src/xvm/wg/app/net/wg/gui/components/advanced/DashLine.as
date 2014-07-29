@@ -9,7 +9,8 @@ package net.wg.gui.components.advanced
     public class DashLine extends UIComponent
     {
         
-        public function DashLine() {
+        public function DashLine()
+        {
             this.maskObj = new Sprite();
             super();
         }
@@ -24,13 +25,15 @@ package net.wg.gui.components.advanced
         
         private var _dashLength:uint = 1;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addChild(this.maskObj);
             this.background.mask = this.maskObj;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Graphics = null;
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
@@ -66,25 +69,30 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get gap() : uint {
+        public function get gap() : uint
+        {
             return this._gap;
         }
         
-        public function set gap(param1:uint) : void {
+        public function set gap(param1:uint) : void
+        {
             this._gap = param1;
             invalidate(REDRAW_INV);
         }
         
-        public function get dashLength() : uint {
+        public function get dashLength() : uint
+        {
             return this._dashLength;
         }
         
-        public function set dashLength(param1:uint) : void {
+        public function set dashLength(param1:uint) : void
+        {
             this._dashLength = param1;
             invalidate(REDRAW_INV);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.background.mask = null;
             this.background = null;
             this.maskObj = null;

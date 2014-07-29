@@ -9,7 +9,8 @@ package net.wg.gui.lobby.questsWindow
     public class VehicleBlock extends UIComponent
     {
         
-        public function VehicleBlock() {
+        public function VehicleBlock()
+        {
             this.nations = [];
             super();
             this.levelMC.visible = false;
@@ -32,7 +33,8 @@ package net.wg.gui.lobby.questsWindow
         
         public var data:Object = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.discountDL.width = DEFAULT_WIDTH;
             this.nationIcon.hideLoader = false;
@@ -40,12 +42,14 @@ package net.wg.gui.lobby.questsWindow
             this.tankSmallIcon.hideLoader = false;
         }
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:String = null;
             var _loc2_:String = null;
             if((isInvalid(InvalidationType.DATA)) && (this.data))
@@ -71,15 +75,18 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        public function getNationIconPath(param1:int) : String {
+        public function getNationIconPath(param1:int) : String
+        {
             return "../maps/icons/filters/nations/" + this.nations[param1] + ".png";
         }
         
-        public function getTypeIconPath(param1:String) : String {
+        public function getTypeIconPath(param1:String) : String
+        {
             return "../maps/icons/filters/tanks/" + param1 + ".png";
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.nationIcon)
             {
                 this.nationIcon.dispose();

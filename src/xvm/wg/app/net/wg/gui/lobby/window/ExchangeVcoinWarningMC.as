@@ -10,7 +10,8 @@ package net.wg.gui.lobby.window
     public class ExchangeVcoinWarningMC extends UIComponent
     {
         
-        public function ExchangeVcoinWarningMC() {
+        public function ExchangeVcoinWarningMC()
+        {
             super();
         }
         
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.window
         
         private var _contentPadding:int = 20;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.textField.autoSize = TextFieldAutoSize.LEFT;
             this.textField.wordWrap = true;
@@ -33,14 +35,16 @@ package net.wg.gui.lobby.window
             this.buyVcoinBtn.label = _loc1_.makeString(MENU.EXCHANGEVCOIN_BUYVCOINBTNNAME);
         }
         
-        public function set minTransactValue(param1:Number) : void {
+        public function set minTransactValue(param1:Number) : void
+        {
             var _loc2_:ILocale = App.utils.locale;
             this.textField.text = _loc2_.makeString(MENU.EXCHANGEVCOIN_VCOINISTIGHT,{"minval":param1.toString()});
             this.buyVcoinBtn.y = Math.round(this.textField.y + this.textField.textHeight + BTN_OFFSET);
             this.bg.height = Math.round(this.buyVcoinBtn.y + this._contentPadding * 2);
         }
         
-        public function get contentPadding() : int {
+        public function get contentPadding() : int
+        {
             return this._contentPadding;
         }
     }

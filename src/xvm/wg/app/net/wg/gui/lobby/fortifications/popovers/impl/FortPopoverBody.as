@@ -10,7 +10,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     public class FortPopoverBody extends MovieClip implements IDisposable
     {
         
-        public function FortPopoverBody() {
+        public function FortPopoverBody()
+        {
             super();
         }
         
@@ -26,14 +27,16 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var model:OrderInfoVO;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.orderInfo.dispose();
             this.orderInfo = null;
             this.model.dispose();
             this.model = null;
         }
         
-        public function setData(param1:OrderInfoVO) : void {
+        public function setData(param1:OrderInfoVO) : void
+        {
             this.model = param1;
             if(this.model.buildingType == FortBuildingConstants.BASE_BUILDING)
             {
@@ -49,7 +52,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.updateState(this.model.buildingType == FortBuildingConstants.BASE_BUILDING);
         }
         
-        private function updateState(param1:Boolean) : void {
+        private function updateState(param1:Boolean) : void
+        {
             this.title.visible = param1;
             this.description.visible = param1;
         }

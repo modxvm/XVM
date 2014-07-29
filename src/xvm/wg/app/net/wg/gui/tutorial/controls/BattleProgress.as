@@ -8,7 +8,8 @@ package net.wg.gui.tutorial.controls
     public class BattleProgress extends UIComponent
     {
         
-        public function BattleProgress() {
+        public function BattleProgress()
+        {
             this.separatorItems = [];
             this.taskItems = [];
             this.phaseItems = [];
@@ -58,24 +59,28 @@ package net.wg.gui.tutorial.controls
         
         private var _bodyWidth:Number;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.setupPhases();
             this.setupTasks();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.clearItems(this.separatorsContainer,this.separatorItems);
             this.clearItems(this.phasesContainer,this.phaseItems);
             this.clearItems(this.tasksContainer,this.taskItems);
         }
         
-        public function populateUI(param1:Number, param2:Number) : void {
+        public function populateUI(param1:Number, param2:Number) : void
+        {
             if(this._allPhases != param2)
             {
                 this._allPhases = param2;
@@ -91,12 +96,14 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        public function setPhases(param1:Number) : void {
+        public function setPhases(param1:Number) : void
+        {
             this._phaseStatusMask = param1;
             invalidate();
         }
         
-        public function setTasks(param1:Number, param2:Number) : void {
+        public function setTasks(param1:Number, param2:Number) : void
+        {
             if(this._allTasks != param1)
             {
                 this._allTasks = param1;
@@ -109,7 +116,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        private function rebuildPhases() : void {
+        private function rebuildPhases() : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:ProgressSeparator = null;
             var _loc4_:ProgressItem = null;
@@ -132,7 +140,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        private function setupPhases() : void {
+        private function setupPhases() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = 0;
             var _loc3_:ProgressItem = null;
@@ -156,7 +165,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        private function setupTasks() : void {
+        private function setupTasks() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = 0;
             var _loc3_:ProgressItem = null;
@@ -177,7 +187,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        private function rebuildTasks() : void {
+        private function rebuildTasks() : void
+        {
             var _loc4_:ProgressItem = null;
             this.clearItems(this.tasksContainer,this.taskItems);
             var _loc1_:Number = this._phaseWidth * this._curPhase ^ 0;
@@ -193,7 +204,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        private function getLineStatus(param1:Number) : String {
+        private function getLineStatus(param1:Number) : String
+        {
             var _loc2_:String = PHASE_NONE;
             switch(param1)
             {
@@ -213,7 +225,8 @@ package net.wg.gui.tutorial.controls
             return _loc2_;
         }
         
-        public function createInstance(param1:DisplayObjectContainer, param2:String) : MovieClip {
+        public function createInstance(param1:DisplayObjectContainer, param2:String) : MovieClip
+        {
             var _loc3_:MovieClip = null;
             _loc3_ = App.utils.classFactory.getObject(param2) as MovieClip;
             if(_loc3_)
@@ -223,7 +236,8 @@ package net.wg.gui.tutorial.controls
             return _loc3_;
         }
         
-        private function clearItems(param1:Sprite, param2:Array) : void {
+        private function clearItems(param1:Sprite, param2:Array) : void
+        {
             while(param1.numChildren)
             {
                 param1.removeChildAt(0);

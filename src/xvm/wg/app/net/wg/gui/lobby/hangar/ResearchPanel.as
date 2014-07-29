@@ -12,7 +12,8 @@ package net.wg.gui.lobby.hangar
     public class ResearchPanel extends ResearchPanelMeta implements IResearchPanelMeta, IHelpLayoutComponent
     {
         
-        public function ResearchPanel() {
+        public function ResearchPanel()
+        {
             super();
         }
         
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.hangar
         
         private var _isElite:Boolean = false;
         
-        public function as_setEarnedXP(param1:Number) : void {
+        public function as_setEarnedXP(param1:Number) : void
+        {
             if(this._earnedXP == param1)
             {
                 return;
@@ -33,7 +35,8 @@ package net.wg.gui.lobby.hangar
             invalidateData();
         }
         
-        public function as_setElite(param1:Boolean) : void {
+        public function as_setElite(param1:Boolean) : void
+        {
             if(this._isElite == param1)
             {
                 return;
@@ -42,15 +45,18 @@ package net.wg.gui.lobby.hangar
             invalidateData();
         }
         
-        public function showHelpLayout() : void {
+        public function showHelpLayout() : void
+        {
             this.button.showHelpLayout();
         }
         
-        public function closeHelpLayout() : void {
+        public function closeHelpLayout() : void
+        {
             this.button.closeHelpLayout();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             this.xpText.focusable = false;
             this.xpText.mouseChildren = false;
@@ -60,7 +66,8 @@ package net.wg.gui.lobby.hangar
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.button != null)
             {
@@ -72,7 +79,8 @@ package net.wg.gui.lobby.hangar
             this.button = null;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && !(this.xpText == null))
             {
@@ -81,7 +89,8 @@ package net.wg.gui.lobby.hangar
             }
         }
         
-        private function handleButtonClick(param1:ButtonEvent) : void {
+        private function handleButtonClick(param1:ButtonEvent) : void
+        {
             goToResearchS();
         }
     }

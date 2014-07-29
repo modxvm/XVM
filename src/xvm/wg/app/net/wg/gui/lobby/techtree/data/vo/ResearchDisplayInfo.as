@@ -6,7 +6,8 @@ package net.wg.gui.lobby.techtree.data.vo
     public class ResearchDisplayInfo extends Object implements IValueObject
     {
         
-        public function ResearchDisplayInfo(param1:Array = null, param2:String = "", param3:int = -1) {
+        public function ResearchDisplayInfo(param1:Array = null, param2:String = "", param3:int = -1)
+        {
             super();
             this._path = param1;
             this._renderer = param2;
@@ -23,19 +24,23 @@ package net.wg.gui.lobby.techtree.data.vo
         
         private var _level:int;
         
-        public function get path() : Array {
+        public function get path() : Array
+        {
             return this._path;
         }
         
-        public function get renderer() : String {
+        public function get renderer() : String
+        {
             return this._renderer;
         }
         
-        public function get level() : int {
+        public function get level() : int
+        {
             return this._level;
         }
         
-        public function fromArray(param1:Array, param2:ILocale) : void {
+        public function fromArray(param1:Array, param2:ILocale) : void
+        {
             if(param1.length > 2)
             {
                 this._path = param1[0];
@@ -44,7 +49,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function fromObject(param1:Object, param2:ILocale) : void {
+        public function fromObject(param1:Object, param2:ILocale) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -63,7 +69,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function clearUp() : void {
+        public function clearUp() : void
+        {
             this._renderer = "";
             this._level = -1;
             if(this._path != null)
@@ -72,19 +79,23 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function isDrawItem() : Boolean {
+        public function isDrawItem() : Boolean
+        {
             return this._renderer == ITEM_RENDERER;
         }
         
-        public function isDrawVehicle() : Boolean {
+        public function isDrawVehicle() : Boolean
+        {
             return this._renderer == VEHICLE_RENDERER;
         }
         
-        public function getDepthOfPath() : Number {
+        public function getDepthOfPath() : Number
+        {
             return this._path != null?this._path.length:0;
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[ResearchDisplayInfo: path = " + this._path + ", renderer = " + this._renderer + ", level = " + this._level + "]";
         }
     }

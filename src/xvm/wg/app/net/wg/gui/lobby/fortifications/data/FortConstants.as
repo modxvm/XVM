@@ -3,7 +3,8 @@ package net.wg.gui.lobby.fortifications.data
     public class FortConstants extends Object
     {
         
-        public function FortConstants() {
+        public function FortConstants()
+        {
             super();
         }
         

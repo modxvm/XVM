@@ -3,7 +3,8 @@ package net.wg.data.VO
     public class AnimationObject extends Object
     {
         
-        public function AnimationObject(param1:Number, param2:Number, param3:Number) {
+        public function AnimationObject(param1:Number, param2:Number, param3:Number)
+        {
             super();
             this.devHeight = param1;
             this.listHeight = param2;
@@ -50,23 +51,28 @@ package net.wg.data.VO
         
         private var isEmpty:Boolean = true;
         
-        public function get isOpen() : Boolean {
+        public function get isOpen() : Boolean
+        {
             return this._isOpen;
         }
         
-        public function set isOpen(param1:Boolean) : void {
+        public function set isOpen(param1:Boolean) : void
+        {
             this._isOpen = param1;
         }
         
-        public function get settingsBtnY() : Number {
+        public function get settingsBtnY() : Number
+        {
             return Math.round(SETTINGS_BTN_Y + this.devHeight);
         }
         
-        public function get expandBgY() : Number {
+        public function get expandBgY() : Number
+        {
             return Math.round(EXPANDBG_Y + this.devHeight);
         }
         
-        public function get arrowBgHeight() : Number {
+        public function get arrowBgHeight() : Number
+        {
             if(!this.isEmpty)
             {
                 if(this._isOpen)
@@ -78,7 +84,8 @@ package net.wg.data.VO
             return Math.round(DEF_ARROW_BG_HEIGHT + this.devHeight);
         }
         
-        public function get BtnsY() : Number {
+        public function get BtnsY() : Number
+        {
             if(!this.isEmpty)
             {
                 if(this._isOpen)
@@ -90,7 +97,8 @@ package net.wg.data.VO
             return Math.round(DEF_BTNS_Y + this.devHeight);
         }
         
-        public function get dropdownResultY() : Number {
+        public function get dropdownResultY() : Number
+        {
             if(this._isOpen)
             {
                 return Math.round(DROPDOWNRESULT_Y + this.listHeight + this.devHeight);
@@ -98,7 +106,8 @@ package net.wg.data.VO
             return Math.round(DEF_DROPDOWNRESULT_Y + this.devHeight);
         }
         
-        public function get alpha() : Number {
+        public function get alpha() : Number
+        {
             if(this._isOpen)
             {
                 return 0;
@@ -106,7 +115,8 @@ package net.wg.data.VO
             return 1;
         }
         
-        public function get expandBgHeight() : Number {
+        public function get expandBgHeight() : Number
+        {
             if(this._isOpen)
             {
                 return Math.round(EXPANDBG_HEIGHT + MARGIN + this.listHeight);
@@ -114,7 +124,8 @@ package net.wg.data.VO
             return Math.round(EXPANDBG_HEIGHT);
         }
         
-        public function get maskMcHeight() : Number {
+        public function get maskMcHeight() : Number
+        {
             if(this._isOpen)
             {
                 return Math.round(this.listHeight - MARGIN);
@@ -122,11 +133,13 @@ package net.wg.data.VO
             return 0;
         }
         
-        public function get maskMcY() : Number {
+        public function get maskMcY() : Number
+        {
             return Math.round(LIST_Y + this.devHeight);
         }
         
-        public function get slidingScrListY() : Number {
+        public function get slidingScrListY() : Number
+        {
             if(this._isOpen)
             {
                 return Math.round(LIST_Y + this.devHeight);
@@ -134,7 +147,8 @@ package net.wg.data.VO
             return 0;
         }
         
-        public function get resultMcY() : Number {
+        public function get resultMcY() : Number
+        {
             if(!this.isEmpty)
             {
                 if(this._isOpen)
@@ -146,7 +160,8 @@ package net.wg.data.VO
             return Math.round(DEF_RESULT_Y + this.devHeight);
         }
         
-        public function get windBgFormHeight() : Number {
+        public function get windBgFormHeight() : Number
+        {
             if(!this.isEmpty)
             {
                 if(this._isOpen)
@@ -158,7 +173,8 @@ package net.wg.data.VO
             return Math.round(DEF_BGFORM_HEIGHT + this.devHeight);
         }
         
-        public function get windBgHeight() : Number {
+        public function get windBgHeight() : Number
+        {
             if(this._isOpen)
             {
                 return Math.round(WINDOW_HEIGHT + MARGIN + this.listHeight + this.devHeight);

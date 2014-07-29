@@ -15,7 +15,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
     public class DemountBuildingWindow extends DemountBuildingWindowMeta implements IDemountBuildingWindowMeta
     {
         
-        public function DemountBuildingWindow() {
+        public function DemountBuildingWindow()
+        {
             super();
             isModal = true;
             isCentered = true;
@@ -33,11 +34,13 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         public var inputChecker:InputChecker;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             registerComponent(this.inputChecker,Aliases.INPUT_CHECKER_COMPONENT);
@@ -47,7 +50,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.cancelButton.addEventListener(ButtonEvent.CLICK,this.onClickCancelBtnHandler);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.inputChecker.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
             this.cancelButton.removeEventListener(ButtonEvent.CLICK,this.onClickCancelBtnHandler);
             this.cancelButton.dispose();
@@ -59,12 +63,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
             super.onDispose();
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.inputChecker.textInput);
         }
         
-        override protected function setData(param1:DemountBuildingVO) : void {
+        override protected function setData(param1:DemountBuildingVO) : void
+        {
             window.title = param1.windowTitle;
             this.titleText.htmlText = param1.headerQuestion;
             this.bodyText.htmlText = param1.bodyText;
@@ -72,19 +78,23 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.cancelButton.label = param1.cancelButtonLbl;
         }
         
-        private function updateFocus() : void {
+        private function updateFocus() : void
+        {
             setFocus(this.applyButton);
         }
         
-        private function onClickApplyBtnHandler(param1:ButtonEvent) : void {
+        private function onClickApplyBtnHandler(param1:ButtonEvent) : void
+        {
             applyDemountS();
         }
         
-        private function onClickCancelBtnHandler(param1:ButtonEvent) : void {
+        private function onClickCancelBtnHandler(param1:ButtonEvent) : void
+        {
             onWindowCloseS();
         }
         
-        private function onRequestFocusHandler(param1:Event) : void {
+        private function onRequestFocusHandler(param1:Event) : void
+        {
             if(this.inputChecker.isInvalidUserText)
             {
                 this.applyButton.enabled = true;

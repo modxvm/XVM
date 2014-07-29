@@ -10,11 +10,13 @@ package net.wg.infrastructure.managers.utils.impl
     public class TweenManager extends TweenManagerMeta implements ITweenManager
     {
         
-        public function TweenManager() {
+        public function TweenManager()
+        {
             super();
         }
         
-        public function createNewTween(param1:ITweenPropertiesVO) : ITween {
+        public function createNewTween(param1:ITweenPropertiesVO) : ITween
+        {
             var _loc2_:Class = null;
             var _loc3_:IClassFactory = App.utils.classFactory;
             if(param1.getIsOnCodeBased())

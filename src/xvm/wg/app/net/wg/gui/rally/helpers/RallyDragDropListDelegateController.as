@@ -9,7 +9,8 @@ package net.wg.gui.rally.helpers
     public class RallyDragDropListDelegateController extends DropListDelegateCtrlr
     {
         
-        public function RallyDragDropListDelegateController(param1:Vector.<InteractiveObject>, param2:Class, param3:String, param4:Function, param5:Function, param6:Function) {
+        public function RallyDragDropListDelegateController(param1:Vector.<InteractiveObject>, param2:Class, param3:String, param4:Function, param5:Function, param6:Function)
+        {
             var _loc7_:IDroppable = null;
             super(param1,param2,param3);
             for each(_loc7_ in getDelegates())
@@ -18,7 +19,8 @@ package net.wg.gui.rally.helpers
             }
         }
         
-        override protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void {
+        override protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void
+        {
             var _loc3_:IDroppable = null;
             if(param2 is IDropItem)
             {
@@ -43,7 +45,8 @@ package net.wg.gui.rally.helpers
             }
         }
         
-        override protected function getPairedElementsFromVector(param1:InteractiveObject, param2:Vector.<InteractiveObject>) : Vector.<InteractiveObject> {
+        override protected function getPairedElementsFromVector(param1:InteractiveObject, param2:Vector.<InteractiveObject>) : Vector.<InteractiveObject>
+        {
             return param2;
         }
     }

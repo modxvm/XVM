@@ -12,7 +12,8 @@ package net.wg.gui.rally.controls
     public class SlotDropIndicator extends UIComponent implements IDropItem, IUpdatable
     {
         
-        public function SlotDropIndicator() {
+        public function SlotDropIndicator()
+        {
             super();
             addEventListener(MouseEvent.CLICK,this.onClickHandler);
             addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
@@ -30,38 +31,46 @@ package net.wg.gui.rally.controls
         
         private var _isHighlighted:Boolean = false;
         
-        public function setHighlightState(param1:Boolean) : void {
+        public function setHighlightState(param1:Boolean) : void
+        {
             this._isHighlighted = param1;
             alpha = this._isHighlighted?1:0;
             this.updateMouseEnabled();
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             this._data = param1?IExtendedUserVO(param1):null;
             this.updateMouseEnabled();
         }
         
-        public function get index() : Number {
+        public function get index() : Number
+        {
             return this._index;
         }
         
-        public function set index(param1:Number) : void {
+        public function set index(param1:Number) : void
+        {
             this._index = param1;
         }
         
-        public function get data() : Object {
+        public function get data() : Object
+        {
             return this._data;
         }
         
-        public function set isCurrentUserCommander(param1:Boolean) : void {
+        public function set isCurrentUserCommander(param1:Boolean) : void
+        {
             this._isCurrentUserCommander = param1;
         }
         
-        public function set playerStatus(param1:int) : void {
+        public function set playerStatus(param1:int) : void
+        {
             this._playerStatus = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.CLICK,this.onClickHandler);
             removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
@@ -73,7 +82,8 @@ package net.wg.gui.rally.controls
             super.onDispose();
         }
         
-        private function updateMouseEnabled() : void {
+        private function updateMouseEnabled() : void
+        {
             if(this._isCurrentUserCommander)
             {
                 mouseEnabled = this._index > 0 && ((this._isHighlighted) || (this._data));
@@ -85,7 +95,8 @@ package net.wg.gui.rally.controls
             buttonMode = useHandCursor = mouseEnabled;
         }
         
-        private function onClickHandler(param1:MouseEvent) : void {
+        private function onClickHandler(param1:MouseEvent) : void
+        {
             var _loc2_:IExtendedUserVO = null;
             var _loc3_:PlayerCIGenerator = null;
             if(App.utils.commons.isRightButton(param1))
@@ -99,7 +110,8 @@ package net.wg.gui.rally.controls
             }
         }
         
-        private function onContextMenuAction(param1:ContextMenuEvent) : void {
+        private function onContextMenuAction(param1:ContextMenuEvent) : void
+        {
             switch(param1.id)
             {
                 case "addToIgnored":
@@ -108,14 +120,16 @@ package net.wg.gui.rally.controls
             }
         }
         
-        private function onRollOverHandler(param1:MouseEvent) : void {
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
             if(this._data)
             {
                 App.toolTipMgr.show(this._data.getToolTip());
             }
         }
         
-        private function onRollOutHandler(param1:MouseEvent) : void {
+        private function onRollOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
     }

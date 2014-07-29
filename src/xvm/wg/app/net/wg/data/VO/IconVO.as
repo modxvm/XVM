@@ -5,7 +5,8 @@ package net.wg.data.VO
     public class IconVO extends DAAPIDataClass
     {
         
-        public function IconVO(param1:Object) {
+        public function IconVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -13,19 +14,23 @@ package net.wg.data.VO
         
         private var _small:String = "";
         
-        public function get big() : String {
+        public function get big() : String
+        {
             return this._big;
         }
         
-        public function set big(param1:String) : void {
+        public function set big(param1:String) : void
+        {
             this._big = param1;
         }
         
-        public function get small() : String {
+        public function get small() : String
+        {
             return this._small;
         }
         
-        public function set small(param1:String) : void {
+        public function set small(param1:String) : void
+        {
             this._small = param1;
         }
     }

@@ -13,7 +13,8 @@ package net.wg.infrastructure.helpers
     public class DropListDelegateCtrlr extends Object implements IDisposable
     {
         
-        public function DropListDelegateCtrlr(param1:Vector.<InteractiveObject>, param2:Class, param3:String) {
+        public function DropListDelegateCtrlr(param1:Vector.<InteractiveObject>, param2:Class, param3:String)
+        {
             var _loc4_:InteractiveObject = null;
             var _loc5_:IDropListDelegate = null;
             super();
@@ -38,11 +39,13 @@ package net.wg.infrastructure.helpers
         
         private var _currentDroppedItem:InteractiveObject = null;
         
-        public final function dispose() : void {
+        public final function dispose() : void
+        {
             this.onDispose();
         }
         
-        protected function onDispose() : void {
+        protected function onDispose() : void
+        {
             var _loc1_:IDropListDelegate = null;
             var _loc2_:IEventDispatcher = null;
             for each(_loc1_ in this._delegates)
@@ -59,14 +62,17 @@ package net.wg.infrastructure.helpers
             this._delegates = null;
         }
         
-        protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void {
+        protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void
+        {
         }
         
-        protected final function getDelegates() : Vector.<IDropListDelegate> {
+        protected final function getDelegates() : Vector.<IDropListDelegate>
+        {
             return this._delegates;
         }
         
-        protected function getPairedElementsFromVector(param1:InteractiveObject, param2:Vector.<InteractiveObject>) : Vector.<InteractiveObject> {
+        protected function getPairedElementsFromVector(param1:InteractiveObject, param2:Vector.<InteractiveObject>) : Vector.<InteractiveObject>
+        {
             var checker:Function = null;
             var pairsFor:InteractiveObject = param1;
             var vector:Vector.<InteractiveObject> = param2;
@@ -77,28 +83,33 @@ package net.wg.infrastructure.helpers
             return vector.filter(checker,null);
         }
         
-        private function assertLinkage(param1:String) : void {
+        private function assertLinkage(param1:String) : void
+        {
             var _loc2_:* = "dropElementLinkage must has correct linkage value!";
             App.utils.asserter.assert(!(param1 == Values.EMPTY_STR),_loc2_,ArgumentException);
             this.assertNotNull(param1,"linkage");
         }
         
-        private function assertNotNull(param1:Object, param2:String) : void {
+        private function assertNotNull(param1:Object, param2:String) : void
+        {
             App.utils.asserter.assertNotNull(param1,param2 + Errors.CANT_EMPTY);
         }
         
-        private function onControllerBeforeDropHandler(param1:DropEvent) : void {
+        private function onControllerBeforeDropHandler(param1:DropEvent) : void
+        {
             this._currentDroppedItem = param1.draggedItem;
             this.onHighlightHitAreas(true,this._currentDroppedItem);
         }
         
-        private function onControllerAfterDropHandler(param1:DropEvent) : void {
+        private function onControllerAfterDropHandler(param1:DropEvent) : void
+        {
             this.assertNotNull(this._currentDroppedItem,"_currentDroppedItem");
             this.onHighlightHitAreas(false,this._currentDroppedItem);
             this._currentDroppedItem = null;
         }
         
-        private function onControllerStartDropHandler(param1:DropEvent) : void {
+        private function onControllerStartDropHandler(param1:DropEvent) : void
+        {
         }
     }
 }

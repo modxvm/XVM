@@ -6,18 +6,21 @@ package net.wg.gui.components.common.video.advanced
     public class AbstractPlayerController extends Object implements IDisposable
     {
         
-        public function AbstractPlayerController(param1:SimpleVideoPlayer) {
+        public function AbstractPlayerController(param1:SimpleVideoPlayer)
+        {
             super();
             this.videoPlayer = param1;
         }
         
         protected var videoPlayer:SimpleVideoPlayer;
         
-        public final function dispose() : void {
+        public final function dispose() : void
+        {
             this.onDispose();
         }
         
-        protected function onDispose() : void {
+        protected function onDispose() : void
+        {
             this.videoPlayer = null;
         }
     }

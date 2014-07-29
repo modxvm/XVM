@@ -10,17 +10,20 @@ package net.wg.gui.lobby.hangar
     public class TmenXpPanel extends TmenXpPanelMeta implements ITmenXpPanelMeta
     {
         
-        public function TmenXpPanel() {
+        public function TmenXpPanel()
+        {
             super();
         }
         
         private static var INVALIDATE_XP_PANEL:String = "invXpPanel";
         
-        private static function showXpTankmenTooltip(param1:MouseEvent) : void {
+        private static function showXpTankmenTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(TOOLTIPS.HANGAR_XPTOTMENCHECKBOX);
         }
         
-        private static function hideXpTankmenTooltip(param1:MouseEvent) : void {
+        private static function hideXpTankmenTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -32,13 +35,15 @@ package net.wg.gui.lobby.hangar
         
         private var _panelSelected:Boolean = false;
         
-        public function as_setTankmenXpPanel(param1:Boolean, param2:Boolean) : void {
+        public function as_setTankmenXpPanel(param1:Boolean, param2:Boolean) : void
+        {
             this._panelVisible = param1;
             this._panelSelected = param2;
             invalidate(INVALIDATE_XP_PANEL);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.checkboxTankersBg.visible = this.xpToTmenCheckbox.visible = false;
             this.xpToTmenCheckbox.label = DIALOGS.XPTOTMENCHECKBOX_TITLE;
@@ -47,7 +52,8 @@ package net.wg.gui.lobby.hangar
             this.xpToTmenCheckbox.addEventListener(ButtonEvent.CLICK,this.onXpToTmenCheckboxClick);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INVALIDATE_XP_PANEL))
             {
@@ -56,7 +62,8 @@ package net.wg.gui.lobby.hangar
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.toolTipMgr.hide();
             super.onDispose();
             this.xpToTmenCheckbox.removeEventListener(MouseEvent.ROLL_OVER,showXpTankmenTooltip);
@@ -67,7 +74,8 @@ package net.wg.gui.lobby.hangar
             this.xpToTmenCheckbox = null;
         }
         
-        private function onXpToTmenCheckboxClick(param1:ButtonEvent) : void {
+        private function onXpToTmenCheckboxClick(param1:ButtonEvent) : void
+        {
             App.toolTipMgr.hide();
             DebugUtils.LOG_DEBUG(this.xpToTmenCheckbox.selected);
             accelerateTmenXpS(this.xpToTmenCheckbox.selected);

@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class ContainerTypes extends Object
     {
         
-        public function ContainerTypes() {
+        public function ContainerTypes()
+        {
             super();
         }
         
@@ -23,6 +24,6 @@ package net.wg.data.constants
         
         public static var SERVICE_LAYOUT:String = "serviceLayout";
         
-        public static var CTNR_ORDER:Vector.<String>;
+        public static var CTNR_ORDER:Vector.<String> = Vector.<String>([WAITING,SERVICE_LAYOUT,TOP_WINDOW,BROWSER,WINDOW,LOBBY_SUB_VIEW,VIEW]);
     }
 }

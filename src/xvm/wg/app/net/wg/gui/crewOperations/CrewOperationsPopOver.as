@@ -11,13 +11,15 @@ package net.wg.gui.crewOperations
     public class CrewOperationsPopOver extends CrewOperationsPopOverMeta implements ICrewOperationsPopOverMeta
     {
         
-        public function CrewOperationsPopOver() {
+        public function CrewOperationsPopOver()
+        {
             super();
         }
         
         public var group:GroupEx;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addChild(this.group);
             this.group.layout = new VerticalGroupLayout();
@@ -26,27 +28,32 @@ package net.wg.gui.crewOperations
             this.group.addEventListener(CrewOperationEvent.OPERATION_CHANGED,this.operationChangedHandler,false,0,true);
         }
         
-        private function operationChangedHandler(param1:CrewOperationEvent) : void {
+        private function operationChangedHandler(param1:CrewOperationEvent) : void
+        {
             param1.stopImmediatePropagation();
             invokeOperationS(param1.operationName);
             App.popoverMgr.hide();
         }
         
-        private function groupResizeHandler(param1:Event) : void {
+        private function groupResizeHandler(param1:Event) : void
+        {
             setSize(this.group.width,this.group.height);
         }
         
-        override public function set wrapper(param1:IWrapper) : void {
+        override public function set wrapper(param1:IWrapper) : void
+        {
             super.wrapper = param1;
             PopOver(wrapper).title = App.utils.locale.makeString(CREW_OPERATIONS.WINDOW_TITLE);
         }
         
-        public function as_update(param1:Object) : void {
+        public function as_update(param1:Object) : void
+        {
             var _loc2_:CrewOperationsInitVO = new CrewOperationsInitVO(param1);
             this.group.dataProvider = _loc2_.castedOperations;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.group)
             {
                 this.group.removeEventListener(Event.RESIZE,this.groupResizeHandler);

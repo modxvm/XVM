@@ -15,7 +15,8 @@ package net.wg.infrastructure.helpers
     public class LibraryLoader extends EventDispatcher implements ILibraryLoader
     {
         
-        public function LibraryLoader() {
+        public function LibraryLoader()
+        {
             super();
         }
         
@@ -27,12 +28,14 @@ package net.wg.infrastructure.helpers
         
         private var loaders:Vector.<Loader> = null;
         
-        public function init(param1:DisplayObjectContainer) : void {
+        public function init(param1:DisplayObjectContainer) : void
+        {
             this.container = param1;
             this.loaders = new Vector.<Loader>();
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             var _loc1_:Loader = null;
             for each(_loc1_ in this.loaders)
             {
@@ -45,7 +48,8 @@ package net.wg.infrastructure.helpers
             DebugUtils.LOG_DEBUG("LibraryLoader disposed");
         }
         
-        public function load(param1:Vector.<String>) : void {
+        public function load(param1:Vector.<String>) : void
+        {
             var _loc2_:String = null;
             var _loc3_:URLRequest = null;
             var _loc4_:Loader = null;
@@ -67,7 +71,8 @@ package net.wg.infrastructure.helpers
             }
         }
         
-        private function onLibLoaded(param1:Event) : void {
+        private function onLibLoaded(param1:Event) : void
+        {
             var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
             this.removeListeners(_loc2_);
             DebugUtils.LOG_DEBUG("Library loaded",_loc2_.url);
@@ -77,14 +82,16 @@ package net.wg.infrastructure.helpers
             this.checkLoadComplete();
         }
         
-        private function onLibLoadError(param1:IOErrorEvent) : void {
+        private function onLibLoadError(param1:IOErrorEvent) : void
+        {
             var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
             this.removeListeners(_loc2_);
             DebugUtils.LOG_DEBUG("Library load error",_loc2_.url);
             this.checkLoadComplete();
         }
         
-        private function checkLoadComplete() : void {
+        private function checkLoadComplete() : void
+        {
             this.processedCounter++;
             if(this.processedCounter == this.librariesList.length)
             {
@@ -92,12 +99,14 @@ package net.wg.infrastructure.helpers
             }
         }
         
-        private function addListeners(param1:LoaderInfo) : void {
+        private function addListeners(param1:LoaderInfo) : void
+        {
             param1.addEventListener(Event.INIT,this.onLibLoaded);
             param1.addEventListener(IOErrorEvent.IO_ERROR,this.onLibLoadError);
         }
         
-        private function removeListeners(param1:LoaderInfo) : void {
+        private function removeListeners(param1:LoaderInfo) : void
+        {
             param1.removeEventListener(Event.INIT,this.onLibLoaded);
             param1.removeEventListener(IOErrorEvent.IO_ERROR,this.onLibLoadError);
         }

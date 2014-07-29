@@ -14,7 +14,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
     public class TransportingHelper extends Object implements ITransportingHelper
     {
         
-        public function TransportingHelper(param1:Vector.<IFortBuilding>, param2:ITransportingHandler) {
+        public function TransportingHelper(param1:Vector.<IFortBuilding>, param2:ITransportingHandler)
+        {
             super();
             var _loc3_:IUtils = App.utils;
             this._commons = _loc3_.commons;
@@ -34,7 +35,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
         
         private var _commons:ICommons = null;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.removeAllTransportingListeners();
             this._transportingHandler = null;
             this._buildings = null;
@@ -42,7 +44,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
             this._buildToImport = null;
         }
         
-        public function updateTransportMode(param1:Boolean, param2:Boolean) : void {
+        public function updateTransportMode(param1:Boolean, param2:Boolean) : void
+        {
             var _loc3_:IFortBuilding = null;
             if(param1)
             {
@@ -61,19 +64,22 @@ package net.wg.gui.lobby.fortifications.utils.impl
             }
         }
         
-        private function initTransportingEntering() : void {
+        private function initTransportingEntering() : void
+        {
             var _loc1_:Vector.<IEventDispatcher> = this.getExportAvailableBuildingsHitArea();
             this._commons.addMultipleHandlers(_loc1_,MouseEvent.CLICK,this.onExportingClickHandler);
         }
         
-        private function removeAllTransportingListeners() : void {
+        private function removeAllTransportingListeners() : void
+        {
             var _loc1_:Vector.<IEventDispatcher> = this.getAllBuildingsHitArea();
             this._commons.removeMultipleHandlers(_loc1_,MouseEvent.CLICK,this.onExportingClickHandler);
             this._commons.removeMultipleHandlers(_loc1_,MouseEvent.CLICK,this.onImportClickHandler);
             App.stage.removeEventListener(MouseEvent.CLICK,this.onStageClickHandler);
         }
         
-        private function getAllBuildingsHitArea() : Vector.<IEventDispatcher> {
+        private function getAllBuildingsHitArea() : Vector.<IEventDispatcher>
+        {
             var _loc2_:IFortBuilding = null;
             var _loc1_:Vector.<IEventDispatcher> = new Vector.<IEventDispatcher>();
             for each(_loc2_ in this._buildings)
@@ -86,7 +92,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
             return _loc1_;
         }
         
-        private function getExportAvailableBuildingsHitArea() : Vector.<IEventDispatcher> {
+        private function getExportAvailableBuildingsHitArea() : Vector.<IEventDispatcher>
+        {
             var _loc2_:IFortBuilding = null;
             var _loc1_:Vector.<IEventDispatcher> = new Vector.<IEventDispatcher>();
             for each(_loc2_ in this._buildings)
@@ -102,7 +109,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
             return _loc1_;
         }
         
-        private function getImportAvailableBuildingsHitArea() : Vector.<IEventDispatcher> {
+        private function getImportAvailableBuildingsHitArea() : Vector.<IEventDispatcher>
+        {
             var _loc2_:IFortBuilding = null;
             var _loc1_:Vector.<IEventDispatcher> = new Vector.<IEventDispatcher>();
             for each(_loc2_ in this._buildings)
@@ -118,7 +126,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
             return _loc1_;
         }
         
-        private function onStageClickHandler(param1:MouseEvent) : void {
+        private function onStageClickHandler(param1:MouseEvent) : void
+        {
             var _loc2_:DisplayObject = DisplayObject(param1.target);
             while(_loc2_ != null)
             {
@@ -132,7 +141,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
             this.updateTransportMode(true,false);
         }
         
-        private function onExportingClickHandler(param1:MouseEvent) : void {
+        private function onExportingClickHandler(param1:MouseEvent) : void
+        {
             var _loc2_:Vector.<IEventDispatcher> = null;
             var _loc3_:IFortBuilding = null;
             if(App.utils.commons.isLeftButton(param1))
@@ -155,7 +165,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
             }
         }
         
-        private function onImportClickHandler(param1:MouseEvent) : void {
+        private function onImportClickHandler(param1:MouseEvent) : void
+        {
             var _loc2_:IFortBuilding = null;
             if(App.utils.commons.isLeftButton(param1))
             {

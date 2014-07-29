@@ -15,7 +15,8 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
     public class FortMainHeader extends UIComponentEx implements IMainHeader
     {
         
-        public function FortMainHeader() {
+        public function FortMainHeader()
+        {
             super();
             this.helper = FortsControlsAligner.instance;
             this._statsBtn.UIID = 1;
@@ -25,7 +26,7 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         private static var TRANSPORT_BTN_RIGHT_OFFSET:Number = 9;
         
-        private static var DEPOT_QUANTITY_RIGHT_OFFSET:Number = 17.0;
+        private static var DEPOT_QUANTITY_RIGHT_OFFSET:Number = TRANSPORT_BTN_RIGHT_OFFSET + 8;
         
         public var headerBitmapFill:BitmapFill = null;
         
@@ -47,7 +48,8 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         private var helper:IFortsControlsAligner = null;
         
-        public function updateControls() : void {
+        public function updateControls() : void
+        {
             this._title.width = App.appWidth;
             this.helper.centerControl(this._vignetteYellow);
             this.helper.centerControl(this._clanInfo);
@@ -56,82 +58,101 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this.helper.rightControl(this._totalDepotQuantityText,DEPOT_QUANTITY_RIGHT_OFFSET + this._transportBtn.width);
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this.clanListBtn;
         }
         
-        public function set widthFill(param1:Number) : void {
+        public function set widthFill(param1:Number) : void
+        {
             this.headerBitmapFill.widthFill = param1;
         }
         
-        public function get heightFill() : Number {
+        public function get heightFill() : Number
+        {
             return this.headerBitmapFill.heightFill;
         }
         
-        public function get statsBtn() : IconTextButton {
+        public function get statsBtn() : IconTextButton
+        {
             return this._statsBtn;
         }
         
-        public function set statsBtn(param1:IconTextButton) : void {
+        public function set statsBtn(param1:IconTextButton) : void
+        {
             this._statsBtn = param1;
         }
         
-        public function get clanListBtn() : IconTextButton {
+        public function get clanListBtn() : IconTextButton
+        {
             return this._clanListBtn;
         }
         
-        public function set clanListBtn(param1:IconTextButton) : void {
+        public function set clanListBtn(param1:IconTextButton) : void
+        {
             this._clanListBtn = param1;
         }
         
-        public function get transportBtn() : ToggleButton {
+        public function get transportBtn() : ToggleButton
+        {
             return this._transportBtn;
         }
         
-        public function set transportBtn(param1:ToggleButton) : void {
+        public function set transportBtn(param1:ToggleButton) : void
+        {
             this._transportBtn = param1;
         }
         
-        public function get vignetteYellow() : VignetteYellow {
+        public function get vignetteYellow() : VignetteYellow
+        {
             return this._vignetteYellow;
         }
         
-        public function set vignetteYellow(param1:VignetteYellow) : void {
+        public function set vignetteYellow(param1:VignetteYellow) : void
+        {
             this._vignetteYellow = param1;
         }
         
-        public function get totalDepotQuantityText() : TextField {
+        public function get totalDepotQuantityText() : TextField
+        {
             return this._totalDepotQuantityText;
         }
         
-        public function set totalDepotQuantityText(param1:TextField) : void {
+        public function set totalDepotQuantityText(param1:TextField) : void
+        {
             this._totalDepotQuantityText = param1;
         }
         
-        public function get clanInfo() : IFortHeaderClanInfo {
+        public function get clanInfo() : IFortHeaderClanInfo
+        {
             return this._clanInfo;
         }
         
-        public function set clanInfo(param1:IFortHeaderClanInfo) : void {
+        public function set clanInfo(param1:IFortHeaderClanInfo) : void
+        {
             this._clanInfo = param1;
         }
         
-        public function get title() : TextField {
+        public function get title() : TextField
+        {
             return this._title;
         }
         
-        public function set title(param1:TextField) : void {
+        public function set title(param1:TextField) : void
+        {
             this._title = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this._vignetteYellow.mouseEnabled = false;
             this._vignetteYellow.mouseChildren = false;
             mouseEnabled = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.headerBitmapFill.dispose();
             this.headerBitmapFill = null;
             this._clanInfo.dispose();
@@ -152,11 +173,13 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             super.onDispose();
         }
         
-        public function get tutorialArrow() : IUIComponentEx {
+        public function get tutorialArrow() : IUIComponentEx
+        {
             return this._tutorialArrow;
         }
         
-        public function set tutorialArrow(param1:IUIComponentEx) : void {
+        public function set tutorialArrow(param1:IUIComponentEx) : void
+        {
             this._tutorialArrow = param1;
         }
     }

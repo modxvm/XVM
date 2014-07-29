@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class FreeXPInfoWindowMeta extends AbstractWindowView
     {
         
-        public function FreeXPInfoWindowMeta() {
+        public function FreeXPInfoWindowMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onCancelButton:Function = null;
         
-        public function onSubmitButtonS() : void {
+        public function onSubmitButtonS() : void
+        {
             App.utils.asserter.assertNotNull(this.onSubmitButton,"onSubmitButton" + Errors.CANT_NULL);
             this.onSubmitButton();
         }
         
-        public function onCancelButtonS() : void {
+        public function onCancelButtonS() : void
+        {
             App.utils.asserter.assertNotNull(this.onCancelButton,"onCancelButton" + Errors.CANT_NULL);
             this.onCancelButton();
         }

@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class TankCarouselMeta extends Carousel
     {
         
-        public function TankCarouselMeta() {
+        public function TankCarouselMeta()
+        {
             super();
         }
         
@@ -30,52 +31,62 @@ package net.wg.infrastructure.base.meta.impl
         
         public var getVehicleTypeProvider:Function = null;
         
-        public function showVehicleInfoS(param1:String) : void {
+        public function showVehicleInfoS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.showVehicleInfo,"showVehicleInfo" + Errors.CANT_NULL);
             this.showVehicleInfo(param1);
         }
         
-        public function toResearchS(param1:String) : void {
+        public function toResearchS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.toResearch,"toResearch" + Errors.CANT_NULL);
             this.toResearch(param1);
         }
         
-        public function vehicleSellS(param1:String) : void {
+        public function vehicleSellS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.vehicleSell,"vehicleSell" + Errors.CANT_NULL);
             this.vehicleSell(param1);
         }
         
-        public function vehicleChangeS(param1:String) : void {
+        public function vehicleChangeS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.vehicleChange,"vehicleChange" + Errors.CANT_NULL);
             this.vehicleChange(param1);
         }
         
-        public function buySlotS() : void {
+        public function buySlotS() : void
+        {
             App.utils.asserter.assertNotNull(this.buySlot,"buySlot" + Errors.CANT_NULL);
             this.buySlot();
         }
         
-        public function buyTankClickS() : void {
+        public function buyTankClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.buyTankClick,"buyTankClick" + Errors.CANT_NULL);
             this.buyTankClick();
         }
         
-        public function setVehiclesFilterS(param1:Number, param2:String, param3:Boolean) : void {
+        public function setVehiclesFilterS(param1:Number, param2:String, param3:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.setVehiclesFilter,"setVehiclesFilter" + Errors.CANT_NULL);
             this.setVehiclesFilter(param1,param2,param3);
         }
         
-        public function favoriteVehicleS(param1:String, param2:Boolean) : void {
+        public function favoriteVehicleS(param1:String, param2:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.favoriteVehicle,"favoriteVehicle" + Errors.CANT_NULL);
             this.favoriteVehicle(param1,param2);
         }
         
-        public function showVehicleStatsS(param1:Number) : void {
+        public function showVehicleStatsS(param1:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.showVehicleStats,"showVehicleStats" + Errors.CANT_NULL);
             this.showVehicleStats(param1);
         }
         
-        public function getVehicleTypeProviderS() : Array {
+        public function getVehicleTypeProviderS() : Array
+        {
             App.utils.asserter.assertNotNull(this.getVehicleTypeProvider,"getVehicleTypeProvider" + Errors.CANT_NULL);
             return this.getVehicleTypeProvider();
         }

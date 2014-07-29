@@ -5,11 +5,12 @@ package net.wg.gui.lobby.messengerBar.carousel.data
     public class ChannelListItemVO extends DAAPIDataClass
     {
         
-        public function ChannelListItemVO(param1:Object) {
+        public function ChannelListItemVO(param1:Object)
+        {
             super(param1);
         }
         
-        private static var excluded:Array;
+        private static var excluded:Array = ["order"];
         
         private var _clientID:Number = 0;
         
@@ -23,47 +24,58 @@ package net.wg.gui.lobby.messengerBar.carousel.data
         
         private var _isInProgress:Boolean = false;
         
-        public function get clientID() : Number {
+        public function get clientID() : Number
+        {
             return this._clientID;
         }
         
-        public function set clientID(param1:Number) : void {
+        public function set clientID(param1:Number) : void
+        {
             this._clientID = param1;
         }
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this._label = param1;
         }
         
-        public function get canClose() : Boolean {
+        public function get canClose() : Boolean
+        {
             return this._canClose;
         }
         
-        public function set canClose(param1:Boolean) : void {
+        public function set canClose(param1:Boolean) : void
+        {
             this._canClose = param1;
         }
         
-        public function get isNotified() : Boolean {
+        public function get isNotified() : Boolean
+        {
             return this._isNotified;
         }
         
-        public function set isNotified(param1:Boolean) : void {
+        public function set isNotified(param1:Boolean) : void
+        {
             this._isNotified = param1;
         }
         
-        public function get icon() : String {
+        public function get icon() : String
+        {
             return this._icon;
         }
         
-        public function set icon(param1:String) : void {
+        public function set icon(param1:String) : void
+        {
             this._icon = param1;
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(excluded.indexOf(param1) > -1)
             {
                 return false;
@@ -71,11 +83,13 @@ package net.wg.gui.lobby.messengerBar.carousel.data
             return super.onDataWrite(param1,param2);
         }
         
-        public function get isInProgress() : Boolean {
+        public function get isInProgress() : Boolean
+        {
             return this._isInProgress;
         }
         
-        public function set isInProgress(param1:Boolean) : void {
+        public function set isInProgress(param1:Boolean) : void
+        {
             this._isInProgress = param1;
         }
     }

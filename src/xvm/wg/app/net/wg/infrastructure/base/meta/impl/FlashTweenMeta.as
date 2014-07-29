@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class FlashTweenMeta extends AbstractTween
     {
         
-        public function FlashTweenMeta() {
+        public function FlashTweenMeta()
+        {
             super();
         }
     }

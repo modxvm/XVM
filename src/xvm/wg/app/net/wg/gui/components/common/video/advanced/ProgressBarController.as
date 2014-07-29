@@ -10,7 +10,8 @@ package net.wg.gui.components.common.video.advanced
     public class ProgressBarController extends AbstractPlayerController
     {
         
-        public function ProgressBarController(param1:SimpleVideoPlayer, param2:AbstractPlayerProgressBar) {
+        public function ProgressBarController(param1:SimpleVideoPlayer, param2:AbstractPlayerProgressBar)
+        {
             super(param1);
             this.progressBar = param2;
             this.progressBar.addEventListener(ProgressBarEvent.POSITION_UPDATED,this.progressBarUpdatePositionHandler,false,0,true);
@@ -22,7 +23,8 @@ package net.wg.gui.components.common.video.advanced
         
         private static var SEEK_INVOKE_COOLDOWN_TIME:uint = 500;
         
-        public static function roundDecimal(param1:Number, param2:int) : Number {
+        public static function roundDecimal(param1:Number, param2:int) : Number
+        {
             var _loc3_:Number = Math.pow(10,param2);
             return Math.round(_loc3_ * param1) / _loc3_;
         }
@@ -31,15 +33,18 @@ package net.wg.gui.components.common.video.advanced
         
         private var timer:Timer;
         
-        private function seekCompleteHandler(param1:Event) : void {
+        private function seekCompleteHandler(param1:Event) : void
+        {
             this.progressBar.addEventListener(Event.ENTER_FRAME,this.updateHandler,false,0,true);
         }
         
-        private function seekStartHandler(param1:Event) : void {
+        private function seekStartHandler(param1:Event) : void
+        {
             this.progressBar.removeEventListener(Event.ENTER_FRAME,this.updateHandler);
         }
         
-        private function underUsingStateChangedHandler(param1:Event) : void {
+        private function underUsingStateChangedHandler(param1:Event) : void
+        {
             if(this.progressBar.underUsing)
             {
                 videoPlayer.pausePlayback();
@@ -53,7 +58,8 @@ package net.wg.gui.components.common.video.advanced
             }
         }
         
-        private function startSeekingByCoolDown() : void {
+        private function startSeekingByCoolDown() : void
+        {
             if(!this.timer)
             {
                 this.timer = new Timer(SEEK_INVOKE_COOLDOWN_TIME);
@@ -62,7 +68,8 @@ package net.wg.gui.components.common.video.advanced
             this.timer.start();
         }
         
-        private function stopSeekingByCoolDown() : void {
+        private function stopSeekingByCoolDown() : void
+        {
             if(this.timer)
             {
                 this.timer.removeEventListener(TimerEvent.TIMER,this.invokeSeeking);
@@ -70,7 +77,8 @@ package net.wg.gui.components.common.video.advanced
             }
         }
         
-        private function invokeSeeking(param1:TimerEvent) : void {
+        private function invokeSeeking(param1:TimerEvent) : void
+        {
             var _loc2_:Number = roundDecimal(this.progressBarPosition * videoPlayer.metaData.duration,2);
             if(videoPlayer.status == PlayerStatus.STOP)
             {
@@ -79,7 +87,8 @@ package net.wg.gui.components.common.video.advanced
             videoPlayer.seek(_loc2_);
         }
         
-        private function updateHandler(param1:Event) : void {
+        private function updateHandler(param1:Event) : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             if(!this.progressBar.underUsing)
@@ -92,7 +101,8 @@ package net.wg.gui.components.common.video.advanced
         
         private var progressBarPosition:Number;
         
-        private function progressBarUpdatePositionHandler(param1:ProgressBarEvent) : void {
+        private function progressBarUpdatePositionHandler(param1:ProgressBarEvent) : void
+        {
             this.progressBarPosition = param1.position;
             if(!this.progressBar.underUsing)
             {
@@ -100,7 +110,8 @@ package net.wg.gui.components.common.video.advanced
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.stopSeekingByCoolDown();
             this.progressBar.removeEventListener(ProgressBarEvent.POSITION_UPDATED,this.progressBarUpdatePositionHandler);
             this.progressBar.removeEventListener(AbstractPlayerProgressBar.UNDER_USING_STATE,this.underUsingStateChangedHandler);

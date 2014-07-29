@@ -5,7 +5,8 @@ package net.wg.gui.prebattle.invites
     public class PrbSendInviteCIGenerator extends ContextItemGenerator
     {
         
-        public function PrbSendInviteCIGenerator() {
+        public function PrbSendInviteCIGenerator()
+        {
             super();
         }
     }

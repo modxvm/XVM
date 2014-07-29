@@ -8,7 +8,8 @@ package net.wg.gui.cyberSport.views.autoSearch
     public class WaitingPlayers extends StateViewBase
     {
         
-        public function WaitingPlayers() {
+        public function WaitingPlayers()
+        {
             super();
             currentState = CYBER_SPORT_ALIASES.AUTO_SEARCH_WAITING_PLAYERS_STATE;
             mainField.text = CYBERSPORT.WINDOW_AUTOSEARCH_WAITINGPLAYERS_MAINTEXT;
@@ -38,7 +39,8 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         private var players:Array = null;
         
-        override protected function updateView() : void {
+        override protected function updateView() : void
+        {
             super.updateView();
             this.buttonsBG.visible = cancelButton.visible = model.canInvokeAutoSearch;
             updateTime();
@@ -46,7 +48,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             this.initPlayersState(model.playersReadiness);
         }
         
-        private function initPlayersState(param1:Array) : void {
+        private function initPlayersState(param1:Array) : void
+        {
             var _loc4_:String = null;
             var _loc2_:uint = param1.length;
             var _loc3_:* = 0;
@@ -65,13 +68,15 @@ package net.wg.gui.cyberSport.views.autoSearch
             }
         }
         
-        override protected function onTimer() : void {
+        override protected function onTimer() : void
+        {
             super.onTimer();
             updateTime();
             startTimer();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.players)
             {
                 this.players.splice(0,this.players.length);
@@ -80,7 +85,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             super.onDispose();
         }
         
-        override protected function cancelButtonOnClick(param1:ButtonEvent = null) : void {
+        override protected function cancelButtonOnClick(param1:ButtonEvent = null) : void
+        {
             super.cancelButtonOnClick(param1);
             cancelButton.enabled = false;
         }

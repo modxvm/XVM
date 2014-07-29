@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.technique.data
     public class TechniqueStatisticVO extends DAAPIDataClass
     {
         
-        public function TechniqueStatisticVO(param1:Object) {
+        public function TechniqueStatisticVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -51,171 +52,213 @@ package net.wg.gui.lobby.profile.pages.technique.data
         
         private var _avgBonusDmg:String = "";
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             this._type = param1;
         }
         
-        public function get vName() : String {
+        public function get vName() : String
+        {
             return this._vName;
         }
         
-        public function set vName(param1:String) : void {
+        public function set vName(param1:String) : void
+        {
             this._vName = param1;
         }
         
-        public function get battles() : String {
+        public function get battles() : String
+        {
             return this._battles;
         }
         
-        public function set battles(param1:String) : void {
+        public function set battles(param1:String) : void
+        {
             this._battles = param1;
         }
         
-        public function get wins() : String {
+        public function get wins() : String
+        {
             return this._wins;
         }
         
-        public function set wins(param1:String) : void {
+        public function set wins(param1:String) : void
+        {
             this._wins = param1;
         }
         
-        public function get defeats() : String {
+        public function get defeats() : String
+        {
             return this._defeats;
         }
         
-        public function set defeats(param1:String) : void {
+        public function set defeats(param1:String) : void
+        {
             this._defeats = param1;
         }
         
-        public function get survive() : String {
+        public function get survive() : String
+        {
             return this._survive;
         }
         
-        public function set survive(param1:String) : void {
+        public function set survive(param1:String) : void
+        {
             this._survive = param1;
         }
         
-        public function get accuracy() : String {
+        public function get accuracy() : String
+        {
             return this._accuracy;
         }
         
-        public function set accuracy(param1:String) : void {
+        public function set accuracy(param1:String) : void
+        {
             this._accuracy = param1;
         }
         
-        public function get maxExp() : String {
+        public function get maxExp() : String
+        {
             return this._maxExp;
         }
         
-        public function set maxExp(param1:String) : void {
+        public function set maxExp(param1:String) : void
+        {
             this._maxExp = param1;
         }
         
-        public function get maxKill() : String {
+        public function get maxKill() : String
+        {
             return this._maxKill;
         }
         
-        public function set maxKill(param1:String) : void {
+        public function set maxKill(param1:String) : void
+        {
             this._maxKill = param1;
         }
         
-        public function get totalKill() : String {
+        public function get totalKill() : String
+        {
             return this._totalKill;
         }
         
-        public function set totalKill(param1:String) : void {
+        public function set totalKill(param1:String) : void
+        {
             this._totalKill = param1;
         }
         
-        public function get totalDead() : String {
+        public function get totalDead() : String
+        {
             return this._totalDead;
         }
         
-        public function set totalDead(param1:String) : void {
+        public function set totalDead(param1:String) : void
+        {
             this._totalDead = param1;
         }
         
-        public function get killRatio() : String {
+        public function get killRatio() : String
+        {
             return this._killRatio;
         }
         
-        public function set killRatio(param1:String) : void {
+        public function set killRatio(param1:String) : void
+        {
             this._killRatio = param1;
         }
         
-        public function get dealtDmg() : String {
+        public function get dealtDmg() : String
+        {
             return this._dealtDmg;
         }
         
-        public function set dealtDmg(param1:String) : void {
+        public function set dealtDmg(param1:String) : void
+        {
             this._dealtDmg = param1;
         }
         
-        public function get receivedDmg() : String {
+        public function get receivedDmg() : String
+        {
             return this._receivedDmg;
         }
         
-        public function set receivedDmg(param1:String) : void {
+        public function set receivedDmg(param1:String) : void
+        {
             this._receivedDmg = param1;
         }
         
-        public function get dmgRatio() : String {
+        public function get dmgRatio() : String
+        {
             return this._dmgRatio;
         }
         
-        public function set dmgRatio(param1:String) : void {
+        public function set dmgRatio(param1:String) : void
+        {
             this._dmgRatio = param1;
         }
         
-        public function get avgExp() : String {
+        public function get avgExp() : String
+        {
             return this._avgExp;
         }
         
-        public function set avgExp(param1:String) : void {
+        public function set avgExp(param1:String) : void
+        {
             this._avgExp = param1;
         }
         
-        public function get avgKills() : String {
+        public function get avgKills() : String
+        {
             return this._avgKills;
         }
         
-        public function set avgKills(param1:String) : void {
+        public function set avgKills(param1:String) : void
+        {
             this._avgKills = param1;
         }
         
-        public function get avgDetected() : String {
+        public function get avgDetected() : String
+        {
             return this._avgDetected;
         }
         
-        public function set avgDetected(param1:String) : void {
+        public function set avgDetected(param1:String) : void
+        {
             this._avgDetected = param1;
         }
         
-        public function get avgDmgDealt() : String {
+        public function get avgDmgDealt() : String
+        {
             return this._avgDmgDealt;
         }
         
-        public function set avgDmgDealt(param1:String) : void {
+        public function set avgDmgDealt(param1:String) : void
+        {
             this._avgDmgDealt = param1;
         }
         
-        public function get avgDmgReceived() : String {
+        public function get avgDmgReceived() : String
+        {
             return this._avgDmgReceived;
         }
         
-        public function set avgDmgReceived(param1:String) : void {
+        public function set avgDmgReceived(param1:String) : void
+        {
             this._avgDmgReceived = param1;
         }
         
-        public function get avgBonusDmg() : String {
+        public function get avgBonusDmg() : String
+        {
             return this._avgBonusDmg;
         }
         
-        public function set avgBonusDmg(param1:String) : void {
+        public function set avgBonusDmg(param1:String) : void
+        {
             this._avgBonusDmg = param1;
         }
     }

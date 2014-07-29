@@ -11,7 +11,8 @@ package net.wg.gui.lobby.store.views.base
     public class FitsSelectableStoreMenuView extends BaseStoreMenuView
     {
         
-        public function FitsSelectableStoreMenuView() {
+        public function FitsSelectableStoreMenuView()
+        {
             super();
         }
         
@@ -25,17 +26,20 @@ package net.wg.gui.lobby.store.views.base
         
         private var _programUpdating:Boolean = false;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             resetTemporaryHandlers();
             this.fitsSelectDropDn.removeEventListener(ListEvent.INDEX_CHANGE,this.fitsSelectDropDnChangeHandler);
         }
         
-        override public function setViewData(param1:Array) : void {
+        override public function setViewData(param1:Array) : void
+        {
             this.fitsSelectDropDn.addEventListener(ListEvent.INDEX_CHANGE,this.fitsSelectDropDnChangeHandler);
         }
         
-        override public final function setSubFilterData(param1:int, param2:ShopSubFilterData) : void {
+        override public final function setSubFilterData(param1:int, param2:ShopSubFilterData) : void
+        {
             if(param2)
             {
                 setFilterData(param2);
@@ -47,7 +51,8 @@ package net.wg.gui.lobby.store.views.base
             }
         }
         
-        override public function updateSubFilter(param1:int) : void {
+        override public function updateSubFilter(param1:int) : void
+        {
             var _loc5_:ShopVehicleFilterElementData = null;
             var _loc2_:Number = 0;
             var _loc3_:DataProvider = new DataProvider();
@@ -61,10 +66,9 @@ package net.wg.gui.lobby.store.views.base
                     {
                         _loc2_ = _loc3_.length;
                     }
-                    _loc3_.push({
-                        "label":_loc5_.name,
-                        "data":_loc5_.id
-                    });
+                    _loc3_.push({"label":_loc5_.name,
+                    "data":_loc5_.id
+                });
             }
             _loc4_++;
         }
@@ -75,7 +79,8 @@ package net.wg.gui.lobby.store.views.base
         this.onVehicleFilterUpdated(_loc3_,_loc2_,param1);
     }
     
-    protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void {
+    protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void
+    {
         if(param1.length == 0)
         {
             this.myVehicleRadioBtn.enabled = false;
@@ -90,15 +95,18 @@ package net.wg.gui.lobby.store.views.base
         }
     }
     
-    protected function getCurrentVehicle() : Object {
+    protected function getCurrentVehicle() : Object
+    {
         return this._currentVehicle;
     }
     
-    protected function setCurrentVehicle(param1:Object) : void {
+    protected function setCurrentVehicle(param1:Object) : void
+    {
         this._currentVehicle = param1;
     }
     
-    private function fitsSelectDropDnChangeHandler(param1:ListEvent) : void {
+    private function fitsSelectDropDnChangeHandler(param1:ListEvent) : void
+    {
         if((this.fitsSelectDropDn.enabled) && !(getFilterData().current == param1.itemData) && !this._programUpdating)
         {
             getFilterData().current = param1.itemData.data;

@@ -14,7 +14,8 @@ package net.wg.gui.lobby.customization
     public class BaseTimedCustomizationGroupView extends UIComponentEx implements IViewStackContent
     {
         
-        public function BaseTimedCustomizationGroupView() {
+        public function BaseTimedCustomizationGroupView()
+        {
             super();
         }
         
@@ -34,16 +35,19 @@ package net.wg.gui.lobby.customization
         
         private var _selectedPriceIdx:int = -1;
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             DebugUtils.LOG_DEBUG("BaseTimedCustomizationGroupView.update",param1);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.clearData();
             super.onDispose();
         }
         
-        public function invalidateListData(param1:Boolean = false) : void {
+        public function invalidateListData(param1:Boolean = false) : void
+        {
             if((this.list.initialized) && !param1)
             {
                 this.list.scrollPosition = 0;
@@ -51,7 +55,8 @@ package net.wg.gui.lobby.customization
             this.itemsDP.invalidateRemote(param1);
         }
         
-        public function setListSelectedIndex(param1:String, param2:Boolean, param3:Object) : void {
+        public function setListSelectedIndex(param1:String, param2:Boolean, param3:Object) : void
+        {
             if(initialized)
             {
                 this.selectedItemIdx = this.selectedGroupName == param1 && (param3)?param3.index:-1;
@@ -69,31 +74,38 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        public function get selectedGroupName() : String {
+        public function get selectedGroupName() : String
+        {
             return this.itemsDP.groupName;
         }
         
-        public function set selectedGroupName(param1:String) : void {
+        public function set selectedGroupName(param1:String) : void
+        {
             this.itemsDP.groupName = param1;
         }
         
-        public function get selectedItemIdx() : int {
+        public function get selectedItemIdx() : int
+        {
             return this._selectedItemIdx;
         }
         
-        public function set selectedItemIdx(param1:int) : void {
+        public function set selectedItemIdx(param1:int) : void
+        {
             this._selectedItemIdx = param1;
         }
         
-        public function get selectedPriceIdx() : int {
+        public function get selectedPriceIdx() : int
+        {
             return this._selectedPriceIdx;
         }
         
-        public function set selectedPriceIdx(param1:int) : void {
+        public function set selectedPriceIdx(param1:int) : void
+        {
             this._selectedPriceIdx = param1;
         }
         
-        public function initData() : void {
+        public function initData() : void
+        {
             if(this.rentalPackageList != null)
             {
                 this.rentalPackageList.labelField = "userString";
@@ -114,7 +126,8 @@ package net.wg.gui.lobby.customization
             this.itemsDP.addEventListener(Event.CHANGE,this.handleItemDataChanged);
         }
         
-        public function clearData() : void {
+        public function clearData() : void
+        {
             this.selectedItemIdx = -1;
             this.selectedPriceIdx = -1;
             if(this.list)
@@ -139,7 +152,8 @@ package net.wg.gui.lobby.customization
             this.rentalPackageDP = null;
         }
         
-        protected function handleItemDataChanged(param1:Event = null) : void {
+        protected function handleItemDataChanged(param1:Event = null) : void
+        {
             var _loc2_:Object = null;
             var _loc3_:CustomizationEvent = null;
             if(this.selectedItemIdx > -1)
@@ -155,7 +169,8 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        protected function handlePeriodDaysItemChange(param1:ListEvent) : void {
+        protected function handlePeriodDaysItemChange(param1:ListEvent) : void
+        {
             this.selectedPriceIdx = param1.index;
             if(param1.index > -1)
             {
@@ -163,16 +178,19 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        protected function handleItemChange(param1:ListEvent) : void {
+        protected function handleItemChange(param1:ListEvent) : void
+        {
             this.selectedItemIdx = param1.index;
             this.handleItemDataChanged();
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

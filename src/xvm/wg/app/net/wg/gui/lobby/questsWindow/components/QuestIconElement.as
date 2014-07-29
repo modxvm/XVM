@@ -9,13 +9,15 @@ package net.wg.gui.lobby.questsWindow.components
     public class QuestIconElement extends AbstractResizableContent
     {
         
-        public function QuestIconElement() {
+        public function QuestIconElement()
+        {
             super();
         }
         
         public static var TEXT_PADDING:int = 5;
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -25,14 +27,16 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var dataVO:QuestIconElementVO = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.icon.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.icon.addEventListener(MouseEvent.CLICK,hideTooltip);
             this.icon.addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.icon.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.icon.removeEventListener(MouseEvent.CLICK,hideTooltip);
             this.icon.removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
@@ -46,7 +50,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(this.dataVO)
             {
                 this.dataVO.dispose();
@@ -55,7 +60,8 @@ package net.wg.gui.lobby.questsWindow.components
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.dataVO))
@@ -75,7 +81,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function showTooltip(param1:MouseEvent) : void {
+        private function showTooltip(param1:MouseEvent) : void
+        {
             if((this.dataVO.dataType) && (this.dataVO.dataName) && (this.dataVO.dataBlock))
             {
                 App.toolTipMgr.showSpecial(this.dataVO.dataType,null,this.dataVO.dataBlock,this.dataVO.dataName);

@@ -24,7 +24,8 @@ package net.wg.gui.prebattle.squad
     public class SquadWindow extends PrebattleWindowAbstract implements IPrebattleWindowMeta
     {
         
-        public function SquadWindow() {
+        public function SquadWindow()
+        {
             super();
         }
         
@@ -44,19 +45,23 @@ package net.wg.gui.prebattle.squad
         
         private var _canSendInvites:Boolean = false;
         
-        override public function as_enableLeaveBtn(param1:Boolean) : void {
+        override public function as_enableLeaveBtn(param1:Boolean) : void
+        {
             this.leaveButton.enabled = param1;
         }
         
-        override public function as_enableReadyBtn(param1:Boolean) : void {
+        override public function as_enableReadyBtn(param1:Boolean) : void
+        {
             this.readyButton.enabled = param1;
         }
         
-        override public function as_toggleReadyBtn(param1:Boolean) : void {
+        override public function as_toggleReadyBtn(param1:Boolean) : void
+        {
             this.readyButton.label = param1?MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY:MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY;
         }
         
-        override public function as_setPlayerState(param1:int, param2:Boolean, param3:Object) : void {
+        override public function as_setPlayerState(param1:int, param2:Boolean, param3:Object) : void
+        {
             var _loc4_:PlayerPrbInfoVO = null;
             var _loc6_:PlayerPrbInfoVO = null;
             var _loc7_:SquadItemRenderer = null;
@@ -82,19 +87,23 @@ package net.wg.gui.prebattle.squad
             }
         }
         
-        override public function as_setCoolDownForReadyButton(param1:uint) : void {
+        override public function as_setCoolDownForReadyButton(param1:uint) : void
+        {
             this.coolDownReadyButton(param1);
         }
         
-        override public function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void {
+        override public function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void
+        {
             this.onRefreshMemberList(param3);
         }
         
-        override public function as_refreshPermissions() : void {
+        override public function as_refreshPermissions() : void
+        {
             this.updatePermissions();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
             super.draw();
@@ -113,7 +122,8 @@ package net.wg.gui.prebattle.squad
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             constraints.addElement("readyButton",this.readyButton,Constraints.TOP | Constraints.RIGHT);
@@ -140,7 +150,8 @@ package net.wg.gui.prebattle.squad
             this.updatePermissions();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             App.utils.scheduler.cancelTask(this.updateWindowProperties);
             this.memberList.removeEventListener(ListEventEx.ITEM_CLICK,this.onMemberItemClickHandler);
@@ -151,7 +162,8 @@ package net.wg.gui.prebattle.squad
             this.leaveButton.dispose();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             Window(window).visible = false;
             super.onPopulate();
             registerComponent(channelComponent,Aliases.CHANNEL_COMPONENT);
@@ -172,7 +184,8 @@ package net.wg.gui.prebattle.squad
             geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
         }
         
-        private function updatePermissions() : void {
+        private function updatePermissions() : void
+        {
             this._isReadyBtnEnabled = isReadyBtnEnabledS();
             this._isLeaveBtnEnabled = isLeaveBtnEnabledS();
             this._canSendInvites = canSendInviteS();
@@ -182,11 +195,13 @@ package net.wg.gui.prebattle.squad
             this.updateMainButtons();
         }
         
-        private function updateWindowProperties() : void {
+        private function updateWindowProperties() : void
+        {
             Window(window).visible = true;
         }
         
-        private function updateMainButtons() : void {
+        private function updateMainButtons() : void
+        {
             if(this.leaveButton != null)
             {
                 this.leaveButton.label = isPlayerCreatorS()?MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_DISMISS:MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_LEAVE;
@@ -197,7 +212,8 @@ package net.wg.gui.prebattle.squad
             }
         }
         
-        private function onRefreshMemberList(param1:Array) : void {
+        private function onRefreshMemberList(param1:Array) : void
+        {
             var _loc5_:PlayerPrbInfoVO = null;
             var _loc6_:String = null;
             if(canSendInviteS())
@@ -229,7 +245,8 @@ package net.wg.gui.prebattle.squad
             this.updateMemberList();
         }
         
-        private function checkRosters() : Boolean {
+        private function checkRosters() : Boolean
+        {
             var _loc3_:SquadItemRenderer = null;
             var _loc1_:uint = this.memberList.dataProvider.length;
             var _loc2_:* = 0;
@@ -248,13 +265,15 @@ package net.wg.gui.prebattle.squad
             return false;
         }
         
-        private function updateMemberList() : void {
+        private function updateMemberList() : void
+        {
             this.memberList.labelField = "fullName";
             this.memberList.dataProvider = this.memberDataProvider;
             App.utils.scheduler.envokeInNextFrame(this.updateWindowProperties);
         }
         
-        private function coolDownReadyButton(param1:uint) : void {
+        private function coolDownReadyButton(param1:uint) : void
+        {
             if(this.readyButton.enabled)
             {
                 this.readyButton.enabled = false;
@@ -262,12 +281,14 @@ package net.wg.gui.prebattle.squad
             }
         }
         
-        private function enabledReadyButton(param1:Boolean) : void {
+        private function enabledReadyButton(param1:Boolean) : void
+        {
             this.readyButton.enabled = (param1) && (this._isReadyBtnEnabled);
             clearTimeout(this.readyBtnCoolDownID);
         }
         
-        private function updateInviteButton(param1:Boolean) : void {
+        private function updateInviteButton(param1:Boolean) : void
+        {
             var _loc5_:SquadItemRenderer = null;
             var _loc6_:PlayerPrbInfoVO = null;
             var _loc2_:uint = this.memberList.dataProvider.length;
@@ -296,7 +317,8 @@ package net.wg.gui.prebattle.squad
             }
         }
         
-        private function getInviteRoster() : Object {
+        private function getInviteRoster() : Object
+        {
             var _loc1_:Object = {};
             _loc1_.dbID = -1;
             _loc1_.accID = -1;
@@ -306,15 +328,18 @@ package net.wg.gui.prebattle.squad
             return _loc1_;
         }
         
-        private function handleLeaveClick(param1:ButtonEvent) : void {
+        private function handleLeaveClick(param1:ButtonEvent) : void
+        {
             requestToLeaveS();
         }
         
-        private function handleReadyClick(param1:ButtonEvent) : void {
+        private function handleReadyClick(param1:ButtonEvent) : void
+        {
             requestToReadyS(this.readyButton.label == MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY);
         }
         
-        private function onMemberItemClickHandler(param1:ListEventEx) : void {
+        private function onMemberItemClickHandler(param1:ListEventEx) : void
+        {
             var _loc2_:PlayerPrbInfoVO = null;
             var _loc3_:* = false;
             var _loc4_:IUserContextMenuGenerator = null;

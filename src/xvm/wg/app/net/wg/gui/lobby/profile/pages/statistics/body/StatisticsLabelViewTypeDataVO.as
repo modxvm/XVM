@@ -3,7 +3,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class StatisticsLabelViewTypeDataVO extends StatisticsLabelDataVO
     {
         
-        public function StatisticsLabelViewTypeDataVO(param1:Object) {
+        public function StatisticsLabelViewTypeDataVO(param1:Object)
+        {
             super(param1);
         }
         

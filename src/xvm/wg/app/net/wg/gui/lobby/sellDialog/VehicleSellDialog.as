@@ -28,7 +28,8 @@ package net.wg.gui.lobby.sellDialog
     public class VehicleSellDialog extends VehicleSellDialogMeta implements IVehicleSellDialogMeta
     {
         
-        public function VehicleSellDialog() {
+        public function VehicleSellDialog()
+        {
             this.tweens = new Vector.<Tween>();
             super();
             isModal = true;
@@ -97,7 +98,8 @@ package net.wg.gui.lobby.sellDialog
         
         private var _isPopulated:Boolean = false;
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             var _loc2_:Padding = null;
             super.setWindow(param1);
             if(param1)
@@ -108,12 +110,14 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             super.updateStage(param1,param2);
             this.updateWindowPosition();
         }
         
-        public function as_visibleControlBlock(param1:Boolean) : void {
+        public function as_visibleControlBlock(param1:Boolean) : void
+        {
             if(this.controlQuestion.visible != param1)
             {
                 this.controlQuestion.visible = param1;
@@ -126,7 +130,8 @@ package net.wg.gui.lobby.sellDialog
             invalidate(INV_CONTROL_QUESTION);
         }
         
-        public function as_enableButton(param1:Boolean) : void {
+        public function as_enableButton(param1:Boolean) : void
+        {
             var _loc2_:* = false;
             if(this.submitBtn)
             {
@@ -139,7 +144,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        public function as_setCtrlQuestion(param1:String) : void {
+        public function as_setCtrlQuestion(param1:String) : void
+        {
             if(this.controlQuestion)
             {
                 this.controlQuestion.headerText = DIALOGS.VEHICLESELLDIALOG_CTRLQUESTION_HEADER;
@@ -149,7 +155,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        public function as_setControlNumber(param1:Boolean, param2:String) : void {
+        public function as_setControlNumber(param1:Boolean, param2:String) : void
+        {
             var _loc3_:String = null;
             if(this.controlQuestion)
             {
@@ -169,7 +176,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        public function as_checkGold(param1:Number) : void {
+        public function as_checkGold(param1:Number) : void
+        {
             var _loc2_:* = NaN;
             this.accGold = param1;
             this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
@@ -199,7 +207,8 @@ package net.wg.gui.lobby.sellDialog
             this.result_mc.goldIT.textColor = _loc2_;
         }
         
-        public function as_setData(param1:Object, param2:Object, param3:Object, param4:Object, param5:Number) : void {
+        public function as_setData(param1:Object, param2:Object, param3:Object, param4:Object, param5:Number) : void
+        {
             var _loc8_:SellInInventoryModuleVo = null;
             var _loc9_:SellInInventoryShellVo = null;
             var _loc10_:SellOnVehicleOptionalDeviceVo = null;
@@ -303,7 +312,8 @@ package net.wg.gui.lobby.sellDialog
             invalidateData();
         }
         
-        public function motionCallBack(param1:Tween) : void {
+        public function motionCallBack(param1:Tween) : void
+        {
             this.countCallBack++;
             if(this.compCompletedTween())
             {
@@ -311,11 +321,13 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        public function compCompletedTween() : Boolean {
+        public function compCompletedTween() : Boolean
+        {
             return this.countTweenObjects == this.countCallBack;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.updateOpenedState();
             this.controlQuestion.addEventListener(ControlQuestionComponent.USER_INPUT_HANDLER,this.userInputHandler);
@@ -336,7 +348,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:Tween = null;
             super.onDispose();
             App.utils.scheduler.cancelTask(setFocus);
@@ -370,12 +383,14 @@ package net.wg.gui.lobby.sellDialog
             App.toolTipMgr.hide();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             this._isPopulated = true;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if((isInvalid(INV_BARRACKS_DROP)) && (this._isPopulated))
             {
                 checkControlQuestionS(this.headerComponent.inBarracsDrop.selectedIndex == DISSMIS_TANKMEN);
@@ -399,7 +414,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        private function clearVectorWithDisposableVo(param1:Vector.<IDisposable>) : void {
+        private function clearVectorWithDisposableVo(param1:Vector.<IDisposable>) : void
+        {
             var _loc2_:IDisposable = null;
             if(param1)
             {
@@ -412,18 +428,21 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        private function enabledSubmitBtn(param1:Boolean) : void {
+        private function enabledSubmitBtn(param1:Boolean) : void
+        {
             if(this.submitBtn.enabled != param1)
             {
                 this.submitBtn.enabled = param1;
             }
         }
         
-        private function isHasGold() : Number {
+        private function isHasGold() : Number
+        {
             return this.goldCommon - this.headerComponent.tankGoldPrice;
         }
         
-        private function updateWindowPosition() : void {
+        private function updateWindowPosition() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
             if(isCentered)
@@ -446,7 +465,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        private function setGoldText(param1:Number, param2:Number) : void {
+        private function setGoldText(param1:Number, param2:Number) : void
+        {
             var _loc9_:* = false;
             var _loc10_:* = 0;
             var _loc3_:ILocale = App.utils.locale;
@@ -514,29 +534,35 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        private function setHeader(param1:SellVehicleVo) : void {
+        private function setHeader(param1:SellVehicleVo) : void
+        {
             this.headerComponent.setData(param1);
         }
         
-        private function setDevices(param1:Vector.<SellOnVehicleOptionalDeviceVo>) : void {
+        private function setDevices(param1:Vector.<SellOnVehicleOptionalDeviceVo>) : void
+        {
             this.devicesComponent.setData(param1);
             this.slidingComponent.sellData = this.devicesComponent.sellData;
         }
         
-        private function setShells(param1:Vector.<SellOnVehicleShellVo>) : void {
+        private function setShells(param1:Vector.<SellOnVehicleShellVo>) : void
+        {
             this.updateOpenedState();
             this.slidingComponent.setShells(param1);
         }
         
-        private function setEquipment(param1:Vector.<SellOnVehicleEquipmentVo>) : void {
+        private function setEquipment(param1:Vector.<SellOnVehicleEquipmentVo>) : void
+        {
             this.slidingComponent.setEquipment(param1);
         }
         
-        private function setInventory(param1:Vector.<SellInInventoryModuleVo>, param2:Vector.<SellInInventoryShellVo>) : void {
+        private function setInventory(param1:Vector.<SellInInventoryModuleVo>, param2:Vector.<SellInInventoryShellVo>) : void
+        {
             this.slidingComponent.setInventory(param1,param2);
         }
         
-        private function updateComponentsPosition() : void {
+        private function updateComponentsPosition() : void
+        {
             this.slidingComponent.visible = !(this.listVisibleHight == 0);
             if(this.listVisibleHight != 0)
             {
@@ -574,7 +600,8 @@ package net.wg.gui.lobby.sellDialog
             this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
         }
         
-        private function playSlidingAnimation() : void {
+        private function playSlidingAnimation() : void
+        {
             var _loc5_:Tween = null;
             var _loc6_:* = 0;
             var _loc7_:* = 0;
@@ -613,52 +640,40 @@ package net.wg.gui.lobby.sellDialog
             var _loc15_:Number = this.slidingComponent.isOpened?1:0;
             var _loc16_:Number = this.slidingComponent.isOpened?0:1;
             this.slidingComponent.isOpened = !this.slidingComponent.isOpened;
-            this.tweens = Vector.<Tween>([new Tween(_loc1_,this.slidingComponent,{"height":_loc6_},{
-                "paused":false,
-                "ease":Strong.easeOut,
-                "onComplete":null
-            }),new Tween(_loc1_,this.windBgForm,{"height":_loc9_},{
-            "paused":false,
+            this.tweens = Vector.<Tween>([new Tween(_loc1_,this.slidingComponent,{"height":_loc6_},{"paused":false,
             "ease":Strong.easeOut,
             "onComplete":null
-        }),new Tween(_loc1_,this.submitBtn,{"y":_loc7_},{
-        "paused":false,
+        }),new Tween(_loc1_,this.windBgForm,{"height":_loc9_},{"paused":false,
         "ease":Strong.easeOut,
         "onComplete":null
-    }),new Tween(_loc1_,this.cancelBtn,{"y":_loc8_},{
-    "paused":false,
+    }),new Tween(_loc1_,this.submitBtn,{"y":_loc7_},{"paused":false,
     "ease":Strong.easeOut,
     "onComplete":null
-}),new Tween(_loc1_,this.result_mc,{"y":_loc11_},{
-"paused":false,
+}),new Tween(_loc1_,this.cancelBtn,{"y":_loc8_},{"paused":false,
 "ease":Strong.easeOut,
 "onComplete":null
-}),new Tween(_loc1_,this.slidingComponent.mask_mc,{"height":_loc12_},{
-"paused":false,
+}),new Tween(_loc1_,this.result_mc,{"y":_loc11_},{"paused":false,
 "ease":Strong.easeOut,
 "onComplete":null
-}),new Tween(_loc1_,this.slidingComponent.expandBg,{"height":_loc13_},{
-"paused":false,
+}),new Tween(_loc1_,this.slidingComponent.mask_mc,{"height":_loc12_},{"paused":false,
 "ease":Strong.easeOut,
 "onComplete":null
-}),new Tween(_loc1_,this.slidingComponent.settingsBtn.creditsIT,{"alpha":_loc15_},{
-"paused":false,
+}),new Tween(_loc1_,this.slidingComponent.expandBg,{"height":_loc13_},{"paused":false,
 "ease":Strong.easeOut,
 "onComplete":null
-}),new Tween(_loc1_,this.slidingComponent.settingsBtn.ddLine,{"alpha":_loc16_},{
-"paused":false,
+}),new Tween(_loc1_,this.slidingComponent.settingsBtn.creditsIT,{"alpha":_loc15_},{"paused":false,
 "ease":Strong.easeOut,
 "onComplete":null
-}),new Tween(_loc1_,this.controlQuestion,{"y":_loc14_},{
-"paused":false,
+}),new Tween(_loc1_,this.slidingComponent.settingsBtn.ddLine,{"alpha":_loc16_},{"paused":false,
 "ease":Strong.easeOut,
 "onComplete":null
-}),new Tween(_loc1_,window,{"y":_loc4_},{
-"paused":false,
+}),new Tween(_loc1_,this.controlQuestion,{"y":_loc14_},{"paused":false,
 "ease":Strong.easeOut,
 "onComplete":null
-}),new Tween(_loc1_,window.getBackground(),{"height":_loc10_},{
-"paused":false,
+}),new Tween(_loc1_,window,{"y":_loc4_},{"paused":false,
+"ease":Strong.easeOut,
+"onComplete":null
+}),new Tween(_loc1_,window.getBackground(),{"height":_loc10_},{"paused":false,
 "ease":Strong.easeOut,
 "onComplete":null
 })]);
@@ -673,18 +688,21 @@ _loc17_++;
 this.updateElements();
 }
 
-private function updateElements() : void {
+private function updateElements() : void
+{
 this.slidingComponent.slidingScrList.y = this.slidingComponent.settingsBtn.y + this.slidingComponent.settingsBtn.height;
 this.slidingComponent.settingsBtn.creditsIT.visible = true;
 this.slidingComponent.slidingScrList.visible = this.slidingComponent.isOpened;
 }
 
-private function updateOpenedState() : void {
+private function updateOpenedState() : void
+{
 var _loc1_:Object = getDialogSettingsS();
 this.slidingComponent.isOpened = _loc1_.isOpened;
 }
 
-private function handleSubmit(param1:ButtonEvent) : void {
+private function handleSubmit(param1:ButtonEvent) : void
+{
 /*
  * Decompilation error
  * Code may be obfuscated
@@ -693,12 +711,14 @@ private function handleSubmit(param1:ButtonEvent) : void {
 throw new Error("Not decompiled due to error");
 }
 
-private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void {
+private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void
+{
 this.listVisibleHight = param1.listVisibleHight;
 this.updateComponentsPosition();
 }
 
-private function updateMoneyResult(param1:VehicleSellDialogEvent) : void {
+private function updateMoneyResult(param1:VehicleSellDialogEvent) : void
+{
 this.headerComponent.creditsCommon = this.headerComponent.tankPrice;
 this.creditsComplDev = 0;
 this.goldCommon = 0;
@@ -733,15 +753,18 @@ this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
 this.as_checkGold(this.accGold);
 }
 
-private function handleClose(param1:ButtonEvent) : void {
+private function handleClose(param1:ButtonEvent) : void
+{
 onWindowCloseS();
 }
 
-private function userInputHandler(param1:Event) : void {
+private function userInputHandler(param1:Event) : void
+{
 setUserInputS(this.controlQuestion.getUserText());
 }
 
-private function handleDissmisClick(param1:ListEvent) : void {
+private function handleDissmisClick(param1:ListEvent) : void
+{
 invalidate(INV_BARRACKS_DROP);
 }
 }

@@ -1,9 +1,10 @@
-package 
+package
 {
     public class RES_COMMON extends Object
     {
         
-        public function RES_COMMON() {
+        public function RES_COMMON()
+        {
             super();
         }
         

@@ -8,7 +8,8 @@ package net.wg.gui.lobby.header
     public class FightButtonFancyRenderer extends FightListItemRenderer
     {
         
-        public function FightButtonFancyRenderer() {
+        public function FightButtonFancyRenderer()
+        {
             super();
             scaleX = scaleY = 1;
             this.newIndicator.visible = false;
@@ -39,7 +40,8 @@ package net.wg.gui.lobby.header
         
         private var _originalDescrY:int;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(!constraintsDisabled)
             {
@@ -47,7 +49,8 @@ package net.wg.gui.lobby.header
             }
         }
         
-        override protected function applyData(param1:BattleSelectDropDownVO) : void {
+        override protected function applyData(param1:BattleSelectDropDownVO) : void
+        {
             var _loc2_:BattleSelectDropDownVO = null;
             super.applyData(param1);
             if(this.newIndicator)
@@ -81,12 +84,14 @@ package net.wg.gui.lobby.header
             this.descr.visible = param1.active;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             this.icon.alpha = param1?1:0.5;
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             super.updateAfterStateChange();
             if(!constraintsDisabled && (this.icon))
             {
@@ -94,7 +99,8 @@ package net.wg.gui.lobby.header
             }
         }
         
-        private function updateNewAnimation(param1:Boolean) : void {
+        private function updateNewAnimation(param1:Boolean) : void
+        {
             preventAutosizing = true;
             if(param1)
             {

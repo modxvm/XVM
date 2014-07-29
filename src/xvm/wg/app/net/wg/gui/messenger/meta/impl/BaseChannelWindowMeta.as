@@ -6,7 +6,8 @@ package net.wg.gui.messenger.meta.impl
     public class BaseChannelWindowMeta extends AbstractWindowView
     {
         
-        public function BaseChannelWindowMeta() {
+        public function BaseChannelWindowMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.gui.messenger.meta.impl
         
         public var getClientID:Function = null;
         
-        public function showFAQWindowS() : void {
+        public function showFAQWindowS() : void
+        {
             App.utils.asserter.assertNotNull(this.showFAQWindow,"showFAQWindow" + Errors.CANT_NULL);
             this.showFAQWindow();
         }
         
-        public function getClientIDS() : Number {
+        public function getClientIDS() : Number
+        {
             App.utils.asserter.assertNotNull(this.getClientID,"getClientID" + Errors.CANT_NULL);
             return this.getClientID();
         }

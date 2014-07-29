@@ -17,7 +17,8 @@ package net.wg.gui.lobby.questsWindow
     public class QuestRenderer extends SoundListItemRenderer
     {
         
-        public function QuestRenderer() {
+        public function QuestRenderer()
+        {
             super();
             this.newIndicator.visible = false;
             this.indicatorIGR.visible = false;
@@ -31,19 +32,23 @@ package net.wg.gui.lobby.questsWindow
         
         private static var COMPLEX_COUNTER_Y:int = 18;
         
-        private static function showLockTooltip(param1:MouseEvent) : void {
+        private static function showLockTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(TOOLTIPS.QUESTS_COMPLEXTASK_LABEL);
         }
         
-        private static function showIGRTooltip(param1:MouseEvent) : void {
+        private static function showIGRTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(TOOLTIPS.QUESTS_IGR);
         }
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private static function showTooltip(param1:MouseEvent) : void {
+        private static function showTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(TOOLTIPS.QUESTS_RENDERER_LABEL);
         }
         
@@ -77,7 +82,8 @@ package net.wg.gui.lobby.questsWindow
         
         private var wasAnimated:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.mouseChildren = true;
             this.mouseEnabled = true;
@@ -91,7 +97,8 @@ package net.wg.gui.lobby.questsWindow
             this.descrTF.validateNow();
         }
         
-        private function addListeners() : void {
+        private function addListeners() : void
+        {
             this.hitTooltipMc.addEventListener(MouseEvent.CLICK,hideTooltip);
             this.hitTooltipMc.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.hitTooltipMc.addEventListener(MouseEvent.ROLL_OVER,showTooltip);
@@ -109,7 +116,8 @@ package net.wg.gui.lobby.questsWindow
             this.lockDownMC.addEventListener(MouseEvent.ROLL_OVER,showLockTooltip);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.hitArea = null;
             this.newIndicator.hitArea = null;
             this.removeListeners();
@@ -132,7 +140,8 @@ package net.wg.gui.lobby.questsWindow
             super.onDispose();
         }
         
-        private function removeListeners() : void {
+        private function removeListeners() : void
+        {
             this.hitTooltipMc.removeEventListener(MouseEvent.CLICK,hideTooltip);
             this.hitTooltipMc.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.hitTooltipMc.removeEventListener(MouseEvent.ROLL_OVER,showTooltip);
@@ -150,21 +159,25 @@ package net.wg.gui.lobby.questsWindow
             this.lockDownMC.removeEventListener(MouseEvent.ROLL_OVER,showLockTooltip);
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return super.enabled;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             mouseChildren = true;
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:QuestRendererVO = null;
             if(isInvalid(InvalidationType.STATE))
             {
@@ -205,7 +218,8 @@ package net.wg.gui.lobby.questsWindow
             this.newIndicator.mouseChildren = false;
         }
         
-        private function checkData(param1:QuestRendererVO) : void {
+        private function checkData(param1:QuestRendererVO) : void
+        {
             this.setTexts(param1);
             this.checkStatus(param1);
             this.checkCounter(param1);
@@ -215,27 +229,32 @@ package net.wg.gui.lobby.questsWindow
             this.checkAction(param1);
         }
         
-        private function checkAction(param1:QuestRendererVO) : void {
+        private function checkAction(param1:QuestRendererVO) : void
+        {
             this.actionMC.visible = param1.eventType == QuestsStates.ACTION;
         }
         
-        private function checkLock(param1:QuestRendererVO) : void {
+        private function checkLock(param1:QuestRendererVO) : void
+        {
             this.lockUpMC.visible = param1.isLocked;
             this.lockDownMC.visible = param1.isLock;
         }
         
-        public function hideNew() : void {
+        public function hideNew() : void
+        {
             this.newIndicator.gotoAndStop("pause");
             this.newIndicator.newLabel.gotoAndPlay("hide");
         }
         
-        private function setTexts(param1:QuestRendererVO) : void {
+        private function setTexts(param1:QuestRendererVO) : void
+        {
             this.taskTF.text = param1.taskType;
             this.descrTF.label = param1.description;
             this.timerTF.htmlText = param1.timerDescr;
         }
         
-        private function checkProgress(param1:QuestRendererVO) : void {
+        private function checkProgress(param1:QuestRendererVO) : void
+        {
             if((param1.progrBarType) && !param1.status)
             {
                 this.progressIndicator.visible = true;
@@ -252,7 +271,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        private function checkCounter(param1:QuestRendererVO) : void {
+        private function checkCounter(param1:QuestRendererVO) : void
+        {
             if(param1.tasksCount >= 0 && !param1.status)
             {
                 this.counter.visible = true;
@@ -265,7 +285,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        private function checkIGR(param1:QuestRendererVO) : void {
+        private function checkIGR(param1:QuestRendererVO) : void
+        {
             this.indicatorIGR.visible = param1.IGR;
             if(this.indicatorIGR.visible)
             {
@@ -274,7 +295,8 @@ package net.wg.gui.lobby.questsWindow
             this.indicatorIGR.x = int(this.taskTF.x + this.taskTF.textWidth + 5);
         }
         
-        private function checkNew(param1:QuestRendererVO) : void {
+        private function checkNew(param1:QuestRendererVO) : void
+        {
             if(param1.isNew)
             {
                 this.newIndicator.newLabel.gotoAndStop("show");
@@ -290,7 +312,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        private function checkStatus(param1:QuestRendererVO) : void {
+        private function checkStatus(param1:QuestRendererVO) : void
+        {
             if(this._status != param1.status)
             {
                 this._status = param1.status;
@@ -300,7 +323,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        private function showNewTooltip(param1:MouseEvent) : void {
+        private function showNewTooltip(param1:MouseEvent) : void
+        {
             var _loc2_:QuestRendererVO = QuestRendererVO(data);
             App.toolTipMgr.show(_loc2_.eventType == QuestsStates.ACTION?TOOLTIPS.QUESTS_NEWLABEL_ACTION:TOOLTIPS.QUESTS_NEWLABEL_TASK);
         }

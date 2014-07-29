@@ -12,7 +12,8 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
     public class FortHeaderClanInfo extends UIComponentEx implements IFortHeaderClanInfo
     {
         
-        public function FortHeaderClanInfo() {
+        public function FortHeaderClanInfo()
+        {
             super();
             this.toolTipArea.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             this.toolTipArea.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
@@ -26,13 +27,15 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         public var toolTipArea:MovieClip = null;
         
-        public function applyClanData(param1:FortificationVO) : void {
+        public function applyClanData(param1:FortificationVO) : void
+        {
             this.clanName.htmlText = param1.clanName;
             this.clanEmblem.setImage(param1.clanIconId);
             this.levelText.text = param1.levelTitle;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.levelText = null;
             this.toolTipArea.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             this.toolTipArea.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
@@ -43,11 +46,13 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             super.onDispose();
         }
         
-        private function onRollOverHandler(param1:MouseEvent) : void {
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showSpecial(Tooltips.CLAN_INFO,null);
         }
         
-        private function onRollOutHandler(param1:MouseEvent) : void {
+        private function onRollOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
     }

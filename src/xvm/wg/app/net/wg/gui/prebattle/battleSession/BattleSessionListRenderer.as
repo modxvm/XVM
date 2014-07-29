@@ -7,7 +7,8 @@ package net.wg.gui.prebattle.battleSession
     public class BattleSessionListRenderer extends TextFieldShort
     {
         
-        public function BattleSessionListRenderer() {
+        public function BattleSessionListRenderer()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.prebattle.battleSession
         
         private var dataVO:BSListRendererVO = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.shadowColor = "Black";
             this.textColor = 16777215;
@@ -28,7 +30,8 @@ package net.wg.gui.prebattle.battleSession
             constraints.addElement("timeField",this.timeField,Constraints.ALL);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(INVALIDATE_DATA)) && (this.dataVO))
             {
@@ -36,14 +39,16 @@ package net.wg.gui.prebattle.battleSession
             }
         }
         
-        private function afterSetData() : void {
+        private function afterSetData() : void
+        {
             textField.text = this.dataVO.descr;
             this.opponentsField.text = this.dataVO.opponents;
             this.timeField.text = this.dataVO.startTime;
             DebugUtils.LOG_DEBUG(this.dataVO.descr,this.dataVO.opponents,this.dataVO.startTime);
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1 == null)
             {
                 this.dataVO = null;

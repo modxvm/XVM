@@ -7,7 +7,8 @@ package net.wg.gui.components.advanced
     public class ExtraModuleIcon extends ModuleIcon
     {
         
-        public function ExtraModuleIcon() {
+        public function ExtraModuleIcon()
+        {
             super();
         }
         
@@ -15,11 +16,13 @@ package net.wg.gui.components.advanced
         
         private var _extraIconSource:String;
         
-        public function get extraIconSource() : String {
+        public function get extraIconSource() : String
+        {
             return this._extraIconSource;
         }
         
-        public function set extraIconSource(param1:String) : void {
+        public function set extraIconSource(param1:String) : void
+        {
             this._extraIconSource = param1;
             if(!this.extraIcon)
             {
@@ -31,7 +34,8 @@ package net.wg.gui.components.advanced
             this.extraIcon.setSource(this._extraIconSource);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.extraIcon)
             {
                 this.extraIcon.dispose();
@@ -40,7 +44,8 @@ package net.wg.gui.components.advanced
             super.onDispose();
         }
         
-        private function onExtraIconLoaded(param1:Event) : void {
+        private function onExtraIconLoaded(param1:Event) : void
+        {
             this.extraIcon.x = Math.round(moduleType.width - this.extraIcon.width - 6);
             this.extraIcon.y = Math.round(moduleType.height - this.extraIcon.height - 5);
             this.extraIcon.visible = true;

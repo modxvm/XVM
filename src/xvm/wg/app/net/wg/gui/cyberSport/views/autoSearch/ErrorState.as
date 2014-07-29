@@ -6,7 +6,8 @@ package net.wg.gui.cyberSport.views.autoSearch
     public class ErrorState extends StateViewBase
     {
         
-        public function ErrorState() {
+        public function ErrorState()
+        {
             super();
             currentState = CYBER_SPORT_ALIASES.AUTO_SEARCH_ERROR_STATE;
             this.headerField.text = CYBERSPORT.WINDOW_AUTOSEARCH_ERRORSTATE_HEADERTEXT;

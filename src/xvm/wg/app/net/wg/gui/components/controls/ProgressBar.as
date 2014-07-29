@@ -6,7 +6,8 @@ package net.wg.gui.components.controls
     public class ProgressBar extends UIComponent implements IProgressBar
     {
         
-        public function ProgressBar() {
+        public function ProgressBar()
+        {
             super();
         }
         
@@ -16,7 +17,8 @@ package net.wg.gui.components.controls
         
         private var _value:Number = 0;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -24,10 +26,12 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function applyDataChanges() : void {
+        protected function applyDataChanges() : void
+        {
         }
         
-        public function set minimum(param1:Number) : void {
+        public function set minimum(param1:Number) : void
+        {
             if(this._minimum != param1)
             {
                 this._minimum = param1;
@@ -35,11 +39,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get minimum() : Number {
+        public function get minimum() : Number
+        {
             return this._minimum;
         }
         
-        public function set maximum(param1:Number) : void {
+        public function set maximum(param1:Number) : void
+        {
             if(this._maximum != param1)
             {
                 this._maximum = param1;
@@ -47,11 +53,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get maximum() : Number {
+        public function get maximum() : Number
+        {
             return this._maximum;
         }
         
-        public function set value(param1:Number) : void {
+        public function set value(param1:Number) : void
+        {
             if(this._value != param1)
             {
                 this._value = param1;
@@ -59,7 +67,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get value() : Number {
+        public function get value() : Number
+        {
             return this._value;
         }
     }

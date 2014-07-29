@@ -27,9 +27,8 @@ package net.wg.gui.components.windows
     public class Window extends scaleform.clik.controls.Window implements IWindow
     {
         
-        public function Window() {
-            this.BG_FORM_DEF_PADDING = new Padding(33,11,16,10);
-            this.CONTENT_DEF_PADDING = new Padding(35,13,19,12);
+        public function Window()
+        {
             super();
             this._formBgPadding = this.BG_FORM_DEF_PADDING;
             _contentPadding = this.CONTENT_DEF_PADDING;
@@ -71,15 +70,16 @@ package net.wg.gui.components.windows
         
         private var _windowContent:IAbstractWindowView = null;
         
-        public var BG_FORM_DEF_PADDING:Padding;
+        public var BG_FORM_DEF_PADDING:Padding = new Padding(33,11,16,10);
         
         private var BTN_PADDING_Y:Number = 26;
         
         private var TAB_PADDING_Y:Number = 30;
         
-        private var CONTENT_DEF_PADDING:Padding;
+        private var CONTENT_DEF_PADDING:Padding = new Padding(35,13,19,12);
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if((_content) && (contains(_content)))
             {
                 removeChild(_content);
@@ -108,34 +108,42 @@ package net.wg.gui.components.windows
             super.onDispose();
         }
         
-        public function setWindow(param1:IWindow) : void {
+        public function setWindow(param1:IWindow) : void
+        {
         }
         
-        public function setTitleIcon(param1:String) : void {
+        public function setTitleIcon(param1:String) : void
+        {
             this.iconMovie.gotoAndStop(param1);
             invalidate(INVALID_TITLE);
         }
         
-        public function onStartDrag() : void {
+        public function onStartDrag() : void
+        {
             startDrag();
         }
         
-        public function onDragging(param1:Number, param2:Number) : void {
+        public function onDragging(param1:Number, param2:Number) : void
+        {
         }
         
-        public function onEndDrag() : void {
+        public function onEndDrag() : void
+        {
             stopDrag();
         }
         
-        public function getDragType() : String {
+        public function getDragType() : String
+        {
             return DragType.SOFT;
         }
         
-        public function getHitArea() : InteractiveObject {
+        public function getHitArea() : InteractiveObject
+        {
             return this.titleBtnEx;
         }
         
-        public function updateSize(param1:Number, param2:Number, param3:Boolean = false) : void {
+        public function updateSize(param1:Number, param2:Number, param3:Boolean = false) : void
+        {
             if(param3)
             {
                 param1 = param1 + contentPadding.horizontal;
@@ -147,63 +155,78 @@ package net.wg.gui.components.windows
             setActualScale(1,1);
         }
         
-        public function getTitleBtnEx() : ITextContainer {
+        public function getTitleBtnEx() : ITextContainer
+        {
             return this.titleBtnEx;
         }
         
-        public function getTitleBtn() : Button {
+        public function getTitleBtn() : Button
+        {
             return titleBtn;
         }
         
-        public function getCloseBtn() : Button {
+        public function getCloseBtn() : Button
+        {
             return closeBtn;
         }
         
-        public function setMaxWidth(param1:Number) : void {
+        public function setMaxWidth(param1:Number) : void
+        {
             maxWidth = param1;
         }
         
-        public function setMaxHeight(param1:Number) : void {
+        public function setMaxHeight(param1:Number) : void
+        {
             maxHeight = param1;
         }
         
-        public function getMinWidth() : Number {
+        public function getMinWidth() : Number
+        {
             return minWidth;
         }
         
-        public function setMinWidth(param1:Number) : void {
+        public function setMinWidth(param1:Number) : void
+        {
             minWidth = param1;
         }
         
-        public function getMinHeight() : Number {
+        public function getMinHeight() : Number
+        {
             return minHeight;
         }
         
-        public function setMinHeight(param1:Number) : void {
+        public function setMinHeight(param1:Number) : void
+        {
             minHeight = param1;
         }
         
-        public function getConstraints() : Constraints {
+        public function getConstraints() : Constraints
+        {
             return constraints;
         }
         
-        public function getBackground() : MovieClip {
+        public function getBackground() : MovieClip
+        {
             return background;
         }
         
-        public function getIconMovie() : MovieClip {
+        public function getIconMovie() : MovieClip
+        {
             return this.iconMovie;
         }
         
-        public function set wrapperContent(param1:IAbstractWrapperView) : void {
+        public function set wrapperContent(param1:IAbstractWrapperView) : void
+        {
             this.setWindowContent(IAbstractWindowView(param1));
         }
         
-        public function get wrapperContent() : IAbstractWrapperView {
+        public function get wrapperContent() : IAbstractWrapperView
+        {
             return this._windowContent;
         }
         
-        public function setWindowContent(param1:IAbstractWindowView) : void {
+        public function setWindowContent(param1:IAbstractWindowView) : void
+        {
             this._windowContent = param1;
             if(_content)
             {
@@ -218,61 +241,74 @@ package net.wg.gui.components.windows
             }
         }
         
-        override public function set scaleX(param1:Number) : void {
+        override public function set scaleX(param1:Number) : void
+        {
             var _loc2_:Number = width;
             super.scaleX = param1;
             dispatchEvent(new WindowEvent(WindowEvent.SCALE_X_CHANGED,_loc2_));
         }
         
-        override public function set scaleY(param1:Number) : void {
+        override public function set scaleY(param1:Number) : void
+        {
             var _loc2_:Number = height;
             super.scaleY = param1;
             dispatchEvent(new WindowEvent(WindowEvent.SCALE_Y_CHANGED,_loc2_));
         }
         
-        override public function set title(param1:String) : void {
+        override public function set title(param1:String) : void
+        {
             _title = param1;
             invalidate(INVALID_TITLE);
         }
         
-        public function get isModal() : Boolean {
+        public function get isModal() : Boolean
+        {
             return this._windowContent.isModal;
         }
         
-        public function get modalAlpha() : Number {
+        public function get modalAlpha() : Number
+        {
             return Values.DEFAULT_ALPHA;
         }
         
-        public function get window() : IManagedContent {
+        public function get window() : IManagedContent
+        {
             return this;
         }
         
-        public function get sourceView() : IView {
+        public function get sourceView() : IView
+        {
             return this._windowContent;
         }
         
-        public function get windowContent() : IAbstractWindowView {
+        public function get windowContent() : IAbstractWindowView
+        {
             return this._windowContent;
         }
         
-        public function get containerContent() : IManagedContent {
+        public function get containerContent() : IManagedContent
+        {
             return this;
         }
         
-        public function get formBgPadding() : Padding {
+        public function get formBgPadding() : Padding
+        {
             return this._formBgPadding;
         }
         
-        public function set formBgPadding(param1:Padding) : void {
+        public function set formBgPadding(param1:Padding) : void
+        {
             this._formBgPadding = param1;
             invalidate("padding");
         }
         
-        public function get useBottomBtns() : Boolean {
+        public function get useBottomBtns() : Boolean
+        {
             return this._useBottomBtns;
         }
         
-        public function set useBottomBtns(param1:Boolean) : void {
+        public function set useBottomBtns(param1:Boolean) : void
+        {
             if(this._useBottomBtns == param1)
             {
                 return;
@@ -284,11 +320,13 @@ package net.wg.gui.components.windows
             invalidate("padding");
         }
         
-        public function get useTabs() : Boolean {
+        public function get useTabs() : Boolean
+        {
             return this._useTabs;
         }
         
-        public function set useTabs(param1:Boolean) : void {
+        public function set useTabs(param1:Boolean) : void
+        {
             if(this._useTabs == param1)
             {
                 return;
@@ -300,11 +338,13 @@ package net.wg.gui.components.windows
             invalidate("padding");
         }
         
-        public function get showBgForm() : Boolean {
+        public function get showBgForm() : Boolean
+        {
             return this._showBgForm;
         }
         
-        public function set showBgForm(param1:Boolean) : void {
+        public function set showBgForm(param1:Boolean) : void
+        {
             if(param1 == this.showBgForm)
             {
                 return;
@@ -314,7 +354,8 @@ package net.wg.gui.components.windows
             invalidate("padding");
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(closeBtn != null)
             {
@@ -352,7 +393,8 @@ package net.wg.gui.components.windows
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if((isInvalid(INVALID_SRC_VIEW)) && (this.windowContent))
             {
                 this.updateSource();
@@ -370,6 +412,7 @@ package net.wg.gui.components.windows
                     }
                     catch(e:Error)
                     {
+                        trace(e);
                     }
                 }
                 if(this.windowContent.isSourceTracked)
@@ -396,7 +439,8 @@ package net.wg.gui.components.windows
             }
         }
         
-        override protected function reflowContent() : void {
+        override protected function reflowContent() : void
+        {
             var _loc1_:Padding = null;
             var _loc2_:ConstrainedElement = null;
             this.bgForm.visible = this._showBgForm;
@@ -414,7 +458,8 @@ package net.wg.gui.components.windows
             super.reflowContent();
         }
         
-        protected function updateSource() : void {
+        protected function updateSource() : void
+        {
             if(this.windowContent != null)
             {
                 minWidth = _content.width + contentPadding.horizontal;
@@ -424,18 +469,21 @@ package net.wg.gui.components.windows
             }
         }
         
-        override protected function onCloseButtonClick(param1:MouseEvent) : void {
+        override protected function onCloseButtonClick(param1:MouseEvent) : void
+        {
             if(this.windowContent)
             {
                 this.windowContent.handleWindowClose();
             }
         }
         
-        protected function closeButtonClickHandler(param1:ButtonEvent) : void {
+        protected function closeButtonClickHandler(param1:ButtonEvent) : void
+        {
             this.onCloseButtonClick(null);
         }
         
-        protected function onMinimizeButtonClick(param1:ButtonEvent) : void {
+        protected function onMinimizeButtonClick(param1:ButtonEvent) : void
+        {
             if((this.windowContent) && (this.windowContent.canMinimize))
             {
                 this.windowContent.handleWindowMinimize();

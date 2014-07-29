@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.awards.data
     public class AchievementFilterVO extends DAAPIDataClass
     {
         
-        public function AchievementFilterVO(param1:Object) {
+        public function AchievementFilterVO(param1:Object)
+        {
             super(param1);
         }
         

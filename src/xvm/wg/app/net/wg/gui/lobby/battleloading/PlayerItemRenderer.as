@@ -18,7 +18,8 @@ package net.wg.gui.lobby.battleloading
     public class PlayerItemRenderer extends ListItemRenderer
     {
         
-        public function PlayerItemRenderer() {
+        public function PlayerItemRenderer()
+        {
             super();
             this.visible = false;
         }
@@ -35,7 +36,8 @@ package net.wg.gui.lobby.battleloading
         
         public var playerActionMarker:PlayerActionMarker;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
             App.voiceChatMgr.addEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
@@ -65,34 +67,40 @@ package net.wg.gui.lobby.battleloading
             }
         }
         
-        private function speakHandler(param1:VoiceChatEvent) : void {
+        private function speakHandler(param1:VoiceChatEvent) : void
+        {
             this.onPlayerSpeak(param1.getAccountDBID(),param1.type == VoiceChatEvent.START_SPEAKING);
         }
         
-        public function onPlayerSpeak(param1:Number, param2:Boolean) : void {
+        public function onPlayerSpeak(param1:Number, param2:Boolean) : void
+        {
             if((data) && (param1 == VehicleInfoVO(data).accountDBID) && (this.voiceWave))
             {
                 this.voiceWave.setSpeaking(param2);
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
             App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             this.update();
             super.draw();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidate();
         }
         
-        private function update() : void {
+        private function update() : void
+        {
             var _loc1_:VehicleInfoVO = null;
             if((data) && (initialized))
             {
@@ -166,13 +174,16 @@ package net.wg.gui.lobby.battleloading
             }
         }
         
-        override protected function setState(param1:String) : void {
+        override protected function setState(param1:String) : void
+        {
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
         }
         
-        private function updateState(param1:VehicleInfoVO) : void {
+        private function updateState(param1:VehicleInfoVO) : void
+        {
             var _loc10_:* = NaN;
             var _loc11_:ColorTransform = null;
             var _loc2_:IColorScheme = null;
@@ -239,11 +250,13 @@ package net.wg.gui.lobby.battleloading
             }
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             invalidate();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG PlayerItemRenderer " + name;
         }
     }

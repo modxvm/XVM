@@ -11,7 +11,8 @@ package net.wg.gui.lobby.settings
     public class OtherSettings extends SettingsBaseView
     {
         
-        public function OtherSettings() {
+        public function OtherSettings()
+        {
             super();
         }
         
@@ -69,7 +70,8 @@ package net.wg.gui.lobby.settings
         
         public var vibroGUIValue:LabelControl = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.vibroDeviceConnectionStateField.text = SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
             this.vibroGainLabel.text = SETTINGS.VIBRO_LABELS_GAIN;
@@ -83,7 +85,8 @@ package net.wg.gui.lobby.settings
             this.fieldSetVibro.label = SETTINGS.VIBRO_FIELDSET_HEADER;
         }
         
-        override protected function setData(param1:Object) : void {
+        override protected function setData(param1:Object) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -92,7 +95,8 @@ package net.wg.gui.lobby.settings
             throw new Error("Not decompiled due to error");
         }
         
-        private function onSliderValueChanged(param1:SliderEvent) : void {
+        private function onSliderValueChanged(param1:SliderEvent) : void
+        {
             var _loc5_:LabelControl = null;
             var _loc2_:Slider = Slider(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_SLIDER);
@@ -105,7 +109,8 @@ package net.wg.gui.lobby.settings
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.value));
         }
         
-        private function showHideControl(param1:String, param2:SettingsControlProp, param3:Boolean) : void {
+        private function showHideControl(param1:String, param2:SettingsControlProp, param3:Boolean) : void
+        {
             if(this[param1 + param2.type])
             {
                 this[param1 + param2.type].visible = param3;
@@ -120,7 +125,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             while((this.vibroControlsList) && this.vibroControlsList.length > 0)
             {
                 this.vibroControlsList.pop();

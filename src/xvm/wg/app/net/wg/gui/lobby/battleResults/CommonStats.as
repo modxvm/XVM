@@ -24,7 +24,8 @@ package net.wg.gui.lobby.battleResults
     public class CommonStats extends UIComponentEx implements IViewStackContent
     {
         
-        public function CommonStats() {
+        public function CommonStats()
+        {
             super();
         }
         
@@ -32,22 +33,22 @@ package net.wg.gui.lobby.battleResults
         
         private static var ARENA_ENEMY_CLAN_EMBLEM:String = "arenaEnemyClanEmblem";
         
-        private static function onIconRollOver(param1:FinalStatisticEvent) : void {
+        private static function onIconRollOver(param1:FinalStatisticEvent) : void
+        {
             var _loc2_:Array = null;
             var _loc3_:Object = null;
             if(param1.data.hoveredKind)
             {
                 _loc2_ = [];
-                _loc3_ = {
-                    "type":param1.data.hoveredKind,
-                    "disabled":param1.data.isDisabled,
-                    "values":null,
-                    "discript":null,
-                    "value":null,
-                    "critDamage":null,
-                    "critDestruction":null,
-                    "critWound":null
-                };
+                _loc3_ = {"type":param1.data.hoveredKind,
+                "disabled":param1.data.isDisabled,
+                "values":null,
+                "discript":null,
+                "value":null,
+                "critDamage":null,
+                "critDestruction":null,
+                "critWound":null
+            };
             switch(param1.data.hoveredKind)
             {
                 case EfficiencyIconRenderer.DAMAGE:
@@ -74,7 +75,8 @@ package net.wg.gui.lobby.battleResults
         }
     }
     
-    private static function onIconRollOut(param1:FinalStatisticEvent) : void {
+    private static function onIconRollOut(param1:FinalStatisticEvent) : void
+    {
         App.toolTipMgr.hide();
     }
     
@@ -132,12 +134,14 @@ package net.wg.gui.lobby.battleResults
     
     private var originalArenaStr:String = "";
     
-    public function update(param1:Object) : void {
+    public function update(param1:Object) : void
+    {
         this.medalsListLeft.invalidateFilters();
         this.medalsListRight.invalidateFilters();
     }
     
-    public function onEmblemLoaded(param1:String, param2:String) : void {
+    public function onEmblemLoaded(param1:String, param2:String) : void
+    {
         var _loc3_:Object = null;
         if(param1 == ARENA_ENEMY_CLAN_EMBLEM)
         {
@@ -146,15 +150,18 @@ package net.wg.gui.lobby.battleResults
         }
     }
     
-    public function getComponentForFocus() : InteractiveObject {
+    public function getComponentForFocus() : InteractiveObject
+    {
         return null;
     }
     
-    public function get myParent() : BattleResults {
+    public function get myParent() : BattleResults
+    {
         return BattleResults(parent.parent.parent);
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         this.detailsMc.detailedReportBtn.removeEventListener(ButtonEvent.CLICK,this.onDetailsClick);
         this.efficiencyList.removeEventListener(FinalStatisticEvent.EFFENSY_ICON_ROLL_OVER,onIconRollOver);
         this.efficiencyList.removeEventListener(FinalStatisticEvent.EFFENSY_ICON_ROLL_OUT,onIconRollOut);
@@ -184,7 +191,8 @@ package net.wg.gui.lobby.battleResults
         super.onDispose();
     }
     
-    override protected function configUI() : void {
+    override protected function configUI() : void
+    {
         var _loc2_:Object = null;
         var _loc8_:IUserProps = null;
         var _loc9_:* = false;
@@ -222,12 +230,11 @@ package net.wg.gui.lobby.battleResults
         this.arenaNameLbl.htmlText = this.originalArenaStr = _loc3_.arenaStr;
         this.tankSlot.areaIcon.source = _loc3_.arenaIcon;
         this.tankSlot.tankIcon.source = _loc3_.tankIcon;
-        this.tankSlot.playerNameLbl.userVO = new UserVO({
-            "fullName":_loc3_.playerFullNameStr,
-            "userName":_loc3_.playerNameStr,
-            "clanAbbrev":_loc3_.clanNameStr,
-            "region":_loc3_.regionNameStr
-        });
+        this.tankSlot.playerNameLbl.userVO = new UserVO({"fullName":_loc3_.playerFullNameStr,
+        "userName":_loc3_.playerNameStr,
+        "clanAbbrev":_loc3_.clanNameStr,
+        "region":_loc3_.regionNameStr
+    });
     this.tankSlot.tankNameLbl.text = _loc3_.vehicleName;
     this.tankSlot.arenaCreateDateLbl.text = _loc3_.arenaCreateTimeStr;
     if((_loc2_.isPrematureLeave) || _loc2_.killerID <= 0)
@@ -313,7 +320,8 @@ package net.wg.gui.lobby.battleResults
     }
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
     this.visible = true;
     this.tankSlot.validateNow();
     this.efficiencyList.validateNow();
@@ -325,15 +333,18 @@ override protected function draw() : void {
     this.resCounter.validateNow();
 }
 
-private function onDetailsClick(param1:ButtonEvent) : void {
+private function onDetailsClick(param1:ButtonEvent) : void
+{
     this.myParent.tabs_mc.selectedIndex = 2;
 }
 
-private function showQuest(param1:QuestEvent) : void {
+private function showQuest(param1:QuestEvent) : void
+{
     this.myParent.showEventsWindow(param1.questID);
 }
 
-public function canShowAutomatically() : Boolean {
+public function canShowAutomatically() : Boolean
+{
     return true;
 }
 }

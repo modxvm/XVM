@@ -3,7 +3,8 @@ package net.wg.gui.notification.constants
     public class MessageMetrics extends Object
     {
         
-        public function MessageMetrics() {
+        public function MessageMetrics()
+        {
             super();
         }
         

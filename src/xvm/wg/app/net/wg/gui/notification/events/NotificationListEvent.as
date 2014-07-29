@@ -5,7 +5,8 @@ package net.wg.gui.notification.events
     public class NotificationListEvent extends Event
     {
         
-        public function NotificationListEvent(param1:String, param2:int, param3:Boolean = false, param4:Boolean = false) {
+        public function NotificationListEvent(param1:String, param2:int, param3:Boolean = false, param4:Boolean = false)
+        {
             super(param1,param3,param4);
             this.length = param2;
         }
@@ -14,11 +15,13 @@ package net.wg.gui.notification.events
         
         public var length:int = -1;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new NotificationListEvent(type,this.length,bubbles,cancelable);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("NotificationListEvent","type","length","bubbles","cancelable");
         }
     }

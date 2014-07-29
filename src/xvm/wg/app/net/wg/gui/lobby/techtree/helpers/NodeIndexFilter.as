@@ -5,14 +5,16 @@ package net.wg.gui.lobby.techtree.helpers
     public class NodeIndexFilter extends Object
     {
         
-        public function NodeIndexFilter(param1:Array) {
+        public function NodeIndexFilter(param1:Array)
+        {
             super();
             this.indexes = param1;
         }
         
         private var indexes:Array;
         
-        public function doFilter(param1:IRenderer, param2:int, param3:Vector.<IRenderer>) : Boolean {
+        public function doFilter(param1:IRenderer, param2:int, param3:Vector.<IRenderer>) : Boolean
+        {
             return !(param1 == null) && this.indexes.indexOf(param2) > -1;
         }
     }

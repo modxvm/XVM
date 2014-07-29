@@ -5,7 +5,8 @@ package net.wg.gui.lobby.customization.data
     public class RentalPackageDAAPIDataProvider extends DAAPIDataProvider
     {
         
-        public function RentalPackageDAAPIDataProvider() {
+        public function RentalPackageDAAPIDataProvider()
+        {
             super();
         }
         

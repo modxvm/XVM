@@ -13,7 +13,8 @@ package net.wg.gui.lobby.settings
     public class SettingsMarkersForm extends UIComponent
     {
         
-        public function SettingsMarkersForm() {
+        public function SettingsMarkersForm()
+        {
             super();
         }
         
@@ -57,15 +58,18 @@ package net.wg.gui.lobby.settings
         
         public var markerAltDamageCheckbox:CheckBox = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        public function setData(param1:String, param2:Object) : void {
+        public function setData(param1:String, param2:Object) : void
+        {
             var _loc3_:String = null;
             var _loc4_:SettingsControlProp = null;
             var _loc5_:CheckBox = null;
@@ -110,25 +114,29 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function onDropDownChange(param1:ListEvent) : void {
+        private function onDropDownChange(param1:ListEvent) : void
+        {
             var _loc2_:DropdownMenu = DropdownMenu(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
             var _loc4_:String = this.getAltPrefix(_loc3_);
             dispatchEvent(new SettingsSubVewEvent(SettingsSubVewEvent.ON_CONTROL_CHANGE,this._id,_loc3_,_loc2_.selectedIndex,_loc4_));
         }
         
-        private function onCheckBoxSelected(param1:Event) : void {
+        private function onCheckBoxSelected(param1:Event) : void
+        {
             var _loc2_:CheckBox = CheckBox(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
             var _loc4_:String = this.getAltPrefix(_loc3_);
             dispatchEvent(new SettingsSubVewEvent(SettingsSubVewEvent.ON_CONTROL_CHANGE,this._id,_loc3_,_loc2_.selected,_loc4_));
         }
         
-        private function getAltPrefix(param1:String) : String {
+        private function getAltPrefix(param1:String) : String
+        {
             return param1.indexOf("Alt",0) >= 0?"Alt":"";
         }
         
-        private function disableAllControls() : void {
+        private function disableAllControls() : void
+        {
             this.markerBaseIconCheckbox.enabled = false;
             this.markerBaseLevelCheckbox.enabled = false;
             this.markerBaseVehicleNameCheckbox.enabled = false;
@@ -145,7 +153,8 @@ package net.wg.gui.lobby.settings
             this.markerAltDamageCheckbox.enabled = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:String = null;
             var _loc2_:SettingsControlProp = null;
             var _loc3_:CheckBox = null;

@@ -14,7 +14,8 @@ package net.wg.gui.lobby.header
     public class HeaderButtonBar extends ButtonBar implements IHelpLayoutComponent
     {
         
-        public function HeaderButtonBar() {
+        public function HeaderButtonBar()
+        {
             super();
             this.visible = false;
         }
@@ -35,7 +36,8 @@ package net.wg.gui.lobby.header
         
         private var _subItemSelectedIndex:Number = -1;
         
-        public function showHelpLayout() : void {
+        public function showHelpLayout() : void
+        {
             var _loc1_:Number = _renderers.length;
             var _loc2_:Number = 1;
             while(_loc2_ < _loc1_ - 1)
@@ -45,7 +47,8 @@ package net.wg.gui.lobby.header
             }
         }
         
-        public function closeHelpLayout() : void {
+        public function closeHelpLayout() : void
+        {
             var _loc1_:Number = _renderers.length;
             var _loc2_:Number = 1;
             while(_loc2_ < _loc1_ - 1)
@@ -55,19 +58,22 @@ package net.wg.gui.lobby.header
             }
         }
         
-        public function setDisableNav(param1:Boolean) : void {
+        public function setDisableNav(param1:Boolean) : void
+        {
             this._disableNav = param1;
             this.enabled = !param1;
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(!this._disableNav)
             {
                 super.handleInput(param1);
             }
         }
         
-        override protected function updateRenderers() : void {
+        override protected function updateRenderers() : void
+        {
             var _loc5_:* = 0;
             var _loc6_:Button = null;
             var _loc7_:* = false;
@@ -164,7 +170,8 @@ package net.wg.gui.lobby.header
             this.selectedIndex = Math.min(_dataProvider.length - 1,_selectedIndex);
         }
         
-        override protected function populateRendererData(param1:Button, param2:uint) : void {
+        override protected function populateRendererData(param1:Button, param2:uint) : void
+        {
             param1.label = itemToLabel(_dataProvider.requestItemAt(param2));
             param1.data = _dataProvider.requestItemAt(param2);
             param1.selected = param2 == selectedIndex;
@@ -182,7 +189,8 @@ package net.wg.gui.lobby.header
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if((isInvalid(InvalidationType.RENDERERS)) || (isInvalid(InvalidationType.DATA)) || (isInvalid(InvalidationType.SETTINGS)) || (isInvalid(InvalidationType.SIZE)))
             {
                 this.visible = true;
@@ -192,12 +200,14 @@ package net.wg.gui.lobby.header
             }
         }
         
-        override public function set selectedIndex(param1:int) : void {
+        override public function set selectedIndex(param1:int) : void
+        {
             super.selectedIndex = param1;
             this.updateSubItem(this.subItemSelectedIndex,"");
         }
         
-        private function updateSubItem(param1:Number, param2:String) : void {
+        private function updateSubItem(param1:Number, param2:String) : void
+        {
             var _loc3_:MainMenuButton = null;
             if(param1 >= 0)
             {
@@ -213,11 +223,13 @@ package net.wg.gui.lobby.header
             }
         }
         
-        public function get subItemSelectedIndex() : int {
+        public function get subItemSelectedIndex() : int
+        {
             return this._subItemSelectedIndex;
         }
         
-        public function set subItemSelectedIndex(param1:int) : void {
+        public function set subItemSelectedIndex(param1:int) : void
+        {
             this.updateSubItem(this._subItemSelectedIndex,"");
             this._subItemSelectedIndex = param1;
             this.updateSubItem(this._subItemSelectedIndex,MainMenuButton.SUB_SELECTED);

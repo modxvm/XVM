@@ -5,7 +5,8 @@ package net.wg.gui.lobby.questsWindow.data
     public class QuestDashlineItemVO extends DAAPIDataClass
     {
         
-        public function QuestDashlineItemVO(param1:Object) {
+        public function QuestDashlineItemVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -19,43 +20,53 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _linkage:String = "";
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this._label = param1;
         }
         
-        public function get linkID() : String {
+        public function get linkID() : String
+        {
             return this._linkID;
         }
         
-        public function set linkID(param1:String) : void {
+        public function set linkID(param1:String) : void
+        {
             this._linkID = param1;
         }
         
-        public function get isNotAvailable() : Boolean {
+        public function get isNotAvailable() : Boolean
+        {
             return this._isNotAvailable;
         }
         
-        public function set isNotAvailable(param1:Boolean) : void {
+        public function set isNotAvailable(param1:Boolean) : void
+        {
             this._isNotAvailable = param1;
         }
         
-        public function get value() : String {
+        public function get value() : String
+        {
             return this._value;
         }
         
-        public function set value(param1:String) : void {
+        public function set value(param1:String) : void
+        {
             this._value = param1;
         }
         
-        public function get linkage() : String {
+        public function get linkage() : String
+        {
             return this._linkage;
         }
         
-        public function set linkage(param1:String) : void {
+        public function set linkage(param1:String) : void
+        {
             this._linkage = param1;
         }
     }

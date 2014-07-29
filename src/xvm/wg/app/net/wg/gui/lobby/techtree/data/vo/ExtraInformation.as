@@ -6,7 +6,8 @@ package net.wg.gui.lobby.techtree.data.vo
     public class ExtraInformation extends Object implements IValueObject
     {
         
-        public function ExtraInformation(param1:String = "", param2:String = "", param3:String = "", param4:String = "") {
+        public function ExtraInformation(param1:String = "", param2:String = "", param3:String = "", param4:String = "")
+        {
             super();
             this.type = param1;
             this.title = param2;
@@ -22,7 +23,8 @@ package net.wg.gui.lobby.techtree.data.vo
         
         public var benefitsList:String;
         
-        public function fromArray(param1:Array, param2:ILocale) : void {
+        public function fromArray(param1:Array, param2:ILocale) : void
+        {
             if(param1.length > 3)
             {
                 this.type = param1[0];
@@ -32,7 +34,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function fromObject(param1:Object, param2:ILocale) : void {
+        public function fromObject(param1:Object, param2:ILocale) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -55,7 +58,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[ExtraInformation: type = " + this.type + ", title = " + this.title + " benefitsHead = " + this.benefitsHead + " benefitsList = " + this.benefitsList + "]";
         }
     }

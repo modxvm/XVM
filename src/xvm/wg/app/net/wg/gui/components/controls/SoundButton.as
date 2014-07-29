@@ -13,7 +13,8 @@ package net.wg.gui.components.controls
     public class SoundButton extends Button implements ISoundButton
     {
         
-        public function SoundButton() {
+        public function SoundButton()
+        {
             super();
         }
         
@@ -31,22 +32,26 @@ package net.wg.gui.components.controls
         
         protected var useFocusedAsSelect:Boolean = false;
         
-        public function get soundType() : String {
+        public function get soundType() : String
+        {
             return this._soundType;
         }
         
-        public function set soundType(param1:String) : void {
+        public function set soundType(param1:String) : void
+        {
             if((param1) && !(param1 == this._soundType))
             {
                 this._soundType = param1;
             }
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG SoundButton " + name + "]";
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.hitMc = null;
             if(_repeatTimer != null)
             {
@@ -62,35 +67,43 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        public function get soundId() : String {
+        public function get soundId() : String
+        {
             return this._soundId;
         }
         
-        public function set soundId(param1:String) : void {
+        public function set soundId(param1:String) : void
+        {
             this._soundId = param1;
         }
         
-        public final function getSoundType() : String {
+        public final function getSoundType() : String
+        {
             return this.soundType;
         }
         
-        public final function getSoundId() : String {
+        public final function getSoundId() : String
+        {
             return this._soundId;
         }
         
-        public final function getStateOverSnd() : String {
+        public final function getStateOverSnd() : String
+        {
             return SoundManagerStates.SND_OVER;
         }
         
-        public final function getStateOutSnd() : String {
+        public final function getStateOutSnd() : String
+        {
             return SoundManagerStates.SND_OUT;
         }
         
-        public final function getStatePressSnd() : String {
+        public final function getStatePressSnd() : String
+        {
             return SoundManagerStates.SND_PRESS;
         }
         
-        public function beginButtonRepeat() : void {
+        public function beginButtonRepeat() : void
+        {
             if((autoRepeat) && _repeatTimer == null)
             {
                 _repeatTimer = new Timer(repeatDelay,1);
@@ -99,7 +112,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(param1 == enabled)
             {
                 return;
@@ -113,7 +127,8 @@ package net.wg.gui.components.controls
             mouseEnabled = true;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.hitMc != null)
             {
@@ -131,11 +146,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function handleMouseRelease(param1:MouseEvent) : void {
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
             var _loc5_:ButtonEvent = null;
             _autoRepeatEvent = null;
             if(!enabled)
@@ -170,7 +187,8 @@ package net.wg.gui.components.controls
             _isRepeating = false;
         }
         
-        override protected function handleRelease(param1:uint = 0) : void {
+        override protected function handleRelease(param1:uint = 0) : void
+        {
             var _loc2_:ButtonEvent = null;
             if(!enabled)
             {
@@ -197,15 +215,18 @@ package net.wg.gui.components.controls
             _isRepeating = false;
         }
         
-        private function unlockMouseHandling() : void {
+        private function unlockMouseHandling() : void
+        {
             this.mouseHandlingLocked = false;
         }
         
-        private function unlockKeyboardHandling() : void {
+        private function unlockKeyboardHandling() : void
+        {
             this.keyboardHandlingLocked = false;
         }
         
-        override protected function changeFocus() : void {
+        override protected function changeFocus() : void
+        {
             var _loc1_:String = null;
             if(!enabled)
             {

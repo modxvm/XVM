@@ -12,7 +12,8 @@ package net.wg.gui.lobby.profile.pages.statistics.header
     public class HeaderContainer extends UIComponent implements IDisposable
     {
         
-        public function HeaderContainer() {
+        public function HeaderContainer()
+        {
             super();
             this.group.layout = new HorizontalGroupLayout();
             this.group.itemRendererClass = App.utils.classFactory.getClass(Linkages.ADVANCED_LINE_DESCR_ICON_TEXT_UI);
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.profile.pages.statistics.header
         
         public var image:HeaderBGImage;
         
-        public function setDossierData(param1:Array) : void {
+        public function setDossierData(param1:Array) : void
+        {
             var _loc3_:StatisticsHeaderVO = null;
             var _loc5_:Object = null;
             var _loc6_:String = null;
@@ -57,7 +59,8 @@ package net.wg.gui.lobby.profile.pages.statistics.header
             this.group.dataProvider = _loc2_;
         }
         
-        public function set battlesType(param1:String) : void {
+        public function set battlesType(param1:String) : void
+        {
             var _loc2_:String = null;
             if(param1 == PROFILE.PROFILE_DROPDOWN_LABELS_ALL)
             {
@@ -89,7 +92,8 @@ package net.wg.gui.lobby.profile.pages.statistics.header
             this.icon.type = _loc2_;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.icon.dispose();
             this.icon = null;
             this.group.dispose();

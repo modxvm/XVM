@@ -8,7 +8,8 @@ package net.wg.gui.components.common.containers
     public class GroupEx extends Group
     {
         
-        public function GroupEx() {
+        public function GroupEx()
+        {
             super();
         }
         
@@ -16,7 +17,8 @@ package net.wg.gui.components.common.containers
         
         private var _itemRendererClass:Class;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:DisplayObject = null;
             var _loc3_:Object = null;
@@ -60,20 +62,24 @@ package net.wg.gui.components.common.containers
             super.draw();
         }
         
-        public function get dataProvider() : Array {
+        public function get dataProvider() : Array
+        {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:Array) : void {
+        public function set dataProvider(param1:Array) : void
+        {
             this._dataProvider = param1;
             invalidateData();
         }
         
-        public function get itemRendererClass() : Class {
+        public function get itemRendererClass() : Class
+        {
             return this._itemRendererClass;
         }
         
-        public function set itemRendererClass(param1:Class) : void {
+        public function set itemRendererClass(param1:Class) : void
+        {
             if(this._itemRendererClass != param1)
             {
                 this._itemRendererClass = param1;
@@ -81,7 +87,8 @@ package net.wg.gui.components.common.containers
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._dataProvider = null;
             this._itemRendererClass = null;
             super.onDispose();

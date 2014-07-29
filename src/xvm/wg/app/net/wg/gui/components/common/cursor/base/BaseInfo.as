@@ -9,7 +9,8 @@ package net.wg.gui.components.common.cursor.base
     public class BaseInfo extends Object implements IDisposable
     {
         
-        public function BaseInfo(param1:IDragDropHitArea, param2:String, param3:String) {
+        public function BaseInfo(param1:IDragDropHitArea, param2:String, param3:String)
+        {
             super();
             var _loc4_:* = "drag or drop object \'" + param1 + "\' must be InteractiveObject";
             var _loc5_:IAssertable = App.utils.asserter;
@@ -25,7 +26,8 @@ package net.wg.gui.components.common.cursor.base
         
         public static var STATE_STARTED:String = "started";
         
-        public static function getHitFromContainer(param1:IDragDropHitArea) : InteractiveObject {
+        public static function getHitFromContainer(param1:IDragDropHitArea) : InteractiveObject
+        {
             var _loc2_:InteractiveObject = param1.getHitArea();
             return _loc2_?_loc2_:InteractiveObject(param1);
         }
@@ -36,34 +38,41 @@ package net.wg.gui.components.common.cursor.base
         
         private var _processState:String = "none";
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._cursor = null;
             this._container = null;
             this._processState = null;
         }
         
-        public function get hit() : InteractiveObject {
+        public function get hit() : InteractiveObject
+        {
             return BaseInfo.getHitFromContainer(this._container);
         }
         
-        public function get cursor() : String {
+        public function get cursor() : String
+        {
             return this._cursor;
         }
         
-        public function set state(param1:String) : void {
+        public function set state(param1:String) : void
+        {
             App.utils.asserter.assert(!([STATE_NONE,STATE_INITIALIZED,STATE_STARTED].indexOf(param1) == -1),"unknown drag state:" + param1);
             this._processState = param1;
         }
         
-        public function get state() : String {
+        public function get state() : String
+        {
             return this._processState;
         }
         
-        protected final function getContainer() : IDragDropHitArea {
+        protected final function getContainer() : IDragDropHitArea
+        {
             return this._container;
         }
         
-        protected final function getCursor() : String {
+        protected final function getCursor() : String
+        {
             return this._cursor;
         }
     }

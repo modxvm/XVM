@@ -8,7 +8,8 @@ package net.wg.gui.lobby.store.views.base
     public class ViewUIElementVO extends Object implements IDisposable
     {
         
-        public function ViewUIElementVO(param1:String, param2:Button) {
+        public function ViewUIElementVO(param1:String, param2:Button)
+        {
             var _loc3_:IAssertable = null;
             super();
             if(App.instance)
@@ -25,16 +26,19 @@ package net.wg.gui.lobby.store.views.base
         
         private var _instance:Button = null;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._instance = null;
             this._name = null;
         }
         
-        public function get name() : String {
+        public function get name() : String
+        {
             return this._name;
         }
         
-        public function get instance() : Button {
+        public function get instance() : Button
+        {
             return this._instance;
         }
     }

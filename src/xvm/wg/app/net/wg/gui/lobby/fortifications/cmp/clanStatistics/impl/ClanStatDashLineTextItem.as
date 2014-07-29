@@ -6,13 +6,15 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
     public class ClanStatDashLineTextItem extends DashLineTextItem
     {
         
-        public function ClanStatDashLineTextItem() {
+        public function ClanStatDashLineTextItem()
+        {
             super();
         }
         
         private var _data:ClanStatItemVO;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._data)
             {
                 this._data.dispose();
@@ -21,11 +23,13 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
             super.onDispose();
         }
         
-        public function get data() : ClanStatItemVO {
+        public function get data() : ClanStatItemVO
+        {
             return this._data;
         }
         
-        public function set data(param1:ClanStatItemVO) : void {
+        public function set data(param1:ClanStatItemVO) : void
+        {
             this._data = param1;
             if(this._data)
             {

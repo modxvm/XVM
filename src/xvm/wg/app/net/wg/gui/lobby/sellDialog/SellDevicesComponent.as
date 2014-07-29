@@ -12,7 +12,8 @@ package net.wg.gui.lobby.sellDialog
     public class SellDevicesComponent extends UIComponent
     {
         
-        public function SellDevicesComponent() {
+        public function SellDevicesComponent()
+        {
             this._sellData = [];
             super();
         }
@@ -37,13 +38,15 @@ package net.wg.gui.lobby.sellDialog
         
         private var _sellData:Array;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.complexDevice.dispose();
             this.complexDevicesArr.dispose();
         }
         
-        public function setData(param1:Vector.<SellOnVehicleOptionalDeviceVo>) : void {
+        public function setData(param1:Vector.<SellOnVehicleOptionalDeviceVo>) : void
+        {
             var _loc6_:SellDialogElement = null;
             var _loc7_:* = NaN;
             this.complexDevicesArr = new SellDialogItem();
@@ -100,15 +103,18 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        public function getNextPosition() : int {
+        public function getNextPosition() : int
+        {
             return this.complexDevice.y + this.complexDevice.height + PADDING_FOR_NEXT_ELEMENT;
         }
         
-        public function get removePrices() : Array {
+        public function get removePrices() : Array
+        {
             return this._removePrices;
         }
         
-        public function set removePrices(param1:Array) : void {
+        public function set removePrices(param1:Array) : void
+        {
             this._removePrices = param1;
             if((this._removePrices) && this._removePrices.length >= 2)
             {
@@ -116,15 +122,18 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        public function get removePrice() : Number {
+        public function get removePrice() : Number
+        {
             return this._removePrice;
         }
         
-        public function set removePrice(param1:Number) : void {
+        public function set removePrice(param1:Number) : void
+        {
             this._removePrice = param1;
         }
         
-        public function set removeActionPriceData(param1:Object) : void {
+        public function set removeActionPriceData(param1:Object) : void
+        {
             this._removeActionPriceData = param1;
             if(this._removeActionPriceData)
             {
@@ -132,19 +141,23 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        public function get removeActionPriceData() : Object {
+        public function get removeActionPriceData() : Object
+        {
             return this._removeActionPriceData;
         }
         
-        public function get sellData() : Array {
+        public function get sellData() : Array
+        {
             return this._sellData;
         }
         
-        public function get deviceItemRenderer() : Vector.<ISaleItemBlockRenderer> {
+        public function get deviceItemRenderer() : Vector.<ISaleItemBlockRenderer>
+        {
             return this.complexDevice.getRenderers();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.complexDevice.scrollingRenderrBg.visible = false;
         }

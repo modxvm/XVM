@@ -5,7 +5,8 @@ package net.wg.gui.tutorial.meta.impl
     public class TutorialBattleNoResultsMeta extends AbstractWindowView
     {
         
-        public function TutorialBattleNoResultsMeta() {
+        public function TutorialBattleNoResultsMeta()
+        {
             super();
         }
     }

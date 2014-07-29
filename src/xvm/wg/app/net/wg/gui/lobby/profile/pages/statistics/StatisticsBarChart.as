@@ -6,7 +6,8 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class StatisticsBarChart extends AxisChart
     {
         
-        public function StatisticsBarChart() {
+        public function StatisticsBarChart()
+        {
             super();
             var _loc1_:StatisticBarChartLayout = new StatisticBarChartLayout();
             _loc1_.paddingRight = 26;
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         private var initializer:StatisticBarChartInitializer;
         
-        override public function set dataProvider(param1:IDataProvider) : void {
+        override public function set dataProvider(param1:IDataProvider) : void
+        {
             var _loc3_:StatisticChartInfo = null;
             var _loc6_:* = NaN;
             if(!param1)
@@ -57,17 +59,20 @@ package net.wg.gui.lobby.profile.pages.statistics
             super.dataProvider = param1;
         }
         
-        protected function adjustProviderItem(param1:StatisticChartInfo, param2:int) : void {
+        protected function adjustProviderItem(param1:StatisticChartInfo, param2:int) : void
+        {
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.mainHorizontalAxis = null;
             this.initializer.dispose();
             this.initializer = null;
             super.onDispose();
         }
         
-        override public function get width() : Number {
+        override public function get width() : Number
+        {
             return this.actualWidth;
         }
     }

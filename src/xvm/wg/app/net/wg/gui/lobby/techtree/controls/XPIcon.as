@@ -6,17 +6,20 @@ package net.wg.gui.lobby.techtree.controls
     public class XPIcon extends UIComponent
     {
         
-        public function XPIcon() {
+        public function XPIcon()
+        {
             super();
         }
         
         private var _type:String = null;
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             if(this._type == param1)
             {
                 return;
@@ -28,12 +31,14 @@ package net.wg.gui.lobby.techtree.controls
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             mouseEnabled = mouseChildren = focusable = false;
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.DATA))
             {
                 this.updateIcon();
@@ -41,7 +46,8 @@ package net.wg.gui.lobby.techtree.controls
             super.draw();
         }
         
-        private function updateIcon() : void {
+        private function updateIcon() : void
+        {
             if((_labelHash[this._type]) && !(this._type == currentFrameLabel))
             {
                 gotoAndStop(this._type);

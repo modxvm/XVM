@@ -6,7 +6,8 @@ package net.wg.gui.lobby.profile.headerBar
     public class ProfileTabButtonBg extends UIComponent
     {
         
-        public function ProfileTabButtonBg() {
+        public function ProfileTabButtonBg()
+        {
             super();
         }
         

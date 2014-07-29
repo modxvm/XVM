@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class BuildingProgressLblVO extends DAAPIDataClass
     {
         
-        public function BuildingProgressLblVO(param1:Object) {
+        public function BuildingProgressLblVO(param1:Object)
+        {
             super(param1);
         }
         

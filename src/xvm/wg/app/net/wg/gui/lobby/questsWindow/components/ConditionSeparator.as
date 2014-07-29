@@ -8,7 +8,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class ConditionSeparator extends AbstractResizableContent
     {
         
-        public function ConditionSeparator() {
+        public function ConditionSeparator()
+        {
             super();
         }
         
@@ -20,7 +21,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var data:ConditionSeparatorVO = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.separatorTF = null;
             if(this.data)
             {
@@ -30,7 +32,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(this.data)
             {
                 this.data.dispose();
@@ -39,7 +42,8 @@ package net.wg.gui.lobby.questsWindow.components
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.data))
             {
@@ -49,7 +53,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function layoutComponents() : void {
+        private function layoutComponents() : void
+        {
             if((isNumerated) && (this.data.needAlign))
             {
                 this.separatorTF.x = PADDING * 3;

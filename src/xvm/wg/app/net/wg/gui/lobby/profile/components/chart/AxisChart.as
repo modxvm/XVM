@@ -8,7 +8,8 @@ package net.wg.gui.lobby.profile.components.chart
     public class AxisChart extends ChartBase
     {
         
-        public function AxisChart() {
+        public function AxisChart()
+        {
             super();
         }
         
@@ -16,7 +17,8 @@ package net.wg.gui.lobby.profile.components.chart
         
         private var _horizontalAxisName:String;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA,LAYOUT_INV))
             {
@@ -24,18 +26,21 @@ package net.wg.gui.lobby.profile.components.chart
             }
         }
         
-        private function applyAxisUpdate() : void {
+        private function applyAxisUpdate() : void
+        {
             if(this._horizontalAxis)
             {
                 this._horizontalAxis.setData(dataProvider,_renderers,currentLayout);
             }
         }
         
-        public function get horizontalAxis() : IChartAxis {
+        public function get horizontalAxis() : IChartAxis
+        {
             return this._horizontalAxis;
         }
         
-        public function set horizontalAxis(param1:IChartAxis) : void {
+        public function set horizontalAxis(param1:IChartAxis) : void
+        {
             var _loc2_:DisplayObject = null;
             if(this._horizontalAxis != param1)
             {
@@ -54,11 +59,13 @@ package net.wg.gui.lobby.profile.components.chart
             }
         }
         
-        public function get horizontalAxisName() : String {
+        public function get horizontalAxisName() : String
+        {
             return this._horizontalAxisName;
         }
         
-        public function set horizontalAxisName(param1:String) : void {
+        public function set horizontalAxisName(param1:String) : void
+        {
             var _loc2_:IChartAxis = null;
             if(this._horizontalAxisName != param1)
             {
@@ -78,7 +85,8 @@ package net.wg.gui.lobby.profile.components.chart
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._horizontalAxis)
             {
                 this._horizontalAxis.dispose();

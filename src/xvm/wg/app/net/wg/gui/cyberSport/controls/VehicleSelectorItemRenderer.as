@@ -23,7 +23,8 @@ package net.wg.gui.cyberSport.controls
     public class VehicleSelectorItemRenderer extends ListItemRendererWithFocusOnDis
     {
         
-        public function VehicleSelectorItemRenderer() {
+        public function VehicleSelectorItemRenderer()
+        {
             this.statesSelectedNotReady = Vector.<String>(["notReady_selected_",""]);
             this.statesNotReady = Vector.<String>(["notReady_",""]);
             super();
@@ -37,261 +38,288 @@ package net.wg.gui.cyberSport.controls
         
         private static var MODE_SINGLE:String = "singleSelection";
         
-        private static var LAYOUT_CONFIG:Object;
-        
-        public var checkBox:CheckBox;
-        
-        public var flagLoader:UILoaderAlt;
-        
-        public var tankIcon:UILoaderAlt;
-        
-        public var vehicleTypeIcon:MovieClip;
-        
-        public var levelIcon:MovieClip;
-        
-        public var vehicleNameTF:TextField;
-        
-        public var notReadyAlert:MovieClip;
-        
-        public var bg:MovieClip;
-        
-        protected var model:VehicleSelectorItemVO;
-        
-        private var _multiSelectionMode:Boolean = false;
-        
-        private var _userVehiclesMode:Boolean = false;
-        
-        private var _isVehicleReady:Boolean = true;
-        
-        protected var statesSelectedNotReady:Vector.<String>;
-        
-        protected var statesNotReady:Vector.<String>;
-        
-        override protected function getStatePrefixes() : Vector.<String> {
-            var _loc2_:Vector.<String> = null;
-            var _loc1_:Boolean = this.model?this.model.selected:false;
-            _loc2_ = _loc1_?this._isVehicleReady?statesSelected:this.statesSelectedNotReady:this._isVehicleReady?statesDefault:this.statesNotReady;
-            var _loc3_:Boolean = _loc2_ == this.statesSelectedNotReady || _loc2_ == this.statesNotReady;
-            this.mouseChildren = true;
-            if(this.bg)
+        private static var LAYOUT_CONFIG:Object = {"multiSelection":{"flagX":40,
+        "vTypeX":78,
+        "vLevelX":110,
+        "vImageX":148,
+        "vNameX":222
+    },
+    "singleSelection":{"flagX":7,
+    "vTypeX":46,
+    "vLevelX":78,
+    "vImageX":116,
+    "vNameX":192
+}
+};
+
+public var checkBox:CheckBox;
+
+public var flagLoader:UILoaderAlt;
+
+public var tankIcon:UILoaderAlt;
+
+public var vehicleTypeIcon:MovieClip;
+
+public var levelIcon:MovieClip;
+
+public var vehicleNameTF:TextField;
+
+public var notReadyAlert:MovieClip;
+
+public var bg:MovieClip;
+
+protected var model:VehicleSelectorItemVO;
+
+private var _multiSelectionMode:Boolean = false;
+
+private var _userVehiclesMode:Boolean = false;
+
+private var _isVehicleReady:Boolean = true;
+
+protected var statesSelectedNotReady:Vector.<String>;
+
+protected var statesNotReady:Vector.<String>;
+
+override protected function getStatePrefixes() : Vector.<String>
+{
+var _loc2_:Vector.<String> = null;
+var _loc1_:Boolean = this.model?this.model.selected:false;
+_loc2_ = _loc1_?this._isVehicleReady?statesSelected:this.statesSelectedNotReady:this._isVehicleReady?statesDefault:this.statesNotReady;
+var _loc3_:Boolean = _loc2_ == this.statesSelectedNotReady || _loc2_ == this.statesNotReady;
+this.mouseChildren = true;
+if(this.bg)
+{
+    this.bg.mouseEnabled = false;
+}
+this.notReadyAlert.visible = _loc3_;
+this.notReadyAlert.buttonMode = (_loc3_) && (enabled);
+this.notReadyAlert.mouseEnabled = true;
+return _loc2_;
+}
+
+override public function setData(param1:Object) : void
+{
+var _loc2_:Point = null;
+var _loc3_:* = false;
+var _loc4_:* = false;
+this.model = param1 as VehicleSelectorItemVO;
+if(this.model)
+{
+    visible = true;
+    enabled = this.checkBox.enabled = this.model.enabled;
+    this._isVehicleReady = this._userVehiclesMode?this.model.isReadyToFight:true;
+    setState(state);
+    _loc2_ = new Point(mouseX,mouseY);
+    _loc2_ = localToGlobal(_loc2_);
+    _loc3_ = this.notReadyAlert.hitTestPoint(_loc2_.x,_loc2_.y,true);
+    _loc4_ = this.hitTestPoint(_loc2_.x,_loc2_.y,true);
+    if(_loc3_)
+    {
+        if(!this._isVehicleReady)
+        {
+            if((this.notReadyAlert.mouseEnabled) && (this.notReadyAlert.buttonMode))
             {
-                this.bg.mouseEnabled = false;
-            }
-            this.notReadyAlert.visible = _loc3_;
-            this.notReadyAlert.buttonMode = (_loc3_) && (enabled);
-            this.notReadyAlert.mouseEnabled = true;
-            return _loc2_;
-        }
-        
-        override public function setData(param1:Object) : void {
-            var _loc2_:Point = null;
-            var _loc3_:* = false;
-            var _loc4_:* = false;
-            this.model = param1 as VehicleSelectorItemVO;
-            if(this.model)
-            {
-                visible = true;
-                enabled = this.checkBox.enabled = this.model.enabled;
-                this._isVehicleReady = this._userVehiclesMode?this.model.isReadyToFight:true;
-                setState(state);
-                _loc2_ = new Point(mouseX,mouseY);
-                _loc2_ = localToGlobal(_loc2_);
-                _loc3_ = this.notReadyAlert.hitTestPoint(_loc2_.x,_loc2_.y,true);
-                _loc4_ = this.hitTestPoint(_loc2_.x,_loc2_.y,true);
-                if(_loc3_)
-                {
-                    if(!this._isVehicleReady)
-                    {
-                        if((this.notReadyAlert.mouseEnabled) && (this.notReadyAlert.buttonMode))
-                        {
-                            App.cursor.setCursor(Cursors.BUTTON);
-                        }
-                        else
-                        {
-                            App.cursor.setCursor(Cursors.ARROW);
-                        }
-                        App.toolTipMgr.show(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
-                    }
-                    else
-                    {
-                        App.toolTipMgr.hide();
-                    }
-                }
-                if((_loc4_) && !_loc3_)
-                {
-                    if((this.model && this.model.tooltip) && (!enabled) && !this.mouseOverAlert)
-                    {
-                        App.toolTipMgr.showComplex(this.model.tooltip);
-                    }
-                    else if(enabled)
-                    {
-                        App.toolTipMgr.hide();
-                    }
-                    
-                }
-                invalidateData();
+                App.cursor.setCursor(Cursors.BUTTON);
             }
             else
             {
-                visible = false;
+                App.cursor.setCursor(Cursors.ARROW);
             }
+            App.toolTipMgr.show(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
         }
-        
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
-            super.handleMouseRollOver(param1);
-            this.showDisabledToolTip();
-        }
-        
-        private var mouseOverAlert:Boolean = false;
-        
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
-            super.handleMouseRollOut(param1);
-            if(!enabled)
-            {
-                App.toolTipMgr.hide();
-            }
-        }
-        
-        private function onRollOverAlert(param1:MouseEvent) : void {
-            var _loc2_:ComplexTooltipHelper = null;
-            this.mouseOverAlert = true;
-            if(!enabled)
-            {
-                App.toolTipMgr.hide();
-            }
-            if((this.model.state) && !(this.model.state == Values.EMPTY_STR))
-            {
-                _loc2_ = new ComplexTooltipHelper();
-                _loc2_.addHeader(this.model.state);
-                _loc2_.addBody(TOOLTIPS.CYBERSPORT_UNIT_SLOT_VEHICLE_NOTREADY_TEMPORALLY_BODY,true);
-                App.toolTipMgr.showComplex(_loc2_.make());
-            }
-            else
-            {
-                App.toolTipMgr.show(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
-            }
-        }
-        
-        private function onRollOutAlert(param1:MouseEvent) : void {
-            this.mouseOverAlert = false;
+        else
+        {
             App.toolTipMgr.hide();
-            this.showDisabledToolTip();
-        }
-        
-        private function showDisabledToolTip() : void {
-            if((this.model && this.model.tooltip) && (!enabled) && !this.mouseOverAlert)
-            {
-                App.toolTipMgr.showComplex(this.model.tooltip);
-            }
-        }
-        
-        override protected function configUI() : void {
-            super.configUI();
-            this.checkBox.label = "";
-            addEventListener(ButtonEvent.CLICK,this.onClick);
-            addEventListener(MouseEvent.DOUBLE_CLICK,this.onDoubleClick);
-            this.updateModeLayout();
-        }
-        
-        private function updateModeLayout() : void {
-            var _loc2_:String = null;
-            var _loc3_:Object = null;
-            var _loc1_:VehicleSelector = owner.parent as VehicleSelector;
-            if(_loc1_)
-            {
-                this._multiSelectionMode = _loc1_.multiSelection;
-                this._userVehiclesMode = _loc1_.isUserVehiclesMode;
-                _loc2_ = this._multiSelectionMode?MODE_MULTI:MODE_SINGLE;
-                _loc3_ = LAYOUT_CONFIG[_loc2_];
-                this.flagLoader.x = _loc3_.flagX;
-                this.vehicleTypeIcon.x = _loc3_.vTypeX;
-                this.levelIcon.x = _loc3_.vLevelX;
-                this.tankIcon.x = _loc3_.vImageX;
-                this.vehicleNameTF.x = _loc3_.vNameX;
-                this.checkBox.visible = this._multiSelectionMode;
-            }
-        }
-        
-        private function onClick(param1:ButtonEvent) : void {
-            this.dispatchVehicleSelector(false);
-        }
-        
-        private function onDoubleClick(param1:MouseEvent) : void {
-            var _loc2_:MouseEventEx = param1 as MouseEventEx;
-            var _loc3_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
-            if(_loc3_ != MouseEventEx.LEFT_BUTTON)
-            {
-                return;
-            }
-            if(!this._multiSelectionMode)
-            {
-                this.dispatchVehicleSelector(true);
-            }
-        }
-        
-        private function dispatchVehicleSelector(param1:Boolean = false) : void {
-            this.model.selected = this._multiSelectionMode?!this.model.selected:true;
-            setState(state);
-            invalidate(InvalidationType.DATA);
-            dispatchEvent(new VehicleSelectorItemEvent(VehicleSelectorItemEvent.SELECT_VEHICLE,this.model,true,false,param1));
-            if(owner)
-            {
-                owner.invalidate(InvalidationType.STATE);
-            }
-        }
-        
-        override public function handleInput(param1:InputEvent) : void {
-            super.handleInput(param1);
-            var _loc2_:InputDetails = param1.details;
-            if(!enabled)
-            {
-                return;
-            }
-            switch(_loc2_.navEquivalent)
-            {
-                case NavigationCode.ENTER:
-                    if(_loc2_.value == InputValue.KEY_DOWN && !this._multiSelectionMode)
-                    {
-                        this.dispatchVehicleSelector(true);
-                    }
-                    break;
-            }
-        }
-        
-        override protected function draw() : void {
-            super.draw();
-            if(isInvalid(InvalidationType.STATE))
-            {
-                if(this.bg)
-                {
-                    this.bg.mouseEnabled = false;
-                }
-            }
-            if((isInvalid(InvalidationType.DATA)) && (this.model))
-            {
-                this.checkBox.selected = this.model.selected;
-                this.vehicleNameTF.text = this.model.shortUserName;
-                this.vehicleTypeIcon.gotoAndStop(this.model.type);
-                this.levelIcon.gotoAndStop(this.model.level);
-                this.flagLoader.source = "../maps/icons/filters/nations/" + App.utils.nations.getNationName(this.model.nationID) + ".png";
-                this.tankIcon.source = this.model.smallIconPath;
-            }
-        }
-        
-        override protected function onDispose() : void {
-            removeEventListener(ButtonEvent.CLICK,this.onClick);
-            removeEventListener(MouseEvent.DOUBLE_CLICK,this.onDoubleClick);
-            if(this.model)
-            {
-                this.model.dispose();
-                this.model = null;
-            }
-            this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverAlert);
-            this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutAlert);
-            this.checkBox.dispose();
-            this.flagLoader.dispose();
-            this.tankIcon.dispose();
-            super.onDispose();
         }
     }
+    if((_loc4_) && !_loc3_)
+    {
+        if((this.model && this.model.tooltip) && (!enabled) && !this.mouseOverAlert)
+        {
+            App.toolTipMgr.showComplex(this.model.tooltip);
+        }
+        else if(enabled)
+        {
+            App.toolTipMgr.hide();
+        }
+        
+    }
+    invalidateData();
+}
+else
+{
+    visible = false;
+}
+}
+
+override protected function handleMouseRollOver(param1:MouseEvent) : void
+{
+super.handleMouseRollOver(param1);
+this.showDisabledToolTip();
+}
+
+private var mouseOverAlert:Boolean = false;
+
+override protected function handleMouseRollOut(param1:MouseEvent) : void
+{
+super.handleMouseRollOut(param1);
+if(!enabled)
+{
+    App.toolTipMgr.hide();
+}
+}
+
+private function onRollOverAlert(param1:MouseEvent) : void
+{
+var _loc2_:ComplexTooltipHelper = null;
+this.mouseOverAlert = true;
+if(!enabled)
+{
+    App.toolTipMgr.hide();
+}
+if((this.model.state) && !(this.model.state == Values.EMPTY_STR))
+{
+    _loc2_ = new ComplexTooltipHelper();
+    _loc2_.addHeader(this.model.state);
+    _loc2_.addBody(TOOLTIPS.CYBERSPORT_UNIT_SLOT_VEHICLE_NOTREADY_TEMPORALLY_BODY,true);
+    App.toolTipMgr.showComplex(_loc2_.make());
+}
+else
+{
+    App.toolTipMgr.show(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
+}
+}
+
+private function onRollOutAlert(param1:MouseEvent) : void
+{
+this.mouseOverAlert = false;
+App.toolTipMgr.hide();
+this.showDisabledToolTip();
+}
+
+private function showDisabledToolTip() : void
+{
+if((this.model && this.model.tooltip) && (!enabled) && !this.mouseOverAlert)
+{
+    App.toolTipMgr.showComplex(this.model.tooltip);
+}
+}
+
+override protected function configUI() : void
+{
+super.configUI();
+this.checkBox.label = "";
+addEventListener(ButtonEvent.CLICK,this.onClick);
+addEventListener(MouseEvent.DOUBLE_CLICK,this.onDoubleClick);
+this.updateModeLayout();
+}
+
+private function updateModeLayout() : void
+{
+var _loc2_:String = null;
+var _loc3_:Object = null;
+var _loc1_:VehicleSelector = owner.parent as VehicleSelector;
+if(_loc1_)
+{
+    this._multiSelectionMode = _loc1_.multiSelection;
+    this._userVehiclesMode = _loc1_.isUserVehiclesMode;
+    _loc2_ = this._multiSelectionMode?MODE_MULTI:MODE_SINGLE;
+    _loc3_ = LAYOUT_CONFIG[_loc2_];
+    this.flagLoader.x = _loc3_.flagX;
+    this.vehicleTypeIcon.x = _loc3_.vTypeX;
+    this.levelIcon.x = _loc3_.vLevelX;
+    this.tankIcon.x = _loc3_.vImageX;
+    this.vehicleNameTF.x = _loc3_.vNameX;
+    this.checkBox.visible = this._multiSelectionMode;
+}
+}
+
+private function onClick(param1:ButtonEvent) : void
+{
+this.dispatchVehicleSelector(false);
+}
+
+private function onDoubleClick(param1:MouseEvent) : void
+{
+var _loc2_:MouseEventEx = param1 as MouseEventEx;
+var _loc3_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
+if(_loc3_ != MouseEventEx.LEFT_BUTTON)
+{
+    return;
+}
+if(!this._multiSelectionMode)
+{
+    this.dispatchVehicleSelector(true);
+}
+}
+
+private function dispatchVehicleSelector(param1:Boolean = false) : void
+{
+this.model.selected = this._multiSelectionMode?!this.model.selected:true;
+setState(state);
+invalidate(InvalidationType.DATA);
+dispatchEvent(new VehicleSelectorItemEvent(VehicleSelectorItemEvent.SELECT_VEHICLE,this.model,true,false,param1));
+if(owner)
+{
+    owner.invalidate(InvalidationType.STATE);
+}
+}
+
+override public function handleInput(param1:InputEvent) : void
+{
+super.handleInput(param1);
+var _loc2_:InputDetails = param1.details;
+if(!enabled)
+{
+    return;
+}
+switch(_loc2_.navEquivalent)
+{
+    case NavigationCode.ENTER:
+        if(_loc2_.value == InputValue.KEY_DOWN && !this._multiSelectionMode)
+        {
+            this.dispatchVehicleSelector(true);
+        }
+        break;
+}
+}
+
+override protected function draw() : void
+{
+super.draw();
+if(isInvalid(InvalidationType.STATE))
+{
+    if(this.bg)
+    {
+        this.bg.mouseEnabled = false;
+    }
+}
+if((isInvalid(InvalidationType.DATA)) && (this.model))
+{
+    this.checkBox.selected = this.model.selected;
+    this.vehicleNameTF.text = this.model.shortUserName;
+    this.vehicleTypeIcon.gotoAndStop(this.model.type);
+    this.levelIcon.gotoAndStop(this.model.level);
+    this.flagLoader.source = "../maps/icons/filters/nations/" + App.utils.nations.getNationName(this.model.nationID) + ".png";
+    this.tankIcon.source = this.model.smallIconPath;
+}
+}
+
+override protected function onDispose() : void
+{
+removeEventListener(ButtonEvent.CLICK,this.onClick);
+removeEventListener(MouseEvent.DOUBLE_CLICK,this.onDoubleClick);
+if(this.model)
+{
+    this.model.dispose();
+    this.model = null;
+}
+this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverAlert);
+this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutAlert);
+this.checkBox.dispose();
+this.flagLoader.dispose();
+this.tankIcon.dispose();
+super.onDispose();
+}
+}
 }

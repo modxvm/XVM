@@ -5,7 +5,8 @@ package net.wg.gui.lobby.retrainCrewWindow
     public class RetrainVehicleBlockVO extends VehicleBlockVO
     {
         
-        public function RetrainVehicleBlockVO(param1:Object) {
+        public function RetrainVehicleBlockVO(param1:Object)
+        {
             super(param1);
         }
         

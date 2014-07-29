@@ -8,21 +8,25 @@ package net.wg.gui.components.common.video.advanced
     public class VideoPlayerControlBar extends UIComponent
     {
         
-        public function VideoPlayerControlBar() {
+        public function VideoPlayerControlBar()
+        {
             super();
         }
         
-        private static function formatTime(param1:Number) : String {
+        private static function formatTime(param1:Number) : String
+        {
             var _loc2_:Number = Math.floor(param1 / 60);
             var _loc3_:Number = Math.floor(param1 % 60);
             return (_loc2_ > 9?_loc2_.toString():"0" + _loc2_.toString()) + ":" + (_loc3_ > 9?_loc3_.toString():"0" + _loc3_.toString());
         }
         
-        private static function htmlFormatTime(param1:Number, param2:Number) : String {
+        private static function htmlFormatTime(param1:Number, param2:Number) : String
+        {
             return "<font color=\'#fffff2\'>" + formatTime(param1) + "</font> / " + formatTime(param2);
         }
         
-        private static function disposeObj(param1:UIComponent) : void {
+        private static function disposeObj(param1:UIComponent) : void
+        {
             if(param1)
             {
                 param1.dispose();
@@ -55,7 +59,8 @@ package net.wg.gui.components.common.video.advanced
         
         private var _totalTime:Number = 0;
         
-        public function get volume() : Number {
+        public function get volume() : Number
+        {
             if(this.soundSlider)
             {
                 return this.soundSlider.value;
@@ -63,7 +68,8 @@ package net.wg.gui.components.common.video.advanced
             return this._volume;
         }
         
-        public function set volume(param1:Number) : void {
+        public function set volume(param1:Number) : void
+        {
             var param1:Number = isNaN(param1)?0:param1;
             if(this.volume == param1)
             {
@@ -74,7 +80,8 @@ package net.wg.gui.components.common.video.advanced
             invalidate();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(this.isVolumeInvalid)
             {
@@ -93,25 +100,29 @@ package net.wg.gui.components.common.video.advanced
             }
         }
         
-        public function set showPlayBtn(param1:Boolean) : void {
+        public function set showPlayBtn(param1:Boolean) : void
+        {
             this._showPlayBtn = param1;
             this.isPlayButtonStateChanged = true;
             invalidate();
         }
         
-        public function set currentTime(param1:Number) : void {
+        public function set currentTime(param1:Number) : void
+        {
             this._currentTime = param1;
             this.isTimeChanged = true;
             invalidate();
         }
         
-        public function set totalTime(param1:Number) : void {
+        public function set totalTime(param1:Number) : void
+        {
             this._totalTime = param1;
             this.isTimeChanged = true;
             invalidate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             disposeObj(this.playButton);
             disposeObj(this.repeatButton);

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.store
     public class StoreEvent extends Event
     {
         
-        public function StoreEvent(param1:String, param2:StoreTableData) {
+        public function StoreEvent(param1:String, param2:StoreTableData)
+        {
             super(param1,true,true);
             this._data = param2;
         }
@@ -19,7 +20,8 @@ package net.wg.gui.lobby.store
         
         private var _data:StoreTableData = null;
         
-        public function get data() : StoreTableData {
+        public function get data() : StoreTableData
+        {
             return this._data;
         }
     }

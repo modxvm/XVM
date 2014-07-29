@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class VoiceChatManagerMeta extends BaseDAAPIModule
     {
         
-        public function VoiceChatManagerMeta() {
+        public function VoiceChatManagerMeta()
+        {
             super();
         }
         
@@ -18,22 +19,26 @@ package net.wg.infrastructure.base.meta.impl
         
         public var isVOIPEnabled:Function = null;
         
-        public function isPlayerSpeakingS(param1:Number) : Boolean {
+        public function isPlayerSpeakingS(param1:Number) : Boolean
+        {
             App.utils.asserter.assertNotNull(this.isPlayerSpeaking,"isPlayerSpeaking" + Errors.CANT_NULL);
             return this.isPlayerSpeaking(param1);
         }
         
-        public function isVivoxS() : Boolean {
+        public function isVivoxS() : Boolean
+        {
             App.utils.asserter.assertNotNull(this.isVivox,"isVivox" + Errors.CANT_NULL);
             return this.isVivox();
         }
         
-        public function isYYS() : Boolean {
+        public function isYYS() : Boolean
+        {
             App.utils.asserter.assertNotNull(this.isYY,"isYY" + Errors.CANT_NULL);
             return this.isYY();
         }
         
-        public function isVOIPEnabledS() : Boolean {
+        public function isVOIPEnabledS() : Boolean
+        {
             App.utils.asserter.assertNotNull(this.isVOIPEnabled,"isVOIPEnabled" + Errors.CANT_NULL);
             return this.isVOIPEnabled();
         }

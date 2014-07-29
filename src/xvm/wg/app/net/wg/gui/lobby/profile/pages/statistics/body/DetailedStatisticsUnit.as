@@ -10,7 +10,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class DetailedStatisticsUnit extends UIComponent
     {
         
-        public function DetailedStatisticsUnit() {
+        public function DetailedStatisticsUnit()
+        {
             super();
         }
         
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
         
         private var _itemRendererClass:Class;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc1_:Vertical100PercWidthLayout = null;
             super.configUI();
             if(!this.group)
@@ -39,11 +41,13 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             }
         }
         
-        private function resizeHandeler(param1:Event) : void {
+        private function resizeHandeler(param1:Event) : void
+        {
             dispatchEvent(new Event(Event.RESIZE,true));
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(RENDERER_INVALID))
             {
@@ -61,12 +65,14 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             }
         }
         
-        public function set data(param1:DetailedStatisticsUnitVO) : void {
+        public function set data(param1:DetailedStatisticsUnitVO) : void
+        {
             this._data = param1;
             invalidateData();
         }
         
-        public function set itemRendererClass(param1:Class) : void {
+        public function set itemRendererClass(param1:Class) : void
+        {
             if(this._itemRendererClass != param1)
             {
                 this._itemRendererClass = param1;
@@ -74,17 +80,20 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             }
         }
         
-        override public function set width(param1:Number) : void {
+        override public function set width(param1:Number) : void
+        {
             super.width = param1;
             this.group.width = param1;
             this.group.invalidateLayout();
         }
         
-        override public function get height() : Number {
+        override public function get height() : Number
+        {
             return actualHeight;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._itemRendererClass = null;
             if(this.group)
             {

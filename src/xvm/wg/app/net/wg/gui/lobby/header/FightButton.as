@@ -18,11 +18,13 @@ package net.wg.gui.lobby.header
     public class FightButton extends FightButtonMeta implements IHelpLayoutComponent, IFightButtonMeta
     {
         
-        public function FightButton() {
+        public function FightButton()
+        {
             super();
         }
         
-        private static function hideTooltip(param1:Event) : void {
+        private static function hideTooltip(param1:Event) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -54,7 +56,8 @@ package net.wg.gui.lobby.header
         
         private var _isInCoolDown:Boolean = false;
         
-        public function as_disableFightButton(param1:Boolean, param2:String) : void {
+        public function as_disableFightButton(param1:Boolean, param2:String) : void
+        {
             this._actualEnabledVal = !param1;
             this.button.enabled = !this._isInCoolDown?this._actualEnabledVal:!this._isInCoolDown;
             this.button.validateNow();
@@ -65,19 +68,22 @@ package net.wg.gui.lobby.header
             App.toolTipMgr.hide();
         }
         
-        public function as_setCoolDownForReady(param1:uint) : void {
+        public function as_setCoolDownForReady(param1:uint) : void
+        {
             this._isInCoolDown = true;
             App.utils.scheduler.cancelTask(this.stopReadyCoolDown);
             this.button.enabled = false;
             App.utils.scheduler.scheduleTask(this.stopReadyCoolDown,param1 * 1000);
         }
         
-        private function stopReadyCoolDown() : void {
+        private function stopReadyCoolDown() : void
+        {
             this._isInCoolDown = false;
             this.button.enabled = this._actualEnabledVal;
         }
         
-        public function as_setFightButton(param1:String, param2:String, param3:Array, param4:Boolean) : void {
+        public function as_setFightButton(param1:String, param2:String, param3:Array, param4:Boolean) : void
+        {
             this.button.label = param1;
             this.button.validateNow();
             this.dropDownButtonLabel = param2?param2:MENU.HEADERBUTTONS_BATTLE;
@@ -86,12 +92,14 @@ package net.wg.gui.lobby.header
             invalidate();
         }
         
-        public function as_setDemonstratorButton(param1:Boolean) : void {
+        public function as_setDemonstratorButton(param1:Boolean) : void
+        {
             this.demonstrationButton.visible = param1;
             this.demonstrationButton.enabled = this.button.enabled;
         }
         
-        public function showHelpLayout() : void {
+        public function showHelpLayout() : void
+        {
             App.popoverMgr.hide();
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             var _loc2_:Object = _loc1_.getProps(152,37,Directions.LEFT,LOBBY_HELP.HEADER_FIGHT_BUTTON,0,0);
@@ -100,13 +108,15 @@ package net.wg.gui.lobby.header
             this._dropDownHelpLayout = _loc1_.create(root,_loc2_,this.buttondropdown);
         }
         
-        public function closeHelpLayout() : void {
+        public function closeHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             _loc1_.destroy(this._buttonHelpLayout);
             _loc1_.destroy(this._dropDownHelpLayout);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.button)
             {
@@ -127,7 +137,8 @@ package net.wg.gui.lobby.header
             this._dropDownHelpLayout = null;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(this.button)
             {
                 this.button.label = MENU.HEADERBUTTONS_BATTLE;
@@ -152,7 +163,8 @@ package net.wg.gui.lobby.header
             this.demonstrationButton.addEventListener(ButtonEvent.CLICK,this.onDemoClick);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(this.isMainButtonLabelInvalid)
             {
@@ -168,22 +180,26 @@ package net.wg.gui.lobby.header
             }
         }
         
-        private function onDemoClick(param1:ButtonEvent) : void {
+        private function onDemoClick(param1:ButtonEvent) : void
+        {
             demoClickS();
         }
         
-        private function onClick(param1:ButtonEvent) : void {
+        private function onClick(param1:ButtonEvent) : void
+        {
             fightClickS(0,"");
         }
         
-        private function showTooltip(param1:Event) : void {
+        private function showTooltip(param1:Event) : void
+        {
             if((this.button) && (this.toolTip))
             {
                 App.toolTipMgr.showComplex(this.toolTip,TooltipProps.WARNING);
             }
         }
         
-        private function onSelectToggle(param1:FightButtonEvent) : void {
+        private function onSelectToggle(param1:FightButtonEvent) : void
+        {
             if(param1.target.selected)
             {
                 this._actualEnabledVal = this.button.enabled;

@@ -12,7 +12,8 @@ package net.wg.gui.components.common
     public class ConfirmItemComponent extends UIComponent
     {
         
-        public function ConfirmItemComponent() {
+        public function ConfirmItemComponent()
+        {
             super();
         }
         
@@ -48,7 +49,8 @@ package net.wg.gui.components.common
         
         public var dropdownMenu:DropdownMenu = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.submitBtn)
             {
                 this.submitBtn.dispose();

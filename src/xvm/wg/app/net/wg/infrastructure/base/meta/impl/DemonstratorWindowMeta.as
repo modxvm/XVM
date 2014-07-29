@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class DemonstratorWindowMeta extends AbstractWindowView
     {
         
-        public function DemonstratorWindowMeta() {
+        public function DemonstratorWindowMeta()
+        {
             super();
         }
         
         public var onMapSelected:Function = null;
         
-        public function onMapSelectedS(param1:Number) : void {
+        public function onMapSelectedS(param1:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.onMapSelected,"onMapSelected" + Errors.CANT_NULL);
             this.onMapSelected(param1);
         }

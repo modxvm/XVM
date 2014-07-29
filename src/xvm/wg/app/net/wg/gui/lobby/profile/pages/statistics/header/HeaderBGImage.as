@@ -6,13 +6,15 @@ package net.wg.gui.lobby.profile.pages.statistics.header
     public class HeaderBGImage extends UIComponent
     {
         
-        public function HeaderBGImage() {
+        public function HeaderBGImage()
+        {
             super();
         }
         
         public var separator:MovieClip;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.separator = null;
             super.onDispose();
         }

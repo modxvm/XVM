@@ -17,7 +17,8 @@ package net.wg.gui.cyberSport.views
     public class IntroView extends CyberSportIntroMeta implements ICyberSportIntroMeta, IBaseRallyViewMeta
     {
         
-        public function IntroView() {
+        public function IntroView()
+        {
             this._selectedVehicles = [];
             super();
         }
@@ -40,18 +41,21 @@ package net.wg.gui.cyberSport.views
         
         private var _readyVehiclesSelected:Boolean = false;
         
-        public function as_setSelectedVehicles(param1:Array, param2:String, param3:Boolean) : void {
+        public function as_setSelectedVehicles(param1:Array, param2:String, param3:Boolean) : void
+        {
             this._selectedVehicles = param1;
             this._readyVehiclesSelected = param3;
             this.selectedVehiclesInfo.update(param2,!param3);
             invalidateData();
         }
         
-        override protected function getRallyViewAlias() : String {
+        override protected function getRallyViewAlias() : String
+        {
             return CYBER_SPORT_ALIASES.UNIT_VIEW_UI;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             titleLbl.text = CYBERSPORT.WINDOW_INTRO_TITLE;
             descrLbl.text = CYBERSPORT.WINDOW_INTRO_DESCRIPTION;
@@ -71,17 +75,20 @@ package net.wg.gui.cyberSport.views
             this.selectedVehiclesInfo.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.autoMatchBtn.enabled = this._readyVehiclesSelected;
             this.autoMatchBtn.mouseChildren = true;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.autoMatchBtn.removeEventListener(ButtonEvent.CLICK,this.onAutoSearchClick);
             this.autoMatchBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
             this.autoMatchBtn.removeEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
@@ -97,7 +104,8 @@ package net.wg.gui.cyberSport.views
             super.onDispose();
         }
         
-        override protected function onControlRollOver(param1:MouseEvent) : void {
+        override protected function onControlRollOver(param1:MouseEvent) : void
+        {
             var _loc2_:* = "";
             var _loc3_:* = "";
             switch(param1.currentTarget)
@@ -122,24 +130,25 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        private function onAutoSearchClick(param1:ButtonEvent) : void {
-            dispatchEvent(new CSComponentEvent(CSComponentEvent.SHOW_AUTO_SEARCH_VIEW,{
-                "state":CYBER_SPORT_ALIASES.INTRO_VIEW_UI,
-                "cmpDescr":this._selectedVehicles
-            }));
+        private function onAutoSearchClick(param1:ButtonEvent) : void
+        {
+            dispatchEvent(new CSComponentEvent(CSComponentEvent.SHOW_AUTO_SEARCH_VIEW,{"state":CYBER_SPORT_ALIASES.INTRO_VIEW_UI,
+            "cmpDescr":this._selectedVehicles
+        }));
     }
     
-    override protected function onListRoomBtnClick(param1:ButtonEvent) : void {
-        var _loc2_:Object = {
-            "alias":CYBER_SPORT_ALIASES.UNITS_LIST_VIEW_UI,
-            "itemId":Number.NaN,
-            "peripheryID":0,
-            "slotIndex":-1
-        };
+    override protected function onListRoomBtnClick(param1:ButtonEvent) : void
+    {
+        var _loc2_:Object = {"alias":CYBER_SPORT_ALIASES.UNITS_LIST_VIEW_UI,
+        "itemId":Number.NaN,
+        "peripheryID":0,
+        "slotIndex":-1
+    };
     dispatchEvent(new RallyViewsEvent(RallyViewsEvent.LOAD_VIEW_REQUEST,_loc2_));
 }
 
-private function csVehicleBtnOnClick(param1:ButtonEvent) : void {
+private function csVehicleBtnOnClick(param1:ButtonEvent) : void
+{
     showSelectorPopupS();
 }
 }

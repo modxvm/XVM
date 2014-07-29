@@ -9,13 +9,15 @@ package net.wg.gui.login.impl
     public class Spark extends Sprite implements IDisposable
     {
         
-        public function Spark(param1:Rectangle, param2:String) {
+        public function Spark(param1:Rectangle, param2:String)
+        {
             this.zone = param1;
             this.name = param2;
             super();
         }
         
-        private static function randRange(param1:Number, param2:Number) : Number {
+        private static function randRange(param1:Number, param2:Number) : Number
+        {
             var _loc3_:Number = Math.random() * (param2 - param1) + param1;
             return _loc3_;
         }
@@ -24,15 +26,18 @@ package net.wg.gui.login.impl
         
         public var sparkAnimation:MovieClip = null;
         
-        public function set zone(param1:Rectangle) : void {
+        public function set zone(param1:Rectangle) : void
+        {
             this._zone = param1;
         }
         
-        public function get zone() : Rectangle {
+        public function get zone() : Rectangle
+        {
             return this._zone;
         }
         
-        public function startAnimation(param1:Event = null) : void {
+        public function startAnimation(param1:Event = null) : void
+        {
             var _loc2_:* = NaN;
             removeEventListener(Event.ADDED_TO_STAGE,this.startAnimation,false);
             if(stage)
@@ -48,11 +53,13 @@ package net.wg.gui.login.impl
             }
         }
         
-        private function sparkAnimationDispatch() : void {
+        private function sparkAnimationDispatch() : void
+        {
             this.reposition();
         }
         
-        private function reposition() : void {
+        private function reposition() : void
+        {
             var _loc1_:Number = 1;
             if(Math.random() > 0.75)
             {
@@ -69,7 +76,8 @@ package net.wg.gui.login.impl
             rotation = randRange(-120,-100);
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             removeEventListener(Event.ADDED_TO_STAGE,this.startAnimation);
             this.zone = null;
             this.sparkAnimation.stop();

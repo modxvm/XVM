@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips.VO
     public class HistoricalModulesVO extends DAAPIDataClass
     {
         
-        public function HistoricalModulesVO(param1:Object) {
+        public function HistoricalModulesVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.components.tooltips.VO
         
         public var modules:Array = null;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:Object = null;
             var _loc5_:ModuleVO = null;
@@ -33,12 +35,14 @@ package net.wg.gui.components.tooltips.VO
             return true;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeModules();
             super.onDispose();
         }
         
-        private function disposeModules() : void {
+        private function disposeModules() : void
+        {
             var _loc1_:ModuleVO = null;
             if(this.modules)
             {

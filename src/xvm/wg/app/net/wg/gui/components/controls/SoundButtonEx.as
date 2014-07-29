@@ -15,7 +15,8 @@ package net.wg.gui.components.controls
     public class SoundButtonEx extends SoundButton implements ISoundButtonEx
     {
         
-        public function SoundButtonEx() {
+        public function SoundButtonEx()
+        {
             super();
         }
         
@@ -45,7 +46,8 @@ package net.wg.gui.components.controls
         
         public var _textColor:Number;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(!constraintsDisabled)
             {
@@ -63,7 +65,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
             removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
             removeEventListener(MouseEvent.MOUSE_DOWN,this.handleMouseDown);
@@ -80,53 +83,64 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        public function get helpText() : String {
+        public function get helpText() : String
+        {
             return this._helpText;
         }
         
-        public function set helpText(param1:String) : void {
+        public function set helpText(param1:String) : void
+        {
             this._helpText = param1;
         }
         
-        public function get helpDirection() : String {
+        public function get helpDirection() : String
+        {
             return this._helpDirection;
         }
         
-        public function set helpDirection(param1:String) : void {
+        public function set helpDirection(param1:String) : void
+        {
             this._helpDirection = param1;
         }
         
-        public function get helpConnectorLength() : Number {
+        public function get helpConnectorLength() : Number
+        {
             return this._helpConnectorLength;
         }
         
-        public function set helpConnectorLength(param1:Number) : void {
+        public function set helpConnectorLength(param1:Number) : void
+        {
             this._helpConnectorLength = param1;
         }
         
-        public function showTooltip(param1:MouseEvent) : void {
+        public function showTooltip(param1:MouseEvent) : void
+        {
             if((this._tooltip) && (App.toolTipMgr))
             {
                 App.toolTipMgr.showComplex(this._tooltip);
             }
         }
         
-        public function hideTooltip(param1:MouseEvent) : void {
+        public function hideTooltip(param1:MouseEvent) : void
+        {
             if(App.toolTipMgr)
             {
                 App.toolTipMgr.hide();
             }
         }
         
-        public function handleMouseDown(param1:MouseEvent) : void {
+        public function handleMouseDown(param1:MouseEvent) : void
+        {
             this.hideTooltip(param1);
         }
         
-        public function get fillPadding() : Number {
+        public function get fillPadding() : Number
+        {
             return this._fillPadding;
         }
         
-        public function set fillPadding(param1:Number) : void {
+        public function set fillPadding(param1:Number) : void
+        {
             if(param1 == this._fillPadding)
             {
                 return;
@@ -134,7 +148,8 @@ package net.wg.gui.components.controls
             this._fillPadding = param1;
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             super.updateText();
             if(_label != null)
             {
@@ -145,11 +160,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get textColor() : Number {
+        public function get textColor() : Number
+        {
             return this._textColor;
         }
         
-        public function set textColor(param1:Number) : void {
+        public function set textColor(param1:Number) : void
+        {
             if(this._textColor == param1)
             {
                 return;
@@ -158,11 +175,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get tooltip() : String {
+        public function get tooltip() : String
+        {
             return this._tooltip;
         }
         
-        public function set tooltip(param1:String) : void {
+        public function set tooltip(param1:String) : void
+        {
             if(this._tooltip == param1)
             {
                 return;
@@ -171,39 +190,43 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function showHelpLayout() : void {
+        public function showHelpLayout() : void
+        {
             var _loc1_:Object = null;
             if(this._helpText.length > 0)
             {
-                _loc1_ = {
-                    "borderWidth":width,
-                    "borderHeight":height,
-                    "direction":this._helpDirection,
-                    "text":this._helpText,
-                    "x":0,
-                    "y":0,
-                    "connectorLength":this._helpConnectorLength
-                };
+                _loc1_ = {"borderWidth":width,
+                "borderHeight":height,
+                "direction":this._helpDirection,
+                "text":this._helpText,
+                "x":0,
+                "y":0,
+                "connectorLength":this._helpConnectorLength
+            };
             this.setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
         }
     }
     
-    public function closeHelpLayout() : void {
+    public function closeHelpLayout() : void
+    {
         if(this.getHelpLayout() != null)
         {
             App.utils.helpLayout.destroy(this.getHelpLayout());
         }
     }
     
-    protected function getHelpLayout() : DisplayObject {
+    protected function getHelpLayout() : DisplayObject
+    {
         return this._helpLayout;
     }
     
-    protected function setHelpLayout(param1:DisplayObject) : void {
+    protected function setHelpLayout(param1:DisplayObject) : void
+    {
         this._helpLayout = param1;
     }
     
-    override protected function updateAfterStateChange() : void {
+    override protected function updateAfterStateChange() : void
+    {
         if(!initialized)
         {
             return;
@@ -222,7 +245,8 @@ package net.wg.gui.components.controls
         dispatchEvent(new StateManagerEvent(ComponentEvent.STATE_CHANGE,state));
     }
     
-    protected function updateDisable() : void {
+    protected function updateDisable() : void
+    {
         if(this.disableMc != null)
         {
             this.disableMc.visible = !enabled;
@@ -234,11 +258,13 @@ package net.wg.gui.components.controls
         }
     }
     
-    public function get paddingHorizontal() : Number {
+    public function get paddingHorizontal() : Number
+    {
         return this._paddingHorizontal;
     }
     
-    public function set paddingHorizontal(param1:Number) : void {
+    public function set paddingHorizontal(param1:Number) : void
+    {
         this._paddingHorizontal = param1;
         if(!(autoSize == "none") && !(textField == null) && (initialized))
         {
@@ -247,7 +273,8 @@ package net.wg.gui.components.controls
         this.updateAfterStateChange();
     }
     
-    override protected function calculateWidth() : Number {
+    override protected function calculateWidth() : Number
+    {
         var _loc2_:* = NaN;
         var _loc3_:ConstrainedElement = null;
         var _loc1_:Number = actualWidth;
@@ -264,11 +291,13 @@ package net.wg.gui.components.controls
         return _loc1_;
     }
     
-    override public function toString() : String {
+    override public function toString() : String
+    {
         return "[WG SoundButtonEx " + name + "]";
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         if(isInvalid(InvalidationType.STATE))
         {
             if(_newFrame)

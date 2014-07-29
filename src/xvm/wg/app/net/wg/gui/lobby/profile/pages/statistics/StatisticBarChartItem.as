@@ -15,7 +15,8 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class StatisticBarChartItem extends FrameChartItem
     {
         
-        public function StatisticBarChartItem() {
+        public function StatisticBarChartItem()
+        {
             this.tweenManager = new ExcludeTweenManager();
             super();
             this.animationClient = new StatisticsChartItemAnimClient(this);
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         protected static var tweeSpeed:uint = 500;
         
-        private static function hideToolTip() : void {
+        private static function hideToolTip() : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -40,23 +42,28 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         private var animationClient:StatisticsChartItemAnimClient;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.textField.autoSize = TextFieldAutoSize.LEFT;
         }
         
-        protected function mouseRollOutHandler(param1:MouseEvent) : void {
+        protected function mouseRollOutHandler(param1:MouseEvent) : void
+        {
             hideToolTip();
         }
         
-        protected function mouseRollOverHandler(param1:MouseEvent) : void {
+        protected function mouseRollOverHandler(param1:MouseEvent) : void
+        {
             this.showToolTip(null);
         }
         
-        protected function showToolTip(param1:IToolTipParams) : void {
+        protected function showToolTip(param1:IToolTipParams) : void
+        {
         }
         
-        override protected function applyValueChange() : void {
+        override protected function applyValueChange() : void
+        {
             var _loc1_:Object = {};
             _loc1_[StatisticsChartItemAnimClient.FRAME_NUMBER_PROPERTY] = value + 1;
             var _loc2_:Number = Number(StatisticChartInfo(_data).yField);
@@ -64,31 +71,37 @@ package net.wg.gui.lobby.profile.pages.statistics
             this.tweenManager.registerAndLaunch(tweeSpeed,this.animationClient,_loc1_,this.getQuickSet());
         }
         
-        protected function getQuickSet() : Object {
+        protected function getQuickSet() : Object
+        {
             var _loc1_:Object = {};
             _loc1_.ease = Strong.easeOut;
             _loc1_.onComplete = this.onTweenComplete;
             return _loc1_;
         }
         
-        private function onTweenComplete(param1:Tween) : void {
+        private function onTweenComplete(param1:Tween) : void
+        {
             this.tweenManager.unregister(param1);
         }
         
-        public function getThumbDimensions() : Point {
+        public function getThumbDimensions() : Point
+        {
             return new Point(this.background.width,this.background.height);
         }
         
-        private function disposeHandlers() : void {
+        private function disposeHandlers() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
             removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
         }
         
-        public function get tooltip() : String {
+        public function get tooltip() : String
+        {
             return this._tooltip;
         }
         
-        public function set tooltip(param1:String) : void {
+        public function set tooltip(param1:String) : void
+        {
             this._tooltip = param1;
             this.disposeHandlers();
             if(this._tooltip)
@@ -98,7 +111,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.mcMask = null;
             this.textField = null;
             this.background = null;

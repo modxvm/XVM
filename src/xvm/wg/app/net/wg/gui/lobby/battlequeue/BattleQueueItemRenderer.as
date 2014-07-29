@@ -8,7 +8,8 @@ package net.wg.gui.lobby.battlequeue
     public class BattleQueueItemRenderer extends UIComponent implements IListItemRenderer
     {
         
-        public function BattleQueueItemRenderer() {
+        public function BattleQueueItemRenderer()
+        {
             super();
         }
         
@@ -26,16 +27,19 @@ package net.wg.gui.lobby.battlequeue
         
         public var countField:TextField;
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidate();
         }
         
-        public function getData() : Object {
+        public function getData() : Object
+        {
             return this.data;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(this.data)
             {
                 if((this.textField) && !(this.data.type == null))
@@ -50,38 +54,47 @@ package net.wg.gui.lobby.battlequeue
             super.draw();
         }
         
-        public function setListData(param1:ListData) : void {
+        public function setListData(param1:ListData) : void
+        {
         }
         
-        public function get index() : uint {
+        public function get index() : uint
+        {
             return this._index;
         }
         
-        public function set index(param1:uint) : void {
+        public function set index(param1:uint) : void
+        {
             this._index = param1;
         }
         
-        public function get owner() : UIComponent {
+        public function get owner() : UIComponent
+        {
             return this._owner;
         }
         
-        public function set owner(param1:UIComponent) : void {
+        public function set owner(param1:UIComponent) : void
+        {
             this._owner = param1;
         }
         
-        public function get selectable() : Boolean {
+        public function get selectable() : Boolean
+        {
             return this._selectable;
         }
         
-        public function set selectable(param1:Boolean) : void {
+        public function set selectable(param1:Boolean) : void
+        {
             this._selectable = param1;
         }
         
-        public function get selected() : Boolean {
+        public function get selected() : Boolean
+        {
             return this._selected;
         }
         
-        public function set selected(param1:Boolean) : void {
+        public function set selected(param1:Boolean) : void
+        {
             if(this._selected == param1)
             {
                 return;
@@ -89,15 +102,18 @@ package net.wg.gui.lobby.battlequeue
             this._selected = param1;
         }
         
-        public function get data() : Object {
+        public function get data() : Object
+        {
             return this._data;
         }
         
-        public function set data(param1:Object) : void {
+        public function set data(param1:Object) : void
+        {
             this._data = param1;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG BattleQueueItemRenderer " + name + "]";
         }
     }

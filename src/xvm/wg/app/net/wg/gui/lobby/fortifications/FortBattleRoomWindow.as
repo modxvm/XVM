@@ -16,23 +16,27 @@ package net.wg.gui.lobby.fortifications
     public class FortBattleRoomWindow extends FortBattleRoomWindowMeta implements IFortBattleRoomWindowMeta
     {
         
-        public function FortBattleRoomWindow() {
+        public function FortBattleRoomWindow()
+        {
             super();
             showWindowBg = false;
             canMinimize = true;
             UIID = 29;
         }
         
-        override public function onWindowMinimizeS() : void {
+        override public function onWindowMinimizeS() : void
+        {
             super.onWindowMinimizeS();
             App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_MINIMIZE,0);
         }
         
-        override protected function getWindowTitle() : String {
+        override protected function getWindowTitle() : String
+        {
             return FORTIFICATIONS.SORTIE_INTROVIEW_TITLE;
         }
         
-        override protected function onViewLoadRequest(param1:RallyViewsEvent) : void {
+        override protected function onViewLoadRequest(param1:RallyViewsEvent) : void
+        {
             if(!param1.data)
             {
                 return;
@@ -55,7 +59,8 @@ package net.wg.gui.lobby.fortifications
             }
         }
         
-        override protected function updateFocus() : void {
+        override protected function updateFocus() : void
+        {
             var _loc1_:IChannelComponentHolder = getCurrentView() as IChannelComponentHolder;
             if(autoSearch.visible)
             {
@@ -83,7 +88,8 @@ package net.wg.gui.lobby.fortifications
             
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.handled)
             {
                 return;
@@ -104,11 +110,13 @@ package net.wg.gui.lobby.fortifications
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_CLOSE,0);
             super.onDispose();
         }

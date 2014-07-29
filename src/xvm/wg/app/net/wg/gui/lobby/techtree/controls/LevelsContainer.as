@@ -8,14 +8,16 @@ package net.wg.gui.lobby.techtree.controls
     public class LevelsContainer extends Sprite implements IDisposable
     {
         
-        public function LevelsContainer() {
+        public function LevelsContainer()
+        {
             super();
             scale9Grid = new Rectangle(0,0,1,1);
             tabEnabled = mouseChildren = mouseEnabled = false;
             this.delimiters = new Vector.<LevelDelimiter>();
         }
         
-        private static function updateLevelDelimiter(param1:LevelDelimiter, param2:Number, param3:Number, param4:Number, param5:Number) : void {
+        private static function updateLevelDelimiter(param1:LevelDelimiter, param2:Number, param3:Number, param4:Number, param5:Number) : void
+        {
             param1.x = param2;
             param1.y = param3;
             param1.setSize(param4,param5);
@@ -27,7 +29,8 @@ package net.wg.gui.lobby.techtree.controls
         
         public var evenLevelRenderer:String = "EvenLevelDelimiter";
         
-        public function updateLevels(param1:Vector.<Distance>, param2:Number, param3:Number) : Number {
+        public function updateLevels(param1:Vector.<Distance>, param2:Number, param3:Number) : Number
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -36,7 +39,8 @@ package net.wg.gui.lobby.techtree.controls
             throw new Error("Not decompiled due to error");
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             var _loc1_:LevelDelimiter = null;
             while(this.delimiters.length)
             {
@@ -52,17 +56,18 @@ package net.wg.gui.lobby.techtree.controls
             }
         }
         
-        private function createLevelDelimiter(param1:Number, param2:Number, param3:Number, param4:Number, param5:Number) : LevelDelimiter {
-            return App.utils.classFactory.getComponent(param1 % 2?this.oddLevelRenderer:this.evenLevelRenderer,LevelDelimiter,{
-                "x":param2,
-                "y":param3,
-                "width":param4,
-                "height":param5,
-                "levelNumber":param1
-            });
+        private function createLevelDelimiter(param1:Number, param2:Number, param3:Number, param4:Number, param5:Number) : LevelDelimiter
+        {
+            return App.utils.classFactory.getComponent(param1 % 2?this.oddLevelRenderer:this.evenLevelRenderer,LevelDelimiter,{"x":param2,
+            "y":param3,
+            "width":param4,
+            "height":param5,
+            "levelNumber":param1
+        });
     }
     
-    private function removeLevelDelimiter(param1:LevelDelimiter) : Boolean {
+    private function removeLevelDelimiter(param1:LevelDelimiter) : Boolean
+    {
         var _loc2_:* = false;
         if(contains(param1))
         {

@@ -7,7 +7,8 @@ package net.wg.gui.lobby.tankman
     public class VehicleTypeButton extends SoundButtonEx
     {
         
-        public function VehicleTypeButton() {
+        public function VehicleTypeButton()
+        {
             super();
             soundType = SoundTypes.RNDR_NORMAL;
         }
@@ -18,16 +19,19 @@ package net.wg.gui.lobby.tankman
         
         public var inspectableGroupName:String;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.typeSwitcher = null;
             super.onDispose();
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             if(this._type == param1)
             {
                 return;
@@ -36,7 +40,8 @@ package net.wg.gui.lobby.tankman
             this.typeSwitcher.gotoAndStop(param1);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.typeSwitcher.mouseEnabled = false;
         }

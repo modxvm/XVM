@@ -16,7 +16,8 @@ package net.wg.gui.lobby.hangar.crew
     public class Crew extends CrewMeta implements IHelpLayoutComponent, ICrewMeta, IDAAPIModule
     {
         
-        public function Crew() {
+        public function Crew()
+        {
             super();
         }
         
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.hangar.crew
         
         private static var INVALIDATE_ENABLE:String = "invalidateEnable";
         
-        private static function setupDataProvider(param1:Array) : IDataProvider {
+        private static function setupDataProvider(param1:Array) : IDataProvider
+        {
             var _loc3_:Object = null;
             var _loc2_:DataProvider = new DataProvider();
             for each(_loc3_ in param1)
@@ -34,14 +36,16 @@ package net.wg.gui.lobby.hangar.crew
             return _loc2_;
         }
         
-        private static function showTooltip(param1:ListEventEx) : void {
+        private static function showTooltip(param1:ListEventEx) : void
+        {
             if(param1.itemData.tankmanID)
             {
                 App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,param1.itemData.tankmanID,true);
             }
         }
         
-        private static function hideTooltip(param1:ListEventEx) : void {
+        private static function hideTooltip(param1:ListEventEx) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -59,7 +63,8 @@ package net.wg.gui.lobby.hangar.crew
         
         private var _helpLayout:DisplayObject = null;
         
-        public function as_tankmenResponse(param1:Array, param2:Array) : void {
+        public function as_tankmenResponse(param1:Array, param2:Array) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -68,41 +73,46 @@ package net.wg.gui.lobby.hangar.crew
             throw new Error("Not decompiled due to error");
         }
         
-        public function showHelpLayout() : void {
-            var _loc1_:Object = {
-                "borderWidth":204,
-                "borderHeight":height,
-                "direction":this.helpDirection,
-                "text":LOBBY_HELP.HANGAR_CREW,
-                "x":0,
-                "y":0,
-                "connectorLength":this.helpConnectorLength
-            };
+        public function showHelpLayout() : void
+        {
+            var _loc1_:Object = {"borderWidth":204,
+            "borderHeight":height,
+            "direction":this.helpDirection,
+            "text":LOBBY_HELP.HANGAR_CREW,
+            "x":0,
+            "y":0,
+            "connectorLength":this.helpConnectorLength
+        };
         this.setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
     }
     
-    public function closeHelpLayout() : void {
+    public function closeHelpLayout() : void
+    {
         if(this.getHelpLayout() != null)
         {
             App.utils.helpLayout.destroy(this.getHelpLayout());
         }
     }
     
-    override public function get enabled() : Boolean {
+    override public function get enabled() : Boolean
+    {
         return super.enabled;
     }
     
-    override public function set enabled(param1:Boolean) : void {
+    override public function set enabled(param1:Boolean) : void
+    {
         super.enabled = param1;
         invalidate(INVALIDATE_ENABLE);
     }
     
-    override protected function onPopulate() : void {
+    override protected function onPopulate() : void
+    {
         super.onPopulate();
         invalidate(INVALIDATE_LIST);
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         this.list.removeEventListener(ListEventEx.ITEM_ROLL_OVER,showTooltip);
         this.list.removeEventListener(ListEventEx.ITEM_ROLL_OUT,hideTooltip);
         this.list.removeEventListener(ListEventEx.ITEM_PRESS,hideTooltip);
@@ -122,7 +132,8 @@ package net.wg.gui.lobby.hangar.crew
         super.onDispose();
     }
     
-    override protected function configUI() : void {
+    override protected function configUI() : void
+    {
         super.configUI();
         mouseEnabled = false;
         addEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
@@ -136,7 +147,8 @@ package net.wg.gui.lobby.hangar.crew
         this.list.validateNow();
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         if(isInvalid(INVALIDATE_LIST))
         {
             updateTankmenS();
@@ -149,27 +161,33 @@ package net.wg.gui.lobby.hangar.crew
         }
     }
     
-    protected function setHelpLayout(param1:DisplayObject) : void {
+    protected function setHelpLayout(param1:DisplayObject) : void
+    {
         this._helpLayout = param1;
     }
     
-    protected function getHelpLayout() : DisplayObject {
+    protected function getHelpLayout() : DisplayObject
+    {
         return this._helpLayout;
     }
     
-    private function onEquipTankman(param1:CrewEvent) : void {
+    private function onEquipTankman(param1:CrewEvent) : void
+    {
         equipTankmanS(param1.initProp.tankmanID,param1.initProp.slot);
     }
     
-    private function onUnloadTankman(param1:CrewEvent) : void {
+    private function onUnloadTankman(param1:CrewEvent) : void
+    {
         unloadTankmanS(param1.initProp.tankmanID);
     }
     
-    private function onShowRecruitWindow(param1:CrewEvent) : void {
+    private function onShowRecruitWindow(param1:CrewEvent) : void
+    {
         onShowRecruitWindowClickS(param1.initProp,param1.menuEnabled);
     }
     
-    private function openPersonalCaseHandler(param1:CrewEvent) : void {
+    private function openPersonalCaseHandler(param1:CrewEvent) : void
+    {
         openPersonalCaseS(param1.initProp.tankmanID.toString(),param1.selectedTab);
     }
 }

@@ -5,7 +5,8 @@ package net.wg.gui.lobby.questsWindow.data
     public class ConditionSeparatorVO extends DAAPIDataClass
     {
         
-        public function ConditionSeparatorVO(param1:Object) {
+        public function ConditionSeparatorVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,27 +16,33 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _needAlign:Boolean = false;
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
         }
         
-        public function get needAlign() : Boolean {
+        public function get needAlign() : Boolean
+        {
             return this._needAlign;
         }
         
-        public function set needAlign(param1:Boolean) : void {
+        public function set needAlign(param1:Boolean) : void
+        {
             this._needAlign = param1;
         }
         
-        public function get linkage() : String {
+        public function get linkage() : String
+        {
             return this._linkage;
         }
         
-        public function set linkage(param1:String) : void {
+        public function set linkage(param1:String) : void
+        {
             this._linkage = param1;
         }
     }

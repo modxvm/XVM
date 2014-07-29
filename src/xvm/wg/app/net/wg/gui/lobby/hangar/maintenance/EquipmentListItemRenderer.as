@@ -20,7 +20,8 @@ package net.wg.gui.lobby.hangar.maintenance
     public class EquipmentListItemRenderer extends SoundListItemRenderer
     {
         
-        public function EquipmentListItemRenderer() {
+        public function EquipmentListItemRenderer()
+        {
             super();
         }
         
@@ -40,12 +41,14 @@ package net.wg.gui.lobby.hangar.maintenance
         
         public var hitMc:MovieClip;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             var _loc1_:IEventCollector = App.utils.events;
             _loc1_.addEvent(this,MouseEvent.ROLL_OVER,this.onRollOver);
@@ -58,7 +61,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:ActionPriceVO = null;
             if(isInvalid(InvalidationType.DATA))
             {
@@ -145,19 +149,23 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function get module() : ModuleVO {
+        private function get module() : ModuleVO
+        {
             return data as ModuleVO;
         }
         
-        private function onRollOver(param1:MouseEvent) : void {
+        private function onRollOver(param1:MouseEvent) : void
+        {
             owner.dispatchEvent(new OnEquipmentRendererOver(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.module.id,this.module.prices,this.module.inventoryCount,this.module.vehicleCount,this.module.slotIndex));
         }
         
-        private function onRollOut(param1:MouseEvent) : void {
+        private function onRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onClick(param1:MouseEvent) : void {
+        private function onClick(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
             if(param1 is MouseEventEx)
             {

@@ -30,7 +30,8 @@ package net.wg.gui.prebattle.invites
     public class PrbSendInvitesWindow extends PrbSendInvitesWindowMeta implements IPrbSendInvitesWindowMeta
     {
         
-        public function PrbSendInvitesWindow() {
+        public function PrbSendInvitesWindow()
+        {
             this.friendMemberDataProvider = new DAAPIDataProvider();
             this.clanMemberDataProvider = new DAAPIDataProvider();
             this.searchMemberDataProvider = new DAAPIDataProvider();
@@ -43,148 +44,163 @@ package net.wg.gui.prebattle.invites
         
         private static var UPDATE_DEFAULT_POSITION:String = "updateWindowPosition";
         
-        private static var userViewsDataProvider:Array;
-        
-        private static var INV_CLAN:String = "invClan";
-        
-        private static function makeRoster(param1:Object) : Object {
-            var _loc2_:Object = {
-                "uid":param1.uid,
-                "userName":param1.userName,
-                "chatRoster":param1.chatRoster,
-                "online":param1.online,
-                "displayName":param1.displayName,
-                "colors":param1.colors,
-                "himself":param1.himself
-            };
-        return _loc2_;
-    }
-    
-    public var friendMemberDataProvider:DAAPIDataProvider;
-    
-    public var clanMemberDataProvider:DAAPIDataProvider;
-    
-    public var searchMemberDataProvider:DAAPIDataProvider;
-    
-    public var usersAccordion:Accordion;
-    
-    public var addUserButton:SoundButtonEx;
-    
-    public var addAllUsersButton:SoundButtonEx;
-    
-    public var removeUserButton:SoundButtonEx;
-    
-    public var removeAllUsersButton:SoundButtonEx;
-    
-    public var receiverList:ScrollingListEx;
-    
-    public var onlineCheckBox:CheckBox;
-    
-    public var messageTextInput:TextInput;
-    
-    public var sendButton:SoundButtonEx;
-    
-    public var emptyRenderer:UserRosterItemRenderer;
-    
-    private var coolDownTimerID:uint = 0;
-    
-    private var wait:Boolean = false;
-    
-    private var lastToken:String = null;
-    
-    private var onSearchResultReceived:Boolean = false;
-    
-    private var lastIsOnlineFlag:Boolean = false;
-    
-    private var receiverData:DataProvider;
-    
-    private var inviteDefaultTextColor:uint = 4144953;
-    
-    private var _showClanOnly:Boolean = false;
-    
-    public function as_setWindowTitle(param1:String) : void {
-        window.title = param1;
-    }
-    
-    public function as_getFriendsDP() : Object {
-        return this.friendMemberDataProvider;
-    }
-    
-    public function as_getClanDP() : Object {
-        return this.clanMemberDataProvider;
-    }
-    
-    public function as_getSearchDP() : Object {
-        return this.searchMemberDataProvider;
-    }
-    
-    public function as_getReceiverDP() : Object {
-        return this.receiverData;
-    }
-    
-    public function as_onSearchResultReceived(param1:Boolean) : void {
-        this.onSearchResultReceived = param1;
-    }
-    
-    public function as_showClanOnly(param1:Boolean) : void {
-        this._showClanOnly = param1;
-        invalidate(INV_CLAN);
-    }
-    
-    public function as_setDefaultOnlineFlag(param1:Boolean) : void {
-        if(this.onlineCheckBox != null)
-        {
-            this.onlineCheckBox.selected = param1;
-        }
-    }
-    
-    public function as_onReceiveSendInvitesCooldown(param1:uint) : void {
-        this.enableManagmentButtons(false);
-        this.sendButton.enabled = false;
-        this.coolDownTimerID = setTimeout(this.onEndSendInvitesCooldown,param1 * 1000);
-    }
-    
-    override protected function onPopulate() : void {
-        this.updateWindowProperties(false);
-        super.onPopulate();
-        showWindowBg = false;
-        window.title = "";
-        var _loc1_:Padding = window.contentPadding as Padding;
-        _loc1_.bottom = 14;
-        _loc1_.left = 12;
-        _loc1_.right = 10;
-    }
-    
-    override protected function draw() : void {
-        super.draw();
-        if(isInvalid(UPDATE_DEFAULT_POSITION))
-        {
-            window.x = 0;
-            window.y = 0;
-        }
-        if(isInvalid(INV_CLAN))
-        {
-            if(this._showClanOnly)
-            {
-                this.usersAccordion.dataProvider = new DataProvider([{
-                    "label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS,
-                    "linkage":Linkages.INVITES_FRIENDS,
-                    "enabled":false
-                },{
-                "label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN,
-                "linkage":Linkages.INVITES_CLAN,
-                "enabled":true
-            },{
-            "label":MESSENGER.DIALOGS_SEARCHCONTACT_TITLE,
-            "linkage":Linkages.INVITES_SEARCH,
-            "enabled":false
-        }]);
-    this.usersAccordion.selectedIndex = 1;
+        private static var userViewsDataProvider:Array = [{"label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS,
+        "linkage":Linkages.INVITES_FRIENDS
+    },{"label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN,
+    "linkage":Linkages.INVITES_CLAN
+},{"label":MESSENGER.DIALOGS_SEARCHCONTACT_TITLE,
+"linkage":Linkages.INVITES_SEARCH
+}];
+
+private static var INV_CLAN:String = "invClan";
+
+private static function makeRoster(param1:Object) : Object
+{
+var _loc2_:Object = {"uid":param1.uid,
+"userName":param1.userName,
+"chatRoster":param1.chatRoster,
+"online":param1.online,
+"displayName":param1.displayName,
+"colors":param1.colors,
+"himself":param1.himself
+};
+return _loc2_;
+}
+
+public var friendMemberDataProvider:DAAPIDataProvider;
+
+public var clanMemberDataProvider:DAAPIDataProvider;
+
+public var searchMemberDataProvider:DAAPIDataProvider;
+
+public var usersAccordion:Accordion;
+
+public var addUserButton:SoundButtonEx;
+
+public var addAllUsersButton:SoundButtonEx;
+
+public var removeUserButton:SoundButtonEx;
+
+public var removeAllUsersButton:SoundButtonEx;
+
+public var receiverList:ScrollingListEx;
+
+public var onlineCheckBox:CheckBox;
+
+public var messageTextInput:TextInput;
+
+public var sendButton:SoundButtonEx;
+
+public var emptyRenderer:UserRosterItemRenderer;
+
+private var coolDownTimerID:uint = 0;
+
+private var wait:Boolean = false;
+
+private var lastToken:String = null;
+
+private var onSearchResultReceived:Boolean = false;
+
+private var lastIsOnlineFlag:Boolean = false;
+
+private var receiverData:DataProvider;
+
+private var inviteDefaultTextColor:uint = 4144953;
+
+private var _showClanOnly:Boolean = false;
+
+public function as_setWindowTitle(param1:String) : void
+{
+window.title = param1;
+}
+
+public function as_getFriendsDP() : Object
+{
+return this.friendMemberDataProvider;
+}
+
+public function as_getClanDP() : Object
+{
+return this.clanMemberDataProvider;
+}
+
+public function as_getSearchDP() : Object
+{
+return this.searchMemberDataProvider;
+}
+
+public function as_getReceiverDP() : Object
+{
+return this.receiverData;
+}
+
+public function as_onSearchResultReceived(param1:Boolean) : void
+{
+this.onSearchResultReceived = param1;
+}
+
+public function as_showClanOnly(param1:Boolean) : void
+{
+this._showClanOnly = param1;
+invalidate(INV_CLAN);
+}
+
+public function as_setDefaultOnlineFlag(param1:Boolean) : void
+{
+if(this.onlineCheckBox != null)
+{
+this.onlineCheckBox.selected = param1;
+}
+}
+
+public function as_onReceiveSendInvitesCooldown(param1:uint) : void
+{
+this.enableManagmentButtons(false);
+this.sendButton.enabled = false;
+this.coolDownTimerID = setTimeout(this.onEndSendInvitesCooldown,param1 * 1000);
+}
+
+override protected function onPopulate() : void
+{
+this.updateWindowProperties(false);
+super.onPopulate();
+showWindowBg = false;
+window.title = "";
+var _loc1_:Padding = window.contentPadding as Padding;
+_loc1_.bottom = 14;
+_loc1_.left = 12;
+_loc1_.right = 10;
+}
+
+override protected function draw() : void
+{
+super.draw();
+if(isInvalid(UPDATE_DEFAULT_POSITION))
+{
+window.x = 0;
+window.y = 0;
+}
+if(isInvalid(INV_CLAN))
+{
+if(this._showClanOnly)
+{
+    this.usersAccordion.dataProvider = new DataProvider([{"label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS,
+    "linkage":Linkages.INVITES_FRIENDS,
+    "enabled":false
+},{"label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN,
+"linkage":Linkages.INVITES_CLAN,
+"enabled":true
+},{"label":MESSENGER.DIALOGS_SEARCHCONTACT_TITLE,
+"linkage":Linkages.INVITES_SEARCH,
+"enabled":false
+}]);
+this.usersAccordion.selectedIndex = 1;
 }
 }
 }
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
 super.configUI();
 this.usersAccordion.view.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChange);
 this.usersAccordion.view.cache = true;
@@ -218,12 +234,14 @@ App.utils.scheduler.envokeInNextFrame(this.updateFocus);
 invalidate(UPDATE_DEFAULT_POSITION);
 }
 
-private function onUsersListChange(param1:Event) : void {
+private function onUsersListChange(param1:Event) : void
+{
 var _loc2_:DAAPIDataProvider = param1.target as DAAPIDataProvider;
 _loc2_.requestItemRange(0,_loc2_.length,this.updateReceiverList);
 }
 
-private function updateReceiverList(param1:Array) : void {
+private function updateReceiverList(param1:Array) : void
+{
 var _loc5_:* = NaN;
 var _loc2_:int = param1.length;
 var _loc3_:* = false;
@@ -233,15 +251,15 @@ while(_loc4_ < _loc2_)
 _loc5_ = this.hasUserInReceiverList(param1[_loc4_]);
 if(_loc5_ >= 0)
 {
-    _loc3_ = true;
-    if(MessengerUtils.isIgnored(param1[_loc4_]))
-    {
-        this.receiverData.splice(_loc5_,1);
-    }
-    else
-    {
-        this.receiverData[_loc5_] = param1[_loc4_];
-    }
+_loc3_ = true;
+if(MessengerUtils.isIgnored(param1[_loc4_]))
+{
+this.receiverData.splice(_loc5_,1);
+}
+else
+{
+this.receiverData[_loc5_] = param1[_loc4_];
+}
 }
 _loc4_++;
 }
@@ -251,7 +269,8 @@ this.receiverData.invalidate();
 }
 }
 
-private function onViewChange(param1:ViewStackEvent) : void {
+private function onViewChange(param1:ViewStackEvent) : void
+{
 var _loc2_:InteractiveObject = param1.view.getComponentForFocus();
 if(_loc2_)
 {
@@ -259,12 +278,14 @@ setFocus(_loc2_);
 }
 }
 
-override protected function onInitModalFocus(param1:InteractiveObject) : void {
+override protected function onInitModalFocus(param1:InteractiveObject) : void
+{
 super.onInitModalFocus(param1);
 this.updateFocus();
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
 App.utils.scheduler.cancelTask(this.updateFocus);
 this.friendMemberDataProvider.removeEventListener(Event.CHANGE,this.onUsersListChange);
 this.clanMemberDataProvider.removeEventListener(Event.CHANGE,this.onUsersListChange);
@@ -290,26 +311,30 @@ this.receiverData = null;
 super.onDispose();
 }
 
-private function updateWindowProperties(param1:Boolean) : void {
+private function updateWindowProperties(param1:Boolean) : void
+{
 if(window)
 {
 Window(window).visible = param1;
 }
 }
 
-private function updateFocus() : void {
+private function updateFocus() : void
+{
 this.updateWindowProperties(true);
 setFocus(this);
 }
 
-private function enableManagmentButtons(param1:Boolean) : void {
+private function enableManagmentButtons(param1:Boolean) : void
+{
 this.addUserButton.enabled = param1;
 this.addAllUsersButton.enabled = param1;
 this.removeAllUsersButton.enabled = param1;
 this.removeUserButton.enabled = param1;
 }
 
-private function onEndSendInvitesCooldown() : void {
+private function onEndSendInvitesCooldown() : void
+{
 if(this.receiverData)
 {
 this.receiverData.cleanUp();
@@ -321,22 +346,24 @@ this.sendButton.enabled = false;
 this.wait = false;
 }
 
-private function hasUserInReceiverList(param1:Object) : Number {
+private function hasUserInReceiverList(param1:Object) : Number
+{
 var _loc2_:Number = -1;
 var _loc3_:Number = 0;
 while(_loc3_ < this.receiverData.length)
 {
 if(this.receiverData[_loc3_].uid == param1.uid)
 {
-    _loc2_ = _loc3_;
-    break;
+_loc2_ = _loc3_;
+break;
 }
 _loc3_++;
 }
 return _loc2_;
 }
 
-private function onReceiveUserInfo(param1:Object) : void {
+private function onReceiveUserInfo(param1:Object) : void
+{
 var _loc2_:Object = makeRoster(param1);
 if(MessengerUtils.isIgnored(_loc2_))
 {
@@ -360,7 +387,8 @@ showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_EXISTSINRECEIVELIST);
 }
 }
 
-private function onReceiveUsersInfo(param1:Array) : void {
+private function onReceiveUsersInfo(param1:Array) : void
+{
 var _loc5_:Object = null;
 var _loc2_:Number = param1.length;
 if(_loc2_ == 0)
@@ -374,10 +402,10 @@ while(_loc3_ < _loc2_)
 _loc5_ = makeRoster(param1[_loc3_]);
 if(!((MessengerUtils.isIgnored(_loc5_)) || !_loc5_.online))
 {
-    if(this.hasUserInReceiverList(_loc5_) < 0)
-    {
-        this.receiverData.push(_loc5_);
-    }
+if(this.hasUserInReceiverList(_loc5_) < 0)
+{
+this.receiverData.push(_loc5_);
+}
 }
 _loc3_++;
 }
@@ -390,18 +418,19 @@ showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_NOTFOUNDUSERS);
 this.sendButton.enabled = _loc4_;
 }
 
-private function removeReceiveItem() : void {
+private function removeReceiveItem() : void
+{
 if(this.receiverData.length > 0)
 {
 if(this.receiverList.selectedIndex > -1)
 {
-    this.receiverData.splice(this.receiverList.selectedIndex,1);
-    this.receiverData.invalidate();
-    this.sendButton.enabled = !(this.receiverData.length == 0);
+this.receiverData.splice(this.receiverList.selectedIndex,1);
+this.receiverData.invalidate();
+this.sendButton.enabled = !(this.receiverData.length == 0);
 }
 else
 {
-    showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_SELECTUSERTOREMOVE);
+showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_SELECTUSERTOREMOVE);
 }
 }
 else
@@ -410,7 +439,8 @@ showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_RECEIVERLISTEMPTY);
 }
 }
 
-private function setToken(param1:String) : void {
+private function setToken(param1:String) : void
+{
 if(param1 == null)
 {
 return;
@@ -418,7 +448,8 @@ return;
 searchTokenS(param1);
 }
 
-private function messageTextInput_CLIK_focusInHandler(param1:FocusHandlerEvent) : void {
+private function messageTextInput_CLIK_focusInHandler(param1:FocusHandlerEvent) : void
+{
 var _loc2_:uint = this.messageTextInput.textField.getTextFormat()["color"];
 if(_loc2_ == this.inviteDefaultTextColor)
 {
@@ -427,18 +458,21 @@ this.messageTextInput.text = "";
 }
 }
 
-private function usersAccordion_listItemDoubleClickHandler(param1:SendInvitesEvent) : void {
+private function usersAccordion_listItemDoubleClickHandler(param1:SendInvitesEvent) : void
+{
 this.onReceiveUserInfo(param1.initItem);
 }
 
-private function receiverList_ClickHandler(param1:ListEvent) : void {
+private function receiverList_ClickHandler(param1:ListEvent) : void
+{
 if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
 {
 App.contextMenuMgr.showUserContextMenu(this,param1.itemData,new PrbSendInviteCIGenerator());
 }
 }
 
-private function receiverList_itemDoubleClickHandler(param1:ListEvent) : void {
+private function receiverList_itemDoubleClickHandler(param1:ListEvent) : void
+{
 if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
 {
 return;
@@ -446,17 +480,18 @@ return;
 this.removeReceiveItem();
 }
 
-private function handleClickAddUserButton(param1:ButtonEvent = null) : void {
+private function handleClickAddUserButton(param1:ButtonEvent = null) : void
+{
 var _loc2_:ScrollingListEx = ScrollingListEx(this.usersAccordion.view.currentView.rosterList);
 if(_loc2_.dataProvider.length > 0)
 {
 if(_loc2_.selectedIndex > -1)
 {
-    _loc2_.dataProvider.requestItemAt(_loc2_.selectedIndex,this.onReceiveUserInfo);
+_loc2_.dataProvider.requestItemAt(_loc2_.selectedIndex,this.onReceiveUserInfo);
 }
 else
 {
-    showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_SELECTUSERTOADD);
+showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_SELECTUSERTOADD);
 }
 }
 else
@@ -465,7 +500,8 @@ showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_USERLISTEMPTY);
 }
 }
 
-private function handleClickAddAllUsersButton(param1:ButtonEvent) : void {
+private function handleClickAddAllUsersButton(param1:ButtonEvent) : void
+{
 var _loc2_:DAAPIDataProvider = DAAPIDataProvider(this.usersAccordion.view.currentView.rosterList.dataProvider);
 if(_loc2_ == null)
 {
@@ -482,11 +518,13 @@ showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_USERLISTEMPTY);
 }
 }
 
-private function handleClickRemoveUserButton(param1:ButtonEvent = null) : void {
+private function handleClickRemoveUserButton(param1:ButtonEvent = null) : void
+{
 this.removeReceiveItem();
 }
 
-private function handleClickRemoveAllUsersButton(param1:ButtonEvent) : void {
+private function handleClickRemoveAllUsersButton(param1:ButtonEvent) : void
+{
 if(this.receiverData.length > 0)
 {
 this.receiverData.cleanUp();
@@ -499,7 +537,8 @@ showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_RECEIVERLISTEMPTY);
 }
 }
 
-private function handleSelectOnlineCheckBox(param1:ButtonEvent) : void {
+private function handleSelectOnlineCheckBox(param1:ButtonEvent) : void
+{
 var _loc2_:Boolean = param1.currentTarget.selected;
 var _loc3_:* = false;
 if(!(this.lastToken == null) && !(this.lastToken == "") && (this.onSearchResultReceived) && !(this.lastIsOnlineFlag == _loc2_))
@@ -514,7 +553,8 @@ this.setToken(this.lastToken);
 this.lastIsOnlineFlag = _loc2_;
 }
 
-private function handleSendInvitations(param1:ButtonEvent) : void {
+private function handleSendInvitations(param1:ButtonEvent) : void
+{
 var _loc2_:Array = [];
 var _loc3_:* = "";
 if(this.messageTextInput.textField.getTextFormat()["color"] != this.inviteDefaultTextColor)
@@ -533,19 +573,22 @@ this.wait = true;
 sendInvitesS(_loc2_,_loc3_);
 }
 
-private function showContextMenu(param1:SendInvitesEvent) : void {
+private function showContextMenu(param1:SendInvitesEvent) : void
+{
 if(param1.initItem)
 {
 App.contextMenuMgr.showUserContextMenu(this,param1.initItem,new PrbSendInviteCIGenerator());
 }
 }
 
-private function usersAccordion_searchTokenHandler(param1:SendInvitesEvent) : void {
+private function usersAccordion_searchTokenHandler(param1:SendInvitesEvent) : void
+{
 this.lastToken = param1.searchString;
 this.setToken(this.lastToken);
 }
 
-private function usersAccordion_initComponentHandler(param1:SendInvitesEvent) : void {
+private function usersAccordion_initComponentHandler(param1:SendInvitesEvent) : void
+{
 var _loc3_:String = null;
 var _loc2_:IViewStackContent = param1.initItem as IViewStackContent;
 if(_loc2_ != null)
@@ -553,15 +596,15 @@ if(_loc2_ != null)
 _loc3_ = getQualifiedClassName(_loc2_);
 if(_loc3_ == Linkages.INVITES_FRIENDS)
 {
-    _loc2_.update(this.friendMemberDataProvider);
+_loc2_.update(this.friendMemberDataProvider);
 }
 else if(_loc3_ == Linkages.INVITES_CLAN)
 {
-    _loc2_.update(this.clanMemberDataProvider);
+_loc2_.update(this.clanMemberDataProvider);
 }
 else if(_loc3_ == Linkages.INVITES_SEARCH)
 {
-    _loc2_.update(this.searchMemberDataProvider);
+_loc2_.update(this.searchMemberDataProvider);
 }
 
 

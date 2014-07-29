@@ -17,7 +17,8 @@ package net.wg.gui.messenger.forms
     public class ContactsListForm extends UIComponent implements IViewStackContent
     {
         
-        public function ContactsListForm() {
+        public function ContactsListForm()
+        {
             super();
         }
         
@@ -41,7 +42,8 @@ package net.wg.gui.messenger.forms
         
         public var mutedDP:DAAPIDataProvider;
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             if(param1)
             {
                 this.friendsDP = param1.friendsDP;
@@ -52,7 +54,8 @@ package net.wg.gui.messenger.forms
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.accordion.removeEventListener(SendInvitesEvent.SHOW_CONTEXT_MENU,this.showContextMenu);
             this.accordion.removeEventListener(IndexEvent.INDEX_CHANGE,this.onViewChanged);
@@ -83,7 +86,8 @@ package net.wg.gui.messenger.forms
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             constraints.addElement("accordion",this.accordion,Constraints.ALL);
@@ -92,7 +96,8 @@ package net.wg.gui.messenger.forms
             this.initAccordion();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((constraints) && (isInvalid(InvalidationType.SIZE)))
             {
@@ -106,41 +111,41 @@ package net.wg.gui.messenger.forms
             }
         }
         
-        private function initAccordion() : void {
-            var _loc1_:Array = [{
-                "label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS,
-                "linkage":FRIENDS_ROSTER
-            },{
-            "label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN,
-            "linkage":CLAN_ROSTER
-        },{
-        "label":MESSENGER.DIALOGS_CONTACTS_TREE_IGNORED,
-        "linkage":IGNORED_ROSTER
-    }];
+        private function initAccordion() : void
+        {
+            var _loc1_:Array = [{"label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS,
+            "linkage":FRIENDS_ROSTER
+        },{"label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN,
+        "linkage":CLAN_ROSTER
+    },{"label":MESSENGER.DIALOGS_CONTACTS_TREE_IGNORED,
+    "linkage":IGNORED_ROSTER
+}];
 if(App.voiceChatMgr.isVOIPEnabledS())
 {
-    _loc1_.push({
-        "label":MESSENGER.DIALOGS_CONTACTS_TREE_MUTED,
-        "linkage":MUTED_ROSTER
-    });
+    _loc1_.push({"label":MESSENGER.DIALOGS_CONTACTS_TREE_MUTED,
+    "linkage":MUTED_ROSTER
+});
 }
 this.accordion.view.cache = true;
 this.accordion.dataProvider = new DataProvider(_loc1_);
 this.accordion.selectedIndex = 0;
 }
 
-private function onViewChanged(param1:IndexEvent) : void {
+private function onViewChanged(param1:IndexEvent) : void
+{
 invalidate(INVALIDATE_VIEW);
 }
 
-private function showContextMenu(param1:SendInvitesEvent) : void {
+private function showContextMenu(param1:SendInvitesEvent) : void
+{
 if(param1.initItem)
 {
 App.contextMenuMgr.showUserContextMenu(this,param1.initItem,new PrbSendInviteCIGenerator());
 }
 }
 
-private function updateViewData() : void {
+private function updateViewData() : void
+{
 var _loc2_:String = null;
 var _loc3_:DAAPIDataProvider = null;
 var _loc1_:IViewStackContent = this.accordion.view.currentView as IViewStackContent;
@@ -169,7 +174,8 @@ if(_loc3_)
 }
 }
 
-private function updateViewSize() : void {
+private function updateViewSize() : void
+{
 var _loc1_:String = null;
 var _loc2_:UIComponent = null;
 for(_loc1_ in this.accordion.view.cachedViews)
@@ -183,11 +189,13 @@ if(_loc2_ == this.accordion.view.currentView)
 }
 }
 
-public function getComponentForFocus() : InteractiveObject {
+public function getComponentForFocus() : InteractiveObject
+{
 return null;
 }
 
-public function canShowAutomatically() : Boolean {
+public function canShowAutomatically() : Boolean
+{
 return true;
 }
 }

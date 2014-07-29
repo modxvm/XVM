@@ -11,7 +11,8 @@ package net.wg.gui.lobby.header
     public class TankPanel extends UIComponent
     {
         
-        public function TankPanel() {
+        public function TankPanel()
+        {
             super();
         }
         
@@ -21,11 +22,13 @@ package net.wg.gui.lobby.header
         
         private static var TEAM_KILLER_COLOR:int = 60159;
         
-        private static function showTooltip(param1:MouseEvent) : void {
+        private static function showTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(TOOLTIPS.HEADER_ELITEICON);
         }
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -45,7 +48,8 @@ package net.wg.gui.lobby.header
         
         private var _clanEmblemVisible:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.elite.visible = false;
             this.tank_name.mouseEnabled = false;
             this.tank_type.mouseEnabled = false;
@@ -56,7 +60,8 @@ package net.wg.gui.lobby.header
             this.elite.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.elite.removeEventListener(MouseEvent.ROLL_OVER,showTooltip);
             this.elite.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.elite = null;
@@ -69,12 +74,14 @@ package net.wg.gui.lobby.header
             super.onDispose();
         }
         
-        public function setClanEmblem(param1:String) : void {
+        public function setClanEmblem(param1:String) : void
+        {
             this.clanEmblem.setImage(param1);
             this.clanEmblem.visible = true;
         }
         
-        public function setTankName(param1:String) : void {
+        public function setTankName(param1:String) : void
+        {
             var _loc2_:String = null;
             if(param1.length != 0)
             {
@@ -87,21 +94,22 @@ package net.wg.gui.lobby.header
             }
         }
         
-        public function setAccountName(param1:String, param2:String, param3:String, param4:Boolean, param5:Boolean) : void {
+        public function setAccountName(param1:String, param2:String, param3:String, param4:Boolean, param5:Boolean) : void
+        {
             if(param4)
             {
                 this.account_name.textColor = TEAM_KILLER_COLOR;
             }
-            this.account_name.userVO = new UserVO({
-                "fullName":param1,
-                "userName":param2,
-                "clanAbbrev":param3
-            });
+            this.account_name.userVO = new UserVO({"fullName":param1,
+            "userName":param2,
+            "clanAbbrev":param3
+        });
         this._clanEmblemVisible = param5;
         invalidate(INVALIDATE_CLAN_EMBLEM);
     }
     
-    public function setTankType(param1:String) : void {
+    public function setTankType(param1:String) : void
+    {
         var _loc2_:String = null;
         if(param1.length != 0)
         {
@@ -114,7 +122,8 @@ package net.wg.gui.lobby.header
         }
     }
     
-    public function setTankElite(param1:Boolean) : void {
+    public function setTankElite(param1:Boolean) : void
+    {
         if(this._eliteVisible == param1)
         {
             return;
@@ -123,7 +132,8 @@ package net.wg.gui.lobby.header
         invalidate(INVALIDATE_TANK_ELITE);
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         if(isInvalid(INVALIDATE_TANK_ELITE))
         {
             this.elite.visible = this._eliteVisible;

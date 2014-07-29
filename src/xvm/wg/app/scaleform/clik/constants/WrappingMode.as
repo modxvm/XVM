@@ -3,7 +3,8 @@ package scaleform.clik.constants
     public class WrappingMode extends Object
     {
         
-        public function WrappingMode() {
+        public function WrappingMode()
+        {
             super();
         }
         

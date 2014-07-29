@@ -3,7 +3,8 @@ package flashx.textLayout.formats
     public final class TextDecoration extends Object
     {
         
-        public function TextDecoration() {
+        public function TextDecoration()
+        {
             super();
         }
         

@@ -14,7 +14,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class ProgressQuestIndicator extends UIComponent
     {
         
-        public function ProgressQuestIndicator() {
+        public function ProgressQuestIndicator()
+        {
             super();
             this.container = new Sprite();
         }
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         private static var DEFAULT_VALUE:int = 100;
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -47,14 +49,16 @@ package net.wg.gui.lobby.questsWindow.components
         
         public var container:Sprite;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(MouseEvent.CLICK,hideTooltip);
             addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.CLICK,hideTooltip);
             removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
@@ -79,18 +83,21 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        public function setValues(param1:String, param2:Number, param3:Number) : void {
+        public function setValues(param1:String, param2:Number, param3:Number) : void
+        {
             this._currentValue = param2;
             this._totalValue = param3 > 0?param3:DEFAULT_VALUE;
             this._type = param1;
             invalidateData();
         }
         
-        public function setTooltip(param1:Object) : void {
+        public function setTooltip(param1:Object) : void
+        {
             this._tooltip = param1?new ComplexTooltipVO(param1):null;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = 0;
@@ -135,7 +142,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function showTooltip(param1:MouseEvent) : void {
+        private function showTooltip(param1:MouseEvent) : void
+        {
             var _loc2_:String = null;
             if(this._tooltip)
             {

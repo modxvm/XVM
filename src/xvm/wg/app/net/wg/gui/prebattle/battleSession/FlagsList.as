@@ -11,11 +11,13 @@ package net.wg.gui.prebattle.battleSession
     public class FlagsList extends MedalsList
     {
         
-        public function FlagsList() {
+        public function FlagsList()
+        {
             super();
         }
         
-        override protected function dispatchItemEvent(param1:Event) : Boolean {
+        override protected function dispatchItemEvent(param1:Event) : Boolean
+        {
             var _loc2_:String = null;
             switch(param1.type)
             {

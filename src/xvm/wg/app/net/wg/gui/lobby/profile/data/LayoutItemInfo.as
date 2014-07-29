@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.data
     public class LayoutItemInfo extends Object
     {
         
-        public function LayoutItemInfo() {
+        public function LayoutItemInfo()
+        {
             super();
         }
         

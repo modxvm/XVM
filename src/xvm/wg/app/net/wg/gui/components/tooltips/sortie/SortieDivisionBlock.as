@@ -7,7 +7,8 @@ package net.wg.gui.components.tooltips.sortie
     public class SortieDivisionBlock extends UIComponent
     {
         
-        public function SortieDivisionBlock() {
+        public function SortieDivisionBlock()
+        {
             super();
         }
         
@@ -33,14 +34,16 @@ package net.wg.gui.components.tooltips.sortie
         
         private var _divisionBonus:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.levelsTF.text = TOOLTIPS.FORTIFICATION_SORTIEDIVISIONTOOLTIP_VEHLEVEL;
             this.bonusTF.text = TOOLTIPS.FORTIFICATION_SORTIEDIVISIONTOOLTIP_BONUS;
             this.playersTF.text = TOOLTIPS.FORTIFICATION_SORTIEDIVISIONTOOLTIP_PLAYERSLIMIT;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -51,7 +54,8 @@ package net.wg.gui.components.tooltips.sortie
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.playersIT = null;
             this.levelsIT = null;
             this.bonusIT = null;
@@ -60,38 +64,46 @@ package net.wg.gui.components.tooltips.sortie
             this.bonusIT = null;
         }
         
-        public function get division() : String {
+        public function get division() : String
+        {
             return this._division;
         }
         
-        public function set division(param1:String) : void {
+        public function set division(param1:String) : void
+        {
             this._division = param1;
             invalidateData();
         }
         
-        public function get divisionLvls() : String {
+        public function get divisionLvls() : String
+        {
             return this._divisionLvls;
         }
         
-        public function set divisionLvls(param1:String) : void {
+        public function set divisionLvls(param1:String) : void
+        {
             this._divisionLvls = param1;
             invalidateData();
         }
         
-        public function get divisionBonus() : String {
+        public function get divisionBonus() : String
+        {
             return this._divisionBonus;
         }
         
-        public function set divisionBonus(param1:String) : void {
+        public function set divisionBonus(param1:String) : void
+        {
             this._divisionBonus = param1;
             invalidateData();
         }
         
-        public function get playersLimit() : String {
+        public function get playersLimit() : String
+        {
             return this._playersLimit;
         }
         
-        public function set playersLimit(param1:String) : void {
+        public function set playersLimit(param1:String) : void
+        {
             this._playersLimit = param1;
             invalidateData();
         }

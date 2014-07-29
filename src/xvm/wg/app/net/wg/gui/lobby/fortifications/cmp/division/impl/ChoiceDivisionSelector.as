@@ -13,7 +13,8 @@ package net.wg.gui.lobby.fortifications.cmp.division.impl
     public class ChoiceDivisionSelector extends SoundButtonEx
     {
         
-        public function ChoiceDivisionSelector() {
+        public function ChoiceDivisionSelector()
+        {
             super();
             doubleClickEnabled = true;
             this.playerRangeIcon.source = RES_ICONS.MAPS_ICONS_LIBRARY_FORTIFICATION_HUMANS;
@@ -40,7 +41,8 @@ package net.wg.gui.lobby.fortifications.cmp.division.impl
         
         private var _model:FortChoiceDivisionSelectorVO = null;
         
-        public function setData(param1:FortChoiceDivisionSelectorVO) : void {
+        public function setData(param1:FortChoiceDivisionSelectorVO) : void
+        {
             this._model = param1;
             this.divisionName.htmlText = param1.divisionName;
             this.divisionProfit.htmlText = param1.divisionProfit;
@@ -49,11 +51,13 @@ package net.wg.gui.lobby.fortifications.cmp.division.impl
             this.updatePosition();
         }
         
-        public function get divisionID() : int {
+        public function get divisionID() : int
+        {
             return this._model.divisionID;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutPlayerCountHandler);
             this.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverPlayerCountHandler);
             this.removeEventListener(MouseEvent.MOUSE_MOVE,this.mouseMoveHandler);
@@ -67,13 +71,15 @@ package net.wg.gui.lobby.fortifications.cmp.division.impl
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutPlayerCountHandler);
             this.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverPlayerCountHandler);
         }
         
-        private function updatePosition() : void {
+        private function updatePosition() : void
+        {
             this.vehicleLevel.x = Math.round(this.vehicleLevel.x);
             this.playerRangeIcon.x = Math.round(this.playerRange.x - this.playerRangeIcon.width + IMAGE_PADDING);
             this.playerRangeIcon.visible = true;
@@ -83,16 +89,19 @@ package net.wg.gui.lobby.fortifications.cmp.division.impl
             this.playerCountHitArea.height = this.playerRangeIcon.height;
         }
         
-        private function onRollOutPlayerCountHandler(param1:MouseEvent) : void {
+        private function onRollOutPlayerCountHandler(param1:MouseEvent) : void
+        {
             this.removeEventListener(MouseEvent.MOUSE_MOVE,this.mouseMoveHandler);
             App.toolTipMgr.hide();
         }
         
-        private function onRollOverPlayerCountHandler(param1:MouseEvent) : void {
+        private function onRollOverPlayerCountHandler(param1:MouseEvent) : void
+        {
             this.addEventListener(MouseEvent.MOUSE_MOVE,this.mouseMoveHandler);
         }
         
-        private function mouseMoveHandler(param1:MouseEvent) : void {
+        private function mouseMoveHandler(param1:MouseEvent) : void
+        {
             var _loc2_:Point = new Point(mouseX,mouseY);
             _loc2_ = localToGlobal(_loc2_);
             if(this.playerCountHitArea.hitTestPoint(_loc2_.x,_loc2_.y,true))

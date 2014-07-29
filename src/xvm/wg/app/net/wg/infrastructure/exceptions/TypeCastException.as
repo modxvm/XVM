@@ -5,7 +5,8 @@ package net.wg.infrastructure.exceptions
     public class TypeCastException extends WGGUIException
     {
         
-        public function TypeCastException(param1:* = "", param2:* = 0) {
+        public function TypeCastException(param1:* = "", param2:* = 0)
+        {
             super(param1,param2);
         }
     }

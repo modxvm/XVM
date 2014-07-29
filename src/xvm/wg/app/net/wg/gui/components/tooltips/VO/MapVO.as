@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips.VO
     public class MapVO extends DAAPIDataClass
     {
         
-        public function MapVO(param1:Object) {
+        public function MapVO(param1:Object)
+        {
             super(param1);
         }
         

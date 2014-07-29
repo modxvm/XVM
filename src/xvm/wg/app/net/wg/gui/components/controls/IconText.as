@@ -15,7 +15,8 @@ package net.wg.gui.components.controls
     public class IconText extends UIComponent implements ITextContainer
     {
         
-        public function IconText() {
+        public function IconText()
+        {
             super();
         }
         
@@ -55,17 +56,20 @@ package net.wg.gui.components.controls
         
         private var _textFieldYOffset:Number = 0;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             removeEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver);
             removeEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut);
         }
         
-        public function get iconPosition() : String {
+        public function get iconPosition() : String
+        {
             return this._iconPosition;
         }
         
-        public function set iconPosition(param1:String) : void {
+        public function set iconPosition(param1:String) : void
+        {
             if(this._iconPosition == param1)
             {
                 return;
@@ -74,11 +78,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get antiAliasing() : String {
+        public function get antiAliasing() : String
+        {
             return this._antiAliasing;
         }
         
-        public function set antiAliasing(param1:String) : void {
+        public function set antiAliasing(param1:String) : void
+        {
             if(this._antiAliasing == param1)
             {
                 return;
@@ -87,11 +93,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get fitIconPosition() : Boolean {
+        public function get fitIconPosition() : Boolean
+        {
             return this._fitIconPosition;
         }
         
-        public function set fitIconPosition(param1:Boolean) : void {
+        public function set fitIconPosition(param1:Boolean) : void
+        {
             if(this._fitIconPosition == param1)
             {
                 return;
@@ -100,11 +108,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get textAlign() : String {
+        public function get textAlign() : String
+        {
             return this._textAlign;
         }
         
-        public function set textAlign(param1:String) : void {
+        public function set textAlign(param1:String) : void
+        {
             if(this._textAlign == param1)
             {
                 return;
@@ -113,11 +123,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get textFont() : String {
+        public function get textFont() : String
+        {
             return this._textFont;
         }
         
-        public function set textFont(param1:String) : void {
+        public function set textFont(param1:String) : void
+        {
             if(this._textFont == param1)
             {
                 return;
@@ -126,11 +138,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get textSize() : Number {
+        public function get textSize() : Number
+        {
             return this._textSize;
         }
         
-        public function set textSize(param1:Number) : void {
+        public function set textSize(param1:Number) : void
+        {
             if(this._textSize == param1)
             {
                 return;
@@ -139,11 +153,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get textColor() : Number {
+        public function get textColor() : Number
+        {
             return this._textColor;
         }
         
-        public function set textColor(param1:Number) : void {
+        public function set textColor(param1:Number) : void
+        {
             if(this._textColor == param1)
             {
                 return;
@@ -152,11 +168,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get toolTip() : String {
+        public function get toolTip() : String
+        {
             return this._toolTip;
         }
         
-        public function set toolTip(param1:String) : void {
+        public function set toolTip(param1:String) : void
+        {
             if(this._toolTip == param1)
             {
                 return;
@@ -165,11 +183,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             if(this._text == param1)
             {
                 return;
@@ -182,11 +202,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get icon() : String {
+        public function get icon() : String
+        {
             return this._icon;
         }
         
-        public function set icon(param1:String) : void {
+        public function set icon(param1:String) : void
+        {
             if(this._icon == param1)
             {
                 return;
@@ -195,11 +217,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get enabledTooltip() : Boolean {
+        public function get enabledTooltip() : Boolean
+        {
             return this._enabledTooltip;
         }
         
-        public function set enabledTooltip(param1:Boolean) : void {
+        public function set enabledTooltip(param1:Boolean) : void
+        {
             if(param1 == this._enabledTooltip)
             {
                 return;
@@ -207,11 +231,13 @@ package net.wg.gui.components.controls
             this._enabledTooltip = param1;
         }
         
-        public function get textFieldYOffset() : Number {
+        public function get textFieldYOffset() : Number
+        {
             return this._textFieldYOffset;
         }
         
-        public function set textFieldYOffset(param1:Number) : void {
+        public function set textFieldYOffset(param1:Number) : void
+        {
             if(param1 == this._textFieldYOffset)
             {
                 return;
@@ -220,25 +246,30 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get css() : StyleSheet {
+        public function get css() : StyleSheet
+        {
             return this._styleSheet;
         }
         
-        public function set css(param1:StyleSheet) : void {
+        public function set css(param1:StyleSheet) : void
+        {
             this._styleSheet = param1;
             invalidate();
         }
         
-        public function get xCorrect() : Number {
+        public function get xCorrect() : Number
+        {
             return this._xCorrect;
         }
         
-        public function set xCorrect(param1:Number) : void {
+        public function set xCorrect(param1:Number) : void
+        {
             this._xCorrect = param1;
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this._textFormat = this.textField.getTextFormat();
             this._iconWidth = this.iconClip.width;
@@ -251,7 +282,8 @@ package net.wg.gui.components.controls
             addEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             super.draw();
@@ -334,7 +366,8 @@ package net.wg.gui.components.controls
             this.alpha = enabled?1:0.3;
         }
         
-        protected function handleMouseRollOver(param1:MouseEvent) : void {
+        protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             if(!enabled)
             {
                 return;
@@ -345,7 +378,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function handleMouseRollOut(param1:MouseEvent) : void {
+        protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             if(!enabled)
             {
                 return;

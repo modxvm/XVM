@@ -9,23 +9,27 @@ package net.wg.gui.lobby.store.inventory
     public class Inventory extends InventoryMeta implements IInventoryMeta
     {
         
-        public function Inventory() {
+        public function Inventory()
+        {
             super();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             form.storeTable.setModuleRendererLinkage(Linkages.INVENTORY_MODULE_ITEM_RENDERER);
             form.storeTable.setVehicleRendererLinkage(Linkages.INVENTORY_VEHICLE_ITEM_RENDERER);
             form.storeTable.addEventListener(StoreEvent.SELL,this.onSellItemHandler);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             form.storeTable.removeEventListener(StoreEvent.SELL,this.onSellItemHandler);
         }
         
-        override protected function onMenuChangeType() : void {
+        override protected function onMenuChangeType() : void
+        {
             var _loc1_:IStoreMenuView = null;
             if(!initializing)
             {
@@ -36,7 +40,8 @@ package net.wg.gui.lobby.store.inventory
             super.onMenuChangeType();
         }
         
-        override protected function onMenuChange() : void {
+        override protected function onMenuChange() : void
+        {
             if(!initializing)
             {
                 updateTable();
@@ -44,11 +49,13 @@ package net.wg.gui.lobby.store.inventory
             super.onMenuChange();
         }
         
-        override protected function getLocalizator() : Function {
+        override protected function getLocalizator() : Function
+        {
             return MENU.inventory_menu;
         }
         
-        override protected function onViewNeedUpdate(param1:IStoreMenuView, param2:String) : void {
+        override protected function onViewNeedUpdate(param1:IStoreMenuView, param2:String) : void
+        {
             super.onViewNeedUpdate(param1,param2);
             if(!initializing)
             {
@@ -58,7 +65,8 @@ package net.wg.gui.lobby.store.inventory
             form.storeTable.updateHeaderCountTitle(MENU.shop_table_header_count(param1.fittingType));
         }
         
-        private function onSellItemHandler(param1:StoreEvent) : void {
+        private function onSellItemHandler(param1:StoreEvent) : void
+        {
             sellItemS(param1.data);
             param1.stopImmediatePropagation();
         }

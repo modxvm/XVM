@@ -9,7 +9,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class TextProgressElement extends AbstractResizableContent
     {
         
-        public function TextProgressElement() {
+        public function TextProgressElement()
+        {
             super();
         }
         
@@ -29,7 +30,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         public var statusMC:QuestStatusComponent;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.description.width = DEFAULT_WIDTH;
             this.indexTF.visible = false;
@@ -40,7 +42,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.statusMC.visible = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.description = null;
             this.indexTF = null;
             this.progress.dispose();
@@ -55,7 +58,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(this.data)
             {
                 this.data.dispose();
@@ -64,7 +68,8 @@ package net.wg.gui.lobby.questsWindow.components
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.data))
             {
@@ -90,7 +95,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function layoutComponents() : void {
+        private function layoutComponents() : void
+        {
             this.description.height = this.description.textHeight + PADDING;
             this.setSize(this.width,this.description.height);
             isReadyForLayout = true;

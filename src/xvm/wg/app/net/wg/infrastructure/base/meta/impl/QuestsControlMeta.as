@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class QuestsControlMeta extends SoundButton
     {
         
-        public function QuestsControlMeta() {
+        public function QuestsControlMeta()
+        {
             super();
         }
         
         public var showQuestsWindow:Function = null;
         
-        public function showQuestsWindowS() : void {
+        public function showQuestsWindowS() : void
+        {
             App.utils.asserter.assertNotNull(this.showQuestsWindow,"showQuestsWindow" + Errors.CANT_NULL);
             this.showQuestsWindow();
         }

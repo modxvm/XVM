@@ -9,7 +9,8 @@ package net.wg.gui.components.common.waiting
     public class WaitingComponent extends UIComponent
     {
         
-        public function WaitingComponent() {
+        public function WaitingComponent()
+        {
             super();
         }
         
@@ -25,7 +26,8 @@ package net.wg.gui.components.common.waiting
         
         private var _isStopped:Boolean;
         
-        public function setAnimationStatus(param1:Boolean) : void {
+        public function setAnimationStatus(param1:Boolean) : void
+        {
             if(this._isStopped != param1)
             {
                 this._isStopped = param1;
@@ -33,18 +35,21 @@ package net.wg.gui.components.common.waiting
             }
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             super.preInitialize();
             constraints = new Constraints(this,ConstrainMode.REFLOW);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints.addElement(this.waitingMc.name,this.waitingMc,Constraints.CENTER_H | Constraints.CENTER_V);
             constraints.addElement(this.backgroundMc.name,this.backgroundMc,Constraints.ALL);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -71,7 +76,8 @@ package net.wg.gui.components.common.waiting
             }
         }
         
-        public function setMessage(param1:String) : void {
+        public function setMessage(param1:String) : void
+        {
             this.text = param1;
             invalidate(TEXT_INVALID);
         }

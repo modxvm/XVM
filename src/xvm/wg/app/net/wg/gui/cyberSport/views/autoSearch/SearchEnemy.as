@@ -6,7 +6,8 @@ package net.wg.gui.cyberSport.views.autoSearch
     public class SearchEnemy extends StateViewBase
     {
         
-        public function SearchEnemy() {
+        public function SearchEnemy()
+        {
             super();
             currentState = CYBER_SPORT_ALIASES.AUTO_SEARCH_ENEMY_STATE;
             mainField.text = CYBERSPORT.WINDOW_AUTOSEARCH_SEARCHENEMY_MAINTEXT;
@@ -17,14 +18,16 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         public var buttonsBG:MovieClip;
         
-        override protected function updateView() : void {
+        override protected function updateView() : void
+        {
             super.updateView();
             this.buttonsBG.visible = cancelButton.visible = model.canInvokeBattleQueue;
             updateTime();
             startTimer();
         }
         
-        override protected function onTimer() : void {
+        override protected function onTimer() : void
+        {
             super.onTimer();
             updateTime();
             startTimer();

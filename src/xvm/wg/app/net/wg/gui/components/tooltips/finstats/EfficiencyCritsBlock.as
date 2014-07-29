@@ -7,7 +7,8 @@ package net.wg.gui.components.tooltips.finstats
     public class EfficiencyCritsBlock extends UIComponent
     {
         
-        public function EfficiencyCritsBlock() {
+        public function EfficiencyCritsBlock()
+        {
             super();
         }
         
@@ -21,11 +22,13 @@ package net.wg.gui.components.tooltips.finstats
         
         private var dirtyData:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(this.dirtyData)
             {
@@ -39,7 +42,8 @@ package net.wg.gui.components.tooltips.finstats
             }
         }
         
-        public function setData(param1:String, param2:String) : void {
+        public function setData(param1:String, param2:String) : void
+        {
             this._header = param1;
             this._content = param2;
             this.dirtyData = true;

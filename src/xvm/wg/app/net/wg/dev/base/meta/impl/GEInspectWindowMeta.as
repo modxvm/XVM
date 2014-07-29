@@ -6,7 +6,8 @@ package net.wg.dev.base.meta.impl
     public class GEInspectWindowMeta extends AbstractWindowView
     {
         
-        public function GEInspectWindowMeta() {
+        public function GEInspectWindowMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.dev.base.meta.impl
         
         public var copyToClipboard:Function = null;
         
-        public function showDesignerS() : void {
+        public function showDesignerS() : void
+        {
             App.utils.asserter.assertNotNull(this.showDesigner,"showDesigner" + Errors.CANT_NULL);
             this.showDesigner();
         }
         
-        public function copyToClipboardS(param1:String) : void {
+        public function copyToClipboardS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.copyToClipboard,"copyToClipboard" + Errors.CANT_NULL);
             this.copyToClipboard(param1);
         }

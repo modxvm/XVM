@@ -9,7 +9,8 @@ package net.wg.gui.cyberSport.views.autoSearch
     public class ConfirmationReadinessStatus extends StateViewBase
     {
         
-        public function ConfirmationReadinessStatus() {
+        public function ConfirmationReadinessStatus()
+        {
             super();
             currentState = CYBER_SPORT_ALIASES.AUTO_SEARCH_CONFIRMATION_STATE;
             this.headerField.text = CYBERSPORT.WINDOW_AUTOSEARCH_CONFIRMATION_HEADERTEXT;
@@ -30,14 +31,16 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         public var countDownSec:TextField;
         
-        override protected function updateView() : void {
+        override protected function updateView() : void
+        {
             App.soundMgr.playControlsSnd(SoundManagerStates.SND_PRESS,SoundTypes.CYBERSPORT_AUTO_SEARCH,null);
             _time = model.countDownSeconds;
             this.contextMessage(String(_time));
             startTimer();
         }
         
-        override protected function onTimer() : void {
+        override protected function onTimer() : void
+        {
             _time--;
             if(_time > 0)
             {
@@ -46,7 +49,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             }
         }
         
-        override protected function contextMessage(param1:String) : void {
+        override protected function contextMessage(param1:String) : void
+        {
             this.countDown.text = param1;
             dispatchEvent(new Event(UPDATE_TIMER,true));
         }

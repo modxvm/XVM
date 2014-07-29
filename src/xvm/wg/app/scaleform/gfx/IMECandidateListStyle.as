@@ -3,7 +3,8 @@ package scaleform.gfx
     public final class IMECandidateListStyle extends Object
     {
         
-        public function IMECandidateListStyle() {
+        public function IMECandidateListStyle()
+        {
             super();
         }
         

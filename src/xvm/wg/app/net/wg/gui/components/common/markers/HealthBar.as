@@ -7,7 +7,8 @@ package net.wg.gui.components.common.markers
     public class HealthBar extends UIComponent
     {
         
-        public function HealthBar() {
+        public function HealthBar()
+        {
             super();
         }
         
@@ -33,11 +34,13 @@ package net.wg.gui.components.common.markers
         
         private var beforeLastHit:Number;
         
-        public function get color() : String {
+        public function get color() : String
+        {
             return this._color;
         }
         
-        public function set color(param1:String) : void {
+        public function set color(param1:String) : void
+        {
             if(param1 == this._color)
             {
                 return;
@@ -46,30 +49,36 @@ package net.wg.gui.components.common.markers
             invalidate(INVALIDATE_COLOR);
         }
         
-        public function get maxHealth() : Number {
+        public function get maxHealth() : Number
+        {
             return this._maxHealth;
         }
         
-        public function set maxHealth(param1:Number) : void {
+        public function set maxHealth(param1:Number) : void
+        {
             this._maxHealth = param1;
             invalidate(INVALIDATE_BAR);
         }
         
-        public function get curHealth() : Number {
+        public function get curHealth() : Number
+        {
             return this._curHealth;
         }
         
-        public function set curHealth(param1:Number) : void {
+        public function set curHealth(param1:Number) : void
+        {
             this._curHealth = param1;
             this._curHealth = this._curHealth >= 0?this._curHealth:0;
             invalidate(INVALIDATE_BAR);
         }
         
-        public function get isSplashRunning() : Boolean {
+        public function get isSplashRunning() : Boolean
+        {
             return this._isSplashRunning;
         }
         
-        public function updateHealth(param1:Number, param2:String) : void {
+        public function updateHealth(param1:Number, param2:String) : void
+        {
             if(this.maxHealth == 0)
             {
                 return;
@@ -87,12 +96,14 @@ package net.wg.gui.components.common.markers
             this.hitSplash.playShowTween();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.hitSplash.addEventListener(HealthBarAnimatedPart.SHOW,this.onSplashVisible);
             this.hitSplash.addEventListener(HealthBarAnimatedPart.HIDE,this.onSplashHidden);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             super.draw();
@@ -111,15 +122,18 @@ package net.wg.gui.components.common.markers
             }
         }
         
-        private function onSplashVisible(param1:Event) : void {
+        private function onSplashVisible(param1:Event) : void
+        {
             invalidate(INVALIDATE_BAR);
         }
         
-        private function onSplashHidden(param1:Event) : void {
+        private function onSplashHidden(param1:Event) : void
+        {
             this._isSplashRunning = false;
         }
         
-        private function getXforHealth(param1:Number, param2:Boolean) : Number {
+        private function getXforHealth(param1:Number, param2:Boolean) : Number
+        {
             var _loc4_:* = NaN;
             var _loc3_:Number = 0;
             if(!isNaN(this.maxHealth) && !(this.maxHealth == 0))

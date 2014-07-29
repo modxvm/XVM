@@ -25,7 +25,8 @@ package net.wg.gui.lobby.messengerBar.carousel
     public class ChannelCarousel extends ChannelCarouselMeta implements IChannelCarouselMeta, IHelpLayoutComponent
     {
         
-        public function ChannelCarousel() {
+        public function ChannelCarousel()
+        {
             super();
             this._dataProvider = new DAAPIDataProvider();
         }
@@ -44,23 +45,27 @@ package net.wg.gui.lobby.messengerBar.carousel
         
         private var _commonChannelHL:DisplayObject;
         
-        public function as_getDataProvider() : Object {
+        public function as_getDataProvider() : Object
+        {
             return this._dataProvider;
         }
         
-        public function showHelpLayout() : void {
+        public function showHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             var _loc2_:DisplayObject = this.list.getRendererAt(0) as DisplayObject;
             var _loc3_:Object = _loc1_.getProps(_loc2_.width,_loc2_.height,Directions.LEFT,LOBBY_HELP.CHAT_CHANNEL_CAROUSEL,_loc2_.x,_loc2_.y);
             this._commonChannelHL = _loc1_.create(root,_loc3_,this.list);
         }
         
-        public function closeHelpLayout() : void {
+        public function closeHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             _loc1_.destroy(this._commonChannelHL);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this._dataProvider.addEventListener(Event.CHANGE,this.onDataChange);
             this.scrollBar.upArrow.preventAutosizing = true;
@@ -71,7 +76,8 @@ package net.wg.gui.lobby.messengerBar.carousel
             App.stage.addEventListener(MessengerBarEvent.PIN_CAROUSEL_WINDOW,this.handlePinChannelWindow);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -80,7 +86,8 @@ package net.wg.gui.lobby.messengerBar.carousel
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._dataProvider.removeEventListener(Event.CHANGE,this.onDataChange);
             this.list.removeEventListener(ChannelListEvent.OPEN_CHANNEL_CLICK,this.onChannelOpenClick);
             this.list.removeEventListener(ChannelListEvent.CLOSE_CHANNEL_CLICK,this.onChannelCloseClick);
@@ -100,7 +107,8 @@ package net.wg.gui.lobby.messengerBar.carousel
             super.onDispose();
         }
         
-        private function updateScrollBar() : void {
+        private function updateScrollBar() : void
+        {
             var _loc1_:* = false;
             this.list.x = HORIZONTAL_OFFSET_NO_SCROLL;
             this.list.width = _width - HORIZONTAL_OFFSET_NO_SCROLL * 2;
@@ -115,7 +123,8 @@ package net.wg.gui.lobby.messengerBar.carousel
             }
         }
         
-        private function findIndexByClientID(param1:Number) : Number {
+        private function findIndexByClientID(param1:Number) : Number
+        {
             var _loc4_:ChannelListItemVO = null;
             var _loc2_:Number = -1;
             var _loc3_:Number = this._dataProvider.length;
@@ -133,19 +142,23 @@ package net.wg.gui.lobby.messengerBar.carousel
             return _loc2_;
         }
         
-        private function onDataChange(param1:Event) : void {
+        private function onDataChange(param1:Event) : void
+        {
             invalidateSize();
         }
         
-        private function onChannelOpenClick(param1:ChannelListEvent) : void {
+        private function onChannelOpenClick(param1:ChannelListEvent) : void
+        {
             channelOpenClickS(param1.itemData.clientID);
         }
         
-        private function onChannelCloseClick(param1:ChannelListEvent) : void {
+        private function onChannelCloseClick(param1:ChannelListEvent) : void
+        {
             channelCloseClickS(param1.itemData.clientID);
         }
         
-        private function handlePinChannelWindow(param1:MessengerBarEvent) : void {
+        private function handlePinChannelWindow(param1:MessengerBarEvent) : void
+        {
             var _loc3_:IListItemRenderer = null;
             var _loc4_:IAbstractWindowView = null;
             var _loc5_:IWindow = null;
@@ -207,7 +220,8 @@ package net.wg.gui.lobby.messengerBar.carousel
             }
         }
         
-        private function updateWindowVisibleProperty(param1:IAbstractWindowView, param2:Boolean = false) : void {
+        private function updateWindowVisibleProperty(param1:IAbstractWindowView, param2:Boolean = false) : void
+        {
             var _loc3_:Window = Window(param1.window);
             if(_loc3_.visible != param2)
             {

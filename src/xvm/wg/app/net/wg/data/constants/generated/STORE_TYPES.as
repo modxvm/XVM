@@ -3,7 +3,8 @@ package net.wg.data.constants.generated
     public class STORE_TYPES extends Object
     {
         
-        public function STORE_TYPES() {
+        public function STORE_TYPES()
+        {
             super();
         }
         

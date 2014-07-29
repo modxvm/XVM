@@ -7,7 +7,8 @@ package net.wg.gui.lobby.browser
     public class BrowserWindow extends BrowserMeta implements IBrowserMeta
     {
         
-        public function BrowserWindow() {
+        public function BrowserWindow()
+        {
             super();
             showWindowBg = false;
         }
@@ -18,16 +19,19 @@ package net.wg.gui.lobby.browser
         
         private var windowTitle:String = "#menu:browser/window/title";
         
-        public function as_loadingStart() : void {
+        public function as_loadingStart() : void
+        {
             this.actionBtn.action = BrowserActionBtn.ACTION_LOADING;
             this.updateFocus();
         }
         
-        public function as_loadingStop() : void {
+        public function as_loadingStop() : void
+        {
             this.actionBtn.action = BrowserActionBtn.ACTION_RELOAD;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.title = this.windowTitle;
             var _loc1_:Padding = window.contentPadding as Padding;
@@ -35,7 +39,8 @@ package net.wg.gui.lobby.browser
             window.contentPadding = _loc1_;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.actionBtn.dispose();
             this.actionBtn.removeEventListener(BrowserEvent.ACTION_LOADING,this.onBtnAction);
@@ -48,7 +53,8 @@ package net.wg.gui.lobby.browser
             this.browserHitArea.removeEventListener(BrowserEvent.BROWSER_FOCUS_OUT,this.onBrowserFocusOut);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.actionBtn.addEventListener(BrowserEvent.ACTION_LOADING,this.onBtnAction);
             this.actionBtn.addEventListener(BrowserEvent.ACTION_RELOAD,this.onBtnAction);
@@ -59,38 +65,46 @@ package net.wg.gui.lobby.browser
             this.browserHitArea.addEventListener(BrowserEvent.BROWSER_FOCUS_OUT,this.onBrowserFocusOut);
         }
         
-        private function onBtnAction(param1:BrowserEvent) : void {
+        private function onBtnAction(param1:BrowserEvent) : void
+        {
             browserActionS(param1.type);
         }
         
-        private function onBrowserDown(param1:BrowserEvent) : void {
+        private function onBrowserDown(param1:BrowserEvent) : void
+        {
             browserDownS(param1.mouseX,param1.mouseY,param1.delta);
         }
         
-        private function onBrowserUp(param1:BrowserEvent) : void {
+        private function onBrowserUp(param1:BrowserEvent) : void
+        {
             browserUpS(param1.mouseX,param1.mouseY,param1.delta);
         }
         
-        private function onBrowserMove(param1:BrowserEvent) : void {
+        private function onBrowserMove(param1:BrowserEvent) : void
+        {
             browserMoveS(param1.mouseX,param1.mouseY,param1.delta);
         }
         
-        private function onBrowserFocusIn(param1:BrowserEvent) : void {
+        private function onBrowserFocusIn(param1:BrowserEvent) : void
+        {
             onBrowserShowS(false);
         }
         
-        private function onBrowserFocusOut(param1:BrowserEvent) : void {
+        private function onBrowserFocusOut(param1:BrowserEvent) : void
+        {
             browserFocusOut();
         }
         
-        private function updateFocus() : void {
+        private function updateFocus() : void
+        {
             if(!this.actionBtn.isMouseOver)
             {
                 setFocus(this);
             }
         }
         
-        public function as_configure(param1:String, param2:Boolean) : void {
+        public function as_configure(param1:String, param2:Boolean) : void
+        {
             if(param1)
             {
                 window.title = this.windowTitle = param1;

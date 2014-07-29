@@ -6,7 +6,8 @@ package net.wg.gui.lobby.fortifications.data
     public class TransportingVO extends DAAPIDataClass
     {
         
-        public function TransportingVO(param1:Object) {
+        public function TransportingVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -22,7 +23,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var defResTep:uint = 0;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if([SOURCE_BASE_VO,TARGET_BASE_VO].indexOf(param1) != -1)
             {
                 this[param1] = new BuildingBaseVO(param2);
@@ -31,7 +33,8 @@ package net.wg.gui.lobby.fortifications.data
             return super.onDataWrite(param1,param2);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.sourceBaseVO.dispose();
             this.sourceBaseVO = null;
             this.targetBaseVO.dispose();

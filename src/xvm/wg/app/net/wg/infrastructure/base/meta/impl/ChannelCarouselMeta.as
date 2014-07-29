@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ChannelCarouselMeta extends BaseDAAPIComponent
     {
         
-        public function ChannelCarouselMeta() {
+        public function ChannelCarouselMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var channelCloseClick:Function = null;
         
-        public function channelOpenClickS(param1:Number) : void {
+        public function channelOpenClickS(param1:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.channelOpenClick,"channelOpenClick" + Errors.CANT_NULL);
             this.channelOpenClick(param1);
         }
         
-        public function channelCloseClickS(param1:Number) : void {
+        public function channelCloseClickS(param1:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.channelCloseClick,"channelCloseClick" + Errors.CANT_NULL);
             this.channelCloseClick(param1);
         }

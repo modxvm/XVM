@@ -10,7 +10,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class BodyContainer extends UIComponent
     {
         
-        public function BodyContainer() {
+        public function BodyContainer()
+        {
             this.availableSize = new Point();
             super();
             this.barStartYPosition = this.bar.y;
@@ -33,7 +34,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
         
         private var dataList:Vector.<StatisticsLabelDataVO>;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.viewStack.cache = true;
             this.bar.minRendererWidth = MIN_BTN_WIDTH;
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             this.bar.selectedIndex = 0;
         }
         
-        private function onTabBarIndexChanged(param1:IndexEvent) : void {
+        private function onTabBarIndexChanged(param1:IndexEvent) : void
+        {
             var _loc2_:int = param1.index;
             if(!(_loc2_ == -1) && (param1.data))
             {
@@ -50,7 +53,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:uint = 0;
             if(_baseDisposed)
             {
@@ -65,7 +69,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             }
         }
         
-        public function setDossierData(param1:Object) : void {
+        public function setDossierData(param1:Object) : void
+        {
             var _loc3_:String = null;
             var _loc5_:StatisticsLabelDataVO = null;
             var _loc2_:Array = [];
@@ -107,20 +112,23 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             invalidate(LAYOUT_INVALID);
         }
         
-        private function updateDataAt(param1:int) : void {
+        private function updateDataAt(param1:int) : void
+        {
             if(this.dataList)
             {
                 this.viewStack.updateData(this.dataList[param1]);
             }
         }
         
-        public function setAvailableSize(param1:Number, param2:Number) : void {
+        public function setAvailableSize(param1:Number, param2:Number) : void
+        {
             this.availableSize.x = param1;
             this.availableSize.y = param2;
             invalidate(LAYOUT_INVALID);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.bar.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChanged);
             this.bar.dispose();
             this.bar = null;
@@ -134,7 +142,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
 class BodyBarData extends Object
 {
     
-    function BodyBarData(param1:String, param2:String) {
+    function BodyBarData(param1:String, param2:String)
+    {
         super();
         this.label = param1;
         this.linkage = param2;

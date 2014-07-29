@@ -8,15 +8,18 @@ package net.wg.gui.utils
     public class VehicleStateString extends Object
     {
         
-        public function VehicleStateString() {
+        public function VehicleStateString()
+        {
             super();
         }
         
-        public static function getI18nKey(param1:String) : String {
+        public static function getI18nKey(param1:String) : String
+        {
             return param1.length > 0?MENU.tankcarousel_vehiclestates(param1):"";
         }
         
-        public static function appendText(param1:TextField, param2:String) : void {
+        public static function appendText(param1:TextField, param2:String) : void
+        {
             var _loc3_:Array = [];
             var _loc4_:Number = 0;
             var _loc5_:* = null;

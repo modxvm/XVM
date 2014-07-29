@@ -10,7 +10,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
     public class BuildingDirection extends SoundButtonEx implements IDisposable
     {
         
-        public function BuildingDirection() {
+        public function BuildingDirection()
+        {
             var _loc1_:ILocale = null;
             super();
             enabled = false;
@@ -41,46 +42,55 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         
         public var title:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             hitMc.alpha = 0;
             toggle = false;
             this.updateState();
         }
         
-        public function get disabled() : Boolean {
+        public function get disabled() : Boolean
+        {
             return this._disabled;
         }
         
-        public function set disabled(param1:Boolean) : void {
+        public function set disabled(param1:Boolean) : void
+        {
             this._disabled = param1;
             alpha = this._disabled?ALPHA_DISABLED:ALPHA_ENABLED;
         }
         
-        public function get isOpen() : Boolean {
+        public function get isOpen() : Boolean
+        {
             return this._isOpen;
         }
         
-        public function set isOpen(param1:Boolean) : void {
+        public function set isOpen(param1:Boolean) : void
+        {
             this._isOpen = param1;
             this.updateState();
         }
         
-        private function updateState() : void {
+        private function updateState() : void
+        {
             this.setState(_state || "up");
         }
         
-        public function get isActive() : Boolean {
+        public function get isActive() : Boolean
+        {
             return this._isActive;
         }
         
-        public function set isActive(param1:Boolean) : void {
+        public function set isActive(param1:Boolean) : void
+        {
             this._isActive = param1;
             enabled = this._isActive;
             this.updateState();
         }
         
-        override protected function setState(param1:String) : void {
+        override protected function setState(param1:String) : void
+        {
             var _loc2_:String = param1;
             if(!this._isActive)
             {
@@ -90,7 +100,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             _state = param1;
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             if(this._isActive)
             {
                 return statesDefault;
@@ -102,11 +113,13 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             return Vector.<String>(["closed"]);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
         }
         
-        override public function showTooltip(param1:MouseEvent) : void {
+        override public function showTooltip(param1:MouseEvent) : void
+        {
             var _loc2_:String = null;
             if((tooltip) && (this._isActive))
             {
@@ -115,21 +128,25 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             }
         }
         
-        public function get uid() : int {
+        public function get uid() : int
+        {
             return this._uid;
         }
         
-        public function set uid(param1:int) : void {
+        public function set uid(param1:int) : void
+        {
             this._uid = param1;
             this.title.text = this.getTitle();
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             super.updateAfterStateChange();
             this.title.text = this.getTitle();
         }
         
-        private function getTitle() : String {
+        private function getTitle() : String
+        {
             var _loc1_:int = this._uid - 1;
             return _loc1_ > -1?dirNamesArr[_loc1_]:"";
         }

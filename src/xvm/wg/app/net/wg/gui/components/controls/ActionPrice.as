@@ -23,13 +23,13 @@ package net.wg.gui.components.controls
     public class ActionPrice extends UIComponent implements ITextContainer
     {
         
-        public function ActionPrice() {
+        public function ActionPrice()
+        {
             this.alertVisibleInNextStates = [];
             this._textColorType = TEXT_COLOR_TYPE_ICON;
-            this.textColors = {
-                "error":this.COLOR_ERROR,
-                "disable":this.COLOR_DISABLE
-            };
+            this.textColors = {"error":this.COLOR_ERROR,
+            "disable":this.COLOR_DISABLE
+        };
         super();
         this.alertVisibleInNextStates = [STATE_ALIGN_MIDDLE,STATE_ALIGN_TOP,STATE_ALIGN_MIDDLE_SMALL];
     }
@@ -110,7 +110,8 @@ package net.wg.gui.components.controls
     
     private var textColors:Object;
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
         removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
         removeEventListener(MouseEvent.MOUSE_DOWN,this.onPressHandler);
@@ -122,19 +123,23 @@ package net.wg.gui.components.controls
         }
     }
     
-    override public function toString() : String {
+    override public function toString() : String
+    {
         return "[WG ActionPrice " + name + "]";
     }
     
-    public function showTooltip() : void {
+    public function showTooltip() : void
+    {
         App.toolTipMgr.showSpecial(Tooltips.ACTION_PRICE,null,this._vo.type,this._vo.key,this._vo.newPrices,this._vo.oldPrices,this._vo.isBuying,this._vo.forCredits);
     }
     
-    public function hideTooltip() : void {
+    public function hideTooltip() : void
+    {
         App.toolTipMgr.hide();
     }
     
-    public function setup(param1:UIComponent) : void {
+    public function setup(param1:UIComponent) : void
+    {
         this._owner = param1;
         this._owner.mouseChildren = true;
         if(param1 is ListItemRenderer)
@@ -145,7 +150,8 @@ package net.wg.gui.components.controls
         this.updateEnabledMode();
     }
     
-    public function setData(param1:ActionPriceVO) : void {
+    public function setData(param1:ActionPriceVO) : void
+    {
         if(param1 == null)
         {
             this.visible = false;
@@ -164,11 +170,13 @@ package net.wg.gui.components.controls
         }
     }
     
-    public function getData() : ActionPriceVO {
+    public function getData() : ActionPriceVO
+    {
         return this._vo;
     }
     
-    override public function set enabled(param1:Boolean) : void {
+    override public function set enabled(param1:Boolean) : void
+    {
         if(param1 == super.enabled)
         {
             return;
@@ -180,29 +188,35 @@ package net.wg.gui.components.controls
         invalidateData();
     }
     
-    public function get textAlign() : String {
+    public function get textAlign() : String
+    {
         return this.textField.getTextFormat().align;
     }
     
-    public function set textAlign(param1:String) : void {
+    public function set textAlign(param1:String) : void
+    {
         throw new AbstractException("setter CheckBox::textAlign" + Errors.ABSTRACT_INVOKE);
     }
     
-    public function get state() : String {
+    public function get state() : String
+    {
         return this._state;
     }
     
-    public function set state(param1:String) : void {
+    public function set state(param1:String) : void
+    {
         this._state = param1;
         this.textFieldYStartPos = -1;
         invalidateState();
     }
     
-    public function get tooltipEnabled() : Boolean {
+    public function get tooltipEnabled() : Boolean
+    {
         return this._tooltipEnabled;
     }
     
-    public function set tooltipEnabled(param1:Boolean) : void {
+    public function set tooltipEnabled(param1:Boolean) : void
+    {
         if(param1 == this._tooltipEnabled)
         {
             return;
@@ -211,11 +225,13 @@ package net.wg.gui.components.controls
         invalidateData();
     }
     
-    public function get textFont() : String {
+    public function get textFont() : String
+    {
         return this._textFont;
     }
     
-    public function set textFont(param1:String) : void {
+    public function set textFont(param1:String) : void
+    {
         if(this._textFont == param1)
         {
             return;
@@ -224,7 +240,8 @@ package net.wg.gui.components.controls
         invalidateData();
     }
     
-    public function get ico() : String {
+    public function get ico() : String
+    {
         if(!this._vo)
         {
             return "";
@@ -232,7 +249,8 @@ package net.wg.gui.components.controls
         return this._vo.ico;
     }
     
-    public function set ico(param1:String) : void {
+    public function set ico(param1:String) : void
+    {
         if(!this._vo || this._vo.ico == param1)
         {
             return;
@@ -241,11 +259,13 @@ package net.wg.gui.components.controls
         invalidateData();
     }
     
-    public function get iconPosition() : String {
+    public function get iconPosition() : String
+    {
         return this._iconPosition;
     }
     
-    public function set iconPosition(param1:String) : void {
+    public function set iconPosition(param1:String) : void
+    {
         if(param1 == this._iconPosition)
         {
             return;
@@ -254,34 +274,41 @@ package net.wg.gui.components.controls
         invalidate(INVALID_POSITION);
     }
     
-    public function get textColorType() : String {
+    public function get textColorType() : String
+    {
         return this._textColorType;
     }
     
-    public function set textColorType(param1:String) : void {
+    public function set textColorType(param1:String) : void
+    {
         this._textColorType = param1;
         invalidateData();
     }
     
-    public function get textSize() : Number {
+    public function get textSize() : Number
+    {
         return this._textSize;
     }
     
-    public function set textSize(param1:Number) : void {
+    public function set textSize(param1:Number) : void
+    {
         this._textSize = param1;
         invalidateData();
     }
     
-    public function get textYOffset() : Number {
+    public function get textYOffset() : Number
+    {
         return this._textYOffset;
     }
     
-    public function set textYOffset(param1:Number) : void {
+    public function set textYOffset(param1:Number) : void
+    {
         this._textYOffset = param1;
         invalidateData();
     }
     
-    override protected function configUI() : void {
+    override protected function configUI() : void
+    {
         var _loc2_:DisplayObject = null;
         super.configUI();
         addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
@@ -302,7 +329,8 @@ package net.wg.gui.components.controls
         this.updateEnabledMode();
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         if(!initialized)
         {
             return;
@@ -325,7 +353,8 @@ package net.wg.gui.components.controls
         }
     }
     
-    private function checkHitTest(param1:InteractiveObject) : Boolean {
+    private function checkHitTest(param1:InteractiveObject) : Boolean
+    {
         var _loc3_:Point = null;
         var _loc2_:* = false;
         if(param1)
@@ -337,7 +366,8 @@ package net.wg.gui.components.controls
         return _loc2_;
     }
     
-    private function getTextColor(param1:String) : uint {
+    private function getTextColor(param1:String) : uint
+    {
         var _loc2_:uint = 16777215;
         switch(param1)
         {
@@ -357,7 +387,8 @@ package net.wg.gui.components.controls
         return _loc2_;
     }
     
-    private function updateState() : void {
+    private function updateState() : void
+    {
         gotoAndStop(this._state);
         if(this.bg)
         {
@@ -378,7 +409,8 @@ package net.wg.gui.components.controls
         this.iconText.mouseEnabled = this.iconText.mouseChildren = false;
     }
     
-    private function updatePositions() : void {
+    private function updatePositions() : void
+    {
         if(!this._vo)
         {
             return;
@@ -431,7 +463,8 @@ package net.wg.gui.components.controls
         this.updateHitArea(this._state);
     }
     
-    private function updateData() : void {
+    private function updateData() : void
+    {
         var _loc2_:ILocale = null;
         var _loc3_:String = null;
         var _loc4_:TextFormat = null;
@@ -486,7 +519,8 @@ package net.wg.gui.components.controls
         }
     }
     
-    private function updateHitArea(param1:String) : void {
+    private function updateHitArea(param1:String) : void
+    {
         if(!this.tooltipEnabled)
         {
             param1 = STATE_TECH_TREE_VEHICLE;
@@ -545,7 +579,8 @@ package net.wg.gui.components.controls
         this.updateEnabledMode();
     }
     
-    private function updateEnabledMode() : void {
+    private function updateEnabledMode() : void
+    {
         var _loc1_:* = false;
         if((this._owner && this._owner.enabled) && (this.enabled) && this._owner is Button)
         {
@@ -556,7 +591,8 @@ package net.wg.gui.components.controls
         this.hitMc.buttonMode = _loc1_;
     }
     
-    private function onRollOverHandler(param1:MouseEvent) : void {
+    private function onRollOverHandler(param1:MouseEvent) : void
+    {
         if((this._owner) && (this.checkHitTest(this._owner)))
         {
             this._owner.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OUT));
@@ -564,7 +600,8 @@ package net.wg.gui.components.controls
         this.showTooltip();
     }
     
-    private function onRollOutHandler(param1:MouseEvent) : void {
+    private function onRollOutHandler(param1:MouseEvent) : void
+    {
         this.hideTooltip();
         if((this._owner) && (this.checkHitTest(this._owner)))
         {
@@ -572,7 +609,8 @@ package net.wg.gui.components.controls
         }
     }
     
-    private function onPressHandler(param1:MouseEvent) : void {
+    private function onPressHandler(param1:MouseEvent) : void
+    {
         this.hideTooltip();
     }
 }

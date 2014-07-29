@@ -5,7 +5,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
     public class MaintenanceVO extends DAAPIDataClass
     {
         
-        public function MaintenanceVO(param1:Object) {
+        public function MaintenanceVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -39,7 +40,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
         
         public var historicalBattle:HistoricalAmmoVO;
         
-        public function disposeShells() : void {
+        public function disposeShells() : void
+        {
             var _loc1_:ShellVO = null;
             if(this.shells)
             {
@@ -55,7 +57,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeShells();
             if(this.historicalBattle)
             {
@@ -64,7 +67,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
             super.onDispose();
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:Object = null;
             var _loc5_:ShellVO = null;
@@ -103,7 +107,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
             return true;
         }
         
-        override protected function onDataRead(param1:String, param2:Object) : Boolean {
+        override protected function onDataRead(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:ShellVO = null;
             if(param1 == SHELLS_FIELD)

@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class QuestsStates extends Object
     {
         
-        public function QuestsStates() {
+        public function QuestsStates()
+        {
             super();
         }
         

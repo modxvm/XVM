@@ -10,7 +10,8 @@ package net.wg.gui.lobby.training
     public class MinimapEntity extends MinimapEntityMeta implements IMinimapEntityMeta
     {
         
-        public function MinimapEntity() {
+        public function MinimapEntity()
+        {
             super();
             constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
         }
@@ -19,7 +20,8 @@ package net.wg.gui.lobby.training
         
         public var iconsMask:MovieClip;
         
-        public function as_updatePoints() : void {
+        public function as_updatePoints() : void
+        {
             var _loc1_:int = this.icons.numChildren;
             var _loc2_:IMinimapEntry = null;
             var _loc3_:* = 0;
@@ -37,7 +39,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.utils.commons.releaseReferences(this.icons);
             this.icons = null;
             this.iconsMask = null;

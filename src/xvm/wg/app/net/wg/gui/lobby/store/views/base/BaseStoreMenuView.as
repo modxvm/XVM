@@ -19,11 +19,13 @@ package net.wg.gui.lobby.store.views.base
     public class BaseStoreMenuView extends UIComponent implements IStoreMenuView
     {
         
-        public function BaseStoreMenuView() {
+        public function BaseStoreMenuView()
+        {
             super();
         }
         
-        protected static function assertGroupSelection(param1:ButtonGroup, param2:String, param3:Boolean = false) : void {
+        protected static function assertGroupSelection(param1:ButtonGroup, param2:String, param3:Boolean = false) : void
+        {
             var _loc4_:IAssertable = null;
             if(App.instance)
             {
@@ -36,7 +38,8 @@ package net.wg.gui.lobby.store.views.base
             }
         }
         
-        protected static function getSelectedFilters(param1:Array, param2:Boolean, param3:Button) : Array {
+        protected static function getSelectedFilters(param1:Array, param2:Boolean, param3:Button) : Array
+        {
             var _loc5_:ViewUIElementVO = null;
             var _loc4_:Array = [];
             for each(_loc5_ in param1)
@@ -54,7 +57,8 @@ package net.wg.gui.lobby.store.views.base
             return _loc4_;
         }
         
-        private static function initializeControlsByHashLocalized(param1:String, param2:Array, param3:String, param4:String, param5:Function) : void {
+        private static function initializeControlsByHashLocalized(param1:String, param2:Array, param3:String, param4:String, param5:Function) : void
+        {
             var _loc6_:ViewUIElementVO = null;
             if(App.instance)
             {
@@ -83,7 +87,8 @@ package net.wg.gui.lobby.store.views.base
         
         private var _localizator:Function = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:IDisposable = null;
             var _loc2_:IDisposable = null;
             super.onDispose();
@@ -108,7 +113,8 @@ package net.wg.gui.lobby.store.views.base
             this._filterData = null;
         }
         
-        public final function update(param1:Object) : void {
+        public final function update(param1:Object) : void
+        {
             var _loc2_:String = null;
             var _loc3_:StoreMenuViewData = null;
             if(App.instance)
@@ -124,10 +130,12 @@ package net.wg.gui.lobby.store.views.base
             }
         }
         
-        public function resetTemporaryHandlers() : void {
+        public function resetTemporaryHandlers() : void
+        {
         }
         
-        public function setUIName(param1:String, param2:Function) : void {
+        public function setUIName(param1:String, param2:Function) : void
+        {
             App.utils.asserter.assert(param1 == STORE_TYPES.SHOP || param1 == STORE_TYPES.INVENTORY,"incorrect uiName: \'" + param1 + "\'");
             this._uiName = param1;
             gotoAndStop(this._uiName);
@@ -139,27 +147,33 @@ package net.wg.gui.lobby.store.views.base
             }
         }
         
-        protected function getUIName() : String {
+        protected function getUIName() : String
+        {
             return this._uiName;
         }
         
-        public function setSubFilterData(param1:int, param2:ShopSubFilterData) : void {
+        public function setSubFilterData(param1:int, param2:ShopSubFilterData) : void
+        {
             throw this.abstractInvoke("setSubFilterData",param1,param2);
         }
         
-        public function updateSubFilter(param1:int) : void {
+        public function updateSubFilter(param1:int) : void
+        {
             throw this.abstractInvoke("updateSubFilter",param1);
         }
         
-        public function getFilter() : Array {
+        public function getFilter() : Array
+        {
             throw this.abstractInvoke("getFilter");
         }
         
-        public function setViewData(param1:Array) : void {
+        public function setViewData(param1:Array) : void
+        {
             throw this.abstractInvoke("setViewData",param1);
         }
         
-        public function get fittingType() : String {
+        public function get fittingType() : String
+        {
             if(this._fittingType == null)
             {
                 DebugUtils.LOG_WARNING("fitting type accessor invoked before field has been initialized.");
@@ -167,7 +181,8 @@ package net.wg.gui.lobby.store.views.base
             return this._fittingType;
         }
         
-        protected final function selectFilter(param1:Array, param2:Array, param3:Boolean, param4:Boolean) : void {
+        protected final function selectFilter(param1:Array, param2:Array, param3:Boolean, param4:Boolean) : void
+        {
             var _loc5_:ViewUIElementVO = null;
             var _loc6_:Button = null;
             var _loc7_:String = null;
@@ -197,7 +212,8 @@ package net.wg.gui.lobby.store.views.base
             }
         }
         
-        protected final function addHandlerToGroup(param1:Button) : void {
+        protected final function addHandlerToGroup(param1:Button) : void
+        {
             var _loc2_:ButtonGroup = param1.group;
             if(App.instance)
             {
@@ -207,7 +223,8 @@ package net.wg.gui.lobby.store.views.base
             _loc2_.addEventListener(Event.CHANGE,this.onFilterChangeHandler);
         }
         
-        protected final function selectFilterSimple(param1:Array, param2:Object, param3:Boolean) : void {
+        protected final function selectFilterSimple(param1:Array, param2:Object, param3:Boolean) : void
+        {
             var _loc4_:ViewUIElementVO = null;
             var _loc5_:Button = null;
             var _loc6_:ButtonGroup = null;
@@ -228,7 +245,8 @@ package net.wg.gui.lobby.store.views.base
             }
         }
         
-        protected final function resetHandlers(param1:Array, param2:Button) : void {
+        protected final function resetHandlers(param1:Array, param2:Button) : void
+        {
             var _loc3_:ViewUIElementVO = null;
             for each(_loc3_ in param1)
             {
@@ -240,15 +258,18 @@ package net.wg.gui.lobby.store.views.base
             }
         }
         
-        protected function getNation() : int {
+        protected function getNation() : int
+        {
             return this._nation;
         }
         
-        protected function getFilterData() : ShopSubFilterData {
+        protected function getFilterData() : ShopSubFilterData
+        {
             return this._filterData;
         }
         
-        protected function setFilterData(param1:ShopSubFilterData) : void {
+        protected function setFilterData(param1:ShopSubFilterData) : void
+        {
             var _loc2_:IAssertable = null;
             if(App.instance)
             {
@@ -260,18 +281,21 @@ package net.wg.gui.lobby.store.views.base
             this._filterData = param1;
         }
         
-        protected final function dispatchViewChange() : void {
+        protected final function dispatchViewChange() : void
+        {
             dispatchEvent(this.getStoreViewEvent(StoreViewsEvent.VIEW_CHANGE));
         }
         
-        protected function onKindChanged() : void {
+        protected function onKindChanged() : void
+        {
             var _loc1_:* = " method result";
             this.initializeControlsByHash(this.specialKindForTags(),this.getTagsArray(),"getTagsArray" + _loc1_,this.getTagsName());
             this.initializeControlsByHash(this._fittingType,this.getFitsArray(),"getFitsArray" + _loc1_,this.getFitsName());
             dispatchEvent(this.getStoreViewEvent(StoreViewsEvent.POPULATE_MENU_FILTER));
         }
         
-        protected final function getTagsArray() : Array {
+        protected final function getTagsArray() : Array
+        {
             if(this._tagsArr == null)
             {
                 this._tagsArr = this.onTagsArrayRequest();
@@ -279,11 +303,13 @@ package net.wg.gui.lobby.store.views.base
             return this._tagsArr;
         }
         
-        protected function onTagsArrayRequest() : Array {
+        protected function onTagsArrayRequest() : Array
+        {
             throw this.abstractInvoke("onTagsArrayRequest");
         }
         
-        protected final function getFitsArray() : Array {
+        protected final function getFitsArray() : Array
+        {
             if(this._fitsArr == null)
             {
                 this._fitsArr = this.onFitsArrayRequest();
@@ -291,44 +317,54 @@ package net.wg.gui.lobby.store.views.base
             return this._fitsArr;
         }
         
-        protected function onFitsArrayRequest() : Array {
+        protected function onFitsArrayRequest() : Array
+        {
             throw this.abstractInvoke("onFitsArrayRequest");
         }
         
-        protected function getFitsName() : String {
+        protected function getFitsName() : String
+        {
             return "fits";
         }
         
-        protected function getTagsName() : String {
+        protected function getTagsName() : String
+        {
             return "tags";
         }
         
-        protected function specialKindForTags() : String {
+        protected function specialKindForTags() : String
+        {
             return this.fittingType;
         }
         
-        protected function initializeControlsByHash(param1:String, param2:Array, param3:String, param4:String) : void {
+        protected function initializeControlsByHash(param1:String, param2:Array, param3:String, param4:String) : void
+        {
             App.utils.asserter.assertNotNull(this._localizator,"_localizator" + Errors.CANT_NULL);
             initializeControlsByHashLocalized(param1,param2,param3,param4,this._localizator);
         }
         
-        private function getStoreViewEvent(param1:String) : StoreViewsEvent {
+        private function getStoreViewEvent(param1:String) : StoreViewsEvent
+        {
             return new StoreViewsEvent(param1,this.fittingType);
         }
         
-        private function abstractInvoke(param1:String, ... rest) : Error {
+        private function abstractInvoke(param1:String, ... rest) : Error
+        {
             return new AbstractException(this.toString() + "\'::" + param1 + "(" + rest.join(",") + ")\'" + Errors.ABSTRACT_INVOKE);
         }
         
-        private function onFilterChangeHandler(param1:Event) : void {
+        private function onFilterChangeHandler(param1:Event) : void
+        {
             this.dispatchViewChange();
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

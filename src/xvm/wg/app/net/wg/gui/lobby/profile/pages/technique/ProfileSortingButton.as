@@ -9,23 +9,27 @@ package net.wg.gui.lobby.profile.pages.technique
     public class ProfileSortingButton extends InteractiveSortingButton
     {
         
-        public function ProfileSortingButton() {
+        public function ProfileSortingButton()
+        {
             super();
         }
         
         private var showSeparator:Boolean = true;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             mcDescendingIcon.addEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             mcDescendingIcon.removeEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
             super.onDispose();
         }
         
-        override protected function sortingIconLoadingCompleteHandler(param1:UILoaderEvent) : void {
+        override protected function sortingIconLoadingCompleteHandler(param1:UILoaderEvent) : void
+        {
             var _loc2_:UILoaderAlt = UILoaderAlt(param1.target);
             if(param1.target == mcAscendingIcon)
             {
@@ -36,7 +40,8 @@ package net.wg.gui.lobby.profile.pages.technique
             invalidate();
         }
         
-        override public function set data(param1:Object) : void {
+        override public function set data(param1:Object) : void
+        {
             var _loc2_:NormalSortingBtnInfo = null;
             super.data = param1;
             if(param1 is NormalSortingBtnInfo)
@@ -52,7 +57,8 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {

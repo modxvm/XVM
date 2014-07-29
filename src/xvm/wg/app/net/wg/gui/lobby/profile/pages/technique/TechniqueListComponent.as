@@ -21,7 +21,8 @@ package net.wg.gui.lobby.profile.pages.technique
     public class TechniqueListComponent extends UIComponent
     {
         
-        public function TechniqueListComponent() {
+        public function TechniqueListComponent()
+        {
             this.tweenManager = new ExcludeTweenManager();
             super();
             this.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED,this.selectedDataChangeHandler,false,0,true);
@@ -36,7 +37,8 @@ package net.wg.gui.lobby.profile.pages.technique
         
         private static var MASTERY_TAB_ENABLING_CHANGED:String = "mTabEnablingChanged";
         
-        private static function getHeadersProvider() : DataProvider {
+        private static function getHeadersProvider() : DataProvider
+        {
             var _loc4_:Array = null;
             var _loc13_:NormalSortingBtnInfo = null;
             var _loc1_:* = "../maps/icons/buttons/tab_sort_button/ascProfileSortArrow.png";
@@ -144,7 +146,8 @@ package net.wg.gui.lobby.profile.pages.technique
         
         private var _vehicles:Array;
         
-        override public function setSize(param1:Number, param2:Number) : void {
+        override public function setSize(param1:Number, param2:Number) : void
+        {
             super.setSize(param1,param2);
             var _loc3_:Number = this.techniqueList.rowHeight;
             var _loc4_:int = int(_height / _loc3_);
@@ -159,12 +162,14 @@ package net.wg.gui.lobby.profile.pages.technique
             this.lowerShadow.y = _loc5_ - this.lowerShadow.height;
         }
         
-        public function set vehicles(param1:Array) : void {
+        public function set vehicles(param1:Array) : void
+        {
             this._vehicles = param1;
             invalidateData();
         }
         
-        public function enableMarkOfMasteryBtn(param1:Boolean) : void {
+        public function enableMarkOfMasteryBtn(param1:Boolean) : void
+        {
             if(this.isMarkOfMasteryBtnEnabled != param1)
             {
                 this.isMarkOfMasteryBtnEnabled = param1;
@@ -172,11 +177,13 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        public function get selectedItem() : TechniqueListVehicleVO {
+        public function get selectedItem() : TechniqueListVehicleVO
+        {
             return TechniqueListVehicleVO(this.techniqueList.selectedItem);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.lowerShadow.mouseEnabled = this.upperShadow.mouseEnabled = false;
             this.sortableButtonBar.dataProvider = getHeadersProvider();
@@ -185,12 +192,14 @@ package net.wg.gui.lobby.profile.pages.technique
             this.applyDefaultSorting();
         }
         
-        private function applyDefaultSorting() : void {
+        private function applyDefaultSorting() : void
+        {
             this.sortableButtonBar.selectedIndex = 4;
             this.techniqueList.sortByField(TechniqueList.BATTLES_COUNT,false);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:uint = 0;
             var _loc2_:* = 0;
             var _loc3_:* = 0;
@@ -218,6 +227,7 @@ package net.wg.gui.lobby.profile.pages.technique
                     _loc3_ = _loc1_ - _loc2_;
                     _loc4_ = ScrollIndicator(this.techniqueList.scrollBar);
                     _loc5_ = _loc4_?_loc4_.position:0;
+                    _loc5_;
                     this.tweenManager.registerAndLaunch(ANIM_SPEED,this.upperShadow,{"alpha":0},this.getAnimTweenSet());
                     this.tweenManager.registerAndLaunch(ANIM_SPEED,this.lowerShadow,{"alpha":1},this.getAnimTweenSet());
                 }
@@ -243,7 +253,8 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.tweenManager.dispose();
             this.tweenManager = null;
             if(this._vehicles)
@@ -273,29 +284,33 @@ package net.wg.gui.lobby.profile.pages.technique
             super.onDispose();
         }
         
-        private function getAnimTweenSet() : Object {
-            return {
-                "ease":Strong.easeOut,
-                "onComplete":this.onTweenComplete
-            };
+        private function getAnimTweenSet() : Object
+        {
+            return {"ease":Strong.easeOut,
+            "onComplete":this.onTweenComplete
+        };
     }
     
-    private function onTweenComplete(param1:Tween) : void {
+    private function onTweenComplete(param1:Tween) : void
+    {
         if(this.tweenManager)
         {
             this.tweenManager.unregister(param1);
         }
     }
     
-    private function listDataInvalidateHandler(param1:Event) : void {
+    private function listDataInvalidateHandler(param1:Event) : void
+    {
         invalidate(LIST_DATA_INVALIDATED);
     }
     
-    private function selectedDataChangeHandler(param1:Event) : void {
+    private function selectedDataChangeHandler(param1:Event) : void
+    {
         dispatchEvent(new Event(DATA_CHANGED));
     }
     
-    private function sortingChangedHandler(param1:Event) : void {
+    private function sortingChangedHandler(param1:Event) : void
+    {
         param1.stopImmediatePropagation();
         var _loc2_:SortingButton = SortingButton(param1.target);
         if(_loc2_.sortDirection != SortingInfo.WITHOUT_SORT)

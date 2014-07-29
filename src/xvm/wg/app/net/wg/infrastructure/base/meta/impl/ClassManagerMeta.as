@@ -1663,3598 +1663,3599 @@ package net.wg.infrastructure.base.meta.impl
     public class ClassManagerMeta extends Object
     {
         
-        public function ClassManagerMeta() {
+        public function ClassManagerMeta()
+        {
             super();
         }
         
-        public static var NET_WG_DATA_ALIASES:Class;
+        public static var NET_WG_DATA_ALIASES:Class = Aliases;
         
-        public static var NET_WG_DATA_CONTAINERCONSTANTS:Class;
+        public static var NET_WG_DATA_CONTAINERCONSTANTS:Class = ContainerConstants;
         
-        public static var NET_WG_DATA_INSPECTABLEDATAPROVIDER:Class;
+        public static var NET_WG_DATA_INSPECTABLEDATAPROVIDER:Class = InspectableDataProvider;
         
-        public static var NET_WG_DATA_VO_ACHIEVEMENTITEMVO:Class;
+        public static var NET_WG_DATA_VO_ACHIEVEMENTITEMVO:Class = AchievementItemVO;
         
-        public static var NET_WG_DATA_VO_ANIMATIONOBJECT:Class;
+        public static var NET_WG_DATA_VO_ANIMATIONOBJECT:Class = AnimationObject;
         
-        public static var NET_WG_DATA_VO_BATTLERESULTSQUESTVO:Class;
+        public static var NET_WG_DATA_VO_BATTLERESULTSQUESTVO:Class = BattleResultsQuestVO;
         
-        public static var NET_WG_DATA_VO_COLORSCHEME:Class;
+        public static var NET_WG_DATA_VO_COLORSCHEME:Class = ColorScheme;
         
-        public static var NET_WG_DATA_VO_EXTENDEDUSERVO:Class;
+        public static var NET_WG_DATA_VO_EXTENDEDUSERVO:Class = ExtendedUserVO;
         
-        public static var NET_WG_DATA_VO_ICONVO:Class;
+        public static var NET_WG_DATA_VO_ICONVO:Class = IconVO;
         
-        public static var NET_WG_DATA_VO_ITEMDIALOGSETTINGSVO:Class;
+        public static var NET_WG_DATA_VO_ITEMDIALOGSETTINGSVO:Class = ItemDialogSettingsVO;
         
-        public static var NET_WG_DATA_VO_POINTVO:Class;
+        public static var NET_WG_DATA_VO_POINTVO:Class = PointVO;
         
-        public static var NET_WG_DATA_VO_PREMIUMFORMMODEL:Class;
+        public static var NET_WG_DATA_VO_PREMIUMFORMMODEL:Class = PremiumFormModel;
         
-        public static var NET_WG_DATA_VO_PROGRESSELEMENTVO:Class;
+        public static var NET_WG_DATA_VO_PROGRESSELEMENTVO:Class = ProgressElementVO;
         
-        public static var NET_WG_DATA_VO_SELLDIALOGELEMENT:Class;
+        public static var NET_WG_DATA_VO_SELLDIALOGELEMENT:Class = SellDialogElement;
         
-        public static var NET_WG_DATA_VO_SELLDIALOGITEM:Class;
+        public static var NET_WG_DATA_VO_SELLDIALOGITEM:Class = SellDialogItem;
         
-        public static var NET_WG_DATA_VO_SEPARATEITEM:Class;
+        public static var NET_WG_DATA_VO_SEPARATEITEM:Class = SeparateItem;
         
-        public static var NET_WG_DATA_VO_SHOPSUBFILTERDATA:Class;
+        public static var NET_WG_DATA_VO_SHOPSUBFILTERDATA:Class = ShopSubFilterData;
         
-        public static var NET_WG_DATA_VO_SHOPVEHICLEFILTERELEMENTDATA:Class;
+        public static var NET_WG_DATA_VO_SHOPVEHICLEFILTERELEMENTDATA:Class = ShopVehicleFilterElementData;
         
-        public static var NET_WG_DATA_VO_STORETABLEDATA:Class;
+        public static var NET_WG_DATA_VO_STORETABLEDATA:Class = StoreTableData;
         
-        public static var NET_WG_DATA_VO_STORETABLEVO:Class;
+        public static var NET_WG_DATA_VO_STORETABLEVO:Class = StoreTableVO;
         
-        public static var NET_WG_DATA_VO_TRAININGFORMRENDERERVO:Class;
+        public static var NET_WG_DATA_VO_TRAININGFORMRENDERERVO:Class = TrainingFormRendererVO;
         
-        public static var NET_WG_DATA_VO_TRAININGROOMINFOVO:Class;
+        public static var NET_WG_DATA_VO_TRAININGROOMINFOVO:Class = TrainingRoomInfoVO;
         
-        public static var NET_WG_DATA_VO_TRAININGROOMLISTVO:Class;
+        public static var NET_WG_DATA_VO_TRAININGROOMLISTVO:Class = TrainingRoomListVO;
         
-        public static var NET_WG_DATA_VO_TRAININGROOMRENDERERVO:Class;
+        public static var NET_WG_DATA_VO_TRAININGROOMRENDERERVO:Class = TrainingRoomRendererVO;
         
-        public static var NET_WG_DATA_VO_TRAININGWINDOWVO:Class;
+        public static var NET_WG_DATA_VO_TRAININGWINDOWVO:Class = TrainingWindowVO;
         
-        public static var NET_WG_DATA_VO_TWEENPROPERTIESVO:Class;
+        public static var NET_WG_DATA_VO_TWEENPROPERTIESVO:Class = TweenPropertiesVO;
         
-        public static var NET_WG_DATA_VO_USERVO:Class;
+        public static var NET_WG_DATA_VO_USERVO:Class = UserVO;
         
-        public static var NET_WG_DATA_VO_WALLETSTATUSVO:Class;
+        public static var NET_WG_DATA_VO_WALLETSTATUSVO:Class = WalletStatusVO;
         
-        public static var NET_WG_DATA_VO_GENERATED_SHOPNATIONFILTERDATA:Class;
+        public static var NET_WG_DATA_VO_GENERATED_SHOPNATIONFILTERDATA:Class = ShopNationFilterData;
         
-        public static var NET_WG_DATA_VODAAPIDATAPROVIDER:Class;
+        public static var NET_WG_DATA_VODAAPIDATAPROVIDER:Class = VoDAAPIDataProvider;
         
-        public static var NET_WG_DATA_COMPONENTS_ABSTRACTCONTEXTITEMGENERATOR:Class;
+        public static var NET_WG_DATA_COMPONENTS_ABSTRACTCONTEXTITEMGENERATOR:Class = AbstractContextItemGenerator;
         
-        public static var NET_WG_DATA_COMPONENTS_ACCORDIONRENDERERDATA:Class;
+        public static var NET_WG_DATA_COMPONENTS_ACCORDIONRENDERERDATA:Class = AccordionRendererData;
         
-        public static var NET_WG_DATA_COMPONENTS_BATTLERESULTSCIGENERATOR:Class;
+        public static var NET_WG_DATA_COMPONENTS_BATTLERESULTSCIGENERATOR:Class = BattleResultsCIGenerator;
         
-        public static var NET_WG_DATA_COMPONENTS_BATTLESESSIONCIGENERATOR:Class;
+        public static var NET_WG_DATA_COMPONENTS_BATTLESESSIONCIGENERATOR:Class = BattleSessionCIGenerator;
         
-        public static var NET_WG_DATA_COMPONENTS_CONTEXTITEM:Class;
+        public static var NET_WG_DATA_COMPONENTS_CONTEXTITEM:Class = ContextItem;
         
-        public static var NET_WG_DATA_COMPONENTS_CONTEXTITEMGENERATOR:Class;
+        public static var NET_WG_DATA_COMPONENTS_CONTEXTITEMGENERATOR:Class = ContextItemGenerator;
         
-        public static var NET_WG_DATA_COMPONENTS_STOREMENUVIEWDATA:Class;
+        public static var NET_WG_DATA_COMPONENTS_STOREMENUVIEWDATA:Class = StoreMenuViewData;
         
-        public static var NET_WG_DATA_COMPONENTS_USERCONTEXTITEM:Class;
+        public static var NET_WG_DATA_COMPONENTS_USERCONTEXTITEM:Class = UserContextItem;
         
-        public static var NET_WG_DATA_CONSTANTS_COLORSCHEMENAMES:Class;
+        public static var NET_WG_DATA_CONSTANTS_COLORSCHEMENAMES:Class = ColorSchemeNames;
         
-        public static var NET_WG_DATA_CONSTANTS_CONTAINERTYPES:Class;
+        public static var NET_WG_DATA_CONSTANTS_CONTAINERTYPES:Class = ContainerTypes;
         
-        public static var NET_WG_DATA_CONSTANTS_CONTEXTMENUCONSTANTS:Class;
+        public static var NET_WG_DATA_CONSTANTS_CONTEXTMENUCONSTANTS:Class = ContextMenuConstants;
         
-        public static var NET_WG_DATA_CONSTANTS_CURRENCIES:Class;
+        public static var NET_WG_DATA_CONSTANTS_CURRENCIES:Class = Currencies;
         
-        public static var NET_WG_DATA_CONSTANTS_CURSORS:Class;
+        public static var NET_WG_DATA_CONSTANTS_CURSORS:Class = Cursors;
         
-        public static var NET_WG_DATA_CONSTANTS_DIALOGS:Class;
+        public static var NET_WG_DATA_CONSTANTS_DIALOGS:Class = Dialogs;
         
-        public static var NET_WG_DATA_CONSTANTS_DIRECTIONS:Class;
+        public static var NET_WG_DATA_CONSTANTS_DIRECTIONS:Class = Directions;
         
-        public static var NET_WG_DATA_CONSTANTS_DRAGTYPE:Class;
+        public static var NET_WG_DATA_CONSTANTS_DRAGTYPE:Class = DragType;
         
-        public static var NET_WG_DATA_CONSTANTS_ENGINEMETHODS:Class;
+        public static var NET_WG_DATA_CONSTANTS_ENGINEMETHODS:Class = EngineMethods;
         
-        public static var NET_WG_DATA_CONSTANTS_FITTINGTYPES:Class;
+        public static var NET_WG_DATA_CONSTANTS_FITTINGTYPES:Class = FittingTypes;
         
-        public static var NET_WG_DATA_CONSTANTS_GUNTYPES:Class;
+        public static var NET_WG_DATA_CONSTANTS_GUNTYPES:Class = GunTypes;
         
-        public static var NET_WG_DATA_CONSTANTS_ICONTEXTPOSITION:Class;
+        public static var NET_WG_DATA_CONSTANTS_ICONTEXTPOSITION:Class = IconTextPosition;
         
-        public static var NET_WG_DATA_CONSTANTS_ITEMTYPES:Class;
+        public static var NET_WG_DATA_CONSTANTS_ITEMTYPES:Class = ItemTypes;
         
-        public static var NET_WG_DATA_CONSTANTS_KEYSMAP:Class;
+        public static var NET_WG_DATA_CONSTANTS_KEYSMAP:Class = KeysMap;
         
-        public static var NET_WG_DATA_CONSTANTS_LOCALES:Class;
+        public static var NET_WG_DATA_CONSTANTS_LOCALES:Class = Locales;
         
-        public static var NET_WG_DATA_CONSTANTS_QUESTSSTATES:Class;
+        public static var NET_WG_DATA_CONSTANTS_QUESTSSTATES:Class = QuestsStates;
         
-        public static var NET_WG_DATA_CONSTANTS_ROLESSTATE:Class;
+        public static var NET_WG_DATA_CONSTANTS_ROLESSTATE:Class = RolesState;
         
-        public static var NET_WG_DATA_CONSTANTS_SORTINGINFO:Class;
+        public static var NET_WG_DATA_CONSTANTS_SORTINGINFO:Class = SortingInfo;
         
-        public static var NET_WG_DATA_CONSTANTS_SOUNDMANAGERSTATES:Class;
+        public static var NET_WG_DATA_CONSTANTS_SOUNDMANAGERSTATES:Class = SoundManagerStates;
         
-        public static var NET_WG_DATA_CONSTANTS_SOUNDTYPES:Class;
+        public static var NET_WG_DATA_CONSTANTS_SOUNDTYPES:Class = SoundTypes;
         
-        public static var NET_WG_DATA_CONSTANTS_TOOLTIPTAGS:Class;
+        public static var NET_WG_DATA_CONSTANTS_TOOLTIPTAGS:Class = TooltipTags;
         
-        public static var NET_WG_DATA_CONSTANTS_TOOLTIPS:Class;
+        public static var NET_WG_DATA_CONSTANTS_TOOLTIPS:Class = Tooltips;
         
-        public static var NET_WG_DATA_CONSTANTS_VALOBJECT:Class;
+        public static var NET_WG_DATA_CONSTANTS_VALOBJECT:Class = ValObject;
         
-        public static var NET_WG_DATA_CONSTANTS_VEHICLESTATE:Class;
+        public static var NET_WG_DATA_CONSTANTS_VEHICLESTATE:Class = VehicleState;
         
-        public static var NET_WG_DATA_CONSTANTS_VEHICLETYPES:Class;
+        public static var NET_WG_DATA_CONSTANTS_VEHICLETYPES:Class = VehicleTypes;
         
-        public static var NET_WG_DATA_CONSTANTS_GENERATED_CUSTOMIZATION_ITEM_TYPE:Class;
+        public static var NET_WG_DATA_CONSTANTS_GENERATED_CUSTOMIZATION_ITEM_TYPE:Class = CUSTOMIZATION_ITEM_TYPE;
         
-        public static var NET_WG_DATA_CONSTANTS_GENERATED_CYBER_SPORT_ALIASES:Class;
+        public static var NET_WG_DATA_CONSTANTS_GENERATED_CYBER_SPORT_ALIASES:Class = CYBER_SPORT_ALIASES;
         
-        public static var NET_WG_DATA_CONSTANTS_GENERATED_EVENT_LOG_CONSTANTS:Class;
+        public static var NET_WG_DATA_CONSTANTS_GENERATED_EVENT_LOG_CONSTANTS:Class = EVENT_LOG_CONSTANTS;
         
-        public static var NET_WG_DATA_CONSTANTS_GENERATED_FITTING_TYPES:Class;
+        public static var NET_WG_DATA_CONSTANTS_GENERATED_FITTING_TYPES:Class = FITTING_TYPES;
         
-        public static var NET_WG_DATA_CONSTANTS_GENERATED_FORTIFICATION_ALIASES:Class;
+        public static var NET_WG_DATA_CONSTANTS_GENERATED_FORTIFICATION_ALIASES:Class = FORTIFICATION_ALIASES;
         
-        public static var NET_WG_DATA_CONSTANTS_GENERATED_GE_ALIASES:Class;
+        public static var NET_WG_DATA_CONSTANTS_GENERATED_GE_ALIASES:Class = GE_ALIASES;
         
-        public static var NET_WG_DATA_CONSTANTS_GENERATED_ORDER_TYPES:Class;
+        public static var NET_WG_DATA_CONSTANTS_GENERATED_ORDER_TYPES:Class = ORDER_TYPES;
         
-        public static var NET_WG_DATA_CONSTANTS_GENERATED_STORE_TYPES:Class;
+        public static var NET_WG_DATA_CONSTANTS_GENERATED_STORE_TYPES:Class = STORE_TYPES;
         
-        public static var NET_WG_DATA_GUI_ITEMS_FITTINGITEM:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_FITTINGITEM:Class = FittingItem;
         
-        public static var NET_WG_DATA_GUI_ITEMS_GUIITEM:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_GUIITEM:Class = GUIItem;
         
-        public static var NET_WG_DATA_GUI_ITEMS_ITEMSUTILS:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_ITEMSUTILS:Class = ItemsUtils;
         
-        public static var NET_WG_DATA_GUI_ITEMS_TANKMAN:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_TANKMAN:Class = Tankman;
         
-        public static var NET_WG_DATA_GUI_ITEMS_TANKMANSKILL:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_TANKMANSKILL:Class = TankmanSkill;
         
-        public static var NET_WG_DATA_GUI_ITEMS_VEHICLE:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_VEHICLE:Class = Vehicle;
         
-        public static var NET_WG_DATA_GUI_ITEMS_VEHICLEPROFILE:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_VEHICLEPROFILE:Class = VehicleProfile;
         
-        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_ACCOUNTDOSSIER:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_ACCOUNTDOSSIER:Class = AccountDossier;
         
-        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_ACHIEVEMENT:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_ACHIEVEMENT:Class = Achievement;
         
-        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_DOSSIER:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_DOSSIER:Class = Dossier;
         
-        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_TANKMANDOSSIER:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_TANKMANDOSSIER:Class = TankmanDossier;
         
-        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_VEHICLEDOSSIER:Class;
+        public static var NET_WG_DATA_GUI_ITEMS_DOSSIER_VEHICLEDOSSIER:Class = VehicleDossier;
         
-        public static var NET_WG_DATA_MANAGERS_IMPL_DIALOGDISPATCHER:Class;
+        public static var NET_WG_DATA_MANAGERS_IMPL_DIALOGDISPATCHER:Class = DialogDispatcher;
         
-        public static var NET_WG_DATA_MANAGERS_IMPL_FLASHTWEEN:Class;
+        public static var NET_WG_DATA_MANAGERS_IMPL_FLASHTWEEN:Class = FlashTween;
         
-        public static var NET_WG_DATA_MANAGERS_IMPL_NOTIFYPROPERTIES:Class;
+        public static var NET_WG_DATA_MANAGERS_IMPL_NOTIFYPROPERTIES:Class = NotifyProperties;
         
-        public static var NET_WG_DATA_MANAGERS_IMPL_PYTHONTWEEN:Class;
+        public static var NET_WG_DATA_MANAGERS_IMPL_PYTHONTWEEN:Class = PythonTween;
         
-        public static var NET_WG_DATA_MANAGERS_IMPL_TOOLTIPPARAMS:Class;
+        public static var NET_WG_DATA_MANAGERS_IMPL_TOOLTIPPARAMS:Class = ToolTipParams;
         
-        public static var NET_WG_DATA_MANAGERS_IMPL_TOOLTIPPROPS:Class;
+        public static var NET_WG_DATA_MANAGERS_IMPL_TOOLTIPPROPS:Class = TooltipProps;
         
-        public static var NET_WG_DATA_UTILDATA_FORMATTEDINTEGER:Class;
+        public static var NET_WG_DATA_UTILDATA_FORMATTEDINTEGER:Class = FormattedInteger;
         
-        public static var NET_WG_DATA_UTILDATA_ITEMPRICE:Class;
+        public static var NET_WG_DATA_UTILDATA_ITEMPRICE:Class = ItemPrice;
         
-        public static var NET_WG_DATA_UTILDATA_TANKMANROLELEVEL:Class;
+        public static var NET_WG_DATA_UTILDATA_TANKMANROLELEVEL:Class = TankmanRoleLevel;
         
-        public static var NET_WG_DATA_UTILDATA_TANKMANSLOT:Class;
+        public static var NET_WG_DATA_UTILDATA_TANKMANSLOT:Class = TankmanSlot;
         
-        public static var NET_WG_DATA_UTILDATA_TWODIMENSIONALPADDING:Class;
+        public static var NET_WG_DATA_UTILDATA_TWODIMENSIONALPADDING:Class = TwoDimensionalPadding;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_ACCORDION:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_ACCORDION:Class = Accordion;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_AMMUNITIONBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_AMMUNITIONBUTTON:Class = AmmunitionButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BACKBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BACKBUTTON:Class = BackButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BLINKINGBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BLINKINGBUTTON:Class = BlinkingButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONBAREX:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONBAREX:Class = ButtonBarEx;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONDNMICON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONDNMICON:Class = ButtonDnmIcon;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONICONLOADER:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONICONLOADER:Class = ButtonIconLoader;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONTOGGLEINDICATOR:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_BUTTONTOGGLEINDICATOR:Class = ButtonToggleIndicator;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_CLANEMBLEM:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_CLANEMBLEM:Class = ClanEmblem;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_CONTENTTABBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_CONTENTTABBAR:Class = ContentTabBar;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_CONTENTTABRENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_CONTENTTABRENDERER:Class = ContentTabRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_COOLDOWNANIMATIONCONTROLLER:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_COOLDOWNANIMATIONCONTROLLER:Class = CooldownAnimationController;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_COUNTEREX:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_COUNTEREX:Class = CounterEx;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_DASHLINE:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_DASHLINE:Class = DashLine;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_DASHLINETEXTITEM:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_DASHLINETEXTITEM:Class = DashLineTextItem;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_DOUBLEPROGRESSBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_DOUBLEPROGRESSBAR:Class = DoubleProgressBar;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_EXTRAMODULEICON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_EXTRAMODULEICON:Class = ExtraModuleIcon;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_FIELDSET:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_FIELDSET:Class = FieldSet;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_HELPLAYOUTCONTROL:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_HELPLAYOUTCONTROL:Class = HelpLayoutControl;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_INTERACTIVESORTINGBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_INTERACTIVESORTINGBUTTON:Class = InteractiveSortingButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_LINEDESCRICONTEXT:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_LINEDESCRICONTEXT:Class = LineDescrIconText;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_LINEICONTEXT:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_LINEICONTEXT:Class = LineIconText;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_MODULEICON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_MODULEICON:Class = ModuleIcon;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_NORMALBUTTONTOGGLEWG:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_NORMALBUTTONTOGGLEWG:Class = NormalButtonToggleWG;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_PORTRAITITEMRENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_PORTRAITITEMRENDERER:Class = PortraitItemRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SCALABLEICONBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SCALABLEICONBUTTON:Class = ScalableIconButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SCALABLEICONWRAPPER:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SCALABLEICONWRAPPER:Class = ScalableIconWrapper;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SHELLBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SHELLBUTTON:Class = ShellButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SHELLSSET:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SHELLSSET:Class = ShellsSet;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SKILLSITEMRENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SKILLSITEMRENDERER:Class = SkillsItemRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SORTABLEHEADERBUTTONBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SORTABLEHEADERBUTTONBAR:Class = SortableHeaderButtonBar;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SORTINGBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SORTINGBUTTON:Class = SortingButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SORTINGBUTTONINFO:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_SORTINGBUTTONINFO:Class = SortingButtonInfo;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TABBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TABBUTTON:Class = TabButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TANKICON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TANKICON:Class = TankIcon;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TEXTAREA:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TEXTAREA:Class = TextArea;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TEXTAREASIMPLE:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TEXTAREASIMPLE:Class = TextAreaSimple;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TOGGLEBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TOGGLEBUTTON:Class = ToggleButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TOGGLESOUNDBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_TOGGLESOUNDBUTTON:Class = ToggleSoundButton;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_UNCLICKABLESHADOWBG:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_UNCLICKABLESHADOWBG:Class = UnClickableShadowBG;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_UNDERLINEDTEXT:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_UNDERLINEDTEXT:Class = UnderlinedText;
         
-        public static var NET_WG_GUI_COMPONENTS_ADVANCED_VIEWSTACK:Class;
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_VIEWSTACK:Class = ViewStack;
         
-        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_ACHIEVEMENTCAROUSEL:Class;
+        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_ACHIEVEMENTCAROUSEL:Class = AchievementCarousel;
         
-        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_CAROUSELBASE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_CAROUSELBASE:Class = CarouselBase;
         
-        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_ICAROUSELITEMRENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_ICAROUSELITEMRENDERER:Class = ICarouselItemRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_PORTRAITSCAROUSEL:Class;
+        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_PORTRAITSCAROUSEL:Class = PortraitsCarousel;
         
-        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_SKILLSCAROUSEL:Class;
+        public static var NET_WG_GUI_COMPONENTS_CAROUSELS_SKILLSCAROUSEL:Class = SkillsCarousel;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_BASELOGOVIEW:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_BASELOGOVIEW:Class = BaseLogoView;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CONFIRMITEMCOMPONENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CONFIRMITEMCOMPONENT:Class = ConfirmItemComponent;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CURSORMANAGEDCONTAINER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CURSORMANAGEDCONTAINER:Class = CursorManagedContainer;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_INPUTCHECKER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_INPUTCHECKER:Class = InputChecker;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MAINVIEWCONTAINER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MAINVIEWCONTAINER:Class = MainViewContainer;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MANAGEDCONTAINER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MANAGEDCONTAINER:Class = ManagedContainer;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VEHICLEMARKERALLY:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VEHICLEMARKERALLY:Class = VehicleMarkerAlly;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VEHICLEMARKERENEMY:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VEHICLEMARKERENEMY:Class = VehicleMarkerEnemy;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITINGMANAGEDCONTAINER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITINGMANAGEDCONTAINER:Class = WaitingManagedContainer;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_EQUALGAPSHORIZONTALLAYOUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_EQUALGAPSHORIZONTALLAYOUT:Class = EqualGapsHorizontalLayout;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_EQUALWIDTHHORIZONTALLAYOUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_EQUALWIDTHHORIZONTALLAYOUT:Class = EqualWidthHorizontalLayout;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUP:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUP:Class = Group;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUPEX:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUPEX:Class = GroupEx;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUPLAYOUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_GROUPLAYOUT:Class = GroupLayout;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_HORIZONTALGROUPLAYOUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_HORIZONTALGROUPLAYOUT:Class = HorizontalGroupLayout;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_VERTICAL100PERCWIDTHLAYOUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_VERTICAL100PERCWIDTHLAYOUT:Class = Vertical100PercWidthLayout;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_VERTICALGROUPLAYOUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CONTAINERS_VERTICALGROUPLAYOUT:Class = VerticalGroupLayout;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CLIPQUANTITYBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CLIPQUANTITYBAR:Class = ClipQuantityBar;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRBASE:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRBASE:Class = CrosshairBase;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELARCADE:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELARCADE:Class = CrosshairPanelArcade;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELBASE:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELBASE:Class = CrosshairPanelBase;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELPOSTMORTEM:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELPOSTMORTEM:Class = CrosshairPanelPostmortem;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELSNIPER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELSNIPER:Class = CrosshairPanelSniper;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELSTRATEGIC:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRPANELSTRATEGIC:Class = CrosshairPanelStrategic;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRSNIPER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRSNIPER:Class = CrosshairSniper;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRSTRATEGIC:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_CROSSHAIRSTRATEGIC:Class = CrosshairStrategic;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_RELOADINGTIMER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CROSSHAIR_RELOADINGTIMER:Class = ReloadingTimer;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CURSOR_CURSOR:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CURSOR_CURSOR:Class = Cursor;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CURSOR_BASE_BASEINFO:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CURSOR_BASE_BASEINFO:Class = BaseInfo;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_CURSOR_BASE_DROPPINGCURSOR:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_CURSOR_BASE_DROPPINGCURSOR:Class = DroppingCursor;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_ANIMATEEXPLOSION:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_ANIMATEEXPLOSION:Class = AnimateExplosion;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DAMAGELABEL:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DAMAGELABEL:Class = DamageLabel;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBAR:Class = HealthBar;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBARANIMATEDLABEL:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBARANIMATEDLABEL:Class = HealthBarAnimatedLabel;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBARANIMATEDPART:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_HEALTHBARANIMATEDPART:Class = HealthBarAnimatedPart;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_VEHICLEACTIONMARKER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_VEHICLEACTIONMARKER:Class = VehicleActionMarker;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_VEHICLEMARKER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_VEHICLEMARKER:Class = VehicleMarker;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_HPDISPLAYMODE:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_HPDISPLAYMODE:Class = HPDisplayMode;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERFLAGS:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERFLAGS:Class = VehicleMarkerFlags;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERSETTINGS:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERSETTINGS:Class = VehicleMarkerSettings;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_MARKERS_DATA_VEHICLEMARKERVO:Class = VehicleMarkerVO;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_TICKER_RSSENTRYVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_TICKER_RSSENTRYVO:Class = RSSEntryVO;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_TICKER_TICKER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_TICKER_TICKER:Class = Ticker;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_TICKER_TICKERITEM:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_TICKER_TICKERITEM:Class = TickerItem;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_NETSTREAMSTATUSCODE:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_NETSTREAMSTATUSCODE:Class = NetStreamStatusCode;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_NETSTREAMSTATUSLEVEL:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_NETSTREAMSTATUSLEVEL:Class = NetStreamStatusLevel;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_PLAYERSTATUS:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_PLAYERSTATUS:Class = net.wg.gui.components.common.video.PlayerStatus;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_SIMPLEVIDEOPLAYER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_SIMPLEVIDEOPLAYER:Class = SimpleVideoPlayer;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_VIDEOPLAYEREVENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_VIDEOPLAYEREVENT:Class = VideoPlayerEvent;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_VIDEOPLAYERSTATUSEVENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_VIDEOPLAYERSTATUSEVENT:Class = VideoPlayerStatusEvent;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ABSTRACTPLAYERCONTROLLER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ABSTRACTPLAYERCONTROLLER:Class = AbstractPlayerController;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ABSTRACTPLAYERPROGRESSBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ABSTRACTPLAYERPROGRESSBAR:Class = AbstractPlayerProgressBar;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ADVANCEDVIDEOPLAYER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_ADVANCEDVIDEOPLAYER:Class = AdvancedVideoPlayer;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_CONTROLBARCONTROLLER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_CONTROLBARCONTROLLER:Class = ControlBarController;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_KEYBOARDCONTROLLER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_KEYBOARDCONTROLLER:Class = KeyboardController;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBARCONTROLLER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBARCONTROLLER:Class = ProgressBarController;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBAREVENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBAREVENT:Class = ProgressBarEvent;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBARSLIDER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_PROGRESSBARSLIDER:Class = ProgressBarSlider;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_SLIDERPLAYERPROGRESSBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_SLIDERPLAYERPROGRESSBAR:Class = SliderPlayerProgressBar;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERANIMATIONMANAGER:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERANIMATIONMANAGER:Class = VideoPlayerAnimationManager;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERCONTROLBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERCONTROLBAR:Class = VideoPlayerControlBar;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERTITLEBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_VIDEO_ADVANCED_VIDEOPLAYERTITLEBAR:Class = VideoPlayerTitleBar;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITING:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITING:Class = Waiting;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGCOMPONENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGCOMPONENT:Class = WaitingComponent;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGMC:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGMC:Class = WaitingMc;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGVIEW:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_WAITINGVIEW:Class = WaitingView;
         
-        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_EVENTS_WAITINGCHANGEVISIBILITYEVENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_COMMON_WAITING_EVENTS_WAITINGCHANGEVISIBILITYEVENT:Class = WaitingChangeVisibilityEvent;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACCORDIONSOUNDRENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACCORDIONSOUNDRENDERER:Class = AccordionSoundRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACTIONPRICE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACTIONPRICE:Class = ActionPrice;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ALERTICO:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ALERTICO:Class = AlertIco;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_BITMAPFILL:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_BITMAPFILL:Class = BitmapFill;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_BORDERSHADOWSCROLLPANE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_BORDERSHADOWSCROLLPANE:Class = BorderShadowScrollPane;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CAROUSEL:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CAROUSEL:Class = Carousel;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CHECKBOX:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CHECKBOX:Class = CheckBox;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CLOSEBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CLOSEBUTTON:Class = CloseButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_COMPACTCHECKBOX:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_COMPACTCHECKBOX:Class = CompactCheckBox;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENU:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENU:Class = ContextMenu;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENUITEM:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENUITEM:Class = ContextMenuItem;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENUITEMSEPARATE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CONTEXTMENUITEMSEPARATE:Class = ContextMenuItemSeparate;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CORELISTEX:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_CORELISTEX:Class = CoreListEx;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DRAGABLELISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DRAGABLELISTITEMRENDERER:Class = DragableListItemRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNIMAGETEXT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNIMAGETEXT:Class = DropDownImageText;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNLISTITEMRENDERERSOUND:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNLISTITEMRENDERERSOUND:Class = DropDownListItemRendererSound;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNMENU:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DROPDOWNMENU:Class = DropdownMenu;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DYNAMICSCROLLINGLISTEX:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_DYNAMICSCROLLINGLISTEX:Class = DynamicScrollingListEx;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_FIGHTBUTTONSELECT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_FIGHTBUTTONSELECT:Class = FightButtonSelect;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_FIGHTLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_FIGHTLISTITEMRENDERER:Class = FightListItemRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_GLOWARROWASSET:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_GLOWARROWASSET:Class = GlowArrowAsset;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_HYPERLINK:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_HYPERLINK:Class = HyperLink;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_IPROGRESSBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_IPROGRESSBAR:Class = IProgressBar;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ITABLERENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ITABLERENDERER:Class = ITableRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ICONBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ICONBUTTON:Class = IconButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ICONTEXT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ICONTEXT:Class = IconText;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ICONTEXTBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ICONTEXTBUTTON:Class = IconTextButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_INFOICON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_INFOICON:Class = InfoIcon;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_LABELCONTROL:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_LABELCONTROL:Class = LabelControl;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_LISTITEMREDERERIMAGETEXT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_LISTITEMREDERERIMAGETEXT:Class = ListItemRedererImageText;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_LISTITEMRENDERERWITHFOCUSONDIS:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_LISTITEMRENDERERWITHFOCUSONDIS:Class = ListItemRendererWithFocusOnDis;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_MAINMENUBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_MAINMENUBUTTON:Class = MainMenuButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_NATIONDROPDOWNMENU:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_NATIONDROPDOWNMENU:Class = NationDropDownMenu;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_NORMALSORTINGBTNINFO:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_NORMALSORTINGBTNINFO:Class = NormalSortingBtnInfo;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_NORMALSORTINGBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_NORMALSORTINGBUTTON:Class = NormalSortingButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_NUMERICSTEPPER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_NUMERICSTEPPER:Class = NumericStepper;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_PROGRESSBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_PROGRESSBAR:Class = ProgressBar;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_RADIOBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_RADIOBUTTON:Class = RadioButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_RANGESLIDER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_RANGESLIDER:Class = RangeSlider;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_READONLYSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_READONLYSCROLLINGLIST:Class = ReadOnlyScrollingList;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_REGIONDROPDOWNMENU:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_REGIONDROPDOWNMENU:Class = RegionDropdownMenu;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_RESIZABLESCROLLPANE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_RESIZABLESCROLLPANE:Class = ResizableScrollPane;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLBAR:Class = ScrollBar;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLPANE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLPANE:Class = ScrollPane;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTAUTOSCROLL:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTAUTOSCROLL:Class = ScrollingListAutoScroll;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTEX:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTEX:Class = ScrollingListEx;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTPX:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTPX:Class = ScrollingListPx;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTWITHDISRENDERERS:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SCROLLINGLISTWITHDISRENDERERS:Class = ScrollingListWithDisRenderers;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SLIDER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SLIDER:Class = Slider;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SLIDERBG:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SLIDERBG:Class = SliderBg;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SLIDERKEYPOINT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SLIDERKEYPOINT:Class = SliderKeyPoint;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SORTBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SORTBUTTON:Class = SortButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLESCROLLINGLIST:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLESCROLLINGLIST:Class = SortableScrollingList;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLETABLE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLETABLE:Class = SortableTable;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLETABLELIST:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SORTABLETABLELIST:Class = SortableTableList;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDBUTTON:Class = SoundButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDBUTTONEX:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDBUTTONEX:Class = SoundButtonEx;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_SOUNDLISTITEMRENDERER:Class = SoundListItemRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_STEPSLIDER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_STEPSLIDER:Class = StepSlider;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TABLERENDERER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TABLERENDERER:Class = TableRenderer;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TANKMANTRAININGBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TANKMANTRAININGBUTTON:Class = TankmanTrainingButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TANKMANTRAININGSMALLBUTTON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TANKMANTRAININGSMALLBUTTON:Class = TankmanTrainingSmallButton;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TEXTFIELDSHORT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TEXTFIELDSHORT:Class = TextFieldShort;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TEXTINPUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TEXTINPUT:Class = TextInput;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TILELIST:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_TILELIST:Class = TileList;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_UILOADERALT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_UILOADERALT:Class = UILoaderAlt;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_UILOADERCUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_UILOADERCUT:Class = UILoaderCut;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_UNITCOMMANDERSTATS:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_UNITCOMMANDERSTATS:Class = UnitCommanderStats;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_USERNAMEFIELD:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_USERNAMEFIELD:Class = UserNameField;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_VO_ACTIONPRICEVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_VO_ACTIONPRICEVO:Class = ActionPriceVO;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_VOICE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_VOICE:Class = Voice;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_VOICEWAVE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_VOICEWAVE:Class = VoiceWave;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_WALLETRESOURCESSTATUS:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_WALLETRESOURCESSTATUS:Class = WalletResourcesStatus;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_WGSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_WGSCROLLINGLIST:Class = WgScrollingList;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOMMON:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOMMON:Class = AchievementCommon;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOMMONVEHICLE:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOMMONVEHICLE:Class = AchievementCommonVehicle;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOUNTER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOUNTER:Class = AchievementCounter;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOUNTERSMALL:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTCOUNTERSMALL:Class = AchievementCounterSmall;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTDIVISION:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTDIVISION:Class = AchievementDivision;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTEVENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTEVENT:Class = AchievementEvent;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESS:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESS:Class = AchievementProgress;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESSBAR:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESSBAR:Class = AchievementProgressBar;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESSCOMPONENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_ACHIEVEMENTPROGRESSCOMPONENT:Class = AchievementProgressComponent;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_BEIGECOUNTER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_BEIGECOUNTER:Class = BeigeCounter;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_COUNTERCOMPONENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_COUNTERCOMPONENT:Class = CounterComponent;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_GREYRIBBONCOUNTER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_GREYRIBBONCOUNTER:Class = GreyRibbonCounter;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_REDCOUNTER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_REDCOUNTER:Class = RedCounter;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_SMALLCOUNTER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_SMALLCOUNTER:Class = SmallCounter;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_YELLOWRIBBONCOUNTER:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_YELLOWRIBBONCOUNTER:Class = YellowRibbonCounter;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_FANCYRENDEREREVENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_FANCYRENDEREREVENT:Class = FancyRendererEvent;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_RANGESLIDEREVENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_RANGESLIDEREVENT:Class = RangeSliderEvent;
         
-        public static var NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_SCROLLBAREVENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_SCROLLBAREVENT:Class = ScrollBarEvent;
         
-        public static var NET_WG_GUI_COMPONENTS_ICONS_BATTLETYPEICON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ICONS_BATTLETYPEICON:Class = BattleTypeIcon;
         
-        public static var NET_WG_GUI_COMPONENTS_ICONS_PLAYERACTIONMARKER:Class;
+        public static var NET_WG_GUI_COMPONENTS_ICONS_PLAYERACTIONMARKER:Class = PlayerActionMarker;
         
-        public static var NET_WG_GUI_COMPONENTS_ICONS_PLAYERACTIONMARKERCONTROLLER:Class;
+        public static var NET_WG_GUI_COMPONENTS_ICONS_PLAYERACTIONMARKERCONTROLLER:Class = PlayerActionMarkerController;
         
-        public static var NET_WG_GUI_COMPONENTS_ICONS_SQUADICON:Class;
+        public static var NET_WG_GUI_COMPONENTS_ICONS_SQUADICON:Class = SquadIcon;
         
-        public static var NET_WG_GUI_COMPONENTS_POPOVERS_POPOVER:Class;
+        public static var NET_WG_GUI_COMPONENTS_POPOVERS_POPOVER:Class = PopOver;
         
-        public static var NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERCONST:Class;
+        public static var NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERCONST:Class = PopOverConst;
         
-        public static var NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERCONTENTPADDING:Class;
+        public static var NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERCONTENTPADDING:Class = PopoverContentPadding;
         
-        public static var NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERINTERNALLAYOUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_POPOVERS_POPOVERINTERNALLAYOUT:Class = PopoverInternalLayout;
         
-        public static var NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVER:Class;
+        public static var NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVER:Class = SmartPopOver;
         
-        public static var NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVEREXTERNALLAYOUT:Class;
+        public static var NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVEREXTERNALLAYOUT:Class = SmartPopOverExternalLayout;
         
-        public static var NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVERLAYOUTINFO:Class;
+        public static var NET_WG_GUI_COMPONENTS_POPOVERS_SMARTPOPOVERLAYOUTINFO:Class = SmartPopOverLayoutInfo;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_ACHIEVEMENTSCUSTOMBLOCKITEM:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_ACHIEVEMENTSCUSTOMBLOCKITEM:Class = AchievementsCustomBlockItem;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_EXTRAMODULEINFO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_EXTRAMODULEINFO:Class = ExtraModuleInfo;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTBLOCK:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTBLOCK:Class = IgrQuestBlock;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTPROGRESSBLOCK:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTPROGRESSBLOCK:Class = IgrQuestProgressBlock;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_MODULEITEM:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_MODULEITEM:Class = ModuleItem;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_SEPARATOR:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_SEPARATOR:Class = Separator;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_STATUS:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_STATUS:Class = Status;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_SUITABLEVEHICLEBLOCKITEM:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_SUITABLEVEHICLEBLOCKITEM:Class = SuitableVehicleBlockItem;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPACHIEVEMENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPACHIEVEMENT:Class = ToolTipAchievement;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPACTIONPRICE:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPACTIONPRICE:Class = ToolTipActionPrice;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPBASE:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPBASE:Class = ToolTipBase;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPBUYSKILL:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPBUYSKILL:Class = ToolTipBuySkill;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPCLANINFO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPCLANINFO:Class = ToolTipClanInfo;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPCOMPLEX:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPCOMPLEX:Class = ToolTipComplex;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPEQUIPMENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPEQUIPMENT:Class = ToolTipEquipment;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPFINALSTATS:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPFINALSTATS:Class = ToolTipFinalStats;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPHISTORICALAMMO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPHISTORICALAMMO:Class = ToolTipHistoricalAmmo;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPHISTORICALMODULES:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPHISTORICALMODULES:Class = ToolTipHistoricalModules;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPIGR:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPIGR:Class = ToolTipIGR;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPMAP:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPMAP:Class = ToolTipMap;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPMARKSONGUN:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPMARKSONGUN:Class = ToolTipMarksOnGun;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPRSSNEWS:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPRSSNEWS:Class = ToolTipRSSNews;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSELECTEDVEHICLE:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSELECTEDVEHICLE:Class = ToolTipSelectedVehicle;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSETTINGSCONTROL:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSETTINGSCONTROL:Class = ToolTipSettingsControl;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSKILL:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSKILL:Class = ToolTipSkill;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSORTIEDIVISION:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSORTIEDIVISION:Class = ToolTipSortieDivision;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSPECIAL:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSPECIAL:Class = ToolTipSpecial;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSUITABLEVEHICLE:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPSUITABLEVEHICLE:Class = ToolTipSuitableVehicle;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPTANKCLASS:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPTANKCLASS:Class = ToolTipTankClass;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPTANKMEN:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPTANKMEN:Class = ToolTipTankmen;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPUNITLEVEL:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPUNITLEVEL:Class = ToolTipUnitLevel;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPVEHICLE:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPVEHICLE:Class = ToolTipVehicle;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPUNITCOMMAND:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_TOOLTIPUNITCOMMAND:Class = TooltipUnitCommand;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_ACHIEVEMENTVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_ACHIEVEMENTVO:Class = AchievementVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_CLANINFOVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_CLANINFOVO:Class = ClanInfoVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_DIMENSION:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_DIMENSION:Class = Dimension;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_DIVISIONVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_DIVISIONVO:Class = DivisionVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EQUIPMENTPARAMVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EQUIPMENTPARAMVO:Class = EquipmentParamVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EQUIPMENTVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EQUIPMENTVO:Class = EquipmentVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EXTRAMODULEINFOVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_EXTRAMODULEINFOVO:Class = ExtraModuleInfoVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_HISTORICALMODULESVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_HISTORICALMODULESVO:Class = HistoricalModulesVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_IGRVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_IGRVO:Class = IgrVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_MAPVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_MAPVO:Class = MapVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_MODULEVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_MODULEVO:Class = net.wg.gui.components.tooltips.VO.ModuleVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SETTINGSCONTROLVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SETTINGSCONTROLVO:Class = SettingsControlVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SORTIEDIVISIONVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SORTIEDIVISIONVO:Class = SortieDivisionVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SUITABLEVEHICLEVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_SUITABLEVEHICLEVO:Class = SuitableVehicleVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TANKMENVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TANKMENVO:Class = TankmenVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPACTIONPRICEVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPACTIONPRICEVO:Class = ToolTipActionPriceVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKRESULTVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKRESULTVO:Class = ToolTipBlockResultVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKRIGHTLISTITEMVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKRIGHTLISTITEMVO:Class = ToolTipBlockRightListItemVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPBLOCKVO:Class = ToolTipBlockVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPFINALSTATSVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPFINALSTATSVO:Class = ToolTipFinalStatsVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPSKILLVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPSKILLVO:Class = ToolTipSkillVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPSTATUSCOLORSVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPSTATUSCOLORSVO:Class = ToolTipStatusColorsVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPVEHICLESELECTEDVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_TOOLTIPVEHICLESELECTEDVO:Class = ToolTipVehicleSelectedVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_UNITCOMMANDVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_UNITCOMMANDVO:Class = UnitCommandVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_VEHICLEBASEVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_VEHICLEBASEVO:Class = VehicleBaseVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_VEHICLEVO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_VO_VEHICLEVO:Class = net.wg.gui.components.tooltips.VO.VehicleVO;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_FINSTATS_EFFICIENCYBLOCK:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_FINSTATS_EFFICIENCYBLOCK:Class = EfficiencyBlock;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_FINSTATS_EFFICIENCYCRITSBLOCK:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_FINSTATS_EFFICIENCYCRITSBLOCK:Class = EfficiencyCritsBlock;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_HELPERS_TANKTYPEICO:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_HELPERS_TANKTYPEICO:Class = TankTypeIco;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_HELPERS_UTILS:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_HELPERS_UTILS:Class = Utils;
         
-        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_SORTIE_SORTIEDIVISIONBLOCK:Class;
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_SORTIE_SORTIEDIVISIONBLOCK:Class = SortieDivisionBlock;
         
-        public static var NET_WG_GUI_COMPONENTS_WINDOWS_MODULEINFO:Class;
+        public static var NET_WG_GUI_COMPONENTS_WINDOWS_MODULEINFO:Class = ModuleInfo;
         
-        public static var NET_WG_GUI_COMPONENTS_WINDOWS_SCREENBG:Class;
+        public static var NET_WG_GUI_COMPONENTS_WINDOWS_SCREENBG:Class = ScreenBg;
         
-        public static var NET_WG_GUI_COMPONENTS_WINDOWS_WINDOW:Class;
+        public static var NET_WG_GUI_COMPONENTS_WINDOWS_WINDOW:Class = Window;
         
-        public static var NET_WG_GUI_COMPONENTS_WINDOWS_WINDOWEVENT:Class;
+        public static var NET_WG_GUI_COMPONENTS_WINDOWS_WINDOWEVENT:Class = WindowEvent;
         
-        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONEVENT:Class;
+        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONEVENT:Class = CrewOperationEvent;
         
-        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONINFOVO:Class;
+        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONINFOVO:Class = CrewOperationInfoVO;
         
-        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONWARNINGVO:Class;
+        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONWARNINGVO:Class = CrewOperationWarningVO;
         
-        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSIRFOOTER:Class;
+        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSIRFOOTER:Class = CrewOperationsIRFooter;
         
-        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSIRENDERER:Class;
+        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSIRENDERER:Class = CrewOperationsIRenderer;
         
-        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSINITVO:Class;
+        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSINITVO:Class = CrewOperationsInitVO;
         
-        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSPOPOVER:Class;
+        public static var NET_WG_GUI_CREWOPERATIONS_CREWOPERATIONSPOPOVER:Class = CrewOperationsPopOver;
         
-        public static var NET_WG_GUI_CYBERSPORT_CSCONSTANTS:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CSCONSTANTS:Class = CSConstants;
         
-        public static var NET_WG_GUI_CYBERSPORT_CSINVALIDATIONTYPE:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CSINVALIDATIONTYPE:Class = CSInvalidationType;
         
-        public static var NET_WG_GUI_CYBERSPORT_CYBERSPORTMAINWINDOW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CYBERSPORTMAINWINDOW:Class = CyberSportMainWindow;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_BUTTONDNMICONSLIM:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_BUTTONDNMICONSLIM:Class = ButtonDnmIconSlim;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_CSCANDIDATESSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_CSCANDIDATESSCROLLINGLIST:Class = CSCandidatesScrollingList;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_CSVEHICLEBUTTON:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_CSVEHICLEBUTTON:Class = CSVehicleButton;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_CSVEHICLEBUTTONLEVELS:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_CSVEHICLEBUTTONLEVELS:Class = CSVehicleButtonLevels;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_CANDIDATEITEMRENDERER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_CANDIDATEITEMRENDERER:Class = CandidateItemRenderer;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_COMMANDRENDERER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_COMMANDRENDERER:Class = CommandRenderer;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_DOUBLESLIDER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_DOUBLESLIDER:Class = DoubleSlider;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_DYNAMICRANGEVEHICLES:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_DYNAMICRANGEVEHICLES:Class = DynamicRangeVehicles;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_GRAYBUTTONTEXT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_GRAYBUTTONTEXT:Class = GrayButtonText;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_GRAYTRANSPARENTBUTTON:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_GRAYTRANSPARENTBUTTON:Class = GrayTransparentButton;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_MANUALSEARCHRENDERER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_MANUALSEARCHRENDERER:Class = ManualSearchRenderer;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_MEDALVEHICLEVO:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_MEDALVEHICLEVO:Class = MedalVehicleVO;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_NAVIGATIONBLOCK:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_NAVIGATIONBLOCK:Class = NavigationBlock;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_RANGEVIEWCOMPONENT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_RANGEVIEWCOMPONENT:Class = RangeViewComponent;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_ROSTERBUTTONGROUP:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_ROSTERBUTTONGROUP:Class = RosterButtonGroup;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_ROSTERSETTINGSNUMERATIONBLOCK:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_ROSTERSETTINGSNUMERATIONBLOCK:Class = RosterSettingsNumerationBlock;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_SELECTEDVEHICLESMSG:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_SELECTEDVEHICLESMSG:Class = SelectedVehiclesMsg;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_SETTINGSICONS:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_SETTINGSICONS:Class = SettingsIcons;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTOR:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTOR:Class = VehicleSelector;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTORFILTER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTORFILTER:Class = VehicleSelectorFilter;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTORITEMRENDERER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_VEHICLESELECTORITEMRENDERER:Class = VehicleSelectorItemRenderer;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_CSCOMPONENTEVENT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_CSCOMPONENTEVENT:Class = CSComponentEvent;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_MANUALSEARCHEVENT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_MANUALSEARCHEVENT:Class = ManualSearchEvent;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTOREVENT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTOREVENT:Class = VehicleSelectorEvent;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTORFILTEREVENT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTORFILTEREVENT:Class = VehicleSelectorFilterEvent;
         
-        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTORITEMEVENT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_CONTROLS_EVENTS_VEHICLESELECTORITEMEVENT:Class = VehicleSelectorItemEvent;
         
-        public static var NET_WG_GUI_CYBERSPORT_DATA_CANDIDATESDATAPROVIDER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_DATA_CANDIDATESDATAPROVIDER:Class = CandidatesDataProvider;
         
-        public static var NET_WG_GUI_CYBERSPORT_DATA_MANUALSEARCHDATAPROVIDER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_DATA_MANUALSEARCHDATAPROVIDER:Class = net.wg.gui.cyberSport.data.ManualSearchDataProvider;
         
-        public static var NET_WG_GUI_CYBERSPORT_INTERFACES_ICSAUTOSEARCHMAINVIEW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_INTERFACES_ICSAUTOSEARCHMAINVIEW:Class = ICSAutoSearchMainView;
         
-        public static var NET_WG_GUI_CYBERSPORT_INTERFACES_ICHANNELCOMPONENTHOLDER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_INTERFACES_ICHANNELCOMPONENTHOLDER:Class = IChannelComponentHolder;
         
-        public static var NET_WG_GUI_CYBERSPORT_INTERFACES_IMANUALSEARCHDATAPROVIDER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_INTERFACES_IMANUALSEARCHDATAPROVIDER:Class = IManualSearchDataProvider;
         
-        public static var NET_WG_GUI_CYBERSPORT_POPUPS_VEHICLESELECTORPOPUP:Class;
+        public static var NET_WG_GUI_CYBERSPORT_POPUPS_VEHICLESELECTORPOPUP:Class = VehicleSelectorPopup;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_ANIMATEDROSTERSETTINGSVIEW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_ANIMATEDROSTERSETTINGSVIEW:Class = AnimatedRosterSettingsView;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_INTROVIEW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_INTROVIEW:Class = IntroView;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_RANGEROSTERSETTINGSVIEW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_RANGEROSTERSETTINGSVIEW:Class = RangeRosterSettingsView;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_ROSTERSETTINGSVIEW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_ROSTERSETTINGSVIEW:Class = RosterSettingsView;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_ROSTERSLOTSETTINGSWINDOW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_ROSTERSLOTSETTINGSWINDOW:Class = RosterSlotSettingsWindow;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNITVIEW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNITVIEW:Class = UnitView;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNITSLISTVIEW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNITSLISTVIEW:Class = UnitsListView;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_CSAUTOSEARCHMAINVIEW:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_CSAUTOSEARCHMAINVIEW:Class = CSAutoSearchMainView;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_CONFIRMATIONREADINESSSTATUS:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_CONFIRMATIONREADINESSSTATUS:Class = ConfirmationReadinessStatus;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_ERRORSTATE:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_ERRORSTATE:Class = ErrorState;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_SEARCHCOMMANDS:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_SEARCHCOMMANDS:Class = SearchCommands;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_SEARCHENEMY:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_SEARCHENEMY:Class = SearchEnemy;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_STATEVIEWBASE:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_STATEVIEWBASE:Class = StateViewBase;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_WAITINGPLAYERS:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_AUTOSEARCH_WAITINGPLAYERS:Class = WaitingPlayers;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_EVENTS_CYBERSPORTEVENT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_EVENTS_CYBERSPORTEVENT:Class = CyberSportEvent;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_EVENTS_ROSTERSETTINGSEVENT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_EVENTS_ROSTERSETTINGSEVENT:Class = RosterSettingsEvent;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_CHATSECTION:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_CHATSECTION:Class = ChatSection;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_JOINUNITSECTION:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_JOINUNITSECTION:Class = JoinUnitSection;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_SIMPLESLOTRENDERER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_SIMPLESLOTRENDERER:Class = SimpleSlotRenderer;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_SLOTRENDERER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_SLOTRENDERER:Class = SlotRenderer;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_TEAMSECTION:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_TEAMSECTION:Class = TeamSection;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_UNITSLOTHELPER:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_UNITSLOTHELPER:Class = UnitSlotHelper;
         
-        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_WAITLISTSECTION:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VIEWS_UNIT_WAITLISTSECTION:Class = WaitListSection;
         
-        public static var NET_WG_GUI_CYBERSPORT_VO_AUTOSEARCHVO:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VO_AUTOSEARCHVO:Class = AutoSearchVO;
         
-        public static var NET_WG_GUI_CYBERSPORT_VO_CSCOMMANDVO:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VO_CSCOMMANDVO:Class = CSCommandVO;
         
-        public static var NET_WG_GUI_CYBERSPORT_VO_IUNIT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VO_IUNIT:Class = IUnit;
         
-        public static var NET_WG_GUI_CYBERSPORT_VO_IUNITSLOT:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VO_IUNITSLOT:Class = IUnitSlot;
         
-        public static var NET_WG_GUI_CYBERSPORT_VO_NAVIGATIONBLOCKVO:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VO_NAVIGATIONBLOCKVO:Class = NavigationBlockVO;
         
-        public static var NET_WG_GUI_CYBERSPORT_VO_VEHICLESELECTORFILTERVO:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VO_VEHICLESELECTORFILTERVO:Class = VehicleSelectorFilterVO;
         
-        public static var NET_WG_GUI_CYBERSPORT_VO_VEHICLESELECTORITEMVO:Class;
+        public static var NET_WG_GUI_CYBERSPORT_VO_VEHICLESELECTORITEMVO:Class = VehicleSelectorItemVO;
         
-        public static var NET_WG_GUI_EVENTS_ACCORDIONRENDEREREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_ACCORDIONRENDEREREVENT:Class = AccordionRendererEvent;
         
-        public static var NET_WG_GUI_EVENTS_ARENAVOIPSETTINGSEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_ARENAVOIPSETTINGSEVENT:Class = ArenaVoipSettingsEvent;
         
-        public static var NET_WG_GUI_EVENTS_CONTEXTMENUEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_CONTEXTMENUEVENT:Class = ContextMenuEvent;
         
-        public static var NET_WG_GUI_EVENTS_COOLDOWNEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_COOLDOWNEVENT:Class = CooldownEvent;
         
-        public static var NET_WG_GUI_EVENTS_CREWEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_CREWEVENT:Class = CrewEvent;
         
-        public static var NET_WG_GUI_EVENTS_DEVICEEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_DEVICEEVENT:Class = DeviceEvent;
         
-        public static var NET_WG_GUI_EVENTS_EQUIPMENTEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_EQUIPMENTEVENT:Class = EquipmentEvent;
         
-        public static var NET_WG_GUI_EVENTS_FIGHTBUTTONEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_FIGHTBUTTONEVENT:Class = FightButtonEvent;
         
-        public static var NET_WG_GUI_EVENTS_FINALSTATISTICEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_FINALSTATISTICEVENT:Class = FinalStatisticEvent;
         
-        public static var NET_WG_GUI_EVENTS_HEADERBUTTONBAREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_HEADERBUTTONBAREVENT:Class = HeaderButtonBarEvent;
         
-        public static var NET_WG_GUI_EVENTS_HEADEREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_HEADEREVENT:Class = HeaderEvent;
         
-        public static var NET_WG_GUI_EVENTS_LISTEVENTEX:Class;
+        public static var NET_WG_GUI_EVENTS_LISTEVENTEX:Class = ListEventEx;
         
-        public static var NET_WG_GUI_EVENTS_LOBBYEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_LOBBYEVENT:Class = LobbyEvent;
         
-        public static var NET_WG_GUI_EVENTS_LOBBYTDISPATCHEREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_LOBBYTDISPATCHEREVENT:Class = LobbyTDispatcherEvent;
         
-        public static var NET_WG_GUI_EVENTS_MANAGEDCONTAINEREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_MANAGEDCONTAINEREVENT:Class = ManagedContainerEvent;
         
-        public static var NET_WG_GUI_EVENTS_MESSENGERBAREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_MESSENGERBAREVENT:Class = MessengerBarEvent;
         
-        public static var NET_WG_GUI_EVENTS_MODULEINFOEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_MODULEINFOEVENT:Class = ModuleInfoEvent;
         
-        public static var NET_WG_GUI_EVENTS_NUMERICSTEPPEREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_NUMERICSTEPPEREVENT:Class = NumericStepperEvent;
         
-        public static var NET_WG_GUI_EVENTS_PARAMSEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_PARAMSEVENT:Class = ParamsEvent;
         
-        public static var NET_WG_GUI_EVENTS_PERSONALCASEEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_PERSONALCASEEVENT:Class = PersonalCaseEvent;
         
-        public static var NET_WG_GUI_EVENTS_QUESTEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_QUESTEVENT:Class = QuestEvent;
         
-        public static var NET_WG_GUI_EVENTS_RESIZABLEBLOCKEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_RESIZABLEBLOCKEVENT:Class = ResizableBlockEvent;
         
-        public static var NET_WG_GUI_EVENTS_SHELLRENDEREREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_SHELLRENDEREREVENT:Class = ShellRendererEvent;
         
-        public static var NET_WG_GUI_EVENTS_SHOWDIALOGEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_SHOWDIALOGEVENT:Class = ShowDialogEvent;
         
-        public static var NET_WG_GUI_EVENTS_SORTABLETABLELISTEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_SORTABLETABLELISTEVENT:Class = SortableTableListEvent;
         
-        public static var NET_WG_GUI_EVENTS_SORTINGEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_SORTINGEVENT:Class = SortingEvent;
         
-        public static var NET_WG_GUI_EVENTS_STATEMANAGEREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_STATEMANAGEREVENT:Class = StateManagerEvent;
         
-        public static var NET_WG_GUI_EVENTS_TIMELINEEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_TIMELINEEVENT:Class = TimelineEvent;
         
-        public static var NET_WG_GUI_EVENTS_TRAININGEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_TRAININGEVENT:Class = TrainingEvent;
         
-        public static var NET_WG_GUI_EVENTS_UILOADEREVENT:Class;
+        public static var NET_WG_GUI_EVENTS_UILOADEREVENT:Class = UILoaderEvent;
         
-        public static var NET_WG_GUI_EVENTS_VEHICLESELLDIALOGEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_VEHICLESELLDIALOGEVENT:Class = VehicleSellDialogEvent;
         
-        public static var NET_WG_GUI_EVENTS_VIEWSTACKEVENT:Class;
+        public static var NET_WG_GUI_EVENTS_VIEWSTACKEVENT:Class = ViewStackEvent;
         
-        public static var NET_WG_GUI_GAMELOADING_GAMELOADING:Class;
+        public static var NET_WG_GUI_GAMELOADING_GAMELOADING:Class = GameLoading;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_HISTORICALBATTLESLISTWINDOW:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_HISTORICALBATTLESLISTWINDOW:Class = HistoricalBattlesListWindow;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_BATTLECAROUSELITEMRENDERER:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_BATTLECAROUSELITEMRENDERER:Class = BattleCarouselItemRenderer;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_BATTLESCAROUSEL:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_BATTLESCAROUSEL:Class = BattlesCarousel;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_SIMPLEVEHICLELIST:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_SIMPLEVEHICLELIST:Class = SimpleVehicleList;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_TEAMSVEHICLELIST:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_TEAMSVEHICLELIST:Class = TeamsVehicleList;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_VEHICLELISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_CONTROLS_VEHICLELISTITEMRENDERER:Class = VehicleListItemRenderer;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_DATA_BATTLELISTITEMVO:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_DATA_BATTLELISTITEMVO:Class = BattleListItemVO;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_DATA_HISTORICALBATTLEVO:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_DATA_HISTORICALBATTLEVO:Class = HistoricalBattleVO;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_DATA_VEHICLELISTITEMVO:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_DATA_VEHICLELISTITEMVO:Class = VehicleListItemVO;
         
-        public static var NET_WG_GUI_HISTORICALBATTLES_EVENTS_TEAMSVEHICLELISTEVENT:Class;
+        public static var NET_WG_GUI_HISTORICALBATTLES_EVENTS_TEAMSVEHICLELISTEVENT:Class = TeamsVehicleListEvent;
         
-        public static var NET_WG_GUI_INTERFACES_IEXTENDEDUSERVO:Class;
+        public static var NET_WG_GUI_INTERFACES_IEXTENDEDUSERVO:Class = IExtendedUserVO;
         
-        public static var NET_WG_GUI_INTERFACES_IRALLYCANDIDATEVO:Class;
+        public static var NET_WG_GUI_INTERFACES_IRALLYCANDIDATEVO:Class = IRallyCandidateVO;
         
-        public static var NET_WG_GUI_INTERFACES_IUSERVO:Class;
+        public static var NET_WG_GUI_INTERFACES_IUSERVO:Class = IUserVO;
         
-        public static var NET_WG_GUI_INTRO_INTROINFOVO:Class;
+        public static var NET_WG_GUI_INTRO_INTROINFOVO:Class = IntroInfoVO;
         
-        public static var NET_WG_GUI_INTRO_INTROPAGE:Class;
+        public static var NET_WG_GUI_INTRO_INTROPAGE:Class = IntroPage;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_CHANGEPROPERTYEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_CHANGEPROPERTYEVENT:Class = ChangePropertyEvent;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTCREATEEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTCREATEEVENT:Class = ComponentCreateEvent;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTINFOVO:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTINFOVO:Class = ComponentInfoVo;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTLISTITEMRENDERER:Class = ComponentListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTSPANEL:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_COMPONENTSPANEL:Class = ComponentsPanel;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_EDITABLEPROPERTYLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_EDITABLEPROPERTYLISTITEMRENDERER:Class = EditablePropertyListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_GECOMPONENTVO:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_GECOMPONENTVO:Class = GEComponentVO;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_GEDESIGNERWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_GEDESIGNERWINDOW:Class = GEDesignerWindow;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_GEINSPECTWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_GEINSPECTWINDOW:Class = GEInspectWindow;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_GUIEDITORHELPER:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_GUIEDITORHELPER:Class = GUIEditorHelper;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_COMPONENTPROPERTIES:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_COMPONENTPROPERTIES:Class = ComponentProperties;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_COMPONENTPROPERTYVO:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_COMPONENTPROPERTYVO:Class = ComponentPropertyVO;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_CONTEXTMENUGENERATORITEMS:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_CONTEXTMENUGENERATORITEMS:Class = ContextMenuGeneratorItems;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_ICONTEXTMENUGENERATORITEMS:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_ICONTEXTMENUGENERATORITEMS:Class = IContextMenuGeneratorItems;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_PROPTYPES:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_DATA_PROPTYPES:Class = PropTypes;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_EVENTS_INSPECTORVIEWEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_EVENTS_INSPECTORVIEWEVENT:Class = InspectorViewEvent;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_VIEWS_EVENTSVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_VIEWS_EVENTSVIEW:Class = EventsView;
         
-        public static var NET_WG_GUI_LOBBY_GUIEDITOR_VIEWS_INSPECTORVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_GUIEDITOR_VIEWS_INSPECTORVIEW:Class = InspectorView;
         
-        public static var NET_WG_GUI_LOBBY_LOBBYPAGE:Class;
+        public static var NET_WG_GUI_LOBBY_LOBBYPAGE:Class = LobbyPage;
         
-        public static var NET_WG_GUI_LOBBY_BARRACKS_BARRACKS:Class;
+        public static var NET_WG_GUI_LOBBY_BARRACKS_BARRACKS:Class = Barracks;
         
-        public static var NET_WG_GUI_LOBBY_BARRACKS_BARRACKSFORM:Class;
+        public static var NET_WG_GUI_LOBBY_BARRACKS_BARRACKSFORM:Class = BarracksForm;
         
-        public static var NET_WG_GUI_LOBBY_BARRACKS_BARRACKSITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_BARRACKS_BARRACKSITEMRENDERER:Class = BarracksItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTS:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTS:Class = BattleResults;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTSEVENTRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTSEVENTRENDERER:Class = BattleResultsEventRenderer;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTSMEDALSLISTVO:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_BATTLERESULTSMEDALSLISTVO:Class = BattleResultsMedalsListVO;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_COMMONSTATS:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_COMMONSTATS:Class = CommonStats;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_CUSTOMACHIEVEMENT:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_CUSTOMACHIEVEMENT:Class = CustomAchievement;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSBLOCK:Class = DetailsBlock;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSSTATS:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSSTATS:Class = DetailsStats;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSSTATSSCROLLPANE:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_DETAILSSTATSSCROLLPANE:Class = DetailsStatsScrollPane;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_EFFICIENCYICONRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_EFFICIENCYICONRENDERER:Class = EfficiencyIconRenderer;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_EFFICIENCYRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_EFFICIENCYRENDERER:Class = EfficiencyRenderer;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_MEDALSLIST:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_MEDALSLIST:Class = MedalsList;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_PROGRESSELEMENT:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_PROGRESSELEMENT:Class = ProgressElement;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_SPECIALACHIEVEMENT:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_SPECIALACHIEVEMENT:Class = SpecialAchievement;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TANKSTATSVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TANKSTATSVIEW:Class = TankStatsView;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMMEMBERITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMMEMBERITEMRENDERER:Class = TeamMemberItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMMEMBERSTATSVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMMEMBERSTATSVIEW:Class = TeamMemberStatsView;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMSTATS:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMSTATS:Class = TeamStats;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMSTATSLIST:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_TEAMSTATSLIST:Class = TeamStatsList;
         
-        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_VEHICLEDETAILS:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLERESULTS_VEHICLEDETAILS:Class = VehicleDetails;
         
-        public static var NET_WG_GUI_LOBBY_BATTLELOADING_BATTLELOADING:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLELOADING_BATTLELOADING:Class = BattleLoading;
         
-        public static var NET_WG_GUI_LOBBY_BATTLELOADING_BATTLELOADINGFORM:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLELOADING_BATTLELOADINGFORM:Class = BattleLoadingForm;
         
-        public static var NET_WG_GUI_LOBBY_BATTLELOADING_PLAYERITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLELOADING_PLAYERITEMRENDERER:Class = PlayerItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_BATTLELOADING_CONSTANTS_PLAYERSTATUS:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLELOADING_CONSTANTS_PLAYERSTATUS:Class = net.wg.gui.lobby.battleloading.constants.PlayerStatus;
         
-        public static var NET_WG_GUI_LOBBY_BATTLELOADING_CONSTANTS_VEHICLESTATUS:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLELOADING_CONSTANTS_VEHICLESTATUS:Class = VehicleStatus;
         
-        public static var NET_WG_GUI_LOBBY_BATTLELOADING_DATA_ENEMYVEHICLESDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLELOADING_DATA_ENEMYVEHICLESDATAPROVIDER:Class = EnemyVehiclesDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_BATTLELOADING_DATA_TEAMVEHICLESDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLELOADING_DATA_TEAMVEHICLESDATAPROVIDER:Class = TeamVehiclesDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_BATTLELOADING_INTERFACES_IVEHICLESDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLELOADING_INTERFACES_IVEHICLESDATAPROVIDER:Class = IVehiclesDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_BATTLELOADING_VO_VEHICLEINFOVO:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLELOADING_VO_VEHICLEINFOVO:Class = VehicleInfoVO;
         
-        public static var NET_WG_GUI_LOBBY_BATTLEQUEUE_BATTLEQUEUE:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLEQUEUE_BATTLEQUEUE:Class = BattleQueue;
         
-        public static var NET_WG_GUI_LOBBY_BATTLEQUEUE_BATTLEQUEUEITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_BATTLEQUEUE_BATTLEQUEUEITEMRENDERER:Class = BattleQueueItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_BROWSER_BROWSERACTIONBTN:Class;
+        public static var NET_WG_GUI_LOBBY_BROWSER_BROWSERACTIONBTN:Class = BrowserActionBtn;
         
-        public static var NET_WG_GUI_LOBBY_BROWSER_BROWSEREVENT:Class;
+        public static var NET_WG_GUI_LOBBY_BROWSER_BROWSEREVENT:Class = BrowserEvent;
         
-        public static var NET_WG_GUI_LOBBY_BROWSER_BROWSERHITAREA:Class;
+        public static var NET_WG_GUI_LOBBY_BROWSER_BROWSERHITAREA:Class = BrowserHitArea;
         
-        public static var NET_WG_GUI_LOBBY_BROWSER_BROWSERWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_BROWSER_BROWSERWINDOW:Class = BrowserWindow;
         
-        public static var NET_WG_GUI_LOBBY_CONFIRMMODULEWINDOW_CONFIRMMODULEWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_CONFIRMMODULEWINDOW_CONFIRMMODULEWINDOW:Class = ConfirmModuleWindow;
         
-        public static var NET_WG_GUI_LOBBY_CONFIRMMODULEWINDOW_MODULEINFOVO:Class;
+        public static var NET_WG_GUI_LOBBY_CONFIRMMODULEWINDOW_MODULEINFOVO:Class = ModuleInfoVo;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_BASETIMEDCUSTOMIZATIONGROUPVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_BASETIMEDCUSTOMIZATIONGROUPVIEW:Class = BaseTimedCustomizationGroupView;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_BASETIMEDCUSTOMIZATIONSECTIONVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_BASETIMEDCUSTOMIZATIONSECTIONVIEW:Class = BaseTimedCustomizationSectionView;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMODROPBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMODROPBUTTON:Class = CamoDropButton;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMOUFLAGEGROUPVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMOUFLAGEGROUPVIEW:Class = CamouflageGroupView;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMOUFLAGESECTIONVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_CAMOUFLAGESECTIONVIEW:Class = CamouflageSectionView;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_CUSTOMIZATIONEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_CUSTOMIZATIONEVENT:Class = CustomizationEvent;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_EMBLEMLEFTSECTIONVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_EMBLEMLEFTSECTIONVIEW:Class = EmblemLeftSectionView;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_EMBLEMRIGHTSECTIONVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_EMBLEMRIGHTSECTIONVIEW:Class = EmblemRightSectionView;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_INSCRIPTIONLEFTSECTIONVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_INSCRIPTIONLEFTSECTIONVIEW:Class = InscriptionLeftSectionView;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_INSCRIPTIONRIGHTSECTIONVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_INSCRIPTIONRIGHTSECTIONVIEW:Class = InscriptionRightSectionView;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_VEHICLECUSTOMIZATION:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_VEHICLECUSTOMIZATION:Class = VehicleCustomization;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_CAMOUFLAGESDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_CAMOUFLAGESDATAPROVIDER:Class = CamouflagesDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_DAAPIITEMSDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_DAAPIITEMSDATAPROVIDER:Class = DAAPIItemsDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_RENTALPACKAGEDAAPIDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_DATA_RENTALPACKAGEDAAPIDATAPROVIDER:Class = RentalPackageDAAPIDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CAMODEMORENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CAMODEMORENDERER:Class = CamoDemoRenderer;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CAMOUFLAGEITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CAMOUFLAGEITEMRENDERER:Class = CamouflageItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CUSTOMIZATIONITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CUSTOMIZATIONITEMRENDERER:Class = CustomizationItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_INSCRIPTIONITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_INSCRIPTIONITEMRENDERER:Class = InscriptionItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_PRICEITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_PRICEITEMRENDERER:Class = PriceItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_RENDERERBORDER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_RENDERERBORDER:Class = RendererBorder;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_RENTALPACKAGEITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_RENTALPACKAGEITEMRENDERER:Class = RentalPackageItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_SECTIONITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_SECTIONITEMRENDERER:Class = SectionItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_TEXTUREITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_TEXTUREITEMRENDERER:Class = TextureItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_DEMONSTRATION_DEMONSTRATORWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_DEMONSTRATION_DEMONSTRATORWINDOW:Class = DemonstratorWindow;
         
-        public static var NET_WG_GUI_LOBBY_DEMONSTRATION_MAPITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_DEMONSTRATION_MAPITEMRENDERER:Class = MapItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_DEMONSTRATION_DATA_DEMONSTRATORVO:Class;
+        public static var NET_WG_GUI_LOBBY_DEMONSTRATION_DATA_DEMONSTRATORVO:Class = DemonstratorVO;
         
-        public static var NET_WG_GUI_LOBBY_DEMONSTRATION_DATA_MAPITEMVO:Class;
+        public static var NET_WG_GUI_LOBBY_DEMONSTRATION_DATA_MAPITEMVO:Class = MapItemVO;
         
-        public static var NET_WG_GUI_LOBBY_DIALOGS_DEMOUNTDEVICEDIALOG:Class;
+        public static var NET_WG_GUI_LOBBY_DIALOGS_DEMOUNTDEVICEDIALOG:Class = DemountDeviceDialog;
         
-        public static var NET_WG_GUI_LOBBY_DIALOGS_DESTROYDEVICEDIALOG:Class;
+        public static var NET_WG_GUI_LOBBY_DIALOGS_DESTROYDEVICEDIALOG:Class = DestroyDeviceDialog;
         
-        public static var NET_WG_GUI_LOBBY_DIALOGS_DISMISSTANKMANDIALOG:Class;
+        public static var NET_WG_GUI_LOBBY_DIALOGS_DISMISSTANKMANDIALOG:Class = DismissTankmanDialog;
         
-        public static var NET_WG_GUI_LOBBY_DIALOGS_FREEXPINFOWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_DIALOGS_FREEXPINFOWINDOW:Class = FreeXPInfoWindow;
         
-        public static var NET_WG_GUI_LOBBY_DIALOGS_ICONDIALOG:Class;
+        public static var NET_WG_GUI_LOBBY_DIALOGS_ICONDIALOG:Class = IconDialog;
         
-        public static var NET_WG_GUI_LOBBY_DIALOGS_ICONPRICEDIALOG:Class;
+        public static var NET_WG_GUI_LOBBY_DIALOGS_ICONPRICEDIALOG:Class = IconPriceDialog;
         
-        public static var NET_WG_GUI_LOBBY_DIALOGS_ITEMSTATUSDATA:Class;
+        public static var NET_WG_GUI_LOBBY_DIALOGS_ITEMSTATUSDATA:Class = ItemStatusData;
         
-        public static var NET_WG_GUI_LOBBY_DIALOGS_PRICEMC:Class;
+        public static var NET_WG_GUI_LOBBY_DIALOGS_PRICEMC:Class = PriceMc;
         
-        public static var NET_WG_GUI_LOBBY_DIALOGS_SIMPLEDIALOG:Class;
+        public static var NET_WG_GUI_LOBBY_DIALOGS_SIMPLEDIALOG:Class = SimpleDialog;
         
-        public static var NET_WG_GUI_LOBBY_ELITEWINDOW_ELITEWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_ELITEWINDOW_ELITEWINDOW:Class = EliteWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTBATTLEROOMWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTBATTLEROOMWINDOW:Class = FortBattleRoomWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTCHOICEDIVISIONWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTCHOICEDIVISIONWINDOW:Class = FortChoiceDivisionWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTIFICATIONSVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_FORTIFICATIONSVIEW:Class = FortificationsView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTINTROVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTINTROVIEW:Class = FortIntroView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTLISTVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTLISTVIEW:Class = FortListView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTROOMVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_FORTROOMVIEW:Class = FortRoomView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_JOINSORTIESECTION:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_JOINSORTIESECTION:Class = JoinSortieSection;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIECHATSECTION:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIECHATSECTION:Class = SortieChatSection;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIELISTRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIELISTRENDERER:Class = SortieListRenderer;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIESLOTHELPER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIESLOTHELPER:Class = SortieSlotHelper;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIETEAMSECTION:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIETEAMSECTION:Class = SortieTeamSection;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIEWAITLISTSECTION:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_BATTLEROOM_SORTIEWAITLISTSECTION:Class = SortieWaitListSection;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTDISCONNECTVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTDISCONNECTVIEW:Class = IFortDisconnectView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTMAINVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTMAINVIEW:Class = IFortMainView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTWELCOMEVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IFORTWELCOMEVIEW:Class = IFortWelcomeView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BASE_IFILLEDBAR:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BASE_IFILLEDBAR:Class = IFilledBar;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BASE_IMPL_FORTBUILDINGBASE:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BASE_IMPL_FORTBUILDINGBASE:Class = FortBuildingBase;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BATTLEROOM_SORTIESIMPLESLOT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BATTLEROOM_SORTIESIMPLESLOT:Class = SortieSimpleSlot;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BATTLEROOM_SORTIESLOT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BATTLEROOM_SORTIESLOT:Class = SortieSlot;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IARROWWITHNUT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IARROWWITHNUT:Class = IArrowWithNut;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGINDICATOR:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGINDICATOR:Class = IBuildingIndicator;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGTEXTURE:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGTEXTURE:Class = IBuildingTexture;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGSWIZARDCMPNT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IBUILDINGSWIZARDCMPNT:Class = IBuildingsWizardCmpnt;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_ICOOLDOWNICON:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_ICOOLDOWNICON:Class = ICooldownIcon;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDING:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDING:Class = IFortBuilding;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGCMP:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGCMP:Class = IFortBuildingCmp;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGUIBASE:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGUIBASE:Class = IFortBuildingUIBase;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGSCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IFORTBUILDINGSCONTAINER:Class = IFortBuildingsContainer;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_ITRANSPORTINGSTEPPER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_ITRANSPORTINGSTEPPER:Class = ITransportingStepper;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ARROWWITHNUT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ARROWWITHNUT:Class = ArrowWithNut;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGBLINKINGBTN:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGBLINKINGBTN:Class = BuildingBlinkingBtn;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGINDICATOR:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGINDICATOR:Class = BuildingIndicator;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGINDICATORSCMP:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGINDICATORSCMP:Class = BuildingIndicatorsCmp;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGORDERPROCESSING:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGORDERPROCESSING:Class = BuildingOrderProcessing;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGTEXTURE:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGTEXTURE:Class = BuildingTexture;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGTHUMBNAIL:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGTHUMBNAIL:Class = BuildingThumbnail;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGSCMPNT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BUILDINGSCMPNT:Class = BuildingsCmpnt;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_COOLDOWNICON:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_COOLDOWNICON:Class = CooldownIcon;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_COOLDOWNICONLOADERCTNR:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_COOLDOWNICONLOADERCTNR:Class = CooldownIconLoaderCtnr;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDING:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDING:Class = FortBuilding;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGBTN:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGBTN:Class = FortBuildingBtn;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGUIBASE:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGUIBASE:Class = FortBuildingUIBase;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGSCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_FORTBUILDINGSCONTAINER:Class = FortBuildingsContainer;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_HITAREACONTROL:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_HITAREACONTROL:Class = HitAreaControl;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_INDICATORLABELS:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_INDICATORLABELS:Class = IndicatorLabels;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_MODERNIZATIONCMP:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_MODERNIZATIONCMP:Class = ModernizationCmp;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ORDERINFOCMP:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ORDERINFOCMP:Class = OrderInfoCmp;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ORDERINFOICONCMP:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_ORDERINFOICONCMP:Class = OrderInfoIconCmp;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_PROGRESSTOTALLABELS:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_PROGRESSTOTALLABELS:Class = ProgressTotalLabels;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_TROWELCMP:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_TROWELCMP:Class = TrowelCmp;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BASE_BUILDINGSWIZARDCMPNT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILD_IMPL_BASE_BUILDINGSWIZARDCMPNT:Class = BuildingsWizardCmpnt;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILDINGPROCESS_IMPL_BUILDINGPROCESSINFO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILDINGPROCESS_IMPL_BUILDINGPROCESSINFO:Class = BuildingProcessInfo;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILDINGPROCESS_IMPL_BUILDINGPROCESSITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_BUILDINGPROCESS_IMPL_BUILDINGPROCESSITEMRENDERER:Class = BuildingProcessItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANLIST_CLANLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANLIST_CLANLISTITEMRENDERER:Class = ClanListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_CLANSTATDASHLINETEXTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_CLANSTATDASHLINETEXTITEM:Class = ClanStatDashLineTextItem;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_CLANSTATSGROUP:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_CLANSTATSGROUP:Class = ClanStatsGroup;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_FORTSTATISTICSLDIT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_FORTSTATISTICSLDIT:Class = FortStatisticsLDIT;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_SORTIESTATISTICSFORM:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_CLANSTATISTICS_IMPL_SORTIESTATISTICSFORM:Class = SortieStatisticsForm;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DIVISION_IMPL_CHOICEDIVISIONSELECTOR:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DIVISION_IMPL_CHOICEDIVISIONSELECTOR:Class = ChoiceDivisionSelector;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IFORTDIRECTIONSCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IFORTDIRECTIONSCONTAINER:Class = IFortDirectionsContainer;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_BUILDINGDIRECTION:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_BUILDINGDIRECTION:Class = BuildingDirection;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_DIRECTIONLISTRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_DIRECTIONLISTRENDERER:Class = DirectionListRenderer;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_FORTDIRECTIONSCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_DRCTN_IMPL_FORTDIRECTIONSCONTAINER:Class = FortDirectionsContainer;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTDISCONNECTVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTDISCONNECTVIEW:Class = FortDisconnectView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTMAINVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTMAINVIEW:Class = FortMainView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMECOMMANDERCONTENT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMECOMMANDERCONTENT:Class = FortWelcomeCommanderContent;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMECOMMANDERVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMECOMMANDERVIEW:Class = FortWelcomeCommanderView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMEVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_IMPL_FORTWELCOMEVIEW:Class = FortWelcomeView;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IFORTHEADERCLANINFO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IFORTHEADERCLANINFO:Class = IFortHeaderClanInfo;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMAINFOOTER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMAINFOOTER:Class = IMainFooter;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMAINHEADER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMAINHEADER:Class = IMainHeader;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTHEADERCLANINFO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTHEADERCLANINFO:Class = FortHeaderClanInfo;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTMAINFOOTER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTMAINFOOTER:Class = FortMainFooter;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTMAINHEADER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_FORTMAINHEADER:Class = FortMainHeader;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_VIGNETTEYELLOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_MAIN_IMPL_VIGNETTEYELLOW:Class = VignetteYellow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IORDERSPANEL:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IORDERSPANEL:Class = IOrdersPanel;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IMPL_ORDERPOPOVERLAYOUT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IMPL_ORDERPOPOVERLAYOUT:Class = OrderPopoverLayout;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IMPL_ORDERSPANEL:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_CMP_ORDERS_IMPL_ORDERSPANEL:Class = OrdersPanel;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGCARDPOPOVERVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGCARDPOPOVERVO:Class = BuildingCardPopoverVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGCTXMENUVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGCTXMENUVO:Class = BuildingCtxMenuVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGINDICATORSVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGINDICATORSVO:Class = BuildingIndicatorsVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGMODERNIZATIONVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGMODERNIZATIONVO:Class = BuildingModernizationVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERACTIONVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERACTIONVO:Class = BuildingPopoverActionVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERBASEVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERBASEVO:Class = BuildingPopoverBaseVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERHEADERVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPOPOVERHEADERVO:Class = BuildingPopoverHeaderVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROGRESSLBLVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROGRESSLBLVO:Class = BuildingProgressLblVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGVO:Class = BuildingVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGSCOMPONENTVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGSCOMPONENTVO:Class = BuildingsComponentVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANLISTRENDERERVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANLISTRENDERERVO:Class = ClanListRendererVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANSTATITEMVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANSTATITEMVO:Class = ClanStatItemVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANSTATSVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CLANSTATSVO:Class = ClanStatsVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CONFIRMORDERVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_CONFIRMORDERVO:Class = ConfirmOrderVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_DIRECTIONVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_DIRECTIONVO:Class = DirectionVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTBUILDINGCONSTANTS:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTBUILDINGCONSTANTS:Class = FortBuildingConstants;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCHOICEDIVISIONSELECTORVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCHOICEDIVISIONSELECTORVO:Class = FortChoiceDivisionSelectorVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCHOICEDIVISIONVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCHOICEDIVISIONVO:Class = FortChoiceDivisionVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCLANLISTWINDOWVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCLANLISTWINDOWVO:Class = FortClanListWindowVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCLANMEMBERVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCLANMEMBERVO:Class = FortClanMemberVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCONSTANTS:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTCONSTANTS:Class = FortConstants;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTFIXEDPLAYERSVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTFIXEDPLAYERSVO:Class = FortFixedPlayersVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTINVALIDATIONTYPE:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTINVALIDATIONTYPE:Class = FortInvalidationType;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODEELEMENTPROPERTY:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODEELEMENTPROPERTY:Class = FortModeElementProperty;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODESTATESTRINGSVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODESTATESTRINGSVO:Class = FortModeStateStringsVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODESTATEVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTMODESTATEVO:Class = FortModeStateVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTWELCOMEVIEWVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTWELCOMEVIEWVO:Class = FortWelcomeViewVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTIFICATIONVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FORTIFICATIONVO:Class = FortificationVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FUNCTIONALSTATES:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_FUNCTIONALSTATES:Class = FunctionalStates;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_MODERNIZATIONCMPVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_MODERNIZATIONCMPVO:Class = ModernizationCmpVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERINFOVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERINFOVO:Class = OrderInfoVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERPOPOVERVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERPOPOVERVO:Class = OrderPopoverVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_ORDERVO:Class = OrderVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_TRANSPORTINGVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_TRANSPORTINGVO:Class = TransportingVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BASE_BASEFORTIFICATIONVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BASE_BASEFORTIFICATIONVO:Class = BaseFortificationVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BASE_BUILDINGBASEVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BASE_BUILDINGBASEVO:Class = BuildingBaseVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BATTLEROOM_SORTIEVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BATTLEROOM_SORTIEVO:Class = SortieVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSINFOVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSINFOVO:Class = BuildingProcessInfoVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSLISTITEMVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSLISTITEMVO:Class = BuildingProcessListItemVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_BUILDINGPROCESS_BUILDINGPROCESSVO:Class = BuildingProcessVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_DEMOUNTBUILDING_DEMOUNTBUILDINGVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_DEMOUNTBUILDING_DEMOUNTBUILDINGVO:Class = DemountBuildingVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_SORTIE_SORTIERENDERVO:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_DATA_SORTIE_SORTIERENDERVO:Class = SortieRenderVO;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_DIRECTIONEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_DIRECTIONEVENT:Class = DirectionEvent;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_FORTBUILDINGCARDPOPOVEREVENT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_FORTBUILDINGCARDPOPOVEREVENT:Class = FortBuildingCardPopoverEvent;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_FORTBUILDINGEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_EVENTS_FORTBUILDINGEVENT:Class = FortBuildingEvent;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ICOMMONMODECLIENT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ICOMMONMODECLIENT:Class = ICommonModeClient;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_IDIRECTIONMODECLIENT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_IDIRECTIONMODECLIENT:Class = IDirectionModeClient;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ITRANSPORTMODECLIENT:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ITRANSPORTMODECLIENT:Class = ITransportModeClient;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ITRANSPORTINGHANDLER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_INTERFACES_ITRANSPORTINGHANDLER:Class = ITransportingHandler;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IBUILDINGCARDCMP:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IBUILDINGCARDCMP:Class = IBuildingCardCmp;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTBUILDINGCARDPOPOVER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTBUILDINGCARDPOPOVER:Class = FortBuildingCardPopover;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTORDERPOPOVER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTORDERPOPOVER:Class = FortOrderPopover;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERASSIGNPLAYER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERASSIGNPLAYER:Class = FortPopoverAssignPlayer;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERBODY:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERBODY:Class = FortPopoverBody;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERCONTROLPANEL:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERCONTROLPANEL:Class = FortPopoverControlPanel;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERHEADER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_IMPL_FORTPOPOVERHEADER:Class = FortPopoverHeader;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_ORDERPOPOVER_ORDERINFOBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_ORDERPOPOVER_ORDERINFOBLOCK:Class = OrderInfoBlock;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IBUILDINGSCIGENERATOR:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IBUILDINGSCIGENERATOR:Class = IBuildingsCIGenerator;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTCOMMONUTILS:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTCOMMONUTILS:Class = IFortCommonUtils;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTMODESWITCHER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTMODESWITCHER:Class = IFortModeSwitcher;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTSCONTROLSALIGNER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IFORTSCONTROLSALIGNER:Class = IFortsControlsAligner;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_ITRANSPORTINGHELPER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_ITRANSPORTINGHELPER:Class = ITransportingHelper;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_BUILDINGSCIGENERATOR:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_BUILDINGSCIGENERATOR:Class = BuildingsCIGenerator;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTCOMMONUTILS:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTCOMMONUTILS:Class = FortCommonUtils;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTMODESWITCHER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTMODESWITCHER:Class = FortModeSwitcher;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTSCONTROLSALIGNER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_FORTSCONTROLSALIGNER:Class = FortsControlsAligner;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_TRANSPORTINGHELPER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_TRANSPORTINGHELPER:Class = TransportingHelper;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_TWEENANIMATOR:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_UTILS_IMPL_TWEENANIMATOR:Class = TweenAnimator;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_DEMOUNTBUILDINGWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_DEMOUNTBUILDINGWINDOW:Class = DemountBuildingWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTBUILDINGPROCESSWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTBUILDINGPROCESSWINDOW:Class = FortBuildingProcessWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCLANLISTWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCLANLISTWINDOW:Class = FortClanListWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCLANSTATISTICSWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCLANSTATISTICSWINDOW:Class = FortClanStatisticsWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCREATEDIRECTIONWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCREATEDIRECTIONWINDOW:Class = FortCreateDirectionWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCREATIONCONGRATULATIONSWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTCREATIONCONGRATULATIONSWINDOW:Class = FortCreationCongratulationsWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTFIXEDPLAYERSWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTFIXEDPLAYERSWINDOW:Class = FortFixedPlayersWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTINTELLIGENCEWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTINTELLIGENCEWINDOW:Class = FortIntelligenceWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTMODERNIZATIONWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTMODERNIZATIONWINDOW:Class = FortModernizationWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTORDERCONFIRMATIONWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTORDERCONFIRMATIONWINDOW:Class = FortOrderConfirmationWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTTRANSPORTCONFIRMATIONWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_FORTTRANSPORTCONFIRMATIONWINDOW:Class = FortTransportConfirmationWindow;
         
-        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_PROMOMCCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_WINDOWS_IMPL_PROMOMCCONTAINER:Class = PromoMCContainer;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREWDROPDOWNEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREWDROPDOWNEVENT:Class = CrewDropDownEvent;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_HANGAR:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_HANGAR:Class = Hangar;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_IGRLABEL:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_IGRLABEL:Class = IgrLabel;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_PARAMS:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_PARAMS:Class = Params;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_PARAMSLISTENER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_PARAMSLISTENER:Class = ParamsListener;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_PARAMSVO:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_PARAMSVO:Class = ParamsVO;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_RESEARCHPANEL:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_RESEARCHPANEL:Class = ResearchPanel;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_TANKPARAM:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_TANKPARAM:Class = TankParam;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_TMENXPPANEL:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_TMENXPPANEL:Class = TmenXpPanel;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_AMMUNITIONPANEL:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_AMMUNITIONPANEL:Class = AmmunitionPanel;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_DEVICESLOT:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_DEVICESLOT:Class = DeviceSlot;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_EQUIPMENTSLOT:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_EQUIPMENTSLOT:Class = EquipmentSlot;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_EXTRAICON:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_EXTRAICON:Class = ExtraIcon;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_FITTINGLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_FITTINGLISTITEMRENDERER:Class = FittingListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_FITTINGSELECT:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_FITTINGSELECT:Class = FittingSelect;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_HISTORICALMODULESOVERLAY:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_HISTORICALMODULESOVERLAY:Class = HistoricalModulesOverlay;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_MODULESLOT:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_AMMUNITIONPANEL_MODULESLOT:Class = ModuleSlot;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_CREW:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_CREW:Class = Crew;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_CREWITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_CREWITEMRENDERER:Class = CrewItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_CREWSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_CREWSCROLLINGLIST:Class = CrewScrollingList;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_ICONSPROPS:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_ICONSPROPS:Class = IconsProps;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_RECRUITITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_RECRUITITEMRENDERER:Class = RecruitItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_RECRUITRENDERERVO:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_RECRUITRENDERERVO:Class = RecruitRendererVO;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_SKILLSVO:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_SKILLSVO:Class = SkillsVO;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_SMALLSKILLITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_SMALLSKILLITEMRENDERER:Class = SmallSkillItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_TANKMENICONS:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_TANKMENICONS:Class = TankmenIcons;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_TEXTOBJECT:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_CREW_TEXTOBJECT:Class = TextObject;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_AMMOBLOCKOVERLAY:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_AMMOBLOCKOVERLAY:Class = AmmoBlockOverlay;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EQUIPMENTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EQUIPMENTITEM:Class = EquipmentItem;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EQUIPMENTLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EQUIPMENTLISTITEMRENDERER:Class = EquipmentListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_MAINTENANCEDROPDOWN:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_MAINTENANCEDROPDOWN:Class = MaintenanceDropDown;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_MAINTENANCESTATUSINDICATOR:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_MAINTENANCESTATUSINDICATOR:Class = MaintenanceStatusIndicator;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_SHELLITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_SHELLITEMRENDERER:Class = ShellItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_SHELLLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_SHELLLISTITEMRENDERER:Class = ShellListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_TECHNICALMAINTENANCE:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_TECHNICALMAINTENANCE:Class = TechnicalMaintenance;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_HISTORICALAMMOVO:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_HISTORICALAMMOVO:Class = HistoricalAmmoVO;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_MAINTENANCEVO:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_MAINTENANCEVO:Class = MaintenanceVO;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_MODULEVO:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_MODULEVO:Class = net.wg.gui.lobby.hangar.maintenance.data.ModuleVO;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_SHELLVO:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_DATA_SHELLVO:Class = ShellVO;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EVENTS_ONEQUIPMENTRENDEREROVER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_MAINTENANCE_EVENTS_ONEQUIPMENTRENDEREROVER:Class = OnEquipmentRendererOver;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_CLANLOCKUI:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_CLANLOCKUI:Class = ClanLockUI;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSEL:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSEL:Class = TankCarousel;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSELFILTERS:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSELFILTERS:Class = TankCarouselFilters;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSELITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_TANKCAROUSELITEMRENDERER:Class = TankCarouselItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_DATA_VEHICLECAROUSELVO:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_DATA_VEHICLECAROUSELVO:Class = VehicleCarouselVO;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_VEHICLECAROUSELVOBUILDER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_VEHICLECAROUSELVOBUILDER:Class = VehicleCarouselVOBuilder;
         
-        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_VEHICLECAROUSELVOMANAGER:Class;
+        public static var NET_WG_GUI_LOBBY_HANGAR_TCAROUSEL_HELPER_VEHICLECAROUSELVOMANAGER:Class = VehicleCarouselVOManager;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_ACCOUNTINFO:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_ACCOUNTINFO:Class = AccountInfo;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_BATTLESELECTDROPDOWNVO:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_BATTLESELECTDROPDOWNVO:Class = BattleSelectDropDownVO;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_BATTLETYPESELECTPOPOVER:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_BATTLETYPESELECTPOPOVER:Class = BattleTypeSelectPopover;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTON:Class = FightButton;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTONFANCYRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTONFANCYRENDERER:Class = FightButtonFancyRenderer;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTONFANCYSELECT:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_FIGHTBUTTONFANCYSELECT:Class = FightButtonFancySelect;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_HEADERBUTTONBAR:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_HEADERBUTTONBAR:Class = HeaderButtonBar;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_LOBBYHEADER:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_LOBBYHEADER:Class = LobbyHeader;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_MAINMENU:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_MAINMENU:Class = MainMenu;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_QUESTSCONTROL:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_QUESTSCONTROL:Class = QuestsControl;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_SERVERSTATS:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_SERVERSTATS:Class = ServerStats;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_SERVERVO:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_SERVERVO:Class = ServerVO;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_TANKPANEL:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_TANKPANEL:Class = TankPanel;
         
-        public static var NET_WG_GUI_LOBBY_HEADER_TUTORIALCONTROL:Class;
+        public static var NET_WG_GUI_LOBBY_HEADER_TUTORIALCONTROL:Class = TutorialControl;
         
-        public static var NET_WG_GUI_LOBBY_MENU_LOBBYMENU:Class;
+        public static var NET_WG_GUI_LOBBY_MENU_LOBBYMENU:Class = LobbyMenu;
         
-        public static var NET_WG_GUI_LOBBY_MENU_LOBBYMENUFORM:Class;
+        public static var NET_WG_GUI_LOBBY_MENU_LOBBYMENUFORM:Class = LobbyMenuForm;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_MESSENGERBAR:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_MESSENGERBAR:Class = MessengerBar;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_NOTIFICATIONLISTBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_NOTIFICATIONLISTBUTTON:Class = NotificationListButton;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_WINDOWGEOMETRYINBAR:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_WINDOWGEOMETRYINBAR:Class = WindowGeometryInBar;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_WINDOWOFFSETSINBAR:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_WINDOWOFFSETSINBAR:Class = WindowOffsetsInBar;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELBUTTON:Class = ChannelButton;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELCAROUSEL:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELCAROUSEL:Class = ChannelCarousel;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELCAROUSELSCROLLBAR:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELCAROUSELSCROLLBAR:Class = ChannelCarouselScrollBar;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELLIST:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELLIST:Class = ChannelList;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_CHANNELRENDERER:Class = ChannelRenderer;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_DATA_CHANNELLISTITEMVO:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_DATA_CHANNELLISTITEMVO:Class = ChannelListItemVO;
         
-        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_EVENTS_CHANNELLISTEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_MESSENGERBAR_CAROUSEL_EVENTS_CHANNELLISTEVENT:Class = ChannelListEvent;
         
-        public static var NET_WG_GUI_LOBBY_MODULEINFO_MODULEEFFECTS:Class;
+        public static var NET_WG_GUI_LOBBY_MODULEINFO_MODULEEFFECTS:Class = ModuleEffects;
         
-        public static var NET_WG_GUI_LOBBY_MODULEINFO_MODULEPARAMETERS:Class;
+        public static var NET_WG_GUI_LOBBY_MODULEINFO_MODULEPARAMETERS:Class = ModuleParameters;
         
-        public static var NET_WG_GUI_LOBBY_PREMIUMFORM_DISCOUNTPRICE:Class;
+        public static var NET_WG_GUI_LOBBY_PREMIUMFORM_DISCOUNTPRICE:Class = DiscountPrice;
         
-        public static var NET_WG_GUI_LOBBY_PREMIUMFORM_PREMIUMFORM:Class;
+        public static var NET_WG_GUI_LOBBY_PREMIUMFORM_PREMIUMFORM:Class = PremiumForm;
         
-        public static var NET_WG_GUI_LOBBY_PREMIUMFORM_PREMIUMFORMITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_PREMIUMFORM_PREMIUMFORMITEMRENDERER:Class = PremiumFormItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILE:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILE:Class = Profile;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILECONSTANTS:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILECONSTANTS:Class = ProfileConstants;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILEINVALIDATIONTYPES:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILEINVALIDATIONTYPES:Class = ProfileInvalidationTypes;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILEMENUINFOVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILEMENUINFOVO:Class = ProfileMenuInfoVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILESECTIONSIMPORTER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILESECTIONSIMPORTER:Class = ProfileSectionsImporter;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILETABNAVIGATOR:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PROFILETABNAVIGATOR:Class = ProfileTabNavigator;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_SECTIONINFO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_SECTIONINFO:Class = SectionInfo;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_SECTIONVIEWINFO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_SECTIONVIEWINFO:Class = SectionViewInfo;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_SECTIONSDATAUTIL:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_SECTIONSDATAUTIL:Class = SectionsDataUtil;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_USERINFOFORM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_USERINFOFORM:Class = UserInfoForm;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ADVANCEDLINEDESCRICONTEXT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ADVANCEDLINEDESCRICONTEXT:Class = AdvancedLineDescrIconText;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_AWARDSTILELISTBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_AWARDSTILELISTBLOCK:Class = AwardsTileListBlock;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_BATTLESTYPEDROPDOWN:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_BATTLESTYPEDROPDOWN:Class = BattlesTypeDropdown;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CENTEREDLINEICONTEXT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CENTEREDLINEICONTEXT:Class = CenteredLineIconText;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_COLOREDDESHLINETEXTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_COLOREDDESHLINETEXTITEM:Class = ColoredDeshLineTextItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_DATAVIEWSTACK:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_DATAVIEWSTACK:Class = DataViewStack;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_GRADIENTLINEBUTTONBAR:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_GRADIENTLINEBUTTONBAR:Class = GradientLineButtonBar;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_HIDABLESCROLLBAR:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_HIDABLESCROLLBAR:Class = HidableScrollBar;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ICOUNTER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ICOUNTER:Class = ICounter;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ILDITINFO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_ILDITINFO:Class = ILditInfo;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_IRESIZABLECONTENT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_IRESIZABLECONTENT:Class = net.wg.gui.lobby.profile.components.IResizableContent;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITBATTLES:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITBATTLES:Class = LditBattles;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITMARKSOFMASTERY:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITMARKSOFMASTERY:Class = LditMarksOfMastery;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITVALUED:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LDITVALUED:Class = LditValued;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LINEBUTTONBAR:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LINEBUTTONBAR:Class = LineButtonBar;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LINETEXTCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_LINETEXTCOMPONENT:Class = LineTextComponent;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PERSONALSCORECOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PERSONALSCORECOMPONENT:Class = PersonalScoreComponent;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEDASHLINETEXTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEDASHLINETEXTITEM:Class = ProfileDashLineTextItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEFOOTER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEFOOTER:Class = ProfileFooter;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEMEDALSLIST:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEMEDALSLIST:Class = ProfileMedalsList;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEPAGEFOOTER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEPAGEFOOTER:Class = ProfilePageFooter;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEWINDOWFOOTER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_PROFILEWINDOWFOOTER:Class = ProfileWindowFooter;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLECONTENT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLECONTENT:Class = ResizableContent;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLEINVALIDATIONTYPES:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLEINVALIDATIONTYPES:Class = ResizableInvalidationTypes;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLETILELIST:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLETILELIST:Class = ResizableTileList;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLEVIEWSTACK:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_RESIZABLEVIEWSTACK:Class = ResizableViewStack;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_SIMPLELOADER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_SIMPLELOADER:Class = SimpleLoader;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_TECHMASTERYICON:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_TECHMASTERYICON:Class = TechMasteryIcon;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_TESTTRACK:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_TESTTRACK:Class = TestTrack;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_USERDATEFOOTER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_USERDATEFOOTER:Class = UserDateFooter;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXISCHART:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXISCHART:Class = AxisChart;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_BARITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_BARITEM:Class = BarItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTBASE:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTBASE:Class = ChartBase;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTITEM:Class = ChartItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTITEMBASE:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_CHARTITEMBASE:Class = ChartItemBase;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_FRAMECHARTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_FRAMECHARTITEM:Class = FrameChartItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_ICHARTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_ICHARTITEM:Class = IChartItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXIS_AXISBASE:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXIS_AXISBASE:Class = AxisBase;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXIS_ICHARTAXIS:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_AXIS_ICHARTAXIS:Class = IChartAxis;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_LAYOUT_ICHARTLAYOUT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_LAYOUT_ICHARTLAYOUT:Class = IChartLayout;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_LAYOUT_LAYOUTBASE:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_COMPONENTS_CHART_LAYOUT_LAYOUTBASE:Class = LayoutBase;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_LAYOUTITEMINFO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_LAYOUTITEMINFO:Class = LayoutItemInfo;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEACHIEVEMENTVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEACHIEVEMENTVO:Class = ProfileAchievementVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEBASEINFOVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEBASEINFOVO:Class = ProfileBaseInfoVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEBATTLETYPEINITVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEBATTLETYPEINITVO:Class = ProfileBattleTypeInitVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILECOMMONINFOVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILECOMMONINFOVO:Class = ProfileCommonInfoVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEDOSSIERINFOVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEDOSSIERINFOVO:Class = ProfileDossierInfoVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEUSERVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_PROFILEUSERVO:Class = ProfileUserVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_SECTIONLAYOUTMANAGER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_DATA_SECTIONLAYOUTMANAGER:Class = SectionLayoutManager;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILEHEADERBUTTONBAR:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILEHEADERBUTTONBAR:Class = ProfileHeaderButtonBar;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILETABBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILETABBUTTON:Class = ProfileTabButton;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILETABBUTTONBG:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_HEADERBAR_PROFILETABBUTTONBG:Class = ProfileTabButtonBg;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILEACHIEVEMENTSSECTION:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILEACHIEVEMENTSSECTION:Class = ProfileAchievementsSection;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILESECTION:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILESECTION:Class = ProfileSection;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILETABINFO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_PROFILETABINFO:Class = ProfiletabInfo;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SECTIONSSHOWANIMATIONMANAGER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SECTIONSSHOWANIMATIONMANAGER:Class = SectionsShowAnimationManager;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_AWARDSBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_AWARDSBLOCK:Class = AwardsBlock;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_AWARDSMAINCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_AWARDSMAINCONTAINER:Class = AwardsMainContainer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_PROFILEAWARDS:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_PROFILEAWARDS:Class = ProfileAwards;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_STAGEAWARDSBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_STAGEAWARDSBLOCK:Class = StageAwardsBlock;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_ACHIEVEMENTFILTERVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_ACHIEVEMENTFILTERVO:Class = AchievementFilterVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_AWARDSBLOCKDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_AWARDSBLOCKDATAVO:Class = AwardsBlockDataVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_PROFILEAWARDSINITVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_AWARDS_DATA_PROFILEAWARDSINITVO:Class = ProfileAwardsInitVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTLEVELS:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTLEVELS:Class = AxisPointLevels;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTNATIONS:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTNATIONS:Class = AxisPointNations;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTTYPES:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_AXISPOINTTYPES:Class = AxisPointTypes;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_COMMONSTATISTICS:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_COMMONSTATISTICS:Class = CommonStatistics;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_LEVELBARCHARTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_LEVELBARCHARTITEM:Class = LevelBarChartItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_LEVELSSTATISTICCHART:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_LEVELSSTATISTICCHART:Class = LevelsStatisticChart;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_NATIONBARCHARTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_NATIONBARCHARTITEM:Class = NationBarChartItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_NATIONSSTATISTICSCHART:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_NATIONSSTATISTICSCHART:Class = NationsStatisticsChart;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_PROFILESTATISTICS:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_PROFILESTATISTICS:Class = ProfileStatistics;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_PROFILESTATISTICSVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_PROFILESTATISTICSVO:Class = ProfileStatisticsVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTAXISPOINT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTAXISPOINT:Class = StatisticBarChartAxisPoint;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTINITIALIZER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTINITIALIZER:Class = StatisticBarChartInitializer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTITEM:Class = StatisticBarChartItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTLAYOUT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICBARCHARTLAYOUT:Class = StatisticBarChartLayout;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICCHARTINFO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICCHARTINFO:Class = StatisticChartInfo;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSBARCHART:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSBARCHART:Class = StatisticsBarChart;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSBARCHARTAXIS:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSBARCHARTAXIS:Class = StatisticsBarChartAxis;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSCHARTITEMANIMCLIENT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSCHARTITEMANIMCLIENT:Class = StatisticsChartItemAnimClient;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSCHARTSUTILS:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSCHARTSUTILS:Class = StatisticsChartsUtils;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSLAYOUTMANAGER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSLAYOUTMANAGER:Class = StatisticsLayoutManager;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSTOOLTIPDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_STATISTICSTOOLTIPDATAVO:Class = StatisticsTooltipDataVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TFCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TFCONTAINER:Class = TfContainer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TYPEBARCHARTITEM:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TYPEBARCHARTITEM:Class = TypeBarChartItem;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TYPESSTATISTICSCHART:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_TYPESSTATISTICSCHART:Class = TypesStatisticsChart;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_BODYCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_BODYCONTAINER:Class = BodyContainer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_CHARTSSTATISTICSGROUP:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_CHARTSSTATISTICSGROUP:Class = ChartsStatisticsGroup;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_CHARTSSTATISTICSVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_CHARTSSTATISTICSVIEW:Class = ChartsStatisticsView;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDLABELDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDLABELDATAVO:Class = DetailedLabelDataVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSLABELDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSLABELDATAVO:Class = DetailedStatisticsLabelDataVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSROOTUNIT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSROOTUNIT:Class = DetailedStatisticsRootUnit;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSUNIT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSUNIT:Class = DetailedStatisticsUnit;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSUNITVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSUNITVO:Class = DetailedStatisticsUnitVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_DETAILEDSTATISTICSVIEW:Class = DetailedStatisticsView;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_PROFILESTATISTICSDETAILEDVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_PROFILESTATISTICSDETAILEDVO:Class = ProfileStatisticsDetailedVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICCHARTSINITDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICCHARTSINITDATAVO:Class = StatisticChartsInitDataVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSBODYVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSBODYVO:Class = StatisticsBodyVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSCHARTSTABDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSCHARTSTABDATAVO:Class = StatisticsChartsTabDataVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSDASHLINETEXTITEMIRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSDASHLINETEXTITEMIRENDERER:Class = StatisticsDashLineTextItemIRenderer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSLABELDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSLABELDATAVO:Class = StatisticsLabelDataVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSLABELVIEWTYPEDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_BODY_STATISTICSLABELVIEWTYPEDATAVO:Class = StatisticsLabelViewTypeDataVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_DETAILEDSTATISTICS_DETAILEDSTATISTICSGROUPEX:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_DETAILEDSTATISTICS_DETAILEDSTATISTICSGROUPEX:Class = DetailedStatisticsGroupEx;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERBGIMAGE:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERBGIMAGE:Class = HeaderBGImage;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERCONTAINER:Class = HeaderContainer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERITEMSTYPES:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_HEADERITEMSTYPES:Class = HeaderItemsTypes;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_STATISTICSHEADERVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_STATISTICS_HEADER_STATISTICSHEADERVO:Class = StatisticsHeaderVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_AWARDSLISTCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_AWARDSLISTCOMPONENT:Class = AwardsListComponent;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_LINETEXTFIELDSLAYOUT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_LINETEXTFIELDSLAYOUT:Class = LineTextFieldsLayout;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARY:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARY:Class = ProfileSummary;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYPAGE:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYPAGE:Class = ProfileSummaryPage;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYVO:Class = ProfileSummaryVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_PROFILESUMMARYWINDOW:Class = ProfileSummaryWindow;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYINITVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYINITVO:Class = SummaryInitVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYPAGEINITVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYPAGEINITVO:Class = SummaryPageInitVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_SUMMARY_SUMMARYVO:Class = SummaryVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_ACHIEVEMENTSMALL:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_ACHIEVEMENTSMALL:Class = AchievementSmall;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILESORTINGBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILESORTINGBUTTON:Class = ProfileSortingButton;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUE:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUE:Class = ProfileTechnique;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEEMPTYSCREEN:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEEMPTYSCREEN:Class = ProfileTechniqueEmptyScreen;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEPAGE:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEPAGE:Class = ProfileTechniquePage;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_PROFILETECHNIQUEWINDOW:Class = ProfileTechniqueWindow;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHAWARDSMAINCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHAWARDSMAINCONTAINER:Class = TechAwardsMainContainer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHSTATISTICSINITVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHSTATISTICSINITVO:Class = TechStatisticsInitVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNICSDASHLINETEXTITEMIRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNICSDASHLINETEXTITEMIRENDERER:Class = TechnicsDashLineTextItemIRenderer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUEACHIEVEMENTTAB:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUEACHIEVEMENTTAB:Class = TechniqueAchievementTab;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUEACHIEVEMENTSBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUEACHIEVEMENTSBLOCK:Class = TechniqueAchievementsBlock;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUELIST:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUELIST:Class = TechniqueList;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUELISTCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUELISTCOMPONENT:Class = TechniqueListComponent;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUERENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUERENDERER:Class = TechniqueRenderer;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUESTACKCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUESTACKCOMPONENT:Class = TechniqueStackComponent;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUESTATISTICTAB:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_TECHNIQUESTATISTICTAB:Class = TechniqueStatisticTab;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_PROFILEVEHICLEDOSSIERVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_PROFILEVEHICLEDOSSIERVO:Class = ProfileVehicleDossierVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_SORTINGSETTINGVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_SORTINGSETTINGVO:Class = SortingSettingVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_TECHNIQUELISTVEHICLEVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_TECHNIQUELISTVEHICLEVO:Class = TechniqueListVehicleVO;
         
-        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_TECHNIQUESTATISTICVO:Class;
+        public static var NET_WG_GUI_LOBBY_PROFILE_PAGES_TECHNIQUE_DATA_TECHNIQUESTATISTICVO:Class = TechniqueStatisticVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_CONDITIONBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_CONDITIONBLOCK:Class = ConditionBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_CONDITIONELEMENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_CONDITIONELEMENT:Class = ConditionElement;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DESCRIPTIONBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DESCRIPTIONBLOCK:Class = DescriptionBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_HEADERBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_HEADERBLOCK:Class = HeaderBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_IQUESTSTAB:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_IQUESTSTAB:Class = IQuestsTab;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTAWARDSBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTAWARDSBLOCK:Class = QuestAwardsBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTBLOCK:Class = QuestBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTCONTENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTCONTENT:Class = QuestContent;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTRENDERER:Class = QuestRenderer;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSCURRENTTAB:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSCURRENTTAB:Class = QuestsCurrentTab;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSFUTURETAB:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSFUTURETAB:Class = QuestsFutureTab;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSLIST:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSLIST:Class = QuestsList;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_QUESTSWINDOW:Class = QuestsWindow;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_REQUIREMENTBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_REQUIREMENTBLOCK:Class = RequirementBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_SUBTASKCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_SUBTASKCOMPONENT:Class = SubtaskComponent;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_SUBTASKSLIST:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_SUBTASKSLIST:Class = SubtasksList;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_VEHICLEBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_VEHICLEBLOCK:Class = VehicleBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_ABSTRACTRESIZABLECONTENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_ABSTRACTRESIZABLECONTENT:Class = AbstractResizableContent;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_ALERTMESSAGE:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_ALERTMESSAGE:Class = AlertMessage;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_COMMONCONDITIONSBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_COMMONCONDITIONSBLOCK:Class = CommonConditionsBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_CONDITIONSEPARATOR:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_CONDITIONSEPARATOR:Class = ConditionSeparator;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_COUNTERTEXTELEMENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_COUNTERTEXTELEMENT:Class = CounterTextElement;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_EVENTSRESIZABLECONTENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_EVENTSRESIZABLECONTENT:Class = EventsResizableContent;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_INNERRESIZABLECONTENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_INNERRESIZABLECONTENT:Class = InnerResizableContent;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_MOVABLEBLOCKSCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_MOVABLEBLOCKSCONTAINER:Class = MovableBlocksContainer;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_PROGRESSBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_PROGRESSBLOCK:Class = ProgressBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_PROGRESSQUESTINDICATOR:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_PROGRESSQUESTINDICATOR:Class = ProgressQuestIndicator;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTICONELEMENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTICONELEMENT:Class = QuestIconElement;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSTATUSCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSTATUSCOMPONENT:Class = QuestStatusComponent;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSCOUNTER:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSCOUNTER:Class = QuestsCounter;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSDASHLINEITEM:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_QUESTSDASHLINEITEM:Class = QuestsDashlineItem;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_RESIZABLECONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_RESIZABLECONTAINER:Class = ResizableContainer;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_RESIZABLECONTENTHEADER:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_RESIZABLECONTENTHEADER:Class = ResizableContentHeader;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_SORTINGPANEL:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_SORTINGPANEL:Class = SortingPanel;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_TEXTPROGRESSELEMENT:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_TEXTPROGRESSELEMENT:Class = TextProgressElement;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_VEHICLEITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_VEHICLEITEMRENDERER:Class = VehicleItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_VEHICLESSORTINGBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_VEHICLESSORTINGBLOCK:Class = VehiclesSortingBlock;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_COMPLEXTOOLTIPVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_COMPLEXTOOLTIPVO:Class = ComplexTooltipVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_CONDITIONELEMENTVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_CONDITIONELEMENTVO:Class = ConditionElementVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_CONDITIONSEPARATORVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_CONDITIONSEPARATORVO:Class = ConditionSeparatorVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_COUNTERTEXTELEMENTVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_COUNTERTEXTELEMENTVO:Class = CounterTextElementVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_DESCRIPTIONVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_DESCRIPTIONVO:Class = DescriptionVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_EVENTSRESIZABLECONTENTVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_EVENTSRESIZABLECONTENTVO:Class = EventsResizableContentVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_HEADERDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_HEADERDATAVO:Class = HeaderDataVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_INFODATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_INFODATAVO:Class = InfoDataVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_PROGRESSBLOCKVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_PROGRESSBLOCKVO:Class = ProgressBlockVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTDASHLINEITEMVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTDASHLINEITEMVO:Class = QuestDashlineItemVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTDATAVO:Class = QuestDataVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTICONELEMENTVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTICONELEMENTVO:Class = QuestIconElementVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTRENDERERVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTRENDERERVO:Class = QuestRendererVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTVEHICLERENDERERVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_QUESTVEHICLERENDERERVO:Class = QuestVehicleRendererVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_REQUIREMENTBLOCKVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_REQUIREMENTBLOCKVO:Class = RequirementBlockVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_SORTEDBTNVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_SORTEDBTNVO:Class = SortedBtnVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_SUBTASKVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_SUBTASKVO:Class = SubtaskVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_VEHICLEBLOCKVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_VEHICLEBLOCKVO:Class = VehicleBlockVO;
         
-        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_VEHICLESSORTINGBLOCKVO:Class;
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_DATA_VEHICLESSORTINGBLOCKVO:Class = VehiclesSortingBlockVO;
         
-        public static var NET_WG_GUI_LOBBY_RECRUITWINDOW_RECRUITWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_RECRUITWINDOW_RECRUITWINDOW:Class = RecruitWindow;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWBLOCKVO:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWBLOCKVO:Class = RetrainCrewBlockVO;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWMAINBUTTONS:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWMAINBUTTONS:Class = RetrainCrewMainButtons;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWOPERATIONVO:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWOPERATIONVO:Class = RetrainCrewOperationVO;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWROLEIR:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWROLEIR:Class = RetrainCrewRoleIR;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWVEHICLEVO:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWVEHICLEVO:Class = RetrainCrewVehicleVO;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWWINDOW:Class = RetrainCrewWindow;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINTANKMANVO:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINTANKMANVO:Class = RetrainTankmanVO;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINVEHICLEBLOCKVO:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINVEHICLEBLOCKVO:Class = RetrainVehicleBlockVO;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_SELPRICEINFO:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_SELPRICEINFO:Class = SelPriceInfo;
         
-        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_TANKMANCREWRETRAININGSMALLBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_TANKMANCREWRETRAININGSMALLBUTTON:Class = TankmanCrewRetrainingSmallButton;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_CONTROLQUESTIONCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_CONTROLQUESTIONCOMPONENT:Class = ControlQuestionComponent;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_MOVINGRESULT:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_MOVINGRESULT:Class = MovingResult;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SALEITEMBLOCKRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SALEITEMBLOCKRENDERER:Class = SaleItemBlockRenderer;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SELLDEVICESCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SELLDEVICESCOMPONENT:Class = SellDevicesComponent;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SELLDIALOGLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SELLDIALOGLISTITEMRENDERER:Class = SellDialogListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SELLHEADERCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SELLHEADERCOMPONENT:Class = SellHeaderComponent;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SELLSLIDINGCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SELLSLIDINGCOMPONENT:Class = SellSlidingComponent;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SETTINGSBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SETTINGSBUTTON:Class = SettingsButton;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SLIDINGSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_SLIDINGSCROLLINGLIST:Class = SlidingScrollingList;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_TOTALRESULT:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_TOTALRESULT:Class = TotalResult;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_USERINPUTCONTROL:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_USERINPUTCONTROL:Class = UserInputControl;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLININVENTORYMODULEVO:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLININVENTORYMODULEVO:Class = SellInInventoryModuleVo;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLININVENTORYSHELLVO:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLININVENTORYSHELLVO:Class = SellInInventoryShellVo;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLEEQUIPMENTVO:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLEEQUIPMENTVO:Class = SellOnVehicleEquipmentVo;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLEOPTIONALDEVICEVO:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLEOPTIONALDEVICEVO:Class = SellOnVehicleOptionalDeviceVo;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLESHELLVO:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLONVEHICLESHELLVO:Class = SellOnVehicleShellVo;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLVEHICLEITEMBASEVO:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLVEHICLEITEMBASEVO:Class = SellVehicleItemBaseVo;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLVEHICLEVO:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VO_SELLVEHICLEVO:Class = SellVehicleVo;
         
-        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VEHICLESELLDIALOG:Class;
+        public static var NET_WG_GUI_LOBBY_SELLDIALOG_VEHICLESELLDIALOG:Class = VehicleSellDialog;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_ADVANCEDGRAPHICCONTENTFORM:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_ADVANCEDGRAPHICCONTENTFORM:Class = AdvancedGraphicContentForm;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_ADVANCEDGRAPHICSETTINGSFORM:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_ADVANCEDGRAPHICSETTINGSFORM:Class = AdvancedGraphicSettingsForm;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_AIMSETTINGS:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_AIMSETTINGS:Class = AimSettings;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_CONTROLSSETTINGS:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_CONTROLSSETTINGS:Class = ControlsSettings;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_GAMESETTINGS:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_GAMESETTINGS:Class = GameSettings;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_GAMESETTINGSBASE:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_GAMESETTINGSBASE:Class = GameSettingsBase;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_GRAPHICSETTINGS:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_GRAPHICSETTINGS:Class = GraphicSettings;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_GRAPHICSETTINGSBASE:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_GRAPHICSETTINGSBASE:Class = GraphicSettingsBase;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_MARKERSETTINGS:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_MARKERSETTINGS:Class = MarkerSettings;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_OTHERSETTINGS:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_OTHERSETTINGS:Class = OtherSettings;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_SCREENSETTINGSFORM:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_SCREENSETTINGSFORM:Class = ScreenSettingsForm;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSAIMFORM:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSAIMFORM:Class = SettingsAimForm;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSBASEVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSBASEVIEW:Class = SettingsBaseView;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSCHANGESMAP:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSCHANGESMAP:Class = SettingsChangesMap;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSCONFIG:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSCONFIG:Class = SettingsConfig;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSMARKERSFORM:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSMARKERSFORM:Class = SettingsMarkersForm;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_SETTINGSWINDOW:Class = SettingsWindow;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_SOUNDSETTINGS:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_SOUNDSETTINGS:Class = SoundSettings;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_SOUNDSETTINGSBASE:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_SOUNDSETTINGSBASE:Class = SoundSettingsBase;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYINPUT:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYINPUT:Class = KeyInput;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSITEMRENDERER:Class = KeysItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSSCROLLINGLIST:Class = KeysScrollingList;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_RADIOBUTTONBAR:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_RADIOBUTTONBAR:Class = RadioButtonBar;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SETTINGSSTEPSLIDER:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SETTINGSSTEPSLIDER:Class = SettingsStepSlider;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SOUNDVOICEWAVES:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SOUNDVOICEWAVES:Class = SoundVoiceWaves;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_EVNTS_KEYINPUTEVENTS:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_EVNTS_KEYINPUTEVENTS:Class = KeyInputEvents;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_EVNTS_ALTERNATIVEVOICEEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_EVNTS_ALTERNATIVEVOICEEVENT:Class = AlternativeVoiceEvent;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_EVNTS_SETTINGVIEWEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_EVNTS_SETTINGVIEWEVENT:Class = SettingViewEvent;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_EVNTS_SETTINGSSUBVEWEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_EVNTS_SETTINGSSUBVEWEVENT:Class = SettingsSubVewEvent;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_VO_SETTINGSCONTROLPROP:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_VO_SETTINGSCONTROLPROP:Class = SettingsControlProp;
         
-        public static var NET_WG_GUI_LOBBY_SETTINGS_VO_SETTINGSKEYPROP:Class;
+        public static var NET_WG_GUI_LOBBY_SETTINGS_VO_SETTINGSKEYPROP:Class = SettingsKeyProp;
         
-        public static var NET_WG_GUI_LOBBY_STORE_COMPLEXLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_COMPLEXLISTITEMRENDERER:Class = ComplexListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_STORE_MODULERENDERERCREDITS:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_MODULERENDERERCREDITS:Class = ModuleRendererCredits;
         
-        public static var NET_WG_GUI_LOBBY_STORE_NATIONFILTER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_NATIONFILTER:Class = NationFilter;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STORE_STATUS_COLOR:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STORE_STATUS_COLOR:Class = STORE_STATUS_COLOR;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STORE:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STORE:Class = Store;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STOREEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STOREEVENT:Class = StoreEvent;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STOREFORM:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STOREFORM:Class = StoreForm;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STOREHELPER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STOREHELPER:Class = StoreHelper;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STORELISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STORELISTITEMRENDERER:Class = StoreListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STORETABLE:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STORETABLE:Class = StoreTable;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STORETABLEDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STORETABLEDATAPROVIDER:Class = StoreTableDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STORETOOLTIPMAPVO:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STORETOOLTIPMAPVO:Class = StoreTooltipMapVO;
         
-        public static var NET_WG_GUI_LOBBY_STORE_STOREVIEWSEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_STOREVIEWSEVENT:Class = StoreViewsEvent;
         
-        public static var NET_WG_GUI_LOBBY_STORE_TABLEHEADER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_TABLEHEADER:Class = TableHeader;
         
-        public static var NET_WG_GUI_LOBBY_STORE_TABLEHEADERINFO:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_TABLEHEADERINFO:Class = TableHeaderInfo;
         
-        public static var NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORY:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORY:Class = Inventory;
         
-        public static var NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORYMODULELISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORYMODULELISTITEMRENDERER:Class = InventoryModuleListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORYVEHICLELISTITEMRDR:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_INVENTORY_INVENTORYVEHICLELISTITEMRDR:Class = InventoryVehicleListItemRdr;
         
-        public static var NET_WG_GUI_LOBBY_STORE_INVENTORY_BASE_INVENTORYLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_INVENTORY_BASE_INVENTORYLISTITEMRENDERER:Class = InventoryListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_STORE_SHOP_SHOP:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_SHOP_SHOP:Class = Shop;
         
-        public static var NET_WG_GUI_LOBBY_STORE_SHOP_SHOPMODULELISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_SHOP_SHOPMODULELISTITEMRENDERER:Class = ShopModuleListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_STORE_SHOP_SHOPVEHICLELISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_SHOP_SHOPVEHICLELISTITEMRENDERER:Class = ShopVehicleListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_STORE_SHOP_BASE_ACTION_CREDITS_STATES:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_SHOP_BASE_ACTION_CREDITS_STATES:Class = ACTION_CREDITS_STATES;
         
-        public static var NET_WG_GUI_LOBBY_STORE_SHOP_BASE_SHOPTABLEITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_SHOP_BASE_SHOPTABLEITEMRENDERER:Class = ShopTableItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_EQUIPMENTVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_EQUIPMENTVIEW:Class = EquipmentView;
         
-        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_MODULEVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_MODULEVIEW:Class = ModuleView;
         
-        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_OPTIONALDEVICEVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_OPTIONALDEVICEVIEW:Class = OptionalDeviceView;
         
-        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_SHELLVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_SHELLVIEW:Class = ShellView;
         
-        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_VEHICLEVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_VEHICLEVIEW:Class = VehicleView;
         
-        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_BASESTOREMENUVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_BASESTOREMENUVIEW:Class = BaseStoreMenuView;
         
-        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_FITSSELECTABLESTOREMENUVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_FITSSELECTABLESTOREMENUVIEW:Class = FitsSelectableStoreMenuView;
         
-        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_SIMPLESTOREMENUVIEW:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_SIMPLESTOREMENUVIEW:Class = SimpleStoreMenuView;
         
-        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_VIEWUIELEMENTVO:Class;
+        public static var NET_WG_GUI_LOBBY_STORE_VIEWS_BASE_VIEWUIELEMENTVO:Class = ViewUIElementVO;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_CAROUSELTANKMANSKILLSMODEL:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_CAROUSELTANKMANSKILLSMODEL:Class = CarouselTankmanSkillsModel;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_CREWTANKMANRETRAINING:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_CREWTANKMANRETRAINING:Class = CrewTankmanRetraining;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASE:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASE:Class = PersonalCase;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBASE:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBASE:Class = PersonalCaseBase;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBLOCKITEM:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBLOCKITEM:Class = PersonalCaseBlockItem;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBLOCKSAREA:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEBLOCKSAREA:Class = PersonalCaseBlocksArea;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASECURRENTVEHICLE:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASECURRENTVEHICLE:Class = PersonalCaseCurrentVehicle;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEDOCS:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEDOCS:Class = PersonalCaseDocs;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEDOCSMODEL:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEDOCSMODEL:Class = PersonalCaseDocsModel;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEINPUTLIST:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEINPUTLIST:Class = PersonalCaseInputList;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEMODEL:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASEMODEL:Class = PersonalCaseModel;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASERETRAININGMODEL:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASERETRAININGMODEL:Class = PersonalCaseRetrainingModel;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLS:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLS:Class = PersonalCaseSkills;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLSITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLSITEMRENDERER:Class = PersonalCaseSkillsItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLSMODEL:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESKILLSMODEL:Class = PersonalCaseSkillsModel;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESPECIALIZATION:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESPECIALIZATION:Class = PersonalCaseSpecialization;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESTATS:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_PERSONALCASESTATS:Class = PersonalCaseStats;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_RANKELEMENT:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_RANKELEMENT:Class = RankElement;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_SKILLDROPMODEL:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_SKILLDROPMODEL:Class = SkillDropModel;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_SKILLDROPWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_SKILLDROPWINDOW:Class = SkillDropWindow;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_SKILLITEMVIEWMINI:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_SKILLITEMVIEWMINI:Class = SkillItemViewMini;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_SKILLSITEMSRENDERERRANKICON:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_SKILLSITEMSRENDERERRANKICON:Class = SkillsItemsRendererRankIcon;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_TANKMANSKILLSINFOBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_TANKMANSKILLSINFOBLOCK:Class = TankmanSkillsInfoBlock;
         
-        public static var NET_WG_GUI_LOBBY_TANKMAN_VEHICLETYPEBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_TANKMAN_VEHICLETYPEBUTTON:Class = VehicleTypeButton;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_MENUHANDLER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_MENUHANDLER:Class = MenuHandler;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_RESEARCHPAGE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_RESEARCHPAGE:Class = ResearchPage;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_TECHTREEEVENT:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_TECHTREEEVENT:Class = TechTreeEvent;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_TECHTREEPAGE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_TECHTREEPAGE:Class = TechTreePage;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_ACTIONNAME:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_ACTIONNAME:Class = ActionName;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_COLORINDEX:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_COLORINDEX:Class = ColorIndex;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_ICONTEXTRESOLVER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_ICONTEXTRESOLVER:Class = IconTextResolver;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NAMEDLABELS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NAMEDLABELS:Class = NamedLabels;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NAVINDICATOR:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NAVINDICATOR:Class = NavIndicator;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NODEENTITYTYPE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NODEENTITYTYPE:Class = NodeEntityType;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NODESTATE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_NODESTATE:Class = NodeState;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_OUTLITERAL:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_OUTLITERAL:Class = OutLiteral;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_TTINVALIDATIONTYPE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_TTINVALIDATIONTYPE:Class = TTInvalidationType;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_TTSOUNDID:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_TTSOUNDID:Class = TTSoundID;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_XPTYPESTRINGS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONSTANTS_XPTYPESTRINGS:Class = XpTypeStrings;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_ACTIONBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_ACTIONBUTTON:Class = ActionButton;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_EXPERIENCEINFORMATION:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_EXPERIENCEINFORMATION:Class = ExperienceInformation;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_EXPERIENCELABEL:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_EXPERIENCELABEL:Class = ExperienceLabel;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_LEVELDELIMITER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_LEVELDELIMITER:Class = LevelDelimiter;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_LEVELSCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_LEVELSCONTAINER:Class = LevelsContainer;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NAMEANDXPFIELD:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NAMEANDXPFIELD:Class = NameAndXpField;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NATIONBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NATIONBUTTON:Class = NationButton;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NATIONSBUTTONBAR:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NATIONSBUTTONBAR:Class = NationsButtonBar;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NODECOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_NODECOMPONENT:Class = NodeComponent;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_PREMIUMDESCRIPTION:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_PREMIUMDESCRIPTION:Class = PremiumDescription;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_PREMIUMLAYOUT:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_PREMIUMLAYOUT:Class = PremiumLayout;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_RESEARCHTITLEBAR:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_RESEARCHTITLEBAR:Class = ResearchTitleBar;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_RETURNTOTTBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_RETURNTOTTBUTTON:Class = ReturnToTTButton;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_TYPEANDLEVELFIELD:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_TYPEANDLEVELFIELD:Class = TypeAndLevelField;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_XPICON:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_CONTROLS_XPICON:Class = XPIcon;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_ABSTRACTDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_ABSTRACTDATAPROVIDER:Class = AbstractDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_NATIONVODATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_NATIONVODATAPROVIDER:Class = NationVODataProvider;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_NATIONXMLDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_NATIONXMLDATAPROVIDER:Class = NationXMLDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_RESEARCHVODATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_RESEARCHVODATAPROVIDER:Class = ResearchVODataProvider;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_RESEARCHXMLDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_RESEARCHXMLDATAPROVIDER:Class = ResearchXMLDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_ANIMATIONPROPERTIES:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_ANIMATIONPROPERTIES:Class = AnimationProperties;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_INVENTORYSTATEITEM:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_INVENTORYSTATEITEM:Class = InventoryStateItem;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_NODESTATECOLLECTION:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_NODESTATECOLLECTION:Class = NodeStateCollection;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_NODESTATEITEM:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_NODESTATEITEM:Class = NodeStateItem;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_RESEARCHSTATEITEM:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_RESEARCHSTATEITEM:Class = ResearchStateItem;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_STATEPROPERTIES:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_STATEPROPERTIES:Class = StateProperties;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_UNLOCKEDSTATEITEM:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_STATE_UNLOCKEDSTATEITEM:Class = UnlockedStateItem;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_EXTRAINFORMATION:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_EXTRAINFORMATION:Class = ExtraInformation;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NTDISPLAYINFO:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NTDISPLAYINFO:Class = NTDisplayInfo;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NATIONDISPLAYSETTINGS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NATIONDISPLAYSETTINGS:Class = NationDisplaySettings;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NODEDATA:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_NODEDATA:Class = NodeData;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_PRIMARYCLASS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_PRIMARYCLASS:Class = PrimaryClass;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_RESEARCHDISPLAYINFO:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_RESEARCHDISPLAYINFO:Class = ResearchDisplayInfo;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_SHOPPRICE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_SHOPPRICE:Class = ShopPrice;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_UNLOCKPROPS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_UNLOCKPROPS:Class = UnlockProps;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_VEHGLOBALSTATS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_DATA_VO_VEHGLOBALSTATS:Class = VehGlobalStats;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_DISTANCE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_DISTANCE:Class = Distance;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_LINESGRAPHICS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_LINESGRAPHICS:Class = LinesGraphics;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_NTGRAPHICS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_NTGRAPHICS:Class = NTGraphics;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_NODEINDEXFILTER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_NODEINDEXFILTER:Class = NodeIndexFilter;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_RESEARCHGRAPHICS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_RESEARCHGRAPHICS:Class = ResearchGraphics;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_TITLEAPPEARANCE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_HELPERS_TITLEAPPEARANCE:Class = TitleAppearance;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IHASRENDERERASOWNER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IHASRENDERERASOWNER:Class = IHasRendererAsOwner;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INATIONTREEDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INATIONTREEDATAPROVIDER:Class = INationTreeDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INODESCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INODESCONTAINER:Class = INodesContainer;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INODESDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_INODESDATAPROVIDER:Class = INodesDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRENDERER:Class = IRenderer;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHCONTAINER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHCONTAINER:Class = IResearchContainer;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHDATAPROVIDER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHDATAPROVIDER:Class = IResearchDataProvider;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHPAGE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IRESEARCHPAGE:Class = IResearchPage;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_ITECHTREEPAGE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_ITECHTREEPAGE:Class = ITechTreePage;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IVALUEOBJECT:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_INTERFACES_IVALUEOBJECT:Class = IValueObject;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_MATH_ADG_ITEMLEVELSBUILDER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_MATH_ADG_ITEMLEVELSBUILDER:Class = ADG_ItemLevelsBuilder;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_MATH_HUNGARIANALGORITHM:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_MATH_HUNGARIANALGORITHM:Class = HungarianAlgorithm;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_MATH_MATRIXPOSITION:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_MATH_MATRIXPOSITION:Class = MatrixPosition;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_MATH_MATRIXUTILS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_MATH_MATRIXUTILS:Class = MatrixUtils;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_FAKENODE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_FAKENODE:Class = FakeNode;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_NATIONTREENODE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_NATIONTREENODE:Class = NationTreeNode;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_RENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_RENDERER:Class = Renderer;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_RESEARCHITEM:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_RESEARCHITEM:Class = ResearchItem;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_RESEARCHROOT:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_NODES_RESEARCHROOT:Class = ResearchRoot;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_SUB_NATIONTREE:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_SUB_NATIONTREE:Class = NationTree;
         
-        public static var NET_WG_GUI_LOBBY_TECHTREE_SUB_RESEARCHITEMS:Class;
+        public static var NET_WG_GUI_LOBBY_TECHTREE_SUB_RESEARCHITEMS:Class = ResearchItems;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_ARENAVOIPSETTINGS:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_ARENAVOIPSETTINGS:Class = ArenaVoipSettings;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_DROPLIST:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_DROPLIST:Class = DropList;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_DROPTILELIST:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_DROPTILELIST:Class = DropTileList;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_MINIMAPENTITY:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_MINIMAPENTITY:Class = MinimapEntity;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_MINIMAPENTRY:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_MINIMAPENTRY:Class = MinimapEntry;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_MINIMAPLOBBY:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_MINIMAPLOBBY:Class = MinimapLobby;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_OBSERVERBUTTONCOMPONENT:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_OBSERVERBUTTONCOMPONENT:Class = ObserverButtonComponent;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_PLAYERELEMENT:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_PLAYERELEMENT:Class = PlayerElement;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_TOOLTIPVIEWER:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_TOOLTIPVIEWER:Class = TooltipViewer;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGCONSTANTS:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGCONSTANTS:Class = TrainingConstants;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGDRAGCONTROLLER:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGDRAGCONTROLLER:Class = TrainingDragController;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGDRAGDELEGATE:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGDRAGDELEGATE:Class = TrainingDragDelegate;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGFORM:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGFORM:Class = TrainingForm;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGLISTITEMRENDERER:Class = TrainingListItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGPLAYERITEMRENDERER:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGPLAYERITEMRENDERER:Class = TrainingPlayerItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGROOM:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGROOM:Class = TrainingRoom;
         
-        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_TRAINING_TRAININGWINDOW:Class = TrainingWindow;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_BODYMC:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_BODYMC:Class = BodyMc;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_BUYINGVEHICLEVO:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_BUYINGVEHICLEVO:Class = BuyingVehicleVO;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_EXPANDBUTTON:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_EXPANDBUTTON:Class = ExpandButton;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_FOOTERMC:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_FOOTERMC:Class = FooterMc;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_HEADERMC:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_HEADERMC:Class = HeaderMc;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_VEHICLEBUYWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_VEHICLEBUYWINDOW:Class = VehicleBuyWindow;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_VEHICLEBUYWINDOWANIMMANAGER:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEBUYWINDOW_VEHICLEBUYWINDOWANIMMANAGER:Class = VehicleBuyWindowAnimManager;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_BASEBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_BASEBLOCK:Class = BaseBlock;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_CREWBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_CREWBLOCK:Class = CrewBlock;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_PROPBLOCK:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_PROPBLOCK:Class = PropBlock;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFO:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFO:Class = VehicleInfo;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOBASE:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOBASE:Class = VehicleInfoBase;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOCREW:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOCREW:Class = VehicleInfoCrew;
         
-        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOPROPS:Class;
+        public static var NET_WG_GUI_LOBBY_VEHICLEINFO_VEHICLEINFOPROPS:Class = VehicleInfoProps;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_BASEEXCHANGEWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_BASEEXCHANGEWINDOW:Class = BaseExchangeWindow;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGECURRENCYWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGECURRENCYWINDOW:Class = ExchangeCurrencyWindow;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANINITVO:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANINITVO:Class = ExchangeFreeToTankmanInitVO;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANXPWARNING:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANXPWARNING:Class = ExchangeFreeToTankmanXpWarning;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANXPWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEFREETOTANKMANXPWINDOW:Class = ExchangeFreeToTankmanXpWindow;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEHEADER:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEHEADER:Class = ExchangeHeader;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEUTILS:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEUTILS:Class = ExchangeUtils;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEVCOINWARNINGMC:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEVCOINWARNINGMC:Class = ExchangeVcoinWarningMC;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEVCOINWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEVCOINWINDOW:Class = ExchangeVcoinWindow;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEWINDOW:Class = ExchangeWindow;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPFROMVEHICLEIR:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPFROMVEHICLEIR:Class = ExchangeXPFromVehicleIR;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPLIST:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPLIST:Class = ExchangeXPList;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPTANKMANSKILLSMODEL:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPTANKMANSKILLSMODEL:Class = ExchangeXPTankmanSkillsModel;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPVEHICLEVO:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPVEHICLEVO:Class = ExchangeXPVehicleVO;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPWARNINGSCREEN:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPWARNINGSCREEN:Class = ExchangeXPWarningScreen;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXCHANGEXPWINDOW:Class = ExchangeXPWindow;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_EXTENDEDICONTEXT:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_EXTENDEDICONTEXT:Class = ExtendedIconText;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_PROFILEWINDOW:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_PROFILEWINDOW:Class = ProfileWindow;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_PROFILEWINDOWINITVO:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_PROFILEWINDOWINITVO:Class = ProfileWindowInitVO;
         
-        public static var NET_WG_GUI_LOBBY_WINDOW_VCOINEXCHANGEDATAVO:Class;
+        public static var NET_WG_GUI_LOBBY_WINDOW_VCOINEXCHANGEDATAVO:Class = VcoinExchangeDataVO;
         
-        public static var NET_WG_GUI_LOGIN_EULA_EULADLG:Class;
+        public static var NET_WG_GUI_LOGIN_EULA_EULADLG:Class = EULADlg;
         
-        public static var NET_WG_GUI_LOGIN_EULA_EULAFULLDLG:Class;
+        public static var NET_WG_GUI_LOGIN_EULA_EULAFULLDLG:Class = EULAFullDlg;
         
-        public static var NET_WG_GUI_LOGIN_ILOGINFORM:Class;
+        public static var NET_WG_GUI_LOGIN_ILOGINFORM:Class = ILoginForm;
         
-        public static var NET_WG_GUI_LOGIN_IRSSNEWSFEEDRENDERER:Class;
+        public static var NET_WG_GUI_LOGIN_IRSSNEWSFEEDRENDERER:Class = IRssNewsFeedRenderer;
         
-        public static var NET_WG_GUI_LOGIN_ISPARKSMANAGER:Class;
+        public static var NET_WG_GUI_LOGIN_ISPARKSMANAGER:Class = ISparksManager;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_LOGINCREATEANACCOUNTWINDOW:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_LOGINCREATEANACCOUNTWINDOW:Class = LoginCreateAnAccountWindow;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_LOGINEVENT:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_LOGINEVENT:Class = LoginEvent;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_LOGINFORM:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_LOGINFORM:Class = LoginForm;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_LOGINPAGE:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_LOGINPAGE:Class = LoginPage;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_LOGINQUEUEWINDOW:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_LOGINQUEUEWINDOW:Class = LoginQueueWindow;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_SPARK:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_SPARK:Class = Spark;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_SPARKSMANAGER:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_SPARKSMANAGER:Class = SparksManager;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_COPYRIGHT:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_COPYRIGHT:Class = Copyright;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_COPYRIGHTEVENT:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_COPYRIGHTEVENT:Class = CopyrightEvent;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_RSSITEMEVENT:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_RSSITEMEVENT:Class = RssItemEvent;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_RSSNEWSFEED:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_RSSNEWSFEED:Class = RssNewsFeed;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_RSSNEWSFEEDRENDERER:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_RSSNEWSFEEDRENDERER:Class = RssNewsFeedRenderer;
         
-        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_VO_RSSITEMVO:Class;
+        public static var NET_WG_GUI_LOGIN_IMPL_COMPONENTS_VO_RSSITEMVO:Class = RssItemVo;
         
-        public static var NET_WG_GUI_LOGIN_LEGAL_LEGALCONTENT:Class;
+        public static var NET_WG_GUI_LOGIN_LEGAL_LEGALCONTENT:Class = LegalContent;
         
-        public static var NET_WG_GUI_LOGIN_LEGAL_LEGALINFOWINDOW:Class;
+        public static var NET_WG_GUI_LOGIN_LEGAL_LEGALINFOWINDOW:Class = LegalInfoWindow;
         
-        public static var NET_WG_GUI_MESSENGER_CHANNELCOMPONENT:Class;
+        public static var NET_WG_GUI_MESSENGER_CHANNELCOMPONENT:Class = ChannelComponent;
         
-        public static var NET_WG_GUI_MESSENGER_ICHANNELCOMPONENT:Class;
+        public static var NET_WG_GUI_MESSENGER_ICHANNELCOMPONENT:Class = IChannelComponent;
         
-        public static var NET_WG_GUI_MESSENGER_SMILEYMAP:Class;
+        public static var NET_WG_GUI_MESSENGER_SMILEYMAP:Class = SmileyMap;
         
-        public static var NET_WG_GUI_MESSENGER_CONTROLS_CHANNELITEMRENDERER:Class;
+        public static var NET_WG_GUI_MESSENGER_CONTROLS_CHANNELITEMRENDERER:Class = ChannelItemRenderer;
         
-        public static var NET_WG_GUI_MESSENGER_CONTROLS_MEMBERITEMRENDERER:Class;
+        public static var NET_WG_GUI_MESSENGER_CONTROLS_MEMBERITEMRENDERER:Class = MemberItemRenderer;
         
-        public static var NET_WG_GUI_MESSENGER_DATA_CHANNELMEMBERVO:Class;
+        public static var NET_WG_GUI_MESSENGER_DATA_CHANNELMEMBERVO:Class = ChannelMemberVO;
         
-        public static var NET_WG_GUI_MESSENGER_EVNTS_CHANNELSFORMEVENT:Class;
+        public static var NET_WG_GUI_MESSENGER_EVNTS_CHANNELSFORMEVENT:Class = ChannelsFormEvent;
         
-        public static var NET_WG_GUI_MESSENGER_EVNTS_CONTACTSFORMEVENT:Class;
+        public static var NET_WG_GUI_MESSENGER_EVNTS_CONTACTSFORMEVENT:Class = ContactsFormEvent;
         
-        public static var NET_WG_GUI_MESSENGER_FORMS_CHANNELSCREATEFORM:Class;
+        public static var NET_WG_GUI_MESSENGER_FORMS_CHANNELSCREATEFORM:Class = ChannelsCreateForm;
         
-        public static var NET_WG_GUI_MESSENGER_FORMS_CHANNELSSEARCHFORM:Class;
+        public static var NET_WG_GUI_MESSENGER_FORMS_CHANNELSSEARCHFORM:Class = ChannelsSearchForm;
         
-        public static var NET_WG_GUI_MESSENGER_FORMS_CONTACTSLISTFORM:Class;
+        public static var NET_WG_GUI_MESSENGER_FORMS_CONTACTSLISTFORM:Class = ContactsListForm;
         
-        public static var NET_WG_GUI_MESSENGER_FORMS_CONTACTSSEARCHFORM:Class;
+        public static var NET_WG_GUI_MESSENGER_FORMS_CONTACTSSEARCHFORM:Class = ContactsSearchForm;
         
-        public static var NET_WG_GUI_MESSENGER_META_IBASECHANNELWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_IBASECHANNELWINDOWMETA:Class = IBaseChannelWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_ICHANNELCOMPONENTMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_ICHANNELCOMPONENTMETA:Class = net.wg.gui.messenger.meta.IChannelComponentMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_ICHANNELSMANAGEMENTWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_ICHANNELSMANAGEMENTWINDOWMETA:Class = IChannelsManagementWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_ICONNECTTOSECURECHANNELWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_ICONNECTTOSECURECHANNELWINDOWMETA:Class = IConnectToSecureChannelWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_ICONTACTSWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_ICONTACTSWINDOWMETA:Class = IContactsWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_IFAQWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_IFAQWINDOWMETA:Class = IFAQWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_ILOBBYCHANNELWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_ILOBBYCHANNELWINDOWMETA:Class = ILobbyChannelWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_IMPL_BASECHANNELWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_IMPL_BASECHANNELWINDOWMETA:Class = BaseChannelWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_IMPL_CHANNELCOMPONENTMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_IMPL_CHANNELCOMPONENTMETA:Class = ChannelComponentMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_IMPL_CHANNELSMANAGEMENTWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_IMPL_CHANNELSMANAGEMENTWINDOWMETA:Class = ChannelsManagementWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_IMPL_CONNECTTOSECURECHANNELWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_IMPL_CONNECTTOSECURECHANNELWINDOWMETA:Class = ConnectToSecureChannelWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_IMPL_CONTACTSWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_IMPL_CONTACTSWINDOWMETA:Class = ContactsWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_IMPL_FAQWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_IMPL_FAQWINDOWMETA:Class = FAQWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_META_IMPL_LOBBYCHANNELWINDOWMETA:Class;
+        public static var NET_WG_GUI_MESSENGER_META_IMPL_LOBBYCHANNELWINDOWMETA:Class = LobbyChannelWindowMeta;
         
-        public static var NET_WG_GUI_MESSENGER_WINDOWS_BASECHANNELWINDOW:Class;
+        public static var NET_WG_GUI_MESSENGER_WINDOWS_BASECHANNELWINDOW:Class = BaseChannelWindow;
         
-        public static var NET_WG_GUI_MESSENGER_WINDOWS_CHANNELSMANAGEMENTWINDOW:Class;
+        public static var NET_WG_GUI_MESSENGER_WINDOWS_CHANNELSMANAGEMENTWINDOW:Class = ChannelsManagementWindow;
         
-        public static var NET_WG_GUI_MESSENGER_WINDOWS_CONNECTTOSECURECHANNELWINDOW:Class;
+        public static var NET_WG_GUI_MESSENGER_WINDOWS_CONNECTTOSECURECHANNELWINDOW:Class = ConnectToSecureChannelWindow;
         
-        public static var NET_WG_GUI_MESSENGER_WINDOWS_CONTACTSWINDOW:Class;
+        public static var NET_WG_GUI_MESSENGER_WINDOWS_CONTACTSWINDOW:Class = ContactsWindow;
         
-        public static var NET_WG_GUI_MESSENGER_WINDOWS_FAQWINDOW:Class;
+        public static var NET_WG_GUI_MESSENGER_WINDOWS_FAQWINDOW:Class = FAQWindow;
         
-        public static var NET_WG_GUI_MESSENGER_WINDOWS_LAZYCHANNELWINDOW:Class;
+        public static var NET_WG_GUI_MESSENGER_WINDOWS_LAZYCHANNELWINDOW:Class = LazyChannelWindow;
         
-        public static var NET_WG_GUI_MESSENGER_WINDOWS_LOBBYCHANNELWINDOW:Class;
+        public static var NET_WG_GUI_MESSENGER_WINDOWS_LOBBYCHANNELWINDOW:Class = LobbyChannelWindow;
         
-        public static var NET_WG_GUI_NOTIFICATION_CAPTCHA:Class;
+        public static var NET_WG_GUI_NOTIFICATION_CAPTCHA:Class = CAPTCHA;
         
-        public static var NET_WG_GUI_NOTIFICATION_NOTIFICATIONLISTVIEW:Class;
+        public static var NET_WG_GUI_NOTIFICATION_NOTIFICATIONLISTVIEW:Class = NotificationListView;
         
-        public static var NET_WG_GUI_NOTIFICATION_NOTIFICATIONPOPUPVIEWER:Class;
+        public static var NET_WG_GUI_NOTIFICATION_NOTIFICATIONPOPUPVIEWER:Class = NotificationPopUpViewer;
         
-        public static var NET_WG_GUI_NOTIFICATION_NOTIFICATIONTIMECOMPONENT:Class;
+        public static var NET_WG_GUI_NOTIFICATION_NOTIFICATIONTIMECOMPONENT:Class = NotificationTimeComponent;
         
-        public static var NET_WG_GUI_NOTIFICATION_NOTIFICATIONSLIST:Class;
+        public static var NET_WG_GUI_NOTIFICATION_NOTIFICATIONSLIST:Class = NotificationsList;
         
-        public static var NET_WG_GUI_NOTIFICATION_SERVICEMESSAGE:Class;
+        public static var NET_WG_GUI_NOTIFICATION_SERVICEMESSAGE:Class = ServiceMessage;
         
-        public static var NET_WG_GUI_NOTIFICATION_SERVICEMESSAGEITEMRENDERER:Class;
+        public static var NET_WG_GUI_NOTIFICATION_SERVICEMESSAGEITEMRENDERER:Class = ServiceMessageItemRenderer;
         
-        public static var NET_WG_GUI_NOTIFICATION_SERVICEMESSAGEPOPUP:Class;
+        public static var NET_WG_GUI_NOTIFICATION_SERVICEMESSAGEPOPUP:Class = ServiceMessagePopUp;
         
-        public static var NET_WG_GUI_NOTIFICATION_SYSTEMMESSAGEDIALOG:Class;
+        public static var NET_WG_GUI_NOTIFICATION_SYSTEMMESSAGEDIALOG:Class = SystemMessageDialog;
         
-        public static var NET_WG_GUI_NOTIFICATION_CONSTANTS_BUTTONSTATE:Class;
+        public static var NET_WG_GUI_NOTIFICATION_CONSTANTS_BUTTONSTATE:Class = ButtonState;
         
-        public static var NET_WG_GUI_NOTIFICATION_CONSTANTS_BUTTONTYPE:Class;
+        public static var NET_WG_GUI_NOTIFICATION_CONSTANTS_BUTTONTYPE:Class = ButtonType;
         
-        public static var NET_WG_GUI_NOTIFICATION_CONSTANTS_MESSAGEMETRICS:Class;
+        public static var NET_WG_GUI_NOTIFICATION_CONSTANTS_MESSAGEMETRICS:Class = MessageMetrics;
         
-        public static var NET_WG_GUI_NOTIFICATION_EVENTS_NOTIFICATIONLISTEVENT:Class;
+        public static var NET_WG_GUI_NOTIFICATION_EVENTS_NOTIFICATIONLISTEVENT:Class = NotificationListEvent;
         
-        public static var NET_WG_GUI_NOTIFICATION_EVENTS_SERVICEMESSAGEEVENT:Class;
+        public static var NET_WG_GUI_NOTIFICATION_EVENTS_SERVICEMESSAGEEVENT:Class = ServiceMessageEvent;
         
-        public static var NET_WG_GUI_NOTIFICATION_VO_BUTTONVO:Class;
+        public static var NET_WG_GUI_NOTIFICATION_VO_BUTTONVO:Class = ButtonVO;
         
-        public static var NET_WG_GUI_NOTIFICATION_VO_LAYOUTINFOVO:Class;
+        public static var NET_WG_GUI_NOTIFICATION_VO_LAYOUTINFOVO:Class = LayoutInfoVO;
         
-        public static var NET_WG_GUI_NOTIFICATION_VO_MESSAGEINFOVO:Class;
+        public static var NET_WG_GUI_NOTIFICATION_VO_MESSAGEINFOVO:Class = MessageInfoVO;
         
-        public static var NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONDIALOGINITINFOVO:Class;
+        public static var NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONDIALOGINITINFOVO:Class = NotificationDialogInitInfoVO;
         
-        public static var NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONINFOVO:Class;
+        public static var NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONINFOVO:Class = NotificationInfoVO;
         
-        public static var NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONSETTINGSVO:Class;
+        public static var NET_WG_GUI_NOTIFICATION_VO_NOTIFICATIONSETTINGSVO:Class = NotificationSettingsVO;
         
-        public static var NET_WG_GUI_NOTIFICATION_VO_POPUPNOTIFICATIONINFOVO:Class;
+        public static var NET_WG_GUI_NOTIFICATION_VO_POPUPNOTIFICATIONINFOVO:Class = PopUpNotificationInfoVO;
         
-        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_BSLISTRENDERERVO:Class;
+        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_BSLISTRENDERERVO:Class = BSListRendererVO;
         
-        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONLIST:Class;
+        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONLIST:Class = BattleSessionList;
         
-        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONLISTRENDERER:Class;
+        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONLISTRENDERER:Class = BattleSessionListRenderer;
         
-        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONWINDOW:Class;
+        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_BATTLESESSIONWINDOW:Class = BattleSessionWindow;
         
-        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_FLAGSLIST:Class;
+        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_FLAGSLIST:Class = FlagsList;
         
-        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_REQUIREMENTINFO:Class;
+        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_REQUIREMENTINFO:Class = RequirementInfo;
         
-        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_TOPINFO:Class;
+        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_TOPINFO:Class = TopInfo;
         
-        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_TOPSTATS:Class;
+        public static var NET_WG_GUI_PREBATTLE_BATTLESESSION_TOPSTATS:Class = TopStats;
         
-        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANIESLISTWINDOW:Class;
+        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANIESLISTWINDOW:Class = CompaniesListWindow;
         
-        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANIESSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANIESSCROLLINGLIST:Class = CompaniesScrollingList;
         
-        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPDOWNEVENT:Class;
+        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPDOWNEVENT:Class = CompanyDropDownEvent;
         
-        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPITEMRENDERER:Class;
+        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPITEMRENDERER:Class = CompanyDropItemRenderer;
         
-        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPLIST:Class;
+        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYDROPLIST:Class = CompanyDropList;
         
-        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYEVENT:Class;
+        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYEVENT:Class = CompanyEvent;
         
-        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYLISTITEMRENDERER:Class;
+        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYLISTITEMRENDERER:Class = CompanyListItemRenderer;
         
-        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYWINDOW:Class;
+        public static var NET_WG_GUI_PREBATTLE_COMPANY_COMPANYWINDOW:Class = CompanyWindow;
         
-        public static var NET_WG_GUI_PREBATTLE_COMPANY_GROUPPLAYERSDROPDOWNMENU:Class;
+        public static var NET_WG_GUI_PREBATTLE_COMPANY_GROUPPLAYERSDROPDOWNMENU:Class = GroupPlayersDropDownMenu;
         
-        public static var NET_WG_GUI_PREBATTLE_CONSTANTS_PREBATTLESTATEFLAGS:Class;
+        public static var NET_WG_GUI_PREBATTLE_CONSTANTS_PREBATTLESTATEFLAGS:Class = PrebattleStateFlags;
         
-        public static var NET_WG_GUI_PREBATTLE_CONSTANTS_PREBATTLESTATESTRING:Class;
+        public static var NET_WG_GUI_PREBATTLE_CONSTANTS_PREBATTLESTATESTRING:Class = PrebattleStateString;
         
-        public static var NET_WG_GUI_PREBATTLE_CONTROLS_TEAMMEMBERRENDERER:Class;
+        public static var NET_WG_GUI_PREBATTLE_CONTROLS_TEAMMEMBERRENDERER:Class = TeamMemberRenderer;
         
-        public static var NET_WG_GUI_PREBATTLE_DATA_PLAYERPRBINFOVO:Class;
+        public static var NET_WG_GUI_PREBATTLE_DATA_PLAYERPRBINFOVO:Class = PlayerPrbInfoVO;
         
-        public static var NET_WG_GUI_PREBATTLE_DATA_RECEIVEDINVITEVO:Class;
+        public static var NET_WG_GUI_PREBATTLE_DATA_RECEIVEDINVITEVO:Class = ReceivedInviteVO;
         
-        public static var NET_WG_GUI_PREBATTLE_INVITES_INVITESTACKCONTAINERBASE:Class;
+        public static var NET_WG_GUI_PREBATTLE_INVITES_INVITESTACKCONTAINERBASE:Class = InviteStackContainerBase;
         
-        public static var NET_WG_GUI_PREBATTLE_INVITES_PRBINVITESEARCHUSERSFORM:Class;
+        public static var NET_WG_GUI_PREBATTLE_INVITES_PRBINVITESEARCHUSERSFORM:Class = PrbInviteSearchUsersForm;
         
-        public static var NET_WG_GUI_PREBATTLE_INVITES_PRBSENDINVITECIGENERATOR:Class;
+        public static var NET_WG_GUI_PREBATTLE_INVITES_PRBSENDINVITECIGENERATOR:Class = PrbSendInviteCIGenerator;
         
-        public static var NET_WG_GUI_PREBATTLE_INVITES_PRBSENDINVITESWINDOW:Class;
+        public static var NET_WG_GUI_PREBATTLE_INVITES_PRBSENDINVITESWINDOW:Class = PrbSendInvitesWindow;
         
-        public static var NET_WG_GUI_PREBATTLE_INVITES_RECEIVEDINVITEWINDOW:Class;
+        public static var NET_WG_GUI_PREBATTLE_INVITES_RECEIVEDINVITEWINDOW:Class = ReceivedInviteWindow;
         
-        public static var NET_WG_GUI_PREBATTLE_INVITES_SENDINVITESEVENT:Class;
+        public static var NET_WG_GUI_PREBATTLE_INVITES_SENDINVITESEVENT:Class = SendInvitesEvent;
         
-        public static var NET_WG_GUI_PREBATTLE_INVITES_USERROSTERITEMRENDERER:Class;
+        public static var NET_WG_GUI_PREBATTLE_INVITES_USERROSTERITEMRENDERER:Class = UserRosterItemRenderer;
         
-        public static var NET_WG_GUI_PREBATTLE_INVITES_USERROSTERVIEW:Class;
+        public static var NET_WG_GUI_PREBATTLE_INVITES_USERROSTERVIEW:Class = UserRosterView;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IBATTLESESSIONLISTMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IBATTLESESSIONLISTMETA:Class = IBattleSessionListMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IBATTLESESSIONWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IBATTLESESSIONWINDOWMETA:Class = IBattleSessionWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_ICHANNELWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_ICHANNELWINDOWMETA:Class = IChannelWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_ICOMPANIESWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_ICOMPANIESWINDOWMETA:Class = ICompaniesWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_ICOMPANYWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_ICOMPANYWINDOWMETA:Class = ICompanyWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IPREBATTLEWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IPREBATTLEWINDOWMETA:Class = IPrebattleWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IPREQUEUEWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IPREQUEUEWINDOWMETA:Class = IPrequeueWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IRECEIVEDINVITEWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IRECEIVEDINVITEWINDOWMETA:Class = IReceivedInviteWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_ABSTRACT_PREBATTLEWINDOWABSTRACT:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_ABSTRACT_PREBATTLEWINDOWABSTRACT:Class = PrebattleWindowAbstract;
         
-        public static var NET_WG_GUI_PREBATTLE_META_ABSTRACT_PREQUEUEWINDOW:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_ABSTRACT_PREQUEUEWINDOW:Class = PrequeueWindow;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IMPL_BATTLESESSIONLISTMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IMPL_BATTLESESSIONLISTMETA:Class = BattleSessionListMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IMPL_BATTLESESSIONWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IMPL_BATTLESESSIONWINDOWMETA:Class = BattleSessionWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IMPL_CHANNELWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IMPL_CHANNELWINDOWMETA:Class = ChannelWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IMPL_COMPANIESWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IMPL_COMPANIESWINDOWMETA:Class = CompaniesWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IMPL_COMPANYWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IMPL_COMPANYWINDOWMETA:Class = CompanyWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IMPL_PREBATTLEWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IMPL_PREBATTLEWINDOWMETA:Class = PrebattleWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IMPL_PREQUEUEWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IMPL_PREQUEUEWINDOWMETA:Class = PrequeueWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_META_IMPL_RECEIVEDINVITEWINDOWMETA:Class;
+        public static var NET_WG_GUI_PREBATTLE_META_IMPL_RECEIVEDINVITEWINDOWMETA:Class = ReceivedInviteWindowMeta;
         
-        public static var NET_WG_GUI_PREBATTLE_PAGES_CHANNELWINDOW:Class;
+        public static var NET_WG_GUI_PREBATTLE_PAGES_CHANNELWINDOW:Class = ChannelWindow;
         
-        public static var NET_WG_GUI_PREBATTLE_PAGES_LAZYWINDOW:Class;
+        public static var NET_WG_GUI_PREBATTLE_PAGES_LAZYWINDOW:Class = LazyWindow;
         
-        public static var NET_WG_GUI_PREBATTLE_PAGES_MEMBERDATAPROVIDER:Class;
+        public static var NET_WG_GUI_PREBATTLE_PAGES_MEMBERDATAPROVIDER:Class = MemberDataProvider;
         
-        public static var NET_WG_GUI_PREBATTLE_SQUAD_MESSENGERUTILS:Class;
+        public static var NET_WG_GUI_PREBATTLE_SQUAD_MESSENGERUTILS:Class = MessengerUtils;
         
-        public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADITEMRENDERER:Class;
+        public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADITEMRENDERER:Class = SquadItemRenderer;
         
-        public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOW:Class;
+        public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOW:Class = SquadWindow;
         
-        public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOWCIGENERATOR:Class;
+        public static var NET_WG_GUI_PREBATTLE_SQUAD_SQUADWINDOWCIGENERATOR:Class = SquadWindowCIGenerator;
         
-        public static var NET_WG_GUI_PREBATTLE_SQUAD_USERDATAFLAGS:Class;
+        public static var NET_WG_GUI_PREBATTLE_SQUAD_USERDATAFLAGS:Class = UserDataFlags;
         
-        public static var NET_WG_GUI_RALLY_BASERALLYMAINWINDOW:Class;
+        public static var NET_WG_GUI_RALLY_BASERALLYMAINWINDOW:Class = BaseRallyMainWindow;
         
-        public static var NET_WG_GUI_RALLY_BASERALLYVIEW:Class;
+        public static var NET_WG_GUI_RALLY_BASERALLYVIEW:Class = BaseRallyView;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_BASERALLYSLOTHELPER:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_BASERALLYSLOTHELPER:Class = BaseRallySlotHelper;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_CANDIDATESSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_CANDIDATESSCROLLINGLIST:Class = CandidatesScrollingList;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_IGRAYTRANSPARENTBUTTON:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_IGRAYTRANSPARENTBUTTON:Class = IGrayTransparentButton;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_ISLOTRENDERERHELPER:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_ISLOTRENDERERHELPER:Class = ISlotRendererHelper;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_MANUALSEARCHSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_MANUALSEARCHSCROLLINGLIST:Class = ManualSearchScrollingList;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_RALLYINVALIDATIONTYPE:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_RALLYINVALIDATIONTYPE:Class = RallyInvalidationType;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_RALLYLOCKABLESLOTRENDERER:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_RALLYLOCKABLESLOTRENDERER:Class = RallyLockableSlotRenderer;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_RALLYSIMPLESLOTRENDERER:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_RALLYSIMPLESLOTRENDERER:Class = RallySimpleSlotRenderer;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_RALLYSLOTRENDERER:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_RALLYSLOTRENDERER:Class = RallySlotRenderer;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_READYMSG:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_READYMSG:Class = ReadyMsg;
         
-        public static var NET_WG_GUI_RALLY_CONTROLS_SLOTDROPINDICATOR:Class;
+        public static var NET_WG_GUI_RALLY_CONTROLS_SLOTDROPINDICATOR:Class = SlotDropIndicator;
         
-        public static var NET_WG_GUI_RALLY_DATA_MANUALSEARCHDATAPROVIDER:Class;
+        public static var NET_WG_GUI_RALLY_DATA_MANUALSEARCHDATAPROVIDER:Class = net.wg.gui.rally.data.ManualSearchDataProvider;
         
-        public static var NET_WG_GUI_RALLY_EVENTS_RALLYVIEWSEVENT:Class;
+        public static var NET_WG_GUI_RALLY_EVENTS_RALLYVIEWSEVENT:Class = RallyViewsEvent;
         
-        public static var NET_WG_GUI_RALLY_HELPERS_PLAYERCIGENERATOR:Class;
+        public static var NET_WG_GUI_RALLY_HELPERS_PLAYERCIGENERATOR:Class = PlayerCIGenerator;
         
-        public static var NET_WG_GUI_RALLY_HELPERS_RALLYDRAGDROPDELEGATE:Class;
+        public static var NET_WG_GUI_RALLY_HELPERS_RALLYDRAGDROPDELEGATE:Class = RallyDragDropDelegate;
         
-        public static var NET_WG_GUI_RALLY_HELPERS_RALLYDRAGDROPLISTDELEGATECONTROLLER:Class;
+        public static var NET_WG_GUI_RALLY_HELPERS_RALLYDRAGDROPLISTDELEGATECONTROLLER:Class = RallyDragDropListDelegateController;
         
-        public static var NET_WG_GUI_RALLY_INTERFACES_IMANUALSEARCHRENDERER:Class;
+        public static var NET_WG_GUI_RALLY_INTERFACES_IMANUALSEARCHRENDERER:Class = IManualSearchRenderer;
         
-        public static var NET_WG_GUI_RALLY_INTERFACES_IMANUALSEARCHSCROLLINGLIST:Class;
+        public static var NET_WG_GUI_RALLY_INTERFACES_IMANUALSEARCHSCROLLINGLIST:Class = IManualSearchScrollingList;
         
-        public static var NET_WG_GUI_RALLY_INTERFACES_IRALLYLISTITEMVO:Class;
+        public static var NET_WG_GUI_RALLY_INTERFACES_IRALLYLISTITEMVO:Class = IRallyListItemVO;
         
-        public static var NET_WG_GUI_RALLY_INTERFACES_IRALLYSLOTVO:Class;
+        public static var NET_WG_GUI_RALLY_INTERFACES_IRALLYSLOTVO:Class = IRallySlotVO;
         
-        public static var NET_WG_GUI_RALLY_INTERFACES_IRALLYVO:Class;
+        public static var NET_WG_GUI_RALLY_INTERFACES_IRALLYVO:Class = IRallyVO;
         
-        public static var NET_WG_GUI_RALLY_VIEWS_INTRO_BASERALLYINTROVIEW:Class;
+        public static var NET_WG_GUI_RALLY_VIEWS_INTRO_BASERALLYINTROVIEW:Class = BaseRallyIntroView;
         
-        public static var NET_WG_GUI_RALLY_VIEWS_LIST_BASERALLYDETAILSSECTION:Class;
+        public static var NET_WG_GUI_RALLY_VIEWS_LIST_BASERALLYDETAILSSECTION:Class = BaseRallyDetailsSection;
         
-        public static var NET_WG_GUI_RALLY_VIEWS_LIST_BASERALLYLISTVIEW:Class;
+        public static var NET_WG_GUI_RALLY_VIEWS_LIST_BASERALLYLISTVIEW:Class = BaseRallyListView;
         
-        public static var NET_WG_GUI_RALLY_VIEWS_ROOM_BASECHATSECTION:Class;
+        public static var NET_WG_GUI_RALLY_VIEWS_ROOM_BASECHATSECTION:Class = BaseChatSection;
         
-        public static var NET_WG_GUI_RALLY_VIEWS_ROOM_BASERALLYROOMVIEW:Class;
+        public static var NET_WG_GUI_RALLY_VIEWS_ROOM_BASERALLYROOMVIEW:Class = BaseRallyRoomView;
         
-        public static var NET_WG_GUI_RALLY_VIEWS_ROOM_BASETEAMSECTION:Class;
+        public static var NET_WG_GUI_RALLY_VIEWS_ROOM_BASETEAMSECTION:Class = BaseTeamSection;
         
-        public static var NET_WG_GUI_RALLY_VIEWS_ROOM_BASEWAITLISTSECTION:Class;
+        public static var NET_WG_GUI_RALLY_VIEWS_ROOM_BASEWAITLISTSECTION:Class = BaseWaitListSection;
         
-        public static var NET_WG_GUI_RALLY_VO_ACTIONBUTTONVO:Class;
+        public static var NET_WG_GUI_RALLY_VO_ACTIONBUTTONVO:Class = ActionButtonVO;
         
-        public static var NET_WG_GUI_RALLY_VO_RALLYCANDIDATEVO:Class;
+        public static var NET_WG_GUI_RALLY_VO_RALLYCANDIDATEVO:Class = RallyCandidateVO;
         
-        public static var NET_WG_GUI_RALLY_VO_RALLYSHORTVO:Class;
+        public static var NET_WG_GUI_RALLY_VO_RALLYSHORTVO:Class = RallyShortVO;
         
-        public static var NET_WG_GUI_RALLY_VO_RALLYSLOTVO:Class;
+        public static var NET_WG_GUI_RALLY_VO_RALLYSLOTVO:Class = RallySlotVO;
         
-        public static var NET_WG_GUI_RALLY_VO_RALLYVO:Class;
+        public static var NET_WG_GUI_RALLY_VO_RALLYVO:Class = RallyVO;
         
-        public static var NET_WG_GUI_RALLY_VO_SETTINGROSTERVO:Class;
+        public static var NET_WG_GUI_RALLY_VO_SETTINGROSTERVO:Class = SettingRosterVO;
         
-        public static var NET_WG_GUI_RALLY_VO_VEHICLEVO:Class;
+        public static var NET_WG_GUI_RALLY_VO_VEHICLEVO:Class = net.wg.gui.rally.vo.VehicleVO;
         
-        public static var NET_WG_GUI_TUTORIAL_TUTORIALBATTLELOADING:Class;
+        public static var NET_WG_GUI_TUTORIAL_TUTORIALBATTLELOADING:Class = TutorialBattleLoading;
         
-        public static var NET_WG_GUI_TUTORIAL_CONSTANTS_HINTITEMTYPE:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONSTANTS_HINTITEMTYPE:Class = HintItemType;
         
-        public static var NET_WG_GUI_TUTORIAL_CONSTANTS_PLAYERXPLEVEL:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONSTANTS_PLAYERXPLEVEL:Class = PlayerXPLevel;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_BATTLEBONUSITEM:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_BATTLEBONUSITEM:Class = BattleBonusItem;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_BATTLEPROGRESS:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_BATTLEPROGRESS:Class = BattleProgress;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_CHAPTERPROGRESSITEMRENDERER:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_CHAPTERPROGRESSITEMRENDERER:Class = ChapterProgressItemRenderer;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_FINALSTATISTICPROGRESS:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_FINALSTATISTICPROGRESS:Class = FinalStatisticProgress;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_HINTBASEITEMRENDERER:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_HINTBASEITEMRENDERER:Class = HintBaseItemRenderer;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_HINTLIST:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_HINTLIST:Class = HintList;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_HINTTEXTITEMRENDERER:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_HINTTEXTITEMRENDERER:Class = HintTextItemRenderer;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_HINTVIDEOITEMRENDERER:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_HINTVIDEOITEMRENDERER:Class = HintVideoItemRenderer;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_PROGRESSITEM:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_PROGRESSITEM:Class = ProgressItem;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_PROGRESSSEPARATOR:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_PROGRESSSEPARATOR:Class = ProgressSeparator;
         
-        public static var NET_WG_GUI_TUTORIAL_CONTROLS_TUTORIALBATTLELOADINGFORM:Class;
+        public static var NET_WG_GUI_TUTORIAL_CONTROLS_TUTORIALBATTLELOADINGFORM:Class = TutorialBattleLoadingForm;
         
-        public static var NET_WG_GUI_TUTORIAL_META_ITUTORIALBATTLENORESULTSMETA:Class;
+        public static var NET_WG_GUI_TUTORIAL_META_ITUTORIALBATTLENORESULTSMETA:Class = ITutorialBattleNoResultsMeta;
         
-        public static var NET_WG_GUI_TUTORIAL_META_ITUTORIALBATTLESTATISTICMETA:Class;
+        public static var NET_WG_GUI_TUTORIAL_META_ITUTORIALBATTLESTATISTICMETA:Class = ITutorialBattleStatisticMeta;
         
-        public static var NET_WG_GUI_TUTORIAL_META_ITUTORIALDIALOGMETA:Class;
+        public static var NET_WG_GUI_TUTORIAL_META_ITUTORIALDIALOGMETA:Class = ITutorialDialogMeta;
         
-        public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLENORESULTSMETA:Class;
+        public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLENORESULTSMETA:Class = TutorialBattleNoResultsMeta;
         
-        public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLESTATISTICMETA:Class;
+        public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLESTATISTICMETA:Class = TutorialBattleStatisticMeta;
         
-        public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALDIALOGMETA:Class;
+        public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALDIALOGMETA:Class = TutorialDialogMeta;
         
-        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLENORESULTSWINDOW:Class;
+        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLENORESULTSWINDOW:Class = TutorialBattleNoResultsWindow;
         
-        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLESTATISTICWINDOW:Class;
+        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLESTATISTICWINDOW:Class = TutorialBattleStatisticWindow;
         
-        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALDIALOG:Class;
+        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALDIALOG:Class = TutorialDialog;
         
-        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALGREETINGDIALOG:Class;
+        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALGREETINGDIALOG:Class = TutorialGreetingDialog;
         
-        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALQUEUEDIALOG:Class;
+        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALQUEUEDIALOG:Class = TutorialQueueDialog;
         
-        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALVIDEODIALOG:Class;
+        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALVIDEODIALOG:Class = TutorialVideoDialog;
         
-        public static var NET_WG_GUI_UTILS_COMPLEXTOOLTIPHELPER:Class;
+        public static var NET_WG_GUI_UTILS_COMPLEXTOOLTIPHELPER:Class = ComplexTooltipHelper;
         
-        public static var NET_WG_GUI_UTILS_EXCLUDETWEENMANAGER:Class;
+        public static var NET_WG_GUI_UTILS_EXCLUDETWEENMANAGER:Class = ExcludeTweenManager;
         
-        public static var NET_WG_GUI_UTILS_FRAMEWALKER:Class;
+        public static var NET_WG_GUI_UTILS_FRAMEWALKER:Class = FrameWalker;
         
-        public static var NET_WG_GUI_UTILS_IMAGESUBSTITUTION:Class;
+        public static var NET_WG_GUI_UTILS_IMAGESUBSTITUTION:Class = ImageSubstitution;
         
-        public static var NET_WG_GUI_UTILS_TEXTFIELDSTYLESHEET:Class;
+        public static var NET_WG_GUI_UTILS_TEXTFIELDSTYLESHEET:Class = TextFieldStyleSheet;
         
-        public static var NET_WG_GUI_UTILS_VEHICLESTATESTRING:Class;
+        public static var NET_WG_GUI_UTILS_VEHICLESTATESTRING:Class = VehicleStateString;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_ABSTRACTCONFIRMITEMDIALOG:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_ABSTRACTCONFIRMITEMDIALOG:Class = AbstractConfirmItemDialog;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_ABSTRACTPOPOVERVIEW:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_ABSTRACTPOPOVERVIEW:Class = AbstractPopOverView;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_ABSTRACTWINDOWVIEW:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_ABSTRACTWINDOWVIEW:Class = AbstractWindowView;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_ABSTRACTWRAPPERVIEW:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_ABSTRACTWRAPPERVIEW:Class = AbstractWrapperView;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_BASELAYOUT:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_BASELAYOUT:Class = BaseLayout;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_BASEVIEWWRAPPER:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_BASEVIEWWRAPPER:Class = BaseViewWrapper;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_DEFAULTWINDOWGEOMETRY:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_DEFAULTWINDOWGEOMETRY:Class = DefaultWindowGeometry;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_SMARTPOPOVERVIEW:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_SMARTPOPOVERVIEW:Class = SmartPopOverView;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_STOREDWINDOWGEOMETRY:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_STOREDWINDOWGEOMETRY:Class = StoredWindowGeometry;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IAMMUNITIONPANELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IAMMUNITIONPANELMETA:Class = IAmmunitionPanelMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBARRACKSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBARRACKSMETA:Class = IBarracksMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASEEXCHANGEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASEEXCHANGEWINDOWMETA:Class = IBaseExchangeWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYINTROVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYINTROVIEWMETA:Class = IBaseRallyIntroViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYLISTVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYLISTVIEWMETA:Class = IBaseRallyListViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYMAINWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYMAINWINDOWMETA:Class = IBaseRallyMainWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYROOMVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYROOMVIEWMETA:Class = IBaseRallyRoomViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBASERALLYVIEWMETA:Class = IBaseRallyViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBATTLELOADINGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBATTLELOADINGMETA:Class = IBattleLoadingMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBATTLEQUEUEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBATTLEQUEUEMETA:Class = IBattleQueueMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBATTLERESULTSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBATTLERESULTSMETA:Class = IBattleResultsMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBATTLETYPESELECTPOPOVERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBATTLETYPESELECTPOPOVERMETA:Class = IBattleTypeSelectPopoverMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBROWSERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IBROWSERMETA:Class = IBrowserMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICAPTCHAMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICAPTCHAMETA:Class = ICAPTCHAMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICHANNELCAROUSELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICHANNELCAROUSELMETA:Class = IChannelCarouselMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICHANNELCOMPONENTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICHANNELCOMPONENTMETA:Class = net.wg.infrastructure.base.meta.IChannelComponentMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICONFIRMMODULEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICONFIRMMODULEWINDOWMETA:Class = IConfirmModuleWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICREWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICREWMETA:Class = ICrewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICREWOPERATIONSPOPOVERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICREWOPERATIONSPOPOVERMETA:Class = ICrewOperationsPopOverMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICURSORMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICURSORMETA:Class = ICursorMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTBASEVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTBASEVIEWMETA:Class = ICyberSportBaseViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTINTROMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTINTROMETA:Class = ICyberSportIntroMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTMAINWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTMAINWINDOWMETA:Class = ICyberSportMainWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTUNITMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTUNITMETA:Class = ICyberSportUnitMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTUNITSLISTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ICYBERSPORTUNITSLISTMETA:Class = ICyberSportUnitsListMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IDEMONSTRATORWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IDEMONSTRATORWINDOWMETA:Class = IDemonstratorWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IDEMOUNTBUILDINGWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IDEMOUNTBUILDINGWINDOWMETA:Class = IDemountBuildingWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IDISMISSTANKMANDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IDISMISSTANKMANDIALOGMETA:Class = IDismissTankmanDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEULAMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEULAMETA:Class = IEULAMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IELITEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IELITEWINDOWMETA:Class = IEliteWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEFREETOTANKMANXPWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEFREETOTANKMANXPWINDOWMETA:Class = IExchangeFreeToTankmanXpWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEVCOINWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEVCOINWINDOWMETA:Class = IExchangeVcoinWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEWINDOWMETA:Class = IExchangeWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEXPWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IEXCHANGEXPWINDOWMETA:Class = IExchangeXpWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFIGHTBUTTONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFIGHTBUTTONMETA:Class = IFightButtonMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTBATTLEROOMWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTBATTLEROOMWINDOWMETA:Class = IFortBattleRoomWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGCARDPOPOVERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGCARDPOPOVERMETA:Class = IFortBuildingCardPopoverMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGCOMPONENTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGCOMPONENTMETA:Class = IFortBuildingComponentMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGPROCESSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTBUILDINGPROCESSWINDOWMETA:Class = IFortBuildingProcessWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCHOICEDIVISIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCHOICEDIVISIONWINDOWMETA:Class = IFortChoiceDivisionWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCLANLISTWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCLANLISTWINDOWMETA:Class = IFortClanListWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCLANSTATISTICSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCLANSTATISTICSWINDOWMETA:Class = IFortClanStatisticsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCREATEDIRECTIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCREATEDIRECTIONWINDOWMETA:Class = IFortCreateDirectionWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCREATIONCONGRATULATIONSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTCREATIONCONGRATULATIONSWINDOWMETA:Class = IFortCreationCongratulationsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTDISCONNECTVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTDISCONNECTVIEWMETA:Class = IFortDisconnectViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTFIXEDPLAYERSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTFIXEDPLAYERSWINDOWMETA:Class = IFortFixedPlayersWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTINTELLIGENCEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTINTELLIGENCEWINDOWMETA:Class = IFortIntelligenceWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTINTROMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTINTROMETA:Class = IFortIntroMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTLISTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTLISTMETA:Class = IFortListMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTMAINVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTMAINVIEWMETA:Class = IFortMainViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTMODERNIZATIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTMODERNIZATIONWINDOWMETA:Class = IFortModernizationWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTORDERCONFIRMATIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTORDERCONFIRMATIONWINDOWMETA:Class = IFortOrderConfirmationWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTORDERPOPOVERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTORDERPOPOVERMETA:Class = IFortOrderPopoverMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTROOMMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTROOMMETA:Class = IFortRoomMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTTRANSPORTCONFIRMATIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTTRANSPORTCONFIRMATIONWINDOWMETA:Class = IFortTransportConfirmationWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTWELCOMEVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTWELCOMEVIEWMETA:Class = IFortWelcomeViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTIFICATIONSVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFORTIFICATIONSVIEWMETA:Class = IFortificationsViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFREEXPINFOWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IFREEXPINFOWINDOWMETA:Class = IFreeXPInfoWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IGEDESIGNERWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IGEDESIGNERWINDOWMETA:Class = IGEDesignerWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IGEINSPECTWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IGEINSPECTWINDOWMETA:Class = IGEInspectWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IHANGARMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IHANGARMETA:Class = IHangarMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IHISTORICALBATTLESLISTWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IHISTORICALBATTLESLISTWINDOWMETA:Class = IHistoricalBattlesListWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IICONDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IICONDIALOGMETA:Class = IIconDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IICONPRICEDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IICONPRICEDIALOGMETA:Class = IIconPriceDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IINPUTCHECKERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IINPUTCHECKERMETA:Class = IInputCheckerMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IINTROPAGEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IINTROPAGEMETA:Class = IIntroPageMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IINVENTORYMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IINVENTORYMETA:Class = IInventoryMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILEGALINFOWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILEGALINFOWINDOWMETA:Class = ILegalInfoWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYHEADERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYHEADERMETA:Class = ILobbyHeaderMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMENUMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMENUMETA:Class = ILobbyMenuMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMESSENGERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMESSENGERMETA:Class = ILobbyMessengerMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMINIMAPMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYMINIMAPMETA:Class = ILobbyMinimapMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYPAGEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOBBYPAGEMETA:Class = ILobbyPageMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOGINCREATEANACCOUNTWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOGINCREATEANACCOUNTWINDOWMETA:Class = ILoginCreateAnAccountWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOGINPAGEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOGINPAGEMETA:Class = ILoginPageMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOGINQUEUEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ILOGINQUEUEWINDOWMETA:Class = ILoginQueueWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMESSENGERBARMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMESSENGERBARMETA:Class = IMessengerBarMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMINIMAPENTITYMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMINIMAPENTITYMETA:Class = IMinimapEntityMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMINIMAPLOBBYMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMINIMAPLOBBYMETA:Class = IMinimapLobbyMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMODULEINFOMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMODULEINFOMETA:Class = IModuleInfoMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONLISTBUTTONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONLISTBUTTONMETA:Class = INotificationListButtonMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONPOPUPVIEWERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONPOPUPVIEWERMETA:Class = INotificationPopUpViewerMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONSLISTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_INOTIFICATIONSLISTMETA:Class = INotificationsListMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IORDERSPANELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IORDERSPANELMETA:Class = IOrdersPanelMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPARAMSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPARAMSMETA:Class = IParamsMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPERSONALCASEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPERSONALCASEMETA:Class = IPersonalCaseMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPOPOVERVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPOPOVERVIEWMETA:Class = IPopOverViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPRBSENDINVITESWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPRBSENDINVITESWINDOWMETA:Class = IPrbSendInvitesWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPREMIUMFORMMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPREMIUMFORMMETA:Class = IPremiumFormMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEACHIEVEMENTSECTIONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEACHIEVEMENTSECTIONMETA:Class = IProfileAchievementSectionMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEAWARDSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEAWARDSMETA:Class = IProfileAwardsMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEMETA:Class = IProfileMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESECTIONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESECTIONMETA:Class = IProfileSectionMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESTATISTICSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESTATISTICSMETA:Class = IProfileStatisticsMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESUMMARYMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILESUMMARYMETA:Class = IProfileSummaryMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETABNAVIGATORMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETABNAVIGATORMETA:Class = IProfileTabNavigatorMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETECHNIQUEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETECHNIQUEMETA:Class = IProfileTechniqueMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETECHNIQUEPAGEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETECHNIQUEPAGEMETA:Class = IProfileTechniquePageMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEWINDOWMETA:Class = IProfileWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSCONTROLMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSCONTROLMETA:Class = IQuestsControlMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSCURRENTTABMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSCURRENTTABMETA:Class = IQuestsCurrentTabMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSFUTURETABMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSFUTURETABMETA:Class = IQuestsFutureTabMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IQUESTSWINDOWMETA:Class = IQuestsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRALLYBASEVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRALLYBASEVIEWMETA:Class = IRallyBaseViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRECRUITWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRECRUITWINDOWMETA:Class = IRecruitWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHMETA:Class = IResearchMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHPANELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHPANELMETA:Class = IResearchPanelMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRESEARCHVIEWMETA:Class = IResearchViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRETRAINCREWWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRETRAINCREWWINDOWMETA:Class = IRetrainCrewWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IROSTERSLOTSETTINGSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IROSTERSLOTSETTINGSWINDOWMETA:Class = IRosterSlotSettingsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRSSNEWSFEEDMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IRSSNEWSFEEDMETA:Class = IRssNewsFeedMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISETTINGSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISETTINGSWINDOWMETA:Class = ISettingsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISHOPMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISHOPMETA:Class = IShopMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISIMPLEDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISIMPLEDIALOGMETA:Class = ISimpleDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISKILLDROPMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISKILLDROPMETA:Class = ISkillDropMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISMARTPOPOVERVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISMARTPOPOVERVIEWMETA:Class = ISmartPopOverViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISTOREMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISTOREMETA:Class = IStoreMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISTORETABLEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISTORETABLEMETA:Class = IStoreTableMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISYSTEMMESSAGEDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ISYSTEMMESSAGEDIALOGMETA:Class = ISystemMessageDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITANKCAROUSELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITANKCAROUSELMETA:Class = ITankCarouselMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITECHTREEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITECHTREEMETA:Class = ITechTreeMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITECHNICALMAINTENANCEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITECHNICALMAINTENANCEMETA:Class = ITechnicalMaintenanceMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITICKERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITICKERMETA:Class = ITickerMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITMENXPPANELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITMENXPPANELMETA:Class = ITmenXpPanelMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGFORMMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGFORMMETA:Class = ITrainingFormMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGROOMMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGROOMMETA:Class = ITrainingRoomMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITRAININGWINDOWMETA:Class = ITrainingWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITUTORIALCONTROLMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITUTORIALCONTROLMETA:Class = ITutorialControlMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITUTORIALLAYOUTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_ITUTORIALLAYOUTMETA:Class = ITutorialLayoutMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLEBUYWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLEBUYWINDOWMETA:Class = IVehicleBuyWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLECUSTOMIZATIONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLECUSTOMIZATIONMETA:Class = IVehicleCustomizationMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLEINFOMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLEINFOMETA:Class = IVehicleInfoMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLESELECTORPOPUPMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLESELECTORPOPUPMETA:Class = IVehicleSelectorPopupMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLESELLDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IVEHICLESELLDIALOGMETA:Class = IVehicleSellDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IWAITINGVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IWAITINGVIEWMETA:Class = IWaitingViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IWINDOWVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IWINDOWVIEWMETA:Class = IWindowViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IWRAPPERVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IWRAPPERVIEWMETA:Class = IWrapperViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_AMMUNITIONPANELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_AMMUNITIONPANELMETA:Class = AmmunitionPanelMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BARRACKSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BARRACKSMETA:Class = BarracksMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASEEXCHANGEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASEEXCHANGEWINDOWMETA:Class = BaseExchangeWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYINTROVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYINTROVIEWMETA:Class = BaseRallyIntroViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYLISTVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYLISTVIEWMETA:Class = BaseRallyListViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYMAINWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYMAINWINDOWMETA:Class = BaseRallyMainWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYROOMVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYROOMVIEWMETA:Class = BaseRallyRoomViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BASERALLYVIEWMETA:Class = BaseRallyViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLELOADINGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLELOADINGMETA:Class = BattleLoadingMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLEQUEUEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLEQUEUEMETA:Class = BattleQueueMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLERESULTSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLERESULTSMETA:Class = BattleResultsMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLETYPESELECTPOPOVERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BATTLETYPESELECTPOPOVERMETA:Class = BattleTypeSelectPopoverMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BROWSERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_BROWSERMETA:Class = BrowserMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CAPTCHAMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CAPTCHAMETA:Class = CAPTCHAMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CHANNELCAROUSELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CHANNELCAROUSELMETA:Class = ChannelCarouselMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CLASSMANAGERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CLASSMANAGERMETA:Class = ClassManagerMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CONFIRMMODULEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CONFIRMMODULEWINDOWMETA:Class = ConfirmModuleWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CREWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CREWMETA:Class = CrewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CREWOPERATIONSPOPOVERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CREWOPERATIONSPOPOVERMETA:Class = CrewOperationsPopOverMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CURSORMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CURSORMETA:Class = CursorMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTBASEVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTBASEVIEWMETA:Class = CyberSportBaseViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTINTROMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTINTROMETA:Class = CyberSportIntroMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTMAINWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTMAINWINDOWMETA:Class = CyberSportMainWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTUNITMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTUNITMETA:Class = CyberSportUnitMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTUNITSLISTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_CYBERSPORTUNITSLISTMETA:Class = CyberSportUnitsListMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMONSTRATORWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMONSTRATORWINDOWMETA:Class = DemonstratorWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMOUNTBUILDINGWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DEMOUNTBUILDINGWINDOWMETA:Class = DemountBuildingWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DISMISSTANKMANDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_DISMISSTANKMANDIALOGMETA:Class = DismissTankmanDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EULAMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EULAMETA:Class = EULAMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ELITEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ELITEWINDOWMETA:Class = EliteWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEFREETOTANKMANXPWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEFREETOTANKMANXPWINDOWMETA:Class = ExchangeFreeToTankmanXpWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEVCOINWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEVCOINWINDOWMETA:Class = ExchangeVcoinWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEWINDOWMETA:Class = ExchangeWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEXPWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_EXCHANGEXPWINDOWMETA:Class = ExchangeXpWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FIGHTBUTTONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FIGHTBUTTONMETA:Class = FightButtonMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBATTLEROOMWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBATTLEROOMWINDOWMETA:Class = FortBattleRoomWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGCARDPOPOVERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGCARDPOPOVERMETA:Class = FortBuildingCardPopoverMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGCOMPONENTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGCOMPONENTMETA:Class = FortBuildingComponentMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGPROCESSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTBUILDINGPROCESSWINDOWMETA:Class = FortBuildingProcessWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCHOICEDIVISIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCHOICEDIVISIONWINDOWMETA:Class = FortChoiceDivisionWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCLANLISTWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCLANLISTWINDOWMETA:Class = FortClanListWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCLANSTATISTICSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCLANSTATISTICSWINDOWMETA:Class = FortClanStatisticsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCREATEDIRECTIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCREATEDIRECTIONWINDOWMETA:Class = FortCreateDirectionWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCREATIONCONGRATULATIONSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTCREATIONCONGRATULATIONSWINDOWMETA:Class = FortCreationCongratulationsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTDISCONNECTVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTDISCONNECTVIEWMETA:Class = FortDisconnectViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTFIXEDPLAYERSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTFIXEDPLAYERSWINDOWMETA:Class = FortFixedPlayersWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTINTELLIGENCEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTINTELLIGENCEWINDOWMETA:Class = FortIntelligenceWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTINTROMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTINTROMETA:Class = FortIntroMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTLISTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTLISTMETA:Class = FortListMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTMAINVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTMAINVIEWMETA:Class = FortMainViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTMODERNIZATIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTMODERNIZATIONWINDOWMETA:Class = FortModernizationWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTORDERCONFIRMATIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTORDERCONFIRMATIONWINDOWMETA:Class = FortOrderConfirmationWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTORDERPOPOVERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTORDERPOPOVERMETA:Class = FortOrderPopoverMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTROOMMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTROOMMETA:Class = FortRoomMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTTRANSPORTCONFIRMATIONWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTTRANSPORTCONFIRMATIONWINDOWMETA:Class = FortTransportConfirmationWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTWELCOMEVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTWELCOMEVIEWMETA:Class = FortWelcomeViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTIFICATIONSVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FORTIFICATIONSVIEWMETA:Class = FortificationsViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FREEXPINFOWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_FREEXPINFOWINDOWMETA:Class = FreeXPInfoWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_HANGARMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_HANGARMETA:Class = HangarMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_HISTORICALBATTLESLISTWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_HISTORICALBATTLESLISTWINDOWMETA:Class = HistoricalBattlesListWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ICONDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ICONDIALOGMETA:Class = IconDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ICONPRICEDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ICONPRICEDIALOGMETA:Class = IconPriceDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INPUTCHECKERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INPUTCHECKERMETA:Class = InputCheckerMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INTROPAGEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INTROPAGEMETA:Class = IntroPageMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INVENTORYMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_INVENTORYMETA:Class = InventoryMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LEGALINFOWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LEGALINFOWINDOWMETA:Class = LegalInfoWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYHEADERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYHEADERMETA:Class = LobbyHeaderMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMENUMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMENUMETA:Class = LobbyMenuMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMESSENGERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMESSENGERMETA:Class = LobbyMessengerMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMINIMAPMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYMINIMAPMETA:Class = LobbyMinimapMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYPAGEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOBBYPAGEMETA:Class = LobbyPageMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINCREATEANACCOUNTWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINCREATEANACCOUNTWINDOWMETA:Class = LoginCreateAnAccountWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINPAGEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINPAGEMETA:Class = LoginPageMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINQUEUEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_LOGINQUEUEWINDOWMETA:Class = LoginQueueWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MESSENGERBARMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MESSENGERBARMETA:Class = MessengerBarMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MINIMAPENTITYMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MINIMAPENTITYMETA:Class = MinimapEntityMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MINIMAPLOBBYMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MINIMAPLOBBYMETA:Class = MinimapLobbyMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MODULEINFOMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_MODULEINFOMETA:Class = ModuleInfoMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONLISTBUTTONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONLISTBUTTONMETA:Class = NotificationListButtonMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONPOPUPVIEWERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONPOPUPVIEWERMETA:Class = NotificationPopUpViewerMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONSLISTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_NOTIFICATIONSLISTMETA:Class = NotificationsListMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ORDERSPANELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ORDERSPANELMETA:Class = OrdersPanelMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PARAMSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PARAMSMETA:Class = ParamsMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PERSONALCASEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PERSONALCASEMETA:Class = PersonalCaseMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_POPOVERVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_POPOVERVIEWMETA:Class = PopOverViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PRBSENDINVITESWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PRBSENDINVITESWINDOWMETA:Class = PrbSendInvitesWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PREMIUMFORMMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PREMIUMFORMMETA:Class = PremiumFormMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEACHIEVEMENTSECTIONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEACHIEVEMENTSECTIONMETA:Class = ProfileAchievementSectionMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEAWARDSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEAWARDSMETA:Class = ProfileAwardsMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEMETA:Class = ProfileMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESECTIONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESECTIONMETA:Class = ProfileSectionMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESTATISTICSMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESTATISTICSMETA:Class = ProfileStatisticsMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESUMMARYMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILESUMMARYMETA:Class = ProfileSummaryMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETABNAVIGATORMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETABNAVIGATORMETA:Class = ProfileTabNavigatorMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETECHNIQUEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETECHNIQUEMETA:Class = ProfileTechniqueMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETECHNIQUEPAGEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETECHNIQUEPAGEMETA:Class = ProfileTechniquePageMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEWINDOWMETA:Class = ProfileWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSCONTROLMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSCONTROLMETA:Class = QuestsControlMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSCURRENTTABMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSCURRENTTABMETA:Class = QuestsCurrentTabMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSFUTURETABMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSFUTURETABMETA:Class = QuestsFutureTabMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_QUESTSWINDOWMETA:Class = QuestsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RECRUITWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RECRUITWINDOWMETA:Class = RecruitWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHMETA:Class = ResearchMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHPANELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHPANELMETA:Class = ResearchPanelMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RESEARCHVIEWMETA:Class = ResearchViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RETRAINCREWWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RETRAINCREWWINDOWMETA:Class = RetrainCrewWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ROSTERSLOTSETTINGSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_ROSTERSLOTSETTINGSWINDOWMETA:Class = RosterSlotSettingsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RSSNEWSFEEDMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_RSSNEWSFEEDMETA:Class = RssNewsFeedMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SETTINGSWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SETTINGSWINDOWMETA:Class = SettingsWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SHOPMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SHOPMETA:Class = ShopMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SIMPLEDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SIMPLEDIALOGMETA:Class = SimpleDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SKILLDROPMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SKILLDROPMETA:Class = SkillDropMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SMARTPOPOVERVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SMARTPOPOVERVIEWMETA:Class = SmartPopOverViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STATSSTORAGEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STATSSTORAGEMETA:Class = StatsStorageMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STOREMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STOREMETA:Class = StoreMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STORETABLEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_STORETABLEMETA:Class = StoreTableMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SYSTEMMESSAGEDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_SYSTEMMESSAGEDIALOGMETA:Class = SystemMessageDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TANKCAROUSELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TANKCAROUSELMETA:Class = TankCarouselMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHTREEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHTREEMETA:Class = TechTreeMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHNICALMAINTENANCEMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TECHNICALMAINTENANCEMETA:Class = TechnicalMaintenanceMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TICKERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TICKERMETA:Class = TickerMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TMENXPPANELMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TMENXPPANELMETA:Class = TmenXpPanelMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGFORMMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGFORMMETA:Class = TrainingFormMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGROOMMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGROOMMETA:Class = TrainingRoomMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TRAININGWINDOWMETA:Class = TrainingWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TUTORIALCONTROLMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TUTORIALCONTROLMETA:Class = TutorialControlMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TUTORIALLAYOUTMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_TUTORIALLAYOUTMETA:Class = TutorialLayoutMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLEBUYWINDOWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLEBUYWINDOWMETA:Class = VehicleBuyWindowMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLECUSTOMIZATIONMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLECUSTOMIZATIONMETA:Class = VehicleCustomizationMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLEINFOMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLEINFOMETA:Class = VehicleInfoMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLESELECTORPOPUPMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLESELECTORPOPUPMETA:Class = VehicleSelectorPopupMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLESELLDIALOGMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VEHICLESELLDIALOGMETA:Class = VehicleSellDialogMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VIEWPRESENTERMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_VIEWPRESENTERMETA:Class = ViewPresenterMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WAITINGVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WAITINGVIEWMETA:Class = WaitingViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WINDOWVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WINDOWVIEWMETA:Class = WindowViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WRAPPERVIEWMETA:Class;
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_WRAPPERVIEWMETA:Class = WrapperViewMeta;
         
-        public static var NET_WG_INFRASTRUCTURE_CONSTANTS_WINDOWVIEWINVALIDATIONTYPE:Class;
+        public static var NET_WG_INFRASTRUCTURE_CONSTANTS_WINDOWVIEWINVALIDATIONTYPE:Class = WindowViewInvalidationType;
         
-        public static var NET_WG_INFRASTRUCTURE_EVENTS_COLORSCHEMEEVENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_EVENTS_COLORSCHEMEEVENT:Class = ColorSchemeEvent;
         
-        public static var NET_WG_INFRASTRUCTURE_EVENTS_DRAGEVENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_EVENTS_DRAGEVENT:Class = DragEvent;
         
-        public static var NET_WG_INFRASTRUCTURE_EVENTS_DROPEVENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_EVENTS_DROPEVENT:Class = DropEvent;
         
-        public static var NET_WG_INFRASTRUCTURE_EVENTS_ENVIRONMENTEVENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_EVENTS_ENVIRONMENTEVENT:Class = EnvironmentEvent;
         
-        public static var NET_WG_INFRASTRUCTURE_EVENTS_FOCUSEDVIEWEVENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_EVENTS_FOCUSEDVIEWEVENT:Class = FocusedViewEvent;
         
-        public static var NET_WG_INFRASTRUCTURE_EVENTS_GAMEEVENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_EVENTS_GAMEEVENT:Class = GameEvent;
         
-        public static var NET_WG_INFRASTRUCTURE_EVENTS_LIBRARYLOADEREVENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_EVENTS_LIBRARYLOADEREVENT:Class = LibraryLoaderEvent;
         
-        public static var NET_WG_INFRASTRUCTURE_EVENTS_LOADEREVENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_EVENTS_LOADEREVENT:Class = LoaderEvent;
         
-        public static var NET_WG_INFRASTRUCTURE_EVENTS_VOICECHATEVENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_EVENTS_VOICECHATEVENT:Class = VoiceChatEvent;
         
-        public static var NET_WG_INFRASTRUCTURE_HELPERS_DRAGDELEGATE:Class;
+        public static var NET_WG_INFRASTRUCTURE_HELPERS_DRAGDELEGATE:Class = DragDelegate;
         
-        public static var NET_WG_INFRASTRUCTURE_HELPERS_DRAGDELEGATECONTROLLER:Class;
+        public static var NET_WG_INFRASTRUCTURE_HELPERS_DRAGDELEGATECONTROLLER:Class = DragDelegateController;
         
-        public static var NET_WG_INFRASTRUCTURE_HELPERS_DROPLISTDELEGATE:Class;
+        public static var NET_WG_INFRASTRUCTURE_HELPERS_DROPLISTDELEGATE:Class = DropListDelegate;
         
-        public static var NET_WG_INFRASTRUCTURE_HELPERS_DROPLISTDELEGATECTRLR:Class;
+        public static var NET_WG_INFRASTRUCTURE_HELPERS_DROPLISTDELEGATECTRLR:Class = DropListDelegateCtrlr;
         
-        public static var NET_WG_INFRASTRUCTURE_HELPERS_LIBRARYLOADER:Class;
+        public static var NET_WG_INFRASTRUCTURE_HELPERS_LIBRARYLOADER:Class = LibraryLoader;
         
-        public static var NET_WG_INFRASTRUCTURE_HELPERS_LOADEREX:Class;
+        public static var NET_WG_INFRASTRUCTURE_HELPERS_LOADEREX:Class = LoaderEx;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IABSTRACTPOPOVERVIEW:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IABSTRACTPOPOVERVIEW:Class = IAbstractPopOverView;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IABSTRACTWINDOWVIEW:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IABSTRACTWINDOWVIEW:Class = IAbstractWindowView;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IBASELAYOUT:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IBASELAYOUT:Class = IBaseLayout;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ICOUNTERCOMPONENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ICOUNTERCOMPONENT:Class = ICounterComponent;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IDRAGDELEGATE:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IDRAGDELEGATE:Class = IDragDelegate;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IDRAGGABLELIST:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IDRAGGABLELIST:Class = IDraggableList;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IDROPLISTDELEGATE:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IDROPLISTDELEGATE:Class = IDropListDelegate;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IHANGAR:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IHANGAR:Class = IHangar;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_INOTIFICATIONLISTBUTTON:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_INOTIFICATIONLISTBUTTON:Class = INotificationListButton;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IRESIZABLECONTENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IRESIZABLECONTENT:Class = net.wg.infrastructure.interfaces.IResizableContent;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ISORTABLE:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ISORTABLE:Class = ISortable;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ISTOREMENUVIEW:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ISTOREMENUVIEW:Class = IStoreMenuView;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ISTORETABLE:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ISTORETABLE:Class = IStoreTable;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ISUBTASKCOMPONENT:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_ISUBTASKCOMPONENT:Class = ISubtaskComponent;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IVEHICLEBUTTON:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IVEHICLEBUTTON:Class = IVehicleButton;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IWINDOW:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IWINDOW:Class = IWindow;
         
-        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IWINDOWGEOMETRY:Class;
+        public static var NET_WG_INFRASTRUCTURE_INTERFACES_IWINDOWGEOMETRY:Class = IWindowGeometry;
     }
 }

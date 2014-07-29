@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class IntroPageMeta extends AbstractView
     {
         
-        public function IntroPageMeta() {
+        public function IntroPageMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var handleError:Function = null;
         
-        public function stopVideoS() : void {
+        public function stopVideoS() : void
+        {
             App.utils.asserter.assertNotNull(this.stopVideo,"stopVideo" + Errors.CANT_NULL);
             this.stopVideo();
         }
         
-        public function handleErrorS(param1:Object) : void {
+        public function handleErrorS(param1:Object) : void
+        {
             App.utils.asserter.assertNotNull(this.handleError,"handleError" + Errors.CANT_NULL);
             this.handleError(param1);
         }

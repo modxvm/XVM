@@ -11,7 +11,8 @@ package net.wg.gui.lobby.header
     public class AccountInfo extends UIComponent
     {
         
-        public function AccountInfo() {
+        public function AccountInfo()
+        {
             super();
         }
         
@@ -39,7 +40,8 @@ package net.wg.gui.lobby.header
         
         public var steamPackets:Array;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.gold.focusable = false;
             this.gold.mouseChildren = false;
             this.credits.focusable = false;
@@ -54,7 +56,8 @@ package net.wg.gui.lobby.header
             this.expGatheringBtn.addEventListener(ButtonEvent.CLICK,this.onGatheringXPBtnClick);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.premiumBtn.removeEventListener(ButtonEvent.CLICK,this.onPremiumBtnClickHndlr);
             this.goldExchangeBtn.removeEventListener(ButtonEvent.CLICK,this.showExchange);
@@ -86,59 +89,71 @@ package net.wg.gui.lobby.header
             }
         }
         
-        public function setProfileType(param1:String) : void {
+        public function setProfileType(param1:String) : void
+        {
             this.premiumBtn.label = MENU.COMMON_PREMIUMBUY;
             this.premiumBtn.tooltip = TOOLTIPS.HEADER_PREMIUM_BUY;
             this.premiumBtn.enabled = true;
             this.premium_info.textField.htmlText = param1;
         }
         
-        public function setPremiumParams(param1:String, param2:String, param3:Boolean) : void {
+        public function setPremiumParams(param1:String, param2:String, param3:Boolean) : void
+        {
             this.premiumBtn.label = param2;
             this.premiumBtn.tooltip = TOOLTIPS.HEADER_PREMIUM_EXTEND;
             this.premiumBtn.enabled = !param3;
             this.premium_info.textField.htmlText = this.premium_info.textField.htmlText + (" " + param1);
         }
         
-        public function setExp(param1:String, param2:Boolean) : void {
+        public function setExp(param1:String, param2:Boolean) : void
+        {
             this.experience.text = param1;
             this.experience.toolTip = param2?TOOLTIPS.USEFREEXP:TOOLTIPS.FREEXP;
         }
         
-        public function setCredits(param1:String) : void {
+        public function setCredits(param1:String) : void
+        {
             this.credits.text = param1;
         }
         
-        public function setGold(param1:String) : void {
+        public function setGold(param1:String) : void
+        {
             this.gold.text = param1;
         }
         
-        public function updateWalletStatus() : void {
+        public function updateWalletStatus() : void
+        {
             this.gold.visible = !this.walletHaveNotGold.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
             this.experience.visible = !this.walletHaveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
         }
         
-        public function onPremiumChange(param1:Boolean) : void {
+        public function onPremiumChange(param1:Boolean) : void
+        {
             this.m_isPremium = param1;
         }
         
-        public function disablePaymentButon(param1:Boolean) : void {
+        public function disablePaymentButon(param1:Boolean) : void
+        {
             this.accountRefillBtn.enabled = param1;
         }
         
-        public function onPaymentBtnClick(param1:ButtonEvent) : void {
+        public function onPaymentBtnClick(param1:ButtonEvent) : void
+        {
             dispatchEvent(new HeaderEvent(HeaderEvent.PAYMENT_BTN_CLICK));
         }
         
-        public function showExchange(param1:ButtonEvent) : void {
+        public function showExchange(param1:ButtonEvent) : void
+        {
             dispatchEvent(new HeaderEvent(HeaderEvent.SHOW_EXCHANGE));
         }
         
-        public function onGatheringXPBtnClick(param1:Object) : void {
+        public function onGatheringXPBtnClick(param1:Object) : void
+        {
             dispatchEvent(new HeaderEvent(HeaderEvent.SHOW_XP_EXCHANGE));
         }
         
-        public function onPremiumBtnClickHndlr(param1:ButtonEvent) : void {
+        public function onPremiumBtnClickHndlr(param1:ButtonEvent) : void
+        {
             dispatchEvent(new HeaderEvent(HeaderEvent.SHOW_PREMIUM));
         }
     }

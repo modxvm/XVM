@@ -3,7 +3,8 @@ package net.wg.data.constants.generated
     public class FORTIFICATION_ALIASES extends Object
     {
         
-        public function FORTIFICATION_ALIASES() {
+        public function FORTIFICATION_ALIASES()
+        {
             super();
         }
         
@@ -135,9 +136,9 @@ package net.wg.data.constants.generated
         
         public static var FORT_BATTLE_ROOM_VIEW_PY:String = "forttifications/battleRoom/room";
         
-        public static var FLASH_ALIASES:Array;
+        public static var FLASH_ALIASES:Array = [FORT_BATTLE_ROOM_INTRO_VIEW_UI,FORT_BATTLE_ROOM_LIST_VIEW_UI,FORT_BATTLE_ROOM_VIEW_UI];
         
-        public static var PYTHON_ALIASES:Array;
+        public static var PYTHON_ALIASES:Array = [FORT_BATTLE_ROOM_INTRO_VIEW_PY,FORT_BATTLE_ROOM_LIST_VIEW_PY,FORT_BATTLE_ROOM_VIEW_PY];
         
         public static var MODE_COMMON:String = "common";
         
@@ -151,9 +152,9 @@ package net.wg.data.constants.generated
         
         public static var MODE_TRANSPORTING_TUTORIAL:String = "transportingTutor";
         
-        public static var MODES:Array;
+        public static var MODES:Array = [MODE_COMMON,MODE_COMMON_TUTORIAL,MODE_DIRECTIONS,MODE_DIRECTIONS_TUTORIAL,MODE_TRANSPORTING,MODE_TRANSPORTING_TUTORIAL];
         
-        public static var TUTORIAL_MODES:Array;
+        public static var TUTORIAL_MODES:Array = [MODE_DIRECTIONS_TUTORIAL,MODE_COMMON_TUTORIAL,MODE_TRANSPORTING_TUTORIAL];
         
         public static var FORT_UNKNOWN:String = "unknown";
         
@@ -191,7 +192,7 @@ package net.wg.data.constants.generated
         
         public static var STATE_BUILDING:Number = 3;
         
-        public static var STATES:Array;
+        public static var STATES:Array = [STATE_TROWEL,STATE_FOUNDATION,STATE_FOUNDATION_DEF,STATE_BUILDING];
         
         public static var CTX_ACTION_DIRECTION_CONTROL:String = "ctxActionDirectionControl";
         

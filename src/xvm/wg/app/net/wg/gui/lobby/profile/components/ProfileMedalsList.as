@@ -5,17 +5,21 @@ package net.wg.gui.lobby.profile.components
     public class ProfileMedalsList extends MedalsList
     {
         
-        public function ProfileMedalsList() {
+        public function ProfileMedalsList()
+        {
             super();
         }
         
-        override protected function showToolTip(param1:String, param2:Object) : void {
+        override protected function showToolTip(param1:String, param2:Object) : void
+        {
         }
         
-        override public function updateFilters() : void {
+        override public function updateFilters() : void
+        {
         }
         
-        override protected function hideTooltip() : void {
+        override protected function hideTooltip() : void
+        {
         }
     }
 }

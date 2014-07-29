@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class ModernizationCmpVO extends DAAPIDataClass
     {
         
-        public function ModernizationCmpVO(param1:Object) {
+        public function ModernizationCmpVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var titleText:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == BUILDING_INDICATORS)
             {
                 if(param2 is BuildingIndicatorsVO)

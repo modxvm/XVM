@@ -19,13 +19,15 @@ package net.wg.gui.components.controls
     public class NumericStepper extends scaleform.clik.controls.NumericStepper
     {
         
-        public function NumericStepper() {
+        public function NumericStepper()
+        {
             this._textFilter = [];
             super();
             tabChildren = true;
         }
         
-        protected static function stripNulls(param1:String) : String {
+        protected static function stripNulls(param1:String) : String
+        {
             while(param1.length > 1 && !(param1.substr(0,2) == "0.") && param1.length > 0 && param1.substr(0,1) == "0")
             {
                 param1 = param1.substr(1,param1.length - 1);
@@ -33,7 +35,8 @@ package net.wg.gui.components.controls
             return param1;
         }
         
-        protected static function stripDecimal(param1:String) : String {
+        protected static function stripDecimal(param1:String) : String
+        {
             var _loc2_:Array = param1.split(".");
             var _loc3_:Array = _loc2_.join("").split(",");
             return _loc3_.join("");
@@ -71,7 +74,8 @@ package net.wg.gui.components.controls
         
         private var isTextFilterChanged:Boolean;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             nextBtn.removeEventListener(ButtonEvent.DRAG_OUT,this.onNextBtnOut);
             prevBtn.removeEventListener(ButtonEvent.DRAG_OUT,this.onPrevBtnOut);
             nextBtn.removeEventListener(ButtonEvent.DRAG_OVER,this.onNextBtnOver);
@@ -89,13 +93,15 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             nextBtn = this.nextBtn1 as SoundButton;
             prevBtn = this.prevBtn1 as SoundButton;
             super.initialize();
         }
         
-        override public function set maximum(param1:Number) : void {
+        override public function set maximum(param1:Number) : void
+        {
             if(_maximum == param1)
             {
                 return;
@@ -104,7 +110,8 @@ package net.wg.gui.components.controls
             this.value = _value;
         }
         
-        override public function set minimum(param1:Number) : void {
+        override public function set minimum(param1:Number) : void
+        {
             if(_minimum == param1)
             {
                 return;
@@ -113,11 +120,13 @@ package net.wg.gui.components.controls
             this.value = _value;
         }
         
-        public function get integral() : Boolean {
+        public function get integral() : Boolean
+        {
             return this._integral;
         }
         
-        public function set integral(param1:Boolean) : void {
+        public function set integral(param1:Boolean) : void
+        {
             if(this._integral == param1)
             {
                 return;
@@ -127,7 +136,8 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        override public function set value(param1:Number) : void {
+        override public function set value(param1:Number) : void
+        {
             var param1:Number = lockValue(param1);
             if(param1 == _value)
             {
@@ -143,11 +153,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get textColor() : Number {
+        public function get textColor() : Number
+        {
             return this._textColor;
         }
         
-        public function set textColor(param1:Number) : void {
+        public function set textColor(param1:Number) : void
+        {
             if(this._textColor == param1)
             {
                 return;
@@ -157,11 +169,13 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get textFilter() : Array {
+        public function get textFilter() : Array
+        {
             return this._textFilter;
         }
         
-        public function set textFilter(param1:Array) : void {
+        public function set textFilter(param1:Array) : void
+        {
             if(this._textFilter == param1)
             {
                 return;
@@ -171,31 +185,37 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        public function get selectionTextColor() : uint {
+        public function get selectionTextColor() : uint
+        {
             return this._selectionTextColor;
         }
         
-        public function set selectionTextColor(param1:uint) : void {
+        public function set selectionTextColor(param1:uint) : void
+        {
             this._selectionTextColor = this.rgbToArgb(param1);
             TextFieldEx.setSelectionTextColor(textField,this._selectionTextColor);
             TextFieldEx.setInactiveSelectionTextColor(textField,this.rgbToArgb(textField.textColor));
         }
         
-        public function get selectionBgColor() : uint {
+        public function get selectionBgColor() : uint
+        {
             return this._selectionBgColor;
         }
         
-        public function set selectionBgColor(param1:uint) : void {
+        public function set selectionBgColor(param1:uint) : void
+        {
             this._selectionBgColor = this.rgbToArgb(param1);
             TextFieldEx.setSelectionBkgColor(textField,this._selectionBgColor);
             TextFieldEx.setInactiveSelectionBkgColor(textField,0);
         }
         
-        private function rgbToArgb(param1:uint) : uint {
+        private function rgbToArgb(param1:uint) : uint
+        {
             return 4.27819008E9 + param1;
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.isDefaultPrevented())
             {
                 return;
@@ -259,7 +279,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.selectionTextColor = this._selectionTextColor;
             this.selectionBgColor = this._selectionBgColor;
@@ -284,7 +305,8 @@ package net.wg.gui.components.controls
             addEventListener(MouseEvent.MOUSE_WHEEL,this.mouseScrollWheelHandler,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(this.isTextColorChanged)
             {
@@ -315,11 +337,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function updateLabel() : void {
+        override protected function updateLabel() : void
+        {
             super.updateLabel();
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             invalidateSize();
             this.updateLabel();
             if(!(constraints == null) && !constraintsDisabled)
@@ -328,7 +352,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function onNext(param1:ButtonEvent) : void {
+        override protected function onNext(param1:ButtonEvent) : void
+        {
             if(!isNaN(this._manualValue))
             {
                 this.normalizeValue();
@@ -338,7 +363,8 @@ package net.wg.gui.components.controls
             textField.setSelection(this.selectionPosBegin,this.selectionPosEnd);
         }
         
-        override protected function onPrev(param1:ButtonEvent) : void {
+        override protected function onPrev(param1:ButtonEvent) : void
+        {
             if(!isNaN(this._manualValue))
             {
                 this.normalizeValue();
@@ -348,7 +374,8 @@ package net.wg.gui.components.controls
             textField.setSelection(this.selectionPosBegin,this.selectionPosEnd);
         }
         
-        protected function onChanged(param1:Event) : void {
+        protected function onChanged(param1:Event) : void
+        {
             var _loc2_:IScheduler = App.utils.scheduler;
             _loc2_.cancelTask(this.normalizeValue);
             var _loc3_:String = stripNulls(textField.text);
@@ -365,7 +392,8 @@ package net.wg.gui.components.controls
             _loc2_.scheduleTask(this.normalizeValue,1000);
         }
         
-        protected function normalizeValue() : void {
+        protected function normalizeValue() : void
+        {
             if(!isNaN(this._manualValue))
             {
                 this.value = this._manualValue;
@@ -375,15 +403,18 @@ package net.wg.gui.components.controls
             this._manualValue = Number.NaN;
         }
         
-        override protected function changeFocus() : void {
+        override protected function changeFocus() : void
+        {
             super.changeFocus();
         }
         
-        protected function onKillTextFieldFocus(param1:FocusEvent) : void {
+        protected function onKillTextFieldFocus(param1:FocusEvent) : void
+        {
             this.normalizeValue();
         }
         
-        protected function onSetTextFieldFocus(param1:FocusEvent) : void {
+        protected function onSetTextFieldFocus(param1:FocusEvent) : void
+        {
             this.selectionPosBegin = 0;
             this.selectionPosEnd = String(value).length;
             textField.setSelection(this.selectionPosBegin,this.selectionPosEnd);
@@ -392,11 +423,13 @@ package net.wg.gui.components.controls
             this.setState("focused");
         }
         
-        private function mouseScrollWheelHandler(param1:MouseEvent) : void {
+        private function mouseScrollWheelHandler(param1:MouseEvent) : void
+        {
             this.scrollWheel(param1.delta);
         }
         
-        protected function scrollWheel(param1:Number) : void {
+        protected function scrollWheel(param1:Number) : void
+        {
             if(!enabled)
             {
                 return;
@@ -411,19 +444,23 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function onNextBtnOut(param1:ButtonEvent) : void {
+        protected function onNextBtnOut(param1:ButtonEvent) : void
+        {
             SoundButton(nextBtn).clearRepeatInterval();
         }
         
-        protected function onPrevBtnOut(param1:ButtonEvent) : void {
+        protected function onPrevBtnOut(param1:ButtonEvent) : void
+        {
             SoundButton(prevBtn).clearRepeatInterval();
         }
         
-        protected function onNextBtnOver(param1:ButtonEvent) : void {
+        protected function onNextBtnOver(param1:ButtonEvent) : void
+        {
             SoundButton(nextBtn).beginButtonRepeat();
         }
         
-        protected function onPrevBtnOver(param1:ButtonEvent) : void {
+        protected function onPrevBtnOver(param1:ButtonEvent) : void
+        {
             SoundButton(prevBtn).beginButtonRepeat();
         }
     }

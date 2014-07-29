@@ -8,7 +8,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseSpecialization extends UIComponent
     {
         
-        public function PersonalCaseSpecialization() {
+        public function PersonalCaseSpecialization()
+        {
             super();
         }
         
@@ -20,16 +21,19 @@ package net.wg.gui.lobby.tankman
         
         private var _vIco:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.contourIcon.dispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -38,7 +42,8 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        public function setData(param1:String, param2:String) : void {
+        public function setData(param1:String, param2:String) : void
+        {
             this._vType = param1;
             this._vIco = param2;
             this.contourIcon.visible = !(this._vIco == null);

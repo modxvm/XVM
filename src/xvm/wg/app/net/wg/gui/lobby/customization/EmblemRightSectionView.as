@@ -8,7 +8,8 @@ package net.wg.gui.lobby.customization
     public class EmblemRightSectionView extends BaseTimedCustomizationSectionView
     {
         
-        public function EmblemRightSectionView() {
+        public function EmblemRightSectionView()
+        {
             super();
         }
         
@@ -16,39 +17,48 @@ package net.wg.gui.lobby.customization
         
         public var newLabel:TextField;
         
-        override public function getEmptyDataItem() : Object {
+        override public function getEmptyDataItem() : Object
+        {
             return DAAPIItemsDataProvider.getEmptyItem();
         }
         
-        override public function getItemsDP() : DAAPIItemsDataProvider {
+        override public function getItemsDP() : DAAPIItemsDataProvider
+        {
             return form.emblemRightDP;
         }
         
-        override public function getGroupsDP() : DAAPIDataProvider {
+        override public function getGroupsDP() : DAAPIDataProvider
+        {
             return form.emblemRightGroupsDataProvider;
         }
         
-        override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider {
+        override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider
+        {
             return form.emblemRightRentalPackageDP;
         }
         
-        override public function getViewLinkage() : String {
+        override public function getViewLinkage() : String
+        {
             return BaseTimedCustomizationSectionView.EMBLEM_GROUP_VIEW_COPY;
         }
         
-        override public function getTimeSectionLabel() : String {
+        override public function getTimeSectionLabel() : String
+        {
             return MENU.CUSTOMIZATION_LABELS_EMBLEM_PERIOD;
         }
         
-        override public function getDropButtonTooltip() : String {
+        override public function getDropButtonTooltip() : String
+        {
             return TOOLTIPS.CUSTOMIZATION_EMBLEMRIGHT_CURRENT_DROP;
         }
         
-        override public function getSectionName() : String {
+        override public function getSectionName() : String
+        {
             return BaseTimedCustomizationSectionView.EMBLEM_RIGHT;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.curLabel.text = MENU.CUSTOMIZATION_LABELS_EMBLEM_CURRENT;
             this.newLabel.text = MENU.CUSTOMIZATION_LABELS_EMBLEM_NEW;

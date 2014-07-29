@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class PersonalCaseMeta extends AbstractWindowView
     {
         
-        public function PersonalCaseMeta() {
+        public function PersonalCaseMeta()
+        {
             super();
         }
         
@@ -34,62 +35,74 @@ package net.wg.infrastructure.base.meta.impl
         
         public var openExchangeFreeToTankmanXpWindow:Function = null;
         
-        public function dismissTankmanS(param1:int) : void {
+        public function dismissTankmanS(param1:int) : void
+        {
             App.utils.asserter.assertNotNull(this.dismissTankman,"dismissTankman" + Errors.CANT_NULL);
             this.dismissTankman(param1);
         }
         
-        public function unloadTankmanS(param1:int, param2:int) : void {
+        public function unloadTankmanS(param1:int, param2:int) : void
+        {
             App.utils.asserter.assertNotNull(this.unloadTankman,"unloadTankman" + Errors.CANT_NULL);
             this.unloadTankman(param1,param2);
         }
         
-        public function getCommonDataS() : void {
+        public function getCommonDataS() : void
+        {
             App.utils.asserter.assertNotNull(this.getCommonData,"getCommonData" + Errors.CANT_NULL);
             this.getCommonData();
         }
         
-        public function getDossierDataS() : void {
+        public function getDossierDataS() : void
+        {
             App.utils.asserter.assertNotNull(this.getDossierData,"getDossierData" + Errors.CANT_NULL);
             this.getDossierData();
         }
         
-        public function getRetrainingDataS() : void {
+        public function getRetrainingDataS() : void
+        {
             App.utils.asserter.assertNotNull(this.getRetrainingData,"getRetrainingData" + Errors.CANT_NULL);
             this.getRetrainingData();
         }
         
-        public function retrainingTankmanS(param1:int, param2:int, param3:int) : void {
+        public function retrainingTankmanS(param1:int, param2:int, param3:int) : void
+        {
             App.utils.asserter.assertNotNull(this.retrainingTankman,"retrainingTankman" + Errors.CANT_NULL);
             this.retrainingTankman(param1,param2,param3);
         }
         
-        public function getSkillsDataS() : void {
+        public function getSkillsDataS() : void
+        {
             App.utils.asserter.assertNotNull(this.getSkillsData,"getSkillsData" + Errors.CANT_NULL);
             this.getSkillsData();
         }
         
-        public function getDocumentsDataS() : void {
+        public function getDocumentsDataS() : void
+        {
             App.utils.asserter.assertNotNull(this.getDocumentsData,"getDocumentsData" + Errors.CANT_NULL);
             this.getDocumentsData();
         }
         
-        public function addTankmanSkillS(param1:int, param2:String) : void {
+        public function addTankmanSkillS(param1:int, param2:String) : void
+        {
             App.utils.asserter.assertNotNull(this.addTankmanSkill,"addTankmanSkill" + Errors.CANT_NULL);
             this.addTankmanSkill(param1,param2);
         }
         
-        public function dropSkillsS() : void {
+        public function dropSkillsS() : void
+        {
             App.utils.asserter.assertNotNull(this.dropSkills,"dropSkills" + Errors.CANT_NULL);
             this.dropSkills();
         }
         
-        public function changeTankmanPassportS(param1:int, param2:int, param3:int, param4:int) : void {
+        public function changeTankmanPassportS(param1:int, param2:int, param3:int, param4:int) : void
+        {
             App.utils.asserter.assertNotNull(this.changeTankmanPassport,"changeTankmanPassport" + Errors.CANT_NULL);
             this.changeTankmanPassport(param1,param2,param3,param4);
         }
         
-        public function openExchangeFreeToTankmanXpWindowS() : void {
+        public function openExchangeFreeToTankmanXpWindowS() : void
+        {
             App.utils.asserter.assertNotNull(this.openExchangeFreeToTankmanXpWindow,"openExchangeFreeToTankmanXpWindow" + Errors.CANT_NULL);
             this.openExchangeFreeToTankmanXpWindow();
         }

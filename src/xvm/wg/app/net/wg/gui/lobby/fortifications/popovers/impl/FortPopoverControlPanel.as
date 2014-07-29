@@ -14,7 +14,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     public class FortPopoverControlPanel extends UIComponentEx
     {
         
-        public function FortPopoverControlPanel() {
+        public function FortPopoverControlPanel()
+        {
             super();
             this.orderIcon.visible = false;
         }
@@ -51,7 +52,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var _currentState:String = "allPlayersState";
         
-        public function setData(param1:BuildingPopoverActionVO) : void {
+        public function setData(param1:BuildingPopoverActionVO) : void
+        {
             this.model = param1;
             this.orderIcon.visible = false;
             this.orderTimer.visible = false;
@@ -90,11 +92,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             
         }
         
-        public function get currentState() : String {
+        public function get currentState() : String
+        {
             return this._currentState;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(INVALIDATE_BUTTON)) && (this.model))
             {
@@ -102,7 +106,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
         }
         
-        private function updateActionButton() : void {
+        private function updateActionButton() : void
+        {
             this.actionButton.label = this.model.actionButtonLbl;
             this.actionButton.enabled = this.model.enableActionButton;
             if((this.actionButton.visible) && (this.actionButton.enabled))
@@ -117,12 +122,14 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.actionButton.UIID = 80;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.actionButton)
             {
                 this.actionButton.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
@@ -144,7 +151,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             super.onDispose();
         }
         
-        private function onRollOverHandler(param1:MouseEvent) : void {
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
             if(!this.actionButton && !this.actionButton.visible)
             {
                 return;
@@ -159,11 +167,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
         }
         
-        private function onRollOutHandler(param1:MouseEvent) : void {
+        private function onRollOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onClickActionButtonHandler(param1:ButtonEvent) : void {
+        private function onClickActionButtonHandler(param1:ButtonEvent) : void
+        {
             var _loc2_:String = null;
             var _loc3_:uint = 0;
             if(this._currentState == ACTION_STATE && this.model.currentState == BASE_COMMANDER)

@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class TutorialControlMeta extends SoundButton
     {
         
-        public function TutorialControlMeta() {
+        public function TutorialControlMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var refuse:Function = null;
         
-        public function restartS() : void {
+        public function restartS() : void
+        {
             App.utils.asserter.assertNotNull(this.restart,"restart" + Errors.CANT_NULL);
             this.restart();
         }
         
-        public function refuseS() : void {
+        public function refuseS() : void
+        {
             App.utils.asserter.assertNotNull(this.refuse,"refuse" + Errors.CANT_NULL);
             this.refuse();
         }

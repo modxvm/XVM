@@ -16,7 +16,8 @@ package net.wg.gui.components.controls
     public class NormalSortingButton extends ScalableIconButton
     {
         
-        public function NormalSortingButton() {
+        public function NormalSortingButton()
+        {
             super();
         }
         
@@ -62,16 +63,19 @@ package net.wg.gui.components.controls
         
         private var _previousSelectedSorDirection:String;
         
-        override public function set data(param1:Object) : void {
+        override public function set data(param1:Object) : void
+        {
             super.data = param1;
             this.checkSortingBtnInfo(param1);
             invalidateData();
         }
         
-        override public function set toggle(param1:Boolean) : void {
+        override public function set toggle(param1:Boolean) : void
+        {
         }
         
-        override public function set selected(param1:Boolean) : void {
+        override public function set selected(param1:Boolean) : void
+        {
             if(selected != param1)
             {
                 if(param1 == false)
@@ -91,11 +95,13 @@ package net.wg.gui.components.controls
             super.selected = param1;
         }
         
-        public function get sortDirection() : String {
+        public function get sortDirection() : String
+        {
             return this._sortDirection;
         }
         
-        public function set sortDirection(param1:String) : void {
+        public function set sortDirection(param1:String) : void
+        {
             if(!(this._sortDirection == param1) && (selected))
             {
                 this._previousSelectedSorDirection = this._sortDirection;
@@ -112,21 +118,25 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get id() : String {
+        public function get id() : String
+        {
             return this._id;
         }
         
-        public function set id(param1:String) : void {
+        public function set id(param1:String) : void
+        {
             this._id = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.bg = null;
             this.upperBg = null;
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.sortingArrow.visible = false;
             this.tabEnabled = false;
@@ -134,7 +144,8 @@ package net.wg.gui.components.controls
             allowDeselect = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             if(isInvalid(InvalidationType.STATE))
             {
@@ -208,7 +219,8 @@ package net.wg.gui.components.controls
             this.updateDisable();
         }
         
-        override protected function updateDisable() : void {
+        override protected function updateDisable() : void
+        {
             if(disableMc != null)
             {
                 disableMc.visible = !enabled && (this._showDisabledState);
@@ -220,7 +232,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function handleClick(param1:uint = 0) : void {
+        override protected function handleClick(param1:uint = 0) : void
+        {
             if(selected)
             {
                 if(this.sortDirection == SortingInfo.ASCENDING_SORT)
@@ -239,7 +252,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function applySortDirection() : void {
+        protected function applySortDirection() : void
+        {
             if(this._sortDirection == SortingInfo.ASCENDING_SORT)
             {
                 this.sortingArrow.gotoAndStop(SortingInfo.ASCENDING_SORT);
@@ -257,11 +271,13 @@ package net.wg.gui.components.controls
             
         }
         
-        override protected function iconLoadingCompleteHandler(param1:UILoaderEvent) : void {
+        override protected function iconLoadingCompleteHandler(param1:UILoaderEvent) : void
+        {
             invalidateSize();
         }
         
-        private function checkSortingBtnInfo(param1:Object) : void {
+        private function checkSortingBtnInfo(param1:Object) : void
+        {
             var _loc2_:NormalSortingBtnInfo = null;
             if(param1 is SortingButtonInfo)
             {
@@ -291,7 +307,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function updateTextSize(param1:Boolean = false) : void {
+        private function updateTextSize(param1:Boolean = false) : void
+        {
             var _loc2_:TextFormat = null;
             if((this.labelField) && (this.labelField.visible))
             {

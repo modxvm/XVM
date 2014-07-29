@@ -10,7 +10,8 @@ package net.wg.gui.components.controls
     public class ScrollBar extends scaleform.clik.controls.ScrollBar
     {
         
-        public function ScrollBar() {
+        public function ScrollBar()
+        {
             _trackMode = ScrollBarTrackMode.SCROLL_TO_CURSOR;
             super();
         }
@@ -21,15 +22,18 @@ package net.wg.gui.components.controls
         
         public var thumbWg:SoundButton;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override public function get trackMode() : String {
+        override public function get trackMode() : String
+        {
             return _trackMode;
         }
         
-        override public function set trackMode(param1:String) : void {
+        override public function set trackMode(param1:String) : void
+        {
             if(param1 == _trackMode)
             {
                 return;
@@ -41,23 +45,27 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             upArrow = this.upArrowWg;
             downArrow = this.downArrowWg;
             thumb = this.thumbWg;
             super.initialize();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
         }
         
-        override protected function handleMouseWheel(param1:MouseEvent) : void {
+        override protected function handleMouseWheel(param1:MouseEvent) : void
+        {
             super.handleMouseWheel(param1);
             param1.stopPropagation();
         }
         
-        override protected function handleThumbPress(param1:Event) : void {
+        override protected function handleThumbPress(param1:Event) : void
+        {
             var _loc2_:MouseEventEx = param1 as MouseEventEx;
             var _loc3_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
             if(_loc3_ != 0)
@@ -67,7 +75,8 @@ package net.wg.gui.components.controls
             super.handleThumbPress(param1);
         }
         
-        override protected function handleTrackPress(param1:MouseEvent) : void {
+        override protected function handleTrackPress(param1:MouseEvent) : void
+        {
             var _loc2_:MouseEventEx = param1 as MouseEventEx;
             var _loc3_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
             if(_loc3_ != 0)
@@ -77,7 +86,8 @@ package net.wg.gui.components.controls
             super.handleTrackPress(param1);
         }
         
-        override protected function handleTrackClick(param1:ButtonEvent) : void {
+        override protected function handleTrackClick(param1:ButtonEvent) : void
+        {
             if(param1.buttonIdx != 0)
             {
                 return;
@@ -85,11 +95,13 @@ package net.wg.gui.components.controls
             super.handleTrackClick(param1);
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return super.enabled;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             upArrow.enabled = param1;
             downArrow.enabled = param1;

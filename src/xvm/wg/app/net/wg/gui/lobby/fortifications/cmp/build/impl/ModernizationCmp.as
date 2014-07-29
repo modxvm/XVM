@@ -9,13 +9,15 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class ModernizationCmp extends MovieClip implements IDisposable
     {
         
-        public function ModernizationCmp() {
+        public function ModernizationCmp()
+        {
             super();
         }
         
         private static var GLOW_COLOR:uint = 12273152;
         
-        private static function getGlowFilter(param1:Number) : Array {
+        private static function getGlowFilter(param1:Number) : Array
+        {
             var _loc2_:Array = [];
             var _loc3_:Number = 1;
             var _loc4_:Number = 30;
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var model:ModernizationCmpVO = null;
         
-        public function setData(param1:ModernizationCmpVO) : void {
+        public function setData(param1:ModernizationCmpVO) : void
+        {
             this.model = param1;
             this.buildingIndicators.setData(this.model.buildingIndicators);
             this.orderInfo.setData(this.model.defResInfo);
@@ -50,7 +53,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.titleText.htmlText = this.model.titleText;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.buildingIcon = null;
             this.buildingLevel = null;
             this.buildingIndicators.dispose();
@@ -60,7 +64,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.titleText = null;
         }
         
-        public function applyGlowFilter() : void {
+        public function applyGlowFilter() : void
+        {
             this.buildingIcon.filters = getGlowFilter(GLOW_COLOR);
         }
     }

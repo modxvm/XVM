@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.technique.data
     public class SortingSettingVO extends DAAPIDataClass
     {
         
-        public function SortingSettingVO(param1:Object) {
+        public function SortingSettingVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -13,19 +14,23 @@ package net.wg.gui.lobby.profile.pages.technique.data
         
         private var _sortDirection:String = "";
         
-        public function get btnType() : String {
+        public function get btnType() : String
+        {
             return this._btnType;
         }
         
-        public function set btnType(param1:String) : void {
+        public function set btnType(param1:String) : void
+        {
             this._btnType = param1;
         }
         
-        public function get sortDirection() : String {
+        public function get sortDirection() : String
+        {
             return this._sortDirection;
         }
         
-        public function set sortDirection(param1:String) : void {
+        public function set sortDirection(param1:String) : void
+        {
             this._sortDirection = param1;
         }
     }

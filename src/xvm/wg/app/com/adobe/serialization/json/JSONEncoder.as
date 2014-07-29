@@ -5,18 +5,21 @@ package com.adobe.serialization.json
     public class JSONEncoder extends Object
     {
         
-        public function JSONEncoder(param1:*) {
+        public function JSONEncoder(param1:*)
+        {
             super();
             this.jsonString = this.convertToString(param1);
         }
         
         private var jsonString:String;
         
-        public function getString() : String {
+        public function getString() : String
+        {
             return this.jsonString;
         }
         
-        private function convertToString(param1:*) : String {
+        private function convertToString(param1:*) : String
+        {
             if(param1 is String)
             {
                 return this.escapeString(param1 as String);
@@ -40,7 +43,8 @@ package com.adobe.serialization.json
             return "null";
         }
         
-        private function escapeString(param1:String) : String {
+        private function escapeString(param1:String) : String
+        {
             var _loc3_:String = null;
             var _loc6_:String = null;
             var _loc7_:String = null;
@@ -90,7 +94,8 @@ package com.adobe.serialization.json
             return "\"" + _loc2_ + "\"";
         }
         
-        private function arrayToString(param1:Array) : String {
+        private function arrayToString(param1:Array) : String
+        {
             var _loc2_:* = "";
             var _loc3_:int = param1.length;
             var _loc4_:* = 0;
@@ -106,7 +111,8 @@ package com.adobe.serialization.json
             return "[" + _loc2_ + "]";
         }
         
-        private function objectToString(param1:Object) : String {
+        private function objectToString(param1:Object) : String
+        {
             /*
              * Decompilation error
              * Code may be obfuscated

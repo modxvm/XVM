@@ -13,7 +13,8 @@ package net.wg.gui.lobby.profile
     public class Profile extends ProfileMeta implements IProfileMeta
     {
         
-        public function Profile() {
+        public function Profile()
+        {
             super();
         }
         
@@ -21,25 +22,30 @@ package net.wg.gui.lobby.profile
         
         public var tabNavigator:ProfileTabNavigator;
         
-        private function handleEscape(param1:InputEvent) : void {
+        private function handleEscape(param1:InputEvent) : void
+        {
             onCloseProfileS();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             registerComponent(this.tabNavigator,Aliases.PROFILE_TAB_NAVIGATOR);
             this.tabNavigator.centerOffset = ProfileConstants.MAIN_CENTER_OFFSET;
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
         }
         
-        public function as_update(param1:Object) : void {
+        public function as_update(param1:Object) : void
+        {
         }
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             setViewSize(param1,param2);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -48,7 +54,8 @@ package net.wg.gui.lobby.profile
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.screenBg)
             {
                 this.screenBg.parent.removeChild(this.screenBg);
@@ -60,7 +67,8 @@ package net.wg.gui.lobby.profile
             super.onDispose();
         }
         
-        override public function get isModal() : Boolean {
+        override public function get isModal() : Boolean
+        {
             return true;
         }
     }

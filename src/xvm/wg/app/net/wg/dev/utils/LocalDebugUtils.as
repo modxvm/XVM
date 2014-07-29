@@ -3,11 +3,13 @@ package net.wg.dev.utils
     public class LocalDebugUtils extends Object
     {
         
-        public function LocalDebugUtils() {
+        public function LocalDebugUtils()
+        {
             super();
         }
         
-        public static function traceObjectStructure(param1:Object, param2:String = "") : void {
+        public static function traceObjectStructure(param1:Object, param2:String = "") : void
+        {
             var _loc3_:String = null;
             var _loc4_:* = undefined;
             var _loc5_:String = null;
@@ -15,6 +17,7 @@ package net.wg.dev.utils
             {
                 if(_loc3_ == "")
                 {
+                    trace(param2 + "EMPTY PROPERTY NAME !");
                 }
                 _loc4_ = param1[_loc3_];
                 _loc5_ = typeof _loc4_;
@@ -22,6 +25,7 @@ package net.wg.dev.utils
                 {
                     _loc5_ = "array";
                 }
+                trace(param2 + _loc3_ + " : [" + _loc5_ + "] : " + _loc4_);
                 if(_loc5_ == "object")
                 {
                     traceObjectStructure(_loc4_,param2 + "\t");
@@ -34,7 +38,8 @@ package net.wg.dev.utils
             }
         }
         
-        public static function traceArrayStructure(param1:Array, param2:String = "") : void {
+        public static function traceArrayStructure(param1:Array, param2:String = "") : void
+        {
             var _loc5_:* = undefined;
             var _loc6_:String = null;
             var _loc3_:int = param1.length;
@@ -47,6 +52,7 @@ package net.wg.dev.utils
                 {
                     _loc6_ = "array";
                 }
+                trace(param2 + _loc4_ + " : [" + _loc6_ + "] : " + _loc5_);
                 if(_loc6_ == "object")
                 {
                     traceObjectStructure(_loc5_,param2 + "\t");
@@ -60,7 +66,8 @@ package net.wg.dev.utils
             }
         }
         
-        public static function traceDisplayListProps(param1:Object, param2:Function = null, ... rest) : void {
+        public static function traceDisplayListProps(param1:Object, param2:Function = null, ... rest) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated

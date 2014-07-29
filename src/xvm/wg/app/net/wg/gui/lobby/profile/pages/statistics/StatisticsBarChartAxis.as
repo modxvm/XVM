@@ -13,7 +13,8 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class StatisticsBarChartAxis extends AxisBase
     {
         
-        public function StatisticsBarChartAxis() {
+        public function StatisticsBarChartAxis()
+        {
             super();
         }
         
@@ -27,18 +28,21 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         public var lineText:LineTextComponent;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function createPoint(param1:Object) : IListItemRenderer {
+        override protected function createPoint(param1:Object) : IListItemRenderer
+        {
             var _loc2_:StatisticBarChartAxisPoint = new _pointClass();
             _loc2_.addEventListener(SimpleLoader.LOADED,this.iconLoadingCompleteHandler,false,0,true);
             addChild(_loc2_);
             return _loc2_;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(LAYOUT_INV))
             {
@@ -46,7 +50,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             }
         }
         
-        private function iconLoadingCompleteHandler(param1:Event) : void {
+        private function iconLoadingCompleteHandler(param1:Event) : void
+        {
             var _loc6_:StatisticBarChartAxisPoint = null;
             var _loc2_:uint = getData().length;
             var _loc3_:* = true;
@@ -73,14 +78,16 @@ package net.wg.gui.lobby.profile.pages.statistics
             invalidate(LAYOUT_INV);
         }
         
-        override protected function layoutPoint(param1:IListItemRenderer, param2:IChartItem) : void {
+        override protected function layoutPoint(param1:IListItemRenderer, param2:IChartItem) : void
+        {
             var _loc3_:StatisticBarChartItem = StatisticBarChartItem(param2);
             var _loc4_:Point = _loc3_.getThumbDimensions();
             param1.y = paddingTop;
             param1.x = Math.round(_loc3_.x + (_loc4_.x - param1.width >> 1));
         }
         
-        override protected function layoutAll(param1:IChartLayout) : void {
+        override protected function layoutAll(param1:IChartLayout) : void
+        {
             var _loc2_:StatisticBarChartItem = null;
             super.layoutAll(param1);
             if(!renderers)
@@ -101,7 +108,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:Object = null;
             this.background = null;
             this.lineText.dispose();

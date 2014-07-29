@@ -22,11 +22,11 @@ package net.wg.gui.lobby.settings
     public class GraphicSettings extends GraphicSettingsBase
     {
         
-        public function GraphicSettings() {
+        public function GraphicSettings()
+        {
             this._onlyPresetsDP = [];
             this._presetsWithCustomDP = [];
             this._extendAdvancedControlsIds = [SettingsConfig.COLOR_GRADING_TECHNIQUE];
-            this._imaginaryIdList = [SettingsConfig.CUSTOM_AA,SettingsConfig.MULTISAMPLING,SettingsConfig.WINDOW_SIZE,SettingsConfig.RESOLUTION,SettingsConfig.PRESETS,SettingsConfig.QUALITY_ORDER];
             super();
         }
         
@@ -58,11 +58,12 @@ package net.wg.gui.lobby.settings
         
         private var skipDispatchPresetEvent:Boolean = false;
         
-        private var _imaginaryIdList:Array;
+        private var _imaginaryIdList:Array = [SettingsConfig.CUSTOM_AA,SettingsConfig.MULTISAMPLING,SettingsConfig.WINDOW_SIZE,SettingsConfig.RESOLUTION,SettingsConfig.PRESETS,SettingsConfig.QUALITY_ORDER];
         
         private var _initialFOVValues:Array = null;
         
-        override public function update(param1:Object) : void {
+        override public function update(param1:Object) : void
+        {
             var _loc3_:uint = 0;
             var _loc4_:uint = 0;
             var _loc5_:String = null;
@@ -87,11 +88,13 @@ package net.wg.gui.lobby.settings
             super.update(param1);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG GraphicSettings " + name + "]";
         }
         
-        override public function updateDependentData() : void {
+        override public function updateDependentData() : void
+        {
             if((SettingsConfig.liveUpdateVideoSettingsData) && (this._isInited))
             {
                 this.initMonitors();
@@ -99,13 +102,15 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        public function rewriteInitialValues() : void {
+        public function rewriteInitialValues() : void
+        {
             var _loc1_:SettingsControlProp = SettingsControlProp(_data[SettingsConfig.FOV]);
             this._initialFOVValues = [fovRangeSlider.value,fovRangeSlider.leftValue,fovRangeSlider.rightValue];
             _loc1_.current = this._initialFOVValues;
         }
         
-        public function setPresetAfterAutoDetect(param1:Number) : void {
+        public function setPresetAfterAutoDetect(param1:Number) : void
+        {
             var _loc2_:String = null;
             _loc2_ = SettingsConfig.GRAPHIC_QUALITY;
             var _loc3_:SettingsControlProp = SettingsControlProp(_data[_loc2_]);
@@ -118,7 +123,8 @@ package net.wg.gui.lobby.settings
             autodetectQuality.enabled = true;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -127,7 +133,8 @@ package net.wg.gui.lobby.settings
             throw new Error("Not decompiled due to error");
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             graphicsQualityLabel.text = SETTINGS.GRAPHICSQUALITY;
             autodetectQuality.label = SETTINGS.AUTODETECTBUTTON;
@@ -138,23 +145,27 @@ package net.wg.gui.lobby.settings
             autodetectQuality.addEventListener(ButtonEvent.CLICK,this.onAutodetectPress);
         }
         
-        private function onTabChange(param1:IndexEvent) : void {
+        private function onTabChange(param1:IndexEvent) : void
+        {
             if(initialized)
             {
                 this.updateCurrentTab();
             }
         }
         
-        private function updateCurrentTab() : void {
+        private function updateCurrentTab() : void
+        {
             screenForm.visible = tabs.selectedIndex == 0;
             advancedForm.visible = !screenForm.visible;
         }
         
-        override protected function setData(param1:Object) : void {
+        override protected function setData(param1:Object) : void
+        {
             this.setControlsData(param1);
         }
         
-        private function setControlsData(param1:Object) : void {
+        private function setControlsData(param1:Object) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -163,7 +174,8 @@ package net.wg.gui.lobby.settings
             throw new Error("Not decompiled due to error");
         }
         
-        private function initMonitors() : void {
+        private function initMonitors() : void
+        {
             var _loc1_:SettingsControlProp = SettingsControlProp(_data[SettingsConfig.MONITOR]);
             var _loc2_:Number = Number(_loc1_.changedVal);
             var _loc3_:uint = _loc1_.options is Array?_loc1_.options.length:0;
@@ -180,7 +192,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function updateFullScreenDependentControls() : void {
+        private function updateFullScreenDependentControls() : void
+        {
             var _loc2_:String = null;
             var _loc3_:SettingsControlProp = null;
             var _loc4_:UIComponent = null;
@@ -193,7 +206,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function setSizeControl(param1:Boolean = true) : void {
+        private function setSizeControl(param1:Boolean = true) : void
+        {
             var _loc2_:String = SettingsConfig.SIZE;
             var _loc3_:SettingsControlProp = SettingsControlProp(_data[_loc2_]);
             var _loc4_:DropdownMenu = this[_loc2_ + _loc3_.type];
@@ -222,23 +236,27 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function updateDropDownEnabled(param1:String) : void {
+        private function updateDropDownEnabled(param1:String) : void
+        {
             var _loc2_:SettingsControlProp = SettingsControlProp(_data[param1]);
             var _loc3_:DropdownMenu = this[param1 + _loc2_.type];
             _loc3_.enabled = _loc3_.dataProvider.length > 1 && !_loc2_.readOnly;
         }
         
-        private function setInitialFOVValues() : void {
+        private function setInitialFOVValues() : void
+        {
             fovRangeSlider.value = this._initialFOVValues[0];
             fovRangeSlider.rightValue = this._initialFOVValues[2];
             fovRangeSlider.leftValue = this._initialFOVValues[1];
         }
         
-        private function initRefreshRateControl() : void {
+        private function initRefreshRateControl() : void
+        {
             refreshRateDropDown.addEventListener(ListEvent.INDEX_CHANGE,this.onRefreshRateDDChange);
         }
         
-        private function onRefreshRateDDChange(param1:ListEvent = null) : void {
+        private function onRefreshRateDDChange(param1:ListEvent = null) : void
+        {
             var _loc2_:String = null;
             var _loc3_:SettingsControlProp = null;
             var _loc4_:DropdownMenu = null;
@@ -260,7 +278,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function updateRefreshRate(param1:Boolean = false) : void {
+        private function updateRefreshRate(param1:Boolean = false) : void
+        {
             var _loc7_:SettingsControlProp = null;
             var _loc8_:* = 0;
             var _loc9_:* = 0;
@@ -308,7 +327,8 @@ package net.wg.gui.lobby.settings
             this.onRefreshRateDDChange();
         }
         
-        private function getClosestRefreshRate(param1:int, param2:IDataProvider) : Number {
+        private function getClosestRefreshRate(param1:int, param2:IDataProvider) : Number
+        {
             var _loc5_:* = NaN;
             var _loc3_:Number = NaN;
             var _loc4_:* = 0;
@@ -324,7 +344,8 @@ package net.wg.gui.lobby.settings
             return _loc3_;
         }
         
-        private function setPresets() : void {
+        private function setPresets() : void
+        {
             var _loc4_:* = 0;
             var _loc6_:String = null;
             var _loc7_:* = 0;
@@ -340,12 +361,11 @@ package net.wg.gui.lobby.settings
             {
                 _loc7_ = this._presets.options[_loc5_].index;
                 _loc6_ = this._presets.options[_loc5_].key;
-                _loc8_ = {
-                    "label":SETTINGS.graphicssettingsoptions(_loc6_),
-                    "settings":this._presets.options[_loc5_].settings,
-                    "key":_loc6_,
-                    "data":_loc7_
-                };
+                _loc8_ = {"label":SETTINGS.graphicssettingsoptions(_loc6_),
+                "settings":this._presets.options[_loc5_].settings,
+                "key":_loc6_,
+                "data":_loc7_
+            };
             this._presetsWithCustomDP.push(_loc8_);
             if(_loc6_ == SettingsConfig.CUSTOM)
             {
@@ -375,7 +395,8 @@ package net.wg.gui.lobby.settings
         _loc3_.addEventListener(ListEvent.INDEX_CHANGE,this.onGraphicsQualityChangePreset);
     }
     
-    private function setRenderPipeline() : void {
+    private function setRenderPipeline() : void
+    {
         var _loc2_:SettingsControlProp = null;
         var _loc3_:* = false;
         var _loc4_:ButtonBarEx = null;
@@ -393,7 +414,8 @@ package net.wg.gui.lobby.settings
         }
     }
     
-    private function getDPItemIndex(param1:IDataProvider, param2:*, param3:String = "data") : int {
+    private function getDPItemIndex(param1:IDataProvider, param2:*, param3:String = "data") : int
+    {
         var _loc5_:Object = null;
         var _loc4_:* = -1;
         for each(_loc5_ in param1)
@@ -407,14 +429,16 @@ package net.wg.gui.lobby.settings
         return _loc4_;
     }
     
-    private function updateAdvancedDependedControls() : void {
+    private function updateAdvancedDependedControls() : void
+    {
         this.updateDataProviderForQuality();
         this.updateQualityControls();
         this.updateExtendedAdvancedControls();
         this.updateSmoothingControl();
     }
     
-    private function updateDataProviderForQuality() : void {
+    private function updateDataProviderForQuality() : void
+    {
         /*
          * Decompilation error
          * Code may be obfuscated
@@ -423,7 +447,8 @@ package net.wg.gui.lobby.settings
         throw new Error("Not decompiled due to error");
     }
     
-    private function updateQualityControls() : void {
+    private function updateQualityControls() : void
+    {
         var _loc1_:String = null;
         var _loc2_:SettingsControlProp = null;
         for(_loc1_ in this._graphicsQualityDataProv)
@@ -439,7 +464,8 @@ package net.wg.gui.lobby.settings
         }
     }
     
-    private function updateAdvancedQualityControl(param1:String, param2:SettingsControlProp) : void {
+    private function updateAdvancedQualityControl(param1:String, param2:SettingsControlProp) : void
+    {
         var _loc3_:* = NaN;
         var _loc4_:* = NaN;
         var _loc5_:uint = 0;
@@ -544,7 +570,8 @@ package net.wg.gui.lobby.settings
         }
     }
     
-    private function updateExtendedAdvancedControls() : void {
+    private function updateExtendedAdvancedControls() : void
+    {
         var _loc1_:SettingsControlProp = null;
         var _loc2_:String = null;
         var _loc3_:String = null;
@@ -566,7 +593,8 @@ package net.wg.gui.lobby.settings
         }
     }
     
-    private function updateSmoothingControl() : void {
+    private function updateSmoothingControl() : void
+    {
         var _loc4_:DropdownMenu = null;
         var _loc5_:* = NaN;
         var _loc6_:* = NaN;
@@ -597,7 +625,8 @@ package net.wg.gui.lobby.settings
         }
     }
     
-    private function updateCurrentPropForGraphicsOrderInPreset(param1:Object) : void {
+    private function updateCurrentPropForGraphicsOrderInPreset(param1:Object) : void
+    {
         var _loc2_:String = null;
         var _loc3_:SettingsControlProp = null;
         for(_loc2_ in param1)
@@ -617,7 +646,8 @@ package net.wg.gui.lobby.settings
         }
     }
     
-    private function updateLiveVideoData() : void {
+    private function updateLiveVideoData() : void
+    {
         /*
          * Decompilation error
          * Code may be obfuscated
@@ -626,7 +656,8 @@ package net.wg.gui.lobby.settings
         throw new Error("Not decompiled due to error");
     }
     
-    private function tryFindPreset() : void {
+    private function tryFindPreset() : void
+    {
         var _loc1_:Array = null;
         var _loc2_:* = NaN;
         var _loc3_:SettingsControlProp = null;
@@ -686,7 +717,8 @@ package net.wg.gui.lobby.settings
         }
     }
     
-    private function updatePresetsDP() : void {
+    private function updatePresetsDP() : void
+    {
         var _loc1_:String = SettingsConfig.GRAPHIC_QUALITY;
         var _loc2_:SettingsControlProp = SettingsControlProp(_data[_loc1_]);
         var _loc3_:DropdownMenu = this[_loc1_ + _loc2_.type];
@@ -694,14 +726,16 @@ package net.wg.gui.lobby.settings
         this.updateDropDownEnabled(_loc1_);
     }
     
-    private function trySearchSameSizeForAnotherMonitor(param1:String, param2:Array) : Number {
+    private function trySearchSameSizeForAnotherMonitor(param1:String, param2:Array) : Number
+    {
         var _loc3_:RegExp = new RegExp("\\*","g");
         var param1:String = param1.replace(_loc3_,"");
         var _loc4_:Number = param2.indexOf(param1);
         return _loc4_ == -1?param2.length - 1:_loc4_;
     }
     
-    private function onGraphicsQualityChangePreset(param1:ListEvent) : void {
+    private function onGraphicsQualityChangePreset(param1:ListEvent) : void
+    {
         var _loc5_:SettingsControlProp = null;
         var _loc6_:ButtonBarEx = null;
         var _loc7_:* = NaN;
@@ -736,6 +770,7 @@ package net.wg.gui.lobby.settings
                 {
                     _loc10_ = _loc6_.dataProvider.requestItemAt(_loc9_);
                     _loc11_ = _loc10_.hasOwnProperty("supported")?_loc10_["supported"]:true;
+                    _loc11_;
                     _loc6_.selectedIndex = _loc9_;
                 }
             }
@@ -747,7 +782,8 @@ package net.wg.gui.lobby.settings
         this._allowCheckPreset = true;
     }
     
-    private function onGraphicsQualityChangeRenderPipeline(param1:IndexEvent) : void {
+    private function onGraphicsQualityChangeRenderPipeline(param1:IndexEvent) : void
+    {
         var _loc2_:Number = param1.index;
         var _loc3_:ButtonBarEx = ButtonBarEx(param1.target);
         var _loc4_:String = SettingsConfig.getControlId(_loc3_.name,SettingsConfig.TYPE_BUTTON_BAR);
@@ -766,7 +802,8 @@ package net.wg.gui.lobby.settings
         this.tryFindPreset();
     }
     
-    private function onDropDownChange(param1:ListEvent) : void {
+    private function onDropDownChange(param1:ListEvent) : void
+    {
         var _loc7_:String = null;
         var _loc8_:* = NaN;
         var _loc2_:DropdownMenu = DropdownMenu(param1.target);
@@ -804,7 +841,8 @@ package net.wg.gui.lobby.settings
         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc4_,_loc3_));
     }
     
-    private function onRangeSliderChanged(param1:SliderEvent) : void {
+    private function onRangeSliderChanged(param1:SliderEvent) : void
+    {
         var _loc2_:RangeSlider = RangeSlider(param1.target);
         var _loc3_:String = SettingsConfig.getControlId(RangeSlider(param1.target).name,SettingsConfig.TYPE_RANGE_SLIDER);
         var _loc4_:SettingsControlProp = SettingsControlProp(_data[_loc3_]);
@@ -812,7 +850,8 @@ package net.wg.gui.lobby.settings
         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc5_));
     }
     
-    private function onSliderChanged(param1:SliderEvent) : void {
+    private function onSliderChanged(param1:SliderEvent) : void
+    {
         var _loc5_:LabelControl = null;
         var _loc6_:String = null;
         var _loc2_:Slider = Slider(param1.target);
@@ -835,7 +874,8 @@ package net.wg.gui.lobby.settings
         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,Slider(param1.target).value));
     }
     
-    private function onCheckBoxChange(param1:Event) : void {
+    private function onCheckBoxChange(param1:Event) : void
+    {
         var _loc2_:CheckBox = CheckBox(param1.target);
         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
         if(_loc3_ == SettingsConfig.FULL_SCREEN)
@@ -854,7 +894,8 @@ package net.wg.gui.lobby.settings
         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.selected));
     }
     
-    private function onCheckBoxOrderedChange(param1:Event) : void {
+    private function onCheckBoxOrderedChange(param1:Event) : void
+    {
         var _loc2_:CheckBox = CheckBox(param1.target);
         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
         var _loc4_:SettingsControlProp = SettingsControlProp(this._graphicsQualityDataProv[_loc3_]);
@@ -863,7 +904,8 @@ package net.wg.gui.lobby.settings
         this.tryFindPreset();
     }
     
-    private function onDropDownOrderedChange(param1:ListEvent) : void {
+    private function onDropDownOrderedChange(param1:ListEvent) : void
+    {
         var _loc2_:DropdownMenu = DropdownMenu(param1.target);
         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
         var _loc4_:SettingsControlProp = null;
@@ -887,13 +929,15 @@ package net.wg.gui.lobby.settings
         this.tryFindPreset();
     }
     
-    private function updateColorFilterPreview(param1:int) : void {
+    private function updateColorFilterPreview(param1:int) : void
+    {
         colorFilterOverlayImg.source = this._colorFilterPreviews[param1];
         colorFilterIntensitySlider.enabled = !(param1 == SettingsConfig.NO_COLOR_FILTER_DATA);
         colorFilterIntensityValue.visible = !(param1 == SettingsConfig.NO_COLOR_FILTER_DATA);
     }
     
-    private function onSliderOrderedChange(param1:SliderEvent) : void {
+    private function onSliderOrderedChange(param1:SliderEvent) : void
+    {
         var _loc2_:SettingsStepSlider = SettingsStepSlider(param1.target);
         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_STEP_SLIDER);
         var _loc4_:SettingsControlProp = null;
@@ -913,7 +957,8 @@ package net.wg.gui.lobby.settings
         this.tryFindPreset();
     }
     
-    private function onAutodetectPress(param1:ButtonEvent) : void {
+    private function onAutodetectPress(param1:ButtonEvent) : void
+    {
         autodetectQuality.enabled = false;
         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_AUTO_DETECT_QUALITY,_viewId));
     }

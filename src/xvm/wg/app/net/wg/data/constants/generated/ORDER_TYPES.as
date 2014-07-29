@@ -3,7 +3,8 @@ package net.wg.data.constants.generated
     public class ORDER_TYPES extends Object
     {
         
-        public function ORDER_TYPES() {
+        public function ORDER_TYPES()
+        {
             super();
         }
         

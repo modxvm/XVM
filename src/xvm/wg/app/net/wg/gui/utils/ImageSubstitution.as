@@ -6,7 +6,8 @@ package net.wg.gui.utils
     public class ImageSubstitution extends Object
     {
         
-        public function ImageSubstitution(param1:String, param2:String, param3:Number = 0, param4:Number = 16, param5:Number = 16, param6:Boolean = false) {
+        public function ImageSubstitution(param1:String, param2:String, param3:Number = 0, param4:Number = 16, param5:Number = 16, param6:Boolean = false)
+        {
             super();
             this.subString = param1;
             this.source = param2;
@@ -31,11 +32,13 @@ package net.wg.gui.utils
         
         public var height:Number = 16;
         
-        public function get valid() : Boolean {
+        public function get valid() : Boolean
+        {
             return !(this.image == null);
         }
         
-        public function loadImage() : Boolean {
+        public function loadImage() : Boolean
+        {
             var BitmapDataClass:Class = null;
             var result:Boolean = true;
             if(!(this.source == null) && this.source.length > 0)
@@ -47,6 +50,7 @@ package net.wg.gui.utils
                 }
                 catch(error:ReferenceError)
                 {
+                    trace("<ReferenceError> " + error.message);
                     image = null;
                     result = false;
                 }
@@ -54,7 +58,8 @@ package net.wg.gui.utils
             return result;
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[ImageSubstitution subString=" + this.subString + " source=" + this.source + " image=" + this.image + " baseLineY=" + this.baseLineY + " width=" + this.width + " height=" + this.height + "]";
         }
     }

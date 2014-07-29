@@ -7,7 +7,8 @@ package net.wg.gui.lobby.store
     public class StoreTableDataProvider extends DAAPIDataProvider
     {
         
-        public function StoreTableDataProvider() {
+        public function StoreTableDataProvider()
+        {
             super();
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.lobby.store
         
         private var _type:String = "";
         
-        override public function requestItemAt(param1:uint, param2:Function = null) : Object {
+        override public function requestItemAt(param1:uint, param2:Function = null) : Object
+        {
             var _loc4_:StoreTableData = null;
             var _loc3_:Object = requestItemAtHandler(param1);
             if(_loc3_ != null)
@@ -35,7 +37,8 @@ package net.wg.gui.lobby.store
             return _loc4_;
         }
         
-        override public function requestItemRange(param1:int, param2:int, param3:Function = null) : Array {
+        override public function requestItemRange(param1:int, param2:int, param3:Function = null) : Array
+        {
             var _loc6_:StoreTableData = null;
             var _loc7_:Object = null;
             if(!Boolean(requestItemRangeHandler))
@@ -58,19 +61,23 @@ package net.wg.gui.lobby.store
             return _loc5_;
         }
         
-        public function get tableVO() : StoreTableVO {
+        public function get tableVO() : StoreTableVO
+        {
             return this._tableVO;
         }
         
-        public function set tableVO(param1:StoreTableVO) : void {
+        public function set tableVO(param1:StoreTableVO) : void
+        {
             this._tableVO = param1;
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             this._type = param1;
         }
     }

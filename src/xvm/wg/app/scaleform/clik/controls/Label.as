@@ -12,7 +12,8 @@ package scaleform.clik.controls
     public class Label extends UIComponent
     {
         
-        public function Label() {
+        public function Label()
+        {
             super();
         }
         
@@ -30,22 +31,26 @@ package scaleform.clik.controls
         
         public var textField:TextField;
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             if(!this.constraintsDisabled)
             {
                 constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
             }
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return super.enabled;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(param1 == super.enabled)
             {
                 return;
@@ -55,37 +60,45 @@ package scaleform.clik.controls
             this.setState(this.defaultState);
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             if(param1 == null)
             {
+                param1 == "";
             }
             this.isHtml = false;
             this._text = param1;
             invalidateData();
         }
         
-        public function get htmlText() : String {
+        public function get htmlText() : String
+        {
             return this._text;
         }
         
-        public function set htmlText(param1:String) : void {
+        public function set htmlText(param1:String) : void
+        {
             if(param1 == null)
             {
+                param1 == "";
             }
             this.isHtml = true;
             this._text = param1;
             invalidateData();
         }
         
-        public function get autoSize() : String {
+        public function get autoSize() : String
+        {
             return this._autoSize;
         }
         
-        public function set autoSize(param1:String) : void {
+        public function set autoSize(param1:String) : void
+        {
             if(param1 == this._autoSize)
             {
                 return;
@@ -94,31 +107,37 @@ package scaleform.clik.controls
             invalidateData();
         }
         
-        public function get length() : uint {
+        public function get length() : uint
+        {
             return this.textField.length;
         }
         
-        public function get defaultState() : String {
+        public function get defaultState() : String
+        {
             return !this.enabled?"disabled":focused?"focused":"default";
         }
         
-        public function appendText(param1:String) : void {
+        public function appendText(param1:String) : void
+        {
             this._text = this._text + param1;
             this.isHtml = false;
             invalidateData();
         }
         
-        public function appendHtml(param1:String) : void {
+        public function appendHtml(param1:String) : void
+        {
             this._text = this._text + param1;
             this.isHtml = true;
             invalidateData();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[CLIK Label " + name + "]";
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(!this.constraintsDisabled)
             {
@@ -127,7 +146,8 @@ package scaleform.clik.controls
             focusable = false;
         }
         
-        protected function calculateWidth() : Number {
+        protected function calculateWidth() : Number
+        {
             var _loc2_:ConstrainedElement = null;
             if(constraints == null || this.textField == null)
             {
@@ -141,7 +161,8 @@ package scaleform.clik.controls
             return _loc1_;
         }
         
-        protected function alignForAutoSize() : void {
+        protected function alignForAutoSize() : void
+        {
             var _loc1_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
@@ -164,7 +185,8 @@ package scaleform.clik.controls
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.STATE))
             {
                 if(this._newFrame)
@@ -195,7 +217,8 @@ package scaleform.clik.controls
             }
         }
         
-        protected function updateText() : void {
+        protected function updateText() : void
+        {
             if(!(this._text == null) && !(this.textField == null))
             {
                 if(this.isHtml)
@@ -209,7 +232,8 @@ package scaleform.clik.controls
             }
         }
         
-        protected function updateAfterStateChange() : void {
+        protected function updateAfterStateChange() : void
+        {
             if(!initialized)
             {
                 return;
@@ -222,7 +246,8 @@ package scaleform.clik.controls
             dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
         }
         
-        protected function setState(... rest) : void {
+        protected function setState(... rest) : void
+        {
             var _loc4_:String = null;
             var _loc5_:String = null;
             if(rest.length == 1)

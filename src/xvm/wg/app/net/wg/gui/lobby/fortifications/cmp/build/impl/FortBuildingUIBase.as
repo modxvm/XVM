@@ -9,7 +9,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class FortBuildingUIBase extends UIComponentEx
     {
         
-        public function FortBuildingUIBase() {
+        public function FortBuildingUIBase()
+        {
             super();
             this._exportArrow.mouseEnabled = this._exportArrow.mouseChildren = false;
             this._importArrow.mouseEnabled = this._importArrow.mouseChildren = false;
@@ -33,23 +34,28 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _importArrow:IArrowWithNut = null;
         
-        public function get exportArrow() : IArrowWithNut {
+        public function get exportArrow() : IArrowWithNut
+        {
             return this._exportArrow;
         }
         
-        public function set exportArrow(param1:IArrowWithNut) : void {
+        public function set exportArrow(param1:IArrowWithNut) : void
+        {
             this._exportArrow = param1;
         }
         
-        public function get importArrow() : IArrowWithNut {
+        public function get importArrow() : IArrowWithNut
+        {
             return this._importArrow;
         }
         
-        public function set importArrow(param1:IArrowWithNut) : void {
+        public function set importArrow(param1:IArrowWithNut) : void
+        {
             this._importArrow = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.hitAreaControl.dispose();
             this.hitAreaControl = null;
             this.indicators.dispose();

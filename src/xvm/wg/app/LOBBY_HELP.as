@@ -1,9 +1,10 @@
-package 
+package
 {
     public class LOBBY_HELP extends Object
     {
         
-        public function LOBBY_HELP() {
+        public function LOBBY_HELP()
+        {
             super();
         }
         

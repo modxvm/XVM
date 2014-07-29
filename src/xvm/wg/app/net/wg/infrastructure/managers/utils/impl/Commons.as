@@ -33,7 +33,8 @@ package net.wg.infrastructure.managers.utils.impl
     public class Commons extends Object implements ICommons
     {
         
-        public function Commons() {
+        public function Commons()
+        {
             super();
         }
         
@@ -51,9 +52,10 @@ package net.wg.infrastructure.managers.utils.impl
         
         private static var CUT_SYMBOLS_STR:String = "..";
         
-        private static var s_found:Array;
+        private static var s_found:Array = [];
         
-        public function createMap(param1:Array) : Map {
+        public function createMap(param1:Array) : Map
+        {
             this.assertEvenArray(param1);
             var _loc2_:Map = new HashMap();
             var _loc3_:Number = 0;
@@ -68,7 +70,8 @@ package net.wg.infrastructure.managers.utils.impl
             return _loc2_;
         }
         
-        public function createMappedArray(param1:Array) : Array {
+        public function createMappedArray(param1:Array) : Array
+        {
             var _loc4_:Object = null;
             this.assertEvenArray(param1);
             var _loc2_:Array = [];
@@ -86,7 +89,8 @@ package net.wg.infrastructure.managers.utils.impl
             return _loc2_;
         }
         
-        public function cleanupDynamicObject(param1:Object) : Object {
+        public function cleanupDynamicObject(param1:Object) : Object
+        {
             var _loc3_:* = undefined;
             var _loc2_:Array = [];
             for(_loc3_ in param1)
@@ -96,12 +100,14 @@ package net.wg.infrastructure.managers.utils.impl
             for each(_loc3_ in _loc2_)
             {
                 delete param1[_loc3_];
+                true;
             }
             _loc2_.splice(0,_loc2_.length);
             return null;
         }
         
-        public function releaseReferences(param1:Object, param2:Boolean = true) : void {
+        public function releaseReferences(param1:Object, param2:Boolean = true) : void
+        {
             var _loc3_:String = null;
             var _loc4_:Object = null;
             var _loc5_:DisplayObject = null;
@@ -123,6 +129,7 @@ package net.wg.infrastructure.managers.utils.impl
                             IDisposable(_loc4_).dispose();
                         }
                         delete param1[_loc3_];
+                        true;
                     }
                 }
                 if(param1 is DisplayObjectContainer)
@@ -152,7 +159,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function keyToString(param1:Number) : KeyProps {
+        public function keyToString(param1:Number) : KeyProps
+        {
             var _loc2_:KeyProps = new KeyProps();
             var _loc3_:String = String.fromCharCode(param1);
             if(KeysMap.mapping.hasOwnProperty(param1.toString()))
@@ -182,14 +190,16 @@ package net.wg.infrastructure.managers.utils.impl
             return _loc2_;
         }
         
-        public function cutBitmapFromBitmapData(param1:BitmapData, param2:Rectangle) : Bitmap {
+        public function cutBitmapFromBitmapData(param1:BitmapData, param2:Rectangle) : Bitmap
+        {
             var _loc3_:BitmapData = new BitmapData(param2.width,param2.height,true,13421772);
             _loc3_.copyPixels(param1,new Rectangle(param2.x,param2.y,param2.width,param2.height),new Point(0,0));
             var _loc4_:Bitmap = new Bitmap(_loc3_,"auto",true);
             return _loc4_;
         }
         
-        public function cloneObject(param1:Object) : * {
+        public function cloneObject(param1:Object) : *
+        {
             var _loc2_:* = undefined;
             var _loc3_:String = null;
             if(param1 is Object)
@@ -204,7 +214,8 @@ package net.wg.infrastructure.managers.utils.impl
             return undefined;
         }
         
-        public function addBlankLines(param1:String, param2:TextField, param3:Vector.<TextField>) : void {
+        public function addBlankLines(param1:String, param2:TextField, param3:Vector.<TextField>) : void
+        {
             var _loc6_:TextField = null;
             var _loc7_:* = 0;
             var _loc4_:String = param2.htmlText;
@@ -222,7 +233,8 @@ package net.wg.infrastructure.managers.utils.impl
             param2.htmlText = _loc4_;
         }
         
-        public function setSaturation(param1:Sprite, param2:Number) : void {
+        public function setSaturation(param1:Sprite, param2:Number) : void
+        {
             var object:Sprite = param1;
             var amount:Number = param2;
             var interpolateArrays:Function = function(param1:Array, param2:Array, param3:Number):Object
@@ -251,11 +263,13 @@ package net.wg.infrastructure.managers.utils.impl
             object.filters = [colorFilter];
         }
         
-        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0) : IUserProps {
+        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0) : IUserProps
+        {
             return new UserProps(param1,param2,param3,param4);
         }
         
-        public function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean {
+        public function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean
+        {
             var _loc10_:* = 0;
             var _loc3_:TextFormat = param1.getTextFormat();
             var _loc4_:Object = _loc3_.size;
@@ -285,7 +299,8 @@ package net.wg.infrastructure.managers.utils.impl
             return _loc9_;
         }
         
-        private function applyTextProps(param1:TextField, param2:String, param3:TextFormat, param4:Object, param5:String, param6:String) : void {
+        private function applyTextProps(param1:TextField, param2:String, param3:TextFormat, param4:Object, param5:String, param6:String) : void
+        {
             param1.htmlText = param2;
             param3.size = param4;
             param3.font = param5;
@@ -293,12 +308,14 @@ package net.wg.infrastructure.managers.utils.impl
             param1.setTextFormat(param3);
         }
         
-        public function getFullPlayerName(param1:IUserProps) : String {
+        public function getFullPlayerName(param1:IUserProps) : String
+        {
             var _loc2_:String = (param1.igrType == 2?IMG_TAG_OPEN_PREMIUM:IMG_TAG_OPEN_BASIC) + param1.igrVspace + IMG_TAG_CLOSE;
             return param1.prefix + param1.userName + (param1.clanAbbrev?CLAN_TAG_OPEN + param1.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param1.region?Values.SPACE_STR + param1.region:Values.EMPTY_STR) + (param1.igrType > 0?Values.SPACE_STR + _loc2_:Values.EMPTY_STR) + param1.suffix;
         }
         
-        private function canToDestroying(param1:Object) : Boolean {
+        private function canToDestroying(param1:Object) : Boolean
+        {
             if(param1)
             {
                 return param1 is IDAAPIModule && !IDAAPIModule(param1).disposed || !(param1 is IDAAPIModule);
@@ -306,7 +323,8 @@ package net.wg.infrastructure.managers.utils.impl
             return false;
         }
         
-        private function assertEvenArray(param1:Array) : void {
+        private function assertEvenArray(param1:Array) : void
+        {
             var _loc2_:* = "pureHash must be have even quantity of elements";
             var _loc3_:IAssertable = App.utils.asserter;
             _loc3_.assertNotNull(param1,"pureHash" + Errors.CANT_NULL,NullPointerException);
@@ -314,7 +332,8 @@ package net.wg.infrastructure.managers.utils.impl
             _loc3_.assert(param1.length > 0,"pureHash can`t be empty",ArgumentException);
         }
         
-        public function isLeftButton(param1:MouseEvent) : Boolean {
+        public function isLeftButton(param1:MouseEvent) : Boolean
+        {
             if(param1 is MouseEventEx)
             {
                 return MouseEventEx(param1).buttonIdx == MouseEventEx.LEFT_BUTTON;
@@ -322,7 +341,8 @@ package net.wg.infrastructure.managers.utils.impl
             return true;
         }
         
-        public function isRightButton(param1:MouseEvent) : Boolean {
+        public function isRightButton(param1:MouseEvent) : Boolean
+        {
             if(param1 is MouseEventEx)
             {
                 return MouseEventEx(param1).buttonIdx == MouseEventEx.RIGHT_BUTTON;
@@ -330,7 +350,8 @@ package net.wg.infrastructure.managers.utils.impl
             return false;
         }
         
-        public function addMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void {
+        public function addMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void
+        {
             var _loc4_:IEventDispatcher = null;
             for each(_loc4_ in param1)
             {
@@ -338,7 +359,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function removeMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void {
+        public function removeMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void
+        {
             var _loc4_:IEventDispatcher = null;
             for each(_loc4_ in param1)
             {
@@ -346,7 +368,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function initTabIndex(param1:Array) : void {
+        public function initTabIndex(param1:Array) : void
+        {
             var _loc2_:Number = 0;
             while(_loc2_ < param1.length)
             {
@@ -355,7 +378,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function moveIconToEndOfText(param1:DisplayObject, param2:TextField, param3:int = 0, param4:int = 0) : void {
+        public function moveIconToEndOfText(param1:DisplayObject, param2:TextField, param3:int = 0, param4:int = 0) : void
+        {
             var _loc11_:TextLineMetrics = null;
             var _loc5_:* = 2;
             var _loc6_:int = param2.numLines;
@@ -388,7 +412,8 @@ import net.wg.infrastructure.interfaces.IUserProps;
 class UserProps extends Object implements IUserProps
 {
     
-    function UserProps(param1:String, param2:String, param3:String, param4:int) {
+    function UserProps(param1:String, param2:String, param3:String, param4:int)
+    {
         super();
         this._userName = param1;
         this._clanAbbrev = param2;
@@ -412,67 +437,83 @@ class UserProps extends Object implements IUserProps
     
     private var _rgb:Number = NaN;
     
-    public function get userName() : String {
+    public function get userName() : String
+    {
         return this._userName;
     }
     
-    public function set userName(param1:String) : void {
+    public function set userName(param1:String) : void
+    {
         this._userName = param1;
     }
     
-    public function get clanAbbrev() : String {
+    public function get clanAbbrev() : String
+    {
         return this._clanAbbrev;
     }
     
-    public function set clanAbbrev(param1:String) : void {
+    public function set clanAbbrev(param1:String) : void
+    {
         this._clanAbbrev = param1;
     }
     
-    public function get region() : String {
+    public function get region() : String
+    {
         return this._region;
     }
     
-    public function set region(param1:String) : void {
+    public function set region(param1:String) : void
+    {
         this._region = param1;
     }
     
-    public function get igrType() : int {
+    public function get igrType() : int
+    {
         return this._igrType;
     }
     
-    public function set igrType(param1:int) : void {
+    public function set igrType(param1:int) : void
+    {
         this._igrType = param1;
     }
     
-    public function get prefix() : String {
+    public function get prefix() : String
+    {
         return this._prefix;
     }
     
-    public function set prefix(param1:String) : void {
+    public function set prefix(param1:String) : void
+    {
         this._prefix = param1;
     }
     
-    public function get suffix() : String {
+    public function get suffix() : String
+    {
         return this._suffix;
     }
     
-    public function set suffix(param1:String) : void {
+    public function set suffix(param1:String) : void
+    {
         this._suffix = param1;
     }
     
-    public function get igrVspace() : int {
+    public function get igrVspace() : int
+    {
         return this._igrVspace;
     }
     
-    public function set igrVspace(param1:int) : void {
+    public function set igrVspace(param1:int) : void
+    {
         this._igrVspace = param1;
     }
     
-    public function get rgb() : Number {
+    public function get rgb() : Number
+    {
         return this._rgb;
     }
     
-    public function set rgb(param1:Number) : void {
+    public function set rgb(param1:Number) : void
+    {
         this._rgb = param1;
     }
 }

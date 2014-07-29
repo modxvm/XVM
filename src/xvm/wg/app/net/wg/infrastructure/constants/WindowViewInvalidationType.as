@@ -3,7 +3,8 @@ package net.wg.infrastructure.constants
     public class WindowViewInvalidationType extends Object
     {
         
-        public function WindowViewInvalidationType() {
+        public function WindowViewInvalidationType()
+        {
             super();
         }
         

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.hangar.crew
     public class TankmenIcons extends UIComponent
     {
         
-        public function TankmenIcons() {
+        public function TankmenIcons()
+        {
             super();
         }
         

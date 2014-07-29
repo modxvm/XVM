@@ -15,7 +15,8 @@ package net.wg.gui.lobby.questsWindow
     public class HeaderBlock extends UIComponent
     {
         
-        public function HeaderBlock() {
+        public function HeaderBlock()
+        {
             super();
             this.counter.visible = false;
             this.progressIndicator.visible = false;
@@ -61,7 +62,8 @@ package net.wg.gui.lobby.questsWindow
         
         public var statusMC:MovieClip;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.progressIndicator.dispose();
             this.counter.dispose();
             if(this.headerData)
@@ -82,7 +84,8 @@ package net.wg.gui.lobby.questsWindow
             super.onDispose();
         }
         
-        public function setData(param1:HeaderDataVO) : void {
+        public function setData(param1:HeaderDataVO) : void
+        {
             if(this.headerData)
             {
                 this.headerData.dispose();
@@ -91,24 +94,24 @@ package net.wg.gui.lobby.questsWindow
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.maskMC.height = 0;
             this.bg.mouseEnabled = false;
             this.bg.mouseChildren = false;
             this.hitArea = this.maskMC;
-            this.contentTabs.dataProvider = new DataProvider([{
-                "label":QUESTS.QUESTS_CONDITIONS,
-                "data":QuestsStates.CONDITIONS,
-                "tooltip":""
-            },{
-            "label":QUESTS.QUESTS_REQUIREMENTS,
-            "data":QuestsStates.REQUIREMENTS,
+            this.contentTabs.dataProvider = new DataProvider([{"label":QUESTS.QUESTS_CONDITIONS,
+            "data":QuestsStates.CONDITIONS,
             "tooltip":""
-        }]);
+        },{"label":QUESTS.QUESTS_REQUIREMENTS,
+        "data":QuestsStates.REQUIREMENTS,
+        "tooltip":""
+    }]);
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
     super.draw();
     if(isInvalid(InvalidationType.DATA))
     {
@@ -128,12 +131,14 @@ override protected function draw() : void {
     }
 }
 
-private function setTexts() : void {
+private function setTexts() : void
+{
     this.lableTF.htmlText = this.headerData.title;
     this.timeTF.htmlText = this.headerData.date;
 }
 
-private function layoutComponents() : void {
+private function layoutComponents() : void
+{
     this.lableTF.height = this.lableTF.textHeight + TEXT_MARGIN;
     this.timeTF.height = this.timeTF.textHeight + TEXT_MARGIN;
     var _loc1_:Number = this.lableTF.textHeight + this.lableTF.y;
@@ -161,7 +166,8 @@ private function layoutComponents() : void {
     setSize(this.width,_loc5_);
 }
 
-private function checkProgress() : void {
+private function checkProgress() : void
+{
     this.progressIndicator.visible = (Boolean(this.headerData.progrBarType)) && !this._noProgress;
     if(this.headerData.progrBarType)
     {
@@ -171,7 +177,8 @@ private function checkProgress() : void {
     }
 }
 
-private function checkCounter() : void {
+private function checkCounter() : void
+{
     this.counter.textField.text = this.headerData.tasksCount.toString();
     if(this.headerData.tasksCount > COUNTER_NO_DATA && !this._noProgress)
     {
@@ -185,7 +192,8 @@ private function checkCounter() : void {
     }
 }
 
-private function checkStatus() : void {
+private function checkStatus() : void
+{
     this._noProgress = false;
     if(this.headerData.status == QuestsStates.NOT_AVAILABLE)
     {

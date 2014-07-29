@@ -15,7 +15,8 @@ package net.wg.gui.lobby.battleResults
     public class TeamMemberItemRenderer extends SoundListItemRenderer
     {
         
-        public function TeamMemberItemRenderer() {
+        public function TeamMemberItemRenderer()
+        {
             super();
         }
         
@@ -53,13 +54,15 @@ package net.wg.gui.lobby.battleResults
         
         private var _dataDirty:Boolean = false;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             this._dataDirty = true;
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.mouseChildren = true;
             this.medalIcon.addEventListener(MouseEvent.ROLL_OVER,this.onMedalRollOver);
@@ -67,7 +70,8 @@ package net.wg.gui.lobby.battleResults
             this.medalIcon.addEventListener(MouseEvent.CLICK,this.onMedalClick);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.medalIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onMedalRollOver);
             this.medalIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onMedalRollOut);
@@ -76,7 +80,8 @@ package net.wg.gui.lobby.battleResults
             this.vehicleIcon.dispose();
         }
         
-        private function onMedalRollOver(param1:MouseEvent) : void {
+        private function onMedalRollOver(param1:MouseEvent) : void
+        {
             var _loc2_:Array = null;
             var _loc3_:uint = 0;
             if(data.achievements.length > 0)
@@ -92,39 +97,44 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             this.fakeFocusIndicator.gotoAndPlay("over");
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             super.handleMouseRollOut(param1);
             this.fakeFocusIndicator.gotoAndPlay("out");
         }
         
-        private function onMedalRollOut(param1:MouseEvent) : void {
+        private function onMedalRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onMedalClick(param1:MouseEvent) : void {
+        private function onMedalClick(param1:MouseEvent) : void
+        {
             this.handleMouseRelease(param1);
         }
         
-        override protected function handleMouseRelease(param1:MouseEvent) : void {
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
             var _loc2_:Object = null;
             if((App.utils.commons.isRightButton(param1)) && (this.data))
             {
-                _loc2_ = {
-                    "uid":data.playerId,
-                    "userName":data.userName,
-                    "himself":data.isSelf
-                };
+                _loc2_ = {"uid":data.playerId,
+                "userName":data.userName,
+                "himself":data.isSelf
+            };
             App.contextMenuMgr.showUserContextMenu(this,_loc2_,new BattleResultsCIGenerator(data.isOwnSquad));
         }
         super.handleMouseRelease(param1);
     }
     
-    private function getDimmFilter() : ColorMatrixFilter {
+    private function getDimmFilter() : ColorMatrixFilter
+    {
         var _loc1_:ColorMatrixFilter = new ColorMatrixFilter();
         var _loc2_:Array = [0.4,0,0,0,0];
         var _loc3_:Array = [0,0.4,0,0,0];
@@ -139,7 +149,8 @@ package net.wg.gui.lobby.battleResults
         return _loc1_;
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         var _loc1_:IColorScheme = null;
         var _loc2_:* = 0;
         var _loc3_:* = NaN;
@@ -187,13 +198,12 @@ package net.wg.gui.lobby.battleResults
                     this.resourceIcon.visible = true;
                     this.resourceLbl.text = data.resourceCount;
                 }
-                this.playerName.userVO = new UserVO({
-                    "fullName":data.playerFullName,
-                    "userName":data.playerName,
-                    "clanAbbrev":data.playerClan,
-                    "region":data.playerRegion,
-                    "igrType":data.playerIgrType
-                });
+                this.playerName.userVO = new UserVO({"fullName":data.playerFullName,
+                "userName":data.playerName,
+                "clanAbbrev":data.playerClan,
+                "region":data.playerRegion,
+                "igrType":data.playerIgrType
+            });
             this.playerName.textColor = _loc1_.rgb;
             this.vehicleIcon.source = data.tankIcon?data.tankIcon:this.vehicleIcon.sourceAlt;
             this.vehicleName.text = data.vehicleName;
@@ -252,7 +262,8 @@ package net.wg.gui.lobby.battleResults
     this.mouseChildren = true;
 }
 
-private function getColorForAlias(param1:String, param2:Number) : Number {
+private function getColorForAlias(param1:String, param2:Number) : Number
+{
     var alias:String = param1;
     var defaultColor:Number = param2;
     var result:Number = undefined;

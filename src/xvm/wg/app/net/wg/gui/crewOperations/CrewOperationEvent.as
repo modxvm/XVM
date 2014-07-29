@@ -5,7 +5,8 @@ package net.wg.gui.crewOperations
     public class CrewOperationEvent extends Event
     {
         
-        public function CrewOperationEvent(param1:String, param2:String, param3:Boolean = false, param4:Boolean = false) {
+        public function CrewOperationEvent(param1:String, param2:String, param3:Boolean = false, param4:Boolean = false)
+        {
             super(param1,param3,param4);
             this.operationName = param2;
         }
@@ -14,11 +15,13 @@ package net.wg.gui.crewOperations
         
         public var operationName:String;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new CrewOperationEvent(type,this.operationName,bubbles,cancelable);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("CrewOperationEvent","type","bubbles","cancelable","eventPhase");
         }
     }

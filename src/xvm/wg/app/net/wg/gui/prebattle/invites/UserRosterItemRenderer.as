@@ -10,7 +10,8 @@ package net.wg.gui.prebattle.invites
     public class UserRosterItemRenderer extends SoundListItemRenderer
     {
         
-        public function UserRosterItemRenderer() {
+        public function UserRosterItemRenderer()
+        {
             super();
             toggle = true;
             selectable = true;
@@ -25,17 +26,20 @@ package net.wg.gui.prebattle.invites
         
         public var voiceWave:VoiceWave;
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             App.toolTipMgr.show(data.displayName);
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             super.handleMouseRollOut(param1);
             App.toolTipMgr.hide();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(this.focusIndicatorA)
             {
                 focusIndicator = this.focusIndicatorA;
@@ -45,7 +49,8 @@ package net.wg.gui.prebattle.invites
             this.voiceWave.validateNow();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc2_:Point = null;
             var _loc1_:Boolean = (isInvalid("update_data")) && (data);
             if((_loc1_) && (enabled))
@@ -66,7 +71,8 @@ package net.wg.gui.prebattle.invites
             }
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1 == null)
             {
                 this.visible = false;
@@ -80,12 +86,14 @@ package net.wg.gui.prebattle.invites
             }
         }
         
-        override public function set label(param1:String) : void {
+        override public function set label(param1:String) : void
+        {
             var param1:String = this.cutText(param1);
             super.label = param1;
         }
         
-        private function afterSetData() : void {
+        private function afterSetData() : void
+        {
             if(this.status == null)
             {
                 return;
@@ -141,7 +149,8 @@ package net.wg.gui.prebattle.invites
             invalidate();
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             if(data == null)
             {
                 return;
@@ -184,13 +193,15 @@ package net.wg.gui.prebattle.invites
             super.updateAfterStateChange();
         }
         
-        protected function updateVoiceWave() : void {
+        protected function updateVoiceWave() : void
+        {
             this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
             this.voiceWave.setMuted(MessengerUtils.isMuted(data));
             this.voiceWave.validateNow();
         }
         
-        private function cutText(param1:String) : String {
+        private function cutText(param1:String) : String
+        {
             var _loc2_:String = null;
             var _loc3_:* = 0;
             textField.text = param1;

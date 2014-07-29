@@ -9,14 +9,16 @@ package net.wg.gui.components.common.video.advanced
     public class KeyboardController extends AbstractPlayerController
     {
         
-        public function KeyboardController(param1:SimpleVideoPlayer) {
+        public function KeyboardController(param1:SimpleVideoPlayer)
+        {
             super(param1);
             videoPlayer.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
         }
         
         private static var VOLUME_STEP:Number = 0.01;
         
-        private function handleInput(param1:InputEvent) : void {
+        private function handleInput(param1:InputEvent) : void
+        {
             var _loc2_:* = false;
             var _loc3_:InputDetails = param1.details;
             switch(_loc3_.navEquivalent)
@@ -50,7 +52,8 @@ package net.wg.gui.components.common.video.advanced
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             videoPlayer.removeEventListener(InputEvent.INPUT,this.handleInput);
             super.onDispose();
         }

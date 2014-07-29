@@ -17,7 +17,8 @@ package net.wg.gui.prebattle.company
     public class CompaniesScrollingList extends ScrollingListEx
     {
         
-        public function CompaniesScrollingList() {
+        public function CompaniesScrollingList()
+        {
             super();
             tabEnabled = true;
             focusable = true;
@@ -34,7 +35,8 @@ package net.wg.gui.prebattle.company
         
         private var isItemSelected:Boolean = false;
         
-        private function buttonDoubleClickHandler(param1:ListEventEx) : void {
+        private function buttonDoubleClickHandler(param1:ListEventEx) : void
+        {
             var _loc2_:CompanyEvent = null;
             if(param1.buttonIdx == MouseEventEx.LEFT_BUTTON)
             {
@@ -44,7 +46,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        public function get isOpenedState() : Boolean {
+        public function get isOpenedState() : Boolean
+        {
             var _loc3_:CompanyListItemRenderer = null;
             var _loc1_:int = _renderers.length;
             var _loc2_:* = 0;
@@ -60,11 +63,13 @@ package net.wg.gui.prebattle.company
             return false;
         }
         
-        public function updateRenderer() : void {
+        public function updateRenderer() : void
+        {
             refreshData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             App.utils.scheduler.cancelTask(this.updateRenderer);
             this.removeEventListener(FocusEvent.FOCUS_OUT,this.focusOutHandler);
@@ -74,7 +79,8 @@ package net.wg.gui.prebattle.company
             App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.clickHandler);
         }
         
-        private function clickHandler(param1:MouseEvent) : void {
+        private function clickHandler(param1:MouseEvent) : void
+        {
             var _loc2_:ScrollBar = null;
             if((scrollBar) && (scrollBar.hitTestPoint(param1.stageX,param1.stageY)))
             {
@@ -90,7 +96,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        public function unselectedRenderers() : void {
+        public function unselectedRenderers() : void
+        {
             var _loc3_:CompanyListItemRenderer = null;
             this.isItemSelected = false;
             var _loc1_:int = _renderers.length;
@@ -103,7 +110,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        private function buttonClickHandler(param1:MouseEvent) : void {
+        private function buttonClickHandler(param1:MouseEvent) : void
+        {
             if(param1.target is CompaniesScrollingList)
             {
                 this.isItemSelected = false;
@@ -111,24 +119,29 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        private function selectedItemHandler(param1:CompanyEvent) : void {
+        private function selectedItemHandler(param1:CompanyEvent) : void
+        {
             this.isItemSelected = param1.isSelected;
         }
         
-        public function set setIndexCompany(param1:uint) : void {
+        public function set setIndexCompany(param1:uint) : void
+        {
             this._setIndexCompany = int(param1);
         }
         
-        private function isShowPlayersList() : Boolean {
+        private function isShowPlayersList() : Boolean
+        {
             return !(this._setIndexCompany == -1) && this._setIndexCompany >= _scrollPosition && this._setIndexCompany <= _scrollPosition + _totalRenderers;
         }
         
-        private function focusOutHandler(param1:FocusEvent) : void {
+        private function focusOutHandler(param1:FocusEvent) : void
+        {
             this.isItemSelected = false;
             App.utils.scheduler.scheduleTask(this.updateRenderer,110);
         }
         
-        override protected function populateData(param1:Array) : void {
+        override protected function populateData(param1:Array) : void
+        {
             var _loc5_:CompanyListItemRenderer = null;
             var _loc6_:* = 0;
             var _loc7_:* = false;
@@ -162,7 +175,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.handled)
             {
                 return;

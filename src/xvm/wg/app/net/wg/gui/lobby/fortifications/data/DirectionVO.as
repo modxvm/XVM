@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class DirectionVO extends DAAPIDataClass
     {
         
-        public function DirectionVO(param1:Object) {
+        public function DirectionVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -23,11 +24,13 @@ package net.wg.gui.lobby.fortifications.data
         
         public var buildings:Array;
         
-        public function get hasBuildings() : Boolean {
+        public function get hasBuildings() : Boolean
+        {
             return (this.buildings) && this.buildings.length > 0;
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:Object = null;
             var _loc5_:BuildingVO = null;
@@ -45,12 +48,14 @@ package net.wg.gui.lobby.fortifications.data
             return true;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeBuildings();
             super.onDispose();
         }
         
-        private function disposeBuildings() : void {
+        private function disposeBuildings() : void
+        {
             var _loc1_:BuildingVO = null;
             if(this.buildings)
             {

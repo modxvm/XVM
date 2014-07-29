@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class ModuleInfoEvent extends Event
     {
         
-        public function ModuleInfoEvent(param1:String, param2:String) {
+        public function ModuleInfoEvent(param1:String, param2:String)
+        {
             super(param1,true,true);
             this.id = param2;
         }
@@ -14,7 +15,8 @@ package net.wg.gui.events
         
         public var id:String;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new ModuleInfoEvent(type,this.id);
         }
     }

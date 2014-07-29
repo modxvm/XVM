@@ -3,7 +3,8 @@ package net.wg.gui.notification.constants
     public class ButtonState extends Object
     {
         
-        public function ButtonState() {
+        public function ButtonState()
+        {
             super();
         }
         

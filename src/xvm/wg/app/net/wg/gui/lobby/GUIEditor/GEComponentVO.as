@@ -6,7 +6,8 @@ package net.wg.gui.lobby.GUIEditor
     public class GEComponentVO extends DAAPIDataClass
     {
         
-        public function GEComponentVO(param1:Object) {
+        public function GEComponentVO(param1:Object)
+        {
             super(param1);
         }
         

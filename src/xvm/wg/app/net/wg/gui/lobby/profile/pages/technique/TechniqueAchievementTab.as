@@ -11,11 +11,13 @@ package net.wg.gui.lobby.profile.pages.technique
     public class TechniqueAchievementTab extends ResizableContent
     {
         
-        public function TechniqueAchievementTab() {
+        public function TechniqueAchievementTab()
+        {
             super();
         }
         
-        private static function isHasAchievements(param1:Array) : Boolean {
+        private static function isHasAchievements(param1:Array) : Boolean
+        {
             var _loc2_:Array = null;
             for each(_loc2_ in param1)
             {
@@ -35,7 +37,8 @@ package net.wg.gui.lobby.profile.pages.technique
         
         public var listBg:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.warningTextField.autoSize = TextFieldAutoSize.LEFT;
             this.warningTextField.text = PROFILE.SECTION_TECHNIQUE_AWARDS_NOACHIEVEMENTS;
@@ -44,13 +47,15 @@ package net.wg.gui.lobby.profile.pages.technique
             this.getPaneContent().gapBetweenBlocks = 6;
         }
         
-        override protected function applyResizing() : void {
+        override protected function applyResizing() : void
+        {
             super.applyResizing();
             this.scrollPane.setSize(currentDimension.x - this.scrollPane.x,currentDimension.y - this.scrollPane.y);
             this.listBg.height = currentDimension.y - this.listBg.y;
         }
         
-        override public function update(param1:Object) : void {
+        override public function update(param1:Object) : void
+        {
             var _loc3_:Array = null;
             var _loc2_:ProfileVehicleDossierVO = ProfileVehicleDossierVO(param1);
             if(this._data != _loc2_)
@@ -79,11 +84,13 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        private function getPaneContent() : AwardsMainContainer {
+        private function getPaneContent() : AwardsMainContainer
+        {
             return AwardsMainContainer(this.scrollPane.target);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.scrollPane)
             {
                 this.scrollPane.dispose();

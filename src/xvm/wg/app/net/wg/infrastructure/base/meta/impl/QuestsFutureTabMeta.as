@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class QuestsFutureTabMeta extends BaseDAAPIComponent
     {
         
-        public function QuestsFutureTabMeta() {
+        public function QuestsFutureTabMeta()
+        {
             super();
         }
     }

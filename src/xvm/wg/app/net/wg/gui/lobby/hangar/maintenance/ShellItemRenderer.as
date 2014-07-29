@@ -29,7 +29,8 @@ package net.wg.gui.lobby.hangar.maintenance
     public class ShellItemRenderer extends SoundListItemRenderer
     {
         
-        public function ShellItemRenderer() {
+        public function ShellItemRenderer()
+        {
             super();
             this.select.handleScroll = false;
             soundType = "shellItemRenderer";
@@ -73,7 +74,8 @@ package net.wg.gui.lobby.hangar.maintenance
         
         public var actionPrice:ActionPrice;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:IEventCollector = App.utils.events;
             _loc1_.removeEvent(this.countSlider,SliderEvent.VALUE_CHANGE,this.onSliderValueChange);
             _loc1_.removeEvent(this.countSlider,MouseEvent.ROLL_OVER,this.onRollOut);
@@ -107,7 +109,8 @@ package net.wg.gui.lobby.hangar.maintenance
             super.onDispose();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             var _loc2_:IEventCollector = App.utils.events;
             if(this.shell)
             {
@@ -121,7 +124,8 @@ package net.wg.gui.lobby.hangar.maintenance
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             focusTarget = this.select;
             _focusable = tabEnabled = tabChildren = mouseChildren = true;
@@ -144,7 +148,8 @@ package net.wg.gui.lobby.hangar.maintenance
             _loc1_.addEvent(this,MouseEvent.CLICK,this.onClick);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:ILocale = null;
             var _loc2_:ActionPriceVO = null;
             super.draw();
@@ -214,7 +219,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function updateShellsPrice() : void {
+        private function updateShellsPrice() : void
+        {
             var _loc1_:int = this.shell.buyShellsCount;
             var _loc2_:* = 0;
             var _loc3_:* = "";
@@ -263,11 +269,13 @@ package net.wg.gui.lobby.hangar.maintenance
             dispatchEvent(new ShellRendererEvent(ShellRendererEvent.TOTAL_PRICE_CHANGED));
         }
         
-        private function get shell() : ShellVO {
+        private function get shell() : ShellVO
+        {
             return data as ShellVO;
         }
         
-        private function onSliderValueChange(param1:SliderEvent) : void {
+        private function onSliderValueChange(param1:SliderEvent) : void
+        {
             App.toolTipMgr.hide();
             if(this.countStepper.value != this.countSlider.value)
             {
@@ -275,21 +283,24 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function onStepperValueChange(param1:IndexEvent) : void {
+        private function onStepperValueChange(param1:IndexEvent) : void
+        {
             if(this.countStepper.value != this.countSlider.value)
             {
                 this.shell.userCount = this.countSlider.value = this.countStepper.value;
             }
         }
         
-        private function onShellCurrencyChanged(param1:ListEvent) : void {
+        private function onShellCurrencyChanged(param1:ListEvent) : void
+        {
             this.price.icon = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
             this.actionPrice.ico = this.toBuyDropdown.selectedIndex == 0?IconsTypes.CREDITS:IconsTypes.GOLD;
             this.shell.currency = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
             this.onUserCountChange();
         }
         
-        private function onShellOrderChange(param1:ListEvent) : void {
+        private function onShellOrderChange(param1:ListEvent) : void
+        {
             if(this.select.selectedIndex == -1 || this.shell.id == this.shell.list[this.select.selectedIndex].id)
             {
                 return;
@@ -297,7 +308,8 @@ package net.wg.gui.lobby.hangar.maintenance
             dispatchEvent(new ShellRendererEvent(ShellRendererEvent.CHANGE_ORDER,this.shell,this.shell.list[this.select.selectedIndex]));
         }
         
-        private function onUserCountChange(param1:ShellRendererEvent = null) : void {
+        private function onUserCountChange(param1:ShellRendererEvent = null) : void
+        {
             this.countSlider.maximum = this.countStepper.maximum = this.shell.maxAmmo;
             this.countSlider.snapInterval = this.countStepper.stepSize = this.shell.step;
             this.countSlider.value = this.shell.userCount;
@@ -308,15 +320,18 @@ package net.wg.gui.lobby.hangar.maintenance
             this.updateShellsPrice();
         }
         
-        private function onRollOver(param1:MouseEvent = null) : void {
+        private function onRollOver(param1:MouseEvent = null) : void
+        {
             App.toolTipMgr.showSpecial(Tooltips.TECH_MAIN_SHELL,null,data.id,data.prices,data.inventoryCount,data.count);
         }
         
-        private function onRollOut(param1:MouseEvent) : void {
+        private function onRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onClick(param1:MouseEvent) : void {
+        private function onClick(param1:MouseEvent) : void
+        {
             var _loc2_:MouseEventEx = null;
             App.toolTipMgr.hide();
             if(param1 is MouseEventEx)

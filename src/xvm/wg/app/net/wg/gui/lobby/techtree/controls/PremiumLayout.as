@@ -10,13 +10,15 @@ package net.wg.gui.lobby.techtree.controls
     public class PremiumLayout extends UIComponent
     {
         
-        public function PremiumLayout() {
+        public function PremiumLayout()
+        {
             super();
         }
         
         public static var PREMIUM_LAYOUT_SOURCE:String = "PremiumLayoutSkinned";
         
-        public static function show(param1:ResearchItems) : PremiumLayout {
+        public static function show(param1:ResearchItems) : PremiumLayout
+        {
             var _loc2_:PremiumLayout = App.utils.classFactory.getComponent(PREMIUM_LAYOUT_SOURCE,PremiumLayout);
             if(_loc2_ != null)
             {
@@ -38,11 +40,13 @@ package net.wg.gui.lobby.techtree.controls
         
         public var background:Sprite;
         
-        public function get context() : ResearchItems {
+        public function get context() : ResearchItems
+        {
             return this._context;
         }
         
-        public function set context(param1:ResearchItems) : void {
+        public function set context(param1:ResearchItems) : void
+        {
             if(this._context == param1)
             {
                 return;
@@ -51,16 +55,19 @@ package net.wg.gui.lobby.techtree.controls
             invalidate(TTInvalidationType.NATION,TTInvalidationType.DESCRIPTION);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._context = null;
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             super.draw();

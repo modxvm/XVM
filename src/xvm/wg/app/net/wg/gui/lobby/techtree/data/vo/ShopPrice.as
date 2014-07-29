@@ -7,7 +7,8 @@ package net.wg.gui.lobby.techtree.data.vo
     public class ShopPrice extends Object implements IValueObject
     {
         
-        public function ShopPrice(param1:Number = 0, param2:Number = 0, param3:Object = null) {
+        public function ShopPrice(param1:Number = 0, param2:Number = 0, param3:Object = null)
+        {
             super();
             this._credits = param1;
             if(this._credits > 0)
@@ -40,27 +41,33 @@ package net.wg.gui.lobby.techtree.data.vo
         
         private var _goldLabel:String;
         
-        public function get credits() : Number {
+        public function get credits() : Number
+        {
             return this._credits;
         }
         
-        public function get creditsLabel() : String {
+        public function get creditsLabel() : String
+        {
             return this._creditsLabel;
         }
         
-        public function get gold() : Number {
+        public function get gold() : Number
+        {
             return this._gold;
         }
         
-        public function get goldLabel() : String {
+        public function get goldLabel() : String
+        {
             return this._goldLabel;
         }
         
-        public function get actionPriceDataVo() : ActionPriceVO {
+        public function get actionPriceDataVo() : ActionPriceVO
+        {
             return this._actionPriceDataVo;
         }
         
-        public function fromArray(param1:Array, param2:ILocale) : void {
+        public function fromArray(param1:Array, param2:ILocale) : void
+        {
             if(param1.length > 1)
             {
                 this._credits = isNaN(param1[0])?0:param1[0];
@@ -71,7 +78,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function fromObject(param1:Object, param2:ILocale) : void {
+        public function fromObject(param1:Object, param2:ILocale) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -92,7 +100,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[ShopPrice: credits = " + this._credits + ", gold = " + this._gold + ", actionPriceDataVo = " + this._actionPriceDataVo + "]";
         }
     }

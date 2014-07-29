@@ -11,7 +11,8 @@ package net.wg.gui.lobby.store
     public class StoreHelper extends Object
     {
         
-        public function StoreHelper() {
+        public function StoreHelper()
+        {
             super();
             if(App.instance)
             {
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.store
         
         private static var DEFAULT_FRAME_IDX:uint = 1;
         
-        public static function getInstance() : StoreHelper {
+        public static function getInstance() : StoreHelper
+        {
             if(ms_instance == null)
             {
                 ms_instance = new StoreHelper();
@@ -31,7 +33,8 @@ package net.wg.gui.lobby.store
             return ms_instance;
         }
         
-        public function updateCountFields(param1:TextField, param2:TextField, param3:StoreTableData) : void {
+        public function updateCountFields(param1:TextField, param2:TextField, param3:StoreTableData) : void
+        {
             var _loc4_:ILocale = null;
             if(App.instance)
             {
@@ -55,7 +58,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        public function initModuleIconAsDefault(param1:ModuleIcon) : void {
+        public function initModuleIconAsDefault(param1:ModuleIcon) : void
+        {
             if(param1)
             {
                 param1.moduleType.gotoAndStop(DEFAULT_FRAME_IDX);
@@ -63,7 +67,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        public function initVehicleIcon(param1:TankIcon, param2:StoreTableData) : void {
+        public function initVehicleIcon(param1:TankIcon, param2:StoreTableData) : void
+        {
             if(param1)
             {
                 param1.nation = param2.nation;

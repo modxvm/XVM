@@ -5,7 +5,8 @@ package net.wg.data.VO
     public class ProgressElementVO extends DAAPIDataClass
     {
         
-        public function ProgressElementVO(param1:Object) {
+        public function ProgressElementVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -27,75 +28,93 @@ package net.wg.data.VO
         
         private var _showDone:Boolean = false;
         
-        public function get progrTooltip() : Object {
+        public function get progrTooltip() : Object
+        {
             return this._progrTooltip;
         }
         
-        public function set progrTooltip(param1:Object) : void {
+        public function set progrTooltip(param1:Object) : void
+        {
             this._progrTooltip = param1;
         }
         
-        public function get progrBarType() : String {
+        public function get progrBarType() : String
+        {
             return this._progrBarType;
         }
         
-        public function set progrBarType(param1:String) : void {
+        public function set progrBarType(param1:String) : void
+        {
             this._progrBarType = param1;
         }
         
-        public function get maxProgrVal() : Number {
+        public function get maxProgrVal() : Number
+        {
             return this._maxProgrVal;
         }
         
-        public function set maxProgrVal(param1:Number) : void {
+        public function set maxProgrVal(param1:Number) : void
+        {
             this._maxProgrVal = param1;
         }
         
-        public function get currentProgrVal() : Number {
+        public function get currentProgrVal() : Number
+        {
             return this._currentProgrVal;
         }
         
-        public function set currentProgrVal(param1:Number) : void {
+        public function set currentProgrVal(param1:Number) : void
+        {
             this._currentProgrVal = param1;
         }
         
-        public function get description() : String {
+        public function get description() : String
+        {
             return this._description;
         }
         
-        public function set description(param1:String) : void {
+        public function set description(param1:String) : void
+        {
             this._description = param1;
         }
         
-        public function get progressDiff() : String {
+        public function get progressDiff() : String
+        {
             return this._progressDiff;
         }
         
-        public function set progressDiff(param1:String) : void {
+        public function set progressDiff(param1:String) : void
+        {
             this._progressDiff = param1;
         }
         
-        public function get linkage() : String {
+        public function get linkage() : String
+        {
             return this._linkage;
         }
         
-        public function set linkage(param1:String) : void {
+        public function set linkage(param1:String) : void
+        {
             this._linkage = param1;
         }
         
-        public function get progrIndex() : int {
+        public function get progrIndex() : int
+        {
             return this._progrIndex;
         }
         
-        public function set progrIndex(param1:int) : void {
+        public function set progrIndex(param1:int) : void
+        {
             this._progrIndex = param1;
         }
         
-        public function get showDone() : Boolean {
+        public function get showDone() : Boolean
+        {
             return this._showDone;
         }
         
-        public function set showDone(param1:Boolean) : void {
+        public function set showDone(param1:Boolean) : void
+        {
             this._showDone = param1;
         }
     }

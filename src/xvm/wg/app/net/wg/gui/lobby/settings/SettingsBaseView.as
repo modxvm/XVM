@@ -11,7 +11,8 @@ package net.wg.gui.lobby.settings
     public class SettingsBaseView extends UIComponent implements IViewStackContent, ISettingsBase
     {
         
-        public function SettingsBaseView() {
+        public function SettingsBaseView()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.lobby.settings
         
         protected var _viewId:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this._data)
             {
@@ -27,7 +29,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        protected function trySetLabel(param1:String, param2:String = "") : void {
+        protected function trySetLabel(param1:String, param2:String = "") : void
+        {
             var _loc3_:String = null;
             var _loc4_:LabelControl = null;
             var _loc5_:TextField = null;
@@ -61,7 +64,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             this._viewId = param1.id;
             this._data = param1.data;
             if(this.initialized)
@@ -70,23 +74,28 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        protected function setData(param1:Object) : void {
+        protected function setData(param1:Object) : void
+        {
         }
         
-        public function updateDependentData() : void {
+        public function updateDependentData() : void
+        {
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this._data = null;
             this._viewId = null;
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

@@ -28,7 +28,8 @@ package net.wg.gui.lobby.GUIEditor.views
     public class InspectorView extends UIComponent implements IViewStackContent
     {
         
-        public function InspectorView() {
+        public function InspectorView()
+        {
             super();
         }
         
@@ -42,14 +43,17 @@ package net.wg.gui.lobby.GUIEditor.views
         
         private var selectedElement:DisplayObject = null;
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.sceneList.addEventListener(ListEventEx.ITEM_CLICK,this.onSceneListClickHandler);
             App.stage.addEventListener(MouseEvent.MOUSE_DOWN,this.onGlobalMouseDnHdlr);
@@ -59,7 +63,8 @@ package net.wg.gui.lobby.GUIEditor.views
             this.createBtnGetParent();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.cleanUpInstancesInList();
             this.disposeSelectRect();
             removeEventListener(ChangePropertyEvent.CHANGE_PROPERTY,this.onChangePropertyHandler);
@@ -76,7 +81,8 @@ package net.wg.gui.lobby.GUIEditor.views
             super.onDispose();
         }
         
-        private function createBtnGetParent() : void {
+        private function createBtnGetParent() : void
+        {
             if(this.btnGetParent == null)
             {
                 this.btnGetParent = App.utils.classFactory.getComponent("ButtonNormal",SoundButtonEx);
@@ -91,7 +97,8 @@ package net.wg.gui.lobby.GUIEditor.views
             }
         }
         
-        private function disposeSelectRect() : void {
+        private function disposeSelectRect() : void
+        {
             var _loc1_:Sprite = null;
             var _loc2_:DisplayObjectContainer = null;
             if(this.constraint != null)
@@ -107,7 +114,8 @@ package net.wg.gui.lobby.GUIEditor.views
             }
         }
         
-        private function cleanUpInstancesInList() : void {
+        private function cleanUpInstancesInList() : void
+        {
             var _loc2_:Object = null;
             var _loc1_:IDataProvider = this.sceneList.dataProvider;
             if(_loc1_ != null)
@@ -120,13 +128,15 @@ package net.wg.gui.lobby.GUIEditor.views
             }
         }
         
-        private function updateDisplayList() : void {
+        private function updateDisplayList() : void
+        {
             this.cleanUpInstancesInList();
             var _loc1_:Array = GUIEditorHelper.instance.getDisplayList(DisplayObjectContainer(App.instance));
             this.sceneList.dataProvider = new DataProvider(_loc1_);
         }
         
-        private function updatePropertiesListForElement(param1:Number) : void {
+        private function updatePropertiesListForElement(param1:Number) : void
+        {
             var _loc5_:ComponentPropertyVO = null;
             var _loc2_:DisplayObject = this.sceneList.dataProvider[param1].instance;
             var _loc3_:Array = [];
@@ -140,7 +150,8 @@ package net.wg.gui.lobby.GUIEditor.views
             this.propsList.dataProvider = new DataProvider(_loc3_);
         }
         
-        private function changeSelectRect(param1:DisplayObject) : void {
+        private function changeSelectRect(param1:DisplayObject) : void
+        {
             var _loc2_:Sprite = null;
             var _loc3_:DisplayObjectContainer = null;
             var _loc4_:Rectangle = null;
@@ -171,7 +182,8 @@ package net.wg.gui.lobby.GUIEditor.views
             }
         }
         
-        private function createSelectRect() : Sprite {
+        private function createSelectRect() : Sprite
+        {
             var _loc4_:uint = 0;
             var _loc5_:DisplayObject = null;
             var _loc1_:Sprite = new Sprite();
@@ -192,12 +204,14 @@ package net.wg.gui.lobby.GUIEditor.views
             return _loc1_;
         }
         
-        private function selectElementById(param1:int) : void {
+        private function selectElementById(param1:int) : void
+        {
             var _loc2_:DisplayObject = this.sceneList.dataProvider[param1].instance;
             this.selectElement(_loc2_);
         }
         
-        private function selectElement(param1:DisplayObject) : void {
+        private function selectElement(param1:DisplayObject) : void
+        {
             var _loc2_:Object = null;
             var _loc3_:* = NaN;
             this.updateDisplayList();
@@ -224,7 +238,8 @@ package net.wg.gui.lobby.GUIEditor.views
             }
         }
         
-        private function checkElementUnderCursor(param1:DisplayObject) : DisplayObject {
+        private function checkElementUnderCursor(param1:DisplayObject) : DisplayObject
+        {
             var _loc2_:Point = null;
             var _loc3_:Array = null;
             if(param1 as DisplayObjectContainer != null)
@@ -236,13 +251,15 @@ package net.wg.gui.lobby.GUIEditor.views
             return param1;
         }
         
-        private function onChangePropertyHandler(param1:ChangePropertyEvent) : void {
+        private function onChangePropertyHandler(param1:ChangePropertyEvent) : void
+        {
             var _loc2_:Object = this.sceneList.dataProvider[this.sceneList.selectedIndex];
             _loc2_.instance[param1.property.name] = param1.newValue;
             this.changeSelectRect(this.sceneList.dataProvider[this.sceneList.selectedIndex].instance);
         }
         
-        private function onGlobalMouseDnHdlr(param1:MouseEvent) : void {
+        private function onGlobalMouseDnHdlr(param1:MouseEvent) : void
+        {
             var _loc2_:DisplayObject = DisplayObject(App.instance);
             var _loc3_:DisplayObject = DisplayObject(param1.target);
             if(App.stage.mouseX < App.appWidth + _loc2_.x && App.stage.mouseY < App.appHeight + _loc2_.y && App.stage.mouseX >= _loc2_.x && App.stage.mouseY >= _loc2_.y)
@@ -256,21 +273,24 @@ package net.wg.gui.lobby.GUIEditor.views
             
         }
         
-        private function onSceneListClickHandler(param1:ListEventEx) : void {
+        private function onSceneListClickHandler(param1:ListEventEx) : void
+        {
             if(param1.index < this.sceneList.dataProvider.length)
             {
                 this.selectElementById(param1.index);
             }
         }
         
-        private function getParent(param1:MouseEvent) : void {
+        private function getParent(param1:MouseEvent) : void
+        {
             if(this.selectedElement.parent != null)
             {
                 this.selectElement(this.selectedElement.parent);
             }
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

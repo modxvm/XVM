@@ -10,7 +10,8 @@ package net.wg.gui.lobby.store.views
     public class ModuleView extends SimpleStoreMenuView
     {
         
-        public function ModuleView() {
+        public function ModuleView()
+        {
             super();
         }
         
@@ -30,13 +31,15 @@ package net.wg.gui.lobby.store.views
         
         private var _kindsArr:Array = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.inHangarChkBx.enableDynamicFrameUpdating();
             this.lockedChkBx.enableDynamicFrameUpdating();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:ViewUIElementVO = null;
             super.onDispose();
             if(this._kindsArr != null)
@@ -50,12 +53,14 @@ package net.wg.gui.lobby.store.views
             }
         }
         
-        override public function resetTemporaryHandlers() : void {
+        override public function resetTemporaryHandlers() : void
+        {
             resetHandlers(this.getKindsArray(),null);
             resetHandlers(getTagsArray(),null);
         }
         
-        override public function setViewData(param1:Array) : void {
+        override public function setViewData(param1:Array) : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:Array = null;
             var _loc4_:String = null;
@@ -74,7 +79,8 @@ package net.wg.gui.lobby.store.views
             }
         }
         
-        override public function getFilter() : Array {
+        override public function getFilter() : Array
+        {
             var _loc2_:IAssertable = null;
             var _loc1_:Array = getSelectedFilters(this.getKindsArray(),true,null);
             _loc1_.push(myVehicleRadioBtn.group.data);
@@ -89,12 +95,14 @@ package net.wg.gui.lobby.store.views
             return _loc1_;
         }
         
-        override protected function onKindChanged() : void {
+        override protected function onKindChanged() : void
+        {
             initializeControlsByHash(fittingType,this.getKindsArray(),"kindsMap","types");
             super.onKindChanged();
         }
         
-        override protected function onTagsArrayRequest() : Array {
+        override protected function onTagsArrayRequest() : Array
+        {
             if(getUIName() == STORE_TYPES.SHOP)
             {
                 return [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("onVehicle",onVehicleChkBx),new ViewUIElementVO("inHangar",this.inHangarChkBx)];
@@ -102,7 +110,8 @@ package net.wg.gui.lobby.store.views
             return [new ViewUIElementVO("onVehicle",onVehicleChkBx)];
         }
         
-        override protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void {
+        override protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void
+        {
             super.onVehicleFilterUpdated(param1,param2,param3);
             if(param1.length == 0)
             {
@@ -116,7 +125,8 @@ package net.wg.gui.lobby.store.views
             }
         }
         
-        private function getKindsArray() : Array {
+        private function getKindsArray() : Array
+        {
             if(this._kindsArr == null)
             {
                 this._kindsArr = [new ViewUIElementVO("vehicleGun",this.vehicleGunChkBx),new ViewUIElementVO("vehicleTurret",this.vehicleTurretChkBx),new ViewUIElementVO("vehicleEngine",this.vehicleEngineChkBx),new ViewUIElementVO("vehicleChassis",this.vehicleChassisChkBx),new ViewUIElementVO("vehicleRadio",this.vehicleRadioChkBx)];

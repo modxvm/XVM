@@ -19,7 +19,8 @@ package net.wg.gui.login.EULA
     public class EULADlg extends EULAMeta implements IEULAMeta
     {
         
-        public function EULADlg() {
+        public function EULADlg()
+        {
             super();
             isModal = true;
             isCentered = true;
@@ -30,19 +31,22 @@ package net.wg.gui.login.EULA
         
         public var textArea:TextAreaSimple = null;
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.applyButton);
         }
         
-        override public final function setViewSize(param1:Number, param2:Number) : void {
+        override public final function setViewSize(param1:Number, param2:Number) : void
+        {
             _originalWidth = width;
             _originalHeight = height;
             setActualSize(width,height);
             setActualScale(1,1);
         }
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             if(this.isAutoResize())
             {
                 this.updatePosition();
@@ -53,7 +57,8 @@ package net.wg.gui.login.EULA
             }
         }
         
-        public function as_setEULAText(param1:String) : void {
+        public function as_setEULAText(param1:String) : void
+        {
             var _loc5_:* = NaN;
             var _loc2_:* = "Incorrect invoking as_setEULAText!" + "Method must be call once time only!";
             var _loc3_:IAssertable = App.utils.asserter;
@@ -75,11 +80,13 @@ package net.wg.gui.login.EULA
             }
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             constraints = new Constraints(this,ConstrainMode.REFLOW);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             var _loc1_:Padding = window.contentPadding as Padding;
@@ -94,7 +101,8 @@ package net.wg.gui.login.EULA
             requestEULATextS();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.applyButton.removeEventListener(ButtonEvent.CLICK,this.onApplyBtnClickHandler);
             this.textArea.removeEventListener(TextEvent.LINK,this.onLinkClickHandler);
@@ -105,23 +113,28 @@ package net.wg.gui.login.EULA
             removeEventListener(InputEvent.INPUT,this.handleInput);
         }
         
-        protected function isAutoResize() : Boolean {
+        protected function isAutoResize() : Boolean
+        {
             return true;
         }
         
-        private function updatePosition() : void {
+        private function updatePosition() : void
+        {
             geometry.setPosition(window);
         }
         
-        private function onApplyBtnClickHandler(param1:ButtonEvent) : void {
+        private function onApplyBtnClickHandler(param1:ButtonEvent) : void
+        {
             onApplyS();
         }
         
-        private function onLinkClickHandler(param1:TextEvent) : void {
+        private function onLinkClickHandler(param1:TextEvent) : void
+        {
             onLinkClickS(param1.text);
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             super.handleInput(param1);
             if(param1.handled)
             {

@@ -14,7 +14,8 @@ package net.wg.gui.cyberSport.views
     public class AnimatedRosterSettingsView extends UIComponent
     {
         
-        public function AnimatedRosterSettingsView() {
+        public function AnimatedRosterSettingsView()
+        {
             this.tweens = new Vector.<Tween>();
             super();
         }
@@ -33,25 +34,30 @@ package net.wg.gui.cyberSport.views
         
         private var rightHash;
         
-        public function set animationDuration(param1:Number) : void {
+        public function set animationDuration(param1:Number) : void
+        {
             this._animationDuration = param1;
         }
         
-        public function get animationDuration() : Number {
+        public function get animationDuration() : Number
+        {
             return this._animationDuration;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.leftBtn.addEventListener(ButtonEvent.CLICK,this.leftBtn_buttonClickHandler);
             this.rightBtn.addEventListener(ButtonEvent.CLICK,this.rightBtn_buttonClickHandler);
         }
         
-        public function getModels() : Array {
+        public function getModels() : Array
+        {
             return [this.leftBtn.getModel(),this.rightBtn.getModel()];
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.leftBtn.addEventListener(ButtonEvent.CLICK,this.leftBtn_buttonClickHandler);
             this.rightBtn.addEventListener(ButtonEvent.CLICK,this.rightBtn_buttonClickHandler);
@@ -61,15 +67,18 @@ package net.wg.gui.cyberSport.views
             this.tweens.splice(0,this.tweens.length);
         }
         
-        private function leftBtn_buttonClickHandler(param1:ButtonEvent) : void {
+        private function leftBtn_buttonClickHandler(param1:ButtonEvent) : void
+        {
             dispatchEvent(new CSComponentEvent(CSComponentEvent.CLICK_SLOT_SETTINGS_BTN,[0,this.leftBtn.getModel()]));
         }
         
-        private function rightBtn_buttonClickHandler(param1:ButtonEvent) : void {
+        private function rightBtn_buttonClickHandler(param1:ButtonEvent) : void
+        {
             dispatchEvent(new CSComponentEvent(CSComponentEvent.CLICK_SLOT_SETTINGS_BTN,[1,this.rightBtn.getModel()]));
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.leftBtn.x = Math.round(this.leftBtn.x);
             this.leftBtn.y = Math.round(this.leftBtn.y);
@@ -79,12 +88,14 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        private function afterSetData() : void {
+        private function afterSetData() : void
+        {
             this.defType(this.leftBtn,this.leftHash);
             this.defType(this.rightBtn,this.rightHash);
         }
         
-        private function defType(param1:CSVehicleButton, param2:*) : void {
+        private function defType(param1:CSVehicleButton, param2:*) : void
+        {
             if(param2 is Object && (param2.hasOwnProperty("isReadyToFight")))
             {
                 this.setVehicle(param1,new VehicleVO(param2));
@@ -107,20 +118,24 @@ package net.wg.gui.cyberSport.views
             
         }
         
-        private function setVehicle(param1:CSVehicleButton, param2:VehicleVO) : void {
+        private function setVehicle(param1:CSVehicleButton, param2:VehicleVO) : void
+        {
             param1.setVehicle(param2);
         }
         
-        private function setRangeData(param1:CSVehicleButton, param2:*) : void {
+        private function setRangeData(param1:CSVehicleButton, param2:*) : void
+        {
             param1.setRangeData(param2);
         }
         
-        private function setDefaultState(param1:CSVehicleButton) : void {
+        private function setDefaultState(param1:CSVehicleButton) : void
+        {
             param1.reset();
             param1.selectState(true,CYBERSPORT.BUTTON_MEDALLION_ADDSLOTSETTINGS);
         }
         
-        public function setSelectedSettings(param1:int, param2:*) : void {
+        public function setSelectedSettings(param1:int, param2:*) : void
+        {
             if(param1 == 0)
             {
                 this.defType(this.leftBtn,param2);
@@ -131,40 +146,45 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        public function setData(param1:*, param2:*) : void {
+        public function setData(param1:*, param2:*) : void
+        {
             this.leftHash = param1;
             this.rightHash = param2;
             invalidateData();
         }
         
-        public function animationIn() : void {
+        public function animationIn() : void
+        {
             this.setAnimationRules({"x":0});
         }
         
-        public function animationOut() : void {
+        public function animationOut() : void
+        {
             this.setAnimationRules({"x":this.rightBtn.x});
         }
         
-        private function setAnimationRules(param1:Object) : void {
+        private function setAnimationRules(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
             }
             this.stopPreviousAnimation();
-            this.tweens = Vector.<Tween>([new Tween(this.animationDuration,this.leftBtn,param1,{
-                "paused":false,
-                "ease":Strong.easeOut,
-                "onComplete":this.callBack
-            })]);
+            this.tweens = Vector.<Tween>([new Tween(this.animationDuration,this.leftBtn,param1,{"paused":false,
+            "ease":Strong.easeOut,
+            "onComplete":this.callBack
+        })]);
     }
     
-    private function callBack(param1:Object) : void {
+    private function callBack(param1:Object) : void
+    {
         this.leftBtn.x = Math.round(this.leftBtn.x);
         this.leftBtn.y = Math.round(this.leftBtn.y);
         this.leftBtn.validateNow();
     }
     
-    private function stopPreviousAnimation() : void {
+    private function stopPreviousAnimation() : void
+    {
         var _loc1_:Tween = null;
         if(this.tweens)
         {

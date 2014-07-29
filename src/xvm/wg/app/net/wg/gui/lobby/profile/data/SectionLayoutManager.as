@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.data
     public class SectionLayoutManager extends Object
     {
         
-        public function SectionLayoutManager(param1:Number, param2:Number) {
+        public function SectionLayoutManager(param1:Number, param2:Number)
+        {
             this.store = new Vector.<LayoutItemInfo>();
             super();
             this.minH = param1;
@@ -22,7 +23,8 @@ package net.wg.gui.lobby.profile.data
         
         protected var isInitialized:Boolean;
         
-        public function setDimension(param1:Number, param2:Number) : void {
+        public function setDimension(param1:Number, param2:Number) : void
+        {
             var param2:Number = Math.max(this.minH,Math.min(this.maxH,param2));
             if(this.currentValue == param2)
             {
@@ -39,12 +41,14 @@ package net.wg.gui.lobby.profile.data
             this.isInitialized = true;
         }
         
-        protected function applyDimensionToItem(param1:int) : void {
+        protected function applyDimensionToItem(param1:int) : void
+        {
             var _loc2_:LayoutItemInfo = this.store[param1];
             _loc2_.item.y = Math.round(_loc2_.position * this.currentValue);
         }
         
-        public function registerComponents(... rest) : void {
+        public function registerComponents(... rest) : void
+        {
             var _loc3_:LayoutItemInfo = null;
             var _loc4_:DisplayObject = null;
             var _loc2_:uint = rest.length;
@@ -60,7 +64,8 @@ package net.wg.gui.lobby.profile.data
             }
         }
         
-        public function unRegisterComponent(param1:DisplayObject) : void {
+        public function unRegisterComponent(param1:DisplayObject) : void
+        {
             var _loc2_:int = this.store.indexOf(param1);
             if(_loc2_ != -1)
             {
@@ -68,7 +73,8 @@ package net.wg.gui.lobby.profile.data
             }
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.currentValue = 0;
             while(this.store.length > 0)
             {

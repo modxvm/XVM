@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ProfileAchievementSectionMeta extends ProfileSection
     {
         
-        public function ProfileAchievementSectionMeta() {
+        public function ProfileAchievementSectionMeta()
+        {
             super();
         }
     }

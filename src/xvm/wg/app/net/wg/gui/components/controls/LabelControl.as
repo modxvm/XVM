@@ -6,13 +6,15 @@ package net.wg.gui.components.controls
     public class LabelControl extends Label
     {
         
-        public function LabelControl() {
+        public function LabelControl()
+        {
             super();
         }
         
         protected var _textAlign:String = "none";
         
-        public function set textAlign(param1:String) : void {
+        public function set textAlign(param1:String) : void
+        {
             if(this._textAlign == param1)
             {
                 return;
@@ -21,11 +23,13 @@ package net.wg.gui.components.controls
             invalidateData();
         }
         
-        public function get textAlign() : String {
+        public function get textAlign() : String
+        {
             return this._textAlign;
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             var _loc1_:TextFormat = null;
             super.updateText();
             if(!(_text == null) && !(textField == null))

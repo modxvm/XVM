@@ -5,7 +5,8 @@ package net.wg.gui.components.common.waiting.events
     public class WaitingChangeVisibilityEvent extends Event
     {
         
-        public function WaitingChangeVisibilityEvent(param1:String) {
+        public function WaitingChangeVisibilityEvent(param1:String)
+        {
             super(param1,true,false);
         }
         

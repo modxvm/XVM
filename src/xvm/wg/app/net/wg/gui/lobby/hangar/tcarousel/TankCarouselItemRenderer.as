@@ -18,7 +18,8 @@ package net.wg.gui.lobby.hangar.tcarousel
     public class TankCarouselItemRenderer extends DragableListItemRenderer
     {
         
-        public function TankCarouselItemRenderer() {
+        public function TankCarouselItemRenderer()
+        {
             super();
             focusIndicator = this.focusIndicator1;
         }
@@ -85,7 +86,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         private var _slotPriceActionData:ActionPriceVO = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.vehicleIcon)
             {
                 this.vehicleIcon.dispose();
@@ -113,7 +115,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             super.onDispose();
         }
         
-        public function setDataVO(param1:VehicleCarouselVO) : void {
+        public function setDataVO(param1:VehicleCarouselVO) : void
+        {
             if(param1)
             {
                 this.dataVO = VehicleCarouselVO(param1);
@@ -146,11 +149,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG TankCarouselItemRenderer]";
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             useHandCursor = param1;
             if(this.buySlot)
@@ -159,11 +164,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        override public function get displayFocus() : Boolean {
+        override public function get displayFocus() : Boolean
+        {
             return _displayFocus;
         }
         
-        override public function set displayFocus(param1:Boolean) : void {
+        override public function set displayFocus(param1:Boolean) : void
+        {
             if(param1 == _displayFocus)
             {
                 return;
@@ -172,11 +179,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             changeFocus();
         }
         
-        public function get favorite() : Boolean {
+        public function get favorite() : Boolean
+        {
             return this._favorite;
         }
         
-        public function set favorite(param1:Boolean) : void {
+        public function set favorite(param1:Boolean) : void
+        {
             if(this._favorite == param1)
             {
                 return;
@@ -186,11 +195,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             invalidate();
         }
         
-        public function get buyTank() : Boolean {
+        public function get buyTank() : Boolean
+        {
             return this._buyTank;
         }
         
-        public function set buyTank(param1:Boolean) : void {
+        public function set buyTank(param1:Boolean) : void
+        {
             if(this._buyTank == param1)
             {
                 return;
@@ -201,11 +212,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             setState(!enabled?"disabled":"up");
         }
         
-        public function get buySlot() : Boolean {
+        public function get buySlot() : Boolean
+        {
             return this._buySlot;
         }
         
-        public function set buySlot(param1:Boolean) : void {
+        public function set buySlot(param1:Boolean) : void
+        {
             if(this._buySlot == param1)
             {
                 return;
@@ -216,22 +229,26 @@ package net.wg.gui.lobby.hangar.tcarousel
             setState(!enabled?"disabled":"up");
         }
         
-        public function get id() : Number {
+        public function get id() : Number
+        {
             return this._id;
         }
         
-        public function set id(param1:Number) : void {
+        public function set id(param1:Number) : void
+        {
             if(!isNaN(param1))
             {
                 this._id = param1;
             }
         }
         
-        public function get image() : String {
+        public function get image() : String
+        {
             return this._image;
         }
         
-        public function set image(param1:String) : void {
+        public function set image(param1:String) : void
+        {
             if(param1)
             {
                 this._image = param1;
@@ -240,11 +257,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        public function get nation() : Number {
+        public function get nation() : Number
+        {
             return this._nation;
         }
         
-        public function set nation(param1:Number) : void {
+        public function set nation(param1:Number) : void
+        {
             if(param1 >= 0)
             {
                 this._nation = param1;
@@ -253,11 +272,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        public function get level() : Number {
+        public function get level() : Number
+        {
             return this._level;
         }
         
-        public function set level(param1:Number) : void {
+        public function set level(param1:Number) : void
+        {
             if(param1 >= 1)
             {
                 this._level = param1;
@@ -266,11 +287,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        public function get stat() : String {
+        public function get stat() : String
+        {
             return this._stat;
         }
         
-        public function set stat(param1:String) : void {
+        public function set stat(param1:String) : void
+        {
             if(param1 != "")
             {
                 this._stat = param1;
@@ -279,18 +302,21 @@ package net.wg.gui.lobby.hangar.tcarousel
             invalidate();
         }
         
-        public function get current() : Number {
+        public function get current() : Number
+        {
             return this._current;
         }
         
-        public function set current(param1:Number) : void {
+        public function set current(param1:Number) : void
+        {
             if(param1 >= 0)
             {
                 this._current = param1;
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.soundType = SoundTypes.CAROUSEL_BTN;
             this.soundId = SoundManagerStates.CAROUSEL_CELL_BTN;
@@ -300,7 +326,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             var _loc2_:TextFormat = null;
             var _loc3_:Object = null;
@@ -389,7 +416,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.scaleX = this.scaleY = 1;
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             if((_selected) && !_empty && !this._buyTank && !this._buySlot)
             {
                 return Vector.<String>(["selected_",""]);
@@ -409,7 +437,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             return Vector.<String>([""]);
         }
         
-        private function getBgLable(param1:String) : String {
+        private function getBgLable(param1:String) : String
+        {
             var _loc5_:FrameLabel = null;
             var _loc2_:* = "ready";
             var _loc3_:Array = this.bg_switcher.currentLabels;
@@ -427,7 +456,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             return _loc2_;
         }
         
-        private function getStatColor(param1:String) : Object {
+        private function getStatColor(param1:String) : Object
+        {
             var _loc15_:GlowFilter = null;
             var _loc16_:DropShadowFilter = null;
             var _loc17_:DropShadowFilter = null;

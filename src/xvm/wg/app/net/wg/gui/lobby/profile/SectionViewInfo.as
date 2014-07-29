@@ -3,7 +3,8 @@ package net.wg.gui.lobby.profile
     public class SectionViewInfo extends Object
     {
         
-        public function SectionViewInfo() {
+        public function SectionViewInfo()
+        {
             super();
         }
         

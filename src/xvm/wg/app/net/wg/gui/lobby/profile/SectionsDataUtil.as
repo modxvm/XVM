@@ -6,7 +6,8 @@ package net.wg.gui.lobby.profile
     public class SectionsDataUtil extends Object
     {
         
-        public function SectionsDataUtil() {
+        public function SectionsDataUtil()
+        {
             this.aliasesByLinkage = new Dictionary(true);
             super();
             if(!this.linkageByAlias)
@@ -26,17 +27,20 @@ package net.wg.gui.lobby.profile
         
         private var aliasesByLinkage:Dictionary;
         
-        public function register(param1:String) : String {
+        public function register(param1:String) : String
+        {
             var _loc2_:String = this.linkageByAlias[param1];
             this.aliasesByLinkage[_loc2_] = param1;
             return _loc2_;
         }
         
-        public function getLinkageByAlias(param1:String) : String {
+        public function getLinkageByAlias(param1:String) : String
+        {
             return this.linkageByAlias[param1];
         }
         
-        public function getAliasByLinkage(param1:String) : String {
+        public function getAliasByLinkage(param1:String) : String
+        {
             return this.aliasesByLinkage[param1];
         }
     }

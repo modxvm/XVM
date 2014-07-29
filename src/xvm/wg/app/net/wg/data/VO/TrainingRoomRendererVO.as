@@ -3,7 +3,8 @@ package net.wg.data.VO
     public class TrainingRoomRendererVO extends UserVO
     {
         
-        public function TrainingRoomRendererVO(param1:Object) {
+        public function TrainingRoomRendererVO(param1:Object)
+        {
             super(param1);
         }
         

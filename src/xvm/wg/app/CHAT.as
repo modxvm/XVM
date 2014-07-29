@@ -1,9 +1,10 @@
-package 
+package
 {
     public class CHAT extends Object
     {
         
-        public function CHAT() {
+        public function CHAT()
+        {
             super();
         }
         

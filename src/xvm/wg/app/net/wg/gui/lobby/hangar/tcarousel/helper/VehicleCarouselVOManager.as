@@ -5,7 +5,8 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
     public class VehicleCarouselVOManager extends Object
     {
         
-        public function VehicleCarouselVOManager() {
+        public function VehicleCarouselVOManager()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
         
         private var _updatedData:Vector.<VehicleCarouselVO> = null;
         
-        public function clear() : void {
+        public function clear() : void
+        {
             if(this._vehiclesDataList)
             {
                 while(this._vehiclesDataList.length > 0)
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             this.clearDiffData();
         }
         
-        private function clearDiffData() : void {
+        private function clearDiffData() : void
+        {
             if(this._addedData)
             {
                 while(this._addedData.length > 0)
@@ -68,7 +71,8 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             }
         }
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             var _loc2_:String = null;
             if(!this._vehiclesDataListIndexes)
             {
@@ -88,7 +92,8 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             }
         }
         
-        public function updateData(param1:Object) : void {
+        public function updateData(param1:Object) : void
+        {
             var _loc2_:String = null;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
@@ -117,12 +122,14 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             }
         }
         
-        public function clearAndInitDynamicData() : void {
+        public function clearAndInitDynamicData() : void
+        {
             this.clearDiffData();
             this.initDynamicData();
         }
         
-        private function initDynamicData() : void {
+        private function initDynamicData() : void
+        {
             if(!this._addedData)
             {
                 this._addedData = new Vector.<VehicleCarouselVO>(0);
@@ -137,13 +144,15 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             }
         }
         
-        private function update(param1:Number, param2:Object) : void {
+        private function update(param1:Number, param2:Object) : void
+        {
             var _loc3_:VehicleCarouselVO = this._vehiclesDataList[param1];
             _loc3_.parsObj(param2);
             this._updatedData.push(_loc3_);
         }
         
-        private function add(param1:Object) : void {
+        private function add(param1:Object) : void
+        {
             var _loc2_:VehicleCarouselVO = new VehicleCarouselVO();
             var _loc3_:Number = _loc2_.parsObj(param1);
             this._vehiclesDataList.push(_loc2_);
@@ -151,14 +160,16 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             this._addedData.push(_loc2_);
         }
         
-        private function deleteByIndex(param1:Number) : void {
+        private function deleteByIndex(param1:Number) : void
+        {
             this._vehiclesDataListIndexes.splice(param1,1);
             var _loc2_:VehicleCarouselVO = this._vehiclesDataList[param1];
             this._vehiclesDataList.splice(param1,1);
             this._removedData.push(_loc2_);
         }
         
-        public function getVOByNum(param1:Number) : VehicleCarouselVO {
+        public function getVOByNum(param1:Number) : VehicleCarouselVO
+        {
             if(param1 < 0)
             {
                 return null;
@@ -170,7 +181,8 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             return null;
         }
         
-        public function getVehiclesLen() : Number {
+        public function getVehiclesLen() : Number
+        {
             if(this._vehiclesDataList)
             {
                 return this._vehiclesDataList.length;
@@ -178,15 +190,18 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             return 0;
         }
         
-        public function getAdded() : Vector.<VehicleCarouselVO> {
+        public function getAdded() : Vector.<VehicleCarouselVO>
+        {
             return this._addedData;
         }
         
-        public function getRemoved() : Vector.<VehicleCarouselVO> {
+        public function getRemoved() : Vector.<VehicleCarouselVO>
+        {
             return this._removedData;
         }
         
-        public function getUpdated() : Vector.<VehicleCarouselVO> {
+        public function getUpdated() : Vector.<VehicleCarouselVO>
+        {
             return this._updatedData;
         }
     }

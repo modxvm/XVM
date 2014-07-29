@@ -5,7 +5,8 @@ package net.wg.gui.lobby.techtree
     public class TechTreeEvent extends Event
     {
         
-        public function TechTreeEvent(param1:String, param2:int = -1, param3:int = -1, param4:uint = 0, param5:Boolean = true, param6:Boolean = false) {
+        public function TechTreeEvent(param1:String, param2:int = -1, param3:int = -1, param4:uint = 0, param5:Boolean = true, param6:Boolean = false)
+        {
             super(param1,param5,param6);
             this.primary = param2;
             this.index = param3;
@@ -42,11 +43,13 @@ package net.wg.gui.lobby.techtree
         
         public var entityType:uint = 0;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new TechTreeEvent(type,this.primary,this.index,this.entityType,bubbles,cancelable);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("TTEventTypes","type","primary","index","entityType","bubbles","cancelable");
         }
     }

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.techtree.data.vo
     public class NationDisplaySettings extends Object implements IValueObject
     {
         
-        public function NationDisplaySettings(param1:String = "", param2:Boolean = false) {
+        public function NationDisplaySettings(param1:String = "", param2:Boolean = false)
+        {
             super();
             this._nodeRendererName = param1;
             this._isLevelDisplayed = param2;
@@ -16,15 +17,18 @@ package net.wg.gui.lobby.techtree.data.vo
         
         private var _isLevelDisplayed:Boolean;
         
-        public function get nodeRendererName() : String {
+        public function get nodeRendererName() : String
+        {
             return this._nodeRendererName;
         }
         
-        public function get isLevelDisplayed() : Boolean {
+        public function get isLevelDisplayed() : Boolean
+        {
             return this._isLevelDisplayed;
         }
         
-        public function fromArray(param1:Array, param2:ILocale) : void {
+        public function fromArray(param1:Array, param2:ILocale) : void
+        {
             if(param1.length > 1)
             {
                 this._nodeRendererName = param1[0]?param1[0]:"";
@@ -32,7 +36,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function fromObject(param1:Object, param2:ILocale) : void {
+        public function fromObject(param1:Object, param2:ILocale) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -47,7 +52,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[NationDisplaySettings: nodeRendererName = " + this._nodeRendererName + ", isLevelDisplayed = " + this._isLevelDisplayed + " ]";
         }
     }

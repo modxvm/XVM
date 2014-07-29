@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class StatisticsLabelDataVO extends DAAPIDataClass
     {
         
-        public function StatisticsLabelDataVO(param1:Object) {
+        public function StatisticsLabelDataVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
         
         public var data:Object;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "data")
             {
                 this.parceData(param2);
@@ -22,7 +24,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             return this.hasOwnProperty(param1);
         }
         
-        protected function parceData(param1:Object) : void {
+        protected function parceData(param1:Object) : void
+        {
             this.data = param1;
         }
     }

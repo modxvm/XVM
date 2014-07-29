@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class ContextMenuEvent extends Event
     {
         
-        public function ContextMenuEvent(param1:String, param2:String = "", param3:Object = null, param4:Object = null, param5:Boolean = false, param6:Boolean = false) {
+        public function ContextMenuEvent(param1:String, param2:String = "", param3:Object = null, param4:Object = null, param5:Boolean = false, param6:Boolean = false)
+        {
             this.data = new Object();
             this.memberItemData = new Object();
             super(param1,param5,param6);
@@ -24,11 +25,13 @@ package net.wg.gui.events
         
         public var memberItemData:Object;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new ContextMenuEvent(type,this.id,this.data,this.memberItemData,bubbles,cancelable);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("ContextMenuEvent","type","bubbles","cancelable","eventPhase");
         }
     }

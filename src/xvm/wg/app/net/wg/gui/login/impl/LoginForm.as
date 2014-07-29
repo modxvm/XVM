@@ -21,7 +21,8 @@ package net.wg.gui.login.impl
     public class LoginForm extends UIComponent implements ILoginForm
     {
         
-        public function LoginForm() {
+        public function LoginForm()
+        {
             super();
         }
         
@@ -65,7 +66,8 @@ package net.wg.gui.login.impl
         
         private var _isIgrCredentialsReset:Boolean = false;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             addEventListener(InputEvent.INPUT,this.handleInput);
             this.server.dispose();
             this.loginField = null;
@@ -86,7 +88,8 @@ package net.wg.gui.login.impl
             super.onDispose();
         }
         
-        public function update(param1:Object, param2:Boolean) : void {
+        public function update(param1:Object, param2:Boolean) : void
+        {
             var _loc3_:String = null;
             if((param1 == this._login || param1 == this._pass) && (param2))
             {
@@ -109,7 +112,8 @@ package net.wg.gui.login.impl
             this._submit.enabled = this._login.text.length > 1;
         }
         
-        public function addChangeHandler(param1:Function) : void {
+        public function addChangeHandler(param1:Function) : void
+        {
             this._login.addEventListener(Event.CHANGE,param1);
             this._pass.addEventListener(Event.CHANGE,param1);
             this.server.addEventListener(Event.CHANGE,param1);
@@ -117,7 +121,8 @@ package net.wg.gui.login.impl
             this._rememberPwdCheckbox.addEventListener(Event.SELECT,this.onRememberPwdCheckboxToggle);
         }
         
-        public function removeChangeHandler(param1:Function) : void {
+        public function removeChangeHandler(param1:Function) : void
+        {
             this._login.removeEventListener(Event.CHANGE,param1);
             this._pass.removeEventListener(Event.CHANGE,param1);
             this.server.removeEventListener(Event.CHANGE,param1);
@@ -125,7 +130,8 @@ package net.wg.gui.login.impl
             this._rememberPwdCheckbox.removeEventListener(Event.SELECT,this.onRememberPwdCheckboxToggle);
         }
         
-        public function setDefaultValues(param1:String, param2:String, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void {
+        public function setDefaultValues(param1:String, param2:String, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void
+        {
             if(param5)
             {
                 this.igrWarning.visible = param3;
@@ -145,16 +151,16 @@ package net.wg.gui.login.impl
             this._recoveryLink.visible = param6;
         }
         
-        public function setServersList(param1:Array, param2:int) : void {
+        public function setServersList(param1:Array, param2:int) : void
+        {
             var _loc3_:Array = [];
             var _loc4_:uint = param1.length;
             var _loc5_:uint = 0;
             while(_loc5_ < _loc4_)
             {
-                _loc3_.push({
-                    "label":param1[_loc5_].label,
-                    "data":param1[_loc5_].data
-                });
+                _loc3_.push({"label":param1[_loc5_].label,
+                "data":param1[_loc5_].data
+            });
             _loc5_++;
         }
         if(_loc3_.length > this.server.menuRowCount)
@@ -170,83 +176,102 @@ package net.wg.gui.login.impl
         this.server.menuRowCount = Math.min(this.server.dataProvider.length,MAX_SERVER_ROW_COUNT);
     }
     
-    public function setErrorMessage(param1:String, param2:int) : void {
+    public function setErrorMessage(param1:String, param2:int) : void
+    {
         this.message.htmlText = param1;
         this.login.highlight = (param2 & ErrorStates.LOGIN_INVALID) == ErrorStates.LOGIN_INVALID;
         this.pass.highlight = (param2 & ErrorStates.PASSWORD_INVALID) == ErrorStates.PASSWORD_INVALID;
     }
     
-    public function setCapsLockState(param1:Boolean) : void {
+    public function setCapsLockState(param1:Boolean) : void
+    {
         this.capsLockIndicator.visible = param1;
     }
     
-    public function setKeyboardLang(param1:String) : void {
+    public function setKeyboardLang(param1:String) : void
+    {
         this.keyboardLang.text = param1;
     }
     
-    public function getSelectedServerName() : String {
+    public function getSelectedServerName() : String
+    {
         var _loc1_:Number = this.server.selectedIndex;
         var _loc2_:Object = this.server.dataProvider.requestItemAt(_loc1_);
         return String(_loc2_.data);
     }
     
-    public function get rememberPwdCheckbox() : CheckBox {
+    public function get rememberPwdCheckbox() : CheckBox
+    {
         return this._rememberPwdCheckbox;
     }
     
-    public function set rememberPwdCheckbox(param1:CheckBox) : void {
+    public function set rememberPwdCheckbox(param1:CheckBox) : void
+    {
         this._rememberPwdCheckbox = param1;
     }
     
-    public function get registerLink() : HyperLink {
+    public function get registerLink() : HyperLink
+    {
         return this._registerLink;
     }
     
-    public function set registerLink(param1:HyperLink) : void {
+    public function set registerLink(param1:HyperLink) : void
+    {
         this._registerLink = param1;
     }
     
-    public function get recoveryLink() : HyperLink {
+    public function get recoveryLink() : HyperLink
+    {
         return this._recoveryLink;
     }
     
-    public function set recoveryLink(param1:HyperLink) : void {
+    public function set recoveryLink(param1:HyperLink) : void
+    {
         this._recoveryLink = param1;
     }
     
-    public function get submit() : SoundButton {
+    public function get submit() : SoundButton
+    {
         return this._submit;
     }
     
-    public function set submit(param1:SoundButton) : void {
+    public function set submit(param1:SoundButton) : void
+    {
         this._submit = param1;
     }
     
-    public function get login() : TextInput {
+    public function get login() : TextInput
+    {
         return this._login;
     }
     
-    public function set login(param1:TextInput) : void {
+    public function set login(param1:TextInput) : void
+    {
         this._login = param1;
     }
     
-    public function get pass() : TextInput {
+    public function get pass() : TextInput
+    {
         return this._pass;
     }
     
-    public function set pass(param1:TextInput) : void {
+    public function set pass(param1:TextInput) : void
+    {
         this._pass = param1;
     }
     
-    public function get message() : TextField {
+    public function get message() : TextField
+    {
         return this._message;
     }
     
-    public function set message(param1:TextField) : void {
+    public function set message(param1:TextField) : void
+    {
         this._message = param1;
     }
     
-    override protected function configUI() : void {
+    override protected function configUI() : void
+    {
         super.configUI();
         this._message.styleSheet = App.utils.styleSheetManager.getRedHyperlinkCSS();
         this.server.menuWidth = App.globalVarsMgr.isDevelopmentS()?DEBUG_SERVER_LIST_SIZE:-1;
@@ -258,14 +283,16 @@ package net.wg.gui.login.impl
         addEventListener(InputEvent.INPUT,this.handleInput);
     }
     
-    private function onRememberPwdCheckboxToggle(param1:Event) : void {
+    private function onRememberPwdCheckboxToggle(param1:Event) : void
+    {
         if(this._isIgrCredentialsReset)
         {
             this.igrWarning.visible = this.rememberPwdCheckbox.selected;
         }
     }
     
-    override public function handleInput(param1:InputEvent) : void {
+    override public function handleInput(param1:InputEvent) : void
+    {
         if(param1.details.value == InputValue.KEY_DOWN)
         {
             this._lastDownKeyCode = param1.details.code;

@@ -7,7 +7,8 @@ package net.wg.infrastructure.base.meta.impl
     public class AbstractViewMeta extends UIComponent
     {
         
-        public function AbstractViewMeta() {
+        public function AbstractViewMeta()
+        {
             super();
         }
         
@@ -15,12 +16,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var unregisterFlashComponent:Function = null;
         
-        public function registerFlashComponentS(param1:IDAAPIModule, param2:String) : void {
+        public function registerFlashComponentS(param1:IDAAPIModule, param2:String) : void
+        {
             App.utils.asserter.assertNotNull(this.registerFlashComponent,"registerFlashComponent" + Errors.CANT_NULL);
             this.registerFlashComponent(param1,param2);
         }
         
-        public function unregisterFlashComponentS(param1:String) : void {
+        public function unregisterFlashComponentS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.unregisterFlashComponent,"unregisterFlashComponent" + Errors.CANT_NULL);
             this.unregisterFlashComponent(param1);
         }

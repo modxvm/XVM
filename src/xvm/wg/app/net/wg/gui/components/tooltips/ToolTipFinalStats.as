@@ -14,7 +14,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipFinalStats extends ToolTipSpecial
     {
         
-        public function ToolTipFinalStats() {
+        public function ToolTipFinalStats()
+        {
             super();
             this.headerTF = content.headerTF;
             this.infoTF = content.infoTF;
@@ -35,17 +36,20 @@ package net.wg.gui.components.tooltips
         
         private var efficiencyBlock:EfficiencyBlock = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             this.setData();
             updatePositions();
             super.redraw();
         }
         
-        private function setData() : void {
+        private function setData() : void
+        {
             var _loc1_:ToolTipFinalStatsVO = null;
             var _loc6_:ILocale = null;
             _loc1_ = new ToolTipFinalStatsVO(_data);
@@ -172,7 +176,8 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        private function hideInfo() : void {
+        private function hideInfo() : void
+        {
             if(this.infoTF)
             {
                 this.infoTF.x = 0;
@@ -182,7 +187,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        private function createCritPart(param1:String, param2:String, param3:Number) : Number {
+        private function createCritPart(param1:String, param2:String, param3:Number) : Number
+        {
             var _loc4_:EfficiencyCritsBlock = App.utils.classFactory.getComponent("EfficiencyCritsBlockUI",EfficiencyCritsBlock);
             content.addChild(_loc4_);
             _loc4_.setData(BATTLE_RESULTS.common_tooltip("crits/" + param1),param2);
@@ -197,14 +203,16 @@ package net.wg.gui.components.tooltips
             return param3;
         }
         
-        private function onIcoLoaded(param1:UILoaderEvent) : void {
+        private function onIcoLoaded(param1:UILoaderEvent) : void
+        {
             this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.onIcoLoaded);
             this.headerTF.x = this.icon.x + this.icon.width + contentMargin.left | 0;
             this.icon.alpha = this.disabled?0.3:1;
             updateSize();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:EfficiencyCritsBlock = null;
             if(this.efficiencyBlock)
             {

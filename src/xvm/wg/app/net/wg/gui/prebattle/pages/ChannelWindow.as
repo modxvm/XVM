@@ -6,7 +6,8 @@ package net.wg.gui.prebattle.pages
     public class ChannelWindow extends ChannelWindowMeta implements IChannelWindowMeta
     {
         
-        public function ChannelWindow() {
+        public function ChannelWindow()
+        {
             super();
         }
     }

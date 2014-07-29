@@ -14,7 +14,8 @@ package net.wg.gui.login.legal
     public class LegalInfoWindow extends LegalInfoWindowMeta implements ILegalInfoWindowMeta
     {
         
-        public function LegalInfoWindow() {
+        public function LegalInfoWindow()
+        {
             super();
             isCentered = true;
             showWindowBg = false;
@@ -30,22 +31,26 @@ package net.wg.gui.login.legal
         
         private var _legalInfo:String = "";
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.title = DIALOGS.LEGALINFOWINDOW_TITLE;
             var _loc1_:Padding = new Padding(window.formBgPadding.top,window.formBgPadding.right,window.formBgPadding.bottom + 1,window.formBgPadding.left);
             window.contentPadding = _loc1_;
             this.scrollPane.setSize(455,376);
+            trace(455,376,this.background.width,this.background.height);
             this.legalContent = this.scrollPane.target as LegalContent;
             this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onClose);
             getLegalInfoS();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.DATA))
             {
                 this.legalContent.updateData(this._legalInfo);
@@ -53,12 +58,14 @@ package net.wg.gui.login.legal
             super.draw();
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.closeBtn);
         }
         
-        public function as_setLegalInfo(param1:String) : void {
+        public function as_setLegalInfo(param1:String) : void
+        {
             this._legalInfo = param1;
             if(this._legalInfo == Values.EMPTY_STR)
             {
@@ -69,11 +76,13 @@ package net.wg.gui.login.legal
             super.draw();
         }
         
-        private function onClose(param1:ButtonEvent) : void {
+        private function onClose(param1:ButtonEvent) : void
+        {
             onCancelClickS();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.onClose);
             this.closeBtn.dispose();
             this.closeBtn = null;

@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.data.state
     public class StateProperties extends Object
     {
         
-        public function StateProperties(param1:uint, param2:uint, param3:String = null, param4:uint = 0, param5:Boolean = false, param6:AnimationProperties = null, param7:Number = 1) {
+        public function StateProperties(param1:uint, param2:uint, param3:String = null, param4:uint = 0, param5:Boolean = false, param6:AnimationProperties = null, param7:Number = 1)
+        {
             super();
             this.id = param1;
             this.index = param2;
@@ -28,7 +29,8 @@ package net.wg.gui.lobby.techtree.data.state
         
         public var icoAlpha:Number;
         
-        public function toString() : String {
+        public function toString() : String
+        {
             var _loc1_:* = "StateProperties(";
             _loc1_ = _loc1_ + ("id = " + this.id);
             _loc1_ = _loc1_ + (", index = " + this.index);

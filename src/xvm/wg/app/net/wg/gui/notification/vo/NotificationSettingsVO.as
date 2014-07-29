@@ -5,7 +5,8 @@ package net.wg.gui.notification.vo
     public class NotificationSettingsVO extends DAAPIDataClass
     {
         
-        public function NotificationSettingsVO(param1:Object) {
+        public function NotificationSettingsVO(param1:Object)
+        {
             super(param1);
         }
         

@@ -7,7 +7,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class FortBuildingBtn extends FortBuildingBase
     {
         
-        public function FortBuildingBtn() {
+        public function FortBuildingBtn()
+        {
             super();
             this.blinkingButton.gotoAndStop(0);
             this.setLevelUpState(false);
@@ -27,11 +28,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _currentState:String = "";
         
-        public function getBuildingShape() : MovieClip {
+        public function getBuildingShape() : MovieClip
+        {
             return this.building.getBuildingShape();
         }
         
-        override public function dispose() : void {
+        override public function dispose() : void
+        {
             this.building.dispose();
             this.building = null;
             this.blendingEffect = null;
@@ -40,16 +43,19 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             super.dispose();
         }
         
-        public function handleMousePress() : void {
+        public function handleMousePress() : void
+        {
             this.setLevelUpState(false);
             App.contextMenuMgr.hide();
         }
         
-        public function setCurrentState(param1:String) : void {
+        public function setCurrentState(param1:String) : void
+        {
             this.updateStates(param1);
         }
         
-        public function setLevelUpState(param1:Boolean) : void {
+        public function setLevelUpState(param1:Boolean) : void
+        {
             if(this._levelUp == param1)
             {
                 return;
@@ -67,11 +73,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function set uid(param1:String) : void {
+        public function set uid(param1:String) : void
+        {
             this._uid = param1;
         }
         
-        private function updateStates(param1:String) : void {
+        private function updateStates(param1:String) : void
+        {
             if(this._currentState == param1)
             {
                 return;

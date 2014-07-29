@@ -6,7 +6,8 @@ package scaleform.clik.controls
     public class StatusIndicator extends UIComponent
     {
         
-        public function StatusIndicator() {
+        public function StatusIndicator()
+        {
             super();
         }
         
@@ -16,23 +17,28 @@ package scaleform.clik.controls
         
         protected var _value:Number = 0;
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
         }
         
-        public function get maximum() : Number {
+        public function get maximum() : Number
+        {
             return this._maximum;
         }
         
-        public function set maximum(param1:Number) : void {
+        public function set maximum(param1:Number) : void
+        {
             this._maximum = param1;
         }
         
-        public function get minimum() : Number {
+        public function get minimum() : Number
+        {
             return this._minimum;
         }
         
-        public function set minimum(param1:Number) : void {
+        public function set minimum(param1:Number) : void
+        {
             if(this._minimum == param1)
             {
                 return;
@@ -41,11 +47,13 @@ package scaleform.clik.controls
             this.updatePosition();
         }
         
-        public function get value() : Number {
+        public function get value() : Number
+        {
             return this._value;
         }
         
-        public function set value(param1:Number) : void {
+        public function set value(param1:Number) : void
+        {
             var _loc2_:Number = Math.max(this._minimum,Math.min(this._maximum,param1));
             if(this._value == _loc2_)
             {
@@ -55,24 +63,29 @@ package scaleform.clik.controls
             this.updatePosition();
         }
         
-        public function get position() : Number {
+        public function get position() : Number
+        {
             return this._value;
         }
         
-        public function set position(param1:Number) : void {
+        public function set position(param1:Number) : void
+        {
             this.value = param1;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[CLIK StatusIndicator " + name + "]";
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             tabEnabled = focusable = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.SIZE))
             {
                 setActualSize(_width,_height);
@@ -83,7 +96,8 @@ package scaleform.clik.controls
             }
         }
         
-        protected function updatePosition() : void {
+        protected function updatePosition() : void
+        {
             if(!enabled)
             {
                 return;

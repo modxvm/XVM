@@ -3,7 +3,8 @@ package net.wg.gui.components.icons
     public class PlayerActionMarkerController extends Object
     {
         
-        public function PlayerActionMarkerController() {
+        public function PlayerActionMarkerController()
+        {
             super();
             if(__allowInstantiation)
             {
@@ -14,7 +15,8 @@ package net.wg.gui.components.icons
         
         private static var __allowInstantiation:Boolean = false;
         
-        public static function get instance() : PlayerActionMarkerController {
+        public static function get instance() : PlayerActionMarkerController
+        {
             if(!__instance)
             {
                 __allowInstantiation = true;
@@ -29,7 +31,8 @@ package net.wg.gui.components.icons
         
         private var __allActions:Array;
         
-        public function init() : void {
+        public function init() : void
+        {
             var _loc1_:String = null;
             var _loc2_:String = null;
             this.__ACTIONS = new Object();
@@ -47,11 +50,13 @@ package net.wg.gui.components.icons
             }
         }
         
-        public function get allActions() : Array {
+        public function get allActions() : Array
+        {
             return this.__allActions;
         }
         
-        public function getActions(param1:String, param2:Number) : Array {
+        public function getActions(param1:String, param2:Number) : Array
+        {
             var _loc4_:String = null;
             var _loc5_:* = NaN;
             var _loc3_:Array = new Array();

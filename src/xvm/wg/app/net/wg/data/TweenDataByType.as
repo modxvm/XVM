@@ -7,7 +7,8 @@ package net.wg.data
     public class TweenDataByType extends Object implements ITweenTypesDuration
     {
         
-        public function TweenDataByType(param1:Vector.<String>, param2:int) {
+        public function TweenDataByType(param1:Vector.<String>, param2:int)
+        {
             super();
             if(CHANGES_BY_TYPE == null)
             {
@@ -23,34 +24,31 @@ package net.wg.data
         
         public static var TYPE_SET:String = "set";
         
-        public static function getPropertyChanges(param1:String) : Object {
+        public static function getPropertyChanges(param1:String) : Object
+        {
             return CHANGES_BY_TYPE[param1];
         }
         
-        private static function customizeConst() : void {
+        private static function customizeConst() : void
+        {
             CHANGES_BY_TYPE = {};
-            CHANGES_BY_TYPE[TweenTypes.FADE_IN] = {
-                "type":TYPE_SET,
-                "propertyName":"alpha",
-                "value":TweenConstraints.FADE_ALPHA_MAX
-            };
-        CHANGES_BY_TYPE[TweenTypes.FADE_OUT] = {
-            "type":TYPE_SET,
+            CHANGES_BY_TYPE[TweenTypes.FADE_IN] = {"type":TYPE_SET,
             "propertyName":"alpha",
-            "value":TweenConstraints.FADE_ALPHA_MIN
+            "value":TweenConstraints.FADE_ALPHA_MAX
         };
-    CHANGES_BY_TYPE[TweenTypes.MOVE_UP] = {
-        "type":TYPE_ADD,
-        "propertyName":"y",
-        "value":TweenConstraints.TRANSLATION_LENGTH
+        CHANGES_BY_TYPE[TweenTypes.FADE_OUT] = {"type":TYPE_SET,
+        "propertyName":"alpha",
+        "value":TweenConstraints.FADE_ALPHA_MIN
     };
-CHANGES_BY_TYPE[TweenTypes.MOVE_DOWN] = {
-    "type":TYPE_ADD,
+    CHANGES_BY_TYPE[TweenTypes.MOVE_UP] = {"type":TYPE_ADD,
     "propertyName":"y",
     "value":TweenConstraints.TRANSLATION_LENGTH
 };
-CHANGES_BY_TYPE[TweenTypes.TURN_HALF] = {
-"type":TYPE_ADD,
+CHANGES_BY_TYPE[TweenTypes.MOVE_DOWN] = {"type":TYPE_ADD,
+"propertyName":"y",
+"value":TweenConstraints.TRANSLATION_LENGTH
+};
+CHANGES_BY_TYPE[TweenTypes.TURN_HALF] = {"type":TYPE_ADD,
 "propertyName":"rotation",
 "value":180
 };
@@ -60,19 +58,23 @@ private var _types:Vector.<String> = null;
 
 private var _duration:int;
 
-public function get types() : Vector.<String> {
+public function get types() : Vector.<String>
+{
 return this._types;
 }
 
-public function set types(param1:Vector.<String>) : void {
+public function set types(param1:Vector.<String>) : void
+{
 this._types = param1;
 }
 
-public function get duration() : int {
+public function get duration() : int
+{
 return this._duration;
 }
 
-public function set duration(param1:int) : void {
+public function set duration(param1:int) : void
+{
 this._duration = param1;
 }
 }

@@ -6,7 +6,8 @@ package net.wg.gui.components.controls
     public class UnitCommanderStats extends UIComponent
     {
         
-        public function UnitCommanderStats() {
+        public function UnitCommanderStats()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.components.controls
         
         public var descr:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.descr.text = TOOLTIPS.CYBERSPORT_COMMANDER_STATS;
         }

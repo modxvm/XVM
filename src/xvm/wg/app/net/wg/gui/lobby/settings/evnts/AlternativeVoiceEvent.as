@@ -5,7 +5,8 @@ package net.wg.gui.lobby.settings.evnts
     public class AlternativeVoiceEvent extends Event
     {
         
-        public function AlternativeVoiceEvent(param1:String, param2:String = "", param3:Boolean = true, param4:Boolean = false) {
+        public function AlternativeVoiceEvent(param1:String, param2:String = "", param3:Boolean = true, param4:Boolean = false)
+        {
             super(param1,param3,param4);
             this.modeName = param2;
         }
@@ -14,11 +15,13 @@ package net.wg.gui.lobby.settings.evnts
         
         public var modeName:String = "";
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new AlternativeVoiceEvent(type,this.modeName,bubbles,cancelable);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("AlternativeVoiceEvent","type","modeName","bubbles","cancelable","eventPhase");
         }
     }

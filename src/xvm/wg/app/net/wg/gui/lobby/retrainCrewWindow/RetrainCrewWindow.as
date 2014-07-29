@@ -23,7 +23,8 @@ package net.wg.gui.lobby.retrainCrewWindow
     public class RetrainCrewWindow extends RetrainCrewWindowMeta implements IRetrainCrewWindowMeta
     {
         
-        public function RetrainCrewWindow() {
+        public function RetrainCrewWindow()
+        {
             super();
             isModal = true;
             isCentered = true;
@@ -77,7 +78,8 @@ package net.wg.gui.lobby.retrainCrewWindow
         
         public var rolesGroup:GroupEx;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.enough_money_color = this.result.valueTextField.textColor;
             this.rolesGroup.layout = new HorizontalGroupLayout();
@@ -98,7 +100,8 @@ package net.wg.gui.lobby.retrainCrewWindow
             this.btnsGroup.addEventListener(IndexEvent.INDEX_CHANGE,this.btnsGroupChangeHandler,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc2_:QuestsDashlineItem = null;
             var _loc3_:SelPriceInfo = null;
             var _loc4_:uint = 0;
@@ -147,7 +150,8 @@ package net.wg.gui.lobby.retrainCrewWindow
             }
         }
         
-        private function btnsGroupChangeHandler(param1:IndexEvent) : void {
+        private function btnsGroupChangeHandler(param1:IndexEvent) : void
+        {
             var _loc2_:Object = null;
             if(param1.index != -1)
             {
@@ -164,19 +168,23 @@ package net.wg.gui.lobby.retrainCrewWindow
             }
         }
         
-        private function groupResizeHandler(param1:Event) : void {
+        private function groupResizeHandler(param1:Event) : void
+        {
             this.rolesGroup.x = _width - this.rolesGroup.width - SIDE_PADDING;
         }
         
-        private function submitClickHandler(param1:ButtonEvent) : void {
+        private function submitClickHandler(param1:ButtonEvent) : void
+        {
             submitS({"operationId":this.btnsGroup.selectedId});
         }
         
-        private function cancelClickHandler(param1:ButtonEvent) : void {
+        private function cancelClickHandler(param1:ButtonEvent) : void
+        {
             onWindowCloseS();
         }
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             super.setWindow(param1);
             window.title = App.utils.locale.makeString(RETRAIN_CREW.WINDOW_TITLE);
             var _loc2_:Padding = window.contentPadding as Padding;
@@ -188,7 +196,8 @@ package net.wg.gui.lobby.retrainCrewWindow
             param1.formBgPadding = _loc4_;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.initVehicleVO)
             {
                 this.initVehicleVO.dispose();
@@ -216,7 +225,8 @@ package net.wg.gui.lobby.retrainCrewWindow
             super.onDispose();
         }
         
-        public function as_setCommonData(param1:Object) : void {
+        public function as_setCommonData(param1:Object) : void
+        {
             this.initVehicleVO = new RetrainCrewVehicleVO(param1);
             this.vehicleBlock.setData(this.initVehicleVO.vehicleBlockVO);
             this.initCrewVO = new RetrainCrewBlockVO(param1);
@@ -228,7 +238,8 @@ package net.wg.gui.lobby.retrainCrewWindow
             invalidate(VEHICLE_BLOCK_INVALID);
         }
         
-        public function as_updateData(param1:Object) : void {
+        public function as_updateData(param1:Object) : void
+        {
             this.initCrewOperationVO = new RetrainCrewOperationVO(param1);
             this.btnsGroup.operationData = this.initCrewOperationVO;
         }

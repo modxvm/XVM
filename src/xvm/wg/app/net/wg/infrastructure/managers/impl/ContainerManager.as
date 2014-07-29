@@ -16,7 +16,8 @@ package net.wg.infrastructure.managers.impl
     public class ContainerManager extends ContainerManagerMeta implements IContainerManager, IContainerManagerMeta
     {
         
-        public function ContainerManager() {
+        public function ContainerManager()
+        {
             this.tokenToView = {};
             this.nameToView = {};
             super();
@@ -24,7 +25,8 @@ package net.wg.infrastructure.managers.impl
             this._containersForLoadingViews = new Dictionary();
         }
         
-        private static function getViewName(param1:IManagedContent) : String {
+        private static function getViewName(param1:IManagedContent) : String
+        {
             return param1.sourceView.as_name;
         }
         
@@ -40,13 +42,15 @@ package net.wg.infrastructure.managers.impl
         
         private var _loader:ILoaderManager;
         
-        public function registerContainer(param1:IManagedContainer) : void {
+        public function registerContainer(param1:IManagedContainer) : void
+        {
             assert(!this.containersMap.hasOwnProperty(param1.type),"ContainerManager.registerContainer container for type " + param1.type + " is already registered");
             this.containersMap[param1.type] = param1;
             param1.addEventListener(FocusEvent.FOCUS_OUT,this.onContainerFocusOut);
         }
         
-        public function updateStage(param1:Number, param2:Number) : void {
+        public function updateStage(param1:Number, param2:Number) : void
+        {
             var _loc3_:String = null;
             var _loc4_:IManagedContainer = null;
             for(_loc3_ in this.containersMap)
@@ -59,7 +63,8 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        public function as_getView(param1:String) : Boolean {
+        public function as_getView(param1:String) : Boolean
+        {
             var _loc3_:ViewInfo = null;
             var _loc2_:* = false;
             if(this.nameToView.hasOwnProperty(param1))
@@ -71,7 +76,8 @@ package net.wg.infrastructure.managers.impl
             return _loc2_;
         }
         
-        public function as_getNameByToken(param1:String) : String {
+        public function as_getNameByToken(param1:String) : String
+        {
             var _loc2_:ViewInfo = this.tokenToView[param1];
             if(_loc2_)
             {
@@ -80,7 +86,8 @@ package net.wg.infrastructure.managers.impl
             return null;
         }
         
-        public function as_getViewTypeByToken(param1:String) : String {
+        public function as_getViewTypeByToken(param1:String) : String
+        {
             var _loc2_:ViewInfo = this.tokenToView[param1];
             if(_loc2_)
             {
@@ -89,7 +96,8 @@ package net.wg.infrastructure.managers.impl
             return null;
         }
         
-        public function as_show(param1:String, param2:int = 0, param3:int = 0) : Boolean {
+        public function as_show(param1:String, param2:int = 0, param3:int = 0) : Boolean
+        {
             var _loc4_:* = false;
             var _loc5_:ViewInfo = this.tokenToView[param1];
             if((_loc5_) && (_loc5_.view))
@@ -113,7 +121,8 @@ package net.wg.infrastructure.managers.impl
             throw new Error("net.wg.infrastructure.base.BaseView is not found using token = " + param1);
         }
         
-        public function as_hide(param1:String) : Boolean {
+        public function as_hide(param1:String) : Boolean
+        {
             var _loc5_:* = NaN;
             var _loc2_:* = false;
             var _loc3_:ViewInfo = this.tokenToView[param1];
@@ -129,7 +138,9 @@ package net.wg.infrastructure.managers.impl
             if(_loc3_)
             {
                 delete this.nameToView[_loc3_.view.as_name];
+                true;
                 delete this.tokenToView[param1];
+                true;
                 _loc3_.removeView();
                 _loc3_.dispose();
                 _loc3_ = null;
@@ -140,7 +151,8 @@ package net.wg.infrastructure.managers.impl
             throw new Error("net.wg.infrastructure.base.AbstractView is not found using token = " + param1);
         }
         
-        public function as_registerContainer(param1:String, param2:String) : void {
+        public function as_registerContainer(param1:String, param2:String) : void
+        {
             assert(!this.containersMap.hasOwnProperty(param1),"ContainerManager.as_registerContainer container for type " + param1 + " is already registered");
             var _loc3_:ViewInfo = this.tokenToView[param2];
             var _loc4_:IView = _loc3_.view;
@@ -151,22 +163,27 @@ package net.wg.infrastructure.managers.impl
             _loc5_.addEventListener(FocusEvent.FOCUS_OUT,this.onContainerFocusOut);
         }
         
-        public function as_unregisterContainer(param1:String) : void {
+        public function as_unregisterContainer(param1:String) : void
+        {
             assert(this.containersMap.hasOwnProperty(param1),"ContainerManager.as_unregisterContainer container for type " + param1 + " is not registered");
             var _loc2_:IManagedContainer = this.getContainer(param1);
             assert(!(_loc2_ == null),"ContainerManager.as_unregisterContainer container is null for type " + param1);
             this.cancelLoadingsForContainer(param1);
             delete this._containersForLoadingViews[param1];
+            true;
             delete this.containersMap[_loc2_.type];
+            true;
             _loc2_.removeEventListener(FocusEvent.FOCUS_OUT,this.onContainerFocusOut);
         }
         
-        public function as_closePopUps() : void {
+        public function as_closePopUps() : void
+        {
             App.toolTipMgr.hide();
             App.utils.popupMgr.removeAll();
         }
         
-        public function as_isOnTop(param1:String, param2:String) : Boolean {
+        public function as_isOnTop(param1:String, param2:String) : Boolean
+        {
             var obj:IManagedContent = null;
             var cType:String = param1;
             var vName:String = param2;
@@ -183,7 +200,8 @@ package net.wg.infrastructure.managers.impl
             return result;
         }
         
-        public function as_bringToFront(param1:String, param2:String) : void {
+        public function as_bringToFront(param1:String, param2:String) : void
+        {
             var container:IManagedContainer = null;
             var currentView:IManagedContent = null;
             var childrenCount:int = 0;
@@ -213,7 +231,8 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        public function updateFocus(param1:Object = null) : void {
+        public function updateFocus(param1:Object = null) : void
+        {
             var _loc2_:String = null;
             var _loc3_:IManagedContainer = null;
             var _loc4_:* = false;
@@ -238,15 +257,18 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        public function isModalViewsExisting() : Boolean {
+        public function isModalViewsExisting() : Boolean
+        {
             return isModalViewsIsExistsS();
         }
         
-        public function get containersMap() : Dictionary {
+        public function get containersMap() : Dictionary
+        {
             return this._containersMap;
         }
         
-        public function set containersMap(param1:Dictionary) : void {
+        public function set containersMap(param1:Dictionary) : void
+        {
             var _loc2_:String = null;
             var _loc3_:IManagedContainer = null;
             this._containersMap = param1;
@@ -257,11 +279,13 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        public function get loader() : ILoaderManager {
+        public function get loader() : ILoaderManager
+        {
             return this._loader;
         }
         
-        public function set loader(param1:ILoaderManager) : void {
+        public function set loader(param1:ILoaderManager) : void
+        {
             App.utils.asserter.assertNull(this._loader,"setter for loader must be called onetime only!");
             this._loader = param1;
             if(this._loader)
@@ -271,18 +295,22 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        public function get lastFocusedView() : IView {
+        public function get lastFocusedView() : IView
+        {
             return this._lastFocusedView;
         }
         
-        public function set lastFocusedView(param1:IView) : void {
+        public function set lastFocusedView(param1:IView) : void
+        {
             this._lastFocusedView = param1;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var key:String = null;
             var container:IManagedContainer = null;
             try
@@ -292,6 +320,7 @@ package net.wg.infrastructure.managers.impl
                     if(!this.as_hide(key))
                     {
                         delete this.tokenToView[key];
+                        true;
                     }
                 }
                 this.tokenToView = null;
@@ -301,6 +330,7 @@ package net.wg.infrastructure.managers.impl
                     assert(!(container == null),"ContainerManager.onDispose container is null for type " + key);
                     container.removeEventListener(FocusEvent.FOCUS_OUT,this.onContainerFocusOut);
                     delete this.containersMap[key];
+                    true;
                 }
                 this.clearContainersForViewsDict();
                 this.containersMap = null;
@@ -318,7 +348,8 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        private function cancelLoadingsForContainer(param1:String) : void {
+        private function cancelLoadingsForContainer(param1:String) : void
+        {
             var _loc2_:Array = this._containersForLoadingViews[param1];
             if(_loc2_)
             {
@@ -326,9 +357,11 @@ package net.wg.infrastructure.managers.impl
                 _loc2_.splice(0,_loc2_.length);
             }
             delete this._containersForLoadingViews[param1];
+            true;
         }
         
-        private function clearContainersForViewsDict() : void {
+        private function clearContainersForViewsDict() : void
+        {
             var _loc1_:String = null;
             var _loc2_:Array = null;
             for(_loc1_ in this._containersForLoadingViews)
@@ -336,10 +369,12 @@ package net.wg.infrastructure.managers.impl
                 _loc2_ = this._containersForLoadingViews[_loc1_];
                 _loc2_.splice(0,_loc2_.length);
                 delete this._containersForLoadingViews[_loc1_];
+                true;
             }
         }
         
-        private function getContainer(param1:String) : IManagedContainer {
+        private function getContainer(param1:String) : IManagedContainer
+        {
             var _loc2_:IManagedContainer = null;
             if(this.containersMap.hasOwnProperty(param1))
             {
@@ -348,7 +383,8 @@ package net.wg.infrastructure.managers.impl
             return _loc2_;
         }
         
-        private function handleViewLoaded(param1:LoaderEvent) : void {
+        private function handleViewLoaded(param1:LoaderEvent) : void
+        {
             var viewType:String = null;
             var alias:String = null;
             var container:IManagedContainer = null;
@@ -371,7 +407,8 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        private function handleViewLoading(param1:LoaderEvent) : void {
+        private function handleViewLoading(param1:LoaderEvent) : void
+        {
             var _loc2_:String = param1.config.type;
             var _loc3_:String = param1.config.alias;
             var _loc4_:Array = this._containersForLoadingViews[_loc2_];
@@ -391,7 +428,8 @@ package net.wg.infrastructure.managers.impl
             
         }
         
-        private function onContainerFocusOut(param1:FocusEvent) : void {
+        private function onContainerFocusOut(param1:FocusEvent) : void
+        {
             if(param1.target == param1.currentTarget)
             {
                 this.updateFocus(param1.target);
@@ -409,7 +447,8 @@ import net.wg.data.constants.Errors;
 class ViewInfo extends Object implements IDisposable
 {
     
-    function ViewInfo(param1:IManagedContainer, param2:IView) {
+    function ViewInfo(param1:IManagedContainer, param2:IView)
+    {
         super();
         App.utils.asserter.assertNotNull(param1,"container " + Errors.CANT_NULL);
         App.utils.asserter.assertNotNull(param2,"view " + Errors.CANT_NULL);
@@ -421,20 +460,24 @@ class ViewInfo extends Object implements IDisposable
     
     private var _container:IManagedContainer = null;
     
-    public function dispose() : void {
+    public function dispose() : void
+    {
         this._container = null;
         this._view = null;
     }
     
-    public function addView() : void {
+    public function addView() : void
+    {
         this._container.addChild(DisplayObject(this._view));
     }
     
-    public function setFocused() : void {
+    public function setFocused() : void
+    {
         this._container.setFocusedView(this._view);
     }
     
-    public function removeView() : void {
+    public function removeView() : void
+    {
         var _loc1_:IAssertable = App.utils.asserter;
         _loc1_.assertNotNull(this._container,"_container " + Errors.CANT_NULL);
         _loc1_.assertNotNull(this._view,"_view " + Errors.CANT_NULL);
@@ -448,11 +491,13 @@ class ViewInfo extends Object implements IDisposable
         }
     }
     
-    public function get view() : IView {
+    public function get view() : IView
+    {
         return this._view;
     }
     
-    public function get container() : IManagedContainer {
+    public function get container() : IManagedContainer
+    {
         return this._container;
     }
 }

@@ -5,7 +5,8 @@ package net.wg.infrastructure.events
     public class EnvironmentEvent extends Event
     {
         
-        public function EnvironmentEvent(param1:String, ... rest) {
+        public function EnvironmentEvent(param1:String, ... rest)
+        {
             this._args = rest;
             super(param1);
         }
@@ -16,7 +17,8 @@ package net.wg.infrastructure.events
         
         private var _args:Array = null;
         
-        public function getArgs() : Array {
+        public function getArgs() : Array
+        {
             return this._args;
         }
     }

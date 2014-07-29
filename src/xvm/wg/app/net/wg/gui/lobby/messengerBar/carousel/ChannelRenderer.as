@@ -11,7 +11,8 @@ package net.wg.gui.lobby.messengerBar.carousel
     public class ChannelRenderer extends UIComponent implements IListItemRenderer
     {
         
-        public function ChannelRenderer() {
+        public function ChannelRenderer()
+        {
             super();
             visible = false;
         }
@@ -30,45 +31,55 @@ package net.wg.gui.lobby.messengerBar.carousel
         
         protected var model:ChannelListItemVO;
         
-        public function get index() : uint {
+        public function get index() : uint
+        {
             return this._index;
         }
         
-        public function set index(param1:uint) : void {
+        public function set index(param1:uint) : void
+        {
             this._index = param1;
         }
         
-        public function get owner() : UIComponent {
+        public function get owner() : UIComponent
+        {
             return this._owner;
         }
         
-        public function set owner(param1:UIComponent) : void {
+        public function set owner(param1:UIComponent) : void
+        {
             this._owner = param1;
         }
         
-        public function get selectable() : Boolean {
+        public function get selectable() : Boolean
+        {
             return this._selectable;
         }
         
-        public function set selectable(param1:Boolean) : void {
+        public function set selectable(param1:Boolean) : void
+        {
             this._selectable = param1;
         }
         
-        public function get selected() : Boolean {
+        public function get selected() : Boolean
+        {
             return this.openButton.selected;
         }
         
-        public function set selected(param1:Boolean) : void {
+        public function set selected(param1:Boolean) : void
+        {
             this.openButton.selected = param1;
         }
         
-        public function setListData(param1:ListData) : void {
+        public function setListData(param1:ListData) : void
+        {
             this.index = param1.index;
             this.selected = param1.selected;
             this.openButton.label = param1.label || "";
         }
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             if(param1)
             {
                 this.model = new ChannelListItemVO(param1);
@@ -76,11 +87,13 @@ package net.wg.gui.lobby.messengerBar.carousel
             }
         }
         
-        public function getData() : Object {
+        public function getData() : Object
+        {
             return this.model;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.model)
             {
@@ -89,7 +102,8 @@ package net.wg.gui.lobby.messengerBar.carousel
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.model))
             {

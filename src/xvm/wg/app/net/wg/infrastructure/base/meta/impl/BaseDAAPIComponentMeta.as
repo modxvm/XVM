@@ -7,7 +7,8 @@ package net.wg.infrastructure.base.meta.impl
     public class BaseDAAPIComponentMeta extends UIComponent
     {
         
-        public function BaseDAAPIComponentMeta() {
+        public function BaseDAAPIComponentMeta()
+        {
             super();
         }
         
@@ -17,17 +18,20 @@ package net.wg.infrastructure.base.meta.impl
         
         public var unregisterFlashComponent:Function = null;
         
-        public function registerFlashComponentS(param1:IDAAPIModule, param2:String) : void {
+        public function registerFlashComponentS(param1:IDAAPIModule, param2:String) : void
+        {
             App.utils.asserter.assertNotNull(this.registerFlashComponent,"registerFlashComponent" + Errors.CANT_NULL);
             this.registerFlashComponent(param1,param2);
         }
         
-        public function isFlashComponentRegisteredS(param1:String) : Boolean {
+        public function isFlashComponentRegisteredS(param1:String) : Boolean
+        {
             App.utils.asserter.assertNotNull(this.isFlashComponentRegistered,"isFlashComponentRegistered" + Errors.CANT_NULL);
             return this.isFlashComponentRegistered(param1);
         }
         
-        public function unregisterFlashComponentS(param1:String) : void {
+        public function unregisterFlashComponentS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.unregisterFlashComponent,"unregisterFlashComponent" + Errors.CANT_NULL);
             this.unregisterFlashComponent(param1);
         }

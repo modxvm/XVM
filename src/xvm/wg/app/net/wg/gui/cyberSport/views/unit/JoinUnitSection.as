@@ -15,7 +15,8 @@ package net.wg.gui.cyberSport.views.unit
     public class JoinUnitSection extends BaseRallyDetailsSection
     {
         
-        public function JoinUnitSection() {
+        public function JoinUnitSection()
+        {
             super();
         }
         
@@ -41,11 +42,13 @@ package net.wg.gui.cyberSport.views.unit
         
         public var slot6:SimpleSlotRenderer;
         
-        public function get unitModel() : RallyShortVO {
+        public function get unitModel() : RallyShortVO
+        {
             return model as RallyShortVO;
         }
         
-        override protected function getSlots() : Array {
+        override protected function getSlots() : Array
+        {
             var _loc2_:SimpleSlotRenderer = null;
             var _loc1_:Array = [this.slot0,this.slot1,this.slot2,this.slot3,this.slot4,this.slot5,this.slot6];
             var _loc3_:UnitSlotHelper = new UnitSlotHelper();
@@ -56,7 +59,8 @@ package net.wg.gui.cyberSport.views.unit
             return _loc1_;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             joinButton = this.joinUnitButton;
             super.configUI();
             headerTF.text = CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM;
@@ -69,7 +73,8 @@ package net.wg.gui.cyberSport.views.unit
             this.restrictionIcon.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -82,7 +87,8 @@ package net.wg.gui.cyberSport.views.unit
             }
         }
         
-        override protected function updateTitle(param1:IRallyVO) : void {
+        override protected function updateTitle(param1:IRallyVO) : void
+        {
             super.updateTitle(param1);
             if((this.unitModel) && (this.unitModel.commander))
             {
@@ -94,7 +100,8 @@ package net.wg.gui.cyberSport.views.unit
             }
         }
         
-        override protected function updateDescription(param1:IRallyVO) : void {
+        override protected function updateDescription(param1:IRallyVO) : void
+        {
             super.updateDescription(param1);
             var _loc2_:IUserProps = App.utils.commons.getUserProps(param1.description,null,null,0);
             var _loc3_:Boolean = App.utils.commons.formatPlayerName(descriptionTF,_loc2_);
@@ -105,7 +112,8 @@ package net.wg.gui.cyberSport.views.unit
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.freezeIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
             this.freezeIcon.removeEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
             this.restrictionIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
@@ -113,7 +121,8 @@ package net.wg.gui.cyberSport.views.unit
             super.onDispose();
         }
         
-        override protected function onControlRollOver(param1:MouseEvent) : void {
+        override protected function onControlRollOver(param1:MouseEvent) : void
+        {
             switch(param1.currentTarget)
             {
                 case this.freezeIcon:

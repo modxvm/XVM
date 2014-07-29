@@ -3,7 +3,8 @@ package scaleform.clik.constants
     public class ScrollBarDirection extends Object
     {
         
-        public function ScrollBarDirection() {
+        public function ScrollBarDirection()
+        {
             super();
         }
         

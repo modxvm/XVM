@@ -1,9 +1,10 @@
-package 
+package
 {
     public class MENU extends Object
     {
         
-        public function MENU() {
+        public function MENU()
+        {
             super();
         }
         
@@ -1553,21 +1554,21 @@ package
         
         public static var TRAINING_INFO_VOICECHAT:String = "#menu:training/info/voiceChat";
         
-        public static var TRAINING_INFO_STATES_STATE0:String;
+        public static var TRAINING_INFO_STATES_STATE0:String = TRAINING_INFO_STATES_STATE + "0";
         
-        public static var TRAINING_INFO_STATES_STATE1:String;
+        public static var TRAINING_INFO_STATES_STATE1:String = TRAINING_INFO_STATES_STATE + "1";
         
-        public static var TRAINING_INFO_STATES_STATE2:String;
+        public static var TRAINING_INFO_STATES_STATE2:String = TRAINING_INFO_STATES_STATE + "2";
         
-        public static var TRAINING_INFO_STATES_STATE4:String;
+        public static var TRAINING_INFO_STATES_STATE4:String = TRAINING_INFO_STATES_STATE + "4";
         
-        public static var TRAINING_INFO_STATES_STATE8:String;
+        public static var TRAINING_INFO_STATES_STATE8:String = TRAINING_INFO_STATES_STATE + "8";
         
-        public static var TRAINING_INFO_STATES_STATE17:String;
+        public static var TRAINING_INFO_STATES_STATE17:String = TRAINING_INFO_STATES_STATE + "17";
         
-        public static var TRAINING_INFO_STATES_STATE20:String;
+        public static var TRAINING_INFO_STATES_STATE20:String = TRAINING_INFO_STATES_STATE + "20";
         
-        public static var TRAINING_INFO_STATES_STATE24:String;
+        public static var TRAINING_INFO_STATES_STATE24:String = TRAINING_INFO_STATES_STATE + "24";
         
         public static var TRAINING_INFO_USECOMMONVOICECHAT:String = "#menu:training/info/useCommonVoiceChat";
         
@@ -2019,55 +2020,56 @@ package
         
         public static var HEADERBUTTONS_BATTLE_TYPES_LEAVEFORT_DESCR:String = "#menu:headerButtons/battle/types/leaveFort/descr";
         
-        public static var NATION_TREE_TITLE_ENUM:Array;
+        public static var NATION_TREE_TITLE_ENUM:Array = [NATION_TREE_TITLE_USSR,NATION_TREE_TITLE_GERMANY,NATION_TREE_TITLE_USA,NATION_TREE_TITLE_FRANCE,NATION_TREE_TITLE_UK,NATION_TREE_TITLE_CHINA,NATION_TREE_TITLE_JAPAN];
         
-        public static var TANKMANPERSONALCASE_MODIFIERS_ENUM:Array;
+        public static var TANKMANPERSONALCASE_MODIFIERS_ENUM:Array = [TANKMANPERSONALCASE_MODIFIERS_FROMCOMMANDER,TANKMANPERSONALCASE_MODIFIERS_FROMEQUIPMENT,TANKMANPERSONALCASE_MODIFIERS_FROMSKILLS,TANKMANPERSONALCASE_MODIFIERS_PENALTY,TANKMANPERSONALCASE_MODIFIERSHEADER,TANKMANPERSONALCASE_MODIFIERSRESULT];
         
-        public static var TANKMANTRAININGWINDOW_ENUM:Array;
+        public static var TANKMANTRAININGWINDOW_ENUM:Array = [TANKMANTRAININGWINDOW_TITLE,TANKMANTRAININGWINDOW_ACADEMY,TANKMANTRAININGWINDOW_SCOOL,TANKMANTRAININGWINDOW_FREE,TANKMANTRAININGWINDOW_TRAININGTO,TANKMANTRAININGWINDOW_CLOSEBTN];
         
-        public static var SHOP_MENU_ENUM:Array;
+        public static var SHOP_MENU_ENUM:Array = [SHOP_MENU_VEHICLE_NAME,SHOP_MENU_VEHICLE_TAGS_NAME,SHOP_MENU_VEHICLE_TAGS_ALL_NAME,SHOP_MENU_VEHICLE_TAGS_LIGHTTANK_NAME,SHOP_MENU_VEHICLE_TAGS_MEDIUMTANK_NAME,SHOP_MENU_VEHICLE_TAGS_HEAVYTANK_NAME,SHOP_MENU_VEHICLE_TAGS_AT_SPG_NAME,SHOP_MENU_VEHICLE_TAGS_SPG_NAME,SHOP_MENU_VEHICLE_EXTRA_NAME,SHOP_MENU_VEHICLE_EXTRA_LOCKED_NAME,SHOP_MENU_VEHICLE_EXTRA_INHANGAR_NAME,SHOP_MENU_MODULE_NAME,SHOP_MENU_MODULE_TYPES_NAME,SHOP_MENU_MODULE_TYPES_VEHICLECHASSIS_NAME,SHOP_MENU_MODULE_TYPES_VEHICLETURRET_NAME,SHOP_MENU_MODULE_TYPES_VEHICLEGUN_NAME,SHOP_MENU_MODULE_TYPES_VEHICLEENGINE_NAME,SHOP_MENU_MODULE_TYPES_VEHICLERADIO_NAME,SHOP_MENU_MODULE_FITS_NAME,SHOP_MENU_MODULE_FITS_MYVEHICLE_NAME,SHOP_MENU_MODULE_FITS_MYVEHICLES_NAME,SHOP_MENU_MODULE_FITS_OTHERVEHICLES_NAME,SHOP_MENU_MODULE_EXTRA_NAME,SHOP_MENU_MODULE_EXTRA_LOCKED_NAME,SHOP_MENU_MODULE_EXTRA_ONVEHICLE_NAME,SHOP_MENU_MODULE_EXTRA_INHANGAR_NAME,SHOP_MENU_SHELL_NAME,SHOP_MENU_SHELL_KINDS_NAME,SHOP_MENU_SHELL_KINDS_ARMOR_PIERCING_NAME,SHOP_MENU_SHELL_KINDS_ARMOR_PIERCING_CR_NAME,SHOP_MENU_SHELL_KINDS_ARMOR_PIERCING_HE_NAME,SHOP_MENU_SHELL_KINDS_HOLLOW_CHARGE_NAME,SHOP_MENU_SHELL_KINDS_HIGH_EXPLOSIVE_NAME,SHOP_MENU_SHELL_FITS_NAME,SHOP_MENU_SHELL_FITS_MYVEHICLEGUN_NAME,SHOP_MENU_SHELL_FITS_MYINVENTORYGUNS_NAME,SHOP_MENU_SHELL_FITS_MYVEHICLESINVENTORYGUNS_NAME,SHOP_MENU_SHELL_FITS_OTHERGUNS_NAME,SHOP_MENU_OPTIONALDEVICE_NAME,SHOP_MENU_OPTIONALDEVICE_FITS_NAME,SHOP_MENU_OPTIONALDEVICE_FITS_MYVEHICLE_NAME,SHOP_MENU_OPTIONALDEVICE_FITS_MYVEHICLES_NAME,SHOP_MENU_OPTIONALDEVICE_FITS_OTHERVEHICLES_NAME,SHOP_MENU_OPTIONALDEVICE_EXTRA_NAME,SHOP_MENU_OPTIONALDEVICE_EXTRA_ONVEHICLE_NAME,SHOP_MENU_EQUIPMENT_NAME,SHOP_MENU_EQUIPMENT_FITS_NAME,SHOP_MENU_EQUIPMENT_FITS_MYVEHICLE_NAME,SHOP_MENU_EQUIPMENT_FITS_MYVEHICLES_NAME,SHOP_MENU_EQUIPMENT_FITS_OTHERVEHICLES_NAME];
         
-        public static var MODULEINFO_PARAMS_ENUM:Array;
+        public static var MODULEINFO_PARAMS_ENUM:Array = [MODULEINFO_PARAMS_MAXLOAD,MODULEINFO_PARAMS_ENGINEPOWER,MODULEINFO_PARAMS_CALIBER,MODULEINFO_PARAMS_SHELLSCOUNT,MODULEINFO_PARAMS_SHELLRELOADINGTIME,MODULEINFO_PARAMS_RELOADMAGAZINETIME,MODULEINFO_PARAMS_RELOADTIME,MODULEINFO_PARAMS_PIERCINGPOWER,MODULEINFO_PARAMS_DAMAGE,MODULEINFO_PARAMS_AVGPIERCINGPOWER,MODULEINFO_PARAMS_AVGDAMAGE,MODULEINFO_PARAMS_ARMOR,MODULEINFO_PARAMS_ROTATIONSPEED,MODULEINFO_PARAMS_DISPERTIONRADIUS,MODULEINFO_PARAMS_AIMINGTIME,MODULEINFO_PARAMS_FIRESTARTINGCHANCE,MODULEINFO_PARAMS_RADIODISTANCE,MODULEINFO_PARAMS_CIRCULARVISIONRADIUS,MODULEINFO_PARAMS_WEIGHT,MODULEINFO_PARAMS_EXPLOSIONRADIUS];
         
-        public static var SKILLDROPWINDOW_STUDY_ENUM:Array;
+        public static var SKILLDROPWINDOW_STUDY_ENUM:Array = [SKILLDROPWINDOW_STUDY_GOLDLABEL,SKILLDROPWINDOW_STUDY_CREDITSLABEL,SKILLDROPWINDOW_STUDY_FREELABEL];
         
-        public static var INVENTORY_MENU_ENUM:Array;
+        public static var INVENTORY_MENU_ENUM:Array = [INVENTORY_MENU_VEHICLE_NAME,INVENTORY_MENU_VEHICLE_TAGS_NAME,INVENTORY_MENU_VEHICLE_TAGS_ALL_NAME,INVENTORY_MENU_VEHICLE_TAGS_LIGHTTANK_NAME,INVENTORY_MENU_VEHICLE_TAGS_MEDIUMTANK_NAME,INVENTORY_MENU_VEHICLE_TAGS_HEAVYTANK_NAME,INVENTORY_MENU_VEHICLE_TAGS_AT_SPG_NAME,INVENTORY_MENU_VEHICLE_TAGS_SPG_NAME,INVENTORY_MENU_VEHICLE_EXTRA_NAME,INVENTORY_MENU_VEHICLE_EXTRA_BROCKEN_NAME,INVENTORY_MENU_VEHICLE_EXTRA_LOCKED_NAME,INVENTORY_MENU_MODULE_NAME,INVENTORY_MENU_MODULE_TYPES_NAME,INVENTORY_MENU_MODULE_TYPES_VEHICLECHASSIS_NAME,INVENTORY_MENU_MODULE_TYPES_VEHICLETURRET_NAME,INVENTORY_MENU_MODULE_TYPES_VEHICLEGUN_NAME,INVENTORY_MENU_MODULE_TYPES_VEHICLEENGINE_NAME,INVENTORY_MENU_MODULE_TYPES_VEHICLERADIO_NAME,INVENTORY_MENU_MODULE_FITS_NAME,INVENTORY_MENU_MODULE_FITS_MYVEHICLE_NAME,INVENTORY_MENU_MODULE_FITS_MYVEHICLES_NAME,INVENTORY_MENU_MODULE_FITS_OTHERVEHICLES_NAME,INVENTORY_MENU_MODULE_EXTRA_NAME,INVENTORY_MENU_MODULE_EXTRA_ONVEHICLE_NAME,INVENTORY_MENU_SHELL_NAME,INVENTORY_MENU_SHELL_KINDS_NAME,INVENTORY_MENU_SHELL_KINDS_ARMOR_PIERCING_NAME,INVENTORY_MENU_SHELL_KINDS_ARMOR_PIERCING_CR_NAME,INVENTORY_MENU_SHELL_KINDS_ARMOR_PIERCING_HE_NAME,INVENTORY_MENU_SHELL_KINDS_HOLLOW_CHARGE_NAME,INVENTORY_MENU_SHELL_KINDS_HIGH_EXPLOSIVE_NAME,INVENTORY_MENU_SHELL_FITS_NAME,INVENTORY_MENU_SHELL_FITS_MYVEHICLEGUN_NAME,INVENTORY_MENU_SHELL_FITS_MYINVENTORYGUNS_NAME,INVENTORY_MENU_SHELL_FITS_MYVEHICLESINVENTORYGUNS_NAME,INVENTORY_MENU_SHELL_FITS_OTHERGUNS_NAME,INVENTORY_MENU_OPTIONALDEVICE_NAME,INVENTORY_MENU_OPTIONALDEVICE_FITS_NAME,INVENTORY_MENU_OPTIONALDEVICE_FITS_MYVEHICLE_NAME,INVENTORY_MENU_OPTIONALDEVICE_FITS_MYVEHICLES_NAME,INVENTORY_MENU_OPTIONALDEVICE_FITS_OTHERVEHICLES_NAME,INVENTORY_MENU_OPTIONALDEVICE_EXTRA_NAME,INVENTORY_MENU_OPTIONALDEVICE_EXTRA_ONVEHICLE_NAME,INVENTORY_MENU_EQUIPMENT_NAME,INVENTORY_MENU_EQUIPMENT_FITS_NAME,INVENTORY_MENU_EQUIPMENT_FITS_MYVEHICLE_NAME,INVENTORY_MENU_EQUIPMENT_FITS_MYVEHICLES_NAME,INVENTORY_MENU_EQUIPMENT_FITS_OTHERVEHICLES_NAME];
         
-        public static var TANK_PARAMS_ENUM:Array;
+        public static var TANK_PARAMS_ENUM:Array = [TANK_PARAMS_MAXHEALTH,TANK_PARAMS_WEIGHT,TANK_PARAMS_ENGINEPOWER,TANK_PARAMS_ENGINEPOWERPERTON,TANK_PARAMS_SPEEDLIMITS,TANK_PARAMS_CHASSISROTATIONSPEED,TANK_PARAMS_HULLARMOR,TANK_PARAMS_TURRETARMOR,TANK_PARAMS_RELOADTIME,TANK_PARAMS_RELOADTIMESECS,TANK_PARAMS_PIERCINGPOWER,TANK_PARAMS_DAMAGE,TANK_PARAMS_DAMAGEAVG,TANK_PARAMS_DAMAGEAVGPERMINUTE,TANK_PARAMS_TURRETROTATIONSPEED,TANK_PARAMS_GUNROTATIONSPEED,TANK_PARAMS_CIRCULARVISIONRADIUS,TANK_PARAMS_RADIODISTANCE,TANK_PARAMS_PARAM12,TANK_PARAMS_SHOTDISPERSIONANGLE,TANK_PARAMS_AIMINGTIME,TANK_PARAMS_MAXAMMO,TANK_PARAMS_VALUES_PARAM12_VALUE0,TANK_PARAMS_VALUES_PARAM12_VALUE1,TANK_PARAMS_VALUES_PARAM12_VALUE2,TANK_PARAMS_VALUES_PARAM12_VALUE3,TANK_PARAMS_VALUES_PARAM10_VALUE0,TANK_PARAMS_VALUES_PARAM10_VALUE1,TANK_PARAMS_VALUES_PARAM10_VALUE2,TANK_PARAMS_VALUES_PARAM10_VALUE3,TANK_PARAMS_VALUES_PARAM11_VALUE0,TANK_PARAMS_VALUES_PARAM11_VALUE1,TANK_PARAMS_VALUES_PARAM11_VALUE2,TANK_PARAMS_VALUES_PARAM11_VALUE3,TANK_PARAMS_EXPLOSIONRADIUS];
         
-        public static var LOADING_BATTLETYPES_ENUM:Array;
+        public static var LOADING_BATTLETYPES_ENUM:Array = [LOADING_BATTLETYPES_0,LOADING_BATTLETYPES_1,LOADING_BATTLETYPES_2,LOADING_BATTLETYPES_3,LOADING_BATTLETYPES_4,LOADING_BATTLETYPES_5,LOADING_BATTLETYPES_6,LOADING_BATTLETYPES_7,LOADING_BATTLETYPES_8];
         
-        public static var TANKCAROUSEL_VEHICLESTATES_ENUM:Array;
+        public static var TANKCAROUSEL_VEHICLESTATES_ENUM:Array = [TANKCAROUSEL_VEHICLESTATES_BATTLE,TANKCAROUSEL_VEHICLESTATES_LOCKED,TANKCAROUSEL_VEHICLESTATES_CLANLOCKED,TANKCAROUSEL_VEHICLESTATES_INPREBATTLE,TANKCAROUSEL_VEHICLESTATES_AMMONOTFULL,TANKCAROUSEL_VEHICLESTATES_DAMAGED,TANKCAROUSEL_VEHICLESTATES_DESTROYED,TANKCAROUSEL_VEHICLESTATES_EXPLODED,TANKCAROUSEL_VEHICLESTATES_NOTPRESENT,TANKCAROUSEL_VEHICLESTATES_UNDAMAGED,TANKCAROUSEL_VEHICLESTATES_NOT_SUITABLE,TANKCAROUSEL_VEHICLESTATES_SERVERRESTRICTION,TANKCAROUSEL_VEHICLESTATES_CREWNOTFULL,TANKCAROUSEL_VEHICLESTATES_BUYTANK,TANKCAROUSEL_VEHICLESTATES_BUYTANKEMPTYCOUNT,TANKCAROUSEL_VEHICLESTATES_BUYSLOT];
         
-        public static var SHOP_TABLE_HEADER_COUNT_ENUM:Array;
+        public static var SHOP_TABLE_HEADER_COUNT_ENUM:Array = [SHOP_TABLE_HEADER_COUNT_VEHICLE,SHOP_TABLE_HEADER_COUNT_MODULE,SHOP_TABLE_HEADER_COUNT_SHELL,SHOP_TABLE_HEADER_COUNT_OPTIONALDEVICE,SHOP_TABLE_HEADER_COUNT_EQUIPMENT];
         
-        public static var TANKMEN_ENUM:Array;
+        public static var TANKMEN_ENUM:Array = [TANKMEN_LIGHTTANK,TANKMEN_MEDIUMTANK,TANKMEN_HEAVYTANK,TANKMEN_AT_SPG,TANKMEN_SPG,TANKMEN_LOCKREASON_INBATTLE,TANKMEN_LOCKREASON_PREBATTLE,TANKMEN_LOCKREASON_BROKEN];
         
-        public static var DENUNCIATION_ENUM:Array;
+        public static var DENUNCIATION_ENUM:Array = [DENUNCIATION_0,DENUNCIATION_1,DENUNCIATION_2,DENUNCIATION_3,DENUNCIATION_4,DENUNCIATION_5,DENUNCIATION_6];
         
-        public static var VEHICLEINFO_PARAMS_ENUM:Array;
+        public static var VEHICLEINFO_PARAMS_ENUM:Array = [VEHICLEINFO_PARAMS_MAXHEALTH,VEHICLEINFO_PARAMS_WEIGHT,VEHICLEINFO_PARAMS_ENGINEPOWER,VEHICLEINFO_PARAMS_SPEEDLIMITS,VEHICLEINFO_PARAMS_CHASSISROTATIONSPEED,VEHICLEINFO_PARAMS_HULLARMOR,VEHICLEINFO_PARAMS_TURRETARMOR,VEHICLEINFO_PARAMS_RELOADTIME,VEHICLEINFO_PARAMS_PIERCINGPOWER,VEHICLEINFO_PARAMS_DAMAGE,VEHICLEINFO_PARAMS_TURRETROTATIONSPEED,VEHICLEINFO_PARAMS_GUNROTATIONSPEED,VEHICLEINFO_PARAMS_CIRCULARVISIONRADIUS,VEHICLEINFO_PARAMS_RADIODISTANCE];
         
-        public static var LOADING_BATTLETYPES_DESC_ENUM:Array;
+        public static var LOADING_BATTLETYPES_DESC_ENUM:Array = [LOADING_BATTLETYPES_DESC_0,LOADING_BATTLETYPES_DESC_1,LOADING_BATTLETYPES_DESC_2,LOADING_BATTLETYPES_DESC_3,LOADING_BATTLETYPES_DESC_4,LOADING_BATTLETYPES_DESC_5,LOADING_BATTLETYPES_DESC_6,LOADING_BATTLETYPES_DESC_7,LOADING_BATTLETYPES_DESC_8];
         
-        public static var PROFILE_STATS_BLOCKS_ENUM:Array;
+        public static var PROFILE_STATS_BLOCKS_ENUM:Array = [PROFILE_STATS_BLOCKS_COMMON,PROFILE_STATS_BLOCKS_BATTLEEFFECT,PROFILE_STATS_BLOCKS_CREDITS,PROFILE_STATS_BLOCKS_STUDYING];
         
-        public static var PROFILE_STATS_ITEMS_ENUM:Array;
+        public static var PROFILE_STATS_ITEMS_ENUM:Array = [PROFILE_STATS_ITEMS_READYTOLEARN,PROFILE_STATS_ITEMS_NEXTSKILLXPLEFT,PROFILE_STATS_ITEMS_NEXTSKILLBATTLESLEFT,PROFILE_STATS_ITEMS_XP,PROFILE_STATS_ITEMS_FRAGS,PROFILE_STATS_ITEMS_UNKNOWN,PROFILE_STATS_ITEMS_READY,PROFILE_STATS_ITEMS_FRAGSBEAST,PROFILE_STATS_ITEMS_AVGEXPERIENCE,PROFILE_STATS_ITEMS_MAXXP,PROFILE_STATS_ITEMS_MAXFRAGS,PROFILE_STATS_ITEMS_BATTLESCOUNT,PROFILE_STATS_ITEMS_WINS,PROFILE_STATS_ITEMS_LOSSES,PROFILE_STATS_ITEMS_SURVIVEDBATTLES,PROFILE_STATS_ITEMS_LASTBATTLETIME,PROFILE_STATS_ITEMS_EFFECTIVESHOTS,PROFILE_STATS_ITEMS_DAMAGEDEALT,PROFILE_STATS_ITEMS_HEROES,PROFILE_STATS_ITEMS_WARRIOR,PROFILE_STATS_ITEMS_INVADER,PROFILE_STATS_ITEMS_SNIPER,PROFILE_STATS_ITEMS_DEFENDER,PROFILE_STATS_ITEMS_STEELWALL,PROFILE_STATS_ITEMS_SUPPORTER,PROFILE_STATS_ITEMS_SCOUT,PROFILE_STATS_ITEMS_MEDALKAY];
         
-        public static var LOGIN_STATUS_ENUM:Array;
+        public static var LOGIN_STATUS_ENUM:Array = [LOGIN_STATUS_EMPTY_LOGIN,LOGIN_STATUS_INVALID_LOGIN_LENGTH,LOGIN_STATUS_INVALID_NICKNAME,LOGIN_STATUS_INVALID_LOGIN,LOGIN_STATUS_EMPTY_PASSWORD,LOGIN_STATUS_INVALID_PASSWORD,LOGIN_STATUS_EMPTY_SERVER,LOGIN_STATUS_CONNECTING,LOGIN_STATUS_DISCONNECTED,LOGIN_STATUS_UNAVAILABLE,LOGIN_STATUS_LOGIN_REJECTED_ALREADY_LOGGED_IN,LOGIN_STATUS_CONNECTION_FAILED,LOGIN_STATUS_DNS_LOOKUP_FAILED,LOGIN_STATUS_UNKNOWN_ERROR,LOGIN_STATUS_CANCELLED,LOGIN_STATUS_LOGIN_REJECTED_NO_SUCH_USER,LOGIN_STATUS_LOGIN_REJECTED_ACTIVATING,LOGIN_STATUS_LOGIN_REJECTED_INVALID_PASSWORD,LOGIN_STATUS_LOGIN_REJECTED_NO_BASEAPP_RESPONSE,LOGIN_STATUS_LOGIN_REJECTED_ILLEGAL_CHARACTERS,LOGIN_STATUS_LOGIN_BAD_PROTOCOL_VERSION,LOGIN_STATUS_LOGIN_REJECTED_BAD_DIGEST,LOGIN_STATUS_LOGIN_REJECTED_SERVER_NOT_READY,LOGIN_STATUS_LOGIN_REJECTED_BASEAPP_OVERLOAD,LOGIN_STATUS_LOGIN_REJECTED_CELLAPP_OVERLOAD,LOGIN_STATUS_LOGIN_REJECTED_DBMGR_OVERLOAD,LOGIN_STATUS_LOGIN_REJECTED_LOGINS_NOT_ALLOWED,LOGIN_STATUS_LOGIN_REJECTED_REGISTRATION_NOT_CONFIRMED,LOGIN_STATUS_LOGIN_REJECTED_RATE_LIMITED,LOGIN_STATUS_LOGIN_REJECTED_USERS_LIMIT,LOGIN_STATUS_LOGIN_REJECTED_DB_GENERAL_FAILURE,LOGIN_STATUS_LOGIN_REJECTED_DB_NOT_READY,LOGIN_STATUS_LOGIN_REJECTED_NO_BASEAPPS,LOGIN_STATUS_LOGIN_REJECTED_NO_LOGINAPP_RESPONSE,LOGIN_STATUS_LOGIN_REJECTED_BASEAPP_TIMEOUT,LOGIN_STATUS_LOGIN_REJECTED_BASEAPPMGR_TIMEOUT,LOGIN_STATUS_LOGIN_MALFORMED_REQUEST,LOGIN_STATUS_PUBLIC_KEY_LOOKUP_FAILED,LOGIN_STATUS_ALREADY_ONLINE_LOCALLY,LOGIN_STATUS_LOGIN_REJECTED_BAN,LOGIN_STATUS_LOGIN_REJECTED_BAN_UNLIMITED,LOGIN_STATUS_LOGIN_CUSTOM_DEFINED_ERROR,LOGIN_STATUS_LOGIN_REJECTED_LOGIN_QUEUE,LOGIN_STATUS_LOGIN_REJECTED_NICKNAME_ALREADY_EXIST,LOGIN_STATUS_LOGIN_REJECTED_UNABLE_TO_PARSE_JSON,LOGIN_STATUS_LOGIN_REJECTED_REGISTRATION_NOT_ALLOWED,LOGIN_STATUS_LOGIN_REJECTED_INACCESSIBLE_REALM,LOGIN_STATUS_LOGIN_REJECTED_IP_ADDRESS_BAN,LOGIN_STATUS_LAUNCHERNOTFOUND,LOGIN_STATUS_SESSION_END,LOGIN_STATUS_ACCOUNTNOTREADY,LOGIN_STATUS_VERSIONMISMATCH,LOGIN_STATUS_CENTERRESTART,LOGIN_STATUS_CLIENT_SERVER_VERSIONS_ARE_DIFFERENT];
         
-        public static var TRAINING_INFO_ENUM:Array;
+        public static var TRAINING_INFO_ENUM:Array = [TRAINING_INFO_TITLE,TRAINING_INFO_STARTBUTTON,TRAINING_INFO_SETTINGSBUTTON,TRAINING_INFO_INVITEBUTTON,TRAINING_INFO_EXITBUTTON,TRAINING_INFO_DELETEBUTTON,TRAINING_INFO_OBSERVER,TRAINING_INFO_TEAM1LABEL,TRAINING_INFO_TEAM2LABEL,TRAINING_INFO_OTHERLABEL,TRAINING_INFO_SETTINGS_TITLE,TRAINING_INFO_SETTINGS_OKBUTTON,TRAINING_INFO_MAP,TRAINING_INFO_TIMEOUT_LABEL,TRAINING_INFO_TIMEOUT_VALUE,TRAINING_INFO_MAXPLAYERS,TRAINING_INFO_OWNER,TRAINING_INFO_VOICECHAT,TRAINING_INFO_STATES_STATE0,TRAINING_INFO_STATES_STATE1,TRAINING_INFO_STATES_STATE2,TRAINING_INFO_STATES_STATE4,TRAINING_INFO_STATES_STATE8,TRAINING_INFO_STATES_STATE17,TRAINING_INFO_STATES_STATE20,TRAINING_INFO_STATES_STATE24,TRAINING_INFO_USECOMMONVOICECHAT,TRAINING_INFO_USESEPARATEVOIPCHAT,TRAINING_INFO_NOTUSECHAT];
         
-        public static var PREMIUM_PERIODS_ENUM:Array;
+        public static var PREMIUM_PERIODS_ENUM:Array = [PREMIUM_PERIODS_DAYS1,PREMIUM_PERIODS_DAYS3,PREMIUM_PERIODS_DAYS7,PREMIUM_PERIODS_DAYS30,PREMIUM_PERIODS_DAYS180,PREMIUM_PERIODS_DAYS360];
         
-        public static var CONTEXTMENU_ENUM:Array;
+        public static var CONTEXTMENU_ENUM:Array = [CONTEXTMENU_VEHICLEINFO,CONTEXTMENU_VEHICLEINFOEX,CONTEXTMENU_GOTONATIONTREE,CONTEXTMENU_GOTONEXTVEHICLE,CONTEXTMENU_VEHICLESELL,CONTEXTMENU_VEHICLERESEARCH,CONTEXTMENU_VEHICLECHECK,CONTEXTMENU_VEHICLEUNCHECK,CONTEXTMENU_USERINFO,CONTEXTMENU_MONEYTRANSFER,CONTEXTMENU_CREATEPRIVATECHANNEL,CONTEXTMENU_ADDTOFRIENDS,CONTEXTMENU_REMOVEFROMFRIENDS,CONTEXTMENU_ADDTOIGNORED,CONTEXTMENU_REMOVEFROMIGNORED,CONTEXTMENU_COPYTOCLIPBOARD,CONTEXTMENU_SETMUTED,CONTEXTMENU_UNSETMUTED,CONTEXTMENU_MODULEINFO,CONTEXTMENU_SELL,CONTEXTMENU_SELLFROMINVENTORY,CONTEXTMENU_SELECTVEHICLEINHANGAR,CONTEXTMENU_SHOWVEHICLESTATISTICS,CONTEXTMENU_BUY,CONTEXTMENU_UNLOAD,CONTEXTMENU_CANCELBUY,CONTEXTMENU_BUYANDEQUIP,CONTEXTMENU_EQUIP,CONTEXTMENU_UNLOCK,CONTEXTMENU_KICKPLAYERFROMPREBATTLE,CONTEXTMENU_KICKPLAYERFROMUNIT,CONTEXTMENU_APPEAL,CONTEXTMENU_OFFEND,CONTEXTMENU_FLOOD,CONTEXTMENU_BLACKMAIL,CONTEXTMENU_SWINDLE,CONTEXTMENU_NOTFAIRPLAY,CONTEXTMENU_FORBIDDENNICK,CONTEXTMENU_BOT,CONTEXTMENU_PERSONALCASE,CONTEXTMENU_TANKMANUNLOAD,CONTEXTMENU_TANKMANUNLOADALL,CONTEXTMENU_DISMISS,CONTEXTMENU_LOCKSLOT,CONTEXTMENU_UNLOCKSLOT];
         
-        public static var NATIONS_ENUM:Array;
+        public static var NATIONS_ENUM:Array = [NATIONS_TITLE,NATIONS_USSR,NATIONS_GERMANY,NATIONS_USA,NATIONS_FRANCE,NATIONS_CHINA,NATIONS_JAPAN,NATIONS_UK,NATIONS_ALL];
         
-        public static var TANKMANRECRUITRENDERER_ENUM:Array;
+        public static var TANKMANRECRUITRENDERER_ENUM:Array = [TANKMANRECRUITRENDERER_PERSONALCASE,TANKMANRECRUITRENDERER_COMMANDER,TANKMANRECRUITRENDERER_GUNNER,TANKMANRECRUITRENDERER_LOADER,TANKMANRECRUITRENDERER_DRIVER,TANKMANRECRUITRENDERER_RADIOMAN,TANKMANRECRUITRENDERER_DESCR,TANKMANRECRUITRENDERER_UNLOAD];
         
-        public static var MODULEINFO_COMPATIBLE_ENUM:Array;
+        public static var MODULEINFO_COMPATIBLE_ENUM:Array = [MODULEINFO_COMPATIBLE_TURRETS,MODULEINFO_COMPATIBLE_SHELLS,MODULEINFO_COMPATIBLE_GUNS,MODULEINFO_COMPATIBLE_SHELLGUNS,MODULEINFO_COMPATIBLE_VEHICLES,MODULEINFO_COMPATIBLE_UNICHARGEDVEHICLES,MODULEINFO_COMPATIBLE_CLIPVEHICLES];
         
-        public static function nation_tree_title(param1:String) : String {
+        public static function nation_tree_title(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:nation_tree/title/" + param1;
             if(NATION_TREE_TITLE_ENUM.indexOf(_loc2_) == -1)
@@ -2078,161 +2080,184 @@ package
             return _loc2_;
         }
         
-        public static function tankmanpersonalcase_modifiers(param1:String) : String {
+        public static function tankmanpersonalcase_modifiers(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:tankmanPersonalCase/modifiers/" + param1;
             App.utils.asserter.assert(!(TANKMANPERSONALCASE_MODIFIERS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function tankmantrainingwindow(param1:String) : String {
+        public static function tankmantrainingwindow(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:tankmanTrainingWindow/" + param1;
             App.utils.asserter.assert(!(TANKMANTRAININGWINDOW_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function shop_menu(param1:String) : String {
+        public static function shop_menu(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:shop/menu/" + param1;
             App.utils.asserter.assert(!(SHOP_MENU_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function moduleinfo_params(param1:String) : String {
+        public static function moduleinfo_params(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:moduleInfo/params/" + param1;
             App.utils.asserter.assert(!(MODULEINFO_PARAMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function skilldropwindow_study(param1:String) : String {
+        public static function skilldropwindow_study(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:skillDropWindow/study/" + param1;
             App.utils.asserter.assert(!(SKILLDROPWINDOW_STUDY_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function inventory_menu(param1:String) : String {
+        public static function inventory_menu(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:inventory/menu/" + param1;
             App.utils.asserter.assert(!(INVENTORY_MENU_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function tank_params(param1:String) : String {
+        public static function tank_params(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:tank_params/" + param1;
             App.utils.asserter.assert(!(TANK_PARAMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function loading_battletypes(param1:String) : String {
+        public static function loading_battletypes(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:loading/battleTypes/" + param1;
             App.utils.asserter.assert(!(LOADING_BATTLETYPES_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function tankcarousel_vehiclestates(param1:String) : String {
+        public static function tankcarousel_vehiclestates(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:tankCarousel/vehicleStates/" + param1;
             App.utils.asserter.assert(!(TANKCAROUSEL_VEHICLESTATES_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function shop_table_header_count(param1:String) : String {
+        public static function shop_table_header_count(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:shop/table/header/count/" + param1;
             App.utils.asserter.assert(!(SHOP_TABLE_HEADER_COUNT_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function tankmen(param1:String) : String {
+        public static function tankmen(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:tankmen/" + param1;
             App.utils.asserter.assert(!(TANKMEN_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function denunciation(param1:String) : String {
+        public static function denunciation(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:denunciation/" + param1;
             App.utils.asserter.assert(!(DENUNCIATION_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function vehicleinfo_params(param1:String) : String {
+        public static function vehicleinfo_params(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:vehicleInfo/params/" + param1;
             App.utils.asserter.assert(!(VEHICLEINFO_PARAMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function loading_battletypes_desc(param1:String) : String {
+        public static function loading_battletypes_desc(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:loading/battleTypes/desc/" + param1;
             App.utils.asserter.assert(!(LOADING_BATTLETYPES_DESC_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function profile_stats_blocks(param1:String) : String {
+        public static function profile_stats_blocks(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:profile/stats/blocks/" + param1;
             App.utils.asserter.assert(!(PROFILE_STATS_BLOCKS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function profile_stats_items(param1:String) : String {
+        public static function profile_stats_items(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:profile/stats/items/" + param1;
             App.utils.asserter.assert(!(PROFILE_STATS_ITEMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function login_status(param1:String) : String {
+        public static function login_status(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:login/status/" + param1;
             App.utils.asserter.assert(!(LOGIN_STATUS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function training_info(param1:String) : String {
+        public static function training_info(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:training/info/" + param1;
             App.utils.asserter.assert(!(TRAINING_INFO_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function premium_periods(param1:String) : String {
+        public static function premium_periods(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:premium/periods/" + param1;
             App.utils.asserter.assert(!(PREMIUM_PERIODS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function contextmenu(param1:String) : String {
+        public static function contextmenu(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:contextMenu/" + param1;
             App.utils.asserter.assert(!(CONTEXTMENU_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function nations(param1:String) : String {
+        public static function nations(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:nations/" + param1;
             App.utils.asserter.assert(!(NATIONS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function tankmanrecruitrenderer(param1:String) : String {
+        public static function tankmanrecruitrenderer(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:tankmanRecruitRenderer/" + param1;
             App.utils.asserter.assert(!(TANKMANRECRUITRENDERER_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function moduleinfo_compatible(param1:String) : String {
+        public static function moduleinfo_compatible(param1:String) : String
+        {
             var _loc2_:String = null;
             _loc2_ = "#menu:moduleInfo/compatible/" + param1;
             App.utils.asserter.assert(!(MODULEINFO_COMPATIBLE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");

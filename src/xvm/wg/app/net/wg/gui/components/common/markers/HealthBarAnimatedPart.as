@@ -8,7 +8,8 @@ package net.wg.gui.components.common.markers
     public class HealthBarAnimatedPart extends UIComponent
     {
         
-        public function HealthBarAnimatedPart() {
+        public function HealthBarAnimatedPart()
+        {
             super();
             stop();
             visible = false;
@@ -34,12 +35,14 @@ package net.wg.gui.components.common.markers
         
         public var animate_mc:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(TimelineEvent.TWEEN_COMPLETE,this.onTimelineTweenComplete);
         }
         
-        public function playShowTween() : void {
+        public function playShowTween() : void
+        {
             var _loc1_:String = this.tweenState;
             switch(this.tweenState)
             {
@@ -60,15 +63,18 @@ package net.wg.gui.components.common.markers
             }
         }
         
-        protected function setState() : void {
+        protected function setState() : void
+        {
             gotoAndPlay(this.tweenState);
         }
         
-        private function onTimelineTweenComplete(param1:TimelineEvent) : void {
+        private function onTimelineTweenComplete(param1:TimelineEvent) : void
+        {
             this.onTweenComplete(param1.isShow);
         }
         
-        public function onTweenComplete(param1:Boolean) : void {
+        public function onTweenComplete(param1:Boolean) : void
+        {
             if(param1)
             {
                 this.tweenState = ACTIVE_STATE;
@@ -83,12 +89,14 @@ package net.wg.gui.components.common.markers
             }
         }
         
-        public function playHideTween() : void {
+        public function playHideTween() : void
+        {
             this.tweenState = HIDE_STATE;
             gotoAndPlay(this.tweenState);
         }
         
-        public function setAnimationType(param1:String) : void {
+        public function setAnimationType(param1:String) : void
+        {
             if(this.animate_mc)
             {
                 this.animate_mc.gotoAndStop(param1);

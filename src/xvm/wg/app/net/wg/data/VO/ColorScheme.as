@@ -12,7 +12,8 @@ package net.wg.data.VO
     public class ColorScheme extends DAAPIDataClass implements IColorScheme
     {
         
-        public function ColorScheme(param1:Object) {
+        public function ColorScheme(param1:Object)
+        {
             super(param1);
         }
         
@@ -30,35 +31,43 @@ package net.wg.data.VO
         
         private var _adjustOffset:BitmapFilter = null;
         
-        public function get aliasColor() : String {
+        public function get aliasColor() : String
+        {
             return this._aliasColor;
         }
         
-        public function set aliasColor(param1:String) : void {
+        public function set aliasColor(param1:String) : void
+        {
             this._aliasColor = param1;
         }
         
-        public function get rgb() : Number {
+        public function get rgb() : Number
+        {
             return this._rgb;
         }
         
-        public function set rgb(param1:Number) : void {
+        public function set rgb(param1:Number) : void
+        {
             this._rgb = param1;
         }
         
-        public function get schemeName() : String {
+        public function get schemeName() : String
+        {
             return this._schemeName;
         }
         
-        public function set schemeName(param1:String) : void {
+        public function set schemeName(param1:String) : void
+        {
             this._schemeName = param1;
         }
         
-        public function get transform() : Object {
+        public function get transform() : Object
+        {
             return this._transform;
         }
         
-        public function set transform(param1:Object) : void {
+        public function set transform(param1:Object) : void
+        {
             this._transform = param1;
             var _loc2_:Object = param1["mult"];
             var _loc3_:Object = param1["offset"];
@@ -67,15 +76,18 @@ package net.wg.data.VO
             this._colorTransform = new ColorTransform(_loc2_[0],_loc2_[1],_loc2_[2],_loc2_[3],_loc3_[0],_loc3_[1],_loc3_[2],_loc3_[3]);
         }
         
-        public function get colorTransform() : ColorTransform {
+        public function get colorTransform() : ColorTransform
+        {
             return this._colorTransform;
         }
         
-        public function get adjust() : Object {
+        public function get adjust() : Object
+        {
             return this._adjust;
         }
         
-        public function set adjust(param1:Object) : void {
+        public function set adjust(param1:Object) : void
+        {
             this._adjust = param1;
             var _loc2_:Array = param1["offset"];
             this.assertNotNull(_loc2_,"offset");
@@ -87,11 +99,13 @@ package net.wg.data.VO
             this._adjustOffset = new ColorMatrixFilter(_loc3_.CalculateFinalFlatArray());
         }
         
-        public function get adjustOffset() : BitmapFilter {
+        public function get adjustOffset() : BitmapFilter
+        {
             return this._adjustOffset;
         }
         
-        private function assertNotNull(param1:Object, param2:String) : void {
+        private function assertNotNull(param1:Object, param2:String) : void
+        {
             App.utils.asserter.assertNotNull(param1,param2 + Errors.CANT_NULL,NullPointerException);
         }
     }

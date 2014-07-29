@@ -6,7 +6,8 @@ package net.wg.gui.components.common.waiting
     public class WaitingMc extends UIComponent
     {
         
-        public function WaitingMc() {
+        public function WaitingMc()
+        {
             super();
             id++;
             this.uid = id;
@@ -22,17 +23,20 @@ package net.wg.gui.components.common.waiting
         
         private var _text:String = "";
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.textField = null;
             super.onDispose();
         }
         
-        public function setMessage(param1:String) : void {
+        public function setMessage(param1:String) : void
+        {
             this._text = param1;
             invalidate(TEXT_INVALID);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(TEXT_INVALID))
             {

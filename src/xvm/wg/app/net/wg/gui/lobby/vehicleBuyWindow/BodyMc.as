@@ -8,14 +8,15 @@ package net.wg.gui.lobby.vehicleBuyWindow
     import net.wg.gui.components.controls.TankmanTrainingButton;
     import scaleform.clik.controls.ButtonGroup;
     import scaleform.clik.controls.Button;
-    import net.wg.utils.ILocale;
     import flash.events.Event;
+    import net.wg.utils.ILocale;
     import net.wg.data.constants.SoundTypes;
     
     public class BodyMc extends UIComponent
     {
         
-        public function BodyMc() {
+        public function BodyMc()
+        {
             super();
         }
         
@@ -47,7 +48,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         private var lastSelectedButton:Button;
         
-        public function get selectedPrice() : Number {
+        public function get selectedPrice() : Number
+        {
             if((this.btnGroup) && (this.btnGroup.selectedButton))
             {
                 return Number(TankmanTrainingButton(this.btnGroup.selectedButton).data);
@@ -55,7 +57,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             return NaN;
         }
         
-        public function get isGoldPriceSelected() : Boolean {
+        public function get isGoldPriceSelected() : Boolean
+        {
             if((this.btnGroup) && (this.btnGroup.selectedButton))
             {
                 return TankmanTrainingButton(this.btnGroup.selectedButton).type == "academy";
@@ -63,7 +66,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             return false;
         }
         
-        public function get groupEnabled() : Boolean {
+        public function get groupEnabled() : Boolean
+        {
             if(this.lastSelectedButton)
             {
                 return this.lastSelectedButton.selected;
@@ -71,7 +75,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             return false;
         }
         
-        public function set groupEnabled(param1:Boolean) : void {
+        public function set groupEnabled(param1:Boolean) : void
+        {
             if(this.groupEnabled == param1)
             {
                 return;
@@ -86,7 +91,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             }
         }
         
-        public function get crewType() : int {
+        public function get crewType() : int
+        {
             var _loc1_:TankmanTrainingButton = null;
             if((this.btnGroup) && (this.btnGroup.selectedButton))
             {
@@ -107,8 +113,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             return -1;
         }
         
-        override protected function configUI() : void {
-            var _loc2_:ILocale = null;
+        override protected function configUI() : void
+        {
             super.configUI();
             var _loc1_:* = "scoolGroup";
             this.btnGroup = new ButtonGroup(_loc1_,this);
@@ -119,7 +125,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.scoolBtn.groupName = _loc1_;
             this.freeBtn.groupName = _loc1_;
             this.btnGroup.addEventListener(Event.CHANGE,this.groupChangeHandler,false,0,true);
-            _loc2_ = App.utils.locale;
+            var _loc2_:ILocale = App.utils.locale;
             this.slotCheckbox.label = _loc2_.makeString(DIALOGS.BUYVEHICLEDIALOG_SLOTCHECKBOX);
             this.ammoCheckbox.label = _loc2_.makeString(DIALOGS.BUYVEHICLEDIALOG_AMMOCHECKBOX);
             this.crewCheckbox.label = _loc2_.makeString(DIALOGS.BUYVEHICLEDIALOG_TANKMENCHECKBOX);
@@ -135,7 +141,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.freeBtn.soundType = SoundTypes.RNDR_NORMAL;
         }
         
-        private function groupChangeHandler(param1:Event) : void {
+        private function groupChangeHandler(param1:Event) : void
+        {
             if(this.btnGroup.selectedButton)
             {
                 this.lastSelectedButton = this.btnGroup.selectedButton;
@@ -143,7 +150,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             dispatchEvent(new Event(BUTTONS_GROUP_SELECTION_CHANGED));
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.slotActionPrice.dispose();
             this.slotActionPrice = null;
             this.ammoActionPrice.dispose();

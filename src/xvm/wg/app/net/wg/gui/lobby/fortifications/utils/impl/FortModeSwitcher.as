@@ -12,7 +12,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
     public class FortModeSwitcher extends Object implements IFortModeSwitcher
     {
         
-        public function FortModeSwitcher() {
+        public function FortModeSwitcher()
+        {
             super();
         }
         
@@ -20,11 +21,13 @@ package net.wg.gui.lobby.fortifications.utils.impl
         
         private static var MOVE_DOWN:uint = 2;
         
-        private static function getFortCommonUtils() : IFortCommonUtils {
+        private static function getFortCommonUtils() : IFortCommonUtils
+        {
             return FortCommonUtils.instance;
         }
         
-        private static function getTweenAnimator() : ITweenAnimator {
+        private static function getTweenAnimator() : ITweenAnimator
+        {
             return TweenAnimator.instance;
         }
         
@@ -34,7 +37,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
         
         private var _startDescrTextY:Number = 0;
         
-        public function init(param1:IFortMainView) : void {
+        public function init(param1:IFortMainView) : void
+        {
             App.utils.asserter.assertNotNull(param1,param1.name + Errors.CANT_NULL);
             this._mainView = param1;
             if((this._mainView.header) && (this._mainView.header.vignetteYellow) && (this._mainView.header.vignetteYellow.descrText))
@@ -43,7 +47,8 @@ package net.wg.gui.lobby.fortifications.utils.impl
             }
         }
         
-        public function applyMode(param1:FortModeStateVO) : void {
+        public function applyMode(param1:FortModeStateVO) : void
+        {
             this.removeAllAnims();
             this._mainView.gotoAndPlay(param1.mode);
             this._mainView.header.gotoAndPlay(param1.mode);
@@ -53,12 +58,14 @@ package net.wg.gui.lobby.fortifications.utils.impl
             this._animsAdded = true;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.removeAllAnims();
             this._mainView = null;
         }
         
-        private function applyStepEffects(param1:FortModeStateVO) : void {
+        private function applyStepEffects(param1:FortModeStateVO) : void
+        {
             this.fadeSomeElementSimply(param1.getYellowVignette(),this._mainView.header.vignetteYellow);
             this.moveElementSimply(param1.descrTextMove,this._startDescrTextY,this._mainView.header.vignetteYellow.descrText);
             this.fadeSomeElementSimply(param1.getClanInfo(),DisplayObject(this._mainView.header.clanInfo));
@@ -86,28 +93,33 @@ package net.wg.gui.lobby.fortifications.utils.impl
             this.fadeSomeElementSimply(param1.getLeaveModeBtn(),this._mainView.footer.leaveModeBtn);
         }
         
-        private function startArrowBlinking() : void {
+        private function startArrowBlinking() : void
+        {
             this._mainView.header.tutorialArrow.visible = true;
             getTweenAnimator().blinkInfinity(DisplayObject(this._mainView.header.tutorialArrow));
         }
         
-        private function stopArrowBlinking() : void {
+        private function stopArrowBlinking() : void
+        {
             this._mainView.header.tutorialArrow.visible = false;
             getTweenAnimator().removeAnims(DisplayObject(this._mainView.header.tutorialArrow));
         }
         
-        private function fadeSomeElementSimply(param1:FortModeElementProperty, param2:DisplayObject) : void {
+        private function fadeSomeElementSimply(param1:FortModeElementProperty, param2:DisplayObject) : void
+        {
             getFortCommonUtils().fadeSomeElementSimply(param1.isVisible,param1.isAnimated,param2);
         }
         
-        private function moveElementSimply(param1:uint, param2:Number, param3:DisplayObject) : void {
+        private function moveElementSimply(param1:uint, param2:Number, param3:DisplayObject) : void
+        {
             if(param1 != DONT_MOVE)
             {
                 getFortCommonUtils().moveElementSimply(param1 == MOVE_DOWN,param2,param3);
             }
         }
         
-        private function removeAllAnims() : void {
+        private function removeAllAnims() : void
+        {
             this.stopArrowBlinking();
             var _loc1_:ITweenAnimator = getTweenAnimator();
             _loc1_.removeAnims(DisplayObject(this._mainView.header.vignetteYellow));

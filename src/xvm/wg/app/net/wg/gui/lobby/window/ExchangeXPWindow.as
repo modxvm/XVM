@@ -25,7 +25,8 @@ package net.wg.gui.lobby.window
     public class ExchangeXPWindow extends BaseExchangeWindow implements IExchangeXpWindowMeta
     {
         
-        public function ExchangeXPWindow() {
+        public function ExchangeXPWindow()
+        {
             super();
             isModal = false;
             canResize = false;
@@ -89,7 +90,8 @@ package net.wg.gui.lobby.window
         
         private var selectedGold:int;
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             var _loc2_:Padding = null;
             super.setWindow(param1);
             if(window)
@@ -104,14 +106,16 @@ package net.wg.gui.lobby.window
             }
         }
         
-        public function as_totalExperienceChanged(param1:Number) : void {
+        public function as_totalExperienceChanged(param1:Number) : void
+        {
             this.totalXP = param1;
             var _loc2_:ILocale = App.utils?App.utils.locale:null;
             this.itExperienceBefore.text = _loc2_?_loc2_.gold(this.totalXP):this.totalXP.toString();
             invalidate(TOTAL_RESULT_INVALID);
         }
         
-        public function as_vehiclesDataChanged(param1:Boolean, param2:Array) : void {
+        public function as_vehiclesDataChanged(param1:Boolean, param2:Array) : void
+        {
             var vehicleInfo:ExchangeXPVehicleVO = null;
             var object:Object = null;
             var lng:uint = 0;
@@ -142,7 +146,8 @@ package net.wg.gui.lobby.window
             }
         }
         
-        public function as_setWalletStatus(param1:Object) : void {
+        public function as_setWalletStatus(param1:Object) : void
+        {
             var _loc2_:* = false;
             var _loc3_:* = false;
             var _loc4_:* = false;
@@ -159,7 +164,8 @@ package net.wg.gui.lobby.window
             this.submitBtn.enabled = _loc4_;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.lblTotalAvailableXp.autoSize = TextFieldAutoSize.RIGHT;
             this.nsXpExchange.minimum = 0;
@@ -198,7 +204,8 @@ package net.wg.gui.lobby.window
             this.itTotalAvailableXp.textColor = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_CREDITS);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
@@ -279,18 +286,21 @@ package net.wg.gui.lobby.window
             }
         }
         
-        override protected function applyPrimaryCurrencyChange() : void {
+        override protected function applyPrimaryCurrencyChange() : void
+        {
             var _loc1_:ILocale = App.utils?App.utils.locale:null;
             this.itGoldBefore.text = _loc1_?_loc1_.gold(totalPrimaryCurrency):totalPrimaryCurrency.toString();
             invalidate(TOTAL_AVAILABLE_XP_INVALID);
         }
         
-        override protected function applyRatesChanges() : void {
+        override protected function applyRatesChanges() : void
+        {
             this.headerMC.setRates(rate,actionRate);
             invalidate(TOTAL_RESULT_INVALID);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.cancelBtn.removeEventListener(ButtonEvent.CLICK,cancelBtnClickHandler);
             this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler);
             removeEventListener(ExchangeXPFromVehicleIR.SELECTION_CHANGED,this.selectionIRChanged);
@@ -318,12 +328,14 @@ package net.wg.gui.lobby.window
             super.onDispose();
         }
         
-        private function checkBoxSelectHandler(param1:Event) : void {
+        private function checkBoxSelectHandler(param1:Event) : void
+        {
             this.scrollList.applySelection(this.cbSelectAll.selected);
             invalidate(TOTAL_AVAILABLE_XP_INVALID);
         }
         
-        private function sortingDirectionChanged(param1:Event) : void {
+        private function sortingDirectionChanged(param1:Event) : void
+        {
             var _loc3_:* = false;
             param1.stopImmediatePropagation();
             var _loc2_:SortingButton = SortingButton(param1.target);
@@ -334,22 +346,26 @@ package net.wg.gui.lobby.window
             }
         }
         
-        private function nsGoldChangeHandler(param1:IndexEvent) : void {
+        private function nsGoldChangeHandler(param1:IndexEvent) : void
+        {
             this.selectedGold = this.nsGoldExchange.value;
             invalidate(TOTAL_RESULT_INVALID);
         }
         
-        private function nsXpChangeHandler(param1:IndexEvent) : void {
+        private function nsXpChangeHandler(param1:IndexEvent) : void
+        {
             this.selectedGold = Math.floor(this.nsXpExchange.value / actualRate);
             invalidate(TOTAL_RESULT_INVALID);
         }
         
-        private function selectionIRChanged(param1:Event) : void {
+        private function selectionIRChanged(param1:Event) : void
+        {
             param1.stopImmediatePropagation();
             invalidate(TOTAL_AVAILABLE_XP_INVALID);
         }
         
-        private function submitBtnClickHandler(param1:ButtonEvent) : void {
+        private function submitBtnClickHandler(param1:ButtonEvent) : void
+        {
             var _loc3_:ExchangeXPVehicleVO = null;
             var _loc2_:Array = [];
             var _loc4_:DataProvider = DataProvider(this.scrollList.dataProvider);
@@ -365,10 +381,9 @@ package net.wg.gui.lobby.window
                 _loc6_++;
             }
             App.utils.asserter.assert(_loc2_.length > 0,"Flash Asserter warning: Exchange XP Window submit method have empty data array");
-            var _loc7_:Object = {
-                "exchangeXp":this.nsXpExchange.value,
-                "selectedVehicles":_loc2_
-            };
+            var _loc7_:Object = {"exchangeXp":this.nsXpExchange.value,
+            "selectedVehicles":_loc2_
+        };
         exchangeS(_loc7_);
     }
 }

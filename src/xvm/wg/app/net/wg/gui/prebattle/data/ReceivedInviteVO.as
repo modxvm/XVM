@@ -5,7 +5,8 @@ package net.wg.gui.prebattle.data
     public class ReceivedInviteVO extends DAAPIDataClass
     {
         
-        public function ReceivedInviteVO(param1:Object) {
+        public function ReceivedInviteVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -25,71 +26,88 @@ package net.wg.gui.prebattle.data
         
         private var _isDeclineVisible:Boolean = false;
         
-        public function get id() : int {
+        public function get id() : int
+        {
             return this._id;
         }
         
-        public function set id(param1:int) : void {
+        public function set id(param1:int) : void
+        {
             this._id = param1;
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
         }
         
-        public function get comment() : String {
+        public function get comment() : String
+        {
             return this._comment;
         }
         
-        public function set comment(param1:String) : void {
+        public function set comment(param1:String) : void
+        {
             this._comment = param1;
         }
         
-        public function get note() : String {
+        public function get note() : String
+        {
             return this._note;
         }
         
-        public function set note(param1:String) : void {
+        public function set note(param1:String) : void
+        {
             this._note = param1;
         }
         
-        public function get canAccept() : Boolean {
+        public function get canAccept() : Boolean
+        {
             return this._canAccept;
         }
         
-        public function set canAccept(param1:Boolean) : void {
+        public function set canAccept(param1:Boolean) : void
+        {
             this._canAccept = param1;
         }
         
-        public function get canDecline() : Boolean {
+        public function get canDecline() : Boolean
+        {
             return this._canDecline;
         }
         
-        public function set canDecline(param1:Boolean) : void {
+        public function set canDecline(param1:Boolean) : void
+        {
             this._canDecline = param1;
         }
         
-        public function get isAcceptVisible() : Boolean {
+        public function get isAcceptVisible() : Boolean
+        {
             return this._isAcceptVisible;
         }
         
-        public function set isAcceptVisible(param1:Boolean) : void {
+        public function set isAcceptVisible(param1:Boolean) : void
+        {
             this._isAcceptVisible = param1;
         }
         
-        public function get isDeclineVisible() : Boolean {
+        public function get isDeclineVisible() : Boolean
+        {
             return this._isDeclineVisible;
         }
         
-        public function set isDeclineVisible(param1:Boolean) : void {
+        public function set isDeclineVisible(param1:Boolean) : void
+        {
             this._isDeclineVisible = param1;
         }
         
-        public function hasNote() : Boolean {
+        public function hasNote() : Boolean
+        {
             return (this._note) && this._note.length > 0;
         }
     }

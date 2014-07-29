@@ -3,7 +3,8 @@ package scaleform.clik.constants
     public class ConstrainMode extends Object
     {
         
-        public function ConstrainMode() {
+        public function ConstrainMode()
+        {
             super();
         }
         

@@ -9,7 +9,8 @@ package net.wg.gui.notification
     public class ServiceMessageItemRenderer extends ServiceMessage implements IListItemRenderer
     {
         
-        public function ServiceMessageItemRenderer() {
+        public function ServiceMessageItemRenderer()
+        {
             super();
         }
         
@@ -31,39 +32,48 @@ package net.wg.gui.notification
         
         private var _backgroundLabel:String = "";
         
-        public function get index() : uint {
+        public function get index() : uint
+        {
             return this._index;
         }
         
-        public function set index(param1:uint) : void {
+        public function set index(param1:uint) : void
+        {
             this._index = param1;
         }
         
-        public function get selectable() : Boolean {
+        public function get selectable() : Boolean
+        {
             return this._selectable;
         }
         
-        public function set selectable(param1:Boolean) : void {
+        public function set selectable(param1:Boolean) : void
+        {
             this._selectable = param1;
         }
         
-        public function setListData(param1:ListData) : void {
+        public function setListData(param1:ListData) : void
+        {
             this.index = param1.index;
         }
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             this.data = param1;
         }
         
-        public function getData() : Object {
+        public function getData() : Object
+        {
             return this.data;
         }
         
-        public function get owner() : UIComponent {
+        public function get owner() : UIComponent
+        {
             return this._owner;
         }
         
-        public function set owner(param1:UIComponent) : void {
+        public function set owner(param1:UIComponent) : void
+        {
             if(this._owner)
             {
                 this._owner.removeEventListener(NotificationListEvent.UPDATE_INDEXES,this.handleUpdateIndexes,false);
@@ -76,19 +86,23 @@ package net.wg.gui.notification
             this.focusTarget = this._owner;
         }
         
-        public function get selected() : Boolean {
+        public function get selected() : Boolean
+        {
             return this._selected;
         }
         
-        public function set selected(param1:Boolean) : void {
+        public function set selected(param1:Boolean) : void
+        {
             this._selected = param1;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[Service message ListItemRenderer " + this.index + ", " + name + "]";
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc2_:InteractiveObject = null;
             super.configUI();
             focusTarget = this._owner;
@@ -105,12 +119,14 @@ package net.wg.gui.notification
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.owner = null;
             super.onDispose();
         }
         
-        private function handleUpdateIndexes(param1:NotificationListEvent) : void {
+        private function handleUpdateIndexes(param1:NotificationListEvent) : void
+        {
             var _loc2_:int = param1.length;
             if(!background)
             {

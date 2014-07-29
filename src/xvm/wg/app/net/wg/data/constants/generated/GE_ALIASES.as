@@ -3,7 +3,8 @@ package net.wg.data.constants.generated
     public class GE_ALIASES extends Object
     {
         
-        public function GE_ALIASES() {
+        public function GE_ALIASES()
+        {
             super();
         }
         

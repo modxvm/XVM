@@ -16,13 +16,15 @@ package net.wg.gui.lobby.profile.pages.summary
     public class ProfileSummary extends ProfileSummaryMeta implements IProfileSummaryMeta
     {
         
-        public function ProfileSummary() {
+        public function ProfileSummary()
+        {
             super();
         }
         
         private static var INIT_DATA_INVALID:String = "idInv";
         
-        protected static function getAchievementVector(param1:Array, param2:Boolean = false) : Array {
+        protected static function getAchievementVector(param1:Array, param2:Boolean = false) : Array
+        {
             var _loc4_:ProfileAchievementVO = null;
             var _loc5_:Object = null;
             var _loc3_:Array = [];
@@ -64,7 +66,8 @@ package net.wg.gui.lobby.profile.pages.summary
         
         private var lineTextFieldsLayout:LineTextFieldsLayout;
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             this.significantAwards.titleToolTip = PROFILE.PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP;
             layoutManager = new SectionLayoutManager(525,740);
@@ -77,7 +80,8 @@ package net.wg.gui.lobby.profile.pages.summary
             this.lineTextFieldsLayout.layout();
         }
         
-        override protected function applyResizing() : void {
+        override protected function applyResizing() : void
+        {
             if(layoutManager)
             {
                 layoutManager.setDimension(currentDimension.x,currentDimension.y);
@@ -86,7 +90,8 @@ package net.wg.gui.lobby.profile.pages.summary
             this.x = Math.round(currentDimension.x / 2 - _centerOffset);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(_baseDisposed)
             {
                 return;
@@ -98,7 +103,8 @@ package net.wg.gui.lobby.profile.pages.summary
             }
         }
         
-        override protected function applyData(param1:Object) : Object {
+        override protected function applyData(param1:Object) : Object
+        {
             var _loc2_:ProfileSummaryVO = new ProfileSummaryVO(param1);
             if(_loc2_.battlesCount != 0)
             {
@@ -151,11 +157,13 @@ package net.wg.gui.lobby.profile.pages.summary
             return _loc2_;
         }
         
-        override public function as_setInitData(param1:Object) : void {
+        override public function as_setInitData(param1:Object) : void
+        {
             this.applyInitData(new SummaryInitVO(param1));
         }
         
-        protected function applyInitData(param1:SummaryInitVO) : void {
+        protected function applyInitData(param1:SummaryInitVO) : void
+        {
             var _loc2_:Object = param1.commonScores;
             this.tfWins.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_WINS;
             this.tfHits.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_HITS;
@@ -178,11 +186,13 @@ package net.wg.gui.lobby.profile.pages.summary
             this.significantAwards.errorText = param1.significantAwardsErrorText;
         }
         
-        public function set significantAchievementProvider(param1:Array) : void {
+        public function set significantAchievementProvider(param1:Array) : void
+        {
             this.significantAwards.dataProvider = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.tfWins.dispose();
             this.tfHits.dispose();
             this.tfAvgExperience.dispose();
@@ -204,7 +214,8 @@ package net.wg.gui.lobby.profile.pages.summary
             super.onDispose();
         }
         
-        public function as_setUserData(param1:Object) : void {
+        public function as_setUserData(param1:Object) : void
+        {
             this.initData = new ProfileUserVO(param1);
             invalidate(INIT_DATA_INVALID);
         }

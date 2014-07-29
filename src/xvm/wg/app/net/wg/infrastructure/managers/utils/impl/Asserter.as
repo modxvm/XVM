@@ -7,7 +7,8 @@ package net.wg.infrastructure.managers.utils.impl
     public final class Asserter extends Object implements IAssertable
     {
         
-        public function Asserter() {
+        public function Asserter()
+        {
             super();
             this.assertProcessing = this.startingAssertProcessing;
         }
@@ -16,23 +17,28 @@ package net.wg.infrastructure.managers.utils.impl
         
         private var _errorLoggingEnabled:Boolean = true;
         
-        public final function assert(param1:Boolean, param2:String, param3:Class = null) : void {
+        public final function assert(param1:Boolean, param2:String, param3:Class = null) : void
+        {
             this.assertProcessing(param1,param2,param3);
         }
         
-        public final function assertNotNull(param1:Object, param2:String, param3:Class = null) : void {
+        public final function assertNotNull(param1:Object, param2:String, param3:Class = null) : void
+        {
             this.assert(!(param1 == null),param2);
         }
         
-        public final function assertNull(param1:Object, param2:String, param3:Class = null) : void {
+        public final function assertNull(param1:Object, param2:String, param3:Class = null) : void
+        {
             this.assert(param1 == null,param2);
         }
         
-        public final function enableErrorLogging(param1:Boolean) : void {
+        public final function enableErrorLogging(param1:Boolean) : void
+        {
             this._errorLoggingEnabled = param1;
         }
         
-        private function throwException(param1:String, param2:Class = null) : void {
+        private function throwException(param1:String, param2:Class = null) : void
+        {
             var _loc3_:Error = null;
             if(param2 == null)
             {
@@ -52,7 +58,8 @@ package net.wg.infrastructure.managers.utils.impl
             throw _loc3_;
         }
         
-        private function startingAssertProcessing(param1:Boolean, param2:String, param3:Class) : void {
+        private function startingAssertProcessing(param1:Boolean, param2:String, param3:Class) : void
+        {
             var _loc4_:Function = Object(App.globalVarsMgr).isDevelopment;
             if(_loc4_ != null)
             {
@@ -73,14 +80,16 @@ package net.wg.infrastructure.managers.utils.impl
             
         }
         
-        private function debugAssertProcessing(param1:Boolean, param2:String, param3:Class) : void {
+        private function debugAssertProcessing(param1:Boolean, param2:String, param3:Class) : void
+        {
             if(!param1)
             {
                 this.throwException(param2,param3);
             }
         }
         
-        private function releaseAssertProcessing(param1:Boolean, param2:String, param3:Class) : void {
+        private function releaseAssertProcessing(param1:Boolean, param2:String, param3:Class) : void
+        {
         }
     }
 }

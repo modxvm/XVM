@@ -11,7 +11,8 @@ package net.wg.gui.lobby.hangar.maintenance
     public class AmmoBlockOverlay extends UIComponent
     {
         
-        public function AmmoBlockOverlay() {
+        public function AmmoBlockOverlay()
+        {
             super();
             this.priceLabelTF = this.priceBlockMC.priceLabelTF;
             this.priceNoteTF = this.priceBlockMC.priceNoteTF;
@@ -39,12 +40,14 @@ package net.wg.gui.lobby.hangar.maintenance
         
         protected var model:HistoricalAmmoVO;
         
-        public function setData(param1:HistoricalAmmoVO) : void {
+        public function setData(param1:HistoricalAmmoVO) : void
+        {
             this.model = param1;
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.priceLabelTF.autoSize = TextFieldAutoSize.LEFT;
             this.priceNoteTF.autoSize = TextFieldAutoSize.LEFT;
@@ -56,7 +59,8 @@ package net.wg.gui.lobby.hangar.maintenance
             this.priceNoteTF.text = HISTORICAL_BATTLES.AMMOPRESET_PRICENOTE;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.model))
             {
@@ -69,7 +73,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.model)
             {
                 this.model.dispose();

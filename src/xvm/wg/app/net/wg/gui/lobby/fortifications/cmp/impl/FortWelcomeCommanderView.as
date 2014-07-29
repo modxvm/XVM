@@ -9,7 +9,8 @@ package net.wg.gui.lobby.fortifications.cmp.impl
     public class FortWelcomeCommanderView extends UIComponent implements IFocusContainer
     {
         
-        public function FortWelcomeCommanderView() {
+        public function FortWelcomeCommanderView()
+        {
             super();
         }
         
@@ -17,7 +18,8 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         
         public var content:FortWelcomeCommanderContent;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -28,11 +30,13 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             }
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this.content.button;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.background = null;
             this.content.dispose();
             this.content = null;

@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class BaseRallyViewMeta extends BaseDAAPIComponent
     {
         
-        public function BaseRallyViewMeta() {
+        public function BaseRallyViewMeta()
+        {
             super();
         }
     }

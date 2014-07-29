@@ -12,7 +12,8 @@ package net.wg.gui.components.advanced
     public class ButtonIconLoader extends SoundButtonEx
     {
         
-        public function ButtonIconLoader() {
+        public function ButtonIconLoader()
+        {
             super();
         }
         
@@ -24,19 +25,23 @@ package net.wg.gui.components.advanced
         
         protected var _externalSource:Boolean = false;
         
-        public function get externalSource() : Boolean {
+        public function get externalSource() : Boolean
+        {
             return this._externalSource;
         }
         
-        public function set externalSource(param1:Boolean) : void {
+        public function set externalSource(param1:Boolean) : void
+        {
             this._externalSource = param1;
         }
         
-        public function get iconSource() : String {
+        public function get iconSource() : String
+        {
             return this._iconSource;
         }
         
-        public function set iconSource(param1:String) : void {
+        public function set iconSource(param1:String) : void
+        {
             if((param1 == "" || param1 == null || param1 == this._iconSource) && !this._externalSource)
             {
                 return;
@@ -45,7 +50,8 @@ package net.wg.gui.components.advanced
             this.initLoader();
         }
         
-        protected function completeHandler(param1:Event) : void {
+        protected function completeHandler(param1:Event) : void
+        {
             if((this.loader) && (this.container.contains(this.loader)))
             {
                 this.container.removeChild(this.loader);
@@ -57,7 +63,8 @@ package net.wg.gui.components.advanced
             this.container.addChild(this.loader);
         }
         
-        private function initLoader() : void {
+        private function initLoader() : void
+        {
             this.loader = new Loader();
             this.loader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.completeHandler);
             this.loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.ioErrorHandler);
@@ -66,7 +73,8 @@ package net.wg.gui.components.advanced
             this.loader.load(_loc1_,_loc2_);
         }
         
-        private function loaderDispose() : void {
+        private function loaderDispose() : void
+        {
             if(this.loader)
             {
                 this.loader.unloadAndStop(true);
@@ -80,11 +88,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function ioErrorHandler(param1:IOErrorEvent) : void {
+        private function ioErrorHandler(param1:IOErrorEvent) : void
+        {
             DebugUtils.LOG_ERROR(this + " can\'t find source file : ",this._iconSource);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.loaderDispose();
             super.onDispose();
         }

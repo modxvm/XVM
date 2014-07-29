@@ -5,7 +5,8 @@ package net.wg.gui.historicalBattles.data
     public class BattleListItemVO extends DAAPIDataClass
     {
         
-        public function BattleListItemVO(param1:Object) {
+        public function BattleListItemVO(param1:Object)
+        {
             super(param1);
         }
         

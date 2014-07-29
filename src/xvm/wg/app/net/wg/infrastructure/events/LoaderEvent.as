@@ -6,7 +6,8 @@ package net.wg.infrastructure.events
     public class LoaderEvent extends Event
     {
         
-        public function LoaderEvent(param1:String, param2:Object, param3:String = null, param4:IView = null) {
+        public function LoaderEvent(param1:String, param2:Object, param3:String = null, param4:IView = null)
+        {
             super(param1,true,true);
             this.config = param2;
             this.token = param3;
@@ -31,7 +32,8 @@ package net.wg.infrastructure.events
         
         public var token:String;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new LoaderEvent(type,this.config,this.token,this.view);
         }
     }

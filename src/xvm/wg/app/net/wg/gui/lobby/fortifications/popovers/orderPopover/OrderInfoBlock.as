@@ -9,7 +9,8 @@ package net.wg.gui.lobby.fortifications.popovers.orderPopover
     public class OrderInfoBlock extends UIComponent
     {
         
-        public function OrderInfoBlock() {
+        public function OrderInfoBlock()
+        {
             super();
             this.createOrderBtn.UIID = 95;
         }
@@ -24,12 +25,14 @@ package net.wg.gui.lobby.fortifications.popovers.orderPopover
         
         private static var VERTICAL_PADDING:int = 21;
         
-        private static function showTooltip(param1:MouseEvent) : void {
+        private static function showTooltip(param1:MouseEvent) : void
+        {
             var _loc2_:String = App.utils.locale.makeString(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_LINKBTN);
             App.toolTipMgr.show(_loc2_);
         }
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             if(param1.type == MouseEvent.CLICK)
             {
                 App.eventLogManager.logUIEvent(param1,0);
@@ -71,41 +74,49 @@ package net.wg.gui.lobby.fortifications.popovers.orderPopover
         
         private var _showCreateOrderBtn:Boolean = true;
         
-        public function set duration(param1:String) : void {
+        public function set duration(param1:String) : void
+        {
             this._duration = param1;
             invalidate(INV_PARAM);
         }
         
-        public function set productionTime(param1:String) : void {
+        public function set productionTime(param1:String) : void
+        {
             this._productionTime = param1;
             invalidate(INV_PARAM);
         }
         
-        public function set building(param1:String) : void {
+        public function set building(param1:String) : void
+        {
             this._building = param1;
             invalidate(INV_PARAM);
         }
         
-        public function set price(param1:String) : void {
+        public function set price(param1:String) : void
+        {
             this._price = param1;
             invalidate(INV_PARAM);
         }
         
-        public function set producedAmount(param1:String) : void {
+        public function set producedAmount(param1:String) : void
+        {
             this._producedAmount = param1;
             invalidate(INV_PARAM);
         }
         
-        public function get showCreateOrderBtn() : Boolean {
+        public function get showCreateOrderBtn() : Boolean
+        {
             return this._showCreateOrderBtn;
         }
         
-        public function set showCreateOrderBtn(param1:Boolean) : void {
+        public function set showCreateOrderBtn(param1:Boolean) : void
+        {
             this._showCreateOrderBtn = param1;
             invalidate(INV_CREATE_ORDER_BTN);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.createOrderBtn.addEventListener(MouseEvent.MOUSE_OVER,showTooltip);
             this.createOrderBtn.addEventListener(MouseEvent.CLICK,hideTooltip);
@@ -117,7 +128,8 @@ package net.wg.gui.lobby.fortifications.popovers.orderPopover
             this.producedName.text = FORTIFICATIONS.ORDERS_ORDERPOPOVER_PRODUCEDAMOUNT;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
@@ -150,7 +162,8 @@ package net.wg.gui.lobby.fortifications.popovers.orderPopover
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.durationValue = null;
             this.productionTimeValue = null;
             this.buildingValue = null;

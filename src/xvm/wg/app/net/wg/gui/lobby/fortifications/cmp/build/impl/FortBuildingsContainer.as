@@ -11,7 +11,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class FortBuildingsContainer extends UIComponent implements IFortBuildingsContainer
     {
         
-        public function FortBuildingsContainer() {
+        public function FortBuildingsContainer()
+        {
             var _loc2_:IFortBuilding = null;
             super();
             this._buildings = Vector.<IFortBuilding>([this.baseBuilding,this.building1,this.building2,this.building3,this.building4,this.building5,this.building6,this.building7,this.building8]);
@@ -25,7 +26,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             addEventListener(FortBuildingEvent.BUILDING_SELECTED,this.buildingSelectedHandler);
         }
         
-        public static function updateBuildings(param1:Vector.<BuildingVO>, param2:Vector.<IFortBuilding>, param3:Boolean) : void {
+        public static function updateBuildings(param1:Vector.<BuildingVO>, param2:Vector.<IFortBuilding>, param3:Boolean) : void
+        {
             var _loc6_:BuildingVO = null;
             var _loc7_:IFortBuilding = null;
             var _loc8_:* = 0;
@@ -80,7 +82,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _buildings:Vector.<IFortBuilding> = null;
         
-        public function updateCommonMode(param1:Boolean, param2:Boolean) : void {
+        public function updateCommonMode(param1:Boolean, param2:Boolean) : void
+        {
             var _loc3_:IFortBuilding = null;
             for each(_loc3_ in this._buildings)
             {
@@ -88,7 +91,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void {
+        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void
+        {
             var _loc3_:IFortBuilding = null;
             for each(_loc3_ in this._buildings)
             {
@@ -96,19 +100,23 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function update(param1:Vector.<BuildingVO>, param2:Boolean) : void {
+        public function update(param1:Vector.<BuildingVO>, param2:Boolean) : void
+        {
             updateBuildings(param1,this.buildings,param2);
         }
         
-        public function getBuildingTooltipData(param1:String) : Array {
+        public function getBuildingTooltipData(param1:String) : Array
+        {
             return IFortBuildingCmp(parent).getBuildingTooltipDataS(param1);
         }
         
-        public function get buildings() : Vector.<IFortBuilding> {
+        public function get buildings() : Vector.<IFortBuilding>
+        {
             return this._buildings;
         }
         
-        public function setBuildingData(param1:BuildingVO, param2:Boolean) : void {
+        public function setBuildingData(param1:BuildingVO, param2:Boolean) : void
+        {
             var _loc3_:IFortBuilding = null;
             for each(_loc3_ in this._buildings)
             {
@@ -121,7 +129,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:IDisposable = null;
             removeEventListener(FortBuildingEvent.BUILDING_SELECTED,this.buildingSelectedHandler);
             for each(_loc1_ in this._buildings)
@@ -133,7 +142,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             super.onDispose();
         }
         
-        private function buildingSelectedHandler(param1:FortBuildingEvent) : void {
+        private function buildingSelectedHandler(param1:FortBuildingEvent) : void
+        {
             var _loc3_:IFortBuilding = null;
             var _loc2_:String = IFortBuilding(param1.target).uid;
             for each(_loc3_ in this._buildings)

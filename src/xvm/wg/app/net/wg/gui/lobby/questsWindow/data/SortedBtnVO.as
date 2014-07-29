@@ -5,7 +5,8 @@ package net.wg.gui.lobby.questsWindow.data
     public class SortedBtnVO extends DAAPIDataClass
     {
         
-        public function SortedBtnVO(param1:Object) {
+        public function SortedBtnVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -19,43 +20,53 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _toolTip:String = "";
         
-        public function get id() : String {
+        public function get id() : String
+        {
             return this._id;
         }
         
-        public function set id(param1:String) : void {
+        public function set id(param1:String) : void
+        {
             this._id = param1;
         }
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this._label = param1;
         }
         
-        public function get iconSource() : String {
+        public function get iconSource() : String
+        {
             return this._iconSource;
         }
         
-        public function set iconSource(param1:String) : void {
+        public function set iconSource(param1:String) : void
+        {
             this._iconSource = param1;
         }
         
-        public function get buttonWidth() : Number {
+        public function get buttonWidth() : Number
+        {
             return this._buttonWidth;
         }
         
-        public function set buttonWidth(param1:Number) : void {
+        public function set buttonWidth(param1:Number) : void
+        {
             this._buttonWidth = param1;
         }
         
-        public function get toolTip() : String {
+        public function get toolTip() : String
+        {
             return this._toolTip;
         }
         
-        public function set toolTip(param1:String) : void {
+        public function set toolTip(param1:String) : void
+        {
             this._toolTip = param1;
         }
     }

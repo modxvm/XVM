@@ -5,7 +5,8 @@ package net.wg.gui.lobby.GUIEditor.data
     public class ComponentPropertyVO extends DAAPIDataClass
     {
         
-        public function ComponentPropertyVO(param1:Object) {
+        public function ComponentPropertyVO(param1:Object)
+        {
             this.allowedValues = [];
             super(param1);
         }
@@ -20,18 +21,19 @@ package net.wg.gui.lobby.GUIEditor.data
         
         public var canModify:Boolean = true;
         
-        public function clone() : ComponentPropertyVO {
-            var _loc1_:ComponentPropertyVO = new ComponentPropertyVO({
-                "name":this.name,
-                "type":this.type,
-                "allowedValues":this.allowedValues,
-                "value":this.value,
-                "canModify":this.canModify
-            });
+        public function clone() : ComponentPropertyVO
+        {
+            var _loc1_:ComponentPropertyVO = new ComponentPropertyVO({"name":this.name,
+            "type":this.type,
+            "allowedValues":this.allowedValues,
+            "value":this.value,
+            "canModify":this.canModify
+        });
         return _loc1_;
     }
     
-    public function cloneAndSetValue(param1:*) : ComponentPropertyVO {
+    public function cloneAndSetValue(param1:*) : ComponentPropertyVO
+    {
         var _loc2_:ComponentPropertyVO = this.clone();
         _loc2_.value = param1;
         return _loc2_;

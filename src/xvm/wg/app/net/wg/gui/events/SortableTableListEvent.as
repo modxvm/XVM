@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class SortableTableListEvent extends ListEventEx
     {
         
-        public function SortableTableListEvent(param1:ListEvent) {
+        public function SortableTableListEvent(param1:ListEvent)
+        {
             var _loc2_:* = "";
             switch(param1.type)
             {

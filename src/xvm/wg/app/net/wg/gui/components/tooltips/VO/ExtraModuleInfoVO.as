@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips.VO
     public class ExtraModuleInfoVO extends DAAPIDataClass
     {
         
-        public function ExtraModuleInfoVO(param1:Object) {
+        public function ExtraModuleInfoVO(param1:Object)
+        {
             super(param1);
         }
         

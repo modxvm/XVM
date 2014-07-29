@@ -6,14 +6,16 @@ package net.wg.gui.components.icons
     public class SquadIcon extends MovieClip
     {
         
-        public function SquadIcon() {
+        public function SquadIcon()
+        {
             super();
             stop();
         }
         
         public var numTf:TextField;
         
-        public function show(param1:Boolean, param2:uint) : void {
+        public function show(param1:Boolean, param2:uint) : void
+        {
             if(param1)
             {
                 this.numTf.text = param2.toString();
@@ -26,16 +28,19 @@ package net.wg.gui.components.icons
             }
         }
         
-        public function hide() : void {
+        public function hide() : void
+        {
             this.numTf.text = "";
             this.setLabel("empty");
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG SquadIcon " + name + "]";
         }
         
-        private function setLabel(param1:String) : void {
+        private function setLabel(param1:String) : void
+        {
             if(param1 != currentFrameLabel)
             {
                 gotoAndStop(param1);

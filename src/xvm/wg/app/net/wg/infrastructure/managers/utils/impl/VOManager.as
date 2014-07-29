@@ -7,19 +7,22 @@ package net.wg.infrastructure.managers.utils.impl
     public class VOManager extends Object implements IVOManager
     {
         
-        public function VOManager() {
+        public function VOManager()
+        {
             super();
             this._walletStatusVO = new WalletStatusVO();
         }
         
         private var _walletStatusVO:IWalletStatusVO;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._walletStatusVO.dispose();
             this._walletStatusVO = null;
         }
         
-        public function get walletStatusVO() : IWalletStatusVO {
+        public function get walletStatusVO() : IWalletStatusVO
+        {
             return this._walletStatusVO;
         }
     }

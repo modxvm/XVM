@@ -6,7 +6,8 @@ package net.wg.gui.lobby.hangar
     public class IgrLabel extends UIComponent
     {
         
-        public function IgrLabel() {
+        public function IgrLabel()
+        {
             super();
         }
         

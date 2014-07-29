@@ -19,7 +19,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
     public class FortRoomView extends FortRoomMeta implements IFortRoomMeta
     {
         
-        public function FortRoomView() {
+        public function FortRoomView()
+        {
             super();
             backBtn.UIID = 51;
         }
@@ -34,33 +35,40 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         public var divisionInfoText:TextField;
         
-        public function get unitTeamSection() : SortieTeamSection {
+        public function get unitTeamSection() : SortieTeamSection
+        {
             return teamSection as SortieTeamSection;
         }
         
-        override protected function getRallyVO(param1:Object) : IRallyVO {
+        override protected function getRallyVO(param1:Object) : IRallyVO
+        {
             return new SortieVO(param1);
         }
         
-        override protected function onToggleReadyStateRequest(param1:RallyViewsEvent) : void {
+        override protected function onToggleReadyStateRequest(param1:RallyViewsEvent) : void
+        {
             App.eventLogManager.logSubSystem(EVENT_LOG_CONSTANTS.SST_UI_FORT,EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,param1.data.uiid,param1.data.arg);
             super.onToggleReadyStateRequest(param1);
         }
         
-        override protected function onChooseVehicleRequest(param1:RallyViewsEvent) : void {
+        override protected function onChooseVehicleRequest(param1:RallyViewsEvent) : void
+        {
             App.eventLogManager.logUIElement(IIdentifiable(param1.target.vehicleBtn),EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,0);
             super.onChooseVehicleRequest(param1);
         }
         
-        override protected function getTitleStr() : String {
+        override protected function getTitleStr() : String
+        {
             return FORTIFICATIONS.SORTIE_ROOM_TITLE;
         }
         
-        override protected function getRallyViewAlias() : String {
+        override protected function getRallyViewAlias() : String
+        {
             return FORTIFICATION_ALIASES.FORT_BATTLE_ROOM_VIEW_UI;
         }
         
-        override protected function coolDownControls(param1:Boolean, param2:int) : void {
+        override protected function coolDownControls(param1:Boolean, param2:int) : void
+        {
             if(param2 == CHANGE_UNIT_STATE)
             {
                 chatSection.enableEditCommitButton(param1);
@@ -73,7 +81,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             super.coolDownControls(param1,param2);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.changeDivisionBtn.visible = false;
             titleLbl.text = FORTIFICATIONS.SORTIE_ROOM_TITLE;
@@ -87,7 +96,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.filterInfo.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.changeDivisionBtn.removeEventListener(ButtonEvent.CLICK,this.changeDivisionHandler);
             this.changeDivisionBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
             this.changeDivisionBtn.removeEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
@@ -100,7 +110,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(RallyInvalidationType.RALLY_DATA)) && (rallyData))
             {
@@ -109,12 +120,14 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
-        override protected function onBackClickHandler(param1:ButtonEvent) : void {
+        override protected function onBackClickHandler(param1:ButtonEvent) : void
+        {
             super.onBackClickHandler(param1);
             App.eventLogManager.logUIEvent(param1,0);
         }
         
-        override protected function onControlRollOver(param1:MouseEvent) : void {
+        override protected function onControlRollOver(param1:MouseEvent) : void
+        {
             super.onControlRollOver(param1);
             switch(param1.target)
             {
@@ -130,7 +143,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
-        private function changeDivisionHandler(param1:ButtonEvent) : void {
+        private function changeDivisionHandler(param1:ButtonEvent) : void
+        {
             showChangeDivisionWindowS();
         }
     }

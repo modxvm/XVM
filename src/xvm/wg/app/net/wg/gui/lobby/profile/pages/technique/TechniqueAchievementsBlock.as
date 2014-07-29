@@ -8,13 +8,15 @@ package net.wg.gui.lobby.profile.pages.technique
     public class TechniqueAchievementsBlock extends AwardsTileListBlock
     {
         
-        public function TechniqueAchievementsBlock() {
+        public function TechniqueAchievementsBlock()
+        {
             super();
         }
         
         private static var defaultIR_smallWidth:int = -1;
         
-        public static function getBigRendererWidth() : Number {
+        public static function getBigRendererWidth() : Number
+        {
             if(defaultIR_smallWidth == -1)
             {
                 defaultIR_smallWidth = getDefaultWidth(Linkages.ACHIEVEMENT_COMMON);
@@ -22,13 +24,15 @@ package net.wg.gui.lobby.profile.pages.technique
             return defaultIR_smallWidth;
         }
         
-        private static function getDefaultWidth(param1:String) : uint {
+        private static function getDefaultWidth(param1:String) : uint
+        {
             var _loc2_:Class = getClass(param1);
             var _loc3_:Object = new _loc2_();
             return _loc3_.width;
         }
         
-        private static function getClass(param1:String) : Class {
+        private static function getClass(param1:String) : Class
+        {
             if(App.utils)
             {
                 return App.utils.classFactory.getClass(param1);
@@ -38,7 +42,8 @@ package net.wg.gui.lobby.profile.pages.technique
         
         private var MIN_ITEMS_COUNT:uint = 5;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             tileList.direction = DirectionMode.VERTICAL;
             tileList.columnWidth = getBigRendererWidth();
@@ -46,7 +51,8 @@ package net.wg.gui.lobby.profile.pages.technique
             tileList.itemRenderer = getClass(Linkages.ACHIEVEMENT_COMMON_VEHICLE);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
         }
     }

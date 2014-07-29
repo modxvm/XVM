@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class CyberSportIntroMeta extends BaseRallyIntroView
     {
         
-        public function CyberSportIntroMeta() {
+        public function CyberSportIntroMeta()
+        {
             super();
         }
         
@@ -16,17 +17,20 @@ package net.wg.infrastructure.base.meta.impl
         
         public var showSelectorPopup:Function = null;
         
-        public function requestVehicleSelectionS() : void {
+        public function requestVehicleSelectionS() : void
+        {
             App.utils.asserter.assertNotNull(this.requestVehicleSelection,"requestVehicleSelection" + Errors.CANT_NULL);
             this.requestVehicleSelection();
         }
         
-        public function startAutoMatchingS() : void {
+        public function startAutoMatchingS() : void
+        {
             App.utils.asserter.assertNotNull(this.startAutoMatching,"startAutoMatching" + Errors.CANT_NULL);
             this.startAutoMatching();
         }
         
-        public function showSelectorPopupS() : void {
+        public function showSelectorPopupS() : void
+        {
             App.utils.asserter.assertNotNull(this.showSelectorPopup,"showSelectorPopup" + Errors.CANT_NULL);
             this.showSelectorPopup();
         }

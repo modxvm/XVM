@@ -14,7 +14,8 @@ package net.wg.gui.cyberSport.views.autoSearch
     public class CSAutoSearchMainView extends UIComponent implements ICSAutoSearchMainView
     {
         
-        public function CSAutoSearchMainView() {
+        public function CSAutoSearchMainView()
+        {
             super();
             this.views = [];
             this.views.push(this.searchCommands,this.searchEnemy,this.waitingPlayer,this.confirmationState,this.errorState);
@@ -50,11 +51,13 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         private var frameCount:Number = 7;
         
-        private function csUpdateTimerHandler(param1:Event) : void {
+        private function csUpdateTimerHandler(param1:Event) : void
+        {
             this.initWheelBehaviour();
         }
         
-        public function enableButton(param1:Boolean) : void {
+        public function enableButton(param1:Boolean) : void
+        {
             var _loc2_:* = 0;
             while(_loc2_ < this.viewsLength)
             {
@@ -63,7 +66,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             }
         }
         
-        public function set changeState(param1:AutoSearchVO) : void {
+        public function set changeState(param1:AutoSearchVO) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -73,7 +77,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             this.initWheelBehaviour();
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             var _loc1_:InteractiveObject = null;
             var _loc2_:InteractiveObject = null;
             var _loc3_:* = 0;
@@ -89,7 +94,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             return _loc2_;
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             var _loc2_:ICSAutoSearchMainView = null;
             var _loc3_:* = 0;
             while(_loc3_ < this.viewsLength)
@@ -103,7 +109,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             }
         }
         
-        public function stopTimer() : void {
+        public function stopTimer() : void
+        {
             var _loc1_:* = 0;
             while(_loc1_ < this.viewsLength)
             {
@@ -112,7 +119,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             }
         }
         
-        private function initWheelBehaviour() : void {
+        private function initWheelBehaviour() : void
+        {
             if(this.model.state == CYBER_SPORT_ALIASES.AUTO_SEARCH_CONFIRMATION_STATE)
             {
                 this.waitingCmp.stop();
@@ -130,11 +138,13 @@ package net.wg.gui.cyberSport.views.autoSearch
             
         }
         
-        private function updateWaiting() : void {
+        private function updateWaiting() : void
+        {
             this.addEventListener(Event.ENTER_FRAME,this.wheelReversHandler);
         }
         
-        private function wheelReversHandler(param1:Event) : void {
+        private function wheelReversHandler(param1:Event) : void
+        {
             var _loc2_:* = NaN;
             if(this.frameCount <= 0)
             {
@@ -152,7 +162,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:* = 0;
             while(_loc1_ < this.viewsLength)
             {
@@ -163,7 +174,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -171,7 +183,8 @@ package net.wg.gui.cyberSport.views.autoSearch
             }
         }
         
-        private function initStates() : void {
+        private function initStates() : void
+        {
             var _loc1_:uint = 0;
             while(_loc1_ < this.viewsLength)
             {

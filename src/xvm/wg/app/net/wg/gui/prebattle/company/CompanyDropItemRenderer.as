@@ -10,7 +10,8 @@ package net.wg.gui.prebattle.company
     public class CompanyDropItemRenderer extends ListItemRenderer
     {
         
-        public function CompanyDropItemRenderer() {
+        public function CompanyDropItemRenderer()
+        {
             super();
             buttonMode = true;
             mouseEnabled = true;
@@ -22,7 +23,8 @@ package net.wg.gui.prebattle.company
         
         private var isUpdated:Boolean = false;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -35,13 +37,15 @@ package net.wg.gui.prebattle.company
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints.addElement(this.numberField.name,this.numberField,Constraints.LEFT);
             constraints.addElement(this.bg.name,this.bg,Constraints.ALL);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && !this.isUpdated)
             {
@@ -50,7 +54,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             if((data) && (data.userName))
             {
                 App.utils.commons.formatPlayerName(textField,App.utils.commons.getUserProps(data.userName,data.clanAbbrev,data.region,data.igrType));
@@ -65,7 +70,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        private function afterSetData() : void {
+        private function afterSetData() : void
+        {
             this.numberField.text = String(index + 1);
             this.bg.visible = !Boolean(index % 2);
         }

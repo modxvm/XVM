@@ -1,9 +1,10 @@
-package 
+package
 {
     public class RES_ICONS extends Object
     {
         
-        public function RES_ICONS() {
+        public function RES_ICONS()
+        {
             super();
         }
         

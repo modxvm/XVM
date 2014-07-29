@@ -7,13 +7,15 @@ package net.wg.infrastructure.base.meta.impl
     public class InventoryMeta extends Store
     {
         
-        public function InventoryMeta() {
+        public function InventoryMeta()
+        {
             super();
         }
         
         public var sellItem:Function = null;
         
-        public function sellItemS(param1:StoreTableData) : void {
+        public function sellItemS(param1:StoreTableData) : void
+        {
             App.utils.asserter.assertNotNull(this.sellItem,"sellItem" + Errors.CANT_NULL);
             this.sellItem(param1);
         }

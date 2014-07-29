@@ -14,11 +14,13 @@ package net.wg.gui.components.controls
     public class ScrollingListAutoScroll extends ScrollingList
     {
         
-        public function ScrollingListAutoScroll() {
+        public function ScrollingListAutoScroll()
+        {
             super();
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc8_:IListItemRenderer = null;
             var _loc1_:uint = _renderers.length;
             var _loc2_:Number = rowHeight;
@@ -43,7 +45,8 @@ package net.wg.gui.components.controls
             this.drawScrollBar();
         }
         
-        override protected function drawScrollBar() : void {
+        override protected function drawScrollBar() : void
+        {
             super.drawScrollBar();
             if(_scrollBar)
             {
@@ -55,11 +58,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function get availableWidth() : Number {
+        override public function get availableWidth() : Number
+        {
             return Math.round(_width) - margin * 2;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
             var _loc4_:IListItemRenderer = null;
@@ -78,7 +83,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function populateData(param1:Array) : void {
+        override protected function populateData(param1:Array) : void
+        {
             var _loc5_:IListItemRenderer = null;
             var _loc6_:uint = 0;
             var _loc7_:ListData = null;
@@ -98,7 +104,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             var _loc3_:* = 0;
             if(param1.handled)
             {
@@ -247,7 +254,8 @@ package net.wg.gui.components.controls
             param1.handled = true;
         }
         
-        private function canMoveSelectionTo(param1:int) : Boolean {
+        private function canMoveSelectionTo(param1:int) : Boolean
+        {
             var _loc2_:Object = dataProvider.requestItemAt(param1);
             if((_loc2_) && (_loc2_.hasOwnProperty("enabled")))
             {

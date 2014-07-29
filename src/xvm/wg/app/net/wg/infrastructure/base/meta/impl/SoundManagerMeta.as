@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class SoundManagerMeta extends BaseDAAPIModule
     {
         
-        public function SoundManagerMeta() {
+        public function SoundManagerMeta()
+        {
             super();
         }
         
         public var soundEventHandler:Function = null;
         
-        public function soundEventHandlerS(param1:String, param2:String, param3:String, param4:String) : void {
+        public function soundEventHandlerS(param1:String, param2:String, param3:String, param4:String) : void
+        {
             App.utils.asserter.assertNotNull(this.soundEventHandler,"soundEventHandler" + Errors.CANT_NULL);
             this.soundEventHandler(param1,param2,param3,param4);
         }

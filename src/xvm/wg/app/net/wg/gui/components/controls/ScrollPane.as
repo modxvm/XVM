@@ -16,7 +16,8 @@ package net.wg.gui.components.controls
     public class ScrollPane extends UIComponent
     {
         
-        public function ScrollPane() {
+        public function ScrollPane()
+        {
             super();
         }
         
@@ -48,7 +49,8 @@ package net.wg.gui.components.controls
         
         protected var _autoScrollBar:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(!this.maskObject)
             {
@@ -64,7 +66,8 @@ package net.wg.gui.components.controls
             mask = this.maskObject;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(TARGET_INVALID))
             {
@@ -88,7 +91,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function applyTargetChanges() : void {
+        protected function applyTargetChanges() : void
+        {
             this.removeSource();
             if(this._target)
             {
@@ -97,7 +101,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function drawBackground() : void {
+        protected function drawBackground() : void
+        {
             var _loc1_:Graphics = this.background.graphics;
             _loc1_.clear();
             _loc1_.beginFill(0,0);
@@ -105,7 +110,8 @@ package net.wg.gui.components.controls
             _loc1_.endFill();
         }
         
-        protected function drawMask() : void {
+        protected function drawMask() : void
+        {
             var _loc1_:Graphics = this.maskObject.graphics;
             _loc1_.clear();
             _loc1_.beginFill(16777215,1);
@@ -113,11 +119,13 @@ package net.wg.gui.components.controls
             _loc1_.endFill();
         }
         
-        private function targetMouseWheelHandler(param1:MouseEvent) : void {
+        private function targetMouseWheelHandler(param1:MouseEvent) : void
+        {
             this.scrollPosition = this.scrollPosition - (param1.delta > 0?1:-1);
         }
         
-        protected function applyScrollBarUpdating() : void {
+        protected function applyScrollBarUpdating() : void
+        {
             var _loc6_:* = NaN;
             var _loc7_:* = NaN;
             var _loc8_:* = NaN;
@@ -143,7 +151,8 @@ package net.wg.gui.components.controls
             this.scrollBar.trackScrollPageSize = _loc1_;
         }
         
-        protected function drawScrollBar() : void {
+        protected function drawScrollBar() : void
+        {
             if(!this._autoScrollBar)
             {
                 return;
@@ -154,23 +163,28 @@ package net.wg.gui.components.controls
             this._scrollBar.validateNow();
         }
         
-        public function set scrollBarMargin(param1:Number) : void {
+        public function set scrollBarMargin(param1:Number) : void
+        {
             this._scrollBarMargin = param1;
         }
         
-        public function get scrollBarMargin() : Number {
+        public function get scrollBarMargin() : Number
+        {
             return this._scrollBarMargin;
         }
         
-        public function get availableHeight() : Number {
+        public function get availableHeight() : Number
+        {
             return Math.round(_height);
         }
         
-        public function get target() : DisplayObject {
+        public function get target() : DisplayObject
+        {
             return this._target;
         }
         
-        public function set target(param1:DisplayObject) : void {
+        public function set target(param1:DisplayObject) : void
+        {
             this._target = param1;
             if(_invalidHash)
             {
@@ -178,11 +192,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get scrollPageSize() : Number {
+        public function get scrollPageSize() : Number
+        {
             return Math.round(_height / this._scrollStepFactor);
         }
         
-        private function removeSource() : DisplayObject {
+        private function removeSource() : DisplayObject
+        {
             var _loc1_:DisplayObjectContainer = null;
             if(this._target)
             {
@@ -196,16 +212,19 @@ package net.wg.gui.components.controls
             return this._target;
         }
         
-        public function get scrollBar() : Object {
+        public function get scrollBar() : Object
+        {
             return this._scrollBar;
         }
         
-        public function set scrollBar(param1:Object) : void {
+        public function set scrollBar(param1:Object) : void
+        {
             this._scrollBarValue = param1;
             invalidate(InvalidationType.SCROLL_BAR);
         }
         
-        protected function createScrollBar() : void {
+        protected function createScrollBar() : void
+        {
             var _loc1_:IScrollBar = null;
             var _loc2_:Class = null;
             var _loc3_:Object = null;
@@ -279,15 +298,18 @@ package net.wg.gui.components.controls
             this._scrollBar.tabEnabled = false;
         }
         
-        protected function handleScroll(param1:Event) : void {
+        protected function handleScroll(param1:Event) : void
+        {
             this.scrollPosition = this._scrollBar.position;
         }
         
-        public function get scrollPosition() : Number {
+        public function get scrollPosition() : Number
+        {
             return this._scrollPosition;
         }
         
-        public function set scrollPosition(param1:Number) : void {
+        public function set scrollPosition(param1:Number) : void
+        {
             var param1:Number = Math.max(0,Math.min(this.maxScroll,Math.round(param1)));
             if(this._scrollPosition == param1)
             {
@@ -297,11 +319,13 @@ package net.wg.gui.components.controls
             invalidate(SCROLL_UPDATE_INV);
         }
         
-        public function get maxScroll() : Number {
+        public function get maxScroll() : Number
+        {
             return Math.ceil((this.getContentHeight() - _height) / this._scrollStepFactor);
         }
         
-        protected function getContentHeight() : Number {
+        protected function getContentHeight() : Number
+        {
             if(this._target)
             {
                 return this._target.height;
@@ -309,16 +333,19 @@ package net.wg.gui.components.controls
             return 0;
         }
         
-        public function get scrollStepFactor() : Number {
+        public function get scrollStepFactor() : Number
+        {
             return this._scrollStepFactor;
         }
         
-        public function set scrollStepFactor(param1:Number) : void {
+        public function set scrollStepFactor(param1:Number) : void
+        {
             this._scrollStepFactor = param1;
             invalidate(SCROLL_UPDATE_INV);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:DisplayObject = null;
             super.onDispose();
             this.thumbOffset = null;

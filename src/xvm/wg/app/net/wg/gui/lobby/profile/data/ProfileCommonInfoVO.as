@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.data
     public class ProfileCommonInfoVO extends ProfileBaseInfoVO
     {
         
-        public function ProfileCommonInfoVO(param1:Object) {
+        public function ProfileCommonInfoVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,15 +16,18 @@ package net.wg.gui.lobby.profile.data
         
         public var avgXP:int = -1;
         
-        public function getHitsEfficiencyStr() : String {
+        public function getHitsEfficiencyStr() : String
+        {
             return ItemsUtils.floatToPercent(this.hitsEfficiency);
         }
         
-        public function getMaxExperienceStr() : String {
+        public function getMaxExperienceStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.maxXP);
         }
         
-        public function getAvgExperienceStr() : String {
+        public function getAvgExperienceStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.avgXP);
         }
     }

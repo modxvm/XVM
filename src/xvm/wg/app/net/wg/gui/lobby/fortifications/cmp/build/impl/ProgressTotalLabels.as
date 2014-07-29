@@ -8,7 +8,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class ProgressTotalLabels extends MovieClip implements IDisposable
     {
         
-        public function ProgressTotalLabels() {
+        public function ProgressTotalLabels()
+        {
             super();
         }
         
@@ -20,7 +21,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var model:BuildingProgressLblVO;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             if(this.model)
             {
                 this.model.dispose();
@@ -28,7 +30,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function set setData(param1:BuildingProgressLblVO) : void {
+        public function set setData(param1:BuildingProgressLblVO) : void
+        {
             this.model = param1;
             this.currentValue.htmlText = this.model.currentValue;
             this.totalValue.htmlText = this.model.totalValue;

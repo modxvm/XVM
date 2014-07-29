@@ -5,7 +5,8 @@ package net.wg.infrastructure.exceptions
     public class InfrastructureException extends WGGUIException
     {
         
-        public function InfrastructureException(param1:String = "", param2:* = 0) {
+        public function InfrastructureException(param1:String = "", param2:* = 0)
+        {
             super(param1,param2);
         }
     }

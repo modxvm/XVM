@@ -12,7 +12,8 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class ProfileStatistics extends ProfileStatisticsMeta implements IProfileStatisticsMeta
     {
         
-        public function ProfileStatistics() {
+        public function ProfileStatistics()
+        {
             super();
         }
         
@@ -22,13 +23,15 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         public var bodyContainer:BodyContainer;
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             layoutManager = new StatisticsLayoutManager(525,740);
             layoutManager.registerComponents(this.headerContainer);
         }
         
-        override protected function applyResizing() : void {
+        override protected function applyResizing() : void
+        {
             super.applyResizing();
             var _loc1_:* = 100;
             var _loc2_:* = 20;
@@ -39,12 +42,14 @@ package net.wg.gui.lobby.profile.pages.statistics
             this.headerLabel.width = _loc4_;
         }
         
-        override public function as_setInitData(param1:Object) : void {
+        override public function as_setInitData(param1:Object) : void
+        {
             var _loc2_:ProfileBattleTypeInitVO = new ProfileBattleTypeInitVO(param1);
             battlesDropdown.menuProvider = _loc2_.dropDownProvider;
         }
         
-        override protected function applyData(param1:Object) : Object {
+        override protected function applyData(param1:Object) : Object
+        {
             this.headerLabel.text = param1.headerText;
             this.headerContainer.battlesType = battlesType;
             this.headerContainer.setDossierData(param1.headerParams);
@@ -52,7 +57,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             return super.applyData(param1);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.headerLabel = null;
             this.headerContainer.dispose();
             this.headerContainer = null;

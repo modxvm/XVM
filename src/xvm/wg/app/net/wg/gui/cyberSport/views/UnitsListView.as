@@ -22,7 +22,8 @@ package net.wg.gui.cyberSport.views
     public class UnitsListView extends CyberSportUnitsListMeta implements ICyberSportUnitsListMeta, IBaseRallyViewMeta
     {
         
-        public function UnitsListView() {
+        public function UnitsListView()
+        {
             super();
             listDataProvider = new ManualSearchDataProvider(CSCommandVO);
         }
@@ -39,33 +40,40 @@ package net.wg.gui.cyberSport.views
         
         private var navigationConfig:NavigationBlockVO;
         
-        public function as_updateNavigationBlock(param1:Object) : void {
+        public function as_updateNavigationBlock(param1:Object) : void
+        {
             this.navigationConfig = new NavigationBlockVO(param1);
             this.navigationBlock.setup(this.navigationConfig);
         }
         
-        public function as_setSelectedVehiclesInfo(param1:String, param2:int) : void {
+        public function as_setSelectedVehiclesInfo(param1:String, param2:int) : void
+        {
             this._selectedVehiclesCount = param2;
         }
         
-        public function as_setSearchResultText(param1:String) : void {
+        public function as_setSearchResultText(param1:String) : void
+        {
             this.searchResultsTF.htmlText = param1;
             this.refreshBtn.x = this.searchResultsTF.x + this.searchResultsTF.textWidth + REFRESH_BUTTON_OFFSET;
         }
         
-        override protected function convertToRallyVO(param1:Object) : IRallyVO {
+        override protected function convertToRallyVO(param1:Object) : IRallyVO
+        {
             return new RallyShortVO(param1);
         }
         
-        override protected function getRallyTooltipLinkage() : String {
+        override protected function getRallyTooltipLinkage() : String
+        {
             return Tooltips.CYBER_SPORT_TEAM;
         }
         
-        override protected function getRallyViewAlias() : String {
+        override protected function getRallyViewAlias() : String
+        {
             return CYBER_SPORT_ALIASES.UNIT_VIEW_UI;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.initListColumns();
             this.refreshBtn.addEventListener(ButtonEvent.CLICK,this.onRefreshClick);
@@ -78,11 +86,13 @@ package net.wg.gui.cyberSport.views
             descrLbl.text = CYBERSPORT.WINDOW_UNITLISTVIEW_DESCRIPTION;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.navigationBlock.removeEventListener(CSComponentEvent.LOAD_PREVIOUS_REQUEST,this.onLoadPreviousRequest);
             this.navigationBlock.removeEventListener(CSComponentEvent.LOAD_NEXT_REQUEST,this.onLoadNextRequest);
             this.refreshBtn.removeEventListener(ButtonEvent.CLICK,this.onRefreshClick);
@@ -91,13 +101,15 @@ package net.wg.gui.cyberSport.views
             super.onDispose();
         }
         
-        override protected function coolDownControls(param1:Boolean, param2:int) : void {
+        override protected function coolDownControls(param1:Boolean, param2:int) : void
+        {
             this.refreshBtn.enabled = param1;
             this.navigationBlock.setInCoolDown(!param1);
             super.coolDownControls(param1,param2);
         }
         
-        override protected function onControlRollOver(param1:MouseEvent) : void {
+        override protected function onControlRollOver(param1:MouseEvent) : void
+        {
             switch(param1.currentTarget)
             {
                 case this.refreshBtn:
@@ -109,19 +121,23 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        private function onRefreshClick(param1:ButtonEvent) : void {
+        private function onRefreshClick(param1:ButtonEvent) : void
+        {
             refreshTeamsS();
         }
         
-        private function onLoadNextRequest(param1:CSComponentEvent) : void {
+        private function onLoadNextRequest(param1:CSComponentEvent) : void
+        {
             loadNextS();
         }
         
-        private function onLoadPreviousRequest(param1:CSComponentEvent) : void {
+        private function onLoadPreviousRequest(param1:CSComponentEvent) : void
+        {
             loadPreviousS();
         }
         
-        private function initListColumns() : void {
+        private function initListColumns() : void
+        {
             var _loc1_:NormalSortingBtnInfo = null;
             var _loc2_:Array = [];
             _loc1_ = new NormalSortingBtnInfo();

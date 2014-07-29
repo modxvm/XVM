@@ -10,7 +10,8 @@ package net.wg.gui.cyberSport.controls
     public class NavigationBlock extends UIComponent
     {
         
-        public function NavigationBlock() {
+        public function NavigationBlock()
+        {
             super();
         }
         
@@ -18,14 +19,16 @@ package net.wg.gui.cyberSport.controls
         
         public var nextButton:GrayTransparentButton;
         
-        public function setup(param1:NavigationBlockVO) : void {
+        public function setup(param1:NavigationBlockVO) : void
+        {
             this.previousButton.visible = param1.previousVisible;
             this.nextButton.visible = param1.nextVisible;
             this.previousButton.enabled = param1.previousEnabled;
             this.nextButton.enabled = param1.nextEnabled;
         }
         
-        public function setInCoolDown(param1:Boolean) : void {
+        public function setInCoolDown(param1:Boolean) : void
+        {
             if(this.previousButton)
             {
                 this.previousButton.enabled = !param1;
@@ -36,7 +39,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.previousButton.addEventListener(ButtonEvent.CLICK,this.onPreviousClick);
             this.nextButton.addEventListener(ButtonEvent.CLICK,this.onNextClick);
@@ -44,27 +48,32 @@ package net.wg.gui.cyberSport.controls
             this.addListeners(this.previousButton);
         }
         
-        private function addListeners(param1:InteractiveObject) : void {
+        private function addListeners(param1:InteractiveObject) : void
+        {
             param1.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             param1.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
         }
         
-        private function removeListeners(param1:InteractiveObject) : void {
+        private function removeListeners(param1:InteractiveObject) : void
+        {
             param1.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             param1.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
         }
         
-        private function onNextClick(param1:ButtonEvent) : void {
+        private function onNextClick(param1:ButtonEvent) : void
+        {
             param1.stopImmediatePropagation();
             dispatchEvent(new CSComponentEvent(CSComponentEvent.LOAD_NEXT_REQUEST));
         }
         
-        private function onPreviousClick(param1:ButtonEvent) : void {
+        private function onPreviousClick(param1:ButtonEvent) : void
+        {
             param1.stopImmediatePropagation();
             dispatchEvent(new CSComponentEvent(CSComponentEvent.LOAD_PREVIOUS_REQUEST));
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.previousButton.removeEventListener(ButtonEvent.CLICK,this.onPreviousClick);
             this.nextButton.removeEventListener(ButtonEvent.CLICK,this.onNextClick);
             this.removeListeners(this.nextButton);
@@ -74,10 +83,12 @@ package net.wg.gui.cyberSport.controls
             super.onDispose();
         }
         
-        private function onRollOverHandler(param1:MouseEvent) : void {
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
         }
         
-        private function onRollOutHandler(param1:MouseEvent) : void {
+        private function onRollOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
     }

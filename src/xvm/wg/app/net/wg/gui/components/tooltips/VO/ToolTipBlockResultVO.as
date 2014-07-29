@@ -6,7 +6,8 @@ package net.wg.gui.components.tooltips.VO
     public class ToolTipBlockResultVO extends Object
     {
         
-        public function ToolTipBlockResultVO(param1:Number, param2:TextField, param3:Vector.<IconText>, param4:Array, param5:TextField, param6:Boolean, param7:Number, param8:Number) {
+        public function ToolTipBlockResultVO(param1:Number, param2:TextField, param3:Vector.<IconText>, param4:Array, param5:TextField, param6:Boolean, param7:Number, param8:Number)
+        {
             super();
             this.startYPos = param1;
             this.leftTextField = param2;

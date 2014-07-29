@@ -5,7 +5,8 @@ package net.wg.infrastructure.events
     public class ColorSchemeEvent extends Event
     {
         
-        public function ColorSchemeEvent(param1:String) {
+        public function ColorSchemeEvent(param1:String)
+        {
             super(param1);
         }
         

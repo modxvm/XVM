@@ -12,7 +12,8 @@ package net.wg.gui.components.controls
     public class TextInput extends scaleform.clik.controls.TextInput
     {
         
-        public function TextInput() {
+        public function TextInput()
+        {
             super();
         }
         
@@ -30,7 +31,8 @@ package net.wg.gui.components.controls
         
         private var _pastSelectionEnd:Number = 0;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.highlightMc.dispose();
             this.highlightMc = null;
             removeEventListener(MouseEvent.MOUSE_UP,this.handleMouseUp,false);
@@ -38,7 +40,8 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        override public function set focusable(param1:Boolean) : void {
+        override public function set focusable(param1:Boolean) : void
+        {
             super.focusable = param1;
             if((_focusable) && (editable))
             {
@@ -50,31 +53,37 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get selectionTextColor() : uint {
+        public function get selectionTextColor() : uint
+        {
             return this._selectionTextColor;
         }
         
-        public function set selectionTextColor(param1:uint) : void {
+        public function set selectionTextColor(param1:uint) : void
+        {
             this._selectionTextColor = this.rgbToArgb(param1);
             TextFieldEx.setSelectionTextColor(textField,this._selectionTextColor);
             TextFieldEx.setInactiveSelectionTextColor(textField,this.rgbToArgb(textField.textColor));
         }
         
-        public function get selectionBgColor() : uint {
+        public function get selectionBgColor() : uint
+        {
             return this._selectionBgColor;
         }
         
-        public function set selectionBgColor(param1:uint) : void {
+        public function set selectionBgColor(param1:uint) : void
+        {
             this._selectionBgColor = this.rgbToArgb(param1);
             TextFieldEx.setSelectionBkgColor(textField,this._selectionBgColor);
             TextFieldEx.setInactiveSelectionBkgColor(textField,0);
         }
         
-        public function get extractEscapes() : Boolean {
+        public function get extractEscapes() : Boolean
+        {
             return this._extractEscapes;
         }
         
-        public function set extractEscapes(param1:Boolean) : void {
+        public function set extractEscapes(param1:Boolean) : void
+        {
             if(this._extractEscapes == param1)
             {
                 return;
@@ -82,15 +91,18 @@ package net.wg.gui.components.controls
             this._extractEscapes = param1;
         }
         
-        public function get highlight() : Boolean {
+        public function get highlight() : Boolean
+        {
             return this.highlightMc.visible;
         }
         
-        public function set highlight(param1:Boolean) : void {
+        public function set highlight(param1:Boolean) : void
+        {
             this.highlightMc.visible = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if((focusable) && (editable))
             {
@@ -98,7 +110,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function updateTextField() : void {
+        override protected function updateTextField() : void
+        {
             super.updateTextField();
             if(textField != null)
             {
@@ -117,7 +130,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function autoSelectionText() : void {
+        protected function autoSelectionText() : void
+        {
             if(this._focusOutByWaiting)
             {
                 textField.setSelection(this._pastSelectionStart,this._pastSelectionEnd);
@@ -129,17 +143,20 @@ package net.wg.gui.components.controls
             this._focusOutByWaiting = false;
         }
         
-        override protected function handleMouseDown(param1:MouseEvent) : void {
+        override protected function handleMouseDown(param1:MouseEvent) : void
+        {
             super.handleMouseDown(param1);
         }
         
-        override protected function handleTextFieldFocusIn(param1:FocusEvent) : void {
+        override protected function handleTextFieldFocusIn(param1:FocusEvent) : void
+        {
             super.handleTextFieldFocusIn(param1);
             this.autoSelectionText();
             App.utils.IME.setVisible(true);
         }
         
-        override protected function handleTextChange(param1:Event) : void {
+        override protected function handleTextChange(param1:Event) : void
+        {
             var _loc2_:String = null;
             var _loc3_:String = null;
             var _loc4_:* = NaN;
@@ -166,16 +183,19 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function rgbToArgb(param1:uint) : uint {
+        private function rgbToArgb(param1:uint) : uint
+        {
             return 4.27819008E9 + param1;
         }
         
-        private function handleMouseUp(param1:MouseEvent) : void {
+        private function handleMouseUp(param1:MouseEvent) : void
+        {
             this._pastSelectionStart = textField.selectionBeginIndex;
             this._pastSelectionEnd = textField.selectionEndIndex;
         }
         
-        protected function handleTextFieldFocusOut(param1:FocusEvent) : void {
+        protected function handleTextFieldFocusOut(param1:FocusEvent) : void
+        {
             if(App.instance)
             {
                 this._focusOutByWaiting = App.waiting.isOnStage;
@@ -190,7 +210,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(!this._focusOutByWaiting)
             {
                 this._pastSelectionStart = textField.selectionBeginIndex;

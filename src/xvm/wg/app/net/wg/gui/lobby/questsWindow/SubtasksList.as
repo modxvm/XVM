@@ -9,7 +9,8 @@ package net.wg.gui.lobby.questsWindow
     public class SubtasksList extends UIComponent
     {
         
-        public function SubtasksList() {
+        public function SubtasksList()
+        {
             this.data = [];
             super();
             this._tasks = new Vector.<ISubtaskComponent>();
@@ -28,26 +29,31 @@ package net.wg.gui.lobby.questsWindow
         
         private var _needCheck:Boolean = false;
         
-        public function get linkage() : String {
+        public function get linkage() : String
+        {
             return this._linkage;
         }
         
-        public function set linkage(param1:String) : void {
+        public function set linkage(param1:String) : void
+        {
             this._linkage = param1;
         }
         
-        public function setData(param1:Array) : void {
+        public function setData(param1:Array) : void
+        {
             this.data = param1;
             invalidateData();
         }
         
-        public function checkDisabledQuests(param1:Vector.<String>) : void {
+        public function checkDisabledQuests(param1:Vector.<String>) : void
+        {
             this._availableQuests = param1;
             this.needCheck = true;
             invalidate(DISABLED_QUESTS);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._tasks)
             {
                 this.clearTasks();
@@ -66,7 +72,8 @@ package net.wg.gui.lobby.questsWindow
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -80,7 +87,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        private function disableInvalidQuests() : void {
+        private function disableInvalidQuests() : void
+        {
             var _loc1_:ISubtaskComponent = null;
             if(this._needCheck)
             {
@@ -91,7 +99,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        private function layoutTasks() : void {
+        private function layoutTasks() : void
+        {
             var _loc1_:* = 1;
             while(_loc1_ < this._tasks.length)
             {
@@ -104,7 +113,8 @@ package net.wg.gui.lobby.questsWindow
             dispatchEvent(new Event(Event.RESIZE));
         }
         
-        private function clearTasks() : void {
+        private function clearTasks() : void
+        {
             var _loc1_:* = 0;
             while(_loc1_ < this._tasks.length)
             {
@@ -115,7 +125,8 @@ package net.wg.gui.lobby.questsWindow
             this._tasks.splice(0,this._tasks.length);
         }
         
-        private function createTasks() : void {
+        private function createTasks() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
             var _loc3_:* = 0;
@@ -161,11 +172,13 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        public function get needCheck() : Boolean {
+        public function get needCheck() : Boolean
+        {
             return this._needCheck;
         }
         
-        public function set needCheck(param1:Boolean) : void {
+        public function set needCheck(param1:Boolean) : void
+        {
             this._needCheck = param1;
         }
     }

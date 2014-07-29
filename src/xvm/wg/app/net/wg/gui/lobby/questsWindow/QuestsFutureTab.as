@@ -5,11 +5,13 @@ package net.wg.gui.lobby.questsWindow
     public class QuestsFutureTab extends QuestsCurrentTab
     {
         
-        public function QuestsFutureTab() {
+        public function QuestsFutureTab()
+        {
             super();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             questContent.hideSortPanel(true);
             questContent.setNodataLabel(QUESTS.QUESTS_FUTURE_NODATA);
             questContent.questsList.questsState = QuestsStates.FUTURE_STATE;

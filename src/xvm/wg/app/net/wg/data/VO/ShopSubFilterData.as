@@ -7,7 +7,8 @@ package net.wg.data.VO
     public class ShopSubFilterData extends DAAPIDataClass
     {
         
-        public function ShopSubFilterData(param1:Object) {
+        public function ShopSubFilterData(param1:Object)
+        {
             super(param1);
         }
         
@@ -23,7 +24,8 @@ package net.wg.data.VO
         
         private var _fitsType:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Object = null;
             if(param1 == "dataProvider")
             {
@@ -48,15 +50,18 @@ package net.wg.data.VO
             return true;
         }
         
-        public function get dataProvider() : DataProvider {
+        public function get dataProvider() : DataProvider
+        {
             return this._dataProvider;
         }
         
-        public function get current() : String {
+        public function get current() : String
+        {
             return this._current;
         }
         
-        public function set current(param1:String) : void {
+        public function set current(param1:String) : void
+        {
             var _loc2_:String = null;
             if(App.instance)
             {
@@ -70,35 +75,43 @@ package net.wg.data.VO
             this._current = param1;
         }
         
-        public function get nation() : int {
+        public function get nation() : int
+        {
             return this._nation;
         }
         
-        public function set nation(param1:int) : void {
+        public function set nation(param1:int) : void
+        {
             this._nation = param1;
         }
         
-        public function get requestTypes() : Array {
+        public function get requestTypes() : Array
+        {
             return this._requestTypes;
         }
         
-        public function set requestTypes(param1:Array) : void {
+        public function set requestTypes(param1:Array) : void
+        {
             this._requestTypes = param1;
         }
         
-        public function get kind() : String {
+        public function get kind() : String
+        {
             return this._kind;
         }
         
-        public function set kind(param1:String) : void {
+        public function set kind(param1:String) : void
+        {
             this._kind = param1;
         }
         
-        public function get fitsType() : String {
+        public function get fitsType() : String
+        {
             return this._fitsType;
         }
         
-        public function set fitsType(param1:String) : void {
+        public function set fitsType(param1:String) : void
+        {
             this._fitsType = param1;
         }
     }

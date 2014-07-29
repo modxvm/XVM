@@ -35,7 +35,8 @@ package net.wg.gui.lobby.hangar.tcarousel
     public class TankCarousel extends TankCarouselMeta implements ITankCarouselMeta, IDAAPIModule, IHelpLayoutComponent
     {
         
-        public function TankCarousel() {
+        public function TankCarousel()
+        {
             this.filterData = {};
             super();
             dragHitArea = this.dragHitArea1;
@@ -121,7 +122,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         private var skipScrollToIndex:Boolean = false;
         
-        override public function scrollToIndex(param1:uint) : void {
+        override public function scrollToIndex(param1:uint) : void
+        {
             var _loc2_:uint = 0;
             if((container) && (_renderers))
             {
@@ -132,10 +134,12 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        public function as_populate() : void {
+        public function as_populate() : void
+        {
         }
         
-        public function as_dispose() : void {
+        public function as_dispose() : void
+        {
             var _loc1_:String = null;
             this.tankFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.onVehicleTypeFilterChanged);
             this.checkBoxToMain.removeEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
@@ -151,6 +155,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             for(_loc1_ in this.filterData)
             {
                 delete this.filterData[_loc1_];
+                true;
             }
             this.filterData = null;
             this.nationFilter = null;
@@ -176,12 +181,14 @@ package net.wg.gui.lobby.hangar.tcarousel
             var _loc3_:Number = 0;
             while(_loc3_ < _loc2_.numChildren)
             {
+                trace("child: " + _loc2_.getChildAt(_loc3_).name);
                 _loc3_++;
             }
             App.utils.asserter.assert(_loc2_.numChildren == 0,"container is not empty after dispose!");
         }
         
-        override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
+        override protected function cleanUpRenderer(param1:IListItemRenderer) : void
+        {
             var _loc2_:Number = _renderers.indexOf(param1);
             if(_loc2_ != -1)
             {
@@ -194,13 +201,15 @@ package net.wg.gui.lobby.hangar.tcarousel
             super.cleanUpRenderer(param1);
         }
         
-        public function as_setCarouselFilter(param1:Object) : void {
+        public function as_setCarouselFilter(param1:Object) : void
+        {
             this.filterData = param1;
             this.filterDataInvalid = true;
             this.updateFiltersData();
         }
         
-        public function as_setParams(param1:Object) : void {
+        public function as_setParams(param1:Object) : void
+        {
             var _loc5_:IListItemRenderer = null;
             var _loc6_:VehicleCarouselVO = null;
             var _loc7_:DisplayObject = null;
@@ -293,7 +302,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        public function as_updateVehicles(param1:Object, param2:Boolean) : void {
+        public function as_updateVehicles(param1:Object, param2:Boolean) : void
+        {
             this._updateInProgress = true;
             if(!this._vehiclesVOManager)
             {
@@ -310,7 +320,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             invalidate(VO_VEHICLES_IS_INVALID);
         }
         
-        public function as_showVehicles(param1:Array) : void {
+        public function as_showVehicles(param1:Array) : void
+        {
             this._updateShowByCompactDescription = param1;
             if(!this._updateInProgress)
             {
@@ -318,7 +329,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        public function showHelpLayout() : void {
+        public function showHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = null;
             var _loc2_:Object = null;
             if(container)
@@ -330,21 +342,25 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        public function closeHelpLayout() : void {
+        public function closeHelpLayout() : void
+        {
             this._isShowHelpLayout = false;
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             _loc1_.destroy(this._rendererHelpLayout);
         }
         
-        public function onFilterChanged() : void {
+        public function onFilterChanged() : void
+        {
             setVehiclesFilterS(this.filterData.nation,this.filterData.tankType,this.filterData.ready);
         }
         
-        override public function get selectedIndex() : int {
+        override public function get selectedIndex() : int
+        {
             return _selectedIndex;
         }
         
-        override public function set selectedIndex(param1:int) : void {
+        override public function set selectedIndex(param1:int) : void
+        {
             var _loc2_:IListItemRenderer = null;
             if(selectedItemRenderer)
             {
@@ -370,7 +386,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             _selectedIndex = param1;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             var _loc2_:String = null;
             var _loc3_:IListItemRenderer = null;
             super.enabled = param1;
@@ -387,16 +404,19 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        public function get disposed() : Boolean {
+        public function get disposed() : Boolean
+        {
             return false;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.initFilters();
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
@@ -470,28 +490,33 @@ package net.wg.gui.lobby.hangar.tcarousel
             super.draw();
         }
         
-        override protected function initUIStartPosition() : void {
+        override protected function initUIStartPosition() : void
+        {
             this.vehicleFilters.x = contentMargin;
             this.vehicleFilters.y = contentMargin;
             super.initUIStartPosition();
         }
         
-        override protected function updateArrowsState() : void {
+        override protected function updateArrowsState() : void
+        {
             super.updateArrowsState();
         }
         
-        override protected function setupRenderer(param1:IListItemRenderer) : void {
+        override protected function setupRenderer(param1:IListItemRenderer) : void
+        {
             super.setupRenderer(param1);
         }
         
-        override protected function handleMouseWheel(param1:MouseEvent) : void {
+        override protected function handleMouseWheel(param1:MouseEvent) : void
+        {
             if((enabled) && (allowDrag) && (dragHitArea.hitTestPoint(stage.mouseX,stage.mouseY)) && !isPreDragging)
             {
                 super.handleMouseWheel(param1);
             }
         }
         
-        override protected function onItemRollOver(param1:ListEventEx) : void {
+        override protected function onItemRollOver(param1:ListEventEx) : void
+        {
             super.onItemRollOver(param1);
             if(isSliding)
             {
@@ -515,17 +540,20 @@ package net.wg.gui.lobby.hangar.tcarousel
             App.toolTipMgr.showSpecial(Tooltips.CAROUSEL_VEHICLE,null,_loc2_.inventoryId);
         }
         
-        override protected function onItemRollOut(param1:ListEventEx) : void {
+        override protected function onItemRollOut(param1:ListEventEx) : void
+        {
             super.onItemRollOut(param1);
             App.toolTipMgr.hide();
         }
         
-        override protected function onItemStartDrag(param1:ListEventEx) : void {
+        override protected function onItemStartDrag(param1:ListEventEx) : void
+        {
             App.toolTipMgr.hide();
             super.onItemStartDrag(param1);
         }
         
-        override protected function handleItemClick(param1:ButtonEvent) : void {
+        override protected function handleItemClick(param1:ButtonEvent) : void
+        {
             App.toolTipMgr.hide();
             if(isMoving)
             {
@@ -549,7 +577,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        override protected function onItemClick(param1:ListEventEx) : void {
+        override protected function onItemClick(param1:ListEventEx) : void
+        {
             var _loc2_:VehicleCarouselVO = param1.itemData as VehicleCarouselVO;
             if(_loc2_.empty)
             {
@@ -581,27 +610,33 @@ package net.wg.gui.lobby.hangar.tcarousel
             
         }
         
-        private function updateSlotForBuyVehicle(param1:Boolean) : void {
+        private function updateSlotForBuyVehicle(param1:Boolean) : void
+        {
             this.populateRendererData(this._currentShowRendersByIndex.length,this._slotForBuyVehicle,VehicleCarouselVOBuilder.instance.getDataVoForBuyVehicle(this._availableSlotsForBuyVehicle),param1,true);
         }
         
-        private function updateSlotForBuySlot(param1:Boolean) : void {
+        private function updateSlotForBuySlot(param1:Boolean) : void
+        {
             this.populateRendererData(this._currentShowRendersByIndex.length,this._slotForBuySlot,VehicleCarouselVOBuilder.instance.getDataVoForBuySlot(this._slotPrice,this._slotPriceActionData),param1,true);
         }
         
-        private function tryBuyTank(param1:VehicleCarouselVO) : void {
+        private function tryBuyTank(param1:VehicleCarouselVO) : void
+        {
             buyTankClickS();
         }
         
-        private function tryBuySlot(param1:VehicleCarouselVO) : void {
+        private function tryBuySlot(param1:VehicleCarouselVO) : void
+        {
             buySlotS();
         }
         
-        private function selectItem(param1:Number) : void {
+        private function selectItem(param1:Number) : void
+        {
             vehicleChangeS(param1.toString());
         }
         
-        private function clearArrays(param1:Boolean) : void {
+        private function clearArrays(param1:Boolean) : void
+        {
             var _loc2_:IListItemRenderer = null;
             var _loc3_:Array = null;
             var _loc4_:String = null;
@@ -625,6 +660,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                         }
                         this.cleanUpRenderer(_loc2_);
                         delete this._createdRendersListByCompDescr[_loc4_];
+                        true;
                     }
                     _loc3_.splice(0,_loc3_.length);
                     this._createdRendersListByCompDescr = null;
@@ -653,16 +689,16 @@ package net.wg.gui.lobby.hangar.tcarousel
             this._currentShowByCompactDescription.splice(0,this._currentShowByCompactDescription.length);
         }
         
-        private function initFilters() : void {
+        private function initFilters() : void
+        {
             this.tankFilter.dataProvider = new DataProvider(getVehicleTypeProviderS());
             this.tankFilter.menuRowCount = this.tankFilter.dataProvider.length;
             var _loc1_:INations = App.utils.nations;
             var _loc2_:Array = _loc1_.getNationsData();
-            var _loc3_:Array = [{
-                "label":MENU.NATIONS_ALL,
-                "data":TankCarouselFilters.FILTER_ALL_NATION,
-                "icon":"../maps/icons/filters/nations/all.png"
-            }];
+            var _loc3_:Array = [{"label":MENU.NATIONS_ALL,
+            "data":TankCarouselFilters.FILTER_ALL_NATION,
+            "icon":"../maps/icons/filters/nations/all.png"
+        }];
         var _loc4_:uint = 0;
         while(_loc4_ < _loc2_.length)
         {
@@ -685,7 +721,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         this.checkBoxToMain.addEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
     }
     
-    private function showHideFilters() : void {
+    private function showHideFilters() : void
+    {
         updateVisibleSlotsCount();
         var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);
         if(!_loc1_)
@@ -710,7 +747,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         updateVisibleSlotsCount();
     }
     
-    private function updateFiltersData() : void {
+    private function updateFiltersData() : void
+    {
         var _loc1_:* = NaN;
         var _loc2_:* = NaN;
         if(!initialized)
@@ -745,12 +783,14 @@ package net.wg.gui.lobby.hangar.tcarousel
         }
     }
     
-    private function showContextMenu(param1:VehicleCarouselVO) : void {
+    private function showContextMenu(param1:VehicleCarouselVO) : void
+    {
         var _loc2_:String = !param1.favorite?"vehicleCheck":"vehicleUncheck";
         App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("vehicleInfo"),new UserContextItem(SHOW_VEHICLE_STATS,{"enabled":App.contextMenuMgr.vehicleWasInBattle(param1.compactDescr)}),new SeparateItem(),new UserContextItem("vehicleSell",{"enabled":param1.canSell}),new SeparateItem(),new UserContextItem("vehicleResearch"),new UserContextItem(_loc2_)]),this,this.onContectMenuItemSelect,param1);
     }
     
-    private function rebuildRenderers() : void {
+    private function rebuildRenderers() : void
+    {
         var _loc1_:* = 0;
         var _loc2_:* = 0;
         var _loc3_:IListItemRenderer = null;
@@ -771,6 +811,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                 _loc3_ = this._createdRendersListByCompDescr[_loc5_.compactDescr];
                 this.cleanUpRenderer(_loc3_);
                 delete this._createdRendersListByCompDescr[_loc5_.compactDescr];
+                true;
             }
             _loc1_++;
         }
@@ -810,7 +851,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         invalidate(InvalidationType.RENDERERS);
     }
     
-    private function updateCreatedRenderersLength() : void {
+    private function updateCreatedRenderersLength() : void
+    {
         var _loc2_:String = null;
         var _loc1_:Number = 0;
         if(this._createdRendersListByCompDescr)
@@ -823,7 +865,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         this._createdRendersListByCompDescrLength = _loc1_;
     }
     
-    private function populateRendererData(param1:Number, param2:IListItemRenderer, param3:VehicleCarouselVO, param4:Boolean = false, param5:Boolean = false) : void {
+    private function populateRendererData(param1:Number, param2:IListItemRenderer, param3:VehicleCarouselVO, param4:Boolean = false, param5:Boolean = false) : void
+    {
         var _loc8_:ListData = null;
         var _loc6_:DisplayObject = param2 as DisplayObject;
         var _loc7_:TankCarouselItemRenderer = param2 as TankCarouselItemRenderer;
@@ -848,12 +891,14 @@ package net.wg.gui.lobby.hangar.tcarousel
         
     }
     
-    private function getRendererByCompactDescr(param1:Number) : IListItemRenderer {
+    private function getRendererByCompactDescr(param1:Number) : IListItemRenderer
+    {
         var _loc2_:IListItemRenderer = this._createdRendersListByCompDescr[param1];
         return _loc2_;
     }
     
-    private function removeRendererFromShowByCompactDescr(param1:Number) : void {
+    private function removeRendererFromShowByCompactDescr(param1:Number) : void
+    {
         var _loc3_:DisplayObject = null;
         var _loc2_:IListItemRenderer = this.getRendererByCompactDescr(param1);
         if(_loc2_)
@@ -863,7 +908,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         }
     }
     
-    private function insertRendererToShowByNum(param1:Number, param2:Number) : void {
+    private function insertRendererToShowByNum(param1:Number, param2:Number) : void
+    {
         var _loc3_:IListItemRenderer = this.getRendererByCompactDescr(param2);
         if(_loc3_)
         {
@@ -872,7 +918,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         }
     }
     
-    private function updateEmptySlots() : void {
+    private function updateEmptySlots() : void
+    {
         if(!_renderers)
         {
             return;
@@ -881,7 +928,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         this.addEmptySlots();
     }
     
-    private function removeEmptySlots() : void {
+    private function removeEmptySlots() : void
+    {
         var _loc1_:IListItemRenderer = null;
         var _loc2_:VehicleCarouselVO = null;
         while(_renderers.length)
@@ -898,7 +946,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         }
     }
     
-    private function addEmptySlots() : void {
+    private function addEmptySlots() : void
+    {
         var _loc1_:DisplayObject = null;
         var _loc2_:IListItemRenderer = null;
         while(_visibleSlots > _renderers.length)
@@ -917,7 +966,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         }
     }
     
-    private function removeAdvancedSlots() : void {
+    private function removeAdvancedSlots() : void
+    {
         var _loc1_:IListItemRenderer = null;
         var _loc2_:VehicleCarouselVO = null;
         while(_renderers.length)
@@ -945,7 +995,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         }
     }
     
-    private function addAdvancedSlots() : void {
+    private function addAdvancedSlots() : void
+    {
         var _loc1_:DisplayObject = null;
         if(this._availableSlotsForBuyVehicle > 0)
         {
@@ -990,7 +1041,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         _loc1_.visible = true;
     }
     
-    private function repositionRenderers() : void {
+    private function repositionRenderers() : void
+    {
         var _loc2_:IListItemRenderer = null;
         var _loc3_:DisplayObject = null;
         var _loc1_:Number = 0;
@@ -1013,22 +1065,26 @@ package net.wg.gui.lobby.hangar.tcarousel
         this.scrollToIndex(_loc4_);
     }
     
-    private function onFilterCheckBoxChanged(param1:Event) : void {
+    private function onFilterCheckBoxChanged(param1:Event) : void
+    {
         this.filterData.ready = this.checkBoxToMain.selected;
         this.onFilterChanged();
     }
     
-    private function onVehicleTypeFilterChanged(param1:ListEvent) : void {
+    private function onVehicleTypeFilterChanged(param1:ListEvent) : void
+    {
         this.filterData.tankType = param1.itemData.data;
         this.onFilterChanged();
     }
     
-    private function onNationFilterChanged(param1:ListEvent) : void {
+    private function onNationFilterChanged(param1:ListEvent) : void
+    {
         this.filterData.nation = param1.itemData.data;
         this.onFilterChanged();
     }
     
-    private function onContectMenuItemSelect(param1:ContextMenuEvent) : void {
+    private function onContectMenuItemSelect(param1:ContextMenuEvent) : void
+    {
         var _loc2_:Object = param1.memberItemData;
         switch(param1.id)
         {
@@ -1053,7 +1109,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         }
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         super.onDispose();
     }
 }

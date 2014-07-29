@@ -6,7 +6,8 @@ package net.wg.gui.prebattle.company
     public class CompanyDropDownEvent extends Event
     {
         
-        public function CompanyDropDownEvent(param1:String, param2:MovieClip) {
+        public function CompanyDropDownEvent(param1:String, param2:MovieClip)
+        {
             super(param1,true,true);
             this._dropDownref = param2;
         }
@@ -15,7 +16,8 @@ package net.wg.gui.prebattle.company
         
         private var _dropDownref:MovieClip = null;
         
-        public function get dropDownref() : MovieClip {
+        public function get dropDownref() : MovieClip
+        {
             return this._dropDownref;
         }
     }

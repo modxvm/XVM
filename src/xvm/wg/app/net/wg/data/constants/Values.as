@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class Values extends Object
     {
         
-        public function Values() {
+        public function Values()
+        {
             super();
         }
         
@@ -15,7 +16,7 @@ package net.wg.data.constants
         
         public static var DEFAULT_INT:int = -1;
         
-        public static var DEFAULT_ALPHA:Number = 1.0;
+        public static var DEFAULT_ALPHA:Number = 1;
         
         public static var EMPTY_UIID:uint = 4.294967295E9;
     }

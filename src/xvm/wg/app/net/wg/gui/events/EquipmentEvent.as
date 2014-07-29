@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class EquipmentEvent extends Event
     {
         
-        public function EquipmentEvent(param1:String, param2:int = -1, param3:int = -1, param4:String = "") {
+        public function EquipmentEvent(param1:String, param2:int = -1, param3:int = -1, param4:String = "")
+        {
             super(param1,true,true);
             this.changeIndex = param2;
             this.changePos = param3;
@@ -26,7 +27,8 @@ package net.wg.gui.events
         
         public var changeCurrency:String = "";
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new EquipmentEvent(type,this.changeIndex,this.changePos,this.changeCurrency);
         }
     }

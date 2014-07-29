@@ -8,7 +8,8 @@ package net.wg.gui.tutorial.windows
     public class TutorialQueueDialog extends TutorialDialog
     {
         
-        public function TutorialQueueDialog() {
+        public function TutorialQueueDialog()
+        {
             this._timePointcuts = [];
             super();
             canClose = false;
@@ -34,7 +35,8 @@ package net.wg.gui.tutorial.windows
         
         private var _messageText:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             messageField.wordWrap = true;
             messageField.autoSize = TextFieldAutoSize.LEFT;
@@ -42,12 +44,14 @@ package net.wg.gui.tutorial.windows
             App.utils.scheduler.scheduleTask(this.updateWaitingTime,1000 * 60);
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(submitBtn);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INVALIDATE_MESSAGE))
             {
@@ -55,11 +59,13 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        override protected function drawData() : void {
+        override protected function drawData() : void
+        {
             this.titleField.text = _data.title;
         }
         
-        override public function as_setContent(param1:Object) : void {
+        override public function as_setContent(param1:Object) : void
+        {
             super.as_setContent(param1);
             this._baseMessage = _data.message;
             this._playerTimeTextStart = _data.playerTimeTextStart;
@@ -69,18 +75,21 @@ package net.wg.gui.tutorial.windows
             this.updateMessageText();
         }
         
-        override public function as_updateContent(param1:Object) : void {
+        override public function as_updateContent(param1:Object) : void
+        {
             this._avgTimeText = param1.avgTimeText;
             this.updateMessageText();
         }
         
-        public function updateWaitingTime() : void {
+        public function updateWaitingTime() : void
+        {
             this._waitingTime = this._waitingTime + 1;
             this.updateMessageText();
             App.utils.scheduler.scheduleTask(this.updateWaitingTime,1000 * 60);
         }
         
-        private function updateMessageText() : void {
+        private function updateMessageText() : void
+        {
             var _loc1_:String = null;
             var _loc2_:* = NaN;
             var _loc3_:ILocale = null;
@@ -116,11 +125,13 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             window.getBackground().visible = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             App.utils.scheduler.cancelTask(this.updateWaitingTime);
             this._timePointcuts = this._timePointcuts.splice(0,this._timePointcuts.length);

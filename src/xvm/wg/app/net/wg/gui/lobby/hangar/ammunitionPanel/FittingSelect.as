@@ -14,7 +14,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     public class FittingSelect extends DropdownMenu
     {
         
-        public function FittingSelect() {
+        public function FittingSelect()
+        {
             this._availableSize = new Point();
             super();
             soundType = SoundTypes.FITTING_BUTTON;
@@ -29,12 +30,14 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         private var _availableSize:Point;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             scrollBar = Linkages.SCROLL_BAR;
         }
         
-        override public function close() : void {
+        override public function close() : void
+        {
             if(!selected || (this.closeOnlyClickItem) && !this.itemClicked)
             {
                 return;
@@ -45,7 +48,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             setState("up");
         }
         
-        override protected function showDropdown() : void {
+        override protected function showDropdown() : void
+        {
             var _loc1_:IEventCollector = null;
             super.showDropdown();
             if(_dropdownRef)
@@ -59,14 +63,16 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        override protected function updateDDPosition(param1:Event) : void {
+        override protected function updateDDPosition(param1:Event) : void
+        {
             super.updateDDPosition(param1);
             var _loc2_:Point = parent.parent.parent.globalToLocal(new Point(_dropdownRef.x,_dropdownRef.y));
             _dropdownRef.x = _loc2_.x;
             _dropdownRef.y = _loc2_.y;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
@@ -93,19 +99,22 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        override protected function handleMenuItemClick(param1:ListEvent) : void {
+        override protected function handleMenuItemClick(param1:ListEvent) : void
+        {
             selectedIndex = param1.index;
             this.itemClicked = true;
             this.close();
             this.itemClicked = false;
         }
         
-        override protected function hideDropdown() : void {
+        override protected function hideDropdown() : void
+        {
             App.toolTipMgr.hide();
             super.hideDropdown();
         }
         
-        public function updateAvailableSize(param1:Number, param2:Number) : void {
+        public function updateAvailableSize(param1:Number, param2:Number) : void
+        {
             this._availableSize.x = param1;
             this._availableSize.y = param2;
             invalidate(SIZE_INVALID);

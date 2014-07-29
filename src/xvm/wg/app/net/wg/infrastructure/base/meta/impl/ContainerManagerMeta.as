@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ContainerManagerMeta extends BaseDAAPIModule
     {
         
-        public function ContainerManagerMeta() {
+        public function ContainerManagerMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var canCancelPreviousLoading:Function = null;
         
-        public function isModalViewsIsExistsS() : Boolean {
+        public function isModalViewsIsExistsS() : Boolean
+        {
             App.utils.asserter.assertNotNull(this.isModalViewsIsExists,"isModalViewsIsExists" + Errors.CANT_NULL);
             return this.isModalViewsIsExists();
         }
         
-        public function canCancelPreviousLoadingS(param1:String) : Boolean {
+        public function canCancelPreviousLoadingS(param1:String) : Boolean
+        {
             App.utils.asserter.assertNotNull(this.canCancelPreviousLoading,"canCancelPreviousLoading" + Errors.CANT_NULL);
             return this.canCancelPreviousLoading(param1);
         }

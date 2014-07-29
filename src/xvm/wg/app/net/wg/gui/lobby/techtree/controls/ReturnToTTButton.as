@@ -5,11 +5,13 @@ package net.wg.gui.lobby.techtree.controls
     public class ReturnToTTButton extends NationButton
     {
         
-        public function ReturnToTTButton() {
+        public function ReturnToTTButton()
+        {
             super();
         }
         
-        override protected function defineSoundProps() : void {
+        override protected function defineSoundProps() : void
+        {
             soundType = SoundTypes.CLOSE_WINDOW;
         }
     }

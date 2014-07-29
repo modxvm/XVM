@@ -5,7 +5,8 @@ package net.wg.gui.lobby.questsWindow.data
     public class QuestIconElementVO extends DAAPIDataClass
     {
         
-        public function QuestIconElementVO(param1:Object) {
+        public function QuestIconElementVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -21,7 +22,8 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _dataBlock:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "dataValue")
             {
                 if(param2 is Array)
@@ -34,51 +36,63 @@ package net.wg.gui.lobby.questsWindow.data
             return true;
         }
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this._label = param1;
         }
         
-        public function get icon() : String {
+        public function get icon() : String
+        {
             return this._icon;
         }
         
-        public function set icon(param1:String) : void {
+        public function set icon(param1:String) : void
+        {
             this._icon = param1;
         }
         
-        public function get linkage() : String {
+        public function get linkage() : String
+        {
             return this._linkage;
         }
         
-        public function set linkage(param1:String) : void {
+        public function set linkage(param1:String) : void
+        {
             this._linkage = param1;
         }
         
-        public function get dataType() : String {
+        public function get dataType() : String
+        {
             return this._dataType;
         }
         
-        public function set dataType(param1:String) : void {
+        public function set dataType(param1:String) : void
+        {
             this._dataType = param1;
         }
         
-        public function get dataName() : String {
+        public function get dataName() : String
+        {
             return this._dataName;
         }
         
-        public function set dataName(param1:String) : void {
+        public function set dataName(param1:String) : void
+        {
             this._dataName = param1;
         }
         
-        public function get dataBlock() : String {
+        public function get dataBlock() : String
+        {
             return this._dataBlock;
         }
         
-        public function set dataBlock(param1:String) : void {
+        public function set dataBlock(param1:String) : void
+        {
             this._dataBlock = param1;
         }
     }

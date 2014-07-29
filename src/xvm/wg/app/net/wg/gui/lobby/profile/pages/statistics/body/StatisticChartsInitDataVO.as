@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class StatisticChartsInitDataVO extends DAAPIDataClass
     {
         
-        public function StatisticChartsInitDataVO(param1:Object) {
+        public function StatisticChartsInitDataVO(param1:Object)
+        {
             super(param1);
         }
     }

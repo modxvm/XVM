@@ -1,9 +1,10 @@
-package 
+package
 {
     public class CYBERSPORT extends Object
     {
         
-        public function CYBERSPORT() {
+        public function CYBERSPORT()
+        {
             super();
         }
         

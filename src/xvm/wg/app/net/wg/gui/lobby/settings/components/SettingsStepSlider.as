@@ -6,16 +6,19 @@ package net.wg.gui.lobby.settings.components
     public class SettingsStepSlider extends StepSlider
     {
         
-        public function SettingsStepSlider() {
+        public function SettingsStepSlider()
+        {
             super();
         }
         
         private var _inAdvancedMode:Boolean = true;
         
-        override protected function onScrollWheel(param1:MouseEvent) : void {
+        override protected function onScrollWheel(param1:MouseEvent) : void
+        {
         }
         
-        override protected function checkIsItemDisabled(param1:Object) : Boolean {
+        override protected function checkIsItemDisabled(param1:Object) : Boolean
+        {
             var _loc2_:* = false;
             var _loc3_:Boolean = param1.hasOwnProperty("supported")?param1["supported"]:true;
             if(_loc3_)
@@ -32,15 +35,18 @@ package net.wg.gui.lobby.settings.components
             return _loc2_;
         }
         
-        override protected function getItemTooltip(param1:Object) : String {
+        override protected function getItemTooltip(param1:Object) : String
+        {
             return App.utils.locale.makeString(getItemLabel(param1));
         }
         
-        public function get inAdvancedMode() : Boolean {
+        public function get inAdvancedMode() : Boolean
+        {
             return this._inAdvancedMode;
         }
         
-        public function set inAdvancedMode(param1:Boolean) : void {
+        public function set inAdvancedMode(param1:Boolean) : void
+        {
             this._inAdvancedMode = param1;
             invalidateData();
         }

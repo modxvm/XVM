@@ -7,7 +7,8 @@ package net.wg.gui.rally.data
     public class ManualSearchDataProvider extends VoDAAPIDataProvider implements IManualSearchDataProvider
     {
         
-        public function ManualSearchDataProvider(param1:Class) {
+        public function ManualSearchDataProvider(param1:Class)
+        {
             this.indexes = [];
             this.cache = [];
             super(param1);
@@ -19,11 +20,13 @@ package net.wg.gui.rally.data
         
         private var cache:Array;
         
-        override public function cleanUp() : void {
+        override public function cleanUp() : void
+        {
             this.cache = [];
         }
         
-        override public function requestItemAt(param1:uint, param2:Function = null) : Object {
+        override public function requestItemAt(param1:uint, param2:Function = null) : Object
+        {
             var _loc3_:Object = this.cache[param1];
             if(!_loc3_)
             {
@@ -37,7 +40,8 @@ package net.wg.gui.rally.data
             return _loc3_;
         }
         
-        override public function requestItemRange(param1:int, param2:int, param3:Function = null) : Array {
+        override public function requestItemRange(param1:int, param2:int, param3:Function = null) : Array
+        {
             var _loc7_:Object = null;
             var _loc10_:Object = null;
             if(!Boolean(requestItemRangeHandler))
@@ -83,7 +87,8 @@ package net.wg.gui.rally.data
             return _loc8_;
         }
         
-        public function requestUpdatedItems(param1:int, param2:int, param3:Function = null) : Array {
+        public function requestUpdatedItems(param1:int, param2:int, param3:Function = null) : Array
+        {
             var _loc4_:uint = 0;
             var _loc7_:Array = null;
             var _loc8_:Array = null;
@@ -125,12 +130,14 @@ package net.wg.gui.rally.data
             return _loc6_;
         }
         
-        override public function invalidate(param1:uint = 0) : void {
+        override public function invalidate(param1:uint = 0) : void
+        {
             this.cache = new Array(param1);
             super.invalidate(param1);
         }
         
-        public function update(param1:Array) : void {
+        public function update(param1:Array) : void
+        {
             var _loc2_:uint = 0;
             this.indexes = param1;
             for each(_loc2_ in this.indexes)

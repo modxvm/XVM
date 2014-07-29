@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class Locales extends Object
     {
         
-        public function Locales() {
+        public function Locales()
+        {
             super();
         }
         

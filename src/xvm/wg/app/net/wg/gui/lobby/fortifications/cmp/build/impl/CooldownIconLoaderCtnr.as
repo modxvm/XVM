@@ -6,13 +6,15 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class CooldownIconLoaderCtnr extends UIComponentEx
     {
         
-        public function CooldownIconLoaderCtnr() {
+        public function CooldownIconLoaderCtnr()
+        {
             super();
         }
         
         public var loader:UILoaderAlt = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.loader.dispose();
             this.loader = null;
             super.onDispose();

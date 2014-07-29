@@ -20,7 +20,8 @@ package net.wg.gui.components.common.cursor
     public class Cursor extends DroppingCursor implements ICursor
     {
         
-        public function Cursor() {
+        public function Cursor()
+        {
             this._dragObjects = new Dictionary(true);
             super();
             stop();
@@ -34,7 +35,8 @@ package net.wg.gui.components.common.cursor
         
         private var _customLock:Boolean = false;
         
-        override public function registerDragging(param1:IDragDropHitArea, param2:String = null) : void {
+        override public function registerDragging(param1:IDragDropHitArea, param2:String = null) : void
+        {
             if(!(param1 is IDraggable) && !(param1 is IDroppable))
             {
                 DebugUtils.LOG_ERROR(CAST_MSG_ERROR);
@@ -53,7 +55,8 @@ package net.wg.gui.components.common.cursor
             }
         }
         
-        override public function unRegisterDragging(param1:IDragDropHitArea) : void {
+        override public function unRegisterDragging(param1:IDragDropHitArea) : void
+        {
             if(!disposed)
             {
                 if(!(param1 is IDraggable) && !(param1 is IDroppable))
@@ -76,25 +79,30 @@ package net.wg.gui.components.common.cursor
             }
         }
         
-        public function lock() : void {
+        public function lock() : void
+        {
             App.utils.asserter.assert(this._customLock == false,"Duplicate locking is incorrect!",InfrastructureException);
             this._customLock = true;
         }
         
-        public function unlock() : void {
+        public function unlock() : void
+        {
             App.utils.asserter.assert(this._customLock,"You can lock cursor, if it unlocked only!",InfrastructureException);
             this._customLock = false;
             resetCursor();
         }
         
-        public function as_setCursor(param1:String) : void {
+        public function as_setCursor(param1:String) : void
+        {
             setCursor(param1);
         }
         
-        override protected function nextFrameAfterPopulateHandler() : void {
+        override protected function nextFrameAfterPopulateHandler() : void
+        {
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             if(App.instance)
             {
@@ -103,7 +111,8 @@ package net.wg.gui.components.common.cursor
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:DragInfo = null;
             for each(_loc1_ in this._dragObjects)
             {
@@ -114,11 +123,13 @@ package net.wg.gui.components.common.cursor
             super.onDispose();
         }
         
-        override protected function cursorIsFree() : Boolean {
+        override protected function cursorIsFree() : Boolean
+        {
             return (super.cursorIsFree()) && !this._isOnDragging && !this._customLock;
         }
         
-        private function registerDrag(param1:IDraggable, param2:String = null) : void {
+        private function registerDrag(param1:IDraggable, param2:String = null) : void
+        {
             var _loc3_:DragInfo = new DragInfo(param1,param2);
             assert(this._dragObjects[_loc3_.hit] == undefined,Errors.ALREADY_REGISTERED);
             this._dragObjects[_loc3_.hit] = _loc3_;
@@ -130,7 +141,8 @@ package net.wg.gui.components.common.cursor
             }
         }
         
-        private function unRegisterDrag(param1:IDraggable) : void {
+        private function unRegisterDrag(param1:IDraggable) : void
+        {
             var _loc2_:InteractiveObject = BaseInfo.getHitFromContainer(param1);
             assert(!(this._dragObjects[_loc2_] == undefined),Errors.MUST_REGISTER);
             var _loc3_:DragInfo = this.getDragInfoByHit(_loc2_);
@@ -143,14 +155,17 @@ package net.wg.gui.components.common.cursor
             _loc2_.removeEventListener(MouseEvent.ROLL_OUT,this.rollOutDragHandler);
             _loc2_.removeEventListener(MouseEvent.MOUSE_DOWN,this.mouseDnDragHandler);
             delete this._dragObjects[_loc2_];
+            true;
             _loc3_.dispose();
         }
         
-        private function getDragInfoByHit(param1:InteractiveObject) : DragInfo {
+        private function getDragInfoByHit(param1:InteractiveObject) : DragInfo
+        {
             return this._dragObjects[param1];
         }
         
-        private function setDragging(param1:Boolean, param2:Boolean = false) : void {
+        private function setDragging(param1:Boolean, param2:Boolean = false) : void
+        {
             if(param1 != this._isOnDragging)
             {
                 this._isOnDragging = param1;
@@ -161,14 +176,16 @@ package net.wg.gui.components.common.cursor
             }
         }
         
-        private function onEnterToDragMode(param1:MouseEvent) : void {
+        private function onEnterToDragMode(param1:MouseEvent) : void
+        {
             if(this.cursorIsFree())
             {
                 forceSetCursor(Cursors.DRAG_OPEN);
             }
         }
         
-        private function draggingHandler(param1:MouseEvent) : void {
+        private function draggingHandler(param1:MouseEvent) : void
+        {
             assertLifeCycle();
             var _loc2_:DragInfo = this.getDragInfoByHit(InteractiveObject(param1.currentTarget));
             if(_loc2_.state != BaseInfo.STATE_STARTED)
@@ -180,12 +197,14 @@ package net.wg.gui.components.common.cursor
             _loc3_.onDragging(param1.localX,param1.localY);
         }
         
-        private function rollOutDragHandler(param1:MouseEvent) : void {
+        private function rollOutDragHandler(param1:MouseEvent) : void
+        {
             assertLifeCycle();
             resetCursor();
         }
         
-        private function mouseDnDragHandler(param1:MouseEvent) : void {
+        private function mouseDnDragHandler(param1:MouseEvent) : void
+        {
             var dragInfo:DragInfo = null;
             var mouseUpLclHdr:Function = null;
             var mouseReleaseOutsideLclHdr:Function = null;
@@ -223,7 +242,8 @@ package net.wg.gui.components.common.cursor
             }
         }
         
-        private function onAfterDraggableObjDispose(param1:LifeCycleEvent) : void {
+        private function onAfterDraggableObjDispose(param1:LifeCycleEvent) : void
+        {
             assertLifeCycle();
             var _loc2_:IDraggable = IDraggable(param1.target);
             DebugUtils.LOG_DEBUG(_loc2_ + Errors.WASNT_UNREGISTERED);
@@ -243,11 +263,13 @@ import net.wg.data.constants.Cursors;
 class DragInfo extends BaseInfo
 {
     
-    function DragInfo(param1:IDraggable, param2:String) {
+    function DragInfo(param1:IDraggable, param2:String)
+    {
         super(param1,param2,Cursors.DRAG_CLOSE);
     }
     
-    public function get container() : IDraggable {
+    public function get container() : IDraggable
+    {
         return IDraggable(getContainer());
     }
 }

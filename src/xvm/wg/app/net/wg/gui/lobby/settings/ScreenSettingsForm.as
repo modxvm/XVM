@@ -12,7 +12,8 @@ package net.wg.gui.lobby.settings
     public class ScreenSettingsForm extends UIComponent
     {
         
-        public function ScreenSettingsForm() {
+        public function ScreenSettingsForm()
+        {
             super();
         }
         
@@ -70,7 +71,8 @@ package net.wg.gui.lobby.settings
         
         public var bottomShadow:MovieClip;
         
-        private function initTexts() : void {
+        private function initTexts() : void
+        {
             this.monitorLabel.text = SETTINGS.MONITOR;
             this.fullScreenCheckbox.label = SETTINGS.FULLSCREEN;
             this.vertSyncCheckbox.label = SETTINGS.VERTSYNC;
@@ -85,7 +87,8 @@ package net.wg.gui.lobby.settings
             this.dynamicFovCheckbox.label = SETTINGS.DYNAMICFOV;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.initTexts();
             this.colorFilterDefaultImg.source = RES_ICONS.MAPS_ICONS_SETTINGS_COLOR_GRADING_TECHNIQUE_NONE;
@@ -94,7 +97,8 @@ package net.wg.gui.lobby.settings
             this.bottomShadow.mouseChildren = this.bottomShadow.mouseEnabled = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.monitorLabel.dispose();
             this.monitorDropDown.dispose();
             this.fullScreenCheckbox.dispose();

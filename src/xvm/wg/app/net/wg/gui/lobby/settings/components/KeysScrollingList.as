@@ -16,12 +16,14 @@ package net.wg.gui.lobby.settings.components
     public class KeysScrollingList extends ScrollingListPx
     {
         
-        public function KeysScrollingList() {
+        public function KeysScrollingList()
+        {
             super();
             scrollPosition = 0;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:uint = 0;
             var _loc2_:uint = 0;
             var _loc3_:IListItemRenderer = null;
@@ -62,7 +64,8 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        public function updateDataProvider() : void {
+        public function updateDataProvider() : void
+        {
             var _loc1_:uint = 0;
             var _loc2_:uint = 0;
             var _loc3_:IListItemRenderer = null;
@@ -82,7 +85,8 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        override protected function createRendererByDataIndex(param1:int) : void {
+        override protected function createRendererByDataIndex(param1:int) : void
+        {
             var _loc2_:IListItemRenderer = this.createRenderer(param1);
             if(_loc2_ == null)
             {
@@ -100,7 +104,8 @@ package net.wg.gui.lobby.settings.components
             totalHeight = totalHeight + Math.round(_loc2_.height);
         }
         
-        override protected function createRenderer(param1:uint) : IListItemRenderer {
+        override protected function createRenderer(param1:uint) : IListItemRenderer
+        {
             var _loc2_:IListItemRenderer = super.createRenderer(param1);
             if(_loc2_ != null)
             {
@@ -110,9 +115,11 @@ package net.wg.gui.lobby.settings.components
             return null;
         }
         
-        override protected function drawRenderers(param1:Number) : void {
+        override protected function drawRenderers(param1:Number) : void
+        {
             if(_itemRenderer == null)
             {
+                trace("Renderer class not defined.");
                 return;
             }
             totalHeight = 0;
@@ -124,7 +131,8 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        override protected function setupRenderer(param1:IListItemRenderer) : void {
+        override protected function setupRenderer(param1:IListItemRenderer) : void
+        {
             param1.owner = this;
             param1.focusTarget = this;
             param1.tabEnabled = false;
@@ -141,7 +149,8 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
+        override protected function cleanUpRenderer(param1:IListItemRenderer) : void
+        {
             param1.owner = null;
             param1.focusTarget = null;
             param1.doubleClickEnabled = false;
@@ -154,7 +163,8 @@ package net.wg.gui.lobby.settings.components
             param1.removeEventListener(KeyInputEvents.CHANGE,this.dispatchItemEvent);
         }
         
-        override protected function dispatchItemEvent(param1:Event) : Boolean {
+        override protected function dispatchItemEvent(param1:Event) : Boolean
+        {
             var _loc2_:String = null;
             switch(param1.type)
             {
@@ -214,7 +224,8 @@ package net.wg.gui.lobby.settings.components
             return dispatchEvent(_loc7_);
         }
         
-        override protected function scrollList(param1:int) : void {
+        override protected function scrollList(param1:int) : void
+        {
             if(this.isSelected())
             {
                 return;
@@ -222,7 +233,8 @@ package net.wg.gui.lobby.settings.components
             super.scrollList(param1);
         }
         
-        override public function scrollToIndex(param1:uint) : void {
+        override public function scrollToIndex(param1:uint) : void
+        {
             if(this.isSelected())
             {
                 return;
@@ -230,7 +242,8 @@ package net.wg.gui.lobby.settings.components
             super.scrollToIndex(param1);
         }
         
-        private function isSelected() : Boolean {
+        private function isSelected() : Boolean
+        {
             var _loc3_:KeysItemRenderer = null;
             var _loc1_:uint = _renderers.length;
             var _loc2_:uint = 0;
@@ -246,7 +259,8 @@ package net.wg.gui.lobby.settings.components
             return false;
         }
         
-        public function restoreDefault() : void {
+        public function restoreDefault() : void
+        {
             var _loc3_:ListEventEx = null;
             var _loc1_:uint = dataProvider.length;
             var _loc2_:uint = 0;
@@ -263,7 +277,8 @@ package net.wg.gui.lobby.settings.components
             dataProvider.invalidate();
         }
         
-        public function keysWasChanged() : Boolean {
+        public function keysWasChanged() : Boolean
+        {
             var _loc1_:* = false;
             var _loc2_:uint = dataProvider.length;
             var _loc3_:uint = 0;
@@ -279,12 +294,14 @@ package net.wg.gui.lobby.settings.components
             return _loc1_;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             _renderers = new Vector.<IListItemRenderer>();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[Wargaming KeysScrollingList " + name + "]";
         }
     }

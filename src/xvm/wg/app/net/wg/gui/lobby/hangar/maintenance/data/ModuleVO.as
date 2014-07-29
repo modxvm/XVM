@@ -6,7 +6,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
     public class ModuleVO extends DAAPIDataClass
     {
         
-        public function ModuleVO(param1:Object) {
+        public function ModuleVO(param1:Object)
+        {
             super(param1);
             this._originalHash = param1;
         }
@@ -47,21 +48,25 @@ package net.wg.gui.lobby.hangar.maintenance.data
         
         public var actionPriceData:Object = null;
         
-        public function clone(param1:int) : ModuleVO {
+        public function clone(param1:int) : ModuleVO
+        {
             var _loc2_:ModuleVO = new ModuleVO(this._originalHash);
             _loc2_.slotIndex = param1;
             return _loc2_;
         }
         
-        public function get status() : String {
+        public function get status() : String
+        {
             return this.target == 1 && !(this.slotIndex == this.index)?MENU.MODULEFITS_WRONG_SLOT:this.fits[this.slotIndex];
         }
         
-        public function get price() : int {
+        public function get price() : int
+        {
             return this.prices[this.currency == Currencies.CREDITS?0:1];
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.prices.splice(0);
             this.fits.splice(0);
             this._originalHash = null;

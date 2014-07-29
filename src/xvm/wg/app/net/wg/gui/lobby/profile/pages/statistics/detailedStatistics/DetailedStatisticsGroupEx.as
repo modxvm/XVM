@@ -8,7 +8,8 @@ package net.wg.gui.lobby.profile.pages.statistics.detailedStatistics
     public class DetailedStatisticsGroupEx extends GroupEx
     {
         
-        public function DetailedStatisticsGroupEx() {
+        public function DetailedStatisticsGroupEx()
+        {
             super();
         }
         
@@ -16,12 +17,14 @@ package net.wg.gui.lobby.profile.pages.statistics.detailedStatistics
         
         private var _unitRendererClass:Class;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             itemRendererClass = App.utils.classFactory.getClass(Linkages.DETAILED_STATISTICS_UNIT);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
             var _loc3_:DetailedStatisticsUnit = null;
@@ -39,11 +42,13 @@ package net.wg.gui.lobby.profile.pages.statistics.detailedStatistics
             }
         }
         
-        public function get unitRendererClass() : Class {
+        public function get unitRendererClass() : Class
+        {
             return this._unitRendererClass;
         }
         
-        public function set unitRendererClass(param1:Class) : void {
+        public function set unitRendererClass(param1:Class) : void
+        {
             if(this._unitRendererClass != param1)
             {
                 this._unitRendererClass = param1;
@@ -51,7 +56,8 @@ package net.wg.gui.lobby.profile.pages.statistics.detailedStatistics
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._unitRendererClass = null;
             super.onDispose();
         }

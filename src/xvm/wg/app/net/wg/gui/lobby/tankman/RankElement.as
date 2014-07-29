@@ -6,13 +6,15 @@ package net.wg.gui.lobby.tankman
     public class RankElement extends UIComponent
     {
         
-        public function RankElement() {
+        public function RankElement()
+        {
             super();
         }
         
         public var icoLoader:UILoaderAlt;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.icoLoader.dispose();
         }

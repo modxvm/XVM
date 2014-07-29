@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class FinalStatisticEvent extends Event
     {
         
-        public function FinalStatisticEvent(param1:String, param2:Object = null) {
+        public function FinalStatisticEvent(param1:String, param2:Object = null)
+        {
             super(param1,true,true);
             this.data = param2;
         }
@@ -20,7 +21,8 @@ package net.wg.gui.events
         
         public var data:Object;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new FinalStatisticEvent(type,this.data);
         }
     }

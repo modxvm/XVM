@@ -3,7 +3,8 @@ package net.wg.data.constants.generated
     public class CYBER_SPORT_ALIASES extends Object
     {
         
-        public function CYBER_SPORT_ALIASES() {
+        public function CYBER_SPORT_ALIASES()
+        {
             super();
         }
         
@@ -59,8 +60,8 @@ package net.wg.data.constants.generated
         
         public static var AUTO_SEARCH_ERROR_STATE:String = "autoSearchErrorState";
         
-        public static var FLASH_ALIASES:Array;
+        public static var FLASH_ALIASES:Array = [INTRO_VIEW_UI,UNITS_LIST_VIEW_UI,UNIT_VIEW_UI];
         
-        public static var PYTHON_ALIASES:Array;
+        public static var PYTHON_ALIASES:Array = [INTRO_VIEW_PY,UNITS_LIST_VIEW_PY,UNIT_VIEW_PY];
     }
 }

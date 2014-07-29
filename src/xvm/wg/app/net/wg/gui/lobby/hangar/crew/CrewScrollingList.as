@@ -7,11 +7,13 @@ package net.wg.gui.lobby.hangar.crew
     public class CrewScrollingList extends ScrollingListEx
     {
         
-        public function CrewScrollingList() {
+        public function CrewScrollingList()
+        {
             super();
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             var _loc2_:IListItemRenderer = getRendererAt(_selectedIndex,_scrollPosition);
             if(_loc2_ != null)
             {

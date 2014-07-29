@@ -15,7 +15,8 @@ package net.wg.gui.lobby.GUIEditor
     public class GUIEditorHelper extends Object
     {
         
-        public function GUIEditorHelper() {
+        public function GUIEditorHelper()
+        {
             super();
             this.componentsInfo = new ComponentsInfoContainer();
         }
@@ -34,7 +35,8 @@ package net.wg.gui.lobby.GUIEditor
         
         public static var TYPE_SMART:String = "smart";
         
-        public static function getLocationForDO(param1:DisplayObject) : String {
+        public static function getLocationForDO(param1:DisplayObject) : String
+        {
             var _loc2_:String = null;
             var _loc3_:DisplayObject = param1.parent;
             var _loc4_:String = param1.name;
@@ -51,7 +53,8 @@ package net.wg.gui.lobby.GUIEditor
             return _loc2_;
         }
         
-        public static function getClassName(param1:*) : String {
+        public static function getClassName(param1:*) : String
+        {
             var _loc2_:String = getQualifiedClassName(param1);
             if(_loc2_.indexOf("::") >= 0)
             {
@@ -60,7 +63,8 @@ package net.wg.gui.lobby.GUIEditor
             return _loc2_;
         }
         
-        public static function get instance() : GUIEditorHelper {
+        public static function get instance() : GUIEditorHelper
+        {
             if(ms_instance == null)
             {
                 ms_instance = new GUIEditorHelper();
@@ -68,17 +72,18 @@ package net.wg.gui.lobby.GUIEditor
             return ms_instance;
         }
         
-        private static function createGEComponentVO(param1:String, param2:String, param3:DisplayObject) : GEComponentVO {
-            return new GEComponentVO({
-                "label":param1,
-                "icon":param2,
-                "instance":param3
-            });
+        private static function createGEComponentVO(param1:String, param2:String, param3:DisplayObject) : GEComponentVO
+        {
+            return new GEComponentVO({"label":param1,
+            "icon":param2,
+            "instance":param3
+        });
     }
     
     private var componentsInfo:ComponentsInfoContainer = null;
     
-    public function getDisplayList(param1:DisplayObjectContainer, param2:String = "") : Array {
+    public function getDisplayList(param1:DisplayObjectContainer, param2:String = "") : Array
+    {
         var _loc9_:* = NaN;
         var _loc10_:DisplayObject = null;
         var _loc11_:String = null;
@@ -123,7 +128,8 @@ package net.wg.gui.lobby.GUIEditor
         return _loc7_;
     }
     
-    public function getPropsList(param1:Object) : Array {
+    public function getPropsList(param1:Object) : Array
+    {
         var _loc2_:Array = [];
         if(param1 is InteractiveObject)
         {
@@ -167,7 +173,8 @@ package net.wg.gui.lobby.GUIEditor
         return _loc2_;
     }
     
-    public function getComponentsList(param1:String = "all") : Array {
+    public function getComponentsList(param1:String = "all") : Array
+    {
         var _loc4_:ComponentInfoVo = null;
         var _loc2_:Vector.<ComponentInfoVo> = this.componentsInfo.getComponentsList(param1);
         var _loc3_:Array = [];
@@ -192,12 +199,10 @@ import flash.utils.getQualifiedClassName;
 class ComponentsInfoContainer extends Object
 {
 
-function ComponentsInfoContainer() {
+function ComponentsInfoContainer()
+{
     var _loc1_:String = null;
     this._information = {};
-    this._SIMPLE_CONTROLS_LINKAGES = ["BitmapFill","ButtonBlack","ButtonNormal","ButtonRed","CheckBox","DropDownListItemRendererSound","DropdownMenu","DropdownMenu_ScrollingList","HyperLink","LoadingBar","RedButton","ScrollBar","TextFieldShort","TextInput","UILoaderAlt"];
-    this._CONTROLS_LINKAGES = ["ActionPriceUI","AlertIcon_UI","IconText","ButtonCaps","ButtonCapsRed","ButtonIcon","ButtonIconText","CheckBoxFilter","CheckBoxTankers","CompactCheckBoxUI","ContextMenu","ContextMenuItem","DropDownImageText","UILoaderAlt","DropdownMenu","LabelControl","ListItemRedererImageText","LobbyMenuButton","MainMenuButton","NationDropdownMenuUI","NumericStepper","RadioButton","RedButtonDropDown","RedButtonDropDown_ListItemRenderer","RedButtonDropDown_ScrollingList","RegionDropdownMenu_UI","ScrollingList","Slider","UILoaderCut"];
-    this._ADVANCED_CONTROLS_LINKAGES = ["AccordionUI","ViewStack","AccrodionSoundRendererUI","BigAccrodionSoundRenderer","ButtonBarEx","ClanEmblem","CounterEx","DashLine_UI","DashLine","DoubleProgressBar","FieldSet","HelpLayout","InteractiveSortingButton_UI","ModuleIconUI","moduleIconExtra","PortraitsItemRendererUI","ScalableIconButton_UI","ScalableIconWrapper_UI","ShellButton","SkillItemViewMiniUI","SkillsItemRendererUI","SmallTabButton","SortableHeaderButtonBar_UI","SortingIconLoader","TabButton","TankIcon","TextAreaSimple","vehicleTypeButtonUI"];
     this.LINKAGES = {};
     super();
     this.LINKAGES[GUIEditorHelper.TYPE_SIMPLE] = this._SIMPLE_CONTROLS_LINKAGES;
@@ -213,15 +218,16 @@ function ComponentsInfoContainer() {
 
 private var _information:Object;
 
-private var _SIMPLE_CONTROLS_LINKAGES:Array;
+private var _SIMPLE_CONTROLS_LINKAGES:Array = ["BitmapFill","ButtonBlack","ButtonNormal","ButtonRed","CheckBox","DropDownListItemRendererSound","DropdownMenu","DropdownMenu_ScrollingList","HyperLink","LoadingBar","RedButton","ScrollBar","TextFieldShort","TextInput","UILoaderAlt"];
 
-private var _CONTROLS_LINKAGES:Array;
+private var _CONTROLS_LINKAGES:Array = ["ActionPriceUI","AlertIcon_UI","IconText","ButtonCaps","ButtonCapsRed","ButtonIcon","ButtonIconText","CheckBoxFilter","CheckBoxTankers","CompactCheckBoxUI","ContextMenu","ContextMenuItem","DropDownImageText","UILoaderAlt","DropdownMenu","LabelControl","ListItemRedererImageText","LobbyMenuButton","MainMenuButton","NationDropdownMenuUI","NumericStepper","RadioButton","RedButtonDropDown","RedButtonDropDown_ListItemRenderer","RedButtonDropDown_ScrollingList","RegionDropdownMenu_UI","ScrollingList","Slider","UILoaderCut"];
 
-private var _ADVANCED_CONTROLS_LINKAGES:Array;
+private var _ADVANCED_CONTROLS_LINKAGES:Array = ["AccordionUI","ViewStack","AccrodionSoundRendererUI","BigAccrodionSoundRenderer","ButtonBarEx","ClanEmblem","CounterEx","DashLine_UI","DashLine","DoubleProgressBar","FieldSet","HelpLayout","InteractiveSortingButton_UI","ModuleIconUI","moduleIconExtra","PortraitsItemRendererUI","ScalableIconButton_UI","ScalableIconWrapper_UI","ShellButton","SkillItemViewMiniUI","SkillsItemRendererUI","SmallTabButton","SortableHeaderButtonBar_UI","SortingIconLoader","TabButton","TankIcon","TextAreaSimple","vehicleTypeButtonUI"];
 
 private var LINKAGES:Object;
 
-private function createComponentsInfoByType(param1:String) : Vector.<ComponentInfoVo> {
+private function createComponentsInfoByType(param1:String) : Vector.<ComponentInfoVo>
+{
     var _loc4_:String = null;
     var _loc2_:Array = this.LINKAGES[param1];
     var _loc3_:Vector.<ComponentInfoVo> = new Vector.<ComponentInfoVo>();
@@ -232,7 +238,8 @@ private function createComponentsInfoByType(param1:String) : Vector.<ComponentIn
     return _loc3_;
 }
 
-public function getComponentsList(param1:String) : Vector.<ComponentInfoVo> {
+public function getComponentsList(param1:String) : Vector.<ComponentInfoVo>
+{
     switch(param1)
     {
         case GUIEditorHelper.TYPE_ALL:
@@ -251,7 +258,8 @@ public function getComponentsList(param1:String) : Vector.<ComponentInfoVo> {
     }
 }
 
-private function updateSmartControls(param1:DisplayObjectContainer) : void {
+private function updateSmartControls(param1:DisplayObjectContainer) : void
+{
     var _loc3_:DisplayObject = null;
     var _loc4_:String = null;
     var _loc2_:Number = 0;

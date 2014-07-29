@@ -5,7 +5,8 @@ package net.wg.gui.lobby.customization
     public class CustomizationEvent extends Event
     {
         
-        public function CustomizationEvent(param1:String) {
+        public function CustomizationEvent(param1:String)
+        {
             super(param1,true,true);
         }
         
@@ -35,7 +36,8 @@ package net.wg.gui.lobby.customization
         
         public var data:Object;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new CustomizationEvent(type);
         }
     }

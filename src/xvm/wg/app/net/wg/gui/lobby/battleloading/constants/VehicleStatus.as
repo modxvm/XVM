@@ -3,7 +3,8 @@ package net.wg.gui.lobby.battleloading.constants
     public class VehicleStatus extends Object
     {
         
-        public function VehicleStatus() {
+        public function VehicleStatus()
+        {
             super();
         }
         

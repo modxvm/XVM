@@ -5,7 +5,8 @@ package net.wg.gui.lobby.battleResults
     public class BattleResultsMedalsListVO extends DAAPIDataClass
     {
         
-        public function BattleResultsMedalsListVO(param1:Object) {
+        public function BattleResultsMedalsListVO(param1:Object)
+        {
             super(param1);
         }
         

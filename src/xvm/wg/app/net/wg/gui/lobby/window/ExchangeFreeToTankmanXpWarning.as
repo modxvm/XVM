@@ -6,7 +6,8 @@ package net.wg.gui.lobby.window
     public class ExchangeFreeToTankmanXpWarning extends MovieClip
     {
         
-        public function ExchangeFreeToTankmanXpWarning() {
+        public function ExchangeFreeToTankmanXpWarning()
+        {
             super();
         }
         

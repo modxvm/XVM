@@ -3,13 +3,15 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class DetailedLabelDataVO extends StatisticsLabelDataVO
     {
         
-        public function DetailedLabelDataVO(param1:Object) {
+        public function DetailedLabelDataVO(param1:Object)
+        {
             super(param1);
         }
         
         private var _detailedInfoList:Array;
         
-        override protected function parceData(param1:Object) : void {
+        override protected function parceData(param1:Object) : void
+        {
             var _loc3_:Array = null;
             var _loc4_:Array = null;
             var _loc5_:* = 0;
@@ -30,11 +32,13 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             }
         }
         
-        public function get detailedInfoList() : Array {
+        public function get detailedInfoList() : Array
+        {
             return this._detailedInfoList;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this._detailedInfoList = null;
         }

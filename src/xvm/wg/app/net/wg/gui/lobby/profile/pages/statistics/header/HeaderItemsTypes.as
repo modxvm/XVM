@@ -3,7 +3,8 @@ package net.wg.gui.lobby.profile.pages.statistics.header
     public class HeaderItemsTypes extends Object
     {
         
-        public function HeaderItemsTypes() {
+        public function HeaderItemsTypes()
+        {
             super();
         }
         

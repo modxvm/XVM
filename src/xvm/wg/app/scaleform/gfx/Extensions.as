@@ -7,44 +7,55 @@ package scaleform.gfx
     public final class Extensions extends Object
     {
         
-        public function Extensions() {
+        public function Extensions()
+        {
             super();
         }
         
-        public static function set enabled(param1:Boolean) : void {
+        public static function set enabled(param1:Boolean) : void
+        {
         }
         
-        public static function get enabled() : Boolean {
+        public static function get enabled() : Boolean
+        {
             return false;
         }
         
-        public static function set noInvisibleAdvance(param1:Boolean) : void {
+        public static function set noInvisibleAdvance(param1:Boolean) : void
+        {
         }
         
-        public static function get noInvisibleAdvance() : Boolean {
+        public static function get noInvisibleAdvance() : Boolean
+        {
             return false;
         }
         
-        public static function getTopMostEntity(param1:Number, param2:Number, param3:Boolean = true) : DisplayObject {
+        public static function getTopMostEntity(param1:Number, param2:Number, param3:Boolean = true) : DisplayObject
+        {
             return null;
         }
         
-        public static function getMouseTopMostEntity(param1:Boolean = true, param2:uint = 0) : DisplayObject {
+        public static function getMouseTopMostEntity(param1:Boolean = true, param2:uint = 0) : DisplayObject
+        {
             return null;
         }
         
-        public static function setMouseCursorType(param1:String, param2:uint = 0) : void {
+        public static function setMouseCursorType(param1:String, param2:uint = 0) : void
+        {
         }
         
-        public static function getMouseCursorType(param1:uint = 0) : String {
+        public static function getMouseCursorType(param1:uint = 0) : String
+        {
             return "";
         }
         
-        public static function get numControllers() : uint {
+        public static function get numControllers() : uint
+        {
             return 1;
         }
         
-        public static function get visibleRect() : Rectangle {
+        public static function get visibleRect() : Rectangle
+        {
             return new Rectangle(0,0,0,0);
         }
         
@@ -56,17 +67,21 @@ package scaleform.gfx
         
         public static var EDGEAA_DISABLE:uint = 3;
         
-        public static function getEdgeAAMode(param1:DisplayObject) : uint {
+        public static function getEdgeAAMode(param1:DisplayObject) : uint
+        {
             return EDGEAA_INHERIT;
         }
         
-        public static function setEdgeAAMode(param1:DisplayObject, param2:uint) : void {
+        public static function setEdgeAAMode(param1:DisplayObject, param2:uint) : void
+        {
         }
         
-        public static function setIMEEnabled(param1:TextField, param2:Boolean) : void {
+        public static function setIMEEnabled(param1:TextField, param2:Boolean) : void
+        {
         }
         
-        public static function get isScaleform() : Boolean {
+        public static function get isScaleform() : Boolean
+        {
             return false;
         }
         

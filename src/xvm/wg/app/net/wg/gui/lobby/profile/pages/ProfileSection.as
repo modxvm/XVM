@@ -14,7 +14,8 @@ package net.wg.gui.lobby.profile.pages
     public class ProfileSection extends ProfileSectionMeta implements IProfileSectionMeta, IResizableContent
     {
         
-        public function ProfileSection() {
+        public function ProfileSection()
+        {
             super();
             this.animationManager = new SectionsShowAnimationManager(this);
         }
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.profile.pages
         
         private static var ANIMATION_INVALID:String = "animInv";
         
-        public static function applyInitDataToTextField(param1:String, param2:Object, param3:LineDescrIconText) : void {
+        public static function applyInitDataToTextField(param1:String, param2:Object, param3:LineDescrIconText) : void
+        {
             var _loc4_:Object = null;
             _loc4_ = param2[param1];
             param3.description = _loc4_["description"];
@@ -48,7 +50,8 @@ package net.wg.gui.lobby.profile.pages
         
         private var animationManager:SectionsShowAnimationManager;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID)) && (this.currentDimension))
             {
@@ -69,7 +72,8 @@ package net.wg.gui.lobby.profile.pages
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.battlesDropdown)
             {
@@ -77,11 +81,13 @@ package net.wg.gui.lobby.profile.pages
             }
         }
         
-        protected function dropDownChangeHandler(param1:Event) : void {
+        protected function dropDownChangeHandler(param1:Event) : void
+        {
             requestDossierS(this.battlesDropdown.selectedItem);
         }
         
-        protected function applyResizing() : void {
+        protected function applyResizing() : void
+        {
             if(this.layoutManager)
             {
                 this.layoutManager.setDimension(this.currentDimension.x,this.currentDimension.y);
@@ -89,7 +95,8 @@ package net.wg.gui.lobby.profile.pages
             this.x = Math.round(this.currentDimension.x / 2 - this._centerOffset);
         }
         
-        public function setViewSize(param1:Number, param2:Number) : void {
+        public function setViewSize(param1:Number, param2:Number) : void
+        {
             if(!this.currentDimension)
             {
                 this.currentDimension = new Point();
@@ -99,17 +106,21 @@ package net.wg.gui.lobby.profile.pages
             invalidate(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
         }
         
-        public function as_update(param1:Object) : void {
+        public function as_update(param1:Object) : void
+        {
         }
         
-        protected function applyData(param1:Object) : Object {
+        protected function applyData(param1:Object) : Object
+        {
             return null;
         }
         
-        public function as_setInitData(param1:Object) : void {
+        public function as_setInitData(param1:Object) : void
+        {
         }
         
-        protected function disposeLayoutManager() : void {
+        protected function disposeLayoutManager() : void
+        {
             if(this.layoutManager)
             {
                 this.layoutManager.dispose();
@@ -117,10 +128,12 @@ package net.wg.gui.lobby.profile.pages
             }
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
         }
         
-        public function set active(param1:Boolean) : void {
+        public function set active(param1:Boolean) : void
+        {
             this.isActive = param1;
             if(this.isActive)
             {
@@ -133,20 +146,24 @@ package net.wg.gui.lobby.profile.pages
             setActiveS(this.isActive);
         }
         
-        public function get active() : Boolean {
+        public function get active() : Boolean
+        {
             return this.isActive;
         }
         
-        public function set centerOffset(param1:int) : void {
+        public function set centerOffset(param1:int) : void
+        {
             this._centerOffset = param1;
             invalidate(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
         }
         
-        public function get centerOffset() : int {
+        public function get centerOffset() : int
+        {
             return this._centerOffset;
         }
         
-        public function as_responseDossier(param1:String, param2:Object) : void {
+        public function as_responseDossier(param1:String, param2:Object) : void
+        {
             this.currentData = param2;
             this.battlesType = param1;
             if(this.battlesDropdown)
@@ -156,7 +173,8 @@ package net.wg.gui.lobby.profile.pages
             invalidate(DOSSIER_DATA_INVALID);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.currentData = null;
             this.currentDimension = null;
             if(this.animationManager)
@@ -174,11 +192,13 @@ package net.wg.gui.lobby.profile.pages
             super.onDispose();
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

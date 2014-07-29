@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class MessengerBarMeta extends BaseDAAPIComponent
     {
         
-        public function MessengerBarMeta() {
+        public function MessengerBarMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var contactsButtonClick:Function = null;
         
-        public function channelButtonClickS() : void {
+        public function channelButtonClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.channelButtonClick,"channelButtonClick" + Errors.CANT_NULL);
             this.channelButtonClick();
         }
         
-        public function contactsButtonClickS() : void {
+        public function contactsButtonClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.contactsButtonClick,"contactsButtonClick" + Errors.CANT_NULL);
             this.contactsButtonClick();
         }

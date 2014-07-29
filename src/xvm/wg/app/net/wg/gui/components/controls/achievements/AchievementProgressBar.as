@@ -6,7 +6,8 @@ package net.wg.gui.components.controls.achievements
     public class AchievementProgressBar extends ProgressBar
     {
         
-        public function AchievementProgressBar() {
+        public function AchievementProgressBar()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.components.controls.achievements
         
         public var dot:MovieClip;
         
-        override protected function applyDataChanges() : void {
+        override protected function applyDataChanges() : void
+        {
             super.applyDataChanges();
             var _loc1_:Number = (value - minimum) / (maximum - minimum);
             var _loc2_:Number = Math.round(_originalWidth * _loc1_);

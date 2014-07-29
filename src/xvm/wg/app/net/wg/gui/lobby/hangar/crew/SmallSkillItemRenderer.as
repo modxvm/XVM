@@ -11,23 +11,23 @@ package net.wg.gui.lobby.hangar.crew
     public class SmallSkillItemRenderer extends ListItemRenderer
     {
         
-        public function SmallSkillItemRenderer() {
+        public function SmallSkillItemRenderer()
+        {
             super();
-            _stateMap = {
-                "up":["up"],
-                "over":["over"],
-                "down":["down"],
-                "release":["release","over"],
-                "out":["out","up"],
-                "disabled":["disabled"],
-                "selecting":["selecting","over"],
-                "toggle":["toggle","up"],
-                "kb_selecting":["kb_selecting","up"],
-                "kb_release":["kb_release","out","up"],
-                "kb_down":["kb_down","down"],
-                "in_progress":["in_progress"],
-                "new_skill":["new_skill"]
-            };
+            _stateMap = {"up":["up"],
+            "over":["over"],
+            "down":["down"],
+            "release":["release","over"],
+            "out":["out","up"],
+            "disabled":["disabled"],
+            "selecting":["selecting","over"],
+            "toggle":["toggle","up"],
+            "kb_selecting":["kb_selecting","up"],
+            "kb_release":["kb_release","out","up"],
+            "kb_down":["kb_down","down"],
+            "in_progress":["in_progress"],
+            "new_skill":["new_skill"]
+        };
     }
     
     public var loader:UILoaderAlt;
@@ -36,7 +36,8 @@ package net.wg.gui.lobby.hangar.crew
     
     private var _inprogress:Boolean = false;
     
-    override public function setData(param1:Object) : void {
+    override public function setData(param1:Object) : void
+    {
         var _loc2_:SkillsVO = null;
         this.data = param1;
         if(param1)
@@ -51,23 +52,28 @@ package net.wg.gui.lobby.hangar.crew
         }
     }
     
-    override public function toString() : String {
+    override public function toString() : String
+    {
         return "[Scaleform RoleItemRenderer " + name + "]";
     }
     
-    public function get inprogress() : Boolean {
+    public function get inprogress() : Boolean
+    {
         return this._inprogress;
     }
     
-    public function set inprogress(param1:Boolean) : void {
+    public function set inprogress(param1:Boolean) : void
+    {
         this._inprogress = param1;
     }
     
-    override protected function configUI() : void {
+    override protected function configUI() : void
+    {
         super.configUI();
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         var _loc1_:SkillsVO = null;
         super.draw();
         if((isInvalid(InvalidationType.DATA)) && (data))
@@ -97,7 +103,8 @@ package net.wg.gui.lobby.hangar.crew
         }
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         removeEventListener(Event.ADDED,addToAutoGroup,false);
         removeEventListener(Event.REMOVED,addToAutoGroup,false);
         removeEventListener(MouseEvent.ROLL_OVER,handleMouseRollOver,false);

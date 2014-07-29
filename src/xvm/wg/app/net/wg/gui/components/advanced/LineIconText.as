@@ -6,7 +6,8 @@ package net.wg.gui.components.advanced
     public class LineIconText extends UIComponent
     {
         
-        public function LineIconText() {
+        public function LineIconText()
+        {
             super();
         }
         
@@ -22,7 +23,8 @@ package net.wg.gui.components.advanced
         
         private var _iconSource:String;
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             if(this._text != param1)
             {
                 this._text = param1;
@@ -30,11 +32,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(TEXT_INVALID))
             {
@@ -46,15 +50,18 @@ package net.wg.gui.components.advanced
             }
         }
         
-        protected function applyText(param1:String) : void {
+        protected function applyText(param1:String) : void
+        {
             this.textComponent.text = param1;
         }
         
-        public function get iconSource() : String {
+        public function get iconSource() : String
+        {
             return this._iconSource;
         }
         
-        public function set iconSource(param1:String) : void {
+        public function set iconSource(param1:String) : void
+        {
             if(this._iconSource != param1)
             {
                 this._iconSource = param1;
@@ -62,7 +69,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.textComponent = null;
             super.onDispose();
             if(this.icon)

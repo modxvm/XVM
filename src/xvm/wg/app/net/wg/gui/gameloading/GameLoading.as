@@ -17,7 +17,8 @@ package net.wg.gui.gameloading
     public class GameLoading extends UIComponent
     {
         
-        public function GameLoading() {
+        public function GameLoading()
+        {
             super();
             stage.scaleMode = StageScaleMode.NO_SCALE;
         }
@@ -80,34 +81,40 @@ package net.wg.gui.gameloading
         
         private var _progress:Number;
         
-        public function setVersion(param1:String) : void {
+        public function setVersion(param1:String) : void
+        {
             this._version = param1;
             invalidate(INVALID_VERSION);
         }
         
-        public function setLocale(param1:String) : void {
+        public function setLocale(param1:String) : void
+        {
             this._locale = param1;
             this.isLocaleSet = true;
             invalidate(INVALID_LOCALE);
         }
         
-        public function setProgress(param1:Number) : void {
+        public function setProgress(param1:Number) : void
+        {
             this._progress = param1;
             invalidate(INVALID_PROGRESS);
         }
         
-        public function updateStage(param1:Number, param2:Number) : void {
+        public function updateStage(param1:Number, param2:Number) : void
+        {
             this.appWidth = param1;
             this.appHeight = param2;
             invalidateSize();
         }
         
-        public function cleanup() : void {
+        public function cleanup() : void
+        {
             this.awardsLoader.removeEventListener(UILoaderEvent.COMPLETE,this.onAwardsLoaded);
             this.awardsLoader.dispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.progressBar = this.form.progressBar;
             this.infoTF = this.form.infoTF;
@@ -122,12 +129,14 @@ package net.wg.gui.gameloading
             this.awardsLoader.addEventListener(UILoaderEvent.COMPLETE,this.onAwardsLoaded);
         }
         
-        private function onAwardsLoaded(param1:UILoaderEvent) : void {
+        private function onAwardsLoaded(param1:UILoaderEvent) : void
+        {
             this.awardsLoader.x = -(this.awardsLoader.width >> 1);
             this.awardsLoader.removeEventListener(UILoaderEvent.COMPLETE,this.onAwardsLoaded);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INVALID_VERSION))
             {
@@ -163,7 +172,8 @@ package net.wg.gui.gameloading
             }
         }
         
-        private function relayout() : void {
+        private function relayout() : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:TextFormat = null;

@@ -7,7 +7,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
     public class SortieTeamSection extends BaseTeamSection
     {
         
-        public function SortieTeamSection() {
+        public function SortieTeamSection()
+        {
             super();
             btnFight.UIID = 72;
             btnNotReady.UIID = 72;
@@ -73,25 +74,30 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         public var dropTargerIndicator14:SlotDropIndicator;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             lblTeamVehicles.htmlText = this.getVehiclesStaticStr();
             lblTeamHeader.text = FORTIFICATIONS.SORTIE_ROOM_ROSTERLISTTITLE;
         }
         
-        override protected function getMembersStr() : String {
+        override protected function getMembersStr() : String
+        {
             return FORTIFICATIONS.SORTIE_ROOM_MEMBERS;
         }
         
-        override protected function getVehiclesStr() : String {
+        override protected function getVehiclesStr() : String
+        {
             return App.utils.locale.makeString(FORTIFICATIONS.SORTIE_ROOM_VEHICLES);
         }
         
-        override protected function getVehiclesStaticStr() : String {
+        override protected function getVehiclesStaticStr() : String
+        {
             return App.utils.locale.makeString(FORTIFICATIONS.SORTIE_ROOM_VEHICLES);
         }
         
-        override protected function getSlotsUI() : Array {
+        override protected function getSlotsUI() : Array
+        {
             var _loc2_:SortieSlot = null;
             var _loc1_:Array = [this.slot0,this.slot1,this.slot2,this.slot3,this.slot4,this.slot5,this.slot6,this.slot7,this.slot8,this.slot9,this.slot10,this.slot11,this.slot12,this.slot13,this.slot14];
             var _loc3_:* = 0;
@@ -105,7 +111,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             return _loc1_;
         }
         
-        override protected function getIndicatorsUI() : Array {
+        override protected function getIndicatorsUI() : Array
+        {
             return [this.dropTargerIndicator0,this.dropTargerIndicator1,this.dropTargerIndicator2,this.dropTargerIndicator3,this.dropTargerIndicator4,this.dropTargerIndicator5,this.dropTargerIndicator6,this.dropTargerIndicator7,this.dropTargerIndicator8,this.dropTargerIndicator9,this.dropTargerIndicator10,this.dropTargerIndicator11,this.dropTargerIndicator12,this.dropTargerIndicator13,this.dropTargerIndicator14];
         }
     }

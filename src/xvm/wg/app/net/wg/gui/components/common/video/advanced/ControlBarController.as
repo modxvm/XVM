@@ -13,7 +13,8 @@ package net.wg.gui.components.common.video.advanced
     public class ControlBarController extends AbstractPlayerController
     {
         
-        public function ControlBarController(param1:SimpleVideoPlayer, param2:VideoPlayerControlBar) {
+        public function ControlBarController(param1:SimpleVideoPlayer, param2:VideoPlayerControlBar)
+        {
             super(param1);
             this.controlBar = param2;
             videoPlayer.addEventListener(VideoPlayerStatusEvent.STATUS_CHANGED,this.videoPlayerStatusHandler,false,0,true);
@@ -31,15 +32,18 @@ package net.wg.gui.components.common.video.advanced
         
         private var timer:Timer;
         
-        private function soundSliderChangeHandler(param1:SliderEvent) : void {
+        private function soundSliderChangeHandler(param1:SliderEvent) : void
+        {
             videoPlayer.volume = this.controlBar.volume;
         }
         
-        private function videoMetaDataChangeHandler(param1:Event) : void {
+        private function videoMetaDataChangeHandler(param1:Event) : void
+        {
             this.controlBar.totalTime = videoPlayer.metaData.duration;
         }
         
-        private function videoPlayerStatusHandler(param1:VideoPlayerStatusEvent) : void {
+        private function videoPlayerStatusHandler(param1:VideoPlayerStatusEvent) : void
+        {
             var _loc2_:uint = 0;
             _loc2_ = videoPlayer.status;
             if(_loc2_ == PlayerStatus.PLAYING)
@@ -61,7 +65,8 @@ package net.wg.gui.components.common.video.advanced
             this.controlBar.enabled = !(_loc2_ == PlayerStatus.LOADING);
         }
         
-        private function stopTimer() : void {
+        private function stopTimer() : void
+        {
             if(this.timer)
             {
                 this.timer.removeEventListener(TimerEvent.TIMER,this.updateTime);
@@ -69,24 +74,29 @@ package net.wg.gui.components.common.video.advanced
             }
         }
         
-        private function updateTime(param1:TimerEvent) : void {
+        private function updateTime(param1:TimerEvent) : void
+        {
             this.controlBar.currentTime = videoPlayer.currentTime;
         }
         
-        private function volumeChangeHandler(param1:Event) : void {
+        private function volumeChangeHandler(param1:Event) : void
+        {
             this.controlBar.volume = videoPlayer.volume;
         }
         
-        private function playButtonClickHandler(param1:ButtonEvent) : void {
+        private function playButtonClickHandler(param1:ButtonEvent) : void
+        {
             videoPlayer.togglePlayback();
         }
         
-        private function repeatButtonClickHandler(param1:ButtonEvent) : void {
+        private function repeatButtonClickHandler(param1:ButtonEvent) : void
+        {
             videoPlayer.runPlayback();
             this.controlBar.currentTime = 0;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.stopTimer();
             this.timer = null;
             this.controlBar.playButton.removeEventListener(ButtonEvent.CLICK,this.playButtonClickHandler);

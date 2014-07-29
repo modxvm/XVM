@@ -5,7 +5,8 @@ package scaleform.gfx
     public final class MouseCursorEvent extends Event
     {
         
-        public function MouseCursorEvent() {
+        public function MouseCursorEvent()
+        {
             super("MouseCursorEvent",false,true);
         }
         

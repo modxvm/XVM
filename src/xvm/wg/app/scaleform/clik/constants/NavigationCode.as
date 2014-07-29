@@ -3,7 +3,8 @@ package scaleform.clik.constants
     public class NavigationCode extends Object
     {
         
-        public function NavigationCode() {
+        public function NavigationCode()
+        {
             super();
         }
         

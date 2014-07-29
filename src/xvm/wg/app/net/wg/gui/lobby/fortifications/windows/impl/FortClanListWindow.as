@@ -18,7 +18,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
     public class FortClanListWindow extends FortClanListWindowMeta implements IFortClanListWindowMeta
     {
         
-        public function FortClanListWindow() {
+        public function FortClanListWindow()
+        {
             super();
             isModal = false;
             isCentered = true;
@@ -35,7 +36,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private static var IS_SELF:String = "himself";
         
-        private static function getHeadersProvider() : DataProvider {
+        private static function getHeadersProvider() : DataProvider
+        {
             var _loc1_:Array = null;
             var _loc4_:NormalSortingBtnInfo = null;
             _loc1_ = [];
@@ -86,7 +88,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private var data:FortClanListWindowVO = null;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.data))
             {
@@ -97,16 +100,19 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.table.headerDP = getHeadersProvider();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.table.removeEventListener(SortableTableListEvent.RENDERER_CLICK,this.itemClickHandler);
             this.table.dispose();
             this.table = null;
@@ -118,12 +124,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
             super.onDispose();
         }
         
-        override protected function setData(param1:FortClanListWindowVO) : void {
+        override protected function setData(param1:FortClanListWindowVO) : void
+        {
             this.data = param1;
             invalidateData();
         }
         
-        private function itemClickHandler(param1:SortableTableListEvent) : void {
+        private function itemClickHandler(param1:SortableTableListEvent) : void
+        {
             var _loc2_:ClanListRendererVO = null;
             if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
             {

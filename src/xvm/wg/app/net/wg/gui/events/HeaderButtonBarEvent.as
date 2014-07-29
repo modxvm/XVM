@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class HeaderButtonBarEvent extends Event
     {
         
-        public function HeaderButtonBarEvent(param1:String, param2:int = 0) {
+        public function HeaderButtonBarEvent(param1:String, param2:int = 0)
+        {
             super(param1,true,true);
             this.width = param2;
         }
@@ -14,7 +15,8 @@ package net.wg.gui.events
         
         public var width:int;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new HeaderButtonBarEvent(type,this.width);
         }
     }

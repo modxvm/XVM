@@ -13,7 +13,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
     public class DirectionListRenderer extends UIComponent
     {
         
-        public function DirectionListRenderer() {
+        public function DirectionListRenderer()
+        {
             super();
         }
         
@@ -31,13 +32,15 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         
         private var model:DirectionVO;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.closeBtn.label = FORTIFICATIONS.FORTDIRECTIONSWINDOW_BUTTON_CLOSEDIRECTION;
             this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onCloseClick);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.onCloseClick);
             this.closeBtn.dispose();
             this.closeBtn = null;
@@ -54,7 +57,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -94,16 +98,19 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             }
         }
         
-        public function setData(param1:DirectionVO) : void {
+        public function setData(param1:DirectionVO) : void
+        {
             this.model = param1;
             invalidateData();
         }
         
-        private function onCloseClick(param1:ButtonEvent) : void {
+        private function onCloseClick(param1:ButtonEvent) : void
+        {
             dispatchEvent(new DirectionEvent(DirectionEvent.CLOSE_DIRECTION,this.model.uid));
         }
         
-        private function setControlsVisible(param1:Boolean) : void {
+        private function setControlsVisible(param1:Boolean) : void
+        {
             this.textField.visible = param1;
             this.closeBtn.visible = param1;
             this.roadPic.visible = param1;

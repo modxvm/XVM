@@ -12,7 +12,8 @@ package net.wg.gui.components.advanced
     public class CounterEx extends UIComponent
     {
         
-        public function CounterEx() {
+        public function CounterEx()
+        {
             this.tfMetrics = {};
             super();
         }
@@ -63,7 +64,8 @@ package net.wg.gui.components.advanced
         
         private var _expectedWidth:Number;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.clearLines();
             this.tFormat = null;
@@ -77,11 +79,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get tweenNum() : Number {
+        public function get tweenNum() : Number
+        {
             return this._tweenNum;
         }
         
-        public function set tweenNum(param1:Number) : void {
+        public function set tweenNum(param1:Number) : void
+        {
             if(this._tweenNum == param1)
             {
                 return;
@@ -90,15 +94,18 @@ package net.wg.gui.components.advanced
             this.setLinesPosition(this._tweenNum);
         }
         
-        public function get expectedWidth() : Number {
+        public function get expectedWidth() : Number
+        {
             return this._expectedWidth;
         }
         
-        public function get number() : Number {
+        public function get number() : Number
+        {
             return this._number;
         }
         
-        public function set number(param1:Number) : void {
+        public function set number(param1:Number) : void
+        {
             if(param1 == this._number)
             {
                 return;
@@ -107,11 +114,13 @@ package net.wg.gui.components.advanced
             this.startAnim();
         }
         
-        public function get playAnim() : Boolean {
+        public function get playAnim() : Boolean
+        {
             return this._playAnim;
         }
         
-        public function set playAnim(param1:Boolean) : void {
+        public function set playAnim(param1:Boolean) : void
+        {
             if(param1 == this._playAnim)
             {
                 return;
@@ -119,11 +128,13 @@ package net.wg.gui.components.advanced
             this._playAnim = param1;
         }
         
-        public function get size() : Number {
+        public function get size() : Number
+        {
             return this._size;
         }
         
-        public function set size(param1:Number) : void {
+        public function set size(param1:Number) : void
+        {
             if(param1 == this._size)
             {
                 return;
@@ -132,11 +143,13 @@ package net.wg.gui.components.advanced
             this.startAnim();
         }
         
-        public function get color() : Number {
+        public function get color() : Number
+        {
             return this._color;
         }
         
-        public function set color(param1:Number) : void {
+        public function set color(param1:Number) : void
+        {
             if(param1 == this._color)
             {
                 return;
@@ -145,11 +158,13 @@ package net.wg.gui.components.advanced
             this.startAnim();
         }
         
-        public function get letterSpacing() : Number {
+        public function get letterSpacing() : Number
+        {
             return this._letterSpacing;
         }
         
-        public function set letterSpacing(param1:Number) : void {
+        public function set letterSpacing(param1:Number) : void
+        {
             if(param1 == this._letterSpacing)
             {
                 return;
@@ -158,11 +173,13 @@ package net.wg.gui.components.advanced
             this.startAnim();
         }
         
-        public function get speed() : Number {
+        public function get speed() : Number
+        {
             return this._speed;
         }
         
-        public function set speed(param1:Number) : void {
+        public function set speed(param1:Number) : void
+        {
             if(param1 == this._speed)
             {
                 return;
@@ -171,11 +188,13 @@ package net.wg.gui.components.advanced
             this.startAnim();
         }
         
-        public function get font() : String {
+        public function get font() : String
+        {
             return this._font;
         }
         
-        public function set font(param1:String) : void {
+        public function set font(param1:String) : void
+        {
             if(param1 == this._font)
             {
                 return;
@@ -184,11 +203,13 @@ package net.wg.gui.components.advanced
             this.startAnim();
         }
         
-        public function get localizationSymbol() : String {
+        public function get localizationSymbol() : String
+        {
             return this._localizationSymbol;
         }
         
-        public function set localizationSymbol(param1:String) : void {
+        public function set localizationSymbol(param1:String) : void
+        {
             if(param1 == this._localizationSymbol)
             {
                 return;
@@ -196,28 +217,34 @@ package net.wg.gui.components.advanced
             this._localizationSymbol = param1;
         }
         
-        public function get metricsWidth() : Number {
+        public function get metricsWidth() : Number
+        {
             return this.realMetricsWidth;
         }
         
-        public function get formattedNumber() : String {
+        public function get formattedNumber() : String
+        {
             return this._formattedNumber;
         }
         
-        public function set formattedNumber(param1:String) : void {
+        public function set formattedNumber(param1:String) : void
+        {
             this._formattedNumber = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.tempTF.visible = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        private function areSpaces(param1:String) : Boolean {
+        private function areSpaces(param1:String) : Boolean
+        {
             var _loc2_:* = true;
             var _loc3_:Number = 0;
             while(_loc3_ < param1.length)
@@ -232,7 +259,8 @@ package net.wg.gui.components.advanced
             return _loc2_;
         }
         
-        private function startAnim() : void {
+        private function startAnim() : void
+        {
             if((!(this.font == "") && this.size > 0) && (this.color) && this.speed > 0)
             {
                 this.checkTruePosition = [];
@@ -256,7 +284,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function clearLines() : void {
+        private function clearLines() : void
+        {
             if(this.tween)
             {
                 this.tween.paused = true;
@@ -276,7 +305,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function createLines() : void {
+        private function createLines() : void
+        {
             var _loc3_:MovieClip = null;
             var _loc4_:TextField = null;
             var _loc7_:* = NaN;
@@ -339,21 +369,20 @@ package net.wg.gui.components.advanced
                 _loc4_.x = _loc1_;
             }
             this._expectedWidth = Math.abs(_loc1_);
-            this.checkTruePosition.push({
-                "stand":true,
-                "num":0
-            });
+            this.checkTruePosition.push({"stand":true,
+            "num":0
+        });
     }
     
-    private function animate() : void {
+    private function animate() : void
+    {
         var _loc1_:* = 0;
         if(this.playAnim)
         {
-            this.tween = new Tween(this.speed,this,{"tweenNum":Math.abs(this.number)},{
-                "paused":false,
-                "ease":Cubic.easeOut,
-                "onComplete":null
-            });
+            this.tween = new Tween(this.speed,this,{"tweenNum":Math.abs(this.number)},{"paused":false,
+            "ease":Cubic.easeOut,
+            "onComplete":null
+        });
     }
     else
     {
@@ -367,7 +396,8 @@ package net.wg.gui.components.advanced
     }
 }
 
-private function setLinesPosition(param1:Number) : void {
+private function setLinesPosition(param1:Number) : void
+{
     var _loc2_:* = 0;
     while(_loc2_ < this.lines.length)
     {

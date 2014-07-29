@@ -21,7 +21,8 @@ package net.wg.gui.lobby.settings
     public class SoundSettings extends SoundSettingsBase
     {
         
-        public function SoundSettings() {
+        public function SoundSettings()
+        {
             super();
         }
         
@@ -35,13 +36,15 @@ package net.wg.gui.lobby.settings
         
         private var LOCALIZATION_PREFIX:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             btnVivoxTest.addEventListener(ButtonEvent.CLICK,this.onBtnVivoxTest);
             btnCaptureDevicesUpdate.addEventListener(ButtonEvent.CLICK,this.onCaptureDevicesBtnClick);
             super.configUI();
         }
         
-        private function onBtnVivoxTest(param1:ButtonEvent) : void {
+        private function onBtnVivoxTest(param1:ButtonEvent) : void
+        {
             if(this.isVoiceTestStarted)
             {
                 return;
@@ -49,18 +52,21 @@ package net.wg.gui.lobby.settings
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_VIVOX_TEST,_viewId,"",true));
         }
         
-        public function onViewChanged() : void {
+        public function onViewChanged() : void
+        {
             this.breakSoundCheck();
         }
         
-        public function breakSoundCheck() : void {
+        public function breakSoundCheck() : void
+        {
             if(this.isVoiceTestStarted)
             {
                 dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_VIVOX_TEST,_viewId,"",false));
             }
         }
         
-        public function setVoiceTestState(param1:Boolean) : void {
+        public function setVoiceTestState(param1:Boolean) : void
+        {
             if(this.isVoiceTestStarted == param1)
             {
                 return;
@@ -79,7 +85,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function voiceTimerTest(param1:SoundSettings) : void {
+        private function voiceTimerTest(param1:SoundSettings) : void
+        {
             var _loc2_:String = null;
             param1.vivoxTestTimeLeft = param1.vivoxTestTimeLeft - 100;
             if(param1.vivoxTestTimeLeft > 0)
@@ -93,7 +100,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function forceFinishVivoxTest() : void {
+        private function forceFinishVivoxTest() : void
+        {
             if(this.voiceTestTimerID != 0)
             {
                 clearInterval(this.voiceTestTimerID);
@@ -105,11 +113,13 @@ package net.wg.gui.lobby.settings
             voiceAnimation.speak(this.isVoiceTestStarted);
         }
         
-        override public function update(param1:Object) : void {
+        override public function update(param1:Object) : void
+        {
             super.update(param1);
         }
         
-        override protected function setData(param1:Object) : void {
+        override protected function setData(param1:Object) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -118,39 +128,48 @@ package net.wg.gui.lobby.settings
             throw new Error("Not decompiled due to error");
         }
         
-        private function handleMousePressPTTKey(param1:KeyInputEvents) : void {
+        private function handleMousePressPTTKey(param1:KeyInputEvents) : void
+        {
             this.hideTooltip();
         }
         
-        private function handleMouseRollOutPTTKey(param1:KeyInputEvents) : void {
+        private function handleMouseRollOutPTTKey(param1:KeyInputEvents) : void
+        {
             this.hideTooltip();
         }
         
-        private function handleMouseRollOverPTTKey(param1:KeyInputEvents) : void {
+        private function handleMouseRollOverPTTKey(param1:KeyInputEvents) : void
+        {
             App.toolTipMgr.showComplex(TOOLTIPS.SETTINGS_DIALOG_SOUND_PTTKEY,null);
         }
         
-        private function onTestAlternativeVoicesButtonOut(param1:MouseEvent) : void {
+        private function onTestAlternativeVoicesButtonOut(param1:MouseEvent) : void
+        {
             this.hideTooltip();
         }
         
-        private function onTestAlternativeVoicesButtonOver(param1:MouseEvent) : void {
+        private function onTestAlternativeVoicesButtonOver(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(TOOLTIPS.SETTINGS_DIALOG_SOUND_ALTERNATIVEVOICES,null);
         }
         
-        private function onTestAlternativeVoicesButtonClick(param1:ButtonEvent) : void {
+        private function onTestAlternativeVoicesButtonClick(param1:ButtonEvent) : void
+        {
             dispatchEvent(new AlternativeVoiceEvent(AlternativeVoiceEvent.ON_TEST_ALTERNATIVE_VOICES));
         }
         
-        private function hideTooltip() : void {
+        private function hideTooltip() : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onCaptureDevicesBtnClick(param1:ButtonEvent) : void {
+        private function onCaptureDevicesBtnClick(param1:ButtonEvent) : void
+        {
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_UPDATE_CAPTURE_DEVICE,_viewId));
         }
         
-        public function setCaptureDevices(param1:Number, param2:Array) : void {
+        public function setCaptureDevices(param1:Number, param2:Array) : void
+        {
             var _loc3_:uint = 0;
             while(_loc3_ < param2.length)
             {
@@ -170,7 +189,8 @@ package net.wg.gui.lobby.settings
             this.onVoiceChatEnabledSelect();
         }
         
-        private function onCheckBoxSelected(param1:Event) : void {
+        private function onCheckBoxSelected(param1:Event) : void
+        {
             var _loc2_:CheckBox = CheckBox(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
             if(_loc3_ == SettingsConfig.ENABLE_VO_IP)
@@ -180,7 +200,8 @@ package net.wg.gui.lobby.settings
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.selected));
         }
         
-        private function onSliderValueChanged(param1:SliderEvent) : void {
+        private function onSliderValueChanged(param1:SliderEvent) : void
+        {
             var _loc5_:LabelControl = null;
             var _loc2_:Slider = Slider(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_SLIDER);
@@ -197,16 +218,19 @@ package net.wg.gui.lobby.settings
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.value));
         }
         
-        private function onDropDownChange(param1:ListEvent) : void {
+        private function onDropDownChange(param1:ListEvent) : void
+        {
             var _loc2_:DropdownMenu = DropdownMenu(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.selectedIndex));
         }
         
-        private function setVivoxMicVolume(param1:Number) : void {
+        private function setVivoxMicVolume(param1:Number) : void
+        {
         }
         
-        private function onVoiceChatEnabledSelect() : void {
+        private function onVoiceChatEnabledSelect() : void
+        {
             this.breakSoundCheck();
             var _loc1_:Boolean = (enableVoIPCheckbox.selected) && (SettingsControlProp(_data[SettingsConfig.VOICE_CHAT_SUPORTED]).current);
             if(captureDeviceDropDown != null)
@@ -239,7 +263,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function showHideVoiceSettings() : void {
+        private function showHideVoiceSettings() : void
+        {
             var _loc1_:Boolean = App.voiceChatMgr.isYYS();
             var _loc2_:Boolean = App.voiceChatMgr.isVOIPEnabledS();
             voiceConnectFieldSet.visible = _loc2_;
@@ -264,7 +289,8 @@ package net.wg.gui.lobby.settings
             masterFadeVivoxVolumeValue.visible = _loc2_;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:String = null;
             var _loc2_:SettingsControlProp = null;
             var _loc3_:CheckBox = null;
@@ -347,18 +373,21 @@ package net.wg.gui.lobby.settings
             super.onDispose();
         }
         
-        public function updatePTTControl(param1:Number) : void {
+        public function updatePTTControl(param1:Number) : void
+        {
             PTTKeyInput.key = param1;
         }
         
-        private function showHideAlternativeVoices(param1:Boolean) : void {
+        private function showHideAlternativeVoices(param1:Boolean) : void
+        {
             alternativeVoicesFieldSet.visible = param1;
             alternativeVoicesLabel.visible = param1;
             alternativeVoicesDropDown.visible = param1;
             testAlternativeVoicesButton.visible = param1;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG SoundSettings " + name + "]";
         }
     }

@@ -11,7 +11,8 @@ package net.wg.gui.lobby.profile.pages.technique
     public class ProfileTechnique extends ProfileTechniqueMeta implements IProfileTechniqueMeta
     {
         
-        public function ProfileTechnique() {
+        public function ProfileTechnique()
+        {
             super();
             this.listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED,this.listDataChangeHandler,false,0,true);
         }
@@ -24,18 +25,21 @@ package net.wg.gui.lobby.profile.pages.technique
         
         public var emptyScreen:ProfileTechniqueEmptyScreen;
         
-        override public function as_setInitData(param1:Object) : void {
+        override public function as_setInitData(param1:Object) : void
+        {
             super.as_setInitData(param1);
             battlesDropdown.menuProvider = param1.dropDownProvider;
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             layoutManager = new SectionLayoutManager(525,740);
             layoutManager.registerComponents(this.listComponent,this.stackComponent);
         }
         
-        override protected function applyData(param1:Object) : Object {
+        override protected function applyData(param1:Object) : Object
+        {
             var _loc4_:TechniqueListVehicleVO = null;
             var _loc5_:Object = null;
             var _loc6_:* = false;
@@ -55,7 +59,8 @@ package net.wg.gui.lobby.profile.pages.technique
             return param1;
         }
         
-        private function listDataChangeHandler(param1:Event) : void {
+        private function listDataChangeHandler(param1:Event) : void
+        {
             var _loc2_:TechniqueListVehicleVO = this.listComponent.selectedItem;
             if(_loc2_)
             {
@@ -68,7 +73,8 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        override protected function applyResizing() : void {
+        override protected function applyResizing() : void
+        {
             if(layoutManager)
             {
                 layoutManager.setDimension(currentDimension.x,currentDimension.y);
@@ -80,7 +86,8 @@ package net.wg.gui.lobby.profile.pages.technique
             this.stackComponent.setViewSize(_loc1_ - this.stackComponent.x,currentDimension.y - this.stackComponent.y);
         }
         
-        override public function as_responseDossier(param1:String, param2:Object) : void {
+        override public function as_responseDossier(param1:String, param2:Object) : void
+        {
             super.as_responseDossier(param1,param2);
             if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_ALL)
             {
@@ -112,7 +119,8 @@ package net.wg.gui.lobby.profile.pages.technique
             
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(CURRENT_DIMENSION_INVALID)) && (currentDimension))
             {
@@ -120,7 +128,8 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        public function as_responseVehicleDossier(param1:Object) : void {
+        public function as_responseVehicleDossier(param1:Object) : void
+        {
             if(param1 != null)
             {
                 this.stackComponent.updateTankData(new ProfileVehicleDossierVO(param1));
@@ -131,7 +140,8 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.listComponent)
             {
                 this.listComponent.removeEventListener(TechniqueListComponent.DATA_CHANGED,this.listDataChangeHandler);

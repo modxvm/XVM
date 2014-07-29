@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class ModuleInfoMeta extends AbstractWindowView
     {
         
-        public function ModuleInfoMeta() {
+        public function ModuleInfoMeta()
+        {
             super();
         }
         
         public var onCancelClick:Function = null;
         
-        public function onCancelClickS() : void {
+        public function onCancelClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.onCancelClick,"onCancelClick" + Errors.CANT_NULL);
             this.onCancelClick();
         }

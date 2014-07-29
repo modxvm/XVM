@@ -8,7 +8,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
     public class FooterMc extends UIComponent
     {
         
-        public function FooterMc() {
+        public function FooterMc()
+        {
             super();
         }
         
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         public var warningMsg:TextField;
         
-        public function showWarning() : void {
+        public function showWarning() : void
+        {
             gotoAndStop("warning");
             this.warningMsg.text = DIALOGS.BUYVEHICLEDIALOG_WARNING;
             _originalHeight = _originalHeight + VehicleBuyWindow.WARNING_HEIGHT;
@@ -32,12 +34,14 @@ package net.wg.gui.lobby.vehicleBuyWindow
             setActualScale(1,1);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.expandBtn.buttonMode = true;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.submitBtn.dispose();
             this.cancelBtn.dispose();

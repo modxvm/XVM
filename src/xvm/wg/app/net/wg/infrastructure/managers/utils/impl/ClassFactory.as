@@ -11,11 +11,13 @@ package net.wg.infrastructure.managers.utils.impl
     public class ClassFactory extends Object implements IClassFactory
     {
         
-        public function ClassFactory() {
+        public function ClassFactory()
+        {
             super();
         }
         
-        public function getClass(param1:String) : Class {
+        public function getClass(param1:String) : Class
+        {
             var classpath:String = param1;
             var outcomeClass:Class = null;
             try
@@ -29,7 +31,8 @@ package net.wg.infrastructure.managers.utils.impl
             return outcomeClass;
         }
         
-        public function getObject(param1:String, param2:Object = null) : Object {
+        public function getObject(param1:String, param2:Object = null) : Object
+        {
             var _loc5_:String = null;
             var _loc6_:String = null;
             var _loc3_:Object = null;
@@ -54,7 +57,8 @@ package net.wg.infrastructure.managers.utils.impl
             return _loc3_;
         }
         
-        public function getComponent(param1:String, param2:Class, param3:Object = null) : * {
+        public function getComponent(param1:String, param2:Class, param3:Object = null) : *
+        {
             var _loc4_:Object = this.getObject(param1,param3);
             var _loc5_:* = "object with \"" + param1 + "\" linkage ";
             var _loc6_:* = _loc5_ + "is not a component from library!";

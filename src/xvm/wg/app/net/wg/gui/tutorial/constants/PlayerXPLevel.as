@@ -3,7 +3,8 @@ package net.wg.gui.tutorial.constants
     public class PlayerXPLevel extends Object
     {
         
-        public function PlayerXPLevel() {
+        public function PlayerXPLevel()
+        {
             super();
         }
         

@@ -3,7 +3,8 @@ package net.wg.gui.lobby.store
     public final class STORE_STATUS_COLOR extends Object
     {
         
-        public function STORE_STATUS_COLOR() {
+        public function STORE_STATUS_COLOR()
+        {
             super();
         }
         
@@ -13,12 +14,12 @@ package net.wg.gui.lobby.store
         
         public static var INFO:uint = 4945434;
         
-        public static function getColor(param1:String) : uint {
-            var _loc2_:Object = {
-                "critical":CRITICAL,
-                "warning":WARNING,
-                "info":INFO
-            };
+        public static function getColor(param1:String) : uint
+        {
+            var _loc2_:Object = {"critical":CRITICAL,
+            "warning":WARNING,
+            "info":INFO
+        };
         if(App.instance)
         {
             App.utils.asserter.assert(_loc2_.hasOwnProperty(param1),"unknown status for color: " + param1);

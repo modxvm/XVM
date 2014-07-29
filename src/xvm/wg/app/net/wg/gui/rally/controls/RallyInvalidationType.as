@@ -3,7 +3,8 @@ package net.wg.gui.rally.controls
     public class RallyInvalidationType extends Object
     {
         
-        public function RallyInvalidationType() {
+        public function RallyInvalidationType()
+        {
             super();
         }
         

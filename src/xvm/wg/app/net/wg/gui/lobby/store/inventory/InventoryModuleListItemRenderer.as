@@ -9,7 +9,8 @@ package net.wg.gui.lobby.store.inventory
     public class InventoryModuleListItemRenderer extends InventoryListItemRenderer
     {
         
-        public function InventoryModuleListItemRenderer() {
+        public function InventoryModuleListItemRenderer()
+        {
             super();
         }
         
@@ -19,13 +20,15 @@ package net.wg.gui.lobby.store.inventory
         
         public var count:TextField = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints.addElement(this.moduleIcon.name,this.moduleIcon,Constraints.LEFT);
             constraints.addElement(this.count.name,this.count,Constraints.RIGHT);
         }
         
-        override protected function update() : void {
+        override protected function update() : void
+        {
             var _loc1_:StoreTableData = null;
             super.update();
             if(data)
@@ -41,7 +44,8 @@ package net.wg.gui.lobby.store.inventory
             }
         }
         
-        private function updateModuleIcon(param1:StoreTableData) : void {
+        private function updateModuleIcon(param1:StoreTableData) : void
+        {
             if(this.moduleIcon)
             {
                 this.moduleIcon.setValuesWithType(param1.requestType,param1.type,param1.level);

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.store
     public class ModuleRendererCredits extends UIComponent
     {
         
-        public function ModuleRendererCredits() {
+        public function ModuleRendererCredits()
+        {
             super();
         }
         

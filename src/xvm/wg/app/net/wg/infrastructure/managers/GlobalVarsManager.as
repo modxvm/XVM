@@ -6,7 +6,8 @@ package net.wg.infrastructure.managers
     public class GlobalVarsManager extends GlobalVarsMgrMeta implements IGlobalVarsMgrMeta
     {
         
-        public function GlobalVarsManager() {
+        public function GlobalVarsManager()
+        {
             super();
         }
     }

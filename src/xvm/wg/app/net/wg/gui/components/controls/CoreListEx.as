@@ -11,7 +11,8 @@ package net.wg.gui.components.controls
     public class CoreListEx extends CoreList
     {
         
-        public function CoreListEx() {
+        public function CoreListEx()
+        {
             super();
         }
         
@@ -19,13 +20,16 @@ package net.wg.gui.components.controls
         
         private var _useRightButtonForSelect:Boolean = false;
         
-        protected function onItemStartDrag(param1:ListEventEx) : void {
+        protected function onItemStartDrag(param1:ListEventEx) : void
+        {
         }
         
-        protected function onItemStopDrag(param1:ListEventEx) : void {
+        protected function onItemStopDrag(param1:ListEventEx) : void
+        {
         }
         
-        override protected function setupRenderer(param1:IListItemRenderer) : void {
+        override protected function setupRenderer(param1:IListItemRenderer) : void
+        {
             param1.owner = this;
             param1.focusTarget = this;
             param1.tabEnabled = false;
@@ -51,7 +55,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
+        override protected function cleanUpRenderer(param1:IListItemRenderer) : void
+        {
             param1.doubleClickEnabled = false;
             param1.removeEventListener(ButtonEvent.DRAG_OVER,this.dispatchItemEvent,false);
             param1.removeEventListener(ButtonEvent.DRAG_OUT,this.dispatchItemEvent,false);
@@ -61,7 +66,8 @@ package net.wg.gui.components.controls
             super.cleanUpRenderer(param1);
         }
         
-        override protected function dispatchItemEvent(param1:Event) : Boolean {
+        override protected function dispatchItemEvent(param1:Event) : Boolean
+        {
             var _loc2_:String = null;
             switch(param1.type)
             {
@@ -122,7 +128,8 @@ package net.wg.gui.components.controls
             return dispatchEvent(_loc7_);
         }
         
-        public function set useRightButton(param1:Boolean) : void {
+        public function set useRightButton(param1:Boolean) : void
+        {
             var _loc2_:uint = 0;
             var _loc3_:SoundListItemRenderer = null;
             if(this._useRightButton == param1)
@@ -145,11 +152,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get useRightButton() : Boolean {
+        public function get useRightButton() : Boolean
+        {
             return this._useRightButton;
         }
         
-        public function set useRightButtonForSelect(param1:Boolean) : void {
+        public function set useRightButtonForSelect(param1:Boolean) : void
+        {
             if(this._useRightButtonForSelect == param1)
             {
                 return;
@@ -157,11 +166,13 @@ package net.wg.gui.components.controls
             this._useRightButtonForSelect = param1;
         }
         
-        public function get useRightButtonForSelect() : Boolean {
+        public function get useRightButtonForSelect() : Boolean
+        {
             return this._useRightButtonForSelect;
         }
         
-        override protected function handleItemClick(param1:ButtonEvent) : void {
+        override protected function handleItemClick(param1:ButtonEvent) : void
+        {
             var _loc2_:Number = (param1.currentTarget as IListItemRenderer).index;
             if(isNaN(_loc2_))
             {

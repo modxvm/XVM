@@ -6,7 +6,8 @@ package net.wg.gui.tutorial.meta.impl
     public class TutorialDialogMeta extends AbstractWindowView
     {
         
-        public function TutorialDialogMeta() {
+        public function TutorialDialogMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.gui.tutorial.meta.impl
         
         public var cancel:Function = null;
         
-        public function submitS() : void {
+        public function submitS() : void
+        {
             App.utils.asserter.assertNotNull(this.submit,"submit" + Errors.CANT_NULL);
             this.submit();
         }
         
-        public function cancelS() : void {
+        public function cancelS() : void
+        {
             App.utils.asserter.assertNotNull(this.cancel,"cancel" + Errors.CANT_NULL);
             this.cancel();
         }

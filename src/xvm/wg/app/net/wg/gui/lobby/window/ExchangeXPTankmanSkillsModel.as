@@ -5,19 +5,22 @@ package net.wg.gui.lobby.window
     public class ExchangeXPTankmanSkillsModel extends CarouselTankmanSkillsModel
     {
         
-        public function ExchangeXPTankmanSkillsModel() {
+        public function ExchangeXPTankmanSkillsModel()
+        {
             super();
             this._defaultActiveValue = isActive;
         }
         
         private var _defaultActiveValue:Boolean;
         
-        override public function set level(param1:int) : void {
+        override public function set level(param1:int) : void
+        {
             super.level = param1;
             this.reCalcValues();
         }
         
-        private function reCalcValues() : void {
+        private function reCalcValues() : void
+        {
             if(super.level >= 100)
             {
                 isActive = true;
@@ -28,7 +31,8 @@ package net.wg.gui.lobby.window
             }
         }
         
-        public function set defaultActiveValue(param1:Boolean) : void {
+        public function set defaultActiveValue(param1:Boolean) : void
+        {
             this._defaultActiveValue = param1;
             this.reCalcValues();
         }

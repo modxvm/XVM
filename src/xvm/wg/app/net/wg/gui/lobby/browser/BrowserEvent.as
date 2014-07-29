@@ -5,7 +5,8 @@ package net.wg.gui.lobby.browser
     public class BrowserEvent extends Event
     {
         
-        public function BrowserEvent(param1:String, param2:Number = 0, param3:Number = 0, param4:int = 0) {
+        public function BrowserEvent(param1:String, param2:Number = 0, param3:Number = 0, param4:int = 0)
+        {
             super(param1,true,true);
             this.mouseX = param2;
             this.mouseY = param3;
@@ -32,7 +33,8 @@ package net.wg.gui.lobby.browser
         
         public var delta:int;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new BrowserEvent(type,this.mouseX,this.mouseY,this.delta);
         }
     }

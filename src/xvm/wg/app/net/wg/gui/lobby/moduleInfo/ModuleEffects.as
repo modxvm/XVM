@@ -9,7 +9,8 @@ package net.wg.gui.lobby.moduleInfo
     public class ModuleEffects extends UIComponent
     {
         
-        public function ModuleEffects() {
+        public function ModuleEffects()
+        {
             super();
         }
         
@@ -17,7 +18,8 @@ package net.wg.gui.lobby.moduleInfo
         
         protected var _bottomMargin:Number = 20;
         
-        public function setEffects(param1:Object = null) : void {
+        public function setEffects(param1:Object = null) : void
+        {
             if(param1)
             {
                 this.effectsTF.multiline = true;
@@ -28,25 +30,30 @@ package net.wg.gui.lobby.moduleInfo
             }
         }
         
-        public function get bottomMargin() : Number {
+        public function get bottomMargin() : Number
+        {
             return this._bottomMargin;
         }
         
-        public function set bottomMargin(param1:Number) : void {
+        public function set bottomMargin(param1:Number) : void
+        {
             this._bottomMargin = param1;
         }
         
-        private function getEffectParams(param1:Object) : String {
+        private function getEffectParams(param1:Object) : String
+        {
             var _loc2_:* = "";
             var _loc3_:Number = 25;
             var _loc4_:ILocale = App.utils.locale;
             if((param1.effectOnUse) && (!(param1.effectOnUse == "")) && !(param1.effectOnUse == undefined))
             {
                 _loc2_ = _loc2_ + this.getEquipmentUsageBlock(_loc4_.makeString(TOOLTIPS.EQUIPMENT_ONUSE),_loc4_.makeString(param1.effectOnUse),_loc3_);
+                _loc3_ + 25;
             }
             if(!(param1.effectAlways == "") && !(param1.effectAlways == "") && !(param1.effectAlways == undefined))
             {
                 _loc2_ = _loc2_ + this.getEquipmentUsageBlock(_loc4_.makeString(TOOLTIPS.EQUIPMENT_ALWAYS),_loc4_.makeString(param1.effectAlways),_loc3_);
+                _loc3_ + 25;
             }
             if(_loc2_ != "")
             {
@@ -59,7 +66,8 @@ package net.wg.gui.lobby.moduleInfo
             return _loc2_;
         }
         
-        private function getEquipmentUsageBlock(param1:String, param2:String, param3:int = 20) : String {
+        private function getEquipmentUsageBlock(param1:String, param2:String, param3:int = 20) : String
+        {
             var param1:String = param1 == ""?"":Utils.instance.htmlWrapper(param1,"#c1ba9c",13,"$FieldFont",true) + Utils.instance.htmlWrapper(" ","#c1ba9c",param3,"$FieldFont");
             var param2:String = param2 == ""?"":Utils.instance.htmlWrapper(param2,"#95907f",12,"$FieldFont");
             var _loc4_:String = "<br/>" + param1 + "<br/>" + param2;

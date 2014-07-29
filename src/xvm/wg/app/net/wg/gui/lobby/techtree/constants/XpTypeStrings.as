@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.constants
     public class XpTypeStrings extends Object
     {
         
-        public function XpTypeStrings() {
+        public function XpTypeStrings()
+        {
             super();
         }
         

@@ -3,7 +3,8 @@ package net.wg.gui.lobby.profile.pages
     public class ProfiletabInfo extends Object
     {
         
-        public function ProfiletabInfo() {
+        public function ProfiletabInfo()
+        {
             super();
         }
         

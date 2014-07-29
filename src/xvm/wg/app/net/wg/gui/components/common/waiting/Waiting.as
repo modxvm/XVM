@@ -8,7 +8,8 @@ package net.wg.gui.components.common.waiting
     public class Waiting extends UIComponent implements IDisposable
     {
         
-        public function Waiting() {
+        public function Waiting()
+        {
             super();
         }
         
@@ -22,7 +23,8 @@ package net.wg.gui.components.common.waiting
         
         private var _backgroundAlpha:Number = 1;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -44,12 +46,14 @@ package net.wg.gui.components.common.waiting
             }
         }
         
-        public function setMessage(param1:String) : void {
+        public function setMessage(param1:String) : void
+        {
             this._text = param1;
             invalidate(TEXT_INVALID);
         }
         
-        public function show() : void {
+        public function show() : void
+        {
             visible = true;
             if(!this.waitingComponent)
             {
@@ -60,11 +64,13 @@ package net.wg.gui.components.common.waiting
             }
         }
         
-        public function hide() : void {
+        public function hide() : void
+        {
             visible = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.waitingComponent)
             {
@@ -85,7 +91,8 @@ package net.wg.gui.components.common.waiting
             }
         }
         
-        public function set backgroundAlpha(param1:Number) : void {
+        public function set backgroundAlpha(param1:Number) : void
+        {
             if(this._backgroundAlpha != param1)
             {
                 this._backgroundAlpha = param1;

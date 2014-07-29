@@ -15,7 +15,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipBase extends UIComponent implements IToolTip
     {
         
-        public function ToolTipBase() {
+        public function ToolTipBase()
+        {
             this.contentMargin = new Padding(12,17,12,17);
             this.bgShadowMargin = new Padding(3,5,7,5);
             super();
@@ -83,7 +84,8 @@ package net.wg.gui.components.tooltips
         
         private var SHOW_DELAY:Number = 400;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:Separator = null;
             if(this.separators)
             {
@@ -105,11 +107,13 @@ package net.wg.gui.components.tooltips
             super.onDispose();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ToolTipBase " + name + "]";
         }
         
-        public function build(param1:Object, param2:ITooltipProps) : void {
+        public function build(param1:Object, param2:ITooltipProps) : void
+        {
             this._type = param1.type;
             this._component = param1.component;
             this._data = param1.data;
@@ -122,7 +126,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if((this._data) && !this.isRedrawed)
             {
@@ -130,7 +135,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        protected function redraw() : void {
+        protected function redraw() : void
+        {
             this.isRedrawed = true;
             this.updateSize();
             this.clearDelayIntervalID();
@@ -138,7 +144,8 @@ package net.wg.gui.components.tooltips
             this.showDelayIntervalID = setTimeout(this.startShow,_loc1_,this);
         }
         
-        protected function updateSize() : void {
+        protected function updateSize() : void
+        {
             if(this.contentWidth == 0)
             {
                 this.contentWidth = this.content.width;
@@ -147,12 +154,14 @@ package net.wg.gui.components.tooltips
             this.background.height = this.content.height + this.contentMargin.vertical + this.bgShadowMargin.vertical | 0;
         }
         
-        private function startShow(... rest) : void {
+        private function startShow(... rest) : void
+        {
             this.clearDelayIntervalID();
             this.fadeIn();
         }
         
-        private function fadeIn() : void {
+        private function fadeIn() : void
+        {
             var _loc1_:Number = App.appWidth;
             var _loc2_:Number = App.appHeight;
             var _loc3_:Number = this._props.x != 0?this._props.x:App.stage.mouseX;
@@ -179,18 +188,19 @@ package net.wg.gui.components.tooltips
             this.y = _loc4_ | 0;
             this.visible = true;
             this.tryClearTween();
-            this.tween = new Tween(300,this,{"alpha":1},{
-                "paused":false,
-                "onComplete":this.onTweenComplete,
-                "ease":Strong.easeInOut
-            });
+            this.tween = new Tween(300,this,{"alpha":1},{"paused":false,
+            "onComplete":this.onTweenComplete,
+            "ease":Strong.easeInOut
+        });
     }
     
-    private function onTweenComplete(param1:Tween) : void {
+    private function onTweenComplete(param1:Tween) : void
+    {
         this.tryClearTween();
     }
     
-    private function tryClearTween() : void {
+    private function tryClearTween() : void
+    {
         if(this.tween)
         {
             this.tween.paused = true;
@@ -198,7 +208,8 @@ package net.wg.gui.components.tooltips
         }
     }
     
-    private function clearDelayIntervalID() : void {
+    private function clearDelayIntervalID() : void
+    {
         if(this.showDelayIntervalID != 0)
         {
             clearTimeout(this.showDelayIntervalID);

@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class IconTextPosition extends Object
     {
         
-        public function IconTextPosition() {
+        public function IconTextPosition()
+        {
             super();
         }
         

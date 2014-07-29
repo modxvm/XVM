@@ -8,7 +8,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class OrderInfoIconCmp extends MovieClip implements IDisposable
     {
         
-        public function OrderInfoIconCmp() {
+        public function OrderInfoIconCmp()
+        {
             super();
             this.bgOrderCount.visible = this.orderItemCount.visible = false;
             this.level.visible = false;
@@ -22,7 +23,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         public var icon:UILoaderAlt;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.icon.dispose();
             this.icon = null;
             this.bgOrderCount = null;
@@ -30,7 +32,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.level = null;
         }
         
-        public function setLevels(param1:int) : void {
+        public function setLevels(param1:int) : void
+        {
             if(param1 > 0)
             {
                 this.level.gotoAndStop(param1);
@@ -38,14 +41,16 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function setSource(param1:String) : void {
+        public function setSource(param1:String) : void
+        {
             if(param1)
             {
                 this.icon.source = param1;
             }
         }
         
-        public function setResourceCount(param1:int) : void {
+        public function setResourceCount(param1:int) : void
+        {
             this.bgOrderCount.visible = this.orderItemCount.visible = !(param1 == -1);
             if(this.orderItemCount.visible)
             {

@@ -6,7 +6,8 @@ package net.wg.data.VO
     public class BattleResultsQuestVO extends SubtaskVO
     {
         
-        public function BattleResultsQuestVO(param1:Object) {
+        public function BattleResultsQuestVO(param1:Object)
+        {
             this._awards = [];
             this._progressList = [];
             super(param1);
@@ -18,7 +19,8 @@ package net.wg.data.VO
         
         private var _alertMsg:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             switch(param1)
             {
                 case "questInfo":
@@ -29,27 +31,33 @@ package net.wg.data.VO
             }
         }
         
-        public function get progressList() : Array {
+        public function get progressList() : Array
+        {
             return this._progressList;
         }
         
-        public function set progressList(param1:Array) : void {
+        public function set progressList(param1:Array) : void
+        {
             this._progressList = param1;
         }
         
-        public function get alertMsg() : String {
+        public function get alertMsg() : String
+        {
             return this._alertMsg;
         }
         
-        public function set alertMsg(param1:String) : void {
+        public function set alertMsg(param1:String) : void
+        {
             this._alertMsg = param1;
         }
         
-        public function get awards() : Array {
+        public function get awards() : Array
+        {
             return this._awards;
         }
         
-        public function set awards(param1:Array) : void {
+        public function set awards(param1:Array) : void
+        {
             this._awards = param1;
         }
     }

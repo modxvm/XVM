@@ -3,7 +3,8 @@ package net.wg.gui.lobby.fortifications.data
     public class FunctionalStates extends Object
     {
         
-        public function FunctionalStates() {
+        public function FunctionalStates()
+        {
             super();
         }
         

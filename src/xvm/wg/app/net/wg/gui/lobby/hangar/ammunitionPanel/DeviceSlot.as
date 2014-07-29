@@ -20,7 +20,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     public class DeviceSlot extends AmmunitionButton
     {
         
-        public function DeviceSlot() {
+        public function DeviceSlot()
+        {
             this.dataValues = [];
             super();
             if(this.emptyFocusIndicator)
@@ -53,16 +54,19 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         private var _tooltip:String;
         
-        public function selectItem(param1:Object) : void {
+        public function selectItem(param1:Object) : void
+        {
             this.select.selectedIndex = this.dataValues.indexOf(param1);
         }
         
-        public function setValues(param1:Array) : void {
+        public function setValues(param1:Array) : void
+        {
             this.dataValues = param1;
             invalidate(InvalidationType.DATA);
         }
         
-        public function updateStage(param1:Number, param2:Number) : void {
+        public function updateStage(param1:Number, param2:Number) : void
+        {
             this.select.updateAvailableSize(param1,param2 - _originalHeight);
             if(this.select.selected)
             {
@@ -72,37 +76,45 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             this.select.enabled = param1;
             mouseChildren = enabled;
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             this._type = param1;
         }
         
-        public function get slotIndex() : Number {
+        public function get slotIndex() : Number
+        {
             return this._slotIndex;
         }
         
-        public function set slotIndex(param1:Number) : void {
+        public function set slotIndex(param1:Number) : void
+        {
             this._slotIndex = param1;
         }
         
-        public function get iconType() : int {
+        public function get iconType() : int
+        {
             return this._iconType;
         }
         
-        public function set iconType(param1:int) : void {
+        public function set iconType(param1:int) : void
+        {
             this._iconType = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             buttonMode = true;
             mouseChildren = enabled;
@@ -123,7 +135,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             _loc1_.addEvent(this,MouseEvent.MOUSE_DOWN,this.onMouseDown,false,0,true);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:IEventCollector = App.utils.events;
             _loc1_.removeEvent(this.select,MouseEvent.ROLL_OVER,this.onOver);
             _loc1_.removeEvent(this.select,MouseEvent.ROLL_OUT,this.onOut);
@@ -144,7 +157,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
             var _loc3_:* = false;
@@ -200,10 +214,12 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        protected function applyIconData(param1:*) : void {
+        protected function applyIconData(param1:*) : void
+        {
         }
         
-        protected function createExtraIcon() : void {
+        protected function createExtraIcon() : void
+        {
             this.extraIcon = new ExtraIcon();
             App.utils.events.addEvent(this.extraIcon,SimpleLoader.LOADED,this.onExtraIconLoaded,false,0,true);
             this.extraIcon.mouseChildren = false;
@@ -211,14 +227,16 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             addChild(this.extraIcon);
         }
         
-        private function onExtraIconLoaded(param1:Event) : void {
+        private function onExtraIconLoaded(param1:Event) : void
+        {
             var _loc2_:uint = 0;
             _loc2_ = 2;
             this.extraIcon.x = width - this.extraIcon.width - _loc2_;
             this.extraIcon.y = height - this.extraIcon.height - _loc2_;
         }
         
-        private function onOver(param1:MouseEvent) : void {
+        private function onOver(param1:MouseEvent) : void
+        {
             var _loc2_:Object = null;
             var _loc3_:Array = null;
             var _loc4_:ITooltipProps = null;
@@ -236,11 +254,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        private function onOut(param1:MouseEvent) : void {
+        private function onOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onChange(param1:ListEvent) : void {
+        private function onChange(param1:ListEvent) : void
+        {
             var _loc2_:Object = null;
             var _loc3_:Object = null;
             if((this.select.enabled) && !(this.selectedIndex == this.select.selectedIndex))
@@ -260,11 +280,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        private function highlightParams(param1:Event) : void {
+        private function highlightParams(param1:Event) : void
+        {
             dispatchEvent(new ParamsEvent(ParamsEvent.HIGHLIGHT_PARAMS,this.select.selected?this.type:"empty"));
         }
         
-        private function onMouseDown(param1:MouseEvent) : void {
+        private function onMouseDown(param1:MouseEvent) : void
+        {
             if(param1 is MouseEventEx)
             {
                 if(App.utils.commons.isRightButton(param1))
@@ -274,11 +296,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        public function get tooltip() : String {
+        public function get tooltip() : String
+        {
             return this._tooltip;
         }
         
-        public function set tooltip(param1:String) : void {
+        public function set tooltip(param1:String) : void
+        {
             this._tooltip = param1;
         }
     }

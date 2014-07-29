@@ -3,7 +3,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class InnerResizableContent extends EventsResizableContent
     {
         
-        public function InnerResizableContent() {
+        public function InnerResizableContent()
+        {
             super();
         }
         
@@ -11,7 +12,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         private static var AVAILABLE_WIDTH:int = 365;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             header.height = HEADER_HEIGHT;
             resizableContainer.availableWidth = AVAILABLE_WIDTH;

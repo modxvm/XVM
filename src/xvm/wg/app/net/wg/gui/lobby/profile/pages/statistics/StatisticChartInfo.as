@@ -3,7 +3,8 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class StatisticChartInfo extends Object
     {
         
-        public function StatisticChartInfo() {
+        public function StatisticChartInfo()
+        {
             super();
         }
         

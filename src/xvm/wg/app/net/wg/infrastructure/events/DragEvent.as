@@ -6,7 +6,8 @@ package net.wg.infrastructure.events
     public class DragEvent extends Event
     {
         
-        public function DragEvent(param1:String, param2:InteractiveObject, param3:Number, param4:Number) {
+        public function DragEvent(param1:String, param2:InteractiveObject, param3:Number, param4:Number)
+        {
             super(param1,bubbles,cancelable);
             this._dragItem = param2;
             this._x = param3;
@@ -25,15 +26,18 @@ package net.wg.infrastructure.events
         
         private var _y:Number = 0;
         
-        public function get dragItem() : InteractiveObject {
+        public function get dragItem() : InteractiveObject
+        {
             return this._dragItem;
         }
         
-        public function get x() : Number {
+        public function get x() : Number
+        {
             return this._x;
         }
         
-        public function get y() : Number {
+        public function get y() : Number
+        {
             return this._y;
         }
     }

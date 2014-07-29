@@ -5,7 +5,8 @@ package net.wg.gui.prebattle.company
     public class CompanyEvent extends Event
     {
         
-        public function CompanyEvent(param1:String, param2:Boolean = true, param3:Boolean = false) {
+        public function CompanyEvent(param1:String, param2:Boolean = true, param3:Boolean = false)
+        {
             super(param1,param2,param3);
         }
         

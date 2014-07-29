@@ -5,7 +5,8 @@ package net.wg.gui.components.common
     public class CursorManagedContainer extends ManagedContainer
     {
         
-        public function CursorManagedContainer() {
+        public function CursorManagedContainer()
+        {
             super();
             manageFocus = false;
             enabled = false;

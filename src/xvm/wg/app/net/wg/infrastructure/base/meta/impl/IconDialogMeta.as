@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class IconDialogMeta extends SimpleDialog
     {
         
-        public function IconDialogMeta() {
+        public function IconDialogMeta()
+        {
             super();
         }
     }

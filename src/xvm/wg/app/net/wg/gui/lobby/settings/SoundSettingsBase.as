@@ -14,7 +14,8 @@ package net.wg.gui.lobby.settings
     public class SoundSettingsBase extends SettingsBaseView
     {
         
-        public function SoundSettingsBase() {
+        public function SoundSettingsBase()
+        {
             super();
         }
         
@@ -112,7 +113,8 @@ package net.wg.gui.lobby.settings
         
         public var voiceAnimation:SoundVoiceWaves = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.volumeFieldSet.label = SETTINGS.SOUND_FIELDSET_HEADER;
             this.masterVolumeLabel.text = SETTINGS.SOUNDS_MASTERVOLUME;
             this.musicVolumeLabel.text = SETTINGS.SOUNDS_ARENA;

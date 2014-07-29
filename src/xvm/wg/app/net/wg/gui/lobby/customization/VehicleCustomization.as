@@ -30,7 +30,8 @@ package net.wg.gui.lobby.customization
     public class VehicleCustomization extends VehicleCustomizationMeta implements IVehicleCustomizationMeta
     {
         
-        public function VehicleCustomization() {
+        public function VehicleCustomization()
+        {
             this.typeToNewIds = {};
             super();
             _instance = this;
@@ -56,18 +57,21 @@ package net.wg.gui.lobby.customization
         
         private static var _instance:VehicleCustomization = null;
         
-        public static function get instance() : VehicleCustomization {
+        public static function get instance() : VehicleCustomization
+        {
             return _instance;
         }
         
-        private static function showToolTip(param1:AccordionRendererEvent) : void {
+        private static function showToolTip(param1:AccordionRendererEvent) : void
+        {
             if(!param1.target.enabled && (App.globalVarsMgr.isInRoamingS()))
             {
                 App.toolTipMgr.show(TOOLTIPS.CUSTOMIZATION_TABS_INROAMING);
             }
         }
         
-        private static function hideToolTip(param1:Event) : void {
+        private static function hideToolTip(param1:Event) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -141,7 +145,8 @@ package net.wg.gui.lobby.customization
         
         private var _accountGold:Number;
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             super.handleInput(param1);
             if(param1.handled)
             {
@@ -155,16 +160,19 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             super.updateStage(param1,param2);
             y = param2 - this.background.height + 13;
         }
         
-        public function showView(param1:String) : MovieClip {
+        public function showView(param1:String) : MovieClip
+        {
             return this.currentView.show(param1);
         }
         
-        public function as_onServerResponsesReceived() : void {
+        public function as_onServerResponsesReceived() : void
+        {
             var _loc1_:Object = null;
             var _loc2_:Number = 0;
             while(_loc2_ < this._priceDataProvider.length)
@@ -184,7 +192,8 @@ package net.wg.gui.lobby.customization
             this.applyButton.enabled = false;
         }
         
-        public function as_onInit(param1:Array) : void {
+        public function as_onInit(param1:Array) : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:Object = null;
@@ -197,25 +206,22 @@ package net.wg.gui.lobby.customization
                 {
                     _loc4_ = param1[_loc2_];
                     _loc5_ = _loc4_.sectionName;
-                    this._sectionsDataProvider.push({
-                        "label":_loc4_.sectionLabel,
-                        "section":_loc5_,
-                        "data":_loc5_ + this.SECTION_VIEW,
-                        "linkage":_loc4_.linkage,
-                        "enabled":_loc4_.enabled
-                    });
-                this._priceDataProvider.push({
-                    "label":_loc4_.priceLabel,
+                    this._sectionsDataProvider.push({"label":_loc4_.sectionLabel,
                     "section":_loc5_,
-                    "price":{
-                        "isGold":false,
-                        "cost":0
-                    },
-                "priceOverride":null,
-                "selected":false,
-                "enabled":false,
-                "type":_loc4_.type
-            });
+                    "data":_loc5_ + this.SECTION_VIEW,
+                    "linkage":_loc4_.linkage,
+                    "enabled":_loc4_.enabled
+                });
+                this._priceDataProvider.push({"label":_loc4_.priceLabel,
+                "section":_loc5_,
+                "price":{"isGold":false,
+                "cost":0
+            },
+            "priceOverride":null,
+            "selected":false,
+            "enabled":false,
+            "type":_loc4_.type
+        });
         _loc2_++;
     }
     this.accordion.invalidate();
@@ -223,7 +229,8 @@ package net.wg.gui.lobby.customization
 }
 }
 
-public function as_setActionsLocked(param1:Boolean) : void {
+public function as_setActionsLocked(param1:Boolean) : void
+{
 if(this._actionsLocked == param1)
 {
     return;
@@ -235,37 +242,44 @@ _loc2_.locked = param1;
 dispatchEvent(_loc2_);
 }
 
-public function as_onChangeSuccess() : void {
+public function as_onChangeSuccess() : void
+{
 this.accordion.view.currentView.onChangeSuccess();
 }
 
-public function as_onCurrentChanged(param1:String) : void {
+public function as_onCurrentChanged(param1:String) : void
+{
 if(param1 == this._sectionsDataProvider[this.accordion.selectedIndex].section)
 {
     this.accordion.view.currentView.onCurrentChanged();
 }
 }
 
-public function as_onDropSuccess() : void {
+public function as_onDropSuccess() : void
+{
 this.accordion.view.currentView.onDropSuccess();
 }
 
-public function as_onResetNewItem() : void {
+public function as_onResetNewItem() : void
+{
 this.as_onServerResponsesReceived();
 this.accordion.view.currentView.dispatchEvent(new CustomizationEvent(CustomizationEvent.RESET_NEW_ITEM));
 }
 
-public function as_setCredits(param1:Number) : void {
+public function as_setCredits(param1:Number) : void
+{
 this._accountCredits = param1;
 this.calculateTotalPrice();
 }
 
-public function as_setGold(param1:Number) : void {
+public function as_setGold(param1:Number) : void
+{
 this._accountGold = param1;
 this.calculateTotalPrice();
 }
 
-public function as_refreshData() : void {
+public function as_refreshData() : void
+{
 this._sectionsData = {};
 this.camouflageRentalPackageDP.invalidate();
 this.emblemLeftRentalPackageDP.invalidate();
@@ -281,7 +295,8 @@ this.as_refreshItemsData();
 this.accordion.view.currentView.refreshSelection(true);
 }
 
-public function as_refreshItemsData() : void {
+public function as_refreshItemsData() : void
+{
 this.camouflageDP.invalidateRemote(true);
 this.emblemLeftDP.invalidateRemote(true);
 this.emblemRightDP.invalidateRemote(true);
@@ -289,21 +304,25 @@ this.inscriptionLeftDP.invalidateRemote(true);
 this.inscriptionRightDP.invalidateRemote(true);
 }
 
-public function isActionsLocked() : Boolean {
+public function isActionsLocked() : Boolean
+{
 return this._actionsLocked;
 }
 
-public function getSectionData(param1:String) : Object {
+public function getSectionData(param1:String) : Object
+{
 return this._sectionsData[param1];
 }
 
-public function resetSectionData(param1:String) : void {
+public function resetSectionData(param1:String) : void
+{
 this._sectionsData[param1] = null;
 }
 
 private var typeToNewIds:Object;
 
-public function setSectionData(param1:String, param2:Boolean, param3:Object) : void {
+public function setSectionData(param1:String, param2:Boolean, param3:Object) : void
+{
 /*
  * Decompilation error
  * Code may be obfuscated
@@ -312,7 +331,8 @@ public function setSectionData(param1:String, param2:Boolean, param3:Object) : v
 throw new Error("Not decompiled due to error");
 }
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
 super.configUI();
 App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.REGISTER_DRAGGING));
 this.windowCloseButton.addEventListener(ButtonEvent.CLICK,this.onWindowClose);
@@ -332,7 +352,8 @@ this.applyButton.addEventListener(ButtonEvent.CLICK,this.onClickApplyButton);
 setFocus(this.closeButton);
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
 App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.UNREGISTER_DRAGGING));
 this.windowCloseButton.removeEventListener(ButtonEvent.CLICK,this.onWindowClose);
 this.closeButton.removeEventListener(ButtonEvent.CLICK,this.onWindowClose);
@@ -374,7 +395,8 @@ this._selectedSections = null;
 super.onDispose();
 }
 
-private function onViewChange(param1:IndexEvent) : void {
+private function onViewChange(param1:IndexEvent) : void
+{
 if((this.accordion.view.currentView) && (this.accordion.view.currentView.initialized))
 {
     this.showView(this.accordion.view.currentView.getViewLinkage());
@@ -383,11 +405,13 @@ if((this.accordion.view.currentView) && (this.accordion.view.currentView.initial
 }
 }
 
-private function onWindowClose(param1:ButtonEvent) : void {
+private function onWindowClose(param1:ButtonEvent) : void
+{
 closeWindowS();
 }
 
-private function handleClickPriceItem(param1:ListEvent) : void {
+private function handleClickPriceItem(param1:ListEvent) : void
+{
 var _loc5_:Array = null;
 var _loc6_:Object = null;
 var _loc7_:* = 0;
@@ -413,16 +437,17 @@ if(_loc4_ == BaseTimedCustomizationSectionView.CAMOUFLAGE)
 this.calculateTotalPrice();
 }
 
-private function onClickApplyButton(param1:ButtonEvent) : void {
+private function onClickApplyButton(param1:ButtonEvent) : void
+{
 applyCustomizationS(this._selectedSections);
 }
 
-private function getSumCost(param1:Array) : Object {
+private function getSumCost(param1:Array) : Object
+{
 var _loc3_:* = 0;
 var _loc4_:Object = null;
-var _loc2_:Object = {
-    "isGold":false,
-    "cost":0
+var _loc2_:Object = {"isGold":false,
+"cost":0
 };
 _loc3_ = 0;
 while(_loc3_ < param1.length)
@@ -435,7 +460,8 @@ _loc3_++;
 return _loc2_;
 }
 
-private function calculateTotalPrice() : void {
+private function calculateTotalPrice() : void
+{
 var _loc6_:Object = null;
 var _loc7_:Object = null;
 var _loc8_:Object = null;
@@ -471,18 +497,16 @@ if(_loc7_)
             }
             else
             {
-                _loc7_.priceOverride = {
-                    "isGold":true,
-                    "cost":0
-                };
+                _loc7_.priceOverride = {"isGold":true,
+                "cost":0
+            };
         }
     }
     else
     {
-        _loc7_.priceOverride = {
-            "isGold":false,
-            "cost":0
-        };
+        _loc7_.priceOverride = {"isGold":false,
+        "cost":0
+    };
 }
 }
 }
@@ -532,8 +556,7 @@ else
 }
 
 }
-this._selectedSections.push({
-"sectionName":_loc11_.section,
+this._selectedSections.push({"sectionName":_loc11_.section,
 "isGold":_loc3_
 });
 }

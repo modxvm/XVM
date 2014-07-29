@@ -8,7 +8,8 @@ package net.wg.gui.lobby.questsWindow
     public class DescriptionBlock extends UIComponent
     {
         
-        public function DescriptionBlock() {
+        public function DescriptionBlock()
+        {
             super();
         }
         
@@ -26,18 +27,21 @@ package net.wg.gui.lobby.questsWindow
         
         private var _isReadyForLayout:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             mouseChildren = mouseEnabled = false;
         }
         
-        public function setLabels(param1:String, param2:String) : void {
+        public function setLabels(param1:String, param2:String) : void
+        {
             this._title = param1;
             this._descr = param2;
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
@@ -61,17 +65,20 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.lableTF = null;
             this.descrTF = null;
             super.onDispose();
         }
         
-        public function get isReadyForLayout() : Boolean {
+        public function get isReadyForLayout() : Boolean
+        {
             return this._isReadyForLayout;
         }
         
-        public function set isReadyForLayout(param1:Boolean) : void {
+        public function set isReadyForLayout(param1:Boolean) : void
+        {
             this._isReadyForLayout = param1;
         }
     }

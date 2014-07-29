@@ -5,7 +5,8 @@ package net.wg.infrastructure.exceptions
     public class AssertionException extends WGGUIException
     {
         
-        public function AssertionException(param1:* = "", param2:* = 0) {
+        public function AssertionException(param1:* = "", param2:* = 0)
+        {
             super(param1,param2);
         }
     }

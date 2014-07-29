@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips.VO
     public class TankmenVO extends Object
     {
         
-        public function TankmenVO(param1:Object) {
+        public function TankmenVO(param1:Object)
+        {
             super();
             this.parsHash(param1);
         }
@@ -36,7 +37,8 @@ package net.wg.gui.components.tooltips.VO
         
         public var statusText:String = null;
         
-        private function parsHash(param1:Object) : void {
+        private function parsHash(param1:Object) : void
+        {
             var _loc10_:uint = 0;
             this.vName = (param1.hasOwnProperty("name")) && !(param1["name"] == undefined)?param1["name"]:"";
             this.rank = (param1.hasOwnProperty("rank")) && !(param1["rank"] == undefined)?param1["rank"]:"";
@@ -50,6 +52,7 @@ package net.wg.gui.components.tooltips.VO
             _loc2_ = (param1.hasOwnProperty("roleLevel")) && !(param1["roleLevel"] == undefined)?param1["roleLevel"]:0;
             _loc3_ = (param1.hasOwnProperty("penalty")) && !(param1["penalty"] == undefined)?param1["penalty"]:0;
             _loc4_ = (param1.hasOwnProperty("addition")) && !(param1["addition"] == undefined)?param1["addition"]:0;
+            _loc4_ == 0;
             var _loc6_:String = "";
             var _loc7_:String = _loc3_ == 0?"":this.getSign(_loc3_) + _loc3_.toString();
             if(!(_loc3_ == 0) || !(_loc4_ == 0))
@@ -100,7 +103,8 @@ package net.wg.gui.components.tooltips.VO
             }
         }
         
-        private function getSign(param1:Number) : String {
+        private function getSign(param1:Number) : String
+        {
             return param1 >= 0?"+":"";
         }
     }

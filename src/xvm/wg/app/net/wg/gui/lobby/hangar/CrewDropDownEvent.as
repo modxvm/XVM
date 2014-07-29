@@ -6,7 +6,8 @@ package net.wg.gui.lobby.hangar
     public class CrewDropDownEvent extends Event
     {
         
-        public function CrewDropDownEvent(param1:String, param2:MovieClip) {
+        public function CrewDropDownEvent(param1:String, param2:MovieClip)
+        {
             super(param1,true,true);
             this._dropDownref = param2;
         }
@@ -15,7 +16,8 @@ package net.wg.gui.lobby.hangar
         
         private var _dropDownref:MovieClip = null;
         
-        public function get dropDownref() : MovieClip {
+        public function get dropDownref() : MovieClip
+        {
             return this._dropDownref;
         }
     }

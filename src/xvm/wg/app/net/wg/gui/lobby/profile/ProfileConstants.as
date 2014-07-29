@@ -3,7 +3,8 @@ package net.wg.gui.lobby.profile
     public class ProfileConstants extends Object
     {
         
-        public function ProfileConstants() {
+        public function ProfileConstants()
+        {
             super();
         }
         
@@ -11,8 +12,8 @@ package net.wg.gui.lobby.profile
         
         public static var MIN_APP_WIDTH:uint = 1024;
         
-        public static var MAIN_CENTER_OFFSET:uint = 512.0;
+        public static var MAIN_CENTER_OFFSET:uint = MIN_APP_WIDTH / 2;
         
-        public static var WINDOW_CENTER_OFFSET:uint = 500.0;
+        public static var WINDOW_CENTER_OFFSET:uint = WINDOW_WIDTH / 2;
     }
 }

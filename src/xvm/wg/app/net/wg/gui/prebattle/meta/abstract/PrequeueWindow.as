@@ -7,15 +7,18 @@ package net.wg.gui.prebattle.meta.abstract
     public class PrequeueWindow extends PrequeueWindowMeta implements IPrequeueWindowMeta
     {
         
-        public function PrequeueWindow() {
+        public function PrequeueWindow()
+        {
             super();
         }
         
-        public function as_enableLeaveBtn(param1:Boolean) : void {
+        public function as_enableLeaveBtn(param1:Boolean) : void
+        {
             throw new AbstractException("This method should be overriden");
         }
         
-        public function as_enableEnqueueBtn(param1:Boolean) : void {
+        public function as_enableEnqueueBtn(param1:Boolean) : void
+        {
             throw new AbstractException("This method should be overriden");
         }
     }

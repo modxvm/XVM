@@ -3,18 +3,21 @@ package org.idmedia.as3commons.util
     public class HashMap extends AbstractMap implements Map
     {
         
-        public function HashMap() {
+        public function HashMap()
+        {
             super();
             this.entries = new EntrySet();
         }
         
         private var entries:Set;
         
-        override public function entrySet() : Set {
+        override public function entrySet() : Set
+        {
             return this.entries;
         }
         
-        override public function put(param1:*, param2:*) : * {
+        override public function put(param1:*, param2:*) : *
+        {
             var _loc4_:Entry = null;
             var _loc5_:* = undefined;
             var _loc3_:Iterator = this.entries.iterator();
@@ -32,7 +35,8 @@ package org.idmedia.as3commons.util
             return null;
         }
         
-        public function forEach(param1:Function) : void {
+        public function forEach(param1:Function) : void
+        {
             var _loc3_:Object = null;
             var _loc2_:Array = this.keySet().toArray();
             for each(_loc3_ in _loc2_)
@@ -47,7 +51,8 @@ import org.idmedia.as3commons.util.Entry;
 class EntryImpl extends Object implements Entry
 {
     
-    function EntryImpl(param1:*, param2:*) {
+    function EntryImpl(param1:*, param2:*)
+    {
         super();
         this.key = param1;
         this.value = param2;
@@ -57,21 +62,25 @@ class EntryImpl extends Object implements Entry
     
     private var value;
     
-    public function getKey() : * {
+    public function getKey() : *
+    {
         return this.key;
     }
     
-    public function getValue() : * {
+    public function getValue() : *
+    {
         return this.value;
     }
     
-    public function setValue(param1:*) : * {
+    public function setValue(param1:*) : *
+    {
         var _loc2_:* = this.value;
         this.value = param1;
         return _loc2_;
     }
     
-    public function equals(param1:*) : Boolean {
+    public function equals(param1:*) : Boolean
+    {
         return param1 === this;
     }
 }

@@ -10,7 +10,8 @@ package net.wg.gui.lobby.questsWindow
     public class QuestsList extends ScrollingListEx
     {
         
-        public function QuestsList() {
+        public function QuestsList()
+        {
             super();
         }
         
@@ -24,13 +25,15 @@ package net.wg.gui.lobby.questsWindow
         
         private var _questsType:int = 0;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.allQuestsDoneTF.text = QUESTS.QUESTS_LIST_COMPLETE;
             this.clickCheckboxTF.text = QUESTS.QUESTS_LIST_CLICKCHECKBOX;
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc8_:IListItemRenderer = null;
             var _loc1_:uint = _renderers.length;
             var _loc2_:Number = rowHeight;
@@ -53,12 +56,14 @@ package net.wg.gui.lobby.questsWindow
             drawScrollBar();
         }
         
-        override public function set dataProvider(param1:IDataProvider) : void {
+        override public function set dataProvider(param1:IDataProvider) : void
+        {
             super.dataProvider = param1;
             invalidate(INV_DP);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             super.draw();
             if(isInvalid(INV_DP))
@@ -89,19 +94,23 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        public function get questsState() : int {
+        public function get questsState() : int
+        {
             return this._questsState;
         }
         
-        public function set questsState(param1:int) : void {
+        public function set questsState(param1:int) : void
+        {
             this._questsState = param1;
         }
         
-        public function get questsType() : int {
+        public function get questsType() : int
+        {
             return this._questsType;
         }
         
-        public function set questsType(param1:int) : void {
+        public function set questsType(param1:int) : void
+        {
             this._questsType = param1;
         }
     }

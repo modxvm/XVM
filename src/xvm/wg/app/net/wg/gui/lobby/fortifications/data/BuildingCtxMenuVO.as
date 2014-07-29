@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class BuildingCtxMenuVO extends DAAPIDataClass
     {
         
-        public function BuildingCtxMenuVO(param1:Object) {
+        public function BuildingCtxMenuVO(param1:Object)
+        {
             super(param1);
         }
         

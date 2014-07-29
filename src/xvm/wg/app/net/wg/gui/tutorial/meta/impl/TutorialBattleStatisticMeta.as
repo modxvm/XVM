@@ -6,7 +6,8 @@ package net.wg.gui.tutorial.meta.impl
     public class TutorialBattleStatisticMeta extends AbstractWindowView
     {
         
-        public function TutorialBattleStatisticMeta() {
+        public function TutorialBattleStatisticMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.gui.tutorial.meta.impl
         
         public var showVideoDialog:Function = null;
         
-        public function restartS() : void {
+        public function restartS() : void
+        {
             App.utils.asserter.assertNotNull(this.restart,"restart" + Errors.CANT_NULL);
             this.restart();
         }
         
-        public function showVideoDialogS() : void {
+        public function showVideoDialogS() : void
+        {
             App.utils.asserter.assertNotNull(this.showVideoDialog,"showVideoDialog" + Errors.CANT_NULL);
             this.showVideoDialog();
         }

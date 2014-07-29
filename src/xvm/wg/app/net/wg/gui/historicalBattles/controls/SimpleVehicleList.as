@@ -11,11 +11,13 @@ package net.wg.gui.historicalBattles.controls
     public class SimpleVehicleList extends ScrollingListEx
     {
         
-        public function SimpleVehicleList() {
+        public function SimpleVehicleList()
+        {
             super();
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.handled)
             {
                 return;
@@ -127,7 +129,8 @@ package net.wg.gui.historicalBattles.controls
             param1.handled = true;
         }
         
-        public function getFirstSelectablePosition(param1:int, param2:Boolean = true) : int {
+        public function getFirstSelectablePosition(param1:int, param2:Boolean = true) : int
+        {
             var _loc3_:int = selectedIndex;
             var _loc4_:int = param1;
             var _loc5_:int = _dataProvider?_dataProvider.length:0;
@@ -144,7 +147,8 @@ package net.wg.gui.historicalBattles.controls
             return _loc3_;
         }
         
-        protected function checkIsItemDisabled(param1:Object) : Boolean {
+        protected function checkIsItemDisabled(param1:Object) : Boolean
+        {
             var _loc2_:* = false;
             if(!param1 || (param1.hasOwnProperty("enabled")) && !param1["enabled"])
             {

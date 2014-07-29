@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class SliderBg extends Sprite
     {
         
-        public function SliderBg() {
+        public function SliderBg()
+        {
             super();
         }
         

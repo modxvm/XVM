@@ -5,7 +5,8 @@ package net.wg.gui.rally.vo
     public class VehicleVO extends DAAPIDataClass
     {
         
-        public function VehicleVO(param1:Object) {
+        public function VehicleVO(param1:Object)
+        {
             super(param1);
         }
         

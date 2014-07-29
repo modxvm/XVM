@@ -5,13 +5,15 @@ package net.wg.gui.events
     public class CooldownEvent extends Event
     {
         
-        public function CooldownEvent(param1:String, param2:Boolean = false, param3:Boolean = false) {
+        public function CooldownEvent(param1:String, param2:Boolean = false, param3:Boolean = false)
+        {
             super(param1,param2,param3);
         }
         
         public static var FINISHED:String = "finished";
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new CooldownEvent(type);
         }
     }

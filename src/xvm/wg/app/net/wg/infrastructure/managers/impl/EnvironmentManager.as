@@ -10,14 +10,16 @@ package net.wg.infrastructure.managers.impl
     public final class EnvironmentManager extends EventDispatcher implements IEnvironmentManager
     {
         
-        public function EnvironmentManager() {
+        public function EnvironmentManager()
+        {
             super();
             ms_instance = this;
         }
         
         private static var ms_instance:EnvironmentManager = null;
         
-        public static function getInstance() : IEnvironmentManager {
+        public static function getInstance() : IEnvironmentManager
+        {
             if(ms_instance == null)
             {
                 ms_instance = new EnvironmentManager();
@@ -29,23 +31,28 @@ package net.wg.infrastructure.managers.impl
         
         private var _result:Object = null;
         
-        public function quit() : void {
+        public function quit() : void
+        {
             this.dofsCommand(EnvironmentEvent.QIUT);
         }
         
-        public function logoff() : void {
+        public function logoff() : void
+        {
             this.dofsCommand(EnvironmentEvent.LOGOFF);
         }
         
-        public final function useEventSystem() : void {
+        public final function useEventSystem() : void
+        {
             this._useEventSystem = true;
         }
         
-        public final function useExternallInterface() : void {
+        public final function useExternallInterface() : void
+        {
             this._useEventSystem = false;
         }
         
-        public final function addCallback(param1:String, param2:Function) : void {
+        public final function addCallback(param1:String, param2:Function) : void
+        {
             if(this._useEventSystem)
             {
                 addEventListener(param1,param2);
@@ -56,7 +63,8 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        public final function call(... rest) : * {
+        public final function call(... rest) : *
+        {
             var _loc2_:String = null;
             var _loc3_:String = null;
             var _loc4_:String = null;
@@ -89,7 +97,8 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        public final function envoke(param1:String) : * {
+        public final function envoke(param1:String) : *
+        {
             this._result = null;
             if(this._useEventSystem)
             {
@@ -99,11 +108,13 @@ package net.wg.infrastructure.managers.impl
             return ExternalInterface.call(param1);
         }
         
-        public function setLastResult(param1:Object) : void {
+        public function setLastResult(param1:Object) : void
+        {
             this._result = param1;
         }
         
-        private function dofsCommand(param1:String) : void {
+        private function dofsCommand(param1:String) : void
+        {
             if(this._useEventSystem)
             {
                 dispatchEvent(new EnvironmentEvent(param1));

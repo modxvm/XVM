@@ -3,7 +3,8 @@ package scaleform.clik.utils
     public class Padding extends Object
     {
         
-        public function Padding(... rest) {
+        public function Padding(... rest)
+        {
             super();
             switch(rest.length)
             {
@@ -35,15 +36,18 @@ package scaleform.clik.utils
         
         public var right:Number = 0;
         
-        public function get vertical() : Number {
+        public function get vertical() : Number
+        {
             return this.top + this.bottom;
         }
         
-        public function get horizontal() : Number {
+        public function get horizontal() : Number
+        {
             return this.left + this.right;
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[Padding top=" + this.top + " bottom=" + this.bottom + " left=" + this.left + " right=" + this.right + "]";
         }
     }

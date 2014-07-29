@@ -1,9 +1,10 @@
-package 
+package
 {
     public class BATTLE_TUTORIAL extends Object
     {
         
-        public function BATTLE_TUTORIAL() {
+        public function BATTLE_TUTORIAL()
+        {
             super();
         }
         

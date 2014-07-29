@@ -5,7 +5,8 @@ package net.wg.gui.lobby.questsWindow.data
     public class InfoDataVO extends DAAPIDataClass
     {
         
-        public function InfoDataVO(param1:Object) {
+        public function InfoDataVO(param1:Object)
+        {
             this._subtasks = [];
             this._conditions = [];
             super(param1);
@@ -17,7 +18,8 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _conditions:Array;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             switch(param1)
             {
                 case "descr":
@@ -28,31 +30,38 @@ package net.wg.gui.lobby.questsWindow.data
             }
         }
         
-        public function get descr() : DescriptionVO {
+        public function get descr() : DescriptionVO
+        {
             return this._descr;
         }
         
-        public function set descr(param1:DescriptionVO) : void {
+        public function set descr(param1:DescriptionVO) : void
+        {
             this._descr = param1;
         }
         
-        public function get subtasks() : Array {
+        public function get subtasks() : Array
+        {
             return this._subtasks;
         }
         
-        public function set subtasks(param1:Array) : void {
+        public function set subtasks(param1:Array) : void
+        {
             this._subtasks = param1;
         }
         
-        public function get conditions() : Array {
+        public function get conditions() : Array
+        {
             return this._conditions;
         }
         
-        public function set conditions(param1:Array) : void {
+        public function set conditions(param1:Array) : void
+        {
             this._conditions = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._descr)
             {
                 this._descr.dispose();

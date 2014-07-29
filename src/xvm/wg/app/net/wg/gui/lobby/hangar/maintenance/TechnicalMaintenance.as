@@ -29,7 +29,8 @@ package net.wg.gui.lobby.hangar.maintenance
     public class TechnicalMaintenance extends TechnicalMaintenanceMeta implements ITechnicalMaintenanceMeta
     {
         
-        public function TechnicalMaintenance() {
+        public function TechnicalMaintenance()
+        {
             super();
         }
         
@@ -133,7 +134,8 @@ package net.wg.gui.lobby.hangar.maintenance
         
         private var eqOrderChanged:Boolean = false;
         
-        public function isResetWindow() : Boolean {
+        public function isResetWindow() : Boolean
+        {
             var _loc1_:* = true;
             if((this.oldMD) && (this.maintenanceData))
             {
@@ -142,7 +144,8 @@ package net.wg.gui.lobby.hangar.maintenance
             return _loc1_;
         }
         
-        public function as_setData(param1:Object) : void {
+        public function as_setData(param1:Object) : void
+        {
             this.oldMD = this.maintenanceData;
             this.maintenanceData = new MaintenanceVO(param1);
             this.updateRepairBlock();
@@ -151,7 +154,8 @@ package net.wg.gui.lobby.hangar.maintenance
             this.updateTotalPrice();
         }
         
-        public function as_setEquipment(param1:Array, param2:Array, param3:Array) : void {
+        public function as_setEquipment(param1:Array, param2:Array, param3:Array) : void
+        {
             var _loc4_:Object = null;
             if(this.equipmentList)
             {
@@ -175,10 +179,12 @@ package net.wg.gui.lobby.hangar.maintenance
             invalidate(EQUIPMENT);
         }
         
-        public function as_onAmmoInstall() : void {
+        public function as_onAmmoInstall() : void
+        {
         }
         
-        public function as_setCredits(param1:Number) : void {
+        public function as_setCredits(param1:Number) : void
+        {
             if(this.maintenanceData)
             {
                 this.maintenanceData.credits = param1;
@@ -186,7 +192,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        public function as_setGold(param1:Number) : void {
+        public function as_setGold(param1:Number) : void
+        {
             if(this.maintenanceData)
             {
                 this.maintenanceData.gold = param1;
@@ -194,7 +201,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.btnGroup = new ButtonGroup("buttonGroup",this);
             this.repairTextfield.text = MENU.HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_REPAIR_LABEL;
@@ -216,7 +224,8 @@ package net.wg.gui.lobby.hangar.maintenance
             _loc1_.addEvent(this.closeBtn,ButtonEvent.CLICK,this.onClose);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(MONEY))
             {
@@ -237,7 +246,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.title = MENU.HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_TITLE;
             window.useBottomBtns = true;
@@ -253,7 +263,8 @@ package net.wg.gui.lobby.hangar.maintenance
             _loc2_.addEvent(App.stage,ShellRendererEvent.CHANGE_ORDER,this.onChangeOrder);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.maintenanceData)
             {
@@ -282,7 +293,8 @@ package net.wg.gui.lobby.hangar.maintenance
             this.autoChBListeners(false);
         }
         
-        private function subscribeModules(param1:Boolean = true) : void {
+        private function subscribeModules(param1:Boolean = true) : void
+        {
             var _loc3_:EquipmentItem = null;
             var _loc2_:Array = [this.eqItem1,this.eqItem2,this.eqItem3];
             var _loc4_:IEventCollector = App.utils.events;
@@ -308,7 +320,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function onEquipmentItemOver(param1:OnEquipmentRendererOver) : void {
+        private function onEquipmentItemOver(param1:OnEquipmentRendererOver) : void
+        {
             var _loc4_:EquipmentItem = null;
             var _loc5_:String = null;
             var _loc2_:Array = [];
@@ -321,7 +334,8 @@ package net.wg.gui.lobby.hangar.maintenance
             App.toolTipMgr.showSpecial(Tooltips.TECH_MAIN_MODULE,null,param1.moduleID,param1.modulePrices,param1.inventoryCount,param1.vehicleCount,param1.moduleIndex,_loc2_);
         }
         
-        private function autoChBListeners(param1:Boolean = true) : void {
+        private function autoChBListeners(param1:Boolean = true) : void
+        {
             var _loc3_:CheckBox = null;
             var _loc2_:Array = [this.repairAuto,this.shellsAuto,this.eqAuto];
             var _loc4_:IEventCollector = App.utils.events;
@@ -344,7 +358,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function onAutoRollOver(param1:MouseEvent) : void {
+        private function onAutoRollOver(param1:MouseEvent) : void
+        {
             var _loc2_:String = null;
             if(param1.target == this.repairAuto)
             {
@@ -366,15 +381,18 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function onAutoRollOut(param1:MouseEvent) : void {
+        private function onAutoRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onEquipmentUpdate(param1:EquipmentEvent) : void {
+        private function onEquipmentUpdate(param1:EquipmentEvent) : void
+        {
             invalidate(EQUIPMENT_CHANGED);
         }
         
-        private function onEquipmentChange(param1:EquipmentEvent) : void {
+        private function onEquipmentChange(param1:EquipmentEvent) : void
+        {
             var _loc2_:Array = null;
             var _loc3_:EquipmentItem = null;
             var _loc4_:EquipmentItem = null;
@@ -403,12 +421,14 @@ package net.wg.gui.lobby.hangar.maintenance
                 this.eqOrderChanged = true;
             }
             getEquipmentS(this.eqItem1.selectedItem?this.eqItem1.selectedItem.id:undefined,this.eqItem1.selectedItem?this.eqItem1.selectedItem.currency:undefined,this.eqItem2.selectedItem?this.eqItem2.selectedItem.id:undefined,this.eqItem2.selectedItem?this.eqItem2.selectedItem.currency:undefined,this.eqItem3.selectedItem?this.eqItem3.selectedItem.id:undefined,this.eqItem3.selectedItem?this.eqItem3.selectedItem.currency:undefined,(param1.target as EquipmentItem).index);
-            if(this.eqChanged)
+            if(!this.eqChanged)
             {
+                !(this.eqChanged == this.eqOrderChanged);
             }
         }
         
-        private function updateRepairBlock() : void {
+        private function updateRepairBlock() : void
+        {
             var _loc2_:* = NaN;
             var _loc1_:IEventCollector = App.utils.events;
             _loc1_.removeEvent(this.repairAuto,Event.SELECT,this.updateRefillSettings);
@@ -433,7 +453,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function updateShellsBlock(param1:Boolean = false) : void {
+        private function updateShellsBlock(param1:Boolean = false) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -442,7 +463,8 @@ package net.wg.gui.lobby.hangar.maintenance
             throw new Error("Not decompiled due to error");
         }
         
-        private function updateEquipmentBlock(param1:Array, param2:Array, param3:Array) : void {
+        private function updateEquipmentBlock(param1:Array, param2:Array, param3:Array) : void
+        {
             var _loc8_:EquipmentItem = null;
             var _loc10_:Array = null;
             var _loc11_:ModuleVO = null;
@@ -488,7 +510,8 @@ package net.wg.gui.lobby.hangar.maintenance
             this.eqIndicator.textField.text = _loc13_ + SPLITTER_CHAR + _loc7_.length;
         }
         
-        private function updateAmmoBlockView() : void {
+        private function updateAmmoBlockView() : void
+        {
             if((this.maintenanceData) && (this.maintenanceData.historicalBattle))
             {
                 this.ammoBlockView.visible = true;
@@ -500,11 +523,13 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function onShowModuleInfo(param1:ModuleInfoEvent) : void {
+        private function onShowModuleInfo(param1:ModuleInfoEvent) : void
+        {
             showModuleInfoS(param1.id);
         }
         
-        private function onChangeOrder(param1:ShellRendererEvent) : void {
+        private function onChangeOrder(param1:ShellRendererEvent) : void
+        {
             var _loc4_:* = 0;
             var _loc5_:Array = null;
             var _loc6_:Array = null;
@@ -543,7 +568,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function updateTotalPrice() : void {
+        private function updateTotalPrice() : void
+        {
             var _loc1_:Prices = this.__getAmmoPrice();
             this.updatePriceLabels(this.shellsTotalCredits,this.shellsTotalGold,_loc1_);
             var _loc2_:Prices = this.__getEquipmentsPrice();
@@ -553,7 +579,8 @@ package net.wg.gui.lobby.hangar.maintenance
             this.updateButtonStates();
         }
         
-        private function updateButtonStates() : void {
+        private function updateButtonStates() : void
+        {
             var _loc3_:ShellVO = null;
             var _loc7_:EquipmentItem = null;
             this.repairBtn.enabled = !(this.maintenanceData.repairCost == 0) && this.maintenanceData.repairCost <= this.maintenanceData.credits;
@@ -591,7 +618,8 @@ package net.wg.gui.lobby.hangar.maintenance
             this.applyBtn.enabled = this.maintenanceData.credits >= this.totalPrice.credits && this.maintenanceData.gold >= this.totalPrice.gold;
         }
         
-        private function __getAmmoPrice() : Prices {
+        private function __getAmmoPrice() : Prices
+        {
             var _loc2_:ShellVO = null;
             var _loc1_:Prices = new Prices();
             for each(_loc2_ in this.maintenanceData.shells)
@@ -601,7 +629,8 @@ package net.wg.gui.lobby.hangar.maintenance
             return _loc1_;
         }
         
-        private function __getEquipmentsPrice() : Prices {
+        private function __getEquipmentsPrice() : Prices
+        {
             var _loc3_:EquipmentItem = null;
             var _loc1_:Prices = new Prices();
             var _loc2_:Array = [this.eqItem1,this.eqItem2,this.eqItem3];
@@ -615,14 +644,16 @@ package net.wg.gui.lobby.hangar.maintenance
             return _loc1_;
         }
         
-        private function updateRefillSettings(param1:Event) : void {
+        private function updateRefillSettings(param1:Event) : void
+        {
             if(this.maintenanceData)
             {
                 setRefillSettingsS(this.maintenanceData.vehicleId,this.repairAuto.selected,this.shellsAuto.selected,this.eqAuto.selected);
             }
         }
         
-        private function updatePriceLabels(param1:IconText, param2:IconText, param3:Prices) : void {
+        private function updatePriceLabels(param1:IconText, param2:IconText, param3:Prices) : void
+        {
             param1.textColor = Currencies.TEXT_COLORS[param3.credits > this.maintenanceData.credits?Currencies.ERROR:Currencies.CREDITS];
             var _loc4_:ILocale = App.utils.locale;
             param1.text = _loc4_.integer(param3.credits || 0);
@@ -630,21 +661,25 @@ package net.wg.gui.lobby.hangar.maintenance
             param2.text = _loc4_.gold(param3.gold || 0);
         }
         
-        private function onAmmoPriceChanged(param1:ShellRendererEvent) : void {
+        private function onAmmoPriceChanged(param1:ShellRendererEvent) : void
+        {
             invalidate(ShellRendererEvent.TOTAL_PRICE_CHANGED);
         }
         
-        private function onEquipmentPriceChanged(param1:EquipmentEvent) : void {
+        private function onEquipmentPriceChanged(param1:EquipmentEvent) : void
+        {
             var _loc2_:EquipmentItem = param1.currentTarget as EquipmentItem;
             updateEquipmentCurrencyS(_loc2_.index,param1.changeCurrency);
             invalidate(ShellRendererEvent.TOTAL_PRICE_CHANGED);
         }
         
-        private function onRepairClick(param1:ButtonEvent) : void {
+        private function onRepairClick(param1:ButtonEvent) : void
+        {
             repairS();
         }
         
-        private function onApplyClick(param1:ButtonEvent) : void {
+        private function onApplyClick(param1:ButtonEvent) : void
+        {
             var _loc3_:ShellVO = null;
             var _loc4_:* = false;
             var _loc5_:* = false;
@@ -671,7 +706,8 @@ package net.wg.gui.lobby.hangar.maintenance
             fillVehicleS(this.repairBtn.enabled,_loc7_,_loc9_,_loc2_,_loc4_,_loc5_,this.maintenanceData.shells,[this.eqItem1.selectedItem,this.eqItem2.selectedItem,this.eqItem3.selectedItem]);
         }
         
-        private function onClose(param1:ButtonEvent) : void {
+        private function onClose(param1:ButtonEvent) : void
+        {
             onWindowCloseS();
         }
     }
@@ -679,7 +715,8 @@ package net.wg.gui.lobby.hangar.maintenance
 class Prices extends Object
 {
     
-    function Prices(param1:Number = 0, param2:Number = 0) {
+    function Prices(param1:Number = 0, param2:Number = 0)
+    {
         super();
         this.credits = param1;
         this.gold = param2;
@@ -689,7 +726,8 @@ class Prices extends Object
     
     public var gold:Number = 0;
     
-    public function toString() : Object {
+    public function toString() : Object
+    {
         return "credits: " + this.credits + ", gold: " + this.gold;
     }
 }

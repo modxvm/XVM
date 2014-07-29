@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class BattleQueueMeta extends AbstractView
     {
         
-        public function BattleQueueMeta() {
+        public function BattleQueueMeta()
+        {
             super();
         }
         
@@ -16,17 +17,20 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onEscape:Function = null;
         
-        public function startClickS() : void {
+        public function startClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.startClick,"startClick" + Errors.CANT_NULL);
             this.startClick();
         }
         
-        public function exitClickS() : void {
+        public function exitClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.exitClick,"exitClick" + Errors.CANT_NULL);
             this.exitClick();
         }
         
-        public function onEscapeS() : void {
+        public function onEscapeS() : void
+        {
             App.utils.asserter.assertNotNull(this.onEscape,"onEscape" + Errors.CANT_NULL);
             this.onEscape();
         }

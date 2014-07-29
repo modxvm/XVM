@@ -8,7 +8,8 @@ package net.wg.gui.lobby.messengerBar
     public class WindowGeometryInBar extends DefaultWindowGeometry
     {
         
-        public function WindowGeometryInBar(param1:String, param2:Number = 0) {
+        public function WindowGeometryInBar(param1:String, param2:Number = 0)
+        {
             super();
             this.eventType = param1;
             this.clientID = param2;
@@ -20,7 +21,8 @@ package net.wg.gui.lobby.messengerBar
         
         private var doPositionOnce:Boolean = true;
         
-        override public function setPosition(param1:IWindow) : Boolean {
+        override public function setPosition(param1:IWindow) : Boolean
+        {
             var _loc2_:IAbstractWindowView = param1.windowContent;
             if((_loc2_) && (this.doPositionOnce))
             {

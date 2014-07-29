@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.math
     public class ADG_ItemLevelsBuilder extends Object
     {
         
-        public function ADG_ItemLevelsBuilder(param1:Number, param2:Number) {
+        public function ADG_ItemLevelsBuilder(param1:Number, param2:Number)
+        {
             super();
             if(param1 > 0)
             {
@@ -36,15 +37,18 @@ package net.wg.gui.lobby.techtree.math
         
         private var isCyclicReference:Boolean = false;
         
-        public function get matrix() : Array {
+        public function get matrix() : Array
+        {
             return this.adjacencyMatrix;
         }
         
-        public function get nodesByLevel() : Array {
+        public function get nodesByLevel() : Array
+        {
             return this.levels;
         }
         
-        public function get levelDimension() : MatrixPosition {
+        public function get levelDimension() : MatrixPosition
+        {
             var _loc3_:* = NaN;
             var _loc4_:Array = null;
             var _loc1_:Number = this.levels.length;
@@ -68,29 +72,35 @@ package net.wg.gui.lobby.techtree.math
             return new MatrixPosition(this.levels.length,_loc2_);
         }
         
-        public function getParentLevelIdxs(param1:Number) : Array {
+        public function getParentLevelIdxs(param1:Number) : Array
+        {
             return this.parentLevelIdxs[param1];
         }
         
-        public function getChildrenLevelIdxs(param1:Number) : Array {
+        public function getChildrenLevelIdxs(param1:Number) : Array
+        {
             return this.childrenLevelIdxs[param1];
         }
         
-        public function hasCyclicReference() : Boolean {
+        public function hasCyclicReference() : Boolean
+        {
             return this.isCyclicReference;
         }
         
-        public function addFixedPath(param1:Number, param2:Number) : void {
+        public function addFixedPath(param1:Number, param2:Number) : void
+        {
             this.fixedPaths[param1] = param2;
         }
         
-        public function process() : void {
+        public function process() : void
+        {
             this.isCyclicReference = false;
             this.distributionOfVerticesOnLevels();
             this.determineNodesPositionsOnLevel();
         }
         
-        private function createEmptyAdjacencyMatrix() : void {
+        private function createEmptyAdjacencyMatrix() : void
+        {
             var _loc2_:* = NaN;
             this.adjacencyMatrix = new Array(this.matrixDimension);
             var _loc1_:Number = 0;
@@ -107,7 +117,8 @@ package net.wg.gui.lobby.techtree.math
             }
         }
         
-        private function normalizeLevels() : void {
+        private function normalizeLevels() : void
+        {
             var _loc1_:* = NaN;
             _loc1_ = 0;
             while(_loc1_ < this.levels.length)
@@ -126,7 +137,8 @@ package net.wg.gui.lobby.techtree.math
             }
         }
         
-        private function alignLevel(param1:Number) : void {
+        private function alignLevel(param1:Number) : void
+        {
             var _loc4_:* = NaN;
             var _loc2_:Array = this.levels[param1];
             var _loc3_:Number = this.maxLevelWidth - _loc2_.length;
@@ -147,7 +159,8 @@ package net.wg.gui.lobby.techtree.math
             }
         }
         
-        private function mapLevel(param1:Number, param2:Array) : void {
+        private function mapLevel(param1:Number, param2:Array) : void
+        {
             var _loc3_:Number = param2.length;
             var _loc4_:Array = this.levels[param1];
             if(_loc4_ == null)
@@ -184,7 +197,8 @@ package net.wg.gui.lobby.techtree.math
             this.levels[param1] = _loc5_;
         }
         
-        private function addLevelItem(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void {
+        private function addLevelItem(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void
+        {
             var _loc6_:* = NaN;
             if(this.levels[param1] == undefined)
             {
@@ -209,7 +223,8 @@ package net.wg.gui.lobby.techtree.math
             }
         }
         
-        private function removeLevelItem(param1:Number, param2:Number) : void {
+        private function removeLevelItem(param1:Number, param2:Number) : void
+        {
             var _loc3_:Array = this.levels[param1];
             var _loc4_:Array = [];
             var _loc5_:Number = 0;
@@ -224,7 +239,8 @@ package net.wg.gui.lobby.techtree.math
             this.levels[param1] = _loc4_;
         }
         
-        private function zipLevel(param1:Number) : void {
+        private function zipLevel(param1:Number) : void
+        {
             var _loc4_:* = NaN;
             var _loc5_:* = NaN;
             var _loc6_:LevelItem = null;
@@ -304,7 +320,8 @@ package net.wg.gui.lobby.techtree.math
             }
         }
         
-        private function buildLevelsCache() : void {
+        private function buildLevelsCache() : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
@@ -377,14 +394,16 @@ package net.wg.gui.lobby.techtree.math
             }
         }
         
-        private function addFakeRelations(param1:Number, param2:Number, param3:Number) : void {
+        private function addFakeRelations(param1:Number, param2:Number, param3:Number) : void
+        {
             this.adjacencyMatrix[param3][param2] = 2;
             this.adjacencyMatrix[param2][param3] = -2;
             this.adjacencyMatrix[param3][param1] = -2;
             this.adjacencyMatrix[param1][param3] = 2;
         }
         
-        private function addFakeNode(param1:LevelItem, param2:Number, param3:Number) : Number {
+        private function addFakeNode(param1:LevelItem, param2:Number, param3:Number) : Number
+        {
             var _loc5_:* = NaN;
             var _loc4_:Number = param1.index;
             this.adjacencyMatrix[param3][_loc4_] = 0;
@@ -412,7 +431,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc6_;
         }
         
-        private function addFakeNodes(param1:LevelItem, param2:Number, param3:Number, param4:Number) : Number {
+        private function addFakeNodes(param1:LevelItem, param2:Number, param3:Number, param4:Number) : Number
+        {
             var _loc5_:* = NaN;
             var _loc6_:* = NaN;
             var _loc7_:Number = 0;
@@ -429,7 +449,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc5_;
         }
         
-        private function hasFakeNode(param1:Number) : Boolean {
+        private function hasFakeNode(param1:Number) : Boolean
+        {
             var _loc2_:Array = this.levels[param1];
             var _loc3_:Number = 0;
             while(_loc3_ < _loc2_.length)
@@ -443,7 +464,8 @@ package net.wg.gui.lobby.techtree.math
             return false;
         }
         
-        private function searchMaxPathLegth(param1:Number, param2:Number, param3:Array, param4:Number) : void {
+        private function searchMaxPathLegth(param1:Number, param2:Number, param3:Array, param4:Number) : void
+        {
             if(param4 > 20)
             {
                 this.isCyclicReference = true;
@@ -474,7 +496,8 @@ package net.wg.gui.lobby.techtree.math
             }
         }
         
-        private function distributionOfVerticesOnLevels() : void {
+        private function distributionOfVerticesOnLevels() : void
+        {
             var _loc1_:* = NaN;
             var _loc3_:* = NaN;
             var _loc6_:LevelItem = null;
@@ -533,7 +556,8 @@ package net.wg.gui.lobby.techtree.math
             this.normalizeLevels();
         }
         
-        private function getLines(param1:Number, param2:Boolean) : Array {
+        private function getLines(param1:Number, param2:Boolean) : Array
+        {
             var _loc4_:LevelLine = null;
             var _loc9_:* = NaN;
             var _loc10_:Array = null;
@@ -590,7 +614,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc3_;
         }
         
-        private function getCrossingCost(param1:Array) : Number {
+        private function getCrossingCost(param1:Array) : Number
+        {
             var _loc4_:LevelLine = null;
             var _loc5_:LevelLine = null;
             var _loc6_:* = NaN;
@@ -619,7 +644,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc2_;
         }
         
-        private function getCrossingCostEx(param1:Array) : Number {
+        private function getCrossingCostEx(param1:Array) : Number
+        {
             var _loc4_:LevelLine = null;
             var _loc5_:LevelLine = null;
             var _loc6_:* = NaN;
@@ -648,7 +674,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc2_;
         }
         
-        private function getTotalCost(param1:Array) : Number {
+        private function getTotalCost(param1:Array) : Number
+        {
             var _loc3_:LevelLine = null;
             var _loc2_:Number = this.getCrossingCostEx(param1);
             var _loc4_:Number = 0;
@@ -664,7 +691,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc2_;
         }
         
-        private function findMaxChildCount(param1:Array) : Number {
+        private function findMaxChildCount(param1:Array) : Number
+        {
             var _loc4_:* = NaN;
             if((this.isCyclicReference) || param1 == null)
             {
@@ -691,7 +719,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc3_;
         }
         
-        private function breedNodesByNextRelations(param1:Number) : void {
+        private function breedNodesByNextRelations(param1:Number) : void
+        {
             var _loc4_:* = NaN;
             var _loc5_:LevelItem = null;
             var _loc11_:* = NaN;
@@ -768,7 +797,8 @@ package net.wg.gui.lobby.techtree.math
             this.mapLevel(param1,_loc7_);
         }
         
-        private function makeMinCrossing(param1:Number, param2:Boolean) : Number {
+        private function makeMinCrossing(param1:Number, param2:Boolean) : Number
+        {
             var i:Number = NaN;
             var node:LevelItem = null;
             var other:LevelItem = null;
@@ -852,7 +882,8 @@ package net.wg.gui.lobby.techtree.math
             return profit;
         }
         
-        private function findNodePositionInLevel(param1:Number, param2:Boolean) : Array {
+        private function findNodePositionInLevel(param1:Number, param2:Boolean) : Array
+        {
             var _loc9_:Array = null;
             var _loc3_:Number = -1;
             var _loc4_:Number = 0;
@@ -860,8 +891,14 @@ package net.wg.gui.lobby.techtree.math
             var _loc6_:Number = 0;
             var _loc7_:Number = this.maxLevelWidth * this.maxLevelWidth;
             var _loc8_:Number = 0;
-            while(_loc8_ < _loc7_)
+            while(true)
             {
+                !(_loc3_ == 0) && !(_loc6_ == 3) && !(_loc4_ == _loc3_);
+                !(_loc3_ == 0) && !(_loc6_ == 3) && !(_loc4_ == _loc3_);
+                if(_loc8_ >= _loc7_)
+                {
+                    break;
+                }
                 _loc4_ = _loc3_;
                 _loc3_ = this.makeMinCrossing(param1,param2);
                 _loc9_ = this.getLines(param1,param2);
@@ -876,7 +913,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc9_;
         }
         
-        private function determineNodesPositionsOnLevel() : void {
+        private function determineNodesPositionsOnLevel() : void
+        {
             var _loc1_:Array = null;
             var _loc3_:* = NaN;
             this.breedNodesByNextRelations(1);
@@ -905,7 +943,8 @@ package net.wg.gui.lobby.techtree.math
 class LevelItem extends Object
 {
     
-    function LevelItem(param1:uint, param2:uint, param3:Boolean) {
+    function LevelItem(param1:uint, param2:uint, param3:Boolean)
+    {
         super();
         this.index = param1;
         this.dx = param2;
@@ -921,7 +960,8 @@ class LevelItem extends Object
 class LevelLine extends Object
 {
     
-    function LevelLine(param1:uint, param2:uint, param3:uint, param4:uint) {
+    function LevelLine(param1:uint, param2:uint, param3:uint, param4:uint)
+    {
         super();
         this.start = param1;
         this.end = param2;
@@ -929,11 +969,13 @@ class LevelLine extends Object
         this.child = param4;
     }
     
-    public static function makeByTop(param1:LevelItem, param2:LevelItem) : LevelLine {
+    public static function makeByTop(param1:LevelItem, param2:LevelItem) : LevelLine
+    {
         return new LevelLine(param2.dx,param1.dx,param2.index,param1.index);
     }
     
-    public static function makeByNext(param1:LevelItem, param2:LevelItem) : LevelLine {
+    public static function makeByNext(param1:LevelItem, param2:LevelItem) : LevelLine
+    {
         return new LevelLine(param1.dx,param2.dx,param1.index,param2.index);
     }
     

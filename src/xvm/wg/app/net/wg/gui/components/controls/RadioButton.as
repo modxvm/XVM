@@ -11,7 +11,8 @@ package net.wg.gui.components.controls
     public class RadioButton extends scaleform.clik.controls.RadioButton implements ISoundable
     {
         
-        public function RadioButton() {
+        public function RadioButton()
+        {
             super();
         }
         
@@ -19,18 +20,21 @@ package net.wg.gui.components.controls
         
         public var soundId:String = "";
         
-        public function get soundType() : String {
+        public function get soundType() : String
+        {
             return this._soundType;
         }
         
-        public function set soundType(param1:String) : void {
+        public function set soundType(param1:String) : void
+        {
             if((param1) && !(param1 == this._soundType))
             {
                 this._soundType = param1;
             }
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             _label = "";
             toggle = true;
@@ -42,39 +46,47 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             App.soundMgr.addSoundsHdlrs(this);
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             if(!(_label == null) && !(textField == null))
             {
                 textField.htmlText = _label;
             }
         }
         
-        public final function getSoundType() : String {
+        public final function getSoundType() : String
+        {
             return this.soundType;
         }
         
-        public final function getSoundId() : String {
+        public final function getSoundId() : String
+        {
             return this.soundId;
         }
         
-        public final function getStateOverSnd() : String {
+        public final function getStateOverSnd() : String
+        {
             return SoundManagerStates.SND_OVER;
         }
         
-        public final function getStateOutSnd() : String {
+        public final function getStateOutSnd() : String
+        {
             return SoundManagerStates.SND_OUT;
         }
         
-        public final function getStatePressSnd() : String {
+        public final function getStatePressSnd() : String
+        {
             return SoundManagerStates.SND_PRESS;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(Event.ADDED,addToAutoGroup,false);
             removeEventListener(Event.REMOVED,addToAutoGroup,false);
             removeEventListener(MouseEvent.ROLL_OVER,handleMouseRollOver,false);

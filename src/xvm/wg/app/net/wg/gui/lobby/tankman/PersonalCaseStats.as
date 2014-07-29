@@ -11,7 +11,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseStats extends UIComponent implements IViewStackContent
     {
         
-        public function PersonalCaseStats() {
+        public function PersonalCaseStats()
+        {
             super();
         }
         
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.tankman
         
         private var data:Object;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.achievements)
             {
@@ -37,7 +39,8 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -52,16 +55,19 @@ package net.wg.gui.lobby.tankman
             this.blocksArea.setData(param1.stats);
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.achievements.visible = false;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

@@ -10,7 +10,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipSortieDivision extends ToolTipBase
     {
         
-        public function ToolTipSortieDivision() {
+        public function ToolTipSortieDivision()
+        {
             super();
             this.headerTF = content.headerTF;
             this.descrTF = content.descrTF;
@@ -42,7 +43,8 @@ package net.wg.gui.components.tooltips
         
         private var _divisions:Vector.<SortieDivisionBlock> = null;
         
-        private function addSeparatorWithMargin() : Separator {
+        private function addSeparatorWithMargin() : Separator
+        {
             var _loc1_:Separator = Utils.instance.createSeparate(content);
             _loc1_.y = topPosition ^ 0;
             _loc1_.x = LEFT_SEP_PADDING;
@@ -51,14 +53,13 @@ package net.wg.gui.components.tooltips
             return _loc1_;
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc1_:SortieDivisionVO = null;
-            var _loc2_:* = 0;
-            var _loc3_:ILocale = null;
             var _loc6_:SortieDivisionBlock = null;
             _loc1_ = new SortieDivisionVO(_data);
-            _loc2_ = bgShadowMargin.left + contentMargin.left;
-            _loc3_ = App.utils.locale;
+            var _loc2_:int = bgShadowMargin.left + contentMargin.left;
+            var _loc3_:ILocale = App.utils.locale;
             separators = new Vector.<Separator>();
             this.headerTF.text = _loc3_.makeString(TOOLTIPS.FORTIFICATION_SORTIEDIVISIONTOOLTIP_TITLE);
             this.headerTF.width = this.headerTF.textWidth + TEXT_PADDING;
@@ -91,7 +92,8 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.headerTF = null;
             this.descrTF = null;
             this.infoTF = null;

@@ -5,7 +5,8 @@ package scaleform.clik.utils
     public class ConstrainedElement extends Object
     {
         
-        public function ConstrainedElement(param1:DisplayObject, param2:uint, param3:Number, param4:Number, param5:Number, param6:Number, param7:Number, param8:Number) {
+        public function ConstrainedElement(param1:DisplayObject, param2:uint, param3:Number, param4:Number, param5:Number, param6:Number, param7:Number, param8:Number)
+        {
             super();
             this.clip = param1;
             this.edges = param2;
@@ -33,7 +34,8 @@ package scaleform.clik.utils
         
         public var scaleY:Number;
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[ConstrainedElement " + this.clip + ", edges=" + this.edges + ", left=" + this.left + ", right=" + this.right + ", top=" + this.top + ", bottom=" + this.bottom + ", scaleX=" + this.scaleX + ", scaleY=" + this.scaleY + "]";
         }
     }

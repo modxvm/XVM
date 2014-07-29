@@ -5,7 +5,8 @@ package net.wg.gui.components.common
     public class VehicleMarkerEnemy extends VehicleMarker
     {
         
-        public function VehicleMarkerEnemy() {
+        public function VehicleMarkerEnemy()
+        {
             super();
             _entityName = "enemy";
         }

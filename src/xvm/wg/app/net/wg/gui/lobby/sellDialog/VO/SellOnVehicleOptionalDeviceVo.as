@@ -5,7 +5,8 @@ package net.wg.gui.lobby.sellDialog.VO
     public class SellOnVehicleOptionalDeviceVo extends SellVehicleItemBaseVo
     {
         
-        public function SellOnVehicleOptionalDeviceVo(param1:Object) {
+        public function SellOnVehicleOptionalDeviceVo(param1:Object)
+        {
             super(param1);
         }
         
@@ -17,7 +18,8 @@ package net.wg.gui.lobby.sellDialog.VO
         
         public var actionVo:ActionPriceVO = null;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "action")
             {
                 this.action = param2;

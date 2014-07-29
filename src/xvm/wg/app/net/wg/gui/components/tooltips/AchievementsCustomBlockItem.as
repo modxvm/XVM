@@ -8,7 +8,8 @@ package net.wg.gui.components.tooltips
     public class AchievementsCustomBlockItem extends UIComponent
     {
         
-        public function AchievementsCustomBlockItem() {
+        public function AchievementsCustomBlockItem()
+        {
             super();
         }
         
@@ -36,11 +37,13 @@ package net.wg.gui.components.tooltips
         
         private var _ico:String = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:String = null;
             super.draw();
             if(this.dataDirty)
@@ -72,7 +75,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             this._data = param1;
             this._nation = this._data.nation;
             this._name = this._data.name;
@@ -83,7 +87,8 @@ package net.wg.gui.components.tooltips
             validateNow();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG AchievementsCustomBlockItem " + name + "]";
         }
     }

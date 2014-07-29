@@ -7,7 +7,8 @@ package net.wg.gui.lobby.vehicleInfo
     public class VehicleInfoCrew extends UIComponent implements IViewStackContent
     {
         
-        public function VehicleInfoCrew() {
+        public function VehicleInfoCrew()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.lobby.vehicleInfo
         
         private var startX:Number = 10;
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             var _loc3_:CrewBlock = null;
             this._data = param1 as Array;
             var _loc2_:uint = 0;
@@ -34,7 +36,8 @@ package net.wg.gui.lobby.vehicleInfo
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             while(this.numChildren > 0)
             {
@@ -42,15 +45,18 @@ package net.wg.gui.lobby.vehicleInfo
             }
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG VehicleInfoCrew " + name + "]";
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

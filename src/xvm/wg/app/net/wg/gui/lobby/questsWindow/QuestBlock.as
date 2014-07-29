@@ -9,7 +9,8 @@ package net.wg.gui.lobby.questsWindow
     public class QuestBlock extends UIComponent
     {
         
-        public function QuestBlock() {
+        public function QuestBlock()
+        {
             super();
         }
         
@@ -21,13 +22,15 @@ package net.wg.gui.lobby.questsWindow
         
         private var currentView:String = "conditions";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.requirementsView.addEventListener(Event.RESIZE,this.layoutBlocks);
             this.conditionsView.addEventListener(Event.RESIZE,this.layoutBlocks);
         }
         
-        public function setData(param1:QuestDataVO) : void {
+        public function setData(param1:QuestDataVO) : void
+        {
             if(this.questData)
             {
                 this.questData.dispose();
@@ -38,10 +41,12 @@ package net.wg.gui.lobby.questsWindow
             invalidateData();
         }
         
-        public function setAvailableQuests(param1:Vector.<String>) : void {
+        public function setAvailableQuests(param1:Vector.<String>) : void
+        {
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.questData))
             {
@@ -50,14 +55,16 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        private function layoutBlocks(param1:Event) : void {
+        private function layoutBlocks(param1:Event) : void
+        {
             if((this.conditionsView.isReadyForLayout) && (this.requirementsView.isReadyForLayout))
             {
                 this.layoutCurrentView(this.currentView);
             }
         }
         
-        public function changeView(param1:Object) : void {
+        public function changeView(param1:Object) : void
+        {
             this.currentView = String(param1);
             if((this.conditionsView.isReadyForLayout) && (this.requirementsView.isReadyForLayout))
             {
@@ -65,7 +72,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        private function layoutCurrentView(param1:String) : void {
+        private function layoutCurrentView(param1:String) : void
+        {
             if(param1 == QuestsStates.REQUIREMENTS)
             {
                 this.requirementsView.visible = true;
@@ -83,7 +91,8 @@ package net.wg.gui.lobby.questsWindow
             
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.requirementsView.removeEventListener(Event.RESIZE,this.layoutBlocks);
             this.conditionsView.removeEventListener(Event.RESIZE,this.layoutBlocks);
             this.requirementsView.dispose();

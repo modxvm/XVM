@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips.VO
     public class ClanInfoVO extends DAAPIDataClass
     {
         
-        public function ClanInfoVO(param1:Object) {
+        public function ClanInfoVO(param1:Object)
+        {
             super(param1);
         }
         

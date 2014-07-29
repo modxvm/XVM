@@ -1,9 +1,10 @@
-package 
+package
 {
     public class VEHICLE_CUSTOMIZATION extends Object
     {
         
-        public function VEHICLE_CUSTOMIZATION() {
+        public function VEHICLE_CUSTOMIZATION()
+        {
             super();
         }
         

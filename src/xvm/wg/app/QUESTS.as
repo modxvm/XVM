@@ -1,9 +1,10 @@
-package 
+package
 {
     public class QUESTS extends Object
     {
         
-        public function QUESTS() {
+        public function QUESTS()
+        {
             super();
         }
         

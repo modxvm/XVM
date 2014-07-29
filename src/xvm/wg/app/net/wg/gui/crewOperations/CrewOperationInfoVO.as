@@ -5,7 +5,8 @@ package net.wg.gui.crewOperations
     public class CrewOperationInfoVO extends DAAPIDataClass
     {
         
-        public function CrewOperationInfoVO(param1:Object) {
+        public function CrewOperationInfoVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -25,7 +26,8 @@ package net.wg.gui.crewOperations
         
         public var btnLabel:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "warning" && (param2))
             {
                 this._warningVO = new CrewOperationWarningVO(param2);
@@ -34,7 +36,8 @@ package net.wg.gui.crewOperations
             return this.hasOwnProperty(param1);
         }
         
-        public function get warningVO() : CrewOperationWarningVO {
+        public function get warningVO() : CrewOperationWarningVO
+        {
             return this._warningVO;
         }
     }

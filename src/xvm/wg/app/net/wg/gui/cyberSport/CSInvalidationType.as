@@ -3,7 +3,8 @@ package net.wg.gui.cyberSport
     public class CSInvalidationType extends Object
     {
         
-        public function CSInvalidationType() {
+        public function CSInvalidationType()
+        {
             super();
         }
         

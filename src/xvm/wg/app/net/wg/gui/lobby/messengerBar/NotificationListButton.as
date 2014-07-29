@@ -11,46 +11,54 @@ package net.wg.gui.lobby.messengerBar
     public class NotificationListButton extends NotificationListButtonMeta implements INotificationListButton
     {
         
-        public function NotificationListButton() {
+        public function NotificationListButton()
+        {
             super();
         }
         
         public var button:BlinkingButton;
         
-        public function getTargetButton() : DisplayObject {
+        public function getTargetButton() : DisplayObject
+        {
             return this.button;
         }
         
-        public function getHitArea() : DisplayObject {
+        public function getHitArea() : DisplayObject
+        {
             return this.button;
         }
         
-        public function as_setState(param1:Boolean) : void {
+        public function as_setState(param1:Boolean) : void
+        {
             if(this.button.blinking != param1)
             {
                 this.button.blinking = param1;
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(ButtonEvent.CLICK,this.btnClickHandler,false,0,true);
             this.button.tooltip = TOOLTIPS.LOBY_MESSENGER_SERVICE_BUTTON;
             this.button.soundType = SoundTypes.MESSANGER_BTN;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             removeEventListener(ButtonEvent.CLICK,this.btnClickHandler);
             this.button.dispose();
             this.button = null;
         }
         
-        private function btnClickHandler(param1:ButtonEvent) : void {
+        private function btnClickHandler(param1:ButtonEvent) : void
+        {
             handleClickS();
             App.popoverMgr.show(this,Aliases.NOTIFICATIONS_LIST,0,0);
         }

@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class CyberSportMainWindowMeta extends BaseRallyMainWindow
     {
         
-        public function CyberSportMainWindowMeta() {
+        public function CyberSportMainWindowMeta()
+        {
             super();
         }
     }

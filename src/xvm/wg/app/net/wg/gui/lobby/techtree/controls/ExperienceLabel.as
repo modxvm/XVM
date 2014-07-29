@@ -6,7 +6,8 @@ package net.wg.gui.lobby.techtree.controls
     public class ExperienceLabel extends NodeComponent
     {
         
-        public function ExperienceLabel() {
+        public function ExperienceLabel()
+        {
             super();
         }
         
@@ -16,12 +17,14 @@ package net.wg.gui.lobby.techtree.controls
         
         public var xpIcon:XPIcon;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             mouseEnabled = mouseChildren = false;
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:String = null;
             if(!(_owner == null) && (isInvalid(InvalidationType.DATA)))
             {
@@ -35,7 +38,8 @@ package net.wg.gui.lobby.techtree.controls
             super.draw();
         }
         
-        private function setXpField(param1:String) : void {
+        private function setXpField(param1:String) : void
+        {
             if(this.textField != null)
             {
                 this.textField.text = param1;

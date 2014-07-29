@@ -11,7 +11,8 @@ package net.wg.gui.lobby.profile.components.chart.axis
     public class AxisBase extends UIComponent implements IChartAxis
     {
         
-        public function AxisBase() {
+        public function AxisBase()
+        {
             this._points = [];
             super();
         }
@@ -26,7 +27,8 @@ package net.wg.gui.lobby.profile.components.chart.axis
         
         protected var _pointClass:Class;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:IListItemRenderer = null;
             var _loc2_:uint = 0;
             var _loc3_:Object = null;
@@ -63,24 +65,29 @@ package net.wg.gui.lobby.profile.components.chart.axis
             }
         }
         
-        public function setData(param1:IDataProvider, param2:Vector.<IChartItem>, param3:IChartLayout) : void {
+        public function setData(param1:IDataProvider, param2:Vector.<IChartItem>, param3:IChartLayout) : void
+        {
             this._dataProvider = param1;
             this.currentLayout = param3;
             this.renderers = param2;
             invalidateData();
         }
         
-        protected function layoutAll(param1:IChartLayout) : void {
+        protected function layoutAll(param1:IChartLayout) : void
+        {
         }
         
-        protected function layoutPoint(param1:IListItemRenderer, param2:IChartItem) : void {
+        protected function layoutPoint(param1:IListItemRenderer, param2:IChartItem) : void
+        {
         }
         
-        protected function createPoint(param1:Object) : IListItemRenderer {
+        protected function createPoint(param1:Object) : IListItemRenderer
+        {
             throw new Error("this method should be overridden");
         }
         
-        protected function removePointAt(param1:uint) : Object {
+        protected function removePointAt(param1:uint) : Object
+        {
             var _loc2_:Object = this._points.splice(param1,1)[0];
             if(_loc2_ is IDisposable)
             {
@@ -89,20 +96,24 @@ package net.wg.gui.lobby.profile.components.chart.axis
             return _loc2_;
         }
         
-        public function get pointClass() : Class {
+        public function get pointClass() : Class
+        {
             return this._pointClass;
         }
         
-        public function set pointClass(param1:Class) : void {
+        public function set pointClass(param1:Class) : void
+        {
             this._pointClass = param1;
             invalidateData();
         }
         
-        public function getData() : Object {
+        public function getData() : Object
+        {
             return this._dataProvider;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:Object = null;
             this._dataProvider = null;
             this.currentLayout.dispose();

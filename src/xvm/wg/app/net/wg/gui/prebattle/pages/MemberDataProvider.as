@@ -5,7 +5,8 @@ package net.wg.gui.prebattle.pages
     public dynamic class MemberDataProvider extends DAAPIItemsDataProvider
     {
         
-        public function MemberDataProvider(param1:Array = null) {
+        public function MemberDataProvider(param1:Array = null)
+        {
             super(param1);
         }
         

@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class InputCheckerMeta extends BaseDAAPIComponent
     {
         
-        public function InputCheckerMeta() {
+        public function InputCheckerMeta()
+        {
             super();
         }
         
         public var sendUserInput:Function = null;
         
-        public function sendUserInputS(param1:String, param2:Boolean) : void {
+        public function sendUserInputS(param1:String, param2:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.sendUserInput,"sendUserInput" + Errors.CANT_NULL);
             this.sendUserInput(param1,param2);
         }

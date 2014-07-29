@@ -7,7 +7,8 @@ package net.wg.gui.lobby.tankman
     public class SkillItemViewMini extends UIComponent
     {
         
-        public function SkillItemViewMini() {
+        public function SkillItemViewMini()
+        {
             super();
         }
         
@@ -39,44 +40,53 @@ package net.wg.gui.lobby.tankman
         
         private var _type:String;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.icon.dispose();
             this.icon = null;
             super.onDispose();
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
             this.textField.htmlText = this._text;
         }
         
-        public function get level() : Number {
+        public function get level() : Number
+        {
             return this._level;
         }
         
-        public function set level(param1:Number) : void {
+        public function set level(param1:Number) : void
+        {
             this._level = param1;
             this.text = isNaN(this._level)?"":this._level.toString() + LEVEL_POSTFIX;
         }
         
-        public function get count() : int {
+        public function get count() : int
+        {
             return this._count;
         }
         
-        public function set count(param1:int) : void {
+        public function set count(param1:int) : void
+        {
             this._count = param1;
             this.text = this._count.toString() + COUNT_POSTFIX;
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             if(this._type == param1)
             {
                 return;
@@ -85,7 +95,8 @@ package net.wg.gui.lobby.tankman
             this.updateType();
         }
         
-        protected function updateType() : void {
+        protected function updateType() : void
+        {
             if(this._type == TYPE_CURRENT_NEW_SKILL || this._type == TYPE_NEW_SKILL || this._type == TYPE_NEW_SKILLS)
             {
                 this.iconSource = null;
@@ -93,11 +104,13 @@ package net.wg.gui.lobby.tankman
             gotoAndPlay(this._type);
         }
         
-        public function get iconSource() : String {
+        public function get iconSource() : String
+        {
             return this.icon.source;
         }
         
-        public function set iconSource(param1:String) : void {
+        public function set iconSource(param1:String) : void
+        {
             this.icon.source = param1;
             this.icon.visible = Boolean(param1);
         }

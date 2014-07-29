@@ -11,7 +11,8 @@ package net.wg.gui.components.advanced
     public class ShellButton extends AmmunitionButton
     {
         
-        public function ShellButton() {
+        public function ShellButton()
+        {
             this.statesPassive = Vector.<String>(["passive_"]);
             super();
             soundType = SoundTypes.FITTING_BUTTON;
@@ -31,7 +32,8 @@ package net.wg.gui.components.advanced
         
         private static var DISABLED_ALPHA:Number = 0.6;
         
-        private static function onOut(param1:MouseEvent) : void {
+        private static function onOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -79,7 +81,8 @@ package net.wg.gui.components.advanced
         
         protected var statesPassive:Vector.<String>;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             mouseEnabled = enabled;
             if(hitMc != null)
@@ -95,7 +98,8 @@ package net.wg.gui.components.advanced
             addEventListener(MouseEvent.CLICK,onOut);
         }
         
-        public function setCooldown(param1:Number) : void {
+        public function setCooldown(param1:Number) : void
+        {
             var _loc2_:* = NaN;
             this.cooldownAnimator.visible = true;
             if(param1 > 0)
@@ -122,13 +126,15 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function clearCoolDownTime() : void {
+        public function clearCoolDownTime() : void
+        {
             this._isReloading = false;
             this.cooldownAnimator.clearCooldown();
             this.cooldownAnimator.visible = false;
         }
         
-        public function setCoolDownPosAsPercent(param1:Number) : void {
+        public function setCoolDownPosAsPercent(param1:Number) : void
+        {
             this.cooldownAnimator.visible = true;
             this.cooldownAnimator.setPositionAsPercent(param1);
             if((this._isDischarging) && !this._isReloading)
@@ -139,12 +145,14 @@ package net.wg.gui.components.advanced
             this._isReloading = true;
         }
         
-        public function playRechargeAnimation() : void {
+        public function playRechargeAnimation() : void
+        {
             this.rechargeMc.visible = true;
             this.rechargeMc.gotoAndPlay("activate");
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.cooldownAnimator.removeEventListener(CooldownEvent.FINISHED,this.cooldownHandler);
             removeEventListener(MouseEvent.MOUSE_OVER,this.onOver);
             removeEventListener(MouseEvent.MOUSE_OUT,onOut);
@@ -160,7 +168,8 @@ package net.wg.gui.components.advanced
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INV_AMMUN_ICON))
             {
@@ -218,7 +227,8 @@ package net.wg.gui.components.advanced
             this.cooldownAnimator.visible = this._isReloading;
         }
         
-        public function highlightCounter(param1:Boolean) : void {
+        public function highlightCounter(param1:Boolean) : void
+        {
             if(this._showCounterIndicator != param1)
             {
                 this._showCounterIndicator = param1;
@@ -226,41 +236,50 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get ammunitionIcon() : String {
+        public function get ammunitionIcon() : String
+        {
             return this._ammunitionIcon;
         }
         
-        public function set ammunitionIcon(param1:String) : void {
+        public function set ammunitionIcon(param1:String) : void
+        {
             this._ammunitionIcon = param1;
             invalidate(INV_AMMUN_ICON);
         }
         
-        public function get ammunitionType() : String {
+        public function get ammunitionType() : String
+        {
             return this._ammunitionType;
         }
         
-        public function set ammunitionType(param1:String) : void {
+        public function set ammunitionType(param1:String) : void
+        {
             this._ammunitionType = param1;
         }
         
-        public function get inventoryCount() : String {
+        public function get inventoryCount() : String
+        {
             return this._inventoryCount;
         }
         
-        public function set inventoryCount(param1:String) : void {
+        public function set inventoryCount(param1:String) : void
+        {
             this._inventoryCount = param1;
         }
         
-        public function get count() : String {
+        public function get count() : String
+        {
             return this._count;
         }
         
-        public function set count(param1:String) : void {
+        public function set count(param1:String) : void
+        {
             this._count = param1;
             invalidate(INV_COUNTER);
         }
         
-        public function clear() : void {
+        public function clear() : void
+        {
             this.id = null;
             this.count = "";
             this.ammunitionIcon = "";
@@ -269,7 +288,8 @@ package net.wg.gui.components.advanced
             this._showCounterIndicator = false;
         }
         
-        private function onOver(param1:MouseEvent) : void {
+        private function onOver(param1:MouseEvent) : void
+        {
             switch(this.tooltipType)
             {
                 case Tooltips.HANGAR_SHELL:
@@ -290,56 +310,69 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get level() : int {
+        public function get level() : int
+        {
             return this._level;
         }
         
-        public function set level(param1:int) : void {
+        public function set level(param1:int) : void
+        {
             this._level = param1;
             invalidate(INV_LEVEL);
         }
         
-        public function get tooltipType() : String {
+        public function get tooltipType() : String
+        {
             return this._tooltipType;
         }
         
-        public function set tooltipType(param1:String) : void {
+        public function set tooltipType(param1:String) : void
+        {
             this._tooltipType = param1;
         }
         
-        public function get id() : String {
+        public function get id() : String
+        {
             return this._id;
         }
         
-        public function set id(param1:String) : void {
+        public function set id(param1:String) : void
+        {
             this._id = param1;
         }
         
-        public function get historicalBattleID() : int {
+        public function get historicalBattleID() : int
+        {
             return this._historicalBattleID;
         }
         
-        public function set historicalBattleID(param1:int) : void {
+        public function set historicalBattleID(param1:int) : void
+        {
             this._historicalBattleID = param1;
         }
         
-        public function get tooltip() : String {
+        public function get tooltip() : String
+        {
             return this._tooltip;
         }
         
-        public function set tooltip(param1:String) : void {
+        public function set tooltip(param1:String) : void
+        {
             this._tooltip = param1;
         }
         
-        public function get isDischarging() : Boolean {
+        public function get isDischarging() : Boolean
+        {
             return this._isDischarging;
         }
         
-        public function set isDischarging(param1:Boolean) : void {
+        public function set isDischarging(param1:Boolean) : void
+        {
             this.cooldownAnimator.isDischarging = this._isDischarging = param1;
         }
         
-        private function cooldownHandler(param1:CooldownEvent) : void {
+        private function cooldownHandler(param1:CooldownEvent) : void
+        {
             if(!this._isDischarging)
             {
                 this.cooldownAnimator.visible = false;
@@ -348,7 +381,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(param1 == enabled)
             {
                 return;
@@ -362,7 +396,8 @@ package net.wg.gui.components.advanced
             mouseEnabled = enabled;
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             if(this._isPassive)
             {
                 return this.statesPassive;
@@ -370,11 +405,13 @@ package net.wg.gui.components.advanced
             return _selected?statesSelected:statesDefault;
         }
         
-        public function get isPassive() : Boolean {
+        public function get isPassive() : Boolean
+        {
             return this._isPassive;
         }
         
-        public function set isPassive(param1:Boolean) : void {
+        public function set isPassive(param1:Boolean) : void
+        {
             this._isPassive = param1;
             setState(_state?_state:"up");
             invalidate(INV_PASSIVE);

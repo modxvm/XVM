@@ -7,14 +7,16 @@ package net.wg.gui.lobby.battleloading.data
     public class EnemyVehiclesDataProvider extends DataProvider implements IVehiclesDataProvider
     {
         
-        public function EnemyVehiclesDataProvider(param1:Array = null) {
+        public function EnemyVehiclesDataProvider(param1:Array = null)
+        {
             this.vehicleIDs = [];
             super(param1);
         }
         
         private var vehicleIDs:Array;
         
-        public function setVehicleStatus(param1:Number, param2:Number) : Boolean {
+        public function setVehicleStatus(param1:Number, param2:Number) : Boolean
+        {
             var _loc3_:int = this.vehicleIDs.indexOf(param1);
             var _loc4_:VehicleInfoVO = this[_loc3_] as VehicleInfoVO;
             if(!(_loc4_ == null) && !(_loc4_.vehicleStatus == param2))
@@ -25,7 +27,8 @@ package net.wg.gui.lobby.battleloading.data
             return false;
         }
         
-        public function setPlayerStatus(param1:Number, param2:Number) : Boolean {
+        public function setPlayerStatus(param1:Number, param2:Number) : Boolean
+        {
             var _loc3_:int = this.vehicleIDs.indexOf(param1);
             var _loc4_:VehicleInfoVO = this[_loc3_] as VehicleInfoVO;
             if(!(_loc4_ == null) && !(_loc4_.playerStatus == param2))
@@ -36,7 +39,8 @@ package net.wg.gui.lobby.battleloading.data
             return false;
         }
         
-        public function addVehicleInfo(param1:Object, param2:Array) : Boolean {
+        public function addVehicleInfo(param1:Object, param2:Array) : Boolean
+        {
             if(param1 == null || param2 == null)
             {
                 return false;
@@ -47,7 +51,8 @@ package net.wg.gui.lobby.battleloading.data
             return true;
         }
         
-        public function updateVehicleInfo(param1:Object) : Boolean {
+        public function updateVehicleInfo(param1:Object) : Boolean
+        {
             var _loc2_:VehicleInfoVO = this.makeVO(param1);
             var _loc3_:int = this.vehicleIDs.indexOf(_loc2_.vehicleID);
             if(this[_loc3_])
@@ -59,7 +64,8 @@ package net.wg.gui.lobby.battleloading.data
             return false;
         }
         
-        public function setSorting(param1:Array) : Boolean {
+        public function setSorting(param1:Array) : Boolean
+        {
             if(param1 == null)
             {
                 return false;
@@ -69,7 +75,8 @@ package net.wg.gui.lobby.battleloading.data
             return true;
         }
         
-        override protected function parseSource(param1:Array) : void {
+        override protected function parseSource(param1:Array) : void
+        {
             var _loc3_:VehicleInfoVO = null;
             if(param1 == null)
             {
@@ -88,11 +95,13 @@ package net.wg.gui.lobby.battleloading.data
             }
         }
         
-        protected function makeVO(param1:Object) : VehicleInfoVO {
+        protected function makeVO(param1:Object) : VehicleInfoVO
+        {
             return new VehicleInfoVO(param1);
         }
         
-        private function compare(param1:VehicleInfoVO, param2:VehicleInfoVO) : Number {
+        private function compare(param1:VehicleInfoVO, param2:VehicleInfoVO) : Number
+        {
             var _loc3_:int = this.vehicleIDs.indexOf(param1.vehicleID);
             var _loc4_:int = this.vehicleIDs.indexOf(param2.vehicleID);
             if(_loc3_ > _loc4_)

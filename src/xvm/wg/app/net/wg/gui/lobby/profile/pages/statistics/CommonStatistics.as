@@ -7,7 +7,8 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class CommonStatistics extends UIComponent
     {
         
-        public function CommonStatistics() {
+        public function CommonStatistics()
+        {
             super();
         }
         
@@ -21,7 +22,8 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         private static var CENTER_PADDING:int = 50;
         
-        private static function applyLabelsText(param1:String, param2:Object, param3:ProfileDashLineTextItem) : void {
+        private static function applyLabelsText(param1:String, param2:Object, param3:ProfileDashLineTextItem) : void
+        {
             param3.label = param2[param1];
         }
         
@@ -49,7 +51,8 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         public var hit:UIComponent;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.ltKilled.width = this.ltDestroyed.width = this.ltDestructionCoefficient.width = this.ltDealOutDamage.width = this.ltReceivedDamage.width = this.ltDamageCoefficient.width = TF_BLOCK1_WIDTH;
             this.ltAvgDestroyedVehicles.width = this.ltMaxDestroyedVehicles.width = this.ltAvgDamage.width = this.ltAvgReceivedDamage.width = this.ltAvgDetectedEnemies.width = TF_BLOCK2_WIDTH;
@@ -58,7 +61,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             hitArea = this.hit;
         }
         
-        public function setLabels(param1:Object) : void {
+        public function setLabels(param1:Object) : void
+        {
             applyLabelsText("killed",param1,this.ltKilled);
             applyLabelsText("destroyed",param1,this.ltDestroyed);
             applyLabelsText("destructionCoefficient",param1,this.ltDestructionCoefficient);
@@ -72,7 +76,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             applyLabelsText("avgDetectedEnemies",param1,this.ltAvgDetectedEnemies);
         }
         
-        public function setDossierData(param1:Object) : void {
+        public function setDossierData(param1:Object) : void
+        {
             var _loc2_:ProfileStatisticsDetailedVO = new ProfileStatisticsDetailedVO(param1);
             this.ltKilled.receiveAndSetValue(_loc2_.fragsCount,DEFAULT_COLOR,_loc2_.getFragsCountStr);
             this.ltDestroyed.receiveAndSetValue(_loc2_.deathsCount,DEFAULT_COLOR,_loc2_.getDeathsCountStr);
@@ -89,7 +94,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             this.ltAvgDetectedEnemies.receiveAndSetValue(_loc2_.avgEnemiesSpotted,DEFAULT_COLOR,_loc2_.getAvgEnemiesSpottedStr);
         }
         
-        public function setViewSize(param1:Number, param2:Number) : void {
+        public function setViewSize(param1:Number, param2:Number) : void
+        {
             this.ltKilled.x = this.ltDestroyed.x = this.ltDestructionCoefficient.x = this.ltDealOutDamage.x = this.ltReceivedDamage.x = this.ltDamageCoefficient.x = SIDES_PADDING;
             this.ltAvgDestroyedVehicles.x = this.ltMaxDestroyedVehicles.x = this.ltAvgDamage.x = this.ltAvgReceivedDamage.x = this.ltAvgDetectedEnemies.x = param1 - TF_BLOCK2_WIDTH - SIDES_PADDING;
         }

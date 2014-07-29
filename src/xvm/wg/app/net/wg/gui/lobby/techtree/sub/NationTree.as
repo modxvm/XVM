@@ -27,7 +27,8 @@ package net.wg.gui.lobby.techtree.sub
     public class NationTree extends UIComponent implements INodesContainer, IDraggable
     {
         
-        public function NationTree() {
+        public function NationTree()
+        {
             super();
             this.positionByNation = {};
         }
@@ -78,11 +79,13 @@ package net.wg.gui.lobby.techtree.sub
         
         public var background:Sprite;
         
-        public function get view() : ITechTreePage {
+        public function get view() : ITechTreePage
+        {
             return this._view;
         }
         
-        public function set view(param1:ITechTreePage) : void {
+        public function set view(param1:ITechTreePage) : void
+        {
             if(param1 == this._view)
             {
                 return;
@@ -101,7 +104,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        public function set itemRendererName(param1:String) : void {
+        public function set itemRendererName(param1:String) : void
+        {
             var classRef:Class = null;
             var renderer:IRenderer = null;
             var value:String = param1;
@@ -116,6 +120,7 @@ package net.wg.gui.lobby.techtree.sub
             }
             catch(error:*)
             {
+                trace("error",error.message);
                 throw new Error("The class " + value + " cannot be found in your library. Please ensure it exists.");
             }
             if(classRef != null)
@@ -133,7 +138,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             visible = false;
             this.removeItemRenderers();
             this.view = null;
@@ -161,7 +167,8 @@ package net.wg.gui.lobby.techtree.sub
             super.onDispose();
         }
         
-        public function scrollToIndex(param1:Number) : void {
+        public function scrollToIndex(param1:Number) : void
+        {
             var _loc2_:IRenderer = null;
             if(-1 < param1 && param1 < this.renderers.length)
             {
@@ -173,11 +180,13 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        public function get scrollPosition() : Number {
+        public function get scrollPosition() : Number
+        {
             return this._scrollPosition;
         }
         
-        public function set scrollPosition(param1:Number) : void {
+        public function set scrollPosition(param1:Number) : void
+        {
             var param1:Number = Math.max(0,Math.min(this.maxScroll,Math.round(param1)));
             if(this._scrollPosition == param1)
             {
@@ -188,26 +197,31 @@ package net.wg.gui.lobby.techtree.sub
             this.updateScrollBar();
         }
         
-        public function get maxScroll() : Number {
+        public function get maxScroll() : Number
+        {
             return Math.ceil((this._totalWidth - width) / this.scrollStepFactor);
         }
         
-        public function get scrollPageSize() : Number {
+        public function get scrollPageSize() : Number
+        {
             return Math.ceil(width / this.scrollStepFactor);
         }
         
-        public function storeScrollPosition() : void {
+        public function storeScrollPosition() : void
+        {
             if(this._dataProvider != null)
             {
                 this.positionByNation[this._dataProvider.nation] = this._scrollPosition;
             }
         }
         
-        public function get dataProvider() : INationTreeDataProvider {
+        public function get dataProvider() : INationTreeDataProvider
+        {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:INationTreeDataProvider) : void {
+        public function set dataProvider(param1:INationTreeDataProvider) : void
+        {
             if(this._dataProvider != null)
             {
                 this._dataProvider.removeEventListener(TechTreeEvent.DATA_BUILD_COMPLETE,this.handleDataComplete);
@@ -219,32 +233,38 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        public function invalidateNodesData(param1:String, param2:Object) : void {
+        public function invalidateNodesData(param1:String, param2:Object) : void
+        {
             this.ntGraphics.hide();
             this.drawTreeEnabled = false;
             this.scrollToPosition = this.positionByNation[param1] != undefined?this.positionByNation[param1]:0;
             this._dataProvider.invalidate(param1,param2);
         }
         
-        public function getNodeByID(param1:Number) : IRenderer {
+        public function getNodeByID(param1:Number) : IRenderer
+        {
             return this.renderers[this._dataProvider.getIndexByID(param1)];
         }
         
-        public function getRootNode() : IRenderer {
+        public function getRootNode() : IRenderer
+        {
             return this.renderers[0];
         }
         
-        public function isParentUnlocked(param1:Number, param2:Number) : Boolean {
+        public function isParentUnlocked(param1:Number, param2:Number) : Boolean
+        {
             var _loc3_:Object = this._dataProvider.getItemByID(param2);
             var _loc4_:UnlockProps = _loc3_.unlockProps as UnlockProps;
             return !(_loc4_ == null) && (_loc4_.hasID(param1));
         }
         
-        public function getNation() : String {
+        public function getNation() : String
+        {
             return this._dataProvider.nation;
         }
         
-        public function onStartDrag() : void {
+        public function onStartDrag() : void
+        {
             if(this.isDragging == true)
             {
                 return;
@@ -253,7 +273,8 @@ package net.wg.gui.lobby.techtree.sub
             this.dragOffset = stage.mouseX - this.ntGraphics.x;
         }
         
-        public function onDragging(param1:Number, param2:Number) : void {
+        public function onDragging(param1:Number, param2:Number) : void
+        {
             var _loc3_:Number = this.dragOffset - stage.mouseX;
             _loc3_ = Math.max(0,Math.min(this._totalWidth - width,Math.round(_loc3_)));
             this._scrollPosition = Math.round(_loc3_ / this.scrollStepFactor);
@@ -261,19 +282,23 @@ package net.wg.gui.lobby.techtree.sub
             this.updateScrollBar();
         }
         
-        public function onEndDrag() : void {
+        public function onEndDrag() : void
+        {
             this.isDragging = false;
         }
         
-        public function getDragType() : String {
+        public function getDragType() : String
+        {
             return DragType.SOFT;
         }
         
-        public function getHitArea() : InteractiveObject {
+        public function getHitArea() : InteractiveObject
+        {
             return this.background;
         }
         
-        public function setVehicleTypeXP(param1:Array) : void {
+        public function setVehicleTypeXP(param1:Array) : void
+        {
             var _loc3_:* = NaN;
             var _loc4_:Array = null;
             var _loc2_:Number = param1.length;
@@ -291,7 +316,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        public function setItemsField(param1:Array, param2:String) : void {
+        public function setItemsField(param1:Array, param2:String) : void
+        {
             var _loc4_:* = NaN;
             var _loc5_:Array = null;
             var _loc3_:Number = param1.length;
@@ -309,7 +335,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        public function setNodesStates(param1:Number, param2:Array, param3:String = null) : void {
+        public function setNodesStates(param1:Number, param2:Array, param3:String = null) : void
+        {
             var _loc5_:* = NaN;
             var _loc6_:Array = null;
             var _loc7_:* = false;
@@ -338,7 +365,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             this._dataProvider = new NationVODataProvider();
             this._dataProvider.addEventListener(TechTreeEvent.DATA_BUILD_COMPLETE,this.handleDataComplete,false,0,true);
@@ -349,7 +377,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this._totalWidth = _width;
             if(this.scrollBar != null)
@@ -365,7 +394,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.SIZE))
             {
                 this.updateLayouts();
@@ -405,7 +435,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        protected function updateLayouts() : void {
+        protected function updateLayouts() : void
+        {
             if(this.background != null)
             {
                 this.background.width = _width;
@@ -417,7 +448,8 @@ package net.wg.gui.lobby.techtree.sub
             this.updateScrollBar();
         }
         
-        private function updateScrollBar() : void {
+        private function updateScrollBar() : void
+        {
             if(this.scrollBar != null)
             {
                 this.scrollBar.setScrollProperties(this.scrollPageSize,0,this.maxScroll);
@@ -425,12 +457,14 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function handleDataComplete(param1:TechTreeEvent) : void {
+        private function handleDataComplete(param1:TechTreeEvent) : void
+        {
             this.drawTreeEnabled = true;
             invalidateData();
         }
         
-        private function handleMouseScroll(param1:Event) : void {
+        private function handleMouseScroll(param1:Event) : void
+        {
             var _loc2_:Number = param1.target.position;
             if(isNaN(_loc2_))
             {
@@ -440,11 +474,13 @@ package net.wg.gui.lobby.techtree.sub
             MenuHandler.getInstance().hideMenu();
         }
         
-        private function handleMouseWheel(param1:MouseEvent) : void {
+        private function handleMouseWheel(param1:MouseEvent) : void
+        {
             this.scrollPosition = this.scrollPosition - (param1.delta > 0?1:-1);
         }
         
-        private function handleClickNode(param1:TechTreeEvent) : void {
+        private function handleClickNode(param1:TechTreeEvent) : void
+        {
             var _loc2_:NodeData = null;
             if(!(this.view == null) && param1.index > -1)
             {
@@ -453,7 +489,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function handleUnlockNode(param1:TechTreeEvent) : void {
+        private function handleUnlockNode(param1:TechTreeEvent) : void
+        {
             var _loc2_:NodeData = null;
             var _loc3_:UnlockProps = null;
             if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
@@ -468,7 +505,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function handleBuyNode(param1:TechTreeEvent) : void {
+        private function handleBuyNode(param1:TechTreeEvent) : void
+        {
             var _loc2_:NodeData = null;
             if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
             {
@@ -478,7 +516,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function handleSellNode(param1:TechTreeEvent) : void {
+        private function handleSellNode(param1:TechTreeEvent) : void
+        {
             var _loc2_:NodeData = null;
             if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
             {
@@ -488,7 +527,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function handleSelectVehicleInHangar(param1:TechTreeEvent) : void {
+        private function handleSelectVehicleInHangar(param1:TechTreeEvent) : void
+        {
             var _loc2_:NodeData = null;
             if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
             {
@@ -497,7 +537,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function handleShowVehicleInStats(param1:TechTreeEvent) : void {
+        private function handleShowVehicleInStats(param1:TechTreeEvent) : void
+        {
             var _loc2_:NodeData = null;
             if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
             {
@@ -506,7 +547,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function handleVehicleInfo(param1:TechTreeEvent) : void {
+        private function handleVehicleInfo(param1:TechTreeEvent) : void
+        {
             var _loc2_:NodeData = null;
             if(!(this.view == null) && param1.index > -1)
             {
@@ -515,16 +557,19 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function activateCoolDown() : void {
+        private function activateCoolDown() : void
+        {
             this.requestInCoolDown = true;
             App.utils.scheduler.scheduleTask(this.deactivateCoolDown,250);
         }
         
-        private function deactivateCoolDown() : void {
+        private function deactivateCoolDown() : void
+        {
             this.requestInCoolDown = false;
         }
         
-        private function createItemRenderer(param1:Number, param2:NodeData) : IRenderer {
+        private function createItemRenderer(param1:Number, param2:NodeData) : IRenderer
+        {
             var _loc3_:IRenderer = new this._itemRendererClass();
             _loc3_.container = this;
             _loc3_.setup(param1,param2);
@@ -539,7 +584,8 @@ package net.wg.gui.lobby.techtree.sub
             return _loc3_;
         }
         
-        private function cleanUpRenderer(param1:IRenderer) : void {
+        private function cleanUpRenderer(param1:IRenderer) : void
+        {
             param1.cleanUp();
             param1.removeEventListener(TechTreeEvent.CLICK_2_OPEN,this.handleClickNode);
             param1.removeEventListener(TechTreeEvent.CLICK_2_UNLOCK,this.handleUnlockNode);
@@ -550,7 +596,8 @@ package net.wg.gui.lobby.techtree.sub
             param1.removeEventListener(TechTreeEvent.CLICK_2_VEHICLE_INFO,this.handleVehicleInfo);
         }
         
-        private function removeItemRenderers() : void {
+        private function removeItemRenderers() : void
+        {
             while(this.renderers.length > 0)
             {
                 this.cleanUpRenderer(this.renderers.pop());
@@ -561,7 +608,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function drawRenderers() : void {
+        private function drawRenderers() : void
+        {
             var _loc2_:IRenderer = null;
             var _loc5_:Object = null;
             var _loc6_:* = 0;
@@ -636,7 +684,8 @@ package net.wg.gui.lobby.techtree.sub
             this.scrollPosition = this._scrollPosition;
         }
         
-        private function drawLines() : void {
+        private function drawLines() : void
+        {
             var _loc1_:Number = this.renderers.length;
             if(_loc1_ > 0)
             {
@@ -650,7 +699,8 @@ package net.wg.gui.lobby.techtree.sub
             }
         }
         
-        private function drawScrollBar() : void {
+        private function drawScrollBar() : void
+        {
             if(this.scrollBar != null)
             {
                 this.scrollBar.y = height - this.scrollBarBottomOffset;

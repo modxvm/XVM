@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class BaseDAAPIModuleMeta extends EventDispatcher
     {
         
-        public function BaseDAAPIModuleMeta() {
+        public function BaseDAAPIModuleMeta()
+        {
             super();
         }
     }

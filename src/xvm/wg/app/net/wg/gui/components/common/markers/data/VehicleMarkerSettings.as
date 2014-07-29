@@ -3,7 +3,8 @@ package net.wg.gui.components.common.markers.data
     public class VehicleMarkerSettings extends Object
     {
         
-        public function VehicleMarkerSettings() {
+        public function VehicleMarkerSettings()
+        {
             super();
         }
         

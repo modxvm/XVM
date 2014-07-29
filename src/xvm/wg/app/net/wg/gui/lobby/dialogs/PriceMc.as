@@ -11,7 +11,8 @@ package net.wg.gui.lobby.dialogs
     public class PriceMc extends UIComponent
     {
         
-        public function PriceMc() {
+        public function PriceMc()
+        {
             super();
         }
         
@@ -37,45 +38,54 @@ package net.wg.gui.lobby.dialogs
         
         private var _currency:String = "";
         
-        public function set allowed(param1:Boolean) : void {
+        public function set allowed(param1:Boolean) : void
+        {
             this._allowed = param1;
             invalidate(OPERATION_INVALID);
         }
         
-        public function get price() : Number {
+        public function get price() : Number
+        {
             return this._price;
         }
         
-        public function set price(param1:Number) : void {
+        public function set price(param1:Number) : void
+        {
             this._price = param1;
             invalidate(IS_INVALID_PRICE);
         }
         
-        public function get actionPriceVo() : ActionPriceVO {
+        public function get actionPriceVo() : ActionPriceVO
+        {
             return this._actionPriceVo;
         }
         
-        public function set actionPriceVo(param1:ActionPriceVO) : void {
+        public function set actionPriceVo(param1:ActionPriceVO) : void
+        {
             this._actionPriceVo = param1;
             invalidate(IS_INVALID_PRICE);
         }
         
-        public function get currency() : String {
+        public function get currency() : String
+        {
             return this._currency;
         }
         
-        public function set currency(param1:String) : void {
+        public function set currency(param1:String) : void
+        {
             this._currency = param1;
             invalidate(IS_INVALID_PRICE);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.dashLine.width = 305;
             this.normalTextColor = this.priceValue.textColor;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(OPERATION_INVALID))
             {

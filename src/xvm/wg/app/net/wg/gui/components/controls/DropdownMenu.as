@@ -21,7 +21,8 @@ package net.wg.gui.components.controls
     public class DropdownMenu extends scaleform.clik.controls.DropdownMenu implements ISoundable
     {
         
-        public function DropdownMenu() {
+        public function DropdownMenu()
+        {
             super();
         }
         
@@ -43,38 +44,46 @@ package net.wg.gui.components.controls
         
         private var allowScrolling:Boolean = true;
         
-        public function get soundType() : String {
+        public function get soundType() : String
+        {
             return this._soundType;
         }
         
-        public function set soundType(param1:String) : void {
+        public function set soundType(param1:String) : void
+        {
             if((param1) && !(param1 == this._soundType))
             {
                 this._soundType = param1;
             }
         }
         
-        public final function getSoundType() : String {
+        public final function getSoundType() : String
+        {
             return this.soundType;
         }
         
-        public final function getSoundId() : String {
+        public final function getSoundId() : String
+        {
             return this.soundId;
         }
         
-        public final function getStateOverSnd() : String {
+        public final function getStateOverSnd() : String
+        {
             return SoundManagerStates.SND_OVER;
         }
         
-        public final function getStateOutSnd() : String {
+        public final function getStateOutSnd() : String
+        {
             return SoundManagerStates.SND_OUT;
         }
         
-        public final function getStatePressSnd() : String {
+        public final function getStatePressSnd() : String
+        {
             return SoundManagerStates.SND_PRESS;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.hitArea = this.hitMc;
             buttonMode = true;
@@ -85,7 +94,8 @@ package net.wg.gui.components.controls
             this.calcMenuAvailableRowCount();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(HANDLE_SCROLL_INV))
             {
@@ -97,13 +107,15 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function open() : void {
+        override public function open() : void
+        {
             super.open();
             App.stage.addEventListener(MouseEvent.MOUSE_WHEEL,this.mouseWheelHandlerGlobal,false,0,true);
             App.stage.addEventListener(ScrollBarEvent.ON_MOUSE_WHEEL_INSIDE,this.onMouseWheelInside,false);
         }
         
-        override public function close() : void {
+        override public function close() : void
+        {
             selected = false;
             App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleStageClick,false);
             App.stage.removeEventListener(MouseEvent.MOUSE_WHEEL,this.mouseWheelHandlerGlobal,false);
@@ -111,7 +123,8 @@ package net.wg.gui.components.controls
             this.hideDropdown();
         }
         
-        override protected function showDropdown() : void {
+        override protected function showDropdown() : void
+        {
             var _loc1_:MovieClip = null;
             var _loc2_:Class = null;
             if(dropdown == null)
@@ -159,10 +172,9 @@ package net.wg.gui.components.controls
                 _loc1_.padding = menuPadding;
                 _loc1_.wrapping = menuWrapping;
                 _loc1_.margin = menuMargin;
-                _loc1_.thumbOffset = {
-                    "top":thumbOffsetTop,
-                    "bottom":thumbOffsetBottom
-                };
+                _loc1_.thumbOffset = {"top":thumbOffsetTop,
+                "bottom":thumbOffsetBottom
+            };
             _loc1_.focusTarget = this;
             _loc1_.rowCount = menuRowCount < 1?5:menuRowCount;
             _loc1_.labelField = _labelField;
@@ -174,15 +186,18 @@ package net.wg.gui.components.controls
         stage.addEventListener(Event.RESIZE,this.updateDDPosition);
     }
     
-    private function mouseWheelHandlerGlobal(param1:MouseEvent) : void {
+    private function mouseWheelHandlerGlobal(param1:MouseEvent) : void
+    {
         this.tryClosedDropDown();
     }
     
-    private function onMouseWheelInside(param1:ScrollBarEvent) : void {
+    private function onMouseWheelInside(param1:ScrollBarEvent) : void
+    {
         this.tryClosedDropDown();
     }
     
-    private function tryClosedDropDown() : void {
+    private function tryClosedDropDown() : void
+    {
         var _loc1_:Point = null;
         var _loc2_:* = false;
         if(isOpen())
@@ -197,7 +212,8 @@ package net.wg.gui.components.controls
         }
     }
     
-    private function mouseWheelHandler(param1:MouseEvent) : void {
+    private function mouseWheelHandler(param1:MouseEvent) : void
+    {
         var _loc4_:ScrollingList = null;
         param1.stopPropagation();
         if(App.stage)
@@ -226,7 +242,8 @@ package net.wg.gui.components.controls
         this.selectedIndex = _loc3_;
     }
     
-    override public function set selectedIndex(param1:int) : void {
+    override public function set selectedIndex(param1:int) : void
+    {
         var _loc2_:CoreList = null;
         var _loc3_:uint = 0;
         if(_selectedIndex == param1)
@@ -247,12 +264,14 @@ package net.wg.gui.components.controls
         }
     }
     
-    override protected function hideDropdown() : void {
+    override protected function hideDropdown() : void
+    {
         super.hideDropdown();
         App.stage.removeEventListener(Event.RESIZE,this.updateDDPosition);
     }
     
-    protected function updateDDPosition(param1:Event) : void {
+    protected function updateDDPosition(param1:Event) : void
+    {
         var _loc2_:Number = x + menuOffset.left;
         var _loc3_:Number = menuDirection == "down"?y + height + menuOffset.top:y - _dropdownRef.height + menuOffset.bottom;
         var _loc4_:Point = parent.localToGlobal(new Point(_loc2_,_loc3_));
@@ -260,11 +279,13 @@ package net.wg.gui.components.controls
         _dropdownRef.y = _loc4_.y;
     }
     
-    override public function get enabled() : Boolean {
+    override public function get enabled() : Boolean
+    {
         return super.enabled;
     }
     
-    override public function set enabled(param1:Boolean) : void {
+    override public function set enabled(param1:Boolean) : void
+    {
         if(super.enabled == param1)
         {
             return;
@@ -276,14 +297,16 @@ package net.wg.gui.components.controls
         }
     }
     
-    override protected function updateText() : void {
+    override protected function updateText() : void
+    {
         if(!(_label == null) && !(textField == null))
         {
             textField.htmlText = _label;
         }
     }
     
-    override protected function handleStageClick(param1:MouseEvent) : void {
+    override protected function handleStageClick(param1:MouseEvent) : void
+    {
         if(this.contains(param1.target as DisplayObject))
         {
             return;
@@ -295,7 +318,8 @@ package net.wg.gui.components.controls
         this.close();
     }
     
-    override public function set dataProvider(param1:IDataProvider) : void {
+    override public function set dataProvider(param1:IDataProvider) : void
+    {
         if(_dataProvider == param1)
         {
             return;
@@ -318,7 +342,8 @@ package net.wg.gui.components.controls
         invalidateData();
     }
     
-    private function calcMenuAvailableRowCount() : void {
+    private function calcMenuAvailableRowCount() : void
+    {
         var _loc1_:uint = _dataProvider?_dataProvider.length:0;
         if(!menuRowsFixed)
         {
@@ -346,21 +371,25 @@ package net.wg.gui.components.controls
         }
     }
     
-    public function get rowCount() : int {
+    public function get rowCount() : int
+    {
         return this._maxRowCount;
     }
     
-    public function set rowCount(param1:int) : void {
+    public function set rowCount(param1:int) : void
+    {
         this._maxRowCount = param1;
         this.calcMenuAvailableRowCount();
         invalidateData();
     }
     
-    public function get handleScroll() : Boolean {
+    public function get handleScroll() : Boolean
+    {
         return this._handleScroll;
     }
     
-    public function set handleScroll(param1:Boolean) : void {
+    public function set handleScroll(param1:Boolean) : void
+    {
         if(this._handleScroll != param1)
         {
             this._handleScroll = param1;
@@ -368,7 +397,8 @@ package net.wg.gui.components.controls
         }
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         removeEventListener(Event.ADDED,addToAutoGroup,false);
         removeEventListener(Event.REMOVED,addToAutoGroup,false);
         removeEventListener(MouseEvent.ROLL_OVER,handleMouseRollOver,false);

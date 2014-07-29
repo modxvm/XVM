@@ -6,7 +6,8 @@ package net.wg.gui.lobby.GUIEditor
     public class ChangePropertyEvent extends Event
     {
         
-        public function ChangePropertyEvent(param1:String, param2:ComponentPropertyVO, param3:*) {
+        public function ChangePropertyEvent(param1:String, param2:ComponentPropertyVO, param3:*)
+        {
             super(param1,true,true);
             this._property = param2;
             this._newValue = param3;
@@ -18,11 +19,13 @@ package net.wg.gui.lobby.GUIEditor
         
         private var _newValue;
         
-        public function get property() : ComponentPropertyVO {
+        public function get property() : ComponentPropertyVO
+        {
             return this._property;
         }
         
-        public function get newValue() : * {
+        public function get newValue() : *
+        {
             return this._newValue;
         }
     }

@@ -6,7 +6,8 @@ package net.wg.gui.events
     public class ShellRendererEvent extends Event
     {
         
-        public function ShellRendererEvent(param1:String, param2:ShellVO = null, param3:ShellVO = null) {
+        public function ShellRendererEvent(param1:String, param2:ShellVO = null, param3:ShellVO = null)
+        {
             super(param1,true,true);
             this.shell = param2;
             this.shellToReplace = param3;
@@ -22,7 +23,8 @@ package net.wg.gui.events
         
         public var shellToReplace:ShellVO = null;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new ShellRendererEvent(type,this.shell,this.shellToReplace);
         }
     }

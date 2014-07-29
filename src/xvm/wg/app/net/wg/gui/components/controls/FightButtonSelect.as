@@ -13,15 +13,18 @@ package net.wg.gui.components.controls
     public class FightButtonSelect extends SoundButtonEx implements IPopOverCaller, IClosePopoverCallback, IOpenPopoverCallback
     {
         
-        public function FightButtonSelect() {
+        public function FightButtonSelect()
+        {
             super();
         }
         
-        public static function showTooltip(param1:MouseEvent) : void {
+        public static function showTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(TOOLTIPS.HEADER_FIGHT_BUTTON_DROPDOWN);
         }
         
-        public static function hideTooltip(param1:MouseEvent) : void {
+        public static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -31,11 +34,13 @@ package net.wg.gui.components.controls
         
         protected var _fightBtnlabel:String;
         
-        public function get fightBtnlabel() : String {
+        public function get fightBtnlabel() : String
+        {
             return _label;
         }
         
-        public function set fightBtnlabel(param1:String) : void {
+        public function set fightBtnlabel(param1:String) : void
+        {
             if(this._fightBtnlabel == param1)
             {
                 return;
@@ -44,12 +49,14 @@ package net.wg.gui.components.controls
             invalidateData();
         }
         
-        override public function set selected(param1:Boolean) : void {
+        override public function set selected(param1:Boolean) : void
+        {
             super.selected = param1;
             dispatchEvent(new FightButtonEvent(FightButtonEvent.SELECT_TOGGLE));
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             if(!(this._fightBtnlabel == null) && !(this.iconText == null))
             {
                 this.iconText.text = this._fightBtnlabel;
@@ -57,7 +64,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.hitArea = this.hit_mc;
             this.iconText.icon = "arrowDown";
@@ -69,21 +77,25 @@ package net.wg.gui.components.controls
             addEventListener(ButtonEvent.CLICK,this.showPopoverHandler,false,0,true);
         }
         
-        private function showPopoverHandler(param1:ButtonEvent) : void {
+        private function showPopoverHandler(param1:ButtonEvent) : void
+        {
             App.popoverMgr.show(this,Aliases.BATTLE_TYPE_SELECT_POPOVER,0,0,null,this,this);
         }
         
-        public function onPopoverOpen() : void {
+        public function onPopoverOpen() : void
+        {
             this.iconText.icon = "arrowUp";
             this.iconText.validateNow();
         }
         
-        public function onPopoverClose() : void {
+        public function onPopoverClose() : void
+        {
             this.iconText.icon = "arrowDown";
             this.iconText.validateNow();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(ButtonEvent.CLICK,this.showPopoverHandler);
             removeEventListener(MouseEvent.ROLL_OVER,showTooltip,false);
             removeEventListener(MouseEvent.ROLL_OUT,hideTooltip,false);
@@ -92,11 +104,13 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        public function getTargetButton() : DisplayObject {
+        public function getTargetButton() : DisplayObject
+        {
             return this.hit_mc;
         }
         
-        public function getHitArea() : DisplayObject {
+        public function getHitArea() : DisplayObject
+        {
             return this;
         }
     }

@@ -12,7 +12,8 @@ package net.wg.gui.lobby.battleResults
     public class DetailsStats extends UIComponent
     {
         
-        public function DetailsStats() {
+        public function DetailsStats()
+        {
             super();
             this.creditsLbl.mouseWheelEnabled = false;
             this.creditsValuesLbl.mouseWheelEnabled = false;
@@ -92,12 +93,14 @@ package net.wg.gui.lobby.battleResults
         
         private var _bonusType:int = 1;
         
-        public function get myParent() : BattleResults {
+        public function get myParent() : BattleResults
+        {
             return BattleResults(parent.parent.parent.parent);
         }
         
-        override protected function configUI() : void {
-            var _loc3_:* = NaN;
+        override protected function configUI() : void
+        {
+            var _loc4_:* = NaN;
             var _loc5_:DisplayObject = null;
             super.configUI();
             var _loc1_:Object = this.myParent.data;
@@ -112,8 +115,8 @@ package net.wg.gui.lobby.battleResults
             this.vehicleTimeStats.state = VehicleDetails.STATE_TIME;
             this.vehicleTimeStats.data = _loc1_.common.timeStats;
             var _loc2_:Boolean = _loc1_.personal.isPremium;
-            _loc3_ = _loc2_?FADED_ALPHA:FULL_ALPHA;
-            var _loc4_:Number = _loc2_?FULL_ALPHA:FADED_ALPHA;
+            var _loc3_:Number = _loc2_?FADED_ALPHA:FULL_ALPHA;
+            _loc4_ = _loc2_?FULL_ALPHA:FADED_ALPHA;
             this.creditsValuesLbl.alpha = _loc3_;
             this.goldValuesLbl.alpha = _loc3_;
             this.xpValuesLbl.alpha = _loc3_;
@@ -143,11 +146,13 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
         }
         
-        private function populateCredits(param1:Array) : void {
+        private function populateCredits(param1:Array) : void
+        {
             var _loc4_:Object = null;
             var _loc5_:* = NaN;
             var _loc6_:* = NaN;
@@ -171,17 +176,17 @@ package net.wg.gui.lobby.battleResults
                 {
                     _loc5_ = this.creditsLbl.x + DOTS_OFFSET;
                     _loc6_ = Math.floor(this.creditsLbl.y + this.creditsLbl.textHeight) + DOTS_OFFSET;
-                    addChild(App.utils.classFactory.getComponent(_loc4_.lineType,MovieClip,{
-                        "x":_loc5_,
-                        "y":_loc6_
-                    }));
+                    addChild(App.utils.classFactory.getComponent(_loc4_.lineType,MovieClip,{"x":_loc5_,
+                    "y":_loc6_
+                }));
             }
             _loc2_++;
         }
         this.creditsSplitLine.height = this.creditsLbl.textHeight + LINE_OFFSET;
     }
     
-    private function populateXp(param1:Array) : void {
+    private function populateXp(param1:Array) : void
+    {
         var _loc4_:Object = null;
         var _loc8_:* = NaN;
         var _loc9_:* = NaN;
@@ -208,10 +213,9 @@ package net.wg.gui.lobby.battleResults
             {
                 _loc8_ = this.xpLbl.x + DOTS_OFFSET;
                 _loc9_ = Math.floor(this.xpLbl.y + this.xpLbl.textHeight) + DOTS_OFFSET;
-                addChild(_loc7_.getComponent(_loc4_.lineType,MovieClip,{
-                    "x":_loc8_,
-                    "y":_loc9_
-                }));
+                addChild(_loc7_.getComponent(_loc4_.lineType,MovieClip,{"x":_loc8_,
+                "y":_loc9_
+            }));
         }
         _loc2_++;
     }
@@ -219,7 +223,8 @@ package net.wg.gui.lobby.battleResults
     this.xpSplitLine.height = this.xpLbl.textHeight + LINE_OFFSET;
 }
 
-private function positionBlock(param1:DisplayObject, param2:DisplayObject, param3:Array) : void {
+private function positionBlock(param1:DisplayObject, param2:DisplayObject, param3:Array) : void
+{
     var _loc6_:DisplayObject = null;
     var _loc4_:Number = param1.y + param1.height + BLOCK_PADDING;
     var _loc5_:Number = param2.y - _loc4_;
@@ -229,7 +234,8 @@ private function positionBlock(param1:DisplayObject, param2:DisplayObject, param
     }
 }
 
-private function populateResource(param1:Array) : void {
+private function populateResource(param1:Array) : void
+{
     var _loc4_:Object = null;
     var _loc8_:* = NaN;
     var _loc9_:* = NaN;
@@ -252,10 +258,9 @@ private function populateResource(param1:Array) : void {
         {
             _loc8_ = this.resLbl.x + DOTS_OFFSET;
             _loc9_ = Math.floor(this.resLbl.y + this.resLbl.textHeight) + DOTS_OFFSET;
-            addChild(_loc7_.getComponent(_loc4_.lineType,MovieClip,{
-                "x":_loc8_,
-                "y":_loc9_
-            }));
+            addChild(_loc7_.getComponent(_loc4_.lineType,MovieClip,{"x":_loc8_,
+            "y":_loc9_
+        }));
     }
     _loc2_++;
 }

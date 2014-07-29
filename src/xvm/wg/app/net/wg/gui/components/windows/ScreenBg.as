@@ -8,7 +8,8 @@ package net.wg.gui.components.windows
     public class ScreenBg extends UIComponent implements IDisposable
     {
         
-        public function ScreenBg() {
+        public function ScreenBg()
+        {
             super();
         }
         
@@ -22,15 +23,18 @@ package net.wg.gui.components.windows
         
         private var _isShowHeaderBg:Boolean = true;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override public function setSize(param1:Number, param2:Number) : void {
+        override public function setSize(param1:Number, param2:Number) : void
+        {
             super.setSize(param1,param2);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -45,7 +49,8 @@ package net.wg.gui.components.windows
             }
         }
         
-        public function set isShowHeaderBg(param1:Boolean) : void {
+        public function set isShowHeaderBg(param1:Boolean) : void
+        {
             if(param1 == this._isShowHeaderBg)
             {
                 return;
@@ -54,11 +59,13 @@ package net.wg.gui.components.windows
             invalidate(STATE_INV);
         }
         
-        public function get isShowHeaderBg() : Boolean {
+        public function get isShowHeaderBg() : Boolean
+        {
             return this._isShowHeaderBg;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.headerBg = null;
             this.bgFx = null;
             this.bg = null;

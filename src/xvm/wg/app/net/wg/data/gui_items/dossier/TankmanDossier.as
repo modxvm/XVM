@@ -5,7 +5,8 @@ package net.wg.data.gui_items.dossier
     public class TankmanDossier extends Dossier
     {
         
-        public function TankmanDossier(param1:uint) {
+        public function TankmanDossier(param1:uint)
+        {
             super(ItemTypes.TANKMAN_DOSSIER,param1);
         }
     }

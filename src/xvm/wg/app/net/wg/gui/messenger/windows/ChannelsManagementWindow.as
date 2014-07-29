@@ -24,52 +24,53 @@ package net.wg.gui.messenger.windows
     public class ChannelsManagementWindow extends ChannelsManagementWindowMeta
     {
         
-        public function ChannelsManagementWindow() {
-            this.tabsDataProvider = [{
-                "label":MESSENGER.DIALOGS_CHANNELS_BUTTONS_SEARCHANDJOIN,
-                "linkage":this.SEARCH_CHANNEL_FORM_ID
-            },{
-            "label":MESSENGER.DIALOGS_CHANNELS_BUTTONS_CREATE,
-            "linkage":this.CREATE_CHANNEL_FORM_ID
-        }];
-    super();
-    isModal = false;
-    isCentered = false;
-    canClose = true;
-    canDrag = true;
-    canResize = true;
-    showWindowBg = false;
-    this._searchResDataProvider = new DAAPIDataProvider();
-}
-
-public var tabs:ButtonBarEx = null;
-
-public var tabLine:Sprite = null;
-
-public var view:ViewStack = null;
-
-private var SEARCH_CHANNEL_FORM_ID:String = "searchChannelFormUI";
-
-private var CREATE_CHANNEL_FORM_ID:String = "createChannelFormUI";
-
-private var searchLimitLabel:String = null;
-
-private var tabsDataProvider:Array;
+        public function ChannelsManagementWindow()
+        {
+            super();
+            isModal = false;
+            isCentered = false;
+            canClose = true;
+            canDrag = true;
+            canResize = true;
+            showWindowBg = false;
+            this._searchResDataProvider = new DAAPIDataProvider();
+        }
+        
+        public var tabs:ButtonBarEx = null;
+        
+        public var tabLine:Sprite = null;
+        
+        public var view:ViewStack = null;
+        
+        private var SEARCH_CHANNEL_FORM_ID:String = "searchChannelFormUI";
+        
+        private var CREATE_CHANNEL_FORM_ID:String = "createChannelFormUI";
+        
+        private var searchLimitLabel:String = null;
+        
+        private var tabsDataProvider:Array = [{"label":MESSENGER.DIALOGS_CHANNELS_BUTTONS_SEARCHANDJOIN,
+        "linkage":this.SEARCH_CHANNEL_FORM_ID
+    },{"label":MESSENGER.DIALOGS_CHANNELS_BUTTONS_CREATE,
+    "linkage":this.CREATE_CHANNEL_FORM_ID
+}];
 
 private var __currentTab:Number = 0;
 
 protected var _searchResDataProvider:DAAPIDataProvider;
 
-override protected function onSetModalFocus(param1:InteractiveObject) : void {
+override protected function onSetModalFocus(param1:InteractiveObject) : void
+{
     super.onSetModalFocus(param1);
     this.onViewChangeHandler();
 }
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
     super.configUI();
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
     if(this.tabs.selectedIndex == -1)
     {
         this.tabs.selectedIndex = this.__currentTab;
@@ -81,7 +82,8 @@ override protected function draw() : void {
     super.draw();
 }
 
-private function updateViewSize() : void {
+private function updateViewSize() : void
+{
     var _loc1_:String = null;
     var _loc2_:UIComponent = null;
     if(this.view)
@@ -95,7 +97,8 @@ private function updateViewSize() : void {
     }
 }
 
-override protected function onPopulate() : void {
+override protected function onPopulate() : void
+{
     window.useBottomBtns = false;
     window.title = MESSENGER.LOBBY_BUTTONS_CHANNELS;
     window.contentPadding = new Padding(40,10,17,8);
@@ -111,11 +114,13 @@ override protected function onPopulate() : void {
     geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CHANNELS_WINDOW);
 }
 
-public function as_getDataProvider() : Object {
+public function as_getDataProvider() : Object
+{
     return this._searchResDataProvider;
 }
 
-private function initTabs() : void {
+private function initTabs() : void
+{
     if(this.tabs != null)
     {
         this.tabs.dataProvider = new DataProvider(this.tabsDataProvider);
@@ -131,7 +136,8 @@ private function initTabs() : void {
     }
 }
 
-private function onViewChange(param1:ViewStackEvent) : void {
+private function onViewChange(param1:ViewStackEvent) : void
+{
     var _loc2_:IViewStackContent = param1.view;
     switch(param1.linkage)
     {
@@ -147,7 +153,8 @@ private function onViewChange(param1:ViewStackEvent) : void {
     this.updateViewSize();
 }
 
-private function updateView(param1:IViewStackContent, param2:Object = null) : void {
+private function updateView(param1:IViewStackContent, param2:Object = null) : void
+{
     param1.update(param2);
     if(param1.getComponentForFocus())
     {
@@ -155,7 +162,8 @@ private function updateView(param1:IViewStackContent, param2:Object = null) : vo
     }
 }
 
-private function onViewChangeHandler(param1:ViewStackEvent = null) : void {
+private function onViewChangeHandler(param1:ViewStackEvent = null) : void
+{
     var _loc2_:IViewStackContent = null;
     if((this.view) && (this.view.currentView) && param1 == null)
     {
@@ -170,12 +178,14 @@ private function onViewChangeHandler(param1:ViewStackEvent = null) : void {
     
 }
 
-private function onTabChange(param1:IndexEvent) : void {
+private function onTabChange(param1:IndexEvent) : void
+{
     this.__currentTab = param1.index;
     this.updateViewSize();
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
     if(this.view)
     {
         this.view.dispose();
@@ -193,20 +203,24 @@ override protected function onDispose() : void {
     super.onDispose();
 }
 
-private function onSearchCkick(param1:ChannelsFormEvent) : void {
+private function onSearchCkick(param1:ChannelsFormEvent) : void
+{
     searchTokenS(param1.channelName);
 }
 
-private function onJoinHandler(param1:ChannelsFormEvent) : void {
+private function onJoinHandler(param1:ChannelsFormEvent) : void
+{
     joinToChannelS(param1.index);
 }
 
-private function onCreateChannel(param1:ChannelsFormEvent) : void {
+private function onCreateChannel(param1:ChannelsFormEvent) : void
+{
     var _loc2_:* = !(param1.channelPass == null && param1.channelRetypePass == null);
     createChannelS(param1.channelName,_loc2_,param1.channelPass,param1.channelRetypePass);
 }
 
-public function as_freezSearchButton(param1:Boolean) : void {
+public function as_freezSearchButton(param1:Boolean) : void
+{
     var _loc2_:ChannelsSearchForm = ChannelsSearchForm(this.tryGetView(this.SEARCH_CHANNEL_FORM_ID));
     if(_loc2_)
     {
@@ -214,7 +228,8 @@ public function as_freezSearchButton(param1:Boolean) : void {
     }
 }
 
-private function tryGetView(param1:String) : MovieClip {
+private function tryGetView(param1:String) : MovieClip
+{
     var _loc2_:MovieClip = null;
     if(!this.view)
     {

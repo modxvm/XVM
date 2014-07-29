@@ -8,13 +8,15 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
     public class FortStatisticsLDIT extends LineDescrIconText
     {
         
-        public function FortStatisticsLDIT() {
+        public function FortStatisticsLDIT()
+        {
             super();
         }
         
         private var _model:ClanStatItemVO;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._model)
             {
                 this._model.dispose();
@@ -23,7 +25,8 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
             super.onDispose();
         }
         
-        override protected function showToolTip(param1:IToolTipParams) : void {
+        override protected function showToolTip(param1:IToolTipParams) : void
+        {
             if(!this._model)
             {
                 return;
@@ -35,11 +38,13 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
             }
         }
         
-        public function get model() : ClanStatItemVO {
+        public function get model() : ClanStatItemVO
+        {
             return this._model;
         }
         
-        public function set model(param1:ClanStatItemVO) : void {
+        public function set model(param1:ClanStatItemVO) : void
+        {
             this._model = param1;
             if(this._model)
             {

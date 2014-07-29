@@ -5,11 +5,13 @@ package org.idmedia.as3commons.util
     public class AbstractSet extends AbstractCollection implements Set
     {
         
-        public function AbstractSet() {
+        public function AbstractSet()
+        {
             super();
         }
         
-        override public function equals(param1:*) : Boolean {
+        override public function equals(param1:*) : Boolean
+        {
             var o:* = param1;
             if(o === this)
             {

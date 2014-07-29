@@ -6,7 +6,8 @@ package net.wg.gui.lobby.hangar.tcarousel
     public class ClanLockUI extends UIComponent
     {
         
-        public function ClanLockUI() {
+        public function ClanLockUI()
+        {
             super();
         }
         
@@ -14,26 +15,31 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         private var _timer:Number;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.textField = null;
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.textField.text = this.updateClanLock();
         }
         
-        public function set timer(param1:Number) : void {
+        public function set timer(param1:Number) : void
+        {
             this._timer = param1;
             invalidate();
         }
         
-        public function get timer() : Number {
+        public function get timer() : Number
+        {
             return this._timer;
         }
         
-        private function updateClanLock() : String {
+        private function updateClanLock() : String
+        {
             var _loc1_:* = "";
             var _loc2_:Date = new Date();
             var _loc3_:Number = Math.round(this._timer - _loc2_.valueOf() / 1000);
@@ -49,7 +55,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             return _loc1_;
         }
         
-        private function calcLockTime(param1:Number) : String {
+        private function calcLockTime(param1:Number) : String
+        {
             var _loc2_:* = "";
             var param1:Number = Math.ceil(param1 / 60);
             var _loc3_:Number = Math.floor(param1 / 60);
@@ -60,7 +67,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             return _loc2_;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ClanLockUi " + name + "]";
         }
     }

@@ -5,7 +5,8 @@ package net.wg.gui.lobby.questsWindow.data
     public class ConditionElementVO extends DAAPIDataClass
     {
         
-        public function ConditionElementVO(param1:Object) {
+        public function ConditionElementVO(param1:Object)
+        {
             this._iconElements = [];
             super(param1);
         }
@@ -20,43 +21,53 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _linkage:String = "ConditionElement_UI";
         
-        public function get conditionType() : String {
+        public function get conditionType() : String
+        {
             return this._conditionType;
         }
         
-        public function set conditionType(param1:String) : void {
+        public function set conditionType(param1:String) : void
+        {
             this._conditionType = param1;
         }
         
-        public function get iconElements() : Array {
+        public function get iconElements() : Array
+        {
             return this._iconElements;
         }
         
-        public function set iconElements(param1:Array) : void {
+        public function set iconElements(param1:Array) : void
+        {
             this._iconElements = param1;
         }
         
-        public function get linkage() : String {
+        public function get linkage() : String
+        {
             return this._linkage;
         }
         
-        public function set linkage(param1:String) : void {
+        public function set linkage(param1:String) : void
+        {
             this._linkage = param1;
         }
         
-        public function get contentAlign() : String {
+        public function get contentAlign() : String
+        {
             return this._contentAlign;
         }
         
-        public function set contentAlign(param1:String) : void {
+        public function set contentAlign(param1:String) : void
+        {
             this._contentAlign = param1;
         }
         
-        public function get progrIndex() : int {
+        public function get progrIndex() : int
+        {
             return this._progrIndex;
         }
         
-        public function set progrIndex(param1:int) : void {
+        public function set progrIndex(param1:int) : void
+        {
             this._progrIndex = param1;
         }
     }

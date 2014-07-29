@@ -5,7 +5,8 @@ package net.wg.data.managers.impl
     public class NotifyProperties extends Object implements INotifyProperties
     {
         
-        public function NotifyProperties() {
+        public function NotifyProperties()
+        {
             super();
         }
         
@@ -15,33 +16,40 @@ package net.wg.data.managers.impl
         
         private var _titleArgs:Array = null;
         
-        public function set imgUrl(param1:String) : void {
+        public function set imgUrl(param1:String) : void
+        {
             this._imageUrl = param1;
         }
         
-        public function get imgUrl() : String {
+        public function get imgUrl() : String
+        {
             return this._imageUrl;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._imageUrl = null;
             this._msgArgs = null;
             this._titleArgs = null;
         }
         
-        public function set messageArguments(param1:Array) : void {
+        public function set messageArguments(param1:Array) : void
+        {
             this._msgArgs = param1;
         }
         
-        public function get messageArguments() : Array {
+        public function get messageArguments() : Array
+        {
             return this._msgArgs;
         }
         
-        public function set titleArguments(param1:Array) : void {
+        public function set titleArguments(param1:Array) : void
+        {
             this._titleArgs = param1;
         }
         
-        public function get titleArguments() : Array {
+        public function get titleArguments() : Array
+        {
             return this._titleArgs;
         }
     }

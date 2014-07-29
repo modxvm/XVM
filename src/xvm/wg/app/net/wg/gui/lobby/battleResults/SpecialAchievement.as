@@ -8,7 +8,8 @@ package net.wg.gui.lobby.battleResults
     public class SpecialAchievement extends UIComponent
     {
         
-        public function SpecialAchievement() {
+        public function SpecialAchievement()
+        {
             super();
         }
         
@@ -18,12 +19,14 @@ package net.wg.gui.lobby.battleResults
         
         private var _data:Object;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.stripe.visible = this.loader.visible = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:BattleResultsMedalsListVO = null;
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this._data))
@@ -46,12 +49,14 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        public function set data(param1:Object) : void {
+        public function set data(param1:Object) : void
+        {
             this._data = param1;
             invalidateData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.stripe = null;
             this.loader.dispose();
             this.loader = null;

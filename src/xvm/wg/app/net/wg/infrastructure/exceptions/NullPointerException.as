@@ -5,7 +5,8 @@ package net.wg.infrastructure.exceptions
     public class NullPointerException extends WGGUIException
     {
         
-        public function NullPointerException(param1:* = "", param2:* = 0) {
+        public function NullPointerException(param1:* = "", param2:* = 0)
+        {
             super(param1,param2);
         }
     }

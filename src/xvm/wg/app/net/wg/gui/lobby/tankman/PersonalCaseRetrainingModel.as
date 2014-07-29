@@ -3,7 +3,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseRetrainingModel extends Object
     {
         
-        public function PersonalCaseRetrainingModel() {
+        public function PersonalCaseRetrainingModel()
+        {
             this.lightTanks = [];
             this.mediumTanks = [];
             this.heavyTanks = [];

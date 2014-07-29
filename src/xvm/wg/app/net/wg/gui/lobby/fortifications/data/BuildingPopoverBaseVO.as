@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class BuildingPopoverBaseVO extends DAAPIDataClass
     {
         
-        public function BuildingPopoverBaseVO(param1:Object) {
+        public function BuildingPopoverBaseVO(param1:Object)
+        {
             super(param1);
         }
         

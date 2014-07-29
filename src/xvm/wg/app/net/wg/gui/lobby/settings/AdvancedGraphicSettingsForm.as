@@ -6,7 +6,8 @@ package net.wg.gui.lobby.settings
     public class AdvancedGraphicSettingsForm extends UIComponent
     {
         
-        public function AdvancedGraphicSettingsForm() {
+        public function AdvancedGraphicSettingsForm()
+        {
             super();
         }
         
@@ -20,13 +21,15 @@ package net.wg.gui.lobby.settings
         
         protected var _data:Object = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.scrollPane.setSize(PANE_WIDTH,PANE_HEIGHT);
             this.content = this.scrollPane.target as AdvancedGraphicContentForm;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.content = null;
             this.scrollPane.dispose();
             this.scrollPane = null;

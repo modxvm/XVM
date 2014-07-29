@@ -7,7 +7,8 @@ package mx.core
     public class FlexBitmap extends Bitmap
     {
         
-        public function FlexBitmap(param1:BitmapData = null, param2:String = "auto", param3:Boolean = false) {
+        public function FlexBitmap(param1:BitmapData = null, param2:String = "auto", param3:Boolean = false)
+        {
             super(param1,param2,param3);
             try
             {
@@ -18,9 +19,10 @@ package mx.core
             }
         }
         
-        mx_internal  static var VERSION:String = "4.6.0.23201";
+        mx_internal  static var VERSION:String = "4.5.1.21328";
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return NameUtil.displayObjectToString(this);
         }
     }

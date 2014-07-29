@@ -5,7 +5,8 @@ package net.wg.gui.messenger.evnts
     public class ChannelsFormEvent extends Event
     {
         
-        public function ChannelsFormEvent(param1:String, param2:Boolean = true, param3:Boolean = false, param4:String = "", param5:String = null, param6:String = null, param7:Number = -1) {
+        public function ChannelsFormEvent(param1:String, param2:Boolean = true, param3:Boolean = false, param4:String = "", param5:String = null, param6:String = null, param7:Number = -1)
+        {
             super(param1,param2,param3);
             this.channelName = param4;
             this.channelPass = param5;
@@ -27,11 +28,13 @@ package net.wg.gui.messenger.evnts
         
         public var index:Number = -1;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new ChannelsFormEvent(type,bubbles,cancelable,this.channelName,this.channelPass,this.channelRetypePass,this.index);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("ChannelsFormEvent","type","cancelable","eventPhase","channelName","channelPass","channelRetypePass","index");
         }
     }

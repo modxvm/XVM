@@ -10,7 +10,8 @@ package net.wg.gui.lobby.fortifications.cmp.impl
     public class FortDisconnectView extends FortDisconnectViewMeta implements IFortDisconnectView
     {
         
-        public function FortDisconnectView() {
+        public function FortDisconnectView()
+        {
             super();
         }
         
@@ -26,18 +27,21 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         
         private var _warningDescTxt:String = null;
         
-        public function as_setWarningTexts(param1:String, param2:String) : void {
+        public function as_setWarningTexts(param1:String, param2:String) : void
+        {
             this._warningTxt = param1;
             this._warningDescTxt = param2;
             invalidate(INVALID_TEXTS);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             super.draw();
             if((this.warningText) && (this.warningDescription))
@@ -58,20 +62,24 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.warningText = null;
             this.warningDescription = null;
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

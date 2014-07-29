@@ -7,7 +7,8 @@ package net.wg.gui.components.tooltips.VO
     public class SuitableVehicleVO extends DAAPIDataClass implements IDisposable
     {
         
-        public function SuitableVehicleVO(param1:Object) {
+        public function SuitableVehicleVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -23,7 +24,8 @@ package net.wg.gui.components.tooltips.VO
         
         private var MAX_VEHICLES:uint = 5;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:uint = 0;
             var _loc5_:* = false;
@@ -101,7 +103,8 @@ package net.wg.gui.components.tooltips.VO
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:VehicleVO = null;
             if((this.vehiclesList) && this.vehiclesList.length > 0)
             {

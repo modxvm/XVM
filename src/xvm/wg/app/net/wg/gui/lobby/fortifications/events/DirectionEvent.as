@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.events
     public class DirectionEvent extends Event
     {
         
-        public function DirectionEvent(param1:String, param2:int = -1, param3:Boolean = false, param4:Boolean = false) {
+        public function DirectionEvent(param1:String, param2:int = -1, param3:Boolean = false, param4:Boolean = false)
+        {
             this.id = param2;
             super(param1,param3,param4);
         }

@@ -5,7 +5,8 @@ package net.wg.gui.login.impl.components.Vo
     public class RssItemVo extends DAAPIDataClass
     {
         
-        public function RssItemVo(param1:Object) {
+        public function RssItemVo(param1:Object)
+        {
             super(param1);
         }
         

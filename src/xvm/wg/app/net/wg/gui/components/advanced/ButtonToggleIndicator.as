@@ -7,7 +7,8 @@ package net.wg.gui.components.advanced
     public class ButtonToggleIndicator extends UIComponent
     {
         
-        public function ButtonToggleIndicator() {
+        public function ButtonToggleIndicator()
+        {
             super();
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.components.advanced
         
         private var _selected:Boolean;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -23,7 +25,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             _labelHash = UIComponent.generateLabelHash(this);
             _originalWidth = this.hit.width / super.scaleX;
             _originalHeight = this.hit.height / super.scaleY;
@@ -38,7 +41,8 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        override public function set scaleX(param1:Number) : void {
+        override public function set scaleX(param1:Number) : void
+        {
             super.scaleX = param1;
             if(rotation == 0)
             {
@@ -46,7 +50,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override public function set scaleY(param1:Number) : void {
+        override public function set scaleY(param1:Number) : void
+        {
             super.scaleY = param1;
             if(rotation == 0)
             {
@@ -54,11 +59,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get selected() : Boolean {
+        public function get selected() : Boolean
+        {
             return this._selected;
         }
         
-        public function set selected(param1:Boolean) : void {
+        public function set selected(param1:Boolean) : void
+        {
             if(this._selected != param1)
             {
                 this._selected = param1;
@@ -66,7 +73,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.hit = null;
             super.onDispose();
         }

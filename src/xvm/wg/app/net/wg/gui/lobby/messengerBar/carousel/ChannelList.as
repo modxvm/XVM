@@ -10,33 +10,39 @@ package net.wg.gui.lobby.messengerBar.carousel
     public class ChannelList extends TileList
     {
         
-        public function ChannelList() {
+        public function ChannelList()
+        {
             super();
         }
         
-        override protected function setupRenderer(param1:IListItemRenderer) : void {
+        override protected function setupRenderer(param1:IListItemRenderer) : void
+        {
             super.setupRenderer(param1);
             var _loc2_:ChannelRenderer = param1 as ChannelRenderer;
             _loc2_.openButton.addEventListener(ButtonEvent.CLICK,this.onItemOpenClick);
             _loc2_.closeButton.addEventListener(ButtonEvent.CLICK,this.onItemCloseClick);
         }
         
-        override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
+        override protected function cleanUpRenderer(param1:IListItemRenderer) : void
+        {
             super.cleanUpRenderer(param1);
             var _loc2_:ChannelRenderer = param1 as ChannelRenderer;
             _loc2_.openButton.removeEventListener(ButtonEvent.CLICK,this.onItemOpenClick);
             _loc2_.closeButton.removeEventListener(ButtonEvent.CLICK,this.onItemCloseClick);
         }
         
-        private function onItemOpenClick(param1:ButtonEvent) : void {
+        private function onItemOpenClick(param1:ButtonEvent) : void
+        {
             dispatchEvent(this.generateEvent(ChannelListEvent.OPEN_CHANNEL_CLICK,param1));
         }
         
-        private function onItemCloseClick(param1:ButtonEvent) : void {
+        private function onItemCloseClick(param1:ButtonEvent) : void
+        {
             dispatchEvent(this.generateEvent(ChannelListEvent.CLOSE_CHANNEL_CLICK,param1));
         }
         
-        private function generateEvent(param1:String, param2:Event) : ChannelListEvent {
+        private function generateEvent(param1:String, param2:Event) : ChannelListEvent
+        {
             var _loc3_:IListItemRenderer = param2.currentTarget.parent as IListItemRenderer;
             var _loc4_:uint = 0;
             if(param2 is ButtonEvent)

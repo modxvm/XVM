@@ -15,7 +15,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class QuestsDashlineItem extends DashLineTextItem implements IResizableContent
     {
         
-        public function QuestsDashlineItem() {
+        public function QuestsDashlineItem()
+        {
             super();
             dashLine.visible = false;
         }
@@ -28,7 +29,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         public static var TEXT_PADDING:int = 5;
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -48,7 +50,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var _isNumerated:Boolean = false;
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             var _loc2_:QuestDashlineItemVO = new QuestDashlineItemVO(param1);
             this.label = _loc2_.label;
             this.linkID = _loc2_.linkID;
@@ -56,7 +59,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.value = _loc2_.value;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             dashLine.visible = false;
             this.linkBtn.visible = false;
@@ -67,7 +71,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.addListeners();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.removeListeners();
             this.linkBtn.dispose();
             this.naMc = null;
@@ -76,33 +81,39 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        private function addListeners() : void {
+        private function addListeners() : void
+        {
             this.linkBtn.addEventListener(ButtonEvent.CLICK,this.linkBtnHandler);
             this.linkBtn.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.linkBtn.addEventListener(MouseEvent.ROLL_OVER,this.showLinkBtnTooltip);
         }
         
-        private function showLinkBtnTooltip(param1:MouseEvent) : void {
+        private function showLinkBtnTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(this.linkBtn.enabled?TOOLTIPS.QUESTS_LINKBTN_TASK:TOOLTIPS.QUESTS_DISABLELINKBTN_TASK);
         }
         
-        public function disableLinkBtns(param1:Vector.<String>) : void {
+        public function disableLinkBtns(param1:Vector.<String>) : void
+        {
             this.linkBtn.enabled = !(param1.indexOf(this._linkID) == -1);
             this.linkBtn.mouseEnabled = true;
         }
         
-        private function removeListeners() : void {
+        private function removeListeners() : void
+        {
             this.linkBtn.removeEventListener(ButtonEvent.CLICK,this.linkBtnHandler);
             this.linkBtn.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.linkBtn.removeEventListener(MouseEvent.ROLL_OVER,this.showLinkBtnTooltip);
         }
         
-        private function linkBtnHandler(param1:ButtonEvent) : void {
+        private function linkBtnHandler(param1:ButtonEvent) : void
+        {
             App.toolTipMgr.hide();
             dispatchEvent(new QuestEvent(QuestEvent.SELECT_QUEST,this._linkID));
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
@@ -185,53 +196,65 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        public function get isReadyForLayout() : Boolean {
+        public function get isReadyForLayout() : Boolean
+        {
             return this._isReadyForLayout;
         }
         
-        public function set isReadyForLayout(param1:Boolean) : void {
+        public function set isReadyForLayout(param1:Boolean) : void
+        {
             this._isReadyForLayout = param1;
         }
         
-        public function get linkID() : String {
+        public function get linkID() : String
+        {
             return this._linkID;
         }
         
-        public function set linkID(param1:String) : void {
+        public function set linkID(param1:String) : void
+        {
             this._linkID = param1;
             invalidate(INV_LINK_ID);
         }
         
-        public function get isNotAvailable() : Boolean {
+        public function get isNotAvailable() : Boolean
+        {
             return this._isNotAvailable;
         }
         
-        public function set isNotAvailable(param1:Boolean) : void {
+        public function set isNotAvailable(param1:Boolean) : void
+        {
             this._isNotAvailable = param1;
             invalidate(INV_NOT_DONE);
         }
         
-        public function get availableWidth() : Number {
+        public function get availableWidth() : Number
+        {
             return this.width;
         }
         
-        public function set availableWidth(param1:Number) : void {
+        public function set availableWidth(param1:Number) : void
+        {
             this.width = param1;
         }
         
-        public function get contentAlign() : String {
+        public function get contentAlign() : String
+        {
             return this._contentAlign;
         }
         
-        public function set contentAlign(param1:String) : void {
+        public function set contentAlign(param1:String) : void
+        {
             this._contentAlign = param1;
         }
         
-        public function get isNumerated() : Boolean {
+        public function get isNumerated() : Boolean
+        {
             return this._isNumerated;
         }
         
-        public function set isNumerated(param1:Boolean) : void {
+        public function set isNumerated(param1:Boolean) : void
+        {
             this._isNumerated = param1;
         }
     }

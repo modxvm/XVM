@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class DeviceEvent extends Event
     {
         
-        public function DeviceEvent(param1:String, param2:Object, param3:Object = null, param4:Boolean = false) {
+        public function DeviceEvent(param1:String, param2:Object, param3:Object = null, param4:Boolean = false)
+        {
             super(param1,true,true);
             this.newDevice = param2;
             this.oldDevice = param3;
@@ -22,7 +23,8 @@ package net.wg.gui.events
         
         public var useGold:Boolean;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new DeviceEvent(type,this.newDevice,this.oldDevice,this.useGold);
         }
     }

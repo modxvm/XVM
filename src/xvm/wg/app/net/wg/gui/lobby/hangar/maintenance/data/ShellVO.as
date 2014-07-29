@@ -6,7 +6,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
     public class ShellVO extends DAAPIDataClass
     {
         
-        public function ShellVO(param1:Object) {
+        public function ShellVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -52,11 +53,13 @@ package net.wg.gui.lobby.hangar.maintenance.data
         
         public var userCredits:Object = null;
         
-        public function get userCount() : int {
+        public function get userCount() : int
+        {
             return this._userCount;
         }
         
-        public function set userCount(param1:int) : void {
+        public function set userCount(param1:int) : void
+        {
             var _loc2_:ShellVO = null;
             var _loc4_:ShellVO = null;
             this._userCount = param1;
@@ -86,7 +89,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
             dispatchEvent(new ShellRendererEvent(ShellRendererEvent.USER_COUNT_CHANGED));
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == USER_COUNT_FIELD)
             {
                 this.setUserCount(int(param2));
@@ -95,22 +99,26 @@ package net.wg.gui.lobby.hangar.maintenance.data
             return true;
         }
         
-        public function setUserCount(param1:int) : void {
+        public function setUserCount(param1:int) : void
+        {
             this._userCount = param1;
             dispatchEvent(new ShellRendererEvent(ShellRendererEvent.USER_COUNT_CHANGED));
         }
         
-        public function get price() : int {
+        public function get price() : int
+        {
             var _loc1_:int = this.currency == "credits"?0:1;
             return this.prices[_loc1_];
         }
         
-        public function get buyShellsCount() : int {
+        public function get buyShellsCount() : int
+        {
             var _loc1_:int = this.count - this.userCount + this.inventoryCount;
             return _loc1_ < 0?-_loc1_:0;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.prices)
             {
                 this.prices.splice(0);

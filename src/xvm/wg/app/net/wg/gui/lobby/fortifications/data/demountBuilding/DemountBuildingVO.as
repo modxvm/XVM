@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data.demountBuilding
     public class DemountBuildingVO extends DAAPIDataClass
     {
         
-        public function DemountBuildingVO(param1:Object) {
+        public function DemountBuildingVO(param1:Object)
+        {
             super(param1);
         }
         

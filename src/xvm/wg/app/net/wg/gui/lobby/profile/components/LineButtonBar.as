@@ -9,7 +9,8 @@ package net.wg.gui.lobby.profile.components
     public class LineButtonBar extends ButtonBarEx
     {
         
-        public function LineButtonBar() {
+        public function LineButtonBar()
+        {
             this.line = new Sprite();
             super();
         }
@@ -22,7 +23,8 @@ package net.wg.gui.lobby.profile.components
         
         protected var lineColor:int = 6710617;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.mcBG)
             {
@@ -31,7 +33,8 @@ package net.wg.gui.lobby.profile.components
             addChild(this.line);
         }
         
-        override public function set selectedIndex(param1:int) : void {
+        override public function set selectedIndex(param1:int) : void
+        {
             if(param1 == _selectedIndex)
             {
                 return;
@@ -45,7 +48,8 @@ package net.wg.gui.lobby.profile.components
             invalidate(LINE_INVALID);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(LINE_INVALID))
             {
@@ -53,7 +57,8 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        protected function drawLine() : void {
+        protected function drawLine() : void
+        {
             var _loc3_:DisplayObject = null;
             var _loc4_:uint = 0;
             var _loc1_:Graphics = this.line.graphics;
@@ -79,7 +84,8 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        override protected function updateRenderers() : void {
+        override protected function updateRenderers() : void
+        {
             super.updateRenderers();
             this.drawLine();
         }

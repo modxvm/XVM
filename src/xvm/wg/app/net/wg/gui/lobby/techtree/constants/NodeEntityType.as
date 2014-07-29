@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.constants
     public class NodeEntityType extends Object
     {
         
-        public function NodeEntityType() {
+        public function NodeEntityType()
+        {
             super();
         }
         
@@ -19,11 +20,13 @@ package net.wg.gui.lobby.techtree.constants
         
         public static var NEXT_VEHICLE:uint = 5;
         
-        public static function isVehicleType(param1:uint) : Boolean {
+        public static function isVehicleType(param1:uint) : Boolean
+        {
             return param1 == NATION_TREE || param1 == RESEARCH_ROOT || param1 == TOP_VEHICLE || param1 == NEXT_VEHICLE;
         }
         
-        public static function isModuleType(param1:uint) : Boolean {
+        public static function isModuleType(param1:uint) : Boolean
+        {
             return param1 == RESEARCH_ITEM;
         }
     }

@@ -8,7 +8,8 @@ package net.wg.gui.components.advanced
     public class ShellsSet extends UIComponent
     {
         
-        public function ShellsSet() {
+        public function ShellsSet()
+        {
             this.shellViews = [];
             super();
         }
@@ -21,13 +22,15 @@ package net.wg.gui.components.advanced
         
         private var shellViews:Array;
         
-        public function setData(param1:Array, param2:int = -1) : void {
+        public function setData(param1:Array, param2:int = -1) : void
+        {
             this.data = param1;
             this.historicalBattleID = param2;
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:ShellButton = null;
             var _loc2_:ShellVO = null;
             var _loc3_:* = NaN;
@@ -75,7 +78,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.data)
             {
                 this.data.splice(0);
@@ -85,7 +89,8 @@ package net.wg.gui.components.advanced
             super.onDispose();
         }
         
-        private function clearRenderers() : void {
+        private function clearRenderers() : void
+        {
             var _loc1_:ShellButton = null;
             for each(_loc1_ in this.shellViews)
             {

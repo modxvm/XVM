@@ -14,7 +14,8 @@ package net.wg.gui.components.controls
     public class UILoaderAlt extends Sprite implements IDisposable
     {
         
-        public function UILoaderAlt() {
+        public function UILoaderAlt()
+        {
             super();
             this._width = width;
             this._height = height;
@@ -62,17 +63,20 @@ package net.wg.gui.components.controls
         
         private var _invalid:Boolean = false;
         
-        public function setSourceSize(param1:Number, param2:Number) : void {
+        public function setSourceSize(param1:Number, param2:Number) : void
+        {
             this.loader.width = param1;
             this.loader.height = param2;
             this.loader.scaleX = this.loader.scaleY = Math.min(this._height / param2,this._width / param1);
         }
         
-        public final function dispose() : void {
+        public final function dispose() : void
+        {
             this.onDispose();
         }
         
-        protected function onDispose() : void {
+        protected function onDispose() : void
+        {
             if(this.loader)
             {
                 this.removeLoaderListener();
@@ -90,28 +94,34 @@ package net.wg.gui.components.controls
             removeEventListener(Event.RENDER,this.updateSize);
         }
         
-        override public function get visible() : Boolean {
+        override public function get visible() : Boolean
+        {
             return super.visible;
         }
         
-        override public function set visible(param1:Boolean) : void {
+        override public function set visible(param1:Boolean) : void
+        {
             super.visible = param1;
             dispatchEvent(new ComponentEvent(param1?ComponentEvent.SHOW:ComponentEvent.HIDE));
         }
         
-        public function get autoSize() : Boolean {
+        public function get autoSize() : Boolean
+        {
             return this._autoSize;
         }
         
-        public function set autoSize(param1:Boolean) : void {
+        public function set autoSize(param1:Boolean) : void
+        {
             this._autoSize = param1;
         }
         
-        public function get source() : String {
+        public function get source() : String
+        {
             return this._source;
         }
         
-        public function set source(param1:String) : void {
+        public function set source(param1:String) : void
+        {
             this._loadFailed = false;
             if(!param1 || param1 == this._source)
             {
@@ -120,11 +130,13 @@ package net.wg.gui.components.controls
             this.startLoad(param1);
         }
         
-        public function get sourceAlt() : String {
+        public function get sourceAlt() : String
+        {
             return this._sourceAlt;
         }
         
-        public function set sourceAlt(param1:String) : void {
+        public function set sourceAlt(param1:String) : void
+        {
             if(!param1 || this._sourceAlt == param1)
             {
                 return;
@@ -136,23 +148,28 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get originalWidth() : Number {
+        public function get originalWidth() : Number
+        {
             return this._width;
         }
         
-        public function get originalHeight() : Number {
+        public function get originalHeight() : Number
+        {
             return this._height;
         }
         
-        public function get maintainAspectRatio() : Boolean {
+        public function get maintainAspectRatio() : Boolean
+        {
             return this._maintainAspectRatio;
         }
         
-        public function set maintainAspectRatio(param1:Boolean) : void {
+        public function set maintainAspectRatio(param1:Boolean) : void
+        {
             this._maintainAspectRatio = param1;
         }
         
-        public function unload() : void {
+        public function unload() : void
+        {
             if(this._loadInProgress)
             {
                 this.loader.close();
@@ -170,7 +187,8 @@ package net.wg.gui.components.controls
             this._sizeRetries = 0;
         }
         
-        public function invalidate() : void {
+        public function invalidate() : void
+        {
             if(!this._invalid)
             {
                 this._invalid = true;
@@ -192,7 +210,8 @@ package net.wg.gui.components.controls
             
         }
         
-        protected function handleStageChange(param1:Event) : void {
+        protected function handleStageChange(param1:Event) : void
+        {
             if(param1.type == Event.ADDED_TO_STAGE)
             {
                 removeEventListener(Event.ADDED_TO_STAGE,this.handleStageChange,false);
@@ -204,18 +223,21 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function handleEnterFrameValidation(param1:Event) : void {
+        protected function handleEnterFrameValidation(param1:Event) : void
+        {
             this.updateSize();
         }
         
-        private function toggleVisible(param1:Boolean) : void {
+        private function toggleVisible(param1:Boolean) : void
+        {
             if(this.hideLoader)
             {
                 this.loader.visible = param1;
             }
         }
         
-        public function updateSize(param1:Event = null) : void {
+        public function updateSize(param1:Event = null) : void
+        {
             var _loc2_:* = NaN;
             removeEventListener(Event.ADDED_TO_STAGE,this.handleStageChange);
             removeEventListener(Event.ENTER_FRAME,this.handleEnterFrameValidation);
@@ -260,7 +282,8 @@ package net.wg.gui.components.controls
             this._invalid = false;
         }
         
-        private function startLoad(param1:String) : void {
+        private function startLoad(param1:String) : void
+        {
             this._source = param1;
             if(!this._previousContentUnloaded)
             {
@@ -274,13 +297,15 @@ package net.wg.gui.components.controls
             this.loader.load(_loc2_,_loc3_);
         }
         
-        private function onLoadComplete(param1:Event) : void {
+        private function onLoadComplete(param1:Event) : void
+        {
             this._loadFailed = false;
             this._loadInProgress = false;
             this.updateSize();
         }
         
-        private function onIOError(param1:IOErrorEvent) : void {
+        private function onIOError(param1:IOErrorEvent) : void
+        {
             if(!this._loadFailed && (this._sourceAlt))
             {
                 this._loadFailed = true;
@@ -293,16 +318,19 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function startLoadAlt() : void {
+        public function startLoadAlt() : void
+        {
             this.startLoad(this._sourceAlt);
         }
         
-        private function onUnloadComplete(param1:Event) : void {
+        private function onUnloadComplete(param1:Event) : void
+        {
             this._previousContentUnloaded = true;
             this._unloadInProgress = false;
         }
         
-        private function removeLoaderListener() : void {
+        private function removeLoaderListener() : void
+        {
             this.loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.onLoadComplete);
             this.loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onIOError);
             this.loader.contentLoaderInfo.removeEventListener(Event.UNLOAD,this.onUnloadComplete);

@@ -5,17 +5,20 @@ package net.wg.gui.tutorial.controls
     public class ProgressItem extends MovieClip
     {
         
-        public function ProgressItem() {
+        public function ProgressItem()
+        {
             super();
         }
         
         public var lineMC:MovieClip;
         
-        public function get phaseFrame() : int {
+        public function get phaseFrame() : int
+        {
             return this.lineMC.currentFrame;
         }
         
-        public function setPhase(param1:String) : void {
+        public function setPhase(param1:String) : void
+        {
             var _loc2_:int = this.phaseFrame;
             this.lineMC.gotoAndStop(param1);
             if(_loc2_ != this.phaseFrame)
@@ -24,7 +27,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        public function highlight() : void {
+        public function highlight() : void
+        {
             gotoAndPlay(1);
         }
     }

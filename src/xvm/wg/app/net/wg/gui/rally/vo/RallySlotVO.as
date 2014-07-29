@@ -7,7 +7,8 @@ package net.wg.gui.rally.vo
     public class RallySlotVO extends DAAPIDataClass implements IRallySlotVO
     {
         
-        public function RallySlotVO(param1:Object) {
+        public function RallySlotVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -43,91 +44,113 @@ package net.wg.gui.rally.vo
         
         private var _selectedVehicleLevel:int = 0;
         
-        public function get playerObj() : Object {
+        public function get playerObj() : Object
+        {
             return this._player;
         }
         
-        public function get isClosedVal() : Boolean {
+        public function get isClosedVal() : Boolean
+        {
             return this._isClosed;
         }
         
-        public function get playerStatus() : int {
+        public function get playerStatus() : int
+        {
             return this._playerStatus;
         }
         
-        public function set playerStatus(param1:int) : void {
+        public function set playerStatus(param1:int) : void
+        {
             this._playerStatus = param1;
         }
         
-        public function get selectedVehicle() : VehicleVO {
+        public function get selectedVehicle() : VehicleVO
+        {
             return this._selectedVehicle;
         }
         
-        public function set selectedVehicle(param1:VehicleVO) : void {
+        public function set selectedVehicle(param1:VehicleVO) : void
+        {
             this._selectedVehicle = param1;
         }
         
-        public function get selectedVehicleLevel() : int {
+        public function get selectedVehicleLevel() : int
+        {
             return this._selectedVehicleLevel;
         }
         
-        public function set selectedVehicleLevel(param1:int) : void {
+        public function set selectedVehicleLevel(param1:int) : void
+        {
             this._selectedVehicleLevel = param1;
         }
         
-        public function get isCurrentUserInSlot() : Boolean {
+        public function get isCurrentUserInSlot() : Boolean
+        {
             return this._isCurrentUserInSlot;
         }
         
-        public function set isCurrentUserInSlot(param1:Boolean) : void {
+        public function set isCurrentUserInSlot(param1:Boolean) : void
+        {
             this._isCurrentUserInSlot = param1;
         }
         
-        public function get hasRestrictions() : Boolean {
+        public function get hasRestrictions() : Boolean
+        {
             return !(this.restrictions[0] == null) || !(this.restrictions[1] == null);
         }
         
-        public function get slotLabel() : String {
+        public function get slotLabel() : String
+        {
             return this._slotLabel;
         }
         
-        public function set slotLabel(param1:String) : void {
+        public function set slotLabel(param1:String) : void
+        {
             this._slotLabel = param1;
         }
         
-        public function get isCommanderState() : Boolean {
+        public function get isCommanderState() : Boolean
+        {
             return this._isCommanderState;
         }
         
-        public function set isCommanderState(param1:Boolean) : void {
+        public function set isCommanderState(param1:Boolean) : void
+        {
             this._isCommanderState = param1;
         }
         
-        public function get canBeTaken() : Boolean {
+        public function get canBeTaken() : Boolean
+        {
             return this._canBeTaken;
         }
         
-        public function set canBeTaken(param1:Boolean) : void {
+        public function set canBeTaken(param1:Boolean) : void
+        {
             this._canBeTaken = param1;
         }
         
-        public function get rallyIdx() : Number {
+        public function get rallyIdx() : Number
+        {
             return this._rallyIdx;
         }
         
-        public function set rallyIdx(param1:Number) : void {
+        public function set rallyIdx(param1:Number) : void
+        {
             this._rallyIdx = param1;
         }
         
-        public function get player() : IRallyCandidateVO {
+        public function get player() : IRallyCandidateVO
+        {
             return this._player;
         }
         
-        public function set player(param1:IRallyCandidateVO) : void {
+        public function set player(param1:IRallyCandidateVO) : void
+        {
             this._player = param1;
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:* = undefined;
             var _loc5_:SettingRosterVO = null;
@@ -167,7 +190,8 @@ package net.wg.gui.rally.vo
             return true;
         }
         
-        override protected function onDataRead(param1:String, param2:Object) : Boolean {
+        override protected function onDataRead(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:* = undefined;
             if(param1 == RESTRICTIONS_FIELD)
@@ -200,31 +224,38 @@ package net.wg.gui.rally.vo
             return true;
         }
         
-        protected function initCandidateVO(param1:Object) : IRallyCandidateVO {
+        protected function initCandidateVO(param1:Object) : IRallyCandidateVO
+        {
             return new RallyCandidateVO(param1);
         }
         
-        public function get isClosed() : Boolean {
+        public function get isClosed() : Boolean
+        {
             return this._isClosed;
         }
         
-        public function set isClosed(param1:Boolean) : void {
+        public function set isClosed(param1:Boolean) : void
+        {
             this._isClosed = param1;
         }
         
-        public function get isFreezed() : Boolean {
+        public function get isFreezed() : Boolean
+        {
             return this._isFreezed;
         }
         
-        public function set isFreezed(param1:Boolean) : void {
+        public function set isFreezed(param1:Boolean) : void
+        {
             this._isFreezed = param1;
         }
         
-        public function get compatibleVehiclesCount() : int {
+        public function get compatibleVehiclesCount() : int
+        {
             return this._compatibleVehiclesCount;
         }
         
-        public function set compatibleVehiclesCount(param1:int) : void {
+        public function set compatibleVehiclesCount(param1:int) : void
+        {
             this._compatibleVehiclesCount = param1;
         }
     }

@@ -5,13 +5,15 @@ package net.wg.gui.components.tooltips.VO
     public class SortieDivisionVO extends DAAPIDataClass
     {
         
-        public function SortieDivisionVO(param1:Object) {
+        public function SortieDivisionVO(param1:Object)
+        {
             super(param1);
         }
         
         private var _divisions:Vector.<DivisionVO> = null;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Object = null;
             var _loc4_:DivisionVO = null;
             switch(param1)
@@ -29,7 +31,8 @@ package net.wg.gui.components.tooltips.VO
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this._divisions)
             {
@@ -38,7 +41,8 @@ package net.wg.gui.components.tooltips.VO
             }
         }
         
-        private function cleanData() : void {
+        private function cleanData() : void
+        {
             var _loc1_:DivisionVO = null;
             for each(_loc1_ in this._divisions)
             {
@@ -47,11 +51,13 @@ package net.wg.gui.components.tooltips.VO
             this._divisions.splice(0,this._divisions.length);
         }
         
-        public function get divisions() : Vector.<DivisionVO> {
+        public function get divisions() : Vector.<DivisionVO>
+        {
             return this._divisions;
         }
         
-        public function set divisions(param1:Vector.<DivisionVO>) : void {
+        public function set divisions(param1:Vector.<DivisionVO>) : void
+        {
             this._divisions = param1;
         }
     }

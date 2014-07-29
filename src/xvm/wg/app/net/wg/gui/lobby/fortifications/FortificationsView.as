@@ -22,7 +22,8 @@ package net.wg.gui.lobby.fortifications
     public class FortificationsView extends FortificationsViewMeta implements IFortificationsViewMeta
     {
         
-        public function FortificationsView() {
+        public function FortificationsView()
+        {
             super();
         }
         
@@ -32,29 +33,35 @@ package net.wg.gui.lobby.fortifications
         
         private var _currentViewAlias:String = null;
         
-        override public final function setViewSize(param1:Number, param2:Number) : void {
+        override public final function setViewSize(param1:Number, param2:Number) : void
+        {
             this.invalidateSize();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override public function invalidateSize() : void {
+        override public function invalidateSize() : void
+        {
             super.invalidateSize();
             this.invalidateCurrentViewSize();
         }
         
-        override public final function updateStage(param1:Number, param2:Number) : void {
+        override public final function updateStage(param1:Number, param2:Number) : void
+        {
             this.setViewSize(param1,param2);
         }
         
-        public function as_loadView(param1:String, param2:String) : void {
+        public function as_loadView(param1:String, param2:String) : void
+        {
             this.viewStack.show(param1);
             this.invalidateSize();
         }
         
-        override protected function setCommonData(param1:FortificationVO) : void {
+        override protected function setCommonData(param1:FortificationVO) : void
+        {
             if(this._data != null)
             {
                 this._data.dispose();
@@ -66,7 +73,8 @@ package net.wg.gui.lobby.fortifications
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -83,14 +91,16 @@ package net.wg.gui.lobby.fortifications
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             this.viewStack.addEventListener(FortConstants.ON_FORT_CREATE_EVENT,this.onFortCreateHandler);
             this.viewStack.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onFocusRequestHandler);
             this.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChangedHandler);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.setCommonData(null);
             this.viewStack.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChangedHandler);
             this.viewStack.removeEventListener(FortConstants.ON_FORT_CREATE_EVENT,this.onFortCreateHandler);
@@ -99,7 +109,8 @@ package net.wg.gui.lobby.fortifications
             super.onDispose();
         }
         
-        private function invalidateCurrentViewSize() : void {
+        private function invalidateCurrentViewSize() : void
+        {
             var _loc1_:UIComponent = null;
             if(this.viewStack.currentView != null)
             {
@@ -109,7 +120,8 @@ package net.wg.gui.lobby.fortifications
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.handled)
             {
                 return;
@@ -122,7 +134,8 @@ package net.wg.gui.lobby.fortifications
             }
         }
         
-        private function onViewChangedHandler(param1:ViewStackEvent) : void {
+        private function onViewChangedHandler(param1:ViewStackEvent) : void
+        {
             App.toolTipMgr.hide();
             if(this._currentViewAlias != null)
             {
@@ -151,11 +164,13 @@ package net.wg.gui.lobby.fortifications
             
         }
         
-        private function onFocusRequestHandler(param1:FocusRequestEvent) : void {
+        private function onFocusRequestHandler(param1:FocusRequestEvent) : void
+        {
             setFocus(param1.focusContainer.getComponentForFocus());
         }
         
-        private function onFortCreateHandler(param1:Event) : void {
+        private function onFortCreateHandler(param1:Event) : void
+        {
             setFocus(this.viewStack);
             onFortCreateClickS();
         }

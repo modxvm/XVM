@@ -6,11 +6,13 @@ package net.wg.infrastructure.managers.utils.impl
     public class Icons extends Object implements IIcons
     {
         
-        public function Icons() {
+        public function Icons()
+        {
             super();
         }
         
-        public function getIcon16StrPath(param1:String) : String {
+        public function getIcon16StrPath(param1:String) : String
+        {
             if(IconsTypes.ALLOW_ICONS.indexOf(param1) < 0)
             {
                 DebugUtils.LOG_WARNING("Invalid icon ID: " + param1);

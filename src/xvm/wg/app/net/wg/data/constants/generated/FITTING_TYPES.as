@@ -3,7 +3,8 @@ package net.wg.data.constants.generated
     public class FITTING_TYPES extends Object
     {
         
-        public function FITTING_TYPES() {
+        public function FITTING_TYPES()
+        {
             super();
         }
         
@@ -17,9 +18,9 @@ package net.wg.data.constants.generated
         
         public static var MODULE:String = "module";
         
-        public static var STORE_SLOTS:Array;
+        public static var STORE_SLOTS:Array = [VEHICLE,MODULE,SHELL,OPTIONAL_DEVICE,EQUIPMENT];
         
-        public static var ARTEFACT_SLOTS:Array;
+        public static var ARTEFACT_SLOTS:Array = [OPTIONAL_DEVICE,EQUIPMENT];
         
         public static var VEHICLE_GUN:String = "vehicleGun";
         
@@ -31,6 +32,6 @@ package net.wg.data.constants.generated
         
         public static var VEHICLE_RADIO:String = "vehicleRadio";
         
-        public static var MANDATORY_SLOTS:Array;
+        public static var MANDATORY_SLOTS:Array = [VEHICLE_GUN,VEHICLE_TURRET,VEHICLE_CHASSIS,VEHICLE_ENGINE,VEHICLE_RADIO];
     }
 }

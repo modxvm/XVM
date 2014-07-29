@@ -17,16 +17,18 @@ package net.wg.gui.lobby.sellDialog
     public class SellHeaderComponent extends UIComponent
     {
         
-        public function SellHeaderComponent() {
+        public function SellHeaderComponent()
+        {
             super();
             this.locale = App.utils.locale;
         }
         
-        private static var VEHICLE_LEVELS:Array;
+        private static var VEHICLE_LEVELS:Array = ["I","II","III","IV","V","VI","VII","VIII","IX","X"];
         
         private static var PADDING_FOR_NEXT_ELEMENT:int = 8;
         
-        private static function showLevel(param1:Number) : String {
+        private static function showLevel(param1:Number) : String
+        {
             return VEHICLE_LEVELS[param1 - 1].toString();
         }
         
@@ -58,7 +60,8 @@ package net.wg.gui.lobby.sellDialog
         
         private var locale:ILocale;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.vehicleActionPrice.dispose();
             this.emptySellIT.dispose();
@@ -66,7 +69,8 @@ package net.wg.gui.lobby.sellDialog
             this.tankIcon.dispose();
         }
         
-        public function setData(param1:SellVehicleVo) : void {
+        public function setData(param1:SellVehicleVo) : void
+        {
             var _loc2_:String = null;
             this.tankNameTF.text = param1.userName;
             if(param1.isElite)
@@ -127,42 +131,51 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        public function getNextPosition() : int {
+        public function getNextPosition() : int
+        {
             return this.crewBG.y + this.crewBG.height + PADDING_FOR_NEXT_ELEMENT;
         }
         
-        public function get tankGoldPrice() : Number {
+        public function get tankGoldPrice() : Number
+        {
             return this._tankGoldPrice;
         }
         
-        public function set tankGoldPrice(param1:Number) : void {
+        public function set tankGoldPrice(param1:Number) : void
+        {
             this._tankGoldPrice = param1;
         }
         
-        public function get tankPrice() : Number {
+        public function get tankPrice() : Number
+        {
             return this._tankPrice;
         }
         
-        public function set tankPrice(param1:Number) : void {
+        public function set tankPrice(param1:Number) : void
+        {
             this._tankPrice = param1;
         }
         
-        public function get creditsCommon() : Number {
+        public function get creditsCommon() : Number
+        {
             return this._creditsCommon;
         }
         
-        public function set creditsCommon(param1:Number) : void {
+        public function set creditsCommon(param1:Number) : void
+        {
             this._creditsCommon = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.tankPriceTF.text = DIALOGS.VEHICLESELLDIALOG_VEHICLE_EMPTYSELLPRICE;
             this.emptySellIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
             this.vehicleActionPrice.textYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
         }
         
-        private function showPrice(param1:Boolean, param2:Number, param3:ActionPriceVO) : void {
+        private function showPrice(param1:Boolean, param2:Number, param3:ActionPriceVO) : void
+        {
             if(param1)
             {
                 this.emptySellIT.text = "+ " + this.locale.gold(param2);

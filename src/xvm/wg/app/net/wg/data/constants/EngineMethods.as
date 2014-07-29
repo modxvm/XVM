@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class EngineMethods extends Object
     {
         
-        public function EngineMethods() {
+        public function EngineMethods()
+        {
             super();
         }
         

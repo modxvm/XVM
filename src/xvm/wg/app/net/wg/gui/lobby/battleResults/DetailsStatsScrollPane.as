@@ -10,7 +10,8 @@ package net.wg.gui.lobby.battleResults
     public class DetailsStatsScrollPane extends ResizableScrollPane implements IViewStackContent
     {
         
-        public function DetailsStatsScrollPane() {
+        public function DetailsStatsScrollPane()
+        {
             super();
         }
         
@@ -20,7 +21,8 @@ package net.wg.gui.lobby.battleResults
         
         public var bottomLip:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.topLip.mouseEnabled = false;
             this.bottomLip.mouseEnabled = false;
@@ -29,14 +31,17 @@ package net.wg.gui.lobby.battleResults
             scrollBar = this.detailsScrollBar;
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        override protected function applyScrollBarUpdating() : void {
+        override protected function applyScrollBarUpdating() : void
+        {
             super.applyScrollBarUpdating();
             if((_scrollBar) && ((_scrollBar as DisplayObject).visible))
             {
@@ -49,13 +54,15 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        override protected function applyTargetChanges() : void {
+        override protected function applyTargetChanges() : void
+        {
             super.applyTargetChanges();
             setChildIndex(this.topLip,numChildren - 1);
             setChildIndex(this.bottomLip,numChildren - 1);
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

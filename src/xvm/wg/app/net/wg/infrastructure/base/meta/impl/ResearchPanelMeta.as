@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class ResearchPanelMeta extends BaseDAAPIComponent
     {
         
-        public function ResearchPanelMeta() {
+        public function ResearchPanelMeta()
+        {
             super();
         }
         
         public var goToResearch:Function = null;
         
-        public function goToResearchS() : void {
+        public function goToResearchS() : void
+        {
             App.utils.asserter.assertNotNull(this.goToResearch,"goToResearch" + Errors.CANT_NULL);
             this.goToResearch();
         }

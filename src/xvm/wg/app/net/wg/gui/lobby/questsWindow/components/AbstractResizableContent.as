@@ -6,7 +6,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class AbstractResizableContent extends UIComponent implements IResizableContent
     {
         
-        public function AbstractResizableContent() {
+        public function AbstractResizableContent()
+        {
             super();
         }
         
@@ -20,46 +21,57 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var _isNumerated:Boolean = false;
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
         }
         
-        public function get isReadyForLayout() : Boolean {
+        public function get isReadyForLayout() : Boolean
+        {
             return this._isReadyForLayout;
         }
         
-        public function set isReadyForLayout(param1:Boolean) : void {
+        public function set isReadyForLayout(param1:Boolean) : void
+        {
             this._isReadyForLayout = param1;
         }
         
-        public function get leftPadding() : int {
+        public function get leftPadding() : int
+        {
             return this._leftPadding;
         }
         
-        public function set leftPadding(param1:int) : void {
+        public function set leftPadding(param1:int) : void
+        {
             this._leftPadding = param1;
         }
         
-        public function get availableWidth() : Number {
+        public function get availableWidth() : Number
+        {
             return this._availableWidth;
         }
         
-        public function set availableWidth(param1:Number) : void {
+        public function set availableWidth(param1:Number) : void
+        {
             this._availableWidth = param1;
         }
         
-        public function get contentAlign() : String {
+        public function get contentAlign() : String
+        {
             return this._contentAlign;
         }
         
-        public function set contentAlign(param1:String) : void {
+        public function set contentAlign(param1:String) : void
+        {
             this._contentAlign = param1;
         }
         
-        public function get isNumerated() : Boolean {
+        public function get isNumerated() : Boolean
+        {
             return this._isNumerated;
         }
         
-        public function set isNumerated(param1:Boolean) : void {
+        public function set isNumerated(param1:Boolean) : void
+        {
             this._isNumerated = param1;
         }
     }

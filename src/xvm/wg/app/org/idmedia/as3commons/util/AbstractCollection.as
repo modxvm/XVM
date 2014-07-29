@@ -5,15 +5,18 @@ package org.idmedia.as3commons.util
     public class AbstractCollection extends Object implements Collection
     {
         
-        public function AbstractCollection() {
+        public function AbstractCollection()
+        {
             super();
         }
         
-        public function add(param1:*) : Boolean {
+        public function add(param1:*) : Boolean
+        {
             throw new UnsupportedOperationException();
         }
         
-        public function addAll(param1:Collection) : Boolean {
+        public function addAll(param1:Collection) : Boolean
+        {
             var _loc2_:* = false;
             var _loc3_:Iterator = param1.iterator();
             while(_loc3_.hasNext())
@@ -26,7 +29,8 @@ package org.idmedia.as3commons.util
             return _loc2_;
         }
         
-        public function clear() : void {
+        public function clear() : void
+        {
             var _loc1_:Iterator = this.iterator();
             while(_loc1_.hasNext())
             {
@@ -35,11 +39,13 @@ package org.idmedia.as3commons.util
             }
         }
         
-        public function contains(param1:*) : Boolean {
+        public function contains(param1:*) : Boolean
+        {
             return this.toArray().indexOf(param1) > -1;
         }
         
-        public function containsAll(param1:Collection) : Boolean {
+        public function containsAll(param1:Collection) : Boolean
+        {
             var _loc2_:Iterator = param1.iterator();
             while(_loc2_.hasNext())
             {
@@ -51,15 +57,18 @@ package org.idmedia.as3commons.util
             return true;
         }
         
-        public function isEmpty() : Boolean {
+        public function isEmpty() : Boolean
+        {
             return this.size() == 0;
         }
         
-        public function iterator() : Iterator {
+        public function iterator() : Iterator
+        {
             return null;
         }
         
-        public function remove(param1:* = null) : Boolean {
+        public function remove(param1:* = null) : Boolean
+        {
             var _loc2_:Iterator = this.iterator();
             while(_loc2_.hasNext())
             {
@@ -72,11 +81,13 @@ package org.idmedia.as3commons.util
             return false;
         }
         
-        public function size() : int {
+        public function size() : int
+        {
             return 0;
         }
         
-        public function toArray() : Array {
+        public function toArray() : Array
+        {
             var _loc1_:Array = new Array();
             var _loc2_:Iterator = this.iterator();
             while(_loc2_.hasNext())
@@ -86,7 +97,8 @@ package org.idmedia.as3commons.util
             return _loc1_;
         }
         
-        public function equals(param1:*) : Boolean {
+        public function equals(param1:*) : Boolean
+        {
             return param1 === this;
         }
     }

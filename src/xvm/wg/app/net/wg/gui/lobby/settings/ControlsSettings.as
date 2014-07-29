@@ -20,7 +20,8 @@ package net.wg.gui.lobby.settings
     public class ControlsSettings extends SettingsBaseView
     {
         
-        public function ControlsSettings() {
+        public function ControlsSettings()
+        {
             super();
         }
         
@@ -54,11 +55,13 @@ package net.wg.gui.lobby.settings
         
         public var defaultBtn:SoundButtonEx = null;
         
-        override public function update(param1:Object) : void {
+        override public function update(param1:Object) : void
+        {
             super.update(param1);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -67,15 +70,18 @@ package net.wg.gui.lobby.settings
             throw new Error("Not decompiled due to error");
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ControlsSettings " + name + "]";
         }
         
-        public function getKeyasDataProvider() : IDataProvider {
+        public function getKeyasDataProvider() : IDataProvider
+        {
             return this.keys.dataProvider;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.keyboardFieldSet.label = SETTINGS.KEYBOARD_KEYBOARD;
             this.mouseFieldSet.label = SETTINGS.KEYBOARD_MOUSE;
             this.mouseSensitivityLabel.text = SETTINGS.MOUSE_SENSITIVITY_HEADER;
@@ -90,7 +96,8 @@ package net.wg.gui.lobby.settings
             super.configUI();
         }
         
-        override protected function setData(param1:Object) : void {
+        override protected function setData(param1:Object) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -99,7 +106,8 @@ package net.wg.gui.lobby.settings
             throw new Error("Not decompiled due to error");
         }
         
-        private function createDataProviderForKeys(param1:Object, param2:Array) : Array {
+        private function createDataProviderForKeys(param1:Object, param2:Array) : Array
+        {
             var _loc6_:String = null;
             var _loc3_:Array = [];
             var _loc4_:uint = param2.length;
@@ -113,11 +121,13 @@ package net.wg.gui.lobby.settings
             return _loc3_;
         }
         
-        private function checkEnabledSetDefBtn() : void {
+        private function checkEnabledSetDefBtn() : void
+        {
             this.defaultBtn.enabled = (this.keys.keysWasChanged()) || (this.controlsChanged());
         }
         
-        private function controlsChanged() : Boolean {
+        private function controlsChanged() : Boolean
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -126,7 +136,8 @@ package net.wg.gui.lobby.settings
             throw new Error("Not decompiled due to error");
         }
         
-        private function onSetDefaultClick(param1:ButtonEvent) : void {
+        private function onSetDefaultClick(param1:ButtonEvent) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -135,21 +146,24 @@ package net.wg.gui.lobby.settings
             throw new Error("Not decompiled due to error");
         }
         
-        private function onSliderValueChanged(param1:SliderEvent) : void {
+        private function onSliderValueChanged(param1:SliderEvent) : void
+        {
             var _loc2_:Slider = Slider(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_SLIDER);
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.value));
             this.checkEnabledSetDefBtn();
         }
         
-        private function onCheckBoxSelected(param1:Event) : void {
+        private function onCheckBoxSelected(param1:Event) : void
+        {
             var _loc2_:CheckBox = CheckBox(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.selected));
             this.checkEnabledSetDefBtn();
         }
         
-        private function onKeyChange(param1:ListEventEx) : void {
+        private function onKeyChange(param1:ListEventEx) : void
+        {
             this.keys.updateDataProvider();
             var _loc2_:String = param1.itemData.id;
             var _loc3_:Object = {};

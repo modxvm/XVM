@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class EULAMeta extends AbstractWindowView
     {
         
-        public function EULAMeta() {
+        public function EULAMeta()
+        {
             super();
         }
         
@@ -16,17 +17,20 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onApply:Function = null;
         
-        public function requestEULATextS() : void {
+        public function requestEULATextS() : void
+        {
             App.utils.asserter.assertNotNull(this.requestEULAText,"requestEULAText" + Errors.CANT_NULL);
             this.requestEULAText();
         }
         
-        public function onLinkClickS(param1:String) : void {
+        public function onLinkClickS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.onLinkClick,"onLinkClick" + Errors.CANT_NULL);
             this.onLinkClick(param1);
         }
         
-        public function onApplyS() : void {
+        public function onApplyS() : void
+        {
             App.utils.asserter.assertNotNull(this.onApply,"onApply" + Errors.CANT_NULL);
             this.onApply();
         }

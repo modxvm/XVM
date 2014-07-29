@@ -13,7 +13,8 @@ package net.wg.gui.components.common.cursor.base
     public class DroppingCursor extends ResizingCursor
     {
         
-        public function DroppingCursor() {
+        public function DroppingCursor()
+        {
             this._dropObjects = new Dictionary(true);
             super();
         }
@@ -32,14 +33,16 @@ package net.wg.gui.components.common.cursor.base
         
         private var _afterDropHandlersAdded:Boolean = false;
         
-        public function registerDragging(param1:IDragDropHitArea, param2:String = null) : void {
+        public function registerDragging(param1:IDragDropHitArea, param2:String = null) : void
+        {
             if(param1 is IDroppable)
             {
                 this.registerDrop(IDroppable(param1),param2);
             }
         }
         
-        public function unRegisterDragging(param1:IDragDropHitArea) : void {
+        public function unRegisterDragging(param1:IDragDropHitArea) : void
+        {
             if(param1)
             {
                 if(param1 is IDroppable)
@@ -49,7 +52,8 @@ package net.wg.gui.components.common.cursor.base
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:DropInfo = null;
             for each(_loc1_ in this._dropObjects)
             {
@@ -62,11 +66,13 @@ package net.wg.gui.components.common.cursor.base
             super.onDispose();
         }
         
-        override protected function cursorIsFree() : Boolean {
+        override protected function cursorIsFree() : Boolean
+        {
             return (super.cursorIsFree()) && !this._isOnDropping;
         }
         
-        private function removeAfterDropUpHandlers(param1:Function) : void {
+        private function removeAfterDropUpHandlers(param1:Function) : void
+        {
             assertNotNull(this._dropSenderInfo,"_dropSenderInfo");
             assert(this._afterDropHandlersAdded,"must be added for removing.");
             this._afterDropHandlersAdded = false;
@@ -74,7 +80,8 @@ package net.wg.gui.components.common.cursor.base
             this._dropSenderInfo.hit.removeEventListener(MouseEvent.MOUSE_UP,param1);
         }
         
-        private function addAfterDropUpHandlers(param1:Function) : void {
+        private function addAfterDropUpHandlers(param1:Function) : void
+        {
             assertNotNull(this._dropSenderInfo,"_dropSenderInfo");
             assert(!this._afterDropHandlersAdded,"must be removed for adding.");
             this._afterDropHandlersAdded = true;
@@ -82,7 +89,8 @@ package net.wg.gui.components.common.cursor.base
             stage.addEventListener(MouseEvent.MOUSE_UP,param1,false,AFTER_DROP_PRIORITY);
         }
         
-        private function onAfterDrop() : void {
+        private function onAfterDrop() : void
+        {
             forceSetCursor(Cursors.DRAG_OPEN);
             this.setDropping(false);
             var _loc1_:InteractiveObject = this._dropSenderInfo.container.getHitArea();
@@ -92,7 +100,8 @@ package net.wg.gui.components.common.cursor.base
             this._dropItem = null;
         }
         
-        private function registerDrop(param1:IDroppable, param2:String = null) : void {
+        private function registerDrop(param1:IDroppable, param2:String = null) : void
+        {
             var _loc3_:DropInfo = new DropInfo(param1,param2);
             assert(this._dropObjects[_loc3_.hit] == undefined,Errors.ALREADY_REGISTERED);
             this._dropObjects[_loc3_.hit] = _loc3_;
@@ -101,7 +110,8 @@ package net.wg.gui.components.common.cursor.base
             _loc3_.hit.addEventListener(MouseEvent.MOUSE_DOWN,this.mouseDnDropHandler);
         }
         
-        private function unRegisterDrop(param1:IDroppable) : void {
+        private function unRegisterDrop(param1:IDroppable) : void
+        {
             if(this._dropSenderInfo)
             {
                 if(this._dropSenderInfo.container == param1)
@@ -121,10 +131,12 @@ package net.wg.gui.components.common.cursor.base
             _loc2_.removeEventListener(MouseEvent.ROLL_OUT,this.rollOutDropHandler,true);
             _loc2_.removeEventListener(MouseEvent.MOUSE_DOWN,this.mouseDnDropHandler);
             delete this._dropObjects[_loc2_];
+            true;
             _loc3_.dispose();
         }
         
-        private function addDropListeners(param1:DropInfo) : void {
+        private function addDropListeners(param1:DropInfo) : void
+        {
             var _loc3_:InteractiveObject = null;
             var _loc2_:Vector.<InteractiveObject> = param1.container.getDropGroup();
             if(_loc2_ != null)
@@ -136,7 +148,8 @@ package net.wg.gui.components.common.cursor.base
             }
         }
         
-        private function removeDropListeners(param1:DropInfo) : void {
+        private function removeDropListeners(param1:DropInfo) : void
+        {
             var _loc3_:InteractiveObject = null;
             var _loc2_:Vector.<InteractiveObject> = param1.container.getDropGroup();
             if(_loc2_ != null)
@@ -148,7 +161,8 @@ package net.wg.gui.components.common.cursor.base
             }
         }
         
-        private function getDropInfoBySlot(param1:InteractiveObject) : DropInfo {
+        private function getDropInfoBySlot(param1:InteractiveObject) : DropInfo
+        {
             var _loc2_:DropInfo = null;
             var _loc3_:Vector.<InteractiveObject> = null;
             for each(_loc2_ in this._dropObjects)
@@ -162,7 +176,8 @@ package net.wg.gui.components.common.cursor.base
             throw new ArgumentException("Unknown slot: " + param1);
         }
         
-        private function setDropping(param1:Boolean) : void {
+        private function setDropping(param1:Boolean) : void
+        {
             if(param1 != this._isOnDropping)
             {
                 this._isOnDropping = param1;
@@ -170,18 +185,21 @@ package net.wg.gui.components.common.cursor.base
             }
         }
         
-        private function getDropInfoByHit(param1:InteractiveObject) : DropInfo {
+        private function getDropInfoByHit(param1:InteractiveObject) : DropInfo
+        {
             return this._dropObjects[param1];
         }
         
-        private function onEnterToDropMode(param1:MouseEvent) : void {
+        private function onEnterToDropMode(param1:MouseEvent) : void
+        {
             if(param1.target is IDropItem)
             {
                 setCursor(Cursors.DRAG_OPEN);
             }
         }
         
-        private function rollOutDropHandler(param1:MouseEvent) : void {
+        private function rollOutDropHandler(param1:MouseEvent) : void
+        {
             assertLifeCycle();
             if(!this._isOnDropping)
             {
@@ -189,7 +207,8 @@ package net.wg.gui.components.common.cursor.base
             }
         }
         
-        private function onDropHandler(param1:MouseEvent) : void {
+        private function onDropHandler(param1:MouseEvent) : void
+        {
             assertNotNull(this._dropSenderInfo,"_dropSenderInfo");
             assertNotNull(this._dropItem,"_dropItem");
             var _loc2_:InteractiveObject = InteractiveObject(param1.currentTarget);
@@ -200,7 +219,8 @@ package net.wg.gui.components.common.cursor.base
             _loc4_.container.onEndDrop(_loc5_,_loc2_,this._dropItem,_loc3_);
         }
         
-        private function mouseDnDropHandler(param1:MouseEvent) : void {
+        private function mouseDnDropHandler(param1:MouseEvent) : void
+        {
             var _loc2_:DropInfo = null;
             var _loc3_:InteractiveObject = null;
             var _loc4_:InteractiveObject = null;
@@ -226,7 +246,8 @@ package net.wg.gui.components.common.cursor.base
             }
         }
         
-        private function mouseUpDropHdlr(param1:MouseEvent) : void {
+        private function mouseUpDropHdlr(param1:MouseEvent) : void
+        {
             assertLifeCycle();
             this._dropSenderInfo.hit.removeEventListener(MouseEvent.MOUSE_MOVE,this.droppingHandler);
             var _loc2_:InteractiveObject = this._dropSenderInfo.container.getHitArea();
@@ -239,13 +260,15 @@ package net.wg.gui.components.common.cursor.base
             this.onAfterDrop();
         }
         
-        private function mouseUpHdlr(param1:MouseEvent) : void {
+        private function mouseUpHdlr(param1:MouseEvent) : void
+        {
             this._dropSenderInfo.hit.removeEventListener(MouseEvent.MOUSE_MOVE,this.droppingHandler);
             this.removeAfterDropUpHandlers(this.mouseUpHdlr);
             this.onAfterDrop();
         }
         
-        private function droppingHandler(param1:MouseEvent) : void {
+        private function droppingHandler(param1:MouseEvent) : void
+        {
             var _loc3_:InteractiveObject = null;
             var _loc4_:* = false;
             assertLifeCycle();
@@ -276,11 +299,13 @@ import net.wg.data.constants.Cursors;
 class DropInfo extends BaseInfo
 {
     
-    function DropInfo(param1:IDroppable, param2:String) {
+    function DropInfo(param1:IDroppable, param2:String)
+    {
         super(param1,param2,Cursors.DRAG_CLOSE);
     }
     
-    public function get container() : IDroppable {
+    public function get container() : IDroppable
+    {
         return IDroppable(getContainer());
     }
 }

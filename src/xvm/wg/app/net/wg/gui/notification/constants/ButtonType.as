@@ -5,7 +5,8 @@ package net.wg.gui.notification.constants
     public class ButtonType extends Object
     {
         
-        public function ButtonType() {
+        public function ButtonType()
+        {
             super();
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.notification.constants
         
         public static var CANCEL:String = "cancel";
         
-        public static function getLinkageByType(param1:String) : String {
+        public static function getLinkageByType(param1:String) : String
+        {
             var _loc2_:String = null;
             switch(param1)
             {

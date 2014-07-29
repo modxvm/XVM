@@ -3,7 +3,8 @@ package net.wg.gui.lobby.profile
     public class ProfileInvalidationTypes extends Object
     {
         
-        public function ProfileInvalidationTypes() {
+        public function ProfileInvalidationTypes()
+        {
             super();
         }
         

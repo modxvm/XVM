@@ -5,7 +5,8 @@ package net.wg.data
     public class StrCaseProperties extends Object implements IStrCaseProperties
     {
         
-        public function StrCaseProperties() {
+        public function StrCaseProperties()
+        {
             super();
         }
     }

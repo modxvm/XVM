@@ -5,7 +5,8 @@ package scaleform.clik.events
     public class IndexEvent extends Event
     {
         
-        public function IndexEvent(param1:String, param2:Boolean = false, param3:Boolean = true, param4:int = -1, param5:int = -1, param6:Object = null) {
+        public function IndexEvent(param1:String, param2:Boolean = false, param3:Boolean = true, param4:int = -1, param5:int = -1, param6:Object = null)
+        {
             super(param1,param2,param3);
             this.index = param4;
             this.lastIndex = param5;
@@ -20,11 +21,13 @@ package scaleform.clik.events
         
         public var data:Object;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new IndexEvent(type,bubbles,cancelable,this.index,this.lastIndex,this.data);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("IndexEvent","type","bubbles","cancelable","index","lastIndex","data");
         }
     }

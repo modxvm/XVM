@@ -14,7 +14,8 @@ package net.wg.gui.lobby.window
     public class ExchangeCurrencyWindow extends BaseExchangeWindow implements IExchangeWindowMeta
     {
         
-        public function ExchangeCurrencyWindow() {
+        public function ExchangeCurrencyWindow()
+        {
             super();
             isModal = false;
             canResize = false;
@@ -64,7 +65,8 @@ package net.wg.gui.lobby.window
         
         private var totalSecondaryCurrency:Number = 0;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler);
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,cancelBtnClickHandler);
@@ -73,7 +75,8 @@ package net.wg.gui.lobby.window
             this.nsSecondaryCurrency.addEventListener(IndexEvent.INDEX_CHANGE,this.nsSecondaryCurrencyChangeHandler);
         }
         
-        override public function as_setPrimaryCurrency(param1:Number) : void {
+        override public function as_setPrimaryCurrency(param1:Number) : void
+        {
             if(totalPrimaryCurrency != param1)
             {
                 totalPrimaryCurrency = param1;
@@ -86,21 +89,25 @@ package net.wg.gui.lobby.window
             }
         }
         
-        private function nsSecondaryCurrencyChangeHandler(param1:IndexEvent) : void {
+        private function nsSecondaryCurrencyChangeHandler(param1:IndexEvent) : void
+        {
             this.selectedPrimaryCurrency = Math.floor(this.nsSecondaryCurrency.value / actualRate);
             invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
         }
         
-        private function nsFirstCurrencyChangeHandler(param1:IndexEvent) : void {
+        private function nsFirstCurrencyChangeHandler(param1:IndexEvent) : void
+        {
             this.selectedPrimaryCurrency = this.nsPrimaryCurrency.value;
             invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
         }
         
-        protected function submitBtnClickHandler(param1:Event) : void {
+        protected function submitBtnClickHandler(param1:Event) : void
+        {
             exchangeS(this.selectedPrimaryCurrency);
         }
         
-        public function as_setSecondaryCurrency(param1:Number) : void {
+        public function as_setSecondaryCurrency(param1:Number) : void
+        {
             if(this.totalSecondaryCurrency != param1)
             {
                 this.totalSecondaryCurrency = param1;
@@ -108,7 +115,8 @@ package net.wg.gui.lobby.window
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(TOTAL_SECONDARY_CURRENCY_CHANGED))
             {
@@ -129,18 +137,21 @@ package net.wg.gui.lobby.window
             }
         }
         
-        protected function isSubmitOperationAllowed() : Boolean {
+        protected function isSubmitOperationAllowed() : Boolean
+        {
             return this.selectedPrimaryCurrency > 0;
         }
         
-        protected function applyResultUpdating() : void {
+        protected function applyResultUpdating() : void
+        {
             var _loc1_:ILocale = App.utils.locale;
             var _loc2_:Number = totalPrimaryCurrency - this.selectedPrimaryCurrency;
             this.resultPrimaryCurrencyText.text = _loc1_.gold(_loc2_);
             this.resultSecondaryCurrencyText.text = _loc1_.gold(this.totalSecondaryCurrency + this.selectedPrimaryCurrency * actualRate);
         }
         
-        override protected function applyRatesChanges() : void {
+        override protected function applyRatesChanges() : void
+        {
             this.nsPrimaryCurrency.stepSize = this._exchangeStep;
             this.nsSecondaryCurrency.stepSize = actualRate * this._exchangeStep;
             this.headerMC.setRates(rate,actionRate);
@@ -148,16 +159,19 @@ package net.wg.gui.lobby.window
             invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
         }
         
-        override protected function applyPrimaryCurrencyChange() : void {
+        override protected function applyPrimaryCurrencyChange() : void
+        {
             this.onHandPrimaryCurrencyText.text = App.utils.locale.gold(totalPrimaryCurrency);
             this.isUpdateResult = true;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler);
             this.cancelBtn.removeEventListener(ButtonEvent.CLICK,cancelBtnClickHandler);
@@ -179,20 +193,24 @@ package net.wg.gui.lobby.window
             }
         }
         
-        public function get exchangeStep() : Number {
+        public function get exchangeStep() : Number
+        {
             return this._exchangeStep;
         }
         
-        public function set exchangeStep(param1:Number) : void {
+        public function set exchangeStep(param1:Number) : void
+        {
             this._exchangeStep = param1;
             invalidate(RATES_INVALID);
         }
         
-        public function get selectedPrimaryCurrency() : Number {
+        public function get selectedPrimaryCurrency() : Number
+        {
             return this._selectedPrimaryCurrency;
         }
         
-        public function set selectedPrimaryCurrency(param1:Number) : void {
+        public function set selectedPrimaryCurrency(param1:Number) : void
+        {
             if(this._selectedPrimaryCurrency == param1)
             {
                 return;
@@ -200,7 +218,8 @@ package net.wg.gui.lobby.window
             this._selectedPrimaryCurrency = param1;
         }
         
-        public function as_setWalletStatus(param1:Object) : void {
+        public function as_setWalletStatus(param1:Object) : void
+        {
             App.utils.voMgr.walletStatusVO.update(param1);
             var _loc2_:* = false;
             if((this.onHandHaveNotGold) && (this.resultHaveNotGold))

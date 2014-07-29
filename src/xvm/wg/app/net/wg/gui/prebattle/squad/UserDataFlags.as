@@ -3,7 +3,8 @@ package net.wg.gui.prebattle.squad
     public class UserDataFlags extends Object
     {
         
-        public function UserDataFlags() {
+        public function UserDataFlags()
+        {
             super();
         }
         

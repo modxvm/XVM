@@ -6,13 +6,15 @@ package net.wg.gui.rally.controls
     public class ReadyMsg extends MovieClip
     {
         
-        public function ReadyMsg() {
+        public function ReadyMsg()
+        {
             super();
         }
         
         public var tf:TextField;
         
-        public function setMessage(param1:String, param2:String) : void {
+        public function setMessage(param1:String, param2:String) : void
+        {
             gotoAndStop(param2);
             this.tf.text = param1;
         }

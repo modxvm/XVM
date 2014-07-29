@@ -10,7 +10,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipHistoricalModules extends ToolTipSpecial
     {
         
-        public function ToolTipHistoricalModules() {
+        public function ToolTipHistoricalModules()
+        {
             this.moduleItems = [];
             super();
             this.headerTF = content.headerTF;
@@ -26,7 +27,8 @@ package net.wg.gui.components.tooltips
         
         private var moduleItems:Array;
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc1_:Separator = null;
             var _loc3_:ModuleItem = null;
             var _loc4_:ModuleVO = null;
@@ -64,13 +66,15 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeModel();
             this.clearModules();
             super.onDispose();
         }
         
-        private function clearModules() : void {
+        private function clearModules() : void
+        {
             var _loc1_:ModuleItem = null;
             if(this.moduleItems)
             {
@@ -82,7 +86,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        private function disposeModel() : void {
+        private function disposeModel() : void
+        {
             if(this.model)
             {
                 this.model.dispose();

@@ -6,13 +6,15 @@ package net.wg.gui.components.common.containers
     public class EqualGapsHorizontalLayout extends GroupLayout
     {
         
-        public function EqualGapsHorizontalLayout() {
+        public function EqualGapsHorizontalLayout()
+        {
             super();
         }
         
         private var _availableSize:Number = 0;
         
-        override public function invokeLayout() : Object {
+        override public function invokeLayout() : Object
+        {
             var _loc1_:DisplayObject = null;
             var _loc6_:uint = 0;
             var _loc2_:int = _target.numChildren;
@@ -38,11 +40,13 @@ package net.wg.gui.components.common.containers
             return new Point(_loc7_,_loc3_);
         }
         
-        public function get availableSize() : Number {
+        public function get availableSize() : Number
+        {
             return this._availableSize;
         }
         
-        public function set availableSize(param1:Number) : void {
+        public function set availableSize(param1:Number) : void
+        {
             this._availableSize = param1;
         }
     }

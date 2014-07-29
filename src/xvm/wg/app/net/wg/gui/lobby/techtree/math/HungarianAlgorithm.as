@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.math
     public final class HungarianAlgorithm extends Object
     {
         
-        public function HungarianAlgorithm() {
+        public function HungarianAlgorithm()
+        {
             super();
         }
         
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.techtree.math
         
         private var path:Array;
         
-        public function makeCostMatrix(param1:Array, param2:Function) : Array {
+        public function makeCostMatrix(param1:Array, param2:Function) : Array
+        {
             var _loc5_:Array = null;
             var _loc6_:Array = null;
             var _loc7_:* = NaN;
@@ -45,7 +47,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc3_;
         }
         
-        public function compute(param1:Array) : Array {
+        public function compute(param1:Array) : Array
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -54,7 +57,8 @@ package net.wg.gui.lobby.techtree.math
             throw new Error("Not decompiled due to error");
         }
         
-        private function padMatrix(param1:Array, param2:Number = 0) : Array {
+        private function padMatrix(param1:Array, param2:Number = 0) : Array
+        {
             var _loc5_:* = NaN;
             var _loc6_:* = NaN;
             var _loc7_:Array = null;
@@ -97,7 +101,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc8_;
         }
         
-        private function makeMatrix(param1:Number, param2:Number) : Array {
+        private function makeMatrix(param1:Number, param2:Number) : Array
+        {
             var _loc4_:Array = null;
             var _loc6_:* = NaN;
             var _loc3_:Array = [];
@@ -117,7 +122,8 @@ package net.wg.gui.lobby.techtree.math
             return _loc3_;
         }
         
-        private function clearCovers() : void {
+        private function clearCovers() : void
+        {
             var _loc1_:Number = 0;
             while(_loc1_ < this.n)
             {
@@ -127,7 +133,8 @@ package net.wg.gui.lobby.techtree.math
             }
         }
         
-        private function findZero() : Object {
+        private function findZero() : Object
+        {
             var _loc5_:* = NaN;
             var _loc1_:Number = -1;
             var _loc2_:Number = -1;
@@ -154,13 +161,13 @@ package net.wg.gui.lobby.techtree.math
                     _loc4_ = true;
                 }
             }
-            return {
-                "row":_loc1_,
-                "col":_loc2_
-            };
+            return {"row":_loc1_,
+            "col":_loc2_
+        };
     }
     
-    private function findSmallest() : Number {
+    private function findSmallest() : Number
+    {
         var _loc3_:* = NaN;
         var _loc1_:Number = Number.MAX_VALUE;
         var _loc2_:Number = 0;
@@ -183,7 +190,8 @@ package net.wg.gui.lobby.techtree.math
         return _loc1_;
     }
     
-    private function findStarInRow(param1:Number) : Number {
+    private function findStarInRow(param1:Number) : Number
+    {
         var _loc2_:Number = -1;
         var _loc3_:Number = 0;
         while(_loc3_ < this.n)
@@ -198,7 +206,8 @@ package net.wg.gui.lobby.techtree.math
         return _loc2_;
     }
     
-    private function findStarInCol(param1:Number) : Number {
+    private function findStarInCol(param1:Number) : Number
+    {
         var _loc2_:Number = -1;
         var _loc3_:Number = 0;
         while(_loc3_ < this.n)
@@ -213,7 +222,8 @@ package net.wg.gui.lobby.techtree.math
         return _loc2_;
     }
     
-    private function findPrimeInRow(param1:Number) : Number {
+    private function findPrimeInRow(param1:Number) : Number
+    {
         var _loc2_:Number = -1;
         var _loc3_:Number = 0;
         while(_loc3_ < this.n)
@@ -228,7 +238,8 @@ package net.wg.gui.lobby.techtree.math
         return _loc2_;
     }
     
-    private function convertPath(param1:Array, param2:Number) : void {
+    private function convertPath(param1:Array, param2:Number) : void
+    {
         var _loc3_:Number = 0;
         while(_loc3_ < param2 + 1)
         {
@@ -244,7 +255,8 @@ package net.wg.gui.lobby.techtree.math
         }
     }
     
-    private function erasePrimes() : void {
+    private function erasePrimes() : void
+    {
         var _loc2_:* = NaN;
         var _loc1_:Number = 0;
         while(_loc1_ < this.n)
@@ -262,7 +274,8 @@ package net.wg.gui.lobby.techtree.math
         }
     }
     
-    private function step1() : Number {
+    private function step1() : Number
+    {
         var _loc2_:Array = null;
         var _loc3_:* = NaN;
         var _loc4_:* = NaN;
@@ -288,7 +301,8 @@ package net.wg.gui.lobby.techtree.math
         return 2;
     }
     
-    private function step2() : Number {
+    private function step2() : Number
+    {
         var _loc2_:Array = null;
         var _loc3_:* = NaN;
         var _loc1_:Number = 0;
@@ -312,7 +326,8 @@ package net.wg.gui.lobby.techtree.math
         return 3;
     }
     
-    private function step3() : Number {
+    private function step3() : Number
+    {
         var _loc3_:* = NaN;
         var _loc1_:Number = 0;
         var _loc2_:Number = 0;
@@ -333,7 +348,8 @@ package net.wg.gui.lobby.techtree.math
         return _loc1_ >= this.n?7:4;
     }
     
-    private function step4() : Number {
+    private function step4() : Number
+    {
         var _loc6_:Object = null;
         var _loc1_:Number = 0;
         var _loc2_:* = false;
@@ -372,7 +388,8 @@ package net.wg.gui.lobby.techtree.math
         return _loc1_;
     }
     
-    private function step5() : Number {
+    private function step5() : Number
+    {
         var _loc3_:* = NaN;
         var _loc4_:* = NaN;
         var _loc1_:Number = 0;
@@ -406,7 +423,8 @@ package net.wg.gui.lobby.techtree.math
         return 3;
     }
     
-    private function step6() : Number {
+    private function step6() : Number
+    {
         var _loc3_:* = NaN;
         var _loc1_:Number = this.findSmallest();
         var _loc2_:Number = 0;

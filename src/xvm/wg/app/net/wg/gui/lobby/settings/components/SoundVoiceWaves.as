@@ -6,7 +6,8 @@ package net.wg.gui.lobby.settings.components
     public class SoundVoiceWaves extends UIComponent
     {
         
-        public function SoundVoiceWaves() {
+        public function SoundVoiceWaves()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.lobby.settings.components
         
         private var finishFrame:uint;
         
-        public function speak(param1:Boolean) : void {
+        public function speak(param1:Boolean) : void
+        {
             if(param1)
             {
                 this.step = 1;
@@ -32,7 +34,8 @@ package net.wg.gui.lobby.settings.components
             this.addEventListener(Event.ENTER_FRAME,this.anim);
         }
         
-        private function anim(param1:Event) : void {
+        private function anim(param1:Event) : void
+        {
             this.gotoAndStop(this.currentFrame + this.step);
             if(this.currentFrame == this.finishFrame)
             {

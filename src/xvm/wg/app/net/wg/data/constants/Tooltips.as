@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class Tooltips extends Object
     {
         
-        public function Tooltips() {
+        public function Tooltips()
+        {
             super();
         }
         

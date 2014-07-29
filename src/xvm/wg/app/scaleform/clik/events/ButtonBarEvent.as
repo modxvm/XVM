@@ -6,7 +6,8 @@ package scaleform.clik.events
     public class ButtonBarEvent extends Event
     {
         
-        public function ButtonBarEvent(param1:String, param2:Boolean = false, param3:Boolean = true, param4:int = -1, param5:Button = null) {
+        public function ButtonBarEvent(param1:String, param2:Boolean = false, param3:Boolean = true, param4:int = -1, param5:Button = null)
+        {
             super(param1,param2,param3);
             this.index = param4;
             this.renderer = param5;
@@ -18,11 +19,13 @@ package scaleform.clik.events
         
         public var renderer:Button;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new ButtonBarEvent(type,bubbles,cancelable,this.index,this.renderer);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("ButtonBarEvent","type","bubbles","cancelable","index","renderer");
         }
     }

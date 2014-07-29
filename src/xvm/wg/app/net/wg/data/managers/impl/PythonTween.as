@@ -8,7 +8,8 @@ package net.wg.data.managers.impl
     public class PythonTween extends PythonTweenMeta implements ITween, IPythonMeta
     {
         
-        public function PythonTween(param1:ITweenPropertiesVO) {
+        public function PythonTween(param1:ITweenPropertiesVO)
+        {
             super();
             props = param1;
         }

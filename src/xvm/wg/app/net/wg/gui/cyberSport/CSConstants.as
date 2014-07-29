@@ -3,7 +3,8 @@ package net.wg.gui.cyberSport
     public class CSConstants extends Object
     {
         
-        public function CSConstants() {
+        public function CSConstants()
+        {
             super();
         }
         

@@ -5,7 +5,8 @@ package net.wg.gui.lobby.window
     public class ProfileWindowInitVO extends DAAPIDataClass
     {
         
-        public function ProfileWindowInitVO(param1:Object) {
+        public function ProfileWindowInitVO(param1:Object)
+        {
             super(param1);
         }
         

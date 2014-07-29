@@ -12,7 +12,8 @@ package net.wg.gui.lobby.training
     public class PlayerElement extends UIComponent implements IUpdatable
     {
         
-        public function PlayerElement() {
+        public function PlayerElement()
+        {
             super();
         }
         
@@ -36,12 +37,14 @@ package net.wg.gui.lobby.training
         
         private var defColorTrans:ColorTransform;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.defColorTrans = this.iconLoader.transform.colorTransform;
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             if(param1)
             {
                 this.data = TrainingRoomRendererVO(param1);
@@ -49,7 +52,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.iconLoader.dispose();
             this.iconLoader = null;
             this.nameField.dispose();
@@ -66,7 +70,8 @@ package net.wg.gui.lobby.training
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:ColorTransform = null;
             if(isInvalid(InvalidationType.DATA))
             {

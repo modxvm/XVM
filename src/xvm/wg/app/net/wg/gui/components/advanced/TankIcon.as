@@ -11,8 +11,8 @@ package net.wg.gui.components.advanced
     public class TankIcon extends UIComponent
     {
         
-        public function TankIcon() {
-            this.DIRTY_FLAGS = [this._showMultyXpDirty,this._showXpDirty,this._showNameDirty,this._nationDirty,this._imageDirty,this._tankTypeDirty,this._levelDirty,this._multyXpValDirty,this._xpValDirty,this._tankNameDirty,this._isEliteDirty,this._isPremiumDirty];
+        public function TankIcon()
+        {
             super();
         }
         
@@ -90,9 +90,10 @@ package net.wg.gui.components.advanced
         
         private var _isPremiumDirty:Boolean = true;
         
-        private var DIRTY_FLAGS:Array;
+        public var DIRTY_FLAGS:Array = [_showMultyXpDirty,_showXpDirty,_showNameDirty,_nationDirty,_imageDirty,_tankTypeDirty,_levelDirty,_multyXpValDirty,_xpValDirty,_tankNameDirty,_isEliteDirty,_isPremiumDirty];
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.flag = null;
             this.iconLoader.dispose();
             this.iconLoader = null;
@@ -107,11 +108,13 @@ package net.wg.gui.components.advanced
             super.onDispose();
         }
         
-        public function get favorite() : Boolean {
+        public function get favorite() : Boolean
+        {
             return this._favorite;
         }
         
-        public function set favorite(param1:Boolean) : void {
+        public function set favorite(param1:Boolean) : void
+        {
             if(this._favorite == param1)
             {
                 return;
@@ -121,41 +124,49 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get showMultyXp() : Boolean {
+        public function get showMultyXp() : Boolean
+        {
             return this._showMultyXp;
         }
         
-        public function set showMultyXp(param1:Boolean) : void {
+        public function set showMultyXp(param1:Boolean) : void
+        {
             this._showMultyXp = param1;
             this._showMultyXpDirty = true;
             invalidate();
         }
         
-        public function get showXp() : Boolean {
+        public function get showXp() : Boolean
+        {
             return this._showXp;
         }
         
-        public function set showXp(param1:Boolean) : void {
+        public function set showXp(param1:Boolean) : void
+        {
             this._showXp = param1;
             this._showXpDirty = true;
             invalidate();
         }
         
-        public function get showName() : Boolean {
+        public function get showName() : Boolean
+        {
             return this._showName;
         }
         
-        public function set showName(param1:Boolean) : void {
+        public function set showName(param1:Boolean) : void
+        {
             this._showName = param1;
             this._showNameDirty = true;
             invalidate();
         }
         
-        public function get nation() : Number {
+        public function get nation() : Number
+        {
             return this._nation;
         }
         
-        public function set nation(param1:Number) : void {
+        public function set nation(param1:Number) : void
+        {
             if(param1 < 0 || param1 == this._nation)
             {
                 return;
@@ -166,11 +177,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get nationName() : String {
+        public function get nationName() : String
+        {
             return this._nationName;
         }
         
-        public function set nationName(param1:String) : void {
+        public function set nationName(param1:String) : void
+        {
             if(!param1 || param1 == this._nationName)
             {
                 return;
@@ -181,11 +194,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get image() : String {
+        public function get image() : String
+        {
             return this._image;
         }
         
-        public function set image(param1:String) : void {
+        public function set image(param1:String) : void
+        {
             if(!param1 || param1 == this._image)
             {
                 return;
@@ -195,11 +210,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get tankType() : String {
+        public function get tankType() : String
+        {
             return this._tankType;
         }
         
-        public function set tankType(param1:String) : void {
+        public function set tankType(param1:String) : void
+        {
             if(!param1 || param1 == this._tankType)
             {
                 return;
@@ -209,11 +226,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get level() : Number {
+        public function get level() : Number
+        {
             return this._level;
         }
         
-        public function set level(param1:Number) : void {
+        public function set level(param1:Number) : void
+        {
             if(param1 == this._level)
             {
                 return;
@@ -223,11 +242,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get multyXpVal() : Number {
+        public function get multyXpVal() : Number
+        {
             return this._multyXpVal;
         }
         
-        public function set multyXpVal(param1:Number) : void {
+        public function set multyXpVal(param1:Number) : void
+        {
             if(param1 == this._multyXpVal)
             {
                 return;
@@ -237,11 +258,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get xpVal() : Number {
+        public function get xpVal() : Number
+        {
             return this._xpVal;
         }
         
-        public function set xpVal(param1:Number) : void {
+        public function set xpVal(param1:Number) : void
+        {
             if(param1 == this._xpVal)
             {
                 return;
@@ -251,11 +274,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get tankName() : String {
+        public function get tankName() : String
+        {
             return this._tankName;
         }
         
-        public function set tankName(param1:String) : void {
+        public function set tankName(param1:String) : void
+        {
             if(param1 == this._tankName)
             {
                 return;
@@ -265,11 +290,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get isElite() : Boolean {
+        public function get isElite() : Boolean
+        {
             return this._isElite;
         }
         
-        public function set isElite(param1:Boolean) : void {
+        public function set isElite(param1:Boolean) : void
+        {
             if(param1 == this._isElite)
             {
                 return;
@@ -279,11 +306,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        public function get isPremium() : Boolean {
+        public function get isPremium() : Boolean
+        {
             return this._isPremium;
         }
         
-        public function set isPremium(param1:Boolean) : void {
+        public function set isPremium(param1:Boolean) : void
+        {
             if(param1 == this._isPremium)
             {
                 return;
@@ -293,11 +322,13 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.flag.visible = true;
             if(((this._multyXpValDirty) || (this._showMultyXpDirty)) && (this.multyXp))
@@ -361,7 +392,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function updateTankType() : void {
+        private function updateTankType() : void
+        {
             if(this.tankType)
             {
                 this.tankTypeMc.gotoAndStop(this.tankType + (this.isElite?"_elite":""));
@@ -376,7 +408,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function updateMultyXp() : void {
+        private function updateMultyXp() : void
+        {
             if(this.showMultyXp)
             {
                 this.multyXp.visible = this.multyXpVal >= 2;
@@ -400,7 +433,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function updateTankName() : void {
+        private function updateTankName() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;

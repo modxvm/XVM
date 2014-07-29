@@ -9,7 +9,8 @@ package net.wg.gui.tutorial.controls
     public class HintList extends UIComponent
     {
         
-        public function HintList() {
+        public function HintList()
+        {
             this._dataProvider = [];
             this.items = [];
             super();
@@ -25,26 +26,31 @@ package net.wg.gui.tutorial.controls
         
         private var items:Array;
         
-        public function get dataProvider() : Array {
+        public function get dataProvider() : Array
+        {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:Array) : void {
+        public function set dataProvider(param1:Array) : void
+        {
             this._dataProvider = param1;
             invalidateData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.removeItems();
             this._dataProvider = this._dataProvider.splice(0,this._dataProvider.length);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -53,7 +59,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        public function relayout() : void {
+        public function relayout() : void
+        {
             var _loc2_:HintBaseItemRenderer = null;
             var _loc1_:Number = 0;
             for each(_loc2_ in this.items)
@@ -63,7 +70,8 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        private function repopulate() : void {
+        private function repopulate() : void
+        {
             var _loc1_:Object = null;
             var _loc2_:HintBaseItemRenderer = null;
             this.removeItems();
@@ -77,14 +85,16 @@ package net.wg.gui.tutorial.controls
             }
         }
         
-        private function onItemClick(param1:MouseEvent) : void {
+        private function onItemClick(param1:MouseEvent) : void
+        {
             var _loc2_:HintBaseItemRenderer = param1.currentTarget as HintBaseItemRenderer;
             var _loc3_:ListEvent = new ListEvent(ListEvent.ITEM_CLICK);
             _loc3_.itemData = _loc2_.data;
             dispatchEvent(_loc3_);
         }
         
-        private function createRenderer(param1:Object) : HintBaseItemRenderer {
+        private function createRenderer(param1:Object) : HintBaseItemRenderer
+        {
             var _loc2_:HintBaseItemRenderer = null;
             var _loc3_:* = "";
             switch(param1.type)
@@ -101,7 +111,8 @@ package net.wg.gui.tutorial.controls
             return _loc2_;
         }
         
-        private function removeItems() : void {
+        private function removeItems() : void
+        {
             var _loc1_:HintBaseItemRenderer = null;
             for each(_loc1_ in this.items)
             {

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.demonstration.data
     public class DemonstratorVO extends DAAPIDataClass
     {
         
-        public function DemonstratorVO(param1:Object) {
+        public function DemonstratorVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -18,39 +19,48 @@ package net.wg.gui.lobby.demonstration.data
         
         private var _nations:DataProvider;
         
-        public function get standard() : DataProvider {
+        public function get standard() : DataProvider
+        {
             return this._standard;
         }
         
-        public function set standard(param1:DataProvider) : void {
+        public function set standard(param1:DataProvider) : void
+        {
             this._standard = param1;
         }
         
-        public function get assault() : DataProvider {
+        public function get assault() : DataProvider
+        {
             return this._assault;
         }
         
-        public function set assault(param1:DataProvider) : void {
+        public function set assault(param1:DataProvider) : void
+        {
             this._assault = param1;
         }
         
-        public function get encounter() : DataProvider {
+        public function get encounter() : DataProvider
+        {
             return this._encounter;
         }
         
-        public function set encounter(param1:DataProvider) : void {
+        public function set encounter(param1:DataProvider) : void
+        {
             this._encounter = param1;
         }
         
-        public function get nations() : DataProvider {
+        public function get nations() : DataProvider
+        {
             return this._nations;
         }
         
-        public function set nations(param1:DataProvider) : void {
+        public function set nations(param1:DataProvider) : void
+        {
             this._nations = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this._standard.cleanUp();
             this._assault.cleanUp();
@@ -60,7 +70,8 @@ package net.wg.gui.lobby.demonstration.data
             this._encounter = null;
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             switch(param1)
             {
                 case "standard":
@@ -74,7 +85,8 @@ package net.wg.gui.lobby.demonstration.data
             }
         }
         
-        private function convertToDataProvider(param1:Array) : DataProvider {
+        private function convertToDataProvider(param1:Array) : DataProvider
+        {
             var _loc3_:Object = null;
             var _loc2_:DataProvider = new DataProvider();
             for each(_loc3_ in param1)

@@ -5,7 +5,8 @@ package net.wg.gui.components.windows
     public class WindowEvent extends Event
     {
         
-        public function WindowEvent(param1:String, param2:Number) {
+        public function WindowEvent(param1:String, param2:Number)
+        {
             super(param1,true,false);
             this.prevValue = param2;
         }

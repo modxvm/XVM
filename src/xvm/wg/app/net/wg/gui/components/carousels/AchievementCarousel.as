@@ -7,7 +7,8 @@ package net.wg.gui.components.carousels
     public class AchievementCarousel extends CarouselBase
     {
         
-        public function AchievementCarousel() {
+        public function AchievementCarousel()
+        {
             super();
             leftArrow.enabled = rightArrow.enabled = false;
             leftArrow.visible = rightArrow.visible = false;
@@ -16,15 +17,18 @@ package net.wg.gui.components.carousels
         
         public var achievementBG:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function initPosition() : void {
+        override protected function initPosition() : void
+        {
             super.initPosition();
             if(this.achievementBG)
             {
@@ -35,7 +39,8 @@ package net.wg.gui.components.carousels
             }
         }
         
-        override protected function updateContainerPosition() : void {
+        override protected function updateContainerPosition() : void
+        {
             super.updateContainerPosition();
             if(_renderers.length <= countVisibleSlots)
             {
@@ -50,7 +55,8 @@ package net.wg.gui.components.carousels
             updateArrowsState();
         }
         
-        override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void {
+        override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void
+        {
             super.updateRenderPosition(param1,param2,param3,param4);
             if(_renderers.length <= countVisibleSlots)
             {
@@ -58,7 +64,8 @@ package net.wg.gui.components.carousels
             }
         }
         
-        override protected function populateData(param1:Array) : void {
+        override protected function populateData(param1:Array) : void
+        {
             super.populateData(param1);
             if(_renderers.length > countVisibleSlots)
             {

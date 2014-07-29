@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class BaseRallyIntroViewMeta extends BaseRallyView
     {
         
-        public function BaseRallyIntroViewMeta() {
+        public function BaseRallyIntroViewMeta()
+        {
             super();
         }
     }

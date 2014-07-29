@@ -17,7 +17,8 @@ package net.wg.infrastructure.managers.impl
     public class ContextMenuManager extends ContextMenuManagerMeta implements IContextMenuManager
     {
         
-        public function ContextMenuManager() {
+        public function ContextMenuManager()
+        {
             super();
         }
         
@@ -27,7 +28,8 @@ package net.wg.infrastructure.managers.impl
         
         private var _extraHandler:Function = null;
         
-        public function show(param1:Vector.<IContextItem>, param2:DisplayObject, param3:Function = null, param4:Object = null) : IContextMenu {
+        public function show(param1:Vector.<IContextItem>, param2:DisplayObject, param3:Function = null, param4:Object = null) : IContextMenu
+        {
             this.hide();
             this._handler = param3;
             var _loc5_:IClassFactory = App.utils.classFactory;
@@ -48,7 +50,8 @@ package net.wg.infrastructure.managers.impl
             return this._currentMenu;
         }
         
-        public function showUserContextMenu(param1:DisplayObject, param2:Object, param3:IUserContextMenuGenerator, param4:Function = null) : IContextMenu {
+        public function showUserContextMenu(param1:DisplayObject, param2:Object, param3:IUserContextMenuGenerator, param4:Function = null) : IContextMenu
+        {
             var _loc5_:PlayerInfo = null;
             var _loc6_:* = NaN;
             var _loc7_:Vector.<IContextItem> = null;
@@ -62,15 +65,18 @@ package net.wg.infrastructure.managers.impl
             return null;
         }
         
-        public function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>, param3:Object = null) : IContextMenu {
+        public function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>, param3:Object = null) : IContextMenu
+        {
             return this.show(param2,param1,this.handleUserContextMenu,param3);
         }
         
-        public function vehicleWasInBattle(param1:Number) : Boolean {
+        public function vehicleWasInBattle(param1:Number) : Boolean
+        {
             return isVehicleWasInBattleS(param1);
         }
         
-        public function hide() : void {
+        public function hide() : void
+        {
             if(this._currentMenu != null)
             {
                 if(!(this._handler == null) && (DisplayObject(this._currentMenu).hasEventListener(ContextMenuEvent.ON_ITEM_SELECT)))
@@ -96,11 +102,13 @@ package net.wg.infrastructure.managers.impl
             }
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.hide();
         }
         
-        private function handleUserContextMenu(param1:ContextMenuEvent) : void {
+        private function handleUserContextMenu(param1:ContextMenuEvent) : void
+        {
             var _loc2_:Object = param1.memberItemData;
             switch(param1.id)
             {
@@ -169,11 +177,13 @@ package net.wg.infrastructure.managers.impl
             this.hide();
         }
         
-        private function closeEventHandler(param1:Event) : void {
+        private function closeEventHandler(param1:Event) : void
+        {
             this.hide();
         }
         
-        private function onContextMenuAction(param1:ContextMenuEvent) : void {
+        private function onContextMenuAction(param1:ContextMenuEvent) : void
+        {
             if(this._handler != null)
             {
                 this._handler(param1);

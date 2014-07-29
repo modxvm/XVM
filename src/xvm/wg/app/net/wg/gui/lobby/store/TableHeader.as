@@ -5,7 +5,8 @@ package net.wg.gui.lobby.store
     public class TableHeader extends UIComponent
     {
         
-        public function TableHeader() {
+        public function TableHeader()
+        {
             super();
         }
         

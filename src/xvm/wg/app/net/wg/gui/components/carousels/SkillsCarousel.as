@@ -6,11 +6,13 @@ package net.wg.gui.components.carousels
     public class SkillsCarousel extends CarouselBase
     {
         
-        public function SkillsCarousel() {
+        public function SkillsCarousel()
+        {
             super();
         }
         
-        override protected function updateContainerPosition() : void {
+        override protected function updateContainerPosition() : void
+        {
             super.updateContainerPosition();
             if(_renderers.length <= 0)
             {
@@ -31,7 +33,8 @@ package net.wg.gui.components.carousels
             updateArrowsState();
         }
         
-        override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void {
+        override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void
+        {
             super.updateRenderPosition(param1,param2,param3,param4);
             if(_renderers.length <= countVisibleSlots)
             {

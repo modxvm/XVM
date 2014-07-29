@@ -23,7 +23,8 @@ package net.wg.gui.messenger.windows
     public class ContactsWindow extends ContactsWindowMeta implements IContactsWindowMeta
     {
         
-        public function ContactsWindow() {
+        public function ContactsWindow()
+        {
             this.friendsDP = new DAAPIDataProvider();
             this.clanDP = new DAAPIDataProvider();
             this.ignoredDP = new DAAPIDataProvider();
@@ -62,41 +63,50 @@ package net.wg.gui.messenger.windows
         
         protected var freezeSearch:Boolean;
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             this.updateFocusInViewContainer();
         }
         
-        public function as_getFriendsDP() : Object {
+        public function as_getFriendsDP() : Object
+        {
             return this.friendsDP;
         }
         
-        public function as_getClanDP() : Object {
+        public function as_getClanDP() : Object
+        {
             return this.clanDP;
         }
         
-        public function as_getIgnoredDP() : Object {
+        public function as_getIgnoredDP() : Object
+        {
             return this.ignoredDP;
         }
         
-        public function as_getMutedDP() : Object {
+        public function as_getMutedDP() : Object
+        {
             return this.mutedDP;
         }
         
-        public function as_getSearchDP() : Object {
+        public function as_getSearchDP() : Object
+        {
             return this.searchDP;
         }
         
-        public function as_setSearchResultText(param1:String) : void {
+        public function as_setSearchResultText(param1:String) : void
+        {
             this.searchResultText = param1;
         }
         
-        public function as_frozenSearchAction(param1:Boolean) : void {
+        public function as_frozenSearchAction(param1:Boolean) : void
+        {
             this.freezeSearch = param1;
             this.updateViewData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.tabs.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabSelected);
             this.viewStack.removeEventListener(ContactsFormEvent.SEARCH,this.onSearchFormEvent);
@@ -129,7 +139,8 @@ package net.wg.gui.messenger.windows
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             constraints.addElement("tabs",this.tabs,Constraints.TOP | Constraints.RIGHT | Constraints.LEFT);
@@ -142,7 +153,8 @@ package net.wg.gui.messenger.windows
             this.updateViewData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.SIZE))
             {
                 this.updateViewSize();
@@ -155,25 +167,26 @@ package net.wg.gui.messenger.windows
             super.draw();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.title = MESSENGER.LOBBY_BUTTONS_CONTACTS;
             window.contentPadding = new Padding(36,13,19,12);
             geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CONTACTS_WINDOW);
         }
         
-        private function initTabs() : void {
-            this.tabs.dataProvider = new DataProvider([{
-                "label":MESSENGER.DIALOGS_CONTACTS_TITLE,
-                "linkage":VIEW_LIST
-            },{
-            "label":MESSENGER.DIALOGS_SEARCHCONTACT_TITLE,
-            "linkage":VIEW_SEARCH
-        }]);
+        private function initTabs() : void
+        {
+            this.tabs.dataProvider = new DataProvider([{"label":MESSENGER.DIALOGS_CONTACTS_TITLE,
+            "linkage":VIEW_LIST
+        },{"label":MESSENGER.DIALOGS_SEARCHCONTACT_TITLE,
+        "linkage":VIEW_SEARCH
+    }]);
     this.tabs.selectedIndex = 0;
 }
 
-private function updateViewSize() : void {
+private function updateViewSize() : void
+{
     var _loc4_:String = null;
     var _loc5_:UIComponent = null;
     var _loc1_:Padding = window.contentPadding as Padding;
@@ -190,7 +203,8 @@ private function updateViewSize() : void {
     }
 }
 
-private function updateFocusInViewContainer() : void {
+private function updateFocusInViewContainer() : void
+{
     if(this.viewStack == null || this.viewStack.currentView == null)
     {
         return;
@@ -199,7 +213,8 @@ private function updateFocusInViewContainer() : void {
     this.updateView(_loc1_);
 }
 
-private function updateView(param1:IViewStackContent, param2:Object = null) : void {
+private function updateView(param1:IViewStackContent, param2:Object = null) : void
+{
     param1.update(param2);
     if(param1.getComponentForFocus())
     {
@@ -207,7 +222,8 @@ private function updateView(param1:IViewStackContent, param2:Object = null) : vo
     }
 }
 
-private function updateViewData() : void {
+private function updateViewData() : void
+{
     var _loc2_:String = null;
     var _loc3_:Object = null;
     var _loc1_:IViewStackContent = this.viewStack.currentView as IViewStackContent;
@@ -217,27 +233,26 @@ private function updateViewData() : void {
         _loc3_ = null;
         if(_loc2_ == VIEW_LIST)
         {
-            _loc3_ = {
-                "friendsDP":this.friendsDP,
-                "clanDP":this.clanDP,
-                "ignoredDP":this.ignoredDP,
-                "mutedDP":this.mutedDP
-            };
+            _loc3_ = {"friendsDP":this.friendsDP,
+            "clanDP":this.clanDP,
+            "ignoredDP":this.ignoredDP,
+            "mutedDP":this.mutedDP
+        };
     }
     else if(_loc2_ == VIEW_SEARCH)
     {
-        _loc3_ = {
-            "searchDP":this.searchDP,
-            "resultText":this.searchResultText,
-            "freezeSearch":this.freezeSearch
-        };
+        _loc3_ = {"searchDP":this.searchDP,
+        "resultText":this.searchResultText,
+        "freezeSearch":this.freezeSearch
+    };
 }
 
 this.updateView(_loc1_,_loc3_);
 }
 }
 
-private function onSearchFormEvent(param1:ContactsFormEvent) : void {
+private function onSearchFormEvent(param1:ContactsFormEvent) : void
+{
 switch(param1.type)
 {
 case ContactsFormEvent.SEARCH:
@@ -252,7 +267,8 @@ case ContactsFormEvent.ADD_TO_IGNORED:
 }
 }
 
-private function onTabSelected(param1:IndexEvent) : void {
+private function onTabSelected(param1:IndexEvent) : void
+{
 invalidate(INVALIDATE_VIEW);
 }
 }

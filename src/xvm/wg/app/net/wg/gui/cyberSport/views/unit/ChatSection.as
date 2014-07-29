@@ -6,11 +6,13 @@ package net.wg.gui.cyberSport.views.unit
     public class ChatSection extends BaseChatSection implements IFocusContainer
     {
         
-        public function ChatSection() {
+        public function ChatSection()
+        {
             super();
         }
         
-        override protected function getHeader() : String {
+        override protected function getHeader() : String
+        {
             return CYBERSPORT.WINDOW_UNIT_CHAT;
         }
     }

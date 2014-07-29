@@ -16,7 +16,8 @@ package net.wg.gui.components.common
     public class InputChecker extends InputCheckerMeta implements IInputCheckerMeta, IFocusContainer
     {
         
-        public function InputChecker() {
+        public function InputChecker()
+        {
             super();
             this.userInputControl = new UserInputControl();
             this.title.mouseEnabled = this.body.mouseEnabled = this.errorMessage.mouseEnabled = false;
@@ -42,27 +43,33 @@ package net.wg.gui.components.common
         
         private var _defaultInterval:int = 5000;
         
-        public function set defaultInterval(param1:int) : void {
+        public function set defaultInterval(param1:int) : void
+        {
             this._defaultInterval = param1;
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this.textInput;
         }
         
-        public function as_setTitle(param1:String) : void {
+        public function as_setTitle(param1:String) : void
+        {
             this.title.htmlText = param1;
         }
         
-        public function as_setBody(param1:String) : void {
+        public function as_setBody(param1:String) : void
+        {
             this.body.htmlText = param1;
         }
         
-        public function as_setErrorMsg(param1:String) : void {
+        public function as_setErrorMsg(param1:String) : void
+        {
             this.errorMessage.htmlText = param1;
         }
         
-        public function as_invalidUserText(param1:Boolean) : void {
+        public function as_invalidUserText(param1:Boolean) : void
+        {
             if(param1 == this._isInvalidUserText)
             {
                 return;
@@ -71,25 +78,30 @@ package net.wg.gui.components.common
             dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
         }
         
-        public function as_setFormattedControlNumber(param1:String) : void {
+        public function as_setFormattedControlNumber(param1:String) : void
+        {
             this.creditsParseResult = App.utils.locale.parseFormattedInteger(param1);
             this._formattedControlNumber = param1;
         }
         
-        public function as_setOriginalControlNumber(param1:String) : void {
+        public function as_setOriginalControlNumber(param1:String) : void
+        {
             this._originalControlNumber = param1;
         }
         
-        public function getUserText() : String {
+        public function getUserText() : String
+        {
             var _loc1_:IFormattedInt = App.utils.locale.parseFormattedInteger(this.textInput.text);
             return _loc1_.value.toString();
         }
         
-        public function get isInvalidUserText() : Boolean {
+        public function get isInvalidUserText() : Boolean
+        {
             return this._isInvalidUserText;
         }
         
-        public function get isValidControlInput() : Boolean {
+        public function get isValidControlInput() : Boolean
+        {
             if(this.creditsParseResult)
             {
                 return this.userInputControl.cmpFormatUserInputString(this.textInput.text,this.creditsParseResult.delimiter,this.formattedControlText,this.originalControlNumber);
@@ -97,11 +109,13 @@ package net.wg.gui.components.common
             return false;
         }
         
-        public function get formattedControlText() : String {
+        public function get formattedControlText() : String
+        {
             return this._formattedControlNumber;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.textInput.removeEventListener(InputEvent.INPUT,this.userInputHandler);
             this.textInput.dispose();
             this.textInput = null;
@@ -111,7 +125,8 @@ package net.wg.gui.components.common
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.showErrorState(false);
             if(this.textInput)
@@ -120,11 +135,13 @@ package net.wg.gui.components.common
             }
         }
         
-        private function runtimeValidate() : void {
+        private function runtimeValidate() : void
+        {
             this.showErrorState(!this.isValidControlInput);
         }
         
-        private function showErrorState(param1:Boolean) : void {
+        private function showErrorState(param1:Boolean) : void
+        {
             if(this.textInput.text == "")
             {
                 this.textInput.highlight = false;
@@ -137,15 +154,18 @@ package net.wg.gui.components.common
             }
         }
         
-        private function get originalControlNumber() : String {
+        private function get originalControlNumber() : String
+        {
             return this._originalControlNumber;
         }
         
-        private function get isEmptyText() : Boolean {
+        private function get isEmptyText() : Boolean
+        {
             return this.textInput.text == "";
         }
         
-        private function userInputHandler(param1:InputEvent) : void {
+        private function userInputHandler(param1:InputEvent) : void
+        {
             if(param1.details.value == InputValue.KEY_UP)
             {
                 this.showErrorState(false);

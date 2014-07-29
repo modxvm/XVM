@@ -6,7 +6,8 @@ package net.wg.gui.components.icons
     public class BattleTypeIcon extends UIComponent
     {
         
-        public function BattleTypeIcon() {
+        public function BattleTypeIcon()
+        {
             super();
             stop();
             this._allTypes = this.currentLabels;
@@ -18,7 +19,8 @@ package net.wg.gui.components.icons
         
         private var _typeByNumber:uint = 1;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(currentLabel != this._type)
             {
@@ -27,16 +29,19 @@ package net.wg.gui.components.icons
             }
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             this._type = param1;
             invalidate();
         }
         
-        public function set typeByNumber(param1:uint) : void {
+        public function set typeByNumber(param1:uint) : void
+        {
             if(this._typeByNumber == param1)
             {
                 return;
@@ -46,15 +51,18 @@ package net.wg.gui.components.icons
             invalidate();
         }
         
-        public function get typeByNumber() : uint {
+        public function get typeByNumber() : uint
+        {
             return this._typeByNumber;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG BattleTypeIcon " + name + "]";
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._allTypes)
             {
                 this._allTypes.splice(0,this._allTypes.length);

@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips
     public class Separator extends Sprite
     {
         
-        public function Separator() {
+        public function Separator()
+        {
             super();
         }
     }

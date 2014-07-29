@@ -8,7 +8,8 @@ package net.wg.gui.login.impl
     public final class SparksManager extends Object implements ISparksManager
     {
         
-        public function SparksManager() {
+        public function SparksManager()
+        {
             super();
         }
         
@@ -18,31 +19,38 @@ package net.wg.gui.login.impl
         
         private var _zone:Rectangle = null;
         
-        public function set scope(param1:MovieClip) : void {
+        public function set scope(param1:MovieClip) : void
+        {
             this._scope = param1;
         }
         
-        public function get scope() : MovieClip {
+        public function get scope() : MovieClip
+        {
             return this._scope;
         }
         
-        public function set sparkQuantity(param1:Number) : void {
+        public function set sparkQuantity(param1:Number) : void
+        {
             this._sparkQuantity = param1;
         }
         
-        public function get sparkQuantity() : Number {
+        public function get sparkQuantity() : Number
+        {
             return this._sparkQuantity;
         }
         
-        public function set zone(param1:Rectangle) : void {
+        public function set zone(param1:Rectangle) : void
+        {
             this._zone = param1;
         }
         
-        public function get zone() : Rectangle {
+        public function get zone() : Rectangle
+        {
             return this._zone;
         }
         
-        public function resetZone(param1:Rectangle) : void {
+        public function resetZone(param1:Rectangle) : void
+        {
             var _loc3_:Spark = null;
             this._zone = param1;
             var _loc2_:Number = 0;
@@ -54,7 +62,8 @@ package net.wg.gui.login.impl
             }
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             var _loc1_:IDisposable = null;
             while(this._scope.numChildren)
             {
@@ -65,7 +74,8 @@ package net.wg.gui.login.impl
             this._scope = null;
         }
         
-        public function createSparks() : void {
+        public function createSparks() : void
+        {
             var _loc2_:Spark = null;
             var _loc1_:uint = 0;
             while(_loc1_ < this._sparkQuantity)

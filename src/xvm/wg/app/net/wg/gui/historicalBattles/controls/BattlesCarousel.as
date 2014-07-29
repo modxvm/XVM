@@ -10,7 +10,8 @@ package net.wg.gui.historicalBattles.controls
     public class BattlesCarousel extends CarouselBase
     {
         
-        public function BattlesCarousel() {
+        public function BattlesCarousel()
+        {
             super();
         }
         
@@ -18,12 +19,14 @@ package net.wg.gui.historicalBattles.controls
         
         private var buttonGroup:ButtonGroup;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.buttonGroup = ButtonGroup.getGroup("renderersGroup",this);
         }
         
-        override protected function initPosition() : void {
+        override protected function initPosition() : void
+        {
             super.initPosition();
             if(this.carouselBG)
             {
@@ -34,17 +37,20 @@ package net.wg.gui.historicalBattles.controls
             }
         }
         
-        override public function set dataProvider(param1:IDataProvider) : void {
+        override public function set dataProvider(param1:IDataProvider) : void
+        {
             super.dataProvider = param1;
             invalidate(INIT_CAROUSEL);
         }
         
-        override protected function updateContainerPosition() : void {
+        override protected function updateContainerPosition() : void
+        {
             super.updateContainerPosition();
             this.carouselBG.visible = leftArrow.visible;
         }
         
-        override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void {
+        override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void
+        {
             super.updateRenderPosition(param1,param2,param3,param4);
             if(!this.buttonGroup.hasButton(Button(param1)))
             {

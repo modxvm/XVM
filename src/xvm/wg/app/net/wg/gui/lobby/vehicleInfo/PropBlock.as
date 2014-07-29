@@ -6,7 +6,8 @@ package net.wg.gui.lobby.vehicleInfo
     public class PropBlock extends Sprite
     {
         
-        public function PropBlock() {
+        public function PropBlock()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.lobby.vehicleInfo
         
         public var propName:TextField;
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             this.propValue.text = param1.value;
             this.propName.text = MENU.vehicleinfo_params(param1.name);
         }

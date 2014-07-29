@@ -6,7 +6,8 @@ package net.wg.infrastructure.base
     public class UIComponentEx extends UIComponent implements IUIComponentEx
     {
         
-        public function UIComponentEx() {
+        public function UIComponentEx()
+        {
             super();
         }
     }

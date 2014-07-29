@@ -3,7 +3,8 @@ package com.adobe.serialization.json
     public final class JSONTokenType extends Object
     {
         
-        public function JSONTokenType() {
+        public function JSONTokenType()
+        {
             super();
         }
         

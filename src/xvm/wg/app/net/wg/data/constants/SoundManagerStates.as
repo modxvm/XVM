@@ -3,7 +3,8 @@ package net.wg.data.constants
     public final class SoundManagerStates extends Object
     {
         
-        public function SoundManagerStates() {
+        public function SoundManagerStates()
+        {
             super();
         }
         

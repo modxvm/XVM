@@ -3,7 +3,8 @@ package scaleform.clik.constants
     public class DirectionMode extends Object
     {
         
-        public function DirectionMode() {
+        public function DirectionMode()
+        {
             super();
         }
         

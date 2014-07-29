@@ -15,7 +15,8 @@ package net.wg.gui.cyberSport.controls
     public class VehicleSelectorFilter extends UIComponent
     {
         
-        public function VehicleSelectorFilter() {
+        public function VehicleSelectorFilter()
+        {
             super();
         }
         
@@ -27,7 +28,8 @@ package net.wg.gui.cyberSport.controls
         
         private static var INVALID_MODE:String = "invalidMode";
         
-        private static function onControllOut(param1:MouseEvent) : void {
+        private static function onControllOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -47,18 +49,21 @@ package net.wg.gui.cyberSport.controls
         
         private var _changeHandlersInited:Boolean = false;
         
-        public function setData(param1:VehicleSelectorFilterVO) : void {
+        public function setData(param1:VehicleSelectorFilterVO) : void
+        {
             this._model = param1;
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.compatibleOnlyCheckBox.label = CYBERSPORT.WINDOW_VEHICLESELECTOR_FILTERS_MATCHES;
             this.initFilters();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(INVALID_MODE)) && (this._mode))
             {
@@ -87,7 +92,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function initChangeHandlers() : void {
+        private function initChangeHandlers() : void
+        {
             this.nationDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
             this.vehicleTypeDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
             this.levelDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
@@ -107,7 +113,8 @@ package net.wg.gui.cyberSport.controls
             this.mainCheckBox.addEventListener(MouseEvent.CLICK,onControllOut);
         }
         
-        private function selectNation(param1:int) : void {
+        private function selectNation(param1:int) : void
+        {
             var _loc2_:Object = null;
             for each(_loc2_ in this.nationDD.dataProvider)
             {
@@ -119,7 +126,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function selectVehicleType(param1:String) : void {
+        private function selectVehicleType(param1:String) : void
+        {
             var _loc2_:Object = null;
             for each(_loc2_ in this.vehicleTypeDD.dataProvider)
             {
@@ -131,7 +139,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function selectLevel(param1:int) : void {
+        private function selectLevel(param1:int) : void
+        {
             var _loc2_:Object = null;
             for each(_loc2_ in this.levelDD.dataProvider)
             {
@@ -143,7 +152,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function onFiltersChanged(param1:Event = null) : void {
+        private function onFiltersChanged(param1:Event = null) : void
+        {
             App.toolTipMgr.hide();
             var _loc2_:Object = this.nationDD.dataProvider.requestItemAt(this.nationDD.selectedIndex);
             var _loc3_:Object = this.vehicleTypeDD.dataProvider.requestItemAt(this.vehicleTypeDD.selectedIndex);
@@ -157,14 +167,14 @@ package net.wg.gui.cyberSport.controls
             dispatchEvent(_loc5_);
         }
         
-        private function initFilters() : void {
+        private function initFilters() : void
+        {
             var _loc1_:INations = App.utils.nations;
             var _loc2_:Array = _loc1_.getNationsData();
-            var _loc3_:Array = [{
-                "label":MENU.NATIONS_ALL,
-                "data":NATION_FILTER_ALL,
-                "icon":"../maps/icons/filters/nations/all.png"
-            }];
+            var _loc3_:Array = [{"label":MENU.NATIONS_ALL,
+            "data":NATION_FILTER_ALL,
+            "icon":"../maps/icons/filters/nations/all.png"
+        }];
         var _loc4_:uint = 0;
         while(_loc4_ < _loc2_.length)
         {
@@ -176,7 +186,8 @@ package net.wg.gui.cyberSport.controls
         this.nationDD.selectedIndex = 0;
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         super.onDispose();
         this.nationDD.removeEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
         this.vehicleTypeDD.removeEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
@@ -202,16 +213,19 @@ package net.wg.gui.cyberSport.controls
         this.compatibleOnlyCheckBox.dispose();
     }
     
-    public function get mode() : String {
+    public function get mode() : String
+    {
         return this._mode;
     }
     
-    public function set mode(param1:String) : void {
+    public function set mode(param1:String) : void
+    {
         this._mode = param1;
         invalidate(INVALID_MODE);
     }
     
-    private function onControllOver(param1:MouseEvent) : void {
+    private function onControllOver(param1:MouseEvent) : void
+    {
         switch(param1.target)
         {
             case this.nationDD:

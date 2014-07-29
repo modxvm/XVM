@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class CrewEvent extends Event
     {
         
-        public function CrewEvent(param1:String, param2:Object = null, param3:Boolean = false, param4:uint = 0) {
+        public function CrewEvent(param1:String, param2:Object = null, param3:Boolean = false, param4:uint = 0)
+        {
             super(param1,true,true);
             this.initProp = param2;
             this.menuEnabled = param3;
@@ -36,7 +37,8 @@ package net.wg.gui.events
         
         public var selectedTab:uint = 0;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new CrewEvent(type,this.initProp,this.menuEnabled);
         }
     }

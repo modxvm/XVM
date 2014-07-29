@@ -6,7 +6,8 @@ package net.wg.gui.lobby.profile.pages.summary
     public class ProfileSummaryVO extends ProfileDossierInfoVO
     {
         
-        public function ProfileSummaryVO(param1:Object) {
+        public function ProfileSummaryVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -22,15 +23,18 @@ package net.wg.gui.lobby.profile.pages.summary
         
         public var nearestAchievements:Array;
         
-        public function getMaxDestroyedStr() : String {
+        public function getMaxDestroyedStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.maxDestroyed);
         }
         
-        public function getGlobalRatingStr() : String {
+        public function getGlobalRatingStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.globalRating);
         }
         
-        public function getAvgDamageStr() : String {
+        public function getAvgDamageStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.avgDamage);
         }
     }

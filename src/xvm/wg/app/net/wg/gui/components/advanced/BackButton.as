@@ -5,11 +5,13 @@ package net.wg.gui.components.advanced
     public class BackButton extends SoundButton
     {
         
-        public function BackButton() {
+        public function BackButton()
+        {
             super();
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             super.updateText();
             if(hitMc)
             {

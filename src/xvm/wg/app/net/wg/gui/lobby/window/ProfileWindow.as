@@ -19,7 +19,8 @@ package net.wg.gui.lobby.window
     public class ProfileWindow extends ProfileWindowMeta implements IProfileWindowMeta
     {
         
-        public function ProfileWindow() {
+        public function ProfileWindow()
+        {
             this.maskObj = new MovieClip();
             super();
             isModal = false;
@@ -60,7 +61,8 @@ package net.wg.gui.lobby.window
         
         private var isCreateChannelAvailable:Boolean;
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             super.setWindow(param1);
             if(param1)
             {
@@ -68,30 +70,36 @@ package net.wg.gui.lobby.window
             }
         }
         
-        public function as_setInitData(param1:Object) : void {
+        public function as_setInitData(param1:Object) : void
+        {
             this.initData = new ProfileWindowInitVO(param1);
             invalidate(INIT_DATA_INV);
         }
         
-        public function as_update(param1:Object) : void {
+        public function as_update(param1:Object) : void
+        {
         }
         
-        public function as_addFriendAvailable(param1:Boolean) : void {
+        public function as_addFriendAvailable(param1:Boolean) : void
+        {
             this.isAddFriendAvailable = param1;
             invalidate(ADDFRIENDAVAILABLE);
         }
         
-        public function as_setIgnoredAvailable(param1:Boolean) : void {
+        public function as_setIgnoredAvailable(param1:Boolean) : void
+        {
             this.isSetIgnoreAvailable = param1;
             invalidate(SETIGNOREDAVAILABLE);
         }
         
-        public function as_setCreateChannelAvailable(param1:Boolean) : void {
+        public function as_setCreateChannelAvailable(param1:Boolean) : void
+        {
             this.isCreateChannelAvailable = param1;
             invalidate(CREATEPRIVATECHANNELAVAILABLE);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.removeTemplateButton();
             try
@@ -100,6 +108,7 @@ package net.wg.gui.lobby.window
             }
             catch(e:Error)
             {
+                trace(e);
             }
             this.tabNavigator.centerOffset = ProfileConstants.WINDOW_CENTER_OFFSET;
             var locale:ILocale = App.utils.locale;
@@ -111,7 +120,8 @@ package net.wg.gui.lobby.window
             this.btnCreatePrivateChannel.addEventListener(ButtonEvent.CLICK,this.createPrivateChannelBtnHandler,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Graphics = null;
             var _loc2_:* = NaN;
             super.draw();
@@ -147,7 +157,8 @@ package net.wg.gui.lobby.window
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.tabNavigator.mask = null;
             if(this.maskObj)
             {
@@ -175,7 +186,8 @@ package net.wg.gui.lobby.window
             super.onDispose();
         }
         
-        private function removeTemplateButton() : void {
+        private function removeTemplateButton() : void
+        {
             if(this.btnTemplate)
             {
                 this.btnTemplate.parent.removeChild(this.btnTemplate);
@@ -184,15 +196,18 @@ package net.wg.gui.lobby.window
             }
         }
         
-        private function createPrivateChannelBtnHandler(param1:ButtonEvent) : void {
+        private function createPrivateChannelBtnHandler(param1:ButtonEvent) : void
+        {
             this.userCreatePrivateChannelS();
         }
         
-        private function addToIgnoreBtnHandler(param1:ButtonEvent) : void {
+        private function addToIgnoreBtnHandler(param1:ButtonEvent) : void
+        {
             this.userSetIgnoredS();
         }
         
-        private function addToFriendBtnHandler(param1:ButtonEvent) : void {
+        private function addToFriendBtnHandler(param1:ButtonEvent) : void
+        {
             this.userAddFriendS();
         }
     }

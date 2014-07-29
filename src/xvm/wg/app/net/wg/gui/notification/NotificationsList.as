@@ -9,7 +9,8 @@ package net.wg.gui.notification
     public class NotificationsList extends ScrollingListPx
     {
         
-        public function NotificationsList() {
+        public function NotificationsList()
+        {
             this.pendingDataList = [];
             super();
         }
@@ -18,12 +19,14 @@ package net.wg.gui.notification
         
         private var pendingDataList:Array;
         
-        public function appendData(param1:NotificationInfoVO) : void {
+        public function appendData(param1:NotificationInfoVO) : void
+        {
             this.pendingDataList.push(param1);
             invalidate(PENDING_DATA_INV);
         }
         
-        public function updateData(param1:NotificationInfoVO) : void {
+        public function updateData(param1:NotificationInfoVO) : void
+        {
             var _loc5_:* = 0;
             var _loc2_:uint = _dataProvider.length;
             var _loc3_:NotificationInfoVO = null;
@@ -45,7 +48,8 @@ package net.wg.gui.notification
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             super.draw();
             if(isInvalid(PENDING_DATA_INV))
@@ -74,7 +78,8 @@ package net.wg.gui.notification
             }
         }
         
-        override protected function drawRenderers(param1:Number) : void {
+        override protected function drawRenderers(param1:Number) : void
+        {
             super.drawRenderers(param1);
             if(totalHeight > maskObject.height)
             {

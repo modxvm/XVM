@@ -6,12 +6,14 @@ package net.wg.gui.components.advanced
     public class TabButton extends SoundButtonEx
     {
         
-        public function TabButton() {
+        public function TabButton()
+        {
             super();
             soundType = SoundTypes.TAB;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG TabButton " + name + "]";
         }
     }

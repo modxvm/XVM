@@ -18,7 +18,8 @@ package net.wg.gui.lobby.barracks
     public class Barracks extends BarracksMeta implements IBarracksMeta
     {
         
-        public function Barracks() {
+        public function Barracks()
+        {
             super();
         }
         
@@ -32,29 +33,35 @@ package net.wg.gui.lobby.barracks
         
         private var MY_HEIGHT_OFFSET:Number = 18;
         
-        override public function setViewSize(param1:Number, param2:Number) : void {
+        override public function setViewSize(param1:Number, param2:Number) : void
+        {
             this.myWidth = param1;
             this.myHeight = param2;
             invalidateSize();
         }
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             this.setViewSize(param1,param2);
         }
         
-        public function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Object, param6:Number, param7:Array) : void {
+        public function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:Number, param5:Object, param6:Number, param7:Array) : void
+        {
             this.form.as_setTankmen(param1,param2,param3,param4,param5,param6,param7);
         }
         
-        public function as_updateTanksList(param1:Array) : void {
+        public function as_updateTanksList(param1:Array) : void
+        {
             this.form.as_updateTanksList(param1);
         }
         
-        public function as_setTankmenFilter(param1:Number, param2:String, param3:String, param4:String, param5:String) : void {
+        public function as_setTankmenFilter(param1:Number, param2:String, param3:String, param4:String, param5:String) : void
+        {
             this.form.as_setTankmenFilter(param1,param2,param3,param4,param5);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.form.addEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
             this.form.addEventListener(CrewEvent.ON_INVALID_TANK_LIST,this.onInvalidateTanksList);
@@ -69,7 +76,8 @@ package net.wg.gui.lobby.barracks
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.form.removeEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
             this.form.removeEventListener(CrewEvent.ON_INVALID_TANK_LIST,this.onInvalidateTanksList);
@@ -84,11 +92,13 @@ package net.wg.gui.lobby.barracks
             App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             this.form.onPopulate();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -97,7 +107,8 @@ package net.wg.gui.lobby.barracks
             }
         }
         
-        private function updateSelectedIndex(param1:Object, param2:Object) : void {
+        private function updateSelectedIndex(param1:Object, param2:Object) : void
+        {
             var _loc3_:Boolean = param1 is ButtonBar || param1 is DropdownMenu;
             var _loc4_:* = "object in ... must be ButtonBar or DropdownMenu";
             assert(_loc3_,_loc4_,TypeCastException);
@@ -115,43 +126,54 @@ package net.wg.gui.lobby.barracks
             }
         }
         
-        private function openPersonalCaseHandler(param1:CrewEvent) : void {
+        private function openPersonalCaseHandler(param1:CrewEvent) : void
+        {
             openPersonalCaseS(param1.initProp.tankmanID.toString(),param1.selectedTab);
         }
         
-        private function onShowRecruitWindow(param1:CrewEvent) : void {
+        private function onShowRecruitWindow(param1:CrewEvent) : void
+        {
             onShowRecruitWindowClickS(param1.initProp,param1.menuEnabled);
         }
         
-        private function onUnloadTankman(param1:CrewEvent) : void {
+        private function onUnloadTankman(param1:CrewEvent) : void
+        {
             unloadTankmanS(param1.initProp.compact);
         }
         
-        private function showDismissDialog(param1:CrewEvent) : void {
+        private function showDismissDialog(param1:CrewEvent) : void
+        {
+            trace("showDismissDialog","compact",param1.initProp.compact);
             dismissTankmanS(param1.initProp.compact);
         }
         
-        private function onBuyBerths(param1:CrewEvent) : void {
+        private function onBuyBerths(param1:CrewEvent) : void
+        {
             buyBerthsS();
         }
         
-        private function setFilters(param1:CrewEvent) : void {
+        private function setFilters(param1:CrewEvent) : void
+        {
             setFilterS(param1.initProp.nation,param1.initProp.role,param1.initProp.tankType,param1.initProp.location,param1.initProp.nationID);
         }
         
-        private function handleEscape(param1:InputEvent) : void {
+        private function handleEscape(param1:InputEvent) : void
+        {
             closeBarracksS();
         }
         
-        private function onBarracksClose(param1:ButtonEvent) : void {
+        private function onBarracksClose(param1:ButtonEvent) : void
+        {
             closeBarracksS();
         }
         
-        private function onInvalidateTanksList(param1:CrewEvent) : void {
+        private function onInvalidateTanksList(param1:CrewEvent) : void
+        {
             invalidateTanksListS();
         }
         
-        private function setFocusToControl(param1:ListEvent) : void {
+        private function setFocusToControl(param1:ListEvent) : void
+        {
             setFocus(InteractiveObject(param1.target));
         }
     }

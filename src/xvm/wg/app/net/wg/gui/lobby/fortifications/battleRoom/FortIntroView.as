@@ -12,7 +12,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
     public class FortIntroView extends FortIntroMeta implements IFortIntroMeta
     {
         
-        public function FortIntroView() {
+        public function FortIntroView()
+        {
             super();
             listRoomBtn.UIID = 30;
         }
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         public var fortBattleBtnTitle:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             titleLbl.text = FORTIFICATIONS.SORTIE_INTROVIEW_TITLE;
             descrLbl.text = FORTIFICATIONS.SORTIE_INTROVIEW_DESCR;
@@ -38,27 +40,30 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.fortBattleBtnTitle.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.fortBattleBtnTitle.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
             this.fortBattleBtnTitle.removeEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
             super.onDispose();
         }
         
-        override protected function onListRoomBtnClick(param1:ButtonEvent) : void {
+        override protected function onListRoomBtnClick(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,0);
-            var _loc2_:Object = {
-                "alias":FORTIFICATION_ALIASES.FORT_BATTLE_ROOM_LIST_VIEW_UI,
-                "itemId":Number.NaN,
-                "peripheryID":0,
-                "slotIndex":-1
-            };
+            var _loc2_:Object = {"alias":FORTIFICATION_ALIASES.FORT_BATTLE_ROOM_LIST_VIEW_UI,
+            "itemId":Number.NaN,
+            "peripheryID":0,
+            "slotIndex":-1
+        };
         dispatchEvent(new RallyViewsEvent(RallyViewsEvent.LOAD_VIEW_REQUEST,_loc2_));
     }
     
-    private function onFortBattleBtnClick(param1:ButtonEvent) : void {
+    private function onFortBattleBtnClick(param1:ButtonEvent) : void
+    {
     }
     
-    override protected function onControlRollOver(param1:MouseEvent) : void {
+    override protected function onControlRollOver(param1:MouseEvent) : void
+    {
         switch(param1.target)
         {
             case this.fortBattleBtnTitle:

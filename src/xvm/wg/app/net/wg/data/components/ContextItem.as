@@ -5,7 +5,8 @@ package net.wg.data.components
     public class ContextItem extends Object implements IContextItem
     {
         
-        public function ContextItem(param1:String, param2:String, param3:Object = null, param4:Vector.<IContextItem> = null) {
+        public function ContextItem(param1:String, param2:String, param3:Object = null, param4:Vector.<IContextItem> = null)
+        {
             super();
             this._id = param1;
             this._label = param2;
@@ -21,31 +22,38 @@ package net.wg.data.components
         
         private var _initData:Object = null;
         
-        public function get id() : String {
+        public function get id() : String
+        {
             return this._id;
         }
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             this._label = param1;
         }
         
-        public function get submenu() : Vector.<IContextItem> {
+        public function get submenu() : Vector.<IContextItem>
+        {
             return this._submenu;
         }
         
-        public function set submenu(param1:Vector.<IContextItem>) : void {
+        public function set submenu(param1:Vector.<IContextItem>) : void
+        {
             this._submenu = param1;
         }
         
-        public function get initData() : Object {
+        public function get initData() : Object
+        {
             return this._initData;
         }
         
-        public function set initData(param1:Object) : void {
+        public function set initData(param1:Object) : void
+        {
             this._initData = param1;
         }
     }

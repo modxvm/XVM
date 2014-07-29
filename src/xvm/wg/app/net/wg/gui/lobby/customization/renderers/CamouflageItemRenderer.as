@@ -5,12 +5,14 @@ package net.wg.gui.lobby.customization.renderers
     public class CamouflageItemRenderer extends CustomizationItemRenderer
     {
         
-        public function CamouflageItemRenderer() {
+        public function CamouflageItemRenderer()
+        {
             super();
             soundId = SoundTypes.CAMOUFLAGE_RENDERER;
         }
         
-        override protected function setState(param1:String) : void {
+        override protected function setState(param1:String) : void
+        {
             var _loc4_:* = 0;
             var _loc5_:String = null;
             var _loc6_:String = null;

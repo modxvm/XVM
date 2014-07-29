@@ -1,9 +1,10 @@
-package 
+package
 {
     public class HISTORICAL_BATTLES extends Object
     {
         
-        public function HISTORICAL_BATTLES() {
+        public function HISTORICAL_BATTLES()
+        {
             super();
         }
         

@@ -12,11 +12,13 @@ package net.wg.gui.crewOperations
     public class CrewOperationsIRFooter extends UIComponent
     {
         
-        public function CrewOperationsIRFooter() {
+        public function CrewOperationsIRFooter()
+        {
             super();
         }
         
-        private static function hideToolTip() : void {
+        private static function hideToolTip() : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -34,7 +36,8 @@ package net.wg.gui.crewOperations
         
         private var separatorBottomPadding:int;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.errorText.mouseEnabled = false;
             this.errorText.visible = false;
@@ -42,7 +45,8 @@ package net.wg.gui.crewOperations
             this.separatorBottomPadding = this.button.y + this.button.height - this.separator.y;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             var _loc2_:* = false;
             super.draw();
@@ -76,7 +80,8 @@ package net.wg.gui.crewOperations
             }
         }
         
-        public function set toolTip(param1:String) : void {
+        public function set toolTip(param1:String) : void
+        {
             this._tooltip = param1;
             this.disposeHandlers();
             if(this._tooltip)
@@ -86,36 +91,43 @@ package net.wg.gui.crewOperations
             }
         }
         
-        protected function mouseRollOverHandler(param1:MouseEvent) : void {
+        protected function mouseRollOverHandler(param1:MouseEvent) : void
+        {
             this.showToolTip(null);
         }
         
-        protected function mouseRollOutHandler(param1:MouseEvent) : void {
+        protected function mouseRollOutHandler(param1:MouseEvent) : void
+        {
             hideToolTip();
         }
         
-        protected function showToolTip(param1:IToolTipParams) : void {
+        protected function showToolTip(param1:IToolTipParams) : void
+        {
             if(this._tooltip)
             {
                 App.toolTipMgr.showComplex(this._tooltip);
             }
         }
         
-        private function disposeHandlers() : void {
+        private function disposeHandlers() : void
+        {
             this.warning.removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
             this.warning.removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
         }
         
-        public function get data() : CrewOperationInfoVO {
+        public function get data() : CrewOperationInfoVO
+        {
             return this._data;
         }
         
-        public function set data(param1:CrewOperationInfoVO) : void {
+        public function set data(param1:CrewOperationInfoVO) : void
+        {
             this._data = param1;
             invalidateData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._data = null;
             this.disposeHandlers();
             super.onDispose();

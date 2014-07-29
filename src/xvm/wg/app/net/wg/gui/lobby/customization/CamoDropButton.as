@@ -6,23 +6,27 @@ package net.wg.gui.lobby.customization
     public class CamoDropButton extends Button
     {
         
-        public function CamoDropButton() {
+        public function CamoDropButton()
+        {
             super();
         }
         
         public var kind:int = -1;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(ButtonEvent.CLICK,this.onClick,false,0,true);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             removeEventListener(ButtonEvent.CLICK,this.onClick);
         }
         
-        private function onClick(param1:ButtonEvent) : void {
+        private function onClick(param1:ButtonEvent) : void
+        {
             var _loc2_:CustomizationEvent = new CustomizationEvent(CustomizationEvent.DROP_ITEM);
             _loc2_.kind = this.kind;
             dispatchEvent(_loc2_);

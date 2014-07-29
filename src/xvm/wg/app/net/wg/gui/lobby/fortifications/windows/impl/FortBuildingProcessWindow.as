@@ -18,7 +18,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
     public class FortBuildingProcessWindow extends FortBuildingProcessWindowMeta implements IFortBuildingProcessWindowMeta
     {
         
-        public function FortBuildingProcessWindow() {
+        public function FortBuildingProcessWindow()
+        {
             super();
             isModal = false;
             isCentered = true;
@@ -48,14 +49,16 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         public var textInfo:TextField;
         
-        override protected function responseBuildingInfo(param1:BuildingProcessInfoVO) : void {
+        override protected function responseBuildingInfo(param1:BuildingProcessInfoVO) : void
+        {
             this.buildingInfo.addEventListener(BuildingProcessInfo.BUY_BUILDING,this.buyBuildingHandler);
             this.buildingInfo.visible = true;
             this.textInfo.visible = false;
             this.buildingInfo.setData(param1);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.buildingList.removeEventListener(SortableTableListEvent.LIST_INDEX_CHANGE,this.onClickItemHandler);
             this.buildingList.removeEventListener(SortableTableListEvent.RENDERER_DOUBLE_CLICK,this.onDoubleClickItemHandler);
             this.buildingList.dispose();
@@ -68,7 +71,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             super.onDispose();
         }
         
-        override protected function setData(param1:BuildingProcessVO) : void {
+        override protected function setData(param1:BuildingProcessVO) : void
+        {
             var _loc2_:BuildingProcessListItemVO = null;
             if(this.buildingList)
             {
@@ -87,7 +91,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        private function findFirstAvailableBuilding() : void {
+        private function findFirstAvailableBuilding() : void
+        {
             var _loc3_:BuildingProcessListItemVO = null;
             var _loc1_:int = this.model.listItems.length;
             var _loc2_:* = 0;
@@ -104,13 +109,15 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        private function onClickItemHandler(param1:SortableTableListEvent) : void {
+        private function onClickItemHandler(param1:SortableTableListEvent) : void
+        {
             var _loc2_:BuildingProcessListItemVO = this.buildingList.getListSelectedItem() as BuildingProcessListItemVO;
             App.utils.asserter.assertNotNull(_loc2_," [selectItem] buildingId can\'t be NULL " + Errors.CANT_NULL);
             requestBuildingInfoS(_loc2_.buildingID);
         }
         
-        private function buyBuildingHandler(param1:Event) : void {
+        private function buyBuildingHandler(param1:Event) : void
+        {
             var _loc2_:String = BuildingProcessInfo(param1.target).getBuildingId();
             App.utils.asserter.assertNotNull(_loc2_," [buyBuilding] buildingId can\'t be NULL " + Errors.CANT_NULL);
             if(_loc2_)
@@ -119,12 +126,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        private function requestFocusHandler(param1:FocusRequestEvent) : void {
+        private function requestFocusHandler(param1:FocusRequestEvent) : void
+        {
             setFocus(param1.focusContainer.getComponentForFocus());
             this.buildingInfo.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.requestFocusHandler);
         }
         
-        private function onDoubleClickItemHandler(param1:SortableTableListEvent) : void {
+        private function onDoubleClickItemHandler(param1:SortableTableListEvent) : void
+        {
             var _loc2_:BuildingProcessListItemVO = this.buildingList.getListSelectedItem() as BuildingProcessListItemVO;
             App.utils.asserter.assertNotNull(_loc2_," [doubleCLICK on buildingItem] BuildingProcessListItemVO can\'t be NULL " + Errors.CANT_NULL);
             if((_loc2_.buildingID) && _loc2_.buildingStatus == BUILDING_STATUS_AVAILABLE)

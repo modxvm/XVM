@@ -11,7 +11,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipSkill extends ToolTipSpecial
     {
         
-        public function ToolTipSkill() {
+        public function ToolTipSkill()
+        {
             super();
             this.headerTF = content.headerTF;
             this.discrTF = content.discrTF;
@@ -20,7 +21,8 @@ package net.wg.gui.components.tooltips
             separators = new Vector.<Separator>();
         }
         
-        private static function getInfoText(param1:String) : String {
+        private static function getInfoText(param1:String) : String
+        {
             var _loc2_:* = "";
             _loc2_ = Utils.instance.htmlWrapper(App.utils.locale.makeString(ITEM_TYPES.tankman_skills_type(param1),{}),Utils.instance.COLOR_NORMAL,14,"$FieldFont",true);
             return _loc2_;
@@ -36,7 +38,8 @@ package net.wg.gui.components.tooltips
         
         private var maxWidth:Number = 270;
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc1_:ToolTipSkillVO = null;
             var _loc3_:String = null;
             var _loc4_:TextFormat = null;
@@ -105,13 +108,15 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
             background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
             this.whiteBg.width = content.width + contentMargin.bottom + bgShadowMargin.bottom | 0;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[SkillToolTip]";
         }
     }

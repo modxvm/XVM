@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class FortIntroMeta extends BaseRallyIntroView
     {
         
-        public function FortIntroMeta() {
+        public function FortIntroMeta()
+        {
             super();
         }
     }

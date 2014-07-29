@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class SortButton extends UIComponent
     {
         
-        public function SortButton() {
+        public function SortButton()
+        {
             super();
         }
     }

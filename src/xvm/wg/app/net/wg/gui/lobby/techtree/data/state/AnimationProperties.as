@@ -5,7 +5,8 @@ package net.wg.gui.lobby.techtree.data.state
     public class AnimationProperties extends Object
     {
         
-        public function AnimationProperties(param1:Number, param2:Object, param3:Object) {
+        public function AnimationProperties(param1:Number, param2:Object, param3:Object)
+        {
             super();
             this.duration = param1;
             this.from = param2;
@@ -18,7 +19,8 @@ package net.wg.gui.lobby.techtree.data.state
         
         public var to:Object;
         
-        public function setTo(param1:MovieClip) : void {
+        public function setTo(param1:MovieClip) : void
+        {
             var _loc2_:String = null;
             for(_loc2_ in this.to)
             {
@@ -26,7 +28,8 @@ package net.wg.gui.lobby.techtree.data.state
             }
         }
         
-        public function setFrom(param1:MovieClip) : void {
+        public function setFrom(param1:MovieClip) : void
+        {
             var _loc2_:String = null;
             for(_loc2_ in this.from)
             {

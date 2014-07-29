@@ -17,11 +17,13 @@ package net.wg.gui.lobby.battleResults
     public class EfficiencyRenderer extends UIComponent implements IListItemRenderer
     {
         
-        public function EfficiencyRenderer() {
+        public function EfficiencyRenderer()
+        {
             super();
         }
         
-        private static function getDimmFilter() : ColorMatrixFilter {
+        private static function getDimmFilter() : ColorMatrixFilter
+        {
             var _loc1_:ColorMatrixFilter = new ColorMatrixFilter();
             var _loc2_:Array = [0.4,0,0,0,0];
             var _loc3_:Array = [0,0.4,0,0,0];
@@ -72,12 +74,14 @@ package net.wg.gui.lobby.battleResults
         
         protected var _selected:Boolean = false;
         
-        public function setListData(param1:ListData) : void {
+        public function setListData(param1:ListData) : void
+        {
             this.index = param1.index;
             this.selected = param1.selected;
         }
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             this.data = param1;
             if(param1)
             {
@@ -90,11 +94,13 @@ package net.wg.gui.lobby.battleResults
             invalidate();
         }
         
-        public function getData() : Object {
+        public function getData() : Object
+        {
             return this.data;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc2_:EfficiencyIconRenderer = null;
             super.configUI();
             focusTarget = this.owner;
@@ -115,7 +121,8 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        private function handleIconRoll(param1:MouseEvent) : void {
+        private function handleIconRoll(param1:MouseEvent) : void
+        {
             if(param1.type == MouseEvent.ROLL_OVER)
             {
                 this.data.isDisabled = !param1.target.enabled;
@@ -130,7 +137,8 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:TextFormat = null;
             super.draw();
             if(this._dataDirty)
@@ -148,12 +156,11 @@ package net.wg.gui.lobby.battleResults
                     this.critsIcon.visible = !this.data.isFake && !this.data.isAlly;
                     this.evilIcon.visible = !this.data.isFake && !this.data.isAlly;
                     this.spottedIcon.visible = !this.data.isFake && !this.data.isAlly;
-                    this.playerName.userVO = new UserVO({
-                        "fullName":this.data.playerFullName,
-                        "userName":this.data.playerName,
-                        "clanAbbrev":this.data.playerClan,
-                        "region":this.data.playerRegion
-                    });
+                    this.playerName.userVO = new UserVO({"fullName":this.data.playerFullName,
+                    "userName":this.data.playerName,
+                    "clanAbbrev":this.data.playerClan,
+                    "region":this.data.playerRegion
+                });
                 _loc1_ = this.playerName.textField.getTextFormat();
                 if(this.data.isFake)
                 {
@@ -218,7 +225,8 @@ package net.wg.gui.lobby.battleResults
         }
     }
     
-    private function checkMouseOverOnScroll() : void {
+    private function checkMouseOverOnScroll() : void
+    {
         var _loc3_:EfficiencyIconRenderer = null;
         var _loc1_:Point = new Point(mouseX,mouseY);
         _loc1_ = this.localToGlobal(_loc1_);
@@ -237,35 +245,43 @@ package net.wg.gui.lobby.battleResults
         }
     }
     
-    public function get index() : uint {
+    public function get index() : uint
+    {
         return this._index;
     }
     
-    public function set index(param1:uint) : void {
+    public function set index(param1:uint) : void
+    {
         this._index = param1;
     }
     
-    public function get owner() : UIComponent {
+    public function get owner() : UIComponent
+    {
         return this._owner;
     }
     
-    public function set owner(param1:UIComponent) : void {
+    public function set owner(param1:UIComponent) : void
+    {
         this._owner = param1;
     }
     
-    public function get selectable() : Boolean {
+    public function get selectable() : Boolean
+    {
         return this._selectable;
     }
     
-    public function set selectable(param1:Boolean) : void {
+    public function set selectable(param1:Boolean) : void
+    {
         this._selectable = param1;
     }
     
-    public function get selected() : Boolean {
+    public function get selected() : Boolean
+    {
         return this._selected;
     }
     
-    public function set selected(param1:Boolean) : void {
+    public function set selected(param1:Boolean) : void
+    {
         if(this._selected == param1)
         {
             return;

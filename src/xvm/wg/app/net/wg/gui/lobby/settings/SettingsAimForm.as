@@ -13,7 +13,8 @@ package net.wg.gui.lobby.settings
     public class SettingsAimForm extends UIComponent
     {
         
-        public function SettingsAimForm() {
+        public function SettingsAimForm()
+        {
             super();
         }
         
@@ -77,15 +78,18 @@ package net.wg.gui.lobby.settings
         
         public var reloaderTimerValue:LabelControl = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        public function setData(param1:String, param2:Object) : void {
+        public function setData(param1:String, param2:Object) : void
+        {
             var _loc3_:String = null;
             var _loc4_:SettingsControlProp = null;
             var _loc5_:Slider = null;
@@ -143,13 +147,15 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function onDropDownChange(param1:ListEvent) : void {
+        private function onDropDownChange(param1:ListEvent) : void
+        {
             var _loc2_:DropdownMenu = DropdownMenu(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
             dispatchEvent(new SettingsSubVewEvent(SettingsSubVewEvent.ON_CONTROL_CHANGE,this._id,_loc3_,_loc2_.selectedIndex));
         }
         
-        private function onSliderValueChanged(param1:SliderEvent) : void {
+        private function onSliderValueChanged(param1:SliderEvent) : void
+        {
             var _loc5_:LabelControl = null;
             var _loc2_:Slider = Slider(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_SLIDER);
@@ -162,7 +168,8 @@ package net.wg.gui.lobby.settings
             dispatchEvent(new SettingsSubVewEvent(SettingsSubVewEvent.ON_CONTROL_CHANGE,this._id,_loc3_,_loc2_.value));
         }
         
-        private function disableAllControls() : void {
+        private function disableAllControls() : void
+        {
             this.netSlider.enabled = false;
             this.netTypeDropDown.enabled = false;
             this.centralTagSlider.enabled = false;
@@ -177,15 +184,18 @@ package net.wg.gui.lobby.settings
             this.reloaderTimerSlider.enabled = false;
         }
         
-        public function set id(param1:String) : void {
+        public function set id(param1:String) : void
+        {
             this._id = param1;
         }
         
-        public function get id() : String {
+        public function get id() : String
+        {
             return this._id;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:String = null;
             var _loc2_:SettingsControlProp = null;
             var _loc3_:Slider = null;

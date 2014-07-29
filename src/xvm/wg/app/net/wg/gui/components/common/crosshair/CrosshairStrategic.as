@@ -5,7 +5,8 @@ package net.wg.gui.components.common.crosshair
     public class CrosshairStrategic extends CrosshairBase
     {
         
-        public function CrosshairStrategic() {
+        public function CrosshairStrategic()
+        {
             super();
         }
         
@@ -19,22 +20,27 @@ package net.wg.gui.components.common.crosshair
         
         private static var NODE_NAME_BASE:String = "elem_";
         
-        override protected function initCallbacks() : void {
+        override protected function initCallbacks() : void
+        {
         }
         
-        override protected function onSetReloading(param1:Number, param2:Number, param3:Boolean, param4:Number = 0) : void {
+        override protected function onSetReloading(param1:Number, param2:Number, param3:Boolean, param4:Number = 0) : void
+        {
             this.radiusNodesGotoAndStop(param1 == 0?NODE_TYPE_GREEN:NODE_TYPE_RED);
         }
         
-        override protected function onSetReloadingAsPercent(param1:Number) : void {
+        override protected function onSetReloadingAsPercent(param1:Number) : void
+        {
             this.radiusNodesGotoAndStop(param1 < 100?NODE_TYPE_RED:NODE_TYPE_GREEN);
         }
         
-        protected function onSetAsDebug() : void {
+        protected function onSetAsDebug() : void
+        {
             this.radiusNodesGotoAndStop(NODE_TYPE_DEBUG);
         }
         
-        private function radiusNodesGotoAndStop(param1:String) : void {
+        private function radiusNodesGotoAndStop(param1:String) : void
+        {
             var _loc2_:* = 1;
             while(_loc2_ <= NODES_COUNT)
             {

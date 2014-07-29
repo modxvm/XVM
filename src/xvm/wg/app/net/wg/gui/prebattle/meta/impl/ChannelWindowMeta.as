@@ -5,7 +5,8 @@ package net.wg.gui.prebattle.meta.impl
     public class ChannelWindowMeta extends AbstractWindowView
     {
         
-        public function ChannelWindowMeta() {
+        public function ChannelWindowMeta()
+        {
             super();
         }
     }

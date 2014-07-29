@@ -9,7 +9,8 @@ package net.wg.gui.prebattle.data
     public class PlayerPrbInfoVO extends ExtendedUserVO
     {
         
-        public function PlayerPrbInfoVO(param1:Object) {
+        public function PlayerPrbInfoVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -31,87 +32,108 @@ package net.wg.gui.prebattle.data
         
         private var _isCreator:Boolean;
         
-        override public function get kickId() : Number {
+        override public function get kickId() : Number
+        {
             return accID;
         }
         
-        public function get time() : Number {
+        public function get time() : Number
+        {
             return this._time;
         }
         
-        public function set time(param1:Number) : void {
+        public function set time(param1:Number) : void
+        {
             this._time = param1;
         }
         
-        public function get state() : Number {
+        public function get state() : Number
+        {
             return this._state;
         }
         
-        public function set state(param1:Number) : void {
+        public function set state(param1:Number) : void
+        {
             this._state = param1;
         }
         
-        public function get icon() : String {
+        public function get icon() : String
+        {
             return this._icon;
         }
         
-        public function set icon(param1:String) : void {
+        public function set icon(param1:String) : void
+        {
             this._icon = param1;
         }
         
-        public function get vShortName() : String {
+        public function get vShortName() : String
+        {
             return this._vShortName;
         }
         
-        public function set vShortName(param1:String) : void {
+        public function set vShortName(param1:String) : void
+        {
             this._vShortName = param1;
         }
         
-        public function get vLevel() : String {
+        public function get vLevel() : String
+        {
             return this._vLevel;
         }
         
-        public function set vLevel(param1:String) : void {
+        public function set vLevel(param1:String) : void
+        {
             this._vLevel = param1;
         }
         
-        public function get dummy() : Boolean {
+        public function get dummy() : Boolean
+        {
             return this._dummy;
         }
         
-        public function set dummy(param1:Boolean) : void {
+        public function set dummy(param1:Boolean) : void
+        {
             this._dummy = param1;
         }
         
-        public function get vType() : String {
+        public function get vType() : String
+        {
             return this._vType;
         }
         
-        public function set vType(param1:String) : void {
+        public function set vType(param1:String) : void
+        {
             this._vType = param1;
         }
         
-        public function get orderNumber() : Number {
+        public function get orderNumber() : Number
+        {
             return this._orderNumber;
         }
         
-        public function set orderNumber(param1:Number) : void {
+        public function set orderNumber(param1:Number) : void
+        {
             this._orderNumber = param1;
         }
         
-        public function get isCreator() : Boolean {
+        public function get isCreator() : Boolean
+        {
             return this._isCreator;
         }
         
-        public function set isCreator(param1:Boolean) : void {
+        public function set isCreator(param1:Boolean) : void
+        {
             this._isCreator = param1;
         }
         
-        public function isOffline() : Boolean {
+        public function isOffline() : Boolean
+        {
             return !((this._state & PrebattleStateFlags.OFFLINE) == 0);
         }
         
-        public function getStateString() : String {
+        public function getStateString() : String
+        {
             var _loc1_:String = PrebattleStateString.UNKNOWN;
             if((this._state) && !(this._state == PrebattleStateFlags.UNKNOWN))
             {
@@ -143,7 +165,8 @@ package net.wg.gui.prebattle.data
             return _loc1_;
         }
         
-        public function getCurrentColor() : Number {
+        public function getCurrentColor() : Number
+        {
             var _loc1_:IColorScheme = null;
             if((this.isCreator) && !himself)
             {

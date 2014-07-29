@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips.VO
     public class SettingsControlVO extends DAAPIDataClass
     {
         
-        public function SettingsControlVO(param1:Object) {
+        public function SettingsControlVO(param1:Object)
+        {
             super(param1);
         }
         

@@ -22,7 +22,8 @@ package scaleform.clik.controls
     public class ButtonBar extends UIComponent
     {
         
-        public function ButtonBar() {
+        public function ButtonBar()
+        {
             super();
         }
         
@@ -56,13 +57,15 @@ package scaleform.clik.controls
         
         public var container:MovieClip;
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             this.dataProvider = new DataProvider();
             this._renderers = [];
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._dataProvider)
             {
                 this._dataProvider.cleanUp();
@@ -78,11 +81,13 @@ package scaleform.clik.controls
             super.onDispose();
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return super.enabled;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(this.enabled == param1)
             {
                 return;
@@ -103,19 +108,23 @@ package scaleform.clik.controls
             }
         }
         
-        override public function get focusable() : Boolean {
+        override public function get focusable() : Boolean
+        {
             return _focusable;
         }
         
-        override public function set focusable(param1:Boolean) : void {
+        override public function set focusable(param1:Boolean) : void
+        {
             super.focusable = param1;
         }
         
-        public function get dataProvider() : IDataProvider {
+        public function get dataProvider() : IDataProvider
+        {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:IDataProvider) : void {
+        public function set dataProvider(param1:IDataProvider) : void
+        {
             if(this._dataProvider == param1)
             {
                 return;
@@ -133,7 +142,8 @@ package scaleform.clik.controls
             invalidateData();
         }
         
-        public function set itemRendererName(param1:String) : void {
+        public function set itemRendererName(param1:String) : void
+        {
             var classRef:Class = null;
             var value:String = param1;
             if((_inspector) && value == "Button" || value == "")
@@ -155,29 +165,35 @@ package scaleform.clik.controls
             }
         }
         
-        public function get spacing() : Number {
+        public function get spacing() : Number
+        {
             return this._spacing;
         }
         
-        public function set spacing(param1:Number) : void {
+        public function set spacing(param1:Number) : void
+        {
             this._spacing = param1;
             this.invalidateSettings();
         }
         
-        public function get direction() : String {
+        public function get direction() : String
+        {
             return this._direction;
         }
         
-        public function set direction(param1:String) : void {
+        public function set direction(param1:String) : void
+        {
             this._direction = param1;
             this.invalidateSettings();
         }
         
-        public function get autoSize() : String {
+        public function get autoSize() : String
+        {
             return this._autoSize;
         }
         
-        public function set autoSize(param1:String) : void {
+        public function set autoSize(param1:String) : void
+        {
             if(param1 == this._autoSize)
             {
                 return;
@@ -192,20 +208,24 @@ package scaleform.clik.controls
             this.invalidateSettings();
         }
         
-        public function get buttonWidth() : Number {
+        public function get buttonWidth() : Number
+        {
             return this._buttonWidth;
         }
         
-        public function set buttonWidth(param1:Number) : void {
+        public function set buttonWidth(param1:Number) : void
+        {
             this._buttonWidth = param1;
             invalidate();
         }
         
-        public function get selectedIndex() : int {
+        public function get selectedIndex() : int
+        {
             return this._selectedIndex;
         }
         
-        public function set selectedIndex(param1:int) : void {
+        public function set selectedIndex(param1:int) : void
+        {
             if(param1 == this._selectedIndex)
             {
                 return;
@@ -225,37 +245,45 @@ package scaleform.clik.controls
             dispatchEvent(new IndexEvent(IndexEvent.INDEX_CHANGE,true,true,this._selectedIndex,_loc2_,this._dataProvider[this._selectedIndex]));
         }
         
-        public function get selectedItem() : Object {
+        public function get selectedItem() : Object
+        {
             return this._dataProvider.requestItemAt(this._selectedIndex);
         }
         
-        public function get data() : Object {
+        public function get data() : Object
+        {
             return this.selectedItem.data;
         }
         
-        public function get labelField() : String {
+        public function get labelField() : String
+        {
             return this._labelField;
         }
         
-        public function set labelField(param1:String) : void {
+        public function set labelField(param1:String) : void
+        {
             this._labelField = param1;
             invalidateData();
         }
         
-        public function get labelFunction() : Function {
+        public function get labelFunction() : Function
+        {
             return this._labelFunction;
         }
         
-        public function set labelFunction(param1:Function) : void {
+        public function set labelFunction(param1:Function) : void
+        {
             this._labelFunction = param1;
             invalidateData();
         }
         
-        public function invalidateSettings() : void {
+        public function invalidateSettings() : void
+        {
             invalidate(InvalidationType.SETTINGS);
         }
         
-        public function itemToLabel(param1:Object) : String {
+        public function itemToLabel(param1:Object) : String
+        {
             if(param1 == null)
             {
                 return "";
@@ -275,7 +303,8 @@ package scaleform.clik.controls
             return param1.toString();
         }
         
-        public function getButtonAt(param1:int) : Button {
+        public function getButtonAt(param1:int) : Button
+        {
             if(param1 >= 0 && param1 < this._renderers.length)
             {
                 return this._renderers[param1];
@@ -283,7 +312,8 @@ package scaleform.clik.controls
             return null;
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             var _loc6_:* = NaN;
             if(param1.handled)
             {
@@ -347,11 +377,13 @@ package scaleform.clik.controls
             }
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[CLIK ButtonBar " + name + "]";
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             tabEnabled = (_focusable) && (this.enabled);
             if(this._group == null)
@@ -367,7 +399,8 @@ package scaleform.clik.controls
             addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:IEventCollector = null;
             if((isInvalid(InvalidationType.RENDERERS)) || (isInvalid(InvalidationType.DATA)) || (isInvalid(InvalidationType.SETTINGS)) || (isInvalid(InvalidationType.SIZE)))
             {
@@ -383,7 +416,8 @@ package scaleform.clik.controls
             }
         }
         
-        protected function refreshData() : void {
+        protected function refreshData() : void
+        {
             this.selectedIndex = Math.min(this._dataProvider.length - 1,this._selectedIndex);
             if(this._dataProvider)
             {
@@ -391,7 +425,8 @@ package scaleform.clik.controls
             }
         }
         
-        protected function updateRenderers() : void {
+        protected function updateRenderers() : void
+        {
             var _loc5_:* = 0;
             var _loc6_:DisplayObject = null;
             var _loc7_:Button = null;
@@ -508,7 +543,8 @@ package scaleform.clik.controls
             this.selectedIndex = Math.min(this._dataProvider.length - 1,this._selectedIndex);
         }
         
-        protected function populateData(param1:Array) : void {
+        protected function populateData(param1:Array) : void
+        {
             var _loc3_:Button = null;
             var _loc2_:uint = 0;
             while(_loc2_ < this._renderers.length)
@@ -520,13 +556,15 @@ package scaleform.clik.controls
             }
         }
         
-        protected function populateRendererData(param1:Button, param2:uint) : void {
+        protected function populateRendererData(param1:Button, param2:uint) : void
+        {
             param1.label = this.itemToLabel(this._dataProvider.requestItemAt(param2));
             param1.data = this._dataProvider.requestItemAt(param2);
             param1.selected = param2 == this.selectedIndex;
         }
         
-        protected function setupRenderer(param1:Button, param2:uint) : void {
+        protected function setupRenderer(param1:Button, param2:uint) : void
+        {
             param1.owner = this;
             param1.focusable = false;
             param1.focusTarget = this;
@@ -534,7 +572,8 @@ package scaleform.clik.controls
             param1.allowDeselect = false;
         }
         
-        protected function handleButtonGroupChange(param1:Event) : void {
+        protected function handleButtonGroupChange(param1:Event) : void
+        {
             if(this._group.selectedIndex != this.selectedIndex)
             {
                 this.selectedIndex = this._group.selectedIndex;
@@ -542,11 +581,13 @@ package scaleform.clik.controls
             }
         }
         
-        protected function handleDataChange(param1:Event) : void {
+        protected function handleDataChange(param1:Event) : void
+        {
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function changeFocus() : void {
+        override protected function changeFocus() : void
+        {
             var _loc1_:Button = this._renderers[this._selectedIndex] as Button;
             if(_loc1_ == null)
             {

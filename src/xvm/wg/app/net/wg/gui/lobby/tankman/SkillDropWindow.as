@@ -12,7 +12,8 @@ package net.wg.gui.lobby.tankman
     public class SkillDropWindow extends SkillDropMeta implements ISkillDropMeta
     {
         
-        public function SkillDropWindow() {
+        public function SkillDropWindow()
+        {
             super();
             isModal = true;
         }
@@ -45,7 +46,8 @@ package net.wg.gui.lobby.tankman
         
         private var isFirstInited:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             var _loc1_:* = "savingModeGroup";
             this.savingModeGroup = new ButtonGroup("savingModeGroup",this);
@@ -67,23 +69,28 @@ package net.wg.gui.lobby.tankman
             this.buttonCancel.addEventListener(ButtonEvent.CLICK,this.onCancelClick);
         }
         
-        private function onSavingModeChanghed(param1:Event) : void {
+        private function onSavingModeChanghed(param1:Event) : void
+        {
             this.recalculateData();
         }
         
-        private function onSavingModeButtonDoubleClick(param1:MouseEvent) : void {
+        private function onSavingModeButtonDoubleClick(param1:MouseEvent) : void
+        {
             this.onDropClick(null);
         }
         
-        private function onCancelClick(param1:ButtonEvent) : void {
+        private function onCancelClick(param1:ButtonEvent) : void
+        {
             onWindowCloseS();
         }
         
-        private function onDropClick(param1:ButtonEvent) : void {
+        private function onDropClick(param1:ButtonEvent) : void
+        {
             dropSkillsS(this.getSelectedDropCostInfo().id);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.goldButton.removeEventListener(MouseEvent.DOUBLE_CLICK,this.onSavingModeButtonDoubleClick);
             this.creditsButton.removeEventListener(MouseEvent.DOUBLE_CLICK,this.onSavingModeButtonDoubleClick);
@@ -102,13 +109,15 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             this.window.title = MENU.SKILLDROPWINDOW_TITLE;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(INVALID_DATA)) && (this.model))
             {
@@ -135,13 +144,15 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        private function updateSavingModes() : void {
+        private function updateSavingModes() : void
+        {
             this.goldButton.setDataForDropSkills(this.model.dropSkillGold.gold,this.gold >= this.model.dropSkillGold.gold,this.model.dropSkillGold.actionPriceDataVo);
             this.creditsButton.setDataForDropSkills(this.model.dropSkillCredits.credits,this.credits > this.model.dropSkillCredits.credits,this.model.dropSkillCredits.actionPriceDataVo);
             this.freeButton.setDataForDropSkills(NaN,true,null);
         }
         
-        private function autoSelectSavingMode() : void {
+        private function autoSelectSavingMode() : void
+        {
             var _loc1_:TankmanTrainingSmallButton = null;
             switch(this.model.defaultSavingMode)
             {
@@ -160,7 +171,8 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        public function getSelectedDropCostInfo() : Object {
+        public function getSelectedDropCostInfo() : Object
+        {
             var _loc1_:Object = null;
             switch(this.savingModeGroup.selectedButton)
             {
@@ -177,7 +189,8 @@ package net.wg.gui.lobby.tankman
             return _loc1_;
         }
         
-        private function recalculateData() : void {
+        private function recalculateData() : void
+        {
             var _loc1_:Object = this.getSelectedDropCostInfo();
             var _loc2_:Array = calcDropSkillsParamsS(this.model.compactDescriptor,_loc1_.xpReuseFraction);
             var _loc3_:Number = _loc2_[0];
@@ -191,19 +204,22 @@ package net.wg.gui.lobby.tankman
             this.afterBlock.setRoleLevel(this.model.roleLevel,_loc3_);
         }
         
-        public function as_setData(param1:Object) : void {
+        public function as_setData(param1:Object) : void
+        {
             this.model = SkillDropModel.parseFromObject(param1);
             this.gold = this.model.gold;
             this.credits = this.model.credits;
             invalidate(INVALID_DATA);
         }
         
-        public function as_setGold(param1:Number) : void {
+        public function as_setGold(param1:Number) : void
+        {
             this.gold = param1;
             invalidate(INVALID_MONEY);
         }
         
-        public function as_setCredits(param1:Number) : void {
+        public function as_setCredits(param1:Number) : void
+        {
             this.credits = param1;
             invalidate(INVALID_MONEY);
         }

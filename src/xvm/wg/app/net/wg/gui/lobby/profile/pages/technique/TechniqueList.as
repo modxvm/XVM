@@ -13,7 +13,8 @@ package net.wg.gui.lobby.profile.pages.technique
     public class TechniqueList extends SortableScrollingList
     {
         
-        public function TechniqueList() {
+        public function TechniqueList()
+        {
             super();
         }
         
@@ -43,24 +44,28 @@ package net.wg.gui.lobby.profile.pages.technique
         
         private var isDataProviderReceived:Boolean;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.addEventListener(ListEvent.INDEX_CHANGE,this.indexChangedHandler,false,0,true);
         }
         
-        override protected function handleItemClick(param1:ButtonEvent) : void {
+        override protected function handleItemClick(param1:ButtonEvent) : void
+        {
             super.handleItemClick(param1);
             this.isSortingTheLastActivity = false;
         }
         
-        private function indexChangedHandler(param1:ListEvent) : void {
+        private function indexChangedHandler(param1:ListEvent) : void
+        {
             if(!this.isSortingTheLastActivity)
             {
                 dispatchEvent(new Event(SELECTED_DATA_CHANGED));
             }
         }
         
-        override public function set dataProvider(param1:IDataProvider) : void {
+        override public function set dataProvider(param1:IDataProvider) : void
+        {
             var _loc2_:Vector.<String> = null;
             var _loc3_:Object = null;
             var _loc4_:String = null;
@@ -90,7 +95,8 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        override protected function applySorting(param1:Array) : void {
+        override protected function applySorting(param1:Array) : void
+        {
             var _loc4_:TechniqueListVehicleVO = null;
             super.applySorting(param1);
             var _loc2_:* = -1;
@@ -114,7 +120,8 @@ package net.wg.gui.lobby.profile.pages.technique
             invalidateSelectedIndex();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.isSortingTheLastActivity = false;
             if(this.isDataProviderReceived)
@@ -124,7 +131,8 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        public function get selectedItem() : Object {
+        public function get selectedItem() : Object
+        {
             if((dataProvider) && dataProvider.length > 0)
             {
                 return dataProvider[selectedIndex];
@@ -132,14 +140,16 @@ package net.wg.gui.lobby.profile.pages.technique
             return null;
         }
         
-        override protected function invalidateSorting(param1:Object) : void {
+        override protected function invalidateSorting(param1:Object) : void
+        {
             this.updateOldSelected(_selectedIndex);
             super.invalidateSorting(param1);
             this.isSortingTheLastActivity = true;
             invalidate(SORTING_INVALID);
         }
         
-        private function updateOldSelected(param1:int) : void {
+        private function updateOldSelected(param1:int) : void
+        {
             var _loc3_:TechniqueListVehicleVO = null;
             var _loc2_:IListItemRenderer = getRendererAt(param1);
             if(_loc2_)
@@ -156,7 +166,8 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc8_:IListItemRenderer = null;
             var _loc1_:uint = _renderers.length;
             var _loc2_:Number = rowHeight;
@@ -180,12 +191,14 @@ package net.wg.gui.lobby.profile.pages.technique
             drawScrollBar();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.removeEventListener(ListEvent.INDEX_CHANGE,this.indexChangedHandler);
             super.onDispose();
         }
         
-        public function set selectedVehIntCD(param1:int) : void {
+        public function set selectedVehIntCD(param1:int) : void
+        {
             var _loc4_:TechniqueListVehicleVO = null;
             this.oldSelectedItemId = param1;
             var _loc2_:* = -1;

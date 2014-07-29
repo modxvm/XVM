@@ -8,7 +8,8 @@ package net.wg.gui.tutorial.windows
     public class TutorialGreetingDialog extends TutorialDialog
     {
         
-        public function TutorialGreetingDialog() {
+        public function TutorialGreetingDialog()
+        {
             super();
             canClose = false;
             canDrag = false;
@@ -23,7 +24,8 @@ package net.wg.gui.tutorial.windows
         
         public var restartHintField:TextField;
         
-        override protected function drawData() : void {
+        override protected function drawData() : void
+        {
             super.drawData();
             this.imageLoader.source = _data.imageUrl;
             messageField.htmlText = _data.message;
@@ -31,7 +33,8 @@ package net.wg.gui.tutorial.windows
             this.updateBonuses();
         }
         
-        private function updateBonuses() : void {
+        private function updateBonuses() : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = 0;
@@ -64,23 +67,27 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.restartHintField.text = App.utils.locale.makeString(BATTLE_TUTORIAL.DIALOGS_GREETING_RESTART_HINT_TEXT);
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(submitBtn);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             window.title = BATTLE_TUTORIAL.DIALOGS_GREETING_TITLE;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.imageLoader.dispose();
         }

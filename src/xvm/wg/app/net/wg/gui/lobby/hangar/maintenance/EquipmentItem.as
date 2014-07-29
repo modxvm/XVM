@@ -30,7 +30,8 @@ package net.wg.gui.lobby.hangar.maintenance
     public class EquipmentItem extends SoundButtonEx implements IResettable
     {
         
-        public function EquipmentItem() {
+        public function EquipmentItem()
+        {
             super();
             this.select.handleScroll = false;
             this.select.focusIndicator = this.emptyFocusIndicator;
@@ -92,7 +93,8 @@ package net.wg.gui.lobby.hangar.maintenance
         
         private var gold:Number;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:IEventCollector = App.utils.events;
             _loc1_.removeEvent(this.toBuyDropdown,ListEvent.INDEX_CHANGE,this.onModuleCurrencyChanged);
             _loc1_.removeEvent(this.select,ListEvent.INDEX_CHANGE,this.onItemRendererClick);
@@ -102,7 +104,8 @@ package net.wg.gui.lobby.hangar.maintenance
             super.onDispose();
         }
         
-        public function setData(param1:Array, param2:int, param3:Array, param4:Array, param5:Number, param6:Number) : void {
+        public function setData(param1:Array, param2:int, param3:Array, param4:Array, param5:Number, param6:Number) : void
+        {
             var _loc8_:ModuleVO = null;
             var _loc9_:* = 0;
             if(param1)
@@ -123,10 +126,9 @@ package net.wg.gui.lobby.hangar.maintenance
             while(_loc9_ < _loc10_)
             {
                 _loc8_ = param1[_loc9_];
-                _loc8_.userCredits = {
-                    "credits":param5,
-                    "gold":param6
-                };
+                _loc8_.userCredits = {"credits":param5,
+                "gold":param6
+            };
             if(_loc8_.target == 1 && param2 == _loc8_.index)
             {
                 this.selectedIndexOld = _loc9_;
@@ -165,7 +167,8 @@ package net.wg.gui.lobby.hangar.maintenance
         }
     }
     
-    public function toggleSelectChange(param1:Boolean) : void {
+    public function toggleSelectChange(param1:Boolean) : void
+    {
         if(param1)
         {
             App.utils.events.addEvent(this.select,ListEvent.INDEX_CHANGE,this.onItemRendererClick);
@@ -176,12 +179,14 @@ package net.wg.gui.lobby.hangar.maintenance
         }
     }
     
-    public function reset() : void {
+    public function reset() : void
+    {
         this.clear();
         this.default_initialized = false;
     }
     
-    public function get changed() : Boolean {
+    public function get changed() : Boolean
+    {
         if(this.select.selectedIndex > -1)
         {
             return !(this.initialId == this.artifactsData[this.select.selectedIndex].id);
@@ -189,11 +194,13 @@ package net.wg.gui.lobby.hangar.maintenance
         return false;
     }
     
-    public function get selectedItem() : ModuleVO {
+    public function get selectedItem() : ModuleVO
+    {
         return this.select.selectedIndex == -1?null:this.artifactsData[this.select.selectedIndex];
     }
     
-    override protected function configUI() : void {
+    override protected function configUI() : void
+    {
         super.configUI();
         focusTarget = this.select;
         _focusable = tabEnabled = tabChildren = mouseChildren = true;
@@ -209,7 +216,8 @@ package net.wg.gui.lobby.hangar.maintenance
         this.soundType = SoundTypes.ARTEFACT_RENDERER;
     }
     
-    private function cleanupData() : void {
+    private function cleanupData() : void
+    {
         if(this.artifactsData)
         {
             this.artifactsData.splice(0,this.artifactsData.length);
@@ -227,7 +235,8 @@ package net.wg.gui.lobby.hangar.maintenance
         }
     }
     
-    private function update() : void {
+    private function update() : void
+    {
         var _loc3_:IEventCollector = null;
         var _loc1_:ModuleVO = this.artifactsData[this.select.selectedIndex];
         this.toBuyDropdown.visible = false;
@@ -261,7 +270,8 @@ package net.wg.gui.lobby.hangar.maintenance
         this.updateModulePrice();
     }
     
-    private function clear() : void {
+    private function clear() : void
+    {
         this.toBuyDropdown.visible = false;
         this.toBuyTf.visible = false;
         this.icon.source = EMPTY_ICON;
@@ -270,7 +280,8 @@ package net.wg.gui.lobby.hangar.maintenance
         this.countLabel.visible = this.toBuy.visible = this.price.visible = this.actionPrice.visible = false;
     }
     
-    private function updateModulePrice() : void {
+    private function updateModulePrice() : void
+    {
         var _loc1_:ModuleVO = this.selectedItem;
         this.price.icon = this.toBuy.icon = _loc1_.currency;
         var _loc2_:* = 0;
@@ -328,7 +339,8 @@ package net.wg.gui.lobby.hangar.maintenance
         this.toBuyTf.alpha = _loc2_ != 0?1:0.3;
     }
     
-    private function vectorToArray(param1:Vector.<ModuleVO>) : Array {
+    private function vectorToArray(param1:Vector.<ModuleVO>) : Array
+    {
         var _loc2_:Array = new Array(param1.length);
         var _loc3_:int = param1.length;
         while(_loc3_--)
@@ -338,7 +350,8 @@ package net.wg.gui.lobby.hangar.maintenance
         return _loc2_;
     }
     
-    private function onModuleCurrencyChanged(param1:ListEvent) : void {
+    private function onModuleCurrencyChanged(param1:ListEvent) : void
+    {
         this.price.icon = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
         this.actionPrice.ico = this.toBuyDropdown.selectedIndex == 0?IconsTypes.CREDITS:IconsTypes.GOLD;
         this.selectedItem.currency = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
@@ -346,7 +359,8 @@ package net.wg.gui.lobby.hangar.maintenance
         dispatchEvent(new EquipmentEvent(EquipmentEvent.TOTAL_PRICE_CHANGED,-1,-1,this.selectedItem.currency));
     }
     
-    private function onItemRendererClick(param1:ListEvent) : void {
+    private function onItemRendererClick(param1:ListEvent) : void
+    {
         var _loc2_:EquipmentEvent = null;
         if(this.artifactsData[this.select.selectedIndex].target == 1)
         {
@@ -363,7 +377,8 @@ package net.wg.gui.lobby.hangar.maintenance
         dispatchEvent(_loc2_);
     }
     
-    private function onContextMenuAction(param1:ContextMenuEvent) : void {
+    private function onContextMenuAction(param1:ContextMenuEvent) : void
+    {
         var _loc2_:IEventCollector = null;
         switch(param1.id)
         {
@@ -382,7 +397,8 @@ package net.wg.gui.lobby.hangar.maintenance
         }
     }
     
-    override public function showTooltip(param1:MouseEvent) : void {
+    override public function showTooltip(param1:MouseEvent) : void
+    {
         var _loc2_:ModuleVO = this.selectedItem;
         if(_loc2_)
         {
@@ -394,7 +410,8 @@ package net.wg.gui.lobby.hangar.maintenance
         }
     }
     
-    override public function handleMouseDown(param1:MouseEvent) : void {
+    override public function handleMouseDown(param1:MouseEvent) : void
+    {
         var _loc2_:String = null;
         App.toolTipMgr.hide();
         if((this.selectedItem) && param1 is MouseEventEx)

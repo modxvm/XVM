@@ -6,7 +6,8 @@ package net.wg.gui.lobby.profile.data
     public class ProfileBaseInfoVO extends DAAPIDataClass
     {
         
-        public function ProfileBaseInfoVO(param1:Object) {
+        public function ProfileBaseInfoVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -16,25 +17,30 @@ package net.wg.gui.lobby.profile.data
         
         public var lossesCount:int = -1;
         
-        public function getBattlesCountStr() : String {
+        public function getBattlesCountStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.battlesCount);
         }
         
-        public function getWinsEfficiencyStr() : String {
+        public function getWinsEfficiencyStr() : String
+        {
             var _loc1_:Number = this.winsCount / this.battlesCount;
             _loc1_ = !isNaN(_loc1_)?_loc1_:0;
             return ItemsUtils.floatToPercent(_loc1_);
         }
         
-        public function getWinsCountStr() : String {
+        public function getWinsCountStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.winsCount);
         }
         
-        public function getLossesCountStr() : String {
+        public function getLossesCountStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.lossesCount);
         }
         
-        public function getDrawsCountStr() : String {
+        public function getDrawsCountStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.battlesCount - this.winsCount - this.lossesCount);
         }
     }

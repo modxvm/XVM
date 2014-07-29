@@ -5,7 +5,8 @@ package net.wg.data.VO
     public class TrainingRoomInfoVO extends DAAPIDataClass
     {
         
-        public function TrainingRoomInfoVO(param1:Object) {
+        public function TrainingRoomInfoVO(param1:Object)
+        {
             super(param1);
         }
         

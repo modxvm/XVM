@@ -6,7 +6,8 @@ package net.wg.gui.components.tooltips.VO
     public class AchievementVO extends Object
     {
         
-        public function AchievementVO(param1:Object) {
+        public function AchievementVO(param1:Object)
+        {
             super();
             this.parsHash(param1);
         }
@@ -45,7 +46,8 @@ package net.wg.gui.components.tooltips.VO
         
         public var closeToRecord:Array = null;
         
-        private function parsHash(param1:Object) : void {
+        private function parsHash(param1:Object) : void
+        {
             var _loc4_:Array = null;
             var _loc5_:uint = 0;
             var _loc6_:String = null;
@@ -97,10 +99,9 @@ package net.wg.gui.components.tooltips.VO
                         {
                             _loc7_ = _loc9_[1];
                         }
-                        this.params.push({
-                            "id":_loc6_,
-                            "val":_loc7_
-                        });
+                        this.params.push({"id":_loc6_,
+                        "val":_loc7_
+                    });
                     _loc8_++;
                 }
             }

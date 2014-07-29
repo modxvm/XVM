@@ -3,7 +3,8 @@ package net.wg.gui.lobby.store.shop.base
     public class ACTION_CREDITS_STATES extends Object
     {
         
-        public function ACTION_CREDITS_STATES() {
+        public function ACTION_CREDITS_STATES()
+        {
             super();
         }
         

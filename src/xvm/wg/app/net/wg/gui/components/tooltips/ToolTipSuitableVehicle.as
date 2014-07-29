@@ -4,8 +4,8 @@ package net.wg.gui.components.tooltips
     import flash.display.Sprite;
     import net.wg.gui.cyberSport.controls.CSVehicleButton;
     import net.wg.data.managers.ITooltipProps;
-    import net.wg.gui.components.tooltips.VO.SuitableVehicleVO;
     import net.wg.utils.ILocale;
+    import net.wg.gui.components.tooltips.VO.SuitableVehicleVO;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
     import net.wg.data.constants.Tooltips;
@@ -16,7 +16,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipSuitableVehicle extends ToolTipSpecial
     {
         
-        public function ToolTipSuitableVehicle() {
+        public function ToolTipSuitableVehicle()
+        {
             super();
             this.headerTF = content.headerTF;
             this.notEnoughTF = content.notEnoughTF;
@@ -46,7 +47,8 @@ package net.wg.gui.components.tooltips
         
         private var MAX_CONDITIONS_CS_VEHICLES_BUTTONS:Number = 2;
         
-        private function addVehicleButtons() : void {
+        private function addVehicleButtons() : void
+        {
             this.i = 0;
             while(this.i < this.MAX_CONDITIONS_CS_VEHICLES_BUTTONS)
             {
@@ -58,7 +60,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:CSVehicleButton = null;
             if(this.conditionCSVehicleButtonList)
             {
@@ -73,23 +76,28 @@ package net.wg.gui.components.tooltips
             super.onDispose();
         }
         
-        override public function build(param1:Object, param2:ITooltipProps) : void {
+        override public function build(param1:Object, param2:ITooltipProps) : void
+        {
             super.build(param1,param2);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ToolTipSuitableVehicle " + name + "]";
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
+            var _loc1_:ILocale = null;
             var _loc2_:SuitableVehicleVO = null;
             var _loc5_:TextField = null;
             var _loc6_:TextField = null;
-            var _loc1_:ILocale = App.utils.locale;
+            _loc1_ = App.utils.locale;
             _loc2_ = new SuitableVehicleVO(_data);
             var _loc3_:Number = 300;
             var _loc4_:Separator = null;
@@ -196,7 +204,8 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             var _loc1_:Separator = null;
             if(content.width < this.MIN_CONTENT_WIDTH)
             {
@@ -211,7 +220,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        private function addCondition(param1:MovieClip, param2:Object, param3:Number, param4:CSVehicleButton) : Number {
+        private function addCondition(param1:MovieClip, param2:Object, param3:Number, param4:CSVehicleButton) : Number
+        {
             var _loc5_:* = false;
             var _loc6_:* = false;
             if((param2.hasOwnProperty("vehicle")) && (param2["vehicle"]))
@@ -245,7 +255,8 @@ package net.wg.gui.components.tooltips
             return param3;
         }
         
-        private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number {
+        private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number
+        {
             var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
             _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
             _loc4_.x = contentMargin.left + bgShadowMargin.left;

@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class ContextMenuItemSeparate extends UIComponent
     {
         
-        public function ContextMenuItemSeparate() {
+        public function ContextMenuItemSeparate()
+        {
             this._items = [];
             this.subItems = [];
             super();
@@ -19,7 +20,8 @@ package net.wg.gui.components.controls
         
         public var subItems:Array;
         
-        public function get items() : Array {
+        public function get items() : Array
+        {
             return this._items;
         }
     }

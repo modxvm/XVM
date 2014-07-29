@@ -7,13 +7,15 @@ package net.wg.infrastructure.base.meta.impl
     public class ShopMeta extends Store
     {
         
-        public function ShopMeta() {
+        public function ShopMeta()
+        {
             super();
         }
         
         public var buyItem:Function = null;
         
-        public function buyItemS(param1:StoreTableData) : void {
+        public function buyItemS(param1:StoreTableData) : void
+        {
             App.utils.asserter.assertNotNull(this.buyItem,"buyItem" + Errors.CANT_NULL);
             this.buyItem(param1);
         }

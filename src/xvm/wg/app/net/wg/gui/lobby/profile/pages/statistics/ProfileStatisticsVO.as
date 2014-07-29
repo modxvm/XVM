@@ -6,13 +6,15 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class ProfileStatisticsVO extends ProfileDossierInfoVO
     {
         
-        public function ProfileStatisticsVO(param1:Object) {
+        public function ProfileStatisticsVO(param1:Object)
+        {
             super(param1);
         }
         
         public var survivalEfficiency:Number;
         
-        public function getSurvivalEfficiencyStr() : String {
+        public function getSurvivalEfficiencyStr() : String
+        {
             return ItemsUtils.floatToPercent(this.survivalEfficiency);
         }
     }

@@ -9,7 +9,8 @@ package net.wg.gui.components.controls
     public class ContextMenuItem extends SoundListItemRenderer
     {
         
-        public function ContextMenuItem() {
+        public function ContextMenuItem()
+        {
             this.subItems = new Array();
             super();
             soundType = SoundTypes.CONTEXT_MENU;
@@ -39,7 +40,8 @@ package net.wg.gui.components.controls
         
         public var textFieldSub:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(!constraintsDisabled && (this.textFieldSub))
             {
                 constraints.addElement("textFieldSub",this.textFieldSub,Constraints.ALL);
@@ -47,7 +49,8 @@ package net.wg.gui.components.controls
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             switch(this.type)
             {
@@ -72,7 +75,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             if(param1 == this._type)
             {
                 return;
@@ -85,11 +89,13 @@ package net.wg.gui.components.controls
             invalidateState();
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set items(param1:Vector.<IContextItem>) : void {
+        public function set items(param1:Vector.<IContextItem>) : void
+        {
             if(!this._items)
             {
                 this._items = new Vector.<IContextItem>();
@@ -109,11 +115,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get items() : Vector.<IContextItem> {
+        public function get items() : Vector.<IContextItem>
+        {
             return this._items;
         }
         
-        public function set isOpened(param1:Boolean) : void {
+        public function set isOpened(param1:Boolean) : void
+        {
             if(param1 == this._isOpened)
             {
                 return;
@@ -125,14 +133,17 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get isOpened() : Boolean {
+        public function get isOpened() : Boolean
+        {
             return this._isOpened;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             super.updateText();
             if(!(_label == null) && !(this.textFieldSub == null))
             {
@@ -140,7 +151,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             if(!initialized)
             {
                 return;
@@ -152,12 +164,14 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             var _loc1_:String = this.type == this.CONTEXT_MENU_ITEM_SUB?this.CONTEXT_MENU_ITEM_SUB + "_":"";
             return _selected?Vector.<String>([_loc1_ + "selected_",""]):Vector.<String>([_loc1_]);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ContextMenuItem " + name + "]";
         }
     }

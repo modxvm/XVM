@@ -5,7 +5,8 @@ package net.wg.app.impl
     public class Application_browserBgClassValue extends BitmapAsset
     {
         
-        public function Application_browserBgClassValue() {
+        public function Application_browserBgClassValue()
+        {
             super();
         }
     }

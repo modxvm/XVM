@@ -12,7 +12,8 @@ package net.wg.gui.lobby.hangar
     public class TankParam extends ListItemRenderer
     {
         
-        public function TankParam() {
+        public function TankParam()
+        {
             super();
             this._styles = new Styles();
         }
@@ -31,7 +32,8 @@ package net.wg.gui.lobby.hangar
         
         private var _styles:Styles = null;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             var _loc2_:ParamsVO = null;
             super.setData(param1);
             if(param1)
@@ -44,11 +46,13 @@ package net.wg.gui.lobby.hangar
             }
         }
         
-        override public function setListData(param1:ListData) : void {
+        override public function setListData(param1:ListData) : void
+        {
             index = param1.index;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(Event.ADDED,addToAutoGroup,false);
             removeEventListener(Event.REMOVED,addToAutoGroup,false);
             removeEventListener(MouseEvent.ROLL_OVER,handleMouseRollOver,false);
@@ -76,11 +80,13 @@ package net.wg.gui.lobby.hangar
             super.onDispose();
         }
         
-        override public function get selected() : Boolean {
+        override public function get selected() : Boolean
+        {
             return _selected;
         }
         
-        override public function set selected(param1:Boolean) : void {
+        override public function set selected(param1:Boolean) : void
+        {
             if(_selected == param1)
             {
                 return;
@@ -89,7 +95,8 @@ package net.wg.gui.lobby.hangar
             validateNow();
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             var _loc2_:String = null;
             super.enabled = param1;
             mouseChildren = false;
@@ -104,11 +111,13 @@ package net.wg.gui.lobby.hangar
             setState(_loc2_);
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             if(this._text == param1)
             {
                 return;
@@ -117,11 +126,13 @@ package net.wg.gui.lobby.hangar
             invalidate(INVALIDATE_TEXT);
         }
         
-        public function get param() : String {
+        public function get param() : String
+        {
             return this._value;
         }
         
-        public function set param(param1:String) : void {
+        public function set param(param1:String) : void
+        {
             if(this._value == param1)
             {
                 return;
@@ -130,12 +141,12 @@ package net.wg.gui.lobby.hangar
             invalidate(INVALIDATE_VALUE);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
-            _stateMap = {
-                "normal":["normal"],
-                "disabled":["disabled"]
-            };
+            _stateMap = {"normal":["normal"],
+            "disabled":["disabled"]
+        };
         var _loc1_:StyleSheet = new StyleSheet();
         _loc1_.setStyle("h1",{"color":"#B4A983"});
         _loc1_.setStyle("p",{"color":"#9F9260"});
@@ -151,7 +162,8 @@ package net.wg.gui.lobby.hangar
         this.tfField.styleSheet = this._styles.normal;
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         super.draw();
         if(isInvalid(INVALIDATE_TEXT))
         {
@@ -193,7 +205,8 @@ import flash.text.StyleSheet;
 class Styles extends Object implements IDisposable
 {
 
-function Styles() {
+function Styles()
+{
     super();
 }
 
@@ -203,31 +216,38 @@ private var _selected:StyleSheet = null;
 
 private var _disabled:StyleSheet = null;
 
-public function get normal() : StyleSheet {
+public function get normal() : StyleSheet
+{
     return this._normal;
 }
 
-public function set normal(param1:StyleSheet) : void {
+public function set normal(param1:StyleSheet) : void
+{
     this._normal = param1;
 }
 
-public function get selected() : StyleSheet {
+public function get selected() : StyleSheet
+{
     return this._selected;
 }
 
-public function set selected(param1:StyleSheet) : void {
+public function set selected(param1:StyleSheet) : void
+{
     this._selected = param1;
 }
 
-public function get disabled() : StyleSheet {
+public function get disabled() : StyleSheet
+{
     return this._disabled;
 }
 
-public function set disabled(param1:StyleSheet) : void {
+public function set disabled(param1:StyleSheet) : void
+{
     this._disabled = param1;
 }
 
-public function dispose() : void {
+public function dispose() : void
+{
     if(this._normal)
     {
         this._normal.clear();

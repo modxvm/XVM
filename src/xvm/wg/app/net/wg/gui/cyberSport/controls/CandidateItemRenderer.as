@@ -16,7 +16,8 @@ package net.wg.gui.cyberSport.controls
     public class CandidateItemRenderer extends SoundListItemRenderer implements IDropItem, IUpdatable
     {
         
-        public function CandidateItemRenderer() {
+        public function CandidateItemRenderer()
+        {
             super();
         }
         
@@ -28,7 +29,8 @@ package net.wg.gui.cyberSport.controls
         
         public var voiceWave:VoiceWave = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
             App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
@@ -37,7 +39,8 @@ package net.wg.gui.cyberSport.controls
             addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
             App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
             removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
@@ -49,7 +52,8 @@ package net.wg.gui.cyberSport.controls
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:RallyCandidateVO = null;
             var _loc2_:IUserProps = null;
             super.draw();
@@ -83,21 +87,25 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             this.setData(param1);
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidateData();
         }
         
-        protected function updateVoiceWave() : void {
+        protected function updateVoiceWave() : void
+        {
             this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
             this.voiceWave.setMuted(data?MessengerUtils.isMuted(data):false);
         }
         
-        protected function setSpeakers(param1:Boolean, param2:Boolean = false) : void {
+        protected function setSpeakers(param1:Boolean, param2:Boolean = false) : void
+        {
             if(param1)
             {
                 param2 = false;
@@ -112,18 +120,21 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function speakHandler(param1:VoiceChatEvent) : void {
+        private function speakHandler(param1:VoiceChatEvent) : void
+        {
             this.onPlayerSpeak(param1.getAccountDBID(),param1.type == VoiceChatEvent.START_SPEAKING);
         }
         
-        public function onPlayerSpeak(param1:Number, param2:Boolean) : void {
+        public function onPlayerSpeak(param1:Number, param2:Boolean) : void
+        {
             if((data) && param1 == data.uid)
             {
                 this.setSpeakers(param2);
             }
         }
         
-        private function onRollOverHandler(param1:MouseEvent) : void {
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
             var _loc2_:RallyCandidateVO = RallyCandidateVO(data);
             if(_loc2_)
             {
@@ -131,7 +142,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function onRollOutHandler(param1:MouseEvent) : void {
+        private function onRollOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
     }

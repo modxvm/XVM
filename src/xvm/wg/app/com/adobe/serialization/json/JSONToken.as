@@ -3,15 +3,17 @@ package com.adobe.serialization.json
     public final class JSONToken extends Object
     {
         
-        public function JSONToken(param1:int = -1, param2:Object = null) {
+        public function JSONToken(param1:int = -1, param2:Object = null)
+        {
             super();
             this.type = param1;
             this.value = param2;
         }
         
-        public static var token:JSONToken;
+        public static var token:JSONToken = new JSONToken();
         
-        public static function create(param1:int = -1, param2:Object = null) : JSONToken {
+        public static function create(param1:int = -1, param2:Object = null) : JSONToken
+        {
             token.type = param1;
             token.value = param2;
             return token;

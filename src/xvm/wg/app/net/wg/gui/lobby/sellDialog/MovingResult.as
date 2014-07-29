@@ -7,7 +7,8 @@ package net.wg.gui.lobby.sellDialog
     public class MovingResult extends UIComponent
     {
         
-        public function MovingResult() {
+        public function MovingResult()
+        {
             super();
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.lobby.sellDialog
         
         public var text:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.text.text = DIALOGS.CONFIRMMODULEDIALOG_TOTALLABEL;
             this.creditsIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
         }

@@ -14,46 +14,44 @@ package net.wg.gui.lobby.settings
     public class MarkerSettings extends SettingsBaseView
     {
         
-        public function MarkerSettings() {
-            this.markerAllyData = {
-                "vClass":"heavyTank",
-                "vIconSource":"../maps/icons/vehicle/contour/usa-T32.png",
-                "vType":"T32",
-                "vLevel":8,
-                "pFullName":"Killer",
-                "curHealth":1075,
-                "maxHealth":1400,
-                "entityName":"ally",
-                "speaking":false,
-                "hunt":false,
-                "entityType":"ally"
-            };
-        this.markerEnemyData = {
-            "vClass":"heavyTank",
-            "vIconSource":"../maps/icons/vehicle/contour/germany-PzVI.png",
-            "vType":"PzKpfw VI Tiger",
-            "vLevel":7,
+        public function MarkerSettings()
+        {
+            this.markerAllyData = {"vClass":"heavyTank",
+            "vIconSource":"../maps/icons/vehicle/contour/usa-T32.png",
+            "vType":"T32",
+            "vLevel":8,
             "pFullName":"Killer",
-            "curHealth":985,
-            "maxHealth":1350,
-            "entityName":"enemy",
+            "curHealth":1075,
+            "maxHealth":1400,
+            "entityName":"ally",
             "speaking":false,
             "hunt":false,
-            "entityType":"enemy"
+            "entityType":"ally"
         };
-    this.markerDeadData = {
-        "vClass":"heavyTank",
-        "vIconSource":"../maps/icons/vehicle/contour/germany-E-75.png",
-        "vType":"E-75",
-        "vLevel":9,
+        this.markerEnemyData = {"vClass":"heavyTank",
+        "vIconSource":"../maps/icons/vehicle/contour/germany-PzVI.png",
+        "vType":"PzKpfw VI Tiger",
+        "vLevel":7,
         "pFullName":"Killer",
-        "curHealth":0,
-        "maxHealth":1920,
-        "entityName":"ally",
+        "curHealth":985,
+        "maxHealth":1350,
+        "entityName":"enemy",
         "speaking":false,
         "hunt":false,
-        "entityType":"ally"
+        "entityType":"enemy"
     };
+    this.markerDeadData = {"vClass":"heavyTank",
+    "vIconSource":"../maps/icons/vehicle/contour/germany-E-75.png",
+    "vType":"E-75",
+    "vLevel":9,
+    "pFullName":"Killer",
+    "curHealth":0,
+    "maxHealth":1920,
+    "entityName":"ally",
+    "speaking":false,
+    "hunt":false,
+    "entityType":"ally"
+};
 super();
 }
 
@@ -93,12 +91,14 @@ private var markerEnemyData:Object;
 
 private var markerDeadData:Object;
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
 super.configUI();
 this.initMarkers();
 }
 
-private function initMarkers() : void {
+private function initMarkers() : void
+{
 this.markerAlly.init(this.markerAllyData);
 this.markerAllyAlt.init(this.markerAllyData);
 this.markerEnemy.init(this.markerEnemyData);
@@ -116,11 +116,13 @@ this.markerEnemyAlt.exInfo = true;
 this.markerDeadAlt.exInfo = true;
 }
 
-override public function update(param1:Object) : void {
+override public function update(param1:Object) : void
+{
 super.update(param1);
 }
 
-override protected function setData(param1:Object) : void {
+override protected function setData(param1:Object) : void
+{
 var _loc2_:String = null;
 var _loc3_:String = null;
 var _loc4_:SettingsMarkersForm = null;
@@ -150,7 +152,8 @@ this.tabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
 this.tabs.selectedIndex = this.__currentTab;
 }
 
-private function onControlChange(param1:SettingsSubVewEvent) : void {
+private function onControlChange(param1:SettingsSubVewEvent) : void
+{
 if(this._setDataInProgress)
 {
     return;
@@ -167,11 +170,13 @@ dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_
 this.updateShowContent();
 }
 
-override public function updateDependentData() : void {
+override public function updateDependentData() : void
+{
 this.updateShowContent();
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
 this.tabs.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
 if(this.enemyForm.hasEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE))
 {
@@ -192,16 +197,19 @@ this._dynamicMarkersData = null;
 super.onDispose();
 }
 
-override public function toString() : String {
+override public function toString() : String
+{
 return "[WG MarkerSettings " + name + "]";
 }
 
-private function onTabChange(param1:IndexEvent) : void {
+private function onTabChange(param1:IndexEvent) : void
+{
 this.__currentTab = param1.index;
 this.updateShowContent();
 }
 
-private function updateShowContent() : void {
+private function updateShowContent() : void
+{
 var _loc2_:String = null;
 var _loc3_:String = null;
 var _loc4_:String = null;

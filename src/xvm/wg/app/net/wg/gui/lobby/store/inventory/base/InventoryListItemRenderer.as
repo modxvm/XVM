@@ -16,13 +16,15 @@ package net.wg.gui.lobby.store.inventory.base
     public class InventoryListItemRenderer extends StoreListItemRenderer
     {
         
-        public function InventoryListItemRenderer() {
+        public function InventoryListItemRenderer()
+        {
             super();
             soundType = SoundTypes.RNDR_NORMAL;
             soundId = SoundManagerStates.RENDERER_INVENTORY;
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             if((App.instance) && (param1))
             {
@@ -31,15 +33,18 @@ package net.wg.gui.lobby.store.inventory.base
             invalidateData();
         }
         
-        public function sellItem() : void {
+        public function sellItem() : void
+        {
             dispatchEvent(new StoreEvent(StoreEvent.SELL,StoreTableData(data)));
         }
         
-        override protected function onLeftButtonClick() : void {
+        override protected function onLeftButtonClick() : void
+        {
             this.sellItem();
         }
         
-        override protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void {
+        override protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void
+        {
             var _loc4_:ILocale = null;
             var _loc5_:String = null;
             var _loc6_:* = NaN;
@@ -85,10 +90,12 @@ package net.wg.gui.lobby.store.inventory.base
             enabled = !param1.disabled;
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
         }
         
-        override protected function getTooltipMapping() : StoreTooltipMapVO {
+        override protected function getTooltipMapping() : StoreTooltipMapVO
+        {
             return new StoreTooltipMapVO(Tooltips.INVENTORY_VEHICLE,Tooltips.INVENTORY_SHELL,Tooltips.INVENTORY_MODULE);
         }
     }

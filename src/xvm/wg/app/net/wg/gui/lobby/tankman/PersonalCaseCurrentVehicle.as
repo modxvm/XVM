@@ -3,7 +3,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseCurrentVehicle extends Object
     {
         
-        public function PersonalCaseCurrentVehicle() {
+        public function PersonalCaseCurrentVehicle()
+        {
             super();
         }
         

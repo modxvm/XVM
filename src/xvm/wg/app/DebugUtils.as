@@ -1,4 +1,4 @@
-package 
+package
 {
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
@@ -6,7 +6,8 @@ package
     public class DebugUtils extends Object
     {
         
-        public function DebugUtils() {
+        public function DebugUtils()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package
         
         public static var LOG:String = "debug.LOG_GUI";
         
-        public static function LOG_DEBUG(... rest) : void {
+        public static function LOG_DEBUG(... rest) : void
+        {
             rest.unshift("DEBUG");
             __doLog.apply(null,rest);
         }
         
-        public static function traceDisplayList(param1:Object, param2:String = "") : void {
+        public static function traceDisplayList(param1:Object, param2:String = "") : void
+        {
             var _loc4_:DisplayObject = null;
             if(param1 == null)
             {
@@ -37,32 +40,39 @@ package
             }
         }
         
-        public static function LOG_ERROR(... rest) : void {
+        public static function LOG_ERROR(... rest) : void
+        {
             rest.unshift("ERROR");
             __doLog.apply(null,rest);
         }
         
-        public static function LOG_WARNING(... rest) : void {
+        public static function LOG_WARNING(... rest) : void
+        {
             rest.unshift("WARNING");
             __doLog.apply(null,rest);
         }
         
-        public static function LOG_DEBUG_FORMAT(... rest) : void {
+        public static function LOG_DEBUG_FORMAT(... rest) : void
+        {
             rest.unshift("DEBUG");
             __doLogFormat.apply(null,rest);
         }
         
-        public static function LOG_ERROR_FORMAT(... rest) : void {
+        public static function LOG_ERROR_FORMAT(... rest) : void
+        {
             rest.unshift("ERROR");
             __doLogFormat.apply(null,rest);
         }
         
-        public static function LOG_WARNING_FORMAT(... rest) : void {
+        public static function LOG_WARNING_FORMAT(... rest) : void
+        {
             rest.unshift("WARNING");
             __doLogFormat.apply(null,rest);
         }
         
-        private static function __doLog() : void {
+        private static function __doLog() : void
+        {
+            trace("[" + arguments[0] + "] " + String(arguments.slice(1)));
             var _loc2_:Array = [LOG];
             while(arguments.length)
             {
@@ -71,7 +81,8 @@ package
             App.environment.call.apply(null,_loc2_);
         }
         
-        private static function __doLogFormat() : void {
+        private static function __doLogFormat() : void
+        {
             var _loc2_:Array = [LOG_FMT];
             while(arguments.length)
             {

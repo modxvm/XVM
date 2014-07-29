@@ -9,27 +9,32 @@ package net.wg.gui.lobby.dialogs
     public class IconDialog extends IconDialogMeta implements IIconDialogMeta
     {
         
-        public function IconDialog() {
+        public function IconDialog()
+        {
             super();
         }
         
         public var icon:UILoaderAlt;
         
-        public function as_setIcon(param1:String) : void {
+        public function as_setIcon(param1:String) : void
+        {
             this.icon.addEventListener(UILoaderEvent.COMPLETE,this.loadingCompleteHandler,false,0,true);
             this.icon.source = param1;
         }
         
-        private function loadingCompleteHandler(param1:Event) : void {
+        private function loadingCompleteHandler(param1:Event) : void
+        {
             invalidateLayout();
         }
         
-        override protected function getBackgroundActualHeight() : Number {
+        override protected function getBackgroundActualHeight() : Number
+        {
             var _loc1_:Number = this.icon?this.icon.y + this.icon.height:0;
             return Math.max(_loc1_,super.getBackgroundActualHeight());
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.icon)
             {
                 this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.loadingCompleteHandler);

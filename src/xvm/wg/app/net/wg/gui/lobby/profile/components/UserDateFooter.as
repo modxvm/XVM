@@ -6,11 +6,13 @@ package net.wg.gui.lobby.profile.components
     public class UserDateFooter extends ProfileFooter
     {
         
-        public function UserDateFooter() {
+        public function UserDateFooter()
+        {
             super();
         }
         
-        public static function getDateWithDot(param1:String) : String {
+        public static function getDateWithDot(param1:String) : String
+        {
             var _loc2_:String = param1;
             if(_loc2_.lastIndexOf(".") != _loc2_.length - 1)
             {
@@ -21,7 +23,8 @@ package net.wg.gui.lobby.profile.components
         
         public var textDates:TextField;
         
-        override protected function applyDataChanges() : void {
+        override protected function applyDataChanges() : void
+        {
             var _loc1_:String = getDateWithDot(initData.registrationDate);
             var _loc2_:String = _loc1_ + this.getSeparator();
             var _loc3_:String = initData.lastBattleDate;
@@ -33,7 +36,8 @@ package net.wg.gui.lobby.profile.components
             this.textDates.htmlText = _loc2_;
         }
         
-        protected function getSeparator() : String {
+        protected function getSeparator() : String
+        {
             return " ";
         }
     }

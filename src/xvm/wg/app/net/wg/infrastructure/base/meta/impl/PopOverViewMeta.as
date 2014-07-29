@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class PopOverViewMeta extends AbstractWrapperView
     {
         
-        public function PopOverViewMeta() {
+        public function PopOverViewMeta()
+        {
             super();
         }
     }

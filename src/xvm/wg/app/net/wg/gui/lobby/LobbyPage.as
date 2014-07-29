@@ -25,7 +25,8 @@ package net.wg.gui.lobby
     public class LobbyPage extends LobbyPageMeta implements IDraggable, ILobbyPageMeta
     {
         
-        public function LobbyPage() {
+        public function LobbyPage()
+        {
             super();
         }
         
@@ -51,11 +52,13 @@ package net.wg.gui.lobby
         
         private var TOP_SUB_VIEW_POSITION:Number = 126;
         
-        override public function getSubContainer() : IManagedContainer {
+        override public function getSubContainer() : IManagedContainer
+        {
             return this.subViewContainer;
         }
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             _originalWidth = param1;
             _originalHeight = param2;
             setSize(param1,param2);
@@ -77,12 +80,14 @@ package net.wg.gui.lobby
             }
         }
         
-        public function onStartDrag() : void {
+        public function onStartDrag() : void
+        {
             this.dragOffsetX = stage.mouseX;
             this.dragOffsetY = stage.mouseY;
         }
         
-        public function onDragging(param1:Number, param2:Number) : void {
+        public function onDragging(param1:Number, param2:Number) : void
+        {
             var _loc3_:Number = -(this.dragOffsetX - stage.mouseX);
             var _loc4_:Number = -(this.dragOffsetY - stage.mouseY);
             this.dragOffsetX = stage.mouseX;
@@ -90,14 +95,17 @@ package net.wg.gui.lobby
             moveSpaceS(_loc3_,_loc4_,0);
         }
         
-        public function onEndDrag() : void {
+        public function onEndDrag() : void
+        {
         }
         
-        public function getDragType() : String {
+        public function getDragType() : String
+        {
             return DragType.SOFT;
         }
         
-        public function getHitArea() : InteractiveObject {
+        public function getHitArea() : InteractiveObject
+        {
             if(this.vehicleHitArea == null)
             {
                 DebugUtils.LOG_WARNING("vehicleHitArea is null!");
@@ -106,7 +114,8 @@ package net.wg.gui.lobby
             return this.vehicleHitArea.hit;
         }
         
-        public function as_showHelpLayout() : void {
+        public function as_showHelpLayout() : void
+        {
             if(!this._isShowHelpLayout)
             {
                 this.previousFocus = App.utils.focusHandler.getFocus(0);
@@ -116,7 +125,8 @@ package net.wg.gui.lobby
             }
         }
         
-        public function as_closeHelpLayout() : void {
+        public function as_closeHelpLayout() : void
+        {
             if(this._isShowHelpLayout)
             {
                 if(this.previousFocus)
@@ -130,7 +140,8 @@ package net.wg.gui.lobby
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             App.stage.addEventListener(LobbyEvent.REGISTER_DRAGGING,this.handleRegisterDragging);
             App.stage.addEventListener(LobbyEvent.UNREGISTER_DRAGGING,this.handleUnregisterDragging);
@@ -141,7 +152,8 @@ package net.wg.gui.lobby
             this.messagePopupTemplate = null;
         }
         
-        override protected function onSetModalFocus(param1:InteractiveObject) : void {
+        override protected function onSetModalFocus(param1:InteractiveObject) : void
+        {
             super.onSetModalFocus(param1);
             if(param1 == null)
             {
@@ -149,7 +161,8 @@ package net.wg.gui.lobby
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
@@ -157,7 +170,8 @@ package net.wg.gui.lobby
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             registerComponent(this.header,Aliases.LOBBY_HEADER);
             if(!this.notificationPopupViewer)
@@ -171,7 +185,8 @@ package net.wg.gui.lobby
             this.subViewContainer.type = ContainerTypes.LOBBY_SUB_VIEW;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             App.stage.removeEventListener(LobbyEvent.REGISTER_DRAGGING,this.handleRegisterDragging,true);
             App.stage.removeEventListener(LobbyEvent.UNREGISTER_DRAGGING,this.handleUnregisterDragging,true);
@@ -184,25 +199,30 @@ package net.wg.gui.lobby
             this.previousFocus = null;
         }
         
-        private function registerDraging() : void {
+        private function registerDraging() : void
+        {
             this.vehicleHitArea.hit.addEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheel,false,0,true);
             App.cursor.registerDragging(this,Cursors.ROTATE);
         }
         
-        private function unregisterDragging() : void {
+        private function unregisterDragging() : void
+        {
             this.vehicleHitArea.hit.removeEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheel);
             App.cursor.unRegisterDragging(this);
         }
         
-        private function onMouseWheel(param1:MouseEvent) : void {
+        private function onMouseWheel(param1:MouseEvent) : void
+        {
             moveSpaceS(0,0,param1.delta * 200);
         }
         
-        private function handleRegisterDragging(param1:LobbyEvent) : void {
+        private function handleRegisterDragging(param1:LobbyEvent) : void
+        {
             this.registerDraging();
         }
         
-        private function handleUnregisterDragging(param1:LobbyEvent) : void {
+        private function handleUnregisterDragging(param1:LobbyEvent) : void
+        {
             this.unregisterDragging();
         }
     }

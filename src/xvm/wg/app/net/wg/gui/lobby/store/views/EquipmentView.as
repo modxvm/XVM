@@ -7,19 +7,23 @@ package net.wg.gui.lobby.store.views
     public class EquipmentView extends SimpleStoreMenuView
     {
         
-        public function EquipmentView() {
+        public function EquipmentView()
+        {
             super();
         }
         
-        override public function resetTemporaryHandlers() : void {
+        override public function resetTemporaryHandlers() : void
+        {
             resetHandlers(getTagsArray(),myVehicleRadioBtn);
         }
         
-        override protected function specialKindForTags() : String {
+        override protected function specialKindForTags() : String
+        {
             return "optionalDevice";
         }
         
-        override public function setViewData(param1:Array) : void {
+        override public function setViewData(param1:Array) : void
+        {
             super.setViewData(param1);
             if(getUIName() == STORE_TYPES.SHOP)
             {
@@ -37,14 +41,16 @@ package net.wg.gui.lobby.store.views
             dispatchViewChange();
         }
         
-        override public function getFilter() : Array {
+        override public function getFilter() : Array
+        {
             var _loc1_:Array = [myVehicleRadioBtn.group.data];
             _loc1_.push(getFilterData().current);
             _loc1_ = _loc1_.concat(getSelectedFilters(getTagsArray(),false,null));
             return _loc1_;
         }
         
-        override protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void {
+        override protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void
+        {
             super.onVehicleFilterUpdated(param1,param2,param3);
             if(param1.length == 0)
             {

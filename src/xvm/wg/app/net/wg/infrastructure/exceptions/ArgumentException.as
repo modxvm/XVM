@@ -5,7 +5,8 @@ package net.wg.infrastructure.exceptions
     public class ArgumentException extends WGGUIException
     {
         
-        public function ArgumentException(param1:* = "", param2:* = 0) {
+        public function ArgumentException(param1:* = "", param2:* = 0)
+        {
             super(param1,param2);
         }
     }

@@ -3,7 +3,8 @@ package scaleform.clik.constants
     public class ScrollBarTrackMode extends Object
     {
         
-        public function ScrollBarTrackMode() {
+        public function ScrollBarTrackMode()
+        {
             super();
         }
         

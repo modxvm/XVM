@@ -10,12 +10,14 @@ package net.wg.data.daapi.base
     public class DAAPIDataClass extends EventDispatcher implements IDAAPIDataClass
     {
         
-        public function DAAPIDataClass(param1:Object) {
+        public function DAAPIDataClass(param1:Object)
+        {
             super();
             this.fromHash(param1);
         }
         
-        public static function compare(param1:Object, param2:Object) : Boolean {
+        public static function compare(param1:Object, param2:Object) : Boolean
+        {
             var _loc4_:Array = null;
             var _loc5_:uint = 0;
             var _loc6_:* = 0;
@@ -77,7 +79,8 @@ package net.wg.data.daapi.base
         
         private var _hash:Object = null;
         
-        public function fromHash(param1:Object) : void {
+        public function fromHash(param1:Object) : void
+        {
             var _loc4_:String = null;
             var _loc5_:* = undefined;
             var _loc6_:String = null;
@@ -114,7 +117,8 @@ package net.wg.data.daapi.base
             }
         }
         
-        public final function dispose() : void {
+        public final function dispose() : void
+        {
             var _loc1_:String = null;
             var _loc2_:* = undefined;
             var _loc3_:String = null;
@@ -124,14 +128,17 @@ package net.wg.data.daapi.base
                 _loc2_ = this._hash[_loc1_];
                 _loc3_ = _loc1_;
                 delete this[_loc1_];
+                true;
             }
             this._hash = null;
         }
         
-        protected function onDispose() : void {
+        protected function onDispose() : void
+        {
         }
         
-        public function toHash() : Object {
+        public function toHash() : Object
+        {
             var _loc2_:String = null;
             var _loc3_:Object = null;
             var _loc4_:String = null;
@@ -148,19 +155,23 @@ package net.wg.data.daapi.base
             return _loc1_;
         }
         
-        protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             return true;
         }
         
-        protected function onDataRead(param1:String, param2:Object) : Boolean {
+        protected function onDataRead(param1:String, param2:Object) : Boolean
+        {
             return true;
         }
         
-        public function getHash() : Object {
+        public function getHash() : Object
+        {
             return this._hash;
         }
         
-        public function isEquals(param1:DAAPIDataClass) : Boolean {
+        public function isEquals(param1:DAAPIDataClass) : Boolean
+        {
             return compare(this._hash,param1.getHash());
         }
     }

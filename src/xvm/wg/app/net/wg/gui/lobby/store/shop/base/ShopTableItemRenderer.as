@@ -17,7 +17,8 @@ package net.wg.gui.lobby.store.shop.base
     public class ShopTableItemRenderer extends StoreListItemRenderer
     {
         
-        public function ShopTableItemRenderer() {
+        public function ShopTableItemRenderer()
+        {
             super();
             soundId = SoundManagerStates.RENDERER_SHOP;
             configUI();
@@ -25,7 +26,8 @@ package net.wg.gui.lobby.store.shop.base
         
         private var _isUseGoldAndCredits:Boolean = false;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             if((App.instance) && (param1))
             {
@@ -34,14 +36,17 @@ package net.wg.gui.lobby.store.shop.base
             invalidateData();
         }
         
-        override protected function getTooltipMapping() : StoreTooltipMapVO {
+        override protected function getTooltipMapping() : StoreTooltipMapVO
+        {
             return new StoreTooltipMapVO(Tooltips.SHOP_VEHICLE,Tooltips.SHOP_SHELL,Tooltips.SHOP_MODULE);
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
         }
         
-        override protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void {
+        override protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void
+        {
             var _loc4_:int = param2;
             var _loc5_:Number = param1.tableVO.gold;
             if(param1.currency == Currencies.CREDITS)
@@ -85,13 +90,15 @@ package net.wg.gui.lobby.store.shop.base
             enabled = !(param1.disabled || _loc6_);
         }
         
-        override protected function onPricesCalculated(param1:Number, param2:Number, param3:StoreTableData) : void {
+        override protected function onPricesCalculated(param1:Number, param2:Number, param3:StoreTableData) : void
+        {
             var _loc4_:Boolean = param1 > 0 && param2 > 0 && (param3.goldShellsForCredits) && param3.itemTypeName == FittingTypes.SHELL;
             var _loc5_:Boolean = param1 > 0 && param2 > 0 && (param3.goldEqsForCredits) && param3.itemTypeName == FittingTypes.EQUIPMENT;
             this._isUseGoldAndCredits = (_loc4_) || (_loc5_);
         }
         
-        override protected function onLeftButtonClick() : void {
+        override protected function onLeftButtonClick() : void
+        {
             var _loc1_:StoreTableData = StoreTableData(data);
             if(_loc1_.disabled)
             {
@@ -108,7 +115,8 @@ package net.wg.gui.lobby.store.shop.base
             }
         }
         
-        protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:StoreTableData) : void {
+        protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:StoreTableData) : void
+        {
             var _loc4_:ILocale = null;
             var _loc5_:ActionPriceVO = null;
             if(App.instance)
@@ -139,11 +147,13 @@ package net.wg.gui.lobby.store.shop.base
             }
         }
         
-        protected function get isUseGoldAndCredits() : Boolean {
+        protected function get isUseGoldAndCredits() : Boolean
+        {
             return this._isUseGoldAndCredits;
         }
         
-        private function updateCredits(param1:Number, param2:StoreTableData, param3:Number, param4:Boolean) : void {
+        private function updateCredits(param1:Number, param2:StoreTableData, param3:Number, param4:Boolean) : void
+        {
             var _loc5_:ILocale = null;
             var _loc6_:* = NaN;
             var _loc7_:* = NaN;
@@ -185,7 +195,8 @@ package net.wg.gui.lobby.store.shop.base
             }
         }
         
-        private function buyItem() : void {
+        private function buyItem() : void
+        {
             dispatchEvent(new StoreEvent(StoreEvent.BUY,StoreTableData(data)));
         }
     }

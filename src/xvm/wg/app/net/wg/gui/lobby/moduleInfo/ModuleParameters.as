@@ -8,13 +8,15 @@ package net.wg.gui.lobby.moduleInfo
     public class ModuleParameters extends UIComponent
     {
         
-        public function ModuleParameters() {
+        public function ModuleParameters()
+        {
             super();
         }
         
         private static var LINE_SPACING_CORRECTION:int = 1;
         
-        private static function updateTextHeight(param1:TextField, param2:int) : void {
+        private static function updateTextHeight(param1:TextField, param2:int) : void
+        {
             var _loc3_:TextLineMetrics = param1.getLineMetrics(0);
             param1.height = (_loc3_.height + _loc3_.leading + LINE_SPACING_CORRECTION) * param2;
         }
@@ -31,15 +33,18 @@ package net.wg.gui.lobby.moduleInfo
         
         private var HEADER_TEXT_INV:String = "headerTextInv";
         
-        public function get bottomMargin() : Number {
+        public function get bottomMargin() : Number
+        {
             return this._bottomMargin;
         }
         
-        public function set bottomMargin(param1:Number) : void {
+        public function set bottomMargin(param1:Number) : void
+        {
             this._bottomMargin = param1;
         }
         
-        public function setParameters(param1:Array = null) : void {
+        public function setParameters(param1:Array = null) : void
+        {
             var _loc3_:Object = null;
             this.paramValue.htmlText = "";
             this.paramType.htmlText = "";
@@ -61,7 +66,8 @@ package net.wg.gui.lobby.moduleInfo
             height = this.paramValue.y + this.paramValue.height + this._bottomMargin;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(this.HEADER_TEXT_INV))
             {
@@ -69,11 +75,13 @@ package net.wg.gui.lobby.moduleInfo
             }
         }
         
-        public function get headerText() : String {
+        public function get headerText() : String
+        {
             return this._headerText;
         }
         
-        public function set headerText(param1:String) : void {
+        public function set headerText(param1:String) : void
+        {
             this._headerText = param1;
             invalidate(this.HEADER_TEXT_INV);
         }

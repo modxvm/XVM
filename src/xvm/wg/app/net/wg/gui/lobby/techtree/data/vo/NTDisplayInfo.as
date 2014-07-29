@@ -7,7 +7,8 @@ package net.wg.gui.lobby.techtree.data.vo
     public class NTDisplayInfo extends Object implements IValueObject
     {
         
-        public function NTDisplayInfo(param1:int = -1, param2:int = -1, param3:Point = null, param4:Array = null) {
+        public function NTDisplayInfo(param1:int = -1, param2:int = -1, param3:Point = null, param4:Array = null)
+        {
             super();
             this._row = param1;
             this._column = param2;
@@ -23,23 +24,28 @@ package net.wg.gui.lobby.techtree.data.vo
         
         private var _lines:Array;
         
-        public function get row() : int {
+        public function get row() : int
+        {
             return this._row;
         }
         
-        public function get column() : int {
+        public function get column() : int
+        {
             return this._column;
         }
         
-        public function get position() : Point {
+        public function get position() : Point
+        {
             return this._position;
         }
         
-        public function get lines() : Array {
+        public function get lines() : Array
+        {
             return this._lines;
         }
         
-        public function fromArray(param1:Array, param2:ILocale) : void {
+        public function fromArray(param1:Array, param2:ILocale) : void
+        {
             var _loc3_:Array = null;
             if(param1.length > 3)
             {
@@ -51,7 +57,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function fromObject(param1:Object, param2:ILocale) : void {
+        public function fromObject(param1:Object, param2:ILocale) : void
+        {
             var _loc3_:Array = null;
             if(param1 == null)
             {
@@ -76,7 +83,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function clearUp() : void {
+        public function clearUp() : void
+        {
             this._row = -1;
             this._column = -1;
             this._position = null;
@@ -86,7 +94,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[NTDisplayInfo: row = " + this._row + ", column = " + this._column + ", position = " + this._position + ", lines = " + this._lines + " ]";
         }
     }

@@ -19,7 +19,8 @@ package net.wg.gui.components.controls
     public class ContextMenu extends UIComponent implements IContextMenu
     {
         
-        public function ContextMenu() {
+        public function ContextMenu()
+        {
             this._padding = new Padding();
             this._bgShadowBorder = new Padding(8,37,16,35);
             this._hitAreMargin = new Padding(3,3,3,3);
@@ -63,7 +64,8 @@ package net.wg.gui.components.controls
         
         public var hit:MovieClip = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.hit)
             {
@@ -78,7 +80,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function build(param1:Vector.<IContextItem>, param2:Number, param3:Number) : void {
+        public function build(param1:Vector.<IContextItem>, param2:Number, param3:Number) : void
+        {
             var _loc4_:Vector.<IContextItem> = null;
             var _loc5_:uint = 0;
             var _loc6_:uint = 0;
@@ -178,14 +181,16 @@ package net.wg.gui.components.controls
             App.stage.addEventListener(MouseEvent.MOUSE_DOWN,this.mouseDownHandler);
         }
         
-        private function mouseDownHandler(param1:MouseEvent) : void {
+        private function mouseDownHandler(param1:MouseEvent) : void
+        {
             if(!this.hit.hitTestPoint(App.stage.mouseX,App.stage.mouseY))
             {
                 dispatchEvent(new ContextMenuEvent(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE));
             }
         }
         
-        private function createSubItems(param1:ContextMenuItem) : void {
+        private function createSubItems(param1:ContextMenuItem) : void
+        {
             var _loc6_:IContextItem = null;
             var _loc7_:ContextMenuItem = null;
             var _loc2_:Number = param1.x;
@@ -215,7 +220,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function onItemClick(param1:ButtonEvent) : void {
+        private function onItemClick(param1:ButtonEvent) : void
+        {
             var _loc2_:ContextMenuItem = ContextMenuItem(param1.target);
             this.beginAnimExpand(_loc2_);
             if(_loc2_.type != _loc2_.CONTEXT_MENU_ITEM_GROUP)
@@ -224,7 +230,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function beginAnimExpand(param1:ContextMenuItem) : void {
+        private function beginAnimExpand(param1:ContextMenuItem) : void
+        {
             this.tweenManager.unregisterAll();
             if((this.groupItemSelected) && this.groupItemSelected == param1)
             {
@@ -249,7 +256,8 @@ package net.wg.gui.components.controls
             this.expand(this.groupItemSelected);
         }
         
-        private function expand(param1:ContextMenuItem) : void {
+        private function expand(param1:ContextMenuItem) : void
+        {
             var _loc2_:uint = param1.index + 1;
             var _loc3_:uint = 0;
             var _loc4_:uint = 0;
@@ -284,28 +292,26 @@ package net.wg.gui.components.controls
                 {
                     _loc6_ = _loc6_ + _loc4_;
                 }
-                this.tweenManager.registerAndLaunch(300,this.items[_loc3_],{"y":_loc6_},{
-                    "paused":false,
-                    "onComplete":this.onHideTweenComplete,
-                    "ease":_loc5_
-                });
+                this.tweenManager.registerAndLaunch(300,this.items[_loc3_],{"y":_loc6_},{"paused":false,
+                "onComplete":this.onHideTweenComplete,
+                "ease":_loc5_
+            });
             _loc6_ = _loc6_ + (this.items[_loc3_].height + this.padding.top + this.padding.bottom);
             _loc3_++;
         }
         var _loc9_:Number = _loc6_ + this.MARGIN + this._bgShadowBorder.bottom - this.padding.bottom - this.padding.top ^ 0;
-        this.tweenManager.registerAndLaunch(300,this.bgMc,{"height":_loc9_},{
-            "paused":false,
-            "onComplete":this.onHideTweenComplete,
-            "ease":_loc5_
-        });
-    this.tweenManager.registerAndLaunch(300,this,{"y":this.startY + _loc8_},{
-        "paused":false,
+        this.tweenManager.registerAndLaunch(300,this.bgMc,{"height":_loc9_},{"paused":false,
         "onComplete":this.onHideTweenComplete,
         "ease":_loc5_
     });
+    this.tweenManager.registerAndLaunch(300,this,{"y":this.startY + _loc8_},{"paused":false,
+    "onComplete":this.onHideTweenComplete,
+    "ease":_loc5_
+});
 }
 
-private function showSub(param1:ContextMenuItem) : void {
+private function showSub(param1:ContextMenuItem) : void
+{
 var _loc3_:ContextMenuItem = null;
 param1.isOpened = true;
 var _loc2_:uint = 0;
@@ -313,36 +319,37 @@ while(_loc2_ < param1.subItems.length)
 {
     _loc3_ = ContextMenuItem(param1.subItems[_loc2_]);
     _loc3_.visible = true;
-    this.showHideSubTween = this.tweenManager.registerAndLaunch(300,_loc3_,{"alpha":1},{
-        "paused":false,
-        "onComplete":this.fSubAnimComplete,
-        "ease":Strong.easeIn
-    });
+    this.showHideSubTween = this.tweenManager.registerAndLaunch(300,_loc3_,{"alpha":1},{"paused":false,
+    "onComplete":this.fSubAnimComplete,
+    "ease":Strong.easeIn
+});
 _loc2_++;
 }
 }
 
-private function hideSub(param1:ContextMenuItem) : void {
+private function hideSub(param1:ContextMenuItem) : void
+{
 var _loc3_:ContextMenuItem = null;
 param1.isOpened = false;
 var _loc2_:uint = 0;
 while(_loc2_ < param1.subItems.length)
 {
 _loc3_ = ContextMenuItem(param1.subItems[_loc2_]);
-this.showHideSubTween = this.tweenManager.registerAndLaunch(300,_loc3_,{"alpha":0},{
-    "paused":false,
-    "onComplete":this.fSubAnimComplete,
-    "ease":Strong.easeOut
+this.showHideSubTween = this.tweenManager.registerAndLaunch(300,_loc3_,{"alpha":0},{"paused":false,
+"onComplete":this.fSubAnimComplete,
+"ease":Strong.easeOut
 });
 _loc2_++;
 }
 }
 
-private function onHideTweenComplete(param1:Tween) : void {
+private function onHideTweenComplete(param1:Tween) : void
+{
 this.tweenManager.unregister(param1);
 }
 
-private function fSubAnimComplete(param1:Tween) : void {
+private function fSubAnimComplete(param1:Tween) : void
+{
 var _loc2_:ContextMenuItem = ContextMenuItem(param1.target);
 if(_loc2_.alpha == 0)
 {
@@ -351,15 +358,18 @@ _loc2_.visible = false;
 this.tweenManager.unregister(param1);
 }
 
-public function get padding() : Padding {
+public function get padding() : Padding
+{
 return this._padding;
 }
 
-public function set padding(param1:Padding) : void {
+public function set padding(param1:Padding) : void
+{
 this._padding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
 var _loc3_:uint = 0;
 var _loc4_:uint = 0;
 super.onDispose();
@@ -398,11 +408,13 @@ _loc3_++;
 }
 }
 
-public function setMemberItemData(param1:Object) : void {
+public function setMemberItemData(param1:Object) : void
+{
 this._memberItemData = param1;
 }
 
-override public function toString() : String {
+override public function toString() : String
+{
 return "[Wargaming ContextMenu " + name + "]";
 }
 }

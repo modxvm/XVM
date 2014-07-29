@@ -5,7 +5,8 @@ package scaleform.clik.events
     public final class FocusHandlerEvent extends Event
     {
         
-        public function FocusHandlerEvent(param1:String, param2:Boolean = true, param3:Boolean = false, param4:uint = 0) {
+        public function FocusHandlerEvent(param1:String, param2:Boolean = true, param3:Boolean = false, param4:uint = 0)
+        {
             super(param1,param2,param3);
             this.controllerIdx = param4;
         }
@@ -16,11 +17,13 @@ package scaleform.clik.events
         
         public var controllerIdx:uint = 0;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new FocusHandlerEvent(type,bubbles,cancelable,this.controllerIdx);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("FocusHandlerEvent","type","bubbles","cancelable","controllerIdx");
         }
     }

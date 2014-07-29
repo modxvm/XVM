@@ -7,7 +7,8 @@ package net.wg.gui.components.tooltips.VO
     public class VehicleVO extends VehicleBaseVO
     {
         
-        public function VehicleVO(param1:Object) {
+        public function VehicleVO(param1:Object)
+        {
             super();
             this.parsHash(param1);
         }
@@ -54,7 +55,8 @@ package net.wg.gui.components.tooltips.VO
         
         public var defBuyPrice:Array = null;
         
-        private function parsHash(param1:Object) : void {
+        private function parsHash(param1:Object) : void
+        {
             var _loc3_:ILocale = null;
             var _loc4_:String = null;
             var _loc5_:* = NaN;
@@ -169,7 +171,8 @@ package net.wg.gui.components.tooltips.VO
             }
         }
         
-        private function getLockPriority(param1:Object) : String {
+        private function getLockPriority(param1:Object) : String
+        {
             if((param1.hasOwnProperty(this.LOCK_ROAMING)) && (param1[this.LOCK_ROAMING]))
             {
                 return this.LOCK_ROAMING;

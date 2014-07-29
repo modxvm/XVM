@@ -10,7 +10,8 @@ package net.wg.gui.login.impl.components
     public class Copyright extends UIComponent
     {
         
-        public function Copyright() {
+        public function Copyright()
+        {
             super();
         }
         
@@ -22,7 +23,8 @@ package net.wg.gui.login.impl.components
         
         private var LINK_MARGIN:Number = 5;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.legalLink.addEventListener(MouseEvent.MOUSE_OVER,this.showToolTip);
             this.legalLink.addEventListener(MouseEvent.MOUSE_DOWN,this.hideToolTip);
@@ -30,23 +32,28 @@ package net.wg.gui.login.impl.components
             this.legalLink.addEventListener(ButtonEvent.CLICK,this.showLegal);
         }
         
-        private function showLegal(param1:ButtonEvent) : void {
+        private function showLegal(param1:ButtonEvent) : void
+        {
             dispatchEvent(new CopyrightEvent(CopyrightEvent.TO_LEGAL));
         }
         
-        private function hideToolTip(param1:MouseEvent) : void {
+        private function hideToolTip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function showToolTip(param1:MouseEvent) : void {
+        private function showToolTip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(TOOLTIPS.LOGIN_LEGAL);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        public function updateLabel(param1:String, param2:String = "") : void {
+        public function updateLabel(param1:String, param2:String = "") : void
+        {
             if(param2 == "" || !param2)
             {
                 this.textField.text = param1;
@@ -60,15 +67,18 @@ package net.wg.gui.login.impl.components
             }
         }
         
-        private function updateLinkPosition() : void {
+        private function updateLinkPosition() : void
+        {
             this.legalLink.x = this.textField.x + (this.textField.width - this.textField.textWidth >> 1) + this.textField.textWidth + this.LINK_MARGIN;
         }
         
-        public function get logos() : MovieClip {
+        public function get logos() : MovieClip
+        {
             return this.logotypes;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.legalLink.removeEventListener(MouseEvent.MOUSE_OVER,this.showToolTip);
             this.legalLink.removeEventListener(MouseEvent.MOUSE_DOWN,this.hideToolTip);
             this.legalLink.removeEventListener(MouseEvent.MOUSE_OUT,this.hideToolTip);

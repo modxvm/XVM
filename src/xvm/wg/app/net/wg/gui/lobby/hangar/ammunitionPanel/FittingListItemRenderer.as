@@ -26,7 +26,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     public class FittingListItemRenderer extends SoundListItemRenderer
     {
         
-        public function FittingListItemRenderer() {
+        public function FittingListItemRenderer()
+        {
             super();
         }
         
@@ -66,13 +67,15 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         private var extraIcon:ExtraIcon;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidateData();
             this.onRollOut();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:IEventCollector = App.utils.events;
             if(this.destroyButton)
             {
@@ -89,15 +92,18 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             super.onDispose();
         }
         
-        public function onRemoveButtonClick(param1:Object) : void {
+        public function onRemoveButtonClick(param1:Object) : void
+        {
             var _loc2_:Boolean = param1.target == this.removeButton && !data.removable;
             dispatchEvent(new DeviceEvent(DeviceEvent.DEVICE_REMOVE,data,data,_loc2_));
         }
         
-        public function processRemove(param1:Boolean) : void {
+        public function processRemove(param1:Boolean) : void
+        {
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(this.actionPrice)
             {
                 this.actionPrice.textColorType = param1?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_DISABLE;
@@ -108,7 +114,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             buttonMode = enabled;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.actionPrice)
             {
@@ -161,7 +168,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             _loc1_.addEvent(this,MouseEvent.ROLL_OUT,this.onRollOut);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.DATA))
             {
                 this.setup();
@@ -169,7 +177,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             super.draw();
         }
         
-        protected function createExtraIcon() : void {
+        protected function createExtraIcon() : void
+        {
             this.extraIcon = new ExtraIcon();
             App.utils.events.addEvent(this.extraIcon,SimpleLoader.LOADED,this.onExtraIconLoaded,false,0,true);
             this.extraIcon.mouseChildren = false;
@@ -177,7 +186,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             addChild(this.extraIcon);
         }
         
-        private function setup() : void {
+        private function setup() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:String = null;
             var _loc3_:* = NaN;
@@ -325,7 +335,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.errorField.visible = !data.isSelected;
         }
         
-        private function onClick(param1:MouseEvent) : void {
+        private function onClick(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
             if(param1 is MouseEventEx)
             {
@@ -336,18 +347,21 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        private function onRollOver(param1:MouseEvent = null) : void {
+        private function onRollOver(param1:MouseEvent = null) : void
+        {
             var _loc2_:Array = [0,0];
             _loc2_[data.currency == Currencies.CREDITS?0:1] = data.price;
             var _loc3_:ITooltipProps = new TooltipProps("",stage.mouseX,stage.mouseY);
             App.toolTipMgr.showSpecial(Tooltips.HANGAR_MODULE,null,data.id,_loc2_,data.inventoryCount,data.vehicleCount,data.slotIndex?data.slotIndex:0);
         }
         
-        private function onRollOut(param1:MouseEvent = null) : void {
+        private function onRollOut(param1:MouseEvent = null) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onExtraIconLoaded(param1:Event) : void {
+        private function onExtraIconLoaded(param1:Event) : void
+        {
             this.extraIcon.x = Math.round(this.icon.x + 3);
             this.extraIcon.y = Math.round(this.icon.y + this.icon.height + 7);
         }

@@ -10,7 +10,8 @@ package net.wg.gui.lobby.store.views
     public class VehicleView extends BaseStoreMenuView
     {
         
-        public function VehicleView() {
+        public function VehicleView()
+        {
             super();
         }
         
@@ -32,21 +33,25 @@ package net.wg.gui.lobby.store.views
         
         public var brockenChckBx:CheckBox = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.inHangarChkBx.enableDynamicFrameUpdating();
             this.brockenChckBx.enableDynamicFrameUpdating();
         }
         
-        override public function resetTemporaryHandlers() : void {
+        override public function resetTemporaryHandlers() : void
+        {
             resetHandlers(getFitsArray(),this.allRadioBtn);
         }
         
-        override protected function onTagsArrayRequest() : Array {
+        override protected function onTagsArrayRequest() : Array
+        {
             return [new ViewUIElementVO("lightTank",this.lightTankRadioBtn),new ViewUIElementVO("mediumTank",this.mediumTankRadioBtn),new ViewUIElementVO("heavyTank",this.heavyTankRadioBtn),new ViewUIElementVO("at-spg",this.at_spgRadioBtn),new ViewUIElementVO("spg",this.spgRadioBtn),new ViewUIElementVO("all",this.allRadioBtn)];
         }
         
-        override protected function onFitsArrayRequest() : Array {
+        override protected function onFitsArrayRequest() : Array
+        {
             if(getUIName() == STORE_TYPES.SHOP)
             {
                 return [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("inHangar",this.inHangarChkBx)];
@@ -54,11 +59,13 @@ package net.wg.gui.lobby.store.views
             return [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("brocken",this.brockenChckBx)];
         }
         
-        override protected function getFitsName() : String {
+        override protected function getFitsName() : String
+        {
             return "extra";
         }
         
-        override public function setViewData(param1:Array) : void {
+        override public function setViewData(param1:Array) : void
+        {
             var _loc2_:Number = Number(param1.shift());
             var _loc3_:Array = param1.splice(0,_loc2_);
             if(_loc3_.length > 4)
@@ -73,16 +80,19 @@ package net.wg.gui.lobby.store.views
             selectFilter(getFitsArray(),param1,true,false);
         }
         
-        override public function getFilter() : Array {
+        override public function getFilter() : Array
+        {
             var _loc1_:Array = getSelectedFilters(getTagsArray(),true,this.allRadioBtn);
             _loc1_ = _loc1_.concat(getSelectedFilters(getFitsArray(),false,null));
             return _loc1_;
         }
         
-        override public function setSubFilterData(param1:int, param2:ShopSubFilterData) : void {
+        override public function setSubFilterData(param1:int, param2:ShopSubFilterData) : void
+        {
         }
         
-        override public function updateSubFilter(param1:int) : void {
+        override public function updateSubFilter(param1:int) : void
+        {
         }
     }
 }

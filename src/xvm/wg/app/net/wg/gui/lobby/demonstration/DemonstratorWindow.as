@@ -13,7 +13,8 @@ package net.wg.gui.lobby.demonstration
     public class DemonstratorWindow extends DemonstratorWindowMeta implements IDemonstratorWindowMeta
     {
         
-        public function DemonstratorWindow() {
+        public function DemonstratorWindow()
+        {
             super();
         }
         
@@ -31,12 +32,14 @@ package net.wg.gui.lobby.demonstration
         
         private var model:DemonstratorVO;
         
-        public function as_setData(param1:Object) : void {
+        public function as_setData(param1:Object) : void
+        {
             this.model = new DemonstratorVO(param1);
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.scrollStandard.visible = false;
             this.scrollAssault.visible = false;
@@ -46,11 +49,13 @@ package net.wg.gui.lobby.demonstration
             this.listEncounter.addEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
         }
         
-        private function onStageClick(param1:MouseEvent) : void {
+        private function onStageClick(param1:MouseEvent) : void
+        {
             this.updateScrollBars();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.model))
             {
@@ -61,13 +66,15 @@ package net.wg.gui.lobby.demonstration
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             window.title = MENU.DEMONSTRATOR_WINDOW_TITLE;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.model.dispose();
             this.model = null;
@@ -82,11 +89,13 @@ package net.wg.gui.lobby.demonstration
             this.listEncounter.dataProvider = null;
         }
         
-        private function onMapItemClick(param1:ListEvent) : void {
+        private function onMapItemClick(param1:ListEvent) : void
+        {
             onMapSelectedS(MapItemVO(param1.itemData).id);
         }
         
-        private function updateScrollBars() : void {
+        private function updateScrollBars() : void
+        {
             this.scrollStandard.visible = this.scrollStandard.thumb.visible;
             this.scrollAssault.visible = this.scrollAssault.thumb.visible;
             this.scrollEncounter.visible = this.scrollEncounter.thumb.visible;

@@ -3,7 +3,8 @@ package net.wg.gui.components.common.markers
     public class HealthBarAnimatedLabel extends HealthBarAnimatedPart
     {
         
-        public function HealthBarAnimatedLabel() {
+        public function HealthBarAnimatedLabel()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.components.common.markers
         
         private var _imitationFlag:String = "";
         
-        public function damage(param1:Number, param2:String) : void {
+        public function damage(param1:Number, param2:String) : void
+        {
             if(!(tweenState == INACTIVE_STATE) && !(tweenState == IMITATION_STATE))
             {
                 this._damage = this._damage + param1;
@@ -32,11 +34,13 @@ package net.wg.gui.components.common.markers
             this.damageLabel.text = this._damage > 0?String(-this._damage):"";
         }
         
-        public function get fakeDamage() : Number {
+        public function get fakeDamage() : Number
+        {
             return this._fakeDamage;
         }
         
-        public function set fakeDamage(param1:Number) : void {
+        public function set fakeDamage(param1:Number) : void
+        {
             if(this._fakeDamage == param1)
             {
                 return;
@@ -45,11 +49,13 @@ package net.wg.gui.components.common.markers
             invalidate(INVALIDATE_DAMAGE);
         }
         
-        public function get imitationFlag() : String {
+        public function get imitationFlag() : String
+        {
             return this._imitationFlag;
         }
         
-        public function set imitationFlag(param1:String) : void {
+        public function set imitationFlag(param1:String) : void
+        {
             if(param1 == this._imitationFlag)
             {
                 return;
@@ -58,11 +64,13 @@ package net.wg.gui.components.common.markers
             invalidate(INVALIDATE_DAMAGE);
         }
         
-        public function get imitation() : Boolean {
+        public function get imitation() : Boolean
+        {
             return this._imitation;
         }
         
-        public function set imitation(param1:Boolean) : void {
+        public function set imitation(param1:Boolean) : void
+        {
             if(this._imitation == param1)
             {
                 return;
@@ -71,7 +79,8 @@ package net.wg.gui.components.common.markers
             invalidate(INVALIDATE_DAMAGE);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INVALIDATE_DAMAGE))
             {
@@ -79,7 +88,8 @@ package net.wg.gui.components.common.markers
             }
         }
         
-        public function imitationDamage(param1:Boolean, param2:Number, param3:String) : void {
+        public function imitationDamage(param1:Boolean, param2:Number, param3:String) : void
+        {
             if(param1)
             {
                 this.damage(param2,param3);

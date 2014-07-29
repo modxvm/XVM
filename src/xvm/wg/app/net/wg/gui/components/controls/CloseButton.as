@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class CloseButton extends SoundButton
     {
         
-        public function CloseButton() {
+        public function CloseButton()
+        {
             super();
             soundType = SoundTypes.CLOSE_WINDOW;
         }

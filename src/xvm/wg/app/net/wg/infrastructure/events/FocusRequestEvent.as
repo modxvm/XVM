@@ -6,7 +6,8 @@ package net.wg.infrastructure.events
     public class FocusRequestEvent extends Event
     {
         
-        public function FocusRequestEvent(param1:String, param2:IFocusContainer) {
+        public function FocusRequestEvent(param1:String, param2:IFocusContainer)
+        {
             super(param1,true,false);
             this._focusContainer = param2;
         }
@@ -15,7 +16,8 @@ package net.wg.infrastructure.events
         
         private var _focusContainer:IFocusContainer = null;
         
-        public function get focusContainer() : IFocusContainer {
+        public function get focusContainer() : IFocusContainer
+        {
             return this._focusContainer;
         }
     }

@@ -8,7 +8,8 @@ package net.wg.gui.lobby.dialogs
     public class IconPriceDialog extends IconPriceDialogMeta implements IIconPriceDialogMeta
     {
         
-        public function IconPriceDialog() {
+        public function IconPriceDialog()
+        {
             super();
         }
         
@@ -18,27 +19,32 @@ package net.wg.gui.lobby.dialogs
         
         public var priceMc:PriceMc;
         
-        override protected function applyLayout() : void {
+        override protected function applyLayout() : void
+        {
             super.applyLayout();
             this.priceMc.y = getBackgroundActualHeight() - this.priceMc.height - PRICE_BOTTOM_OFFSET;
         }
         
-        override protected function getTextAreaCurrentHeight() : Number {
+        override protected function getTextAreaCurrentHeight() : Number
+        {
             var _loc1_:Number = super.getTextAreaCurrentHeight();
             return _loc1_ + PRICE_TEXT_OFFSET + this.priceMc.height + PRICE_BOTTOM_OFFSET;
         }
         
-        public function as_setMessagePrice(param1:Number, param2:String, param3:Object) : void {
+        public function as_setMessagePrice(param1:Number, param2:String, param3:Object) : void
+        {
             this.priceMc.currency = param2;
             this.priceMc.price = param1;
             this.priceMc.actionPriceVo = param3?new ActionPriceVO(param3):null;
         }
         
-        public function as_setPriceLabel(param1:String) : void {
+        public function as_setPriceLabel(param1:String) : void
+        {
             this.priceMc.textField.text = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:DisplayObjectContainer = null;
             if(this.priceMc)
             {
@@ -53,7 +59,8 @@ package net.wg.gui.lobby.dialogs
             super.onDispose();
         }
         
-        public function as_setOperationAllowed(param1:Boolean) : void {
+        public function as_setOperationAllowed(param1:Boolean) : void
+        {
             this.priceMc.allowed = param1;
         }
     }

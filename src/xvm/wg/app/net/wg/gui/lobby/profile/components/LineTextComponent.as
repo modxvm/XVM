@@ -9,7 +9,8 @@ package net.wg.gui.lobby.profile.components
     public class LineTextComponent extends UIComponent
     {
         
-        public function LineTextComponent() {
+        public function LineTextComponent()
+        {
             super();
         }
         
@@ -23,11 +24,13 @@ package net.wg.gui.lobby.profile.components
         
         private var _text:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             super.draw();
             if(isInvalid(TEXT_INV))
@@ -45,16 +48,19 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
             invalidate(TEXT_INV);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.leftLine = null;
             this.rightLine = null;
             this.textField = null;

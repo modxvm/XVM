@@ -16,7 +16,8 @@ package net.wg.infrastructure.managers
     public class LoaderManager extends LoaderManagerMeta implements ILoaderManager
     {
         
-        public function LoaderManager() {
+        public function LoaderManager()
+        {
             super();
             this.loaderToToken = new Dictionary(true);
         }
@@ -25,7 +26,8 @@ package net.wg.infrastructure.managers
         
         private var firstTimeLoadLobby:Boolean = false;
         
-        public function as_loadView(param1:Object, param2:String, param3:String, param4:String) : void {
+        public function as_loadView(param1:Object, param2:String, param3:String, param4:String) : void
+        {
             if(param3 == Aliases.LOBBY && !this.firstTimeLoadLobby)
             {
                 App.libraryLoader.load(Vector.<String>(["toolTips.swf"]));
@@ -41,7 +43,8 @@ package net.wg.infrastructure.managers
             this.dispatchLoaderEvent(LoaderEvent.VIEW_LOADING,param1,param2);
         }
         
-        public function stopLoadingByAliases(param1:Array) : Array {
+        public function stopLoadingByAliases(param1:Array) : Array
+        {
             var _loc3_:* = undefined;
             var _loc4_:Loader = null;
             var _loc5_:LoadInfo = null;
@@ -61,12 +64,14 @@ package net.wg.infrastructure.managers
                     _loc4_.unloadAndStop(true);
                     _loc5_.dispose();
                     delete this.loaderToToken[_loc3_];
+                    true;
                 }
             }
             return _loc2_;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:Object = null;
             var _loc2_:Loader = null;
             var _loc3_:LoadInfo = null;
@@ -79,14 +84,17 @@ package net.wg.infrastructure.managers
                 _loc2_.contentLoaderInfo.removeEventListener(Event.INIT,this.onSWFLoaded);
                 _loc2_.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError);
                 delete this.loaderToToken[_loc2_];
+                true;
             }
         }
         
-        private function dispatchLoaderEvent(param1:String, param2:Object, param3:String, param4:IView = null) : void {
+        private function dispatchLoaderEvent(param1:String, param2:Object, param3:String, param4:IView = null) : void
+        {
             dispatchEvent(new LoaderEvent(param1,param2,param3,param4));
         }
         
-        private function onSWFLoaded(param1:Event) : void {
+        private function onSWFLoaded(param1:Event) : void
+        {
             var event:Event = param1;
             var info:LoaderInfo = LoaderInfo(event.currentTarget);
             var loader:Loader = info.loader;
@@ -124,9 +132,11 @@ package net.wg.infrastructure.managers
             }
             data.dispose();
             delete this.loaderToToken[loader];
+            true;
         }
         
-        private function onSWFLoadError(param1:IOErrorEvent) : void {
+        private function onSWFLoadError(param1:IOErrorEvent) : void
+        {
             var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
             var _loc3_:Loader = _loc2_.loader;
             _loc2_.removeEventListener(Event.INIT,this.onSWFLoaded);
@@ -138,6 +148,7 @@ package net.wg.infrastructure.managers
             viewLoadErrorS(_loc5_,_loc6_,param1.text);
             _loc4_.dispose();
             delete this.loaderToToken[_loc3_];
+            true;
             dispatchEvent(new LoaderEvent(LoaderEvent.VIEW_LOAD_ERROR,_loc7_));
             _loc3_.unloadAndStop();
         }
@@ -146,7 +157,8 @@ package net.wg.infrastructure.managers
 class LoadInfo extends Object
 {
     
-    function LoadInfo(param1:String, param2:String, param3:String, param4:Object) {
+    function LoadInfo(param1:String, param2:String, param3:String, param4:Object)
+    {
         super();
         this.token = param1;
         this.alias = param2;
@@ -162,7 +174,8 @@ class LoadInfo extends Object
     
     public var config:Object;
     
-    public function dispose() : void {
+    public function dispose() : void
+    {
         this.token = null;
         this.alias = null;
         this.name = null;

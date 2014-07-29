@@ -5,7 +5,8 @@ package net.wg.infrastructure.events
     public class VoiceChatEvent extends Event
     {
         
-        public function VoiceChatEvent(param1:String, param2:Number, param3:Boolean) {
+        public function VoiceChatEvent(param1:String, param2:Number, param3:Boolean)
+        {
             super(param1);
             this._accountDBID = param2;
             this._himself = param3;
@@ -19,11 +20,13 @@ package net.wg.infrastructure.events
         
         private var _himself:Boolean;
         
-        public function getAccountDBID() : Number {
+        public function getAccountDBID() : Number
+        {
             return this._accountDBID;
         }
         
-        public function isHimself() : Boolean {
+        public function isHimself() : Boolean
+        {
             return this._himself;
         }
     }

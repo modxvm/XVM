@@ -5,7 +5,8 @@ package net.wg.gui.lobby.sellDialog.VO
     public class SellVehicleItemBaseVo extends DAAPIDataClass
     {
         
-        public function SellVehicleItemBaseVo(param1:Object) {
+        public function SellVehicleItemBaseVo(param1:Object)
+        {
             super(param1);
         }
         

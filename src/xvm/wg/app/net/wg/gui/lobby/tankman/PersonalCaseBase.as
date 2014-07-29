@@ -11,12 +11,13 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseBase extends PersonalCaseMeta implements IPersonalCaseMeta
     {
         
-        public function PersonalCaseBase() {
+        public function PersonalCaseBase()
+        {
             this.skillsModel = [];
             super();
         }
         
-        private static var templateS:Array;
+        private static var templateS:Array = ["a","b","c","d","a","b","c","d","a1","b2","c3","d4","a5","b6","c7","d8","az","xb","cc","fd","ga","tb","jc","dg"];
         
         protected var isFirtsRun:Boolean = true;
         
@@ -34,12 +35,14 @@ package net.wg.gui.lobby.tankman
         
         protected var rentainingTabUpdated:Boolean = true;
         
-        public function as_setCommonData(param1:Object) : void {
+        public function as_setCommonData(param1:Object) : void
+        {
             this.parsePersonalCaseModel(param1);
             this.updateCommonElements();
         }
         
-        public function as_setDossierData(param1:Object) : void {
+        public function as_setDossierData(param1:Object) : void
+        {
             var _loc5_:Array = null;
             var _loc6_:* = 0;
             var _loc7_:* = 0;
@@ -74,7 +77,8 @@ package net.wg.gui.lobby.tankman
             this.runtimeUpdateByModel(PersonalCaseStats,this.stats);
         }
         
-        public function as_setRetrainingData(param1:Object) : void {
+        public function as_setRetrainingData(param1:Object) : void
+        {
             var _loc4_:Object = null;
             this.retrainingData = new PersonalCaseRetrainingModel();
             this.retrainingData.credits = param1.money[0];
@@ -119,7 +123,8 @@ package net.wg.gui.lobby.tankman
             this.runtimeUpdateByModel(CrewTankmanRetraining,this.retrainingData);
         }
         
-        public function as_setSkillsData(param1:Array) : void {
+        public function as_setSkillsData(param1:Array) : void
+        {
             var _loc4_:PersonalCaseSkillsModel = null;
             var _loc5_:String = null;
             var _loc6_:* = 0;
@@ -173,7 +178,8 @@ package net.wg.gui.lobby.tankman
             this.runtimeUpdateByModel(PersonalCaseSkills,this.skillsModel);
         }
         
-        public function as_setDocumentsData(param1:Object) : void {
+        public function as_setDocumentsData(param1:Object) : void
+        {
             this.documentsData = new PersonalCaseDocsModel();
             if(!Extensions.isScaleform)
             {
@@ -218,7 +224,8 @@ package net.wg.gui.lobby.tankman
             this.rentainingTabUpdated = true;
         }
         
-        protected function parsePersonalCaseModel(param1:Object) : void {
+        protected function parsePersonalCaseModel(param1:Object) : void
+        {
             var _loc9_:PersonalCaseCurrentVehicle = null;
             var _loc2_:PersonalCaseModel = new PersonalCaseModel();
             var _loc3_:Object = param1.nativeVehicle;
@@ -265,13 +272,16 @@ package net.wg.gui.lobby.tankman
             this.data = _loc2_;
         }
         
-        protected function updateCommonElements() : void {
+        protected function updateCommonElements() : void
+        {
         }
         
-        protected function runtimeUpdateByModel(param1:Class, param2:Object) : void {
+        protected function runtimeUpdateByModel(param1:Class, param2:Object) : void
+        {
         }
         
-        private function parseCarouselTankmanSkills(param1:Array, param2:int, param3:int, param4:int) : Array {
+        private function parseCarouselTankmanSkills(param1:Array, param2:int, param3:int, param4:int) : Array
+        {
             var _loc7_:CarouselTankmanSkillsModel = null;
             var _loc8_:Object = null;
             var _loc9_:CarouselTankmanSkillsModel = null;
@@ -307,7 +317,8 @@ package net.wg.gui.lobby.tankman
             return _loc5_;
         }
         
-        private function calculateMaxChars(param1:Array, param2:PersonalCaseDocsModel, param3:String) : void {
+        private function calculateMaxChars(param1:Array, param2:PersonalCaseDocsModel, param3:String) : void
+        {
             var _loc6_:uint = 0;
             var _loc4_:uint = param1.length;
             var _loc5_:* = 0;
@@ -327,7 +338,8 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        private function createTestNames(param1:Array) : void {
+        private function createTestNames(param1:Array) : void
+        {
             var _loc3_:Object = null;
             var _loc4_:* = 0;
             var _loc5_:* = 0;

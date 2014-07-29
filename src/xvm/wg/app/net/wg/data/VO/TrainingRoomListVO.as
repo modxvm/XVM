@@ -5,7 +5,8 @@ package net.wg.data.VO
     public class TrainingRoomListVO extends DAAPIDataClass
     {
         
-        public function TrainingRoomListVO(param1:Object) {
+        public function TrainingRoomListVO(param1:Object)
+        {
             this._other = [];
             this._team1 = [];
             this._team2 = [];
@@ -20,39 +21,48 @@ package net.wg.data.VO
         
         private var _myId:Number;
         
-        public function get team2() : Array {
+        public function get team2() : Array
+        {
             return this._team2;
         }
         
-        public function set team2(param1:Array) : void {
+        public function set team2(param1:Array) : void
+        {
             this._team2 = param1;
         }
         
-        public function get team1() : Array {
+        public function get team1() : Array
+        {
             return this._team1;
         }
         
-        public function set team1(param1:Array) : void {
+        public function set team1(param1:Array) : void
+        {
             this._team1 = param1;
         }
         
-        public function get other() : Array {
+        public function get other() : Array
+        {
             return this._other;
         }
         
-        public function set other(param1:Array) : void {
+        public function set other(param1:Array) : void
+        {
             this._other = param1;
         }
         
-        public function get myId() : Number {
+        public function get myId() : Number
+        {
             return this._myId;
         }
         
-        public function set myId(param1:Number) : void {
+        public function set myId(param1:Number) : void
+        {
             this._myId = param1;
         }
         
-        public function getTeam(param1:String) : Array {
+        public function getTeam(param1:String) : Array
+        {
             switch(param1)
             {
                 case "team1":

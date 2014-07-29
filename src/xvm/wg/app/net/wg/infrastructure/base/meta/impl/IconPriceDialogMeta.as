@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class IconPriceDialogMeta extends IconDialog
     {
         
-        public function IconPriceDialogMeta() {
+        public function IconPriceDialogMeta()
+        {
             super();
         }
     }

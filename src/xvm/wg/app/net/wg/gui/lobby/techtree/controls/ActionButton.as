@@ -20,7 +20,8 @@ package net.wg.gui.lobby.techtree.controls
     public class ActionButton extends SoundButton
     {
         
-        public function ActionButton() {
+        public function ActionButton()
+        {
             super();
         }
         
@@ -38,15 +39,18 @@ package net.wg.gui.lobby.techtree.controls
         
         public var disableIndicator:BitmapFill;
         
-        public function set imgSubstitution(param1:Object) : void {
+        public function set imgSubstitution(param1:Object) : void
+        {
             this._imgSubstitution = new ImageSubstitution(param1.subString,param1.source,param1.baseLineY,param1.width,param1.height,true);
         }
         
-        public function get action() : String {
+        public function get action() : String
+        {
             return this._action;
         }
         
-        public function set action(param1:String) : void {
+        public function set action(param1:String) : void
+        {
             if(this._action == param1)
             {
                 return;
@@ -56,7 +60,8 @@ package net.wg.gui.lobby.techtree.controls
             setState(this.state);
         }
         
-        public function setOwner(param1:UIComponent, param2:Boolean = false) : void {
+        public function setOwner(param1:UIComponent, param2:Boolean = false) : void
+        {
             if(_owner != param1)
             {
                 _owner = param1;
@@ -68,7 +73,8 @@ package net.wg.gui.lobby.techtree.controls
             }
         }
         
-        public function setAnimation(param1:Number, param2:AnimationProperties) : Boolean {
+        public function setAnimation(param1:Number, param2:AnimationProperties) : Boolean
+        {
             if(this.animID == param1)
             {
                 return false;
@@ -90,19 +96,20 @@ package net.wg.gui.lobby.techtree.controls
             return true;
         }
         
-        public function startAnimation() : void {
+        public function startAnimation() : void
+        {
             if(this.animProps != null)
             {
                 this.resetTween();
-                this.animTween = new Tween(this.animProps.duration,this,this.animProps.to,{
-                    "ease":Strong.easeOut,
-                    "onComplete":this.onTweenComplete,
-                    "paused":false
-                });
+                this.animTween = new Tween(this.animProps.duration,this,this.animProps.to,{"ease":Strong.easeOut,
+                "onComplete":this.onTweenComplete,
+                "paused":false
+            });
         }
     }
     
-    public function endAnimation(param1:Boolean) : void {
+    public function endAnimation(param1:Boolean) : void
+    {
         var _loc2_:DisplayObject = null;
         var _loc3_:* = false;
         if(this.animProps != null)
@@ -128,20 +135,21 @@ package net.wg.gui.lobby.techtree.controls
             else
             {
                 this.resetTween();
-                this.animTween = new Tween(this.animProps.duration,this,this.animProps.from,{
-                    "ease":Strong.easeOut,
-                    "onComplete":this.onTweenComplete,
-                    "paused":false
-                });
+                this.animTween = new Tween(this.animProps.duration,this,this.animProps.from,{"ease":Strong.easeOut,
+                "onComplete":this.onTweenComplete,
+                "paused":false
+            });
         }
     }
 }
 
-override public function hitTestPoint(param1:Number, param2:Number, param3:Boolean = false) : Boolean {
+override public function hitTestPoint(param1:Number, param2:Number, param3:Boolean = false) : Boolean
+{
     return hitArea != null?hitArea.hitTestPoint(param1,param2,param3):super.hitTestPoint(param1,param2,param3);
 }
 
-public function onTweenComplete() : void {
+public function onTweenComplete() : void
+{
     if(alpha == 0)
     {
         mouseEnabled = false;
@@ -152,22 +160,26 @@ public function onTweenComplete() : void {
     }
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
     owner = null;
     super.onDispose();
 }
 
-override protected function preInitialize() : void {
+override protected function preInitialize() : void
+{
     super.preInitialize();
     _state = "up";
 }
 
-override protected function initialize() : void {
+override protected function initialize() : void
+{
     this.makeStatesPrefixes();
     super.initialize();
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
     super.draw();
     if(_baseDisposed)
     {
@@ -179,7 +191,8 @@ override protected function draw() : void {
     }
 }
 
-override protected function updateText() : void {
+override protected function updateText() : void
+{
     if(!(_label == null) && !(textField == null))
     {
         if(!(this._imgSubstitution == null) && (this._imgSubstitution.valid))
@@ -194,22 +207,26 @@ override protected function updateText() : void {
     }
 }
 
-override protected function handleClick(param1:uint = 0) : void {
+override protected function handleClick(param1:uint = 0) : void
+{
     super.handleClick(param1);
     this.doAction();
 }
 
-override protected function handleMouseRollOut(param1:MouseEvent) : void {
+override protected function handleMouseRollOut(param1:MouseEvent) : void
+{
     super.handleMouseRollOut(param1);
     this.endAnimation(false);
 }
 
-override protected function handleReleaseOutside(param1:MouseEvent) : void {
+override protected function handleReleaseOutside(param1:MouseEvent) : void
+{
     super.handleReleaseOutside(param1);
     this.endAnimation(false);
 }
 
-private function resetTween() : void {
+private function resetTween() : void
+{
     if(this.animTween)
     {
         this.animTween.paused = true;
@@ -217,7 +234,8 @@ private function resetTween() : void {
     }
 }
 
-private function doAction() : void {
+private function doAction() : void
+{
     var _loc2_:IRenderer = null;
     var _loc1_:String = null;
     switch(this._action)
@@ -239,7 +257,8 @@ private function doAction() : void {
     }
 }
 
-private function makeStatesPrefixes() : void {
+private function makeStatesPrefixes() : void
+{
     var _loc1_:* = this._action + "_";
     statesSelected = Vector.<String>(["selected_",_loc1_]);
     statesDefault = Vector.<String>([_loc1_]);

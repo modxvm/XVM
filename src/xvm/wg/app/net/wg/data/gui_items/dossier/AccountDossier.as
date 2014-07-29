@@ -5,7 +5,8 @@ package net.wg.data.gui_items.dossier
     public class AccountDossier extends Dossier
     {
         
-        public function AccountDossier(param1:String = null) {
+        public function AccountDossier(param1:String = null)
+        {
             super(ItemTypes.ACCOUNT_DOSSIER,param1);
         }
     }

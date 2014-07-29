@@ -5,7 +5,8 @@ package net.wg.gui.components.common.video
     public class VideoPlayerEvent extends Event
     {
         
-        public function VideoPlayerEvent(param1:String, param2:Boolean = false, param3:Boolean = false) {
+        public function VideoPlayerEvent(param1:String, param2:Boolean = false, param3:Boolean = false)
+        {
             super(param1,param2,param3);
         }
         
@@ -21,11 +22,13 @@ package net.wg.gui.components.common.video
         
         public static var PLAYBACK_STOPPED:String = "playbackStopped";
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new VideoPlayerEvent(type,bubbles,cancelable);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("VideoPlayerEvent","type","bubbles","cancelable","eventPhase");
         }
     }

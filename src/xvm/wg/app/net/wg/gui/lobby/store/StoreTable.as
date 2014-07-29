@@ -14,7 +14,8 @@ package net.wg.gui.lobby.store
     public class StoreTable extends StoreTableMeta implements IStoreTable
     {
         
-        public function StoreTable() {
+        public function StoreTable()
+        {
             super();
             this._tableDP = new StoreTableDataProvider();
         }
@@ -25,7 +26,8 @@ package net.wg.gui.lobby.store
         
         private static var INVALID_TABLE:String = "invalidTable";
         
-        private static function assertNotNull(param1:Object, param2:String) : void {
+        private static function assertNotNull(param1:Object, param2:String) : void
+        {
             if(App.instance)
             {
                 App.utils.asserter.assert(!(param1 == null),param2 + Errors.CANT_NULL,NullPointerException);
@@ -50,53 +52,64 @@ package net.wg.gui.lobby.store
         
         private var moduleRendererLinkage:String = null;
         
-        public function as_getTableDataProvider() : Object {
+        public function as_getTableDataProvider() : Object
+        {
             return this._tableDP;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.list.dataProvider = this._tableDP;
         }
         
-        public function as_setTableType(param1:String) : void {
+        public function as_setTableType(param1:String) : void
+        {
             StoreTable.assertNotNull(param1,"TableType");
             this._type = param1;
             invalidate(INVALID_TABLE);
         }
         
-        public function as_scrollToFirst(param1:Number, param2:String, param3:String) : void {
+        public function as_scrollToFirst(param1:Number, param2:String, param3:String) : void
+        {
         }
         
-        public function as_setGold(param1:Number) : void {
+        public function as_setGold(param1:Number) : void
+        {
             StoreTable.assertNotNull(this._tableVO,"_tableVO");
             this._tableVO.gold = param1;
         }
         
-        public function as_setCredits(param1:Number) : void {
+        public function as_setCredits(param1:Number) : void
+        {
             StoreTable.assertNotNull(this._tableVO,"_tableVO");
             this._tableVO.credits = param1;
         }
         
-        public function updateHeaderCountTitle(param1:String) : void {
+        public function updateHeaderCountTitle(param1:String) : void
+        {
             this.header.headerInfo.countField.text = param1;
         }
         
-        public function setVehicleRendererLinkage(param1:String) : void {
+        public function setVehicleRendererLinkage(param1:String) : void
+        {
             StoreTable.assertNotNull(param1,"linkage");
             this.vehicleRendererLinkage = param1;
         }
         
-        public function setModuleRendererLinkage(param1:String) : void {
+        public function setModuleRendererLinkage(param1:String) : void
+        {
             StoreTable.assertNotNull(param1,"linkage");
             this.moduleRendererLinkage = param1;
         }
         
-        public function get rightOrientedCount() : Boolean {
+        public function get rightOrientedCount() : Boolean
+        {
             return this._rightOrientedCount;
         }
         
-        public function set rightOrientedCount(param1:Boolean) : void {
+        public function set rightOrientedCount(param1:Boolean) : void
+        {
             if(param1 != this._rightOrientedCount)
             {
                 this._rightOrientedCount = param1;
@@ -111,7 +124,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(INVALID_TABLE)) && (this._tableVO))
             {
@@ -119,7 +133,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             this._tableVO = new StoreTableVO();
             if(this._type)
@@ -128,7 +143,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.header.dispose();
             this.header = null;
@@ -143,7 +159,8 @@ package net.wg.gui.lobby.store
             this._tableDP = null;
         }
         
-        private function updateTable() : void {
+        private function updateTable() : void
+        {
             StoreTable.assertNotNull(this._type,"_type");
             StoreTable.assertNotNull(this.moduleRendererLinkage,"moduleRendererLinkage");
             StoreTable.assertNotNull(this.vehicleRendererLinkage,"vehicleRendererLinkage");
@@ -152,7 +169,8 @@ package net.wg.gui.lobby.store
             this.setupDataProvider(this._type);
         }
         
-        private function setupRendererType(param1:String) : void {
+        private function setupRendererType(param1:String) : void
+        {
             var rendererName:String = null;
             var classRef:Class = null;
             var type:String = param1;
@@ -176,7 +194,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        private function setupDataProvider(param1:String) : void {
+        private function setupDataProvider(param1:String) : void
+        {
             this._tableDP.type = param1;
             this._tableDP.tableVO = this._tableVO;
             refreshStoreTableDataProviderS();
@@ -190,7 +209,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        private function detectRendererHeight(param1:String) : void {
+        private function detectRendererHeight(param1:String) : void
+        {
             var _loc2_:IListItemRenderer = null;
             if(App.instance)
             {

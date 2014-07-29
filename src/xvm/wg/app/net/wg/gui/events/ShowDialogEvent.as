@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class ShowDialogEvent extends Event
     {
         
-        public function ShowDialogEvent(param1:String, param2:String = "") {
+        public function ShowDialogEvent(param1:String, param2:String = "")
+        {
             super(param1,true,true);
             this.id = param2;
         }
@@ -18,7 +19,8 @@ package net.wg.gui.events
         
         public var id:String;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new ShowDialogEvent(type,this.id);
         }
     }

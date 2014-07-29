@@ -6,7 +6,8 @@ package net.wg.gui.rally.vo
     public class RallyCandidateVO extends ExtendedUserVO implements IRallyCandidateVO
     {
         
-        public function RallyCandidateVO(param1:Object) {
+        public function RallyCandidateVO(param1:Object)
+        {
             _colors = [Number.NaN,Number.NaN];
             super(param1);
         }
@@ -23,50 +24,61 @@ package net.wg.gui.rally.vo
         
         private var _isRatingAvailable:Boolean = false;
         
-        public function get isCommander() : Boolean {
+        public function get isCommander() : Boolean
+        {
             return this._isCommander;
         }
         
-        public function set isCommander(param1:Boolean) : void {
+        public function set isCommander(param1:Boolean) : void
+        {
             this._isCommander = param1;
         }
         
-        public function get rating() : String {
+        public function get rating() : String
+        {
             return this._rating;
         }
         
-        public function set rating(param1:String) : void {
+        public function set rating(param1:String) : void
+        {
             this._rating = param1;
         }
         
-        override public function get colors() : Array {
+        override public function get colors() : Array
+        {
             return _colors;
         }
         
-        override public function set colors(param1:Array) : void {
+        override public function set colors(param1:Array) : void
+        {
             if((_colors) && _colors.length > 1)
             {
                 _colors = param1;
             }
         }
         
-        public function get color() : Number {
+        public function get color() : Number
+        {
             return _colors[this._isOffline?1:0];
         }
         
-        public function get isOffline() : Boolean {
+        public function get isOffline() : Boolean
+        {
             return this._isOffline;
         }
         
-        public function set isOffline(param1:Boolean) : void {
+        public function set isOffline(param1:Boolean) : void
+        {
             this._isOffline = param1;
         }
         
-        public function get isRatingAvailable() : Boolean {
+        public function get isRatingAvailable() : Boolean
+        {
             return this._isRatingAvailable;
         }
         
-        public function set isRatingAvailable(param1:Boolean) : void {
+        public function set isRatingAvailable(param1:Boolean) : void
+        {
             this._isRatingAvailable = param1;
         }
     }

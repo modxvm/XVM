@@ -8,7 +8,8 @@ package net.wg.gui.lobby.battleloading
     public class BattleLoading extends BattleLoadingMeta implements IBattleLoadingMeta
     {
         
-        public function BattleLoading() {
+        public function BattleLoading()
+        {
             super();
             this.visible = false;
         }
@@ -59,12 +60,14 @@ package net.wg.gui.lobby.battleloading
         
         private var tipTitle:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             setFocus(this);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if((isInvalid(MAP_BG_IS_INVALID)) && (this.mapBG))
             {
                 this.mapBG.source = this.mapBgSource;
@@ -109,7 +112,8 @@ package net.wg.gui.lobby.battleloading
             }
         }
         
-        public function as_setMapBG(param1:String) : void {
+        public function as_setMapBG(param1:String) : void
+        {
             if(this.mapBgSource == param1)
             {
                 return;
@@ -124,7 +128,8 @@ package net.wg.gui.lobby.battleloading
             invalidate(MAP_BG_IS_INVALID);
         }
         
-        public function as_setProgress(param1:Number) : void {
+        public function as_setProgress(param1:Number) : void
+        {
             if(this.progress == param1)
             {
                 return;
@@ -133,7 +138,8 @@ package net.wg.gui.lobby.battleloading
             invalidate(PROGRESS_IS_INVALID);
         }
         
-        public function as_setMapName(param1:String) : void {
+        public function as_setMapName(param1:String) : void
+        {
             if(this.mapName == param1)
             {
                 return;
@@ -142,7 +148,8 @@ package net.wg.gui.lobby.battleloading
             invalidate(MAP_NAME_IS_INVALID);
         }
         
-        public function as_setBattleTypeName(param1:String) : void {
+        public function as_setBattleTypeName(param1:String) : void
+        {
             if(this.battleTypeName == param1)
             {
                 return;
@@ -151,7 +158,8 @@ package net.wg.gui.lobby.battleloading
             invalidate(BT_NAME_IS_INVALID);
         }
         
-        public function as_setBattleTypeFrameNum(param1:Number) : void {
+        public function as_setBattleTypeFrameNum(param1:Number) : void
+        {
             if(this.battleTypeFrameNum == param1)
             {
                 return;
@@ -160,7 +168,8 @@ package net.wg.gui.lobby.battleloading
             invalidate(BT_FRAME_NUM_IS_INVALID);
         }
         
-        public function as_setBattleTypeFrameName(param1:String) : void {
+        public function as_setBattleTypeFrameName(param1:String) : void
+        {
             if(this.battleTypeFrameName == param1)
             {
                 return;
@@ -169,7 +178,8 @@ package net.wg.gui.lobby.battleloading
             invalidate(BT_FRAME_NAME_IS_INVALID);
         }
         
-        public function as_setWinText(param1:String) : void {
+        public function as_setWinText(param1:String) : void
+        {
             if(this.winText == param1)
             {
                 return;
@@ -178,7 +188,8 @@ package net.wg.gui.lobby.battleloading
             invalidate(WIN_TEXT_IS_INVALID);
         }
         
-        public function as_setTeams(param1:String, param2:String) : void {
+        public function as_setTeams(param1:String, param2:String) : void
+        {
             if(this.teamName1 == param1 || this.teamName2 == param2)
             {
                 return;
@@ -188,7 +199,8 @@ package net.wg.gui.lobby.battleloading
             invalidate(TEAMS_IS_INVALID);
         }
         
-        public function as_setTip(param1:String) : void {
+        public function as_setTip(param1:String) : void
+        {
             if(this.tip == param1)
             {
                 return;
@@ -199,7 +211,8 @@ package net.wg.gui.lobby.battleloading
         
         private var isTipTitleInvalid:Boolean = false;
         
-        public function as_setTipTitle(param1:String) : void {
+        public function as_setTipTitle(param1:String) : void
+        {
             if(this.tipTitle == param1)
             {
                 return;
@@ -209,31 +222,38 @@ package net.wg.gui.lobby.battleloading
             invalidate(TIP_TITLE_IS_INVALID);
         }
         
-        public function as_setPlayerData(param1:Number, param2:Number) : void {
+        public function as_setPlayerData(param1:Number, param2:Number) : void
+        {
             this.form.setPlayerInfo(param1,param2);
         }
         
-        public function as_setVehiclesData(param1:Boolean, param2:Array) : void {
+        public function as_setVehiclesData(param1:Boolean, param2:Array) : void
+        {
             this.form.setVehiclesData(param1,param2);
         }
         
-        public function as_addVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void {
+        public function as_addVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void
+        {
             this.form.addVehicleInfo(param1,param2,param3);
         }
         
-        public function as_updateVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void {
+        public function as_updateVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void
+        {
             this.form.updateVehicleInfo(param1,param2,param3);
         }
         
-        public function as_setVehicleStatus(param1:Boolean, param2:Number, param3:uint, param4:Array) : void {
+        public function as_setVehicleStatus(param1:Boolean, param2:Number, param3:uint, param4:Array) : void
+        {
             this.form.setVehicleStatus(param1,param2,param3,param4);
         }
         
-        public function as_setPlayerStatus(param1:Boolean, param2:Number, param3:uint) : void {
+        public function as_setPlayerStatus(param1:Boolean, param2:Number, param3:uint) : void
+        {
             this.form.setPlayerStatus(param1,param2,param3);
         }
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             this.form.x = param1 >> 1;
             this.form.y = param2 - 743 >> 1;
             this.mapBG.x = 0;
@@ -254,7 +274,8 @@ package net.wg.gui.lobby.battleloading
             this.mapBG.y = param2 - this.mapBG.height >> 1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.form.dispose();
             this.form = null;
             this.mapBG.removeEventListener(UILoaderEvent.COMPLETE,this.onLoaderCompleteBGImageHandler);
@@ -264,24 +285,28 @@ package net.wg.gui.lobby.battleloading
             super.onDispose();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG BattleLoading " + name + "]";
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             this.visible = false;
             App.contextMenuMgr.hide();
             this.updateStage(App.appWidth,App.appHeight);
         }
         
-        private function onLoaderCompleteBGImageHandler(param1:UILoaderEvent) : void {
+        private function onLoaderCompleteBGImageHandler(param1:UILoaderEvent) : void
+        {
             this.visible = onLoadCompleteS();
             this.mapBG.removeEventListener(UILoaderEvent.COMPLETE,this.onLoaderCompleteBGImageHandler);
             this.mapBG.removeEventListener(UILoaderEvent.IOERROR,this.onLoaderCompleteBGImageHandler);
         }
         
-        override protected function canAutoShowView() : Boolean {
+        override protected function canAutoShowView() : Boolean
+        {
             return false;
         }
     }

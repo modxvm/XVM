@@ -8,16 +8,19 @@ package net.wg.gui.lobby.demonstration
     public class MapItemRenderer extends SoundListItemRenderer
     {
         
-        public function MapItemRenderer() {
+        public function MapItemRenderer()
+        {
             super();
             soundType = SoundTypes.RNDR_NORMAL;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (data))
             {
@@ -25,7 +28,8 @@ package net.wg.gui.lobby.demonstration
             }
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             invalidate(InvalidationType.DATA);
         }

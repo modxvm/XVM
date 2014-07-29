@@ -11,7 +11,8 @@ package net.wg.gui.login.legal
     public class LegalContent extends UIComponent
     {
         
-        public function LegalContent() {
+        public function LegalContent()
+        {
             super();
         }
         
@@ -27,23 +28,27 @@ package net.wg.gui.login.legal
         
         private var _textInfo:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.logos.addEventListener(UILoaderEvent.COMPLETE,this.onLoadComplete);
             this.logos.addEventListener(UILoaderEvent.IOERROR,this.onLoadError);
             this.logos.source = RES_COMMON.MAPS_LEGAL_BRANDS;
         }
         
-        private function onLoadError(param1:UILoaderEvent) : void {
+        private function onLoadError(param1:UILoaderEvent) : void
+        {
             this.logos.visible = false;
             invalidateSize();
         }
         
-        private function onLoadComplete(param1:UILoaderEvent) : void {
+        private function onLoadComplete(param1:UILoaderEvent) : void
+        {
             invalidateSize();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -71,14 +76,16 @@ package net.wg.gui.login.legal
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.textField = null;
             this.logos.removeEventListener(UILoaderEvent.COMPLETE,this.onLoadComplete);
             this.logos.removeEventListener(UILoaderEvent.IOERROR,this.onLoadError);
             super.onDispose();
         }
         
-        public function updateData(param1:String) : void {
+        public function updateData(param1:String) : void
+        {
             this._textInfo = param1;
             invalidateData();
         }

@@ -25,7 +25,8 @@ package net.wg.gui.rally.views.room
     public class BaseTeamSection extends UIComponent implements IDropList
     {
         
-        public function BaseTeamSection() {
+        public function BaseTeamSection()
+        {
             super();
         }
         
@@ -53,27 +54,31 @@ package net.wg.gui.rally.views.room
         
         private var _vehiclesLabel:String = "";
         
-        public function setMemberVehicle(param1:uint, param2:uint, param3:VehicleVO) : void {
+        public function setMemberVehicle(param1:uint, param2:uint, param3:VehicleVO) : void
+        {
             var _loc4_:IRallySlotVO = this.getSlotModel(param1);
             _loc4_.selectedVehicle = param3;
             _loc4_.selectedVehicleLevel = param2;
             this.setSlotModel(param1,_loc4_);
         }
         
-        public function setMemberStatus(param1:uint, param2:uint) : void {
+        public function setMemberStatus(param1:uint, param2:uint) : void
+        {
             var _loc3_:IRallySlotVO = this.getSlotModel(param1);
             _loc3_.playerStatus = param2;
             this.setSlotModel(param1,_loc3_);
             this.updateIndicators(param1);
         }
         
-        public function setOfflineStatus(param1:uint, param2:Boolean) : void {
+        public function setOfflineStatus(param1:uint, param2:Boolean) : void
+        {
             var _loc3_:IRallySlotVO = this.getSlotModel(param1);
             _loc3_.playerObj.isOffline = param2;
             this.setSlotModel(param1,_loc3_);
         }
         
-        public function updateMembers(param1:Boolean, param2:Array) : void {
+        public function updateMembers(param1:Boolean, param2:Array) : void
+        {
             var _loc3_:* = 0;
             var _loc5_:IRallySlotVO = null;
             var _loc4_:int = param2.length;
@@ -95,14 +100,15 @@ package net.wg.gui.rally.views.room
             this.lblTeamMembers.htmlText = BaseRallyMainWindow.getTeamHeader(this.getMembersStr(),this._rallyData);
         }
         
-        public function updateVehiclesHeader(param1:int, param2:int) : void {
-            this.lblTeamVehicles.htmlText = App.utils.locale.makeString(this.getVehiclesStr(),{
-                "current":Utils.instance.htmlWrapper(param1.toString(),Utils.instance.COLOR_NORMAL,13,"$FieldFont"),
-                "max":param2.toString()
-            });
+        public function updateVehiclesHeader(param1:int, param2:int) : void
+        {
+            this.lblTeamVehicles.htmlText = App.utils.locale.makeString(this.getVehiclesStr(),{"current":Utils.instance.htmlWrapper(param1.toString(),Utils.instance.COLOR_NORMAL,13,"$FieldFont"),
+            "max":param2.toString()
+        });
     }
     
-    public function enableFightButton(param1:Boolean) : void {
+    public function enableFightButton(param1:Boolean) : void
+    {
         this._isFightBtnInCoolDown = !param1;
         if(this.btnFight)
         {
@@ -114,7 +120,8 @@ package net.wg.gui.rally.views.room
         }
     }
     
-    public function highlightSlots(param1:Array) : void {
+    public function highlightSlots(param1:Array) : void
+    {
         var _loc2_:* = 0;
         var _loc3_:* = 0;
         var _loc4_:SlotDropIndicator = null;
@@ -131,7 +138,8 @@ package net.wg.gui.rally.views.room
         }
     }
     
-    public function cooldownSlots(param1:Boolean) : void {
+    public function cooldownSlots(param1:Boolean) : void
+    {
         var _loc2_:* = 0;
         var _loc3_:* = 0;
         var _loc4_:RallySimpleSlotRenderer = null;
@@ -148,7 +156,8 @@ package net.wg.gui.rally.views.room
         }
     }
     
-    public function highlightList() : void {
+    public function highlightList() : void
+    {
         var _loc1_:SlotDropIndicator = null;
         for each(_loc1_ in this._indicatorsUI)
         {
@@ -156,7 +165,8 @@ package net.wg.gui.rally.views.room
         }
     }
     
-    public function hideHighLight() : void {
+    public function hideHighLight() : void
+    {
         var _loc1_:SlotDropIndicator = null;
         for each(_loc1_ in this._indicatorsUI)
         {
@@ -164,37 +174,45 @@ package net.wg.gui.rally.views.room
         }
     }
     
-    public function get actionButtonData() : ActionButtonVO {
+    public function get actionButtonData() : ActionButtonVO
+    {
         return this._actionButtonData;
     }
     
-    public function set actionButtonData(param1:ActionButtonVO) : void {
+    public function set actionButtonData(param1:ActionButtonVO) : void
+    {
         this._actionButtonData = param1;
         invalidate(RallyInvalidationType.ACTION_BUTTON_DATA);
     }
     
-    public function set vehiclesLabel(param1:String) : void {
+    public function set vehiclesLabel(param1:String) : void
+    {
         this._vehiclesLabel = param1;
         invalidate(RallyInvalidationType.VEHICLE_LABEL);
     }
     
-    public function get selectable() : Boolean {
+    public function get selectable() : Boolean
+    {
         return false;
     }
     
-    public function set selectable(param1:Boolean) : void {
+    public function set selectable(param1:Boolean) : void
+    {
     }
     
-    public function get rallyData() : IRallyVO {
+    public function get rallyData() : IRallyVO
+    {
         return this._rallyData;
     }
     
-    public function set rallyData(param1:IRallyVO) : void {
+    public function set rallyData(param1:IRallyVO) : void
+    {
         this._rallyData = param1;
         invalidate(RallyInvalidationType.RALLY_DATA);
     }
     
-    override protected function configUI() : void {
+    override protected function configUI() : void
+    {
         super.configUI();
         this.lblTeamMembers.htmlText = BaseRallyMainWindow.getTeamHeader(this.getMembersStr(),this._rallyData);
         this.lblTeamVehicles.htmlText = this.getVehiclesStaticStr();
@@ -204,7 +222,8 @@ package net.wg.gui.rally.views.room
         this.btnNotReady.addEventListener(ButtonEvent.CLICK,this.onReadyToggle);
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         super.draw();
         if(isInvalid(RallyInvalidationType.VEHICLE_LABEL))
         {
@@ -237,7 +256,8 @@ package net.wg.gui.rally.views.room
         }
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         var _loc1_:RallySimpleSlotRenderer = null;
         var _loc2_:SlotDropIndicator = null;
         this.btnFight.removeEventListener(ButtonEvent.CLICK,this.onReadyToggle);
@@ -257,31 +277,38 @@ package net.wg.gui.rally.views.room
         super.onDispose();
     }
     
-    protected function getSlotVO(param1:Object) : IRallySlotVO {
+    protected function getSlotVO(param1:Object) : IRallySlotVO
+    {
         return new RallySlotVO(param1);
     }
     
-    protected function getMembersStr() : String {
+    protected function getMembersStr() : String
+    {
         return null;
     }
     
-    protected function getVehiclesStr() : String {
+    protected function getVehiclesStr() : String
+    {
         return null;
     }
     
-    protected function getVehiclesStaticStr() : String {
+    protected function getVehiclesStaticStr() : String
+    {
         return null;
     }
     
-    protected function getSlotsUI() : Array {
+    protected function getSlotsUI() : Array
+    {
         return [];
     }
     
-    protected function getIndicatorsUI() : Array {
+    protected function getIndicatorsUI() : Array
+    {
         return [];
     }
     
-    protected function updateComponents() : void {
+    protected function updateComponents() : void
+    {
         var _loc3_:SlotDropIndicator = null;
         this.assertSlotsEqualsIndicators();
         var _loc1_:Boolean = this._rallyData?this._rallyData.isCommander:false;
@@ -313,15 +340,18 @@ package net.wg.gui.rally.views.room
         }
     }
     
-    private function assertSlotsEqualsIndicators() : void {
+    private function assertSlotsEqualsIndicators() : void
+    {
         var _loc1_:* = "_slotsUi length must be euqals _indicatorsUI length!";
         App.utils.asserter.assert(this._slotsUi.length == this._indicatorsUI.length,_loc1_,InfrastructureException);
     }
     
-    protected function updateRenderIcon(param1:SlotDropIndicator) : void {
+    protected function updateRenderIcon(param1:SlotDropIndicator) : void
+    {
     }
     
-    protected function tooltipSubscribe(param1:Array, param2:Boolean = true) : void {
+    protected function tooltipSubscribe(param1:Array, param2:Boolean = true) : void
+    {
         var _loc3_:DisplayObject = null;
         for each(_loc3_ in param1)
         {
@@ -338,39 +368,45 @@ package net.wg.gui.rally.views.room
         }
     }
     
-    protected function getSlotModel(param1:uint) : IRallySlotVO {
+    protected function getSlotModel(param1:uint) : IRallySlotVO
+    {
         return IRallySlotVO(this._rallyData.slotsArray[param1]);
     }
     
-    protected function setSlotModel(param1:uint, param2:IRallySlotVO) : void {
+    protected function setSlotModel(param1:uint, param2:IRallySlotVO) : void
+    {
         RallySimpleSlotRenderer(this._slotsUi[param1]).slotData = param2;
     }
     
-    private function highlightIndicator(param1:SlotDropIndicator, param2:Boolean) : void {
+    private function highlightIndicator(param1:SlotDropIndicator, param2:Boolean) : void
+    {
         if((this._rallyData) && (this._rallyData.isCommander))
         {
             param1.setHighlightState(param2);
         }
     }
     
-    private function updateIndicators(param1:uint) : void {
+    private function updateIndicators(param1:uint) : void
+    {
         var _loc2_:IRallySlotVO = this.getSlotModel(param1);
         SlotDropIndicator(this._indicatorsUI[param1]).update(_loc2_.playerObj);
         SlotDropIndicator(this._indicatorsUI[param1]).playerStatus = _loc2_.playerStatus;
     }
     
-    private function onReadyToggle(param1:ButtonEvent) : void {
-        var _loc2_:Object = {
-            "uiid":param1.target.UIID,
-            "arg":(this._rallyData.isCommander?0:1)
-        };
+    private function onReadyToggle(param1:ButtonEvent) : void
+    {
+        var _loc2_:Object = {"uiid":param1.target.UIID,
+        "arg":(this._rallyData.isCommander?0:1)
+    };
     dispatchEvent(new RallyViewsEvent(RallyViewsEvent.TOGGLE_READY_STATE_REQUEST,_loc2_));
 }
 
-protected function onControlRollOver(param1:MouseEvent) : void {
+protected function onControlRollOver(param1:MouseEvent) : void
+{
 }
 
-protected function onControlRollOut(param1:MouseEvent) : void {
+protected function onControlRollOut(param1:MouseEvent) : void
+{
     App.toolTipMgr.hide();
 }
 }

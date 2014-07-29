@@ -11,7 +11,8 @@ package net.wg.gui.lobby.techtree.controls
     public class ExperienceInformation extends NodeComponent
     {
         
-        public function ExperienceInformation() {
+        public function ExperienceInformation()
+        {
             super();
         }
         
@@ -35,13 +36,15 @@ package net.wg.gui.lobby.techtree.controls
         
         public var haveNotFreeXp:WalletResourcesStatus;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.haveNotFreeXp.dispose();
             this.haveNotFreeXp = null;
             super.onDispose();
         }
         
-        override public function setOwner(param1:IRenderer, param2:Boolean = false) : void {
+        override public function setOwner(param1:IRenderer, param2:Boolean = false) : void
+        {
             if(_owner != null)
             {
                 _owner.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleOwnerStateChanged);
@@ -54,7 +57,8 @@ package net.wg.gui.lobby.techtree.controls
             invalidate(TTInvalidationType.ELITE,TTInvalidationType.VEH_XP);
         }
         
-        public function setFreeXP(param1:Number) : void {
+        public function setFreeXP(param1:Number) : void
+        {
             if(this._freeXP == param1)
             {
                 return;
@@ -63,11 +67,13 @@ package net.wg.gui.lobby.techtree.controls
             invalidate(TTInvalidationType.FREE_XP);
         }
         
-        public function setWalletStatus() : void {
+        public function setWalletStatus() : void
+        {
             this.freeXPField.visible = !this.haveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(this.vehXPLabel != null)
             {
                 this.vehXPLabel.text = MENU.RESEARCH_LABELS_VEHXP;
@@ -83,7 +89,8 @@ package net.wg.gui.lobby.techtree.controls
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(_owner == null)
             {
@@ -102,13 +109,15 @@ package net.wg.gui.lobby.techtree.controls
             }
         }
         
-        private function changeStars() : void {
+        private function changeStars() : void
+        {
             var _loc1_:String = _owner.isElite()?XpTypeStrings.ELITE_XP_TYPE:XpTypeStrings.EARNED_XP_TYPE;
             this.vehXPIcon.type = _loc1_;
             this.vehXPInTotalIcon.type = _loc1_;
         }
         
-        private function makeVehXPString() : void {
+        private function makeVehXPString() : void
+        {
             var _loc2_:String = null;
             var _loc1_:Number = _owner.getEarnedXP();
             if(App.utils != null)
@@ -122,7 +131,8 @@ package net.wg.gui.lobby.techtree.controls
             this.vehXPField.text = _loc2_;
         }
         
-        private function makeFreeXPString() : void {
+        private function makeFreeXPString() : void
+        {
             var _loc1_:String = null;
             if(App.utils != null)
             {
@@ -135,7 +145,8 @@ package net.wg.gui.lobby.techtree.controls
             this.freeXPField.text = _loc1_;
         }
         
-        private function makeTotalXPString() : void {
+        private function makeTotalXPString() : void
+        {
             var _loc2_:String = null;
             var _loc1_:Number = _owner.getEarnedXP() + Math.max(0,this._freeXP);
             if(App.utils != null)
@@ -149,7 +160,8 @@ package net.wg.gui.lobby.techtree.controls
             this.totalXPField.text = _loc2_;
         }
         
-        private function handleOwnerStateChanged(param1:TechTreeEvent) : void {
+        private function handleOwnerStateChanged(param1:TechTreeEvent) : void
+        {
             if(param1.primary == NodeState.ELITE)
             {
                 invalidate(TTInvalidationType.ELITE);

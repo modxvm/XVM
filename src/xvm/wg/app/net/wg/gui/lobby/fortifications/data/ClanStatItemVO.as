@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class ClanStatItemVO extends DAAPIDataClass
     {
         
-        public function ClanStatItemVO(param1:Object) {
+        public function ClanStatItemVO(param1:Object)
+        {
             super(param1);
         }
         

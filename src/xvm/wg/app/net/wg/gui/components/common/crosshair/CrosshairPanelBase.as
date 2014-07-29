@@ -11,7 +11,8 @@ package net.wg.gui.components.common.crosshair
     public class CrosshairPanelBase extends Sprite implements IDisposable
     {
         
-        public function CrosshairPanelBase() {
+        public function CrosshairPanelBase()
+        {
             this._reloadingSettings = [0,0,false];
             super();
             this.init();
@@ -35,7 +36,8 @@ package net.wg.gui.components.common.crosshair
         
         protected var reloadingTimer:ReloadingTimer;
         
-        private function init() : void {
+        private function init() : void
+        {
             this.initCallbacks();
             this.initFrameWalkers();
             this.initView();
@@ -49,33 +51,39 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        private function initStage(param1:Event = null) : void {
+        private function initStage(param1:Event = null) : void
+        {
             removeEventListener(Event.ADDED_TO_STAGE,this.initStage);
             stage.scaleMode = StageScaleMode.NO_SCALE;
             stage.align = StageAlign.TOP_LEFT;
         }
         
-        protected function initView() : void {
+        protected function initView() : void
+        {
             this.setDefaultTargetState();
             this.onSetAmmoStock(0,0,true,"critical");
             this._fadingTargetFW.setPosAsPercent(100);
         }
         
-        protected function initFrameWalkers() : void {
+        protected function initFrameWalkers() : void
+        {
             this._universalBarFW = new FrameWalker(this.g_modeMC.universalBarMC,60,true);
             this._reloadingBarFW = new FrameWalker(this.g_modeMC.reloadingBarMC,60,false);
             this._fadingTargetFW = new FrameWalker(this.g_modeMC.targetMC,60,false);
         }
         
-        protected function initCallbacks() : void {
+        protected function initCallbacks() : void
+        {
         }
         
-        protected function onRecreateDevice(param1:Number, param2:Number, param3:Number, param4:Number) : void {
+        protected function onRecreateDevice(param1:Number, param2:Number, param3:Number, param4:Number) : void
+        {
             this.g_modeMC.x = 0.5 * param1 * (1 + param3);
             this.g_modeMC.y = 0.5 * param2 * (1 - param4);
         }
         
-        protected function onSetReloading(param1:Number, param2:Number, param3:Boolean, param4:Number = 0) : void {
+        protected function onSetReloading(param1:Number, param2:Number, param3:Boolean, param4:Number = 0) : void
+        {
             this._reloadingSettings = [param1,param2,param3];
             this._reloadingBarFW.stop();
             if(param1 == 0)
@@ -103,7 +111,8 @@ package net.wg.gui.components.common.crosshair
             
         }
         
-        protected function onSetReloadingAsPercent(param1:Number) : void {
+        protected function onSetReloadingAsPercent(param1:Number) : void
+        {
             if(param1 > 100)
             {
                 this._reloadingBarFW.setPosAsPercent(100);
@@ -115,7 +124,8 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        protected function onCorrectReloadingTime(param1:Number) : void {
+        protected function onCorrectReloadingTime(param1:Number) : void
+        {
             var _loc2_:Boolean = this._reloadingSettings[2];
             if(_loc2_)
             {
@@ -124,16 +134,19 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        protected function onSetReloadingTimeWithCorrection(param1:Number, param2:Number, param3:Boolean) : void {
+        protected function onSetReloadingTimeWithCorrection(param1:Number, param2:Number, param3:Boolean) : void
+        {
             this._reloadingBarFW.stop();
         }
         
-        protected function onSetHealth(param1:Number) : void {
+        protected function onSetHealth(param1:Number) : void
+        {
             this._health = param1;
             this._universalBarFW.setPosAsPercent(param1 * 100);
         }
         
-        protected function onSetAmmoStock(param1:Number, param2:Number, param3:Boolean, param4:String, param5:Boolean = false) : void {
+        protected function onSetAmmoStock(param1:Number, param2:Number, param3:Boolean, param4:String, param5:Boolean = false) : void
+        {
             var _loc6_:MovieClip = this.g_modeMC.ammoCountMC;
             _loc6_.gotoAndStop(param3?"ammo_low":"ammo_normal");
             _loc6_.count.text = param1.toString();
@@ -147,7 +160,8 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        protected function onSetClipParams(param1:Number, param2:Number) : void {
+        protected function onSetClipParams(param1:Number, param2:Number) : void
+        {
             var _loc3_:MovieClip = null;
             if(this._clipCapacity == param1)
             {
@@ -165,53 +179,63 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        protected function onSetTarget(param1:String, param2:String, param3:Number) : void {
+        protected function onSetTarget(param1:String, param2:String, param3:Number) : void
+        {
             this._fadingTargetFW.stop();
             this._fadingTargetFW.setPosAsPercent(0);
         }
         
-        protected function setDefaultTargetState() : void {
+        protected function setDefaultTargetState() : void
+        {
             var _loc1_:MovieClip = this.g_modeMC.targetMC.target;
             _loc1_.distance.text = "";
         }
         
-        protected function onClearTarget(param1:Number) : void {
+        protected function onClearTarget(param1:Number) : void
+        {
             this._fadingTargetFW.stop();
             this._fadingTargetFW.start(4,param1);
         }
         
-        protected function onUpdateTarget(param1:Number) : void {
+        protected function onUpdateTarget(param1:Number) : void
+        {
             var _loc2_:MovieClip = this.g_modeMC.targetMC.target;
             _loc2_.distance.text = param1 + "m";
         }
         
-        protected function onSetCenterType(param1:Number, param2:Number) : void {
+        protected function onSetCenterType(param1:Number, param2:Number) : void
+        {
             this.g_modeMC.center.gotoAndStop("type" + param2);
             this.g_modeMC.center.alpha = param1;
         }
         
-        protected function onSetNetType(param1:Number, param2:Number) : void {
+        protected function onSetNetType(param1:Number, param2:Number) : void
+        {
             this.g_modeMC.gotoAndStop("type" + param2);
             this.g_modeMC.grid1.alpha = param1;
         }
         
-        protected function onSetReloaderType(param1:Number, param2:Number) : void {
+        protected function onSetReloaderType(param1:Number, param2:Number) : void
+        {
             this.g_modeMC.reloadingBarMC.alpha = param1;
             this._reloadingBarFW.setTarget(this.g_modeMC.reloadingBarMC);
             this.onSetReloading(this._reloadingSettings[0],this._reloadingSettings[1],this._reloadingSettings[2]);
         }
         
-        protected function onSetConditionType(param1:Number, param2:Number) : void {
+        protected function onSetConditionType(param1:Number, param2:Number) : void
+        {
             this.g_modeMC.universalBarMC.alpha = param1;
             this._universalBarFW.setTarget(this.g_modeMC.universalBarMC);
             this.onSetHealth(this._health);
         }
         
-        protected function onSetCassetteType(param1:Number, param2:Number) : void {
+        protected function onSetCassetteType(param1:Number, param2:Number) : void
+        {
             this.g_modeMC.cassette.alpha = param1;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             if(this._universalBarFW)
             {
                 this._universalBarFW.dispose();

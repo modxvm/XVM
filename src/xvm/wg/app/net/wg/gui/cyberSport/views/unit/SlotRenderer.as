@@ -9,7 +9,8 @@ package net.wg.gui.cyberSport.views.unit
     public class SlotRenderer extends RallyLockableSlotRenderer
     {
         
-        public function SlotRenderer() {
+        public function SlotRenderer()
+        {
             super();
         }
         
@@ -17,11 +18,13 @@ package net.wg.gui.cyberSport.views.unit
         
         public var levelLbl:TextField;
         
-        public function get unitSlotData() : RallySlotVO {
+        public function get unitSlotData() : RallySlotVO
+        {
             return slotData as RallySlotVO;
         }
         
-        override protected function onRemoveClick(param1:ButtonEvent) : void {
+        override protected function onRemoveClick(param1:ButtonEvent) : void
+        {
             if(this.unitSlotData)
             {
                 if(this.unitSlotData.player)
@@ -36,7 +39,8 @@ package net.wg.gui.cyberSport.views.unit
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.ratingTF = null;
             this.levelLbl = null;
             super.onDispose();

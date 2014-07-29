@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class SortingInfo extends Object
     {
         
-        public function SortingInfo() {
+        public function SortingInfo()
+        {
             super();
         }
         

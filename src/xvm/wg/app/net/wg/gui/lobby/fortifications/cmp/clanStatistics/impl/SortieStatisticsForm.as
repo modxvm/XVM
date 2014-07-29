@@ -9,7 +9,8 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
     public class SortieStatisticsForm extends UIComponent
     {
         
-        public function SortieStatisticsForm() {
+        public function SortieStatisticsForm()
+        {
             super();
         }
         
@@ -31,14 +32,16 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
         
         private var _model:ClanStatsVO;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.battlesLabelTF.text = FORTIFICATIONS.FORTCLANSTATISTICSWINDOW_SORTIE_BATTLESHEADER;
             this.battlesStatsGroup.width = STATS_GROUP_WIDTH;
             this.defresStatsGroup.width = STATS_GROUP_WIDTH + ICON_STATS_WIDTH_CORRECTION;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.battlesField.dispose();
             this.winsField.dispose();
             this.avgDefresField.dispose();
@@ -52,7 +55,8 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this._model))
             {
@@ -64,11 +68,13 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
             }
         }
         
-        public function get model() : ClanStatsVO {
+        public function get model() : ClanStatsVO
+        {
             return this._model;
         }
         
-        public function set model(param1:ClanStatsVO) : void {
+        public function set model(param1:ClanStatsVO) : void
+        {
             this._model = param1;
             invalidateData();
         }

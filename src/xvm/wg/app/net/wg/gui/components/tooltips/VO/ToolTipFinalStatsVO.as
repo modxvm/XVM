@@ -3,7 +3,8 @@ package net.wg.gui.components.tooltips.VO
     public class ToolTipFinalStatsVO extends Object
     {
         
-        public function ToolTipFinalStatsVO(param1:Object) {
+        public function ToolTipFinalStatsVO(param1:Object)
+        {
             super();
             this.parseHash(param1);
         }
@@ -44,7 +45,8 @@ package net.wg.gui.components.tooltips.VO
         
         public var critWound:String = null;
         
-        private function parseHash(param1:Object) : void {
+        private function parseHash(param1:Object) : void
+        {
             this.valideTypes = [TYPE_STOTTED,TYPE_ASSIST,TYPE_CRITS,TYPE_DAMAGE,TYPE_KILL,TYPE_TEAM_KILL];
             this.type = (param1.hasOwnProperty("type")) && !(param1["type"] == undefined) && this.valideTypes.indexOf(param1["type"],0) >= 0?param1["type"]:null;
             this.values = (param1.hasOwnProperty("values")) && !(param1["values"] == undefined)?param1["values"]:null;

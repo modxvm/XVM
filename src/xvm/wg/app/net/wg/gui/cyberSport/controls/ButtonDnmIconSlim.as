@@ -7,13 +7,15 @@ package net.wg.gui.cyberSport.controls
     public class ButtonDnmIconSlim extends ButtonDnmIcon
     {
         
-        public function ButtonDnmIconSlim() {
+        public function ButtonDnmIconSlim()
+        {
             super();
         }
         
         public var btnBorder:MovieClip;
         
-        override protected function completeHandler(param1:Event) : void {
+        override protected function completeHandler(param1:Event) : void
+        {
             if((loader) && (this.btnBorder.contains(loader)))
             {
                 this.btnBorder.removeChild(loader);

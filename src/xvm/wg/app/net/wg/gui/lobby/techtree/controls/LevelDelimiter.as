@@ -10,7 +10,8 @@ package net.wg.gui.lobby.techtree.controls
     public class LevelDelimiter extends UIComponent
     {
         
-        public function LevelDelimiter() {
+        public function LevelDelimiter()
+        {
             super();
         }
         
@@ -20,11 +21,13 @@ package net.wg.gui.lobby.techtree.controls
         
         public var background:Sprite;
         
-        public function get levelNumber() : int {
+        public function get levelNumber() : int
+        {
             return this._levelNumber;
         }
         
-        public function set levelNumber(param1:int) : void {
+        public function set levelNumber(param1:int) : void
+        {
             if(this._levelNumber == param1)
             {
                 return;
@@ -33,14 +36,16 @@ package net.wg.gui.lobby.techtree.controls
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             constraints.addElement(this.level.name,this.level,Constraints.CENTER_H);
             constraints.addElement(this.background.name,this.background,Constraints.ALL);
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(!(this.level == null) && (isInvalid(InvalidationType.DATA)))
             {

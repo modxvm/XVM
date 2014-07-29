@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class Voice extends UIComponent
     {
         
-        public function Voice() {
+        public function Voice()
+        {
             super();
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.components.controls
         
         public var voiceWave:VoiceWave;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.voiceWaveFx.dispose();
             this.voiceWaveFx = null;
             this.voiceWave.dispose();
@@ -21,7 +23,8 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.voiceWaveFx.setSpeaking(true,true);
             this.voiceWave.setSpeaking(true,true);
         }

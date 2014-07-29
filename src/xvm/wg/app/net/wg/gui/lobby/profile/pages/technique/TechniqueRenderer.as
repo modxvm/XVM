@@ -12,11 +12,13 @@ package net.wg.gui.lobby.profile.pages.technique
     public class TechniqueRenderer extends SoundListItemRenderer
     {
         
-        public function TechniqueRenderer() {
+        public function TechniqueRenderer()
+        {
             super();
         }
         
-        private static function getSmallMasteryIconPath(param1:int) : String {
+        private static function getSmallMasteryIconPath(param1:int) : String
+        {
             if(param1 > 0)
             {
                 return "../maps/icons/library/proficiency/class_icons_" + param1 + ".png";
@@ -24,7 +26,8 @@ package net.wg.gui.lobby.profile.pages.technique
             return null;
         }
         
-        private static function getString(param1:Number) : String {
+        private static function getString(param1:Number) : String
+        {
             if(App.utils)
             {
                 return App.utils.locale.integer(param1);
@@ -54,7 +57,8 @@ package net.wg.gui.lobby.profile.pages.technique
         
         public var hit:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.mouseChildren = true;
             this.masteryIcon.mouseChildren = false;
@@ -63,11 +67,13 @@ package net.wg.gui.lobby.profile.pages.technique
             hitArea = this.hit;
         }
         
-        override public function set mouseChildren(param1:Boolean) : void {
+        override public function set mouseChildren(param1:Boolean) : void
+        {
             super.mouseChildren = true;
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(_baseDisposed)
             {
                 return;
@@ -76,7 +82,8 @@ package net.wg.gui.lobby.profile.pages.technique
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             var _loc2_:DisplayObject = null;
             var _loc3_:* = 0;

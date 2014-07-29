@@ -11,7 +11,8 @@ package net.wg.gui.lobby.training
     public class ObserverButtonComponent extends UIComponent
     {
         
-        public function ObserverButtonComponent() {
+        public function ObserverButtonComponent()
+        {
             super();
         }
         
@@ -27,7 +28,8 @@ package net.wg.gui.lobby.training
         
         private var tooltipViewer:TooltipViewer;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.defColorTrans = this.icon.transform.colorTransform;
             this.icon.source = RES_ICONS.MAPS_ICONS_VEHICLE_CONTOUR_USSR_OBSERVER;
@@ -40,7 +42,8 @@ package net.wg.gui.lobby.training
             this.updateTooltip();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -48,7 +51,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        private function updateData() : void {
+        private function updateData() : void
+        {
             this.button.selected = this._selected;
             if(this._selected)
             {
@@ -61,7 +65,8 @@ package net.wg.gui.lobby.training
             this.updateTooltip();
         }
         
-        private function updateTooltip() : void {
+        private function updateTooltip() : void
+        {
             if(enabled)
             {
                 this.tooltipViewer.setTooltip(this._selected?TOOLTIPS.TRAINING_OBSERVER_SELECTEDICON:TOOLTIPS.TRAINING_OBSERVER_ICON);
@@ -74,17 +79,20 @@ package net.wg.gui.lobby.training
             }
         }
         
-        private function btnClickHandler(param1:ButtonEvent) : void {
+        private function btnClickHandler(param1:ButtonEvent) : void
+        {
             this._selected = this.button.selected;
             this.updateData();
             dispatchEvent(new Event(SELECTED));
         }
         
-        public function get selected() : Boolean {
+        public function get selected() : Boolean
+        {
             return this._selected;
         }
         
-        public function set selected(param1:Boolean) : void {
+        public function set selected(param1:Boolean) : void
+        {
             if(this._selected != param1)
             {
                 this._selected = param1;
@@ -92,14 +100,16 @@ package net.wg.gui.lobby.training
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.tooltipViewer.dispose();
             this.tooltipViewer = null;
             this.button.removeEventListener(ButtonEvent.CLICK,this.btnClickHandler);
             super.onDispose();
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             this.icon.alpha = param1?1:0.5;
             this.button.enabled = param1;

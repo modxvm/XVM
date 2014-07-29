@@ -9,7 +9,8 @@ package net.wg.gui.lobby.techtree.data
     public class NationVODataProvider extends AbstractDataProvider implements INationTreeDataProvider
     {
         
-        public function NationVODataProvider() {
+        public function NationVODataProvider()
+        {
             this._displaySettings = new NationDisplaySettings();
             super();
         }
@@ -18,15 +19,18 @@ package net.wg.gui.lobby.techtree.data
         
         protected var _displaySettings:NationDisplaySettings;
         
-        public function get scrollIndex() : Number {
+        public function get scrollIndex() : Number
+        {
             return this._scrollIndex;
         }
         
-        public function get displaySettings() : NationDisplaySettings {
+        public function get displaySettings() : NationDisplaySettings
+        {
             return this._displaySettings;
         }
         
-        override public function parse(param1:Object) : void {
+        override public function parse(param1:Object) : void
+        {
             var _loc5_:NodeData = null;
             clearUp();
             NodeData.setDisplayInfoClass(NTDisplayInfo);

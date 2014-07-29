@@ -17,7 +17,8 @@ package net.wg.gui.lobby.fortifications
     public class FortChoiceDivisionWindow extends FortChoiceDivisionWindowMeta implements IFortChoiceDivisionWindowMeta
     {
         
-        public function FortChoiceDivisionWindow() {
+        public function FortChoiceDivisionWindow()
+        {
             super();
             isModal = true;
             isCentered = true;
@@ -45,25 +46,29 @@ package net.wg.gui.lobby.fortifications
         
         private var divisionGroup:ButtonGroup;
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             App.utils.commons.initTabIndex([this.middleDivision,this.championDivision,this.absoluteDivision,this.applyBtn,this.cancelBtn,window.getCloseBtn()]);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.applyBtn.addEventListener(ButtonEvent.CLICK,this.onClickApplyBtnHandler);
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onClickCancelBtnHandler);
         }
         
-        override protected function setData(param1:FortChoiceDivisionVO) : void {
+        override protected function setData(param1:FortChoiceDivisionVO) : void
+        {
             this.divisionGroup = ButtonGroup.getGroup("divisionGroup",this);
             this.model = param1;
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
             var _loc3_:ChoiceDivisionSelector = null;
@@ -95,7 +100,8 @@ package net.wg.gui.lobby.fortifications
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:ChoiceDivisionSelector = null;
             App.utils.scheduler.cancelTask(onWindowCloseS);
             this.applyBtn.removeEventListener(ButtonEvent.CLICK,this.onClickApplyBtnHandler);
@@ -124,21 +130,25 @@ package net.wg.gui.lobby.fortifications
             super.onDispose();
         }
         
-        private function getDivisionID() : int {
+        private function getDivisionID() : int
+        {
             return ChoiceDivisionSelector(this.divisionGroup.selectedButton).divisionID;
         }
         
-        private function onClickApplyBtnHandler(param1:ButtonEvent) : void {
+        private function onClickApplyBtnHandler(param1:ButtonEvent) : void
+        {
             selectedDivisionS(this.getDivisionID());
             App.utils.scheduler.envokeInNextFrame(onWindowCloseS);
         }
         
-        private function doubleClickHandler(param1:MouseEvent) : void {
+        private function doubleClickHandler(param1:MouseEvent) : void
+        {
             selectedDivisionS(this.getDivisionID());
             App.utils.scheduler.envokeInNextFrame(onWindowCloseS);
         }
         
-        private function onClickCancelBtnHandler(param1:ButtonEvent) : void {
+        private function onClickCancelBtnHandler(param1:ButtonEvent) : void
+        {
             onWindowCloseS();
         }
     }

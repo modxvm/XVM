@@ -6,7 +6,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class IndicatorLabels extends MovieClip
     {
         
-        public function IndicatorLabels() {
+        public function IndicatorLabels()
+        {
             super();
         }
         

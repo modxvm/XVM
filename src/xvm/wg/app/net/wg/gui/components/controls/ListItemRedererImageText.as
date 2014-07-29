@@ -6,7 +6,8 @@ package net.wg.gui.components.controls
     public class ListItemRedererImageText extends DropDownListItemRendererSound
     {
         
-        public function ListItemRedererImageText() {
+        public function ListItemRedererImageText()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.components.controls
         
         public var ico_border:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.ico_border.visible = false;
             super.configUI();
             if(this.data)
@@ -23,12 +25,14 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidate("data");
         }
         
-        private function setup() : void {
+        private function setup() : void
+        {
             if(data)
             {
                 this.textField.text = data.label;
@@ -38,7 +42,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function completeLoadA(param1:UILoaderEvent) : void {
+        protected function completeLoadA(param1:UILoaderEvent) : void
+        {
             this.ico_border.visible = true;
             if(this.icon.hasEventListener(UILoaderEvent.COMPLETE))
             {
@@ -46,7 +51,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid("data"))
             {
                 this.setup();

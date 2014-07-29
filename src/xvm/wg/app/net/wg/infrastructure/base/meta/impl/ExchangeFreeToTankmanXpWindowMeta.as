@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ExchangeFreeToTankmanXpWindowMeta extends AbstractWindowView
     {
         
-        public function ExchangeFreeToTankmanXpWindowMeta() {
+        public function ExchangeFreeToTankmanXpWindowMeta()
+        {
             super();
         }
         
@@ -16,17 +17,20 @@ package net.wg.infrastructure.base.meta.impl
         
         public var calcValueRequest:Function = null;
         
-        public function applyS() : void {
+        public function applyS() : void
+        {
             App.utils.asserter.assertNotNull(this.apply,"apply" + Errors.CANT_NULL);
             this.apply();
         }
         
-        public function onValueChangedS(param1:Object) : void {
+        public function onValueChangedS(param1:Object) : void
+        {
             App.utils.asserter.assertNotNull(this.onValueChanged,"onValueChanged" + Errors.CANT_NULL);
             this.onValueChanged(param1);
         }
         
-        public function calcValueRequestS(param1:Number) : void {
+        public function calcValueRequestS(param1:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.calcValueRequest,"calcValueRequest" + Errors.CANT_NULL);
             this.calcValueRequest(param1);
         }

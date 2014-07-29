@@ -8,12 +8,14 @@ package net.wg.gui.lobby.battleResults
     public class CustomAchievement extends SoundListItemRenderer
     {
         
-        public function CustomAchievement() {
+        public function CustomAchievement()
+        {
             super();
             this.loader.hideLoader = false;
         }
         
-        public static function getDataOwnValue(param1:Object, param2:String, param3:*) : * {
+        public static function getDataOwnValue(param1:Object, param2:String, param3:*) : *
+        {
             var _loc4_:* = undefined;
             if(param1)
             {
@@ -30,7 +32,8 @@ package net.wg.gui.lobby.battleResults
         
         protected var _dataDirty:Boolean = false;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.loader)
             {
                 this.loader.dispose();
@@ -40,7 +43,8 @@ package net.wg.gui.lobby.battleResults
             super.onDispose();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -50,7 +54,8 @@ package net.wg.gui.lobby.battleResults
             this.drawLoader();
         }
         
-        protected function drawLoader() : void {
+        protected function drawLoader() : void
+        {
             if(this._dataDirty)
             {
                 if(data == null)
@@ -78,7 +83,8 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        protected function tryToLoadRareAchievement() : void {
+        protected function tryToLoadRareAchievement() : void
+        {
             if(getDataOwnValue(data,"rareIconId",null))
             {
                 this.loader.source = "img://" + data.rareIconId;
@@ -86,12 +92,14 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        private function changeSaturation() : void {
+        private function changeSaturation() : void
+        {
             this.loader.alpha = 0.9;
             App.utils.commons.setSaturation(this.loader,0);
         }
         
-        protected function onComplete(param1:UILoaderEvent) : void {
+        protected function onComplete(param1:UILoaderEvent) : void
+        {
             this.loader.removeEventListener(UILoaderEvent.COMPLETE,this.onComplete);
             if((data.hasOwnProperty("inactive")) && (data.inactive))
             {

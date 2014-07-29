@@ -6,7 +6,8 @@ package net.wg.gui.components.controls.events
     public class RangeSliderEvent extends SliderEvent
     {
         
-        public function RangeSliderEvent(param1:String, param2:Boolean = false, param3:Boolean = true, param4:Number = -1, param5:Number = -1, param6:Number = -1) {
+        public function RangeSliderEvent(param1:String, param2:Boolean = false, param3:Boolean = true, param4:Number = -1, param5:Number = -1, param6:Number = -1)
+        {
             super(param1,param2,param3,param4);
             this.leftValue = param5;
             this.rightValue = param6;
@@ -16,11 +17,13 @@ package net.wg.gui.components.controls.events
         
         public var rightValue:Number = -1;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new RangeSliderEvent(type,bubbles,cancelable,value,this.leftValue,this.rightValue);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("SliderEvent","type","bubbles","cancelable","value","leftValue","rightValue");
         }
     }

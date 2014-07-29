@@ -5,11 +5,13 @@ package net.wg.gui.lobby.window
     public class ExtendedIconText extends IconText
     {
         
-        public function ExtendedIconText() {
+        public function ExtendedIconText()
+        {
             super();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
     }

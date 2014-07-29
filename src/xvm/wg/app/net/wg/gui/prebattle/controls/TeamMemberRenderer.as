@@ -11,7 +11,8 @@ package net.wg.gui.prebattle.controls
     public class TeamMemberRenderer extends SquadItemRenderer
     {
         
-        public function TeamMemberRenderer() {
+        public function TeamMemberRenderer()
+        {
             useRightButton = true;
             super();
         }
@@ -28,7 +29,8 @@ package net.wg.gui.prebattle.controls
         
         private var _isVehicleValid:Boolean = true;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.commander_icon.dispose();
             this.status_icon.dispose();
@@ -36,11 +38,13 @@ package net.wg.gui.prebattle.controls
             this.vehicle_type_icon.dispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(!(param1 == null) && !(param1 is PlayerPrbInfoVO))
             {
                 param1 = new PlayerPrbInfoVO(param1);
@@ -52,7 +56,8 @@ package net.wg.gui.prebattle.controls
             }
         }
         
-        override protected function showToolTips() : void {
+        override protected function showToolTips() : void
+        {
             var _loc1_:String = model.accID == -1?MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_INVITE:this.isVehicleValid?getToolTipData():model.himself?TOOLTIPS.MEMBERS_VEHICLELEVELLIMITS_BODY:getToolTipData();
             if((_loc1_) && _loc1_.length > 0)
             {
@@ -60,7 +65,8 @@ package net.wg.gui.prebattle.controls
             }
         }
         
-        override protected function afterSetData() : void {
+        override protected function afterSetData() : void
+        {
             var _loc1_:String = null;
             var _loc3_:String = null;
             this.commander_icon.visible = this.status_icon.visible = this.vehicle_type_icon.visible = false;
@@ -135,7 +141,8 @@ package net.wg.gui.prebattle.controls
             this.updateAfterStateChange();
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             super.updateAfterStateChange();
             if(!initialized)
             {
@@ -173,16 +180,19 @@ package net.wg.gui.prebattle.controls
             constraints.updateElement("vehicleNameField",vehicleNameField);
         }
         
-        public function get isVehicleValid() : Boolean {
+        public function get isVehicleValid() : Boolean
+        {
             return this._isVehicleValid;
         }
         
-        public function set isVehicleValid(param1:Boolean) : void {
+        public function set isVehicleValid(param1:Boolean) : void
+        {
             this._isVehicleValid = param1;
             this.updateValidVehicleState(param1);
         }
         
-        private function updateValidVehicleState(param1:Boolean) : void {
+        private function updateValidVehicleState(param1:Boolean) : void
+        {
             if((model) && (isNaN(model.accID)))
             {
                 return;

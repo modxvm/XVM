@@ -26,7 +26,8 @@ package scaleform.clik.managers
     public class FocusHandler extends Object
     {
         
-        public function FocusHandler() {
+        public function FocusHandler()
+        {
             super();
             this.currentFocusLookup = new Dictionary();
             this.actualFocusLookup = new Dictionary();
@@ -36,7 +37,8 @@ package scaleform.clik.managers
         
         public static var instance:FocusHandler;
         
-        public static function getInstance() : FocusHandler {
+        public static function getInstance() : FocusHandler
+        {
             if(instance == null)
             {
                 instance = new FocusHandler();
@@ -44,7 +46,8 @@ package scaleform.clik.managers
             return instance;
         }
         
-        public static function init(param1:Stage, param2:UIComponent) : void {
+        public static function init(param1:Stage, param2:UIComponent) : void
+        {
             if(initialized)
             {
                 return;
@@ -66,7 +69,8 @@ package scaleform.clik.managers
         
         protected var mouseDown:Boolean = false;
         
-        public function set stage(param1:Stage) : void {
+        public function set stage(param1:Stage) : void
+        {
             if(this._stage == null)
             {
                 this._stage = param1;
@@ -86,11 +90,13 @@ package scaleform.clik.managers
             _loc2_.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
         }
         
-        public function getFocus(param1:uint) : InteractiveObject {
+        public function getFocus(param1:uint) : InteractiveObject
+        {
             return this.getCurrentFocusDisplayObject(param1);
         }
         
-        public function setFocus(param1:InteractiveObject, param2:uint = 0, param3:Boolean = false) : void {
+        public function setFocus(param1:InteractiveObject, param2:uint = 0, param3:Boolean = false) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -99,7 +105,8 @@ package scaleform.clik.managers
             throw new Error("Not decompiled due to error");
         }
         
-        protected function getCurrentFocusDisplayObject(param1:uint) : InteractiveObject {
+        protected function getCurrentFocusDisplayObject(param1:uint) : InteractiveObject
+        {
             var _loc2_:WeakReference = this.currentFocusLookup[param1] as WeakReference;
             if(_loc2_)
             {
@@ -108,11 +115,13 @@ package scaleform.clik.managers
             return null;
         }
         
-        protected function setCurrentFocusDisplayObject(param1:uint, param2:InteractiveObject) : void {
+        protected function setCurrentFocusDisplayObject(param1:uint, param2:InteractiveObject) : void
+        {
             this.currentFocusLookup[param1] = new WeakReference(param2);
         }
         
-        protected function getActualFocusDisplayObject(param1:uint) : InteractiveObject {
+        protected function getActualFocusDisplayObject(param1:uint) : InteractiveObject
+        {
             var _loc2_:WeakReference = this.actualFocusLookup[param1] as WeakReference;
             if(_loc2_)
             {
@@ -121,11 +130,13 @@ package scaleform.clik.managers
             return null;
         }
         
-        protected function setActualFocusDisplayObject(param1:uint, param2:InteractiveObject) : void {
+        protected function setActualFocusDisplayObject(param1:uint, param2:InteractiveObject) : void
+        {
             this.actualFocusLookup[param1] = new WeakReference(param2);
         }
         
-        protected function setSystemFocus(param1:InteractiveObject, param2:uint = 0) : void {
+        protected function setSystemFocus(param1:InteractiveObject, param2:uint = 0) : void
+        {
             if(Extensions.isScaleform)
             {
                 FocusManager.setFocus(param1,param2);
@@ -136,7 +147,8 @@ package scaleform.clik.managers
             }
         }
         
-        protected function getSystemFocus(param1:uint = 0) : InteractiveObject {
+        protected function getSystemFocus(param1:uint = 0) : InteractiveObject
+        {
             if(Extensions.isScaleform)
             {
                 return FocusManager.getFocus(param1);
@@ -144,21 +156,25 @@ package scaleform.clik.managers
             return this._stage.focus;
         }
         
-        protected function clearFocusPrevention(param1:Event) : void {
+        protected function clearFocusPrevention(param1:Event) : void
+        {
             this.preventStageFocusChanges = false;
             this._stage.removeEventListener(Event.ENTER_FRAME,this.clearFocusPrevention,false);
         }
         
-        public function input(param1:InputDetails) : void {
+        public function input(param1:InputDetails) : void
+        {
             var _loc2_:InputEvent = new InputEvent(InputEvent.INPUT,param1);
             this.handleInput(_loc2_);
         }
         
-        public function trackMouseDown(param1:MouseEvent) : void {
+        public function trackMouseDown(param1:MouseEvent) : void
+        {
             this.mouseDown = param1.buttonDown;
         }
         
-        protected function handleInput(param1:InputEvent) : void {
+        protected function handleInput(param1:InputEvent) : void
+        {
             var _loc16_:String = null;
             var _loc2_:Number = param1.details.controllerIndex;
             var _loc3_:Number = FocusManager.getControllerFocusGroup(_loc2_);
@@ -248,11 +264,13 @@ package scaleform.clik.managers
             }
         }
         
-        protected function handleMouseFocusChange(param1:FocusEvent) : void {
+        protected function handleMouseFocusChange(param1:FocusEvent) : void
+        {
             this.handleFocusChange(param1.target as InteractiveObject,param1.relatedObject as InteractiveObject,param1);
         }
         
-        protected function handleFocusChange(param1:InteractiveObject, param2:InteractiveObject, param3:FocusEvent) : void {
+        protected function handleFocusChange(param1:InteractiveObject, param2:InteractiveObject, param3:FocusEvent) : void
+        {
             var _loc7_:TextField = null;
             if((this.mouseDown) && param2 is TextField)
             {
@@ -286,7 +304,8 @@ package scaleform.clik.managers
             this.setFocus(param2,_loc6_,param3.type == FocusEvent.MOUSE_FOCUS_CHANGE);
         }
         
-        protected function updateActualFocus(param1:FocusEvent) : void {
+        protected function updateActualFocus(param1:FocusEvent) : void
+        {
             var _loc2_:InteractiveObject = null;
             var _loc3_:InteractiveObject = null;
             if(param1.type == FocusEvent.FOCUS_IN)
@@ -330,7 +349,8 @@ package scaleform.clik.managers
             }
         }
         
-        protected function handleTextFieldInput(param1:String, param2:uint) : Boolean {
+        protected function handleTextFieldInput(param1:String, param2:uint) : Boolean
+        {
             var _loc3_:TextField = this.getActualFocusDisplayObject(param2) as TextField;
             if(_loc3_ == null)
             {

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.profile.pages.technique.data
     public class TechniqueListVehicleVO extends DAAPIDataClass
     {
         
-        public function TechniqueListVehicleVO(param1:Object) {
+        public function TechniqueListVehicleVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -44,15 +45,18 @@ package net.wg.gui.lobby.profile.pages.technique.data
         
         public var level:int;
         
-        public function get winsEfficiencyStr() : String {
+        public function get winsEfficiencyStr() : String
+        {
             return ItemsUtils.formatIntegerStr(Math.round(this.winsEfficiency)) + "%";
         }
         
-        public function set winsEfficiencyStr(param1:String) : void {
+        public function set winsEfficiencyStr(param1:String) : void
+        {
             this._winsEfficiencyStr = param1;
         }
         
-        public function get nationIconPath() : String {
+        public function get nationIconPath() : String
+        {
             return App.utils.nations.getNationIcon(this.nationID);
         }
     }

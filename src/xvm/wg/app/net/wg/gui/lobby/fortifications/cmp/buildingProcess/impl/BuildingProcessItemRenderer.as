@@ -9,7 +9,8 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
     public class BuildingProcessItemRenderer extends TableRenderer
     {
         
-        public function BuildingProcessItemRenderer() {
+        public function BuildingProcessItemRenderer()
+        {
             super();
             soundType = SoundTypes.FORT_PROCESS_RENDERER;
             doubleClickEnabled = true;
@@ -25,7 +26,8 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
         
         private var _model:BuildingProcessListItemVO = null;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -38,11 +40,13 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
             this.statusLbl.htmlText = this._model.statusLbl;
         }
         
-        public function get model() : BuildingProcessListItemVO {
+        public function get model() : BuildingProcessListItemVO
+        {
             return this._model;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.smallBuildingsIcon = null;
             this.buildingName = null;
             this.shortDescr = null;

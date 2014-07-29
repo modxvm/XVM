@@ -7,13 +7,15 @@ package net.wg.gui.lobby.store.shop
     public class ShopVehicleListItemRenderer extends ShopTableItemRenderer
     {
         
-        public function ShopVehicleListItemRenderer() {
+        public function ShopVehicleListItemRenderer()
+        {
             super();
         }
         
         public var vehicleIcon:TankIcon = null;
         
-        override protected function update() : void {
+        override protected function update() : void
+        {
             var _loc1_:StoreTableData = null;
             super.update();
             if(data)
@@ -23,7 +25,8 @@ package net.wg.gui.lobby.store.shop
             }
         }
         
-        private function updateVehicleIcon(param1:StoreTableData) : void {
+        private function updateVehicleIcon(param1:StoreTableData) : void
+        {
             getHelper().initVehicleIcon(this.vehicleIcon,param1);
         }
     }

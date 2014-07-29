@@ -37,7 +37,8 @@ package net.wg.gui.lobby.training
     public class TrainingRoom extends TrainingRoomMeta implements ITrainingRoomMeta
     {
         
-        public function TrainingRoom() {
+        public function TrainingRoom()
+        {
             super();
             this._slots = Vector.<InteractiveObject>([this.other,this.team1,this.team2]);
             this.locale = App.utils.locale;
@@ -47,14 +48,16 @@ package net.wg.gui.lobby.training
         
         private static var SUB_VIEW_MARGIN:Number = 120;
         
-        private static function startDisableCoolDown(param1:Function, param2:Number, param3:UIComponent) : void {
+        private static function startDisableCoolDown(param1:Function, param2:Number, param3:UIComponent) : void
+        {
             var _loc4_:IScheduler = App.utils.scheduler;
             _loc4_.cancelTask(param1);
             param3.enabled = false;
             _loc4_.scheduleTask(param1,param2 * 1000);
         }
         
-        private static function checkStatus(param1:CoreList, param2:Number, param3:String, param4:String, param5:String, param6:String, param7:int) : void {
+        private static function checkStatus(param1:CoreList, param2:Number, param3:String, param4:String, param5:String, param6:String, param7:int) : void
+        {
             var _loc9_:TrainingRoomRendererVO = null;
             var _loc8_:IDataProvider = param1.dataProvider;
             for each(_loc9_ in _loc8_)
@@ -72,7 +75,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        private static function checkRoster(param1:CoreList, param2:Number, param3:Number) : void {
+        private static function checkRoster(param1:CoreList, param2:Number, param3:Number) : void
+        {
             var _loc5_:TrainingRoomRendererVO = null;
             var _loc4_:IDataProvider = param1.dataProvider;
             for each(_loc5_ in _loc4_)
@@ -86,7 +90,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        private static function setupDataProvider(param1:Array) : IDataProvider {
+        private static function setupDataProvider(param1:Array) : IDataProvider
+        {
             var _loc3_:Object = null;
             var _loc2_:DataProvider = new DataProvider();
             for each(_loc3_ in param1)
@@ -160,105 +165,128 @@ package net.wg.gui.lobby.training
         
         private var locale:ILocale = null;
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             this.setViewSize(param1,param2);
         }
         
-        override public final function setViewSize(param1:Number, param2:Number) : void {
+        override public final function setViewSize(param1:Number, param2:Number) : void
+        {
             this._myWidth = param1;
             invalidateSize();
         }
         
-        public function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void {
+        public function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void
+        {
             checkStatus(this.team1,param1,param2,param3,param4,param5,param6);
         }
         
-        public function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void {
+        public function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void
+        {
             checkStatus(this.team2,param1,param2,param3,param4,param5,param6);
         }
         
-        public function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void {
+        public function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void
+        {
             checkStatus(this.other,param1,param2,param3,param4,param5,param6);
         }
         
-        public function as_setPlayerChatRosterInTeam1(param1:Number, param2:Number) : void {
+        public function as_setPlayerChatRosterInTeam1(param1:Number, param2:Number) : void
+        {
             checkRoster(this.team1,param1,param2);
         }
         
-        public function as_setPlayerChatRosterInTeam2(param1:Number, param2:Number) : void {
+        public function as_setPlayerChatRosterInTeam2(param1:Number, param2:Number) : void
+        {
             checkRoster(this.team2,param1,param2);
         }
         
-        public function as_setPlayerChatRosterInOther(param1:Number, param2:Number) : void {
+        public function as_setPlayerChatRosterInOther(param1:Number, param2:Number) : void
+        {
             checkRoster(this.other,param1,param2);
         }
         
-        public function as_startCoolDownVoiceChat(param1:Number) : void {
+        public function as_startCoolDownVoiceChat(param1:Number) : void
+        {
             this.arenaVoipSettings.startCoolDownUseCommonVoiceChat(param1);
         }
         
-        public function as_disableControls(param1:Boolean) : void {
+        public function as_disableControls(param1:Boolean) : void
+        {
             this.disableControls(param1);
         }
         
-        public function as_startCoolDownSetting(param1:Number) : void {
+        public function as_startCoolDownSetting(param1:Number) : void
+        {
             startDisableCoolDown(this.finishDisable_settingsButton_CoolDownHandler,param1,this.settingsButton);
         }
         
-        public function as_startCoolDownSwapButton(param1:Number) : void {
+        public function as_startCoolDownSwapButton(param1:Number) : void
+        {
             startDisableCoolDown(this.finishDisable_swapButton_CoolDownHandler,param1,this.swapButton);
         }
         
-        public function as_startCoolDownObserver(param1:Number) : void {
+        public function as_startCoolDownObserver(param1:Number) : void
+        {
             startDisableCoolDown(this.finishDisable_observerButton_CoolDownHandler,param1,this.observerButton);
         }
         
-        private function finishDisable_settingsButton_CoolDownHandler() : void {
+        private function finishDisable_settingsButton_CoolDownHandler() : void
+        {
             this.settingsButton.enabled = true;
         }
         
-        private function finishDisable_swapButton_CoolDownHandler() : void {
+        private function finishDisable_swapButton_CoolDownHandler() : void
+        {
             this.swapButton.enabled = true;
         }
         
-        private function finishDisable_observerButton_CoolDownHandler() : void {
+        private function finishDisable_observerButton_CoolDownHandler() : void
+        {
             this.observerButton.enabled = true;
         }
         
-        public function as_disableStartButton(param1:Boolean) : void {
+        public function as_disableStartButton(param1:Boolean) : void
+        {
             this.startButton.enabled = !param1;
         }
         
-        public function as_enabledCloseButton(param1:Boolean) : void {
+        public function as_enabledCloseButton(param1:Boolean) : void
+        {
             this.closeButton.enabled = param1;
         }
         
-        public function as_setTeam1(param1:Array) : void {
+        public function as_setTeam1(param1:Array) : void
+        {
             this.team1.dataProvider = setupDataProvider(param1);
             this.team1Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM1LABEL);
             this.team1Label.htmlText = this.team1Label.htmlText + (" [<font color=\"#FFFFFF\">" + param1.length + "</font>]");
             this.countPlayers();
         }
         
-        public function as_setTeam2(param1:Array) : void {
+        public function as_setTeam2(param1:Array) : void
+        {
             this.team2.dataProvider = setupDataProvider(param1);
             this.team2Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM2LABEL);
             this.team2Label.htmlText = this.team2Label.htmlText + (" [<font color=\"#FFFFFF\">" + param1.length + "</font>]");
             this.countPlayers();
         }
         
-        public function as_setOther(param1:Array) : void {
+        public function as_setOther(param1:Array) : void
+        {
             this.other.dataProvider = setupDataProvider(param1);
             this.otherLabel.htmlText = this.locale.makeString(MENU.TRAINING_INFO_OTHERLABEL);
             this.otherLabel.htmlText = this.otherLabel.htmlText + (" [<font color=\"#FFFFFF\">" + param1.length + "</font>]");
             this.countPlayers();
         }
         
-        public function as_setArenaVoipChannels(param1:Number) : void {
+        public function as_setArenaVoipChannels(param1:Number) : void
+        {
             this.arenaVoipSettings.setUseArenaVoip(param1);
         }
         
-        public function as_setInfo(param1:Object) : void {
+        public function as_setInfo(param1:Object) : void
+        {
             var _loc2_:TrainingRoomInfoVO = new TrainingRoomInfoVO(param1);
             if(this.isCreator != _loc2_.isCreator)
             {
@@ -271,15 +299,14 @@ package net.wg.gui.lobby.training
             this.map.htmlText = _loc2_.arenaName;
             this.titleField.htmlText = _loc2_.title;
             this.typeField.htmlText = _loc2_.arenaSubType;
-            this.owner.userVO = new UserVO({
-                "accID":-1,
-                "dbID":-1,
-                "fullName":_loc2_.creatorFullName,
-                "userName":_loc2_.creator,
-                "clanAbbrev":_loc2_.creatorClan,
-                "region":_loc2_.creatorRegion,
-                "igrType":_loc2_.creatorIgrType
-            });
+            this.owner.userVO = new UserVO({"accID":-1,
+            "dbID":-1,
+            "fullName":_loc2_.creatorFullName,
+            "userName":_loc2_.creator,
+            "clanAbbrev":_loc2_.creatorClan,
+            "region":_loc2_.creatorRegion,
+            "igrType":_loc2_.creatorIgrType
+        });
         this.minimap.setMapS(_loc2_.arenaTypeID);
         this.description.position = 0;
         this.description.htmlText = _loc2_.description;
@@ -293,21 +320,25 @@ package net.wg.gui.lobby.training
         }
     }
     
-    private function createDragController() : void {
+    private function createDragController() : void
+    {
         var _loc1_:Class = App.utils.classFactory.getClass(Linkages.TRAINING_DRAG_DELEGATE);
         assertNull(this._dragDropListDelegateCtrlr,"_dragDropListDelegateCtrlr");
         this._dragDropListDelegateCtrlr = new TrainingDragController(this._slots,_loc1_,Linkages.PLAYER_ELEMENT_UI,this.isSlotDroppable);
     }
     
-    public function as_updateComment(param1:String) : void {
+    public function as_updateComment(param1:String) : void
+    {
         this.comment.text = param1;
     }
     
-    public function as_updateTimeout(param1:String) : void {
+    public function as_updateTimeout(param1:String) : void
+    {
         this.timeout.label = param1;
     }
     
-    public function as_updateMap(param1:Number, param2:Number, param3:String, param4:String, param5:String, param6:String) : void {
+    public function as_updateMap(param1:Number, param2:Number, param3:String, param4:String, param5:String, param6:String) : void
+    {
         this.minimap.setMapS(param1);
         this.maxPlayers.label = this.curPlayersCount + "/" + param2;
         this.map.htmlText = param3;
@@ -317,7 +348,8 @@ package net.wg.gui.lobby.training
         this.description.htmlText = param6;
     }
     
-    override protected function configUI() : void {
+    override protected function configUI() : void
+    {
         super.configUI();
         this.updateStage(App.appWidth,App.appHeight);
         this.addListeners();
@@ -330,15 +362,18 @@ package net.wg.gui.lobby.training
         this.maxPlayers.buttonMode = false;
     }
     
-    private function observerChangedHandler(param1:Event) : void {
+    private function observerChangedHandler(param1:Event) : void
+    {
         selectObserverS(this.observerButton.selected);
     }
     
-    private function handleEscape(param1:InputEvent) : void {
+    private function handleEscape(param1:InputEvent) : void
+    {
         onEscapeS();
     }
     
-    private function addListeners() : void {
+    private function addListeners() : void
+    {
         this.settingsButton.addEventListener(ButtonEvent.CLICK,this.onSettingsButtonClick);
         this.startButton.addEventListener(ButtonEvent.CLICK,this.onStartButtonClick);
         this.closeButton.addEventListener(ButtonEvent.CLICK,this.closeTraining);
@@ -352,7 +387,8 @@ package net.wg.gui.lobby.training
         App.voiceChatMgr.addEventListener(VoiceChatEvent.STOP_SPEAKING,this.stoptSpeak);
     }
     
-    override protected function onPopulate() : void {
+    override protected function onPopulate() : void
+    {
         super.onPopulate();
         if((canAssignToTeamS(1)) || (canAssignToTeamS(2)) || (canChangePlayerTeamS()))
         {
@@ -371,7 +407,8 @@ package net.wg.gui.lobby.training
         this.arenaVOIPLabel.text = (App.voiceChatMgr.isVOIPEnabledS()) || (_loc1_)?MENU.TRAINING_INFO_VOICECHAT:"";
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         this.observerButton.removeEventListener(ObserverButtonComponent.SELECTED,this.observerChangedHandler);
         App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
         this.removeListeners();
@@ -393,7 +430,8 @@ package net.wg.gui.lobby.training
         super.onDispose();
     }
     
-    private function disposeComponents() : void {
+    private function disposeComponents() : void
+    {
         this.team1Label = null;
         this.team2Label = null;
         this.otherLabel = null;
@@ -436,7 +474,8 @@ package net.wg.gui.lobby.training
         this.arenaVoipSettings = null;
     }
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         super.draw();
         if(isInvalid(InvalidationType.SIZE))
         {
@@ -456,7 +495,8 @@ package net.wg.gui.lobby.training
         }
     }
     
-    private function removeListeners() : void {
+    private function removeListeners() : void
+    {
         this.other.removeEventListener(DropEvent.END_DROP,this.onDrop);
         this.team1.removeEventListener(DropEvent.END_DROP,this.onDrop);
         this.team2.removeEventListener(DropEvent.END_DROP,this.onDrop);
@@ -470,7 +510,8 @@ package net.wg.gui.lobby.training
         App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.stoptSpeak);
     }
     
-    private function setSpeaking(param1:Boolean, param2:Number) : void {
+    private function setSpeaking(param1:Boolean, param2:Number) : void
+    {
         var _loc3_:CoreList = null;
         var _loc4_:IDataProvider = null;
         var _loc5_:TrainingRoomRendererVO = null;
@@ -488,7 +529,8 @@ package net.wg.gui.lobby.training
         }
     }
     
-    private function disableControls(param1:Boolean) : void {
+    private function disableControls(param1:Boolean) : void
+    {
         this.swapButton.enabled = !param1;
         this.closeButton.enabled = !param1;
         this.settingsButton.enabled = !param1;
@@ -511,7 +553,8 @@ package net.wg.gui.lobby.training
         
     }
     
-    private function isSlotDroppable(param1:uint, param2:uint) : Boolean {
+    private function isSlotDroppable(param1:uint, param2:uint) : Boolean
+    {
         var _loc3_:uint = getPlayerTeamS(param1);
         if(_loc3_ == param2)
         {
@@ -528,7 +571,8 @@ package net.wg.gui.lobby.training
         return false;
     }
     
-    private function setTeamsInfo() : void {
+    private function setTeamsInfo() : void
+    {
         this.team1Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM1LABEL);
         this.team1Label.htmlText = this.team1Label.htmlText + (" [<font color=\"#FFFFFF\">" + 0 + "</font>]");
         this.team2Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM2LABEL);
@@ -537,7 +581,8 @@ package net.wg.gui.lobby.training
         this.otherLabel.htmlText = this.otherLabel.htmlText + (" [<font color=\"#FFFFFF\">" + 0 + "</font>]");
     }
     
-    private function countPlayers() : void {
+    private function countPlayers() : void
+    {
         var _loc1_:CoreList = null;
         this.curPlayersCount = 0;
         for each(_loc1_ in this._slots)
@@ -549,15 +594,18 @@ package net.wg.gui.lobby.training
         App.contextMenuMgr.hide();
     }
     
-    private function startSpeak(param1:VoiceChatEvent) : void {
+    private function startSpeak(param1:VoiceChatEvent) : void
+    {
         this.setSpeaking(true,param1.getAccountDBID());
     }
     
-    private function stoptSpeak(param1:VoiceChatEvent) : void {
+    private function stoptSpeak(param1:VoiceChatEvent) : void
+    {
         this.setSpeaking(false,param1.getAccountDBID());
     }
     
-    private function onDrop(param1:DropEvent) : void {
+    private function onDrop(param1:DropEvent) : void
+    {
         var _loc2_:* = NaN;
         var _loc3_:* = NaN;
         if(param1.sender != param1.receiver)
@@ -571,31 +619,38 @@ package net.wg.gui.lobby.training
         }
     }
     
-    private function selectCommonVoiceChatHandler(param1:ArenaVoipSettingsEvent) : void {
+    private function selectCommonVoiceChatHandler(param1:ArenaVoipSettingsEvent) : void
+    {
         selectCommonVoiceChatS(param1.index);
     }
     
-    private function onSettingsButtonClick(param1:ButtonEvent) : void {
+    private function onSettingsButtonClick(param1:ButtonEvent) : void
+    {
         showTrainingSettingsS();
     }
     
-    private function onStartButtonClick(param1:ButtonEvent) : void {
+    private function onStartButtonClick(param1:ButtonEvent) : void
+    {
         startTrainingS();
     }
     
-    private function closeTraining(param1:ButtonEvent) : void {
+    private function closeTraining(param1:ButtonEvent) : void
+    {
         closeTrainingRoomS();
     }
     
-    private function showTrainingInvitations(param1:ButtonEvent) : void {
+    private function showTrainingInvitations(param1:ButtonEvent) : void
+    {
         showPrebattleInvitationsFormS();
     }
     
-    private function onSwapBtnClick(param1:ButtonEvent) : void {
+    private function onSwapBtnClick(param1:ButtonEvent) : void
+    {
         swapTeamsS();
     }
     
-    public function as_setObserver(param1:Boolean) : void {
+    public function as_setObserver(param1:Boolean) : void
+    {
         this.observerButton.selected = param1;
     }
 }

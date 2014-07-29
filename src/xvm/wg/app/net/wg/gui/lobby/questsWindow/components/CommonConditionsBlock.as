@@ -13,7 +13,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class CommonConditionsBlock extends AbstractResizableContent implements ISortable
     {
         
-        public function CommonConditionsBlock() {
+        public function CommonConditionsBlock()
+        {
             super();
         }
         
@@ -39,7 +40,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         public var statusMC:QuestStatusComponent;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.progressElementsContainer.addEventListener(Event.RESIZE,this.layoutHandler);
             this.progressElementsContainer.verticalPadding = VERTICAL_PADDING;
@@ -54,7 +56,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.statusMC.visible = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.progressElementsContainer.removeEventListener(Event.RESIZE,this.layoutHandler);
             this.progressElementsContainer.dispose();
             this.progressElementsContainer = null;
@@ -73,7 +76,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(this.data)
             {
                 this.data.dispose();
@@ -82,7 +86,8 @@ package net.wg.gui.lobby.questsWindow.components
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if((isInvalid(InvalidationType.DATA)) && (this.data))
             {
                 this.description.visible = true;
@@ -100,7 +105,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.draw();
         }
         
-        protected function layoutBlocks() : void {
+        protected function layoutBlocks() : void
+        {
             var _loc1_:Number = this.data.description?Math.round(this.description.height + HEADER_PADDING):0;
             this.progressElementsContainer.y = _loc1_;
             var _loc2_:Number = Math.round(_loc1_ + this.progressElementsContainer.height);
@@ -108,7 +114,8 @@ package net.wg.gui.lobby.questsWindow.components
             isReadyForLayout = true;
         }
         
-        private function layoutHandler(param1:Event) : void {
+        private function layoutHandler(param1:Event) : void
+        {
             if(this.progressElementsContainer.isReadyForLayout)
             {
                 this.layoutBlocks();
@@ -116,11 +123,13 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        public function get sortingFunction() : Function {
+        public function get sortingFunction() : Function
+        {
             return this._sortingFunction;
         }
         
-        public function set sortingFunction(param1:Function) : void {
+        public function set sortingFunction(param1:Function) : void
+        {
             this._sortingFunction = param1;
         }
     }

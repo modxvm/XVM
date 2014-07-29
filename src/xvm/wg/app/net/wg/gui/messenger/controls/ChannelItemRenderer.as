@@ -8,20 +8,24 @@ package net.wg.gui.messenger.controls
     public class ChannelItemRenderer extends TextFieldShort
     {
         
-        public function ChannelItemRenderer() {
+        public function ChannelItemRenderer()
+        {
             super();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             visible = !(param1 == null);
             super.setData(param1);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             visible = !(data == null);
             if(isInvalid(InvalidationType.STATE))

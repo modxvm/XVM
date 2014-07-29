@@ -11,7 +11,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipSpecial extends ToolTipBase
     {
         
-        public function ToolTipSpecial() {
+        public function ToolTipSpecial()
+        {
             super();
         }
         
@@ -29,11 +30,12 @@ package net.wg.gui.components.tooltips
         
         public static var ID_HIDDEN_VEHICLE_COUNT:String = "hiddenVehicleCount";
         
-        public static var SKIP_FIELDS:Array;
+        public static var SKIP_FIELDS:Array = [VehicleBaseVO.DEF_BUY_PRICE,VehicleBaseVO.DEF_SELL_PRICE,VehicleBaseVO.ACTION_PRC];
         
         protected var blockResults:Vector.<ToolTipBlockResultVO> = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:ToolTipBlockResultVO = null;
             var _loc2_:TextField = null;
             var _loc3_:TextField = null;
@@ -72,7 +74,8 @@ package net.wg.gui.components.tooltips
             super.onDispose();
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             if(contentWidth == 0 || contentWidth < content.width)
             {
                 contentWidth = content.width;
@@ -81,7 +84,8 @@ package net.wg.gui.components.tooltips
             background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
         }
         
-        protected function updatePositions() : void {
+        protected function updatePositions() : void
+        {
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
             var _loc4_:uint = 0;
@@ -121,7 +125,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        protected function getAlertInfo(param1:ILocale, param2:Number, param3:String, param4:String) : String {
+        protected function getAlertInfo(param1:ILocale, param2:Number, param3:String, param4:String) : String
+        {
             if(param2 == 0)
             {
                 return "";
@@ -132,7 +137,8 @@ package net.wg.gui.components.tooltips
             return _loc5_;
         }
         
-        protected function getIcoForText(param1:String) : String {
+        protected function getIcoForText(param1:String) : String
+        {
             switch(param1)
             {
                 case IconsTypes.ELITE_XP:
@@ -143,13 +149,13 @@ package net.wg.gui.components.tooltips
             return App.utils.icons.getIcon16StrPath(param1);
         }
         
-        protected function getActionInfo(param1:ILocale, param2:Number, param3:Number, param4:String) : String {
+        protected function getActionInfo(param1:ILocale, param2:Number, param3:Number, param4:String) : String
+        {
             var _loc5_:String = Utils.instance.htmlWrapper(param2.toString() + "%",Utils.instance.COLOR_HEADER);
             var _loc6_:String = param4 == IconsTypes.GOLD?param1.gold(param3):param1.integer(param3);
-            var _loc7_:String = param1.makeString(TOOLTIPS.VEHICLE_ACTION_PRC,{
-                "actionPrc":_loc5_,
-                "oldPrice":_loc6_
-            }) + this.getIcoForText(param4);
+            var _loc7_:String = param1.makeString(TOOLTIPS.VEHICLE_ACTION_PRC,{"actionPrc":_loc5_,
+            "oldPrice":_loc6_
+        }) + this.getIcoForText(param4);
         return _loc7_;
     }
 }

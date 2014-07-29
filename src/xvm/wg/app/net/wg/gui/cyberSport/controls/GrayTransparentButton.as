@@ -7,7 +7,8 @@ package net.wg.gui.cyberSport.controls
     public class GrayTransparentButton extends SoundButtonEx implements IGrayTransparentButton
     {
         
-        public function GrayTransparentButton() {
+        public function GrayTransparentButton()
+        {
             super();
         }
         
@@ -25,11 +26,13 @@ package net.wg.gui.cyberSport.controls
         
         private var _icon:String = "noIcon";
         
-        public function get icon() : String {
+        public function get icon() : String
+        {
             return this._icon;
         }
         
-        public function set icon(param1:String) : void {
+        public function set icon(param1:String) : void
+        {
             this._icon = param1;
             if(this._icon)
             {

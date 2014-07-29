@@ -15,7 +15,8 @@ package net.wg.gui.lobby.header
     public class BattleTypeSelectPopover extends BattleTypeSelectPopoverMeta implements IBattleTypeSelectPopoverMeta
     {
         
-        public function BattleTypeSelectPopover() {
+        public function BattleTypeSelectPopover()
+        {
             super();
             UIID = 97;
         }
@@ -26,7 +27,8 @@ package net.wg.gui.lobby.header
         
         private var PREBATTLE_ACTION_NAME_SORTIE:String = "sortie";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(!hasEventListener(ListEvent.INDEX_CHANGE))
             {
@@ -34,12 +36,14 @@ package net.wg.gui.lobby.header
             }
         }
         
-        override protected function initLayout() : void {
+        override protected function initLayout() : void
+        {
             popoverLayout.preferredLayout = PopOverConst.ARROW_TOP;
             super.initLayout();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Array = null;
             var _loc2_:* = 0;
             super.draw();
@@ -60,7 +64,8 @@ package net.wg.gui.lobby.header
             }
         }
         
-        private function updateSelectedItem() : void {
+        private function updateSelectedItem() : void
+        {
             if(this.list.selectedIndex == -1)
             {
                 this.list.selectedIndex = this.list.getFirstSelectablePosition(0,true);
@@ -76,12 +81,14 @@ package net.wg.gui.lobby.header
             
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.list);
         }
         
-        private function onFightSelect(param1:FancyRendererEvent) : void {
+        private function onFightSelect(param1:FancyRendererEvent) : void
+        {
             param1.stopImmediatePropagation();
             var _loc2_:String = BattleSelectDropDownVO(param1.target.data).data;
             if(_loc2_ == this.PREBATTLE_ACTION_NAME_SORTIE)
@@ -92,12 +99,14 @@ package net.wg.gui.lobby.header
             App.popoverMgr.hide();
         }
         
-        public function as_update(param1:Array) : void {
+        public function as_update(param1:Array) : void
+        {
             this.items = param1;
             invalidateData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.items)
             {
                 this.items.splice(0,this.items.length);

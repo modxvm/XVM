@@ -9,7 +9,8 @@ package net.wg.gui.components.controls
     public class WgScrollingList extends ScrollingList
     {
         
-        public function WgScrollingList() {
+        public function WgScrollingList()
+        {
             super();
         }
         
@@ -17,7 +18,8 @@ package net.wg.gui.components.controls
         
         public var bg:MovieClip;
         
-        override protected function populateData(param1:Array) : void {
+        override protected function populateData(param1:Array) : void
+        {
             var _loc5_:IListItemRenderer = null;
             var _loc6_:uint = 0;
             var _loc7_:ListData = null;

@@ -13,7 +13,8 @@ package net.wg.gui.lobby.fortifications.cmp.clanList
     public class ClanListItemRenderer extends TableRenderer
     {
         
-        public function ClanListItemRenderer() {
+        public function ClanListItemRenderer()
+        {
             super();
             isPassive = false;
         }
@@ -28,12 +29,14 @@ package net.wg.gui.lobby.fortifications.cmp.clanList
         
         private var _isMouseOver:Boolean = false;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:ClanListRendererVO = null;
             var _loc2_:IUserProps = null;
             var _loc3_:Point = null;
@@ -67,13 +70,15 @@ package net.wg.gui.lobby.fortifications.cmp.clanList
             }
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             super.handleMouseRollOut(param1);
             this._isMouseOver = false;
             App.toolTipMgr.hide();
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             this._isMouseOver = true;
             if((data) && (data.fullName))

@@ -6,7 +6,8 @@ package net.wg.gui.cyberSport.data
     public class CandidatesDataProvider extends VoDAAPIDataProvider
     {
         
-        public function CandidatesDataProvider() {
+        public function CandidatesDataProvider()
+        {
             super(RallyCandidateVO);
         }
     }

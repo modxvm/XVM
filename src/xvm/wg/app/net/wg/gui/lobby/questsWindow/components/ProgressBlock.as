@@ -11,7 +11,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class ProgressBlock extends CommonConditionsBlock
     {
         
-        public function ProgressBlock() {
+        public function ProgressBlock()
+        {
             this.tweens = new Vector.<Tween>();
             super();
         }
@@ -30,13 +31,15 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var tweens:Vector.<Tween>;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             progressElementsContainer.bottomPadding = BOTTOM_PADDING;
             progressElementsContainer.addEventListener(ResizableBlockEvent.READY_FOR_ANIMATION,this.containerAnimationHandler);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:Tween = null;
             progressElementsContainer.removeEventListener(ResizableBlockEvent.READY_FOR_ANIMATION,this.containerAnimationHandler);
             this.line = null;
@@ -56,7 +59,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if((isInvalid(InvalidationType.DATA)) && (data))
             {
                 if(data.vehicleData)
@@ -94,7 +98,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        override protected function layoutBlocks() : void {
+        override protected function layoutBlocks() : void
+        {
             var _loc1_:Number = 0;
             if(description.visible)
             {
@@ -111,12 +116,14 @@ package net.wg.gui.lobby.questsWindow.components
             isReadyForLayout = true;
         }
         
-        private function containerAnimationHandler(param1:ResizableBlockEvent) : void {
+        private function containerAnimationHandler(param1:ResizableBlockEvent) : void
+        {
             var _loc2_:Number = this.line.y + param1.heightDiff;
             this.playResizeAnimation(_loc2_,ANIMATION_DURATION,this.onEndAnimation);
         }
         
-        private function playResizeAnimation(param1:Number, param2:Number, param3:Function = null) : void {
+        private function playResizeAnimation(param1:Number, param2:Number, param3:Function = null) : void
+        {
             var _loc4_:Tween = null;
             var _loc5_:Tween = null;
             for each(_loc4_ in this.tweens)
@@ -125,18 +132,18 @@ package net.wg.gui.lobby.questsWindow.components
                 _loc4_.paused = true;
                 _loc4_ = null;
             }
-            this.tweens = Vector.<Tween>([new Tween(param2,this.line,{"y":param1},{
-                "paused":false,
-                "ease":Strong.easeInOut,
-                "onComplete":param3
-            })]);
+            this.tweens = Vector.<Tween>([new Tween(param2,this.line,{"y":param1},{"paused":false,
+            "ease":Strong.easeInOut,
+            "onComplete":param3
+        })]);
         for each(_loc5_ in this.tweens)
         {
             _loc5_.fastTransform = false;
         }
     }
     
-    private function onEndAnimation() : void {
+    private function onEndAnimation() : void
+    {
         this.layoutBlocks();
         dispatchEvent(new ResizableBlockEvent(ResizableBlockEvent.CONTETNT_WAS_CHANGED));
     }

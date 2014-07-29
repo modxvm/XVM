@@ -6,7 +6,8 @@ package net.wg.gui.login.impl.components
     public class RssItemEvent extends Event
     {
         
-        public function RssItemEvent(param1:String, param2:Boolean = false, param3:Boolean = false, param4:RssItemVo = null) {
+        public function RssItemEvent(param1:String, param2:Boolean = false, param3:Boolean = false, param4:RssItemVo = null)
+        {
             super(param1,param2,param3);
             this.rssVo = param4;
         }
@@ -19,7 +20,8 @@ package net.wg.gui.login.impl.components
         
         public var rssVo:RssItemVo = null;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new RssItemEvent(type,bubbles,cancelable,this.rssVo);
         }
     }

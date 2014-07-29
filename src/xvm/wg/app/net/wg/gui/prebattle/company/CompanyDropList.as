@@ -7,7 +7,8 @@ package net.wg.gui.prebattle.company
     public class CompanyDropList extends ScrollingListEx
     {
         
-        public function CompanyDropList() {
+        public function CompanyDropList()
+        {
             super();
         }
         
@@ -19,12 +20,14 @@ package net.wg.gui.prebattle.company
         
         public var bottomLabel:TextField;
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             setActualSize(AUTHENTIC_WIDTH,AUTHENTIC_HEIGHT);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             buttonMode = true;
             mouseEnabled = true;
@@ -37,7 +40,8 @@ package net.wg.gui.prebattle.company
             this.addEventListener(MouseEvent.CLICK,this.clickHandler);
         }
         
-        private function mouseOverHandler(param1:MouseEvent) : void {
+        private function mouseOverHandler(param1:MouseEvent) : void
+        {
             if(!enabled)
             {
                 return;
@@ -48,7 +52,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        private function mouseOutHandler(param1:MouseEvent) : void {
+        private function mouseOutHandler(param1:MouseEvent) : void
+        {
             if(!enabled)
             {
                 return;
@@ -59,7 +64,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        private function clickHandler(param1:MouseEvent) : void {
+        private function clickHandler(param1:MouseEvent) : void
+        {
             if(enabled)
             {
                 return;

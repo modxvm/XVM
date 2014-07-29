@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class VehicleInfoMeta extends AbstractWindowView
     {
         
-        public function VehicleInfoMeta() {
+        public function VehicleInfoMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onCancelClick:Function = null;
         
-        public function getVehicleInfoS() : void {
+        public function getVehicleInfoS() : void
+        {
             App.utils.asserter.assertNotNull(this.getVehicleInfo,"getVehicleInfo" + Errors.CANT_NULL);
             this.getVehicleInfo();
         }
         
-        public function onCancelClickS() : void {
+        public function onCancelClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.onCancelClick,"onCancelClick" + Errors.CANT_NULL);
             this.onCancelClick();
         }

@@ -13,7 +13,8 @@ package net.wg.gui.cyberSport.controls
     public class ManualSearchRenderer extends TableRenderer implements IManualSearchRenderer
     {
         
-        public function ManualSearchRenderer() {
+        public function ManualSearchRenderer()
+        {
             super();
             preventAutosizing = true;
         }
@@ -36,7 +37,8 @@ package net.wg.gui.cyberSport.controls
         
         private var _creatorName:String = null;
         
-        protected function checkTooltip() : void {
+        protected function checkTooltip() : void
+        {
             var _loc1_:Point = new Point(mouseX,mouseY);
             _loc1_ = localToGlobal(_loc1_);
             if(hitTestPoint(_loc1_.x,_loc1_.y))
@@ -52,12 +54,14 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             invalidateData();
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             this.data = param1;
             if(this.data)
             {
@@ -65,7 +69,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.commander.mouseEnabled = false;
             this.commandSize.mouseEnabled = false;
@@ -80,7 +85,8 @@ package net.wg.gui.cyberSport.controls
             this.restrictionIcon.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.freezeIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
             this.freezeIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
             this.restrictionIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
@@ -93,22 +99,26 @@ package net.wg.gui.cyberSport.controls
             super.onDispose();
         }
         
-        private function onControlRollOver(param1:MouseEvent) : void {
+        private function onControlRollOver(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(param1.currentTarget == this.freezeIcon?TOOLTIPS.SETTINGSICON_FREEZED:TOOLTIPS.SETTINGSICON_CONDITIONS);
         }
         
-        private function onControlRollOut(param1:MouseEvent = null) : void {
+        private function onControlRollOut(param1:MouseEvent = null) : void
+        {
             App.toolTipMgr.hide();
             dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             mouseEnabled = true;
             mouseChildren = true;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:CSCommandVO = null;
             mouseEnabled = true;
             mouseChildren = true;
@@ -131,7 +141,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        protected function populateUI(param1:CSCommandVO) : void {
+        protected function populateUI(param1:CSCommandVO) : void
+        {
             var _loc2_:String = null;
             var _loc4_:IUserProps = null;
             if(param1.creator)

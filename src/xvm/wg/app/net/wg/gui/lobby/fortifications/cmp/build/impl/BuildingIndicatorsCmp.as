@@ -10,7 +10,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class BuildingIndicatorsCmp extends MovieClip implements IDisposable
     {
         
-        public function BuildingIndicatorsCmp() {
+        public function BuildingIndicatorsCmp()
+        {
             super();
         }
         
@@ -32,7 +33,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var model:BuildingIndicatorsVO;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.hpToolTipArea.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
             this.hpToolTipArea.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
             this.defResToolTipArea.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
@@ -54,7 +56,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function setData(param1:BuildingIndicatorsVO) : void {
+        public function setData(param1:BuildingIndicatorsVO) : void
+        {
             this.model = param1;
             this.hpLbl.htmlText = this.model.hpLabel;
             this.defResLbl.htmlText = this.model.defResLabel;
@@ -66,7 +69,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.defResLabels.setData = this.model.defResProgressLabels;
         }
         
-        public function showToolTips(param1:Boolean) : void {
+        public function showToolTips(param1:Boolean) : void
+        {
             if(param1)
             {
                 this.hpToolTipArea.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
@@ -76,7 +80,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        private function onRollOverHandler(param1:MouseEvent) : void {
+        private function onRollOverHandler(param1:MouseEvent) : void
+        {
             if(param1.target == this.hpToolTipArea)
             {
                 App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_POPOVER_HPPROGRESS);
@@ -88,7 +93,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             
         }
         
-        private function onRollOutHandler(param1:MouseEvent) : void {
+        private function onRollOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
     }

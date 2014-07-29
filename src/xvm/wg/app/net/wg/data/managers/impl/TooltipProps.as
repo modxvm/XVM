@@ -6,7 +6,8 @@ package net.wg.data.managers.impl
     public class TooltipProps extends Object implements ITooltipProps
     {
         
-        public function TooltipProps(param1:String, param2:Number, param3:Number, param4:Number = 0, param5:Number = -1, param6:Number = 0, param7:Number = 0) {
+        public function TooltipProps(param1:String, param2:Number, param3:Number, param4:Number = 0, param5:Number = -1, param6:Number = 0, param7:Number = 0)
+        {
             super();
             this._type = param1;
             this._x = param2;
@@ -17,9 +18,9 @@ package net.wg.data.managers.impl
             this._maxWidth = param7;
         }
         
-        public static var WARNING:TooltipProps;
+        public static var WARNING:TooltipProps = new TooltipProps(Tooltips.TYPE_WARNING,0,0,0,-1,0,0);
         
-        public static var DEFAULT:TooltipProps;
+        public static var DEFAULT:TooltipProps = new TooltipProps(Tooltips.TYPE_INFO,0,0,0,-1,0,0);
         
         private var _type:String = null;
         
@@ -35,31 +36,38 @@ package net.wg.data.managers.impl
         
         private var _maxWidth:Number = 0;
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function get x() : Number {
+        public function get x() : Number
+        {
             return this._x;
         }
         
-        public function get y() : Number {
+        public function get y() : Number
+        {
             return this._y;
         }
         
-        public function get minWidth() : Number {
+        public function get minWidth() : Number
+        {
             return this._minWidth;
         }
         
-        public function get drawDelay() : Number {
+        public function get drawDelay() : Number
+        {
             return this._drawDelay;
         }
         
-        public function get showDelay() : Number {
+        public function get showDelay() : Number
+        {
             return this._showDelay;
         }
         
-        public function get maxWidth() : Number {
+        public function get maxWidth() : Number
+        {
             return this._maxWidth;
         }
     }

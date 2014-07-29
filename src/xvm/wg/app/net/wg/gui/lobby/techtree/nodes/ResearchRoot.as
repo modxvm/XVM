@@ -21,7 +21,8 @@ package net.wg.gui.lobby.techtree.nodes
     public class ResearchRoot extends Renderer
     {
         
-        public function ResearchRoot() {
+        public function ResearchRoot()
+        {
             super();
         }
         
@@ -39,12 +40,14 @@ package net.wg.gui.lobby.techtree.nodes
         
         public var btnShowInHangar:SoundButtonEx;
         
-        public function setupEx(param1:String) : void {
+        public function setupEx(param1:String) : void
+        {
             this.statusString = param1;
             invalidateData();
         }
         
-        override public function cleanUp() : void {
+        override public function cleanUp() : void
+        {
             if(this.btnShowInHangar != null)
             {
                 this.btnShowInHangar.removeEventListener(ButtonEvent.CLICK,this.btnShowInHangarClickHandler);
@@ -65,15 +68,18 @@ package net.wg.gui.lobby.techtree.nodes
             super.cleanUp();
         }
         
-        override public function click2Info() : void {
+        override public function click2Info() : void
+        {
             dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_VEHICLE_INFO,0,_index,_entityType));
         }
         
-        override public function isParentUnlocked(param1:Number) : Boolean {
+        override public function isParentUnlocked(param1:Number) : Boolean
+        {
             return (dataInited) && !(_valueObject.unlockProps == null) && (_valueObject.unlockProps.hasID(param1));
         }
         
-        override public function populateUI() : void {
+        override public function populateUI() : void
+        {
             var _loc2_:String = null;
             var _loc1_:String = _container.getNation();
             if(!(this.flag == null) && !(this.flag.currentFrameLabel == _loc1_))
@@ -119,7 +125,8 @@ package net.wg.gui.lobby.techtree.nodes
             super.populateUI();
         }
         
-        override protected function getMouseEnabledChildren() : Vector.<DisplayObjectContainer> {
+        override protected function getMouseEnabledChildren() : Vector.<DisplayObjectContainer>
+        {
             var _loc1_:Vector.<DisplayObjectContainer> = super.getMouseEnabledChildren();
             if(this.btnShowInHangar)
             {
@@ -128,11 +135,13 @@ package net.wg.gui.lobby.techtree.nodes
             return _loc1_;
         }
         
-        private function btnShowInHangarClickHandler(param1:ButtonEvent) : void {
+        private function btnShowInHangarClickHandler(param1:ButtonEvent) : void
+        {
             dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SELECT_IN_HANGAR,0,_index,_entityType));
         }
         
-        override public function showContextMenu() : void {
+        override public function showContextMenu() : void
+        {
             if(button != null)
             {
                 button.endAnimation(true);
@@ -140,7 +149,8 @@ package net.wg.gui.lobby.techtree.nodes
             MenuHandler.getInstance().showResearchRootMenu(this);
         }
         
-        override public function getColorIdxEx(param1:IRenderer) : Number {
+        override public function getColorIdxEx(param1:IRenderer) : Number
+        {
             var _loc2_:Number = ColorIndex.LOCKED;
             if(isUnlocked())
             {
@@ -160,11 +170,13 @@ package net.wg.gui.lobby.techtree.nodes
             return _loc2_;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[ResearchRoot " + index + ", " + name + "]";
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             super.preInitialize();
             _entityType = NodeEntityType.RESEARCH_ROOT;
             soundId = TTSoundID.RESEARCH_ROOT;
@@ -172,11 +184,13 @@ package net.wg.gui.lobby.techtree.nodes
             isDelegateEvents = true;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             if(button != null)
             {
@@ -184,7 +198,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             super.handleMouseRollOut(param1);
             if(button != null)
             {
@@ -192,7 +207,8 @@ package net.wg.gui.lobby.techtree.nodes
             }
         }
         
-        override protected function handleClick(param1:uint = 0) : void {
+        override protected function handleClick(param1:uint = 0) : void
+        {
             super.handleClick(param1);
             MenuHandler.getInstance().hideMenu();
             if(button != null)

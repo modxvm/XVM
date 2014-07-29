@@ -5,7 +5,8 @@ package net.wg.data
     public class ImageUrlProperties extends Object implements IImageUrlProperties
     {
         
-        public function ImageUrlProperties(param1:String, param2:int, param3:int, param4:int, param5:int) {
+        public function ImageUrlProperties(param1:String, param2:int, param3:int, param4:int, param5:int)
+        {
             super();
             this.imageAlias = param1;
             this.width = param2;
@@ -24,43 +25,53 @@ package net.wg.data
         
         private var _hSpace:int = 0;
         
-        public function get imageAlias() : String {
+        public function get imageAlias() : String
+        {
             return this._imageAlias;
         }
         
-        public function set imageAlias(param1:String) : void {
+        public function set imageAlias(param1:String) : void
+        {
             this._imageAlias = param1;
         }
         
-        public function get width() : int {
+        public function get width() : int
+        {
             return this._width;
         }
         
-        public function set width(param1:int) : void {
+        public function set width(param1:int) : void
+        {
             this._width = param1;
         }
         
-        public function get height() : int {
+        public function get height() : int
+        {
             return this._height;
         }
         
-        public function set height(param1:int) : void {
+        public function set height(param1:int) : void
+        {
             this._height = param1;
         }
         
-        public function get vSpace() : int {
+        public function get vSpace() : int
+        {
             return this._vSpace;
         }
         
-        public function set vSpace(param1:int) : void {
+        public function set vSpace(param1:int) : void
+        {
             this._vSpace = param1;
         }
         
-        public function get hSpace() : int {
+        public function get hSpace() : int
+        {
             return this._hSpace;
         }
         
-        public function set hSpace(param1:int) : void {
+        public function set hSpace(param1:int) : void
+        {
             this._hSpace = param1;
         }
     }

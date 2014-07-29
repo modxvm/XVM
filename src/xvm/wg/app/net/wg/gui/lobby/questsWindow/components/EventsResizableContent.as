@@ -12,7 +12,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class EventsResizableContent extends AbstractResizableContent implements ISortable
     {
         
-        public function EventsResizableContent() {
+        public function EventsResizableContent()
+        {
             this.tweens = new Vector.<Tween>();
             this.fadeTweens = new Vector.<Tween>();
             super();
@@ -38,7 +39,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var _sortingFunction:Function = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.resizableContainer.verticalPadding = 3;
             this.header.height = HEADER_HEIGHT;
@@ -48,7 +50,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.resizableContainer.addEventListener(Event.RESIZE,this.resizableContainerResizeHandler);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:Tween = null;
             var _loc2_:Tween = null;
             this.resizableContainer.removeEventListener(ResizableBlockEvent.READY_FOR_ANIMATION,this.containerAnimationHandler);
@@ -86,7 +89,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        private function startAnimation(param1:Event) : void {
+        private function startAnimation(param1:Event) : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
@@ -101,12 +105,14 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function onEndAnimation() : void {
+        private function onEndAnimation() : void
+        {
             this.layoutComponents();
             dispatchEvent(new ResizableBlockEvent(ResizableBlockEvent.CONTETNT_WAS_CHANGED));
         }
         
-        private function playResizeAnimation(param1:Number, param2:Number, param3:Function = null) : void {
+        private function playResizeAnimation(param1:Number, param2:Number, param3:Function = null) : void
+        {
             var _loc4_:Tween = null;
             var _loc5_:Tween = null;
             for each(_loc4_ in this.tweens)
@@ -115,18 +121,18 @@ package net.wg.gui.lobby.questsWindow.components
                 _loc4_.paused = true;
                 _loc4_ = null;
             }
-            this.tweens = Vector.<Tween>([new Tween(param2,this.contentMask,{"height":param1},{
-                "paused":false,
-                "ease":Strong.easeInOut,
-                "onComplete":param3
-            })]);
+            this.tweens = Vector.<Tween>([new Tween(param2,this.contentMask,{"height":param1},{"paused":false,
+            "ease":Strong.easeInOut,
+            "onComplete":param3
+        })]);
         for each(_loc5_ in this.tweens)
         {
             _loc5_.fastTransform = false;
         }
     }
     
-    private function playFadeAnimation(param1:Number, param2:Number, param3:Function = null) : void {
+    private function playFadeAnimation(param1:Number, param2:Number, param3:Function = null) : void
+    {
         var _loc4_:Tween = null;
         var _loc5_:Tween = null;
         for each(_loc4_ in this.fadeTweens)
@@ -135,24 +141,25 @@ package net.wg.gui.lobby.questsWindow.components
             _loc4_.paused = true;
             _loc4_ = null;
         }
-        this.fadeTweens = Vector.<Tween>([new Tween(param2,this.resizableContainer,{"alpha":param1},{
-            "paused":false,
-            "ease":Strong.easeInOut,
-            "onComplete":param3
-        })]);
+        this.fadeTweens = Vector.<Tween>([new Tween(param2,this.resizableContainer,{"alpha":param1},{"paused":false,
+        "ease":Strong.easeInOut,
+        "onComplete":param3
+    })]);
     for each(_loc5_ in this.fadeTweens)
     {
         _loc5_.fastTransform = false;
     }
 }
 
-override public function setData(param1:Object) : void {
+override public function setData(param1:Object) : void
+{
     this.data = new EventsResizableContentVO(param1);
     this.resizableContainer.isReadyForLayout = false;
     invalidateData();
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
     super.draw();
     if(isInvalid(InvalidationType.DATA))
     {
@@ -181,7 +188,8 @@ override protected function draw() : void {
     }
 }
 
-private function layoutComponents() : void {
+private function layoutComponents() : void
+{
     var _loc1_:Number = this.header.height;
     this.resizableContainer.y = Math.round(_loc1_);
     this.contentHeight = this.resizableContainer.height;
@@ -191,11 +199,13 @@ private function layoutComponents() : void {
     isReadyForLayout = true;
 }
 
-private function resizableContainerResizeHandler(param1:Event) : void {
+private function resizableContainerResizeHandler(param1:Event) : void
+{
     this.checkInitedComponents();
 }
 
-private function checkInitedComponents() : void {
+private function checkInitedComponents() : void
+{
     var _loc1_:Boolean = this.resizableContainer.isReadyForLayout;
     if(_loc1_)
     {
@@ -204,16 +214,19 @@ private function checkInitedComponents() : void {
     }
 }
 
-private function containerAnimationHandler(param1:ResizableBlockEvent) : void {
+private function containerAnimationHandler(param1:ResizableBlockEvent) : void
+{
     var _loc2_:Number = this.contentMask.height + param1.heightDiff;
     this.playResizeAnimation(_loc2_,ANIMATION_DURATION,this.onEndAnimation);
 }
 
-public function get sortingFunction() : Function {
+public function get sortingFunction() : Function
+{
     return this._sortingFunction;
 }
 
-public function set sortingFunction(param1:Function) : void {
+public function set sortingFunction(param1:Function) : void
+{
     this._sortingFunction = param1;
 }
 }

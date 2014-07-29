@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class TickerMeta extends BaseDAAPIComponent
     {
         
-        public function TickerMeta() {
+        public function TickerMeta()
+        {
             super();
         }
         
         public var showBrowser:Function = null;
         
-        public function showBrowserS(param1:String) : void {
+        public function showBrowserS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.showBrowser,"showBrowser" + Errors.CANT_NULL);
             this.showBrowser(param1);
         }

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.window
     public class ExchangeFreeToTankmanInitVO extends DAAPIDataClass
     {
         
-        public function ExchangeFreeToTankmanInitVO(param1:Object) {
+        public function ExchangeFreeToTankmanInitVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -22,11 +23,13 @@ package net.wg.gui.lobby.window
         
         private var _afterSkill:ExchangeXPTankmanSkillsModel;
         
-        public function get currentSkill() : Object {
+        public function get currentSkill() : Object
+        {
             return this._currentSkill;
         }
         
-        public function set currentSkill(param1:Object) : void {
+        public function set currentSkill(param1:Object) : void
+        {
             this._currentSkill = param1;
             this._beforeSkill = new CarouselTankmanSkillsModel();
             this.initObject(this._beforeSkill,this._currentSkill);
@@ -35,7 +38,8 @@ package net.wg.gui.lobby.window
             this._afterSkill.defaultActiveValue = param1.isActive;
         }
         
-        private function initObject(param1:CarouselTankmanSkillsModel, param2:Object) : void {
+        private function initObject(param1:CarouselTankmanSkillsModel, param2:Object) : void
+        {
             param1.description = param2.description;
             param1.icon = param2.icon.big;
             param1.roleIcon = param2.icon.role;
@@ -49,11 +53,13 @@ package net.wg.gui.lobby.window
             param1.tankmanID = this.tankmanID;
         }
         
-        public function get beforeSkill() : CarouselTankmanSkillsModel {
+        public function get beforeSkill() : CarouselTankmanSkillsModel
+        {
             return this._beforeSkill;
         }
         
-        public function get afterSkill() : ExchangeXPTankmanSkillsModel {
+        public function get afterSkill() : ExchangeXPTankmanSkillsModel
+        {
             return this._afterSkill;
         }
     }

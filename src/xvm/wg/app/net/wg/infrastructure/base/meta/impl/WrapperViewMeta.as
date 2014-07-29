@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class WrapperViewMeta extends AbstractView
     {
         
-        public function WrapperViewMeta() {
+        public function WrapperViewMeta()
+        {
             super();
         }
         
         public var onWindowClose:Function = null;
         
-        public function onWindowCloseS() : void {
+        public function onWindowCloseS() : void
+        {
             App.utils.asserter.assertNotNull(this.onWindowClose,"onWindowClose" + Errors.CANT_NULL);
             this.onWindowClose();
         }

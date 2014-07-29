@@ -10,7 +10,8 @@ package net.wg.infrastructure.helpers
     public class DropListDelegate extends MovieClip implements IDropListDelegate
     {
         
-        public function DropListDelegate(param1:InteractiveObject, param2:String) {
+        public function DropListDelegate(param1:InteractiveObject, param2:String)
+        {
             super();
             this._hitArea = param1;
             this._dropElementLinkage = param2;
@@ -22,11 +23,13 @@ package net.wg.infrastructure.helpers
         
         private var _dropElementLinkage:String = null;
         
-        public final function dispose() : void {
+        public final function dispose() : void
+        {
             this.onDispose();
         }
         
-        protected function onDispose() : void {
+        protected function onDispose() : void
+        {
             if(App.cursor.getAttachedSprite() != null)
             {
                 if(App.cursor.getAttachedSprite() is IDisposable)
@@ -41,12 +44,14 @@ package net.wg.infrastructure.helpers
             this._dropElementLinkage = null;
         }
         
-        public function onBeforeDrop(param1:InteractiveObject, param2:InteractiveObject) : Boolean {
+        public function onBeforeDrop(param1:InteractiveObject, param2:InteractiveObject) : Boolean
+        {
             this.dispatchDropEvent(DropEvent.BEFORE_DROP,param1,null,param2);
             return true;
         }
         
-        public function onAfterDrop(param1:InteractiveObject, param2:InteractiveObject) : void {
+        public function onAfterDrop(param1:InteractiveObject, param2:InteractiveObject) : void
+        {
             this.dispatchDropEvent(DropEvent.AFTER_DROP,param1,null,param2);
             if(App.cursor.getAttachedSprite() != null)
             {
@@ -58,7 +63,8 @@ package net.wg.infrastructure.helpers
             }
         }
         
-        public function onStartDrop(param1:InteractiveObject, param2:InteractiveObject, param3:Number, param4:Number) : Boolean {
+        public function onStartDrop(param1:InteractiveObject, param2:InteractiveObject, param3:Number, param4:Number) : Boolean
+        {
             var _loc5_:Sprite = null;
             if(App.instance)
             {
@@ -69,23 +75,28 @@ package net.wg.infrastructure.helpers
             return true;
         }
         
-        public function onEndDrop(param1:InteractiveObject, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void {
+        public function onEndDrop(param1:InteractiveObject, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void
+        {
             this.dispatchDropEvent(DropEvent.END_DROP,param1,param2,param3);
         }
         
-        public function getDropGroup() : Vector.<InteractiveObject> {
+        public function getDropGroup() : Vector.<InteractiveObject>
+        {
             return Vector.<InteractiveObject>(this._pairedScrollLists);
         }
         
-        public function getHitArea() : InteractiveObject {
+        public function getHitArea() : InteractiveObject
+        {
             return this._hitArea;
         }
         
-        public function setPairedDropLists(param1:Vector.<InteractiveObject>) : void {
+        public function setPairedDropLists(param1:Vector.<InteractiveObject>) : void
+        {
             this._pairedScrollLists = param1;
         }
         
-        private function dispatchDropEvent(param1:String, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void {
+        private function dispatchDropEvent(param1:String, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void
+        {
             this._hitArea.dispatchEvent(new DropEvent(param1,param2,param3,param4));
         }
     }

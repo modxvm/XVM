@@ -12,7 +12,8 @@ package net.wg.gui.lobby.profile.pages.technique
     public class TechniqueStatisticTab extends ResizableContent
     {
         
-        public function TechniqueStatisticTab() {
+        public function TechniqueStatisticTab()
+        {
             this.tweenManager = new ExcludeTweenManager();
             super();
             this.alpha = 0;
@@ -39,7 +40,8 @@ package net.wg.gui.lobby.profile.pages.technique
         
         private var group:DetailedStatisticsGroupEx;
         
-        override public function update(param1:Object) : void {
+        override public function update(param1:Object) : void
+        {
             var _loc2_:ProfileVehicleDossierVO = ProfileVehicleDossierVO(param1);
             if(this._data != _loc2_)
             {
@@ -49,21 +51,22 @@ package net.wg.gui.lobby.profile.pages.technique
                     if(!this.isDataInitialized)
                     {
                         this.isDataInitialized = true;
-                        this.tweenManager.registerAndLaunch(ANIM_SPEED,this,{"alpha":1},{
-                            "ease":Strong.easeOut,
-                            "onComplete":this.onTweenComplete
-                        });
+                        this.tweenManager.registerAndLaunch(ANIM_SPEED,this,{"alpha":1},{"ease":Strong.easeOut,
+                        "onComplete":this.onTweenComplete
+                    });
                 }
                 this.group.dataProvider = _loc2_.detailedDataList;
             }
         }
     }
     
-    private function onTweenComplete(param1:Tween) : void {
+    private function onTweenComplete(param1:Tween) : void
+    {
         this.tweenManager.unregister(param1);
     }
     
-    override protected function onDispose() : void {
+    override protected function onDispose() : void
+    {
         this.tweenManager.dispose();
         this.tweenManager = null;
         if(this._data)

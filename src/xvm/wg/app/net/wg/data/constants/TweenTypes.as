@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class TweenTypes extends Object
     {
         
-        public function TweenTypes() {
+        public function TweenTypes()
+        {
             super();
         }
         
@@ -29,20 +30,32 @@ package net.wg.data.constants
         
         public static var TURN_HALF:String = "turnHalf";
         
-        public static var SIMPLE_ANIM_TYPES:Vector.<String>;
+        public static var SIMPLE_ANIM_TYPES:Vector.<String> = new <String>[MOVE_UP,MOVE_DOWN,FADE_IN,FADE_OUT,TURN_HALF];
         
-        public static var FADE_TYPES:Vector.<String>;
+        public static var FADE_TYPES:Vector.<String> = new <String>[FADE_IN,FADE_OUT];
         
-        public static var BLINKING_TYPES:Vector.<String>;
+        public static var BLINKING_TYPES:Vector.<String> = new <String>[BLINK_IN,BLINK_OUT];
         
-        public static var MOVE_TYPES:Vector.<String>;
+        public static var MOVE_TYPES:Vector.<String> = new <String>[MOVE_UP,MOVE_DOWN];
         
-        public static var TURN_TYPES:Vector.<String>;
+        public static var TURN_TYPES:Vector.<String> = new <String>[TURN_HALF];
         
-        public static var GLOW_TYPES:Vector.<String>;
+        public static var GLOW_TYPES:Vector.<String> = new <String>[GLOW_IN,GLOW_OUT];
         
-        public static var SHADOW_TYPES:Vector.<String>;
+        public static var SHADOW_TYPES:Vector.<String> = new <String>[SHADOW_IN,SHADOW_OUT];
         
-        public static var DURATIONS_BY_TYPES:Vector.<Object>;
-    }
+        public static var DURATIONS_BY_TYPES:Vector.<Object> = new <Object>[{"types":FADE_TYPES,
+        "duration":TweenConstraints.FADE_DURATION
+    },{"types":BLINKING_TYPES,
+    "duration":TweenConstraints.BLINKING_DURATION
+},{"types":MOVE_TYPES,
+"duration":TweenConstraints.MOVE_DURATION
+},{"types":GLOW_TYPES,
+"duration":TweenConstraints.GLOW_DURATION
+},{"types":SHADOW_TYPES,
+"duration":TweenConstraints.SHADOW_DURATION
+},{"types":TURN_TYPES,
+"duration":TweenConstraints.HALF_TURN_DURATION
+}];
+}
 }

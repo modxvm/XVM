@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class FortListMeta extends BaseRallyListView
     {
         
-        public function FortListMeta() {
+        public function FortListMeta()
+        {
             super();
         }
         
         public var changeDivisionIndex:Function = null;
         
-        public function changeDivisionIndexS(param1:int) : void {
+        public function changeDivisionIndexS(param1:int) : void
+        {
             App.utils.asserter.assertNotNull(this.changeDivisionIndex,"changeDivisionIndex" + Errors.CANT_NULL);
             this.changeDivisionIndex(param1);
         }

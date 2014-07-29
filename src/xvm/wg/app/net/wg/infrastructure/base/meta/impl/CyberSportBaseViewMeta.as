@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class CyberSportBaseViewMeta extends BaseDAAPIComponent
     {
         
-        public function CyberSportBaseViewMeta() {
+        public function CyberSportBaseViewMeta()
+        {
             super();
         }
     }

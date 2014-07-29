@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class SystemMessageDialogMeta extends AbstractWindowView
     {
         
-        public function SystemMessageDialogMeta() {
+        public function SystemMessageDialogMeta()
+        {
             super();
         }
     }

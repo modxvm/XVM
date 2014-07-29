@@ -5,7 +5,8 @@ package net.wg.gui.cyberSport.vo
     public class AutoSearchVO extends DAAPIDataClass
     {
         
-        public function AutoSearchVO(param1:Object) {
+        public function AutoSearchVO(param1:Object)
+        {
             super(param1);
         }
         

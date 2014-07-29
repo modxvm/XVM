@@ -8,7 +8,8 @@ package net.wg.gui.lobby.techtree.data.vo
     public class NodeData extends Object implements IValueObject
     {
         
-        public function NodeData() {
+        public function NodeData()
+        {
             super();
         }
         
@@ -18,7 +19,8 @@ package net.wg.gui.lobby.techtree.data.vo
         
         public static var UNLOCK_PROPS_FIELD:String = "unlockProps";
         
-        public static function setDisplayInfoClass(param1:Class) : void {
+        public static function setDisplayInfoClass(param1:Class) : void
+        {
             displayInfoClass = param1;
         }
         
@@ -52,11 +54,13 @@ package net.wg.gui.lobby.techtree.data.vo
         
         public var extraInfo:String = null;
         
-        public function get earnedXP() : Number {
+        public function get earnedXP() : Number
+        {
             return this._earnedXP;
         }
         
-        public function set earnedXP(param1:Number) : void {
+        public function set earnedXP(param1:Number) : void
+        {
             if(this._earnedXP == param1)
             {
                 return;
@@ -72,11 +76,13 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function fromArray(param1:Array, param2:ILocale) : void {
+        public function fromArray(param1:Array, param2:ILocale) : void
+        {
             throw new Error("Does not call method NodeData.fromArray.");
         }
         
-        public function fromObject(param1:Object, param2:ILocale) : void {
+        public function fromObject(param1:Object, param2:ILocale) : void
+        {
             var _loc3_:String = null;
             if(param1 == null)
             {
@@ -151,7 +157,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function clearUp() : void {
+        public function clearUp() : void
+        {
             this.id = 0;
             this.nameString = "";
             this.primaryClass = null;
@@ -174,7 +181,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function getNamedLabel(param1:String) : String {
+        public function getNamedLabel(param1:String) : String
+        {
             var _loc2_:String = null;
             switch(param1)
             {
@@ -196,7 +204,8 @@ package net.wg.gui.lobby.techtree.data.vo
             return _loc2_;
         }
         
-        public function getNamedValue(param1:String) : Number {
+        public function getNamedValue(param1:String) : Number
+        {
             var _loc2_:* = NaN;
             switch(param1)
             {
@@ -218,7 +227,8 @@ package net.wg.gui.lobby.techtree.data.vo
             return _loc2_;
         }
         
-        public function getActionData(param1:String) : ActionPriceVO {
+        public function getActionData(param1:String) : ActionPriceVO
+        {
             var _loc2_:ActionPriceVO = null;
             switch(param1)
             {
@@ -240,7 +250,8 @@ package net.wg.gui.lobby.techtree.data.vo
             return _loc2_;
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n actionPriceDataVo = " + this._actionPriceDataVo + "\n]";
         }
     }

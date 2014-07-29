@@ -7,7 +7,8 @@ package net.wg.gui.login.EULA
     public class EULAFullDlg extends EULADlg
     {
         
-        public function EULAFullDlg() {
+        public function EULAFullDlg()
+        {
             super();
             isModal = true;
             isCentered = true;
@@ -17,12 +18,14 @@ package net.wg.gui.login.EULA
         
         public var agreeCheckBox:CheckBox;
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             constraints.addElement(this.agreeCheckBox.name,this.agreeCheckBox,Constraints.BOTTOM | Constraints.RIGHT);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             textArea.editable = false;
             textArea.selectable = true;
@@ -33,18 +36,21 @@ package net.wg.gui.login.EULA
             this.agreeCheckBox.addEventListener(Event.SELECT,this.agreeCheckBoxHandler);
         }
         
-        override protected function isAutoResize() : Boolean {
+        override protected function isAutoResize() : Boolean
+        {
             return false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             textArea.removeEventListener(Event.SCROLL,this.handleScroll);
             this.agreeCheckBox.removeEventListener(Event.SELECT,this.agreeCheckBoxHandler);
             this.agreeCheckBox.dispose();
             super.onDispose();
         }
         
-        private function handleScroll(param1:Event) : void {
+        private function handleScroll(param1:Event) : void
+        {
             if(this.agreeCheckBox.enabled)
             {
                 return;
@@ -55,7 +61,8 @@ package net.wg.gui.login.EULA
             }
         }
         
-        private function agreeCheckBoxHandler(param1:Event) : void {
+        private function agreeCheckBoxHandler(param1:Event) : void
+        {
             applyButton.enabled = param1.target.selected;
         }
     }

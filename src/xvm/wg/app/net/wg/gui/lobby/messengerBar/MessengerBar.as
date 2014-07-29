@@ -26,7 +26,8 @@ package net.wg.gui.lobby.messengerBar
     public class MessengerBar extends MessengerBarMeta implements IMessengerBarMeta, IDAAPIModule, IHelpLayoutComponent
     {
         
-        public function MessengerBar() {
+        public function MessengerBar()
+        {
             this.stageDimensions = new Point();
             super();
         }
@@ -57,7 +58,8 @@ package net.wg.gui.lobby.messengerBar
         
         public var fakeChnlBtn:MovieClip;
         
-        public function showHelpLayout() : void {
+        public function showHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             var _loc2_:DisplayObject = this.notificationListBtn.button;
             var _loc3_:Object = _loc1_.getProps(_loc2_.width,_loc2_.height,Directions.TOP,LOBBY_HELP.CHAT_SERVICE_CHANNEL,_loc2_.x,_loc2_.y);
@@ -65,60 +67,72 @@ package net.wg.gui.lobby.messengerBar
             this.channelCarousel.showHelpLayout();
         }
         
-        public function closeHelpLayout() : void {
+        public function closeHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             _loc1_.destroy(this._notificationListBtnHL);
             this.channelCarousel.closeHelpLayout();
         }
         
-        public function updateStage(param1:Number, param2:Number) : void {
+        public function updateStage(param1:Number, param2:Number) : void
+        {
             this.stageDimensions.x = param1;
             this.stageDimensions.y = param2;
             invalidate(LAYOUT_INVALID);
         }
         
-        public function get paddingLeft() : uint {
+        public function get paddingLeft() : uint
+        {
             return this._paddingLeft;
         }
         
-        public function set paddingLeft(param1:uint) : void {
+        public function set paddingLeft(param1:uint) : void
+        {
             this._paddingLeft = param1;
             invalidate(LAYOUT_INVALID);
         }
         
-        public function get paddingRight() : uint {
+        public function get paddingRight() : uint
+        {
             return this._paddingRight;
         }
         
-        public function set paddingRight(param1:uint) : void {
+        public function set paddingRight(param1:uint) : void
+        {
             this._paddingRight = param1;
             invalidate(LAYOUT_INVALID);
         }
         
-        public function get paddingBottom() : uint {
+        public function get paddingBottom() : uint
+        {
             return this._paddingBottom;
         }
         
-        public function set paddingBottom(param1:uint) : void {
+        public function set paddingBottom(param1:uint) : void
+        {
             this._paddingBottom = param1;
             invalidate(LAYOUT_INVALID);
         }
         
-        public function get paddingTop() : uint {
+        public function get paddingTop() : uint
+        {
             return this._paddingTop;
         }
         
-        public function set paddingTop(param1:uint) : void {
+        public function set paddingTop(param1:uint) : void
+        {
             this._paddingTop = param1;
             invalidate(LAYOUT_INVALID);
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             super.preInitialize();
             constraints = new Constraints(this,ConstrainMode.REFLOW);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             registerFlashComponentS(this.notificationListBtn,Aliases.NOTIFICATION_LIST_BUTTON);
             registerFlashComponentS(this.channelCarousel,Aliases.CHANNEL_CAROUSEL);
@@ -129,7 +143,8 @@ package net.wg.gui.lobby.messengerBar
             _loc1_.addEventListener(MessengerBarEvent.PIN_CONTACTS_WINDOW,this.handlePinContactsWindow);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.fakeChnlBtn.removeEventListener(MouseEvent.ROLL_OVER,this.showInRoamingTooltip);
             this.fakeChnlBtn.removeEventListener(MouseEvent.ROLL_OUT,this.hideInRoamingTooltip);
             this.fakeChnlBtn.removeEventListener(MouseEvent.CLICK,this.hideInRoamingTooltip);
@@ -148,7 +163,8 @@ package net.wg.gui.lobby.messengerBar
             this._notificationListBtnHL = null;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints.addElement(this.notificationListBtn.name,this.notificationListBtn,Constraints.RIGHT);
             constraints.addElement(this.channelButton.name,this.channelButton,Constraints.LEFT);
@@ -161,7 +177,8 @@ package net.wg.gui.lobby.messengerBar
             this.fakeChnlBtn.addEventListener(MouseEvent.CLICK,this.hideInRoamingTooltip);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(LAYOUT_INVALID))
             {
@@ -179,7 +196,8 @@ package net.wg.gui.lobby.messengerBar
             }
         }
         
-        private function handlePinWindow(param1:MessengerBarEvent, param2:DisplayObject) : void {
+        private function handlePinWindow(param1:MessengerBarEvent, param2:DisplayObject) : void
+        {
             var _loc4_:IManagedContent = null;
             var _loc5_:Point = null;
             if(param1.eventPhase != EventPhase.BUBBLING_PHASE)
@@ -196,27 +214,33 @@ package net.wg.gui.lobby.messengerBar
             }
         }
         
-        private function onChannelButtonClick(param1:ButtonEvent) : void {
+        private function onChannelButtonClick(param1:ButtonEvent) : void
+        {
             channelButtonClickS();
         }
         
-        private function onContactsButtonClick(param1:ButtonEvent) : void {
+        private function onContactsButtonClick(param1:ButtonEvent) : void
+        {
             contactsButtonClickS();
         }
         
-        private function handlePinChannelsWindow(param1:MessengerBarEvent) : void {
+        private function handlePinChannelsWindow(param1:MessengerBarEvent) : void
+        {
             this.handlePinWindow(param1,this.channelButton);
         }
         
-        private function handlePinContactsWindow(param1:MessengerBarEvent) : void {
+        private function handlePinContactsWindow(param1:MessengerBarEvent) : void
+        {
             this.handlePinWindow(param1,this.contactButton);
         }
         
-        private function showInRoamingTooltip(param1:MouseEvent) : void {
+        private function showInRoamingTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(TOOLTIPS.LOBY_MESSENGER_CHANNEL_BUTTON_INROAMING);
         }
         
-        private function hideInRoamingTooltip(param1:MouseEvent) : void {
+        private function hideInRoamingTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
     }

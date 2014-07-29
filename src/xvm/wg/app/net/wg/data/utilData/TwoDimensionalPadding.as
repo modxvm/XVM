@@ -5,7 +5,8 @@ package net.wg.data.utilData
     public class TwoDimensionalPadding extends Object
     {
         
-        public function TwoDimensionalPadding(param1:Point = null, param2:Point = null, param3:Point = null, param4:Point = null) {
+        public function TwoDimensionalPadding(param1:Point = null, param2:Point = null, param3:Point = null, param4:Point = null)
+        {
             this.top = new Point();
             this.bottom = new Point();
             this.left = new Point();

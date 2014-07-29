@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl.base
     public class BuildingsWizardCmpnt extends FortBuildingComponentMeta
     {
         
-        public function BuildingsWizardCmpnt() {
+        public function BuildingsWizardCmpnt()
+        {
             super();
         }
     }

@@ -3,7 +3,8 @@ package net.wg.gui.components.popOvers
     public class SmartPopOverLayoutInfo extends Object
     {
         
-        public function SmartPopOverLayoutInfo(param1:int, param2:int, param3:int, param4:int) {
+        public function SmartPopOverLayoutInfo(param1:int, param2:int, param3:int, param4:int)
+        {
             super();
             this.arrowDirection = param1;
             this.arrowPosition = param2;

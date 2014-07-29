@@ -5,7 +5,8 @@ package scaleform.gfx
     public final class MouseEventEx extends MouseEvent
     {
         
-        public function MouseEventEx(param1:String) {
+        public function MouseEventEx(param1:String)
+        {
             super(param1);
         }
         

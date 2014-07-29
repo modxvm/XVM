@@ -18,7 +18,8 @@ package net.wg.gui.messenger.windows
     public class BaseChannelWindow extends BaseChannelWindowMeta implements IBaseChannelWindowMeta
     {
         
-        public function BaseChannelWindow() {
+        public function BaseChannelWindow()
+        {
             super();
             showWindowBg = false;
             canMinimize = true;
@@ -29,15 +30,18 @@ package net.wg.gui.messenger.windows
         
         public var channelComponent:ChannelComponent;
         
-        public function as_setTitle(param1:String) : void {
+        public function as_setTitle(param1:String) : void
+        {
             window.title = param1;
         }
         
-        public function as_setCloseEnabled(param1:Boolean) : void {
+        public function as_setCloseEnabled(param1:Boolean) : void
+        {
             enabledCloseBtn = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             constraints.addElement("messageArea",this.channelComponent.messageArea,Constraints.ALL);
@@ -46,18 +50,21 @@ package net.wg.gui.messenger.windows
             this.channelComponent.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
             window.contentPadding = new Padding(40,12,16,9);
             geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             var _loc2_:InputDetails = param1.details;
             if(_loc2_.code == Keyboard.F1 && _loc2_.value == InputValue.KEY_UP)
             {
@@ -72,12 +79,14 @@ package net.wg.gui.messenger.windows
             super.handleInput(param1);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.channelComponent.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
         }
         
-        private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
+        private function onRequestFocusHandler(param1:FocusRequestEvent) : void
+        {
             setFocus(this.channelComponent.getComponentForFocus());
         }
     }

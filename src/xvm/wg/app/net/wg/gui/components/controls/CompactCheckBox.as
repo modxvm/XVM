@@ -5,19 +5,22 @@ package net.wg.gui.components.controls
     public class CompactCheckBox extends CheckBox
     {
         
-        public function CompactCheckBox() {
+        public function CompactCheckBox()
+        {
             super();
             constraintsDisabled = true;
             preventAutosizing = true;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             constraints.removeElement("textField");
             textField.autoSize = TextFieldAutoSize.LEFT;
         }
         
-        override protected function updateAfterStateChange() : void {
+        override protected function updateAfterStateChange() : void
+        {
             textField.autoSize = TextFieldAutoSize.LEFT;
             super.updateAfterStateChange();
         }

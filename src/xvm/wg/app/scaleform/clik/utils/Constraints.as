@@ -15,7 +15,8 @@ package scaleform.clik.utils
     public class Constraints extends EventDispatcher implements IDisposable
     {
         
-        public function Constraints(param1:Sprite, param2:String = "counterScale") {
+        public function Constraints(param1:Sprite, param2:String = "counterScale")
+        {
             super();
             this.scope = param1;
             this.scaleMode = param2;
@@ -34,7 +35,7 @@ package scaleform.clik.utils
         
         public static var BOTTOM:uint = 8;
         
-        public static var ALL:uint;
+        public static var ALL:uint = LEFT | RIGHT | TOP | BOTTOM;
         
         public static var CENTER_H:uint = 16;
         
@@ -58,7 +59,8 @@ package scaleform.clik.utils
         
         public var lastHeight:Number = NaN;
         
-        public function addElement(param1:String, param2:DisplayObject, param3:uint) : void {
+        public function addElement(param1:String, param2:DisplayObject, param3:uint) : void
+        {
             if(param2 == null)
             {
                 return;
@@ -78,15 +80,18 @@ package scaleform.clik.utils
             this.elements[param1] = _loc6_;
         }
         
-        public function removeElement(param1:String) : void {
+        public function removeElement(param1:String) : void
+        {
             if(this.elements[param1] != null)
             {
                 this.elementCount--;
             }
             delete this.elements[param1];
+            true;
         }
         
-        public function removeAllElements() : void {
+        public function removeAllElements() : void
+        {
             var _loc1_:String = null;
             for(_loc1_ in this.elements)
             {
@@ -94,15 +99,18 @@ package scaleform.clik.utils
                 {
                     this.elementCount--;
                     delete this.elements[_loc1_];
+                    true;
                 }
             }
         }
         
-        public function getElement(param1:String) : ConstrainedElement {
+        public function getElement(param1:String) : ConstrainedElement
+        {
             return this.elements[param1] as ConstrainedElement;
         }
         
-        public function updateElement(param1:String, param2:DisplayObject) : void {
+        public function updateElement(param1:String, param2:DisplayObject) : void
+        {
             if(param2 == null)
             {
                 return;
@@ -115,7 +123,8 @@ package scaleform.clik.utils
             _loc3_.clip = param2;
         }
         
-        public function getXAdjust() : Number {
+        public function getXAdjust() : Number
+        {
             if(this.scaleMode == ConstrainMode.REFLOW)
             {
                 return this.parentXAdjust;
@@ -123,7 +132,8 @@ package scaleform.clik.utils
             return this.parentXAdjust / this.scope.scaleX;
         }
         
-        public function getYAdjust() : Number {
+        public function getYAdjust() : Number
+        {
             if(this.scaleMode == ConstrainMode.REFLOW)
             {
                 return this.parentYAdjust;
@@ -131,7 +141,8 @@ package scaleform.clik.utils
             return this.parentYAdjust / this.scope.scaleY;
         }
         
-        public function update(param1:Number, param2:Number) : void {
+        public function update(param1:Number, param2:Number) : void
+        {
             var _loc6_:String = null;
             var _loc7_:ConstrainedElement = null;
             var _loc8_:uint = 0;
@@ -248,7 +259,8 @@ package scaleform.clik.utils
             }
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             var _loc3_:String = null;
             var _loc1_:uint = this.elements.length;
             var _loc2_:* = "[CLIK Constraints (" + _loc1_ + ")]";
@@ -259,11 +271,13 @@ package scaleform.clik.utils
             return _loc2_;
         }
         
-        protected function handleScopeAddedToStage(param1:Event) : void {
+        protected function handleScopeAddedToStage(param1:Event) : void
+        {
             this.addToParentConstraints();
         }
         
-        protected function addToParentConstraints() : void {
+        protected function addToParentConstraints() : void
+        {
             if(this.parentConstraints != null)
             {
                 this.parentConstraints.removeEventListener(ResizeEvent.RESIZE,this.handleParentConstraintsResize);
@@ -306,13 +320,15 @@ package scaleform.clik.utils
             }
         }
         
-        protected function handleParentConstraintsResize(param1:ResizeEvent) : void {
+        protected function handleParentConstraintsResize(param1:ResizeEvent) : void
+        {
             this.parentXAdjust = param1.scaleX;
             this.parentYAdjust = param1.scaleY;
             this.update(this.lastWidth,this.lastHeight);
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             if(this.scope)
             {
                 this.scope.removeEventListener(Event.ADDED_TO_STAGE,this.handleScopeAddedToStage,false);

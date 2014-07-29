@@ -6,7 +6,8 @@ package net.wg.infrastructure.managers.impl
     public class GuiItemsManager extends GuiItemsManagerMeta implements IGuiItemsManager
     {
         
-        public function GuiItemsManager() {
+        public function GuiItemsManager()
+        {
             super();
         }
     }

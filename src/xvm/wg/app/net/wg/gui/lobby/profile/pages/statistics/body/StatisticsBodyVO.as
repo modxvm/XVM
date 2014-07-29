@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class StatisticsBodyVO extends DAAPIDataClass
     {
         
-        public function StatisticsBodyVO(param1:Object) {
+        public function StatisticsBodyVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
         
         private var _dataListVO:Vector.<StatisticsLabelDataVO>;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:* = 0;
             var _loc4_:Object = null;
             if(param1 == "dataList")
@@ -39,11 +41,13 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             return this.hasOwnProperty(param1);
         }
         
-        public function get dataListVO() : Vector.<StatisticsLabelDataVO> {
+        public function get dataListVO() : Vector.<StatisticsLabelDataVO>
+        {
             return this._dataListVO;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.dataList = null;
             this._dataListVO = null;

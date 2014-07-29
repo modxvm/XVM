@@ -19,7 +19,8 @@ package net.wg.gui.lobby.techtree.nodes
     public class ResearchItem extends Renderer
     {
         
-        public function ResearchItem() {
+        public function ResearchItem()
+        {
             super();
         }
         
@@ -33,7 +34,8 @@ package net.wg.gui.lobby.techtree.nodes
         
         private var extraIcon:ExtraIcon;
         
-        override public function cleanUp() : void {
+        override public function cleanUp() : void
+        {
             if(this.xpLabel != null)
             {
                 this.xpLabel.dispose();
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.techtree.nodes
             super.cleanUp();
         }
         
-        override public function isAvailable4Buy() : Boolean {
+        override public function isAvailable4Buy() : Boolean
+        {
             if(!dataInited)
             {
                 return false;
@@ -49,7 +52,8 @@ package net.wg.gui.lobby.techtree.nodes
             return !(container == null) && (this.containerEx.canInstallItems()) && (_valueObject.state & NodeState.INSTALLED) == 0 && (super.isAvailable4Buy());
         }
         
-        override public function isActionEnabled() : Boolean {
+        override public function isActionEnabled() : Boolean
+        {
             var _loc1_:Boolean = super.isActionEnabled();
             if((_loc1_) && stateProps.enough == NodeState.ENOUGH_MONEY)
             {
@@ -58,7 +62,8 @@ package net.wg.gui.lobby.techtree.nodes
             return _loc1_;
         }
         
-        override public function populateUI() : void {
+        override public function populateUI() : void
+        {
             var _loc1_:String = null;
             var _loc2_:String = null;
             var _loc3_:* = 0;
@@ -112,14 +117,15 @@ package net.wg.gui.lobby.techtree.nodes
             super.populateUI();
         }
         
-        override public function getExtraState() : Object {
-            return {
-                "rootState":(this.containerEx != null?this.containerEx.getRootState():0),
-                "isParentUnlocked":(this.containerEx != null?this.containerEx.hasUnlockedParent(matrixPosition.row - 1,index):false)
-            };
+        override public function getExtraState() : Object
+        {
+            return {"rootState":(this.containerEx != null?this.containerEx.getRootState():0),
+            "isParentUnlocked":(this.containerEx != null?this.containerEx.hasUnlockedParent(matrixPosition.row - 1,index):false)
+        };
     }
     
-    override public function showContextMenu() : void {
+    override public function showContextMenu() : void
+    {
         if(button != null)
         {
             button.endAnimation(true);
@@ -127,19 +133,23 @@ package net.wg.gui.lobby.techtree.nodes
         MenuHandler.getInstance().showResearchItemMenu(this);
     }
     
-    override public function toString() : String {
+    override public function toString() : String
+    {
         return "[ResearchItem " + index + ", " + name + "]";
     }
     
-    public function isAutoUnlocked() : Boolean {
+    public function isAutoUnlocked() : Boolean
+    {
         return (dataInited) && (_valueObject.state & NodeState.AUTO_UNLOCKED) > 0;
     }
     
-    public function isInstalled() : Boolean {
+    public function isInstalled() : Boolean
+    {
         return (dataInited) && (_valueObject.state & NodeState.INSTALLED) > 0;
     }
     
-    public function isAvailable4Install() : Boolean {
+    public function isAvailable4Install() : Boolean
+    {
         if(!dataInited)
         {
             return false;
@@ -147,22 +157,26 @@ package net.wg.gui.lobby.techtree.nodes
         return !(container == null) && (this.containerEx.canInstallItems()) && (inInventory()) && (_valueObject.state & NodeState.INSTALLED) == 0;
     }
     
-    public function click2Install() : void {
+    public function click2Install() : void
+    {
         dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_INSTALL,0,_index,_entityType));
     }
     
-    override public function set container(param1:INodesContainer) : void {
+    override public function set container(param1:INodesContainer) : void
+    {
         if(param1 is IResearchContainer)
         {
             _container = param1;
         }
     }
     
-    public function get containerEx() : IResearchContainer {
+    public function get containerEx() : IResearchContainer
+    {
         return _container != null?_container as IResearchContainer:null;
     }
     
-    override protected function preInitialize() : void {
+    override protected function preInitialize() : void
+    {
         super.preInitialize();
         _entityType = NodeEntityType.RESEARCH_ITEM;
         soundId = TTSoundID.RESEARCH_ITEM;
@@ -170,7 +184,8 @@ package net.wg.gui.lobby.techtree.nodes
         isDelegateEvents = true;
     }
     
-    override protected function handleClick(param1:uint = 0) : void {
+    override protected function handleClick(param1:uint = 0) : void
+    {
         super.handleClick(param1);
         MenuHandler.getInstance().hideMenu();
         if(button != null)
@@ -180,7 +195,8 @@ package net.wg.gui.lobby.techtree.nodes
         dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_OPEN,0,_index,_entityType));
     }
     
-    private function applyExtraSource() : void {
+    private function applyExtraSource() : void
+    {
         var _loc1_:String = _valueObject.extraInfo;
         if(!this.extraIcon && !(_loc1_ == null) && !(_loc1_ == ""))
         {
@@ -200,7 +216,8 @@ package net.wg.gui.lobby.techtree.nodes
         }
     }
     
-    private function onExtraIconLoaded(param1:Event) : void {
+    private function onExtraIconLoaded(param1:Event) : void
+    {
         this.extraIcon.x = this.typeIcon.x + this.typeIcon.width - this.extraIcon.width - 2;
         this.extraIcon.y = this.typeIcon.y + this.typeIcon.height - this.extraIcon.height - 2;
     }

@@ -6,7 +6,8 @@ package net.wg.infrastructure.base
     public class StoredWindowGeometry extends Object implements IWindowGeometry
     {
         
-        public function StoredWindowGeometry(param1:Number, param2:Number, param3:Number, param4:Number) {
+        public function StoredWindowGeometry(param1:Number, param2:Number, param3:Number, param4:Number)
+        {
             super();
             this._x = param1;
             this._y = param2;
@@ -25,11 +26,13 @@ package net.wg.infrastructure.base
         
         private var doPositionOnce:Boolean;
         
-        public function canOverwrite() : Boolean {
+        public function canOverwrite() : Boolean
+        {
             return false;
         }
         
-        public function setSize(param1:IWindow) : Boolean {
+        public function setSize(param1:IWindow) : Boolean
+        {
             if(this._width > 0 && this._height > 0)
             {
                 param1.updateSize(this._width,this._height);
@@ -41,7 +44,8 @@ package net.wg.infrastructure.base
             return true;
         }
         
-        public function setPosition(param1:IWindow) : Boolean {
+        public function setPosition(param1:IWindow) : Boolean
+        {
             var _loc2_:* = false;
             if(!this.doPositionOnce && (param1))
             {

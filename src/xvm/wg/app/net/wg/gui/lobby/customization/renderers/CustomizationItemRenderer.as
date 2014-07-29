@@ -20,7 +20,8 @@ package net.wg.gui.lobby.customization.renderers
     public class CustomizationItemRenderer extends SoundListItemRenderer
     {
         
-        public function CustomizationItemRenderer() {
+        public function CustomizationItemRenderer()
+        {
             super();
             soundType = SoundTypes.CUSTOMIZATION_ITEM_RENDERER;
         }
@@ -71,7 +72,8 @@ package net.wg.gui.lobby.customization.renderers
         
         private var _useHandCursorForce:Boolean = false;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             var _loc2_:Boolean = this.isNew;
             data = param1;
             if(data)
@@ -104,7 +106,8 @@ package net.wg.gui.lobby.customization.renderers
             invalidateData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
             removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
@@ -137,16 +140,19 @@ package net.wg.gui.lobby.customization.renderers
             data = null;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             mouseChildren = true;
         }
         
-        public function get current() : Boolean {
+        public function get current() : Boolean
+        {
             return this._current;
         }
         
-        public function set current(param1:Boolean) : void {
+        public function set current(param1:Boolean) : void
+        {
             if(this._current == param1)
             {
                 return;
@@ -155,11 +161,13 @@ package net.wg.gui.lobby.customization.renderers
             setState(state);
         }
         
-        public function get demoMode() : String {
+        public function get demoMode() : String
+        {
             return this._demoMode;
         }
         
-        public function set demoMode(param1:String) : void {
+        public function set demoMode(param1:String) : void
+        {
             if(this._demoMode == param1)
             {
                 return;
@@ -171,15 +179,18 @@ package net.wg.gui.lobby.customization.renderers
             setState(state);
         }
         
-        public function get useHandCursorForce() : Boolean {
+        public function get useHandCursorForce() : Boolean
+        {
             return this._useHandCursorForce;
         }
         
-        public function set useHandCursorForce(param1:Boolean) : void {
+        public function set useHandCursorForce(param1:Boolean) : void
+        {
             this._useHandCursorForce = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc1_:* = false;
             super.configUI();
             _loc1_ = (this._useHandCursorForce) || this._demoMode == DEMO_OFF;
@@ -206,7 +217,8 @@ package net.wg.gui.lobby.customization.renderers
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
@@ -260,7 +272,8 @@ package net.wg.gui.lobby.customization.renderers
             }
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             if(this.prefixesVector)
             {
                 this.prefixesVector.splice(0,this.prefixesVector.length);
@@ -285,7 +298,8 @@ package net.wg.gui.lobby.customization.renderers
             return this.prefixesVector;
         }
         
-        protected function checkTooltip() : void {
+        protected function checkTooltip() : void
+        {
             if(this.demoMode == DEMO_NEW || this.demoMode == DEMO_CURRENT)
             {
                 return;
@@ -298,7 +312,8 @@ package net.wg.gui.lobby.customization.renderers
             }
         }
         
-        protected function showIsNew(param1:Boolean) : void {
+        protected function showIsNew(param1:Boolean) : void
+        {
             this.isNew = param1;
             if(param1)
             {
@@ -317,7 +332,8 @@ package net.wg.gui.lobby.customization.renderers
             
         }
         
-        private function loadTexture(param1:String) : void {
+        private function loadTexture(param1:String) : void
+        {
             if(!(param1 == null) && !(param1.length == 0))
             {
                 this.uiLoader.source = param1;
@@ -328,7 +344,8 @@ package net.wg.gui.lobby.customization.renderers
             }
         }
         
-        private function showTooltip(param1:MouseEvent = null) : void {
+        private function showTooltip(param1:MouseEvent = null) : void
+        {
             this._isMouseOver = true;
             if((data) && data.description.length > 0)
             {
@@ -336,12 +353,14 @@ package net.wg.gui.lobby.customization.renderers
             }
         }
         
-        private function hideTooltip(param1:MouseEvent = null) : void {
+        private function hideTooltip(param1:MouseEvent = null) : void
+        {
             this._isMouseOver = false;
             App.toolTipMgr.hide();
         }
         
-        protected function onImageLoadComplete(param1:Event) : void {
+        protected function onImageLoadComplete(param1:Event) : void
+        {
             invalidateSize();
             validateNow();
         }

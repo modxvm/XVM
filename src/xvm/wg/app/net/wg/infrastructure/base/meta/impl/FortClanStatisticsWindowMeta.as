@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class FortClanStatisticsWindowMeta extends AbstractWindowView
     {
         
-        public function FortClanStatisticsWindowMeta() {
+        public function FortClanStatisticsWindowMeta()
+        {
             super();
         }
     }

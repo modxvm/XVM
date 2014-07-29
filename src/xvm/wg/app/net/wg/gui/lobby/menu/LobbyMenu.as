@@ -10,7 +10,8 @@ package net.wg.gui.lobby.menu
     public class LobbyMenu extends LobbyMenuMeta implements ILobbyMenuMeta
     {
         
-        public function LobbyMenu() {
+        public function LobbyMenu()
+        {
             super();
             isCentered = true;
             isModal = true;
@@ -21,11 +22,13 @@ package net.wg.gui.lobby.menu
         
         public var content:LobbyMenuForm = null;
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             super.updateStage(param1,param2);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             MovieClip(window.getBackground()).tabEnabled = false;
             MovieClip(window.getBackground()).tabChildren = false;
             this.content.logoffBtn.addEventListener(ButtonEvent.PRESS,this.onLogoffClick);
@@ -46,7 +49,8 @@ package net.wg.gui.lobby.menu
             this.updateStage(App.appWidth,App.appHeight);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.content.logoffBtn.removeEventListener(ButtonEvent.PRESS,this.onLogoffClick);
             this.content.settingsBtn.removeEventListener(ButtonEvent.PRESS,this.onSettingsClick);
             this.content.quitBtn.removeEventListener(ButtonEvent.PRESS,this.onQuitClick);
@@ -55,12 +59,14 @@ package net.wg.gui.lobby.menu
             super.onDispose();
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.content.cancelBtn);
         }
         
-        private function onLogoffClick(param1:ButtonEvent) : void {
+        private function onLogoffClick(param1:ButtonEvent) : void
+        {
             if(App.globalVarsMgr.isTutorialRunningS())
             {
                 refuseTrainingS();
@@ -71,15 +77,18 @@ package net.wg.gui.lobby.menu
             }
         }
         
-        private function onSettingsClick(param1:ButtonEvent) : void {
+        private function onSettingsClick(param1:ButtonEvent) : void
+        {
             settingsClickS();
         }
         
-        private function onQuitClick(param1:ButtonEvent) : void {
+        private function onQuitClick(param1:ButtonEvent) : void
+        {
             quitClickS();
         }
         
-        private function onCancelClick(param1:ButtonEvent = null) : void {
+        private function onCancelClick(param1:ButtonEvent = null) : void
+        {
             cancelClickS();
         }
     }

@@ -3,7 +3,8 @@ package net.wg.gui.components.tooltips.VO
     public class Dimension extends Object
     {
         
-        public function Dimension() {
+        public function Dimension()
+        {
             super();
         }
         
@@ -11,19 +12,23 @@ package net.wg.gui.components.tooltips.VO
         
         private var _height:Number = 0;
         
-        public function get width() : Number {
+        public function get width() : Number
+        {
             return this._width;
         }
         
-        public function set width(param1:Number) : void {
+        public function set width(param1:Number) : void
+        {
             this._width = param1;
         }
         
-        public function get height() : Number {
+        public function get height() : Number
+        {
             return this._height;
         }
         
-        public function set height(param1:Number) : void {
+        public function set height(param1:Number) : void
+        {
             this._height = param1;
         }
     }

@@ -8,14 +8,16 @@ package net.wg.gui.components.tooltips
     public class ToolTipComplex extends ToolTipBase
     {
         
-        public function ToolTipComplex() {
+        public function ToolTipComplex()
+        {
             super();
             this.contentList = new Vector.<TextField>();
         }
         
         private static var COLOR_HEADER:String = "#fdf4ce";
         
-        private static function setTextProp(param1:TextField, param2:String, param3:TextFormat, param4:String) : void {
+        private static function setTextProp(param1:TextField, param2:String, param3:TextFormat, param4:String) : void
+        {
             param3.align = param4;
             param3.leading = 2;
             param1.wordWrap = true;
@@ -61,7 +63,8 @@ package net.wg.gui.components.tooltips
         
         private var contentList:Vector.<TextField>;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:TextField = null;
             if(this.contentList)
             {
@@ -78,26 +81,30 @@ package net.wg.gui.components.tooltips
             super.onDispose();
         }
         
-        override public function build(param1:Object, param2:ITooltipProps) : void {
+        override public function build(param1:Object, param2:ITooltipProps) : void
+        {
             this.setProp(param2);
             this.setContent(param1);
             redraw();
         }
         
-        private function setProp(param1:ITooltipProps) : void {
+        private function setProp(param1:ITooltipProps) : void
+        {
             _props = param1;
             this._minWidth = param1.minWidth;
             this._maxWidth = param1.maxWidth;
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             var _loc1_:Object = this.calcDimension();
             background.x = background.y = 0;
             background.width = Math.round(_loc1_.w) + this._leftMargin + this._rightMargin;
             background.height = Math.round(_loc1_.h) + this._topMargin + this._bottomMargin;
         }
         
-        private function calcDimension() : Object {
+        private function calcDimension() : Object
+        {
             var _loc7_:TextField = null;
             var _loc8_:* = NaN;
             var _loc1_:Number = this._maxWidth;
@@ -131,14 +138,14 @@ package net.wg.gui.components.tooltips
                 _loc5_++;
             }
             _loc1_ = _loc1_ + 5;
-            var _loc6_:Object = {
-                "w":_loc1_,
-                "h":_loc2_
-            };
+            var _loc6_:Object = {"w":_loc1_,
+            "h":_loc2_
+        };
         return _loc6_;
     }
     
-    private function setContent(param1:Object) : void {
+    private function setContent(param1:Object) : void
+    {
         var _loc6_:* = NaN;
         this._leftMargin = 10;
         this._rightMargin = 10;

@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class DynamicScrollingListEx extends ScrollingListEx implements IDynamicContent
     {
         
-        public function DynamicScrollingListEx() {
+        public function DynamicScrollingListEx()
+        {
             super();
         }
     }

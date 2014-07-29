@@ -16,7 +16,8 @@ package net.wg.gui.rally.views.list
     public class BaseRallyListView extends BaseRallyListViewMeta implements IBaseRallyListViewMeta
     {
         
-        public function BaseRallyListView() {
+        public function BaseRallyListView()
+        {
             super();
         }
         
@@ -26,15 +27,18 @@ package net.wg.gui.rally.views.list
         
         protected var listDataProvider:VoDAAPIDataProvider;
         
-        protected function convertToRallyVO(param1:Object) : IRallyVO {
+        protected function convertToRallyVO(param1:Object) : IRallyVO
+        {
             return null;
         }
         
-        protected function getRallyTooltipLinkage() : String {
+        protected function getRallyTooltipLinkage() : String
+        {
             return null;
         }
         
-        public function as_selectByIndex(param1:int) : void {
+        public function as_selectByIndex(param1:int) : void
+        {
             if(this.rallyTable.listSelectedIndex != param1)
             {
                 this.rallyTable.removeEventListener(SortableTableListEvent.LIST_INDEX_CHANGE,this.onSelectRally);
@@ -44,7 +48,8 @@ package net.wg.gui.rally.views.list
             this.requestRallyData(param1);
         }
         
-        public function as_selectByID(param1:Number) : void {
+        public function as_selectByID(param1:Number) : void
+        {
             var _loc2_:IRallyListItemVO = null;
             for each(_loc2_ in this.rallyTable.listDP)
             {
@@ -59,15 +64,18 @@ package net.wg.gui.rally.views.list
             this.rallyTable.listSelectedIndex = -1;
         }
         
-        public function as_getSearchDP() : Object {
+        public function as_getSearchDP() : Object
+        {
             return this.listDataProvider;
         }
         
-        public function as_setVehiclesTitle(param1:String) : void {
+        public function as_setVehiclesTitle(param1:String) : void
+        {
             this.detailsSection.vehiclesLabel = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(this.rallyTable)
             {
                 this.rallyTable.listSelectedIndex = -1;
@@ -90,7 +98,8 @@ package net.wg.gui.rally.views.list
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.rallyTable)
             {
                 this.listDataProvider.removeEventListener(ManualSearchEvent.DATA_UPDATED,this.handleDataUpdated);
@@ -114,7 +123,8 @@ package net.wg.gui.rally.views.list
             super.onDispose();
         }
         
-        protected function onSelectRally(param1:SortableTableListEvent) : void {
+        protected function onSelectRally(param1:SortableTableListEvent) : void
+        {
             var _loc2_:int = param1.index;
             if(!isNaN(_loc2_))
             {
@@ -122,31 +132,34 @@ package net.wg.gui.rally.views.list
             }
         }
         
-        protected function requestRallyData(param1:int) : void {
+        protected function requestRallyData(param1:int) : void
+        {
             var _loc2_:Object = getRallyDetailsS(param1);
             this.detailsSection.setData(_loc2_ != null?this.convertToRallyVO(_loc2_):null);
         }
         
-        protected function onListItemDoubleClick(param1:SortableTableListEvent) : void {
+        protected function onListItemDoubleClick(param1:SortableTableListEvent) : void
+        {
             var _loc3_:Object = null;
             var _loc2_:IRallyListItemVO = param1.itemData as IRallyListItemVO;
             if(param1.buttonIdx == MouseEventEx.LEFT_BUTTON && (_loc2_))
             {
-                _loc3_ = {
-                    "alias":getRallyViewAlias(),
-                    "itemId":_loc2_.mgrID,
-                    "peripheryID":_loc2_.peripheryID,
-                    "slotIndex":-1
-                };
+                _loc3_ = {"alias":getRallyViewAlias(),
+                "itemId":_loc2_.mgrID,
+                "peripheryID":_loc2_.peripheryID,
+                "slotIndex":-1
+            };
             dispatchEvent(new RallyViewsEvent(RallyViewsEvent.LOAD_VIEW_REQUEST,_loc3_));
         }
     }
     
-    protected function onListItemPress(param1:SortableTableListEvent) : void {
+    protected function onListItemPress(param1:SortableTableListEvent) : void
+    {
         App.toolTipMgr.hide();
     }
     
-    protected function onItemRollOver(param1:SortableTableListEvent) : void {
+    protected function onItemRollOver(param1:SortableTableListEvent) : void
+    {
         var _loc2_:IRallyListItemVO = param1.itemData as IRallyListItemVO;
         if(_loc2_)
         {
@@ -154,27 +167,29 @@ package net.wg.gui.rally.views.list
         }
     }
     
-    protected function onJoinRequest(param1:RallyViewsEvent) : void {
+    protected function onJoinRequest(param1:RallyViewsEvent) : void
+    {
         var _loc3_:Object = null;
         var _loc2_:IRallyListItemVO = this.rallyTable.getListSelectedItem() as IRallyListItemVO;
         if((_loc2_) && !(_loc2_.mgrID == 0))
         {
-            _loc3_ = {
-                "alias":getRallyViewAlias(),
-                "itemId":_loc2_.mgrID,
-                "peripheryID":_loc2_.peripheryID,
-                "slotIndex":(param1.data?param1.data:-1)
-            };
+            _loc3_ = {"alias":getRallyViewAlias(),
+            "itemId":_loc2_.mgrID,
+            "peripheryID":_loc2_.peripheryID,
+            "slotIndex":(param1.data?param1.data:-1)
+        };
         dispatchEvent(new RallyViewsEvent(RallyViewsEvent.LOAD_VIEW_REQUEST,_loc3_));
     }
 }
 
-private function handleDataUpdated(param1:ManualSearchEvent) : void {
+private function handleDataUpdated(param1:ManualSearchEvent) : void
+{
     var _loc2_:Number = Math.min(Math.max(0,this.listDataProvider.length - this.rallyTable.totalRenderers),this.rallyTable.scrollPosition);
     IManualSearchDataProvider(this.listDataProvider).requestUpdatedItems(_loc2_,Math.min(this.listDataProvider.length - 1,_loc2_ + this.rallyTable.totalRenderers - 1),this.updateData);
 }
 
-private function updateData(param1:Array) : void {
+private function updateData(param1:Array) : void
+{
     var _loc3_:* = 0;
     var _loc4_:Array = null;
     var _loc5_:IUpdatable = null;

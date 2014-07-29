@@ -6,7 +6,8 @@ package net.wg.gui.lobby.profile.components
     public class ResizableViewStack extends DataViewStack
     {
         
-        public function ResizableViewStack() {
+        public function ResizableViewStack()
+        {
             super();
         }
         
@@ -18,7 +19,8 @@ package net.wg.gui.lobby.profile.components
         
         private var _centerOffset:int = 0;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(AVAILABLE_SIZE_INV))
             {
@@ -36,7 +38,8 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        override public function show(param1:String) : MovieClip {
+        override public function show(param1:String) : MovieClip
+        {
             var _loc2_:IResizableContent = currentView as IResizableContent;
             var _loc3_:MovieClip = super.show(param1);
             if(_loc2_)
@@ -53,7 +56,8 @@ package net.wg.gui.lobby.profile.components
             return _loc3_;
         }
         
-        public function setAvailableSize(param1:Number, param2:Number) : void {
+        public function setAvailableSize(param1:Number, param2:Number) : void
+        {
             if(!this.availableSize)
             {
                 this.availableSize = new Point();
@@ -63,12 +67,14 @@ package net.wg.gui.lobby.profile.components
             invalidate(AVAILABLE_SIZE_INV);
         }
         
-        public function set centerOffset(param1:int) : void {
+        public function set centerOffset(param1:int) : void
+        {
             this._centerOffset = param1;
             invalidate(OFFSET_INVALID);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.availableSize = null;
             super.onDispose();
         }

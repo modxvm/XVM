@@ -27,7 +27,8 @@ package net.wg.gui.lobby.settings.components
     public class KeyInput extends SoundButton
     {
         
-        public function KeyInput() {
+        public function KeyInput()
+        {
             super();
         }
         
@@ -45,11 +46,13 @@ package net.wg.gui.lobby.settings.components
         
         private var _keyDefault:Number;
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG KeyInput " + name + "]";
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.clearEventListeners();
             if(this.hasEventListener(Event.SELECT))
             {
@@ -58,7 +61,8 @@ package net.wg.gui.lobby.settings.components
             super.onDispose();
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(param1 == enabled)
             {
                 return;
@@ -67,27 +71,33 @@ package net.wg.gui.lobby.settings.components
             super.enabled = param1;
         }
         
-        public function get keyCode() : Number {
+        public function get keyCode() : Number
+        {
             return this._keyCode;
         }
         
-        public function get keyString() : String {
+        public function get keyString() : String
+        {
             return this._keyString;
         }
         
-        public function get keyDefault() : Number {
+        public function get keyDefault() : Number
+        {
             return this._keyDefault;
         }
         
-        public function set keyDefault(param1:Number) : void {
+        public function set keyDefault(param1:Number) : void
+        {
             this._keyDefault = param1;
         }
         
-        public function get key() : Number {
+        public function get key() : Number
+        {
             return this._keyCode;
         }
         
-        public function set key(param1:Number) : void {
+        public function set key(param1:Number) : void
+        {
             if(this._keyCode == param1)
             {
                 return;
@@ -101,16 +111,19 @@ package net.wg.gui.lobby.settings.components
             invalidateData();
         }
         
-        public function get keys() : Array {
+        public function get keys() : Array
+        {
             return this._keys;
         }
         
-        public function set keys(param1:Array) : void {
+        public function set keys(param1:Array) : void
+        {
             this._keys = param1;
             this.__keysToUpperCase();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             stage.doubleClickEnabled = true;
             toggle = true;
@@ -119,7 +132,8 @@ package net.wg.gui.lobby.settings.components
             mouseEnabled = true;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.DATA))
             {
                 textField.text = this._keyString || "";
@@ -128,7 +142,8 @@ package net.wg.gui.lobby.settings.components
             super.draw();
         }
         
-        override protected function handleMousePress(param1:MouseEvent) : void {
+        override protected function handleMousePress(param1:MouseEvent) : void
+        {
             var _loc5_:ButtonEvent = null;
             var _loc2_:MouseEventEx = param1 as MouseEventEx;
             var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
@@ -153,7 +168,8 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        override protected function handleReleaseOutside(param1:MouseEvent) : void {
+        override protected function handleReleaseOutside(param1:MouseEvent) : void
+        {
             _autoRepeatEvent = null;
             if(contains(param1.target as DisplayObject))
             {
@@ -182,7 +198,8 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             if(!enabled)
             {
                 dispatchEvent(new KeyInputEvents(KeyInputEvents.DISABLE_OVER,NaN,true,false));
@@ -190,7 +207,8 @@ package net.wg.gui.lobby.settings.components
             super.handleMouseRollOver(param1);
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             if(!enabled)
             {
                 dispatchEvent(new KeyInputEvents(KeyInputEvents.DISABLE_OUT,NaN,true,false));
@@ -198,7 +216,8 @@ package net.wg.gui.lobby.settings.components
             super.handleMouseRollOut(param1);
         }
         
-        private function __keysToUpperCase() : void {
+        private function __keysToUpperCase() : void
+        {
             var _loc1_:uint = 0;
             while(_loc1_ < this._keys.length)
             {
@@ -207,13 +226,15 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        private function addEventListeners() : void {
+        private function addEventListeners() : void
+        {
             this.addEventListener(ButtonEvent.PRESS,this.onKeyDown);
             App.stage.addEventListener(MouseEvent.MOUSE_DOWN,this.handleReleaseOutside,false,0,true);
             this.addEventListener(ButtonEvent.RELEASE_OUTSIDE,this.onKeyDown);
         }
         
-        private function clearEventListeners() : void {
+        private function clearEventListeners() : void
+        {
             if(this.hasEventListener(ButtonEvent.PRESS))
             {
                 this.removeEventListener(ButtonEvent.PRESS,this.onKeyDown);
@@ -228,7 +249,8 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        private function __processCode(param1:Number) : void {
+        private function __processCode(param1:Number) : void
+        {
             var _loc3_:Point = null;
             var _loc4_:ITooltipProps = null;
             var _loc5_:String = null;
@@ -257,16 +279,19 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        private function __isInKeySet(param1:String) : Boolean {
+        private function __isInKeySet(param1:String) : Boolean
+        {
             return this._keys.indexOf(param1,0) > -1;
         }
         
-        private function __inputClose() : void {
+        private function __inputClose() : void
+        {
             selected = false;
             invalidate();
         }
         
-        private function onButtonSelect(param1:Event) : void {
+        private function onButtonSelect(param1:Event) : void
+        {
             if(this.selected)
             {
                 this.addEventListeners();
@@ -277,11 +302,13 @@ package net.wg.gui.lobby.settings.components
             }
         }
         
-        private function onKeyDown(param1:ButtonEvent) : void {
+        private function onKeyDown(param1:ButtonEvent) : void
+        {
             this.__processCode(param1.isKeyboard?param1.controllerIdx:param1.buttonIdx);
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             var _loc2_:InputDetails = null;
             var _loc3_:uint = 0;
             if(selected)

@@ -15,7 +15,8 @@ package net.wg.gui.lobby.settings
     public class GameSettings extends GameSettingsBase
     {
         
-        public function GameSettings() {
+        public function GameSettings()
+        {
             super();
         }
         
@@ -23,15 +24,18 @@ package net.wg.gui.lobby.settings
         
         private var missChangeEvent:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override public function update(param1:Object) : void {
+        override public function update(param1:Object) : void
+        {
             super.update(param1);
         }
         
-        override protected function setData(param1:Object) : void {
+        override protected function setData(param1:Object) : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -40,16 +44,19 @@ package net.wg.gui.lobby.settings
             throw new Error("Not decompiled due to error");
         }
         
-        override public function updateDependentData() : void {
+        override public function updateDependentData() : void
+        {
             this.updatePostMortem();
         }
         
-        private function updatePostMortem() : void {
+        private function updatePostMortem() : void
+        {
             var _loc1_:SettingsControlProp = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GRAPHIC_SETTINGS][SettingsConfig.POST_PROCESSING_QUALITY]);
             enablePostMortemEffectCheckbox.enabled = !(_loc1_.changedVal == _loc1_.options.length - 1);
         }
         
-        private function showHideControl(param1:String, param2:SettingsControlProp, param3:Boolean) : void {
+        private function showHideControl(param1:String, param2:SettingsControlProp, param3:Boolean) : void
+        {
             if(this[param1 + param2.type])
             {
                 this[param1 + param2.type].visible = param3;
@@ -64,7 +71,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function onSliderValueChanged(param1:SliderEvent) : void {
+        private function onSliderValueChanged(param1:SliderEvent) : void
+        {
             var _loc5_:LabelControl = null;
             var _loc2_:Slider = Slider(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_SLIDER);
@@ -80,7 +88,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function onCheckBoxSelected(param1:Event) : void {
+        private function onCheckBoxSelected(param1:Event) : void
+        {
             var _loc2_:String = SettingsConfig.getControlId(CheckBox(param1.target).name,SettingsConfig.TYPE_CHECKBOX);
             var _loc3_:Boolean = CheckBox(param1.target).selected;
             if(_loc2_ == SettingsConfig.DYNAMIC_CAMERA)
@@ -93,7 +102,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function enableHorStabilizationSnp(param1:Boolean) : void {
+        private function enableHorStabilizationSnp(param1:Boolean) : void
+        {
             var _loc2_:String = null;
             var _loc3_:SettingsControlProp = null;
             if(SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GAME_SETTINGS][SettingsConfig.HOR_STABILIZATION_SNP]).current != null)
@@ -115,13 +125,15 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function onDropDownChange(param1:ListEvent) : void {
+        private function onDropDownChange(param1:ListEvent) : void
+        {
             var _loc2_:DropdownMenu = DropdownMenu(param1.target);
             var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.selectedIndex));
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:String = null;
             var _loc2_:SettingsControlProp = null;
             var _loc3_:CheckBox = null;
@@ -161,11 +173,13 @@ package net.wg.gui.lobby.settings
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG GameSettings " + name + "]";
         }
     }

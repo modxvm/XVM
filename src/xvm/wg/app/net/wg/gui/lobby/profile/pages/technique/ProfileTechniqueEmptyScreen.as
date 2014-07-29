@@ -7,7 +7,8 @@ package net.wg.gui.lobby.profile.pages.technique
     public class ProfileTechniqueEmptyScreen extends UIComponent
     {
         
-        public function ProfileTechniqueEmptyScreen() {
+        public function ProfileTechniqueEmptyScreen()
+        {
             super();
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.lobby.profile.pages.technique
         
         public var textField:TextField;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -23,11 +25,13 @@ package net.wg.gui.lobby.profile.pages.technique
             }
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
             invalidateData();
         }

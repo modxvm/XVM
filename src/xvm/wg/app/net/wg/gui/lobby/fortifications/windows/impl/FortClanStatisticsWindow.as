@@ -9,7 +9,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
     public class FortClanStatisticsWindow extends FortClanStatisticsWindowMeta implements IFortClanStatisticsWindowMeta
     {
         
-        public function FortClanStatisticsWindow() {
+        public function FortClanStatisticsWindow()
+        {
             super();
             isModal = false;
             isCentered = true;
@@ -19,11 +20,13 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private var model:ClanStatsVO;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.model))
             {
@@ -32,7 +35,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.sortieForm.dispose();
             this.sortieForm = null;
             if(this.model)
@@ -43,11 +47,13 @@ package net.wg.gui.lobby.fortifications.windows.impl
             super.onDispose();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
         }
         
-        public function as_setData(param1:Object) : void {
+        public function as_setData(param1:Object) : void
+        {
             this.model = new ClanStatsVO(param1);
             invalidateData();
         }

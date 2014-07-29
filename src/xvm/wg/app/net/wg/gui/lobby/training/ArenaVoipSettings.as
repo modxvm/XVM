@@ -12,7 +12,8 @@ package net.wg.gui.lobby.training
     public class ArenaVoipSettings extends UIComponent
     {
         
-        public function ArenaVoipSettings() {
+        public function ArenaVoipSettings()
+        {
             super();
         }
         
@@ -28,7 +29,8 @@ package net.wg.gui.lobby.training
         
         public var textField:TextFieldShort;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.textField.buttonMode = false;
             this.textField.autoSize = TextFieldAutoSize.LEFT;
@@ -37,7 +39,8 @@ package net.wg.gui.lobby.training
             this.voiceChatDD.addEventListener(ListEvent.INDEX_CHANGE,this.handleChange,false,0,true);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.utils.scheduler.cancelTask(this.stopCoolDownUseCommonVoiceChat);
             this.voiceChatDD.removeEventListener(ListEvent.INDEX_CHANGE,this.handleChange,false);
             this.voiceChatDD.dispose();
@@ -47,7 +50,8 @@ package net.wg.gui.lobby.training
             super.onDispose();
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(param1 == super.enabled)
             {
                 return;
@@ -57,7 +61,8 @@ package net.wg.gui.lobby.training
             this.textField.enabled = param1;
         }
         
-        public function setCanChangeArenaVOIP(param1:Boolean) : void {
+        public function setCanChangeArenaVOIP(param1:Boolean) : void
+        {
             if(this.canChangeArenaVOIP == param1)
             {
                 return;
@@ -66,19 +71,22 @@ package net.wg.gui.lobby.training
             invalidate(ArenaVoipSettings.CHANGE_ARENA_VOIP);
         }
         
-        public function setUseArenaVoip(param1:Number) : void {
+        public function setUseArenaVoip(param1:Number) : void
+        {
             this.useArenaVoip = param1;
             invalidate(ArenaVoipSettings.USE_ARENA_VOIP);
         }
         
-        private function handleChange(param1:ListEvent) : void {
+        private function handleChange(param1:ListEvent) : void
+        {
             if(this.canChangeArenaVOIP)
             {
                 dispatchEvent(new ArenaVoipSettingsEvent(ArenaVoipSettingsEvent.SELECT_USE_COMMON_VOICE_CHAT,this.voiceChatDD.selectedIndex));
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(ArenaVoipSettings.CHANGE_ARENA_VOIP))
             {
@@ -111,18 +119,21 @@ package net.wg.gui.lobby.training
             }
         }
         
-        public function startCoolDownUseCommonVoiceChat(param1:Number) : void {
+        public function startCoolDownUseCommonVoiceChat(param1:Number) : void
+        {
             this.voiceChatDD.enabled = false;
             var _loc2_:IScheduler = App.utils.scheduler;
             _loc2_.cancelTask(this.stopCoolDownUseCommonVoiceChat);
             _loc2_.scheduleTask(this.stopCoolDownUseCommonVoiceChat,param1 * 1000);
         }
         
-        private function stopCoolDownUseCommonVoiceChat() : void {
+        private function stopCoolDownUseCommonVoiceChat() : void
+        {
             this.voiceChatDD.enabled = true;
         }
         
-        public function changeUseArenaVoipFailed(param1:Number) : void {
+        public function changeUseArenaVoipFailed(param1:Number) : void
+        {
             App.utils.scheduler.cancelTask(this.stopCoolDownUseCommonVoiceChat);
             if(this.canChangeArenaVOIP)
             {

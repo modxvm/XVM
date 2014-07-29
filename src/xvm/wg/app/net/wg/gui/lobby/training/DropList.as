@@ -9,7 +9,8 @@ package net.wg.gui.lobby.training
     public class DropList extends ScrollingListEx implements IDropList
     {
         
-        public function DropList() {
+        public function DropList()
+        {
             super();
         }
         
@@ -17,25 +18,29 @@ package net.wg.gui.lobby.training
         
         private var _selectable:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.focusIndicator.visible = false;
             addEventListener(MouseEvent.ROLL_OVER,this.onMouseOver,false,0,true);
             addEventListener(MouseEvent.ROLL_OUT,this.onMouseOut,false,0,true);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.onMouseOver,false);
             removeEventListener(MouseEvent.ROLL_OUT,this.onMouseOut,false);
             this.focusIndicator = null;
             super.onDispose();
         }
         
-        public function get selectable() : Boolean {
+        public function get selectable() : Boolean
+        {
             return this._selectable;
         }
         
-        public function set selectable(param1:Boolean) : void {
+        public function set selectable(param1:Boolean) : void
+        {
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
             var _loc4_:IListItemRenderer = null;
@@ -53,19 +58,23 @@ package net.wg.gui.lobby.training
             }
         }
         
-        public function highlightList() : void {
+        public function highlightList() : void
+        {
             this.focusIndicator.visible = true;
         }
         
-        public function hideHighLight() : void {
+        public function hideHighLight() : void
+        {
             this.focusIndicator.visible = false;
         }
         
-        private function onMouseOver(param1:MouseEvent) : void {
+        private function onMouseOver(param1:MouseEvent) : void
+        {
             this.focusIndicator.gotoAndPlay("dragOver");
         }
         
-        private function onMouseOut(param1:MouseEvent) : void {
+        private function onMouseOut(param1:MouseEvent) : void
+        {
             this.focusIndicator.gotoAndPlay("dragOut");
         }
     }

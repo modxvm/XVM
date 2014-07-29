@@ -3,7 +3,8 @@ package net.wg.data.constants.generated
     public class EVENT_LOG_CONSTANTS extends Object
     {
         
-        public function EVENT_LOG_CONSTANTS() {
+        public function EVENT_LOG_CONSTANTS()
+        {
             super();
         }
         
@@ -17,7 +18,7 @@ package net.wg.data.constants.generated
         
         public static var SST_UI_FORT:Number = 129;
         
-        public static var SUB_SYSTEMS:Array;
+        public static var SUB_SYSTEMS:Array = [SST_EVENT_LOG,SST_TOOLTIP,SST_CONTEXT_MENU,SST_UI_COMMON,SST_UI_FORT];
         
         public static var EVENT_TYPE_CLICK:String = "click";
         
@@ -39,7 +40,7 @@ package net.wg.data.constants.generated
         
         public static var EVENT_TYPE_INDEX_CHANGE:String = "listIndexChange";
         
-        public static var EVENT_TYPES:Array;
+        public static var EVENT_TYPES:Array = [EVENT_TYPE_CLICK,EVENT_TYPE_BUTTON_CLICK,EVENT_TYPE_ON_WINDOW_OPEN,EVENT_TYPE_ON_WINDOW_CLOSE,EVENT_TYPE_ON_WINDOW_MINIMIZE,EVENT_TYPE_STEP_1,EVENT_TYPE_STEP_2,EVENT_TYPE_STEP_3,EVENT_TYPE_DATA,EVENT_TYPE_INDEX_CHANGE];
         
         public static var CLICK:Number = 0;
         
@@ -61,6 +62,6 @@ package net.wg.data.constants.generated
         
         public static var INDEX_CHANGE:Number = 4097;
         
-        public static var EVENT_CODES:Array;
+        public static var EVENT_CODES:Array = [CLICK,BUTTON_CLICK,ON_WINDOW_OPEN,ON_WINDOW_CLOSE,ON_WINDOW_MINIMIZE,STEP_1,STEP_2,STEP_3,DATA,INDEX_CHANGE];
     }
 }

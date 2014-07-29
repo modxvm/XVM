@@ -5,7 +5,8 @@ package net.wg.gui.lobby.retrainCrewWindow
     public class RetrainTankmanVO extends DAAPIDataClass
     {
         
-        public function RetrainTankmanVO(param1:Object) {
+        public function RetrainTankmanVO(param1:Object)
+        {
             super(param1);
         }
         

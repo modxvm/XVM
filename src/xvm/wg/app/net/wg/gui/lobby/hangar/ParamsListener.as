@@ -5,7 +5,8 @@ package net.wg.gui.lobby.hangar
     public class ParamsListener extends Object implements IDisposable
     {
         
-        public function ParamsListener() {
+        public function ParamsListener()
+        {
             this.vehicleGun = [];
             this.vehicleTurret = [];
             this.vehicleEngine = [];
@@ -33,7 +34,8 @@ package net.wg.gui.lobby.hangar
         
         private var empty:Array;
         
-        public function getParams(param1:String) : Array {
+        public function getParams(param1:String) : Array
+        {
             switch(param1)
             {
                 case "vehicleGun":
@@ -53,7 +55,8 @@ package net.wg.gui.lobby.hangar
             }
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.vehicleGun.splice(0,this.vehicleGun.length);
             this.vehicleGun = null;
             this.vehicleTurret.splice(0,this.vehicleTurret.length);

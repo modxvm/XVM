@@ -11,7 +11,8 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class StatisticBarChartInitializer extends Object implements IDisposable
     {
         
-        public function StatisticBarChartInitializer(param1:AxisChart) {
+        public function StatisticBarChartInitializer(param1:AxisChart)
+        {
             this.tweenManager = new ExcludeTweenManager();
             super();
             this.chartRef = param1;
@@ -26,19 +27,21 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         private var tweenManager:ExcludeTweenManager;
         
-        private function initializedHandler(param1:Event) : void {
-            this.tweenManager.registerAndLaunch(500,this.chartRef,{"alpha":1},{
-                "ease":Strong.easeOut,
-                "onComplete":this.onTweenComplete
-            });
+        private function initializedHandler(param1:Event) : void
+        {
+            this.tweenManager.registerAndLaunch(500,this.chartRef,{"alpha":1},{"ease":Strong.easeOut,
+            "onComplete":this.onTweenComplete
+        });
         DisplayObject(this.chartRef.horizontalAxis).removeEventListener(StatisticsBarChartAxis.INITIALIZED,this.initializedHandler);
     }
     
-    private function onTweenComplete(param1:Tween) : void {
+    private function onTweenComplete(param1:Tween) : void
+    {
         this.tweenManager.unregister(param1);
     }
     
-    public function dispose() : void {
+    public function dispose() : void
+    {
         this.tweenManager.dispose();
         this.tweenManager = null;
         if(this.chartRef.horizontalAxis)

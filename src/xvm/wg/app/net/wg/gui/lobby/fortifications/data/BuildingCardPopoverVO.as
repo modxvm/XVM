@@ -3,7 +3,8 @@ package net.wg.gui.lobby.fortifications.data
     public class BuildingCardPopoverVO extends BuildingPopoverBaseVO
     {
         
-        public function BuildingCardPopoverVO(param1:Object) {
+        public function BuildingCardPopoverVO(param1:Object)
+        {
             super(param1);
             if((this.buildingHeader) && (this.buildingsIndicators) && (this.defResInfo))
             {
@@ -42,7 +43,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var maxPlayerCount:int = -1;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == BUILDING_INDICATORS)
             {
                 this.buildingsIndicators = new BuildingIndicatorsVO(param2);

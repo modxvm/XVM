@@ -3,7 +3,8 @@ package net.wg.gui.prebattle.constants
     public class PrebattleStateFlags extends Object
     {
         
-        public function PrebattleStateFlags() {
+        public function PrebattleStateFlags()
+        {
             super();
         }
         
@@ -11,7 +12,7 @@ package net.wg.gui.prebattle.constants
         
         public static var NOT_READY:uint = 1;
         
-        public static var AFK:uint;
+        public static var AFK:uint = 2 | PrebattleStateFlags.NOT_READY;
         
         public static var READY:uint = 4;
         

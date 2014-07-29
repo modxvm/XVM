@@ -5,7 +5,8 @@ package net.wg.gui.lobby.retrainCrewWindow
     public class RetrainCrewVehicleVO extends DAAPIDataClass
     {
         
-        public function RetrainCrewVehicleVO(param1:Object) {
+        public function RetrainCrewVehicleVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.lobby.retrainCrewWindow
         
         private var _vehicleBlockVO:RetrainVehicleBlockVO;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "vehicle")
             {
                 this._vehicleBlockVO = new RetrainVehicleBlockVO(param2);
@@ -22,7 +24,8 @@ package net.wg.gui.lobby.retrainCrewWindow
             return this.hasOwnProperty(param1);
         }
         
-        public function get vehicleBlockVO() : RetrainVehicleBlockVO {
+        public function get vehicleBlockVO() : RetrainVehicleBlockVO
+        {
             return this._vehicleBlockVO;
         }
     }

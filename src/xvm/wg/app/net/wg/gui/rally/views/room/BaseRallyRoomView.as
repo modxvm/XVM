@@ -17,7 +17,8 @@ package net.wg.gui.rally.views.room
     public class BaseRallyRoomView extends BaseRallyRoomViewMeta implements IBaseRallyRoomViewMeta, IChannelComponentHolder
     {
         
-        public function BaseRallyRoomView() {
+        public function BaseRallyRoomView()
+        {
             super();
         }
         
@@ -33,35 +34,40 @@ package net.wg.gui.rally.views.room
         
         private var _rallyData:IRallyVO;
         
-        public function as_setMembers(param1:Boolean, param2:Array) : void {
+        public function as_setMembers(param1:Boolean, param2:Array) : void
+        {
             if(this.rallyData)
             {
                 this.teamSection.updateMembers(param1,param2);
             }
         }
         
-        public function as_setMemberStatus(param1:uint, param2:uint) : void {
+        public function as_setMemberStatus(param1:uint, param2:uint) : void
+        {
             if(this.rallyData)
             {
                 this.teamSection.setMemberStatus(param1,param2);
             }
         }
         
-        public function as_setMemberOffline(param1:uint, param2:Boolean) : void {
+        public function as_setMemberOffline(param1:uint, param2:Boolean) : void
+        {
             if(this.rallyData)
             {
                 this.teamSection.setOfflineStatus(param1,param2);
             }
         }
         
-        public function as_setMemberVehicle(param1:uint, param2:uint, param3:Object) : void {
+        public function as_setMemberVehicle(param1:uint, param2:uint, param3:Object) : void
+        {
             if(this.rallyData)
             {
                 this.teamSection.setMemberVehicle(param1,param2,param3?new VehicleVO(param3):null);
             }
         }
         
-        public function as_setActionButtonState(param1:Object) : void {
+        public function as_setActionButtonState(param1:Object) : void
+        {
             if(param1)
             {
                 this._actionButtonData = new ActionButtonVO(param1);
@@ -69,7 +75,8 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        public function as_setComment(param1:String) : void {
+        public function as_setComment(param1:String) : void
+        {
             if(this.rallyData)
             {
                 this.rallyData.description = param1;
@@ -77,19 +84,23 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        public function as_getCandidatesDP() : Object {
+        public function as_getCandidatesDP() : Object
+        {
             return this.waitingListSection.getCandidatesDP();
         }
         
-        public function as_highlightSlots(param1:Array) : void {
+        public function as_highlightSlots(param1:Array) : void
+        {
             this.teamSection.highlightSlots(param1);
         }
         
-        public function as_setVehiclesTitle(param1:String) : void {
+        public function as_setVehiclesTitle(param1:String) : void
+        {
             this.teamSection.vehiclesLabel = param1;
         }
         
-        public function as_updateRally(param1:Object) : void {
+        public function as_updateRally(param1:Object) : void
+        {
             if(param1)
             {
                 this.rallyData = this.getRallyVO(param1);
@@ -98,19 +109,23 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        public function getChannelComponent() : ChannelComponent {
+        public function getChannelComponent() : ChannelComponent
+        {
             return this.chatSection.channelComponent;
         }
         
-        public function get rallyData() : IRallyVO {
+        public function get rallyData() : IRallyVO
+        {
             return this._rallyData;
         }
         
-        public function set rallyData(param1:IRallyVO) : void {
+        public function set rallyData(param1:IRallyVO) : void
+        {
             this._rallyData = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(RallyViewsEvent.ASSIGN_SLOT_REQUEST,this.onAssignPlaceRequest);
             addEventListener(RallyViewsEvent.LEAVE_SLOT_REQUEST,this.onRemoveRequest);
@@ -122,7 +137,8 @@ package net.wg.gui.rally.views.room
             addEventListener(RallyViewsEvent.SHOW_FAQ_WINDOW,this.onShowFAQWindowRequest);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(RallyInvalidationType.RALLY_DATA)) && (this.rallyData))
             {
@@ -144,7 +160,8 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(RallyViewsEvent.ASSIGN_SLOT_REQUEST,this.onAssignPlaceRequest);
             removeEventListener(RallyViewsEvent.LEAVE_SLOT_REQUEST,this.onRemoveRequest);
             removeEventListener(RallyViewsEvent.CHOOSE_VEHICLE,this.onChooseVehicleRequest);
@@ -181,20 +198,24 @@ package net.wg.gui.rally.views.room
             super.onDispose();
         }
         
-        protected function getRallyVO(param1:Object) : IRallyVO {
+        protected function getRallyVO(param1:Object) : IRallyVO
+        {
             return null;
         }
         
-        protected function getTitleStr() : String {
+        protected function getTitleStr() : String
+        {
             return null;
         }
         
-        protected function getDragDropDeligateController(param1:Array) : IDisposable {
+        protected function getDragDropDeligateController(param1:Array) : IDisposable
+        {
             var _loc2_:Class = App.utils.classFactory.getClass(Linkages.RALLY_DRAG_DROP_DELEGATE);
             return new RallyDragDropListDelegateController(Vector.<InteractiveObject>(param1),_loc2_,Linkages.CANDIDATE_LIST_ITEM_RENDERER_UI,onSlotsHighlihgtingNeedS,assignSlotRequestS,leaveSlotRequestS);
         }
         
-        protected function initializeDragDropSystem() : void {
+        protected function initializeDragDropSystem() : void
+        {
             var _loc1_:Array = null;
             if(this._dragDropListDelegateCtrlr == null && (this.rallyData.isCommander))
             {
@@ -203,35 +224,43 @@ package net.wg.gui.rally.views.room
             }
         }
         
-        protected function onAssignPlaceRequest(param1:RallyViewsEvent) : void {
+        protected function onAssignPlaceRequest(param1:RallyViewsEvent) : void
+        {
             assignSlotRequestS(param1.data,-1);
         }
         
-        protected function onRemoveRequest(param1:RallyViewsEvent) : void {
+        protected function onRemoveRequest(param1:RallyViewsEvent) : void
+        {
             leaveSlotRequestS(param1.data);
         }
         
-        protected function onChooseVehicleRequest(param1:RallyViewsEvent) : void {
+        protected function onChooseVehicleRequest(param1:RallyViewsEvent) : void
+        {
             chooseVehicleRequestS();
         }
         
-        protected function onInviteFriendRequest(param1:RallyViewsEvent) : void {
+        protected function onInviteFriendRequest(param1:RallyViewsEvent) : void
+        {
             inviteFriendRequestS();
         }
         
-        protected function onToggleReadyStateRequest(param1:RallyViewsEvent) : void {
+        protected function onToggleReadyStateRequest(param1:RallyViewsEvent) : void
+        {
             toggleReadyStateRequestS();
         }
         
-        protected function onIgnoreUserRequest(param1:RallyViewsEvent) : void {
+        protected function onIgnoreUserRequest(param1:RallyViewsEvent) : void
+        {
             ignoreUserRequestS(param1.data);
         }
         
-        protected function onEditRallyDescription(param1:RallyViewsEvent) : void {
+        protected function onEditRallyDescription(param1:RallyViewsEvent) : void
+        {
             editDescriptionRequestS(param1.data);
         }
         
-        protected function onShowFAQWindowRequest(param1:RallyViewsEvent) : void {
+        protected function onShowFAQWindowRequest(param1:RallyViewsEvent) : void
+        {
             showFAQWindowS();
         }
     }

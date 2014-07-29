@@ -14,7 +14,8 @@ package net.wg.gui.lobby.window
     public class ExchangeHeader extends UIComponent
     {
         
-        public function ExchangeHeader() {
+        public function ExchangeHeader()
+        {
             this.infoContainer = new Sprite();
             super();
         }
@@ -61,26 +62,30 @@ package net.wg.gui.lobby.window
         
         private var isLayoutChanged:Boolean;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.actionHitMc.removeEventListener(MouseEvent.MOUSE_OVER,this.onOverHandler);
             this.actionHitMc.removeEventListener(MouseEvent.MOUSE_OUT,this.onOutHandler);
             this.actionHitMc.removeEventListener(MouseEvent.MOUSE_DOWN,this.onPressHandler);
         }
         
-        public function setRates(param1:uint, param2:uint) : void {
+        public function setRates(param1:uint, param2:uint) : void
+        {
             this.actionRate = param2;
             this.rate = param1;
             this.isRatesDataChanged = true;
             invalidate();
         }
         
-        public function set rateLabelFunction(param1:Function) : void {
+        public function set rateLabelFunction(param1:Function) : void
+        {
             this._rateLabelFunction = param1;
             this.isApplyRates = true;
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.rateLabel.autoSize = TextFieldAutoSize.LEFT;
             this.rateLabel.text = App.utils.locale.makeString(MENU.EXCHANGE_RATE);
@@ -99,7 +104,8 @@ package net.wg.gui.lobby.window
             this.setChildIndex(this.actionHitMc,this.numChildren - 1);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             var _loc2_:* = NaN;
             super.draw();
@@ -143,11 +149,13 @@ package net.wg.gui.lobby.window
             }
         }
         
-        private function hideTooltip() : void {
+        private function hideTooltip() : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function showTooltip() : void {
+        private function showTooltip() : void
+        {
             var _loc4_:String = null;
             var _loc5_:String = null;
             var _loc6_:ILocale = null;
@@ -169,10 +177,9 @@ package net.wg.gui.lobby.window
                 _loc10_ = _loc5_ == IconsTypes.GOLD?_loc6_.gold(Math.abs(_loc2_)):_loc6_.integer(Math.abs(_loc2_));
                 _loc9_ = " 1" + _loc7_ + "= " + _loc9_ + " " + _loc8_;
                 _loc10_ = " 1" + _loc7_ + "= " + _loc10_ + " " + _loc8_;
-                _loc1_ = new ComplexTooltipHelper().addHeader(_loc6_.makeString(TOOLTIPS.ACTIONPRICE_EXCHANGE_HEADER,{})).addBody(_loc6_.makeString(TOOLTIPS.ACTIONPRICE_EXCHANGE_BODY,{
-                    "oldPrice":_loc10_,
-                    "newPrice":_loc9_
-                })).make();
+                _loc1_ = new ComplexTooltipHelper().addHeader(_loc6_.makeString(TOOLTIPS.ACTIONPRICE_EXCHANGE_HEADER,{})).addBody(_loc6_.makeString(TOOLTIPS.ACTIONPRICE_EXCHANGE_BODY,{"oldPrice":_loc10_,
+                "newPrice":_loc9_
+            })).make();
             if(_loc1_.length > 0)
             {
                 App.toolTipMgr.showComplex(_loc1_);
@@ -184,7 +191,8 @@ package net.wg.gui.lobby.window
         
     }
     
-    private function applyRateText() : void {
+    private function applyRateText() : void
+    {
         var _loc1_:ILocale = App.utils.locale;
         if(this._rateLabelFunction != null)
         {
@@ -197,15 +205,18 @@ package net.wg.gui.lobby.window
         this.rateTo.validateNow();
     }
     
-    private function onOverHandler(param1:MouseEvent) : void {
+    private function onOverHandler(param1:MouseEvent) : void
+    {
         this.showTooltip();
     }
     
-    private function onOutHandler(param1:MouseEvent) : void {
+    private function onOutHandler(param1:MouseEvent) : void
+    {
         this.hideTooltip();
     }
     
-    private function onPressHandler(param1:MouseEvent) : void {
+    private function onPressHandler(param1:MouseEvent) : void
+    {
         this.hideTooltip();
     }
 }

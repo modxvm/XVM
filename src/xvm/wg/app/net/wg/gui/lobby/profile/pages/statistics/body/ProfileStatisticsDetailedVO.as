@@ -6,7 +6,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class ProfileStatisticsDetailedVO extends DAAPIDataClass
     {
         
-        public function ProfileStatisticsDetailedVO(param1:Object) {
+        public function ProfileStatisticsDetailedVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -32,47 +33,58 @@ package net.wg.gui.lobby.profile.pages.statistics.body
         
         public var avgEnemiesSpotted:Number;
         
-        public function getFragsCountStr() : String {
+        public function getFragsCountStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.fragsCount);
         }
         
-        public function getAvgDamageDealtStr() : String {
+        public function getAvgDamageDealtStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.avgDamageDealt);
         }
         
-        public function getAvgDamageReceivedStr() : String {
+        public function getAvgDamageReceivedStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.avgDamageReceived);
         }
         
-        public function getDeathsCountStr() : String {
+        public function getDeathsCountStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.deathsCount);
         }
         
-        public function getFragsEfficiencyStr() : String {
+        public function getFragsEfficiencyStr() : String
+        {
             return ItemsUtils.formatFloatStr(this.fragsEfficiency);
         }
         
-        public function getDamageDealtStr() : String {
+        public function getDamageDealtStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.damageDealt);
         }
         
-        public function getDamageReceivedStr() : String {
+        public function getDamageReceivedStr() : String
+        {
             return ItemsUtils.formatIntegerStr(this.damageReceived);
         }
         
-        public function getDamageEfficiencyStr() : String {
+        public function getDamageEfficiencyStr() : String
+        {
             return ItemsUtils.formatFloatStr(this.damageEfficiency);
         }
         
-        public function getAvgFragsStr() : String {
+        public function getAvgFragsStr() : String
+        {
             return ItemsUtils.formatFloatStr(this.avgFrags);
         }
         
-        public function getMaxFragsStr() : String {
+        public function getMaxFragsStr() : String
+        {
             return ItemsUtils.formatFloatStr(this.maxFrags);
         }
         
-        public function getAvgEnemiesSpottedStr() : String {
+        public function getAvgEnemiesSpottedStr() : String
+        {
             return ItemsUtils.formatFloatStr(this.avgEnemiesSpotted);
         }
     }

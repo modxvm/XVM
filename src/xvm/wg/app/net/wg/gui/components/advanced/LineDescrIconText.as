@@ -11,14 +11,16 @@ package net.wg.gui.components.advanced
     public class LineDescrIconText extends LineIconText
     {
         
-        public function LineDescrIconText() {
+        public function LineDescrIconText()
+        {
             this.hitSprite = new Sprite();
             super();
         }
         
         public static var DESCRIPTION_TEXT_INVALID:String = "dInvalid";
         
-        private static function hideToolTip() : void {
+        private static function hideToolTip() : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -34,7 +36,8 @@ package net.wg.gui.components.advanced
         
         private var hitSprite:Sprite;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             var _loc1_:Graphics = this.hitSprite.graphics;
             _loc1_.beginFill(1,0);
@@ -44,11 +47,13 @@ package net.wg.gui.components.advanced
             this.hitArea = this.hitSprite;
         }
         
-        public function get description() : String {
+        public function get description() : String
+        {
             return this._description;
         }
         
-        public function set description(param1:String) : void {
+        public function set description(param1:String) : void
+        {
             if(this._description != param1)
             {
                 this._description = param1;
@@ -56,11 +61,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override public function get width() : Number {
+        override public function get width() : Number
+        {
             return this.textField.x + this.textField.width;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(DESCRIPTION_TEXT_INVALID))
             {
@@ -77,7 +84,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function applyText(param1:String) : void {
+        override protected function applyText(param1:String) : void
+        {
             if(this._myEnabled)
             {
                 gotoAndPlay("up");
@@ -92,33 +100,39 @@ package net.wg.gui.components.advanced
             invalidate(DESCRIPTION_TEXT_INVALID);
         }
         
-        protected function mouseRollOverHandler(param1:MouseEvent) : void {
+        protected function mouseRollOverHandler(param1:MouseEvent) : void
+        {
             this._isToolTipShowing = true;
             this.showToolTip(null);
         }
         
-        protected function mouseRollOutHandler(param1:MouseEvent) : void {
+        protected function mouseRollOutHandler(param1:MouseEvent) : void
+        {
             this._isToolTipShowing = false;
             hideToolTip();
         }
         
-        protected function showToolTip(param1:IToolTipParams) : void {
+        protected function showToolTip(param1:IToolTipParams) : void
+        {
             if(this._tooltip)
             {
                 App.toolTipMgr.showComplex(this._tooltip);
             }
         }
         
-        private function disposeHandlers() : void {
+        private function disposeHandlers() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
             removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
         }
         
-        public function get tooltip() : String {
+        public function get tooltip() : String
+        {
             return this._tooltip;
         }
         
-        public function set tooltip(param1:String) : void {
+        public function set tooltip(param1:String) : void
+        {
             this._tooltip = param1;
             this.disposeHandlers();
             if(this._isToolTipShowing)
@@ -133,7 +147,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(param1 != this._myEnabled)
             {
                 this._myEnabled = param1;
@@ -141,11 +156,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return this._myEnabled;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeHandlers();
             super.onDispose();
         }

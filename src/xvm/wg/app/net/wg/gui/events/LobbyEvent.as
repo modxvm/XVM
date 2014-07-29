@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class LobbyEvent extends Event
     {
         
-        public function LobbyEvent(param1:String) {
+        public function LobbyEvent(param1:String)
+        {
             super(param1,true,true);
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.events
         
         public static var UNREGISTER_DRAGGING:String = "unregisterDragging";
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new LobbyEvent(type);
         }
     }

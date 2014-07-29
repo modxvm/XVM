@@ -3,7 +3,8 @@ package flashx.textLayout.formats
     public final class TextAlign extends Object
     {
         
-        public function TextAlign() {
+        public function TextAlign()
+        {
             super();
         }
         

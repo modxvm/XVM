@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class FightButtonMeta extends BaseDAAPIComponent
     {
         
-        public function FightButtonMeta() {
+        public function FightButtonMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var demoClick:Function = null;
         
-        public function fightClickS(param1:Number, param2:String) : void {
+        public function fightClickS(param1:Number, param2:String) : void
+        {
             App.utils.asserter.assertNotNull(this.fightClick,"fightClick" + Errors.CANT_NULL);
             this.fightClick(param1,param2);
         }
         
-        public function demoClickS() : void {
+        public function demoClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.demoClick,"demoClick" + Errors.CANT_NULL);
             this.demoClick();
         }

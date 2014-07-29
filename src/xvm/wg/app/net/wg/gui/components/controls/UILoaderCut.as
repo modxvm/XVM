@@ -16,7 +16,8 @@ package net.wg.gui.components.controls
     public class UILoaderCut extends Sprite implements IDisposable
     {
         
-        public function UILoaderCut() {
+        public function UILoaderCut()
+        {
             super();
             scaleX = scaleY = 1;
             this.background.visible = false;
@@ -32,19 +33,23 @@ package net.wg.gui.components.controls
         
         private var _cutRect:Rectangle;
         
-        public function get cutRect() : Object {
+        public function get cutRect() : Object
+        {
             return this._cutRect;
         }
         
-        public function set cutRect(param1:Object) : void {
+        public function set cutRect(param1:Object) : void
+        {
             this._cutRect = new Rectangle(param1.x,param1.y,param1.width,param1.height);
         }
         
-        public function get source() : String {
+        public function get source() : String
+        {
             return this._source;
         }
         
-        public function set source(param1:String) : void {
+        public function set source(param1:String) : void
+        {
             if(param1 == null || param1 == "" || param1 == this._source)
             {
                 return;
@@ -58,7 +63,8 @@ package net.wg.gui.components.controls
             this.loader.load(_loc2_,_loc3_);
         }
         
-        private function completeHandler(param1:Event) : void {
+        private function completeHandler(param1:Event) : void
+        {
             graphics.clear();
             var _loc2_:Matrix = new Matrix(1,0,0,1,-this._cutRect.x,-this._cutRect.y);
             graphics.beginBitmapFill(Bitmap(this.loader.content).bitmapData,_loc2_,false);
@@ -73,12 +79,14 @@ package net.wg.gui.components.controls
             this.loader = null;
         }
         
-        private function onIOError(param1:IOErrorEvent) : void {
+        private function onIOError(param1:IOErrorEvent) : void
+        {
             this.loader.unloadAndStop(true);
             this.source = ERROR_URL;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._source = null;
             this._cutRect = null;
             if(this.loader)

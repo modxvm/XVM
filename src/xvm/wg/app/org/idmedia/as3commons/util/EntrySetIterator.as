@@ -6,7 +6,8 @@ package org.idmedia.as3commons.util
     public class EntrySetIterator extends Object implements Iterator
     {
         
-        public function EntrySetIterator(param1:EntrySet = null) {
+        public function EntrySetIterator(param1:EntrySet = null)
+        {
             super();
             this.s = param1;
         }
@@ -17,11 +18,13 @@ package org.idmedia.as3commons.util
         
         private var s:EntrySet = null;
         
-        public function hasNext() : Boolean {
+        public function hasNext() : Boolean
+        {
             return this.cursor < this.s.size();
         }
         
-        public function next() : * {
+        public function next() : *
+        {
             var _loc1_:int = this.s.size();
             this.current = this.s.get(this.cursor++) as Entry;
             if(this.current == null)
@@ -34,7 +37,8 @@ package org.idmedia.as3commons.util
             }
         }
         
-        public function remove() : void {
+        public function remove() : void
+        {
             if(this.current == null)
             {
                 throw new IllegalStateException();

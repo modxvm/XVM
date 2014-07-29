@@ -3,7 +3,8 @@ package fl.motion
     public class ColorMatrix extends DynamicMatrix
     {
         
-        public function ColorMatrix() {
+        public function ColorMatrix()
+        {
             super(5,5);
             LoadIdentity();
         }
@@ -14,7 +15,8 @@ package fl.motion
         
         protected static var LUMINANCEB:Number = 0.082;
         
-        public function SetBrightnessMatrix(param1:Number) : void {
+        public function SetBrightnessMatrix(param1:Number) : void
+        {
             if(!m_matrix)
             {
                 return;
@@ -24,7 +26,8 @@ package fl.motion
             m_matrix[2][4] = param1;
         }
         
-        public function SetContrastMatrix(param1:Number) : void {
+        public function SetContrastMatrix(param1:Number) : void
+        {
             if(!m_matrix)
             {
                 return;
@@ -39,7 +42,8 @@ package fl.motion
             m_matrix[2][4] = _loc2_;
         }
         
-        public function SetSaturationMatrix(param1:Number) : void {
+        public function SetSaturationMatrix(param1:Number) : void
+        {
             if(!m_matrix)
             {
                 return;
@@ -59,7 +63,8 @@ package fl.motion
             m_matrix[2][2] = _loc3_ + param1;
         }
         
-        public function SetHueMatrix(param1:Number) : void {
+        public function SetHueMatrix(param1:Number) : void
+        {
             var _loc11_:* = 0;
             if(!m_matrix)
             {
@@ -118,7 +123,8 @@ package fl.motion
             }
         }
         
-        public function GetFlatArray() : Array {
+        public function GetFlatArray() : Array
+        {
             var _loc4_:* = 0;
             if(!m_matrix)
             {
@@ -145,7 +151,8 @@ package fl.motion
 class XFormData extends Object
 {
     
-    function XFormData() {
+    function XFormData()
+    {
         super();
     }
     

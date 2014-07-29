@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class FortFixedPlayersVO extends DAAPIDataClass
     {
         
-        public function FortFixedPlayersVO(param1:Object) {
+        public function FortFixedPlayersVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -35,7 +36,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var generalTooltipData:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Object = null;
             var _loc4_:ClanListRendererVO = null;
             if(param1 == ROSTERS)

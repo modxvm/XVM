@@ -1,9 +1,10 @@
-package 
+package
 {
     public class RES_FORT extends Object
     {
         
-        public function RES_FORT() {
+        public function RES_FORT()
+        {
             super();
         }
         

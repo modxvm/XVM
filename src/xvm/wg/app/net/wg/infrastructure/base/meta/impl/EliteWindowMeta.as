@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class EliteWindowMeta extends AbstractWindowView
     {
         
-        public function EliteWindowMeta() {
+        public function EliteWindowMeta()
+        {
             super();
         }
     }

@@ -10,7 +10,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class BuildingThumbnail extends MovieClip implements IDisposable
     {
         
-        public function BuildingThumbnail() {
+        public function BuildingThumbnail()
+        {
             super();
             this.init();
         }
@@ -21,11 +22,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _ttBody:String;
         
-        public function get model() : BuildingVO {
+        public function get model() : BuildingVO
+        {
             return this._model;
         }
         
-        public function set model(param1:BuildingVO) : void {
+        public function set model(param1:BuildingVO) : void
+        {
             this._model = param1;
             if((this._model) && (this._model.toolTipData) && this._model.toolTipData.length > 0)
             {
@@ -40,12 +43,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.updateView();
         }
         
-        private function init() : void {
+        private function init() : void
+        {
             addEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
             addEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.onControlOver);
             removeEventListener(MouseEvent.ROLL_OUT,this.onControlOut);
             if(this._model)
@@ -55,7 +60,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        private function updateView() : void {
+        private function updateView() : void
+        {
             if(this._model)
             {
                 if(this._model.isInFoundationState)
@@ -69,11 +75,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        private function onControlOut(param1:MouseEvent) : void {
+        private function onControlOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onControlOver(param1:MouseEvent) : void {
+        private function onControlOver(param1:MouseEvent) : void
+        {
             var _loc2_:String = new ComplexTooltipHelper().addHeader(this._ttHeader).addBody(this._ttBody).make();
             if(_loc2_.length > 0)
             {

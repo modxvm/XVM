@@ -15,7 +15,8 @@ package net.wg.gui.components.controls
     public class TileList extends scaleform.clik.controls.TileList
     {
         
-        public function TileList() {
+        public function TileList()
+        {
             super();
             componentInspectorSetting = true;
         }
@@ -32,7 +33,8 @@ package net.wg.gui.components.controls
         
         public var paddingRight:Number = 0;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.scrollBarPadding == null)
             {
@@ -40,14 +42,11 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function populateData(param1:Array) : void {
+        override protected function populateData(param1:Array) : void
+        {
             var _loc5_:IListItemRenderer = null;
             var _loc6_:uint = 0;
             var _loc7_:ListData = null;
-            if(_baseDisposed)
-            {
-                return;
-            }
             var _loc2_:uint = param1.length;
             var _loc3_:uint = _renderers.length;
             var _loc4_:uint = 0;
@@ -84,7 +83,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc6_:IListItemRenderer = null;
             var _loc1_:uint = _renderers.length;
             var _loc2_:Number = rowHeight;
@@ -113,16 +113,19 @@ package net.wg.gui.components.controls
             this.drawScrollBar();
         }
         
-        public function get scrollBarPadding() : Padding {
+        public function get scrollBarPadding() : Padding
+        {
             return this._scrollBarPadding;
         }
         
-        public function set scrollBarPadding(param1:Padding) : void {
+        public function set scrollBarPadding(param1:Padding) : void
+        {
             this._scrollBarPadding = param1;
             invalidateSize();
         }
         
-        public function set inspectableScrollBarPadding(param1:Object) : void {
+        public function set inspectableScrollBarPadding(param1:Object) : void
+        {
             if(!componentInspectorSetting)
             {
                 return;
@@ -130,7 +133,8 @@ package net.wg.gui.components.controls
             this.scrollBarPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
         }
         
-        override protected function drawScrollBar() : void {
+        override protected function drawScrollBar() : void
+        {
             var _loc1_:ScrollIndicator = null;
             if(!_autoScrollBar)
             {
@@ -155,15 +159,18 @@ package net.wg.gui.components.controls
             _scrollBar.validateNow();
         }
         
-        override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
+        override protected function cleanUpRenderer(param1:IListItemRenderer) : void
+        {
             super.cleanUpRenderer(param1);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:uint = 0;
             var _loc2_:uint = 0;
             var _loc3_:IListItemRenderer = null;
@@ -249,7 +256,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
+        override protected function calculateRendererTotal(param1:Number, param2:Number) : uint
+        {
             super.calculateRendererTotal(param1,param2);
             _totalRows = availableHeight / (rowHeight + this.paddingBottom) >> 0;
             _totalColumns = availableWidth / (columnWidth + this.paddingRight) >> 0;

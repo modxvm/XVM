@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class IconsTypes extends Object
     {
         
-        public function IconsTypes() {
+        public function IconsTypes()
+        {
             super();
         }
         
@@ -53,6 +54,6 @@ package net.wg.data.constants
         
         public static var DEFRES:String = "defRes";
         
-        public static var ALLOW_ICONS:Array;
+        public static var ALLOW_ICONS:Array = [EMPTY,CREDITS,GOLD,GOLD_DISCOUNT,XP,ELITE_XP,ELITE,ARROW_DOWN,ARROW_UP,ARROW_DOWN_DISABLED,ELITE_TANK_XP,FREE_XP,TANK_DAILYXPFACTOR,TANK_UNLOCK_PRICE,DOUBLE_XP_FACTOR,ACTION_XP_FACTOR,VCOIN,CLASS1,CLASS2,CLASS3,CLASS4,XP_PRICE,DEFRES];
     }
 }

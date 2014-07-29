@@ -24,7 +24,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
     public class FortTransportConfirmationWindow extends FortTransportConfirmationWindowMeta implements IFortTransportConfirmationWindowMeta
     {
         
-        public function FortTransportConfirmationWindow() {
+        public function FortTransportConfirmationWindow()
+        {
             super();
             isModal = true;
             canDrag = false;
@@ -66,15 +67,18 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private var _initialSourceBaseVO:BuildingBaseVO = null;
         
-        public function as_setMaxTransportingSize(param1:String) : void {
+        public function as_setMaxTransportingSize(param1:String) : void
+        {
             this.maxTransportingSizeLabel.htmlText = param1;
         }
         
-        public function as_setFooterText(param1:String) : void {
+        public function as_setFooterText(param1:String) : void
+        {
             this.footerFadingText.htmlText = param1;
         }
         
-        public function as_enableForFirstTransporting(param1:Boolean) : void {
+        public function as_enableForFirstTransporting(param1:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this._initialSourceBaseVO,"_initialSourceBaseVO" + Errors.CANT_NULL);
             App.utils.asserter.assertNotNull(this._initialTargetBaseVO,"_initialTargetBaseVO" + Errors.CANT_NULL);
             this.maxTransportingSizeLabel.visible = !param1;
@@ -92,7 +96,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             invalidate(FortInvalidationType.INVALID_ENABLING);
         }
         
-        private function updateFocus() : void {
+        private function updateFocus() : void
+        {
             if(!this.resourceNumericStepper.enabled)
             {
                 setFocus(this.transportButton);
@@ -103,7 +108,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        private function updateTargetData(param1:Number) : void {
+        private function updateTargetData(param1:Number) : void
+        {
             var _loc4_:* = NaN;
             var _loc2_:BuildingBaseVO = new BuildingBaseVO(this._initialTargetBaseVO.toHash());
             var _loc3_:Number = Math.min(_loc2_.maxHpValue - _loc2_.hpVal,param1);
@@ -118,18 +124,21 @@ package net.wg.gui.lobby.fortifications.windows.impl
             _loc2_.dispose();
         }
         
-        private function updateSourceData(param1:Number) : void {
+        private function updateSourceData(param1:Number) : void
+        {
             var _loc2_:BuildingBaseVO = new BuildingBaseVO(this._initialSourceBaseVO.toHash());
             _loc2_.defResVal = _loc2_.defResVal - param1;
             this.sourceIndicator.applyVOData(_loc2_);
             _loc2_.dispose();
         }
         
-        override protected function onClosingApproved() : void {
+        override protected function onClosingApproved() : void
+        {
             App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_CLOSE,0);
         }
         
-        override protected function setData(param1:TransportingVO) : void {
+        override protected function setData(param1:TransportingVO) : void
+        {
             this.resourceNumericStepper.maximum = param1.maxTransportingSize;
             this.sourceIndicator.applyVOData(param1.sourceBaseVO);
             this._initialSourceBaseVO = param1.sourceBaseVO;
@@ -141,14 +150,16 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.resourceNumericStepper.stepSize = param1.defResTep;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.title = FORTIFICATIONS.FORTTRANSPORTCONFIRMATIONWINDOW_TITLE;
             window.useBottomBtns = true;
             App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_OPEN,0);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.footerFadingText.alpha = 0;
             this.separator.mouseEnabled = false;
@@ -163,17 +174,20 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.getTweenAnimator().addFadeInAnim(this.targetIndicator.labels,null);
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.cancelButton);
             this.updateFocus();
         }
         
-        private function getTweenAnimator() : ITweenAnimator {
+        private function getTweenAnimator() : ITweenAnimator
+        {
             return TweenAnimator.instance;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.getTweenAnimator().removeAnims(this.footerFadingText);
             this.getTweenAnimator().removeAnims(this.sourceIndicator.labels);
             this.getTweenAnimator().removeAnims(this.targetIndicator.labels);
@@ -208,7 +222,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             super.draw();
             if(isInvalid(FortInvalidationType.INVALID_ENABLING))
@@ -227,7 +242,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        private function onResourceNumericStepperIndexChangeHandler(param1:IndexEvent) : void {
+        private function onResourceNumericStepperIndexChangeHandler(param1:IndexEvent) : void
+        {
             if(this.resourceNumericStepper.value == this.resourceNumericStepper.maximum)
             {
                 onTransportingLimitS();
@@ -237,12 +253,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
             invalidate(FortInvalidationType.INVALID_ENABLING);
         }
         
-        private function onTransportingButtonClickHandler(param1:ButtonEvent) : void {
+        private function onTransportingButtonClickHandler(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,0);
             onTransportingS(this.resourceNumericStepper.value);
         }
         
-        private function onCancelButtonClickHandler(param1:ButtonEvent) : void {
+        private function onCancelButtonClickHandler(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,0);
             onCancelS();
         }

@@ -10,7 +10,8 @@ package net.wg.gui.components.advanced
     public class DashLineTextItem extends UIComponent
     {
         
-        public function DashLineTextItem() {
+        public function DashLineTextItem()
+        {
             super();
         }
         
@@ -20,7 +21,8 @@ package net.wg.gui.components.advanced
         
         public static var dashLinePadding:uint = 1;
         
-        private static function hideToolTip() : void {
+        private static function hideToolTip() : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -40,15 +42,18 @@ package net.wg.gui.components.advanced
         
         private var _toolTipParams:IToolTipParams;
         
-        protected function mouseRollOutHandler(param1:MouseEvent) : void {
+        protected function mouseRollOutHandler(param1:MouseEvent) : void
+        {
             hideToolTip();
         }
         
-        protected function mouseRollOverHandler(param1:MouseEvent) : void {
+        protected function mouseRollOverHandler(param1:MouseEvent) : void
+        {
             this.showToolTip(null);
         }
         
-        protected function showToolTip(param1:IToolTipParams) : void {
+        protected function showToolTip(param1:IToolTipParams) : void
+        {
             if(this._tooltip)
             {
                 if(this._toolTipParams)
@@ -62,11 +67,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function set toolTipParams(param1:IToolTipParams) : void {
+        public function set toolTipParams(param1:IToolTipParams) : void
+        {
             this._toolTipParams = param1;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(VALUE_INV))
             {
@@ -96,17 +103,20 @@ package net.wg.gui.components.advanced
             }
         }
         
-        protected function applySizeChanges() : void {
+        protected function applySizeChanges() : void
+        {
             this.dashLine.width = Math.round(_width - this.labelTextField.width - this.valueTextField.width - dashLinePadding * 2);
             this.dashLine.x = Math.round(this.labelTextField.width + dashLinePadding);
             this.valueTextField.x = Math.round(_width - this.valueTextField.width);
         }
         
-        public function get label() : String {
+        public function get label() : String
+        {
             return this._label;
         }
         
-        public function set label(param1:String) : void {
+        public function set label(param1:String) : void
+        {
             if(this._label != param1)
             {
                 this._label = param1;
@@ -114,11 +124,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get value() : String {
+        public function get value() : String
+        {
             return this._value;
         }
         
-        public function set value(param1:String) : void {
+        public function set value(param1:String) : void
+        {
             if(this._value != param1)
             {
                 this._value = param1;
@@ -126,11 +138,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get tooltip() : String {
+        public function get tooltip() : String
+        {
             return this._tooltip;
         }
         
-        public function set tooltip(param1:String) : void {
+        public function set tooltip(param1:String) : void
+        {
             this._tooltip = param1;
             this.disposeListeners();
             if(this._tooltip)
@@ -140,12 +154,14 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function disposeListeners() : void {
+        private function disposeListeners() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler,false);
             removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler,false);
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(param1 != this._myEnabled)
             {
                 this._myEnabled = param1;
@@ -154,11 +170,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return this._myEnabled;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.dashLine.dispose();
             this.dashLine = null;
             this.disposeListeners();

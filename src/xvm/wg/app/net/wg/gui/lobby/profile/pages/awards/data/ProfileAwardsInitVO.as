@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.awards.data
     public class ProfileAwardsInitVO extends DAAPIDataClass
     {
         
-        public function ProfileAwardsInitVO(param1:Object) {
+        public function ProfileAwardsInitVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.lobby.profile.pages.awards.data
         
         public var achievementFilterVO:AchievementFilterVO;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "achievementFilter")
             {
                 this.achievementFilterVO = new AchievementFilterVO(param2);

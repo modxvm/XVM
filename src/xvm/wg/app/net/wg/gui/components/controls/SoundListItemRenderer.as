@@ -13,7 +13,8 @@ package net.wg.gui.components.controls
     public class SoundListItemRenderer extends ListItemRenderer implements ISoundable
     {
         
-        public function SoundListItemRenderer() {
+        public function SoundListItemRenderer()
+        {
             super();
         }
         
@@ -23,22 +24,26 @@ package net.wg.gui.components.controls
         
         private var _useRightButton:Boolean = false;
         
-        public function get soundType() : String {
+        public function get soundType() : String
+        {
             return this._soundType;
         }
         
-        public function set soundType(param1:String) : void {
+        public function set soundType(param1:String) : void
+        {
             if((param1) && !(param1 == this._soundType))
             {
                 this._soundType = param1;
             }
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             buttonMode = true;
             if(App.soundMgr)
@@ -47,27 +52,33 @@ package net.wg.gui.components.controls
             }
         }
         
-        public final function getSoundType() : String {
+        public final function getSoundType() : String
+        {
             return this.soundType;
         }
         
-        public final function getSoundId() : String {
+        public final function getSoundId() : String
+        {
             return this.soundId;
         }
         
-        public final function getStateOverSnd() : String {
+        public final function getStateOverSnd() : String
+        {
             return SoundManagerStates.SND_OVER;
         }
         
-        public final function getStateOutSnd() : String {
+        public final function getStateOutSnd() : String
+        {
             return SoundManagerStates.SND_OUT;
         }
         
-        public final function getStatePressSnd() : String {
+        public final function getStatePressSnd() : String
+        {
             return SoundManagerStates.SND_PRESS;
         }
         
-        public function set useRightButton(param1:Boolean) : void {
+        public function set useRightButton(param1:Boolean) : void
+        {
             if(this._useRightButton == param1)
             {
                 return;
@@ -75,11 +86,13 @@ package net.wg.gui.components.controls
             this._useRightButton = param1;
         }
         
-        public function get useRightButton() : Boolean {
+        public function get useRightButton() : Boolean
+        {
             return this._useRightButton;
         }
         
-        override protected function handleMousePress(param1:MouseEvent) : void {
+        override protected function handleMousePress(param1:MouseEvent) : void
+        {
             if(this._useRightButton)
             {
                 this.handleMousePressEx(param1);
@@ -90,7 +103,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function handleMouseRelease(param1:MouseEvent) : void {
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
             if(this._useRightButton)
             {
                 this.handleMouseReleaseEx(param1);
@@ -101,7 +115,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function handleReleaseOutside(param1:MouseEvent) : void {
+        override protected function handleReleaseOutside(param1:MouseEvent) : void
+        {
             if(this._useRightButton)
             {
                 this.handleReleaseOutsideEx(param1);
@@ -112,7 +127,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function handleMousePressEx(param1:MouseEvent) : void {
+        protected function handleMousePressEx(param1:MouseEvent) : void
+        {
             var _loc5_:ButtonEvent = null;
             var _loc2_:MouseEventEx = param1 as MouseEventEx;
             var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
@@ -136,7 +152,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function handleMouseReleaseEx(param1:MouseEvent) : void {
+        protected function handleMouseReleaseEx(param1:MouseEvent) : void
+        {
             var _loc5_:ButtonEvent = null;
             _autoRepeatEvent = null;
             if(!enabled)
@@ -168,7 +185,8 @@ package net.wg.gui.components.controls
             _isRepeating = false;
         }
         
-        protected function handleReleaseOutsideEx(param1:MouseEvent) : void {
+        protected function handleReleaseOutsideEx(param1:MouseEvent) : void
+        {
             _autoRepeatEvent = null;
             if(contains(param1.target as DisplayObject))
             {
@@ -197,7 +215,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(App.soundMgr != null)
             {
                 App.soundMgr.removeSoundHdlrs(this);

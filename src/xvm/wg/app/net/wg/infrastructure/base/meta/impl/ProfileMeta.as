@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class ProfileMeta extends AbstractView
     {
         
-        public function ProfileMeta() {
+        public function ProfileMeta()
+        {
             super();
         }
         
         public var onCloseProfile:Function = null;
         
-        public function onCloseProfileS() : void {
+        public function onCloseProfileS() : void
+        {
             App.utils.asserter.assertNotNull(this.onCloseProfile,"onCloseProfile" + Errors.CANT_NULL);
             this.onCloseProfile();
         }

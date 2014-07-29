@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips.VO
     public class EquipmentParamVO extends DAAPIDataClass
     {
         
-        public function EquipmentParamVO(param1:Object) {
+        public function EquipmentParamVO(param1:Object)
+        {
             super(param1);
         }
         

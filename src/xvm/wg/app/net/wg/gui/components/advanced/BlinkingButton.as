@@ -5,26 +5,31 @@ package net.wg.gui.components.advanced
     public class BlinkingButton extends IconButton
     {
         
-        public function BlinkingButton() {
+        public function BlinkingButton()
+        {
             super();
         }
         
         private var _blinking:Boolean;
         
-        public function get blinking() : Boolean {
+        public function get blinking() : Boolean
+        {
             return this._blinking;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             setState("up");
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        public function set blinking(param1:Boolean) : void {
+        public function set blinking(param1:Boolean) : void
+        {
             if(this._blinking == param1)
             {
                 return;
@@ -33,7 +38,8 @@ package net.wg.gui.components.advanced
             setState(state);
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             return this._blinking?Vector.<String>(["blinking_",""]):Vector.<String>([""]);
         }
     }

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.fortifications.data.buildingProcess
     public class BuildingProcessInfoVO extends DAAPIDataClass
     {
         
-        public function BuildingProcessInfoVO(param1:Object) {
+        public function BuildingProcessInfoVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -32,7 +33,8 @@ package net.wg.gui.lobby.fortifications.data.buildingProcess
         
         public var statusIconTooltip:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == ORDER_INFO)
             {
                 this.orderInfo = new OrderInfoVO(param2);
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.fortifications.data.buildingProcess
             return super.onDataWrite(param1,param2);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.orderInfo)
             {
                 this.orderInfo.dispose();

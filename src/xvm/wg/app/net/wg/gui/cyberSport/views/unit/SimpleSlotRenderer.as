@@ -7,7 +7,8 @@ package net.wg.gui.cyberSport.views.unit
     public class SimpleSlotRenderer extends RallySimpleSlotRenderer
     {
         
-        public function SimpleSlotRenderer() {
+        public function SimpleSlotRenderer()
+        {
             super();
         }
         

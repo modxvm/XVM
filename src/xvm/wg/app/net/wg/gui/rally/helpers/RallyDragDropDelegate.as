@@ -12,7 +12,8 @@ package net.wg.gui.rally.helpers
     public class RallyDragDropDelegate extends DropListDelegate
     {
         
-        public function RallyDragDropDelegate(param1:InteractiveObject, param2:String) {
+        public function RallyDragDropDelegate(param1:InteractiveObject, param2:String)
+        {
             super(param1,param2);
             this.id = Math.round(Math.random() * 100);
         }
@@ -29,7 +30,8 @@ package net.wg.gui.rally.helpers
         
         private var id:Number = 0;
         
-        override public function onStartDrop(param1:InteractiveObject, param2:InteractiveObject, param3:Number, param4:Number) : Boolean {
+        override public function onStartDrop(param1:InteractiveObject, param2:InteractiveObject, param3:Number, param4:Number) : Boolean
+        {
             var _loc6_:IUpdatable = null;
             var _loc5_:* = !(IDropItem(param2).data == null);
             if(_loc5_)
@@ -53,7 +55,8 @@ package net.wg.gui.rally.helpers
             return _loc5_;
         }
         
-        override public function onBeforeDrop(param1:InteractiveObject, param2:InteractiveObject) : Boolean {
+        override public function onBeforeDrop(param1:InteractiveObject, param2:InteractiveObject) : Boolean
+        {
             var _loc3_:IDropItem = param2 as IDropItem;
             if(_loc3_)
             {
@@ -68,10 +71,12 @@ package net.wg.gui.rally.helpers
             return false;
         }
         
-        override public function onEndDrop(param1:InteractiveObject, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void {
+        override public function onEndDrop(param1:InteractiveObject, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void
+        {
             var _loc7_:* = NaN;
             var _loc8_:* = false;
             super.onEndDrop(param1,param2,param3,param4);
+            trace(param1,param2,param3,param4.parent,param4);
             App.utils.asserter.assertNotNull(s_lastFreeSlots,"_lastFreeSlots" + Errors.CANT_NULL);
             var _loc5_:IDropItem = IDropItem(param3);
             var _loc6_:Number = _loc5_.data?_loc5_.data.dbID:this._playerID;
@@ -94,14 +99,16 @@ package net.wg.gui.rally.helpers
             
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._highlightingHandler = null;
             this._onEndDropHandler = null;
             this._leaveSlotHandler = null;
             super.onDispose();
         }
         
-        public function setHandlers(param1:Function, param2:Function, param3:Function) : void {
+        public function setHandlers(param1:Function, param2:Function, param3:Function) : void
+        {
             this._highlightingHandler = param1;
             this._onEndDropHandler = param2;
             this._leaveSlotHandler = param3;

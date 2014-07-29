@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class VehicleSelectorPopupMeta extends AbstractWindowView
     {
         
-        public function VehicleSelectorPopupMeta() {
+        public function VehicleSelectorPopupMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onSelectVehicles:Function = null;
         
-        public function onFiltersUpdateS(param1:int, param2:String, param3:Boolean, param4:int, param5:Boolean) : void {
+        public function onFiltersUpdateS(param1:int, param2:String, param3:Boolean, param4:int, param5:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.onFiltersUpdate,"onFiltersUpdate" + Errors.CANT_NULL);
             this.onFiltersUpdate(param1,param2,param3,param4,param5);
         }
         
-        public function onSelectVehiclesS(param1:Array) : void {
+        public function onSelectVehiclesS(param1:Array) : void
+        {
             App.utils.asserter.assertNotNull(this.onSelectVehicles,"onSelectVehicles" + Errors.CANT_NULL);
             this.onSelectVehicles(param1);
         }

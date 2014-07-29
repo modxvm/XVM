@@ -30,7 +30,8 @@ package net.wg.gui.login.impl
     public class LoginPage extends LoginPageMeta implements ILoginPageMeta
     {
         
-        public function LoginPage() {
+        public function LoginPage()
+        {
             super();
         }
         
@@ -38,7 +39,7 @@ package net.wg.gui.login.impl
         
         private static var FREE_SPACE_BORDER_FACTOR:Number = 0.18;
         
-        private static var SPARK_ZONE:Rectangle;
+        private static var SPARK_ZONE:Rectangle = new Rectangle(100,0,-200,-100);
         
         private static var SPARK_QUANTITY:uint = 150;
         
@@ -74,7 +75,10 @@ package net.wg.gui.login.impl
         
         private var focusInited:Boolean = false;
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        private var _isInputEnabled:Boolean = true;
+        
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             this.updateContent();
             if(this._sparksManager)
             {
@@ -82,35 +86,42 @@ package net.wg.gui.login.impl
             }
         }
         
-        override protected function onSetModalFocus(param1:InteractiveObject) : void {
+        override protected function onSetModalFocus(param1:InteractiveObject) : void
+        {
             super.onSetModalFocus(param1);
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             this.initFocus();
         }
         
-        public function as_setDefaultValues(param1:String, param2:String, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void {
+        public function as_setDefaultValues(param1:String, param2:String, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void
+        {
             this.form.setDefaultValues(param1,param2,param3,param4,param5,param6);
         }
         
-        public function as_setErrorMessage(param1:String, param2:int) : void {
+        public function as_setErrorMessage(param1:String, param2:int) : void
+        {
             this.setErrorMessage(param1,param2);
         }
         
-        public function as_setServersList(param1:Array, param2:int) : void {
+        public function as_setServersList(param1:Array, param2:int) : void
+        {
             assertNotNull(param1);
             assert(param2 >= -1,"selectedIdx must be greater then -2");
             this.form.setServersList(param1,param2);
         }
         
-        public function as_setVersion(param1:String) : void {
+        public function as_setVersion(param1:String) : void
+        {
             assertNotNull(param1);
             this.version.text = param1;
         }
         
-        public function as_showWallpaper(param1:Boolean, param2:String) : void {
+        public function as_showWallpaper(param1:Boolean, param2:String) : void
+        {
             visible = false;
             this.bg_image.source = param2;
             this.useWallpaper = param1;
@@ -126,37 +137,45 @@ package net.wg.gui.login.impl
             }
         }
         
-        public function as_setCopyright(param1:String, param2:String) : void {
+        public function as_setCopyright(param1:String, param2:String) : void
+        {
             this.copyright.updateLabel(param1,param2);
             this.updateContent();
         }
         
-        public function as_setCapsLockState(param1:Boolean) : void {
+        public function as_setCapsLockState(param1:Boolean) : void
+        {
             this.form.setCapsLockState(param1);
         }
         
-        public function as_setKeyboardLang(param1:String) : void {
+        public function as_setKeyboardLang(param1:String) : void
+        {
             this.form.setKeyboardLang(param1);
         }
         
-        public function as_cancelLoginQueue() : void {
+        public function as_cancelLoginQueue() : void
+        {
             DebugUtils.LOG_DEBUG("as_cancelLoginQueue");
         }
         
-        public function as_doAutoLogin() : void {
+        public function as_doAutoLogin() : void
+        {
             DebugUtils.LOG_DEBUG("as_doAutoLogin");
             this.submit();
         }
         
-        public function as_enable(param1:Boolean) : void {
+        public function as_enable(param1:Boolean) : void
+        {
             this.enableInputs(param1);
         }
         
-        override protected function allowHandleInput() : Boolean {
+        override protected function allowHandleInput() : Boolean
+        {
             return false;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.bottomLogos = this.copyright.logos as BaseLogoView;
             this.rssNewsFeed.addEventListener(RssItemEvent.ITEM_SIZE_INVALID,this.rssSizeInvalid);
@@ -175,19 +194,23 @@ package net.wg.gui.login.impl
             this.createSparks();
         }
         
-        private function toLegalOpen(param1:CopyrightEvent) : void {
+        private function toLegalOpen(param1:CopyrightEvent) : void
+        {
             showLegalS();
         }
         
-        private function rssSizeInvalid(param1:RssItemEvent) : void {
+        private function rssSizeInvalid(param1:RssItemEvent) : void
+        {
             this.updateRssPositions();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             registerComponent(this.rssNewsFeed,Aliases.RSS_NEWS_FEED);
             this.initLoginForm();
@@ -195,7 +218,8 @@ package net.wg.gui.login.impl
             this.keyMappings = App.utils.commons.createMap([Keyboard.ESCAPE,this.onEscapeKeyPress,Keyboard.ENTER,this.onEnterKeyPress]);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.bg_image.removeEventListener(UILoaderEvent.COMPLETE,this.onLoadingImageCompleteHandler);
             this.bg_image.dispose();
             this.bg_image = null;
@@ -225,12 +249,14 @@ package net.wg.gui.login.impl
             super.onDispose();
         }
         
-        private function setErrorMessage(param1:String, param2:int) : void {
+        private function setErrorMessage(param1:String, param2:int) : void
+        {
             this.form.setErrorMessage(param1,param2);
             this.initFocus();
         }
         
-        private function disposeLoginForm() : void {
+        private function disposeLoginForm() : void
+        {
             this.form.submit.removeEventListener(ButtonEvent.CLICK,this.onSubmitButtonClick);
             this.form.removeChangeHandler(this.onChange);
             this.form.removeEventListener(LoginEvent.TOKEN_RESET,this.onNeedTokenReset);
@@ -244,7 +270,8 @@ package net.wg.gui.login.impl
             this.form = null;
         }
         
-        private function initLoginForm() : void {
+        private function initLoginForm() : void
+        {
             this.form.submit.addEventListener(ButtonEvent.CLICK,this.onSubmitButtonClick);
             this.form.addChangeHandler(this.onChange);
             this.form.addEventListener(LoginEvent.TOKEN_RESET,this.onNeedTokenReset);
@@ -255,17 +282,20 @@ package net.wg.gui.login.impl
             this.form.message.addEventListener(MouseEvent.CLICK,this.onMessageTextClick);
         }
         
-        private function onEscapeKeyPress() : void {
+        private function onEscapeKeyPress() : void
+        {
             this.enableInputs(false);
             App.utils.scheduler.scheduleTask(onEscapeS,50);
             App.utils.scheduler.scheduleTask(this.enableInputs,200,true);
         }
         
-        private function onEnterKeyPress() : void {
+        private function onEnterKeyPress() : void
+        {
             this.submit();
         }
         
-        private function updateContent() : void {
+        private function updateContent() : void
+        {
             this.set_position_wallpaper();
             this.form.x = App.appWidth >> 1;
             this.form.y = Math.round(App.appHeight * FREE_SPACE_FACTOR + (App.appHeight - LobbyMetrics.MIN_STAGE_HEIGHT) * FREE_SPACE_BORDER_FACTOR);
@@ -279,12 +309,14 @@ package net.wg.gui.login.impl
             invalidateSize();
         }
         
-        private function updateRssPositions() : void {
+        private function updateRssPositions() : void
+        {
             this.rssNewsFeed.x = App.appWidth - this.rssNewsFeed.actualWidth;
             this.rssNewsFeed.y = App.appHeight;
         }
         
-        private function set_position_wallpaper() : void {
+        private function set_position_wallpaper() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
@@ -316,7 +348,8 @@ package net.wg.gui.login.impl
             }
         }
         
-        private function submit() : void {
+        private function submit() : void
+        {
             var _loc1_:String = this.getLogin();
             var _loc2_:String = this.getPass();
             var _loc3_:String = this.getSelectedServerName();
@@ -341,8 +374,10 @@ package net.wg.gui.login.impl
             
         }
         
-        private function enableInputs(param1:Boolean) : void {
-            if(param1)
+        private function enableInputs(param1:Boolean) : void
+        {
+            this._isInputEnabled = param1;
+            if(this._isInputEnabled)
             {
                 addEventListener(InputEvent.INPUT,this.handleInput);
                 this.initFocus();
@@ -353,38 +388,43 @@ package net.wg.gui.login.impl
             }
         }
         
-        private function createSparks() : void {
+        private function createSparks() : void
+        {
             var _loc1_:Object = null;
             if(this._sparksManager == null)
             {
-                _loc1_ = {
-                    "scope":this.sparksMc,
-                    "sparkQuantity":SPARK_QUANTITY,
-                    "zone":this.getSparkZone()
-                };
+                _loc1_ = {"scope":this.sparksMc,
+                "sparkQuantity":SPARK_QUANTITY,
+                "zone":this.getSparkZone()
+            };
             this._sparksManager = ISparksManager(App.utils.classFactory.getObject(Linkages.SPARKS_MGR,_loc1_));
             this._sparksManager.createSparks();
             this.sparksMc.visible = true;
         }
     }
     
-    private function getSparkZone() : Rectangle {
+    private function getSparkZone() : Rectangle
+    {
         return new Rectangle(SPARK_ZONE.x,SPARK_ZONE.y,stage.width + SPARK_ZONE.right,stage.height + SPARK_ZONE.bottom);
     }
     
-    private function getLogin() : String {
+    private function getLogin() : String
+    {
         return this.form.login.text;
     }
     
-    private function getPass() : String {
+    private function getPass() : String
+    {
         return this.form.pass.text;
     }
     
-    private function getSelectedServerName() : String {
+    private function getSelectedServerName() : String
+    {
         return this.form.getSelectedServerName();
     }
     
-    private function initFocus() : void {
+    private function initFocus() : void
+    {
         assertLifeCycle();
         if(!this.focusInited)
         {
@@ -400,37 +440,47 @@ package net.wg.gui.login.impl
         }
     }
     
-    private function onSubmitButtonClick(param1:ButtonEvent) : void {
+    private function onSubmitButtonClick(param1:ButtonEvent) : void
+    {
         this.submit();
     }
     
-    private function onChange(param1:Event) : void {
+    private function onChange(param1:Event) : void
+    {
+        var isToken:Boolean = false;
         var event:Event = param1;
-        var isToken:Boolean = isTokenS();
-        try
+        if(this._isInputEnabled)
         {
-            onExitFromAutoLoginS();
-            this.form.update(event.target,isToken);
-        }
-        catch(e:Error)
-        {
-            DebugUtils.LOG_ERROR(e.message);
+            isToken = isTokenS();
+            try
+            {
+                onExitFromAutoLoginS();
+                this.form.update(event.target,isToken);
+            }
+            catch(e:Error)
+            {
+                DebugUtils.LOG_ERROR(e.message);
+            }
         }
     }
     
-    private function onRememberPwdCheckboxToggle(param1:Event) : void {
+    private function onRememberPwdCheckboxToggle(param1:Event) : void
+    {
         onSetRememberPasswordS(this.form.rememberPwdCheckbox.selected);
     }
     
-    private function onRegisterLinkClick(param1:ButtonEvent) : void {
+    private function onRegisterLinkClick(param1:ButtonEvent) : void
+    {
         onRegisterS();
     }
     
-    private function onRecoveryLinkClick(param1:ButtonEvent) : void {
+    private function onRecoveryLinkClick(param1:ButtonEvent) : void
+    {
         onRecoveryS();
     }
     
-    private function onMessageLinkClick(param1:TextEvent) : void {
+    private function onMessageLinkClick(param1:TextEvent) : void
+    {
         if(this.isTFClickedByMBR)
         {
             return;
@@ -443,26 +493,31 @@ package net.wg.gui.login.impl
         }
     }
     
-    private function onMessageTextClick(param1:MouseEvent) : void {
+    private function onMessageTextClick(param1:MouseEvent) : void
+    {
         this.isTFClickedByMBR = App.utils.commons.isRightButton(param1);
     }
     
-    private function onQueueDialogQuitClose(param1:MouseEvent) : void {
+    private function onQueueDialogQuitClose(param1:MouseEvent) : void
+    {
         this.form.setErrorMessage("",ErrorStates.NONE);
         onExitFromAutoLogin();
     }
     
-    private function onNeedTokenReset(param1:LoginEvent) : void {
+    private function onNeedTokenReset(param1:LoginEvent) : void
+    {
         resetTokenS();
     }
     
-    private function onLoadingImageCompleteHandler(param1:UILoaderEvent) : void {
+    private function onLoadingImageCompleteHandler(param1:UILoaderEvent) : void
+    {
         this.set_position_wallpaper();
         visible = true;
         invalidate();
     }
     
-    override public function handleInput(param1:InputEvent) : void {
+    override public function handleInput(param1:InputEvent) : void
+    {
         var _loc2_:Function = null;
         super.handleInput(param1);
         if((param1.handled) || (App.waiting.isOnStage))

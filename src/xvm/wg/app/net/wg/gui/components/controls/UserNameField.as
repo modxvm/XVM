@@ -16,21 +16,19 @@ package net.wg.gui.components.controls
     public class UserNameField extends UIComponent implements ITextContainer
     {
         
-        public function UserNameField() {
-            this.shadowColorList = {
-                "White":{
-                    "color":16777215,
-                    "strange":0.4,
-                    "quality":3,
-                    "angle":90
-                },
-            "Black":{
-                "color":0,
-                "strange":1,
-                "quality":2,
-                "angle":270
-            }
-    };
+        public function UserNameField()
+        {
+            this.shadowColorList = {"White":{"color":16777215,
+            "strange":0.4,
+            "quality":3,
+            "angle":90
+        },
+        "Black":{"color":0,
+        "strange":1,
+        "quality":2,
+        "angle":270
+    }
+};
 super();
 this.textField.text = " ";
 this._textFormat = this.textField.getTextFormat();
@@ -60,19 +58,23 @@ protected var _toolTip:String = "";
 
 private var _altToolTip:String = "";
 
-override protected function preInitialize() : void {
+override protected function preInitialize() : void
+{
 constraints = new Constraints(this,ConstrainMode.REFLOW);
 }
 
-public function get showToolTip() : Boolean {
+public function get showToolTip() : Boolean
+{
 return this._showToolTip;
 }
 
-public function set showToolTip(param1:Boolean) : void {
+public function set showToolTip(param1:Boolean) : void
+{
 this._showToolTip = param1;
 }
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
 this._textFormat = this.textField.getTextFormat();
 constraints.addElement("textField",this.textField,Constraints.ALL);
 constraints.update(width,height);
@@ -82,11 +84,13 @@ addEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver);
 addEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut);
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
 super.onDispose();
 }
 
-protected function handleMouseRollOver(param1:MouseEvent) : void {
+protected function handleMouseRollOver(param1:MouseEvent) : void
+{
 if(this._showToolTip)
 {
     if(this._altToolTip)
@@ -101,11 +105,13 @@ if(this._showToolTip)
 }
 }
 
-protected function handleMouseRollOut(param1:MouseEvent) : void {
+protected function handleMouseRollOut(param1:MouseEvent) : void
+{
 App.toolTipMgr.hide();
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
 var _loc1_:DropShadowFilter = null;
 var _loc2_:* = false;
 super.draw();
@@ -151,7 +157,8 @@ if(isInvalid(InvalidationType.DATA))
 }
 }
 
-private function getDropShadowFilter(param1:String) : DropShadowFilter {
+private function getDropShadowFilter(param1:String) : DropShadowFilter
+{
 var _loc2_:DropShadowFilter = new DropShadowFilter();
 _loc2_.color = this.shadowColorList[param1].color;
 _loc2_.angle = this.shadowColorList[param1].angle;
@@ -166,11 +173,13 @@ _loc2_.quality = int(this.shadowColorList[param1].quality);
 return _loc2_;
 }
 
-public function get textFont() : String {
+public function get textFont() : String
+{
 return this._textFont;
 }
 
-public function set textFont(param1:String) : void {
+public function set textFont(param1:String) : void
+{
 if(this._textFont == param1)
 {
     return;
@@ -179,11 +188,13 @@ this._textFont = param1;
 invalidateState();
 }
 
-public function get textSize() : Number {
+public function get textSize() : Number
+{
 return this._textSize;
 }
 
-public function set textSize(param1:Number) : void {
+public function set textSize(param1:Number) : void
+{
 if(this._textSize == param1)
 {
     return;
@@ -192,11 +203,13 @@ this._textSize = param1;
 invalidateState();
 }
 
-public function get textAlign() : String {
+public function get textAlign() : String
+{
 return this._textAlign;
 }
 
-public function set textAlign(param1:String) : void {
+public function set textAlign(param1:String) : void
+{
 if(this._textAlign == param1)
 {
     return;
@@ -205,11 +218,13 @@ this._textAlign = param1;
 invalidateState();
 }
 
-public function get textColor() : Number {
+public function get textColor() : Number
+{
 return this._textColor;
 }
 
-public function set textColor(param1:Number) : void {
+public function set textColor(param1:Number) : void
+{
 if(this._textColor == param1)
 {
     return;
@@ -218,11 +233,13 @@ this._textColor = param1;
 invalidateState();
 }
 
-public function get shadowColor() : String {
+public function get shadowColor() : String
+{
 return this._shadowColor;
 }
 
-public function set shadowColor(param1:String) : void {
+public function set shadowColor(param1:String) : void
+{
 if(this._shadowColor == param1)
 {
     return;
@@ -231,11 +248,13 @@ this._shadowColor = param1;
 invalidateState();
 }
 
-public function get toolTip() : String {
+public function get toolTip() : String
+{
 return this._toolTip;
 }
 
-public function set toolTip(param1:String) : void {
+public function set toolTip(param1:String) : void
+{
 if(this._toolTip == param1)
 {
     return;
@@ -243,11 +262,13 @@ if(this._toolTip == param1)
 this._toolTip = App.utils.locale.makeString(param1);
 }
 
-public function get altToolTip() : String {
+public function get altToolTip() : String
+{
 return this._altToolTip;
 }
 
-public function set altToolTip(param1:String) : void {
+public function set altToolTip(param1:String) : void
+{
 if(this._altToolTip == param1)
 {
     return;
@@ -255,11 +276,13 @@ if(this._altToolTip == param1)
 this._altToolTip = App.utils.locale.makeString(param1);
 }
 
-public function get userVO() : UserVO {
+public function get userVO() : UserVO
+{
 return this._userVO;
 }
 
-public function set userVO(param1:UserVO) : void {
+public function set userVO(param1:UserVO) : void
+{
 this._userVO = param1;
 invalidateData();
 }

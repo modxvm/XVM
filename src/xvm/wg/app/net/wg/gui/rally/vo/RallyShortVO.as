@@ -9,7 +9,8 @@ package net.wg.gui.rally.vo
     public class RallyShortVO extends DAAPIDataClass implements IRallyVO
     {
         
-        public function RallyShortVO(param1:Object) {
+        public function RallyShortVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -29,7 +30,8 @@ package net.wg.gui.rally.vo
         
         private var _statusLbl:String = "";
         
-        public function get slotsArray() : Array {
+        public function get slotsArray() : Array
+        {
             var _loc1_:Array = new Array(this.slots.length);
             var _loc2_:int = this.slots.length;
             while(_loc2_--)
@@ -39,11 +41,13 @@ package net.wg.gui.rally.vo
             return _loc1_;
         }
         
-        public function isAvailable() : Boolean {
+        public function isAvailable() : Boolean
+        {
             return !(this.slots == null) && this.slots.length > 0;
         }
         
-        public function get commander() : IRallyCandidateVO {
+        public function get commander() : IRallyCandidateVO
+        {
             var _loc2_:RallySlotVO = null;
             var _loc1_:IRallyCandidateVO = null;
             if(this.slots)
@@ -57,11 +61,13 @@ package net.wg.gui.rally.vo
             return _loc1_;
         }
         
-        public function get commanderVal() : ExtendedUserVO {
+        public function get commanderVal() : ExtendedUserVO
+        {
             return this.commander as ExtendedUserVO;
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:Object = null;
             var _loc5_:RallySlotVO = null;
@@ -79,7 +85,8 @@ package net.wg.gui.rally.vo
             return true;
         }
         
-        override protected function onDataRead(param1:String, param2:Object) : Boolean {
+        override protected function onDataRead(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:RallySlotVO = null;
             if(param1 == SLOTS_FIELD)
@@ -95,50 +102,61 @@ package net.wg.gui.rally.vo
             return true;
         }
         
-        public function get description() : String {
+        public function get description() : String
+        {
             return this._description;
         }
         
-        public function set description(param1:String) : void {
+        public function set description(param1:String) : void
+        {
             this._description = param1;
         }
         
-        public function get isCommander() : Boolean {
+        public function get isCommander() : Boolean
+        {
             return this._isCommander;
         }
         
-        public function set isCommander(param1:Boolean) : void {
+        public function set isCommander(param1:Boolean) : void
+        {
             this._isCommander = param1;
         }
         
-        public function get statusValue() : Boolean {
+        public function get statusValue() : Boolean
+        {
             return this._statusValue;
         }
         
-        public function set statusValue(param1:Boolean) : void {
+        public function set statusValue(param1:Boolean) : void
+        {
             this._statusValue = param1;
         }
         
-        public function get statusLbl() : String {
+        public function get statusLbl() : String
+        {
             return this._statusLbl;
         }
         
-        public function set statusLbl(param1:String) : void {
+        public function set statusLbl(param1:String) : void
+        {
             this._statusLbl = param1;
         }
         
-        public function clearSlots() : void {
+        public function clearSlots() : void
+        {
             if(this.slots)
             {
                 this.slots.splice(0,this.slots.length);
             }
         }
         
-        public function addSlot(param1:IRallySlotVO) : void {
+        public function addSlot(param1:IRallySlotVO) : void
+        {
             this.slots.push(param1);
         }
         
-        public function get hasRestrictions() : Boolean {
+        public function get hasRestrictions() : Boolean
+        {
             var _loc1_:* = false;
             var _loc2_:* = 0;
             var _loc3_:RallySlotVO = null;
@@ -168,7 +186,8 @@ package net.wg.gui.rally.vo
             return _loc1_;
         }
         
-        public function set hasRestrictions(param1:Boolean) : void {
+        public function set hasRestrictions(param1:Boolean) : void
+        {
             this._hasRestrictions = param1;
         }
     }

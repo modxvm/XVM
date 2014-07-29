@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class StatisticsTooltipDataVO extends DAAPIDataClass
     {
         
-        public function StatisticsTooltipDataVO(param1:Object) {
+        public function StatisticsTooltipDataVO(param1:Object)
+        {
             super(param1);
         }
         

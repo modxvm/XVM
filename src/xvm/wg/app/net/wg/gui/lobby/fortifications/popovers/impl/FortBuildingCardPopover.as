@@ -16,7 +16,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     public class FortBuildingCardPopover extends FortBuildingCardPopoverMeta implements IFortBuildingCardPopoverMeta
     {
         
-        public function FortBuildingCardPopover() {
+        public function FortBuildingCardPopover()
+        {
             super();
             UIID = 74;
             App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_OPEN,0);
@@ -26,9 +27,9 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private static var PLAYERS_PADDING:uint = 19;
         
-        private static var BUILDINGS_PADDING_LEFT:Point;
+        private static var BUILDINGS_PADDING_LEFT:Point = new Point(-12,0);
         
-        private static var BUILDINGS_PADDING_RIGHT:Point;
+        private static var BUILDINGS_PADDING_RIGHT:Point = new Point(12,0);
         
         public var header:FortPopoverHeader = null;
         
@@ -44,16 +45,19 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var model:BuildingCardPopoverVO = null;
         
-        override public function set wrapper(param1:IWrapper) : void {
+        override public function set wrapper(param1:IWrapper) : void
+        {
             super.wrapper = param1;
             PopOver(param1).isCloseBtnVisible = true;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.utils.scheduler.cancelTask(this.invalidateFocus);
             this.header.removeEventListener(FortBuildingCardPopoverEvent.DESTROY_BUILDING,this.onDestroyBuildingHandler);
             this.header.removeEventListener(FortBuildingCardPopoverEvent.UPGRADE_BUILDING,this.onUpgradeBuildingHandler);
@@ -77,7 +81,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.header.addEventListener(FortBuildingCardPopoverEvent.DESTROY_BUILDING,this.onDestroyBuildingHandler);
             this.header.addEventListener(FortBuildingCardPopoverEvent.UPGRADE_BUILDING,this.onUpgradeBuildingHandler);
@@ -86,7 +91,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.controlPanel.addEventListener(FortBuildingCardPopoverEvent.BUY_ORDER,this.onBuyOrderHandler);
         }
         
-        override protected function getKeyPointPadding() : TwoDimensionalPadding {
+        override protected function getKeyPointPadding() : TwoDimensionalPadding
+        {
             var _loc1_:DisplayObject = null;
             var _loc2_:* = 0;
             var _loc3_:* = 0;
@@ -104,7 +110,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             return new TwoDimensionalPadding(new Point(0,-_loc3_),new Point(_loc2_ + _loc5_.x,0 + _loc5_.y),new Point(0,_loc3_),new Point(-_loc2_ + _loc4_.x,0 + _loc4_.y));
         }
         
-        override protected function setData(param1:BuildingCardPopoverVO) : void {
+        override protected function setData(param1:BuildingCardPopoverVO) : void
+        {
             this.model = param1;
             this.header.setData(this.model.buildingHeader);
             this.progressBar.setData(this.model.buildingsIndicators);
@@ -127,7 +134,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             App.utils.scheduler.envokeInNextFrame(this.invalidateFocus);
         }
         
-        private function invalidateFocus() : void {
+        private function invalidateFocus() : void
+        {
             if(!this.model.isCommander)
             {
                 setFocus(this.assignPlayers.assignBtn);
@@ -148,27 +156,32 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             
         }
         
-        private function onDestroyBuildingHandler(param1:FortBuildingCardPopoverEvent) : void {
+        private function onDestroyBuildingHandler(param1:FortBuildingCardPopoverEvent) : void
+        {
             openDemountBuildingWindowS(this.model.buildingType);
             App.popoverMgr.hide();
         }
         
-        private function onUpgradeBuildingHandler(param1:FortBuildingCardPopoverEvent) : void {
+        private function onUpgradeBuildingHandler(param1:FortBuildingCardPopoverEvent) : void
+        {
             openUpgradeWindowS(this.model.buildingType);
             App.popoverMgr.hide();
         }
         
-        private function onAssignPlayersHandler(param1:FortBuildingCardPopoverEvent) : void {
+        private function onAssignPlayersHandler(param1:FortBuildingCardPopoverEvent) : void
+        {
             openAssignedPlayersWindowS(this.model.buildingType);
             App.popoverMgr.hide();
         }
         
-        private function onDirectionControlHandler(param1:FortBuildingCardPopoverEvent) : void {
+        private function onDirectionControlHandler(param1:FortBuildingCardPopoverEvent) : void
+        {
             openDirectionControlWindowS();
             App.popoverMgr.hide();
         }
         
-        private function onBuyOrderHandler(param1:FortBuildingCardPopoverEvent) : void {
+        private function onBuyOrderHandler(param1:FortBuildingCardPopoverEvent) : void
+        {
             openBuyOrderWindowS();
             App.popoverMgr.hide();
         }

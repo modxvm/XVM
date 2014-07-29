@@ -5,7 +5,8 @@ package net.wg.gui.lobby.questsWindow.data
     public class SubtaskVO extends DAAPIDataClass
     {
         
-        public function SubtaskVO(param1:Object) {
+        public function SubtaskVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -13,7 +14,8 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _questInfo:QuestRendererVO = null;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             switch(param1)
             {
                 case "questInfo":
@@ -24,19 +26,23 @@ package net.wg.gui.lobby.questsWindow.data
             }
         }
         
-        public function get title() : String {
+        public function get title() : String
+        {
             return this._title;
         }
         
-        public function set title(param1:String) : void {
+        public function set title(param1:String) : void
+        {
             this._title = param1;
         }
         
-        public function get questInfo() : QuestRendererVO {
+        public function get questInfo() : QuestRendererVO
+        {
             return this._questInfo;
         }
         
-        public function set questInfo(param1:QuestRendererVO) : void {
+        public function set questInfo(param1:QuestRendererVO) : void
+        {
             this._questInfo = param1;
         }
     }

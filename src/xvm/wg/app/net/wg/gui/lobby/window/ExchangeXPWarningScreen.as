@@ -6,7 +6,8 @@ package net.wg.gui.lobby.window
     public class ExchangeXPWarningScreen extends UIComponent
     {
         
-        public function ExchangeXPWarningScreen() {
+        public function ExchangeXPWarningScreen()
+        {
             super();
         }
         
@@ -16,17 +17,20 @@ package net.wg.gui.lobby.window
         
         private var _text:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.textField.multiline = true;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
             invalidate(TEXT_INVALID);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(TEXT_INVALID))
             {

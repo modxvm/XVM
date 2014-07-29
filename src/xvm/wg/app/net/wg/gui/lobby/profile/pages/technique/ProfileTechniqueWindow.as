@@ -9,7 +9,8 @@ package net.wg.gui.lobby.profile.pages.technique
     public class ProfileTechniqueWindow extends ProfileTechnique
     {
         
-        public function ProfileTechniqueWindow() {
+        public function ProfileTechniqueWindow()
+        {
             this.tweenManager = new ExcludeTweenManager();
             super();
         }
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.profile.pages.technique
         
         private var tweenManager:ExcludeTweenManager;
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(WindowViewInvalidationType.WAITING_INVALID))
             {
@@ -47,28 +49,28 @@ package net.wg.gui.lobby.profile.pages.technique
                     if(this._showWaiting)
                     {
                         this._waiting.show();
-                        this.tweenManager.registerAndLaunch(ANIM_SPEED,stackComponent.viewStack,{"alpha":0},{
-                            "ease":Strong.easeOut,
-                            "onComplete":this.onTweenComplete
-                        });
+                        this.tweenManager.registerAndLaunch(ANIM_SPEED,stackComponent.viewStack,{"alpha":0},{"ease":Strong.easeOut,
+                        "onComplete":this.onTweenComplete
+                    });
                 }
                 else
                 {
                     this._waiting.hide();
-                    this.tweenManager.registerAndLaunch(ANIM_SPEED,stackComponent.viewStack,{"alpha":1},{
-                        "ease":Strong.easeOut,
-                        "onComplete":this.onTweenComplete
-                    });
+                    this.tweenManager.registerAndLaunch(ANIM_SPEED,stackComponent.viewStack,{"alpha":1},{"ease":Strong.easeOut,
+                    "onComplete":this.onTweenComplete
+                });
             }
         }
     }
 }
 
-private function onTweenComplete(param1:Tween) : void {
+private function onTweenComplete(param1:Tween) : void
+{
     this.tweenManager.unregister(param1);
 }
 
-public function set showWaiting(param1:Boolean) : void {
+public function set showWaiting(param1:Boolean) : void
+{
     if(this._showWaiting != param1)
     {
         this._showWaiting = param1;
@@ -76,7 +78,8 @@ public function set showWaiting(param1:Boolean) : void {
     }
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
     this.tweenManager.dispose();
     this.tweenManager = null;
     if(this._waiting)
@@ -87,7 +90,8 @@ override protected function onDispose() : void {
     super.onDispose();
 }
 
-override public function as_responseVehicleDossier(param1:Object) : void {
+override public function as_responseVehicleDossier(param1:Object) : void
+{
     this.showWaiting = param1 == null;
     super.as_responseVehicleDossier(param1);
 }

@@ -10,7 +10,8 @@ package net.wg.data.VO
     public class TweenPropertiesVO extends EventDispatcher implements ITweenPropertiesVO
     {
         
-        public function TweenPropertiesVO(param1:Object) {
+        public function TweenPropertiesVO(param1:Object)
+        {
             super();
             var _loc2_:IAssertable = App.utils.asserter;
             _loc2_.assertNotNull(param1,"Hash" + Errors.CANT_NULL);
@@ -85,7 +86,8 @@ package net.wg.data.VO
         
         private var localDelayIsSet:Boolean = false;
         
-        public function fromHash(param1:Object) : void {
+        public function fromHash(param1:Object) : void
+        {
             if(POSITION in param1)
             {
                 this.setPosition(param1[POSITION]);
@@ -152,29 +154,35 @@ package net.wg.data.VO
             }
         }
         
-        public function getPosition() : int {
+        public function getPosition() : int
+        {
             return this._position;
         }
         
-        public function setPosition(param1:int) : void {
+        public function setPosition(param1:int) : void
+        {
             this._position = param1;
         }
         
-        public function getDuration() : int {
+        public function getDuration() : int
+        {
             return this._duration;
         }
         
-        public function setDuration(param1:int) : void {
+        public function setDuration(param1:int) : void
+        {
             var _loc2_:IAssertable = App.utils.asserter;
             _loc2_.assert(param1 > 0,"Duration in Tween will be more than 0.");
             this._duration = param1;
         }
         
-        public function getGlobalDelay() : int {
+        public function getGlobalDelay() : int
+        {
             return this._globalDelay;
         }
         
-        public function setGlobalDelay(param1:int) : void {
+        public function setGlobalDelay(param1:int) : void
+        {
             if(!this.localDelayIsSet)
             {
                 this.setLocalDelay(param1);
@@ -182,127 +190,156 @@ package net.wg.data.VO
             this._globalDelay = param1;
         }
         
-        public function getLocalDelay() : int {
+        public function getLocalDelay() : int
+        {
             return this._localDelay;
         }
         
-        public function setLocalDelay(param1:int) : void {
+        public function setLocalDelay(param1:int) : void
+        {
             this.localDelayIsSet = true;
             this._localDelay = param1;
         }
         
-        public function getTarget() : DisplayObject {
+        public function getTarget() : DisplayObject
+        {
             return this._target;
         }
         
-        public function setTarget(param1:DisplayObject) : void {
+        public function setTarget(param1:DisplayObject) : void
+        {
             App.utils.asserter.assertNotNull(param1,"target " + Errors.CANT_NULL);
             this._target = param1;
         }
         
-        public function getActionAfterRemoveFromStage() : String {
+        public function getActionAfterRemoveFromStage() : String
+        {
             return this._actionAfterRemoveFromStage;
         }
         
-        public function setActionAfterRemoveFromStage(param1:String) : void {
+        public function setActionAfterRemoveFromStage(param1:String) : void
+        {
             this._actionAfterRemoveFromStage = param1;
         }
         
-        public function getLoop() : Boolean {
+        public function getLoop() : Boolean
+        {
             return this._loop;
         }
         
-        public function setLoop(param1:Boolean) : void {
+        public function setLoop(param1:Boolean) : void
+        {
             this._loop = param1;
         }
         
-        public function getPaused() : Boolean {
+        public function getPaused() : Boolean
+        {
             return this._paused;
         }
         
-        public function setPaused(param1:Boolean) : void {
+        public function setPaused(param1:Boolean) : void
+        {
             this._paused = param1;
         }
         
-        public function getHandler() : ITweenHandler {
+        public function getHandler() : ITweenHandler
+        {
             return this._handler;
         }
         
-        public function setHandler(param1:ITweenHandler) : void {
+        public function setHandler(param1:ITweenHandler) : void
+        {
             this._handler = param1;
         }
         
-        public function getX() : Number {
+        public function getX() : Number
+        {
             return this.x;
         }
         
-        public function setX(param1:Number) : void {
+        public function setX(param1:Number) : void
+        {
             this.setIsOnCodeBased(true);
             this.x = param1;
         }
         
-        public function getY() : Number {
+        public function getY() : Number
+        {
             return this.y;
         }
         
-        public function setY(param1:Number) : void {
+        public function setY(param1:Number) : void
+        {
             this.setIsOnCodeBased(true);
             this.y = param1;
         }
         
-        public function getScaleX() : Number {
+        public function getScaleX() : Number
+        {
             return this.scaleX;
         }
         
-        public function setScaleX(param1:Number) : void {
+        public function setScaleX(param1:Number) : void
+        {
             this.setIsOnCodeBased(true);
             this.scaleX = param1;
         }
         
-        public function getScaleY() : Number {
+        public function getScaleY() : Number
+        {
             return this.scaleY;
         }
         
-        public function setScaleY(param1:Number) : void {
+        public function setScaleY(param1:Number) : void
+        {
             this.setIsOnCodeBased(true);
             this.scaleY = param1;
         }
         
-        public function getAlpha() : Number {
+        public function getAlpha() : Number
+        {
             return this.alpha;
         }
         
-        public function setAlpha(param1:Number) : void {
+        public function setAlpha(param1:Number) : void
+        {
             this.setIsOnCodeBased(true);
             this.alpha = param1 * 100;
         }
         
-        public function getRotation() : Number {
+        public function getRotation() : Number
+        {
             return this.rotation;
         }
         
-        public function setRotation(param1:Number) : void {
+        public function setRotation(param1:Number) : void
+        {
             this.setIsOnCodeBased(true);
             this.rotation = param1 * Math.PI / 180;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._target = null;
         }
         
-        public function getIsOnCodeBased() : Boolean {
+        public function getIsOnCodeBased() : Boolean
+        {
             return this._isOnCodeBased;
         }
         
-        public function setIsOnCodeBased(param1:Boolean) : void {
+        public function setIsOnCodeBased(param1:Boolean) : void
+        {
             this._isOnCodeBased = param1;
         }
         
-        public function setTweenIdx(param1:int) : void {
+        public function setTweenIdx(param1:int) : void
+        {
             this._idx = param1;
         }
         
-        public function getTweenIdx() : int {
+        public function getTweenIdx() : int
+        {
             return this._idx;
         }
     }

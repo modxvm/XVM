@@ -7,7 +7,8 @@ package net.wg.gui.cyberSport.controls
     public class SelectedVehiclesMsg extends MovieClip
     {
         
-        public function SelectedVehiclesMsg() {
+        public function SelectedVehiclesMsg()
+        {
             super();
         }
         
@@ -19,7 +20,8 @@ package net.wg.gui.cyberSport.controls
         
         public var warningIcon:Sprite;
         
-        public function update(param1:String, param2:Boolean = false) : void {
+        public function update(param1:String, param2:Boolean = false) : void
+        {
             this.textField.htmlText = param1;
             this.warningIcon.visible = param2;
             this.textField.x = param2?TF_POS_WARN:TF_POS_NORMAL;

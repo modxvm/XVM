@@ -7,14 +7,16 @@ package net.wg.gui.utils
     public class ExcludeTweenManager extends Object implements IDisposable
     {
         
-        public function ExcludeTweenManager() {
+        public function ExcludeTweenManager()
+        {
             super();
             this.currentTweens = new Dictionary();
         }
         
         private var currentTweens:Dictionary;
         
-        public function registerAndLaunch(param1:Number, param2:Object, param3:Object, param4:Object) : Tween {
+        public function registerAndLaunch(param1:Number, param2:Object, param3:Object, param4:Object) : Tween
+        {
             var _loc5_:Tween = null;
             if(this.currentTweens[param2])
             {
@@ -26,16 +28,19 @@ package net.wg.gui.utils
             return _loc5_;
         }
         
-        public function unregister(param1:Tween) : void {
+        public function unregister(param1:Tween) : void
+        {
             if((this.currentTweens) && (this.currentTweens[param1.target]))
             {
                 param1.paused = true;
                 param1.dispose();
                 delete this.currentTweens[param1.target];
+                true;
             }
         }
         
-        public function unregisterAll() : void {
+        public function unregisterAll() : void
+        {
             var _loc1_:Object = null;
             var _loc2_:Tween = null;
             for(_loc1_ in this.currentTweens)
@@ -44,10 +49,12 @@ package net.wg.gui.utils
                 _loc2_.paused = true;
                 _loc2_.dispose();
                 delete this.currentTweens[_loc1_];
+                true;
             }
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.unregisterAll();
             this.currentTweens = null;
         }

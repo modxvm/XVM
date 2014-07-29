@@ -7,7 +7,8 @@ package net.wg.gui.lobby.battleResults
     public class DetailsBlock extends UIComponent
     {
         
-        public function DetailsBlock() {
+        public function DetailsBlock()
+        {
             super();
         }
         
@@ -43,23 +44,27 @@ package net.wg.gui.lobby.battleResults
         
         private var _dataDirty:Boolean = false;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._data = null;
             this.detailedReportBtn.dispose();
             super.onDispose();
         }
         
-        public function get data() : Object {
+        public function get data() : Object
+        {
             return this._data;
         }
         
-        public function set data(param1:Object) : void {
+        public function set data(param1:Object) : void
+        {
             this._data = param1;
             this._dataDirty = true;
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.noPremTitleLbl.text = BATTLE_RESULTS.COMMON_DETAILS_NOPREMTITLE;
             this.premTitleLbl.text = BATTLE_RESULTS.COMMON_DETAILS_PREMTITLE;
@@ -67,7 +72,8 @@ package net.wg.gui.lobby.battleResults
             this.progressTF.text = BATTLE_RESULTS.COMMON_DETAILS_PROGRESS;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(this._dataDirty)
             {

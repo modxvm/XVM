@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.constants
     public class TTSoundID extends Object
     {
         
-        public function TTSoundID() {
+        public function TTSoundID()
+        {
             super();
         }
         

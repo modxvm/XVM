@@ -10,13 +10,15 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
     public class OrderPopoverLayout extends SmartPopOverExternalLayout
     {
         
-        public function OrderPopoverLayout(param1:Point, param2:Point) {
+        public function OrderPopoverLayout(param1:Point, param2:Point)
+        {
             super();
             this.stageDimensions = param1;
             this.positionKeyPoint = param2;
         }
         
-        override public function invokeLayout() : Object {
+        override public function invokeLayout() : Object
+        {
             var _loc4_:DisplayObject = null;
             super.invokeLayout();
             var _loc1_:Point = new Point();

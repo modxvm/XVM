@@ -5,7 +5,8 @@ package net.wg.gui.lobby.profile.pages.technique
     public class TechStatisticsInitVO extends ProfileBattleTypeInitVO
     {
         
-        public function TechStatisticsInitVO(param1:Object) {
+        public function TechStatisticsInitVO(param1:Object)
+        {
             super(param1);
         }
         

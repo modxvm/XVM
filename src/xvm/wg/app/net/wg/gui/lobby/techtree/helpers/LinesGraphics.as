@@ -13,7 +13,8 @@ package net.wg.gui.lobby.techtree.helpers
     public class LinesGraphics extends Sprite implements IDisposable
     {
         
-        public function LinesGraphics() {
+        public function LinesGraphics()
+        {
             super();
             scale9Grid = new Rectangle(0,0,1,1);
             this.getComponent = App.utils.classFactory.getComponent;
@@ -37,15 +38,18 @@ package net.wg.gui.lobby.techtree.helpers
         
         public var arrowRenderer:String = "Arrow";
         
-        public function get container() : INodesContainer {
+        public function get container() : INodesContainer
+        {
             return this._container;
         }
         
-        public function set container(param1:INodesContainer) : void {
+        public function set container(param1:INodesContainer) : void
+        {
             this._container = param1;
         }
         
-        public function getVectorAxeXAngle(param1:Point, param2:Point) : Number {
+        public function getVectorAxeXAngle(param1:Point, param2:Point) : Number
+        {
             var _loc3_:* = NaN;
             var _loc4_:Point = param2.subtract(param1);
             if(_loc4_.y == 0)
@@ -64,7 +68,8 @@ package net.wg.gui.lobby.techtree.helpers
             return _loc3_;
         }
         
-        public function getArrowPosition(param1:Point, param2:Number) : Point {
+        public function getArrowPosition(param1:Point, param2:Number) : Point
+        {
             var _loc3_:Point = param1.clone();
             if(param2 == 0)
             {
@@ -78,20 +83,21 @@ package net.wg.gui.lobby.techtree.helpers
             return _loc3_;
         }
         
-        public function drawLine(param1:IRenderer, param2:Number, param3:Point, param4:Point, param5:String = null) : void {
+        public function drawLine(param1:IRenderer, param2:Number, param3:Point, param4:Point, param5:String = null) : void
+        {
             var _loc6_:Graphics = this.getSubSprite(param1,param5,true).graphics;
             _loc6_.lineStyle(this.lineThickness,param2,1);
             _loc6_.moveTo(param3.x,param3.y);
             _loc6_.lineTo(param4.x,param4.y);
         }
         
-        public function drawArrow(param1:IRenderer, param2:Number, param3:Point, param4:Number = 0, param5:String = null) : void {
+        public function drawArrow(param1:IRenderer, param2:Number, param3:Point, param4:Number = 0, param5:String = null) : void
+        {
             var _loc8_:ColorTransform = null;
-            var _loc6_:Object = {
-                "x":param3.x,
-                "y":param3.y,
-                "rotation":param4
-            };
+            var _loc6_:Object = {"x":param3.x,
+            "y":param3.y,
+            "rotation":param4
+        };
         var _loc7_:Sprite = this.getComponent(this.arrowRenderer,Sprite,_loc6_);
         if(param2)
         {
@@ -102,13 +108,15 @@ package net.wg.gui.lobby.techtree.helpers
         this.getSubSprite(param1,param5,true).addChild(_loc7_);
     }
     
-    public function drawArrowEx(param1:IRenderer, param2:Number, param3:Point, param4:Point, param5:String = null) : void {
+    public function drawArrowEx(param1:IRenderer, param2:Number, param3:Point, param4:Point, param5:String = null) : void
+    {
         var _loc6_:Number = this.getVectorAxeXAngle(param3,param4);
         var _loc7_:Point = this.getArrowPosition(param4,_loc6_);
         this.drawArrow(param1,param2,_loc7_,_loc6_,param5);
     }
     
-    public function clearLinesAndArrows(param1:IRenderer, param2:String = null) : void {
+    public function clearLinesAndArrows(param1:IRenderer, param2:String = null) : void
+    {
         var _loc4_:Sprite = null;
         var _loc3_:Sprite = getChildByName(param1.getGraphicsName()) as Sprite;
         if(_loc3_ == null)
@@ -129,27 +137,33 @@ package net.wg.gui.lobby.techtree.helpers
         }
     }
     
-    public function setup() : void {
+    public function setup() : void
+    {
         this.colorIdxs = [this.unlockedLineColor,this.next2unlockLineColor,this.lockedLineColor];
         this.lineRatio = 0.5 * this.lineThickness;
     }
     
-    public final function dispose() : void {
+    public final function dispose() : void
+    {
         this.onDispose();
     }
     
-    protected function onDispose() : void {
+    protected function onDispose() : void
+    {
         this._container = null;
         this.getComponent = null;
     }
     
-    public function clearUp() : void {
+    public function clearUp() : void
+    {
     }
     
-    public function clearUpRenderer(param1:IRenderer) : void {
+    public function clearUpRenderer(param1:IRenderer) : void
+    {
     }
     
-    public function removeRenderer(param1:IRenderer) : void {
+    public function removeRenderer(param1:IRenderer) : void
+    {
         this.clearUpRenderer(param1);
         this.clearLinesAndArrows(param1);
         if(contains(DisplayObject(param1)))
@@ -158,7 +172,8 @@ package net.wg.gui.lobby.techtree.helpers
         }
     }
     
-    private function getSubSprite(param1:IRenderer, param2:String = null, param3:Boolean = true) : Sprite {
+    private function getSubSprite(param1:IRenderer, param2:String = null, param3:Boolean = true) : Sprite
+    {
         var _loc7_:DisplayObject = null;
         var _loc4_:String = param1.getGraphicsName();
         var _loc5_:Sprite = getChildByName(_loc4_) as Sprite;

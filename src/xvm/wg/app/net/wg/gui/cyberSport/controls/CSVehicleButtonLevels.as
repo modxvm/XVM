@@ -6,7 +6,8 @@ package net.wg.gui.cyberSport.controls
     public class CSVehicleButtonLevels extends UIComponent
     {
         
-        public function CSVehicleButtonLevels() {
+        public function CSVehicleButtonLevels()
+        {
             super();
         }
         
@@ -20,11 +21,13 @@ package net.wg.gui.cyberSport.controls
         
         private var levels:uint = 0;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(UPDATE_LEVELS)) && !(this.levels == 0))
             {
@@ -33,12 +36,14 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        public function setData(param1:uint) : void {
+        public function setData(param1:uint) : void
+        {
             this.levels = param1;
             invalidate(UPDATE_LEVELS);
         }
         
-        public function setState(param1:String) : void {
+        public function setState(param1:String) : void
+        {
             this.state = param1;
             gotoAndPlay(this.state);
         }

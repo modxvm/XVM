@@ -3,7 +3,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseSkillsModel extends Object
     {
         
-        public function PersonalCaseSkillsModel() {
+        public function PersonalCaseSkillsModel()
+        {
             super();
         }
         

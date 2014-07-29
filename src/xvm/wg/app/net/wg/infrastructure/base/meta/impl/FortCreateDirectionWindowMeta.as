@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class FortCreateDirectionWindowMeta extends AbstractWindowView
     {
         
-        public function FortCreateDirectionWindowMeta() {
+        public function FortCreateDirectionWindowMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var closeDirection:Function = null;
         
-        public function openNewDirectionS() : void {
+        public function openNewDirectionS() : void
+        {
             App.utils.asserter.assertNotNull(this.openNewDirection,"openNewDirection" + Errors.CANT_NULL);
             this.openNewDirection();
         }
         
-        public function closeDirectionS(param1:Number) : void {
+        public function closeDirectionS(param1:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.closeDirection,"closeDirection" + Errors.CANT_NULL);
             this.closeDirection(param1);
         }

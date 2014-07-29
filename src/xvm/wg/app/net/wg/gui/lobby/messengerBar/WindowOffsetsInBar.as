@@ -3,7 +3,8 @@ package net.wg.gui.lobby.messengerBar
     public class WindowOffsetsInBar extends Object
     {
         
-        public function WindowOffsetsInBar() {
+        public function WindowOffsetsInBar()
+        {
             super();
         }
         

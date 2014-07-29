@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class BaseRallyMainWindowMeta extends AbstractWindowView
     {
         
-        public function BaseRallyMainWindowMeta() {
+        public function BaseRallyMainWindowMeta()
+        {
             super();
         }
         
@@ -26,42 +27,50 @@ package net.wg.infrastructure.base.meta.impl
         
         public var autoSearchCancel:Function = null;
         
-        public function onBackClickS() : void {
+        public function onBackClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.onBackClick,"onBackClick" + Errors.CANT_NULL);
             this.onBackClick();
         }
         
-        public function canGoBackS() : Boolean {
+        public function canGoBackS() : Boolean
+        {
             App.utils.asserter.assertNotNull(this.canGoBack,"canGoBack" + Errors.CANT_NULL);
             return this.canGoBack();
         }
         
-        public function onBrowseRalliesS() : void {
+        public function onBrowseRalliesS() : void
+        {
             App.utils.asserter.assertNotNull(this.onBrowseRallies,"onBrowseRallies" + Errors.CANT_NULL);
             this.onBrowseRallies();
         }
         
-        public function onCreateRallyS() : void {
+        public function onCreateRallyS() : void
+        {
             App.utils.asserter.assertNotNull(this.onCreateRally,"onCreateRally" + Errors.CANT_NULL);
             this.onCreateRally();
         }
         
-        public function onJoinRallyS(param1:Number, param2:int, param3:Number) : void {
+        public function onJoinRallyS(param1:Number, param2:int, param3:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.onJoinRally,"onJoinRally" + Errors.CANT_NULL);
             this.onJoinRally(param1,param2,param3);
         }
         
-        public function onAutoMatchS(param1:String, param2:Array) : void {
+        public function onAutoMatchS(param1:String, param2:Array) : void
+        {
             App.utils.asserter.assertNotNull(this.onAutoMatch,"onAutoMatch" + Errors.CANT_NULL);
             this.onAutoMatch(param1,param2);
         }
         
-        public function autoSearchApplyS(param1:String) : void {
+        public function autoSearchApplyS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.autoSearchApply,"autoSearchApply" + Errors.CANT_NULL);
             this.autoSearchApply(param1);
         }
         
-        public function autoSearchCancelS(param1:String) : void {
+        public function autoSearchCancelS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.autoSearchCancel,"autoSearchCancel" + Errors.CANT_NULL);
             this.autoSearchCancel(param1);
         }

@@ -6,7 +6,8 @@ package net.wg.data.VO
     public class UserVO extends DAAPIDataClass implements IUserVO
     {
         
-        public function UserVO(param1:Object) {
+        public function UserVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -24,67 +25,83 @@ package net.wg.data.VO
         
         private var _igrType:int = 0;
         
-        public function get accID() : Number {
+        public function get accID() : Number
+        {
             return this._accID;
         }
         
-        public function set accID(param1:Number) : void {
+        public function set accID(param1:Number) : void
+        {
             this._accID = param1;
         }
         
-        public function get dbID() : Number {
+        public function get dbID() : Number
+        {
             return this._dbID;
         }
         
-        public function set dbID(param1:Number) : void {
+        public function set dbID(param1:Number) : void
+        {
             this._dbID = param1;
         }
         
-        public function get fullName() : String {
+        public function get fullName() : String
+        {
             return this._fullName;
         }
         
-        public function set fullName(param1:String) : void {
+        public function set fullName(param1:String) : void
+        {
             this._fullName = param1;
         }
         
-        public function get userName() : String {
+        public function get userName() : String
+        {
             return this._userName;
         }
         
-        public function set userName(param1:String) : void {
+        public function set userName(param1:String) : void
+        {
             this._userName = param1;
         }
         
-        public function get clanAbbrev() : String {
+        public function get clanAbbrev() : String
+        {
             return this._clanAbbrev;
         }
         
-        public function set clanAbbrev(param1:String) : void {
+        public function set clanAbbrev(param1:String) : void
+        {
             this._clanAbbrev = param1;
         }
         
-        public function get region() : String {
+        public function get region() : String
+        {
             return this._region;
         }
         
-        public function set region(param1:String) : void {
+        public function set region(param1:String) : void
+        {
             this._region = param1;
         }
         
-        public function get igrType() : int {
+        public function get igrType() : int
+        {
             return this._igrType;
         }
         
-        public function set igrType(param1:int) : void {
+        public function set igrType(param1:int) : void
+        {
             this._igrType = param1;
         }
         
-        public function get uid() : Number {
+        public function get uid() : Number
+        {
             return this._dbID;
         }
         
-        public function get kickId() : Number {
+        public function get kickId() : Number
+        {
             return this._dbID;
         }
     }

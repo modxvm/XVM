@@ -14,7 +14,8 @@ package net.wg.gui.cyberSport.views
     public class RosterSettingsView extends UIComponent
     {
         
-        public function RosterSettingsView() {
+        public function RosterSettingsView()
+        {
             this.tweens = new Vector.<Tween>();
             super();
             this.slot1.visible = false;
@@ -75,7 +76,8 @@ package net.wg.gui.cyberSport.views
         
         private var _setSelectedSettings:Array = null;
         
-        private function clickRosterSettingsBtnHandler(param1:CSComponentEvent) : void {
+        private function clickRosterSettingsBtnHandler(param1:CSComponentEvent) : void
+        {
             var _loc2_:Array = [];
             var _loc3_:* = 0;
             while(_loc3_ < this.slotsLength)
@@ -89,31 +91,38 @@ package net.wg.gui.cyberSport.views
             dispatchEvent(new CSComponentEvent(CSComponentEvent.SHOW_SETTINGS_ROSTER_WND,_loc2_));
         }
         
-        public function set buttonYOffset(param1:Number) : void {
+        public function set buttonYOffset(param1:Number) : void
+        {
             this._buttonYOffset = param1;
         }
         
-        public function get buttonYOffset() : Number {
+        public function get buttonYOffset() : Number
+        {
             return this._buttonYOffset;
         }
         
-        public function set animationDuration(param1:Number) : void {
+        public function set animationDuration(param1:Number) : void
+        {
             this._animationDuration = param1;
         }
         
-        public function get animationDuration() : Number {
+        public function get animationDuration() : Number
+        {
             return this._animationDuration;
         }
         
-        public function set innerAnmDuration(param1:Number) : void {
+        public function set innerAnmDuration(param1:Number) : void
+        {
             this._innerAnmDuration = param1;
         }
         
-        public function get innerAnmDuration() : Number {
+        public function get innerAnmDuration() : Number
+        {
             return this._innerAnmDuration;
         }
         
-        public function setData(param1:Array) : void {
+        public function setData(param1:Array) : void
+        {
             var _loc3_:RallySlotVO = null;
             if(param1 == null)
             {
@@ -128,11 +137,13 @@ package net.wg.gui.cyberSport.views
             invalidate(InvalidationType.DATA);
         }
         
-        public function get chooseRoster() : Array {
+        public function get chooseRoster() : Array
+        {
             return [];
         }
         
-        private function afterSetData() : void {
+        private function afterSetData() : void
+        {
             var _loc1_:* = 0;
             while(_loc1_ < this._models.length)
             {
@@ -148,7 +159,8 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        public function set setSelectedSettings(param1:Array) : void {
+        public function set setSelectedSettings(param1:Array) : void
+        {
             this._setSelectedSettings = param1;
             var _loc2_:* = 0;
             while(_loc2_ < this.slotsLength)
@@ -161,7 +173,8 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
             this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.cancelBtn_buttonClickHandler);
@@ -179,7 +192,8 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.submitBtn.y = this.buttonYOffset;
             this.cancelBtn.y = this.buttonYOffset;
@@ -193,7 +207,8 @@ package net.wg.gui.cyberSport.views
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.cancelBtn_buttonClickHandler);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this._models))
             {
@@ -201,30 +216,33 @@ package net.wg.gui.cyberSport.views
             }
         }
         
-        public function animationIn() : void {
+        public function animationIn() : void
+        {
             this.setAnimationProperties(true);
             this.setAnimationRules({"alpha":1});
         }
         
-        public function animationOut() : void {
+        public function animationOut() : void
+        {
             this.setAnimationProperties(false);
             this.setAnimationRules({"alpha":0});
         }
         
-        private function setAnimationRules(param1:Object) : void {
+        private function setAnimationRules(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
             }
             this.stopPrevioseAnimation();
-            this.tweens = Vector.<Tween>([new Tween(this.animationDuration,this,param1,{
-                "paused":false,
-                "ease":Strong.easeOut,
-                "onComplete":null
-            })]);
+            this.tweens = Vector.<Tween>([new Tween(this.animationDuration,this,param1,{"paused":false,
+            "ease":Strong.easeOut,
+            "onComplete":null
+        })]);
     }
     
-    private function stopPrevioseAnimation() : void {
+    private function stopPrevioseAnimation() : void
+    {
         var _loc1_:Tween = null;
         if(this.tweens)
         {
@@ -236,7 +254,8 @@ package net.wg.gui.cyberSport.views
         }
     }
     
-    private function setAnimationProperties(param1:Boolean = false) : void {
+    private function setAnimationProperties(param1:Boolean = false) : void
+    {
         var _loc2_:* = 0;
         while(_loc2_ < this.slotsLength)
         {
@@ -253,11 +272,13 @@ package net.wg.gui.cyberSport.views
         }
     }
     
-    private function submitBtn_buttonClickHandler(param1:ButtonEvent) : void {
+    private function submitBtn_buttonClickHandler(param1:ButtonEvent) : void
+    {
         dispatchEvent(new CSComponentEvent(CSComponentEvent.APPLY_ROSTER_SETTINGS));
     }
     
-    public function getSettingsResults() : Array {
+    public function getSettingsResults() : Array
+    {
         var _loc1_:Array = [];
         var _loc2_:* = 0;
         while(_loc2_ < this.slotsLength)
@@ -268,7 +289,8 @@ package net.wg.gui.cyberSport.views
         return _loc1_;
     }
     
-    private function cancelBtn_buttonClickHandler(param1:ButtonEvent) : void {
+    private function cancelBtn_buttonClickHandler(param1:ButtonEvent) : void
+    {
         invalidate(InvalidationType.DATA);
         dispatchEvent(new CSComponentEvent(CSComponentEvent.CANCEL_ROSTER_SETTINGS));
     }

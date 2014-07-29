@@ -21,15 +21,18 @@ package net.wg.gui.lobby.training
     public class TrainingWindow extends TrainingWindowMeta implements ITrainingWindowMeta
     {
         
-        public function TrainingWindow() {
+        public function TrainingWindow()
+        {
             super();
         }
         
-        private static function showTooltip(param1:MouseEvent) : void {
+        private static function showTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(TOOLTIPS.TRAINING_CREATE_INVITES_CHECKBOX);
         }
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -59,12 +62,14 @@ package net.wg.gui.lobby.training
         
         private var _dataWasSetted:Boolean = false;
         
-        public function populateMaps(param1:Array) : void {
+        public function populateMaps(param1:Array) : void
+        {
             this.mapsData = param1;
             this.maps.dataProvider = new DataProvider(param1);
         }
         
-        public function setInfo(param1:Object) : void {
+        public function setInfo(param1:Object) : void
+        {
             var _loc2_:* = NaN;
             this.paramsVO = new TrainingWindowVO(param1);
             if(this.paramsVO.create)
@@ -92,7 +97,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.createButon.addEventListener(ButtonEvent.CLICK,this.createTraining);
             this.closeButon.addEventListener(ButtonEvent.CLICK,this.onClose);
@@ -104,12 +110,14 @@ package net.wg.gui.lobby.training
             this.description.text = "";
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.createButon);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             this.battleTime.maximum = App.globalVarsMgr.isDevelopmentS()?9999:30;
             this.battleTime.validateNow();
@@ -119,7 +127,8 @@ package net.wg.gui.lobby.training
             this.setInfo(getInfoS());
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.createButon.removeEventListener(ButtonEvent.CLICK,this.createTraining);
             this.closeButon.removeEventListener(ButtonEvent.CLICK,this.onClose);
             this.isPrivate.removeEventListener(MouseEvent.ROLL_OVER,showTooltip);
@@ -151,7 +160,8 @@ package net.wg.gui.lobby.training
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.paramsVO))
             {
@@ -165,11 +175,13 @@ package net.wg.gui.lobby.training
             }
         }
         
-        private function onClose(param1:ButtonEvent) : void {
+        private function onClose(param1:ButtonEvent) : void
+        {
             onWindowCloseS();
         }
         
-        private function createTraining(param1:ButtonEvent) : void {
+        private function createTraining(param1:ButtonEvent) : void
+        {
             var _loc2_:Number = this.mapsData[this.maps.selectedIndex].key;
             var _loc3_:Number = this.battleTime.value;
             var _loc4_:int = this.isPrivate.selected?1:0;
@@ -178,7 +190,8 @@ package net.wg.gui.lobby.training
             this.onClose(null);
         }
         
-        private function onMapChange(param1:ListEvent) : void {
+        private function onMapChange(param1:ListEvent) : void
+        {
             if(param1.index < this.mapsData.length)
             {
                 this.mapName.text = param1.itemData.name;

@@ -6,7 +6,8 @@ package net.wg.gui.notification
     public class NotificationTimeComponent extends UIComponent
     {
         
-        public function NotificationTimeComponent() {
+        public function NotificationTimeComponent()
+        {
             super();
         }
         

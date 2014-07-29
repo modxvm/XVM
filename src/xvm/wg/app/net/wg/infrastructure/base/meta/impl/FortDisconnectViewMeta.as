@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class FortDisconnectViewMeta extends BaseDAAPIComponent
     {
         
-        public function FortDisconnectViewMeta() {
+        public function FortDisconnectViewMeta()
+        {
             super();
         }
     }

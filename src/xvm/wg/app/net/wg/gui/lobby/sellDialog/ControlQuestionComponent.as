@@ -13,7 +13,8 @@ package net.wg.gui.lobby.sellDialog
     public class ControlQuestionComponent extends UIComponent
     {
         
-        public function ControlQuestionComponent() {
+        public function ControlQuestionComponent()
+        {
             super();
             this.userInputControl = new UserInputControl();
         }
@@ -46,63 +47,77 @@ package net.wg.gui.lobby.sellDialog
         
         private var userInputControl:UserInputControl;
         
-        public function get controlText() : String {
+        public function get controlText() : String
+        {
             return this._controlText;
         }
         
-        public function set controlText(param1:String) : void {
+        public function set controlText(param1:String) : void
+        {
             this._controlText = param1;
         }
         
-        public function get formattedControlText() : String {
+        public function get formattedControlText() : String
+        {
             return this._formattedControlText;
         }
         
-        public function set formattedControlText(param1:String) : void {
+        public function set formattedControlText(param1:String) : void
+        {
             this.creditsParseResult = App.utils.locale.parseFormattedInteger(param1);
             this._formattedControlText = param1;
         }
         
-        public function get headerText() : String {
+        public function get headerText() : String
+        {
             return this._headerText;
         }
         
-        public function set headerText(param1:String) : void {
+        public function set headerText(param1:String) : void
+        {
             this._headerText = param1;
         }
         
-        public function get questionText() : String {
+        public function get questionText() : String
+        {
             return this._questionText;
         }
         
-        public function set questionText(param1:String) : void {
+        public function set questionText(param1:String) : void
+        {
             this._questionText = param1;
         }
         
-        public function get errorText() : String {
+        public function get errorText() : String
+        {
             return this._errorText;
         }
         
-        public function set errorText(param1:String) : void {
+        public function set errorText(param1:String) : void
+        {
             this._errorText = param1;
         }
         
-        public function getNextPosition() : int {
+        public function getNextPosition() : int
+        {
             return this.errorMessage.y + this.errorMessage.height + PADDING_FOR_NEXT_ELEMENT;
         }
         
-        public function getUserText() : String {
+        public function getUserText() : String
+        {
             var _loc1_:IFormattedInt = App.utils.locale.parseFormattedInteger(this.userInput.text);
             return _loc1_.value.toString();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.showErrorState(false);
             this.userInput.addEventListener(InputEvent.INPUT,this.userInputHandler);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.userInput.removeEventListener(InputEvent.INPUT,this.userInputHandler);
             this.userInput.dispose();
@@ -110,7 +125,8 @@ package net.wg.gui.lobby.sellDialog
             App.utils.scheduler.cancelTask(this.runtimeValidate);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -120,7 +136,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        private function userInputHandler(param1:InputEvent) : void {
+        private function userInputHandler(param1:InputEvent) : void
+        {
             if(param1.details.value == InputValue.KEY_UP)
             {
                 this.showErrorState(false);
@@ -138,7 +155,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        private function showErrorState(param1:Boolean) : void {
+        private function showErrorState(param1:Boolean) : void
+        {
             if(this.userInput.text == "")
             {
                 this.userInput.highlight = false;
@@ -151,15 +169,18 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        private function runtimeValidate() : void {
+        private function runtimeValidate() : void
+        {
             this.showErrorState(!this.isValidControlInput);
         }
         
-        private function get isEmptyText() : Boolean {
+        private function get isEmptyText() : Boolean
+        {
             return this.userInput.text == "";
         }
         
-        public function get isValidControlInput() : Boolean {
+        public function get isValidControlInput() : Boolean
+        {
             if(this.creditsParseResult)
             {
                 return this.userInputControl.cmpFormatUserInputString(this.userInput.text,this.creditsParseResult.delimiter,this.formattedControlText,this.controlText);
@@ -167,7 +188,8 @@ package net.wg.gui.lobby.sellDialog
             return false;
         }
         
-        public function cleanField() : void {
+        public function cleanField() : void
+        {
             if(this.userInput)
             {
                 this.userInput.text = "";

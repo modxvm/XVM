@@ -10,13 +10,15 @@ package net.wg.gui.lobby.window
     public class ExchangeWindow extends ExchangeCurrencyWindow
     {
         
-        public function ExchangeWindow() {
+        public function ExchangeWindow()
+        {
             super();
         }
         
         public var errorLabel:TextField;
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             var _loc2_:Padding = null;
             super.setWindow(param1);
             if(param1)
@@ -31,7 +33,8 @@ package net.wg.gui.lobby.window
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             var _loc1_:DropShadowFilter = new DropShadowFilter();
             _loc1_.blurX = 2;
@@ -57,13 +60,15 @@ package net.wg.gui.lobby.window
             headerMC.rateTo.filters = ExchangeUtils.getGlow(IconsTypes.CREDITS);
         }
         
-        override protected function applyResultUpdating() : void {
+        override protected function applyResultUpdating() : void
+        {
             super.applyResultUpdating();
             nsPrimaryCurrency.maximum = totalPrimaryCurrency;
             nsSecondaryCurrency.maximum = totalPrimaryCurrency * actualRate;
         }
         
-        override protected function applyPrimaryCurrencyChange() : void {
+        override protected function applyPrimaryCurrencyChange() : void
+        {
             super.applyPrimaryCurrencyChange();
             this.errorLabel.visible = totalPrimaryCurrency <= 0;
         }

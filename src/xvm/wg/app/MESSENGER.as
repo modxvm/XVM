@@ -1,9 +1,10 @@
-package 
+package
 {
     public class MESSENGER extends Object
     {
         
-        public function MESSENGER() {
+        public function MESSENGER()
+        {
             super();
         }
         

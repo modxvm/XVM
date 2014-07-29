@@ -11,7 +11,8 @@ package net.wg.infrastructure.managers.utils.animation.impl
     public class TweenWrapper extends Sprite
     {
         
-        public function TweenWrapper(param1:DisplayObjectContainer, param2:DisplayObject) {
+        public function TweenWrapper(param1:DisplayObjectContainer, param2:DisplayObject)
+        {
             this.chainOfAnimations = new Vector.<LinkedObjects>(0);
             super();
             var _loc3_:String = "Container" + Errors.CANT_NULL;
@@ -31,7 +32,8 @@ package net.wg.infrastructure.managers.utils.animation.impl
             addChild(param2);
         }
         
-        private static function getAsserter() : IAssertable {
+        private static function getAsserter() : IAssertable
+        {
             return App.utils.asserter;
         }
         
@@ -45,7 +47,8 @@ package net.wg.infrastructure.managers.utils.animation.impl
         
         private var chainOfAnimations:Vector.<LinkedObjects>;
         
-        public function addAnimationByClassName(param1:String) : IAnimation {
+        public function addAnimationByClassName(param1:String) : IAnimation
+        {
             var _loc2_:IAnimation = null;
             var _loc4_:DisplayObject = null;
             var _loc3_:int = this.findElementIndexByClassName(param1);
@@ -64,7 +67,8 @@ package net.wg.infrastructure.managers.utils.animation.impl
             return _loc2_;
         }
         
-        public function removeAnimationByClassName(param1:String) : void {
+        public function removeAnimationByClassName(param1:String) : void
+        {
             var _loc4_:DisplayObjectContainer = null;
             var _loc5_:IAnimation = null;
             var _loc6_:DisplayObject = null;
@@ -90,7 +94,8 @@ package net.wg.infrastructure.managers.utils.animation.impl
             }
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             while(this.chainOfAnimations.length > 0)
             {
                 this.chainOfAnimations.pop().dispose();
@@ -104,7 +109,8 @@ package net.wg.infrastructure.managers.utils.animation.impl
             this._target = null;
         }
         
-        private function findElementIndexByClassName(param1:String) : int {
+        private function findElementIndexByClassName(param1:String) : int
+        {
             var _loc4_:LinkedObjects = null;
             var _loc2_:* = -1;
             var _loc3_:* = 0;
@@ -128,7 +134,8 @@ import net.wg.infrastructure.interfaces.IAnimation;
 class LinkedObjects extends Object implements IDisposable
 {
     
-    function LinkedObjects(param1:IAnimation, param2:String) {
+    function LinkedObjects(param1:IAnimation, param2:String)
+    {
         super();
         this._element = param1;
         this._elementClassName = param2;
@@ -138,23 +145,28 @@ class LinkedObjects extends Object implements IDisposable
     
     private var _elementClassName:String = null;
     
-    public function get element() : IAnimation {
+    public function get element() : IAnimation
+    {
         return this._element;
     }
     
-    public function set element(param1:IAnimation) : void {
+    public function set element(param1:IAnimation) : void
+    {
         this._element = param1;
     }
     
-    public function get elementClassName() : String {
+    public function get elementClassName() : String
+    {
         return this._elementClassName;
     }
     
-    public function set elementClassName(param1:String) : void {
+    public function set elementClassName(param1:String) : void
+    {
         this._elementClassName = param1;
     }
     
-    public function dispose() : void {
+    public function dispose() : void
+    {
         this._element = null;
         this._elementClassName = null;
     }

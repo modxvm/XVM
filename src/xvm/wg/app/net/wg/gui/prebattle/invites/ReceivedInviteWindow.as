@@ -12,7 +12,8 @@ package net.wg.gui.prebattle.invites
     public class ReceivedInviteWindow extends ReceivedInviteWindowMeta implements IReceivedInviteWindowMeta
     {
         
-        public function ReceivedInviteWindow() {
+        public function ReceivedInviteWindow()
+        {
             super();
         }
         
@@ -42,17 +43,20 @@ package net.wg.gui.prebattle.invites
         
         private var isUpdatedData:Boolean = true;
         
-        public function as_setTitle(param1:String) : void {
+        public function as_setTitle(param1:String) : void
+        {
             window.title = param1;
         }
         
-        public function as_setReceivedInviteInfo(param1:Object) : void {
+        public function as_setReceivedInviteInfo(param1:Object) : void
+        {
             this.inviteVO = new ReceivedInviteVO(param1);
             this.isUpdatedData = false;
             invalidate(UPDATE_DATA);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(UPDATE_DATA)) && !this.isUpdatedData)
             {
@@ -61,7 +65,8 @@ package net.wg.gui.prebattle.invites
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             canClose = true;
             showWindowBg = false;
@@ -73,7 +78,8 @@ package net.wg.gui.prebattle.invites
             this.inviteAddMessageLabel.text = INVITES.GUI_LABELS_ADDITIONALTEXT;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.acceptButton.addEventListener(ButtonEvent.CLICK,this.acceptButton_buttonClickHandler);
             this.declineButton.addEventListener(ButtonEvent.CLICK,this.declineButton_buttonClickHandler);
@@ -82,7 +88,8 @@ package net.wg.gui.prebattle.invites
             invalidate(UPDATE_DATA);
         }
         
-        private function updateComponents() : void {
+        private function updateComponents() : void
+        {
             if(!this.inviteVO)
             {
                 return;
@@ -127,22 +134,26 @@ package net.wg.gui.prebattle.invites
             window.updateSize(width,height,true);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.acceptButton.removeEventListener(ButtonEvent.CLICK,this.acceptButton_buttonClickHandler);
             this.declineButton.removeEventListener(ButtonEvent.CLICK,this.declineButton_buttonClickHandler);
             this.cancelButton.removeEventListener(ButtonEvent.CLICK,this.cancelButton_buttonClickHandler);
             super.onDispose();
         }
         
-        private function acceptButton_buttonClickHandler(param1:ButtonEvent) : void {
+        private function acceptButton_buttonClickHandler(param1:ButtonEvent) : void
+        {
             acceptInviteS();
         }
         
-        private function declineButton_buttonClickHandler(param1:ButtonEvent) : void {
+        private function declineButton_buttonClickHandler(param1:ButtonEvent) : void
+        {
             declineInviteS();
         }
         
-        private function cancelButton_buttonClickHandler(param1:ButtonEvent) : void {
+        private function cancelButton_buttonClickHandler(param1:ButtonEvent) : void
+        {
             cancelInviteS();
         }
     }

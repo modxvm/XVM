@@ -6,18 +6,21 @@ package net.wg.gui.lobby.techtree.controls
     public class TypeAndLevelField extends NodeComponent
     {
         
-        public function TypeAndLevelField() {
+        public function TypeAndLevelField()
+        {
             super();
         }
         
         public var levelIcon:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             mouseEnabled = mouseChildren = false;
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:String = null;
             var _loc2_:String = null;
             var _loc3_:* = 0;

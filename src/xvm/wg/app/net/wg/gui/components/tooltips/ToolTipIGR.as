@@ -12,7 +12,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipIGR extends ToolTipSpecial
     {
         
-        public function ToolTipIGR() {
+        public function ToolTipIGR()
+        {
             super();
             this.headerTF = content.headerTF;
             this.discrTF = content.discrTF;
@@ -27,11 +28,13 @@ package net.wg.gui.components.tooltips
         
         private var progressBlock:IgrQuestProgressBlock = null;
         
-        override public function build(param1:Object, param2:ITooltipProps) : void {
+        override public function build(param1:Object, param2:ITooltipProps) : void
+        {
             super.build(param1,param2);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.progressBlock)
             {
                 content.removeChild(this.progressBlock);
@@ -40,15 +43,18 @@ package net.wg.gui.components.tooltips
             super.onDispose();
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ToolTipIGR " + name + "]";
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc4_:* = NaN;
             var _loc5_:IgrVO = null;
             var _loc9_:IgrQuestBlock = null;
@@ -132,7 +138,8 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             super.updateSize();
             this.whiteBg.width = content.width + bgShadowMargin.horizontal;
         }

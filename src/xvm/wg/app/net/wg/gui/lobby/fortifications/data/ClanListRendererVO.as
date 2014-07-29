@@ -3,7 +3,8 @@ package net.wg.gui.lobby.fortifications.data
     public class ClanListRendererVO extends FortClanMemberVO
     {
         
-        public function ClanListRendererVO(param1:Object) {
+        public function ClanListRendererVO(param1:Object)
+        {
             super(param1);
         }
         

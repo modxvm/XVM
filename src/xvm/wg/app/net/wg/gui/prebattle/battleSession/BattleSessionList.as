@@ -19,7 +19,8 @@ package net.wg.gui.prebattle.battleSession
     public class BattleSessionList extends BattleSessionListMeta implements IBattleSessionListMeta
     {
         
-        public function BattleSessionList() {
+        public function BattleSessionList()
+        {
             super();
             showWindowBg = false;
             canMinimize = true;
@@ -36,32 +37,38 @@ package net.wg.gui.prebattle.battleSession
         
         public var groupListBG:MovieClip;
         
-        public function as_refreshList(param1:Array) : void {
+        public function as_refreshList(param1:Array) : void
+        {
             this.groupsList.dataProvider = new DataProvider(param1);
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.channelComponent.getComponentForFocus());
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.groupsList.addEventListener(ListEventEx.ITEM_CLICK,this.handleTeamItemClick);
             this.setConstraints();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.groupsList.removeEventListener(ListEventEx.ITEM_CLICK,this.handleTeamItemClick);
             removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
         }
         
-        private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
+        private function onRequestFocusHandler(param1:FocusRequestEvent) : void
+        {
             setFocus(param1.focusContainer.getComponentForFocus());
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
             addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
@@ -70,11 +77,13 @@ package net.wg.gui.prebattle.battleSession
             geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        private function setConstraints() : void {
+        private function setConstraints() : void
+        {
             constraints = new Constraints(this,ConstrainMode.REFLOW);
             constraints.addElement("messageArea",this.channelComponent.messageArea,Constraints.ALL);
             constraints.addElement("messageInput",this.channelComponent.messageInput,Constraints.BOTTOM | Constraints.LEFT | Constraints.RIGHT);
@@ -85,7 +94,8 @@ package net.wg.gui.prebattle.battleSession
             constraints.addElement("groupsScrollBar",this.groupsScrollBar,Constraints.TOP | Constraints.BOTTOM | Constraints.RIGHT);
         }
         
-        private function handleTeamItemClick(param1:ListEventEx) : void {
+        private function handleTeamItemClick(param1:ListEventEx) : void
+        {
             var _loc2_:BSListRendererVO = new BSListRendererVO(param1.itemData);
             requestToJoinTeamS(_loc2_.prbID,_loc2_.prbType);
         }

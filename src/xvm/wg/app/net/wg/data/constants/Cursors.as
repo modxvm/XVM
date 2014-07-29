@@ -5,19 +5,20 @@ package net.wg.data.constants
     public class Cursors extends Object
     {
         
-        public function Cursors() {
+        public function Cursors()
+        {
             super();
         }
         
-        public static var ARROW:String = "arrow";
+        public static var ARROW:String = MouseCursor.ARROW;
         
-        public static var AUTO:String = "auto";
+        public static var AUTO:String = MouseCursor.AUTO;
         
-        public static var BUTTON:String = "button";
+        public static var BUTTON:String = MouseCursor.BUTTON;
         
-        public static var HAND:String = "hand";
+        public static var HAND:String = MouseCursor.HAND;
         
-        public static var IBEAM:String = "ibeam";
+        public static var IBEAM:String = MouseCursor.IBEAM;
         
         public static var ROTATE:String = "rotate";
         
@@ -31,6 +32,6 @@ package net.wg.data.constants
         
         public static var NUT:String = "nut";
         
-        public static var CUSTOMIZED_CURSORS:Vector.<String>;
+        public static var CUSTOMIZED_CURSORS:Vector.<String> = Vector.<String>([ROTATE,RESIZE,MOVE,DRAG_OPEN,DRAG_CLOSE]);
     }
 }

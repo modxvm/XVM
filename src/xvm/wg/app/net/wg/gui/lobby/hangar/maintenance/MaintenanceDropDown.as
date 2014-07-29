@@ -10,11 +10,13 @@ package net.wg.gui.lobby.hangar.maintenance
     public class MaintenanceDropDown extends DropdownMenu
     {
         
-        public function MaintenanceDropDown() {
+        public function MaintenanceDropDown()
+        {
             super();
         }
         
-        override protected function showDropdown() : void {
+        override protected function showDropdown() : void
+        {
             super.showDropdown();
             var _loc1_:Point = parent.parent.globalToLocal(new Point(_dropdownRef.x,_dropdownRef.y));
             var _loc2_:IEventCollector = App.utils.events;
@@ -26,11 +28,13 @@ package net.wg.gui.lobby.hangar.maintenance
             _loc2_.addEvent(_dropdownRef,OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.handleOnEquipmentRendererOver,false,0,true);
         }
         
-        private function handleOnEquipmentRendererOver(param1:OnEquipmentRendererOver) : void {
+        private function handleOnEquipmentRendererOver(param1:OnEquipmentRendererOver) : void
+        {
             dispatchEvent(new OnEquipmentRendererOver(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,param1.moduleID,param1.modulePrices,param1.inventoryCount,param1.vehicleCount,param1.moduleIndex));
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             super.handleMouseRollOut(param1);
             if(!param1.buttonDown)
             {
@@ -42,7 +46,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             if(!param1.buttonDown)
             {
@@ -54,7 +59,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {

@@ -11,7 +11,8 @@ package net.wg.gui.components.tooltips
     public class Status extends UIComponent
     {
         
-        public function Status() {
+        public function Status()
+        {
             super();
             this.init();
         }
@@ -38,7 +39,8 @@ package net.wg.gui.components.tooltips
         
         private var textFormat:TextFormat = null;
         
-        private function init() : void {
+        private function init() : void
+        {
             this.textFieldHeader.multiline = true;
             this.textFieldHeader.autoSize = TextFieldAutoSize.LEFT;
             this.textFieldHeader.wordWrap = true;
@@ -48,7 +50,8 @@ package net.wg.gui.components.tooltips
             this.textFormat = new TextFormat();
         }
         
-        public function setData(param1:String = null, param2:String = null, param3:ToolTipStatusColorsVO = null, param4:String = "none") : Number {
+        public function setData(param1:String = null, param2:String = null, param3:ToolTipStatusColorsVO = null, param4:String = "none") : Number
+        {
             var _loc5_:Number = 0;
             this._header = param1;
             this._text = param2;
@@ -81,11 +84,13 @@ package net.wg.gui.components.tooltips
             return _loc5_;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        public function updateWidth(param1:Number) : void {
+        public function updateWidth(param1:Number) : void
+        {
             if(this._ico != this.ICO_DEF)
             {
                 param1 = param1 - this.icon.width;
@@ -100,7 +105,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        override public function get height() : Number {
+        override public function get height() : Number
+        {
             return _originalHeight;
         }
     }

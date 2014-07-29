@@ -6,7 +6,8 @@ package net.wg.gui.lobby.GUIEditor.events
     public class InspectorViewEvent extends Event
     {
         
-        public function InspectorViewEvent(param1:String, param2:DisplayObject, param3:Boolean = true, param4:Boolean = false) {
+        public function InspectorViewEvent(param1:String, param2:DisplayObject, param3:Boolean = true, param4:Boolean = false)
+        {
             super(param1,param3,param4);
             this.selectedElement = param2;
         }

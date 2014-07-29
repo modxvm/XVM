@@ -8,7 +8,8 @@ package net.wg.gui.components.advanced
     public class ToggleButton extends ButtonIconLoader
     {
         
-        public function ToggleButton() {
+        public function ToggleButton()
+        {
             super();
             this.rFlagsFrame.visible = false;
             this.vType.visible = false;
@@ -34,16 +35,19 @@ package net.wg.gui.components.advanced
         
         private var _buttonCursor:Boolean = false;
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             this.alpha = param1?1:0.5;
         }
         
-        public function get vehicleType() : String {
+        public function get vehicleType() : String
+        {
             return this._vehicleType;
         }
         
-        public function set vehicleType(param1:String) : void {
+        public function set vehicleType(param1:String) : void
+        {
             if((param1) && !(param1 == "") && !(param1 == "none"))
             {
                 this._vehicleType = param1;
@@ -52,11 +56,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get nationFlag() : String {
+        public function get nationFlag() : String
+        {
             return this._nationFlag;
         }
         
-        public function set nationFlag(param1:String) : void {
+        public function set nationFlag(param1:String) : void
+        {
             if((param1) && !(param1 == "") && !(param1 == "none"))
             {
                 this._nationFlag = param1;
@@ -68,7 +74,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.sizeArea.visible = false;
             buttonMode = true;
@@ -76,7 +83,8 @@ package net.wg.gui.components.advanced
             mouseChildren = true;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.STATE)) && (this.hightLight))
             {
@@ -84,7 +92,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        protected function changeViewState(param1:Boolean) : void {
+        protected function changeViewState(param1:Boolean) : void
+        {
             if(externalSource)
             {
                 return;
@@ -97,7 +106,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function completeHandler(param1:Event) : void {
+        override protected function completeHandler(param1:Event) : void
+        {
             if((loader) && (this.toggleBg.contains(loader)))
             {
                 this.toggleBg.removeChild(loader);

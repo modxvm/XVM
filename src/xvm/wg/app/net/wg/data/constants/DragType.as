@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class DragType extends Object
     {
         
-        public function DragType() {
+        public function DragType()
+        {
             super();
         }
         

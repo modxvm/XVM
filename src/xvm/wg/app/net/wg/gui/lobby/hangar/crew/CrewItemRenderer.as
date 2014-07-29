@@ -38,7 +38,8 @@ package net.wg.gui.lobby.hangar.crew
     public class CrewItemRenderer extends DropdownMenu implements IListItemRenderer
     {
         
-        public function CrewItemRenderer() {
+        public function CrewItemRenderer()
+        {
             super();
         }
         
@@ -52,7 +53,8 @@ package net.wg.gui.lobby.hangar.crew
         
         private static var DEBUFF:String = "#FF0000";
         
-        private static function setupDataProvider(param1:Array) : IDataProvider {
+        private static function setupDataProvider(param1:Array) : IDataProvider
+        {
             var _loc3_:Object = null;
             var _loc2_:DataProvider = new DataProvider();
             for each(_loc3_ in param1)
@@ -62,7 +64,8 @@ package net.wg.gui.lobby.hangar.crew
             return _loc2_;
         }
         
-        private static function createSkillObj(param1:RecruitRendererVO, param2:Number) : SkillsVO {
+        private static function createSkillObj(param1:RecruitRendererVO, param2:Number) : SkillsVO
+        {
             var _loc3_:SkillsVO = new SkillsVO({});
             var _loc4_:SkillsVO = SkillsVO(param1.skills[param2]);
             if(!_loc4_.buy)
@@ -125,13 +128,15 @@ package net.wg.gui.lobby.hangar.crew
         
         private var itemClicked:Boolean = false;
         
-        public function setListData(param1:ListData) : void {
+        public function setListData(param1:ListData) : void
+        {
             this.index = param1.index;
             selected = param1.selected;
             label = param1.label || "empty";
         }
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             var rendererData:RecruitRendererVO = null;
             var listHeight:Number = NaN;
             var posY:Number = NaN;
@@ -257,11 +262,13 @@ package net.wg.gui.lobby.hangar.crew
             visible = true;
         }
         
-        public function getData() : Object {
+        public function getData() : Object
+        {
             return this.data;
         }
         
-        public function updateSkills(param1:RecruitRendererVO) : void {
+        public function updateSkills(param1:RecruitRendererVO) : void
+        {
             var _loc2_:Array = null;
             var _loc3_:* = 0;
             var _loc4_:* = 0;
@@ -325,23 +332,28 @@ package net.wg.gui.lobby.hangar.crew
             }
         }
         
-        public function openPersonalCase(param1:uint = 0) : void {
+        public function openPersonalCase(param1:uint = 0) : void
+        {
             dispatchEvent(new CrewEvent(CrewEvent.OPEN_PERSONAL_CASE,this.data,false,param1));
         }
         
-        public function playSound(param1:String) : void {
+        public function playSound(param1:String) : void
+        {
             App.soundMgr.playControlsSnd(param1,this.soundType,this.soundId);
         }
         
-        override public function get data() : Object {
+        override public function get data() : Object
+        {
             return _data;
         }
         
-        override public function set data(param1:Object) : void {
+        override public function set data(param1:Object) : void
+        {
             _data = param1;
         }
         
-        override public function set dataProvider(param1:IDataProvider) : void {
+        override public function set dataProvider(param1:IDataProvider) : void
+        {
             dropdown = param1.length > 1?"RecruitScrollingList":"RecruitScrollingList2";
             menuRowCount = param1.length < 5?param1.length:5;
             if(param1.length > this.menuRowCount)
@@ -355,28 +367,34 @@ package net.wg.gui.lobby.hangar.crew
             super.dataProvider = param1;
         }
         
-        public function get index() : uint {
+        public function get index() : uint
+        {
             return this._index;
         }
         
-        public function set index(param1:uint) : void {
+        public function set index(param1:uint) : void
+        {
             this._index = param1;
         }
         
-        public function get selectable() : Boolean {
+        public function get selectable() : Boolean
+        {
             return this._selectable;
         }
         
-        public function set selectable(param1:Boolean) : void {
+        public function set selectable(param1:Boolean) : void
+        {
             this._selectable = param1;
         }
         
-        public function get hasData() : Boolean {
+        public function get hasData() : Boolean
+        {
             var _loc1_:* = !isNaN(RecruitRendererVO(this.data).tankmanID);
             return _loc1_;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             buttonMode = true;
             this.componentInspectorSetting = true;
@@ -386,14 +404,14 @@ package net.wg.gui.lobby.hangar.crew
             menuMargin = 0;
             this.new_skill_anim.alpha = 0;
             menuOffset.left = width - 1;
-            this.inspectableThumbOffset = {
-                "top":0,
-                "bottom":0
-            };
+            this.inspectableThumbOffset = {"top":0,
+            "bottom":0
+        };
         this.visible = false;
     }
     
-    override protected function showDropdown() : void {
+    override protected function showDropdown() : void
+    {
         var _loc1_:MovieClip = null;
         var _loc2_:Class = null;
         if(dropdown == null)
@@ -434,10 +452,9 @@ package net.wg.gui.lobby.hangar.crew
             _loc1_.padding = menuPadding;
             _loc1_.wrapping = menuWrapping;
             _loc1_.margin = menuMargin;
-            _loc1_.thumbOffset = {
-                "top":thumbOffsetTop,
-                "bottom":thumbOffsetBottom
-            };
+            _loc1_.thumbOffset = {"top":thumbOffsetTop,
+            "bottom":thumbOffsetBottom
+        };
         _loc1_.focusTarget = this;
         _loc1_.rowCount = menuRowCount < 1?5:menuRowCount;
         _loc1_.labelField = _labelField;
@@ -453,7 +470,8 @@ package net.wg.gui.lobby.hangar.crew
     }
 }
 
-override protected function hideDropdown() : void {
+override protected function hideDropdown() : void
+{
     App.toolTipMgr.hide();
     if(_dropdownRef)
     {
@@ -468,7 +486,8 @@ override protected function hideDropdown() : void {
     }
 }
 
-override protected function updateAfterStateChange() : void {
+override protected function updateAfterStateChange() : void
+{
     var _loc1_:RecruitRendererVO = null;
     super.updateAfterStateChange();
     if(this.data)
@@ -482,7 +501,8 @@ override protected function updateAfterStateChange() : void {
     }
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
     if((isInvalid(InvalidationType.SELECTED_INDEX)) || (isInvalid(InvalidationType.DATA)))
     {
         _dataProvider.requestItemAt(_selectedIndex,populateText);
@@ -538,7 +558,8 @@ override protected function draw() : void {
     }
 }
 
-override protected function handleMouseRelease(param1:MouseEvent) : void {
+override protected function handleMouseRelease(param1:MouseEvent) : void
+{
     var _loc4_:* = 0;
     var _loc5_:DisplayObject = null;
     var _loc6_:* = NaN;
@@ -596,17 +617,20 @@ override protected function handleMouseRelease(param1:MouseEvent) : void {
     super.handleMouseRelease(param1);
 }
 
-override protected function handleMouseRollOver(param1:MouseEvent) : void {
+override protected function handleMouseRollOver(param1:MouseEvent) : void
+{
     super.handleMouseRollOver(param1);
     this.playSound("over");
 }
 
-override protected function handleMouseRollOut(param1:MouseEvent) : void {
+override protected function handleMouseRollOut(param1:MouseEvent) : void
+{
     super.handleMouseRollOut(param1);
     this.playSound("out");
 }
 
-override protected function handleMousePress(param1:MouseEvent) : void {
+override protected function handleMousePress(param1:MouseEvent) : void
+{
     var _loc5_:ButtonEvent = null;
     var _loc2_:MouseEventEx = param1 as MouseEventEx;
     var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
@@ -631,7 +655,8 @@ override protected function handleMousePress(param1:MouseEvent) : void {
     }
 }
 
-private function onContextMenuAction(param1:ContextMenuEvent) : void {
+private function onContextMenuAction(param1:ContextMenuEvent) : void
+{
     switch(param1.id)
     {
         case "personalCase":
@@ -643,7 +668,8 @@ private function onContextMenuAction(param1:ContextMenuEvent) : void {
     }
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
     removeEventListener(Event.ADDED,addToAutoGroup,false);
     removeEventListener(Event.REMOVED,addToAutoGroup,false);
     removeEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver,false);

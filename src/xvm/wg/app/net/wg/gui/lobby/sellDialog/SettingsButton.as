@@ -8,7 +8,8 @@ package net.wg.gui.lobby.sellDialog
     public class SettingsButton extends UIComponent
     {
         
-        public function SettingsButton() {
+        public function SettingsButton()
+        {
             super();
         }
         
@@ -18,7 +19,8 @@ package net.wg.gui.lobby.sellDialog
         
         public var ddLine:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             var _loc1_:String = App.utils.locale.makeString(DIALOGS.BUYVEHICLEDIALOG_EXPANDBTNLABEL);
             _loc1_ = App.utils.toUpperOrLowerCase(_loc1_,true);

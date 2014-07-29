@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class TooltipTags extends Object
     {
         
-        public function TooltipTags() {
+        public function TooltipTags()
+        {
             super();
         }
         

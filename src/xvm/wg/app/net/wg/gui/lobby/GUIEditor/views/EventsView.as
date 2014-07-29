@@ -7,18 +7,22 @@ package net.wg.gui.lobby.GUIEditor.views
     public class EventsView extends UIComponent implements IViewStackContent
     {
         
-        public function EventsView() {
+        public function EventsView()
+        {
             super();
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

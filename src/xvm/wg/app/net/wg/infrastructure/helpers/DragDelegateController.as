@@ -10,7 +10,8 @@ package net.wg.infrastructure.helpers
     public class DragDelegateController extends Object implements IDisposable
     {
         
-        public function DragDelegateController(param1:Vector.<InteractiveObject>, param2:Class) {
+        public function DragDelegateController(param1:Vector.<InteractiveObject>, param2:Class)
+        {
             var _loc3_:InteractiveObject = null;
             var _loc4_:IDragDelegate = null;
             super();
@@ -28,7 +29,8 @@ package net.wg.infrastructure.helpers
         
         private var _delegates:Vector.<IDragDelegate> = null;
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             var _loc1_:IDragDelegate = null;
             var _loc2_:InteractiveObject = null;
             for each(_loc1_ in this._delegates)
@@ -44,13 +46,16 @@ package net.wg.infrastructure.helpers
             this._delegates = null;
         }
         
-        protected function onBeforeHitAreaUnregistering(param1:InteractiveObject) : void {
+        protected function onBeforeHitAreaUnregistering(param1:InteractiveObject) : void
+        {
         }
         
-        protected function onEndDrag(param1:InteractiveObject, param2:InteractiveObject) : void {
+        protected function onEndDrag(param1:InteractiveObject, param2:InteractiveObject) : void
+        {
         }
         
-        private function onEndDragHandler(param1:DragEvent) : void {
+        private function onEndDragHandler(param1:DragEvent) : void
+        {
             var _loc3_:IDragDropHitArea = null;
             var _loc2_:* = false;
             for each(_loc3_ in this._delegates)
@@ -70,14 +75,17 @@ package net.wg.infrastructure.helpers
             }
         }
         
-        private function onDraggingHandler(param1:DragEvent) : void {
+        private function onDraggingHandler(param1:DragEvent) : void
+        {
         }
         
-        private function onStartDragHandler(param1:DragEvent) : void {
+        private function onStartDragHandler(param1:DragEvent) : void
+        {
             this.onStartDrag(param1.dragItem);
         }
         
-        protected function onStartDrag(param1:InteractiveObject) : void {
+        protected function onStartDrag(param1:InteractiveObject) : void
+        {
         }
     }
 }

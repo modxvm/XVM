@@ -9,7 +9,8 @@ package net.wg.gui.lobby.vehicleInfo
     public class VehicleInfoBase extends UIComponent implements IViewStackContent
     {
         
-        public function VehicleInfoBase() {
+        public function VehicleInfoBase()
+        {
             super();
         }
         
@@ -21,7 +22,8 @@ package net.wg.gui.lobby.vehicleInfo
         
         private var startX:Number = 10;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             while(this.numChildren > 0)
             {
@@ -29,11 +31,13 @@ package net.wg.gui.lobby.vehicleInfo
             }
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG VehicleInfoBase " + name + "]";
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             var _loc3_:BaseBlock = null;
             this._data = param1 as Array;
             var _loc2_:uint = 0;
@@ -48,11 +52,13 @@ package net.wg.gui.lobby.vehicleInfo
             }
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             throw new AbstractException("VehicleInfoBase::componentForFocus" + Errors.ABSTRACT_INVOKE);
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

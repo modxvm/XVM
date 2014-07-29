@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class CAPTCHAMeta extends AbstractWindowView
     {
         
-        public function CAPTCHAMeta() {
+        public function CAPTCHAMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var reload:Function = null;
         
-        public function submitS(param1:String) : void {
+        public function submitS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.submit,"submit" + Errors.CANT_NULL);
             this.submit(param1);
         }
         
-        public function reloadS() : void {
+        public function reloadS() : void
+        {
             App.utils.asserter.assertNotNull(this.reload,"reload" + Errors.CANT_NULL);
             this.reload();
         }

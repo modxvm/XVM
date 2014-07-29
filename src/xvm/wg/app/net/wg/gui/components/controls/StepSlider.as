@@ -10,7 +10,8 @@ package net.wg.gui.components.controls
     public class StepSlider extends Slider
     {
         
-        public function StepSlider() {
+        public function StepSlider()
+        {
             super();
             snapping = true;
             snapInterval = 1;
@@ -23,7 +24,7 @@ package net.wg.gui.components.controls
         
         private static var DISABLED_KEY_POINT_ALPHA:Number = 0.3;
         
-        private static var ENABLED_KEY_POINT_ALPHA:Number = 1.0;
+        private static var ENABLED_KEY_POINT_ALPHA:Number = 1;
         
         public var keyPointsContainer:Sprite;
         
@@ -35,14 +36,16 @@ package net.wg.gui.components.controls
         
         protected var valueLabelControl:DisplayObject;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(SliderEvent.VALUE_CHANGE,this.onValueChanged);
             thumb.addEventListener(MouseEvent.ROLL_OVER,this.onThumbOver);
             thumb.addEventListener(MouseEvent.ROLL_OUT,this.onThumbOut);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INVALID_VALUE_LABEL))
             {
@@ -61,7 +64,8 @@ package net.wg.gui.components.controls
             updatePatterns();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(SliderEvent.VALUE_CHANGE,this.onValueChanged);
             thumb.removeEventListener(MouseEvent.ROLL_OVER,this.onThumbOver);
             thumb.removeEventListener(MouseEvent.ROLL_OUT,this.onThumbOut);
@@ -79,7 +83,8 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        protected function getItemLabel(param1:Object) : String {
+        protected function getItemLabel(param1:Object) : String
+        {
             var _loc2_:* = "";
             if(param1)
             {
@@ -96,15 +101,18 @@ package net.wg.gui.components.controls
             return _loc2_;
         }
         
-        protected function getItemTooltip(param1:Object) : String {
+        protected function getItemTooltip(param1:Object) : String
+        {
             return this.getItemLabel(param1);
         }
         
-        private function onValueChanged(param1:SliderEvent) : void {
+        private function onValueChanged(param1:SliderEvent) : void
+        {
             this.updateValueLabel();
         }
         
-        private function updateValueLabel() : void {
+        private function updateValueLabel() : void
+        {
             if(this.valueLabelControl)
             {
                 if((this._dataProvider) && this._dataProvider.length > 0)
@@ -118,11 +126,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get dataProvider() : IDataProvider {
+        public function get dataProvider() : IDataProvider
+        {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:IDataProvider) : void {
+        public function set dataProvider(param1:IDataProvider) : void
+        {
             this._dataProvider = param1;
             if(this._dataProvider)
             {
@@ -135,16 +145,19 @@ package net.wg.gui.components.controls
             invalidateData();
         }
         
-        public function get keyPointRenderer() : String {
+        public function get keyPointRenderer() : String
+        {
             return this._keyPointRenderer;
         }
         
-        public function set keyPointRenderer(param1:String) : void {
+        public function set keyPointRenderer(param1:String) : void
+        {
             this._keyPointRenderer = param1;
             invalidate(INVALID_KEY_POINT_RENDERER);
         }
         
-        protected function checkIsItemDisabled(param1:Object) : Boolean {
+        protected function checkIsItemDisabled(param1:Object) : Boolean
+        {
             var _loc2_:* = false;
             if((param1.hasOwnProperty("enabled")) && !param1["enabled"])
             {
@@ -153,7 +166,8 @@ package net.wg.gui.components.controls
             return _loc2_;
         }
         
-        private function updateMaxAvailableValue() : void {
+        private function updateMaxAvailableValue() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:* = NaN;
             var _loc3_:* = 0;
@@ -182,7 +196,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function redrawKeyPoints() : void {
+        private function redrawKeyPoints() : void
+        {
             var _loc1_:SliderKeyPoint = null;
             this.clearKeyPoints();
             if(!this._dataProvider || this._dataProvider.length == 0)
@@ -207,19 +222,23 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function onKeyPointClick(param1:MouseEvent) : void {
+        private function onKeyPointClick(param1:MouseEvent) : void
+        {
             value = (param1.currentTarget as SliderKeyPoint).index;
         }
         
-        private function onThumbOut(param1:MouseEvent) : void {
+        private function onThumbOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onThumbOver(param1:MouseEvent) : void {
+        private function onThumbOver(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(this.getItemTooltip(this._dataProvider.requestItemAt(value)));
         }
         
-        private function clearKeyPoints() : void {
+        private function clearKeyPoints() : void
+        {
             var _loc1_:SliderKeyPoint = null;
             while(this.keyPointsContainer.numChildren)
             {
@@ -230,11 +249,13 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function get valueLabel() : String {
+        public function get valueLabel() : String
+        {
             return this._valueLabel;
         }
         
-        public function set valueLabel(param1:String) : void {
+        public function set valueLabel(param1:String) : void
+        {
             this._valueLabel = param1;
             invalidate(INVALID_VALUE_LABEL);
         }

@@ -7,7 +7,8 @@ package net.wg.gui.lobby.window
     public class BaseExchangeWindow extends BaseExchangeWindowMeta implements IBaseExchangeWindowMeta
     {
         
-        public function BaseExchangeWindow() {
+        public function BaseExchangeWindow()
+        {
             super();
         }
         
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.window
         
         protected var actualRate:uint = 1;
         
-        public function as_setPrimaryCurrency(param1:Number) : void {
+        public function as_setPrimaryCurrency(param1:Number) : void
+        {
             if(this.totalPrimaryCurrency != param1)
             {
                 this.totalPrimaryCurrency = param1;
@@ -31,7 +33,8 @@ package net.wg.gui.lobby.window
             }
         }
         
-        public function as_exchangeRate(param1:Number, param2:Number) : void {
+        public function as_exchangeRate(param1:Number, param2:Number) : void
+        {
             if(!(this.rate == param1) || !(this.actionRate == param2))
             {
                 this.rate = param1;
@@ -41,7 +44,8 @@ package net.wg.gui.lobby.window
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(RATES_INVALID))
             {
@@ -53,19 +57,22 @@ package net.wg.gui.lobby.window
             }
         }
         
-        protected function applyPrimaryCurrencyChange() : void {
+        protected function applyPrimaryCurrencyChange() : void
+        {
             var _loc1_:* = "Flash applyPrimaryCurrencyChange method have to be overridden";
             DebugUtils.LOG_ERROR(_loc1_,this);
             throw new Error(_loc1_);
         }
         
-        protected function applyRatesChanges() : void {
+        protected function applyRatesChanges() : void
+        {
             var _loc1_:* = "Flash applyRatesChanges method have to be overridden";
             DebugUtils.LOG_ERROR(_loc1_,this);
             throw new Error(_loc1_);
         }
         
-        protected function cancelBtnClickHandler(param1:Event) : void {
+        protected function cancelBtnClickHandler(param1:Event) : void
+        {
             onWindowCloseS();
         }
     }

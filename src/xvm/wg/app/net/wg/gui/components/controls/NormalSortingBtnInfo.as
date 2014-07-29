@@ -5,7 +5,8 @@ package net.wg.gui.components.controls
     public class NormalSortingBtnInfo extends SortingButtonInfo
     {
         
-        public function NormalSortingBtnInfo() {
+        public function NormalSortingBtnInfo()
+        {
             super();
         }
         

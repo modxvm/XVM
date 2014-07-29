@@ -9,7 +9,8 @@ package net.wg.gui.components.common.crosshair
     public class CrosshairSniper extends CrosshairBase
     {
         
-        public function CrosshairSniper() {
+        public function CrosshairSniper()
+        {
             super();
             this.init();
         }
@@ -26,7 +27,8 @@ package net.wg.gui.components.common.crosshair
         
         private var isReloaded:Boolean = false;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.radiusFW)
             {
@@ -35,7 +37,8 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        private function init() : void {
+        private function init() : void
+        {
             this.initCallbacks();
             this.initView();
             if(stage)
@@ -48,20 +51,24 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        private function initStage(param1:Event = null) : void {
+        private function initStage(param1:Event = null) : void
+        {
             removeEventListener(Event.ADDED_TO_STAGE,this.initStage);
             stage.scaleMode = StageScaleMode.NO_SCALE;
             stage.align = StageAlign.TOP_LEFT;
         }
         
-        override protected function initView() : void {
+        override protected function initView() : void
+        {
             this.radiusFW = new FrameWalker(this.crosshairMC.radiusMC.mixingMC,37,false);
         }
         
-        override protected function initCallbacks() : void {
+        override protected function initCallbacks() : void
+        {
         }
         
-        override protected function onSetReloading(param1:Number, param2:Number, param3:Boolean, param4:Number = 0) : void {
+        override protected function onSetReloading(param1:Number, param2:Number, param3:Boolean, param4:Number = 0) : void
+        {
             this.radiusFW.stop();
             this.isReloaded = false;
             this.onSetMarkerType(MARKER_STATE_RELOADING);
@@ -88,7 +95,8 @@ package net.wg.gui.components.common.crosshair
             
         }
         
-        override protected function onSetReloadingAsPercent(param1:Number) : void {
+        override protected function onSetReloadingAsPercent(param1:Number) : void
+        {
             if(param1 >= 100)
             {
                 this.radiusFW.setPosAsPercent(100);
@@ -100,7 +108,8 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        protected function onCorrectReloadingTime(param1:Number) : void {
+        protected function onCorrectReloadingTime(param1:Number) : void
+        {
             if(!this.isReloaded)
             {
                 this.radiusFW.stop();
@@ -108,11 +117,13 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        protected function onSetMarkerType(param1:String) : void {
+        protected function onSetMarkerType(param1:String) : void
+        {
             this.crosshairMC.markerMC.tag.gotoAndStop(param1);
         }
         
-        protected function onSetTagType(param1:Number, param2:Number) : void {
+        protected function onSetTagType(param1:Number, param2:Number) : void
+        {
             this.crosshairMC.markerMC.gotoAndStop("type" + param2);
             this.crosshairMC.markerMC.alpha = param1;
             this.onSetMarkerType(MARKER_STATE_NORMAL);
@@ -122,7 +133,8 @@ package net.wg.gui.components.common.crosshair
             }
         }
         
-        protected function onSetReloadingType(param1:Number, param2:Number) : void {
+        protected function onSetReloadingType(param1:Number, param2:Number) : void
+        {
             this.crosshairMC.radiusMC.gotoAndStop("type" + param2);
             this.crosshairMC.radiusMC.mixingMC.alpha = param1;
             if(this.isReloaded)

@@ -3,7 +3,8 @@ package net.wg.gui.components.tooltips.VO
     public class UnitCommandVO extends SuitableVehicleVO
     {
         
-        public function UnitCommandVO(param1:Object) {
+        public function UnitCommandVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,35 +16,43 @@ package net.wg.gui.components.tooltips.VO
         
         private var _isPeripheryAnother:Boolean = false;
         
-        public function get unitComment() : String {
+        public function get unitComment() : String
+        {
             return this._unitComment;
         }
         
-        public function set unitComment(param1:String) : void {
+        public function set unitComment(param1:String) : void
+        {
             this._unitComment = param1;
         }
         
-        public function get commanderName() : String {
+        public function get commanderName() : String
+        {
             return this._commanderName;
         }
         
-        public function set commanderName(param1:String) : void {
+        public function set commanderName(param1:String) : void
+        {
             this._commanderName = param1;
         }
         
-        public function get commanderRating() : String {
+        public function get commanderRating() : String
+        {
             return this._commanderRating;
         }
         
-        public function set commanderRating(param1:String) : void {
+        public function set commanderRating(param1:String) : void
+        {
             this._commanderRating = param1;
         }
         
-        public function get isPeripheryAnother() : Boolean {
+        public function get isPeripheryAnother() : Boolean
+        {
             return this._isPeripheryAnother;
         }
         
-        public function set isPeripheryAnother(param1:Boolean) : void {
+        public function set isPeripheryAnother(param1:Boolean) : void
+        {
             this._isPeripheryAnother = param1;
         }
     }

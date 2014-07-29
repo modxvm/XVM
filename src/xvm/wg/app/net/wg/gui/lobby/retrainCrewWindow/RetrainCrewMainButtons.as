@@ -11,7 +11,8 @@ package net.wg.gui.lobby.retrainCrewWindow
     public class RetrainCrewMainButtons extends UIComponent
     {
         
-        public function RetrainCrewMainButtons() {
+        public function RetrainCrewMainButtons()
+        {
             super();
         }
         
@@ -35,7 +36,8 @@ package net.wg.gui.lobby.retrainCrewWindow
         
         private var _currentVehicleIntCD:int;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc2_:TankmanTrainingSmallButton = null;
             super.configUI();
             this.btnGroup = new ButtonGroup(GROUP_NAME,this);
@@ -58,7 +60,8 @@ package net.wg.gui.lobby.retrainCrewWindow
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Array = null;
             var _loc2_:uint = 0;
             var _loc3_:RetrainTankmanVO = null;
@@ -103,7 +106,8 @@ package net.wg.gui.lobby.retrainCrewWindow
             }
         }
         
-        private function autoSelectRetrainingButtons() : void {
+        private function autoSelectRetrainingButtons() : void
+        {
             var _loc3_:TankmanTrainingSmallButton = null;
             var _loc1_:Array = [this.freeBtn,this.schoolBtn,this.academyBtn];
             var _loc2_:* = 0;
@@ -119,25 +123,30 @@ package net.wg.gui.lobby.retrainCrewWindow
             }
         }
         
-        private function groupChangeHandler(param1:Event = null) : void {
+        private function groupChangeHandler(param1:Event = null) : void
+        {
             this._selectedId = this.btnGroup.selectedIndex;
             dispatchEvent(new IndexEvent(IndexEvent.INDEX_CHANGE,false,true,this._selectedId));
         }
         
-        public function set crewInfo(param1:Array) : void {
+        public function set crewInfo(param1:Array) : void
+        {
             this._crewInfo = param1;
         }
         
-        public function set operationData(param1:RetrainCrewOperationVO) : void {
+        public function set operationData(param1:RetrainCrewOperationVO) : void
+        {
             this._operationData = param1;
             invalidateData();
         }
         
-        public function get operationData() : RetrainCrewOperationVO {
+        public function get operationData() : RetrainCrewOperationVO
+        {
             return this._operationData;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.btnGroup.removeEventListener(Event.CHANGE,this.groupChangeHandler);
             this.btnGroup.dispose();
             this._crewInfo = null;
@@ -145,15 +154,18 @@ package net.wg.gui.lobby.retrainCrewWindow
             super.onDispose();
         }
         
-        public function get selectedId() : int {
+        public function get selectedId() : int
+        {
             return this._selectedId;
         }
         
-        public function set currentVehicleType(param1:String) : void {
+        public function set currentVehicleType(param1:String) : void
+        {
             this._currentVehicleType = param1;
         }
         
-        public function set currentVehicleIntCD(param1:int) : void {
+        public function set currentVehicleIntCD(param1:int) : void
+        {
             this._currentVehicleIntCD = param1;
         }
     }

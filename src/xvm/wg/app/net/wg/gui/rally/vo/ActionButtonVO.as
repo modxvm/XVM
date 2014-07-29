@@ -5,7 +5,8 @@ package net.wg.gui.rally.vo
     public class ActionButtonVO extends DAAPIDataClass
     {
         
-        public function ActionButtonVO(param1:Object) {
+        public function ActionButtonVO(param1:Object)
+        {
             super(param1);
         }
         

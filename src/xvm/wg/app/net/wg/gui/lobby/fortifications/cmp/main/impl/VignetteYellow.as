@@ -7,7 +7,8 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
     public class VignetteYellow extends UIComponentEx
     {
         
-        public function VignetteYellow() {
+        public function VignetteYellow()
+        {
             super();
         }
         
@@ -15,11 +16,13 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         public var descrText:TextField = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             constraints.dispose();
             constraints = null;
             this.descrText = null;

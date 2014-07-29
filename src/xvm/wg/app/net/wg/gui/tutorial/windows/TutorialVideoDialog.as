@@ -8,7 +8,8 @@ package net.wg.gui.tutorial.windows
     public class TutorialVideoDialog extends TutorialDialog
     {
         
-        public function TutorialVideoDialog() {
+        public function TutorialVideoDialog()
+        {
             super();
             showWindowBg = false;
             canClose = false;
@@ -21,24 +22,28 @@ package net.wg.gui.tutorial.windows
         
         private var _isPopulated:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.videoPlayer.addEventListener(AdvancedVideoPlayer.PLAYER_CLOSED,this.onVideoClosed);
             this.videoPlayer.addEventListener(VideoPlayerEvent.PLAYBACK_STOPPED,this.onVideoStopped);
         }
         
-        private function onVideoStopped(param1:VideoPlayerEvent) : void {
+        private function onVideoStopped(param1:VideoPlayerEvent) : void
+        {
             if(this._isPopulated)
             {
                 onWindowCloseS();
             }
         }
         
-        private function onVideoClosed(param1:Event) : void {
+        private function onVideoClosed(param1:Event) : void
+        {
             onWindowCloseS();
         }
         
-        override protected function drawData() : void {
+        override protected function drawData() : void
+        {
             super.drawData();
             this.videoPlayer.source = _data.message;
             this.videoPlayer.volume = _data.soundValue;
@@ -48,7 +53,8 @@ package net.wg.gui.tutorial.windows
             this._isPopulated = true;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.getBackground().visible = false;
             window.getTitleBtn().visible = false;
@@ -59,7 +65,8 @@ package net.wg.gui.tutorial.windows
             _loc1_.right = 0;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.videoPlayer)
             {
                 this.videoPlayer.dispose();

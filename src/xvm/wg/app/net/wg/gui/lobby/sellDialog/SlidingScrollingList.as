@@ -23,7 +23,8 @@ package net.wg.gui.lobby.sellDialog
     public class SlidingScrollingList extends ScrollingList
     {
         
-        public function SlidingScrollingList() {
+        public function SlidingScrollingList()
+        {
             super();
         }
         
@@ -53,7 +54,8 @@ package net.wg.gui.lobby.sellDialog
         
         private var totalHeight:Number = 0;
         
-        public function getRenderers() : Vector.<ISaleItemBlockRenderer> {
+        public function getRenderers() : Vector.<ISaleItemBlockRenderer>
+        {
             var _loc2_:IListItemRenderer = null;
             var _loc3_:Vector.<ISaleItemBlockRenderer> = null;
             var _loc4_:ISaleItemBlockRenderer = null;
@@ -69,15 +71,18 @@ package net.wg.gui.lobby.sellDialog
             return _loc1_;
         }
         
-        override public function get availableWidth() : Number {
+        override public function get availableWidth() : Number
+        {
             return Math.round(_width) - margin * 2 - (_autoScrollBar?Math.round(_scrollBar.width + this.sbPadding):0);
         }
         
-        override public function get scrollPosition() : Number {
+        override public function get scrollPosition() : Number
+        {
             return _scrollPosition;
         }
         
-        override public function set scrollPosition(param1:Number) : void {
+        override public function set scrollPosition(param1:Number) : void
+        {
             var _loc3_:IListItemRenderer = null;
             var _loc4_:Vector.<ISaleItemBlockRenderer> = null;
             var _loc5_:ISaleItemBlockRenderer = null;
@@ -93,7 +98,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(container == null)
             {
                 container = new Sprite();
@@ -119,7 +125,8 @@ package net.wg.gui.lobby.sellDialog
             this.listVisibleHight = _height + this.downMargin;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:uint = 0;
             var _loc2_:uint = 0;
             var _loc3_:IListItemRenderer = null;
@@ -186,7 +193,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        override protected function updateScrollBar() : void {
+        override protected function updateScrollBar() : void
+        {
             var _loc2_:ScrollIndicator = null;
             this.stepSize = Math.round(20 * this.height / this.totalHeight);
             var _loc1_:Number = Math.round(this.height / this.totalHeight * 100);
@@ -203,7 +211,8 @@ package net.wg.gui.lobby.sellDialog
             _scrollBar.validateNow();
         }
         
-        override protected function populateData(param1:Array) : void {
+        override protected function populateData(param1:Array) : void
+        {
             var _loc5_:IListItemRenderer = null;
             var _loc6_:uint = 0;
             var _loc7_:ListData = null;
@@ -224,7 +233,8 @@ package net.wg.gui.lobby.sellDialog
             this.drawLayout();
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc6_:IListItemRenderer = null;
             var _loc1_:uint = _renderers.length;
             var _loc2_:Number = 8;
@@ -294,7 +304,8 @@ package net.wg.gui.lobby.sellDialog
             dispatchEvent(new VehicleSellDialogEvent(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.listVisibleHight));
         }
         
-        override protected function createScrollBar() : void {
+        override protected function createScrollBar() : void
+        {
             var _loc1_:IScrollBar = null;
             var _loc2_:Class = null;
             var _loc3_:Object = null;
@@ -370,7 +381,8 @@ package net.wg.gui.lobby.sellDialog
             _scrollBar.tabEnabled = false;
         }
         
-        override protected function drawScrollBar() : void {
+        override protected function drawScrollBar() : void
+        {
             if(!_autoScrollBar)
             {
                 return;
@@ -381,12 +393,14 @@ package net.wg.gui.lobby.sellDialog
             _scrollBar.validateNow();
         }
         
-        override protected function scrollList(param1:int) : void {
+        override protected function scrollList(param1:int) : void
+        {
             _scrollBar.position = _scrollBar.position - param1 * this.stepSize;
             _scrollBar.validateNow();
         }
         
-        override protected function handleMouseWheel(param1:MouseEvent) : void {
+        override protected function handleMouseWheel(param1:MouseEvent) : void
+        {
             if(!(param1.target is DropdownMenu))
             {
                 this.scrollList(param1.delta > 0?1:-1);

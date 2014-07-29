@@ -20,7 +20,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipEquipment extends ToolTipSpecial
     {
         
-        public function ToolTipEquipment() {
+        public function ToolTipEquipment()
+        {
             super();
             this.headerTF = content.headerTF;
             this.discrTF = content.discrTF;
@@ -51,23 +52,28 @@ package net.wg.gui.components.tooltips
         
         private var maxWidth:Number = 250;
         
-        override public function build(param1:Object, param2:ITooltipProps) : void {
+        override public function build(param1:Object, param2:ITooltipProps) : void
+        {
             super.build(param1,param2);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ToolTipEquipment " + name + "]";
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc3_:EquipmentVO = null;
             var _loc7_:ILocale = null;
             var _loc10_:* = NaN;
@@ -144,18 +150,16 @@ package net.wg.gui.components.tooltips
                 _loc18_.size = 11;
                 _loc18_.font = "$TextFont";
                 _loc19_ = new StyleSheet();
-                _loc19_.setStyle("h",{
-                    "color":Utils.instance.COLOR_NORMAL,
-                    "fontSize":"11px",
-                    "fontFamily":"$TextFont",
-                    "leading":"2px"
-                });
-            _loc19_.setStyle("p",{
-                "color":Utils.instance.COLOR_SUB_NORMAL,
+                _loc19_.setStyle("h",{"color":Utils.instance.COLOR_NORMAL,
                 "fontSize":"11px",
                 "fontFamily":"$TextFont",
                 "leading":"2px"
             });
+            _loc19_.setStyle("p",{"color":Utils.instance.COLOR_SUB_NORMAL,
+            "fontSize":"11px",
+            "fontFamily":"$TextFont",
+            "leading":"2px"
+        });
         _loc20_ = new ExtraModuleInfo(_loc18_,_loc19_);
         _loc20_.y = topPosition;
         _loc20_.x = _loc10_;
@@ -321,18 +325,16 @@ package net.wg.gui.components.tooltips
     {
         _loc13_.startYPos = topPosition;
         _loc13_.rightTextCSS = new StyleSheet();
-        _loc13_.rightTextCSS.setStyle("h1",{
-            "color":Utils.instance.COLOR_NORMAL,
-            "fontSize":"11px",
-            "fontFamily":"$TextFont",
-            "leading":"2px"
-        });
-    _loc13_.rightTextCSS.setStyle("p",{
-        "color":Utils.instance.COLOR_ALERT,
+        _loc13_.rightTextCSS.setStyle("h1",{"color":Utils.instance.COLOR_NORMAL,
         "fontSize":"11px",
         "fontFamily":"$TextFont",
         "leading":"2px"
     });
+    _loc13_.rightTextCSS.setStyle("p",{"color":Utils.instance.COLOR_ALERT,
+    "fontSize":"11px",
+    "fontFamily":"$TextFont",
+    "leading":"2px"
+});
 _loc5_ = Utils.instance.createBlock(_loc13_,contentMargin.left + bgShadowMargin.left);
 this.maxWidth = Math.max(this.maxWidth,_loc5_.blockWidth);
 blockResults.push(_loc5_);
@@ -356,15 +358,18 @@ _loc16_ = -1;
 if(_loc3_.effectOnUse != "")
 {
     _loc15_ = _loc15_ + this.getEquipmentUsageBlock(_loc7_.makeString(TOOLTIPS.EQUIPMENT_ONUSE),_loc7_.makeString(_loc3_.effectOnUse),_loc38_);
+    _loc38_ + 18;
 }
 if(_loc3_.effectAlways != "")
 {
     _loc15_ = _loc15_ + this.getEquipmentUsageBlock(_loc7_.makeString(TOOLTIPS.EQUIPMENT_ALWAYS),_loc7_.makeString(_loc3_.effectAlways),_loc38_);
+    _loc38_ + 18;
 }
 if(_loc3_.effectRestriction != "")
 {
     _loc15_ = _loc15_ + ("<br/>" + Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.EQUIPMENT_RESTRICTION),Utils.instance.COLOR_BLOCK_HEADER,14,"$TitleFont",true) + Utils.instance.htmlWrapper(" ",Utils.instance.COLOR_ADD_INFO,24,"$TextFont"));
     _loc15_ = _loc15_ + this.getEquipmentUsageBlock("",_loc7_.makeString(_loc3_.effectRestriction),_loc38_);
+    _loc38_ + 18;
 }
 }
 else if(_loc3_.descr)
@@ -485,13 +490,15 @@ updatePositions();
 super.redraw();
 }
 
-override protected function updateSize() : void {
+override protected function updateSize() : void
+{
 background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
 background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
 this.whiteBg.width = content.width + bgShadowMargin.horizontal;
 }
 
-private function formParamsBlockData(param1:Array, param2:String, param3:Boolean) : ToolTipBlockVO {
+private function formParamsBlockData(param1:Array, param2:String, param3:Boolean) : ToolTipBlockVO
+{
 var _loc8_:String = null;
 var _loc9_:String = null;
 var _loc4_:ToolTipBlockVO = new ToolTipBlockVO();
@@ -504,14 +511,12 @@ _loc4_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.
 _loc4_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
 _loc4_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
 _loc4_.rightTextCSS = new StyleSheet();
-_loc4_.rightTextCSS.setStyle("h",{
-"color":Utils.instance.COLOR_NORMAL,
+_loc4_.rightTextCSS.setStyle("h",{"color":Utils.instance.COLOR_NORMAL,
 "fontSize":"11px",
 "fontFamily":"$TextFont",
 "leading":"2px"
 });
-_loc4_.rightTextCSS.setStyle("p",{
-"color":Utils.instance.COLOR_SUB_NORMAL,
+_loc4_.rightTextCSS.setStyle("p",{"color":Utils.instance.COLOR_SUB_NORMAL,
 "fontSize":"11px",
 "fontFamily":"$TextFont",
 "leading":"2px"
@@ -538,14 +543,16 @@ _loc7_++;
 return _loc4_;
 }
 
-private function getEquipmentUsageBlock(param1:String, param2:String, param3:int = 18) : String {
+private function getEquipmentUsageBlock(param1:String, param2:String, param3:int = 18) : String
+{
 var param1:String = param1 == ""?"":Utils.instance.htmlWrapper(param1,Utils.instance.COLOR_ADD_INFO,13,"$TitleFont",true) + Utils.instance.htmlWrapper(" ",Utils.instance.COLOR_ADD_INFO,param3,"$TextFont");
 var param2:String = param2 == ""?"":Utils.instance.htmlWrapper(param2,Utils.instance.COLOR_NORMAL,12,"$FieldFont");
 var _loc4_:String = "<br/>" + param1 + param2;
 return _loc4_;
 }
 
-private function updateContentWidth() : void {
+private function updateContentWidth() : void
+{
 var _loc1_:* = NaN;
 var _loc2_:* = NaN;
 var _loc3_:uint = 0;

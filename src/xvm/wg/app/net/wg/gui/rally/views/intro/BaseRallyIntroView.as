@@ -10,7 +10,8 @@ package net.wg.gui.rally.views.intro
     public class BaseRallyIntroView extends BaseRallyIntroViewMeta implements IBaseRallyIntroViewMeta
     {
         
-        public function BaseRallyIntroView() {
+        public function BaseRallyIntroView()
+        {
             super();
         }
         
@@ -20,14 +21,16 @@ package net.wg.gui.rally.views.intro
         
         public var listRoomDescrLbl:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.listRoomBtn.addEventListener(ButtonEvent.CLICK,this.onListRoomBtnClick);
             this.listRoomBtn.addEventListener(MouseEvent.ROLL_OVER,onControlRollOver);
             this.listRoomBtn.addEventListener(MouseEvent.ROLL_OUT,onControlRollOut);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.listRoomBtn)
             {
                 this.listRoomBtn.removeEventListener(ButtonEvent.CLICK,this.onListRoomBtnClick);
@@ -39,7 +42,8 @@ package net.wg.gui.rally.views.intro
             super.onDispose();
         }
         
-        protected function onListRoomBtnClick(param1:ButtonEvent) : void {
+        protected function onListRoomBtnClick(param1:ButtonEvent) : void
+        {
         }
     }
 }

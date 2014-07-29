@@ -11,7 +11,8 @@ package net.wg.gui.lobby.GUIEditor
     public class ComponentListItemRenderer extends ListItemRenderer
     {
         
-        public function ComponentListItemRenderer() {
+        public function ComponentListItemRenderer()
+        {
             super();
         }
         
@@ -19,12 +20,14 @@ package net.wg.gui.lobby.GUIEditor
         
         private var _component:DisplayObject = null;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             invalidateData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._component)
             {
                 removeChild(this._component);
@@ -34,13 +37,15 @@ package net.wg.gui.lobby.GUIEditor
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             _focusable = tabEnabled = tabChildren = mouseChildren = false;
             mouseEnabled = true;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:ComponentInfoVo = null;
             var _loc2_:* = NaN;
             super.draw();
@@ -71,7 +76,8 @@ package net.wg.gui.lobby.GUIEditor
             }
         }
         
-        private function onComponentClickHandler(param1:MouseEvent) : void {
+        private function onComponentClickHandler(param1:MouseEvent) : void
+        {
             App.utils.asserter.assertNotNull(data,"data" + Errors.CANT_NULL);
             var _loc2_:ComponentInfoVo = ComponentInfoVo(data);
             dispatchEvent(new ComponentCreateEvent(ComponentCreateEvent.COMPONENT_CREATE,_loc2_.clone()));

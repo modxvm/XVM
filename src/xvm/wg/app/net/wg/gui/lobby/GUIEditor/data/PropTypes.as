@@ -3,7 +3,8 @@ package net.wg.gui.lobby.GUIEditor.data
     public class PropTypes extends Object
     {
         
-        public function PropTypes() {
+        public function PropTypes()
+        {
             super();
         }
         

@@ -6,21 +6,26 @@ package scaleform.gfx
     public final class IMEEx extends EventDispatcher
     {
         
-        public function IMEEx() {
+        public function IMEEx()
+        {
             super();
         }
         
-        public static function getIMECandidateListStyle() : IMECandidateListStyle {
+        public static function getIMECandidateListStyle() : IMECandidateListStyle
+        {
             return null;
         }
         
-        public static function setIMECandidateListStyle(param1:IMECandidateListStyle) : void {
+        public static function setIMECandidateListStyle(param1:IMECandidateListStyle) : void
+        {
         }
         
-        public static function SendLangBarMessage(param1:Sprite, param2:String, param3:String) : void {
+        public static function SendLangBarMessage(param1:Sprite, param2:String, param3:String) : void
+        {
         }
         
-        public static function GetOSVersion() : String {
+        public static function GetOSVersion() : String
+        {
             return null;
         }
     }

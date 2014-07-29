@@ -11,7 +11,8 @@ package net.wg.gui.components.controls
     public class TableRenderer extends SoundListItemRenderer implements ITableRenderer
     {
         
-        public function TableRenderer() {
+        public function TableRenderer()
+        {
             this.statesPassive = Vector.<String>(["passive_"]);
             super();
         }
@@ -32,20 +33,24 @@ package net.wg.gui.components.controls
         
         private var firstClick:Boolean = false;
         
-        override public function set buttonMode(param1:Boolean) : void {
+        override public function set buttonMode(param1:Boolean) : void
+        {
             super.buttonMode = this._isPassive?false:param1;
         }
         
-        public function get isPassive() : Boolean {
+        public function get isPassive() : Boolean
+        {
             return this._isPassive;
         }
         
-        public function set isPassive(param1:Boolean) : void {
+        public function set isPassive(param1:Boolean) : void
+        {
             this._isPassive = param1;
             invalidate(INV_PASSIVE);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.disableMc)
             {
@@ -54,7 +59,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(InvalidationType.STATE))
             {
                 if(_newFrame)
@@ -117,12 +123,14 @@ package net.wg.gui.components.controls
             this.updateDisable();
         }
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             this._rendererBgLabelsHash = generateLabelHash(this.rendererBg);
         }
         
-        override protected function getStatePrefixes() : Vector.<String> {
+        override protected function getStatePrefixes() : Vector.<String>
+        {
             if(this._isPassive)
             {
                 return this.statesPassive;
@@ -130,19 +138,22 @@ package net.wg.gui.components.controls
             return _selected?statesSelected:statesDefault;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:String = null;
             this.stopSimulationDoubleClick();
             for(_loc1_ in this._rendererBgLabelsHash)
             {
                 delete this._rendererBgLabelsHash[_loc1_];
+                true;
             }
             this._rendererBgLabelsHash = null;
             this.rendererBg = null;
             super.onDispose();
         }
         
-        protected function setBackgroundState() : void {
+        protected function setBackgroundState() : void
+        {
             if(this._rendererBgLabelsHash[_newFrame])
             {
                 this.rendererBg.gotoAndPlay(_newFrame);
@@ -153,7 +164,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function updateDisable() : void {
+        protected function updateDisable() : void
+        {
             if(this.disableMc != null)
             {
                 this.disableMc.visible = (_data) && !enabled;
@@ -164,25 +176,30 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function startSimulationDoubleClick() : void {
+        protected function startSimulationDoubleClick() : void
+        {
             this.addEventListener(MouseEvent.MOUSE_DOWN,this.simulationDoubleClickHandler);
         }
         
-        protected function stopSimulationDoubleClick() : void {
+        protected function stopSimulationDoubleClick() : void
+        {
             App.utils.scheduler.cancelTask(this.clearFirstClick);
             this.stageRemoveListener();
             this.removeEventListener(MouseEvent.MOUSE_DOWN,this.simulationDoubleClickHandler);
         }
         
-        private function stageAddListener() : void {
+        private function stageAddListener() : void
+        {
             App.stage.addEventListener(MouseEvent.MOUSE_DOWN,this.simulationDoubleClickHandler);
         }
         
-        private function stageRemoveListener() : void {
+        private function stageRemoveListener() : void
+        {
             App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.simulationDoubleClickHandler);
         }
         
-        private function setDefaultBgState() : void {
+        private function setDefaultBgState() : void
+        {
             var _loc4_:String = null;
             var _loc5_:String = null;
             var _loc1_:Vector.<String> = this.getStatePrefixes();
@@ -201,12 +218,14 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function clearFirstClick() : void {
+        private function clearFirstClick() : void
+        {
             this.firstClick = false;
             this.stageRemoveListener();
         }
         
-        private function simulationDoubleClickHandler(param1:MouseEvent) : void {
+        private function simulationDoubleClickHandler(param1:MouseEvent) : void
+        {
             var _loc3_:MouseEventEx = null;
             var _loc4_:uint = 0;
             var _loc5_:uint = 0;

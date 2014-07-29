@@ -5,7 +5,8 @@ package net.wg.data.VO
     public class TrainingFormRendererVO extends DAAPIDataClass
     {
         
-        public function TrainingFormRendererVO(param1:Object) {
+        public function TrainingFormRendererVO(param1:Object)
+        {
             super(param1);
         }
         

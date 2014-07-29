@@ -6,7 +6,8 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
     public class VehicleCarouselVOBuilder extends Object
     {
         
-        public function VehicleCarouselVOBuilder() {
+        public function VehicleCarouselVOBuilder()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
         
         private static var __allowInstantiation:Boolean = false;
         
-        public static function get instance() : VehicleCarouselVOBuilder {
+        public static function get instance() : VehicleCarouselVOBuilder
+        {
             if(!__instance)
             {
                 __allowInstantiation = true;
@@ -24,13 +26,15 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             return __instance;
         }
         
-        public function getDataVoForEmptySlot() : VehicleCarouselVO {
+        public function getDataVoForEmptySlot() : VehicleCarouselVO
+        {
             var _loc1_:VehicleCarouselVO = new VehicleCarouselVO();
             _loc1_.empty = true;
             return _loc1_;
         }
         
-        public function getDataVoForBuyVehicle(param1:Number) : VehicleCarouselVO {
+        public function getDataVoForBuyVehicle(param1:Number) : VehicleCarouselVO
+        {
             var _loc2_:VehicleCarouselVO = new VehicleCarouselVO();
             _loc2_.stat = "buyTank";
             _loc2_.buyTank = true;
@@ -39,7 +43,8 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
             return _loc2_;
         }
         
-        public function getDataVoForBuySlot(param1:Number, param2:ActionPriceVO) : VehicleCarouselVO {
+        public function getDataVoForBuySlot(param1:Number, param2:ActionPriceVO) : VehicleCarouselVO
+        {
             var _loc3_:VehicleCarouselVO = new VehicleCarouselVO();
             _loc3_.stat = "buySlot";
             _loc3_.buySlot = true;

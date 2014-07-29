@@ -7,15 +7,18 @@ package net.wg.gui.components.common
     public class MainViewContainer extends ManagedContainer
     {
         
-        public function MainViewContainer() {
+        public function MainViewContainer()
+        {
             super();
         }
         
-        override protected function getModalBgLinkage() : String {
+        override protected function getModalBgLinkage() : String
+        {
             return Linkages.VIEW_LOAD_CURTAIN;
         }
         
-        override public function tryToUpdateContent() : void {
+        override public function tryToUpdateContent() : void
+        {
             var _loc1_:IManagedContent = getTopmostView();
             if(_loc1_)
             {

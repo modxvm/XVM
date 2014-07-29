@@ -5,16 +5,19 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class LevelBarChartItem extends StatisticBarChartItem
     {
         
-        public function LevelBarChartItem() {
+        public function LevelBarChartItem()
+        {
             super();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             tooltip = PROFILE.SECTION_STATISTICS_CHART_LEVEL_TOOLTIP;
         }
         
-        override protected function applyValueChange() : void {
+        override protected function applyValueChange() : void
+        {
             var _loc1_:StatisticChartInfo = StatisticChartInfo(_data);
             if(_loc1_.yField == -1)
             {
@@ -27,7 +30,8 @@ package net.wg.gui.lobby.profile.pages.statistics
             super.applyValueChange();
         }
         
-        override protected function showToolTip(param1:IToolTipParams) : void {
+        override protected function showToolTip(param1:IToolTipParams) : void
+        {
             if(tooltip)
             {
                 StatisticsChartsUtils.showLevelTooltip(_data,tooltip);

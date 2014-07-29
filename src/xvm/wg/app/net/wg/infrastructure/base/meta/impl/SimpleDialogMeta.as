@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class SimpleDialogMeta extends AbstractWindowView
     {
         
-        public function SimpleDialogMeta() {
+        public function SimpleDialogMeta()
+        {
             super();
         }
         
         public var onButtonClick:Function = null;
         
-        public function onButtonClickS(param1:String) : void {
+        public function onButtonClickS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.onButtonClick,"onButtonClick" + Errors.CANT_NULL);
             this.onButtonClick(param1);
         }

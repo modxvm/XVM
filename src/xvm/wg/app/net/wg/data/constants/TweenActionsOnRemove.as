@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class TweenActionsOnRemove extends Object
     {
         
-        public function TweenActionsOnRemove() {
+        public function TweenActionsOnRemove()
+        {
             super();
         }
         

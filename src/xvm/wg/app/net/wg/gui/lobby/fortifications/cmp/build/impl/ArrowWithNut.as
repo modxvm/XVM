@@ -11,7 +11,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class ArrowWithNut extends UIComponentEx implements IArrowWithNut
     {
         
-        public function ArrowWithNut() {
+        public function ArrowWithNut()
+        {
             super();
         }
         
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _nutMcStartY:Number = 0;
         
-        public function show() : void {
+        public function show() : void
+        {
             this.visible = true;
             this.removeAllAnims();
             var _loc1_:ITweenAnimator = this.getTweenAnimator();
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             _loc1_.addFadeInAnim(DisplayObject(this.content),null);
         }
         
-        public function hide() : void {
+        public function hide() : void
+        {
             this.removeAllAnims();
             var _loc1_:ITweenAnimator = this.getTweenAnimator();
             if(this._isExport)
@@ -58,27 +61,33 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             _loc1_.addFadeOutAnim(DisplayObject(this.content),this);
         }
         
-        public function get isExport() : Boolean {
+        public function get isExport() : Boolean
+        {
             return this._isExport;
         }
         
-        public function set isExport(param1:Boolean) : void {
+        public function set isExport(param1:Boolean) : void
+        {
             this._isExport = param1;
         }
         
-        public function get isShowed() : Boolean {
+        public function get isShowed() : Boolean
+        {
             return (this.nutMc.visible) && this.nutMc.alpha == 1;
         }
         
-        public function get content() : IUIComponentEx {
+        public function get content() : IUIComponentEx
+        {
             return this._content;
         }
         
-        public function set content(param1:IUIComponentEx) : void {
+        public function set content(param1:IUIComponentEx) : void
+        {
             this._content = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._content)
             {
                 this._content.dispose();
@@ -93,23 +102,27 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.nutMc.source = RES_ICONS.MAPS_ICONS_LIBRARY_FORTIFICATION_NUT;
             this._nutMcStartY = this.nutMc.y;
             this.visible = false;
         }
         
-        private function removeAllAnims() : void {
+        private function removeAllAnims() : void
+        {
             this.getTweenAnimator().removeAnims(this.nutMc);
             this.getTweenAnimator().removeAnims(DisplayObject(this.content));
         }
         
-        private function getTweenAnimator() : ITweenAnimator {
+        private function getTweenAnimator() : ITweenAnimator
+        {
             return TweenAnimator.instance;
         }
         
-        public function onComplete() : void {
+        public function onComplete() : void
+        {
             this.visible = false;
         }
     }

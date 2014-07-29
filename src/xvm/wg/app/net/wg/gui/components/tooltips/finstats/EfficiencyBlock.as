@@ -7,7 +7,8 @@ package net.wg.gui.components.tooltips.finstats
     public class EfficiencyBlock extends UIComponent
     {
         
-        public function EfficiencyBlock() {
+        public function EfficiencyBlock()
+        {
             super();
         }
         
@@ -21,11 +22,13 @@ package net.wg.gui.components.tooltips.finstats
         
         private var _rightStr:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(this.dirtyData)
             {
@@ -45,7 +48,8 @@ package net.wg.gui.components.tooltips.finstats
             }
         }
         
-        public function setData(param1:String, param2:String) : void {
+        public function setData(param1:String, param2:String) : void
+        {
             this._leftStr = param1;
             this._rightStr = param2;
             this.dirtyData = true;

@@ -8,7 +8,8 @@ package net.wg.gui.cyberSport.vo
     public class CSCommandVO extends DAAPIDataClass implements IRallyListItemVO
     {
         
-        public function CSCommandVO(param1:Object) {
+        public function CSCommandVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -42,23 +43,28 @@ package net.wg.gui.cyberSport.vo
         
         private var _peripheryID:Number = 0;
         
-        public function get mgrID() : Number {
+        public function get mgrID() : Number
+        {
             return this.unitMgrID;
         }
         
-        public function get rallyIndex() : Number {
+        public function get rallyIndex() : Number
+        {
             return this.cfdUnitID;
         }
         
-        public function get peripheryID() : Number {
+        public function get peripheryID() : Number
+        {
             return this._peripheryID;
         }
         
-        public function set peripheryID(param1:Number) : void {
+        public function set peripheryID(param1:Number) : void
+        {
             this._peripheryID = param1;
         }
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:* = true;
             if(param1 == CREATOR_FIELD)
             {

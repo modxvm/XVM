@@ -6,7 +6,8 @@ package net.wg.gui.prebattle.meta.impl
     public class ReceivedInviteWindowMeta extends AbstractWindowView
     {
         
-        public function ReceivedInviteWindowMeta() {
+        public function ReceivedInviteWindowMeta()
+        {
             super();
         }
         
@@ -16,17 +17,20 @@ package net.wg.gui.prebattle.meta.impl
         
         public var cancelInvite:Function = null;
         
-        public function acceptInviteS() : void {
+        public function acceptInviteS() : void
+        {
             App.utils.asserter.assertNotNull(this.acceptInvite,"acceptInvite" + Errors.CANT_NULL);
             this.acceptInvite();
         }
         
-        public function declineInviteS() : void {
+        public function declineInviteS() : void
+        {
             App.utils.asserter.assertNotNull(this.declineInvite,"declineInvite" + Errors.CANT_NULL);
             this.declineInvite();
         }
         
-        public function cancelInviteS() : void {
+        public function cancelInviteS() : void
+        {
             App.utils.asserter.assertNotNull(this.cancelInvite,"cancelInvite" + Errors.CANT_NULL);
             this.cancelInvite();
         }

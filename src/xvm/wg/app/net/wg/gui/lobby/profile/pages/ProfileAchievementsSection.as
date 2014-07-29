@@ -8,13 +8,15 @@ package net.wg.gui.lobby.profile.pages
     public class ProfileAchievementsSection extends ProfileAchievementSectionMeta implements IProfileAchievementSectionMeta
     {
         
-        public function ProfileAchievementsSection() {
+        public function ProfileAchievementsSection()
+        {
             super();
         }
         
         private var isRareAchievementRequested:Boolean;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(_baseDisposed)
             {
                 return;
@@ -23,7 +25,8 @@ package net.wg.gui.lobby.profile.pages
             addEventListener(AchievementEvent.REQUEST_RARE_ACHIEVEMENT,this.requestRareAchievementHandler,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(ProfileInvalidationTypes.ACHIEVEMENT_REQUEST_INVALID)) && (this.isRareAchievementRequested))
             {
@@ -32,12 +35,14 @@ package net.wg.gui.lobby.profile.pages
             }
         }
         
-        private function requestRareAchievementHandler(param1:AchievementEvent) : void {
+        private function requestRareAchievementHandler(param1:AchievementEvent) : void
+        {
             this.isRareAchievementRequested = true;
             invalidate(ProfileInvalidationTypes.ACHIEVEMENT_REQUEST_INVALID);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(AchievementEvent.REQUEST_RARE_ACHIEVEMENT,this.requestRareAchievementHandler);
             super.onDispose();
         }

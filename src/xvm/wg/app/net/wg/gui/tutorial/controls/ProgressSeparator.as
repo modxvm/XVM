@@ -7,7 +7,8 @@ package net.wg.gui.tutorial.controls
     public class ProgressSeparator extends MovieClip
     {
         
-        public function ProgressSeparator() {
+        public function ProgressSeparator()
+        {
             super();
         }
         
@@ -15,11 +16,13 @@ package net.wg.gui.tutorial.controls
         
         public var marker:Sprite;
         
-        public function get label() : TextField {
+        public function get label() : TextField
+        {
             return this.labelMc.getChildByName("label") as TextField;
         }
         
-        public function setup(param1:int, param2:Number) : void {
+        public function setup(param1:int, param2:Number) : void
+        {
             this.label.text = String(param1 + 1);
             this.labelMc.x = param2 - this.label.textWidth >> 1;
             if(param1 == 0)

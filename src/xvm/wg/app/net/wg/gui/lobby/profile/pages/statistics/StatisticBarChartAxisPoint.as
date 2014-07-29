@@ -11,11 +11,13 @@ package net.wg.gui.lobby.profile.pages.statistics
     public class StatisticBarChartAxisPoint extends SimpleLoader implements IListItemRenderer
     {
         
-        public function StatisticBarChartAxisPoint() {
+        public function StatisticBarChartAxisPoint()
+        {
             super();
         }
         
-        private static function mouseRollOutHandler(param1:MouseEvent) : void {
+        private static function mouseRollOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
@@ -25,21 +27,25 @@ package net.wg.gui.lobby.profile.pages.statistics
         
         private var _initialized:Boolean;
         
-        public function get tooltip() : String {
+        public function get tooltip() : String
+        {
             return this._tooltip;
         }
         
-        override protected function onLoadingComplete() : void {
+        override protected function onLoadingComplete() : void
+        {
             this._initialized = true;
             super.onLoadingComplete();
         }
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             this._data = param1;
             setSource(StatisticChartInfo(this._data).icon);
         }
         
-        public function set tooltip(param1:String) : void {
+        public function set tooltip(param1:String) : void
+        {
             this._tooltip = param1;
             this.disposeHandlers();
             if(this._tooltip)
@@ -49,87 +55,110 @@ package net.wg.gui.lobby.profile.pages.statistics
             }
         }
         
-        private function disposeHandlers() : void {
+        private function disposeHandlers() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
             removeEventListener(MouseEvent.ROLL_OUT,mouseRollOutHandler);
         }
         
-        protected function mouseRollOverHandler(param1:MouseEvent) : void {
+        protected function mouseRollOverHandler(param1:MouseEvent) : void
+        {
             this.showToolTip();
         }
         
-        protected function showToolTip() : void {
+        protected function showToolTip() : void
+        {
         }
         
-        public function get index() : uint {
+        public function get index() : uint
+        {
             return 0;
         }
         
-        public function set index(param1:uint) : void {
+        public function set index(param1:uint) : void
+        {
         }
         
-        public function get owner() : UIComponent {
+        public function get owner() : UIComponent
+        {
             return null;
         }
         
-        public function set owner(param1:UIComponent) : void {
+        public function set owner(param1:UIComponent) : void
+        {
         }
         
-        public function get selectable() : Boolean {
+        public function get selectable() : Boolean
+        {
             return false;
         }
         
-        public function set selectable(param1:Boolean) : void {
+        public function set selectable(param1:Boolean) : void
+        {
         }
         
-        public function get selected() : Boolean {
+        public function get selected() : Boolean
+        {
             return false;
         }
         
-        public function set selected(param1:Boolean) : void {
+        public function set selected(param1:Boolean) : void
+        {
         }
         
-        public function get displayFocus() : Boolean {
+        public function get displayFocus() : Boolean
+        {
             return false;
         }
         
-        public function set displayFocus(param1:Boolean) : void {
+        public function set displayFocus(param1:Boolean) : void
+        {
         }
         
-        public function setListData(param1:ListData) : void {
+        public function setListData(param1:ListData) : void
+        {
         }
         
-        public function getData() : Object {
+        public function getData() : Object
+        {
             return this._data;
         }
         
-        public function get enabled() : Boolean {
+        public function get enabled() : Boolean
+        {
             return false;
         }
         
-        public function set enabled(param1:Boolean) : void {
+        public function set enabled(param1:Boolean) : void
+        {
         }
         
-        public function get focusTarget() : UIComponent {
+        public function get focusTarget() : UIComponent
+        {
             return null;
         }
         
-        public function set focusTarget(param1:UIComponent) : void {
+        public function set focusTarget(param1:UIComponent) : void
+        {
         }
         
-        public function validateNow(param1:Event = null) : void {
+        public function validateNow(param1:Event = null) : void
+        {
         }
         
-        public function handleInput(param1:InputEvent) : void {
+        public function handleInput(param1:InputEvent) : void
+        {
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeHandlers();
             this._data = null;
             super.onDispose();
         }
         
-        public function get initialized() : Boolean {
+        public function get initialized() : Boolean
+        {
             return this._initialized;
         }
     }

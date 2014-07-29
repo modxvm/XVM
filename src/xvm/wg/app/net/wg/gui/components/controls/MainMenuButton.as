@@ -12,7 +12,8 @@ package net.wg.gui.components.controls
     public class MainMenuButton extends SoundButtonEx
     {
         
-        public function MainMenuButton() {
+        public function MainMenuButton()
+        {
             super();
             constraintsDisabled = true;
             soundType = SoundTypes.MAIN_MENU;
@@ -37,7 +38,8 @@ package net.wg.gui.components.controls
         
         private var _externalState:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.paddingHorizontal = 0;
             addEventListener(MouseEvent.ROLL_OVER,this.onBtnOver);
@@ -45,20 +47,24 @@ package net.wg.gui.components.controls
             this.checkBrowserEffect();
         }
         
-        override public function get paddingHorizontal() : Number {
+        override public function get paddingHorizontal() : Number
+        {
             return _paddingHorizontal;
         }
         
-        override public function set paddingHorizontal(param1:Number) : void {
+        override public function set paddingHorizontal(param1:Number) : void
+        {
             _paddingHorizontal = param1;
             invalidate();
         }
         
-        public function get caps() : Boolean {
+        public function get caps() : Boolean
+        {
             return this._caps;
         }
         
-        public function set caps(param1:Boolean) : void {
+        public function set caps(param1:Boolean) : void
+        {
             if(this._caps == param1)
             {
                 return;
@@ -67,7 +73,8 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             if(param1)
             {
@@ -75,7 +82,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             var _loc1_:String = null;
             if(this.gradient)
             {
@@ -142,7 +150,8 @@ package net.wg.gui.components.controls
             this.width = this.actualWidth;
         }
         
-        override protected function alignForAutoSize() : void {
+        override protected function alignForAutoSize() : void
+        {
             var _loc1_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
@@ -165,7 +174,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function calculateWidth() : Number {
+        override protected function calculateWidth() : Number
+        {
             var _loc2_:ConstrainedElement = null;
             var _loc3_:TextField = null;
             var _loc1_:Number = actualWidth;
@@ -178,11 +188,13 @@ package net.wg.gui.components.controls
             return _loc1_;
         }
         
-        public function get textColorOver() : Number {
+        public function get textColorOver() : Number
+        {
             return _textColor;
         }
         
-        public function set textColorOver(param1:Number) : void {
+        public function set textColorOver(param1:Number) : void
+        {
             if(this._textColorOver == param1)
             {
                 return;
@@ -191,7 +203,8 @@ package net.wg.gui.components.controls
             invalidate();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.STATE))
             {
@@ -215,24 +228,25 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function showHelpLayout() : void {
+        override public function showHelpLayout() : void
+        {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
-            var _loc2_:Object = {
-                "borderWidth":width,
-                "borderHeight":this.fxTextField1.textHeight + 5,
-                "direction":data["helpDirection"],
-                "text":data["helpText"],
-                "x":0,
-                "y":0,
-                "connectorLength":data["helpConnectorLength"]
-            };
+            var _loc2_:Object = {"borderWidth":width,
+            "borderHeight":this.fxTextField1.textHeight + 5,
+            "direction":data["helpDirection"],
+            "text":data["helpText"],
+            "x":0,
+            "y":0,
+            "connectorLength":data["helpConnectorLength"]
+        };
         if(data["helpText"])
         {
             setHelpLayout(_loc1_.create(root,_loc2_,this));
         }
     }
     
-    private function checkBrowserEffect() : void {
+    private function checkBrowserEffect() : void
+    {
         if((data) && data.value == "browser")
         {
             App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
@@ -242,7 +256,8 @@ package net.wg.gui.components.controls
     
     private var _isBlinking:Boolean = false;
     
-    private function changeEffectState() : void {
+    private function changeEffectState() : void
+    {
         if((selected) || !enabled)
         {
             filters = [];
@@ -268,7 +283,8 @@ package net.wg.gui.components.controls
         }
     }
     
-    private function onBtnOver(param1:MouseEvent) : void {
+    private function onBtnOver(param1:MouseEvent) : void
+    {
         if((data) && data.value == "browser")
         {
             App.utils.scheduler.cancelTask(this.changeEffectState);
@@ -276,16 +292,19 @@ package net.wg.gui.components.controls
         }
     }
     
-    private function onBtnOut(param1:MouseEvent) : void {
+    private function onBtnOut(param1:MouseEvent) : void
+    {
         this.checkBrowserEffect();
     }
     
-    public function setExternalState(param1:String) : void {
+    public function setExternalState(param1:String) : void
+    {
         this._externalState = param1;
         setState(state);
     }
     
-    override protected function getStatePrefixes() : Vector.<String> {
+    override protected function getStatePrefixes() : Vector.<String>
+    {
         return _selected?statesSelected:this._externalState != ""?Vector.<String>([this._externalState]):statesDefault;
     }
 }

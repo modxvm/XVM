@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class FortChoiceDivisionSelectorVO extends DAAPIDataClass
     {
         
-        public function FortChoiceDivisionSelectorVO(param1:Object) {
+        public function FortChoiceDivisionSelectorVO(param1:Object)
+        {
             super(param1);
         }
         

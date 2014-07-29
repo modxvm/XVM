@@ -12,7 +12,8 @@ package net.wg.gui.components.controls
     public class SortableTableList extends SortableScrollingList
     {
         
-        public function SortableTableList() {
+        public function SortableTableList()
+        {
             super();
         }
         
@@ -30,17 +31,20 @@ package net.wg.gui.components.controls
         
         private var _isSelectable:Boolean = true;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.addEventListener(ListEvent.INDEX_CHANGE,this.indexChangedHandler,false,0,true);
         }
         
-        override protected function updateSelectedIndex() : void {
+        override protected function updateSelectedIndex() : void
+        {
             super.updateSelectedIndex();
             invalidate(INV_SElECTED_RENDERER);
         }
         
-        private function layoutSelectedRenderers() : void {
+        private function layoutSelectedRenderers() : void
+        {
             var _loc1_:IListItemRenderer = null;
             var _loc2_:* = 0;
             var _loc3_:* = 0;
@@ -65,12 +69,14 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function handleItemClick(param1:ButtonEvent) : void {
+        override protected function handleItemClick(param1:ButtonEvent) : void
+        {
             super.handleItemClick(param1);
             this.isSortingTheLastActivity = false;
         }
         
-        private function indexChangedHandler(param1:ListEvent) : void {
+        private function indexChangedHandler(param1:ListEvent) : void
+        {
             if(this._isSelectable)
             {
                 if(!this.isSortingTheLastActivity)
@@ -86,19 +92,22 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function set dataProvider(param1:IDataProvider) : void {
+        override public function set dataProvider(param1:IDataProvider) : void
+        {
             this.isSortingTheLastActivity = false;
             this.isDataProviderReceived = true;
             super.dataProvider = param1;
         }
         
-        public function resetSelectedItem() : void {
+        public function resetSelectedItem() : void
+        {
             this.oldSelectedItem = null;
             this._lastSelectedUniqValue = null;
             selectedIndex = -1;
         }
         
-        override protected function applySorting(param1:Array) : void {
+        override protected function applySorting(param1:Array) : void
+        {
             super.applySorting(param1);
             var _loc2_:* = -1;
             if(this._isSelectable)
@@ -109,7 +118,8 @@ package net.wg.gui.components.controls
             invalidateSelectedIndex();
         }
         
-        private function checkSelectedItem(param1:int) : int {
+        private function checkSelectedItem(param1:int) : int
+        {
             var _loc4_:Object = null;
             var _loc2_:uint = dataProvider.length;
             var _loc3_:* = 0;
@@ -134,7 +144,8 @@ package net.wg.gui.components.controls
             return param1;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             this.isSortingTheLastActivity = false;
             if((this.isDataProviderReceived) && (this._isSelectable))
             {
@@ -148,7 +159,8 @@ package net.wg.gui.components.controls
             super.draw();
         }
         
-        public function get selectedItem() : Object {
+        public function get selectedItem() : Object
+        {
             if((dataProvider) && dataProvider.length > 0)
             {
                 return dataProvider.requestItemAt(selectedIndex);
@@ -156,14 +168,16 @@ package net.wg.gui.components.controls
             return null;
         }
         
-        override protected function invalidateSorting(param1:Object) : void {
+        override protected function invalidateSorting(param1:Object) : void
+        {
             this.updateOldSelected(_selectedIndex);
             super.invalidateSorting(param1);
             this.isSortingTheLastActivity = true;
             invalidate(SORTING_INVALID);
         }
         
-        private function updateOldSelected(param1:int) : void {
+        private function updateOldSelected(param1:int) : void
+        {
             var _loc2_:IListItemRenderer = getRendererAt(param1);
             if(_loc2_)
             {
@@ -175,14 +189,16 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._lastSelectedUniqValue = null;
             this.oldSelectedItem = null;
             this.removeEventListener(ListEvent.INDEX_CHANGE,this.indexChangedHandler);
             super.onDispose();
         }
         
-        public function selectedItemByUniqKey(param1:String, param2:Object) : void {
+        public function selectedItemByUniqKey(param1:String, param2:Object) : void
+        {
             var _loc3_:int = this.findItemIndex(param2,param1);
             if(_loc3_ > -1)
             {
@@ -192,7 +208,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        public function scrollToItemByUniqKey(param1:String, param2:Object) : void {
+        public function scrollToItemByUniqKey(param1:String, param2:Object) : void
+        {
             var _loc3_:int = this.findItemIndex(param2,param1);
             if(_loc3_ > -1)
             {
@@ -200,7 +217,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function findItemIndex(param1:Object, param2:String) : int {
+        private function findItemIndex(param1:Object, param2:String) : int
+        {
             var _loc3_:* = -1;
             var _loc4_:uint = dataProvider.length;
             var _loc5_:* = 0;
@@ -216,7 +234,8 @@ package net.wg.gui.components.controls
             return _loc3_;
         }
         
-        override protected function populateData(param1:Array) : void {
+        override protected function populateData(param1:Array) : void
+        {
             var _loc5_:IListItemRenderer = null;
             var _loc6_:* = 0;
             var _loc7_:ListData = null;
@@ -245,24 +264,29 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function drawScrollBar() : void {
+        override protected function drawScrollBar() : void
+        {
             super.drawScrollBar();
             _scrollBar.x = _width - _scrollBar.width - margin - sbPadding.right;
         }
         
-        public function get uniqKeyForAutoSelect() : String {
+        public function get uniqKeyForAutoSelect() : String
+        {
             return this._uniqKeyForAutoSelect;
         }
         
-        public function set uniqKeyForAutoSelect(param1:String) : void {
+        public function set uniqKeyForAutoSelect(param1:String) : void
+        {
             this._uniqKeyForAutoSelect = param1;
         }
         
-        public function get isSelectable() : Boolean {
+        public function get isSelectable() : Boolean
+        {
             return this._isSelectable;
         }
         
-        public function set isSelectable(param1:Boolean) : void {
+        public function set isSelectable(param1:Boolean) : void
+        {
             this._isSelectable = param1;
         }
     }

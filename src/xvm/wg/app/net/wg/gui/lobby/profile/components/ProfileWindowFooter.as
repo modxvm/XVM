@@ -10,13 +10,15 @@ package net.wg.gui.lobby.profile.components
     public class ProfileWindowFooter extends UserDateFooter
     {
         
-        public function ProfileWindowFooter() {
+        public function ProfileWindowFooter()
+        {
             super();
         }
         
         private static var LAYOUT_INVALID:String = "layInv";
         
-        private static function cutText(param1:TextField, param2:String) : String {
+        private static function cutText(param1:TextField, param2:String) : String
+        {
             var _loc4_:* = 0;
             param1.htmlText = param2;
             var _loc3_:* = -1;
@@ -36,7 +38,8 @@ package net.wg.gui.lobby.profile.components
             return param1.htmlText;
         }
         
-        private static function processCutText(param1:TextField, param2:String) : void {
+        private static function processCutText(param1:TextField, param2:String) : void
+        {
             var _loc3_:String = null;
             if(param1.getLineLength(1) != -1)
             {
@@ -62,7 +65,8 @@ package net.wg.gui.lobby.profile.components
         
         private var clanText:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             textDates.autoSize = TextFieldAutoSize.LEFT;
             this.txtClanJoin.selectable = this.txtClanInfo.selectable = textDates.selectable = false;
@@ -70,7 +74,8 @@ package net.wg.gui.lobby.profile.components
             this.txtClanInfo.addEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:uint = 0;
             var _loc2_:* = false;
             super.draw();
@@ -93,7 +98,8 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        override protected function applyDataChanges() : void {
+        override protected function applyDataChanges() : void
+        {
             var _loc2_:String = null;
             super.applyDataChanges();
             var _loc1_:* = !(initData.clanName == Values.EMPTY_STR);
@@ -116,32 +122,39 @@ package net.wg.gui.lobby.profile.components
             invalidate(LAYOUT_INVALID);
         }
         
-        override protected function getSeparator() : String {
+        override protected function getSeparator() : String
+        {
             return "\n";
         }
         
-        public function get sidesGap() : uint {
+        public function get sidesGap() : uint
+        {
             return this._sidesGap;
         }
         
-        public function set sidesGap(param1:uint) : void {
+        public function set sidesGap(param1:uint) : void
+        {
             this._sidesGap = param1;
             invalidate(LAYOUT_INVALID);
         }
         
-        private function leftTextMouseOverHandler(param1:MouseEvent) : void {
+        private function leftTextMouseOverHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(this.clanText);
         }
         
-        private function leftTextMouseOutHandler(param1:MouseEvent) : void {
+        private function leftTextMouseOutHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        override public function get height() : Number {
+        override public function get height() : Number
+        {
             return 48;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.txtClanInfo.removeEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler);
             this.txtClanInfo.removeEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler);
             this.txtClanInfo = null;

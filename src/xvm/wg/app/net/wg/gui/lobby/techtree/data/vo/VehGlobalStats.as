@@ -6,7 +6,8 @@ package net.wg.gui.lobby.techtree.data.vo
     public class VehGlobalStats extends Object implements IValueObject
     {
         
-        public function VehGlobalStats(param1:Boolean = false, param2:String = "", param3:ExtraInformation = null, param4:Number = 0, param5:Boolean = false) {
+        public function VehGlobalStats(param1:Boolean = false, param2:String = "", param3:ExtraInformation = null, param4:Number = 0, param5:Boolean = false)
+        {
             super();
             this.enableInstallItems = param1;
             this.statusString = param2;
@@ -29,7 +30,8 @@ package net.wg.gui.lobby.techtree.data.vo
         
         public var historicalBattleID:int = -1;
         
-        public function fromArray(param1:Array, param2:ILocale) : void {
+        public function fromArray(param1:Array, param2:ILocale) : void
+        {
             if(param1.length > 4)
             {
                 this.enableInstallItems = param1[0];
@@ -43,7 +45,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function fromObject(param1:Object, param2:ILocale) : void {
+        public function fromObject(param1:Object, param2:ILocale) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -76,7 +79,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[VehGlobalStats: enableInstallItems = " + this.enableInstallItems + ", statusString = " + this.statusString + ", extraInfo = " + this.extraInfo + ", freeXP = " + this.freeXP + ", hasNationTree = " + this.hasNationTree + ", warningMessage = " + this.warningMessage + ", historicalBattleID = " + this.historicalBattleID + "]";
         }
     }

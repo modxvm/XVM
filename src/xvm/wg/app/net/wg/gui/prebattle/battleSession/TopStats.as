@@ -6,7 +6,8 @@ package net.wg.gui.prebattle.battleSession
     public class TopStats extends UIComponent
     {
         
-        public function TopStats() {
+        public function TopStats()
+        {
             super();
         }
         

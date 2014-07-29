@@ -3,7 +3,8 @@ package net.wg.gui.lobby.training
     public class TrainingConstants extends Object
     {
         
-        public function TrainingConstants() {
+        public function TrainingConstants()
+        {
             super();
         }
         

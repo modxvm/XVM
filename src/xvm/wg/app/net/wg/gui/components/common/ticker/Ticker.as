@@ -13,7 +13,8 @@ package net.wg.gui.components.common.ticker
     public class Ticker extends TickerMeta implements ITickerMeta
     {
         
-        public function Ticker() {
+        public function Ticker()
+        {
             this._rssItems = [];
             this._renderers = [];
             super();
@@ -51,16 +52,19 @@ package net.wg.gui.components.common.ticker
         
         private var _intervalID:int = -1;
         
-        public function as_setItems(param1:Array) : void {
+        public function as_setItems(param1:Array) : void
+        {
             this._rssItems = param1;
             invalidate(INVALID_ITEMS);
         }
         
-        public function get hasItems() : Boolean {
+        public function get hasItems() : Boolean
+        {
             return (this._rssItems) && this._rssItems.length > 0;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOver);
             removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
@@ -88,14 +92,16 @@ package net.wg.gui.components.common.ticker
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             hitArea = this.hit;
             addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOver);
             addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(INVALID_ITEMS)) && (this.hasItems))
             {
@@ -103,7 +109,8 @@ package net.wg.gui.components.common.ticker
             }
         }
         
-        private function startAnimation() : void {
+        private function startAnimation() : void
+        {
             this.show();
             if(this._intervalID == -1)
             {
@@ -111,7 +118,8 @@ package net.wg.gui.components.common.ticker
             }
         }
         
-        private function pauseAnimation() : void {
+        private function pauseAnimation() : void
+        {
             if(this._intervalID != -1)
             {
                 clearInterval(this._intervalID);
@@ -119,7 +127,8 @@ package net.wg.gui.components.common.ticker
             }
         }
         
-        private function show() : void {
+        private function show() : void
+        {
             visible = true;
             if(this._showHideTween)
             {
@@ -129,7 +138,8 @@ package net.wg.gui.components.common.ticker
             this._showHideTween = new Tween(HIDE_SHOW_SPEED,this,{"alpha":1});
         }
         
-        private function hide() : void {
+        private function hide() : void
+        {
             if(this._showHideTween)
             {
                 this._showHideTween.paused = true;
@@ -138,11 +148,13 @@ package net.wg.gui.components.common.ticker
             this._showHideTween = new Tween(HIDE_SHOW_SPEED,this,{"alpha":0.0},{"onComplete":this.onHideTweenComplete});
         }
         
-        private function onHideTweenComplete() : void {
+        private function onHideTweenComplete() : void
+        {
             visible = false;
         }
         
-        private function animate() : void {
+        private function animate() : void
+        {
             var _loc1_:TickerItem = null;
             var _loc2_:TickerItem = null;
             var _loc3_:TickerItem = null;
@@ -175,7 +187,8 @@ package net.wg.gui.components.common.ticker
             
         }
         
-        private function addRenderer() : void {
+        private function addRenderer() : void
+        {
             var _loc2_:TickerItem = null;
             this._itemIndex++;
             if(this._itemIndex >= this._rssItems.length)
@@ -193,7 +206,8 @@ package net.wg.gui.components.common.ticker
             this._renderers.push(_loc2_);
         }
         
-        private function removeRenderer() : void {
+        private function removeRenderer() : void
+        {
             var _loc1_:TickerItem = this._renderers.shift();
             _loc1_.removeEventListener(MouseEvent.MOUSE_OVER,this.onItemMouseInteraction);
             _loc1_.removeEventListener(MouseEvent.MOUSE_OUT,this.onItemMouseInteraction);
@@ -202,15 +216,18 @@ package net.wg.gui.components.common.ticker
             this.container.removeChild(_loc1_);
         }
         
-        private function onMouseOut(param1:MouseEvent) : void {
+        private function onMouseOut(param1:MouseEvent) : void
+        {
             this.startAnimation();
         }
         
-        private function onMouseOver(param1:MouseEvent) : void {
+        private function onMouseOver(param1:MouseEvent) : void
+        {
             this.pauseAnimation();
         }
         
-        private function onItemMouseInteraction(param1:MouseEvent) : void {
+        private function onItemMouseInteraction(param1:MouseEvent) : void
+        {
             var _loc2_:Object = (param1.currentTarget as TickerItem).model;
             switch(param1.type)
             {

@@ -3,7 +3,8 @@ package scaleform.clik.constants
     public class InputValue extends Object
     {
         
-        public function InputValue() {
+        public function InputValue()
+        {
             super();
         }
         

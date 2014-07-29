@@ -8,7 +8,8 @@ package net.wg.data.daapi.base
     public class DAAPIDataProvider extends EventDispatcher implements IDataProvider, IDAAPIModule
     {
         
-        public function DAAPIDataProvider() {
+        public function DAAPIDataProvider()
+        {
             super();
         }
         
@@ -18,11 +19,13 @@ package net.wg.data.daapi.base
         
         public var requestItemRangeHandler:Function;
         
-        public function get disposed() : Boolean {
+        public function get disposed() : Boolean
+        {
             return false;
         }
         
-        public function get length() : uint {
+        public function get length() : uint
+        {
             if(this.lengthHandler != null)
             {
                 return this.lengthHandler();
@@ -30,7 +33,8 @@ package net.wg.data.daapi.base
             return 0;
         }
         
-        public function requestItemAt(param1:uint, param2:Function = null) : Object {
+        public function requestItemAt(param1:uint, param2:Function = null) : Object
+        {
             var _loc3_:Object = this.requestItemAtHandler(param1);
             if(param2 != null)
             {
@@ -39,7 +43,8 @@ package net.wg.data.daapi.base
             return _loc3_;
         }
         
-        public function requestItemRange(param1:int, param2:int, param3:Function = null) : Array {
+        public function requestItemRange(param1:int, param2:int, param3:Function = null) : Array
+        {
             if(!Boolean(this.requestItemRangeHandler))
             {
                 return [];
@@ -52,7 +57,8 @@ package net.wg.data.daapi.base
             return _loc4_;
         }
         
-        public function indexOf(param1:Object, param2:Function = null) : int {
+        public function indexOf(param1:Object, param2:Function = null) : int
+        {
             if(param2 != null)
             {
                 param2(-1);
@@ -60,21 +66,26 @@ package net.wg.data.daapi.base
             return -1;
         }
         
-        public function cleanUp() : void {
+        public function cleanUp() : void
+        {
         }
         
-        public function triggerInvalidation() : void {
+        public function triggerInvalidation() : void
+        {
             this.invalidate(this.lengthHandler());
         }
         
-        public function invalidate(param1:uint = 0) : void {
+        public function invalidate(param1:uint = 0) : void
+        {
             dispatchEvent(new Event(Event.CHANGE));
         }
         
-        public function as_populate() : void {
+        public function as_populate() : void
+        {
         }
         
-        public function as_dispose() : void {
+        public function as_dispose() : void
+        {
         }
     }
 }

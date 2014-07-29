@@ -7,12 +7,14 @@ package net.wg.gui.lobby.profile.headerBar
     public class ProfileHeaderButtonBar extends ButtonBarEx
     {
         
-        public function ProfileHeaderButtonBar() {
+        public function ProfileHeaderButtonBar()
+        {
             super();
             spacing = 10;
         }
         
-        override protected function populateRendererData(param1:Button, param2:uint) : void {
+        override protected function populateRendererData(param1:Button, param2:uint) : void
+        {
             super.populateRendererData(param1,param2);
             if(param2 == _dataProvider.length - 1)
             {
@@ -24,7 +26,8 @@ package net.wg.gui.lobby.profile.headerBar
             param1.validateNow();
         }
         
-        override public function set selectedIndex(param1:int) : void {
+        override public function set selectedIndex(param1:int) : void
+        {
             if(param1 == _selectedIndex)
             {
                 return;

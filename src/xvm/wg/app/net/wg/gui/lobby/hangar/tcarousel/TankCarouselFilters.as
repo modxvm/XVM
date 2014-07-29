@@ -7,7 +7,8 @@ package net.wg.gui.lobby.hangar.tcarousel
     public class TankCarouselFilters extends UIComponent
     {
         
-        public function TankCarouselFilters() {
+        public function TankCarouselFilters()
+        {
             super();
         }
         
@@ -27,7 +28,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         public var checkBoxToMain:CheckBox;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.nationFilter.dispose();
             this.nationFilter = null;
             this.tankFilter.dispose();
@@ -37,7 +39,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             super.onDispose();
         }
         
-        public function close() : void {
+        public function close() : void
+        {
             if((this.nationFilter) && (this.nationFilter.isOpen()))
             {
                 this.nationFilter.close();
@@ -48,11 +51,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return super.enabled;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(param1 == super.enabled)
             {
                 return;

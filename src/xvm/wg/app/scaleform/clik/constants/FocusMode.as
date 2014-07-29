@@ -3,7 +3,8 @@ package scaleform.clik.constants
     public class FocusMode extends Object
     {
         
-        public function FocusMode() {
+        public function FocusMode()
+        {
             super();
         }
         

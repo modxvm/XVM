@@ -9,7 +9,8 @@ package net.wg.gui.components.tooltips
     public class ModuleItem extends UIComponent
     {
         
-        public function ModuleItem() {
+        public function ModuleItem()
+        {
             super();
         }
         
@@ -19,17 +20,20 @@ package net.wg.gui.components.tooltips
         
         private var model:ModuleVO;
         
-        public function setData(param1:ModuleVO) : void {
+        public function setData(param1:ModuleVO) : void
+        {
             this.model = param1;
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.textField.autoSize = TextFieldAutoSize.LEFT;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.model))
             {
@@ -38,7 +42,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.model)
             {
                 this.model.dispose();

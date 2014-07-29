@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class VehicleTypes extends Object
     {
         
-        public function VehicleTypes() {
+        public function VehicleTypes()
+        {
             super();
         }
         

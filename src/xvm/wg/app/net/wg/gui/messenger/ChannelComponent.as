@@ -17,7 +17,8 @@ package net.wg.gui.messenger
     public class ChannelComponent extends ChannelComponentMeta implements IChannelComponent
     {
         
-        public function ChannelComponent() {
+        public function ChannelComponent()
+        {
             super();
         }
         
@@ -37,11 +38,13 @@ package net.wg.gui.messenger
         
         private var needDispose:Boolean = true;
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this.messageInput;
         }
         
-        public function as_setJoined(param1:Boolean) : void {
+        public function as_setJoined(param1:Boolean) : void
+        {
             this._isJoined = param1;
             this.enableControls(this._isJoined);
             if(this._isJoined)
@@ -50,7 +53,8 @@ package net.wg.gui.messenger
             }
         }
         
-        public function as_addMessage(param1:String) : void {
+        public function as_addMessage(param1:String) : void
+        {
             if(param1)
             {
                 this.messageArea.appendHtmlResetPosition(param1 + "\n");
@@ -61,11 +65,13 @@ package net.wg.gui.messenger
             }
         }
         
-        public function get externalButton() : SoundButtonEx {
+        public function get externalButton() : SoundButtonEx
+        {
             return this.sendButton;
         }
         
-        public function set externalButton(param1:SoundButtonEx) : void {
+        public function set externalButton(param1:SoundButtonEx) : void
+        {
             if(!param1)
             {
                 return;
@@ -74,7 +80,8 @@ package net.wg.gui.messenger
             this.sendButton = param1;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             this.messageInput.maxChars = getMessageMaxLengthS();
             this._isJoined = isJoinedS();
@@ -85,7 +92,8 @@ package net.wg.gui.messenger
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             var _loc1_:SmileyMap = new SmileyMap();
             this.sendButton.addEventListener(ButtonEvent.CLICK,this.onSendBtnClick,false,0,true);
@@ -100,7 +108,8 @@ package net.wg.gui.messenger
             this.sendButton.soundType = SoundTypes.NORMAL_BTN;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.sendButton.removeEventListener(ButtonEvent.CLICK,this.onSendBtnClick);
             if(this.needDispose)
@@ -116,7 +125,8 @@ package net.wg.gui.messenger
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INVALIDATE_CONTROLS))
             {
@@ -128,14 +138,16 @@ package net.wg.gui.messenger
             }
         }
         
-        private function setFocusToInput() : void {
+        private function setFocusToInput() : void
+        {
             if((initialized) && (isJoinedS()))
             {
                 this.updateFocus();
             }
         }
         
-        private function updateFocus() : void {
+        private function updateFocus() : void
+        {
             if((this.messageInput) && (this.messageInput.enabled) && this.messageInput.focused == 0)
             {
                 this.messageInput.validateNow();
@@ -143,12 +155,14 @@ package net.wg.gui.messenger
             }
         }
         
-        private function enableControls(param1:Boolean) : void {
+        private function enableControls(param1:Boolean) : void
+        {
             this.messageInput.enabled = param1;
             this.sendButton.enabled = param1;
         }
         
-        private function doMessage() : void {
+        private function doMessage() : void
+        {
             if(this.messageInput.text)
             {
                 if(sendMessageS(this.messageInput.text))
@@ -158,7 +172,8 @@ package net.wg.gui.messenger
             }
         }
         
-        private function setHistory() : void {
+        private function setHistory() : void
+        {
             if(getHistoryS())
             {
                 this.messageArea.htmlText = getHistoryS() + "\n";
@@ -170,12 +185,14 @@ package net.wg.gui.messenger
             this.updateFocus();
         }
         
-        private function onSendBtnClick(param1:ButtonEvent) : void {
+        private function onSendBtnClick(param1:ButtonEvent) : void
+        {
             this.doMessage();
             this.setFocusToInput();
         }
         
-        private function handleTextInput(param1:InputEvent) : void {
+        private function handleTextInput(param1:InputEvent) : void
+        {
             var _loc2_:InputDetails = param1.details;
             if(param1.details.code == Keyboard.ENTER && _loc2_.value == InputValue.KEY_UP)
             {

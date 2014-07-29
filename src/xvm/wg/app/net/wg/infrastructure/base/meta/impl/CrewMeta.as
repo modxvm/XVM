@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class CrewMeta extends BaseDAAPIComponent
     {
         
-        public function CrewMeta() {
+        public function CrewMeta()
+        {
             super();
         }
         
@@ -22,32 +23,38 @@ package net.wg.infrastructure.base.meta.impl
         
         public var updateTankmen:Function = null;
         
-        public function onShowRecruitWindowClickS(param1:Object, param2:Boolean) : void {
+        public function onShowRecruitWindowClickS(param1:Object, param2:Boolean) : void
+        {
             App.utils.asserter.assertNotNull(this.onShowRecruitWindowClick,"onShowRecruitWindowClick" + Errors.CANT_NULL);
             this.onShowRecruitWindowClick(param1,param2);
         }
         
-        public function unloadTankmanS(param1:String) : void {
+        public function unloadTankmanS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.unloadTankman,"unloadTankman" + Errors.CANT_NULL);
             this.unloadTankman(param1);
         }
         
-        public function unloadAllTankmanS() : void {
+        public function unloadAllTankmanS() : void
+        {
             App.utils.asserter.assertNotNull(this.unloadAllTankman,"unloadAllTankman" + Errors.CANT_NULL);
             this.unloadAllTankman();
         }
         
-        public function equipTankmanS(param1:String, param2:Number) : void {
+        public function equipTankmanS(param1:String, param2:Number) : void
+        {
             App.utils.asserter.assertNotNull(this.equipTankman,"equipTankman" + Errors.CANT_NULL);
             this.equipTankman(param1,param2);
         }
         
-        public function openPersonalCaseS(param1:String, param2:uint) : void {
+        public function openPersonalCaseS(param1:String, param2:uint) : void
+        {
             App.utils.asserter.assertNotNull(this.openPersonalCase,"openPersonalCase" + Errors.CANT_NULL);
             this.openPersonalCase(param1,param2);
         }
         
-        public function updateTankmenS() : void {
+        public function updateTankmenS() : void
+        {
             App.utils.asserter.assertNotNull(this.updateTankmen,"updateTankmen" + Errors.CANT_NULL);
             this.updateTankmen();
         }

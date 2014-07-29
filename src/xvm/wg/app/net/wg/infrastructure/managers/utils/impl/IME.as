@@ -15,7 +15,8 @@ package net.wg.infrastructure.managers.utils.impl
     public class IME extends Object implements IIME
     {
         
-        public function IME() {
+        public function IME()
+        {
             super();
             this._container = new Sprite();
             this._container.visible = false;
@@ -39,7 +40,8 @@ package net.wg.infrastructure.managers.utils.impl
         
         private var TextColorSelected:Number = 16777215;
         
-        public function init(param1:Boolean) : void {
+        public function init(param1:Boolean) : void
+        {
             var _loc2_:LoaderContext = null;
             var _loc3_:URLRequest = null;
             var _loc4_:URLRequest = null;
@@ -62,7 +64,8 @@ package net.wg.infrastructure.managers.utils.impl
             this.initStyle();
         }
         
-        private function initStyle() : void {
+        private function initStyle() : void
+        {
             var _loc1_:IMECandidateListStyle = new IMECandidateListStyle();
             _loc1_.textColor = 0;
             _loc1_.selectedTextColor = 16777215;
@@ -77,7 +80,8 @@ package net.wg.infrastructure.managers.utils.impl
             IMEEx.setIMECandidateListStyle(_loc1_);
         }
         
-        private function langBarLoaded(param1:Event) : void {
+        private function langBarLoaded(param1:Event) : void
+        {
             var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
             _loc2_.removeEventListener(Event.COMPLETE,this.langBarLoaded);
             this.langBar = param1.currentTarget.content;
@@ -85,14 +89,16 @@ package net.wg.infrastructure.managers.utils.impl
             this.updateStyle();
         }
         
-        private function statusWindowLoaded(param1:Event) : void {
+        private function statusWindowLoaded(param1:Event) : void
+        {
             var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
             _loc2_.removeEventListener(Event.COMPLETE,this.statusWindowLoaded);
             this.statusWinContainer = param1.currentTarget.content;
             this.updateStyle();
         }
         
-        private function updateStyle() : void {
+        private function updateStyle() : void
+        {
             if(!(this.langBar == null) && !(this.statusWinContainer == null))
             {
                 this.langBar.SetBackgroundColor(14608366,5619932);
@@ -110,18 +116,21 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function setVisible(param1:Boolean) : void {
+        public function setVisible(param1:Boolean) : void
+        {
             if(App.globalVarsMgr.isShowLangaugeBarS())
             {
                 this._container.visible = param1;
             }
         }
         
-        public function getContainer() : Sprite {
+        public function getContainer() : Sprite
+        {
             return this._container;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             if(this._container)
             {
                 if(this.langBar)
@@ -148,7 +157,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function onLangBarResize(param1:Number, param2:Number) : void {
+        public function onLangBarResize(param1:Number, param2:Number) : void
+        {
             if(this.statusWinContainer != null)
             {
                 this.statusWinContainer.x = param1;
@@ -156,7 +166,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function onSwitchLanguage() : void {
+        public function onSwitchLanguage() : void
+        {
         }
     }
 }

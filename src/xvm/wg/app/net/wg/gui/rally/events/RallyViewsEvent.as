@@ -5,7 +5,8 @@ package net.wg.gui.rally.events
     public class RallyViewsEvent extends Event
     {
         
-        public function RallyViewsEvent(param1:String, param2:* = null) {
+        public function RallyViewsEvent(param1:String, param2:* = null)
+        {
             super(param1,true,false);
             this.data = param2;
         }
@@ -38,7 +39,8 @@ package net.wg.gui.rally.events
         
         public var data;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new RallyViewsEvent(type,this.data);
         }
     }

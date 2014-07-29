@@ -3,7 +3,8 @@ package net.wg.gui.components.tooltips.VO
     public class ToolTipBlockRightListItemVO extends Object
     {
         
-        public function ToolTipBlockRightListItemVO(param1:String = "", param2:String = null, param3:Number = 0, param4:Number = 0) {
+        public function ToolTipBlockRightListItemVO(param1:String = "", param2:String = null, param3:Number = 0, param4:Number = 0)
+        {
             super();
             this.text = param1;
             this.icon = param2;

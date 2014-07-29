@@ -7,7 +7,8 @@ package net.wg.gui.lobby.battleloading.vo
     public class VehicleInfoVO extends DAAPIDataClass
     {
         
-        public function VehicleInfoVO(param1:Object) {
+        public function VehicleInfoVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -47,27 +48,33 @@ package net.wg.gui.lobby.battleloading.vo
         
         public var isPlayerTeam:Boolean = false;
         
-        public function isAlive() : Boolean {
+        public function isAlive() : Boolean
+        {
             return (this.vehicleStatus & VehicleStatus.IS_ALIVE) > 0;
         }
         
-        public function isReady() : Boolean {
+        public function isReady() : Boolean
+        {
             return (this.vehicleStatus & VehicleStatus.IS_READY) > 0;
         }
         
-        public function isNotAvailable() : Boolean {
+        public function isNotAvailable() : Boolean
+        {
             return (this.vehicleStatus & VehicleStatus.NOT_AVAILABLE) > 0;
         }
         
-        public function isSquadMan() : Boolean {
+        public function isSquadMan() : Boolean
+        {
             return (this.playerStatus & PlayerStatus.IS_SQUAD_MAN) > 0;
         }
         
-        public function isTeamKiller() : Boolean {
+        public function isTeamKiller() : Boolean
+        {
             return (this.playerStatus & PlayerStatus.IS_TEAM_KILLER) > 0;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[VehicleInfoVO: vehicleID = " + this.vehicleID + ", playerName = " + this.playerName + " vehicleStatus = " + this.vehicleStatus + "]";
         }
     }

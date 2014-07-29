@@ -6,7 +6,8 @@ package net.wg.gui.components.advanced
     public class UnClickableShadowBG extends UIComponent
     {
         
-        public function UnClickableShadowBG() {
+        public function UnClickableShadowBG()
+        {
             super();
             this.shadow.buttonMode = true;
             this.shadow.hitArea = this.hit;

@@ -6,7 +6,8 @@ package net.wg.gui.lobby.vehicleInfo
     public class CrewBlock extends Sprite
     {
         
-        public function CrewBlock() {
+        public function CrewBlock()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.lobby.vehicleInfo
         
         public var crewValue:TextField;
         
-        public function setData(param1:Object) : void {
+        public function setData(param1:Object) : void
+        {
             this.crewTankMan.text = param1.tankmanType;
             this.crewValue.text = param1.value;
         }

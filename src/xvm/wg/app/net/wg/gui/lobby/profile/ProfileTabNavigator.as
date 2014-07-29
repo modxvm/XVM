@@ -14,7 +14,8 @@ package net.wg.gui.lobby.profile
     public class ProfileTabNavigator extends ProfileTabNavigatorMeta implements IProfileTabNavigatorMeta
     {
         
-        public function ProfileTabNavigator() {
+        public function ProfileTabNavigator()
+        {
             this._sectionsDataUtil = new SectionsDataUtil();
             super();
         }
@@ -33,7 +34,8 @@ package net.wg.gui.lobby.profile
         
         private var _centerOffset:int = 0;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.disposeImporters();
             this.viewStack.cache = true;
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.profile
             this.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onSectionViewShowed,false,0,true);
         }
         
-        private function disposeImporters() : void {
+        private function disposeImporters() : void
+        {
             var _loc1_:DisplayObject = null;
             var _loc3_:ProfileSectionsImporter = null;
             var _loc2_:int = numChildren - 1;
@@ -58,7 +61,8 @@ package net.wg.gui.lobby.profile
             }
         }
         
-        private function onSectionViewShowed(param1:ViewStackEvent) : void {
+        private function onSectionViewShowed(param1:ViewStackEvent) : void
+        {
             var _loc2_:String = this._sectionsDataUtil.getAliasByLinkage(param1.linkage);
             if(!isFlashComponentRegisteredS(_loc2_))
             {
@@ -66,7 +70,8 @@ package net.wg.gui.lobby.profile
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Array = null;
             var _loc2_:uint = 0;
             var _loc3_:Array = null;
@@ -112,19 +117,22 @@ package net.wg.gui.lobby.profile
             }
         }
         
-        private function onTabBarIndexChanged(param1:IndexEvent) : void {
+        private function onTabBarIndexChanged(param1:IndexEvent) : void
+        {
             if(param1.index != -1)
             {
                 this.viewStack.show(this._sectionsDataUtil.getLinkageByAlias(SectionInfo(param1.data).alias));
             }
         }
         
-        public function as_setInitData(param1:Object) : void {
+        public function as_setInitData(param1:Object) : void
+        {
             this.initData = new ProfileMenuInfoVO(param1);
             invalidate(INIT_DATA_INV);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._sectionsDataUtil = null;
             this.bar.dispose();
             this.bar = null;
@@ -138,12 +146,14 @@ package net.wg.gui.lobby.profile
             super.onDispose();
         }
         
-        public function setAvailableSize(param1:Number, param2:Number) : void {
+        public function setAvailableSize(param1:Number, param2:Number) : void
+        {
             this.viewStack.setAvailableSize(param1,param2 - this.viewStack.y);
             setSize(param1,param2);
         }
         
-        public function set centerOffset(param1:int) : void {
+        public function set centerOffset(param1:int) : void
+        {
             this._centerOffset = param1;
             invalidate(OFFSET_INVALID);
         }

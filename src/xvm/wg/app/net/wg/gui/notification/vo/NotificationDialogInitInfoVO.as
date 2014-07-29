@@ -5,7 +5,8 @@ package net.wg.gui.notification.vo
     public class NotificationDialogInitInfoVO extends DAAPIDataClass
     {
         
-        public function NotificationDialogInitInfoVO(param1:Object) {
+        public function NotificationDialogInitInfoVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.notification.vo
         
         public var settings:NotificationSettingsVO = null;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             if(param1 == "settings")
             {
                 this.settings = new NotificationSettingsVO(param2);

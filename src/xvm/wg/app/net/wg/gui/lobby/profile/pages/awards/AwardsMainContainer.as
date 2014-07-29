@@ -10,12 +10,14 @@ package net.wg.gui.lobby.profile.pages.awards
     public class AwardsMainContainer extends UIComponent
     {
         
-        public function AwardsMainContainer() {
+        public function AwardsMainContainer()
+        {
             super();
             addEventListener(Event.RESIZE,this.blockResizeHandler,false,0,true);
         }
         
-        private static function applyBlockData(param1:AwardsTileListBlock, param2:Array) : Boolean {
+        private static function applyBlockData(param1:AwardsTileListBlock, param2:Array) : Boolean
+        {
             var _loc6_:* = false;
             var _loc7_:ProfileAchievementVO = null;
             var _loc8_:* = 0;
@@ -69,7 +71,8 @@ package net.wg.gui.lobby.profile.pages.awards
         
         protected var blocks:Vector.<AwardsTileListBlock>;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc2_:AwardsTileListBlock = null;
             super.configUI();
             var _loc1_:ILocale = App.utils.locale;
@@ -88,12 +91,14 @@ package net.wg.gui.lobby.profile.pages.awards
             }
         }
         
-        private function blockResizeHandler(param1:Event) : void {
+        private function blockResizeHandler(param1:Event) : void
+        {
             param1.stopPropagation();
             invalidate(InvalidationType.SIZE);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:uint = 0;
             var _loc2_:* = 0;
             var _loc3_:uint = 0;
@@ -140,12 +145,14 @@ package net.wg.gui.lobby.profile.pages.awards
             }
         }
         
-        public function set data(param1:Array) : void {
+        public function set data(param1:Array) : void
+        {
             this._allMedalsData = param1;
             invalidateData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:AwardsTileListBlock = null;
             while(this.blocks.length > 0)
             {
@@ -162,7 +169,8 @@ package net.wg.gui.lobby.profile.pages.awards
             super.onDispose();
         }
         
-        public function set gapBetweenBlocks(param1:uint) : void {
+        public function set gapBetweenBlocks(param1:uint) : void
+        {
             this._gapBetweenBlocks = param1;
             invalidateSize();
         }

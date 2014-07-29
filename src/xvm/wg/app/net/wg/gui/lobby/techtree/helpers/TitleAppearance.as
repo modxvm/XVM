@@ -6,7 +6,8 @@ package net.wg.gui.lobby.techtree.helpers
     public class TitleAppearance extends Object
     {
         
-        public function TitleAppearance(param1:DisplayObject = null) {
+        public function TitleAppearance(param1:DisplayObject = null)
+        {
             super();
             this.title = param1;
         }
@@ -19,7 +20,8 @@ package net.wg.gui.lobby.techtree.helpers
         
         private var title:DisplayObject;
         
-        public function updateInTT(param1:Number = 1024, param2:Number = 768) : void {
+        public function updateInTT(param1:Number = 1024, param2:Number = 768) : void
+        {
             if(this.title == null)
             {
                 return;
@@ -32,7 +34,8 @@ package net.wg.gui.lobby.techtree.helpers
             }
         }
         
-        public function updateInResearch(param1:Number = 1024, param2:Number = 768, param3:Number = 0) : void {
+        public function updateInResearch(param1:Number = 1024, param2:Number = 768, param3:Number = 0) : void
+        {
             if(this.title == null)
             {
                 return;
@@ -48,7 +51,8 @@ package net.wg.gui.lobby.techtree.helpers
             }
         }
         
-        public function update(param1:Number = 1024, param2:Number = 768) : void {
+        public function update(param1:Number = 1024, param2:Number = 768) : void
+        {
             var _loc4_:* = NaN;
             if(this.title == null)
             {
@@ -68,7 +72,8 @@ package net.wg.gui.lobby.techtree.helpers
             this.title.width = param1;
         }
         
-        public function clearUp() : void {
+        public function clearUp() : void
+        {
             this.title = null;
         }
     }

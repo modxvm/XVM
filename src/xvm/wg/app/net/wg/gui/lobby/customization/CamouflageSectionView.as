@@ -14,7 +14,8 @@ package net.wg.gui.lobby.customization
     public class CamouflageSectionView extends BaseTimedCustomizationSectionView
     {
         
-        public function CamouflageSectionView() {
+        public function CamouflageSectionView()
+        {
             this.currentData = [null,null,null];
             this.newData = [null,null,null];
             super();
@@ -42,55 +43,68 @@ package net.wg.gui.lobby.customization
         
         private var currentDataDirty:Boolean = false;
         
-        override public function getEmptyDataItem() : Object {
+        override public function getEmptyDataItem() : Object
+        {
             return CamouflagesDataProvider.getEmptyItem();
         }
         
-        override public function getGroupsDP() : DAAPIDataProvider {
+        override public function getGroupsDP() : DAAPIDataProvider
+        {
             return form.camouflageGroupsDataProvider;
         }
         
-        override public function getItemsDP() : DAAPIItemsDataProvider {
+        override public function getItemsDP() : DAAPIItemsDataProvider
+        {
             return form.camouflageDP;
         }
         
-        override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider {
+        override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider
+        {
             return form.camouflageRentalPackageDP;
         }
         
-        override public function getViewLinkage() : String {
+        override public function getViewLinkage() : String
+        {
             return BaseTimedCustomizationSectionView.CAMOUFLAGE_GROUP_VIEW;
         }
         
-        override public function getTimeSectionLabel() : String {
+        override public function getTimeSectionLabel() : String
+        {
             return MENU.CUSTOMIZATION_LABELS_CAMOUFLAGE_PERIOD;
         }
         
-        override public function getDropButtonTooltip() : String {
+        override public function getDropButtonTooltip() : String
+        {
             return TOOLTIPS.CUSTOMIZATION_CAMOUFLAGE_CURRENT_DROP;
         }
         
-        override public function getSectionName() : String {
+        override public function getSectionName() : String
+        {
             return BaseTimedCustomizationSectionView.CAMOUFLAGE;
         }
         
-        override public function get currentItemData() : Object {
+        override public function get currentItemData() : Object
+        {
             return this.currentData[this._selectedKind];
         }
         
-        override public function set currentItemData(param1:Object) : void {
+        override public function set currentItemData(param1:Object) : void
+        {
             this.currentData[this._selectedKind] = param1;
         }
         
-        override public function get newItemData() : Object {
+        override public function get newItemData() : Object
+        {
             return this.newData[this._selectedKind];
         }
         
-        override public function set newItemData(param1:Object) : void {
+        override public function set newItemData(param1:Object) : void
+        {
             this.newData[this._selectedKind] = param1;
         }
         
-        override public function onChangeSuccess() : void {
+        override public function onChangeSuccess() : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:CamoDemoRenderer = null;
             var _loc4_:Button = null;
@@ -119,7 +133,8 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        override public function onDropSuccess() : void {
+        override public function onDropSuccess() : void
+        {
             var _loc1_:Object = this.getEmptyDataItem();
             var _loc2_:String = CamouflagesDataProvider(this.getItemsDP()).getDefaultDescription(this._droppingKind);
             if(_loc2_.length > 0)
@@ -143,7 +158,8 @@ package net.wg.gui.lobby.customization
             this.requestCurrentItem();
         }
         
-        override public function requestCurrentItem() : void {
+        override public function requestCurrentItem() : void
+        {
             var _loc3_:* = NaN;
             var _loc4_:Object = null;
             var _loc1_:Array = form.getCurrentItemS(this.getSectionName()) as Array;
@@ -159,7 +175,8 @@ package net.wg.gui.lobby.customization
             invalidate();
         }
         
-        override public function requestItemAt(param1:int) : void {
+        override public function requestItemAt(param1:int) : void
+        {
             var _loc3_:CamouflagesDataProvider = null;
             var _loc4_:Object = null;
             var _loc5_:Object = null;
@@ -198,7 +215,8 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc2_:CamoDemoRenderer = null;
             var _loc3_:CamoDropButton = null;
             var _loc4_:* = NaN;
@@ -248,12 +266,14 @@ package net.wg.gui.lobby.customization
             super.onDispose();
         }
         
-        override protected function handleChangeGroupSelectedIndex(param1:ListEvent) : void {
+        override protected function handleChangeGroupSelectedIndex(param1:ListEvent) : void
+        {
             this._selectedKind = param1.index;
             super.handleChangeGroupSelectedIndex(param1);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc3_:CamoDemoRenderer = null;
             var _loc4_:CamoDropButton = null;
             var _loc5_:* = NaN;
@@ -321,7 +341,8 @@ package net.wg.gui.lobby.customization
             this.requestCurrentItem();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             var _loc2_:CamoDemoRenderer = null;
             var _loc3_:* = 0;
@@ -383,25 +404,30 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        private function getCurrRenderer(param1:Number) : CamoDemoRenderer {
+        private function getCurrRenderer(param1:Number) : CamoDemoRenderer
+        {
             var _loc2_:Array = [this.currentItemRenderer0,this.currentItemRenderer1,this.currentItemRenderer2];
             return _loc2_[param1];
         }
         
-        private function getDropButton(param1:Number) : CamoDropButton {
+        private function getDropButton(param1:Number) : CamoDropButton
+        {
             var _loc2_:Array = [this.dropButton0,this.dropButton1,this.dropButton2];
             return _loc2_[param1];
         }
         
-        private function onRollOverDropButton(param1:MouseEvent) : void {
+        private function onRollOverDropButton(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(this.getDropButtonTooltip());
         }
         
-        private function onRollOutDropButton(param1:MouseEvent) : void {
+        private function onRollOutDropButton(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onSelectNewItem(param1:CustomizationEvent) : void {
+        private function onSelectNewItem(param1:CustomizationEvent) : void
+        {
             var _loc3_:* = 0;
             var _loc4_:Object = null;
             var _loc2_:Object = form.getSectionData(this.getSectionName());
@@ -424,7 +450,8 @@ package net.wg.gui.lobby.customization
             this.setNewItemView(param1.index,param1.data,this._selectedKind);
         }
         
-        private function onResetNewItem(param1:CustomizationEvent) : void {
+        private function onResetNewItem(param1:CustomizationEvent) : void
+        {
             this.newData = [null,null,null];
             this.newItemData = this.getEmptyDataItem();
             if(view != null)
@@ -435,13 +462,16 @@ package net.wg.gui.lobby.customization
             invalidate();
         }
         
-        private function onChangeActionLock(param1:CustomizationEvent) : void {
+        private function onChangeActionLock(param1:CustomizationEvent) : void
+        {
             var _loc3_:Button = null;
             var _loc4_:* = 0;
             var _loc2_:* = 3;
             _loc4_ = 0;
             while(true)
             {
+                _loc2_;
+                _loc4_;
                 _loc3_ = this.getDropButton(_loc4_);
                 if(_loc3_ != null)
                 {
@@ -451,7 +481,8 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        private function onClickDropButton(param1:CustomizationEvent) : void {
+        private function onClickDropButton(param1:CustomizationEvent) : void
+        {
             App.toolTipMgr.hide();
             this._droppingKind = param1.kind;
             if(form)
@@ -460,7 +491,8 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        private function onClickRenderer(param1:ButtonEvent) : void {
+        private function onClickRenderer(param1:ButtonEvent) : void
+        {
             var _loc2_:* = NaN;
             _loc2_ = 0;
             while(_loc2_ < 3)
@@ -474,7 +506,8 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        private function updateTimeLeftVisibility() : void {
+        private function updateTimeLeftVisibility() : void
+        {
             var _loc2_:* = NaN;
             var _loc1_:* = false;
             _loc2_ = 0;
@@ -493,7 +526,8 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        private function setNewItemView(param1:int, param2:Object, param3:int) : void {
+        private function setNewItemView(param1:int, param2:Object, param3:int) : void
+        {
             var _loc6_:Array = null;
             var _loc11_:* = NaN;
             var _loc4_:int = param2.id;
@@ -554,14 +588,13 @@ package net.wg.gui.lobby.customization
                 _loc13_.visible = !(this.currentData[param3].id == -1);
             }
             form.setNewItemIdS(this.getSectionName(),_loc4_,param3,view.selectedPriceIdx);
-            form.setSectionData(this.getSectionName(),_loc7_,{
-                "selectedIdx":param1,
-                "selectedItems":_loc6_,
-                "selectedGroupIdx":list.selectedIndex,
-                "groupName":view.selectedGroupName,
-                "price":_loc8_,
-                "_new":this.newItemData
-            });
+            form.setSectionData(this.getSectionName(),_loc7_,{"selectedIdx":param1,
+            "selectedItems":_loc6_,
+            "selectedGroupIdx":list.selectedIndex,
+            "groupName":view.selectedGroupName,
+            "price":_loc8_,
+            "_new":this.newItemData
+        });
     }
 }
 }

@@ -5,7 +5,8 @@ package net.wg.gui.cyberSport.controls.events
     public class CSComponentEvent extends Event
     {
         
-        public function CSComponentEvent(param1:String, param2:* = null) {
+        public function CSComponentEvent(param1:String, param2:* = null)
+        {
             super(param1,true,true);
             this._data = param2;
         }
@@ -38,7 +39,8 @@ package net.wg.gui.cyberSport.controls.events
         
         private var _data = null;
         
-        public function get data() : * {
+        public function get data() : *
+        {
             return this._data;
         }
     }

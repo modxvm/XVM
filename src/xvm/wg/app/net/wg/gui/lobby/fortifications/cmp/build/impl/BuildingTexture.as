@@ -7,7 +7,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class BuildingTexture extends UIComponentEx implements IBuildingTexture
     {
         
-        public function BuildingTexture() {
+        public function BuildingTexture()
+        {
             super();
             this.buildingShape.mouseChildren = this.buildingShape.mouseEnabled = false;
             this.buildingShape.visible = false;
@@ -15,15 +16,18 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         public var buildingShape:MovieClip;
         
-        public function setState(param1:String) : void {
+        public function setState(param1:String) : void
+        {
             gotoAndStop(param1);
         }
         
-        public function getBuildingShape() : MovieClip {
+        public function getBuildingShape() : MovieClip
+        {
             return this.buildingShape;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.buildingShape = null;
             super.onDispose();
         }

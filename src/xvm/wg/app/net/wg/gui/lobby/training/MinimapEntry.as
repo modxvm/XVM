@@ -8,13 +8,15 @@ package net.wg.gui.lobby.training
     public class MinimapEntry extends UIComponent implements IMinimapEntry
     {
         
-        public function MinimapEntry() {
+        public function MinimapEntry()
+        {
             super();
         }
         
         private static var ms_lastLitEntry:MinimapEntry = null;
         
-        public static function unhighlightLastEntry() : void {
+        public static function unhighlightLastEntry() : void
+        {
             if(ms_lastLitEntry)
             {
                 ms_lastLitEntry.lightPlayer(false);
@@ -53,15 +55,18 @@ package net.wg.gui.lobby.training
         
         private var playingTimeoutId:Number = NaN;
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        public function init(param1:String, param2:String, param3:String, param4:String) : void {
+        public function init(param1:String, param2:String, param3:String, param4:String) : void
+        {
             this.m_type = param1;
             this.entryName = param2;
             this.vehicleClass = param3;
@@ -69,7 +74,8 @@ package net.wg.gui.lobby.training
             this.validateNow();
         }
         
-        public function showAction(param1:String) : void {
+        public function showAction(param1:String) : void
+        {
             if(this.markMC != null)
             {
                 this.markMC.gotoAndStop(1);
@@ -78,7 +84,8 @@ package net.wg.gui.lobby.training
             validateNow();
         }
         
-        public function lightPlayer(param1:Boolean) : void {
+        public function lightPlayer(param1:Boolean) : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             if(this.player != null)
@@ -118,16 +125,19 @@ package net.wg.gui.lobby.training
             }
         }
         
-        private function playPlayer() : void {
+        private function playPlayer() : void
+        {
             this.player.litIcon.play();
             App.utils.scheduler.cancelTask(this.playPlayer);
         }
         
-        public function get colorSchemeName() : String {
+        public function get colorSchemeName() : String
+        {
             return "vm_" + (this.entryName != null?this.entryName:this.m_type);
         }
         
-        public function setEntryName(param1:String) : void {
+        public function setEntryName(param1:String) : void
+        {
             if(param1 != this.entryName)
             {
                 this.entryName = param1;
@@ -135,33 +145,39 @@ package net.wg.gui.lobby.training
             }
         }
         
-        public function setDead(param1:Boolean) : void {
+        public function setDead(param1:Boolean) : void
+        {
             this.isDead = true;
             this.isDeadPermanent = param1;
             invalidate();
         }
         
-        public function setPostmortem(param1:Boolean) : void {
+        public function setPostmortem(param1:Boolean) : void
+        {
             this.isPostmortem = param1;
             invalidate();
         }
         
-        public function isTeamPoint() : Boolean {
+        public function isTeamPoint() : Boolean
+        {
             return this.m_type == "points" && !(this.teamPoint == null);
         }
         
-        private function isBackMarker() : Boolean {
+        private function isBackMarker() : Boolean
+        {
             return this.m_type == "backgroundMarker" && !(this.backMarker == null);
         }
         
-        private function updateType() : void {
+        private function updateType() : void
+        {
             if(this.m_type != null)
             {
                 gotoAndStop(this.m_type);
             }
         }
         
-        private function updateIfEntryIsPlayer() : void {
+        private function updateIfEntryIsPlayer() : void
+        {
             var _loc1_:String = null;
             if(this.player != null)
             {
@@ -192,7 +208,8 @@ package net.wg.gui.lobby.training
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:String = null;
             var _loc2_:String = null;
             var _loc3_:String = null;
@@ -246,7 +263,8 @@ package net.wg.gui.lobby.training
             super.draw();
         }
         
-        private function getMinimap() : MovieClip {
+        private function getMinimap() : MovieClip
+        {
             return MovieClip(this.parent);
         }
     }

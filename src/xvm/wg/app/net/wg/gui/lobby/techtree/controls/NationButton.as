@@ -10,11 +10,13 @@ package net.wg.gui.lobby.techtree.controls
     public class NationButton extends SoundButton
     {
         
-        public function NationButton() {
+        public function NationButton()
+        {
             super();
         }
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             if(App.toolTipMgr != null)
             {
                 App.toolTipMgr.hide();
@@ -25,30 +27,35 @@ package net.wg.gui.lobby.techtree.controls
         
         public var icoAdd:MovieClip;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false);
             removeEventListener(MouseEvent.ROLL_OUT,hideTooltip,false);
             removeEventListener(MouseEvent.CLICK,hideTooltip,false);
             super.onDispose();
         }
         
-        protected function defineSoundProps() : void {
+        protected function defineSoundProps() : void
+        {
             soundType = SoundTypes.TAB;
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             super.preInitialize();
             this.defineSoundProps();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false,0,true);
             addEventListener(MouseEvent.ROLL_OUT,hideTooltip,false,0,true);
             addEventListener(MouseEvent.CLICK,hideTooltip,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(!(_label == null) && (isInvalid(InvalidationType.DATA)))
             {
@@ -63,14 +70,16 @@ package net.wg.gui.lobby.techtree.controls
             }
         }
         
-        override protected function handleMouseRelease(param1:MouseEvent) : void {
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
             if(!_selected)
             {
                 super.handleMouseRelease(param1);
             }
         }
         
-        private function showTooltip(param1:MouseEvent) : void {
+        private function showTooltip(param1:MouseEvent) : void
+        {
             if(!(_label == null) && !_selected)
             {
                 if(App.toolTipMgr != null)

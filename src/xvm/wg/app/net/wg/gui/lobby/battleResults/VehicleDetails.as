@@ -10,7 +10,8 @@ package net.wg.gui.lobby.battleResults
     public class VehicleDetails extends UIComponent
     {
         
-        public function VehicleDetails() {
+        public function VehicleDetails()
+        {
             super();
         }
         
@@ -32,7 +33,8 @@ package net.wg.gui.lobby.battleResults
         
         private var lineType:String = "statsLine";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.clearLines();
             this.statsLbl.mouseWheelEnabled = false;
@@ -43,11 +45,13 @@ package net.wg.gui.lobby.battleResults
         
         private var _dataDirty:Boolean = false;
         
-        public function get data() : Array {
+        public function get data() : Array
+        {
             return this._data;
         }
         
-        public function set data(param1:Array) : void {
+        public function set data(param1:Array) : void
+        {
             this._data = param1;
             this._dataDirty = true;
             this.invalidateFast();
@@ -57,17 +61,20 @@ package net.wg.gui.lobby.battleResults
         
         private var _stateDirty:Boolean = false;
         
-        public function get state() : String {
+        public function get state() : String
+        {
             return this._state;
         }
         
-        public function set state(param1:String) : void {
+        public function set state(param1:String) : void
+        {
             this._state = param1;
             this._stateDirty = true;
             invalidate();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(this._stateDirty)
             {
@@ -109,7 +116,8 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        private function populateStats(param1:Array) : void {
+        private function populateStats(param1:Array) : void
+        {
             var _loc4_:Object = null;
             var _loc5_:MovieClip = null;
             this.statsLbl.htmlText = "";
@@ -128,10 +136,9 @@ package net.wg.gui.lobby.battleResults
                 this.statsValuesLbl.htmlText = this.statsValuesLbl.htmlText + _loc4_.value;
                 if(Math.floor(this.statsLbl.y + this.statsLbl.textHeight) + 3 < this.statsLbl.height)
                 {
-                    _loc5_ = _loc8_.getComponent(this.lineType,MovieClip,{
-                        "x":this.statsLbl.x + 3,
-                        "y":Math.floor(this.statsLbl.y + this.statsLbl.textHeight) + 3
-                    });
+                    _loc5_ = _loc8_.getComponent(this.lineType,MovieClip,{"x":this.statsLbl.x + 3,
+                    "y":Math.floor(this.statsLbl.y + this.statsLbl.textHeight) + 3
+                });
                 this.linesContainer.addChild(_loc5_);
             }
             _loc2_++;
@@ -139,7 +146,8 @@ package net.wg.gui.lobby.battleResults
         height = Math.max(this.statsLbl.textHeight,this.statsValuesLbl.textHeight) + 6;
     }
     
-    private function clearLines() : void {
+    private function clearLines() : void
+    {
         if(this.linesContainer)
         {
             removeChild(this.linesContainer);
@@ -148,7 +156,8 @@ package net.wg.gui.lobby.battleResults
         addChild(this.linesContainer);
     }
     
-    private function invalidateFast() : void {
+    private function invalidateFast() : void
+    {
         if(initialized)
         {
             validateNow();

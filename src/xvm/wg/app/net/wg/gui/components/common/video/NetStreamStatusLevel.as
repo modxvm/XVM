@@ -3,7 +3,8 @@ package net.wg.gui.components.common.video
     public class NetStreamStatusLevel extends Object
     {
         
-        public function NetStreamStatusLevel() {
+        public function NetStreamStatusLevel()
+        {
             super();
         }
         

@@ -5,7 +5,8 @@ package net.wg.gui.components.tooltips.VO
     public class IgrVO extends DAAPIDataClass
     {
         
-        public function IgrVO(param1:Object) {
+        public function IgrVO(param1:Object)
+        {
             super(param1);
         }
         

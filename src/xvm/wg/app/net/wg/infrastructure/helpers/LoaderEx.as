@@ -7,13 +7,15 @@ package net.wg.infrastructure.helpers
     public class LoaderEx extends Loader
     {
         
-        public function LoaderEx() {
+        public function LoaderEx()
+        {
             super();
         }
         
         public var params:Object = null;
         
-        public function loadEx(param1:URLRequest, param2:Object = null, param3:LoaderContext = null) : void {
+        public function loadEx(param1:URLRequest, param2:Object = null, param3:LoaderContext = null) : void
+        {
             this.params = param2;
             load(param1,param3);
         }

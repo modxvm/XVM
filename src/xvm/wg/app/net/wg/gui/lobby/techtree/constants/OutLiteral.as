@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.constants
     public class OutLiteral extends Object
     {
         
-        public function OutLiteral() {
+        public function OutLiteral()
+        {
             super();
         }
         

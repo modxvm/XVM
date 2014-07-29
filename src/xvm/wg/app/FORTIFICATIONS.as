@@ -1,9 +1,10 @@
-package 
+package
 {
     public class FORTIFICATIONS extends Object
     {
         
-        public function FORTIFICATIONS() {
+        public function FORTIFICATIONS()
+        {
             super();
         }
         
@@ -19,13 +20,13 @@ package
         
         public static var FORTINTELLIGENCE_BOTTOMBLOCK:String = "#fortifications:FortIntelligence/bottomBlock";
         
-        public static var TIME_TIMEVALUE_DAYS:String;
+        public static var TIME_TIMEVALUE_DAYS:String = TIME_TIMEVALUE + "/days";
         
-        public static var TIME_TIMEVALUE_HOURS:String;
+        public static var TIME_TIMEVALUE_HOURS:String = TIME_TIMEVALUE + "/hours";
         
-        public static var TIME_TIMEVALUE_MIN:String;
+        public static var TIME_TIMEVALUE_MIN:String = TIME_TIMEVALUE + "/min";
         
-        public static var TIME_TIMEVALUE_LESSMIN:String;
+        public static var TIME_TIMEVALUE_LESSMIN:String = TIME_TIMEVALUE + "/lessMin";
         
         public static var GENERAL_DIRECTION:String = "#fortifications:General/direction";
         
@@ -145,9 +146,9 @@ package
         
         public static var FORTDIRECTIONSWINDOW_LABEL_NOBUILDINGS:String = "#fortifications:FortDirectionsWindow/label/noBuildings";
         
-        public static var BUILDINGDIRECTION_TOOLTIP_HEADER:String;
+        public static var BUILDINGDIRECTION_TOOLTIP_HEADER:String = BUILDINGDIRECTION_TOOLTIP + "/header";
         
-        public static var BUILDINGDIRECTION_TOOLTIP_BODY:String;
+        public static var BUILDINGDIRECTION_TOOLTIP_BODY:String = BUILDINGDIRECTION_TOOLTIP + "/body";
         
         public static var BUILDINGDIRECTION_LABEL1:String = "#fortifications:BuildingDirection/label1";
         
@@ -585,21 +586,21 @@ package
         
         public static var FORTINTELLIGENCE_WINDOWTITLE:String = "#fortifications:FortIntelligence/windowTitle";
         
-        public static var FORTINTELLIGENCE_HEADERBLOCK_HEADER:String;
+        public static var FORTINTELLIGENCE_HEADERBLOCK_HEADER:String = FORTINTELLIGENCE_HEADERBLOCK + "/header";
         
-        public static var FORTINTELLIGENCE_HEADERBLOCK_BODY:String;
+        public static var FORTINTELLIGENCE_HEADERBLOCK_BODY:String = FORTINTELLIGENCE_HEADERBLOCK + "/body";
         
-        public static var FORTINTELLIGENCE_TOPBLOCK_HEADER:String;
+        public static var FORTINTELLIGENCE_TOPBLOCK_HEADER:String = FORTINTELLIGENCE_TOPBLOCK + "/header";
         
-        public static var FORTINTELLIGENCE_TOPBLOCK_BODY:String;
+        public static var FORTINTELLIGENCE_TOPBLOCK_BODY:String = FORTINTELLIGENCE_TOPBLOCK + "/body";
         
-        public static var FORTINTELLIGENCE_MIDDLEBLOCK_HEADER:String;
+        public static var FORTINTELLIGENCE_MIDDLEBLOCK_HEADER:String = FORTINTELLIGENCE_MIDDLEBLOCK + "/header";
         
-        public static var FORTINTELLIGENCE_MIDDLEBLOCK_BODY:String;
+        public static var FORTINTELLIGENCE_MIDDLEBLOCK_BODY:String = FORTINTELLIGENCE_MIDDLEBLOCK + "/body";
         
-        public static var FORTINTELLIGENCE_BOTTOMBLOCK_HEADER:String;
+        public static var FORTINTELLIGENCE_BOTTOMBLOCK_HEADER:String = FORTINTELLIGENCE_BOTTOMBLOCK + "/header";
         
-        public static var FORTINTELLIGENCE_BOTTOMBLOCK_BODY:String;
+        public static var FORTINTELLIGENCE_BOTTOMBLOCK_BODY:String = FORTINTELLIGENCE_BOTTOMBLOCK + "/body";
         
         public static var FORTINTELLIGENCE_ADDITIONALTEXT_COMINGSOON:String = "#fortifications:FortIntelligence/additionalText/comingSoon";
         
@@ -647,31 +648,32 @@ package
         
         public static var DISCONNECTED_WARNINGDESCRIPTIONCENTERUNAVAILABLE:String = "#fortifications:disconnected/WarningDescriptionCenterUnavailable";
         
-        public static var SORTIE_DIVISION_NAME_ENUM:Array;
+        public static var SORTIE_DIVISION_NAME_ENUM:Array = [SORTIE_DIVISION_NAME_ALL,SORTIE_DIVISION_NAME_ABSOLUTE,SORTIE_DIVISION_NAME_CHAMPION,SORTIE_DIVISION_NAME_MIDDLE];
         
-        public static var BUILDINGS_DEFRESINFO_ENUM:Array;
+        public static var BUILDINGS_DEFRESINFO_ENUM:Array = [BUILDINGS_DEFRESINFO_BASE_BUILDING,BUILDINGS_DEFRESINFO_WARSCHOOL_BUILDING,BUILDINGS_DEFRESINFO_TROPHY_BUILDING,BUILDINGS_DEFRESINFO_TRAINING_BUILDING,BUILDINGS_DEFRESINFO_TANKODROM_BUILDING,BUILDINGS_DEFRESINFO_INTENDANCY_BUILDING,BUILDINGS_DEFRESINFO_FINANCE_BUILDING,BUILDINGS_DEFRESINFO_CAR_BUILDING];
         
-        public static var BUILDINGSPROCESS_LONGDESCR_ENUM:Array;
+        public static var BUILDINGSPROCESS_LONGDESCR_ENUM:Array = [BUILDINGSPROCESS_LONGDESCR_WARSCHOOL_BUILDING,BUILDINGSPROCESS_LONGDESCR_TROPHY_BUILDING,BUILDINGSPROCESS_LONGDESCR_TRAINING_BUILDING,BUILDINGSPROCESS_LONGDESCR_TANKODROM_BUILDING,BUILDINGSPROCESS_LONGDESCR_INTENDANCY_BUILDING,BUILDINGSPROCESS_LONGDESCR_FINANCE_BUILDING,BUILDINGSPROCESS_LONGDESCR_CAR_BUILDING];
         
-        public static var BUILDINGPOPOVER_SOLDIERSTATUS_BODYSTATUS_ENUM:Array;
+        public static var BUILDINGPOPOVER_SOLDIERSTATUS_BODYSTATUS_ENUM:Array = [BUILDINGPOPOVER_SOLDIERSTATUS_BODYSTATUS_FOUNDATION,BUILDINGPOPOVER_SOLDIERSTATUS_BODYSTATUS_HALFDESTROY];
         
-        public static var BUILDINGPOPOVER_HEADER_TITLESTATUS_ENUM:Array;
+        public static var BUILDINGPOPOVER_HEADER_TITLESTATUS_ENUM:Array = [BUILDINGPOPOVER_HEADER_TITLESTATUS_FOUNDATION,BUILDINGPOPOVER_HEADER_TITLESTATUS_MODERNIZATION,BUILDINGPOPOVER_HEADER_TITLESTATUS_HALFDESTROY,BUILDINGPOPOVER_HEADER_TITLESTATUS_CONGRATULATION,BUILDINGPOPOVER_HEADER_TITLESTATUS_FREEZE];
         
-        public static var BUILDINGPOPOVER_COMMANDERSTATUS_BODYSTATUS_ENUM:Array;
+        public static var BUILDINGPOPOVER_COMMANDERSTATUS_BODYSTATUS_ENUM:Array = [BUILDINGPOPOVER_COMMANDERSTATUS_BODYSTATUS_FOUNDATION,BUILDINGPOPOVER_COMMANDERSTATUS_BODYSTATUS_HALFDESTROY,BUILDINGPOPOVER_COMMANDERSTATUS_BODYSTATUS_MODERNIZATION,BUILDINGPOPOVER_COMMANDERSTATUS_BODYSTATUS_CONGRATULATION];
         
-        public static var BUILDINGSPROCESS_SHORTDESCR_ENUM:Array;
+        public static var BUILDINGSPROCESS_SHORTDESCR_ENUM:Array = [BUILDINGSPROCESS_SHORTDESCR_WARSCHOOL_BUILDING,BUILDINGSPROCESS_SHORTDESCR_TROPHY_BUILDING,BUILDINGSPROCESS_SHORTDESCR_TRAINING_BUILDING,BUILDINGSPROCESS_SHORTDESCR_TANKODROM_BUILDING,BUILDINGSPROCESS_SHORTDESCR_INTENDANCY_BUILDING,BUILDINGSPROCESS_SHORTDESCR_FINANCE_BUILDING,BUILDINGSPROCESS_SHORTDESCR_CAR_BUILDING];
         
-        public static var BUILDINGS_BUILDINGNAME_ENUM:Array;
+        public static var BUILDINGS_BUILDINGNAME_ENUM:Array = [BUILDINGS_BUILDINGNAME_BASE_BUILDING,BUILDINGS_BUILDINGNAME_WARSCHOOL_BUILDING,BUILDINGS_BUILDINGNAME_TROPHY_BUILDING,BUILDINGS_BUILDINGNAME_TRAINING_BUILDING,BUILDINGS_BUILDINGNAME_TANKODROM_BUILDING,BUILDINGS_BUILDINGNAME_INTENDANCY_BUILDING,BUILDINGS_BUILDINGNAME_FINANCE_BUILDING,BUILDINGS_BUILDINGNAME_CAR_BUILDING];
         
-        public static var CHOICEDIVISION_DIVISIONTYPE_ENUM:Array;
+        public static var CHOICEDIVISION_DIVISIONTYPE_ENUM:Array = [CHOICEDIVISION_DIVISIONTYPE_MIDDLEDIVISION,CHOICEDIVISION_DIVISIONTYPE_CHAMPIONDIVISION,CHOICEDIVISION_DIVISIONTYPE_ABSOLUTEDIVISION];
         
-        public static var ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM:Array;
+        public static var ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM:Array = [ORDERS_ORDERPOPOVER_ORDERTYPE_BATTLEPAYMENTS,ORDERS_ORDERPOPOVER_ORDERTYPE_REQUISITION,ORDERS_ORDERPOPOVER_ORDERTYPE_EVACUATION,ORDERS_ORDERPOPOVER_ORDERTYPE_HEAVYTRUCKS,ORDERS_ORDERPOPOVER_ORDERTYPE_MILITARYMANEUVERS,ORDERS_ORDERPOPOVER_ORDERTYPE_ADDITIONALBRIEFING,ORDERS_ORDERPOPOVER_ORDERTYPE_TACTICALTRAINING];
         
-        public static var BUILDINGS_PROCESSORDERINFO_ENUM:Array;
+        public static var BUILDINGS_PROCESSORDERINFO_ENUM:Array = [BUILDINGS_PROCESSORDERINFO_WARSCHOOL_BUILDING,BUILDINGS_PROCESSORDERINFO_TROPHY_BUILDING,BUILDINGS_PROCESSORDERINFO_TRAINING_BUILDING,BUILDINGS_PROCESSORDERINFO_TANKODROM_BUILDING,BUILDINGS_PROCESSORDERINFO_INTENDANCY_BUILDING,BUILDINGS_PROCESSORDERINFO_FINANCE_BUILDING,BUILDINGS_PROCESSORDERINFO_CAR_BUILDING];
         
-        public static var FORTMAINVIEW_ENUM:Array;
+        public static var FORTMAINVIEW_ENUM:Array = [FORTMAINVIEW_COMMON_TOTALDEPOTQUANTITYTEXT,FORTMAINVIEW_COMMON_TITLE,FORTMAINVIEW_DIRECTIONS_TITLE,FORTMAINVIEW_DIRECTIONS_SELECTINGSTATUS,FORTMAINVIEW_TRANSPORTING_TITLE,FORTMAINVIEW_TRANSPORTING_EXPORTINGSTATUS,FORTMAINVIEW_TRANSPORTING_IMPORTINGSTATUS,FORTMAINVIEW_TRANSPORTING_TUTORIALDESCR,FORTMAINVIEW_TRANSPORTING_TUTORIALDESCRDISABLED,FORTMAINVIEW_SORTIEBUTTON_TITLE,FORTMAINVIEW_INTELLIGENCEBUTTON_TITLE,FORTMAINVIEW_HEADER_LEVELSLBL,FORTMAINVIEW_LEAVE_BUTTON_LABEL,FORTMAINVIEW_DIRECTIONSTUTOR_TITLE,FORTMAINVIEW_COMMONTUTOR_TITLE,FORTMAINVIEW_TRANSPORTINGTUTOR_TITLE];
         
-        public static function sortie_division_name(param1:String) : String {
+        public static function sortie_division_name(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:sortie/division_name/" + param1;
             if(SORTIE_DIVISION_NAME_ENUM.indexOf(_loc2_) == -1)
             {
@@ -681,67 +683,78 @@ package
             return _loc2_;
         }
         
-        public static function buildings_defresinfo(param1:String) : String {
+        public static function buildings_defresinfo(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:Buildings/defResInfo/" + param1;
             App.utils.asserter.assert(!(BUILDINGS_DEFRESINFO_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function buildingsprocess_longdescr(param1:String) : String {
+        public static function buildingsprocess_longdescr(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:BuildingsProcess/longDescr/" + param1;
             App.utils.asserter.assert(!(BUILDINGSPROCESS_LONGDESCR_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function buildingpopover_soldierstatus_bodystatus(param1:String) : String {
+        public static function buildingpopover_soldierstatus_bodystatus(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:BuildingPopover/soldierStatus/bodyStatus/" + param1;
             App.utils.asserter.assert(!(BUILDINGPOPOVER_SOLDIERSTATUS_BODYSTATUS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function buildingpopover_header_titlestatus(param1:String) : String {
+        public static function buildingpopover_header_titlestatus(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:BuildingPopover/header/titleStatus/" + param1;
             App.utils.asserter.assert(!(BUILDINGPOPOVER_HEADER_TITLESTATUS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function buildingpopover_commanderstatus_bodystatus(param1:String) : String {
+        public static function buildingpopover_commanderstatus_bodystatus(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:BuildingPopover/commanderStatus/bodyStatus/" + param1;
             App.utils.asserter.assert(!(BUILDINGPOPOVER_COMMANDERSTATUS_BODYSTATUS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function buildingsprocess_shortdescr(param1:String) : String {
+        public static function buildingsprocess_shortdescr(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:BuildingsProcess/shortDescr/" + param1;
             App.utils.asserter.assert(!(BUILDINGSPROCESS_SHORTDESCR_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function buildings_buildingname(param1:String) : String {
+        public static function buildings_buildingname(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:Buildings/buildingName/" + param1;
             App.utils.asserter.assert(!(BUILDINGS_BUILDINGNAME_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function choicedivision_divisiontype(param1:String) : String {
+        public static function choicedivision_divisiontype(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:ChoiceDivision/divisionType/" + param1;
             App.utils.asserter.assert(!(CHOICEDIVISION_DIVISIONTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function orders_orderpopover_ordertype(param1:String) : String {
+        public static function orders_orderpopover_ordertype(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:Orders/orderPopover/orderType/" + param1;
             App.utils.asserter.assert(!(ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function buildings_processorderinfo(param1:String) : String {
+        public static function buildings_processorderinfo(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:Buildings/processOrderInfo/" + param1;
             App.utils.asserter.assert(!(BUILDINGS_PROCESSORDERINFO_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
-        public static function fortmainview(param1:String) : String {
+        public static function fortmainview(param1:String) : String
+        {
             var _loc2_:String = "#fortifications:FortMainView/" + param1;
             App.utils.asserter.assert(!(FORTMAINVIEW_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;

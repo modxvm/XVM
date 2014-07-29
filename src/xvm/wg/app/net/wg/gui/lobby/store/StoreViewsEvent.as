@@ -5,7 +5,8 @@ package net.wg.gui.lobby.store
     public class StoreViewsEvent extends Event
     {
         
-        public function StoreViewsEvent(param1:String, param2:String) {
+        public function StoreViewsEvent(param1:String, param2:String)
+        {
             super(param1,false,false);
             this.viewType = param2;
         }

@@ -5,7 +5,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     public class ModuleSlot extends DeviceSlot
     {
         
-        public function ModuleSlot() {
+        public function ModuleSlot()
+        {
             super();
         }
         
@@ -15,7 +16,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         public var icon:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.icon)
             {
@@ -23,11 +25,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        public function get slotType() : int {
+        public function get slotType() : int
+        {
             return this._slotType;
         }
         
-        public function set slotType(param1:int) : void {
+        public function set slotType(param1:int) : void
+        {
             this._slotType = param1;
             if(this._slotType > 1)
             {
@@ -35,11 +39,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        public function get level() : int {
+        public function get level() : int
+        {
             return this._level;
         }
         
-        public function set level(param1:int) : void {
+        public function set level(param1:int) : void
+        {
             this._level = param1;
             if(this.level > 0 && (levelMC))
             {
@@ -53,7 +59,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             
         }
         
-        override protected function applyIconData(param1:*) : void {
+        override protected function applyIconData(param1:*) : void
+        {
             super.applyIconData(param1);
             if(param1)
             {

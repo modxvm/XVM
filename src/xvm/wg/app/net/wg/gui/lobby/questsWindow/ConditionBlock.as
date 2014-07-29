@@ -10,7 +10,8 @@ package net.wg.gui.lobby.questsWindow
     public class ConditionBlock extends RequirementBlock
     {
         
-        public function ConditionBlock() {
+        public function ConditionBlock()
+        {
             super();
         }
         
@@ -24,7 +25,8 @@ package net.wg.gui.lobby.questsWindow
         
         public var lowerSeparator:Sprite;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.topConditions.visible = false;
             this.topConditions.contentAlign = TextFieldAutoSize.RIGHT;
@@ -36,7 +38,8 @@ package net.wg.gui.lobby.questsWindow
             this.topConditions.addEventListener(Event.RESIZE,this.layoutBlocks);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.topConditions.removeEventListener(Event.RESIZE,this.layoutBlocks);
             this.topConditions.dispose();
             this.topConditions = null;
@@ -45,12 +48,14 @@ package net.wg.gui.lobby.questsWindow
             super.onDispose();
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.topConditions.isReadyForLayout = false;
             super.setData(param1);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:RequirementBlockVO = null;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
@@ -71,7 +76,8 @@ package net.wg.gui.lobby.questsWindow
             }
         }
         
-        override protected function layoutBlocks(param1:Event) : void {
+        override protected function layoutBlocks(param1:Event) : void
+        {
             var _loc2_:* = false;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;

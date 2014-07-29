@@ -5,7 +5,8 @@ package net.wg.gui.components.advanced
     public class TextArea extends scaleform.clik.controls.TextArea
     {
         
-        public function TextArea() {
+        public function TextArea()
+        {
             super();
         }
     }

@@ -3,7 +3,8 @@ package net.wg.gui.components.common.markers.data
     public class HPDisplayMode extends Object
     {
         
-        public function HPDisplayMode() {
+        public function HPDisplayMode()
+        {
             super();
         }
         

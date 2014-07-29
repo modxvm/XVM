@@ -19,45 +19,37 @@ package net.wg.gui.lobby.battleResults
     public class TeamStats extends UIComponent implements IViewStackContent
     {
         
-        public function TeamStats() {
-            this.iconTypeToKey = {
-                "squad":{
-                    "key":"prebattleID",
-                    "isNumeric":true,
-                    "index":0
-                },
-            "player":{
-                "key":"playerName",
-                "isNumeric":false,
-                "index":1
-            },
-        "tank":{
-            "key":"vehicleSort",
+        public function TeamStats()
+        {
+            this.iconTypeToKey = {"squad":{"key":"prebattleID",
             "isNumeric":true,
-            "index":2
+            "index":0
         },
-    "damage":{
-        "key":"damageDealt",
-        "isNumeric":true,
-        "index":3
+        "player":{"key":"playerName",
+        "isNumeric":false,
+        "index":1
     },
-"frag":{
-    "key":"realKills",
+    "tank":{"key":"vehicleSort",
     "isNumeric":true,
-    "index":4
+    "index":2
 },
-"xp":{
-"key":["xpSort","damageDealt","vehicleId"],
+"damage":{"key":"damageDealt",
+"isNumeric":true,
+"index":3
+},
+"frag":{"key":"realKills",
+"isNumeric":true,
+"index":4
+},
+"xp":{"key":["xpSort","damageDealt","vehicleId"],
 "isNumeric":true,
 "index":5
 },
-"medal":{
-"key":"medalsCount",
+"medal":{"key":"medalsCount",
 "isNumeric":true,
 "index":6
 },
-"resourceCount":{
-"key":"resourceCount",
+"resourceCount":{"key":"resourceCount",
 "isNumeric":true,
 "index":6
 }
@@ -111,7 +103,8 @@ private var _bonusType:int = 1;
 
 private var iconTypeToKey:Object;
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
 var _loc1_:Object = null;
 var _loc2_:String = null;
 super.configUI();
@@ -161,7 +154,8 @@ _loc4_.sortDirection = _loc5_.sortDirection = _loc3_;
 this.applySort(_loc2_,_loc3_);
 }
 
-public function onEmblemLoaded(param1:String, param2:String) : void {
+public function onEmblemLoaded(param1:String, param2:String) : void
+{
 var _loc3_:Object = this.myParent.data;
 if(param1 == CLAN_TEAM_ALLIES)
 {
@@ -174,12 +168,14 @@ this.enemyTitle.htmlText = App.utils.locale.makeString(BATTLE_RESULTS.TEAM_STATS
 
 }
 
-private function hideStatsView(param1:FinalStatisticEvent) : void {
+private function hideStatsView(param1:FinalStatisticEvent) : void
+{
 this.team1List.selectedIndex = -1;
 this.team2List.selectedIndex = -1;
 }
 
-private function onItemSelect(param1:ListEvent) : void {
+private function onItemSelect(param1:ListEvent) : void
+{
 if(param1.target.selectedIndex == param1.index)
 {
 param1.target.selectedIndex = -1;
@@ -188,7 +184,8 @@ this._focusCandidate = param1.target;
 dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
 }
 
-private function onIndexChange(param1:ListEvent) : void {
+private function onIndexChange(param1:ListEvent) : void
+{
 var _loc4_:ScrollingListEx = null;
 if(param1.target.selectedIndex != -1)
 {
@@ -206,11 +203,13 @@ this.team1List.tabEnabled = this.team1List.visible = this.header1.visible = _loc
 this.team2List.tabEnabled = this.team2List.visible = this.header2.visible = _loc3_;
 }
 
-public function get myParent() : BattleResults {
+public function get myParent() : BattleResults
+{
 return BattleResults(parent.parent.parent);
 }
 
-private function onHeaderClick(param1:ButtonEvent) : void {
+private function onHeaderClick(param1:ButtonEvent) : void
+{
 var _loc2_:InteractiveSortingButton = null;
 if(param1.target is InteractiveSortingButton)
 {
@@ -229,7 +228,8 @@ this.applySort(_loc2_.id,_loc2_.sortDirection);
 }
 }
 
-private function applySort(param1:String, param2:String) : void {
+private function applySort(param1:String, param2:String) : void
+{
 var _loc3_:Number = 0;
 if(this.iconTypeToKey[param1].isNumeric)
 {
@@ -254,7 +254,8 @@ this.team2List.dataProvider = new DataProvider(_loc4_);
 this.myParent.saveSortingS(param1,param2,this._bonusType);
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
 this.header1.removeEventListener(ButtonEvent.CLICK,this.onHeaderClick);
 this.header1.dispose();
 this.header1 = null;
@@ -277,7 +278,8 @@ this.team2Stats = null;
 super.onDispose();
 }
 
-private function getHeadersProvider() : DataProvider {
+private function getHeadersProvider() : DataProvider
+{
 var _loc4_:SortingButtonInfo = null;
 var _loc1_:* = "../maps/icons/buttons/tab_sort_button/ascendingSortArrow.png";
 var _loc2_:* = "../maps/icons/buttons/tab_sort_button/descendingSortArrow.png";
@@ -379,22 +381,27 @@ _loc3_.push(_loc4_);
 return new DataProvider(_loc3_);
 }
 
-public function update(param1:Object) : void {
+public function update(param1:Object) : void
+{
 }
 
-public function get changeIndexOnFocus() : Boolean {
+public function get changeIndexOnFocus() : Boolean
+{
 return this._changeIndexOnFocus;
 }
 
-public function set changeIndexOnFocus(param1:Boolean) : void {
+public function set changeIndexOnFocus(param1:Boolean) : void
+{
 this._changeIndexOnFocus = param1;
 }
 
-public function getComponentForFocus() : InteractiveObject {
+public function getComponentForFocus() : InteractiveObject
+{
 return InteractiveObject(this._focusCandidate);
 }
 
-public function canShowAutomatically() : Boolean {
+public function canShowAutomatically() : Boolean
+{
 return true;
 }
 }

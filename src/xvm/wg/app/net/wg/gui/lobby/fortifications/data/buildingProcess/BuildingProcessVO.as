@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data.buildingProcess
     public class BuildingProcessVO extends DAAPIDataClass
     {
         
-        public function BuildingProcessVO(param1:Object) {
+        public function BuildingProcessVO(param1:Object)
+        {
             this.listItems = [];
             super(param1);
         }
@@ -20,7 +21,8 @@ package net.wg.gui.lobby.fortifications.data.buildingProcess
         
         public var textInfo:String = "";
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:uint = 0;
             var _loc5_:uint = 0;
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.fortifications.data.buildingProcess
             return super.onDataWrite(param1,param2);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:BuildingProcessListItemVO = null;
             for each(_loc1_ in this.listItems)
             {

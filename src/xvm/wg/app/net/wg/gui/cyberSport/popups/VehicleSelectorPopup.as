@@ -15,7 +15,8 @@ package net.wg.gui.cyberSport.popups
     public class VehicleSelectorPopup extends VehicleSelectorPopupMeta implements IVehicleSelectorPopupMeta
     {
         
-        public function VehicleSelectorPopup() {
+        public function VehicleSelectorPopup()
+        {
             this.selectedItems = [];
             super();
             isModal = true;
@@ -35,7 +36,8 @@ package net.wg.gui.cyberSport.popups
         
         private var selectedItems:Array;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.selector.addEventListener(VehicleSelectorFilterEvent.CHANGE,this.onFiltersChanged);
             this.selector.addEventListener(VehicleSelectorEvent.SELECTION_CHANGED,this.onSelectionChanged);
@@ -43,11 +45,13 @@ package net.wg.gui.cyberSport.popups
             this.cancelButton.addEventListener(ButtonEvent.CLICK,this.onCancelClick);
         }
         
-        override protected function onClosingApproved() : void {
+        override protected function onClosingApproved() : void
+        {
             App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_CLOSE,0);
         }
         
-        private function onSelectionChanged(param1:VehicleSelectorEvent) : void {
+        private function onSelectionChanged(param1:VehicleSelectorEvent) : void
+        {
             this.selectedItems = param1.selectedDescriptors;
             this.selectButton.enabled = this.selectedItems.length > 0;
             if(param1.forceSelect)
@@ -56,29 +60,35 @@ package net.wg.gui.cyberSport.popups
             }
         }
         
-        private function onFiltersChanged(param1:VehicleSelectorFilterEvent) : void {
+        private function onFiltersChanged(param1:VehicleSelectorFilterEvent) : void
+        {
             onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain,param1.level,param1.compatibleOnly);
         }
         
-        private function onCancelClick(param1:ButtonEvent) : void {
+        private function onCancelClick(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,0);
             onWindowClose();
         }
         
-        private function onSelectClick(param1:ButtonEvent) : void {
+        private function onSelectClick(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,0);
             onSelectVehiclesS(this.selectedItems);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        public function as_setFiltersData(param1:Object) : void {
+        public function as_setFiltersData(param1:Object) : void
+        {
             this.selector.setFiltersData(new VehicleSelectorFilterVO(param1));
         }
         
-        public function as_setListData(param1:Array, param2:Array) : void {
+        public function as_setListData(param1:Array, param2:Array) : void
+        {
             var _loc4_:Object = null;
             var _loc5_:VehicleSelectorItemVO = null;
             var _loc3_:Array = [];
@@ -93,21 +103,25 @@ package net.wg.gui.cyberSport.popups
             this.selector.setListItems(_loc3_);
         }
         
-        public function as_setListMode(param1:Boolean) : void {
+        public function as_setListMode(param1:Boolean) : void
+        {
             this.selector.multiSelection = param1;
         }
         
-        public function as_setInfoText(param1:String) : void {
+        public function as_setInfoText(param1:String) : void
+        {
             this.infoTF.text = param1;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = true;
             window.title = CYBERSPORT.WINDOW_VEHICLESELECTOR_TITLE;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.selector.removeEventListener(VehicleSelectorFilterEvent.CHANGE,this.onFiltersChanged);
             this.selector.removeEventListener(VehicleSelectorEvent.SELECTION_CHANGED,this.onSelectionChanged);

@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class ResizableBlockEvent extends Event
     {
         
-        public function ResizableBlockEvent(param1:String, param2:Boolean = false, param3:Number = 0) {
+        public function ResizableBlockEvent(param1:String, param2:Boolean = false, param3:Number = 0)
+        {
             super(param1,true,true);
             this.contentWasChanged = param2;
             this.heightDiff = param3;
@@ -23,7 +24,8 @@ package net.wg.gui.events
         
         public var heightDiff:Number = 0;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new ResizableBlockEvent(type,this.contentWasChanged,this.heightDiff);
         }
     }

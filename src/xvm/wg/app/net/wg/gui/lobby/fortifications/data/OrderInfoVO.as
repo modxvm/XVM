@@ -3,7 +3,8 @@ package net.wg.gui.lobby.fortifications.data
     public class OrderInfoVO extends BuildingPopoverBaseVO
     {
         
-        public function OrderInfoVO(param1:Object) {
+        public function OrderInfoVO(param1:Object)
+        {
             super(param1);
         }
         

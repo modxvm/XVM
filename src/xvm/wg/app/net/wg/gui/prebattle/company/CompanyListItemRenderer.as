@@ -15,7 +15,8 @@ package net.wg.gui.prebattle.company
     public class CompanyListItemRenderer extends SoundListItemRenderer implements IFocusContainer
     {
         
-        public function CompanyListItemRenderer() {
+        public function CompanyListItemRenderer()
+        {
             super();
             tabEnabled = true;
             focusable = true;
@@ -43,15 +44,18 @@ package net.wg.gui.prebattle.company
         
         private var pressEvent:MouseEvent;
         
-        public function showPlayersList(param1:Boolean) : void {
+        public function showPlayersList(param1:Boolean) : void
+        {
             this._showPlayers = param1;
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.removeEventListener(ButtonEvent.CLICK,this.clickHandler);
             if(this.dd)
@@ -64,7 +68,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             focusIndicator = this.emtyFocusIndicator;
             toggle = true;
             allowDeselect = true;
@@ -75,7 +80,8 @@ package net.wg.gui.prebattle.company
             this.addEventListener(ButtonEvent.CLICK,this.clickHandler);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (data))
             {
@@ -83,7 +89,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        private function afterSetData() : void {
+        private function afterSetData() : void
+        {
             this.pCountField.text = data.playersCount;
             this.divisionField.text = data.division;
             this.cutText(this.descriptionField,data.comment);
@@ -91,7 +98,8 @@ package net.wg.gui.prebattle.company
             this.updateTextFieldWidth();
         }
         
-        private function cutText(param1:TextField, param2:String) : void {
+        private function cutText(param1:TextField, param2:String) : void
+        {
             var _loc3_:String = null;
             var _loc4_:* = 0;
             param1.text = param2;
@@ -105,7 +113,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1 == null)
             {
                 visible = false;
@@ -121,10 +130,9 @@ package net.wg.gui.prebattle.company
             {
                 while(param1.players.length < 15)
                 {
-                    param1.players.push({
-                        "label":"",
-                        "color":null
-                    });
+                    param1.players.push({"label":"",
+                    "color":null
+                });
             }
             this.dd.dataProvider = new DataProvider(param1.players);
         }
@@ -144,7 +152,8 @@ package net.wg.gui.prebattle.company
         invalidate(InvalidationType.DATA);
     }
     
-    private function clickHandler(param1:ButtonEvent) : void {
+    private function clickHandler(param1:ButtonEvent) : void
+    {
         if(param1.isKeyboard)
         {
             return;
@@ -174,23 +183,27 @@ package net.wg.gui.prebattle.company
         
     }
     
-    private function dispatchIsSelectedItem(param1:Boolean) : void {
+    private function dispatchIsSelectedItem(param1:Boolean) : void
+    {
         var _loc2_:CompanyEvent = new CompanyEvent(CompanyEvent.SELECTED_ITEM,true);
         _loc2_.isSelected = param1;
         _loc2_.prbID = data.prbID;
         dispatchEvent(_loc2_);
     }
     
-    private function isPlayersData() : Boolean {
+    private function isPlayersData() : Boolean
+    {
         return (data.hasOwnProperty("players")) && !(data.players == null);
     }
     
-    private function updateTextFieldWidth() : void {
+    private function updateTextFieldWidth() : void
+    {
         this.divisionField.x = Math.round(this.mainTextField.x + this.mainTextField.textWidth + 12);
         this.divisionField.width = Math.round(this.pCountField.x - this.divisionField.x - 8);
     }
     
-    override public function set selected(param1:Boolean) : void {
+    override public function set selected(param1:Boolean) : void
+    {
         if(!param1 && (this.dd.isOpen()))
         {
             this.dd.close();
@@ -198,25 +211,30 @@ package net.wg.gui.prebattle.company
         super.selected = param1;
     }
     
-    public function refreshPopulateData(param1:Function) : void {
+    public function refreshPopulateData(param1:Function) : void
+    {
         this.listRefreshData = param1;
     }
     
-    override protected function handleMouseRollOver(param1:MouseEvent) : void {
+    override protected function handleMouseRollOver(param1:MouseEvent) : void
+    {
         super.handleMouseRollOver(param1);
         App.toolTipMgr.show(App.utils.commons.getFullPlayerName(App.utils.commons.getUserProps(data.creatorName,data.creatorClan,data.creatorRegion,data.creatorIgrType)));
     }
     
-    override protected function handleMouseRollOut(param1:MouseEvent) : void {
+    override protected function handleMouseRollOut(param1:MouseEvent) : void
+    {
         super.handleMouseRollOut(param1);
         App.toolTipMgr.hide();
     }
     
-    override protected function handleMousePress(param1:MouseEvent) : void {
+    override protected function handleMousePress(param1:MouseEvent) : void
+    {
         this.pressEvent = param1;
     }
     
-    override protected function handleMouseRelease(param1:MouseEvent) : void {
+    override protected function handleMouseRelease(param1:MouseEvent) : void
+    {
         if(this.pressEvent)
         {
             super.handleMousePress(this.pressEvent);

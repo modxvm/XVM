@@ -9,7 +9,8 @@ package net.wg.gui.lobby.training
     public class DropTileList extends TileList implements IDropList
     {
         
-        public function DropTileList() {
+        public function DropTileList()
+        {
             super();
             this.focusIndicator.visible = false;
             addEventListener(MouseEvent.ROLL_OVER,this.onMouseOver,false,0,true);
@@ -20,34 +21,41 @@ package net.wg.gui.lobby.training
         
         public var focusIndicator:MovieClip;
         
-        private function onMouseOver(param1:MouseEvent) : void {
+        private function onMouseOver(param1:MouseEvent) : void
+        {
             this.focusIndicator.gotoAndStop("dragOver");
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.onMouseOver,false);
             removeEventListener(MouseEvent.ROLL_OUT,this.onMouseOut,false);
             this.focusIndicator = null;
             super.onDispose();
         }
         
-        private function onMouseOut(param1:MouseEvent) : void {
+        private function onMouseOut(param1:MouseEvent) : void
+        {
             this.focusIndicator.gotoAndStop("dragOut");
         }
         
-        public function highlightList() : void {
+        public function highlightList() : void
+        {
             this.focusIndicator.visible = true;
         }
         
-        public function hideHighLight() : void {
+        public function hideHighLight() : void
+        {
             this.focusIndicator.visible = false;
         }
         
-        public function get selectable() : Boolean {
+        public function get selectable() : Boolean
+        {
             return this._selectable;
         }
         
-        public function set selectable(param1:Boolean) : void {
+        public function set selectable(param1:Boolean) : void
+        {
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
             var _loc4_:IListItemRenderer = null;

@@ -4,7 +4,6 @@ package net.wg.gui.lobby.fortifications.battleRoom
     import net.wg.gui.rally.interfaces.IManualSearchRenderer;
     import flash.text.TextField;
     import net.wg.gui.lobby.fortifications.data.sortie.SortieRenderVO;
-    import net.wg.data.constants.Values;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.infrastructure.interfaces.IUserProps;
     import flash.events.MouseEvent;
@@ -13,7 +12,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
     public class SortieListRenderer extends TableRenderer implements IManualSearchRenderer
     {
         
-        public function SortieListRenderer() {
+        public function SortieListRenderer()
+        {
             super();
             UIID = 33;
             preventAutosizing = true;
@@ -29,29 +29,14 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         private var _creatorName:String = null;
         
-        override public function setData(param1:Object) : void {
-            var _loc2_:Array = null;
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
-            if(this.data)
-            {
-                _loc2_ = SortieRenderVO(param1).sortieID;
-                if(!(_loc2_[0] == Values.DEFAULT_INT) && !(_loc2_[1] == Values.DEFAULT_INT))
-                {
-                    startSimulationDoubleClick();
-                }
-                else
-                {
-                    stopSimulationDoubleClick();
-                }
-            }
-            else
-            {
-                stopSimulationDoubleClick();
-            }
             invalidateData();
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             this.data = param1;
             if(this.data)
             {
@@ -59,13 +44,15 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             super.enabled = param1;
             mouseEnabled = true;
             mouseChildren = true;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.commander.mouseEnabled = false;
             this.divisionName.mouseEnabled = false;
@@ -73,7 +60,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.commandMaxSize.mouseEnabled = false;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.commander = null;
             this.divisionName = null;
             this.commandSize = null;
@@ -81,7 +69,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:SortieRenderVO = null;
             mouseEnabled = true;
             mouseChildren = true;
@@ -101,7 +90,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
-        protected function populateUI(param1:SortieRenderVO) : void {
+        protected function populateUI(param1:SortieRenderVO) : void
+        {
             var _loc2_:String = null;
             var _loc3_:IUserProps = null;
             if(param1.creatorName)
@@ -133,9 +123,11 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.divisionName.text = param1.divisionName;
         }
         
-        override protected function handleMouseRelease(param1:MouseEvent) : void {
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
             super.handleMouseRelease(param1);
             var _loc2_:uint = 0;
+            _loc2_;
             App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,_loc2_);
         }
     }

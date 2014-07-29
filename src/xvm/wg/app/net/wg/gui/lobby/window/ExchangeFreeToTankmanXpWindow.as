@@ -24,7 +24,8 @@ package net.wg.gui.lobby.window
     public class ExchangeFreeToTankmanXpWindow extends ExchangeFreeToTankmanXpWindowMeta implements IExchangeFreeToTankmanXpWindowMeta
     {
         
-        public function ExchangeFreeToTankmanXpWindow() {
+        public function ExchangeFreeToTankmanXpWindow()
+        {
             super();
             isModal = false;
             canResize = false;
@@ -87,7 +88,8 @@ package net.wg.gui.lobby.window
         
         private var _initMax:Boolean = false;
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             var _loc2_:Padding = null;
             super.setWindow(param1);
             if(param1)
@@ -100,28 +102,33 @@ package net.wg.gui.lobby.window
             }
         }
         
-        public function as_setInitData(param1:Object) : void {
+        public function as_setInitData(param1:Object) : void
+        {
             this.initData = new ExchangeFreeToTankmanInitVO(param1);
             invalidate(INIT_DATA_INVALID);
         }
         
-        public function as_setCalcValueResponse(param1:Number, param2:Object) : void {
+        public function as_setCalcValueResponse(param1:Number, param2:Object) : void
+        {
             this._price = param1;
             this._actionPriceData = param2;
             invalidate(RECALC_VALUE_INVALID);
         }
         
-        public function as_setWalletStatus(param1:Object) : void {
+        public function as_setWalletStatus(param1:Object) : void
+        {
             App.utils.voMgr.walletStatusVO.update(param1);
             this.updateWalletStatus();
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             super.preInitialize();
             constraints = new Constraints(this,ConstrainMode.REFLOW);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.submitBtn.addEventListener(ButtonEvent.CLICK,this.onClickSubmitButton,false,0,true);
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onClickCancelButton,false,0,true);
@@ -147,7 +154,8 @@ package net.wg.gui.lobby.window
             constraints.addElement(MOVINGCONTAINER_NAME,_loc2_,Constraints.BOTTOM);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = false;
             var _loc2_:ActionPriceVO = null;
             super.draw();
@@ -244,7 +252,8 @@ package net.wg.gui.lobby.window
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.submitBtn.addEventListener(ButtonEvent.CLICK,this.onClickSubmitButton,false,0,true);
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onClickCancelButton,false,0,true);
@@ -266,7 +275,8 @@ package net.wg.gui.lobby.window
             }
         }
         
-        private function updateWalletStatus() : void {
+        private function updateWalletStatus() : void
+        {
             if(App.utils)
             {
                 this.isAlertWalletVisible = this.walletStatus.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
@@ -274,23 +284,27 @@ package net.wg.gui.lobby.window
             }
         }
         
-        private function nsFirstCurrencyChangeHandler(param1:IndexEvent) : void {
+        private function nsFirstCurrencyChangeHandler(param1:IndexEvent) : void
+        {
             this.selectedValue = this.nsLevel.value;
             invalidate(SELECTED_VALUE_INVALID);
         }
         
-        private function calcHeightInNextFrame(param1:Event) : void {
+        private function calcHeightInNextFrame(param1:Event) : void
+        {
             removeEventListener(Event.ENTER_FRAME,this.calcHeightInNextFrame);
             this.originalWindowHeight = window.height;
             this.expandedWindowHeight = this.originalWindowHeight + this.warningMc.height - 30;
             invalidate(WARNING_INVALID);
         }
         
-        private function onClickSubmitButton(param1:ButtonEvent) : void {
+        private function onClickSubmitButton(param1:ButtonEvent) : void
+        {
             applyS();
         }
         
-        private function onClickCancelButton(param1:ButtonEvent) : void {
+        private function onClickCancelButton(param1:ButtonEvent) : void
+        {
             onWindowCloseS();
         }
     }

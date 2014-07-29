@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.data.state
     public class NodeStateItem extends Object
     {
         
-        public function NodeStateItem(param1:uint, param2:StateProperties) {
+        public function NodeStateItem(param1:uint, param2:StateProperties)
+        {
             super();
             this.state = param1;
             this.props = param2;
@@ -13,11 +14,13 @@ package net.wg.gui.lobby.techtree.data.state
         
         private var props:StateProperties;
         
-        public function getState() : uint {
+        public function getState() : uint
+        {
             return this.state;
         }
         
-        public function getProps() : StateProperties {
+        public function getProps() : StateProperties
+        {
             return this.props;
         }
     }

@@ -19,7 +19,8 @@ package net.wg.gui.lobby.store
     public class StoreListItemRenderer extends ComplexListItemRenderer
     {
         
-        public function StoreListItemRenderer() {
+        public function StoreListItemRenderer()
+        {
             super();
         }
         
@@ -31,7 +32,8 @@ package net.wg.gui.lobby.store
         
         public var hitMc:Sprite;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.actionPrice.dispose();
             this.actionPrice = null;
             this.credits.dispose();
@@ -39,7 +41,8 @@ package net.wg.gui.lobby.store
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             TextFieldEx.setVerticalAlign(this.errorField,TextFieldEx.VALIGN_CENTER);
             constraints.addElement(textField.name,textField,Constraints.ALL);
@@ -50,7 +53,8 @@ package net.wg.gui.lobby.store
             hitArea = this.hitMc;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Point = null;
             if(isInvalid(InvalidationType.DATA))
             {
@@ -73,7 +77,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        protected function update() : void {
+        protected function update() : void
+        {
             var _loc1_:StoreTableData = null;
             var _loc2_:* = 0;
             var _loc3_:* = 0;
@@ -124,32 +129,40 @@ package net.wg.gui.lobby.store
             }
         }
         
-        protected function onPricesCalculated(param1:Number, param2:Number, param3:StoreTableData) : void {
+        protected function onPricesCalculated(param1:Number, param2:Number, param3:StoreTableData) : void
+        {
         }
         
-        protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void {
+        protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void
+        {
         }
         
-        protected function getTooltipMapping() : StoreTooltipMapVO {
+        protected function getTooltipMapping() : StoreTooltipMapVO
+        {
             throw new AbstractException("InventoryListItemRenderer::getTooltipMapping" + Errors.ABSTRACT_INVOKE);
         }
         
-        protected final function infoItem() : void {
+        protected final function infoItem() : void
+        {
             dispatchEvent(new StoreEvent(StoreEvent.INFO,StoreTableData(data)));
         }
         
-        protected final function getHelper() : StoreHelper {
+        protected final function getHelper() : StoreHelper
+        {
             return StoreHelper.getInstance();
         }
         
-        protected function onLeftButtonClick() : void {
+        protected function onLeftButtonClick() : void
+        {
         }
         
-        protected function onRightButtonClick() : void {
+        protected function onRightButtonClick() : void
+        {
             this.infoItem();
         }
         
-        override protected function handleMouseRollOut(param1:MouseEvent) : void {
+        override protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             if(App.instance)
             {
                 App.toolTipMgr.hide();
@@ -163,7 +176,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        override protected function handleMousePress(param1:MouseEvent) : void {
+        override protected function handleMousePress(param1:MouseEvent) : void
+        {
             if(App.instance)
             {
                 App.toolTipMgr.hide();
@@ -171,12 +185,14 @@ package net.wg.gui.lobby.store
             super.handleMousePress(param1);
         }
         
-        override protected function handleMouseRollOver(param1:MouseEvent) : void {
+        override protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             super.handleMouseRollOver(param1);
             this.shopTooltip();
         }
         
-        private function shopTooltip() : void {
+        private function shopTooltip() : void
+        {
             var _loc1_:ITooltipMgr = null;
             var _loc2_:StoreTableData = null;
             var _loc3_:String = null;
@@ -208,7 +224,8 @@ package net.wg.gui.lobby.store
             }
         }
         
-        private function onMouseClickHandler(param1:MouseEvent) : void {
+        private function onMouseClickHandler(param1:MouseEvent) : void
+        {
             if(App.utils.commons.isRightButton(param1))
             {
                 this.onRightButtonClick();

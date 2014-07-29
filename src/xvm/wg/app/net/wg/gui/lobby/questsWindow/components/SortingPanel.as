@@ -9,7 +9,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class SortingPanel extends UIComponent
     {
         
-        public function SortingPanel() {
+        public function SortingPanel()
+        {
             super();
         }
         
@@ -23,7 +24,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         public var doneCB:CheckBox;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.sortTF.mouseEnabled = false;
             this.sortTF.text = QUESTS.QUESTS_CURRENTTAB_HEADER_SORT;
@@ -32,13 +34,15 @@ package net.wg.gui.lobby.questsWindow.components
             this.sortingDD.selectedIndex = 0;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             this.sortingDD.x = this.sortTF.x + this.sortTF.textWidth + DD_PADDING;
             this.doneCB.x = this.sortingDD.x + this.sortingDD.width + CB_PADDING;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.sortingDD.dispose();
             this.sortingDD = null;
             this.doneCB.dispose();

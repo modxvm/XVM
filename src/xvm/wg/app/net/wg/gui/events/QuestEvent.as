@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class QuestEvent extends Event
     {
         
-        public function QuestEvent(param1:String, param2:String) {
+        public function QuestEvent(param1:String, param2:String)
+        {
             super(param1,true,true);
             this.questID = param2;
         }
@@ -14,7 +15,8 @@ package net.wg.gui.events
         
         public var questID:String = "";
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new QuestEvent(type,this.questID);
         }
     }

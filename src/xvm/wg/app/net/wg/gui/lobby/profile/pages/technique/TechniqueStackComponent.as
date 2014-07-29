@@ -13,7 +13,8 @@ package net.wg.gui.lobby.profile.pages.technique
     public class TechniqueStackComponent extends UIComponent
     {
         
-        public function TechniqueStackComponent() {
+        public function TechniqueStackComponent()
+        {
             super();
         }
         
@@ -27,24 +28,24 @@ package net.wg.gui.lobby.profile.pages.technique
         
         public var viewStack:ResizableViewStack;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.viewStack.cache = true;
-            this.buttonBar.dataProvider = new DataProvider([{
-                "label":PROFILE.SECTION_TECHNIQUE_TABBTN_STATISTIC,
-                "linkage":"TechniqueStatisticTab_UI",
-                "tooltip":PROFILE.SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP
-            },{
-            "label":PROFILE.SECTION_TECHNIQUE_TABBTN_ACHIEVEMENTS,
-            "linkage":"TechniqueAchievementTab_UI",
-            "tooltip":PROFILE.SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP
-        }]);
+            this.buttonBar.dataProvider = new DataProvider([{"label":PROFILE.SECTION_TECHNIQUE_TABBTN_STATISTIC,
+            "linkage":"TechniqueStatisticTab_UI",
+            "tooltip":PROFILE.SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP
+        },{"label":PROFILE.SECTION_TECHNIQUE_TABBTN_ACHIEVEMENTS,
+        "linkage":"TechniqueAchievementTab_UI",
+        "tooltip":PROFILE.SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP
+    }]);
     this.buttonBar.selectedIndex = 1;
     this.buttonBar.selectedIndex = 0;
     this.buttonBar.validateNow();
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
     if(this.buttonBar)
     {
         this.buttonBar.dispose();
@@ -64,12 +65,14 @@ override protected function onDispose() : void {
     super.onDispose();
 }
 
-public function setViewSize(param1:Number, param2:Number) : void {
+public function setViewSize(param1:Number, param2:Number) : void
+{
     this.tabsBg.scrollRect = new Rectangle(0,0,this.tabsBg.width,param2);
     this.viewStack.setAvailableSize(param1 - this.viewStack.x,param2 - this.viewStack.y);
 }
 
-public function updateLabel(param1:String, param2:String) : void {
+public function updateLabel(param1:String, param2:String) : void
+{
     this.vNameTF.text = param1;
     if(param2 != null)
     {
@@ -81,11 +84,13 @@ public function updateLabel(param1:String, param2:String) : void {
     }
 }
 
-public function updateTankData(param1:Object) : void {
+public function updateTankData(param1:Object) : void
+{
     this.viewStack.updateData(param1);
 }
 
-public function enableAwardsButton(param1:Boolean) : void {
+public function enableAwardsButton(param1:Boolean) : void
+{
     if(!param1)
     {
         this.buttonBar.selectedIndex = 0;

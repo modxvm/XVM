@@ -6,7 +6,8 @@ package net.wg.gui.lobby.premiumForm
     public class DiscountPrice extends UIComponent
     {
         
-        public function DiscountPrice() {
+        public function DiscountPrice()
+        {
             super();
         }
         

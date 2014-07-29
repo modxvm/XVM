@@ -10,7 +10,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipHistoricalAmmo extends ToolTipSpecial
     {
         
-        public function ToolTipHistoricalAmmo() {
+        public function ToolTipHistoricalAmmo()
+        {
             super();
             this.headerTF = content.headerTF;
             this.descriptionTF = content.descriptionTF;
@@ -43,7 +44,8 @@ package net.wg.gui.components.tooltips
         
         private var model:HistoricalAmmoVO;
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc1_:Separator = null;
             this.disposeModel();
             this.model = new HistoricalAmmoVO(_data);
@@ -82,7 +84,8 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function updatePositions() : void {
+        override protected function updatePositions() : void
+        {
             super.updatePositions();
             this.shellsSet.x = content.width - this.shellsSet.actualWidth >> 1;
             var _loc1_:Number = this.priceLabelTF.width + PRICE_GAP + this.priceTF.width;
@@ -90,14 +93,16 @@ package net.wg.gui.components.tooltips
             this.priceTF.x = this.priceLabelTF.x + this.priceLabelTF.width + PRICE_GAP;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeModel();
             this.shellsSet.dispose();
             this.shellsSet = null;
             super.onDispose();
         }
         
-        private function disposeModel() : void {
+        private function disposeModel() : void
+        {
             if(this.model)
             {
                 this.model.dispose();
@@ -105,7 +110,8 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        private function updateStaticTexts() : void {
+        private function updateStaticTexts() : void
+        {
             this.priceLabelTF.autoSize = TextFieldAutoSize.LEFT;
             this.headerTF.htmlText = Utils.instance.htmlWrapper(App.utils.locale.makeString(HISTORICAL_BATTLES.AMMOPRESET_HEADER),Utils.instance.COLOR_HEADER,18,"$TitleFont");
             this.descriptionTF.htmlText = Utils.instance.htmlWrapper(App.utils.locale.makeString(HISTORICAL_BATTLES.AMMOPRESET_DESCRIPTION),Utils.instance.COLOR_NORMAL,14,"$FieldFont");

@@ -3,7 +3,8 @@ package net.wg.gui.lobby.techtree.constants
     public class NodeState extends Object
     {
         
-        public function NodeState() {
+        public function NodeState()
+        {
             super();
         }
         

@@ -14,13 +14,15 @@ package net.wg.gui.lobby.fortifications.battleRoom
     public class JoinSortieSection extends BaseRallyDetailsSection
     {
         
-        public function JoinSortieSection() {
+        public function JoinSortieSection()
+        {
             super();
             this.joinSortieButton.UIID = 49;
             joinButton = this.joinSortieButton;
         }
         
-        protected static function takePlaceBtnOverHandler(param1:MouseEvent) : void {
+        protected static function takePlaceBtnOverHandler(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_JOINBTN);
         }
         
@@ -58,7 +60,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         public var slot14:SortieSimpleSlot;
         
-        override protected function getSlots() : Array {
+        override protected function getSlots() : Array
+        {
             var _loc2_:SortieSimpleSlot = null;
             var _loc1_:Array = [this.slot0,this.slot1,this.slot2,this.slot3,this.slot4,this.slot5,this.slot6,this.slot7,this.slot8,this.slot9,this.slot10,this.slot11,this.slot12,this.slot13,this.slot14];
             this.helper = new SortieSlotHelper();
@@ -72,7 +75,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             return _loc1_;
         }
         
-        override protected function updateTitle(param1:IRallyVO) : void {
+        override protected function updateTitle(param1:IRallyVO) : void
+        {
             if((param1) && (param1.commanderVal))
             {
                 App.utils.commons.formatPlayerName(headerTF,App.utils.commons.getUserProps(param1.commanderVal.userName,param1.commanderVal.clanAbbrev,param1.commanderVal.region,param1.commanderVal.igrType));
@@ -83,7 +87,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
-        private function addSlotsListeners() : void {
+        private function addSlotsListeners() : void
+        {
             var _loc1_:SortieSimpleSlot = null;
             for each(_loc1_ in slots)
             {
@@ -92,7 +97,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
-        private function removeSlotsListeners() : void {
+        private function removeSlotsListeners() : void
+        {
             var _loc1_:SortieSimpleSlot = null;
             for each(_loc1_ in slots)
             {
@@ -101,7 +107,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             joinButton = this.joinSortieButton;
             super.configUI();
             headerTF.text = CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM;
@@ -112,12 +119,14 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.addSlotsListeners();
         }
         
-        override protected function onJoinClick(param1:ButtonEvent) : void {
+        override protected function onJoinClick(param1:ButtonEvent) : void
+        {
             super.onJoinClick(param1);
             App.eventLogManager.logUIEvent(param1,0);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -125,7 +134,8 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
-        override protected function onControlRollOver(param1:MouseEvent) : void {
+        override protected function onControlRollOver(param1:MouseEvent) : void
+        {
             switch(param1.currentTarget)
             {
                 case joinButton:
@@ -140,25 +150,40 @@ package net.wg.gui.lobby.fortifications.battleRoom
             }
         }
         
-        override protected function updateSlots(param1:IRallyVO) : void {
+        override protected function updateSlots(param1:IRallyVO) : void
+        {
             var _loc3_:IRallySlotVO = null;
             var _loc4_:SortieSimpleSlot = null;
             var _loc2_:Array = param1.slotsArray;
             var _loc5_:* = true;
-            for each(_loc4_ in slots)
+            var _loc6_:uint = Math.min(slots.length,_loc2_.length);
+            var _loc7_:Number = 0;
+            while(_loc7_ < _loc6_)
             {
-                _loc3_ = _loc2_[slots.indexOf(_loc4_)];
+                _loc4_ = slots[_loc7_];
+                _loc3_ = _loc2_[_loc7_];
+                _loc5_;
+                _loc5_;
                 _loc4_.showTakePlaceBtn = (_loc3_) && !_loc3_.playerObj;
                 _loc4_.slotData = _loc3_;
+                _loc7_++;
+            }
+            while(_loc7_ < slots.length)
+            {
+                _loc4_ = slots[_loc7_];
+                _loc4_.slotData = null;
+                _loc7_++;
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.removeSlotsListeners();
             super.onDispose();
         }
         
-        private function buttonClickHandler(param1:ButtonEvent) : void {
+        private function buttonClickHandler(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,0);
         }
     }

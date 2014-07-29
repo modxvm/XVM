@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class ClanStatsVO extends DAAPIDataClass
     {
         
-        public function ClanStatsVO(param1:Object) {
+        public function ClanStatsVO(param1:Object)
+        {
             this.sortieBattlesStats = [];
             this.sortieDefresStats = [];
             super(param1);
@@ -33,7 +34,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var sortieDefresStats:Array;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:ClanStatItemVO = null;
             var _loc4_:Array = null;
             var _loc5_:Object = null;
@@ -58,7 +60,8 @@ package net.wg.gui.lobby.fortifications.data
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc2_:ClanStatItemVO = null;
             var _loc3_:Array = null;
             if(this.sortieBattlesCount)

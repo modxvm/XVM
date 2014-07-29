@@ -7,17 +7,20 @@ package net.wg.gui.prebattle.company
     public class GroupPlayersDropDownMenu extends DropdownMenu
     {
         
-        public function GroupPlayersDropDownMenu() {
+        public function GroupPlayersDropDownMenu()
+        {
             super();
         }
         
         private var _prbID:int;
         
-        public function set prbID(param1:int) : void {
+        public function set prbID(param1:int) : void
+        {
             this._prbID = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(_dropdownRef)
             {
@@ -25,7 +28,8 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        override protected function showDropdown() : void {
+        override protected function showDropdown() : void
+        {
             super.showDropdown();
             if(_dropdownRef)
             {
@@ -36,26 +40,31 @@ package net.wg.gui.prebattle.company
             }
         }
         
-        private function onClickDropDownMenu(param1:MouseEvent) : void {
+        private function onClickDropDownMenu(param1:MouseEvent) : void
+        {
             var _loc2_:CompanyEvent = new CompanyEvent(CompanyEvent.DROP_LIST_CLICK,true);
             _loc2_.prbID = this._prbID;
             dispatchEvent(_loc2_);
         }
         
-        override public function open() : void {
+        override public function open() : void
+        {
             selected = true;
             this.showDropdown();
         }
         
-        override protected function changeFocus() : void {
+        override protected function changeFocus() : void
+        {
         }
         
-        override public function close() : void {
+        override public function close() : void
+        {
             selected = false;
             hideDropdown();
         }
         
-        override protected function updateDDPosition(param1:Event) : void {
+        override protected function updateDDPosition(param1:Event) : void
+        {
         }
     }
 }

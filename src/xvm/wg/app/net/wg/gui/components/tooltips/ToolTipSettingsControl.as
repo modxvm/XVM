@@ -8,7 +8,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipSettingsControl extends ToolTipSpecial
     {
         
-        public function ToolTipSettingsControl() {
+        public function ToolTipSettingsControl()
+        {
             super();
             this.headerTF = content.headerTF;
             this.descriptionTF = content.descriptionTF;
@@ -36,7 +37,8 @@ package net.wg.gui.components.tooltips
         
         private var model:SettingsControlVO;
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc1_:Separator = null;
             var _loc2_:String = null;
             var _loc3_:String = null;
@@ -95,7 +97,8 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             super.updateSize();
             if((this.whiteBg) && (this.whiteBg.visible))
             {
@@ -103,12 +106,14 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeModel();
             super.onDispose();
         }
         
-        private function disposeModel() : void {
+        private function disposeModel() : void
+        {
             if(this.model)
             {
                 this.model.dispose();

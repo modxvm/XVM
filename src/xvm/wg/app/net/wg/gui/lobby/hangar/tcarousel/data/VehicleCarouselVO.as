@@ -5,7 +5,8 @@ package net.wg.gui.lobby.hangar.tcarousel.data
     public class VehicleCarouselVO extends Object
     {
         
-        public function VehicleCarouselVO() {
+        public function VehicleCarouselVO()
+        {
             super();
         }
         
@@ -61,7 +62,8 @@ package net.wg.gui.lobby.hangar.tcarousel.data
         
         public var availableSlots:Number = 0;
         
-        public function parsObj(param1:Object) : Number {
+        public function parsObj(param1:Object) : Number
+        {
             var _loc2_:String = null;
             for(_loc2_ in param1)
             {

@@ -11,7 +11,8 @@ package net.wg.gui.lobby.settings
     public class AdvancedGraphicContentForm extends UIComponent
     {
         
-        public function AdvancedGraphicContentForm() {
+        public function AdvancedGraphicContentForm()
+        {
             super();
             this.initTexts();
             visible = false;
@@ -119,7 +120,8 @@ package net.wg.gui.lobby.settings
         
         public var SEMITRANSPARENT_LEAVES_ENABLEDCheckbox:CheckBox = null;
         
-        private function initTexts() : void {
+        private function initTexts() : void
+        {
             this.RENDER_PIPELINELabel.text = "";
             this.TEXTURE_QUALITYLabel.text = "";
             this.DECALS_QUALITYLabel.text = "";
@@ -142,7 +144,8 @@ package net.wg.gui.lobby.settings
             this.SEMITRANSPARENT_LEAVES_ENABLEDCheckbox.label = "";
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.graficsFieldSet.label = SETTINGS.GRAPHICS_SIGNIFICANTLYAFFECTING;
             this.RENDER_PIPELINELabel.text = SETTINGS.RENDER_PIPELINE_LABEL;
@@ -152,7 +155,8 @@ package net.wg.gui.lobby.settings
             visible = true;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.RENDER_PIPELINELabel.dispose();
             this.RENDER_PIPELINEButtonBar.dispose();
             this.TEXTURE_QUALITYLabel.dispose();

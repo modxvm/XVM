@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class SoundTypes extends Object
     {
         
-        public function SoundTypes() {
+        public function SoundTypes()
+        {
             super();
         }
         

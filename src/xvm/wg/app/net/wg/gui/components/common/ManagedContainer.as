@@ -25,7 +25,8 @@ package net.wg.gui.components.common
     public class ManagedContainer extends UIComponent implements IManagedContainer
     {
         
-        public function ManagedContainer() {
+        public function ManagedContainer()
+        {
             this.groupCounters = {};
             super();
             this.mouseEnabled = false;
@@ -49,7 +50,8 @@ package net.wg.gui.components.common
         
         private var GROUP_Y_OFFSET:int = 20;
         
-        override public function addChild(param1:DisplayObject) : DisplayObject {
+        override public function addChild(param1:DisplayObject) : DisplayObject
+        {
             var _loc3_:IAbstractWrapperView = null;
             var _loc4_:IWrapper = null;
             var _loc5_:DisplayObject = null;
@@ -93,7 +95,8 @@ package net.wg.gui.components.common
             throw new Error(this.ADD_CHILD_ERROR_STR);
         }
         
-        override public function removeChild(param1:DisplayObject) : DisplayObject {
+        override public function removeChild(param1:DisplayObject) : DisplayObject
+        {
             var _loc5_:String = null;
             var _loc6_:GroupCounter = null;
             var _loc2_:IAssertable = App.utils.asserter;
@@ -118,6 +121,7 @@ package net.wg.gui.components.common
                         if(_loc6_.views.length == 0)
                         {
                             delete this.groupCounters[_loc5_];
+                            true;
                         }
                     }
                 }
@@ -130,7 +134,8 @@ package net.wg.gui.components.common
             throw new Error(this.REMOVE_CHILD_ERROR_STR);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:String = null;
             var _loc2_:GroupCounter = null;
             super.onDispose();
@@ -140,12 +145,14 @@ package net.wg.gui.components.common
                 _loc2_ = this.groupCounters[_loc1_];
                 _loc2_.dispose();
                 delete this.groupCounters[_loc1_];
+                true;
             }
             this.groupCounters = null;
             this._modalBg = null;
         }
         
-        public function getTopmostView() : IManagedContent {
+        public function getTopmostView() : IManagedContent
+        {
             if(numChildren)
             {
                 return IManagedContent(getChildAt(numChildren - 1));
@@ -153,7 +160,8 @@ package net.wg.gui.components.common
             return null;
         }
         
-        public function setFocusedView(param1:IManagedContent) : void {
+        public function setFocusedView(param1:IManagedContent) : void
+        {
             if((contains(DisplayObject(param1))) && !(param1.sourceView == App.containerMgr.lastFocusedView))
             {
                 if(App.containerMgr.lastFocusedView != null)
@@ -171,7 +179,8 @@ package net.wg.gui.components.common
             }
         }
         
-        public function tryToSetFocus(param1:Boolean = false) : Boolean {
+        public function tryToSetFocus(param1:Boolean = false) : Boolean
+        {
             var _loc2_:IManagedContent = null;
             if(this.manageFocus)
             {
@@ -189,10 +198,12 @@ package net.wg.gui.components.common
             return !(_loc2_ == null);
         }
         
-        public function tryToUpdateContent() : void {
+        public function tryToUpdateContent() : void
+        {
         }
         
-        public function updateStage(param1:Number, param2:Number) : void {
+        public function updateStage(param1:Number, param2:Number) : void
+        {
             var _loc3_:* = 0;
             var _loc4_:DisplayObject = null;
             if(this._modalBg != null)
@@ -220,35 +231,42 @@ package net.wg.gui.components.common
             }
         }
         
-        public function onTweenEnd(param1:Tween = null) : void {
+        public function onTweenEnd(param1:Tween = null) : void
+        {
             if(super.getChildByName(DisplayObject(param1.target).name) != null)
             {
                 this.performRemoveChild(IManagedContent(param1.target));
             }
         }
         
-        public function get manageSize() : Boolean {
+        public function get manageSize() : Boolean
+        {
             return this._manageSize;
         }
         
-        public function set manageSize(param1:Boolean) : void {
+        public function set manageSize(param1:Boolean) : void
+        {
             this._manageSize = param1;
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             this._type = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             initSize();
         }
         
-        protected function updateOrCreateModalBg(param1:Number = 1.0) : void {
+        protected function updateOrCreateModalBg(param1:Number = 1.0) : void
+        {
             if(this._modalBg == null)
             {
                 this._modalBg = MovieClip(App.utils.classFactory.getComponent(this.getModalBgLinkage(),MovieClip));
@@ -269,35 +287,42 @@ package net.wg.gui.components.common
             this._modalBg.alpha = param1;
         }
         
-        protected function getModalBgLinkage() : String {
+        protected function getModalBgLinkage() : String
+        {
             return Linkages.POPUP_MODAL;
         }
         
-        protected function removeAllChildren() : void {
+        protected function removeAllChildren() : void
+        {
             while(numChildren)
             {
                 removeChildAt(numChildren - 1);
             }
         }
         
-        protected function superRemoveChild(param1:DisplayObject) : DisplayObject {
+        protected function superRemoveChild(param1:DisplayObject) : DisplayObject
+        {
             return super.removeChild(param1);
         }
         
-        protected function get manageFocus() : Boolean {
+        protected function get manageFocus() : Boolean
+        {
             return this._manageFocus;
         }
         
-        protected function set manageFocus(param1:Boolean) : void {
+        protected function set manageFocus(param1:Boolean) : void
+        {
             this._manageFocus = param1;
         }
         
-        private function assertNumberChildrenForModalBg() : void {
+        private function assertNumberChildrenForModalBg() : void
+        {
             var _loc1_:* = "If modalBg is not null, the container must have more then 1 children.";
             App.utils.asserter.assert(numChildren > 1,_loc1_);
         }
         
-        private function performRemoveChild(param1:IManagedContent) : void {
+        private function performRemoveChild(param1:IManagedContent) : void
+        {
             var _loc2_:* = "for performRemoveChild " + param1 + " must implements IView or IWrapper";
             App.utils.asserter.assert(param1 is IWrapper || param1 is IView,_loc2_,InfrastructureException);
             this.superRemoveChild(DisplayObject(param1));
@@ -320,7 +345,8 @@ package net.wg.gui.components.common
             dispatchEvent(new ManagedContainerEvent(ManagedContainerEvent.CHILD_REMOVED));
         }
         
-        private function isModalViewsIsExisting() : Boolean {
+        private function isModalViewsIsExisting() : Boolean
+        {
             var _loc2_:DisplayObject = null;
             var _loc1_:Number = 0;
             while(_loc1_ < numChildren)
@@ -339,12 +365,14 @@ package net.wg.gui.components.common
             return false;
         }
         
-        private function assertContent(param1:Object) : void {
+        private function assertContent(param1:Object) : void
+        {
             var _loc2_:* = "if element of managedContainer is not a ModalBG, that must implements IManagedContent";
             App.utils.asserter.assert(param1 is IManagedContent || param1 == this._modalBg,_loc2_,InfrastructureException);
         }
         
-        private function addGroupCounter(param1:String, param2:String) : void {
+        private function addGroupCounter(param1:String, param2:String) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -357,7 +385,8 @@ package net.wg.gui.components.common
             _loc3_.increment(param2);
         }
         
-        private function movieViewToVector(param1:DisplayObject, param2:String) : void {
+        private function movieViewToVector(param1:DisplayObject, param2:String) : void
+        {
             var _loc3_:GroupCounter = this.groupCounters[param2];
             if(!_loc3_)
             {
@@ -393,13 +422,15 @@ package net.wg.gui.components.common
             param1.y = _loc5_;
         }
         
-        private function onAfterManagedContentDisposeHandler(param1:LifeCycleEvent) : void {
+        private function onAfterManagedContentDisposeHandler(param1:LifeCycleEvent) : void
+        {
             var _loc2_:IManagedContent = IManagedContent(param1.target);
             _loc2_.containerContent.removeEventListener(MouseEvent.MOUSE_DOWN,this.onViewClickHandler,false);
             _loc2_.removeEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE,this.onAfterManagedContentDisposeHandler);
         }
         
-        private function onViewClickHandler(param1:Event) : void {
+        private function onViewClickHandler(param1:Event) : void
+        {
             var _loc2_:IManagedContent = null;
             var _loc3_:String = null;
             if((contains(DisplayObject(param1.currentTarget))) && (this.isOwnedByMe(DisplayObject(param1.target))))
@@ -422,7 +453,8 @@ package net.wg.gui.components.common
             }
         }
         
-        private function isOwnedByMe(param1:DisplayObject) : Boolean {
+        private function isOwnedByMe(param1:DisplayObject) : Boolean
+        {
             while(!(param1 == null) && !(param1 == this))
             {
                 if(param1 is IManagedContainer)
@@ -440,7 +472,8 @@ import net.wg.infrastructure.interfaces.entity.IDisposable;
 class GroupCounter extends Object implements IDisposable
 {
     
-    function GroupCounter() {
+    function GroupCounter()
+    {
         super();
         this.views = new Vector.<GroupViewObject>();
     }
@@ -451,12 +484,14 @@ class GroupCounter extends Object implements IDisposable
     
     public var isReverceY:Boolean = false;
     
-    public function dispose() : void {
+    public function dispose() : void
+    {
         this.views.splice(0,this.views.length);
         this.views = null;
     }
     
-    public function increment(param1:String) : void {
+    public function increment(param1:String) : void
+    {
         var _loc2_:GroupViewObject = new GroupViewObject(param1);
         var _loc3_:int = this.views.length > 0?this.views[this.views.length - 1].xAdjust:0;
         var _loc4_:int = this.views.length > 0?this.views[this.views.length - 1].yAdjust:0;
@@ -467,7 +502,8 @@ class GroupCounter extends Object implements IDisposable
         this.views.push(_loc2_);
     }
     
-    public function decrement(param1:String) : void {
+    public function decrement(param1:String) : void
+    {
         var _loc2_:GroupViewObject = null;
         for each(_loc2_ in this.views)
         {
@@ -479,18 +515,21 @@ class GroupCounter extends Object implements IDisposable
         }
     }
     
-    public function get xAdjust() : int {
+    public function get xAdjust() : int
+    {
         return this.views.length > 0?this.views[this.views.length - 1].xAdjust:0;
     }
     
-    public function get yAdjust() : int {
+    public function get yAdjust() : int
+    {
         return this.views.length > 0?this.views[this.views.length - 1].yAdjust:0;
     }
 }
 class GroupViewObject extends Object
 {
     
-    function GroupViewObject(param1:String) {
+    function GroupViewObject(param1:String)
+    {
         super();
         this.id = param1;
     }

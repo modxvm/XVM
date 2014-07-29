@@ -21,7 +21,8 @@ package net.wg.gui.lobby.hangar.maintenance
     public class ShellListItemRenderer extends SoundListItemRenderer
     {
         
-        public function ShellListItemRenderer() {
+        public function ShellListItemRenderer()
+        {
             super();
         }
         
@@ -37,12 +38,14 @@ package net.wg.gui.lobby.hangar.maintenance
         
         public var hitMc:MovieClip;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             super.setData(param1);
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.desc.text = MENU.SHELLLISTITEMRENDERER_REPLACE;
             var _loc1_:IEventCollector = App.utils.events;
@@ -56,7 +59,8 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:ILocale = null;
             var _loc2_:Object = null;
             var _loc3_:* = NaN;
@@ -96,15 +100,18 @@ package net.wg.gui.lobby.hangar.maintenance
             }
         }
         
-        private function onRollOver(param1:MouseEvent) : void {
+        private function onRollOver(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showSpecial(Tooltips.TECH_MAIN_SHELL,null,data.id,data.prices,data.inventoryCount,data.count);
         }
         
-        private function onRollOut(param1:MouseEvent) : void {
+        private function onRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onClick(param1:MouseEvent) : void {
+        private function onClick(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
             if(param1 is MouseEventEx)
             {

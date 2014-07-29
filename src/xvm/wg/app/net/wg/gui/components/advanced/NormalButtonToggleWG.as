@@ -6,7 +6,8 @@ package net.wg.gui.components.advanced
     public class NormalButtonToggleWG extends SoundButtonEx
     {
         
-        public function NormalButtonToggleWG() {
+        public function NormalButtonToggleWG()
+        {
             super();
         }
         

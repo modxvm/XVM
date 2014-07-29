@@ -23,7 +23,8 @@ package net.wg.gui.lobby.questsWindow.components
     public class VehiclesSortingBlock extends AbstractResizableContent implements ISortable
     {
         
-        public function VehiclesSortingBlock() {
+        public function VehiclesSortingBlock()
+        {
             super();
         }
         
@@ -37,7 +38,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         private static var BOTTOM_PADDING:int = 10;
         
-        private static function updateSelectedIndex(param1:DropDownImageText, param2:Object) : void {
+        private static function updateSelectedIndex(param1:DropDownImageText, param2:Object) : void
+        {
             var _loc3_:int = param1.dataProvider.length;
             param1.selectedIndex = 0;
             var _loc4_:Number = 0;
@@ -52,7 +54,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private static function setupDataProvider(param1:Array) : IDataProvider {
+        private static function setupDataProvider(param1:Array) : IDataProvider
+        {
             var _loc3_:Object = null;
             var _loc2_:DataProvider = new DataProvider();
             for each(_loc3_ in param1)
@@ -64,7 +67,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         private static var INV_AVAILABLE_WIDTH:String = "invAvailableWidth";
         
-        private static function getHeadersProvider(param1:Array) : DataProvider {
+        private static function getHeadersProvider(param1:Array) : DataProvider
+        {
             var _loc7_:SortedBtnVO = null;
             var _loc8_:NormalSortingBtnInfo = null;
             var _loc2_:* = "../maps/icons/buttons/tab_sort_button/ascProfileSortArrow.png";
@@ -114,7 +118,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var _sortingFunction:Function = null;
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(this.data)
             {
                 this.data.dispose();
@@ -123,13 +128,15 @@ package net.wg.gui.lobby.questsWindow.components
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.sortCheckBox.label = QUESTS.QUESTS_TABLE_INHANGAR;
             this.vehiclesList.sbPadding = new Padding(5,4,5,1);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.removeListeners();
             this.sortCheckBox.dispose();
             this.sortCheckBox = null;
@@ -151,7 +158,8 @@ package net.wg.gui.lobby.questsWindow.components
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = 0;
             var _loc2_:Array = null;
             var _loc3_:* = 0;
@@ -209,7 +217,8 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function addListeners() : void {
+        private function addListeners() : void
+        {
             this.nationFilter.addEventListener(ListEvent.INDEX_CHANGE,this.updateSortedData);
             this.tankFilter.addEventListener(ListEvent.INDEX_CHANGE,this.updateSortedData);
             this.levelFilter.addEventListener(ListEvent.INDEX_CHANGE,this.updateSortedData);
@@ -217,7 +226,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.buttonBar.addEventListener(ButtonEvent.CLICK,this.updateSortedData);
         }
         
-        private function removeListeners() : void {
+        private function removeListeners() : void
+        {
             this.nationFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.updateSortedData);
             this.tankFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.updateSortedData);
             this.levelFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.updateSortedData);
@@ -225,12 +235,14 @@ package net.wg.gui.lobby.questsWindow.components
             this.buttonBar.removeEventListener(ButtonEvent.CLICK,this.updateSortedData);
         }
         
-        override public function set availableWidth(param1:Number) : void {
+        override public function set availableWidth(param1:Number) : void
+        {
             super.availableWidth = param1;
             invalidate(INV_AVAILABLE_WIDTH);
         }
         
-        override public function set isReadyForLayout(param1:Boolean) : void {
+        override public function set isReadyForLayout(param1:Boolean) : void
+        {
             super.isReadyForLayout = param1;
             if(param1)
             {
@@ -242,13 +254,15 @@ package net.wg.gui.lobby.questsWindow.components
             }
         }
         
-        private function updateSortedData(param1:Event) : void {
+        private function updateSortedData(param1:Event) : void
+        {
             var _loc2_:Object = this.getSortingObject();
             var _loc3_:Array = this._sortingFunction(_loc2_);
             this.setSortedData(_loc3_);
         }
         
-        private function getSortingObject() : Object {
+        private function getSortingObject() : Object
+        {
             var _loc1_:Number = this.nationFilter.dataProvider[this.nationFilter.selectedIndex].data;
             var _loc2_:String = String(this.tankFilter.dataProvider[this.tankFilter.selectedIndex].data);
             var _loc3_:Number = this.levelFilter.dataProvider[this.levelFilter.selectedIndex].data;
@@ -256,20 +270,20 @@ package net.wg.gui.lobby.questsWindow.components
             var _loc5_:ProfileSortingButton = this.buttonBar.getButtonAt(this.buttonBar.selectedIndex) as ProfileSortingButton;
             var _loc6_:String = _loc5_?_loc5_.sortDirection:SortingInfo.WITHOUT_SORT;
             var _loc7_:String = _loc5_?_loc5_.id:"";
-            var _loc8_:Object = {
-                "nation":_loc1_,
-                "vehType":_loc2_,
-                "level":_loc3_,
-                "cbSelected":_loc4_,
-                "sortingDirection":_loc6_,
-                "buttonID":_loc7_,
-                "isAction":this.data.showNotInHangarCB,
-                "tableID":this._tableID
-            };
+            var _loc8_:Object = {"nation":_loc1_,
+            "vehType":_loc2_,
+            "level":_loc3_,
+            "cbSelected":_loc4_,
+            "sortingDirection":_loc6_,
+            "buttonID":_loc7_,
+            "isAction":this.data.showNotInHangarCB,
+            "tableID":this._tableID
+        };
         return _loc8_;
     }
     
-    private function setSortedData(param1:Array) : void {
+    private function setSortedData(param1:Array) : void
+    {
         var _loc2_:int = param1.length > 0?param1.length:1;
         var _loc3_:Number = VEHICLE_RENDERER_HEIGHT * Math.min(MAX_VEHICLE_RENDERERS,_loc2_);
         var _loc4_:Number = _loc3_ - this.vehiclesList.height;
@@ -279,11 +293,13 @@ package net.wg.gui.lobby.questsWindow.components
         dispatchEvent(new ResizableBlockEvent(ResizableBlockEvent.CONTETNT_WAS_CHANGED,true));
     }
     
-    public function get sortingFunction() : Function {
+    public function get sortingFunction() : Function
+    {
         return this._sortingFunction;
     }
     
-    public function set sortingFunction(param1:Function) : void {
+    public function set sortingFunction(param1:Function) : void
+    {
         this._sortingFunction = param1;
     }
 }

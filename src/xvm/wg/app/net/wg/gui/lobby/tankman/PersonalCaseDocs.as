@@ -18,7 +18,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseDocs extends UIComponentEx implements IViewStackContent
     {
         
-        public function PersonalCaseDocs() {
+        public function PersonalCaseDocs()
+        {
             super();
         }
         
@@ -48,7 +49,8 @@ package net.wg.gui.lobby.tankman
         
         private var selectedIcon:Object = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             if(this.submitBtn)
             {
@@ -81,7 +83,8 @@ package net.wg.gui.lobby.tankman
             this.actionPriceCredits.dispose();
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -107,30 +110,35 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
             this.firstnames.addEventListener(PersonalCaseInputList.NAME_SELECTED,this.firstnames_nameSelectedHandler);
             this.lastnames.addEventListener(PersonalCaseInputList.NAME_SELECTED,this.lastnames_nameSelectedHandler);
         }
         
-        private function cleanTempData() : void {
+        private function cleanTempData() : void
+        {
             this.selectedFirstName = null;
             this.selectedLastName = null;
             this.selectedIcon = null;
         }
         
-        private function updatePortraitsDocs() : void {
+        private function updatePortraitsDocs() : void
+        {
             this.portraitsCarousel.addEventListener(ListEvent.INDEX_CHANGE,this.portraitsCarousel_listIndexChangeHandler);
             this.portraitsCarousel.dataProvider = new DataProvider(this.model.icons);
             this.portraitsCarousel.invalidate(CarouselBase.INIT_CAROUSEL);
         }
         
-        private function updateTextColor() : void {
+        private function updateTextColor() : void
+        {
             var _loc1_:Boolean = this.isHasMoney();
             this.gold.textColor = _loc1_?Currencies.TEXT_COLORS[Currencies.GOLD]:Currencies.TEXT_COLORS[Currencies.ERROR];
             this.credits.textColor = this.model.useOnlyGold?Currencies.TEXT_COLORS[Currencies.CREDITS]:_loc1_?Currencies.TEXT_COLORS[Currencies.CREDITS]:Currencies.TEXT_COLORS[Currencies.ERROR];
@@ -138,7 +146,8 @@ package net.wg.gui.lobby.tankman
             this.actionPriceCredits.textColorType = this.model.useOnlyGold?ActionPrice.TEXT_COLOR_TYPE_ICON:_loc1_?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
         }
         
-        private function isHasMoney() : Boolean {
+        private function isHasMoney() : Boolean
+        {
             if(this.model.useOnlyGold)
             {
                 return this.model.userGold >= this.model.priceOfGold;
@@ -146,11 +155,13 @@ package net.wg.gui.lobby.tankman
             return this.model.userGold >= this.model.priceOfGold || this.model.userCredits >= this.model.priceOfCredits;
         }
         
-        private function checkSelectedItems() : void {
+        private function checkSelectedItems() : void
+        {
             this.submitBtn.enabled = this.checkAllData();
         }
         
-        private function checkAllData() : Boolean {
+        private function checkAllData() : Boolean
+        {
             if(!this.isHasMoney())
             {
                 return false;
@@ -170,7 +181,8 @@ package net.wg.gui.lobby.tankman
             return false;
         }
         
-        private function checkOriginalIcon(param1:String = null) : Boolean {
+        private function checkOriginalIcon(param1:String = null) : Boolean
+        {
             if(this.model.originalIconFile.indexOf(param1,0) == -1)
             {
                 return true;
@@ -178,17 +190,20 @@ package net.wg.gui.lobby.tankman
             return false;
         }
         
-        private function firstnames_nameSelectedHandler(param1:Event) : void {
+        private function firstnames_nameSelectedHandler(param1:Event) : void
+        {
             this.selectedFirstName = this.firstnames.selectedItem;
             this.checkSelectedItems();
         }
         
-        private function lastnames_nameSelectedHandler(param1:Event) : void {
+        private function lastnames_nameSelectedHandler(param1:Event) : void
+        {
             this.selectedLastName = this.lastnames.selectedItem;
             this.checkSelectedItems();
         }
         
-        private function submitBtn_buttonClickHandler(param1:ButtonEvent) : void {
+        private function submitBtn_buttonClickHandler(param1:ButtonEvent) : void
+        {
             var _loc3_:String = null;
             var _loc4_:* = 0;
             var _loc5_:* = 0;
@@ -210,7 +225,8 @@ package net.wg.gui.lobby.tankman
             dispatchEvent(_loc2_);
         }
         
-        private function portraitsCarousel_listIndexChangeHandler(param1:ListEvent) : void {
+        private function portraitsCarousel_listIndexChangeHandler(param1:ListEvent) : void
+        {
             if(param1.itemData == null)
             {
                 return;
@@ -228,11 +244,13 @@ package net.wg.gui.lobby.tankman
             this.checkSelectedItems();
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

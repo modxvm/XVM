@@ -7,7 +7,8 @@ package net.wg.gui.lobby.customization
     public class CamouflageGroupView extends BaseTimedCustomizationGroupView
     {
         
-        public function CamouflageGroupView() {
+        public function CamouflageGroupView()
+        {
             super();
         }
         
@@ -21,11 +22,13 @@ package net.wg.gui.lobby.customization
         
         private var _selectedIndex:int = -1;
         
-        override public function get selectedItemIdx() : int {
+        override public function get selectedItemIdx() : int
+        {
             return this._isIgrPeriod?this._igrSelectedIndex:this._selectedIndex;
         }
         
-        override public function set selectedItemIdx(param1:int) : void {
+        override public function set selectedItemIdx(param1:int) : void
+        {
             if(this._isIgrPeriod)
             {
                 this._igrSelectedIndex = param1;
@@ -36,19 +39,22 @@ package net.wg.gui.lobby.customization
             }
         }
         
-        public function setDefaultLabel(param1:String) : void {
+        public function setDefaultLabel(param1:String) : void
+        {
             this.defaultLbl = param1;
             this.hintLabel.htmlText = this.defaultLbl;
         }
         
-        override protected function handlePeriodDaysItemChange(param1:ListEvent) : void {
+        override protected function handlePeriodDaysItemChange(param1:ListEvent) : void
+        {
             var _loc2_:Object = rentalPackageDP.requestItemAt(param1.index);
             this._isIgrPeriod = (_loc2_) && (_loc2_.isIGR);
             super.handlePeriodDaysItemChange(param1);
             list.selectedIndex = this.selectedItemIdx;
         }
         
-        override protected function handleItemDataChanged(param1:Event = null) : void {
+        override protected function handleItemDataChanged(param1:Event = null) : void
+        {
             var _loc2_:Object = null;
             var _loc3_:CustomizationEvent = null;
             this.hintLabel.htmlText = this.defaultLbl;

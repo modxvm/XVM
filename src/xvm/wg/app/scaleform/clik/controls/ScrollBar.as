@@ -15,7 +15,8 @@ package scaleform.clik.controls
     public class ScrollBar extends ScrollIndicator
     {
         
-        public function ScrollBar() {
+        public function ScrollBar()
+        {
             super();
         }
         
@@ -33,7 +34,8 @@ package scaleform.clik.controls
         
         public var downArrow:Button;
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             super.initialize();
             var _loc1_:Number = rotation;
             rotation = 0;
@@ -45,15 +47,18 @@ package scaleform.clik.controls
             rotation = _loc1_;
         }
         
-        override protected function preInitialize() : void {
+        override protected function preInitialize() : void
+        {
             constraints = new Constraints(this,ConstrainMode.REFLOW);
         }
         
-        override public function get enabled() : Boolean {
+        override public function get enabled() : Boolean
+        {
             return super.enabled;
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             if(this.enabled == param1)
             {
                 return;
@@ -63,11 +68,13 @@ package scaleform.clik.controls
             invalidate(InvalidationType.STATE);
         }
         
-        override public function get position() : Number {
+        override public function get position() : Number
+        {
             return _position;
         }
         
-        override public function set position(param1:Number) : void {
+        override public function set position(param1:Number) : void
+        {
             var param1:Number = Math.round(param1);
             if(param1 == this.position)
             {
@@ -77,11 +84,13 @@ package scaleform.clik.controls
             this.updateScrollTarget();
         }
         
-        public function get trackMode() : String {
+        public function get trackMode() : String
+        {
             return this._trackMode;
         }
         
-        public function set trackMode(param1:String) : void {
+        public function set trackMode(param1:String) : void
+        {
             if(param1 == this._trackMode)
             {
                 return;
@@ -93,15 +102,18 @@ package scaleform.clik.controls
             }
         }
         
-        override public function get availableHeight() : Number {
+        override public function get availableHeight() : Number
+        {
             return track.height - thumb.height + offsetBottom + offsetTop;
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[CLIK ScrollBar " + name + "]";
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             mouseEnabled = mouseChildren = this.enabled;
             tabEnabled = tabChildren = _focusable;
@@ -133,15 +145,18 @@ package scaleform.clik.controls
             track.autoRepeat = this.trackMode == ScrollBarTrackMode.SCROLL_PAGE;
         }
         
-        protected function scrollUp() : void {
+        protected function scrollUp() : void
+        {
             this.position = this.position - _pageScrollSize;
         }
         
-        protected function scrollDown() : void {
+        protected function scrollDown() : void
+        {
             this.position = this.position + _pageScrollSize;
         }
         
-        override protected function drawLayout() : void {
+        override protected function drawLayout() : void
+        {
             var _loc1_:* = NaN;
             thumb.y = track.y - offsetTop;
             if(isHorizontal)
@@ -159,7 +174,8 @@ package scaleform.clik.controls
             }
         }
         
-        override protected function updateThumb() : void {
+        override protected function updateThumb() : void
+        {
             var _loc1_:Number = Math.max(1,_maxPosition - _minPosition + _pageSize);
             var _loc2_:Number = track.height + offsetTop + offsetBottom;
             thumb.height = Math.max(_minThumbSize,Math.min(_loc2_,_pageSize / _loc1_ * _loc2_));
@@ -170,7 +186,8 @@ package scaleform.clik.controls
             this.updateThumbPosition();
         }
         
-        override protected function updateThumbPosition() : void {
+        override protected function updateThumbPosition() : void
+        {
             var _loc1_:Number = (_position - _minPosition) / (_maxPosition - _minPosition);
             var _loc2_:Number = track.y - offsetTop;
             var _loc3_:Number = Math.round(_loc1_ * this.availableHeight + _loc2_);
@@ -190,29 +207,34 @@ package scaleform.clik.controls
             track.enabled = track.mouseEnabled = _loc4_;
         }
         
-        protected function handleUpArrowClick(param1:ButtonEvent) : void {
+        protected function handleUpArrowClick(param1:ButtonEvent) : void
+        {
             if(param1.isRepeat)
             {
                 this.scrollUp();
             }
         }
         
-        protected function handleUpArrowPress(param1:ButtonEvent) : void {
+        protected function handleUpArrowPress(param1:ButtonEvent) : void
+        {
             this.scrollUp();
         }
         
-        protected function handleDownArrowClick(param1:ButtonEvent) : void {
+        protected function handleDownArrowClick(param1:ButtonEvent) : void
+        {
             if(param1.isRepeat)
             {
                 this.scrollDown();
             }
         }
         
-        protected function handleDownArrowPress(param1:ButtonEvent) : void {
+        protected function handleDownArrowPress(param1:ButtonEvent) : void
+        {
             this.scrollDown();
         }
         
-        protected function handleThumbPress(param1:Event) : void {
+        protected function handleThumbPress(param1:Event) : void
+        {
             if(_isDragging)
             {
                 return;
@@ -223,18 +245,21 @@ package scaleform.clik.controls
             this._dragOffset = new Point(0,mouseY - thumb.y);
         }
         
-        protected function doDrag(param1:MouseEvent) : void {
+        protected function doDrag(param1:MouseEvent) : void
+        {
             var _loc2_:Number = (mouseY - this._dragOffset.y - track.y) / this.availableHeight;
             this.position = _minPosition + _loc2_ * (_maxPosition - _minPosition);
         }
         
-        protected function endDrag(param1:MouseEvent) : void {
+        protected function endDrag(param1:MouseEvent) : void
+        {
             stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.doDrag);
             stage.removeEventListener(MouseEvent.MOUSE_UP,this.endDrag);
             _isDragging = false;
         }
         
-        protected function handleTrackPress(param1:MouseEvent) : void {
+        protected function handleTrackPress(param1:MouseEvent) : void
+        {
             var _loc2_:* = NaN;
             if((param1.shiftKey) || this.trackMode == ScrollBarTrackMode.SCROLL_TO_CURSOR)
             {
@@ -256,7 +281,8 @@ package scaleform.clik.controls
             this.position = this.position + (thumb.y < mouseY?this.trackScrollPageSize:-this.trackScrollPageSize);
         }
         
-        protected function handleTrackClick(param1:ButtonEvent) : void {
+        protected function handleTrackClick(param1:ButtonEvent) : void
+        {
             if(param1.isRepeat)
             {
                 if((_isDragging) || this.position == this._trackScrollPosition)
@@ -271,7 +297,8 @@ package scaleform.clik.controls
             }
         }
         
-        protected function updateScrollTarget() : void {
+        protected function updateScrollTarget() : void
+        {
             if(_scrollTarget == null || !this.enabled)
             {
                 return;
@@ -283,15 +310,18 @@ package scaleform.clik.controls
             }
         }
         
-        protected function handleMouseWheel(param1:MouseEvent) : void {
+        protected function handleMouseWheel(param1:MouseEvent) : void
+        {
             this.position = this.position - (param1.delta > 0?1:-1) * _pageScrollSize;
         }
         
-        override protected function changeFocus() : void {
+        override protected function changeFocus() : void
+        {
             thumb.displayFocus = _focused || _displayFocus;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel,false);
             removeEventListener(InputEvent.INPUT,handleInput,false);
             if(this.upArrow)

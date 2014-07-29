@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class StatsStorageMeta extends BaseDAAPIModule
     {
         
-        public function StatsStorageMeta() {
+        public function StatsStorageMeta()
+        {
             super();
         }
     }

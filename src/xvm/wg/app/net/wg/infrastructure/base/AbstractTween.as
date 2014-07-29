@@ -14,7 +14,8 @@ package net.wg.infrastructure.base
     public class AbstractTween extends AbstractTweenMeta implements ITween
     {
         
-        public function AbstractTween() {
+        public function AbstractTween()
+        {
             super();
         }
         
@@ -24,41 +25,49 @@ package net.wg.infrastructure.base
         
         private var _memberData:Object;
         
-        public function getTargetDisplayObject() : DisplayObject {
+        public function getTargetDisplayObject() : DisplayObject
+        {
             return this._props.getTarget();
         }
         
-        public function setHandler(param1:ITweenHandler) : void {
+        public function setHandler(param1:ITweenHandler) : void
+        {
             this._handler = param1;
         }
         
-        public function onAnimComplete() : void {
+        public function onAnimComplete() : void
+        {
             if(this._handler != null)
             {
                 this._handler.onComplete(this);
             }
         }
         
-        public function onAnimStart() : void {
+        public function onAnimStart() : void
+        {
             if(this._handler != null)
             {
                 this._handler.onStart(this);
             }
         }
         
-        public function get memberData() : Object {
+        public function get memberData() : Object
+        {
             return this._memberData;
         }
         
-        public function set memberData(param1:Object) : void {
+        public function set memberData(param1:Object) : void
+        {
             this._memberData = param1;
         }
         
-        public function get props() : ITweenPropertiesVO {
+        public function get props() : ITweenPropertiesVO
+        {
             return this._props;
         }
         
-        public function set props(param1:ITweenPropertiesVO) : void {
+        public function set props(param1:ITweenPropertiesVO) : void
+        {
             var _loc2_:IAssertable = App.utils.asserter;
             _loc2_.assertNotNull(param1,"props in Tween " + Errors.CANT_NULL);
             var _loc3_:DisplayObject = param1.getTarget();
@@ -75,13 +84,15 @@ package net.wg.infrastructure.base
             this._props = param1;
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             initialiazeS(this._props);
             this._props.getTarget().addEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:IAssertable = App.utils.asserter;
             _loc1_.assertNotNull(this._props,"props in Tween " + Errors.CANT_NULL);
             var _loc2_:DisplayObject = this._props.getTarget();
@@ -94,7 +105,8 @@ package net.wg.infrastructure.base
             super.onDispose();
         }
         
-        private function onRemovedFromStage(param1:Event) : void {
+        private function onRemovedFromStage(param1:Event) : void
+        {
             var _loc2_:String = null;
             switch(this._props.getActionAfterRemoveFromStage())
             {
@@ -109,7 +121,8 @@ package net.wg.infrastructure.base
             }
         }
         
-        public function get isOnCodeBased() : Boolean {
+        public function get isOnCodeBased() : Boolean
+        {
             return this.props.getIsOnCodeBased();
         }
     }

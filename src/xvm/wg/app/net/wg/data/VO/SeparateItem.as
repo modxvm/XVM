@@ -6,7 +6,8 @@ package net.wg.data.VO
     public class SeparateItem extends ContextItem
     {
         
-        public function SeparateItem() {
+        public function SeparateItem()
+        {
             super(ContextMenuConstants.SEPARATE,null);
         }
     }

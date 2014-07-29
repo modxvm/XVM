@@ -12,7 +12,8 @@ package net.wg.gui.components.controls
     public class RangeSlider extends Slider
     {
         
-        public function RangeSlider() {
+        public function RangeSlider()
+        {
             super();
             this.leftProgressMask = track["left_progress_mask"];
         }
@@ -51,87 +52,105 @@ package net.wg.gui.components.controls
         
         private var _rightValue:Number = 10;
         
-        public function get divisionPointRenderer() : String {
+        public function get divisionPointRenderer() : String
+        {
             return this._divisionPointRenderer;
         }
         
-        public function set divisionPointRenderer(param1:String) : void {
+        public function set divisionPointRenderer(param1:String) : void
+        {
             this._divisionPointRenderer = param1;
             invalidate(INVALID_DIVISION_POINT_RENDERER);
         }
         
-        public function get rangeMode() : Boolean {
+        public function get rangeMode() : Boolean
+        {
             return this._rangeMode;
         }
         
-        public function set rangeMode(param1:Boolean) : void {
+        public function set rangeMode(param1:Boolean) : void
+        {
             this._rangeMode = param1;
             invalidate(INVALID_MODE);
         }
         
-        public function get divisionStep() : Number {
+        public function get divisionStep() : Number
+        {
             return this._divisionStep;
         }
         
-        public function set divisionStep(param1:Number) : void {
+        public function set divisionStep(param1:Number) : void
+        {
             this._divisionStep = param1;
             invalidate(INVALID_DIVISION_SCALE);
         }
         
-        public function get divisionLabelStep() : Number {
+        public function get divisionLabelStep() : Number
+        {
             return this._divisionLabelStep;
         }
         
-        public function set divisionLabelStep(param1:Number) : void {
+        public function set divisionLabelStep(param1:Number) : void
+        {
             this._divisionLabelStep = param1;
             invalidate(INVALID_DIVISION_SCALE);
         }
         
-        public function get divisionLabelPostfix() : String {
+        public function get divisionLabelPostfix() : String
+        {
             return this._divisionLabelPostfix;
         }
         
-        public function set divisionLabelPostfix(param1:String) : void {
+        public function set divisionLabelPostfix(param1:String) : void
+        {
             this._divisionLabelPostfix = param1;
             invalidate(INVALID_DIVISION_SCALE);
         }
         
-        public function get leftValue() : Number {
+        public function get leftValue() : Number
+        {
             return this._leftValue;
         }
         
-        public function set leftValue(param1:Number) : void {
+        public function set leftValue(param1:Number) : void
+        {
             this._leftValue = param1;
             this.dispatchChangeEvent();
             this.updateRangeThumbs();
         }
         
-        public function get rightValue() : Number {
+        public function get rightValue() : Number
+        {
             return this._rightValue;
         }
         
-        public function set rightValue(param1:Number) : void {
+        public function set rightValue(param1:Number) : void
+        {
             this._rightValue = param1;
             this.dispatchChangeEvent();
             this.updateRangeThumbs();
         }
         
-        public function get minRangeDistance() : Number {
+        public function get minRangeDistance() : Number
+        {
             return this._minRangeDistance;
         }
         
-        public function set minRangeDistance(param1:Number) : void {
+        public function set minRangeDistance(param1:Number) : void
+        {
             this._minRangeDistance = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             track["left_progress_mask"].gotoAndStop(0);
             this.leftThumb.addEventListener(MouseEvent.MOUSE_DOWN,this.beginDrag,false,0,true);
             this.rightThumb.addEventListener(MouseEvent.MOUSE_DOWN,this.beginDrag,false,0,true);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.leftThumb.removeEventListener(MouseEvent.MOUSE_DOWN,this.beginDrag,false);
             this.rightThumb.removeEventListener(MouseEvent.MOUSE_DOWN,this.beginDrag,false);
             this.clearDivisionScale();
@@ -144,7 +163,8 @@ package net.wg.gui.components.controls
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INVALID_MODE))
             {
@@ -160,7 +180,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function trackPress(param1:MouseEvent) : void {
+        override protected function trackPress(param1:MouseEvent) : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
@@ -197,14 +218,16 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function onScrollWheel(param1:MouseEvent) : void {
+        override protected function onScrollWheel(param1:MouseEvent) : void
+        {
             if(!this._rangeMode)
             {
                 super.onScrollWheel(param1);
             }
         }
         
-        override protected function beginDrag(param1:MouseEvent) : void {
+        override protected function beginDrag(param1:MouseEvent) : void
+        {
             var _loc2_:Point = null;
             if(App.utils.commons.isLeftButton(param1))
             {
@@ -217,7 +240,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function doDrag(param1:MouseEvent) : void {
+        override protected function doDrag(param1:MouseEvent) : void
+        {
             var _loc2_:* = NaN;
             if(this._draggingThumb == thumb)
             {
@@ -238,7 +262,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function updateRangeThumbs() : void {
+        protected function updateRangeThumbs() : void
+        {
             var _loc1_:Number = track.width - offsetLeft - offsetRight;
             var _loc2_:Number = _maximum - _minimum;
             var _loc3_:Number = offsetLeft - thumb.width / 2;
@@ -250,24 +275,28 @@ package net.wg.gui.components.controls
             track["progress_mask"].gotoAndStop(Math.round(_loc4_ * track["progress_mask"].totalFrames));
         }
         
-        protected function getValueByPosition(param1:MouseEvent) : Number {
+        protected function getValueByPosition(param1:MouseEvent) : Number
+        {
             var _loc2_:Number = track.width - offsetLeft - offsetRight;
             var _loc3_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
             var _loc4_:Number = _loc3_.x - _dragOffset.x;
             return lockValue((_loc4_ - offsetLeft) / _loc2_ * (_maximum - _minimum) + _minimum);
         }
         
-        override public function set minimum(param1:Number) : void {
+        override public function set minimum(param1:Number) : void
+        {
             super.minimum = param1;
             invalidate(INVALID_RANGE);
         }
         
-        override public function set maximum(param1:Number) : void {
+        override public function set maximum(param1:Number) : void
+        {
             super.maximum = param1;
             invalidate(INVALID_RANGE);
         }
         
-        private function updateDivisionScale() : void {
+        private function updateDivisionScale() : void
+        {
             var _loc1_:SliderKeyPoint = null;
             var _loc8_:* = NaN;
             var _loc9_:* = false;
@@ -291,7 +320,8 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function clearDivisionScale() : void {
+        private function clearDivisionScale() : void
+        {
             var _loc1_:SliderKeyPoint = null;
             while(this.divisionScaleContainer.numChildren)
             {
@@ -301,14 +331,16 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function updateMode() : void {
+        private function updateMode() : void
+        {
             thumb.visible = !this._rangeMode;
             this.leftThumb.visible = this._rangeMode;
             this.rightThumb.visible = this._rangeMode;
             this.leftProgressMask.visible = this._rangeMode;
         }
         
-        private function dispatchChangeEvent() : void {
+        private function dispatchChangeEvent() : void
+        {
             dispatchEvent(new RangeSliderEvent(SliderEvent.VALUE_CHANGE,false,true,_value,this._leftValue,this._rightValue));
         }
     }

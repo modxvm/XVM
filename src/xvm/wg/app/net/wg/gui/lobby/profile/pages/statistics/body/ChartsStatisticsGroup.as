@@ -15,18 +15,21 @@ package net.wg.gui.lobby.profile.pages.statistics.body
     public class ChartsStatisticsGroup extends Group
     {
         
-        public function ChartsStatisticsGroup() {
+        public function ChartsStatisticsGroup()
+        {
             super();
         }
         
-        private static function formTypeChartItem(param1:Object, param2:String) : StatisticChartInfo {
+        private static function formTypeChartItem(param1:Object, param2:String) : StatisticChartInfo
+        {
             var _loc3_:StatisticChartInfo = new StatisticChartInfo();
             _loc3_.xField = param2;
             _loc3_.yField = param1[param2];
             return _loc3_;
         }
         
-        private static function formChartItemProvider(param1:Array) : DataProvider {
+        private static function formChartItemProvider(param1:Array) : DataProvider
+        {
             var _loc3_:StatisticChartInfo = null;
             var _loc5_:Object = null;
             var _loc6_:* = undefined;
@@ -53,7 +56,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
         
         public var levelChart:LevelsStatisticChart;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.typeChart.mainHorizontalAxis.pointClass = AxisPointTypes;
             this.nationChart.mainHorizontalAxis.pointClass = AxisPointNations;
@@ -64,7 +68,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             this.levelChart.mainHorizontalAxis.lineText.text = _loc1_.makeString(PROFILE.SECTION_STATISTICS_CHARTS_BYLEVELLABEL);
         }
         
-        public function setDossierData(param1:Array) : void {
+        public function setDossierData(param1:Array) : void
+        {
             var _loc2_:Vector.<StatisticsBarChart> = new Vector.<StatisticsBarChart>();
             _loc2_.push(this.typeChart);
             _loc2_.push(this.nationChart);
@@ -77,7 +82,8 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.typeChart = null;
             this.nationChart = null;
             this.levelChart = null;

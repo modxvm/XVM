@@ -10,7 +10,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     public class BuildingIndicator extends UIComponentEx implements IBuildingIndicator
     {
         
-        public function BuildingIndicator() {
+        public function BuildingIndicator()
+        {
             super();
             gotoAndPlay("stop");
             this.buildingLevel.mouseEnabled = false;
@@ -31,7 +32,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _labels:IndicatorLabels;
         
-        public function applyVOData(param1:BuildingBaseVO) : void {
+        public function applyVOData(param1:BuildingBaseVO) : void
+        {
             this.hpIndicator.maximum = param1.maxHpValue;
             this.defResIndicator.maximum = param1.maxDefResValue;
             this.setHpValue(param1.hpVal);
@@ -39,7 +41,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.buildingLevel.gotoAndStop(param1.buildingLevel);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.hpIndicator.dispose();
             this.hpIndicator = null;
             this.defResIndicator.dispose();
@@ -49,25 +52,30 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             super.onDispose();
         }
         
-        override protected function addedToStage(param1:Event) : void {
+        override protected function addedToStage(param1:Event) : void
+        {
             super.addedToStage(param1);
         }
         
-        private function setHpValue(param1:int) : void {
+        private function setHpValue(param1:int) : void
+        {
             this.hpIndicator.value = param1;
             this._labels.hpValue.htmlText = App.utils.locale.integer(param1);
         }
         
-        private function setDefResValue(param1:int) : void {
+        private function setDefResValue(param1:int) : void
+        {
             this.defResIndicator.value = param1;
             this._labels.defResValue.htmlText = App.utils.locale.integer(param1);
         }
         
-        public function get labels() : IndicatorLabels {
+        public function get labels() : IndicatorLabels
+        {
             return this._labels;
         }
         
-        public function set labels(param1:IndicatorLabels) : void {
+        public function set labels(param1:IndicatorLabels) : void
+        {
             this._labels = param1;
         }
     }

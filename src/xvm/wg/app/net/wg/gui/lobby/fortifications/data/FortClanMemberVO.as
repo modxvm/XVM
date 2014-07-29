@@ -5,7 +5,8 @@ package net.wg.gui.lobby.fortifications.data
     public class FortClanMemberVO extends DAAPIDataClass
     {
         
-        public function FortClanMemberVO(param1:Object) {
+        public function FortClanMemberVO(param1:Object)
+        {
             super(param1);
         }
         

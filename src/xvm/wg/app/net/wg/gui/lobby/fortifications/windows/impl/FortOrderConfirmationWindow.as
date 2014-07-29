@@ -16,7 +16,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
     public class FortOrderConfirmationWindow extends FortOrderConfirmationWindowMeta implements IFortOrderConfirmationWindowMeta
     {
         
-        public function FortOrderConfirmationWindow() {
+        public function FortOrderConfirmationWindow()
+        {
             super();
             isModal = true;
             isCentered = true;
@@ -49,7 +50,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private var selectedCount:Number = 0;
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             super.setWindow(param1);
             if(param1)
             {
@@ -57,17 +59,20 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        public function as_setData(param1:Object) : void {
+        public function as_setData(param1:Object) : void
+        {
             this.orderInfo = new ConfirmOrderVO(param1);
             invalidate(DATA_INVALID);
         }
         
-        public function as_setSettings(param1:Object) : void {
+        public function as_setSettings(param1:Object) : void
+        {
             this.settings = new ItemDialogSettingsVO(param1);
             invalidate(SETTINGS_INVALID);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             content.dropdownMenu.visible = content.actionPrice.visible = false;
             content.leftIT.iconPosition = content.leftResultIT.iconPosition = TextFieldAutoSize.LEFT;
@@ -78,7 +83,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             content.rightResultIT.textColor = content.rightIT.textColor = PURPLE_COLOR;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.orderInfo)
             {
                 this.orderInfo.dispose();
@@ -92,7 +98,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             super.onDispose();
         }
         
-        override protected function setLabels() : void {
+        override protected function setLabels() : void
+        {
             var _loc1_:ILocale = App.utils.locale;
             content.countLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_COUNTLABEL);
             content.leftLabel.text = _loc1_.makeString(FORTIFICATIONS.ORDERS_ORDERCONFIRMATIONWINDOW_PREPARATIONTIME);
@@ -100,7 +107,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             content.resultLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_TOTALLABEL);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
             var _loc4_:* = NaN;
@@ -174,21 +182,25 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        override protected function selectedCountChangeHandler(param1:IndexEvent) : void {
+        override protected function selectedCountChangeHandler(param1:IndexEvent) : void
+        {
             this.selectedCount = content.nsCount.value;
             invalidate(RESULT_INVALID);
         }
         
-        override protected function onClosingApproved() : void {
+        override protected function onClosingApproved() : void
+        {
             App.eventLogManager.logUIElement(this,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_CLOSE,0);
         }
         
-        override protected function cancelBtnClickHandler(param1:ButtonEvent) : void {
+        override protected function cancelBtnClickHandler(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,this.selectedCount);
             super.cancelBtnClickHandler(param1);
         }
         
-        override protected function submitBtnClickHandler(param1:ButtonEvent) : void {
+        override protected function submitBtnClickHandler(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,this.selectedCount);
             submitS(this.selectedCount);
         }

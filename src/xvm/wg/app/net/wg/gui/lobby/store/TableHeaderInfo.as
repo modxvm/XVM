@@ -6,7 +6,8 @@ package net.wg.gui.lobby.store
     public class TableHeaderInfo extends UIComponent
     {
         
-        public function TableHeaderInfo() {
+        public function TableHeaderInfo()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.lobby.store
         
         public var textField:TextField = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.textField.text = MENU.SHOP_TABLE_HEADER_PRICE;
         }

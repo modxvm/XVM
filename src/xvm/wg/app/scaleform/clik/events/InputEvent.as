@@ -6,7 +6,8 @@ package scaleform.clik.events
     public class InputEvent extends Event
     {
         
-        public function InputEvent(param1:String, param2:InputDetails) {
+        public function InputEvent(param1:String, param2:InputDetails)
+        {
             super(param1,true,true);
             this.details = param2;
         }
@@ -15,22 +16,26 @@ package scaleform.clik.events
         
         public var details:InputDetails;
         
-        public function get handled() : Boolean {
+        public function get handled() : Boolean
+        {
             return isDefaultPrevented();
         }
         
-        public function set handled(param1:Boolean) : void {
+        public function set handled(param1:Boolean) : void
+        {
             if(param1)
             {
                 preventDefault();
             }
         }
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new InputEvent(type,this.details);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return formatToString("InputEvent","type","details");
         }
     }

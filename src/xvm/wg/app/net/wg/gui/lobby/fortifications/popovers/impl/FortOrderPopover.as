@@ -23,7 +23,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     public class FortOrderPopover extends FortOrderPopoverMeta implements IFortOrderPopoverMeta
     {
         
-        public function FortOrderPopover() {
+        public function FortOrderPopover()
+        {
             super();
             this.useOrderBtn.UIID = 96;
         }
@@ -40,11 +41,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private static var DISABLED_ALPHA:Number = 0.5;
         
-        private static function hideTooltip(param1:MouseEvent) : void {
+        private static function hideTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private static function showAlertTooltip(param1:MouseEvent) : void {
+        private static function showAlertTooltip(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE);
         }
         
@@ -76,7 +79,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var _cooldownPeriod:Number = 0;
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             if((this.useOrderBtn.visible) && (this.useOrderBtn.enabled))
             {
@@ -93,7 +97,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.useOrderBtn.visible = false;
             this.useOrderBtn.label = FORTIFICATIONS.ORDERS_ORDERPOPOVER_USEORDER;
@@ -107,32 +112,38 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.alertIcon.addEventListener(MouseEvent.MOUSE_OUT,hideTooltip);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
         }
         
-        override protected function getKeyPointPadding() : TwoDimensionalPadding {
+        override protected function getKeyPointPadding() : TwoDimensionalPadding
+        {
             var _loc1_:TwoDimensionalPadding = super.getKeyPointPadding();
             _loc1_.top = new Point(-5,_loc1_.top.y);
             return _loc1_;
         }
         
-        override protected function setInitData(param1:OrderPopoverVO) : void {
+        override protected function setInitData(param1:OrderPopoverVO) : void
+        {
             this._data = param1;
             invalidateData();
         }
         
-        public function as_disableOrder(param1:Boolean) : void {
+        public function as_disableOrder(param1:Boolean) : void
+        {
             this._isOrderDisabled = param1;
             invalidate(INV_DISABLE_BTN);
         }
         
-        override protected function initLayout() : void {
+        override protected function initLayout() : void
+        {
             popoverLayout.preferredLayout = PopOverConst.ARROW_BOTTOM;
             super.initLayout();
         }
         
-        private function startCooldownAnimation() : void {
+        private function startCooldownAnimation() : void
+        {
             App.utils.scheduler.cancelTask(this.updateCooldonwAnimation);
             var _loc1_:Number = this._data.leftTime / this._data.effectTime;
             var _loc2_:int = Math.round(_loc1_ * this.durationProgress.totalFrames);
@@ -140,7 +151,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             App.utils.scheduler.scheduleTask(this.updateCooldonwAnimation,this._cooldownPeriod);
         }
         
-        private function updateCooldonwAnimation() : void {
+        private function updateCooldonwAnimation() : void
+        {
             var _loc1_:Number = getLeftTimeS();
             this.timeLeftTF.htmlText = getLeftTimeStrS();
             if(_loc1_ > 0)
@@ -154,12 +166,14 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
         }
         
-        override public function set wrapper(param1:IWrapper) : void {
+        override public function set wrapper(param1:IWrapper) : void
+        {
             super.wrapper = param1;
             PopOver(param1).isCloseBtnVisible = true;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             if((isInvalid(InvalidationType.DATA)) && (this._data))
@@ -227,13 +241,15 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             super.draw();
         }
         
-        private function clearCooldown() : void {
+        private function clearCooldown() : void
+        {
             App.utils.scheduler.cancelTask(this.updateCooldonwAnimation);
             this.durationProgress.visible = false;
             this._cooldownPeriod = 0;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             App.utils.scheduler.cancelTask(this.updateCooldonwAnimation);
             this.bigIcon = null;
             this.titleTF = null;
@@ -279,16 +295,19 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             super.onDispose();
         }
         
-        private function createOrderClickHandler(param1:ButtonEvent) : void {
+        private function createOrderClickHandler(param1:ButtonEvent) : void
+        {
             requestForCreateOrderS();
         }
         
-        private function useOrderClickHandler(param1:ButtonEvent) : void {
+        private function useOrderClickHandler(param1:ButtonEvent) : void
+        {
             App.eventLogManager.logUIEvent(param1,0);
             requestForUseOrderS();
         }
         
-        private function showDurationTooltip(param1:MouseEvent) : void {
+        private function showDurationTooltip(param1:MouseEvent) : void
+        {
             var _loc2_:String = getLeftTimeTooltipS();
             if(_loc2_)
             {
@@ -296,7 +315,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
         }
         
-        private function showUseBtnTooltip(param1:MouseEvent) : void {
+        private function showUseBtnTooltip(param1:MouseEvent) : void
+        {
             var _loc2_:String = null;
             var _loc3_:String = null;
             if(this._data)

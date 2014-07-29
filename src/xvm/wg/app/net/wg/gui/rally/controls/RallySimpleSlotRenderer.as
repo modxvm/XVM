@@ -20,7 +20,8 @@ package net.wg.gui.rally.controls
     public class RallySimpleSlotRenderer extends UIComponent
     {
         
-        public function RallySimpleSlotRenderer() {
+        public function RallySimpleSlotRenderer()
+        {
             super();
         }
         
@@ -48,44 +49,60 @@ package net.wg.gui.rally.controls
         
         private var _helper:ISlotRendererHelper;
         
-        public function get index() : int {
+        public function get index() : int
+        {
             return this._index;
         }
         
-        public function set index(param1:int) : void {
+        public function set index(param1:int) : void
+        {
             this._index = param1;
         }
         
-        public function get slotData() : IRallySlotVO {
+        public function get slotData() : IRallySlotVO
+        {
             return this._slotData;
         }
         
-        public function set slotData(param1:IRallySlotVO) : void {
+        public function set slotData(param1:IRallySlotVO) : void
+        {
             this._slotData = param1;
             this.updateComponents();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
-            if((isInvalid(UPDATE_SLOT_DATA)) && (this._slotData))
+            if(isInvalid(UPDATE_SLOT_DATA))
             {
-                App.utils.asserter.assertNotNull(this.vehicleBtn,"\"vehicleBtn\" in " + name + Errors.CANT_NULL);
-                this.updateComponents();
+                if(this._slotData != null)
+                {
+                    App.utils.asserter.assertNotNull(this.vehicleBtn,"\"vehicleBtn\" in " + name + Errors.CANT_NULL);
+                    this.updateComponents();
+                }
+                else
+                {
+                    this.initControlsState();
+                }
             }
         }
         
-        public function cooldown(param1:Boolean) : void {
+        public function cooldown(param1:Boolean) : void
+        {
         }
         
-        public function get helper() : ISlotRendererHelper {
+        public function get helper() : ISlotRendererHelper
+        {
             return this._helper;
         }
         
-        public function set helper(param1:ISlotRendererHelper) : void {
+        public function set helper(param1:ISlotRendererHelper) : void
+        {
             this._helper = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             var _loc1_:Array = null;
             super.configUI();
             if(this.orderNo)
@@ -117,7 +134,8 @@ package net.wg.gui.rally.controls
             this.initControlsState();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this.vehicleBtn)
             {
                 this.vehicleBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onMedallionRollOver);
@@ -150,16 +168,19 @@ package net.wg.gui.rally.controls
             super.onDispose();
         }
         
-        protected function initControlsState() : void {
+        protected function initControlsState() : void
+        {
             this._helper.initControlsState(this);
         }
         
-        protected function updateComponents() : void {
+        protected function updateComponents() : void
+        {
             this.initControlsState();
             this._helper.updateComponents(this,this._slotData);
         }
         
-        protected function tooltipSubscribe(param1:Array, param2:Boolean = true) : void {
+        protected function tooltipSubscribe(param1:Array, param2:Boolean = true) : void
+        {
             var _loc3_:DisplayObject = null;
             for each(_loc3_ in param1)
             {
@@ -179,7 +200,8 @@ package net.wg.gui.rally.controls
             }
         }
         
-        protected function onContextMenuAreaClick(param1:MouseEvent) : void {
+        protected function onContextMenuAreaClick(param1:MouseEvent) : void
+        {
             var _loc2_:ExtendedUserVO = null;
             var _loc3_:PlayerCIGenerator = null;
             if(App.utils.commons.isRightButton(param1))
@@ -193,19 +215,23 @@ package net.wg.gui.rally.controls
             }
         }
         
-        protected function onControlRollOver(param1:MouseEvent) : void {
+        protected function onControlRollOver(param1:MouseEvent) : void
+        {
             this._helper.onControlRollOver(param1.currentTarget as InteractiveObject,this,this._slotData);
         }
         
-        protected function onMedallionRollOver(param1:RallyViewsEvent) : void {
+        protected function onMedallionRollOver(param1:RallyViewsEvent) : void
+        {
             this._helper.onControlRollOver(InteractiveObject(this.vehicleBtn),this,this._slotData,param1.data);
         }
         
-        protected function onTakePlaceClick(param1:ButtonEvent) : void {
+        protected function onTakePlaceClick(param1:ButtonEvent) : void
+        {
             dispatchEvent(new RallyViewsEvent(RallyViewsEvent.ASSIGN_SLOT_REQUEST,this.index));
         }
         
-        protected function onControlRollOut(param1:Event) : void {
+        protected function onControlRollOut(param1:Event) : void
+        {
             App.toolTipMgr.hide();
         }
     }

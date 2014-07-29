@@ -10,7 +10,8 @@ package net.wg.gui.cyberSport.controls
     public class RangeViewComponent extends UIComponent
     {
         
-        public function RangeViewComponent() {
+        public function RangeViewComponent()
+        {
             super();
             this.mouseChildren = false;
             this.mouseEnabled = false;
@@ -28,7 +29,8 @@ package net.wg.gui.cyberSport.controls
         
         private var lastPadding:int = 0;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.removeChild(this.container);
             if(this.model)
@@ -37,7 +39,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        public function setData(param1:SettingRosterVO) : void {
+        public function setData(param1:SettingRosterVO) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -46,7 +49,8 @@ package net.wg.gui.cyberSport.controls
             invalidate(UPDATE_ROSTER);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(UPDATE_ROSTER)) && (this.model))
             {
@@ -55,14 +59,16 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function cleanContainer() : void {
+        private function cleanContainer() : void
+        {
             while(this.container.numChildren > 0)
             {
                 this.container.removeChildAt(0);
             }
         }
         
-        private function initializeComponents() : void {
+        private function initializeComponents() : void
+        {
             this.componentDecorator(this.model.nationIDRange,CYBER_SPORT_ALIASES.ROSTER_FLAGS,[this.model.vTypeRange,this.model.vLevelRange],0);
             this.componentDecorator(this.model.vTypeRange,CYBER_SPORT_ALIASES.ROSTER_TYPES,[this.model.vLevelRange],-2);
             if((this.checkArrayRosters(this.model.vLevelRange)) && this.model.vLevelRange.length > 1)
@@ -86,7 +92,8 @@ package net.wg.gui.cyberSport.controls
             this.container.x = Math.round((this._width - this.container.width) / 2);
         }
         
-        private function componentDecorator(param1:Array = null, param2:String = null, param3:Array = null, param4:int = 0) : void {
+        private function componentDecorator(param1:Array = null, param2:String = null, param3:Array = null, param4:int = 0) : void
+        {
             if(!this.checkArrayRosters(param1) && !(param2 == CYBER_SPORT_ALIASES.ROSTER_LEVEL_SEPARATOR))
             {
                 return;
@@ -109,7 +116,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function classInitializator(param1:Array = null, param2:String = null, param3:int = 0) : void {
+        private function classInitializator(param1:Array = null, param2:String = null, param3:int = 0) : void
+        {
             var _loc4_:MovieClip = null;
             var _loc5_:uint = 0;
             var _loc6_:* = 0;
@@ -134,7 +142,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function setComponentPosition(param1:DisplayObject, param2:int = 0) : void {
+        private function setComponentPosition(param1:DisplayObject, param2:int = 0) : void
+        {
             var _loc3_:DisplayObject = null;
             if(this.container.numChildren > 1)
             {
@@ -152,18 +161,21 @@ package net.wg.gui.cyberSport.controls
             param1.y = Math.round((this.height - param1.height) / 2);
         }
         
-        private function checkArrayRosters(param1:Array) : Boolean {
+        private function checkArrayRosters(param1:Array) : Boolean
+        {
             return (param1) && param1.length > 0;
         }
         
-        private function createSeparator() : void {
+        private function createSeparator() : void
+        {
             var _loc1_:MovieClip = this.classFactory(CYBER_SPORT_ALIASES.ROSTER_SEPARATOR);
             this.container.addChild(_loc1_);
             this.setComponentPosition(_loc1_,PADDING_SEPARATOR);
             this.lastPadding = PADDING_SEPARATOR;
         }
         
-        private function classFactory(param1:String) : * {
+        private function classFactory(param1:String) : *
+        {
             return App.utils.classFactory.getComponent(param1,MovieClip);
         }
     }

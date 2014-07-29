@@ -61,7 +61,8 @@ package net.wg.app.impl
     public final class Application extends AbstractApplication
     {
         
-        public function Application() {
+        public function Application()
+        {
             this.browserBgClassValue = Application_browserBgClassValue;
             this._librariesList = Vector.<String>(["windows.swf","popovers.swf","animations.swf"]);
             super();
@@ -96,29 +97,35 @@ package net.wg.app.impl
         
         private var _waitingCtnr:ManagedContainer;
         
-        public function as_traceObject(param1:*) : void {
+        public function as_traceObject(param1:*) : void
+        {
             DebugUtils.LOG_DEBUG("traceObject",param1);
         }
         
-        override public function get browserBgClass() : Class {
+        override public function get browserBgClass() : Class
+        {
             return this.browserBgClassValue;
         }
         
-        override public function get systemMessages() : DisplayObjectContainer {
+        override public function get systemMessages() : DisplayObjectContainer
+        {
             return this._systemMessages;
         }
         
-        override protected function getNewUtils() : IUtils {
+        override protected function getNewUtils() : IUtils
+        {
             var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new Locale(),new WGJSON(),new HelpLayout(),new ClassFactory(),new PopupManager(),new Commons(),new FocusHandlerEx(),new EventCollector(),new IME(),new VOManager(),new Icons(),new StyleSheetManager(),new TweenAnimator(),new AnimBuilder());
             _loc1_.setNations(new Nations(_loc1_));
             return _loc1_;
         }
         
-        override protected function getNewTweenManager() : ITweenManager {
+        override protected function getNewTweenManager() : ITweenManager
+        {
             return new TweenManager();
         }
         
-        override protected function createContainers() : void {
+        override protected function createContainers() : void
+        {
             this._libraries = new MovieClip();
             this._serviceLayout = new ManagedContainer();
             this._serviceLayout.type = ContainerTypes.SERVICE_LAYOUT;
@@ -137,7 +144,8 @@ package net.wg.app.impl
             super.createContainers();
         }
         
-        override protected function disposeContainers() : void {
+        override protected function disposeContainers() : void
+        {
             super.disposeContainers();
             this._views.dispose();
             this._views = null;
@@ -158,88 +166,108 @@ package net.wg.app.impl
             this._waitingCtnr = null;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
         }
         
-        override protected function getContainers() : Vector.<DisplayObject> {
+        override protected function getContainers() : Vector.<DisplayObject>
+        {
             var _loc1_:Vector.<DisplayObject> = new <DisplayObject>[this._libraries,this._views,this._windows,this._systemMessages,this._browser,this._dialogs,utils.IME.getContainer(),this._toolTips,this._serviceLayout,this._cursorCtnr,this._waitingCtnr];
             return _loc1_;
         }
         
-        override protected function getNewEnvironment() : IEnvironmentManager {
+        override protected function getNewEnvironment() : IEnvironmentManager
+        {
             return EnvironmentManager.getInstance();
         }
         
-        override protected function getNewSoundManager() : ISoundManager {
+        override protected function getNewSoundManager() : ISoundManager
+        {
             return new SoundManager();
         }
         
-        override protected function getNewTooltipManager() : ITooltipMgr {
+        override protected function getNewTooltipManager() : ITooltipMgr
+        {
             return new ToolTipManager(this._toolTips);
         }
         
-        override protected function getNewContainerManager() : IContainerManager {
+        override protected function getNewContainerManager() : IContainerManager
+        {
             return new ContainerManager();
         }
         
-        override protected function getNewColorSchemeManager() : IColorSchemeManager {
+        override protected function getNewColorSchemeManager() : IColorSchemeManager
+        {
             return new ColorSchemeManager();
         }
         
-        override protected function getNewContextMenuManager() : IContextMenuManager {
+        override protected function getNewContextMenuManager() : IContextMenuManager
+        {
             return new ContextMenuManager();
         }
         
-        override protected function getNewPopoverManager() : IPopoverManager {
+        override protected function getNewPopoverManager() : IPopoverManager
+        {
             return new PopoverManager(stage);
         }
         
-        override protected function getNewClassManager() : Object {
+        override protected function getNewClassManager() : Object
+        {
             return new ClassManager();
         }
         
-        override protected function getNewGuiItemsManager() : IGuiItemsManager {
+        override protected function getNewGuiItemsManager() : IGuiItemsManager
+        {
             return new GuiItemsManager();
         }
         
-        override protected function getNewVoiceChatManager() : IVoiceChatManager {
+        override protected function getNewVoiceChatManager() : IVoiceChatManager
+        {
             return new VoiceChatManager();
         }
         
-        override protected function getNewGameInputManager() : IGameInputManager {
+        override protected function getNewGameInputManager() : IGameInputManager
+        {
             return new GameInputManager();
         }
         
-        override protected function getEventLogManager() : IEventLogManager {
+        override protected function getEventLogManager() : IEventLogManager
+        {
             return new EventLogManager();
         }
         
-        override protected function onAfterAppConfiguring() : void {
+        override protected function onAfterAppConfiguring() : void
+        {
             super.onAfterAppConfiguring();
             libraryLoader.load(this._librariesList);
         }
         
-        override protected function onBeforeAppConfiguring() : void {
+        override protected function onBeforeAppConfiguring() : void
+        {
             super.onBeforeAppConfiguring();
             libraryLoader.init(this._libraries);
         }
         
-        override protected function onPopUpManagerInit() : void {
+        override protected function onPopUpManagerInit() : void
+        {
             super.onPopUpManagerInit();
             addChildAt(utils.popupMgr.popupCanvas,this.getTooltipsLayerIndex());
         }
         
-        override protected function getRegCmdName() : String {
+        override protected function getRegCmdName() : String
+        {
             return APP_REG_CMD;
         }
         
-        override protected function initStage(param1:Event = null) : void {
+        override protected function initStage(param1:Event = null) : void
+        {
             gameInputMgr.initStage(this.stage);
             super.initStage(param1);
         }
         
-        private function getTooltipsLayerIndex() : Number {
+        private function getTooltipsLayerIndex() : Number
+        {
             return getChildIndex(this._toolTips);
         }
     }

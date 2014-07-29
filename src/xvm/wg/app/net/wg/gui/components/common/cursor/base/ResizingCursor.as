@@ -10,13 +10,15 @@ package net.wg.gui.components.common.cursor.base
     public class ResizingCursor extends BaseCursor
     {
         
-        public function ResizingCursor() {
+        public function ResizingCursor()
+        {
             super();
         }
         
         private var _isOnResizing:Boolean = false;
         
-        public function useResizeCursor(param1:InteractiveObject) : void {
+        public function useResizeCursor(param1:InteractiveObject) : void
+        {
             assertNotNull(param1,"window" + Errors.CANT_NULL);
             param1.addEventListener(MouseEvent.ROLL_OVER,this.onResizableObjectRollOver,false,0,true);
             param1.addEventListener(MouseEvent.MOUSE_DOWN,this.onResizableObjectMouseDn,false,0,true);
@@ -26,7 +28,8 @@ package net.wg.gui.components.common.cursor.base
             }
         }
         
-        public function unUseResizeCursor(param1:InteractiveObject) : void {
+        public function unUseResizeCursor(param1:InteractiveObject) : void
+        {
             assertNotNull(param1,"window" + Errors.CANT_NULL);
             param1.removeEventListener(MouseEvent.ROLL_OVER,this.onResizableObjectRollOver);
             param1.removeEventListener(MouseEvent.MOUSE_DOWN,this.onResizableObjectMouseDn);
@@ -36,15 +39,18 @@ package net.wg.gui.components.common.cursor.base
             }
         }
         
-        override protected function cursorIsFree() : Boolean {
+        override protected function cursorIsFree() : Boolean
+        {
             return !this._isOnResizing;
         }
         
-        private function onResizableObjectRollOver(param1:MouseEvent) : void {
+        private function onResizableObjectRollOver(param1:MouseEvent) : void
+        {
             setCursor(Cursors.RESIZE);
         }
         
-        private function onResizableObjectMouseDn(param1:MouseEvent) : void {
+        private function onResizableObjectMouseDn(param1:MouseEvent) : void
+        {
             if(this.isLeftButton(param1))
             {
                 stage.addEventListener(MouseEvent.MOUSE_UP,this.onResizableObjectMouseUp);
@@ -52,21 +58,25 @@ package net.wg.gui.components.common.cursor.base
             }
         }
         
-        protected final function isLeftButton(param1:MouseEvent) : Boolean {
+        protected final function isLeftButton(param1:MouseEvent) : Boolean
+        {
             return App.utils.commons.isLeftButton(param1);
         }
         
-        private function onResizableObjectMouseUp(param1:MouseEvent) : void {
+        private function onResizableObjectMouseUp(param1:MouseEvent) : void
+        {
             stage.removeEventListener(MouseEvent.MOUSE_UP,this.onResizableObjectMouseUp);
             this.setResizing(false);
         }
         
-        private function onBeforeResizableObjDispose(param1:LifeCycleEvent) : void {
+        private function onBeforeResizableObjDispose(param1:LifeCycleEvent) : void
+        {
             var _loc2_:InteractiveObject = InteractiveObject(param1.target);
             this.unUseResizeCursor(_loc2_);
         }
         
-        private function setResizing(param1:Boolean) : void {
+        private function setResizing(param1:Boolean) : void
+        {
             if(param1 != this._isOnResizing)
             {
                 this._isOnResizing = param1;

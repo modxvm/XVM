@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class MinimapEntityMeta extends BaseDAAPIComponent
     {
         
-        public function MinimapEntityMeta() {
+        public function MinimapEntityMeta()
+        {
             super();
         }
     }

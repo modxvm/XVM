@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class FortBattleRoomWindowMeta extends BaseRallyMainWindow
     {
         
-        public function FortBattleRoomWindowMeta() {
+        public function FortBattleRoomWindowMeta()
+        {
             super();
         }
     }

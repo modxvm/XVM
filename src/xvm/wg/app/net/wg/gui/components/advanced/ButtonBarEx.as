@@ -16,7 +16,8 @@ package net.wg.gui.components.advanced
     public class ButtonBarEx extends ButtonBar implements IGroupedControl
     {
         
-        public function ButtonBarEx() {
+        public function ButtonBarEx()
+        {
             super();
         }
         
@@ -26,16 +27,19 @@ package net.wg.gui.components.advanced
         
         private var _paddingHorizontal:Number = 10;
         
-        public function get paddingHorizontal() : Number {
+        public function get paddingHorizontal() : Number
+        {
             return this._paddingHorizontal;
         }
         
-        public function set paddingHorizontal(param1:Number) : void {
+        public function set paddingHorizontal(param1:Number) : void
+        {
             this._paddingHorizontal = param1;
             invalidate(InvalidationType.SETTINGS);
         }
         
-        override protected function setupRenderer(param1:Button, param2:uint) : void {
+        override protected function setupRenderer(param1:Button, param2:uint) : void
+        {
             var _loc3_:SoundButtonEx = null;
             super.setupRenderer(param1,param2);
             param1.autoSize = this.autoSize;
@@ -46,7 +50,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function get selectedRenderer() : IListItemRenderer {
+        public function get selectedRenderer() : IListItemRenderer
+        {
             if(_selectedIndex >= 0)
             {
                 return _renderers[_selectedIndex];
@@ -54,11 +59,13 @@ package net.wg.gui.components.advanced
             return null;
         }
         
-        override public function get data() : Object {
+        override public function get data() : Object
+        {
             return selectedItem;
         }
         
-        public function disposeRenderers() : void {
+        public function disposeRenderers() : void
+        {
             var _loc2_:* = NaN;
             var _loc3_:Button = null;
             var _loc4_:IDisposable = null;
@@ -94,7 +101,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             var _loc6_:* = NaN;
             if(param1.handled)
             {
@@ -158,7 +166,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        protected function getNextEnabledBtnIndex(param1:int, param2:int) : int {
+        protected function getNextEnabledBtnIndex(param1:int, param2:int) : int
+        {
             var _loc5_:Button = null;
             var _loc6_:* = 0;
             var _loc7_:* = false;
@@ -226,12 +235,14 @@ package net.wg.gui.components.advanced
             return _loc4_;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.disposeRenderers();
             super.onDispose();
         }
         
-        override protected function populateRendererData(param1:Button, param2:uint) : void {
+        override protected function populateRendererData(param1:Button, param2:uint) : void
+        {
             var _loc3_:Object = _dataProvider.requestItemAt(param2);
             if((param1.hasOwnProperty("tooltip")) && (_loc3_) && (_loc3_.hasOwnProperty("tooltip")))
             {
@@ -240,7 +251,8 @@ package net.wg.gui.components.advanced
             super.populateRendererData(param1,param2);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ButtonBarEx " + name + "]";
         }
     }

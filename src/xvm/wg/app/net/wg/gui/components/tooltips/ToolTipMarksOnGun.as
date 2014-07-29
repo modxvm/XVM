@@ -11,11 +11,13 @@ package net.wg.gui.components.tooltips
     public class ToolTipMarksOnGun extends ToolTipAchievement
     {
         
-        public function ToolTipMarksOnGun() {
+        public function ToolTipMarksOnGun()
+        {
             super();
         }
         
-        override protected function getClassInfoText(param1:Number, param2:String, param3:Array) : String {
+        override protected function getClassInfoText(param1:Number, param2:String, param3:Array) : String
+        {
             if(param2 != "")
             {
                 return Utils.instance.htmlWrapper(param2,Utils.instance.COLOR_NORMAL,12,"$TextFont");
@@ -23,7 +25,8 @@ package net.wg.gui.components.tooltips
             return "";
         }
         
-        override protected function applyClassParams(param1:AchievementVO, param2:Number) : void {
+        override protected function applyClassParams(param1:AchievementVO, param2:Number) : void
+        {
             var _loc4_:ToolTipBlockVO = null;
             var _loc7_:ToolTipBlockResultVO = null;
             var _loc8_:String = null;
@@ -54,18 +57,21 @@ package net.wg.gui.components.tooltips
             leftPartMaxW = _loc7_.leftPartMaxW > leftPartMaxW?_loc7_.leftPartMaxW:leftPartMaxW;
         }
         
-        override protected function applyDescriptionParams(param1:String, param2:Number, param3:Number) : void {
+        override protected function applyDescriptionParams(param1:String, param2:Number, param3:Number) : void
+        {
             var _loc4_:ILocale = App.utils.locale;
             var _loc5_:String = _loc4_.makeString(ACHIEVEMENTS.MARKSONGUNHEADER);
             _loc5_ = "<br/><br/>" + Utils.instance.htmlWrapper(_loc5_,Utils.instance.COLOR_NORMAL,14,"$TitleFont",true);
             super.applyDescriptionParams(param1 + _loc5_,param2,param3);
         }
         
-        override protected function getInfoCounter(param1:String, param2:Number, param3:String, param4:String) : ICounterComponent {
+        override protected function getInfoCounter(param1:String, param2:Number, param3:String, param4:String) : ICounterComponent
+        {
             return null;
         }
         
-        override protected function getNotAvailableText() : String {
+        override protected function getNotAvailableText() : String
+        {
             return TOOLTIPS.ACHIEVEMENT_MARKSONGUN_NOTINDOSSIER;
         }
     }

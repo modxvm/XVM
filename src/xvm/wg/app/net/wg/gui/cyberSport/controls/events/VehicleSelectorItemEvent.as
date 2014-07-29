@@ -6,7 +6,8 @@ package net.wg.gui.cyberSport.controls.events
     public class VehicleSelectorItemEvent extends Event
     {
         
-        public function VehicleSelectorItemEvent(param1:String, param2:VehicleSelectorItemVO, param3:Boolean = false, param4:Boolean = false, param5:Boolean = false) {
+        public function VehicleSelectorItemEvent(param1:String, param2:VehicleSelectorItemVO, param3:Boolean = false, param4:Boolean = false, param5:Boolean = false)
+        {
             super(param1,param3,param4);
             this.data = param2;
             this.forceSelect = param5;

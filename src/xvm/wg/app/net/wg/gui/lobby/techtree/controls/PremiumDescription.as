@@ -12,7 +12,8 @@ package net.wg.gui.lobby.techtree.controls
     public class PremiumDescription extends UIComponent
     {
         
-        public function PremiumDescription() {
+        public function PremiumDescription()
+        {
             super();
             this.textFormat = new TextFormat();
             this.textFormat.align = TextFormatAlign.LEFT;
@@ -35,7 +36,8 @@ package net.wg.gui.lobby.techtree.controls
         
         public var typeIcon:MovieClip;
         
-        public function setData(param1:ExtraInformation) : void {
+        public function setData(param1:ExtraInformation) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -44,11 +46,13 @@ package net.wg.gui.lobby.techtree.controls
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(!(this._data == null) && (isInvalid(InvalidationType.DATA)))
             {
                 if(this.titleField != null)

@@ -5,19 +5,23 @@ package net.wg.gui.components.tooltips.helpers
     public class TankTypeIco extends UIComponent
     {
         
-        public function TankTypeIco() {
+        public function TankTypeIco()
+        {
             super();
             stop();
         }
         
         private var _type:String = null;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             gotoAndStop(1);
+            this._labelHash;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(_labelHash[this.type])
             {
@@ -25,11 +29,13 @@ package net.wg.gui.components.tooltips.helpers
             }
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function set type(param1:String) : void {
+        public function set type(param1:String) : void
+        {
             this._type = param1;
             invalidate();
         }

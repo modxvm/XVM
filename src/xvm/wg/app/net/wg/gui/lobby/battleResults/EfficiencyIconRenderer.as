@@ -7,7 +7,8 @@ package net.wg.gui.lobby.battleResults
     public class EfficiencyIconRenderer extends UIComponent
     {
         
-        public function EfficiencyIconRenderer() {
+        public function EfficiencyIconRenderer()
+        {
             super();
             buttonMode = true;
         }
@@ -42,39 +43,46 @@ package net.wg.gui.lobby.battleResults
         
         public var iconLabelMc:MovieClip;
         
-        public function get kind() : String {
+        public function get kind() : String
+        {
             return this._kind;
         }
         
-        public function set kind(param1:String) : void {
+        public function set kind(param1:String) : void
+        {
             this._kind = param1;
             this._kindDirty = true;
             invalidate();
         }
         
-        public function get value() : Number {
+        public function get value() : Number
+        {
             return this._value;
         }
         
-        public function set value(param1:Number) : void {
+        public function set value(param1:Number) : void
+        {
             this._value = param1;
             this._valueDirty = true;
             invalidate();
         }
         
-        override public function set enabled(param1:Boolean) : void {
+        override public function set enabled(param1:Boolean) : void
+        {
             this._disabledDirty = true;
             super.enabled = param1;
             mouseEnabled = true;
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             mouseChildren = false;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:ColorMatrixFilter = null;
             var _loc2_:Array = null;
             var _loc3_:Array = null;

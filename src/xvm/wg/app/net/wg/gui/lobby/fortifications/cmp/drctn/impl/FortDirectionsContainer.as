@@ -13,7 +13,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
     public class FortDirectionsContainer extends UIComponentEx implements IFortDirectionsContainer
     {
         
-        public function FortDirectionsContainer() {
+        public function FortDirectionsContainer()
+        {
             super();
             this.directions = Vector.<BuildingDirection>([this.direction1,this.direction2,this.direction3,this.direction4]);
         }
@@ -30,7 +31,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         
         private var isInOpenDirMode:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             if(this.direction1)
             {
@@ -50,11 +52,13 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             }
         }
         
-        public function update(param1:Vector.<BuildingVO>) : void {
+        public function update(param1:Vector.<BuildingVO>) : void
+        {
             this.updateDirections(param1,this.directions);
         }
         
-        protected function updateDirections(param1:Vector.<BuildingVO>, param2:Vector.<BuildingDirection>) : void {
+        protected function updateDirections(param1:Vector.<BuildingVO>, param2:Vector.<BuildingDirection>) : void
+        {
             var _loc4_:* = 0;
             var _loc5_:BuildingVO = null;
             var _loc11_:BuildingDirection = null;
@@ -86,7 +90,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             }
         }
         
-        public function updateTransportMode(param1:Boolean, param2:Boolean) : void {
+        public function updateTransportMode(param1:Boolean, param2:Boolean) : void
+        {
             var _loc3_:BuildingDirection = null;
             if(!param2)
             {
@@ -97,7 +102,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             }
         }
         
-        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void {
+        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void
+        {
             var _loc3_:BuildingDirection = null;
             switch(FortCommonUtils.instance.getFunctionalState(param1,param2))
             {
@@ -130,7 +136,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc2_:BuildingDirection = null;
             var _loc1_:int = this.directions.length - 1;
             while(_loc1_ >= 0)
@@ -149,7 +156,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             super.onDispose();
         }
         
-        private function dirClickHandler(param1:ButtonEvent) : void {
+        private function dirClickHandler(param1:ButtonEvent) : void
+        {
             dispatchEvent(new DirectionEvent(DirectionEvent.OPEN_DIRECTION,BuildingDirection(param1.target).uid,true));
         }
     }

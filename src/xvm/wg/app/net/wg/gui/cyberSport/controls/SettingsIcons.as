@@ -8,7 +8,8 @@ package net.wg.gui.cyberSport.controls
     public class SettingsIcons extends UIComponent
     {
         
-        public function SettingsIcons() {
+        public function SettingsIcons()
+        {
             super();
         }
         
@@ -20,25 +21,30 @@ package net.wg.gui.cyberSport.controls
         
         private var _gearVisible:Boolean;
         
-        public function get flakeVisible() : Boolean {
+        public function get flakeVisible() : Boolean
+        {
             return this._flakeVisible;
         }
         
-        public function set flakeVisible(param1:Boolean) : void {
+        public function set flakeVisible(param1:Boolean) : void
+        {
             this._flakeVisible = param1;
             invalidateData();
         }
         
-        public function get gearVisible() : Boolean {
+        public function get gearVisible() : Boolean
+        {
             return this._gearVisible;
         }
         
-        public function set gearVisible(param1:Boolean) : void {
+        public function set gearVisible(param1:Boolean) : void
+        {
             this._gearVisible = param1;
             invalidateData();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.flake.visible = false;
             this.gear.visible = false;
@@ -48,7 +54,8 @@ package net.wg.gui.cyberSport.controls
             this.gear.addEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -57,7 +64,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.flake.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
             this.flake.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
             this.gear.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
@@ -65,11 +73,13 @@ package net.wg.gui.cyberSport.controls
             super.onDispose();
         }
         
-        private function onRollOver(param1:MouseEvent) : void {
+        private function onRollOver(param1:MouseEvent) : void
+        {
             App.toolTipMgr.showComplex(param1.currentTarget == this.flake?TOOLTIPS.SETTINGSICON_FREEZED:TOOLTIPS.SETTINGSICON_CONDITIONS);
         }
         
-        private function onRollOut(param1:MouseEvent) : void {
+        private function onRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
     }

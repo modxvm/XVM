@@ -8,11 +8,13 @@ package net.wg.gui.components.tooltips
     public class ToolTipActionPrice extends ToolTipComplex
     {
         
-        public function ToolTipActionPrice() {
+        public function ToolTipActionPrice()
+        {
             super();
         }
         
-        override public function build(param1:Object, param2:ITooltipProps) : void {
+        override public function build(param1:Object, param2:ITooltipProps) : void
+        {
             var _loc7_:String = null;
             var _loc8_:String = null;
             var _loc9_:String = null;
@@ -26,10 +28,9 @@ package net.wg.gui.components.tooltips
                 _loc7_ = App.utils.icons.getIcon16StrPath(_loc3_.ico);
                 _loc8_ = _loc3_.priceStr + " " + _loc7_;
                 _loc9_ = _loc3_.defaultPriceStr + " " + _loc7_;
-                _loc6_ = _loc5_.makeString(TOOLTIPS.ACTIONPRICE_BODY,{
-                    "oldPrice":_loc9_,
-                    "newPrice":_loc8_
-                });
+                _loc6_ = _loc5_.makeString(TOOLTIPS.ACTIONPRICE_BODY,{"oldPrice":_loc9_,
+                "newPrice":_loc8_
+            });
             _loc4_ = new ComplexTooltipHelper().addHeader(_loc5_.makeString(TOOLTIPS.ACTIONPRICE_HEADER)).addBody(_loc6_).make();
         }
         else if(_loc3_.actionPrc < 0 && !(_loc3_.itemType == ""))

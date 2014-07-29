@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class Dialogs extends Object
     {
         
-        public function Dialogs() {
+        public function Dialogs()
+        {
             super();
         }
         

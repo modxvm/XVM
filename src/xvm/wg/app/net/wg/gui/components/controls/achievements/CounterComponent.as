@@ -9,7 +9,8 @@ package net.wg.gui.components.controls.achievements
     public class CounterComponent extends SoundButtonEx implements ICounterComponent
     {
         
-        public function CounterComponent() {
+        public function CounterComponent()
+        {
             super();
             this.originalBgWidth = this.background.width;
         }
@@ -26,12 +27,14 @@ package net.wg.gui.components.controls.achievements
         
         private var originalBgWidth:uint = 0;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.background = null;
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
             super.draw();
@@ -57,11 +60,13 @@ package net.wg.gui.components.controls.achievements
             }
         }
         
-        override public function get width() : Number {
+        override public function get width() : Number
+        {
             return actualWidth;
         }
         
-        override protected function handleStageChange(param1:Event) : void {
+        override protected function handleStageChange(param1:Event) : void
+        {
             if(param1.type == Event.ADDED_TO_STAGE)
             {
                 removeEventListener(Event.ADDED_TO_STAGE,this.handleStageChange,false);
@@ -74,25 +79,30 @@ package net.wg.gui.components.controls.achievements
             }
         }
         
-        public function get minBgWindowWidth() : uint {
+        public function get minBgWindowWidth() : uint
+        {
             return this._minBgWindowWidth;
         }
         
-        public function set minBgWindowWidth(param1:uint) : void {
+        public function set minBgWindowWidth(param1:uint) : void
+        {
             this._minBgWindowWidth = param1;
             invalidate(LAYOUT_INV);
         }
         
-        public function get text() : String {
+        public function get text() : String
+        {
             return this._text;
         }
         
-        public function set text(param1:String) : void {
+        public function set text(param1:String) : void
+        {
             this._text = param1;
             invalidate(COUNT_INV);
         }
         
-        public function receiveBottomPadding() : Number {
+        public function receiveBottomPadding() : Number
+        {
             return 0;
         }
     }

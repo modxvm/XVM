@@ -5,7 +5,8 @@ package net.wg.gui.cyberSport.controls
     public class CommandRenderer extends SoundListItemRenderer
     {
         
-        public function CommandRenderer() {
+        public function CommandRenderer()
+        {
             super();
         }
     }

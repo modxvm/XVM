@@ -7,7 +7,8 @@ package net.wg.gui.lobby.fortifications.data
     public class BuildingVO extends BuildingBaseVO
     {
         
-        public function BuildingVO(param1:Object) {
+        public function BuildingVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -39,7 +40,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var isOpenCtxMenu:Boolean = false;
         
-        override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
+        {
             var _loc3_:Array = null;
             var _loc4_:Object = null;
             var _loc5_:BuildingCtxMenuVO = null;
@@ -57,11 +59,13 @@ package net.wg.gui.lobby.fortifications.data
             return super.onDataWrite(param1,param2);
         }
         
-        public function get isInFoundationState() : Boolean {
+        public function get isInFoundationState() : Boolean
+        {
             return this.progress > FORTIFICATION_ALIASES.STATE_TROWEL && this.progress < FORTIFICATION_ALIASES.STATE_BUILDING;
         }
         
-        public final function validate() : void {
+        public final function validate() : void
+        {
             var _loc1_:IAssertable = App.utils.asserter;
             var _loc2_:* = this.progress == FORTIFICATION_ALIASES.STATE_BUILDING;
             var _loc3_:* = "non-completed building \'" + uid + "\' can not be available to ";

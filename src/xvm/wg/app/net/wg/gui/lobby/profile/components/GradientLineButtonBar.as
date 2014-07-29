@@ -10,13 +10,15 @@ package net.wg.gui.lobby.profile.components
     public class GradientLineButtonBar extends LineButtonBar
     {
         
-        public function GradientLineButtonBar() {
+        public function GradientLineButtonBar()
+        {
             super();
         }
         
         private static var color:uint = 3749680;
         
-        override protected function drawLine() : void {
+        override protected function drawLine() : void
+        {
             var _loc1_:Number = 1;
             var _loc2_:DisplayObject = _renderers[selectedIndex] as DisplayObject;
             var _loc3_:Graphics = line.graphics;
@@ -37,7 +39,8 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        private function drawGradientLine(param1:Graphics, param2:Number, param3:Number, param4:Number, param5:Number, param6:Array, param7:Array) : void {
+        private function drawGradientLine(param1:Graphics, param2:Number, param3:Number, param4:Number, param5:Number, param6:Array, param7:Array) : void
+        {
             var _loc8_:String = GradientType.LINEAR;
             var _loc9_:Array = [125,255];
             var _loc10_:Matrix = new Matrix();

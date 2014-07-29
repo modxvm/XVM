@@ -12,7 +12,8 @@ package net.wg.gui.crewOperations
     public class CrewOperationsIRenderer extends UIComponent
     {
         
-        public function CrewOperationsIRenderer() {
+        public function CrewOperationsIRenderer()
+        {
             this.myHitArea = new MovieClip();
             super();
         }
@@ -31,7 +32,8 @@ package net.wg.gui.crewOperations
         
         private var myHitArea:MovieClip;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.description.mouseEnabled = false;
             this.footer.button.addEventListener(ButtonEvent.CLICK,this.btnClickHandler,false,0,true);
@@ -39,11 +41,13 @@ package net.wg.gui.crewOperations
             hitArea = this.myHitArea;
         }
         
-        private function btnClickHandler(param1:ButtonEvent) : void {
+        private function btnClickHandler(param1:ButtonEvent) : void
+        {
             dispatchEvent(new CrewOperationEvent(CrewOperationEvent.OPERATION_CHANGED,this._data.id,true));
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Graphics = null;
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this._data))
@@ -65,16 +69,19 @@ package net.wg.gui.crewOperations
             }
         }
         
-        public function get data() : CrewOperationInfoVO {
+        public function get data() : CrewOperationInfoVO
+        {
             return this._data;
         }
         
-        public function set data(param1:CrewOperationInfoVO) : void {
+        public function set data(param1:CrewOperationInfoVO) : void
+        {
             this._data = param1;
             invalidateData();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this._data = null;
             if(this.footer)
             {

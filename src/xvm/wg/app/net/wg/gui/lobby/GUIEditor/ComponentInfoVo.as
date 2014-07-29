@@ -7,7 +7,8 @@ package net.wg.gui.lobby.GUIEditor
     public class ComponentInfoVo extends Object implements IDisposable
     {
         
-        public function ComponentInfoVo(param1:String) {
+        public function ComponentInfoVo(param1:String)
+        {
             super();
             this._linkage = param1;
         }
@@ -16,12 +17,14 @@ package net.wg.gui.lobby.GUIEditor
         
         private var _component:DisplayObject = null;
         
-        public function isAvailable() : Boolean {
+        public function isAvailable() : Boolean
+        {
             this._component = this.clone();
             return !(this._component == null);
         }
         
-        public function clone() : DisplayObject {
+        public function clone() : DisplayObject
+        {
             var asserter:IAssertable = null;
             var component:DisplayObject = null;
             try
@@ -38,7 +41,8 @@ package net.wg.gui.lobby.GUIEditor
             return component;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             if(this._component is IDisposable)
             {
                 IDisposable(this._component).dispose();
@@ -46,16 +50,19 @@ package net.wg.gui.lobby.GUIEditor
             this._component = null;
         }
         
-        public function get linkage() : String {
+        public function get linkage() : String
+        {
             return this._linkage;
         }
         
-        public function get shortLinkageName() : String {
+        public function get shortLinkageName() : String
+        {
             var _loc1_:Array = this._linkage.split("::");
             return _loc1_[_loc1_.length - 1];
         }
         
-        public function get component() : DisplayObject {
+        public function get component() : DisplayObject
+        {
             return this._component;
         }
     }

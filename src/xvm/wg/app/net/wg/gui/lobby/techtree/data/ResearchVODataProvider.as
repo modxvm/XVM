@@ -12,7 +12,8 @@ package net.wg.gui.lobby.techtree.data
     public class ResearchVODataProvider extends AbstractDataProvider implements IResearchDataProvider
     {
         
-        public function ResearchVODataProvider() {
+        public function ResearchVODataProvider()
+        {
             super();
             this.topData = new Vector.<NodeData>();
         }
@@ -25,16 +26,19 @@ package net.wg.gui.lobby.techtree.data
         
         protected var global:VehGlobalStats;
         
-        public function get topLength() : Number {
+        public function get topLength() : Number
+        {
             return this.topData.length;
         }
         
-        public function getDepthOfPath(param1:Number) : Number {
+        public function getDepthOfPath(param1:Number) : Number
+        {
             var _loc2_:Number = this.depthOfPaths[param1];
             return isNaN(_loc2_)?0:_loc2_;
         }
         
-        public function getMaxDepthOfPath() : Number {
+        public function getMaxDepthOfPath() : Number
+        {
             var _loc2_:* = NaN;
             var _loc1_:Number = 0;
             for each(_loc2_ in this.depthOfPaths)
@@ -44,26 +48,31 @@ package net.wg.gui.lobby.techtree.data
             return _loc1_;
         }
         
-        public function getGlobalStats() : VehGlobalStats {
+        public function getGlobalStats() : VehGlobalStats
+        {
             return this.global;
         }
         
-        public function getTopLevelAt(param1:Number) : NodeData {
+        public function getTopLevelAt(param1:Number) : NodeData
+        {
             return this.topData[param1];
         }
         
-        public function getTopLevelIndexByID(param1:Number) : Number {
+        public function getTopLevelIndexByID(param1:Number) : Number
+        {
             return this.topLevelIdxCache[param1] != undefined?this.topLevelIdxCache[param1]:-1;
         }
         
-        override public function clearUp() : void {
+        override public function clearUp() : void
+        {
             super.clearUp();
             this.topData.splice(0,this.topData.length);
             this.topLevelIdxCache = {};
             this.depthOfPaths = [];
         }
         
-        override public function parse(param1:Object) : void {
+        override public function parse(param1:Object) : void
+        {
             var _loc5_:* = NaN;
             var _loc6_:NodeData = null;
             var _loc7_:ResearchDisplayInfo = null;
@@ -98,7 +107,8 @@ package net.wg.gui.lobby.techtree.data
             }
         }
         
-        public function populate(param1:ADG_ItemLevelsBuilder) : void {
+        public function populate(param1:ADG_ItemLevelsBuilder) : void
+        {
             var _loc4_:* = NaN;
             var _loc5_:* = NaN;
             var _loc6_:* = NaN;
@@ -145,11 +155,13 @@ package net.wg.gui.lobby.techtree.data
             }
         }
         
-        public function setTopLevelState(param1:Number, param2:Number, param3:Number) : Boolean {
+        public function setTopLevelState(param1:Number, param2:Number, param3:Number) : Boolean
+        {
             return findAndSetState(this.topData,param1,param2,param3);
         }
         
-        public function setTopLevelUnlockProps(param1:Number, param2:UnlockProps) : Boolean {
+        public function setTopLevelUnlockProps(param1:Number, param2:UnlockProps) : Boolean
+        {
             var _loc3_:* = false;
             if(param1 < this.topData.length && !(this.topData[param1] == null))
             {
@@ -159,7 +171,8 @@ package net.wg.gui.lobby.techtree.data
             return _loc3_;
         }
         
-        public function setTopLevelXP(param1:Number, param2:Number) : Boolean {
+        public function setTopLevelXP(param1:Number, param2:Number) : Boolean
+        {
             var _loc3_:* = false;
             if(param1 < this.topData.length && !(this.topData[param1] == null))
             {
@@ -169,7 +182,8 @@ package net.wg.gui.lobby.techtree.data
             return _loc3_;
         }
         
-        public function setTopLevelField(param1:String, param2:Number, param3:Object) : Boolean {
+        public function setTopLevelField(param1:String, param2:Number, param3:Object) : Boolean
+        {
             var _loc5_:UnlockProps = null;
             var _loc4_:* = false;
             switch(param1)
@@ -183,7 +197,8 @@ package net.wg.gui.lobby.techtree.data
             return _loc4_;
         }
         
-        public function resolveEntityType(param1:NodeData, param2:Boolean = false) : uint {
+        public function resolveEntityType(param1:NodeData, param2:Boolean = false) : uint
+        {
             var _loc4_:ResearchDisplayInfo = null;
             var _loc3_:uint = 0;
             if(param1 != null)

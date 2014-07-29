@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class ViewPresenterMeta extends AbstractView
     {
         
-        public function ViewPresenterMeta() {
+        public function ViewPresenterMeta()
+        {
             super();
         }
         
         public var showView:Function = null;
         
-        public function showViewS(param1:String) : void {
+        public function showViewS(param1:String) : void
+        {
             App.utils.asserter.assertNotNull(this.showView,"showView" + Errors.CANT_NULL);
             this.showView(param1);
         }

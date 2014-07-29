@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ProfileTechniqueMeta extends ProfileSection
     {
         
-        public function ProfileTechniqueMeta() {
+        public function ProfileTechniqueMeta()
+        {
             super();
         }
     }

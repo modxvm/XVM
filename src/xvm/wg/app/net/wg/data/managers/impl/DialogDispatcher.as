@@ -7,7 +7,8 @@ package net.wg.data.managers.impl
     public class DialogDispatcher extends Object implements IDialogDispatcher
     {
         
-        public function DialogDispatcher() {
+        public function DialogDispatcher()
+        {
             super();
         }
         
@@ -19,31 +20,38 @@ package net.wg.data.managers.impl
         
         private var _handlersInfo:Array = null;
         
-        public function set onClose(param1:Function) : void {
+        public function set onClose(param1:Function) : void
+        {
             this._onClose = param1;
         }
         
-        public function get onClose() : Function {
+        public function get onClose() : Function
+        {
             return this._onClose;
         }
         
-        public function set onButtonClick(param1:Function) : void {
+        public function set onButtonClick(param1:Function) : void
+        {
             this._onButtonClick = param1;
         }
         
-        public function get onButtonClick() : Function {
+        public function get onButtonClick() : Function
+        {
             return this._onButtonClick;
         }
         
-        public function set onSubmit(param1:Function) : void {
+        public function set onSubmit(param1:Function) : void
+        {
             this._onSubmit = param1;
         }
         
-        public function get onSubmit() : Function {
+        public function get onSubmit() : Function
+        {
             return this._onSubmit;
         }
         
-        public function set handlersInfo(param1:Array) : void {
+        public function set handlersInfo(param1:Array) : void
+        {
             var _loc3_:String = null;
             var _loc2_:Number = 0;
             while(_loc2_ < param1.length)
@@ -63,7 +71,8 @@ package net.wg.data.managers.impl
             this._handlersInfo = param1;
         }
         
-        private function assertType(param1:Object, param2:Class, param3:String) : void {
+        private function assertType(param1:Object, param2:Class, param3:String) : void
+        {
             var _loc4_:* = param3 + " must be " + param2 + "!";
             if(param1 != null)
             {
@@ -71,11 +80,13 @@ package net.wg.data.managers.impl
             }
         }
         
-        public function get handlersInfo() : Array {
+        public function get handlersInfo() : Array
+        {
             return this._handlersInfo;
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this._handlersInfo = null;
             this._onSubmit = null;
             this._onButtonClick = null;

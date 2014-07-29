@@ -15,14 +15,16 @@ package net.wg.gui.lobby.fortifications.windows.impl
     public class FortCreateDirectionWindow extends FortCreateDirectionWindowMeta implements IFortCreateDirectionWindowMeta
     {
         
-        public function FortCreateDirectionWindow() {
+        public function FortCreateDirectionWindow()
+        {
             super();
             isModal = false;
             isCentered = true;
             this.allRenderers = [this.direction0,this.direction1,this.direction2,this.direction3,this.direction4,this.direction5];
         }
         
-        private static function showComplexTT(param1:String, param2:String = "") : void {
+        private static function showComplexTT(param1:String, param2:String = "") : void
+        {
             var _loc3_:String = new ComplexTooltipHelper().addHeader(param1).addBody(param2).make();
             if(_loc3_.length > 0)
             {
@@ -54,7 +56,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private var allRenderers:Array;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.titleTF.htmlText = FORTIFICATIONS.FORTDIRECTIONSWINDOW_LABEL_OPENEDDIRECTIONS;
             this.newDirectionBtn.label = FORTIFICATIONS.FORTDIRECTIONSWINDOW_BUTTON_NEWDIRECTION;
@@ -64,7 +67,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.setupRenderers();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.newDirectionBtn.removeEventListener(ButtonEvent.CLICK,this.onOpenNewDirectionClick);
             this.newDirectionBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onNewDirctnOver);
             this.newDirectionBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onNewDirctnOut);
@@ -74,29 +78,35 @@ package net.wg.gui.lobby.fortifications.windows.impl
             super.onDispose();
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void {
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
             super.onInitModalFocus(param1);
             setFocus(this.newDirectionBtn);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.title = FORTIFICATIONS.FORTDIRECTIONSWINDOW_TITLE;
         }
         
-        private function onNewDirctnOver(param1:MouseEvent) : void {
+        private function onNewDirctnOver(param1:MouseEvent) : void
+        {
             showComplexTT(this._buttonTTHeader,this._buttonTTDescr);
         }
         
-        private function onNewDirctnOut(param1:MouseEvent) : void {
+        private function onNewDirctnOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function disposeRenderers() : void {
+        private function disposeRenderers() : void
+        {
             var _loc1_:DirectionListRenderer = null;
             for each(_loc1_ in this.allRenderers)
             {
@@ -108,7 +118,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.allRenderers = null;
         }
         
-        private function setupRenderers() : void {
+        private function setupRenderers() : void
+        {
             var _loc1_:DirectionListRenderer = null;
             for each(_loc1_ in this.allRenderers)
             {
@@ -117,26 +128,31 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        private function onOpenNewDirectionClick(param1:ButtonEvent) : void {
+        private function onOpenNewDirectionClick(param1:ButtonEvent) : void
+        {
             openNewDirectionS();
         }
         
-        private function onCloseDirectionRequest(param1:DirectionEvent) : void {
+        private function onCloseDirectionRequest(param1:DirectionEvent) : void
+        {
             closeDirectionS(param1.id);
         }
         
-        public function as_setDescription(param1:String) : void {
+        public function as_setDescription(param1:String) : void
+        {
             this.descriptionTF.htmlText = param1;
         }
         
-        public function as_setupButton(param1:Boolean, param2:Boolean, param3:String, param4:String) : void {
+        public function as_setupButton(param1:Boolean, param2:Boolean, param3:String, param4:String) : void
+        {
             this.newDirectionBtn.enabled = param1;
             this.newDirectionBtn.visible = param2;
             this._buttonTTHeader = param3;
             this._buttonTTDescr = param4;
         }
         
-        public function as_setDirections(param1:Array) : void {
+        public function as_setDirections(param1:Array) : void
+        {
             var _loc2_:DirectionListRenderer = null;
             var _loc3_:DirectionVO = null;
             var _loc4_:* = 0;

@@ -10,11 +10,13 @@ package net.wg.gui.components.advanced
     public class AmmunitionButton extends SoundButton
     {
         
-        public function AmmunitionButton() {
+        public function AmmunitionButton()
+        {
             super();
         }
         
-        override protected function handleMousePress(param1:MouseEvent) : void {
+        override protected function handleMousePress(param1:MouseEvent) : void
+        {
             var _loc5_:ButtonEvent = null;
             var _loc2_:MouseEventEx = param1 as MouseEventEx;
             var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
@@ -35,7 +37,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        override protected function handleMouseRelease(param1:MouseEvent) : void {
+        override protected function handleMouseRelease(param1:MouseEvent) : void
+        {
             var _loc5_:ButtonEvent = null;
             _autoRepeatEvent = null;
             if(!enabled)
@@ -64,7 +67,8 @@ package net.wg.gui.components.advanced
             _isRepeating = false;
         }
         
-        override protected function handleRelease(param1:uint = 0) : void {
+        override protected function handleRelease(param1:uint = 0) : void
+        {
             var _loc2_:ButtonEvent = null;
             if(!enabled)
             {

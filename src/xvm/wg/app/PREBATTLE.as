@@ -1,9 +1,10 @@
-package 
+package
 {
     public class PREBATTLE extends Object
     {
         
-        public function PREBATTLE() {
+        public function PREBATTLE()
+        {
             super();
         }
         

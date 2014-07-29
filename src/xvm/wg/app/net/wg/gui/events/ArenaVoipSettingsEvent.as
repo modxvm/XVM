@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class ArenaVoipSettingsEvent extends Event
     {
         
-        public function ArenaVoipSettingsEvent(param1:String, param2:Number) {
+        public function ArenaVoipSettingsEvent(param1:String, param2:Number)
+        {
             super(param1,true,true);
             this.index = param2;
         }
@@ -14,7 +15,8 @@ package net.wg.gui.events
         
         public var index:Number = 0;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new ArenaVoipSettingsEvent(type,this.index);
         }
     }

@@ -6,7 +6,8 @@ package net.wg.gui.components.controls.achievements
     public class AchievementProgressComponent extends UIComponent
     {
         
-        public function AchievementProgressComponent() {
+        public function AchievementProgressComponent()
+        {
             super();
         }
         
@@ -14,7 +15,8 @@ package net.wg.gui.components.controls.achievements
         
         public var progressTextField:TextField;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.progressBar.setActualSize(_originalWidth,this.progressBar.height);
         }

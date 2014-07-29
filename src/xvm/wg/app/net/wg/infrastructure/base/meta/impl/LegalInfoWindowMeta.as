@@ -6,7 +6,8 @@ package net.wg.infrastructure.base.meta.impl
     public class LegalInfoWindowMeta extends AbstractWindowView
     {
         
-        public function LegalInfoWindowMeta() {
+        public function LegalInfoWindowMeta()
+        {
             super();
         }
         
@@ -14,12 +15,14 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onCancelClick:Function = null;
         
-        public function getLegalInfoS() : void {
+        public function getLegalInfoS() : void
+        {
             App.utils.asserter.assertNotNull(this.getLegalInfo,"getLegalInfo" + Errors.CANT_NULL);
             this.getLegalInfo();
         }
         
-        public function onCancelClickS() : void {
+        public function onCancelClickS() : void
+        {
             App.utils.asserter.assertNotNull(this.onCancelClick,"onCancelClick" + Errors.CANT_NULL);
             this.onCancelClick();
         }

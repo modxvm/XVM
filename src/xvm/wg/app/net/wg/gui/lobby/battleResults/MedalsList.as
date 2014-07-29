@@ -21,7 +21,8 @@ package net.wg.gui.lobby.battleResults
     public class MedalsList extends UIComponent
     {
         
-        public function MedalsList() {
+        public function MedalsList()
+        {
             super();
             this.renderers = [];
             this.stripes = [];
@@ -39,7 +40,8 @@ package net.wg.gui.lobby.battleResults
         
         private static var INVALIDATE_FILTERS:String = "invFilt";
         
-        private static function isDisplaySpecial(param1:Object) : Boolean {
+        private static function isDisplaySpecial(param1:Object) : Boolean
+        {
             var _loc2_:* = "isEpic";
             var _loc3_:Boolean = _loc2_ in param1 && (param1[_loc2_]);
             var _loc4_:* = "specialIcon";
@@ -67,17 +69,20 @@ package net.wg.gui.lobby.battleResults
         
         public var stripesArea:MovieClip;
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             this.dataProvider = new DataProvider();
             super.initialize();
         }
         
-        public function invalidateFilters() : void {
+        public function invalidateFilters() : void
+        {
             invalidate(INVALIDATE_FILTERS);
             invalidate(InvalidationType.DATA);
         }
         
-        public function updateFilters() : void {
+        public function updateFilters() : void
+        {
             var _loc1_:Array = [];
             _loc1_ = _loc1_.concat([this._colorDodgeMulty,0,0,0,0]);
             _loc1_ = _loc1_.concat([0,this._colorDodgeMulty,0,0,0]);
@@ -92,11 +97,13 @@ package net.wg.gui.lobby.battleResults
             this.stripesArea.filters = [new DropShadowFilter(2,90,0,0.75,4,4)];
         }
         
-        public function get dataProvider() : IDataProvider {
+        public function get dataProvider() : IDataProvider
+        {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:IDataProvider) : void {
+        public function set dataProvider(param1:IDataProvider) : void
+        {
             if(this._dataProvider == param1)
             {
                 return;
@@ -114,7 +121,8 @@ package net.wg.gui.lobby.battleResults
             invalidateData();
         }
         
-        public function clear() : void {
+        public function clear() : void
+        {
             while(this.renderers.length)
             {
                 this.renderers.pop().removeMovieClip();
@@ -125,7 +133,8 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             initSize();
             this.contentArea.height = height;
@@ -137,7 +146,8 @@ package net.wg.gui.lobby.battleResults
             invalidate(INVALIDATE_FILTERS);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(this._dataProvider)
             {
                 this.drawRenderers(this._dataProvider.length);
@@ -156,7 +166,8 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        private function drawRenderers(param1:Number) : void {
+        private function drawRenderers(param1:Number) : void
+        {
             var _loc2_:Object = null;
             while(this.renderers.length)
             {
@@ -176,7 +187,8 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        private function drawLayout() : void {
+        private function drawLayout() : void
+        {
             var _loc8_:MovieClip = null;
             var _loc1_:Number = this.renderers.length;
             var _loc2_:MovieClip = null;
@@ -227,7 +239,8 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        private function createItemRenderer() : IListItemRenderer {
+        private function createItemRenderer() : IListItemRenderer
+        {
             var _loc1_:Class = getDefinitionByName(this._itemRenderer) as Class;
             var _loc2_:IListItemRenderer = new _loc1_() as IListItemRenderer;
             if(_loc2_ == null)
@@ -242,7 +255,8 @@ package net.wg.gui.lobby.battleResults
             return _loc2_;
         }
         
-        protected function setupRenderer(param1:IListItemRenderer) : void {
+        protected function setupRenderer(param1:IListItemRenderer) : void
+        {
             param1.owner = this;
             param1.focusTarget = this;
             param1.tabEnabled = false;
@@ -254,7 +268,8 @@ package net.wg.gui.lobby.battleResults
             param1.addEventListener(MouseEvent.ROLL_OUT,this.dispatchItemEvent,false,0,true);
         }
         
-        protected function dispatchItemEvent(param1:Event) : Boolean {
+        protected function dispatchItemEvent(param1:Event) : Boolean
+        {
             var _loc2_:String = null;
             var _loc8_:Object = null;
             var _loc9_:String = null;
@@ -331,15 +346,18 @@ package net.wg.gui.lobby.battleResults
             return dispatchEvent(_loc7_);
         }
         
-        protected function showToolTip(param1:String, param2:Object) : void {
+        protected function showToolTip(param1:String, param2:Object) : void
+        {
             App.toolTipMgr.showSpecial(param1,null,param2.block,param2.type,param2.rank,param2.customData);
         }
         
-        protected function hideTooltip() : void {
+        protected function hideTooltip() : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function handleItemClick(param1:Event) : void {
+        private function handleItemClick(param1:Event) : void
+        {
             var _loc2_:Number = param1.target.index;
             if(isNaN(_loc2_))
             {
@@ -348,7 +366,8 @@ package net.wg.gui.lobby.battleResults
             this.dispatchItemEvent(param1);
         }
         
-        private function populateData(param1:Array) : void {
+        private function populateData(param1:Array) : void
+        {
             var _loc3_:MovieClip = null;
             var _loc4_:Object = null;
             var _loc5_:Class = null;
@@ -384,11 +403,13 @@ package net.wg.gui.lobby.battleResults
             }
         }
         
-        private function onDataChange(param1:Event) : void {
+        private function onDataChange(param1:Event) : void
+        {
             invalidate();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             var _loc1_:SpecialAchievement = null;
             while(this.stripes.length > 0)
             {

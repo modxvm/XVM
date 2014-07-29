@@ -14,7 +14,8 @@ package net.wg.gui.lobby.tankman
     public class PersonalCaseSkillsItemRenderer extends SoundListItemRenderer
     {
         
-        public function PersonalCaseSkillsItemRenderer() {
+        public function PersonalCaseSkillsItemRenderer()
+        {
             super();
             soundType = SoundTypes.RNDR_NORMAL;
         }
@@ -39,7 +40,8 @@ package net.wg.gui.lobby.tankman
         
         public var focusIndicatorUI:MovieClip;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
             removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
             if(this.icon)
@@ -53,7 +55,8 @@ package net.wg.gui.lobby.tankman
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             buttonMode = true;
             allowDeselect = false;
             super.configUI();
@@ -61,7 +64,8 @@ package net.wg.gui.lobby.tankman
             addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
         }
         
-        public function showTooltip(param1:MouseEvent = null) : void {
+        public function showTooltip(param1:MouseEvent = null) : void
+        {
             if(!this.isHeader)
             {
                 App.toolTipMgr.showSpecial(Tooltips.TANKMAN_SKILL,null,data.title,data.tankmanID);
@@ -72,21 +76,24 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        public function hideTooltip(param1:MouseEvent = null) : void {
+        public function hideTooltip(param1:MouseEvent = null) : void
+        {
             if(!this.isHeader)
             {
                 App.toolTipMgr.hide();
             }
         }
         
-        public function onSelect(param1:ButtonEvent) : void {
+        public function onSelect(param1:ButtonEvent) : void
+        {
             if(!this.isHeader)
             {
                 App.toolTipMgr.hide();
             }
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1 == null)
             {
                 if(this.visible)
@@ -114,7 +121,8 @@ package net.wg.gui.lobby.tankman
             this.initVisibleElements();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(this.UPDATE_DATA)) && (this.isData))
             {
@@ -122,7 +130,8 @@ package net.wg.gui.lobby.tankman
             }
         }
         
-        private function updateData() : void {
+        private function updateData() : void
+        {
             var _loc1_:String = null;
             var _loc2_:String = null;
             if(this.isHeader)
@@ -166,7 +175,8 @@ package net.wg.gui.lobby.tankman
             this.isData = false;
         }
         
-        private function initVisibleElements() : void {
+        private function initVisibleElements() : void
+        {
             this.isHeader = data.isHeader;
             if(data.isHeader)
             {
@@ -176,7 +186,8 @@ package net.wg.gui.lobby.tankman
             invalidate(this.UPDATE_DATA);
         }
         
-        private function doubleClickHandler(param1:MouseEvent) : void {
+        private function doubleClickHandler(param1:MouseEvent) : void
+        {
             DebugUtils.LOG_DEBUG("[PersonalCaseSkillsItemRenderer] : [doubleClickHandler : dispatch event]");
             dispatchEvent(new Event(SKILL_DOUBLE_CLICK,true));
         }

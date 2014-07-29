@@ -14,7 +14,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipTankClass extends ToolTipSpecial
     {
         
-        public function ToolTipTankClass() {
+        public function ToolTipTankClass()
+        {
             super();
             this.initControls();
         }
@@ -27,11 +28,13 @@ package net.wg.gui.components.tooltips
         
         private var separator:Separator;
         
-        public function get utils() : Utils {
+        public function get utils() : Utils
+        {
             return Utils.instance;
         }
         
-        override protected function redraw() : void {
+        override protected function redraw() : void
+        {
             var _loc1_:String = null;
             var _loc12_:String = null;
             var _loc13_:String = null;
@@ -93,14 +96,16 @@ package net.wg.gui.components.tooltips
             super.redraw();
         }
         
-        override protected function updateSize() : void {
+        override protected function updateSize() : void
+        {
             background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
             background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
             this.whiteBg.width = content.width + bgShadowMargin.horizontal;
             this.whiteBg.height = content.height - this.whiteBg.y + contentMargin.bottom;
         }
         
-        private function initControls() : void {
+        private function initControls() : void
+        {
             this.headerTF = content.headerTF;
             this.descriptionTF = content.descriptionTF;
             this.whiteBg = content.whiteBg;

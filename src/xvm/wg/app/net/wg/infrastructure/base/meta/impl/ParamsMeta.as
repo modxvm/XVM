@@ -5,7 +5,8 @@ package net.wg.infrastructure.base.meta.impl
     public class ParamsMeta extends BaseDAAPIComponent
     {
         
-        public function ParamsMeta() {
+        public function ParamsMeta()
+        {
             super();
         }
     }

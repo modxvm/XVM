@@ -3,7 +3,8 @@ package net.wg.gui.prebattle.constants
     public class PrebattleStateString extends Object
     {
         
-        public function PrebattleStateString() {
+        public function PrebattleStateString()
+        {
             super();
         }
         

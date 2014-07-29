@@ -20,7 +20,8 @@ package net.wg.gui.tutorial.windows
     public class TutorialBattleStatisticWindow extends TutorialBattleStatisticMeta implements ITutorialBattleStatisticMeta
     {
         
-        public function TutorialBattleStatisticWindow() {
+        public function TutorialBattleStatisticWindow()
+        {
             super();
         }
         
@@ -58,7 +59,8 @@ package net.wg.gui.tutorial.windows
         
         protected var data:Object;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.column1Header.text = App.utils.locale.makeString(BATTLE_TUTORIAL.WINDOWS_RESULT_TABLE_COLUMN_1);
             this.column2Header.text = App.utils.locale.makeString(BATTLE_TUTORIAL.WINDOWS_RESULT_TABLE_COLUMN_2);
@@ -66,11 +68,13 @@ package net.wg.gui.tutorial.windows
             this.battleHintList.addEventListener(ListEvent.ITEM_CLICK,this.onHintItemClick);
         }
         
-        private function onRestartButtonClick(param1:ButtonEvent) : void {
+        private function onRestartButtonClick(param1:ButtonEvent) : void
+        {
             restartS();
         }
         
-        private function onHintItemClick(param1:ListEvent) : void {
+        private function onHintItemClick(param1:ListEvent) : void
+        {
             var _loc2_:Object = param1.itemData;
             if(_loc2_.type == HintItemType.VIDEO_LINK)
             {
@@ -78,12 +82,14 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        public function as_setData(param1:Object) : void {
+        public function as_setData(param1:Object) : void
+        {
             this.data = param1;
             invalidate(InvalidationType.DATA);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.data))
             {
@@ -101,7 +107,8 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        private function showBonuses(param1:Array) : void {
+        private function showBonuses(param1:Array) : void
+        {
             var _loc5_:Object = null;
             var _loc6_:Object = null;
             var _loc8_:String = null;
@@ -167,13 +174,15 @@ package net.wg.gui.tutorial.windows
             }
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             window.useBottomBtns = false;
             window.title = BATTLE_TUTORIAL.WINDOWS_RESULT_TITLE;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.data = null;
             this.restartButton.removeEventListener(ButtonEvent.CLICK,this.onRestartButtonClick);

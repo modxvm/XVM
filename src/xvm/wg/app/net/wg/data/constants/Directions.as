@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class Directions extends Object
     {
         
-        public function Directions() {
+        public function Directions()
+        {
             super();
         }
         
@@ -15,6 +16,6 @@ package net.wg.data.constants
         
         public static var LEFT:String = "L";
         
-        public static var LAYOUT_DIRECTIONS:Vector.<String>;
+        public static var LAYOUT_DIRECTIONS:Vector.<String> = Vector.<String>([TOP,BOTTOM,RIGHT,LEFT]);
     }
 }

@@ -23,7 +23,8 @@ package net.wg.gui.cyberSport.controls
     public class VehicleSelector extends UIComponent implements IViewStackContent
     {
         
-        public function VehicleSelector() {
+        public function VehicleSelector()
+        {
             this._localSelectionOverrides = [];
             super();
         }
@@ -52,15 +53,18 @@ package net.wg.gui.cyberSport.controls
         
         private var _isOverridesInitialized:Boolean = false;
         
-        public function setFiltersData(param1:VehicleSelectorFilterVO) : void {
+        public function setFiltersData(param1:VehicleSelectorFilterVO) : void
+        {
             this.filtersView.setData(param1);
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             this.setListItems(param1 as Array);
         }
         
-        public function setupSelectionOverrides(param1:Array) : void {
+        public function setupSelectionOverrides(param1:Array) : void
+        {
             var _loc2_:Object = null;
             if(!this._isOverridesInitialized)
             {
@@ -72,7 +76,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        public function setListItems(param1:Array) : void {
+        public function setListItems(param1:Array) : void
+        {
             if(this.list.dataProvider)
             {
                 if(this._selectedItemVO)
@@ -89,7 +94,8 @@ package net.wg.gui.cyberSport.controls
             this.dispatchUpdate();
         }
         
-        public function getSelectedDescriptors() : Array {
+        public function getSelectedDescriptors() : Array
+        {
             var _loc2_:VehicleSelectorItemVO = null;
             var _loc3_:SelectionInfo = null;
             var _loc1_:Array = [];
@@ -110,7 +116,8 @@ package net.wg.gui.cyberSport.controls
             return _loc1_;
         }
         
-        public function getSelectedVehicles() : Array {
+        public function getSelectedVehicles() : Array
+        {
             var _loc3_:VehicleSelectorItemVO = null;
             var _loc4_:SelectionInfo = null;
             var _loc1_:Array = [];
@@ -133,33 +140,40 @@ package net.wg.gui.cyberSport.controls
             return _loc1_;
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return null;
         }
         
-        public function get multiSelection() : Boolean {
+        public function get multiSelection() : Boolean
+        {
             return this._multiSelection;
         }
         
-        public function set multiSelection(param1:Boolean) : void {
+        public function set multiSelection(param1:Boolean) : void
+        {
             this._multiSelection = param1;
             invalidate(INVALID_SELECTION_MODE);
         }
         
-        public function get filtersMode() : String {
+        public function get filtersMode() : String
+        {
             return this._filtersMode;
         }
         
-        public function set filtersMode(param1:String) : void {
+        public function set filtersMode(param1:String) : void
+        {
             this._filtersMode = param1;
             invalidate(INVALID_FILTERS_MODE);
         }
         
-        public function get isUserVehiclesMode() : Boolean {
+        public function get isUserVehiclesMode() : Boolean
+        {
             return this._filtersMode == VehicleSelectorFilter.MODE_USER_VEHICLES;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.allCheckBox.label = CYBERSPORT.WINDOW_VEHICLESELECTOR_FILTERS_ALL;
             this.allCheckBox.addEventListener(Event.SELECT,this.onAllCheckBoxChanged);
@@ -167,7 +181,8 @@ package net.wg.gui.cyberSport.controls
             this.header.addEventListener(SortingEvent.SORT_DIRECTION_CHANGED,this.sortingChangedHandler,false,0,true);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if(isInvalid(INVALID_SELECTION_MODE))
             {
@@ -187,7 +202,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.allCheckBox.removeEventListener(Event.SELECT,this.onAllCheckBoxChanged);
             this.list.removeEventListener(VehicleSelectorItemEvent.SELECT_VEHICLE,this.dispatchUpdate);
@@ -201,7 +217,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function getOverride(param1:VehicleVO) : SelectionInfo {
+        private function getOverride(param1:VehicleVO) : SelectionInfo
+        {
             var _loc2_:SelectionInfo = null;
             var _loc3_:SelectionInfo = null;
             for each(_loc3_ in this._localSelectionOverrides)
@@ -215,7 +232,8 @@ package net.wg.gui.cyberSport.controls
             return _loc2_;
         }
         
-        private function updateOverride(param1:VehicleVO, param2:Boolean) : void {
+        private function updateOverride(param1:VehicleVO, param2:Boolean) : void
+        {
             var _loc3_:SelectionInfo = this.getOverride(param1);
             if(_loc3_)
             {
@@ -228,7 +246,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function applyOverrides(param1:Array) : void {
+        private function applyOverrides(param1:Array) : void
+        {
             var _loc2_:VehicleSelectorItemVO = null;
             var _loc3_:SelectionInfo = null;
             for each(_loc2_ in param1)
@@ -241,7 +260,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function checkAllSelected() : void {
+        private function checkAllSelected() : void
+        {
             var _loc3_:VehicleSelectorItemVO = null;
             var _loc4_:* = false;
             var _loc1_:uint = 0;
@@ -260,7 +280,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        private function getHeaderDP() : IDataProvider {
+        private function getHeaderDP() : IDataProvider
+        {
             var _loc5_:SortingButtonInfo = null;
             var _loc1_:* = "../maps/icons/buttons/tab_sort_button/ascProfileSortArrow.png";
             var _loc2_:* = "../maps/icons/buttons/tab_sort_button/descProfileSortArrow.png";
@@ -323,7 +344,8 @@ package net.wg.gui.cyberSport.controls
             return new DataProvider(_loc4_);
         }
         
-        private function dispatchUpdate(param1:VehicleSelectorItemEvent = null) : void {
+        private function dispatchUpdate(param1:VehicleSelectorItemEvent = null) : void
+        {
             var _loc2_:VehicleSelectorItemVO = param1?param1.data:null;
             if(!this._multiSelection)
             {
@@ -347,7 +369,8 @@ package net.wg.gui.cyberSport.controls
             dispatchEvent(new VehicleSelectorEvent(VehicleSelectorEvent.SELECTION_CHANGED,this.getSelectedDescriptors(),this.getSelectedVehicles(),false,false,param1?param1.forceSelect:false));
         }
         
-        private function onAllCheckBoxChanged(param1:Event) : void {
+        private function onAllCheckBoxChanged(param1:Event) : void
+        {
             var _loc3_:VehicleSelectorItemVO = null;
             if(this._ignoreAllCheckBoxChange)
             {
@@ -364,7 +387,8 @@ package net.wg.gui.cyberSport.controls
             this.dispatchUpdate();
         }
         
-        private function sortingChangedHandler(param1:Event) : void {
+        private function sortingChangedHandler(param1:Event) : void
+        {
             param1.stopImmediatePropagation();
             var _loc2_:SortingButton = SortingButton(param1.target);
             if(_loc2_.sortDirection != SortingInfo.WITHOUT_SORT)
@@ -373,7 +397,8 @@ package net.wg.gui.cyberSport.controls
             }
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }
@@ -383,7 +408,8 @@ import net.wg.gui.rally.vo.VehicleVO;
 class SelectionInfo extends Object
 {
     
-    function SelectionInfo(param1:VehicleVO, param2:Boolean) {
+    function SelectionInfo(param1:VehicleVO, param2:Boolean)
+    {
         super();
         this.vehicle = param1;
         this.selected = param2;

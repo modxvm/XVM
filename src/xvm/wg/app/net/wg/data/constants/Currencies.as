@@ -3,7 +3,8 @@ package net.wg.data.constants
     public class Currencies extends Object
     {
         
-        public function Currencies() {
+        public function Currencies()
+        {
             super();
         }
         
@@ -15,6 +16,10 @@ package net.wg.data.constants
         
         public static var ERROR:String = "error";
         
-        public static var TEXT_COLORS:Object;
-    }
+        public static var TEXT_COLORS:Object = {"credits":13556185,
+        "gold":16761699,
+        "disabled":5197640,
+        "error":16711680
+    };
+}
 }

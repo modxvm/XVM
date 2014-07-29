@@ -16,7 +16,8 @@ package net.wg.gui.lobby.confirmModuleWindow
     public class ConfirmModuleWindow extends ConfirmModuleWindowMeta implements IConfirmModuleWindowMeta
     {
         
-        public function ConfirmModuleWindow() {
+        public function ConfirmModuleWindow()
+        {
             super();
             isModal = true;
             isCentered = true;
@@ -44,7 +45,8 @@ package net.wg.gui.lobby.confirmModuleWindow
         
         private var selectedCount:Number = 0;
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             super.setWindow(param1);
             if(param1)
             {
@@ -52,17 +54,20 @@ package net.wg.gui.lobby.confirmModuleWindow
             }
         }
         
-        public function as_setData(param1:Object) : void {
+        public function as_setData(param1:Object) : void
+        {
             this.moduleInfo = new ModuleInfoVo(param1);
             invalidate(DATA_INVALID);
         }
         
-        public function as_setSettings(param1:Object) : void {
+        public function as_setSettings(param1:Object) : void
+        {
             this.settings = new ItemDialogSettingsVO(param1);
             invalidate(SETTINGS_INVALID);
         }
         
-        override protected function setLabels() : void {
+        override protected function setLabels() : void
+        {
             var _loc1_:ILocale = App.utils.locale;
             content.countLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_COUNTLABEL);
             content.leftLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_PRICELABEL);
@@ -70,7 +75,8 @@ package net.wg.gui.lobby.confirmModuleWindow
             content.resultLabel.text = _loc1_.makeString(DIALOGS.CONFIRMMODULEDIALOG_TOTALLABEL);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:ILocale = null;
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
@@ -245,7 +251,8 @@ package net.wg.gui.lobby.confirmModuleWindow
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(content)
             {
                 content.dropdownMenu.removeEventListener(ListEvent.INDEX_CHANGE,this.currencyChangedHandler);
@@ -253,16 +260,19 @@ package net.wg.gui.lobby.confirmModuleWindow
             super.onDispose();
         }
         
-        override protected function selectedCountChangeHandler(param1:IndexEvent) : void {
+        override protected function selectedCountChangeHandler(param1:IndexEvent) : void
+        {
             this.selectedCount = content.nsCount.value;
             invalidate(RESULT_INVALID);
         }
         
-        override protected function submitBtnClickHandler(param1:ButtonEvent) : void {
+        override protected function submitBtnClickHandler(param1:ButtonEvent) : void
+        {
             submitS(this.selectedCount,this.currency);
         }
         
-        protected function currencyChangedHandler(param1:ListEvent) : void {
+        protected function currencyChangedHandler(param1:ListEvent) : void
+        {
             invalidate(SELECTED_CURRENCY_INVALID);
         }
     }

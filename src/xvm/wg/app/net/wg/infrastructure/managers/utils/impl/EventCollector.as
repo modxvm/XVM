@@ -19,7 +19,8 @@ package net.wg.infrastructure.managers.utils.impl
     public class EventCollector extends Object implements IEventCollector
     {
         
-        public function EventCollector() {
+        public function EventCollector()
+        {
             super();
             this.initObj();
         }
@@ -40,11 +41,13 @@ package net.wg.infrastructure.managers.utils.impl
         
         private var _dynamicContents:Array;
         
-        public function setEnabled(param1:Boolean) : void {
+        public function setEnabled(param1:Boolean) : void
+        {
             this._isEnabled = param1;
         }
         
-        public function addOneShotEvent(param1:IEventDispatcher, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void {
+        public function addOneShotEvent(param1:IEventDispatcher, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void
+        {
             var ec:EventCollector = null;
             var autoRemoveFunc:Function = null;
             var obj:IEventDispatcher = param1;
@@ -63,7 +66,8 @@ package net.wg.infrastructure.managers.utils.impl
             this._addEvent(obj,event,autoRemoveFunc);
         }
         
-        public function addEvent(param1:IEventDispatcher, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void {
+        public function addEvent(param1:IEventDispatcher, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void
+        {
             if(this._isEnabled)
             {
                 this._addEvent(param1,param2,param3,param4,param5,param6);
@@ -74,7 +78,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function addEventCollection(param1:Array, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void {
+        public function addEventCollection(param1:Array, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void
+        {
             var _loc8_:IEventDispatcher = null;
             var _loc7_:int = param1.length - 1;
             while(_loc7_ >= 0)
@@ -85,7 +90,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function removeEvent(param1:Object, param2:String, param3:Function, param4:Boolean = false) : void {
+        public function removeEvent(param1:Object, param2:String, param3:Function, param4:Boolean = false) : void
+        {
             var _loc5_:Object = null;
             var _loc6_:Array = null;
             var _loc7_:EventListnerProxy = null;
@@ -116,7 +122,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function removeEventCollection(param1:Array, param2:String, param3:Function) : void {
+        public function removeEventCollection(param1:Array, param2:String, param3:Function) : void
+        {
             var _loc4_:int = param1.length - 1;
             while(_loc4_ > 0)
             {
@@ -125,7 +132,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function removeAllEvents() : void {
+        public function removeAllEvents() : void
+        {
             var _loc2_:Object = null;
             var _loc3_:Array = null;
             var _loc4_:EventListnerProxy = null;
@@ -138,6 +146,7 @@ package net.wg.infrastructure.managers.utils.impl
                 _loc3_.splice(0);
                 this.doRemoveEventListener(_loc2_,LifeCycleEvent.ON_AFTER_DISPOSE,this.onBeforeModuleDisposeHandler);
                 delete this._moduleStack[_loc2_];
+                true;
             }
             _loc6_ = [];
             for(_loc2_ in this._objStack)
@@ -157,7 +166,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function removeModuleEvents(param1:IDAAPIModule) : void {
+        public function removeModuleEvents(param1:IDAAPIModule) : void
+        {
             var _loc3_:EventListnerProxy = null;
             var _loc4_:Object = null;
             var _loc2_:Array = this._moduleStack[param1];
@@ -172,9 +182,11 @@ package net.wg.infrastructure.managers.utils.impl
             this.doRemoveEventListener(param1,LifeCycleEvent.ON_AFTER_DISPOSE,this.onBeforeModuleDisposeHandler);
             App.utils.commons.releaseReferences(param1);
             delete this._moduleStack[param1];
+            true;
         }
         
-        public function removeObjectEvents(param1:Object, param2:Boolean = true) : void {
+        public function removeObjectEvents(param1:Object, param2:Boolean = true) : void
+        {
             var _loc4_:Array = null;
             var _loc5_:EventListnerProxy = null;
             var _loc6_:* = 0;
@@ -196,7 +208,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function hasRegisteredEvent(param1:Object, param2:String, param3:Function, param4:Boolean) : Boolean {
+        public function hasRegisteredEvent(param1:Object, param2:String, param3:Function, param4:Boolean) : Boolean
+        {
             var _loc6_:EventListnerProxy = null;
             this.checkObject(param1);
             var _loc5_:Array = this._objStack[param1][PROXIES];
@@ -213,11 +226,13 @@ package net.wg.infrastructure.managers.utils.impl
             return false;
         }
         
-        public function objectIsRegistered(param1:Object) : Boolean {
+        public function objectIsRegistered(param1:Object) : Boolean
+        {
             return Boolean(this._objStack[param1]);
         }
         
-        public function logState() : void {
+        public function logState() : void
+        {
             /*
              * Decompilation error
              * Code may be obfuscated
@@ -226,14 +241,16 @@ package net.wg.infrastructure.managers.utils.impl
             throw new Error("Not decompiled due to error");
         }
         
-        public function dispose() : void {
+        public function dispose() : void
+        {
             this.removeAllEvents();
             this._objStack = null;
             this._moduleStack = null;
             this._dynamicContents = null;
         }
         
-        public function enableDisposingForObj(param1:DisplayObject) : void {
+        public function enableDisposingForObj(param1:DisplayObject) : void
+        {
             var _loc2_:IDynamicContent = null;
             var _loc3_:Array = null;
             var _loc4_:Object = null;
@@ -258,20 +275,23 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function disableDisposingForObj(param1:DisplayObject) : void {
+        public function disableDisposingForObj(param1:DisplayObject) : void
+        {
             if(this._isEnabled)
             {
                 this.removeCustomObjectManaging(DisplayObject(param1));
             }
         }
         
-        private function removeCustomObjectEvents(param1:DisplayObject) : void {
+        private function removeCustomObjectEvents(param1:DisplayObject) : void
+        {
             this.removeCustomObjectManaging(param1);
             this.removeObjectEvents(param1,false);
             App.utils.commons.releaseReferences(param1);
         }
         
-        private function removeCustomObjectManaging(param1:DisplayObject) : void {
+        private function removeCustomObjectManaging(param1:DisplayObject) : void
+        {
             var _loc2_:* = NaN;
             this.removeRemovingFromStageListener(param1);
             if(param1 is DisplayObjectContainer)
@@ -285,7 +305,8 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        private function traceObject(param1:Object) : String {
+        private function traceObject(param1:Object) : String
+        {
             var _loc3_:EventListnerProxy = null;
             var _loc5_:DisplayObject = null;
             var _loc6_:Array = null;
@@ -321,13 +342,15 @@ package net.wg.infrastructure.managers.utils.impl
             return _loc2_;
         }
         
-        private function initObj() : void {
+        private function initObj() : void
+        {
             this._objStack = new Dictionary(true);
             this._moduleStack = new Dictionary(true);
             this._dynamicContents = [];
         }
         
-        private function _addEvent(param1:IEventDispatcher, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void {
+        private function _addEvent(param1:IEventDispatcher, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void
+        {
             var _loc7_:Array = null;
             var _loc8_:EventListnerProxy = null;
             var _loc9_:IDAAPIModule = null;
@@ -368,13 +391,18 @@ package net.wg.infrastructure.managers.utils.impl
             {
                 this.addCustomModuleManaging(_loc9_,param1);
             }
-            else if(param1 is DisplayObject)
+            else
             {
+                _loc10_ == null;
+                _loc10_ == null;
+                if(param1 is DisplayObject)
+                {
+                }
             }
-            
         }
         
-        private function addCustomModuleManaging(param1:IDAAPIModule, param2:IEventDispatcher) : void {
+        private function addCustomModuleManaging(param1:IDAAPIModule, param2:IEventDispatcher) : void
+        {
             var _loc3_:Array = this._moduleStack[param1];
             if(!_loc3_)
             {
@@ -388,19 +416,20 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        private function checkSlowWorking(param1:Object) : void {
+        private function checkSlowWorking(param1:Object) : void
+        {
             if(param1 is IDynamicContent)
             {
                 DebugUtils.LOG_WARNING("DAAPIModule \"" + getQualifiedClassName(param1) + "\" is DynamicContent. It may provide to slow working in the EventCollector! ");
             }
         }
         
-        private function findModuleAndDynamicContent(param1:DisplayObject) : Object {
+        private function findModuleAndDynamicContent(param1:DisplayObject) : Object
+        {
             var _loc3_:String = null;
-            var _loc2_:Object = {
-                "module":null,
-                "dynamicContent":null
-            };
+            var _loc2_:Object = {"module":null,
+            "dynamicContent":null
+        };
         while(param1 != null)
         {
             if(param1 is IDAAPIModule)
@@ -432,7 +461,8 @@ package net.wg.infrastructure.managers.utils.impl
         return _loc2_;
     }
     
-    private function checkObject(param1:Object) : void {
+    private function checkObject(param1:Object) : void
+    {
         if(param1 == null)
         {
             throw new NullPointerException();
@@ -443,11 +473,13 @@ package net.wg.infrastructure.managers.utils.impl
         }
     }
     
-    private function checkProxy(param1:EventListnerProxy, param2:Object, param3:String, param4:Function, param5:Boolean) : Boolean {
+    private function checkProxy(param1:EventListnerProxy, param2:Object, param3:String, param4:Function, param5:Boolean) : Boolean
+    {
         return param1.obj === param2 && param1.event === param3 && param1.func === param4 && param1.useCapture == param5;
     }
     
-    private function deleteProxy(param1:EventListnerProxy, param2:Boolean = true) : void {
+    private function deleteProxy(param1:EventListnerProxy, param2:Boolean = true) : void
+    {
         var _loc5_:Array = null;
         var _loc3_:Object = param1.obj;
         var _loc4_:IDAAPIModule = null;
@@ -467,6 +499,7 @@ package net.wg.infrastructure.managers.utils.impl
             if(_loc5_.length == 0)
             {
                 delete this._objStack[_loc3_];
+                true;
             }
         }
         else
@@ -509,7 +542,8 @@ package net.wg.infrastructure.managers.utils.impl
         param1.finalize();
     }
     
-    private function cleanupInModuleStack(param1:Object, param2:IDAAPIModule) : void {
+    private function cleanupInModuleStack(param1:Object, param2:IDAAPIModule) : void
+    {
         var _loc3_:Array = null;
         if(this._moduleStack[param2])
         {
@@ -519,11 +553,13 @@ package net.wg.infrastructure.managers.utils.impl
             {
                 this.doRemoveEventListener(param2,LifeCycleEvent.ON_AFTER_DISPOSE,this.onBeforeModuleDisposeHandler);
                 delete this._moduleStack[param2];
+                true;
             }
         }
     }
     
-    private function doRemoveEventListener(param1:Object, param2:String, param3:Function, param4:Boolean = false) : void {
+    private function doRemoveEventListener(param1:Object, param2:String, param3:Function, param4:Boolean = false) : void
+    {
         if(param1.hasOwnProperty("removeSuperEventListener"))
         {
             param1.removeSuperEventListener(param2,param3,param4);
@@ -534,7 +570,8 @@ package net.wg.infrastructure.managers.utils.impl
         }
     }
     
-    private function doAddEventListener(param1:Object, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void {
+    private function doAddEventListener(param1:Object, param2:String, param3:Function, param4:Boolean = false, param5:int = 0, param6:Boolean = false) : void
+    {
         if(param1.hasOwnProperty("addSuperEventListener"))
         {
             param1.addSuperEventListener(param2,param3,param4,param5,param6);
@@ -545,7 +582,8 @@ package net.wg.infrastructure.managers.utils.impl
         }
     }
     
-    private function addRemovingFromStageListener(param1:DisplayObject) : void {
+    private function addRemovingFromStageListener(param1:DisplayObject) : void
+    {
         if(this._dynamicContents.indexOf(param1) == -1)
         {
             this._dynamicContents.push(param1);
@@ -553,17 +591,20 @@ package net.wg.infrastructure.managers.utils.impl
         }
     }
     
-    private function removeRemovingFromStageListener(param1:DisplayObject) : void {
+    private function removeRemovingFromStageListener(param1:DisplayObject) : void
+    {
         this._dynamicContents.splice(this._dynamicContents.indexOf(param1),1);
         this.doRemoveEventListener(param1,Event.REMOVED_FROM_STAGE,this.onRemovedFromStageHandler);
     }
     
-    private function onBeforeModuleDisposeHandler(param1:LifeCycleEvent) : void {
+    private function onBeforeModuleDisposeHandler(param1:LifeCycleEvent) : void
+    {
         var _loc2_:IDAAPIModule = param1.target as IDAAPIModule;
         this.removeModuleEvents(_loc2_);
     }
     
-    private function onRemovedFromStageHandler(param1:Event) : void {
+    private function onRemovedFromStageHandler(param1:Event) : void
+    {
         var _loc2_:DisplayObject = null;
         if(param1.eventPhase == EventPhase.AT_TARGET)
         {

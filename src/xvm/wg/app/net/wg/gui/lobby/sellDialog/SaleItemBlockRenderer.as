@@ -25,7 +25,8 @@ package net.wg.gui.lobby.sellDialog
     public class SaleItemBlockRenderer extends ListItemRenderer implements ISaleItemBlockRenderer
     {
         
-        public function SaleItemBlockRenderer() {
+        public function SaleItemBlockRenderer()
+        {
             super();
         }
         
@@ -71,7 +72,8 @@ package net.wg.gui.lobby.sellDialog
         
         private var _sellExternalData:Array = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.alertIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onAlertIconRollOverHdlr,false);
             this.alertIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onAlertIconRollOutHdlr,false);
@@ -98,7 +100,8 @@ package net.wg.gui.lobby.sellDialog
             this.actionPrice = null;
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             this.data = param1;
             var _loc2_:SellDialogElement = SellDialogElement(param1);
             this._toInventory = _loc2_.toInventory;
@@ -117,53 +120,65 @@ package net.wg.gui.lobby.sellDialog
             invalidateData();
         }
         
-        override public function setSize(param1:Number, param2:Number) : void {
+        override public function setSize(param1:Number, param2:Number) : void
+        {
             this.money.x = param1 - this.money.width - RIGHT_MARGIN;
             this.actionPrice.x = param1 - 5;
             this.itemUnderline.width = param1;
         }
         
-        public function setColor(param1:Number) : void {
+        public function setColor(param1:Number) : void
+        {
             this.money.textColor = param1;
         }
         
-        public function hideLine() : void {
+        public function hideLine() : void
+        {
             this.itemUnderline.visible = false;
         }
         
-        public function get toInventory() : Boolean {
+        public function get toInventory() : Boolean
+        {
             return this._toInventory;
         }
         
-        public function get fromInventory() : Boolean {
+        public function get fromInventory() : Boolean
+        {
             return this._fromInventory;
         }
         
-        public function get isRemovable() : Boolean {
+        public function get isRemovable() : Boolean
+        {
             return this._isRemovable;
         }
         
-        public function get moneyValue() : Number {
+        public function get moneyValue() : Number
+        {
             return this._moneyValue;
         }
         
-        public function get type() : String {
+        public function get type() : String
+        {
             return this._type;
         }
         
-        public function get intCD() : Number {
+        public function get intCD() : Number
+        {
             return this._intCD;
         }
         
-        public function get count() : Number {
+        public function get count() : Number
+        {
             return this._count;
         }
         
-        public function get sellExternalData() : Array {
+        public function get sellExternalData() : Array
+        {
             return this._sellExternalData;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             this.buttonMode = false;
             this.money.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
             this.actionPrice.textYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
@@ -187,7 +202,8 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:String = null;
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (data))
@@ -265,7 +281,8 @@ package net.wg.gui.lobby.sellDialog
             constraints.update(this._width,this._height);
         }
         
-        private function getSign(param1:Number, param2:String) : String {
+        private function getSign(param1:Number, param2:String) : String
+        {
             if(param2 == Currencies.CREDITS)
             {
                 return (param1 > 0?"+":"") + App.utils.locale.integer(param1);
@@ -273,7 +290,8 @@ package net.wg.gui.lobby.sellDialog
             return (param1 > 0?"+":"") + App.utils.locale.gold(param1);
         }
         
-        private function onAlertIconRollOverHdlr(param1:MouseEvent) : void {
+        private function onAlertIconRollOverHdlr(param1:MouseEvent) : void
+        {
             var _loc2_:TooltipProps = null;
             if(this.ddm.selectedIndex == 1)
             {
@@ -282,11 +300,13 @@ package net.wg.gui.lobby.sellDialog
             }
         }
         
-        private function onAlertIconRollOutHdlr(param1:MouseEvent) : void {
+        private function onAlertIconRollOutHdlr(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        private function onChangeHandler(param1:ListEvent) : void {
+        private function onChangeHandler(param1:ListEvent) : void
+        {
             if(param1.index == 1)
             {
                 this._toInventory = true;

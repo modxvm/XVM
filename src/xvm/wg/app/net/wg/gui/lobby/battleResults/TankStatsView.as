@@ -9,7 +9,8 @@ package net.wg.gui.lobby.battleResults
     public class TankStatsView extends UIComponent
     {
         
-        public function TankStatsView() {
+        public function TankStatsView()
+        {
             super();
         }
         
@@ -29,7 +30,8 @@ package net.wg.gui.lobby.battleResults
         
         private var _toolTip:String = null;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.vehicleStateLbl.removeEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver);
             this.vehicleStateLbl.removeEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut);
             this.tankIcon.dispose();
@@ -37,21 +39,25 @@ package net.wg.gui.lobby.battleResults
             this.areaIcon.dispose();
         }
         
-        public function get toolTip() : String {
+        public function get toolTip() : String
+        {
             return this._toolTip;
         }
         
-        public function set toolTip(param1:String) : void {
+        public function set toolTip(param1:String) : void
+        {
             this._toolTip = param1;
             this.vehicleStateLbl.addEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver);
             this.vehicleStateLbl.addEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut);
         }
         
-        protected function handleMouseRollOver(param1:MouseEvent) : void {
+        protected function handleMouseRollOver(param1:MouseEvent) : void
+        {
             App.toolTipMgr.show(this.toolTip);
         }
         
-        protected function handleMouseRollOut(param1:MouseEvent) : void {
+        protected function handleMouseRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
     }

@@ -5,7 +5,8 @@ package net.wg.gui.components.controls.achievements
     public class BeigeCounter extends CounterComponent
     {
         
-        public function BeigeCounter() {
+        public function BeigeCounter()
+        {
             super();
         }
         
@@ -15,16 +16,19 @@ package net.wg.gui.components.controls.achievements
         
         private var _classValue:String = "";
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this._labels = this.currentLabels;
         }
         
-        override public function receiveBottomPadding() : Number {
+        override public function receiveBottomPadding() : Number
+        {
             return 0;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:uint = 0;
             var _loc2_:FrameLabel = null;
             if(isInvalid(CLASS_INV))
@@ -47,11 +51,13 @@ package net.wg.gui.components.controls.achievements
             }
         }
         
-        override public function get text() : String {
+        override public function get text() : String
+        {
             return this._classValue;
         }
         
-        override public function set text(param1:String) : void {
+        override public function set text(param1:String) : void
+        {
             this._classValue = param1;
             invalidate(CLASS_INV);
         }

@@ -5,7 +5,8 @@ package net.wg.gui.components.advanced
     public class SortingButtonInfo extends Object
     {
         
-        public function SortingButtonInfo() {
+        public function SortingButtonInfo()
+        {
             super();
         }
         
@@ -39,15 +40,18 @@ package net.wg.gui.components.advanced
         
         public var label:String = "";
         
-        public function get defaultSortDir() : uint {
+        public function get defaultSortDir() : uint
+        {
             return this.defaultSortDirection == SortingInfo.DESCENDING_SORT?Array.DESCENDING:0;
         }
         
-        public function get dataSortType() : uint {
+        public function get dataSortType() : uint
+        {
             return this.sortType == NUMERIC?Array.NUMERIC:Array.CASEINSENSITIVE;
         }
         
-        public function set dataSortType(param1:uint) : void {
+        public function set dataSortType(param1:uint) : void
+        {
             this.sortType = param1 == Array.NUMERIC?NUMERIC:CASEINSENSITIVE;
         }
     }

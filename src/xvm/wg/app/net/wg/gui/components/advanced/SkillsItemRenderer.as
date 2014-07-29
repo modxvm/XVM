@@ -16,7 +16,8 @@ package net.wg.gui.components.advanced
     public class SkillsItemRenderer extends ListItemRenderer
     {
         
-        public function SkillsItemRenderer() {
+        public function SkillsItemRenderer()
+        {
             super();
         }
         
@@ -26,7 +27,8 @@ package net.wg.gui.components.advanced
         
         protected static var DATA_CHANGED:String = "dataChanged";
         
-        private static function getRankGlowFilter() : Array {
+        private static function getRankGlowFilter() : Array
+        {
             var _loc1_:Array = [];
             var _loc2_:Number = 16724246;
             var _loc3_:Number = 0.5;
@@ -59,7 +61,8 @@ package net.wg.gui.components.advanced
         
         public var role_ico_path:String = "";
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
             removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
             removeEventListener(ButtonEvent.CLICK,this.onShowSkillTab);
@@ -78,19 +81,22 @@ package net.wg.gui.components.advanced
             super.onDispose();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if(isInvalid(DATA_CHANGED))
             {
                 this.setup(this.data);
             }
         }
         
-        override public function set data(param1:Object) : void {
+        override public function set data(param1:Object) : void
+        {
             super.data = param1;
             invalidate(DATA_CHANGED);
         }
         
-        override public function setData(param1:Object) : void {
+        override public function setData(param1:Object) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -99,13 +105,15 @@ package net.wg.gui.components.advanced
             invalidate(DATA_CHANGED);
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             addEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
             addEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
         }
         
-        private function onRollOver(param1:MouseEvent) : void {
+        private function onRollOver(param1:MouseEvent) : void
+        {
             if(!data.hasOwnProperty("name") && !data.hasOwnProperty("tankmanID") && !(data.name == null))
             {
                 return;
@@ -120,11 +128,13 @@ package net.wg.gui.components.advanced
             }
         }
         
-        private function onRollOut(param1:MouseEvent) : void {
+        private function onRollOut(param1:MouseEvent) : void
+        {
             App.toolTipMgr.hide();
         }
         
-        public function setup(param1:Object) : void {
+        public function setup(param1:Object) : void
+        {
             var c:ColorTransform = null;
             var data:Object = param1;
             if(data == null)
@@ -217,7 +227,8 @@ package net.wg.gui.components.advanced
             }
         }
         
-        public function onShowSkillTab(param1:ButtonEvent) : void {
+        public function onShowSkillTab(param1:ButtonEvent) : void
+        {
             dispatchEvent(new PersonalCaseEvent(PersonalCaseEvent.CHANGE_TAB_ON_TWO,true));
         }
     }

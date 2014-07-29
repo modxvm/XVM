@@ -9,25 +9,29 @@ package net.wg.gui.components.controls
     public class DropDownListItemRendererSound extends SoundListItemRenderer
     {
         
-        public function DropDownListItemRendererSound() {
+        public function DropDownListItemRendererSound()
+        {
             super();
             soundType = SoundTypes.DROPDN_ITEM_RNDR;
         }
         
         public var focusElement:MovieClip;
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG DropDownListItemRendererSound " + name + "]";
         }
         
-        override protected function updateText() : void {
+        override protected function updateText() : void
+        {
             if(!(_label == null) && !(textField == null))
             {
                 textField.htmlText = _label;
             }
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             var _loc1_:Point = null;
             if(isInvalid(InvalidationType.DATA))
             {
@@ -45,7 +49,8 @@ package net.wg.gui.components.controls
             super.draw();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(this.focusElement)
             {
                 focusIndicator = this.focusElement;

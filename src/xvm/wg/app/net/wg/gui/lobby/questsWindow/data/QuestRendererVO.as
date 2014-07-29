@@ -5,7 +5,8 @@ package net.wg.gui.lobby.questsWindow.data
     public class QuestRendererVO extends DAAPIDataClass
     {
         
-        public function QuestRendererVO(param1:Object) {
+        public function QuestRendererVO(param1:Object)
+        {
             super(param1);
         }
         
@@ -39,123 +40,153 @@ package net.wg.gui.lobby.questsWindow.data
         
         private var _eventType:int = 0;
         
-        public function get isNew() : Boolean {
+        public function get isNew() : Boolean
+        {
             return this._isNew;
         }
         
-        public function set isNew(param1:Boolean) : void {
+        public function set isNew(param1:Boolean) : void
+        {
             this._isNew = param1;
         }
         
-        public function get IGR() : Boolean {
+        public function get IGR() : Boolean
+        {
             return this._IGR;
         }
         
-        public function set IGR(param1:Boolean) : void {
+        public function set IGR(param1:Boolean) : void
+        {
             this._IGR = param1;
         }
         
-        public function get taskType() : String {
+        public function get taskType() : String
+        {
             return this._taskType;
         }
         
-        public function set taskType(param1:String) : void {
+        public function set taskType(param1:String) : void
+        {
             this._taskType = param1;
         }
         
-        public function get description() : String {
+        public function get description() : String
+        {
             return this._description;
         }
         
-        public function set description(param1:String) : void {
+        public function set description(param1:String) : void
+        {
             this._description = param1;
         }
         
-        public function get timerDescr() : String {
+        public function get timerDescr() : String
+        {
             return this._timerDescr;
         }
         
-        public function set timerDescr(param1:String) : void {
+        public function set timerDescr(param1:String) : void
+        {
             this._timerDescr = param1;
         }
         
-        public function get tasksCount() : int {
+        public function get tasksCount() : int
+        {
             return this._tasksCount;
         }
         
-        public function set tasksCount(param1:int) : void {
+        public function set tasksCount(param1:int) : void
+        {
             this._tasksCount = param1;
         }
         
-        public function get maxProgrVal() : Number {
+        public function get maxProgrVal() : Number
+        {
             return this._maxProgrVal;
         }
         
-        public function set maxProgrVal(param1:Number) : void {
+        public function set maxProgrVal(param1:Number) : void
+        {
             this._maxProgrVal = param1;
         }
         
-        public function get currentProgrVal() : Number {
+        public function get currentProgrVal() : Number
+        {
             return this._currentProgrVal;
         }
         
-        public function set currentProgrVal(param1:Number) : void {
+        public function set currentProgrVal(param1:Number) : void
+        {
             this._currentProgrVal = param1;
         }
         
-        public function get progrBarType() : String {
+        public function get progrBarType() : String
+        {
             return this._progrBarType;
         }
         
-        public function set progrBarType(param1:String) : void {
+        public function set progrBarType(param1:String) : void
+        {
             this._progrBarType = param1;
         }
         
-        public function get status() : String {
+        public function get status() : String
+        {
             return this._status;
         }
         
-        public function set status(param1:String) : void {
+        public function set status(param1:String) : void
+        {
             this._status = param1;
         }
         
-        public function get isLock() : Boolean {
+        public function get isLock() : Boolean
+        {
             return this._isLock;
         }
         
-        public function set isLock(param1:Boolean) : void {
+        public function set isLock(param1:Boolean) : void
+        {
             this._isLock = param1;
         }
         
-        public function get isLocked() : Boolean {
+        public function get isLocked() : Boolean
+        {
             return this._isLocked;
         }
         
-        public function set isLocked(param1:Boolean) : void {
+        public function set isLocked(param1:Boolean) : void
+        {
             this._isLocked = param1;
         }
         
-        public function get questID() : String {
+        public function get questID() : String
+        {
             return this._questID;
         }
         
-        public function set questID(param1:String) : void {
+        public function set questID(param1:String) : void
+        {
             this._questID = param1;
         }
         
-        public function get progrTooltip() : Object {
+        public function get progrTooltip() : Object
+        {
             return this._progrTooltip;
         }
         
-        public function set progrTooltip(param1:Object) : void {
+        public function set progrTooltip(param1:Object) : void
+        {
             this._progrTooltip = param1;
         }
         
-        public function get eventType() : int {
+        public function get eventType() : int
+        {
             return this._eventType;
         }
         
-        public function set eventType(param1:int) : void {
+        public function set eventType(param1:int) : void
+        {
             this._eventType = param1;
         }
     }

@@ -7,11 +7,11 @@ package net.wg.gui.lobby.profile
     public class UserInfoForm extends UIComponent
     {
         
-        public function UserInfoForm() {
-            this.USER_INFO_FRAME = {
-                "CLAN":1,
-                "NORMAL":2
-            };
+        public function UserInfoForm()
+        {
+            this.USER_INFO_FRAME = {"CLAN":1,
+            "NORMAL":2
+        };
         super();
     }
     
@@ -39,14 +39,16 @@ package net.wg.gui.lobby.profile
     
     private var USER_INFO_FRAME:Object;
     
-    override protected function draw() : void {
+    override protected function draw() : void
+    {
         if(this.dataUpdated)
         {
             this.dataUpdated = false;
         }
     }
     
-    public function setData(param1:Object) : void {
+    public function setData(param1:Object) : void
+    {
         if((param1) && !(param1 == this._data))
         {
             this._data = param1;

@@ -5,7 +5,8 @@ package net.wg.infrastructure.exceptions
     public class LifecycleException extends WGGUIException
     {
         
-        public function LifecycleException(param1:* = "", param2:* = 0) {
+        public function LifecycleException(param1:* = "", param2:* = 0)
+        {
             super(param1,param2);
         }
     }

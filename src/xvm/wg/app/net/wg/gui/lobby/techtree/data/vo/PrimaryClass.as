@@ -6,7 +6,8 @@ package net.wg.gui.lobby.techtree.data.vo
     public class PrimaryClass extends Object implements IValueObject
     {
         
-        public function PrimaryClass(param1:String = "", param2:String = "") {
+        public function PrimaryClass(param1:String = "", param2:String = "")
+        {
             super();
             this._name = param1;
             this._userString = param2;
@@ -16,15 +17,18 @@ package net.wg.gui.lobby.techtree.data.vo
         
         private var _userString:String;
         
-        public function get name() : String {
+        public function get name() : String
+        {
             return this._name;
         }
         
-        public function get userString() : String {
+        public function get userString() : String
+        {
             return this._userString;
         }
         
-        public function fromArray(param1:Array, param2:ILocale) : void {
+        public function fromArray(param1:Array, param2:ILocale) : void
+        {
             if(param1.length > 1)
             {
                 this._name = param1[0];
@@ -32,7 +36,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function fromObject(param1:Object, param2:ILocale) : void {
+        public function fromObject(param1:Object, param2:ILocale) : void
+        {
             if(param1 == null)
             {
                 return;
@@ -47,7 +52,8 @@ package net.wg.gui.lobby.techtree.data.vo
             }
         }
         
-        public function toString() : String {
+        public function toString() : String
+        {
             return "[PrimaryClass: name = " + this._name + ", userString = " + this._userString + " ]";
         }
     }

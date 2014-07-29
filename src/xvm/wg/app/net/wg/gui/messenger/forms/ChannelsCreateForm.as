@@ -23,7 +23,8 @@ package net.wg.gui.messenger.forms
     public class ChannelsCreateForm extends UIComponentEx implements IViewStackContent
     {
         
-        public function ChannelsCreateForm() {
+        public function ChannelsCreateForm()
+        {
             super();
         }
         
@@ -53,7 +54,8 @@ package net.wg.gui.messenger.forms
         
         private var usePassword:Boolean = false;
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.channelPasswordCheckBox.addEventListener(Event.SELECT,this.onChannelPasswordCheckBox);
             this.channelCreateButton.addEventListener(ButtonEvent.CLICK,this.onCreateChannelClick);
@@ -74,7 +76,8 @@ package net.wg.gui.messenger.forms
             constraints.addElement("bg",this.bg,Constraints.ALL);
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.isDefaultPrevented())
             {
                 return;
@@ -105,11 +108,13 @@ package net.wg.gui.messenger.forms
             
         }
         
-        private function handlePress(param1:uint) : void {
+        private function handlePress(param1:uint) : void
+        {
             this.onCreateChannelClick(null);
         }
         
-        private function onCreateChannelClick(param1:ButtonEvent = null) : void {
+        private function onCreateChannelClick(param1:ButtonEvent = null) : void
+        {
             var _loc2_:String = this.channelNameInput.text;
             var _loc3_:Boolean = this.channelPasswordCheckBox.selected;
             var _loc4_:String = _loc3_?this.channelPasswordInput.text:null;
@@ -117,13 +122,15 @@ package net.wg.gui.messenger.forms
             dispatchEvent(new ChannelsFormEvent(ChannelsFormEvent.ON_CREATE_CHANNEL,true,false,_loc2_,_loc4_,_loc5_));
         }
         
-        private function onChannelPasswordCheckBox(param1:Event = null) : void {
+        private function onChannelPasswordCheckBox(param1:Event = null) : void
+        {
             this.usePassword = this.channelPasswordCheckBox.selected;
             this.channelFillPasswordLabel.enabled = this.channelRetypePasswordLabel.enabled = this.channelPasswordInput.enabled = this.channelRetypePasswordInput.enabled = this.usePassword;
             invalidate(UPDATE_PASSWORD_TEXT);
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((constraints) && (isInvalid(InvalidationType.SIZE)))
             {
@@ -135,7 +142,8 @@ package net.wg.gui.messenger.forms
             }
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             super.onDispose();
             this.channelPasswordCheckBox.removeEventListener(Event.SELECT,this.onChannelPasswordCheckBox);
             this.channelNameInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
@@ -143,24 +151,29 @@ package net.wg.gui.messenger.forms
             this.channelRetypePasswordInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
         }
         
-        public function update(param1:Object) : void {
+        public function update(param1:Object) : void
+        {
             this._data = param1;
             invalidate(InvalidationType.DATA);
         }
         
-        override public function setSize(param1:Number, param2:Number) : void {
+        override public function setSize(param1:Number, param2:Number) : void
+        {
             super.setSize(param1,param2);
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG ChannelsCreateForm " + name + "]";
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this.channelNameInput;
         }
         
-        public function canShowAutomatically() : Boolean {
+        public function canShowAutomatically() : Boolean
+        {
             return true;
         }
     }

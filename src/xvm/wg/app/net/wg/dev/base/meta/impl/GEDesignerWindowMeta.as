@@ -5,7 +5,8 @@ package net.wg.dev.base.meta.impl
     public class GEDesignerWindowMeta extends AbstractWindowView
     {
         
-        public function GEDesignerWindowMeta() {
+        public function GEDesignerWindowMeta()
+        {
             super();
         }
     }

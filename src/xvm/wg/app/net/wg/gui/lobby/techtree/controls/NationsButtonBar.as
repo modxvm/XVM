@@ -7,7 +7,8 @@ package net.wg.gui.lobby.techtree.controls
     public class NationsButtonBar extends ButtonBarEx
     {
         
-        public function NationsButtonBar() {
+        public function NationsButtonBar()
+        {
             super();
         }
         
@@ -21,16 +22,19 @@ package net.wg.gui.lobby.techtree.controls
         
         public var barBG:Sprite;
         
-        public function get tabVAlign() : String {
+        public function get tabVAlign() : String
+        {
             return this._tabVAlign;
         }
         
-        public function set tabVAlign(param1:String) : void {
+        public function set tabVAlign(param1:String) : void
+        {
             this._tabVAlign = param1;
             invalidate();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             if(this.barBG != null)
             {
                 this.barBG.mouseEnabled = false;
@@ -38,11 +42,13 @@ package net.wg.gui.lobby.techtree.controls
             super.configUI();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
         }
         
-        override protected function updateRenderers() : void {
+        override protected function updateRenderers() : void
+        {
             var _loc1_:Button = null;
             super.updateRenderers();
             switch(this.tabVAlign)
@@ -64,11 +70,13 @@ package net.wg.gui.lobby.techtree.controls
             }
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[WG NationsButtonBar " + name + "]";
         }
         
-        private function repositionRenderers(param1:Number) : void {
+        private function repositionRenderers(param1:Number) : void
+        {
             var _loc2_:Button = null;
             var _loc3_:Number = 0;
             while(_loc3_ < _renderers.length)

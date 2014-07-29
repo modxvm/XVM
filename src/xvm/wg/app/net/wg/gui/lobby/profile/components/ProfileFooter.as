@@ -7,18 +7,21 @@ package net.wg.gui.lobby.profile.components
     public class ProfileFooter extends UIComponent
     {
         
-        public function ProfileFooter() {
+        public function ProfileFooter()
+        {
             super();
         }
         
         protected var initData:ProfileUserVO;
         
-        public function setUserData(param1:ProfileUserVO) : void {
+        public function setUserData(param1:ProfileUserVO) : void
+        {
             this.initData = param1;
             invalidateData();
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.initData))
             {
@@ -26,10 +29,12 @@ package net.wg.gui.lobby.profile.components
             }
         }
         
-        protected function applyDataChanges() : void {
+        protected function applyDataChanges() : void
+        {
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.initData = null;
             super.onDispose();
         }

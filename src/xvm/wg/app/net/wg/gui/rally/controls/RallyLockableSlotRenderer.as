@@ -6,18 +6,21 @@ package net.wg.gui.rally.controls
     public class RallyLockableSlotRenderer extends RallySlotRenderer
     {
         
-        public function RallyLockableSlotRenderer() {
+        public function RallyLockableSlotRenderer()
+        {
             super();
         }
         
         public var lockBackground:Sprite;
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.lockBackground = null;
             super.onDispose();
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             App.utils.asserter.assertNotNull(this.lockBackground,"lockBackground in " + name + Errors.CANT_NULL);
             super.configUI();
         }

@@ -16,7 +16,8 @@ package net.wg.gui.messenger.windows
     public class ConnectToSecureChannelWindow extends ConnectToSecureChannelWindowMeta implements IConnectToSecureChannelWindowMeta
     {
         
-        public function ConnectToSecureChannelWindow() {
+        public function ConnectToSecureChannelWindow()
+        {
             super();
         }
         
@@ -38,13 +39,15 @@ package net.wg.gui.messenger.windows
         
         private var channelInfoText:String = "";
         
-        public function as_infoMessage(param1:String) : void {
+        public function as_infoMessage(param1:String) : void
+        {
             this.channelInfoText = param1;
             this.isUpdated = false;
             invalidate(UPDATE_COMPONENTS);
         }
         
-        override protected function onPopulate() : void {
+        override protected function onPopulate() : void
+        {
             super.onPopulate();
             showWindowBg = false;
             window.useBottomBtns = true;
@@ -56,7 +59,8 @@ package net.wg.gui.messenger.windows
             _loc1_.bottom = 18;
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             super.draw();
             if((isInvalid(UPDATE_COMPONENTS)) && !this.isUpdated)
             {
@@ -65,7 +69,8 @@ package net.wg.gui.messenger.windows
             }
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this.connectButton.addEventListener(ButtonEvent.CLICK,this.connectButtonClickHandler);
             this.cancelButton.addEventListener(ButtonEvent.CLICK,this.cancelButtonClickHandler);
@@ -75,30 +80,36 @@ package net.wg.gui.messenger.windows
             App.utils.scheduler.envokeInNextFrame(this.onSetModalFocus);
         }
         
-        override protected function onSetModalFocus(param1:InteractiveObject) : void {
+        override protected function onSetModalFocus(param1:InteractiveObject) : void
+        {
             this.passwordInput.validateNow();
             setFocus(this.passwordInput);
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.connectButton.removeEventListener(ButtonEvent.CLICK,this.connectButtonClickHandler);
             this.cancelButton.removeEventListener(ButtonEvent.CLICK,this.cancelButtonClickHandler);
             super.onDispose();
         }
         
-        private function connectButtonClickHandler(param1:ButtonEvent) : void {
+        private function connectButtonClickHandler(param1:ButtonEvent) : void
+        {
             this.prepareSendPassword();
         }
         
-        private function prepareSendPassword() : void {
+        private function prepareSendPassword() : void
+        {
             sendPasswordS(this.passwordInput.text);
         }
         
-        private function cancelButtonClickHandler(param1:ButtonEvent) : void {
+        private function cancelButtonClickHandler(param1:ButtonEvent) : void
+        {
             cancelPasswordS();
         }
         
-        private function passwordInputHandler(param1:InputEvent) : void {
+        private function passwordInputHandler(param1:InputEvent) : void
+        {
             var _loc2_:InputDetails = param1.details;
             if(param1.details.code == Keyboard.ENTER && _loc2_.value == InputValue.KEY_UP)
             {
@@ -107,7 +118,8 @@ package net.wg.gui.messenger.windows
             }
         }
         
-        private function updateData() : void {
+        private function updateData() : void
+        {
             this.channelInfoLabel.text = this.channelInfoText;
         }
     }

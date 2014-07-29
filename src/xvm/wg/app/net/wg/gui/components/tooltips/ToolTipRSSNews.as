@@ -9,7 +9,8 @@ package net.wg.gui.components.tooltips
     public class ToolTipRSSNews extends ToolTipSpecial
     {
         
-        public function ToolTipRSSNews() {
+        public function ToolTipRSSNews()
+        {
             super();
             contentMargin.top = 8;
             contentMargin.bottom = 17;
@@ -29,20 +30,22 @@ package net.wg.gui.components.tooltips
         
         private var separator:Separator;
         
-        public function get utils() : Utils {
+        public function get utils() : Utils
+        {
             return Utils.instance;
         }
         
-        override public function build(param1:Object, param2:ITooltipProps) : void {
+        override public function build(param1:Object, param2:ITooltipProps) : void
+        {
             var _loc3_:Array = param1 as Array;
-            var _loc4_:Object = {"data":{
-                "header":_loc3_[0],
-                "description":_loc3_[1]
-            }};
+            var _loc4_:Object = {"data":{"header":_loc3_[0],
+            "description":_loc3_[1]
+        }};
         super.build(_loc4_,param2);
     }
     
-    override protected function redraw() : void {
+    override protected function redraw() : void
+    {
         var _loc2_:String = null;
         topPosition = bgShadowMargin.top + contentMargin.top;
         blockResults = new Vector.<ToolTipBlockResultVO>();
@@ -61,6 +64,7 @@ package net.wg.gui.components.tooltips
         topPosition = topPosition + GAP;
         if(_loc2_)
         {
+            this.descriptionTF.defaultTextFormat.leading;
             this.descriptionTF.htmlText = this.utils.htmlWrapper(_loc2_,this.utils.COLOR_NORMAL,12,"$TextFont",false);
             this.descriptionTF.width = MAX_WIDTH - contentMargin.left;
             this.descriptionTF.height = this.descriptionTF.textHeight + 5;
@@ -79,14 +83,16 @@ package net.wg.gui.components.tooltips
         super.redraw();
     }
     
-    override protected function updateSize() : void {
+    override protected function updateSize() : void
+    {
         background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
         background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
         this.whiteBg.width = content.width + bgShadowMargin.horizontal;
         this.whiteBg.height = content.height - this.whiteBg.y + contentMargin.bottom;
     }
     
-    private function initControls() : void {
+    private function initControls() : void
+    {
         this.headerTF = content.headerTF;
         this.descriptionTF = content.descriptionTF;
         this.whiteBg = content.whiteBg;

@@ -20,6 +20,7 @@ package net.wg.gui.lobby.settings
     import net.wg.gui.lobby.settings.evnts.SettingViewEvent;
     import net.wg.gui.lobby.settings.evnts.AlternativeVoiceEvent;
     import net.wg.gui.components.windows.WindowEvent;
+    import net.wg.infrastructure.constants.WindowViewInvalidationType;
     import net.wg.gui.lobby.settings.vo.SettingsKeyProp;
     import flash.display.MovieClip;
     import scaleform.clik.interfaces.IDataProvider;
@@ -30,12 +31,12 @@ package net.wg.gui.lobby.settings
     import net.wg.data.managers.impl.TooltipProps;
     import net.wg.data.constants.Tooltips;
     import net.wg.gui.components.tooltips.helpers.Utils;
-    import net.wg.infrastructure.constants.WindowViewInvalidationType;
     
     public class SettingsWindow extends SettingsWindowMeta implements ISettingsWindowMeta
     {
         
-        public function SettingsWindow() {
+        public function SettingsWindow()
+        {
             this._invalidTabs = {};
             super();
             this.canDrag = false;
@@ -80,11 +81,13 @@ package net.wg.gui.lobby.settings
         
         private var SOUND_MODE_WARNING:String = "soundModeInvalid";
         
-        override public function updateStage(param1:Number, param2:Number) : void {
+        override public function updateStage(param1:Number, param2:Number) : void
+        {
             super.updateStage(param1,param2);
         }
         
-        override public function setWindow(param1:IWindow) : void {
+        override public function setWindow(param1:IWindow) : void
+        {
             var _loc2_:Padding = null;
             super.setWindow(param1);
             if(window)
@@ -99,7 +102,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        public function as_setCaptureDevices(param1:Number, param2:Array) : void {
+        public function as_setCaptureDevices(param1:Number, param2:Array) : void
+        {
             var _loc3_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
             if(_loc3_ != null)
             {
@@ -107,12 +111,14 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        public function as_onVibroManagerConnect(param1:Boolean) : void {
+        public function as_onVibroManagerConnect(param1:Boolean) : void
+        {
             SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.OTHER_SETTINGS].vibroIsConnected).current = param1;
             this.updateTabs(param1);
         }
         
-        public function as_updateVideoSettings(param1:Object) : void {
+        public function as_updateVideoSettings(param1:Object) : void
+        {
             var _loc4_:uint = 0;
             var _loc5_:ICommons = null;
             var _loc6_:uint = 0;
@@ -177,7 +183,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        public function as_confirmWarningDialog(param1:Boolean, param2:String) : void {
+        public function as_confirmWarningDialog(param1:Boolean, param2:String) : void
+        {
             var _loc3_:Object = null;
             var _loc4_:SettingsControlProp = null;
             var _loc5_:SoundSettings = null;
@@ -208,12 +215,14 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        public function as_setData(param1:Object) : void {
+        public function as_setData(param1:Object) : void
+        {
             this.invalidateAllTabs();
             this.initializeCommonData(param1);
         }
         
-        public function as_openTab(param1:Number) : void {
+        public function as_openTab(param1:Number) : void
+        {
             this.tabToSelect = param1;
             if((initialized) && !(param1 == -1))
             {
@@ -221,7 +230,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        public function as_setGraphicsPreset(param1:Number) : void {
+        public function as_setGraphicsPreset(param1:Number) : void
+        {
             this.graphicsPresetToSelect = param1;
             var _loc2_:GraphicSettings = GraphicSettings(this.tryGetView(SettingsConfig.GRAPHIC_SETTINGS));
             if(_loc2_)
@@ -231,7 +241,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function invalidateAllTabs() : void {
+        private function invalidateAllTabs() : void
+        {
             var _loc2_:Object = null;
             this._invalidTabs = {};
             var _loc1_:Array = SettingsConfig.tabsDataProviderWithOther;
@@ -241,7 +252,8 @@ package net.wg.gui.lobby.settings
             }
         }
         
-        private function isTabInvalid(param1:String) : Boolean {
+        private function isTabInvalid(param1:String) : Boolean
+        {
             var _loc2_:* = false;
             if((this._invalidTabs.hasOwnProperty(param1)) && (this._invalidTabs[param1]))
             {
@@ -250,18 +262,19 @@ package net.wg.gui.lobby.settings
             return _loc2_;
         }
         
-        private function updateTabIfNeeded(param1:String, param2:IViewStackContent) : void {
+        private function updateTabIfNeeded(param1:String, param2:IViewStackContent) : void
+        {
             if(this.isTabInvalid(param1))
             {
-                param2.update({
-                    "id":param1,
-                    "data":this._settingsData[param1]
-                });
+                param2.update({"id":param1,
+                "data":this._settingsData[param1]
+            });
             this._invalidTabs[param1] = false;
         }
     }
     
-    private function initializeCommonData(param1:Object) : void {
+    private function initializeCommonData(param1:Object) : void
+    {
         var _loc2_:String = null;
         var _loc3_:IViewStackContent = null;
         this._settingsData = this.normalize(param1);
@@ -273,15 +286,15 @@ package net.wg.gui.lobby.settings
             _loc2_ = SettingsConfig.tabsDataProviderWithOther[__currentTab].linkage;
             this.view.show(_loc2_);
             _loc3_ = IViewStackContent(this.view.currentView);
-            _loc3_.update({
-                "id":_loc2_,
-                "data":this._settingsData[_loc2_]
-            });
+            _loc3_.update({"id":_loc2_,
+            "data":this._settingsData[_loc2_]
+        });
         this.tabs.validateNow();
     }
 }
 
-private function updateTabs(param1:Boolean) : void {
+private function updateTabs(param1:Boolean) : void
+{
     var _loc2_:DataProvider = null;
     var _loc3_:uint = 0;
     if(param1)
@@ -308,11 +321,13 @@ private function updateTabs(param1:Boolean) : void {
     }
 }
 
-public function as_ConfirmationOfApplication(param1:Boolean) : void {
+public function as_ConfirmationOfApplication(param1:Boolean) : void
+{
     this.updateSettingsConfig(param1);
 }
 
-override protected function configUI() : void {
+override protected function configUI() : void
+{
     super.configUI();
     this.submitBtn.label = SETTINGS.OK_BUTTON;
     this.cancelBtn.label = SETTINGS.CANCEL_BUTTON;
@@ -340,15 +355,23 @@ override protected function configUI() : void {
     window.addEventListener(WindowEvent.SCALE_Y_CHANGED,this.window_scaleYChangedHandler);
 }
 
-override protected function onPopulate() : void {
+override protected function onPopulate() : void
+{
     super.onPopulate();
 }
 
-override protected function draw() : void {
+override protected function draw() : void
+{
     super.draw();
+    if((geometry) && (window) && (isInvalid(WindowViewInvalidationType.POSITION_INVALID)))
+    {
+        window.x = Math.round((App.appWidth - window.getBackground().width) / 2);
+        window.y = Math.round((App.appHeight - window.getBackground().height) / 2);
+    }
 }
 
-override protected function onDispose() : void {
+override protected function onDispose() : void
+{
     window.removeEventListener(WindowEvent.SCALE_Y_CHANGED,this.window_scaleYChangedHandler);
     this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.cancelBtnClickHandler);
     this.applyBtn.removeEventListener(ButtonEvent.CLICK,this.applyBtnClickHandler);
@@ -377,7 +400,8 @@ override protected function onDispose() : void {
     super.onDispose();
 }
 
-private function controlDefValEqNewVal(param1:*, param2:*) : Boolean {
+private function controlDefValEqNewVal(param1:*, param2:*) : Boolean
+{
     var _loc3_:String = null;
     if(param1 is SettingsControlProp)
     {
@@ -412,7 +436,8 @@ private function controlDefValEqNewVal(param1:*, param2:*) : Boolean {
     return false;
 }
 
-private function checkChanges(param1:Boolean, param2:String, param3:*) : void {
+private function checkChanges(param1:Boolean, param2:String, param3:*) : void
+{
     if(param1)
     {
         this.changesData.tryCutChanges(param2,param3);
@@ -424,11 +449,13 @@ private function checkChanges(param1:Boolean, param2:String, param3:*) : void {
     this.updateApplyBtnState();
 }
 
-private function updateApplyBtnState() : void {
+private function updateApplyBtnState() : void
+{
     this.applyBtn.enabled = (this.changesData) && this.changesData.length > 0;
 }
 
-private function tryGetView(param1:String) : MovieClip {
+private function tryGetView(param1:String) : MovieClip
+{
     var _loc2_:MovieClip = null;
     if(!this.view)
     {
@@ -441,7 +468,8 @@ private function tryGetView(param1:String) : MovieClip {
     return _loc2_;
 }
 
-private function normalize(param1:Object) : Object {
+private function normalize(param1:Object) : Object
+{
     var _loc2_:String = null;
     var _loc3_:SettingsControlProp = null;
     var _loc4_:SettingsKeyProp = null;
@@ -462,7 +490,8 @@ private function normalize(param1:Object) : Object {
     return SettingsConfig.settingsData;
 }
 
-private function normalizeInside(param1:Object, param2:Object, param3:String) : void {
+private function normalizeInside(param1:Object, param2:Object, param3:String) : void
+{
     /*
      * Decompilation error
      * Code may be obfuscated
@@ -471,7 +500,8 @@ private function normalizeInside(param1:Object, param2:Object, param3:String) : 
     throw new Error("Not decompiled due to error");
 }
 
-private function normalizeKeys(param1:Object, param2:Array, param3:Object, param4:Array) : void {
+private function normalizeKeys(param1:Object, param2:Array, param3:Object, param4:Array) : void
+{
     var _loc6_:uint = 0;
     var _loc7_:String = null;
     var _loc8_:Array = null;
@@ -511,7 +541,8 @@ private function normalizeKeys(param1:Object, param2:Array, param3:Object, param
     }
 }
 
-private function sendData(param1:Boolean) : void {
+private function sendData(param1:Boolean) : void
+{
     var _loc5_:String = null;
     var _loc6_:GraphicSettings = null;
     this.cancelBtn.enabled = this.applyBtn.enabled = this.submitBtn.enabled = false;
@@ -540,7 +571,8 @@ private function sendData(param1:Boolean) : void {
     }
 }
 
-private function checkControlsWrong() : Boolean {
+private function checkControlsWrong() : Boolean
+{
     var _loc3_:IDataProvider = null;
     var _loc4_:uint = 0;
     var _loc5_:uint = 0;
@@ -580,7 +612,8 @@ private function checkControlsWrong() : Boolean {
     return _loc1_;
 }
 
-private function updateSettingsConfig(param1:Boolean) : void {
+private function updateSettingsConfig(param1:Boolean) : void
+{
     var _loc2_:Object = null;
     if((param1) && (this.changesData))
     {
@@ -592,7 +625,8 @@ private function updateSettingsConfig(param1:Boolean) : void {
     this.updateApplyBtnState();
 }
 
-private function searchAndOverride(param1:uint, param2:Object, param3:Object) : void {
+private function searchAndOverride(param1:uint, param2:Object, param3:Object) : void
+{
     var _loc4_:String = null;
     var _loc5_:Object = null;
     var _loc6_:Object = null;
@@ -635,7 +669,8 @@ private function searchAndOverride(param1:uint, param2:Object, param3:Object) : 
     }
 }
 
-private function getPropObj(param1:Object, param2:String) : Object {
+private function getPropObj(param1:Object, param2:String) : Object
+{
     var _loc3_:String = null;
     for(_loc3_ in param1)
     {
@@ -647,7 +682,8 @@ private function getPropObj(param1:Object, param2:String) : Object {
     return null;
 }
 
-private function onTabChange(param1:IndexEvent) : void {
+private function onTabChange(param1:IndexEvent) : void
+{
     __currentTab = param1.index;
     App.toolTipMgr.hide();
     var _loc2_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
@@ -658,11 +694,13 @@ private function onTabChange(param1:IndexEvent) : void {
     onTabSelectedS(SettingsConfig.tabsDataProviderWithOther[__currentTab].label);
 }
 
-private function onViewNeedUpdateHandler(param1:ViewStackEvent) : void {
+private function onViewNeedUpdateHandler(param1:ViewStackEvent) : void
+{
     this.updateTabIfNeeded(param1.linkage,param1.view);
 }
 
-private function onViewChangeHandler(param1:ViewStackEvent) : void {
+private function onViewChangeHandler(param1:ViewStackEvent) : void
+{
     this.updateTabIfNeeded(param1.linkage,param1.view);
     var _loc2_:IViewStackContent = param1.view;
     var _loc3_:ISettingsBase = _loc2_ as ISettingsBase;
@@ -685,7 +723,8 @@ private function onViewChangeHandler(param1:ViewStackEvent) : void {
     }
 }
 
-private function onPTTControlChanged(param1:SettingViewEvent) : void {
+private function onPTTControlChanged(param1:SettingViewEvent) : void
+{
     var _loc2_:SettingsControlProp = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.SOUND_SETTINGS][SettingsConfig.PTT]);
     _loc2_.current = param1.controlValue;
     var _loc3_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
@@ -695,7 +734,8 @@ private function onPTTControlChanged(param1:SettingViewEvent) : void {
     }
 }
 
-private function onControlChanged(param1:SettingViewEvent) : void {
+private function onControlChanged(param1:SettingViewEvent) : void
+{
     var _loc2_:String = param1.viewId;
     var _loc3_:String = param1.controlId;
     var _loc4_:* = param1.controlValue;
@@ -704,7 +744,8 @@ private function onControlChanged(param1:SettingViewEvent) : void {
     this.checkChanges(_loc5_,_loc3_,_loc4_);
 }
 
-private function onVivoxTest(param1:SettingViewEvent) : void {
+private function onVivoxTest(param1:SettingViewEvent) : void
+{
     var _loc2_:Boolean = Boolean(param1.controlValue);
     var _loc3_:Boolean = startVOIPTestS(_loc2_);
     var _loc4_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
@@ -714,7 +755,8 @@ private function onVivoxTest(param1:SettingViewEvent) : void {
     }
 }
 
-private function onAutodetectQuality(param1:SettingViewEvent) : void {
+private function onAutodetectQuality(param1:SettingViewEvent) : void
+{
     var _loc2_:Number = autodetectQualityS();
     var _loc3_:GraphicSettings = GraphicSettings(this.tryGetView(SettingsConfig.GRAPHIC_SETTINGS));
     if(_loc3_ != null)
@@ -723,11 +765,13 @@ private function onAutodetectQuality(param1:SettingViewEvent) : void {
     }
 }
 
-private function onUpdateCaptureDevices(param1:SettingViewEvent) : void {
+private function onUpdateCaptureDevices(param1:SettingViewEvent) : void
+{
     updateCaptureDevicesS();
 }
 
-private function onAlternativeVoice(param1:AlternativeVoiceEvent) : void {
+private function onAlternativeVoice(param1:AlternativeVoiceEvent) : void
+{
     var _loc2_:SoundSettings = null;
     var _loc3_:* = NaN;
     var _loc4_:* = NaN;
@@ -750,7 +794,8 @@ private function onAlternativeVoice(param1:AlternativeVoiceEvent) : void {
     }
 }
 
-private function cancelBtnClickHandler(param1:ButtonEvent) : void {
+private function cancelBtnClickHandler(param1:ButtonEvent) : void
+{
     var _loc2_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
     if(_loc2_)
     {
@@ -759,15 +804,18 @@ private function cancelBtnClickHandler(param1:ButtonEvent) : void {
     onWindowCloseS();
 }
 
-private function applyBtnClickHandler(param1:ButtonEvent) : void {
+private function applyBtnClickHandler(param1:ButtonEvent) : void
+{
     this.sendData(false);
 }
 
-private function submitBtnClickHandler(param1:ButtonEvent) : void {
+private function submitBtnClickHandler(param1:ButtonEvent) : void
+{
     this.sendData(true);
 }
 
-private function window_scaleYChangedHandler(param1:WindowEvent) : void {
+private function window_scaleYChangedHandler(param1:WindowEvent) : void
+{
     invalidate(WindowViewInvalidationType.POSITION_INVALID);
 }
 }

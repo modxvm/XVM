@@ -5,11 +5,13 @@ package net.wg.gui.components.controls
     public class ResizableScrollPane extends ScrollPane
     {
         
-        public function ResizableScrollPane() {
+        public function ResizableScrollPane()
+        {
             super();
         }
         
-        override protected function applyTargetChanges() : void {
+        override protected function applyTargetChanges() : void
+        {
             if(target)
             {
                 target.removeEventListener(Event.RESIZE,this.resizeHandler);
@@ -18,12 +20,14 @@ package net.wg.gui.components.controls
             super.applyTargetChanges();
         }
         
-        private function resizeHandler(param1:Event) : void {
+        private function resizeHandler(param1:Event) : void
+        {
             _scrollPosition = Math.max(0,Math.min(maxScroll,Math.round(_scrollPosition)));
             invalidateSize();
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(target)
             {
                 target.removeEventListener(Event.RESIZE,this.resizeHandler);

@@ -12,7 +12,8 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
     public class FortMainFooter extends UIComponentEx implements IMainFooter
     {
         
-        public function FortMainFooter() {
+        public function FortMainFooter()
+        {
             super();
         }
         
@@ -28,7 +29,8 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         private var _leaveModeBtn:SoundButtonEx = null;
         
-        public function updateControls() : void {
+        public function updateControls() : void
+        {
             FortsControlsAligner.instance.rightControl(DisplayObject(this._intelligenceButton),0);
             this._leaveModeBtn.y = actualHeight - this._leaveModeBtn.actualHeight >> 1 - LEAVE_TRANSPORT_BTN_OFFSET_Y;
             FortsControlsAligner.instance.centerControl(this._leaveModeBtn);
@@ -36,59 +38,73 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this.ordersPanel.y = this._footerBitmapFill.y;
         }
         
-        public function getComponentForFocus() : InteractiveObject {
+        public function getComponentForFocus() : InteractiveObject
+        {
             return this._leaveModeBtn;
         }
         
-        public function set widthFill(param1:Number) : void {
+        public function set widthFill(param1:Number) : void
+        {
             this._footerBitmapFill.widthFill = param1;
         }
         
-        public function get heightFill() : Number {
+        public function get heightFill() : Number
+        {
             return this._footerBitmapFill.heightFill;
         }
         
-        public function get leaveModeBtn() : SoundButtonEx {
+        public function get leaveModeBtn() : SoundButtonEx
+        {
             return this._leaveModeBtn;
         }
         
-        public function set leaveModeBtn(param1:SoundButtonEx) : void {
+        public function set leaveModeBtn(param1:SoundButtonEx) : void
+        {
             this._leaveModeBtn = param1;
         }
         
-        public function get ordersPanel() : IOrdersPanel {
+        public function get ordersPanel() : IOrdersPanel
+        {
             return this._ordersPanel;
         }
         
-        public function set ordersPanel(param1:IOrdersPanel) : void {
+        public function set ordersPanel(param1:IOrdersPanel) : void
+        {
             this._ordersPanel = param1;
         }
         
-        public function get intelligenceButton() : SoundButtonEx {
+        public function get intelligenceButton() : SoundButtonEx
+        {
             return this._intelligenceButton;
         }
         
-        public function set intelligenceButton(param1:SoundButtonEx) : void {
+        public function set intelligenceButton(param1:SoundButtonEx) : void
+        {
             this._intelligenceButton = param1;
         }
         
-        public function get sortieBtn() : SoundButtonEx {
+        public function get sortieBtn() : SoundButtonEx
+        {
             return this._sortieBtn;
         }
         
-        public function set sortieBtn(param1:SoundButtonEx) : void {
+        public function set sortieBtn(param1:SoundButtonEx) : void
+        {
             this._sortieBtn = param1;
         }
         
-        public function get footerBitmapFill() : BitmapFill {
+        public function get footerBitmapFill() : BitmapFill
+        {
             return this._footerBitmapFill;
         }
         
-        public function set footerBitmapFill(param1:BitmapFill) : void {
+        public function set footerBitmapFill(param1:BitmapFill) : void
+        {
             this._footerBitmapFill = param1;
         }
         
-        override protected function configUI() : void {
+        override protected function configUI() : void
+        {
             super.configUI();
             this._sortieBtn.label = FORTIFICATIONS.FORTMAINVIEW_SORTIEBUTTON_TITLE;
             this._sortieBtn.tooltip = TOOLTIPS.FORTIFICATION_FOOTER_SORTIEBUTTON;
@@ -100,7 +116,8 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this._sortieBtn.UIID = 28;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             this.ordersPanel = null;
             this._leaveModeBtn.dispose();
             this._leaveModeBtn = null;

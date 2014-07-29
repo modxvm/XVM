@@ -19,7 +19,8 @@ package scaleform.clik.controls
     public class DropdownMenu extends Button
     {
         
-        public function DropdownMenu() {
+        public function DropdownMenu()
+        {
             super();
         }
         
@@ -61,51 +62,63 @@ package scaleform.clik.controls
         
         protected var _dropdownRef:MovieClip = null;
         
-        override protected function initialize() : void {
+        override protected function initialize() : void
+        {
             this.dataProvider = new DataProvider();
             this.menuOffset = new Padding(0,0,0,0);
             this.menuPadding = new Padding(0,0,0,0);
             super.initialize();
         }
         
-        override public function get autoRepeat() : Boolean {
+        override public function get autoRepeat() : Boolean
+        {
             return false;
         }
         
-        override public function set autoRepeat(param1:Boolean) : void {
+        override public function set autoRepeat(param1:Boolean) : void
+        {
         }
         
-        override public function get data() : Object {
+        override public function get data() : Object
+        {
             return null;
         }
         
-        override public function set data(param1:Object) : void {
+        override public function set data(param1:Object) : void
+        {
         }
         
-        override public function get label() : String {
+        override public function get label() : String
+        {
             return "";
         }
         
-        override public function set label(param1:String) : void {
+        override public function set label(param1:String) : void
+        {
         }
         
-        override public function get selected() : Boolean {
+        override public function get selected() : Boolean
+        {
             return super.selected;
         }
         
-        override public function set selected(param1:Boolean) : void {
+        override public function set selected(param1:Boolean) : void
+        {
             super.selected = param1;
         }
         
-        override public function get toggle() : Boolean {
+        override public function get toggle() : Boolean
+        {
             return super.toggle;
         }
         
-        override public function set toggle(param1:Boolean) : void {
+        override public function set toggle(param1:Boolean) : void
+        {
             super.toggle = param1;
         }
         
-        public function set inspectableMenuPadding(param1:Object) : void {
+        public function set inspectableMenuPadding(param1:Object) : void
+        {
             if(!componentInspectorSetting)
             {
                 return;
@@ -113,7 +126,8 @@ package scaleform.clik.controls
             this.menuPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
         }
         
-        public function set inspectableMenuOffset(param1:Object) : void {
+        public function set inspectableMenuOffset(param1:Object) : void
+        {
             if(!componentInspectorSetting)
             {
                 return;
@@ -121,7 +135,8 @@ package scaleform.clik.controls
             this.menuOffset = new Padding(param1.top,param1.right,param1.bottom,param1.left);
         }
         
-        public function set inspectableThumbOffset(param1:Object) : void {
+        public function set inspectableThumbOffset(param1:Object) : void
+        {
             if(!componentInspectorSetting)
             {
                 return;
@@ -130,15 +145,18 @@ package scaleform.clik.controls
             this.thumbOffsetBottom = Number(param1.bottom);
         }
         
-        override public function get focusable() : Boolean {
+        override public function get focusable() : Boolean
+        {
             return _focusable;
         }
         
-        override public function set focusable(param1:Boolean) : void {
+        override public function set focusable(param1:Boolean) : void
+        {
             super.focusable = param1;
         }
         
-        override protected function onDispose() : void {
+        override protected function onDispose() : void
+        {
             if(this._dataProvider)
             {
                 this._dataProvider.removeEventListener(Event.CHANGE,this.handleDataChange,false);
@@ -148,11 +166,13 @@ package scaleform.clik.controls
             super.onDispose();
         }
         
-        public function get selectedIndex() : int {
+        public function get selectedIndex() : int
+        {
             return this._selectedIndex;
         }
         
-        public function set selectedIndex(param1:int) : void {
+        public function set selectedIndex(param1:int) : void
+        {
             var _loc2_:CoreList = null;
             var _loc3_:uint = 0;
             if(this._selectedIndex == param1)
@@ -169,11 +189,13 @@ package scaleform.clik.controls
             }
         }
         
-        public function get dataProvider() : IDataProvider {
+        public function get dataProvider() : IDataProvider
+        {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:IDataProvider) : void {
+        public function set dataProvider(param1:IDataProvider) : void
+        {
             if(this._dataProvider == param1)
             {
                 return;
@@ -196,25 +218,30 @@ package scaleform.clik.controls
             invalidateData();
         }
         
-        public function get labelField() : String {
+        public function get labelField() : String
+        {
             return this._labelField;
         }
         
-        public function set labelField(param1:String) : void {
+        public function set labelField(param1:String) : void
+        {
             this._labelField = param1;
             invalidateData();
         }
         
-        public function get labelFunction() : Function {
+        public function get labelFunction() : Function
+        {
             return this._labelFunction;
         }
         
-        public function set labelFunction(param1:Function) : void {
+        public function set labelFunction(param1:Function) : void
+        {
             this._labelFunction = param1;
             invalidateData();
         }
         
-        public function itemToLabel(param1:Object) : String {
+        public function itemToLabel(param1:Object) : String
+        {
             if(param1 == null)
             {
                 return "";
@@ -234,27 +261,32 @@ package scaleform.clik.controls
             return param1.toString();
         }
         
-        public function open() : void {
+        public function open() : void
+        {
             this.selected = true;
             stage.addEventListener(MouseEvent.MOUSE_DOWN,this.handleStageClick,false,0,true);
             this.showDropdown();
         }
         
-        public function close() : void {
+        public function close() : void
+        {
             this.selected = false;
             stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleStageClick,false);
             this.hideDropdown();
         }
         
-        public function isOpen() : Boolean {
+        public function isOpen() : Boolean
+        {
             return !(this._dropdownRef == null);
         }
         
-        public function invalidateSelectedIndex() : void {
+        public function invalidateSelectedIndex() : void
+        {
             invalidate(InvalidationType.SELECTED_INDEX);
         }
         
-        override public function handleInput(param1:InputEvent) : void {
+        override public function handleInput(param1:InputEvent) : void
+        {
             if(param1.handled)
             {
                 return;
@@ -286,11 +318,13 @@ package scaleform.clik.controls
             }
         }
         
-        override public function toString() : String {
+        override public function toString() : String
+        {
             return "[CLIK DropdownMenu " + name + "]";
         }
         
-        override protected function draw() : void {
+        override protected function draw() : void
+        {
             if((isInvalid(InvalidationType.SELECTED_INDEX)) || (isInvalid(InvalidationType.DATA)))
             {
                 this._dataProvider.requestItemAt(this._selectedIndex,this.populateText);
@@ -299,7 +333,8 @@ package scaleform.clik.controls
             super.draw();
         }
         
-        override protected function changeFocus() : void {
+        override protected function changeFocus() : void
+        {
             super.changeFocus();
             if((_selected) && (this._dropdownRef))
             {
@@ -307,7 +342,8 @@ package scaleform.clik.controls
             }
         }
         
-        override protected function handleClick(param1:uint = 0) : void {
+        override protected function handleClick(param1:uint = 0) : void
+        {
             if(!_selected)
             {
                 this.open();
@@ -319,20 +355,24 @@ package scaleform.clik.controls
             super.handleClick();
         }
         
-        protected function handleDataChange(param1:Event) : void {
+        protected function handleDataChange(param1:Event) : void
+        {
             invalidate(InvalidationType.DATA);
         }
         
-        protected function populateText(param1:Object) : void {
+        protected function populateText(param1:Object) : void
+        {
             this.updateLabel(param1);
             dispatchEvent(new Event(Event.CHANGE));
         }
         
-        protected function updateLabel(param1:Object) : void {
+        protected function updateLabel(param1:Object) : void
+        {
             _label = this.itemToLabel(param1);
         }
         
-        protected function handleStageClick(param1:MouseEvent) : void {
+        protected function handleStageClick(param1:MouseEvent) : void
+        {
             if(this.contains(param1.target as DisplayObject))
             {
                 return;
@@ -344,7 +384,8 @@ package scaleform.clik.controls
             this.close();
         }
         
-        protected function showDropdown() : void {
+        protected function showDropdown() : void
+        {
             var _loc1_:MovieClip = null;
             var _loc2_:Class = null;
             if(this.dropdown == null)
@@ -385,10 +426,9 @@ package scaleform.clik.controls
                 _loc1_.padding = this.menuPadding;
                 _loc1_.wrapping = this.menuWrapping;
                 _loc1_.margin = this.menuMargin;
-                _loc1_.thumbOffset = {
-                    "top":this.thumbOffsetTop,
-                    "bottom":this.thumbOffsetBottom
-                };
+                _loc1_.thumbOffset = {"top":this.thumbOffsetTop,
+                "bottom":this.thumbOffsetBottom
+            };
             _loc1_.focusTarget = this;
             _loc1_.rowCount = this.menuRowCount < 1?5:this.menuRowCount;
             _loc1_.labelField = this._labelField;
@@ -399,7 +439,8 @@ package scaleform.clik.controls
         }
     }
     
-    protected function hideDropdown() : void {
+    protected function hideDropdown() : void
+    {
         if(this._dropdownRef)
         {
             this._dropdownRef.parent.removeChild(this._dropdownRef);
@@ -407,7 +448,8 @@ package scaleform.clik.controls
         }
     }
     
-    protected function handleMenuItemClick(param1:ListEvent) : void {
+    protected function handleMenuItemClick(param1:ListEvent) : void
+    {
         this.selectedIndex = param1.index;
         this.close();
     }

@@ -6,13 +6,15 @@ package net.wg.infrastructure.base.meta.impl
     public class ProfileAwardsMeta extends ProfileAchievementsSection
     {
         
-        public function ProfileAwardsMeta() {
+        public function ProfileAwardsMeta()
+        {
             super();
         }
         
         public var setFilter:Function = null;
         
-        public function setFilterS(param1:Object) : void {
+        public function setFilterS(param1:Object) : void
+        {
             App.utils.asserter.assertNotNull(this.setFilter,"setFilter" + Errors.CANT_NULL);
             this.setFilter(param1);
         }

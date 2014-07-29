@@ -5,7 +5,8 @@ package net.wg.gui.events
     public class TrainingEvent extends Event
     {
         
-        public function TrainingEvent(param1:String, param2:Object = null, param3:Array = null) {
+        public function TrainingEvent(param1:String, param2:Object = null, param3:Array = null)
+        {
             super(param1,true,true);
             this.initObj = param2;
             this.initArr = param3;
@@ -17,7 +18,8 @@ package net.wg.gui.events
         
         public var initArr:Array;
         
-        override public function clone() : Event {
+        override public function clone() : Event
+        {
             return new TrainingEvent(type,this.initObj,this.initArr);
         }
     }
