@@ -70,6 +70,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         $85_winter:             { size: 100 }, // Severogorsk
         $86_himmelsdorf_winter: { size: 70 },  // Winter Himmelsdorf
         $87_ruinberg_on_fire:   { size: 80 },  // Ruinberg on Fire
+        $96_prohorovka_defense: { size: 100 }, //
         $99_himmelball:         { size: 70 },  //
         __end__: null
     }

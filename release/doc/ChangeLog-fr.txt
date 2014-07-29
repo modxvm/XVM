@@ -1,7 +1,9 @@
-﻿XVM-5.3.2-test1:
+﻿XVM-5.3.3:
+  * adaptation pour WoT 0.9.2
+
+XVM-5.3.2:
   * nouvelles options : captureBar/allyColor, captureBar/enemyColor
 
-  
 XVM-5.3.1:
   * adaptation pour WoT 0.9.1
   * affiche la portée de vue actuelle, le temps de rechargement du canon et la portée radio dans le garage
