@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ "$OS" = "Windows_NT" ]; then
+    export PATH=$(pwd):$PATH
+fi
+
 echo "Updating icons of top clans..."
 cd scripts-topclans
 

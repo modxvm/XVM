@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ "$OS" = "Windows_NT" ]; then
+    export PATH=$(pwd):$PATH
+fi
+
 echo "Updating icons of all clans..."
 cd scripts-allclans
 
