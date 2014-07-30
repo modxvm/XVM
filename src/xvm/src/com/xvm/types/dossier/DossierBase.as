@@ -18,7 +18,6 @@ package com.xvm.types.dossier
         public var xp:int;
         public var losses:int;
         public var survived:int;
-        public var winAndSurvived:int;
         public var shots:int;
         public var hits:int;
         public var spotted:int;

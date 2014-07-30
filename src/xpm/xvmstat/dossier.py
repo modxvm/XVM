@@ -62,7 +62,6 @@ class _Dossier(object):
             'losses': total.getLossesCount(),
             'xp': total.getXP(),
             'survived': total.getSurvivedBattlesCount(),
-            'winAndSurvived': total.getWinAndSurvived(),
             'shots': total.getShotsCount(),
             'hits': total.getHitsCount(),
             'spotted': total.getSpottedEnemiesCount(),
