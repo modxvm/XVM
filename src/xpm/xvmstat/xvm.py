@@ -265,9 +265,10 @@ class Xvm(object):
     def setAltMode(self, isDown):
         #debug('setAltMode: ' + str(isDown))
         try:
-            movie = self.battleFlashObject.movie
-            if movie is not None:
-                movie.invoke((RESPOND_ALT_MODE, isDown))
+            if self.battleFlashObject is not None:
+                movie = self.battleFlashObject.movie
+                if movie is not None:
+                    movie.invoke((RESPOND_ALT_MODE, isDown))
         except Exception, ex:
             err('setAltMode(): ' + traceback.format_exc())
 

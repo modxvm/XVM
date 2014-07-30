@@ -39,7 +39,7 @@ package xvm.tcarousel
 
         private function init():void
         {
-            Dossier.loadAccountDossier(page.carousel, page.carousel.invalidateData);
+            Dossier.loadAccountDossier(page.carousel, page.carousel.invalidateData, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
 
             page.carousel.itemRenderer = UI_TankCarouselItemRenderer;
         }

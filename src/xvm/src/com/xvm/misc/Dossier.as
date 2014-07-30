@@ -32,17 +32,17 @@ package com.xvm.misc
 
         /////////////////////
 
-        public static function loadAccountDossier(target:Object, callback:Function, playerId:int = 0):void
+        public static function loadAccountDossier(target:Object, callback:Function, battleType:String, playerId:int = 0):void
         {
-            loadDossierInternal(target, callback, playerId, 0);
+            loadDossierInternal(target, callback, battleType, playerId, 0);
         }
 
-        public static function loadVehicleDossier(target:Object, callback:Function, vehId:int, playerId:int = 0):void
+        public static function loadVehicleDossier(target:Object, callback:Function, battleType:String, vehId:int, playerId:int = 0):void
         {
-            loadDossierInternal(target, callback, playerId, vehId);
+            loadDossierInternal(target, callback, battleType, playerId, vehId);
         }
 
-        private static function loadDossierInternal(target:Object, callback:Function, playerId:int, vehId:int):void
+        private static function loadDossierInternal(target:Object, callback:Function, battleType:String, playerId:int, vehId:int):void
         {
             init();
             var key:String = playerId + "," + vehId;
@@ -51,7 +51,7 @@ package com.xvm.misc
                 _requests[key] = [];
             if (callback != null)
                 _requests[key].push( { target: target, callback: callback } );
-            Cmd.getDossier(playerId == 0 ? null : playerId.toString(), vehId == 0 ? null : vehId.toString());
+            Cmd.getDossier(battleType, playerId == 0 ? null : playerId.toString(), vehId == 0 ? null : vehId.toString());
         }
 
         private static function dossierLoaded(playerId:int, vehId:int, str:String):void

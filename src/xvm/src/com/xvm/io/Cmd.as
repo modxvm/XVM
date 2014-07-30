@@ -113,9 +113,9 @@ package com.xvm.io
             _call(null, null, [COMMAND_LOADUSERDATA, value, isId]);
         }
 
-        public static function getDossier(playerId:String, vehId:String = null):void
+        public static function getDossier(battleType:String, playerId:String, vehId:String):void
         {
-            _call(null, null, [COMMAND_GETDOSSIER, playerId, vehId]);
+            _call(null, null, [COMMAND_GETDOSSIER, battleType, playerId, vehId]);
         }
 
         public static function openUrl(url:String):void

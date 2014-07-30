@@ -15,7 +15,7 @@ package xvm.profile.components
             super(page, playerName);
 
             _playerId = 0;
-            Dossier.loadAccountDossier(this, dossierLoaded);
+            Dossier.loadAccountDossier(this, dossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
 
             page.listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
         }

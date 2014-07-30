@@ -13,7 +13,7 @@ package xvm.profile.components
             super(window, playerName);
 
             _playerId = playerId;
-            Dossier.loadAccountDossier(null, null, playerId);
+            Dossier.loadAccountDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, playerId);
         }
 
         override protected function createFilters():void

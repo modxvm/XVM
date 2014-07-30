@@ -27,8 +27,6 @@ package com.xvm.types.dossier
         public var capture:int;
         public var defence:int;
 
-        public var frags8p:int; // what is this?
-
         public var xpBefore8_8:int;
         public var battlesBefore8_8:int;
 

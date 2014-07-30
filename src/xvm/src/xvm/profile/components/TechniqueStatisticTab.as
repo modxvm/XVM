@@ -571,7 +571,7 @@ package xvm.profile.components
         private function updateVehicleData(vehId:uint):void
         {
             lastBattleTimeTF.htmlText = "";
-            Dossier.loadVehicleDossier(this, updateVehicleDataCallback, vehId, tech.playerId);
+            Dossier.loadVehicleDossier(this, updateVehicleDataCallback, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, vehId, tech.playerId);
         }
 
         private function updateVehicleDataCallback(dossier:VehicleDossier):void

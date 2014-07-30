@@ -1,6 +1,6 @@
-diff --strip-trailing-cr -Naur app.orig/App.as app/App.as
---- app.orig/App.as	2014-07-29 13:58:29 +0300
-+++ app/App.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/App.as app/App.as
+--- app.orig/App.as	2014-07-30 12:59:11.178935000 +0300
++++ app/App.as	2014-07-30 13:14:56.234856100 +0300
 @@ -1,5 +1,6 @@
  package
  {
@@ -8,9 +8,9 @@ diff --strip-trailing-cr -Naur app.orig/App.as app/App.as
      import net.wg.app.IApplication;
      import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
      import net.wg.infrastructure.managers.ISoundManager;
-diff --strip-trailing-cr -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/components/advanced/TankIcon.as
---- app.orig/net/wg/gui/components/advanced/TankIcon.as	2014-07-29 14:05:03 +0300
-+++ app/net/wg/gui/components/advanced/TankIcon.as	2014-07-29 16:10:16 +0300
+diff -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/components/advanced/TankIcon.as
+--- app.orig/net/wg/gui/components/advanced/TankIcon.as	2014-07-30 13:01:00.705638300 +0300
++++ app/net/wg/gui/components/advanced/TankIcon.as	2014-07-30 13:14:56.244856700 +0300
 @@ -90,7 +90,7 @@
          
          private var _isPremiumDirty:Boolean = true;
@@ -20,9 +20,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/gui/components/advanced/TankIcon.
          
          override protected function onDispose() : void
          {
-diff --strip-trailing-cr -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/net/wg/gui/components/common/video/SimpleVideoPlayer.as
---- app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-07-29 14:02:08 +0300
-+++ app/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-07-29 14:26:44 +0300
+diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/net/wg/gui/components/common/video/SimpleVideoPlayer.as
+--- app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-07-30 13:00:16.283507300 +0300
++++ app/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-07-30 13:14:56.260857600 +0300
 @@ -311,10 +311,10 @@
          }
      }
@@ -38,9 +38,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/gui/components/common/video/Simpl
      
      public function get currentTime() : Number
      {
-diff --strip-trailing-cr -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as
---- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-07-29 14:10:01 +0300
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-07-30 13:02:03.247737100 +0300
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-07-30 13:14:56.274858400 +0300
 @@ -84,9 +84,9 @@
          
          private var filterDataInvalid:Boolean = false;
@@ -53,9 +53,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCa
          
          private var checkBoxToMain:CheckBox;
          
-diff --strip-trailing-cr -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as
---- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-07-29 14:10:30 +0300
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-07-30 13:02:10.417747100 +0300
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-07-30 13:14:56.280858700 +0300
 @@ -22,9 +22,9 @@
          
          public static var FILTER_READY:String = "ready";
@@ -68,9 +68,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCa
          
          public var checkBoxToMain:CheckBox;
          
-diff --strip-trailing-cr -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/gui/lobby/profile/ProfileTabNavigator.as
---- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-07-29 14:05:58 +0300
-+++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/gui/lobby/profile/ProfileTabNavigator.as
+--- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-07-30 13:01:13.029659700 +0300
++++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-07-30 13:14:56.289859300 +0300
 @@ -28,7 +28,7 @@
          
          public var viewStack:ResizableViewStack;
@@ -80,9 +80,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavig
          
          private var _sectionsDataUtil:SectionsDataUtil;
          
-diff --strip-trailing-cr -Naur app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as app/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as
---- app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2014-07-29 14:08:57 +0300
-+++ app/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2014-07-29 14:51:57 +0300
+diff -Naur app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as app/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as
+--- app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2014-07-30 13:01:49.717718200 +0300
++++ app/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2014-07-30 13:14:56.332861700 +0300
 @@ -599,7 +599,7 @@
                                  _loc12_ = _loc7_[_loc17_];
                                  if(!(_loc12_ == null) && _loc12_.index == _loc16_)
@@ -92,9 +92,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemL
                                      _loc3_.push(_loc4_);
                                      break;
                                  }
-diff --strip-trailing-cr -Naur app.orig/net/wg/gui/notification/NotificationPopUpViewer.as app/net/wg/gui/notification/NotificationPopUpViewer.as
---- app.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2014-07-29 14:12:09 +0300
-+++ app/net/wg/gui/notification/NotificationPopUpViewer.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/net/wg/gui/notification/NotificationPopUpViewer.as app/net/wg/gui/notification/NotificationPopUpViewer.as
+--- app.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2014-07-30 13:02:31.031780100 +0300
++++ app/net/wg/gui/notification/NotificationPopUpViewer.as	2014-07-30 13:14:56.342862300 +0300
 @@ -45,7 +45,7 @@
      
      private var maxAvailaleMessagesCount:uint = 5;
@@ -104,9 +104,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/gui/notification/NotificationPopU
      
      private var animationManager:ExcludeTweenManager;
      
-diff --strip-trailing-cr -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/gui/prebattle/squad/SquadItemRenderer.as
---- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-07-29 14:00:51 +0300
-+++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/gui/prebattle/squad/SquadItemRenderer.as
+--- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-07-30 12:59:55.573451000 +0300
++++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-07-30 13:14:56.353862900 +0300
 @@ -171,7 +171,7 @@
                  }
                  this.setSpeakers(this.model.isPlayerSpeaking,true);
@@ -127,9 +127,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRend
                  this.updateVoiceWave();
                  _loc3_ = this.model.getCurrentColor();
                  if(!isNaN(_loc3_))
-diff --strip-trailing-cr -Naur app.orig/net/wg/gui/prebattle/squad/SquadWindow.as app/net/wg/gui/prebattle/squad/SquadWindow.as
---- app.orig/net/wg/gui/prebattle/squad/SquadWindow.as	2014-07-29 14:06:38 +0300
-+++ app/net/wg/gui/prebattle/squad/SquadWindow.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadWindow.as app/net/wg/gui/prebattle/squad/SquadWindow.as
+--- app.orig/net/wg/gui/prebattle/squad/SquadWindow.as	2014-07-30 13:01:21.769671900 +0300
++++ app/net/wg/gui/prebattle/squad/SquadWindow.as	2014-07-30 13:14:56.363863500 +0300
 @@ -68,7 +68,7 @@
              if(param3)
              {
@@ -139,9 +139,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/gui/prebattle/squad/SquadWindow.a
                  while(_loc5_ < this.memberList.dataProvider.length)
                  {
                      _loc6_ = this.memberList.dataProvider.requestItemAt(_loc5_) as PlayerPrbInfoVO;
-diff --strip-trailing-cr -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/wg/infrastructure/managers/IContainerManager.as
---- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2014-07-29 13:58:29 +0300
-+++ app/net/wg/infrastructure/managers/IContainerManager.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/wg/infrastructure/managers/IContainerManager.as
+--- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2014-07-30 12:59:11.084932900 +0300
++++ app/net/wg/infrastructure/managers/IContainerManager.as	2014-07-30 13:14:56.369863800 +0300
 @@ -15,6 +15,8 @@
          
          function isModalViewsExisting() : Boolean;
@@ -151,9 +151,9 @@ diff --strip-trailing-cr -Naur app.orig/net/wg/infrastructure/managers/IContaine
          function set loader(param1:ILoaderManager) : void;
          
          function get lastFocusedView() : IView;
-diff --strip-trailing-cr -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/controls/ButtonGroup.as
---- app.orig/scaleform/clik/controls/ButtonGroup.as	2014-07-29 14:10:50 +0300
-+++ app/scaleform/clik/controls/ButtonGroup.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/controls/ButtonGroup.as
+--- app.orig/scaleform/clik/controls/ButtonGroup.as	2014-07-30 13:02:14.747753200 +0300
++++ app/scaleform/clik/controls/ButtonGroup.as	2014-07-30 13:14:56.376864200 +0300
 @@ -68,6 +68,7 @@
                  _loc1_ = _loc2_ as DisplayObjectContainer;
                  return _loc1_;
@@ -162,9 +162,9 @@ diff --strip-trailing-cr -Naur app.orig/scaleform/clik/controls/ButtonGroup.as a
          }
          
          public function addButton(param1:Button) : void
-diff --strip-trailing-cr -Naur app.orig/scaleform/clik/ui/InputDetails.as app/scaleform/clik/ui/InputDetails.as
---- app.orig/scaleform/clik/ui/InputDetails.as	2014-07-29 14:12:10 +0300
-+++ app/scaleform/clik/ui/InputDetails.as	2014-07-29 14:23:39 +0300
+diff -Naur app.orig/scaleform/clik/ui/InputDetails.as app/scaleform/clik/ui/InputDetails.as
+--- app.orig/scaleform/clik/ui/InputDetails.as	2014-07-30 13:02:31.241780400 +0300
++++ app/scaleform/clik/ui/InputDetails.as	2014-07-30 13:14:56.382864600 +0300
 @@ -20,7 +20,7 @@
          
          public var code:Number;
