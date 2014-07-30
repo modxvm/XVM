@@ -60,13 +60,20 @@ class com.xvm.Macros
                             var norm = parts[1];
                             var def:String = parts[5];
 
+                            //Logger.add("macroname:" + macroName + "| norm:" + norm + "| def:" + def + "| format:" + format);
+
                             var value = pdata[macroName];
+
                             if (value === undefined)
                                 value = globals[macroName];
 
                             if (value === undefined)
                             {
-                                res += def;
+                                //process l10n macro
+                                if (macroName.indexOf("l10n") == 0)
+                                    res += prepareValue(NaN, macroName, norm, def, pdata);
+                                else
+                                    res += def;
                                 isStaticMacro = false;
                             }
                             else if (value == null)
@@ -124,7 +131,7 @@ class com.xvm.Macros
             switch (ch)
             {
                 case ":":
-                    if (section < 1 && pdata.hasOwnProperty(part))
+                    if (section < 1 && ( pdata.hasOwnProperty(part) || (macro.indexOf("l10n") == 0) ) )
                     {
                         parts[section] = part;
                         section = 1;
@@ -178,6 +185,7 @@ class com.xvm.Macros
         if (parts[5] == null)
             parts[5] = "";
 
+        //Logger.add("[AS2][MACROS][GetMacroParts]: [0]:" + parts[0] +"| [1]:" + parts[1] +"| [2]:" + parts[2] +"| [3]:" + parts[3] +"| [4]:" + parts[4] +"| [5]:" + parts[5]);
         return parts;
     }
 
@@ -286,6 +294,9 @@ class com.xvm.Macros
                 if (isNaN(value))
                     value = 100;
                 res = Math.round(parseInt(norm) * value / 100).toString();
+                break;
+            case "l10n":
+                res = Locale.get(norm);
                 break;
         }
 

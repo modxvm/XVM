@@ -132,6 +132,10 @@
     "token/time_left_warn": "Time left:<tab/><font color='#EEEE00'>{0}d. {1}h. {2}m.</font>",
     "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Unknown status",
-    "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet."
+    "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet.",
+    
+    //Vehicle status
+    "Destroyed": "Destroyed",
+    "No data": "No data"
   }
 }

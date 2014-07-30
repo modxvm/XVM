@@ -132,6 +132,10 @@
     "token/time_left_warn": "Осталось:<tab/><font color='#EEEE00'>{0}д. {1}ч. {2}м.</font>",
     "token/cnt": "Количество запросов:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Неизвестный статус",
-    "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете."
+    "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете.",
+    
+    //Vehicle status
+    "Destroyed": "Уничтожен",
+    "No data": "Нет данных"
   }
 }
