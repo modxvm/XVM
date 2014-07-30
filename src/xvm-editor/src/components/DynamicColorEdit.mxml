@@ -44,7 +44,7 @@
         <s:Label text="&lt;" width="10" verticalAlign="middle"/>
         <s:NumericStepper id="valueEdit" width="60" minimum="{minimum}" maximum="{maximum}" stepSize="{stepSize}" value="{v_value}" change="v_value=valueEdit.value; onChange(event)" valueFormatFunction="formatValue"/>
         <a:ColorSelector id="colorEdit" width="90" value="{v_color}" change="v_color=colorEdit.value; onChange(event)"/>
-        <mx:Image id="del" width="16" height="16" source="@Embed(source='images/delete.png')" toolTip="{resourceManager.getString('components', 'DeleteLine')}" useHandCursor="true" buttonMode="true"/>
-        <mx:Image id="add" width="16" height="16" source="@Embed(source='images/add.png')" toolTip="{resourceManager.getString('components', 'InsertLine')}" useHandCursor="true" buttonMode="true"/>
+        <mx:Image id="del" width="16" height="16" source="@Embed(source='../images/delete.png')" toolTip="{resourceManager.getString('components', 'DeleteLine')}" useHandCursor="true" buttonMode="true"/>
+        <mx:Image id="add" width="16" height="16" source="@Embed(source='../images/add.png')" toolTip="{resourceManager.getString('components', 'InsertLine')}" useHandCursor="true" buttonMode="true"/>
     </s:HGroup>
 </c:DefaultComponent>

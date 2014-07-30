@@ -442,7 +442,7 @@ private function RefreshPlayersPanel1Page():void
         this.p_playersPanel.v_iconAlpha.value = section.iconAlpha;
         this.p_playersPanel.v_removeSquadIcon.value = section.removeSquadIcon;
         this.p_playersPanel.v_removePanelsModeSwitcher.value = section.removePanelsModeSwitcher;
-        this.p_playersPanel.v_startMode.value = section.startMode;
+        //this.p_playersPanel.v_startMode.value = section.startMode;
 
         section = Config.config.playersPanel.clanIcon;
         this.p_playersPanel_icons.v_show.value = section.show;

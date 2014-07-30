@@ -30,7 +30,7 @@
         <s:Label text="&lt;" width="10" verticalAlign="middle"/>
         <s:NumericStepper id="valueEdit" width="60" minimum="{minimum}" maximum="{maximum}" value="{v_value}" change="{v_value=valueEdit.value; onChange(event)}"/>
         <s:HSlider id="alphaEdit" width="100%" minimum="0" maximum="100" toolTip="{v_alpha}" value="{v_alpha}" change="{v_alpha=alphaEdit.value; onChange(event)}"/>
-        <mx:Image id="del" width="16" height="16" source="@Embed(source='images/delete.png')" toolTip="{resourceManager.getString('components', 'DeleteLine')}" useHandCursor="true" buttonMode="true"/>
-        <mx:Image id="add" width="16" height="16" source="@Embed(source='images/add.png')" toolTip="{resourceManager.getString('components', 'InsertLine')}" useHandCursor="true" buttonMode="true"/>
+        <mx:Image id="del" width="16" height="16" source="@Embed(source='../images/delete.png')" toolTip="{resourceManager.getString('components', 'DeleteLine')}" useHandCursor="true" buttonMode="true"/>
+        <mx:Image id="add" width="16" height="16" source="@Embed(source='../images/add.png')" toolTip="{resourceManager.getString('components', 'InsertLine')}" useHandCursor="true" buttonMode="true"/>
     </s:HGroup>
 </c:DefaultComponent>

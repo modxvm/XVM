@@ -8,7 +8,7 @@ package controls
 
     public class ComboBoxItemRenderer extends ListItemRenderer
     {
-        [Embed("images/separator.png")]
+        [Embed("../images/separator.png")]
         private const iconClass:Class;
 
         override protected function commitProperties():void
