@@ -211,6 +211,7 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_COLOR_E:               cfg = cfg_root.e; break;
             case Defines.DYNAMIC_COLOR_WN6:             cfg = cfg_root.wn6; break;
             case Defines.DYNAMIC_COLOR_WN8:             cfg = cfg_root.wn8; break;
+            case Defines.DYNAMIC_COLOR_WGR:             cfg = cfg_root.wgr; break;
             case Defines.DYNAMIC_COLOR_X:               cfg = cfg_root.x; break;
             case Defines.DYNAMIC_COLOR_RATING:          cfg = cfg_root.rating; break;
             case Defines.DYNAMIC_COLOR_KB:              cfg = cfg_root.kb; break;
@@ -254,6 +255,7 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_ALPHA_E:               cfg = cfg_root.e; break;
             case Defines.DYNAMIC_ALPHA_WN6:             cfg = cfg_root.wn6; break;
             case Defines.DYNAMIC_ALPHA_WN8:             cfg = cfg_root.wn8; break;
+            case Defines.DYNAMIC_ALPHA_WGR:             cfg = cfg_root.wgr; break;
             case Defines.DYNAMIC_ALPHA_X:               cfg = cfg_root.x; break;
             case Defines.DYNAMIC_ALPHA_RATING:          cfg = cfg_root.rating; break;
             case Defines.DYNAMIC_ALPHA_KB:              cfg = cfg_root.kb; break;

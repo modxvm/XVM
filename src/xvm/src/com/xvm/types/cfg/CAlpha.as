@@ -15,6 +15,7 @@ package com.xvm.types.cfg
         //eff: [..],
         //wn6: [..],
         //wn8: [..],
+        //wgr: [..],
         //rating: [..],
         //e: [..],
         //kb: [..],

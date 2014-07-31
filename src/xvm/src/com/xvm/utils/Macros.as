@@ -323,6 +323,8 @@ package com.xvm.utils
             pdata["xwn8"] = isNaN(stat.xwn8) ? null : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
             // {{xwn}}
             pdata["xwn"] = pdata["xwn8"];
+            // {{xwgr}}
+            pdata["xwgr"] = isNaN(stat.xwgr) ? null : stat.xwgr == 100 ? "XX" : (stat.xwgr < 10 ? "0" : "") + stat.xwgr;
             // {{eff}}
             pdata["eff"] = stat.e;
             // {{wn6}}
@@ -331,6 +333,8 @@ package com.xvm.utils
             pdata["wn8"] = stat.wn8;
             // {{wn}}
             pdata["wn"] = pdata["wn8"];
+            // {{wgr}}
+            pdata["wgr"] = stat.wgr;
             // {{e}}
             pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "E" : String(stat.v.te);
             // {{teff}}
@@ -373,6 +377,8 @@ package com.xvm.utils
             pdata["c:xwn8"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", o.darken); }
             // {{c:xwn}}
             pdata["c:xwn"] = pdata["c:xwn8"]
+            // {{c:xwgr}}
+            pdata["c:xwgr"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#", o.darken); }
             // {{c:eff}}
             pdata["c:eff"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#", o.darken); }
             // {{c:wn6}}
@@ -381,6 +387,8 @@ package com.xvm.utils
             pdata["c:wn8"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", o.darken); }
             // {{c:wn}}
             pdata["c:wn"] = pdata["c:wn8"];
+            // {{c:wgr}}
+            pdata["c:wgr"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#", o.darken); }
             // {{c:e}}
             pdata["c:e"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", o.darken); }
             // {{c:rating}}
@@ -411,6 +419,8 @@ package com.xvm.utils
             pdata["a:xwn8"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
             // {{a:xwn}}
             pdata["a:xwn"] = pdata["a:xwn8"];
+            // {{a:xwgr}}
+            pdata["a:xwgr"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
             // {{a:eff}}
             pdata["a:eff"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
             // {{a:wn6}}
@@ -419,6 +429,8 @@ package com.xvm.utils
             pdata["a:wn8"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
             // {{a:wn}}
             pdata["a:wn"] = pdata["a:wn8"];
+            // {{a:wgr}}
+            pdata["a:wgr"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
             // {{a:e}}
             pdata["a:e"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
             // {{a:rating}}

@@ -483,6 +483,8 @@ class com.xvm.Macros
         pdata["xwn8"] = isNaN(stat.xwn8) ? null : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
         // {{xwn}}
         pdata["xwn"] = pdata["xwn8"];
+        // {{xwgr}}
+        pdata["xwgr"] = isNaN(stat.xwgr) ? null : stat.xwgr == 100 ? "XX" : (stat.xwgr < 10 ? "0" : "") + stat.xwgr;
         // {{eff}}
         pdata["eff"] = stat.e;
         // {{wn6}}
@@ -491,6 +493,8 @@ class com.xvm.Macros
         pdata["wn8"] = stat.wn8;
         // {{wn}}
         pdata["wn"] = pdata["wn8"];
+        // {{wgr}}
+        pdata["wgr"] = stat.wgr;
         // {{e}}
         pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "E" : String(stat.v.te);
         // {{teff}}
@@ -537,6 +541,9 @@ class com.xvm.Macros
         // {{c:xwn}}
         pdata["c:xwn"] = pdata["c:xwn8"];
         pdata["c:xwn#d"] = pdata["c:xwn8#d"];
+        // {{c:xwgr}}
+        pdata["c:xwgr"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#", false);
+        pdata["c:xwgr#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwgr, "#", true);
         // {{c:eff}}
         pdata["c:eff"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#", false);
         pdata["c:eff#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#", true);
@@ -549,6 +556,9 @@ class com.xvm.Macros
         // {{c:wn}}
         pdata["c:wn"] =   pdata["c:wn8"];
         pdata["c:wn#d"] = pdata["c:wn8#d"];
+        // {{c:wgr}}
+        pdata["c:wgr"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#", false);
+        pdata["c:wgr#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WGR, stat.wgr, "#", true);
         // {{c:e}}
         pdata["c:e"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", false);
         pdata["c:e#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", true);
@@ -589,6 +599,8 @@ class com.xvm.Macros
         pdata["a:xwn8"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
         // {{a:xwn}}
         pdata["a:xwn"] = pdata["a:xwn8"];
+        // {{a:xwgr}}
+        pdata["a:xwgr"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwgr);
         // {{a:eff}}
         pdata["a:eff"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
         // {{a:wn6}}
@@ -597,6 +609,8 @@ class com.xvm.Macros
         pdata["a:wn8"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
         // {{a:wn}}
         pdata["a:wn"] = pdata["a:wn8"];
+        // {{a:wgr}}
+        pdata["a:wgr"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WGR, stat.wgr);
         // {{a:e}}
         pdata["a:e"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
         // {{a:rating}}

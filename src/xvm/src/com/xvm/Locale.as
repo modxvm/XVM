@@ -136,6 +136,7 @@ package com.xvm
             //"WN6": "WN6",
             //"WN8": "WN8",
             "EFF": "РЭ",
+            "WGR": "ЛРИ",
             "updated": "обновлено",
             " to ": " до ",
             "avg": "ср.",

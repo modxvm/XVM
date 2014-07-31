@@ -131,6 +131,11 @@ class com.xvm.StatLoader
         if (stat.wn8 != null && stat.wn8 > 0)
             stat.xwn8 = Utils.XWN8(stat.wn8);
 
+        // xwgr
+        stat.xwgr = null;
+        if (stat.wgr != null && stat.wgr > 0)
+            stat.xwgr = Utils.XWGR(stat.wgr);
+
         // tdb, tfb, tsb, tdv, te, teff (last)
         stat.v.db = null;
         stat.v.fb = null;

@@ -7,7 +7,7 @@ package com.xvm
     public class Defines
     {
         // Global versions
-        public static const XVM_VERSION:String = "5.3.3-dev";
+        public static const XVM_VERSION:String = "5.3.3";
         public static const XVM_INTRO:String = "www.modxvm.com";
         public static const WOT_VERSION:String = "0.9.2";
         public static const CONFIG_VERSION:String = "5.1.0";
@@ -114,8 +114,9 @@ package com.xvm
         public static const DYNAMIC_COLOR_E:int = 11;
         public static const DYNAMIC_COLOR_WN6:int = 12;
         public static const DYNAMIC_COLOR_WN8:int = 13;
-        public static const DYNAMIC_COLOR_X:int = 14;
-        public static const DYNAMIC_COLOR_AVGLVL:int = 15;
+        public static const DYNAMIC_COLOR_WGR:int = 14;
+        public static const DYNAMIC_COLOR_X:int = 15;
+        public static const DYNAMIC_COLOR_AVGLVL:int = 16;
 
         // Dynamic alpha types
         public static const DYNAMIC_ALPHA_EFF:int = 1;
@@ -131,8 +132,9 @@ package com.xvm
         public static const DYNAMIC_ALPHA_E:int = 11;
         public static const DYNAMIC_ALPHA_WN6:int = 12;
         public static const DYNAMIC_ALPHA_WN8:int = 13;
-        public static const DYNAMIC_ALPHA_X:int = 14;
-        public static const DYNAMIC_ALPHA_AVGLVL:int = 15;
+        public static const DYNAMIC_ALPHA_WGR:int = 14;
+        public static const DYNAMIC_ALPHA_X:int = 15;
+        public static const DYNAMIC_ALPHA_AVGLVL:int = 16;
 
         // Damage flag at Xvm.as: updateHealth
         public static const FROM_UNKNOWN:int = 0;

@@ -147,6 +147,7 @@ package com.xvm.types.cfg
         //],
         //wn6: [..],
         //wn8: [..],
+        //wgr: [..],
         //rating: [
             //{ value: 47,  color: ColorPalette.red },      // very bad
             //{ value: 49,  color: ColorPalette.orange },   // bad

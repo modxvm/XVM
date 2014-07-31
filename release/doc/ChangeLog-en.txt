@@ -3,6 +3,7 @@
   * new macros:
       {{player}}, returns "pl" for current player and empty string for others
       {{tk}}, returns "tk" for teamkiller and empty string for others
+      {{wgr}}, {{c:wgr}}, {{a:wgr}}, {{xwgr}}, {{c:xwgr}}, {{a:xwgr}} for WG rating
   * new option:
       playersPanel/altMode - mode with Alt key pressed
 

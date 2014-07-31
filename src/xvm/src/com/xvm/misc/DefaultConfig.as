@@ -977,6 +977,15 @@ package com.xvm.misc
                 { value: 2570, color: Defines.C_BLUE },    // very good
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
+            // TODO: update values
+            c.wgr = [
+                { value: 410,  color: Defines.C_RED },     // very bad
+                { value: 795,  color: Defines.C_ORANGE },  // bad
+                { value: 1185, color: Defines.C_YELLOW },  // normal
+                { value: 1585, color: Defines.C_GREEN },   // good
+                { value: 1925, color: Defines.C_BLUE },    // very good
+                { value: 9999, color: Defines.C_PURPLE }   // unique
+            ];
             c.rating = [
                 { value: 46.5,  color: Defines.C_RED },      // very bad
                 { value: 48.5,  color: Defines.C_ORANGE },   // bad
@@ -1089,6 +1098,13 @@ package com.xvm.misc
                 { value: 760,  alpha: 100 },
                 { value: 1325, alpha: 80 },
                 { value: 1980, alpha: 60 },
+                { value: 9999, alpha: 40 }
+            ];
+            // TODO: update values
+            c.wgr = [
+                { value: 795,  alpha: 100 },
+                { value: 1185, alpha: 80 },
+                { value: 1585, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.rating = [

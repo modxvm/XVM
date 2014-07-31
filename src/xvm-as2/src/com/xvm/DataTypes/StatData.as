@@ -20,6 +20,7 @@ class com.xvm.DataTypes.StatData
         public var e:Number = NaN;             // eff (int)
         public var wn6:Number = NaN;           // WN6 rating (int)
         public var wn8:Number = NaN;           // WN8 rating (int)
+        public var wgr:Number = NaN;           // WG rating (int)
 
         public var cid:Number = NaN;           // clanId
         public var emblem:String = null;       // url for clan icon
@@ -41,4 +42,5 @@ class com.xvm.DataTypes.StatData
         public var xeff:Number = NaN;          // Eff in XVM Scale (int)
         public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
         public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
+        public var xwgr:Number = NaN;          // WG rating in XVM Scale (int)
 }

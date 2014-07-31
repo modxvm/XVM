@@ -5,7 +5,7 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "5.3.3-dev";
+    public static var XVM_VERSION:String = "5.3.3";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.9.2";
     public static var CONFIG_VERSION:String = "5.1.0";
@@ -79,8 +79,9 @@ class com.xvm.Defines
     public static var DYNAMIC_COLOR_E:Number = 11;
     public static var DYNAMIC_COLOR_WN6:Number = 12;
     public static var DYNAMIC_COLOR_WN8:Number = 13;
-    public static var DYNAMIC_COLOR_X:Number = 14;
-    public static var DYNAMIC_COLOR_AVGLVL:Number = 15;
+    public static var DYNAMIC_COLOR_WGR:Number = 14;
+    public static var DYNAMIC_COLOR_X:Number = 15;
+    public static var DYNAMIC_COLOR_AVGLVL:Number = 16;
 
     // Dynamic alpha types
     public static var DYNAMIC_ALPHA_EFF:Number = 1;
@@ -96,8 +97,9 @@ class com.xvm.Defines
     public static var DYNAMIC_ALPHA_E:Number = 11;
     public static var DYNAMIC_ALPHA_WN6:Number = 12;
     public static var DYNAMIC_ALPHA_WN8:Number = 13;
-    public static var DYNAMIC_ALPHA_X:Number = 14;
-    public static var DYNAMIC_ALPHA_AVGLVL:Number = 15;
+    public static var DYNAMIC_ALPHA_WGR:Number = 14;
+    public static var DYNAMIC_ALPHA_X:Number = 15;
+    public static var DYNAMIC_ALPHA_AVGLVL:Number = 16;
 
     // Damage flag at Xvm.as: updateHealth
     public static var FROM_UNKNOWN:Number = 0;

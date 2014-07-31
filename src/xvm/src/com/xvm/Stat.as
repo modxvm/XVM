@@ -423,6 +423,10 @@ package com.xvm
             if (!isNaN(stat.wn8))
                 stat.xwn8 = XvmScale.XWN8(stat.wn8);
 
+            // xwgr
+            if (!isNaN(stat.wgr))
+                stat.xwgr = XvmScale.XWGR(stat.wgr);
+
             // vehicle stat
             calculateVehicleStatValues(stat, forceTeff);
         }

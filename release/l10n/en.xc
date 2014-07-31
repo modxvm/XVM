@@ -57,6 +57,7 @@
     "WN6": "WN6",
     "WN8": "WN8",
     "EFF": "EFF",
+    "WGR": "WGR",
     "updated": "updated",
     " to ": " to ",
     "avg": "avg",
