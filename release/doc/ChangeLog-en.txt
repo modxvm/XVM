@@ -1,6 +1,7 @@
 ﻿XVM-5.3.3:
   * adaptation to WoT 0.9.2
   * new macros:
+      {{ready}}, returns "ready" when player loaded to the game and empty if not
       {{player}}, returns "pl" for current player and empty string for others
       {{tk}}, returns "tk" for teamkiller and empty string for others
       {{wgr}}, {{c:wgr}}, {{a:wgr}}, {{xwgr}}, {{c:xwgr}}, {{a:xwgr}} for WG rating

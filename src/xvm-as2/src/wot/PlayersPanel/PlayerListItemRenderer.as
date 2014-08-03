@@ -550,7 +550,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         if (format.src != null)
         {
-            //var dead = (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
+            //var dead = (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
             //Logger.add(dead + " " + obj.dead + " " + m_name);
             var src:String = Macros.Format(m_name, format.src, obj);
             src = "../../" + Utils.fixImgTag(src).split("img://").join("");

@@ -41,7 +41,8 @@ Legend:
 │ {{c:hp-ratio}}             │   │ X │ X │ X │ X │ X │ X │   │   │ color depending on current health ratio (only in vehicle markers)
 │ {{a:hp}}                   │   │ X │ X │ X │ X │ X │ X │   │   │ transparency depending on current health points (only in vehicle markers)
 │ {{a:hp-ratio}}             │   │ X │ X │ X │ X │ X │ X │   │   │ transparency depending on current health ratio (only in vehicle markers)
-│ {{alive}}                  │   │ X │ X │ X │ X │ X │ X │   │   │ 'alive' for alive, '' for dead
+│ {{alive}}                  │   │ X │ X │ X │ X │ X │ X │   │   │ value 'alive' for alive, '' for dead
+│ {{ready}}                  │   │ X │ X │ X │   │   │   │   │   │ value 'ready' if player loaded to the game, '' if not
 │ {{frags}}                  │   │ X │ X │ X │   │   │   │   │   │ current frags
 │ {{player}}                 │   │ X │ X │ X │   │   │   │   │   │ value 'pl' for current player, empty for others
 │ {{tk}}                     │   │ X │ X │ X │ X │   │   │   │   │ value 'tk' for teamkiller, empty for others
