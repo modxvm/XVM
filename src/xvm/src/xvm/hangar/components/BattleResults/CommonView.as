@@ -130,7 +130,7 @@ package xvm.hangar.components.BattleResults
             newTf.selectable = false;
 
             var y_space:Number = view.detailsMc.xpTitleLbl.height;
-            var y_pos:Number = view.detailsMc.xpTitleLbl.y;
+            var y_pos:Number = view.detailsMc.resTitleLbl && view.detailsMc.resTitleLbl.visible ? view.detailsMc.resTitleLbl.y : view.detailsMc.xpTitleLbl.y;
 
             newTf.y = y_pos + line * y_space;
 
