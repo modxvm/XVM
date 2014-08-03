@@ -189,7 +189,7 @@ package xvm.hangar.components.BattleLoading
         {
             //Logger.add("onStatLoaded: " + fullPlayerName);
             if (Config.config.rating.showPlayersStatistics)
-                proxy.vehicleField.condenseWhite = false; // TODO StatData.s_empty;
+                proxy.vehicleField.condenseWhite = false;
             //draw();
             proxy.invalidateData();
 

@@ -114,21 +114,23 @@ class wot.StatisticForm.BattleStatItemRenderer
         if (dlg == null)
             return;
 
-        wrapper.col3.condenseWhite = Stat.s_empty;
-
         var name = Utils.GetPlayerName(wrapper.data.label);
         var saved_icon = wrapper.data.icon;
         var saved_label = wrapper.data.label;
 
+        wrapper.col3.condenseWhite = !Config.config.rating.showPlayersStatistics || !Stat.s_loaded;
+
         // Add data for Win Chance calculation
         //Logger.add(dlg.visible);
         //Logger.addObject(wrapper.data);
-        if (Config.config.rating.showPlayersStatistics) {
+        if (Config.config.rating.showPlayersStatistics)
+        {
             if (Stat.s_data[name] && Stat.s_data[name].stat)
                 Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & VehicleStateInBattle.IS_ALIVE) != 0;
         }
+
         // Chance
-        if (!Stat.s_empty && (Config.config.statisticForm.showChances || Config.config.statisticForm.showBattleTier) && wrapper.selected == true)
+        if (Stat.s_loaded && (Config.config.statisticForm.showChances || Config.config.statisticForm.showBattleTier) && wrapper.selected == true)
             s_winChances.showWinChances();
 
         // Alternative icon set

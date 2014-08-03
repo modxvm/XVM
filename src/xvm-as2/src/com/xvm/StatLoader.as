@@ -20,7 +20,6 @@ class com.xvm.StatLoader
             return;
         instance._loading = true;
         Stat.s_data = {};
-        Stat.s_empty = true;
         Cmd.loadBattleStat(null);
     }
 
@@ -56,7 +55,6 @@ class com.xvm.StatLoader
                     Stat.s_data[nm].stat = stat;
                     Stat.s_data[nm].loadstate = (Stat.s_data[nm].vehicleKey == "UNKNOWN")
                         ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
-                    Stat.s_empty = false;
                     Macros.RegisterStatMacros(nm, stat);
                     //Logger.addObject(StatData.s_data[nm], "s_data[" + nm + "]", 3);
                 }
