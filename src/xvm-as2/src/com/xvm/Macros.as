@@ -414,10 +414,20 @@ class com.xvm.Macros
             // {{c:dmg}}
             pdata["c:dmg"] = function(o):String
             {
-                return isNaN(o.delta) ? null : GraphicsUtil.GetDmgSrcValue(
-                    Utils.damageFlagToDamageSource(o.damageFlag),
-                    o.entityName == 'teamKiller' ? (data.team + "tk") : o.entityName,
-                    o.dead, o.blowedUp);
+                if isNaN(o.delta)
+                    return null;
+                switch (o.damageType)
+                {
+                    case "world_collision":
+                    case "death_zone":
+                    case "drowning":
+                        return GraphicsUtil.GetDmgKindValue(o.damageType);
+                    default:
+                        return GraphicsUtil.GetDmgSrcValue(
+                            Utils.damageFlagToDamageSource(o.damageFlag),
+                            o.entityName == 'teamKiller' ? (data.team + "tk") : o.entityName,
+                            o.dead, o.blowedUp);
+                }
             }
             // {{c:dmg-kind}}
             pdata["c:dmg-kind"] = function(o):String { return o.damageType == null ? null : GraphicsUtil.GetDmgKindValue(o.damageType); }

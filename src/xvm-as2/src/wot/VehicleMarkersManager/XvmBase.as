@@ -101,7 +101,7 @@ class wot.VehicleMarkersManager.XvmBase
         return Strings.trim(Macros.Format(m_playerFullName, format,
             {
                 curHealth:curHealth,
-                delta:isBlowedUp ? delta - 1 : delta, // curHealth = -1 for blowedUp
+                delta:isBlowedUp ? delta + 1 : delta, // curHealth = -1 for blowedUp
                 damageFlag:damageFlag,
                 damageType:damageType,
                 entityName:m_entityName,
