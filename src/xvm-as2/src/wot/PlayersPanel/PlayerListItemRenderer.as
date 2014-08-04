@@ -120,12 +120,14 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     function __getColorTransformImpl(schemeName)
     {
-        //Logger.add("data.squad=" + data.squad + " " + data.userName + " scheme=" + schemeName);
+        //Logger.add(m_name + " scheme=" + schemeName);
 
         if (Config.config.battle.highlightVehicleIcon == false)
         {
             if (schemeName == "selected" || schemeName == "squad")
                 schemeName = "normal";
+            else if (schemeName == "selected_offline" || schemeName == "squad_offline")
+                schemeName = "normal_offline";
             else if (schemeName == "selected_dead" || schemeName == "squad_dead")
                 schemeName = "normal_dead";
         }

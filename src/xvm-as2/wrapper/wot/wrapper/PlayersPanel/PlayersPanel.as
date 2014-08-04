@@ -9,6 +9,7 @@ class wot.wrapper.PlayersPanel.PlayersPanel extends net.wargaming.ingame.Players
         var OVERRIDE_FUNCTIONS:Array = [
             "setData",
             "onRecreateDevice",
+            "update",
             "updateAlphas",
             "updateWidthOfLongestName"
         ];

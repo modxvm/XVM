@@ -306,25 +306,27 @@ package com.xvm.misc
               }
             };
             c.none = {
-              layout: "vertical",
-              extraFields: {
-                leftPanel: {
-                  x: 0,
-                  y: 65,
-                  width: 250,
-                  height: 25,
-                  formats: []
-                },
-                rightPanel: {
-                  x: 0,
-                  y: 65,
-                  width: 250,
-                  height: 25,
-                  formats: []
+                enabled: true,
+                layout: "vertical",
+                extraFields: {
+                    leftPanel: {
+                        x: 0,
+                        y: 65,
+                        width: 250,
+                        height: 25,
+                        formats: []
+                    },
+                    rightPanel: {
+                        x: 0,
+                        y: 65,
+                        width: 250,
+                        height: 25,
+                        formats: []
+                    }
                 }
-              }
             };
             c.short = {
+                enabled: true,
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],
@@ -332,6 +334,7 @@ package com.xvm.misc
             };
             // Medium1 mode.
             c.medium = {
+                enabled: true,
                 // 0..250 - player name field width.
                 width: 46,
                 // Dispay format.
@@ -344,6 +347,7 @@ package com.xvm.misc
             };
             // Medium2 mode.
             c.medium2 = {
+                enabled: true,
                 // 0..250 - player name field width.
                 width: 65,
                 // Dispay format.
@@ -356,6 +360,7 @@ package com.xvm.misc
             };
             // Large mode.
             c.large = {
+                enabled: true,
                 // 0..250 - player name field width.
                 width: 170,
                 // Dispay format.

@@ -3,8 +3,8 @@
  * @author sirmax2, ilitvinov87
  */
 import com.xvm.*;
+import gfx.controls.*;
 import wot.Minimap.*;
-import gfx.controls.ScrollingList;
 
 class wot.PlayersPanel.PlayersPanel extends XvmComponent
 {
@@ -30,6 +30,11 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     function onRecreateDevice()
     {
         return this.onRecreateDeviceImpl.apply(this, arguments);
+    }
+
+    function update()
+    {
+        return this.updateImpl.apply(this, arguments);
     }
 
     function updateAlphas()
@@ -75,20 +80,27 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private function onConfigLoaded()
     {
-        setStartMode(Config.config.playersPanel.startMode, wrapper);
-        m_altMode = String(Config.config.playersPanel.altMode);
-        switch (m_altMode)
-        {
-            case "none":
-            case "short":
-            case "medium":
-            case "medium2":
-            case "large":
-                break;
-            default:
-                m_altMode = null;
-        }
+        var startMode:String = String(Config.config.playersPanel.startMode).toLowerCase();
+        if (net.wargaming.ingame.PlayersPanel.STATES[startMode] == null)
+            startMode = net.wargaming.ingame.PlayersPanel.STATES.large.name;
+        Config.config.playersPanel[startMode].enabled = true;
+        setStartMode(startMode, wrapper);
+
+        m_altMode = String(Config.config.playersPanel.altMode).toLowerCase();
+        if (net.wargaming.ingame.PlayersPanel.STATES[m_altMode] == null)
+            m_altMode = null;
         m_savedState = null;
+
+        _root.switcher_mc.noneBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.none.name].enabled;
+        _root.switcher_mc.shortBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.short.name].enabled;
+        _root.switcher_mc.mediumBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.medium.name].enabled;
+        _root.switcher_mc.mediumBtn2.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.medium2.name].enabled;
+        _root.switcher_mc.largeBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.large.name].enabled;
+        _root.switcher_mc.noneBtn._alpha = _root.switcher_mc.noneBtn.enabled ? 100 : 50;
+        _root.switcher_mc.shortBtn._alpha = _root.switcher_mc.shortBtn.enabled ? 100 : 50;
+        _root.switcher_mc.mediumBtn._alpha = _root.switcher_mc.mediumBtn.enabled ? 100 : 50;
+        _root.switcher_mc.mediumBtn2._alpha = _root.switcher_mc.mediumBtn2.enabled ? 100 : 50;
+        _root.switcher_mc.largeBtn._alpha = _root.switcher_mc.largeBtn.enabled ? 100 : 50;
     }
 
     private function setStartMode(mode:String, wrapper:net.wargaming.ingame.PlayersPanel)
@@ -101,6 +113,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         }
 
         wrapper.state = mode;
+        updateSwitcherButton();
 
         // initialize
 
@@ -133,6 +146,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 wrapper.state = m_savedState;
             m_savedState = null;
         }
+        updateSwitcherButton();
     }
 
     private function setDataImpl()
@@ -269,6 +283,36 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         wrapper.update();
     }
 
+    private function updateImpl()
+    {
+        //Logger.add("up: " + wrapper.state);
+        if (m_savedState == null && Config.config.playersPanel[wrapper.state].enabled == false)
+        {
+            switch (wrapper.state)
+            {
+                case net.wargaming.ingame.PlayersPanel.STATES.none.name:
+                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.short.name;
+                    break;
+                case net.wargaming.ingame.PlayersPanel.STATES.short.name:
+                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.medium.name;
+                    break;
+                case net.wargaming.ingame.PlayersPanel.STATES.medium.name:
+                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.medium2.name;
+                    break;
+                case net.wargaming.ingame.PlayersPanel.STATES.medium2.name:
+                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.large.name;
+                    break;
+                case net.wargaming.ingame.PlayersPanel.STATES.large.name:
+                    wrapper.state = net.wargaming.ingame.PlayersPanel.STATES.none.name;
+                    break;
+            }
+            updateSwitcherButton();
+            return;
+        }
+
+        base.update();
+    }
+
     private function updateAlphasImpl()
     {
         wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
@@ -276,6 +320,31 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     }
 
     // PRIVATE
+
+    private function updateSwitcherButton()
+    {
+        var btn:Object;
+        switch (wrapper.state)
+        {
+            case net.wargaming.ingame.PlayersPanel.STATES.none.name:
+                btn = _root.switcher_mc.noneBtn;
+                break;
+            case net.wargaming.ingame.PlayersPanel.STATES.short.name:
+                btn = _root.switcher_mc.shortBtn;
+                break;
+            case net.wargaming.ingame.PlayersPanel.STATES.medium.name:
+                btn = _root.switcher_mc.mediumBtn;
+                break;
+            case net.wargaming.ingame.PlayersPanel.STATES.medium2.name:
+                btn = _root.switcher_mc.mediumBtn2;
+                break;
+            case net.wargaming.ingame.PlayersPanel.STATES.large.name:
+                btn = _root.switcher_mc.largeBtn;
+                break;
+        }
+        //currentType = value;
+        btn.selected = true;
+    }
 
     // update without hide menu
     private function update2()
