@@ -32,6 +32,11 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         return this.onRecreateDeviceImpl.apply(this, arguments);
     }
 
+    function updateAlphas()
+    {
+        return this.updateAlphasImpl.apply(this, arguments);
+    }
+
     function updateWidthOfLongestName()
     {
         // stub
@@ -192,9 +197,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
             base.saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig);
 
-            wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
-            wrapper.m_list._alpha = Config.config.playersPanel.iconAlpha;
-
             // new player added in the FoW mode
             if (m_knownPlayersCount != data.length)
                 m_knownPlayersCount = data.length;
@@ -265,6 +267,12 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         //Logger.add("PlayersPanel.onRecreateDevice()");
         base.onRecreateDevice(width, height);
         wrapper.update();
+    }
+
+    private function updateAlphasImpl()
+    {
+        wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
+        wrapper.m_list._alpha = Config.config.playersPanel.iconAlpha;
     }
 
     // PRIVATE
