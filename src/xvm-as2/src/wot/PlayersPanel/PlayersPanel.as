@@ -77,6 +77,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
     private var m_altMode:String = null;
     private var m_savedState:String = null;
+    private var m_initialized = false;
 
     private function onConfigLoaded()
     {
@@ -111,6 +112,8 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
             setTimeout(function() { $this.setStartMode(mode, wrapper); }, 1);
             return;
         }
+
+        m_initialized = true;
 
         wrapper.state = mode;
         updateSwitcherButton();
@@ -286,7 +289,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private function updateImpl()
     {
         //Logger.add("up: " + wrapper.state);
-        if (m_savedState == null && Config.config.playersPanel[wrapper.state].enabled == false)
+        if (m_initialized && m_savedState == null && Config.config.playersPanel[wrapper.state].enabled == false)
         {
             switch (wrapper.state)
             {
