@@ -52,7 +52,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         }
 
         var cfg = MapConfig.circles;
-        var ci = Config.config.minimap._internal;
+        var ci = Config.config.minimap.circles._internal;
         //Logger.addObject(cfg, 2);
 
         GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
@@ -290,7 +290,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         var cfg = MapConfig.circles;
 
         // Calculations
-        var ci = Config.config.minimap._internal;
+        var ci = Config.config.minimap.circles._internal;
 
         var view_distance_vehicle:Number = ci.view_distance_vehicle;
         var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
@@ -318,7 +318,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         if (ci.view_coated_optics == true)
             view_distance = view_distance * 1.1
 
-        //Logger.addObject(_internal, 2);
+        //Logger.addObject(Config.config.minimap._internal, 2);
         //Logger.add("K=" + K + " view_distance=" + view_distance);
 
         // Drawing
