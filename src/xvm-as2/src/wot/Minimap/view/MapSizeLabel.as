@@ -41,7 +41,6 @@ class wot.Minimap.view.MapSizeLabel
         {
             tf.removeTextField();
             delete tf;
-            tf = null;
         }
     }
 

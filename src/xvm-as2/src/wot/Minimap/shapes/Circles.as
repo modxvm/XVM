@@ -25,6 +25,9 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     private var stereoscope_enabled:Boolean = false;
     private var moving_state:Number;
 
+    private var artilleryMc:MovieClip = null;
+    private var shellMc:MovieClip = null;
+
     public function Circles()
     {
         super();
@@ -34,7 +37,9 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         var player:Player = PlayersPanelProxy.self;
         var vdata:VehicleData = VehicleInfo.getByIcon(player.icon);
 
-        staticCircles = defineCirclesCfg(vdata.key.split(":").join("-"));
+        var vehicleType:String = vdata.key.split(":").join("-");
+        staticCircles = defineStaticCirclesCfg(vehicleType);
+        dynamicCircles = defineDynamicCirclesCfg(vehicleType);
         var len:Number = staticCircles.length;
         for (var i:Number = 0; i < len; ++i)
         {
@@ -47,11 +52,12 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         }
 
         var cfg = MapConfig.circles;
+        var ci = Config.config.minimap._internal;
         //Logger.addObject(cfg, 2);
 
         GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
 
-        stereoscope_exists = stereoscope_enabled = cfg._internal.view_stereoscope == true;
+        stereoscope_exists = stereoscope_enabled = ci.view_stereoscope == true;
 
         if (dynamicCircles.length > 0)
         {
@@ -63,16 +69,16 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         if (cfg.artillery.enabled)
         {
-            var radius:Number = scaleFactor * cfg._internal.artillery_range;
+            var radius:Number = scaleFactor * ci.artillery_range;
             if (radius > 0)
-                drawCircle(radius, cfg.artillery.thickness, cfg.artillery.color, cfg.artillery.alpha);
+                artilleryMc = drawCircle(radius, cfg.artillery.thickness, cfg.artillery.color, cfg.artillery.alpha);
         }
 
         if (cfg.shell.enabled)
         {
-            var radius:Number = scaleFactor * cfg._internal.shell_range;
+            var radius:Number = scaleFactor * ci.shell_range;
             if (radius > 0)
-                drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
+                shellMc = drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
         }
     }
 
@@ -83,36 +89,53 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         GlobalEventDispatcher.removeEventListener(Defines.E_MODULE_REPAIRED, this, onModuleRepaired);
         GlobalEventDispatcher.removeEventListener(Defines.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
 
+        var len:Number = staticCircles.length;
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var mc:MovieClip = staticCircles[i].$mc;
+            if (mc != null)
+            {
+                mc.removeMovieClip();
+                delete mc;
+            }
+        }
+        staticCircles = [];
+
+        len = dynamicCircles.length;
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var mc:MovieClip = dynamicCircles[i].$mc;
+            if (mc != null)
+            {
+                mc.removeMovieClip();
+                delete mc;
+            }
+        }
+        dynamicCircles = [];
+
+        if (artilleryMc != null)
+        {
+            artilleryMc.removeMovieClip();
+            delete artilleryMc;
+        }
+
+        if (shellMc != null)
+        {
+            shellMc.removeMovieClip();
+            delete shellMc;
+        }
+
         super.Dispose();
     }
 
     /** Private */
 
-    private function defineCirclesCfg(vehicleType:String):Array
+    private function defineStaticCirclesCfg(vehicleType:String):Array
     {
         var cfg:Array = [];
 
-        /** Special vehicle type dependent circle configs */
-        var spec:Array = MapConfig.circles.special;
-        var len:Number = spec.length;
-        for (var i:Number = 0; i < len; ++i)
-        {
-            var rule:Object = spec[i];
-            if (rule[vehicleType])
-            {
-                var c = spec[i][vehicleType];
-                if (c.enabled)
-                {
-                    if (c.state == null)
-                        c.state = Defines.MOVING_STATE_ALL;
-                    cfg.push(c);
-                }
-            }
-        }
-
-        dynamicCircles = [];
         var view:Array = MapConfig.circles.view;
-        len = view.length;
+        var len:Number = view.length;
         for (var i:Number = 0; i < len; ++i)
         {
             var c = view[i];
@@ -124,15 +147,49 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             {
                 if (isNaN(c.distance))
                     c.distance = parseFloat(c.distance);
-                cfg.push(c);
-            }
-            else
-            {
-                dynamicCircles.push(c);
+                cfg.push(JSONx.parse(JSONx.stringify(c)));
             }
         }
 
-        //Logger.addObject(cfg, 2);
+        /** Special vehicle type dependent circle configs */
+        var spec:Array = MapConfig.circles.special;
+        len = spec.length;
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var rule:Object = spec[i];
+            if (rule[vehicleType])
+            {
+                var c = spec[i][vehicleType];
+                if (!c.enabled)
+                    continue;
+                if (c.state == null)
+                    c.state = Defines.MOVING_STATE_ALL;
+                cfg.push(JSONx.parse(JSONx.stringify(c)));
+            }
+        }
+
+        //Logger.addObject(cfg, 2, "static");
+        return cfg;
+    }
+
+    private function defineDynamicCirclesCfg(vehicleType:String):Array
+    {
+        var cfg:Array = [];
+
+        var view:Array = MapConfig.circles.view;
+        var len:Number = view.length;
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var c = view[i];
+            if (!c.enabled)
+                continue;
+            if (c.state == null)
+                c.state = Defines.MOVING_STATE_ALL;
+            if (!isFinite(c.distance))
+                cfg.push(JSONx.parse(JSONx.stringify(c)));
+        }
+
+        //Logger.addObject(cfg, 2, "dynamic");
         return cfg;
     }
 
@@ -233,7 +290,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         var cfg = MapConfig.circles;
 
         // Calculations
-        var ci = cfg._internal;
+        var ci = Config.config.minimap._internal;
 
         var view_distance_vehicle:Number = ci.view_distance_vehicle;
         var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
@@ -261,7 +318,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         if (ci.view_coated_optics == true)
             view_distance = view_distance * 1.1
 
-        //Logger.addObject(cfg._internal, 2);
+        //Logger.addObject(_internal, 2);
         //Logger.add("K=" + K + " view_distance=" + view_distance);
 
         // Drawing
@@ -271,6 +328,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         for (var i:Number = 0; i < len; ++i)
         {
             var dc = dynamicCircles[i];
+            //Logger.addObject(dc);
 
             var radius:Number = 0;
             switch (dc.distance)

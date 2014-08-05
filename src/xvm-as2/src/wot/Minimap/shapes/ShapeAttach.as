@@ -46,7 +46,7 @@ class wot.Minimap.shapes.ShapeAttach
 
     public function Dispose()
     {
-        IconsProxy.selfEntry.removeAttachments();
+        GlobalEventDispatcher.removeEventListener(Defines.E_SELF_DEAD, this, postmortemMod);
     }
 
     // -- Private

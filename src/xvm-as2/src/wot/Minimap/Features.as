@@ -1,6 +1,7 @@
+import com.xvm.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.*;
-import wot.Minimap.model.mapSize.MapSizeModel;
+import wot.Minimap.model.mapSize.*;
 import wot.Minimap.shapes.*;
 import wot.Minimap.view.*;
 
@@ -123,7 +124,6 @@ class wot.Minimap.Features
         {
             zoom.Dispose();
             delete zoom;
-            zoom = null;
         }
 
         if (MapConfig.zoomEnabled)
@@ -138,7 +138,6 @@ class wot.Minimap.Features
         {
             mapSizeLabel.Dispose();
             delete mapSizeLabel;
-            mapSizeLabel = null;
         }
 
         /** Draw map size at map corner */
@@ -158,7 +157,6 @@ class wot.Minimap.Features
         {
             circles.Dispose();
             delete circles;
-            circles = null;
         }
         if (MapConfig.circles.enabled)
         {
@@ -173,7 +171,6 @@ class wot.Minimap.Features
         {
             square.Dispose();
             delete square;
-            square = null;
         }
         if (MapConfig.squareEnabled)
         {
@@ -189,7 +186,6 @@ class wot.Minimap.Features
         {
             lines.Dispose();
             delete lines;
-            lines = null;
         }
         if (MapConfig.linesEnabled)
         {

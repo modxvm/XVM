@@ -6,7 +6,7 @@
         "view": [
             { "enabled": true, "state": 1, "distance": 50, "scale": 1, "thickness": 0.5, "alpha": 70, "color": "0xFFFFFF" },
             { "enabled": true, "state": 2, "distance": 50, "scale": 1, "thickness": 0.5, "alpha": 45, "color": "0xFFFFFF" },
-            //{ "enabled": true, "distance": 445, "scale": 1, "thickness": 0.5, "alpha": 45, "color": "0xFFFFFF" },
+            { "enabled": true, "distance": 445, "scale": 1, "thickness": 0.5, "alpha": 45, "color": "0xFFFFFF" },
             //{ "enabled": true, "distance": "blindarea", "scale": 0.9, "thickness": 1.5, "alpha": 80, "color": "0xFFFF00" },
             { "enabled": true, "state": 1, "distance": "dynamic", "scale": 1, "thickness": 1, "alpha": 80, "color": "0x3EB5F1" },
             { "enabled": true, "state": 2, "distance": "dynamic", "scale": 1, "thickness": 0.75, "alpha": 80, "color": "0x3EB5F1" },
@@ -70,13 +70,14 @@
       "units": {
         "format": {
           "ally":           "<span class='mm_a'><font color='{{c:xwn8}}'>*</font></span>",
+          "squad":          "<span class='mm_s'><font color='{{c:xwn8}}'>*</font></span>",
           "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}'>*</font></span>",
           "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}'>*</font></span>"
         }
       },
       "mapSize": { "enabled": false }
     },
-    "square" : { "enabled": false },
+    //"square" : { "enabled": false },
     "__stub__": null
   }
 }

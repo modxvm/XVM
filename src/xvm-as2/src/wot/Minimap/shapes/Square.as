@@ -39,7 +39,6 @@ class wot.Minimap.shapes.Square extends ShapeAttach
         {
             squareClip.removeMovieClip();
             delete squareClip;
-            squareClip = null;
         }
     }
 

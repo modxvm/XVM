@@ -109,16 +109,6 @@ class wot.Minimap.MinimapEntry
         return wrapper.xvm_attachments;
     }
 
-    public function removeAttachments():Void
-    {
-        if (wrapper.xvm_attachments != null)
-        {
-            wrapper.xvm_attachments.removeMovieClip();
-            delete wrapper.xvm_attachments;
-            wrapper.xvm_attachments = null;
-        }
-    }
-
     /**
      * Minimap resize procedures break attachments scale.
      * Workaround.
