@@ -26,6 +26,7 @@ package com.xvm.types.cfg
         public var captureBar:CCaptureBar;
         public var hitLog:CHitlog;
         public var minimap:CMinimap;
+        public var minimapAlt:CMinimap;
         public var markers:CMarkers;
 
         public var colors:CColors;

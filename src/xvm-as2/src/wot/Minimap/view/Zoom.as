@@ -21,10 +21,19 @@ class wot.Minimap.view.Zoom
      * #################
      * TODO: fix messages at right side while zoomed
      */
-    
+
     public function Zoom()
     {
-        init();
+        var key:Number = MapConfig.zoomKey;
+        net.wargaming.managers.BattleInputHandler.instance.addHandler(key, false, this, "onZoomKeyClick");
+        net.wargaming.managers.BattleInputHandler.instance.addHandler(key, true, this, "onZoomKeyClick");
+
+        currentState = true;
+    }
+
+    public function Dispose()
+    {
+        net.wargaming.managers.BattleInputHandler.instance.removeHandlers(MapConfig.zoomKey);
     }
 
     public function onZoomKeyClick(event):Void
@@ -48,15 +57,6 @@ class wot.Minimap.view.Zoom
     }
 
     // -- Private
-    
-    private function init():Void
-    {
-        var key:Number = MapConfig.zoomKey;
-        net.wargaming.managers.BattleInputHandler.instance.addHandler(key, false, this, "onZoomKeyClick");
-        net.wargaming.managers.BattleInputHandler.instance.addHandler(key, true, this, "onZoomKeyClick");
-        
-        currentState = true;
-    }
 
     private function holdBehaviour(isZoomKeyDown:Boolean):Void
     {
@@ -92,7 +92,7 @@ class wot.Minimap.view.Zoom
             centerPosition();
         }
         swapDepth();
-        
+
         /** Without timer fix is reverted immediately */
         timer = _global.setInterval(this, "fixDeathLogPosition", DELAY_BEFORE_DEATH_LOG_FIX);;
     }
@@ -132,7 +132,7 @@ class wot.Minimap.view.Zoom
     {
         minimap.setupSize(minimap.m_sizeIndex, Stage.height);
     }
-    
+
     /**
      * Moves zoomed minimap back and forth
      * relative to other overlapping clips.
@@ -142,12 +142,12 @@ class wot.Minimap.view.Zoom
     {
         minimap.swapDepths(battleStartTimerClip);
     }
-    
+
     /**
      * Death log list position is moved to the top of minimap
      * each time minimap size changes.
      * List position becomes too high while minimap is zoomed.
-     * 
+     *
      * Fix is here.
      */
     private function fixDeathLogPosition():Void
@@ -155,7 +155,7 @@ class wot.Minimap.view.Zoom
         _global.clearInterval(timer);
         _root.playerMessangersPanel._y = Stage.height;
     }
-    
+
     private function get userIsUsingChat():Boolean
     {
         var ret:Boolean = _root.messenger.messageInput._focused;
@@ -163,15 +163,15 @@ class wot.Minimap.view.Zoom
         {
             Logger.add("## ERROR wot.Minimap.view.Zoom: _root.messenger.messageInput._focused == null");
         }
-        
+
         return ret;
     }
-    
+
     private function get minimap():Minimap
     {
         return MinimapProxy.wrapper;
     }
-    
+
     private function get battleStartTimerClip():MovieClip
     {
         return _root.timerBig;

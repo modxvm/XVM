@@ -1,4 +1,5 @@
 import com.xvm.*;
+import com.xvm.*;
 import com.xvm.DataTypes.*;
 import wot.Minimap.dataTypes.*;
 import wot.Minimap.model.externalProxy.*;
@@ -73,6 +74,16 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             if (radius > 0)
                 drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
         }
+    }
+
+    public function Dispose():Void
+    {
+        GlobalEventDispatcher.removeEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
+        GlobalEventDispatcher.removeEventListener(Defines.E_MODULE_DESTROYED, this, onModuleDestroyed);
+        GlobalEventDispatcher.removeEventListener(Defines.E_MODULE_REPAIRED, this, onModuleRepaired);
+        GlobalEventDispatcher.removeEventListener(Defines.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
+
+        super.Dispose();
     }
 
     /** Private */

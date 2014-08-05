@@ -119,6 +119,13 @@ class wot.Minimap.Features
 
     private function zoomFeature():Void
     {
+        if (zoom != null)
+        {
+            zoom.Dispose();
+            delete zoom;
+            zoom = null;
+        }
+
         if (MapConfig.zoomEnabled)
         {
             zoom = new Zoom();
@@ -127,6 +134,13 @@ class wot.Minimap.Features
 
     private function mapSizeFeature():Void
     {
+        if (mapSizeLabel != null)
+        {
+            mapSizeLabel.Dispose();
+            delete mapSizeLabel;
+            mapSizeLabel = null;
+        }
+
         /** Draw map size at map corner */
         if (MapConfig.mapSizeLabelEnabled)
         {
@@ -140,6 +154,12 @@ class wot.Minimap.Features
          * Draw customized circles.
          * Outlines distance in meters.
          */
+        if (circles != null)
+        {
+            circles.Dispose();
+            delete circles;
+            circles = null;
+        }
         if (MapConfig.circles.enabled)
         {
             circles = new Circles(); /** Total map side distance in meters */
@@ -149,6 +169,12 @@ class wot.Minimap.Features
          * Draw customized circles.
          * Outlines distance in meters.
          */
+        if (square != null)
+        {
+            square.Dispose();
+            delete square;
+            square = null;
+        }
         if (MapConfig.squareEnabled)
         {
             square = new Square(); /** Total map side distance in meters */
@@ -159,6 +185,12 @@ class wot.Minimap.Features
          * Outlines vehicle direction, gun horizontal traverse angle
          * and possibly distance in meters.
          */
+        if (lines != null)
+        {
+            lines.Dispose();
+            delete lines;
+            lines = null;
+        }
         if (MapConfig.linesEnabled)
         {
             lines = new Lines(); /** Total map side distance in meters  */

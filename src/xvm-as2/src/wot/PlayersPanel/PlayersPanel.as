@@ -64,7 +64,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, update2);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, update2);
-        GlobalEventDispatcher.addEventListener(Defines.E_ALT_MODE, this, setAltMode);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, update2);
     }
 
@@ -87,10 +86,12 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         Config.config.playersPanel[startMode].enabled = true;
         setStartMode(startMode, wrapper);
 
+        m_savedState = null;
         m_altMode = String(Config.config.playersPanel.altMode).toLowerCase();
         if (net.wargaming.ingame.PlayersPanel.STATES[m_altMode] == null)
             m_altMode = null;
-        m_savedState = null;
+        if (m_altMode != null)
+            GlobalEventDispatcher.addEventListener(Defines.E_ALT_MODE, this, setAltMode);
 
         _root.switcher_mc.noneBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.none.name].enabled;
         _root.switcher_mc.shortBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.short.name].enabled;
@@ -126,7 +127,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
     }
-
 
     private function setAltMode(e:Object)
     {

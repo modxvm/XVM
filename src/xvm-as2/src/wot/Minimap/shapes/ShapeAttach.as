@@ -21,7 +21,7 @@ class wot.Minimap.shapes.ShapeAttach
 
     private var scaleFactor:Number;
 
-    private var selfAttachments:MovieClip;
+    private var selfAttachments:MovieClip = null;
 
     public function ShapeAttach()
     {
@@ -42,6 +42,11 @@ class wot.Minimap.shapes.ShapeAttach
         var ud = BattleState.getSelfUserData();
         if (ud != null && ud.dead == true)
             postmortemMod();
+    }
+
+    public function Dispose()
+    {
+        IconsProxy.selfEntry.removeAttachments();
     }
 
     // -- Private

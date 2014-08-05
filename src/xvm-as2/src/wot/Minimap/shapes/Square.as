@@ -15,7 +15,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private static var SQUARE_SIDE_IN_METERS:Number = 1000;
 
-    private var squareClip:MovieClip;
+    private var squareClip:MovieClip = null;
 
     public function Square()
     {
@@ -31,6 +31,16 @@ class wot.Minimap.shapes.Square extends ShapeAttach
         defineStyle();
         drawLines();
         updatePosition();
+    }
+
+    public function Dispose()
+    {
+        if (squareClip != null)
+        {
+            squareClip.removeMovieClip();
+            delete squareClip;
+            squareClip = null;
+        }
     }
 
     //--Private
@@ -86,7 +96,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     /** overwrite */
     private function postmortemMod(event) {
-		squareClip._visible = false;
-		super.postmortemMod.apply(arguments);
+        squareClip._visible = false;
+        super.postmortemMod.apply(arguments);
     }
 }

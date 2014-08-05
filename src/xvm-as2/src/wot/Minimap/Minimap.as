@@ -51,7 +51,7 @@ class wot.Minimap.Minimap
     {
         Utils.TraceXvmModule("Minimap");
 
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, updateEntries);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, updateEntries);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, updateEntries);
         GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
@@ -135,6 +135,13 @@ class wot.Minimap.Minimap
 
     // -- Private
 
+    private function onConfigLoaded()
+    {
+        if (Config.config.minimap.enabled && Config.config.minimapAlt.enabled)
+            GlobalEventDispatcher.addEventListener(Defines.E_ALT_MODE, this, setAltMode);
+        updateEntries();
+    }
+
     private function checkLoading():Void
     {
         wrapper.icons.onEnterFrame = function()
@@ -180,5 +187,16 @@ class wot.Minimap.Minimap
         SyncModel.instance.updateIconUids();
 
         _global.setTimeout(function() { Features.instance.applyMajorMods(); }, 1);
+    }
+
+    private function setAltMode(e:Object):Void
+    {
+        if (!mapExtended)
+            return;
+        //Logger.add("setAltMode: " + e.isDown);
+        MapConfig.isAltMode = e.isDown;
+        Features.instance.scaleMarkers();
+        Features.instance.applyMajorMods();
+        updateEntries();
     }
 }

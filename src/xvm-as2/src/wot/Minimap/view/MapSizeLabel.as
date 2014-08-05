@@ -1,16 +1,20 @@
-import flash.geom.Point;
-import wot.Minimap.MinimapProxy;
-import wot.Minimap.model.externalProxy.MapConfig;
-import wot.Minimap.model.mapSize.MapSizeModel;
+import com.xvm.*;
+import flash.geom.*;
+import wot.Minimap.*;
+import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.model.mapSize.*;
 
 class wot.Minimap.view.MapSizeLabel
 {
+    private static var MAP_SIZE_TEXT_FIELD_NAME = "mapSize";
     private static var CELLSIZE_MACRO:String = "{{cellsize}}";
+
+    private var tf:TextField = null;
 
     public function MapSizeLabel()
     {
         var offset:Point = MapConfig.mapSizeLabelOffset;
-        var tf:TextField = bg.createTextField("mapSize", bg.getNextHighestDepth(),
+        tf = bg.createTextField(MAP_SIZE_TEXT_FIELD_NAME, bg.getNextHighestDepth(),
             offset.x, offset.y, MapConfig.mapSizeLabelWidth, MapConfig.mapSizeLabelHeight);
         tf.antiAliasType = "advanced";
         tf.html = true;
@@ -31,6 +35,16 @@ class wot.Minimap.view.MapSizeLabel
         }
     }
 
+    public function Dispose()
+    {
+        if (tf != null)
+        {
+            tf.removeTextField();
+            delete tf;
+            tf = null;
+        }
+    }
+
     /** -- Private */
 
     private function defineLabelText(format:String):String
@@ -43,12 +57,12 @@ class wot.Minimap.view.MapSizeLabel
 
         return format;
     }
-    
+
     private function get bg():MovieClip
     {
         return MinimapProxy.wrapper.backgrnd;
     }
-    
+
     private function get cellSize():Number
     {
         return MapSizeModel.instance.getCellSide();

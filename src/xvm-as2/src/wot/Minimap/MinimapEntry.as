@@ -104,9 +104,19 @@ class wot.Minimap.MinimapEntry
      */
     public function get attachments():MovieClip
     {
-        if (!wrapper.xvm_attachments)
+        if (wrapper.xvm_attachments == null)
             wrapper.createEmptyMovieClip("xvm_attachments", wrapper.getNextHighestDepth());
         return wrapper.xvm_attachments;
+    }
+
+    public function removeAttachments():Void
+    {
+        if (wrapper.xvm_attachments != null)
+        {
+            wrapper.xvm_attachments.removeMovieClip();
+            delete wrapper.xvm_attachments;
+            wrapper.xvm_attachments = null;
+        }
     }
 
     /**

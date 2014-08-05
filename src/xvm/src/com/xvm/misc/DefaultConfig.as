@@ -33,6 +33,8 @@ package com.xvm.misc
             c.turretMarkers = getTurretMarkersSection();
             c.expertPanel = getExpertPanelSection();
             c.minimap = getMinimapSection();
+            c.minimapAlt = getMinimapSection();
+            c.minimapAlt.enabled = false;
             c.captureBar = getCaptureBarSection();
             c.hitLog = getHitlogSection();
             c.markers = getMarkersSection();

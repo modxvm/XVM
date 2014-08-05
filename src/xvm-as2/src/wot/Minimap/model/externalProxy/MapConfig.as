@@ -5,6 +5,10 @@ import wot.Minimap.dataTypes.*;
 
 class wot.Minimap.model.externalProxy.MapConfig
 {
+    private static var _isAltMode:Boolean = false;
+    public static function get isAltMode():Boolean              { return _isAltMode; }
+    public static function set isAltMode(value:Boolean):Void    { _isAltMode = value; }
+
     public static function get enabled():Boolean                { return minimap.enabled; }
     public static function get mapBackgroundImageAlpha():Number { return minimap.mapBackgroundImageAlpha; }
     public static function get selfIconAlpha():Number           { return minimap.selfIconAlpha; }
@@ -159,6 +163,6 @@ class wot.Minimap.model.externalProxy.MapConfig
 
     private static function get minimap():Object
     {
-        return Config.config.minimap;
+        return _isAltMode ? Config.config.minimapAlt : Config.config.minimap;
     }
 }

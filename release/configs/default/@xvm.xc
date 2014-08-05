@@ -137,6 +137,10 @@
   // Миникарта.
   "minimap": ${"minimap.xc":"minimap"},
 
+  // Minimap.
+  // Миникарта.
+  "minimapAlt": ${"minimapAlt.xc":"minimap"},
+
   // Over-target markers.
   // Маркеры над танками.
   "markers": ${"markers.xc":"markers"},

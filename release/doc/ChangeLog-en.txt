@@ -1,5 +1,6 @@
 ﻿XVM-5.3.4-dev:
   * added ability to disable some modes in the players panels
+  * new section "minimapAlt" for alternative minimap mode (disabled by default)
 
 XVM-5.3.3:
   * adaptation to WoT 0.9.2
