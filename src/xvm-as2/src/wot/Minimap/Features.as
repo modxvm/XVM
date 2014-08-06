@@ -33,6 +33,11 @@ class wot.Minimap.Features
         return _instance;
     }
 
+    public function Features()
+    {
+        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, onRefreshEvent);
+    }
+
     /**
      * Have to be public.
      * Invoked each time minimap.scaleMarkers is called.
@@ -96,6 +101,12 @@ class wot.Minimap.Features
     }
 
     //-- Private
+
+    private function onRefreshEvent(e)
+    {
+        scaleMarkers();
+        applyMajorMods();
+    }
 
     /**
      * Set alpha of background map image.

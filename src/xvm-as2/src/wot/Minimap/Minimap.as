@@ -54,8 +54,12 @@ class wot.Minimap.Minimap
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, updateEntries);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, updateEntries);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.REFRESH, this, updateEntries);
         GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
         GlobalEventDispatcher.addEventListener(MinimapEvent.PANEL_READY, this, onReady);
+
+        GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
+        GlobalEventDispatcher.addEventListener(Defines.E_STEREOSCOPE_TOGGLED, this, onStereoscopeToggled);
 
         checkLoading();
     }
@@ -81,6 +85,9 @@ class wot.Minimap.Minimap
     private var isPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
     private var mapExtended:Boolean = false;
+    private var stereoscope_exists:Boolean = false;
+    private var stereoscope_enabled:Boolean = false;
+    private var is_moving:Boolean = false;
 
     function scaleMarkersImpl(factor:Number)
     {
@@ -189,15 +196,32 @@ class wot.Minimap.Minimap
         _global.setTimeout(function() { Features.instance.applyMajorMods(); }, 1);
     }
 
+    private function onMovingStateChanged(event)
+    {
+        is_moving = event.value;
+    }
+
+    private function onStereoscopeToggled(event)
+    {
+        if (stereoscope_exists == false && event.value == true)
+            stereoscope_exists = true;
+        stereoscope_enabled = event.value;
+    }
+
     private function setAltMode(e:Object):Void
     {
         if (!mapExtended)
             return;
         //Logger.add("setAltMode: " + e.isDown);
         MapConfig.isAltMode = e.isDown;
-        Features.instance.scaleMarkers();
-        Features.instance.applyMajorMods();
         GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
-        updateEntries();
+        if (stereoscope_exists)
+        {
+            var en:Boolean = stereoscope_enabled;
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: true } );
+            if (en == false)
+                GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: false } );
+        }
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MOVING_STATE_CHANGED, value: is_moving } );
     }
 }
