@@ -3,10 +3,10 @@
 // http://www.koreanrandom.com/forum/topic/3163-/#entry43725
 
 // Введите название рейтинга маленькими буквами кавычках
-var rating = "xwn"; // Примеры: "eff", "xeff", "wn8", "xwn8", "wn6", "xwn6", "wn", "xwn"
+var rating = "xwn"; // Примеры: "eff", "xeff", "wn8", "xwn8", "wn6", "xwn6", "wn", "xwn", "wgr", "xwgr"
 
 // массив поддерживаемых рейтингов
-var Aratings = [ "eff", "xeff", "wn8", "xwn8", "wn6", "xwn6", "wn", "xwn" ];
+var Aratings = [ "eff", "xeff", "wn8", "xwn8", "wn6", "xwn6", "wn", "xwn", "wgr", "xwgr" ];
 
 // если в качестве первого аргумента передан какой-то рейтинг, применяем его для замен в файлах
 if ( arg0isRating()==1 )
@@ -18,13 +18,13 @@ if ( rating.indexOf("x")==0 )
 else
     var text_rate   = "{{" + rating + "%4d|----}}";
 var text_param      = "{{$1:" + rating + "$3}}";
-var text_option     = "\"xwnInCompany\": false";
-if ( rating.indexOf("wn")>=0 )
-    text_option     = "\"xwnInCompany\": true";
+var text_option     = "\"xwnInCompany\": true";
+if ( rating.indexOf("eff")>=0 )
+    text_option     = "\"xwnInCompany\": false";
 
 // заменяемый текст
-var find_rate   = /{{x?(wn|eff)[^}]*}}/g;
-var find_param  = /{{(a|c):x?(wn|eff)[^|}]*(|[^}]*)?}}/g;
+var find_rate   = /{{x?(wn|eff|wgr)[^}]*}}/g;
+var find_param  = /{{(a|c):x?(wn|eff|wgr)[^|}]*(|[^}]*)?}}/g;
 var find_option = /"xwnInCompany"[\s\t]*:[\s\t]*(true|false)/g;
 
 var fso = new ActiveXObject("Scripting.FileSystemObject");

@@ -3,7 +3,7 @@
 // http://www.koreanrandom.com/forum/topic/3163-/#entry43725
 
 // Введите название рейтинга маленькими буквами кавычках
-var rating = "xeff"; // Примеры: "eff", "xeff", "wn8", "xwn8", "wn6", "xwn6", "wn", "xwn", "wgr", "xwgr"
+var rating = "xwgr"; // Примеры: "eff", "xeff", "wn8", "xwn8", "wn6", "xwn6", "wn", "xwn", "wgr", "xwgr"
 
 // массив поддерживаемых рейтингов
 var Aratings = [ "eff", "xeff", "wn8", "xwn8", "wn6", "xwn6", "wn", "xwn", "wgr", "xwgr" ];
