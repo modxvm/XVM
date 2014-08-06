@@ -31,6 +31,8 @@ wn6 - initial form of WN6 rating
 xwn6 - two-sign form of WN6 rating by XVM scale
 wn8 - initial form of WN8 rating
 xwn8 - two-sign form of WN8 rating by XVM scale
+wgr - initial form of WG rating
+xwgr - two-sign form of WG rating by XVM scale
 The default macro is a two-sign form of WN8 rating by XVM scale: xwn8.
 
 E.g. if you want to use initial form of wot-news rating,
@@ -44,7 +46,7 @@ For developers:
 Script may be called from other scripts, batch files and programs with arguments or without them:
 anyscript.js [rating] [file1 folder1 folder2 folder3 file3 ...]
 The first argument may be a rating, that will be applied to all the files and folders, enumerated further.
-Possible values for [rating]: eff xeff wn8 xwn8 wn6 xwn6 wn xwn
+Possible values for [rating]: eff xeff wn8 xwn8 wn6 xwn6 wn xwn wgr xwgr
 If the first argument is not one of latter, the default rating from the script body will be used.
 If there are no arguments or the only argument is rating, the script will proceed all the files with *.xc, *.XC, *.xvmconf and *.XVMconf extensions in the current folder.
 For all the arguments that are files, the script will replace ratings in all of them independently of extensions.
@@ -56,11 +58,11 @@ anyscript.js xeff "C:\Games\World_of_Tanks\res_mods\xvm\configs\default" "C:\Gam
 Will change rating to xeff in all the files xvm\configs\default\*.xc and in xvm\readme.txt
 
 anyscript.js "C:\Games\World_of_Tanks\res_mods\xvm\configs\default"
-Will change rating to the one from the script body in all the files xvm\configs\default\*.xc 
+Will change rating to the one from the script body in all the files xvm\configs\default\*.xc
 
 anyscript.js wn8
 Will change rating to wn8 in all *.xc files in current folder.
 
 *************************
-Translated by sech_92. 
+Translated by sech_92.
 If you see some mistakes, you may PM me on http://kr.cm

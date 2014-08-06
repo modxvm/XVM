@@ -72,7 +72,9 @@
           "ally":           "<span class='mm_a'><font color='{{c:xwn8}}'>*</font></span>",
           "squad":          "<span class='mm_s'><font color='{{c:xwn8}}'>*</font></span>",
           "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}'>*</font></span>",
-          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}'>*</font></span>"
+          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}'>*</font></span>",
+          "lostally":       "<span class='mm_la'>{{vehicle-class}}</span>",
+          "lost":           "<span class='mm_l'>{{vehicle-class}}</span>"
         }
       },
       "mapSize": { "enabled": false }

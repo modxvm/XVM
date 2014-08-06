@@ -1,16 +1,23 @@
 ﻿XVM-5.3.4-dev:
+  * new macros:
+      {{ready}}, returns "ready" when player loaded to the game and empty if not
   * added ability to disable some modes in the players panels
   * new section "minimapAlt" for alternative minimap mode (disabled by default)
+  * localization:
+      added {{l10n:Not ready}}
 
 XVM-5.3.3:
   * adaptation to WoT 0.9.2
   * new macros:
-      {{ready}}, returns "ready" when player loaded to the game and empty if not
       {{player}}, returns "pl" for current player and empty string for others
       {{tk}}, returns "tk" for teamkiller and empty string for others
       {{wgr}}, {{c:wgr}}, {{a:wgr}}, {{xwgr}}, {{c:xwgr}}, {{a:xwgr}} for WG rating
+  * macros extended:
+      {{l10n:<id>}} now works in PlayersPanel
   * new option:
       playersPanel/altMode - mode with Alt key pressed
+  * localization:
+      added {{l10n:Destroyed}} and {{l10n:No data}}
 
 XVM-5.3.2:
   * new options: captureBar/allyColor, captureBar/enemyColor

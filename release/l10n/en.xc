@@ -137,6 +137,7 @@
     
     //Vehicle status
     "Destroyed": "Destroyed",
-    "No data": "No data"
+    "No data": "No data",
+    "Not ready": "Not ready"
   }
 }
