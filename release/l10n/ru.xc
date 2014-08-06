@@ -138,6 +138,6 @@
     //Vehicle status
     "Destroyed": "Уничтожен",
     "No data": "Нет данных",
-    "Not ready":"Не готов"
+    "Not ready": "Не готов"
   }
 }
