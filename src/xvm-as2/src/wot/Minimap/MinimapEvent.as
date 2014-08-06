@@ -4,6 +4,7 @@ class wot.Minimap.MinimapEvent
     public static var PANEL_READY:String = "PANEL_READY";
     public static var ENTRY_REVEALED:String = "ENTRY_REVEALED";
     public static var ENTRY_LOST:String = "ENTRY_LOST";
+    public static var REFRESH:String = "REFRESH";
 
     /** Used for camera atachments redraw */
     public static var ON_ENTRY_INITED:String = "ON_ENTRY_INITED";

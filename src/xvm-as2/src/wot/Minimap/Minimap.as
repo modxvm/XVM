@@ -197,6 +197,7 @@ class wot.Minimap.Minimap
         MapConfig.isAltMode = e.isDown;
         Features.instance.scaleMarkers();
         Features.instance.applyMajorMods();
+        GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
         updateEntries();
     }
 }
