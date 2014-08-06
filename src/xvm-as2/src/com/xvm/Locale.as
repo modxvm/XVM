@@ -1,7 +1,7 @@
 ﻿/**
- * ...
- * @author Maxim Schedriviy
- * @author Michael Pavlyshko
+ * XVM Localization module
+ * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
+ * @author Mikhail Paulyshka "mixail(at)modxvm.com"
  * @author Pavel Máca
  */
 import com.xvm.*;
@@ -170,6 +170,7 @@ class com.xvm.Locale
             //Vehicle status
             tr["Destroyed"] = "Уничтожен";
             tr["No data"] = "Нет данных";
+            tr["Not ready"] = "Не готов";
         }
         else
         {

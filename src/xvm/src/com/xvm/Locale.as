@@ -1,7 +1,7 @@
 ﻿/**
- * XVM Sandbox Detector
+ * XVM Localization module
  * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
- * @author Michael Pavlyshko
+ * @author Mikhail Paulyshka "mixail(at)modxvm.com"
  * @author Pavel Máca
  */
 package com.xvm
@@ -217,7 +217,8 @@ package com.xvm
        
             //Vehicle status
             "Destroyed": "Уничтожен",
-            "No data": "Нет данных"
+            "No data": "Нет данных",
+            "Not ready": "Не готов"
         };
 
         /** Hardcoded EN language */
