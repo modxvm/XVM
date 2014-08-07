@@ -16,9 +16,6 @@ class wot.Minimap.model.externalProxy.MapConfig
     public static function get iconScale():Number               { return minimap.iconScale; }
 
     /** Zoom */
-    public static function get zoomEnabled():Boolean    { return Config.config.hotkeys.minimapZoom.enabled; }
-    public static function get zoomHold():Boolean       { return Config.config.hotkeys.minimapZoom.onHold; }
-    public static function get zoomKey():Number         { return Config.config.hotkeys.minimapZoom.keyCode; }
     public static function get zoomCentered():Boolean   { return minimap.zoom.centered; }
     public static function get zoomPixelsBack():Number  { return minimap.zoom.pixelsBack; }
 

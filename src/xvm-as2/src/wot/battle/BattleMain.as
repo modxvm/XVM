@@ -42,9 +42,7 @@ class wot.battle.BattleMain
         gfx.io.GameDelegate.addCallBack("battle.damagePanel.updateState", instance, "updateState");
         gfx.io.GameDelegate.addCallBack("battle.damagePanel.updateSpeed", instance, "updateSpeed");
 
-        BattleInputHandler.upgrade();
-
-        ExternalInterface.addCallback(Cmd.RESPOND_ALT_MODE, instance, instance.setAltMode);
+        ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
         ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATE, instance, instance.onBattleStateChanged);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
     }
@@ -178,9 +176,16 @@ class wot.battle.BattleMain
         }
     }
 
-    private function setAltMode(isDown:Boolean):Void
+    private function onKeyEvent(key:Number, isDown:Boolean):Void
     {
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_ALT_MODE, isDown: isDown } );
+        //Logger.add("onKeyEvent: " + key + " " + isDown);
+        var cfg = Config.config.hotkeys
+        if (cfg.minimapZoom.enabled && cfg.minimapZoom.keyCode == key)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ZOOM, isDown: isDown } );
+        if (cfg.minimapAltMode.enabled && cfg.minimapAltMode.keyCode == key)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_MM_ALT_MODE, isDown: isDown } );
+        if (cfg.playersPanelAltMode.enabled && cfg.playersPanelAltMode.keyCode == key)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PP_ALT_MODE, isDown: isDown } );
     }
 
     private function onBattleStateChanged(playerName:String, playerId:Number, vehId:Number,

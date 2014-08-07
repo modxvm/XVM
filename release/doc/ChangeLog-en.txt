@@ -5,6 +5,9 @@
   * new section "minimapAlt" for alternative minimap mode (disabled by default)
   * localization:
       added {{l10n:Not ready}}
+  * "hotkeys" section updated:
+     - added key bindings for minimap and players panel alt mode
+     - full keyboard can be used
 
 XVM-5.3.3:
   * adaptation to WoT 0.9.2

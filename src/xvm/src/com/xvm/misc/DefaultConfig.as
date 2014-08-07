@@ -213,9 +213,11 @@ package com.xvm.misc
         private static function getHotkeysSection():CHotkeys
         {
             var c:CHotkeys = new CHotkeys();
-            c.minimapZoom = { enabled: false, onHold: true, keyCode: 17 }; // 17 - Ctrl
+            c.minimapZoom = { enabled: false, keyCode: 29, onHold: true }; // 29 - Left Ctrl
+            c.minimapAltMode = { enabled: false, keyCode: 29 };
+            c.playersPanelAltMode = { enabled: false, keyCode: 29 };
             /*
-            c.minimapExtended: { enabled: true, onHold: true, keycode: 16 } // 16 - Alt?
+            c.minimapExtended: { enabled: true, onHold: true, keycode: 16 }
             c.messages: [
               {  enabled: true, keycode: 113, text: "ШАНСЫ 5% АЙДА ТАПИЦА" }, // F2
               {  enabled: true, keycode: 114, text: "☆\nhey!\n☆" } // .split("\n")

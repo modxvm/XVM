@@ -137,7 +137,7 @@ class wot.Minimap.Features
             delete zoom;
         }
 
-        if (MapConfig.zoomEnabled)
+        if (Config.config.hotkeys.minimapZoom.enabled)
         {
             zoom = new Zoom();
         }

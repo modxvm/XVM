@@ -10,7 +10,6 @@ import BigWorld
 import GUI
 from gui.shared.utils import decorators
 from gui import SystemMessages
-import CommandMapping
 
 from xpm import *
 
@@ -120,24 +119,40 @@ class Xvm(object):
         except Exception, ex:
             err(traceback.format_exc())
 
-    def onKeyDown(self, event):
-        # do not handle keys when chat is active
-        #from messenger import MessengerEntry
-        #if MessengerEntry.g_instance.gui.isFocused():
-        #    return False
-        cmdMap = CommandMapping.g_instance
-        key = event.key
-        isDown = event.isKeyDown()
-        isRepeated = event.isRepeatedEvent()
-        if not isRepeated:
-            if cmdMap.isFired(CommandMapping.CMD_VEHICLE_MARKERS_SHOW_INFO, key):
-                self.setAltMode(isDown)
-                return True
-        #if event.isKeyDown() and not event.isRepeatedEvent():
-        #    #debug("key=" + str(key))
-        #    #return True
-        #    pass
+    def onKeyEvent(self, event):
+        try:
+            key = event.key
+            isDown = event.isKeyDown()
+            isRepeated = event.isRepeatedEvent()
+            if not isRepeated:
+                #debug("key=" + str(key) + ' ' + ('down' if isDown else 'up'))
+                if self.config is not None:
+                    if self.battleFlashObject is not None:
+                        if self.checkKeyEventBattle(key, isDown):
+                            movie = self.battleFlashObject.movie
+                            if movie is not None:
+                                movie.invoke((RESPOND_KEY_EVENT, key, isDown))
+        except Exception, ex:
+            err('onKeyEvent(): ' + traceback.format_exc())
         return True
+
+    def checkKeyEventBattle(self, key, isDown):
+        # do not handle keys when chat is active
+        from messenger import MessengerEntry
+        if MessengerEntry.g_instance.gui.isFocused():
+            return False
+
+        c = self.config['hotkeys']
+
+        if (c['minimapZoom']['enabled'] == True and c['minimapZoom']['keyCode'] == key):
+            return True
+        if (c['minimapAltMode']['enabled'] == True and c['minimapAltMode']['keyCode'] == key):
+            return True
+        if (c['playersPanelAltMode']['enabled'] == True and c['playersPanelAltMode']['keyCode'] == key):
+            return True
+
+        return False
+
 
     def getMods(self):
         mods_dir = XVM_MODS_DIR
@@ -261,16 +276,6 @@ class Xvm(object):
                     getVehicleInfoDataStr()]))
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
-
-    def setAltMode(self, isDown):
-        #debug('setAltMode: ' + str(isDown))
-        try:
-            if self.battleFlashObject is not None:
-                movie = self.battleFlashObject.movie
-                if movie is not None:
-                    movie.invoke((RESPOND_ALT_MODE, isDown))
-        except Exception, ex:
-            err('setAltMode(): ' + traceback.format_exc())
 
     # taken from gui.Scaleform.daapi.view.lobby.crewOperations.CrewOperationsPopOver
     @decorators.process('crewReturning')

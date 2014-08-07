@@ -91,7 +91,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         if (net.wargaming.ingame.PlayersPanel.STATES[m_altMode] == null)
             m_altMode = null;
         if (m_altMode != null)
-            GlobalEventDispatcher.addEventListener(Defines.E_ALT_MODE, this, setAltMode);
+            GlobalEventDispatcher.addEventListener(Defines.E_PP_ALT_MODE, this, setAltMode);
 
         _root.switcher_mc.noneBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.none.name].enabled;
         _root.switcher_mc.shortBtn.enabled = Config.config.playersPanel[net.wargaming.ingame.PlayersPanel.STATES.short.name].enabled;

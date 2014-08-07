@@ -80,7 +80,10 @@
     "__stub__": null
   },
   "hotkeys": {
-    "minimapZoom": { "enabled": false, "onHold": true, "keyCode": 17 }
+    //"minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
+    //"minimapAltMode": { "enabled": true, "keyCode": 29 },
+    //"playersPanelAltMode": { "enabled": true, "keyCode": 29 },
+    "__stub__": {}
   },
   "battleLoading": {
     "showChances": true,

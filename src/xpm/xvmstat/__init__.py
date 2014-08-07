@@ -157,7 +157,7 @@ def _RegisterEvents():
     import game
     start()
     RegisterEvent(game, 'fini', fini)
-    RegisterEvent(game, 'handleKeyEvent', g_xvm.onKeyDown)
+    RegisterEvent(game, 'handleKeyEvent', g_xvm.onKeyEvent)
 
     from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
     OverrideMethod(ProfileTechniqueWindow, 'requestData', ProfileTechniqueWindowRequestData)

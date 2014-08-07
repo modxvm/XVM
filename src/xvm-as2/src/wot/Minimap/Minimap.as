@@ -145,7 +145,7 @@ class wot.Minimap.Minimap
     private function onConfigLoaded()
     {
         if (Config.config.minimap.enabled && Config.config.minimapAlt.enabled)
-            GlobalEventDispatcher.addEventListener(Defines.E_ALT_MODE, this, setAltMode);
+            GlobalEventDispatcher.addEventListener(Defines.E_MM_ALT_MODE, this, setAltMode);
         updateEntries();
     }
 

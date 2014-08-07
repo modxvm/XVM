@@ -1,5 +1,5 @@
-import com.xvm.Logger;
-import net.wargaming.ingame.Minimap;
+import com.xvm.*;
+import net.wargaming.ingame.*;
 import wot.Minimap.MinimapProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
 
@@ -9,14 +9,13 @@ import wot.Minimap.model.externalProxy.MapConfig;
  */
 class wot.Minimap.view.Zoom
 {
-    /** Temporary place to store last normal map size value before resize procedure by zoom */
-    private var prevSizeIndex:Number;
-
     /** Stores state for switcher */
-    private var currentState:Boolean;
+    private static var currentState:Boolean = true;
+
+    private static var DELAY_BEFORE_DEATH_LOG_FIX:Number = 10;
 
     private var timer;
-    private static var DELAY_BEFORE_DEATH_LOG_FIX:Number = 10;
+
     /**
      * #################
      * TODO: fix messages at right side while zoomed
@@ -24,35 +23,27 @@ class wot.Minimap.view.Zoom
 
     public function Zoom()
     {
-        var key:Number = MapConfig.zoomKey;
-        net.wargaming.managers.BattleInputHandler.instance.addHandler(key, false, this, "onZoomKeyClick");
-        net.wargaming.managers.BattleInputHandler.instance.addHandler(key, true, this, "onZoomKeyClick");
-
-        currentState = true;
+        GlobalEventDispatcher.addEventListener(Defines.E_MM_ZOOM, this, onZoomKeyClick)
     }
 
     public function Dispose()
     {
-        net.wargaming.managers.BattleInputHandler.instance.removeHandlers(MapConfig.zoomKey);
+        GlobalEventDispatcher.removeEventListener(Defines.E_MM_ZOOM, this, onZoomKeyClick)
     }
 
-    public function onZoomKeyClick(event):Void
+    public function onZoomKeyClick(e:Object):Void
     {
-        if (!userIsUsingChat)
+        /**
+         * Zoom while key is on hold
+         * or switch zoom when key is clicked
+         */
+        if (Config.config.hotkeys.minimapZoom.onHold)
         {
-            /**
-             * Zoom while key is on hold
-             * or switch zoom when key is clicked
-             */
-            var isZoomKeyDown:Boolean = event.details.value == "keyDown";
-            if (MapConfig.zoomHold)
-            {
-                holdBehaviour(isZoomKeyDown);
-            }
-            else if (isZoomKeyDown)
-            {
-                switchBehaviour();
-            }
+            holdBehaviour(e.isDown);
+        }
+        else if (e.isDown)
+        {
+            switchBehaviour();
         }
     }
 
@@ -72,6 +63,7 @@ class wot.Minimap.view.Zoom
 
     private function switchBehaviour():Void
     {
+        Logger.add("sw: " + currentState);
         if (currentState)
         {
             zoomIn();
@@ -94,7 +86,7 @@ class wot.Minimap.view.Zoom
         swapDepth();
 
         /** Without timer fix is reverted immediately */
-        timer = _global.setInterval(this, "fixDeathLogPosition", DELAY_BEFORE_DEATH_LOG_FIX);;
+        timer = _global.setInterval(this, "fixDeathLogPosition", DELAY_BEFORE_DEATH_LOG_FIX);
     }
 
     private function zoomOut():Void
@@ -154,17 +146,6 @@ class wot.Minimap.view.Zoom
     {
         _global.clearInterval(timer);
         _root.playerMessangersPanel._y = Stage.height;
-    }
-
-    private function get userIsUsingChat():Boolean
-    {
-        var ret:Boolean = _root.messenger.messageInput._focused;
-        if (ret == null)
-        {
-            Logger.add("## ERROR wot.Minimap.view.Zoom: _root.messenger.messageInput._focused == null");
-        }
-
-        return ret;
     }
 
     private function get minimap():Minimap
