@@ -39,25 +39,26 @@ class wot.VehicleMarkersManager.XvmBase
     private var m_entityType:String; // TODO: is the same as proxy.m_team?
 
     // Private (?) members
-    public var m_showExInfo: Boolean;
-    public var m_isDead: Boolean;
-    public var m_defaultIconSource: String;
+    public var m_showExInfo:Boolean;
+    public var m_isReady:Boolean;
+    public var m_isDead:Boolean;
+    public var m_defaultIconSource:String;
 
     // TextFields
-    private var textFields: Object;
+    private var textFields:Object;
 
     // Vehicle State
-    public var vehicleState: VehicleState;
+    public var vehicleState:VehicleState;
 
     // UI Controls
-    private var actionMarkerComponent: ActionMarkerComponent;
+    private var actionMarkerComponent:ActionMarkerComponent;
     private var clanIconComponent:ClanIconComponent;
-    private var contourIconComponent: ContourIconComponent;
-    private var damageTextComponent: DamageTextComponent;
-    private var healthBarComponent: HealthBarComponent;
-    private var levelIconComponent: LevelIconComponent;
-    private var turretStatusComponent: TurretStatusComponent;
-    private var vehicleTypeComponent: VehicleTypeComponent;
+    private var contourIconComponent:ContourIconComponent;
+    private var damageTextComponent:DamageTextComponent;
+    private var healthBarComponent:HealthBarComponent;
+    private var levelIconComponent:LevelIconComponent;
+    private var turretStatusComponent:TurretStatusComponent;
+    private var vehicleTypeComponent:VehicleTypeComponent;
 
     // Parent proxy instance (assigned from proxy)
     private var _proxy:VehicleMarkerProxy;
@@ -105,6 +106,7 @@ class wot.VehicleMarkersManager.XvmBase
                 damageFlag:damageFlag,
                 damageType:damageType,
                 entityName:m_entityName,
+                ready:m_isReady,
                 dead:m_isDead,
                 blowedUp:isBlowedUp,
                 teamKiller:m_entityName == "teamKiller"

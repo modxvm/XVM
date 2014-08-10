@@ -99,6 +99,10 @@ def LoginView_onSetOptions(base, self, optionsList, host):
             options.append({'data': key, 'label': name})
         self.as_setServersListS(options, selectedId)
 
+def onArenaCreated():
+    #debug('> onArenaCreated')
+    g_xvm.updateCurrentVehicle()
+
 # on any player marker appear (spectators only)
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
@@ -117,11 +121,11 @@ def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
 # on any vehicle hit received
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     #debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    g_xvm.invalidateBattleState(self)
+    g_xvm.invalidateBattleState(self, True)
 
-def onArenaCreated():
-    #debug('> onArenaCreated')
-    g_xvm.updateCurrentVehicle()
+def BattleArenaController_invalidateVehicleStatus(self, flags, vo, arenaDP):
+    vehicle = BigWorld.entity(vo.vehicleID)
+    g_xvm.updateVehicleStatus(vehicle, vo)
 
 def PreDefinedHostList_autoLoginQuery(base, callback):
     #debug('> PreDefinedHostList_autoLoginQuery')
@@ -165,6 +169,9 @@ def _RegisterEvents():
     from gui.Scaleform.daapi.view.login import LoginView
     OverrideMethod(LoginView, 'onSetOptions', LoginView_onSetOptions)
 
+    from PlayerEvents import g_playerEvents
+    g_playerEvents.onArenaCreated += onArenaCreated
+
     from Avatar import PlayerAvatar
     RegisterEvent(PlayerAvatar, 'vehicle_onEnterWorld', PlayerAvatar_vehicle_onEnterWorld)
     RegisterEvent(PlayerAvatar, 'vehicle_onLeaveWorld', PlayerAvatar_vehicle_onLeaveWorld)
@@ -173,8 +180,8 @@ def _RegisterEvents():
     #RegisterEvent(Vehicle, 'set_health', Vehicle_set_health, True)
     RegisterEvent(Vehicle, 'onHealthChanged', Vehicle_onHealthChanged)
 
-    from PlayerEvents import g_playerEvents
-    g_playerEvents.onArenaCreated += onArenaCreated
+    from gui.battle_control.battle_arena_ctrl import BattleArenaController
+    RegisterEvent(BattleArenaController, 'invalidateVehicleStatus', BattleArenaController_invalidateVehicleStatus)
 
     # enable for pinger_wg
     #from predefined_hosts import g_preDefinedHosts

@@ -226,9 +226,12 @@ class Xvm(object):
             if isinstance(v, Vehicle.Vehicle) and v.isStarted:
                 self.invalidateBattleState(v)
 
-    def invalidateBattleState(self, vehicle):
+    def invalidateBattleState(self, vehicle, isHealthChanged=False):
         #log("invalidateBattleState: " + str(vehicle.id))
-        if self.config is None or not self.config['battle']['allowHpInPanelsAndMinimap']:
+        if self.config is None:
+            return
+
+        if isHealthChanged and not self.config['battle']['allowHpInPanelsAndMinimap']:
             return
 
         player = BigWorld.player()
@@ -242,6 +245,9 @@ class Xvm(object):
         if self._battleStateTimersId.get(vehId, None) == None:
             self._battleStateTimersId[vehId] = \
                 BigWorld.callback(0.3, lambda: self._updateBattleState(vehId))
+
+        if not isHealthChanged:
+            self.updateVehicleStatus(vehicle)
 
     def _updateBattleState(self, vehId):
         #log("_updateBattleState: " + str(vehId))
@@ -262,6 +268,19 @@ class Xvm(object):
                         ))
             except Exception, ex:
                 err('_updateBattleState(): ' + traceback.format_exc())
+
+    def updateVehicleStatus(self, vehicle, vo=None):
+        if self.vmmFlashObject is not None:
+            try:
+                if vehicle is not None and hasattr(vehicle, 'marker'):
+                    if vo is None:
+                        from gui.BattleContext import g_battleContext
+                        vehicleStatus = g_battleContext.arenaDP.getVehicleInfo(vehicle.id).vehicleStatus
+                    else:
+                        vehicleStatus = vo.vehicleStatus
+                    self.vmmFlashObject.invokeMarker(vehicle.marker, 'showActionMarker', [None, vehicleStatus])
+            except Exception, ex:
+                err('updateVehicleStatus(): ' + traceback.format_exc())
 
     def sendConfig(self, flashObject):
         if self.config is None or flashObject is None:
@@ -285,7 +304,6 @@ class Xvm(object):
         result = yield TankmanReturn(g_currentVehicle.item).request()
         if len(result.userMsg):
             SystemMessages.g_instance.pushI18nMessage(result.userMsg, type = result.sysMsgType)
-
 
 g_xvm = Xvm()
 
