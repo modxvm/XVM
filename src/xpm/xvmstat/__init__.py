@@ -107,6 +107,7 @@ def onArenaCreated():
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
     g_xvm.invalidateBattleState(vehicle)
+    g_xvm.updateVehicleMarksOnGun(vehicle)
     g_xvm.updateVehicleStatus(vehicle)
     g_xvm.updateVehicleStats(vehicle)
 

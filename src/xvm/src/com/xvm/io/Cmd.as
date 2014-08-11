@@ -39,6 +39,7 @@ package com.xvm.io
         public static const RESPOND_USERDATA:String = "xvm.userdata";
         public static const RESPOND_DOSSIER:String = "xvm.dossier";
         public static const RESPOND_BATTLESTATE:String = "xvm.battleState";
+        public static const RESPOND_MARKSONGUN:String = "xvm.marksOnGun";
         public static const RESPOND_UPDATECURRENTVEHICLE:String = "xvm.updatecurrentvehicle";
 
         public static function log(str:String):void

@@ -23,4 +23,5 @@ def _getVehicleStateData(vehicle, playerId):
         'dead': not vehicle.isAlive(),
         'curHealth': vehicle.health,
         'maxHealth': vehicle.typeDescriptor.maxHealth,
+        'marksOnGun': vehicle.publicInfo.marksOnGun,
     }

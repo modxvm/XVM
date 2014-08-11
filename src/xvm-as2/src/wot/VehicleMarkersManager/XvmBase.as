@@ -44,6 +44,7 @@ class wot.VehicleMarkersManager.XvmBase
     public var m_isDead:Boolean;
     public var m_defaultIconSource:String;
     public var m_frags:Number;
+    public var m_marksOnGun:Number;
 
     // TextFields
     private var textFields:Object;
@@ -111,7 +112,8 @@ class wot.VehicleMarkersManager.XvmBase
                 dead:m_isDead,
                 blowedUp:isBlowedUp,
                 teamKiller:m_entityName == "teamKiller",
-                frags:m_frags
+                frags:m_frags,
+                marksOnGun:m_marksOnGun
             }));
     }
 

@@ -6,8 +6,9 @@ class com.xvm.DataTypes.BattleStateData
     public var dead:Boolean = false;
     public var curHealth:Number = 0;
     public var maxHealth:Number = 0;
+    public var marksOnGun:Number = 0;
 
-    public function BattleStateData(playerName, playerId, vehId, dead, curHealth, maxHealth)
+    public function BattleStateData(playerName, playerId, vehId, dead, curHealth, maxHealth, marksOnGun)
     {
         this.playerName = playerName;
         this.playerId = playerId;
@@ -15,5 +16,6 @@ class com.xvm.DataTypes.BattleStateData
         this.dead = dead;
         this.curHealth = curHealth;
         this.maxHealth = maxHealth;
+        this.marksOnGun = marksOnGun;
     }
 }

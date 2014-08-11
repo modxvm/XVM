@@ -319,9 +319,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
                 switch (arguments[1])
                 {
                     case 1:
-                        call("invalidateVehicleStatus", [arguments[2]]);
+                        call("invalidateVehicleStatus", [arguments[2], arguments[3]]);
                         break;
-
                     case 2:
                         call("invalidateVehicleStats", [arguments[2]]);
                         break;
@@ -330,13 +329,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         }
     }
 
-    public function onLoad()                      { return call("onLoad", arguments); }
-
-    //
-    function invalidateVehicleStatus(vehicleState:Number):Void
+    public function onLoad()
     {
-        if (IsXvmMarker)
-            call("invalidateVehicleStatus", arguments);
+        return call("onLoad", arguments);
     }
-
 }

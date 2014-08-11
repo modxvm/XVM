@@ -378,13 +378,15 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("hp"))
         {
             // {{frags}}
-            pdata["frags"] = function(o):Number { return isNaN(o.frags) ? NaN : o.frags; }
+            pdata["frags"] = function(o):Number { return isNaN(o.frags) || o.frags <= 0 ? NaN : o.frags; }
             // {{ready}}
             pdata["ready"] = function(o):Number { return o.ready ? 'ready' : null; }
             // {{alive}}
             pdata["alive"] = function(o):String { return o.dead == true ? null : 'alive'; }
             // {{tk}}
             pdata["tk"] = function(o):String { return o.teamKiller == true ? 'tk' : null; }
+            // {{gun-marks}}
+            pdata["gun-marks"] = function(o):String { return isNaN(o.marksOnGun) ? NaN : o.marksOnGun; }
 
             // hp
 

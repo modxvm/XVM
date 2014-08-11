@@ -44,6 +44,7 @@ class wot.battle.BattleMain
 
         ExternalInterface.addCallback(Cmd.RESPOND_KEY_EVENT, instance, instance.onKeyEvent);
         ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATE, instance, instance.onBattleStateChanged);
+        ExternalInterface.addCallback(Cmd.RESPOND_MARKSONGUN, instance, instance.onMarksOnGun);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
     }
 
@@ -189,14 +190,21 @@ class wot.battle.BattleMain
     }
 
     private function onBattleStateChanged(playerName:String, playerId:Number, vehId:Number,
-        dead:Boolean, curHealth:Number, maxHealth:Number):Void
+        dead:Boolean, curHealth:Number, maxHealth:Number, marksOnGun:Number):Void
     {
-        var data = new BattleStateData(playerName, playerId, vehId, dead, curHealth, maxHealth);
+        var data = new BattleStateData(playerName, playerId, vehId, dead, curHealth, maxHealth, marksOnGun);
 
         //Logger.addObject(data);
         BattleState.setUserData(playerName, data);
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED, playerName: playerName } );
     }
+
+    private function onMarksOnGun(playerName:String, marksOnGun:Number)
+    {
+        BattleState.setUserData(playerName, { marksOnGun:marksOnGun } );
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED, playerName: playerName } );
+    }
+
 
     private var debugTextField:TextField = null;
     function onDebugText(text)

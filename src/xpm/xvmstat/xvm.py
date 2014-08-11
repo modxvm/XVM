@@ -225,6 +225,7 @@ class Xvm(object):
         for v in BigWorld.entities.values():
             if isinstance(v, Vehicle.Vehicle) and v.isStarted:
                 self.invalidateBattleState(v)
+                self.updateVehicleMarksOnGun(v)
                 self.updateVehicleStatus(v)
                 self.updateVehicleStats(v)
 
@@ -243,14 +244,13 @@ class Xvm(object):
         vehId = vehicle.id
         playerId = player.arena.vehicles[vehId]['accountDBID']
         self._battleStateData[vehId] = getVehicleStateData(vehicle, playerId)
-        #self._updateBattleState(vehId)
         if self._battleStateTimersId.get(vehId, None) == None:
             self._battleStateTimersId[vehId] = \
-                BigWorld.callback(0.3, lambda: self._updateBattleState(vehId))
+                BigWorld.callback(0.3, lambda: self.updateBattleState(vehId))
 
-    def _updateBattleState(self, vehId):
+    def updateBattleState(self, vehId):
         try:
-            #log("_updateBattleState: " + str(vehId))
+            #log("updateBattleState: " + str(vehId))
             self._battleStateTimersId[vehId] = None
             if self.battleFlashObject is not None:
                 vdata = self._battleStateData.get(vehId, None)
@@ -264,31 +264,47 @@ class Xvm(object):
                             vdata['dead'],
                             vdata['curHealth'],
                             vdata['maxHealth'],
+                            vdata['marksOnGun'],
                         ))
         except Exception, ex:
-            err('_updateBattleState(): ' + traceback.format_exc())
+            err('updateBattleState(): ' + traceback.format_exc())
+
+    def updateVehicleMarksOnGun(self, vehicle):
+        try:
+            if self.config['battle']['allowHpInPanelsAndMinimap']:
+                return
+            if self.battleFlashObject is not None:
+                movie = self.battleFlashObject.movie
+                if movie is not None:
+                    movie.invoke((RESPOND_MARKSONGUN,
+                        vehicle.publicInfo.name,
+                        vehicle.publicInfo.marksOnGun))
+        except Exception, ex:
+            err('updateVehicleMarksOnGun(): ' + traceback.format_exc())
 
     def updateVehicleStatus(self, vehicle, vo=None):
-        if self.vmmFlashObject is not None:
-            try:
+        try:
+            if self.vmmFlashObject is not None:
                 if vehicle is not None and hasattr(vehicle, 'marker'):
                     if vo is None:
                         from gui.BattleContext import g_battleContext
                         vo = g_battleContext.arenaDP.getVehicleInfo(vehicle.id)
-                    self.vmmFlashObject.invokeMarker(vehicle.marker, 'showActionMarker', [None, 1, vo.vehicleStatus])
-            except Exception, ex:
-                err('updateVehicleStatus(): ' + traceback.format_exc())
+                    self.vmmFlashObject.invokeMarker(vehicle.marker, 'showActionMarker',
+                        [None, 1, vo.vehicleStatus, vehicle.publicInfo.marksOnGun])
+        except Exception, ex:
+            err('updateVehicleStatus(): ' + traceback.format_exc())
 
     def updateVehicleStats(self, vehicle, vo=None):
-        if self.vmmFlashObject is not None:
-            try:
+        try:
+            if self.vmmFlashObject is not None:
                 if vehicle is not None and hasattr(vehicle, 'marker'):
                     if vo is None:
                         from gui.BattleContext import g_battleContext
                         vo = g_battleContext.arenaDP.getVehicleStats(vehicle.id)
-                    self.vmmFlashObject.invokeMarker(vehicle.marker, 'showActionMarker', [None, 2, vo.frags])
-            except Exception, ex:
-                err('updateVehicleStats(): ' + traceback.format_exc())
+                    self.vmmFlashObject.invokeMarker(vehicle.marker, 'showActionMarker',
+                        [None, 2, vo.frags])
+        except Exception, ex:
+            err('updateVehicleStats(): ' + traceback.format_exc())
 
     def sendConfig(self, flashObject):
         if self.config is None or flashObject is None:

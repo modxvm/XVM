@@ -335,18 +335,28 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         XVMUpdateStyle();
     }
 
-    function invalidateVehicleStatus(vehicleStatus:Number)
+    function invalidateVehicleStatus(vehicleStatus:Number, marksOnGun:Number)
     {
+        var update:Boolean = false;
         //Logger.add('invalidateVehicleStatus: ' + vehicleStatus);
         var prev = m_isReady;
         m_isReady = (vehicleStatus & 2) != 0; // 2 - IS_AVATAR_READY
         if (prev != m_isReady)
+            update = true;
+
+        if (m_marksOnGun != marksOnGun)
+        {
+            m_marksOnGun = marksOnGun;
+            update = true;
+        }
+
+        if (update)
             XVMUpdateStyle();
     }
 
-    function invalidateVehicleStats(frags:Number)
+    function invalidateVehicleStats(frags:Number, marksOnGun:Number)
     {
-        //Logger.add('invalidateVehicleStats: ' + vehicleStatus);
+        //Logger.add('invalidateVehicleStats: ' + frags);
         if (m_frags != frags)
         {
             m_frags = frags;
