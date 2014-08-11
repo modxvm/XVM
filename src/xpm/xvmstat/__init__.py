@@ -107,6 +107,7 @@ def onArenaCreated():
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
     g_xvm.invalidateBattleState(vehicle)
+    g_xvm.updateVehicleStatus(vehicle)
 
 # on any player marker lost
 def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
@@ -121,7 +122,7 @@ def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
 # on any vehicle hit received
 def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     #debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
-    g_xvm.invalidateBattleState(self, True)
+    g_xvm.invalidateBattleState(self)
 
 def BattleArenaController_invalidateVehicleStatus(self, flags, vo, arenaDP):
     vehicle = BigWorld.entity(vo.vehicleID)
