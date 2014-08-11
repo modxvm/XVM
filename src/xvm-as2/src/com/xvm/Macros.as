@@ -180,8 +180,8 @@ class com.xvm.Macros
         }
         parts[section] = part;
 
-        if (dead && Strings.startsWith("c:", parts[0]) && pdata[parts[0] + "#d"] != null)
-            parts[0] += "#d";
+        //if (dead && Strings.startsWith("c:", parts[0]) && pdata[parts[0] + "#d"] != null)
+        //    parts[0] += "#d";
         if (parts[5] == null)
             parts[5] = "";
 

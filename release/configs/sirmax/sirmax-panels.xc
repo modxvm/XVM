@@ -10,8 +10,8 @@
     "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>       &nbsp;",
     "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
     "vehicleFormatRight": "{{hp}} / {{hp-max}}",
-    //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
-    //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>",
+    //"vehicleFormatLeft": "<font color='{{c:rating}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
+    //"vehicleFormatRight": "<font color='{{c:rating}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
     //"fragsFormatLeft": "{{frags|0}}",
     //"fragsFormatRight": "{{frags|0}}",
     "extraFieldsLeft": [
@@ -21,7 +21,7 @@
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
-      { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
+      { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
       {}
     ],
     "extraFieldsRight": [
@@ -34,20 +34,20 @@
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c2"}, "alpha": 50 },
       { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
-      { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
+      { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{xwn8|--}}</font>", "shadow": {} },
       {}
     ],
     "width": 120
   },
   "medium": {
     "width": 120,
-    "formatLeft": "<font color='{{c:xwn8}}'>{{nick}}</font>",
-    "formatRight": "<font color='{{c:xwn8}}'>{{nick}}</font>"
+    "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>",
+    "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{nick}}</font>"
   },
   "medium2": {
     "width": 120,
-    "formatLeft": "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
-    "formatRight": "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
+    "formatLeft": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>",
+    "formatRight": "<font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{vehicle}}</font>"
   },
   "none": {
     //"layout": "horizontal",
