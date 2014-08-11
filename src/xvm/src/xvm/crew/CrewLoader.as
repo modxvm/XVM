@@ -63,7 +63,7 @@ package xvm.crew
                         new SeparateItem(),
                         new ContextItem("PutClassCrew", Locale.get("PutClassCrew")),
                         new SeparateItem(),
-                        new ContextItem("PutPreviousCrew", App.utils.locale.makeString(CREW_OPERATIONS.RETURN_TITLE))
+                        new ContextItem("PutPreviousCrew", Locale.get("PutPreviousCrew"))
                     ]), this, this.onContextMenuAction, renderer);
                 }
                 else
@@ -73,7 +73,7 @@ package xvm.crew
                         new SeparateItem(),
                         new UserContextItem("tankmanUnload"),
                         new SeparateItem(),
-                        new ContextItem("UnloadAllCrew", App.utils.locale.makeString(CREW_OPERATIONS.DROPINBARRACK_DESCRIPTION))
+                        new ContextItem("UnloadAllCrew", Locale.get("DropAllCrew"))
                     ]), this, this.onContextMenuAction, renderer);
                 }
             }

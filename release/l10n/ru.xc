@@ -90,6 +90,8 @@
     "PutOwnCrew": "Родной экипаж",
     "PutBestCrew": "Лучший экипаж",
     "PutClassCrew": "Экипаж того же класса",
+    "PutPreviousCrew": "Предыдущий экипаж",
+    "DropAllCrew": "Высадить весь экипаж",
 
     // Vehicle Params
     "gun_reload_time/actual": "Расчетное время перезарядки орудия",

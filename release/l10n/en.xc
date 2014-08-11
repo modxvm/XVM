@@ -90,6 +90,8 @@
     "PutOwnCrew": "Put own crew",
     "PutBestCrew": "Put best crew",
     "PutClassCrew": "Put same class crew",
+    "PutPreviousCrew": "Put previous crew",
+    "DropAllCrew": "Drop all crew",
 
     // Vehicle Params
     "gun_reload_time/actual": "Actual gun reload time",

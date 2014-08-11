@@ -170,6 +170,8 @@ package com.xvm
             "PutOwnCrew": "Родной экипаж",
             "PutBestCrew": "Лучший экипаж",
             "PutClassCrew": "Экипаж того же класса",
+            "PutPreviousCrew": "Предыдущий экипаж",
+            "DropAllCrew": "Высадить весь экипаж",
 
             // Vehicle Params
             "gun_reload_time/actual": "Расчетное время перезарядки орудия",
@@ -245,6 +247,8 @@ package com.xvm
             "PutOwnCrew": "Put own crew",
             "PutBestCrew": "Put best crew",
             "PutClassCrew": "Put same class crew",
+            "PutPreviousCrew": "Put previous crew",
+            "DropAllCrew": "Drop all crew",
 
             // Vehicle Params
             "gun_reload_time/actual": "Actual gun reload time",
