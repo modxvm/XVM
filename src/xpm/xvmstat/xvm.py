@@ -226,6 +226,7 @@ class Xvm(object):
             if isinstance(v, Vehicle.Vehicle) and v.isStarted:
                 self.invalidateBattleState(v)
                 self.updateVehicleStatus(v)
+                self.updateVehicleStats(v)
 
     def invalidateBattleState(self, vehicle):
         #log("invalidateBattleState: " + str(vehicle.id))
@@ -248,10 +249,10 @@ class Xvm(object):
                 BigWorld.callback(0.3, lambda: self._updateBattleState(vehId))
 
     def _updateBattleState(self, vehId):
-        #log("_updateBattleState: " + str(vehId))
-        self._battleStateTimersId[vehId] = None
-        if self.battleFlashObject is not None:
-            try:
+        try:
+            #log("_updateBattleState: " + str(vehId))
+            self._battleStateTimersId[vehId] = None
+            if self.battleFlashObject is not None:
                 vdata = self._battleStateData.get(vehId, None)
                 if vdata is not None:
                     movie = self.battleFlashObject.movie
@@ -264,8 +265,8 @@ class Xvm(object):
                             vdata['curHealth'],
                             vdata['maxHealth'],
                         ))
-            except Exception, ex:
-                err('_updateBattleState(): ' + traceback.format_exc())
+        except Exception, ex:
+            err('_updateBattleState(): ' + traceback.format_exc())
 
     def updateVehicleStatus(self, vehicle, vo=None):
         if self.vmmFlashObject is not None:
@@ -273,12 +274,21 @@ class Xvm(object):
                 if vehicle is not None and hasattr(vehicle, 'marker'):
                     if vo is None:
                         from gui.BattleContext import g_battleContext
-                        vehicleStatus = g_battleContext.arenaDP.getVehicleInfo(vehicle.id).vehicleStatus
-                    else:
-                        vehicleStatus = vo.vehicleStatus
-                    self.vmmFlashObject.invokeMarker(vehicle.marker, 'showActionMarker', [None, vehicleStatus])
+                        vo = g_battleContext.arenaDP.getVehicleInfo(vehicle.id)
+                    self.vmmFlashObject.invokeMarker(vehicle.marker, 'showActionMarker', [None, 1, vo.vehicleStatus])
             except Exception, ex:
                 err('updateVehicleStatus(): ' + traceback.format_exc())
+
+    def updateVehicleStats(self, vehicle, vo=None):
+        if self.vmmFlashObject is not None:
+            try:
+                if vehicle is not None and hasattr(vehicle, 'marker'):
+                    if vo is None:
+                        from gui.BattleContext import g_battleContext
+                        vo = g_battleContext.arenaDP.getVehicleStats(vehicle.id)
+                    self.vmmFlashObject.invokeMarker(vehicle.marker, 'showActionMarker', [None, 2, vo.frags])
+            except Exception, ex:
+                err('updateVehicleStats(): ' + traceback.format_exc())
 
     def sendConfig(self, flashObject):
         if self.config is None or flashObject is None:

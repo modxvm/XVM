@@ -108,6 +108,7 @@ def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
     g_xvm.invalidateBattleState(vehicle)
     g_xvm.updateVehicleStatus(vehicle)
+    g_xvm.updateVehicleStats(vehicle)
 
 # on any player marker lost
 def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
@@ -127,6 +128,10 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
 def BattleArenaController_invalidateVehicleStatus(self, flags, vo, arenaDP):
     vehicle = BigWorld.entity(vo.vehicleID)
     g_xvm.updateVehicleStatus(vehicle, vo)
+
+def BattleArenaController_invalidateVehicleStats(self, flags, vo, arenaDP):
+    vehicle = BigWorld.entity(vo.vehicleID)
+    g_xvm.updateVehicleStats(vehicle, vo)
 
 def PreDefinedHostList_autoLoginQuery(base, callback):
     #debug('> PreDefinedHostList_autoLoginQuery')
@@ -183,6 +188,7 @@ def _RegisterEvents():
 
     from gui.battle_control.battle_arena_ctrl import BattleArenaController
     RegisterEvent(BattleArenaController, 'invalidateVehicleStatus', BattleArenaController_invalidateVehicleStatus)
+    RegisterEvent(BattleArenaController, 'invalidateVehicleStats', BattleArenaController_invalidateVehicleStats)
 
     # enable for pinger_wg
     #from predefined_hosts import g_preDefinedHosts

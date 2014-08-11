@@ -314,13 +314,17 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         }
         else
         {
-            if (IsXvmMarker)
+            if (IsXvmMarker && arguments.length > 2)
             {
-                if (arguments.length > 1)
+                switch (arguments[1])
                 {
-                    var vehicleStatus:Number = arguments[1];
-                    if (vehicleStatus != null)
-                        call("invalidateVehicleStatus", [vehicleStatus]);
+                    case 1:
+                        call("invalidateVehicleStatus", [arguments[2]]);
+                        break;
+
+                    case 2:
+                        call("invalidateVehicleStats", [arguments[2]]);
+                        break;
                 }
             }
         }

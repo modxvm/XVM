@@ -344,6 +344,16 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             XVMUpdateStyle();
     }
 
+    function invalidateVehicleStats(frags:Number)
+    {
+        //Logger.add('invalidateVehicleStats: ' + vehicleStatus);
+        if (m_frags != frags)
+        {
+            m_frags = frags;
+            XVMUpdateStyle();
+        }
+    }
+
     function XVMUpdateDynamicTextFields()
     {
         try
