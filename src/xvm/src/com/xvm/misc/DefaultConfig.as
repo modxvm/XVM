@@ -162,6 +162,7 @@ package com.xvm.misc
             c.showPostmortemTips = true;        // Popup tooltip panel after death.
             c.highlightVehicleIcon = true;      // False - disable highlighting of selected vehicle icon and squad.
             c.allowHpInPanelsAndMinimap = false;
+            c.allowGunMarksInPanelsAndMinimap = false;
             // Show the clock on the Debug Panel (near FPS).
             c.clockFormat = "H:N"; // TODO "H:i:s";   // Format: http://php.net/date
             c.clanIconsFolder = "clanicons/";   // Folder with clan icons

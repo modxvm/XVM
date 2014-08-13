@@ -77,7 +77,11 @@ class wot.wrapper.VehicleMarkersManager.VehicleMarkerProxy extends net.wargaming
 
             // MovieClip
             "onEnterFrame",
-            "gotoAndStop"
+            "gotoAndStop",
+
+            // XVM
+            "setStatus",
+            "setFrags"
         ];
         Wrapper.override(this, new wot.VehicleMarkersManager.VehicleMarkerProxy(this, super), OVERRIDE_FUNCTIONS);
     }

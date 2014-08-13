@@ -244,9 +244,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             initializeSubject();
         if (wrapper.m_team == "enemy")
         {
-            logLists.onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, pName, pClan, pRegion, curHealth, maxHealth);
+            logLists.onNewMarkerCreated.apply(logLists, arguments);
         }
-        call("init", [ vClass, vIconSource, vType, vLevel, pFullName, pName, pClan, pRegion, curHealth, maxHealth, entityName, speaking, hunt, entityType ], registerMacros);
+        call("init", arguments, registerMacros);
     }
 
     public function update():Void { return call("update", arguments); }
@@ -304,33 +304,29 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         return call("showExInfo", arguments);
     }
 
-    /**
-     * Use this method also for vehicle state update (because invokeMarker is incapsulated into C++ part and cannot be enhanced)
-     */
-    public function showActionMarker(actionState):Void {
-        if (actionState != null)
-        {
-            call("showActionMarker", [actionState]);
-        }
-        else
-        {
-            if (IsXvmMarker && arguments.length > 2)
-            {
-                switch (arguments[1])
-                {
-                    case 1:
-                        call("invalidateVehicleStatus", [arguments[2], arguments[3]]);
-                        break;
-                    case 2:
-                        call("invalidateVehicleStats", [arguments[2]]);
-                        break;
-                }
-            }
-        }
+    public function showActionMarker(actionState):Void
+    {
+        call("showActionMarker", [actionState]);
     }
 
     public function onLoad()
     {
         return call("onLoad", arguments);
+    }
+
+    // XVM
+
+    public function setStatus()
+    {
+        //Logger.add("setStatus: " + arguments);
+        if (IsXvmMarker)
+            call("setStatus", [arguments[0]]);
+    }
+
+    public function setFrags()
+    {
+        //Logger.add("setFrags: " + arguments);
+        if (IsXvmMarker)
+            call("setFrags", [arguments[0]]);
     }
 }

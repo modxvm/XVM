@@ -78,6 +78,13 @@ def FlashBeforeDelete(self):
     if self.swf == _VMM_SWF:
         g_xvm.vmmFlashObject = None
 
+def Flash_call(base, self, methodName, args = None):
+    #debug("> call: %s, %s" % (methodName, str(args)))
+    base(self, methodName, g_xvm.extendInvokeArgs(self.swf, methodName, args))
+
+def VehicleMarkersManager_invokeMarker(base, self, handle, function, args = None):
+    #debug("> invokeMarker: %i, %s, %s" % (handle, function, str(args)))
+    base(self, handle, function, g_xvm.extendVehicleMarkerArgs(handle, function, args))
 
 def ProfileTechniqueWindowRequestData(base, self, data):
     if data.vehicleId:
@@ -107,9 +114,6 @@ def onArenaCreated():
 def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
     #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
     g_xvm.invalidateBattleState(vehicle)
-    g_xvm.updateVehicleMarksOnGun(vehicle)
-    g_xvm.updateVehicleStatus(vehicle)
-    g_xvm.updateVehicleStats(vehicle)
 
 # on any player marker lost
 def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
@@ -162,6 +166,7 @@ def AmmunitionPanel_highlightParams(self, type):
 from gui.Scaleform.Flash import Flash
 RegisterEvent(Flash, '__init__', FlashInit)
 RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
+OverrideMethod(Flash, 'call', Flash_call)
 
 # Delayed registration
 def _RegisterEvents():
@@ -169,6 +174,9 @@ def _RegisterEvents():
     start()
     RegisterEvent(game, 'fini', fini)
     RegisterEvent(game, 'handleKeyEvent', g_xvm.onKeyEvent)
+
+    from gui.Scaleform.Battle import VehicleMarkersManager
+    OverrideMethod(VehicleMarkersManager, 'invokeMarker', VehicleMarkersManager_invokeMarker)
 
     from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
     OverrideMethod(ProfileTechniqueWindow, 'requestData', ProfileTechniqueWindowRequestData)

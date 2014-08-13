@@ -210,7 +210,9 @@ class com.xvm.Macros
         var res:String = value;
         if (type == "function")
         {
-            value = options ? value(options) : "{{" + macro + "}}";
+            if (options == null)
+                return "{{" + macro + "}}";
+            value = value(options);
             if (value == null)
                 return prepareValue(NaN, name, norm, def, pdata);
             type = typeof value;
@@ -380,7 +382,7 @@ class com.xvm.Macros
             // {{frags}}
             pdata["frags"] = function(o):Number { return isNaN(o.frags) || o.frags <= 0 ? NaN : o.frags; }
             // {{ready}}
-            pdata["ready"] = function(o):Number { return o.ready ? 'ready' : null; }
+            pdata["ready"] = function(o):String { return o.ready == true ? 'ready' : null; }
             // {{alive}}
             pdata["alive"] = function(o):String { return o.dead == true ? null : 'alive'; }
             // {{tk}}

@@ -35,3 +35,25 @@ def openWebBrowser(url, allowInternalBrowser=True):
         if browser is not None:
             openBrowser = browser.openBrowser
     openBrowser(url)
+
+def getVehicleByName(name):
+    import Vehicle
+    for v in BigWorld.entities.values():
+        if isinstance(v, Vehicle.Vehicle) and v.publicInfo['name'] == name:
+            return v
+    return None
+
+def getVehicleByHandle(handle):
+    import Vehicle
+    for v in BigWorld.entities.values():
+        if isinstance(v, Vehicle.Vehicle) and hasattr(v, 'marker') and v.marker == handle:
+            return v
+    return None
+
+def getVehicleInfo(vehId):
+    from gui.BattleContext import g_battleContext
+    return g_battleContext.arenaDP.getVehicleInfo(vehId)
+
+def getVehicleStats(vehId):
+    from gui.BattleContext import g_battleContext
+    return g_battleContext.arenaDP.getVehicleStats(vehId)

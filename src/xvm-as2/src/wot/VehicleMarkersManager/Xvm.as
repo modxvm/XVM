@@ -79,6 +79,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
         pFullName:String, pName:String, pClan:String, pRegion:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String)
+        /* added by XVM: marksOnGun:Number, vehicleState:Number, frags:Number*/
     {
         m_playerName = pName; // alex
         m_playerClan = pClan; // "" || ALX
@@ -102,6 +103,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         m_isDead    = curHealth <= 0; // -1 for ammunition storage explosion
         m_curHealth = curHealth >= 0 ? curHealth : 0;
+
+        m_marksOnGun = arguments[14];
+        m_isReady = (arguments[15] & 2) != 0; // 2 - IS_AVATAR_READY
+        m_frags = arguments[16];
 
         healthBarComponent.init();
         contourIconComponent.init(m_entityType);
@@ -335,26 +340,17 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         XVMUpdateStyle();
     }
 
-    function invalidateVehicleStatus(vehicleStatus:Number, marksOnGun:Number)
+    function setStatus(vehicleStatus:Number)
     {
         var update:Boolean = false;
         //Logger.add('invalidateVehicleStatus: ' + vehicleStatus);
         var prev = m_isReady;
         m_isReady = (vehicleStatus & 2) != 0; // 2 - IS_AVATAR_READY
         if (prev != m_isReady)
-            update = true;
-
-        if (m_marksOnGun != marksOnGun)
-        {
-            m_marksOnGun = marksOnGun;
-            update = true;
-        }
-
-        if (update)
             XVMUpdateStyle();
     }
 
-    function invalidateVehicleStats(frags:Number, marksOnGun:Number)
+    function setFrags(frags:Number)
     {
         //Logger.add('invalidateVehicleStats: ' + frags);
         if (m_frags != frags)
