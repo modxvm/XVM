@@ -342,19 +342,20 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
     function setStatus(vehicleStatus:Number)
     {
-        var update:Boolean = false;
-        //Logger.add('invalidateVehicleStatus: ' + vehicleStatus);
         var prev = m_isReady;
         m_isReady = (vehicleStatus & 2) != 0; // 2 - IS_AVATAR_READY
         if (prev != m_isReady)
+        {
+            //Logger.add('setStatus: ' + prev + ' -> ' + m_isReady);
             XVMUpdateStyle();
+        }
     }
 
     function setFrags(frags:Number)
     {
-        //Logger.add('invalidateVehicleStats: ' + frags);
         if (m_frags != frags)
         {
+            //Logger.add('setFrags: ' + frags);
             m_frags = frags;
             XVMUpdateStyle();
         }

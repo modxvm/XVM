@@ -70,14 +70,6 @@ class wot.Minimap.view.LabelViewBuilder
         for (var i in playerInfo)
             obj[i] = playerInfo[i];
         var text:String = Macros.Format(playerInfo.userName, format, obj);
-        if (text == "undefined" || !text)
-        {
-            /**
-             * Skip creation of textFields with "undefined" string.
-             * Happens for oneSelf icon at replay rewind.
-             */
-            text = "";
-        }
         textField.htmlText = text;
     }
 }

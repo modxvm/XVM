@@ -4,6 +4,7 @@
       {{gun-marks}}, return count of the marks on gun for spotted vehicles
   * new option battle/allowGunMarksInPanelsAndMinimap - enable {{gun-marks}}
     macro in players panels and minimap. WARNING: performance expensive
+  * added texts/gunMarks config section
   * added ability to disable some modes in the players panels
   * new section "minimapAlt" for alternative minimap mode (disabled by default)
   * localization:

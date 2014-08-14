@@ -2,10 +2,8 @@
  * ...
  * @author sirmax2
  */
-import flash.filters.DropShadowFilter;
-import com.xvm.Defines;
-import com.xvm.Logger;
-import com.xvm.Strings;
+import com.xvm.*;
+import flash.filters.*;
 
 class com.xvm.Utils
 {
@@ -70,6 +68,16 @@ class com.xvm.Utils
             case "AT-SPG": return "TD";
             default: return vclass;
         }
+    }
+
+    public static function getGunMarksText(value:Number):String
+    {
+        if (value == null || !Config.config.texts.gunMarks["_" + value])
+            return null;
+        var v:String = Config.config.texts.gunMarks["_" + value];
+        if (v.indexOf("{{l10n:") >= 0)
+            v = Locale.get(v);
+        return v;
     }
 
     ////////////////////

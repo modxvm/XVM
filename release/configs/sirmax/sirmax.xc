@@ -165,7 +165,10 @@
     "usa-T34_hvy": { "name": "т34.", "short": "т34" },
     "ussr-KV-1s": { "name": "квас", "short": "квс" }
   },
-  //"texts": { "vtype": { "LT":  "ЛТ" } },
+  "texts": {
+    //"vtype": { "LT":  "ЛТ" },
+    "gunMarks": { "_0": "", "_1": "|", "_2": "||", "_3": "|||" }
+  },
   "colors": {
     "system": {
       //"ally_alive":          "0x029CF5",
