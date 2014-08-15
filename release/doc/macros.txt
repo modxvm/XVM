@@ -74,50 +74,50 @@ Legend:
 └────────────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────
 
   Statistic macros
-┌─────────────────┬───┬───┬───┬───┬────────────────────────────────────────────────────────────────
-│ macro           │ BL│ PP│ SF│ VM│ Description
-├─────────────────┼───┼───┼───┼───┼────────────────────────────────────────────────────────────────
-│ {{avglvl}}      │ X │ X │ X │ X │ average level (tier) of tanks
-│ {{eff}}         │ X │ X │ X │ X │ player efficiency: http://wot-news.com/index.php/stat/calc/en/
-│ {{teff}}, {{e}} │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
-│ {{wn6}}         │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
-│ {{wn8}}         │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
-│ {{wgr}}         │ X │ X │ X │ X │ WG rating: http://www.koreanrandom.com/forum/topic/13433-
-│ {{xeff}}        │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
-│ {{xwn6}}        │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
-│ {{xwn8}}        │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
-│ {{xwgr}}        │ X │ X │ X │ X │ XVM Scale for WG rating (values 00-99, XX for Tops)
-│ {{rating}}      │ X │ X │ X │ X │ GWR (Global Win Ratio)
-│ {{battles}}     │ X │ X │ X │ X │ total battles count
-│ {{wins}}        │ X │ X │ X │ X │ total wins count
-│ {{kb}}          │ X │ X │ X │ X │ number of kilo-battles (total battles count divided by 1000)
-│ {{t-rating}}    │ X │ X │ X │ X │ vehicle win ratio
-│ {{t-battles}}   │ X │ X │ X │ X │ total battles count for current vehicle
-│ {{t-wins}}      │ X │ X │ X │ X │ total wins count for current vehicle
-│ {{t-kb}}        │ X │ X │ X │ X │ number of kilo-battles for current vehicle
-│ {{t-hb}}        │ X │ X │ X │ X │ number of hecto-battles for current vehicle (hecto = 100)
-│ {{tdb}}         │ X │ X │ X │ X │ average damage for current tank - damage/battles
-│ {{tdv}}         │ X │ X │ X │ X │ average damage efficiency for tank - damage/(battles*maxHP)
-│ {{tfb}}         │ X │ X │ X │ X │ average frags per battle for current tank
-│ {{tsb}}         │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank
-│ {{c:tdb}}       │ X │ X │ X │ X │ dynamic colors for this macros
-│ {{c:tdv}}       │ X │ X │ X │ X │ dynamic colors for this macros
-│ {{c:tfb}}       │ X │ X │ X │ X │ dynamic colors for this macros
-│ {{c:tsb}}       │ X │ X │ X │ X │ dynamic colors for this macros
-│ {{c:eff}}       │ X │ X │ X │ X │ color depending on player efficiency
-│ {{c:e}}         │ X │ X │ X │ X │ color depending on player per-vehicle efficiency
-│ {{c:wn6}}       │ X │ X │ X │ X │ color depending on WN6 rating
-│ {{c:wn8}}       │ X │ X │ X │ X │ color depending on WN8 rating
-│ {{c:wgr}}       │ X │ X │ X │ X │ color depending on WG rating
-│ {{c:xeff}}      │ X │ X │ X │ X │ color depending on XVM Scale for efficiency
-│ {{c:xwn6}}      │ X │ X │ X │ X │ color depending on XVM Scale for WN6
-│ {{c:xwn8}}      │ X │ X │ X │ X │ color depending on XVM Scale for WN8
-│ {{c:xwgr}}      │ X │ X │ X │ X │ color depending on XVM Scale for WG rating
-│ {{c:rating}}    │ X │ X │ X │ X │ color depending on GWR
-│ {{c:kb}}        │ X │ X │ X │ X │ color depending on kilo-battles
-│ {{c:avglvl}}    │ X │ X │ X │ X │ color depending on average level of tanks
-│ {{c:t-rating}}  │ X │ X │ X │ X │ color depending on current vehicle win ratio
-│ {{c:t-battles}} │ X │ X │ X │ X │ color depending on current vehicle battles
-│ {{gun-marks}}   │   │ X │ X │ X │ marks on gun (only for spotted vehicles)
-└─────────────────┴───┴───┴───┴───┴────────────────────────────────────────────────────────────────
+┌─────────────────┬───┬───┬───┬───┬───┬────────────────────────────────────────────────────────────────
+│ macro           │ BL│ PP│ MM│ SF│ VM│ Description
+├─────────────────┼───┼───┼───┼───┼───┼────────────────────────────────────────────────────────────────
+│ {{avglvl}}      │ X │ X │ X │ X │ X │ average level (tier) of tanks
+│ {{eff}}         │ X │ X │ X │ X │ X │ player efficiency: http://wot-news.com/index.php/stat/calc/en/
+│ {{teff}}, {{e}} │ X │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
+│ {{wn6}}         │ X │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
+│ {{wn8}}         │ X │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
+│ {{wgr}}         │ X │ X │ X │ X │ X │ WG rating: http://www.koreanrandom.com/forum/topic/13433-
+│ {{xeff}}        │ X │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
+│ {{xwn6}}        │ X │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
+│ {{xwn8}}        │ X │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
+│ {{xwgr}}        │ X │ X │ X │ X │ X │ XVM Scale for WG rating (values 00-99, XX for Tops)
+│ {{rating}}      │ X │ X │ X │ X │ X │ GWR (Global Win Ratio)
+│ {{battles}}     │ X │ X │ X │ X │ X │ total battles count
+│ {{wins}}        │ X │ X │ X │ X │ X │ total wins count
+│ {{kb}}          │ X │ X │ X │ X │ X │ number of kilo-battles (total battles count divided by 1000)
+│ {{t-rating}}    │ X │ X │ X │ X │ X │ vehicle win ratio
+│ {{t-battles}}   │ X │ X │ X │ X │ X │ total battles count for current vehicle
+│ {{t-wins}}      │ X │ X │ X │ X │ X │ total wins count for current vehicle
+│ {{t-kb}}        │ X │ X │ X │ X │ X │ number of kilo-battles for current vehicle
+│ {{t-hb}}        │ X │ X │ X │ X │ X │ number of hecto-battles for current vehicle (hecto = 100)
+│ {{tdb}}         │ X │ X │ X │ X │ X │ average damage for current tank - damage/battles
+│ {{tdv}}         │ X │ X │ X │ X │ X │ average damage efficiency for tank - damage/(battles*maxHP)
+│ {{tfb}}         │ X │ X │ X │ X │ X │ average frags per battle for current tank
+│ {{tsb}}         │ X │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank
+│ {{c:tdb}}       │ X │ X │ X │ X │ X │ dynamic colors for this macros
+│ {{c:tdv}}       │ X │ X │ X │ X │ X │ dynamic colors for this macros
+│ {{c:tfb}}       │ X │ X │ X │ X │ X │ dynamic colors for this macros
+│ {{c:tsb}}       │ X │ X │ X │ X │ X │ dynamic colors for this macros
+│ {{c:eff}}       │ X │ X │ X │ X │ X │ color depending on player efficiency
+│ {{c:e}}         │ X │ X │ X │ X │ X │ color depending on player per-vehicle efficiency
+│ {{c:wn6}}       │ X │ X │ X │ X │ X │ color depending on WN6 rating
+│ {{c:wn8}}       │ X │ X │ X │ X │ X │ color depending on WN8 rating
+│ {{c:wgr}}       │ X │ X │ X │ X │ X │ color depending on WG rating
+│ {{c:xeff}}      │ X │ X │ X │ X │ X │ color depending on XVM Scale for efficiency
+│ {{c:xwn6}}      │ X │ X │ X │ X │ X │ color depending on XVM Scale for WN6
+│ {{c:xwn8}}      │ X │ X │ X │ X │ X │ color depending on XVM Scale for WN8
+│ {{c:xwgr}}      │ X │ X │ X │ X │ X │ color depending on XVM Scale for WG rating
+│ {{c:rating}}    │ X │ X │ X │ X │ X │ color depending on GWR
+│ {{c:kb}}        │ X │ X │ X │ X │ X │ color depending on kilo-battles
+│ {{c:avglvl}}    │ X │ X │ X │ X │ X │ color depending on average level of tanks
+│ {{c:t-rating}}  │ X │ X │ X │ X │ X │ color depending on current vehicle win ratio
+│ {{c:t-battles}} │ X │ X │ X │ X │ X │ color depending on current vehicle battles
+│ {{gun-marks}}   │   │ X │ X │ X │ X │ marks on gun (only for spotted vehicles)
+└─────────────────┴───┴───┴───┴───┴───┴────────────────────────────────────────────────────────────────
   * Any color macro you can change to transparency macro (e.g. {{a:tdb}}).
