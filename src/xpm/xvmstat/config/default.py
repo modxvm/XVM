@@ -28,7 +28,6 @@ class _DefaultConfig(object):
             'statisticForm': self.getStatisticFormSection(),
             'playersPanel': self.getPlayersPanelSection(),
             'battleResults': self.getBattleResultsSection(),
-            'turretMarkers': self.getTurretMarkersSection(),
             'expertPanel': self.getExpertPanelSection(),
             'minimap': self.getMinimapSection(),
             'captureBar': self.getCaptureBarSection(),
@@ -292,12 +291,6 @@ class _DefaultConfig(object):
             'showTotals': True,
             'showChances': False,
             'showBattleTier': False,
-        }
-
-    def getTurretMarkersSection(self):
-        return {
-            'highVulnerability': "*",
-            'lowVulnerability': "'",
         }
 
     def getExpertPanelSection(self):

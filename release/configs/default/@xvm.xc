@@ -121,10 +121,6 @@
   // Параметры окна послебоевой статистики.
   "battleResults": ${"battleResults.xc":"battleResults"},
 
-  // {{turret}} marker display strings.
-  // Отображаемые строки {{turret}} маркера.
-  "turretMarkers": ${"turretMarkers.xc":"turretMarkers"},
-
   // Hit log (my hits calculator).
   // Лог попаданий (счетчик своих попаданий).
   "hitLog": ${"hitLog.xc":"hitLog"},

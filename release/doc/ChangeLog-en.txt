@@ -16,6 +16,7 @@
   * disabled color fogging of {{c:*}} macros for dead vehicles
     use {{alive}} macro with alpha:
       <font color='{{c:xwn}}' alpha='{{alive?#FF|#80}}'>{{xwn}}</font>
+  * section turretMarkers moved to markers/turretMarkers
 
 XVM-5.3.3:
   * adaptation to WoT 0.9.2

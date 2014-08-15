@@ -21,7 +21,6 @@ package com.xvm.types.cfg
         public var battleLoading:CBattleLoading;
         public var statisticForm:CStatisticForm;
         public var playersPanel:CPlayersPanel;
-        public var turretMarkers:CTurretMarkers;
         public var expertPanel:CExpertPanel;
         public var captureBar:CCaptureBar;
         public var hitLog:CHitlog;

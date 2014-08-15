@@ -30,7 +30,6 @@ package com.xvm.misc
             c.statisticForm = getStatisticFormSection();
             c.playersPanel = getPlayersPanelSection();
             c.battleResults = getBattleResultsSection();
-            c.turretMarkers = getTurretMarkersSection();
             c.expertPanel = getExpertPanelSection();
             c.minimap = getMinimapSection();
             c.minimapAlt = getMinimapSection();
@@ -394,14 +393,6 @@ package com.xvm.misc
             return c;
         }
 
-        private static function getTurretMarkersSection():CTurretMarkers
-        {
-            var c:CTurretMarkers = new CTurretMarkers();
-            c.highVulnerability = "*";
-            c.lowVulnerability = "'";
-            return c;
-        }
-
         private static function getExpertPanelSection():CExpertPanel
         {
             var c:CExpertPanel = new CExpertPanel();
@@ -717,7 +708,12 @@ package com.xvm.misc
         private static function getMarkersSection():CMarkers
         {
             var c:CMarkers = new CMarkers();
+
             c.useStandardMarkers = false;       // Use original WoT markers.
+            c.turretMarkers = {
+                highVulnerability: "*",
+                lowVulnerability: "'"
+            };
             c.ally = {
                 alive: {
                     normal: {
