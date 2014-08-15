@@ -1174,13 +1174,20 @@ package com.xvm.misc
         private static function getTextsSection():CTexts
         {
             var c:CTexts = new CTexts();
-            // Text for {{vtype}} macro
+
             c.vtype = new CTextsVType();
             c.vtype.LT =  "{{l10n:LT}}",   // Text for light tanks
             c.vtype.MT =  "{{l10n:MT}}",   // Text for medium tanks
             c.vtype.HT =  "{{l10n:HT}}",   // Text for heavy tanks
             c.vtype.SPG = "{{l10n:SPG}}",  // Text for arty
             c.vtype.TD =  "{{l10n:TD}}"    // Text for tank destroyers
+
+            c.gunMarks = new CTextsGunMarks();
+            c.gunMarks._0 = "0";
+            c.gunMarks._1 = "1";
+            c.gunMarks._2 = "2";
+            c.gunMarks._3 = "3";
+
             return c;
         }
 

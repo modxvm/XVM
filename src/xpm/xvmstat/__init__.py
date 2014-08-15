@@ -131,12 +131,10 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     g_xvm.invalidateBattleState(self)
 
 def BattleArenaController_invalidateVehicleStatus(self, flags, vo, arenaDP):
-    vehicle = BigWorld.entity(vo.vehicleID)
-    g_xvm.updateVehicleStatus(vehicle, vo)
+    g_xvm.updateVehicleStatus(vo)
 
 def BattleArenaController_invalidateVehicleStats(self, flags, vo, arenaDP):
-    vehicle = BigWorld.entity(vo.vehicleID)
-    g_xvm.updateVehicleStats(vehicle, vo)
+    g_xvm.updateVehicleStats(vo)
 
 def PreDefinedHostList_autoLoginQuery(base, callback):
     #debug('> PreDefinedHostList_autoLoginQuery')

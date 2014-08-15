@@ -290,24 +290,20 @@ class Xvm(object):
         except Exception, ex:
             err('updateBattleState(): ' + traceback.format_exc())
 
-    def updateVehicleStatus(self, vehicle, vo=None):
+    def updateVehicleStatus(self, vo):
         try:
             if self.vmmFlashObject is not None:
+                vehicle = BigWorld.entity(vo.vehicleID)
                 if vehicle is not None and hasattr(vehicle, 'marker'):
-                    if vo is None:
-                        from gui.BattleContext import g_battleContext
-                        vo = g_battleContext.arenaDP.getVehicleInfo(vehicle.id)
                     self.vmmFlashObject.invokeMarker(vehicle.marker, 'setStatus', [vo.vehicleStatus])
         except Exception, ex:
             err('updateVehicleStatus(): ' + traceback.format_exc())
 
-    def updateVehicleStats(self, vehicle, vo=None):
+    def updateVehicleStats(self, vo):
         try:
             if self.vmmFlashObject is not None:
+                vehicle = BigWorld.entity(vo.vehicleID)
                 if vehicle is not None and hasattr(vehicle, 'marker'):
-                    if vo is None:
-                        from gui.BattleContext import g_battleContext
-                        vo = g_battleContext.arenaDP.getVehicleStats(vehicle.id)
                     self.vmmFlashObject.invokeMarker(vehicle.marker, 'setFrags', [vo.frags])
         except Exception, ex:
             err('updateVehicleStats(): ' + traceback.format_exc())
