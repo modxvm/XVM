@@ -52,12 +52,18 @@ package com.xvm.utils
                 )));
         }
 
-        // TODO: update formula
         public static function XWGR(WGR:Number):Number
         {
-            return WGR > 20000 ? 100 :
+            return WGR > 11000 ? 100 :
                 Math.round(Math.max(0, Math.min(100,
-                    WGR / 200
+                    WGR*(WGR*(WGR*(WGR*(WGR*(-WGR*
+                    0.0000000000000000000004209
+                    + 0.000000000000000012477)
+                    - 0.00000000000014338)
+                    + 0.0000000008309)
+                    - 0.000002361)
+                    + 0.01048)
+                    + 0.4
                 )));
         }
     }

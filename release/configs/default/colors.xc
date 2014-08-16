@@ -233,12 +233,12 @@
     // Динамический цвет по рейтингу WG
     // TODO: update values
     "wgr": [
-      { "value": 2000,  "color": ${"def.colorRating.very_bad" } },  // very bad   (20% of players)
-      { "value": 4000,  "color": ${"def.colorRating.bad"      } },  // bad        (better then 20% of players)
-      { "value": 6000,  "color": ${"def.colorRating.normal"   } },  // normal     (better then 60% of players)
-      { "value": 8000,  "color": ${"def.colorRating.good"     } },  // good       (better then 90% of players)
-      { "value": 10000, "color": ${"def.colorRating.very_good"} },  // very good  (better then 99% of players)
-      { "value": 20000, "color": ${"def.colorRating.unique"   } }   // unique     (better then 99.9% of players)
+      { "value": 2020,  "color": ${"def.colorRating.very_bad" } },  //    0 - 2019 - very bad   (20% of players)
+      { "value": 4185,  "color": ${"def.colorRating.bad"      } },  // 2020 - 4184 - bad        (better then 20% of players)
+      { "value": 6340,  "color": ${"def.colorRating.normal"   } },  // 4185 - 6339 - normal     (better then 60% of players)
+      { "value": 8525,  "color": ${"def.colorRating.good"     } },  // 6340 - 8524 - good       (better then 90% of players)
+      { "value": 9930,  "color": ${"def.colorRating.very_good"} },  // 8525 - 9929 - very good  (better then 99% of players)
+      { "value": 99999, "color": ${"def.colorRating.unique"   } }   // 9930 - *    - unique     (better then 99.9% of players)
     ],
     // Dynamic color by TEFF (E) rating
     // Динамический цвет по рейтингу TEFF (E)
