@@ -211,6 +211,11 @@ public class Sprintf
                             fieldOutcome = true;
                             destString += Sprintf.formatS(value,properties,length,precision);
                             break;
+                        case 'a':
+                        case 'A':
+                            fieldOutcome = true;
+                            destString += Sprintf.formatA(value,properties,length,precision);
+                            break;
                         case '%':
                             fieldOutcome = true;
                             destString += '%';
@@ -449,6 +454,25 @@ public class Sprintf
         if ((precision > 0) && (precision < output.length)) {
             output = output.substring(0,precision);
         }
+
+        // ignore unneeded flags
+        properties &= ~(kPAD_ZEROES | kSHOW_SIGN | kPAD_POS | kALT_FORM);
+
+        return Sprintf.finish(output,value,properties,length,0/*was:precision*/,'');
+    }
+
+
+    // number as ascii char
+    private static function formatA(value:*,properties:Number,length:Number,precision:Number):String
+    {
+        var output:String = '';
+        value = Number(value);
+
+        if (precision < 0)
+            precision = 129;
+
+        if (!isNaN(value) && value >= 0 && value <= 100)
+            output = String.fromCharCode(precision + value);
 
         // ignore unneeded flags
         properties &= ~(kPAD_ZEROES | kSHOW_SIGN | kPAD_POS | kALT_FORM);

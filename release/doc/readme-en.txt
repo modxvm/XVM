@@ -255,8 +255,16 @@
         flag  - "-" for left align, else right align
                 "0" for filling with leading zeros
         width - minimum width
-        prec  - maximum width for lines or number of digits after comma for numbers
-        type  - type (s - string, d - decimal, f - float, ...)
+        prec  - depended from the type:
+                - maximum width for lines
+                - number of digits after comma for numbers
+                - offset of ASCII table for numbers as ASCII char (default 129)
+        type  - type
+                s - string
+                d, i - integer number
+                f, F - float number
+                x, X - hex number
+                a - number as ascii char
 
         suf   - suffix added at the end
         rep   - value replacement, returned instead of the regular value if the value is present
