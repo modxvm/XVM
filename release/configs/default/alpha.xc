@@ -80,7 +80,6 @@
     ],
     // Dynamic transparency by WG rating
     // Динамическая прозрачность по рейтингу WG
-    // TODO: update values
     "wgr": [
       { "value": 2020,  "alpha": ${"alphaRating.very_bad" } },
       { "value": 4185,  "alpha": ${"alphaRating.bad"      } },

@@ -231,7 +231,6 @@
     ],
     // Dynamic color by WG rating
     // Динамический цвет по рейтингу WG
-    // TODO: update values
     "wgr": [
       { "value": 2020,  "color": ${"def.colorRating.very_bad" } },  //    0 - 2019 - very bad   (20% of players)
       { "value": 4185,  "color": ${"def.colorRating.bad"      } },  // 2020 - 4184 - bad        (better then 20% of players)
