@@ -380,7 +380,7 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("hp"))
         {
             // {{frags}}
-            pdata["frags"] = function(o):Number { return isNaN(o.frags) || o.frags <= 0 ? NaN : o.frags; }
+            pdata["frags"] = function(o):Number { return isNaN(o.frags) || o.frags == 0 ? NaN : o.frags; }
             // {{ready}}
             pdata["ready"] = function(o):String { return o.ready == true ? 'ready' : null; }
             // {{alive}}
