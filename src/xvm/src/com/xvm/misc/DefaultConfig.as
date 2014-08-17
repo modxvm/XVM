@@ -166,7 +166,23 @@ package com.xvm.misc
             c.clockFormat = "H:N"; // TODO "H:i:s";   // Format: http://php.net/date
             c.clanIconsFolder = "clanicons/";   // Folder with clan icons
             // Visual elements
-            c.elements = [];
+            c.elements = [
+                {
+                    minimap: {
+                        rowA: { textColor: "0xFFFF66" },
+                        rowB: { textColor: "0xFFFF66" },
+                        rowC: { textColor: "0xFFFF66" },
+                        rowD: { textColor: "0xFFFF66" },
+                        rowE: { textColor: "0xFFFF66" },
+                        rowF: { textColor: "0xFFFF66" },
+                        rowG: { textColor: "0xFFFF66" },
+                        rowH: { textColor: "0xFFFF66" },
+                        rowJ: { textColor: "0xFFFF66" },
+                        rowK: { textColor: "0xFFFF66" },
+                        colsNames: { textColor: "0xFFFF66" }
+                    }
+                }
+            ];
             return c;
         }
 
