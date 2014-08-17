@@ -447,6 +447,9 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var squadSize = 0;
         switch (wrapper.state)
         {
+            case "short":
+                widthDelta = -Config.config.playersPanel.short.width;
+                break;
             case "medium":
                 namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), Config.config.playersPanel.medium.width);
                 widthDelta = namesWidthDefault - namesWidth;

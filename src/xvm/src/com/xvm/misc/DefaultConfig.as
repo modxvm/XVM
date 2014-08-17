@@ -331,6 +331,7 @@ package com.xvm.misc
             };
             c.short = {
                 enabled: true,
+                width: 0,
                 fragsFormatLeft: "{{frags}}",
                 fragsFormatRight: "{{frags}}",
                 extraFieldsLeft: [],

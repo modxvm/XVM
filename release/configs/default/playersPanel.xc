@@ -154,6 +154,9 @@
     "short": {
       // false - disable (отключить)
       "enabled": true,
+      // Width of the column, 0-250. Default is 0.
+      // Ширина поля, 0-250. По умолчанию: 0.
+      "width": 0,
       // Display format for frags (macros allowed, see readme-en.txt).
       // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
       "fragsFormatLeft": "{{frags}}",
