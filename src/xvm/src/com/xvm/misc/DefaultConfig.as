@@ -169,17 +169,17 @@ package com.xvm.misc
             c.elements = [
                 {
                     minimap: {
-                        rowA: { textColor: "0xFFFF66" },
-                        rowB: { textColor: "0xFFFF66" },
-                        rowC: { textColor: "0xFFFF66" },
-                        rowD: { textColor: "0xFFFF66" },
-                        rowE: { textColor: "0xFFFF66" },
-                        rowF: { textColor: "0xFFFF66" },
-                        rowG: { textColor: "0xFFFF66" },
-                        rowH: { textColor: "0xFFFF66" },
-                        rowJ: { textColor: "0xFFFF66" },
-                        rowK: { textColor: "0xFFFF66" },
-                        colsNames: { textColor: "0xFFFF66" }
+                        rowA: { textColor: "0x8A855C" },
+                        rowB: { textColor: "0x8A855C" },
+                        rowC: { textColor: "0x8A855C" },
+                        rowD: { textColor: "0x8A855C" },
+                        rowE: { textColor: "0x8A855C" },
+                        rowF: { textColor: "0x8A855C" },
+                        rowG: { textColor: "0x8A855C" },
+                        rowH: { textColor: "0x8A855C" },
+                        rowJ: { textColor: "0x8A855C" },
+                        rowK: { textColor: "0x8A855C" },
+                        colsNames: { textColor: "0x8A855C" }
                     }
                 }
             ];

@@ -7,7 +7,7 @@
     // Minimap coordinates font
     // Шрифт координат миникарты
     "minimapFont": {
-        "color": "0xFFFF66",    // цвет / color
+        "color": "0x8A855C",    // цвет / color
         "alpha": 100            // прозрачность / transparency
     },
     // Interface elements
