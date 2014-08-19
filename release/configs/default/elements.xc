@@ -78,7 +78,7 @@
             // Minimap
             // Миникарта
             "minimap": {
-                "_alpha": 100,
+                "_alpha": "minimap._alpha",
                 // Vertical coordinates
                 // Координаты по вертикали
                 "rowA": { "textColor": ${"minimapFont.color"}, "_alpha": ${"minimapFont.alpha"} },
