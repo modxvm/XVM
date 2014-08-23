@@ -88,7 +88,7 @@ package net.wg.gui.components.controls
         
         protected var selectedItemRenderer:IListItemRenderer = null;
         
-        private var scopeWidth:Number = 0;
+        protected var scopeWidth:Number = 0;
         
         private var courseFactor:Number = 0;
         

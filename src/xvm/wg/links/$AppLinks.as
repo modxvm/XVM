@@ -80,6 +80,7 @@ ServiceMessagePopUp_UI;
 squadItemRendererUI;
 
 // TankCarousel.swf
+TankCarouselUI;
 TankCarouselItemRendererUI;
 
 }

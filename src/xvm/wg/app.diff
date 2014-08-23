@@ -38,9 +38,21 @@ diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/
      
      public function get currentTime() : Number
      {
+diff -Naur app.orig/net/wg/gui/components/controls/Carousel.as app/net/wg/gui/components/controls/Carousel.as
+--- app.orig/net/wg/gui/components/controls/Carousel.as	2014-07-30 13:00:17.635511000 +0300
++++ app/net/wg/gui/components/controls/Carousel.as	2014-08-24 00:39:38.336425700 +0300
+@@ -88,7 +88,7 @@
+         
+         protected var selectedItemRenderer:IListItemRenderer = null;
+         
+-        private var scopeWidth:Number = 0;
++        protected var scopeWidth:Number = 0;
+         
+         private var courseFactor:Number = 0;
+         
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as
 --- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-07-30 13:02:03.247737100 +0300
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-07-30 13:14:56.274858400 +0300
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-08-24 00:40:31.776500500 +0300
 @@ -84,9 +84,9 @@
          
          private var filterDataInvalid:Boolean = false;
@@ -52,6 +64,15 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg
 +        private var tankFilter:net.wg.gui.components.controls.DropDownImageText;
          
          private var checkBoxToMain:CheckBox;
+         
+@@ -102,7 +102,7 @@
+         
+         private var _currentShowByCompactDescription:Array = null;
+         
+-        private var _currentShowRendersByIndex:Vector.<IListItemRenderer> = null;
++        protected var _currentShowRendersByIndex:Vector.<IListItemRenderer> = null;
+         
+         private var _createdRendersListByCompDescr:Object = null;
          
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as
 --- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-07-30 13:02:10.417747100 +0300

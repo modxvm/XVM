@@ -9,8 +9,10 @@ package xvm.tcarousel
     import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import net.wg.gui.lobby.hangar.*;
+    import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    import scaleform.clik.utils.Padding;
 
     public class TCarouselXvmView extends XvmViewBase
     {
@@ -22,6 +24,11 @@ package xvm.tcarousel
         public function get page():net.wg.gui.lobby.hangar.Hangar
         {
             return super.view as net.wg.gui.lobby.hangar.Hangar;
+        }
+
+        override public function onBeforePopulate(e:LifeCycleEvent):void
+        {
+            replaceCarouselControl();
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
@@ -37,11 +44,44 @@ package xvm.tcarousel
             }
         }
 
+        private function replaceCarouselControl():void
+        {
+            if (isNaN(Config.config.hangar.carousel.rows) || Config.config.hangar.carousel.rows <= 0)
+                Config.config.hangar.carousel.rows = 1;
+
+            var c:TankCarousel = new UI_TankCarousel(Config.config.hangar.carousel);
+            c.componentInspectorSetting = true;
+            c.dragEnabled = page.carousel.dragEnabled;
+            c.enabled = page.carousel.enabled;
+            c.enableInitCallback = page.carousel.enableInitCallback;
+            c.focusable = page.carousel.focusable;
+            c.margin = page.carousel.margin;
+            c.inspectablePadding = {
+                top: Config.config.hangar.carousel.padding.top,
+                right: Config.config.hangar.carousel.padding.right,
+                bottom: Config.config.hangar.carousel.padding.bottom,
+                left: Config.config.hangar.carousel.padding.left
+            };
+            c.useRightButton = page.carousel.useRightButton;
+            c.useRightButtonForSelect = page.carousel.useRightButtonForSelect;
+            c.visible = page.carousel.visible;
+            c.slotImageWidth = page.carousel.slotImageWidth * Config.config.hangar.carousel.zoom;
+            c.slotImageHeight = page.carousel.slotImageHeight * Config.config.hangar.carousel.zoom;
+            c.height = (c.slotImageHeight + c.padding.vertical) * Config.config.hangar.carousel.rows;
+            c.renderersMask.height = c.dragHitArea.height = c.height;
+            c.itemRenderer = UI_TankCarouselItemRenderer;
+            c.componentInspectorSetting = false;
+
+            var index:int = page.getChildIndex(page.carousel);
+            page.removeChildAt(index);
+            page.carousel.dispose();
+            page.carousel = c;
+            page.addChildAt(page.carousel, index);
+        }
+
         private function init():void
         {
             Dossier.loadAccountDossier(page.carousel, page.carousel.invalidateData, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
-
-            page.carousel.itemRenderer = UI_TankCarouselItemRenderer;
         }
     }
 }
