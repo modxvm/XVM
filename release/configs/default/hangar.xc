@@ -88,8 +88,8 @@
         "strength": 2
       }
     },
-    // true - tank carousel
-    // true - карусель танков
+    // Parameters for tank carousel
+    // Параметры карусели танков
     "carousel": ${"carousel.xc":"carousel"}
   }
 }
