@@ -32,8 +32,13 @@ package xvm.tcarousel
             if (isInvalid(InvalidationType.RENDERERS))
             {
                 repositionRenderers();
-                repositionAdvancedAndEmptySlots();
+                repositionAdvancedSlots();
+                removeEmptySlots();
                 //Logger.add("_visibleSlots=" + _visibleSlots + " _renderers.length=" + _renderers.length);
+            }
+            if (isInvalid(InvalidationType.SIZE))
+            {
+                removeEmptySlots();
             }
         }
 
@@ -199,7 +204,7 @@ package xvm.tcarousel
             scrollToIndex(selectedIndex);
         }
 
-        private function repositionAdvancedAndEmptySlots():void
+        private function repositionAdvancedSlots():void
         {
             var renderer:IListItemRenderer;
 
@@ -219,23 +224,13 @@ package xvm.tcarousel
                 renderer.y = padding.vertical + (i % cfg.rows) * (slotImageHeight + padding.vertical);
                 ++i;
             }
+        }
 
-            // reposition empty slots ...
-            /*var index:int = findSlotIndex(SLOT_TYPE_EMPTY);
-            if (index < 0)
-                return;
-            while (index < _renderers.length)
-            {
-                renderer = getRendererAt(index);
-                renderer.x = padding.horizontal + Math.floor(i / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = padding.vertical + (i % cfg.rows) * (slotImageHeight + padding.vertical);
-                ++i;
-                ++index;
-            }*/
-            // ... or remove empty slots
+        private function removeEmptySlots():void
+        {
             while(true)
             {
-                renderer = getRendererAt(_renderers.length - 1);
+                var renderer:IListItemRenderer = getRendererAt(_renderers.length - 1);
                 if (checkRendererType(renderer, SLOT_TYPE_EMPTY))
                 {
                     _renderers.splice(_renderers.length - 1, 1);
