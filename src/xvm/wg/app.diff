@@ -40,7 +40,7 @@ diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/
      {
 diff -Naur app.orig/net/wg/gui/components/controls/Carousel.as app/net/wg/gui/components/controls/Carousel.as
 --- app.orig/net/wg/gui/components/controls/Carousel.as	2014-07-30 13:00:17.635511000 +0300
-+++ app/net/wg/gui/components/controls/Carousel.as	2014-08-25 21:04:39.082412700 +0300
++++ app/net/wg/gui/components/controls/Carousel.as	2014-08-25 22:32:02.322508100 +0300
 @@ -88,9 +88,9 @@
          
          protected var selectedItemRenderer:IListItemRenderer = null;
@@ -53,6 +53,15 @@ diff -Naur app.orig/net/wg/gui/components/controls/Carousel.as app/net/wg/gui/co
          
          private var slideAcceleratorAfterDrag:Number = 16;
          
+@@ -598,7 +598,7 @@
+     
+ }
+ 
+-private function getCurrentFirstRendererOnAnim() : Number
++protected function getCurrentFirstRendererOnAnim() : Number
+ {
+     var _loc1_:* = NaN;
+     if(!container || !_renderers)
 @@ -729,7 +729,7 @@
  this.courseFactor = 0;
  }

@@ -598,7 +598,7 @@ private function slidingFn(param1:Object) : void
     
 }
 
-private function getCurrentFirstRendererOnAnim() : Number
+protected function getCurrentFirstRendererOnAnim() : Number
 {
     var _loc1_:* = NaN;
     if(!container || !_renderers)

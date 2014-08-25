@@ -1,6 +1,6 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm
---- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-25 21:05:12.519258700 +0300
-+++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-25 21:06:51.334755000 +0300
+--- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-25 22:31:55.617124600 +0300
++++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-25 22:33:15.438690100 +0300
 @@ -63,8 +63,8 @@
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "lastDx") type QName(PackageNamespace(""), "Number") value Integer(0) end
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "allowDrag") type QName(PackageNamespace(""), "Boolean") value False() end
@@ -39,6 +39,42 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
        returnvoid
       end ; code
+@@ -2313,7 +2313,7 @@
+ 
+       getlocal0
+       getlocal0
+-      callproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim"), 0
++      callproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim"), 0
+       initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "currentFirstRenderer")
+ 
+       getlex              QName(PackageNamespace(""), "container")
+@@ -2335,7 +2335,7 @@
+     end ; body
+    end ; method
+   end ; trait
+-  trait method QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim")
++  trait method QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim")
+    method
+     refid "net.wg.gui.components.controls:Carousel/instance/net.wg.gui.components.controls:Carousel/instance/getCurrentFirstRendererOnAnim"
+     returns QName(PackageNamespace(""), "Number")
+@@ -2437,7 +2437,7 @@
+       pushscope
+ 
+       getlocal0
+-      callproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim"), 0
++      callproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim"), 0
+       convert_d
+       setlocal1
+ 
+@@ -2672,7 +2672,7 @@
+ 
+       getlocal0
+       getlocal0
+-      callproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim"), 0
++      callproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim"), 0
+       initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "currentFirstRenderer")
+ 
+       getlocal0
 @@ -2727,7 +2727,7 @@
  
        getlocal0
@@ -101,6 +137,15 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        pushbyte            0
        ifne                L106
  
+@@ -3076,7 +3076,7 @@
+       setproperty         QName(PackageNamespace(""), "x")
+ 
+       getlocal0
+-      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim"), 0
++      callpropvoid        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim"), 0
+ 
+       getlocal0
+       getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "_currentFirstRendererOnAnim")
 @@ -3087,7 +3087,7 @@
  
        pop

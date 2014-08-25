@@ -40,6 +40,7 @@ package xvm.tcarousel
         // Carousel
         override protected function goToFirstRenderer():void
         {
+            //Logger.add("goToFirstRenderer: " + currentFirstRenderer);
             this.currentFirstRenderer = Math.floor(this.currentFirstRenderer / cfg.rows);
             super.goToFirstRenderer();
         }
@@ -54,8 +55,6 @@ package xvm.tcarousel
                 this.leftArrow.enabled = true;
                 this.rightArrow.enabled = false;
                 this.allowDrag = true;
-                //clearAllAnimIntervals();
-                //goToFirstRenderer();
             }
             else
             {
@@ -93,12 +92,26 @@ package xvm.tcarousel
         // Carousel
         override protected function set currentFirstRenderer(value:uint):void
         {
-            var v:uint = value;
-            v = Math.min(Math.ceil((_renderers.length - _visibleSlots) / cfg.rows), value);
-            //Logger.add("currentFirstRenderer=" + v + " value=" + value);
+            var v:uint = Math.min(Math.max(Math.ceil((_renderers.length - _visibleSlots) / cfg.rows), 0), value);
+            //Logger.add(" value=" + value + " currentFirstRenderer=" + v);
             super.currentFirstRenderer = v;
         }
 
+        // Carousel
+        override protected function getCurrentFirstRendererOnAnim():Number
+        {
+            super.getCurrentFirstRendererOnAnim();
+            if (container && _renderers)
+            {
+                var n:Number = -Math.round((container.x - this._defContainerPos) / this.slotWidth);
+                if (n >= _renderers.length - this._visibleSlots)
+                    _currentFirstRendererOnAnim = Math.max(0, _renderers.length - this._visibleSlots);
+                //Logger.add("_currentFirstRendererOnAnim: " + _currentFirstRendererOnAnim);
+            }
+            return _currentFirstRendererOnAnim;
+        }
+
+        // Carousel
         override protected function arrowSlide():void
         {
             super.arrowSlide();
