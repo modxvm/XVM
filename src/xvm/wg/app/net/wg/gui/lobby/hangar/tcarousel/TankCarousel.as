@@ -102,7 +102,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         private var _currentShowByCompactDescription:Array = null;
         
-        protected var _currentShowRendersByIndex:Vector.<IListItemRenderer> = null;
+        private var _currentShowRendersByIndex:Vector.<IListItemRenderer> = null;
         
         private var _createdRendersListByCompDescr:Object = null;
         

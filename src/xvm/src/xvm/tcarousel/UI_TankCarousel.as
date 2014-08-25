@@ -22,7 +22,6 @@ package xvm.tcarousel
         {
             //Logger.add("UI_TankCarousel");
             super();
-
             this.cfg = cfg;
         }
 
@@ -148,20 +147,27 @@ package xvm.tcarousel
             return index < 0 ? null : getRendererAt(index);
         }
 
+        private var _currentShowRendersCount:int;
+
         private function repositionRenderers():void
         {
             var renderer:IListItemRenderer = null;
-            var _loc3_:DisplayObject = null;
             var selectedIndex:Number = 0;
-            for (var i:Number = 0; i < this._currentShowRendersByIndex.length; ++i)
+            _currentShowRendersCount = 0;
+            var n:int = 0;
+            for (var i:Number = 0; i < this._renderers.length; ++i)
             {
-                renderer = this._currentShowRendersByIndex[i];
-                renderer.x = padding.horizontal + Math.floor(i / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = padding.vertical + (i % cfg.rows) * (slotImageHeight + padding.vertical);
+                renderer = _renderers[i];
+                if ((renderer as DisplayObject).visible == false)
+                    continue;
+                renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
+                renderer.y = padding.vertical + (n % cfg.rows) * (slotImageHeight + padding.vertical);
                 if (renderer.selected)
-                    selectedIndex = i;
+                    selectedIndex = n;
+                if (checkRendererType(renderer, SLOT_TYPE_TANK))
+                    ++_currentShowRendersCount;
+                ++n;
             }
-            //_totalRenderers = this._availableSlotsForBuyVehicle > 0?this._currentShowRendersByIndex.length + 2:this._currentShowRendersByIndex.length + 1;
             scrollToIndex(selectedIndex);
         }
 
@@ -169,7 +175,7 @@ package xvm.tcarousel
         {
             var renderer:IListItemRenderer;
 
-            var i:int = this._currentShowRendersByIndex.length;
+            var i:int = _currentShowRendersCount;
             renderer = findSlot(SLOT_TYPE_BUYTANK);
             if (renderer != null)
             {
@@ -202,7 +208,7 @@ package xvm.tcarousel
             while(true)
             {
                 renderer = getRendererAt(_renderers.length - 1);
-                if ((renderer as TankCarouselItemRenderer).dataVO.empty)
+                if (checkRendererType(renderer, SLOT_TYPE_EMPTY))
                 {
                     _renderers.splice(_renderers.length - 1, 1);
                     cleanUpRenderer(renderer);
