@@ -3,8 +3,9 @@ package xvm.tcarousel
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
+    import flash.events.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
-    import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
+    import net.wg.gui.lobby.hangar.tcarousel.data.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.interfaces.*;
 
@@ -50,6 +51,47 @@ package xvm.tcarousel
         override protected function updateScopeWidth():void
         {
             this.scopeWidth = Math.ceil(_renderers.length / cfg.rows) * this.slotWidth + this.padding.horizontal;
+        }
+
+        // Carousel
+        override protected function updateArrowsState():void
+        {
+            //Logger.add("updateArrowsState: " + _totalRenderers  + " " + this._visibleSlots + " " + currentFirstRenderer);
+
+            if (_totalRenderers > this._visibleSlots && this.currentFirstRenderer * cfg.rows >= _totalRenderers - this._visibleSlots)
+            {
+                this.leftArrow.enabled = true;
+                this.rightArrow.enabled = false;
+                this.allowDrag = true;
+            }
+            else
+            {
+                super.updateArrowsState();
+            }
+        }
+
+        // Carousel
+        override protected function set currentFirstRenderer(value:uint):void
+        {
+            var v:uint = value;
+            v = Math.min(Math.ceil((_renderers.length - _visibleSlots) / cfg.rows), value);
+            //Logger.add("currentFirstRenderer=" + v + " value=" + value);
+            super.currentFirstRenderer = v;
+        }
+
+        // Carousel
+        override protected function goToFirstRenderer():void
+        {
+            this.currentFirstRenderer = Math.floor(this.currentFirstRenderer / cfg.rows);
+            super.goToFirstRenderer();
+        }
+
+        // Carousel
+        override protected function handleMouseWheel(param1:MouseEvent):void
+        {
+            if (param1.delta <= 0 && this.currentFirstRenderer * cfg.rows >= _renderers.length - this._visibleSlots)
+                return;
+            super.handleMouseWheel(param1);
         }
 
         // TankCarousel
