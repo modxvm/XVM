@@ -1,15 +1,17 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm
---- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-23 23:23:07.228183400 +0300
-+++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-24 00:46:42.930971600 +0300
-@@ -63,7 +63,7 @@
+--- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-25 21:05:12.519258700 +0300
++++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-25 21:06:51.334755000 +0300
+@@ -63,8 +63,8 @@
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "lastDx") type QName(PackageNamespace(""), "Number") value Integer(0) end
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "allowDrag") type QName(PackageNamespace(""), "Boolean") value False() end
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "selectedItemRenderer") type QName(PackageNamespace("scaleform.clik.interfaces"), "IListItemRenderer") value Null() end
 -  trait slot QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "scopeWidth") type QName(PackageNamespace(""), "Number") value Integer(0) end
+-  trait slot QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor") type QName(PackageNamespace(""), "Number") value Integer(0) end
 +  trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "scopeWidth") type QName(PackageNamespace(""), "Number") value Integer(0) end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor") type QName(PackageNamespace(""), "Number") value Integer(0) end
++  trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor") type QName(PackageNamespace(""), "Number") value Integer(0) end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "slideAcceleratorAfterDrag") type QName(PackageNamespace(""), "Number") value Integer(16) end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "slideAcceleratorByArrow") type QName(PackageNamespace(""), "Number") value Integer(7) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "slideToPosAccelerator") type QName(PackageNamespace(""), "Number") value Integer(7) end
 @@ -1384,7 +1384,7 @@
        getlocal0
        getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "_defContainerPos")
@@ -37,6 +39,104 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
        returnvoid
       end ; code
+@@ -2727,7 +2727,7 @@
+ 
+       getlocal0
+       pushbyte            0
+-      initproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor")
++      initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor")
+ 
+       jump                L65
+ 
+@@ -2746,7 +2746,7 @@
+       pushbyte            255
+       convert_d
+ L64:
+-      initproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor")
++      initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor")
+ 
+ L65:
+       getlocal0
+@@ -2776,7 +2776,7 @@
+       getlocal0
+       findpropstrict      QName(PackageNamespace("flash.utils"), "setInterval")
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "arrowSlide")
++      getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "arrowSlide")
+       getlocal0
+       getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "INTERVAL_SPEED")
+       callproperty        QName(PackageNamespace("flash.utils"), "setInterval"), 2
+@@ -2923,14 +2923,14 @@
+ 
+       getlocal0
+       pushbyte            0
+-      initproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor")
++      initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor")
+ 
+       returnvoid
+      end ; code
+     end ; body
+    end ; method
+   end ; trait
+-  trait method QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "arrowSlide")
++  trait method QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "arrowSlide")
+    method
+     refid "net.wg.gui.components.controls:Carousel/instance/net.wg.gui.components.controls:Carousel/instance/arrowSlide"
+     returns QName(PackageNamespace(""), "void")
+@@ -2955,7 +2955,7 @@
+       getlocal0
+       getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "maxDx")
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor")
++      getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor")
+       multiply
+       getlocal0
+       getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "lastDx")
+@@ -2967,7 +2967,7 @@
+       initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "lastDx")
+ 
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor")
++      getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor")
+       pushbyte            0
+       ifne                L106
+ 
+@@ -3087,7 +3087,7 @@
+ 
+       pop
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor")
++      getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor")
+       pushbyte            1
+       equals
+ L126:
+@@ -3099,7 +3099,7 @@
+ 
+       getlocal0
+       pushbyte            0
+-      initproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor")
++      initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor")
+ 
+       jump                L160
+ 
+@@ -3117,7 +3117,7 @@
+ 
+       pop
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor")
++      getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor")
+       pushbyte            255
+       equals
+ L149:
+@@ -3133,7 +3133,7 @@
+ 
+       getlocal0
+       pushbyte            0
+-      initproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "courseFactor")
++      initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "courseFactor")
+ 
+ L160:
+       returnvoid
 @@ -3164,7 +3164,7 @@
        iffalse             L38
  

@@ -90,7 +90,7 @@ package net.wg.gui.components.controls
         
         protected var scopeWidth:Number = 0;
         
-        private var courseFactor:Number = 0;
+        protected var courseFactor:Number = 0;
         
         private var slideAcceleratorAfterDrag:Number = 16;
         
@@ -729,7 +729,7 @@ this.currentFirstRenderer = _loc4_;
 this.courseFactor = 0;
 }
 
-private function arrowSlide() : void
+protected function arrowSlide() : void
 {
 var _loc1_:* = NaN;
 var _loc2_:* = NaN;

@@ -25,6 +25,44 @@ package xvm.tcarousel
             this.cfg = cfg;
         }
 
+        // TankCarousel
+        override protected function draw():void
+        {
+            super.draw();
+            if (isInvalid(InvalidationType.RENDERERS))
+            {
+                repositionRenderers();
+                repositionAdvancedAndEmptySlots();
+                //Logger.add("_visibleSlots=" + _visibleSlots + " _renderers.length=" + _renderers.length);
+            }
+        }
+
+        // Carousel
+        override protected function goToFirstRenderer():void
+        {
+            this.currentFirstRenderer = Math.floor(this.currentFirstRenderer / cfg.rows);
+            super.goToFirstRenderer();
+        }
+
+        // Carousel
+        override protected function updateArrowsState():void
+        {
+            //Logger.add("updateArrowsState: " + _totalRenderers  + " " + this._visibleSlots + " " + currentFirstRenderer);
+
+            if (_totalRenderers > this._visibleSlots && this.currentFirstRenderer * cfg.rows >= _totalRenderers - this._visibleSlots)
+            {
+                this.leftArrow.enabled = true;
+                this.rightArrow.enabled = false;
+                this.allowDrag = true;
+                //clearAllAnimIntervals();
+                //goToFirstRenderer();
+            }
+            else
+            {
+                super.updateArrowsState();
+            }
+        }
+
         // Carousel
         override protected function updateVisibleSlotsCount():Number
         {
@@ -53,23 +91,6 @@ package xvm.tcarousel
         }
 
         // Carousel
-        override protected function updateArrowsState():void
-        {
-            //Logger.add("updateArrowsState: " + _totalRenderers  + " " + this._visibleSlots + " " + currentFirstRenderer);
-
-            if (_totalRenderers > this._visibleSlots && this.currentFirstRenderer * cfg.rows >= _totalRenderers - this._visibleSlots)
-            {
-                this.leftArrow.enabled = true;
-                this.rightArrow.enabled = false;
-                this.allowDrag = true;
-            }
-            else
-            {
-                super.updateArrowsState();
-            }
-        }
-
-        // Carousel
         override protected function set currentFirstRenderer(value:uint):void
         {
             var v:uint = value;
@@ -78,11 +99,17 @@ package xvm.tcarousel
             super.currentFirstRenderer = v;
         }
 
-        // Carousel
-        override protected function goToFirstRenderer():void
+        override protected function arrowSlide():void
         {
-            this.currentFirstRenderer = Math.floor(this.currentFirstRenderer / cfg.rows);
-            super.goToFirstRenderer();
+            super.arrowSlide();
+            if (this.courseFactor == -1)
+            {
+                if (this._currentFirstRendererOnAnim >= Math.ceil((_renderers.length - _visibleSlots) / cfg.rows))
+                {
+                    this.currentFirstRenderer = _renderers.length - this._visibleSlots;
+                    this.courseFactor = 0;
+                }
+            }
         }
 
         // Carousel
@@ -91,18 +118,6 @@ package xvm.tcarousel
             if (param1.delta <= 0 && this.currentFirstRenderer * cfg.rows >= _renderers.length - this._visibleSlots)
                 return;
             super.handleMouseWheel(param1);
-        }
-
-        // TankCarousel
-        override protected function draw():void
-        {
-            super.draw();
-            if (isInvalid(InvalidationType.RENDERERS))
-            {
-                repositionRenderers();
-                repositionAdvancedAndEmptySlots();
-                //Logger.add("_visibleSlots=" + _visibleSlots + " _renderers.length=" + _renderers.length);
-            }
         }
 
         // PRIVATE
