@@ -90,6 +90,6 @@
     },
     // true - tank carousel
     // true - карусель танков
-    "carousel": ${"carousel.xc":"carousel"},
+    "carousel": ${"carousel.xc":"carousel"}
   }
 }

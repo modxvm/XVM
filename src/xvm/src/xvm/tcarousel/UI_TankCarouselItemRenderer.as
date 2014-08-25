@@ -71,7 +71,7 @@ package xvm.tcarousel
             tf.width = 32;
             tf.height = 32;
             tf.selectable = false;
-            tf.htmlText = "<img src='img://gui/maps/icons/library/proficiency/class_icons_3.png' width='23' height='23'>";
+            //tf.htmlText = "<img src='img://gui/maps/icons/library/proficiency/class_icons_3.png' width='23' height='23'>";
             extraFields.addChild(tf);
             /*masteryTF = null;
             masteryTF = new TextField();
