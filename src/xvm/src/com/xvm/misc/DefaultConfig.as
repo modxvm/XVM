@@ -153,7 +153,7 @@ package com.xvm.misc
             c.carousel = new CCarousel();
             c.carousel.zoom = 1;
             c.carousel.rows = 1;
-            c.carousel.padding = { left:5, right:5, top:0, bottom:0 },
+            c.carousel.padding = { horizontal:10, vertical:2 },
             c.carousel.extraFields = [];
             return c;
         }

@@ -57,10 +57,10 @@ package xvm.tcarousel
             c.focusable = page.carousel.focusable;
             c.margin = page.carousel.margin;
             c.inspectablePadding = {
-                top: Config.config.hangar.carousel.padding.top,
-                right: Config.config.hangar.carousel.padding.right,
-                bottom: Config.config.hangar.carousel.padding.bottom,
-                left: Config.config.hangar.carousel.padding.left
+                top: 0,
+                right: Config.config.hangar.carousel.padding.horizontal / 2,
+                bottom: Config.config.hangar.carousel.padding.vertical,
+                left: Config.config.hangar.carousel.padding.horizontal / 2
             };
             c.useRightButton = page.carousel.useRightButton;
             c.useRightButtonForSelect = page.carousel.useRightButtonForSelect;
@@ -68,6 +68,7 @@ package xvm.tcarousel
             c.slotImageWidth = page.carousel.slotImageWidth * Config.config.hangar.carousel.zoom;
             c.slotImageHeight = page.carousel.slotImageHeight * Config.config.hangar.carousel.zoom;
             c.height = (c.slotImageHeight + c.padding.vertical) * Config.config.hangar.carousel.rows;
+            c.leftArrow.height = c.rightArrow.height = c.height;
             c.renderersMask.height = c.dragHitArea.height = c.height;
             c.itemRenderer = UI_TankCarouselItemRenderer;
             c.componentInspectorSetting = false;

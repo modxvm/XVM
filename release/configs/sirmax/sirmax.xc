@@ -42,7 +42,7 @@
     "carousel": {
       "zoom": 0.75,
       "rows": 2,
-      "padding": { "left": 1, "right": 1, "top": 1, "bottom": 1 },
+      "padding": { "horizontal": 2, "vertical": 2 },
       "extraFields": [
 
       ]

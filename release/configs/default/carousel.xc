@@ -6,7 +6,7 @@
   "carousel": {
     "zoom": 1,
     "rows": 1,
-    "padding": { "left": 5, "right": 5, "top": 0, "bottom": 0 },
+    "padding": { "horizontal": 10, "vertical": 2 },
     "extraFields": [
 
     ]

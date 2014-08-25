@@ -38,6 +38,7 @@ package xvm.tcarousel
             }
             if (isInvalid(InvalidationType.SIZE))
             {
+                repositionAdvancedSlots();
                 removeEmptySlots();
             }
         }
@@ -194,7 +195,7 @@ package xvm.tcarousel
                 if ((renderer as DisplayObject).visible == false)
                     continue;
                 renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = padding.vertical + (n % cfg.rows) * (slotImageHeight + padding.vertical);
+                renderer.y = padding.vertical / 2 + (n % cfg.rows) * (slotImageHeight + padding.vertical);
                 if (renderer.selected)
                     selectedIndex = n;
                 if (checkRendererType(renderer, SLOT_TYPE_TANK))
@@ -213,7 +214,7 @@ package xvm.tcarousel
             if (renderer != null)
             {
                 renderer.x = padding.horizontal + Math.floor(i / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = padding.vertical + (i % cfg.rows) * (slotImageHeight + padding.vertical);
+                renderer.y = (i % cfg.rows) * (slotImageHeight + padding.vertical);
                 ++i;
             }
 
@@ -221,7 +222,7 @@ package xvm.tcarousel
             if (renderer != null)
             {
                 renderer.x = padding.horizontal + Math.floor(i / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = padding.vertical + (i % cfg.rows) * (slotImageHeight + padding.vertical);
+                renderer.y = padding.vertical / 2 + (i % cfg.rows) * (slotImageHeight + padding.vertical);
                 ++i;
             }
         }
