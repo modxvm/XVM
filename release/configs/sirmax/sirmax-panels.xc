@@ -57,6 +57,7 @@
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },
   "alpha": 50,
+  //"iconAlpha": 50,
   "removeSquadIcon": true,
   "removePanelsModeSwitcher": true,
   "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },

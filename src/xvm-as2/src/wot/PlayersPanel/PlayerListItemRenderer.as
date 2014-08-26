@@ -186,6 +186,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
             base.update();
 
+            wrapper.iconLoader.content._alpha = Config.config.playersPanel.iconAlpha;
+
             if (data != null)
                 data.icon = saved_icon;
         }
@@ -360,7 +362,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var x:Number = format.x != null && !isNaN(format.x) ? format.x : 0;
         var y:Number = format.y != null && !isNaN(format.y) ? format.y : 0;
         var w:Number = format.w != null && !isNaN(format.w) ? format.w : NaN;
-        var h:Number = format.h != null  && !isNaN(format.h) ? format.h : NaN;
+        var h:Number = format.h != null && !isNaN(format.h) ? format.h : NaN;
 
         var img:UILoaderAlt = (UILoaderAlt)(mc.attachMovie("UILoaderAlt", "f" + n, mc.getNextHighestDepth()));
         img["data"] = {

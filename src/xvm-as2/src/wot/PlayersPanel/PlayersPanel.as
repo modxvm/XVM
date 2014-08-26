@@ -319,7 +319,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
     private function updateAlphasImpl()
     {
         wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
-        wrapper.m_list._alpha = Config.config.playersPanel.iconAlpha;
+        wrapper.m_list._alpha = 100;
     }
 
     // PRIVATE
