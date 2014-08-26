@@ -11,12 +11,12 @@ package xvm.tcarousel
 
     public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI
     {
-        private var cfg:CCarousel;
+        private static const SLOT_TYPE_TANK:int = 1;
+        private static const SLOT_TYPE_BUYTANK:int = 2;
+        private static const SLOT_TYPE_BUYSLOT:int = 3;
+        private static const SLOT_TYPE_EMPTY:int = 4;
 
-        private const SLOT_TYPE_TANK:int = 1;
-        private const SLOT_TYPE_BUYTANK:int = 2;
-        private const SLOT_TYPE_BUYSLOT:int = 3;
-        private const SLOT_TYPE_EMPTY:int = 4;
+        private var cfg:CCarousel;
 
         public function UI_TankCarousel(cfg:CCarousel)
         {
@@ -195,7 +195,7 @@ package xvm.tcarousel
                 if ((renderer as DisplayObject).visible == false)
                     continue;
                 renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = padding.vertical / 2 + (n % cfg.rows) * (slotImageHeight + padding.vertical);
+                renderer.y = (n % cfg.rows) * (slotImageHeight + padding.vertical);
                 if (renderer.selected)
                     selectedIndex = n;
                 if (checkRendererType(renderer, SLOT_TYPE_TANK))
@@ -209,21 +209,21 @@ package xvm.tcarousel
         {
             var renderer:IListItemRenderer;
 
-            var i:int = _currentShowRendersCount;
+            var n:int = _currentShowRendersCount;
             renderer = findSlot(SLOT_TYPE_BUYTANK);
             if (renderer != null)
             {
-                renderer.x = padding.horizontal + Math.floor(i / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = (i % cfg.rows) * (slotImageHeight + padding.vertical);
-                ++i;
+                renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
+                renderer.y = (n % cfg.rows) * (slotImageHeight + padding.vertical);
+                ++n;
             }
 
             renderer = findSlot(SLOT_TYPE_BUYSLOT);
             if (renderer != null)
             {
-                renderer.x = padding.horizontal + Math.floor(i / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = padding.vertical / 2 + (i % cfg.rows) * (slotImageHeight + padding.vertical);
-                ++i;
+                renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
+                renderer.y = (n % cfg.rows) * (slotImageHeight + padding.vertical);
+                ++n;
             }
         }
 

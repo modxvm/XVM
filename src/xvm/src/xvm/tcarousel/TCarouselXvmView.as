@@ -67,9 +67,9 @@ package xvm.tcarousel
             c.visible = page.carousel.visible;
             c.slotImageWidth = page.carousel.slotImageWidth * Config.config.hangar.carousel.zoom;
             c.slotImageHeight = page.carousel.slotImageHeight * Config.config.hangar.carousel.zoom;
-            c.height = (c.slotImageHeight + c.padding.vertical) * Config.config.hangar.carousel.rows;
-            c.leftArrow.height = c.rightArrow.height = c.height;
-            c.renderersMask.height = c.dragHitArea.height = c.height;
+            var h:int = (c.slotImageHeight + c.padding.vertical) * Config.config.hangar.carousel.rows - c.padding.vertical;
+            c.height = h + 10;
+            c.leftArrow.height = c.rightArrow.height = c.renderersMask.height = c.dragHitArea.height = h;
             c.itemRenderer = UI_TankCarouselItemRenderer;
             c.componentInspectorSetting = false;
 
