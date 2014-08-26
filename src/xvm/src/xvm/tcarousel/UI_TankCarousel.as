@@ -43,12 +43,20 @@ package xvm.tcarousel
             }
         }
 
-        // Carousel
-        override protected function goToFirstRenderer():void
+        // TankCarousel
+        override public function scrollToIndex(index:uint):void
         {
-            //Logger.add("goToFirstRenderer: " + currentFirstRenderer);
-            this.currentFirstRenderer = Math.floor(this.currentFirstRenderer / cfg.rows);
-            super.goToFirstRenderer();
+            Logger.add("scrollToIndex: " + index);
+            //super.scrollToIndex(index);
+            var n:uint = 0;
+            if ((container) && (_renderers))
+            {
+                n = Math.floor(_visibleSlots / 2);
+                n -= 1 - (_visibleSlots % 2);
+                n *= cfg.rows;
+                currentFirstRenderer = Math.min(_renderers.length - _visibleSlots, Math.max(0, index - n));
+                goToFirstRenderer();
+            }
         }
 
         // Carousel
@@ -99,7 +107,7 @@ package xvm.tcarousel
         override protected function set currentFirstRenderer(value:uint):void
         {
             var v:uint = Math.min(Math.max(Math.ceil((_renderers.length - _visibleSlots) / cfg.rows), 0), value);
-            //Logger.add(" value=" + value + " currentFirstRenderer=" + v);
+            Logger.add(" value=" + value + " currentFirstRenderer=" + v);
             super.currentFirstRenderer = v;
         }
 

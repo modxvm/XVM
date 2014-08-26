@@ -40,7 +40,7 @@
       "x": 5
     },
     "carousel": {
-      "zoom": 0.75,
+      //"zoom": 0.75,
       "rows": 2,
       "padding": { "horizontal": 2, "vertical": 2 },
       "hideBuyTank": false,
