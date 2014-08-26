@@ -40,6 +40,7 @@
       "x": 5
     },
     "carousel": {
+      //"enabled": false,
       //"zoom": 0.75,
       "rows": 2,
       "padding": { "horizontal": 2, "vertical": 2 },

@@ -151,6 +151,7 @@ package com.xvm.misc
                     strength: 2
                 };
             c.carousel = new CCarousel();
+            c.carousel.enabled = true;
             c.carousel.zoom = 1;
             c.carousel.rows = 1;
             c.carousel.padding = { horizontal:10, vertical:2 },

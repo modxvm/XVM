@@ -6,6 +6,7 @@ package com.xvm.types.cfg
 {
     public dynamic class CCarousel extends Object
     {
+        public var enabled:Boolean;
         public var zoom:Number;
         public var rows:Number;
         public var padding:Object;

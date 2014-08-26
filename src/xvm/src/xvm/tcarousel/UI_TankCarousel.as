@@ -4,6 +4,7 @@ package xvm.tcarousel
     import com.xvm.types.cfg.*;
     import flash.display.*;
     import flash.events.*;
+    import net.wg.gui.events.ListEventEx;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
     import scaleform.clik.constants.*;
@@ -26,24 +27,6 @@ package xvm.tcarousel
         }
 
         // TankCarousel
-        override protected function draw():void
-        {
-            super.draw();
-            if (isInvalid(InvalidationType.RENDERERS))
-            {
-                repositionRenderers();
-                repositionAdvancedSlots();
-                removeEmptySlots();
-                //Logger.add("_visibleSlots=" + _visibleSlots + " _renderers.length=" + _renderers.length);
-            }
-            if (isInvalid(InvalidationType.SIZE))
-            {
-                repositionAdvancedSlots();
-                removeEmptySlots();
-            }
-        }
-
-        // TankCarousel
         override public function scrollToIndex(index:uint):void
         {
             //Logger.add("scrollToIndex: " + index + " _visibleSlots: " + _visibleSlots);
@@ -53,6 +36,14 @@ package xvm.tcarousel
             index = Math.floor(index / cfg.rows);
             currentFirstRenderer = Math.max(0, index - n);
             goToFirstRenderer();
+        }
+
+        // TankCarousel
+        override public function as_setParams(param1:Object):void
+        {
+            super.as_setParams(param1);
+            repositionAdvancedSlots();
+            removeEmptySlots();
         }
 
         // Carousel
@@ -84,6 +75,17 @@ package xvm.tcarousel
         // Carousel
         override protected function updateUIPosition():void
         {
+            if (isInvalid(InvalidationType.RENDERERS))
+            {
+                //Logger.add("RENDERERS");
+                repositionRenderers();
+                //Logger.add("_visibleSlots=" + _visibleSlots + " _renderers.length=" + _renderers.length);
+            }
+
+            //Logger.add("updateUIPosition");
+            repositionAdvancedSlots();
+            removeEmptySlots();
+
             var slotWidth:Number = this.slotWidth;
             this.slotWidth /= cfg.rows;
             super.updateUIPosition();
@@ -96,7 +98,9 @@ package xvm.tcarousel
         // Carousel
         override protected function updateScopeWidth():void
         {
-            this.scopeWidth = Math.ceil(_renderers.length / cfg.rows) * this.slotWidth + this.padding.horizontal;
+            if (_renderers == null)
+                return;
+            this.scopeWidth = Math.ceil(Math.max(_renderers.length, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
         }
 
         // Carousel
@@ -118,6 +122,7 @@ package xvm.tcarousel
                     _currentFirstRendererOnAnim = Math.max(0, _renderers.length - this._visibleSlots);
                 //Logger.add("_currentFirstRendererOnAnim: " + _currentFirstRendererOnAnim);
             }
+            //Logger.add("getCurrentFirstRendererOnAnim: " + _currentFirstRendererOnAnim);
             return _currentFirstRendererOnAnim;
         }
 
@@ -211,11 +216,12 @@ package xvm.tcarousel
 
         private function repositionAdvancedSlots():void
         {
+            //Logger.add("repositionAdvancedSlots");
+
             var i:int;
             var renderer:IListItemRenderer;
-            var needUpdateScopeWidth:Boolean = false;
 
-            var n:int = _currentShowRendersCount;
+            _totalRenderers = _currentShowRendersCount;
 
             i = findSlotIndex(SLOT_TYPE_BUYTANK);
             if (i >= 0)
@@ -223,15 +229,17 @@ package xvm.tcarousel
                 renderer = getRendererAt(i);
                 if (Config.config.hangar.carousel.hideBuyTank == true)
                 {
-                    _renderers.splice(i, 1);
-                    (renderer as DisplayObject).visible = false;
-                    needUpdateScopeWidth = true;
+                    if (this._slotForBuyVehicle)
+                    {
+                        this.cleanUpRenderer(this._slotForBuyVehicle);
+                        this._slotForBuyVehicle = null;
+                    }
                 }
                 else
                 {
-                    renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
-                    renderer.y = (n % cfg.rows) * (slotImageHeight + padding.vertical);
-                    ++n;
+                    renderer.x = padding.horizontal + Math.floor(_totalRenderers / cfg.rows) * (slotImageWidth + padding.horizontal);
+                    renderer.y = (_totalRenderers % cfg.rows) * (slotImageHeight + padding.vertical);
+                    ++_totalRenderers;
                 }
             }
 
@@ -241,24 +249,26 @@ package xvm.tcarousel
                 renderer = getRendererAt(i);
                 if (Config.config.hangar.carousel.hideBuySlot == true)
                 {
-                    _renderers.splice(i, 1);
-                    (renderer as DisplayObject).visible = false;
-                    needUpdateScopeWidth = true;
+                    if (this._slotForBuySlot)
+                    {
+                        this.cleanUpRenderer(this._slotForBuySlot);
+                        this._slotForBuySlot = null;
+                    }
                 }
                 else
                 {
-                    renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
-                    renderer.y = (n % cfg.rows) * (slotImageHeight + padding.vertical);
-                    ++n;
+                    renderer.x = padding.horizontal + Math.floor(_totalRenderers / cfg.rows) * (slotImageWidth + padding.horizontal);
+                    renderer.y = (_totalRenderers % cfg.rows) * (slotImageHeight + padding.vertical);
+                    ++_totalRenderers;
                 }
             }
-
-            if (needUpdateScopeWidth)
-                updateScopeWidth();
         }
 
         private function removeEmptySlots():void
         {
+            //Logger.add("removeEmptySlots");
+            if (_renderers == null)
+                return;
             while(true)
             {
                 var renderer:IListItemRenderer = getRendererAt(_renderers.length - 1);

@@ -28,7 +28,8 @@ package xvm.tcarousel
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
-            replaceCarouselControl();
+            if (Config.config.hangar.carousel.enabled)
+                replaceCarouselControl();
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
@@ -36,7 +37,8 @@ package xvm.tcarousel
             //Logger.addObject("onAfterPopulate: " + view.as_alias);
             try
             {
-                init();
+                if (Config.config.hangar.carousel.enabled)
+                    init();
             }
             catch (ex:Error)
             {
