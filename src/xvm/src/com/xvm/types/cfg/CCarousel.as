@@ -9,6 +9,8 @@ package com.xvm.types.cfg
         public var zoom:Number;
         public var rows:Number;
         public var padding:Object;
+        public var hideBuyTank:Boolean;
+        public var hideBuySlot:Boolean;
         public var extraFields:Array;
     }
 }

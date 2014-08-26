@@ -207,23 +207,43 @@ package xvm.tcarousel
 
         private function repositionAdvancedSlots():void
         {
+            var i:int;
             var renderer:IListItemRenderer;
 
             var n:int = _currentShowRendersCount;
-            renderer = findSlot(SLOT_TYPE_BUYTANK);
-            if (renderer != null)
+
+            i = findSlotIndex(SLOT_TYPE_BUYTANK);
+            if (i >= 0)
             {
-                renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = (n % cfg.rows) * (slotImageHeight + padding.vertical);
-                ++n;
+                renderer = getRendererAt(i);
+                if (Config.config.hangar.carousel.hideBuyTank == true)
+                {
+                    _renderers.splice(i, 1);
+                    (renderer as DisplayObject).visible = false;
+                }
+                else
+                {
+                    renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
+                    renderer.y = (n % cfg.rows) * (slotImageHeight + padding.vertical);
+                    ++n;
+                }
             }
 
-            renderer = findSlot(SLOT_TYPE_BUYSLOT);
-            if (renderer != null)
+            i = findSlotIndex(SLOT_TYPE_BUYSLOT);
+            if (i > 0)
             {
-                renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
-                renderer.y = (n % cfg.rows) * (slotImageHeight + padding.vertical);
-                ++n;
+                renderer = getRendererAt(i);
+                if (Config.config.hangar.carousel.hideBuySlot == true)
+                {
+                    _renderers.splice(i, 1);
+                    (renderer as DisplayObject).visible = false;
+                }
+                else
+                {
+                    renderer.x = padding.horizontal + Math.floor(n / cfg.rows) * (slotImageWidth + padding.horizontal);
+                    renderer.y = (n % cfg.rows) * (slotImageHeight + padding.vertical);
+                    ++n;
+                }
             }
         }
 
@@ -234,7 +254,6 @@ package xvm.tcarousel
                 var renderer:IListItemRenderer = getRendererAt(_renderers.length - 1);
                 if (checkRendererType(renderer, SLOT_TYPE_EMPTY))
                 {
-                    _renderers.splice(_renderers.length - 1, 1);
                     cleanUpRenderer(renderer);
                     continue;
                 }
