@@ -213,6 +213,7 @@ package xvm.tcarousel
         {
             var i:int;
             var renderer:IListItemRenderer;
+            var needUpdateScopeWidth:Boolean = false;
 
             var n:int = _currentShowRendersCount;
 
@@ -224,6 +225,7 @@ package xvm.tcarousel
                 {
                     _renderers.splice(i, 1);
                     (renderer as DisplayObject).visible = false;
+                    needUpdateScopeWidth = true;
                 }
                 else
                 {
@@ -234,13 +236,14 @@ package xvm.tcarousel
             }
 
             i = findSlotIndex(SLOT_TYPE_BUYSLOT);
-            if (i > 0)
+            if (i >= 0)
             {
                 renderer = getRendererAt(i);
                 if (Config.config.hangar.carousel.hideBuySlot == true)
                 {
                     _renderers.splice(i, 1);
                     (renderer as DisplayObject).visible = false;
+                    needUpdateScopeWidth = true;
                 }
                 else
                 {
@@ -249,6 +252,9 @@ package xvm.tcarousel
                     ++n;
                 }
             }
+
+            if (needUpdateScopeWidth)
+                updateScopeWidth();
         }
 
         private function removeEmptySlots():void

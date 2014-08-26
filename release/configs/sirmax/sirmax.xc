@@ -43,8 +43,8 @@
       //"zoom": 0.75,
       "rows": 2,
       "padding": { "horizontal": 2, "vertical": 2 },
-      "hideBuyTank": false,
-      "hideBuySlot": false,
+      //"hideBuyTank": true,
+      //"hideBuySlot": true,
       "extraFields": [
 
       ]
