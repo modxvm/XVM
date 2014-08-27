@@ -10,18 +10,25 @@ package xvm.tcarousel
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
         private var extraFields:Sprite;
+        private var zoomSet:Boolean;
 
         public function UI_TankCarouselItemRenderer()
         {
             super();
+            zoomSet = false;
             createExtraFields();
+        }
+
+        override protected function configUI():void
+        {
+            super.configUI();
         }
 
         override protected function draw():void
         {
             super.draw();
 
-            scaleX = scaleY = Config.config.hangar.carousel.zoom;
+            setZoom();
 
             /*
             if (!masteryTF)
@@ -83,5 +90,33 @@ package xvm.tcarousel
             vehicleIcon.addChild(masteryTF);*/
         }
 
+        private function setZoom():void
+        {
+            scaleX = scaleY = Config.config.hangar.carousel.zoom;
+
+            if (vehicleIcon == null)
+                return;
+
+            if (zoomSet)
+                return;
+
+            zoomSet = true;
+
+            var z:Number = 1 / Config.config.hangar.carousel.zoom;
+
+            vehicleIcon.tankTypeMc.scaleX = vehicleIcon.tankTypeMc.scaleY = z;
+
+            vehicleIcon.levelMc.scaleX = vehicleIcon.levelMc.scaleY = z;
+            vehicleIcon.levelMc.x = 30;
+            vehicleIcon.levelMc.y = 2;
+
+            vehicleIcon.multyXp.scaleX = vehicleIcon.multyXp.scaleY = z;
+            vehicleIcon.multyXp.x = width - 35;
+            vehicleIcon.multyXp.y = 2;
+
+            vehicleIcon.xp.scaleX = vehicleIcon.xp.scaleY = z;
+
+            //vehicleIcon.tankNameField.scaleX = vehicleIcon.tankNameField.scaleY = z;
+        }
     }
 }

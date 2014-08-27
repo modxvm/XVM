@@ -41,7 +41,9 @@
     },
     "carousel": {
       //"enabled": false,
-      //"zoom": 0.75,
+      //"zoom": 0.66,
+      //"zoom": 0.70,
+      "zoom": 0.75,
       "rows": 2,
       "padding": { "horizontal": 2, "vertical": 2 },
       //"hideBuyTank": true,
