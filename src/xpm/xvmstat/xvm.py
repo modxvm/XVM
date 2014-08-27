@@ -124,18 +124,22 @@ class Xvm(object):
         return args
 
     def extendVehicleMarkerArgs(self, handle, function, args):
-        if function == 'init':
-            #debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
-            v = utils.getVehicleByName(args[5])
-            args.extend([
-                v.publicInfo.marksOnGun,
-                utils.getVehicleInfo(v.id).vehicleStatus,
-                utils.getVehicleStats(v.id).frags,
-            ])
-        elif function not in ['showExInfo']:
-            #debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))
-            pass
-        return args
+        try:
+            if function == 'init':
+                if len(args) > 5:
+                    #debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
+                    v = utils.getVehicleByName(args[5])
+                    args.extend([
+                        v.publicInfo.marksOnGun,
+                        utils.getVehicleInfo(v.id).vehicleStatus,
+                        utils.getVehicleStats(v.id).frags,
+                    ])
+            elif function not in ['showExInfo']:
+                #debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))
+                pass
+            return args
+        except Exception, ex:
+            err('extendVehicleMarkerArgs(): ' + traceback.format_exc())
 
     def onKeyEvent(self, event):
         try:
