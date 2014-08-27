@@ -1,6 +1,6 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm
---- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-26 20:41:04.304508100 +0300
-+++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-26 20:41:29.051362300 +0300
+--- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-27 20:11:25.951511700 +0300
++++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-08-27 20:11:51.411547400 +0300
 @@ -63,8 +63,8 @@
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "lastDx") type QName(PackageNamespace(""), "Number") value Integer(0) end
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "allowDrag") type QName(PackageNamespace(""), "Boolean") value False() end
@@ -192,8 +192,8 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        getproperty         QName(PackageNamespace(""), "renderersMask")
        getproperty         QName(PackageNamespace(""), "width")
 diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm Application.orig-0/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm
---- Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-08-26 20:41:11.724636800 +0300
-+++ Application.orig-0/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-08-26 20:42:20.733401600 +0300
+--- Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-08-27 20:11:33.361522100 +0300
++++ Application.orig-0/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-08-27 20:12:19.751587000 +0300
 @@ -119,8 +119,8 @@
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_createdRendersListByCompDescr") type QName(PackageNamespace(""), "Object") value Null() end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_createdRendersListByCompDescrLength") type QName(PackageNamespace(""), "Number") value Integer(0) end
@@ -302,6 +302,24 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        callpropvoid        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "push"), 1
  
        getlocal0
+@@ -1582,7 +1582,7 @@
+       initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_updateShowByCompactDescription")
+ 
+       getlocal0
+-      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "showHideFilters"), 0
++      callpropvoid        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "showHideFilters"), 0
+ 
+       getlocal0
+       callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "addAdvancedSlots"), 0
+@@ -1604,7 +1604,7 @@
+       iffalse             L175
+ 
+       getlocal0
+-      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "showHideFilters"), 0
++      callpropvoid        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "showHideFilters"), 0
+ 
+       getlocal0
+       callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "updateEmptySlots"), 0
 @@ -2148,7 +2148,7 @@
        getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_currentShowRendersByIndex")
        getproperty         QName(PackageNamespace(""), "length")
@@ -320,6 +338,15 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace("net.wg.gui.lobby.hangar.tcarousel.helper"), "VehicleCarouselVOBuilder")
        getproperty         QName(PackageNamespace(""), "instance")
        getlocal0
+@@ -2668,7 +2668,7 @@
+     end ; body
+    end ; method
+   end ; trait
+-  trait method QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "showHideFilters")
++  trait method QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "showHideFilters")
+    method
+     refid "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance/net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance/showHideFilters"
+     returns QName(PackageNamespace(""), "void")
 @@ -3796,12 +3796,12 @@
        callpropvoid        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "cleanUpRenderer"), 1
  

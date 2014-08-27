@@ -155,6 +155,7 @@ package com.xvm.misc
             c.carousel.zoom = 1;
             c.carousel.rows = 1;
             c.carousel.padding = { horizontal:10, vertical:2 },
+            c.carousel.alwaysShowFilters = false;
             c.carousel.hideBuyTank = false;
             c.carousel.hideBuySlot = false;
             c.carousel.extraFields = [];

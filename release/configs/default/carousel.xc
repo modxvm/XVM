@@ -8,6 +8,7 @@
     "zoom": 1,
     "rows": 1,
     "padding": { "horizontal": 10, "vertical": 2 },
+    "alwaysShowFilters": false,
     "hideBuyTank": false,
     "hideBuySlot": false,
     "extraFields": [

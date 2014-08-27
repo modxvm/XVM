@@ -102,6 +102,8 @@ package xvm.tcarousel
 
             zoomSet = true;
 
+            return;
+
             var z:Number = 1 / Config.config.hangar.carousel.zoom;
 
             vehicleIcon.tankTypeMc.scaleX = vehicleIcon.tankTypeMc.scaleY = z;

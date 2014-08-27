@@ -148,6 +148,27 @@ package xvm.tcarousel
             super.handleMouseWheel(param1);
         }
 
+        override protected function showHideFilters():void
+        {
+            if (Config.config.hangar.carousel.alwaysShowFilters == true)
+            {
+                leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
+                this.vehicleFilters.visible = true;
+                updateDefContainerPos();
+                if (container && (slidingIntervalId == 0) && !isTween)
+                {
+                    container.x = _defContainerPos - currentFirstRenderer * slotWidth;
+                    renderersMask.x = leftArrow.x + leftArrow.width;
+                    dragHitArea.x = renderersMask.x;
+                }
+                updateVisibleSlotsCount();
+            }
+            else
+            {
+                super.showHideFilters();
+            }
+        }
+
         // PRIVATE
 
         private function checkRendererType(renderer:IListItemRenderer, slotType:int):Boolean

@@ -721,7 +721,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         this.checkBoxToMain.addEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
     }
     
-    private function showHideFilters() : void
+    protected function showHideFilters() : void
     {
         updateVisibleSlotsCount();
         var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);
