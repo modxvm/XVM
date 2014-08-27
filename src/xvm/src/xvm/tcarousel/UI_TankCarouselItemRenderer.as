@@ -10,12 +10,10 @@ package xvm.tcarousel
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
         private var extraFields:Sprite;
-        private var zoomSet:Boolean;
 
         public function UI_TankCarouselItemRenderer()
         {
             super();
-            zoomSet = false;
             createExtraFields();
         }
 
@@ -26,9 +24,9 @@ package xvm.tcarousel
 
         override protected function draw():void
         {
+            //Logger.add("draw");
             super.draw();
-
-            setZoom();
+            scaleX = scaleY = Config.config.hangar.carousel.zoom;
 
             /*
             if (!masteryTF)
@@ -69,8 +67,40 @@ package xvm.tcarousel
         {
             if (!vehicleIcon)
                 return;
+
+            var w:int = width * Config.config.hangar.carousel.zoom;
+            var h:int = height * Config.config.hangar.carousel.zoom;
+
             extraFields = new Sprite();
-            this.addChild(extraFields);
+            extraFields.scaleX = extraFields.scaleY = 1 / Config.config.hangar.carousel.zoom;
+            //extraFields.graphics.beginFill(0xFFFFFF, 0.3); extraFields.graphics.drawRect(0, 0, w, h); extraFields.graphics.endFill();
+            vehicleIcon.addChild(extraFields);
+
+            vehicleIcon.removeChild(vehicleIcon.tankTypeMc);
+            extraFields.addChild(vehicleIcon.tankTypeMc);
+
+            vehicleIcon.removeChild(vehicleIcon.levelMc);
+            extraFields.addChild(vehicleIcon.levelMc);
+
+            vehicleIcon.removeChild(vehicleIcon.xp);
+            extraFields.addChild(vehicleIcon.xp);
+
+            vehicleIcon.removeChild(vehicleIcon.multyXp);
+            extraFields.addChild(vehicleIcon.multyXp);
+            vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width - 2;
+            vehicleIcon.multyXp.y = 1;
+
+            /*
+            vehicleIcon.removeChild(vehicleIcon.tankNameField);
+            extraFields.addChild(vehicleIcon.tankNameField);
+            vehicleIcon.tankNameField.x = w - vehicleIcon.tankNameField.width - 2;
+            vehicleIcon.tankNameField.y = h - vehicleIcon.tankNameField.height - 2;
+
+            vehicleIcon.removeChild(vehicleIcon.tankNameBg);
+            extraFields.addChild(vehicleIcon.tankNameBg);
+            vehicleIcon.tankNameBg.x = w - vehicleIcon.tankNameBg.width - 2;
+            vehicleIcon.tankNameBg.y = h - vehicleIcon.tankNameBg.height - 2;
+            */
 
             var tf:TextField = new TextField();
             tf.x = -1;
@@ -88,37 +118,6 @@ package xvm.tcarousel
             masteryTF.height = 32;
             masteryTF.selectable = false;
             vehicleIcon.addChild(masteryTF);*/
-        }
-
-        private function setZoom():void
-        {
-            scaleX = scaleY = Config.config.hangar.carousel.zoom;
-
-            if (vehicleIcon == null)
-                return;
-
-            if (zoomSet)
-                return;
-
-            zoomSet = true;
-
-            return;
-
-            var z:Number = 1 / Config.config.hangar.carousel.zoom;
-
-            vehicleIcon.tankTypeMc.scaleX = vehicleIcon.tankTypeMc.scaleY = z;
-
-            vehicleIcon.levelMc.scaleX = vehicleIcon.levelMc.scaleY = z;
-            vehicleIcon.levelMc.x = 30;
-            vehicleIcon.levelMc.y = 2;
-
-            vehicleIcon.multyXp.scaleX = vehicleIcon.multyXp.scaleY = z;
-            vehicleIcon.multyXp.x = width - 35;
-            vehicleIcon.multyXp.y = 2;
-
-            vehicleIcon.xp.scaleX = vehicleIcon.xp.scaleY = z;
-
-            //vehicleIcon.tankNameField.scaleX = vehicleIcon.tankNameField.scaleY = z;
         }
     }
 }
