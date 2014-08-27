@@ -129,17 +129,18 @@ class Xvm(object):
                 if len(args) > 5:
                     #debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
                     v = utils.getVehicleByName(args[5])
-                    args.extend([
-                        v.publicInfo.marksOnGun,
-                        utils.getVehicleInfo(v.id).vehicleStatus,
-                        utils.getVehicleStats(v.id).frags,
-                    ])
+                    if hasattr(v, 'publicInfo'): 
+                        args.extend([
+                            v.publicInfo.marksOnGun,
+                            utils.getVehicleInfo(v.id).vehicleStatus,
+                            utils.getVehicleStats(v.id).frags,
+                        ])
             elif function not in ['showExInfo']:
                 #debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))
                 pass
-            return args
         except Exception, ex:
             err('extendVehicleMarkerArgs(): ' + traceback.format_exc())
+        return args
 
     def onKeyEvent(self, event):
         try:
