@@ -5,11 +5,12 @@
 package com.xvm.utils
 {
     import com.xvm.*;
+    import com.xvm.types.*;
     import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
     import flash.utils.*;
-    import org.idmedia.as3commons.util.StringUtils;
+    import org.idmedia.as3commons.util.*;
 
     public class Macros
     {
@@ -549,18 +550,4 @@ package com.xvm.utils
             Logger.add("");
         }
     }
-}
-
-
-class MacrosFormatOptions
-{
-    public var skip:Object = null;
-    public var curHealth:int = NaN;
-    public var delta:int = NaN;
-    public var damageType:String = null;
-    public var damageFlag:int = NaN;
-    public var entityName:String = null;
-    public var dead:Boolean = false;
-    public var blowedUp:Boolean = false;
-    public var darken:Boolean = false;
 }
