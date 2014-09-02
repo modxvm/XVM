@@ -32,10 +32,10 @@ package com.xvm
         public static const XVMMODS_ROOT:String = XVM_ROOT + "mods/";
 
         // res_mods/xvm/ (for <img> tag)
-        public static const XVM_IMG_ROOT:String = "../";
+        public static const XVM_IMG_ROOT:String = "../xvm/";
 
         // res_mods/xvm/res/ (for <img> tag)
-        public static const XVMRES_IMG_ROOT:String = "../res/";
+        public static const XVMRES_IMG_ROOT:String = "../xvm/res/";
 
         // res_mods/xvm/res/SixthSense.png
         public static const SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";

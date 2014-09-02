@@ -6,21 +6,26 @@
     import flash.display.*;
     import flash.filters.*;
     import flash.text.*;
+    import flash.utils.*;
+    import net.wg.gui.components.controls.*;
+    import scaleform.gfx.*;
 
     public class ExtraFields
     {
-        public static function createExtraFields(owner:Sprite, width:Number, height:Number, cfg:Object):void
+        public static function createExtraFields(owner:MovieClip, width:Number, height:Number, cfg:Object):void
         {
             if (cfg == null)
                 return;
 
-            owner["cfg"] = cfg;
+            //Logger.addObject(cfg, 2);
+            owner.cfg = cfg;
 
-            var len:int = cfg.formats.length;
-            owner["formats"] = [];
+            var len:int = cfg.length;
+            owner.formats = [];
+            owner.data = {};
             for (var i:int = 0; i < len; ++i)
             {
-                var format:Object = cfg.formats[i];
+                var format:Object = cfg[i];
 
                 if (format == null)
                     continue;
@@ -28,7 +33,7 @@
                 if (typeof format == "string")
                 {
                     format = { format: format };
-                    cfg.formats[i] = format;
+                    cfg[i] = format;
                 }
 
                 if (typeof format != "object")
@@ -47,103 +52,53 @@
                 var fmt:Object = { };
                 for (var n:String in format)
                     fmt[n] = format[n];
-                owner["formats"].push(fmt);
+                owner.formats.push(fmt);
 
-                Logger.add("createExtraTextField: " + fmt);
+                //Logger.addObject(fmt);
 
-                //if (fmt.src != null)
-                //    createExtraMovieClip(mc, fmt, mc.formats.length - 1);
-                //else
-                    createExtraTextField(owner, fmt, owner["formats"].length - 1, width, height);
+                createExtraTextField(owner, fmt, owner.formats.length - 1, width, height);
             }
         }
 
-        public static function updateExtraFields(owner:Sprite):void
+        public static function updateExtraFields(owner:MovieClip):void
         {
             //Logger.add("updateExtraFields");
             //var obj = BattleState.getUserData(m_name);
-            var formats:Array = owner["formats"];
+            var formats:Array = owner.formats;
             var len:Number = formats.length;
             for (var i:Number = 0; i < len; ++i)
-                _internal_update(owner["f" + i], formats[i], null /*obj*/);
+            {
+                var field:DisplayObject = owner.getChildByName("f" + i);
+                if (field != null)
+                    _internal_update(field, formats[i], null /*obj*/);
+            }
         }
 
-
-        /*private function createExtraMovieClip(mc:MovieClip, format:Object, n:Number)
-        {
-            //Logger.addObject(format);
-            var x:Number = format.x != null && !isNaN(format.x) ? format.x : 0;
-            var y:Number = format.y != null && !isNaN(format.y) ? format.y : 0;
-            var w:Number = format.w != null && !isNaN(format.w) ? format.w : NaN;
-            var h:Number = format.h != null && !isNaN(format.h) ? format.h : NaN;
-
-            var img:UILoaderAlt = (UILoaderAlt)(mc.attachMovie("UILoaderAlt", "f" + n, mc.getNextHighestDepth()));
-            img["data"] = {
-                x: x, y: y, w: w, h: h,
-                format: format,
-                align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
-            };
-            //Logger.addObject(img["data"]);
-
-            img._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
-            img._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
-
-            img.autoSize = true;
-            img.maintainAspectRatio = false;
-            var me = this;
-            img.visible = false;
-            img.onLoadInit = function() { me.onExtraMovieClipLoadInit(img); }
-
-            cleanupFormat(img, format);
-
-            return img;
-        }
-
-        private function onExtraMovieClipLoadInit(img:UILoaderAlt)
-        {
-            //Logger.add("onExtraMovieClipLoadInit: " + m_name + " " + img.source);
-
-            var data = img["data"];
-            if (isNaN(data.w) && data.format.w == null)
-                data.w = img.content._width;
-            if (isNaN(data.h) && data.format.h == null)
-                data.h = img.content._height;
-            //Logger.addObject(data, 2, m_name);
-
-            img.visible = false;
-            img._x = 0;
-            img._y = 0;
-            img.width = 0;
-            img.height = 0;
-            alignField(img);
-
-            setTimeout(function() { img.visible = true; }, 1);
-        }*/
-
-        private static function createExtraTextField(owner:Sprite, format:Object, n:Number, defW:Number, defH:Number):TextField
+        private static function createExtraTextField(owner:MovieClip, format:Object, n:Number, defW:Number, defH:Number):TextField
         {
             //Logger.addObject(format);
             var x:Number = format.x != null && !isNaN(format.x) ? format.x : 0;
             var y:Number = format.y != null && !isNaN(format.y) ? format.y : 0;
             var w:Number = format.w != null && !isNaN(format.w) ? format.w : defW;
             var h:Number = format.h != null  && !isNaN(format.h) ? format.h : defH;
+
             var tf:TextField = owner.addChild(new TextField()) as TextField;
             tf.name = "f" + n;
-            tf["data"] = {
+            owner.data[tf.name] = {
                 x: x, y: y, w: w, h: h,
                 align: format.align
             };
 
-            tf.alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
+            tf.alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha / 100.0 : 1;
             tf.rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
 
             tf.selectable = false;
             tf.multiline = true;
             tf.wordWrap = false;
-            tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : "advanced";
-            tf.autoSize = "none";
-            //tf.verticalAlign = format.valign != null ? format.valign : "none";
-            //tf.styleSheet =  Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
+            tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : AntiAliasType.ADVANCED;
+            tf.autoSize = TextFieldAutoSize.NONE;
+            TextFieldEx.setVerticalAlign(tf, format.valign != null ? format.valign : TextFieldEx.VALIGN_NONE);
+            tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
 
             tf.border = format.borderColor != null;
             tf.borderColor = format.borderColor != null && !isNaN(format.borderColor) ? format.borderColor : 0xCCCCCC;
@@ -201,9 +156,8 @@
         private static function alignField(field:DisplayObject):void
         {
             var tf:TextField = field as TextField;
-            //var img:UILoaderAlt = UILoaderAlt(field);
 
-            var data:Object = field["data"];
+            var data:Object = (field.parent as MovieClip).data[field.name];
             //Logger.addObject(data);
 
             var x:Number = data.x;
@@ -235,19 +189,6 @@
                 if (tf.height != h)
                     tf.height = h;
             }
-            else
-            {
-                /*if (img.x != x)
-                    img.x = x;
-                if (img.y != y)
-                    img.y = y;
-                if (img.width != w || img.height != h)
-                {
-                    //Logger.add(img.width + "->" + w + " " + x + " " + y + " " + m_name + " " + wrapper._name);
-                    img.setSize(w, h);
-                    img.validateNow();
-                }*/
-            }
         }
 
         private static function _internal_update(f:DisplayObject, format:Object, options:MacrosFormatOptions):void
@@ -257,7 +198,7 @@
             var tf:TextField = f as TextField;
 
             var needAlign:Boolean = false;
-            var data:Object = f["data"];
+            var data:Object = (f.parent as MovieClip).data[f.name];
 
             if (format.x != null)
             {
@@ -282,7 +223,7 @@
             if (format.alpha != null)
             {
                 var alpha:Number = parseFloat(Macros.Format(m_name, format.alpha, options));
-                f.alpha = isNaN(alpha) ? 100 : alpha;
+                f.alpha = isNaN(alpha) ? 1 : alpha / 100.0;
             }
             if (format.rotation != null)
                 f.rotation = parseFloat(Macros.Format(m_name, format.rotation, options)) || 0;
@@ -294,26 +235,10 @@
             if (format.format != null && tf != null)
             {
                 var txt:String = Macros.Format(m_name, format.format, options);
-                //Logger.add(m_name + " " + txt);
+                //Logger.add(txt);
                 tf.htmlText = "<span class='extraField'>" + txt + "</span>";
-                //if (format.format.indexOf("{{") < 0) // TODO
-                //    delete format.format;
                 needAlign = true;
             }
-
-            /*if (format.src != null)
-            {
-                //var dead = (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
-                //Logger.add(dead + " " + obj.dead + " " + m_name);
-                var src:String = Macros.Format(m_name, format.src, options);
-                src = "../../" + Utils.fixImgTag(src).split("img://").join("");
-                if (f.source != src)
-                {
-                    //Logger.add(m_name + " " + f.source + " => " + src);
-                    f._visible = false;
-                    f.source = src;
-                }
-            }*/
 
             if (needAlign)
                 alignField(f);

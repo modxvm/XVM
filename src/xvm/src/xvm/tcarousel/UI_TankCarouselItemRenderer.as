@@ -10,7 +10,7 @@ package xvm.tcarousel
 
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
-        private var extraFields:Sprite;
+        private var extraFields:MovieClip;
 
         public function UI_TankCarouselItemRenderer()
         {
@@ -25,11 +25,18 @@ package xvm.tcarousel
 
         override protected function draw():void
         {
-            //Logger.add("draw");
-            super.draw();
-            scaleX = scaleY = Config.config.hangar.carousel.zoom;
+            try
+            {
+                //Logger.add("draw");
+                super.draw();
+                scaleX = scaleY = Config.config.hangar.carousel.zoom;
 
-            //ExtraFields.updateExtraFields(extraFields);
+                ExtraFields.updateExtraFields(extraFields);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
 
             /*
             if (!masteryTF)
@@ -79,7 +86,7 @@ package xvm.tcarousel
                 var w:int = width * zoom;
                 var h:int = height * zoom;
 
-                extraFields = new Sprite();
+                extraFields = new MovieClip();
                 extraFields.scaleX = extraFields.scaleY = 1 / zoom;
                 //extraFields.graphics.beginFill(0xFFFFFF, 0.3); extraFields.graphics.drawRect(0, 0, w, h); extraFields.graphics.endFill();
                 vehicleIcon.addChild(extraFields);
@@ -96,7 +103,7 @@ package xvm.tcarousel
 
                 setupTankNameField(Config.config.hangar.carousel.fields.tankName, zoom);
 
-                //ExtraFields.createExtraFields(extraFields, w, h, Config.config.hangar.carousel.extraFields);
+                ExtraFields.createExtraFields(extraFields, w, h, Config.config.hangar.carousel.extraFields);
             }
             catch (ex:Error)
             {
