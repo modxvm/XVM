@@ -4,6 +4,7 @@ package xvm.tcarousel
     import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import flash.display.*;
+    import flash.geom.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
 
