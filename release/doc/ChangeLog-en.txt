@@ -1,4 +1,4 @@
-﻿XVM-5.3.4-dev:
+﻿XVM-5.3.4:
   * new macros:
       {{ready}}, returns "ready" when player loaded to the game and empty if not
       {{gun-marks}}, return count of the marks on gun for spotted vehicles
