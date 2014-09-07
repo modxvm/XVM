@@ -59,8 +59,8 @@ package xvm.hangar.views
 
         private function hideTutorial():void
         {
-            if (Config.config.hangar.hideTutorial == true)
-                page.header.tutorialControl.y = -10000;
+            // TODO:0.9.3 if (Config.config.hangar.hideTutorial == true)
+            // TODO:0.9.3     page.header.tutorialControl.y = -10000;
         }
     }
 

@@ -9,6 +9,8 @@ package xvm.profile
     import com.xvm.misc.*;
     import com.xvm.utils.*;
     import net.wg.gui.lobby.*;
+    import net.wg.gui.lobby.header.headerButtonBar.*;
+    import net.wg.gui.lobby.header.vo.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 
@@ -26,7 +28,9 @@ package xvm.profile
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            Globals[Globals.NAME] = page.header.tankPanel.account_name.userVO.userName;
+            var accountData:HBC_AccountDataVo = HBC_AccountDataVo(page.header._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
+            if (accountData)
+                Globals[Globals.NAME] = accountData.userVO.userName;
         }
     }
 

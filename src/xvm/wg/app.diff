@@ -122,6 +122,18 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app
          
          public var checkBoxToMain:CheckBox;
          
+diff -Naur app.orig/net/wg/gui/lobby/header/LobbyHeader.as app/net/wg/gui/lobby/header/LobbyHeader.as
+--- app.orig/net/wg/gui/lobby/header/LobbyHeader.as	2014-09-06 22:45:34.445059100 +0300
++++ app/net/wg/gui/lobby/header/LobbyHeader.as	2014-09-07 19:45:58.931896400 +0300
+@@ -55,7 +55,7 @@
+         
+         private var _mainMenuHelper:MainMenuHelper;
+         
+-        private var _headerButtonsHelper:HeaderButtonsHelper;
++        protected var _headerButtonsHelper:HeaderButtonsHelper;
+         
+         private var _isShowHelpLayout:Boolean = false;
+         
 diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/gui/lobby/profile/ProfileTabNavigator.as
 --- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-09-06 22:44:34.408953000 +0300
 +++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-09-06 22:49:46.956985100 +0300

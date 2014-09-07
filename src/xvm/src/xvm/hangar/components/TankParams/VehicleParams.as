@@ -8,6 +8,7 @@ package xvm.hangar.components.TankParams
     import com.xvm.types.cfg.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.*;
+    import net.wg.gui.lobby.hangar.data.*;
     import scaleform.clik.data.*;
 
     public class VehicleParams
@@ -36,7 +37,7 @@ package xvm.hangar.components.TankParams
                 "<font color='" + reloadTimeColor1 + "'>" + Locale.get("gun_reload_time/actual") + " </font>" +
                 "<font color='" + reloadTimeColor2 + "'>" + Locale.get("(sec)") + "</font>";
             if (getIndex(dp, "xvm_reloadTime") < 0)
-                dp.splice(idx + 1, 0, new ParamsVO( { text: "xvm_reloadTime", param: v_reloadTime, selected: false } ));
+                dp.splice(idx + 1, 0, new HangarParamVO( { text: "xvm_reloadTime", param: v_reloadTime, selected: false } ));
 
             // View range
             idx = getIndex(dp, "circularVisionRadius");

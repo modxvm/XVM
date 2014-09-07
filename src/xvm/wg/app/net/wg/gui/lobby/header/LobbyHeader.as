@@ -55,7 +55,7 @@ package net.wg.gui.lobby.header
         
         private var _mainMenuHelper:MainMenuHelper;
         
-        private var _headerButtonsHelper:HeaderButtonsHelper;
+        public var _headerButtonsHelper:HeaderButtonsHelper;
         
         private var _isShowHelpLayout:Boolean = false;
         
