@@ -112,9 +112,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         private var _vehiclesVOManager:VehicleCarouselVOManager = null;
         
-        private var _slotForBuySlot:IListItemRenderer = null;
+        protected var _slotForBuySlot:IListItemRenderer = null;
         
-        private var _slotForBuyVehicle:IListItemRenderer = null;
+        protected var _slotForBuyVehicle:IListItemRenderer = null;
         
         private var _updateInProgress:Boolean = false;
         
@@ -734,7 +734,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         this.checkBoxToMain.addEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
     }
     
-    private function showHideFilters() : void
+    protected function showHideFilters() : void
     {
         updateVisibleSlotsCount();
         var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);
