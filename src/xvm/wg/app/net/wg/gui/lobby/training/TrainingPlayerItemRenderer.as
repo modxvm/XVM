@@ -7,6 +7,7 @@ package net.wg.gui.lobby.training
     import flash.geom.ColorTransform;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.components.controls.VoiceWave;
+    import net.wg.data.constants.Cursors;
     import scaleform.clik.utils.Constraints;
     import flash.events.MouseEvent;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
@@ -47,12 +48,19 @@ package net.wg.gui.lobby.training
         
         private var _isMouseOver:Boolean = false;
         
+        public function get getCursorType() : String
+        {
+            return Cursors.DRAG_OPEN;
+        }
+        
         override protected function configUI() : void
         {
             super.configUI();
             if(!constraintsDisabled)
             {
-                constraints.addElement(this.vehicleField.name,this.vehicleField,Constraints.RIGHT);
+                constraints.addElement(this.vehicleField.name,this.vehicleField,Constraints.LEFT);
+                constraints.addElement(this.vehicleLevelField.name,this.vehicleLevelField,Constraints.LEFT);
+                constraints.addElement(this.stateField.name,this.stateField,Constraints.RIGHT);
             }
             this.defColorTrans = this.iconLoader.transform.colorTransform;
             this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
@@ -228,6 +236,21 @@ package net.wg.gui.lobby.training
                     if(this.voiceWave)
                     {
                         this.voiceWave.setMuted(false);
+                    }
+                }
+            }
+            if(isInvalid(InvalidationType.SIZE))
+            {
+                if(!preventAutosizing)
+                {
+                    alignForAutoSize();
+                    setActualSize(_width,_height);
+                }
+                if(!constraintsDisabled)
+                {
+                    if(constraints)
+                    {
+                        constraints.update(_width,_height);
                     }
                 }
             }

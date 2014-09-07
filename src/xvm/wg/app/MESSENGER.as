@@ -236,17 +236,33 @@ package
         
         public static var DIALOGS_SERVICECHANNEL_TITLE:String = "#messenger:dialogs/serviceChannel/title";
         
+        public static var DIALOGS_SQUAD_MESSAGE_ALLREADY:String = "#messenger:dialogs/squad/message/allReady";
+        
+        public static var DIALOGS_SQUAD_MESSAGE_GETREADY:String = "#messenger:dialogs/squad/message/getReady";
+        
+        public static var DIALOGS_SQUAD_MESSAGE_GETNOTREADY:String = "#messenger:dialogs/squad/message/getNotReady";
+        
+        public static var DIALOGS_SQUADCHANNEL_CHATNAME:String = "#messenger:dialogs/squadChannel/chatName";
+        
+        public static var DIALOGS_SQUADCHANNEL_MEMBERS:String = "#messenger:dialogs/squadChannel/members";
+        
+        public static var DIALOGS_SQUADCHANNEL_VEHICLES:String = "#messenger:dialogs/squadChannel/vehicles";
+        
+        public static var DIALOGS_SQUADCHANNEL_BATTLETYPE:String = "#messenger:dialogs/squadChannel/battleType";
+        
+        public static var DIALOGS_SQUADCHANNEL_BUTTONS_INVITE:String = "#messenger:dialogs/squadChannel/buttons/invite";
+        
+        public static var DIALOGS_SQUADCHANNEL_BUTTONS_RECOMMEND:String = "#messenger:dialogs/squadChannel/buttons/recommend";
+        
+        public static var DIALOGS_SQUADCHANNEL_BUTTONS_LEAVE:String = "#messenger:dialogs/squadChannel/buttons/leave";
+        
         public static var DIALOGS_SQUADCHANNEL_BUTTONS_READY:String = "#messenger:dialogs/squadChannel/buttons/ready";
         
         public static var DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY:String = "#messenger:dialogs/squadChannel/buttons/notReady";
         
-        public static var DIALOGS_SQUADCHANNEL_BUTTONS_LEAVE:String = "#messenger:dialogs/squadChannel/buttons/leave";
-        
         public static var DIALOGS_SQUADCHANNEL_BUTTONS_DISMISS:String = "#messenger:dialogs/squadChannel/buttons/dismiss";
         
         public static var DIALOGS_SQUADCHANNEL_BUTTONS_AFK:String = "#messenger:dialogs/squadChannel/buttons/afk";
-        
-        public static var DIALOGS_SQUADCHANNEL_BUTTONS_INVITE:String = "#messenger:dialogs/squadChannel/buttons/invite";
         
         public static var DIALOGS_SQUADCHANNEL_MESSEGE_NOPREMIUM:String = "#messenger:dialogs/squadChannel/messege/noPremium";
         
@@ -459,30 +475,6 @@ package
         public static var COMMAND_LEAVECHATCHANNEL:String = "#messenger:command/leaveChatChannel";
         
         public static var COMMAND_REQUESTCHATCHANNELMEMBERS:String = "#messenger:command/requestChatChannelMembers";
-        
-        public static var COMMAND_ATTENTIONTOCELL_ARG0:String = "#messenger:command/ATTENTIONTOCELL/arg0";
-        
-        public static var COMMAND_ATTACKENEMY_ARG0:String = "#messenger:command/ATTACKENEMY/arg0";
-        
-        public static var COMMAND_TURNBACK_ARG0:String = "#messenger:command/TURNBACK/arg0";
-        
-        public static var COMMAND_HELPMEEX_ARG0:String = "#messenger:command/HELPMEEX/arg0";
-        
-        public static var COMMAND_SUPPORTMEWITHFIRE_ARG0:String = "#messenger:command/SUPPORTMEWITHFIRE/arg0";
-        
-        public static var COMMAND_STOP_ARG0:String = "#messenger:command/STOP/arg0";
-        
-        public static var COMMAND_FOLLOWME_ARG0:String = "#messenger:command/FOLLOWME/arg0";
-        
-        public static var COMMAND_RELOADING_READY_CASSETE_RTIME:String = "#messenger:command/RELOADING_READY_CASSETE/rTime";
-        
-        public static var COMMAND_RELOADING_READY_CASSETE_AMMOINCASSETE:String = "#messenger:command/RELOADING_READY_CASSETE/ammoInCassete";
-        
-        public static var COMMAND_RELOADINGGUN_RTIME:String = "#messenger:command/RELOADINGGUN/rTime";
-        
-        public static var COMMAND_RELOADING_CASSETE_RTIME:String = "#messenger:command/RELOADING_CASSETE/rTime";
-        
-        public static var COMMAND_RELOADING_CASSETE_AMMOQUANTITYLEFT:String = "#messenger:command/RELOADING_CASSETE/ammoQuantityLeft";
         
         public static var EVENTS_ENTERCHANNEL:String = "#messenger:events/enterChannel";
         
@@ -806,14 +798,27 @@ package
         
         public static var SERVICECHANNELMESSAGES_FORT_FORT_READY:String = "#messenger:serviceChannelMessages/fort/FORT_READY";
         
+        public static var SERVICECHANNELMESSAGES_FORT_DEF_HOUR_SHUTDOWN:String = "#messenger:serviceChannelMessages/fort/DEF_HOUR_SHUTDOWN";
+        
         public static var SERVICECHANNELMESSAGES_FORT_RESERVE_ACTIVATED:String = "#messenger:serviceChannelMessages/fort/RESERVE_ACTIVATED";
         
         public static var SERVICECHANNELMESSAGES_FORT_RESERVE_EXPIRED:String = "#messenger:serviceChannelMessages/fort/RESERVE_EXPIRED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_RESERVE_PRODUCED:String = "#messenger:serviceChannelMessages/fort/RESERVE_PRODUCED";
         
         public static var SERVICECHANNELMESSAGES_FORT_STORAGE_OVERFLOW:String = "#messenger:serviceChannelMessages/fort/STORAGE_OVERFLOW";
         
         public static var SERVICECHANNELMESSAGES_FORT_ORDER_CANCELED:String = "#messenger:serviceChannelMessages/fort/ORDER_CANCELED";
         
         public static var SERVICECHANNELMESSAGES_FORT_REATTACHED_TO_BASE:String = "#messenger:serviceChannelMessages/fort/REATTACHED_TO_BASE";
+        
+        public static var DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM:Array = [DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_OFFLINE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_NOTREADY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_READY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_INBATTLE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK];
+        
+        public static function dialogs_squadchannel_tooltips_status(param1:String) : String
+        {
+            var _loc2_:String = "#messenger:dialogs/squadChannel/tooltips/status/" + param1;
+            App.utils.asserter.assert(!(DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
     }
 }

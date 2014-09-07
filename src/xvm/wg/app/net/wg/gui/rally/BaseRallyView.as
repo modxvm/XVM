@@ -2,18 +2,16 @@ package net.wg.gui.rally
 {
     import net.wg.infrastructure.base.meta.impl.BaseRallyViewMeta;
     import net.wg.infrastructure.base.meta.IBaseRallyViewMeta;
-    import net.wg.infrastructure.interfaces.IViewStackContent;
     import flash.text.TextField;
-    import net.wg.infrastructure.interfaces.ISoundButton;
+    import net.wg.gui.interfaces.ISoundButton;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import flash.display.InteractiveObject;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import net.wg.gui.rally.events.RallyViewsEvent;
     import flash.events.Event;
     
-    public class BaseRallyView extends BaseRallyViewMeta implements IBaseRallyViewMeta, IViewStackContent
+    public class BaseRallyView extends BaseRallyViewMeta implements IBaseRallyViewMeta
     {
         
         public function BaseRallyView()
@@ -30,23 +28,11 @@ package net.wg.gui.rally
         
         public var createBtn:SoundButtonEx;
         
-        private var _pyAlias:String;
-        
         private var _coolDownRequests:Array;
         
         public function isInCoolDown(param1:int) : Boolean
         {
             return this._coolDownRequests.indexOf(param1) > -1;
-        }
-        
-        public function as_setPyAlias(param1:String) : void
-        {
-            this._pyAlias = param1;
-        }
-        
-        public function as_getPyAlias() : String
-        {
-            return this._pyAlias;
         }
         
         public function as_setCoolDown(param1:Number, param2:int) : void
@@ -56,15 +42,6 @@ package net.wg.gui.rally
                 this.coolDownControls(false,param2);
                 App.utils.scheduler.scheduleNonCancelableTask(this.coolDownControls,param1 * 1000,true,param2);
             }
-        }
-        
-        public function update(param1:Object) : void
-        {
-        }
-        
-        public function getComponentForFocus() : InteractiveObject
-        {
-            return null;
         }
         
         override protected function configUI() : void
@@ -162,7 +139,7 @@ package net.wg.gui.rally
         App.toolTipMgr.hide();
     }
     
-    public function canShowAutomatically() : Boolean
+    override public function canShowAutomatically() : Boolean
     {
         return true;
     }

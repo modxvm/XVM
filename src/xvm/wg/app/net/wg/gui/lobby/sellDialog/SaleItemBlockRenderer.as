@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.sellDialog
 {
     import scaleform.clik.controls.ListItemRenderer;
-    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
+    import net.wg.gui.interfaces.ISaleItemBlockRenderer;
     import net.wg.gui.components.controls.TextFieldShort;
     import net.wg.gui.components.controls.AlertIco;
     import net.wg.gui.components.controls.DropdownMenu;

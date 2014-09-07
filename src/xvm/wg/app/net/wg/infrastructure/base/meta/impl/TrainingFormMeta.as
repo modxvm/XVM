@@ -17,6 +17,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onEscape:Function = null;
         
+        public var onLeave:Function = null;
+        
         public function joinTrainingRequestS(param1:String) : void
         {
             App.utils.asserter.assertNotNull(this.joinTrainingRequest,"joinTrainingRequest" + Errors.CANT_NULL);
@@ -33,6 +35,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onEscape,"onEscape" + Errors.CANT_NULL);
             this.onEscape();
+        }
+        
+        public function onLeaveS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onLeave,"onLeave" + Errors.CANT_NULL);
+            this.onLeave();
         }
     }
 }

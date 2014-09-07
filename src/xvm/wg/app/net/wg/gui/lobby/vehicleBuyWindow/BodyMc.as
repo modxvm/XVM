@@ -8,8 +8,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
     import net.wg.gui.components.controls.TankmanTrainingButton;
     import scaleform.clik.controls.ButtonGroup;
     import scaleform.clik.controls.Button;
-    import flash.events.Event;
     import net.wg.utils.ILocale;
+    import flash.events.Event;
     import net.wg.data.constants.SoundTypes;
     
     public class BodyMc extends UIComponent
@@ -115,6 +115,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         override protected function configUI() : void
         {
+            var _loc2_:ILocale = null;
             super.configUI();
             var _loc1_:* = "scoolGroup";
             this.btnGroup = new ButtonGroup(_loc1_,this);
@@ -125,7 +126,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.scoolBtn.groupName = _loc1_;
             this.freeBtn.groupName = _loc1_;
             this.btnGroup.addEventListener(Event.CHANGE,this.groupChangeHandler,false,0,true);
-            var _loc2_:ILocale = App.utils.locale;
+            _loc2_ = App.utils.locale;
             this.slotCheckbox.label = _loc2_.makeString(DIALOGS.BUYVEHICLEDIALOG_SLOTCHECKBOX);
             this.ammoCheckbox.label = _loc2_.makeString(DIALOGS.BUYVEHICLEDIALOG_AMMOCHECKBOX);
             this.crewCheckbox.label = _loc2_.makeString(DIALOGS.BUYVEHICLEDIALOG_TANKMENCHECKBOX);

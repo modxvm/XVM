@@ -4,7 +4,7 @@ package net.wg.gui.rally.helpers
     import flash.display.InteractiveObject;
     import net.wg.infrastructure.interfaces.entity.IDroppable;
     import net.wg.infrastructure.interfaces.entity.IDropItem;
-    import net.wg.infrastructure.interfaces.IDropList;
+    import net.wg.gui.interfaces.IDropList;
     
     public class RallyDragDropListDelegateController extends DropListDelegateCtrlr
     {

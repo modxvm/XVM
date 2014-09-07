@@ -10,6 +10,8 @@ package net.wg.infrastructure.base.meta
         
         function unregisterFlashComponentS(param1:String) : void;
         
+        function onFocusInS(param1:String) : void;
+        
         function as_populate() : void;
         
         function as_dispose() : void;

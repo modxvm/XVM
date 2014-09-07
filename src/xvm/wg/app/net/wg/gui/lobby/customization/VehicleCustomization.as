@@ -179,6 +179,7 @@ package net.wg.gui.lobby.customization
             {
                 _loc1_ = this._priceDataProvider[_loc2_];
                 _loc1_.price = null;
+                _loc1_.priceOverride = null;
                 _loc1_.selected = false;
                 _loc1_.enabled = false;
                 _loc2_++;
@@ -416,6 +417,9 @@ var _loc5_:Array = null;
 var _loc6_:Object = null;
 var _loc7_:* = 0;
 var _loc8_:* = 0;
+this.updateTypeToNewIds();
+this.updatePrices();
+this._priceDataProvider.invalidate();
 var _loc2_:Object = param1.itemData;
 var _loc3_:Boolean = _loc2_.price.isGold;
 var _loc4_:String = _loc2_.section;
@@ -463,104 +467,65 @@ return _loc2_;
 private function calculateTotalPrice() : void
 {
 var _loc6_:Object = null;
-var _loc7_:Object = null;
+var _loc7_:* = 0;
 var _loc8_:Object = null;
-var _loc9_:* = 0;
-var _loc11_:Object = null;
-var _loc12_:* = NaN;
-var _loc13_:Object = null;
+var _loc9_:* = NaN;
+var _loc10_:Object = null;
 var _loc1_:Number = 0;
 var _loc2_:Number = 0;
 var _loc3_:* = false;
 var _loc4_:* = true;
 var _loc5_:* = true;
-var _loc10_:Object = {};
-_loc9_ = 0;
-while(_loc9_ < this._priceDataProvider.length)
-{
-_loc7_ = this._priceDataProvider[_loc9_];
-if(_loc7_)
-{
-    _loc7_.priceOverride = null;
-    if(!(_loc7_.type in _loc10_))
-    {
-        _loc10_[_loc7_.type] = [];
-    }
-    _loc8_ = this._sectionsData[_loc7_.section]?this._sectionsData[_loc7_.section]._new:null;
-    if((_loc8_ && _loc8_.price) && (!(_loc8_.price is Array)) && (this.typeToNewIds[_loc7_.type]) && !(this.typeToNewIds[_loc7_.type].indexOf(_loc8_.id) == -1))
-    {
-        if(_loc8_.price.isGold)
-        {
-            if(_loc10_[_loc7_.type].indexOf(_loc8_.id) == -1)
-            {
-                _loc10_[_loc7_.type].push(_loc8_.id);
-            }
-            else
-            {
-                _loc7_.priceOverride = {"isGold":true,
-                "cost":0
-            };
-        }
-    }
-    else
-    {
-        _loc7_.priceOverride = {"isGold":false,
-        "cost":0
-    };
-}
-}
-}
-_loc9_++;
-}
+this.updatePrices();
 this._priceDataProvider.invalidate();
 this._selectedSections = [];
-_loc9_ = 0;
-while(_loc9_ < this._priceDataProvider.length)
+_loc7_ = 0;
+while(_loc7_ < this._priceDataProvider.length)
 {
-_loc11_ = this._priceDataProvider[_loc9_];
-if(_loc11_.selected)
+_loc8_ = this._priceDataProvider[_loc7_];
+if(_loc8_.selected)
 {
-_loc3_ = false;
-_loc6_ = _loc11_.priceOverride?_loc11_.priceOverride:_loc11_.price;
-if(_loc6_ != null)
-{
-if(_loc6_ is Array)
-{
-    _loc12_ = 0;
-    while(_loc12_ < _loc6_.lengh)
+    _loc3_ = false;
+    _loc6_ = _loc8_.priceOverride?_loc8_.priceOverride:_loc8_.price;
+    if(_loc6_ != null)
     {
-        _loc13_ = _loc6_[_loc12_];
-        if(_loc13_ != null)
+        if(_loc6_ is Array)
         {
-            if(_loc6_.isGold)
+            _loc9_ = 0;
+            while(_loc9_ < _loc6_.lengh)
             {
-                _loc3_ = true;
-                _loc2_ = _loc2_ + _loc13_.cost;
-            }
-            else
-            {
-                _loc1_ = _loc1_ + _loc13_.cost;
+                _loc10_ = _loc6_[_loc9_];
+                if(_loc10_ != null)
+                {
+                    if(_loc6_.isGold)
+                    {
+                        _loc3_ = true;
+                        _loc2_ = _loc2_ + _loc10_.cost;
+                    }
+                    else
+                    {
+                        _loc1_ = _loc1_ + _loc10_.cost;
+                    }
+                }
+                _loc9_++;
             }
         }
-        _loc12_++;
+        else if(_loc6_.isGold)
+        {
+            _loc3_ = true;
+            _loc2_ = _loc2_ + _loc6_.cost;
+        }
+        else
+        {
+            _loc1_ = _loc1_ + _loc6_.cost;
+        }
+        
     }
-}
-else if(_loc6_.isGold)
-{
-    _loc3_ = true;
-    _loc2_ = _loc2_ + _loc6_.cost;
-}
-else
-{
-    _loc1_ = _loc1_ + _loc6_.cost;
-}
-
-}
-this._selectedSections.push({"sectionName":_loc11_.section,
-"isGold":_loc3_
+    this._selectedSections.push({"sectionName":_loc8_.section,
+    "isGold":_loc3_
 });
 }
-_loc9_++;
+_loc7_++;
 }
 if(_loc1_ <= this._accountCredits)
 {
@@ -583,6 +548,92 @@ _loc5_ = false;
 this.totalCreditsField.text = App.utils.locale.integer(_loc1_);
 this.totalGoldField.text = App.utils.locale.gold(_loc2_);
 this.applyButton.enabled = !this._actionsLocked && (_loc5_) && (_loc4_) && _loc1_ >= 0 && _loc2_ >= 0 && this._selectedSections.length > 0;
+}
+
+private function updateTypeToNewIds() : void
+{
+var _loc2_:* = 0;
+var _loc3_:Object = null;
+var _loc1_:Object = null;
+this.typeToNewIds = {};
+_loc2_ = 0;
+while(_loc2_ < this._priceDataProvider.length)
+{
+_loc3_ = this._priceDataProvider[_loc2_];
+if((_loc3_) && (_loc3_.selected))
+{
+if(!(_loc3_.type in this.typeToNewIds))
+{
+    this.typeToNewIds[_loc3_.type] = [];
+}
+if(this._sectionsData[_loc3_.section])
+{
+    _loc1_ = this._sectionsData[_loc3_.section]._new;
+    if((_loc1_ && _loc1_.price) && (!(_loc1_.price is Array)) && (_loc1_.price.isGold))
+    {
+        if((this.typeToNewIds[_loc3_.type]) && this.typeToNewIds[_loc3_.type].indexOf(_loc1_.id) == -1)
+        {
+            this.typeToNewIds[_loc3_.type].push(_loc1_.id);
+        }
+    }
+}
+}
+_loc2_++;
+}
+}
+
+private function updatePrices() : void
+{
+var _loc1_:Object = null;
+var _loc2_:Object = null;
+var _loc3_:* = 0;
+var _loc4_:Object = {};
+_loc3_ = 0;
+while(_loc3_ < this._priceDataProvider.length)
+{
+_loc1_ = this._priceDataProvider[_loc3_];
+if(_loc1_)
+{
+_loc1_.priceOverride = null;
+if(!(_loc1_.type in _loc4_))
+{
+    _loc4_[_loc1_.type] = [];
+}
+_loc2_ = this._sectionsData[_loc1_.section]?this._sectionsData[_loc1_.section]._new:null;
+if((_loc2_ && _loc2_.price) && (!(_loc2_.price is Array)) && (this.typeToNewIds[_loc1_.type]) && !(this.typeToNewIds[_loc1_.type].indexOf(_loc2_.id) == -1))
+{
+    if(_loc1_.selected)
+    {
+        if(_loc2_.price.isGold)
+        {
+            if(_loc4_[_loc1_.type].indexOf(_loc2_.id) == -1)
+            {
+                _loc4_[_loc1_.type].push(_loc2_.id);
+            }
+            else
+            {
+                _loc1_.priceOverride = {"isGold":true,
+                "cost":0
+            };
+        }
+    }
+    else
+    {
+        _loc1_.priceOverride = {"isGold":false,
+        "cost":0
+    };
+}
+}
+else
+{
+_loc1_.priceOverride = {"isGold":_loc1_.price.isGold,
+"cost":0
+};
+}
+}
+}
+_loc3_++;
+}
 }
 }
 }

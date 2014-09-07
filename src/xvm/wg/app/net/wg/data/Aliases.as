@@ -78,6 +78,8 @@ package net.wg.data
         
         public static var BATTLE_TYPE_SELECT_POPOVER:String = "battleTypeSelectPopover";
         
+        public static var ACCOUNT_POPOVER:String = "accountPopover";
+        
         public static var SYSTEM_MESSAGES_GENERATOR_WINDOW:String = "SystemMessagesGenerator";
         
         public static var TRAINING_WINDOW:String = "trainingWindow";
@@ -130,15 +132,13 @@ package net.wg.data
         
         public static var NOTIFICATION_LIST_BUTTON:String = "notificationListButton";
         
-        public static var TUTORIAL_CONTROL:String = "tutorialControl";
+        public static var CONTACTS_LIST_BUTTON:String = "contactsListButton";
         
         public static var TICKER:String = "ticker";
         
         public static var QUESTS_CONTROL:String = "questsControl";
         
         public static var TMEN_XP_PANEL:String = "tmenXpPanel";
-        
-        public static var FIGHT_BUTTON:String = "fightButton";
         
         public static var CHANNEL_COMPONENT:String = "channelComponent";
         
@@ -149,6 +149,10 @@ package net.wg.data
         public static var QUESTS_FUTURE_TAB:String = "questsFutureTab";
         
         public static var INPUT_CHECKER_COMPONENT:String = "inputCheckerComponent";
+        
+        public static var CALENDAR:String = "calendar";
+        
+        public static var SERVER_STATS:String = "serverStats";
         
         public static var PROFILE_TAB_NAVIGATOR:String = "profileTabNavigator";
         

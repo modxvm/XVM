@@ -30,5 +30,7 @@ package net.wg.infrastructure.base.meta
         function as_onSearchResultReceived(param1:Boolean) : void;
         
         function as_setWindowTitle(param1:String) : void;
+        
+        function as_setInvites(param1:Array) : void;
     }
 }

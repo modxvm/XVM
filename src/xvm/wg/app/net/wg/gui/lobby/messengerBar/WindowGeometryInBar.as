@@ -1,8 +1,8 @@
 package net.wg.gui.lobby.messengerBar
 {
     import net.wg.infrastructure.base.DefaultWindowGeometry;
-    import net.wg.infrastructure.interfaces.IWindow;
-    import net.wg.infrastructure.interfaces.IAbstractWindowView;
+    import net.wg.infrastructure.base.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IAbstractWindowView;
     import net.wg.gui.events.MessengerBarEvent;
     
     public class WindowGeometryInBar extends DefaultWindowGeometry

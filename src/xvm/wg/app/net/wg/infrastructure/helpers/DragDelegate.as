@@ -1,7 +1,7 @@
 package net.wg.infrastructure.helpers
 {
     import flash.display.InteractiveObject;
-    import net.wg.infrastructure.interfaces.IDragDelegate;
+    import net.wg.infrastructure.helpers.interfaces.IDragDelegate;
     import net.wg.infrastructure.events.DragEvent;
     import net.wg.data.constants.DragType;
     

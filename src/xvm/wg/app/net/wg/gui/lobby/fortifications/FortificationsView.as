@@ -153,7 +153,7 @@ package net.wg.gui.lobby.fortifications
             }
             else if(param1.linkage == FORTIFICATION_ALIASES.DISCONNECT_VIEW_LINCKAGE)
             {
-                this._currentViewAlias = FORTIFICATION_ALIASES.DISCONNECT_VIEW_LINCKAGE;
+                this._currentViewAlias = FORTIFICATION_ALIASES.DISCONNECT_VIEW_ALIAS;
                 registerComponent(IDAAPIModule(param1.view),FORTIFICATION_ALIASES.DISCONNECT_VIEW_ALIAS);
             }
             else

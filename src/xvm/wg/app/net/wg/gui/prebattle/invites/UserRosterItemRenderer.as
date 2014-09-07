@@ -20,6 +20,8 @@ package net.wg.gui.prebattle.invites
             _state = "up";
         }
         
+        private static var UPDATE_DATA:String = "update_data";
+        
         public var focusIndicatorA:MovieClip;
         
         public var status:MovieClip;
@@ -52,7 +54,7 @@ package net.wg.gui.prebattle.invites
         override protected function draw() : void
         {
             var _loc2_:Point = null;
-            var _loc1_:Boolean = (isInvalid("update_data")) && (data);
+            var _loc1_:Boolean = (isInvalid(UPDATE_DATA)) && (data);
             if((_loc1_) && (enabled))
             {
                 _loc2_ = new Point(mouseX,mouseY);
@@ -82,7 +84,7 @@ package net.wg.gui.prebattle.invites
             {
                 this.visible = true;
                 this.data = param1;
-                invalidate("update_data");
+                invalidate(UPDATE_DATA);
             }
         }
         

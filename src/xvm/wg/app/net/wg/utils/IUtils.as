@@ -49,6 +49,8 @@ package net.wg.utils
         
         function get animBuilder() : IAnimBuilder;
         
+        function get dateTime() : IDateTime;
+        
         function getImageUrlProperties(param1:String, param2:int, param3:int, param4:int = -4, param5:int = 0) : IImageUrlProperties;
     }
 }

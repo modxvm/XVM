@@ -21,5 +21,7 @@ package net.wg.data.constants.generated
         public static var TACTICAL_TRAINING:String = "tacticalTraining";
         
         public static var BATTLE_PAYMENTS:String = "battlePayments";
+        
+        public static var SPECIAL_MISSION:String = "specialMission";
     }
 }

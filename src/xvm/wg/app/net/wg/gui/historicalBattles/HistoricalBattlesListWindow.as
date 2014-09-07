@@ -106,6 +106,7 @@ package net.wg.gui.historicalBattles
             super.configUI();
             this.descriptionTitleTF.text = HISTORICAL_BATTLES.LABEL_DESCRIPTIONTITLE;
             this.priceInfoIcon.visible = false;
+            this.fightButton.mouseEnabledOnDisabled = true;
             this.carousel.addEventListener(ListEvent.INDEX_CHANGE,this.onCarouselItemSelect);
             this.showFullDescrButton.addEventListener(ButtonEvent.CLICK,this.onShowFullDescrClick);
             this.fightButton.addEventListener(ButtonEvent.CLICK,this.onFightButtonClick);

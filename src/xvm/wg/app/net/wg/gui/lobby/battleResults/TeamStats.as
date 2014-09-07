@@ -106,7 +106,6 @@ private var iconTypeToKey:Object;
 override protected function configUI() : void
 {
 var _loc1_:Object = null;
-var _loc2_:String = null;
 super.configUI();
 _loc1_ = this.myParent.data;
 this._bonusType = _loc1_.common.bonusType;
@@ -115,14 +114,14 @@ this.header1.tabEnabled = false;
 this.header1.focusable = false;
 this.header1.validateNow();
 this.header2.validateNow();
-if(this._bonusType == 10)
+if(this._bonusType == 10 || this._bonusType == 11)
 {
 this.ownTitle.htmlText = App.utils.locale.makeString(BATTLE_RESULTS.TEAM_STATS_OWNTEAM) + " " + _loc1_.common.clans.allies.clanAbbrev;
 this.enemyTitle.htmlText = App.utils.locale.makeString(BATTLE_RESULTS.TEAM_STATS_ENEMYTEAM) + " " + _loc1_.common.clans.enemies.clanAbbrev;
 this.myParent.requestClanEmblem(CLAN_TEAM_ALLIES,_loc1_.common.clans.allies.clanDBID,this.onEmblemLoaded);
 this.myParent.requestClanEmblem(CLAN_TEAM_ENEMIES,_loc1_.common.clans.enemies.clanDBID,this.onEmblemLoaded);
-this.teamResourceTotal.visible = true;
-this.teamResourceTotal.htmlText = _loc1_.common.totalFortResourceStr;
+this.teamResourceTotal.visible = this._bonusType == 10;
+this.teamResourceTotal.htmlText = this._bonusType == 10?_loc1_.common.totalFortResourceStr:"";
 }
 else
 {
@@ -145,7 +144,7 @@ this.team1List.addEventListener(ListEventEx.ITEM_CLICK,this.onItemSelect);
 this.team2List.addEventListener(ListEventEx.ITEM_CLICK,this.onItemSelect);
 this.team1List.dataProvider = new DataProvider(_loc1_.team1);
 this.team2List.dataProvider = new DataProvider(_loc1_.team2);
-_loc2_ = _loc1_.common.iconType;
+var _loc2_:String = _loc1_.common.iconType;
 var _loc3_:String = _loc1_.common.sortDirection;
 this.header1.selectedIndex = this.header2.selectedIndex = this.iconTypeToKey[_loc2_].index;
 var _loc4_:InteractiveSortingButton = InteractiveSortingButton(this.header1.getButtonAt(this.iconTypeToKey[_loc2_].index));
@@ -284,7 +283,7 @@ var _loc4_:SortingButtonInfo = null;
 var _loc1_:* = "../maps/icons/buttons/tab_sort_button/ascendingSortArrow.png";
 var _loc2_:* = "../maps/icons/buttons/tab_sort_button/descendingSortArrow.png";
 var _loc3_:Array = [];
-if(this._bonusType != 10)
+if(!(this._bonusType == 10) && !(this._bonusType == 11))
 {
 _loc4_ = new SortingButtonInfo();
 _loc4_.iconId = SQUAD;
@@ -304,7 +303,19 @@ _loc4_.iconSource = "../maps/icons/buttons/tab_sort_button/player.png";
 _loc4_.ascendingIconSource = _loc1_;
 _loc4_.descendingIconSource = _loc2_;
 _loc4_.toolTip = BATTLE_RESULTS.TEAM_PLAYERHEADER;
-_loc4_.buttonWidth = this._bonusType != 10?120:103;
+if(this._bonusType == 10)
+{
+_loc4_.buttonWidth = 103;
+}
+else if(this._bonusType == 11)
+{
+_loc4_.buttonWidth = 150;
+}
+else
+{
+_loc4_.buttonWidth = 120;
+}
+
 _loc4_.buttonHeight = 30;
 _loc4_.enabled = true;
 _loc4_.defaultSortDirection = SortingInfo.ASCENDING_SORT;

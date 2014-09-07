@@ -13,7 +13,7 @@ package net.wg.gui.lobby.fortifications.data
         
         private static var BUILDING_DATA:String = "buildingData";
         
-        public var isCommander:Boolean = false;
+        public var canAddBuilding:Boolean = false;
         
         public var buildingData:Vector.<BuildingVO>;
         

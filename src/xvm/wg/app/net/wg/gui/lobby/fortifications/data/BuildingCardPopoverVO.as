@@ -8,13 +8,9 @@ package net.wg.gui.lobby.fortifications.data
             super(param1);
             if((this.buildingHeader) && (this.buildingsIndicators) && (this.defResInfo))
             {
-                this.buildingHeader.isCommander = isCommander;
                 this.buildingHeader.buildingType = buildingType;
-                this.buildingsIndicators.isCommander = isCommander;
                 this.buildingsIndicators.buildingType = buildingType;
-                this.defResInfo.isCommander = isCommander;
                 this.defResInfo.buildingType = buildingType;
-                this.actionData.isCommander = isCommander;
                 this.actionData.buildingType = buildingType;
             }
         }
@@ -42,6 +38,10 @@ package net.wg.gui.lobby.fortifications.data
         public var playerCount:int = -1;
         
         public var maxPlayerCount:int = -1;
+        
+        public var canUpgradeBuilding:Boolean = false;
+        
+        public var canAddOrder:Boolean = false;
         
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {

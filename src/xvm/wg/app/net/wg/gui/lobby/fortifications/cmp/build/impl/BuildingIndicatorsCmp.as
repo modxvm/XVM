@@ -2,10 +2,10 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
 {
     import flash.display.MovieClip;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import flash.events.MouseEvent;
     import flash.text.TextField;
     import scaleform.clik.controls.StatusIndicator;
     import net.wg.gui.lobby.fortifications.data.BuildingIndicatorsVO;
-    import flash.events.MouseEvent;
     
     public class BuildingIndicatorsCmp extends MovieClip implements IDisposable
     {
@@ -13,6 +13,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public function BuildingIndicatorsCmp()
         {
             super();
+        }
+        
+        private static function onRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
         
         public var hpLbl:TextField;
@@ -36,9 +41,9 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public function dispose() : void
         {
             this.hpToolTipArea.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-            this.hpToolTipArea.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+            this.hpToolTipArea.removeEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             this.defResToolTipArea.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-            this.defResToolTipArea.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+            this.defResToolTipArea.removeEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             this.hpToolTipArea = null;
             this.defResToolTipArea = null;
             this.hpProgress.dispose();
@@ -74,9 +79,9 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             if(param1)
             {
                 this.hpToolTipArea.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-                this.hpToolTipArea.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+                this.hpToolTipArea.addEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
                 this.defResToolTipArea.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-                this.defResToolTipArea.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+                this.defResToolTipArea.addEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             }
         }
         
@@ -91,11 +96,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                 App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_POPOVER_DEFRESPROGRESS);
             }
             
-        }
-        
-        private function onRollOutHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
         }
     }
 }

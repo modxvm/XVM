@@ -4,7 +4,7 @@ package net.wg.gui.lobby.sellDialog
     import net.wg.infrastructure.base.meta.IVehicleSellDialogMeta;
     import flash.display.Sprite;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
+    import net.wg.gui.interfaces.ISaleItemBlockRenderer;
     import scaleform.clik.motion.Tween;
     import net.wg.gui.lobby.sellDialog.VO.SellVehicleVo;
     import net.wg.gui.lobby.sellDialog.VO.SellInInventoryModuleVo;
@@ -12,7 +12,7 @@ package net.wg.gui.lobby.sellDialog
     import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleOptionalDeviceVo;
     import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleShellVo;
     import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleEquipmentVo;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import scaleform.clik.utils.Padding;
     import org.idmedia.as3commons.util.StringUtils;
     import net.wg.gui.events.VehicleSellDialogEvent;
@@ -35,7 +35,7 @@ package net.wg.gui.lobby.sellDialog
             isModal = true;
             isCentered = true;
             canDrag = false;
-            showWindowBg = false;
+            showWindowBgForm = false;
             scaleX = scaleY = 1;
             this.controlQuestion.visible = false;
         }

@@ -1,7 +1,7 @@
 package net.wg.gui.cyberSport.controls
 {
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.gui.rally.controls.IGrayTransparentButton;
+    import net.wg.gui.rally.controls.interfaces.IGrayTransparentButton;
     import flash.display.MovieClip;
     
     public class GrayTransparentButton extends SoundButtonEx implements IGrayTransparentButton

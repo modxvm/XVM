@@ -100,7 +100,6 @@ package net.wg.gui.lobby.battleResults
         
         override protected function configUI() : void
         {
-            var _loc4_:* = NaN;
             var _loc5_:DisplayObject = null;
             super.configUI();
             var _loc1_:Object = this.myParent.data;
@@ -116,7 +115,7 @@ package net.wg.gui.lobby.battleResults
             this.vehicleTimeStats.data = _loc1_.common.timeStats;
             var _loc2_:Boolean = _loc1_.personal.isPremium;
             var _loc3_:Number = _loc2_?FADED_ALPHA:FULL_ALPHA;
-            _loc4_ = _loc2_?FULL_ALPHA:FADED_ALPHA;
+            var _loc4_:Number = _loc2_?FULL_ALPHA:FADED_ALPHA;
             this.creditsValuesLbl.alpha = _loc3_;
             this.goldValuesLbl.alpha = _loc3_;
             this.xpValuesLbl.alpha = _loc3_;

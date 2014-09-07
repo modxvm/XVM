@@ -7,8 +7,9 @@ package net.wg.gui.lobby.window
     import net.wg.gui.components.controls.CompactCheckBox;
     import net.wg.gui.components.controls.NumericStepper;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.components.common.ArrowSeparator;
     import net.wg.gui.components.controls.WalletResourcesStatus;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import scaleform.clik.utils.Padding;
     import net.wg.utils.ILocale;
     import flash.text.TextFieldAutoSize;
@@ -73,6 +74,10 @@ package net.wg.gui.lobby.window
         public var cancelBtn:SoundButtonEx;
         
         public var headerMC:ExchangeHeader;
+        
+        public var topSeparator:ArrowSeparator;
+        
+        public var bottomSeparator:ArrowSeparator;
         
         public var onHandHaveNotMoney:WalletResourcesStatus = null;
         
@@ -150,13 +155,12 @@ package net.wg.gui.lobby.window
         {
             var _loc2_:* = false;
             var _loc3_:* = false;
-            var _loc4_:* = false;
             App.utils.voMgr.walletStatusVO.update(param1);
             _loc2_ = !this.onHandHaveNotMoney.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
             this.resultHaveNotMoney.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
             _loc3_ = !this.onHandHaveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
             this.resultHaveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
-            _loc4_ = (_loc2_) && (_loc3_);
+            var _loc4_:Boolean = (_loc2_) && (_loc3_);
             this.itGoldBefore.visible = _loc2_;
             this.itGoldResult.visible = _loc2_;
             this.itExperienceBefore.visible = _loc3_;
@@ -325,6 +329,10 @@ package net.wg.gui.lobby.window
             this.onHandHaveNotMoney = null;
             this.resultHaveNotMoney.dispose();
             this.resultHaveNotMoney = null;
+            this.topSeparator.dispose();
+            this.bottomSeparator.dispose();
+            this.topSeparator = null;
+            this.bottomSeparator = null;
             super.onDispose();
         }
         

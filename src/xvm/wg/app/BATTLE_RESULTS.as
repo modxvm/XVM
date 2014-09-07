@@ -28,6 +28,18 @@ package
         
         public static var FINISH_REASON_0:String = "#battle_results:finish/reason/0";
         
+        public static var FINISH_CLANBATTLE_REASON_ATTACK_1WIN:String = "#battle_results:finish/clanBattle_reason_attack/1win";
+        
+        public static var FINISH_CLANBATTLE_REASON_ATTACK_1LOSE:String = "#battle_results:finish/clanBattle_reason_attack/1lose";
+        
+        public static var FINISH_CLANBATTLE_REASON_ATTACK_1TIE:String = "#battle_results:finish/clanBattle_reason_attack/1tie";
+        
+        public static var FINISH_CLANBATTLE_REASON_DEF_1WIN:String = "#battle_results:finish/clanBattle_reason_def/1win";
+        
+        public static var FINISH_CLANBATTLE_REASON_DEF_1LOSE:String = "#battle_results:finish/clanBattle_reason_def/1lose";
+        
+        public static var FINISH_CLANBATTLE_REASON_DEF_1TIE:String = "#battle_results:finish/clanBattle_reason_def/1tie";
+        
         public static var FINISH_REASON_1WIN:String = "#battle_results:finish/reason/1win";
         
         public static var FINISH_REASON_1LOSE:String = "#battle_results:finish/reason/1lose";
@@ -275,6 +287,12 @@ package
         public static var DETAILS_CALCULATIONS_NOPENALTY:String = "#battle_results:details/calculations/noPenalty";
         
         public static var DETAILS_CALCULATIONS_EVENT:String = "#battle_results:details/calculations/event";
+        
+        public static var DETAILS_CALCULATIONS_FAIRPLAYVIOLATION_DESERTER:String = "#battle_results:details/calculations/fairPlayViolation/deserter";
+        
+        public static var DETAILS_CALCULATIONS_FAIRPLAYVIOLATION_AFK:String = "#battle_results:details/calculations/fairPlayViolation/afk";
+        
+        public static var DETAILS_CALCULATIONS_FAIRPLAYVIOLATION_SUICIDE:String = "#battle_results:details/calculations/fairPlayViolation/suicide";
         
         public static var DETAILS_CALCULATIONS_FRIENDLYFIREPENALTY:String = "#battle_results:details/calculations/friendlyFirePenalty";
         

@@ -4,7 +4,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
     import net.wg.infrastructure.base.meta.IVehicleBuyWindowMeta;
     import flash.display.Sprite;
     import flash.display.MovieClip;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import flash.events.Event;
     import scaleform.clik.utils.Padding;
     import flash.display.InteractiveObject;
@@ -27,7 +27,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             isModal = true;
             isCentered = true;
             canDrag = false;
-            showWindowBg = false;
+            showWindowBgForm = false;
         }
         
         private static var goldColor:uint;

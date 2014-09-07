@@ -17,6 +17,8 @@ package net.wg.utils
         
         function destroy(param1:DisplayObject) : void;
         
-        function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number) : Object;
+        function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number, param7:Number) : Object;
+        
+        function get defConnectorLength() : Number;
     }
 }

@@ -11,6 +11,7 @@ package net.wg.gui.tutorial.windows
         public function TutorialVideoDialog()
         {
             super();
+            showWindowBgForm = false;
             showWindowBg = false;
             canClose = false;
             canDrag = false;
@@ -56,7 +57,6 @@ package net.wg.gui.tutorial.windows
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            window.getBackground().visible = false;
             window.getTitleBtn().visible = false;
             var _loc1_:Padding = window.contentPadding as Padding;
             _loc1_.top = 0;

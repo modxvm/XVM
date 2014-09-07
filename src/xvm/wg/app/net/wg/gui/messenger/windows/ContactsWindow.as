@@ -32,7 +32,7 @@ package net.wg.gui.messenger.windows
             this.searchDP = new DAAPIDataProvider();
             super();
             isCentered = false;
-            showWindowBg = false;
+            showWindowBgForm = false;
             canResize = true;
             canDrag = true;
         }

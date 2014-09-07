@@ -32,5 +32,9 @@ package net.wg.infrastructure.base.meta
         function getLocaleOverrideS() : String;
         
         function isFortificationAvailableS() : Boolean;
+        
+        function isFortificationBattleAvailableS() : Boolean;
+        
+        function isShowTickerS() : Boolean;
     }
 }

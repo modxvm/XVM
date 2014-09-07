@@ -164,6 +164,10 @@ package
         
         public static var WINDOW_UNIT_MESSAGE_LEVELERROR:String = "#cyberSport:window/unit/message/levelError";
         
+        public static var WINDOW_UNIT_MESSAGE_WAITCOMMANDER:String = "#cyberSport:window/unit/message/waitCommander";
+        
+        public static var WINDOW_UNIT_MESSAGE_ALLREADY:String = "#cyberSport:window/unit/message/allReady";
+        
         public static var WINDOW_UNIT_READY:String = "#cyberSport:window/unit/ready";
         
         public static var WINDOW_UNIT_NOTREADY:String = "#cyberSport:window/unit/notReady";

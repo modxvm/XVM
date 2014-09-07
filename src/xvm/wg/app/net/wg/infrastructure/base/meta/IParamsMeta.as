@@ -5,7 +5,7 @@ package net.wg.infrastructure.base.meta
     public interface IParamsMeta extends IEventDispatcher
     {
         
-        function as_setValues(param1:Array) : void;
+        function as_setValues(param1:Object) : void;
         
         function as_highlightParams(param1:String) : void;
     }

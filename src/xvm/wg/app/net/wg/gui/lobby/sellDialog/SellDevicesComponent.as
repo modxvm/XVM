@@ -7,7 +7,7 @@ package net.wg.gui.lobby.sellDialog
     import net.wg.gui.lobby.sellDialog.VO.SellOnVehicleOptionalDeviceVo;
     import net.wg.data.VO.SellDialogElement;
     import net.wg.data.constants.FittingTypes;
-    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
+    import net.wg.gui.interfaces.ISaleItemBlockRenderer;
     
     public class SellDevicesComponent extends UIComponent
     {

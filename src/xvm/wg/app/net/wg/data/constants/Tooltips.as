@@ -68,7 +68,11 @@ package net.wg.data.constants
         
         public static var SETTINGS_CONTROL:String = "control";
         
+        public static var SETTINGS_BUTTON:String = "settingsButton";
+        
         public static var CLAN_INFO:String = "clanInfo";
+        
+        public static var FORT_BUILDING_INFO:String = "fortBuildingInfo";
         
         public static var TYPE_WARNING:String = "WARNING";
         
@@ -85,6 +89,8 @@ package net.wg.data.constants
         public static var CYBER_SPORT_TEAM:String = "cyberSportTeam";
         
         public static var CYBER_SPORT_VEHICLE_NOT_READY:String = "cyberSportVehicleNotReady";
+        
+        public static var SQUAD_SLOT_VEHICLE_SELECTED:String = "squadSlotVehicleSelected";
         
         public static var SORTIE_DIVISION:String = "sortieDivision";
         

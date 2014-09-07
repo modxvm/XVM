@@ -3,7 +3,7 @@ package net.wg.gui.rally.views.list
     import net.wg.infrastructure.base.meta.impl.BaseRallyListViewMeta;
     import net.wg.infrastructure.base.meta.IBaseRallyListViewMeta;
     import net.wg.gui.components.controls.SortableTable;
-    import net.wg.data.VoDAAPIDataProvider;
+    import net.wg.data.SortableVoDAAPIDataProvider;
     import net.wg.gui.rally.interfaces.IRallyVO;
     import net.wg.gui.events.SortableTableListEvent;
     import net.wg.gui.rally.interfaces.IRallyListItemVO;
@@ -25,7 +25,7 @@ package net.wg.gui.rally.views.list
         
         public var detailsSection:BaseRallyDetailsSection;
         
-        protected var listDataProvider:VoDAAPIDataProvider;
+        protected var listDataProvider:SortableVoDAAPIDataProvider;
         
         protected function convertToRallyVO(param1:Object) : IRallyVO
         {
@@ -135,7 +135,11 @@ package net.wg.gui.rally.views.list
         protected function requestRallyData(param1:int) : void
         {
             var _loc2_:Object = getRallyDetailsS(param1);
-            this.detailsSection.setData(_loc2_ != null?this.convertToRallyVO(_loc2_):null);
+        }
+        
+        public function as_setDetails(param1:Object) : void
+        {
+            this.detailsSection.setData(param1 != null?this.convertToRallyVO(param1):null);
         }
         
         protected function onListItemDoubleClick(param1:SortableTableListEvent) : void

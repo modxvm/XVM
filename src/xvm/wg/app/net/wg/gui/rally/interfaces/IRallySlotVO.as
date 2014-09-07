@@ -16,8 +16,6 @@ package net.wg.gui.rally.interfaces
         
         function get isClosedVal() : Boolean;
         
-        function get playerObj() : Object;
-        
         function get selectedVehicle() : VehicleVO;
         
         function set selectedVehicle(param1:VehicleVO) : void;

@@ -2,6 +2,7 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
 {
     import net.wg.gui.components.advanced.DashLineTextItem;
     import net.wg.gui.lobby.fortifications.data.ClanStatItemVO;
+    import net.wg.data.managers.impl.ToolTipParams;
     
     public class ClanStatDashLineTextItem extends DashLineTextItem
     {
@@ -36,6 +37,11 @@ package net.wg.gui.lobby.fortifications.cmp.clanStatistics.impl
                 this.label = this._data.label;
                 this.value = this._data.value;
                 this.enabled = this._data.enabled;
+                if(!(this._data.ttBodyParams == null) && !(this._data.ttLabel == null))
+                {
+                    tooltip = this._data.ttLabel;
+                    toolTipParams = new ToolTipParams({},this._data.ttBodyParams,null);
+                }
             }
         }
     }

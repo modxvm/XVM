@@ -5,7 +5,7 @@ package net.wg.infrastructure.base.meta
     public interface IPopoverManagerMeta extends IEventDispatcher
     {
         
-        function requestShowPopoverS(param1:String, param2:Number, param3:Number, param4:Object) : void;
+        function requestShowPopoverS(param1:String, param2:Object) : void;
         
         function requestHidePopoverS() : void;
         

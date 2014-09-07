@@ -2,7 +2,6 @@ package net.wg.gui.cyberSport
 {
     import net.wg.infrastructure.base.meta.impl.CyberSportMainWindowMeta;
     import net.wg.infrastructure.base.meta.ICyberSportMainWindowMeta;
-    import net.wg.gui.cyberSport.interfaces.IChannelComponentHolder;
     import net.wg.gui.cyberSport.views.UnitsListView;
     import net.wg.gui.cyberSport.views.IntroView;
     import net.wg.gui.rally.events.RallyViewsEvent;
@@ -19,7 +18,7 @@ package net.wg.gui.cyberSport
         public function CyberSportMainWindow()
         {
             super();
-            showWindowBg = false;
+            showWindowBgForm = false;
             canMinimize = true;
             visible = true;
         }
@@ -31,13 +30,7 @@ package net.wg.gui.cyberSport
         
         override protected function updateFocus() : void
         {
-            var _loc1_:IChannelComponentHolder = getCurrentView() as IChannelComponentHolder;
-            if((_loc1_) && (isChatFocusNeeded()))
-            {
-                setFocus(_loc1_.getChannelComponent().messageInput);
-                resetChatFocusRequirement();
-            }
-            else if(autoSearch.visible)
+            if(autoSearch.visible)
             {
                 autoSearchUpdateFocus();
             }
@@ -51,9 +44,8 @@ package net.wg.gui.cyberSport
             }
             else
             {
-                setFocus(lastFocusedElement);
+                super.updateFocus();
             }
-            
             
             
         }

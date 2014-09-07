@@ -2,7 +2,7 @@ package net.wg.gui.components.advanced
 {
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.Loader;
-    import flash.display.MovieClip;
+    import flash.display.Sprite;
     import flash.events.Event;
     import flash.events.IOErrorEvent;
     import flash.net.URLRequest;
@@ -19,7 +19,7 @@ package net.wg.gui.components.advanced
         
         protected var loader:Loader;
         
-        public var container:MovieClip;
+        public var container:Sprite;
         
         private var _iconSource:String;
         
@@ -56,10 +56,10 @@ package net.wg.gui.components.advanced
             {
                 this.container.removeChild(this.loader);
             }
-            this.loader.scaleX = 1 / scaleX;
-            this.loader.scaleY = 1 / scaleY;
-            this.loader.x = Math.floor((this.container.width - this.loader.width) / 2);
-            this.loader.y = Math.floor((this.container.height - this.loader.height) / 2);
+            this.container.scaleX = 1 / scaleX;
+            this.container.scaleY = 1 / scaleY;
+            this.loader.x = Math.floor((this.width - this.loader.width) / 2);
+            this.loader.y = Math.floor((this.height - this.loader.height) / 2);
             this.container.addChild(this.loader);
         }
         

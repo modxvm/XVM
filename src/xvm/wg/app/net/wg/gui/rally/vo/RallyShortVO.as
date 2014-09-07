@@ -2,9 +2,9 @@ package net.wg.gui.rally.vo
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.gui.rally.interfaces.IRallyVO;
+    import net.wg.gui.rally.interfaces.IRallySlotVO;
     import net.wg.gui.interfaces.IRallyCandidateVO;
     import net.wg.data.VO.ExtendedUserVO;
-    import net.wg.gui.rally.interfaces.IRallySlotVO;
     
     public class RallyShortVO extends DAAPIDataClass implements IRallyVO
     {
@@ -20,7 +20,7 @@ package net.wg.gui.rally.vo
         
         private var _hasRestrictions:Boolean;
         
-        public var slots:Vector.<RallySlotVO>;
+        public var slots:Vector.<IRallySlotVO>;
         
         private var _description:String = "";
         
@@ -52,7 +52,7 @@ package net.wg.gui.rally.vo
             var _loc1_:IRallyCandidateVO = null;
             if(this.slots)
             {
-                _loc2_ = this.slots[0];
+                _loc2_ = RallySlotVO(this.slots[0]);
                 if(_loc2_.player)
                 {
                     _loc1_ = _loc2_.player;
@@ -68,21 +68,25 @@ package net.wg.gui.rally.vo
         
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
-            var _loc3_:Array = null;
-            var _loc4_:Object = null;
-            var _loc5_:RallySlotVO = null;
             if(param1 == SLOTS_FIELD)
             {
-                this.slots = new Vector.<RallySlotVO>();
-                _loc3_ = param2 as Array;
-                for each(_loc4_ in _loc3_)
-                {
-                    _loc5_ = new RallySlotVO(_loc4_);
-                    this.slots.push(_loc5_);
-                }
+                this.initSlotsVO(param2);
                 return false;
             }
             return true;
+        }
+        
+        protected function initSlotsVO(param1:Object) : void
+        {
+            var _loc3_:Object = null;
+            var _loc4_:RallySlotVO = null;
+            this.slots = new Vector.<IRallySlotVO>();
+            var _loc2_:Array = param1 as Array;
+            for each(_loc3_ in _loc2_)
+            {
+                _loc4_ = new RallySlotVO(_loc3_);
+                this.slots.push(_loc4_);
+            }
         }
         
         override protected function onDataRead(param1:String, param2:Object) : Boolean
@@ -169,7 +173,7 @@ package net.wg.gui.rally.vo
                 _loc5_ = false;
                 while(_loc2_ < this.slots.length)
                 {
-                    _loc3_ = this.slots[_loc2_];
+                    _loc3_ = RallySlotVO(this.slots[_loc2_]);
                     _loc5_ = false;
                     for each(_loc4_ in _loc3_.restrictions)
                     {

@@ -10,17 +10,17 @@ package
         
         public static var HEADER_SETTINGS_BUTTON:String = "#lobby_help:header/settings-button";
         
-        public static var HEADER_FIGHT_BUTTON:String = "#lobby_help:header/fight-button";
-        
-        public static var HEADER_FIGHT_DROPDOWN:String = "#lobby_help:header/fight-dropDown";
+        public static var HEADER_ACCOUNT_BUTTON:String = "#lobby_help:header/account-button";
         
         public static var HEADER_PREMIUM_BUTTON:String = "#lobby_help:header/premium-button";
         
-        public static var HEADER_BUY_GOLD_BUTTON:String = "#lobby_help:header/buy-gold-button";
+        public static var HEADER_SQUAD_BUTTON:String = "#lobby_help:header/squad-button";
         
-        public static var HEADER_EXCHANGE_GOLD_BUTTON:String = "#lobby_help:header/exchange-gold-button";
+        public static var HEADER_BATTLETYPE_BUTTON:String = "#lobby_help:header/battleType-button";
         
-        public static var HEADER_GATHERING_EXPERIENCE_BUTTON:String = "#lobby_help:header/gathering-experience-button";
+        public static var HEADER_FINANCE_BLOCK:String = "#lobby_help:header/finance-block";
+        
+        public static var HEADER_FIGHT_BUTTON:String = "#lobby_help:header/fight-button";
         
         public static var HEADER_MENU_INVENTORY:String = "#lobby_help:header/menu/inventory";
         

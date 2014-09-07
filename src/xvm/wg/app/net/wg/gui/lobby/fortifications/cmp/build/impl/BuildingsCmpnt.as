@@ -3,10 +3,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     import net.wg.infrastructure.base.meta.impl.FortBuildingComponentMeta;
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingCmp;
     import net.wg.infrastructure.interfaces.IUIComponentEx;
+    import net.wg.gui.lobby.profile.components.SimpleLoader;
     import net.wg.gui.lobby.fortifications.cmp.drctn.IFortDirectionsContainer;
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingsContainer;
     import net.wg.gui.lobby.fortifications.data.BuildingsComponentVO;
     import net.wg.gui.lobby.fortifications.utils.ITransportingHelper;
+    import net.wg.gui.lobby.fortifications.data.FortModeVO;
+    import net.wg.gui.lobby.fortifications.data.FunctionalStates;
     import net.wg.data.constants.Linkages;
     import flash.geom.Point;
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuilding;
@@ -22,13 +25,15 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             UIID = 1;
         }
         
+        private static var DEFAULT_LANDSCAPE_WIDTH:int = 1600;
+        
         public var shadowMC:IUIComponentEx = null;
         
-        public var landscape:IUIComponentEx = null;
-        
-        public var directionsContainer:IFortDirectionsContainer;
+        private var _landscapeBG:SimpleLoader = null;
         
         public var bgFore:IUIComponentEx = null;
+        
+        private var _directionsContainer:IFortDirectionsContainer;
         
         private var _buildingContainer:IFortBuildingsContainer;
         
@@ -36,32 +41,32 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _transportingHelper:ITransportingHelper = null;
         
-        public function updateCommonMode(param1:Boolean, param2:Boolean) : void
+        public function updateCommonMode(param1:FortModeVO) : void
         {
-            this._buildingContainer.updateCommonMode(param1,param2);
+            this._buildingContainer.updateCommonMode(param1);
         }
         
         public function as_refreshTransporting() : void
         {
-            this._transportingHelper.updateTransportMode(false,false);
-            this._transportingHelper.updateTransportMode(true,false);
+            this._transportingHelper.updateTransportMode(this._transportingHelper.getModeVO(false,false));
+            this._transportingHelper.updateTransportMode(this._transportingHelper.getModeVO(true,false));
         }
         
-        public function updateTransportMode(param1:Boolean, param2:Boolean) : void
+        public function updateTransportMode(param1:FortModeVO) : void
         {
-            var _loc3_:Class = null;
-            if(!param2)
+            var _loc2_:Class = null;
+            if(!param1.isTutorial && !(param1.currentMode == FunctionalStates.TRANSPORTING_NEXT_STEP) || (param1.isTutorial) && param1.currentMode == FunctionalStates.TRANSPORTING_TUTORIAL_FIRST_STEP)
             {
-                this.directionsContainer.updateTransportMode(param1,param2);
-                if((param1) && this._transportingHelper == null)
+                this._directionsContainer.updateTransportMode(param1);
+                if((param1.isEntering) && this._transportingHelper == null)
                 {
-                    _loc3_ = App.utils.classFactory.getClass(Linkages.TRANSPORTING_HELPER);
-                    this._transportingHelper = ITransportingHelper(new _loc3_(this._buildingContainer.buildings,this));
+                    _loc2_ = App.utils.classFactory.getClass(Linkages.TRANSPORTING_HELPER);
+                    this._transportingHelper = ITransportingHelper(new _loc2_(this._buildingContainer.buildings,this));
                 }
                 if(this._transportingHelper != null)
                 {
-                    this._transportingHelper.updateTransportMode(param1,param2);
-                    this.toggleBackground(param1);
+                    this._transportingHelper.updateTransportMode(param1);
+                    this.toggleBackground(param1.isEntering);
                 }
             }
         }
@@ -72,13 +77,15 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.bgFore.y = this.shadowMC.y = -y;
             this.bgFore.setActualSize(App.appWidth,App.appHeight);
             this.shadowMC.setActualSize(App.appWidth,App.appHeight);
+            var _loc1_:Number = localToGlobal(new Point(0,0)).x;
+            this._landscapeBG.x = (App.appWidth - DEFAULT_LANDSCAPE_WIDTH >> 1) - _loc1_;
         }
         
-        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void
+        public function updateDirectionsMode(param1:FortModeVO) : void
         {
-            this.directionsContainer.updateDirectionsMode(param1,param2);
-            this._buildingContainer.updateDirectionsMode(param1,param2);
-            this.toggleBackground(param1);
+            this._directionsContainer.updateDirectionsMode(param1);
+            this._buildingContainer.updateDirectionsMode(param1);
+            this.toggleBackground(param1.isEntering);
         }
         
         public function onTransportingSuccess(param1:IFortBuilding, param2:IFortBuilding) : void
@@ -113,6 +120,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this._buildingContainer.addEventListener(FortBuildingEvent.BUILDING_SELECTED,this.buildingSelectedHandler);
             this.shadowMC.mouseChildren = false;
             this.shadowMC.mouseEnabled = false;
+            this._landscapeBG.setSource(RES_FORT.MAPS_FORT_FORTLANDSCAPE);
         }
         
         override protected function setData(param1:BuildingsComponentVO) : void
@@ -123,7 +131,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         override protected function setBuildingData(param1:BuildingVO) : void
         {
-            this._buildingContainer.setBuildingData(param1,this.model.isCommander);
+            this._buildingContainer.setBuildingData(param1,this.model.canAddBuilding);
         }
         
         override protected function onPopulate() : void
@@ -138,14 +146,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                 this._transportingHelper.dispose();
                 this._transportingHelper = null;
             }
-            this.directionsContainer.dispose();
-            this.directionsContainer = null;
+            this._directionsContainer.dispose();
+            this._directionsContainer = null;
             this._buildingContainer.removeEventListener(FortBuildingEvent.BUY_BUILDINGS,this.onByuBuildingsHandler);
             this._buildingContainer.removeEventListener(FortBuildingEvent.BUILDING_SELECTED,this.buildingSelectedHandler);
             this._buildingContainer.dispose();
             this._buildingContainer = null;
-            this.landscape.dispose();
-            this.landscape = null;
+            this._landscapeBG.dispose();
+            this._landscapeBG = null;
             if(this.model)
             {
                 this.model.dispose();
@@ -160,14 +168,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private function toggleBackground(param1:Boolean) : void
         {
-            this.landscape.alpha = !param1?1:0.4;
+            this._landscapeBG.alpha = !param1?1:0.4;
         }
         
         private function update() : void
         {
             var _loc1_:Vector.<BuildingVO> = this.model.buildingData;
-            this._buildingContainer.update(_loc1_,this.model.isCommander);
-            this.directionsContainer.update(_loc1_);
+            this._buildingContainer.update(_loc1_,this.model.canAddBuilding);
+            this._directionsContainer.update(_loc1_);
         }
         
         private function buildingSelectedHandler(param1:FortBuildingEvent) : void
@@ -181,6 +189,26 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         private function onByuBuildingsHandler(param1:FortBuildingEvent) : void
         {
             requestBuildingProcessS(param1.direction,param1.position);
+        }
+        
+        public function get directionsContainer() : IFortDirectionsContainer
+        {
+            return this._directionsContainer;
+        }
+        
+        public function set directionsContainer(param1:IFortDirectionsContainer) : void
+        {
+            this._directionsContainer = param1;
+        }
+        
+        public function get landscapeBG() : SimpleLoader
+        {
+            return this._landscapeBG;
+        }
+        
+        public function set landscapeBG(param1:SimpleLoader) : void
+        {
+            this._landscapeBG = param1;
         }
     }
 }

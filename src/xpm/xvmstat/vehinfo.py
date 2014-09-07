@@ -20,6 +20,7 @@ import ResMgr
 import nations
 from items import vehicles
 
+from logger import *
 from vehinfo_short import getShortName
 from vehinfo_tiers import getTiers
 
@@ -41,6 +42,7 @@ def _init():
                     continue
 
                 item = vehicles.g_cache.vehicle(nationID, id)
+                #pprint(vars(item))
 
                 data = dict()
                 data['vid'] = descr['compactDescr']
@@ -55,8 +57,10 @@ def _init():
 
                 stockTurret = item.turrets[0][0]
                 topTurret = item.turrets[0][-1]
-                data['hpStock'] = item.hull['maxHealth'] + stockTurret['maxHealth']
-                data['hpTop'] = item.hull['maxHealth'] + topTurret['maxHealth']
+                if len(item.hulls) != 1:
+                    log('WARNING: TODO: len(hulls) != 1 for vehicle ' + descr['name'])
+                data['hpStock'] = item.hulls[0]['maxHealth'] + stockTurret['maxHealth']
+                data['hpTop'] = item.hulls[0]['maxHealth'] + topTurret['maxHealth']
                 data['turret'] = _getTurretType(item, nation)
                 (data['visRadius'], data['firingRadius'], data['artyRadius']) = _getRanges(topTurret, data['nation'], data['vclass'])
 

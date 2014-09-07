@@ -8,7 +8,7 @@ package net.wg.gui.components.common.markers.data
             super();
         }
         
-        public static var DAMAGE_ATTACK:String = "attack";
+        public static var DAMAGE_SHOT:String = "shot";
         
         public static var DAMAGE_FIRE:String = "fire";
         
@@ -61,7 +61,7 @@ package net.wg.gui.components.common.markers.data
 }
 };
 
-public static var ALL_DAMAGE_TYPES:Array = [DAMAGE_ATTACK,DAMAGE_FIRE,DAMAGE_RAMMING,DAMAGE_WORLD_COLLISION,DAMAGE_DEATH_ZONE,DAMAGE_DROWNING,DAMAGE_EXPLOSION];
+public static var ALL_DAMAGE_TYPES:Array = [DAMAGE_SHOT,DAMAGE_FIRE,DAMAGE_RAMMING,DAMAGE_WORLD_COLLISION,DAMAGE_DEATH_ZONE,DAMAGE_DROWNING,DAMAGE_EXPLOSION];
 
 public static var ALLOWED_DAMAGE_TYPES:Array = [DAMAGE_FIRE,DAMAGE_EXPLOSION];
 

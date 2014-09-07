@@ -1,6 +1,7 @@
 package net.wg.gui.components.controls
 {
-    import net.wg.infrastructure.interfaces.ISoundButtonEx;
+    import net.wg.gui.interfaces.ISoundButtonEx;
+    import scaleform.clik.utils.Padding;
     import flash.display.DisplayObject;
     import flash.text.TextField;
     import flash.display.MovieClip;
@@ -17,6 +18,7 @@ package net.wg.gui.components.controls
         
         public function SoundButtonEx()
         {
+            this._disabledFillPadding = new Padding(0,0,0,0);
             super();
         }
         
@@ -28,7 +30,7 @@ package net.wg.gui.components.controls
         
         private var _helpConnectorLength:Number = 12;
         
-        public var _fillPadding:Number = 0;
+        private var _disabledFillPadding:Padding;
         
         protected var _paddingHorizontal:Number = 5;
         
@@ -134,20 +136,6 @@ package net.wg.gui.components.controls
             this.hideTooltip(param1);
         }
         
-        public function get fillPadding() : Number
-        {
-            return this._fillPadding;
-        }
-        
-        public function set fillPadding(param1:Number) : void
-        {
-            if(param1 == this._fillPadding)
-            {
-                return;
-            }
-            this._fillPadding = param1;
-        }
-        
         override protected function updateText() : void
         {
             super.updateText();
@@ -187,7 +175,10 @@ package net.wg.gui.components.controls
                 return;
             }
             this._tooltip = param1;
-            invalidate();
+            if(App.toolTipMgr)
+            {
+                App.toolTipMgr.hide();
+            }
         }
         
         public function showHelpLayout() : void
@@ -195,16 +186,21 @@ package net.wg.gui.components.controls
             var _loc1_:Object = null;
             if(this._helpText.length > 0)
             {
-                _loc1_ = {"borderWidth":width,
-                "borderHeight":height,
-                "direction":this._helpDirection,
-                "text":this._helpText,
-                "x":0,
-                "y":0,
-                "connectorLength":this._helpConnectorLength
-            };
-            this.setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
+                _loc1_ = this.getParamsForHelpLayout(this._helpDirection,this._helpText,this._helpConnectorLength);
+                this.setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
+            }
         }
+        
+        protected function getParamsForHelpLayout(param1:String, param2:String, param3:Number) : Object
+        {
+            return {"borderWidth":width,
+            "borderHeight":height,
+            "direction":param1,
+            "text":param2,
+            "x":0,
+            "y":0,
+            "connectorLength":param3
+        };
     }
     
     public function closeHelpLayout() : void
@@ -249,13 +245,33 @@ package net.wg.gui.components.controls
     {
         if(this.disableMc != null)
         {
-            this.disableMc.visible = !enabled;
-            this.disableMc.x = this.disableMc.y = this._fillPadding;
+            this.disableMc.x = this.disabledFillPadding.left;
+            this.disableMc.y = this.disabledFillPadding.top;
             this.disableMc.scaleX = 1 / this.scaleX;
             this.disableMc.scaleY = 1 / this.scaleY;
-            this.disableMc.widthFill = Math.round(this.bgMc.width * this.scaleX) - this._fillPadding * 2;
-            this.disableMc.heightFill = Math.round(this.bgMc.height * this.scaleY) - this._fillPadding * 2;
+            this.disableMc.widthFill = Math.round(this.bgMc.width * this.scaleX) - this.disabledFillPadding.horizontal;
+            this.disableMc.heightFill = Math.round(this.bgMc.height * this.scaleY) - this.disabledFillPadding.vertical;
+            this.disableMc.visible = !enabled;
         }
+    }
+    
+    public function set inspectableDisabledFillPadding(param1:Object) : void
+    {
+        if(!componentInspectorSetting)
+        {
+            return;
+        }
+        this.disabledFillPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
+    }
+    
+    public function get disabledFillPadding() : Padding
+    {
+        return this._disabledFillPadding;
+    }
+    
+    public function set disabledFillPadding(param1:Padding) : void
+    {
+        this._disabledFillPadding = param1;
     }
     
     public function get paddingHorizontal() : Number

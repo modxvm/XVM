@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.battleResults
 {
     import scaleform.clik.core.UIComponent;
-    import net.wg.infrastructure.interfaces.ISubtaskComponent;
+    import net.wg.gui.lobby.interfaces.ISubtaskComponent;
     import flash.events.MouseEvent;
     import net.wg.gui.components.controls.TextFieldShort;
     import flash.display.MovieClip;

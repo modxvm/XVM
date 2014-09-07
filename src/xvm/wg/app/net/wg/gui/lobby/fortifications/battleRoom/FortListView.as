@@ -7,7 +7,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
     import net.wg.gui.components.controls.InfoIcon;
     import net.wg.data.daapi.base.DAAPIDataProvider;
     import net.wg.gui.rally.interfaces.IRallyVO;
-    import net.wg.gui.rally.vo.RallyShortVO;
+    import net.wg.gui.lobby.fortifications.data.battleRoom.LegionariesSortieVO;
     import net.wg.data.constants.Tooltips;
     import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
     import scaleform.clik.events.ListEvent;
@@ -58,15 +58,6 @@ package net.wg.gui.lobby.fortifications.battleRoom
             this.filterIndexChanging = false;
         }
         
-        public function as_setDetails(param1:Object) : void
-        {
-            if(param1 == null)
-            {
-                return;
-            }
-            detailsSection.setData(this.convertToRallyVO(param1));
-        }
-        
         public function as_setCreationEnabled(param1:Boolean) : void
         {
             createBtn.enabled = param1;
@@ -74,7 +65,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         override protected function convertToRallyVO(param1:Object) : IRallyVO
         {
-            return new RallyShortVO(param1);
+            return new LegionariesSortieVO(param1);
         }
         
         override protected function getRallyTooltipLinkage() : String
@@ -163,17 +154,23 @@ package net.wg.gui.lobby.fortifications.battleRoom
             _loc1_.label = FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_NAME;
             _loc1_.buttonWidth = 332;
             _loc1_.textAlign = TextFieldAutoSize.LEFT;
+            _loc1_.sortOrder = 0;
+            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_SORTNAMEBTN;
             _loc1_.iconId = "creatorName";
             _loc2_.push(_loc1_);
             _loc1_ = new NormalSortingBtnInfo();
             _loc1_.label = FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_DIVISION;
             _loc1_.buttonWidth = 115;
-            _loc1_.iconId = "description";
+            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_SORTDIVISIONBTN;
+            _loc1_.iconId = "division";
+            _loc1_.sortOrder = 1;
             _loc2_.push(_loc1_);
             _loc1_ = new NormalSortingBtnInfo();
             _loc1_.label = FORTIFICATIONS.SORTIE_LISTVIEW_LISTCOLUMNS_MEMBERSCOUNT;
+            _loc1_.toolTip = TOOLTIPS.FORTIFICATION_SORTIE_LISTROOM_SORTSQUADBTN;
             _loc1_.buttonWidth = 130;
             _loc1_.iconId = "playersCount";
+            _loc1_.sortOrder = 2;
             _loc2_.push(_loc1_);
             rallyTable.headerDP = new DataProvider(_loc2_);
             rallyTable.sortByField("creatorName",SortingInfo.ASCENDING_SORT);

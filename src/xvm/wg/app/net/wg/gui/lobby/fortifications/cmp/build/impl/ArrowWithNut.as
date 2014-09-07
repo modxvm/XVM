@@ -2,11 +2,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.gui.lobby.fortifications.cmp.build.IArrowWithNut;
+    import net.wg.utils.ITweenAnimator;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.infrastructure.interfaces.IUIComponentEx;
-    import net.wg.utils.ITweenAnimator;
     import flash.display.DisplayObject;
-    import net.wg.gui.lobby.fortifications.utils.impl.TweenAnimator;
+    import scaleform.clik.events.InputEvent;
     
     public class ArrowWithNut extends UIComponentEx implements IArrowWithNut
     {
@@ -14,6 +14,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public function ArrowWithNut()
         {
             super();
+        }
+        
+        private static function getTweenAnimator() : ITweenAnimator
+        {
+            return App.utils.tweenAnimator;
         }
         
         public var nutMc:UILoaderAlt;
@@ -28,7 +33,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         {
             this.visible = true;
             this.removeAllAnims();
-            var _loc1_:ITweenAnimator = this.getTweenAnimator();
+            var _loc1_:ITweenAnimator = getTweenAnimator();
             if(this._isExport)
             {
                 _loc1_.addMoveUpAnim(this.nutMc,this._nutMcStartY,null);
@@ -46,7 +51,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public function hide() : void
         {
             this.removeAllAnims();
-            var _loc1_:ITweenAnimator = this.getTweenAnimator();
+            var _loc1_:ITweenAnimator = getTweenAnimator();
             if(this._isExport)
             {
                 _loc1_.addMoveDownAnim(this.nutMc,this._nutMcStartY,null);
@@ -112,18 +117,18 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private function removeAllAnims() : void
         {
-            this.getTweenAnimator().removeAnims(this.nutMc);
-            this.getTweenAnimator().removeAnims(DisplayObject(this.content));
-        }
-        
-        private function getTweenAnimator() : ITweenAnimator
-        {
-            return TweenAnimator.instance;
+            getTweenAnimator().removeAnims(this.nutMc);
+            getTweenAnimator().removeAnims(DisplayObject(this.content));
         }
         
         public function onComplete() : void
         {
             this.visible = false;
+        }
+        
+        override public function handleInput(param1:InputEvent) : void
+        {
+            super.handleInput(param1);
         }
     }
 }

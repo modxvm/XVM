@@ -16,6 +16,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var unregisterFlashComponent:Function = null;
         
+        public var onFocusIn:Function = null;
+        
         public function registerFlashComponentS(param1:IDAAPIModule, param2:String) : void
         {
             App.utils.asserter.assertNotNull(this.registerFlashComponent,"registerFlashComponent" + Errors.CANT_NULL);
@@ -26,6 +28,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.unregisterFlashComponent,"unregisterFlashComponent" + Errors.CANT_NULL);
             this.unregisterFlashComponent(param1);
+        }
+        
+        public function onFocusInS(param1:String) : void
+        {
+            App.utils.asserter.assertNotNull(this.onFocusIn,"onFocusIn" + Errors.CANT_NULL);
+            this.onFocusIn(param1);
         }
     }
 }

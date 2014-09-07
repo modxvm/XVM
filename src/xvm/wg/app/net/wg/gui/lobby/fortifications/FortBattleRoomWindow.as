@@ -19,7 +19,7 @@ package net.wg.gui.lobby.fortifications
         public function FortBattleRoomWindow()
         {
             super();
-            showWindowBg = false;
+            showWindowBgForm = false;
             canMinimize = true;
             UIID = 29;
         }
@@ -56,6 +56,18 @@ package net.wg.gui.lobby.fortifications
                         onCreateRallyS();
                     }
                     break;
+                case FORTIFICATION_ALIASES.FORT_CLAN_BATTLE_LIST_VIEW_UI:
+                    onBrowseClanBattlesS();
+                    break;
+                case FORTIFICATION_ALIASES.FORT_CLAN_BATTLE_ROOM_VIEW_UI:
+                    if(param1.data.itemId)
+                    {
+                        onJoinClanBattleS(param1.data.itemId,param1.data.slotIndex,param1.data.peripheryID);
+                    }
+                    break;
+                case RallyViewsEvent.CREATE_CLAN_BATTLE_ROOM:
+                    onCreatedBattleRoomS(param1.data.itemId,param1.data.peripheryID);
+                    break;
             }
         }
         
@@ -77,12 +89,13 @@ package net.wg.gui.lobby.fortifications
             }
             else if(getCurrentView() is FortIntroView)
             {
-                setFocus(FortIntroView(getCurrentView()).listRoomBtn);
+                setFocus(FortIntroView(getCurrentView()).getComponentForFocus());
             }
-            else
+            else if(lastFocusedElement)
             {
                 setFocus(lastFocusedElement);
             }
+            
             
             
             

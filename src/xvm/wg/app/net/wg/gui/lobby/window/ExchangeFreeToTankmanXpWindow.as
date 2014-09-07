@@ -11,7 +11,7 @@ package net.wg.gui.lobby.window
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.advanced.SkillsItemRenderer;
     import flash.text.TextField;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import scaleform.clik.utils.Padding;
     import flash.events.Event;
     import scaleform.clik.utils.Constraints;
@@ -31,7 +31,7 @@ package net.wg.gui.lobby.window
             canResize = false;
             canMinimize = false;
             isCentered = true;
-            showWindowBg = false;
+            showWindowBgForm = false;
         }
         
         public static var INIT_DATA_INVALID:String = "initDataInv";

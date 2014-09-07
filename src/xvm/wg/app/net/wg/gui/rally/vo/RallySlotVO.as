@@ -44,11 +44,6 @@ package net.wg.gui.rally.vo
         
         private var _selectedVehicleLevel:int = 0;
         
-        public function get playerObj() : Object
-        {
-            return this._player;
-        }
-        
         public function get isClosedVal() : Boolean
         {
             return this._isClosed;

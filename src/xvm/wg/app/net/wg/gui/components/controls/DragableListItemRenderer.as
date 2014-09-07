@@ -1,6 +1,6 @@
 package net.wg.gui.components.controls
 {
-    import net.wg.infrastructure.interfaces.IDraggableList;
+    import net.wg.gui.components.controls.interfaces.IDraggableList;
     import flash.events.MouseEvent;
     import scaleform.clik.core.UIComponent;
     import scaleform.gfx.MouseEventEx;
@@ -67,7 +67,7 @@ package net.wg.gui.components.controls
                 _loc4_ = _loc2_ == null?0:_loc2_.buttonIdx;
                 this.startDragX = owner.mouseX;
                 this.isDragging = true;
-                dispatchEvent(new ListEventEx(ListEventEx.ITEM_DRAG_START,false,false,index,-1,-1,null,null,_loc3_,_loc4_));
+                dispatchEvent(new ListEventEx(ListEventEx.ITEM_DRAG_START,false,true,index,-1,-1,this,this.data,_loc3_,_loc4_));
             }
             super.handleMousePress(param1);
         }
@@ -77,7 +77,7 @@ package net.wg.gui.components.controls
             if((this.isDragging) && (this.dragEnabled))
             {
                 this.isDragging = false;
-                dispatchEvent(new ListEventEx(ListEventEx.ITEM_DRAG_STOP,false,false,index));
+                dispatchEvent(new ListEventEx(ListEventEx.ITEM_DRAG_STOP,false,true,index));
             }
             super.handleMouseRelease(param1);
             if(Math.abs(this.startDragX - owner.mouseX) > this.DRAGGING_DELTA)

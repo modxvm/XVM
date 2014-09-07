@@ -4,7 +4,7 @@ package net.wg.gui.lobby.window
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.utils.ExcludeTweenManager;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import net.wg.data.constants.Errors;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;

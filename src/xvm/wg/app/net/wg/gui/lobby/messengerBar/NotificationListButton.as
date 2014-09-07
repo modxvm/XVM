@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.messengerBar
 {
     import net.wg.infrastructure.base.meta.impl.NotificationListButtonMeta;
-    import net.wg.infrastructure.interfaces.INotificationListButton;
+    import net.wg.gui.lobby.messengerBar.interfaces.INotificationListButton;
     import net.wg.gui.components.advanced.BlinkingButton;
     import flash.display.DisplayObject;
     import scaleform.clik.events.ButtonEvent;
@@ -60,7 +60,7 @@ package net.wg.gui.lobby.messengerBar
         private function btnClickHandler(param1:ButtonEvent) : void
         {
             handleClickS();
-            App.popoverMgr.show(this,Aliases.NOTIFICATIONS_LIST,0,0);
+            App.popoverMgr.show(this,Aliases.NOTIFICATIONS_LIST);
         }
     }
 }

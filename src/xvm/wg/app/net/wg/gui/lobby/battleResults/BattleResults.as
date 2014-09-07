@@ -19,7 +19,7 @@ package net.wg.gui.lobby.battleResults
         {
             this._clanEmblemCallbacks = {};
             super();
-            showWindowBg = false;
+            showWindowBgForm = false;
             this.visible = false;
             isCentered = true;
             this.noResult.visible = false;

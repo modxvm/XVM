@@ -37,6 +37,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         override protected function configUI() : void
         {
             super.configUI();
+            this.applyButton.mouseEnabledOnDisabled = true;
         }
         
         override protected function onPopulate() : void

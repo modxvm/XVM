@@ -5,7 +5,7 @@ package net.wg.gui.lobby.training
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.data.constants.Errors;
     import net.wg.data.constants.Linkages;
-    import net.wg.infrastructure.interfaces.IMinimapEntry;
+    import net.wg.gui.interfaces.IMinimapEntry;
     import flash.display.DisplayObject;
     
     public class MinimapLobby extends MinimapLobbyMeta implements IMinimapLobbyMeta

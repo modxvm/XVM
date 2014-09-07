@@ -13,12 +13,16 @@ package net.wg.gui.login.impl
     import net.wg.gui.login.ISparksManager;
     import org.idmedia.as3commons.util.Map;
     import flash.display.InteractiveObject;
+    import net.wg.gui.components.common.serverStats.ServerVO;
+    import scaleform.clik.interfaces.IDataProvider;
     import net.wg.gui.login.impl.components.RssItemEvent;
     import net.wg.gui.events.UILoaderEvent;
     import net.wg.gui.login.impl.components.CopyrightEvent;
     import net.wg.data.Aliases;
     import flash.ui.Keyboard;
     import scaleform.clik.events.ButtonEvent;
+    import net.wg.gui.components.controls.events.DropdownMenuEvent;
+    import scaleform.clik.events.ListEvent;
     import flash.events.Event;
     import flash.events.TextEvent;
     import flash.events.MouseEvent;
@@ -47,6 +51,8 @@ package net.wg.gui.login.impl
         
         private static var SPECIAL_SYMBOLS:String = "~`!@#$%^&*()|\\/,.;:\"\'";
         
+        private static var INV_CSIS_LISTENING:String = "invCsisListening";
+        
         public var bg_image:UILoaderAlt = null;
         
         public var sparksMc:MovieClip = null;
@@ -74,6 +80,8 @@ package net.wg.gui.login.impl
         private var isTFClickedByMBR:Boolean = false;
         
         private var focusInited:Boolean = false;
+        
+        private var _startListenCSIS:Boolean = false;
         
         private var _isInputEnabled:Boolean = true;
         
@@ -164,6 +172,30 @@ package net.wg.gui.login.impl
             this.submit();
         }
         
+        public function as_switchToAutoAndSubmit(param1:String) : void
+        {
+            var _loc5_:ServerVO = null;
+            var _loc2_:IDataProvider = this.form.server.dataProvider;
+            var _loc3_:* = -1;
+            var _loc4_:* = 0;
+            while(_loc4_ < _loc2_.length)
+            {
+                _loc5_ = _loc2_[_loc4_];
+                if(_loc5_.data == param1)
+                {
+                    _loc3_ = _loc4_;
+                    break;
+                }
+                _loc4_++;
+            }
+            if(_loc3_ > -1)
+            {
+                this.form.server.selectedIndex = _loc3_;
+                this.form.server.validateNow();
+                this.submit();
+            }
+        }
+        
         public function as_enable(param1:Boolean) : void
         {
             this.enableInputs(param1);
@@ -207,6 +239,10 @@ package net.wg.gui.login.impl
         override protected function draw() : void
         {
             super.draw();
+            if(isInvalid(INV_CSIS_LISTENING))
+            {
+                startListenCsisUpdateS(this._startListenCSIS);
+            }
         }
         
         override protected function onPopulate() : void
@@ -260,6 +296,9 @@ package net.wg.gui.login.impl
             this.form.submit.removeEventListener(ButtonEvent.CLICK,this.onSubmitButtonClick);
             this.form.removeChangeHandler(this.onChange);
             this.form.removeEventListener(LoginEvent.TOKEN_RESET,this.onNeedTokenReset);
+            this.form.server.removeEventListener(DropdownMenuEvent.SHOW_DROP_DOWN,this.onServersDDClick);
+            this.form.server.removeEventListener(DropdownMenuEvent.CLOSE_DROP_DOWN,this.onServersDDClick);
+            this.form.server.removeEventListener(ListEvent.INDEX_CHANGE,this.onServerChange);
             this.form.rememberPwdCheckbox.removeEventListener(Event.SELECT,this.onRememberPwdCheckboxToggle);
             this.form.registerLink.removeEventListener(ButtonEvent.CLICK,this.onRegisterLinkClick);
             this.form.recoveryLink.removeEventListener(ButtonEvent.CLICK,this.onRecoveryLinkClick);
@@ -273,6 +312,12 @@ package net.wg.gui.login.impl
         private function initLoginForm() : void
         {
             this.form.submit.addEventListener(ButtonEvent.CLICK,this.onSubmitButtonClick);
+            if(isCSISUpdateOnRequestS())
+            {
+                this.form.server.addEventListener(DropdownMenuEvent.SHOW_DROP_DOWN,this.onServersDDClick);
+                this.form.server.addEventListener(DropdownMenuEvent.CLOSE_DROP_DOWN,this.onServersDDClick);
+            }
+            this.form.server.addEventListener(ListEvent.INDEX_CHANGE,this.onServerChange);
             this.form.addChangeHandler(this.onChange);
             this.form.addEventListener(LoginEvent.TOKEN_RESET,this.onNeedTokenReset);
             this.form.rememberPwdCheckbox.addEventListener(Event.SELECT,this.onRememberPwdCheckboxToggle);
@@ -532,6 +577,20 @@ package net.wg.gui.login.impl
                 _loc2_();
                 param1.handled = true;
             }
+        }
+    }
+    
+    private function onServersDDClick(param1:DropdownMenuEvent) : void
+    {
+        this._startListenCSIS = param1.type == DropdownMenuEvent.SHOW_DROP_DOWN;
+        invalidate(INV_CSIS_LISTENING);
+    }
+    
+    private function onServerChange(param1:ListEvent) : void
+    {
+        if(param1.itemData)
+        {
+            saveLastSelectedServerS(ServerVO(param1.itemData).data);
         }
     }
 }

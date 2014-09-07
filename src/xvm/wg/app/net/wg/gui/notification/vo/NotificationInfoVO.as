@@ -18,8 +18,6 @@ package net.wg.gui.notification.vo
         
         private var _messageVO:MessageInfoVO;
         
-        public var auxData:Array;
-        
         public var notify:Boolean;
         
         override public function isEquals(param1:DAAPIDataClass) : Boolean

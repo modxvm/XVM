@@ -132,7 +132,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             _loc1_.addEvent(this.select,MouseEvent.CLICK,this.onOut,false,0,true);
             _loc1_.addEvent(this.select,ListEvent.INDEX_CHANGE,this.onChange,false,0,true);
             _loc1_.addEvent(this.select,Event.SELECT,this.highlightParams,false,0,true);
-            _loc1_.addEvent(this,MouseEvent.MOUSE_DOWN,this.onMouseDown,false,0,true);
+            _loc1_.addEvent(this,MouseEvent.MOUSE_DOWN,this.handleMouseDown,false,0,true);
         }
         
         override protected function onDispose() : void
@@ -143,7 +143,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             _loc1_.removeEvent(this.select,MouseEvent.CLICK,this.onOut);
             _loc1_.removeEvent(this.select,ListEvent.INDEX_CHANGE,this.onChange);
             _loc1_.removeEvent(this.select,Event.SELECT,this.highlightParams);
-            _loc1_.removeEvent(this,MouseEvent.MOUSE_DOWN,this.onMouseDown);
+            _loc1_.removeEvent(this,MouseEvent.MOUSE_DOWN,this.handleMouseDown);
             if(this.extraIcon)
             {
                 _loc1_.removeEvent(this.extraIcon,SimpleLoader.LOADED,this.onExtraIconLoaded);
@@ -229,8 +229,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         private function onExtraIconLoaded(param1:Event) : void
         {
-            var _loc2_:uint = 0;
-            _loc2_ = 2;
+            var _loc2_:uint = 2;
             this.extraIcon.x = width - this.extraIcon.width - _loc2_;
             this.extraIcon.y = height - this.extraIcon.height - _loc2_;
         }
@@ -285,7 +284,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             dispatchEvent(new ParamsEvent(ParamsEvent.HIGHLIGHT_PARAMS,this.select.selected?this.type:"empty"));
         }
         
-        private function onMouseDown(param1:MouseEvent) : void
+        private function handleMouseDown(param1:MouseEvent) : void
         {
             if(param1 is MouseEventEx)
             {

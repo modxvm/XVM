@@ -1,8 +1,8 @@
 package net.wg.infrastructure.base
 {
-    import net.wg.infrastructure.interfaces.IWindowGeometry;
-    import net.wg.infrastructure.interfaces.IWindow;
-    import net.wg.infrastructure.interfaces.IAbstractWindowView;
+    import net.wg.infrastructure.base.interfaces.IWindowGeometry;
+    import net.wg.infrastructure.base.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IAbstractWindowView;
     
     public class DefaultWindowGeometry extends Object implements IWindowGeometry
     {

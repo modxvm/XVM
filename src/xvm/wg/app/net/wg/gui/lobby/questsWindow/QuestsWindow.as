@@ -19,7 +19,7 @@ package net.wg.gui.lobby.questsWindow
         public function QuestsWindow()
         {
             super();
-            showWindowBg = false;
+            showWindowBgForm = false;
             isCentered = true;
         }
         

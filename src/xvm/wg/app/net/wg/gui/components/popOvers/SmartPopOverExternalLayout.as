@@ -112,7 +112,7 @@ package net.wg.gui.components.popOvers
                 _loc7_++;
             }
             var _loc8_:IAbstractWrapperView = _loc2_.wrapperContent;
-            var _loc9_:Rectangle = new Rectangle(_loc8_.x - _loc2_.hitMc.x,_loc8_.y - _loc2_.hitMc.y,_loc8_.width - bgFormPadding.horizontal,_loc8_.height - bgFormPadding.vertical);
+            var _loc9_:Rectangle = new Rectangle(0,0,_loc2_.hitMc.width,_loc2_.hitMc.height);
             var _loc10_:SmartPopOverLayoutInfo = getLayoutOptions(_loc1_,_loc3_,this._stageDimensions,this._positionKeyPoint,_loc9_,this._positionKeyPointPadding,this._preferredLayout);
             _loc2_.arrowDirection = _loc10_.arrowDirection;
             _loc2_.arrowPosition = _loc10_.arrowPosition;

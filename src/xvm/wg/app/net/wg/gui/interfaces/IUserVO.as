@@ -6,5 +6,7 @@ package net.wg.gui.interfaces
     {
         
         function get dbID() : Number;
+        
+        function get accID() : Number;
     }
 }

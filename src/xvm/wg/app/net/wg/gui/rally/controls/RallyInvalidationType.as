@@ -10,6 +10,8 @@ package net.wg.gui.rally.controls
         
         public static var VEHICLE_LABEL:String = "vehicleLabel";
         
+        public static var TEAM_LABEL:String = "teamLabel";
+        
         public static var ACTION_BUTTON_DATA:String = "actionButtonData";
         
         public static var RALLY_DATA:String = "rallyData";

@@ -28,13 +28,11 @@ package net.wg.gui.lobby.fortifications.data
         
         private var _leftTimeStr:String = "";
         
-        private var _orderID:String = "";
+        private var _icon:String = "";
         
         private var _canUseOrder:Boolean = false;
         
         private var _canCreateOrder:Boolean = true;
-        
-        private var _hasBtn:Boolean = false;
         
         private var _hasBuilding:Boolean = false;
         
@@ -46,7 +44,13 @@ package net.wg.gui.lobby.fortifications.data
         
         private var _useBtnTooltip:String = "";
         
+        private var _questID:String = "";
+        
+        private var _showLinkBtn:Boolean = false;
+        
         private var _isPermanent:Boolean = false;
+        
+        private var _showAlertIcon:Boolean = false;
         
         public function get title() : String
         {
@@ -56,16 +60,6 @@ package net.wg.gui.lobby.fortifications.data
         public function set title(param1:String) : void
         {
             this._title = param1;
-        }
-        
-        public function get hasBtn() : Boolean
-        {
-            return this._hasBtn;
-        }
-        
-        public function set hasBtn(param1:Boolean) : void
-        {
-            this._hasBtn = param1;
         }
         
         public function get description() : String
@@ -178,16 +172,6 @@ package net.wg.gui.lobby.fortifications.data
             this._leftTime = param1;
         }
         
-        public function get orderID() : String
-        {
-            return this._orderID;
-        }
-        
-        public function set orderID(param1:String) : void
-        {
-            this._orderID = param1;
-        }
-        
         public function get levelStr() : String
         {
             return this._levelStr;
@@ -236,6 +220,46 @@ package net.wg.gui.lobby.fortifications.data
         public function set isPermanent(param1:Boolean) : void
         {
             this._isPermanent = param1;
+        }
+        
+        public function get icon() : String
+        {
+            return this._icon;
+        }
+        
+        public function set icon(param1:String) : void
+        {
+            this._icon = param1;
+        }
+        
+        public function get questID() : String
+        {
+            return this._questID;
+        }
+        
+        public function set questID(param1:String) : void
+        {
+            this._questID = param1;
+        }
+        
+        public function get showLinkBtn() : Boolean
+        {
+            return this._showLinkBtn;
+        }
+        
+        public function set showLinkBtn(param1:Boolean) : void
+        {
+            this._showLinkBtn = param1;
+        }
+        
+        public function get showAlertIcon() : Boolean
+        {
+            return this._showAlertIcon;
+        }
+        
+        public function set showAlertIcon(param1:Boolean) : void
+        {
+            this._showAlertIcon = param1;
         }
     }
 }

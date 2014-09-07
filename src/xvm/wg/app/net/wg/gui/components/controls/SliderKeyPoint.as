@@ -1,10 +1,11 @@
 package net.wg.gui.components.controls
 {
     import scaleform.clik.core.UIComponent;
+    import net.wg.gui.components.controls.interfaces.ISliderKeyPoint;
     import flash.text.TextField;
     import flash.events.MouseEvent;
     
-    public class SliderKeyPoint extends UIComponent
+    public class SliderKeyPoint extends UIComponent implements ISliderKeyPoint
     {
         
         public function SliderKeyPoint()
@@ -17,9 +18,43 @@ package net.wg.gui.components.controls
         
         private var _tooltip:String;
         
+        public function get tooltip() : String
+        {
+            return this._tooltip;
+        }
+        
+        public function set tooltip(param1:String) : void
+        {
+            this._tooltip = param1;
+        }
+        
         private var _index:int = -1;
         
+        public function get index() : int
+        {
+            return this._index;
+        }
+        
+        public function set index(param1:int) : void
+        {
+            this._index = param1;
+        }
+        
         private var _label:String = "";
+        
+        public function get label() : String
+        {
+            return this._label;
+        }
+        
+        public function set label(param1:String) : void
+        {
+            this._label = param1;
+            if(this.labelTF)
+            {
+                this.labelTF.htmlText = this._label;
+            }
+        }
         
         override protected function configUI() : void
         {
@@ -30,6 +65,7 @@ package net.wg.gui.components.controls
         
         override protected function onDispose() : void
         {
+            this.labelTF = null;
             removeEventListener(MouseEvent.ROLL_OVER,this.onOver);
             removeEventListener(MouseEvent.ROLL_OUT,this.onOut);
             super.onDispose();
@@ -45,40 +81,6 @@ package net.wg.gui.components.controls
             if(this._tooltip)
             {
                 App.toolTipMgr.show(this._tooltip);
-            }
-        }
-        
-        public function get tooltip() : String
-        {
-            return this._tooltip;
-        }
-        
-        public function set tooltip(param1:String) : void
-        {
-            this._tooltip = param1;
-        }
-        
-        public function get index() : int
-        {
-            return this._index;
-        }
-        
-        public function set index(param1:int) : void
-        {
-            this._index = param1;
-        }
-        
-        public function get label() : String
-        {
-            return this._label;
-        }
-        
-        public function set label(param1:String) : void
-        {
-            this._label = param1;
-            if(this.labelTF)
-            {
-                this.labelTF.htmlText = this._label;
             }
         }
     }

@@ -1,16 +1,16 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm Application.orig-0/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm
---- Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-05-29 23:23:08.929740600 +0300
-+++ Application.orig-0/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-05-29 23:24:39.472919400 +0300
-@@ -31,7 +31,7 @@
+--- Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-09-06 22:59:47.565465700 +0300
++++ Application.orig-0/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-09-06 22:58:57.172838200 +0300
+@@ -80,7 +80,7 @@
    end ; method
    trait slot QName(PackageNamespace(""), "bar") type QName(PackageNamespace("net.wg.gui.components.advanced"), "ButtonBarEx") end
    trait slot QName(PackageNamespace(""), "viewStack") type QName(PackageNamespace("net.wg.gui.lobby.profile.components"), "ResizableViewStack") end
 -  trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData") type QName(PackageNamespace("net.wg.gui.lobby.profile"), "ProfileMenuInfoVO") end
 +  trait slot QName(PackageNamespace(""), "initData") type QName(PackageNamespace("net.wg.gui.lobby.profile"), "ProfileMenuInfoVO") end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "_sectionsDataUtil") type QName(PackageNamespace("net.wg.gui.lobby.profile"), "SectionsDataUtil") end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "_sectionsDataUtil") type QName(PackageNamespace("net.wg.gui.lobby.profile"), "LinkageUtils") end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "_centerOffset") type QName(PackageNamespace(""), "int") value Integer(0) end
    trait method QName(ProtectedNamespace("net.wg.gui.lobby.profile:ProfileTabNavigator"), "configUI") flag OVERRIDE
-@@ -249,13 +249,13 @@
+@@ -298,13 +298,13 @@
  
        pop
        getlocal0
@@ -26,7 +26,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.
        getproperty         QName(PackageNamespace(""), "sectionsData")
        coerce              QName(PackageNamespace(""), "Array")
        setlocal1
-@@ -273,7 +273,7 @@
+@@ -322,7 +322,7 @@
        setlocal            5
  
        getlocal0
@@ -35,7 +35,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.
        getproperty         QName(PackageNamespace(""), "selectedAlias")
        coerce_s
        setlocal            6
-@@ -438,7 +438,7 @@
+@@ -487,7 +487,7 @@
        findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.profile"), "ProfileMenuInfoVO")
        getlocal1
        constructprop       QName(PackageNamespace("net.wg.gui.lobby.profile"), "ProfileMenuInfoVO"), 1
@@ -44,13 +44,13 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.
  
        findpropstrict      QName(PackageNamespace(""), "invalidate")
        getlex              QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "INIT_DATA_INV")
-@@ -475,16 +475,16 @@
+@@ -528,16 +528,16 @@
        initproperty        QName(PackageNamespace(""), "bar")
  
        getlocal0
 -      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
 +      getproperty         QName(PackageNamespace(""), "initData")
-       iffalse             L20
+       iffalse             L23
  
        getlocal0
 -      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
@@ -60,7 +60,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.
        getlocal0
        pushnull
 -      initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
-+      initproperty        QName(PackageNamespace(""), "initData")
++      getproperty         QName(PackageNamespace(""), "initData")
  
- L20:
+ L23:
        getlocal0

@@ -8,10 +8,12 @@ package net.wg.gui.cyberSport.views
     import net.wg.gui.rally.interfaces.IRallyVO;
     import net.wg.gui.rally.vo.RallyVO;
     import net.wg.gui.cyberSport.views.unit.WaitListSection;
+    import net.wg.gui.rally.interfaces.IChatSectionWithDescription;
     import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
     import net.wg.data.constants.Values;
     import net.wg.gui.rally.events.RallyViewsEvent;
     import fl.transitions.easing.Strong;
+    import flash.display.Sprite;
     
     public class UnitView extends CyberSportUnitMeta implements ICyberSportUnitMeta
     {
@@ -115,7 +117,7 @@ package net.wg.gui.cyberSport.views
             {
                 (waitingListSection as WaitListSection).enableCloseButton(param1);
                 this.unitTeamSection.enableFreezeButton(param1);
-                chatSection.enableEditCommitButton(param1);
+                (chatSection as IChatSectionWithDescription).enableEditCommitButton(param1);
             }
             else if(param2 == SET_PLAYER_STATE)
             {
@@ -243,12 +245,12 @@ private function set rosterTeamSectionMouseEnabled(param1:Boolean) : void
 this.isRosterSettingsVisible = param1;
 this.rosterTeamSection.mouseEnabled = param1;
 this.rosterTeamSection.mouseChildren = param1;
-teamSection.mouseEnabled = !param1;
-teamSection.mouseChildren = !param1;
+(teamSection as Sprite).mouseEnabled = !param1;
+(teamSection as Sprite).mouseChildren = !param1;
 waitingListSection.mouseEnabled = !param1;
 waitingListSection.mouseChildren = !param1;
-chatSection.mouseEnabled = !param1;
-chatSection.mouseChildren = !param1;
+(chatSection as Sprite).mouseEnabled = !param1;
+(chatSection as Sprite).mouseChildren = !param1;
 this.rosterTeamContext = param1;
 }
 

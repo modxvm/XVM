@@ -7,6 +7,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
     import net.wg.gui.components.controls.NormalSortingBtnInfo;
     import net.wg.data.constants.SortingInfo;
     import flash.text.TextFieldAutoSize;
+    import flash.events.MouseEvent;
     import net.wg.gui.components.controls.SortableTable;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.components.controls.SoundButtonEx;
@@ -15,7 +16,6 @@ package net.wg.gui.lobby.fortifications.windows.impl
     import net.wg.gui.lobby.fortifications.data.FortFixedPlayersVO;
     import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
     import net.wg.gui.events.SortableTableListEvent;
-    import flash.events.MouseEvent;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.data.constants.Values;
     import flash.display.InteractiveObject;
@@ -36,7 +36,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             isModal = false;
             isCentered = true;
             this.toolTipArea.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverToolTipAreaHandler);
-            this.toolTipArea.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutToolTipAreaHandler);
+            this.toolTipArea.addEventListener(MouseEvent.ROLL_OUT,onRollOutToolTipAreaHandler);
             this.playersList.addEventListener(SortableTableListEvent.RENDERER_CLICK,this.itemClickHandler);
         }
         
@@ -68,7 +68,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             var _loc5_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
             _loc5_.iconId = ROLE;
             _loc5_.label = FORTIFICATIONS.CLANLISTWINDOW_TABLE_ROLE;
-            _loc5_.buttonWidth = 137;
+            _loc5_.buttonWidth = 199;
             _loc5_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
             _loc5_.sortOrder = 1;
             _loc5_.textAlign = TextFieldAutoSize.LEFT;
@@ -94,6 +94,11 @@ package net.wg.gui.lobby.fortifications.windows.impl
             _loc7_.sortOrder = 3;
             _loc1_.push(_loc7_);
             return new DataProvider(_loc1_);
+        }
+        
+        private static function onRollOutToolTipAreaHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
         
         public var playersList:SortableTable = null;
@@ -133,7 +138,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.playersList.dispose();
             this.playersList = null;
             this.toolTipArea.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverToolTipAreaHandler);
-            this.toolTipArea.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutToolTipAreaHandler);
+            this.toolTipArea.removeEventListener(MouseEvent.ROLL_OUT,onRollOutToolTipAreaHandler);
             this.toolTipArea = null;
             this.assignPlayer.removeEventListener(ButtonEvent.CLICK,this.onClickBtnHandler);
             this.assignPlayer.dispose();
@@ -237,11 +242,6 @@ package net.wg.gui.lobby.fortifications.windows.impl
         {
             App.eventLogManager.logSubSystem(EVENT_LOG_CONSTANTS.SST_TOOLTIP,EVENT_LOG_CONSTANTS.EVENT_TYPE_ON_WINDOW_OPEN,0,this.model.buildingId);
             App.toolTipMgr.showComplex(this.model.generalTooltipData);
-        }
-        
-        private function onRollOutToolTipAreaHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
         }
     }
 }

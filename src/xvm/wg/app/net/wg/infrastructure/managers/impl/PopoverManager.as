@@ -6,13 +6,12 @@ package net.wg.infrastructure.managers.impl
     import flash.display.Stage;
     import net.wg.infrastructure.interfaces.IPopOverCaller;
     import net.wg.infrastructure.interfaces.IClosePopoverCallback;
-    import net.wg.infrastructure.interfaces.IOpenPopoverCallback;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.NullPointerException;
     import flash.events.MouseEvent;
     import flash.display.DisplayObject;
     import net.wg.infrastructure.interfaces.IPopoverWrapper;
-    import net.wg.infrastructure.interfaces.IAbstractPopOverView;
+    import net.wg.infrastructure.base.interfaces.IAbstractPopOverView;
     
     public class PopoverManager extends PopoverManagerMeta implements IPopoverManagerMeta, IPopoverManager
     {
@@ -27,9 +26,9 @@ package net.wg.infrastructure.managers.impl
         
         private var _popoverCaller:IPopOverCaller;
         
-        private var closeCallBack:IClosePopoverCallback = null;
+        private var client:IClosePopoverCallback = null;
         
-        public function show(param1:IPopOverCaller, param2:String, param3:int, param4:int, param5:Object = null, param6:IClosePopoverCallback = null, param7:IOpenPopoverCallback = null) : void
+        public function show(param1:IPopOverCaller, param2:String, param3:Object = null, param4:IClosePopoverCallback = null) : void
         {
             App.utils.asserter.assertNotNull(param1,"popoverCaller" + Errors.CANT_NULL,NullPointerException);
             App.utils.asserter.assertNotNull(param2,"alias" + Errors.CANT_NULL,NullPointerException);
@@ -40,11 +39,11 @@ package net.wg.infrastructure.managers.impl
             }
             this._stage.addEventListener(MouseEvent.MOUSE_DOWN,this.stageMouseDownHandler,false,0,true);
             this._popoverCaller = param1;
-            this.closeCallBack = param6;
-            requestShowPopoverS(param2,param3,param4,param5);
-            if(param7)
+            this.client = param4;
+            requestShowPopoverS(param2,param3);
+            if(this.client)
             {
-                param7.onPopoverOpen();
+                this.client.onPopoverOpen();
             }
         }
         
@@ -58,9 +57,9 @@ package net.wg.infrastructure.managers.impl
             if(this._popoverCaller)
             {
                 this._stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.stageMouseDownHandler);
-                if(this.closeCallBack != null)
+                if(this.client != null)
                 {
-                    this.closeCallBack.onPopoverClose();
+                    this.client.onPopoverClose();
                 }
                 this._popoverCaller = null;
             }
@@ -69,7 +68,7 @@ package net.wg.infrastructure.managers.impl
         public function dispose() : void
         {
             this._popoverCaller = null;
-            this.closeCallBack = null;
+            this.client = null;
             this._stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.stageMouseDownHandler);
             this._stage = null;
         }

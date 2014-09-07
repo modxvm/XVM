@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.training
 {
     import scaleform.clik.core.UIComponent;
-    import net.wg.infrastructure.interfaces.IMinimapEntry;
+    import net.wg.gui.interfaces.IMinimapEntry;
     import flash.display.MovieClip;
     import flash.filters.BitmapFilter;
     

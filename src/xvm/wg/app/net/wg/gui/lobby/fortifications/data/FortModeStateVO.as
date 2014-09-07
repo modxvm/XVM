@@ -26,6 +26,10 @@ package net.wg.gui.lobby.fortifications.data
         
         private var _clanListBtn:uint = 0;
         
+        private var _calendarBtn:uint = 0;
+        
+        private var _settingBtn:uint = 0;
+        
         private var _transportToggle:uint = 0;
         
         private var _footerBitmapFill:uint = 0;
@@ -39,6 +43,8 @@ package net.wg.gui.lobby.fortifications.data
         private var _leaveModeBtn:uint = 0;
         
         private var _tutorialArrow:uint = 0;
+        
+        private var _infoTF:uint = 0;
         
         public function getYellowVignette() : FortModeElementProperty
         {
@@ -58,6 +64,16 @@ package net.wg.gui.lobby.fortifications.data
         public function getClanListBtn() : FortModeElementProperty
         {
             return new FortModeElementProperty(this._clanListBtn);
+        }
+        
+        public function getCalendarBtn() : FortModeElementProperty
+        {
+            return new FortModeElementProperty(this._calendarBtn);
+        }
+        
+        public function getSettingBtn() : FortModeElementProperty
+        {
+            return new FortModeElementProperty(this._settingBtn);
         }
         
         public function getTransportToggle() : FortModeElementProperty
@@ -100,6 +116,11 @@ package net.wg.gui.lobby.fortifications.data
             return new FortModeElementProperty(this._tutorialArrow);
         }
         
+        public function getInfoTF() : FortModeElementProperty
+        {
+            return new FortModeElementProperty(this._infoTF);
+        }
+        
         public function get statsBtn() : uint
         {
             return this._statsBtn;
@@ -118,6 +139,26 @@ package net.wg.gui.lobby.fortifications.data
         public function set clanListBtn(param1:uint) : void
         {
             this._clanListBtn = param1;
+        }
+        
+        public function get calendarBtn() : uint
+        {
+            return this._calendarBtn;
+        }
+        
+        public function set calendarBtn(param1:uint) : void
+        {
+            this._calendarBtn = param1;
+        }
+        
+        public function get settingBtn() : uint
+        {
+            return this._settingBtn;
+        }
+        
+        public function set settingBtn(param1:uint) : void
+        {
+            this._settingBtn = param1;
         }
         
         public function get mode() : String
@@ -265,6 +306,16 @@ package net.wg.gui.lobby.fortifications.data
         public function set transportToggle(param1:uint) : void
         {
             this._transportToggle = param1;
+        }
+        
+        public function get infoTF() : uint
+        {
+            return this._infoTF;
+        }
+        
+        public function set infoTF(param1:uint) : void
+        {
+            this._infoTF = param1;
         }
     }
 }

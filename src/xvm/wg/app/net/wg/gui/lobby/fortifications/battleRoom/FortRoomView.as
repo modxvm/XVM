@@ -6,14 +6,16 @@ package net.wg.gui.lobby.fortifications.battleRoom
     import net.wg.gui.components.controls.InfoIcon;
     import flash.text.TextField;
     import net.wg.gui.rally.interfaces.IRallyVO;
+    import net.wg.gui.lobby.fortifications.data.battleRoom.LegionariesSortieVO;
+    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
+    import net.wg.gui.rally.interfaces.IChatSectionWithDescription;
+    import scaleform.clik.events.ButtonEvent;
+    import flash.events.MouseEvent;
+    import net.wg.gui.rally.controls.RallyInvalidationType;
     import net.wg.gui.lobby.fortifications.data.battleRoom.SortieVO;
     import net.wg.gui.rally.events.RallyViewsEvent;
     import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
     import net.wg.infrastructure.interfaces.entity.IIdentifiable;
-    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
-    import scaleform.clik.events.ButtonEvent;
-    import flash.events.MouseEvent;
-    import net.wg.gui.rally.controls.RallyInvalidationType;
     import net.wg.data.constants.Tooltips;
     
     public class FortRoomView extends FortRoomMeta implements IFortRoomMeta
@@ -22,6 +24,9 @@ package net.wg.gui.lobby.fortifications.battleRoom
         public function FortRoomView()
         {
             super();
+            this.tooltipMessage.htmlText = FORTIFICATIONS.FORTBATTLEROOM_LEGIONARIESTOOLTIPMSG;
+            this.tooltipMessage.visible = false;
+            this.legionariesCount.visible = false;
             backBtn.UIID = 51;
         }
         
@@ -29,32 +34,33 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         private static var SET_PLAYER_STATE:int = 6;
         
-        public var changeDivisionBtn:SoundButton;
+        public var changeDivisionBtn:SoundButton = null;
         
-        public var filterInfo:InfoIcon;
+        public var filterInfo:InfoIcon = null;
         
-        public var divisionInfoText:TextField;
+        public var divisionInfoText:TextField = null;
         
-        public function get unitTeamSection() : SortieTeamSection
+        public var tooltipMessage:TextField = null;
+        
+        public var legionariesCount:TextField = null;
+        
+        public function as_showLegionariesCount(param1:Boolean, param2:String) : void
         {
-            return teamSection as SortieTeamSection;
+            this.legionariesCount.visible = param1;
+            this.legionariesCount.htmlText = param2;
+        }
+        
+        public function as_showLegionariesToolTip(param1:Boolean) : void
+        {
+            if(this.tooltipMessage.visible != param1)
+            {
+                this.tooltipMessage.visible = param1;
+            }
         }
         
         override protected function getRallyVO(param1:Object) : IRallyVO
         {
-            return new SortieVO(param1);
-        }
-        
-        override protected function onToggleReadyStateRequest(param1:RallyViewsEvent) : void
-        {
-            App.eventLogManager.logSubSystem(EVENT_LOG_CONSTANTS.SST_UI_FORT,EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,param1.data.uiid,param1.data.arg);
-            super.onToggleReadyStateRequest(param1);
-        }
-        
-        override protected function onChooseVehicleRequest(param1:RallyViewsEvent) : void
-        {
-            App.eventLogManager.logUIElement(IIdentifiable(param1.target.vehicleBtn),EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,0);
-            super.onChooseVehicleRequest(param1);
+            return new LegionariesSortieVO(param1);
         }
         
         override protected function getTitleStr() : String
@@ -71,7 +77,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
         {
             if(param2 == CHANGE_UNIT_STATE)
             {
-                chatSection.enableEditCommitButton(param1);
+                (chatSection as IChatSectionWithDescription).enableEditCommitButton(param1);
             }
             else if(param2 == SET_PLAYER_STATE)
             {
@@ -118,6 +124,18 @@ package net.wg.gui.lobby.fortifications.battleRoom
                 this.divisionInfoText.htmlText = SortieVO(rallyData).divisionLbl;
                 this.changeDivisionBtn.visible = false;
             }
+        }
+        
+        override protected function onToggleReadyStateRequest(param1:RallyViewsEvent) : void
+        {
+            App.eventLogManager.logSubSystem(EVENT_LOG_CONSTANTS.SST_UI_FORT,EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,param1.data.uiid,param1.data.arg);
+            super.onToggleReadyStateRequest(param1);
+        }
+        
+        override protected function onChooseVehicleRequest(param1:RallyViewsEvent) : void
+        {
+            App.eventLogManager.logUIElement(IIdentifiable(param1.target.vehicleBtn),EVENT_LOG_CONSTANTS.EVENT_TYPE_CLICK,0);
+            super.onChooseVehicleRequest(param1);
         }
         
         override protected function onBackClickHandler(param1:ButtonEvent) : void

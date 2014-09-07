@@ -10,7 +10,7 @@ package net.wg.gui.lobby.browser
         public function BrowserWindow()
         {
             super();
-            showWindowBg = false;
+            showWindowBgForm = false;
         }
         
         public var actionBtn:BrowserActionBtn;

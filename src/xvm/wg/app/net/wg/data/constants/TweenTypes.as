@@ -30,6 +30,8 @@ package net.wg.data.constants
         
         public static var TURN_HALF:String = "turnHalf";
         
+        public static var USER_TWEEN:String = "userTween";
+        
         public static var SIMPLE_ANIM_TYPES:Vector.<String> = new <String>[MOVE_UP,MOVE_DOWN,FADE_IN,FADE_OUT,TURN_HALF];
         
         public static var FADE_TYPES:Vector.<String> = new <String>[FADE_IN,FADE_OUT];

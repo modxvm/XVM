@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.questsWindow.components
 {
     import scaleform.clik.core.UIComponent;
-    import net.wg.infrastructure.interfaces.IResizableContent;
+    import net.wg.gui.lobby.questsWindow.components.interfaces.IResizableContent;
     import net.wg.gui.events.ResizableBlockEvent;
     import scaleform.clik.constants.InvalidationType;
     import flash.display.DisplayObject;

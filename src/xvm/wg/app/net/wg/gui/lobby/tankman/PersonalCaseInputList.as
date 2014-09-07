@@ -9,6 +9,7 @@ package net.wg.gui.lobby.tankman
     import scaleform.clik.events.InputEvent;
     import flash.events.FocusEvent;
     import scaleform.clik.constants.InvalidationType;
+    import scaleform.clik.constants.InputValue;
     import flash.events.Event;
     
     public class PersonalCaseInputList extends UIComponent
@@ -16,11 +17,12 @@ package net.wg.gui.lobby.tankman
         
         public function PersonalCaseInputList()
         {
-            this._selectedItem = {};
             super();
         }
         
         public static var NAME_SELECTED:String = "nameSelected";
+        
+        private static var TIME_DELAY:uint = 500;
         
         public var searchText:TextInput;
         
@@ -30,7 +32,7 @@ package net.wg.gui.lobby.tankman
         
         private var currentName:String = null;
         
-        private var _selectedItem:Object;
+        private var _selectedItem:Object = null;
         
         private var isTextInput:Boolean = false;
         
@@ -38,7 +40,7 @@ package net.wg.gui.lobby.tankman
         
         override protected function onDispose() : void
         {
-            super.onDispose();
+            App.utils.scheduler.cancelTask(this.updateSelectedIndex);
             this.list.removeEventListener(ListEvent.INDEX_CHANGE,this.list_listIndexChangeHandler);
             this.list.removeEventListener(ListEvent.ITEM_PRESS,this.list_itemPressHandler);
             this.list.disposeRenderers();
@@ -48,6 +50,7 @@ package net.wg.gui.lobby.tankman
             this.searchText = null;
             this.dataProvider.cleanUp();
             this.dataProvider = null;
+            super.onDispose();
         }
         
         override protected function configUI() : void
@@ -101,6 +104,14 @@ package net.wg.gui.lobby.tankman
         
         private function searchText_inputHandler(param1:InputEvent) : void
         {
+            if((param1.details) && !(param1.details.value == InputValue.KEY_HOLD))
+            {
+                App.utils.scheduler.scheduleTask(this.updateSelectedIndex,TIME_DELAY);
+            }
+        }
+        
+        private function updateSelectedIndex() : void
+        {
             this.list.selectedIndex = this.searchIndex(this.searchText.text);
         }
         
@@ -125,7 +136,6 @@ package net.wg.gui.lobby.tankman
         
         private function searchText_focusInHandler(param1:FocusEvent) : void
         {
-            this.searchText.textField.selectable;
             this.searchText.textField.setSelection(0,this.searchText.text.length);
         }
         

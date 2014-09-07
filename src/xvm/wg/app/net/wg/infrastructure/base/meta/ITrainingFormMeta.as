@@ -11,6 +11,8 @@ package net.wg.infrastructure.base.meta
         
         function onEscapeS() : void;
         
+        function onLeaveS() : void;
+        
         function as_setList(param1:Array, param2:Number) : void;
     }
 }

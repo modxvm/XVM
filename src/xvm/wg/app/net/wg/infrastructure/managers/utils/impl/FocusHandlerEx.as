@@ -12,7 +12,7 @@ package net.wg.infrastructure.managers.utils.impl
     import flash.display.Stage;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.interfaces.IAbstractWrapperView;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     
     public class FocusHandlerEx extends Object implements IFocusHandler
     {

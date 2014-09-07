@@ -17,6 +17,10 @@ package net.wg.infrastructure.managers
         
         function vehicleWasInBattle(param1:Number) : Boolean;
         
+        function canGiveLeadershipTo(param1:Number) : Boolean;
+        
+        function canInviteThe(param1:Number) : Boolean;
+        
         function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>, param3:Object = null) : IContextMenu;
     }
 }

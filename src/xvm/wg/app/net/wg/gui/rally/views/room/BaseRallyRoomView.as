@@ -3,13 +3,15 @@ package net.wg.gui.rally.views.room
     import net.wg.infrastructure.base.meta.impl.BaseRallyRoomViewMeta;
     import net.wg.infrastructure.base.meta.IBaseRallyRoomViewMeta;
     import net.wg.gui.cyberSport.interfaces.IChannelComponentHolder;
+    import net.wg.gui.rally.interfaces.IBaseTeamSection;
+    import net.wg.gui.rally.interfaces.IBaseChatSection;
     import net.wg.gui.rally.vo.ActionButtonVO;
-    import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.gui.rally.interfaces.IRallyVO;
     import net.wg.gui.rally.vo.VehicleVO;
     import net.wg.gui.rally.controls.RallyInvalidationType;
     import net.wg.gui.messenger.ChannelComponent;
     import net.wg.gui.rally.events.RallyViewsEvent;
+    import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.rally.helpers.RallyDragDropListDelegateController;
     import flash.display.InteractiveObject;
@@ -22,15 +24,11 @@ package net.wg.gui.rally.views.room
             super();
         }
         
-        public var waitingListSection:BaseWaitListSection;
+        public var teamSection:IBaseTeamSection;
         
-        public var teamSection:BaseTeamSection;
-        
-        public var chatSection:BaseChatSection;
+        public var chatSection:IBaseChatSection;
         
         private var _actionButtonData:ActionButtonVO;
-        
-        private var _dragDropListDelegateCtrlr:IDisposable = null;
         
         private var _rallyData:IRallyVO;
         
@@ -86,12 +84,7 @@ package net.wg.gui.rally.views.room
         
         public function as_getCandidatesDP() : Object
         {
-            return this.waitingListSection.getCandidatesDP();
-        }
-        
-        public function as_highlightSlots(param1:Array) : void
-        {
-            this.teamSection.highlightSlots(param1);
+            return null;
         }
         
         public function as_setVehiclesTitle(param1:String) : void
@@ -111,7 +104,7 @@ package net.wg.gui.rally.views.room
         
         public function getChannelComponent() : ChannelComponent
         {
-            return this.chatSection.channelComponent;
+            return this.chatSection.getChannelComponent();
         }
         
         public function get rallyData() : IRallyVO
@@ -142,13 +135,8 @@ package net.wg.gui.rally.views.room
             super.draw();
             if((isInvalid(RallyInvalidationType.RALLY_DATA)) && (this.rallyData))
             {
-                this.waitingListSection.rallyData = this.rallyData;
                 this.chatSection.rallyData = this.rallyData;
-                if(this.rallyData)
-                {
-                    this.initializeDragDropSystem();
-                    titleLbl.text = App.utils.locale.makeString(this.getTitleStr(),{"commanderName":App.utils.commons.getFullPlayerName(App.utils.commons.getUserProps(this.rallyData.commanderVal.userName,this.rallyData.commanderVal.clanAbbrev,this.rallyData.commanderVal.region))});
-                }
+                this.updateTitle();
             }
             if((isInvalid(RallyInvalidationType.UPDATE_COMMENTS)) && (this.rallyData))
             {
@@ -158,6 +146,15 @@ package net.wg.gui.rally.views.room
             {
                 this.teamSection.actionButtonData = this._actionButtonData;
             }
+        }
+        
+        protected function updateTitle() : void
+        {
+            if(!titleLbl)
+            {
+                return;
+            }
+            titleLbl.text = App.utils.locale.makeString(this.getTitleStr(),{"commanderName":App.utils.commons.getFullPlayerName(App.utils.commons.getUserProps(this.rallyData.commanderVal.userName,this.rallyData.commanderVal.clanAbbrev,this.rallyData.commanderVal.region))});
         }
         
         override protected function onDispose() : void
@@ -170,11 +167,6 @@ package net.wg.gui.rally.views.room
             removeEventListener(RallyViewsEvent.IGNORE_USER_REQUEST,this.onIgnoreUserRequest);
             removeEventListener(RallyViewsEvent.EDIT_RALLY_DESCRIPTION,this.onEditRallyDescription);
             removeEventListener(RallyViewsEvent.SHOW_FAQ_WINDOW,this.onShowFAQWindowRequest);
-            if(this.waitingListSection)
-            {
-                this.waitingListSection.dispose();
-                this.waitingListSection = null;
-            }
             if(this.teamSection)
             {
                 this.teamSection.dispose();
@@ -185,17 +177,23 @@ package net.wg.gui.rally.views.room
                 this.chatSection.dispose();
                 this.chatSection = null;
             }
-            if(this._dragDropListDelegateCtrlr)
-            {
-                this._dragDropListDelegateCtrlr.dispose();
-                this._dragDropListDelegateCtrlr = null;
-            }
             if(this._rallyData)
             {
                 this._rallyData.dispose();
                 this._rallyData = null;
             }
             super.onDispose();
+        }
+        
+        public function as_highlightSlots(param1:Array) : void
+        {
+            this.teamSection.highlightSlots(param1);
+        }
+        
+        protected function getDragDropDeligateController(param1:Array) : IDisposable
+        {
+            var _loc2_:Class = App.utils.classFactory.getClass(Linkages.RALLY_DRAG_DROP_DELEGATE);
+            return new RallyDragDropListDelegateController(Vector.<InteractiveObject>(param1),_loc2_,Linkages.CANDIDATE_LIST_ITEM_RENDERER_UI,onSlotsHighlihgtingNeedS,assignSlotRequestS,leaveSlotRequestS);
         }
         
         protected function getRallyVO(param1:Object) : IRallyVO
@@ -206,22 +204,6 @@ package net.wg.gui.rally.views.room
         protected function getTitleStr() : String
         {
             return null;
-        }
-        
-        protected function getDragDropDeligateController(param1:Array) : IDisposable
-        {
-            var _loc2_:Class = App.utils.classFactory.getClass(Linkages.RALLY_DRAG_DROP_DELEGATE);
-            return new RallyDragDropListDelegateController(Vector.<InteractiveObject>(param1),_loc2_,Linkages.CANDIDATE_LIST_ITEM_RENDERER_UI,onSlotsHighlihgtingNeedS,assignSlotRequestS,leaveSlotRequestS);
-        }
-        
-        protected function initializeDragDropSystem() : void
-        {
-            var _loc1_:Array = null;
-            if(this._dragDropListDelegateCtrlr == null && (this.rallyData.isCommander))
-            {
-                _loc1_ = [this.waitingListSection.candidates,this.teamSection];
-                this._dragDropListDelegateCtrlr = this.getDragDropDeligateController(_loc1_);
-            }
         }
         
         protected function onAssignPlaceRequest(param1:RallyViewsEvent) : void
@@ -262,6 +244,16 @@ package net.wg.gui.rally.views.room
         protected function onShowFAQWindowRequest(param1:RallyViewsEvent) : void
         {
             showFAQWindowS();
+        }
+        
+        public function get actionButtonData() : ActionButtonVO
+        {
+            return this._actionButtonData;
+        }
+        
+        public function set actionButtonData(param1:ActionButtonVO) : void
+        {
+            this._actionButtonData = param1;
         }
     }
 }

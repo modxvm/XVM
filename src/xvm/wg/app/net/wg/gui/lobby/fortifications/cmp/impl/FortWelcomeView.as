@@ -5,7 +5,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
     import flash.events.MouseEvent;
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.text.TextField;
-    import net.wg.gui.lobby.fortifications.windows.impl.PromoMCContainer;
+    import net.wg.gui.lobby.profile.components.SimpleLoader;
     import flash.display.MovieClip;
     import flash.display.DisplayObject;
     import net.wg.gui.lobby.fortifications.data.FortWelcomeViewVO;
@@ -40,9 +40,9 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         
         private static var MIN_APP_HGHT_FOR_TEXT_V_ALIGN:uint = 768;
         
-        private static var V_ALIGN_THRESHOLD:uint = 5;
+        private static var V_ALIGN_THRESHOLD:uint = 3;
         
-        private static var TEXT_V_ALIGN_START_POSITION_Y:uint = 93;
+        private static var TEXT_V_ALIGN_START_POSITION_Y:uint = 130;
         
         private static var WARNING_OFFSET_Y:uint = 8;
         
@@ -79,7 +79,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         
         public var detail:TextField = null;
         
-        public var promoMC:PromoMCContainer = null;
+        public var promoMC:SimpleLoader = null;
         
         public var blackBg:MovieClip = null;
         
@@ -125,6 +125,13 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this.requirementText.htmlText = param1;
         }
         
+        public function as_setHyperLinks(param1:String, param2:String, param3:String) : void
+        {
+            this.searchClanText.htmlText = param1;
+            this.createClanText.htmlText = param2;
+            this.detail.htmlText = param3;
+        }
+        
         public function canShowAutomatically() : Boolean
         {
             return true;
@@ -140,6 +147,9 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         override protected function configUI() : void
         {
             super.configUI();
+            this.promoMC.setSource(RES_FORT.MAPS_FORT_WELCOMESCREEN);
+            this.promoMC.visible = false;
+            this.promoMC.addEventListener(SimpleLoader.LOADED,this.onPromoMCLoaded);
             this.rightAlignedControls = Vector.<DisplayObject>([this.buildingAndUpgradeTitleTextField,this.buildingAndUpgradeBodyTextField,this.bonusesTitleTextField,this.bonusesBodyTextField,this.warForResourcesTitleTextField,this.warForResourcesBodyTextField,this.detail,this.requirementText,this.searchClanText]);
             this.createFortBtn.addEventListener(ButtonEvent.CLICK,this.onCreateFortBtnClickHandler);
             this.detail.autoSize = this.searchClanText.autoSize = this.createClanText.autoSize = TextFieldAutoSize.LEFT;
@@ -154,7 +164,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this.updateControlPositions();
             if((isInvalid(InvalidationType.DATA)) && (this._data))
             {
-                this.createFortBtn.visible = this._data.canRoleCreateFort();
+                this.createFortBtn.visible = this._data.canRoleCreateFortRest;
                 this.createFortBtn.enabled = this._data.canCreateFort();
                 if(this._data.canCreateFort())
                 {
@@ -165,7 +175,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
                     this.createFortBtn.tooltip = this._disabledBtnTooltip;
                 }
                 this.searchClanText.visible = this.createClanText.visible = !this._data.isOnClan;
-                this.requirementText.visible = !this._data.isCommander;
+                this.requirementText.visible = !this._data.canRoleCreateFortRest;
                 this.warningText.visible = !this.createFortBtn.enabled && this.warningText.text.length > 2;
             }
         }
@@ -173,6 +183,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         override protected function onDispose() : void
         {
             this.disposeLinks();
+            this.promoMC.removeEventListener(SimpleLoader.LOADED,this.onPromoMCLoaded);
             this.createFortBtn.removeEventListener(ButtonEvent.CLICK,this.onCreateFortBtnClickHandler);
             this.createFortBtn.dispose();
             this.createFortBtn = null;
@@ -246,9 +257,6 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this.bonusesBodyTextField.text = FORTIFICATIONS.FORTWELCOMEVIEW_BONUSES_BODY;
             this.warForResourcesTitleTextField.text = FORTIFICATIONS.FORTWELCOMEVIEW_WARFORRESOURCES_TITLE;
             this.warForResourcesBodyTextField.text = FORTIFICATIONS.FORTWELCOMEVIEW_WARFORRESOURCES_BODY;
-            this.searchClanText.htmlText = FORTIFICATIONS.FORTWELCOMEVIEW_CLANSEARCH;
-            this.createClanText.htmlText = FORTIFICATIONS.FORTWELCOMEVIEW_CLANCREATE;
-            this.detail.htmlText = FORTIFICATIONS.FORTWELCOMEVIEW_HYPERLINK_MORE;
             this.updateControlPositions();
         }
         
@@ -296,6 +304,12 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         {
             param1.stopImmediatePropagation();
             dispatchEvent(new Event(FortConstants.ON_FORT_CREATE_EVENT,true));
+        }
+        
+        private function onPromoMCLoaded(param1:Event) : void
+        {
+            this.promoMC.removeEventListener(SimpleLoader.LOADED,this.onPromoMCLoaded);
+            this.promoMC.visible = true;
         }
     }
 }

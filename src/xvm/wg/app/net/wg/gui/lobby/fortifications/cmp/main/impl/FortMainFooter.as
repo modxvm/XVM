@@ -33,8 +33,8 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         {
             FortsControlsAligner.instance.rightControl(DisplayObject(this._intelligenceButton),0);
             this._leaveModeBtn.y = actualHeight - this._leaveModeBtn.actualHeight >> 1 - LEAVE_TRANSPORT_BTN_OFFSET_Y;
-            FortsControlsAligner.instance.centerControl(this._leaveModeBtn);
-            FortsControlsAligner.instance.centerControl(this.ordersPanel);
+            FortsControlsAligner.instance.centerControl(this._leaveModeBtn,false);
+            FortsControlsAligner.instance.centerControl(this.ordersPanel,false);
             this.ordersPanel.y = this._footerBitmapFill.y;
         }
         

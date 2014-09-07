@@ -2,12 +2,12 @@ package net.wg.gui.lobby.fortifications.windows.impl
 {
     import net.wg.infrastructure.base.meta.impl.FortCreateDirectionWindowMeta;
     import net.wg.infrastructure.base.meta.IFortCreateDirectionWindowMeta;
+    import flash.events.MouseEvent;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import flash.text.TextField;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.fortifications.cmp.drctn.impl.DirectionListRenderer;
     import scaleform.clik.events.ButtonEvent;
-    import flash.events.MouseEvent;
     import flash.display.InteractiveObject;
     import net.wg.gui.lobby.fortifications.events.DirectionEvent;
     import net.wg.gui.lobby.fortifications.data.DirectionVO;
@@ -21,6 +21,11 @@ package net.wg.gui.lobby.fortifications.windows.impl
             isModal = false;
             isCentered = true;
             this.allRenderers = [this.direction0,this.direction1,this.direction2,this.direction3,this.direction4,this.direction5];
+        }
+        
+        private static function onNewDirctnOut(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
         
         private static function showComplexTT(param1:String, param2:String = "") : void
@@ -61,9 +66,10 @@ package net.wg.gui.lobby.fortifications.windows.impl
             super.configUI();
             this.titleTF.htmlText = FORTIFICATIONS.FORTDIRECTIONSWINDOW_LABEL_OPENEDDIRECTIONS;
             this.newDirectionBtn.label = FORTIFICATIONS.FORTDIRECTIONSWINDOW_BUTTON_NEWDIRECTION;
+            this.newDirectionBtn.mouseEnabledOnDisabled = true;
             this.newDirectionBtn.addEventListener(ButtonEvent.CLICK,this.onOpenNewDirectionClick);
             this.newDirectionBtn.addEventListener(MouseEvent.ROLL_OVER,this.onNewDirctnOver);
-            this.newDirectionBtn.addEventListener(MouseEvent.ROLL_OUT,this.onNewDirctnOut);
+            this.newDirectionBtn.addEventListener(MouseEvent.ROLL_OUT,onNewDirctnOut);
             this.setupRenderers();
         }
         
@@ -71,7 +77,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         {
             this.newDirectionBtn.removeEventListener(ButtonEvent.CLICK,this.onOpenNewDirectionClick);
             this.newDirectionBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onNewDirctnOver);
-            this.newDirectionBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onNewDirctnOut);
+            this.newDirectionBtn.removeEventListener(MouseEvent.ROLL_OUT,onNewDirctnOut);
             this.newDirectionBtn.dispose();
             this.newDirectionBtn = null;
             this.disposeRenderers();
@@ -100,11 +106,6 @@ package net.wg.gui.lobby.fortifications.windows.impl
             showComplexTT(this._buttonTTHeader,this._buttonTTDescr);
         }
         
-        private function onNewDirctnOut(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
-        }
-        
         private function disposeRenderers() : void
         {
             var _loc1_:DirectionListRenderer = null;
@@ -124,7 +125,6 @@ package net.wg.gui.lobby.fortifications.windows.impl
             for each(_loc1_ in this.allRenderers)
             {
                 _loc1_.addEventListener(DirectionEvent.CLOSE_DIRECTION,this.onCloseDirectionRequest);
-                _loc1_ = null;
             }
         }
         

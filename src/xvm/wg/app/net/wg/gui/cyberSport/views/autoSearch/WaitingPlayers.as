@@ -2,6 +2,7 @@ package net.wg.gui.cyberSport.views.autoSearch
 {
     import net.wg.gui.components.advanced.FieldSet;
     import flash.display.MovieClip;
+    import net.wg.gui.components.advanced.IndicationOfStatus;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
     
@@ -14,7 +15,7 @@ package net.wg.gui.cyberSport.views.autoSearch
             currentState = CYBER_SPORT_ALIASES.AUTO_SEARCH_WAITING_PLAYERS_STATE;
             mainField.text = CYBERSPORT.WINDOW_AUTOSEARCH_WAITINGPLAYERS_MAINTEXT;
             cancelButton.label = CYBERSPORT.WINDOW_AUTOSEARCH_SEARCHCOMMAND_CANCELLBL;
-            this.players = [this.player1,this.player2,this.player3,this.player4,this.player5,this.player6,this.player7];
+            this.players = new <IndicationOfStatus>[this.player1,this.player2,this.player3,this.player4,this.player5,this.player6,this.player7];
             this.buttonsBG.visible = false;
             cancelButton.visible = false;
         }
@@ -23,21 +24,21 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         public var buttonsBG:MovieClip;
         
-        public var player1:MovieClip = null;
+        public var player1:IndicationOfStatus = null;
         
-        public var player2:MovieClip = null;
+        public var player2:IndicationOfStatus = null;
         
-        public var player3:MovieClip = null;
+        public var player3:IndicationOfStatus = null;
         
-        public var player4:MovieClip = null;
+        public var player4:IndicationOfStatus = null;
         
-        public var player5:MovieClip = null;
+        public var player5:IndicationOfStatus = null;
         
-        public var player6:MovieClip = null;
+        public var player6:IndicationOfStatus = null;
         
-        public var player7:MovieClip = null;
+        public var player7:IndicationOfStatus = null;
         
-        private var players:Array = null;
+        private var players:Vector.<IndicationOfStatus> = null;
         
         override protected function updateView() : void
         {
@@ -50,19 +51,17 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         private function initPlayersState(param1:Array) : void
         {
-            var _loc4_:String = null;
             var _loc2_:uint = param1.length;
             var _loc3_:* = 0;
             while(_loc3_ < _loc2_)
             {
                 if(param1[_loc3_] == null)
                 {
-                    this.players[_loc3_].gotoAndStop("locked");
+                    this.players[_loc3_].status = IndicationOfStatus.STATUS_LOCKED;
                 }
                 else
                 {
-                    _loc4_ = param1[_loc3_] == true?"ready":"normal";
-                    this.players[_loc3_].gotoAndStop(_loc4_);
+                    this.players[_loc3_].status = param1[_loc3_]?IndicationOfStatus.STATUS_READY:IndicationOfStatus.STATUS_NORMAL;
                 }
                 _loc3_++;
             }
@@ -77,9 +76,12 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         override protected function onDispose() : void
         {
+            var _loc1_:IndicationOfStatus = null;
             if(this.players)
             {
-                this.players.splice(0,this.players.length);
+                _loc1_ = this.players.pop();
+                _loc1_.dispose();
+                _loc1_ = null;
                 this.players = null;
             }
             super.onDispose();

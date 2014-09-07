@@ -37,7 +37,7 @@ package net.wg.gui.lobby.tankman
             isModal = false;
             isCentered = true;
             canClose = true;
-            showWindowBg = false;
+            showWindowBgForm = false;
         }
         
         private static var UPDATE_SCROLLING_LIST:String = "updateScrollingList";
@@ -645,7 +645,7 @@ this.changeTabToTwoHandler();
 
 private function changePassportHandler(param1:PersonalCaseEvent) : void
 {
-changeTankmanPassportS(data.inventoryID,param1.newTankmanFirstName.id,param1.newTankmanLastName.id,param1.newIcon.id);
+changeTankmanPassportS(data.inventoryID,param1.newTankmanFirstName.id,param1.newTankmanFirstName.group,param1.newTankmanLastName.id,param1.newTankmanLastName.group,param1.newIcon.id,param1.newIcon.group);
 }
 
 private function changeTabToTwoHandler(param1:PersonalCaseEvent = null) : void

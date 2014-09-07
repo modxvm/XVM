@@ -1,9 +1,10 @@
 package net.wg.infrastructure.helpers
 {
     import flash.display.MovieClip;
-    import net.wg.infrastructure.interfaces.IDropListDelegate;
+    import net.wg.infrastructure.helpers.interfaces.IDropListDelegate;
     import flash.display.InteractiveObject;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import net.wg.infrastructure.interfaces.entity.IDropItem;
     import net.wg.infrastructure.events.DropEvent;
     import flash.display.Sprite;
     
@@ -46,8 +47,12 @@ package net.wg.infrastructure.helpers
         
         public function onBeforeDrop(param1:InteractiveObject, param2:InteractiveObject) : Boolean
         {
-            this.dispatchDropEvent(DropEvent.BEFORE_DROP,param1,null,param2);
-            return true;
+            if(param2 as IDropItem != null)
+            {
+                this.dispatchDropEvent(DropEvent.BEFORE_DROP,param1,null,param2);
+                return true;
+            }
+            return false;
         }
         
         public function onAfterDrop(param1:InteractiveObject, param2:InteractiveObject) : void

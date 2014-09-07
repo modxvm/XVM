@@ -33,6 +33,7 @@ package net.wg.gui.lobby.training
             super.configUI();
             this.defColorTrans = this.icon.transform.colorTransform;
             this.icon.source = RES_ICONS.MAPS_ICONS_VEHICLE_CONTOUR_USSR_OBSERVER;
+            this.button.mouseEnabledOnDisabled = true;
             this.button.addEventListener(ButtonEvent.CLICK,this.btnClickHandler,false,0,true);
             this.button.label = App.utils.locale.makeString(MENU.TRAINING_INFO_OBSERVER);
             if(this.tooltipViewer == null)

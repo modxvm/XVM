@@ -41,15 +41,8 @@ package net.wg.gui.lobby.profile.components
         {
             this._data = param1;
             description = param1.description;
-            if(param1.text != "-1")
-            {
-                enabled = true;
-                text = param1.text;
-            }
-            else
-            {
-                enabled = false;
-            }
+            text = param1.text;
+            enabled = param1.enabled;
             tooltip = param1.tooltip;
             this.toolTipParams = param1.toolTipParams;
             iconSource = param1.iconPath;

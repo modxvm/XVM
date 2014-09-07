@@ -3,7 +3,7 @@ package net.wg.gui.lobby.sellDialog
     import scaleform.clik.controls.ScrollingList;
     import flash.display.MovieClip;
     import flash.geom.Rectangle;
-    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
+    import net.wg.gui.interfaces.ISaleItemBlockRenderer;
     import scaleform.clik.interfaces.IListItemRenderer;
     import flash.display.Sprite;
     import flash.events.MouseEvent;

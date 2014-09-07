@@ -26,7 +26,11 @@ package net.wg.gui.lobby.header
         
         public var anim:MovieClip = null;
         
+        public var bg:MovieClip = null;
+        
         private var _disposed:Boolean = false;
+        
+        private var _isDAAPIInited:Boolean = false;
         
         private var _hasNew:Boolean = false;
         
@@ -54,6 +58,9 @@ package net.wg.gui.lobby.header
             addEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
             addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
             addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+            this.mouseChildren = false;
+            this.bg.mouseEnabled = false;
+            this.bg.mouseChildren = false;
         }
         
         override protected function onDispose() : void
@@ -117,8 +124,19 @@ package net.wg.gui.lobby.header
             return this._hasNew?Vector.<String>([_loc1_]):statesDefault;
         }
         
+        public function as_isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
+        public function get isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
         public function as_populate() : void
         {
+            this._isDAAPIInited = true;
         }
         
         public function as_dispose() : void

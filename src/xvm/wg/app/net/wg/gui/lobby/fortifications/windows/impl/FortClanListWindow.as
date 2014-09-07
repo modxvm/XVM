@@ -56,7 +56,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             var _loc5_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
             _loc5_.iconId = ROLE;
             _loc5_.label = FORTIFICATIONS.CLANLISTWINDOW_TABLE_ROLE;
-            _loc5_.buttonWidth = 143;
+            _loc5_.buttonWidth = 203;
             _loc5_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
             _loc5_.toolTip = TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_FORTROLE;
             _loc5_.textAlign = TextFieldAutoSize.LEFT;
@@ -66,7 +66,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             var _loc6_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
             _loc6_.iconId = WEEK_MINING;
             _loc6_.label = App.utils.locale.makeString(FORTIFICATIONS.FIXEDPLAYERS_LISTHEADER_FIELDWEEK,{"icon":_loc3_});
-            _loc6_.buttonWidth = 147;
+            _loc6_.buttonWidth = 137;
             _loc6_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
             _loc6_.textAlign = TextFieldAutoSize.RIGHT;
             _loc6_.toolTip = TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_WEEK;
@@ -93,17 +93,17 @@ package net.wg.gui.lobby.fortifications.windows.impl
             super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this.data))
             {
-                window.title = this.data.windowTitle;
                 this.table.listDP = new DataProvider(this.data.members);
-                this.table.sortByField(TOTAL_MINING,SortingInfo.DESCENDING_SORT);
-                this.table.scrollListToItemByUniqKey(IS_SELF,true);
             }
         }
         
         override protected function configUI() : void
         {
             super.configUI();
+            window.title = this.data.windowTitle;
             this.table.headerDP = getHeadersProvider();
+            this.table.sortByField(TOTAL_MINING,SortingInfo.DESCENDING_SORT);
+            this.table.scrollListToItemByUniqKey(IS_SELF,true);
         }
         
         override protected function onPopulate() : void

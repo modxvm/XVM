@@ -17,6 +17,7 @@ package net.wg.gui.login.impl
         {
             super();
             canClose = false;
+            showWindowBgForm = false;
             showWindowBg = false;
             isCentered = true;
             isModal = true;
@@ -69,7 +70,6 @@ package net.wg.gui.login.impl
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            window.getBackground().alpha = 0;
             this.noteField.htmlText = DIALOGS.CREATEANACCOUNT_NOTE;
             this.createBtn.addEventListener(ButtonEvent.CLICK,this.onCreateBtnClickHandler);
             setFocus(this.inputNick);

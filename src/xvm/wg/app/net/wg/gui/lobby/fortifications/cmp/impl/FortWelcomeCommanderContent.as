@@ -12,14 +12,6 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         public function FortWelcomeCommanderContent()
         {
             super();
-            var _loc1_:ILocale = App.utils.locale;
-            this.title1.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION1_TITLE);
-            this.titleDescr1.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION1_DESCR);
-            this.title2.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION2_TITLE);
-            this.titleDescr2.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION2_DESCR);
-            this.title3.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION3_TITLE);
-            this.titleDescr3.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION3_DESCR);
-            this.button.label = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_BUTTON_LABEL);
         }
         
         public var windowTitle:TextFieldShort;
@@ -43,6 +35,13 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             super.configUI();
             var _loc1_:ILocale = App.utils.locale;
             this.windowTitle.label = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_TITLE);
+            this.title1.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION1_TITLE);
+            this.titleDescr1.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION1_DESCR);
+            this.title2.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION2_TITLE);
+            this.titleDescr2.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION2_DESCR);
+            this.title3.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION3_TITLE);
+            this.titleDescr3.text = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_OPTION3_DESCR);
+            this.button.label = _loc1_.makeString(FORTIFICATIONS.FORTWELCOMECOMMANDERVIEW_BUTTON_LABEL);
         }
         
         override protected function onDispose() : void

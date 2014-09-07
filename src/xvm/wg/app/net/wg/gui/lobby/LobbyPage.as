@@ -9,6 +9,8 @@ package net.wg.gui.lobby
     import net.wg.gui.notification.ServiceMessagePopUp;
     import net.wg.gui.notification.NotificationPopUpViewer;
     import net.wg.gui.lobby.messengerBar.MessengerBar;
+    import net.wg.gui.components.common.ticker.Ticker;
+    import flash.display.Sprite;
     import flash.display.InteractiveObject;
     import net.wg.infrastructure.interfaces.IManagedContainer;
     import net.wg.data.constants.DragType;
@@ -42,6 +44,10 @@ package net.wg.gui.lobby
         
         public var messengerBar:MessengerBar;
         
+        public var ticker:Ticker;
+        
+        public var tickerBg:Sprite;
+        
         private var dragOffsetX:Number = 0;
         
         private var dragOffsetY:Number = 0;
@@ -50,7 +56,9 @@ package net.wg.gui.lobby
         
         private var previousFocus:InteractiveObject;
         
-        private var TOP_SUB_VIEW_POSITION:Number = 126;
+        private var TOP_SUB_VIEW_POSITION:Number = 53;
+        
+        private var tickerHeight:Number = 0;
         
         override public function getSubContainer() : IManagedContainer
         {
@@ -62,11 +70,16 @@ package net.wg.gui.lobby
             _originalWidth = param1;
             _originalHeight = param2;
             setSize(param1,param2);
+            this.ticker.y = this.tickerHeight - this.ticker.height >> 1;
+            this.ticker.x = param1 - this.ticker.width >> 1;
+            this.tickerBg.width = _originalWidth;
             this.vehicleHitArea.x = 0;
-            this.vehicleHitArea.y = this.TOP_SUB_VIEW_POSITION;
+            this.vehicleHitArea.y = this.TOP_SUB_VIEW_POSITION + this.tickerHeight;
             this.vehicleHitArea.width = param1;
             this.vehicleHitArea.height = param2 - this.vehicleHitArea.y;
             this.messengerBar.updateStage(param1,param2);
+            this.header.y = this.tickerHeight;
+            this.subViewContainer.y = this.TOP_SUB_VIEW_POSITION + this.tickerHeight;
             var _loc3_:Number = param2 - this.subViewContainer.y - this.messengerBar.height - this.messengerBar.paddingBottom + this.messengerBar.paddingTop;
             this.subViewContainer.updateStage(param1,_loc3_);
             this.header.width = param1;
@@ -157,7 +170,7 @@ package net.wg.gui.lobby
             super.onSetModalFocus(param1);
             if(param1 == null)
             {
-                setFocus(this.header.buttonsBlock.bar);
+                setFocus(this.header.mainMenuButtonBar);
             }
         }
         
@@ -173,7 +186,12 @@ package net.wg.gui.lobby
         override protected function onPopulate() : void
         {
             super.onPopulate();
+            var _loc1_:Boolean = App.globalVarsMgr.isShowTickerS();
+            this.tickerHeight = _loc1_?this.ticker.tickerHeight:0;
+            this.tickerBg.height = this.tickerHeight;
+            this.tickerBg.visible = _loc1_;
             registerComponent(this.header,Aliases.LOBBY_HEADER);
+            registerComponent(this.ticker,Aliases.TICKER);
             if(!this.notificationPopupViewer)
             {
                 this.notificationPopupViewer = new NotificationPopUpViewer(App.utils.classFactory.getClass(Linkages.SERVICE_MESSAGES_POPUP));
@@ -197,6 +215,7 @@ package net.wg.gui.lobby
             this.notificationPopupViewer = null;
             this.messengerBar = null;
             this.previousFocus = null;
+            this.ticker = null;
         }
         
         private function registerDraging() : void

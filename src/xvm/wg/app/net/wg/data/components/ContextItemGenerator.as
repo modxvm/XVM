@@ -16,9 +16,9 @@ package net.wg.data.components
             return App.utils.commons.createMap(["offend",{},"flood",{},"blackmail",{},"swindle",{},"notFairPlay",{},"forbiddenNick",{},"bot",{}]);
         }
         
-        override protected function createSimpleDataIDs(param1:PlayerInfo, param2:String, param3:String, param4:String, param5:String) : Map
+        override protected function createSimpleDataIDs(param1:PlayerInfo, param2:String, param3:String, param4:String, param5:String, param6:Boolean = false) : Map
         {
-            return App.utils.commons.createMap(["userInfo",{},param2,{"enabled":param1.canCreateChannel && param1.isFriend},param3,{"enabled":param1.canAddToFriend},param4,{},"copyToClipBoard",{},param5,{}]);
+            return App.utils.commons.createMap(["userInfo",{},param2,{"enabled":param1.canCreateChannel && param1.isFriend},param3,{"enabled":param1.canAddToFriend},param4,{},"copyToClipBoard",{},param5,{},"createSquad",{},"invite",{"enabled":param6}]);
         }
     }
 }

@@ -9,5 +9,9 @@ package
         }
         
         public static var MAPS_FORT_WELCOMESCREEN:String = "../maps/fort/WelcomeScreen.png";
+        
+        public static var MAPS_FORT_FORTLANDSCAPE:String = "../maps/fort/fortLandscape.png";
+        
+        public static var MAPS_FORT_PERIODDEFENCEWINDOW:String = "../maps/fort/periodDefenceWindow.png";
     }
 }

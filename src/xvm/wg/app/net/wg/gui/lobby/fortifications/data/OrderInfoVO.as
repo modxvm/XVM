@@ -22,6 +22,6 @@ package net.wg.gui.lobby.fortifications.data
         
         public var ordersCount:int = -1;
         
-        public var isPermanent:Boolean = false;
+        public var showAlertIcon:Boolean = true;
     }
 }

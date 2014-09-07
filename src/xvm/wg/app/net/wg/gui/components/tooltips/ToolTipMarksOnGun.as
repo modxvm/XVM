@@ -6,7 +6,7 @@ package net.wg.gui.components.tooltips
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import net.wg.utils.ILocale;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
-    import net.wg.infrastructure.interfaces.ICounterComponent;
+    import net.wg.gui.components.interfaces.ICounterComponent;
     
     public class ToolTipMarksOnGun extends ToolTipAchievement
     {

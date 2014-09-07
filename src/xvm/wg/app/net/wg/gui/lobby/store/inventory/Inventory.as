@@ -4,7 +4,7 @@ package net.wg.gui.lobby.store.inventory
     import net.wg.infrastructure.base.meta.IInventoryMeta;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.store.StoreEvent;
-    import net.wg.infrastructure.interfaces.IStoreMenuView;
+    import net.wg.gui.lobby.store.views.base.interfaces.IStoreMenuView;
     
     public class Inventory extends InventoryMeta implements IInventoryMeta
     {

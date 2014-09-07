@@ -23,5 +23,17 @@ package net.wg.data.constants
         public static var TEAM_SELF:String = "team_self";
         
         public static var TEAM_USER:String = "team_user";
+        
+        public static var TEAMKILLER:String = "teamkiller";
+        
+        public static var TEAMKILLER_DEAD:String = "teamkiller_dead";
+        
+        public static var SELECTED:String = "selected";
+        
+        public static var SELECTED_DEAD:String = "selected_dead";
+        
+        public static var NORMAL:String = "normal";
+        
+        public static var NORMAL_DEAD:String = "normal_dead";
     }
 }

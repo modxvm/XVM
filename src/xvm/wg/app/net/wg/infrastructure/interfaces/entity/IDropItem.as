@@ -4,5 +4,7 @@ package net.wg.infrastructure.interfaces.entity
     {
         
         function get data() : Object;
+        
+        function get getCursorType() : String;
     }
 }

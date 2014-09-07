@@ -14,9 +14,9 @@ package scaleform.clik.controls
     import scaleform.clik.constants.InputValue;
     import scaleform.clik.constants.NavigationCode;
     import net.wg.utils.IEventCollector;
-    import flash.display.DisplayObject;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.text.TextFieldAutoSize;
+    import flash.display.DisplayObject;
     import scaleform.clik.events.ButtonBarEvent;
     
     public class ButtonBar extends UIComponent
@@ -75,6 +75,7 @@ package scaleform.clik.controls
             if(this._group)
             {
                 this._group.removeEventListener(ButtonEvent.CLICK,this.handleButtonGroupChange,false);
+                this._group.dispose();
                 this._group = null;
             }
             removeEventListener(InputEvent.INPUT,this.handleInput,false);
@@ -428,11 +429,10 @@ package scaleform.clik.controls
         protected function updateRenderers() : void
         {
             var _loc5_:* = 0;
-            var _loc6_:DisplayObject = null;
-            var _loc7_:Button = null;
-            var _loc8_:* = false;
-            var _loc9_:* = 0;
-            var _loc10_:Button = null;
+            var _loc6_:Button = null;
+            var _loc7_:* = false;
+            var _loc8_:* = 0;
+            var _loc9_:Button = null;
             var _loc1_:Number = 0;
             var _loc2_:Number = 0;
             var _loc3_:* = -1;
@@ -454,93 +454,99 @@ package scaleform.clik.controls
             }
             else
             {
-                while(this.container.numChildren > 0)
-                {
-                    _loc6_ = this.container.removeChildAt(0);
-                    if(_loc6_ is IDisposable)
-                    {
-                        IDisposable(_loc6_).dispose();
-                    }
-                }
-                this._renderers.length = 0;
+                this.removeAllRenderers();
             }
             var _loc4_:uint = 0;
             while(_loc4_ < this._dataProvider.length && _loc3_ == -1)
             {
-                _loc8_ = false;
+                _loc7_ = false;
                 if(_loc4_ < this._renderers.length)
                 {
-                    _loc7_ = this._renderers[_loc4_];
+                    _loc6_ = this._renderers[_loc4_];
                 }
                 else
                 {
-                    _loc7_ = new this._itemRendererClass();
-                    this.setupRenderer(_loc7_,_loc4_);
-                    _loc8_ = true;
+                    _loc6_ = new this._itemRendererClass();
+                    this.setupRenderer(_loc6_,_loc4_);
+                    _loc7_ = true;
                 }
-                this.populateRendererData(_loc7_,_loc4_);
+                this.populateRendererData(_loc6_,_loc4_);
                 if(this._autoSize == TextFieldAutoSize.NONE && this._buttonWidth > 0)
                 {
-                    _loc7_.width = this._buttonWidth;
+                    _loc6_.width = this._buttonWidth;
                 }
                 else if(this._autoSize != TextFieldAutoSize.NONE)
                 {
-                    _loc7_.autoSize = this._autoSize;
+                    _loc6_.autoSize = this._autoSize;
                 }
                 
-                _loc7_.validateNow();
+                _loc6_.validateNow();
                 if(this._direction == DIRECTION_HORIZONTAL)
                 {
-                    if(Math.round(_width) >= Math.round(_loc7_.width + this._spacing + _loc1_))
+                    if(Math.round(_width) >= Math.round(_loc6_.width + this._spacing + _loc1_))
                     {
-                        _loc7_.y = 0;
-                        _loc7_.x = _loc1_;
-                        _loc1_ = _loc1_ + (_loc7_.width + this._spacing);
+                        _loc6_.y = 0;
+                        _loc6_.x = _loc1_;
+                        _loc1_ = _loc1_ + (_loc6_.width + this._spacing);
                     }
                     else
                     {
                         _loc3_ = _loc4_;
-                        _loc7_ = null;
+                        _loc6_ = null;
                     }
                 }
-                else if(_height > _loc7_.height + this._spacing + _loc2_)
+                else if(_height > _loc6_.height + this._spacing + _loc2_)
                 {
-                    _loc7_.x = 0;
-                    _loc7_.y = _loc2_;
-                    _loc2_ = _loc2_ + (_loc7_.height + this._spacing);
+                    _loc6_.x = 0;
+                    _loc6_.y = _loc2_;
+                    _loc2_ = _loc2_ + (_loc6_.height + this._spacing);
                 }
                 else
                 {
                     _loc3_ = _loc4_;
-                    _loc7_ = null;
+                    _loc6_ = null;
                 }
                 
-                if((_loc8_) && !(_loc7_ == null))
+                if((_loc7_) && !(_loc6_ == null))
                 {
-                    _loc7_.group = this._group;
-                    this.container.addChild(_loc7_);
-                    this._renderers.push(_loc7_);
+                    _loc6_.group = this._group;
+                    this.container.addChild(_loc6_);
+                    this._renderers.push(_loc6_);
                 }
                 _loc4_++;
             }
             if(_loc3_ > -1)
             {
-                _loc9_ = this._renderers.length - 1;
-                while(_loc9_ >= _loc3_)
+                _loc8_ = this._renderers.length - 1;
+                while(_loc8_ >= _loc3_)
                 {
-                    _loc10_ = this._renderers[_loc9_];
-                    if(_loc10_)
+                    _loc9_ = this._renderers[_loc8_];
+                    if(_loc9_)
                     {
-                        if(this.container.contains(_loc10_))
+                        if(this.container.contains(_loc9_))
                         {
-                            this.container.removeChild(_loc10_);
+                            this.container.removeChild(_loc9_);
                         }
-                        this._renderers.splice(_loc9_,1);
+                        this._renderers.splice(_loc8_,1);
                     }
-                    _loc9_--;
+                    _loc8_--;
                 }
             }
             this.selectedIndex = Math.min(this._dataProvider.length - 1,this._selectedIndex);
+        }
+        
+        public function removeAllRenderers() : void
+        {
+            var _loc1_:DisplayObject = null;
+            while(this.container.numChildren > 0)
+            {
+                _loc1_ = this.container.removeChildAt(0);
+                if(_loc1_ is IDisposable)
+                {
+                    IDisposable(_loc1_).dispose();
+                }
+            }
+            this._renderers.length = 0;
         }
         
         protected function populateData(param1:Array) : void

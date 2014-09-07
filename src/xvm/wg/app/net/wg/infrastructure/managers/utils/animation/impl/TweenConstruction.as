@@ -135,6 +135,14 @@ package net.wg.infrastructure.managers.utils.animation.impl
         
         public function addTween(param1:ITween, param2:int, param3:String = "global") : ITweenConstruction
         {
+            if(param1.memberData == null)
+            {
+                param1.memberData = {"type":TweenTypes.USER_TWEEN};
+            }
+            else
+            {
+                param1.memberData.type = TweenTypes.USER_TWEEN;
+            }
             this.addInStack(new TweenLinkedObjects(param1,param2,param3));
             return this;
         }
@@ -143,6 +151,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
         {
             var _loc1_:TweenLinkedObjects = null;
             var _loc2_:ITween = null;
+            this.tweenWrapper.changeVisibilityFromTarget();
             for each(_loc1_ in this.tweensData)
             {
                 _loc2_ = _loc1_.tween;
@@ -352,7 +361,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
             var _loc2_:String = null;
             for(_loc2_ in param1)
             {
-                this.tweenWrapper[_loc2_] = this.stateTargetAfterAnim[_loc2_];
+                this.tweenWrapper[_loc2_] = param1[_loc2_];
             }
         }
         
@@ -508,67 +517,5 @@ package net.wg.infrastructure.managers.utils.animation.impl
             }
             return true;
         }
-    }
-}
-import net.wg.infrastructure.interfaces.entity.IDisposable;
-import net.wg.infrastructure.interfaces.ITween;
-import net.wg.data.constants.Errors;
-import net.wg.utils.IAssertable;
-
-class TweenLinkedObjects extends Object implements IDisposable
-{
-    
-    function TweenLinkedObjects(param1:ITween, param2:int, param3:String)
-    {
-        super();
-        var _loc4_:String = "curTween" + Errors.CANT_NULL;
-        var _loc5_:String = "curDelayType" + Errors.CANT_NULL;
-        var _loc6_:IAssertable = App.utils.asserter;
-        _loc6_.assertNotNull(param1,_loc4_);
-        _loc6_.assertNotNull(param3,_loc5_);
-        this._tween = param1;
-        this._type = param3;
-        this._delay = param2;
-    }
-    
-    private var _tween:ITween = null;
-    
-    private var _type:String = null;
-    
-    private var _delay:int;
-    
-    public function get tween() : ITween
-    {
-        return this._tween;
-    }
-    
-    public function set tween(param1:ITween) : void
-    {
-        this._tween = param1;
-    }
-    
-    public function get type() : String
-    {
-        return this._type;
-    }
-    
-    public function set type(param1:String) : void
-    {
-        this._type = param1;
-    }
-    
-    public function dispose() : void
-    {
-        this._tween = null;
-    }
-    
-    public function get delay() : int
-    {
-        return this._delay;
-    }
-    
-    public function set delay(param1:int) : void
-    {
-        this._delay = param1;
     }
 }

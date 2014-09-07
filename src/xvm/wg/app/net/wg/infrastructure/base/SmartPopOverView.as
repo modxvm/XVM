@@ -14,11 +14,11 @@ package net.wg.infrastructure.base
         
         public function SmartPopOverView()
         {
-            this.popoverLayout = new SmartPopOverExternalLayout();
+            this._popoverLayout = new SmartPopOverExternalLayout();
             super();
         }
         
-        protected var popoverLayout:SmartPopOverExternalLayout;
+        private var _popoverLayout:SmartPopOverExternalLayout;
         
         override protected function configUI() : void
         {
@@ -35,9 +35,9 @@ package net.wg.infrastructure.base
         
         protected function initLayout() : void
         {
-            this.popoverLayout.positionKeyPointPadding = this.getKeyPointPadding();
+            this._popoverLayout.positionKeyPointPadding = this.getKeyPointPadding();
             this.updateCallerGlobalPosition();
-            BaseViewWrapper(wrapper).layout = this.popoverLayout;
+            BaseViewWrapper(wrapper).layout = this._popoverLayout;
         }
         
         protected function getKeyPointPadding() : TwoDimensionalPadding
@@ -57,27 +57,32 @@ package net.wg.infrastructure.base
             this.as_setPositionKeyPoint(_loc4_.x + _loc2_,_loc4_.y + _loc3_);
         }
         
-        protected function stageResizeHandler(param1:Event) : void
+        private function stageResizeHandler(param1:Event) : void
         {
-            this.popoverLayout.stageDimensions = new Point(stage.stageWidth,stage.stageHeight);
+            this._popoverLayout.stageDimensions = new Point(stage.stageWidth,stage.stageHeight);
             this.updateCallerGlobalPosition();
             BaseViewWrapper(wrapper).invalidateLayout();
         }
         
         public function as_setPositionKeyPoint(param1:Number, param2:Number) : void
         {
-            this.popoverLayout.positionKeyPoint = new Point(param1,param2);
+            this._popoverLayout.positionKeyPoint = new Point(param1,param2);
             BaseViewWrapper(wrapper).invalidateLayout();
         }
         
         override protected function onDispose() : void
         {
-            this.popoverLayout = null;
+            this._popoverLayout = null;
             if(stage)
             {
                 stage.removeEventListener(Event.RESIZE,this.stageResizeHandler);
             }
             super.onDispose();
+        }
+        
+        public function get popoverLayout() : SmartPopOverExternalLayout
+        {
+            return this._popoverLayout;
         }
     }
 }

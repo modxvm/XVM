@@ -55,5 +55,23 @@ package net.wg.data.constants
         public static var DEFRES:String = "defRes";
         
         public static var ALLOW_ICONS:Array = [EMPTY,CREDITS,GOLD,GOLD_DISCOUNT,XP,ELITE_XP,ELITE,ARROW_DOWN,ARROW_UP,ARROW_DOWN_DISABLED,ELITE_TANK_XP,FREE_XP,TANK_DAILYXPFACTOR,TANK_UNLOCK_PRICE,DOUBLE_XP_FACTOR,ACTION_XP_FACTOR,VCOIN,CLASS1,CLASS2,CLASS3,CLASS4,XP_PRICE,DEFRES];
+        
+        public static function getTextColor(param1:String) : Number
+        {
+            var _loc2_:Number = -1;
+            switch(param1)
+            {
+                case CREDITS:
+                    _loc2_ = 13556185;
+                    break;
+                case GOLD:
+                    _loc2_ = 16761699;
+                    break;
+                case FREE_XP:
+                    _loc2_ = 13224374;
+                    break;
+            }
+            return _loc2_;
+        }
     }
 }

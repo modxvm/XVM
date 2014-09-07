@@ -13,8 +13,6 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
     import flash.geom.Point;
     import scaleform.gfx.MouseEventEx;
     import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
-    import net.wg.utils.ILocale;
-    import net.wg.gui.utils.ComplexTooltipHelper;
     
     public class OrdersPanel extends OrdersPanelMeta implements IOrdersPanel
     {
@@ -23,7 +21,7 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
         {
             this.ordersData = [];
             super();
-            this.orders = Vector.<ShellButton>([this.order1,this.order2,this.order3,this.order4,this.order5,this.order6,this.order7]);
+            this.orders = Vector.<ShellButton>([this.order1,this.order2,this.order3,this.order4,this.order5,this.order6,this.order7,this.order8]);
             var _loc1_:uint = 0;
             while(_loc1_ < this.orders.length)
             {
@@ -79,6 +77,8 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
         public var order6:ShellButton;
         
         public var order7:ShellButton;
+        
+        public var order8:ShellButton;
         
         private var orders:Vector.<ShellButton> = null;
         
@@ -206,7 +206,7 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
                     _loc3_ = Math.round(_loc2_.x);
                     _loc4_ = Math.round(_loc2_.y);
                     _loc5_ = localToGlobal(new Point(_loc3_,_loc4_));
-                    App.popoverMgr.show(this,FORTIFICATION_ALIASES.FORT_ORDER_POPOVER_EVENT,_loc5_.x,_loc5_.y,_loc2_.id);
+                    App.popoverMgr.show(this,FORTIFICATION_ALIASES.FORT_ORDER_POPOVER_EVENT,_loc2_.id);
                 }
             }
         }
@@ -214,13 +214,10 @@ package net.wg.gui.lobby.fortifications.cmp.orders.impl
         private function showTooltip(param1:MouseEvent) : void
         {
             var _loc2_:ShellButton = ShellButton(param1.target);
-            var _loc3_:ILocale = App.utils.locale;
-            var _loc4_:String = _loc3_.makeString(FORTIFICATIONS.orders_orderpopover_ordertype(_loc2_.id));
-            var _loc5_:String = getOrderTooltipBodyS(_loc2_.id);
-            var _loc6_:String = new ComplexTooltipHelper().addHeader(_loc4_).addBody(_loc5_).make();
-            if(_loc6_.length > 0)
+            var _loc3_:String = getOrderTooltipBodyS(_loc2_.id);
+            if(_loc3_.length > 0)
             {
-                App.toolTipMgr.showComplex(_loc6_);
+                App.toolTipMgr.showComplex(_loc3_);
             }
         }
     }

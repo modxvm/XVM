@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.fortifications.popovers.impl
 {
     import net.wg.infrastructure.base.UIComponentEx;
+    import flash.events.MouseEvent;
     import flash.text.TextField;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.UILoaderAlt;
@@ -8,8 +9,8 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.data.constants.Values;
-    import flash.events.MouseEvent;
     import net.wg.gui.lobby.fortifications.events.FortBuildingCardPopoverEvent;
+    import net.wg.gui.utils.ComplexTooltipHelper;
     
     public class FortPopoverControlPanel extends UIComponentEx
     {
@@ -37,6 +38,11 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         private static var NOT_BASE_COMMANDER_NOT_ORDERED:uint = 5;
         
         private static var INVALIDATE_BUTTON:String = "invalidateButton";
+        
+        private static function onRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+        }
         
         public var orderTimer:TextField;
         
@@ -83,10 +89,20 @@ package net.wg.gui.lobby.fortifications.popovers.impl
                 this.orderTimer.htmlText = this.model.orderTimer;
                 this.orderIcon.source = RES_ICONS.MAPS_ICONS_LIBRARY_FORTIFICATION_RESERVE_INPROGRESS_24;
                 this.orderIcon.x = this.orderTimer.x - this.orderIcon.width;
-                this.orderIcon.visible = true;
+                this.orderIcon.visible = !this.model.productionInPause;
                 this.timeOver.visible = true;
                 this.timeOver.htmlText = this.model.timeOver;
                 this.generalLabel.htmlText = this.model.generalLabel;
+                if(this.model.productionInPause)
+                {
+                    this.timeOver.addEventListener(MouseEvent.ROLL_OVER,this.showAlertTooltip);
+                    this.timeOver.addEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
+                }
+                else
+                {
+                    this.timeOver.removeEventListener(MouseEvent.ROLL_OVER,this.showAlertTooltip);
+                    this.timeOver.removeEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
+                }
             }
             
             
@@ -118,7 +134,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             {
                 this.actionButton.mouseEnabled = this.actionButton.mouseChildren = true;
                 this.actionButton.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-                this.actionButton.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+                this.actionButton.addEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             }
         }
         
@@ -126,14 +142,17 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         {
             super.configUI();
             this.actionButton.UIID = 80;
+            this.actionButton.mouseEnabledOnDisabled = true;
         }
         
         override protected function onDispose() : void
         {
+            this.timeOver.removeEventListener(MouseEvent.ROLL_OVER,this.showAlertTooltip);
+            this.timeOver.removeEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             if(this.actionButton)
             {
                 this.actionButton.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-                this.actionButton.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+                this.actionButton.removeEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
                 this.actionButton.removeEventListener(ButtonEvent.CLICK,this.onClickActionButtonHandler);
                 this.actionButton.dispose();
                 this.actionButton = null;
@@ -167,11 +186,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
         }
         
-        private function onRollOutHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
-        }
-        
         private function onClickActionButtonHandler(param1:ButtonEvent) : void
         {
             var _loc2_:String = null;
@@ -190,6 +204,19 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             {
                 App.eventLogManager.logUIEvent(param1,_loc3_);
                 dispatchEvent(new FortBuildingCardPopoverEvent(_loc2_));
+            }
+        }
+        
+        private function showAlertTooltip(param1:MouseEvent) : void
+        {
+            var _loc2_:String = null;
+            if((this.model) && (this.model.pauseReasonTooltip.length))
+            {
+                _loc2_ = new ComplexTooltipHelper().addHeader(this.model.pauseReasonTooltip[0]).addBody(this.model.pauseReasonTooltip[1]).make();
+                if(_loc2_.length > 0)
+                {
+                    App.toolTipMgr.showComplex(_loc2_);
+                }
             }
         }
     }

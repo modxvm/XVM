@@ -5,7 +5,7 @@ package net.wg.gui.lobby.dialogs
     import scaleform.clik.controls.Button;
     import flash.text.TextField;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import scaleform.clik.utils.Padding;
     import flash.display.InteractiveObject;
     import flash.text.TextFieldAutoSize;

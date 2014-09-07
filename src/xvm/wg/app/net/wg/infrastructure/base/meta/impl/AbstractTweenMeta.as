@@ -43,6 +43,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var getIsComplete:Function = null;
         
+        public var postponedCheckState:Function = null;
+        
         public function initialiazeS(param1:ITweenPropertiesVO) : void
         {
             App.utils.asserter.assertNotNull(this.initialiaze,"initialiaze" + Errors.CANT_NULL);
@@ -131,6 +133,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.getIsComplete,"getIsComplete" + Errors.CANT_NULL);
             return this.getIsComplete();
+        }
+        
+        public function postponedCheckStateS() : void
+        {
+            App.utils.asserter.assertNotNull(this.postponedCheckState,"postponedCheckState" + Errors.CANT_NULL);
+            this.postponedCheckState();
         }
     }
 }

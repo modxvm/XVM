@@ -14,7 +14,7 @@ package net.wg.gui.components.common
     import net.wg.data.constants.Errors;
     import flash.events.FocusEvent;
     import net.wg.infrastructure.base.AbstractView;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import scaleform.clik.motion.Tween;
     import flash.display.MovieClip;
     import net.wg.data.constants.Linkages;

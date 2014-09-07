@@ -1,7 +1,7 @@
 package net.wg.gui.components.controls
 {
     import scaleform.clik.controls.Button;
-    import net.wg.infrastructure.interfaces.ISoundButton;
+    import net.wg.gui.interfaces.ISoundButton;
     import flash.display.MovieClip;
     import flash.events.TimerEvent;
     import net.wg.data.constants.SoundManagerStates;
@@ -23,6 +23,8 @@ package net.wg.gui.components.controls
         private var _soundType:String = "normal";
         
         private var _soundId:String = "";
+        
+        private var _mouseEnabledOnDisabled:Boolean = false;
         
         public var hitMc:MovieClip;
         
@@ -124,7 +126,26 @@ package net.wg.gui.components.controls
             }
             super.enabled = param1;
             buttonMode = useHandCursor = enabled;
-            mouseEnabled = true;
+            this.updateMouseEnabled();
+        }
+        
+        public function get mouseEnabledOnDisabled() : Boolean
+        {
+            return this._mouseEnabledOnDisabled;
+        }
+        
+        public function set mouseEnabledOnDisabled(param1:Boolean) : void
+        {
+            this._mouseEnabledOnDisabled = param1;
+            this.updateMouseEnabled();
+        }
+        
+        private function updateMouseEnabled() : void
+        {
+            if((this._mouseEnabledOnDisabled) && !enabled)
+            {
+                mouseEnabled = true;
+            }
         }
         
         override protected function configUI() : void
@@ -135,7 +156,7 @@ package net.wg.gui.components.controls
                 this.hitArea = this.hitMc;
             }
             buttonMode = enabled;
-            mouseEnabled = true;
+            this.updateMouseEnabled();
             if(App.soundMgr != null)
             {
                 App.soundMgr.addSoundsHdlrs(this);

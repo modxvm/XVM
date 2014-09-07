@@ -15,6 +15,8 @@ package net.wg.infrastructure.base.meta
         
         function getLeftTimeTooltipS() : String;
         
+        function openQuestS(param1:String) : void;
+        
         function as_setInitData(param1:Object) : void;
         
         function as_disableOrder(param1:Boolean) : void;

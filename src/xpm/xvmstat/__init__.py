@@ -6,7 +6,7 @@
 XPM_MOD_VERSION    = "1.3.1"
 XPM_MOD_URL        = "http://www.modxvm.com/"
 XPM_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XPM_GAME_VERSIONS  = ["0.9.0","0.9.1","0.9.2"]
+XPM_GAME_VERSIONS  = ["0.9.0","0.9.1","0.9.2","0.9.3"]
 
 #####################################################################
 
@@ -94,17 +94,9 @@ def ProfileTechniqueWindowRequestData(base, self, data):
 
 def LoginView_onSetOptions(base, self, optionsList, host):
     #log('LoginView_onSetOptions')
-    if g_xvm.config is None or not g_xvm.config['login']['saveLastServer']:
-        base(self, optionsList, host)
-    else:
-        options = []
-        selectedId = 0
-        searchForHost = host
-        for idx, (key, name) in enumerate(optionsList):
-            if key == searchForHost:
-                selectedId = idx
-            options.append({'data': key, 'label': name})
-        self.as_setServersListS(options, selectedId)
+    if g_xvm.config is not None and g_xvm.config['login']['saveLastServer']:
+        self.saveLastSelectedServer(host)
+    base(self, optionsList, host)
 
 def onArenaCreated():
     #debug('> onArenaCreated')

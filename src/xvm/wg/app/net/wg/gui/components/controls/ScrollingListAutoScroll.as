@@ -19,9 +19,12 @@ package net.wg.gui.components.controls
             super();
         }
         
+        private var scrollBarNeeded:Boolean = false;
+        
         override protected function drawLayout() : void
         {
             var _loc8_:IListItemRenderer = null;
+            this.scrollBarNeeded = (dataProvider) && dataProvider.length > rowCount;
             var _loc1_:uint = _renderers.length;
             var _loc2_:Number = rowHeight;
             var _loc3_:Number = this.availableWidth - padding.horizontal;
@@ -50,7 +53,7 @@ package net.wg.gui.components.controls
             super.drawScrollBar();
             if(_scrollBar)
             {
-                (_scrollBar as DisplayObject).visible = (dataProvider) && dataProvider.length > rowCount;
+                (_scrollBar as DisplayObject).visible = this.scrollBarNeeded;
                 if(container.contains(_scrollBar as DisplayObject))
                 {
                     container.addChild(_scrollBar as DisplayObject);
@@ -60,7 +63,7 @@ package net.wg.gui.components.controls
         
         override public function get availableWidth() : Number
         {
-            return Math.round(_width) - margin * 2;
+            return Math.round(_width) - margin * 2 - (this.scrollBarNeeded?Math.round(_scrollBar.width):0);
         }
         
         override public function set enabled(param1:Boolean) : void

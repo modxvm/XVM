@@ -52,11 +52,20 @@ package net.wg.gui.components.controls
         override protected function configUI() : void
         {
             super.configUI();
+            preventAutosizing = true;
             if(this.disableMc)
             {
                 this.disableMc.widthFill = Math.round(this.width);
                 this.disableMc.heightFill = Math.round(this.height);
             }
+            constraints = null;
+        }
+        
+        override public function setSize(param1:Number, param2:Number) : void
+        {
+            _width = param1;
+            _height = param2;
+            invalidateSize();
         }
         
         override protected function draw() : void
@@ -95,13 +104,6 @@ package net.wg.gui.components.controls
                 if(!preventAutosizing)
                 {
                     alignForAutoSize();
-                }
-                if(!constraintsDisabled)
-                {
-                    if(constraints)
-                    {
-                        constraints.update(_width,_height);
-                    }
                 }
                 this.rendererBg.width = _width;
             }

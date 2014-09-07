@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.store.views.base
 {
     import scaleform.clik.core.UIComponent;
-    import net.wg.infrastructure.interfaces.IStoreMenuView;
+    import net.wg.gui.lobby.store.views.base.interfaces.IStoreMenuView;
     import scaleform.clik.controls.ButtonGroup;
     import net.wg.utils.IAssertable;
     import net.wg.data.constants.Errors;

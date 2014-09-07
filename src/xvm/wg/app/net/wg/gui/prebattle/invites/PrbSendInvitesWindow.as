@@ -38,6 +38,7 @@ package net.wg.gui.prebattle.invites
             this.receiverData = new DataProvider();
             super();
             this.emptyRenderer.visible = false;
+            isCentered = false;
         }
         
         private static var inviteTextColor:uint = 9803143;
@@ -53,6 +54,8 @@ package net.wg.gui.prebattle.invites
 }];
 
 private static var INV_CLAN:String = "invClan";
+
+private static var INV_INVITES:String = "invInvites";
 
 private static function makeRoster(param1:Object) : Object
 {
@@ -109,6 +112,8 @@ private var inviteDefaultTextColor:uint = 4144953;
 
 private var _showClanOnly:Boolean = false;
 
+private var _invitesArr:Array;
+
 public function as_setWindowTitle(param1:String) : void
 {
 window.title = param1;
@@ -160,11 +165,17 @@ this.sendButton.enabled = false;
 this.coolDownTimerID = setTimeout(this.onEndSendInvitesCooldown,param1 * 1000);
 }
 
+public function as_setInvites(param1:Array) : void
+{
+this._invitesArr = param1;
+invalidate(INV_INVITES);
+}
+
 override protected function onPopulate() : void
 {
 this.updateWindowProperties(false);
 super.onPopulate();
-showWindowBg = false;
+showWindowBgForm = false;
 window.title = "";
 var _loc1_:Padding = window.contentPadding as Padding;
 _loc1_.bottom = 14;
@@ -179,6 +190,10 @@ if(isInvalid(UPDATE_DEFAULT_POSITION))
 {
 window.x = 0;
 window.y = 0;
+}
+if((isInvalid(INV_INVITES)) && !(this._invitesArr == null))
+{
+this.onReceiveUsersInfo(this._invitesArr);
 }
 if(isInvalid(INV_CLAN))
 {

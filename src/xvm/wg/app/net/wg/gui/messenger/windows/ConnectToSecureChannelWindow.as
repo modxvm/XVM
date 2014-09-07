@@ -49,7 +49,7 @@ package net.wg.gui.messenger.windows
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            showWindowBg = false;
+            showWindowBgForm = false;
             window.useBottomBtns = true;
             window.title = MESSENGER.DIALOGS_CONNECTINGTOSECURECHANNEL_TITLE;
             var _loc1_:Padding = window.contentPadding as Padding;

@@ -14,9 +14,9 @@ package net.wg.gui.lobby.GUIEditor
     import net.wg.gui.lobby.GUIEditor.events.InspectorViewEvent;
     import flash.events.MouseEvent;
     import flash.display.DisplayObject;
+    import flash.geom.Point;
     import net.wg.gui.lobby.GUIEditor.data.ContextMenuGeneratorItems;
     import net.wg.infrastructure.interfaces.IContextMenu;
-    import flash.geom.Point;
     import net.wg.gui.events.ContextMenuEvent;
     
     public class GEInspectWindow extends GEInspectWindowMeta implements IGEInspectWindowMeta
@@ -25,6 +25,7 @@ package net.wg.gui.lobby.GUIEditor
         public function GEInspectWindow()
         {
             super();
+            showWindowBgForm = false;
             showWindowBg = false;
             canClose = false;
         }
@@ -83,7 +84,6 @@ override protected function onPopulate() : void
 {
 super.onPopulate();
 addEventListener(ComponentCreateEvent.COMPONENT_CREATE,onComponentCreateHandler);
-window.getBackground().visible = false;
 InteractiveObject(window).mouseEnabled = false;
 window.title = "";
 }
@@ -147,6 +147,8 @@ private function onViewChangeHandler(param1:ViewStackEvent) : void
 
 private function showContextMenu(param1:MouseEvent) : void
 {
+var _loc5_:DisplayObject = null;
+var _loc7_:Point = null;
 var _loc8_:String = null;
 var _loc2_:DisplayObject = DisplayObject(param1.target);
 if(_loc2_ == this.fileBtn)
@@ -159,9 +161,9 @@ _loc8_ = ContextMenuGeneratorItems.EDIT_TYPE;
 }
 var _loc3_:ContextMenuGeneratorItems = new ContextMenuGeneratorItems();
 var _loc4_:IContextMenu = App.contextMenuMgr.show(_loc3_.generateItemsContextMenu(_loc8_),this,this.onContextMenuHandler);
-var _loc5_:DisplayObject = DisplayObject(_loc4_);
+_loc5_ = DisplayObject(_loc4_);
 var _loc6_:Point = localToGlobal(new Point(_loc2_.x,_loc2_.y));
-var _loc7_:Point = _loc5_.parent.globalToLocal(_loc6_);
+_loc7_ = _loc5_.parent.globalToLocal(_loc6_);
 _loc5_.x = _loc7_.x;
 _loc5_.y = _loc7_.y + _loc2_.height;
 }

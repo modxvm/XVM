@@ -2,8 +2,8 @@ package net.wg.gui.lobby.confirmModuleWindow
 {
     import net.wg.infrastructure.base.meta.impl.ConfirmModuleWindowMeta;
     import net.wg.infrastructure.base.meta.IConfirmModuleWindowMeta;
-    import net.wg.data.VO.ItemDialogSettingsVO;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.data.VO.DialogSettingsVO;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import net.wg.utils.ILocale;
     import net.wg.gui.components.controls.VO.ActionPriceVO;
     import scaleform.clik.data.DataProvider;
@@ -22,7 +22,7 @@ package net.wg.gui.lobby.confirmModuleWindow
             isModal = true;
             isCentered = true;
             canDrag = false;
-            showWindowBg = false;
+            showWindowBgForm = false;
         }
         
         private static var NORMAL_COLOR:uint = 6447189;
@@ -39,7 +39,7 @@ package net.wg.gui.lobby.confirmModuleWindow
         
         private var moduleInfo:ModuleInfoVo;
         
-        private var settings:ItemDialogSettingsVO;
+        private var settings:DialogSettingsVO;
         
         private var currency:String;
         
@@ -62,7 +62,7 @@ package net.wg.gui.lobby.confirmModuleWindow
         
         public function as_setSettings(param1:Object) : void
         {
-            this.settings = new ItemDialogSettingsVO(param1);
+            this.settings = new DialogSettingsVO(param1);
             invalidate(SETTINGS_INVALID);
         }
         

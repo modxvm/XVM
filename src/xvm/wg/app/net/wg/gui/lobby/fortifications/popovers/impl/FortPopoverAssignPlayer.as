@@ -1,10 +1,10 @@
 package net.wg.gui.lobby.fortifications.popovers.impl
 {
     import scaleform.clik.core.UIComponent;
+    import flash.events.MouseEvent;
     import flash.text.TextField;
     import net.wg.gui.components.controls.IconTextButton;
     import scaleform.clik.events.ButtonEvent;
-    import flash.events.MouseEvent;
     import net.wg.gui.lobby.fortifications.events.FortBuildingCardPopoverEvent;
     import net.wg.gui.utils.ComplexTooltipHelper;
     
@@ -18,12 +18,17 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.assignBtn.textField.x = this.assignBtn.textField.x + TEXT_PADDING;
             this.assignBtn.addEventListener(ButtonEvent.CLICK,this.onClickAssignPlayerHandler);
             this.assignBtn.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-            this.assignBtn.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+            this.assignBtn.addEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
         }
         
         private static var TEXT_PADDING:uint = 6;
         
         private static var FOOTHOLD_BTN_PNG:String = "foothold.png";
+        
+        private static function onRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+        }
         
         public var assignLabl:TextField;
         
@@ -43,7 +48,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         {
             this.assignBtn.removeEventListener(ButtonEvent.CLICK,this.onClickAssignPlayerHandler);
             this.assignBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-            this.assignBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+            this.assignBtn.removeEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             this.assignBtn.dispose();
             this.assignBtn = null;
             super.onDispose();
@@ -77,11 +82,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         {
             App.toolTipMgr.showComplex(_loc2_);
         }
-    }
-    
-    private function onRollOutHandler(param1:MouseEvent) : void
-    {
-        App.toolTipMgr.hide();
     }
 }
 }

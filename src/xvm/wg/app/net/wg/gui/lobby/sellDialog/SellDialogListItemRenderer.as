@@ -4,7 +4,7 @@ package net.wg.gui.lobby.sellDialog
     import flash.display.MovieClip;
     import flash.text.TextField;
     import net.wg.data.VO.SellDialogElement;
-    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
+    import net.wg.gui.interfaces.ISaleItemBlockRenderer;
     import flash.display.Sprite;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.data.VO.SellDialogItem;

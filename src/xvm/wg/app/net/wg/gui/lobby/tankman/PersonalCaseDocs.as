@@ -204,54 +204,59 @@ package net.wg.gui.lobby.tankman
         
         private function submitBtn_buttonClickHandler(param1:ButtonEvent) : void
         {
-            var _loc3_:String = null;
-            var _loc4_:* = 0;
-            var _loc5_:* = 0;
-            var _loc6_:String = null;
             var _loc2_:PersonalCaseEvent = new PersonalCaseEvent(PersonalCaseEvent.CHANGE_PASSPORT,true);
             _loc2_.newTankmanFirstName = this.selectedFirstName?this.selectedFirstName:this.firstnames.selectedItem;
             _loc2_.newTankmanLastName = this.selectedLastName?this.selectedLastName:this.lastnames.selectedItem;
             if(!this.selectedIcon)
             {
-                _loc3_ = this.model.originalIconFile;
-                _loc4_ = _loc3_.lastIndexOf("-") + 1;
-                _loc5_ = _loc3_.lastIndexOf(".");
-                _loc6_ = _loc3_.substr(_loc4_,_loc5_ - _loc4_);
                 this.selectedIcon = {};
-                this.selectedIcon.id = parseInt(_loc6_);
-                this.selectedIcon.value = "fake";
+                this.selectedIcon.id = -1;
+                this.selectedIcon.group = 0;
             }
-            _loc2_.newIcon = this.selectedIcon;
-            dispatchEvent(_loc2_);
-        }
-        
-        private function portraitsCarousel_listIndexChangeHandler(param1:ListEvent) : void
-        {
-            if(param1.itemData == null)
+            if(!_loc2_.newTankmanFirstName)
             {
-                return;
-            }
-            if((param1.itemData) && (this.checkOriginalIcon(param1.itemData.value)))
-            {
-                this.selectedIcon = {};
-                this.selectedIcon.id = param1.itemData.id;
-                this.selectedIcon.value = param1.itemData.value;
-            }
-            else
-            {
-                this.selectedIcon = null;
-            }
-            this.checkSelectedItems();
+                _loc2_.newTankmanFirstName = {"id":-1,
+                "group":0
+            };
         }
-        
-        public function getComponentForFocus() : InteractiveObject
+        if(!_loc2_.newTankmanLastName)
         {
-            return null;
-        }
-        
-        public function canShowAutomatically() : Boolean
-        {
-            return true;
-        }
+            _loc2_.newTankmanLastName = {"id":-1,
+            "group":0
+        };
     }
+    _loc2_.newIcon = this.selectedIcon;
+    dispatchEvent(_loc2_);
+}
+
+private function portraitsCarousel_listIndexChangeHandler(param1:ListEvent) : void
+{
+    if(param1.itemData == null)
+    {
+        return;
+    }
+    if((param1.itemData) && (this.checkOriginalIcon(param1.itemData.value)))
+    {
+        this.selectedIcon = {};
+        this.selectedIcon.id = param1.itemData.id;
+        this.selectedIcon.value = param1.itemData.value;
+        this.selectedIcon.group = param1.itemData.group;
+    }
+    else
+    {
+        this.selectedIcon = null;
+    }
+    this.checkSelectedItems();
+}
+
+public function getComponentForFocus() : InteractiveObject
+{
+    return null;
+}
+
+public function canShowAutomatically() : Boolean
+{
+    return true;
+}
+}
 }

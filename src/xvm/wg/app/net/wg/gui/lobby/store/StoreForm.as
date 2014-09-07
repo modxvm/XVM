@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.store
 {
     import scaleform.clik.core.UIComponent;
-    import net.wg.infrastructure.interfaces.IStoreTable;
+    import net.wg.gui.lobby.store.interfaces.IStoreTable;
     import net.wg.gui.components.advanced.Accordion;
     import net.wg.gui.components.controls.TextFieldShort;
     import net.wg.gui.components.controls.CloseButton;

@@ -2,9 +2,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
 {
     import net.wg.infrastructure.base.UIComponentEx;
     import net.wg.gui.lobby.fortifications.cmp.build.ICooldownIcon;
-    import flash.text.TextField;
     import net.wg.utils.ITweenAnimator;
-    import net.wg.gui.lobby.fortifications.utils.impl.TweenAnimator;
+    import flash.text.TextField;
     
     public class CooldownIcon extends UIComponentEx implements ICooldownIcon
     {
@@ -16,18 +15,18 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             mouseEnabled = false;
         }
         
+        private static function getTweenAnimator() : ITweenAnimator
+        {
+            return App.utils.tweenAnimator;
+        }
+        
         public var loader:CooldownIconLoaderCtnr = null;
         
         private var _timeTextField:TextField = null;
         
-        private function getTweenAnimator() : ITweenAnimator
-        {
-            return TweenAnimator.instance;
-        }
-        
         override protected function onDispose() : void
         {
-            this.getTweenAnimator().removeAnims(this);
+            getTweenAnimator().removeAnims(this);
             this._timeTextField = null;
             this.loader.dispose();
             this.loader = null;

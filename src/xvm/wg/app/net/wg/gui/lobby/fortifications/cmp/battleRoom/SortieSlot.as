@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.fortifications.cmp.battleRoom
 {
     import net.wg.gui.rally.controls.RallyLockableSlotRenderer;
+    import net.wg.gui.components.advanced.IndicationOfStatus;
     
     public class SortieSlot extends RallyLockableSlotRenderer
     {
@@ -14,16 +15,12 @@ package net.wg.gui.lobby.fortifications.cmp.battleRoom
         
         override public function setStatus(param1:int) : String
         {
-            var _loc2_:String = STATUS_NORMAL;
+            var _loc2_:String = IndicationOfStatus.STATUS_NORMAL;
             if(param1 < STATUSES.length && (param1))
             {
                 _loc2_ = STATUSES[param1];
             }
-            if(_loc2_ == STATUS_COMMANDER)
-            {
-                _loc2_ = STATUS_READY;
-            }
-            statusIndicator.gotoAndStop(_loc2_);
+            statusIndicator.status = _loc2_;
             return _loc2_;
         }
         

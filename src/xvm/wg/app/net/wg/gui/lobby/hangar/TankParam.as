@@ -2,6 +2,8 @@ package net.wg.gui.lobby.hangar
 {
     import scaleform.clik.controls.ListItemRenderer;
     import flash.text.TextField;
+    import net.wg.gui.lobby.hangar.data.HangarParamVO;
+    import net.wg.infrastructure.interfaces.entity.IDisposable;
     import scaleform.clik.data.ListData;
     import flash.events.Event;
     import flash.events.MouseEvent;
@@ -34,13 +36,17 @@ package net.wg.gui.lobby.hangar
         
         override public function setData(param1:Object) : void
         {
-            var _loc2_:ParamsVO = null;
+            var _loc2_:HangarParamVO = null;
+            if(this.data != null)
+            {
+                IDisposable(this.data).dispose();
+            }
             super.setData(param1);
             if(param1)
             {
-                _loc2_ = ParamsVO(param1);
+                _loc2_ = HangarParamVO(param1);
                 this.param = _loc2_.param;
-                this.text = MENU.tank_params(_loc2_.text);
+                this.text = _loc2_.text;
                 this.selected = _loc2_.selected;
                 invalidate();
             }
@@ -70,7 +76,7 @@ package net.wg.gui.lobby.hangar
             this._styles = null;
             if(_data)
             {
-                ParamsVO(_data).dispose();
+                IDisposable(_data).dispose();
                 _data = null;
             }
             this._text = null;

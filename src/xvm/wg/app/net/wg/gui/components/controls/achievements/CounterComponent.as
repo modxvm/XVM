@@ -1,7 +1,7 @@
 package net.wg.gui.components.controls.achievements
 {
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.infrastructure.interfaces.ICounterComponent;
+    import net.wg.gui.components.interfaces.ICounterComponent;
     import flash.display.MovieClip;
     import flash.text.TextFieldAutoSize;
     import flash.events.Event;

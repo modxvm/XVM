@@ -2,7 +2,7 @@ package net.wg.gui.lobby.store.shop
 {
     import net.wg.infrastructure.base.meta.impl.ShopMeta;
     import net.wg.infrastructure.base.meta.IShopMeta;
-    import net.wg.infrastructure.interfaces.IStoreMenuView;
+    import net.wg.gui.lobby.store.views.base.interfaces.IStoreMenuView;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.store.StoreEvent;
     

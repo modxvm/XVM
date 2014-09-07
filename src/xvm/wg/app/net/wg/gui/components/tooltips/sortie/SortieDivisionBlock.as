@@ -2,6 +2,7 @@ package net.wg.gui.components.tooltips.sortie
 {
     import scaleform.clik.core.UIComponent;
     import flash.text.TextField;
+    import net.wg.gui.components.controls.UILoaderAlt;
     import scaleform.clik.constants.InvalidationType;
     
     public class SortieDivisionBlock extends UIComponent
@@ -19,6 +20,8 @@ package net.wg.gui.components.tooltips.sortie
         public var bonusTF:TextField;
         
         public var playersTF:TextField;
+        
+        public var humanIcon:UILoaderAlt;
         
         public var levelsIT:TextField;
         
@@ -40,6 +43,7 @@ package net.wg.gui.components.tooltips.sortie
             this.levelsTF.text = TOOLTIPS.FORTIFICATION_SORTIEDIVISIONTOOLTIP_VEHLEVEL;
             this.bonusTF.text = TOOLTIPS.FORTIFICATION_SORTIEDIVISIONTOOLTIP_BONUS;
             this.playersTF.text = TOOLTIPS.FORTIFICATION_SORTIEDIVISIONTOOLTIP_PLAYERSLIMIT;
+            this.humanIcon.source = RES_ICONS.MAPS_ICONS_LIBRARY_FORTIFICATION_HUMANS;
         }
         
         override protected function draw() : void
@@ -62,6 +66,8 @@ package net.wg.gui.components.tooltips.sortie
             this.divisionHeaderTF = null;
             this.levelsIT = null;
             this.bonusIT = null;
+            this.humanIcon.dispose();
+            this.humanIcon = null;
         }
         
         public function get division() : String

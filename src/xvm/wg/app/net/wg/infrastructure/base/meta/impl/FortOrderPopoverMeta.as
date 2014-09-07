@@ -23,6 +23,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var getLeftTimeTooltip:Function = null;
         
+        public var openQuest:Function = null;
+        
         public function requestForCreateOrderS() : void
         {
             App.utils.asserter.assertNotNull(this.requestForCreateOrder,"requestForCreateOrder" + Errors.CANT_NULL);
@@ -51,6 +53,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.getLeftTimeTooltip,"getLeftTimeTooltip" + Errors.CANT_NULL);
             return this.getLeftTimeTooltip();
+        }
+        
+        public function openQuestS(param1:String) : void
+        {
+            App.utils.asserter.assertNotNull(this.openQuest,"openQuest" + Errors.CANT_NULL);
+            this.openQuest(param1);
         }
         
         public function as_setInitData(param1:Object) : void

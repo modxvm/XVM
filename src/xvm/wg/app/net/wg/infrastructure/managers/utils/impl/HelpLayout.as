@@ -20,6 +20,8 @@ package net.wg.infrastructure.managers.utils.impl
         
         private static var HL_MAIN_SOURCE:String = "HelpLayout";
         
+        private static var DEF_CONNECTOR_LENGTH:Number = 12;
+        
         private var _modalBackground:DisplayObject = null;
         
         public function create(param1:DisplayObject, param2:Object, param3:DisplayObjectContainer) : DisplayObject
@@ -30,7 +32,6 @@ package net.wg.infrastructure.managers.utils.impl
             _loc5_.assert(param2.text.length > 0,"text in initproperties can`t empty!");
             var _loc6_:IPopUpManager = _loc4_.popupMgr;
             var _loc7_:DisplayObject = _loc6_.create(HL_MAIN_SOURCE,param2,param3);
-            _loc6_.show(_loc7_,param2.x,param2.y,param3);
             return _loc7_;
         }
         
@@ -82,15 +83,21 @@ package net.wg.infrastructure.managers.utils.impl
         this.destroyBackground();
     }
     
-    public function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number) : Object
+    public function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number, param7:Number) : Object
     {
         return {"borderWidth":param1,
         "borderHeight":param2,
         "direction":param3,
         "text":param4,
         "x":param5,
-        "y":param6
+        "y":param6,
+        "connectorLength":param7
     };
+}
+
+public function get defConnectorLength() : Number
+{
+    return DEF_CONNECTOR_LENGTH;
 }
 }
 }

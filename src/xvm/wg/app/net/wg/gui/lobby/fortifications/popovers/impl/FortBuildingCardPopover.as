@@ -134,17 +134,18 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             App.utils.scheduler.envokeInNextFrame(this.invalidateFocus);
         }
         
+        public function as_setModernizationDestructionEnabling(param1:Boolean, param2:Boolean, param3:String, param4:String) : void
+        {
+            this.header.setModernizationDestructionEnabling(param1,param2,param3,param4);
+        }
+        
         private function invalidateFocus() : void
         {
-            if(!this.model.isCommander)
-            {
-                setFocus(this.assignPlayers.assignBtn);
-            }
-            else if((this.model.buildingHeader.isModernization) && (this.header.upgradeBtn.visible))
+            if((this.model.buildingHeader.isModernization) && (this.header.upgradeBtn.visible) && (this.model.canUpgradeBuilding))
             {
                 setFocus(this.header.upgradeBtn);
             }
-            else if(this.controlPanel.currentState == FortPopoverControlPanel.ACTION_STATE && (this.controlPanel.visible) && (this.controlPanel.actionButton.enabled))
+            else if(this.controlPanel.currentState == FortPopoverControlPanel.ACTION_STATE && (this.controlPanel.visible) && (this.controlPanel.actionButton.enabled) && (this.model.canAddOrder))
             {
                 setFocus(this.controlPanel.actionButton);
             }
@@ -152,7 +153,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             {
                 setFocus(this.assignPlayers.assignBtn);
             }
-            
             
         }
         

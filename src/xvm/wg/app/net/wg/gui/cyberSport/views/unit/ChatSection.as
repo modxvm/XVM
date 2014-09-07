@@ -1,9 +1,8 @@
 package net.wg.gui.cyberSport.views.unit
 {
-    import net.wg.gui.rally.views.room.BaseChatSection;
-    import net.wg.infrastructure.interfaces.entity.IFocusContainer;
+    import net.wg.gui.rally.views.room.ChatSectionWithDescription;
     
-    public class ChatSection extends BaseChatSection implements IFocusContainer
+    public class ChatSection extends ChatSectionWithDescription
     {
         
         public function ChatSection()

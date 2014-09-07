@@ -1,6 +1,7 @@
 package net.wg.gui.components.advanced
 {
     import net.wg.gui.components.controls.IconButton;
+    import flash.events.MouseEvent;
     
     public class BlinkingButton extends IconButton
     {
@@ -8,6 +9,7 @@ package net.wg.gui.components.advanced
         public function BlinkingButton()
         {
             super();
+            setState("up");
         }
         
         private var _blinking:Boolean;
@@ -17,10 +19,12 @@ package net.wg.gui.components.advanced
             return this._blinking;
         }
         
-        override protected function configUI() : void
+        override public function showTooltip(param1:MouseEvent) : void
         {
-            super.configUI();
-            setState("up");
+            if(enabled)
+            {
+                super.showTooltip(param1);
+            }
         }
         
         override protected function draw() : void

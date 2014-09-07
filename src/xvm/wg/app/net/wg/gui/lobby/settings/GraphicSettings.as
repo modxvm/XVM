@@ -432,6 +432,7 @@ package net.wg.gui.lobby.settings
     private function updateAdvancedDependedControls() : void
     {
         this.updateDataProviderForQuality();
+        this.updateExtendedAdvancedControlsData();
         this.updateQualityControls();
         this.updateExtendedAdvancedControls();
         this.updateSmoothingControl();
@@ -570,7 +571,7 @@ package net.wg.gui.lobby.settings
         }
     }
     
-    private function updateExtendedAdvancedControls() : void
+    private function updateExtendedAdvancedControlsData() : void
     {
         var _loc1_:SettingsControlProp = null;
         var _loc2_:String = null;
@@ -588,6 +589,19 @@ package net.wg.gui.lobby.settings
                         _loc1_.options.push(SettingsControlProp(_data[_loc2_]).options[_loc3_]);
                     }
                 }
+            }
+        }
+    }
+    
+    private function updateExtendedAdvancedControls() : void
+    {
+        var _loc1_:SettingsControlProp = null;
+        var _loc2_:String = null;
+        if(this._extendAdvancedControls)
+        {
+            for(_loc2_ in this._extendAdvancedControls)
+            {
+                _loc1_ = SettingsControlProp(this._extendAdvancedControls[_loc2_]);
                 this.updateAdvancedQualityControl(_loc2_,_loc1_);
             }
         }
@@ -845,9 +859,8 @@ package net.wg.gui.lobby.settings
     {
         var _loc2_:RangeSlider = RangeSlider(param1.target);
         var _loc3_:String = SettingsConfig.getControlId(RangeSlider(param1.target).name,SettingsConfig.TYPE_RANGE_SLIDER);
-        var _loc4_:SettingsControlProp = SettingsControlProp(_data[_loc3_]);
-        var _loc5_:Array = [_loc2_.value,_loc2_.leftValue,_loc2_.rightValue];
-        dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc5_));
+        var _loc4_:Array = [_loc2_.value,_loc2_.leftValue,_loc2_.rightValue];
+        dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc4_));
     }
     
     private function onSliderChanged(param1:SliderEvent) : void

@@ -22,7 +22,7 @@ package net.wg.gui.lobby.profile.headerBar
         
         public var highLight:MovieClip;
         
-        public var backGround:MovieClip;
+        public var backGround:ProfileTabButtonBg;
         
         private var textHOffset:uint = 14;
         
@@ -45,7 +45,6 @@ package net.wg.gui.lobby.profile.headerBar
         override protected function draw() : void
         {
             var _loc1_:uint = 0;
-            var _loc2_:ProfileTabButtonBg = null;
             if(_baseDisposed)
             {
                 return;
@@ -62,11 +61,7 @@ package net.wg.gui.lobby.profile.headerBar
             }
             if(isInvalid(LAST_LINE_INVALID))
             {
-                _loc2_ = this.backGround as ProfileTabButtonBg;
-                if(_loc2_)
-                {
-                    _loc2_.lastLine.visible = this._showLastLineItem;
-                }
+                this.backGround.showLastLineItem(this._showLastLineItem);
             }
         }
         
@@ -100,7 +95,9 @@ package net.wg.gui.lobby.profile.headerBar
         override protected function updateAfterStateChange() : void
         {
             super.updateAfterStateChange();
+            this.backGround.selected = _selected;
             invalidate(LAST_LINE_INVALID);
+            invalidateSize();
         }
         
         override protected function updateText() : void

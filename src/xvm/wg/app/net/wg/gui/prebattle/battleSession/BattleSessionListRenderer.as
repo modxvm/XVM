@@ -2,6 +2,7 @@ package net.wg.gui.prebattle.battleSession
 {
     import net.wg.gui.components.controls.TextFieldShort;
     import flash.text.TextField;
+    import flash.display.MovieClip;
     import scaleform.clik.utils.Constraints;
     
     public class BattleSessionListRenderer extends TextFieldShort
@@ -20,6 +21,8 @@ package net.wg.gui.prebattle.battleSession
         
         private var dataVO:BSListRendererVO = null;
         
+        public var icon:MovieClip;
+        
         override protected function configUI() : void
         {
             super.configUI();
@@ -28,6 +31,7 @@ package net.wg.gui.prebattle.battleSession
             this.textSize = 15;
             constraints.addElement("opponentsField",this.opponentsField,Constraints.ALL);
             constraints.addElement("timeField",this.timeField,Constraints.ALL);
+            constraints.addElement(this.icon.name,this.icon,Constraints.LEFT | Constraints.TOP);
         }
         
         override protected function draw() : void
@@ -44,7 +48,6 @@ package net.wg.gui.prebattle.battleSession
             textField.text = this.dataVO.descr;
             this.opponentsField.text = this.dataVO.opponents;
             this.timeField.text = this.dataVO.startTime;
-            DebugUtils.LOG_DEBUG(this.dataVO.descr,this.dataVO.opponents,this.dataVO.startTime);
         }
         
         override public function setData(param1:Object) : void

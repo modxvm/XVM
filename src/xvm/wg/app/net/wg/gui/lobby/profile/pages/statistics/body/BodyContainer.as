@@ -55,7 +55,6 @@ package net.wg.gui.lobby.profile.pages.statistics.body
         
         override protected function draw() : void
         {
-            var _loc1_:uint = 0;
             if(_baseDisposed)
             {
                 return;
@@ -64,7 +63,6 @@ package net.wg.gui.lobby.profile.pages.statistics.body
             if(isInvalid(LAYOUT_INVALID))
             {
                 this.viewStack.setAvailableSize(this.availableSize.x,this.availableSize.y);
-                _loc1_ = this.bar.dataProvider?this.bar.dataProvider.length:0;
                 this.bar.x = (this.availableSize.x - this.bar.width) / 2;
             }
         }
@@ -73,6 +71,7 @@ package net.wg.gui.lobby.profile.pages.statistics.body
         {
             var _loc3_:String = null;
             var _loc5_:StatisticsLabelDataVO = null;
+            var _loc6_:uint = 0;
             var _loc2_:Array = [];
             this.dataList = new StatisticsBodyVO(param1).dataListVO;
             var _loc4_:* = 0;
@@ -91,22 +90,23 @@ package net.wg.gui.lobby.profile.pages.statistics.body
                 _loc2_.push(new BodyBarData(_loc5_.label,_loc3_));
                 _loc4_++;
             }
-            this.bar.dataProvider = new DataProvider(_loc2_);
-            if(_loc4_ > 1)
+            if(this.bar.dataProvider)
             {
-                this.bar.visible = true;
-                if(this.bar.selectedIndex == -1)
+                _loc6_ = this.bar.dataProvider.length;
+                if(_loc6_ > 0 && !(_loc6_ == _loc2_.length))
                 {
-                    this.bar.selectedIndex = 0;
+                    this.bar.selectedIndex = -1;
+                    this.bar.removeAllRenderers();
                 }
-                this.viewStack.y = this.viewStackStartYPosition;
             }
-            else
+            this.bar.dataProvider = new DataProvider(_loc2_);
+            _loc4_;
+            this.bar.visible = true;
+            if(this.bar.selectedIndex == -1)
             {
                 this.bar.selectedIndex = 0;
-                this.bar.visible = false;
-                this.viewStack.y = this.barStartYPosition;
             }
+            this.viewStack.y = this.viewStackStartYPosition;
             this.viewStack.show(BodyBarData(_loc2_[this.bar.selectedIndex]).linkage);
             this.updateDataAt(this.bar.selectedIndex);
             invalidate(LAYOUT_INVALID);

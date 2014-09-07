@@ -7,5 +7,7 @@ package net.wg.infrastructure.interfaces
     {
         
         function get disposed() : Boolean;
+        
+        function get isDAAPIInited() : Boolean;
     }
 }

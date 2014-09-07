@@ -32,7 +32,7 @@ package net.wg.gui.messenger.windows
             canClose = true;
             canDrag = true;
             canResize = true;
-            showWindowBg = false;
+            showWindowBgForm = false;
             this._searchResDataProvider = new DAAPIDataProvider();
         }
         

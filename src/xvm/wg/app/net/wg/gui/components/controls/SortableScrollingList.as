@@ -4,6 +4,7 @@ package net.wg.gui.components.controls
     import flash.events.Event;
     import scaleform.clik.interfaces.IListItemRenderer;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.infrastructure.interfaces.IDAAPISortable;
     import net.wg.gui.components.advanced.SortingButtonInfo;
     
     public class SortableScrollingList extends ScrollingListEx
@@ -31,7 +32,7 @@ package net.wg.gui.components.controls
         
         private var _optionsDict:Object;
         
-        private var _sortProps:Array;
+        protected var _sortProps:Array;
         
         private var _sortingOrder:Array;
         
@@ -94,7 +95,10 @@ package net.wg.gui.components.controls
                 _loc8_ = getRendererAt(_loc7_);
                 _loc8_.x = Math.round(_loc4_);
                 _loc8_.y = Math.round(_loc5_ + _loc7_ * _loc2_);
-                _loc8_.width = _loc3_;
+                if(_widthAutoResize)
+                {
+                    _loc8_.width = _loc3_;
+                }
                 if(this._isRowHeightFixed)
                 {
                     _loc8_.height = _loc2_;
@@ -153,6 +157,7 @@ package net.wg.gui.components.controls
             var _loc2_:Array = null;
             var _loc3_:String = null;
             var _loc4_:Array = null;
+            var _loc5_:* = 0;
             if(dataProvider)
             {
                 _loc2_ = [];
@@ -167,10 +172,24 @@ package net.wg.gui.components.controls
                         _loc2_.push(this._optionsDict[_loc3_] | this._sortingDefaults[_loc3_]);
                     }
                 }
-                _loc4_ = dataProvider as Array;
-                if((_loc4_ && param1 && param1.length > 0 && _loc2_) && (_loc2_.length > 0) && param1.length == _loc2_.length)
+                if((param1 && param1.length > 0 && _loc2_) && (_loc2_.length > 0) && param1.length == _loc2_.length)
                 {
-                    _loc4_.sortOn(param1,_loc2_);
+                    if(dataProvider is IDAAPISortable)
+                    {
+                        _loc4_ = [];
+                        _loc5_ = 0;
+                        while(_loc5_ < param1.length)
+                        {
+                            _loc4_.push(!Boolean(_loc2_[_loc5_] ^ this._sortingTypes[param1[_loc5_]]));
+                            _loc5_++;
+                        }
+                        (dataProvider as IDAAPISortable).DAAPIsortOn(param1,_loc4_);
+                    }
+                    else if(dataProvider is Array)
+                    {
+                        (dataProvider as Array).sortOn(param1,_loc2_);
+                    }
+                    
                 }
                 this.invalidateData();
             }

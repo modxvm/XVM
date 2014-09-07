@@ -7,8 +7,11 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
     import flash.text.TextField;
     import net.wg.gui.lobby.fortifications.cmp.main.IFortHeaderClanInfo;
     import net.wg.gui.components.controls.IconTextButton;
+    import net.wg.gui.components.advanced.ButtonDnmIcon;
     import net.wg.gui.components.advanced.ToggleButton;
     import net.wg.gui.lobby.fortifications.utils.IFortsControlsAligner;
+    import flash.display.DisplayObject;
+    import flash.geom.Rectangle;
     import flash.display.InteractiveObject;
     import net.wg.gui.lobby.fortifications.utils.impl.FortsControlsAligner;
     
@@ -22,17 +25,22 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this._statsBtn.UIID = 1;
             this._clanListBtn.UIID = 2;
             this._transportBtn.UIID = 3;
+            this._vignetteYellow.alpha = 0;
         }
         
         private static var TRANSPORT_BTN_RIGHT_OFFSET:Number = 9;
         
         private static var DEPOT_QUANTITY_RIGHT_OFFSET:Number = TRANSPORT_BTN_RIGHT_OFFSET + 8;
         
+        private static var SETTING_BTN_LEFT_OFFSET:Number = 15;
+        
         public var headerBitmapFill:BitmapFill = null;
         
         private var _tutorialArrow:IUIComponentEx = null;
         
         private var _title:TextField = null;
+        
+        private var _infoTF:TextField = null;
         
         private var _clanInfo:IFortHeaderClanInfo = null;
         
@@ -44,6 +52,10 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         private var _clanListBtn:IconTextButton = null;
         
+        private var _calendarBtn:IconTextButton = null;
+        
+        private var _settingBtn:ButtonDnmIcon = null;
+        
         private var _transportBtn:ToggleButton = null;
         
         private var helper:IFortsControlsAligner = null;
@@ -51,11 +63,14 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         public function updateControls() : void
         {
             this._title.width = App.appWidth;
-            this.helper.centerControl(this._vignetteYellow);
-            this.helper.centerControl(this._clanInfo);
+            this._infoTF.width = App.appWidth;
+            this.helper.centerControl(this._vignetteYellow,false);
+            this.helper.centerControl(this._clanInfo,true);
             this.helper.rightControl(this._transportBtn,TRANSPORT_BTN_RIGHT_OFFSET);
             this._tutorialArrow.x = this._transportBtn.x + (this._transportBtn.width - this._tutorialArrow.width >> 1);
             this.helper.rightControl(this._totalDepotQuantityText,DEPOT_QUANTITY_RIGHT_OFFSET + this._transportBtn.width);
+            var _loc1_:Rectangle = DisplayObject(this.clanInfo).getRect(this);
+            this.settingBtn.x = _loc1_.x + _loc1_.width + SETTING_BTN_LEFT_OFFSET;
         }
         
         public function getComponentForFocus() : InteractiveObject
@@ -93,6 +108,16 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this._clanListBtn = param1;
         }
         
+        public function get calendarBtn() : IconTextButton
+        {
+            return this._calendarBtn;
+        }
+        
+        public function set calendarBtn(param1:IconTextButton) : void
+        {
+            this._calendarBtn = param1;
+        }
+        
         public function get transportBtn() : ToggleButton
         {
             return this._transportBtn;
@@ -101,6 +126,16 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         public function set transportBtn(param1:ToggleButton) : void
         {
             this._transportBtn = param1;
+        }
+        
+        public function get settingBtn() : ButtonDnmIcon
+        {
+            return this._settingBtn;
+        }
+        
+        public function set settingBtn(param1:ButtonDnmIcon) : void
+        {
+            this._settingBtn = param1;
         }
         
         public function get vignetteYellow() : VignetteYellow
@@ -143,12 +178,34 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this._title = param1;
         }
         
+        public function get infoTF() : TextField
+        {
+            return this._infoTF;
+        }
+        
+        public function set infoTF(param1:TextField) : void
+        {
+            this._infoTF = param1;
+        }
+        
+        public function get tutorialArrow() : IUIComponentEx
+        {
+            return this._tutorialArrow;
+        }
+        
+        public function set tutorialArrow(param1:IUIComponentEx) : void
+        {
+            this._tutorialArrow = param1;
+        }
+        
         override protected function configUI() : void
         {
             super.configUI();
+            this.calendarBtn.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_CALENDAR;
             this._vignetteYellow.mouseEnabled = false;
             this._vignetteYellow.mouseChildren = false;
             mouseEnabled = false;
+            this.settingBtn.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_SETTINGS;
         }
         
         override protected function onDispose() : void
@@ -161,26 +218,21 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this._statsBtn = null;
             this._clanListBtn.dispose();
             this._clanListBtn = null;
+            this._calendarBtn.dispose();
+            this._calendarBtn = null;
+            this._settingBtn.dispose();
+            this._settingBtn = null;
             this._vignetteYellow.dispose();
             this._vignetteYellow = null;
             this._transportBtn.dispose();
             this._transportBtn = null;
             this._totalDepotQuantityText = null;
             this._title = null;
+            this._infoTF = null;
             this._tutorialArrow.dispose();
             this._tutorialArrow = null;
             this.helper = null;
             super.onDispose();
-        }
-        
-        public function get tutorialArrow() : IUIComponentEx
-        {
-            return this._tutorialArrow;
-        }
-        
-        public function set tutorialArrow(param1:IUIComponentEx) : void
-        {
-            this._tutorialArrow = param1;
         }
     }
 }

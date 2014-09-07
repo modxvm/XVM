@@ -24,6 +24,14 @@ package net.wg.gui.lobby.messengerBar.carousel.data
         
         private var _isInProgress:Boolean = false;
         
+        private var _isWindowFocused:Boolean = false;
+        
+        private var _isWindowOpened:Boolean = false;
+        
+        private var _readyData:Object;
+        
+        private var _readyDataVO:ReadyData;
+        
         public function get clientID() : Number
         {
             return this._clientID;
@@ -41,7 +49,7 @@ package net.wg.gui.lobby.messengerBar.carousel.data
         
         public function set label(param1:String) : void
         {
-            this._label = param1;
+            this._label = App.utils.locale.makeString(param1);
         }
         
         public function get canClose() : Boolean
@@ -80,6 +88,10 @@ package net.wg.gui.lobby.messengerBar.carousel.data
             {
                 return false;
             }
+            if(param1 == "readyData" && (param2))
+            {
+                this._readyDataVO = new ReadyData(param2);
+            }
             return super.onDataWrite(param1,param2);
         }
         
@@ -91,6 +103,41 @@ package net.wg.gui.lobby.messengerBar.carousel.data
         public function set isInProgress(param1:Boolean) : void
         {
             this._isInProgress = param1;
+        }
+        
+        public function get isWindowFocused() : Boolean
+        {
+            return this._isWindowFocused;
+        }
+        
+        public function set isWindowFocused(param1:Boolean) : void
+        {
+            this._isWindowFocused = param1;
+        }
+        
+        public function get isWindowOpened() : Boolean
+        {
+            return this._isWindowOpened;
+        }
+        
+        public function set isWindowOpened(param1:Boolean) : void
+        {
+            this._isWindowOpened = param1;
+        }
+        
+        public function get readyData() : Object
+        {
+            return this._readyData;
+        }
+        
+        public function set readyData(param1:Object) : void
+        {
+            this._readyData = param1;
+        }
+        
+        public function get readyDataVO() : ReadyData
+        {
+            return this._readyDataVO;
         }
     }
 }

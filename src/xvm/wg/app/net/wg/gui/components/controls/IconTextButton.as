@@ -18,29 +18,11 @@ package net.wg.gui.components.controls
         
         public function set icon(param1:String) : void
         {
-            if(iconSource != "../maps/icons/buttons/" + param1)
+            RES_ICONS.maps_icons_buttons(param1);
+            var _loc2_:String = RES_ICONS.MAPS_ICONS_BUTTONS + "/" + param1;
+            if(iconSource != _loc2_)
             {
-                iconSource = "../maps/icons/buttons/" + param1;
-            }
-        }
-        
-        override protected function configUI() : void
-        {
-            if((iconSource) && iconSource.indexOf("../maps/icons/buttons/") == -1)
-            {
-                iconSource = "../maps/icons/buttons/" + iconSource;
-            }
-            super.configUI();
-        }
-        
-        override protected function configIcon() : void
-        {
-            if(loader)
-            {
-                loader.x = _iconOffsetLeft;
-                loader.y = _iconOffsetTop;
-                loader.tabEnabled = loader.mouseEnabled = false;
-                loader.visible = true;
+                iconSource = _loc2_;
             }
         }
         
@@ -57,6 +39,27 @@ package net.wg.gui.components.controls
             }
             this._caps = param1;
             invalidate();
+        }
+        
+        override protected function configUI() : void
+        {
+            if((iconSource) && iconSource.indexOf(RES_ICONS.MAPS_ICONS_BUTTONS + "/") == -1)
+            {
+                RES_ICONS.maps_icons_buttons(iconSource);
+                iconSource = RES_ICONS.MAPS_ICONS_BUTTONS + "/" + iconSource;
+            }
+            super.configUI();
+        }
+        
+        override protected function configIcon() : void
+        {
+            if(loader)
+            {
+                loader.x = _iconOffsetLeft;
+                loader.y = _iconOffsetTop;
+                loader.tabEnabled = loader.mouseEnabled = false;
+                loader.visible = true;
+            }
         }
         
         override protected function onDispose() : void
@@ -113,5 +116,17 @@ package net.wg.gui.components.controls
                 }
             }
         }
+        
+        override protected function getParamsForHelpLayout(param1:String, param2:String, param3:Number) : Object
+        {
+            return {"borderWidth":width - 3,
+            "borderHeight":height - 2,
+            "direction":param1,
+            "text":param2,
+            "x":0,
+            "y":0,
+            "connectorLength":param3
+        };
     }
+}
 }

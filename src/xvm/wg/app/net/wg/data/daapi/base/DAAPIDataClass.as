@@ -117,26 +117,6 @@ package net.wg.data.daapi.base
             }
         }
         
-        public final function dispose() : void
-        {
-            var _loc1_:String = null;
-            var _loc2_:* = undefined;
-            var _loc3_:String = null;
-            this.onDispose();
-            for(_loc1_ in this._hash)
-            {
-                _loc2_ = this._hash[_loc1_];
-                _loc3_ = _loc1_;
-                delete this[_loc1_];
-                true;
-            }
-            this._hash = null;
-        }
-        
-        protected function onDispose() : void
-        {
-        }
-        
         public function toHash() : Object
         {
             var _loc2_:String = null;
@@ -155,6 +135,27 @@ package net.wg.data.daapi.base
             return _loc1_;
         }
         
+        public function isEquals(param1:DAAPIDataClass) : Boolean
+        {
+            return compare(this._hash,param1.getHash());
+        }
+        
+        public final function dispose() : void
+        {
+            this.onDispose();
+            App.utils.commons.cleanupDynamicObjectsCouple(this._hash,this);
+            this._hash = null;
+        }
+        
+        public function getHash() : Object
+        {
+            return this._hash;
+        }
+        
+        protected function onDispose() : void
+        {
+        }
+        
         protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
             return true;
@@ -163,16 +164,6 @@ package net.wg.data.daapi.base
         protected function onDataRead(param1:String, param2:Object) : Boolean
         {
             return true;
-        }
-        
-        public function getHash() : Object
-        {
-            return this._hash;
-        }
-        
-        public function isEquals(param1:DAAPIDataClass) : Boolean
-        {
-            return compare(this._hash,param1.getHash());
         }
     }
 }

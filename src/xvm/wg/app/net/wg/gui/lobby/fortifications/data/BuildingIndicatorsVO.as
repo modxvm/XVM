@@ -42,5 +42,22 @@ package net.wg.gui.lobby.fortifications.data
             }
             return super.onDataWrite(param1,param2);
         }
+        
+        override protected function onDispose() : void
+        {
+            if(this.hpProgressLabels)
+            {
+                this.hpProgressLabels.dispose();
+                this.hpProgressLabels = null;
+            }
+            if(this.defResProgressLabels)
+            {
+                this.defResProgressLabels.dispose();
+                this.defResProgressLabels = null;
+            }
+            this.hpLabel = null;
+            this.defResLabel = null;
+            super.onDispose();
+        }
     }
 }

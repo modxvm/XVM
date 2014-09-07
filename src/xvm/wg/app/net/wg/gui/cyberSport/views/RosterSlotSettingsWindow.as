@@ -10,7 +10,7 @@ package net.wg.gui.cyberSport.views
     import net.wg.gui.cyberSport.controls.GrayTransparentButton;
     import net.wg.gui.rally.vo.SettingRosterVO;
     import net.wg.gui.cyberSport.controls.VehicleSelector;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import net.wg.gui.components.windows.WindowEvent;
     import net.wg.gui.rally.vo.VehicleVO;
     import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
@@ -151,7 +151,7 @@ package net.wg.gui.cyberSport.views
         {
             super.onPopulate();
             Window(window).visible = false;
-            showWindowBg = false;
+            showWindowBgForm = false;
             window.title = CYBERSPORT.WINDOW_ROSTERSLOTSETTINGS_TITLE;
         }
         

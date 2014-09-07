@@ -7,7 +7,7 @@ package net.wg.gui.components.advanced
     import net.wg.utils.IEventCollector;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.controls.Button;
-    import net.wg.infrastructure.interfaces.IAccordionItemRenderer;
+    import net.wg.gui.interfaces.IAccordionItemRenderer;
     import scaleform.clik.events.InputEvent;
     
     public class Accordion extends ButtonBarEx implements IDynamicContent

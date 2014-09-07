@@ -8,7 +8,7 @@ package net.wg.gui.notification
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.notification.vo.NotificationInfoVO;
     import net.wg.gui.notification.vo.NotificationDialogInitInfoVO;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.events.UILoaderEvent;
     import scaleform.clik.events.ButtonEvent;
@@ -26,7 +26,7 @@ package net.wg.gui.notification
             canResize = false;
             isModal = true;
             isCentered = true;
-            showWindowBg = false;
+            showWindowBgForm = false;
             this.visible = false;
         }
         

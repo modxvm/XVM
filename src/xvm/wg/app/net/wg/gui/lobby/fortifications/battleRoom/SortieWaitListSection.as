@@ -1,9 +1,9 @@
 package net.wg.gui.lobby.fortifications.battleRoom
 {
     import net.wg.gui.rally.views.room.BaseWaitListSection;
+    import net.wg.gui.cyberSport.data.CandidatesDataProvider;
     import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
     import flash.events.MouseEvent;
-    import net.wg.gui.cyberSport.data.CandidatesDataProvider;
     
     public class SortieWaitListSection extends BaseWaitListSection
     {
@@ -11,6 +11,10 @@ package net.wg.gui.lobby.fortifications.battleRoom
         public function SortieWaitListSection()
         {
             super();
+        }
+        
+        override protected function initializeDP() : void
+        {
             candidatesDP = new CandidatesDataProvider();
         }
         

@@ -30,8 +30,6 @@ package net.wg.gui.components.controls
         
         public var fx:MovieClip = null;
         
-        public var gradient:MovieClip = null;
-        
         private var _textColorOver:Number;
         
         private var textColorBeforeBlink:Number = NaN;
@@ -85,9 +83,9 @@ package net.wg.gui.components.controls
         override protected function updateText() : void
         {
             var _loc1_:String = null;
-            if(this.gradient)
+            if(hitMc)
             {
-                this.gradient.width = 1;
+                hitMc.width = 1;
             }
             if(this.caps)
             {
@@ -143,9 +141,9 @@ package net.wg.gui.components.controls
                     this.fxTextField2.text = _label;
                 }
             }
-            if(this.gradient)
+            if(hitMc)
             {
-                this.gradient.width = this.actualWidth;
+                hitMc.width = this.actualWidth;
             }
             this.width = this.actualWidth;
         }
@@ -217,31 +215,24 @@ package net.wg.gui.components.controls
                     this.fxTextField1.textColor = _textColor;
                 }
                 
-                if((selected) && (enabled))
-                {
-                    this.gradient.alpha = 0.4;
-                }
-                else
-                {
-                    this.gradient.alpha = 1;
-                }
             }
         }
         
         override public function showHelpLayout() : void
         {
-            var _loc1_:IHelpLayout = App.utils.helpLayout;
-            var _loc2_:Object = {"borderWidth":width,
+            var _loc1_:Number = 8;
+            var _loc2_:IHelpLayout = App.utils.helpLayout;
+            var _loc3_:Object = {"borderWidth":width + _loc1_,
             "borderHeight":this.fxTextField1.textHeight + 5,
             "direction":data["helpDirection"],
             "text":data["helpText"],
-            "x":0,
+            "x":-_loc1_ >> 1,
             "y":0,
             "connectorLength":data["helpConnectorLength"]
         };
         if(data["helpText"])
         {
-            setHelpLayout(_loc1_.create(root,_loc2_,this));
+            setHelpLayout(_loc2_.create(root,_loc3_,this));
         }
     }
     

@@ -15,5 +15,11 @@ package net.wg.gui.lobby.fortifications.data
         public static var ENTER:Number = 2;
         
         public static var ENTER_TUTORIAL:Number = 3;
+        
+        public static var UNKNOWN:Number = 4;
+        
+        public static var TRANSPORTING_NEXT_STEP:Number = 5;
+        
+        public static var TRANSPORTING_TUTORIAL_FIRST_STEP:Number = 6;
     }
 }

@@ -71,10 +71,6 @@ override public function invalidate(param1:uint = 0) : void
 this.items.invalidate(param1);
 }
 
-override public function as_populate() : void
-{
-}
-
 override public function as_dispose() : void
 {
 this.cleanUp();

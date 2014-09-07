@@ -3,9 +3,12 @@ package net.wg.gui.lobby.header
     import net.wg.infrastructure.base.meta.impl.BattleTypeSelectPopoverMeta;
     import net.wg.infrastructure.base.meta.IBattleTypeSelectPopoverMeta;
     import net.wg.gui.historicalBattles.controls.SimpleVehicleList;
+    import flash.display.MovieClip;
+    import net.wg.gui.lobby.header.events.BattleTypeSelectorEvent;
     import scaleform.clik.events.ListEvent;
     import net.wg.gui.components.controls.events.FancyRendererEvent;
     import net.wg.gui.components.popOvers.PopOverConst;
+    import flash.display.Graphics;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.data.DataProvider;
     import flash.display.InteractiveObject;
@@ -17,19 +20,47 @@ package net.wg.gui.lobby.header
         
         public function BattleTypeSelectPopover()
         {
+            this.hitSprite = new MovieClip();
             super();
             UIID = 97;
         }
         
+        private static var LIPS_PADDING:Number = 10;
+        
+        private static var LIST_TOP_PADDING:Number = -8;
+        
+        private static var LIST_LEFT_PADDING:Number = -6;
+        
+        private static var LIST_RIGHT_PADDING:Number = -6;
+        
         public var list:SimpleVehicleList;
         
-        private var items:Array;
+        public var demonstrationItem:BattleTypeSelectPopoverDemonstrator = null;
+        
+        public var topLip:MovieClip;
+        
+        public var bottomLip:MovieClip;
+        
+        private var _items:Array;
+        
+        private var _isShowDemonstrator:Boolean = false;
         
         private var PREBATTLE_ACTION_NAME_SORTIE:String = "sortie";
+        
+        private var hitSprite:MovieClip;
         
         override protected function configUI() : void
         {
             super.configUI();
+            this.demonstrationItem.visible = false;
+            this.demonstrationItem.addEventListener(BattleTypeSelectorEvent.BATTLE_TYPE_ITEM_EVENT,this.onDemoClick);
+            this.topLip.mouseChildren = this.bottomLip.mouseChildren = false;
+            this.topLip.mouseEnabled = this.bottomLip.mouseEnabled = false;
+            this.list.y = LIST_TOP_PADDING + LIPS_PADDING;
+            this.list.x = LIST_LEFT_PADDING;
+            this.demonstrationItem.y = LIPS_PADDING;
+            addChildAt(this.hitSprite,getChildIndex(this.list));
+            hitArea = this.hitSprite;
             if(!hasEventListener(ListEvent.INDEX_CHANGE))
             {
                 addEventListener(FancyRendererEvent.RENDERER_CLICK,this.onFightSelect,false,0,true);
@@ -46,21 +77,34 @@ package net.wg.gui.lobby.header
         {
             var _loc1_:Array = null;
             var _loc2_:* = 0;
-            super.draw();
-            if((isInvalid(InvalidationType.DATA)) && (this.items))
+            var _loc3_:Graphics = null;
+            if(_baseDisposed)
             {
-                this.list.rowCount = this.items.length;
+                return;
+            }
+            super.draw();
+            if((isInvalid(InvalidationType.DATA)) && (this._items))
+            {
+                this.demonstrationItem.visible = this._isShowDemonstrator;
+                this.list.y = this._isShowDemonstrator?this.demonstrationItem.y + this.demonstrationItem.height + LIST_TOP_PADDING:LIPS_PADDING + LIST_TOP_PADDING;
+                this.list.rowCount = this._items.length;
                 _loc1_ = [];
                 _loc2_ = 0;
-                while(_loc2_ < this.items.length)
+                while(_loc2_ < this._items.length)
                 {
-                    _loc1_.push(new BattleSelectDropDownVO(this.items[_loc2_]));
+                    _loc1_.push(new BattleSelectDropDownVO(this._items[_loc2_]));
                     _loc2_++;
                 }
                 this.list.dataProvider = new DataProvider(_loc1_);
                 this.updateSelectedItem();
                 this.list.validateNow();
-                setSize(this.list.width,this.list.height);
+                this.topLip.y = this._isShowDemonstrator?this.demonstrationItem.y - this.topLip.height:this.list.y - this.topLip.height - LIST_TOP_PADDING;
+                this.bottomLip.y = this.list.y + this.list.height + this.bottomLip.height - LIST_TOP_PADDING;
+                _loc3_ = this.hitSprite.graphics;
+                _loc3_.beginFill(0,0);
+                _loc3_.drawRect(0,0,this.list.width + LIST_RIGHT_PADDING + LIST_LEFT_PADDING,this.list.y + this.list.height + this.list._gap + LIST_TOP_PADDING + LIPS_PADDING);
+                _loc3_.endFill();
+                setSize(this.hitSprite.width,this.hitSprite.height);
             }
         }
         
@@ -99,21 +143,35 @@ package net.wg.gui.lobby.header
             App.popoverMgr.hide();
         }
         
-        public function as_update(param1:Array) : void
+        public function as_update(param1:Array, param2:Boolean, param3:Boolean) : void
         {
-            this.items = param1;
+            this.as_setDemonstrationEnabled(param3);
+            this._items = param1;
+            this._isShowDemonstrator = param2;
             invalidateData();
         }
         
         override protected function onDispose() : void
         {
-            if(this.items)
+            if(this._items)
             {
-                this.items.splice(0,this.items.length);
+                this._items.splice(0,this._items.length);
             }
-            this.items = null;
+            this._items = null;
+            this.demonstrationItem.removeEventListener(BattleTypeSelectorEvent.BATTLE_TYPE_ITEM_EVENT,this.onDemoClick);
+            this.demonstrationItem.dispose();
             removeEventListener(FancyRendererEvent.RENDERER_CLICK,this.onFightSelect);
             super.onDispose();
+        }
+        
+        public function as_setDemonstrationEnabled(param1:Boolean) : void
+        {
+            this.demonstrationItem.enabled = param1;
+        }
+        
+        private function onDemoClick(param1:BattleTypeSelectorEvent) : void
+        {
+            demoClickS();
         }
     }
 }

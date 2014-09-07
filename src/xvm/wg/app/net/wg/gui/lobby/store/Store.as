@@ -3,7 +3,7 @@ package net.wg.gui.lobby.store
     import net.wg.infrastructure.base.meta.impl.StoreMeta;
     import net.wg.infrastructure.base.meta.IStoreMeta;
     import flash.utils.Dictionary;
-    import net.wg.infrastructure.interfaces.IStoreMenuView;
+    import net.wg.gui.lobby.store.views.base.interfaces.IStoreMenuView;
     import net.wg.gui.components.controls.CloseButton;
     import net.wg.data.VO.ShopSubFilterData;
     import scaleform.clik.events.InputEvent;

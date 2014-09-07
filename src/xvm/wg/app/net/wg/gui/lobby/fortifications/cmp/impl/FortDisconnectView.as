@@ -64,9 +64,9 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         
         override protected function onDispose() : void
         {
-            super.onDispose();
             this.warningText = null;
             this.warningDescription = null;
+            super.onDispose();
         }
         
         public function update(param1:Object) : void

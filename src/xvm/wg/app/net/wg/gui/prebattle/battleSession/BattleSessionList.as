@@ -22,7 +22,7 @@ package net.wg.gui.prebattle.battleSession
         public function BattleSessionList()
         {
             super();
-            showWindowBg = false;
+            showWindowBgForm = false;
             canMinimize = true;
             enabledCloseBtn = false;
             canResize = true;

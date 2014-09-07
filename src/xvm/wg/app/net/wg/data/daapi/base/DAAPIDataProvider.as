@@ -19,6 +19,8 @@ package net.wg.data.daapi.base
         
         public var requestItemRangeHandler:Function;
         
+        private var _isDAAPIInited:Boolean = false;
+        
         public function get disposed() : Boolean
         {
             return false;
@@ -82,10 +84,21 @@ package net.wg.data.daapi.base
         
         public function as_populate() : void
         {
+            this._isDAAPIInited = true;
         }
         
         public function as_dispose() : void
         {
+        }
+        
+        public function as_isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
+        public function get isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
         }
     }
 }

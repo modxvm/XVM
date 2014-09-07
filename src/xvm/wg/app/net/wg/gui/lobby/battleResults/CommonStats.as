@@ -254,6 +254,11 @@ package net.wg.gui.lobby.battleResults
     }
     
     this.tankSlot.vehicleStateLbl.textColor = _loc2_.killerID == 0?13224374:8684674;
+    if(_loc3_.bonusType == 11)
+    {
+        this.arenaNameLbl.htmlText = this.arenaNameLbl.htmlText + (" " + _loc1_.common.clans.enemies.clanAbbrev);
+        this.myParent.requestClanEmblem(ARENA_ENEMY_CLAN_EMBLEM,_loc1_.common.clans.enemies.clanDBID,this.onEmblemLoaded);
+    }
     if(_loc3_.bonusType == 10)
     {
         this.arenaNameLbl.htmlText = this.arenaNameLbl.htmlText + (" " + _loc1_.common.clans.enemies.clanAbbrev);

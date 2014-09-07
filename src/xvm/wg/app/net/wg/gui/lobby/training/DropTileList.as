@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.training
 {
     import net.wg.gui.components.controls.TileList;
-    import net.wg.infrastructure.interfaces.IDropList;
+    import net.wg.gui.interfaces.IDropList;
     import flash.display.MovieClip;
     import flash.events.MouseEvent;
     import scaleform.clik.interfaces.IListItemRenderer;

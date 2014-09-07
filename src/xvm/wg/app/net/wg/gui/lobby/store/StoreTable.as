@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.store
 {
     import net.wg.infrastructure.base.meta.impl.StoreTableMeta;
-    import net.wg.infrastructure.interfaces.IStoreTable;
+    import net.wg.gui.lobby.store.interfaces.IStoreTable;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.NullPointerException;
     import net.wg.gui.components.controls.ScrollingListEx;

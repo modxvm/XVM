@@ -1,6 +1,11 @@
 package net.wg.gui.lobby.fortifications.cmp.build.impl
 {
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuilding;
+    import net.wg.gui.utils.ComplexTooltipHelper;
+    import net.wg.utils.ITweenAnimator;
+    import net.wg.utils.IScheduler;
+    import net.wg.gui.lobby.fortifications.data.FortBuildingConstants;
+    import flash.geom.Rectangle;
     import net.wg.gui.lobby.fortifications.data.BuildingVO;
     import net.wg.utils.ICommons;
     import net.wg.infrastructure.interfaces.IContextItem;
@@ -8,23 +13,17 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     import flash.display.InteractiveObject;
     import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
     import net.wg.data.constants.Errors;
+    import net.wg.gui.lobby.fortifications.data.FortModeVO;
     import net.wg.gui.lobby.fortifications.utils.impl.FortCommonUtils;
     import net.wg.gui.lobby.fortifications.data.FunctionalStates;
     import flash.display.DisplayObject;
     import scaleform.clik.constants.InvalidationType;
-    import flash.events.Event;
-    import net.wg.utils.ITweenAnimator;
     import net.wg.gui.events.ContextMenuEvent;
-    import net.wg.gui.utils.ComplexTooltipHelper;
-    import net.wg.gui.lobby.fortifications.utils.impl.TweenAnimator;
-    import net.wg.utils.IScheduler;
-    import flash.display.Sprite;
+    import net.wg.gui.lobby.fortifications.events.FortBuildingAnimationEvent;
     import flash.events.MouseEvent;
     import net.wg.data.constants.Values;
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingsContainer;
     import net.wg.infrastructure.exceptions.InfrastructureException;
-    import net.wg.gui.lobby.fortifications.data.FortBuildingConstants;
-    import flash.geom.Point;
     import net.wg.gui.lobby.fortifications.cmp.build.IArrowWithNut;
     import net.wg.data.constants.Cursors;
     import net.wg.gui.lobby.fortifications.events.FortBuildingEvent;
@@ -32,6 +31,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     import scaleform.gfx.MouseEventEx;
     import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
     import net.wg.gui.lobby.fortifications.utils.impl.BuildingsCIGenerator;
+    import flash.events.Event;
     
     public class FortBuilding extends FortBuildingUIBase implements IFortBuilding
     {
@@ -49,19 +49,41 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.addCommonBuildingListeners();
         }
         
-        private static var ALPHA_DISABLED:Number = 0.33;
+        private static var ALPHA_DISABLED:Number = 0.25;
         
         private static var ALPHA_ENABLED:Number = 1;
         
-        private static var SATURATION_DISABLED:Number = 100;
-        
-        private static var SATURATION_ENABLED:Number = 0;
-        
         private static var HALF_TURN_SCHEDULER_TIME:int = 2000;
+        
+        private static var hitAreas:Array = [new Rectangle(15,50,140,82),new Rectangle(6,54,160,91),new Rectangle(49,58,83,65),new Rectangle(15,51,134,81),new Rectangle(10,49,145,85),new Rectangle(13,51,137,82),new Rectangle(28,52,118,82),new Rectangle(34,57,82,56),new Rectangle(12,52,135,82),new Rectangle(25,52,95,65)];
+        
+        protected static function showToolTip(param1:String, param2:String, param3:String = "") : void
+        {
+            var _loc4_:String = new ComplexTooltipHelper().addHeader(param1).addBody(param2).addNote(param3,false).make();
+            if(_loc4_.length > 0)
+            {
+                App.toolTipMgr.showComplex(_loc4_);
+            }
+        }
+        
+        private static function getTweenAnimator() : ITweenAnimator
+        {
+            return App.utils.tweenAnimator;
+        }
+        
+        private static function getScheduler() : IScheduler
+        {
+            return App.utils.scheduler;
+        }
+        
+        private static function getRequiredBuildingState(param1:Number) : String
+        {
+            return FortBuildingConstants.BUILD_CODE_TO_NAME_MAP[param1];
+        }
         
         private var model:BuildingVO = null;
         
-        private var _isCommander:Boolean = false;
+        private var _userCanAddBuilding:Boolean = false;
         
         private var _uid:String = "";
         
@@ -101,6 +123,12 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _contextMenu:IContextMenu = null;
         
+        private var latestUID:String = null;
+        
+        private var latestLevel:int = -1;
+        
+        private var forceResetAnimation:Boolean = false;
+        
         public function getCustomHitArea() : InteractiveObject
         {
             return hitAreaControl;
@@ -109,7 +137,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public function setData(param1:BuildingVO) : void
         {
             var _loc2_:String = null;
-            _loc2_ = null;
             if(this.model != null)
             {
                 _loc2_ = this.model.cooldown;
@@ -130,15 +157,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                         this.showCooldown(this.isInCooldown());
                     }
                 }
-                this.isDisableCursor = !this._isCommander && (this.isTrowelState());
+                this.isDisableCursor = (this.isTrowelState()) && (!this._userCanAddBuilding || (this.model.isFortFrozen) || (this.model.isBaseBuildingDamaged));
                 App.utils.asserter.assertNotNull(this.model,"model" + Errors.CANT_NULL);
                 this.model.validate();
-                this._uid = buildingMc.uid = this.model.uid;
+                this._uid = this.model.uid;
                 this.buildingCtxMenu();
                 this.setState(this.model.progress);
                 indicators.applyVOData(this.model);
                 hitAreaControl.soundType = this.model.uid;
-                hitAreaControl.setData(this.model.uid,this.model.progress,this._isCommander);
                 if((this.isInExporting) && !this.model.isExportAvailable || (this.isInImporting) && !this.model.isImportAvailable)
                 {
                     this.removeTransportingListeners();
@@ -147,17 +173,18 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function updateCommonMode(param1:Boolean, param2:Boolean) : void
+        public function updateCommonMode(param1:FortModeVO) : void
         {
-            this.isTutorial = param2;
+            this.isTutorial = param1.isTutorial;
         }
         
-        public function updateTransportMode(param1:Boolean, param2:Boolean) : void
+        public function updateTransportMode(param1:FortModeVO) : void
         {
-            switch(FortCommonUtils.instance.getFunctionalState(param1,param2))
+            switch(FortCommonUtils.instance.getFunctionalState(param1))
             {
                 case FunctionalStates.ENTER:
                     this.isInExporting = true;
+                    this.isInImporting = false;
                     cooldownIcon.visible = false;
                     this.showCooldown(this.isInCooldown());
                     if(this.isExportAvailable())
@@ -184,7 +211,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                     this.updateEnabling();
                     break;
             }
-            if(param1)
+            if(param1.isEntering)
             {
                 this.addTransportingTooltipListener();
             }
@@ -193,12 +220,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                 this.removeTransportingTooltipListener();
                 this.removeTransportingListeners();
             }
+            this.checkAnimationState();
         }
         
-        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void
+        public function updateDirectionsMode(param1:FortModeVO) : void
         {
-            this.inDirectionMode = param1;
+            this.inDirectionMode = param1.isEntering;
             this.updateEnabling();
+            this.checkAnimationState();
         }
         
         public function nextTransportingStep(param1:Boolean) : void
@@ -238,6 +267,10 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             {
                 this.forceSelected = false;
             }
+        }
+        
+        public function onPopoverOpen() : void
+        {
         }
         
         public function onComplete() : void
@@ -300,9 +333,9 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.selected = param1;
         }
         
-        public function set isCommander(param1:Boolean) : void
+        public function set userCanAddBuilding(param1:Boolean) : void
         {
-            this._isCommander = param1;
+            this._userCanAddBuilding = param1;
             if(this.model != null)
             {
                 this.setState(this.model.progress);
@@ -319,10 +352,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this._uid = param1;
         }
         
-        public function set levelUpState(param1:Boolean) : void
-        {
-        }
-        
         override protected function draw() : void
         {
             super.draw();
@@ -337,12 +366,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         override protected function onDispose() : void
         {
             this.removeAllListeners();
-            App.stage.removeEventListener(Event.ENTER_FRAME,this.enterFrameHandlerA);
-            var _loc1_:ITweenAnimator = this.getTweenAnimator();
-            _loc1_.removeAnims(DisplayObject(cooldownIcon));
-            _loc1_.removeAnims(DisplayObject(indicators));
-            _loc1_.removeAnims(orderProcess.hourglasses);
-            this.getScheduler().cancelTask(this.doHalfTurnHourglasses);
+            getTweenAnimator().removeAnims(DisplayObject(cooldownIcon));
+            getTweenAnimator().removeAnims(DisplayObject(indicators));
+            getTweenAnimator().removeAnims(orderProcess.hourglasses);
+            getTweenAnimator().removeAnims(indicators.labels);
+            getScheduler().cancelTask(this.doHalfTurnHourglasses);
             this._uid = null;
             if(this.model)
             {
@@ -356,26 +384,10 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                 DisplayObject(this._contextMenu).removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.closeEventHandler);
                 this._contextMenu = null;
             }
+            animationController.removeEventListener(FortBuildingAnimationEvent.END_ANIMATION,this.animationControllerEndAnimation);
+            animationController.dispose();
+            animationController = null;
             super.onDispose();
-        }
-        
-        protected function showToolTip(param1:String, param2:String) : void
-        {
-            var _loc3_:String = new ComplexTooltipHelper().addHeader(param1).addBody(param2).addNote("",false).make();
-            if(_loc3_.length > 0)
-            {
-                App.toolTipMgr.showComplex(_loc3_);
-            }
-        }
-        
-        private function getTweenAnimator() : ITweenAnimator
-        {
-            return TweenAnimator.instance;
-        }
-        
-        private function getScheduler() : IScheduler
-        {
-            return App.utils.scheduler;
         }
         
         private function isInNormalMode() : Boolean
@@ -383,9 +395,19 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             return !this.isInExporting && !this.isInImporting && !this.inDirectionMode;
         }
         
+        private function checkAnimationState() : void
+        {
+            if((this.model) && (!this.isInNormalMode()) && (animationController.isPlayingAnimation))
+            {
+                animationController.resetAnimationType();
+                this.updateBuildingState();
+            }
+        }
+        
         private function updateEnabling() : void
         {
-            var _loc1_:* = false;
+            var _loc2_:* = false;
+            var _loc1_:* = true;
             if(this.isInNormalMode())
             {
                 this.enableForAll();
@@ -396,8 +418,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
             else if(this.isNotInCooldown())
             {
-                _loc1_ = ((this.isExportAvailable()) && (this.isInExporting) || (this.isImportAvailable()) && (this.isInImporting)) && (this.isNotTrowelState());
-                if(_loc1_)
+                _loc2_ = ((this.isExportAvailable()) && (this.isInExporting) || (this.isImportAvailable()) && (this.isInImporting)) && (this.isNotTrowelState());
+                if(_loc2_)
                 {
                     this.enableForTransporting();
                 }
@@ -410,11 +432,15 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             {
                 cooldownIcon.timeTextField.text = String(this.model.cooldown);
                 this.disableForCooldown();
+                _loc1_ = false;
             }
             
             
             this.updateOrderTime();
-            this.updateBlinkingBtn();
+            if(_loc1_)
+            {
+                this.updateBlinkingBtn();
+            }
         }
         
         private function isInCooldown() : Boolean
@@ -443,7 +469,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             buildingMc.blinkingButton.alpha = ALPHA_ENABLED;
             trowel.alpha = ALPHA_ENABLED;
             ground.alpha = ALPHA_ENABLED;
-            this.applySaturationForBuilding(false);
             this.updateInteractionEnabling(true);
             indicators.visible = this.isNotTrowelState();
             this.addCommonBuildingListeners();
@@ -455,7 +480,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             buildingMc.blinkingButton.alpha = ALPHA_DISABLED;
             trowel.alpha = 0;
             ground.alpha = ALPHA_DISABLED;
-            this.applySaturationForBuilding(true);
             this.updateInteractionEnabling(false);
             indicators.visible = false;
             this.removeCommonBuildingListeners();
@@ -467,7 +491,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             buildingMc.blinkingButton.alpha = ALPHA_ENABLED;
             trowel.alpha = 0;
             ground.alpha = ALPHA_DISABLED;
-            this.applySaturationForBuilding(false);
             this.updateInteractionEnabling(true);
             this.updateIndicatorsVisibility();
             this.removeCommonBuildingListeners();
@@ -479,7 +502,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             buildingMc.blinkingButton.alpha = ALPHA_DISABLED;
             trowel.alpha = 0;
             ground.alpha = ALPHA_DISABLED;
-            this.applySaturationForBuilding(true);
             this.updateInteractionEnabling(false);
             this.updateIndicatorsVisibility();
             this.removeCommonBuildingListeners();
@@ -490,7 +512,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             buildingMc.building.alpha = ALPHA_DISABLED;
             buildingMc.blinkingButton.alpha = ALPHA_DISABLED;
             trowel.alpha = 0;
-            this.applySaturationForBuilding(true);
             this.updateInteractionEnabling(false);
             this.updateIndicatorsVisibility();
             this.removeCommonBuildingListeners();
@@ -498,28 +519,19 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private function showCooldown(param1:Boolean) : void
         {
-            var _loc2_:ITweenAnimator = null;
             if(cooldownIcon.visible != param1)
             {
-                _loc2_ = this.getTweenAnimator();
-                _loc2_.removeAnims(DisplayObject(cooldownIcon));
+                getTweenAnimator().removeAnims(DisplayObject(cooldownIcon));
                 if(param1)
                 {
                     cooldownIcon.timeTextField.text = String(this.model.cooldown);
-                    _loc2_.addFadeInAnim(DisplayObject(cooldownIcon),null);
+                    getTweenAnimator().addFadeInAnim(DisplayObject(cooldownIcon),null);
                 }
                 else
                 {
-                    _loc2_.addFadeOutAnim(DisplayObject(cooldownIcon),null);
+                    getTweenAnimator().addFadeOutAnim(DisplayObject(cooldownIcon),null);
                 }
             }
-        }
-        
-        private function applySaturationForBuilding(param1:Boolean) : void
-        {
-            var _loc2_:Number = param1?SATURATION_ENABLED:SATURATION_DISABLED;
-            App.utils.commons.setSaturation(Sprite(buildingMc.building),_loc2_);
-            App.utils.commons.setSaturation(trowel,_loc2_);
         }
         
         private function updateInteractionEnabling(param1:Boolean) : void
@@ -580,24 +592,23 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private function showIndicators(param1:Boolean) : void
         {
-            if(!(indicators == null) && !(this.getTweenAnimator() == null))
+            getTweenAnimator().removeAnims(indicators.labels);
+            if(param1)
             {
-                this.getTweenAnimator().removeAnims(DisplayObject(indicators.labels));
-                if(param1)
+                if((!indicators.labels.visible || indicators.labels.alpha < 1) && (indicators.visible))
                 {
-                    this.getTweenAnimator().addFadeInAnim(DisplayObject(indicators.labels),this);
+                    getTweenAnimator().addFadeInAnim(indicators.labels,this);
                 }
-                else if(indicators.labels.visible)
-                {
-                    this.getTweenAnimator().addFadeOutAnim(DisplayObject(indicators.labels),this);
-                }
-                
             }
+            else if((indicators.labels.visible) && (indicators.labels.stage))
+            {
+                getTweenAnimator().addFadeOutAnim(indicators.labels,this);
+            }
+            
         }
         
         private function updateIndicatorsVisibility() : void
         {
-            trace(indicators.visible + "/" + this.isNotTrowelState() + "/" + indicators.labels.visible);
             indicators.visible = this.isNotTrowelState();
             if(indicators.labels.visible != this.isNotTrowelState())
             {
@@ -657,33 +668,47 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         {
             var _loc1_:Boolean = this.canShowOrderTime();
             var _loc2_:Boolean = orderProcess.visible;
+            var _loc3_:String = orderProcess.currentLabel;
             orderProcess.visible = _loc1_;
-            var _loc3_:ITweenAnimator = this.getTweenAnimator();
-            if(!(_loc1_ == _loc2_) && (_loc1_))
+            if(_loc1_)
             {
-                orderProcess.rotation = 0;
-                this.doHalfTurnHourglasses();
+                if((this.model) && (this.model.productionInPause))
+                {
+                    getScheduler().cancelTask(this.doHalfTurnHourglasses);
+                    orderProcess.rotation = 0;
+                    getTweenAnimator().removeAnims(orderProcess.hourglasses);
+                    orderProcess.gotoAndStop("pause");
+                }
+                else
+                {
+                    if(_loc3_ != "normal")
+                    {
+                        orderProcess.gotoAndStop("normal");
+                    }
+                    if(orderProcess.rotation == 0)
+                    {
+                        this.doHalfTurnHourglasses();
+                    }
+                }
             }
             else if(!_loc1_)
             {
-                _loc3_.removeAnims(orderProcess.hourglasses);
+                getTweenAnimator().removeAnims(orderProcess.hourglasses);
             }
             
         }
         
         private function doHalfTurnHourglasses() : void
         {
-            var _loc1_:ITweenAnimator = null;
             if(orderProcess != null)
             {
-                _loc1_ = this.getTweenAnimator();
                 if(orderProcess.visible)
                 {
-                    this.getScheduler().scheduleTask(this.doHalfTurnHourglasses,HALF_TURN_SCHEDULER_TIME);
+                    getScheduler().scheduleTask(this.doHalfTurnHourglasses,HALF_TURN_SCHEDULER_TIME);
                 }
-                _loc1_.removeAnims(orderProcess.hourglasses);
+                getTweenAnimator().removeAnims(orderProcess.hourglasses);
                 orderProcess.hourglasses.rotation = 0;
-                this.getTweenAnimator().addHalfTurnAnim(orderProcess.hourglasses);
+                getTweenAnimator().addHalfTurnAnim(orderProcess.hourglasses);
             }
         }
         
@@ -710,10 +735,17 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         {
             var _loc1_:String = null;
             var _loc2_:String = null;
-            if(this._isCommander)
+            if(this._userCanAddBuilding)
             {
                 _loc1_ = TOOLTIPS.FORTIFICATION_FOUNDATIONCOMMANDER_HEADER;
-                _loc2_ = TOOLTIPS.FORTIFICATION_FOUNDATIONCOMMANDER_BODY;
+                if((this.model.isFortFrozen) || (this.model.isBaseBuildingDamaged))
+                {
+                    _loc2_ = TOOLTIPS.FORTIFICATION_FOUNDATIONCOMMANDER_NOTAVAILABLE_BODY;
+                }
+                else
+                {
+                    _loc2_ = TOOLTIPS.FORTIFICATION_FOUNDATIONCOMMANDER_BODY;
+                }
             }
             else
             {
@@ -726,17 +758,125 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private function setState(param1:Number) : void
         {
+            var _loc2_:String = null;
             App.utils.asserter.assert(!(FORTIFICATION_ALIASES.STATES.indexOf(param1) == -1),"Unknown build state:" + param1,InfrastructureException);
+            if(!this.isInNormalMode())
+            {
+                this.updateBuildingState();
+                return;
+            }
+            this.forceResetAnimation = false;
+            if(animationController.isPlayingAnimation)
+            {
+                if(this.model.uid == FORTIFICATION_ALIASES.FORT_UNKNOWN && !(this.latestUID == null))
+                {
+                    this.forceResetAnimation = true;
+                    this.latestUID = null;
+                }
+                if(!(this.model.uid == FORTIFICATION_ALIASES.FORT_UNKNOWN) && this.latestUID == null)
+                {
+                    this.latestUID = this.model.uid;
+                    this.forceResetAnimation = true;
+                }
+                if(this.model.buildingLevel > this.latestLevel && this.model.buildingLevel >= 2)
+                {
+                    this.forceResetAnimation = true;
+                    this.latestLevel = this.model.buildingLevel;
+                }
+                if(this.forceResetAnimation)
+                {
+                    this._lastState = -1;
+                    animationController.resetAnimationType();
+                }
+                else
+                {
+                    this.model.animationType = FORTIFICATION_ALIASES.WITHOUT_ANIMATION;
+                    return;
+                }
+            }
+            if(this.model.uid != FORTIFICATION_ALIASES.FORT_UNKNOWN)
+            {
+                this.latestUID = this.model.uid;
+            }
+            else
+            {
+                this.latestUID = null;
+            }
             if(this._lastState != param1)
             {
-                gotoAndPlay(this.getRequiredBuildingState(param1));
+                if(this.model.animationType > FORTIFICATION_ALIASES.WITHOUT_ANIMATION)
+                {
+                    animationController.addEventListener(FortBuildingAnimationEvent.END_ANIMATION,this.animationControllerEndAnimation);
+                    if(this.model.animationType == FORTIFICATION_ALIASES.BUILD_FOUNDATION_ANIMATION)
+                    {
+                        animationController.setAnimationType(this.model.animationType,FORTIFICATION_ALIASES.FORT_FOUNDATION);
+                        this.updateBuildingState();
+                        return;
+                    }
+                    if(this.model.animationType == FORTIFICATION_ALIASES.DEMOUNT_BUILDING_ANIMATION)
+                    {
+                        this.gotoBuildingState(this.model.progress,this.model.uid);
+                        trowel.visible = false;
+                        _loc2_ = this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION_DEF?FORTIFICATION_ALIASES.FORT_FOUNDATION:buildingMc.currentState();
+                        animationController.setAnimationType(this.model.animationType,_loc2_);
+                        return;
+                    }
+                }
             }
-            this._lastState = param1;
-            trowel.visible = (this._isCommander) && (this.isTrowelState());
+            if(this.model.animationType == FORTIFICATION_ALIASES.UPGRADE_BUILDING_ANIMATION)
+            {
+                animationController.addEventListener(FortBuildingAnimationEvent.END_ANIMATION,this.animationControllerEndAnimation);
+                animationController.setAnimationType(this.model.animationType,null);
+                this.model.animationType = FORTIFICATION_ALIASES.WITHOUT_ANIMATION;
+            }
+            this.updateBuildingState();
+        }
+        
+        public function gotoBuildingState(param1:Number, param2:String) : void
+        {
+            var _loc3_:Array = [FORTIFICATION_ALIASES.FORT_FOUNDATION,FORTIFICATION_ALIASES.FORT_BASE_BUILDING,FORTIFICATION_ALIASES.FORT_WAR_SCHOOL_BUILDING,FORTIFICATION_ALIASES.FORT_TROPHY_BUILDING,FORTIFICATION_ALIASES.FORT_TRAINING_BUILDING,FORTIFICATION_ALIASES.FORT_TANKODROM_BUILDING,FORTIFICATION_ALIASES.FORT_INTENDANCY_BUILDING,FORTIFICATION_ALIASES.FORT_FINANCE_BUILDING,FORTIFICATION_ALIASES.FORT_CAR_BUILDING,FORTIFICATION_ALIASES.FORT_OFFICE_BUILDING];
+            gotoAndPlay(getRequiredBuildingState(this.model.progress));
+            if(param1 == FORTIFICATION_ALIASES.STATE_BUILDING)
+            {
+                hitAreaControl.x = hitAreas[_loc3_.indexOf(param2)].x;
+                hitAreaControl.y = hitAreas[_loc3_.indexOf(param2)].y;
+                hitAreaControl.width = hitAreas[_loc3_.indexOf(param2)].width;
+                hitAreaControl.height = hitAreas[_loc3_.indexOf(param2)].height;
+            }
+            else if(this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION_DEF || this.model.progress == FORTIFICATION_ALIASES.STATE_FOUNDATION)
+            {
+                hitAreaControl.x = hitAreas[0].x;
+                hitAreaControl.y = hitAreas[0].y;
+                hitAreaControl.width = hitAreas[0].width;
+                hitAreaControl.height = hitAreas[0].height;
+            }
+            else if(this.model.progress == FORTIFICATION_ALIASES.STATE_TROWEL)
+            {
+                hitAreaControl.x = trowel.x;
+                hitAreaControl.y = trowel.y;
+                hitAreaControl.width = 64;
+                hitAreaControl.height = 64;
+            }
+            
+            
+        }
+        
+        private function updateBuildingState() : void
+        {
+            var _loc1_:String = null;
+            if(this._lastState != this.model.progress)
+            {
+                this.gotoBuildingState(this.model.progress,this.model.uid);
+            }
+            this._lastState = this.model.progress;
+            trowel.visible = (this._userCanAddBuilding) && (this.isTrowelState()) && !this.model.isFortFrozen && !this.model.isBaseBuildingDamaged;
             ground.visible = false;
             if(this.model.progress == FORTIFICATION_ALIASES.STATE_TROWEL)
             {
-                trowel.label = FORTIFICATIONS.BUILDINGS_TROWELLABEL;
+                if(!this.model.isFortFrozen && !this.model.isBaseBuildingDamaged)
+                {
+                    trowel.label = FORTIFICATIONS.BUILDINGS_TROWELLABEL;
+                }
                 ground.visible = true;
                 this.createSimpleTooltipData();
             }
@@ -756,12 +896,25 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
             if(this.model.progress == FORTIFICATION_ALIASES.STATE_BUILDING)
             {
-                buildingMc.setCurrentState(this.model.uid);
+                _loc1_ = this.model.uid;
+                if((this.model.isFortFrozen) && !(FortBuildingConstants.CRASHABLE_BUILDINGS.indexOf(this.model.uid) == -1))
+                {
+                    _loc1_ = _loc1_ + FortBuildingConstants.CRASH_POSTFIX;
+                }
+                buildingMc.setCurrentState(_loc1_);
                 if(!this.selected)
                 {
                     this.updateBlinkingBtn();
                 }
             }
+            this.latestLevel = this.model.buildingLevel;
+        }
+        
+        private function animationControllerEndAnimation(param1:FortBuildingAnimationEvent) : void
+        {
+            animationController.resetAnimationType();
+            animationController.removeEventListener(FortBuildingAnimationEvent.END_ANIMATION,this.animationControllerEndAnimation);
+            this.updateBuildingState();
         }
         
         private function updateBlinkingBtn() : void
@@ -785,11 +938,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             return false;
         }
         
-        private function getRequiredBuildingState(param1:Number) : String
-        {
-            return FortBuildingConstants.BUILD_CODE_TO_NAME_MAP[param1];
-        }
-        
         private function callPopOver() : void
         {
             if(!this.model || this.model.uid == FortBuildingConstants.FORT_UNKNOWN)
@@ -797,8 +945,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                 return;
             }
             var _loc1_:Object = {"uid":this.model.uid};
-            var _loc2_:Point = hitAreaControl.absPosition;
-            App.popoverMgr.show(this,FORTIFICATION_ALIASES.FORT_BUILDING_CARD_POPOVER_EVENT,_loc2_.x,_loc2_.y,_loc1_,this);
+            if(App.popoverMgr.popoverCaller != this)
+            {
+                App.popoverMgr.show(this,FORTIFICATION_ALIASES.FORT_BUILDING_CARD_POPOVER_EVENT,_loc1_,this);
+            }
+            else
+            {
+                App.popoverMgr.hide();
+            }
         }
         
         private function updateExternalRequest(param1:Boolean) : void
@@ -846,11 +1000,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             {
                 if(this.model.transportTooltipData != null)
                 {
-                    this.showToolTip(this.model.transportTooltipData[0],this.model.transportTooltipData[1]);
+                    showToolTip(this.model.transportTooltipData[0],this.model.transportTooltipData[1]);
                 }
                 else
                 {
-                    this.showToolTip(this.toolTipHeader,this.toolTipBody);
+                    showToolTip(this.toolTipHeader,this.toolTipBody);
                 }
             }
             
@@ -889,7 +1043,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             {
                 this.createSimpleTooltipData();
             }
-            this.showToolTip(this.toolTipHeader,this.toolTipBody);
+            showToolTip(this.toolTipHeader,this.toolTipBody);
         }
         
         private function onDownHitAreaHandler(param1:MouseEvent) : void
@@ -897,11 +1051,15 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             var _loc3_:FortBuildingEvent = null;
             var _loc4_:IBuildingsCIGenerator = null;
             var _loc2_:MouseEventEx = param1 as MouseEventEx;
-            if(!this.model.isOpenCtxMenu && ((this.isTrowelState()) || (this.commons.isRightButton(MouseEventEx(param1)))))
+            if(!this._userCanAddBuilding && (this.commons.isLeftButton(MouseEventEx(param1))) && (this.isTrowelState()))
             {
                 return;
             }
-            if(this.model.progress == FORTIFICATION_ALIASES.STATE_TROWEL && (this._isCommander) && (this.commons.isLeftButton(_loc2_)))
+            if(!this.model.isOpenCtxMenu && (this.commons.isRightButton(MouseEventEx(param1))))
+            {
+                return;
+            }
+            if(this.model.progress == FORTIFICATION_ALIASES.STATE_TROWEL && (this._userCanAddBuilding) && !this.model.isFortFrozen && !this.model.isBaseBuildingDamaged && (this.commons.isLeftButton(_loc2_)))
             {
                 _loc3_ = new FortBuildingEvent(FortBuildingEvent.BUY_BUILDINGS);
                 _loc3_.position = this.model.position;

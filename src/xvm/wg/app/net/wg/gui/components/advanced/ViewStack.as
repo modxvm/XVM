@@ -2,7 +2,7 @@ package net.wg.gui.components.advanced
 {
     import scaleform.clik.core.UIComponent;
     import flash.display.Sprite;
-    import net.wg.infrastructure.interfaces.IGroupedControl;
+    import net.wg.gui.interfaces.IGroupedControl;
     import flash.display.MovieClip;
     import net.wg.infrastructure.interfaces.IViewStackContent;
     import scaleform.clik.events.IndexEvent;
@@ -11,6 +11,7 @@ package net.wg.gui.components.advanced
     import net.wg.infrastructure.interfaces.entity.IDAAPIEntity;
     import net.wg.utils.IAssertable;
     import net.wg.infrastructure.exceptions.ArgumentException;
+    import net.wg.gui.events.ViewStackContentEvent;
     import net.wg.infrastructure.events.LifeCycleEvent;
     import flash.utils.getDefinitionByName;
     import net.wg.gui.events.ViewStackEvent;
@@ -217,6 +218,7 @@ package net.wg.gui.components.advanced
                 if(this._currentView["__cached__"] == true)
                 {
                     this._currentView.visible = false;
+                    this._currentView.dispatchEvent(new ViewStackContentEvent(ViewStackContentEvent.VIEW_HIDE));
                 }
                 else
                 {

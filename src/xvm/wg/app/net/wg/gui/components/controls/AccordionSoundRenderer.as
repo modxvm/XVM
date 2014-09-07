@@ -1,6 +1,6 @@
 package net.wg.gui.components.controls
 {
-    import net.wg.infrastructure.interfaces.IAccordionItemRenderer;
+    import net.wg.gui.interfaces.IAccordionItemRenderer;
     import net.wg.data.constants.SoundTypes;
     import net.wg.data.components.AccordionRendererData;
     import flash.events.MouseEvent;

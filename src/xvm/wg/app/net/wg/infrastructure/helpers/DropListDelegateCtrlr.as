@@ -1,7 +1,7 @@
 package net.wg.infrastructure.helpers
 {
     import net.wg.infrastructure.interfaces.entity.IDisposable;
-    import net.wg.infrastructure.interfaces.IDropListDelegate;
+    import net.wg.infrastructure.helpers.interfaces.IDropListDelegate;
     import flash.display.InteractiveObject;
     import flash.events.IEventDispatcher;
     import net.wg.infrastructure.events.DropEvent;

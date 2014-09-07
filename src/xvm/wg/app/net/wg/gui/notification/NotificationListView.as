@@ -2,6 +2,7 @@ package net.wg.gui.notification
 {
     import net.wg.infrastructure.base.meta.impl.NotificationsListMeta;
     import net.wg.infrastructure.base.meta.INotificationsListMeta;
+    import flash.display.MovieClip;
     import net.wg.gui.notification.events.ServiceMessageEvent;
     import net.wg.gui.notification.vo.NotificationInfoVO;
     import net.wg.infrastructure.interfaces.IWrapper;
@@ -19,6 +20,10 @@ package net.wg.gui.notification
         
         public var list:NotificationsList;
         
+        public var background:MovieClip;
+        
+        public var bottomLip:MovieClip;
+        
         public var rendererTemplate:ServiceMessageItemRenderer;
         
         private var TIME_UPDATE_INTERVAL:uint = 300000.0;
@@ -26,6 +31,9 @@ package net.wg.gui.notification
         override protected function configUI() : void
         {
             super.configUI();
+            hitArea = this.background;
+            this.bottomLip.mouseChildren = false;
+            this.bottomLip.mouseEnabled = false;
             this.list.addEventListener(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this.messageButtonClickHandler,false,0,true);
             this.list.addEventListener(ServiceMessageEvent.MESSAGE_LINK_CLICKED,this.messageLinkClickHandler,false,0,true);
             if(this.rendererTemplate)
@@ -126,6 +134,16 @@ package net.wg.gui.notification
         public function as_updateMessage(param1:Object) : void
         {
             this.list.updateData(new NotificationInfoVO(param1));
+        }
+        
+        override public function get width() : Number
+        {
+            return this.background.width;
+        }
+        
+        override public function get height() : Number
+        {
+            return this.background.height;
         }
         
         override protected function onDispose() : void

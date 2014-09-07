@@ -1,9 +1,9 @@
 package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.gui.rally.views.room.BaseRallyRoomView;
+    import net.wg.gui.rally.views.room.BaseRallyRoomViewWithWaiting;
     import net.wg.data.constants.Errors;
     
-    public class CyberSportUnitMeta extends BaseRallyRoomView
+    public class CyberSportUnitMeta extends BaseRallyRoomViewWithWaiting
     {
         
         public function CyberSportUnitMeta()

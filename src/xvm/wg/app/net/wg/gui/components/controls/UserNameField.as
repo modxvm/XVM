@@ -18,6 +18,7 @@ package net.wg.gui.components.controls
         
         public function UserNameField()
         {
+            this._textColor = DEF_USER_NAME_COLOR;
             this.shadowColorList = {"White":{"color":16777215,
             "strange":0.4,
             "quality":3,
@@ -34,6 +35,8 @@ this.textField.text = " ";
 this._textFormat = this.textField.getTextFormat();
 }
 
+public static var DEF_USER_NAME_COLOR:Number = 15327935;
+
 public var textField:TextField;
 
 private var _userVO:UserVO;
@@ -46,11 +49,11 @@ private var _textSize:Number = 12;
 
 private var _textAlign:String;
 
-private var _textColor:Number = 16777215;
-
 private var _shadowColor:String = "Black";
 
 private var _showToolTip:Boolean = true;
+
+private var _textColor:Number;
 
 private var shadowColorList:Object;
 
@@ -135,8 +138,6 @@ if(isInvalid(InvalidationType.DATA))
     if(this.userVO)
     {
         this.textField.autoSize = TextFieldAutoSize.NONE;
-        this.textField.x = 0;
-        this.textField.width = _width;
         _loc2_ = App.utils.commons.formatPlayerName(this.textField,App.utils.commons.getUserProps(this.userVO.userName,this.userVO.clanAbbrev,this.userVO.region,this.userVO.igrType));
         this._showToolTip = _loc2_;
         if(_loc2_)

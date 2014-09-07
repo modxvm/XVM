@@ -19,6 +19,7 @@ package net.wg.infrastructure.managers.utils.impl
     import net.wg.utils.IStyleSheetManager;
     import net.wg.utils.ITweenAnimator;
     import net.wg.utils.IAnimBuilder;
+    import net.wg.utils.IDateTime;
     import net.wg.infrastructure.interfaces.IStrCaseProperties;
     import net.wg.data.StrCaseProperties;
     import net.wg.infrastructure.interfaces.IImageUrlProperties;
@@ -27,7 +28,7 @@ package net.wg.infrastructure.managers.utils.impl
     public class Utils extends UtilsManagerMeta implements IUtils
     {
         
-        public function Utils(param1:IAssertable, param2:IScheduler, param3:ILocale, param4:ISerializable, param5:IHelpLayout, param6:IClassFactory, param7:IPopUpManager, param8:ICommons, param9:IFocusHandler, param10:IEventCollector, param11:IIME, param12:IVOManager, param13:IIcons, param14:IStyleSheetManager, param15:ITweenAnimator, param16:IAnimBuilder)
+        public function Utils(param1:IAssertable, param2:IScheduler, param3:ILocale, param4:ISerializable, param5:IHelpLayout, param6:IClassFactory, param7:IPopUpManager, param8:ICommons, param9:IFocusHandler, param10:IEventCollector, param11:IIME, param12:IVOManager, param13:IIcons, param14:IStyleSheetManager, param15:ITweenAnimator, param16:IAnimBuilder, param17:IDateTime)
         {
             super();
             this._asserter = param1;
@@ -46,6 +47,7 @@ package net.wg.infrastructure.managers.utils.impl
             this._styleSheetManager = param14;
             this._tweenAnimator = param15;
             this._animBuilder = param16;
+            this._dateTime = param17;
         }
         
         private var _asserter:IAssertable = null;
@@ -82,6 +84,8 @@ package net.wg.infrastructure.managers.utils.impl
         
         private var _animBuilder:IAnimBuilder = null;
         
+        private var _dateTime:IDateTime = null;
+        
         public function setNations(param1:INations) : void
         {
             this._nations = param1;
@@ -112,6 +116,7 @@ package net.wg.infrastructure.managers.utils.impl
             this._tweenAnimator.dispose();
             this._tweenAnimator = null;
             this._animBuilder = null;
+            this._dateTime = null;
         }
         
         public function toUpperOrLowerCase(param1:String, param2:Boolean, param3:IStrCaseProperties = null) : String
@@ -212,6 +217,11 @@ package net.wg.infrastructure.managers.utils.impl
         public function get animBuilder() : IAnimBuilder
         {
             return this._animBuilder;
+        }
+        
+        public function get dateTime() : IDateTime
+        {
+            return this._dateTime;
         }
     }
 }

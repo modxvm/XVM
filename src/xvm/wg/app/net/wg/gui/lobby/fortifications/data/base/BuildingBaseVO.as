@@ -21,5 +21,7 @@ package net.wg.gui.lobby.fortifications.data.base
         public var maxHpValue:uint = 0;
         
         public var maxDefResValue:uint = 0;
+        
+        public var animationType:int = -1;
     }
 }

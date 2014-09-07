@@ -1,7 +1,7 @@
 package net.wg.infrastructure.base
 {
-    import net.wg.infrastructure.interfaces.IWindowGeometry;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindowGeometry;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     
     public class StoredWindowGeometry extends Object implements IWindowGeometry
     {

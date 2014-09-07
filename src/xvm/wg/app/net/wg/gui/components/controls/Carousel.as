@@ -1,6 +1,6 @@
 package net.wg.gui.components.controls
 {
-    import net.wg.infrastructure.interfaces.IDraggableList;
+    import net.wg.gui.components.controls.interfaces.IDraggableList;
     import flash.display.MovieClip;
     import scaleform.clik.utils.Padding;
     import scaleform.clik.motion.Tween;
@@ -9,6 +9,7 @@ package net.wg.gui.components.controls
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.events.ListEventEx;
     import fl.transitions.easing.*;
+    import net.wg.data.constants.Cursors;
     import flash.utils.setInterval;
     import flash.events.Event;
     import scaleform.gfx.MouseEventEx;
@@ -16,6 +17,8 @@ package net.wg.gui.components.controls
     import flash.utils.clearInterval;
     import flash.utils.setTimeout;
     import flash.utils.clearTimeout;
+    import net.wg.data.constants.DragType;
+    import flash.display.InteractiveObject;
     
     public class Carousel extends CoreListEx implements IDraggableList
     {
@@ -120,6 +123,7 @@ package net.wg.gui.components.controls
         {
             this.clearAllAnimIntervals();
             this.clearWheelTimeout();
+            App.cursor.unRegisterDragging(this);
             _renderers = null;
             if(this.dragHitArea)
             {
@@ -260,6 +264,7 @@ package net.wg.gui.components.controls
             this.addEventListener(ListEventEx.ITEM_CLICK,this.onItemClick);
             this.addEventListener(ListEventEx.ITEM_ROLL_OVER,this.onItemRollOver);
             this.addEventListener(ListEventEx.ITEM_ROLL_OUT,this.onItemRollOut);
+            App.cursor.registerDragging(this,Cursors.MOVE);
         }
         
         override protected function draw() : void
@@ -322,6 +327,7 @@ package net.wg.gui.components.controls
             }
             
             
+            this.dragHitArea.visible = this.allowDrag;
         }
         
         protected function updateDefContainerPos() : Number
@@ -382,6 +388,7 @@ package net.wg.gui.components.controls
             this.isDragging = false;
             if((this._dragEnabled) && (this.allowDrag))
             {
+                this.dragHitArea.removeEventListener(MouseEvent.MOUSE_DOWN,this.onDragAreaMouseDown);
                 this.clearSlidingIntervalId();
                 if(!this.isPreDragging)
                 {
@@ -536,9 +543,12 @@ private function updateDrugPosition(param1:Carousel, param2:Object) : void
         {
             this.isDragging = true;
             this.isMoving = true;
+            this.dragHitArea.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
+            this.dragHitArea.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_MOVE));
         }
         if(this.isDragging)
         {
+            this.dragHitArea.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_MOVE));
             _loc3_ = param2.scopeStartX + (param1.mouseX - param2.startMouseX);
             if(_loc3_ > param2.scopeDefPosition + this.maxDragOffset)
             {
@@ -832,6 +842,11 @@ private function onStageMouseUp(param1:MouseEvent) : void
 if(stage.hasEventListener(MouseEvent.MOUSE_UP))
 {
     stage.removeEventListener(MouseEvent.MOUSE_UP,this.onStageMouseUp);
+    this.dragHitArea.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
+}
+if((this._dragEnabled) && (this.allowDrag))
+{
+    this.dragHitArea.addEventListener(MouseEvent.MOUSE_DOWN,this.onDragAreaMouseDown);
 }
 this.stopDragging();
 }
@@ -897,6 +912,28 @@ this._isMouseOver = false;
 protected function onItemRollOver(param1:ListEventEx) : void
 {
 this._isMouseOver = true;
+}
+
+public function onStartDrag() : void
+{
+}
+
+public function onDragging(param1:Number, param2:Number) : void
+{
+}
+
+public function onEndDrag() : void
+{
+}
+
+public function getDragType() : String
+{
+return DragType.SOFT;
+}
+
+public function getHitArea() : InteractiveObject
+{
+return this.dragHitArea;
 }
 }
 }

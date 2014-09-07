@@ -1,14 +1,17 @@
 package net.wg.gui.lobby.messengerBar.carousel
 {
-    import scaleform.clik.core.UIComponent;
-    import scaleform.clik.interfaces.IListItemRenderer;
     import scaleform.clik.controls.Button;
-    import flash.display.MovieClip;
-    import net.wg.gui.lobby.messengerBar.carousel.data.ChannelListItemVO;
-    import scaleform.clik.data.ListData;
+    import scaleform.clik.events.ButtonEvent;
+    import flash.events.MouseEvent;
+    import scaleform.gfx.MouseEventEx;
+    import net.wg.infrastructure.interfaces.IContextItem;
+    import net.wg.data.components.ContextItem;
+    import net.wg.gui.events.ContextMenuEvent;
+    import net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent;
     import scaleform.clik.constants.InvalidationType;
+    import scaleform.clik.utils.Padding;
     
-    public class ChannelRenderer extends UIComponent implements IListItemRenderer
+    public class ChannelRenderer extends BaseChannelRenderer
     {
         
         public function ChannelRenderer()
@@ -17,103 +20,74 @@ package net.wg.gui.lobby.messengerBar.carousel
             visible = false;
         }
         
-        public var openButton:ChannelButton;
+        private static var closeBtnPadding:uint = 23;
+        
+        private static var MINIMIZE_ALL:String = "mA";
+        
+        private static var CLOSE_CURRENT:String = "clC";
+        
+        private static var CLOSE_ALL_EXCEPT_CURRENT:String = "clAdE";
         
         public var closeButton:Button;
         
-        public var progressIndicator:MovieClip;
-        
-        protected var _index:uint = 0;
-        
-        protected var _selectable:Boolean = true;
-        
-        protected var _owner:UIComponent = null;
-        
-        protected var model:ChannelListItemVO;
-        
-        public function get index() : uint
+        override protected function configUI() : void
         {
-            return this._index;
+            super.configUI();
+            this.closeButton.addEventListener(ButtonEvent.CLICK,onItemClose,false,0,true);
         }
         
-        public function set index(param1:uint) : void
+        override protected function handleMouseRelease(param1:MouseEvent) : void
         {
-            this._index = param1;
-        }
-        
-        public function get owner() : UIComponent
-        {
-            return this._owner;
-        }
-        
-        public function set owner(param1:UIComponent) : void
-        {
-            this._owner = param1;
-        }
-        
-        public function get selectable() : Boolean
-        {
-            return this._selectable;
-        }
-        
-        public function set selectable(param1:Boolean) : void
-        {
-            this._selectable = param1;
-        }
-        
-        public function get selected() : Boolean
-        {
-            return this.openButton.selected;
-        }
-        
-        public function set selected(param1:Boolean) : void
-        {
-            this.openButton.selected = param1;
-        }
-        
-        public function setListData(param1:ListData) : void
-        {
-            this.index = param1.index;
-            this.selected = param1.selected;
-            this.openButton.label = param1.label || "";
-        }
-        
-        public function setData(param1:Object) : void
-        {
-            if(param1)
+            super.handleMouseRelease(param1);
+            if(param1 is MouseEventEx && (App.utils.commons.isRightButton(param1)))
             {
-                this.model = new ChannelListItemVO(param1);
-                invalidateData();
+                App.contextMenuMgr.show(Vector.<IContextItem>([new ContextItem(MINIMIZE_ALL,MENU.CONTEXTMENU_MESSENGER_MINIMIZEALL),new ContextItem(CLOSE_CURRENT,MENU.CONTEXTMENU_MESSENGER_CLOSECURRENT,{"enabled":_data.canClose}),new ContextItem(CLOSE_ALL_EXCEPT_CURRENT,MENU.CONTEXTMENU_MESSENGER_CLOSEALLEXCEPTCURRENT)]),this,this.onContextMenuItemSelect);
             }
         }
         
-        public function getData() : Object
+        private function onContextMenuItemSelect(param1:ContextMenuEvent) : void
         {
-            return this.model;
-        }
-        
-        override protected function onDispose() : void
-        {
-            super.onDispose();
-            if(this.model)
+            switch(param1.id)
             {
-                this.model.dispose();
-                this.model = null;
+                case MINIMIZE_ALL:
+                    dispatchEvent(new ChannelListEvent(ChannelListEvent.MINIMIZE_ALL_CHANNELS,NaN,true));
+                    break;
+                case CLOSE_CURRENT:
+                    onItemClose();
+                    break;
+                case CLOSE_ALL_EXCEPT_CURRENT:
+                    dispatchEvent(new ChannelListEvent(ChannelListEvent.CLOSE_ALL_EXCEPT_CURRENT,_data.clientID,true));
+                    break;
             }
         }
         
         override protected function draw() : void
         {
             super.draw();
-            if((isInvalid(InvalidationType.DATA)) && (this.model))
+            if(isInvalid(InvalidationType.SIZE))
             {
-                this.openButton.label = this.model.label;
-                this.openButton.blinking = this.model.isNotified;
-                this.openButton.iconSource = this.model.icon;
-                this.closeButton.visible = this.model.canClose;
-                this.progressIndicator.visible = this.model.isInProgress;
+                openButton.width = _width;
+                this.closeButton.x = _width - closeBtnPadding;
             }
-            visible = Boolean(this.model);
+            visible = !(_data == null);
+        }
+        
+        override protected function applyData() : void
+        {
+            var _loc1_:* = false;
+            super.applyData();
+            openButton.iconSource = _data.icon;
+            _loc1_ = _data.canClose;
+            this.closeButton.visible = _loc1_;
+            var _loc2_:Padding = DEFAULT_TF_PADDING;
+            _loc2_.right = 23;
+            openButton.textFieldPadding = (_loc1_) || (_data.isInProgress)?_loc2_:DEFAULT_TF_PADDING;
+        }
+        
+        override protected function onDispose() : void
+        {
+            this.closeButton.removeEventListener(ButtonEvent.CLICK,onItemClose);
+            super.onDispose();
         }
     }
 }

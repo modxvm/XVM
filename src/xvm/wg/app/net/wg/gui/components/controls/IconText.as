@@ -9,6 +9,7 @@ package net.wg.gui.components.controls
     import flash.events.MouseEvent;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
+    import net.wg.data.constants.IconsTypes;
     import net.wg.data.constants.IconTextPosition;
     import flash.text.TextFormatAlign;
     
@@ -286,12 +287,14 @@ package net.wg.gui.components.controls
         {
             var _loc1_:* = NaN;
             var _loc2_:* = NaN;
+            var _loc3_:* = NaN;
             super.draw();
             constraints.update(_width,_height);
             constraints.update(_width,_height);
             if(this.textField)
             {
-                this._textFormat.color = this._textColor;
+                _loc1_ = IconsTypes.getTextColor(this._icon);
+                this._textFormat.color = _loc1_ > -1?_loc1_:this._textColor;
                 this._textFormat.size = this._textSize;
                 this._textFormat.font = this._textFont;
                 this._textFormat.align = this._textAlign;
@@ -317,43 +320,43 @@ package net.wg.gui.components.controls
                     {
                         this.textField.x = 0;
                     }
-                    _loc1_ = Math.round(this.textField.width * scaleX);
+                    _loc2_ = Math.round(this.textField.width * scaleX);
                     if(this._fitIconPosition)
                     {
-                        _loc1_ = Math.min(this.textField.textWidth,_loc1_);
+                        _loc2_ = Math.min(this.textField.textWidth,_loc2_);
                     }
-                    _loc2_ = 0;
+                    _loc3_ = 0;
                     if(this._iconPosition == IconTextPosition.LEFT)
                     {
                         if(this._textAlign == TextFormatAlign.LEFT)
                         {
-                            _loc2_ = 0;
+                            _loc3_ = 0;
                         }
                         else if(this._textAlign == TextFormatAlign.RIGHT)
                         {
-                            _loc2_ = _width - _loc1_ - this._iconWidth;
+                            _loc3_ = _width - _loc2_ - this._iconWidth;
                         }
                         else
                         {
-                            _loc2_ = (_width - _loc1_ - this._iconWidth) / 2;
+                            _loc3_ = (_width - _loc2_ - this._iconWidth) / 2;
                         }
                         
                     }
                     else if(this._textAlign == TextFormatAlign.RIGHT)
                     {
-                        _loc2_ = _width - this._iconWidth;
+                        _loc3_ = _width - this._iconWidth;
                     }
                     else if(this._textAlign == TextFormatAlign.LEFT)
                     {
-                        _loc2_ = _loc1_;
+                        _loc3_ = _loc2_;
                     }
                     else
                     {
-                        _loc2_ = (_width + _loc1_ - this._iconWidth) / 2;
+                        _loc3_ = (_width + _loc2_ - this._iconWidth) / 2;
                     }
                     
                     
-                    this.iconClip.x = Math.round(_loc2_ * this.iconClip.scaleX);
+                    this.iconClip.x = Math.round(_loc3_ * this.iconClip.scaleX);
                     this.iconClip.gotoAndStop(this._icon);
                     this.iconClip.visible = !(this._icon == "empty");
                 }

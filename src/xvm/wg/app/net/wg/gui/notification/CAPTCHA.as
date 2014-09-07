@@ -18,6 +18,7 @@ package net.wg.gui.notification
         public function CAPTCHA()
         {
             super();
+            showWindowBgForm = false;
             showWindowBg = false;
             canClose = false;
             canDrag = false;
@@ -92,7 +93,6 @@ package net.wg.gui.notification
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            window.getBackground().visible = false;
             window.getTitleBtn().visible = false;
         }
         

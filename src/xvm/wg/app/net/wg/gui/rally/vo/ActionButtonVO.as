@@ -17,5 +17,7 @@ package net.wg.gui.rally.vo
         public var isEnabled:Boolean = false;
         
         public var isReady:Boolean = false;
+        
+        public var toolTipData:String = "";
     }
 }

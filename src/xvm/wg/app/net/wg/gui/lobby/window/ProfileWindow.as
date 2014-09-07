@@ -7,7 +7,7 @@ package net.wg.gui.lobby.window
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.advanced.TabButton;
     import flash.display.Sprite;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import net.wg.utils.ILocale;
     import net.wg.data.Aliases;
     import net.wg.gui.lobby.profile.ProfileConstants;
@@ -27,7 +27,7 @@ package net.wg.gui.lobby.window
             canResize = false;
             canMinimize = false;
             isCentered = true;
-            showWindowBg = false;
+            showWindowBgForm = false;
             addChild(this.maskObj);
         }
         
@@ -100,6 +100,7 @@ package net.wg.gui.lobby.window
         
         override protected function configUI() : void
         {
+            var locale:ILocale = null;
             super.configUI();
             this.removeTemplateButton();
             try
@@ -111,7 +112,7 @@ package net.wg.gui.lobby.window
                 trace(e);
             }
             this.tabNavigator.centerOffset = ProfileConstants.WINDOW_CENTER_OFFSET;
-            var locale:ILocale = App.utils.locale;
+            locale = App.utils.locale;
             this.btnAddToFriends.label = locale.makeString(MESSENGER.DIALOGS_CONTACTS_CONTACT_ADDTOFRIENDS);
             this.btnAddToIgnore.label = locale.makeString(MESSENGER.DIALOGS_CONTACTS_CONTACT_ADDTOIGNORED);
             this.btnCreatePrivateChannel.label = locale.makeString(MESSENGER.DIALOGS_CONTACTS_CONTACT_CREATEPRIVATECHANNEL);

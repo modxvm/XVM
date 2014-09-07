@@ -27,7 +27,7 @@ package net.wg.gui.lobby.vehicleInfo
             canResize = false;
             canMinimize = false;
             isCentered = false;
-            showWindowBg = false;
+            showWindowBgForm = false;
         }
         
         public var vehicleIcon:TankIcon;

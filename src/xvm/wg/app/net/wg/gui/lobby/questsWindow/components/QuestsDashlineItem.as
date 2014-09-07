@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.questsWindow.components
 {
     import net.wg.gui.components.advanced.DashLineTextItem;
-    import net.wg.infrastructure.interfaces.IResizableContent;
+    import net.wg.gui.lobby.questsWindow.components.interfaces.IResizableContent;
     import flash.events.MouseEvent;
     import net.wg.gui.components.controls.SoundButton;
     import flash.display.MovieClip;

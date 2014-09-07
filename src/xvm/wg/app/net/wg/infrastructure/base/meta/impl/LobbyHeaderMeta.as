@@ -2,7 +2,6 @@ package net.wg.infrastructure.base.meta.impl
 {
     import net.wg.infrastructure.base.BaseDAAPIComponent;
     import net.wg.data.constants.Errors;
-    import flash.events.Event;
     
     public class LobbyHeaderMeta extends BaseDAAPIComponent
     {
@@ -24,9 +23,9 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onPayment:Function = null;
         
-        public var getServers:Function = null;
+        public var showSquad:Function = null;
         
-        public var relogin:Function = null;
+        public var fightClick:Function = null;
         
         public function menuItemClickS(param1:String) : void
         {
@@ -40,22 +39,22 @@ package net.wg.infrastructure.base.meta.impl
             this.showLobbyMenu();
         }
         
-        public function showExchangeWindowS(param1:Object) : void
+        public function showExchangeWindowS() : void
         {
             App.utils.asserter.assertNotNull(this.showExchangeWindow,"showExchangeWindow" + Errors.CANT_NULL);
-            this.showExchangeWindow(param1);
+            this.showExchangeWindow();
         }
         
-        public function showExchangeXPWindowS(param1:Object) : void
+        public function showExchangeXPWindowS() : void
         {
             App.utils.asserter.assertNotNull(this.showExchangeXPWindow,"showExchangeXPWindow" + Errors.CANT_NULL);
-            this.showExchangeXPWindow(param1);
+            this.showExchangeXPWindow();
         }
         
-        public function showPremiumDialogS(param1:Event) : void
+        public function showPremiumDialogS() : void
         {
             App.utils.asserter.assertNotNull(this.showPremiumDialog,"showPremiumDialog" + Errors.CANT_NULL);
-            this.showPremiumDialog(param1);
+            this.showPremiumDialog();
         }
         
         public function onPaymentS() : void
@@ -64,16 +63,16 @@ package net.wg.infrastructure.base.meta.impl
             this.onPayment();
         }
         
-        public function getServersS() : Array
+        public function showSquadS() : void
         {
-            App.utils.asserter.assertNotNull(this.getServers,"getServers" + Errors.CANT_NULL);
-            return this.getServers();
+            App.utils.asserter.assertNotNull(this.showSquad,"showSquad" + Errors.CANT_NULL);
+            this.showSquad();
         }
         
-        public function reloginS(param1:int) : void
+        public function fightClickS(param1:Number, param2:String) : void
         {
-            App.utils.asserter.assertNotNull(this.relogin,"relogin" + Errors.CANT_NULL);
-            this.relogin(param1);
+            App.utils.asserter.assertNotNull(this.fightClick,"fightClick" + Errors.CANT_NULL);
+            this.fightClick(param1,param2);
         }
     }
 }

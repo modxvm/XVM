@@ -8,6 +8,20 @@ package
             super();
         }
         
+        public static var SQUADWINDOW_BUTTONS_INVITE:String = "#tooltips:squadWindow/buttons/invite";
+        
+        public static var SQUADWINDOW_BUTTONS_RECOMMEND:String = "#tooltips:squadWindow/buttons/recommend";
+        
+        public static var SQUADWINDOW_BUTTONS_LEAVESQUAD:String = "#tooltips:squadWindow/buttons/leaveSquad";
+        
+        public static var SQUADWINDOW_BUTTONS_BTNFIGHT:String = "#tooltips:squadWindow/buttons/btnFight";
+        
+        public static var SQUADWINDOW_BUTTONS_BTNNOTREADY:String = "#tooltips:squadWindow/buttons/btnNotReady";
+        
+        public static var SQUADWINDOW_BUTTONS_SENDMESSAGE:String = "#tooltips:squadWindow/buttons/sendMessage";
+        
+        public static var SQUADWINDOW_BATTLETYPEINFO:String = "#tooltips:squadWindow/battleTypeInfo";
+        
         public static var LOGIN_LEGAL:String = "#tooltips:login/legal";
         
         public static var PREBATTLE_NAMEFILTERBUTTON:String = "#tooltips:prebattle/nameFilterButton";
@@ -29,6 +43,18 @@ package
         public static var HANGAR_TUNING:String = "#tooltips:hangar/tuning";
         
         public static var HANGAR_AMMO_PANEL_DEVICE_EMPTY:String = "#tooltips:hangar/ammo_panel/device/empty";
+        
+        public static var HANGAR_UNLOCKBUTTON:String = "#tooltips:hangar/unlockButton";
+        
+        public static var HEADER_ACCOUNT:String = "#tooltips:header/account";
+        
+        public static var HEADER_SQUAD:String = "#tooltips:header/squad";
+        
+        public static var HEADER_SQUAD_MEMBER:String = HEADER_SQUAD + "_member";
+        
+        public static var HEADER_BATTLETYPE:String = "#tooltips:header/battleType";
+        
+        public static var HEADER_INFO_PLAYERS_UNAVAILABLE:String = "#tooltips:header/info/players_unavailable";
         
         public static var HEADER_INFO_PLAYERS_ONLINE_REGION:String = "#tooltips:header/info/players_online_region";
         
@@ -54,7 +80,11 @@ package
         
         public static var HEADER_PREMIUM_EXTEND:String = "#tooltips:header/premium_extend";
         
-        public static var HEADER_FIGHT_BUTTON_DROPDOWN:String = "#tooltips:header/fight_button/dropdown";
+        public static var HEADER_REFILL:String = "#tooltips:header/refill";
+        
+        public static var HEADER_GOLD_EXCHANGE:String = "#tooltips:header/gold_exchange";
+        
+        public static var HEADER_XP_GATHERING:String = "#tooltips:header/xp_gathering";
         
         public static var TRAINING_CREATE_INVITES_CHECKBOX:String = "#tooltips:training/create/invites_checkbox";
         
@@ -76,10 +106,6 @@ package
         
         public static var BATTLETYPES_STANDART:String = "#tooltips:battleTypes/standart";
         
-        public static var BATTLETYPES_SQUAD:String = "#tooltips:battleTypes/squad";
-        
-        public static var BATTLETYPES_SQUADLEAVE:String = BATTLETYPES_SQUAD + "Leave";
-        
         public static var BATTLETYPES_LEAVEUNIT:String = "#tooltips:battleTypes/leaveUnit";
         
         public static var BATTLETYPES_LEAVECOMPANY:String = "#tooltips:battleTypes/leaveCompany";
@@ -99,6 +125,8 @@ package
         public static var BATTLETYPES_UNIT:String = "#tooltips:battleTypes/unit";
         
         public static var BATTLETYPES_HISTORICAL:String = "#tooltips:battleTypes/historical";
+        
+        public static var BATTLETYPES_BATTLETUTORIAL:String = "#tooltips:battleTypes/battleTutorial";
         
         public static var REDBUTTON_DISABLED_BUYNEEDED:String = "#tooltips:redButton/disabled/buyNeeded";
         
@@ -137,6 +165,10 @@ package
         public static var TANKS_CAROUSEL_BUY_VEHICLE:String = "#tooltips:tanks_carousel/buy_vehicle";
         
         public static var LOBY_MESSENGER_SERVICE_BUTTON:String = "#tooltips:loby_messenger/service_button";
+        
+        public static var LOBY_MESSENGER_CONTACTS_BUTTON:String = "#tooltips:loby_messenger/contacts_button";
+        
+        public static var LOBY_MESSENGER_CHANNELS_BUTTON:String = "#tooltips:loby_messenger/channels_button";
         
         public static var HANGAR_XPTOTMENCHECKBOX:String = "#tooltips:hangar/xpToTmenCheckbox";
         
@@ -179,6 +211,8 @@ package
         public static var CYBERSPORT_UNIT_TAKEPLACEFIRSTTIMEBTN:String = "#tooltips:cyberSport/unit/takePlaceFirstTimeBtn";
         
         public static var CYBERSPORT_VEHICLESELECTOR_OVERFLOWLEVEL:String = "#tooltips:cyberSport/vehicleSelector/overflowLevel";
+        
+        public static var CYBERSPORT_UNIT_INVITEBTN:String = "#tooltips:cyberSport/unit/inviteBtn";
         
         public static var USEFREEXP:String = "#tooltips:useFreeXP";
         
@@ -244,6 +278,16 @@ package
         
         public static var FORTIFICATION_BUILDINGPROCESS_STATUSICONNOTAVAILABLE:String = "#tooltips:fortification/buildingProcess/statusIconNotAvailable";
         
+        public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFATTACK:String = "#tooltips:fortification/clanStats/periodDefence/battles/efficiencyOfAttack";
+        
+        public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFDEFENCE:String = "#tooltips:fortification/clanStats/periodDefence/battles/efficiencyOfDefence";
+        
+        public static var PERIODDEFENCEWINDOW_TOOLTIP_PERIPHERY:String = "#tooltips:periodDefenceWindow/tooltip/periphery";
+        
+        public static var PERIODDEFENCEWINDOW_TOOLTIP_HOURDEFENCE:String = "#tooltips:periodDefenceWindow/tooltip/hourDefence";
+        
+        public static var PERIODDEFENCEWINDOW_TOOLTIP_HOLIDAY:String = "#tooltips:periodDefenceWindow/tooltip/holiday";
+        
         public static var FORTIFICATION_POPOVER_PREPAREORDEROVERLOAD:String = "#tooltips:fortification/popOver/prepareOrderOverload";
         
         public static var FORTIFICATION_POPOVER_DEMOUNTBTN:String = "#tooltips:fortification/popOver/demountBtn";
@@ -306,7 +350,143 @@ package
         
         public static var FORTIFICATION_FIXEDPLAYERS_NIC:String = "#tooltips:fortification/fixedPlayers/nic";
         
+        public static var FORTIFICATION_INTROVIEW_CLANBATTLEBTN_ENABLED:String = "#tooltips:fortification/introView/clanBattleBtn/enabled";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_LEVEL:String = "#tooltips:fortification/intelligenceWindow/sortBtn/level";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_CLANTAG:String = "#tooltips:fortification/intelligenceWindow/sortBtn/clanTag";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_DEFENCETIME:String = "#tooltips:fortification/intelligenceWindow/sortBtn/defenceTime";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_BUILDINGS:String = "#tooltips:fortification/intelligenceWindow/sortBtn/buildings";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_AVAILABILITY:String = "#tooltips:fortification/intelligenceWindow/sortBtn/availability";
+        
+        public static var FORTIFICATION_BATTLEROOMLEGIONARIES:String = "#tooltips:fortification/battleRoomLegionaries";
+        
+        public static var FORTIFICATION_BATTLEROOMLEGIONARIES_TEAMSECTION:String = FORTIFICATION_BATTLEROOMLEGIONARIES + "/teamSection";
+        
+        public static var FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_OFFENSE:String = "#tooltips:fortification/fortBattleDirectionPopover/offense";
+        
+        public static var FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_DEFENSE:String = "#tooltips:fortification/fortBattleDirectionPopover/defense";
+        
+        public static var FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_ISINBATTLE:String = "#tooltips:fortification/fortBattleDirectionPopover/isInBattle";
+        
+        public static var FORTIFICATION_BATTLENOTIFIER_OFFENSE:String = "#tooltips:fortification/battleNotifier/offense";
+        
+        public static var FORTIFICATION_BATTLENOTIFIER_DEFENSE:String = "#tooltips:fortification/battleNotifier/defense";
+        
+        public static var FORTIFICATION_BATTLENOTIFIER_OFFANDDEF:String = "#tooltips:fortification/battleNotifier/offAndDef";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANFILTERPOPOVER_DEFAULT:String = "#tooltips:fortification/FortIntelligenceClanFilterPopover/default";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANFILTERPOPOVER_APPLY:String = "#tooltips:fortification/FortIntelligenceClanFilterPopover/apply";
+        
+        public static var LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_LEFT:String = "#tooltips:loby_messenger/channels_carousel_button_left";
+        
+        public static var LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_LEFT:String = "#tooltips:loby_messenger/new/channels_carousel_button_left";
+        
+        public static var LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_RIGHT:String = "#tooltips:loby_messenger/channels_carousel_button_right";
+        
+        public static var LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_RIGHT:String = "#tooltips:loby_messenger/new/channels_carousel_button_right";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT:String = "#tooltips:fortification/intelligenceWindow/tagSearchTextInput";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON:String = "#tooltips:fortification/intelligenceWindow/tagSearchButton";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_CLEARFILTERBTN:String = "#tooltips:fortification/intelligenceWindow/clearFilterBtn";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_FILTERBUTTON:String = "#tooltips:fortification/intelligenceWindow/filterButton";
+        
+        public static var FORTIFICATION_HEADER_CALENDARBTN:String = "#tooltips:fortification/header/calendarBtn";
+        
+        public static var FORTIFICATION_HEADER_SETTINGSBTN:String = "#tooltips:fortification/header/settingsBtn";
+        
+        public static var FORTIFICATION_FORTSETTINGSDAYOFFPOPOVER_APPLY_ENABLED:String = "#tooltips:fortification/FortSettingsDayoffPopover/apply/enabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSDAYOFFPOPOVER_APPLY_DISABLED:String = "#tooltips:fortification/FortSettingsDayoffPopover/apply/disabled";
+        
         public static var FORTIFICATION_CHOICEDIVISION_PLAYERRANGE:String = "#tooltips:fortification/choiceDivision/playerRange";
+        
+        public static var FORTIFICATION_POPOVER_DEMOUNTBTNDISABLED:String = FORTIFICATION_POPOVER_DEMOUNTBTN + "Disabled";
+        
+        public static var FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYBATTLE:String = "#tooltips:fortification/popOver/upgradeBtn_DisabledByBattle";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN:String = "#tooltips:fortification/fortSettingsWindow/perepheryBtn";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNENABLED:String = "#tooltips:fortification/fortSettingsWindow/defenceBtnEnabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNDISABLED:String = "#tooltips:fortification/fortSettingsWindow/defenceBtnDisabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNENABLED:String = "#tooltips:fortification/fortSettingsWindow/weekEndBtnEnabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNDISABLED:String = "#tooltips:fortification/fortSettingsWindow/weekEndBtnDisabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNENABLED:String = "#tooltips:fortification/fortSettingsWindow/vacationBtnEnabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED:String = "#tooltips:fortification/fortSettingsWindow/vacationBtnDisabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLEDNOTPLANNED:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED + "NotPlanned";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_INFOICON:String = "#tooltips:fortification/fortSettingsWindow/infoIcon";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DISABLEDEFENCEPERIOD:String = "#tooltips:fortification/fortSettingsWindow/disableDefencePeriod";
+        
+        public static var FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYDESTROY:String = "#tooltips:fortification/popOver/upgradeBtn_DisabledByDestroy";
+        
+        public static var HEADERTUTORIAL_BREAKTUTORIAL:String = "#tooltips:headerTutorial/breakTutorial";
+        
+        public static var HEADERTUTORIAL_NEXT:String = "#tooltips:headerTutorial/next";
+        
+        public static var HEADERTUTORIAL_BACK:String = "#tooltips:headerTutorial/back";
+        
+        public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_BATTLESCOUNT:String = "#tooltips:fortification/clanStats/periodDefence/battles/battlesCount";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLENAME:String = "#tooltips:fortification/fortClanBattleList/battleName";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLEDATE:String = "#tooltips:fortification/fortClanBattleList/battleDate";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME:String = "#tooltips:fortification/fortClanBattleList/battleTime";
+        
+        public static var SQUADWINDOW_BATTLETYPEINFO_HEADER:String = SQUADWINDOW_BATTLETYPEINFO + "/header";
+        
+        public static var SQUADWINDOW_BATTLETYPEINFO_BODY:String = SQUADWINDOW_BATTLETYPEINFO + "/body";
+        
+        public static var SQUADWINDOW_BUTTONS_BTNNOTREADY_HEADER:String = SQUADWINDOW_BUTTONS_BTNNOTREADY + "/header";
+        
+        public static var SQUADWINDOW_BUTTONS_BTNNOTREADY_BODY:String = SQUADWINDOW_BUTTONS_BTNNOTREADY + "/body";
+        
+        public static var SQUADWINDOW_BUTTONS_BTNFIGHT_HEADER:String = SQUADWINDOW_BUTTONS_BTNFIGHT + "/header";
+        
+        public static var SQUADWINDOW_BUTTONS_BTNFIGHT_BODY:String = SQUADWINDOW_BUTTONS_BTNFIGHT + "/body";
+        
+        public static var SQUADWINDOW_BUTTONS_INVITE_HEADER:String = SQUADWINDOW_BUTTONS_INVITE + "/header";
+        
+        public static var SQUADWINDOW_BUTTONS_INVITE_BODY:String = SQUADWINDOW_BUTTONS_INVITE + "/body";
+        
+        public static var SQUADWINDOW_BUTTONS_RECOMMEND_HEADER:String = SQUADWINDOW_BUTTONS_RECOMMEND + "/header";
+        
+        public static var SQUADWINDOW_BUTTONS_RECOMMEND_BODY:String = SQUADWINDOW_BUTTONS_RECOMMEND + "/body";
+        
+        public static var SQUADWINDOW_BUTTONS_LEAVESQUAD_HEADER:String = SQUADWINDOW_BUTTONS_LEAVESQUAD + "/header";
+        
+        public static var SQUADWINDOW_BUTTONS_LEAVESQUAD_BODY:String = SQUADWINDOW_BUTTONS_LEAVESQUAD + "/body";
+        
+        public static var SQUADWINDOW_BUTTONS_SENDMESSAGE_HEADER:String = SQUADWINDOW_BUTTONS_SENDMESSAGE + "/header";
+        
+        public static var SQUADWINDOW_BUTTONS_SENDMESSAGE_BODY:String = SQUADWINDOW_BUTTONS_SENDMESSAGE + "/body";
+        
+        public static var SQUADWINDOW_STATUS_COMMANDER:String = "#tooltips:squadWindow/status/commander";
+        
+        public static var SQUADWINDOW_STATUS_NORMAL:String = "#tooltips:squadWindow/status/normal";
+        
+        public static var SQUADWINDOW_STATUS_CANCELED:String = "#tooltips:squadWindow/status/canceled";
+        
+        public static var SQUADWINDOW_STATUS_READY:String = "#tooltips:squadWindow/status/ready";
+        
+        public static var SQUADWINDOW_STATUS_INBATTLE:String = "#tooltips:squadWindow/status/inBattle";
+        
+        public static var SQUADWINDOW_STATUS_LOCKED:String = "#tooltips:squadWindow/status/locked";
         
         public static var LOGIN_LEGAL_BODY:String = LOGIN_LEGAL + "/body";
         
@@ -418,14 +598,6 @@ package
         
         public static var BATTLETYPES_STANDART_BODY:String = BATTLETYPES_STANDART + "/body";
         
-        public static var BATTLETYPES_SQUAD_HEADER:String = BATTLETYPES_SQUAD + "/header";
-        
-        public static var BATTLETYPES_SQUAD_BODY:String = BATTLETYPES_SQUAD + "/body";
-        
-        public static var BATTLETYPES_SQUADLEAVE_HEADER:String = BATTLETYPES_SQUAD + "Leave/header";
-        
-        public static var BATTLETYPES_SQUADLEAVE_BODY:String = BATTLETYPES_SQUAD + "Leave/body";
-        
         public static var BATTLETYPES_TRAINING_HEADER:String = BATTLETYPES_TRAINING + "/header";
         
         public static var BATTLETYPES_TRAINING_BODY:String = BATTLETYPES_TRAINING + "/body";
@@ -465,6 +637,10 @@ package
         public static var BATTLETYPES_LEAVEHISTORICAL_HEADER:String = BATTLETYPES_LEAVEHISTORICAL + "/header";
         
         public static var BATTLETYPES_LEAVEHISTORICAL_BODY:String = BATTLETYPES_LEAVEHISTORICAL + "/body";
+        
+        public static var BATTLETYPES_BATTLETUTORIAL_HEADER:String = BATTLETYPES_BATTLETUTORIAL + "/header";
+        
+        public static var BATTLETYPES_BATTLETUTORIAL_BODY:String = BATTLETYPES_BATTLETUTORIAL + "/body";
         
         public static var REDBUTTON_DISABLED_BUYNEEDED_HEADER:String = REDBUTTON_DISABLED_BUYNEEDED + "/header";
         
@@ -520,8 +696,6 @@ package
         
         public static var MEMBERS_VEHICLELEVELLIMITS_BODY:String = "#tooltips:members/vehicleLevelLimits/body";
         
-        public static var ACHIEVEMENT_NOTE:String = "#tooltips:achievement/note";
-        
         public static var ACHIEVEMENT_HISTORYDESCRIPTIONHEADER:String = "#tooltips:achievement/historyDescriptionHeader";
         
         public static var ACHIEVEMENT_CURRENTDEGREE:String = "#tooltips:achievement/currentDegree";
@@ -546,7 +720,13 @@ package
         
         public static var ACHIEVEMENT_PARAMS_MAXKILLINGSERIES:String = "#tooltips:achievement/params/maxKillingSeries";
         
+        public static var ACHIEVEMENT_PARAMS_MAXRELIABLECOMRADESERIES:String = "#tooltips:achievement/params/maxReliableComradeSeries";
+        
+        public static var ACHIEVEMENT_PARAMS_MAXAIMERSERIES:String = "#tooltips:achievement/params/maxAimerSeries";
+        
         public static var ACHIEVEMENT_PARAMS_MAXWFC2014WINSERIES:String = "#tooltips:achievement/params/maxWFC2014WinSeries";
+        
+        public static var ACHIEVEMENT_PARAMS_MAXDEATHTRACKWINSERIES:String = "#tooltips:achievement/params/maxDeathTrackWinSeries";
         
         public static var ACHIEVEMENT_PARAMS_MAXPIERCINGSERIES:String = "#tooltips:achievement/params/maxPiercingSeries";
         
@@ -606,7 +786,15 @@ package
         
         public static var HEADER_MENU_HEADER:String = "#tooltips:header/menu/header";
         
-        public static var HEADER_MENU_BODY:String = "#tooltips:header/menu/body";
+        public static var HEADER_MENU_DESCRIPTION:String = "#tooltips:header/menu/description";
+        
+        public static var HEADER_MENU_SERVER:String = "#tooltips:header/menu/server";
+        
+        public static var HEADER_MENU_PLAYERSONSERVER:String = "#tooltips:header/menu/playersOnServer";
+        
+        public static var HEADER_ACCOUNT_HEADER:String = HEADER_ACCOUNT + "/header";
+        
+        public static var HEADER_ACCOUNT_BODY:String = HEADER_ACCOUNT + "/body";
         
         public static var HEADER_PREMIUM_BUY_HEADER:String = HEADER_PREMIUM_BUY + "/header";
         
@@ -616,21 +804,33 @@ package
         
         public static var HEADER_PREMIUM_EXTEND_BODY:String = HEADER_PREMIUM_EXTEND + "/body";
         
-        public static var HEADER_REFILL_HEADER:String = "#tooltips:header/refill/header";
+        public static var HEADER_SQUAD_MEMBER_HEADER:String = HEADER_SQUAD + "_member/header";
         
-        public static var HEADER_REFILL_BODY:String = "#tooltips:header/refill/body";
+        public static var HEADER_SQUAD_MEMBER_BODY:String = HEADER_SQUAD + "_member/body";
         
-        public static var HEADER_GOLD_EXCHANGE_HEADER:String = "#tooltips:header/gold_exchange/header";
+        public static var HEADER_SQUAD_HEADER:String = HEADER_SQUAD + "/header";
         
-        public static var HEADER_GOLD_EXCHANGE_BODY:String = "#tooltips:header/gold_exchange/body";
+        public static var HEADER_SQUAD_BODY:String = HEADER_SQUAD + "/body";
         
-        public static var HEADER_XP_GATHERING_HEADER:String = "#tooltips:header/xp_gathering/header";
+        public static var HEADER_BATTLETYPE_HEADER:String = HEADER_BATTLETYPE + "/header";
         
-        public static var HEADER_XP_GATHERING_BODY:String = "#tooltips:header/xp_gathering/body";
+        public static var HEADER_BATTLETYPE_BODY:String = HEADER_BATTLETYPE + "/body";
         
-        public static var HANGAR_UNLOCKBUTTON_HEADER:String = "#tooltips:hangar/unlockButton/header";
+        public static var HEADER_REFILL_HEADER:String = HEADER_REFILL + "/header";
         
-        public static var HANGAR_UNLOCKBUTTON_BODY:String = "#tooltips:hangar/unlockButton/body";
+        public static var HEADER_REFILL_BODY:String = HEADER_REFILL + "/body";
+        
+        public static var HEADER_GOLD_EXCHANGE_HEADER:String = HEADER_GOLD_EXCHANGE + "/header";
+        
+        public static var HEADER_GOLD_EXCHANGE_BODY:String = HEADER_GOLD_EXCHANGE + "/body";
+        
+        public static var HEADER_XP_GATHERING_HEADER:String = HEADER_XP_GATHERING + "/header";
+        
+        public static var HEADER_XP_GATHERING_BODY:String = HEADER_XP_GATHERING + "/body";
+        
+        public static var HANGAR_UNLOCKBUTTON_HEADER:String = HANGAR_UNLOCKBUTTON + "/header";
+        
+        public static var HANGAR_UNLOCKBUTTON_BODY:String = HANGAR_UNLOCKBUTTON + "/body";
         
         public static var HANGAR_MAINTENANCE_HEADER:String = HANGAR_MAINTENANCE + "/header";
         
@@ -652,8 +852,6 @@ package
         
         public static var HANGAR_CREW_SPECIALTY_SKILLS:String = "#tooltips:hangar/crew/specialty_skills";
         
-        public static var HANGAR_CREW_NOTE:String = "#tooltips:hangar/crew/note";
-        
         public static var HANGAR_XPTOTMENCHECKBOX_HEADER:String = HANGAR_XPTOTMENCHECKBOX + "/header";
         
         public static var HANGAR_XPTOTMENCHECKBOX_BODY:String = HANGAR_XPTOTMENCHECKBOX + "/body";
@@ -666,13 +864,9 @@ package
         
         public static var PERSONAL_CASE_SKILLS_NEW_BODY:String = "#tooltips:personal_case/skills/new/body";
         
-        public static var PERSONAL_CASE_SKILLS_SKILL_NOTE:String = "#tooltips:personal_case/skills/skill/note";
-        
         public static var PERSONAL_CASE_TRAINING_LIGHT_TANK_BTN_HEADER:String = "#tooltips:personal_case/training/light_tank_btn/header";
         
         public static var PERSONAL_CASE_TRAINING_LIGHT_TANK_BTN_BODY:String = "#tooltips:personal_case/training/light_tank_btn/body";
-        
-        public static var PERSONAL_CASE_TRAINING_LIGHT_TANK_BTN_NOTE:String = "#tooltips:personal_case/training/light_tank_btn/note";
         
         public static var PERSONAL_CASE_TRAINING_LIGHT_TANK_BTN_DISABLED_HEADER:String = "#tooltips:personal_case/training/light_tank_btn_disabled/header";
         
@@ -682,8 +876,6 @@ package
         
         public static var PERSONAL_CASE_TRAINING_MEDIUM_TANK_BTN_BODY:String = "#tooltips:personal_case/training/medium_tank_btn/body";
         
-        public static var PERSONAL_CASE_TRAINING_MEDIUM_TANK_BTN_NOTE:String = "#tooltips:personal_case/training/medium_tank_btn/note";
-        
         public static var PERSONAL_CASE_TRAINING_MEDIUM_TANK_BTN_DISABLED_HEADER:String = "#tooltips:personal_case/training/medium_tank_btn_disabled/header";
         
         public static var PERSONAL_CASE_TRAINING_MEDIUM_TANK_BTN_DISABLED_BODY:String = "#tooltips:personal_case/training/medium_tank_btn_disabled/body";
@@ -691,8 +883,6 @@ package
         public static var PERSONAL_CASE_TRAINING_HEAVY_TANK_BTN_HEADER:String = "#tooltips:personal_case/training/heavy_tank_btn/header";
         
         public static var PERSONAL_CASE_TRAINING_HEAVY_TANK_BTN_BODY:String = "#tooltips:personal_case/training/heavy_tank_btn/body";
-        
-        public static var PERSONAL_CASE_TRAINING_HEAVY_TANK_BTN_NOTE:String = "#tooltips:personal_case/training/heavy_tank_btn/note";
         
         public static var PERSONAL_CASE_TRAINING_HEAVY_TANK_BTN_DISABLED_HEADER:String = "#tooltips:personal_case/training/heavy_tank_btn_disabled/header";
         
@@ -702,8 +892,6 @@ package
         
         public static var PERSONAL_CASE_TRAINING_AT_SPG_BTN_BODY:String = "#tooltips:personal_case/training/at_spg_btn/body";
         
-        public static var PERSONAL_CASE_TRAINING_AT_SPG_BTN_NOTE:String = "#tooltips:personal_case/training/at_spg_btn/note";
-        
         public static var PERSONAL_CASE_TRAINING_AT_SPG_BTN_DISABLED_HEADER:String = "#tooltips:personal_case/training/at_spg_btn_disabled/header";
         
         public static var PERSONAL_CASE_TRAINING_AT_SPG_BTN_DISABLED_BODY:String = "#tooltips:personal_case/training/at_spg_btn_disabled/body";
@@ -711,8 +899,6 @@ package
         public static var PERSONAL_CASE_TRAINING_SPG_BTN_HEADER:String = "#tooltips:personal_case/training/spg_btn/header";
         
         public static var PERSONAL_CASE_TRAINING_SPG_BTN_BODY:String = "#tooltips:personal_case/training/spg_btn/body";
-        
-        public static var PERSONAL_CASE_TRAINING_SPG_BTN_NOTE:String = "#tooltips:personal_case/training/spg_btn/note";
         
         public static var PERSONAL_CASE_TRAINING_SPG_BTN_DISABLED_HEADER:String = "#tooltips:personal_case/training/spg_btn_disabled/header";
         
@@ -726,19 +912,13 @@ package
         
         public static var PERSONAL_CASE_TRAINING_CURRENT_TANK_BODY:String = "#tooltips:personal_case/training/current_tank/body";
         
-        public static var PERSONAL_CASE_SKILLS_LIST_ITEM_NOTE:String = "#tooltips:personal_case/skills_list/item/note";
-        
-        public static var HANGAR_AMMO_PANEL_SHELL_NOTE:String = "#tooltips:hangar/ammo_panel/shell/note";
-        
-        public static var HANGAR_AMMO_PANEL_MODULE_NOTE:String = "#tooltips:hangar/ammo_panel/module/note";
-        
         public static var HANGAR_AMMO_PANEL_DEVICE_EMPTY_HEADER:String = HANGAR_AMMO_PANEL_DEVICE_EMPTY + "/header";
         
-        public static var HANGAR_AMMO_PANEL_DEVICE_EMPTY_NOTE:String = HANGAR_AMMO_PANEL_DEVICE_EMPTY + "/note";
+        public static var HANGAR_AMMO_PANEL_DEVICE_EMPTY_BODY:String = HANGAR_AMMO_PANEL_DEVICE_EMPTY + "/body";
         
         public static var HANGAR_AMMO_PANEL_EQUIPMENT_EMPTY_HEADER:String = "#tooltips:hangar/ammo_panel/equipment/empty/header";
         
-        public static var HANGAR_AMMO_PANEL_EQUIPMENT_EMPTY_NOTE:String = "#tooltips:hangar/ammo_panel/equipment/empty/note";
+        public static var HANGAR_AMMO_PANEL_EQUIPMENT_EMPTY_BODY:String = "#tooltips:hangar/ammo_panel/equipment/empty/body";
         
         public static var MODULEFITS_CREDIT_ERROR_HEADER:String = "#tooltips:moduleFits/credit_error/header";
         
@@ -840,17 +1020,13 @@ package
         
         public static var EQUIPMENT_RESTRICTION:String = "#tooltips:equipment/restriction";
         
-        public static var TANKS_CAROUSEL_CURRENT_VEHICLE_NOTE:String = "#tooltips:tanks_carousel/current_vehicle/note";
-        
-        public static var TANKS_CAROUSEL_VEHICLE_NOTE:String = "#tooltips:tanks_carousel/vehicle/note";
-        
         public static var TANKS_CAROUSEL_BUY_VEHICLE_HEADER:String = TANKS_CAROUSEL_BUY_VEHICLE + "/header";
         
-        public static var TANKS_CAROUSEL_BUY_VEHICLE_NOTE:String = TANKS_CAROUSEL_BUY_VEHICLE + "/note";
+        public static var TANKS_CAROUSEL_BUY_VEHICLE_BODY:String = TANKS_CAROUSEL_BUY_VEHICLE + "/body";
         
         public static var TANKS_CAROUSEL_BUY_SLOT_HEADER:String = TANKS_CAROUSEL_BUY_SLOT + "/header";
         
-        public static var TANKS_CAROUSEL_BUY_SLOT_NOTE:String = TANKS_CAROUSEL_BUY_SLOT + "/note";
+        public static var TANKS_CAROUSEL_BUY_SLOT_BODY:String = TANKS_CAROUSEL_BUY_SLOT + "/body";
         
         public static var TANKS_CAROUSEL_VEHICLESTATES_BATTLE:String = "#tooltips:tanks_carousel/vehicleStates/battle";
         
@@ -884,9 +1060,31 @@ package
         
         public static var LOBY_MESSENGER_SERVICE_BUTTON_BODY:String = LOBY_MESSENGER_SERVICE_BUTTON + "/body";
         
-        public static var LOBY_MESSENGER_SERVICE_BUTTON_NOTE:String = LOBY_MESSENGER_SERVICE_BUTTON + "/note";
+        public static var LOBY_MESSENGER_CONTACTS_BUTTON_HEADER:String = LOBY_MESSENGER_CONTACTS_BUTTON + "/header";
+        
+        public static var LOBY_MESSENGER_CONTACTS_BUTTON_BODY:String = LOBY_MESSENGER_CONTACTS_BUTTON + "/body";
+        
+        public static var LOBY_MESSENGER_CHANNELS_BUTTON_HEADER:String = LOBY_MESSENGER_CHANNELS_BUTTON + "/header";
+        
+        public static var LOBY_MESSENGER_CHANNELS_BUTTON_BODY:String = LOBY_MESSENGER_CHANNELS_BUTTON + "/body";
         
         public static var LOBY_MESSENGER_CHANNEL_BUTTON_INROAMING:String = "#tooltips:loby_messenger/channel_button/inRoaming";
+        
+        public static var LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_LEFT_HEADER:String = LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_LEFT + "/header";
+        
+        public static var LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_LEFT_BODY:String = LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_LEFT + "/body";
+        
+        public static var LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_LEFT_HEADER:String = LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_LEFT + "/header";
+        
+        public static var LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_LEFT_BODY:String = LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_LEFT + "/body";
+        
+        public static var LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_RIGHT_HEADER:String = LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_RIGHT + "/header";
+        
+        public static var LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_RIGHT_BODY:String = LOBY_MESSENGER_CHANNELS_CAROUSEL_BUTTON_RIGHT + "/body";
+        
+        public static var LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_RIGHT_HEADER:String = LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_RIGHT + "/header";
+        
+        public static var LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_RIGHT_BODY:String = LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_RIGHT + "/body";
         
         public static var TRAINING_CREATE_INVITES_CHECKBOX_HEADER:String = TRAINING_CREATE_INVITES_CHECKBOX + "/header";
         
@@ -908,17 +1106,13 @@ package
         
         public static var BARRACKS_TANKMEN_UNLOAD_BODY:String = BARRACKS_TANKMEN_UNLOAD + "/body";
         
-        public static var BARRACKS_TANKMEN_UNLOAD_NOTE:String = BARRACKS_TANKMEN_UNLOAD + "/note";
-        
         public static var BARRACKS_TANKMEN_DISMISS_HEADER:String = BARRACKS_TANKMEN_DISMISS + "/header";
         
         public static var BARRACKS_TANKMEN_DISMISS_BODY:String = BARRACKS_TANKMEN_DISMISS + "/body";
         
-        public static var BARRACKS_TANKMEN_DISMISS_NOTE:String = BARRACKS_TANKMEN_DISMISS + "/note";
+        public static var HEADER_INFO_PLAYERS_UNAVAILABLE_HEADER:String = HEADER_INFO_PLAYERS_UNAVAILABLE + "/header";
         
-        public static var HEADER_FIGHT_BUTTON_DROPDOWN_HEADER:String = HEADER_FIGHT_BUTTON_DROPDOWN + "/header";
-        
-        public static var HEADER_FIGHT_BUTTON_DROPDOWN_NOTE:String = HEADER_FIGHT_BUTTON_DROPDOWN + "/note";
+        public static var HEADER_INFO_PLAYERS_UNAVAILABLE_BODY:String = HEADER_INFO_PLAYERS_UNAVAILABLE + "/body";
         
         public static var HEADER_INFO_PLAYERS_ONLINE_REGION_HEADER:String = HEADER_INFO_PLAYERS_ONLINE_REGION + "/header";
         
@@ -962,23 +1156,13 @@ package
         
         public static var HEADER_HEADER_BUTTONS_BROWSER_BODY:String = HEADER_HEADER_BUTTONS_BROWSER + "/body";
         
-        public static var INVENTORY_LISTITEMRENDERER_NOTE:String = "#tooltips:inventory/listItemRenderer/note";
-        
-        public static var INVENTORY_LISTITEMRENDERER_INSTALLED_NOTE:String = "#tooltips:inventory/listItemRenderer_installed/note";
-        
-        public static var INVENTORY_LISTITEMRENDERER_INFO_NOTE:String = "#tooltips:inventory/listItemRenderer_info/note";
-        
-        public static var SHOP_LISTITEMRENDERER_NOTE:String = "#tooltips:shop/listItemRenderer/note";
-        
-        public static var SHOP_LISTITEMRENDERER_INFO_NOTE:String = "#tooltips:shop/listItemRenderer_info/note";
-        
         public static var BARRACKS_ITEM_EMPTY_HEADER:String = BARRACKS_ITEM_EMPTY + "/header";
         
-        public static var BARRACKS_ITEM_EMPTY_NOTE:String = BARRACKS_ITEM_EMPTY + "/note";
+        public static var BARRACKS_ITEM_EMPTY_BODY:String = BARRACKS_ITEM_EMPTY + "/body";
         
         public static var BARRACKS_ITEM_BUY_HEADER:String = BARRACKS_ITEM_BUY + "/header";
         
-        public static var BARRACKS_ITEM_BUY_NOTE:String = BARRACKS_ITEM_BUY + "/note";
+        public static var BARRACKS_ITEM_BUY_BODY:String = BARRACKS_ITEM_BUY + "/body";
         
         public static var VEHICLE_GRAPH_NOTES_SHOWCONTEXTMENU:String = "#tooltips:vehicle/graph/notes/showContextMenu";
         
@@ -1000,31 +1184,21 @@ package
         
         public static var VEHICLE_GRAPH_BODY_NOTENOUGH:String = "#tooltips:vehicle/graph/body/notEnough";
         
-        public static var AMMO_SHELLITEMRENDERER_NOTE:String = "#tooltips:ammo/shellitemRenderer/note";
-        
-        public static var AMMO_EQUIPMENT_NOTE:String = "#tooltips:ammo/equipment/note";
-        
         public static var REPAIR_AUTO_HEADER:String = REPAIR_AUTO + "/header";
         
         public static var REPAIR_AUTO_BODY:String = REPAIR_AUTO + "/body";
-        
-        public static var REPAIR_AUTO_NOTE:String = REPAIR_AUTO + "/note";
         
         public static var AMMO_AUTO_HEADER:String = AMMO_AUTO + "/header";
         
         public static var AMMO_AUTO_BODY:String = AMMO_AUTO + "/body";
         
-        public static var AMMO_AUTO_NOTE:String = AMMO_AUTO + "/note";
-        
         public static var EQUIPMENT_AUTO_HEADER:String = EQUIPMENT_AUTO + "/header";
         
         public static var EQUIPMENT_AUTO_BODY:String = EQUIPMENT_AUTO + "/body";
         
-        public static var EQUIPMENT_AUTO_NOTE:String = EQUIPMENT_AUTO + "/note";
-        
         public static var EQUIPMENT_EMPTY_HEADER:String = EQUIPMENT_EMPTY + "/header";
         
-        public static var EQUIPMENT_EMPTY_NOTE:String = EQUIPMENT_EMPTY + "/note";
+        public static var EQUIPMENT_EMPTY_BODY:String = EQUIPMENT_EMPTY + "/body";
         
         public static var SETTINGS_DIALOG_SOUND_PTTKEY_HEADER:String = SETTINGS_DIALOG_SOUND_PTTKEY + "/header";
         
@@ -1193,8 +1367,6 @@ package
         public static var QUESTS_NOTIFIER_HEADER:String = QUESTS_NOTIFIER + "/header";
         
         public static var QUESTS_NOTIFIER_BODY:String = QUESTS_NOTIFIER + "/body";
-        
-        public static var QUESTS_NOTIFIER_NOTE:String = QUESTS_NOTIFIER + "/note";
         
         public static var VEHICLESTATUS_BATTLE_HEADER:String = "#tooltips:vehicleStatus/battle/header";
         
@@ -1426,6 +1598,10 @@ package
         
         public static var CYBERSPORT_UNIT_ACCESS_HEADER:String = "#tooltips:cyberSport/unit/access/header";
         
+        public static var CYBERSPORT_UNIT_INVITEBTN_HEADER:String = CYBERSPORT_UNIT_INVITEBTN + "/header";
+        
+        public static var CYBERSPORT_UNIT_INVITEBTN_BODY:String = CYBERSPORT_UNIT_INVITEBTN + "/body";
+        
         public static var CYBERSPORT_UNIT_ACCESS_BODYOPEN:String = "#tooltips:cyberSport/unit/access/bodyOpen";
         
         public static var CYBERSPORT_UNIT_ACCESS_BODYCLOSED:String = "#tooltips:cyberSport/unit/access/bodyClosed";
@@ -1498,9 +1674,33 @@ package
         
         public static var HISTORICALBATTLES_MODULES_SUBTITLE:String = "#tooltips:historicalBattles/modules/subTitle";
         
+        public static var FORTIFICATION_BATTLEROOMLEGIONARIES_HEADER:String = FORTIFICATION_BATTLEROOMLEGIONARIES + "/header";
+        
+        public static var FORTIFICATION_BATTLEROOMLEGIONARIES_BODY:String = FORTIFICATION_BATTLEROOMLEGIONARIES + "/body";
+        
+        public static var FORTIFICATION_BATTLEROOMLEGIONARIES_TEAMSECTION_HEADER:String = FORTIFICATION_BATTLEROOMLEGIONARIES + "/teamSection/header";
+        
+        public static var FORTIFICATION_BATTLEROOMLEGIONARIES_TEAMSECTION_BODY:String = FORTIFICATION_BATTLEROOMLEGIONARIES + "/teamSection/body";
+        
+        public static var FORTIFICATION_INTROVIEW_CLANBATTLEBTN_ENABLED_HEADER:String = FORTIFICATION_INTROVIEW_CLANBATTLEBTN_ENABLED + "/header";
+        
+        public static var FORTIFICATION_INTROVIEW_CLANBATTLEBTN_ENABLED_BODY:String = FORTIFICATION_INTROVIEW_CLANBATTLEBTN_ENABLED + "/body";
+        
+        public static var FORTIFICATION_INTROVIEW_CLANBATTLEBTN_DISABLED_LEADER:String = "#tooltips:fortification/introView/clanBattleBtn/disabled/leader";
+        
+        public static var FORTIFICATION_INTROVIEW_CLANBATTLEBTN_DISABLED_NOTLEADER:String = "#tooltips:fortification/introView/clanBattleBtn/disabled/notLeader";
+        
+        public static var FORTIFICATION_INTROVIEW_CLANBATTLEBTN_DISABLED_NEXTBATTLE:String = "#tooltips:fortification/introView/clanBattleBtn/disabled/nextBattle";
+        
+        public static var FORTIFICATION_INTROVIEW_CLANBATTLEBTN_DISABLED_LEADERNOACTION:String = "#tooltips:fortification/introView/clanBattleBtn/disabled/leaderNoAction";
+        
+        public static var FORTIFICATION_INTROVIEW_CLANBATTLEBTN_DISABLED_NOTLEADERNOACTION:String = "#tooltips:fortification/introView/clanBattleBtn/disabled/notLeaderNoAction";
+        
         public static var FORTIFICATION_INTROVIEW_FORTBATTLES_BTNTOOLTIP:String = "#tooltips:fortification/introView/fortBattles/btnTooltip";
         
         public static var FORTIFICATION_INTROVIEW_SORTIE_BTNTOOLTIP:String = "#tooltips:fortification/introView/sortie/btnTooltip";
+        
+        public static var FORTIFICATION_INTROVIEW_BATTLE_BTNTOOLTIP:String = "#tooltips:fortification/introView/battle/btnTooltip";
         
         public static var FORTIFICATION_MODERNIZATION_APPLYBUTTON_HEADER:String = FORTIFICATION_MODERNIZATION + "/applyButton/header";
         
@@ -1514,9 +1714,15 @@ package
         
         public static var FORTIFICATION_DEFRESICONINFO_BODY:String = FORTIFICATION_DEFRESICONINFO + "/body";
         
+        public static var FORTIFICATION_MODERNIZATION_NOTACTIVATEDDEFPERIOD_HEADER:String = FORTIFICATION_MODERNIZATION + "/notActivatedDefPeriod/header";
+        
+        public static var FORTIFICATION_MODERNIZATION_NOTACTIVATEDDEFPERIOD_BODY:String = FORTIFICATION_MODERNIZATION + "/notActivatedDefPeriod/body";
+        
         public static var FORTIFICATION_FOUNDATIONCOMMANDER_HEADER:String = FORTIFICATION_FOUNDATION + "Commander/header";
         
         public static var FORTIFICATION_FOUNDATIONCOMMANDER_BODY:String = FORTIFICATION_FOUNDATION + "Commander/body";
+        
+        public static var FORTIFICATION_FOUNDATIONCOMMANDER_NOTAVAILABLE_BODY:String = FORTIFICATION_FOUNDATION + "Commander/notAvailable/body";
         
         public static var FORTIFICATION_FOUNDATIONNOTCOMMANDER_HEADER:String = FORTIFICATION_FOUNDATION + "NotCommander/header";
         
@@ -1529,6 +1735,14 @@ package
         public static var FORTIFICATION_HEADER_CLANLIST_HEADER:String = FORTIFICATION_HEADER_CLANLIST + "/header";
         
         public static var FORTIFICATION_HEADER_CLANLIST_BODY:String = FORTIFICATION_HEADER_CLANLIST + "/body";
+        
+        public static var FORTIFICATION_HEADER_CALENDARBTN_HEADER:String = FORTIFICATION_HEADER_CALENDARBTN + "/header";
+        
+        public static var FORTIFICATION_HEADER_CALENDARBTN_BODY:String = FORTIFICATION_HEADER_CALENDARBTN + "/body";
+        
+        public static var FORTIFICATION_HEADER_SETTINGSBTN_HEADER:String = FORTIFICATION_HEADER_SETTINGSBTN + "/header";
+        
+        public static var FORTIFICATION_HEADER_SETTINGSBTN_BODY:String = FORTIFICATION_HEADER_SETTINGSBTN + "/body";
         
         public static var FORTIFICATION_FOOTER_SORTIEBUTTON_HEADER:String = FORTIFICATION_FOOTER_SORTIEBUTTON + "/header";
         
@@ -1576,6 +1790,10 @@ package
         
         public static var FORTIFICATION_ORDERPOPOVER_USEORDERBTN_HEADER:String = "#tooltips:fortification/orderPopover/useOrderBtn/header";
         
+        public static var FORTIFICATION_ORDERPOPOVER_USEORDERBTN_CANTUSE_HEADER:String = "#tooltips:fortification/orderPopover/useOrderBtn/cantUse/header";
+        
+        public static var FORTIFICATION_ORDERPOPOVER_USEORDERBTN_CANTUSE_BODY:String = "#tooltips:fortification/orderPopover/useOrderBtn/cantUse/body";
+        
         public static var FORTIFICATION_ORDERPOPOVER_USEORDERBTN_DESCRIPTION:String = "#tooltips:fortification/orderPopover/useOrderBtn/description";
         
         public static var FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE:String = "#tooltips:fortification/orderPopover/useOrderBtn/notAvailable";
@@ -1594,6 +1812,8 @@ package
         
         public static var FORTIFICATION_ORDERPOPOVER_USEORDERBTN_WASUSED:String = "#tooltips:fortification/orderPopover/useOrderBtn/wasUsed";
         
+        public static var FORTIFICATION_ORDERPOPOVER_USEORDERBTN_DEFENCEHOURDISABLED:String = "#tooltips:fortification/orderPopover/useOrderBtn/defenceHourDisabled";
+        
         public static var FORTIFICATION_ORDERPOPOVER_PROGRESSBAR_TIMELEFT:String = "#tooltips:fortification/orderPopover/progressBar/timeLeft";
         
         public static var FORTIFICATION_ORDERPOPOVER_INDEFENSIVE:String = "#tooltips:fortification/orderPopover/inDefensive";
@@ -1604,6 +1824,8 @@ package
         
         public static var FORTIFICATION_ORDERPOPOVER_LINKBTN:String = "#tooltips:fortification/orderPopover/linkBtn";
         
+        public static var FORTIFICATION_ORDERPOPOVER_PERMANENTORDER_INFO:String = "#tooltips:fortification/orderPopover/permanentOrder/info";
+        
         public static var FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN_HEADER:String = FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN + "/header";
         
         public static var FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN_BODY:String = FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN + "/body";
@@ -1612,9 +1834,21 @@ package
         
         public static var FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN_DISABLED_BODY:String = FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN + "_Disabled/body";
         
+        public static var FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYBATTLE_HEADER:String = FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYBATTLE + "/header";
+        
+        public static var FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYBATTLE_BODY:String = FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYBATTLE + "/body";
+        
+        public static var FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYDESTROY_HEADER:String = FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYDESTROY + "/header";
+        
+        public static var FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYDESTROY_BODY:String = FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYDESTROY + "/body";
+        
         public static var FORTIFICATION_POPOVER_DEMOUNTBTN_HEADER:String = FORTIFICATION_POPOVER_DEMOUNTBTN + "/header";
         
         public static var FORTIFICATION_POPOVER_DEMOUNTBTN_BODY:String = FORTIFICATION_POPOVER_DEMOUNTBTN + "/body";
+        
+        public static var FORTIFICATION_POPOVER_DEMOUNTBTNDISABLED_HEADER:String = FORTIFICATION_POPOVER_DEMOUNTBTN + "Disabled/header";
+        
+        public static var FORTIFICATION_POPOVER_DEMOUNTBTNDISABLED_BODY:String = FORTIFICATION_POPOVER_DEMOUNTBTN + "Disabled/body";
         
         public static var FORTIFICATION_POPOVER_PREPAREORDERDISABLE_HEADER:String = FORTIFICATION_POPOVER_PREPAREORDERDISABLE + "/header";
         
@@ -1705,6 +1939,22 @@ package
         public static var FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_HEADER:String = "#tooltips:fortification/transporting/notEmptySpace/header";
         
         public static var FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_BODY:String = "#tooltips:fortification/transporting/notEmptySpace/body";
+        
+        public static var FORTIFICATION_ORDERPROCESS_NOTAVAILABLE_HEADER:String = "#tooltips:fortification/orderProcess/notAvailable/header";
+        
+        public static var FORTIFICATION_ORDERPROCESS_NOTAVAILABLE_BODY:String = "#tooltips:fortification/orderProcess/notAvailable/body";
+        
+        public static var FORTIFICATION_ORDERPROCESS_INPAUSE:String = "#tooltips:fortification/orderProcess/inPause";
+        
+        public static var FORTIFICATION_ORDERPROCESS_INPAUSE_HEADER:String = "#tooltips:fortification/orderProcess/inPause/header";
+        
+        public static var FORTIFICATION_ORDERPROCESS_INPAUSE_BODY:String = "#tooltips:fortification/orderProcess/inPause/body";
+        
+        public static var FORTIFICATION_ORDERPROCESS_NOTENOUGHHP:String = "#tooltips:fortification/orderProcess/notEnoughHp";
+        
+        public static var FORTIFICATION_ORDERPROCESS_BASEDESTROYED:String = "#tooltips:fortification/orderProcess/baseDestroyed";
+        
+        public static var FORTIFICATION_ORDERPROCESS_INFO:String = "#tooltips:fortification/orderProcess/info";
         
         public static var FORTIFICATION_SORTIEDIVISIONTOOLTIP_TITLE:String = "#tooltips:fortification/sortieDivisionToolTip/title";
         
@@ -1816,11 +2066,69 @@ package
         
         public static var FORTIFICATION_SORTIE_SLOT_VEHICLE_NOTREADY_TEMPORALLY_BODY:String = "#tooltips:fortification/sortie/slot/vehicle/notReady/temporally/body";
         
-        public static var TOOLTIPCLANINFO_FORTIFICATION_HEADER:String = "#tooltips:TooltipClanInfo/fortification/header";
+        public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFATTACK_HEADER:String = FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFATTACK + "/header";
         
-        public static var TOOLTIPCLANINFO_FORTIFICATION_DESCRIPTION:String = "#tooltips:TooltipClanInfo/fortification/description";
+        public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFATTACK_BODY:String = FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFATTACK + "/body";
         
-        public static var TOOLTIPCLANINFO_FORTIFICATION_FORTCREATIONDATE:String = "#tooltips:TooltipClanInfo/fortification/fortCreationDate";
+        public static var PERIODDEFENCEWINDOW_TOOLTIP_PERIPHERY_HEADER:String = PERIODDEFENCEWINDOW_TOOLTIP_PERIPHERY + "/header";
+        
+        public static var PERIODDEFENCEWINDOW_TOOLTIP_PERIPHERY_BODY:String = PERIODDEFENCEWINDOW_TOOLTIP_PERIPHERY + "/body";
+        
+        public static var PERIODDEFENCEWINDOW_TOOLTIP_HOURDEFENCE_HEADER:String = PERIODDEFENCEWINDOW_TOOLTIP_HOURDEFENCE + "/header";
+        
+        public static var PERIODDEFENCEWINDOW_TOOLTIP_HOURDEFENCE_BODY:String = PERIODDEFENCEWINDOW_TOOLTIP_HOURDEFENCE + "/body";
+        
+        public static var PERIODDEFENCEWINDOW_TOOLTIP_HOLIDAY_HEADER:String = PERIODDEFENCEWINDOW_TOOLTIP_HOLIDAY + "/header";
+        
+        public static var PERIODDEFENCEWINDOW_TOOLTIP_HOLIDAY_BODY:String = PERIODDEFENCEWINDOW_TOOLTIP_HOLIDAY + "/body";
+        
+        public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFDEFENCE_HEADER:String = FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFDEFENCE + "/header";
+        
+        public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFDEFENCE_BODY:String = FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_EFFICIENCYOFDEFENCE + "/body";
+        
+        public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_BATTLESCOUNT_HEADER:String = FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_BATTLESCOUNT + "/header";
+        
+        public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_BATTLESCOUNT_BODY:String = FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_BATTLESCOUNT + "/body";
+        
+        public static var FORTIFICATION_TOOLTIPCLANINFO_HEADER:String = "#tooltips:fortification/TooltipClanInfo/header";
+        
+        public static var FORTIFICATION_TOOLTIPCLANINFO_DESCRIPTION:String = "#tooltips:fortification/TooltipClanInfo/description";
+        
+        public static var FORTIFICATION_TOOLTIPCLANINFO_FORTCREATIONDATE:String = "#tooltips:fortification/TooltipClanInfo/fortCreationDate";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_HEADER:String = "#tooltips:fortification/TooltipEnemyClanInfo/header";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_HOMEPEREPHIRY:String = "#tooltips:fortification/TooltipEnemyClanInfo/homePerephiry";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_PLAYERSATCLAN:String = "#tooltips:fortification/TooltipEnemyClanInfo/playersAtClan";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_BUILDINGSATFORTIFICATION:String = "#tooltips:fortification/TooltipEnemyClanInfo/buildingsAtFortification";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_FIGHTSFORFORTIFICATION:String = "#tooltips:fortification/TooltipEnemyClanInfo/fightsForFortification";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_WINPERCENTAGE:String = "#tooltips:fortification/TooltipEnemyClanInfo/winPercentage";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_PROFITPERCENTAGE:String = "#tooltips:fortification/TooltipEnemyClanInfo/profitPercentage";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_DEFENSETIME:String = "#tooltips:fortification/TooltipEnemyClanInfo/defenseTime";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_DEFENSETIMESTOPPED:String = "#tooltips:fortification/TooltipEnemyClanInfo/defenseTimeStopped";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_NODAYOFF:String = "#tooltips:fortification/TooltipEnemyClanInfo/noDayOff";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_NOVACATION:String = "#tooltips:fortification/TooltipEnemyClanInfo/noVacation";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_VACATION:String = "#tooltips:fortification/TooltipEnemyClanInfo/vacation";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_DAYOFF:String = "#tooltips:fortification/TooltipEnemyClanInfo/dayOff";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_DEFENSEHOUR:String = "#tooltips:fortification/TooltipEnemyClanInfo/defenseHour";
+        
+        public static var FORTIFICATION_TOOLTIPENEMYCLANINFO_PERIOD:String = "#tooltips:fortification/TooltipEnemyClanInfo/period";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANFILTERPOPOVER_APPLY_NOTE:String = FORTIFICATION_FORTINTELLIGENCECLANFILTERPOPOVER_APPLY + "/note";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANFILTERPOPOVER_DEFAULT_NOTE:String = FORTIFICATION_FORTINTELLIGENCECLANFILTERPOPOVER_DEFAULT + "/note";
         
         public static var VEHICLESELECTOR_FILTER_NATION:String = "#tooltips:vehicleSelector/filter/nation";
         
@@ -1850,19 +2158,231 @@ package
         
         public static var VEHICLESELECTOR_OVERFLOWLEVEL_BODY:String = VEHICLESELECTOR_OVERFLOWLEVEL + "/body";
         
+        public static var FORTIFICATION_FORTCLANBATTLELIST_GENERALRENDER:String = "#tooltips:fortification/fortClanBattleList/generalRender";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLETYPEICON_DEFENCE:String = "#tooltips:fortification/fortClanBattleList/battleTypeIcon/defence";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLETYPEICON_OFFENCE:String = "#tooltips:fortification/fortClanBattleList/battleTypeIcon/offence";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLENAME_HEADER:String = FORTIFICATION_FORTCLANBATTLELIST_BATTLENAME + "/header";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLENAME_BODY:String = FORTIFICATION_FORTCLANBATTLELIST_BATTLENAME + "/body";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLEDATE_HEADER:String = FORTIFICATION_FORTCLANBATTLELIST_BATTLEDATE + "/header";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLEDATE_BODY:String = FORTIFICATION_FORTCLANBATTLELIST_BATTLEDATE + "/body";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME_HEADER:String = FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME + "/header";
+        
+        public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME_BODY:String = FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME + "/body";
+        
+        public static var FORTIFICATION_FORTCLANBATTLEROOM_FIGHTBTN_VEHICLENOTVALID:String = "#tooltips:fortification/fortClanBattleRoom/fightBtn/vehicleNotValid";
+        
+        public static var FORTIFICATION_FORTCLANBATTLEROOM_FIGHTBTN_NOTINSLOT:String = "#tooltips:fortification/fortClanBattleRoom/fightBtn/notInSlot";
+        
+        public static var FORTIFICATION_FORTCLANBATTLEROOM_FIGHTBTN_PRESSFORREADY:String = "#tooltips:fortification/fortClanBattleRoom/fightBtn/pressForReady";
+        
+        public static var FORTIFICATION_FORTCLANBATTLEROOM_FIGHTBTN_PRESSFORNOTREADY:String = "#tooltips:fortification/fortClanBattleRoom/fightBtn/pressForNotReady";
+        
         public static var FORTIFICATION_CHOICEDIVISION_PLAYERRANGE_HEADER:String = FORTIFICATION_CHOICEDIVISION_PLAYERRANGE + "/header";
         
         public static var FORTIFICATION_CHOICEDIVISION_PLAYERRANGE_BODY:String = FORTIFICATION_CHOICEDIVISION_PLAYERRANGE + "/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_LEVEL_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_LEVEL + "/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_LEVEL_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_LEVEL + "/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT + "/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHTEXTINPUT + "/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON + "/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON + "/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_CLEARFILTERBTN_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_CLEARFILTERBTN + "/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_CLEARFILTERBTN_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_CLEARFILTERBTN + "/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_FILTERBUTTON_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_FILTERBUTTON + "/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_FILTERBUTTON_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_FILTERBUTTON + "/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_CLANTAG_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_CLANTAG + "/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_CLANTAG_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_CLANTAG + "/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_CLANTAG_NOTE:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_CLANTAG + "/note";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_DEFENCETIME_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_DEFENCETIME + "/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_DEFENCETIME_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_DEFENCETIME + "/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_BUILDINGS_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_BUILDINGS + "/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_BUILDINGS_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_BUILDINGS + "/body";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_AVAILABILITY_HEADER:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_AVAILABILITY + "/header";
+        
+        public static var FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_AVAILABILITY_BODY:String = FORTIFICATION_INTELLIGENCEWINDOW_SORTBTN_AVAILABILITY + "/body";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_CALENDARBTN:String = "#tooltips:fortification/fortIntelligenceClanDescription/calendarBtn";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_CALENDARBTN_CANTATTACK:String = "#tooltips:fortification/fortIntelligenceClanDescription/calendarBtn/cantAttack";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_LINKBTN:String = "#tooltips:fortification/fortIntelligenceClanDescription/linkBtn";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_ADDTOFAVORITE:String = "#tooltips:fortification/fortIntelligenceClanDescription/addToFavorite";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_REMOVEFROMFAVORITE:String = "#tooltips:fortification/fortIntelligenceClanDescription/removeFromFavorite";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_MAXFAVORITES:String = "#tooltips:fortification/fortIntelligenceClanDescription/maxFavorites";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_BATTLES_HEADER:String = "#tooltips:fortification/fortIntelligenceClanDescription/battles/header";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_BATTLES_BODY:String = "#tooltips:fortification/fortIntelligenceClanDescription/battles/body";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_WINS_HEADER:String = "#tooltips:fortification/fortIntelligenceClanDescription/wins/header";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_WINS_BODY:String = "#tooltips:fortification/fortIntelligenceClanDescription/wins/body";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_AVGDEFRES_HEADER:String = "#tooltips:fortification/fortIntelligenceClanDescription/avgDefRes/header";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_AVGDEFRES_BODY:String = "#tooltips:fortification/fortIntelligenceClanDescription/avgDefRes/body";
+        
+        public static var FORTIFICATION_FORTINTELLIGENCECLANDESCRIPTION_WARTIME:String = "#tooltips:fortification/fortIntelligenceClanDescription/warTime";
+        
+        public static var FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_OFFENSE_HEADER:String = FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_OFFENSE + "/header";
+        
+        public static var FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_OFFENSE_BODY:String = FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_OFFENSE + "/body";
+        
+        public static var FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_DEFENSE_HEADER:String = FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_DEFENSE + "/header";
+        
+        public static var FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_DEFENSE_BODY:String = FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_DEFENSE + "/body";
+        
+        public static var FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_ISINBATTLE_HEADER:String = FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_ISINBATTLE + "/header";
+        
+        public static var FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_ISINBATTLE_BODY:String = FORTIFICATION_FORTBATTLEDIRECTIONPOPOVER_ISINBATTLE + "/body";
+        
+        public static var FORTIFICATION_BATTLENOTIFIER_OFFENSE_HEADER:String = FORTIFICATION_BATTLENOTIFIER_OFFENSE + "/header";
+        
+        public static var FORTIFICATION_BATTLENOTIFIER_OFFENSE_BODY:String = FORTIFICATION_BATTLENOTIFIER_OFFENSE + "/body";
+        
+        public static var FORTIFICATION_BATTLENOTIFIER_DEFENSE_HEADER:String = FORTIFICATION_BATTLENOTIFIER_DEFENSE + "/header";
+        
+        public static var FORTIFICATION_BATTLENOTIFIER_DEFENSE_BODY:String = FORTIFICATION_BATTLENOTIFIER_DEFENSE + "/body";
+        
+        public static var FORTIFICATION_BATTLENOTIFIER_OFFANDDEF_HEADER:String = FORTIFICATION_BATTLENOTIFIER_OFFANDDEF + "/header";
+        
+        public static var FORTIFICATION_BATTLENOTIFIER_OFFANDDEF_BODY:String = FORTIFICATION_BATTLENOTIFIER_OFFANDDEF + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSPERIPHERYPOPOVER_APPLYBTN_ENABLED:String = "#tooltips:fortification/fortSettingsPeripheryPopover/applyBtn/enabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSPERIPHERYPOPOVER_APPLYBTN_DISABLED:String = "#tooltips:fortification/fortSettingsPeripheryPopover/applyBtn/disabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSDEFENCEHOURPOPOVER_APPLYBTN_ENABLED:String = "#tooltips:fortification/fortSettingsDefenceHourPopover/applyBtn/enabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSDEFENCEHOURPOPOVER_APPLYBTN_DISABLED:String = "#tooltips:fortification/fortSettingsDefenceHourPopover/applyBtn/disabled";
+        
+        public static var FORTIFICATION_FORTSETTINGSVACATIONPOPOVER_APPLYBTN_BODY:String = "#tooltips:fortification/fortSettingsVacationPopover/applyBtn/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DISABLEDEFENCEPERIOD_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_DISABLEDEFENCEPERIOD + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DISABLEDEFENCEPERIOD_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_DISABLEDEFENCEPERIOD + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_INFOICON_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_INFOICON + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_INFOICON_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_INFOICON + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DISABLEBUTTON:String = "#tooltips:fortification/fortSettingsWindow/disableButton";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_STATUSSTRING_ACTIVATED:String = "#tooltips:fortification/fortSettingsWindow/statusString/activated";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_STATUSSTRING_FREEZED:String = "#tooltips:fortification/fortSettingsWindow/statusString/freezed";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_STATUSSTRING_CANBEACTIVATED:String = "#tooltips:fortification/fortSettingsWindow/statusString/canBeActivated";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_STATUSSTRING_CANNOTBEACTIVATED:String = "#tooltips:fortification/fortSettingsWindow/statusString/canNotBeActivated";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_PEREPHERYBTN + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNENABLED_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNENABLED + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNENABLED_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNENABLED + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNDISABLED_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNDISABLED + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNDISABLED_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_DEFENCEBTNDISABLED + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNENABLED_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNENABLED + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNENABLED_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNENABLED + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNDISABLED_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNDISABLED + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNDISABLED_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_WEEKENDBTNDISABLED + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNENABLED_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNENABLED + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNENABLED_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNENABLED + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLEDNOTPLANNED_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED + "NotPlanned/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLEDNOTPLANNED_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED + "NotPlanned/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED_HEADER:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED + "/header";
+        
+        public static var FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED_BODY:String = FORTIFICATION_FORTSETTINGSWINDOW_VACATIONBTNDISABLED + "/body";
+        
+        public static var FORTIFICATION_FORTSETTINGSDAYOFFPOPOVER_APPLY_ENABLED_NOTE:String = FORTIFICATION_FORTSETTINGSDAYOFFPOPOVER_APPLY_ENABLED + "/note";
+        
+        public static var FORTIFICATION_FORTSETTINGSDAYOFFPOPOVER_APPLY_DISABLED_NOTE:String = FORTIFICATION_FORTSETTINGSDAYOFFPOPOVER_APPLY_DISABLED + "/note";
+        
+        public static var FORTIFICATION_FORTCREATEDIRWIN_NEWDIRBTN_ENABLED_HEADER:String = "#tooltips:fortification/fortCreateDirWin/newDirBtn/enabled/header";
+        
+        public static var FORTIFICATION_FORTCREATEDIRWIN_NEWDIRBTN_ENABLED_BODY:String = "#tooltips:fortification/fortCreateDirWin/newDirBtn/enabled/body";
+        
+        public static var FORTIFICATION_FORTCREATEDIRWIN_NEWDIRBTN_DISABLEDBYFROZEN_HEADER:String = "#tooltips:fortification/fortCreateDirWin/newDirBtn/disabledByFrozen/header";
+        
+        public static var FORTIFICATION_FORTCREATEDIRWIN_NEWDIRBTN_DISABLEDBYFROZEN_BODY:String = "#tooltips:fortification/fortCreateDirWin/newDirBtn/disabledByFrozen/body";
+        
+        public static var FORTIFICATION_FORTCREATEDIRWIN_NEWDIRBTN_DISABLEDBYPLAYERS_HEADER:String = "#tooltips:fortification/fortCreateDirWin/newDirBtn/disabledByPlayers/header";
+        
+        public static var FORTIFICATION_FORTCREATEDIRWIN_NEWDIRBTN_DISABLEDBYPLAYERS_BODY:String = "#tooltips:fortification/fortCreateDirWin/newDirBtn/disabledByPlayers/body";
+        
+        public static var HEADERTUTORIAL_BREAKTUTORIAL_HEADER:String = HEADERTUTORIAL_BREAKTUTORIAL + "/header";
+        
+        public static var HEADERTUTORIAL_BREAKTUTORIAL_BODY:String = HEADERTUTORIAL_BREAKTUTORIAL + "/body";
+        
+        public static var HEADERTUTORIAL_NEXT_HEADER:String = HEADERTUTORIAL_NEXT + "/header";
+        
+        public static var HEADERTUTORIAL_NEXT_BODY:String = HEADERTUTORIAL_NEXT + "/body";
+        
+        public static var HEADERTUTORIAL_BACK_HEADER:String = HEADERTUTORIAL_BACK + "/header";
+        
+        public static var HEADERTUTORIAL_BACK_BODY:String = HEADERTUTORIAL_BACK + "/body";
+        
+        public static var FORTIFICATION_FORTBUILDINGCARDPOPOVER_MAPINFO_HEADER:String = "#tooltips:fortification/fortBuildingCardPopover/mapInfo/header";
+        
+        public static var FORTIFICATION_FORTBUILDINGCARDPOPOVER_MAPINFO_BODY:String = "#tooltips:fortification/fortBuildingCardPopover/mapInfo/body";
+        
+        public static var FORTIFICATION_FORTBUILDINGCARDPOPOVER_MAPINFO_NOBATTLE_HEADER:String = "#tooltips:fortification/fortBuildingCardPopover/mapInfo/noBattle/header";
+        
+        public static var FORTIFICATION_FORTBUILDINGCARDPOPOVER_MAPINFO_NOBATTLE_BODY:String = "#tooltips:fortification/fortBuildingCardPopover/mapInfo/noBattle/body";
         
         public static var TECHTREEPAGE_NATIONS_ENUM:Array = [TECHTREEPAGE_NATIONS_USSR,TECHTREEPAGE_NATIONS_GERMANY,TECHTREEPAGE_NATIONS_USA,TECHTREEPAGE_NATIONS_CHINA,TECHTREEPAGE_NATIONS_FRANCE,TECHTREEPAGE_NATIONS_UK,TECHTREEPAGE_NATIONS_JAPAN];
         
         public static var FORTIFICATION_TRANSPORTING_ENUM:Array = [FORTIFICATION_TRANSPORTING_EMPTYSTORAGE_HEADER,FORTIFICATION_TRANSPORTING_EMPTYSTORAGE_BODY,FORTIFICATION_TRANSPORTING_COOLDOWN_HEADER,FORTIFICATION_TRANSPORTING_COOLDOWN_BODY,FORTIFICATION_TRANSPORTING_FOUNDATION_HEADER,FORTIFICATION_TRANSPORTING_FOUNDATION_BODY,FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_HEADER,FORTIFICATION_TRANSPORTING_NOTEMPTYSPACE_BODY];
         
-        public static var ACHIEVEMENT_PARAMS_ENUM:Array = [ACHIEVEMENT_PARAMS_MAXSNIPERSERIES,ACHIEVEMENT_PARAMS_MAXINVINCIBLESERIES,ACHIEVEMENT_PARAMS_MAXDIEHARDSERIES,ACHIEVEMENT_PARAMS_MAXKILLINGSERIES,ACHIEVEMENT_PARAMS_MAXWFC2014WINSERIES,ACHIEVEMENT_PARAMS_MAXPIERCINGSERIES,ACHIEVEMENT_PARAMS_MAXTACTICALBREAKTHROUGHSERIES,ACHIEVEMENT_PARAMS_NO_CLASS_ACHIEVEMENT_LEFT,ACHIEVEMENT_PARAMS_LEFT4,ACHIEVEMENT_PARAMS_LEFT3,ACHIEVEMENT_PARAMS_LEFT2,ACHIEVEMENT_PARAMS_LEFT1,ACHIEVEMENT_PARAMS_HEROESLEFT,ACHIEVEMENT_PARAMS_PAIRWINSLEFT,ACHIEVEMENT_PARAMS_VEHICLESLEFT,ACHIEVEMENT_PARAMS_DAMAGELEFT,ACHIEVEMENT_PARAMS_BATTLESLEFT,ACHIEVEMENT_PARAMS_CAPTUREPOINTSLEFT,ACHIEVEMENT_PARAMS_DROPPOINTSLEFT,ACHIEVEMENT_PARAMS_WINSLEFT,ACHIEVEMENT_PARAMS_ACHIEVESLEFT,ACHIEVEMENT_PARAMS_FORTDEFRESLEFT,ACHIEVEMENT_PARAMS_VEHICLESTAKEPART,ACHIEVEMENT_PARAMS_VEHICLESTOKILL,ACHIEVEMENT_PARAMS_VEHICLESTORESEARCH,ACHIEVEMENT_PARAMS_VEHICLES];
+        public static var ACHIEVEMENT_PARAMS_ENUM:Array = [ACHIEVEMENT_PARAMS_MAXSNIPERSERIES,ACHIEVEMENT_PARAMS_MAXINVINCIBLESERIES,ACHIEVEMENT_PARAMS_MAXDIEHARDSERIES,ACHIEVEMENT_PARAMS_MAXKILLINGSERIES,ACHIEVEMENT_PARAMS_MAXRELIABLECOMRADESERIES,ACHIEVEMENT_PARAMS_MAXAIMERSERIES,ACHIEVEMENT_PARAMS_MAXWFC2014WINSERIES,ACHIEVEMENT_PARAMS_MAXDEATHTRACKWINSERIES,ACHIEVEMENT_PARAMS_MAXPIERCINGSERIES,ACHIEVEMENT_PARAMS_MAXTACTICALBREAKTHROUGHSERIES,ACHIEVEMENT_PARAMS_NO_CLASS_ACHIEVEMENT_LEFT,ACHIEVEMENT_PARAMS_LEFT4,ACHIEVEMENT_PARAMS_LEFT3,ACHIEVEMENT_PARAMS_LEFT2,ACHIEVEMENT_PARAMS_LEFT1,ACHIEVEMENT_PARAMS_HEROESLEFT,ACHIEVEMENT_PARAMS_PAIRWINSLEFT,ACHIEVEMENT_PARAMS_VEHICLESLEFT,ACHIEVEMENT_PARAMS_DAMAGELEFT,ACHIEVEMENT_PARAMS_BATTLESLEFT,ACHIEVEMENT_PARAMS_CAPTUREPOINTSLEFT,ACHIEVEMENT_PARAMS_DROPPOINTSLEFT,ACHIEVEMENT_PARAMS_WINSLEFT,ACHIEVEMENT_PARAMS_ACHIEVESLEFT,ACHIEVEMENT_PARAMS_FORTDEFRESLEFT,ACHIEVEMENT_PARAMS_VEHICLESTAKEPART,ACHIEVEMENT_PARAMS_VEHICLESTOKILL,ACHIEVEMENT_PARAMS_VEHICLESTORESEARCH,ACHIEVEMENT_PARAMS_VEHICLES];
         
         public static var TANKCARUSEL_LOCK_ENUM:Array = [TANKCARUSEL_LOCK_HEADER,TANKCARUSEL_LOCK_TO,TANKCARUSEL_LOCK_CLAN,TANKCARUSEL_LOCK_TOURNAMENT,TANKCARUSEL_LOCK_ROAMING];
         
         public static var ACTIONPRICE_SELL_TYPE_ENUM:Array = [ACTIONPRICE_SELL_TYPE_VEHICLE,ACTIONPRICE_SELL_TYPE_MODULE,ACTIONPRICE_SELL_TYPE_EQUIPMENT,ACTIONPRICE_SELL_TYPE_SHELL,ACTIONPRICE_SELL_TYPE_OPTIONALDEVICE];
+        
+        public static var SQUADWINDOW_STATUS_ENUM:Array = [SQUADWINDOW_STATUS_COMMANDER,SQUADWINDOW_STATUS_NORMAL,SQUADWINDOW_STATUS_CANCELED,SQUADWINDOW_STATUS_READY,SQUADWINDOW_STATUS_INBATTLE,SQUADWINDOW_STATUS_LOCKED];
         
         public static var LEVEL_ENUM:Array = [LEVEL_1,LEVEL_2,LEVEL_3,LEVEL_4,LEVEL_5,LEVEL_6,LEVEL_7,LEVEL_8,LEVEL_9,LEVEL_10];
         
@@ -1872,7 +2392,8 @@ package
         
         public static function techtreepage_nations(param1:String) : String
         {
-            var _loc2_:String = "#tooltips:techTreePage/nations/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:techTreePage/nations/" + param1;
             if(TECHTREEPAGE_NATIONS_ENUM.indexOf(_loc2_) == -1)
             {
                 DebugUtils.LOG_WARNING("[techtreepage_nations]:locale key \"" + _loc2_ + "\" was not found");
@@ -1883,49 +2404,64 @@ package
         
         public static function fortification_transporting(param1:String) : String
         {
-            var _loc2_:String = "#tooltips:fortification/transporting/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:fortification/transporting/" + param1;
             App.utils.asserter.assert(!(FORTIFICATION_TRANSPORTING_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
         public static function achievement_params(param1:String) : String
         {
-            var _loc2_:String = "#tooltips:achievement/params/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:achievement/params/" + param1;
             App.utils.asserter.assert(!(ACHIEVEMENT_PARAMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
         public static function tankcarusel_lock(param1:String) : String
         {
-            var _loc2_:String = "#tooltips:tankCarusel/lock/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:tankCarusel/lock/" + param1;
             App.utils.asserter.assert(!(TANKCARUSEL_LOCK_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
         public static function actionprice_sell_type(param1:String) : String
         {
-            var _loc2_:String = "#tooltips:actionPrice/sell/type/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:actionPrice/sell/type/" + param1;
             App.utils.asserter.assert(!(ACTIONPRICE_SELL_TYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
+        
+        public static function squadwindow_status(param1:String) : String
+        {
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:squadWindow/status/" + param1;
+            App.utils.asserter.assert(!(SQUADWINDOW_STATUS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
         public static function level(param1:String) : String
         {
-            var _loc2_:String = "#tooltips:level/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:level/" + param1;
             App.utils.asserter.assert(!(LEVEL_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
         public static function vehicle(param1:String) : String
         {
-            var _loc2_:String = "#tooltips:vehicle/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:vehicle/" + param1;
             App.utils.asserter.assert(!(VEHICLE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         
         public static function tankcaruseltooltip_vehicletype_elite(param1:String) : String
         {
-            var _loc2_:String = "#tooltips:tankCaruselTooltip/vehicleType/elite/" + param1;
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:tankCaruselTooltip/vehicleType/elite/" + param1;
             App.utils.asserter.assert(!(TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }

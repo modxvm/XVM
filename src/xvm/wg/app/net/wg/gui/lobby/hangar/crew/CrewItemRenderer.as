@@ -137,7 +137,6 @@ package net.wg.gui.lobby.hangar.crew
         
         public function setData(param1:Object) : void
         {
-            var rendererData:RecruitRendererVO = null;
             var listHeight:Number = NaN;
             var posY:Number = NaN;
             var listTop:Number = NaN;
@@ -149,7 +148,7 @@ package net.wg.gui.lobby.hangar.crew
                 return;
             }
             this.visible = true;
-            rendererData = RecruitRendererVO(data);
+            var rendererData:RecruitRendererVO = RecruitRendererVO(data);
             if(rendererData.recruitList)
             {
                 this.dataProvider = setupDataProvider(rendererData.recruitList.sort(function(param1:Object, param2:Object):Number

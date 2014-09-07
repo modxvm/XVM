@@ -90,21 +90,39 @@ package net.wg.gui.rally.views.list
             super.draw();
             if(isInvalid(RallyInvalidationType.VEHICLE_LABEL))
             {
-                this.vehiclesInfoTF.htmlText = this._vehiclesLabel;
+                this.updateVehicleInfoTF();
             }
             if(isInvalid(InvalidationType.DATA))
             {
-                if((this.model) && (this.model.isAvailable()))
-                {
-                    this.updateTitle(this.model);
-                    this.updateDescription(this.model);
-                    this.updateSlots(this.model);
-                    this.noRallyScreen.visible = false;
-                }
-                else
-                {
-                    this.noRallyScreen.visible = true;
-                }
+                this.updateElements();
+            }
+        }
+        
+        protected function updateVehicleInfoTF() : void
+        {
+            this.vehiclesInfoTF.htmlText = this._vehiclesLabel;
+        }
+        
+        protected function updateElements() : void
+        {
+            if((this.model) && (this.model.isAvailable()))
+            {
+                this.updateTitle(this.model);
+                this.updateDescription(this.model);
+                this.updateSlots(this.model);
+                this.updateNoRallyScreen(false);
+            }
+            else
+            {
+                this.updateNoRallyScreen(true);
+            }
+        }
+        
+        protected function updateNoRallyScreen(param1:Boolean) : void
+        {
+            if(this.noRallyScreen.visible != param1)
+            {
+                this.noRallyScreen.visible = param1;
             }
         }
         

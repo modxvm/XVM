@@ -3,8 +3,6 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
     import scaleform.clik.core.UIComponent;
     import flash.text.TextField;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import flash.display.Sprite;
-    import net.wg.gui.lobby.fortifications.cmp.build.impl.BuildingThumbnail;
     import net.wg.gui.lobby.fortifications.data.DirectionVO;
     import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.constants.InvalidationType;
@@ -22,11 +20,7 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         
         public var closeBtn:SoundButtonEx;
         
-        public var roadPic:Sprite;
-        
-        public var building1:BuildingThumbnail;
-        
-        public var building2:BuildingThumbnail;
+        public var direction:DirectionCmp;
         
         public var statusTF:TextField;
         
@@ -36,6 +30,10 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         {
             super.configUI();
             this.closeBtn.label = FORTIFICATIONS.FORTDIRECTIONSWINDOW_BUTTON_CLOSEDIRECTION;
+            this.closeBtn.mouseEnabledOnDisabled = true;
+            this.direction.labelVisible = false;
+            this.direction.solidMode = false;
+            this.direction.useDirectionBuildingTooltips = false;
             this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onCloseClick);
         }
         
@@ -44,11 +42,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.onCloseClick);
             this.closeBtn.dispose();
             this.closeBtn = null;
-            this.building1.dispose();
-            this.building1 = null;
-            this.building2.dispose();
-            this.building2 = null;
-            this.roadPic = null;
+            this.direction.dispose();
+            this.direction = null;
             if(this.model)
             {
                 this.model.dispose();
@@ -65,28 +60,18 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
                 if(this.model)
                 {
                     this.setControlsVisible(true);
-                    this.textField.text = this.model.name;
+                    this.textField.text = this.model.fullName;
                     this.closeBtn.visible = this.model.closeButtonVisible;
                     this.closeBtn.enabled = this.model.canBeClosed;
                     this.closeBtn.tooltip = this.closeBtn.enabled?TOOLTIPS.FORTIFICATION_CLOSEDIRECTIONBUTTON_ACTIVE:TOOLTIPS.FORTIFICATION_CLOSEDIRECTIONBUTTON_INACTIVE;
                     if(this.model.hasBuildings)
                     {
-                        this.building1.model = this.model.buildings[0];
-                        if(this.model.buildings.length > 1)
-                        {
-                            this.building2.model = this.model.buildings[1];
-                        }
-                        else
-                        {
-                            this.building2.visible = false;
-                        }
+                        this.direction.visible = true;
                         this.statusTF.visible = false;
                     }
                     else
                     {
-                        this.roadPic.visible = false;
-                        this.building1.visible = false;
-                        this.building2.visible = false;
+                        this.direction.visible = false;
                         this.statusTF.visible = true;
                         this.statusTF.htmlText = this.model.isOpened?FORTIFICATIONS.FORTDIRECTIONSWINDOW_LABEL_NOBUILDINGS:FORTIFICATIONS.FORTDIRECTIONSWINDOW_LABEL_NOTOPENED;
                     }
@@ -101,6 +86,7 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         public function setData(param1:DirectionVO) : void
         {
             this.model = param1;
+            this.direction.setData(param1);
             invalidateData();
         }
         
@@ -113,9 +99,7 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         {
             this.textField.visible = param1;
             this.closeBtn.visible = param1;
-            this.roadPic.visible = param1;
-            this.building1.visible = param1;
-            this.building2.visible = param1;
+            this.direction.visible = param1;
         }
     }
 }

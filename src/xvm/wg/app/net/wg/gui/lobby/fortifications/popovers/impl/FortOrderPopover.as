@@ -3,12 +3,14 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import net.wg.infrastructure.base.meta.impl.FortOrderPopoverMeta;
     import net.wg.infrastructure.base.meta.IFortOrderPopoverMeta;
     import flash.events.MouseEvent;
-    import flash.display.MovieClip;
+    import net.wg.gui.components.controls.UILoaderAlt;
     import flash.text.TextField;
+    import flash.display.MovieClip;
     import scaleform.clik.controls.StatusIndicator;
     import net.wg.gui.lobby.fortifications.popovers.orderPopover.OrderInfoBlock;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.fortifications.data.OrderPopoverVO;
+    import net.wg.gui.components.controls.SoundButton;
     import flash.display.InteractiveObject;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.data.utilData.TwoDimensionalPadding;
@@ -17,8 +19,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import net.wg.infrastructure.interfaces.IWrapper;
     import net.wg.gui.components.popOvers.PopOver;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.gui.components.popOvers.PopoverInternalLayout;
-    import net.wg.gui.utils.ComplexTooltipHelper;
     
     public class FortOrderPopover extends FortOrderPopoverMeta implements IFortOrderPopoverMeta
     {
@@ -31,15 +31,17 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private static var AFTER_DESCR_PADDING:int = 15;
         
-        private static var BOTTOM_PADDING:int = 5;
+        private static var TEXT_PADDING:int = 5;
         
-        private static var BTN_PADDING:int = 21;
+        private static var BUTTON_PADDING:int = 10;
+        
+        private static var PIXEL_PADDING:int = 1;
+        
+        private static var DISABLED_ALPHA:Number = 0.5;
         
         private static var INV_DISABLE_BTN:String = "invDisableBtn";
         
         private static var INV_FOCUS:String = "invFocus";
-        
-        private static var DISABLED_ALPHA:Number = 0.5;
         
         private static function hideTooltip(param1:MouseEvent) : void
         {
@@ -48,10 +50,17 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private static function showAlertTooltip(param1:MouseEvent) : void
         {
-            App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE);
+            if(App.globalVarsMgr.isFortificationBattleAvailableS())
+            {
+                App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_DEFENCEHOURDISABLED);
+            }
+            else
+            {
+                App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE);
+            }
         }
         
-        public var bigIcon:MovieClip;
+        public var bigIcon:UILoaderAlt;
         
         public var titleTF:TextField;
         
@@ -73,11 +82,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var _data:OrderPopoverVO = null;
         
-        private var _canUseOrder:Boolean = false;
+        public var bottomSeparator:MovieClip = null;
         
         private var _isOrderDisabled:Boolean = false;
         
         private var _cooldownPeriod:Number = 0;
+        
+        public var questLink:SoundButton;
         
         override protected function onInitModalFocus(param1:InteractiveObject) : void
         {
@@ -110,6 +121,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.timerHover.addEventListener(MouseEvent.MOUSE_OUT,hideTooltip);
             this.alertIcon.addEventListener(MouseEvent.MOUSE_OVER,showAlertTooltip);
             this.alertIcon.addEventListener(MouseEvent.MOUSE_OUT,hideTooltip);
+            this.questLink.addEventListener(ButtonEvent.CLICK,this.openQuestWindow);
         }
         
         override protected function onPopulate() : void
@@ -180,7 +192,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             {
                 this.titleTF.htmlText = this._data.title;
                 this.levelTF.htmlText = this._data.levelStr;
-                this.alertIcon.visible = this._data.isPermanent;
+                this.alertIcon.visible = this._data.showAlertIcon;
                 this.descriptionTF.htmlText = this._data.description;
                 this.timeLeftTF.htmlText = this._data.leftTimeStr;
                 if((this._data.inCooldown) && !this._data.isPermanent)
@@ -194,46 +206,45 @@ package net.wg.gui.lobby.fortifications.popovers.impl
                 {
                     this.clearCooldown();
                 }
-                this._canUseOrder = this._data.canUseOrder;
-                this.useOrderBtn.visible = this._canUseOrder;
+                this.useOrderBtn.visible = this._data.canUseOrder;
+                this.questLink.visible = this._data.showLinkBtn;
                 this.infoBlock.duration = this._data.effectTimeStr;
                 this.infoBlock.productionTime = this._data.productionTime;
                 this.infoBlock.building = this._data.buildingStr;
                 this.infoBlock.price = this._data.productionCost;
                 this.infoBlock.producedAmount = this._data.producedAmount;
                 this.infoBlock.showCreateOrderBtn = this._data.canCreateOrder;
-                if(this._data.orderID)
-                {
-                    this.bigIcon.gotoAndStop(this._data.orderID);
-                }
+                this.bigIcon.source = this._data.icon;
                 this.bigIcon.alpha = this._data.hasBuilding?1:DISABLED_ALPHA;
                 this.infoBlock.validateNow();
                 invalidateSize();
             }
             if(isInvalid(InvalidationType.SIZE))
             {
-                this.titleTF.height = Math.round(this.titleTF.textHeight + BOTTOM_PADDING);
-                App.utils.commons.moveIconToEndOfText(this.alertIcon,this.titleTF,0,1);
+                this.titleTF.height = Math.round(this.titleTF.textHeight + TEXT_PADDING);
+                App.utils.commons.moveDsiplObjToEndOfText(this.alertIcon,this.titleTF,0,PIXEL_PADDING);
                 this.levelTF.y = Math.round(this.titleTF.y + this.titleTF.height);
-                this.descriptionTF.height = Math.round(this.descriptionTF.textHeight + BOTTOM_PADDING);
+                this.descriptionTF.height = Math.round(this.descriptionTF.textHeight + TEXT_PADDING);
                 this.infoBlock.y = Math.round(this.descriptionTF.y + this.descriptionTF.textHeight + AFTER_DESCR_PADDING);
-                _loc1_ = Math.round(this.infoBlock.y + this.infoBlock.height + AFTER_DESCR_PADDING + BOTTOM_PADDING);
-                this.useOrderBtn.y = _loc1_;
-                _loc2_ = Math.round(this.useOrderBtn.y + this.useOrderBtn.height - BOTTOM_PADDING + 1);
-                if(this._canUseOrder)
+                _loc1_ = Math.round(this.infoBlock.y + this.infoBlock.height + AFTER_DESCR_PADDING + TEXT_PADDING);
+                this.bottomSeparator.y = this.infoBlock.y + this.infoBlock.height + TEXT_PADDING + this.bottomSeparator.height;
+                this.useOrderBtn.y = this.bottomSeparator.y - this.bottomSeparator.height + BUTTON_PADDING;
+                _loc2_ = Math.round(this.useOrderBtn.y + this.useOrderBtn.height + BUTTON_PADDING);
+                App.utils.commons.moveDsiplObjToEndOfText(this.questLink,this.descriptionTF,TEXT_PADDING,PIXEL_PADDING);
+                if(this._data.canUseOrder)
                 {
-                    PopoverInternalLayout(PopOver(wrapper).layout).bgFormPadding.bottom = BTN_PADDING;
                     setSize(this.width,_loc2_);
+                    this.bottomSeparator.visible = true;
                 }
                 else
                 {
-                    PopoverInternalLayout(PopOver(wrapper).layout).bgFormPadding.bottom = 0;
                     setSize(this.width,_loc1_);
+                    this.bottomSeparator.visible = false;
                 }
             }
             if(isInvalid(INV_DISABLE_BTN))
             {
-                this.useOrderBtn.enabled = !this._isOrderDisabled && !this._data.isPermanent;
+                this.useOrderBtn.enabled = !this._isOrderDisabled;
                 this.useOrderBtn.mouseChildren = true;
                 this.useOrderBtn.mouseEnabled = true;
                 invalidate(INV_FOCUS);
@@ -251,6 +262,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         override protected function onDispose() : void
         {
             App.utils.scheduler.cancelTask(this.updateCooldonwAnimation);
+            if(this.questLink)
+            {
+                this.questLink.removeEventListener(ButtonEvent.CLICK,this.openQuestWindow);
+                this.questLink.dispose();
+                this.questLink = null;
+            }
+            this.bigIcon.dispose();
             this.bigIcon = null;
             this.titleTF = null;
             this.levelTF = null;
@@ -318,15 +336,21 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         private function showUseBtnTooltip(param1:MouseEvent) : void
         {
             var _loc2_:String = null;
-            var _loc3_:String = null;
             if(this._data)
             {
-                _loc2_ = App.utils.locale.makeString(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_HEADER);
-                _loc3_ = new ComplexTooltipHelper().addHeader(_loc2_).addBody(this._data.useBtnTooltip).make();
-                if(_loc3_.length > 0)
+                _loc2_ = this._data.useBtnTooltip;
+                if(_loc2_.length > 0)
                 {
-                    App.toolTipMgr.showComplex(_loc3_);
+                    App.toolTipMgr.showComplex(_loc2_);
                 }
+            }
+        }
+        
+        private function openQuestWindow(param1:ButtonEvent) : void
+        {
+            if(this._data)
+            {
+                openQuestS(this._data.questID);
             }
         }
     }

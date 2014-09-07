@@ -44,10 +44,10 @@ package net.wg.gui.lobby.GUIEditor
             {
                 _loc4_ = "";
             }
-            _loc2_ = _loc4_ + "(" + getClassName(param1) + "}";
+            _loc2_ = _loc4_ + "(" + getClassName(param1) + ")";
             while(!(_loc3_ == null) && !(_loc3_.name == null))
             {
-                _loc2_ = _loc3_.name + "(" + getClassName(_loc3_) + "}" + "\\" + _loc2_;
+                _loc2_ = _loc3_.name + "(" + getClassName(_loc3_) + ")" + "\\" + _loc2_;
                 _loc3_ = _loc3_.parent;
             }
             return _loc2_;

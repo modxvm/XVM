@@ -24,7 +24,7 @@ package net.wg.gui.components.controls
         
         protected var loader:Loader;
         
-        private var _iconSource:String;
+        protected var _iconSource:String;
         
         private var isIconSourceChanged:Boolean;
         

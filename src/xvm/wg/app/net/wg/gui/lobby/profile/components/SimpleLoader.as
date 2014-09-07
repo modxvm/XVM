@@ -2,6 +2,7 @@ package net.wg.gui.lobby.profile.components
 {
     import flash.display.Sprite;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import net.wg.infrastructure.events.LibraryLoaderEvent;
     import flash.display.Loader;
     import flash.net.URLRequest;
     import flash.events.Event;
@@ -16,9 +17,9 @@ package net.wg.gui.lobby.profile.components
             super();
         }
         
-        public static var LOADED:String = "sourceLoaded";
+        public static var LOADED:String = LibraryLoaderEvent.ICON_LOADED;
         
-        public static var LOAD_ERROR:String = "sourceLoadError";
+        public static var LOAD_ERROR:String = LibraryLoaderEvent.ICON_LOADING_FAILED;
         
         private static var CONTENT_TYPE_SWF:String = "application/x-shockwave-flash";
         
@@ -126,13 +127,13 @@ package net.wg.gui.lobby.profile.components
         {
             this.onLoadingError();
             DebugUtils.LOG_DEBUG(getQualifiedClassName(this) + " : couldn\'t load extra icon!",this.currentSourcePath);
-            dispatchEvent(new Event(LOAD_ERROR));
+            dispatchEvent(new LibraryLoaderEvent(LibraryLoaderEvent.ICON_LOADING_FAILED,this._loader,this.currentSourcePath));
         }
         
         private function loadingCompleteHandler(param1:Event) : void
         {
             this.onLoadingComplete();
-            dispatchEvent(new Event(LOADED));
+            dispatchEvent(new LibraryLoaderEvent(LibraryLoaderEvent.ICON_LOADED,this._loader,this.currentSourcePath));
         }
     }
 }

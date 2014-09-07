@@ -3,8 +3,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
     import net.wg.infrastructure.base.meta.impl.FortOrderConfirmationWindowMeta;
     import net.wg.infrastructure.base.meta.IFortOrderConfirmationWindowMeta;
     import net.wg.gui.lobby.fortifications.data.ConfirmOrderVO;
-    import net.wg.data.VO.ItemDialogSettingsVO;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.data.VO.DialogSettingsVO;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import flash.text.TextFieldAutoSize;
     import net.wg.data.constants.IconsTypes;
     import net.wg.utils.ILocale;
@@ -22,7 +22,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
             isModal = true;
             isCentered = true;
             canDrag = false;
-            showWindowBg = false;
+            showWindowBgForm = false;
             content.submitBtn.UIID = 81;
             content.cancelBtn.UIID = 82;
             UIID = 83;
@@ -46,7 +46,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private var orderInfo:ConfirmOrderVO;
         
-        private var settings:ItemDialogSettingsVO;
+        private var settings:DialogSettingsVO;
         
         private var selectedCount:Number = 0;
         
@@ -67,7 +67,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         public function as_setSettings(param1:Object) : void
         {
-            this.settings = new ItemDialogSettingsVO(param1);
+            this.settings = new DialogSettingsVO(param1);
             invalidate(SETTINGS_INVALID);
         }
         

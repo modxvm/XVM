@@ -2,11 +2,11 @@ package net.wg.gui.lobby.training
 {
     import net.wg.infrastructure.helpers.DropListDelegateCtrlr;
     import flash.display.InteractiveObject;
-    import net.wg.infrastructure.interfaces.IDropListDelegate;
+    import net.wg.infrastructure.helpers.interfaces.IDropListDelegate;
     import net.wg.data.VO.TrainingRoomRendererVO;
     import net.wg.infrastructure.interfaces.entity.IDroppable;
     import net.wg.infrastructure.interfaces.entity.IDropItem;
-    import net.wg.infrastructure.interfaces.IDropList;
+    import net.wg.gui.interfaces.IDropList;
     
     public class TrainingDragController extends DropListDelegateCtrlr
     {

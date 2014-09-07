@@ -23,8 +23,6 @@ package net.wg.gui.events
         
         public static var SHOW_MENU:String = "showMenu";
         
-        public static var LOAD_VIEW:String = "loadView";
-        
         public static var LOAD_HANGAR:String = "loadHangar";
         
         public static var LOAD_INVENTORY:String = "loadInventory";

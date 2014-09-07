@@ -47,6 +47,16 @@ package net.wg.infrastructure.base.meta.impl
         
         public var kickPlayerFromUnit:Function = null;
         
+        public var giveLeadership:Function = null;
+        
+        public var canGiveLeadership:Function = null;
+        
+        public var createSquad:Function = null;
+        
+        public var invite:Function = null;
+        
+        public var canInvite:Function = null;
+        
         public var fortDirection:Function = null;
         
         public var fortAssignPlayers:Function = null;
@@ -163,6 +173,36 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.kickPlayerFromUnit,"kickPlayerFromUnit" + Errors.CANT_NULL);
             this.kickPlayerFromUnit(param1);
+        }
+        
+        public function giveLeadershipS(param1:Number) : void
+        {
+            App.utils.asserter.assertNotNull(this.giveLeadership,"giveLeadership" + Errors.CANT_NULL);
+            this.giveLeadership(param1);
+        }
+        
+        public function canGiveLeadershipS(param1:Number) : Boolean
+        {
+            App.utils.asserter.assertNotNull(this.canGiveLeadership,"canGiveLeadership" + Errors.CANT_NULL);
+            return this.canGiveLeadership(param1);
+        }
+        
+        public function createSquadS(param1:Number) : void
+        {
+            App.utils.asserter.assertNotNull(this.createSquad,"createSquad" + Errors.CANT_NULL);
+            this.createSquad(param1);
+        }
+        
+        public function inviteS(param1:Number, param2:Object) : void
+        {
+            App.utils.asserter.assertNotNull(this.invite,"invite" + Errors.CANT_NULL);
+            this.invite(param1,param2);
+        }
+        
+        public function canInviteS(param1:Number) : Boolean
+        {
+            App.utils.asserter.assertNotNull(this.canInvite,"canInvite" + Errors.CANT_NULL);
+            return this.canInvite(param1);
         }
         
         public function fortDirectionS() : void

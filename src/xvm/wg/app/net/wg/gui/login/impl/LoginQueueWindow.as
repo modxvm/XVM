@@ -5,6 +5,7 @@ package net.wg.gui.login.impl
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.text.TextField;
     import scaleform.clik.events.ButtonEvent;
+    import flash.display.InteractiveObject;
     
     public class LoginQueueWindow extends LoginQueueWindowMeta implements ILoginQueueWindowMeta
     {
@@ -13,17 +14,30 @@ package net.wg.gui.login.impl
         {
             super();
             canClose = false;
+            showWindowBgForm = false;
             showWindowBg = false;
             isCentered = true;
         }
         
+        private static var DEFAULT_WIDTH:int = 160;
+        
+        private static var AUTOSEARCH_WIDTH:int = 120;
+        
         public var cancelBtn:SoundButtonEx = null;
+        
+        public var autologinBtn:SoundButtonEx = null;
         
         public var titleField:TextField = null;
         
         public var messageTextField:TextField = null;
         
         private var isFirstUpdateStage:Boolean = true;
+        
+        override protected function configUI() : void
+        {
+            super.configUI();
+            this.autologinBtn.label = WAITING.BUTTONS_AUTOSEARCH;
+        }
         
         override public function updateStage(param1:Number, param2:Number) : void
         {
@@ -56,23 +70,59 @@ package net.wg.gui.login.impl
             this.cancelBtn.label = param1;
         }
         
+        public function as_showAutoLoginBtn(param1:Boolean) : void
+        {
+            if(param1)
+            {
+                this.autologinBtn.visible = true;
+                this.cancelBtn.width = AUTOSEARCH_WIDTH;
+                this.autologinBtn.x = (width - this.autologinBtn.width - this.cancelBtn.width) / 2;
+                this.cancelBtn.x = this.autologinBtn.x + this.autologinBtn.width;
+            }
+            else
+            {
+                this.autologinBtn.visible = false;
+                this.cancelBtn.width = DEFAULT_WIDTH;
+                this.cancelBtn.x = (width - this.cancelBtn.width) / 2;
+            }
+        }
+        
         override protected function onPopulate() : void
         {
             super.onPopulate();
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler,false,0,true);
-            window.getBackground().alpha = 0;
-            setFocus(this.cancelBtn);
+            this.autologinBtn.addEventListener(ButtonEvent.CLICK,this.onAutologinBtnClickHandler,false,0,true);
         }
         
         override protected function onDispose() : void
         {
             super.onDispose();
-            this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler);
+            this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler,false);
+            this.autologinBtn.removeEventListener(ButtonEvent.CLICK,this.onAutologinBtnClickHandler,false);
+        }
+        
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
+            super.onInitModalFocus(param1);
+            if(this.autologinBtn.visible)
+            {
+                setFocus(this.autologinBtn);
+            }
+            else
+            {
+                setFocus(this.cancelBtn);
+            }
         }
         
         private function onCancelBtnClickHandler(param1:ButtonEvent) : void
         {
             onCancelClickS();
+        }
+        
+        private function onAutologinBtnClickHandler(param1:ButtonEvent) : void
+        {
+            DebugUtils.LOG_DEBUG("onAutologinBtnClickHandler!!!!! in Flash");
+            onAutoLoginClickS();
         }
     }
 }

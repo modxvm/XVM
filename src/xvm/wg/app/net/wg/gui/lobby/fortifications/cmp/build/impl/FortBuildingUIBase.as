@@ -4,6 +4,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     import net.wg.gui.lobby.fortifications.cmp.build.ICooldownIcon;
     import net.wg.gui.lobby.fortifications.cmp.build.IBuildingIndicator;
     import flash.display.MovieClip;
+    import net.wg.gui.lobby.fortifications.cmp.build.impl.animationImpl.BuildingsAnimationController;
     import net.wg.gui.lobby.fortifications.cmp.build.IArrowWithNut;
     
     public class FortBuildingUIBase extends UIComponentEx
@@ -29,6 +30,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public var trowel:TrowelCmp = null;
         
         public var ground:MovieClip = null;
+        
+        public var animationController:BuildingsAnimationController;
         
         private var _exportArrow:IArrowWithNut = null;
         

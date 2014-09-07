@@ -1,13 +1,9 @@
 package net.wg.gui.lobby.messengerBar.carousel
 {
-    import net.wg.gui.components.controls.TileList;
-    import scaleform.clik.interfaces.IListItemRenderer;
-    import scaleform.clik.events.ButtonEvent;
-    import net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent;
-    import flash.events.Event;
-    import scaleform.gfx.MouseEventEx;
+    import net.wg.gui.lobby.messengerBar.carousel.data.ChannelListItemVO;
+    import scaleform.clik.constants.DirectionMode;
     
-    public class ChannelList extends TileList
+    public class ChannelList extends FlexibleTileList
     {
         
         public function ChannelList()
@@ -15,62 +11,72 @@ package net.wg.gui.lobby.messengerBar.carousel
             super();
         }
         
-        override protected function setupRenderer(param1:IListItemRenderer) : void
+        private static function isHaveBlinking(param1:Array) : Boolean
         {
-            super.setupRenderer(param1);
-            var _loc2_:ChannelRenderer = param1 as ChannelRenderer;
-            _loc2_.openButton.addEventListener(ButtonEvent.CLICK,this.onItemOpenClick);
-            _loc2_.closeButton.addEventListener(ButtonEvent.CLICK,this.onItemCloseClick);
+            var _loc2_:ChannelListItemVO = null;
+            var _loc3_:* = 0;
+            while(_loc3_ < param1.length)
+            {
+                _loc2_ = new ChannelListItemVO(param1[_loc3_]);
+                if(_loc2_.isNotified)
+                {
+                    return true;
+                }
+                _loc3_++;
+            }
+            return false;
         }
         
-        override protected function cleanUpRenderer(param1:IListItemRenderer) : void
+        private function checkLeftScrollBarArrowBlinking(param1:Array) : void
         {
-            super.cleanUpRenderer(param1);
-            var _loc2_:ChannelRenderer = param1 as ChannelRenderer;
-            _loc2_.openButton.removeEventListener(ButtonEvent.CLICK,this.onItemOpenClick);
-            _loc2_.closeButton.removeEventListener(ButtonEvent.CLICK,this.onItemCloseClick);
+            this.setLeftScrollBarArrowBlinking(isHaveBlinking(param1));
         }
         
-        private function onItemOpenClick(param1:ButtonEvent) : void
+        private function checkRightScrollBarArrowBlinking(param1:Array) : void
         {
-            dispatchEvent(this.generateEvent(ChannelListEvent.OPEN_CHANNEL_CLICK,param1));
+            this.setRightScrollBarArrowBlinking(isHaveBlinking(param1));
         }
         
-        private function onItemCloseClick(param1:ButtonEvent) : void
+        private function setLeftScrollBarArrowBlinking(param1:Boolean) : void
         {
-            dispatchEvent(this.generateEvent(ChannelListEvent.CLOSE_CHANNEL_CLICK,param1));
+            ChannelCarouselScrollBar(_scrollBar).setUpArrowBlinking(param1);
         }
         
-        private function generateEvent(param1:String, param2:Event) : ChannelListEvent
+        private function setRightScrollBarArrowBlinking(param1:Boolean) : void
         {
-            var _loc3_:IListItemRenderer = param2.currentTarget.parent as IListItemRenderer;
-            var _loc4_:uint = 0;
-            if(param2 is ButtonEvent)
+            ChannelCarouselScrollBar(_scrollBar).setDownArrowBlinking(param1);
+        }
+        
+        override protected function updateScrollBar() : void
+        {
+            var _loc1_:* = NaN;
+            var _loc2_:* = NaN;
+            var _loc3_:* = NaN;
+            var _loc4_:* = 0;
+            super.updateScrollBar();
+            if((_dataProvider) && _dataProvider.length > 0)
             {
-                _loc4_ = (param2 as ButtonEvent).controllerIdx;
+                _loc1_ = _direction == DirectionMode.HORIZONTAL?_totalRows:_totalColumns;
+                _loc2_ = _scrollPosition * _loc1_;
+                _loc3_ = _loc2_ + _totalColumns * _totalRows - 1;
+                if(_loc2_ > 0)
+                {
+                    _dataProvider.requestItemRange(0,_loc2_ - 1,this.checkLeftScrollBarArrowBlinking);
+                }
+                else
+                {
+                    this.setLeftScrollBarArrowBlinking(false);
+                }
+                _loc4_ = _dataProvider.length - 1;
+                if(_loc3_ < _loc4_)
+                {
+                    _dataProvider.requestItemRange(_loc3_ + 1,_loc4_,this.checkRightScrollBarArrowBlinking);
+                }
+                else
+                {
+                    this.setRightScrollBarArrowBlinking(false);
+                }
             }
-            else if(param2 is MouseEventEx)
-            {
-                _loc4_ = (param2 as MouseEventEx).mouseIdx;
-            }
-            
-            var _loc5_:uint = 0;
-            if(param2 is ButtonEvent)
-            {
-                _loc5_ = (param2 as ButtonEvent).buttonIdx;
-            }
-            else if(param2 is MouseEventEx)
-            {
-                _loc5_ = (param2 as MouseEventEx).buttonIdx;
-            }
-            
-            var _loc6_:* = false;
-            if(param2 is ButtonEvent)
-            {
-                _loc6_ = (param2 as ButtonEvent).isKeyboard;
-            }
-            var _loc7_:ChannelListEvent = new ChannelListEvent(param1,false,true,_loc3_.index,0,_loc3_.index,_loc3_,dataProvider.requestItemAt(_loc3_.index),_loc4_,_loc5_,_loc6_);
-            return _loc7_;
         }
     }
 }

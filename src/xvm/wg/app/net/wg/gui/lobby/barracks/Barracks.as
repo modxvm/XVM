@@ -94,6 +94,7 @@ package net.wg.gui.lobby.barracks
         
         override protected function onPopulate() : void
         {
+            super.onPopulate();
             this.form.onPopulate();
         }
         

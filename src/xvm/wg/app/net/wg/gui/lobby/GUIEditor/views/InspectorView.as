@@ -3,7 +3,7 @@ package net.wg.gui.lobby.GUIEditor.views
     import scaleform.clik.core.UIComponent;
     import net.wg.infrastructure.interfaces.IViewStackContent;
     import net.wg.gui.components.controls.ScrollingListEx;
-    import scaleform.clik.utils.Constraints;
+    import net.wg.gui.lobby.GUIEditor.SelectRectangle;
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.DisplayObject;
     import flash.display.InteractiveObject;
@@ -11,10 +11,9 @@ package net.wg.gui.lobby.GUIEditor.views
     import flash.events.MouseEvent;
     import net.wg.gui.lobby.GUIEditor.ChangePropertyEvent;
     import flash.text.TextFieldAutoSize;
-    import flash.display.Sprite;
-    import flash.display.DisplayObjectContainer;
     import scaleform.clik.interfaces.IDataProvider;
     import net.wg.gui.lobby.GUIEditor.GUIEditorHelper;
+    import flash.display.DisplayObjectContainer;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.lobby.GUIEditor.data.ComponentPropertyVO;
     import net.wg.gui.lobby.GUIEditor.data.ComponentProperties;
@@ -37,7 +36,7 @@ package net.wg.gui.lobby.GUIEditor.views
         
         public var propsList:ScrollingListEx = null;
         
-        private var constraint:Constraints;
+        private var selectRect:SelectRectangle = null;
         
         private var btnGetParent:SoundButtonEx = null;
         
@@ -61,21 +60,22 @@ package net.wg.gui.lobby.GUIEditor.views
             this.propsList.mouseEnabled = false;
             this.updateDisplayList();
             this.createBtnGetParent();
+            this.selectRect = new SelectRectangle();
         }
         
         override protected function onDispose() : void
         {
             this.cleanUpInstancesInList();
-            this.disposeSelectRect();
             removeEventListener(ChangePropertyEvent.CHANGE_PROPERTY,this.onChangePropertyHandler);
             App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.onGlobalMouseDnHdlr);
             this.sceneList.removeEventListener(ListEventEx.ITEM_CLICK,this.onSceneListClickHandler);
+            App.stage.removeChild(this.selectRect);
+            this.selectRect.dispose();
+            this.selectRect = null;
             this.sceneList.dispose();
             this.sceneList = null;
             this.propsList.dispose();
             this.propsList = null;
-            this.constraint.dispose();
-            this.constraint = null;
             this.btnGetParent = null;
             this.selectedElement = null;
             super.onDispose();
@@ -94,23 +94,6 @@ package net.wg.gui.lobby.GUIEditor.views
                 this.btnGetParent.addEventListener(MouseEvent.CLICK,this.getParent);
                 this.btnGetParent.x = this.sceneList.width - this.btnGetParent.width;
                 this.btnGetParent.y = this.sceneList.height;
-            }
-        }
-        
-        private function disposeSelectRect() : void
-        {
-            var _loc1_:Sprite = null;
-            var _loc2_:DisplayObjectContainer = null;
-            if(this.constraint != null)
-            {
-                _loc1_ = Sprite(this.constraint.scope);
-                while(_loc1_.numChildren)
-                {
-                    _loc1_.removeChildAt(0);
-                }
-                _loc2_ = App.stage;
-                _loc2_.removeChild(_loc1_);
-                this.constraint.dispose();
             }
         }
         
@@ -152,56 +135,22 @@ package net.wg.gui.lobby.GUIEditor.views
         
         private function changeSelectRect(param1:DisplayObject) : void
         {
-            var _loc2_:Sprite = null;
-            var _loc3_:DisplayObjectContainer = null;
-            var _loc4_:Rectangle = null;
-            if(this.constraint == null)
-            {
-                _loc2_ = this.createSelectRect();
-            }
-            else
-            {
-                _loc2_ = Sprite(this.constraint.scope);
-            }
+            var _loc2_:DisplayObjectContainer = null;
+            var _loc3_:Rectangle = null;
             if(param1 != null)
             {
-                _loc2_.visible = true;
-                _loc3_ = App.stage;
-                _loc3_.addChildAt(_loc2_,_loc3_.numChildren);
-                _loc4_ = param1.getBounds(_loc3_);
-                _loc2_.x = _loc4_.x;
-                _loc2_.y = _loc4_.y;
-                this.constraint.update(_loc4_.width,_loc4_.height);
-                _loc2_.graphics.clear();
-                _loc2_.graphics.lineStyle(1,4560867);
-                _loc2_.graphics.drawRect(0,0,_loc4_.width,_loc4_.height);
+                this.selectRect.visible = true;
+                _loc2_ = App.stage;
+                _loc3_ = param1.getBounds(_loc2_);
+                _loc2_.addChildAt(this.selectRect,_loc2_.numChildren);
+                this.selectRect.x = _loc3_.x;
+                this.selectRect.y = _loc3_.y;
+                this.selectRect.update(param1);
             }
             else
             {
-                _loc2_.visible = false;
+                this.selectRect.visible = false;
             }
-        }
-        
-        private function createSelectRect() : Sprite
-        {
-            var _loc4_:uint = 0;
-            var _loc5_:DisplayObject = null;
-            var _loc1_:Sprite = new Sprite();
-            this.constraint = new Constraints(_loc1_);
-            var _loc2_:Class = App.utils.classFactory.getClass("SquareForSelect");
-            var _loc3_:Array = [Constraints.LEFT | Constraints.TOP,Constraints.RIGHT | Constraints.TOP,Constraints.LEFT | Constraints.BOTTOM,Constraints.RIGHT | Constraints.BOTTOM,Constraints.CENTER_H | Constraints.TOP,Constraints.LEFT | Constraints.CENTER_V,Constraints.CENTER_H | Constraints.BOTTOM,Constraints.RIGHT | Constraints.CENTER_V];
-            if(_loc2_ != null)
-            {
-                _loc4_ = 8;
-                while(_loc4_ > 0)
-                {
-                    _loc5_ = new _loc2_();
-                    _loc1_.addChild(_loc5_);
-                    this.constraint.addElement("square" + _loc4_,_loc5_,_loc3_[_loc4_]);
-                    _loc4_--;
-                }
-            }
-            return _loc1_;
         }
         
         private function selectElementById(param1:int) : void
@@ -251,22 +200,28 @@ package net.wg.gui.lobby.GUIEditor.views
             return param1;
         }
         
+        private function isMouseCoordinatesInAppWindow() : Boolean
+        {
+            var _loc1_:DisplayObject = DisplayObject(App.instance);
+            return App.stage.mouseX < App.appWidth + _loc1_.x && App.stage.mouseY < App.appHeight + _loc1_.y && App.stage.mouseX >= _loc1_.x && App.stage.mouseY >= _loc1_.y;
+        }
+        
         private function onChangePropertyHandler(param1:ChangePropertyEvent) : void
         {
-            var _loc2_:Object = this.sceneList.dataProvider[this.sceneList.selectedIndex];
-            _loc2_.instance[param1.property.name] = param1.newValue;
-            this.changeSelectRect(this.sceneList.dataProvider[this.sceneList.selectedIndex].instance);
+            var _loc2_:DisplayObject = this.sceneList.dataProvider[this.sceneList.selectedIndex].instance;
+            _loc2_[param1.property.name] = param1.newValue;
+            this.changeSelectRect(_loc2_);
         }
         
         private function onGlobalMouseDnHdlr(param1:MouseEvent) : void
         {
             var _loc2_:DisplayObject = DisplayObject(App.instance);
             var _loc3_:DisplayObject = DisplayObject(param1.target);
-            if(App.stage.mouseX < App.appWidth + _loc2_.x && App.stage.mouseY < App.appHeight + _loc2_.y && App.stage.mouseX >= _loc2_.x && App.stage.mouseY >= _loc2_.y)
+            if((this.isMouseCoordinatesInAppWindow()) && !(_loc3_ == App.stage))
             {
                 this.selectElement(this.checkElementUnderCursor(_loc3_));
             }
-            else if(_loc3_ is GEInspectWindow)
+            else if(_loc3_ is GEInspectWindow || _loc3_ == App.stage)
             {
                 this.selectElement(null);
             }

@@ -3,7 +3,7 @@ package net.wg.gui.lobby.hangar.tcarousel
     import net.wg.infrastructure.base.meta.impl.TankCarouselMeta;
     import net.wg.infrastructure.base.meta.ITankCarouselMeta;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
-    import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
+    import net.wg.gui.interfaces.IHelpLayoutComponent;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.SoundButton;
     import net.wg.gui.components.controls.DropDownImageText;
@@ -80,6 +80,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         public var bg1:MovieClip;
         
+        private var _isDAAPIInited:Boolean = false;
+        
         private var filterData:Object;
         
         private var filterDataInvalid:Boolean = false;
@@ -110,9 +112,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         private var _vehiclesVOManager:VehicleCarouselVOManager = null;
         
-        protected var _slotForBuySlot:IListItemRenderer = null;
+        private var _slotForBuySlot:IListItemRenderer = null;
         
-        protected var _slotForBuyVehicle:IListItemRenderer = null;
+        private var _slotForBuyVehicle:IListItemRenderer = null;
         
         private var _updateInProgress:Boolean = false;
         
@@ -134,8 +136,19 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
         }
         
+        public function as_isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
+        public function get isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
         public function as_populate() : void
         {
+            this._isDAAPIInited = true;
         }
         
         public function as_dispose() : void
@@ -337,7 +350,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 this._isShowHelpLayout = true;
                 _loc1_ = App.utils.helpLayout;
-                _loc2_ = _loc1_.getProps(162,102,Directions.RIGHT,LOBBY_HELP.HANGAR_VEHICLE_CAROUSEL,_defContainerPos + padding.left + padding.right,container.y);
+                _loc2_ = _loc1_.getProps(162,102,Directions.RIGHT,LOBBY_HELP.HANGAR_VEHICLE_CAROUSEL,_defContainerPos + padding.left + padding.right,container.y,_loc1_.defConnectorLength);
                 this._rendererHelpLayout = _loc1_.create(root,_loc2_,this);
             }
         }
@@ -721,7 +734,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         this.checkBoxToMain.addEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
     }
     
-    protected function showHideFilters() : void
+    private function showHideFilters() : void
     {
         updateVisibleSlotsCount();
         var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);

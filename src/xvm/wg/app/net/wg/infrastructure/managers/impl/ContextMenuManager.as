@@ -75,6 +75,16 @@ package net.wg.infrastructure.managers.impl
             return isVehicleWasInBattleS(param1);
         }
         
+        public function canGiveLeadershipTo(param1:Number) : Boolean
+        {
+            return canGiveLeadershipS(param1);
+        }
+        
+        public function canInviteThe(param1:Number) : Boolean
+        {
+            return canInviteS(param1);
+        }
+        
         public function hide() : void
         {
             if(this._currentMenu != null)
@@ -153,6 +163,15 @@ package net.wg.infrastructure.managers.impl
                     break;
                 case "kickPlayerFromUnit":
                     kickPlayerFromUnitS(_loc2_.kickId);
+                    break;
+                case "giveLeadership":
+                    giveLeadershipS(_loc2_.uid);
+                    break;
+                case "createSquad":
+                    createSquadS(_loc2_.uid);
+                    break;
+                case "invite":
+                    inviteS(_loc2_.uid,_loc2_);
                     break;
                 case "ctxActionDirectionControl":
                     fortDirectionS();

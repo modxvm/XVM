@@ -5,18 +5,13 @@ package net.wg.gui.rally
     import net.wg.gui.rally.interfaces.IRallyVO;
     import net.wg.gui.rally.interfaces.IRallySlotVO;
     import net.wg.gui.components.tooltips.helpers.Utils;
-    import net.wg.gui.components.advanced.ViewStack;
-    import net.wg.gui.cyberSport.interfaces.ICSAutoSearchMainView;
-    import net.wg.infrastructure.base.meta.IBaseRallyViewMeta;
-    import net.wg.gui.cyberSport.vo.AutoSearchVO;
-    import flash.display.InteractiveObject;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import net.wg.gui.components.windows.WindowEvent;
+    import flash.display.InteractiveObject;
     import net.wg.gui.rally.events.RallyViewsEvent;
-    import flash.display.MovieClip;
-    import scaleform.clik.controls.Button;
-    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
     import net.wg.infrastructure.events.FocusRequestEvent;
+    import net.wg.infrastructure.base.meta.IAbstractRallyViewMeta;
+    import flash.display.MovieClip;
     import net.wg.gui.cyberSport.interfaces.IChannelComponentHolder;
     import net.wg.data.Aliases;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
@@ -27,10 +22,7 @@ package net.wg.gui.rally
         public function BaseRallyMainWindow()
         {
             super();
-            this.autoSearch.visible = false;
         }
-        
-        private static var UPDATE_AUTO_SEARCH_MODEL:String = "autoSearchModel";
         
         public static function getTeamHeader(param1:String, param2:IRallyVO, param3:int = 7) : String
         {
@@ -50,7 +42,7 @@ package net.wg.gui.rally
                     {
                         _loc4_++;
                     }
-                    if(_loc8_.playerObj)
+                    if(_loc8_.player)
                     {
                         _loc5_++;
                     }
@@ -67,17 +59,7 @@ package net.wg.gui.rally
         });
     }
     
-    public var stack:ViewStack;
-    
-    public var autoSearch:ICSAutoSearchMainView;
-    
-    private var currentView:IBaseRallyViewMeta;
-    
     private var chatFocusNeeded:Boolean = true;
-    
-    private var autoSearchModel:AutoSearchVO;
-    
-    private var lastFocusedElementUnderAS:InteractiveObject;
     
     override public function setWindow(param1:IWindow) : void
     {
@@ -103,49 +85,10 @@ package net.wg.gui.rally
         return null;
     }
     
-    public function as_autoSearchEnableBtn(param1:Boolean) : void
+    override public function as_loadView(param1:String, param2:String) : void
     {
-        this.autoSearch.enableButton(param1);
-    }
-    
-    public function as_hideAutoSearch() : void
-    {
-        this.autoSearch.stopTimer();
-        this.autoSearch.visible = false;
-        this.autoSearchModel = null;
-        setFocus(this.lastFocusedElementUnderAS?this.lastFocusedElementUnderAS:this);
-    }
-    
-    public function as_changeAutoSearchState(param1:Object) : void
-    {
-        if(param1 == null)
-        {
-            return;
-        }
-        this.autoSearchModel = new AutoSearchVO(param1);
-        invalidate(UPDATE_AUTO_SEARCH_MODEL);
-    }
-    
-    public function as_loadView(param1:String, param2:String) : void
-    {
-        this.lastFocusedElementUnderAS = null;
-        if(this.currentView)
-        {
-            this.currentView.removeEventListener(RallyViewsEvent.LOAD_VIEW_REQUEST,this.onViewLoadRequest);
-            if(!this.stack.cache)
-            {
-                this.unregisterCurrentView();
-            }
-        }
+        super.as_loadView(param1,param2);
         setFocus(window.getCloseBtn());
-        var _loc3_:MovieClip = this.stack.show(param1);
-        this.registerCurrentView(_loc3_,param2);
-        App.toolTipMgr.hide();
-    }
-    
-    public function as_enableWndCloseBtn(param1:Boolean) : void
-    {
-        Button(window.getCloseBtn()).enabled = param1;
     }
     
     override protected function onSetModalFocus(param1:InteractiveObject) : void
@@ -162,21 +105,6 @@ package net.wg.gui.rally
     
     override protected function onDispose() : void
     {
-        this.lastFocusedElementUnderAS = null;
-        removeEventListener(CSComponentEvent.SHOW_AUTO_SEARCH_VIEW,this.showAutoSearchView);
-        removeEventListener(CSComponentEvent.AUTO_SEARCH_APPLY_BTN,this.autoSearchApplyHandler);
-        removeEventListener(CSComponentEvent.AUTO_SEARCH_CANCEL_BTN,this.autoSearchCancelHandler);
-        this.autoSearch.stopTimer();
-        this.autoSearch.dispose();
-        this.autoSearch = null;
-        this.stack.dispose();
-        this.stack = null;
-        this.currentView = null;
-        if(this.autoSearchModel)
-        {
-            this.autoSearchModel.dispose();
-            this.autoSearchModel = null;
-        }
         removeEventListener(RallyViewsEvent.BACK_NAVIGATION_REQUEST,this.backBtnClick);
         removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
         super.onDispose();
@@ -190,10 +118,6 @@ package net.wg.gui.rally
             return;
         }
         super.configUI();
-        addEventListener(CSComponentEvent.SHOW_AUTO_SEARCH_VIEW,this.showAutoSearchView);
-        addEventListener(CSComponentEvent.AUTO_SEARCH_APPLY_BTN,this.autoSearchApplyHandler);
-        addEventListener(CSComponentEvent.AUTO_SEARCH_CANCEL_BTN,this.autoSearchCancelHandler);
-        invalidate(UPDATE_AUTO_SEARCH_MODEL);
         addEventListener(RallyViewsEvent.BACK_NAVIGATION_REQUEST,this.backBtnClick);
         addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
     }
@@ -201,18 +125,11 @@ package net.wg.gui.rally
     override protected function draw() : void
     {
         super.draw();
-        if((isInvalid(UPDATE_AUTO_SEARCH_MODEL)) && (this.autoSearchModel))
-        {
-            this.lastFocusedElementUnderAS = lastFocusedElement;
-            this.autoSearch.changeState = this.autoSearchModel;
-            this.autoSearch.visible = true;
-            App.utils.scheduler.envokeInNextFrame(this.autoSearchUpdateFocus);
-        }
     }
     
-    protected function getCurrentView() : IBaseRallyViewMeta
+    protected function getCurrentView() : IAbstractRallyViewMeta
     {
-        return this.currentView;
+        return currentView;
     }
     
     protected function isChatFocusNeeded() : Boolean
@@ -230,39 +147,38 @@ package net.wg.gui.rally
         return "BaseRallyWindow";
     }
     
-    protected function registerCurrentView(param1:MovieClip, param2:String) : void
+    override protected function registerCurrentView(param1:MovieClip, param2:String) : void
     {
-        this.currentView = param1 as IBaseRallyViewMeta;
-        this.currentView.as_setPyAlias(param2);
-        this.currentView.addEventListener(RallyViewsEvent.LOAD_VIEW_REQUEST,this.onViewLoadRequest);
+        currentView = param1 as IAbstractRallyViewMeta;
+        currentView.as_setPyAlias(param2);
+        currentView.addEventListener(RallyViewsEvent.LOAD_VIEW_REQUEST,onViewLoadRequest);
         var _loc3_:IChannelComponentHolder = param1 as IChannelComponentHolder;
         if(_loc3_ != null)
         {
             registerComponent(_loc3_.getChannelComponent(),Aliases.CHANNEL_COMPONENT);
         }
-        registerComponent(this.currentView as IDAAPIModule,this.currentView.as_getPyAlias());
+        registerComponent(currentView as IDAAPIModule,currentView.as_getPyAlias());
         this.chatFocusNeeded = true;
         if(hasFocus)
         {
             this.updateFocus();
-            this.lastFocusedElementUnderAS = lastFocusedElement;
         }
     }
     
-    protected function unregisterCurrentView() : void
+    override protected function unregisterCurrentView() : void
     {
         setFocus(this);
-        if(this.currentView is IChannelComponentHolder)
+        if(currentView is IChannelComponentHolder)
         {
             unregisterComponent(Aliases.CHANNEL_COMPONENT);
         }
-        unregisterComponent(this.currentView.as_getPyAlias());
+        unregisterComponent(currentView.as_getPyAlias());
     }
     
     protected function updateFocus() : void
     {
-        var _loc1_:IChannelComponentHolder = this.currentView as IChannelComponentHolder;
-        if((_loc1_) && (this.chatFocusNeeded))
+        var _loc1_:IChannelComponentHolder = currentView as IChannelComponentHolder;
+        if((_loc1_) && (this.isChatFocusNeeded()))
         {
             setFocus(_loc1_.getChannelComponent().messageInput);
             this.chatFocusNeeded = false;
@@ -271,34 +187,6 @@ package net.wg.gui.rally
         {
             setFocus(lastFocusedElement);
         }
-    }
-    
-    protected function autoSearchUpdateFocus() : void
-    {
-        var _loc1_:InteractiveObject = this.autoSearch.getComponentForFocus();
-        if(_loc1_ != null)
-        {
-            setFocus(_loc1_);
-        }
-    }
-    
-    private function autoSearchCancelHandler(param1:CSComponentEvent) : void
-    {
-        autoSearchCancelS(param1.data.toString());
-    }
-    
-    private function autoSearchApplyHandler(param1:CSComponentEvent) : void
-    {
-        autoSearchApplyS(param1.data.toString());
-    }
-    
-    private function showAutoSearchView(param1:CSComponentEvent) : void
-    {
-        onAutoMatchS(param1.data.state.toString(),param1.data.cmpDescr);
-    }
-    
-    protected function onViewLoadRequest(param1:RallyViewsEvent) : void
-    {
     }
     
     protected function onScaleChanged(param1:WindowEvent) : void

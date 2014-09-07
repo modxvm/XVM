@@ -5,6 +5,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.fortifications.data.FortModeStateVO;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.gui.lobby.fortifications.data.FortificationVO;
+    import net.wg.gui.lobby.fortifications.data.BattleNotifiersDataVO;
     
     public class FortMainViewMeta extends BaseDAAPIComponent
     {
@@ -17,6 +18,10 @@ package net.wg.infrastructure.base.meta.impl
         public var onStatsClick:Function = null;
         
         public var onClanClick:Function = null;
+        
+        public var onCalendarClick:Function = null;
+        
+        public var onSettingClick:Function = null;
         
         public var onCreateDirectionClick:Function = null;
         
@@ -36,6 +41,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onNextTransportingStep:Function = null;
         
+        public var onViewReady:Function = null;
+        
         public function onStatsClickS() : void
         {
             App.utils.asserter.assertNotNull(this.onStatsClick,"onStatsClick" + Errors.CANT_NULL);
@@ -46,6 +53,18 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.onClanClick,"onClanClick" + Errors.CANT_NULL);
             this.onClanClick();
+        }
+        
+        public function onCalendarClickS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onCalendarClick,"onCalendarClick" + Errors.CANT_NULL);
+            this.onCalendarClick();
+        }
+        
+        public function onSettingClickS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onSettingClick,"onSettingClick" + Errors.CANT_NULL);
+            this.onSettingClick();
         }
         
         public function onCreateDirectionClickS(param1:uint) : void
@@ -102,6 +121,12 @@ package net.wg.infrastructure.base.meta.impl
             this.onNextTransportingStep();
         }
         
+        public function onViewReadyS() : void
+        {
+            App.utils.asserter.assertNotNull(this.onViewReady,"onViewReady" + Errors.CANT_NULL);
+            this.onViewReady();
+        }
+        
         public function as_switchMode(param1:Object) : void
         {
             var _loc2_:FortModeStateVO = new FortModeStateVO(param1);
@@ -124,6 +149,19 @@ package net.wg.infrastructure.base.meta.impl
         protected function setMainData(param1:FortificationVO) : void
         {
             var _loc2_:String = "as_setMainData" + Errors.ABSTRACT_INVOKE;
+            DebugUtils.LOG_ERROR(_loc2_);
+            throw new AbstractException(_loc2_);
+        }
+        
+        public function as_setBattlesDirectionData(param1:Object) : void
+        {
+            var _loc2_:BattleNotifiersDataVO = new BattleNotifiersDataVO(param1);
+            this.setBattlesDirectionData(_loc2_);
+        }
+        
+        protected function setBattlesDirectionData(param1:BattleNotifiersDataVO) : void
+        {
+            var _loc2_:String = "as_setBattlesDirectionData" + Errors.ABSTRACT_INVOKE;
             DebugUtils.LOG_ERROR(_loc2_);
             throw new AbstractException(_loc2_);
         }

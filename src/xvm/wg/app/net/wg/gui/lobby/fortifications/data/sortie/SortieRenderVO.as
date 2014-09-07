@@ -19,7 +19,9 @@ package net.wg.gui.lobby.fortifications.data.sortie
         
         public var divisionName:String = "";
         
-        public var playerCount:int = -1;
+        public var division:int = -1;
+        
+        public var playersCount:int = -1;
         
         public var commandSize:int = -1;
         

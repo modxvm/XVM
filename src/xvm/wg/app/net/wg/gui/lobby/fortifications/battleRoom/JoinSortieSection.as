@@ -128,10 +128,15 @@ package net.wg.gui.lobby.fortifications.battleRoom
         override protected function draw() : void
         {
             super.draw();
-            if(isInvalid(InvalidationType.DATA))
+            if((isInvalid(InvalidationType.DATA)) && (model))
             {
-                rallyInfoTF.htmlText = BaseRallyMainWindow.getTeamHeader(CYBERSPORT.WINDOW_UNIT_TEAMMEMBERS,model);
+                this.updateRallyInfoTF();
             }
+        }
+        
+        protected function updateRallyInfoTF() : void
+        {
+            rallyInfoTF.htmlText = BaseRallyMainWindow.getTeamHeader(CYBERSPORT.WINDOW_UNIT_TEAMMEMBERS,model);
         }
         
         override protected function onControlRollOver(param1:MouseEvent) : void
@@ -155,24 +160,20 @@ package net.wg.gui.lobby.fortifications.battleRoom
             var _loc3_:IRallySlotVO = null;
             var _loc4_:SortieSimpleSlot = null;
             var _loc2_:Array = param1.slotsArray;
-            var _loc5_:* = true;
-            var _loc6_:uint = Math.min(slots.length,_loc2_.length);
-            var _loc7_:Number = 0;
-            while(_loc7_ < _loc6_)
+            var _loc5_:uint = Math.min(slots.length,_loc2_.length);
+            var _loc6_:Number = 0;
+            while(_loc6_ < _loc5_)
             {
-                _loc4_ = slots[_loc7_];
-                _loc3_ = _loc2_[_loc7_];
-                _loc5_;
-                _loc5_;
-                _loc4_.showTakePlaceBtn = (_loc3_) && !_loc3_.playerObj;
+                _loc4_ = slots[_loc6_];
+                _loc3_ = _loc2_[_loc6_];
                 _loc4_.slotData = _loc3_;
-                _loc7_++;
+                _loc6_++;
             }
-            while(_loc7_ < slots.length)
+            while(_loc6_ < slots.length)
             {
-                _loc4_ = slots[_loc7_];
+                _loc4_ = slots[_loc6_];
                 _loc4_.slotData = null;
-                _loc7_++;
+                _loc6_++;
             }
         }
         

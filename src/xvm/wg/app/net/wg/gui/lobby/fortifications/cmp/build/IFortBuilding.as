@@ -23,9 +23,7 @@ package net.wg.gui.lobby.fortifications.cmp.build
         
         function set uid(param1:String) : void;
         
-        function set levelUpState(param1:Boolean) : void;
-        
-        function set isCommander(param1:Boolean) : void;
+        function set userCanAddBuilding(param1:Boolean) : void;
         
         function set forceSelected(param1:Boolean) : void;
         

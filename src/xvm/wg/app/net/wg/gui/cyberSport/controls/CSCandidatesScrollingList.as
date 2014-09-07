@@ -1,7 +1,7 @@
 package net.wg.gui.cyberSport.controls
 {
     import net.wg.gui.components.controls.ScrollingListEx;
-    import net.wg.infrastructure.interfaces.IDropList;
+    import net.wg.gui.interfaces.IDropList;
     import flash.display.MovieClip;
     
     public class CSCandidatesScrollingList extends ScrollingListEx implements IDropList

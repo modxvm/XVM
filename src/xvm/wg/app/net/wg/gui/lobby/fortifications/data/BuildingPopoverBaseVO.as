@@ -12,8 +12,6 @@ package net.wg.gui.lobby.fortifications.data
         
         public var buildingType:String = "";
         
-        public var isCommander:Boolean = false;
-        
         public var isVisibleDemountBtn:Boolean = false;
     }
 }

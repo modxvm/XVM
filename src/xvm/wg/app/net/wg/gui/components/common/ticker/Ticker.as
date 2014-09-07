@@ -189,14 +189,13 @@ package net.wg.gui.components.common.ticker
         
         private function addRenderer() : void
         {
-            var _loc2_:TickerItem = null;
             this._itemIndex++;
             if(this._itemIndex >= this._rssItems.length)
             {
                 this._itemIndex = 0;
             }
             var _loc1_:Object = this._rssItems[this._itemIndex];
-            _loc2_ = App.utils.classFactory.getComponent(Linkages.TICKER_ITEM,TickerItem);
+            var _loc2_:TickerItem = App.utils.classFactory.getComponent(Linkages.TICKER_ITEM,TickerItem);
             _loc2_.model = new RSSEntryVO(_loc1_);
             _loc2_.x = this.maskView.width;
             _loc2_.addEventListener(MouseEvent.MOUSE_OVER,this.onItemMouseInteraction);
@@ -242,6 +241,11 @@ package net.wg.gui.components.common.ticker
                     showBrowserS(_loc2_.id);
                     break;
             }
+        }
+        
+        public function get tickerHeight() : Number
+        {
+            return this.hit.height;
         }
     }
 }

@@ -110,7 +110,7 @@ package net.wg.gui.lobby.fortifications.battleRoom
                 this._creatorName = _loc2_;
                 this.commander.htmlText = _loc2_;
             }
-            _loc2_ = String(param1.playerCount);
+            _loc2_ = String(param1.playersCount);
             if(_loc2_ != this.commandSize.text)
             {
                 this.commandSize.text = _loc2_;

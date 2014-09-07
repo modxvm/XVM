@@ -33,7 +33,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private static function showAlertTooltip(param1:MouseEvent) : void
         {
-            App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE);
+            App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_DEFENCEHOURDISABLED);
         }
         
         public var infoIcon:UILoaderAlt;
@@ -90,7 +90,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
             this.description.width = this._descrRightMargin - this.description.x;
             this.description.htmlText = this.model.description;
-            this.alertIcon.visible = this.model.isPermanent;
+            this.alertIcon.visible = this.model.showAlertIcon;
             if(!(this.model.infoIconSource == Values.EMPTY_STR) && !(this.model.infoIconSource == null))
             {
                 this.infoIcon.source = this.model.infoIconSource;
@@ -103,7 +103,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             {
                 this.infoIcon.visible = false;
             }
-            App.utils.commons.moveIconToEndOfText(this.alertIcon,this.title);
+            App.utils.commons.moveDsiplObjToEndOfText(this.alertIcon,this.title);
         }
         
         protected function prepareToolTipMessage() : void

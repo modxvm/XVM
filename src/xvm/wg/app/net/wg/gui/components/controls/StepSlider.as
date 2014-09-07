@@ -6,6 +6,7 @@ package net.wg.gui.components.controls
     import scaleform.clik.events.SliderEvent;
     import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.gui.components.controls.interfaces.ISliderKeyPoint;
     
     public class StepSlider extends Slider
     {
@@ -198,7 +199,7 @@ package net.wg.gui.components.controls
         
         private function redrawKeyPoints() : void
         {
-            var _loc1_:SliderKeyPoint = null;
+            var _loc1_:ISliderKeyPoint = null;
             this.clearKeyPoints();
             if(!this._dataProvider || this._dataProvider.length == 0)
             {
@@ -217,7 +218,7 @@ package net.wg.gui.components.controls
                 _loc1_.index = _loc6_;
                 _loc1_.alpha = _loc6_ > maxAvailableValue?DISABLED_KEY_POINT_ALPHA:ENABLED_KEY_POINT_ALPHA;
                 _loc1_.addEventListener(MouseEvent.CLICK,this.onKeyPointClick);
-                this.keyPointsContainer.addChild(_loc1_);
+                this.keyPointsContainer.addChild(DisplayObject(_loc1_));
                 _loc6_++;
             }
         }
@@ -239,12 +240,12 @@ package net.wg.gui.components.controls
         
         private function clearKeyPoints() : void
         {
-            var _loc1_:SliderKeyPoint = null;
+            var _loc1_:ISliderKeyPoint = null;
             while(this.keyPointsContainer.numChildren)
             {
-                _loc1_ = this.keyPointsContainer.getChildAt(0) as SliderKeyPoint;
+                _loc1_ = ISliderKeyPoint(this.keyPointsContainer.getChildAt(0));
                 _loc1_.removeEventListener(MouseEvent.CLICK,this.onKeyPointClick);
-                this.keyPointsContainer.removeChild(_loc1_);
+                this.keyPointsContainer.removeChild(DisplayObject(_loc1_));
                 _loc1_.dispose();
             }
         }

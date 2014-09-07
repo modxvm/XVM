@@ -21,6 +21,7 @@ package net.wg.gui.rally.views.room
         public function BaseWaitListSection()
         {
             super();
+            this.initializeDP();
         }
         
         public var lblCandidatesHeader:TextField;
@@ -32,6 +33,10 @@ package net.wg.gui.rally.views.room
         protected var candidatesDP:VoDAAPIDataProvider;
         
         protected var _rallyData:IRallyVO;
+        
+        protected function initializeDP() : void
+        {
+        }
         
         protected function updateControls() : void
         {

@@ -5,6 +5,8 @@ package net.wg.infrastructure.base.meta
     public interface IBaseDAAPIModuleMeta extends IEventDispatcher
     {
         
+        function as_isDAAPIInited() : Boolean;
+        
         function as_populate() : void;
         
         function as_dispose() : void;

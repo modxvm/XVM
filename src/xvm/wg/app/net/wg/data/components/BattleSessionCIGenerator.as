@@ -25,10 +25,10 @@ package net.wg.data.components
             return _loc3_;
         }
         
-        override protected function createSimpleDataIDs(param1:PlayerInfo, param2:String, param3:String, param4:String, param5:String) : Map
+        override protected function createSimpleDataIDs(param1:PlayerInfo, param2:String, param3:String, param4:String, param5:String, param6:Boolean = false) : Map
         {
-            var _loc6_:Boolean = (param1.canCreateChannel?this._isOnline:param1.canCreateChannel) && (param1.isFriend);
-            return App.utils.commons.createMap(["userInfo",{},param2,{"enabled":_loc6_},param3,{"enabled":(param1.canAddToFriend?this._isOnline:param1.canAddToFriend)},param4,{"enabled":param1.canAddToIgnore},"copyToClipBoard",{},param5,{"enabled":this._isOnline},"kickPlayerFromPrebattle",{"enabled":this._canKickPlayer}]);
+            var _loc7_:Boolean = (param1.canCreateChannel?this._isOnline:param1.canCreateChannel) && (param1.isFriend);
+            return App.utils.commons.createMap(["userInfo",{},param2,{"enabled":_loc7_},param3,{"enabled":(param1.canAddToFriend?this._isOnline:param1.canAddToFriend)},param4,{"enabled":param1.canAddToIgnore},"copyToClipBoard",{},param5,{"enabled":this._isOnline},"createSquad",{},"invite",{"enabled":param6},"kickPlayerFromPrebattle",{"enabled":this._canKickPlayer}]);
         }
     }
 }

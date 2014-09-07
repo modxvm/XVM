@@ -3,9 +3,9 @@ package net.wg.gui.components.tooltips.helpers
     import net.wg.data.constants.IconsTypes;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
-    import flash.text.TextFormat;
     import net.wg.gui.components.controls.IconText;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
+    import flash.text.TextFormat;
     import flash.text.TextField;
     import flash.text.TextFormatAlign;
     import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;

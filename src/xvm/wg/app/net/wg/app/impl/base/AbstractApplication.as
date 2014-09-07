@@ -104,6 +104,8 @@ package net.wg.app.impl.base
         
         private var _appHeight:Number = 0;
         
+        private var _isDAAPIInited:Boolean = false;
+        
         public final function as_dispose() : void
         {
             this.onDispose();
@@ -111,6 +113,17 @@ package net.wg.app.impl.base
         
         public final function as_populate() : void
         {
+            this._isDAAPIInited = true;
+        }
+        
+        public function as_isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
+        public function get isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
         }
         
         public function as_registerManagers() : void

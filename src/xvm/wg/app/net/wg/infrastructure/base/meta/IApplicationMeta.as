@@ -48,6 +48,8 @@ package net.wg.infrastructure.base.meta
         
         function onAsInitializationCompletedS() : void;
         
+        function as_isDAAPIInited() : Boolean;
+        
         function as_populate() : void;
         
         function as_dispose() : void;

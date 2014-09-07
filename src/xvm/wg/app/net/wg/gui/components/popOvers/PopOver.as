@@ -48,8 +48,6 @@ package net.wg.gui.components.popOvers
         
         public var closeBtn:CloseButton;
         
-        public var bgForm:MovieClip;
-        
         public var background:MovieClip;
         
         public var hitMc:MovieClip;
@@ -79,7 +77,6 @@ package net.wg.gui.components.popOvers
         {
             super.draw();
             this.mouseEnabled = false;
-            this.bgForm.mouseChildren = this.bgForm.mouseEnabled = false;
             if(isInvalid(TITLE_INVALID))
             {
                 this.titleTextField.text = this._title || "";
@@ -209,7 +206,6 @@ package net.wg.gui.components.popOvers
         override protected function onDispose() : void
         {
             this.titleTextField = null;
-            this.bgForm = null;
             this.background = null;
             this.hitMc = null;
             this.arrowLeft = null;

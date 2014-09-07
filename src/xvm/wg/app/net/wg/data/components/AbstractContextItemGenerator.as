@@ -61,10 +61,11 @@ package net.wg.data.components
             {
                 _loc5_ = param1.isMuted?"unsetMuted":"setMuted";
             }
-            return this.createSimpleDataIDs(param1,_loc4_,_loc2_,_loc3_,_loc5_);
+            var _loc6_:Boolean = App.contextMenuMgr.canInviteThe(param1.dbID)?param1:false;
+            return this.createSimpleDataIDs(param1,_loc4_,_loc2_,_loc3_,_loc5_,_loc6_);
         }
         
-        protected function createSimpleDataIDs(param1:PlayerInfo, param2:String, param3:String, param4:String, param5:String) : Map
+        protected function createSimpleDataIDs(param1:PlayerInfo, param2:String, param3:String, param4:String, param5:String, param6:Boolean = false) : Map
         {
             throw new AbstractException("createSimpleDataIDs" + Errors.ABSTRACT_INVOKE);
         }

@@ -11,6 +11,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         {
             super();
             this.blinkingButton.gotoAndStop(0);
+            this.blinkingButton.alpha = 0;
+            this.blinkingButton.visible = false;
             this.setLevelUpState(false);
         }
         
@@ -22,16 +24,9 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         public var blinkingButton:BuildingBlinkingBtn;
         
-        private var _uid:String = "";
-        
         private var _levelUp:Boolean = false;
         
         private var _currentState:String = "";
-        
-        public function getBuildingShape() : MovieClip
-        {
-            return this.building.getBuildingShape();
-        }
         
         override public function dispose() : void
         {
@@ -41,6 +36,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.blinkingButton.dispose();
             this.blinkingButton = null;
             super.dispose();
+        }
+        
+        public function getBuildingShape() : MovieClip
+        {
+            return this.building.getBuildingShape();
         }
         
         public function handleMousePress() : void
@@ -54,6 +54,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.updateStates(param1);
         }
         
+        public function currentState() : String
+        {
+            return this._currentState;
+        }
+        
         public function setLevelUpState(param1:Boolean) : void
         {
             if(this._levelUp == param1)
@@ -61,8 +66,12 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                 return;
             }
             this._levelUp = param1;
-            this.building.visible = !param1;
-            this.blinkingButton.visible = param1;
+            this.building.alpha = this.getAlpha(!param1);
+            if((param1) && !this.blinkingButton.visible)
+            {
+                this.blinkingButton.visible = true;
+            }
+            this.blinkingButton.alpha = this.getAlpha(param1);
             if(param1)
             {
                 this.blinkingButton.gotoAndPlay(START_ANIMATION);
@@ -73,9 +82,9 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
         }
         
-        public function set uid(param1:String) : void
+        public function getAlpha(param1:Boolean) : int
         {
-            this._uid = param1;
+            return param1?1:0;
         }
         
         private function updateStates(param1:String) : void

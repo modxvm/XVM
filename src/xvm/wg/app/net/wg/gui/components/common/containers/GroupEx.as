@@ -4,6 +4,9 @@ package net.wg.gui.components.common.containers
     import scaleform.clik.constants.InvalidationType;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import scaleform.clik.core.UIComponent;
+    import scaleform.clik.interfaces.IDataProvider;
+    import flash.events.IEventDispatcher;
+    import flash.events.Event;
     
     public class GroupEx extends Group
     {
@@ -13,7 +16,7 @@ package net.wg.gui.components.common.containers
             super();
         }
         
-        private var _dataProvider:Array;
+        private var _dataProvider:Object;
         
         private var _itemRendererClass:Class;
         
@@ -26,7 +29,7 @@ package net.wg.gui.components.common.containers
             var _loc5_:* = undefined;
             if((isInvalid(InvalidationType.DATA)) && (this._itemRendererClass))
             {
-                _loc1_ = this._dataProvider?this._dataProvider.length:0;
+                _loc1_ = this.getProviderLength();
                 while(_loc1_ < numChildren)
                 {
                     _loc2_ = removeChildAt(numChildren - 1);
@@ -38,7 +41,7 @@ package net.wg.gui.components.common.containers
                 _loc4_ = 0;
                 while(_loc4_ < _loc1_)
                 {
-                    _loc3_ = this._dataProvider[_loc4_];
+                    _loc3_ = this.getProviderItemAt(_loc4_);
                     if(_loc4_ == numChildren)
                     {
                         _loc5_ = new this._itemRendererClass();
@@ -62,14 +65,50 @@ package net.wg.gui.components.common.containers
             super.draw();
         }
         
-        public function get dataProvider() : Array
+        public function getProviderLength() : int
+        {
+            return this._dataProvider?this._dataProvider.length:0;
+        }
+        
+        public function getProviderItemAt(param1:int) : Object
+        {
+            var _loc2_:Object = null;
+            if(this._dataProvider is Array)
+            {
+                _loc2_ = this._dataProvider[param1];
+            }
+            else if(this._dataProvider is IDataProvider)
+            {
+                _loc2_ = IDataProvider(this._dataProvider).requestItemAt(param1);
+            }
+            
+            return _loc2_;
+        }
+        
+        public function get dataProvider() : Object
         {
             return this._dataProvider;
         }
         
-        public function set dataProvider(param1:Array) : void
+        public function set dataProvider(param1:Object) : void
         {
+            if(param1 == null)
+            {
+                if(!(this._dataProvider == null) && this._dataProvider is IEventDispatcher)
+                {
+                    IEventDispatcher(this._dataProvider).removeEventListener(Event.CHANGE,this.dataProviderChangeHandler);
+                }
+            }
             this._dataProvider = param1;
+            if((this._dataProvider) && this._dataProvider is IEventDispatcher)
+            {
+                IEventDispatcher(this._dataProvider).addEventListener(Event.CHANGE,this.dataProviderChangeHandler,false,0,true);
+            }
+            invalidateData();
+        }
+        
+        private function dataProviderChangeHandler(param1:Event) : void
+        {
             invalidateData();
         }
         
@@ -89,6 +128,10 @@ package net.wg.gui.components.common.containers
         
         override protected function onDispose() : void
         {
+            if(!(this._dataProvider == null) && this._dataProvider is IEventDispatcher)
+            {
+                IEventDispatcher(this._dataProvider).removeEventListener(Event.CHANGE,this.dataProviderChangeHandler);
+            }
             this._dataProvider = null;
             this._itemRendererClass = null;
             super.onDispose();

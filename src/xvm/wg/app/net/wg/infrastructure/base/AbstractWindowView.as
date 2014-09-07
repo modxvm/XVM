@@ -1,10 +1,10 @@
 package net.wg.infrastructure.base
 {
     import net.wg.infrastructure.base.meta.impl.WindowViewMeta;
-    import net.wg.infrastructure.interfaces.IAbstractWindowView;
+    import net.wg.infrastructure.base.interfaces.IAbstractWindowView;
     import net.wg.gui.components.common.waiting.Waiting;
-    import net.wg.infrastructure.interfaces.IWindow;
-    import net.wg.infrastructure.interfaces.IWindowGeometry;
+    import net.wg.infrastructure.base.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindowGeometry;
     import flash.display.DisplayObject;
     import net.wg.infrastructure.constants.WindowViewInvalidationType;
     import net.wg.infrastructure.interfaces.IManagedContent;
@@ -52,6 +52,8 @@ package net.wg.infrastructure.base
         private var _canResize:Boolean = false;
         
         private var _isCentered:Boolean = true;
+        
+        private var _showWindowBgForm:Boolean = true;
         
         private var _showWindowBg:Boolean = true;
         
@@ -228,6 +230,16 @@ package net.wg.infrastructure.base
         public function set isCentered(param1:Boolean) : void
         {
             this._isCentered = param1;
+        }
+        
+        public function get showWindowBgForm() : Boolean
+        {
+            return this._showWindowBgForm;
+        }
+        
+        public function set showWindowBgForm(param1:Boolean) : void
+        {
+            this._showWindowBgForm = param1;
         }
         
         public function get showWindowBg() : Boolean

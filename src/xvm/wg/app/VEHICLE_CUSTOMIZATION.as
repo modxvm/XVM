@@ -80,6 +80,8 @@ package
         
         public static var CAMOUFLAGE_GERMANY_BICOLOR_DARK_SPOTS:String = "#vehicle_customization:camouflage/germany/bicolor/Dark_Spots";
         
+        public static var CAMOUFLAGE_GERMANY_DESERTTIGER:String = "#vehicle_customization:camouflage/germany/DesertTiger";
+        
         public static var CAMOUFLAGE_USA_BICOLOR_GUAMBICOLOR:String = "#vehicle_customization:camouflage/usa/bicolor/GuamBicolor";
         
         public static var CAMOUFLAGE_USA_BICOLOR_IVOZIMABICOLOR:String = "#vehicle_customization:camouflage/usa/bicolor/IvozimaBicolor";

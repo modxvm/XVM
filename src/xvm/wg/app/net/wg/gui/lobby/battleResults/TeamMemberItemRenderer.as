@@ -10,6 +10,7 @@ package net.wg.gui.lobby.battleResults
     import net.wg.data.components.BattleResultsCIGenerator;
     import flash.filters.ColorMatrixFilter;
     import net.wg.infrastructure.interfaces.IColorScheme;
+    import net.wg.data.constants.ColorSchemeNames;
     import net.wg.data.VO.UserVO;
     
     public class TeamMemberItemRenderer extends SoundListItemRenderer
@@ -153,7 +154,8 @@ package net.wg.gui.lobby.battleResults
     {
         var _loc1_:IColorScheme = null;
         var _loc2_:* = 0;
-        var _loc3_:* = NaN;
+        var _loc3_:* = 0;
+        var _loc4_:* = NaN;
         super.draw();
         if(this._dataDirty)
         {
@@ -169,25 +171,31 @@ package net.wg.gui.lobby.battleResults
                 _loc1_ = null;
                 if(data.isTeamKiller)
                 {
-                    _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"teamkiller_dead":"teamkiller");
+                    _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?ColorSchemeNames.TEAMKILLER_DEAD:ColorSchemeNames.TEAMKILLER);
                 }
                 else if(data.isOwnSquad)
                 {
-                    _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"selected_dead":"selected");
+                    _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?ColorSchemeNames.SELECTED_DEAD:ColorSchemeNames.SELECTED);
                 }
                 else
                 {
-                    _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"normal_dead":"normal");
+                    _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?ColorSchemeNames.NORMAL_DEAD:ColorSchemeNames.NORMAL);
                 }
                 
+                if(data.playerNamePosition)
+                {
+                    _loc3_ = this.playerName.x;
+                    this.playerName.x = this.selfBg.x + 6;
+                    this.playerName.width = this.playerName.width + (_loc3_ - this.playerName.x);
+                }
                 _loc2_ = this.sqadIcon.x == 2?0:9;
                 if(data.showResources)
                 {
                     this.sqadIcon.visible = false;
-                    this.playerName.width = 108;
+                    this.playerName.width = 98;
                     this.playerName.x = _loc2_ + 2;
                     this.vehicleIcon.x = _loc2_ + 105;
-                    this.vehicleName.x = _loc2_ + 162;
+                    this.vehicleName.x = _loc2_ + 157;
                     this.damageLbl.x = _loc2_ + 230;
                     this.fragsLbl.x = _loc2_ + 286;
                     this.xpLbl.x = _loc2_ + 325;
@@ -242,8 +250,8 @@ package net.wg.gui.lobby.battleResults
             }
             if(data.tkills > 0)
             {
-                _loc3_ = this.getColorForAlias("teamkiller",65535);
-                this.fragsLbl.htmlText = this.fragsLbl.htmlText + ("(<FONT color=\"#" + _loc3_.toString(16) + "\">" + data.tkills + "</FONT>)");
+                _loc4_ = this.getColorForAlias("teamkiller",65535);
+                this.fragsLbl.htmlText = this.fragsLbl.htmlText + ("(<FONT color=\"#" + _loc4_.toString(16) + "\">" + data.tkills + "</FONT>)");
             }
             if(data.medalsCount > 0)
             {

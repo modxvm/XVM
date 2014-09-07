@@ -16,7 +16,7 @@ package net.wg.gui.lobby.techtree.helpers
         
         public static var TITLE_FIX_POSITION_FACTOR:Number = 1007;
         
-        public static var TITLE_FIX_POSITION_Y:Number = 174;
+        public static var TITLE_FIX_POSITION_Y:Number = 140;
         
         private var title:DisplayObject;
         

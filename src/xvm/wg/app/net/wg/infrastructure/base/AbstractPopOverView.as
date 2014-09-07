@@ -1,7 +1,7 @@
 package net.wg.infrastructure.base
 {
     import net.wg.infrastructure.base.meta.impl.PopOverViewMeta;
-    import net.wg.infrastructure.interfaces.IAbstractPopOverView;
+    import net.wg.infrastructure.base.interfaces.IAbstractPopOverView;
     import scaleform.clik.events.ComponentEvent;
     import net.wg.infrastructure.interfaces.IWrapper;
     import scaleform.clik.constants.InvalidationType;
@@ -37,6 +37,10 @@ package net.wg.infrastructure.base
         
         override protected function draw() : void
         {
+            if(_baseDisposed)
+            {
+                return;
+            }
             super.draw();
             var _loc1_:IWrapper = wrapper;
             if((isInvalid(InvalidationType.SIZE)) && (_loc1_))

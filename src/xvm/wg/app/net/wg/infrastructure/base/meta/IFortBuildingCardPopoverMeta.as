@@ -16,5 +16,7 @@ package net.wg.infrastructure.base.meta
         function openBuyOrderWindowS() : void;
         
         function as_setData(param1:Object) : void;
+        
+        function as_setModernizationDestructionEnabling(param1:Boolean, param2:Boolean, param3:String, param4:String) : void;
     }
 }

@@ -7,6 +7,7 @@ package net.wg.gui.historicalBattles.controls
     import scaleform.clik.constants.InputValue;
     import scaleform.clik.constants.WrappingMode;
     import scaleform.clik.constants.NavigationCode;
+    import net.wg.gui.components.controls.helpers.ListUtils;
     
     public class SimpleVehicleList extends ScrollingListEx
     {
@@ -131,30 +132,7 @@ package net.wg.gui.historicalBattles.controls
         
         public function getFirstSelectablePosition(param1:int, param2:Boolean = true) : int
         {
-            var _loc3_:int = selectedIndex;
-            var _loc4_:int = param1;
-            var _loc5_:int = _dataProvider?_dataProvider.length:0;
-            var _loc6_:int = param2?1:-1;
-            while(_loc4_ >= 0 && _loc4_ < _loc5_)
-            {
-                if(!this.checkIsItemDisabled(_dataProvider.requestItemAt(_loc4_)))
-                {
-                    _loc3_ = _loc4_;
-                    break;
-                }
-                _loc4_ = _loc4_ + _loc6_;
-            }
-            return _loc3_;
-        }
-        
-        protected function checkIsItemDisabled(param1:Object) : Boolean
-        {
-            var _loc2_:* = false;
-            if(!param1 || (param1.hasOwnProperty("enabled")) && !param1["enabled"])
-            {
-                _loc2_ = true;
-            }
-            return _loc2_;
+            return ListUtils.getFirstSelectablePosition(param1,selectedIndex,_dataProvider,param2);
         }
     }
 }

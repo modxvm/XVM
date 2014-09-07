@@ -30,10 +30,6 @@ package net.wg.gui.lobby.fortifications.data
         
         public var rosters:Array = null;
         
-        public var isAssigned:Boolean = false;
-        
-        public var currentPlayerName:String = "";
-        
         public var generalTooltipData:String = "";
         
         override protected function onDataWrite(param1:String, param2:Object) : Boolean

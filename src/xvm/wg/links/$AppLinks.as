@@ -18,7 +18,7 @@ import net.wg.gui.intro.*; IntroPage;
 import net.wg.gui.login.impl.*; LoginPage;
 import net.wg.gui.lobby.*; LobbyPage;
 import net.wg.gui.lobby.dialogs.*; SimpleDialog;
-import net.wg.gui.lobby.header.*; TutorialControl;
+//TODO: 0.9.3 import net.wg.gui.lobby.header.*; TutorialControl;
 import net.wg.gui.lobby.hangar.*; Hangar; TankParam;
 import net.wg.gui.lobby.hangar.crew.*; Crew; RecruitRendererVO; CrewItemRenderer;
 import net.wg.gui.lobby.battleloading.*; BattleLoading; PlayerItemRenderer;

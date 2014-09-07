@@ -13,12 +13,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
             super();
         }
         
-        public function generateGeneralCtxItems(param1:Array) : Vector.<IContextItem>
-        {
-            return this.generateContextItems(param1);
-        }
-        
-        private function generateContextItems(param1:Array) : Vector.<IContextItem>
+        private static function generateContextItems(param1:Array) : Vector.<IContextItem>
         {
             var _loc5_:BuildingCtxMenuVO = null;
             var _loc6_:ContextItem = null;
@@ -33,6 +28,11 @@ package net.wg.gui.lobby.fortifications.utils.impl
                 _loc4_++;
             }
             return _loc3_;
+        }
+        
+        public function generateGeneralCtxItems(param1:Array) : Vector.<IContextItem>
+        {
+            return generateContextItems(param1);
         }
     }
 }

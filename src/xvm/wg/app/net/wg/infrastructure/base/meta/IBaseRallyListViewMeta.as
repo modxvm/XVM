@@ -13,6 +13,8 @@ package net.wg.infrastructure.base.meta
         
         function as_getSearchDP() : Object;
         
+        function as_setDetails(param1:Object) : void;
+        
         function as_setVehiclesTitle(param1:String) : void;
     }
 }

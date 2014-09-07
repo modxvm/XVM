@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.hangar.crew
 {
     import net.wg.infrastructure.base.meta.impl.CrewMeta;
-    import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
+    import net.wg.gui.interfaces.IHelpLayoutComponent;
     import net.wg.infrastructure.base.meta.ICrewMeta;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
     import scaleform.clik.interfaces.IDataProvider;

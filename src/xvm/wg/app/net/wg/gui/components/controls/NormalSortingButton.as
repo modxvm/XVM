@@ -138,6 +138,7 @@ package net.wg.gui.components.controls
         override protected function configUI() : void
         {
             super.configUI();
+            mouseEnabledOnDisabled = true;
             this.sortingArrow.visible = false;
             this.tabEnabled = false;
             _toggle = true;
@@ -224,11 +225,12 @@ package net.wg.gui.components.controls
             if(disableMc != null)
             {
                 disableMc.visible = !enabled && (this._showDisabledState);
-                disableMc.x = disableMc.y = _fillPadding;
+                disableMc.x = disabledFillPadding.left;
+                disableMc.y = disabledFillPadding.top;
                 disableMc.width = _width;
                 disableMc.height = _height;
-                disableMc.widthFill = _width - _fillPadding * 2;
-                disableMc.heightFill = _height - _fillPadding * 2;
+                disableMc.widthFill = _width - disabledFillPadding.horizontal;
+                disableMc.heightFill = _height - disabledFillPadding.vertical;
             }
         }
         

@@ -1,7 +1,7 @@
 package net.wg.gui.components.advanced
 {
     import scaleform.clik.controls.ButtonBar;
-    import net.wg.infrastructure.interfaces.IGroupedControl;
+    import net.wg.gui.interfaces.IGroupedControl;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.controls.Button;
     import net.wg.gui.components.controls.SoundButtonEx;

@@ -106,12 +106,13 @@ package net.wg.gui.prebattle.company
         
         override protected function onPopulate() : void
         {
+            super.onPopulate();
             canClose = true;
             enabledCloseBtn = false;
             canDrag = true;
             canResize = true;
             canMinimize = true;
-            showWindowBg = false;
+            showWindowBgForm = false;
             var _loc1_:Padding = window.contentPadding as Padding;
             _loc1_.top = 40;
             _loc1_.left = 10;

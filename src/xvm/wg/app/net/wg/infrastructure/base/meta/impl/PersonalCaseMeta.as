@@ -95,10 +95,10 @@ package net.wg.infrastructure.base.meta.impl
             this.dropSkills();
         }
         
-        public function changeTankmanPassportS(param1:int, param2:int, param3:int, param4:int) : void
+        public function changeTankmanPassportS(param1:int, param2:int, param3:int, param4:int, param5:int, param6:int, param7:int) : void
         {
             App.utils.asserter.assertNotNull(this.changeTankmanPassport,"changeTankmanPassport" + Errors.CANT_NULL);
-            this.changeTankmanPassport(param1,param2,param3,param4);
+            this.changeTankmanPassport(param1,param2,param3,param4,param5,param6,param7);
         }
         
         public function openExchangeFreeToTankmanXpWindowS() : void

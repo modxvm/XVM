@@ -3,7 +3,7 @@ package net.wg.gui.lobby.questsWindow.components
     import net.wg.infrastructure.interfaces.ISortable;
     import scaleform.clik.motion.Tween;
     import net.wg.gui.events.ResizableBlockEvent;
-    import net.wg.infrastructure.interfaces.IResizableContent;
+    import net.wg.gui.lobby.questsWindow.components.interfaces.IResizableContent;
     import flash.display.DisplayObject;
     import fl.transitions.easing.Strong;
     

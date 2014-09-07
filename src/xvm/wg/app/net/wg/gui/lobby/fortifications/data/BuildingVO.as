@@ -28,7 +28,7 @@ package net.wg.gui.lobby.fortifications.data
         
         public var progress:int = -1;
         
-        public var isAvailable:Boolean = false;
+        public var isAvailable:Boolean = true;
         
         public var isExportAvailable:Boolean = false;
         
@@ -39,6 +39,16 @@ package net.wg.gui.lobby.fortifications.data
         public var ctxMenuData:Array = null;
         
         public var isOpenCtxMenu:Boolean = false;
+        
+        public var productionInPause:Boolean = false;
+        
+        public var underAttack:Boolean = false;
+        
+        public var looted:Boolean = false;
+        
+        public var isBaseBuildingDamaged:Boolean = false;
+        
+        public var isFortFrozen:Boolean = false;
         
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {

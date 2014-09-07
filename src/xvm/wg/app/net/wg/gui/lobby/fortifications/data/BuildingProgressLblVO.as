@@ -15,5 +15,13 @@ package net.wg.gui.lobby.fortifications.data
         public var currentValue:String = "";
         
         public var separator:String = "";
+        
+        override protected function onDispose() : void
+        {
+            this.totalValue = null;
+            this.currentValue = null;
+            this.separator = null;
+            super.onDispose();
+        }
     }
 }

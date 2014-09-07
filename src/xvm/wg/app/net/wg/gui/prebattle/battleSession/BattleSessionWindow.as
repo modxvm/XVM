@@ -22,8 +22,6 @@ package net.wg.gui.prebattle.battleSession
     import net.wg.gui.events.ListEventEx;
     import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.constants.InvalidationType;
-    import scaleform.clik.utils.Constraints;
-    import scaleform.clik.constants.ConstrainMode;
     import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
     import scaleform.gfx.MouseEventEx;
     import net.wg.data.components.BattleSessionCIGenerator;
@@ -36,10 +34,8 @@ package net.wg.gui.prebattle.battleSession
             super();
             this._canKickPlayer = false;
             this._isReady = false;
-            showWindowBg = false;
-            canResize = true;
+            showWindowBgForm = false;
             canMinimize = true;
-            enabledCloseBtn = false;
             isCentered = false;
         }
         
@@ -120,6 +116,8 @@ package net.wg.gui.prebattle.battleSession
         
         public var vehicleLevelText:TextField;
         
+        public var queueLabel:TextField;
+        
         public var commentValue:TextAreaSimple;
         
         private var _canKickPlayer:Boolean;
@@ -139,10 +137,15 @@ package net.wg.gui.prebattle.battleSession
             this._isReady = isPlayerReadyS();
             this.readyButton.label = this._isReady?PREBATTLE.DIALOGS_BUTTONS_NOTREADY:PREBATTLE.DIALOGS_BUTTONS_READY;
             this.readyButton.enabled = isReadyBtnEnabledS();
-            this.leaveButton.enabled = isLeaveBtnEnabledS();
+            this.enableLeave(isLeaveBtnEnabledS());
             this._canKickPlayer = canKickPlayerS();
             this.downButton.enabled = (canMoveToUnassignedS()) && this.memberList.dataProvider.length > 0;
             this.upButton.enabled = (canMoveToAssignedS()) && this.memberStackList.dataProvider.length > 0;
+        }
+        
+        private function enableLeave(param1:Boolean) : void
+        {
+            enabledCloseBtn = this.leaveButton.enabled = param1;
         }
         
         override public function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void
@@ -167,7 +170,7 @@ package net.wg.gui.prebattle.battleSession
         
         override public function as_enableLeaveBtn(param1:Boolean) : void
         {
-            this.leaveButton.enabled = param1;
+            this.enableLeave(param1);
         }
         
         override public function as_enableReadyBtn(param1:Boolean) : void
@@ -284,7 +287,7 @@ package net.wg.gui.prebattle.battleSession
             this._isReady = isPlayerReadyS();
             this.readyButton.label = this._isReady?PREBATTLE.DIALOGS_BUTTONS_NOTREADY:PREBATTLE.DIALOGS_BUTTONS_READY;
             this.readyButton.enabled = isReadyBtnEnabledS();
-            this.leaveButton.enabled = isLeaveBtnEnabledS();
+            this.enableLeave(isLeaveBtnEnabledS());
             this._canKickPlayer = canKickPlayerS();
             window.setTitleIcon("team");
             geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
@@ -295,7 +298,7 @@ package net.wg.gui.prebattle.battleSession
             super.configUI();
             this.hiddenRenderer.visible = false;
             this.hiddenRenderer.data = null;
-            this.setConstraints();
+            this.queueLabel.text = PREBATTLE.LABELS_COMPANY_QUEUE;
             this.setControlsLabels();
             this.memberList.addEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
             this.memberList.addEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.handleDoubleClick);
@@ -330,9 +333,6 @@ package net.wg.gui.prebattle.battleSession
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
-                _width = window.width - window.contentPadding.left - window.contentPadding.right;
-                _height = window.height - window.contentPadding.top - window.contentPadding.bottom;
-                constraints.update(_width,_height);
                 this.topInfo.x = Math.round(_width / 2);
                 this.requirementInfo.x = Math.round(_width / 2);
             }
@@ -349,17 +349,6 @@ package net.wg.gui.prebattle.battleSession
         
         private function redrawList() : void
         {
-            var _loc1_:Number = this.firstLength >= 5?this.firstLength:5;
-            this.memberList.height = 20 * _loc1_ + 2;
-            var _loc2_:Number = this.memberList.y + this.memberList.height + 5;
-            this.upAllButton.y = _loc2_;
-            this.upButton.y = _loc2_;
-            this.downButton.y = _loc2_;
-            this.downAllButton.y = _loc2_;
-            this.memberStackList.y = _loc2_ + 24;
-            this.memberStackList.height = 20 * (19 - _loc1_) + 2;
-            this.downButton.enabled = (canMoveToUnassignedS()) && this.memberList.dataProvider.length > 0;
-            this.upButton.enabled = (canMoveToAssignedS()) && this.memberStackList.dataProvider.length > 0;
             if(this.firstLength < this._maxPlayers)
             {
                 this.playersStats.valueTF.text = this.firstLength + "/" + this._maxPlayers;
@@ -368,30 +357,6 @@ package net.wg.gui.prebattle.battleSession
             {
                 this.playersStats.valueTF.htmlText = "<font color=\"#ff0000\">" + this.firstLength + "/" + this._maxPlayers + "</font>";
             }
-        }
-        
-        private function setConstraints() : void
-        {
-            constraints = new Constraints(this,ConstrainMode.REFLOW);
-            constraints.addElement("upButton",this.upButton,Constraints.RIGHT);
-            constraints.addElement("upAllButton",this.upAllButton,Constraints.RIGHT);
-            constraints.addElement("downButton",this.downButton,Constraints.RIGHT);
-            constraints.addElement("downAllButton",this.downAllButton,Constraints.RIGHT);
-            constraints.addElement("topBG",this.topBG,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
-            constraints.addElement("topStats",this.topStats,Constraints.TOP | Constraints.RIGHT);
-            constraints.addElement("listTitle",this.listTitle,Constraints.TOP | Constraints.RIGHT);
-            constraints.addElement("mapValue",this.mapValue,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
-            constraints.addElement("winsText",this.winsText,Constraints.TOP | Constraints.RIGHT);
-            constraints.addElement("winsValue",this.winsValue,Constraints.TOP | Constraints.RIGHT);
-            constraints.addElement("topHeaderBG",this.topHeaderBG,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
-            constraints.addElement("leaveButton",this.leaveButton,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
-            constraints.addElement("readyButton",this.readyButton,Constraints.TOP | Constraints.RIGHT);
-            constraints.addElement("memberList",this.memberList,Constraints.RIGHT);
-            constraints.addElement("messageArea",channelComponent.messageArea,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
-            constraints.addElement("commentValue",this.commentValue,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
-            constraints.addElement("messageInput",channelComponent.messageInput,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
-            constraints.addElement("sendButton",channelComponent.sendButton,Constraints.TOP | Constraints.RIGHT);
-            constraints.addElement("memberStackList",this.memberStackList,Constraints.RIGHT);
         }
         
         private function setControlsLabels() : void

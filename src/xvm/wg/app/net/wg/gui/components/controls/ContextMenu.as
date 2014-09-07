@@ -194,7 +194,7 @@ package net.wg.gui.components.controls
             var _loc6_:IContextItem = null;
             var _loc7_:ContextMenuItem = null;
             var _loc2_:Number = param1.x;
-            var _loc3_:Number = param1.y + param1.height + this.padding.top + this.padding.bottom;
+            var _loc3_:Number = param1.y + param1.height + this.padding.top + this.padding.bottom - this.FIRST_ELEM_TOP_PADDING;
             var _loc4_:IClassFactory = App.utils.classFactory;
             var _loc5_:uint = 0;
             while(_loc5_ < param1.items.length)

@@ -3,9 +3,8 @@ package net.wg.gui.lobby.messengerBar
     import net.wg.infrastructure.base.meta.impl.MessengerBarMeta;
     import net.wg.infrastructure.base.meta.IMessengerBarMeta;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
-    import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
+    import net.wg.gui.interfaces.IHelpLayoutComponent;
     import net.wg.gui.lobby.messengerBar.carousel.ChannelCarousel;
-    import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.MovieClip;
     import flash.geom.Point;
     import flash.display.DisplayObject;
@@ -21,7 +20,7 @@ package net.wg.gui.lobby.messengerBar
     import scaleform.clik.constants.InvalidationType;
     import net.wg.infrastructure.interfaces.IManagedContent;
     import flash.events.EventPhase;
-    import net.wg.infrastructure.interfaces.IAbstractWindowView;
+    import net.wg.infrastructure.base.interfaces.IAbstractWindowView;
     
     public class MessengerBar extends MessengerBarMeta implements IMessengerBarMeta, IDAAPIModule, IHelpLayoutComponent
     {
@@ -38,9 +37,9 @@ package net.wg.gui.lobby.messengerBar
         
         public var notificationListBtn:NotificationListButton;
         
-        public var channelButton:SoundButtonEx;
+        public var channelButton:MessengerIconButton;
         
-        public var contactButton:SoundButtonEx;
+        public var contactsListBtn:ContactsListButton;
         
         public var bg:MovieClip;
         
@@ -62,7 +61,7 @@ package net.wg.gui.lobby.messengerBar
         {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             var _loc2_:DisplayObject = this.notificationListBtn.button;
-            var _loc3_:Object = _loc1_.getProps(_loc2_.width,_loc2_.height,Directions.TOP,LOBBY_HELP.CHAT_SERVICE_CHANNEL,_loc2_.x,_loc2_.y);
+            var _loc3_:Object = _loc1_.getProps(_loc2_.width,_loc2_.height,Directions.TOP,LOBBY_HELP.CHAT_SERVICE_CHANNEL,_loc2_.x,_loc2_.y,_loc1_.defConnectorLength);
             this._notificationListBtnHL = _loc1_.create(root,_loc3_,this.notificationListBtn);
             this.channelCarousel.showHelpLayout();
         }
@@ -79,6 +78,12 @@ package net.wg.gui.lobby.messengerBar
             this.stageDimensions.x = param1;
             this.stageDimensions.y = param2;
             invalidate(LAYOUT_INVALID);
+        }
+        
+        public function as_setInitData(param1:Object) : void
+        {
+            this.channelButton.htmlIconStr = param1.channelsHtmlIcon;
+            this.contactsListBtn.button.htmlIconStr = param1.contactsHtmlIcon;
         }
         
         public function get paddingLeft() : uint
@@ -135,9 +140,10 @@ package net.wg.gui.lobby.messengerBar
         {
             super.onPopulate();
             registerFlashComponentS(this.notificationListBtn,Aliases.NOTIFICATION_LIST_BUTTON);
+            registerFlashComponentS(this.contactsListBtn,Aliases.CONTACTS_LIST_BUTTON);
             registerFlashComponentS(this.channelCarousel,Aliases.CHANNEL_CAROUSEL);
             this.channelButton.addEventListener(ButtonEvent.CLICK,this.onChannelButtonClick);
-            this.contactButton.addEventListener(ButtonEvent.CLICK,this.onContactsButtonClick);
+            this.contactsListBtn.addEventListener(ButtonEvent.CLICK,this.onContactsButtonClick);
             var _loc1_:Stage = App.stage;
             _loc1_.addEventListener(MessengerBarEvent.PIN_CHANNELS_WINDOW,this.handlePinChannelsWindow);
             _loc1_.addEventListener(MessengerBarEvent.PIN_CONTACTS_WINDOW,this.handlePinContactsWindow);
@@ -149,7 +155,7 @@ package net.wg.gui.lobby.messengerBar
             this.fakeChnlBtn.removeEventListener(MouseEvent.ROLL_OUT,this.hideInRoamingTooltip);
             this.fakeChnlBtn.removeEventListener(MouseEvent.CLICK,this.hideInRoamingTooltip);
             this.channelButton.removeEventListener(ButtonEvent.CLICK,this.onChannelButtonClick);
-            this.contactButton.removeEventListener(ButtonEvent.CLICK,this.onContactsButtonClick);
+            this.contactsListBtn.removeEventListener(ButtonEvent.CLICK,this.onContactsButtonClick);
             var _loc1_:Stage = App.stage;
             _loc1_.removeEventListener(MessengerBarEvent.PIN_CHANNELS_WINDOW,this.handlePinChannelsWindow);
             _loc1_.removeEventListener(MessengerBarEvent.PIN_CONTACTS_WINDOW,this.handlePinContactsWindow);
@@ -157,8 +163,7 @@ package net.wg.gui.lobby.messengerBar
             this.notificationListBtn = null;
             this.channelButton.dispose();
             this.channelButton = null;
-            this.contactButton.dispose();
-            this.contactButton = null;
+            this.contactsListBtn = null;
             this.stageDimensions = null;
             this._notificationListBtnHL = null;
         }
@@ -169,12 +174,16 @@ package net.wg.gui.lobby.messengerBar
             constraints.addElement(this.notificationListBtn.name,this.notificationListBtn,Constraints.RIGHT);
             constraints.addElement(this.channelButton.name,this.channelButton,Constraints.LEFT);
             constraints.addElement(this.fakeChnlBtn.name,this.fakeChnlBtn,Constraints.LEFT);
-            constraints.addElement(this.contactButton.name,this.contactButton,Constraints.LEFT);
+            constraints.addElement(this.contactsListBtn.name,this.contactsListBtn,Constraints.LEFT);
             this.channelButton.enabled = !App.globalVarsMgr.isInRoamingS();
+            this.channelButton.tooltip = TOOLTIPS.LOBY_MESSENGER_CHANNELS_BUTTON;
             this.fakeChnlBtn.visible = App.globalVarsMgr.isInRoamingS();
             this.fakeChnlBtn.addEventListener(MouseEvent.ROLL_OVER,this.showInRoamingTooltip);
             this.fakeChnlBtn.addEventListener(MouseEvent.ROLL_OUT,this.hideInRoamingTooltip);
             this.fakeChnlBtn.addEventListener(MouseEvent.CLICK,this.hideInRoamingTooltip);
+            this.fakeChnlBtn.x = this.channelButton.x;
+            this.fakeChnlBtn.width = this.channelButton.width;
+            this.fakeChnlBtn.height = this.channelButton.height;
         }
         
         override protected function draw() : void
@@ -191,7 +200,7 @@ package net.wg.gui.lobby.messengerBar
             if(isInvalid(InvalidationType.SIZE))
             {
                 constraints.update(_width,_height);
-                this.channelCarousel.x = this.contactButton?this.contactButton.x + this.contactButton.width:this.channelButton?this.channelButton.x + this.channelButton.width:0;
+                this.channelCarousel.x = this.channelButton?this.channelButton.x + this.channelButton.width:this.channelButton?this.channelButton.x + this.channelButton.width:0;
                 this.channelCarousel.width = this.notificationListBtn.x - this.channelCarousel.x - 1;
             }
         }
@@ -231,7 +240,7 @@ package net.wg.gui.lobby.messengerBar
         
         private function handlePinContactsWindow(param1:MessengerBarEvent) : void
         {
-            this.handlePinWindow(param1,this.contactButton);
+            this.handlePinWindow(param1,this.contactsListBtn);
         }
         
         private function showInRoamingTooltip(param1:MouseEvent) : void

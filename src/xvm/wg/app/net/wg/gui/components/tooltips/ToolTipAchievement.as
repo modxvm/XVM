@@ -3,11 +3,11 @@ package net.wg.gui.components.tooltips
     import flash.text.TextField;
     import flash.display.Sprite;
     import net.wg.gui.components.controls.UILoaderAlt;
-    import net.wg.infrastructure.interfaces.ICounterComponent;
+    import net.wg.gui.components.interfaces.ICounterComponent;
     import net.wg.data.managers.ITooltipProps;
     import flash.display.DisplayObject;
-    import net.wg.gui.components.tooltips.VO.AchievementVO;
     import net.wg.utils.ILocale;
+    import net.wg.gui.components.tooltips.VO.AchievementVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;

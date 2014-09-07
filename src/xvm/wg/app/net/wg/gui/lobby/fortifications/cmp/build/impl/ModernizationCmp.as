@@ -41,16 +41,13 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         public var titleText:TextField = null;
         
-        private var model:ModernizationCmpVO = null;
-        
         public function setData(param1:ModernizationCmpVO) : void
         {
-            this.model = param1;
-            this.buildingIndicators.setData(this.model.buildingIndicators);
-            this.orderInfo.setData(this.model.defResInfo);
-            this.buildingLevel.gotoAndStop(this.model.buildingLevel);
-            this.buildingIcon.gotoAndStop(this.model.buildingType);
-            this.titleText.htmlText = this.model.titleText;
+            this.buildingIndicators.setData(param1.buildingIndicators);
+            this.orderInfo.setData(param1.defResInfo);
+            this.buildingLevel.gotoAndStop(param1.buildingLevel);
+            this.buildingIcon.gotoAndStop(param1.buildingType);
+            this.titleText.htmlText = param1.titleText;
         }
         
         public function dispose() : void

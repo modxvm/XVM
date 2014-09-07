@@ -21,7 +21,7 @@ package net.wg.gui.messenger.windows
         public function BaseChannelWindow()
         {
             super();
-            showWindowBg = false;
+            showWindowBgForm = false;
             canMinimize = true;
             canResize = true;
             canDrag = true;

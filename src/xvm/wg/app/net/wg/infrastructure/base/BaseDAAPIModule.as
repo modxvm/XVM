@@ -15,6 +15,8 @@ package net.wg.infrastructure.base
         
         private var _disposed:Boolean = false;
         
+        private var _isDAAPIInited:Boolean = false;
+        
         public function get disposed() : Boolean
         {
             return this._disposed;
@@ -22,6 +24,7 @@ package net.wg.infrastructure.base
         
         protected function onPopulate() : void
         {
+            this._isDAAPIInited = true;
         }
         
         protected function onDispose() : void
@@ -56,6 +59,16 @@ package net.wg.infrastructure.base
         protected final function assertNull(param1:Object, param2:String = "object") : void
         {
             App.utils.asserter.assertNull(param1,param2 + Errors.MUST_NULL);
+        }
+        
+        public function as_isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
+        public function get isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
         }
     }
 }

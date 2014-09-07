@@ -116,6 +116,8 @@ package
         
         public static var QUESTS_CURRENTTAB_HEADER_DROPDOWN_QUESTS:String = "#quests:quests/currentTab/header/dropdown/quests";
         
+        public static var QUESTS_CURRENTTAB_HEADER_DROPDOWN_SPECIALMISSION:String = "#quests:quests/currentTab/header/dropdown/specialMission";
+        
         public static var QUESTS_LIST_COMPLETE:String = "#quests:quests/list/complete";
         
         public static var QUESTS_LIST_CURRENT_NOALL:String = "#quests:quests/list/current/noAll";
@@ -141,6 +143,8 @@ package
         public static var ITEM_TYPE_QUEST:String = "#quests:item/type/quest";
         
         public static var ITEM_TYPE_QUESTDAILY:String = "#quests:item/type/questDaily";
+        
+        public static var ITEM_TYPE_SPECIALMISSION:String = "#quests:item/type/specialMission";
         
         public static var ITEM_TYPE_QUESTSTRATEGIC:String = "#quests:item/type/questStrategic";
         
@@ -254,17 +258,29 @@ package
         
         public static var DETAILS_STATUS_NOTAVAILABLE_REQUIREMENTS:String = "#quests:details/status/notAvailable/requirements";
         
-        public static var DETAILS_RELATIONS_GREATER:String = "#quests:details/relations/greater";
+        public static var DETAILS_RELATIONS1_GREATER:String = "#quests:details/relations1/greater";
         
-        public static var DETAILS_RELATIONS_LESS:String = "#quests:details/relations/less";
+        public static var DETAILS_RELATIONS1_LESS:String = "#quests:details/relations1/less";
         
-        public static var DETAILS_RELATIONS_EQUAL:String = "#quests:details/relations/equal";
+        public static var DETAILS_RELATIONS1_EQUAL:String = "#quests:details/relations1/equal";
         
-        public static var DETAILS_RELATIONS_NOTEQUAL:String = "#quests:details/relations/notEqual";
+        public static var DETAILS_RELATIONS1_NOTEQUAL:String = "#quests:details/relations1/notEqual";
         
-        public static var DETAILS_RELATIONS_LESSOREQUAL:String = "#quests:details/relations/lessOrEqual";
+        public static var DETAILS_RELATIONS1_LESSOREQUAL:String = "#quests:details/relations1/lessOrEqual";
         
-        public static var DETAILS_RELATIONS_GREATEROREQUAL:String = "#quests:details/relations/greaterOrEqual";
+        public static var DETAILS_RELATIONS1_GREATEROREQUAL:String = "#quests:details/relations1/greaterOrEqual";
+        
+        public static var DETAILS_RELATIONS2_GREATER:String = "#quests:details/relations2/greater";
+        
+        public static var DETAILS_RELATIONS2_LESS:String = "#quests:details/relations2/less";
+        
+        public static var DETAILS_RELATIONS2_EQUAL:String = "#quests:details/relations2/equal";
+        
+        public static var DETAILS_RELATIONS2_NOTEQUAL:String = "#quests:details/relations2/notEqual";
+        
+        public static var DETAILS_RELATIONS2_LESSOREQUAL:String = "#quests:details/relations2/lessOrEqual";
+        
+        public static var DETAILS_RELATIONS2_GREATEROREQUAL:String = "#quests:details/relations2/greaterOrEqual";
         
         public static var DETAILS_GROUPS_OR:String = "#quests:details/groups/or";
         
@@ -490,17 +506,47 @@ package
         
         public static var DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_POSITION_NOT:String = "#quests:details/conditions/results/single/bothTeams/position/not";
         
-        public static var DETAILS_CONDITIONS_RESULTS_UNIT_ALIVE:String = "#quests:details/conditions/results/unit/alive";
+        public static var DETAILS_CONDITIONS_RESULTS_FORMATION_ALIVE:String = "#quests:details/conditions/results/formation/alive";
         
-        public static var DETAILS_CONDITIONS_RESULTS_UNIT_ALIVE_NOT:String = "#quests:details/conditions/results/unit/alive/not";
+        public static var DETAILS_CONDITIONS_RESULTS_FORMATION_ALIVE_NOT:String = "#quests:details/conditions/results/formation/alive/not";
         
-        public static var DETAILS_CONDITIONS_RESULTS_UNIT_SIMPLE:String = "#quests:details/conditions/results/unit/simple";
+        public static var DETAILS_CONDITIONS_RESULTS_FORMATION_SIMPLE:String = "#quests:details/conditions/results/formation/simple";
         
-        public static var DETAILS_CONDITIONS_RESULTS_UNIT_AVG:String = "#quests:details/conditions/results/unit/avg";
+        public static var DETAILS_CONDITIONS_RESULTS_FORMATION_AVG:String = "#quests:details/conditions/results/formation/avg";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_SQUAD_ALIVE:String = "#quests:details/conditions/results/squad/alive";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_SQUAD_ALIVE_NOT:String = "#quests:details/conditions/results/squad/alive/not";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_SQUAD_SIMPLE:String = "#quests:details/conditions/results/squad/simple";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_SQUAD_AVG:String = "#quests:details/conditions/results/squad/avg";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_COMPANY_ALIVE:String = "#quests:details/conditions/results/company/alive";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_COMPANY_ALIVE_NOT:String = "#quests:details/conditions/results/company/alive/not";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_COMPANY_SIMPLE:String = "#quests:details/conditions/results/company/simple";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_COMPANY_AVG:String = "#quests:details/conditions/results/company/avg";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_TEAM7X7_ALIVE:String = "#quests:details/conditions/results/team7x7/alive";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_TEAM7X7_ALIVE_NOT:String = "#quests:details/conditions/results/team7x7/alive/not";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_TEAM7X7_SIMPLE:String = "#quests:details/conditions/results/team7x7/simple";
+        
+        public static var DETAILS_CONDITIONS_RESULTS_TEAM7X7_AVG:String = "#quests:details/conditions/results/team7x7/avg";
         
         public static var DETAILS_CONDITIONS_CUMULATIVE_SINGLE:String = "#quests:details/conditions/cumulative/single";
         
-        public static var DETAILS_CONDITIONS_CUMULATIVE_UNIT:String = "#quests:details/conditions/cumulative/unit";
+        public static var DETAILS_CONDITIONS_CUMULATIVE_FORMATION:String = "#quests:details/conditions/cumulative/formation";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_SQUAD:String = "#quests:details/conditions/cumulative/squad";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_COMPANY:String = "#quests:details/conditions/cumulative/company";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_TEAM7X7:String = "#quests:details/conditions/cumulative/team7x7";
         
         public static var DETAILS_CONDITIONS_VEHICLESKILLS:String = "#quests:details/conditions/vehiclesKills";
         
@@ -613,6 +659,20 @@ package
         public static var DETAILS_CONDITIONS_CUMULATIVE_DAMAGEASSISTEDTRACK:String = "#quests:details/conditions/cumulative/damageAssistedTrack";
         
         public static var DETAILS_CONDITIONS_CUMULATIVE_DAMAGEASSISTEDRADIO:String = "#quests:details/conditions/cumulative/damageAssistedRadio";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_MARKOFMASTERY:String = "#quests:details/conditions/cumulative/markOfMastery";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_MARKOFMASTERY0:String = "#quests:details/conditions/cumulative/markOfMastery0";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_MARKOFMASTERY0_NOT:String = "#quests:details/conditions/cumulative/markOfMastery0/not";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_MARKOFMASTERY1:String = "#quests:details/conditions/cumulative/markOfMastery1";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_MARKOFMASTERY2:String = "#quests:details/conditions/cumulative/markOfMastery2";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_MARKOFMASTERY3:String = "#quests:details/conditions/cumulative/markOfMastery3";
+        
+        public static var DETAILS_CONDITIONS_CUMULATIVE_MARKOFMASTERY4:String = "#quests:details/conditions/cumulative/markOfMastery4";
         
         public static var DETAILS_DOSSIER_SNIPERSERIES:String = "#quests:details/dossier/sniperSeries";
         

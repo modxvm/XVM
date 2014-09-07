@@ -1,7 +1,8 @@
 package net.wg.gui.lobby.window
 {
     import flash.text.TextField;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.gui.components.common.ArrowSeparator;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import scaleform.clik.utils.Padding;
     import flash.filters.DropShadowFilter;
     import net.wg.data.constants.ColorSchemeNames;
@@ -16,6 +17,10 @@ package net.wg.gui.lobby.window
         }
         
         public var errorLabel:TextField;
+        
+        public var topSeparator:ArrowSeparator;
+        
+        public var bottomSeparator:ArrowSeparator;
         
         override public function setWindow(param1:IWindow) : void
         {
@@ -58,6 +63,16 @@ package net.wg.gui.lobby.window
             headerMC.rateTo.icon = IconsTypes.CREDITS;
             headerMC.rateTo.textColor = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_CREDITS);
             headerMC.rateTo.filters = ExchangeUtils.getGlow(IconsTypes.CREDITS);
+        }
+        
+        override protected function onDispose() : void
+        {
+            this.errorLabel = null;
+            this.topSeparator.dispose();
+            this.bottomSeparator.dispose();
+            this.topSeparator = null;
+            this.bottomSeparator = null;
+            super.onDispose();
         }
         
         override protected function applyResultUpdating() : void

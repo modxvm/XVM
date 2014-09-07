@@ -7,6 +7,7 @@ package net.wg.gui.lobby.fortifications.data
         
         public function ClanStatItemVO(param1:Object)
         {
+            this.ttBodyParams = {};
             super(param1);
         }
         
@@ -21,5 +22,9 @@ package net.wg.gui.lobby.fortifications.data
         public var ttHeader:String = "";
         
         public var ttBody:String = "";
+        
+        public var ttBodyParams:Object;
+        
+        public var ttLabel:String = "";
     }
 }

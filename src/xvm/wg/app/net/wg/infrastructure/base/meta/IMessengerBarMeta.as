@@ -8,5 +8,7 @@ package net.wg.infrastructure.base.meta
         function channelButtonClickS() : void;
         
         function contactsButtonClickS() : void;
+        
+        function as_setInitData(param1:Object) : void;
     }
 }

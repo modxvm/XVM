@@ -15,6 +15,7 @@ package net.wg.gui.components.advanced
         public function HelpLayoutControl()
         {
             super();
+            this.visible = false;
         }
         
         public var textField:TextField;
@@ -32,6 +33,8 @@ package net.wg.gui.components.advanced
         private var _borderHeight:Number = 256;
         
         private var _connectorLength:Number = 12;
+        
+        private var TEXT_APP_BORDER_MARGIN:Number = 10;
         
         override protected function onDispose() : void
         {
@@ -81,6 +84,7 @@ package net.wg.gui.components.advanced
             this.setConnectorPosition();
             this.setTextFieldPosition();
             super.draw();
+            this.visible = true;
         }
         
         private function setConnectorPosition() : void
@@ -128,7 +132,7 @@ package net.wg.gui.components.advanced
                     this.textField.autoSize = TextFieldAutoSize.CENTER;
                     _loc1_.align = TextFormatAlign.CENTER;
                     this.textField.text = this._text;
-                    this.textField.x = (this._borderWidth >> 1) - (this.textField.width >> 1);
+                    this.textField.x = this.getTextXPosForVerticalDirection();
                     this.textField.y = -(this.connector.height + this.textField.textHeight + 2);
                     break;
                 case "R":
@@ -142,7 +146,7 @@ package net.wg.gui.components.advanced
                     this.textField.autoSize = TextFieldAutoSize.CENTER;
                     _loc1_.align = TextFormatAlign.CENTER;
                     this.textField.text = this._text;
-                    this.textField.x = (this._borderWidth >> 1) - (this.textField.width >> 1);
+                    this.textField.x = this.getTextXPosForVerticalDirection();
                     this.textField.y = this._borderHeight + this.connector.height + 2;
                     break;
                 case "L":
@@ -154,6 +158,25 @@ package net.wg.gui.components.advanced
                     break;
             }
             this.textField.setTextFormat(_loc1_);
+        }
+        
+        private function getTextXPosForVerticalDirection() : Number
+        {
+            var _loc1_:Number = 0;
+            if(this.TEXT_APP_BORDER_MARGIN > this.x + (this._borderWidth - this.textField.textWidth >> 1))
+            {
+                _loc1_ = this.TEXT_APP_BORDER_MARGIN + (this.textField.textWidth - this.textField.width >> 1) - this.x;
+            }
+            else if(App.appWidth < this.x + (this._borderWidth + this.textField.textWidth >> 1) + this.TEXT_APP_BORDER_MARGIN)
+            {
+                _loc1_ = App.appWidth - this.x - (this.textField.width + this.textField.textWidth >> 1) - this.TEXT_APP_BORDER_MARGIN;
+            }
+            else
+            {
+                _loc1_ = (this._borderWidth >> 1) - (this.textField.width >> 1);
+            }
+            
+            return _loc1_;
         }
     }
 }

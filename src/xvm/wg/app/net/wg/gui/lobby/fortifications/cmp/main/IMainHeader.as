@@ -5,6 +5,7 @@ package net.wg.gui.lobby.fortifications.cmp.main
     import flash.text.TextField;
     import net.wg.gui.components.controls.IconTextButton;
     import net.wg.gui.components.advanced.ToggleButton;
+    import net.wg.gui.components.advanced.ButtonDnmIcon;
     import net.wg.gui.lobby.fortifications.cmp.main.impl.VignetteYellow;
     import net.wg.infrastructure.interfaces.IUIComponentEx;
     
@@ -23,9 +24,17 @@ package net.wg.gui.lobby.fortifications.cmp.main
         
         function set clanListBtn(param1:IconTextButton) : void;
         
+        function get calendarBtn() : IconTextButton;
+        
+        function set calendarBtn(param1:IconTextButton) : void;
+        
         function get transportBtn() : ToggleButton;
         
         function set transportBtn(param1:ToggleButton) : void;
+        
+        function get settingBtn() : ButtonDnmIcon;
+        
+        function set settingBtn(param1:ButtonDnmIcon) : void;
         
         function get vignetteYellow() : VignetteYellow;
         
@@ -38,6 +47,10 @@ package net.wg.gui.lobby.fortifications.cmp.main
         function get title() : TextField;
         
         function set title(param1:TextField) : void;
+        
+        function get infoTF() : TextField;
+        
+        function set infoTF(param1:TextField) : void;
         
         function get tutorialArrow() : IUIComponentEx;
         

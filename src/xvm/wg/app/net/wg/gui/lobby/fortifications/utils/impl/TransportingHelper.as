@@ -4,6 +4,7 @@ package net.wg.gui.lobby.fortifications.utils.impl
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuilding;
     import net.wg.gui.lobby.fortifications.interfaces.ITransportingHandler;
     import net.wg.utils.ICommons;
+    import net.wg.gui.lobby.fortifications.data.FortModeVO;
     import flash.events.IEventDispatcher;
     import flash.events.MouseEvent;
     import flash.display.DisplayObject;
@@ -44,13 +45,12 @@ package net.wg.gui.lobby.fortifications.utils.impl
             this._buildToImport = null;
         }
         
-        public function updateTransportMode(param1:Boolean, param2:Boolean) : void
+        public function updateTransportMode(param1:FortModeVO) : void
         {
-            var _loc3_:IFortBuilding = null;
-            if(param1)
+            var _loc2_:IFortBuilding = null;
+            if(param1.isEntering)
             {
                 this.initTransportingEntering();
-                this._transportingHandler.onStartExporting();
             }
             else
             {
@@ -58,10 +58,18 @@ package net.wg.gui.lobby.fortifications.utils.impl
                 this._buildToImport = null;
                 this.removeAllTransportingListeners();
             }
-            for each(_loc3_ in this._buildings)
+            for each(_loc2_ in this._buildings)
             {
-                _loc3_.updateTransportMode(param1,false);
+                _loc2_.updateTransportMode(param1);
             }
+        }
+        
+        public function getModeVO(param1:Boolean, param2:Boolean) : FortModeVO
+        {
+            var _loc3_:FortModeVO = new FortModeVO();
+            _loc3_.isEntering = param1;
+            _loc3_.isTutorial = param2;
+            return _loc3_;
         }
         
         private function initTransportingEntering() : void
@@ -137,8 +145,9 @@ package net.wg.gui.lobby.fortifications.utils.impl
                 }
                 _loc2_ = _loc2_.parent;
             }
-            this.updateTransportMode(false,false);
-            this.updateTransportMode(true,false);
+            this._transportingHandler.onStartExporting();
+            this.updateTransportMode(this.getModeVO(false,false));
+            this.updateTransportMode(this.getModeVO(true,false));
         }
         
         private function onExportingClickHandler(param1:MouseEvent) : void

@@ -9,14 +9,22 @@ package net.wg.gui.interfaces
         
         function get clanAbbrev() : String;
         
+        function set clanAbbrev(param1:String) : void;
+        
         function get region() : String;
         
         function get igrType() : int;
         
         function get color() : Number;
         
+        function get rating() : String;
+        
+        function get isOffline() : Boolean;
+        
+        function set isOffline(param1:Boolean) : void;
+        
         function get isPlayerSpeaking() : Boolean;
         
-        function get rating() : String;
+        function set isPlayerSpeaking(param1:Boolean) : void;
     }
 }

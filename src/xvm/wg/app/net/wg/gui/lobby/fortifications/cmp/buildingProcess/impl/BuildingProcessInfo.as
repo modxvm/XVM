@@ -3,13 +3,13 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
     import flash.display.MovieClip;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.infrastructure.interfaces.entity.IFocusContainer;
+    import flash.events.MouseEvent;
     import flash.text.TextField;
     import net.wg.gui.lobby.fortifications.cmp.build.impl.OrderInfoCmp;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.advanced.DashLine;
     import net.wg.gui.lobby.fortifications.data.buildingProcess.BuildingProcessInfoVO;
     import flash.display.InteractiveObject;
-    import flash.events.MouseEvent;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import net.wg.gui.utils.ComplexTooltipHelper;
@@ -31,6 +31,11 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
         public static var BUY_BUILDING:String = "buyBuilding";
         
         private static var DASH_LINE_PADDING:uint = 18;
+        
+        private static function onRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+        }
         
         public var buildingName:TextField = null;
         
@@ -59,7 +64,7 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
         {
             this.buildingName = null;
             this.statusMsg.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-            this.statusMsg.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+            this.statusMsg.removeEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             this.statusMsg = null;
             this.buildingImg = null;
             this.longDescription = null;
@@ -93,7 +98,7 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
             this.buildingName.htmlText = this.model.buildingName;
             this.statusMsg.htmlText = this.model.statusMsg;
             this.statusMsg.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-            this.statusMsg.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+            this.statusMsg.addEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             this.buildingImg.gotoAndStop(this.model.buildingID);
             this.longDescription.htmlText = this.model.longDescr;
             this.applyButton.label = this.model.buttonLabel;
@@ -127,11 +132,6 @@ package net.wg.gui.lobby.fortifications.cmp.buildingProcess.impl
         private function onRollOverHandler(param1:MouseEvent) : void
         {
             App.toolTipMgr.showComplex(this.model.statusIconTooltip);
-        }
-        
-        private function onRollOutHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
         }
         
         private function onClickHandler(param1:ButtonEvent) : void

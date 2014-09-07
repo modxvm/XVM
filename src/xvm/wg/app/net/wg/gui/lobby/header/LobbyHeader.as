@@ -2,23 +2,29 @@ package net.wg.gui.lobby.header
 {
     import net.wg.infrastructure.base.meta.impl.LobbyHeaderMeta;
     import net.wg.infrastructure.base.meta.ILobbyHeaderMeta;
-    import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
-    import flash.display.MovieClip;
-    import flash.text.TextField;
-    import net.wg.gui.components.controls.RegionDropdownMenu;
-    import net.wg.gui.components.common.ticker.Ticker;
-    import net.wg.gui.components.controls.VoiceWave;
-    import net.wg.gui.components.controls.IconTextButton;
+    import net.wg.gui.interfaces.IHelpLayoutComponent;
+    import flash.display.Sprite;
+    import net.wg.gui.lobby.header.mainMenuButtonBar.MainMenuButtonBar;
+    import net.wg.gui.lobby.header.headerButtonBar.HeaderButtonBar;
+    import net.wg.gui.lobby.header.mainMenuButtonBar.MainMenuHelper;
+    import net.wg.gui.lobby.header.headerButtonBar.HeaderButtonsHelper;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
-    import net.wg.gui.events.HeaderEvent;
-    import net.wg.gui.events.HeaderButtonBarEvent;
     import scaleform.clik.events.ButtonEvent;
-    import net.wg.infrastructure.events.VoiceChatEvent;
-    import net.wg.data.Aliases;
-    import scaleform.clik.events.ListEvent;
-    import scaleform.clik.data.DataProvider;
+    import net.wg.gui.lobby.header.events.HeaderEvents;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.constants.Values;
+    import net.wg.gui.lobby.header.headerButtonBar.HeaderButton;
+    import net.wg.gui.lobby.header.vo.HeaderButtonVo;
+    import net.wg.data.Aliases;
+    import net.wg.gui.lobby.header.vo.HBC_AccountDataVo;
+    import net.wg.data.VO.UserVO;
+    import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
+    import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
+    import net.wg.gui.lobby.header.vo.HBC_BattleTypeVo;
+    import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
+    import net.wg.data.constants.IconsTypes;
+    import net.wg.gui.lobby.headerTutorial.HeaderTutorialStates;
     
     public class LobbyHeader extends LobbyHeaderMeta implements ILobbyHeaderMeta, IHelpLayoutComponent
     {
@@ -26,411 +32,384 @@ package net.wg.gui.lobby.header
         public function LobbyHeader()
         {
             super();
-            this.visible = false;
+            this._headerButtonsHelper = new HeaderButtonsHelper(this.headerButtonBar);
         }
         
-        private static var INVALIDATE_SERVER_STATS:String = "serverStats";
+        public static var NARROW_SCREEN:String = "narrowScreen";
         
-        private static var MAIN_MENU_ICON:String = "mainMenu.png";
+        public static var WIDE_SCREEN:String = "wideScreen";
         
-        public var logo:MovieClip;
+        public static var MAX_SCREEN:String = "maxScreen";
         
-        public var serverStats:ServerStats;
+        public var centerBg:Sprite = null;
         
-        public var serverInfo:TextField;
+        public var resizeBg:Sprite = null;
         
-        public var regionDD:RegionDropdownMenu;
-        
-        public var tankPanel:TankPanel;
-        
-        public var ticker:Ticker;
-        
-        public var buttonsBlock:MainMenu;
+        public var mainMenuGradient:Sprite = null;
         
         public var fightBtn:FightButton;
         
-        public var voiceWave:VoiceWave;
+        public var mainMenuButtonBar:MainMenuButtonBar;
         
-        public var tutorialControl:TutorialControl;
+        public var headerButtonBar:HeaderButtonBar;
         
-        public var questsControl:QuestsControl;
+        private var _mainMenuHelper:MainMenuHelper;
         
-        public var MenuButton:IconTextButton;
-        
-        public var account:AccountInfo;
-        
-        public var header_bg:MovieClip;
-        
-        public var bg:MovieClip;
-        
-        private var _isAccountNameSet:Boolean = false;
-        
-        private var _serverStats:Object = null;
+        private var _headerButtonsHelper:HeaderButtonsHelper;
         
         private var _isShowHelpLayout:Boolean = false;
         
-        public function as_doDisableNavigation() : void
-        {
-            this.buttonsBlock.bar.setDisableNav(true);
-        }
+        private var _currentScreen:String = "";
         
-        public function as_setScreen(param1:String) : void
-        {
-            this.buttonsBlock.bar.setDisableNav(false);
-            this.buttonsBlock.setCurrent(param1);
-        }
+        private var NARROW_SCREEN_SIZE:Number = 1024;
         
-        public function as_setProfileType(param1:String) : void
-        {
-            this.account.setProfileType(param1);
-        }
+        private var WIDE_SCREEN_SIZE:Number = 1280;
         
-        public function as_disableRoamingDD(param1:Boolean) : void
-        {
-            this.regionDD.enabled = !param1;
-        }
+        private var MAX_SCREEN_SIZE:Number = 1600;
         
-        public function as_setPremiumParams(param1:String, param2:String, param3:Boolean) : void
-        {
-            this.account.setPremiumParams(param1,param2,param3);
-        }
-        
-        public function as_setFreeXP(param1:String, param2:Boolean) : void
-        {
-            this.account.setExp(param1,param2);
-        }
-        
-        public function as_creditsResponse(param1:String) : void
-        {
-            this.account.setCredits(param1);
-        }
-        
-        public function as_goldResponse(param1:String) : void
-        {
-            this.account.setGold(param1);
-        }
-        
-        public function as_setWalletStatus(param1:Object) : void
-        {
-            App.utils.voMgr.walletStatusVO.update(param1);
-            this.account.updateWalletStatus();
-        }
-        
-        public function as_premiumResponse(param1:Boolean) : void
-        {
-            this.account.onPremiumChange(param1);
-        }
-        
-        public function as_setServerStats(param1:Object) : void
-        {
-            this._serverStats = param1;
-            invalidate(INVALIDATE_SERVER_STATS);
-        }
-        
-        public function as_setServerInfo(param1:String, param2:String) : void
-        {
-            this.serverInfo.htmlText = param1;
-            this.serverStats.tooltipFullData = param2;
-        }
-        
-        public function as_nameResponse(param1:String, param2:String, param3:String, param4:Boolean, param5:Boolean) : void
-        {
-            this.tankPanel.setAccountName(param1,param2,param3,param4,param5);
-            this._isAccountNameSet = true;
-            this.visible = true;
-        }
-        
-        public function as_setClanEmblem(param1:String) : void
-        {
-            this.tankPanel.setClanEmblem(param1);
-        }
-        
-        public function as_setTankName(param1:String) : void
-        {
-            this.tankPanel.setTankName(param1);
-        }
-        
-        public function as_setTankType(param1:String) : void
-        {
-            this.tankPanel.setTankType(param1);
-        }
-        
-        public function as_setTankElite(param1:Boolean) : void
-        {
-            this.tankPanel.setTankElite(param1);
-        }
-        
-        public function showHelpLayout() : void
-        {
-            if(!this._isShowHelpLayout)
-            {
-                this._isShowHelpLayout = true;
-                App.helpLayout.createBackground();
-                this.MenuButton.showHelpLayout();
-                this.account.premiumBtn.showHelpLayout();
-                this.account.accountRefillBtn.showHelpLayout();
-                this.account.goldExchangeBtn.showHelpLayout();
-                this.account.expGatheringBtn.showHelpLayout();
-                this.fightBtn.showHelpLayout();
-                this.buttonsBlock.bar.showHelpLayout();
-            }
-        }
-        
-        public function closeHelpLayout() : void
-        {
-            if(this._isShowHelpLayout)
-            {
-                this._isShowHelpLayout = false;
-                this.MenuButton.closeHelpLayout();
-                this.account.premiumBtn.closeHelpLayout();
-                this.account.accountRefillBtn.closeHelpLayout();
-                this.account.goldExchangeBtn.closeHelpLayout();
-                this.account.expGatheringBtn.closeHelpLayout();
-                this.fightBtn.closeHelpLayout();
-                this.buttonsBlock.bar.closeHelpLayout();
-            }
-        }
-        
-        override public function get visible() : Boolean
-        {
-            return super.visible;
-        }
-        
-        override public function set visible(param1:Boolean) : void
-        {
-            super.visible = (param1) && (this._isAccountNameSet);
-        }
-        
-        override protected function configUI() : void
-        {
-            constraints = new Constraints(this,ConstrainMode.REFLOW);
-            constraints.addElement("serverStats",this.serverStats,Constraints.TOP | Constraints.LEFT);
-            constraints.addElement("account",this.account,Constraints.TOP | Constraints.RIGHT);
-            constraints.addElement("MenuButton",this.MenuButton,Constraints.LEFT);
-            constraints.addElement("header_bg",this.header_bg,Constraints.LEFT | Constraints.RIGHT);
-            constraints.addElement("bg",this.bg,Constraints.CENTER_H);
-            constraints.addElement("tutorialControl",this.tutorialControl,Constraints.LEFT);
-            constraints.addElement("fightBtn",this.fightBtn,Constraints.CENTER_H);
-            constraints.addElement("voiceWave",this.voiceWave,Constraints.CENTER_H);
-            constraints.addElement("tankPanel",this.tankPanel,Constraints.CENTER_H);
-            constraints.addElement("serverInfo",this.serverInfo,Constraints.CENTER_H);
-            this.MenuButton.iconSource = MAIN_MENU_ICON;
-            this.addListeners();
-            this.serverStats.focusable = false;
-            this.serverInfo.mouseEnabled = false;
-        }
-        
-        private function addListeners() : void
-        {
-            addEventListener(HeaderEvent.SHOW_EXCHANGE,this.onShowExchangeWindow,false,0,true);
-            addEventListener(HeaderEvent.SHOW_XP_EXCHANGE,this.onShowExchangeXPWindow,false,0,true);
-            addEventListener(HeaderEvent.LOAD_VIEW,this.onMenuItemClick,false,0,true);
-            addEventListener(HeaderEvent.SHOW_PREMIUM,this.onShowPremiumHandler,false,0,true);
-            addEventListener(HeaderEvent.PAYMENT_BTN_CLICK,this.onPaymentClick,false,0,true);
-            this.buttonsBlock.bar.addEventListener(HeaderButtonBarEvent.RESIZE,this.resizeBtnsBlock);
-            this.MenuButton.addEventListener(ButtonEvent.CLICK,this.onMenuButtonClick,false,0,true);
-            App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.setSpeaking);
-            App.voiceChatMgr.addEventListener(VoiceChatEvent.STOP_SPEAKING,this.setSpeaking);
-        }
+        private var _currentHeaderHelpStepId:String = "";
         
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            this.checkRoaming();
-            registerFlashComponentS(this.tutorialControl,Aliases.TUTORIAL_CONTROL);
-            registerFlashComponentS(this.questsControl,Aliases.QUESTS_CONTROL);
-            registerFlashComponentS(this.ticker,Aliases.TICKER);
-            registerFlashComponentS(this.fightBtn,Aliases.FIGHT_BUTTON);
         }
         
-        private function checkRoaming() : void
+        override protected function configUI() : void
         {
-            var _loc1_:Boolean = App.globalVarsMgr.isRoamingEnabledS();
-            var _loc2_:Array = getServersS();
-            var _loc3_:Boolean = (_loc1_) && _loc2_.length > 1;
-            this.regionDD.visible = _loc3_;
-            this.serverInfo.visible = !_loc3_;
-            if(_loc3_)
-            {
-                this.setupServersData(_loc2_);
-                this.regionDD.addEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
-                this.regionDD.x = 100;
-                this.serverStats.x = 300;
-            }
-            else
-            {
-                this.serverStats.x = 155;
-            }
+            super.configUI();
+            constraints = new Constraints(this,ConstrainMode.REFLOW);
+            constraints.addElement("centerBg",this.centerBg,Constraints.CENTER_H);
+            constraints.addElement("resizeBg",this.resizeBg,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+            constraints.addElement("fightBtn",this.fightBtn,Constraints.CENTER_H);
+            constraints.addElement("mainMenuButtonBar",this.mainMenuButtonBar,Constraints.CENTER_H);
+            constraints.addElement("mainMenuGradient",this.mainMenuGradient,Constraints.CENTER_H);
+            this.centerBg.mouseChildren = this.centerBg.mouseEnabled = false;
+            this.mainMenuGradient.mouseEnabled = false;
+            this.mainMenuGradient.mouseChildren = false;
+            this.hitArea = this.resizeBg;
+            this._mainMenuHelper = new MainMenuHelper(this.mainMenuButtonBar);
+            this.updateSize();
+            this._headerButtonsHelper.setData();
+            this.fightBtn.addEventListener(ButtonEvent.CLICK,this.onFightClick);
+            this.headerButtonBar.updateCenterItem(this.fightBtn.getRectangle());
+            this.mainMenuButtonBar.addEventListener(ButtonEvent.CLICK,this.mainMenuButtonClickHandler,false,0,true);
+            this.headerButtonBar.addEventListener(ButtonEvent.CLICK,this.headerButtonClickHandler,false,0,true);
+            this.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION,this.onHeaderItemsReposition,false,0,true);
         }
         
-        public function as_setPeripheryChanging(param1:Boolean) : void
+        private function onFightClick(param1:ButtonEvent) : void
         {
-            if(!param1)
-            {
-                this.regionDD.removeEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
-                this.setupServersData(getServersS());
-                this.regionDD.addEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
-            }
-        }
-        
-        private function setupServersData(param1:Array) : void
-        {
-            var _loc5_:ServerVO = null;
-            var _loc2_:DataProvider = new DataProvider();
-            var _loc3_:* = -1;
-            var _loc4_:* = 0;
-            while(_loc4_ < param1.length)
-            {
-                _loc5_ = new ServerVO(param1[_loc4_]);
-                _loc2_.push(_loc5_);
-                if(_loc5_.selected)
-                {
-                    _loc3_ = _loc4_;
-                }
-                _loc4_++;
-            }
-            this.regionDD.dataProvider = _loc2_;
-            this.regionDD.selectedIndex = _loc3_;
-        }
-        
-        override protected function onDispose() : void
-        {
-            super.onDispose();
-            this.removeListeners();
-            this.disposeComponents();
-            this.cleanRefs();
-        }
-        
-        private function cleanRefs() : void
-        {
-            var _loc1_:String = null;
-            this.header_bg = null;
-            this.bg = null;
-            this.MenuButton = null;
-            this.serverInfo = null;
-            this.tankPanel = null;
-            this.serverStats = null;
-            this.buttonsBlock = null;
-            this.voiceWave = null;
-            this.account = null;
-            this.fightBtn = null;
-            this.ticker = null;
-            this.tutorialControl = null;
-            this.regionDD = null;
-            this.questsControl = null;
-            for(_loc1_ in this._serverStats)
-            {
-                delete this._serverStats[_loc1_];
-                true;
-            }
-            this._serverStats = null;
-            this.logo = null;
-        }
-        
-        private function disposeComponents() : void
-        {
-            this.MenuButton.dispose();
-            this.regionDD.dispose();
-            this.tankPanel.dispose();
-            this.serverStats.dispose();
-            this.buttonsBlock.dispose();
-            this.voiceWave.dispose();
-            this.account.dispose();
-        }
-        
-        private function removeListeners() : void
-        {
-            removeEventListener(HeaderEvent.SHOW_EXCHANGE,this.onShowExchangeWindow);
-            removeEventListener(HeaderEvent.SHOW_XP_EXCHANGE,this.onShowExchangeXPWindow);
-            removeEventListener(HeaderEvent.LOAD_VIEW,this.onMenuItemClick);
-            removeEventListener(HeaderEvent.SHOW_PREMIUM,this.onShowPremiumHandler);
-            removeEventListener(HeaderEvent.PAYMENT_BTN_CLICK,this.onPaymentClick);
-            this.MenuButton.removeEventListener(ButtonEvent.CLICK,this.onMenuButtonClick);
-            this.regionDD.removeEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
-            App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.setSpeaking);
-            App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.setSpeaking);
+            fightClickS(0,"");
         }
         
         override protected function draw() : void
         {
-            var _loc1_:* = NaN;
-            if((isInvalid(INVALIDATE_SERVER_STATS)) && (this._serverStats))
-            {
-                this.serverStats.setValues(this._serverStats);
-            }
+            super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
                 constraints.update(width,height);
-                this.buttonsBlock.x = Math.round((App.appWidth - this.buttonsBlock.bar.bg.width) / 2);
-                _loc1_ = App.appWidth - this.ticker.width >> 1;
-                if(_loc1_ - this.account.width < 0)
-                {
-                    _loc1_ = _loc1_ + ((this.MenuButton.x + this.MenuButton.width - this.account.width >> 1) + 15);
-                }
-                else
-                {
-                    _loc1_ = _loc1_ - 15;
-                }
-                this.ticker.x = _loc1_;
-                this.fightBtn.x = this.fightBtn.x ^ 0;
+                this.updateSize();
             }
         }
         
-        private function resizeBtnsBlock(param1:HeaderButtonBarEvent) : void
+        private function updateSize() : void
         {
-            this.buttonsBlock.x = Math.round((App.appWidth - param1.width) / 2);
-        }
-        
-        private function onPaymentClick(param1:HeaderEvent) : void
-        {
-            onPaymentS();
-        }
-        
-        private function onMenuButtonClick(param1:ButtonEvent) : void
-        {
-            showLobbyMenuS();
-        }
-        
-        private function onShowExchangeWindow(param1:HeaderEvent) : void
-        {
-            param1.stopImmediatePropagation();
-            showExchangeWindow({});
-        }
-        
-        private function onShowExchangeXPWindow(param1:HeaderEvent) : void
-        {
-            param1.stopImmediatePropagation();
-            showExchangeXPWindow({});
-        }
-        
-        private function onMenuItemClick(param1:HeaderEvent) : void
-        {
-            menuItemClickS(param1.id);
-        }
-        
-        private function onShowPremiumHandler(param1:HeaderEvent) : void
-        {
-            showPremiumDialogS(param1);
-        }
-        
-        private function setSpeaking(param1:VoiceChatEvent) : void
-        {
-            if(param1.isHimself())
+            this.headerButtonBar.updateCenterItem(this.fightBtn.getRectangle());
+            this._currentScreen = WIDE_SCREEN;
+            var _loc1_:Number = 0;
+            var _loc2_:Number = 0;
+            if(App.appWidth <= this.NARROW_SCREEN_SIZE)
             {
-                if(param1.type == VoiceChatEvent.START_SPEAKING)
-                {
-                    this.voiceWave.setSpeaking(true);
-                }
-                if(param1.type == VoiceChatEvent.STOP_SPEAKING)
-                {
-                    this.voiceWave.setSpeaking(false);
-                }
+                this._currentScreen = NARROW_SCREEN;
+            }
+            else if(App.appWidth >= this.WIDE_SCREEN_SIZE)
+            {
+                this._currentScreen = MAX_SCREEN;
+                _loc1_ = 1;
+                _loc2_ = Math.min((App.appWidth - this.WIDE_SCREEN_SIZE) / (this.MAX_SCREEN_SIZE - this.WIDE_SCREEN_SIZE),1);
+            }
+            else
+            {
+                _loc1_ = Math.min((App.appWidth - this.NARROW_SCREEN_SIZE) / (this.WIDE_SCREEN_SIZE - this.NARROW_SCREEN_SIZE),1);
+            }
+            
+            this.headerButtonBar.updateScreen(this._currentScreen,App.appWidth,_loc1_,_loc2_);
+        }
+        
+        private function onHeaderItemsReposition(param1:HeaderEvents) : void
+        {
+            if(this._currentHeaderHelpStepId != Values.EMPTY_STR)
+            {
+                this.as_highlightTutorialControls(this._currentHeaderHelpStepId);
             }
         }
         
-        private function changeRegion(param1:ListEvent) : void
+        override protected function onDispose() : void
         {
-            reloginS(ServerVO(param1.itemData).id);
+            this.mainMenuButtonBar.removeEventListener(ButtonEvent.CLICK,this.mainMenuButtonClickHandler);
+            this.mainMenuButtonBar.dispose();
+            this.mainMenuButtonBar = null;
+            this.headerButtonBar.removeEventListener(ButtonEvent.CLICK,this.headerButtonClickHandler);
+            this.headerButtonBar.removeEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION,this.onHeaderItemsReposition);
+            this.headerButtonBar.dispose();
+            this.headerButtonBar = null;
+            this._mainMenuHelper.dispose();
+            this._mainMenuHelper = null;
+            this.fightBtn.removeEventListener(ButtonEvent.CLICK,this.onFightClick);
+            this._headerButtonsHelper.dispose();
+            this._headerButtonsHelper = null;
+            super.onDispose();
+        }
+        
+        protected function mainMenuButtonClickHandler(param1:ButtonEvent) : void
+        {
+            if(param1.target.data != null)
+            {
+                menuItemClickS(param1.target.data.value);
+            }
+        }
+        
+        protected function headerButtonClickHandler(param1:ButtonEvent) : void
+        {
+            var _loc2_:HeaderButton = HeaderButton(param1.target);
+            var _loc3_:HeaderButtonVo = HeaderButtonVo(_loc2_.data);
+            switch(_loc3_.id)
+            {
+                case HeaderButtonsHelper.ITEM_ID_SETTINGS:
+                    showLobbyMenuS();
+                    break;
+                case HeaderButtonsHelper.ITEM_ID_ACCOUNT:
+                    App.popoverMgr.show(_loc2_,Aliases.ACCOUNT_POPOVER,null,_loc2_);
+                    break;
+                case HeaderButtonsHelper.ITEM_ID_PREM:
+                    showPremiumDialogS();
+                    break;
+                case HeaderButtonsHelper.ITEM_ID_SQUAD:
+                    showSquadS();
+                    break;
+                case HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR:
+                    App.popoverMgr.show(_loc2_,Aliases.BATTLE_TYPE_SELECT_POPOVER,null,_loc2_);
+                    break;
+                case HeaderButtonsHelper.ITEM_ID_GOLD:
+                    onPaymentS();
+                    break;
+                case HeaderButtonsHelper.ITEM_ID_SILVER:
+                    showExchangeWindowS();
+                    break;
+                case HeaderButtonsHelper.ITEM_ID_FREEXP:
+                    showExchangeXPWindowS();
+                    break;
+            }
+        }
+        
+        public function as_setScreen(param1:String) : void
+        {
+            this.mainMenuButtonBar.setDisableNav(false);
+            this._mainMenuHelper.setCurrent(param1);
+        }
+        
+        public function as_doDisableNavigation() : void
+        {
+            this.mainMenuButtonBar.setDisableNav(true);
+        }
+        
+        public function as_nameResponse(param1:String, param2:String, param3:String, param4:Boolean, param5:Boolean) : void
+        {
+            var _loc6_:HBC_AccountDataVo = HBC_AccountDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
+            if(_loc6_)
+            {
+                _loc6_.userVO = new UserVO({"fullName":param1,
+                "userName":param2,
+                "clanAbbrev":param3
+            });
+            _loc6_.isTeamKiller = param4;
+            _loc6_.isClan = param5;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
         }
     }
+    
+    public function as_setClanEmblem(param1:String) : void
+    {
+        var _loc2_:HBC_AccountDataVo = HBC_AccountDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT));
+        if(_loc2_)
+        {
+            _loc2_.clanEmblemId = (param1) && !(param1 == Values.EMPTY_STR)?param1:null;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_ACCOUNT);
+        }
+    }
+    
+    public function as_setPremiumParams(param1:Boolean, param2:String, param3:String, param4:Boolean) : void
+    {
+        var _loc5_:HBC_PremDataVo = HBC_PremDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_PREM));
+        if(_loc5_)
+        {
+            _loc5_.isPrem = param1;
+            _loc5_.btnLabel = param2;
+            _loc5_.doLabel = param3;
+            _loc5_.isYear = param4;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_PREM);
+        }
+    }
+    
+    public function as_updateSquad(param1:Boolean) : void
+    {
+        var _loc2_:HBC_SquadDataVo = HBC_SquadDataVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_SQUAD));
+        if(_loc2_)
+        {
+            _loc2_.isInSquad = param1;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+        }
+    }
+    
+    public function as_updateBattleType(param1:String, param2:String, param3:Boolean) : void
+    {
+        var _loc4_:HBC_BattleTypeVo = HBC_BattleTypeVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR));
+        if(_loc4_)
+        {
+            _loc4_.battleTypeName = param1;
+            _loc4_.battleTypeIcon = param2;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
+            this.as_doDisableHeaderButton(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR,param3);
+        }
+    }
+    
+    public function as_goldResponse(param1:String) : void
+    {
+        var _loc2_:HBC_FinanceVo = HBC_FinanceVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_GOLD));
+        if(_loc2_)
+        {
+            _loc2_.money = param1;
+            _loc2_.iconId = IconsTypes.GOLD;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_GOLD);
+        }
+    }
+    
+    public function as_creditsResponse(param1:String) : void
+    {
+        var _loc2_:HBC_FinanceVo = HBC_FinanceVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_SILVER));
+        if(_loc2_)
+        {
+            _loc2_.money = param1;
+            _loc2_.iconId = IconsTypes.CREDITS;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_SILVER);
+        }
+    }
+    
+    public function as_setFreeXP(param1:String, param2:Boolean) : void
+    {
+        var _loc3_:HBC_FinanceVo = HBC_FinanceVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_FREEXP));
+        if(_loc3_)
+        {
+            _loc3_.money = param1;
+            _loc3_.iconId = IconsTypes.FREE_XP;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_FREEXP);
+        }
+    }
+    
+    public function as_doDisableHeaderButton(param1:String, param2:Boolean) : void
+    {
+        this._headerButtonsHelper.setButtonEnabled(param1,param2);
+    }
+    
+    public function as_setWalletStatus(param1:Object) : void
+    {
+        App.utils.voMgr.walletStatusVO.update(param1);
+        this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_GOLD);
+        this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_FREEXP);
+    }
+    
+    public function showHelpLayout() : void
+    {
+        if(!this._isShowHelpLayout)
+        {
+            this._isShowHelpLayout = true;
+            App.helpLayout.createBackground();
+            this.fightBtn.showHelpLayout();
+            this.mainMenuButtonBar.showHelpLayout();
+            this.headerButtonBar.showHelpLayout();
+        }
+    }
+    
+    public function closeHelpLayout() : void
+    {
+        if(this._isShowHelpLayout)
+        {
+            this._isShowHelpLayout = false;
+            this.hideHelpLayout();
+        }
+    }
+    
+    public function as_highlightTutorialControls(param1:String) : void
+    {
+        this.hideHelpLayout();
+        this._isShowHelpLayout = true;
+        this._currentHeaderHelpStepId = param1;
+        switch(param1)
+        {
+            case HeaderTutorialStates.STEP1:
+                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_SETTINGS]);
+                break;
+            case HeaderTutorialStates.STEP2:
+                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_ACCOUNT]);
+                break;
+            case HeaderTutorialStates.STEP3:
+                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_PREM]);
+                break;
+            case HeaderTutorialStates.STEP4:
+                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_SQUAD]);
+                break;
+            case HeaderTutorialStates.STEP5:
+                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR]);
+                break;
+            case HeaderTutorialStates.STEP6:
+                this.headerButtonBar.showFinanceHelpLayout();
+                break;
+        }
+    }
+    
+    private function hideHelpLayout() : void
+    {
+        this.fightBtn.closeHelpLayout();
+        this.mainMenuButtonBar.closeHelpLayout();
+        this.headerButtonBar.closeHelpLayout();
+    }
+    
+    public function as_resetHighlightTutorialControls() : void
+    {
+        this._currentHeaderHelpStepId = Values.EMPTY_STR;
+        this.closeHelpLayout();
+    }
+    
+    private var _actualEnabledVal:Boolean;
+    
+    private var _isInCoolDown:Boolean = false;
+    
+    public function as_disableFightButton(param1:Boolean, param2:String) : void
+    {
+        this._actualEnabledVal = !param1;
+        this.fightBtn.enabled = !this._isInCoolDown?this._actualEnabledVal:!this._isInCoolDown;
+        this.fightBtn.validateNow();
+        App.toolTipMgr.hide();
+    }
+    
+    public function as_setFightButton(param1:String) : void
+    {
+        this.fightBtn.label = param1;
+        this.fightBtn.validateNow();
+    }
+    
+    public function as_setCoolDownForReady(param1:uint) : void
+    {
+        this._isInCoolDown = true;
+        App.utils.scheduler.cancelTask(this.stopReadyCoolDown);
+        this.fightBtn.enabled = false;
+        App.utils.scheduler.scheduleTask(this.stopReadyCoolDown,param1 * 1000);
+    }
+    
+    private function stopReadyCoolDown() : void
+    {
+        this._isInCoolDown = false;
+        this.fightBtn.enabled = this._actualEnabledVal;
+    }
+}
 }

@@ -33,6 +33,8 @@ package net.wg.gui.components.controls
         
         public static var INV_HANDLERS:String = "InvHandlers";
         
+        public static var INV_ROW_WIDTH:String = "InvRowWidth";
+        
         private static var LEFT_PADDING:int = 2;
         
         protected var header:SortableHeaderButtonBar = null;
@@ -91,7 +93,7 @@ package net.wg.gui.components.controls
         
         private var _listSelectedIndex:int = 0;
         
-        private var _rowHeightFixed:Boolean = true;
+        private var _rowHeightFixed:Boolean = false;
         
         private var _scrollbarPadding:Padding = null;
         
@@ -152,6 +154,7 @@ package net.wg.gui.components.controls
         public function set rowWidthAutoResize(param1:Boolean) : void
         {
             this._rowWidthAutoResize = param1;
+            invalidate(INV_ROW_WIDTH);
         }
         
         public function get listLinkage() : String
@@ -338,6 +341,10 @@ package net.wg.gui.components.controls
                 if(isInvalid(INV_UNIQ_KEY))
                 {
                     this.list.uniqKeyForAutoSelect = this._uniqKeyForAutoSelect;
+                }
+                if(isInvalid(INV_ROW_WIDTH))
+                {
+                    this.list.widthAutoResize = this._rowWidthAutoResize;
                 }
                 if(isInvalid(INV_HEADER_DATA))
                 {

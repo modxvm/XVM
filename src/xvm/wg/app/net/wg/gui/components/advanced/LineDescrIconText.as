@@ -90,11 +90,13 @@ package net.wg.gui.components.advanced
             {
                 gotoAndPlay("up");
                 super.applyText(param1);
+                textComponent.textField.alpha = 1;
             }
             else
             {
                 gotoAndPlay("disabled");
                 super.applyText("--");
+                textComponent.textField.alpha = 0.2;
             }
             invalidateSize();
             invalidate(DESCRIPTION_TEXT_INVALID);

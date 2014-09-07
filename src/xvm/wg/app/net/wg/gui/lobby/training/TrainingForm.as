@@ -39,6 +39,8 @@ package net.wg.gui.lobby.training
         
         public var createButon:SoundButtonEx;
         
+        public var leaveButton:SoundButtonEx;
+        
         public var titleField:TextField;
         
         public var descriptionLabel:TextField;
@@ -80,6 +82,8 @@ package net.wg.gui.lobby.training
             this.descriptionLabel.text = MENU.TRAINING_DESCRIPTION;
             constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
             this.createButon.addEventListener(ButtonEvent.CLICK,this.showCreateTraining);
+            this.leaveButton.addEventListener(ButtonEvent.CLICK,this.leaveTraining);
+            this.leaveButton.label = MENU.TRAINING_LEAVEBUTTON;
             addEventListener(TrainingEvent.OPEN_TRAINING_ROOM,this.onOpenRoom);
             App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
         }
@@ -107,6 +111,7 @@ package net.wg.gui.lobby.training
         {
             App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
             this.createButon.removeEventListener(ButtonEvent.CLICK,this.showCreateTraining);
+            this.leaveButton.removeEventListener(ButtonEvent.CLICK,this.leaveTraining);
             removeEventListener(TrainingEvent.OPEN_TRAINING_ROOM,this.onOpenRoom);
             this.sb.dispose();
             this.sb = null;
@@ -118,6 +123,8 @@ package net.wg.gui.lobby.training
             this.battleIconBig = null;
             this.createButon.dispose();
             this.createButon = null;
+            this.leaveButton.dispose();
+            this.leaveButton = null;
             this.titleField = null;
             this.descriptionLabel = null;
             this.listTitle = null;
@@ -155,6 +162,11 @@ package net.wg.gui.lobby.training
         private function showCreateTraining(param1:ButtonEvent) : void
         {
             createTrainingRequestS();
+        }
+        
+        private function leaveTraining(param1:ButtonEvent) : void
+        {
+            onLeaveS();
         }
         
         private function handleEscape(param1:InputEvent) : void

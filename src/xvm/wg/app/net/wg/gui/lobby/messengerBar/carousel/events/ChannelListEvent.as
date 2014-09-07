@@ -1,18 +1,31 @@
 package net.wg.gui.lobby.messengerBar.carousel.events
 {
-    import scaleform.clik.events.ListEvent;
-    import scaleform.clik.interfaces.IListItemRenderer;
+    import flash.events.Event;
     
-    public class ChannelListEvent extends ListEvent
+    public class ChannelListEvent extends Event
     {
         
-        public function ChannelListEvent(param1:String, param2:Boolean = false, param3:Boolean = true, param4:int = -1, param5:int = -1, param6:int = -1, param7:IListItemRenderer = null, param8:Object = null, param9:uint = 0, param10:uint = 0, param11:Boolean = false)
+        public function ChannelListEvent(param1:String, param2:Number, param3:Boolean = false, param4:Boolean = true)
         {
-            super(param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11);
+            super(param1,param3,param4);
+            this.clientID = param2;
         }
         
-        public static var OPEN_CHANNEL_CLICK:String = "openChannelClick";
+        public static var OPEN_CHANNEL:String = "openChannel";
         
-        public static var CLOSE_CHANNEL_CLICK:String = "closeChannelClick";
+        public static var CLOSE_CHANNEL:String = "closeChannel";
+        
+        public static var MINIMIZE_ALL_CHANNELS:String = "minimizeAllChannels";
+        
+        public static var CLOSE_ALL_EXCEPT_CURRENT:String = "closeAllExceptCurrent";
+        
+        public static var CLOSE_ALL:String = "closeAll";
+        
+        public var clientID:Number;
+        
+        override public function clone() : Event
+        {
+            return new ChannelListEvent(type,this.clientID,bubbles,cancelable);
+        }
     }
 }

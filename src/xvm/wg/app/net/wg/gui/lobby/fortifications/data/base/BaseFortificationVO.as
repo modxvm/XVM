@@ -10,8 +10,6 @@ package net.wg.gui.lobby.fortifications.data.base
             super(param1);
         }
         
-        private var _isCommander:Boolean = false;
-        
         private var _level:uint = 0;
         
         private var _clanSize:uint = 0;
@@ -48,16 +46,6 @@ package net.wg.gui.lobby.fortifications.data.base
         public function set clanCommanderName(param1:String) : void
         {
             this._clanCommanderName = param1;
-        }
-        
-        public function get isCommander() : Boolean
-        {
-            return this._isCommander;
-        }
-        
-        public function set isCommander(param1:Boolean) : void
-        {
-            this._isCommander = param1;
         }
         
         public function get level() : uint

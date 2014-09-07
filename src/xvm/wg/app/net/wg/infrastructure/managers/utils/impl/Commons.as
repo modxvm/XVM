@@ -106,6 +106,25 @@ package net.wg.infrastructure.managers.utils.impl
             return null;
         }
         
+        public function cleanupDynamicObjectsCouple(param1:Object, param2:Object) : Object
+        {
+            var _loc4_:* = undefined;
+            var _loc3_:Array = [];
+            for(_loc4_ in param1)
+            {
+                _loc3_.push(_loc4_);
+            }
+            for each(_loc4_ in _loc3_)
+            {
+                delete param1[_loc4_];
+                true;
+                delete param2[_loc4_];
+                true;
+            }
+            _loc3_.splice(0,_loc3_.length);
+            return null;
+        }
+        
         public function releaseReferences(param1:Object, param2:Boolean = true) : void
         {
             var _loc3_:String = null;
@@ -299,6 +318,34 @@ package net.wg.infrastructure.managers.utils.impl
             return _loc9_;
         }
         
+        public function truncateTextFieldText(param1:TextField, param2:String, param3:String = "..") : String
+        {
+            var _loc6_:String = null;
+            var _loc7_:uint = 0;
+            var _loc4_:uint = param1.width / param1.scaleX;
+            var _loc5_:uint = 4;
+            param1.text = param2;
+            if(param1.textWidth + _loc5_ > _loc4_)
+            {
+                _loc6_ = param2;
+                _loc7_ = param3.length;
+                while(_loc6_.length > 0 && _loc7_ > 0)
+                {
+                    _loc6_ = param2.substring(0,param2.length - _loc7_) + param3;
+                    param1.text = _loc6_;
+                    if(param1.textWidth + _loc5_ > _loc4_)
+                    {
+                        _loc7_++;
+                    }
+                    else
+                    {
+                        _loc7_ = 0;
+                    }
+                }
+            }
+            return _loc6_;
+        }
+        
         private function applyTextProps(param1:TextField, param2:String, param3:TextFormat, param4:Object, param5:String, param6:String) : void
         {
             param1.htmlText = param2;
@@ -378,7 +425,7 @@ package net.wg.infrastructure.managers.utils.impl
             }
         }
         
-        public function moveIconToEndOfText(param1:DisplayObject, param2:TextField, param3:int = 0, param4:int = 0) : void
+        public function moveDsiplObjToEndOfText(param1:DisplayObject, param2:TextField, param3:int = 0, param4:int = 0) : void
         {
             var _loc11_:TextLineMetrics = null;
             var _loc5_:* = 2;

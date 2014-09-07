@@ -5,9 +5,10 @@ package net.wg.gui.components.controls
     import flash.display.Sprite;
     import flash.display.DisplayObject;
     import flash.events.MouseEvent;
-    import flash.geom.Point;
+    import net.wg.gui.components.controls.interfaces.ISliderKeyPoint;
     import net.wg.gui.components.controls.events.RangeSliderEvent;
     import scaleform.clik.events.SliderEvent;
+    import flash.geom.Point;
     
     public class RangeSlider extends Slider
     {
@@ -34,34 +35,21 @@ package net.wg.gui.components.controls
         
         public var divisionScaleContainer:Sprite;
         
-        private var _rangeMode:Boolean = true;
-        
-        private var _divisionPointRenderer:String = "SliderDivisionPointUI";
-        
-        private var _divisionStep:Number = 5;
-        
-        private var _divisionLabelStep:Number = 10;
-        
-        private var _minRangeDistance:Number = 0;
-        
-        private var _divisionLabelPostfix:String = "";
-        
         private var _draggingThumb:DisplayObject;
         
-        private var _leftValue:Number = 0;
-        
-        private var _rightValue:Number = 10;
-        
-        public function get divisionPointRenderer() : String
+        override public function set minimum(param1:Number) : void
         {
-            return this._divisionPointRenderer;
+            super.minimum = param1;
+            invalidate(INVALID_RANGE);
         }
         
-        public function set divisionPointRenderer(param1:String) : void
+        override public function set maximum(param1:Number) : void
         {
-            this._divisionPointRenderer = param1;
-            invalidate(INVALID_DIVISION_POINT_RENDERER);
+            super.maximum = param1;
+            invalidate(INVALID_RANGE);
         }
+        
+        private var _rangeMode:Boolean = true;
         
         public function get rangeMode() : Boolean
         {
@@ -74,6 +62,21 @@ package net.wg.gui.components.controls
             invalidate(INVALID_MODE);
         }
         
+        private var _divisionPointRenderer:String = "SliderDivisionPointUI";
+        
+        public function get divisionPointRenderer() : String
+        {
+            return this._divisionPointRenderer;
+        }
+        
+        public function set divisionPointRenderer(param1:String) : void
+        {
+            this._divisionPointRenderer = param1;
+            invalidate(INVALID_DIVISION_POINT_RENDERER);
+        }
+        
+        private var _divisionStep:Number = 5;
+        
         public function get divisionStep() : Number
         {
             return this._divisionStep;
@@ -84,6 +87,8 @@ package net.wg.gui.components.controls
             this._divisionStep = param1;
             invalidate(INVALID_DIVISION_SCALE);
         }
+        
+        private var _divisionLabelStep:Number = 10;
         
         public function get divisionLabelStep() : Number
         {
@@ -96,6 +101,20 @@ package net.wg.gui.components.controls
             invalidate(INVALID_DIVISION_SCALE);
         }
         
+        private var _minRangeDistance:Number = 0;
+        
+        public function get minRangeDistance() : Number
+        {
+            return this._minRangeDistance;
+        }
+        
+        public function set minRangeDistance(param1:Number) : void
+        {
+            this._minRangeDistance = param1;
+        }
+        
+        private var _divisionLabelPostfix:String = "";
+        
         public function get divisionLabelPostfix() : String
         {
             return this._divisionLabelPostfix;
@@ -106,6 +125,8 @@ package net.wg.gui.components.controls
             this._divisionLabelPostfix = param1;
             invalidate(INVALID_DIVISION_SCALE);
         }
+        
+        private var _leftValue:Number = 0;
         
         public function get leftValue() : Number
         {
@@ -119,6 +140,8 @@ package net.wg.gui.components.controls
             this.updateRangeThumbs();
         }
         
+        private var _rightValue:Number = 10;
+        
         public function get rightValue() : Number
         {
             return this._rightValue;
@@ -129,16 +152,6 @@ package net.wg.gui.components.controls
             this._rightValue = param1;
             this.dispatchChangeEvent();
             this.updateRangeThumbs();
-        }
-        
-        public function get minRangeDistance() : Number
-        {
-            return this._minRangeDistance;
-        }
-        
-        public function set minRangeDistance(param1:Number) : void
-        {
-            this._minRangeDistance = param1;
         }
         
         override protected function configUI() : void
@@ -178,6 +191,69 @@ package net.wg.gui.components.controls
             {
                 this.updateRangeThumbs();
             }
+        }
+        
+        protected function updateRangeThumbs() : void
+        {
+            var _loc3_:* = NaN;
+            var _loc1_:Number = track.width - offsetLeft - offsetRight;
+            var _loc2_:Number = _maximum - _minimum;
+            _loc3_ = offsetLeft - thumb.width / 2;
+            this.leftThumb.x = (this._leftValue - _minimum) / _loc2_ * _loc1_ + _loc3_ ^ 0;
+            this.rightThumb.x = (this._rightValue - _minimum) / _loc2_ * _loc1_ + _loc3_ ^ 0;
+            var _loc4_:Number = (this._leftValue - _minimum) / (_maximum - _minimum);
+            this.leftProgressMask.gotoAndStop(Math.round(_loc4_ * this.leftProgressMask.totalFrames));
+            _loc4_ = (this._rightValue - _minimum) / (_maximum - _minimum);
+            track["progress_mask"].gotoAndStop(Math.round(_loc4_ * track["progress_mask"].totalFrames));
+        }
+        
+        private function updateDivisionScale() : void
+        {
+            var _loc1_:ISliderKeyPoint = null;
+            var _loc8_:* = NaN;
+            var _loc9_:* = false;
+            this.clearDivisionScale();
+            var _loc2_:Number = track.width - offsetLeft - offsetRight;
+            var _loc3_:Number = Math.abs(_maximum - _minimum);
+            var _loc4_:int = _loc3_ / this._divisionStep;
+            var _loc5_:Number = _loc2_ / _loc4_;
+            var _loc6_:Class = App.utils.classFactory.getClass(this._divisionPointRenderer);
+            var _loc7_:* = 0;
+            while(_loc7_ <= _loc4_)
+            {
+                _loc1_ = App.utils.classFactory.getComponent(this._divisionPointRenderer,_loc6_);
+                _loc8_ = _minimum + _loc7_ * this._divisionStep;
+                _loc9_ = _loc8_ % this._divisionLabelStep == 0;
+                _loc1_.x = _loc7_ * _loc5_ ^ 0;
+                _loc1_.index = _loc7_;
+                _loc1_.label = _loc9_?_loc8_ + this._divisionLabelPostfix:"";
+                this.divisionScaleContainer.addChild(DisplayObject(_loc1_));
+                _loc7_++;
+            }
+        }
+        
+        private function clearDivisionScale() : void
+        {
+            var _loc1_:ISliderKeyPoint = null;
+            while(this.divisionScaleContainer.numChildren)
+            {
+                _loc1_ = ISliderKeyPoint(this.divisionScaleContainer.getChildAt(0));
+                this.divisionScaleContainer.removeChild(DisplayObject(_loc1_));
+                _loc1_.dispose();
+            }
+        }
+        
+        private function updateMode() : void
+        {
+            thumb.visible = !this._rangeMode;
+            this.leftThumb.visible = this._rangeMode;
+            this.rightThumb.visible = this._rangeMode;
+            this.leftProgressMask.visible = this._rangeMode;
+        }
+        
+        private function dispatchChangeEvent() : void
+        {
+            dispatchEvent(new RangeSliderEvent(SliderEvent.VALUE_CHANGE,false,true,_value,this._leftValue,this._rightValue));
         }
         
         override protected function trackPress(param1:MouseEvent) : void
@@ -262,86 +338,12 @@ package net.wg.gui.components.controls
             }
         }
         
-        protected function updateRangeThumbs() : void
-        {
-            var _loc1_:Number = track.width - offsetLeft - offsetRight;
-            var _loc2_:Number = _maximum - _minimum;
-            var _loc3_:Number = offsetLeft - thumb.width / 2;
-            this.leftThumb.x = (this._leftValue - _minimum) / _loc2_ * _loc1_ + _loc3_ ^ 0;
-            this.rightThumb.x = (this._rightValue - _minimum) / _loc2_ * _loc1_ + _loc3_ ^ 0;
-            var _loc4_:Number = (this._leftValue - _minimum) / (_maximum - _minimum);
-            this.leftProgressMask.gotoAndStop(Math.round(_loc4_ * this.leftProgressMask.totalFrames));
-            _loc4_ = (this._rightValue - _minimum) / (_maximum - _minimum);
-            track["progress_mask"].gotoAndStop(Math.round(_loc4_ * track["progress_mask"].totalFrames));
-        }
-        
         protected function getValueByPosition(param1:MouseEvent) : Number
         {
             var _loc2_:Number = track.width - offsetLeft - offsetRight;
             var _loc3_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
             var _loc4_:Number = _loc3_.x - _dragOffset.x;
             return lockValue((_loc4_ - offsetLeft) / _loc2_ * (_maximum - _minimum) + _minimum);
-        }
-        
-        override public function set minimum(param1:Number) : void
-        {
-            super.minimum = param1;
-            invalidate(INVALID_RANGE);
-        }
-        
-        override public function set maximum(param1:Number) : void
-        {
-            super.maximum = param1;
-            invalidate(INVALID_RANGE);
-        }
-        
-        private function updateDivisionScale() : void
-        {
-            var _loc1_:SliderKeyPoint = null;
-            var _loc8_:* = NaN;
-            var _loc9_:* = false;
-            this.clearDivisionScale();
-            var _loc2_:Number = track.width - offsetLeft - offsetRight;
-            var _loc3_:Number = Math.abs(_maximum - _minimum);
-            var _loc4_:int = _loc3_ / this._divisionStep;
-            var _loc5_:Number = _loc2_ / _loc4_;
-            var _loc6_:Class = App.utils.classFactory.getClass(this._divisionPointRenderer);
-            var _loc7_:* = 0;
-            while(_loc7_ <= _loc4_)
-            {
-                _loc1_ = App.utils.classFactory.getComponent(this._divisionPointRenderer,_loc6_);
-                _loc8_ = _minimum + _loc7_ * this._divisionStep;
-                _loc9_ = _loc8_ % this._divisionLabelStep == 0;
-                _loc1_.x = _loc7_ * _loc5_ ^ 0;
-                _loc1_.index = _loc7_;
-                _loc1_.label = _loc9_?_loc8_ + this._divisionLabelPostfix:"";
-                this.divisionScaleContainer.addChild(_loc1_);
-                _loc7_++;
-            }
-        }
-        
-        private function clearDivisionScale() : void
-        {
-            var _loc1_:SliderKeyPoint = null;
-            while(this.divisionScaleContainer.numChildren)
-            {
-                _loc1_ = this.divisionScaleContainer.getChildAt(0) as SliderKeyPoint;
-                this.divisionScaleContainer.removeChild(_loc1_);
-                _loc1_.dispose();
-            }
-        }
-        
-        private function updateMode() : void
-        {
-            thumb.visible = !this._rangeMode;
-            this.leftThumb.visible = this._rangeMode;
-            this.rightThumb.visible = this._rangeMode;
-            this.leftProgressMask.visible = this._rangeMode;
-        }
-        
-        private function dispatchChangeEvent() : void
-        {
-            dispatchEvent(new RangeSliderEvent(SliderEvent.VALUE_CHANGE,false,true,_value,this._leftValue,this._rightValue));
         }
     }
 }

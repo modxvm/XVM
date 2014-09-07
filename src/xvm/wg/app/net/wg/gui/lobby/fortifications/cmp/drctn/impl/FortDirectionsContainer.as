@@ -4,10 +4,12 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
     import net.wg.gui.lobby.fortifications.cmp.drctn.IFortDirectionsContainer;
     import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
     import net.wg.gui.lobby.fortifications.data.BuildingVO;
+    import net.wg.gui.lobby.fortifications.data.BattleNotifierVO;
     import flash.utils.Dictionary;
+    import net.wg.gui.lobby.fortifications.data.FortModeVO;
+    import net.wg.gui.lobby.fortifications.data.FunctionalStates;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.fortifications.utils.impl.FortCommonUtils;
-    import net.wg.gui.lobby.fortifications.data.FunctionalStates;
     import net.wg.gui.lobby.fortifications.events.DirectionEvent;
     
     public class FortDirectionsContainer extends UIComponentEx implements IFortDirectionsContainer
@@ -17,6 +19,7 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         {
             super();
             this.directions = Vector.<BuildingDirection>([this.direction1,this.direction2,this.direction3,this.direction4]);
+            this.battleNotifiers = Vector.<FortBattleNotifier>([this.dirBattleNotifier1,this.dirBattleNotifier2,this.dirBattleNotifier3,this.dirBattleNotifier4]);
         }
         
         public var direction1:BuildingDirection = null;
@@ -28,6 +31,16 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         public var direction4:BuildingDirection = null;
         
         private var directions:Vector.<BuildingDirection>;
+        
+        public var dirBattleNotifier1:FortBattleNotifier = null;
+        
+        public var dirBattleNotifier2:FortBattleNotifier = null;
+        
+        public var dirBattleNotifier3:FortBattleNotifier = null;
+        
+        public var dirBattleNotifier4:FortBattleNotifier = null;
+        
+        private var battleNotifiers:Vector.<FortBattleNotifier>;
         
         private var isInOpenDirMode:Boolean = false;
         
@@ -55,6 +68,23 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         public function update(param1:Vector.<BuildingVO>) : void
         {
             this.updateDirections(param1,this.directions);
+        }
+        
+        public function updateBattleDirectionNotifiers(param1:Vector.<BattleNotifierVO>) : void
+        {
+            var _loc2_:Vector.<BattleNotifierVO> = new Vector.<BattleNotifierVO>(this.battleNotifiers.length);
+            var _loc3_:* = 0;
+            while(_loc3_ < param1.length)
+            {
+                _loc2_[param1[_loc3_].direction - 1] = param1[_loc3_];
+                _loc3_++;
+            }
+            var _loc4_:* = 0;
+            while(_loc4_ < this.battleNotifiers.length)
+            {
+                this.battleNotifiers[_loc4_].setData(_loc2_[_loc4_]);
+                _loc4_++;
+            }
         }
         
         protected function updateDirections(param1:Vector.<BuildingVO>, param2:Vector.<BuildingDirection>) : void
@@ -90,46 +120,56 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
             }
         }
         
-        public function updateTransportMode(param1:Boolean, param2:Boolean) : void
+        public function updateTransportMode(param1:FortModeVO) : void
         {
+            var _loc2_:FortBattleNotifier = null;
             var _loc3_:BuildingDirection = null;
-            if(!param2)
+            if(!param1.isTutorial || param1.currentMode == FunctionalStates.TRANSPORTING_TUTORIAL_FIRST_STEP)
             {
                 for each(_loc3_ in this.directions)
                 {
-                    _loc3_.disabled = param1;
+                    _loc3_.disabled = param1.isEntering;
                 }
+            }
+            for each(_loc2_ in this.battleNotifiers)
+            {
+                _loc2_.updateTransportMode(param1);
             }
         }
         
-        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void
+        public function updateDirectionsMode(param1:FortModeVO) : void
         {
-            var _loc3_:BuildingDirection = null;
-            switch(FortCommonUtils.instance.getFunctionalState(param1,param2))
+            var _loc3_:FortBattleNotifier = null;
+            var _loc2_:BuildingDirection = null;
+            for each(_loc3_ in this.battleNotifiers)
+            {
+                _loc3_.updateDirectionsMode(param1);
+            }
+            switch(FortCommonUtils.instance.getFunctionalState(param1))
             {
                 case FunctionalStates.ENTER:
                 case FunctionalStates.ENTER_TUTORIAL:
-                    for each(_loc3_ in this.directions)
+                    for each(_loc2_ in this.directions)
                     {
-                        if(!_loc3_.isOpen)
+                        if(!_loc2_.isOpen)
                         {
-                            _loc3_.isActive = true;
+                            _loc2_.isActive = true;
                         }
                         else
                         {
-                            _loc3_.disabled = true;
+                            _loc2_.disabled = true;
                         }
-                        _loc3_.addEventListener(ButtonEvent.CLICK,this.dirClickHandler,false,0,true);
+                        _loc2_.addEventListener(ButtonEvent.CLICK,this.dirClickHandler,false,0,true);
                     }
                     this.isInOpenDirMode = true;
                     break;
                 case FunctionalStates.LEAVE:
                 case FunctionalStates.LEAVE_TUTORIAL:
-                    for each(_loc3_ in this.directions)
+                    for each(_loc2_ in this.directions)
                     {
-                        _loc3_.isActive = false;
-                        _loc3_.disabled = false;
-                        _loc3_.removeEventListener(ButtonEvent.CLICK,this.dirClickHandler);
+                        _loc2_.isActive = false;
+                        _loc2_.disabled = false;
+                        _loc2_.removeEventListener(ButtonEvent.CLICK,this.dirClickHandler);
                     }
                     this.isInOpenDirMode = false;
                     break;
@@ -138,16 +178,27 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         
         override protected function onDispose() : void
         {
-            var _loc2_:BuildingDirection = null;
+            var _loc2_:FortBattleNotifier = null;
+            var _loc3_:BuildingDirection = null;
             var _loc1_:int = this.directions.length - 1;
             while(_loc1_ >= 0)
             {
-                _loc2_ = this.directions[0];
-                _loc2_.removeEventListener(ButtonEvent.CLICK,this.dirClickHandler);
-                _loc2_.dispose();
+                _loc3_ = this.directions[0];
+                _loc3_.removeEventListener(ButtonEvent.CLICK,this.dirClickHandler);
+                _loc3_.dispose();
                 this.directions.splice(0,1);
                 _loc1_--;
             }
+            for each(_loc2_ in this.battleNotifiers)
+            {
+                _loc2_.dispose();
+            }
+            this.dirBattleNotifier1 = null;
+            this.dirBattleNotifier2 = null;
+            this.dirBattleNotifier3 = null;
+            this.dirBattleNotifier4 = null;
+            this.battleNotifiers.splice(0,this.battleNotifiers.length);
+            this.battleNotifiers = null;
             this.direction1 = null;
             this.direction2 = null;
             this.direction3 = null;

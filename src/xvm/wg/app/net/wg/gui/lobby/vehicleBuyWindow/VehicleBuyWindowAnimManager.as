@@ -3,7 +3,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.gui.utils.ExcludeTweenManager;
     import flash.display.MovieClip;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import flash.display.DisplayObject;
     import scaleform.clik.motion.Tween;
     import fl.transitions.easing.Strong;

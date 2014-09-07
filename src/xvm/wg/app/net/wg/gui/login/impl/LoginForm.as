@@ -2,6 +2,8 @@ package net.wg.gui.login.impl
 {
     import scaleform.clik.core.UIComponent;
     import net.wg.gui.login.ILoginForm;
+    import net.wg.gui.components.common.serverStats.ServerVO;
+    import net.wg.gui.components.controls.ServerIndicator;
     import net.wg.gui.components.controls.DropdownMenu;
     import flash.display.MovieClip;
     import flash.text.TextField;
@@ -32,7 +34,12 @@ package net.wg.gui.login.impl
         
         private static var MULTI_SYMBOL:String = "*";
         
-        public var server:DropdownMenu = null;
+        private static function checkListItemDisabledFunction(param1:ServerVO) : Boolean
+        {
+            return param1.csisStatus == ServerIndicator.NOT_AVAILABLE;
+        }
+        
+        private var _server:DropdownMenu = null;
         
         public var capsLockIndicator:MovieClip = null;
         
@@ -69,7 +76,7 @@ package net.wg.gui.login.impl
         override protected function onDispose() : void
         {
             addEventListener(InputEvent.INPUT,this.handleInput);
-            this.server.dispose();
+            this._server.dispose();
             this.loginField = null;
             this.passwordField = null;
             this._rememberPwdCheckbox.dispose();
@@ -116,8 +123,8 @@ package net.wg.gui.login.impl
         {
             this._login.addEventListener(Event.CHANGE,param1);
             this._pass.addEventListener(Event.CHANGE,param1);
-            this.server.addEventListener(Event.CHANGE,param1);
-            this.server.addEventListener(ListEvent.INDEX_CHANGE,param1);
+            this._server.addEventListener(Event.CHANGE,param1);
+            this._server.addEventListener(ListEvent.INDEX_CHANGE,param1);
             this._rememberPwdCheckbox.addEventListener(Event.SELECT,this.onRememberPwdCheckboxToggle);
         }
         
@@ -125,8 +132,8 @@ package net.wg.gui.login.impl
         {
             this._login.removeEventListener(Event.CHANGE,param1);
             this._pass.removeEventListener(Event.CHANGE,param1);
-            this.server.removeEventListener(Event.CHANGE,param1);
-            this.server.removeEventListener(ListEvent.INDEX_CHANGE,param1);
+            this._server.removeEventListener(Event.CHANGE,param1);
+            this._server.removeEventListener(ListEvent.INDEX_CHANGE,param1);
             this._rememberPwdCheckbox.removeEventListener(Event.SELECT,this.onRememberPwdCheckboxToggle);
         }
         
@@ -158,146 +165,155 @@ package net.wg.gui.login.impl
             var _loc5_:uint = 0;
             while(_loc5_ < _loc4_)
             {
-                _loc3_.push({"label":param1[_loc5_].label,
-                "data":param1[_loc5_].data
-            });
-            _loc5_++;
+                _loc3_.push(new ServerVO(param1[_loc5_]));
+                _loc5_++;
+            }
+            if(_loc3_.length > this._server.menuRowCount)
+            {
+                this._server.scrollBar = Linkages.SCROLL_BAR;
+            }
+            else
+            {
+                this._server.scrollBar = Values.EMPTY_STR;
+            }
+            this._server.dataProvider = new DataProvider(_loc3_);
+            this._server.selectedIndex = param2;
+            this._server.menuRowCount = Math.min(this._server.dataProvider.length,MAX_SERVER_ROW_COUNT);
         }
-        if(_loc3_.length > this.server.menuRowCount)
+        
+        public function setErrorMessage(param1:String, param2:int) : void
         {
-            this.server.scrollBar = Linkages.SCROLL_BAR;
+            this.message.htmlText = param1;
+            this.login.highlight = (param2 & ErrorStates.LOGIN_INVALID) == ErrorStates.LOGIN_INVALID;
+            this.pass.highlight = (param2 & ErrorStates.PASSWORD_INVALID) == ErrorStates.PASSWORD_INVALID;
         }
-        else
+        
+        public function setCapsLockState(param1:Boolean) : void
         {
-            this.server.scrollBar = Values.EMPTY_STR;
+            this.capsLockIndicator.visible = param1;
         }
-        this.server.dataProvider = new DataProvider(_loc3_);
-        this.server.selectedIndex = param2;
-        this.server.menuRowCount = Math.min(this.server.dataProvider.length,MAX_SERVER_ROW_COUNT);
-    }
-    
-    public function setErrorMessage(param1:String, param2:int) : void
-    {
-        this.message.htmlText = param1;
-        this.login.highlight = (param2 & ErrorStates.LOGIN_INVALID) == ErrorStates.LOGIN_INVALID;
-        this.pass.highlight = (param2 & ErrorStates.PASSWORD_INVALID) == ErrorStates.PASSWORD_INVALID;
-    }
-    
-    public function setCapsLockState(param1:Boolean) : void
-    {
-        this.capsLockIndicator.visible = param1;
-    }
-    
-    public function setKeyboardLang(param1:String) : void
-    {
-        this.keyboardLang.text = param1;
-    }
-    
-    public function getSelectedServerName() : String
-    {
-        var _loc1_:Number = this.server.selectedIndex;
-        var _loc2_:Object = this.server.dataProvider.requestItemAt(_loc1_);
-        return String(_loc2_.data);
-    }
-    
-    public function get rememberPwdCheckbox() : CheckBox
-    {
-        return this._rememberPwdCheckbox;
-    }
-    
-    public function set rememberPwdCheckbox(param1:CheckBox) : void
-    {
-        this._rememberPwdCheckbox = param1;
-    }
-    
-    public function get registerLink() : HyperLink
-    {
-        return this._registerLink;
-    }
-    
-    public function set registerLink(param1:HyperLink) : void
-    {
-        this._registerLink = param1;
-    }
-    
-    public function get recoveryLink() : HyperLink
-    {
-        return this._recoveryLink;
-    }
-    
-    public function set recoveryLink(param1:HyperLink) : void
-    {
-        this._recoveryLink = param1;
-    }
-    
-    public function get submit() : SoundButton
-    {
-        return this._submit;
-    }
-    
-    public function set submit(param1:SoundButton) : void
-    {
-        this._submit = param1;
-    }
-    
-    public function get login() : TextInput
-    {
-        return this._login;
-    }
-    
-    public function set login(param1:TextInput) : void
-    {
-        this._login = param1;
-    }
-    
-    public function get pass() : TextInput
-    {
-        return this._pass;
-    }
-    
-    public function set pass(param1:TextInput) : void
-    {
-        this._pass = param1;
-    }
-    
-    public function get message() : TextField
-    {
-        return this._message;
-    }
-    
-    public function set message(param1:TextField) : void
-    {
-        this._message = param1;
-    }
-    
-    override protected function configUI() : void
-    {
-        super.configUI();
-        this._message.styleSheet = App.utils.styleSheetManager.getRedHyperlinkCSS();
-        this.server.menuWidth = App.globalVarsMgr.isDevelopmentS()?DEBUG_SERVER_LIST_SIZE:-1;
-        this._submit.enabled = false;
-        this._submit.soundType = SoundTypes.RED_BTN;
-        this.capsLockIndicator.visible = false;
-        this.capsLockIndicator.alpha = 1;
-        App.utils.commons.initTabIndex([this._login.textField,this._pass.textField,this._submit,this._registerLink,this._recoveryLink,this._rememberPwdCheckbox,this.server]);
-        addEventListener(InputEvent.INPUT,this.handleInput);
-    }
-    
-    private function onRememberPwdCheckboxToggle(param1:Event) : void
-    {
-        if(this._isIgrCredentialsReset)
+        
+        public function setKeyboardLang(param1:String) : void
         {
-            this.igrWarning.visible = this.rememberPwdCheckbox.selected;
+            this.keyboardLang.text = param1;
         }
-    }
-    
-    override public function handleInput(param1:InputEvent) : void
-    {
-        if(param1.details.value == InputValue.KEY_DOWN)
+        
+        public function getSelectedServerName() : String
         {
-            this._lastDownKeyCode = param1.details.code;
-            this._lastPressUsedCtrl = param1.details.ctrlKey;
+            var _loc1_:Number = this._server.selectedIndex;
+            var _loc2_:ServerVO = this._server.dataProvider.requestItemAt(_loc1_) as ServerVO;
+            return _loc2_.data;
+        }
+        
+        public function get rememberPwdCheckbox() : CheckBox
+        {
+            return this._rememberPwdCheckbox;
+        }
+        
+        public function set rememberPwdCheckbox(param1:CheckBox) : void
+        {
+            this._rememberPwdCheckbox = param1;
+        }
+        
+        public function get registerLink() : HyperLink
+        {
+            return this._registerLink;
+        }
+        
+        public function set registerLink(param1:HyperLink) : void
+        {
+            this._registerLink = param1;
+        }
+        
+        public function get recoveryLink() : HyperLink
+        {
+            return this._recoveryLink;
+        }
+        
+        public function set recoveryLink(param1:HyperLink) : void
+        {
+            this._recoveryLink = param1;
+        }
+        
+        public function get submit() : SoundButton
+        {
+            return this._submit;
+        }
+        
+        public function set submit(param1:SoundButton) : void
+        {
+            this._submit = param1;
+        }
+        
+        public function get login() : TextInput
+        {
+            return this._login;
+        }
+        
+        public function set login(param1:TextInput) : void
+        {
+            this._login = param1;
+        }
+        
+        public function get pass() : TextInput
+        {
+            return this._pass;
+        }
+        
+        public function set pass(param1:TextInput) : void
+        {
+            this._pass = param1;
+        }
+        
+        public function get message() : TextField
+        {
+            return this._message;
+        }
+        
+        public function set message(param1:TextField) : void
+        {
+            this._message = param1;
+        }
+        
+        override protected function configUI() : void
+        {
+            super.configUI();
+            this._message.styleSheet = App.utils.styleSheetManager.getRedHyperlinkCSS();
+            this._server.checkItemDisabledFunction = checkListItemDisabledFunction;
+            this._server.menuWidth = App.globalVarsMgr.isDevelopmentS()?DEBUG_SERVER_LIST_SIZE:-1;
+            this._submit.enabled = false;
+            this._submit.soundType = SoundTypes.RED_BTN;
+            this.capsLockIndicator.visible = false;
+            this.capsLockIndicator.alpha = 1;
+            App.utils.commons.initTabIndex([this._login.textField,this._pass.textField,this._submit,this._registerLink,this._recoveryLink,this._rememberPwdCheckbox,this._server]);
+            addEventListener(InputEvent.INPUT,this.handleInput);
+        }
+        
+        private function onRememberPwdCheckboxToggle(param1:Event) : void
+        {
+            if(this._isIgrCredentialsReset)
+            {
+                this.igrWarning.visible = this.rememberPwdCheckbox.selected;
+            }
+        }
+        
+        override public function handleInput(param1:InputEvent) : void
+        {
+            if(param1.details.value == InputValue.KEY_DOWN)
+            {
+                this._lastDownKeyCode = param1.details.code;
+                this._lastPressUsedCtrl = param1.details.ctrlKey;
+            }
+        }
+        
+        public function get server() : DropdownMenu
+        {
+            return this._server;
+        }
+        
+        public function set server(param1:DropdownMenu) : void
+        {
+            this._server = param1;
         }
     }
-}
 }

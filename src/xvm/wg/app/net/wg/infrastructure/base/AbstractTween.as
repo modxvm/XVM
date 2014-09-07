@@ -5,9 +5,10 @@ package net.wg.infrastructure.base
     import net.wg.infrastructure.interfaces.ITweenPropertiesVO;
     import net.wg.infrastructure.interfaces.ITweenHandler;
     import flash.display.DisplayObject;
-    import net.wg.utils.IAssertable;
     import net.wg.data.constants.Errors;
     import flash.events.Event;
+    import net.wg.utils.IScheduler;
+    import net.wg.utils.IAssertable;
     import org.idmedia.as3commons.lang.IllegalStateException;
     import net.wg.data.constants.TweenActionsOnRemove;
     
@@ -68,20 +69,24 @@ package net.wg.infrastructure.base
         
         public function set props(param1:ITweenPropertiesVO) : void
         {
-            var _loc2_:IAssertable = App.utils.asserter;
-            _loc2_.assertNotNull(param1,"props in Tween " + Errors.CANT_NULL);
-            var _loc3_:DisplayObject = param1.getTarget();
-            _loc2_.assertNotNull(_loc3_,"_props.target in Tween " + Errors.CANT_NULL);
-            _loc2_.assertNotNull(_loc3_.stage,"target.stage in Tween " + Errors.CANT_NULL);
-            var _loc4_:int = param1.getDuration();
-            _loc2_.assertNotNull(_loc4_,"_props.duration " + Errors.CANT_NULL);
-            _loc2_.assert(_loc4_ > 0,"_props.duration has not maintained value");
-            var _loc5_:ITweenHandler = param1.getHandler();
-            if(_loc5_ != null)
+            this.asserter.assertNotNull(param1,"props in Tween " + Errors.CANT_NULL);
+            var _loc2_:DisplayObject = param1.getTarget();
+            this.asserter.assertNotNull(_loc2_,"_props.target in Tween " + Errors.CANT_NULL);
+            this.asserter.assertNotNull(_loc2_.stage,"target.stage in Tween " + Errors.CANT_NULL);
+            var _loc3_:int = param1.getDuration();
+            this.asserter.assertNotNull(_loc3_,"_props.duration " + Errors.CANT_NULL);
+            this.asserter.assert(_loc3_ > 0,"_props.duration has not maintained value");
+            var _loc4_:ITweenHandler = param1.getHandler();
+            if(_loc4_ != null)
             {
-                this.setHandler(_loc5_);
+                this.setHandler(_loc4_);
             }
             this._props = param1;
+        }
+        
+        public function get isOnCodeBased() : Boolean
+        {
+            return this.props.getIsOnCodeBased();
         }
         
         override protected function onPopulate() : void
@@ -89,20 +94,31 @@ package net.wg.infrastructure.base
             super.onPopulate();
             initialiazeS(this._props);
             this._props.getTarget().addEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
+            this.scheduler.envokeInNextFrame(postponedCheckStateS);
         }
         
         override protected function onDispose() : void
         {
-            var _loc1_:IAssertable = App.utils.asserter;
-            _loc1_.assertNotNull(this._props,"props in Tween " + Errors.CANT_NULL);
-            var _loc2_:DisplayObject = this._props.getTarget();
-            _loc1_.assertNotNull(_loc2_,"_props.target in Tween " + Errors.CANT_NULL);
-            _loc2_.removeEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
+            this.scheduler.cancelTask(postponedCheckStateS);
+            this.asserter.assertNotNull(this._props,"props in Tween " + Errors.CANT_NULL);
+            var _loc1_:DisplayObject = this._props.getTarget();
+            this.asserter.assertNotNull(_loc1_,"_props.target in Tween " + Errors.CANT_NULL);
+            _loc1_.removeEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
             this._props.dispose();
             this._props = null;
             this._handler = null;
             this._memberData = null;
             super.onDispose();
+        }
+        
+        private function get scheduler() : IScheduler
+        {
+            return App.utils.scheduler;
+        }
+        
+        private function get asserter() : IAssertable
+        {
+            return App.utils.asserter;
         }
         
         private function onRemovedFromStage(param1:Event) : void
@@ -119,11 +135,6 @@ package net.wg.infrastructure.base
                     _loc2_ = "unknown actionAfterRemoveFromStage value: " + this._props.getActionAfterRemoveFromStage();
                     throw new IllegalStateException(_loc2_);
             }
-        }
-        
-        public function get isOnCodeBased() : Boolean
-        {
-            return this.props.getIsOnCodeBased();
         }
     }
 }

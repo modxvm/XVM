@@ -91,24 +91,6 @@ package net.wg.gui.lobby.fortifications.windows.impl
             }
         }
         
-        private function findFirstAvailableBuilding() : void
-        {
-            var _loc3_:BuildingProcessListItemVO = null;
-            var _loc1_:int = this.model.listItems.length;
-            var _loc2_:* = 0;
-            while(_loc2_ < _loc1_)
-            {
-                _loc3_ = BuildingProcessListItemVO(this.model.listItems[_loc2_]);
-                if(_loc3_.buildingStatus == BUILDING_STATUS_AVAILABLE)
-                {
-                    this.buildingList.selectListItemByUniqKey("buildingID",_loc3_.buildingID);
-                    requestBuildingInfoS(_loc3_.buildingID);
-                    break;
-                }
-                _loc2_++;
-            }
-        }
-        
         private function onClickItemHandler(param1:SortableTableListEvent) : void
         {
             var _loc2_:BuildingProcessListItemVO = this.buildingList.getListSelectedItem() as BuildingProcessListItemVO;
@@ -134,6 +116,10 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private function onDoubleClickItemHandler(param1:SortableTableListEvent) : void
         {
+            if(this.buildingList.listSelectedIndex == -1)
+            {
+                return;
+            }
             var _loc2_:BuildingProcessListItemVO = this.buildingList.getListSelectedItem() as BuildingProcessListItemVO;
             App.utils.asserter.assertNotNull(_loc2_," [doubleCLICK on buildingItem] BuildingProcessListItemVO can\'t be NULL " + Errors.CANT_NULL);
             if((_loc2_.buildingID) && _loc2_.buildingStatus == BUILDING_STATUS_AVAILABLE)

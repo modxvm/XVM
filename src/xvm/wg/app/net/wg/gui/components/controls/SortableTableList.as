@@ -6,6 +6,8 @@ package net.wg.gui.components.controls
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.events.SortingEvent;
     import scaleform.clik.interfaces.IDataProvider;
+    import flash.events.Event;
+    import net.wg.infrastructure.interfaces.IDAAPISortable;
     import scaleform.clik.data.ListData;
     import flash.display.Sprite;
     
@@ -96,7 +98,22 @@ package net.wg.gui.components.controls
         {
             this.isSortingTheLastActivity = false;
             this.isDataProviderReceived = true;
-            super.dataProvider = param1;
+            this.invalidateSorting(_sortProps);
+            if(_dataProvider == param1)
+            {
+                return;
+            }
+            if(_dataProvider != null)
+            {
+                _dataProvider.removeEventListener(Event.CHANGE,handleDataChange,false);
+            }
+            _dataProvider = param1;
+            if(_dataProvider == null)
+            {
+                return;
+            }
+            _dataProvider.addEventListener(Event.CHANGE,handleDataChange,false,0,true);
+            invalidateData();
         }
         
         public function resetSelectedItem() : void
@@ -112,10 +129,22 @@ package net.wg.gui.components.controls
             var _loc2_:* = -1;
             if(this._isSelectable)
             {
-                _loc2_ = this.checkSelectedItem(_loc2_);
+                if((_dataProvider) && _dataProvider is IDAAPISortable)
+                {
+                    _newSelectedIndex = IDAAPISortable(_dataProvider).getDAAPIselectedIdx();
+                    invalidateSelectedIndex();
+                }
+                else
+                {
+                    _newSelectedIndex = this.checkSelectedItem(_loc2_);
+                    invalidateSelectedIndex();
+                }
             }
-            _newSelectedIndex = _loc2_;
-            invalidateSelectedIndex();
+            else
+            {
+                _newSelectedIndex = _loc2_;
+                invalidateSelectedIndex();
+            }
         }
         
         private function checkSelectedItem(param1:int) : int
@@ -126,7 +155,7 @@ package net.wg.gui.components.controls
             while(_loc3_ < _loc2_)
             {
                 _loc4_ = dataProvider[_loc3_];
-                if(this.oldSelectedItem == _loc4_)
+                if((this.oldSelectedItem) && (_loc4_) && this.oldSelectedItem == _loc4_)
                 {
                     param1 = _loc3_;
                     break;
@@ -288,6 +317,11 @@ package net.wg.gui.components.controls
         public function set isSelectable(param1:Boolean) : void
         {
             this._isSelectable = param1;
+        }
+        
+        override public function toString() : String
+        {
+            return "[WG SortableTableList " + name + "]";
         }
     }
 }

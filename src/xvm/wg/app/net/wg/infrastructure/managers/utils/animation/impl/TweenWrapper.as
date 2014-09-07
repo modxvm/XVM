@@ -23,8 +23,8 @@ package net.wg.infrastructure.managers.utils.animation.impl
             this._container = param1;
             this.startIndex = this._container.getChildIndex(param2);
             this.startPoint = new Point(param2.x,param2.y);
-            this._container.x = param2.x;
-            this._container.y = param2.y;
+            x = param2.x;
+            y = param2.y;
             this._target = param2;
             this._target.x = 0;
             this._target.y = 0;
@@ -46,6 +46,14 @@ package net.wg.infrastructure.managers.utils.animation.impl
         private var startPoint:Point = null;
         
         private var chainOfAnimations:Vector.<LinkedObjects>;
+        
+        public function changeVisibilityFromTarget() : void
+        {
+            visible = this._target.visible;
+            alpha = this._target.alpha;
+            this._target.alpha = 1;
+            this._target.visible = true;
+        }
         
         public function addAnimationByClassName(param1:String) : IAnimation
         {
@@ -104,6 +112,8 @@ package net.wg.infrastructure.managers.utils.animation.impl
             this._container.addChildAt(this._target,this.startIndex);
             this._target.x = this.startPoint.x;
             this._target.y = this.startPoint.y;
+            this._target.alpha = alpha;
+            this._target.visible = visible;
             this._container.removeChild(this);
             this._container = null;
             this._target = null;

@@ -1,5 +1,5 @@
---- orig\StatisticForm.xml	2014-07-29 13:47:56 +0300
-+++ StatisticForm.xml	2014-07-29 13:47:56 +0300
+--- orig\StatisticForm.xml	2014-09-06 22:46:37.721170900 +0300
++++ StatisticForm.xml	2014-09-06 22:46:37.891171100 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>

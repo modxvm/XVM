@@ -15,6 +15,8 @@ package net.wg.infrastructure.base
         
         private var _disposed:Boolean = false;
         
+        private var _isDAAPIInited:Boolean = false;
+        
         public final function as_populate() : void
         {
             try
@@ -51,6 +53,17 @@ package net.wg.infrastructure.base
         
         protected function onPopulate() : void
         {
+            this._isDAAPIInited = true;
+        }
+        
+        public function as_isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
+        public function get isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
         }
     }
 }

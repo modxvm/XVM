@@ -1,12 +1,16 @@
 package net.wg.gui.rally.controls
 {
     import scaleform.clik.core.UIComponent;
+    import net.wg.gui.rally.controls.interfaces.IRallySimpleSlotRenderer;
+    import net.wg.gui.components.advanced.IndicationOfStatus;
     import flash.text.TextField;
+    import net.wg.gui.rally.controls.interfaces.IGrayTransparentButton;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.infrastructure.interfaces.IVehicleButton;
+    import net.wg.gui.cyberSport.controls.interfaces.IVehicleButton;
     import flash.display.Sprite;
     import flash.display.MovieClip;
     import net.wg.gui.rally.interfaces.IRallySlotVO;
+    import net.wg.gui.rally.controls.interfaces.ISlotRendererHelper;
     import net.wg.data.constants.Errors;
     import net.wg.gui.rally.events.RallyViewsEvent;
     import flash.events.MouseEvent;
@@ -17,15 +21,18 @@ package net.wg.gui.rally.controls
     import flash.display.InteractiveObject;
     import flash.events.Event;
     
-    public class RallySimpleSlotRenderer extends UIComponent
+    public class RallySimpleSlotRenderer extends UIComponent implements IRallySimpleSlotRenderer
     {
         
         public function RallySimpleSlotRenderer()
         {
             super();
+            this.tooltipSubscribeListOfControls = new Array();
         }
         
         private static var UPDATE_SLOT_DATA:String = "updateSlotData";
+        
+        public static var STATUSES:Array = [IndicationOfStatus.STATUS_NORMAL,IndicationOfStatus.STATUS_CANCELED,IndicationOfStatus.STATUS_READY,IndicationOfStatus.STATUS_IN_BATTLE,IndicationOfStatus.STATUS_LOCKED];
         
         public var orderNo:TextField;
         
@@ -39,7 +46,7 @@ package net.wg.gui.rally.controls
         
         public var contextMenuArea:Sprite;
         
-        public var statusIndicator:MovieClip;
+        public var statusIndicator:IndicationOfStatus;
         
         public var commander:MovieClip;
         
@@ -48,6 +55,19 @@ package net.wg.gui.rally.controls
         private var _slotData:IRallySlotVO;
         
         private var _helper:ISlotRendererHelper;
+        
+        protected var tooltipSubscribeListOfControls:Array = null;
+        
+        public function setStatus(param1:int) : String
+        {
+            var _loc2_:String = IndicationOfStatus.STATUS_NORMAL;
+            if(param1 < STATUSES.length && (param1))
+            {
+                _loc2_ = STATUSES[param1];
+            }
+            this.statusIndicator.status = _loc2_;
+            return _loc2_;
+        }
         
         public function get index() : int
         {
@@ -67,7 +87,7 @@ package net.wg.gui.rally.controls
         public function set slotData(param1:IRallySlotVO) : void
         {
             this._slotData = param1;
-            this.updateComponents();
+            invalidate(UPDATE_SLOT_DATA);
         }
         
         override protected function draw() : void
@@ -103,8 +123,11 @@ package net.wg.gui.rally.controls
         
         override protected function configUI() : void
         {
-            var _loc1_:Array = null;
             super.configUI();
+            App.utils.asserter.assertNotNull(this.tooltipSubscribeListOfControls,"[RallySimpleSlotRenderer] tooltipSubscribeListOfControls " + Errors.CANT_NULL);
+            this.tooltipSubscribeListOfControls.push(this.slotLabel);
+            this.tooltipSubscribeListOfControls.push(this.takePlaceBtn);
+            this.tooltipSubscribeListOfControls.push(this.takePlaceFirstTimeBtn);
             if(this.orderNo)
             {
                 this.orderNo.text = (this._index + 1).toString() + ".";
@@ -114,15 +137,14 @@ package net.wg.gui.rally.controls
                 this.vehicleBtn.addEventListener(RallyViewsEvent.VEH_BTN_ROLL_OVER,this.onMedallionRollOver,false,int.MAX_VALUE);
                 this.vehicleBtn.addEventListener(RallyViewsEvent.VEH_BTN_ROLL_OUT,this.onControlRollOut);
             }
-            _loc1_ = [this.slotLabel,this.takePlaceBtn,this.takePlaceFirstTimeBtn];
             if(this.contextMenuArea)
             {
                 this.contextMenuArea.buttonMode = this.contextMenuArea.useHandCursor = true;
                 this.contextMenuArea.addEventListener(MouseEvent.CLICK,this.onContextMenuAreaClick);
                 this.contextMenuArea.visible = false;
-                _loc1_.push(this.contextMenuArea);
+                this.tooltipSubscribeListOfControls.push(this.contextMenuArea);
             }
-            this.tooltipSubscribe(_loc1_,true);
+            this.tooltipSubscribe(this.tooltipSubscribeListOfControls,true);
             if(this.takePlaceBtn)
             {
                 this.takePlaceBtn.addEventListener(ButtonEvent.CLICK,this.onTakePlaceClick);
@@ -143,12 +165,8 @@ package net.wg.gui.rally.controls
                 this.vehicleBtn.dispose();
                 this.vehicleBtn = null;
             }
-            var _loc1_:Array = [this.slotLabel,this.takePlaceBtn,this.takePlaceFirstTimeBtn];
-            if(this.contextMenuArea)
-            {
-                _loc1_.push(this.contextMenuArea);
-            }
-            this.tooltipSubscribe(_loc1_,false);
+            this.tooltipSubscribe(this.tooltipSubscribeListOfControls,false);
+            this.tooltipSubscribeListOfControls = null;
             if(this.takePlaceBtn)
             {
                 this.takePlaceBtn.removeEventListener(ButtonEvent.CLICK,this.onTakePlaceClick);
@@ -165,6 +183,11 @@ package net.wg.gui.rally.controls
             {
                 this.contextMenuArea.removeEventListener(MouseEvent.CLICK,this.onContextMenuAreaClick);
             }
+            if(this.statusIndicator)
+            {
+                this.statusIndicator.dispose();
+                this.statusIndicator = null;
+            }
             super.onDispose();
         }
         
@@ -173,13 +196,13 @@ package net.wg.gui.rally.controls
             this._helper.initControlsState(this);
         }
         
-        protected function updateComponents() : void
+        public function updateComponents() : void
         {
             this.initControlsState();
             this._helper.updateComponents(this,this._slotData);
         }
         
-        protected function tooltipSubscribe(param1:Array, param2:Boolean = true) : void
+        private function tooltipSubscribe(param1:Array, param2:Boolean = true) : void
         {
             var _loc3_:DisplayObject = null;
             for each(_loc3_ in param1)
@@ -206,10 +229,10 @@ package net.wg.gui.rally.controls
             var _loc3_:PlayerCIGenerator = null;
             if(App.utils.commons.isRightButton(param1))
             {
-                _loc2_ = this._slotData?this._slotData.playerObj as ExtendedUserVO:null;
+                _loc2_ = this._slotData?this._slotData.player as ExtendedUserVO:null;
                 if((_loc2_) && !_loc2_.himself)
                 {
-                    _loc3_ = new PlayerCIGenerator(false);
+                    _loc3_ = new PlayerCIGenerator();
                     App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc3_);
                 }
             }

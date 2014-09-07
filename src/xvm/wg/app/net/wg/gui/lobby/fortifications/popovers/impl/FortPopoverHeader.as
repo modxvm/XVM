@@ -10,8 +10,11 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import net.wg.gui.components.advanced.ButtonDnmIcon;
     import net.wg.gui.lobby.fortifications.data.BuildingPopoverHeaderVO;
     import scaleform.clik.events.ButtonEvent;
+    import flash.events.MouseEvent;
     import net.wg.data.constants.Values;
     import net.wg.gui.lobby.fortifications.events.FortBuildingCardPopoverEvent;
+    import net.wg.gui.utils.ComplexTooltipHelper;
+    import flash.text.TextFieldAutoSize;
     
     public class FortPopoverHeader extends UIComponent
     {
@@ -21,6 +24,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             super();
             this.upgradeBtn.UIID = 75;
             this.destroyBtn.UIID = 79;
+            this.mapInfoTF.autoSize = TextFieldAutoSize.LEFT;
         }
         
         private static var UPGRADE_BTN_ICON_PNG:String = "level_up.png";
@@ -60,18 +64,24 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         public var buildLevel:TextField = null;
         
+        public var mapInfoTF:TextField = null;
+        
         private var model:BuildingPopoverHeaderVO = null;
         
         override protected function configUI() : void
         {
             super.configUI();
             this.upgradeBtn.icon = UPGRADE_BTN_ICON_PNG;
+            this.upgradeBtn.mouseEnabledOnDisabled = true;
+            this.destroyBtn.mouseEnabledOnDisabled = true;
         }
         
         override protected function onDispose() : void
         {
             this.upgradeBtn.removeEventListener(ButtonEvent.CLICK,this.headerActionHandler);
             this.destroyBtn.removeEventListener(ButtonEvent.CLICK,this.headerActionHandler);
+            this.mapInfoTF.removeEventListener(MouseEvent.ROLL_OVER,this.onMapInfoRollOver);
+            this.mapInfoTF.removeEventListener(MouseEvent.ROLL_OUT,this.onMapInfoRollOut);
             this.upgradeBtn.dispose();
             this.upgradeBtn = null;
             this.destroyBtn.dispose();
@@ -91,6 +101,21 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.buildingName.htmlText = this.model.buildingName;
             this.buildingIcon.gotoAndStop(this.model.buildingIcon);
             this.buildLevel.htmlText = this.model.buildLevel;
+            if(this.model.mapInfo != Values.EMPTY_STR)
+            {
+                this.mapInfoTF.htmlText = this.model.mapInfo;
+                this.mapInfoTF.visible = true;
+                this.mapInfoTF.addEventListener(MouseEvent.ROLL_OVER,this.onMapInfoRollOver);
+                this.mapInfoTF.addEventListener(MouseEvent.ROLL_OUT,this.onMapInfoRollOut);
+            }
+            else
+            {
+                this.mapInfoTF.visible = false;
+                this.mapInfoTF.removeEventListener(MouseEvent.ROLL_OVER,this.onMapInfoRollOver);
+                this.mapInfoTF.removeEventListener(MouseEvent.ROLL_OUT,this.onMapInfoRollOut);
+            }
+            this.titleStatus.htmlText = this.model.titleStatus;
+            this.bodyStatus.htmlText = this.model.bodyStatus;
             if(this.model.titleStatus == Values.EMPTY_STR && this.model.bodyStatus == Values.EMPTY_STR)
             {
                 this.buildingIcon.alpha = 1;
@@ -98,8 +123,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             else
             {
                 this.buildingIcon.alpha = 0.2;
-                this.titleStatus.htmlText = this.model.titleStatus;
-                this.bodyStatus.htmlText = this.model.bodyStatus;
                 updateTextAlign(this.model.titleStatus == Values.EMPTY_STR,this.bodyStatus);
             }
             updateTextAlign(this.model.showUpgradeButton,this.buildLevel);
@@ -119,7 +142,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             {
                 this.destroyBtn.addEventListener(ButtonEvent.CLICK,this.headerActionHandler);
             }
-            if((this.model.isCommander) && (this.destroyBtn.visible) && !(this.model.demountBtnTooltip == Values.EMPTY_STR))
+            if((this.model.canDeleteBuilding) && (this.destroyBtn.visible) && !(this.model.demountBtnTooltip == Values.EMPTY_STR))
             {
                 this.destroyBtn.tooltip = this.model.demountBtnTooltip;
             }
@@ -136,7 +159,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             {
                 this.titleStatus.filters = getGlowFilter(this.model.glowColor);
             }
-            if(this.model.titleStatus == Values.EMPTY_STR && !(this.model.bodyStatus == Values.EMPTY_STR) && !this.model.isCommander)
+            if(this.model.titleStatus == Values.EMPTY_STR && !(this.model.bodyStatus == Values.EMPTY_STR) && !this.model.canDeleteBuilding)
             {
                 this.bodyStatus.filters = getGlowFilter(this.model.glowColor);
             }
@@ -154,6 +177,32 @@ package net.wg.gui.lobby.fortifications.popovers.impl
                 dispatchEvent(new FortBuildingCardPopoverEvent(FortBuildingCardPopoverEvent.DESTROY_BUILDING));
             }
             
+        }
+        
+        public function setModernizationDestructionEnabling(param1:Boolean, param2:Boolean, param3:String, param4:String) : void
+        {
+            this.upgradeBtn.enabled = param1;
+            this.destroyBtn.enabled = param2;
+            this.upgradeBtn.tooltip = param3;
+            this.destroyBtn.tooltip = param4;
+        }
+        
+        private function onMapInfoRollOver(param1:MouseEvent) : void
+        {
+            var _loc2_:String = null;
+            if((this.model) && (this.model.mapTooltip.length))
+            {
+                _loc2_ = new ComplexTooltipHelper().addHeader(this.model.mapTooltip[0]).addBody(this.model.mapTooltip[1]).make();
+                if(_loc2_.length > 0)
+                {
+                    App.toolTipMgr.showComplex(_loc2_);
+                }
+            }
+        }
+        
+        private function onMapInfoRollOut(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
     }
 }

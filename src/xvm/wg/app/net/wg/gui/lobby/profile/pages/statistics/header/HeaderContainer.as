@@ -4,8 +4,6 @@ package net.wg.gui.lobby.profile.pages.statistics.header
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.gui.components.icons.BattleTypeIcon;
     import net.wg.gui.components.common.containers.GroupEx;
-    import net.wg.gui.lobby.profile.pages.statistics.StatisticsTooltipDataVO;
-    import net.wg.data.managers.impl.ToolTipParams;
     import net.wg.gui.components.common.containers.HorizontalGroupLayout;
     import net.wg.data.constants.Linkages;
     
@@ -31,7 +29,6 @@ package net.wg.gui.lobby.profile.pages.statistics.header
             var _loc5_:Object = null;
             var _loc6_:String = null;
             var _loc7_:Object = null;
-            var _loc8_:StatisticsTooltipDataVO = null;
             var _loc2_:Array = [];
             var _loc4_:* = 0;
             while(_loc4_ < param1.length)
@@ -42,10 +39,6 @@ package net.wg.gui.lobby.profile.pages.statistics.header
                 _loc7_ = _loc3_.additionalData;
                 switch(_loc6_)
                 {
-                    case HeaderItemsTypes.TOOL_TIP_VALUES:
-                        _loc8_ = new StatisticsTooltipDataVO(_loc7_.tooltipData);
-                        _loc3_.toolTipParams = new ToolTipParams(_loc8_.header,_loc8_.body,_loc8_.note);
-                        break;
                     case HeaderItemsTypes.RATIO:
                         if(_loc3_.text != "-1")
                         {

@@ -4,6 +4,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingsContainer;
     import net.wg.gui.lobby.fortifications.data.BuildingVO;
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuilding;
+    import net.wg.gui.lobby.fortifications.data.FortModeVO;
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingCmp;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.gui.lobby.fortifications.events.FortBuildingEvent;
@@ -34,7 +35,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             var _loc11_:* = 0;
             var _loc4_:int = param1.length;
             var _loc5_:Vector.<IFortBuilding> = param2.slice();
-            _loc5_[0].isCommander = param3;
+            _loc5_[0].userCanAddBuilding = param3;
             _loc5_[0].setData(param1[0]);
             var _loc9_:uint = 1;
             var _loc10_:uint = 2;
@@ -46,7 +47,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                 _loc11_ = _loc9_ + (_loc8_ - 1) * _loc10_ + _loc6_.position;
                 _loc7_ = _loc5_[_loc11_];
                 _loc5_[_loc11_] = null;
-                _loc7_.isCommander = param3;
+                _loc7_.userCanAddBuilding = param3;
                 _loc7_.setData(_loc6_);
                 _loc12_++;
             }
@@ -82,21 +83,21 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private var _buildings:Vector.<IFortBuilding> = null;
         
-        public function updateCommonMode(param1:Boolean, param2:Boolean) : void
+        public function updateCommonMode(param1:FortModeVO) : void
         {
-            var _loc3_:IFortBuilding = null;
-            for each(_loc3_ in this._buildings)
+            var _loc2_:IFortBuilding = null;
+            for each(_loc2_ in this._buildings)
             {
-                _loc3_.updateCommonMode(param1,param2);
+                _loc2_.updateCommonMode(param1);
             }
         }
         
-        public function updateDirectionsMode(param1:Boolean, param2:Boolean) : void
+        public function updateDirectionsMode(param1:FortModeVO) : void
         {
-            var _loc3_:IFortBuilding = null;
-            for each(_loc3_ in this._buildings)
+            var _loc2_:IFortBuilding = null;
+            for each(_loc2_ in this._buildings)
             {
-                _loc3_.updateDirectionsMode(param1,param2);
+                _loc2_.updateDirectionsMode(param1);
             }
         }
         
@@ -122,7 +123,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             {
                 if(_loc3_.uid == param1.uid)
                 {
-                    _loc3_.isCommander = param2;
+                    _loc3_.userCanAddBuilding = param2;
                     _loc3_.setData(param1);
                     break;
                 }

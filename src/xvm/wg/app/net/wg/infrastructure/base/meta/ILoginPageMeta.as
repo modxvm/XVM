@@ -23,11 +23,17 @@ package net.wg.infrastructure.base.meta
         
         function onEscapeS() : void;
         
+        function isCSISUpdateOnRequestS() : Boolean;
+        
         function isPwdInvalidS(param1:String) : Boolean;
         
         function isLoginInvalidS(param1:String) : Boolean;
         
         function showLegalS() : void;
+        
+        function startListenCsisUpdateS(param1:Boolean) : void;
+        
+        function saveLastSelectedServerS(param1:String) : void;
         
         function as_setDefaultValues(param1:String, param2:String, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void;
         
@@ -50,5 +56,7 @@ package net.wg.infrastructure.base.meta
         function as_doAutoLogin() : void;
         
         function as_enable(param1:Boolean) : void;
+        
+        function as_switchToAutoAndSubmit(param1:String) : void;
     }
 }

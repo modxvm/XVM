@@ -29,11 +29,17 @@ package net.wg.infrastructure.base.meta.impl
         
         public var onEscape:Function = null;
         
+        public var isCSISUpdateOnRequest:Function = null;
+        
         public var isPwdInvalid:Function = null;
         
         public var isLoginInvalid:Function = null;
         
         public var showLegal:Function = null;
+        
+        public var startListenCsisUpdate:Function = null;
+        
+        public var saveLastSelectedServer:Function = null;
         
         public function onLoginS(param1:String, param2:String, param3:String) : void
         {
@@ -89,6 +95,12 @@ package net.wg.infrastructure.base.meta.impl
             this.onEscape();
         }
         
+        public function isCSISUpdateOnRequestS() : Boolean
+        {
+            App.utils.asserter.assertNotNull(this.isCSISUpdateOnRequest,"isCSISUpdateOnRequest" + Errors.CANT_NULL);
+            return this.isCSISUpdateOnRequest();
+        }
+        
         public function isPwdInvalidS(param1:String) : Boolean
         {
             App.utils.asserter.assertNotNull(this.isPwdInvalid,"isPwdInvalid" + Errors.CANT_NULL);
@@ -105,6 +117,18 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.showLegal,"showLegal" + Errors.CANT_NULL);
             this.showLegal();
+        }
+        
+        public function startListenCsisUpdateS(param1:Boolean) : void
+        {
+            App.utils.asserter.assertNotNull(this.startListenCsisUpdate,"startListenCsisUpdate" + Errors.CANT_NULL);
+            this.startListenCsisUpdate(param1);
+        }
+        
+        public function saveLastSelectedServerS(param1:String) : void
+        {
+            App.utils.asserter.assertNotNull(this.saveLastSelectedServer,"saveLastSelectedServer" + Errors.CANT_NULL);
+            this.saveLastSelectedServer(param1);
         }
     }
 }

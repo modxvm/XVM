@@ -3,7 +3,7 @@ package net.wg.gui.lobby.training
     import net.wg.infrastructure.base.meta.impl.MinimapEntityMeta;
     import net.wg.infrastructure.base.meta.IMinimapEntityMeta;
     import flash.display.MovieClip;
-    import net.wg.infrastructure.interfaces.IMinimapEntry;
+    import net.wg.gui.interfaces.IMinimapEntry;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
     

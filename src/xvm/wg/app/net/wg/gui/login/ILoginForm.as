@@ -7,6 +7,7 @@ package net.wg.gui.login
     import net.wg.gui.components.controls.HyperLink;
     import net.wg.gui.components.controls.TextInput;
     import flash.text.TextField;
+    import net.wg.gui.components.controls.DropdownMenu;
     
     public interface ILoginForm extends IUIComponent, IDisposable
     {
@@ -56,5 +57,9 @@ package net.wg.gui.login
         function get message() : TextField;
         
         function set message(param1:TextField) : void;
+        
+        function get server() : DropdownMenu;
+        
+        function set server(param1:DropdownMenu) : void;
     }
 }

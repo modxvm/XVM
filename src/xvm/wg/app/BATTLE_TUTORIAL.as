@@ -106,10 +106,6 @@ package
         
         public static var WINDOWS_RESULT_BUTTONS_RESTART:String = "#battle_tutorial:windows/result/buttons/restart";
         
-        public static var CHAPTERS_OFFBATTLE_TITLE:String = "#battle_tutorial:chapters/offbattle/title";
-        
-        public static var CHAPTERS_OFFBATTLE_DESCRIPTION:String = "#battle_tutorial:chapters/offbattle/description";
-        
         public static var CHAPTERS_GREETING_TITLE:String = "#battle_tutorial:chapters/greeting/title";
         
         public static var CHAPTERS_GREETING_DESCRIPTION:String = "#battle_tutorial:chapters/greeting/description";

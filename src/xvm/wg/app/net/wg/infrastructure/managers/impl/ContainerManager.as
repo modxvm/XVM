@@ -307,6 +307,7 @@ package net.wg.infrastructure.managers.impl
         
         override protected function onPopulate() : void
         {
+            super.onPopulate();
         }
         
         override protected function onDispose() : void

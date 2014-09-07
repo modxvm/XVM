@@ -2,6 +2,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
 {
     import net.wg.infrastructure.base.meta.impl.FortTransportConfirmationWindowMeta;
     import net.wg.infrastructure.base.meta.IFortTransportConfirmationWindowMeta;
+    import net.wg.utils.ITweenAnimator;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.NumericStepper;
     import flash.text.TextField;
@@ -18,8 +19,6 @@ package net.wg.gui.lobby.fortifications.windows.impl
     import net.wg.gui.lobby.fortifications.utils.impl.FortCommonUtils;
     import flash.text.TextFormatAlign;
     import flash.display.InteractiveObject;
-    import net.wg.utils.ITweenAnimator;
-    import net.wg.gui.lobby.fortifications.utils.impl.TweenAnimator;
     
     public class FortTransportConfirmationWindow extends FortTransportConfirmationWindowMeta implements IFortTransportConfirmationWindowMeta
     {
@@ -33,6 +32,13 @@ package net.wg.gui.lobby.fortifications.windows.impl
             UIID = 24;
             this.transportButton.UIID = 25;
             this.cancelButton.UIID = 26;
+            this.sourceIndicator.playAnimation = false;
+            this.targetIndicator.playAnimation = false;
+        }
+        
+        private static function getTweenAnimator() : ITweenAnimator
+        {
+            return App.utils.tweenAnimator;
         }
         
         public var transportButton:SoundButtonEx = null;
@@ -98,7 +104,11 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private function updateFocus() : void
         {
-            if(!this.resourceNumericStepper.enabled)
+            if(this.resourceNumericStepper.enabled)
+            {
+                setFocus(this.resourceNumericStepper);
+            }
+            else if(this.transportButton.enabled)
             {
                 setFocus(this.transportButton);
             }
@@ -106,19 +116,27 @@ package net.wg.gui.lobby.fortifications.windows.impl
             {
                 setFocus(this.cancelButton);
             }
+            
         }
         
         private function updateTargetData(param1:Number) : void
         {
-            var _loc4_:* = NaN;
             var _loc2_:BuildingBaseVO = new BuildingBaseVO(this._initialTargetBaseVO.toHash());
             var _loc3_:Number = Math.min(_loc2_.maxHpValue - _loc2_.hpVal,param1);
             _loc2_.hpVal = _loc2_.hpVal + _loc3_;
             var param1:Number = param1 - _loc3_;
             if(param1 > 0)
             {
-                _loc4_ = Math.min(_loc2_.maxDefResValue - _loc2_.defResVal,param1);
-                _loc2_.defResVal = _loc2_.defResVal + _loc4_;
+                _loc2_.defResVal = _loc2_.defResVal + Math.min(_loc2_.maxDefResValue - _loc2_.defResVal,param1);
+            }
+            if(_loc2_.defResVal == _loc2_.maxDefResValue)
+            {
+                getTweenAnimator().blinkInfinity(this.targetIndicator.defResIndicatorComponent);
+            }
+            else
+            {
+                getTweenAnimator().removeAnims(this.targetIndicator.defResIndicatorComponent);
+                this.targetIndicator.defResIndicatorComponent.alpha = 1;
             }
             this.targetIndicator.applyVOData(_loc2_);
             _loc2_.dispose();
@@ -129,6 +147,15 @@ package net.wg.gui.lobby.fortifications.windows.impl
             var _loc2_:BuildingBaseVO = new BuildingBaseVO(this._initialSourceBaseVO.toHash());
             _loc2_.defResVal = _loc2_.defResVal - param1;
             this.sourceIndicator.applyVOData(_loc2_);
+            if(_loc2_.defResVal == 0)
+            {
+                getTweenAnimator().blinkInfinity(this.sourceIndicator.defResIndicatorComponent);
+            }
+            else
+            {
+                getTweenAnimator().removeAnims(this.sourceIndicator.defResIndicatorComponent);
+                this.sourceIndicator.defResIndicatorComponent.alpha = 1;
+            }
             _loc2_.dispose();
         }
         
@@ -143,8 +170,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.sourceIndicator.applyVOData(param1.sourceBaseVO);
             this._initialSourceBaseVO = param1.sourceBaseVO;
             this._initialTargetBaseVO = param1.targetBaseVO;
-            this.updateSourceData(0);
-            this.updateTargetData(0);
+            this.updateSourceData(this.resourceNumericStepper.value);
+            this.updateTargetData(this.resourceNumericStepper.value);
             this.sourceTextField.text = FORTIFICATIONS.buildings_buildingname(param1.sourceBaseVO.uid);
             this.targetTextField.text = FORTIFICATIONS.buildings_buildingname(param1.targetBaseVO.uid);
             this.resourceNumericStepper.stepSize = param1.defResTep;
@@ -170,27 +197,23 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.cancelButton.addEventListener(ButtonEvent.CLICK,this.onCancelButtonClickHandler);
             this.resourceNumericStepper.addEventListener(IndexEvent.INDEX_CHANGE,this.onResourceNumericStepperIndexChangeHandler);
             FortCommonUtils.instance.changeTextAlign(this.resourceNumericStepper.textField,TextFormatAlign.RIGHT);
-            this.getTweenAnimator().addFadeInAnim(this.sourceIndicator.labels,null);
-            this.getTweenAnimator().addFadeInAnim(this.targetIndicator.labels,null);
+            getTweenAnimator().addFadeInAnim(this.sourceIndicator.labels,null);
+            getTweenAnimator().addFadeInAnim(this.targetIndicator.labels,null);
         }
         
         override protected function onInitModalFocus(param1:InteractiveObject) : void
         {
             super.onInitModalFocus(param1);
-            setFocus(this.cancelButton);
             this.updateFocus();
-        }
-        
-        private function getTweenAnimator() : ITweenAnimator
-        {
-            return TweenAnimator.instance;
         }
         
         override protected function onDispose() : void
         {
-            this.getTweenAnimator().removeAnims(this.footerFadingText);
-            this.getTweenAnimator().removeAnims(this.sourceIndicator.labels);
-            this.getTweenAnimator().removeAnims(this.targetIndicator.labels);
+            getTweenAnimator().removeAnims(this.footerFadingText);
+            getTweenAnimator().removeAnims(this.sourceIndicator.labels);
+            getTweenAnimator().removeAnims(this.targetIndicator.labels);
+            getTweenAnimator().removeAnims(this.sourceIndicator.defResIndicatorComponent);
+            getTweenAnimator().removeAnims(this.targetIndicator.defResIndicatorComponent);
             this.transportButton.removeEventListener(ButtonEvent.CLICK,this.onTransportingButtonClickHandler);
             this.cancelButton.removeEventListener(ButtonEvent.CLICK,this.onCancelButtonClickHandler);
             this.resourceNumericStepper.removeEventListener(IndexEvent.INDEX_CHANGE,this.onResourceNumericStepperIndexChangeHandler);
@@ -231,11 +254,11 @@ package net.wg.gui.lobby.fortifications.windows.impl
                 _loc1_ = this.resourceNumericStepper.value > 0;
                 if((_loc1_) && this.footerFadingText.alpha == 0)
                 {
-                    this.getTweenAnimator().addFadeInAnim(this.footerFadingText,null);
+                    getTweenAnimator().addFadeInAnim(this.footerFadingText,null);
                 }
                 else if(!_loc1_ && this.footerFadingText.alpha > 0)
                 {
-                    this.getTweenAnimator().addFadeOutAnim(this.footerFadingText,null);
+                    getTweenAnimator().addFadeOutAnim(this.footerFadingText,null);
                 }
                 
                 this.transportButton.enabled = _loc1_;

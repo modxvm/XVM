@@ -39,6 +39,10 @@ package net.wg.infrastructure.base.meta.impl
         
         public var isFortificationAvailable:Function = null;
         
+        public var isFortificationBattleAvailable:Function = null;
+        
+        public var isShowTicker:Function = null;
+        
         public function isDevelopmentS() : Boolean
         {
             App.utils.asserter.assertNotNull(this.isDevelopment,"isDevelopment" + Errors.CANT_NULL);
@@ -121,6 +125,18 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.isFortificationAvailable,"isFortificationAvailable" + Errors.CANT_NULL);
             return this.isFortificationAvailable();
+        }
+        
+        public function isFortificationBattleAvailableS() : Boolean
+        {
+            App.utils.asserter.assertNotNull(this.isFortificationBattleAvailable,"isFortificationBattleAvailable" + Errors.CANT_NULL);
+            return this.isFortificationBattleAvailable();
+        }
+        
+        public function isShowTickerS() : Boolean
+        {
+            App.utils.asserter.assertNotNull(this.isShowTicker,"isShowTicker" + Errors.CANT_NULL);
+            return this.isShowTicker();
         }
     }
 }

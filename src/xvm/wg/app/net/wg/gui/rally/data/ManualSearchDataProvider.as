@@ -1,10 +1,10 @@
 package net.wg.gui.rally.data
 {
-    import net.wg.data.VoDAAPIDataProvider;
+    import net.wg.data.SortableVoDAAPIDataProvider;
     import net.wg.gui.cyberSport.interfaces.IManualSearchDataProvider;
     import net.wg.gui.cyberSport.controls.events.ManualSearchEvent;
     
-    public class ManualSearchDataProvider extends VoDAAPIDataProvider implements IManualSearchDataProvider
+    public class ManualSearchDataProvider extends SortableVoDAAPIDataProvider implements IManualSearchDataProvider
     {
         
         public function ManualSearchDataProvider(param1:Class)

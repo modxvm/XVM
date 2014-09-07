@@ -162,8 +162,7 @@ package net.wg.gui.lobby.profile.pages.awards
         
         override protected function applyResizing() : void
         {
-            var _loc1_:* = NaN;
-            _loc1_ = Math.round(currentDimension.x / 2 - centerOffset);
+            var _loc1_:Number = Math.round(currentDimension.x / 2 - centerOffset);
             this.dropdownMenu.x = this.startMenuX + _loc1_;
             this.txtLabel.autoSize = TextFieldAutoSize.LEFT;
             this.txtLabel.x = this.dropdownMenu.x - this.txtLabel.width - 5;

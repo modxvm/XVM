@@ -18,7 +18,7 @@ package net.wg.gui.login.legal
         {
             super();
             isCentered = true;
-            showWindowBg = false;
+            showWindowBgForm = false;
         }
         
         public var closeBtn:SoundButtonEx;

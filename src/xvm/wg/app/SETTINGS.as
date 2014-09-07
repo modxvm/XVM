@@ -198,6 +198,10 @@ package
         
         public static var VEHICLE_TRACES_ENABLED_DESCRIPTION:String = "#settings:VEHICLE_TRACES_ENABLED/description";
         
+        public static var SEMITRANSPARENT_LEAVES_ENABLED:String = "#settings:SEMITRANSPARENT_LEAVES_ENABLED";
+        
+        public static var SEMITRANSPARENT_LEAVES_ENABLED_DESCRIPTION:String = "#settings:SEMITRANSPARENT_LEAVES_ENABLED/description";
+        
         public static var DYNAMICCAMERA:String = "#settings:dynamicCamera";
         
         public static var GAME_HORSTABILIZATIONSNP:String = "#settings:game/horStabilizationSnp";

@@ -1,7 +1,7 @@
 package net.wg.gui.cyberSport.controls
 {
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.infrastructure.interfaces.IVehicleButton;
+    import net.wg.gui.cyberSport.controls.interfaces.IVehicleButton;
     import flash.geom.Rectangle;
     import flash.display.MovieClip;
     import flash.text.TextField;
@@ -85,7 +85,7 @@ package net.wg.gui.cyberSport.controls
         
         public var clickableArea:MovieClip;
         
-        public var currentViewType:String = "autoSearch";
+        public var _currentViewType:String = "autoSearch";
         
         private var _showAlertIcon:Boolean = false;
         
@@ -103,13 +103,23 @@ package net.wg.gui.cyberSport.controls
         
         private var _selectSate:Boolean = false;
         
-        private var selectedStateText:String = "#cyberSport:button/medallion/chooseVehicle";
+        private var selectedStateText:String = "";
         
         private var _forceSoundEnable:Boolean = false;
         
         private var _showCommanderSettings:Boolean = false;
         
         private var _mouseOverAlert:Boolean = false;
+        
+        public function set currentViewType(param1:String) : void
+        {
+            this._currentViewType = param1;
+        }
+        
+        public function get currentViewType() : String
+        {
+            return this._currentViewType;
+        }
         
         public function set forceSoundEnable(param1:Boolean) : void
         {

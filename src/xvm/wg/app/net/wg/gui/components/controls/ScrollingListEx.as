@@ -51,7 +51,7 @@ package net.wg.gui.components.controls
         
         protected var _padding:Padding;
         
-        private var _widthAutoResize:Boolean = true;
+        protected var _widthAutoResize:Boolean = true;
         
         private var _sbPadding:Padding;
         

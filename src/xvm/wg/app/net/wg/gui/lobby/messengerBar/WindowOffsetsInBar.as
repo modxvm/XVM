@@ -14,8 +14,8 @@ package net.wg.gui.lobby.messengerBar
         
         public static var WINDOW_TOP_OFFSET:uint = 2;
         
-        public static var CHANNEL_WINDOW_LEFT_OFFSET:uint = 2;
+        public static var CHANNEL_WINDOW_LEFT_OFFSET:uint = 7;
         
-        public static var CHANNEL_WINDOW_RIGHT_OFFSET:uint = 13;
+        public static var CHANNEL_WINDOW_RIGHT_OFFSET:uint = 8;
     }
 }

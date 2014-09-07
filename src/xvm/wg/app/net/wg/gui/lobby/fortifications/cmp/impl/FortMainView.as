@@ -10,19 +10,24 @@ package net.wg.gui.lobby.fortifications.cmp.impl
     import net.wg.gui.lobby.fortifications.cmp.build.IFortBuildingCmp;
     import net.wg.gui.lobby.fortifications.cmp.main.IMainHeader;
     import net.wg.gui.lobby.fortifications.cmp.main.IMainFooter;
+    import flash.display.DisplayObject;
     import flash.display.InteractiveObject;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
-    import net.wg.infrastructure.events.LibraryLoaderEvent;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.fortifications.events.DirectionEvent;
     import net.wg.gui.lobby.fortifications.events.FortBuildingEvent;
     import scaleform.clik.events.InputEvent;
     import net.wg.gui.lobby.fortifications.data.FortificationVO;
     import net.wg.gui.lobby.fortifications.data.FortModeStateVO;
+    import net.wg.gui.lobby.fortifications.data.BattleNotifiersDataVO;
+    import net.wg.gui.lobby.fortifications.data.FunctionalStates;
+    import net.wg.gui.lobby.fortifications.data.FortModeVO;
     import flash.geom.Point;
     import net.wg.gui.lobby.fortifications.utils.impl.FortsControlsAligner;
+    import net.wg.infrastructure.events.LibraryLoaderEvent;
+    import flash.events.Event;
     import scaleform.clik.ui.InputDetails;
     import flash.ui.Keyboard;
     import scaleform.clik.constants.InputValue;
@@ -33,6 +38,9 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         public function FortMainView()
         {
             this.stateMethods = {};
+            this.TRANSPORTING_MODES = new <String>[FORTIFICATION_ALIASES.MODE_TRANSPORTING_FIRST_STEP,FORTIFICATION_ALIASES.MODE_TRANSPORTING_NEXT_STEP,FORTIFICATION_ALIASES.MODE_TRANSPORTING_NOT_AVAILABLE];
+            this.TRANSPORTING_TUTORIAL_MODES = new <String>[FORTIFICATION_ALIASES.MODE_TRANSPORTING_TUTORIAL,FORTIFICATION_ALIASES.MODE_TRANSPORTING_TUTORIAL_FIRST_STEP,FORTIFICATION_ALIASES.MODE_TRANSPORTING_TUTORIAL_NEXT_STEP];
+            this.DIRECTION_MODES = new <String>[FORTIFICATION_ALIASES.MODE_DIRECTIONS];
             super();
             this.helper = FortsControlsAligner.instance;
             addEventListener(DirectionEvent.OPEN_DIRECTION,this.openDirHandler,false,0,true);
@@ -70,6 +78,16 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         
         private var _footer:IMainFooter = null;
         
+        private var loadersList:Vector.<DisplayObject> = null;
+        
+        private var defaultLoadersList:Vector.<DisplayObject> = null;
+        
+        private var TRANSPORTING_MODES:Vector.<String>;
+        
+        private var TRANSPORTING_TUTORIAL_MODES:Vector.<String>;
+        
+        private var DIRECTION_MODES:Vector.<String>;
+        
         public function update(param1:Object) : void
         {
         }
@@ -99,6 +117,16 @@ package net.wg.gui.lobby.fortifications.cmp.impl
                 this.disposeCommanderHelp();
             }
             dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
+        }
+        
+        public function as_setHeaderMessage(param1:String) : void
+        {
+            this._header.infoTF.htmlText = param1;
+        }
+        
+        public function canShowAutomatically() : Boolean
+        {
+            return false;
         }
         
         override public function set visible(param1:Boolean) : void
@@ -146,13 +174,14 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         override protected function configUI() : void
         {
             super.configUI();
+            this.addLoaderHandlers();
             this._header.transportBtn.addEventListener(ButtonEvent.CLICK,this.onTransportButtonClickHandler);
             this._header.transportBtn.addEventListener(MouseEvent.MOUSE_OVER,this.onTransportButtonMouseOverHandler);
             this._header.transportBtn.addEventListener(MouseEvent.MOUSE_OUT,onTransportButtonMouseOutHandler);
             this._header.statsBtn.addEventListener(ButtonEvent.CLICK,this.onStatsBtnClickHandler);
             this._header.clanListBtn.addEventListener(ButtonEvent.CLICK,this.onClanListBtnClickHandler);
-            this._header.clanListBtn.addEventListener(LibraryLoaderEvent.ICON_LOADED,this.onHeaderClanListBtnIconLoadedHandler);
-            this._header.clanListBtn.addEventListener(LibraryLoaderEvent.ICON_LOADING_FAILED,this.onHeaderClanListBtnIconLoadingFailedHandler);
+            this._header.calendarBtn.addEventListener(ButtonEvent.CLICK,this.onCalendarBtnClickHandler);
+            this._header.settingBtn.addEventListener(ButtonEvent.CLICK,this.onSettingBtnClickHandler);
             this._footer.intelligenceButton.addEventListener(ButtonEvent.CLICK,this.onIntelligenceButtonClickHandler);
             this._footer.sortieBtn.addEventListener(ButtonEvent.CLICK,this.onSortieButtonClickHandler);
             this._footer.leaveModeBtn.addEventListener(ButtonEvent.CLICK,this.onLeaveButtonClickHandler);
@@ -161,10 +190,14 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
             this.stateMethods[FORTIFICATION_ALIASES.MODE_COMMON] = this._buildings.updateCommonMode;
             this.stateMethods[FORTIFICATION_ALIASES.MODE_DIRECTIONS] = this._buildings.updateDirectionsMode;
-            this.stateMethods[FORTIFICATION_ALIASES.MODE_TRANSPORTING] = this._buildings.updateTransportMode;
+            this.stateMethods[FORTIFICATION_ALIASES.MODE_TRANSPORTING_FIRST_STEP] = this._buildings.updateTransportMode;
+            this.stateMethods[FORTIFICATION_ALIASES.MODE_TRANSPORTING_NEXT_STEP] = this._buildings.updateTransportMode;
+            this.stateMethods[FORTIFICATION_ALIASES.MODE_TRANSPORTING_NOT_AVAILABLE] = this._buildings.updateTransportMode;
             this.stateMethods[FORTIFICATION_ALIASES.MODE_COMMON_TUTORIAL] = this._buildings.updateCommonMode;
             this.stateMethods[FORTIFICATION_ALIASES.MODE_DIRECTIONS_TUTORIAL] = this._buildings.updateDirectionsMode;
             this.stateMethods[FORTIFICATION_ALIASES.MODE_TRANSPORTING_TUTORIAL] = this._buildings.updateTransportMode;
+            this.stateMethods[FORTIFICATION_ALIASES.MODE_TRANSPORTING_TUTORIAL_FIRST_STEP] = this._buildings.updateTransportMode;
+            this.stateMethods[FORTIFICATION_ALIASES.MODE_TRANSPORTING_TUTORIAL_NEXT_STEP] = this._buildings.updateTransportMode;
         }
         
         override protected function draw() : void
@@ -187,8 +220,9 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this._header.transportBtn.removeEventListener(ButtonEvent.PRESS,this.onTransportButtonClickHandler);
             this._header.statsBtn.removeEventListener(ButtonEvent.CLICK,this.onStatsBtnClickHandler);
             this._header.clanListBtn.removeEventListener(ButtonEvent.CLICK,this.onClanListBtnClickHandler);
-            this._header.clanListBtn.removeEventListener(LibraryLoaderEvent.ICON_LOADED,this.onHeaderClanListBtnIconLoadedHandler);
-            this._header.clanListBtn.removeEventListener(LibraryLoaderEvent.ICON_LOADING_FAILED,this.onHeaderClanListBtnIconLoadingFailedHandler);
+            this.removeLoaderHandlers();
+            this._header.calendarBtn.removeEventListener(ButtonEvent.CLICK,this.onCalendarBtnClickHandler);
+            this._header.settingBtn.removeEventListener(ButtonEvent.CLICK,this.onSettingBtnClickHandler);
             this.stateMethods = App.utils.commons.cleanupDynamicObject(this.stateMethods);
             if(this.commanderHelpView)
             {
@@ -202,6 +236,11 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this.landscapeMask.dispose();
             this.landscapeMask = null;
             this.helper = null;
+            this.TRANSPORTING_MODES = null;
+            this.TRANSPORTING_TUTORIAL_MODES = null;
+            this.DIRECTION_MODES = null;
+            this.loadersList = null;
+            this.defaultLoadersList = null;
             super.onDispose();
         }
         
@@ -210,10 +249,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this._header.clanListBtn.label = param1.clanSize.toString();
             this._header.totalDepotQuantityText.htmlText = param1.defResText;
             this._header.clanInfo.applyClanData(param1);
-            if(param1.disabledTransporting)
-            {
-                this._header.vignetteYellow.descrText.text = FORTIFICATIONS.FORTMAINVIEW_TRANSPORTING_TUTORIALDESCRDISABLED;
-            }
+            this.updateControlPositions();
         }
         
         override protected function switchMode(param1:FortModeStateVO) : void
@@ -221,17 +257,47 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             if(param1.mode != this._mode)
             {
                 App.utils.asserter.assert(!(FORTIFICATION_ALIASES.MODES.indexOf(param1.mode) == -1),"unknown fort mode:" + param1.mode);
-                this.invokeStateMethod(false,this._mode);
-                this.invokeStateMethod(true,param1.mode);
+                this.invokeStateMethod(false,this._mode,this.getFortMode(param1.mode));
+                this.invokeStateMethod(true,param1.mode,this.getFortMode(param1.mode));
                 this._mode = param1.mode;
             }
             this._switcher.applyMode(param1);
             this._header.statsBtn.tooltip = TOOLTIPS.FORTIFICATION_HEADER_STATISTICS;
             this._header.clanListBtn.tooltip = TOOLTIPS.FORTIFICATION_HEADER_CLANLIST;
-            if(param1.mode == FORTIFICATION_ALIASES.MODE_TRANSPORTING || param1.mode == FORTIFICATION_ALIASES.MODE_DIRECTIONS)
+            this._header.calendarBtn.tooltip = TOOLTIPS.FORTIFICATION_HEADER_CALENDARBTN;
+            this._header.settingBtn.tooltip = TOOLTIPS.FORTIFICATION_HEADER_SETTINGSBTN;
+            if((this.isInTransportingMode(param1.mode)) || (this.isInDirectionMode(param1.mode)))
             {
                 dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this._footer));
             }
+        }
+        
+        override protected function setBattlesDirectionData(param1:BattleNotifiersDataVO) : void
+        {
+            this._buildings.directionsContainer.updateBattleDirectionNotifiers(param1.directionsBattles);
+        }
+        
+        private function getFortMode(param1:String) : Number
+        {
+            if(param1 == FORTIFICATION_ALIASES.MODE_TRANSPORTING_NEXT_STEP)
+            {
+                return FunctionalStates.TRANSPORTING_NEXT_STEP;
+            }
+            if(param1 == FORTIFICATION_ALIASES.MODE_TRANSPORTING_TUTORIAL_FIRST_STEP)
+            {
+                return FunctionalStates.TRANSPORTING_TUTORIAL_FIRST_STEP;
+            }
+            return FunctionalStates.UNKNOWN;
+        }
+        
+        private function isInTransportingMode(param1:String) : Boolean
+        {
+            return !(this.TRANSPORTING_MODES.indexOf(param1) == -1);
+        }
+        
+        private function isInDirectionMode(param1:String) : Boolean
+        {
+            return !(this.DIRECTION_MODES.indexOf(param1) == -1);
         }
         
         private function show() : void
@@ -239,13 +305,16 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this.visible = true;
         }
         
-        private function invokeStateMethod(param1:Boolean, param2:String) : void
+        private function invokeStateMethod(param1:Boolean, param2:String, param3:Number) : void
         {
-            var _loc3_:* = false;
+            var _loc4_:FortModeVO = null;
             if(param2 != null)
             {
-                _loc3_ = !(FORTIFICATION_ALIASES.TUTORIAL_MODES.indexOf(param2) == -1);
-                this.stateMethods[param2](param1,_loc3_);
+                _loc4_ = new FortModeVO();
+                _loc4_.isEntering = param1;
+                _loc4_.isTutorial = !(FORTIFICATION_ALIASES.TUTORIAL_MODES.indexOf(param2) == -1);
+                _loc4_.currentMode = param3;
+                this.stateMethods[param2](_loc4_);
             }
         }
         
@@ -262,7 +331,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             var _loc1_:Number = localToGlobal(new Point(0,0)).y;
             var _loc2_:Number = App.appHeight - _loc1_ - CHAT_HEIGHT;
             this.landscapeMask.setActualSize(App.appWidth,_loc2_);
-            FortsControlsAligner.instance.centerControl(this._buildings);
+            FortsControlsAligner.instance.centerControl(this._buildings,false);
             this._buildings.y = Math.round((this.landscapeMask.height - this._buildings.height) / 2);
             this._buildings.updateControlPositions();
             this._header.updateControls();
@@ -275,16 +344,48 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             this._footer.y = this.landscapeMask.actualHeight - this._footer.heightFill;
         }
         
-        private function onHeaderClanListBtnIconLoadedHandler(param1:LibraryLoaderEvent) : void
+        private function addLoaderHandlers() : void
         {
-            this.show();
-            this._header.clanListBtn.removeEventListener(LibraryLoaderEvent.ICON_LOADED,this.onHeaderClanListBtnIconLoadedHandler);
+            this.loadersList = new Vector.<DisplayObject>();
+            this.defaultLoadersList = new Vector.<DisplayObject>();
+            this.loadersList.push(this._buildings.landscapeBG);
+            this.loadersList.push(this._header.clanListBtn);
+            this.defaultLoadersList = this.loadersList.concat();
+            var _loc1_:int = this.loadersList.length;
+            var _loc2_:DisplayObject = null;
+            var _loc3_:* = 0;
+            while(_loc3_ < _loc1_)
+            {
+                _loc2_ = this.loadersList[_loc3_];
+                _loc2_.addEventListener(LibraryLoaderEvent.ICON_LOADED,this.onLoadHandle);
+                _loc2_.addEventListener(LibraryLoaderEvent.ICON_LOADING_FAILED,this.onLoadHandle);
+                _loc3_++;
+            }
         }
         
-        private function onHeaderClanListBtnIconLoadingFailedHandler(param1:LibraryLoaderEvent) : void
+        private function removeLoaderHandlers() : void
         {
-            this.show();
-            this._header.clanListBtn.removeEventListener(LibraryLoaderEvent.ICON_LOADING_FAILED,this.onHeaderClanListBtnIconLoadedHandler);
+            var _loc1_:int = this.defaultLoadersList.length;
+            var _loc2_:DisplayObject = null;
+            var _loc3_:* = 0;
+            while(_loc3_ < _loc1_)
+            {
+                _loc2_ = this.defaultLoadersList[_loc3_];
+                _loc2_.removeEventListener(LibraryLoaderEvent.ICON_LOADED,this.onLoadHandle);
+                _loc2_.removeEventListener(LibraryLoaderEvent.ICON_LOADING_FAILED,this.onLoadHandle);
+                _loc3_++;
+            }
+        }
+        
+        private function onLoadHandle(param1:Event) : void
+        {
+            this.loadersList.splice(this.loadersList.indexOf(param1.target),1);
+            if(this.loadersList.length == 0)
+            {
+                this.removeLoaderHandlers();
+                onViewReadyS();
+                this.show();
+            }
         }
         
         private function commanderHelpButtonHandler(param1:ButtonEvent) : void
@@ -306,10 +407,20 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             onStatsClickS();
         }
         
+        private function onCalendarBtnClickHandler(param1:ButtonEvent) : void
+        {
+            onCalendarClickS();
+        }
+        
+        private function onSettingBtnClickHandler(param1:ButtonEvent) : void
+        {
+            onSettingClickS();
+        }
+        
         private function onTransportButtonClickHandler(param1:ButtonEvent) : void
         {
             App.eventLogManager.logUIEvent(param1,0);
-            if(this._mode == FORTIFICATION_ALIASES.MODE_TRANSPORTING)
+            if(this.isInTransportingMode(this._mode))
             {
                 removeEventListener(InputEvent.INPUT,this.handleEscape);
                 onLeaveTransportingClickS();
@@ -351,12 +462,12 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         {
             App.eventLogManager.logUIEvent(param1,0);
             var _loc2_:String = this._mode;
-            if(_loc2_ == FORTIFICATION_ALIASES.MODE_TRANSPORTING)
+            if(this.isInTransportingMode(_loc2_))
             {
                 removeEventListener(InputEvent.INPUT,this.handleEscape);
                 onLeaveTransportingClickS();
             }
-            else if(_loc2_ == FORTIFICATION_ALIASES.MODE_DIRECTIONS)
+            else if(this.isInDirectionMode(_loc2_))
             {
                 onLeaveBuildDirectionClickS();
             }
@@ -374,14 +485,12 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         {
             param1.stopImmediatePropagation();
             onFirstTransportingStepS();
-            this._header.vignetteYellow.descrText.text = FORTIFICATIONS.FORTMAINVIEW_TRANSPORTING_EXPORTINGSTATUS;
         }
         
         private function nextTransportingStepHandler(param1:FortBuildingEvent) : void
         {
             param1.stopImmediatePropagation();
             onNextTransportingStepS();
-            this._header.vignetteYellow.descrText.text = FORTIFICATIONS.FORTMAINVIEW_TRANSPORTING_IMPORTINGSTATUS;
         }
         
         private function handleEscape(param1:InputEvent) : void
@@ -394,14 +503,12 @@ package net.wg.gui.lobby.fortifications.cmp.impl
             if(_loc2_.code == Keyboard.ESCAPE && _loc2_.value == InputValue.KEY_DOWN)
             {
                 param1.handled = true;
-                removeEventListener(InputEvent.INPUT,this.handleEscape);
-                onLeaveTransportingClickS();
+                if(this.TRANSPORTING_TUTORIAL_MODES.indexOf(this._mode) == -1)
+                {
+                    removeEventListener(InputEvent.INPUT,this.handleEscape);
+                    onLeaveTransportingClickS();
+                }
             }
-        }
-        
-        public function canShowAutomatically() : Boolean
-        {
-            return false;
         }
     }
 }

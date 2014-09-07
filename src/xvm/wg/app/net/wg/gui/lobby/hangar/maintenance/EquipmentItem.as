@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.hangar.maintenance
 {
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.infrastructure.interfaces.IResettable;
+    import net.wg.gui.interfaces.IResettable;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.components.controls.DropdownMenu;

@@ -21,6 +21,8 @@ package net.wg.utils
         
         function cleanupDynamicObject(param1:Object) : Object;
         
+        function cleanupDynamicObjectsCouple(param1:Object, param2:Object) : Object;
+        
         function keyToString(param1:Number) : KeyProps;
         
         function cloneObject(param1:Object) : *;
@@ -37,6 +39,8 @@ package net.wg.utils
         
         function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean;
         
+        function truncateTextFieldText(param1:TextField, param2:String, param3:String = "..") : String;
+        
         function getFullPlayerName(param1:IUserProps) : String;
         
         function addMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void;
@@ -49,6 +53,6 @@ package net.wg.utils
         
         function initTabIndex(param1:Array) : void;
         
-        function moveIconToEndOfText(param1:DisplayObject, param2:TextField, param3:int = 0, param4:int = 0) : void;
+        function moveDsiplObjToEndOfText(param1:DisplayObject, param2:TextField, param3:int = 0, param4:int = 0) : void;
     }
 }

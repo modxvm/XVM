@@ -72,7 +72,7 @@ package net.wg.gui.lobby.dialogs
         {
             super.onPopulate();
             Window(window).visible = false;
-            showWindowBg = true;
+            showWindowBgForm = true;
             window.useBottomBtns = true;
             this.submitButton.addEventListener(ButtonEvent.CLICK,this.onClickSubmitButton);
         }

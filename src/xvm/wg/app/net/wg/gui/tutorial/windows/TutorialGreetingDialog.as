@@ -3,6 +3,8 @@ package net.wg.gui.tutorial.windows
     import net.wg.gui.components.controls.UILoaderAlt;
     import net.wg.gui.tutorial.controls.BattleBonusItem;
     import flash.text.TextField;
+    import scaleform.gfx.TextFieldEx;
+    import flash.text.TextFieldAutoSize;
     import flash.display.InteractiveObject;
     
     public class TutorialGreetingDialog extends TutorialDialog
@@ -71,6 +73,7 @@ package net.wg.gui.tutorial.windows
         {
             super.configUI();
             this.restartHintField.text = App.utils.locale.makeString(BATTLE_TUTORIAL.DIALOGS_GREETING_RESTART_HINT_TEXT);
+            TextFieldEx.setVerticalAlign(this.restartHintField,TextFieldAutoSize.CENTER);
         }
         
         override protected function onInitModalFocus(param1:InteractiveObject) : void

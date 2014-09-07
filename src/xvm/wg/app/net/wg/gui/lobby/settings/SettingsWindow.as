@@ -8,7 +8,7 @@ package net.wg.gui.lobby.settings
     import net.wg.gui.components.controls.SoundButtonEx;
     import scaleform.clik.controls.ScrollingList;
     import net.wg.gui.components.controls.DropDownListItemRendererSound;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import scaleform.clik.utils.Padding;
     import net.wg.gui.lobby.settings.vo.SettingsControlProp;
     import net.wg.utils.ICommons;
@@ -25,7 +25,7 @@ package net.wg.gui.lobby.settings
     import flash.display.MovieClip;
     import scaleform.clik.interfaces.IDataProvider;
     import net.wg.data.constants.KeysMap;
-    import net.wg.infrastructure.interfaces.ISettingsBase;
+    import net.wg.gui.interfaces.ISettingsBase;
     import flash.geom.Point;
     import net.wg.data.managers.ITooltipProps;
     import net.wg.data.managers.impl.TooltipProps;
@@ -42,7 +42,7 @@ package net.wg.gui.lobby.settings
             this.canDrag = false;
             this.canClose = false;
             this.canResize = false;
-            this.showWindowBg = false;
+            this.showWindowBgForm = false;
             this.isModal = true;
             this.isCentered = true;
         }

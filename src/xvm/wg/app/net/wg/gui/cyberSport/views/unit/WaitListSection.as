@@ -102,9 +102,19 @@ override protected function onDispose() : void
 
 override protected function onControlRollOver(param1:MouseEvent) : void
 {
-    var _loc2_:String = TOOLTIPS.CYBERSPORT_UNIT_ACCESS_HEADER;
-    var _loc3_:String = (_rallyData) && !_rallyData.statusValue?TOOLTIPS.CYBERSPORT_UNIT_ACCESS_BODYCLOSED:TOOLTIPS.CYBERSPORT_UNIT_ACCESS_BODYOPEN;
-    this.showTooltip(_loc2_,_loc3_);
+    var _loc2_:String = null;
+    var _loc3_:String = null;
+    super.onControlRollOver(param1);
+    switch(param1.target)
+    {
+        case btnInviteFriend:
+            App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNIT_INVITEBTN);
+            break;
+        case this.btnCloseRoom:
+            _loc2_ = TOOLTIPS.CYBERSPORT_UNIT_ACCESS_HEADER;
+            _loc3_ = (_rallyData) && !_rallyData.statusValue?TOOLTIPS.CYBERSPORT_UNIT_ACCESS_BODYCLOSED:TOOLTIPS.CYBERSPORT_UNIT_ACCESS_BODYOPEN;
+            this.showTooltip(_loc2_,_loc3_);
+    }
 }
 
 private function showTooltip(param1:String, param2:String) : void

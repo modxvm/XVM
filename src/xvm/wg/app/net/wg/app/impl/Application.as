@@ -22,8 +22,9 @@ package net.wg.app.impl
     import net.wg.infrastructure.managers.utils.impl.VOManager;
     import net.wg.infrastructure.managers.utils.impl.Icons;
     import net.wg.infrastructure.managers.utils.impl.StyleSheetManager;
-    import net.wg.gui.lobby.fortifications.utils.impl.TweenAnimator;
+    import net.wg.infrastructure.managers.utils.impl.TweenAnimator;
     import net.wg.infrastructure.managers.utils.impl.AnimBuilder;
+    import net.wg.infrastructure.managers.utils.impl.DateTime;
     import net.wg.infrastructure.managers.utils.impl.Nations;
     import net.wg.utils.ITweenManager;
     import net.wg.infrastructure.managers.utils.impl.TweenManager;
@@ -114,7 +115,7 @@ package net.wg.app.impl
         
         override protected function getNewUtils() : IUtils
         {
-            var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new Locale(),new WGJSON(),new HelpLayout(),new ClassFactory(),new PopupManager(),new Commons(),new FocusHandlerEx(),new EventCollector(),new IME(),new VOManager(),new Icons(),new StyleSheetManager(),new TweenAnimator(),new AnimBuilder());
+            var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new Locale(),new WGJSON(),new HelpLayout(),new ClassFactory(),new PopupManager(),new Commons(),new FocusHandlerEx(),new EventCollector(),new IME(),new VOManager(),new Icons(),new StyleSheetManager(),new TweenAnimator(),new AnimBuilder(),new DateTime());
             _loc1_.setNations(new Nations(_loc1_));
             return _loc1_;
         }

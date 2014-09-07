@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.hangar.ammunitionPanel
 {
     import net.wg.infrastructure.base.meta.impl.AmmunitionPanelMeta;
-    import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
+    import net.wg.gui.interfaces.IHelpLayoutComponent;
     import net.wg.infrastructure.base.meta.IAmmunitionPanelMeta;
     import net.wg.utils.IEventCollector;
     import flash.text.TextField;
@@ -94,10 +94,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             var _loc2_:Number = this.radio.x + this.radio.width - this.gun.x;
-            var _loc3_:Object = _loc1_.getProps(_loc2_,this.gun.height,Directions.TOP,LOBBY_HELP.HANGAR_MODULES,this.gun.x,this.gun.y);
+            var _loc3_:Object = _loc1_.getProps(_loc2_,this.gun.height,Directions.TOP,LOBBY_HELP.HANGAR_MODULES,this.gun.x,this.gun.y,_loc1_.defConnectorLength);
             this._modulesHL = _loc1_.create(root,_loc3_,this);
             _loc2_ = this.optionalDevice3.x + this.optionalDevice3.width - this.optionalDevice1.x;
-            _loc3_ = _loc1_.getProps(_loc2_,this.optionalDevice1.height,Directions.BOTTOM,LOBBY_HELP.HANGAR_OPTIONAL_DEVICES,this.optionalDevice1.x,this.optionalDevice1.y);
+            _loc3_ = _loc1_.getProps(_loc2_,this.optionalDevice1.height,Directions.BOTTOM,LOBBY_HELP.HANGAR_OPTIONAL_DEVICES,this.optionalDevice1.x,this.optionalDevice1.y,_loc1_.defConnectorLength);
             this._devicesHL = _loc1_.create(root,_loc3_,this);
             this.maitenanceBtn.showHelpLayout();
             this.tuningBtn.showHelpLayout();

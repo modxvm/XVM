@@ -5,6 +5,7 @@ package net.wg.gui.lobby.fortifications.data
         
         public function BuildingPopoverHeaderVO(param1:Object)
         {
+            this.mapTooltip = [];
             super(param1);
         }
         
@@ -31,5 +32,11 @@ package net.wg.gui.lobby.fortifications.data
         public var glowColor:Number = 0;
         
         public var isModernization:Boolean = false;
+        
+        public var canDeleteBuilding:Boolean = false;
+        
+        public var mapInfo:String = "";
+        
+        public var mapTooltip:Array;
     }
 }

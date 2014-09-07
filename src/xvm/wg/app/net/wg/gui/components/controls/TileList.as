@@ -96,13 +96,13 @@ package net.wg.gui.components.controls
                 _loc6_ = getRendererAt(_loc5_);
                 if(direction == DirectionMode.HORIZONTAL)
                 {
-                    _loc6_.y = _loc5_ % _totalRows * (_loc2_ + this.paddingBottom + padding.bottom) + margin + padding.top;
-                    _loc6_.x = (_loc5_ / _totalRows >> 0) * (_loc3_ + this.paddingRight + padding.right) + margin + padding.left;
+                    _loc6_.y = _loc5_ % _totalRows * (_loc2_ + padding.bottom) + margin + padding.top;
+                    _loc6_.x = (_loc5_ / _totalRows >> 0) * (_loc3_ + padding.right) + margin + padding.left;
                 }
                 else
                 {
-                    _loc6_.x = _loc5_ % _totalColumns * (_loc3_ + this.paddingRight + padding.right) + margin + padding.left;
-                    _loc6_.y = (_loc5_ / _totalColumns >> 0) * (_loc2_ + this.paddingBottom + padding.bottom) + margin + padding.top;
+                    _loc6_.x = _loc5_ % _totalColumns * (_loc3_ + padding.right) + margin + padding.left;
+                    _loc6_.y = (_loc5_ / _totalColumns >> 0) * (_loc2_ + padding.bottom) + margin + padding.top;
                 }
                 if(!_loc4_)
                 {
@@ -259,8 +259,8 @@ package net.wg.gui.components.controls
         override protected function calculateRendererTotal(param1:Number, param2:Number) : uint
         {
             super.calculateRendererTotal(param1,param2);
-            _totalRows = availableHeight / (rowHeight + this.paddingBottom) >> 0;
-            _totalColumns = availableWidth / (columnWidth + this.paddingRight) >> 0;
+            _totalRows = (availableHeight + this.paddingBottom) / (rowHeight + padding.bottom) >> 0;
+            _totalColumns = (availableWidth + this.paddingRight) / (columnWidth + padding.right) >> 0;
             _totalRenderers = _totalRows * _totalColumns;
             return _totalRenderers;
         }

@@ -2,13 +2,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
 {
     import net.wg.infrastructure.base.meta.impl.FortModernizationWindowMeta;
     import net.wg.infrastructure.base.meta.IFortModernizationWindowMeta;
+    import flash.events.MouseEvent;
     import net.wg.gui.components.advanced.DashLine;
     import flash.text.TextField;
     import net.wg.gui.lobby.fortifications.cmp.build.impl.ModernizationCmp;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.components.common.ArrowSeparator;
     import net.wg.gui.lobby.fortifications.data.BuildingModernizationVO;
     import net.wg.data.constants.generated.EVENT_LOG_CONSTANTS;
-    import flash.events.MouseEvent;
     import flash.display.InteractiveObject;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.utils.ComplexTooltipHelper;
@@ -29,6 +30,11 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         private static var HORIZONTAL_PADDING:int = 5;
         
+        private static function onRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
+        }
+        
         public var dashLine:DashLine;
         
         public var conditionIcon:TextField = null;
@@ -46,6 +52,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
         public var applyButton:SoundButtonEx = null;
         
         public var cancelButton:SoundButtonEx = null;
+        
+        public var separator:ArrowSeparator = null;
         
         private var model:BuildingModernizationVO = null;
         
@@ -85,12 +93,12 @@ package net.wg.gui.lobby.fortifications.windows.impl
             {
                 this.prepareToolTipMessage();
                 this.applyButton.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-                this.applyButton.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+                this.applyButton.addEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             }
             else
             {
                 this.applyButton.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-                this.applyButton.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+                this.applyButton.removeEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             }
             this.buildingBefore.setData(this.model.beforeUpgradeData);
             this.buildingBefore.applyGlowFilter();
@@ -113,10 +121,12 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         override protected function configUI() : void
         {
+            var _loc1_:* = 0;
             super.configUI();
+            this.applyButton.mouseEnabledOnDisabled = true;
             this.applyButton.addEventListener(ButtonEvent.CLICK,this.onClickApplyBtnHandler);
             this.cancelButton.addEventListener(ButtonEvent.CLICK,this.onClickCancelBtnHandler);
-            var _loc1_:int = this.costLabel.x + HORIZONTAL_PADDING;
+            _loc1_ = this.costLabel.x + HORIZONTAL_PADDING;
             this.dashLine.width = Math.floor(this.costValue.x + this.costValue.width - _loc1_ - HORIZONTAL_PADDING);
             this.dashLine.x = _loc1_;
         }
@@ -130,7 +140,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         override protected function onDispose() : void
         {
             this.applyButton.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-            this.applyButton.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+            this.applyButton.removeEventListener(MouseEvent.ROLL_OUT,onRollOutHandler);
             this.applyButton.removeEventListener(ButtonEvent.CLICK,this.onClickApplyBtnHandler);
             this.applyButton.dispose();
             this.applyButton = null;
@@ -147,6 +157,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.costLabel = null;
             this.costValue = null;
             this.conditionIcon = null;
+            this.separator.dispose();
+            this.separator = null;
             super.onDispose();
         }
         
@@ -158,11 +170,6 @@ package net.wg.gui.lobby.fortifications.windows.impl
         private function onRollOverHandler(param1:MouseEvent) : void
         {
             App.toolTipMgr.showComplex(this.btnToolTipText);
-        }
-        
-        private function onRollOutHandler(param1:MouseEvent) : void
-        {
-            App.toolTipMgr.hide();
         }
         
         private function onClickApplyBtnHandler(param1:ButtonEvent) : void

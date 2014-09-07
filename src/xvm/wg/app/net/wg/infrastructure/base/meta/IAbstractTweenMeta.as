@@ -37,6 +37,8 @@ package net.wg.infrastructure.base.meta
         
         function getIsCompleteS() : Boolean;
         
+        function postponedCheckStateS() : void;
+        
         function getTargetDisplayObject() : DisplayObject;
         
         function onAnimComplete() : void;

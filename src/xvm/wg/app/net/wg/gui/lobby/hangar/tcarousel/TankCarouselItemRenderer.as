@@ -331,11 +331,11 @@ package net.wg.gui.lobby.hangar.tcarousel
             var _loc1_:* = false;
             var _loc2_:TextFormat = null;
             var _loc3_:Object = null;
+            super.draw();
             if(_baseDisposed)
             {
                 return;
             }
-            super.draw();
             if(_dataDirty)
             {
                 if((this.vehicleIcon && !empty) && (!this.buyTank) && !this.buySlot)
@@ -397,7 +397,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                     this.emptyInfoTxt.text = this.emptyInfoTxt.text + " " + this._availableSlots;
                     this.emptyInfoTxt.visible = true;
                 }
-                if(this.buySlot)
+                if((this.buySlot) && (this.slotPrice))
                 {
                     this.slotPrice.text = this._slotPrice.toString();
                     if(this.actionPrice)

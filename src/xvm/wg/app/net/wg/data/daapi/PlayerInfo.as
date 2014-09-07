@@ -10,6 +10,8 @@ package net.wg.data.daapi
             super(param1);
         }
         
+        private var _dbID:Number;
+        
         private var _isFriend:Boolean;
         
         private var _isIgnored:Boolean;
@@ -27,6 +29,16 @@ package net.wg.data.daapi
         private var _canDoDenunciations:Boolean = false;
         
         private var _canCreateChannel:Boolean = false;
+        
+        public function get dbID() : Number
+        {
+            return this._dbID;
+        }
+        
+        public function set dbID(param1:Number) : void
+        {
+            this._dbID = param1;
+        }
         
         public function get canAddToFriend() : Boolean
         {

@@ -11,7 +11,7 @@ package net.wg.infrastructure.managers.utils.impl
     import flash.display.DisplayObjectContainer;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.utils.getQualifiedClassName;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import net.wg.infrastructure.exceptions.InfrastructureException;
     import net.wg.infrastructure.exceptions.NullPointerException;
     import flash.events.EventPhase;

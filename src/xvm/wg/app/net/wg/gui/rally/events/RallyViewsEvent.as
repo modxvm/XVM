@@ -21,6 +21,8 @@ package net.wg.gui.rally.events
         
         public static var ASSIGN_SLOT_REQUEST:String = "takePlaceRequest";
         
+        public static var CREATE_CLAN_BATTLE_ROOM:String = "createClanBattleRoom";
+        
         public static var INVITE_FRIEND_REQUEST:String = "inviteFriendRequest";
         
         public static var IGNORE_USER_REQUEST:String = "ignoreUserRequest";
@@ -33,11 +35,13 @@ package net.wg.gui.rally.events
         
         public static var LEAVE_SLOT_REQUEST:String = "leavePlaceRequest";
         
+        public static var ASSIGN_FREE_SLOT_REQUEST:String = "assignFreeSlotRequest";
+        
         public static var VEH_BTN_ROLL_OVER:String = "vehBtnRollOver";
         
         public static var VEH_BTN_ROLL_OUT:String = "vehBtnRollOut";
         
-        public var data;
+        public var data:*;
         
         override public function clone() : Event
         {

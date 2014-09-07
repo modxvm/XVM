@@ -1,14 +1,14 @@
 package net.wg.gui.components.windows
 {
     import scaleform.clik.controls.Window;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.SoundButton;
     import net.wg.gui.components.controls.TextFieldShort;
     import net.wg.gui.components.controls.CloseButton;
     import flash.display.Sprite;
     import scaleform.clik.utils.Padding;
-    import net.wg.infrastructure.interfaces.IAbstractWindowView;
+    import net.wg.infrastructure.base.interfaces.IAbstractWindowView;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
     import net.wg.data.constants.DragType;
@@ -237,6 +237,10 @@ package net.wg.gui.components.windows
             {
                 _content = DisplayObject(this.windowContent);
                 addChild(_content);
+                if(this.windowContent.canResize)
+                {
+                    setChildIndex(resizeBtn,numChildren - 1);
+                }
                 invalidate(INVALID_SRC_VIEW);
             }
         }
@@ -398,7 +402,8 @@ package net.wg.gui.components.windows
             if((isInvalid(INVALID_SRC_VIEW)) && (this.windowContent))
             {
                 this.updateSource();
-                this.showBgForm = this.windowContent.showWindowBg;
+                this.showBgForm = this.windowContent.showWindowBgForm;
+                background.visible = this.windowContent.showWindowBg;
                 this.minimizeBtn.visible = this.windowContent.canMinimize;
                 resizeBtn.visible = this.windowContent.canResize;
                 closeBtn.visible = this.windowContent.canClose;

@@ -1,12 +1,13 @@
 package net.wg.gui.lobby.hangar
 {
     import net.wg.infrastructure.base.meta.impl.HangarMeta;
-    import net.wg.infrastructure.interfaces.IHangar;
+    import net.wg.gui.lobby.hangar.interfaces.IHangar;
     import net.wg.gui.components.controls.IconButton;
     import net.wg.gui.lobby.hangar.crew.Crew;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.gui.lobby.hangar.ammunitionPanel.AmmunitionPanel;
     import flash.display.Sprite;
+    import net.wg.gui.lobby.header.QuestsControl;
     import flash.display.DisplayObject;
     import net.wg.data.Aliases;
     import flash.ui.Keyboard;
@@ -15,8 +16,8 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.events.LobbyEvent;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.Event;
-    import flash.geom.Point;
     import scaleform.clik.events.InputEvent;
+    import flash.geom.Point;
     import net.wg.utils.IEventCollector;
     import net.wg.data.constants.Tooltips;
     
@@ -30,15 +31,13 @@ package net.wg.gui.lobby.hangar
         
         private static var CAROUSEL_AMMUNITION_PADDING:int = 7;
         
-        private static var PARAMS_RIGHT_MARGIN:int = 8;
+        private static var PARAMS_RIGHT_MARGIN:int = 0;
         
-        private static var RESEARCH_PANEL_RIGHT_MARGIN:int = 172;
+        private static var RESEARCH_PANEL_RIGHT_MARGIN:int = 290;
         
         private static var MESSENGER_BAR_PADDING:int = 45;
         
         private static var INVALIDATE_ENABLED_CREW:String = "InvalidateEnabledCrew";
-        
-        private static var IGR_LOGO:String = "../maps/icons/library/igrLogo.png";
         
         public var vehResearchPanel:ResearchPanel;
         
@@ -57,6 +56,8 @@ package net.wg.gui.lobby.hangar
         public var bottomBg:Sprite;
         
         public var igrLabel:IgrLabel;
+        
+        public var questsControl:QuestsControl;
         
         private var _isShowHelpLayout:Boolean = false;
         
@@ -204,6 +205,7 @@ package net.wg.gui.lobby.hangar
             registerComponent(this.params,Aliases.PARAMS);
             registerComponent(this.carousel,Aliases.TANK_CAROUSEL);
             registerComponent(this.ammunitionPanel,Aliases.AMMUNITION_PANEL);
+            registerFlashComponentS(this.questsControl,Aliases.QUESTS_CONTROL);
             addEventListener(CrewDropDownEvent.SHOW_DROP_DOWN,this.onShowCrewDropwDownHandler);
             if(this.vehResearchPanel != null)
             {
@@ -225,7 +227,6 @@ package net.wg.gui.lobby.hangar
             {
                 App.gameInputMgr.clearKeyHandler(Keyboard.F2,KeyboardEvent.KEY_UP);
             }
-            super.onDispose();
             this.vehResearchPanel = null;
             this.tmenXpPanel = null;
             this.crew = null;
@@ -235,6 +236,8 @@ package net.wg.gui.lobby.hangar
             this.bottomBg = null;
             this.igrLabel.dispose();
             this.igrLabel = null;
+            this.questsControl = null;
+            super.onDispose();
         }
         
         override protected function configUI() : void
@@ -257,6 +260,7 @@ package net.wg.gui.lobby.hangar
             }
             this.crewOperationBtn.tooltip = CREW_OPERATIONS.CREWOPERATIONS_BTN_TOOLTIP;
             this.crewOperationBtn.addEventListener(ButtonEvent.CLICK,this.retrainBtnClickHandler,false,0,true);
+            this.crewOperationBtn.iconSource = RES_ICONS.MAPS_ICONS_TANKMEN_CREW_CREWOPERATIONS;
         }
         
         override protected function draw() : void
@@ -284,8 +288,7 @@ package net.wg.gui.lobby.hangar
         
         private function retrainBtnClickHandler(param1:Event) : void
         {
-            var _loc2_:Point = localToGlobal(new Point(this.crewOperationBtn.x + this.crewOperationBtn.width,this.crewOperationBtn.y + this.crewOperationBtn.height / 2));
-            App.popoverMgr.show(this,Aliases.CREW_OPERATIONS_POPOVER,_loc2_.x,_loc2_.y);
+            App.popoverMgr.show(this,Aliases.CREW_OPERATIONS_POPOVER);
         }
         
         private function toggleGUIEditorHandler(param1:InputEvent) : void

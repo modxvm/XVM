@@ -66,6 +66,12 @@ package net.wg.data.constants
         
         public static var SLIDER_DIVISION_POINT:String = "SliderDivisionPointUI";
         
+        public static var CALENDAR_WEEK_DAY:String = "CalendarWeekDayUI";
+        
+        public static var CALENDAR_DAY:String = "CalendarDayUI";
+        
+        public static var BUILDING_THUMBNAIL:String = "BuildingThumbnailUI";
+        
         public static var TRANSPORTING_HELPER:String = "net.wg.gui.lobby.fortifications.utils.impl.TransportingHelper";
         
         public static var PERSONAL_CASE_STATS:String = "crewTankmanStats";
@@ -143,5 +149,7 @@ package net.wg.data.constants
         public static var SHADOW_IN_ANIM:String = "ShadowInAnimUI";
         
         public static var SHADOW_OUT_ANIM:String = "ShadowOutAnimUI";
+        
+        public static var PRE_BATTLE_CHANNEL_RENDERER:String = "PreBattleChannelRendererUI";
     }
 }

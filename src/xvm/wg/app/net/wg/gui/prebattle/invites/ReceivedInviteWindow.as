@@ -69,7 +69,7 @@ package net.wg.gui.prebattle.invites
         {
             super.onPopulate();
             canClose = true;
-            showWindowBg = false;
+            showWindowBgForm = false;
             window.useBottomBtns = true;
             isCentered = false;
             var _loc1_:Padding = window.contentPadding as Padding;

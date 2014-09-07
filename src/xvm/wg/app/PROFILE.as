@@ -32,6 +32,10 @@ package
         
         public static var PROFILE_TABS_TOOLTIP_AWARDS:String = "#profile:profile/tabs/tooltip/awards";
         
+        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_BATTLES:String = "#profile:profile/params/tooltip/unavailable/fort/battles";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_WINSEFFICIENCY:String = "#profile:profile/params/tooltip/unavailable/fort/winsEfficiency";
+        
         public static var PROFILE_TABS_TOOLTIP_STATISTICS:String = "#profile:profile/tabs/tooltip/statistics";
         
         public static var PROFILE_TABS_TOOLTIP_TECHNIQUE:String = "#profile:profile/tabs/tooltip/technique";
@@ -111,6 +115,10 @@ package
         public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "WinsEfficiency";
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIE:String = "#profile:profile/params/tooltip/fort/sortie";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_LOOTING:String = "#profile:profile/params/tooltip/fort/looting";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_DIF_FORT_BATTLESCOUNT:String = "#profile:profile/params/tooltip/dif/fort/battlesCount";
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency";
         
@@ -243,6 +251,8 @@ package
         public static var SECTION_STATISTICS_SCORES_FORTTOTALBATTLES:String = "#profile:section/statistics/scores/fortTotalBattles";
         
         public static var SECTION_STATISTICS_SCORES_FORTSORTIE:String = "#profile:section/statistics/scores/fortSortie";
+        
+        public static var SECTION_STATISTICS_SCORES_LOOTING:String = "#profile:section/statistics/scores/looting";
         
         public static var SECTION_STATISTICS_SCORES_FORTSORTIES_AVGRESOURCES:String = "#profile:section/statistics/scores/fortSorties/AvgResources";
         
@@ -496,6 +506,10 @@ package
         
         public static var PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT_BODY:String = PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT + "/body";
         
+        public static var PROFILE_PARAMS_TOOLTIP_DIF_FORT_BATTLESCOUNT_HEADER:String = PROFILE_PARAMS_TOOLTIP_DIF_FORT_BATTLESCOUNT + "/header";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_DIF_FORT_BATTLESCOUNT_BODY:String = PROFILE_PARAMS_TOOLTIP_DIF_FORT_BATTLESCOUNT + "/body";
+        
         public static var PROFILE_PARAMS_TOOLTIP_WINS_HEADER:String = PROFILE_PARAMS_TOOLTIP_WINS + "/header";
         
         public static var PROFILE_PARAMS_TOOLTIP_WINS_BODY:String = PROFILE_PARAMS_TOOLTIP_WINS + "/body";
@@ -628,13 +642,25 @@ package
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "/body";
         
+        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_BATTLES_HEADER:String = PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_BATTLES + "/header";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_BATTLES_BODY:String = PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_BATTLES + "/body";
+        
         public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "WinsEfficiency/header";
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_BATTLESWINSEFFICIENCY_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_BATTLES + "WinsEfficiency/body";
         
+        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_WINSEFFICIENCY_HEADER:String = PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_WINSEFFICIENCY + "/header";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_WINSEFFICIENCY_BODY:String = PROFILE_PARAMS_TOOLTIP_UNAVAILABLE_FORT_WINSEFFICIENCY + "/body";
+        
         public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIE_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "/header";
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIE_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "/body";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_LOOTING_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_LOOTING + "/header";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_FORT_LOOTING_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_LOOTING + "/body";
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency/header";
         

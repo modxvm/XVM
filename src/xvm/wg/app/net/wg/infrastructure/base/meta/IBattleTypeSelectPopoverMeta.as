@@ -7,6 +7,10 @@ package net.wg.infrastructure.base.meta
         
         function selectFightS(param1:String) : void;
         
-        function as_update(param1:Array) : void;
+        function demoClickS() : void;
+        
+        function as_update(param1:Array, param2:Boolean, param3:Boolean) : void;
+        
+        function as_setDemonstrationEnabled(param1:Boolean) : void;
     }
 }

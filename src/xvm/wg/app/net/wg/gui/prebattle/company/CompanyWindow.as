@@ -380,7 +380,7 @@ package net.wg.gui.prebattle.company
         {
             super.onPopulate();
             registerComponent(channelComponent,Aliases.CHANNEL_COMPONENT);
-            showWindowBg = false;
+            showWindowBgForm = false;
             window.useBottomBtns = true;
             canMinimize = true;
             canClose = true;

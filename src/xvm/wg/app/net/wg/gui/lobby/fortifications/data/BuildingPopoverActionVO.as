@@ -5,6 +5,7 @@ package net.wg.gui.lobby.fortifications.data
         
         public function BuildingPopoverActionVO(param1:Object)
         {
+            this.pauseReasonTooltip = [];
             super(param1);
         }
         
@@ -21,5 +22,9 @@ package net.wg.gui.lobby.fortifications.data
         public var actionButtonLbl:String = "";
         
         public var enableActionButton:Boolean = true;
+        
+        public var productionInPause:Boolean = false;
+        
+        public var pauseReasonTooltip:Array;
     }
 }

@@ -1,6 +1,8 @@
 package net.wg.gui.lobby.fortifications.data
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
+    import net.wg.gui.lobby.profile.components.ILditInfo;
+    import net.wg.gui.lobby.profile.pages.statistics.header.StatisticsHeaderVO;
     
     public class ClanStatsVO extends DAAPIDataClass
     {
@@ -9,94 +11,66 @@ package net.wg.gui.lobby.fortifications.data
         {
             this.sortieBattlesStats = [];
             this.sortieDefresStats = [];
+            this.periodBattlesStats = [];
+            this.periodDefresStats = [];
             super(param1);
         }
         
-        private static var FIELD_SORTIE_BATTLES_COUNT:String = "sortieBattlesCount";
+        private static var KEYS_CLAN_STAT_ITEM_VO:Vector.<String> = new <String>["sortieBattlesCount","sortieWins","sortieAvgDefres","periodBattles","periodWins","periodAvgDefres"];
         
-        private static var FIELD_SORTIE_WINS:String = "sortieWins";
-        
-        private static var FIELD_SORTIE_AVG_DEFRES:String = "sortieAvgDefres";
-        
-        private static var FIELD_SORTIE_BATTLES_STATS:String = "sortieBattlesStats";
-        
-        private static var FIELD_SORTIE_DEFRES_STATS:String = "sortieDefresStats";
+        private static var KEYS_GROUPEX:Vector.<String> = new <String>["sortieBattlesStats","sortieDefresStats","periodBattlesStats","periodDefresStats"];
         
         public var clanName:String = "";
         
-        public var sortieBattlesCount:ClanStatItemVO;
+        public var sortieBattlesCount:ILditInfo;
         
-        public var sortieWins:ClanStatItemVO;
+        public var sortieWins:ILditInfo;
         
-        public var sortieAvgDefres:ClanStatItemVO;
+        public var sortieAvgDefres:ILditInfo;
         
         public var sortieBattlesStats:Array;
         
         public var sortieDefresStats:Array;
         
+        public var periodBattles:ILditInfo;
+        
+        public var periodWins:ILditInfo;
+        
+        public var periodAvgDefres:ILditInfo;
+        
+        public var periodBattlesStats:Array;
+        
+        public var periodDefresStats:Array;
+        
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
-            var _loc3_:ClanStatItemVO = null;
-            var _loc4_:Array = null;
-            var _loc5_:Object = null;
-            switch(param1)
+            var _loc3_:Array = null;
+            var _loc4_:Object = null;
+            if(KEYS_CLAN_STAT_ITEM_VO.indexOf(param1) >= 0)
             {
-                case FIELD_SORTIE_BATTLES_COUNT:
-                case FIELD_SORTIE_WINS:
-                case FIELD_SORTIE_AVG_DEFRES:
-                    _loc3_ = new ClanStatItemVO(param2);
-                    this[param1] = _loc3_;
-                    return false;
-                case FIELD_SORTIE_BATTLES_STATS:
-                case FIELD_SORTIE_DEFRES_STATS:
-                    _loc4_ = param2 as Array;
-                    for each(_loc5_ in _loc4_)
-                    {
-                        (this[param1] as Array).push(new ClanStatItemVO(_loc5_));
-                    }
-                    return false;
-                default:
-                    return true;
+                this[param1] = new StatisticsHeaderVO(param2);
+                return false;
             }
+            if(KEYS_GROUPEX.indexOf(param1) >= 0)
+            {
+                _loc3_ = param2 as Array;
+                for each(_loc4_ in _loc3_)
+                {
+                    (this[param1] as Array).push(new ClanStatItemVO(_loc4_));
+                }
+                return false;
+            }
+            return true;
         }
         
         override protected function onDispose() : void
         {
-            var _loc2_:ClanStatItemVO = null;
-            var _loc3_:Array = null;
-            if(this.sortieBattlesCount)
-            {
-                this.sortieBattlesCount.dispose();
-                this.sortieBattlesCount = null;
-            }
-            if(this.sortieWins)
-            {
-                this.sortieWins.dispose();
-                this.sortieWins = null;
-            }
-            if(this.sortieAvgDefres)
-            {
-                this.sortieAvgDefres.dispose();
-                this.sortieAvgDefres = null;
-            }
-            var _loc1_:Array = [this.sortieBattlesStats,this.sortieDefresStats];
-            for each(_loc3_ in _loc1_)
-            {
-                if(_loc3_)
-                {
-                    for each(_loc2_ in _loc3_)
-                    {
-                        if(_loc2_)
-                        {
-                            _loc2_.dispose();
-                        }
-                    }
-                    _loc3_.splice(0);
-                }
-            }
-            this.sortieBattlesStats = null;
-            this.sortieDefresStats = null;
-            super.onDispose();
+            /*
+             * Decompilation error
+             * Code may be obfuscated
+             * Error type: TranslateException
+             */
+            throw new Error("Not decompiled due to error");
         }
     }
 }

@@ -76,7 +76,6 @@ package net.wg.gui.rally.helpers
             var _loc7_:* = NaN;
             var _loc8_:* = false;
             super.onEndDrop(param1,param2,param3,param4);
-            trace(param1,param2,param3,param4.parent,param4);
             App.utils.asserter.assertNotNull(s_lastFreeSlots,"_lastFreeSlots" + Errors.CANT_NULL);
             var _loc5_:IDropItem = IDropItem(param3);
             var _loc6_:Number = _loc5_.data?_loc5_.data.dbID:this._playerID;

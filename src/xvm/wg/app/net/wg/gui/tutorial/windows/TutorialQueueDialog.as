@@ -13,6 +13,7 @@ package net.wg.gui.tutorial.windows
             this._timePointcuts = [];
             super();
             canClose = false;
+            showWindowBgForm = false;
             showWindowBg = false;
             isModal = true;
         }
@@ -127,7 +128,7 @@ package net.wg.gui.tutorial.windows
         
         override protected function onPopulate() : void
         {
-            window.getBackground().visible = false;
+            super.onPopulate();
         }
         
         override protected function onDispose() : void

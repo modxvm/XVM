@@ -10,14 +10,14 @@ package net.wg.gui.lobby.retrainCrewWindow
     import net.wg.gui.lobby.profile.components.ColoredDeshLineTextItem;
     import net.wg.gui.lobby.questsWindow.VehicleBlock;
     import net.wg.gui.components.common.containers.GroupEx;
+    import net.wg.utils.ILocale;
     import net.wg.gui.components.common.containers.HorizontalGroupLayout;
     import flash.events.Event;
-    import net.wg.utils.ILocale;
     import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.events.IndexEvent;
     import net.wg.gui.lobby.questsWindow.components.QuestsDashlineItem;
     import net.wg.data.constants.IconsTypes;
-    import net.wg.infrastructure.interfaces.IWindow;
+    import net.wg.infrastructure.base.interfaces.IWindow;
     import scaleform.clik.utils.Padding;
     
     public class RetrainCrewWindow extends RetrainCrewWindowMeta implements IRetrainCrewWindowMeta
@@ -80,12 +80,13 @@ package net.wg.gui.lobby.retrainCrewWindow
         
         override protected function configUI() : void
         {
+            var _loc1_:ILocale = null;
             super.configUI();
             this.enough_money_color = this.result.valueTextField.textColor;
             this.rolesGroup.layout = new HorizontalGroupLayout();
             this.rolesGroup.itemRendererClass = App.utils.classFactory.getClass("RetrainCrewRoleIR_UI");
             this.rolesGroup.addEventListener(Event.RESIZE,this.groupResizeHandler,false,0,true);
-            var _loc1_:ILocale = App.utils.locale;
+            _loc1_ = App.utils.locale;
             this.submitBtn.label = _loc1_.makeString(RETRAIN_CREW.LABEL_BUTTON_SUBMIT);
             this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitClickHandler,false,0,true);
             this.cancelBtn.label = _loc1_.makeString(RETRAIN_CREW.LABEL_BUTTON_CANCEL);

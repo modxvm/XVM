@@ -25,5 +25,9 @@ package net.wg.gui.lobby.profile.components
         function set toolTipParams(param1:IToolTipParams) : void;
         
         function get toolTipParams() : IToolTipParams;
+        
+        function set enabled(param1:Boolean) : void;
+        
+        function get enabled() : Boolean;
     }
 }

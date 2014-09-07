@@ -4,5 +4,7 @@ package net.wg.infrastructure.interfaces
     {
         
         function onPopoverClose() : void;
+        
+        function onPopoverOpen() : void;
     }
 }

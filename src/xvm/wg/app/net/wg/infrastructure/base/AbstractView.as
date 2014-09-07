@@ -5,6 +5,7 @@ package net.wg.infrastructure.base
     import net.wg.infrastructure.base.meta.IAbstractViewMeta;
     import flash.display.Loader;
     import flash.display.InteractiveObject;
+    import scaleform.clik.events.FocusHandlerEvent;
     import net.wg.infrastructure.exceptions.base.WGGUIException;
     import net.wg.infrastructure.events.LifeCycleEvent;
     import flash.utils.getQualifiedClassName;
@@ -21,7 +22,6 @@ package net.wg.infrastructure.base
     import net.wg.utils.IUtils;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.exceptions.LifecycleException;
-    import scaleform.clik.events.FocusHandlerEvent;
     
     public class AbstractView extends AbstractViewMeta implements IView, IAbstractViewMeta
     {
@@ -30,6 +30,7 @@ package net.wg.infrastructure.base
         {
             visible = false;
             super();
+            addEventListener(FocusHandlerEvent.FOCUS_IN,this.handleFocusIn);
         }
         
         private static var INVALID_MODAL_FOCUS:String = "invalidModalFocus";
@@ -51,6 +52,13 @@ package net.wg.infrastructure.base
         private var _waitingFocusToInitialization:Boolean = false;
         
         private var _firstModalFocusUpdating:Boolean = true;
+        
+        private var _isDAAPIInited:Boolean = false;
+        
+        private function handleFocusIn(param1:FocusHandlerEvent) : void
+        {
+            onFocusInS(this._alias);
+        }
         
         public final function as_populate() : void
         {
@@ -117,7 +125,7 @@ package net.wg.infrastructure.base
         
         public function registerComponent(param1:IDAAPIModule, param2:String) : void
         {
-            registerFlashComponent(param1,param2);
+            registerFlashComponentS(param1,param2);
         }
         
         public function unregisterComponent(param1:String) : void
@@ -326,12 +334,14 @@ package net.wg.infrastructure.base
         
         protected function onPopulate() : void
         {
+            this._isDAAPIInited = true;
             App.toolTipMgr.hide();
             App.contextMenuMgr.hide();
         }
         
         override protected function onDispose() : void
         {
+            removeEventListener(FocusHandlerEvent.FOCUS_IN,this.handleFocusIn);
             super.onDispose();
             var _loc1_:IUtils = App.utils;
             App.toolTipMgr.hide();
@@ -429,6 +439,16 @@ package net.wg.infrastructure.base
                 this.assert(!(_loc2_ == null),_loc5_,InfrastructureException);
             }
             this.setLastFocusedElement(_loc2_);
+        }
+        
+        public function as_isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
+        }
+        
+        public function get isDAAPIInited() : Boolean
+        {
+            return this._isDAAPIInited;
         }
     }
 }

@@ -10,14 +10,22 @@ package net.wg.gui.lobby.profile
     import net.wg.infrastructure.interfaces.IDAAPIModule;
     import scaleform.clik.data.DataProvider;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.data.Aliases;
     
     public class ProfileTabNavigator extends ProfileTabNavigatorMeta implements IProfileTabNavigatorMeta
     {
         
         public function ProfileTabNavigator()
         {
-            this._sectionsDataUtil = new SectionsDataUtil();
+            this._sectionsDataUtil = new LinkageUtils();
             super();
+            this._sectionsDataUtil.addEntity(Aliases.PROFILE_SUMMARY_PAGE,"ProfileSummaryPage_UI");
+            this._sectionsDataUtil.addEntity(Aliases.PROFILE_SECTION,"ProfileTest_UI");
+            this._sectionsDataUtil.addEntity(Aliases.PROFILE_SUMMARY_WINDOW,"ProfileSummaryWindow_UI");
+            this._sectionsDataUtil.addEntity(Aliases.PROFILE_AWARDS,"ProfileAwards_UI");
+            this._sectionsDataUtil.addEntity(Aliases.PROFILE_STATISTICS,"ProfileStatistics_UI");
+            this._sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW,"ProfileTechniqueWindow_UI");
+            this._sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE,"ProfileTechniquePage_UI");
         }
         
         private static var OFFSET_INVALID:String = "layoutInv";
@@ -30,7 +38,7 @@ package net.wg.gui.lobby.profile
         
         public var initData:ProfileMenuInfoVO;
         
-        private var _sectionsDataUtil:SectionsDataUtil;
+        private var _sectionsDataUtil:LinkageUtils;
         
         private var _centerOffset:int = 0;
         
@@ -93,7 +101,7 @@ package net.wg.gui.lobby.profile
                 {
                     _loc4_ = _loc1_[_loc7_];
                     _loc8_ = _loc4_.alias;
-                    _loc3_.push(new SectionInfo(_loc8_,this._sectionsDataUtil.register(_loc8_),_loc4_.label,_loc4_.tooltip));
+                    _loc3_.push(new SectionInfo(_loc8_,this._sectionsDataUtil.getLinkageByAlias(_loc8_),_loc4_.label,_loc4_.tooltip));
                     if(_loc6_ == _loc8_)
                     {
                         _loc5_ = _loc7_;
@@ -133,6 +141,7 @@ package net.wg.gui.lobby.profile
         
         override protected function onDispose() : void
         {
+            this._sectionsDataUtil.dispose();
             this._sectionsDataUtil = null;
             this.bar.dispose();
             this.bar = null;
