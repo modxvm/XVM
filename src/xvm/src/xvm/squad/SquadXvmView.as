@@ -26,9 +26,10 @@ package xvm.squad
             return super.view as SquadWindow;
         }
 
+        /* TODO:0.9.3
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            page.memberList.itemRenderer = UI_SquadItemRenderer;
+            page.squadView.memberList.itemRenderer = UI_SquadItemRenderer;
             page.memberList.addEventListener(Defines.E_ITEM_UPDATED, onMemberListItemUpdated);
         }
 
@@ -60,6 +61,7 @@ package xvm.squad
             Window(page.window).title = App.utils.locale.makeString("#menu:headerButtons/battle/types/squad") +
                 (tMin > 0 ? " - " + Locale.get("Squad battle tiers") + ": " + tMin + ".." + tMax : "");
         }
+        */
     }
 
 }
