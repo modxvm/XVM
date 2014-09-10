@@ -20,7 +20,14 @@ def AppStarted(event):
     #debug('AppStarted')
     app = g_windowsManager.window
     if app is not None:
-        if BattleReplay.g_replayCtrl.autoStartBattleReplay() or connectionManager.isConnected():
-            app.loadView(_alias)
-        else:
-            BigWorld.callback(0, lambda: app.loadView(_alias))
+        #if BattleReplay.g_replayCtrl.autoStartBattleReplay() or connectionManager.isConnected():
+        #    _loadView()
+        #else:
+            BigWorld.callback(0, _loadView)
+
+def _loadView():
+    try:
+        #debug('loadView')
+        g_windowsManager.window.loadView(_alias)
+    except Exception, ex:
+        err(traceback.format_exc())
