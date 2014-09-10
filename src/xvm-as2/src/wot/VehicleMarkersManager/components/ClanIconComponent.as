@@ -34,7 +34,7 @@ class wot.VehicleMarkersManager.components.ClanIconComponent
         {
             if (m_clanIcon == null && mc != null)
                 m_clanIcon = PlayerInfo.createIcon(mc, "clanicon", cfg, cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0));
-            PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(proxy.playerName), Utils.GetClanName(proxy.playerName));
+            PlayerInfo.setSource(m_clanIcon, proxy.playerId, Utils.GetPlayerName(proxy.playerName), Utils.GetClanName(proxy.playerName));
             draw(cfg);
         }
 

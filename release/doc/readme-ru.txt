@@ -301,15 +301,16 @@
   Параметр конфигурационного файла battle/clanIconsFolder определяет путь к корневой
   папке иконок кланов.
   Все иконки загружаются автоматически из подпапки с названием, соответствующем региону
-  игры (RU, EU, US, и т.д.).
+  игры (RU, EU, US, и т.д. или из папки ID по id аккаунта игрока).
   Чтобы добавить иконку клана или игрока, просто скопируйте файл иконки в:
     \res_mods\xvm\res\clanicons\[REGION]\clan\ (для клана)
     \res_mods\xvm\res\clanicons\[REGION]\nick\ (для отдельного игрока)
+    \res_mods\xvm\res\clanicons\ID\ (для отдельного игрока по id)
   Так же можно сделать иконку по умолчанию для клана или игрока:
     \res_mods\xvm\res\clanicons\[REGION]\clan\default.png (для клана по умолчанию)
     \res_mods\xvm\res\clanicons\[REGION]\nick\default.png (для игрока по умолчанию)
   Иконки ищутся в следующем порядке:
-    nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
+    ID/<accountId>.png -> nick/<playerName>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
   По умолчанию в архив мода добавлены топ 150 кланов.
   Полный архив со всеми кланами можно скачать отдельно:
     http://www.modxvm.com/%d1%81%d0%ba%d0%b0%d1%87%d0%b0%d1%82%d1%8c-xvm/

@@ -129,11 +129,14 @@ class Xvm(object):
                 if len(args) > 5:
                     #debug('extendVehicleMarkerArgs: %i %s' % (handle, function))
                     v = utils.getVehicleByName(args[5])
-                    if hasattr(v, 'publicInfo'): 
+                    if hasattr(v, 'publicInfo'):
+                        vInfo = utils.getVehicleInfo(v.id)
+                        vStats = utils.getVehicleStats(v.id)
                         args.extend([
+                            vInfo.player.accountDBID,
                             v.publicInfo.marksOnGun,
-                            utils.getVehicleInfo(v.id).vehicleStatus,
-                            utils.getVehicleStats(v.id).frags,
+                            vInfo.vehicleStatus,
+                            vStats.frags,
                         ])
             elif function not in ['showExInfo']:
                 #debug('extendVehicleMarkerArgs: %i %s %s' % (handle, function, str(args)))

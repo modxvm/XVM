@@ -307,16 +307,18 @@
   Clan and players icons.
   Config parameter battle/clanIconsFolder set path to clan icons root folder.
 
-  All icons are loading automatically from game region subfolder (RU/EU/US/...).
+  All icons are loading automatically from game region subfolder (RU/EU/US/... or
+  ID for player's account id).
 
   To add your clan or player icon, just copy icon file to:
     \res_mods\xvm\res\clanicons\[REGION]\clan\ (for clan)
     \res_mods\xvm\res\clanicons\[REGION]\nick\ (for single player)
+    \res_mods\xvm\res\clanicons\ID\ (for single player by accountId)
   Also you can create default clan and player icons:
     \res_mods\xvm\res\clanicons\[REGION]\clan\default.png (for default clan)
     \res_mods\xvm\res\clanicons\[REGION]\nick\default.png (for default player)
   Search order is:
-    nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
+    ID/<accountId>.png -> nick/<playerName>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
   TOP 150 clans are added to mod archive by default.
   Full archive with all clans can be downloaded separately:
     http://www.modxvm.com/en/download-xvm/

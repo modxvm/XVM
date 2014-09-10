@@ -79,7 +79,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
         pFullName:String, pName:String, pClan:String, pRegion:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String)
-        /* added by XVM: marksOnGun:Number, vehicleState:Number, frags:Number*/
+        /* added by XVM: playerId:Number, marksOnGun:Number, vehicleState:Number, frags:Number*/
     {
         m_playerName = pName; // alex
         m_playerClan = pClan; // "" || ALX
@@ -104,9 +104,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         m_isDead    = curHealth <= 0; // -1 for ammunition storage explosion
         m_curHealth = curHealth >= 0 ? curHealth : 0;
 
-        m_marksOnGun = arguments[14];
-        m_isReady = (arguments[15] & 2) != 0; // 2 - IS_AVATAR_READY
-        m_frags = arguments[16];
+        m_playerId = arguments[14];
+        m_marksOnGun = arguments[15];
+        m_isReady = (arguments[16] & 2) != 0; // 2 - IS_AVATAR_READY
+        m_frags = arguments[17];
 
         healthBarComponent.init();
         contourIconComponent.init(m_entityType);

@@ -36,13 +36,13 @@ class com.xvm.PlayerInfo extends MovieClip
         return icon;
     }
 
-    public static function setSource(icon: UILoaderAlt, nick: String, clan: String)
+    public static function setSource(icon: UILoaderAlt, playerId:Number, nick: String, clan: String)
     {
         if (icon["nick"] == nick)
             return;
         icon["nick"] = nick;
 
-        // Load order: nick -> clan -> default clan -> default nick
+        // Load order: id -> nick -> clan -> default clan -> default nick
         var paths = [ ];
         var src = s_playersIconSources[nick];
         if (src != undefined)
@@ -56,7 +56,9 @@ class com.xvm.PlayerInfo extends MovieClip
         }
         else
         {
-            var prefix:String = Defines.XVMRES_ROOT + Config.config.battle.clanIconsFolder + Config.config.region + "/";
+            var prefix:String = Defines.XVMRES_ROOT + Config.config.battle.clanIconsFolder;
+            paths.push(prefix + "ID/" + playerId + ".png");
+            prefix += Config.config.region + "/";
             paths.push(prefix + "nick/" + nick + ".png");
             if (clan)
             {

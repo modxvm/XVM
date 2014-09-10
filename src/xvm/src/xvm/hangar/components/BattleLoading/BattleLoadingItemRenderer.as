@@ -135,7 +135,7 @@ package xvm.hangar.components.BattleLoading
         }
 
         private var _clanIconLoaded:Boolean = false;
-        private function attachClanIconToPlayer(data:Object):void
+        private function attachClanIconToPlayer(data:VehicleInfoVO):void
         {
             if (_clanIconLoaded)
                 return;
@@ -145,7 +145,9 @@ package xvm.hangar.components.BattleLoading
             if (!cfg.show)
                 return;
             var icon:ClanIcon = new ClanIcon(cfg, proxy.iconLoader.x, proxy.iconLoader.y, team,
-                WGUtils.GetPlayerName(fullPlayerName), WGUtils.GetClanNameWithoutBrackets(fullPlayerName));
+                data.accountDBID,
+                WGUtils.GetPlayerName(fullPlayerName),
+                WGUtils.GetClanNameWithoutBrackets(fullPlayerName));
             icon.addEventListener(Event.COMPLETE, function():void
             {
                 // don't add empty icons to the form

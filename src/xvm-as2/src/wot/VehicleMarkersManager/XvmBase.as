@@ -39,12 +39,13 @@ class wot.VehicleMarkersManager.XvmBase
     private var m_entityType:String; // TODO: is the same as proxy.m_team?
 
     // Private (?) members
-    public var m_showExInfo:Boolean;
+    public var m_playerId:Number;
+    public var m_marksOnGun:Number;
+    public var m_frags:Number;
     public var m_isReady:Boolean;
     public var m_isDead:Boolean;
+    public var m_showExInfo:Boolean;
     public var m_defaultIconSource:String;
-    public var m_frags:Number;
-    public var m_marksOnGun:Number;
 
     // TextFields
     private var textFields:Object;
@@ -112,8 +113,9 @@ class wot.VehicleMarkersManager.XvmBase
                 dead:m_isDead,
                 blowedUp:isBlowedUp,
                 teamKiller:m_entityName == "teamKiller",
-                frags:m_frags,
-                marksOnGun:m_marksOnGun
+                playerId:m_playerId,
+                marksOnGun:m_marksOnGun,
+                frags:m_frags
             }));
     }
 

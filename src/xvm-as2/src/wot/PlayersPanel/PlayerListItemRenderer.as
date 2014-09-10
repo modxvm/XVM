@@ -276,7 +276,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
             m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, team);
         }
-        PlayerInfo.setSource(m_clanIcon, m_name, m_clan);
+        PlayerInfo.setSource(m_clanIcon, wrapper.data.uid, m_name, m_clan);
         m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
     }
 

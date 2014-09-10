@@ -19,7 +19,7 @@ package xvm.hangar.components.ClanIcon
         private var cfg:CClanIcon;
         private var nick:String;
 
-        public function ClanIcon(cfg:CClanIcon, dx:Number, dy:Number, team:Number, nick:String, clan:String)
+        public function ClanIcon(cfg:CClanIcon, dx:Number, dy:Number, team:Number, playerId:Number, nick:String, clan:String)
         {
             super();
 
@@ -36,12 +36,12 @@ package xvm.hangar.components.ClanIcon
             autoSize = false;
             visible = false;
 
-            setSource(nick, clan);
+            setSource(playerId, nick, clan);
         }
 
-        public function setSource(nick:String, clan:String):void
+        public function setSource(playerId:Number, nick:String, clan:String):void
         {
-            // Load order: nick -> clan -> default clan -> default nick
+            // Load order: id -> nick -> clan -> default clan -> default nick
             var paths:Vector.<String> = new Vector.<String>();
             var src:String = s_playersIconSources[nick];
             if (src != null)
@@ -55,7 +55,10 @@ package xvm.hangar.components.ClanIcon
             }
             else
             {
-                var prefix:String = Defines.XVMRES_ROOT + Config.config.battle.clanIconsFolder + Config.gameRegion + "/";
+                var prefix:String = Defines.XVMRES_ROOT + Config.config.battle.clanIconsFolder;
+                paths.push(prefix + "ID/" + playerId + ".png");
+
+                prefix += Config.gameRegion + "/";
                 paths.push(prefix + "nick/" + nick + ".png");
                 if (clan != null && clan != "")
                 {
