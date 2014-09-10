@@ -6,7 +6,6 @@ package com.xvm.types.cfg
 {
     public dynamic class CHangar extends Object
     {
-        public var hideTutorial:Boolean;
         public var xwnInCompany:Boolean;
         public var masteryMarkInTechTree:Boolean;
         public var hidePricesInTechTree:Boolean;

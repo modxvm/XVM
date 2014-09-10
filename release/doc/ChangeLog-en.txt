@@ -3,7 +3,9 @@
   * dmg-kind values changed:
       shot, fire, ramming, world_collision, death_zone, drowning, other
   * new section: hangar/carousel
-  * removed option hangar/masteryMarkInCarousel
+  * removed options:
+      hangar/masteryMarkInCarousel
+      hangar/hideTutorial
 
 XVM-5.3.4:
   * new macros:

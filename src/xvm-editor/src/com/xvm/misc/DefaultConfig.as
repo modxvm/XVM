@@ -106,7 +106,6 @@ package com.xvm.misc
         private static function getHangarSection():Object
         {
             var c:Object = new Object();
-            c.hideTutorial = false;
             c.xwnInCompany = true;
             c.masteryMarkInTankCarousel = true;
             c.masteryMarkInTechTree = true;

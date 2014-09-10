@@ -31,7 +31,6 @@
     "pingServers": ${"def.pingServers"}
   },
   "hangar": {
-    "hideTutorial": false,
     "masteryMarkInTechTree": true,
     "hidePricesInTechTree": true,
     "widgetsEnabled": true,

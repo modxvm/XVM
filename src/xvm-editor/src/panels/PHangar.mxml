@@ -5,7 +5,6 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     title="{_('PHangar')}">
-    <c:LabeledCheckBox label="{_('hideTutorial')}" id="v_hideTutorial" config="hangar.hideTutorial" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('xwnInCompany')}" id="v_xwnInCompany" config="hangar.xwnInCompany" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('masteryMarkInTankCarousel')}" id="v_masteryMarkInTankCarousel" config="hangar.masteryMarkInTankCarousel" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('masteryMarkInTechTree')}" id="v_masteryMarkInTechTree" config="hangar.masteryMarkInTechTree" change="onChange(event)"/>

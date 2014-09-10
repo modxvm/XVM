@@ -29,7 +29,6 @@ package xvm.hangar.views
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
             initStatToken();
-            hideTutorial();
 
             //Cmd.runTest("battleResults", "11390684172629596");
             //Cmd.runTest("battleResults", "9734308549388187");
@@ -53,14 +52,6 @@ package xvm.hangar.views
         private function getXvmStatTokenDataCallback(json_str:String):void
         {
             //Logger.add(json_str);
-        }
-
-        // hide tutorial
-
-        private function hideTutorial():void
-        {
-            // TODO:0.9.3 if (Config.config.hangar.hideTutorial == true)
-            // TODO:0.9.3     page.header.tutorialControl.y = -10000;
         }
     }
 

@@ -109,7 +109,6 @@ package com.xvm.misc
         private static function getHangarSection():CHangar
         {
             var c:CHangar = new CHangar();
-            c.hideTutorial = false;
             c.xwnInCompany = true;
             c.masteryMarkInTechTree = true;
             c.hidePricesInTechTree = false;

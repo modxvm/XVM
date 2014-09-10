@@ -157,7 +157,6 @@ private function RefreshHangarPage():void
         var section:*;
 
         section = Config.config.hangar;
-        this.p_hangar.v_hideTutorial.value = section.hideTutorial;
         this.p_hangar.v_xwnInCompany.value = section.xwnInCompany;
         this.p_hangar.v_masteryMarkInTankCarousel.value = section.masteryMarkInTankCarousel;
         this.p_hangar.v_masteryMarkInTechTree.value = section.masteryMarkInTechTree;

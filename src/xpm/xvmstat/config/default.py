@@ -98,7 +98,6 @@ class _DefaultConfig(object):
 
     def getHangarSection(self):
         return {
-            'hideTutorial': false,
             'xwnInCompany': true,
             'masteryMarkInTankCarousel': true,
             'masteryMarkInTechTree': true,
