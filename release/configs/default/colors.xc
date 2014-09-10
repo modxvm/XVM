@@ -57,10 +57,12 @@
     // Dynamic color by damage kind.
     // Динамический цвет по типу урона.
     "dmg_kind": {
-      "attack": "0xFFAA55",          // attack / атака
+      "shot": "0xFFAA55",            // shot / попадание
       "fire": "0xFF6655",            // fire / пожар
       "ramming": "0x998855",         // ramming / таран
       "world_collision": "0x228855", // world collision / столкновение с объектами, падение
+      "death_zone": "0xCCCCCC",      // TODO: value, description
+      "drowning": "0xCCCCCC",        // TODO: value, description
       "other": "0xCCCCCC"            // other / другое
     },
     // Dynamic color by vehicle type.

@@ -98,10 +98,12 @@ package com.xvm
 
             /* xvm-as2
             // Hitlog
-            "attack": "атака",
+            "shot": "атака",
             "fire": "пожар",
             "ramming": "таран",
             "world_collision": "падение",
+            "death_zone": "death zone",
+            "drowning": "drowning",
             "Hits": "Пробитий",
             "Total": "Всего",
             "Last": "Последний",
@@ -232,6 +234,8 @@ package com.xvm
             /* xvm-as2
             // Hitlog
             "world_collision": "falling",
+            "death_zone": "death zone",
+            "drowning": "drowning",
 
             // Hp Left
             "hpLeftTitle": "Hitpoints left:",

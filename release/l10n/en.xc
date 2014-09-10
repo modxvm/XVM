@@ -18,10 +18,13 @@
     "chanceBattleTier": "Battle tier",
 
     // Hitlog
-    "attack": "attack",
+    "shot": "shot",
     "fire": "fire",
     "ramming": "ramming",
     "world_collision": "falling",
+    "death_zone": "death zone",
+    "drowning": "drowning",
+
     "Hits": "Hits",
     "Total": "Total",
     "Last": "Last",

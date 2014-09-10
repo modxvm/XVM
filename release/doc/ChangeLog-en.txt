@@ -1,7 +1,11 @@
-﻿  * new section: hangar/carousel
+﻿XVM-5.3.5-dev:
+  * adaptation to WoT 0.9.3
+  * dmg-kind values changed:
+      shot, fire, ramming, world_collision, death_zone, drowning, other
+  * new section: hangar/carousel
   * removed option hangar/masteryMarkInCarousel
 
-XVM-5.3.4-dev:
+XVM-5.3.4:
   * new macros:
       {{ready}}, returns "ready" when player loaded to the game and empty if not
       {{gun-marks}}, return count of the marks on gun for spotted vehicles

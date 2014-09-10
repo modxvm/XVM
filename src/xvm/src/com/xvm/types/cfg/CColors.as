@@ -100,11 +100,7 @@ package com.xvm.types.cfg
             //player_enemytk_blowup:    "0xFFDD33"
         //},
         //dmg_kind: {
-            //attack:          "0xFFAA55",
-            //fire:            "0xFF6655",
-            //ramming:         "0x998855",
-            //world_collision: "0x998855",
-            //other:           "0xCCCCCC"
+        //...
         //},
         //vtype: {
             //LT:  "0xA2FF9A",        // Color for light tanks

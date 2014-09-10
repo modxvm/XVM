@@ -954,10 +954,12 @@ package com.xvm.misc
                 player_enemytk_blowup:    "0xFFDD33"
             };
             c.dmg_kind = {
-                attack:          "0xFFAA55",
+                shot:            "0xFFAA55",
                 fire:            "0xFF6655",
                 ramming:         "0x998855",
                 world_collision: "0x998855",
+                death_zone:      "0xCCCCCC",
+                drowning:        "0xCCCCCC",
                 other:           "0xCCCCCC"
             };
             c.vtype = {

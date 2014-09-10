@@ -239,7 +239,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
          * 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
          *
          * damageType - string:
-         *  "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
+         *  "shot", "fire", "ramming", "world_collision", "death_zone", "drowning"
          */
 
         //Logger.add("Xvm::updateHealth(" + flag + ", " + damageType + ", " + newHealth +")");

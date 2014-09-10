@@ -18,10 +18,12 @@
     "chanceBattleTier": "Уровень боя",
 
     // Hitlog
-    "attack": "атака",
+    "shot": "атака",
     "fire": "пожар",
     "ramming": "таран",
     "world_collision": "падение",
+    "death_zone": "death zone",
+    "drowning": "drowning",
     "Hits": "Пробитий",
     "Total": "Всего",
     "Last": "Последний",

@@ -103,10 +103,12 @@ class com.xvm.Locale
             tr["chanceBattleTier"] = "Уровень боя";
 
             // Hitlog
-            tr["attack"] = "атака";
+            tr["shot"] = "атака";
             tr["fire"] = "пожар";
             tr["ramming"] = "таран";
             tr["world_collision"] = "падение";
+            tr["death_zone"] = "death zone";
+            tr["drowning"] = "drowning";
             tr["Hits"] = "Пробитий";
             tr["Total"] = "Всего";
             tr["Last"] = "Последний";
@@ -181,6 +183,8 @@ class com.xvm.Locale
 
             // Hitlog
             tr["world_collision"] = "falling";
+            tr["death_zone"] = "death zone";
+            tr["drowning"] = "drowning";
 
             // Hp Left
             tr["hpLeftTitle"] = "Hitpoints left:";

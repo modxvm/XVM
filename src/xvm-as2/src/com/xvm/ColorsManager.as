@@ -58,7 +58,7 @@ class com.xvm.ColorsManager
             case "drowning":
                 return parseInt(Config.config.colors.dmg_kind[damageType]);
 
-            case "attack":
+            case "shot":
             case "fire":
             case "ramming":
             default:
