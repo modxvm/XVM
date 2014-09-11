@@ -77,7 +77,7 @@ package xvm.tcarousel
 
             var index:int = page.getChildIndex(page.carousel);
             page.removeChildAt(index);
-            page.carousel.dispose();
+            //page.carousel.dispose(); // TODO: exception
             page.carousel = c;
             page.addChildAt(page.carousel, index);
         }
