@@ -7,7 +7,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import net.wg.gui.components.controls.DropdownMenu;
     import flash.display.Sprite;
     import net.wg.gui.components.controls.SoundButtonEx;
-    import net.wg.gui.lobby.fortifications.windows.impl.FortPeriodDefenceWindowHelper;
     import net.wg.gui.lobby.fortifications.data.settings.DayOffPopoverVO;
     import net.wg.infrastructure.interfaces.IWrapper;
     import net.wg.gui.components.popOvers.PopOver;
@@ -71,8 +70,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var _enabledApplyButtonTooltip:String = "";
         
-        private var _helper:FortPeriodDefenceWindowHelper;
-        
         private var _data:DayOffPopoverVO;
         
         override public function set wrapper(param1:IWrapper) : void
@@ -91,7 +88,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         override protected function onPopulate() : void
         {
-            this._helper = new FortPeriodDefenceWindowHelper();
             this.dropdownMenu.addEventListener(ListEvent.INDEX_CHANGE,this.onListIndexChange);
             super.onPopulate();
         }
@@ -122,7 +118,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
             if(isInvalid(FortInvalidationType.INVALID_ENABLING))
             {
-                this.applyBtn.enabled = !(this.dropdownMenu.selectedIndex == this._data.currentDayOff);
+                this.applyBtn.enabled = !(this.getSelectedDayId() == this._data.currentDayOff);
                 this.applyBtn.tooltip = this.applyBtn.enabled?this._enabledApplyButtonTooltip:this._disabledApplyButtonTooltip;
             }
             super.draw();
@@ -141,9 +137,37 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.cancelBtn = null;
             this.descriptionTF = null;
             this.dayOffTF = null;
+            this.separator = null;
+            this.separatorBottom = null;
             this._data.dispose();
             this._data = null;
             super.onDispose();
+        }
+        
+        override protected function setData(param1:DayOffPopoverVO) : void
+        {
+            var _loc3_:Object = null;
+            var _loc4_:String = null;
+            if(this._data)
+            {
+                this._data.dispose();
+            }
+            this._data = param1;
+            this.dropdownMenu.dataProvider = new DataProvider(param1.daysList);
+            var _loc2_:* = 0;
+            for each(_loc3_ in param1.daysList)
+            {
+                if(_loc3_.id == param1.currentDayOff)
+                {
+                    break;
+                }
+                _loc2_++;
+            }
+            _loc4_ = "No such elemnt with id = " + param1.currentDayOff + " in dropDown.dataProvider";
+            App.utils.asserter.assert(_loc2_ < param1.daysList.length,_loc4_);
+            this.dropdownMenu.selectedIndex = _loc2_;
+            invalidate(InvalidationType.DATA);
+            invalidate(FortInvalidationType.INVALID_ENABLING);
         }
         
         public function as_setDescriptionsText(param1:String, param2:String) : void
@@ -166,28 +190,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             invalidate(FortInvalidationType.INVALID_ENABLING);
         }
         
-        override protected function setData(param1:DayOffPopoverVO) : void
+        private function getSelectedDayId() : int
         {
-            if(this._data)
+            if(this.dropdownMenu.selectedIndex >= 0)
             {
-                this._data.dispose();
+                return this.dropdownMenu.dataProvider.requestItemAt(this.dropdownMenu.selectedIndex).id;
             }
-            this._data = param1;
-            this.dropdownMenu.dataProvider = new DataProvider(param1.daysList);
-            var _loc2_:* = 0;
-            while(_loc2_ < param1.daysList.length)
-            {
-                if(param1.daysList[_loc2_].id == param1.currentDayOff)
-                {
-                    break;
-                }
-                _loc2_++;
-            }
-            var _loc3_:* = "No such elemnt with id = " + param1.currentDayOff + " in dropDown.dataProvider";
-            App.utils.asserter.assert(_loc2_ < param1.daysList.length,_loc3_);
-            this.dropdownMenu.selectedIndex = _loc2_;
-            invalidate(InvalidationType.DATA);
-            invalidate(FortInvalidationType.INVALID_ENABLING);
+            return -1;
         }
         
         private function onApplyBtnClick(param1:ButtonEvent) : void

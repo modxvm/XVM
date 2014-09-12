@@ -19,6 +19,14 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
         
         public var battleCreator:ClanBattleCreatorView;
         
+        override protected function updateRallyInfoTF() : void
+        {
+            if((model) && (model.hasSlotsData()))
+            {
+                super.updateRallyInfoTF();
+            }
+        }
+        
         override public function setData(param1:IRallyVO) : void
         {
             super.setData(param1);

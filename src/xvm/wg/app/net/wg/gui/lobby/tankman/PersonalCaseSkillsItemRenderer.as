@@ -116,6 +116,10 @@ package net.wg.gui.lobby.tankman
             }
             else
             {
+                if(param1.isHeader)
+                {
+                    setState("disabled");
+                }
                 this.hideTooltip();
             }
             this.initVisibleElements();
@@ -133,7 +137,6 @@ package net.wg.gui.lobby.tankman
         private function updateData() : void
         {
             var _loc1_:String = null;
-            var _loc2_:String = null;
             if(this.isHeader)
             {
                 this._name.text = App.utils.toUpperOrLowerCase(App.utils.locale.makeString("#dialogs:addSkillWindow/label/" + data.title),true);
@@ -150,37 +153,43 @@ package net.wg.gui.lobby.tankman
                 {
                     this.rank.visible = false;
                 }
+                else if(data.rankId != "common")
+                {
+                    this.rank.visible = true;
+                    this.rank.gotoAndStop(data.enabled?"enabled":"disabled");
+                    _loc1_ = "../maps/icons/tankmen/roles/small/" + data.rankId + ".png";
+                    this.rank.setData(_loc1_,data.enabled);
+                    this.rank.validateNow();
+                }
                 else
                 {
-                    if(!this.icon.visible)
-                    {
-                        this.icon.visible = true;
-                    }
-                    _loc1_ = "../maps/icons/tankmen/skills/big/" + data.title + ".png";
-                    this.icon.source = _loc1_;
-                    if(data.rankId != "common")
-                    {
-                        this.rank.visible = true;
-                        this.rank.gotoAndStop(data.enabled?"enabled":"disabled");
-                        _loc2_ = "../maps/icons/tankmen/roles/small/" + data.rankId + ".png";
-                        this.rank.setData(_loc2_,data.enabled);
-                        this.rank.validateNow();
-                    }
-                    else
-                    {
-                        this.rank.visible = false;
-                    }
+                    this.rank.visible = false;
                 }
+                
             }
             this.isData = false;
         }
         
         private function initVisibleElements() : void
         {
+            var _loc1_:String = null;
             this.isHeader = data.isHeader;
             if(data.isHeader)
             {
                 enabled = false;
+            }
+            if(!this.isHeader)
+            {
+                if(!this.icon.visible)
+                {
+                    this.icon.visible = true;
+                }
+                _loc1_ = "../maps/icons/tankmen/skills/big/" + data.title + ".png";
+                this.icon.source = _loc1_;
+            }
+            else
+            {
+                this.icon.visible = false;
             }
             this.isData = true;
             invalidate(this.UPDATE_DATA);

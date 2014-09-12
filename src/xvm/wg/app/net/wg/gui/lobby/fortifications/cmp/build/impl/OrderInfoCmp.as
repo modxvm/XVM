@@ -33,7 +33,14 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         private static function showAlertTooltip(param1:MouseEvent) : void
         {
-            App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_DEFENCEHOURDISABLED);
+            if(!App.globalVarsMgr.isFortificationBattleAvailableS())
+            {
+                App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE);
+            }
+            else
+            {
+                App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_DEFENCEHOURDISABLED);
+            }
         }
         
         public var infoIcon:UILoaderAlt;

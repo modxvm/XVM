@@ -82,7 +82,6 @@ package net.wg.gui.lobby.profile.components.chart
                     }
                     else
                     {
-                        trace("Class of item renderer in Chart has not been defined! Please Define it!");
                         return;
                     }
                 }
@@ -159,10 +158,6 @@ package net.wg.gui.lobby.profile.components.chart
             if(_loc2_ != null)
             {
                 this.itemRenderer = _loc2_;
-            }
-            else
-            {
-                trace("Error: " + this + ", The class " + param1 + " cannot be found in your library. Please ensure it is there.");
             }
         }
         

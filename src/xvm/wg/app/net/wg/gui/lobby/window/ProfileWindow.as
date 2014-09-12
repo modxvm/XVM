@@ -109,7 +109,6 @@ package net.wg.gui.lobby.window
             }
             catch(e:Error)
             {
-                trace(e);
             }
             this.tabNavigator.centerOffset = ProfileConstants.WINDOW_CENTER_OFFSET;
             locale = App.utils.locale;

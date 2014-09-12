@@ -71,6 +71,12 @@ package net.wg.gui.rally.views.room
                 _loc1_ = [this.waitingListSection.candidates,teamSection];
                 this._dragDropListDelegateCtrlr = getDragDropDeligateController(_loc1_);
             }
+            else if(!(this._dragDropListDelegateCtrlr == null) && !rallyData.isCommander)
+            {
+                this._dragDropListDelegateCtrlr.dispose();
+                this._dragDropListDelegateCtrlr = null;
+            }
+            
         }
     }
 }

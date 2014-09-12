@@ -79,12 +79,10 @@ package net.wg.gui.lobby.tankman
                 if(this.model.length > 0)
                 {
                     this.emptySkillsBG.visible = this.emptySkillsMessage.visible = false;
-                    this.modifiers.dataProvider = new DataProvider(this.model);
                     if(this.model.length > 0)
                     {
                         this.autoSelectIndex();
                     }
-                    this.modifiers.validateNow();
                     this.selectBtn.visible = this.checkForNewSkills();
                     if(this.selectBtn.visible)
                     {
@@ -149,6 +147,7 @@ package net.wg.gui.lobby.tankman
         {
             this.model = param1 as Array;
             this.hasNewSkill = false;
+            this.modifiers.dataProvider = new DataProvider(this.model);
             invalidate(this.UPDATE_DATA_PROVIDER);
         }
         

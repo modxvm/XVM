@@ -21,11 +21,8 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         public function DirectionCmp()
         {
             super();
-            this.attackAnimationMC.alpha = 0;
-            this.attackAnimationMC.visible = false;
             this.attackAnimationMC.blendMode = BlendMode.ADD;
-            this.highlightMC.alpha = 0;
-            this.highlightMC.visible = false;
+            this.hideAnimations();
             this.baseBuilding.visible = false;
             this.battleArrow.visible = false;
             this.labelTF.visible = this._labelVisible;
@@ -175,11 +172,19 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
                             this.notOpenedTF.visible = false;
                         }
                         
+                        if(this.isInHoverState)
+                        {
+                            this.showHideHowerState(true,true);
+                        }
                     }
                     else
                     {
                         this.setControlsVisible(false);
                         this.notOpenedTF.visible = true;
+                        if(this.isInHoverState)
+                        {
+                            this.showHideHowerState(false,true);
+                        }
                     }
                     this.label = this.model.name;
                     this.labelTF.visible = this._labelVisible;
@@ -275,6 +280,10 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         public function set hoverAnimation(param1:String) : void
         {
             this._hoverAnimation = param1;
+            if((this.isInHoverState) && !this._hoverAnimation)
+            {
+                this.hideAnimations();
+            }
         }
         
         public function get showLevelsOnHover() : Boolean
@@ -547,6 +556,14 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
                 _loc2_++;
             }
             this.baseBuilding.disableLowLevel = this._disableLowLevelBuildings;
+        }
+        
+        private function hideAnimations() : void
+        {
+            this.attackAnimationMC.alpha = 0;
+            this.attackAnimationMC.visible = false;
+            this.highlightMC.alpha = 0;
+            this.highlightMC.visible = false;
         }
         
         private function mouseOverHandler(param1:MouseEvent) : void

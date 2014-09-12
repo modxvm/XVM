@@ -361,6 +361,11 @@ package net.wg.infrastructure.managers.impl
             true;
         }
         
+        public function as_cancelLoadingsForContainer(param1:String) : void
+        {
+            this.cancelLoadingsForContainer(param1);
+        }
+        
         private function clearContainersForViewsDict() : void
         {
             var _loc1_:String = null;

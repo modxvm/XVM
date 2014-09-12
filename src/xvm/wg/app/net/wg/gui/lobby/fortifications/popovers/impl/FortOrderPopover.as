@@ -50,13 +50,13 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private static function showAlertTooltip(param1:MouseEvent) : void
         {
-            if(App.globalVarsMgr.isFortificationBattleAvailableS())
+            if(!App.globalVarsMgr.isFortificationBattleAvailableS())
             {
-                App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_DEFENCEHOURDISABLED);
+                App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE);
             }
             else
             {
-                App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_NOTAVAILABLE);
+                App.toolTipMgr.show(TOOLTIPS.FORTIFICATION_ORDERPOPOVER_USEORDERBTN_DEFENCEHOURDISABLED);
             }
         }
         

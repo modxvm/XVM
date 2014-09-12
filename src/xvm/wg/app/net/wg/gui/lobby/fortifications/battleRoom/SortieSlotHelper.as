@@ -262,5 +262,10 @@ if((_loc6_) && (param1 == _loc6_.removeBtn) && _loc6_.removeBtn.icon == GrayTran
     App.toolTipMgr.showComplex(TOOLTIPS.FORTIFICATION_SORTIE_REMOVEBTN);
 }
 }
+
+override protected function isShowSlotRestrictions(param1:RallySimpleSlotRenderer, param2:IRallySlotVO) : Boolean
+{
+return false;
+}
 }
 }

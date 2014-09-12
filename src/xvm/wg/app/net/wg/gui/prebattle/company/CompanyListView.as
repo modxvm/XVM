@@ -20,7 +20,6 @@ package net.wg.gui.prebattle.company
     import flash.events.Event;
     import scaleform.clik.events.InputEvent;
     import flash.events.MouseEvent;
-    import net.wg.infrastructure.events.FocusRequestEvent;
     import net.wg.data.Aliases;
     import scaleform.clik.data.DataProvider;
     import scaleform.clik.events.ListEvent;
@@ -144,8 +143,6 @@ package net.wg.gui.prebattle.company
             this.filterInBattleCheckbox.selected = this.selectedFilterInBattleCheckbox;
             this.filterTextField.text = this.defaultFilterText;
             addEventListener(CompanyDropDownEvent.SHOW_DROP_DOWN,this.onShowDropwDownHandler);
-            this.channelComponent.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
-            this.cmpList.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
         }
         
         override protected function onPopulate() : void
@@ -168,18 +165,12 @@ package net.wg.gui.prebattle.company
             App.toolTipMgr.showComplex(TOOLTIPS.PREBATTLE_NAMEFILTERBUTTON);
         }
         
-        private function onRequestFocusHandler(param1:FocusRequestEvent) : void
-        {
-        }
-        
         override protected function onDispose() : void
         {
-            this.channelComponent.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
             if(isFlashComponentRegisteredS(Aliases.CHANNEL_COMPONENT))
             {
                 unregisterFlashComponentS(Aliases.CHANNEL_COMPONENT);
             }
-            this.cmpList.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
             this.refreshButton.removeEventListener(ButtonEvent.CLICK,this.refreshButton_buttonClickHandler);
             this.refreshButton.dispose();
             this.cmpList.removeEventListener(CompanyEvent.DROP_LIST_CLICK,this.groupsList_listClickHandler);

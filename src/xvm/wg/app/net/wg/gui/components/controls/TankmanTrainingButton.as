@@ -69,7 +69,6 @@ override public function toString() : String
 public function updatePrice(param1:Number, param2:String, param3:ActionPriceVO = null) : void
 {
     var _loc4_:String = null;
-    trace("updatePrice",this,this.name,param3);
     if(!this._buy && !(this._type == "free") && !(param1 == 0))
     {
         _loc4_ = !enabled?"disabled":"normal";

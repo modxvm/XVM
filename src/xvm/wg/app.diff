@@ -1,6 +1,6 @@
 diff -Naur app.orig/App.as app/App.as
---- app.orig/App.as	2014-09-06 22:42:06.126127000 +0300
-+++ app/App.as	2014-09-06 22:49:46.886985000 +0300
+--- app.orig/App.as	2014-09-12 12:32:01.145049500 +0300
++++ app/App.as	2014-09-12 12:55:03.687144100 +0300
 @@ -1,5 +1,6 @@
  package
  {
@@ -9,8 +9,8 @@ diff -Naur app.orig/App.as app/App.as
      import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
      import net.wg.infrastructure.managers.ISoundManager;
 diff -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/components/advanced/TankIcon.as
---- app.orig/net/wg/gui/components/advanced/TankIcon.as	2014-09-06 22:44:18.158930200 +0300
-+++ app/net/wg/gui/components/advanced/TankIcon.as	2014-09-06 22:49:46.896985000 +0300
+--- app.orig/net/wg/gui/components/advanced/TankIcon.as	2014-09-12 12:36:59.885626700 +0300
++++ app/net/wg/gui/components/advanced/TankIcon.as	2014-09-12 12:55:03.697144300 +0300
 @@ -90,7 +90,7 @@
          
          private var _isPremiumDirty:Boolean = true;
@@ -21,8 +21,8 @@ diff -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/co
          override protected function onDispose() : void
          {
 diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/net/wg/gui/components/common/video/SimpleVideoPlayer.as
---- app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-09-06 22:43:22.754819500 +0300
-+++ app/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-09-06 22:49:46.906985000 +0300
+--- app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-09-12 12:34:53.226029300 +0300
++++ app/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-09-12 12:55:03.697144300 +0300
 @@ -311,10 +311,10 @@
          }
      }
@@ -39,8 +39,8 @@ diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/
      public function get currentTime() : Number
      {
 diff -Naur app.orig/net/wg/gui/components/controls/Carousel.as app/net/wg/gui/components/controls/Carousel.as
---- app.orig/net/wg/gui/components/controls/Carousel.as	2014-09-06 22:43:24.016822500 +0300
-+++ app/net/wg/gui/components/controls/Carousel.as	2014-09-06 22:49:46.926985000 +0300
+--- app.orig/net/wg/gui/components/controls/Carousel.as	2014-09-12 12:34:57.664418500 +0300
++++ app/net/wg/gui/components/controls/Carousel.as	2014-09-12 12:55:03.697144300 +0300
 @@ -91,9 +91,9 @@
          
          protected var selectedItemRenderer:IListItemRenderer = null;
@@ -72,8 +72,8 @@ diff -Naur app.orig/net/wg/gui/components/controls/Carousel.as app/net/wg/gui/co
  var _loc1_:* = NaN;
  var _loc2_:* = NaN;
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as
---- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-09-06 22:45:42.815070800 +0300
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-09-07 19:11:31.443703100 +0300
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-09-12 12:39:56.574695300 +0300
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-09-12 12:55:03.707144500 +0300
 @@ -86,9 +86,9 @@
          
          private var filterDataInvalid:Boolean = false;
@@ -98,7 +98,7 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg
          
          private var _updateInProgress:Boolean = false;
          
-@@ -734,7 +734,7 @@
+@@ -733,7 +733,7 @@
          this.checkBoxToMain.addEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
      }
      
@@ -108,8 +108,8 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg
          updateVisibleSlotsCount();
          var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as
---- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-09-06 22:45:53.525102600 +0300
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-09-06 22:49:46.946985000 +0300
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-09-12 12:40:16.415488900 +0300
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-09-12 12:55:03.707144500 +0300
 @@ -22,9 +22,9 @@
          
          public static var FILTER_READY:String = "ready";
@@ -123,20 +123,20 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app
          public var checkBoxToMain:CheckBox;
          
 diff -Naur app.orig/net/wg/gui/lobby/header/LobbyHeader.as app/net/wg/gui/lobby/header/LobbyHeader.as
---- app.orig/net/wg/gui/lobby/header/LobbyHeader.as	2014-09-06 22:45:34.445059100 +0300
-+++ app/net/wg/gui/lobby/header/LobbyHeader.as	2014-09-07 19:45:58.931896400 +0300
+--- app.orig/net/wg/gui/lobby/header/LobbyHeader.as	2014-09-12 12:39:38.983991700 +0300
++++ app/net/wg/gui/lobby/header/LobbyHeader.as	2014-09-12 12:55:03.707144500 +0300
 @@ -55,7 +55,7 @@
          
          private var _mainMenuHelper:MainMenuHelper;
          
 -        private var _headerButtonsHelper:HeaderButtonsHelper;
-+        protected var _headerButtonsHelper:HeaderButtonsHelper;
++        public var _headerButtonsHelper:HeaderButtonsHelper;
          
          private var _isShowHelpLayout:Boolean = false;
          
 diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/gui/lobby/profile/ProfileTabNavigator.as
---- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-09-06 22:44:34.408953000 +0300
-+++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-09-06 22:49:46.956985100 +0300
+--- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-09-12 12:37:32.116915900 +0300
++++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-09-12 12:55:03.707144500 +0300
 @@ -36,7 +36,7 @@
          
          public var viewStack:ResizableViewStack;
@@ -146,21 +146,9 @@ diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/g
          
          private var _sectionsDataUtil:LinkageUtils;
          
-diff -Naur app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as app/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as
---- app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2014-09-06 22:45:24.873042800 +0300
-+++ app/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2014-09-06 22:49:46.966985100 +0300
-@@ -599,7 +599,7 @@
-                                 _loc12_ = _loc7_[_loc17_];
-                                 if(!(_loc12_ == null) && _loc12_.index == _loc16_)
-                                 {
--                                    _loc4_ = param2?ADG_ItemLevelsBuilder.makeByNext(_loc11_,_loc12_):ADG_ItemLevelsBuilder.makeByTop(_loc11_,_loc12_);
-+                                    _loc4_ = param2?LevelLine.makeByNext(_loc11_,_loc12_):LevelLine.makeByTop(_loc11_,_loc12_);
-                                     _loc3_.push(_loc4_);
-                                     break;
-                                 }
 diff -Naur app.orig/net/wg/gui/notification/NotificationPopUpViewer.as app/net/wg/gui/notification/NotificationPopUpViewer.as
---- app.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2014-09-06 22:46:21.175141300 +0300
-+++ app/net/wg/gui/notification/NotificationPopUpViewer.as	2014-09-06 22:49:46.976985100 +0300
+--- app.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2014-09-12 12:41:17.197907900 +0300
++++ app/net/wg/gui/notification/NotificationPopUpViewer.as	2014-09-12 12:55:03.717144700 +0300
 @@ -45,7 +45,7 @@
      
      private var maxAvailaleMessagesCount:uint = 5;
@@ -171,8 +159,8 @@ diff -Naur app.orig/net/wg/gui/notification/NotificationPopUpViewer.as app/net/w
      private var animationManager:ExcludeTweenManager;
      
 diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/gui/prebattle/squad/SquadItemRenderer.as
---- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-09-06 22:42:55.242674800 +0300
-+++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-09-06 22:49:46.986985100 +0300
+--- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-09-12 12:33:43.395144500 +0300
++++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-09-12 12:55:03.717144700 +0300
 @@ -171,7 +171,7 @@
                  }
                  this.setSpeakers(this.model.isPlayerSpeaking,true);
@@ -194,8 +182,8 @@ diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/g
                  _loc3_ = this.model.getCurrentColor();
                  if(!isNaN(_loc3_))
 diff -Naur app.orig/net/wg/gui/rally/events/RallyViewsEvent.as app/net/wg/gui/rally/events/RallyViewsEvent.as
---- app.orig/net/wg/gui/rally/events/RallyViewsEvent.as	2014-09-06 22:45:18.543033900 +0300
-+++ app/net/wg/gui/rally/events/RallyViewsEvent.as	2014-09-06 22:54:59.369757100 +0300
+--- app.orig/net/wg/gui/rally/events/RallyViewsEvent.as	2014-09-12 12:39:05.552654500 +0300
++++ app/net/wg/gui/rally/events/RallyViewsEvent.as	2014-09-12 12:55:03.717144700 +0300
 @@ -41,7 +41,7 @@
          
          public static var VEH_BTN_ROLL_OUT:String = "vehBtnRollOut";
@@ -206,8 +194,8 @@ diff -Naur app.orig/net/wg/gui/rally/events/RallyViewsEvent.as app/net/wg/gui/ra
          override public function clone() : Event
          {
 diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/wg/infrastructure/managers/IContainerManager.as
---- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2014-09-06 22:42:06.033121700 +0300
-+++ app/net/wg/infrastructure/managers/IContainerManager.as	2014-09-06 22:49:46.996985100 +0300
+--- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2014-09-12 12:32:01.085047100 +0300
++++ app/net/wg/infrastructure/managers/IContainerManager.as	2014-09-12 12:55:03.717144700 +0300
 @@ -15,6 +15,8 @@
          
          function isModalViewsExisting() : Boolean;
@@ -218,8 +206,8 @@ diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/
          
          function get lastFocusedView() : IView;
 diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/controls/ButtonGroup.as
---- app.orig/scaleform/clik/controls/ButtonGroup.as	2014-09-06 22:45:59.735111300 +0300
-+++ app/scaleform/clik/controls/ButtonGroup.as	2014-09-06 22:49:47.006985100 +0300
+--- app.orig/scaleform/clik/controls/ButtonGroup.as	2014-09-12 12:40:30.685156600 +0300
++++ app/scaleform/clik/controls/ButtonGroup.as	2014-09-12 12:55:03.717144700 +0300
 @@ -68,6 +68,7 @@
                  _loc1_ = _loc2_ as DisplayObjectContainer;
                  return _loc1_;
@@ -229,8 +217,8 @@ diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/co
          
          public function addButton(param1:Button) : void
 diff -Naur app.orig/scaleform/clik/ui/InputDetails.as app/scaleform/clik/ui/InputDetails.as
---- app.orig/scaleform/clik/ui/InputDetails.as	2014-09-06 22:46:26.835149200 +0300
-+++ app/scaleform/clik/ui/InputDetails.as	2014-09-06 22:49:47.016985100 +0300
+--- app.orig/scaleform/clik/ui/InputDetails.as	2014-09-12 12:41:28.377125300 +0300
++++ app/scaleform/clik/ui/InputDetails.as	2014-09-12 12:55:03.727144900 +0300
 @@ -20,7 +20,7 @@
          
          public var code:Number;

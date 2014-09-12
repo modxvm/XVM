@@ -118,6 +118,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.advanced.DoubleProgressBar;
     import net.wg.gui.components.advanced.ExtraModuleIcon;
     import net.wg.gui.components.advanced.FieldSet;
+    import net.wg.gui.components.advanced.GhostButton;
     import net.wg.gui.components.advanced.HelpLayoutControl;
     import net.wg.gui.components.advanced.IndicationOfStatus;
     import net.wg.gui.components.advanced.InteractiveSortingButton;
@@ -2148,6 +2149,8 @@ package net.wg.infrastructure.base.meta.impl
         public static var NET_WG_GUI_COMPONENTS_ADVANCED_EXTRAMODULEICON:Class = ExtraModuleIcon;
         
         public static var NET_WG_GUI_COMPONENTS_ADVANCED_FIELDSET:Class = FieldSet;
+        
+        public static var NET_WG_GUI_COMPONENTS_ADVANCED_GHOSTBUTTON:Class = GhostButton;
         
         public static var NET_WG_GUI_COMPONENTS_ADVANCED_HELPLAYOUTCONTROL:Class = HelpLayoutControl;
         

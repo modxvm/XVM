@@ -9,7 +9,6 @@ package net.wg.gui.components.common.cursor.base
     import net.wg.data.constants.Cursors;
     import net.wg.infrastructure.exceptions.ArgumentException;
     import net.wg.infrastructure.interfaces.entity.IDropItem;
-    import flash.geom.Point;
     
     public class DroppingCursor extends ResizingCursor
     {
@@ -271,9 +270,7 @@ package net.wg.gui.components.common.cursor.base
         private function droppingHandler(param1:MouseEvent) : void
         {
             var _loc3_:InteractiveObject = null;
-            var _loc4_:Point = null;
-            var _loc5_:Point = null;
-            var _loc6_:* = false;
+            var _loc4_:* = false;
             assertLifeCycle();
             assertNotNull(this._dropSenderInfo,"_dropSenderInfo");
             var _loc2_:DropInfo = this.getDropInfoByHit(InteractiveObject(param1.currentTarget));
@@ -281,10 +278,8 @@ package net.wg.gui.components.common.cursor.base
             {
                 _loc2_.state = BaseInfo.STATE_STARTED;
                 _loc3_ = InteractiveObject(this._dropSenderInfo.container.getHitArea());
-                _loc4_ = param1.target.localToGlobal(new Point(param1.localX,param1.localY));
-                _loc5_ = this._dropItem.globalToLocal(_loc4_);
-                _loc6_ = _loc2_.container.onStartDrop(_loc3_,this._dropItem,_loc5_.x,_loc5_.y);
-                if(_loc6_)
+                _loc4_ = _loc2_.container.onStartDrop(_loc3_,this._dropItem,this._dropItem.mouseX,this._dropItem.mouseY);
+                if(_loc4_)
                 {
                     this.addDropListeners(_loc2_);
                     this.removeAfterDropUpHandlers(this.mouseUpHdlr);
