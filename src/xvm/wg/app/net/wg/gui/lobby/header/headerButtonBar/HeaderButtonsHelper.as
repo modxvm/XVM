@@ -5,6 +5,7 @@ package net.wg.gui.lobby.header.headerButtonBar
     import scaleform.clik.interfaces.IDataProvider;
     import scaleform.clik.data.DataProvider;
     import flash.text.TextFieldAutoSize;
+    import net.wg.gui.lobby.header.vo.HBC_SettingsVo;
     import net.wg.gui.lobby.header.vo.HBC_AccountDataVo;
     import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
     import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
@@ -23,7 +24,7 @@ package net.wg.gui.lobby.header.headerButtonBar
             "align":TextFieldAutoSize.LEFT,
             "isUseFreeSize":false,
             "tooltip":null,
-            "data":null,
+            "data":new HBC_SettingsVo(),
             "helpText":LOBBY_HELP.HEADER_SETTINGS_BUTTON,
             "helpDirection":"B",
             "helpConnectorLength":12,

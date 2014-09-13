@@ -26,8 +26,7 @@ package net.wg.gui.lobby.profile.pages
         
         public static function applyInitDataToTextField(param1:String, param2:Object, param3:LineDescrIconText) : void
         {
-            var _loc4_:Object = null;
-            _loc4_ = param2[param1];
+            var _loc4_:Object = param2[param1];
             param3.description = _loc4_["description"];
             param3.iconSource = _loc4_["icon"];
         }

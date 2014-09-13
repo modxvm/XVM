@@ -194,6 +194,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             var _loc3_:Number = 0;
             while(_loc3_ < _loc2_.numChildren)
             {
+                trace("child: " + _loc2_.getChildAt(_loc3_).name);
                 _loc3_++;
             }
             App.utils.asserter.assert(_loc2_.numChildren == 0,"container is not empty after dispose!");

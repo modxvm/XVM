@@ -17,6 +17,7 @@ package net.wg.dev.utils
             {
                 if(_loc3_ == "")
                 {
+                    trace(param2 + "EMPTY PROPERTY NAME !");
                 }
                 _loc4_ = param1[_loc3_];
                 _loc5_ = typeof _loc4_;
@@ -24,6 +25,7 @@ package net.wg.dev.utils
                 {
                     _loc5_ = "array";
                 }
+                trace(param2 + _loc3_ + " : [" + _loc5_ + "] : " + _loc4_);
                 if(_loc5_ == "object")
                 {
                     traceObjectStructure(_loc4_,param2 + "\t");
@@ -50,6 +52,7 @@ package net.wg.dev.utils
                 {
                     _loc6_ = "array";
                 }
+                trace(param2 + _loc4_ + " : [" + _loc6_ + "] : " + _loc5_);
                 if(_loc6_ == "object")
                 {
                     traceObjectStructure(_loc5_,param2 + "\t");

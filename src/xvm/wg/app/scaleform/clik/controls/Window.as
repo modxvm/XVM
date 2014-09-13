@@ -184,6 +184,7 @@ package scaleform.clik.controls
                 else
                 {
                     this._content = null;
+                    trace("Error: Cannot load content for " + name + "; symbol " + this._src + " not found!");
                     return;
                 }
             }

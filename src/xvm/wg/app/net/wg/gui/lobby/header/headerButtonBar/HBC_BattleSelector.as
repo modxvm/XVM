@@ -20,6 +20,7 @@ package net.wg.gui.lobby.header.headerButtonBar
             _maxFontSize = 14;
             _hideDisplayObjList.push(this.icon);
             this.icon.addEventListener(UILoaderEvent.COMPLETE,this.onIcoLoaded);
+            this.icon.addEventListener(UILoaderEvent.IOERROR,this.onIcoLoadError);
         }
         
         public var textField:TextField = null;
@@ -36,8 +37,17 @@ package net.wg.gui.lobby.header.headerButtonBar
         
         private var MAX_TEXT_WIDTH_MAX_SCREEN:Number = 500;
         
+        private var iconWidth:Number = 0;
+        
+        private function onIcoLoadError(param1:UILoaderEvent) : void
+        {
+            this.iconWidth = 0;
+            this.updateData();
+        }
+        
         private function onIcoLoaded(param1:UILoaderEvent) : void
         {
+            this.iconWidth = param1.target.width;
             this.updateData();
         }
         
@@ -53,8 +63,8 @@ package net.wg.gui.lobby.header.headerButtonBar
             var _loc2_:* = NaN;
             if(data)
             {
-                this.textField.x = this.icon.visible?this.icon.x + this.icon.width + ICON_MARGIN:0;
                 this.icon.source = this._battleTypeVo.battleTypeIcon;
+                this.textField.x = (this._battleTypeVo.battleTypeIcon) && (this.icon.visible)?this.iconWidth?this.icon.x + this.iconWidth:this.icon.x + this.icon.width + ICON_MARGIN:0;
                 _loc1_ = -this.textField.x;
                 switch(screen)
                 {
@@ -95,12 +105,17 @@ package net.wg.gui.lobby.header.headerButtonBar
         {
             this._battleTypeVo = null;
             this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.onIcoLoaded);
+            this.icon.removeEventListener(UILoaderEvent.IOERROR,this.onIcoLoadError);
             super.onDispose();
         }
         
         override public function set data(param1:Object) : void
         {
             this._battleTypeVo = HBC_BattleTypeVo(param1);
+            if(!this._battleTypeVo.battleTypeIcon)
+            {
+                this.iconWidth = 0;
+            }
             super.data = param1;
         }
     }

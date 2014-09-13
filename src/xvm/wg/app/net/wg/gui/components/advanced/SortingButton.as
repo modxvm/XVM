@@ -94,6 +94,7 @@ package net.wg.gui.components.advanced
                 }
                 catch(e:Error)
                 {
+                    trace("Flash :: Unknown sorting button state:",value);
                 }
                 value = SortingInfo.WITHOUT_SORT;
             }

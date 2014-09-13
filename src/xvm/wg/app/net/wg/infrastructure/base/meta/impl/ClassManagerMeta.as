@@ -984,6 +984,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.header.vo.HBC_BattleTypeVo;
     import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
     import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
+    import net.wg.gui.lobby.header.vo.HBC_SettingsVo;
     import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
     import net.wg.gui.lobby.header.vo.HeaderButtonVo;
     import net.wg.gui.lobby.interfaces.ISubtaskComponent;
@@ -3881,6 +3882,8 @@ package net.wg.infrastructure.base.meta.impl
         public static var NET_WG_GUI_LOBBY_HEADER_VO_HBC_FINANCEVO:Class = HBC_FinanceVo;
         
         public static var NET_WG_GUI_LOBBY_HEADER_VO_HBC_PREMDATAVO:Class = HBC_PremDataVo;
+        
+        public static var NET_WG_GUI_LOBBY_HEADER_VO_HBC_SETTINGSVO:Class = HBC_SettingsVo;
         
         public static var NET_WG_GUI_LOBBY_HEADER_VO_HBC_SQUADDATAVO:Class = HBC_SquadDataVo;
         

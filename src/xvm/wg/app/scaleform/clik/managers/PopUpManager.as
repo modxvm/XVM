@@ -50,6 +50,7 @@ package scaleform.clik.managers
         {
             if(!_stage)
             {
+                trace("PopUpManager has not been initialized. Automatic initialization has not occured or has failed; call PopUpManager.init() manually.");
                 return;
             }
             var _loc5_:IEventCollector = App.utils.events;
@@ -77,6 +78,7 @@ package scaleform.clik.managers
         {
             if(!_stage)
             {
+                trace("PopUpManager has not been initialized. Automatic initialization has not occured or has failed; call PopUpManager.init() manually.");
                 return;
             }
             if(_modalMc)

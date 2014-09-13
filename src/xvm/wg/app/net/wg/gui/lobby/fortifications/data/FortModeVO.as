@@ -5,7 +5,6 @@ package net.wg.gui.lobby.fortifications.data
         
         public function FortModeVO()
         {
-            this._currentMode = FunctionalStates.UNKNOWN;
             super();
         }
         
@@ -13,7 +12,7 @@ package net.wg.gui.lobby.fortifications.data
         
         private var _isTutorial:Boolean = false;
         
-        private var _currentMode:Number;
+        private var _currentMode:Number = 4;
         
         public function get isEntering() : Boolean
         {

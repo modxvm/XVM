@@ -6,10 +6,10 @@ package net.wg.gui.components.tooltips
     import net.wg.data.managers.ITooltipProps;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import net.wg.gui.components.tooltips.VO.VehicleVO;
-    import net.wg.utils.ILocale;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
     import flash.text.TextFormat;
     import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
+    import net.wg.utils.ILocale;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
@@ -71,7 +71,6 @@ package net.wg.gui.components.tooltips
         {
             var _loc2_:ToolTipBlockResultVO = null;
             var _loc5_:VehicleVO = null;
-            var _loc6_:ILocale = null;
             var _loc11_:ToolTipBlockVO = null;
             var _loc12_:String = null;
             var _loc13_:String = null;
@@ -104,9 +103,10 @@ package net.wg.gui.components.tooltips
             this.vehicleFavorite.visible = _loc5_.isFavorite;
             this.eliteGlow.gotoAndStop(_loc5_.isElite?"elite":"normal");
             this.tankTypeIco.type = _loc5_.isElite?_loc5_.vType + "_elite":_loc5_.vType;
-            _loc6_ = App.utils.locale;
+            var _loc6_:ILocale = App.utils.locale;
             if(!_loc6_)
             {
+                trace("WARNING: locale is undefined" + this);
                 return;
             }
             var _loc7_:* = "";

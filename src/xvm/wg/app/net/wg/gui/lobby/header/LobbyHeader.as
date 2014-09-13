@@ -22,6 +22,7 @@ package net.wg.gui.lobby.header
     import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
     import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
     import net.wg.gui.lobby.header.vo.HBC_BattleTypeVo;
+    import net.wg.gui.lobby.header.vo.HBC_SettingsVo;
     import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
     import net.wg.data.constants.IconsTypes;
     import net.wg.gui.lobby.headerTutorial.HeaderTutorialStates;
@@ -270,6 +271,16 @@ package net.wg.gui.lobby.header
             _loc4_.battleTypeIcon = param2;
             this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
             this.as_doDisableHeaderButton(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR,param3);
+        }
+    }
+    
+    public function as_setServer(param1:String) : void
+    {
+        var _loc2_:HBC_SettingsVo = HBC_SettingsVo(this._headerButtonsHelper.getContentDataById(HeaderButtonsHelper.ITEM_ID_SETTINGS));
+        if(_loc2_)
+        {
+            _loc2_.serverName = param1;
+            this._headerButtonsHelper.invalidateDataById(HeaderButtonsHelper.ITEM_ID_SETTINGS);
         }
     }
     

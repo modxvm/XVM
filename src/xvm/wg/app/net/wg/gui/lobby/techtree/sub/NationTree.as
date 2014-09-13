@@ -120,6 +120,7 @@ package net.wg.gui.lobby.techtree.sub
             }
             catch(error:*)
             {
+                trace("error",error.message);
                 throw new Error("The class " + value + " cannot be found in your library. Please ensure it exists.");
             }
             if(classRef != null)
