@@ -256,8 +256,8 @@
                 "0" for filling with leading zeros
         width - minimum width
         prec  - depended from the type:
-                - maximum width for lines
-                - number of digits after comma for numbers
+                - maximum width for strings
+                - number of digits after comma for float numbers
                 - offset of ASCII table for numbers as ASCII char (default 129)
         type  - type
                 s - string
