@@ -35,7 +35,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         $07_lakeville:          { size: 80 },  // Lakeville
         $08_ruinberg:           { size: 80 },  // Ruinberg
         $10_hills:              { size: 80 },  // Mines
-        $11_murovanka:          { size: 80 },  // Murovanka
+        $11_murovanka:          { size: 100 }, // Murovanka
         $13_erlenberg:          { size: 100 }, // Erlenberg
         $14_siegfried_line:     { size: 100 }, // Siegfried Line
         $15_komarin:            { size: 80 },  // Komarin
