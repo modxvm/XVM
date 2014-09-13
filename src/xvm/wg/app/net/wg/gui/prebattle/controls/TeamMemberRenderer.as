@@ -3,6 +3,7 @@ package net.wg.gui.prebattle.controls
     import net.wg.gui.prebattle.squad.SquadItemRenderer;
     import flash.text.TextField;
     import scaleform.clik.core.UIComponent;
+    import scaleform.clik.utils.Constraints;
     import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
     import net.wg.gui.prebattle.constants.PrebattleStateString;
     import scaleform.gfx.TextFieldEx;
@@ -41,6 +42,7 @@ package net.wg.gui.prebattle.controls
         override protected function configUI() : void
         {
             super.configUI();
+            constraints.addElement(this.vehicle_type_icon.name,this.vehicle_type_icon,Constraints.ALL);
         }
         
         override public function setData(param1:Object) : void
@@ -178,6 +180,7 @@ package net.wg.gui.prebattle.controls
             this.updateValidVehicleState((this._isVehicleValid) && !(vehicleLevelField.text == null) && (this.visible));
             constraints.updateElement("status",status);
             constraints.updateElement("vehicleNameField",vehicleNameField);
+            constraints.updateElement(this.vehicle_type_icon.name,this.vehicle_type_icon);
         }
         
         public function get isVehicleValid() : Boolean

@@ -2310,9 +2310,9 @@ package
         
         public static var TANKMEN_ENUM:Array = [TANKMEN_LIGHTTANK,TANKMEN_MEDIUMTANK,TANKMEN_HEAVYTANK,TANKMEN_AT_SPG,TANKMEN_SPG,TANKMEN_LOCKREASON_INBATTLE,TANKMEN_LOCKREASON_PREBATTLE,TANKMEN_LOCKREASON_BROKEN];
         
-        public static var LOADING_BATTLETYPES_DESC_ENUM:Array = [LOADING_BATTLETYPES_DESC_0,LOADING_BATTLETYPES_DESC_1,LOADING_BATTLETYPES_DESC_2,LOADING_BATTLETYPES_DESC_3,LOADING_BATTLETYPES_DESC_4,LOADING_BATTLETYPES_DESC_5,LOADING_BATTLETYPES_DESC_6,LOADING_BATTLETYPES_DESC_7,LOADING_BATTLETYPES_DESC_8,LOADING_BATTLETYPES_DESC_9];
-        
         public static var PROFILE_STATS_BLOCKS_ENUM:Array = [PROFILE_STATS_BLOCKS_COMMON,PROFILE_STATS_BLOCKS_BATTLEEFFECT,PROFILE_STATS_BLOCKS_CREDITS,PROFILE_STATS_BLOCKS_STUDYING];
+        
+        public static var LOADING_BATTLETYPES_DESC_ENUM:Array = [LOADING_BATTLETYPES_DESC_0,LOADING_BATTLETYPES_DESC_1,LOADING_BATTLETYPES_DESC_2,LOADING_BATTLETYPES_DESC_3,LOADING_BATTLETYPES_DESC_4,LOADING_BATTLETYPES_DESC_5,LOADING_BATTLETYPES_DESC_6,LOADING_BATTLETYPES_DESC_7,LOADING_BATTLETYPES_DESC_8,LOADING_BATTLETYPES_DESC_9];
         
         public static var VEHICLEINFO_PARAMS_ENUM:Array = [VEHICLEINFO_PARAMS_MAXHEALTH,VEHICLEINFO_PARAMS_WEIGHT,VEHICLEINFO_PARAMS_ENGINEPOWER,VEHICLEINFO_PARAMS_SPEEDLIMITS,VEHICLEINFO_PARAMS_CHASSISROTATIONSPEED,VEHICLEINFO_PARAMS_HULLARMOR,VEHICLEINFO_PARAMS_TURRETARMOR,VEHICLEINFO_PARAMS_RELOADTIME,VEHICLEINFO_PARAMS_PIERCINGPOWER,VEHICLEINFO_PARAMS_DAMAGE,VEHICLEINFO_PARAMS_TURRETROTATIONSPEED,VEHICLEINFO_PARAMS_GUNROTATIONSPEED,VEHICLEINFO_PARAMS_CIRCULARVISIONRADIUS,VEHICLEINFO_PARAMS_RADIODISTANCE];
         
@@ -2524,19 +2524,19 @@ package
             return _loc2_;
         }
         
-        public static function loading_battletypes_desc(param1:String) : String
-        {
-            var _loc2_:String = null;
-            _loc2_ = "#menu:loading/battleTypes/desc/" + param1;
-            App.utils.asserter.assert(!(LOADING_BATTLETYPES_DESC_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
-            return _loc2_;
-        }
-        
         public static function profile_stats_blocks(param1:String) : String
         {
             var _loc2_:String = null;
             _loc2_ = "#menu:profile/stats/blocks/" + param1;
             App.utils.asserter.assert(!(PROFILE_STATS_BLOCKS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
+        
+        public static function loading_battletypes_desc(param1:String) : String
+        {
+            var _loc2_:String = null;
+            _loc2_ = "#menu:loading/battleTypes/desc/" + param1;
+            App.utils.asserter.assert(!(LOADING_BATTLETYPES_DESC_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         

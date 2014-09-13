@@ -156,7 +156,7 @@ package net.wg.gui.rally.views.room
         {
             super.configUI();
             this.teamLabel = BaseRallyMainWindow.getTeamHeader(this.getMembersStr(),this._rallyData);
-            this.vehiclesLabel = this.getVehiclesStaticStr();
+            this.lblTeamVehicles.htmlText = this.getVehiclesStaticStr();
             this._slotsUi = this.getSlotsUI();
             this.btnFight.addEventListener(ButtonEvent.CLICK,this.onReadyToggle);
             this.btnNotReady.addEventListener(ButtonEvent.CLICK,this.onReadyToggle);

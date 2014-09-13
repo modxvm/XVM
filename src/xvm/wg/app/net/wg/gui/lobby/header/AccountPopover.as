@@ -111,22 +111,23 @@ package net.wg.gui.lobby.header
             this.userName.textColor = this._isTeamKiller?App.colorSchemeMgr.getScheme(ColorSchemeNames.TEAMKILLER).rgb:UserNameField.DEF_USER_NAME_COLOR;
             this.userName.userVO = this._userVo;
             var _loc1_:Number = this.STATS_ITEMS_START_Y_POS;
+            if(this.statItems)
+            {
+                this.clearStatsItems();
+            }
+            this.statItems = new Vector.<StatisticItem>();
             if((this._mainData) && this._mainData.length > 0)
             {
-                if(!this.statItems)
-                {
-                    this.statItems = new Vector.<StatisticItem>(0);
-                }
                 _loc3_ = 0;
                 while(_loc3_ < this._mainData.length)
                 {
-                    _loc4_ = new StatisticItemVo(this._mainData[_loc3_]);
+                    _loc4_ = new StatisticItemVo(App.utils.commons.cloneObject(this._mainData[_loc3_]));
                     _loc5_ = App.utils.classFactory.getComponent("statsItem_UI",StatisticItem);
                     _loc5_.x = this.STATS_ITEMS_START_X_POS;
                     _loc5_.y = _loc1_ ^ 0;
-                    _loc1_ = _loc1_ + (_loc5_.height + this.STATS_ITEMS_MARGIN);
                     _loc5_.setData(_loc4_);
                     _loc5_.validateNow();
+                    _loc1_ = _loc1_ + (_loc5_.height + this.STATS_ITEMS_MARGIN);
                     this.statItems.push(_loc5_);
                     this.addChild(_loc5_);
                     _loc3_++;
@@ -166,18 +167,9 @@ package net.wg.gui.lobby.header
             return _loc2_;
         }
         
-        override protected function onInitModalFocus(param1:InteractiveObject) : void
-        {
-            super.onInitModalFocus(param1);
-            setFocus(this);
-        }
-        
-        override protected function onDispose() : void
+        private function clearStatsItems() : void
         {
             var _loc1_:StatisticItem = null;
-            this.allAchievements.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
-            this.clanInfo.doActionBtn.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
-            this.crewInfo.doActionBtn.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
             if(this.statItems)
             {
                 while(this.statItems.length > 0)
@@ -189,9 +181,30 @@ package net.wg.gui.lobby.header
                 }
             }
             this.statItems = null;
+        }
+        
+        override protected function onInitModalFocus(param1:InteractiveObject) : void
+        {
+            super.onInitModalFocus(param1);
+            setFocus(this);
+        }
+        
+        override protected function onDispose() : void
+        {
+            this.allAchievements.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
+            this.clanInfo.doActionBtn.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
+            this.crewInfo.doActionBtn.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
+            this.clearStatsItems();
             this._userVo.dispose();
             this._userVo = null;
-            this._mainData = null;
+            if(this._mainData)
+            {
+                while(this._mainData.length)
+                {
+                    this._mainData.pop();
+                }
+                this._mainData = null;
+            }
             if(this._clanData)
             {
                 this._clanData.dispose();

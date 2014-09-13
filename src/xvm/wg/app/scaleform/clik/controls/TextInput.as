@@ -347,7 +347,6 @@ package scaleform.clik.controls
         {
             if(this.textField == null)
             {
-                trace(">>> Error :: " + this + ", textField is NULL.");
                 return;
             }
             this.updateText();

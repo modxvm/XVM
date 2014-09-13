@@ -38,7 +38,8 @@ package net.wg.gui.rally.controls
         
         public function updateComponents(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
         {
-            var _loc5_:IUserProps = null;
+            var _loc5_:* = false;
+            var _loc6_:IUserProps = null;
             var _loc3_:RallySimpleSlotRenderer = param1 as RallySimpleSlotRenderer;
             var _loc4_:* = false;
             if(param2)
@@ -66,7 +67,8 @@ package net.wg.gui.rally.controls
                     else if(param2.isCommanderState)
                     {
                         _loc3_.vehicleBtn.vehicleCount = -1;
-                        _loc3_.vehicleBtn.showCommanderSettings = !(_loc3_.index == 0) && (param2.hasRestrictions);
+                        _loc5_ = this.isShowSlotRestrictions(_loc3_,param2);
+                        _loc3_.vehicleBtn.showCommanderSettings = _loc5_;
                         _loc3_.vehicleBtn.visible = (Boolean(param2.player)) || (_loc3_.vehicleBtn.showCommanderSettings);
                     }
                     else if(!param2.isCommanderState && !param2.player)
@@ -96,16 +98,16 @@ package net.wg.gui.rally.controls
                 _loc3_.slotLabel.visible = !_loc4_;
                 if(param2.player)
                 {
-                    _loc5_ = App.utils.commons.getUserProps(param2.player.userName,param2.player.clanAbbrev,param2.player.region,param2.player.igrType);
+                    _loc6_ = App.utils.commons.getUserProps(param2.player.userName,param2.player.clanAbbrev,param2.player.region,param2.player.igrType);
                     if(!param2.player.himself)
                     {
-                        _loc5_.rgb = param2.player.color;
+                        _loc6_.rgb = param2.player.color;
                     }
                     else
                     {
-                        _loc5_.rgb = 13224374;
+                        _loc6_.rgb = 13224374;
                     }
-                    App.utils.commons.formatPlayerName(_loc3_.slotLabel,_loc5_);
+                    App.utils.commons.formatPlayerName(_loc3_.slotLabel,_loc6_);
                     if(_loc3_.contextMenuArea)
                     {
                         _loc3_.contextMenuArea.width = _loc3_.slotLabel.width;
@@ -125,6 +127,11 @@ package net.wg.gui.rally.controls
             {
                 App.toolTipMgr.show(param3.player.getToolTip());
             }
+        }
+        
+        protected function isShowSlotRestrictions(param1:RallySimpleSlotRenderer, param2:IRallySlotVO) : Boolean
+        {
+            return !(param1.index == 0) && (param2.hasRestrictions);
         }
     }
 }

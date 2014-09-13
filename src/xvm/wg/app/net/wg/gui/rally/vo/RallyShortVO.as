@@ -30,6 +30,11 @@ package net.wg.gui.rally.vo
         
         private var _statusLbl:String = "";
         
+        public function hasSlotsData() : Boolean
+        {
+            return !(this.slots == null);
+        }
+        
         public function get slotsArray() : Array
         {
             var _loc1_:Array = new Array(this.slots.length);

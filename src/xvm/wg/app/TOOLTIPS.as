@@ -1826,6 +1826,8 @@ package
         
         public static var FORTIFICATION_ORDERPOPOVER_PERMANENTORDER_INFO:String = "#tooltips:fortification/orderPopover/permanentOrder/info";
         
+        public static var FORTIFICATION_ORDERSPANEL_CANTUSEORDER:String = "#tooltips:fortification/ordersPanel/cantUseOrder";
+        
         public static var FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN_HEADER:String = FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN + "/header";
         
         public static var FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN_BODY:String = FORTIFICATION_POPOVER_UPGRADEFOUNDATIONBTN + "/body";

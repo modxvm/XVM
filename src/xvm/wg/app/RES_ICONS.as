@@ -1662,9 +1662,15 @@ package
         
         public static var MAPS_ICONS_LIBRARY_FORTIFICATION_RESERVE_INPROGRESS_24:String = "../maps/icons/library/fortification/reserve_inprogress_24.png";
         
+        public static var MAPS_ICONS_LIBRARY_FRTCLANBTLBGBATTLERESULT_UR_DEFEAT_1:String = "../maps/icons/library/frtClanBtlBgBattleResult_UR_Defeat-1.png";
+        
         public static var MAPS_ICONS_LIBRARY_FRTCLANBTLBGBATTLERESULT_UR_DEFEAT:String = "../maps/icons/library/frtClanBtlBgBattleResult_UR_Defeat.png";
         
+        public static var MAPS_ICONS_LIBRARY_FRTCLANBTLBGBATTLERESULT_UR_DRAW_1:String = "../maps/icons/library/frtClanBtlBgBattleResult_UR_Draw-1.png";
+        
         public static var MAPS_ICONS_LIBRARY_FRTCLANBTLBGBATTLERESULT_UR_DRAW:String = "../maps/icons/library/frtClanBtlBgBattleResult_UR_Draw.png";
+        
+        public static var MAPS_ICONS_LIBRARY_FRTCLANBTLBGBATTLERESULT_UR_VICTORY_1:String = "../maps/icons/library/frtClanBtlBgBattleResult_UR_Victory-1.png";
         
         public static var MAPS_ICONS_LIBRARY_FRTCLANBTLBGBATTLERESULT_UR_VICTORY:String = "../maps/icons/library/frtClanBtlBgBattleResult_UR_Victory.png";
         

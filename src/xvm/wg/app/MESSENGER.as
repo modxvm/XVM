@@ -550,6 +550,14 @@ package
         
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_FORTRESOURCE:String = "#messenger:serviceChannelMessages/battleResults/fortResource";
         
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_FORTBUILDING:String = "#messenger:serviceChannelMessages/battleResults/fortBuilding";
+        
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_FORTRESOURCE_CLAN:String = "#messenger:serviceChannelMessages/battleResults/fortResource/clan";
+        
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_FORTRESOURCE_PLAYER:String = "#messenger:serviceChannelMessages/battleResults/fortResource/player";
+        
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_FORT_CLAN:String = "#messenger:serviceChannelMessages/battleResults/fort/clan";
+        
         public static var SERVICECHANNELMESSAGES_BATTLETUTORIAL_RESULTS_FINISHED:String = "#messenger:serviceChannelMessages/battleTutorial/results/finished";
         
         public static var SERVICECHANNELMESSAGES_BATTLETUTORIAL_RESULTS_FAILED:String = "#messenger:serviceChannelMessages/battleTutorial/results/failed";

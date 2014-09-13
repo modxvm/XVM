@@ -2,6 +2,8 @@ package net.wg.gui.prebattle.company
 {
     import net.wg.gui.prebattle.meta.impl.CompanyMainWindowMeta;
     import net.wg.gui.prebattle.meta.ICompanyMainWindowMeta;
+    import net.wg.infrastructure.events.FocusRequestEvent;
+    import net.wg.infrastructure.interfaces.entity.IFocusContainer;
     import net.wg.gui.rally.events.RallyViewsEvent;
     import net.wg.data.constants.generated.PREBATTLE_ALIASES;
     import scaleform.clik.events.InputEvent;
@@ -21,6 +23,18 @@ package net.wg.gui.prebattle.company
             super.onPopulate();
             canMinimize = true;
             showWindowBgForm = false;
+            addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler,false,0,true);
+        }
+        
+        override protected function onDispose() : void
+        {
+            removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+            super.onDispose();
+        }
+        
+        private function onRequestFocusHandler(param1:FocusRequestEvent) : void
+        {
+            setFocus(IFocusContainer(param1.target).getComponentForFocus());
         }
         
         override public function as_loadView(param1:String, param2:String) : void

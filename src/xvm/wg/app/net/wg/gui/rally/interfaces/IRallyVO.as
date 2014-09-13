@@ -29,5 +29,7 @@ package net.wg.gui.rally.interfaces
         function clearSlots() : void;
         
         function addSlot(param1:IRallySlotVO) : void;
+        
+        function hasSlotsData() : Boolean;
     }
 }

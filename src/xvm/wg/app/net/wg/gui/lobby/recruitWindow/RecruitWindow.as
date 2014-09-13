@@ -67,12 +67,7 @@ package net.wg.gui.lobby.recruitWindow
         
         public function as_initData(param1:Object) : void
         {
-            trace("  ");
-            trace("  ");
             LocalDebugUtils.traceObjectStructure(param1,"  ");
-            trace("  ");
-            trace("  ");
-            trace("  ");
             this.data = param1;
             this.menuEnabled = param1.menuEnabled;
             invalidateData();

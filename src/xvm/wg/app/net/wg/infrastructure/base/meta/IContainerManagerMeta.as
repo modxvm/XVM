@@ -28,5 +28,7 @@ package net.wg.infrastructure.base.meta
         function as_getNameByToken(param1:String) : String;
         
         function as_getViewTypeByToken(param1:String) : String;
+        
+        function as_cancelLoadingsForContainer(param1:String) : void;
     }
 }
