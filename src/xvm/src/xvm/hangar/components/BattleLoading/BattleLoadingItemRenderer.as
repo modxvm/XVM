@@ -193,7 +193,8 @@ package xvm.hangar.components.BattleLoading
             if (Config.config.rating.showPlayersStatistics)
                 proxy.vehicleField.condenseWhite = false;
             //draw();
-            proxy.invalidateData();
+            if (proxy.constraints != null)
+                proxy.invalidateData();
 
             //Macros.TestMacros(fullPlayerName);
         }

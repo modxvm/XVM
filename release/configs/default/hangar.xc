@@ -27,7 +27,7 @@
       "updateInterval": 10000,
       // Axis field coordinates
       // Положение поля по осям
-      "x": 50,
+      "x": 5,
       "y": 51,
       // Transparency
       // Прозрачность от 0 до 100

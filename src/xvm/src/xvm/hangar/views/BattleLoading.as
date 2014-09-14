@@ -34,9 +34,6 @@ package xvm.hangar.views
 
             logBriefConfigurationInfo();
 
-            page.form.team1List.itemRenderer = UI_LeftItemRenderer;
-            page.form.team2List.itemRenderer = UI_RightItemRenderer;
-
             waitInit();
         }
 
@@ -74,6 +71,8 @@ package xvm.hangar.views
         {
             try
             {
+                initRenderers();
+
                 // Components
                 new WinChances(page); // Winning chance info above players list.
                 new TipField(page);   // Information field below players list.
@@ -83,6 +82,19 @@ package xvm.hangar.views
             {
                 Logger.add(ex.getStackTrace());
             }
+        }
+
+        private function initRenderers():void
+        {
+            page.form.team1List.validateNow();
+            page.form.team2List.validateNow();
+            page.form.team1List.itemRenderer = UI_LeftItemRenderer;
+            page.form.team2List.itemRenderer = UI_RightItemRenderer;
+            App.utils.scheduler.envokeInNextFrame(function():void
+            {
+                page.form.team1List.itemRenderer = UI_LeftItemRenderer;
+                page.form.team2List.itemRenderer = UI_RightItemRenderer;
+            });
         }
     }
 }
