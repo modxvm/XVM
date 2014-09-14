@@ -27,8 +27,8 @@
       "updateInterval": 10000,
       // Axis field coordinates
       // Положение поля по осям
-      "x": 170,
-      "y": 52,
+      "x": 50,
+      "y": 51,
       // Transparency
       // Прозрачность от 0 до 100
       "alpha": 80,
@@ -37,7 +37,7 @@
       "delimiter": ": ",
       // Maximum number of column rows
       // Максимальное количество строк одной колонки
-      "maxRows": 4,
+      "maxRows": 2,
       // Gap between columns
       // Пространство между колонками
       "columnGap": 10,
