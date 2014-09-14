@@ -119,9 +119,7 @@ package xvm.profile
                 {
                     var index:int = Config.config.userInfo.startPage - 1;
                     if (index > 0 && index < tabNavigator.initData.sectionsData.length)
-                        tabNavigator.initData.selectedAlias = tabNavigator.initData.sectionsData[index].alias;
-                    //Logger.add(tabNavigator.initData.selectedAlias);
-                    tabNavigator.invalidate("initDataInv");
+                        tabNavigator.bar.selectedIndex = index;
                 }
             }
             catch (ex:Error)
@@ -133,7 +131,6 @@ package xvm.profile
         private function viewStack_ViewShowed(e:ViewStackEvent):void
         {
             //Logger.add("viewStack_ViewShowed: " + e.view);
-
             try
             {
                 var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
