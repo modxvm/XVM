@@ -118,7 +118,7 @@ package com.xvm.misc
             c.pingServers.enabled = false;
             c.pingServers.updateInterval = 10000; // msec
             c.pingServers.x = 170;
-            c.pingServers.y = 35;
+            c.pingServers.y = 52;
             c.pingServers.alpha = 80;
             c.pingServers.delimiter = ": ";
             c.pingServers.maxRows = 4;

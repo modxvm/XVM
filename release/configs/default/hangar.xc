@@ -28,7 +28,7 @@
       // Axis field coordinates
       // Положение поля по осям
       "x": 170,
-      "y": 35,
+      "y": 52,
       // Transparency
       // Прозрачность от 0 до 100
       "alpha": 80,
