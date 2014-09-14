@@ -21,7 +21,7 @@ class wot.VehicleMarkersManager.log.HpLeft
 
     public function onNewMarkerCreated(player:Object):Void
     {
-        var loggerPlayer:Object = getLoggedPlayer(player.pFullName);
+        var loggerPlayer:Object = getLoggedPlayer(player.pName);
         if (loggerPlayer == null)
         {
             /** Append new player to HP logging model */
@@ -30,13 +30,13 @@ class wot.VehicleMarkersManager.log.HpLeft
         else if (loggerPlayer.curHealth != player.curHealth)
         {
             /** Enemy health can actually have been changed while he was out of sight */
-            onHealthUpdate(player.pFullName, player.curHealth);
+            onHealthUpdate(player.pName, player.curHealth);
         }
     }
 
-    public function onHealthUpdate(pFullName:String, curHealth:Number):Void
+    public function onHealthUpdate(pName:String, curHealth:Number):Void
     {
-        var player:Object = getLoggedPlayer(pFullName);
+        var player:Object = getLoggedPlayer(pName);
         player.curHealth = curHealth;
     }
 
@@ -62,7 +62,7 @@ class wot.VehicleMarkersManager.log.HpLeft
             }
 
             //Logger.addObject(player);
-            entries += (entries == "" ? "" : "<br/>") + Macros.Format(player.pFullName, format, player);
+            entries += (entries == "" ? "" : "<br/>") + Macros.Format(player.pName, format, player);
         }
 
         text += (direction == Defines.DIRECTION_DOWN) ? header + "<br/>" + entries : entries + "<br/>" + header;
@@ -70,11 +70,11 @@ class wot.VehicleMarkersManager.log.HpLeft
         return text;
     }
 
-    private function getLoggedPlayer(pFullName:String):Object
+    private function getLoggedPlayer(pName:String):Object
     {
         for (var i in model)
         {
-            if (model[i].pFullName == pFullName)
+            if (model[i].pName == pName)
             {
                 return model[i];
             }

@@ -10,19 +10,18 @@ class com.xvm.Macros
     private static var dict:Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
     public static var globals:Object = {};
 
-    public static function Format(playerName:String, format:String, options:Object):String
+    public static function Format(pname:String, format:String, options:Object):String
     {
-        //Logger.add("format:" + format + " player:" + playerName);
-        if (format == null || playerName == null)
+        //Logger.add("format:" + format + " player:" + pname);
+        if (format == null || pname == null)
             return null;
         try
         {
-            var name:String = Utils.GetPlayerName(playerName);
-            var player_cache = macros_cache[name];
+            var player_cache = macros_cache[pname];
             if (player_cache == null)
             {
-                macros_cache[name] = { alive: { }, dead: { }};
-                player_cache = macros_cache[name];
+                macros_cache[pname] = { alive: { }, dead: { }};
+                player_cache = macros_cache[pname];
             }
             var dead:Boolean = options != null && options.dead == true;
             var dead_value:String = dead ? "dead" : "alive";
@@ -51,7 +50,7 @@ class com.xvm.Macros
                     }
                     else
                     {
-                        var pdata = dict[name];
+                        var pdata = dict[pname];
                         if (pdata != null)
                         {
                             var parts:Array = GetMacroParts(macro, pdata, dead);
@@ -101,10 +100,10 @@ class com.xvm.Macros
             if (isStaticMacro)
                 player_cache[dead_value][format] = res;
             //else
-            //    Logger.add(name + "> " + format);
+            //    Logger.add(pname + "> " + format);
 
-            //Logger.add(name + "> " + format);
-            //Logger.add(name + "> " + res);
+            //Logger.add(pname + "> " + format);
+            //Logger.add(pname + "> " + res);
             return res;
         }
         catch (ex:Error)
@@ -307,13 +306,12 @@ class com.xvm.Macros
 
     // Macros registration
 
-    public static function RegisterPlayerData(playerName:String, data:Object, team:Number)
+    public static function RegisterPlayerData(pname:String, data:Object, team:Number)
     {
         if (!Config.config)
             return;
         if (!data)
             return;
-        var pname:String = Utils.GetPlayerName(playerName);
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
         var pdata = dict[pname];
@@ -477,11 +475,10 @@ class com.xvm.Macros
         globals["battletier"] = battletier;
     }
 
-    public static function RegisterStatMacros(playerName:String, stat:StatData)
+    public static function RegisterStatMacros(pname:String, stat:StatData)
     {
         if (!stat)
             return;
-        var pname:String = Utils.GetPlayerName(playerName);
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
         var pdata = dict[pname];
@@ -653,7 +650,7 @@ class com.xvm.Macros
     {
         if (!player)
             return;
-        var pname:String = Utils.GetPlayerName(player.userName);
+        var pname:String = player.userName;
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
         var pdata = dict[pname];
@@ -662,11 +659,10 @@ class com.xvm.Macros
         pdata["vehicle-class"] = vehicleClassSymbol;
     }
 
-    public static function RegisterMarkerData(playerName:String, data:Object)
+    public static function RegisterMarkerData(pname:String, data:Object)
     {
         if (!data)
             return;
-        var pname:String = Utils.GetPlayerName(playerName);
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
         var pdata = dict[pname];
@@ -677,44 +673,43 @@ class com.xvm.Macros
 
     // PRIVATE
 
-    private static function modXvmDevLabel(nick:String):String
+    private static function modXvmDevLabel(pname:String):String
     {
-        var label = Utils.GetPlayerName(nick);
         switch (Config.config.region)
         {
             case "RU":
-                if (label == "M_r_A")
+                if (pname == "M_r_A")
                     return "Флаттершай - лучшая пони!";
-                if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
+                if (pname == "sirmax2" || pname == "0x01" || pname == "_SirMax_")
                     return "«сэр Макс» (XVM)";
-                if (label == "Mixailos")
+                if (pname == "Mixailos")
                     return "Михаил";
-                if (label == "STL1te")
+                if (pname == "STL1te")
                     return "О, СТЛайт!";
-                if (label == "Yusha")
+                if (pname == "Yusha")
                     return "Это же PROТанки!";
                 break;
 
             case "CT":
-                if (label == "M_r_A_RU" || label == "M_r_A_EU")
+                if (pname == "M_r_A_RU" || pname == "M_r_A_EU")
                     return "Fluttershy is best pony!";
-                if (label == "sirmax2_RU" || label == "sirmax2_EU" || label == "sirmax_NA" || label == "0x01_RU")
+                if (pname == "sirmax2_RU" || pname == "sirmax2_EU" || pname == "sirmax_NA" || pname == "0x01_RU")
                     return "«sir Max» (XVM)";
                 break;
 
             case "EU":
-                if (label == "M_r_A")
+                if (pname == "M_r_A")
                     return "Fluttershy is best pony!";
-                if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
+                if (pname == "sirmax2" || pname == "0x01" || pname == "_SirMax_")
                     return "«sir Max» (XVM)";
                 break;
 
             case "US":
-                if (label == "sirmax" || label == "0x01" || label == "_SirMax_")
+                if (pname == "sirmax" || pname == "0x01" || pname == "_SirMax_")
                     return "«sir Max» (XVM)";
                 break;
         }
 
-        return nick;
+        return pname;
     }
 }

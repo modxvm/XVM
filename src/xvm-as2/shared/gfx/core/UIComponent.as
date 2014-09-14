@@ -1,9 +1,9 @@
 ﻿intrinsic class gfx.core.UIComponent extends MovieClip
 {
     public var initialized:Boolean;
-    
+
     static function createInstance(context, symbol, name, depth, initObj);
-    
+
     function get disabled():Boolean;
     function set disabled(value:Boolean):Void;
     function get visible():Boolean;
@@ -20,7 +20,6 @@
     function handleInput(details, pathToFocus):Void;
     function invalidate():Void;
     function validateNow():Void;
-    function toString():String;
     function configUI():Void;
     function initSize():Void;
     function draw():Void;

@@ -24,21 +24,21 @@ class wot.VehicleMarkersManager.XvmBase
     private static var s_showExInfo:Boolean = false; // Saved "Extended Info State" for markers that appeared when Alt pressed.
     private static var s_blowedUp:Object = {}; // List of members that was ammoracked.
 
-    // Private (?) members
+    // Public members
     public var m_entityName:String;
-    private var m_playerName:String;
-    private var m_playerClan:String;
-    private var m_playerRegion:String;
-    public var m_playerFullName:String;
+    public var m_playerName:String;
+    public var m_playerClan:String;
+    public var m_playerRegion:String;
+    //public var m_playerFullName:String;
     public var m_curHealth:Number;
     public var m_maxHealth:Number;
     public var m_source:String;
-    private var m_vname:String;
+    public var m_vname:String;
     public var m_level:Number;
     public var m_speaking:Boolean;
-    private var m_entityType:String; // TODO: is the same as proxy.m_team?
+    public var m_entityType:String; // TODO: is the same as proxy.m_team?
 
-    // Private (?) members
+    // Public members
     public var m_playerId:Number;
     public var m_marksOnGun:Number;
     public var m_frags:Number;
@@ -47,11 +47,10 @@ class wot.VehicleMarkersManager.XvmBase
     public var m_showExInfo:Boolean;
     public var m_defaultIconSource:String;
 
-    // TextFields
-    private var textFields:Object;
-
     // Vehicle State
     public var vehicleState:VehicleState;
+
+    // Private members
 
     // UI Controls
     private var actionMarkerComponent:ActionMarkerComponent;
@@ -62,6 +61,7 @@ class wot.VehicleMarkersManager.XvmBase
     private var levelIconComponent:LevelIconComponent;
     private var turretStatusComponent:TurretStatusComponent;
     private var vehicleTypeComponent:VehicleTypeComponent;
+    private var textFields:Object;
 
     // Parent proxy instance (assigned from proxy)
     private var _proxy:VehicleMarkerProxy;
@@ -69,7 +69,7 @@ class wot.VehicleMarkersManager.XvmBase
 
     public function get wrapper():net.wargaming.ingame.VehicleMarker { return proxy.wrapper; }
 
-    public function get isBlowedUp():Boolean { return s_blowedUp[m_playerFullName] != undefined; }
+    public function get isBlowedUp():Boolean { return s_blowedUp[m_playerName] != undefined; }
 
     private function getCurrentSystemColor():Number
     {
@@ -82,9 +82,7 @@ class wot.VehicleMarkersManager.XvmBase
 
     public function formatStaticText(format:String):String
     {
-        //var key = "VMM/" + m_playerFullName + "/" + format;
-        var pn = m_playerFullName;
-        return Strings.trim(Macros.Format(pn, format));
+        return Strings.trim(Macros.Format(m_playerName, format));
     }
 
     /* Substitutes macroses with values
@@ -102,7 +100,7 @@ class wot.VehicleMarkersManager.XvmBase
      */
     public function formatDynamicText(format:String, curHealth:Number, delta:Number, damageFlag:Number, damageType:String):String
     {
-        return Strings.trim(Macros.Format(m_playerFullName, format,
+        return Strings.trim(Macros.Format(m_playerName, format,
             {
                 curHealth:curHealth,
                 delta:isBlowedUp ? delta + 1 : delta, // curHealth = -1 for blowedUp
@@ -121,7 +119,7 @@ class wot.VehicleMarkersManager.XvmBase
 
     public function formatStaticColorText(format:String):String
     {
-        format = Strings.trim(Macros.Format(m_playerFullName, format));
+        format = Strings.trim(Macros.Format(m_playerName, format));
         return format.split("#").join("0x");
     }
 

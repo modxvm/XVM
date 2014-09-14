@@ -33,7 +33,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     private var m_playerName:String;
     private var m_playerClan:String;
     private var m_playerRegion:String;
-    private var m_playerFullName:String;
+    //private var m_playerFullName:String;
     private var m_curHealth:Number;
     private var m_defaultIconSource:String;
     private var m_vehicleClass:String;
@@ -73,7 +73,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         }
 
         // finalize initialization
-        if (m_playerFullName && !subject)
+        if (m_playerName && !subject)
         {
             initializeSubject();
         }
@@ -84,7 +84,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
      */
     private function initializeSubject():Void
     {
-        //trace("initializeSubject() standard=" + Config.config.markers.useStandardMarkers + " " + m_playerFullName);
+        //trace("initializeSubject() standard=" + Config.config.markers.useStandardMarkers + " " + m_playerName);
 
         // Create marker class depending on config setting
         if (Config.config.markers.useStandardMarkers == true)
@@ -215,10 +215,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
          */
         m_vehicleName = vType;
         m_level = vLevel;
-        m_playerName = pName;
-        m_playerClan = pClan;
-        m_playerRegion = pRegion;
-        m_playerFullName = pFullName;
+        m_playerName = pName; // alex
+        m_playerClan = pClan; // "" || ALX
+        m_playerRegion = pRegion; // null || ?
+        //m_playerFullName = pFullName; // alex[ALX] (MS-1)
         m_defaultIconSource = vIconSource;
         m_vehicleClass = vClass;
         m_curHealth = curHealth;
@@ -228,9 +228,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         var wr = wrapper;
         var registerMacros = function()
         {
-            Macros.RegisterPlayerData(Utils.GetPlayerName(pFullName),
+            Macros.RegisterPlayerData(pName,
             {
-                label: pFullName,
+                label: pName + (pClan == "" ? "" : "[" + pClan + "]"),
                 vehicle: vType,
                 icon: vIconSource,
                 squad: entityName == "squadman" ? 11 : 0,
@@ -270,7 +270,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
                 logLists.onHpUpdate(flag, delta, curHealth,
                     vdata.localizedName,
                     m_defaultIconSource,
-                    m_playerFullName, m_level, damageType,
+                    m_playerName, m_level, damageType,
                     Config.config.texts.vtype[vdata.vtype],
                     GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
                     m_dead, curHealthAbsolute);
@@ -293,7 +293,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
              * Method is invoked both on new marker created being already dead
              * and present marker becoming dead at some point in time.
              */
-            UnitDestroyedAccounting.instance.logDead(m_playerFullName);
+            UnitDestroyedAccounting.instance.logDead(m_playerName);
         }
         return call("updateState", arguments);
     }
