@@ -7,6 +7,7 @@ package xvm.tcarousel
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.misc.*;
+    import com.xvm.utils.*;
     import com.xvm.types.dossier.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
@@ -84,6 +85,7 @@ package xvm.tcarousel
 
         private function init():void
         {
+            Macros.RegisterVehiclesMacros();
             Dossier.loadAccountDossier(page.carousel, page.carousel.invalidateData, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
         }
     }

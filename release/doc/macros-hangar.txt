@@ -1,0 +1,31 @@
+﻿Macros available in hangar
+
+Legend:
+  TC - tank carousel
+  SQ - squad window
+
+  'X' - available
+  ' ' - not available (can return wrong value - '', 'NaN', 'undefined', ...)
+  '.' - TODO
+  '-' - Obsoleted (will be replaced with other macro)
+
+┌────────────────────────────┬───┬───┬─────────────────────────────────
+│ macro                      │ TC│ SQ│ Description
+├────────────────────────────┼───┼───┼─────────────────────────────────
+│ {{v.vehId}}                │ X │ . │ vehicle id
+│ {{v.battles}}              │ X │ . │ total battles count for current vehicle
+│ {{v.wins}}                 │ X │ . │ total wins count for current vehicle
+│ {{v.mastery}}              │ X │ . │ mastery sign for current vehicle
+│ {{v.xp}}                   │ X │ . │ total XP gained on current vehicle
+│ {{v.name}}                 │ . │ . │ vehicle name
+│ {{v.sysname}}              │ . │ . │ vehicle system name (usa-M24_Chaffee)
+│ {{v.shortname}}            │ . │ . │ shortened vehicle name
+│ {{v.type}}                 │ . │ . │ vehicle type (text substitution from config)
+│ {{v.level}}                │ . │ . │ vehicle level (Arabic numerals)
+│ {{v.rlevel}}               │ . │ . │ vehicle level (Roman numerals)
+│ {{v.battletier-min}}       │ . │ . │ minimal vehicle battle tier
+│ {{v.battletier-max}}       │ . │ . │ maximal vehicle battle tier
+│ {{v.gunmarks}}             │ . │ . │ marks on gun
+│ {{l10n:ID}}                │ . │ . │ localizated text, see en.xc for id
+│ {{teff}}, {{e}}            │ . │ . │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
+└────────────────────────────┴───┴───┴─────────────────────────────────

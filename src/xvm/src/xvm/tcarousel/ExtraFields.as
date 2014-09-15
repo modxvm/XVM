@@ -2,6 +2,7 @@
 {
     import com.xvm.*;
     import com.xvm.types.*;
+    import com.xvm.types.dossier.*;
     import com.xvm.utils.*;
     import flash.display.*;
     import flash.filters.*;
@@ -60,17 +61,20 @@
             }
         }
 
-        public static function updateExtraFields(owner:MovieClip):void
+        public static function updateVehicleExtraFields(owner:MovieClip, vdata:VehicleDossierCut):void
         {
-            //Logger.add("updateExtraFields");
-            //var obj = BattleState.getUserData(m_name);
+            //Logger.add("updateVehicleExtraFields");
             var formats:Array = owner.formats;
             var len:Number = formats.length;
             for (var i:Number = 0; i < len; ++i)
             {
                 var field:DisplayObject = owner.getChildByName("f" + i);
                 if (field != null)
-                    _internal_update(field, formats[i], null /*obj*/);
+                {
+                    var opt:MacrosFormatOptions = new MacrosFormatOptions();
+                    opt.vdata = vdata;
+                    _internal_update(field, formats[i], opt);
+                }
             }
         }
 

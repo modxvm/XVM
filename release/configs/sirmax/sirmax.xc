@@ -63,9 +63,10 @@
         //{ "x": "15", "y": 5,  "align": "center", "w": 20, "h": 5, "bgColor": "0x0FFF0F", "alpha": 50 },
         //{ "x": "5",  "y": 10, "align": "right",  "w": 20, "h": 5, "bgColor": "0x0F0FFF", "alpha": 50 },
 
-        //{ "x": 50, "y": 10, "format": "<font color='#FFFFFF'>[{{xwn8|--}}]</font>", "shadow": {} },
+        { "x": -1, "y": 10, "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" },
+//        { "x": 0, "y": 30, "format": "<font color='#FFFFFF'>e:{{e|-}}</font>", "shadow": {} },
         //{ "x": 90, "y": 10, "format": "<img src='xvm://res/icons/xvm/16x16.png'>" },
-        //{ "x": 90, "y": 30, "format": "<img src='xvm://res/contour/HARDicons/{{vehiclename}}.png'" },
+//        { "x": 90, "y": 30, "format": "<img src='xvm://res/contour/HARDicons/{{vehiclename}}.png'" },
         {}
       ]
     }

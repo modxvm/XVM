@@ -170,5 +170,24 @@ package com.xvm.utils
             //com.xvm.Logger.add("getSystemColor():" + key + " " + Config.s_config.colors.system[key]);
             return parseInt(Config.config.colors.system[key]);
         }
+
+        //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
+        public static function damageFlagToDamageSource(damageFlag:Number):String
+        {
+            switch (damageFlag)
+            {
+                case Defines.FROM_ALLY:
+                    return "ally";
+                case Defines.FROM_ENEMY:
+                    return "enemy";
+                case Defines.FROM_PLAYER:
+                    return "player";
+                case Defines.FROM_SQUAD:
+                    return "squadman";
+                case Defines.FROM_UNKNOWN:
+                default:
+                    return "unknown";
+            }
+        }
     }
 }

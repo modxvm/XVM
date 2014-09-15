@@ -46,9 +46,7 @@ package com.xvm.utils
                         }
                         else
                         {
-                            if (dict.hasOwnProperty(name))
-                                res += FormatMacro(macro, dict[name], options);
-                            res += arr2[1];
+                            res += FormatMacro(macro, dict.hasOwnProperty(name) ? dict[name] : globals, options) + arr2[1];
                         }
                     }
                 }
@@ -115,6 +113,13 @@ package com.xvm.utils
             var fmt:String = parts[1];
             var suf:String = parts[2];
             var def:String = parts[3] || "";
+
+            var dotPos:int = name.indexOf(".");
+            if (dotPos > 0 && options != null)
+            {
+                options.__subname = name.slice(dotPos + 1);
+                name = name.slice(0, dotPos);
+            }
 
             // substitute
             //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def);
@@ -460,6 +465,19 @@ package com.xvm.utils
             globals["battletier"] = battletier;
         }
 
+
+        public static function RegisterVehiclesMacros():void
+        {
+            if (!globals.hasOwnProperty("v"))
+            {
+                globals["v"] = function(o:MacrosFormatOptions):* {
+                    if (o == null || o.__subname == null || o.vdata == null)
+                        return null;
+                    return o.vdata[o.__subname];
+                }
+            }
+        }
+
         // PRIVATE
 
         private static function modXvmDevLabel(name:String):String
@@ -500,54 +518,6 @@ package com.xvm.utils
             }
 
             return name;
-        }
-
-        //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
-        public static function damageFlagToDamageSource(damageFlag:Number):String
-        {
-            switch (damageFlag)
-            {
-                case Defines.FROM_ALLY:
-                    return "ally";
-                case Defines.FROM_ENEMY:
-                    return "enemy";
-                case Defines.FROM_PLAYER:
-                    return "player";
-                case Defines.FROM_SQUAD:
-                    return "squadman";
-                case Defines.FROM_UNKNOWN:
-                default:
-                    return "unknown";
-            }
-        }
-
-
-
-        private static var allMacros:Array = [
-            "{{nick}}", "{{name}}", "{{clan}}", "{{clannb}}", "{{vehicle}}", "{{vehiclename}}",
-            "{{vtype}}", "{{c:vtype}}", "{{level}}", "{{rlevel}}", "{{squad}}", "{{turret}}",
-            "{{hp}}", "{{hp-ratio}}", "{{hp-max}}", "{{dmg}}", "{{dmg-ratio}}", "{{dmg-kind}}",
-            "{{c:hp}}", "{{c:hp-ratio}}", "{{c:dmg}}", "{{c:dmg-kind}}", "{{c:system}}", "{{a:hp}}",
-            "{{a:hp-ratio}}", "{{n}}", "{{n-player}}", "{{dmg-total}}", "{{dmg-avg}}", "{{dmg-player}}",
-            "{{dead}}", "{{points}}", "{{extra}}", "{{tanks}}", "{{time}}", "{{time-sec}}",
-            "{{speed}}", "{{vehicle-class}}", "{{cellsize}}",
-            "{{vehicle-short}}", "{{vtype-l}}", "{{battletier-min}}",
-            "{{battletier-max}}", "{{avglvl}}", "{{eff}}", "{{eff:4}}", "{{teff}}, {{e}}",
-            "{{wn6}}", "{{wn8}}", "{{xeff}}", "{{xwn6}}", "{{xwn8}}", "{{rating}}", "{{rating:3}}",
-            "{{battles}}", "{{wins}}", "{{kb}}", "{{kb:3}}",
-            "{{t-rating}}", "{{t-rating:3}}", "{{t-battles}}", "{{t-battles:4}}",
-            "{{t-wins}}", "{{t-kb}}", "{{t-kb-0}}", "{{t-kb:4}}", "{{t-hb}}", "{{t-hb:3}}", "{{tdb}}",
-            "{{tdb:4}}", "{{tdv}}", "{{tfb}}", "{{tsb}}", "{{c:tdb}}", "{{c:tdv}}", "{{c:tfb}}",
-            "{{c:tsb}}", "{{c:eff}}", "{{c:e}}", "{{c:wn6}}", "{{c:wn8}}", "{{c:xeff}}", "{{c:xwn}}",
-            "{{c:rating}}", "{{c:kb}}", "{{c:avglvl}}", "{{c:t-rating}}", "{{c:t-battles}}"
-        ]
-
-        public static function TestMacros(playerName:String, options:MacrosFormatOptions = null):void
-        {
-            Logger.add("Macros::TestMacros(" + playerName + ")");
-            for (var i:int = 0; i < allMacros.length; ++i)
-                Logger.add("TEST: " + allMacros[i] + " => " + Macros.Format(playerName, allMacros[i], options));
-            Logger.add("");
         }
     }
 }
