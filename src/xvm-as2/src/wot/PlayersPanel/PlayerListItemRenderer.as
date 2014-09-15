@@ -3,7 +3,11 @@
  */
 import com.xvm.*;
 import flash.filters.*;
+import gfx.core.*;
+import gfx.controls.*;
+import net.wargaming.*;
 import net.wargaming.controls.*;
+import net.wargaming.managers.*;
 import wot.Minimap.*;
 import wot.PlayersPanel.*;
 
@@ -229,12 +233,13 @@ class wot.PlayersPanel.PlayerListItemRenderer
         return _panel;
     }
 
-    private function get extraPanelsHolder():MovieClip
+    private static function get extraPanelsHolder():MovieClip
     {
         if (_root["extraPanels"] == null)
         {
-            var depth:Number = -16384;//_root.getNextHighestDepth(); // TODO: find suitable depth
+            var depth:Number = -16377; // the only one free depth for panels
             _root["extraPanels"] = _root.createEmptyMovieClip("extraPanels", depth);
+            createMouseHandler();
         }
         return _root["extraPanels"];
     }
@@ -290,11 +295,30 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function createFieldsForNoneMode():MovieClip
     {
-        extraFieldsLayout = Config.config.playersPanel.none.layout;
-        var cfg:Object = Config.config.playersPanel.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
-        if (cfg.formats == null || cfg.formats.length <= 0)
+        try
+        {
+            extraFieldsLayout = Config.config.playersPanel.none.layout;
+            var cfg:Object = Config.config.playersPanel.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
+            if (cfg.formats == null || cfg.formats.length <= 0)
+                return null;
+            var mc:MovieClip = _internal_createExtraFields(extraPanelsHolder, "none", cfg.formats, cfg.width, cfg.height, cfg);
+            var menu_mc:Button = UIComponent.createInstance(mc, "HiddenButton", "menu_mc", mc.getNextHighestDepth(), {
+                _x: isLeftPanel ? 0 : -cfg.width,
+                width:cfg.width,
+                height:cfg.height,
+                panel: isLeftPanel ? _root["leftPanel"] : _root["rightPanel"],
+                owner: this } );
+            menu_mc.addEventListener("rollOver", wrapper, "onItemRollOver");
+            menu_mc.addEventListener("rollOut", wrapper, "onItemRollOut");
+            menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
+
+            return mc;
+        }
+        catch (ex:Error)
+        {
+            Logger.add(ex.message);
             return null;
-        return _internal_createExtraFields(extraPanelsHolder, "none", cfg.formats, cfg.width, cfg.height, cfg);
+        }
     }
 
     private function createExtraFields(mode:String):MovieClip
@@ -685,6 +709,61 @@ class wot.PlayersPanel.PlayerListItemRenderer
             mc._y = 0;
         }
         //Logger.add(BattleState.screenSize.width + " " + panel.m_list.width + " " + panel.m_list._x);
+    }
+
+    private static function createMouseHandler():Void
+    {
+        var mouseHandler:Object = new Object();
+        Mouse.addListener(mouseHandler);
+        mouseHandler.onMouseDown = function(button, target)
+        {
+            //Logger.add(target + " " + button);
+            if (_root["leftPanel"].state != net.wargaming.ingame.PlayersPanel.STATES.none.name)
+                return;
+
+            var extraPanels:MovieClip = _root["extraPanels"];
+            var t = null;
+            for (var n in extraPanels)
+            {
+                var a:MovieClip = extraPanels[n];
+                if (a == null)
+                    continue;
+                var b:MovieClip = a["menu_mc"];
+                if (b == null)
+                    continue;
+                if (b.hitTest(_root._xmouse, _root._ymouse, true))
+                {
+                    t = b;
+                    break;
+                }
+            }
+            if (t == null)
+                return;
+
+            var data = t.owner.wrapper.data;
+            if (data == null)
+                return;
+
+            if (button == Mouse.RIGHT)
+            {
+                if (_root.g_cursorVisible)
+                {
+                    var xmlKeyConverter = new net.wargaming.managers.XMLKeyConverter();
+                    net.wargaming.ingame.MinimapEntry.unhighlightLastEntry();
+                    var ignored = net.wargaming.messenger.MessengerUtils.isIgnored(data);
+                    net.wargaming.ingame.BattleContextMenuHandler.showMenu(extraPanels, data, [
+                        [ { id: net.wargaming.messenger.MessengerUtils.isFriend(data) ? "removeFromFriends" : "addToFriends", disabled: !data.isEnabledInRoaming } ],
+                        [ ignored ? "removeFromIgnored" : "addToIgnored" ],
+                        t.panel.getDenunciationsSubmenu(xmlKeyConverter, data.denunciations, data.squad),
+                        [ !ignored && _global.wg_isShowVoiceChat ? (net.wargaming.messenger.MessengerUtils.isMuted(data) ? "unsetMuted" : "setMuted") : null ]
+                        ]);
+                }
+            }
+            else if (!net.wargaming.ingame.BattleContextMenuHandler.hitTestToCurrentMenu())
+            {
+                gfx.io.GameDelegate.call("Battle.selectPlayer", [data.vehId]);
+            }
+        }
     }
 }
 /*

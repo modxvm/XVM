@@ -7,7 +7,7 @@
   "leftPanel": {
     "x": 0,
     "y": 65,
-    "width": 300,
+    "width": 380,
     "height": 28,
     "formats": [
       // for tests
@@ -46,7 +46,7 @@
   "rightPanel": {
     "x": 0,
     "y": 65,
-    "width": 300,
+    "width": 380,
     "height": 28,
     "formats": [
       // for tests
