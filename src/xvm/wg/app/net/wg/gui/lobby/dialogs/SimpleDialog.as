@@ -107,13 +107,12 @@ package net.wg.gui.lobby.dialogs
     
     public function as_setButtons(param1:Array) : void
     {
-        var _loc4_:* = NaN;
         var _loc5_:SoundButtonEx = null;
         var _loc6_:String = null;
         var _loc2_:Vector.<Button> = this.getButtonsOrder();
         var _loc3_:Number = _loc2_.length - param1.length;
         assert(_loc3_ >= 0,"buttonNames too much");
-        _loc4_ = param1.length - 1;
+        var _loc4_:Number = param1.length - 1;
         while(_loc4_ >= 0)
         {
             _loc5_ = _loc2_[_loc4_ + _loc3_] as SoundButtonEx;
