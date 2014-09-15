@@ -67,7 +67,11 @@ package xvm.tcarousel
 
                 setupStandardField(vehicleIcon.tankTypeMc, Config.config.hangar.carousel.fields.tankType);
 
-                setupStandardField(vehicleIcon.levelMc, Config.config.hangar.carousel.fields.level);
+                vehicleIcon.levelMc.visible = false;
+                App.utils.scheduler.envokeInNextFrame(function():void {
+                    setupStandardField(vehicleIcon.levelMc, Config.config.hangar.carousel.fields.level);
+                    vehicleIcon.levelMc.visible = true;
+                });
 
                 vehicleIcon.xp.x = w - vehicleIcon.xp.width - 2;
                 setupStandardField(vehicleIcon.xp, Config.config.hangar.carousel.fields.xp);
