@@ -17,14 +17,18 @@ Legend:
 │ {{v.wins}}                 │ X │ . │ total wins count for current vehicle
 │ {{v.mastery}}              │ X │ . │ mastery sign for current vehicle
 │ {{v.xp}}                   │ X │ . │ total XP gained on current vehicle
-│ {{v.name}}                 │ . │ . │ vehicle name
-│ {{v.sysname}}              │ . │ . │ vehicle system name (usa-M24_Chaffee)
-│ {{v.shortname}}            │ . │ . │ shortened vehicle name
-│ {{v.type}}                 │ . │ . │ vehicle type (text substitution from config)
-│ {{v.level}}                │ . │ . │ vehicle level (Arabic numerals)
-│ {{v.rlevel}}               │ . │ . │ vehicle level (Roman numerals)
-│ {{v.battletier-min}}       │ . │ . │ minimal vehicle battle tier
-│ {{v.battletier-max}}       │ . │ . │ maximal vehicle battle tier
+│ {{v.name}}                 │ X │ . │ localized vehicle name
+│ {{v.sysname}}              │ X │ . │ vehicle system name (usa-M24_Chaffee)
+│ {{v.shortname}}            │ X │ . │ localized short vehicle name
+│ {{v.type}}                 │ X │ . │ vehicle type (text substitution from config)
+│ {{v.level}}                │ X │ . │ vehicle level (Arabic numerals)
+│ {{v.rlevel}}               │ X │ . │ vehicle level (Roman numerals)
+│ {{v.battletiermin}}        │ X │ . │ minimal vehicle battle tier
+│ {{v.battletiermax}}        │ X │ . │ maximal vehicle battle tier
+│ {{v.nation}}               │ X │ . │ vehicle nation
+│ {{v.premium}}              │ X │ . │ 'premium' for premium, empty for normal vehicle
+│ {{v.shootRange}}           │ . │ . │ shoot range
+│ {{v.viewRange}}            │ . │ . │ view range
 │ {{v.gunmarks}}             │ . │ . │ marks on gun
 │ {{l10n:ID}}                │ . │ . │ localizated text, see en.xc for id
 │ {{teff}}, {{e}}            │ . │ . │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-

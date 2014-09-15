@@ -36,11 +36,8 @@ package xvm.tcarousel
 
                 var id:Number = dataVO.compactDescr;
                 var dossier:AccountDossier = Dossier.getAccountDossier();
-                if (dossier != null && dossier.vehicles.hasOwnProperty(id))
-                {
-                    var vdata:VehicleDossierCut = dossier.vehicles[id];
-                    ExtraFields.updateVehicleExtraFields(extraFields, vdata);
-                }
+                if (dossier != null)
+                    ExtraFields.updateVehicleExtraFields(extraFields, dossier.getVehicleDossierCut(id));
             }
             catch (ex:Error)
             {
