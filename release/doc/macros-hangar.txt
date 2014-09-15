@@ -14,6 +14,7 @@ Legend:
 ├────────────────────────────┼───┼───┼─────────────────────────────────
 │ {{v.vehId}}                │ X │ . │ vehicle id
 │ {{v.battles}}              │ X │ . │ total battles count for current vehicle
+│ {{v.c_battles}}            │ X │ . │ color for battles count
 │ {{v.wins}}                 │ X │ . │ total wins count for current vehicle
 │ {{v.mastery}}              │ X │ . │ mastery sign for current vehicle
 │ {{v.xp}}                   │ X │ . │ total XP gained on current vehicle
@@ -21,6 +22,7 @@ Legend:
 │ {{v.sysname}}              │ X │ . │ vehicle system name (usa-M24_Chaffee)
 │ {{v.shortname}}            │ X │ . │ localized short vehicle name
 │ {{v.type}}                 │ X │ . │ vehicle type (text substitution from config)
+│ {{v.c_type}}               │ X │ . │ color for vehicle type
 │ {{v.level}}                │ X │ . │ vehicle level (Arabic numerals)
 │ {{v.rlevel}}               │ X │ . │ vehicle level (Roman numerals)
 │ {{v.battletiermin}}        │ X │ . │ minimal vehicle battle tier
@@ -30,6 +32,9 @@ Legend:
 │ {{v.shootRange}}           │ . │ . │ shoot range
 │ {{v.viewRange}}            │ . │ . │ view range
 │ {{v.gunmarks}}             │ . │ . │ marks on gun
+│ {{v.winrate}}              │ X │ . │ vehicle win rate (percent of wins on this vehicle)
+│ {{v.c_winrate}}            │ X │ . │ color for win rate
 │ {{l10n:ID}}                │ . │ . │ localizated text, see en.xc for id
-│ {{teff}}, {{e}}            │ . │ . │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
+│ {{v.teff}}, {{v.e}}        │ . │ . │ player's per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
+│ {{v.c_e}}                  │ . │ . │ color for per-vehicle efficiency
 └────────────────────────────┴───┴───┴─────────────────────────────────
