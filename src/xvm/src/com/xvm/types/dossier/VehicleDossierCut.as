@@ -18,7 +18,7 @@ package com.xvm.types.dossier
                 name = vdata.localizedName;
                 sysname = vdata.key.replace(":", "-");
                 shortname = vdata.shortName;
-                type = vdata.vtype;
+                type = VehicleInfo.getVTypeText(vdata.vtype);
                 c_type = MacrosUtil.GetVClassColorValue(vdata);
                 level = vdata.level;
                 rlevel = Defines.ROMAN_LEVEL[vdata.level - 1];

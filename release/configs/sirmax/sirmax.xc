@@ -144,6 +144,7 @@
   "battleResults": {
     "startPage": 1,
     "sortColumn": 5,
+    "showCrewExperience": true,
     "showTotals": true,
     "showChances": true,
     "showBattleTier": true

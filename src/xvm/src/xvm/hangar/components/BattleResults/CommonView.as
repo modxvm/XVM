@@ -1,6 +1,7 @@
 package xvm.hangar.components.BattleResults
 {
     import com.xvm.*;
+    import com.xvm.types.veh.*;
     import com.xvm.utils.*;
     import flash.events.*;
     import flash.text.*;
@@ -95,6 +96,14 @@ package xvm.hangar.components.BattleResults
         {
             var origCrewXP:int = data.tmenXP / (data.isPremium ? (data.premiumXPFactor10 / 10.0) : 1);
             var premCrewXP:int = data.tmenXP * (data.isPremium ? 1 : (data.premiumXPFactor10 / 10.0));
+
+            var vdata:VehicleData = VehicleInfo.get(data.typeCompDescr);
+            if (vdata != null && vdata.premium)
+            {
+                origCrewXP *= 1.5;
+                premCrewXP *= 1.5;
+            }
+
             view.detailsMc.xpTitleLbl.htmlText += " / " + Locale.get("BR_xpCrew");
             view.detailsMc.xpLbl.htmlText = view.detailsMc.xpLbl.htmlText.replace("<IMG SRC",
                 "/ " + App.utils.locale.integer(origCrewXP) + " <IMG SRC");
