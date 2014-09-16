@@ -146,6 +146,8 @@ package com.xvm.io
 
         public static function runTest(... args):void
         {
+            if (args[0] == "battleResults")
+                args[1] = args[1].replace(".dat", "");
             args.unshift(COMMAND_TEST);
             _call(null, null, args);
         }

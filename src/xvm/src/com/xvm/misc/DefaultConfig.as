@@ -418,6 +418,7 @@ package com.xvm.misc
         {
             var c:CBattleResults = new CBattleResults();
             c.startPage = 1;
+            c.showTotalExperience = true;
             c.showNetIncome = true;
             c.showExtendedInfo = true;
             c.showTotals = true;
