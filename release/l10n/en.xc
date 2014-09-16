@@ -43,6 +43,7 @@
     // BattleResults
     "Hit percent": "Hit percent",
     "Damage (assisted / own)": "Damage (assisted / own)",
+    "BR_xpCrew": "crew",
 
     // TeamRenderers
     "Friend": "Friend",
@@ -139,7 +140,7 @@
     "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Unknown status",
     "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet.",
-    
+
     //Vehicle status
     "Destroyed": "Destroyed",
     "No data": "No data",

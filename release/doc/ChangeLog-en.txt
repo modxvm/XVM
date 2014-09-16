@@ -6,8 +6,9 @@
   * removed options:
       hangar/masteryMarkInCarousel
       hangar/hideTutorial
-  * new option:
+  * new options:
     battleResults/showTotalExperience - Display total experience in After Battle Screen
+    battleResults/showCrewExperience - Display crew experience in After Battle Screen
   * player icon by accountId - loading from \res_mods\xvm\res\clanicons\ID\ 
     Search order is:
       id -> nick -> clan -> clan/default.png -> nick/default.png

@@ -121,6 +121,7 @@ package com.xvm
             // BattleResults
             "Hit percent": "Процент попаданий",
             "Damage (assisted / own)": "Урон (по разведданным / свой)",
+            "BR_xpCrew": "экипажу",
 
             // TeamRenderers
             "Friend": "Друг",
@@ -246,6 +247,9 @@ package com.xvm
             "allyBaseCapture": "Base capture by enemies!",
             "allyBaseCaptured": "Base captured by enemies!",
             */
+
+            // BattleResults
+            "BR_xpCrew": "crew",
 
             // Crew
             "PutOwnCrew": "Put own crew",

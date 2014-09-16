@@ -51,6 +51,9 @@ package xvm.hangar.components.BattleResults
             if (Config.config.battleResults.showTotalExperience)
                 instance.showTotalExperience(view.detailsMc.data);
 
+            if (Config.config.battleResults.showCrewExperience)
+                instance.showCrewExperience(view.detailsMc.data);
+
             if (Config.config.battleResults.showNetIncome)
                 instance.showNetIncome(view.detailsMc.data);
         }
@@ -86,6 +89,17 @@ package xvm.hangar.components.BattleResults
             var premXP:int = data.xp * (data.isPremium ? 1 : (data.premiumXPFactor10 / 10.0));
             view.detailsMc.xpLbl.htmlText = App.utils.locale.integer(origXP) + XP_IMG_TXT;
             view.detailsMc.premXpLbl.htmlText = App.utils.locale.integer(premXP) + XP_IMG_TXT;
+       }
+
+        private function showCrewExperience(data:Object):void
+        {
+            var origCrewXP:int = data.tmenXP / (data.isPremium ? (data.premiumXPFactor10 / 10.0) : 1);
+            var premCrewXP:int = data.tmenXP * (data.isPremium ? 1 : (data.premiumXPFactor10 / 10.0));
+            view.detailsMc.xpTitleLbl.htmlText += " / " + Locale.get("BR_xpCrew");
+            view.detailsMc.xpLbl.htmlText = view.detailsMc.xpLbl.htmlText.replace("<IMG SRC",
+                "/ " + App.utils.locale.integer(origCrewXP) + " <IMG SRC");
+            view.detailsMc.premXpLbl.htmlText = view.detailsMc.premXpLbl.htmlText.replace("<IMG SRC",
+                "/ " + App.utils.locale.integer(premCrewXP) + " <IMG SRC");
        }
 
         private function showNetIncome(data:Object):void

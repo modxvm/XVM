@@ -42,6 +42,7 @@
     // BattleResults
     "Hit percent": "Процент попаданий",
     "Damage (assisted / own)": "Урон (с вашей помощью / свой)",
+    "BR_xpCrew": "экипажу",
 
     // TeamRenderers
     "Friend": "Друг",
@@ -138,7 +139,7 @@
     "token/cnt": "Количество запросов:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Неизвестный статус",
     "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете.",
-    
+
     //Vehicle status
     "Destroyed": "Уничтожен",
     "No data": "Нет данных",
