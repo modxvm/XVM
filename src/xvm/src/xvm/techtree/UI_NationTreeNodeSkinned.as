@@ -64,9 +64,9 @@ package xvm.techtree
                 {
                     var id:Number = getID();
                     var dossier:AccountDossier = Dossier.getAccountDossier();
-                    if (dossier != null && dossier.vehicles.hasOwnProperty(id))
+                    if (dossier != null)
                     {
-                        var vdata:VehicleDossierCut = dossier.vehicles[id];
+                        var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(id);
                         masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.mastery + ".png' width='23' height='23'>";
                     }
                 }
