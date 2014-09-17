@@ -4,7 +4,7 @@
 startclan=2000000000
 lastclan=2000004414
 host=worldoftanks.asia
-dir=SG
+dir=ASIA
 
 # main
 . .update.sh
