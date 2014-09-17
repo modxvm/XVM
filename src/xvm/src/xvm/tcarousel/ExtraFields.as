@@ -197,8 +197,6 @@
 
         private static function _internal_update(f:DisplayObject, format:Object, options:MacrosFormatOptions):void
         {
-            var m_name:String = null;
-
             var tf:TextField = f as TextField;
 
             var needAlign:Boolean = false;
@@ -206,39 +204,39 @@
 
             if (format.x != null)
             {
-                data.x = parseFloat(Macros.Format(m_name, format.x, options)) || 0;
+                data.x = parseFloat(Macros.Format(null, format.x, options)) || 0;
                 needAlign = true;
             }
             if (format.y != null)
             {
-                data.y = parseFloat(Macros.Format(m_name, format.y, options)) || 0;
+                data.y = parseFloat(Macros.Format(null, format.y, options)) || 0;
                 needAlign = true;
             }
             if (format.w != null)
             {
-                data.w = parseFloat(Macros.Format(m_name, format.w, options)) || 0;
+                data.w = parseFloat(Macros.Format(null, format.w, options)) || 0;
                 needAlign = true;
             }
             if (format.h != null)
             {
-                data.h = parseFloat(Macros.Format(m_name, format.h, options)) || 0;
+                data.h = parseFloat(Macros.Format(null, format.h, options)) || 0;
                 needAlign = true;
             }
             if (format.alpha != null)
             {
-                var alpha:Number = parseFloat(Macros.Format(m_name, format.alpha, options));
+                var alpha:Number = parseFloat(Macros.Format(null, format.alpha, options));
                 f.alpha = isNaN(alpha) ? 1 : alpha / 100.0;
             }
             if (format.rotation != null)
-                f.rotation = parseFloat(Macros.Format(m_name, format.rotation, options)) || 0;
+                f.rotation = parseFloat(Macros.Format(null, format.rotation, options)) || 0;
             if (format.borderColor != null && tf != null)
-                tf.borderColor = parseInt(Macros.Format(m_name, format.borderColor, options).split("#").join("0x")) || 0;
+                tf.borderColor = parseInt(Macros.Format(null, format.borderColor, options).split("#").join("0x")) || 0;
             if (format.bgColor != null && tf != null)
-                tf.backgroundColor = parseInt(Macros.Format(m_name, format.bgColor, options).split("#").join("0x")) || 0;
+                tf.backgroundColor = parseInt(Macros.Format(null, format.bgColor, options).split("#").join("0x")) || 0;
 
             if (format.format != null && tf != null)
             {
-                var txt:String = Macros.Format(m_name, format.format, options);
+                var txt:String = Macros.Format(null, format.format, options);
                 //Logger.add(txt);
                 tf.htmlText = "<span class='extraField'>" + txt + "</span>";
                 needAlign = true;

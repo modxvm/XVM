@@ -23,7 +23,7 @@ package com.xvm.types.dossier
                 level = vdata.level;
                 rlevel = Defines.ROMAN_LEVEL[vdata.level - 1];
                 nation = vdata.nation;
-                premium = vdata.premium ? "premium" : "";
+                premium = vdata.premium ? "premium" : null;
                 battletiermin = vdata.tierLo;
                 battletiermax = vdata.tierHi;
                 shootRange = NaN; //TODO: vdata.artyRadius || vdata.firingRadius;

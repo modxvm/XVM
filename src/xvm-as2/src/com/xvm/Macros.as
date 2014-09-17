@@ -69,7 +69,7 @@ class com.xvm.Macros
                             if (value === undefined)
                             {
                                 //process l10n macro
-                                if (macroName.indexOf("l10n") == 0)
+                                if (macroName.indexOf("l10n:") == 0)
                                     res += prepareValue(NaN, macroName, norm, def, pdata);
                                 else
                                     res += def;
@@ -114,7 +114,7 @@ class com.xvm.Macros
         return "";
     }
 
-    private static function GetMacroParts(macro:String, pdata:Object, dead:Boolean):Array
+    private static function GetMacroParts(macro:String, pdata:Object):Array
     {
         //Logger.addObject(pdata);
         var parts:Array = [null,null,null,null,null,null];
@@ -179,8 +179,6 @@ class com.xvm.Macros
         }
         parts[section] = part;
 
-        //if (dead && Strings.startsWith("c:", parts[0]) && pdata[parts[0] + "#d"] != null)
-        //    parts[0] += "#d";
         if (parts[5] == null)
             parts[5] = "";
 

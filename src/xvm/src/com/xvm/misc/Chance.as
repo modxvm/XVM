@@ -40,7 +40,7 @@ package com.xvm.misc
                 if (Math.abs(teamsCount.ally - teamsCount.enemy) > 2)
                     return "";
 
-                Chance.battleTier = Macros.globals["battletier"];
+                Chance.battleTier = Macros.getGlobalValue("battletier");
                 Logger.add("battleTier=" + Chance.battleTier);
 
                 var chG:Object = GetChance(playerNames, ChanceFuncG);

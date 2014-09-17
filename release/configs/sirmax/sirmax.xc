@@ -57,18 +57,11 @@
         "tankName": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
       },
       "extraFields": [
-        // for tests
-        //{ "w": 1, "h": 23, "bgColor": "0xFFFFFF" },
-        //{ "x": "25", "y": 0,  "align": "left",   "w": 20, "h": 5, "bgColor": "0xFF0F0F", "alpha": 50 },
-        //{ "x": "15", "y": 5,  "align": "center", "w": 20, "h": 5, "bgColor": "0x0FFF0F", "alpha": 50 },
-        //{ "x": "5",  "y": 10, "align": "right",  "w": 20, "h": 5, "bgColor": "0x0F0FFF", "alpha": 50 },
-
+        //{ "x": "0", "y": 28, "w": 45, "h": 35, "bgColor": "0xFFFFFF", "alpha": 20 },
         { "x": -1, "y": 10, "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" },
-        { "x": 0, "y": 25, "format": "<font color='{{v.c_winrate}}'>{{v.winrate%.2f~%}}</font>", "shadow": {} },
-        { "x": 0, "y": 38, "format": "<font color='{{v.c_type}}'>{{v.type}}</font>", "shadow": {} },
-        { "x": 0, "y": 51, "format": "<font color='{{v.c_battles}}'>{{v.battles}}</font>", "shadow": {} },
-        //{ "x": 50, "y": 30, "format": "<img src='xvm://res/contour/HARDicons/{{v.sysname}}.png'" },
-        //{ "x": 0, "y": 30, "format": "<font color='#FFFFFF'>e:{{e|-}}</font>", "shadow": {} },
+        { "x": 0, "y": 28, "format": "<font color='{{v.c_winrate}}'>{{v.winrate%.2f~%}}</font>", "shadow": {} },
+        { "x": 0, "y": 42, "format": "<font color='{{v.c_battles}}'>{{v.battles}}</font>", "shadow": {} },
+        //{ "x": 0, "y": 54, "format": "<font color='{{v.c_type}}'>{{v.premium?1|0}}</font>", "shadow": {} },
         {}
       ]
     }

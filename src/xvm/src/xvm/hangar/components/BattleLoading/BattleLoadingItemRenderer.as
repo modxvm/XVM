@@ -67,8 +67,8 @@ package xvm.hangar.components.BattleLoading
 
                 var vdata:VehicleData = VehicleInfo.getByIcon(data.vehicleIcon);
                 Macros.RegisterMinimalMacrosData(fullPlayerName, vdata.vid);
-                data.playerName = Macros.Format(fullPlayerName, "{{name}}");
-                data.clanAbbrev = Macros.Format(fullPlayerName, "{{clannb}}");
+                data.playerName = Macros.Format(data.playerName, "{{name}}");
+                data.clanAbbrev = Macros.Format(data.playerName, "{{clannb}}");
 
                 // ClanIcon
                 attachClanIconToPlayer(data);
@@ -109,10 +109,10 @@ package xvm.hangar.components.BattleLoading
                 // Set Text Fields
                 if (_savedTextFieldColor == null)
                     _savedTextFieldColor = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
-                var a:String = Macros.Format(fullPlayerName, team == Defines.TEAM_ALLY
+                var a:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftNick
                     : Config.config.battleLoading.formatRightNick);
-                var b:String = Macros.Format(fullPlayerName, team == Defines.TEAM_ALLY
+                var b:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftVehicle
                     : Config.config.battleLoading.formatRightVehicle);
                 proxy.textField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + a + "</font>";
@@ -195,8 +195,6 @@ package xvm.hangar.components.BattleLoading
             //draw();
             if (proxy.constraints != null)
                 proxy.invalidateData();
-
-            //Macros.TestMacros(fullPlayerName);
         }
     }
 

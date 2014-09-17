@@ -84,7 +84,7 @@ package xvm.squad
                     createVehicleTierField();
                 Macros.RegisterMinimalMacrosData(proxy.data.fullName, vdata.vid);
                 vehicleTierField.htmlText = "<p class='xvm_vehicleTier' align='right'>" +
-                    Macros.Format(proxy.data.fullName, Config.config.squad.formatInfoField) + "</p>";
+                    Macros.Format(proxy.data.userName, Config.config.squad.formatInfoField) + "</p>";
             }
 
             // Remove clan tag from player name

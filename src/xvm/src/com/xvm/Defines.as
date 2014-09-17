@@ -55,6 +55,8 @@ package com.xvm
         public static const WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
         public static const WG_CONTOUR_ICON_NOIMAGE:String = WG_CONTOUR_ICON_PATH + "noImage.png";
 
+        public static const MAX_BATTLETIER_HPS:Array = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000];
+
         // Events
         public static const E_LOCALE_LOADED:String = "locale_loaded";
         public static const E_ITEM_UPDATED:String = "item_updated";
