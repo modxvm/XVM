@@ -2,11 +2,14 @@
 
 # PUBLIC
 
+def checkVersion(config):
+    _checkVersion(config)
+
 def getXvmStatActiveTokenData():
     return _getXvmStatActiveTokenData()
 
-def getXvmStatTokenData():
-    return _getXvmStatTokenData()
+def getXvmStatTokenData(config):
+    return _getXvmStatTokenData(config)
 
 
 # PRIVATE
@@ -24,11 +27,54 @@ from gui import SystemMessages
 
 from constants import *
 import db
+from gameregion import region
 from logger import *
 from loadurl import loadUrl
 import utils
 
+_verInfo = None
 _tdataPrev = None
+
+def _checkVersion(config):
+    playerId = getCurrentPlayerId()
+    if playerId is None:
+        return
+
+    try:
+        req = "checkVersion/%d" % playerId
+        server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
+        (response, duration) = loadUrl(server, req)
+
+        #response =
+        """ {"US":{"message":"www.modxvm.com","ver":"5.2.1-test2"},
+            "RU": {"message":"www.modxvm.com","ver":"5.2.1-test2"},
+            "CT": {"message":"www.modxvm.com","ver":"5.2.1-test2"},
+            "SEA":{"message":"www.modxvm.com","ver":"5.2.1-test2"},
+            "EU": {"message":"www.modxvm.com","ver":"5.2.1-test2"},
+            "VTC":{"message":"www.modxvm.com","ver":"5.2.1-test2"}}"""
+
+        global _verInfo
+        _verInfo = None
+        if not response:
+            #err('Empty response or parsing error')
+            pass
+        else:
+            try:
+                if response is not None:
+                    response = response.strip()
+                    if response not in ('', '[]'):
+                        _verInfo = simplejson.loads(response)
+            except Exception, ex:
+                err('  Bad answer: ' + response)
+                _verInfo = None
+    except Exception, ex:
+        err(traceback.format_exc())
+
+    if not config['rating']['showPlayersStatistics']:
+        type = SystemMessages.SM_TYPE.GameGreeting
+        msg = _getXvmMessageHeader(config)
+        msg += '</textformat>'
+        SystemMessages.pushMessage(msg, type)
 
 def _getXvmStatActiveTokenData():
     playerId = getCurrentPlayerId()
@@ -58,7 +104,7 @@ def _getXvmStatActiveTokenData():
 #    #log(token)
 #    return token
 
-def _getXvmStatTokenData():
+def _getXvmStatTokenData(config):
     global _tdataPrev
 
     playerId = getCurrentPlayerId()
@@ -71,8 +117,7 @@ def _getXvmStatTokenData():
         tdata = _tdataPrev
 
     type = SystemMessages.SM_TYPE.Warning
-    msg = '<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">'
-    msg += '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
+    msg = _getXvmMessageHeader(config)
     if tdata is None:
         msg += '{{l10n:token/network_error}}'
     elif tdata['status'] == 'badToken':
@@ -141,3 +186,26 @@ def _checkToken(playerId, token):
         err(traceback.format_exc())
 
     return data
+
+def _getXvmMessageHeader(config):
+    msg = '<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">'
+    msg += '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
+    rev = ''
+    try:
+        from __version__ import __revision__
+        rev = __revision__
+    except Exception, ex:
+        err(traceback.format_exc())
+    msg += '{{l10n:ver/currentVersion:%s:%s}}\n' % (config['xvmVersion'], rev)
+    msg += _getVersionText(config['xvmVersion']) + '\n'
+    return msg
+
+def _getVersionText(curVer):
+    msg = ''
+    global _verInfo
+    if _verInfo is not None:
+        if region in _verInfo:
+            data = _verInfo[region]
+            if utils.compareVersions(data['ver'], curVer) == 1:
+                return '{{l10n:ver/newVersion:%s:%s}}\n' % (data['ver'], data['message'])
+    return ''

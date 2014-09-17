@@ -6,9 +6,6 @@
     // Ping
     "Initialization": "Initialization",
 
-    // BattleLoading
-    "New version available": "New version available",
-
     // Win chance
     "Chance error": "Chance error",
     "Chance to win": "Chance to win",
@@ -128,6 +125,10 @@
 
     // VehicleMarkersManager
     "blownUp": "Blown-up!",
+
+    // Check version
+    "ver/currentVersion": "XVM {0} #{1}", // XVM 5.3.4 #4321
+    "ver/newVersion": "Update available:<tab/><font color='#00FF00'>v{0}</font>\n{1}",
 
     // Token
     "token/network_error": "Network error. XVM statistics is unavailable, try again later.",

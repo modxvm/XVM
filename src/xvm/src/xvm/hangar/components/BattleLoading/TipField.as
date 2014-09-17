@@ -24,14 +24,6 @@ package xvm.hangar.components.BattleLoading
 
             info.text = "XVM v" + Defines.XVM_VERSION + "     " + Defines.XVM_INTRO;
 
-            if (Stat.infoVersion && Utils.compareVersions(Stat.infoVersion, Defines.XVM_VERSION) == 1)
-            {
-                info.textColor = 0x60FF60;
-                info.text = "XVM: v" + Defines.XVM_VERSION + ". " + Locale.get("New version available") + ": v" + String(Stat.infoVersion);
-                if (Stat.infoMessage && Stat.infoMessage != "")
-                    setTipText(Stat.infoMessage);
-            }
-
             if (Config.stateInfo.warning != null)
             {
                 info.textColor = 0xFFD040;

@@ -30,7 +30,7 @@ package xvm.hangar.views
             //Logger.add("onAfterPopulate: " + view.as_alias);
             initStatToken();
 
-            //Cmd.runTest("battleResults", "13887773865813854");
+            //Cmd.runTest("battleResults", "6317211108532633.dat");
         }
 
         public override function onBeforeDispose(e:LifeCycleEvent):void

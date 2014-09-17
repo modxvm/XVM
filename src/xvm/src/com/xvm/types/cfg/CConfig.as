@@ -6,6 +6,7 @@ package com.xvm.types.cfg
 {
     public dynamic class CConfig extends Object
     {
+        public var xvmVersion:String;
         public var configVersion:String;
         public var editorVersion:String;
         public var language:String; // auto, en, ru, ...

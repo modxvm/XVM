@@ -57,3 +57,35 @@ def getVehicleInfo(vehId):
 def getVehicleStats(vehId):
     from gui.BattleContext import g_battleContext
     return g_battleContext.arenaDP.getVehicleStats(vehId)
+
+# 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
+def compareVersions(v1, v2):
+    try:
+        v1 = v1.replace('-', '.')
+        v2 = v2.replace('-', '.')
+
+        a = v1.split('.')
+        while len(a) < 4:
+            a.append('0')
+
+        b = v2.split('.')
+        while len(b) < 4:
+            b.append('0')
+
+        for i in xrange(4):
+            da = a[i].isdigit()
+            db = b[i].isdigit()
+            if not da and not db:
+                return 0 if a[i] == b[i] else -1 if a[i] < b[i] else 1
+            if not da:
+                return -1
+            if not db:
+                return 1
+            if int(a[i]) < int(b[i]):
+                return -1
+            if int(a[i]) > int(b[i]):
+                return 1
+    except Exception, ex:
+        #err(traceback.format_exc())
+        return -2
+    return 0

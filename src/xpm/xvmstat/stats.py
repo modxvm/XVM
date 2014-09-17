@@ -70,7 +70,6 @@ class _Stat(object):
         self.playersSkip = None
         self.cache = {}
         self.cacheUser = {}
-        self.info = None
 
     def enqueue(self, req):
         with self.lock:
@@ -178,7 +177,7 @@ class _Stat(object):
         #pprint(players)
 
         with self.lock:
-            self.resp = {'players': players, 'info': self.info}
+            self.resp = {'players': players}
 
 
 
@@ -228,7 +227,7 @@ class _Stat(object):
             #pprint(players)
 
             with self.lock:
-                self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players, 'info': self.info}
+                self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players}
 
         except Exception, ex:
             err('_battleResultsCallback() exception: ' + traceback.format_exc())
@@ -354,9 +353,6 @@ class _Stat(object):
                 for vehId in self.players:
                     players.append(self._get_battle_stub(self.players[vehId]))
                 data = {'players':players}
-
-            if 'info' in data and region in data['info']:
-                self.info = data['info'][region]
 
             if 'players' not in data:
                 err('Stat request failed: ' + str(response))

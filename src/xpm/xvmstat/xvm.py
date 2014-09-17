@@ -23,7 +23,7 @@ from dossier import getDossier
 from vehinfo import getVehicleInfoDataStr
 from vehstate import getVehicleStateData
 from wn8 import getWN8ExpectedData
-from token import getXvmStatTokenData
+from token import checkVersion, getXvmStatTokenData
 from test import runTest
 import utils
 from websock import g_websock
@@ -93,7 +93,7 @@ class Xvm(object):
             elif cmd == COMMAND_GETWN8EXPECTEDDATA:
                 res = getWN8ExpectedData()
             elif cmd == COMMAND_GETXVMSTATTOKENDATA:
-                res = simplejson.dumps(getXvmStatTokenData())
+                res = simplejson.dumps(getXvmStatTokenData(self.config))
             elif cmd == COMMAND_LOADBATTLESTAT:
                 getBattleStat(proxy, args)
             elif cmd == COMMAND_LOADBATTLERESULTSSTAT:
@@ -216,6 +216,7 @@ class Xvm(object):
         playerId = getCurrentPlayerId()
         if playerId is not None and self.currentPlayerId != playerId:
             self.currentPlayerId = playerId
+            checkVersion(self.config)
             g_websock.send('id/%d' % playerId)
         if self.app is not None:
            self.app.loaderManager.onViewLoaded += self.onViewLoaded

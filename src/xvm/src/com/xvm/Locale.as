@@ -85,9 +85,6 @@ package com.xvm
             // Ping
             "Initialization": "Инициализация",
 
-            // BattleLoading
-            "New version available": "Доступна новая версия",
-
             // Win chance
             "Chance error": "Ошибка расчета шансов",
             "Chance to win": "Шансы на победу",
@@ -208,6 +205,10 @@ package com.xvm
             // VehicleMarkersManager
             "blownUp": "Взрыв БК!",
 
+            // Check version
+            "ver/currentVersion": "XVM {0} #{1}", // XVM 5.3.4 #4321
+            "ver/newVersion": "Доступно обновление:<tab/><font color='#00FF00'>v{0}</font>\n{1}",
+
             // token
             "token/network_error": "Ошибка сети.\nСтатистика XVM недоступна, попробуйте позже.",
             "token/bad_token": "Неверный токен.\n{{l10n:token/notify_xvm_site}}",
@@ -219,7 +220,7 @@ package com.xvm
             "token/cnt": "Количество запросов:<tab/><font color='#EEEEEE'>{0}</font>",
             "token/unknown_status": "Неизвестный статус",
             "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете.",
-       
+
             //Vehicle status
             "Destroyed": "Уничтожен",
             "No data": "Нет данных",
@@ -279,6 +280,10 @@ package com.xvm
 
             // VehicleMarkersManager
             "blownUp": "Blown-up!",
+
+            // Check version
+            "ver/currentVersion": "XVM {0} #{1}", // XVM 5.3.4 #4321
+            "ver/newVersion": "Update available:<tab/><font color='#00FF00'>v{0}</font>\n{1}",
 
             // token
             "token/network_error": "Network error. XVM statistics is unavailable, try again later.",
