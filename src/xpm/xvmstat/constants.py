@@ -11,7 +11,6 @@ COMMAND_LOG = "log"
 COMMAND_LOAD_FILE = "loadFile"
 COMMAND_SET_CONFIG = "setConfig"
 COMMAND_PING = "ping"
-COMMAND_GETMODS = "getMods"
 COMMAND_GETVEHICLEINFODATA = "getVehicleInfoData"
 COMMAND_GETWN8EXPECTEDDATA = "getWN8ExpectedData"
 COMMAND_GETXVMSTATTOKENDATA = "getXvmStatTokenData"
@@ -51,4 +50,3 @@ TEAM_ENEMY = 2
 
 XVM_DIR = "res_mods/xvm"
 XVM_DB_DIR = XVM_DIR + "/db"
-XVM_MODS_DIR = XVM_DIR + "/mods"

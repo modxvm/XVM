@@ -1,7 +1,6 @@
 """ XVM (c) www.modxvm.com 2013-2014 """
 
 import os
-import glob
 import traceback
 
 import simplejson
@@ -75,9 +74,6 @@ class Xvm(object):
             elif cmd == COMMAND_PING:
                 #return
                 ping(proxy)
-            elif cmd == COMMAND_GETMODS:
-                #return
-                res = self.getMods()
             elif cmd == COMMAND_GETSCREENSIZE:
                 #return
                 res = simplejson.dumps(list(GUI.screenResolution()))
@@ -178,17 +174,6 @@ class Xvm(object):
             return True
 
         return False
-
-    def getMods(self):
-        mods_dir = XVM_MODS_DIR
-        if not os.path.isdir(mods_dir):
-            return None
-        mods = []
-        for m in glob.iglob(mods_dir + "/*.swf"):
-            m = m.replace('\\', '/')
-            if not m.lower().endswith("/xvm.swf"):
-                mods.append(m)
-        return simplejson.dumps(mods) if mods else None
 
     def initApplication(self):
         pass

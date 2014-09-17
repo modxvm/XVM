@@ -5,6 +5,8 @@ import datetime
 import json
 import codecs
 import random
+import glob
+import traceback
 
 #####################################################################
 # Global constants
@@ -18,6 +20,9 @@ if IS_DEVELOPMENT:
 
 def log(msg):
     print datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S:'), msg
+
+def err(msg):
+    log('[ERROR] %s' % msg)
 
 def debug(msg):
     if IS_DEVELOPMENT:
@@ -34,7 +39,7 @@ def logtrace(exc=None):
     print "============================="
     import traceback
     if exc is not None:
-        log("ERROR: " + str(exc))
+        err(str(exc))
         traceback.print_exc()
     else:
         traceback.print_stack()
@@ -104,32 +109,6 @@ class EventHook(object):
                 self -= theHandler
 
 
-#################################################################
-# WG-Specific
-
-import BigWorld
-
-def getCurrentPlayerId():
-    player = BigWorld.player()
-    if hasattr(player, 'databaseID'):
-        return player.databaseID
-
-    arena = getattr(player, 'arena', None)
-    if arena is not None:
-        vehID = getattr(player, 'playerVehicleID', None)
-        if vehID is not None and vehID in arena.vehicles:
-            return arena.vehicles[vehID]['accountDBID']
-
-    #print('===================')
-    #pprint(vars(player))
-    #print('===================')
-    return None
-
-def isReplay():
-    import BattleReplay
-    return BattleReplay.g_replayCtrl.isPlaying
-
-
 #####################################################################
 # Register events
 
@@ -168,6 +147,113 @@ def OverrideMethod(cls, method, handler):
         i += 1
     setattr(cls, newm, getattr(cls, method))
     setattr(cls, method, lambda *a, **k: handler(getattr(cls, newm), *a, **k))
+
+
+#################################################################
+# WG-Specific
+
+import BigWorld
+
+def getCurrentPlayerId():
+    player = BigWorld.player()
+    if hasattr(player, 'databaseID'):
+        return player.databaseID
+
+    arena = getattr(player, 'arena', None)
+    if arena is not None:
+        vehID = getattr(player, 'playerVehicleID', None)
+        if vehID is not None and vehID in arena.vehicles:
+            return arena.vehicles[vehID]['accountDBID']
+
+    #print('===================')
+    #pprint(vars(player))
+    #print('===================')
+    return None
+
+def isReplay():
+    import BattleReplay
+    return BattleReplay.g_replayCtrl.isPlaying
+
+
+#####################################################################
+# SWF mods initializer
+
+from gui.shared import events
+
+_APPLICATION_SWF = 'Application.swf'
+_COMMAND_GETMODS = "getMods"
+_XVM_MODS_DIR = "res_mods/xvm/mods"
+_XVM_VIEW_ALIAS = 'xvm'
+_XVM_SWF_URL = '../../../xvm/mods/xvm.swf'
+
+def _start():
+    #debug('start')
+    from gui.shared import g_eventBus
+    g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, _appStarted)
+
+def _fini():
+    #debug('fini')
+    from gui.shared import g_eventBus
+    g_eventBus.removeListener(events.GUICommonEvent.APP_STARTED, _appStarted)
+
+def _FlashInit(self, swf, className = 'Flash', args = None, path = None):
+    self.swf = swf
+    if self.swf == _APPLICATION_SWF:
+        self.addExternalCallback('xpm.cmd', lambda *args: _onXpmCommand(self, *args))
+
+def _FlashBeforeDelete(self):
+    if self.swf == _APPLICATION_SWF:
+        self.removeExternalCallback('xpm.cmd')
+
+def _appStarted(event):
+    #debug('AppStarted')
+    from gui.WindowsManager import g_windowsManager
+    from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
+    from gui.Scaleform.framework.entities.View import View
+    viewType = ViewTypes.SERVICE_LAYOUT
+    scopeTemplate = ScopeTemplates.GLOBAL_SCOPE
+    settings = ViewSettings(_XVM_VIEW_ALIAS, View, _XVM_SWF_URL, viewType, None, scopeTemplate)
+    g_entitiesFactories.addSettings(settings)
+    app = g_windowsManager.window
+    if app is not None:
+        BigWorld.callback(0, _loadView)
+
+def _loadView():
+    try:
+        #debug('loadView')
+        from gui.WindowsManager import g_windowsManager
+        g_windowsManager.window.loadView(_XVM_VIEW_ALIAS)
+    except Exception, ex:
+        err(traceback.format_exc())
+
+def _onXpmCommand(proxy, id, cmd, *args):
+    try:
+        #debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + json.dumps(args))
+        res = None
+        if cmd == _COMMAND_GETMODS:
+            mods_dir = _XVM_MODS_DIR
+            if not os.path.isdir(mods_dir):
+                return None
+            mods = []
+            for m in glob.iglob(mods_dir + "/*.swf"):
+                m = m.replace('\\', '/')
+                if not m.lower().endswith("/xvm.swf"):
+                    mods.append(m)
+            res = json.dumps(mods) if mods else None
+
+        proxy.movie.invoke(('xpm.respond', [id, res]))
+    except Exception, ex:
+        err(traceback.format_exc())
+
+from gui.Scaleform.Flash import Flash
+RegisterEvent(Flash, '__init__', _FlashInit)
+RegisterEvent(Flash, 'beforeDelete', _FlashBeforeDelete)
+def _RegisterEvents():
+    _start()
+    import game
+    RegisterEvent(game, 'fini', _fini)
+
+BigWorld.callback(0, _RegisterEvents)
 
 
 #####################################################################

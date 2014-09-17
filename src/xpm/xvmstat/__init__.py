@@ -3,10 +3,10 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XPM_MOD_VERSION    = "1.3.1"
+XPM_MOD_VERSION    = "1.4.0"
 XPM_MOD_URL        = "http://www.modxvm.com/"
 XPM_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XPM_GAME_VERSIONS  = ["0.9.0","0.9.1","0.9.2","0.9.3"]
+XPM_GAME_VERSIONS  = ["0.9.3"]
 
 #####################################################################
 
@@ -34,9 +34,7 @@ _SWFS = [_APPLICATION_SWF, _BATTLE_SWF, _VMM_SWF]
 
 def start():
     debug('start')
-    import appstart
     from gui.shared import g_eventBus
-    g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted)
     g_eventBus.addListener(events.ShowViewEvent.SHOW_LOBBY, g_xvm.onShowLobby)
     g_eventBus.addListener(events.ShowViewEvent.SHOW_LOGIN, g_xvm.onShowLogin)
     g_websock.start()
@@ -44,7 +42,6 @@ def start():
 def fini():
     debug('fini')
     from gui.shared import g_eventBus
-    g_eventBus.removeListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted)
     g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_xvm.onShowLobby)
     g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_xvm.onShowLogin)
     g_websock.stop()
@@ -160,8 +157,9 @@ OverrideMethod(Flash, 'call', Flash_call)
 
 # Delayed registration
 def _RegisterEvents():
-    import game
     start()
+
+    import game
     RegisterEvent(game, 'fini', fini)
     RegisterEvent(game, 'handleKeyEvent', g_xvm.onKeyEvent)
 
