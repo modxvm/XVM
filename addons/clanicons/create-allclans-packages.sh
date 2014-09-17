@@ -1,29 +1,43 @@
 #!/bin/sh
-#Using 7-Zip (A) 9.20 for Windows command line
-#Compessing type=deflate, method=w/o compression, multi-threading=on,
-#store creation time=off, compress files open for writing=on, recursive
+# Using 7-Zip (A) 9.20 for Windows command line
+
+# Creating necessary files
+fcreate()
+{
+    region=$1
+    list=$2
+    datenow=`date +%Y%m%d`
+
+    # Zip package
+    echo "Creating $region package"
+    # Compessing type=deflate, method=w/o compression, multi-threading=on,
+    # store creation time=off, compress files open for writing=on, recursive
+    7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-$region-$datenow.zip $list readme.txt
+
+    # MD5 sum
+    echo -n "MD5 (clanicons-full-$region-$datenow.zip) = " > clanicons-full-$region-$datenow.zip.md5
+    md5sum clanicons-full-$region-$datenow.zip | cut -c -33 | tr a-z A-Z >> clanicons-full-$region-$datenow.zip.md5
+
+    # Readme
+    echo "$region clan icons" > clanicons-full-$region-$datenow.zip.txt
+    echo "" >> clanicons-full-$region-$datenow.zip.txt
+    echo "Full archive with all $region clans." >> clanicons-full-$region-$datenow.zip.txt
+    echo "" >> clanicons-full-$region-$datenow.zip.txt
+    cat readme.txt >> clanicons-full-$region-$datenow.zip.txt
+}
+
 
 echo "Creating packages of icons..."
 
 mkdir -p archives
 cd archives
 
-datenow=`date +%Y%m%d`
-
-#echo "Creating VN package"
-#7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-vn-$datenow.zip  ../icons/VTC/res_mods/ readme.txt
-echo "Creating KR package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-kr-$datenow.zip  ../icons/KR/res_mods/ readme.txt
-echo "Creating SG package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-sg-$datenow.zip ../icons/SG/res_mods/ readme.txt
-echo "Creating NA package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-na-$datenow.zip  ../icons/NA/res_mods/ readme.txt
-echo "Creating EU package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-eu-$datenow.zip  ../icons/EU/res_mods/ readme.txt
-echo "Creating RU package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-ru-$datenow-part1.zip  @part1.txt readme.txt
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-ru-$datenow-part2.zip  @part2.txt readme.txt
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-ru-$datenow-part3.zip  @part3.txt readme.txt
+fcreate "KR"   "../icons/KR/res_mods/"
+fcreate "ASIA" "../icons/ASIA/res_mods/"
+fcreate "NA"   "../icons/NA/res_mods/"
+fcreate "EU"   "../icons/EU/res_mods/"
+fcreate "RU"   "../icons/RU/res_mods/"
 
 cd ..
 echo "Packages are created"
+

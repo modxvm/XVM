@@ -7,12 +7,10 @@ fi
 echo "Updating icons of all clans..."
 cd scripts-allclans
 
-echo "Updating VN"
-. update-vn.sh
 echo "Updating KR"
 . update-kr.sh
-echo "Updating SG"
-. update-sg.sh
+echo "Updating ASIA"
+. update-asia.sh
 echo "Updating NA"
 . update-na.sh
 echo "Updating EU"
