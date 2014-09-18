@@ -69,6 +69,8 @@ package xvm.tcarousel
 
                 vehicleIcon.levelMc.visible = false;
                 App.utils.scheduler.envokeInNextFrame(function():void {
+                    if (vehicleIcon == null)
+                        return;
                     setupStandardField(vehicleIcon.levelMc, Config.config.hangar.carousel.fields.level);
                     vehicleIcon.levelMc.visible = true;
                 });

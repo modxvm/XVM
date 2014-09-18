@@ -10,6 +10,7 @@ package com.xvm.components
             enabled = true;
             enableInitCallback = false;
             focusable = true;
+            handleScroll = false;
             itemRenderer = ListItemRedererImageText;
             menuDirection = "down";
             menuMargin = 2;
@@ -20,6 +21,8 @@ package com.xvm.components
             menuWrapping = "normal";
             scrollBar = "";
             showEmptyItems = false;
+            soundId = "";
+            soundType = "";
             inspectableThumbOffset = {top:0, bottom:0};
             visible = true;
         }

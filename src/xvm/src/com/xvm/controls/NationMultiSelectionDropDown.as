@@ -4,7 +4,7 @@ package com.xvm.controls
     import net.wg.utils.*;
     import scaleform.clik.data.*;
 
-    public class NationMultiSelectionDropDown extends DropDown
+    public class NationMultiSelectionDropDown extends MultiSelectionDropDown
     {
         public static const FILTER_ALL_NATION:Number=-1;
 
@@ -14,7 +14,7 @@ package com.xvm.controls
 
             var nations:INations = App.utils.nations;
             var nationsData:Array = nations.getNationsData();
-            var dp:Array = [ { "label":MENU.NATIONS_ALL, "data":FILTER_ALL_NATION, "icon":"../maps/icons/filters/nations/all.png" } ];
+            var dp:Array = [ ];
             for (var i:int = 0; i < nationsData.length; ++i)
             {
                 var item:Object = nationsData[i];
@@ -23,8 +23,9 @@ package com.xvm.controls
             }
             dataProvider = new DataProvider(dp);
 
+            icon.source = "../maps/icons/filters/nations/all.png";
             menuRowCount = dataProvider.length;
-            selectedIndex = 0;
+            menuDirection = "up";
         }
     }
 }

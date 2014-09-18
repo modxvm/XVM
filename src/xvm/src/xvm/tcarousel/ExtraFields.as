@@ -65,6 +65,8 @@
         {
             //Logger.add("updateVehicleExtraFields");
             var formats:Array = owner.formats;
+            if (formats == null)
+                return;
             var len:Number = formats.length;
             for (var i:Number = 0; i < len; ++i)
             {

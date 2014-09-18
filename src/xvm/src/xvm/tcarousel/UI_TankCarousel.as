@@ -1,13 +1,15 @@
 package xvm.tcarousel
 {
     import com.xvm.*;
+    import com.xvm.controls.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
     import flash.events.*;
-    import net.wg.gui.events.ListEventEx;
+    import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
     import scaleform.clik.constants.*;
+    import scaleform.clik.events.*;
     import scaleform.clik.interfaces.*;
 
     public /*dynamic*/ class UI_TankCarousel extends TankCarouselUI
@@ -16,14 +18,20 @@ package xvm.tcarousel
         private static const SLOT_TYPE_BUYTANK:int = 2;
         private static const SLOT_TYPE_BUYSLOT:int = 3;
         private static const SLOT_TYPE_EMPTY:int = 4;
+        private static const FILTER_MARGIN:int = 5;
 
         private var cfg:CCarousel;
+
+        private var premiumFilter:CheckBox;
+        private var multiXpFilter:CheckBox;
+        private var eliteFilter:CheckBox;
 
         public function UI_TankCarousel(cfg:CCarousel)
         {
             //Logger.add("UI_TankCarousel");
             super();
             this.cfg = cfg;
+            createFilters();
         }
 
         // TankCarousel
@@ -290,7 +298,7 @@ package xvm.tcarousel
             //Logger.add("removeEmptySlots");
             if (_renderers == null)
                 return;
-            while(true)
+            while (true)
             {
                 var renderer:IListItemRenderer = getRendererAt(_renderers.length - 1);
                 if (checkRendererType(renderer, SLOT_TYPE_EMPTY))
@@ -300,6 +308,71 @@ package xvm.tcarousel
                 }
                 break;
             }
+        }
+
+        // FILTERS
+
+        private function createFilters():void
+        {
+            //this.createLevelDropdown();
+            //this.createTypeDropdown();
+            //this.createPremiumCheckBox();
+            //this.createMultiXPCheckBox();
+            //this.createEliteCheckBox();
+            /*addChild(createLabel("Filter", 0, 0));
+            filterTextInput = App.utils.classFactory.getComponent("TextInput", TextInput);
+            filterTextInput.x = 0;
+            filterTextInput.y = 17;
+            filterTextInput.width = 250; //65;
+            filterTextInput.text = Config.config.userInfo.defaultFilterValue;
+            filterTextInput.addEventListener(Event.CHANGE, onChange);
+            filterTextInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+            addChild(filterTextInput);*/
+
+            //addChild(createLabel("Nation", 65, 0));
+            /*var nationFilter = new NationMultiSelectionDropDown();
+            nationFilter.x = 5;
+            nationFilter.y = 27;
+            //nationFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
+            addChild(nationFilter);
+
+            //addChild(createLabel("Class", 120, 0));
+            var classFilter = new ClassMultiSelectionDropDown();
+            classFilter.x = 5;
+            classFilter.y = 40;
+            //classFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
+            addChild(classFilter);
+
+            //addChild(createLabel("Level", 175, 0));
+            var levelFilter:LevelMultiSelectionDropDown = new LevelMultiSelectionDropDown();
+            levelFilter.x = 5;
+            levelFilter.y = 63;
+            levelFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
+            //for (var i:int = 0; i < levelFilter.dataProvider.length; ++i)
+            //    levelFilter.dataProvider[i].selected = customFilters.levels.indexOf(levelFilter.dataProvider[i].data) >= 0;
+            addChild(levelFilter);
+
+            //addChild(createLabel("Type", 285, 0));
+            var prefFilter = new PrefMultiSelectionDropDown();
+            prefFilter.x = 5;
+            prefFilter.y = 86;
+            //prefFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
+            addChild(prefFilter);
+
+            /*saveButton = App.utils.classFactory.getComponent("ButtonNormal", Button);
+            saveButton.x = 340;
+            saveButton.y = 17;
+            saveButton.label = Locale.get("Save");*/
+        }
+
+        private function setFilters() : void
+        {
+            /*var _loc_1:* = new Array();
+            _loc_1.push(App.utils.JSON.encode({levels:this.levelFilter.selectedItems, types:this.typeFilter.selectedItems}));
+            _loc_1.unshift("xvm.tankcarousel.setFilters", "tankcarousel");
+            ExternalInterface.call.apply(null, _loc_1);
+            this.page.carousel.onFilterChanged();
+            */
         }
     }
 }

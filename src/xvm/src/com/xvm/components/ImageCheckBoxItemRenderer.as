@@ -5,11 +5,13 @@
 package com.xvm.components
 {
     import com.xvm.*;
-    import com.xvm.utils.*;
-    import flash.display.*;
+    import flash.events.*;
     import flash.geom.*;
-    import net.wg.gui.components.controls.CheckBox;
+    import net.wg.gui.components.controls.DropdownMenu;
     import net.wg.gui.events.*;
+    import scaleform.clik.events.*;
+    import net.wg.gui.components.controls.CheckBox;
+    import scaleform.gfx.*;
 
     public class ImageCheckBoxItemRenderer extends ListItemRedererImageText // from controls.swf
     {
@@ -18,35 +20,56 @@ package com.xvm.components
         public function ImageCheckBoxItemRenderer()
         {
             super();
-            this.icon.autoSize = false;
+            //icon.autoSize = false;
         }
 
         override protected function configUI():void
         {
             super.configUI();
 
-            this.checkBox = this.addChildAt(App.utils.classFactory.getComponent("CheckBox", CheckBox), 5) as CheckBox;
-            this.checkBox.label = "";
-            this.checkBox.x = 45;
-            this.checkBox.setActualSize(40, 20);
-            this.width = 148;
-            this.parent.scrollRect = new Rectangle(0, 0, 93, 220);
+            checkBox = addChild(App.utils.classFactory.getComponent("CheckBox", CheckBox)) as CheckBox;
+            checkBox.label = "";
+            checkBox.x = 5;
+            checkBox.setActualSize(40, 20);
+
+            ico_border.x = 25;
+            textField.x = 75;
+
+            var menu:DropdownMenu = parent as DropdownMenu;
+            if (menu != null)
+            {
+                textField.width = menu.menuWidth - textField.x - 5;
+            }
+
+            //constraints.updateElement("textField", textField);
+        }
+
+        override protected function handleMousePress(event:MouseEvent):void
+        {
+            var e:MouseEventEx = event as MouseEventEx;
+            if (e != null && (e.buttonIdx == 1 || e.buttonIdx == 2))
+            {
+                setState("release");
+                dispatchEvent(new ButtonEvent(ButtonEvent.CLICK, true, false, e.mouseIdx, e.buttonIdx));
+            }
+            else
+            {
+                super.handleMousePress(event);
+            }
         }
 
         override protected function draw():void
         {
             super.draw();
-            this.checkBox.selected = this.selected = this.data.selected;
-            return;
+            checkBox.selected = selected = data.selected;
         }
 
         override protected function completeLoadA(event:UILoaderEvent):void
         {
             super.completeLoadA(event);
-            var loader:* = this.icon.getChildAt(1);
+            var loader:* = icon.getChildAt(1);
             var iconWidth:Number = loader.content.width >> 1;
-            this.icon.x = int(this.ico_border.x + (this.ico_border.width >> 1) - iconWidth);
+            icon.x = int(ico_border.x + (ico_border.width >> 1) - iconWidth);
         }
     }
-
 }
