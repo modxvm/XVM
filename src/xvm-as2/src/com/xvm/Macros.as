@@ -684,8 +684,6 @@ class com.xvm.Macros
                     return "Михаил";
                 if (pname == "STL1te")
                     return "О, СТЛайт!";
-                if (pname == "Yusha")
-                    return "Это же PROТанки!";
                 break;
 
             case "CT":

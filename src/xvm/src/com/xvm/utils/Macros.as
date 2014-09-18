@@ -644,8 +644,6 @@ package com.xvm.utils
                         return "О, СТЛайт!";
                     if (pname == "Mixailos")
                         return "Михаил";
-                    if (pname == "Yusha")
-                        return "Это же PROТанки!";
                     break;
 
                 case "CT":
