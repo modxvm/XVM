@@ -638,8 +638,8 @@ package com.xvm.utils
                         case "MM": return App.utils.dateTime.getMonthName(date.month + 1, true, false);
                         case "MMM": return App.utils.dateTime.getMonthName(date.month + 1, true, true);
                         case "D": return date.date;
-                        case "W": return App.utils.dateTime.getDayName(date.day % 7, true, false);
-                        case "WW": return App.utils.dateTime.getDayName(date.day % 7, true, true);
+                        case "W": return App.utils.dateTime.getDayName(date.day == 0 ? 7 : date.day, true, false);
+                        case "WW": return App.utils.dateTime.getDayName(date.day == 0 ? 7 : date.day, true, true);
                         case "h": return date.hours;
                         case "m": return date.minutes;
                         case "s": return date.seconds;
