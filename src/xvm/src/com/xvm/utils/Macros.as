@@ -32,7 +32,7 @@ package com.xvm.utils
                 return "";
 
             if (format.indexOf("{{") < 0)
-                return format;
+                return Utils.fixImgTag(format);
 
             try
             {
