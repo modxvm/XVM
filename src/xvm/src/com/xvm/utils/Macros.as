@@ -105,7 +105,7 @@ package com.xvm.utils
                                 if (value === undefined)
                                 {
                                     //process l10n macro
-                                    if (macroName.indexOf("l10n:") == 0)
+                                    if (macroName.indexOf("l10n") == 0)
                                         res += prepareValue(NaN, macroName, norm, def, pdata);
                                     else
                                         res += def;
