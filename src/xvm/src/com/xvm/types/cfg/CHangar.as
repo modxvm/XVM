@@ -12,5 +12,6 @@ package com.xvm.types.cfg
         public var widgetsEnabled:Boolean;
         public var pingServers:CPingServers;
         public var carousel:CCarousel;
+        public var clock:CClock;
     }
 }

@@ -611,7 +611,6 @@ package com.xvm.utils
             globals["battletier"] = battletier;
         }
 
-
         public static function RegisterVehiclesMacros():void
         {
             if (!globals.hasOwnProperty("v"))
@@ -620,6 +619,32 @@ package com.xvm.utils
                     if (o == null || o.__subname == null || o.vdata == null)
                         return null;
                     return o.vdata[o.__subname];
+                }
+            }
+        }
+
+        public static function RegisterClockMacros():void
+        {
+            if (!globals.hasOwnProperty("_clock"))
+            {
+                globals["_clock"] = function(o:MacrosFormatOptions):* {
+                    if (o == null || o.__subname == null)
+                        return null;
+                    var date:Date = App.utils.dateTime.now();
+                    switch (o.__subname)
+                    {
+                        case "Y": return date.fullYear;
+                        case "M": return date.month + 1;
+                        case "MM": return App.utils.dateTime.getMonthName(date.month + 1, true, false);
+                        case "MMM": return App.utils.dateTime.getMonthName(date.month + 1, true, true);
+                        case "D": return date.date;
+                        case "W": return App.utils.dateTime.getDayName(date.day, true, false);
+                        case "WW": return App.utils.dateTime.getDayName(date.day, true, true);
+                        case "h": return date.hours;
+                        case "m": return date.minutes;
+                        case "s": return date.seconds;
+                        default: return "";
+                    }
                 }
             }
         }

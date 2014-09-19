@@ -2,7 +2,9 @@
   * адаптация к WoT 0.9.3
   * изменены значения dmg-kind:
       shot, fire, ramming, world_collision, death_zone, drowning, other
-  * новая секция: hangar/carousel
+  * новые секции:
+      hangar/carousel - настройки расширенной карусели танков
+      hangar/clock - настройки часов в ангаре
   * удалены опции:
       hangar/masteryMarkInCarousel
       hangar/hideTutorial

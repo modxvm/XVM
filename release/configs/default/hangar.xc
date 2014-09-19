@@ -87,6 +87,7 @@
     },
     // Parameters for tank carousel
     // Параметры карусели танков
-    "carousel": ${"carousel.xc":"carousel"}
+    "carousel": ${"carousel.xc":"carousel"},
+    "clock": ${"clock.xc":"clock"}
   }
 }

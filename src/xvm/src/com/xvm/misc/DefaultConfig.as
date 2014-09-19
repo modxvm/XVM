@@ -68,6 +68,7 @@ package com.xvm.misc
             c.saveLastServer = false;
             c.autologin = false;
             c.confirmOldReplays = false;
+
             // Show ping to the servers
             c.pingServers = new CPingServers;
             c.pingServers.enabled = false;
@@ -79,31 +80,31 @@ package com.xvm.misc
             c.pingServers.maxRows = 4;
             c.pingServers.columnGap = 10;
             c.pingServers.fontStyle = {
-                    name: "$FieldFont",
-                    size: 12,
-                    bold: false,
-                    italic: false,
-                    color: {
-                        great: "0xFFCC66",
-                        good: "0xE5E4E1",
-                        poor: "0x96948F",
-                        bad: "0xD64D4D"
-                    }
-                };
+                name: "$FieldFont",
+                size: 12,
+                bold: false,
+                italic: false,
+                color: {
+                    great: "0xFFCC66",
+                    good: "0xE5E4E1",
+                    poor: "0x96948F",
+                    bad: "0xD64D4D"
+                }
+            };
             c.pingServers.threshold = {
-                    great: 35,
-                    good: 60,
-                    poor: 100
-                };
-            c.pingServers.shadow = {
-                    enabled: true,
-                    color: "0x000000",
-                    distance: 0,
-                    angle: 0,
-                    alpha: 70,
-                    blur: 4,
-                    strength: 2
-                };
+                great: 35,
+                good: 60,
+                poor: 100
+            };
+            c.pingServers.shadow = new CShadow();
+            c.pingServers.shadow.enabled = true;
+            c.pingServers.shadow.color = "0x000000";
+            c.pingServers.shadow.distance = 0;
+            c.pingServers.shadow.angle = 0;
+            c.pingServers.shadow.alpha = 70;
+            c.pingServers.shadow.blur = 4;
+            c.pingServers.shadow.strength = 2;
+
             return c;
         }
 
@@ -114,6 +115,7 @@ package com.xvm.misc
             c.masteryMarkInTechTree = true;
             c.hidePricesInTechTree = false;
             c.widgetsEnabled = false;
+
             // Show ping to the servers
             c.pingServers = new CPingServers();
             c.pingServers.enabled = false;
@@ -125,31 +127,32 @@ package com.xvm.misc
             c.pingServers.maxRows = 2;
             c.pingServers.columnGap = 10;
             c.pingServers.fontStyle = {
-                    name: "$FieldFont",
-                    size: 12,
-                    bold: false,
-                    italic: false,
-                    color: {
-                        great: "0xFFCC66",
-                        good: "0xE5E4E1",
-                        poor: "0x96948F",
-                        bad: "0xD64D4D"
-                    }
-                };
+                name: "$FieldFont",
+                size: 12,
+                bold: false,
+                italic: false,
+                color: {
+                    great: "0xFFCC66",
+                    good: "0xE5E4E1",
+                    poor: "0x96948F",
+                    bad: "0xD64D4D"
+                }
+            };
             c.pingServers.threshold = {
-                    great: 35,
-                    good: 60,
-                    poor: 100
-                };
-            c.pingServers.shadow = {
-                    enabled: true,
-                    color: "0x000000",
-                    distance: 0,
-                    angle: 0,
-                    alpha: 70,
-                    blur: 4,
-                    strength: 2
-                };
+                great: 35,
+                good: 60,
+                poor: 100
+            };
+            c.pingServers.shadow = new CShadow();
+            c.pingServers.shadow.enabled = true;
+            c.pingServers.shadow.color = "0x000000";
+            c.pingServers.shadow.distance = 0;
+            c.pingServers.shadow.angle = 0;
+            c.pingServers.shadow.alpha = 70;
+            c.pingServers.shadow.blur = 4;
+            c.pingServers.shadow.strength = 2;
+
+            // Tank carousel
             c.carousel = new CCarousel();
             c.carousel.enabled = true;
             c.carousel.zoom = 1;
@@ -159,15 +162,42 @@ package com.xvm.misc
             c.carousel.hideBuyTank = false;
             c.carousel.hideBuySlot = false;
             c.carousel.fields = {
-              tankType: { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
-              level:    { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
-              xp:       { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
-              multiXp:  { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
-              tankName: { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 }
+                tankType: { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                level:    { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                xp:       { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                multiXp:  { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
+                tankName: { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 }
             };
             c.carousel.extraFields = [
                 { x: -1, y: 10, format: "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" }
             ];
+
+            // Clock
+            c.clock = new CClock();
+            c.clock.enabled = true;
+            c.clock.x = 0;
+            c.clock.y = 85;
+            c.clock.width = 600;
+            c.clock.height = 30;
+            c.clock.align = "center";
+            c.clock.valign = "top";
+            c.clock.textAlign = "center";
+            c.clock.textVAlign = "center";
+            c.clock.alpha = 100;
+            c.clock.rotation = 0;
+            c.clock.borderColor = null;
+            c.clock.bgColor = null;
+            c.clock.antiAliasType = "advanced";
+            c.clock.format = "<font face='$FieldFont' size='20'>{{h%02d}}:{{m%02d}}</font>";
+            c.clock.shadow = new CShadow();
+            c.clock.shadow.enabled = true;
+            c.clock.shadow.distance = 0;
+            c.clock.shadow.angle = 0;
+            c.clock.shadow.color = "0x000000";
+            c.clock.shadow.alpha = 100;
+            c.clock.shadow.blur = 3;
+            c.clock.shadow.strength = 2;
+
             return c;
         }
 

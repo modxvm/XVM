@@ -314,11 +314,7 @@ package xvm.tcarousel
 
         private function createFilters():void
         {
-            //this.createLevelDropdown();
-            //this.createTypeDropdown();
-            //this.createPremiumCheckBox();
-            //this.createMultiXPCheckBox();
-            //this.createEliteCheckBox();
+            return;
             /*addChild(createLabel("Filter", 0, 0));
             filterTextInput = App.utils.classFactory.getComponent("TextInput", TextInput);
             filterTextInput.x = 0;
@@ -329,40 +325,27 @@ package xvm.tcarousel
             filterTextInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
             addChild(filterTextInput);*/
 
-            //addChild(createLabel("Nation", 65, 0));
-            /*var nationFilter = new NationMultiSelectionDropDown();
+            var nationFilter:NationMultiSelectionDropDown = addChild(new NationMultiSelectionDropDown()) as NationMultiSelectionDropDown;
+            nationFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
             nationFilter.x = 5;
-            nationFilter.y = 27;
-            //nationFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
-            addChild(nationFilter);
+            nationFilter.y = 30;
 
-            //addChild(createLabel("Class", 120, 0));
-            var classFilter = new ClassMultiSelectionDropDown();
+            var classFilter:ClassMultiSelectionDropDown = addChild(new ClassMultiSelectionDropDown()) as ClassMultiSelectionDropDown;
+            classFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
             classFilter.x = 5;
-            classFilter.y = 40;
-            //classFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
-            addChild(classFilter);
+            classFilter.y = 60;
 
             //addChild(createLabel("Level", 175, 0));
-            var levelFilter:LevelMultiSelectionDropDown = new LevelMultiSelectionDropDown();
+            var levelFilter:LevelMultiSelectionDropDown = addChild(new LevelMultiSelectionDropDown()) as LevelMultiSelectionDropDown;
             levelFilter.x = 5;
-            levelFilter.y = 63;
+            levelFilter.y = 90;
             levelFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
-            //for (var i:int = 0; i < levelFilter.dataProvider.length; ++i)
-            //    levelFilter.dataProvider[i].selected = customFilters.levels.indexOf(levelFilter.dataProvider[i].data) >= 0;
-            addChild(levelFilter);
 
             //addChild(createLabel("Type", 285, 0));
-            var prefFilter = new PrefMultiSelectionDropDown();
+            var prefFilter:PrefMultiSelectionDropDown = addChild(new PrefMultiSelectionDropDown()) as PrefMultiSelectionDropDown;
+            prefFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
             prefFilter.x = 5;
-            prefFilter.y = 86;
-            //prefFilter.addEventListener(ListEvent.INDEX_CHANGE, onIndexChange);
-            addChild(prefFilter);
-
-            /*saveButton = App.utils.classFactory.getComponent("ButtonNormal", Button);
-            saveButton.x = 340;
-            saveButton.y = 17;
-            saveButton.label = Locale.get("Save");*/
+            prefFilter.y = 120;
         }
 
         private function setFilters() : void

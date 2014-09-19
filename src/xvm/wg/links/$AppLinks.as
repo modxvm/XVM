@@ -56,10 +56,9 @@ CompanyListItemRendererUI;
 CompanyDropItemRendererUI;
 
 // controls.swf
-//ButtonBlack; ButtonCaps; ButtonCapsRed; ButtonIcon; ButtonIconText; ButtonNormal; ButtonRed;
-//CheckBox; CheckBoxFilter; CheckBoxTankers; IconText; LabelControl; NumericStepper;
-//RadioButton; RedButton; Slider; TextFieldShort; TextInput; UILoaderAlt; UILoaderCut;
-ListItemRedererImageText; DropDownImageText;
+DropDownImageText;
+LabelControl;
+ListItemRedererImageText;
 
 // nodesLib.swf
 NationTreeNodeSkinned;

@@ -11,6 +11,7 @@
         public var entityName:String = null;
         public var dead:Boolean = false;
         public var blowedUp:Boolean = false;
+
         public var vdata:VehicleDossierCut = null;
 
         // internal use

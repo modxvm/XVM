@@ -4,7 +4,8 @@
  */
 package com.xvm.utils
 {
-    import flash.display.Sprite;
+    import com.xvm.types.cfg.*;
+    import flash.display.*;
     import flash.utils.*;
     import flash.text.*;
     import flash.filters.*;
@@ -323,17 +324,17 @@ package com.xvm.utils
         /**
          * Create DropShadowFilter from config section
          */
-        public static function extractShadowFilter(source:Object):DropShadowFilter
+        public static function createShadowFilter(cfg:CShadow):DropShadowFilter
         {
             // NOTE: quality arg is not working with Scaleform 4.2 AS3
-            return new DropShadowFilter(
-                source.distance, // distance
-                source.angle, // angle
-                parseInt(source.color, 16),
-                source.alpha / 100.0,
-                source.blur,
-                source.blur,
-                source.strength);
+            return cfg.enabled == false ? null : new DropShadowFilter(
+                cfg.distance, // distance
+                cfg.angle, // angle
+                parseInt(cfg.color, 16),
+                cfg.alpha / 100.0,
+                cfg.blur,
+                cfg.blur,
+                cfg.strength);
         }
     }
 }

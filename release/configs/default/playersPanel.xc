@@ -119,7 +119,7 @@
           //      for left panel default value is "left"
           //      for right panel default value is "right"
           //
-          // fields available for both TextField format only:
+          // fields available for TextField format only:
           //   "valign" - vertical alignment ("top", "center", "bottom")
           //      default value is "top"
           //   "borderColor" - if set, draw border with specified color (macros allowed)
