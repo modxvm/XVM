@@ -1,4 +1,4 @@
-/**
+﻿/**
  * XVM
  * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
  */
@@ -47,7 +47,18 @@ package xvm.svcmsg
         {
             if (value != null)
             {
-                value.messageVO.message = Locale.get(value.messageVO.message).split("#XVM_SITE#").join('event:http://www.modxvm.com/#wot-main');
+                if (Config.gameRegion == "RU")
+                {
+                    value.messageVO.message = Locale.get(value.messageVO.message)
+                      .split("#XVM_SITE#").join('event:http://www.modxvm.com/#wot-main')
+                      .split("#XVM_SITE_DL#").join('event:http://www.modxvm.com/скачать-xvm/#wot-main');
+                }
+                else
+                {
+                    value.messageVO.message = Locale.get(value.messageVO.message)
+                      .split("#XVM_SITE#").join('event:http://www.modxvm.com/en/#wot-main')
+                      .split("#XVM_SITE_DL#").join('event:http://www.modxvm.com/en/download-xvm/#wot-main');
+                }
             }
             return value;
         }
