@@ -65,6 +65,10 @@
         //{ "x": -1, "y": 54, "format": "<img src='xvm://res/icons/xvm/16x16.png' width='16' height='16'>" },
         {}
       ]
+    },
+    "clock": {
+      //"x": 100,
+      //"y": 5
     }
   },
   "userInfo": {
