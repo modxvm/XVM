@@ -178,7 +178,7 @@ package com.xvm.misc
             c.clock.x = 0;
             c.clock.y = 85;
             c.clock.width = 600;
-            c.clock.height = 30;
+            c.clock.height = 75;
             c.clock.align = "center";
             c.clock.valign = "top";
             c.clock.textAlign = "center";
@@ -188,14 +188,14 @@ package com.xvm.misc
             c.clock.borderColor = null;
             c.clock.bgColor = null;
             c.clock.antiAliasType = "advanced";
-            c.clock.format = "<font face='$FieldFont' size='20'>{{h%02d}}:{{m%02d}}</font>";
+            c.clock.format = "<font face='$FieldFont'><font size='19'>{{MMM}} {{D%02d}}, {{WW}}</font>\n<font size='26'>{{h%02d}}:{{m%02d}}</font></font>";
             c.clock.shadow = new CShadow();
             c.clock.shadow.enabled = true;
             c.clock.shadow.distance = 0;
             c.clock.shadow.angle = 0;
             c.clock.shadow.color = "0x000000";
-            c.clock.shadow.alpha = 100;
-            c.clock.shadow.blur = 3;
+            c.clock.shadow.alpha = 70;
+            c.clock.shadow.blur = 4;
             c.clock.shadow.strength = 2;
 
             return c;
