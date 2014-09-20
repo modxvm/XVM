@@ -27,10 +27,17 @@ class _WebSock(object):
             on_message = self._on_message,
             on_error = self._on_error,
             on_close = self._on_close)
-        self._thread = threading.Thread(target=self._ws.run_forever)
+        self._thread = threading.Thread(target=self.run)
         self._thread.daemon = True
         self._thread.start()
 
+    def run(self):
+        import ssl
+        sslopt = {
+            "cert_reqs": ssl.CERT_NONE,
+            "check_hostname": False,
+            }
+        self._ws.run_forever(sslopt=sslopt)
 
     def stop(self, e=None):
         return # TODO: temprorary disabled
@@ -44,12 +51,12 @@ class _WebSock(object):
         self._ws = None
         self._playerId = None
 
-    
+
     def send(self, msg):
         if self._ws is not None:
             self._ws.send(msg)
 
-    
+
     # PRIVATE
 
     def _on_open(self, ws):

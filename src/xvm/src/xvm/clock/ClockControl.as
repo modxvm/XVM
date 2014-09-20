@@ -8,11 +8,17 @@ package xvm.clock
     import com.xvm.types.cfg.*;
     import com.xvm.types.*;
     import com.xvm.utils.*;
+    import scaleform.clik.constants.*;
     import scaleform.gfx.*;
 
     public class ClockControl extends LabelControl
     {
         private var cfg:CClock;
+
+        private var prevWidth:Number = 0;
+        private var prevHeight:Number = 0;
+        private var prevTime:int = 0;
+        private var data:String = "";
 
         public function ClockControl(cfg:CClock)
         {
@@ -29,30 +35,8 @@ package xvm.clock
             this.mouseChildren = false;
             this.mouseEnabled = false;
 
-            x = cfg.x;
-            y = cfg.y;
             width = cfg.width;
             height = cfg.height;
-
-            switch (cfg.align)
-            {
-                case "center":
-                    x += (App.appWidth - cfg.width) / 2;
-                    break;
-                case "right":
-                    x += App.appWidth - cfg.width;
-                    break;
-            }
-
-            switch (cfg.valign)
-            {
-                case "center":
-                    y += (App.appHeight - cfg.height) / 2;
-                    break;
-                case "bottom":
-                    y += App.appHeight - cfg.height;
-                    break;
-            }
 
             textAlign = cfg.textAlign;
             TextFieldEx.setVerticalAlign(textField, cfg.textVAlign);
@@ -75,6 +59,7 @@ package xvm.clock
             if (cfg.shadow.enabled)
                 textField.filters = [ Utils.createShadowFilter(cfg.shadow) ];
 
+            invalidate();
             tick();
         }
 
@@ -84,12 +69,62 @@ package xvm.clock
             super.onDispose();
         }
 
-        // private
+        override protected function draw():void
+        {
+            super.draw();
+
+            if (isInvalid(InvalidationType.DATA))
+                htmlText = data;
+
+            if (isInvalid(InvalidationType.SIZE))
+                this.updatePosition();
+        }
+
+        // PRIVATE
+
+        private function updatePosition():void
+        {
+            prevWidth = App.appWidth;
+            prevHeight = App.appHeight;
+
+            x = cfg.x;
+            y = cfg.y;
+
+            switch (cfg.align)
+            {
+                case "center":
+                    x += (App.appWidth - cfg.width) / 2;
+                    break;
+                case "right":
+                    x += App.appWidth - cfg.width;
+                    break;
+            }
+
+            switch (cfg.valign)
+            {
+                case "center":
+                    y += (App.appHeight - cfg.height) / 2;
+                    break;
+                case "bottom":
+                    y += App.appHeight - cfg.height;
+                    break;
+            }
+        }
 
         private function tick():void
         {
-            htmlText = Macros.Format(null, cfg.format.split("{{").join("{{_clock."));
-            App.utils.scheduler.scheduleTask(tick, 1000);
+            if (prevWidth != App.appWidth || prevHeight != App.appHeight)
+                invalidateSize();
+
+            var time:int = int(App.utils.dateTime.now().time / 1000);
+            if (prevTime != time)
+            {
+                prevTime = time;
+                data = Macros.Format(null, cfg.format.split("{{").join("{{_clock."));
+                invalidateData();
+            }
+
+            App.utils.scheduler.scheduleTask(tick, 100);
         }
     }
 }
