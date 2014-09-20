@@ -29,7 +29,7 @@
     // {{h}}   - hour
     // {{m}}   - minute
     // {{s}}   - second
-    "format": "<font face='$FieldFont'><font size='19'>{{MMM}} {{D%02d}}, ({{WW}})</font>\n<font size='26'>{{h%02d}}:{{m%02d}}</font></font>",
+    "format": "<font face='$FieldFont'><font size='19'>{{MMM}} {{D%02d}}, {{WW}}</font>\n<font size='26'>{{h%02d}}:{{m%02d}}</font></font>",
     "shadow": {
       "enabled": true,
       "distance": 0,             // (in pixels)

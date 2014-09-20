@@ -188,7 +188,7 @@ package com.xvm.misc
             c.clock.borderColor = null;
             c.clock.bgColor = null;
             c.clock.antiAliasType = "advanced";
-            c.clock.format = "<font face='$FieldFont'><font size='19'>{{MMM}} {{D%02d}}, ({{WW}})</font>\n<font size='26'>{{h%02d}}:{{m%02d}}</font></font>";
+            c.clock.format = "<font face='$FieldFont'><font size='19'>{{MMM}} {{D%02d}}, {{WW}}</font>\n<font size='26'>{{h%02d}}:{{m%02d}}</font></font>";
             c.clock.shadow = new CShadow();
             c.clock.shadow.enabled = true;
             c.clock.shadow.distance = 0;
