@@ -34,12 +34,6 @@ try:
 
     HAVE_SSL = True
 except ImportError:
-    import sys
-    from xpm import *
-    log(sys.version)
-    import traceback
-    log(traceback.print_exc())
-
     # dummy class of SSLError for ssl none-support environment.
     class SSLError(Exception):
         pass

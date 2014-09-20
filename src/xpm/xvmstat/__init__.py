@@ -38,12 +38,16 @@ def start():
     g_eventBus.addListener(events.ShowViewEvent.SHOW_LOBBY, g_xvm.onShowLobby)
     g_eventBus.addListener(events.ShowViewEvent.SHOW_LOGIN, g_xvm.onShowLogin)
     g_websock.start()
+    g_websock.on_message += g_xvm.on_websock_message
+    g_websock.on_error += g_xvm.on_websock_error
 
 def fini():
     debug('fini')
     from gui.shared import g_eventBus
     g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_xvm.onShowLobby)
     g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_xvm.onShowLogin)
+    g_websock.on_message -= g_xvm.on_websock_message
+    g_websock.on_error -= g_xvm.on_websock_error
     g_websock.stop()
 
 def FlashInit(self, swf, className = 'Flash', args = None, path = None):

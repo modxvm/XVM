@@ -22,7 +22,7 @@ from dossier import getDossier
 from vehinfo import getVehicleInfoDataStr
 from vehstate import getVehicleStateData
 from wn8 import getWN8ExpectedData
-from token import checkVersion, getXvmStatTokenData
+import token
 from test import runTest
 import utils
 from websock import g_websock
@@ -89,7 +89,7 @@ class Xvm(object):
             elif cmd == COMMAND_GETWN8EXPECTEDDATA:
                 res = getWN8ExpectedData()
             elif cmd == COMMAND_GETXVMSTATTOKENDATA:
-                res = simplejson.dumps(getXvmStatTokenData(self.config))
+                res = simplejson.dumps(token.getXvmStatTokenData(self.config))
             elif cmd == COMMAND_LOADBATTLESTAT:
                 getBattleStat(proxy, args)
             elif cmd == COMMAND_LOADBATTLERESULTSSTAT:
@@ -148,6 +148,7 @@ class Xvm(object):
             isRepeated = event.isRepeatedEvent()
             if not isRepeated:
                 #debug("key=" + str(key) + ' ' + ('down' if isDown else 'up'))
+                #g_websock.send("%s/%i" % ('down' if isDown else 'up', key))
                 if self.config is not None:
                     if self.battleFlashObject is not None:
                         if self.checkKeyEventBattle(key, isDown):
@@ -192,6 +193,26 @@ class Xvm(object):
     def initVmm(self):
         self.sendConfig(self.vmmFlashObject)
 
+    def on_websock_message(self, message):
+        try:
+            pass
+            #type = SystemMessages.SM_TYPE.Information
+            #msg += message
+            #msg += '</textformat>'
+            #SystemMessages.pushMessage(msg, type)
+        except:
+            debug(traceback.format_exc())
+
+    def on_websock_error(self, error):
+        try:
+            type = SystemMessages.SM_TYPE.Error
+            msg = token.getXvmMessageHeader(self.config)
+            msg += 'WebSocket error: %s' % str(error)
+            msg += '</textformat>'
+            SystemMessages.pushMessage(msg, type)
+        except:
+            pass
+
     def onShowLogin(self, e=None):
         if self.currentPlayerId is not None:
             self.currentPlayerId = None
@@ -201,7 +222,7 @@ class Xvm(object):
         playerId = getCurrentPlayerId()
         if playerId is not None and self.currentPlayerId != playerId:
             self.currentPlayerId = playerId
-            checkVersion(self.config)
+            token.checkVersion(self.config)
             g_websock.send('id/%d' % playerId)
         if self.app is not None:
            self.app.loaderManager.onViewLoaded += self.onViewLoaded

@@ -11,6 +11,8 @@ def getXvmStatActiveTokenData():
 def getXvmStatTokenData(config):
     return _getXvmStatTokenData(config)
 
+def getXvmMessageHeader(config):
+    return _getXvmMessageHeader(config)
 
 # PRIVATE
 
@@ -31,6 +33,7 @@ from gameregion import region
 from logger import *
 from loadurl import loadUrl
 import utils
+from websock import g_websock
 
 _verInfo = None
 _tdataPrev = None
@@ -198,6 +201,11 @@ def _getXvmMessageHeader(config):
         err(traceback.format_exc())
     msg += '{{l10n:ver/currentVersion:%s:%s}}\n' % (config['xvmVersion'], rev)
     msg += _getVersionText(config['xvmVersion']) + '\n'
+    if g_websock.enabled and g_websock.connected:
+        msg += '{{l10n:websock/not_connected}}\n'
+        if g_websock.last_error:
+            msg += '<font size="12">%s</font>\n' % str(g_websock.last_error)
+        msg += '\n'
     return msg
 
 def _getVersionText(curVer):
