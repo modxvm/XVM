@@ -11,6 +11,7 @@ package com.xvm.types.cfg
         public var y:Number;
         public var width:Number;
         public var height:Number;
+        public var topmost:Boolean;
         public var align:String;
         public var valign:String;
         public var textAlign:String;

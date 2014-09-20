@@ -43,7 +43,7 @@ package xvm.clock
         {
             var cfg:CClock = Config.config.hangar.clock;
             if (cfg.enabled)
-                clock = page.addChildAt(new ClockControl(cfg), page.getChildIndex(page.header) + 1) as ClockControl;
+                clock = page.addChildAt(new ClockControl(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0) as ClockControl;
         }
 
         private function removeClock():void

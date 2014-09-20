@@ -179,6 +179,7 @@ package com.xvm.misc
             c.clock.y = 85;
             c.clock.width = 600;
             c.clock.height = 75;
+            c.clock.topmost = false;
             c.clock.align = "center";
             c.clock.valign = "top";
             c.clock.textAlign = "center";

@@ -9,6 +9,7 @@
     "y": 85,
     "width": 600,
     "height": 75,
+    "topmost": false,            // true - place at top of other windows, false - at bottom
     "align": "center",           // horizontal alignment of field at screen ("left", "center", "right")
     "valign": "top",             // vertical alignment of field at screen ("top", "center", "bottom")
     "textAlign": "center",       // horizontal alignment of text in field ("left", "center", "right")
