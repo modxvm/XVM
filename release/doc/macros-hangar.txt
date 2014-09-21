@@ -36,16 +36,16 @@ Legend:
 │ {{v.winrate}}              │ X │ . │ vehicle win rate (percent of wins on this vehicle)
 │ {{v.hitsRatio}}            │ X │ . │ percent of hits
 │ {{v.c_winrate}}            │ X │ . │ color for win rate
-│ {{v.tdb}}                  │ X │ . │ average damage - damage/battles
+│ {{v.tdb}}                  │ X │ . │ average damage - damage / battles
 │ {{v.c_tdb}}                │ X │ . │ dynamic color for this macro
-│ {{v.tdv}}                  │ X │ . │ average damage efficiency - damage/(battles*maxHP)
+│ {{v.tdv}}                  │ X │ . │ average damage efficiency - damage / (battles * maxHP)
 │ {{v.c_tdv}}                │ X │ . │ dynamic color for this macro
 │ {{v.tfb}}                  │ X │ . │ average frags per battle
 │ {{v.c_tfb}}                │ X │ . │ dynamic color for this macro
 │ {{v.tsb}}                  │ X │ . │ average number of spotted enemies per battle
 │ {{v.c_tsb}}                │ X │ . │ dynamic color for this macro
 │ {{v.wn8expd}}              │ X │ . │ WN8 expected tank damage
-│ {{v.wn8effd}}              │ X │ . │ WN8 effective tank damage (avgdmg / expected_dmg * 100%)
+│ {{v.wn8effd}}              │ X │ . │ WN8 effective tank damage (avgdmg / expected_dmg)
 │ {{v.c_wn8effd}}            │ X │ . │ dynamic color for this macro
 │ {{v.teff}}, {{v.e}}        │ . │ . │ player's per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
 │ {{v.c_e}}                  │ . │ . │ dynamic color for this macro
