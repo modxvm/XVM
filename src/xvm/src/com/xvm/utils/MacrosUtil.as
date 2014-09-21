@@ -5,6 +5,7 @@
 package com.xvm.utils
 {
     import com.xvm.*;
+    import com.xvm.types.cfg.*;
     import com.xvm.types.veh.*;
     import org.idmedia.as3commons.util.*;
 
@@ -20,7 +21,7 @@ package com.xvm.utils
             if (isNaN(value))
                 return null;
 
-            var cfg_root:Object = Config.config.colors;
+            var cfg_root:CColors = Config.config.colors;
             var cfg:Array;
             switch (type)
             {
@@ -40,6 +41,7 @@ package com.xvm.utils
                 case Defines.DYNAMIC_COLOR_TDV:             cfg = cfg_root.tdv; break;
                 case Defines.DYNAMIC_COLOR_TFB:             cfg = cfg_root.tfb; break;
                 case Defines.DYNAMIC_COLOR_TSB:             cfg = cfg_root.tsb; break;
+                case Defines.DYNAMIC_COLOR_WN8EFFD:         cfg = cfg_root.wn8effd; break;
                 default: return null;
             }
 
@@ -63,7 +65,7 @@ package com.xvm.utils
             if (isNaN(value))
                 return NaN;
 
-            var cfg_root:Object = Config.config.alpha;
+            var cfg_root:CAlpha = Config.config.alpha;
             var cfg:Array;
             switch (type)
             {

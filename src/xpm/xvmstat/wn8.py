@@ -2,11 +2,12 @@
 
 # PUBLIC
 
-def getWN8ExpectedData():
+def getWN8ExpectedData(vehId):
     global _wn8ExpectedData
     if _wn8ExpectedData is None:
         _wn8ExpectedData = _load()
-    return _wn8ExpectedData
+    return _wn8ExpectedData.get(str(vehId), None)
+
 
 # PRIVATE
 
@@ -32,9 +33,14 @@ def _load():
         else:
             try:
                 data = None if response in ('', '[]') else simplejson.loads(response)
-                res = simplejson.dumps(data)
+                res = {}
+                for x in data['data']:
+                    n = x['IDNum']
+                    del x['IDNum']
+                    res[n] = x
             except Exception, ex:
                 err('  Bad answer: ' + response)
+                data = None
                 res = None
     except Exception, ex:
         err(traceback.format_exc())

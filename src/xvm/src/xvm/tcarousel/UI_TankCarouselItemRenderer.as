@@ -7,6 +7,7 @@ package xvm.tcarousel
     import flash.geom.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
+    import scaleform.clik.constants.*;
 
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
@@ -29,15 +30,19 @@ package xvm.tcarousel
             {
                 //Logger.add("draw");
                 super.draw();
+
                 scaleX = scaleY = Config.config.hangar.carousel.zoom;
 
-                if (dataVO == null)
-                    return;
+                if (isInvalid(InvalidationType.DATA))
+                {
+                    if (dataVO == null)
+                        return;
 
-                var id:Number = dataVO.compactDescr;
-                var dossier:AccountDossier = Dossier.getAccountDossier();
-                if (dossier != null)
-                    ExtraFields.updateVehicleExtraFields(extraFields, dossier.getVehicleDossierCut(id));
+                    var id:Number = dataVO.compactDescr;
+                    var dossier:AccountDossier = Dossier.getAccountDossier();
+                    if (dossier != null)
+                        ExtraFields.updateVehicleExtraFields(extraFields, dossier.getVehicleDossierCut(id));
+                }
             }
             catch (ex:Error)
             {

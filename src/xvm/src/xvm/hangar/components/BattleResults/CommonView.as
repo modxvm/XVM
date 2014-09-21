@@ -185,8 +185,8 @@ package xvm.hangar.components.BattleResults
             shotsTitle.htmlText = formatText(Locale.get("Hit percent"), "#C9C9B6");
             shotsCount.htmlText = formatText(data.directHits + "/" + data.shots, "#C9C9B6", TextFormatAlign.RIGHT);
 
-            var hitPercent:Number = (data.shots <= 0) ? 0 : (data.directHits / data.shots) * 100;
-            shotsPercent.htmlText = formatText(App.utils.locale.float(hitPercent) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
+            var hitsRatio:Number = (data.shots <= 0) ? 0 : (data.directHits / data.shots) * 100;
+            shotsPercent.htmlText = formatText(App.utils.locale.float(hitsRatio) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
 
             damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted / own)"), "#C9C9B6");
             damageAssistedValue.htmlText = formatText(App.utils.locale.integer(data.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);

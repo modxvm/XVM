@@ -23,6 +23,7 @@ from items import vehicles
 from logger import *
 from vehinfo_short import getShortName
 from vehinfo_tiers import getTiers
+import wn8
 
 _vehicleInfoDataStr = None
 
@@ -68,6 +69,14 @@ def _init():
 
                 data['shortName'] = getShortName(data['key'])
 
+                wn8data = wn8.getWN8ExpectedData(data['vid'])
+                if wn8data is not None:
+                    data['wn8expDamage'] = wn8data['expDamage']
+                    data['wn8expSpot'] = wn8data['expSpot']
+                    data['wn8expWinRate'] = wn8data['expWinRate']
+                    data['wn8expDef'] = wn8data['expDef']
+                    data['wn8expFrag'] = wn8data['expFrag']
+
                 # TODO: load avg/top data from server
                 data['avg'] = {}
                 data['top'] = {}
@@ -77,7 +86,7 @@ def _init():
             ResMgr.purge(_VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml', True)
 
     except Exception, ex:
-        print traceback.format_exc()
+        err(traceback.format_exc())
 
     #pprint(res[0])
     #pprint(res)

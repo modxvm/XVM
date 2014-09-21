@@ -21,7 +21,6 @@ from stats import getBattleStat, getBattleResultsStat, getUserData
 from dossier import getDossier
 from vehinfo import getVehicleInfoDataStr
 from vehstate import getVehicleStateData
-from wn8 import getWN8ExpectedData
 import token
 from test import runTest
 import utils
@@ -86,8 +85,6 @@ class Xvm(object):
             elif cmd == COMMAND_GETVEHICLEINFODATA:
                 #return
                 res = getVehicleInfoDataStr()
-            elif cmd == COMMAND_GETWN8EXPECTEDDATA:
-                res = getWN8ExpectedData()
             elif cmd == COMMAND_GETXVMSTATTOKENDATA:
                 res = simplejson.dumps(token.getXvmStatTokenData(self.config))
             elif cmd == COMMAND_LOADBATTLESTAT:

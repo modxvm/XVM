@@ -15,11 +15,11 @@ Legend:
 │ {{v.vehId}}                │ X │ . │ vehicle id
 │ {{v.battles}}              │ X │ . │ total battles count for current vehicle
 │ {{v.c_battles}}            │ X │ . │ color for battles count
-│ {{v.kb}}                   │ . │ . │ number of kilo-battles for current vehicle
-│ {{v.hb}}                   │ . │ . │ number of hecto-battles for current vehicle (hecto = 100)
+│ {{v.kb}}                   │ X │ . │ number of kilo-battles for current vehicle
+│ {{v.hb}}                   │ X │ . │ number of hecto-battles for current vehicle (hecto = 100)
 │ {{v.wins}}                 │ X │ . │ total wins count for current vehicle
 │ {{v.mastery}}              │ X │ . │ mastery sign for current vehicle
-│ {{v.xp}}                   │ . │ . │ average XP gained on current vehicle
+│ {{v.xp}}                   │ X │ . │ average XP gained on current vehicle
 │ {{v.fullname}}             │ X │ . │ localized full vehicle name
 │ {{v.name}}                 │ X │ . │ localized compact vehicle name
 │ {{v.sysname}}              │ X │ . │ vehicle system name (usa-M24_Chaffee)
@@ -32,38 +32,39 @@ Legend:
 │ {{v.battletiermax}}        │ X │ . │ maximal vehicle battle tier
 │ {{v.nation}}               │ X │ . │ vehicle nation
 │ {{v.premium}}              │ X │ . │ 'premium' for premium, empty for normal vehicle
-│ {{v.shootRange}}           │ . │ . │ shoot range
-│ {{v.viewRange}}            │ . │ . │ view range
+│ {{v.maxHP}}                │ X │ . │ maximum vehicle health points
 │ {{v.winrate}}              │ X │ . │ vehicle win rate (percent of wins on this vehicle)
+│ {{v.hitsRatio}}            │ X │ . │ percent of hits
 │ {{v.c_winrate}}            │ X │ . │ color for win rate
-│ {{v.maxHP}}                │ . │ . │ maximum vehicle health points
-│ {{v.tdb}}                  │ . │ . │ average damage - damage/battles
-│ {{v.c_tdb}}                │ . │ . │ dynamic color for this macro
-│ {{v.tdv}}                  │ . │ . │ average damage efficiency - damage/(battles*maxHP)
-│ {{v.c_tdv}}                │ . │ . │ dynamic color for this macro
-│ {{v.tfb}}                  │ . │ . │ average frags per battle
-│ {{v.c_tfb}}                │ . │ . │ dynamic color for this macro
-│ {{v.tsb}}                  │ . │ . │ average number of spotted enemies per battle
-│ {{v.c_tsb}}                │ . │ . │ dynamic color for this macro
+│ {{v.tdb}}                  │ X │ . │ average damage - damage/battles
+│ {{v.c_tdb}}                │ X │ . │ dynamic color for this macro
+│ {{v.tdv}}                  │ X │ . │ average damage efficiency - damage/(battles*maxHP)
+│ {{v.c_tdv}}                │ X │ . │ dynamic color for this macro
+│ {{v.tfb}}                  │ X │ . │ average frags per battle
+│ {{v.c_tfb}}                │ X │ . │ dynamic color for this macro
+│ {{v.tsb}}                  │ X │ . │ average number of spotted enemies per battle
+│ {{v.c_tsb}}                │ X │ . │ dynamic color for this macro
+│ {{v.wn8expd}}              │ X │ . │ WN8 expected tank damage
+│ {{v.wn8effd}}              │ X │ . │ WN8 effective tank damage (avgdmg / expected_dmg * 100%)
+│ {{v.c_wn8effd}}            │ X │ . │ dynamic color for this macro
 │ {{v.teff}}, {{v.e}}        │ . │ . │ player's per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
 │ {{v.c_e}}                  │ . │ . │ dynamic color for this macro
+│ {{v.equipment1}}           │ . │ . │ small icon of equipment in 1st slot
+│ {{v.equipment2}}           │ . │ . │ small icon of equipment in 2nd slot
+│ {{v.equipment3}}           │ . │ . │ small icon of equipment in 3rd slot
+│ {{v.consumable1}}          │ . │ . │ small icon of consumable in 1st slot
+│ {{v.consumable2}}          │ . │ . │ small icon of consumable in 2nd slot
+│ {{v.consumable3}}          │ . │ . │ small icon of consumable in 3rd slot
+│ {{v.xpForTop}}             │ . │ . │ XP points required for top tank
+│ {{v.xpForExpert}}          │ . │ . │ XP points required for expert tank
+│ {{v.shootRange}}           │ . │ . │ actual shoot range
 │ {{v.viewRange}}            │ . │ . │ actual view range
 │ {{v.dpm}}                  │ . │ . │ actual damage per minute
+│ {{v.gunAvgDamage}}         │ . │ . │ average damage for current gun AP/CR/HE
+│ {{v.gunAvgHit}}            │ . │ . │ average penetration for current gun AP/CR/HE
+│ {{v.gunDispersion}}        │ . │ . │ base dispersion at 100 m for current gun
+│ {{v.gunAimingTime}}        │ . │ . │ base aiming time for current gun
 │ {{v.gunmarks}}             │ . │ . │ marks on gun
 │ {{v.gunMarksPercent}}      │ . │ . │ percents for next level of marks on gun
-│ {{v.xpForTop}}             │ . │ . │ required XP points required for top tank
-│ {{v.xpForExpert}}          │ . │ . │ required XP points required for expert tank
-│ {{v.gunAvgDamage}}         │ . │ . │ average damage for current gun ББ/ПК/ОФ
-│ {{v.gunAvgHit}}            │ . │ . │ среднее пробитие текущего орудия ББ/ПК/ОФ,
-│ {{v.hitPercent}}           │ . │ . │ 
-│ {{v.wn8expectedDamage}}    │ . │ . │ expected_tank_damage
-│ {{v.wn8effectiveDamage}}   │ . │ . │ average_tank_damage / expected_tank_damage * 100%
 │ {{l10n:ID}}                │ . │ . │ localizated text, see en.xc for id
 └────────────────────────────┴───┴───┴─────────────────────────────────
-
-│ {{v.-- разброс текущего орудия на 100м (базовый),
-│ {{v.-- постоянная времени сведения текущего орудия (базовая)
-│ {{v.-- кол-во оставшегося опыта для прокачки в виде двух макросов по версии Meddio, однако выводить цифры надо как XX(YY) где XX - с учетом свободного а YY без учета оного
-│ {{v.-- % прокачки экипажа расчетный, т.е. с учетом модулей и расходников, например: 99%/110%/112%/110%
-│ {{v.-- уменьшить значки оборудования до пиктограмм и выводить их внизу картинки с танком, у каждого танка всего три слота, значит не более трёх пиктограмм возможного оборудования
-│ {{v.-- по аналогии поступить и расходниками, уменьшить картинки до пиктограмм и выводить их внизу или справа вертикально, дабы на карусели было видно что стоит на танке

@@ -1131,6 +1131,14 @@ package com.xvm.misc
                 { value: 2.0,  color: Defines.C_BLUE },
                 { value: 15,   color: Defines.C_PURPLE }
             ];
+            c.wn8effd = [
+                { value: 0.6,  color: Defines.C_RED },
+                { value: 0.8,  color: Defines.C_ORANGE },
+                { value: 1.0,  color: Defines.C_YELLOW },
+                { value: 1.3,  color: Defines.C_GREEN },
+                { value: 2.0,  color: Defines.C_BLUE },
+                { value: 15,   color: Defines.C_PURPLE }
+            ];
             return c;
         }
 

@@ -13,7 +13,6 @@ package xvm.tcarousel
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.utils.Padding;
 
     public class TCarouselXvmView extends XvmViewBase
     {
@@ -86,7 +85,24 @@ package xvm.tcarousel
         private function init():void
         {
             Macros.RegisterVehiclesMacros();
-            Dossier.loadAccountDossier(page.carousel, page.carousel.invalidateData, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
+            Dossier.loadAccountDossier(this, onAccountDossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
+        }
+
+        private function onAccountDossierLoaded():void
+        {
+            var dossier:AccountDossier = Dossier.getAccountDossier();
+            //Logger.addObject(dossier);
+            if (dossier != null)
+            {
+                for (var vehId:String in dossier.vehicles)
+                    Dossier.loadVehicleDossier(this, onVehicleDossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, parseInt(vehId));
+            }
+            page.carousel.invalidateData();
+        }
+
+        private function onVehicleDossierLoaded(dossier:VehicleDossier):void
+        {
+            //Logger.add("onVehicleDossierLoaded");
         }
     }
 }

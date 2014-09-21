@@ -72,6 +72,17 @@ package com.xvm.misc
 
                 _cache[key] = dossier;
 
+                if (vehId != 0)
+                {
+                    var adossier:AccountDossier = getAccountDossier(playerId);
+                    if (adossier != null)
+                    {
+                        var vehicle:VehicleDossierCut = adossier.vehicles[vehId];
+                        if (vehicle != null)
+                            vehicle.update();
+                    }
+                }
+
                 var targets:Array = _requests[key];
                 delete _requests[key];
 
