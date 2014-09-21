@@ -15,6 +15,7 @@ package com.xvm.types.dossier
             var vdata:VehicleData = VehicleInfo.get(vehId);
             if (vdata != null)
             {
+                fullname = vdata.localizedFullName;
                 name = vdata.localizedName;
                 sysname = vdata.key.replace(":", "-");
                 shortname = vdata.shortName;
@@ -43,6 +44,7 @@ package com.xvm.types.dossier
         public var xp:Number = NaN;
 
         // from vehicleData
+        public var fullname:String;
         public var name:String;
         public var sysname:String;
         public var shortname:String;

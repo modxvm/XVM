@@ -20,7 +20,8 @@ Legend:
 │ {{v.wins}}                 │ X │ . │ total wins count for current vehicle
 │ {{v.mastery}}              │ X │ . │ mastery sign for current vehicle
 │ {{v.xp}}                   │ . │ . │ average XP gained on current vehicle
-│ {{v.name}}                 │ X │ . │ localized vehicle name
+│ {{v.fullname}}             │ X │ . │ localized full vehicle name
+│ {{v.name}}                 │ X │ . │ localized compact vehicle name
 │ {{v.sysname}}              │ X │ . │ vehicle system name (usa-M24_Chaffee)
 │ {{v.shortname}}            │ X │ . │ localized short vehicle name
 │ {{v.type}}                 │ X │ . │ vehicle type (text substitution from config)
