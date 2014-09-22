@@ -329,6 +329,16 @@
       { "value": 1.3,  "color": ${"def.colorRating.good"     } },
       { "value": 2.0,  "color": ${"def.colorRating.very_good"} },
       { "value": 15,   "color": ${"def.colorRating.unique"   } }
+    ],
+    // Dynamic color by WN8 effective damage
+    // Динамический цвет по эффективному урону по WN8
+    "wn8effd": [
+      { "value": 0.6,  "color": ${"def.colorRating.very_bad" } },
+      { "value": 0.8,  "color": ${"def.colorRating.bad"      } },
+      { "value": 1.0,  "color": ${"def.colorRating.normal"   } },
+      { "value": 1.3,  "color": ${"def.colorRating.good"     } },
+      { "value": 2.0,  "color": ${"def.colorRating.very_good"} },
+      { "value": 15,   "color": ${"def.colorRating.unique"   } }
     ]
   }
 }

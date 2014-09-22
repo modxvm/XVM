@@ -42,7 +42,7 @@
       //"enabled": false,
       //"zoom": 0.66,
       //"zoom": 0.70,
-      "zoom": 0.75,
+      "zoom": 0.80,
       //"zoom": 2,
       "rows": 2,
       "padding": { "horizontal": 2, "vertical": 2 },
@@ -59,11 +59,17 @@
       "extraFields": [
         //{ "x": "0", "y": 28, "w": 45, "h": 35, "bgColor": "0xFFFFFF", "alpha": 20 },
         { "x": -1, "y": 10, "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" },
-        { "x": 0, "y": 28, "format": "<font color='{{v.c_winrate}}'>{{v.winrate%.2f~%}}</font>", "shadow": {} },
+        { "x": 22, "y": 12, "format": "<font color='{{v.c_winrate}}'>{{v.winrate%d~%}}</font>", "shadow": {} },
+        { "x": 0, "y": 28, "format": "<font color='{{v.c_wn8effd}}'>{{v.wn8effd%0.2f}}</font>", "shadow": {} },
         { "x": 0, "y": 42, "format": "<font color='{{v.c_battles}}'>{{v.battles}}</font>", "shadow": {} },
         //{ "x": 0, "y": 54, "format": "<font color='{{v.c_type}}'>{{v.premium?1|0}}</font>", "shadow": {} },
+        //{ "x": -1, "y": 54, "format": "<img src='xvm://res/icons/xvm/16x16.png' width='16' height='16'>" },
         {}
       ]
+    },
+    "clock": {
+      //"x": 100,
+      //"y": 5
     }
   },
   "userInfo": {

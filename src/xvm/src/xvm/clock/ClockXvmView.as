@@ -23,13 +23,13 @@ package xvm.clock
             return super.view as LobbyPage;
         }
 
-        public override function onAfterPopulate(e:LifeCycleEvent):void
+        override public function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
             createClock();
         }
 
-        public override function onBeforeDispose(e:LifeCycleEvent):void
+        override public function onBeforeDispose(e:LifeCycleEvent):void
         {
             //Logger.add("onBeforeDispose: " + view.as_alias);
             removeClock();
@@ -43,7 +43,7 @@ package xvm.clock
         {
             var cfg:CClock = Config.config.hangar.clock;
             if (cfg.enabled)
-                clock = page.addChild(new ClockControl(cfg)) as ClockControl;
+                clock = page.addChildAt(new ClockControl(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0) as ClockControl;
         }
 
         private function removeClock():void

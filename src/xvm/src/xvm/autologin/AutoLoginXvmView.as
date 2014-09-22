@@ -64,7 +64,7 @@ package xvm.autologin
 
         private function autoLogin(page:LoginPage):void
         {
-            App.utils.scheduler.envokeInNextFrame(function():void
+            App.utils.scheduler.scheduleTask(function():void
             {
                 if (!ready)
                     return;
@@ -72,7 +72,7 @@ package xvm.autologin
                 var rememberPwdCheckbox:CheckBox = page.form.rememberPwdCheckbox;
                 if (rememberPwdCheckbox.selected)
                     page.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
-            });
+            }, 100);
         }
 
         private function confirmOldReplays(page:LoginPage):void

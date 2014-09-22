@@ -34,7 +34,7 @@ package com.xvm.types.dossier
         public var lastBattleTime:uint;
         public var lastBattleTimeStr:String;
 
-        private var vehicles:Object;
+        public var vehicles:Object;
 
         // Calculated
         private var _maxXPVehicleName:String = '';

@@ -31,7 +31,7 @@ print "[XPM] Working dir: " + wd
 
 # add libs to path
 import sys
-sys.path.append('%s/lib' % wd)
+sys.path.insert(0, '%s/lib' % wd)
 
 import xpm
 

@@ -208,6 +208,7 @@ package com.xvm
             // Check version
             "ver/currentVersion": "XVM {0} #{1}", // XVM 5.3.4 #4321
             "ver/newVersion": "Доступно обновление:<tab/><a href='#XVM_SITE_DL#'><font color='#00FF00'>v{0}</font></a>\n{1}",
+            "websock/not_connected": "<font color='#FFFF00'>нет подключения к серверу XVM</font>",
 
             // token
             "token/network_error": "Ошибка сети.\nСтатистика XVM недоступна, попробуйте позже.",
@@ -284,6 +285,7 @@ package com.xvm
             // Check version
             "ver/currentVersion": "XVM {0} #{1}", // XVM 5.3.4 #4321
             "ver/newVersion": "Update available:<tab/><a href='#XVM_SITE_DL#'><font color='#00FF00'>v{0}</font></a>\n{1}",
+            "websock/not_connected": "<font color='#FFFF00'>no connection to XVM server</font>",
 
             // token
             "token/network_error": "Network error. XVM statistics is unavailable, try again later.",

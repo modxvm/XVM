@@ -178,7 +178,8 @@ package com.xvm.misc
             c.clock.x = 0;
             c.clock.y = 85;
             c.clock.width = 600;
-            c.clock.height = 30;
+            c.clock.height = 75;
+            c.clock.topmost = false;
             c.clock.align = "center";
             c.clock.valign = "top";
             c.clock.textAlign = "center";
@@ -188,14 +189,14 @@ package com.xvm.misc
             c.clock.borderColor = null;
             c.clock.bgColor = null;
             c.clock.antiAliasType = "advanced";
-            c.clock.format = "<font face='$FieldFont' size='20'>{{h%02d}}:{{m%02d}}</font>";
+            c.clock.format = "<font face='$FieldFont'><font size='19'>{{MMM}} {{D%02d}}, {{WW}}</font>\n<font size='26'>{{h%02d}}:{{m%02d}}</font></font>";
             c.clock.shadow = new CShadow();
             c.clock.shadow.enabled = true;
             c.clock.shadow.distance = 0;
             c.clock.shadow.angle = 0;
             c.clock.shadow.color = "0x000000";
-            c.clock.shadow.alpha = 100;
-            c.clock.shadow.blur = 3;
+            c.clock.shadow.alpha = 70;
+            c.clock.shadow.blur = 4;
             c.clock.shadow.strength = 2;
 
             return c;
@@ -1123,6 +1124,14 @@ package com.xvm.misc
                 { value: 15,   color: Defines.C_PURPLE }
             ];
             c.tsb = [
+                { value: 0.6,  color: Defines.C_RED },
+                { value: 0.8,  color: Defines.C_ORANGE },
+                { value: 1.0,  color: Defines.C_YELLOW },
+                { value: 1.3,  color: Defines.C_GREEN },
+                { value: 2.0,  color: Defines.C_BLUE },
+                { value: 15,   color: Defines.C_PURPLE }
+            ];
+            c.wn8effd = [
                 { value: 0.6,  color: Defines.C_RED },
                 { value: 0.8,  color: Defines.C_ORANGE },
                 { value: 1.0,  color: Defines.C_YELLOW },
