@@ -41,7 +41,7 @@
     "carousel": {
       //"enabled": false,
       //"zoom": 0.66,
-      //"zoom": 0.70,
+      //"zoom": 0.75,
       "zoom": 0.80,
       //"zoom": 2,
       "rows": 2,

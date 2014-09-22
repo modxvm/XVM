@@ -23,7 +23,6 @@ package com.xvm.controls
             icon.source = "../maps/icons/buttons/tab_sort_button/level.png";
             menuRowCount = dataProvider.length;
             menuDirection = "up";
-            menuWidth = 95;
         }
 
     }
