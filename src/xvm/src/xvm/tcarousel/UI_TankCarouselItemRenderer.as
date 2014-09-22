@@ -2,6 +2,7 @@ package xvm.tcarousel
 {
     import com.xvm.*;
     import com.xvm.misc.*;
+    import com.xvm.types.cfg.*;
     import com.xvm.types.dossier.*;
     import flash.display.*;
     import flash.geom.*;
@@ -11,12 +12,14 @@ package xvm.tcarousel
 
     public dynamic class UI_TankCarouselItemRenderer extends TankCarouselItemRendererUI
     {
+        private var cfg:CCarousel;
         private var extraFields:MovieClip;
 
         public function UI_TankCarouselItemRenderer()
         {
             super();
-            //createExtraFields();
+            cfg = Config.config.hangar.carousel;
+            createExtraFields();
         }
 
         override protected function configUI():void
@@ -31,7 +34,9 @@ package xvm.tcarousel
                 //Logger.add("draw");
                 super.draw();
 
-                //scaleX = scaleY = Config.config.hangar.carousel.zoom;
+                if (scaleX != cfg.zoom || scaleY != cfg.zoom)
+                    scaleX = scaleY = cfg.zoom;
+
                 if (isInvalid(InvalidationType.DATA))
                 {
                     if (dataVO == null)
@@ -60,7 +65,7 @@ package xvm.tcarousel
             {
                 scrollRect = new Rectangle(0, 0, width, height);
 
-                var zoom:Number = Config.config.hangar.carousel.zoom;
+                var zoom:Number = cfg.zoom;
                 var w:int = width * zoom;
                 var h:int = height * zoom;
 
@@ -69,25 +74,25 @@ package xvm.tcarousel
                 //extraFields.graphics.beginFill(0xFFFFFF, 0.3); extraFields.graphics.drawRect(0, 0, w, h); extraFields.graphics.endFill();
                 vehicleIcon.addChild(extraFields);
 
-                setupStandardField(vehicleIcon.tankTypeMc, Config.config.hangar.carousel.fields.tankType);
+                setupStandardField(vehicleIcon.tankTypeMc, cfg.fields.tankType);
 
                 vehicleIcon.levelMc.visible = false;
                 App.utils.scheduler.envokeInNextFrame(function():void {
                     if (vehicleIcon == null)
                         return;
-                    setupStandardField(vehicleIcon.levelMc, Config.config.hangar.carousel.fields.level);
+                    setupStandardField(vehicleIcon.levelMc, cfg.fields.level);
                     vehicleIcon.levelMc.visible = true;
                 });
 
                 vehicleIcon.xp.x = w - vehicleIcon.xp.width - 2;
-                setupStandardField(vehicleIcon.xp, Config.config.hangar.carousel.fields.xp);
+                setupStandardField(vehicleIcon.xp, cfg.fields.xp);
 
                 vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width - 2;
-                setupStandardField(vehicleIcon.multyXp, Config.config.hangar.carousel.fields.multiXp);
+                setupStandardField(vehicleIcon.multyXp, cfg.fields.multiXp);
 
-                setupTankNameField(Config.config.hangar.carousel.fields.tankName, zoom);
+                setupTankNameField(cfg.fields.tankName, zoom);
 
-                ExtraFields.createExtraFields(extraFields, w, h, Config.config.hangar.carousel.extraFields);
+                ExtraFields.createExtraFields(extraFields, w, h, cfg.extraFields);
             }
             catch (ex:Error)
             {

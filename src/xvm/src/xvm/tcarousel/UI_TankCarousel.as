@@ -48,9 +48,9 @@ package xvm.tcarousel
                 bottom: cfg.padding.vertical,
                 left: cfg.padding.horizontal / 2
             };
-            slotImageWidth = 162;
-            slotImageHeight = 102;
 
+            slotImageWidth = int(162 * cfg.zoom);
+            slotImageHeight = int(102 * cfg.zoom);
             var h:int = (slotImageHeight + padding.vertical) * cfg.rows - padding.vertical;
             height = h + 10;
             leftArrow.height = rightArrow.height = renderersMask.height = dragHitArea.height = h;
@@ -60,14 +60,7 @@ package xvm.tcarousel
             createFilters();
         }
 
-        override protected function configUI():void
-        {
-            super.configUI();
-
-            scaleX = scaleY = cfg.zoom;
-        }
-
-/*        // TankCarousel
+        // TankCarousel
         override public function scrollToIndex(index:uint):void
         {
             //Logger.add("scrollToIndex: " + index + " _visibleSlots: " + _visibleSlots);
@@ -343,7 +336,7 @@ package xvm.tcarousel
                 break;
             }
         }
-*/
+
         // FILTERS
 
         private function createFilters():void
