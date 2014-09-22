@@ -15,7 +15,7 @@ package xvm.tcarousel
         public function UI_TankCarouselItemRenderer()
         {
             super();
-            createExtraFields();
+            //createExtraFields();
         }
 
         override protected function configUI():void
@@ -29,9 +29,9 @@ package xvm.tcarousel
             {
                 //Logger.add("draw");
                 super.draw();
-                scaleX = scaleY = Config.config.hangar.carousel.zoom;
+                //scaleX = scaleY = Config.config.hangar.carousel.zoom;
 
-                if (dataVO == null)
+                //if (dataVO == null)
                     return;
 
                 var id:Number = dataVO.compactDescr;

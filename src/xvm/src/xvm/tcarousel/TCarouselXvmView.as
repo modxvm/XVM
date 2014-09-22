@@ -52,34 +52,10 @@ package xvm.tcarousel
             if (isNaN(Config.config.hangar.carousel.rows) || Config.config.hangar.carousel.rows <= 0)
                 Config.config.hangar.carousel.rows = 1;
 
-            var c:TankCarousel = new UI_TankCarousel(Config.config.hangar.carousel);
-            c.componentInspectorSetting = true;
-            c.dragEnabled = page.carousel.dragEnabled;
-            c.enabled = page.carousel.enabled;
-            c.enableInitCallback = page.carousel.enableInitCallback;
-            c.focusable = page.carousel.focusable;
-            c.margin = page.carousel.margin;
-            c.inspectablePadding = {
-                top: 0,
-                right: Config.config.hangar.carousel.padding.horizontal / 2,
-                bottom: Config.config.hangar.carousel.padding.vertical,
-                left: Config.config.hangar.carousel.padding.horizontal / 2
-            };
-            c.useRightButton = page.carousel.useRightButton;
-            c.useRightButtonForSelect = page.carousel.useRightButtonForSelect;
-            c.visible = page.carousel.visible;
-            c.slotImageWidth = page.carousel.slotImageWidth * Config.config.hangar.carousel.zoom;
-            c.slotImageHeight = page.carousel.slotImageHeight * Config.config.hangar.carousel.zoom;
-            var h:int = (c.slotImageHeight + c.padding.vertical) * Config.config.hangar.carousel.rows - c.padding.vertical;
-            c.height = h + 10;
-            c.leftArrow.height = c.rightArrow.height = c.renderersMask.height = c.dragHitArea.height = h;
-            c.itemRenderer = UI_TankCarouselItemRenderer;
-            c.componentInspectorSetting = false;
-
             var index:int = page.getChildIndex(page.carousel);
             page.removeChildAt(index);
             //page.carousel.dispose(); // TODO: exception
-            page.carousel = c;
+            page.carousel = new UI_TankCarousel(Config.config.hangar.carousel);
             page.addChildAt(page.carousel, index);
         }
 

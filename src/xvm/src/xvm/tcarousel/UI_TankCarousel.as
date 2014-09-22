@@ -31,10 +31,43 @@ package xvm.tcarousel
             //Logger.add("UI_TankCarousel");
             super();
             this.cfg = cfg;
+
+            componentInspectorSetting = true;
+
+            enabled = true;
+            visible = true;
+            focusable = false;
+            margin = 5;
+            useRightButton = true;
+            useRightButtonForSelect = false;
+
+            itemRenderer = UI_TankCarouselItemRenderer;
+            inspectablePadding = {
+                top: 0,
+                right: cfg.padding.horizontal / 2,
+                bottom: cfg.padding.vertical,
+                left: cfg.padding.horizontal / 2
+            };
+            slotImageWidth = 162;
+            slotImageHeight = 102;
+
+            var h:int = (slotImageHeight + padding.vertical) * cfg.rows - padding.vertical;
+            height = h + 10;
+            leftArrow.height = rightArrow.height = renderersMask.height = dragHitArea.height = h;
+
+            componentInspectorSetting = false;
+
             createFilters();
         }
 
-        // TankCarousel
+        override protected function configUI():void
+        {
+            super.configUI();
+
+            scaleX = scaleY = cfg.zoom;
+        }
+
+/*        // TankCarousel
         override public function scrollToIndex(index:uint):void
         {
             //Logger.add("scrollToIndex: " + index + " _visibleSlots: " + _visibleSlots);
@@ -223,6 +256,7 @@ package xvm.tcarousel
 
         private function repositionRenderers():void
         {
+            //Logger.add("repositionRenderers");
             var renderer:IListItemRenderer = null;
             var selectedIndex:Number = 0;
             _currentShowRendersCount = 0;
@@ -309,7 +343,7 @@ package xvm.tcarousel
                 break;
             }
         }
-
+*/
         // FILTERS
 
         private function createFilters():void
