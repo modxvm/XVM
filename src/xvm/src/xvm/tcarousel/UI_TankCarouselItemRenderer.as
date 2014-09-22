@@ -32,12 +32,15 @@ package xvm.tcarousel
             try
             {
                 //Logger.add("draw");
+                var dataDirty:Boolean = _dataDirty;
+
                 super.draw();
+                if (_baseDisposed)
+                    return;
 
-                if (scaleX != cfg.zoom || scaleY != cfg.zoom)
-                    scaleX = scaleY = cfg.zoom;
+                this.scaleX = this.scaleY = cfg.zoom;
 
-                if (isInvalid(InvalidationType.DATA))
+                if (dataDirty)
                 {
                     if (dataVO == null)
                         return;
