@@ -27,7 +27,7 @@
       "updateInterval": 10000,
       // Axis field coordinates
       // Положение поля по осям
-      "x": 5,
+      "x": 3,
       "y": 51,
       // Transparency
       // Прозрачность от 0 до 100
@@ -40,23 +40,23 @@
       "maxRows": 2,
       // Gap between columns
       // Пространство между колонками
-      "columnGap": 10,
+      "columnGap": 3,
       // Text style
       // Стиль текста
       "fontStyle": {
         // Font name
         // Название шрифта
         "name": "$FieldFont",
-        "size": 12, // Размер
-        "bold": false,  // Жирный
-        "italic": false, // Курсив
+        "size": 12,         // Размер
+        "bold": false,      // Жирный
+        "italic": false,    // Курсив
         // Different colors depending on server response time
         // Разные цвета в зависимости от времени отклика сервера
         "color": {
-          "great": "0xFFCC66", // Отличный
-          "good": "0xE5E4E1",  // Хороший
-          "poor": "0x96948F",  // Так себе
-          "bad": "0xD64D4D"    // Плохой
+          "great": "0xFFCC66",  // Отличный
+          "good":  "0xE5E4E1",  // Хороший
+          "poor":  "0x96948F",  // Так себе
+          "bad":   "0xD64D4D"   // Плохой
         }
       },
       // Threshold values defining response quality
@@ -88,6 +88,8 @@
     // Parameters for tank carousel
     // Параметры карусели танков
     "carousel": ${"carousel.xc":"carousel"},
+    // Parameters for hangar clock
+    // Параметры часов в ангаре
     "clock": ${"clock.xc":"clock"}
   }
 }

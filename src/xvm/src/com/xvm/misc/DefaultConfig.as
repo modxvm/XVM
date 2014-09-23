@@ -119,12 +119,12 @@ package com.xvm.misc
             c.pingServers = new CPingServers();
             c.pingServers.enabled = false;
             c.pingServers.updateInterval = 10000; // msec
-            c.pingServers.x = 5;
+            c.pingServers.x = 3;
             c.pingServers.y = 51;
             c.pingServers.alpha = 80;
             c.pingServers.delimiter = ": ";
             c.pingServers.maxRows = 2;
-            c.pingServers.columnGap = 10;
+            c.pingServers.columnGap = 3;
             c.pingServers.fontStyle = {
                 name: "$FieldFont",
                 size: 12,
@@ -174,21 +174,21 @@ package com.xvm.misc
             // Clock
             c.clock = new CClock();
             c.clock.enabled = true;
-            c.clock.x = 0;
-            c.clock.y = 85;
-            c.clock.width = 600;
-            c.clock.height = 75;
+            c.clock.x = -15;
+            c.clock.y = 40;
+            c.clock.width = 300;
+            c.clock.height = 60;
             c.clock.topmost = false;
-            c.clock.align = "center";
+            c.clock.align = "right";
             c.clock.valign = "top";
-            c.clock.textAlign = "center";
+            c.clock.textAlign = "right";
             c.clock.textVAlign = "center";
             c.clock.alpha = 100;
             c.clock.rotation = 0;
             c.clock.borderColor = null;
             c.clock.bgColor = null;
             c.clock.antiAliasType = "advanced";
-            c.clock.format = "<font face='$FieldFont'><font size='19'>{{MMM}} {{D%02d}}, {{WW}}</font>\n<font size='26'>{{h%02d}}:{{m%02d}}</font></font>";
+            c.clock.format = "<font face='$FieldFont'><font size='19'>{{W}} {{D%02d}} {{MM}}</font><font size='26'> {{h%02d}}:{{m%02d}}</font></font>";
             c.clock.shadow = new CShadow();
             c.clock.shadow.enabled = true;
             c.clock.shadow.distance = 0;
