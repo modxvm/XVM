@@ -1,14 +1,65 @@
-﻿XVM-5.3.3:
+﻿XVM-5.3.5:
+  * adaptation pour WoT 0.9.3
+  * changement des valeurs dmg-kind :
+      shot, fire, ramming, world_collision, death_zone, drowning, other
+  * nouvelles sections :
+      hangar/carousel - extension des paramètres du carousel
+      hangar/clock - paramètres de l'heure dans le hangar
+  * suppression des options :
+      hangar/masteryMarkInCarousel
+      hangar/hideTutorial
+  * nouvelles options :
+    battleResults/showTotalExperience - affiche l'expérience totale dans la fenêtre de compte-rendu de bataille
+    battleResults/showCrewExperience - affiche l'expérience de l'équipage dans la fenêtre de compte-rendu de bataille
+  * icône de joueur à partir de l'accountId - chargement depuis \res_mods\xvm\res\clanicons\ID\ 
+    L'ordre de recherche est le suivant :
+      id -> nick -> clan -> clan/default.png -> nick/default.png
+
+
+XVM-5.3.4:
+  * nouvelles macros :
+      {{ready}}, retourne "prêt" quand le joueur est dans la bataille (il a terminé de charger la carte) et une chaîne vide sinon
+      {{gun-marks}}, retourne le nombre de marques de maîtrise sur le canon pour les chars détectés
+  * nouvelle option battle/allowGunMarksInPanelsAndMinimap - active la macro {{gun-marks}}
+    dans les panneaux des joueurs et sur la minimap. ATTENTION : coûteux en performances
+  * ajout de la section texts/gunMarks
+  * ajout de la possibilité de désactiver des modes dans les panneaux des joueurs
+  * nouvelle section "minimapAlt" pour le mode de minimap alternatif (désactivé par défaut)
+  * traduction :
+      ajout de {{l10n:Not ready}}
+  * mise à jour de la section "hotkeys" :
+     - ajout de la personnalisation des touches pour la minimap et les panneaux des joueurs
+     - tout le clavier peut être utilisé
+     ATTENTION : les codes touche ont été changé
+  * désactivation des macros couleurs {{c:*}} pour les chars détruits
+    utilisez la macro {{alive}} avec de l'alpha :
+      <font color='{{c:xwn}}' alpha='{{alive?#FF|#80}}'>{{xwn}}</font>
+  * section turretMarkers changée en markers/turretMarkers
+
+
+XVM-5.3.3:
   * adaptation pour WoT 0.9.2
+  * nouvelles macros :
+      {{player}}, retourne "pl" pour le joueur courant et une chaîne vide pour les autres
+      {{tk}}, retourne "tk" pour les teamkillers et une chaîne vide pour les autres
+      {{wgr}}, {{c:wgr}}, {{a:wgr}}, {{xwgr}}, {{c:xwgr}}, {{a:xwgr}} pour la côte personnelle
+  * macros étendues :
+      {{l10n:<id>}} fonctionne désormais dans le PlayersPanel
+  * nouvelle option :
+      playersPanel/altMode - mode avec la touche Alt pressée
+  * traduction
+      ajout de {{l10n:Destroyed}} et {{l10n:No data}}
+
 
 XVM-5.3.2:
   * nouvelles options : captureBar/allyColor, captureBar/enemyColor
+
 
 XVM-5.3.1:
   * adaptation pour WoT 0.9.1
   * affiche la portée de vue actuelle, le temps de rechargement du canon et la portée radio dans le garage
   
-  
+
 XVM-5.3.0:
   [MISES À JOUR MAJEURES]
   * nouveau système de formattage des macros (cf. readme-fr.txt pour plus d'infos) :
@@ -61,7 +112,7 @@ XVM-5.3.0:
   [AUTRES]
   * code source désormais stockée sur http://dev.modxvm.com/
 
-  
+
 XVM-5.2.1:
   * adaptation pour WoT 0.9.0
 
@@ -73,7 +124,7 @@ XVM-5.2.1:
   * les panneaux des joueurs n'étaient pas affichés après le chargement
   * correction de l'affichage des éléments sur la minimap
 
-  
+
 XVM-5.2.0:
   [MISES À JOUR MAJEURES]
   * fichier de configuration principal (xvm.xc) déplacé dans res_mods/xvm/configs
@@ -91,7 +142,7 @@ XVM-5.2.0:
   * option battle/removePanelsModeSwitcher changée en playersPanel/removePanelsModeSwitcher
   * version de la configuration passée en 5.0.2
 
-  
+
 XVM-5.1.0:
   * adaptation pour WoT 0.8.11
 
