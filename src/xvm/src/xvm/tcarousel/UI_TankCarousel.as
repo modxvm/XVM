@@ -60,14 +60,14 @@ package xvm.tcarousel
             leftArrow.height = rightArrow.height = renderersMask.height = dragHitArea.height = h;
 
             componentInspectorSetting = false;
-
-            createFilters();
         }
 
         override protected function configUI():void
         {
             super.configUI();
 
+            return; // temporary disabled
+            createFilters();
             Cmd.loadSettings(this, onFiltersLoaded, SETTINGS_CAROUSEL_FILTERS_KEY);
         }
 
@@ -443,6 +443,9 @@ package xvm.tcarousel
         private function rearrangeFilters():void
         {
             //Logger.add("rearrangeFilters");
+
+            if (levelFilter == null)
+                return;
 
             if (height >= 174)
             {
