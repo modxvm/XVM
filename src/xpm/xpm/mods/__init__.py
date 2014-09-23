@@ -7,7 +7,7 @@ from gui import VERSION_FILE_PATH
 
 # get version
 ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')
-ver = ver[2:-5] # 'v.0.8.7 #512' or 'v.0.8.7 Common Test #499'
+ver = ver[2:ver.index('#')-1] # 'v.0.8.7 #512' or 'v.0.8.7 Common Test #499'
 
 # determine work dir
 try:
