@@ -21,7 +21,7 @@ import nations
 from items import vehicles
 
 from logger import *
-from vehinfo_short import getShortName
+import vehinfo_short
 from vehinfo_tiers import getTiers
 import wn8
 
@@ -44,6 +44,7 @@ def _init():
 
                 item = vehicles.g_cache.vehicle(nationID, id)
                 #pprint(vars(item))
+                #log('%i	%i	%s' % (descr['level'], descr['compactDescr'], descr['name']))
 
                 data = dict()
                 data['vid'] = descr['compactDescr']
@@ -67,7 +68,7 @@ def _init():
 
                 (data['tierLo'], data['tierHi']) = getTiers(data['level'], data['vclass'], data['key'])
 
-                data['shortName'] = getShortName(data['key'])
+                data['shortName'] = vehinfo_short.getShortName(data['key'])
 
                 wn8data = wn8.getWN8ExpectedData(data['vid'])
                 if wn8data is not None:
@@ -84,6 +85,8 @@ def _init():
                 res.append(data)
 
             ResMgr.purge(_VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml', True)
+
+        vehinfo_short.checkNames(res)
 
     except Exception, ex:
         err(traceback.format_exc())
