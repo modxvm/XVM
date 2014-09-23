@@ -15,31 +15,31 @@ package com.xvm.components
 
     public class ImageCheckBoxItemRenderer extends ListItemRedererImageText // from controls.swf
     {
-        public var checkBox:CheckBox;
+        //public var checkBox:CheckBox;
 
         public function ImageCheckBoxItemRenderer()
         {
             super();
-            //icon.autoSize = false;
+            icon.autoSize = false;
         }
 
         override protected function configUI():void
         {
             super.configUI();
 
-            checkBox = addChild(App.utils.classFactory.getComponent("CheckBox", CheckBox)) as CheckBox;
-            checkBox.label = "";
-            checkBox.x = 5;
-            checkBox.setActualSize(40, 20);
+            //checkBox = addChild(App.utils.classFactory.getComponent("CheckBox", CheckBox)) as CheckBox;
+            //checkBox.label = "";
+            //checkBox.x = 5;
+            //checkBox.setActualSize(40, 20);
 
-            ico_border.x = 25;
-            textField.x = 75;
+            //ico_border.x = 25;
+            //textField.x = 75;
 
-            var menu:DropdownMenu = parent as DropdownMenu;
-            if (menu != null)
-            {
-                textField.width = menu.menuWidth - textField.x - 5;
-            }
+            //var menu:DropdownMenu = parent as DropdownMenu;
+            //if (menu != null)
+            //{
+            //    textField.width = menu.menuWidth - textField.x - 5;
+            //}
 
             //constraints.updateElement("textField", textField);
         }
@@ -61,7 +61,8 @@ package com.xvm.components
         override protected function draw():void
         {
             super.draw();
-            checkBox.selected = selected = data.selected;
+            /*checkBox.selected =*/
+            selected = data.selected;
         }
 
         override protected function completeLoadA(event:UILoaderEvent):void

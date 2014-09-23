@@ -22,18 +22,17 @@ from dossier import getDossier
 from vehinfo import getVehicleInfoDataStr
 from vehstate import getVehicleStateData
 import token
-from test import runTest
 import utils
+import userprefs
 from websock import g_websock
 from minimap_circles import g_minimap_circles
+from test import runTest
 #from config.default import g_default_config
 
 _LOG_COMMANDS = (
   COMMAND_LOADBATTLESTAT,
   COMMAND_LOADBATTLERESULTSSTAT,
   COMMAND_LOGSTAT,
-  COMMAND_LOAD_SETTINGS,
-  COMMAND_SAVE_SETTINGS,
   COMMAND_TEST,
   )
 
@@ -95,15 +94,15 @@ class Xvm(object):
                 getUserData(proxy, args)
             elif cmd == COMMAND_GETDOSSIER:
                 getDossier(proxy, args)
+            elif cmd == COMMAND_RETURN_CREW:
+                self.__processReturnCrew()
             elif cmd == COMMAND_OPEN_URL:
                 if len(args[0]):
                     utils.openWebBrowser(args[0], False)
-            elif cmd == COMMAND_RETURN_CREW:
-                self.__processReturnCrew()
             elif cmd == COMMAND_LOAD_SETTINGS:
-                pass # TODO
+                res = userprefs.get(args[0])
             elif cmd == COMMAND_SAVE_SETTINGS:
-                pass # TODO
+                userprefs.set(args[0], args[1])
             elif cmd == COMMAND_TEST:
                 runTest(args)
             else:

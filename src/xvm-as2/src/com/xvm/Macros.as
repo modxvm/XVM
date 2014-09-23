@@ -384,7 +384,7 @@ class com.xvm.Macros
             // {{tk}}
             pdata["tk"] = function(o):String { return o.teamKiller == true ? 'tk' : null; }
             // {{gun-marks}}
-            pdata["gun-marks"] = function(o):String { return isNaN(o.marksOnGun) ? null : Utils.getGunMarksText(o.marksOnGun); }
+            pdata["gun-marks"] = function(o):String { return isNaN(o.marksOnGun) || pdata["level"] < 5 ? null : Utils.getGunMarksText(o.marksOnGun); }
 
             // hp
 

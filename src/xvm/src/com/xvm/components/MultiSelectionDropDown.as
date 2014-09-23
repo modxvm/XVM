@@ -9,13 +9,25 @@ package com.xvm.components
 
     public class MultiSelectionDropDown extends DropDown
     {
-        public var selectedItems:Array = new Array();
-
         public function MultiSelectionDropDown()
         {
             super();
-            //icon.autoSize = false;
+            icon.autoSize = false;
             itemRenderer = ImageCheckBoxItemRenderer;
+        }
+
+        private var _selectedItems:Array = new Array();
+        public function get selectedItems():Array
+        {
+            return _selectedItems;
+        }
+
+        public function set selectedItems(value:Array):void
+        {
+            _selectedItems = value;
+            for each (var key:* in dataProvider)
+                key.selected = _selectedItems.indexOf(key.data) >= 0;
+            dispatchEvent(new ListEvent(ListEvent.INDEX_CHANGE));
         }
 
         override protected function configUI():void
@@ -24,7 +36,7 @@ package com.xvm.components
             updateSelected();
         }
 
-        override protected function handleMenuItemClick(event:ListEvent) : void
+        override protected function handleMenuItemClick(event:ListEvent):void
         {
             if (event.buttonIdx == 1)
                 selectAll(false);
@@ -33,10 +45,10 @@ package com.xvm.components
             else
             {
                 dataProvider[event.index].selected = !dataProvider[event.index].selected;
-                if (selectedItems.indexOf(event.itemData.data) < 0)
-                    selectedItems.push(event.itemData.data);
+                if (_selectedItems.indexOf(event.itemData.data) < 0)
+                    _selectedItems.push(event.itemData.data);
                 else
-                    selectedItems.splice(selectedItems.indexOf(event.itemData.data), 1);
+                    _selectedItems.splice(selectedItems.indexOf(event.itemData.data), 1);
                 dispatchEvent(new ListEvent(ListEvent.INDEX_CHANGE));
             }
         }
@@ -45,11 +57,11 @@ package com.xvm.components
 
         private function updateSelected() : void
         {
-            selectedItems.splice();
+            _selectedItems.splice();
             for each (var key:* in dataProvider)
             {
                 if (key.selected == true)
-                    selectedItems.push(key.data);
+                    _selectedItems.push(key.data);
             }
         }
 

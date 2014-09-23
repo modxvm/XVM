@@ -7,14 +7,20 @@ package com.xvm.controls
 
     public class PrefMultiSelectionDropDown extends MultiSelectionDropDown
     {
+        public static const PREF_ELITE:String = "elite";
+        public static const PREF_PREMIUM:String = "premium";
+        public static const PREF_NORMAL:String = "normal";
+        public static const PREF_MULTIXP:String = "multiXp";
+        public static const PREF_NOMASTER:String = "noMaster";
+
         public function PrefMultiSelectionDropDown()
         {
             var dp:Array = [
-                { label: Locale.get("Elite"), icon: "../maps/icons/library/PersonalAchievementsIcon-1.png", data: "elite" },
-                { label: Locale.get("Premium"), icon: "../maps/icons/library/GoldIcon-1.png", data: "premium" },
-                { label: Locale.get("Normal"), icon: "../maps/icons/library/CreditsIcon-1.png", data: "normal" },
-                { label: Locale.get("MultiXP"), icon: "../maps/icons/library/multyXp.png", data: "multiXp" },
-                { label: Locale.get("NoMaster"), icon: "../maps/icons/library/PowerlevelIcon-1.png", data: "noMaster" },
+                { label: Locale.get("Elite"), icon: "../maps/icons/library/PersonalAchievementsIcon-1.png", data: PREF_ELITE },
+                { label: Locale.get("Premium"), icon: "../maps/icons/library/GoldIcon-1.png", data: PREF_PREMIUM },
+                { label: Locale.get("Normal"), icon: "../maps/icons/library/CreditsIcon-1.png", data: PREF_NORMAL },
+                { label: Locale.get("MultiXP"), icon: "../maps/icons/library/multyXp.png", data: PREF_MULTIXP },
+                { label: Locale.get("NoMaster"), icon: "../maps/icons/library/PowerlevelIcon-1.png", data: PREF_NOMASTER },
             ];
             dataProvider = new DataProvider(dp);
 

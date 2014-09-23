@@ -2,7 +2,11 @@ package xvm.tcarousel
 {
     import com.xvm.*;
     import com.xvm.controls.*;
+    import com.xvm.io.*;
+    import com.xvm.misc.*;
     import com.xvm.types.cfg.*;
+    import com.xvm.types.dossier.*;
+    import com.xvm.types.veh.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.gui.components.controls.*;
@@ -19,12 +23,12 @@ package xvm.tcarousel
         private static const SLOT_TYPE_BUYSLOT:int = 3;
         private static const SLOT_TYPE_EMPTY:int = 4;
         private static const FILTER_MARGIN:int = 5;
+        private static const SETTINGS_CAROUSEL_FILTERS_KEY:String = "tcarousel.filters";
 
         private var cfg:CCarousel;
 
-        private var premiumFilter:CheckBox;
-        private var multiXpFilter:CheckBox;
-        private var eliteFilter:CheckBox;
+        private var levelFilter:LevelMultiSelectionDropDown;
+        private var prefFilter:PrefMultiSelectionDropDown;
 
         public function UI_TankCarousel(cfg:CCarousel)
         {
@@ -60,6 +64,13 @@ package xvm.tcarousel
             createFilters();
         }
 
+        override protected function configUI():void
+        {
+            super.configUI();
+
+            Cmd.loadSettings(this, onFiltersLoaded, SETTINGS_CAROUSEL_FILTERS_KEY);
+        }
+
         // TankCarousel
         override public function scrollToIndex(index:uint):void
         {
@@ -78,6 +89,63 @@ package xvm.tcarousel
             super.as_setParams(param1);
             repositionAdvancedSlots();
             removeEmptySlots();
+        }
+
+        override public function as_showVehicles(param1:Array):void
+        {
+            try
+            {
+                if (_renderers != null)
+                {
+                    //Logger.addObject(param1);
+                    for (var i:int = param1.length - 1; i >= 0; --i)
+                    {
+                        var vehId:int = param1[i];
+
+                        var vdata:VehicleData = VehicleInfo.get(vehId);
+                        if (vdata == null)
+                            continue;
+
+                        var dossier:AccountDossier = Dossier.getAccountDossier();
+                        if (dossier == null)
+                            continue;
+                        var vdossier:VehicleDossierCut = dossier.getVehicleDossierCut(vehId);
+                        if (vdossier == null)
+                            continue;
+
+                        var renderer:TankCarouselItemRenderer = null;
+                        for (var n:int = 0; n < _renderers.length; ++n)
+                        {
+                            var r:TankCarouselItemRenderer = _renderers[n] as TankCarouselItemRenderer;
+                            if (r == null || r.dataVO == null)
+                                continue;
+                            if (r.dataVO.compactDescr == vehId)
+                            {
+                                renderer = r;
+                                break;
+                            }
+                        }
+                        if (renderer == null)
+                            continue;
+
+                        var remove:Boolean = false;
+                        remove = levelFilter.selectedItems.length > 0 && levelFilter.selectedItems.indexOf(vdata.level) < 0;
+                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_ELITE) >= 0 && renderer.dataVO.elite == false);
+                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0 && renderer.dataVO.premium == false);
+                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0 && renderer.dataVO.premium == true);
+                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_MULTIXP) >= 0 && renderer.dataVO.doubleXPReceived == true);
+                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NOMASTER) >= 0 && vdossier.mastery == 4);
+
+                        if (remove)
+                            param1.splice(i, 1);
+                    }
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+            super.as_showVehicles(param1);
         }
 
         // Carousel
@@ -184,6 +252,7 @@ package xvm.tcarousel
 
         override protected function showHideFilters():void
         {
+            rearrangeFilters();
             if (Config.config.hangar.carousel.alwaysShowFilters == true)
             {
                 leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
@@ -341,7 +410,7 @@ package xvm.tcarousel
 
         private function createFilters():void
         {
-            return;
+            //return;
             /*addChild(createLabel("Filter", 0, 0));
             filterTextInput = App.utils.classFactory.getComponent("TextInput", TextInput);
             filterTextInput.x = 0;
@@ -352,6 +421,7 @@ package xvm.tcarousel
             filterTextInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
             addChild(filterTextInput);*/
 
+            /*
             var nationFilter:NationMultiSelectionDropDown = addChild(new NationMultiSelectionDropDown()) as NationMultiSelectionDropDown;
             nationFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
             nationFilter.x = 5;
@@ -361,28 +431,68 @@ package xvm.tcarousel
             classFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
             classFilter.x = 5;
             classFilter.y = 60;
+            */
 
-            //addChild(createLabel("Level", 175, 0));
-            var levelFilter:LevelMultiSelectionDropDown = addChild(new LevelMultiSelectionDropDown()) as LevelMultiSelectionDropDown;
-            levelFilter.x = 5;
-            levelFilter.y = 90;
+            levelFilter = vehicleFilters.addChild(new LevelMultiSelectionDropDown()) as LevelMultiSelectionDropDown;
             levelFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
 
-            //addChild(createLabel("Type", 285, 0));
-            var prefFilter:PrefMultiSelectionDropDown = addChild(new PrefMultiSelectionDropDown()) as PrefMultiSelectionDropDown;
+            prefFilter = vehicleFilters.addChild(new PrefMultiSelectionDropDown()) as PrefMultiSelectionDropDown;
             prefFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
-            prefFilter.x = 5;
-            prefFilter.y = 120;
         }
 
-        private function setFilters() : void
+        private function rearrangeFilters():void
         {
-            /*var _loc_1:* = new Array();
-            _loc_1.push(App.utils.JSON.encode({levels:this.levelFilter.selectedItems, types:this.typeFilter.selectedItems}));
-            _loc_1.unshift("xvm.tankcarousel.setFilters", "tankcarousel");
-            ExternalInterface.call.apply(null, _loc_1);
-            this.page.carousel.onFilterChanged();
-            */
+            //Logger.add("rearrangeFilters");
+
+            if (height >= 174)
+            {
+                vehicleFilters.width = 56;
+
+                levelFilter.x = vehicleFilters.nationFilter.x;
+                levelFilter.y = vehicleFilters.tankFilter.y + 33;
+
+                prefFilter.x = levelFilter.x;
+                prefFilter.y = levelFilter.y + 33;
+
+                vehicleFilters.checkBoxToMain.y = prefFilter.y + 33;
+            }
+            else
+            {
+                vehicleFilters.width = 112;
+
+                levelFilter.x = vehicleFilters.nationFilter.x + vehicleFilters.nationFilter.width + FILTER_MARGIN;
+                levelFilter.y = vehicleFilters.nationFilter.y;
+
+                prefFilter.x = levelFilter.x;
+                prefFilter.y = vehicleFilters.tankFilter.y;
+
+                vehicleFilters.checkBoxToMain.y = vehicleFilters.tankFilter.y + 33;
+            }
+        }
+
+        private function onFiltersLoaded(filter_str:String):void
+        {
+            try
+            {
+                var filter:Object = JSONx.parse(filter_str);
+                if (filter != null)
+                {
+                    levelFilter.selectedItems = filter.levels;
+                    prefFilter.selectedItems = filter.prefs;
+                    onFilterChanged();
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+        }
+
+        private function setFilters(filter_str:String):void
+        {
+            Cmd.saveSettings(SETTINGS_CAROUSEL_FILTERS_KEY,
+                JSONx.stringify( { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems }, '', true));
+            onFilterChanged();
         }
     }
 }

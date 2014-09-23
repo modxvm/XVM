@@ -26,9 +26,9 @@ package com.xvm.io
         private static const COMMAND_LOADBATTLERESULTSSTAT:String = "loadBattleResultsStat";
         private static const COMMAND_LOADUSERDATA:String = "loadUserData";
         private static const COMMAND_GETDOSSIER:String = "getDossier";
+        private static const COMMAND_RETURN_CREW:String = "returnCrew";
         private static const COMMAND_OPEN_URL:String = "openUrl";
         private static const COMMAND_LOGSTAT:String = "logstat";
-        private static const COMMAND_RETURN_CREW:String = "returnCrew";
         private static const COMMAND_SAVE_SETTINGS:String = "save_settings";
         private static const COMMAND_LOAD_SETTINGS:String = "load_settings";
         private static const COMMAND_TEST:String = "test";
@@ -114,6 +114,11 @@ package com.xvm.io
             _call(null, null, [COMMAND_GETDOSSIER, battleType, playerId, vehId]);
         }
 
+        public static function returnCrew():void
+        {
+            _call(null, null, [COMMAND_RETURN_CREW]);
+        }
+
         public static function openUrl(url:String):void
         {
             _call(null, null, [COMMAND_OPEN_URL, url]);
@@ -124,19 +129,14 @@ package com.xvm.io
             _call(null, null, [COMMAND_LOGSTAT]);
         }
 
-        public static function returnCrew():void
+        public static function loadSettings(target:Object, callback:Function, key:String):void
         {
-            _call(null, null, [COMMAND_RETURN_CREW]);
+            _call(target, callback, [COMMAND_LOAD_SETTINGS, key]);
         }
 
-        public static function loadSettings(target:Object, callback:Function):void
+        public static function saveSettings(key:String, value:String):void
         {
-            _call(target, callback, [COMMAND_LOAD_SETTINGS]);
-        }
-
-        public static function saveSettings(settingsStr:String):void
-        {
-            _call(null, null, [COMMAND_SAVE_SETTINGS, settingsStr]);
+            _call(null, null, [COMMAND_SAVE_SETTINGS, key, value]);
         }
 
         public static function runTest(... args):void
