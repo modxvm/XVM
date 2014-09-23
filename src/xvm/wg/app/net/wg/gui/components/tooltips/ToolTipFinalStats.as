@@ -51,7 +51,6 @@ package net.wg.gui.components.tooltips
         private function setData() : void
         {
             var _loc1_:ToolTipFinalStatsVO = null;
-            var _loc6_:ILocale = null;
             _loc1_ = new ToolTipFinalStatsVO(_data);
             this.disabled = _loc1_.disabled;
             contentMargin.top = 17;
@@ -68,7 +67,7 @@ package net.wg.gui.components.tooltips
                 _loc4_ = "<br/><font size=\"4\"> </font><br/>";
             }
             var _loc5_:* = "";
-            _loc6_ = App.utils.locale;
+            var _loc6_:ILocale = App.utils.locale;
             switch(_loc1_.type)
             {
                 case ToolTipFinalStatsVO.TYPE_KILL:

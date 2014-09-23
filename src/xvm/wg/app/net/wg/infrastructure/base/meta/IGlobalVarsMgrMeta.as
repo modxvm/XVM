@@ -11,6 +11,8 @@ package net.wg.infrastructure.base.meta
         
         function isShowServerStatsS() : Boolean;
         
+        function isShowServersListS() : Boolean;
+        
         function isChinaS() : Boolean;
         
         function isKoreaS() : Boolean;

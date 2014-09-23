@@ -2596,7 +2596,17 @@ package
         
         public static var MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_36:String = "../maps/icons/tankmen/icons/barracks/usa-36.png";
         
+        public static var MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_37:String = "../maps/icons/tankmen/icons/barracks/usa-37.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_38:String = "../maps/icons/tankmen/icons/barracks/usa-38.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_39:String = "../maps/icons/tankmen/icons/barracks/usa-39.png";
+        
         public static var MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_4:String = "../maps/icons/tankmen/icons/barracks/usa-4.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_40:String = "../maps/icons/tankmen/icons/barracks/usa-40.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_41:String = "../maps/icons/tankmen/icons/barracks/usa-41.png";
         
         public static var MAPS_ICONS_TANKMEN_ICONS_BARRACKS_USA_5:String = "../maps/icons/tankmen/icons/barracks/usa-5.png";
         
@@ -3008,7 +3018,17 @@ package
         
         public static var MAPS_ICONS_TANKMEN_ICONS_BIG_USA_36:String = "../maps/icons/tankmen/icons/big/usa-36.png";
         
+        public static var MAPS_ICONS_TANKMEN_ICONS_BIG_USA_37:String = "../maps/icons/tankmen/icons/big/usa-37.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_BIG_USA_38:String = "../maps/icons/tankmen/icons/big/usa-38.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_BIG_USA_39:String = "../maps/icons/tankmen/icons/big/usa-39.png";
+        
         public static var MAPS_ICONS_TANKMEN_ICONS_BIG_USA_4:String = "../maps/icons/tankmen/icons/big/usa-4.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_BIG_USA_40:String = "../maps/icons/tankmen/icons/big/usa-40.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_BIG_USA_41:String = "../maps/icons/tankmen/icons/big/usa-41.png";
         
         public static var MAPS_ICONS_TANKMEN_ICONS_BIG_USA_5:String = "../maps/icons/tankmen/icons/big/usa-5.png";
         
@@ -3422,7 +3442,17 @@ package
         
         public static var MAPS_ICONS_TANKMEN_ICONS_SMALL_USA_36:String = "../maps/icons/tankmen/icons/small/usa-36.png";
         
+        public static var MAPS_ICONS_TANKMEN_ICONS_SMALL_USA_37:String = "../maps/icons/tankmen/icons/small/usa-37.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_SMALL_USA_38:String = "../maps/icons/tankmen/icons/small/usa-38.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_SMALL_USA_39:String = "../maps/icons/tankmen/icons/small/usa-39.png";
+        
         public static var MAPS_ICONS_TANKMEN_ICONS_SMALL_USA_4:String = "../maps/icons/tankmen/icons/small/usa-4.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_SMALL_USA_40:String = "../maps/icons/tankmen/icons/small/usa-40.png";
+        
+        public static var MAPS_ICONS_TANKMEN_ICONS_SMALL_USA_41:String = "../maps/icons/tankmen/icons/small/usa-41.png";
         
         public static var MAPS_ICONS_TANKMEN_ICONS_SMALL_USA_5:String = "../maps/icons/tankmen/icons/small/usa-5.png";
         

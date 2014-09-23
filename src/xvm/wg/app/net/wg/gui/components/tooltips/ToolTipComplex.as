@@ -146,7 +146,6 @@ package net.wg.gui.components.tooltips
     
     private function setContent(param1:Object) : void
     {
-        var _loc6_:* = NaN;
         this._leftMargin = 10;
         this._rightMargin = 10;
         this._topMargin = 6;
@@ -155,7 +154,7 @@ package net.wg.gui.components.tooltips
         var _loc3_:Number = this.contTopMargin;
         var _loc4_:Number = 0;
         var _loc5_:TextFormat = new TextFormat();
-        _loc6_ = 10;
+        var _loc6_:Number = 10;
         var _loc7_:Number = this._minWidth == 0?500:this._minWidth;
         var _loc8_:TextField = new TextField();
         _loc8_.x = this.contLeftMargin;

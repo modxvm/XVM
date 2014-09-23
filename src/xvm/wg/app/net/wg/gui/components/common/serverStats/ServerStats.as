@@ -46,7 +46,9 @@ package net.wg.gui.components.common.serverStats
         {
             super.configUI();
             this.textField.text = MENU.LOBBY_MENU_SERVERS_TITLE;
+            this.serverInfo.visible = App.globalVarsMgr.isShowServerStatsS();
             this.serverInfo.focusable = false;
+            this.regionDD.visible = App.globalVarsMgr.isShowServersListS();
         }
         
         override protected function draw() : void
@@ -62,16 +64,23 @@ package net.wg.gui.components.common.serverStats
             }
             if(isInvalid(INVALIDATE_SERVERS))
             {
-                this.regionDD.removeEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
-                this.setupServersData(this._serversList);
-                this.regionDD.addEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
+                if(!App.globalVarsMgr.isShowServersListS())
+                {
+                    this.updateOneServer(this._serversList);
+                }
+                else
+                {
+                    this.regionDD.removeEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
+                    this.setupServersData(this._serversList);
+                    this.regionDD.addEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
+                }
             }
         }
         
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            if(isCSISUpdateOnRequestS())
+            if((isCSISUpdateOnRequestS()) && (App.globalVarsMgr.isShowServersListS()))
             {
                 this.regionDD.addEventListener(DropdownMenuEvent.SHOW_DROP_DOWN,this.onServersDDClick);
                 this.regionDD.addEventListener(DropdownMenuEvent.CLOSE_DROP_DOWN,this.onServersDDClick);
@@ -81,15 +90,19 @@ package net.wg.gui.components.common.serverStats
         override protected function onDispose() : void
         {
             var _loc1_:String = null;
-            this.regionDD.removeEventListener(DropdownMenuEvent.SHOW_DROP_DOWN,this.onServersDDClick);
-            this.regionDD.removeEventListener(DropdownMenuEvent.CLOSE_DROP_DOWN,this.onServersDDClick);
-            this.regionDD.removeEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
+            if(App.globalVarsMgr.isShowServersListS())
+            {
+                this.regionDD.removeEventListener(DropdownMenuEvent.SHOW_DROP_DOWN,this.onServersDDClick);
+                this.regionDD.removeEventListener(DropdownMenuEvent.CLOSE_DROP_DOWN,this.onServersDDClick);
+                this.regionDD.removeEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
+            }
             for(_loc1_ in this._serverInfoData)
             {
                 delete this._serverInfoData[_loc1_];
                 true;
             }
             this._serverInfoData = null;
+            this.serverInfo.dispose();
             this.regionDD = null;
             super.onDispose();
         }
@@ -98,11 +111,34 @@ package net.wg.gui.components.common.serverStats
         {
             if(!param1)
             {
-                this.regionDD.removeEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
                 this._serversList = getServersS();
-                this.setupServersData(this._serversList);
-                this.regionDD.addEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
+                if(!App.globalVarsMgr.isShowServersListS())
+                {
+                    this.updateOneServer(this._serversList);
+                }
+                else
+                {
+                    this.regionDD.removeEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
+                    this.setupServersData(this._serversList);
+                    this.regionDD.addEventListener(ListEvent.INDEX_CHANGE,this.changeRegion);
+                }
             }
+        }
+        
+        private function updateOneServer(param1:Array) : void
+        {
+            var _loc2_:* = "";
+            var _loc3_:Number = 0;
+            while(_loc3_ < param1.length)
+            {
+                if(param1[_loc3_].selected)
+                {
+                    _loc2_ = param1[_loc3_].label;
+                    break;
+                }
+                _loc3_++;
+            }
+            this.textField.htmlText = App.utils.locale.makeString(MENU.LOBBY_MENU_SERVERS_TITLE) + " <font color=\"#8C8C7C\">" + _loc2_ + "</font>";
         }
         
         public function as_setServersList(param1:Array) : void
@@ -140,9 +176,8 @@ package net.wg.gui.components.common.serverStats
         
         private function setupServersData(param1:Array) : void
         {
-            var _loc2_:DataProvider = null;
             var _loc5_:ServerVO = null;
-            _loc2_ = new DataProvider();
+            var _loc2_:DataProvider = new DataProvider();
             var _loc3_:* = -1;
             var _loc4_:* = 0;
             while(_loc4_ < param1.length)

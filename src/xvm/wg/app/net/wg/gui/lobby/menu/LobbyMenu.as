@@ -37,6 +37,12 @@ package net.wg.gui.lobby.menu
         
         public var cancelBtn:SoundButtonEx;
         
+        private var STATE_SHOW_ALL:String = "showAll";
+        
+        private var STATE_HIDE_SERVER_STATS:String = "_server_stats";
+        
+        private var STATE_HIDE_SERVERS_LIST:String = "_servers_list";
+        
         override public function updateStage(param1:Number, param2:Number) : void
         {
             super.updateStage(param1,param2);
@@ -44,6 +50,10 @@ package net.wg.gui.lobby.menu
         
         override protected function onPopulate() : void
         {
+            var _loc1_:String = App.globalVarsMgr.isShowServerStatsS()?"":this.STATE_HIDE_SERVER_STATS;
+            _loc1_ = _loc1_ + (App.globalVarsMgr.isShowServersListS()?"":this.STATE_HIDE_SERVERS_LIST);
+            _loc1_ = _loc1_ == ""?this.STATE_SHOW_ALL:"hide" + _loc1_;
+            this.gotoAndPlay(_loc1_);
             MovieClip(window.getBackground()).tabEnabled = false;
             MovieClip(window.getBackground()).tabChildren = false;
             this.logoffBtn.addEventListener(ButtonEvent.PRESS,this.onLogoffClick);

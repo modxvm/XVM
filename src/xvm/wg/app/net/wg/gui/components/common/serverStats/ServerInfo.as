@@ -5,8 +5,10 @@ package net.wg.gui.components.common.serverStats
     import flash.text.TextField;
     import net.wg.gui.components.advanced.InviteIndicator;
     import flash.display.Sprite;
+    import flash.display.DisplayObject;
     import flash.events.MouseEvent;
     import net.wg.utils.ILocale;
+    import scaleform.clik.constants.InvalidationType;
     
     public class ServerInfo extends UIComponent
     {
@@ -26,7 +28,7 @@ package net.wg.gui.components.common.serverStats
         
         private static var TYPE_FULL:String = "regionCCU/clusterCCU";
         
-        private static var CURRENT_SERVER_TEXT_COLOR:String = "#8C8C7C";
+        private static var CURRENT_SERVER_TEXT_COLOR:String = "#E9E2BF";
         
         public var hitMc:MovieClip;
         
@@ -39,6 +41,8 @@ package net.wg.gui.components.common.serverStats
         public var tooltipType:String = "regionCCU/clusterCCU";
         
         public var tooltipFullData:String = "";
+        
+        private var _relativelyOwner:DisplayObject = null;
         
         override protected function onDispose() : void
         {
@@ -81,6 +85,16 @@ package net.wg.gui.components.common.serverStats
                 this.hitMc.width = this.pCount.x + this.pCount.textWidth - this.hitMc.x + 15;
             }
             this.updateVisibility(!(_loc2_ == "") && (App.instance.globalVarsMgr.isShowServerStatsS()));
+            invalidateSize();
+        }
+        
+        override protected function draw() : void
+        {
+            super.draw();
+            if((isInvalid(InvalidationType.SIZE)) && (this._relativelyOwner))
+            {
+                this.x = this._relativelyOwner.x + (this._relativelyOwner.width - this.hitMc.width >> 1) ^ 0;
+            }
         }
         
         public function hideTooltip(param1:Object) : void
@@ -116,6 +130,17 @@ package net.wg.gui.components.common.serverStats
             this.icon.visible = param1;
             this.pCount.visible = param1;
             this.waiting.visible = !param1;
+        }
+        
+        public function get relativelyOwner() : DisplayObject
+        {
+            return this._relativelyOwner;
+        }
+        
+        public function set relativelyOwner(param1:DisplayObject) : void
+        {
+            this._relativelyOwner = param1;
+            invalidateSize();
         }
     }
 }

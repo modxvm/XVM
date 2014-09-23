@@ -17,6 +17,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var isShowServerStats:Function = null;
         
+        public var isShowServersList:Function = null;
+        
         public var isChina:Function = null;
         
         public var isKorea:Function = null;
@@ -59,6 +61,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.isShowServerStats,"isShowServerStats" + Errors.CANT_NULL);
             return this.isShowServerStats();
+        }
+        
+        public function isShowServersListS() : Boolean
+        {
+            App.utils.asserter.assertNotNull(this.isShowServersList,"isShowServersList" + Errors.CANT_NULL);
+            return this.isShowServersList();
         }
         
         public function isChinaS() : Boolean

@@ -44,13 +44,12 @@ package net.wg.gui.components.tooltips
         
         override protected function redraw() : void
         {
-            var _loc3_:ToolTipSettingsButtonVO = null;
             var _loc4_:* = NaN;
             topPosition = bgShadowMargin.top + contentMargin.top;
             var _loc1_:Separator = null;
             separators = new Vector.<Separator>();
             var _loc2_:Number = 5;
-            _loc3_ = new ToolTipSettingsButtonVO(_data);
+            var _loc3_:ToolTipSettingsButtonVO = new ToolTipSettingsButtonVO(_data);
             this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc3_.name,Utils.instance.COLOR_HEADER,18,"$TitleFont");
             this.headerTF.width = this.headerTF.textWidth + _loc2_;
             this.descriptionTF.multiline = true;
@@ -62,9 +61,16 @@ package net.wg.gui.components.tooltips
             this.serverNameHeader.width = this.serverNameHeader.textWidth + _loc2_;
             this.serverName.text = _loc3_.serverName;
             this.serverName.width = this.serverName.textWidth + _loc2_;
-            this.serverStatsHeader.htmlText = Utils.instance.htmlWrapper(_loc3_.playersOnServer,Utils.instance.COLOR_BLOCK_HEADER,14,"$TitleFont",true);
+            if(!App.globalVarsMgr.isShowServerStatsS())
+            {
+                this.serverStatsHeader.text = "";
+            }
+            else
+            {
+                this.serverStatsHeader.htmlText = Utils.instance.htmlWrapper(_loc3_.playersOnServer,Utils.instance.COLOR_BLOCK_HEADER,14,"$TitleFont",true);
+                this.serverInfo.setValues(_loc3_.servers);
+            }
             this.serverStatsHeader.width = this.serverStatsHeader.textWidth + _loc2_;
-            this.serverInfo.setValues(_loc3_.servers);
             _loc4_ = contentMargin.left + bgShadowMargin.left;
             this.headerTF.x = _loc4_;
             this.headerTF.y = topPosition;
@@ -83,12 +89,24 @@ package net.wg.gui.components.tooltips
             this.serverName.x = _loc4_;
             this.serverName.y = topPosition;
             topPosition = topPosition + (this.serverNameHeader.textHeight + Utils.instance.MARGIN_AFTER_BLOCK ^ 0);
-            this.serverStatsHeader.x = _loc4_;
-            this.serverStatsHeader.y = topPosition;
-            topPosition = topPosition + (this.serverStatsHeader.textHeight + MARGIN_AFTER_SUBHEADER ^ 0);
-            this.serverInfo.x = _loc4_;
-            this.serverInfo.y = topPosition;
-            topPosition = topPosition + (this.serverInfo.height + Utils.instance.MARGIN_AFTER_BLOCK ^ 0);
+            if(!App.globalVarsMgr.isShowServerStatsS())
+            {
+                this.serverStatsHeader.x = 0;
+                this.serverStatsHeader.y = 0;
+                this.serverStatsHeader.visible = false;
+                this.serverInfo.x = 0;
+                this.serverInfo.y = 0;
+                this.serverInfo.visible = false;
+            }
+            else
+            {
+                this.serverStatsHeader.x = _loc4_;
+                this.serverStatsHeader.y = topPosition;
+                topPosition = topPosition + (this.serverStatsHeader.textHeight + MARGIN_AFTER_SUBHEADER ^ 0);
+                this.serverInfo.x = _loc4_;
+                this.serverInfo.y = topPosition;
+                topPosition = topPosition + (this.serverInfo.height + Utils.instance.MARGIN_AFTER_BLOCK ^ 0);
+            }
             this.whiteBg.height = topPosition - this.whiteBg.y;
             contentMargin.bottom = 0;
             _loc3_.dispose();

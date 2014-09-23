@@ -8,6 +8,7 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.lobby.hangar.ammunitionPanel.AmmunitionPanel;
     import flash.display.Sprite;
     import net.wg.gui.lobby.header.QuestsControl;
+    import net.wg.gui.components.common.serverStats.ServerInfo;
     import flash.display.DisplayObject;
     import net.wg.data.Aliases;
     import flash.ui.Keyboard;
@@ -27,6 +28,7 @@ package net.wg.gui.lobby.hangar
         public function Hangar()
         {
             super();
+            this.serverInfo.visible = this.serverInfoBg.visible = App.globalVarsMgr.isShowServerStatsS();
         }
         
         private static var CAROUSEL_AMMUNITION_PADDING:int = 7;
@@ -36,6 +38,8 @@ package net.wg.gui.lobby.hangar
         private static var RESEARCH_PANEL_RIGHT_MARGIN:int = 290;
         
         private static var MESSENGER_BAR_PADDING:int = 45;
+        
+        public static var INVALIDATE_SERVER_INFO:String = "serverInfo";
         
         private static var INVALIDATE_ENABLED_CREW:String = "InvalidateEnabledCrew";
         
@@ -59,6 +63,12 @@ package net.wg.gui.lobby.hangar
         
         public var questsControl:QuestsControl;
         
+        public var serverInfo:ServerInfo;
+        
+        public var serverInfoBg:Sprite;
+        
+        private var _serverInfoData:Object = null;
+        
         private var _isShowHelpLayout:Boolean = false;
         
         private var crewEnabled:Boolean = true;
@@ -81,6 +91,7 @@ package net.wg.gui.lobby.hangar
                 this.bottomBg.width = _originalWidth;
             }
             this.updateIgrPosition();
+            this.updatePlayerCounterPosition();
             if(this.params)
             {
                 this.params.x = param1 - this.params.width - PARAMS_RIGHT_MARGIN;
@@ -100,6 +111,17 @@ package net.wg.gui.lobby.hangar
             {
                 this.as_closeHelpLayout();
             }
+        }
+        
+        public function as_setServerStats(param1:Object) : void
+        {
+            this._serverInfoData = param1;
+            invalidate(INVALIDATE_SERVER_INFO);
+        }
+        
+        public function as_setServerStatsInfo(param1:String) : void
+        {
+            this.serverInfo.tooltipFullData = param1;
         }
         
         public function as_setCrewEnabled(param1:Boolean) : void
@@ -211,10 +233,12 @@ package net.wg.gui.lobby.hangar
             {
                 registerComponent(this.vehResearchPanel,Aliases.RESEARCH_PANEL);
             }
+            this.igrLabel.y = App.globalVarsMgr.isShowServerStatsS()?51:43;
         }
         
         override protected function onDispose() : void
         {
+            var _loc1_:String = null;
             App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
             this.igrLabel.removeEventListener(MouseEvent.ROLL_OVER,this.onIgrRollOver);
             this.igrLabel.removeEventListener(MouseEvent.ROLL_OUT,this.onIgrRollOut);
@@ -237,12 +261,20 @@ package net.wg.gui.lobby.hangar
             this.igrLabel.dispose();
             this.igrLabel = null;
             this.questsControl = null;
+            for(_loc1_ in this._serverInfoData)
+            {
+                delete this._serverInfoData[_loc1_];
+                true;
+            }
+            this._serverInfoData = null;
+            this.serverInfo.dispose();
             super.onDispose();
         }
         
         override protected function configUI() : void
         {
             super.configUI();
+            this.serverInfo.relativelyOwner = this.serverInfoBg;
             App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.REGISTER_DRAGGING));
             this.updateStage(parent.width,parent.height);
             this.params.mouseEnabled = false;
@@ -271,6 +303,10 @@ package net.wg.gui.lobby.hangar
                 this.crew.enabled = this.crewEnabled;
                 this.crewOperationBtn.enabled = this.crewEnabled;
             }
+            if(isInvalid(INVALIDATE_SERVER_INFO))
+            {
+                this.serverInfo.setValues(this._serverInfoData);
+            }
         }
         
         private function updateIgrPosition() : void
@@ -279,6 +315,12 @@ package net.wg.gui.lobby.hangar
             {
                 this.igrLabel.x = width - this.igrLabel.width >> 1;
             }
+        }
+        
+        private function updatePlayerCounterPosition() : void
+        {
+            this.serverInfoBg.x = width - this.serverInfoBg.width >> 1;
+            this.serverInfo.invalidateSize();
         }
         
         private function closeLayoutHandler() : void

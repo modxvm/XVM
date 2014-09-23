@@ -1,4 +1,4 @@
-﻿XVM-5.3.5-dev:
+﻿XVM-5.3.5:
   * адаптация к WoT 0.9.3
   * изменены значения dmg-kind:
       shot, fire, ramming, world_collision, death_zone, drowning, other
