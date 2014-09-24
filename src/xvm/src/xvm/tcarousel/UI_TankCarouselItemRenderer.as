@@ -48,7 +48,11 @@ package xvm.tcarousel
                     var id:Number = dataVO.compactDescr;
                     var dossier:AccountDossier = Dossier.getAccountDossier();
                     if (dossier != null)
-                        ExtraFields.updateVehicleExtraFields(extraFields, dossier.getVehicleDossierCut(id));
+                    {
+                        var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(id);
+                        vdata.elite = dataVO.elite ? "elite" : null;
+                        ExtraFields.updateVehicleExtraFields(extraFields, vdata);
+                    }
                 }
             }
             catch (ex:Error)

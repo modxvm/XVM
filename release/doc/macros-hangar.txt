@@ -32,6 +32,7 @@ Legend:
 │ {{v.battletiermax}}        │ X │ . │ maximal vehicle battle tier
 │ {{v.nation}}               │ X │ . │ vehicle nation
 │ {{v.premium}}              │ X │ . │ 'premium' for premium, empty for normal vehicle
+│ {{v.elite}}                │ X │ . │ 'elite' for elite, empty for normal vehicle
 │ {{v.maxHP}}                │ X │ . │ maximum vehicle health points
 │ {{v.winrate}}              │ X │ . │ vehicle win rate (percent of wins on this vehicle)
 │ {{v.hitsRatio}}            │ X │ . │ percent of hits

@@ -120,5 +120,8 @@ package com.xvm.types.dossier
         public var wn8expd:Number;
         public var wn8effd:Number;
         public var c_wn8effd:String;
+
+        // extra
+        public var elite:String;
     }
 }
