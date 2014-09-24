@@ -55,7 +55,7 @@ package com.xvm.types.dossier
                 var vdossier:VehicleDossier = Dossier.getVehicleDossier(vehId);
                 if (vdossier != null)
                 {
-                    hitsRatio = vdossier.hitsRatio;
+                    hitsRatio = vdossier.hitsRatio * 100;
                     tdb = vdossier.avgDamageDealt;
                     c_tdb = MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, tdb, "#");
                     tdv = vdossier.damageDealt / (battles * maxHP);
