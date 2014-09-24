@@ -14,6 +14,8 @@ package com.xvm.types.dossier
 
             this.vehId  = vehId;
 
+            this.xp /= battles;
+
             update();
         }
 
@@ -46,7 +48,6 @@ package com.xvm.types.dossier
             {
                 kb = battles / 1000.0;
                 hb = battles / 100.0;
-                xp /= battles;
                 c_battles = MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, battles, "#");
                 winrate = wins / battles * 100;
                 c_winrate = MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, winrate, "#");
