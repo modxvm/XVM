@@ -24,7 +24,7 @@ from loadurl import loadUrl
 _wn8ExpectedData = None
 
 def _load():
-    res = None
+    res = {}
     try:
         (response, duration) = loadUrl(__WN8_EXPECTED_DATA_URL)
         if not response:
@@ -40,8 +40,7 @@ def _load():
                     res[n] = x
             except Exception, ex:
                 err('  Bad answer: ' + response)
-                data = None
-                res = None
+                res = {}
     except Exception, ex:
         err(traceback.format_exc())
 
@@ -50,5 +49,6 @@ def _load():
 
 import BigWorld
 def _init():
+    global _wn8ExpectedData
     _wn8ExpectedData = _load()
 BigWorld.callback(1, _init)
