@@ -257,7 +257,7 @@ package xvm.profile.components
                 ratingTF.x -= 20;
             ratingTF.y = /*proxy.battlesDL.y - 62*/0;
             ratingTF.width = 400;
-            ratingTF.height = 80;
+            ratingTF.height = 200;
             ratingTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
             proxy.addChild(ratingTF);
         }
@@ -426,7 +426,10 @@ package xvm.profile.components
                     color(App.utils.locale.integer(data.stat.e), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "\n";
 
                 s += Locale.get("Avg level") + ": " + (!data.stat.lvl ? "-" :
-                    color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + " ";
+                    color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + "\n";
+
+                // TODO: temporary solution
+                s += "\n<font size='7'>\n\n\n</font>\t\t      " + formatHtmlText(size(getWinsToNextPercentStr(data)), Defines.UICOLOR_LABEL);
 
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
             }
@@ -658,7 +661,6 @@ package xvm.profile.components
             */
         }
 
-        /*
         private function getWinsToNextPercentStr(data:DossierBase):String
         {
             // Wins to next percent
@@ -690,7 +692,6 @@ package xvm.profile.components
 
             return info;
         }
-        */
 
         /*
         private function showExtraData(data:DossierBase):void
