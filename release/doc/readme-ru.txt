@@ -31,7 +31,6 @@
   Поддержка:    http://www.koreanrandom.com/forum/forum/43-xvm/
   FAQ:          http://www.modxvm.com/faq/
   Конфиги:      http://www.koreanrandom.com/forum/forum/50-custom-configurations/
-  Редактор:     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
 -----------------------------------------------------------
 2. УСТАНОВКА
@@ -48,7 +47,6 @@
 
     Увидеть все возможные настройки можно в папке
       \res_mods\xvm\configs\@Default\
-    Или воспользоваться онлайн-редактором: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
     Внимание: если вы меняете конфиг вручную, используйте Блокнот (notepad),
     НЕ используйте word, wordpad и подобные редакторы
@@ -77,8 +75,6 @@
   Конфигурационные файлы мода:
     \res_mods\xvm\configs\@Default\
   Можно скопировать готовый конфиг из папки \res_mods\xvm\configs\user configs\
-  Можно создать новый конфиг с помощью онлайн-редактора:
-    http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
   Все возможные параметры конфига можно посмотреть в конфиге с русскими комментариями,
   который находится в папке документации в архиве мода:

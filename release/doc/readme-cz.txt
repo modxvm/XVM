@@ -32,7 +32,6 @@
   Podpora (EN):                 http://www.koreanrandom.com/forum/topic/1383-xvm
   Nejčastější dotazy (EN):      http://www.modxvm.com/en/faq/
   Různá již připravená nastavení (RU): http://www.koreanrandom.com/forum/forum/50-custom-configurations
-  Online editor (EN):           http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
 
 -----------------------------------------------------------
@@ -46,9 +45,6 @@
   2.  Nemusíte nic nastavovat.
     Pokud chcete nějaké jiné, než výchozí nastavení, musíte přejmenovat výchozí soubor s nastavením
     "\res_mods\xvm\configs\xvm.xc.sample" na "xvm.xc" v adresáři hry.
-
-    Můžete použít online editor:
-      http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
     Všechna možná nastavení můžete najít v souborech ve složce:
       "\res_mods\xvm\configs\@Default\"
@@ -87,9 +83,6 @@
 
   Můžete použít některé z připravených souborů s nastavením ze složky:
     "\res_mods\xvm\configs\user configs\"
-
-  Můžete si vytvořit vlastní nastavení v online editoru:
-    http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
   Všechny možnosti nastavení můžete vidět ve složce:
     "\res_mods\xvm\configs\@Default\"

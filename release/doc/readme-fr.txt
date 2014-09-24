@@ -33,8 +33,6 @@
   Support :           http://www.koreanrandom.com/forum/topic/1383-xvm (en anglais)
   FAQ :               http://www.modxvm.com/fr/faq/
   Configurations :    http://www.koreanrandom.com/forum/forum/50-custom-configurations (en anglais)
-  Editeur de config : http://www.koreanrandom.com/forum/topic/1422-/#entry11316
-
 
 -----------------------------------------------------------
 2. INSTALLATION
@@ -53,8 +51,6 @@
 
     Toutes les options de configuration sont localisées dans
       \res_mods\xvm\configs\@Default\
-    Mais vous pouvez également utiliser l'éditeur en ligne : 
-      http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
     Note : Si vous voulez modifier la configuration manuellement, utilisez le 
     Bloc-notes Windows ou Notepad++, mais n'utilisez PAS de logiciels de 
@@ -91,9 +87,6 @@
   Vous pouvez utiliser des configurations toutes faites dans le dossier
     \res_mods\xvm\configs\user configs\
   Vous pouvez créer une nouvelle configuration ou en éditer une déjà existante à
-  l'aide de l'éditeur en ligne :
-    http://www.koreanrandom.com/forum/topic/1422-/#entry11316
-
 
   Balises HTML supportées :
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText (en anglais)

@@ -35,9 +35,6 @@ Zawartość:
   Wsparcie(PL):      http://forum.worldoftanks.eu/index.php?/topic/114684-pomoc-xvm-mod-temat-zbiorczy/
   FAQ:               http://www.modxvm.com/en/faq/
   Konfiguracje:      http://www.koreanrandom.com/forum/forum/50-custom-configurations
-  Edytor wizualny:   http://www.koreanrandom.com/forum/topic/1422-/#entry11316
-
-
 
 -----------------------------------------------------------
 2. INSTALACJA
@@ -58,7 +55,6 @@ Zawartość:
 
     Wszystkie możliwe opcje konfiguracji możesz znaleźć w:
       \res_mods\xvm\configs\@Default\
-    lub możesz użyć edytora: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
     WAŻNE: Jeśli konfigurujesz manualnie, używaj programów typu notatnik(czy innego edytora, który nie modyfikuje kodowania pliku - przykładowo notepad++), NIGDY nie używaj edytorów typu Word/Wordpad. Opcjonalnie możesz również użyć edytora XCPad(podświetla on tagi xvm): http://www.koreanrandom.com/forum/index.php?app=core&module=attach&section=attach&attach_id=22620
 
@@ -85,8 +81,6 @@ Zawartość:
   Pliki konfiguracyjne modyfikacji:
     \res_mods\xvm\configs\@Default\
   * Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\xvm\configs\user configs\ 
-  * Możesz utworzyć nową konfigurację lub edytować istniejącą w:
-    http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
   Wszystkie możliwe opcje konfiguracji znajdziesz tutaj:
     \res_mods\xvm\configs\@Default\
