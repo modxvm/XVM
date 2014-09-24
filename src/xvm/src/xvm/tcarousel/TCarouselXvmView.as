@@ -71,14 +71,9 @@ package xvm.tcarousel
             if (dossier != null)
             {
                 for (var vehId:String in dossier.vehicles)
-                    Dossier.loadVehicleDossier(this, onVehicleDossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, parseInt(vehId));
+                    Dossier.loadVehicleDossier(null, null, PROFILE.PROFILE_DROPDOWN_LABELS_ALL, parseInt(vehId));
             }
             page.carousel.invalidateData();
-        }
-
-        private function onVehicleDossierLoaded(dossier:VehicleDossier):void
-        {
-            //Logger.add("onVehicleDossierLoaded");
         }
     }
 }

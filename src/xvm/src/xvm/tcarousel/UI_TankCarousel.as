@@ -1,5 +1,6 @@
 package xvm.tcarousel
 {
+    import adobe.utils.CustomActions;
     import com.xvm.*;
     import com.xvm.controls.*;
     import com.xvm.io.*;
@@ -12,6 +13,7 @@ package xvm.tcarousel
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
+    import net.wg.gui.lobby.hangar.tcarousel.helper.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.events.*;
     import scaleform.clik.interfaces.*;
@@ -26,6 +28,8 @@ package xvm.tcarousel
         private static const SETTINGS_CAROUSEL_FILTERS_KEY:String = "tcarousel.filters";
 
         private var cfg:CCarousel;
+
+        private var _vehiclesVOManager:VehicleCarouselVOManager = null;
 
         private var levelFilter:LevelMultiSelectionDropDown;
         private var prefFilter:PrefMultiSelectionDropDown;
@@ -62,11 +66,20 @@ package xvm.tcarousel
             componentInspectorSetting = false;
         }
 
+        override protected function onDispose():void
+        {
+            this._vehiclesVOManager.clear();
+            this._vehiclesVOManager = null;
+            if (_baseDisposed)
+                return;
+            super.onDispose();
+        }
+
         override protected function configUI():void
         {
             super.configUI();
 
-            return; // temporary disabled
+            //return; // temporary disabled
             createFilters();
             Cmd.loadSettings(this, onFiltersLoaded, SETTINGS_CAROUSEL_FILTERS_KEY);
         }
@@ -84,68 +97,28 @@ package xvm.tcarousel
         }
 
         // TankCarousel
-        override public function as_setParams(param1:Object):void
+        override public function as_setParams(params:Object):void
         {
-            super.as_setParams(param1);
+            super.as_setParams(params);
             repositionAdvancedSlots();
             removeEmptySlots();
         }
 
-        override public function as_showVehicles(param1:Array):void
+        override public function as_updateVehicles(data:Object, initial:Boolean):void
         {
-            try
-            {
-                if (_renderers != null && levelFilter != null)
-                {
-                    //Logger.addObject(param1);
-                    for (var i:int = param1.length - 1; i >= 0; --i)
-                    {
-                        var vehId:int = param1[i];
+            //Logger.addObject(data);
+            if (!this._vehiclesVOManager)
+                this._vehiclesVOManager = new VehicleCarouselVOManager();
+            if (initial)
+                this._vehiclesVOManager.setData(data);
+            else
+                this._vehiclesVOManager.updateData(data);
+            super.as_updateVehicles(data, initial);
+        }
 
-                        var vdata:VehicleData = VehicleInfo.get(vehId);
-                        if (vdata == null)
-                            continue;
-
-                        var dossier:AccountDossier = Dossier.getAccountDossier();
-                        if (dossier == null)
-                            continue;
-                        var vdossier:VehicleDossierCut = dossier.getVehicleDossierCut(vehId);
-                        if (vdossier == null)
-                            continue;
-
-                        var renderer:TankCarouselItemRenderer = null;
-                        for (var n:int = 0; n < _renderers.length; ++n)
-                        {
-                            var r:TankCarouselItemRenderer = _renderers[n] as TankCarouselItemRenderer;
-                            if (r == null || r.dataVO == null)
-                                continue;
-                            if (r.dataVO.compactDescr == vehId)
-                            {
-                                renderer = r;
-                                break;
-                            }
-                        }
-                        if (renderer == null)
-                            continue;
-
-                        var remove:Boolean = false;
-                        remove = levelFilter.selectedItems.length > 0 && levelFilter.selectedItems.indexOf(vdata.level) < 0;
-                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_ELITE) >= 0 && renderer.dataVO.elite == false);
-                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0 && renderer.dataVO.premium == false);
-                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0 && renderer.dataVO.premium == true);
-                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_MULTIXP) >= 0 && renderer.dataVO.doubleXPReceived == true);
-                        remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NOMASTER) >= 0 && vdossier.mastery == 4);
-
-                        if (remove)
-                            param1.splice(i, 1);
-                    }
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
-            super.as_showVehicles(param1);
+        override public function as_showVehicles(vehIds:Array):void
+        {
+            super.as_showVehicles(applyXvmFilters(vehIds));
         }
 
         // Carousel
@@ -410,7 +383,8 @@ package xvm.tcarousel
 
         private function createFilters():void
         {
-            //return;
+            //Logger.add("createFilters");
+
             /*addChild(createLabel("Filter", 0, 0));
             filterTextInput = App.utils.classFactory.getComponent("TextInput", TextInput);
             filterTextInput.x = 0;
@@ -475,6 +449,7 @@ package xvm.tcarousel
 
         private function onFiltersLoaded(filter_str:String):void
         {
+            //Logger.add("onFilterLoaded: " + filter_str);
             try
             {
                 var filter:Object = JSONx.parse(filter_str);
@@ -491,11 +466,69 @@ package xvm.tcarousel
             }
         }
 
-        private function setFilters(filter_str:String):void
+        private function setFilters(e:ListEvent):void
         {
+            //Logger.add("setFilters");
             Cmd.saveSettings(SETTINGS_CAROUSEL_FILTERS_KEY,
                 JSONx.stringify( { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems }, '', true));
             onFilterChanged();
+        }
+
+        private function applyXvmFilters(vehIds:Array):Array
+        {
+            if (levelFilter == null)
+                return vehIds;
+
+            //Logger.add("applyXvmFilters: " + vehIds.length);
+            try
+            {
+                for (var i:int = vehIds.length - 1; i >= 0; --i)
+                {
+                    var vehId:int = vehIds[i];
+
+                    var vdata:VehicleData = VehicleInfo.get(vehId);
+                    if (vdata == null)
+                        continue;
+
+                    var dossier:AccountDossier = Dossier.getAccountDossier();
+                    if (dossier == null)
+                        continue;
+                    var vdossier:VehicleDossierCut = dossier.getVehicleDossierCut(vehId);
+                    if (vdossier == null)
+                        continue;
+
+                    var dataVO:VehicleCarouselVO = null;
+                    for (var j:int = 0; j < _vehiclesVOManager.getVehiclesLen(); ++j)
+                    {
+                        var vo:VehicleCarouselVO = _vehiclesVOManager.getVOByNum(j);
+                        if (vo != null && vo.compactDescr == vehId)
+                        {
+                            dataVO = vo;
+                            break;
+                        }
+                    }
+                    if (dataVO == null)
+                        continue;
+
+                    var remove:Boolean = false;
+                    remove = levelFilter.selectedItems.length > 0 && levelFilter.selectedItems.indexOf(vdata.level) < 0;
+                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_ELITE) >= 0 && dataVO.elite == false);
+                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0 && dataVO.premium == false);
+                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0 && dataVO.premium == true);
+                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_MULTIXP) >= 0 && dataVO.doubleXPReceived == true);
+                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NOMASTER) >= 0 && vdossier.mastery == 4);
+
+                    if (remove)
+                        vehIds.splice(i, 1);
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+
+            //Logger.add("< " + vehIds.length);
+            return vehIds;
         }
     }
 }

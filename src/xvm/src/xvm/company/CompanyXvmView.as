@@ -7,7 +7,6 @@ package xvm.company
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import net.wg.data.constants.generated.*;
-    import net.wg.gui.rally.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
     import net.wg.gui.events.*;
@@ -35,9 +34,6 @@ package xvm.company
                 return;
 
             page.stack.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);
-
-            //page.assignedList.itemRenderer = UI_TeamMemberRenderer;
-            //page.unassignedList.itemRenderer = UI_TeamMemberRenderer;
         }
 
         // PRIVATE
@@ -53,7 +49,7 @@ package xvm.company
                     new CompanyRoom(e.view);
                     break;
                 default:
-                    Logger.addObject(e);
+                    //Logger.addObject(e);
                     break;
             }
         }

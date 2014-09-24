@@ -6,8 +6,7 @@ package xvm.company.renderers
     import com.xvm.*;
     import com.xvm.types.stat.*;
     import com.xvm.utils.*;
-    import net.wg.gui.prebattle.squad.MessengerUtils;
-    import net.wg.utils.ILocale;
+    import net.wg.gui.prebattle.squad.*;
 
     public class TeamRendererHelper
     {

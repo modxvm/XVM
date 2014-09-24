@@ -5,12 +5,8 @@
 package xvm.company
 {
     import com.xvm.*;
-    import com.xvm.infrastructure.*;
-    import flash.events.*;
-    import flash.utils.*;
     import net.wg.gui.components.controls.*;
     import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.events.*;
     import net.wg.gui.prebattle.company.*;
     //import scaleform.clik.controls.CheckBox; // conflict with .*
     import xvm.company.UI.*;
