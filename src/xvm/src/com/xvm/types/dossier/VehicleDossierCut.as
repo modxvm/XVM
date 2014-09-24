@@ -72,6 +72,9 @@ package com.xvm.types.dossier
                         wn8effd = tdb / wn8expd;
                         c_wn8effd = MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8EFFD, wn8effd, "#");
                     }
+
+                    damageRating = vdossier.damageRating;
+                    marksOnGun = isNaN(vdossier.marksOnGun) || level < 5 ? null : Utils.getGunMarksText(vdossier.marksOnGun);
                 }
             }
         }
@@ -120,6 +123,8 @@ package com.xvm.types.dossier
         public var wn8expd:Number;
         public var wn8effd:Number;
         public var c_wn8effd:String;
+        public var damageRating:Number;
+        public var marksOnGun:String;
 
         // extra
         public var elite:String;

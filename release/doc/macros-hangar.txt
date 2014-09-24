@@ -48,6 +48,8 @@ Legend:
 │ {{v.wn8expd}}              │ X │ . │ WN8 expected tank damage
 │ {{v.wn8effd}}              │ X │ . │ WN8 effective tank damage (avgdmg / expected_dmg)
 │ {{v.c_wn8effd}}            │ X │ . │ dynamic color for this macro
+│ {{v.damageRating}}         │ X │ . │ damage rating in percents for marks on gun
+│ {{v.marksOnGun}}           │ X │ . │ marks on gun
 │ {{v.teff}}, {{v.e}}        │ . │ . │ player's per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
 │ {{v.c_e}}                  │ . │ . │ dynamic color for this macro
 │ {{v.equipment1}}           │ . │ . │ small icon of equipment in 1st slot
@@ -65,7 +67,5 @@ Legend:
 │ {{v.gunAvgHit}}            │ . │ . │ average penetration for current gun AP/CR/HE
 │ {{v.gunDispersion}}        │ . │ . │ base dispersion at 100 m for current gun
 │ {{v.gunAimingTime}}        │ . │ . │ base aiming time for current gun
-│ {{v.gunmarks}}             │ . │ . │ marks on gun
-│ {{v.gunMarksPercent}}      │ . │ . │ percents for next level of marks on gun
 │ {{l10n:ID}}                │ . │ . │ localizated text, see en.xc for id
 └────────────────────────────┴───┴───┴─────────────────────────────────

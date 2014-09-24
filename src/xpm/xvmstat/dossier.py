@@ -22,6 +22,7 @@ from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.locale.PROFILE import PROFILE
 from gui.shared import g_itemsCache
 from items import vehicles
+from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
 
 from xpm import *
 
@@ -158,7 +159,12 @@ class _Dossier(object):
             return res
 
         res = self._prepareCommonResult(dossier)
-        res['vehId'] = int(self.vehId)
+
+        res.update({
+            'vehId': int(self.vehId),
+            'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
+            'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
+        })
 
         #vehicle = g_itemsCache.items.getItemByCD(res['vehId'])
         #if vehicle is not None and vehicle.invID >= 0:

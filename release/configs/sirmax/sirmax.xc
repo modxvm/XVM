@@ -62,8 +62,8 @@
         { "x": 22, "y": 12, "format": "<font color='{{v.c_winrate}}'>{{v.winrate%d~%}}</font>", "shadow": {} },
         { "x": 0, "y": 28, "format": "<font color='{{v.c_wn8effd}}'>{{v.wn8effd%0.2f}}</font>", "shadow": {} },
         { "x": 0, "y": 42, "format": "<font color='{{v.c_battles}}'>{{v.battles}}</font>", "shadow": {} },
-        //{ "x": 0, "y": 54, "format": "<font color='{{v.c_type}}'>{{v.tdb}}</font>", "shadow": {} },
-        //{ "x": 0, "y": 54, "format": "<font color='{{v.c_type}}'>{{v.premium?1|0}}</font>", "shadow": {} },
+        { "x": 0, "y": 54, "format": "<font color='{{v.c_type}}'>{{v.marksOnGun|-}} ({{v.damageRating~%}})</font>", "shadow": {} },
+        //{ "x": 60, "y": 12, "format": "<font color='{{v.c_type}}'>{{v.premium?1|0}}</font>", "shadow": {} },
         //{ "x": -1, "y": 54, "format": "<img src='xvm://res/icons/xvm/16x16.png' width='16' height='16'>" },
         {}
       ]

@@ -336,5 +336,16 @@ package com.xvm.utils
                 cfg.blur,
                 cfg.strength);
         }
+
+        public static function getGunMarksText(value:Number):String
+        {
+            if (isNaN(value) || !Config.config.texts.gunMarks["_" + value])
+                return null;
+            var v:String = Config.config.texts.gunMarks["_" + value];
+            if (v.indexOf("{{l10n:") >= 0)
+                v = Locale.get(v);
+            return v;
+        }
+
     }
 }
