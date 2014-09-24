@@ -13,29 +13,36 @@ package xvm.company
     import net.wg.gui.prebattle.company.*;
     import xvm.company.UI.*;
 
-    public class CompanyWindowXvmView extends XvmViewBase
+    public class CompanyRoom
     {
-        public function CompanyWindowXvmView(view:IView)
+        private var view:CompanyRoomView;
+
+        public function CompanyRoom(view:IViewStackContent)
         {
-            super(view);
+            try
+            {
+                this.view = view as CompanyRoomView;
+                init();
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
-        public function get page():CompanyWindow
-        {
-            return super.view as CompanyWindow;
-        }
+        // PRIVATE
 
-        public override function onAfterPopulate(e:LifeCycleEvent):void
+        private function init():void
         {
-            //Logger.add("onAfterPopulate: " + view.as_alias);
+            Logger.add("init: " + view.as_getPyAlias());
 
             if (Config.config.rating.showPlayersStatistics != true)
                 return;
             if (Config.config.rating.enableCompanyStatistics != true)
                 return;
 
-            page.assignedList.itemRenderer = UI_TeamMemberRenderer;
-            page.unassignedList.itemRenderer = UI_TeamMemberRenderer;
+            view.assignedList.itemRenderer = UI_TeamMemberRenderer;
+            view.unassignedList.itemRenderer = UI_TeamMemberRenderer;
         }
     }
 }

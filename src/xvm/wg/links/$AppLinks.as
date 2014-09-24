@@ -32,7 +32,7 @@ import net.wg.gui.lobby.techtree.*; TechTreePage; ResearchPage;
 import net.wg.gui.lobby.window.*; ProfileWindow;
 import net.wg.gui.messenger.controls.*; MemberItemRenderer;
 import net.wg.gui.notification.*; NotificationListView;
-import net.wg.gui.prebattle.company.*; CompaniesListWindow; CompanyWindow;
+import net.wg.gui.prebattle.company.*; CompanyMainWindow; CompanyListView; CompanyRoomView;
 import net.wg.gui.prebattle.squad.*; SquadWindow; MessengerUtils;
 import net.wg.infrastructure.base.*; BaseViewWrapper;
 import net.wg.infrastructure.events.*; LoaderEvent; LifeCycleEvent;

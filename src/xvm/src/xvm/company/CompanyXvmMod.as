@@ -16,8 +16,7 @@ package xvm.company
 
         private static const _views:Object =
         {
-            "prb_windows/companiesWindow": CompaniesListWindowXvmView,
-            "prb_windows/companyWindow": CompanyWindowXvmView
+            "prb_windows/companyWindow": CompanyXvmView
         }
 
         public override function get views():Object
