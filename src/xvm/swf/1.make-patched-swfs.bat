@@ -14,8 +14,7 @@ echo %1.swf
 copy /Y flash\%n%.swf %n%.orig.swf > nul
 abcexport.exe %n%.orig.swf
 rabcdasm %n%.orig-0.abc
-rem 
-exit
+rem exit
 for %%i in (Application.*.patch) do (
   echo Apply patch: %%i
   patch --binary -p0 < %%i || (

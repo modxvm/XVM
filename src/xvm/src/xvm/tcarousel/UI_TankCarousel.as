@@ -1,6 +1,5 @@
 package xvm.tcarousel
 {
-    import adobe.utils.CustomActions;
     import com.xvm.*;
     import com.xvm.controls.*;
     import com.xvm.io.*;
