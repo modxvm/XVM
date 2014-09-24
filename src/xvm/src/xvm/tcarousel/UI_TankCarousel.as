@@ -95,7 +95,7 @@ package xvm.tcarousel
         {
             try
             {
-                if (_renderers != null && levelFilter == null)
+                if (_renderers != null && levelFilter != null)
                 {
                     //Logger.addObject(param1);
                     for (var i:int = param1.length - 1; i >= 0; --i)
