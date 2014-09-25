@@ -38,6 +38,8 @@ package xvm.hangar.components.BattleResults
 
             instance.compactQuests();
 
+            view.detailsMc.xpTitleLbl.width = 300;
+
             if (Config.config.battleResults.showExtendedInfo)
             {
                 instance.hideDetailBtn();
@@ -58,6 +60,8 @@ package xvm.hangar.components.BattleResults
             if (Config.config.battleResults.showNetIncome)
                 instance.showNetIncome(view.detailsMc.data);
         }
+
+        //
 
         public function CommonView()
         {
@@ -86,8 +90,8 @@ package xvm.hangar.components.BattleResults
         private const XP_IMG_TXT:String = " <IMG SRC='img://gui/maps/icons/library/XpIcon-1.png' width='16' height='16' vspace='-2'/>";
         private function showTotalExperience(data:Object):void
         {
-            var origXP:int = data.xp / (data.isPremium ? (data.premiumXPFactor10 / 10.0) : 1);
-            var premXP:int = data.xp * (data.isPremium ? 1 : (data.premiumXPFactor10 / 10.0));
+            var origXP:int = int(data.xpData[5]["col1"].split(' ')[0]);
+            var premXP:int = int(data.xpData[5]["col3"].split(' ')[0]);
             view.detailsMc.xpLbl.htmlText = App.utils.locale.integer(origXP) + XP_IMG_TXT;
             view.detailsMc.premXpLbl.htmlText = App.utils.locale.integer(premXP) + XP_IMG_TXT;
        }
@@ -332,47 +336,16 @@ package xvm.hangar.components.BattleResults
 
 /*
 view.detailsMc.data: {
-  "freeXP": 36,
-  "achievementsLeft": [
-    {
-      "isEpic": false,
-      "rare": false,
-      "description": "markOfMastery_descr",
-      "title": "Знак классности «3 степень»",
-      "customData": "",
-      "rareIconId": null,
-      "block": "achievements",
-      "icon": "../maps/icons/achievement/markOfMastery1.png",
-      "specialIcon": null,
-      "inactive": false,
-      "localizedValue": "1",
-      "rank": 1,
-      "unic": false,
-      "type": "markOfMastery"
-    }
-  ],
-  "damageAssistedRadio": 217,
-  "creditsPremStr": "39 408 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
-  "sniperDamageDealt": 2571,
+  "sniperDamageDealt": 0,
   "droppedCapturePoints": 0,
-  "damageRating": 44.1625,
   "creditsData": [
     {
-      "col3": "39 408 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+      "col3": "5 371 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
       "col4": "\n",
       "label": "Начислено за бой\n",
-      "col1": "26 272 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+      "col1": "3 581 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
       "lineType": "normalLine",
       "labelStripped": "Начислено за бой\n",
-      "col2": "\n"
-    },
-    {
-      "col3": "5 184 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
-      "col4": "\n",
-      "label": "За достойное сопротивление\n",
-      "col1": "3 456 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
-      "lineType": "normalLine",
-      "labelStripped": "За достойное сопротивление\n",
       "col2": "\n"
     },
     {
@@ -412,37 +385,19 @@ view.detailsMc.data: {
       "col2": "\n"
     },
     {
-      "col3": "44 592 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
-      "col4": "\n",
-      "label": "Итого за бой:\n",
-      "col1": "29 728 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
-      "lineType": "normalLine",
-      "labelStripped": "Итого за бой:\n",
-      "col2": "\n"
-    },
-    {
-      "col3": "\n",
-      "col4": "\n",
-      "label": "\n",
-      "col1": "\n",
-      "lineType": null,
-      "labelStripped": "\n",
-      "col2": "\n"
-    },
-    {
-      "col3": "<FONT color=\"#bc0000\">-11 000</FONT> <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+      "col3": "<FONT color=\"#bc0000\">-325</FONT> <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
       "col4": "\n",
       "label": "Автоматический ремонт техники\n",
-      "col1": "<FONT color=\"#bc0000\">-11 000</FONT> <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+      "col1": "<FONT color=\"#bc0000\">-325</FONT> <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
       "lineType": "normalLine",
       "labelStripped": "Автоматический ремонт техники\n",
       "col2": "\n"
     },
     {
-      "col3": "<FONT color=\"#bc0000\">-9 630</FONT> <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+      "col3": "<FONT color=\"#bc0000\">-75</FONT> <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
       "col4": "\n",
       "label": "Автопополнение боекомплекта\n",
-      "col1": "<FONT color=\"#bc0000\">-9 630</FONT> <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+      "col1": "<FONT color=\"#bc0000\">-75</FONT> <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
       "lineType": "normalLine",
       "labelStripped": "Автопополнение боекомплекта\n",
       "col2": "\n"
@@ -466,55 +421,34 @@ view.detailsMc.data: {
       "col2": "\n"
     },
     {
-      "col3": "23 962 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+      "col3": "4 971 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
       "col4": "<font color=\"#fbc062\">0</font> <IMG SRC=\"img://gui/maps/icons/library/GoldIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
       "label": "<font color=\"#d0ceb8\">Итого:</font>\n",
-      "col1": "9 098 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+      "col1": "3 181 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
       "lineType": "wideLine",
       "labelStripped": "Итого:\n",
       "col2": "<font color=\"#4d3d21\">0</font> <IMG SRC=\"img://gui/maps/icons/library/GoldIconInactive-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>"
     }
   ],
-  "xp": 744,
   "questsProgress": {
-    "RU_01-01_Sep_2014_q08": [
-      null,
-      "[object Object]",
-      "[object Object]"
-    ]
+
   },
-  "potentialDamageReceived": 1440,
-  "xpNoPremStr": "466 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+  "xp": 436,
+  "potentialDamageReceived": 168,
   "directTeamHits": 0,
-  "explosionHits": 0,
+  "xpNoPremStr": "354 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
   "eventCredits": 0,
-  "damageDealt": 3468,
-  "autoEquipCost": [
-    0,
-    0
-  ],
-  "isPrematureLeave": false,
-  "credits": 29728,
-  "igrXPFactor10": 10,
-  "marksOnGun": 0,
+  "credits": 3581,
+  "fortBuilding": null,
   "xpData": [
     {
-      "col3": "699 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
-      "col4": "34 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "col3": "177 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "col4": "7 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
       "label": "Начислено за бой\n",
-      "col1": "466 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "col1": "118 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
       "lineType": "wideLine",
       "labelStripped": "Начислено за бой\n",
-      "col2": "23 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>"
-    },
-    {
-      "col3": "417 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
-      "col4": "19 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
-      "label": "За достойное сопротивление\n",
-      "col1": "278 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
-      "lineType": "wideLine",
-      "labelStripped": "За достойное сопротивление\n",
-      "col2": "13 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>"
+      "col2": "5 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>"
     },
     {
       "col3": "0 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
@@ -526,6 +460,24 @@ view.detailsMc.data: {
       "col2": "\n"
     },
     {
+      "col3": "x3 <IMG SRC=\"img://gui/maps/icons/library/multyXp.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "col4": "x3 <IMG SRC=\"img://gui/maps/icons/library/multyXp.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "label": "Награда за первую победу в день\n",
+      "col1": "x3 <IMG SRC=\"img://gui/maps/icons/library/multyXp.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "lineType": "wideLine",
+      "labelStripped": "Награда за первую победу в день\n",
+      "col2": "x3 <IMG SRC=\"img://gui/maps/icons/library/multyXp.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>"
+    },
+    {
+      "col3": "82 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "col4": "0 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "label": "Награда за выполнение боевых задач\n",
+      "col1": "82 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "lineType": "wideLine",
+      "labelStripped": "Награда за выполнение боевых задач\n",
+      "col2": "<font color=\"#34322a\">0</font> <IMG SRC=\"img://gui/maps/icons/library/FreeXpIconInactive-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>"
+    },
+    {
       "col3": "\n",
       "col4": "\n",
       "label": "\n",
@@ -535,312 +487,56 @@ view.detailsMc.data: {
       "col2": "\n"
     },
     {
-      "col3": "1 116 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
-      "col4": "54 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "col3": "613 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "col4": "21 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
       "label": "<font color=\"#d0ceb8\">Итого:</font>\n",
-      "col1": "744 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+      "col1": "436 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
       "lineType": "wideLine",
       "labelStripped": "Итого:\n",
-      "col2": "36 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>"
+      "col2": "15 <IMG SRC=\"img://gui/maps/icons/library/FreeXpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>"
     }
   ],
-  "creditsPenalty": 0,
-  "damageReceived": 1100,
+  "achievementFreeXP": 0,
+  "igrXPFactor10": 10,
+  "marksOnGun": 0,
+  "damageReceived": 140,
   "tdamageDealt": 0,
-  "orderXP": 0,
-  "achievementFreeXP": 13,
-  "creditsPremTotalStr": "23 962 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
   "dossierType": null,
-  "damaged": 5,
   "premiumCreditsFactor10": 15,
-  "typeCompDescr": 16657,
+  "typeCompDescr": 54529,
   "aogasFactor10": 10,
-  "creditsContributionOut": 0,
-  "kills": 2,
-  "vehTypeLockTime": 0,
-  "premiumXPFactor10": 15,
-  "piercings": 8,
-  "autoRepairCost": 11000,
-  "achievementCredits": 3456,
-  "tmenXP": 744,
+  "kills": 0,
+  "piercings": 1,
+  "autoRepairCost": 325,
   "fortResource": null,
-  "directHitsReceived": 4,
-  "dossierCompDescr": null,
-  "hits": "8/8",
-  "tkills": 0,
-  "creditsNoPremStr": "26 272 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
-  "histAmmoCost": [
-    0,
-    0
-  ],
-  "details": [
-    {
-      "damageDealtNames": "Суммарный урон (ед.)<br/>Всего пробитий",
-      "playerFullName": "vlad7729 [GB11R]",
-      "criticalDevices": "<IMG SRC=\"img://gui/maps/icons/library/crits/ammoBayCriticalSmall.png\" width=\"16\" height=\"16\" vspace=\"-5\"/><font color=\"#7b7969\">Боеукладка</font><br/><IMG SRC=\"img://gui/maps/icons/library/crits/fuelTankCriticalSmall.png\" width=\"16\" height=\"16\" vspace=\"-5\"/><font color=\"#7b7969\">Топливный бак</font>",
-      "isAlly": false,
-      "directHits": 3,
-      "damageAssistedTrack": 0,
-      "destroyedTankmen": "",
-      "explosionHits": 0,
-      "damageDealt": 1465,
-      "critsCount": "2",
-      "crits": 6,
-      "fire": 0,
-      "damageDealtVals": "1 465<br/>3",
-      "damageAssisted": 0,
-      "balanceWeight": 48.00000190734863,
-      "killed": true,
-      "spotted": 1,
-      "damageAssistedVals": "0<br/>0",
-      "destroyedDevices": "",
-      "playerRegion": null,
-      "typeCompDescr": 5137,
-      "vehicleId": 18982890,
-      "playerName": "vlad7729",
-      "damageAssistedRadio": 0,
-      "damageAssistedNames": "По вашим разведданным (ед.)<br/>После попадания, сбившего гусеницу (ед.)",
-      "playerClan": "GB11R",
-      "isFake": false,
-      "vehicleName": "Tiger II",
-      "piercings": 3,
-      "deathReason": -1,
-      "tankIcon": "../maps/icons/vehicle/small/germany-PzVIB_Tiger_II.png"
-    },
-    {
-      "damageDealtNames": "Суммарный урон (ед.)<br/>Всего пробитий",
-      "playerFullName": "Evgeniy68",
-      "criticalDevices": "",
-      "isAlly": false,
-      "directHits": 1,
-      "damageAssistedTrack": 0,
-      "destroyedTankmen": "",
-      "explosionHits": 0,
-      "damageDealt": 415,
-      "critsCount": "0",
-      "crits": 0,
-      "fire": 0,
-      "damageDealtVals": "415<br/>1",
-      "damageAssisted": 0,
-      "balanceWeight": 48.00000190734863,
-      "killed": false,
-      "spotted": 1,
-      "damageAssistedVals": "0<br/>0",
-      "destroyedDevices": "",
-      "playerRegion": null,
-      "typeCompDescr": 9217,
-      "vehicleId": 18982891,
-      "playerName": "Evgeniy68",
-      "damageAssistedRadio": 0,
-      "damageAssistedNames": "По вашим разведданным (ед.)<br/>После попадания, сбившего гусеницу (ед.)",
-      "playerClan": "",
-      "isFake": false,
-      "vehicleName": "ИС-6",
-      "piercings": 1,
-      "deathReason": -1,
-      "tankIcon": "../maps/icons/vehicle/small/ussr-Object252.png"
-    },
-    {
-      "damageDealtNames": "Суммарный урон (ед.)<br/>Всего пробитий",
-      "playerFullName": "SHBB74 [15234]",
-      "criticalDevices": "",
-      "isAlly": false,
-      "directHits": 1,
-      "damageAssistedTrack": 0,
-      "destroyedTankmen": "",
-      "explosionHits": 0,
-      "damageDealt": 440,
-      "critsCount": "0",
-      "crits": 0,
-      "fire": 0,
-      "damageDealtVals": "440<br/>1",
-      "damageAssisted": 0,
-      "balanceWeight": 48,
-      "killed": true,
-      "spotted": 0,
-      "damageAssistedVals": "0<br/>0",
-      "destroyedDevices": "",
-      "playerRegion": null,
-      "typeCompDescr": 13345,
-      "vehicleId": 18982906,
-      "playerName": "SHBB74",
-      "damageAssistedRadio": 0,
-      "damageAssistedNames": "По вашим разведданным (ед.)<br/>После попадания, сбившего гусеницу (ед.)",
-      "playerClan": "15234",
-      "isFake": false,
-      "vehicleName": "T26E4",
-      "piercings": 1,
-      "deathReason": -1,
-      "tankIcon": "../maps/icons/vehicle/small/usa-T26_E4_SuperPershing.png"
-    },
-    {
-      "damageDealtNames": "Суммарный урон (ед.)<br/>Всего пробитий",
-      "playerFullName": "rosia1947",
-      "criticalDevices": "",
-      "isAlly": false,
-      "directHits": 2,
-      "damageAssistedTrack": 0,
-      "destroyedTankmen": "",
-      "explosionHits": 0,
-      "damageDealt": 666,
-      "critsCount": "0",
-      "crits": 0,
-      "fire": 0,
-      "damageDealtVals": "666<br/>2",
-      "damageAssisted": 217,
-      "balanceWeight": 27,
-      "killed": true,
-      "spotted": 1,
-      "damageAssistedVals": "217<br/>0",
-      "destroyedDevices": "",
-      "playerRegion": null,
-      "typeCompDescr": 6657,
-      "vehicleId": 18982901,
-      "playerName": "rosia1947",
-      "damageAssistedRadio": 217,
-      "damageAssistedNames": "По вашим разведданным (ед.)<br/>После попадания, сбившего гусеницу (ед.)",
-      "playerClan": "",
-      "isFake": false,
-      "vehicleName": "Т-43",
-      "piercings": 2,
-      "deathReason": 0,
-      "tankIcon": "../maps/icons/vehicle/small/ussr-T-43.png"
-    },
-    {
-      "damageDealtNames": "Суммарный урон (ед.)<br/>Всего пробитий",
-      "playerFullName": "t1tanum",
-      "criticalDevices": "",
-      "isAlly": false,
-      "directHits": 1,
-      "damageAssistedTrack": 0,
-      "destroyedTankmen": "<IMG SRC=\"img://gui/maps/icons/library/crits/commanderDestroyedSmall.png\" width=\"16\" height=\"16\" vspace=\"-5\"/><font color=\"#7b7969\">Командир</font>",
-      "explosionHits": 0,
-      "damageDealt": 482,
-      "critsCount": "1",
-      "crits": 16777216,
-      "fire": 0,
-      "damageDealtVals": "482<br/>1",
-      "damageAssisted": 0,
-      "balanceWeight": 18,
-      "killed": true,
-      "spotted": 0,
-      "damageAssistedVals": "0<br/>0",
-      "destroyedDevices": "",
-      "playerRegion": null,
-      "typeCompDescr": 2561,
-      "vehicleId": 18982888,
-      "playerName": "t1tanum",
-      "damageAssistedRadio": 0,
-      "damageAssistedNames": "По вашим разведданным (ед.)<br/>После попадания, сбившего гусеницу (ед.)",
-      "playerClan": "",
-      "isFake": false,
-      "vehicleName": "Т-34-85",
-      "piercings": 1,
-      "deathReason": 0,
-      "tankIcon": "../maps/icons/vehicle/small/ussr-T-34-85.png"
-    }
-  ],
-  "capturePointsVal": "<FONT color=\"#414037\">0</FONT><FONT color=\"#414037\">/</FONT><FONT color=\"#414037\">0</FONT>",
-  "eventXP": 0,
+  "directHitsReceived": 7,
   "autoLoadCost": [
-    9630,
+    75,
     0
-  ],
-  "noDamageDirectHitsReceived": 0,
-  "originalFreeXP": 36,
-  "orderFortResource": 0,
-  "damageAssistedTrack": 0,
-  "directHits": 8,
-  "achievements": [
-    228,
-    227
   ],
   "orderTMenXP": 0,
-  "piercingsReceived": 4,
   "serviceProviderID": 0,
-  "lifeTime": 232,
-  "isTeamKiller": false,
-  "dailyXPFactor10": 10,
-  "team": 1,
-  "repair": 11000,
-  "xpStr": "466",
-  "shots": 9,
-  "orderFreeXP": 0,
-  "capturePoints": 0,
-  "xpPenalty": 0,
-  "damageAssisted": 217,
+  "shots": 3,
+  "lifeTime": 74,
+  "xpStr": "354",
+  "team": 2,
+  "repair": 325,
   "creditsToDraw": 0,
-  "originalCredits": 29728,
-  "xpTitleStr": "Опыт",
   "isPremium": false,
-  "gold": 0,
-  "creditsNoPremTotalStr": "9 098 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
-  "spotted": 3,
-  "dossierPopUps": [
-    [
-      227,
-      12
-    ],
-    [
-      228,
-      34
-    ]
+  "creditsNoPremTotalStr": "3 181 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+  "achievementsLeft": [
+
   ],
-  "achievementXP": 278,
-  "mileage": "0,57",
-  "movingAvgDamage": 1461,
-  "damagedKilled": "5/2",
-  "creditsStr": "26 272",
-  "accountDBID": 4516862,
-  "eventGold": 0,
-  "achievementsRight": [
-    {
-      "isEpic": false,
-      "rare": false,
-      "description": "Нанести наибольшее количество урона за бой с дистанции не менее 300 метров.",
-      "title": "«Танкист-снайпер»",
-      "customData": "",
-      "rareIconId": null,
-      "block": "achievements",
-      "icon": "../maps/icons/achievement/sniper2.png",
-      "specialIcon": null,
-      "inactive": false,
-      "localizedValue": "12",
-      "rank": 12,
-      "unic": true,
-      "type": "sniper2"
-    },
-    {
-      "isEpic": false,
-      "rare": false,
-      "description": "Нанести наибольшее количество урона за бой.",
-      "title": "«Основной калибр»",
-      "customData": "",
-      "rareIconId": null,
-      "block": "achievements",
-      "icon": "../maps/icons/achievement/mainGun.png",
-      "specialIcon": null,
-      "inactive": false,
-      "localizedValue": "34",
-      "rank": 34,
-      "unic": true,
-      "type": "mainGun"
-    }
-  ],
-  "xpPremStr": "699 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
-  "eventTMenXP": 0,
-  "originalXP": 744,
-  "teamHitsDamage": "<FONT color=\"#414037\">0/0</FONT>",
-  "orderCredits": 0,
-  "eventFreeXP": 0,
+  "mileage": "0,45",
+  "creditsStr": "3 581",
   "statValues": [
     {
       "label": "Произведено выстрелов",
-      "value": "9"
+      "value": "3"
     },
     {
       "label": "\tпрямых попаданий/пробитий",
-      "value": "8/8"
+      "value": "1/1"
     },
     {
       "label": "\tосколочно-фугасных повреждений",
@@ -848,23 +544,23 @@ view.detailsMc.data: {
     },
     {
       "label": "Нанесено урона",
-      "value": "3 468"
+      "value": "47"
     },
     {
       "label": "\tс дистанции свыше 300 м",
-      "value": "2 571"
+      "value": "<FONT color=\"#414037\">0</FONT>"
     },
     {
       "label": "Получено попаданий",
-      "value": "4"
+      "value": "7"
     },
     {
       "label": "\tпробитий",
-      "value": "4"
+      "value": "6"
     },
     {
       "label": "\tне нанёсших урон",
-      "value": "<FONT color=\"#414037\">0</FONT>"
+      "value": "1"
     },
     {
       "label": "Получено попаданий осколками",
@@ -872,7 +568,7 @@ view.detailsMc.data: {
     },
     {
       "label": "Урон, заблокированный бронёй",
-      "value": "<FONT color=\"#414037\">0</FONT>"
+      "value": "12"
     },
     {
       "label": "Урон союзникам (уничтожено/повреждений)",
@@ -880,15 +576,15 @@ view.detailsMc.data: {
     },
     {
       "label": "Обнаружено машин противника",
-      "value": "3"
+      "value": "2"
     },
     {
       "label": "Повреждено/уничтожено машин противника",
-      "value": "5/2"
+      "value": "1/<FONT color=\"#414037\">0</FONT>"
     },
     {
       "label": "Урон, нанесённый с вашей помощью",
-      "value": "217"
+      "value": "3"
     },
     {
       "label": "Очки захвата/защиты базы",
@@ -896,15 +592,157 @@ view.detailsMc.data: {
     },
     {
       "label": "Пройдено километров",
-      "value": "0,57"
+      "value": "0,45"
     }
   ],
+  "accountDBID": 2178413,
+  "achievementsRight": [
+
+  ],
+  "xpPremStr": "531 <IMG SRC=\"img://gui/maps/icons/library/XpIcon-1.png\" width=\"16\" height=\"16\" vspace=\"-2\"/>",
+  "damageAssistedRadio": 3,
+  "originalXP": 118,
+  "orderCredits": 0,
+  "explosionHitsReceived": 0,
+  "freeXP": 15,
+  "creditsPremStr": "5 371 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+  "damageRating": 0,
+  "damageDealt": 47,
+  "explosionHits": 0,
+  "isPrematureLeave": false,
+  "autoEquipCost": [
+    0,
+    0
+  ],
+  "creditsPenalty": 0,
+  "orderXP": 0,
+  "creditsPremTotalStr": "4 971 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+  "damaged": 1,
+  "fairplayViolations": [
+    0,
+    0
+  ],
+  "creditsContributionOut": 0,
+  "vehTypeLockTime": 0,
+  "premiumXPFactor10": 15,
+  "tdestroyedModules": false,
+  "achievementCredits": 0,
+  "tmenXP": 436,
+  "originalFreeXP": 5,
+  "eventXP": 82,
+  "dossierCompDescr": null,
+  "hits": "1/1",
+  "tkills": 0,
+  "capturePointsVal": "<FONT color=\"#414037\">0</FONT><FONT color=\"#414037\">/</FONT><FONT color=\"#414037\">0</FONT>",
+  "histAmmoCost": [
+    0,
+    0
+  ],
+  "details": [
+    {
+      "damageDealtNames": "Суммарный урон (ед.)<br/>Всего пробитий",
+      "playerFullName": "777Gastello777",
+      "criticalDevices": "",
+      "isAlly": false,
+      "directHits": 0,
+      "damageAssistedTrack": 0,
+      "destroyedTankmen": "",
+      "explosionHits": 0,
+      "damageDealt": 0,
+      "critsCount": "0",
+      "crits": 0,
+      "fire": 0,
+      "damageDealtVals": "0<br/>0",
+      "damageAssisted": 3,
+      "balanceWeight": 3,
+      "killed": true,
+      "spotted": 1,
+      "damageAssistedVals": "3<br/>0",
+      "destroyedDevices": "",
+      "playerRegion": null,
+      "typeCompDescr": 6177,
+      "vehicleId": 14646451,
+      "playerName": "777Gastello777",
+      "damageAssistedRadio": 3,
+      "damageAssistedNames": "По вашим разведданным (ед.)<br/>После попадания, сбившего гусеницу (ед.)",
+      "playerClan": "",
+      "isFake": false,
+      "vehicleName": "T18",
+      "piercings": 0,
+      "deathReason": -1,
+      "tankIcon": "../maps/icons/vehicle/small/usa-T18.png"
+    },
+    {
+      "damageDealtNames": "Суммарный урон (ед.)<br/>Всего пробитий",
+      "playerFullName": "fedya199974",
+      "criticalDevices": "",
+      "isAlly": false,
+      "directHits": 1,
+      "damageAssistedTrack": 0,
+      "destroyedTankmen": "",
+      "explosionHits": 0,
+      "damageDealt": 47,
+      "critsCount": "0",
+      "crits": 0,
+      "fire": 0,
+      "damageDealtVals": "47<br/>1",
+      "damageAssisted": 0,
+      "balanceWeight": 2,
+      "killed": false,
+      "spotted": 1,
+      "damageAssistedVals": "0<br/>0",
+      "destroyedDevices": "",
+      "playerRegion": null,
+      "typeCompDescr": 545,
+      "vehicleId": 14646434,
+      "playerName": "fedya199974",
+      "damageAssistedRadio": 0,
+      "damageAssistedNames": "По вашим разведданным (ед.)<br/>После попадания, сбившего гусеницу (ед.)",
+      "playerClan": "",
+      "isFake": false,
+      "vehicleName": "T1",
+      "piercings": 1,
+      "deathReason": -1,
+      "tankIcon": "../maps/icons/vehicle/small/usa-T1_Cunningham.png"
+    }
+  ],
+  "creditsNoPremStr": "3 581 <IMG SRC=\"img://gui/maps/icons/library/CreditsIcon-2.png\" width=\"16\" height=\"16\" vspace=\"-3\"/>",
+  "noDamageDirectHitsReceived": 1,
+  "orderFortResource": 0,
+  "damageAssistedTrack": 0,
+  "directHits": 1,
+  "achievements": [
+
+  ],
+  "piercingsReceived": 6,
+  "xpPenalty": 0,
+  "orderFreeXP": 0,
+  "dailyXPFactor10": 30,
+  "isTeamKiller": false,
+  "xpTitleStr": "Опыт (х3 за первую победу в день)",
+  "capturePoints": 0,
+  "damageAssisted": 3,
+  "originalCredits": 3581,
+  "gold": 0,
+  "spotted": 2,
+  "eventGold": 0,
+  "movingAvgDamage": 0,
+  "achievementXP": 0,
+  "dossierPopUps": [
+    [
+      218,
+      47
+    ]
+  ],
+  "damagedKilled": "1/<FONT color=\"#414037\">0</FONT>",
+  "eventTMenXP": 0,
+  "eventFreeXP": 0,
+  "teamHitsDamage": "<FONT color=\"#414037\">0/0</FONT>",
   "health": 0,
   "creditsContributionIn": 0,
-  "explosionHitsReceived": 0,
-  "markOfMastery": 1,
-  "deathReason": 0,
-  "damageBlockedByArmor": 0,
-  "killerID": 18982909
+  "markOfMastery": 0,
+  "killerID": 14646434,
+  "damageBlockedByArmor": 12,
+  "deathReason": 0
 }
 */

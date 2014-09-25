@@ -27,7 +27,7 @@ def _showBattleResults(arenaUniqueID):
     from gui.shared import events
     from gui.shared import g_eventBus
     g_eventBus.handleEvent(events.ShowWindowEvent(events.ShowWindowEvent.SHOW_BATTLE_RESULTS, {
-        'arenaUniqueID': int(arenaUniqueID) }))
+        'data': int(arenaUniqueID) }))
 
 def _getBattleResults(base, arenaUniqueID, callback):
     try:
