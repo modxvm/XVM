@@ -429,7 +429,11 @@ package xvm.profile.components
                     color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + "\n";
 
                 // TODO: temporary solution
-                s += "\n<font size='7'>\n\n\n</font>\t\t      " + formatHtmlText(size(getWinsToNextPercentStr(data)), Defines.UICOLOR_LABEL);
+                var adata:AccountDossier = tech.accountDossier;
+                var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(data.winPercent));
+                s += size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
+                formatHtmlText(size(getWinsToNextPercentStr(adata), 13), Defines.UICOLOR_LABEL) + "\n";
+                s += "<font size='7'>\n\n\n</font>\t\t      " + formatHtmlText(size(getWinsToNextPercentStr(data)), Defines.UICOLOR_LABEL);
 
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
             }
