@@ -32,6 +32,7 @@ package xvm.tcarousel
 
         private var levelFilter:LevelMultiSelectionDropDown;
         private var prefFilter:PrefMultiSelectionDropDown;
+        private var lvlFilter:TileList;
 
         public function UI_TankCarousel(cfg:CCarousel)
         {
@@ -67,180 +68,285 @@ package xvm.tcarousel
 
         override protected function onDispose():void
         {
-            this._vehiclesVOManager.clear();
-            this._vehiclesVOManager = null;
+            if (this._vehiclesVOManager != null)
+            {
+                this._vehiclesVOManager.clear();
+                this._vehiclesVOManager = null;
+            }
+
             if (_baseDisposed)
                 return;
+
             super.onDispose();
         }
 
         override protected function configUI():void
         {
-            super.configUI();
+            try
+            {
+                super.configUI();
 
-            //return; // temporary disabled
-            createFilters();
-            Cmd.loadSettings(this, onFiltersLoaded, SETTINGS_CAROUSEL_FILTERS_KEY);
+                //return; // temporary disabled
+                createFilters();
+                Cmd.loadSettings(this, onFiltersLoaded, SETTINGS_CAROUSEL_FILTERS_KEY);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         // TankCarousel
         override public function scrollToIndex(index:uint):void
         {
-            //Logger.add("scrollToIndex: " + index + " _visibleSlots: " + _visibleSlots);
-            if (!container || !_renderers)
-                return;
-            var n:uint = Math.floor(_visibleSlots / cfg.rows / 2);
-            index = Math.floor(index / cfg.rows);
-            currentFirstRenderer = Math.max(0, index - n);
-            goToFirstRenderer();
+            try
+            {
+                //Logger.add("scrollToIndex: " + index + " _visibleSlots: " + _visibleSlots);
+                if (!container || !_renderers)
+                    return;
+                var n:uint = Math.floor(_visibleSlots / cfg.rows / 2);
+                index = Math.floor(index / cfg.rows);
+                currentFirstRenderer = Math.max(0, index - n);
+                goToFirstRenderer();
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         // TankCarousel
         override public function as_setParams(params:Object):void
         {
-            super.as_setParams(params);
-            repositionAdvancedSlots();
-            removeEmptySlots();
+            try
+            {
+                super.as_setParams(params);
+                repositionAdvancedSlots();
+                removeEmptySlots();
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         override public function as_updateVehicles(data:Object, initial:Boolean):void
         {
-            //Logger.addObject(data);
-            if (!this._vehiclesVOManager)
-                this._vehiclesVOManager = new VehicleCarouselVOManager();
-            if (initial)
-                this._vehiclesVOManager.setData(data);
-            else
-                this._vehiclesVOManager.updateData(data);
-            super.as_updateVehicles(data, initial);
+            try
+            {
+                //Logger.addObject(data);
+                if (!this._vehiclesVOManager)
+                    this._vehiclesVOManager = new VehicleCarouselVOManager();
+                if (initial)
+                    this._vehiclesVOManager.setData(data);
+                else
+                    this._vehiclesVOManager.updateData(data);
+                super.as_updateVehicles(data, initial);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         override public function as_showVehicles(vehIds:Array):void
         {
-            super.as_showVehicles(applyXvmFilters(vehIds));
+            try
+            {
+                super.as_showVehicles(applyXvmFilters(vehIds));
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         // Carousel
         override protected function updateArrowsState():void
         {
-            //Logger.add("updateArrowsState: " + _totalRenderers  + " " + this._visibleSlots + " " + currentFirstRenderer);
+            try
+            {
+                //Logger.add("updateArrowsState: " + _totalRenderers  + " " + this._visibleSlots + " " + currentFirstRenderer);
 
-            if (_totalRenderers > this._visibleSlots && this.currentFirstRenderer * cfg.rows >= _totalRenderers - this._visibleSlots)
-            {
-                this.leftArrow.enabled = true;
-                this.rightArrow.enabled = false;
-                this.allowDrag = true;
+                if (_totalRenderers > this._visibleSlots && this.currentFirstRenderer * cfg.rows >= _totalRenderers - this._visibleSlots)
+                {
+                    this.leftArrow.enabled = true;
+                    this.rightArrow.enabled = false;
+                    this.allowDrag = true;
+                }
+                else
+                {
+                    super.updateArrowsState();
+                }
             }
-            else
+            catch (ex:Error)
             {
-                super.updateArrowsState();
+                Logger.add(ex.getStackTrace());
             }
         }
 
         // Carousel
         override protected function updateVisibleSlotsCount():Number
         {
-            super.updateVisibleSlotsCount();
-            _visibleSlots *= cfg.rows;
-            //Logger.add("_visibleSlots=" + _visibleSlots);
+            try
+            {
+                super.updateVisibleSlotsCount();
+                _visibleSlots *= cfg.rows;
+                //Logger.add("_visibleSlots=" + _visibleSlots);
+                return _visibleSlots;
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
             return _visibleSlots;
         }
 
         // Carousel
         override protected function updateUIPosition():void
         {
-            if (isInvalid(InvalidationType.RENDERERS))
+            try
             {
-                //Logger.add("RENDERERS");
-                repositionRenderers();
-                //Logger.add("_visibleSlots=" + _visibleSlots + " _renderers.length=" + _renderers.length);
+                if (isInvalid(InvalidationType.RENDERERS))
+                {
+                    //Logger.add("RENDERERS");
+                    repositionRenderers();
+                    //Logger.add("_visibleSlots=" + _visibleSlots + " _renderers.length=" + _renderers.length);
+                }
+
+                //Logger.add("updateUIPosition");
+                repositionAdvancedSlots();
+                removeEmptySlots();
+
+                var slotWidth:Number = this.slotWidth;
+                this.slotWidth /= cfg.rows;
+                super.updateUIPosition();
+                this.slotWidth = slotWidth;
+
+                if (this.bg)
+                    bg.height = height;
             }
-
-            //Logger.add("updateUIPosition");
-            repositionAdvancedSlots();
-            removeEmptySlots();
-
-            var slotWidth:Number = this.slotWidth;
-            this.slotWidth /= cfg.rows;
-            super.updateUIPosition();
-            this.slotWidth = slotWidth;
-
-            if (this.bg)
-                bg.height = height;
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         // Carousel
         override protected function updateScopeWidth():void
         {
-            if (_renderers == null)
-                return;
-            this.scopeWidth = Math.ceil(Math.max(_renderers.length, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
+            try
+            {
+                if (_renderers == null)
+                    return;
+                this.scopeWidth = Math.ceil(Math.max(_renderers.length, _visibleSlots) / cfg.rows) * this.slotWidth + this.padding.horizontal;
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         // Carousel
         override protected function set currentFirstRenderer(value:uint):void
         {
-            var v:uint = Math.min(Math.max(Math.ceil((_renderers.length - _visibleSlots) / cfg.rows), 0), value);
-            //Logger.add(" value=" + value + " currentFirstRenderer=" + v);
-            super.currentFirstRenderer = v;
+            try
+            {
+                var v:uint = Math.min(Math.max(Math.ceil((_renderers.length - _visibleSlots) / cfg.rows), 0), value);
+                //Logger.add(" value=" + value + " currentFirstRenderer=" + v);
+                super.currentFirstRenderer = v;
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         // Carousel
         override protected function getCurrentFirstRendererOnAnim():Number
         {
-            super.getCurrentFirstRendererOnAnim();
-            if (container && _renderers)
+            try
             {
-                var n:Number = -Math.round((container.x - this._defContainerPos) / this.slotWidth);
-                if (n >= _renderers.length - this._visibleSlots)
-                    _currentFirstRendererOnAnim = Math.max(0, _renderers.length - this._visibleSlots);
-                //Logger.add("_currentFirstRendererOnAnim: " + _currentFirstRendererOnAnim);
+                super.getCurrentFirstRendererOnAnim();
+                if (container && _renderers)
+                {
+                    var n:Number = -Math.round((container.x - this._defContainerPos) / this.slotWidth);
+                    if (n >= _renderers.length - this._visibleSlots)
+                        _currentFirstRendererOnAnim = Math.max(0, _renderers.length - this._visibleSlots);
+                    //Logger.add("_currentFirstRendererOnAnim: " + _currentFirstRendererOnAnim);
+                }
+                //Logger.add("getCurrentFirstRendererOnAnim: " + _currentFirstRendererOnAnim);
+                return _currentFirstRendererOnAnim;
             }
-            //Logger.add("getCurrentFirstRendererOnAnim: " + _currentFirstRendererOnAnim);
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
             return _currentFirstRendererOnAnim;
         }
 
         // Carousel
         override protected function arrowSlide():void
         {
-            super.arrowSlide();
-            if (this.courseFactor == -1)
+            try
             {
-                if (this._currentFirstRendererOnAnim >= Math.ceil((_renderers.length - _visibleSlots) / cfg.rows))
+                super.arrowSlide();
+                if (this.courseFactor == -1)
                 {
-                    this.currentFirstRenderer = _renderers.length - this._visibleSlots;
-                    this.courseFactor = 0;
+                    if (this._currentFirstRendererOnAnim >= Math.ceil((_renderers.length - _visibleSlots) / cfg.rows))
+                    {
+                        this.currentFirstRenderer = _renderers.length - this._visibleSlots;
+                        this.courseFactor = 0;
+                    }
                 }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
             }
         }
 
         // Carousel
         override protected function handleMouseWheel(param1:MouseEvent):void
         {
-            if (param1.delta <= 0 && this.currentFirstRenderer * cfg.rows >= _renderers.length - this._visibleSlots)
-                return;
-            super.handleMouseWheel(param1);
+            try
+            {
+                if (param1.delta <= 0 && this.currentFirstRenderer * cfg.rows >= _renderers.length - this._visibleSlots)
+                    return;
+                super.handleMouseWheel(param1);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         override protected function showHideFilters():void
         {
-            rearrangeFilters();
-            if (Config.config.hangar.carousel.alwaysShowFilters == true)
+            try
             {
-                leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
-                this.vehicleFilters.visible = true;
-                updateDefContainerPos();
-                if (container && (slidingIntervalId == 0) && !isTween)
+                rearrangeFilters();
+                if (Config.config.hangar.carousel.alwaysShowFilters == true)
                 {
-                    container.x = _defContainerPos - currentFirstRenderer * slotWidth;
-                    renderersMask.x = leftArrow.x + leftArrow.width;
-                    dragHitArea.x = renderersMask.x;
+                    leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
+                    this.vehicleFilters.visible = true;
+                    updateDefContainerPos();
+                    if (container && (slidingIntervalId == 0) && !isTween)
+                    {
+                        container.x = _defContainerPos - currentFirstRenderer * slotWidth;
+                        renderersMask.x = leftArrow.x + leftArrow.width;
+                        dragHitArea.x = renderersMask.x;
+                    }
+                    updateVisibleSlotsCount();
                 }
-                updateVisibleSlotsCount();
+                else
+                {
+                    super.showHideFilters();
+                }
             }
-            else
+            catch (ex:Error)
             {
-                super.showHideFilters();
+                Logger.add(ex.getStackTrace());
             }
         }
 
@@ -248,24 +354,32 @@ package xvm.tcarousel
 
         private function checkRendererType(renderer:IListItemRenderer, slotType:int):Boolean
         {
-            if (renderer == null)
-                return false;
-
-            var data:VehicleCarouselVO = (renderer as TankCarouselItemRenderer).dataVO;
-            switch (slotType)
+            try
             {
-                case SLOT_TYPE_BUYTANK:
-                    return data.buyTank == true;
-                case SLOT_TYPE_BUYSLOT:
-                    return data.buySlot == true;
-                case SLOT_TYPE_EMPTY:
-                    return data.empty == true;
-                case SLOT_TYPE_TANK:
-                    return data.buyTank == false && data.buySlot == false && data.empty == false;
-                default:
-                    Logger.add("WARNING: unknown slot type: " + slotType);
+                if (renderer == null)
                     return false;
+
+                var data:VehicleCarouselVO = (renderer as TankCarouselItemRenderer).dataVO;
+                switch (slotType)
+                {
+                    case SLOT_TYPE_BUYTANK:
+                        return data.buyTank == true;
+                    case SLOT_TYPE_BUYSLOT:
+                        return data.buySlot == true;
+                    case SLOT_TYPE_EMPTY:
+                        return data.empty == true;
+                    case SLOT_TYPE_TANK:
+                        return data.buyTank == false && data.buySlot == false && data.empty == false;
+                    default:
+                        Logger.add("WARNING: unknown slot type: " + slotType);
+                        return false;
+                }
             }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+            return false;
         }
 
         private function findSlotIndex(slotType:int):int
@@ -278,12 +392,6 @@ package xvm.tcarousel
                     return i;
             }
             return -1;
-        }
-
-        private function findSlot(slotType:int):IListItemRenderer
-        {
-            var index:int = findSlotIndex(slotType);
-            return index < 0 ? null : getRendererAt(index);
         }
 
         private var _currentShowRendersCount:int;
@@ -382,67 +490,90 @@ package xvm.tcarousel
 
         private function createFilters():void
         {
-            //Logger.add("createFilters");
+            try
+            {
+                //Logger.add("createFilters");
 
-            /*addChild(createLabel("Filter", 0, 0));
-            filterTextInput = App.utils.classFactory.getComponent("TextInput", TextInput);
-            filterTextInput.x = 0;
-            filterTextInput.y = 17;
-            filterTextInput.width = 250; //65;
-            filterTextInput.text = Config.config.userInfo.defaultFilterValue;
-            filterTextInput.addEventListener(Event.CHANGE, onChange);
-            filterTextInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-            addChild(filterTextInput);*/
+                /*addChild(createLabel("Filter", 0, 0));
+                filterTextInput = App.utils.classFactory.getComponent("TextInput", TextInput);
+                filterTextInput.x = 0;
+                filterTextInput.y = 17;
+                filterTextInput.width = 250; //65;
+                filterTextInput.text = Config.config.userInfo.defaultFilterValue;
+                filterTextInput.addEventListener(Event.CHANGE, onChange);
+                filterTextInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+                addChild(filterTextInput);*/
 
-            /*
-            var nationFilter:NationMultiSelectionDropDown = addChild(new NationMultiSelectionDropDown()) as NationMultiSelectionDropDown;
-            nationFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
-            nationFilter.x = 5;
-            nationFilter.y = 30;
+                /*
+                var nationFilter:NationMultiSelectionDropDown = addChild(new NationMultiSelectionDropDown()) as NationMultiSelectionDropDown;
+                nationFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
+                nationFilter.x = 5;
+                nationFilter.y = 30;
 
-            var classFilter:ClassMultiSelectionDropDown = addChild(new ClassMultiSelectionDropDown()) as ClassMultiSelectionDropDown;
-            classFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
-            classFilter.x = 5;
-            classFilter.y = 60;
-            */
+                var classFilter:ClassMultiSelectionDropDown = addChild(new ClassMultiSelectionDropDown()) as ClassMultiSelectionDropDown;
+                classFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
+                classFilter.x = 5;
+                classFilter.y = 60;
+                */
 
-            levelFilter = vehicleFilters.addChild(new LevelMultiSelectionDropDown()) as LevelMultiSelectionDropDown;
-            levelFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
+                levelFilter = vehicleFilters.addChild(new LevelMultiSelectionDropDown()) as LevelMultiSelectionDropDown;
+                levelFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
 
-            prefFilter = vehicleFilters.addChild(new PrefMultiSelectionDropDown()) as PrefMultiSelectionDropDown;
-            prefFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
+                prefFilter = vehicleFilters.addChild(new PrefMultiSelectionDropDown()) as PrefMultiSelectionDropDown;
+                prefFilter.addEventListener(ListEvent.INDEX_CHANGE, setFilters);
+
+                /*
+                lvlFilter = vehicleFilters.addChild(App.utils.classFactory.getComponent("TileListUI", TileList)) as TileList;
+                lvlFilter.x = 0;
+                lvlFilter.y = 0;
+                lvlFilter.visible = true;
+                lvlFilter.columnCount = 5;
+                lvlFilter.columnWidth = 10;
+                lvlFilter.rowHeight = 10;
+                */
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         private function rearrangeFilters():void
         {
             //Logger.add("rearrangeFilters");
-
-            if (levelFilter == null)
-                return;
-
-            if (height >= 174)
+            try
             {
-                vehicleFilters.width = 56;
+                if (levelFilter == null)
+                    return;
 
-                levelFilter.x = vehicleFilters.nationFilter.x;
-                levelFilter.y = vehicleFilters.tankFilter.y + 33;
+                if (height >= 174)
+                {
+                    vehicleFilters.width = 56;
 
-                prefFilter.x = levelFilter.x;
-                prefFilter.y = levelFilter.y + 33;
+                    levelFilter.x = vehicleFilters.nationFilter.x;
+                    levelFilter.y = vehicleFilters.tankFilter.y + 33;
 
-                vehicleFilters.checkBoxToMain.y = prefFilter.y + 33;
+                    prefFilter.x = levelFilter.x;
+                    prefFilter.y = levelFilter.y + 33;
+
+                    vehicleFilters.checkBoxToMain.y = prefFilter.y + 33;
+                }
+                else
+                {
+                    vehicleFilters.width = 112;
+
+                    levelFilter.x = vehicleFilters.nationFilter.x + vehicleFilters.nationFilter.width + FILTER_MARGIN;
+                    levelFilter.y = vehicleFilters.nationFilter.y;
+
+                    prefFilter.x = levelFilter.x;
+                    prefFilter.y = vehicleFilters.tankFilter.y;
+
+                    vehicleFilters.checkBoxToMain.y = vehicleFilters.tankFilter.y + 33;
+                }
             }
-            else
+            catch (ex:Error)
             {
-                vehicleFilters.width = 112;
-
-                levelFilter.x = vehicleFilters.nationFilter.x + vehicleFilters.nationFilter.width + FILTER_MARGIN;
-                levelFilter.y = vehicleFilters.nationFilter.y;
-
-                prefFilter.x = levelFilter.x;
-                prefFilter.y = vehicleFilters.tankFilter.y;
-
-                vehicleFilters.checkBoxToMain.y = vehicleFilters.tankFilter.y + 33;
+                Logger.add(ex.getStackTrace());
             }
         }
 
@@ -467,20 +598,27 @@ package xvm.tcarousel
 
         private function setFilters(e:ListEvent):void
         {
-            //Logger.add("setFilters");
-            Cmd.saveSettings(SETTINGS_CAROUSEL_FILTERS_KEY,
-                JSONx.stringify( { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems }, '', true));
-            onFilterChanged();
+            try
+            {
+                //Logger.add("setFilters");
+                Cmd.saveSettings(SETTINGS_CAROUSEL_FILTERS_KEY,
+                    JSONx.stringify( { levels:levelFilter.selectedItems, prefs:prefFilter.selectedItems }, '', true));
+                onFilterChanged();
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         private function applyXvmFilters(vehIds:Array):Array
         {
-            if (levelFilter == null)
-                return vehIds;
-
             //Logger.add("applyXvmFilters: " + vehIds.length);
             try
             {
+                if (levelFilter == null)
+                    return vehIds;
+
                 for (var i:int = vehIds.length - 1; i >= 0; --i)
                 {
                     var vehId:int = vehIds[i];
