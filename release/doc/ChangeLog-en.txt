@@ -1,5 +1,8 @@
 ﻿XVM-5.3.6-dev:
   * changed macro value: {{v.hitsRatio}} is in percents now
+  * macro {{gun-marks}} changed to {{marksOnGun}}, section "gunmarks" changed to "marksOnGun",
+    option "allowGunMarksInPanelsAndMinimap" changed "allowMarksOnGunInPanelsAndMinimap"
+    for unification
 
 XVM-5.3.5:
   * adaptation to WoT 0.9.3
@@ -14,7 +17,7 @@ XVM-5.3.5:
   * new options:
     battleResults/showTotalExperience - Display total experience in After Battle Screen
     battleResults/showCrewExperience - Display crew experience in After Battle Screen
-  * player icon by accountId - loading from \res_mods\xvm\res\clanicons\ID\ 
+  * player icon by accountId - loading from \res_mods\xvm\res\clanicons\ID\
     Search order is:
       id -> nick -> clan -> clan/default.png -> nick/default.png
 

@@ -92,7 +92,7 @@
     "showPostmortemTips": false,
     "highlightVehicleIcon": false,
     "allowHpInPanelsAndMinimap": true,
-    "allowGunMarksInPanelsAndMinimap": true,
+    "allowMarksOnGunInPanelsAndMinimap": true,
     "clanIconsFolder": "clanicons",
     "elements": ${"elements"}
   },
@@ -200,7 +200,7 @@
   },
   "texts": {
     //"vtype": { "LT":  "ЛТ" },
-    "gunMarks": { "_0": "", "_1": "|", "_2": "||", "_3": "|||" }
+    "marksOnGun": { "_0": "", "_1": "|", "_2": "||", "_3": "|||" }
   },
   "colors": {
     "system": {

@@ -10,7 +10,7 @@ package com.xvm.types.cfg
         public var showPostmortemTips:Boolean;        // Popup tooltip panel after death.
         public var highlightVehicleIcon:Boolean;      // False - disable highlighting of selected vehicle icon and squad.
         public var allowHpInPanelsAndMinimap:Boolean;
-        public var allowGunMarksInPanelsAndMinimap:Boolean;
+        public var allowMarksOnGunInPanelsAndMinimap:Boolean;
         public var clockFormat:String;                // Show the clock on the Debug Panel (near FPS). http://php.net/date
         public var clanIconsFolder:String;            // Folder with clan icons
         public var elements:Array;                    // Visual elements

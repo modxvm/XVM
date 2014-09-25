@@ -8,6 +8,6 @@ package com.xvm.types.cfg
     {
         // Text for {{vtype}} macro
         public var vtype:CTextsVType;
-        public var gunMarks:CTextsGunMarks;
+        public var marksOnGun:CTextsMarksOnGun;
     }
 }

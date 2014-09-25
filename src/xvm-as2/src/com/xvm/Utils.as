@@ -70,11 +70,11 @@ class com.xvm.Utils
         }
     }
 
-    public static function getGunMarksText(value:Number):String
+    public static function getMarksOnGunText(value:Number):String
     {
-        if (value == null || !Config.config.texts.gunMarks["_" + value])
+        if (value == null || !Config.config.texts.marksOnGun["_" + value])
             return null;
-        var v:String = Config.config.texts.gunMarks["_" + value];
+        var v:String = Config.config.texts.marksOnGun["_" + value];
         if (v.indexOf("{{l10n:") >= 0)
             v = Locale.get(v);
         return v;

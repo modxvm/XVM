@@ -18,9 +18,9 @@
       // Text for tank destroyers / Текст для ПТ.
       "TD":  "{{l10n:TD}}"
     },
-    // Text for {{gun-marks}} macro.
-    // Текст для макроса {{gun-marks}}
-    "gunMarks": {
+    // Text for {{marksOnGun}}, {{v.marksOnGun}} macros.
+    // Текст для макросов {{marksOnGun}}, {{v.marksOnGun}}
+    "marksOnGun": {
       "_0": "0",
       "_1": "1",
       "_2": "2",

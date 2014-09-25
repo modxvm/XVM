@@ -259,7 +259,7 @@ class Xvm(object):
         if self.config is None:
             return
 
-        if self.config['battle']['allowGunMarksInPanelsAndMinimap'] and \
+        if self.config['battle']['allowMarksOnGunInPanelsAndMinimap'] and \
             not self.config['battle']['allowHpInPanelsAndMinimap']:
                 if self.battleFlashObject is not None:
                     movie = self.battleFlashObject.movie

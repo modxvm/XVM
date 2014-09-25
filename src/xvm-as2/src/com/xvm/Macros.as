@@ -383,8 +383,8 @@ class com.xvm.Macros
             pdata["alive"] = function(o):String { return o.dead == true ? null : 'alive'; }
             // {{tk}}
             pdata["tk"] = function(o):String { return o.teamKiller == true ? 'tk' : null; }
-            // {{gun-marks}}
-            pdata["gun-marks"] = function(o):String { return isNaN(o.marksOnGun) || pdata["level"] < 5 ? null : Utils.getGunMarksText(o.marksOnGun); }
+            // {{marksOnGun}}
+            pdata["marksOnGun"] = function(o):String { return isNaN(o.marksOnGun) || pdata["level"] < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun); }
 
             // hp
 

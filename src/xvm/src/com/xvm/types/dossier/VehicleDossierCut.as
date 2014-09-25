@@ -74,7 +74,7 @@ package com.xvm.types.dossier
                     }
 
                     damageRating = vdossier.damageRating;
-                    marksOnGun = isNaN(vdossier.marksOnGun) || level < 5 ? null : Utils.getGunMarksText(vdossier.marksOnGun);
+                    marksOnGun = isNaN(vdossier.marksOnGun) || level < 5 ? null : Utils.getMarksOnGunText(vdossier.marksOnGun);
                 }
             }
         }

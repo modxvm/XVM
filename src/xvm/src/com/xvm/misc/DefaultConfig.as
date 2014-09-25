@@ -208,7 +208,7 @@ package com.xvm.misc
             c.showPostmortemTips = true;        // Popup tooltip panel after death.
             c.highlightVehicleIcon = true;      // False - disable highlighting of selected vehicle icon and squad.
             c.allowHpInPanelsAndMinimap = false;
-            c.allowGunMarksInPanelsAndMinimap = false;
+            c.allowMarksOnGunInPanelsAndMinimap = false;
             // Show the clock on the Debug Panel (near FPS).
             c.clockFormat = "H:N"; // TODO "H:i:s";   // Format: http://php.net/date
             c.clanIconsFolder = "clanicons/";   // Folder with clan icons
@@ -1252,11 +1252,11 @@ package com.xvm.misc
             c.vtype.SPG = "{{l10n:SPG}}",  // Text for arty
             c.vtype.TD =  "{{l10n:TD}}"    // Text for tank destroyers
 
-            c.gunMarks = new CTextsGunMarks();
-            c.gunMarks._0 = "0";
-            c.gunMarks._1 = "1";
-            c.gunMarks._2 = "2";
-            c.gunMarks._3 = "3";
+            c.marksOnGun = new CTextsMarksOnGun();
+            c.marksOnGun._0 = "0";
+            c.marksOnGun._1 = "1";
+            c.marksOnGun._2 = "2";
+            c.marksOnGun._3 = "3";
 
             return c;
         }

@@ -36,9 +36,9 @@
     "labels": {
       "units": {
         "format": {
-          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{gun-marks|*}}</font>{{vehicle-short}}</span>",
-          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{gun-marks|*}}</font>{{vehicle-short}}</span>",
-          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{gun-marks|*}}</font>{{vehicle-short}}</span>"
+          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font>{{vehicle-short}}</span>",
+          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font>{{vehicle-short}}</span>",
+          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font>{{vehicle-short}}</span>"
         },
         "alpha" : {
           //"deadenemy": 50
@@ -69,10 +69,10 @@
     "labels": {
       "units": {
         "format": {
-          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{gun-marks|*}}</font></span>",
-          "squad":          "<span class='mm_s'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{gun-marks|*}}</font></span>",
-          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{gun-marks|*}}</font></span>",
-          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{gun-marks|*}}</font></span>",
+          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
+          "squad":          "<span class='mm_s'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
+          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
+          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}' alpha='{{alive?#FF|#80}}'>{{marksOnGun|*}}</font></span>",
           "lostally":       "<span class='mm_la'>{{vehicle-class}}</span>",
           "lost":           "<span class='mm_l'>{{vehicle-class}}</span>"
         }
