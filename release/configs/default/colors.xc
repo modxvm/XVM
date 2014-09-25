@@ -339,6 +339,14 @@
       { "value": 1.3,  "color": ${"def.colorRating.good"     } },
       { "value": 2.0,  "color": ${"def.colorRating.very_good"} },
       { "value": 15,   "color": ${"def.colorRating.unique"   } }
+    ],
+    // Dynamic color by damage rating (percents for marks on gun)
+    // Динамический цвет по рейтингу урона (процент для отметок на стволе)
+    "damageRating": [
+      { "value": 65,  "color": ${"def.colorRating.normal"   } },
+      { "value": 85,  "color": ${"def.colorRating.good"     } },
+      { "value": 95,  "color": ${"def.colorRating.very_good"} },
+      { "value": 101,   "color": ${"def.colorRating.unique"   } }
     ]
   }
 }

@@ -27,5 +27,6 @@ package com.xvm.types.cfg
         public var tfb:Array;
         public var tsb:Array;
         public var wn8effd:Array;
+        public var damageRating:Array;
     }
 }

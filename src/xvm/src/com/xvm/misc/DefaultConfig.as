@@ -1138,6 +1138,12 @@ package com.xvm.misc
                 { value: 2.0,  color: Defines.C_BLUE },
                 { value: 15,   color: Defines.C_PURPLE }
             ];
+            c.damageRating = [
+                { value: 65,  color: Defines.C_YELLOW },
+                { value: 85,  color: Defines.C_GREEN },
+                { value: 95,  color: Defines.C_BLUE },
+                { value: 101,   color: Defines.C_PURPLE }
+            ];
             return c;
         }
 

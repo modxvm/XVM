@@ -42,6 +42,7 @@ package com.xvm.utils
                 case Defines.DYNAMIC_COLOR_TFB:             cfg = cfg_root.tfb; break;
                 case Defines.DYNAMIC_COLOR_TSB:             cfg = cfg_root.tsb; break;
                 case Defines.DYNAMIC_COLOR_WN8EFFD:         cfg = cfg_root.wn8effd; break;
+                case Defines.DYNAMIC_COLOR_DAMAGERATING:    cfg = cfg_root.damageRating; break;
                 default: return null;
             }
 

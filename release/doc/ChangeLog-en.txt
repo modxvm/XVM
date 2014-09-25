@@ -3,6 +3,7 @@
   * macro {{gun-marks}} changed to {{marksOnGun}}, section "gunmarks" changed to "marksOnGun",
     option "allowGunMarksInPanelsAndMinimap" changed "allowMarksOnGunInPanelsAndMinimap"
     for unification
+  * added macro {{v.c_damageRating}} and colors section "damageRating"
 
 XVM-5.3.5:
   * adaptation to WoT 0.9.3

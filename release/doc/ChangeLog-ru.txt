@@ -4,6 +4,7 @@
     опция "allowGunMarksInPanelsAndMinimap" изменена на "allowMarksOnGunInPanelsAndMinimap"
     для однообразия
   * исправлена работа статистики в окне набора роты
+  * добавлен макрос {{damageRating}} и секция цветов "damageRating"
 
 XVM-5.3.5:
   * адаптация к WoT 0.9.3
