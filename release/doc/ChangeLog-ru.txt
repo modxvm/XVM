@@ -3,6 +3,7 @@
   * макрос {{gun-marks}} изменен на {{marksOnGun}}, секция "gunmarks" изменена на "marksOnGun",
     опция "allowGunMarksInPanelsAndMinimap" изменена на "allowMarksOnGunInPanelsAndMinimap"
     для однообразия
+  * исправлена работа статистики в окне набора роты
 
 XVM-5.3.5:
   * адаптация к WoT 0.9.3

@@ -78,9 +78,6 @@ package xvm.tcarousel
                 this._vehiclesVOManager = null;
             }
 
-            if (_baseDisposed)
-                return;
-
             super.onDispose();
         }
 
