@@ -74,7 +74,7 @@ package com.xvm.types.dossier
                     }
 
                     marksOnGun = isNaN(vdossier.marksOnGun) || level < 5 ? null : Utils.getMarksOnGunText(vdossier.marksOnGun);
-                    damageRating = vdossier.damageRating;
+                    damageRating = level < 5 ? null : vdossier.damageRating;
                     c_damageRating = MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_DAMAGERATING, damageRating, "#");
                 }
             }
