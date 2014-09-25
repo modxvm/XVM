@@ -253,8 +253,8 @@ package xvm.profile.components
             ratingTF.selectable = false;
             ratingTF.wordWrap = false;
             ratingTF.x = /*proxy.efficiencyTF.x +*/ COLUMN1_WIDTH + 5;
-            if (!Config.config.userInfo.showExtraDataInProfile)
-                ratingTF.x -= 20;
+            //if (!Config.config.userInfo.showExtraDataInProfile)
+            //    ratingTF.x -= 20;
             ratingTF.y = /*proxy.battlesDL.y - 62*/0;
             ratingTF.width = 400;
             ratingTF.height = 200;
