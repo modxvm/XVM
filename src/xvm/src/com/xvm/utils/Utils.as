@@ -23,6 +23,22 @@ package com.xvm.utils
             return isNaN(n) ? defaultValue : int(n);
         }
 
+        public static function forceInt(value:String):int
+        {
+            if (value == null)
+                return 0;
+            // HINT: string.replace(/[^0-9]/g, '') is broken, use the crutch
+            var s:String = "";
+            var len:int = value.length;
+            for (var i:Number = 0; i < len; ++i)
+            {
+                var c:String = value.charAt(i);
+                if (c >= '0' && c <= '9')
+                    s += c;
+            }
+            return s == "" ? 0 : parseInt(s);
+        }
+
         public static function toFloat(value:Object, defaultValue:Number = 0):Number
         {
             if (!value)

@@ -31,6 +31,7 @@ package xvm.hangar.views
             initStatToken();
 
             //Cmd.runTest("battleResults", "18336627054037.dat");
+            //Cmd.runTest("battleResults", "19708158929042709.dat");
         }
 
         public override function onBeforeDispose(e:LifeCycleEvent):void
