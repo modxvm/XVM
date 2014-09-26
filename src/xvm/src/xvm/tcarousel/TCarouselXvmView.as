@@ -9,6 +9,7 @@ package xvm.tcarousel
     import com.xvm.misc.*;
     import com.xvm.utils.*;
     import com.xvm.types.dossier.*;
+    import net.wg.data.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.infrastructure.events.*;
@@ -26,19 +27,16 @@ package xvm.tcarousel
             return super.view as net.wg.gui.lobby.hangar.Hangar;
         }
 
-        override public function onBeforePopulate(e:LifeCycleEvent):void
-        {
-            if (Config.config.hangar.carousel.enabled)
-                replaceCarouselControl();
-        }
-
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.addObject("onAfterPopulate: " + view.as_alias);
             try
             {
                 if (Config.config.hangar.carousel.enabled)
+                {
+                    replaceCarouselControl();
                     init();
+                }
             }
             catch (ex:Error)
             {
@@ -53,9 +51,11 @@ package xvm.tcarousel
 
             var index:int = page.getChildIndex(page.carousel);
             page.removeChildAt(index);
+            page.unregisterComponent(Aliases.TANK_CAROUSEL);
             //page.carousel.dispose(); // TODO: exception
-            page.carousel = new UI_TankCarousel(Config.config.hangar.carousel);
+            page.carousel = new UI_TankCarousel();
             page.addChildAt(page.carousel, index);
+            page.registerComponent(page.carousel, Aliases.TANK_CAROUSEL);
         }
 
         private function init():void

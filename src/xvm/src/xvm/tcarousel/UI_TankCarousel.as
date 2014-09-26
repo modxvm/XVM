@@ -34,13 +34,13 @@ package xvm.tcarousel
         private var prefFilter:PrefMultiSelectionDropDown;
         private var lvlFilter:TileList;
 
-        public function UI_TankCarousel(cfg:CCarousel)
+        public function UI_TankCarousel()
         {
             //Logger.add("UI_TankCarousel.ctor()");
 
             super();
 
-            this.cfg = cfg;
+            this.cfg = Config.config.hangar.carousel;
 
             componentInspectorSetting = true;
 
