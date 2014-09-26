@@ -66,7 +66,7 @@ package com.xvm
                     "prebattleComponents.swf",      // xvm-company
                     "companiesListWindow.swf",      // xvm-company
                     "companyWindow.swf",            // xvm-company
-                    "squadWindow.swf",              // xvm-squad
+                    //"squadWindow.swf",              // xvm-squad
                     "battleResults.swf",            // xvm-hangar
                     "battleLoading.swf",            // xvm-hangar
                     "TankCarousel.swf",             // xvm-tcarousel
