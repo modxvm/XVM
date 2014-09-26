@@ -13,6 +13,7 @@ package xvm.tcarousel
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
     import net.wg.gui.lobby.hangar.tcarousel.helper.*;
+    import scaleform.clik.core.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.events.*;
     import scaleform.clik.interfaces.*;
@@ -34,6 +35,8 @@ package xvm.tcarousel
         private var prefFilter:PrefMultiSelectionDropDown;
         private var lvlFilter:TileList;
 
+        private var disableAllFilters:Boolean = false;
+
         public function UI_TankCarousel()
         {
             //Logger.add("UI_TankCarousel.ctor()");
@@ -41,6 +44,8 @@ package xvm.tcarousel
             super();
 
             this.cfg = Config.config.hangar.carousel;
+
+            disableAllFilters = !(cfg.filters.nation || cfg.filters.type || cfg.filters.level || cfg.filters.prefs || cfg.filters.favorite);
 
             componentInspectorSetting = true;
 
@@ -341,7 +346,13 @@ package xvm.tcarousel
             try
             {
                 rearrangeFilters();
-                if (Config.config.hangar.carousel.alwaysShowFilters == true)
+                if (disableAllFilters)
+                {
+                    leftArrow.x = this.vehicleFilters.x;
+                    this.vehicleFilters.visible = false;
+                    this.vehicleFilters.close();
+                }
+                else if (Config.config.hangar.carousel.alwaysShowFilters == true)
                 {
                     leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
                     this.vehicleFilters.visible = true;
@@ -564,30 +575,36 @@ package xvm.tcarousel
                 if (levelFilter == null)
                     return;
 
-                if (height >= 174)
+                var visibleFilters:Vector.<UIComponent> = new Vector.<UIComponent>();
+                vehicleFilters.nationFilter.visible = cfg.filters.nation.enabled;
+                vehicleFilters.tankFilter.visible = cfg.filters.type.enabled;
+                levelFilter.visible = cfg.filters.level.enabled;
+                prefFilter.visible = cfg.filters.prefs.enabled;
+                vehicleFilters.checkBoxToMain.visible = cfg.filters.favorite.enabled;
+
+                if (cfg.filters.nation.enabled)
+                    visibleFilters.push(vehicleFilters.nationFilter);
+                if (cfg.filters.type.enabled)
+                    visibleFilters.push(vehicleFilters.tankFilter);
+                if (cfg.filters.level.enabled)
+                    visibleFilters.push(levelFilter);
+                if (cfg.filters.prefs.enabled)
+                    visibleFilters.push(prefFilter);
+                if (cfg.filters.favorite.enabled)
+                    visibleFilters.push(vehicleFilters.checkBoxToMain);
+
+                var w:int = 0;
+                var maxRows:int = Math.floor((height - 4) / 34);
+                for (var i:int = 0; i < visibleFilters.length; ++i)
                 {
-                    vehicleFilters.width = 56;
-
-                    levelFilter.x = vehicleFilters.nationFilter.x;
-                    levelFilter.y = vehicleFilters.tankFilter.y + 33;
-
-                    prefFilter.x = levelFilter.x;
-                    prefFilter.y = levelFilter.y + 33;
-
-                    vehicleFilters.checkBoxToMain.y = prefFilter.y + 33;
+                    var col:int = Math.floor(i / maxRows);
+                    var row:int = i % maxRows;
+                    visibleFilters[i].x = col * 60;
+                    visibleFilters[i].y = row * 34 + 2;
+                    w = (col + 1) * 60 - 4;
                 }
-                else
-                {
-                    vehicleFilters.width = 112;
 
-                    levelFilter.x = vehicleFilters.nationFilter.x + vehicleFilters.nationFilter.width + FILTER_MARGIN;
-                    levelFilter.y = vehicleFilters.nationFilter.y;
-
-                    prefFilter.x = levelFilter.x;
-                    prefFilter.y = vehicleFilters.tankFilter.y;
-
-                    vehicleFilters.checkBoxToMain.y = vehicleFilters.tankFilter.y + 33;
-                }
+                vehicleFilters.width = w;
             }
             catch (ex:Error)
             {

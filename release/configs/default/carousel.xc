@@ -11,6 +11,13 @@
     "alwaysShowFilters": false,
     "hideBuyTank": false,
     "hideBuySlot": false,
+    "filters": {
+      "nation":   { "enabled": true },
+      "type":     { "enabled": true },
+      "level":    { "enabled": true },
+      "prefs":    { "enabled": true },
+      "favorite": { "enabled": true }
+    },
     "fields": {
       "tankType": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
       "level":    { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },

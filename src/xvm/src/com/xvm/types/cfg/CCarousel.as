@@ -13,6 +13,7 @@ package com.xvm.types.cfg
         public var alwaysShowFilters:Boolean;
         public var hideBuyTank:Boolean;
         public var hideBuySlot:Boolean;
+        public var filters:Object;
         public var fields:Object;
         public var extraFields:Array;
     }

@@ -46,16 +46,23 @@ package xvm.tcarousel
 
         private function replaceCarouselControl():void
         {
-            if (isNaN(Config.config.hangar.carousel.rows) || Config.config.hangar.carousel.rows <= 0)
-                Config.config.hangar.carousel.rows = 1;
+            try
+            {
+                if (isNaN(Config.config.hangar.carousel.rows) || Config.config.hangar.carousel.rows <= 0)
+                    Config.config.hangar.carousel.rows = 1;
 
-            var index:int = page.getChildIndex(page.carousel);
-            page.removeChildAt(index);
-            page.unregisterComponent(Aliases.TANK_CAROUSEL);
-            //page.carousel.dispose(); // TODO: exception
-            page.carousel = new UI_TankCarousel();
-            page.addChildAt(page.carousel, index);
-            page.registerComponent(page.carousel, Aliases.TANK_CAROUSEL);
+                var index:int = page.getChildIndex(page.carousel);
+                page.removeChildAt(index);
+                //page.carousel.dispose(); // TODO: exception
+                page.carousel = new UI_TankCarousel();
+                page.addChildAt(page.carousel, index);
+                page.unregisterComponent(Aliases.TANK_CAROUSEL);
+                page.registerComponent(page.carousel, Aliases.TANK_CAROUSEL);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         private function init():void
