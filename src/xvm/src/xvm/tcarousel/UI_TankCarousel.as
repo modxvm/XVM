@@ -36,7 +36,7 @@ package xvm.tcarousel
 
         public function UI_TankCarousel(cfg:CCarousel)
         {
-            Logger.add("UI_TankCarousel.ctor()");
+            //Logger.add("UI_TankCarousel.ctor()");
 
             super();
 
@@ -70,7 +70,7 @@ package xvm.tcarousel
 
         override protected function onDispose():void
         {
-            Logger.add("UI_TankCarousel.onDispose()");
+            //Logger.add("UI_TankCarousel.onDispose()");
 
             if (this._vehiclesVOManager != null)
             {
@@ -83,7 +83,7 @@ package xvm.tcarousel
 
         override protected function configUI():void
         {
-            Logger.add("UI_TankCarousel.configUI()");
+            //Logger.add("UI_TankCarousel.configUI()");
             try
             {
                 super.configUI();
@@ -101,7 +101,7 @@ package xvm.tcarousel
         // TankCarousel
         override public function scrollToIndex(index:uint):void
         {
-            Logger.add("UI_TankCarousel.scrollToIndex(" + index + ")");
+            //Logger.add("UI_TankCarousel.scrollToIndex(" + index + ")");
             try
             {
                 //Logger.add("scrollToIndex: " + index + " _visibleSlots: " + _visibleSlots);
@@ -121,7 +121,7 @@ package xvm.tcarousel
         // TankCarousel
         override public function as_setParams(params:Object):void
         {
-            Logger.add("UI_TankCarousel.as_setParams(...)");
+            //Logger.add("UI_TankCarousel.as_setParams(...)");
             try
             {
                 super.as_setParams(params);
@@ -136,7 +136,7 @@ package xvm.tcarousel
 
         override public function as_updateVehicles(data:Object, initial:Boolean):void
         {
-            Logger.add("UI_TankCarousel.as_updateVehicles(...)");
+            //Logger.add("UI_TankCarousel.as_updateVehicles(...)");
             try
             {
                 //Logger.addObject(data);
@@ -156,7 +156,7 @@ package xvm.tcarousel
 
         override public function as_showVehicles(vehIds:Array):void
         {
-            Logger.add("UI_TankCarousel.as_showVehicles(...)");
+            //Logger.add("UI_TankCarousel.as_showVehicles(...)");
             try
             {
                 super.as_showVehicles(applyXvmFilters(vehIds));
@@ -170,7 +170,7 @@ package xvm.tcarousel
         // Carousel
         override protected function updateArrowsState():void
         {
-            Logger.add("UI_TankCarousel.updateArrowsState()");
+            //Logger.add("UI_TankCarousel.updateArrowsState()");
             try
             {
                 //Logger.add("updateArrowsState: " + _totalRenderers  + " " + this._visibleSlots + " " + currentFirstRenderer);
@@ -195,7 +195,7 @@ package xvm.tcarousel
         // Carousel
         override protected function updateVisibleSlotsCount():Number
         {
-            Logger.add("UI_TankCarousel.updateVisibleSlotsCount()");
+            //Logger.add("UI_TankCarousel.updateVisibleSlotsCount()");
             try
             {
                 super.updateVisibleSlotsCount();
@@ -213,7 +213,7 @@ package xvm.tcarousel
         // Carousel
         override protected function updateUIPosition():void
         {
-            Logger.add("UI_TankCarousel.updateUIPosition()");
+            //Logger.add("UI_TankCarousel.updateUIPosition()");
             try
             {
                 if (isInvalid(InvalidationType.RENDERERS))
@@ -244,7 +244,7 @@ package xvm.tcarousel
         // Carousel
         override protected function updateScopeWidth():void
         {
-            Logger.add("UI_TankCarousel.updateScopeWidth()");
+            //Logger.add("UI_TankCarousel.updateScopeWidth()");
             try
             {
                 if (_renderers == null)
@@ -260,7 +260,7 @@ package xvm.tcarousel
         // Carousel
         override protected function set currentFirstRenderer(value:uint):void
         {
-            Logger.add("UI_TankCarousel.currentFirstRenderer(" + value + ")");
+            //Logger.add("UI_TankCarousel.currentFirstRenderer(" + value + ")");
             try
             {
                 var v:uint = Math.min(Math.max(Math.ceil((_renderers.length - _visibleSlots) / cfg.rows), 0), value);
@@ -276,7 +276,7 @@ package xvm.tcarousel
         // Carousel
         override protected function getCurrentFirstRendererOnAnim():Number
         {
-            Logger.add("UI_TankCarousel.getCurrentFirstRendererOnAnim()");
+            //Logger.add("UI_TankCarousel.getCurrentFirstRendererOnAnim()");
             try
             {
                 super.getCurrentFirstRendererOnAnim();
@@ -300,7 +300,7 @@ package xvm.tcarousel
         // Carousel
         override protected function arrowSlide():void
         {
-            Logger.add("UI_TankCarousel.arrowSlide()");
+            //Logger.add("UI_TankCarousel.arrowSlide()");
             try
             {
                 super.arrowSlide();
@@ -322,7 +322,7 @@ package xvm.tcarousel
         // Carousel
         override protected function handleMouseWheel(param1:MouseEvent):void
         {
-            Logger.add("UI_TankCarousel.handleMouseWheel(...)");
+            //Logger.add("UI_TankCarousel.handleMouseWheel(...)");
             try
             {
                 if (param1.delta <= 0 && this.currentFirstRenderer * cfg.rows >= _renderers.length - this._visibleSlots)
@@ -337,7 +337,7 @@ package xvm.tcarousel
 
         override protected function showHideFilters():void
         {
-            Logger.add("UI_TankCarousel.showHideFilters()");
+            //Logger.add("UI_TankCarousel.showHideFilters()");
             try
             {
                 rearrangeFilters();
@@ -369,7 +369,7 @@ package xvm.tcarousel
 
         private function checkRendererType(renderer:IListItemRenderer, slotType:int):Boolean
         {
-            Logger.add("UI_TankCarousel.checkRendererType(...)");
+            //Logger.add("UI_TankCarousel.checkRendererType(...)");
             try
             {
                 if (renderer == null)
@@ -414,7 +414,7 @@ package xvm.tcarousel
 
         private function repositionRenderers():void
         {
-            Logger.add("UI_TankCarousel.repositionRenderers()");
+            //Logger.add("UI_TankCarousel.repositionRenderers()");
             var renderer:IListItemRenderer = null;
             var selectedIndex:Number = 0;
             _currentShowRendersCount = 0;
@@ -437,7 +437,7 @@ package xvm.tcarousel
 
         private function repositionAdvancedSlots():void
         {
-            Logger.add("UI_TankCarousel.repositionAdvancedSlots()");
+            //Logger.add("UI_TankCarousel.repositionAdvancedSlots()");
 
             var i:int;
             var renderer:IListItemRenderer;
@@ -487,7 +487,7 @@ package xvm.tcarousel
 
         private function removeEmptySlots():void
         {
-            Logger.add("UI_TankCarousel.removeEmptySlots()");
+            //Logger.add("UI_TankCarousel.removeEmptySlots()");
 
             if (_renderers == null)
                 return;
@@ -507,7 +507,7 @@ package xvm.tcarousel
 
         private function createFilters():void
         {
-            Logger.add("UI_TankCarousel.createFilters()");
+            //Logger.add("UI_TankCarousel.createFilters()");
 
             try
             {
@@ -557,7 +557,7 @@ package xvm.tcarousel
 
         private function rearrangeFilters():void
         {
-            Logger.add("UI_TankCarousel.rearrangeFilters()");
+            //Logger.add("UI_TankCarousel.rearrangeFilters()");
 
             try
             {
@@ -597,7 +597,7 @@ package xvm.tcarousel
 
         private function onFiltersLoaded(filter_str:String):void
         {
-            Logger.add("UI_TankCarousel.onFiltersLoaded()");
+            //Logger.add("UI_TankCarousel.onFiltersLoaded()");
 
             try
             {
@@ -617,7 +617,7 @@ package xvm.tcarousel
 
         private function setFilters(e:ListEvent):void
         {
-            Logger.add("UI_TankCarousel.setFilters()");
+            //Logger.add("UI_TankCarousel.setFilters()");
 
             try
             {
@@ -633,7 +633,7 @@ package xvm.tcarousel
 
         private function applyXvmFilters(vehIds:Array):Array
         {
-            Logger.add("UI_TankCarousel.applyXvmFilters(...)");
+            //Logger.add("UI_TankCarousel.applyXvmFilters(...)");
 
             try
             {
