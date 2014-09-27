@@ -13,11 +13,15 @@ internal class XvmLinks
 import com.xvm.*; Stat;
 import com.xvm.infrastructure.*; XvmModBase; XvmViewBase;
 import com.xvm.misc.*; IconLoader; Chance; Globals; Dossier;
+
+// Controls must be compiled inline in the target project. xvm.swf initialization issue.
+/*
 import com.xvm.controls.*;
 NationMultiSelectionDropDown;
 ClassMultiSelectionDropDown;
 LevelMultiSelectionDropDown;
 PrefMultiSelectionDropDown;
+*/
 
 }
 
