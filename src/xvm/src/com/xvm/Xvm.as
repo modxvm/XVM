@@ -68,11 +68,11 @@ package com.xvm
                     "serviceMessageComponents.swf", // xvm-svcmsg
                     "profileStatistics.swf",        // xvm-profile
                     "profileTechnique.swf",         // xvm-profile
-                    //"squadWindow.swf",              // xvm-squad
+                    "squadWindow.swf",              // xvm-squad
+                    "prebattleComponents.swf",      // xvm-company
                     "companiesListWindow.swf",      // xvm-company
                     "companyWindow.swf",            // xvm-company
                     "battleResults.swf",            // xvm-hangar
-                    "prebattleComponents.swf",      // xvm-company
                     "battleLoading.swf"             // xvm-hangar
                 ];
                 for (var x:int = 0; x < preload.length; ++x)

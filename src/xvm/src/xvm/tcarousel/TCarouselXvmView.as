@@ -27,15 +27,25 @@ package xvm.tcarousel
             return super.view as net.wg.gui.lobby.hangar.Hangar;
         }
 
-        public override function onAfterPopulate(e:LifeCycleEvent):void
+        override public function onBeforePopulate(e:LifeCycleEvent):void
+        {
+            Logger.add((new Error()).getStackTrace());
+            if (Config.config.hangar.carousel.enabled)
+                replaceCarouselControl();
+        }
+
+        override public function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.addObject("onAfterPopulate: " + view.as_alias);
             try
             {
                 if (Config.config.hangar.carousel.enabled)
                 {
-                    replaceCarouselControl();
-                    init();
+                    //App.utils.scheduler.scheduleTask(function():void
+                    //{
+                    //    replaceCarouselControl();
+                        init();
+                    //}, 1000);
                 }
             }
             catch (ex:Error)
@@ -43,6 +53,8 @@ package xvm.tcarousel
                 Logger.add(ex.getStackTrace());
             }
         }
+
+        // PRIVATE
 
         private function replaceCarouselControl():void
         {
@@ -54,10 +66,11 @@ package xvm.tcarousel
                 var index:int = page.getChildIndex(page.carousel);
                 page.removeChildAt(index);
                 //page.carousel.dispose(); // TODO: exception
-                page.carousel = new UI_TankCarousel();
-                page.addChildAt(page.carousel, index);
-                page.unregisterComponent(Aliases.TANK_CAROUSEL);
-                page.registerComponent(page.carousel, Aliases.TANK_CAROUSEL);
+                var carousel:UI_TankCarousel = new UI_TankCarousel();
+                //page.unregisterComponent(Aliases.TANK_CAROUSEL);
+                //page.registerComponent(page.carousel, Aliases.TANK_CAROUSEL);
+                page.carousel = carousel;
+                page.addChildAt(carousel, index);
             }
             catch (ex:Error)
             {
