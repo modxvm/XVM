@@ -136,7 +136,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         XVMUpdateStyle();
 
         // Load stat
-        if (Config.config.rating.showPlayersStatistics && !Stat.s_loaded)
+        if (!Stat.s_loaded)
         {
             GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, this, onStatLoaded);
         }
