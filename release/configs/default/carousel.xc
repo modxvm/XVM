@@ -16,7 +16,7 @@
     // Spacing between carousel cells.
     // Отступ между ячейками карусели.
     "padding": {
-        "horizontal": 5,    // по горизонтали
+        "horizontal": 10,   // по горизонтали
         "vertical": 2       // по вертикали
     },
     // true - show filters only if all tanks do not fit on the screen.
