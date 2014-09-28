@@ -101,7 +101,7 @@
             };
             //Logger.addObject(img["data"]);
 
-            img.alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
+            img.alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha / 100.0 : 1;
             img.rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
 
             img.autoSize = true;
