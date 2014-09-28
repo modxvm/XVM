@@ -71,7 +71,7 @@
         { "x": 0, "y": 42, "format": "<font color='{{v.c_battles}}'>{{v.battles}}</font>", "shadow": {} },
         { "x": 0, "y": 54, "format": "<font color='{{v.c_damageRating}}'>{{v.damageRating~%}}</font>", "shadow": {} },
         //{ "x": 60, "y": 12, "format": "<font color='{{v.c_type}}'>{{v.premium?1|0}}</font>", "shadow": {} },
-        //{ "x": -1, "y": 54, "format": "<img src='xvm://res/icons/xvm/16x16.png' width='16' height='16'>" },
+        //{ "x": 60, "src": "xvm://res/contour/HARDicons/{{v.sysname}}.png" },
         {}
       ]
     },

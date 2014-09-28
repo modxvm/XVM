@@ -29,7 +29,7 @@ package xvm.tcarousel
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
-            Logger.add((new Error()).getStackTrace());
+            //Logger.add((new Error()).getStackTrace());
             if (Config.config.hangar.carousel.enabled)
                 replaceCarouselControl();
         }
