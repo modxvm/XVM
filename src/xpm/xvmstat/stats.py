@@ -269,7 +269,7 @@ class _Stat(object):
                     else:
                         req = "nick/%s/%s/%s" % (tok, reg, value)
                     server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-                    (response, duration) = loadUrl(server, req)
+                    (response, duration, errStr) = loadUrl(server, req)
 
                     if not response:
                         #err('Empty response or parsing error')
@@ -341,7 +341,7 @@ class _Stat(object):
                     return
 
                 server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-                (response, duration) = loadUrl(server, updateRequest)
+                (response, duration, errStr) = loadUrl(server, updateRequest)
 
                 if not response:
                     #err('Empty response or parsing error')

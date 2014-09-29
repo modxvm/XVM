@@ -26,7 +26,7 @@ _wn8ExpectedData = None
 def _load():
     res = {}
     try:
-        (response, duration) = loadUrl(__WN8_EXPECTED_DATA_URL)
+        (response, duration, errStr) = loadUrl(__WN8_EXPECTED_DATA_URL)
         if not response:
             #err('Empty response or parsing error')
             pass

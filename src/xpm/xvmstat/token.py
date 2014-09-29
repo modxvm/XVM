@@ -46,7 +46,7 @@ def _checkVersion(config):
     try:
         req = "checkVersion/%d" % playerId
         server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-        (response, duration) = loadUrl(server, req)
+        (response, duration, errStr) = loadUrl(server, req)
 
         #response =
         """ {"US":{"message":"www.modxvm.com","ver":"5.2.1-test2"},
@@ -115,14 +115,14 @@ def _getXvmStatTokenData(config):
         return None
 
     tdataActive = _getXvmStatActiveTokenData()
-    tdata = _checkToken(playerId, None if tdataActive is None else tdataActive['token'])
+    (tdata, errStr) = _checkToken(playerId, None if tdataActive is None else tdataActive['token'])
     if tdata is None:
         tdata = _tdataPrev
 
     type = SystemMessages.SM_TYPE.Warning
     msg = _getXvmMessageHeader(config)
     if tdata is None:
-        msg += '{{l10n:token/network_error}}'
+        msg += '{{l10n:token/network_error}}\n\n%s' % utils.hide_guid(errStr)
     elif tdata['status'] == 'badToken':
         msg += '{{l10n:token/bad_token}}'
     elif tdata['status'] == 'blocked':
@@ -142,7 +142,7 @@ def _getXvmStatTokenData(config):
         msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
     else:
         type = SystemMessages.SM_TYPE.Error
-        msg += '{{l10n:token/unknown_status}}\n%s' % simplejson.dumps(tdata)
+        msg += '{{l10n:token/unknown_status}}\n%s' % utils.hide_guid(simplejson.dumps(tdata))
     msg += '</textformat>'
 
     if _tdataPrev is None or _tdataPrev['status'] != 'active' or tdata is None or tdata['status'] != 'active':
@@ -158,15 +158,15 @@ def _getXvmStatTokenData(config):
 
     return tdata
 
-
 def _checkToken(playerId, token):
     data = None
+    errStr = None
     try:
         req = "checkToken/%d" % playerId
         if token is not None:
             req += "/%s" % token.encode('ascii')
         server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-        (response, duration) = loadUrl(server, req)
+        (response, duration, errStr) = loadUrl(server, req)
 
         #response = """{"expires_at":1394834790589,"cnt":0,"_id":4630209,"status":"active","token":"84a45576-5f06-4945-a607-bbee61b4876a","__v":0,"start_at":1393625190589}"""
         #response = """{"expires_at":1394817931657,"cnt":1,"_id":2178413,"status":"inactive","start_at":1393608331657}"""
@@ -183,12 +183,14 @@ def _checkToken(playerId, token):
                 data = None if response in ('', '[]') else simplejson.loads(response)
                 log(utils.hide_guid(response))
             except Exception, ex:
-                err('  Bad answer: ' + response)
+                errStr = 'Bad answer: ' + response
+                err('  ' + errStr)
                 data = None
     except Exception, ex:
+        errStr = str(ex)
         err(traceback.format_exc())
 
-    return data
+    return (data, errStr)
 
 def _getXvmMessageHeader(config):
     msg = '<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">'
