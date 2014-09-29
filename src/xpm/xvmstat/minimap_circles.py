@@ -34,9 +34,6 @@ class _MinimapCircles(object):
 
     def updateCurrentVehicle(self, config):
         #debug('updateCurrentVehicle')
-        cfg = config['minimap']['circles']
-        if not cfg['enabled']:
-            return
 
         self.clear()
 
@@ -138,9 +135,7 @@ class _MinimapCircles(object):
 
     def updateConfig(self, descr, config):
         cfg = config['minimap']['circles']
-        if not cfg['enabled']:
-            return
-
+ 
         #debug(vars(descr))
         #debug(vars(descr.type))
 
