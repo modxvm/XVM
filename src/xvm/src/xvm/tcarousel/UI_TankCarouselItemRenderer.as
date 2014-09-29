@@ -113,7 +113,7 @@ package xvm.tcarousel
             extraFields.addChild(mc);
 
             mc.scaleX = mc.scaleY = cfg.scale;
-            mc.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 100), 0) : 0;
+            mc.alpha = cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
             mc.x += cfg.dx;
             mc.y += cfg.dy;
         }
@@ -126,11 +126,11 @@ package xvm.tcarousel
             vehicleIcon.tankNameField.scaleX = vehicleIcon.tankNameField.scaleY =
                 vehicleIcon.tankNameBg.scaleX = vehicleIcon.tankNameBg.scaleY = cfg.scale;
             vehicleIcon.tankNameField.alpha = vehicleIcon.tankNameBg.alpha =
-                cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 100), 0) : 0;
-            vehicleIcon.tankNameField.x += cfg.dx + (width - 4) * (1 - cfg.scale);
+                cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 1), 0) : 0;
+            vehicleIcon.tankNameField.x = (width - 4) * (1 - cfg.scale) + cfg.dx;
             vehicleIcon.tankNameField.y += cfg.dy;
-            vehicleIcon.tankNameBg.x += cfg.dx + (width - 4) * (1 - cfg.scale);
-            vehicleIcon.tankNameBg.y += cfg.dy;
+            vehicleIcon.tankNameBg.x = vehicleIcon.tankNameField.x + vehicleIcon.tankNameField.width - vehicleIcon.tankNameBg.width;
+            vehicleIcon.tankNameBg.y = vehicleIcon.tankNameField.y + vehicleIcon.tankNameField.height - vehicleIcon.tankNameBg.height;
         }
     }
 }
