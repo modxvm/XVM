@@ -4,41 +4,80 @@
  */
 {
   "clock": {
+    // Show clock in hangar.
+    // Показывать часы в ангаре.
     "enabled": true,
+    // Horizontal position.
+    // Положение по горизонтали.
     "x": -15,
+    // Vertical position.
+    // Положение по вертикали.
     "y": 40,
+    // Width.
+    // Ширина.
     "width": 300,
+    // Height.
+    // Высота.
     "height": 60,
-    "topmost": true,                // true - place at top of other windows, false - at bottom
-    "align": "right",               // horizontal alignment of field at screen ("left", "center", "right")
-    "valign": "top",                // vertical alignment of field at screen ("top", "center", "bottom")
-    "textAlign": "right",           // horizontal alignment of text in field ("left", "center", "right")
-    "textVAlign": "center",         // vertical alignment of text in field ("top", "center", "bottom")
-    "alpha": 100,                   // transparency in percents (0..100)
-    "rotation": 0,                  // rotation in degrees (0..360)
-    "borderColor": null,            // if set, draw border with specified color ("0xXXXXXX")
-    "bgColor": null,                // if set, draw background with specified color ("0xXXXXXX")
-    "antiAliasType": "advanced",    // anti aliasing mode ("advanced" or "normal")
+    // true - place at top of other windows, false - at bottom.
+    // true - отображать поверх остальных окон, false - под.
+    "topmost": true,
+    // Horizontal alignment of field at screen ("left", "center", "right").
+    // Горизонтальное выравнивание поля на экране ("left", "center", "right").
+    "align": "right",
+    // Vertical alignment of field at screen ("top", "center", "bottom").
+    // Вертикальное выравнивание поля на экране ("top", "center", "bottom").
+    "valign": "top",
+    // Horizontal alignment of text in field ("left", "center", "right").
+    // Горизонтальное выравнивание текста внутри поля ("left", "center", "right").
+    "textAlign": "right",
+    // vertical alignment of text in field ("top", "center", "bottom").
+    // Вертикальное выравнивание текста внутри поля ("top", "center", "bottom").
+    "textVAlign": "center",
+    // Transparency in percents [0..100].
+    // Прозрачность в процентах [0..100].
+    "alpha": 100,
+    // Rotation in degrees [0..360].
+    // Угол поворота в градусах [0..360].
+    "rotation": 0,
+    // If set, draw border with specified color ("0xXXXXXX").
+    // Цвет границы, если задан ("0xXXXXXX").
+    "borderColor": null,
+    // If set, draw background with specified color ("0xXXXXXX").
+    // Цвет фона, если задан ("0xXXXXXX").
+    "bgColor": null,
+    // Anti aliasing mode ("advanced" or "normal").
+    // Тип сглаживания ("advanced" или "normal").
+    "antiAliasType": "advanced",
     // Macros available (case sensitive):
-    // {{Y}}   - full year (4 digits)
-    // {{M}}   - month number (1-12)
-    // {{MM}}  - short month name (Jan)
-    // {{MMM}} - full month name (January)
-    // {{D}}   - day number (1-31)
-    // {{W}}   - short weekday name (Mon)
-    // {{WW}}  - full weekday name (Monday)
-    // {{h}}   - hour
-    // {{m}}   - minute
-    // {{s}}   - second
+    // Доступные макросы (чувствительны к регистру):
+    //
+    // {{Y}}   - full year (4 digits)       / год (4 цифры)
+    // {{MMM}} - full month name (January)  / Полное название месяца (Январь)
+    // {{MM}}  - short month name (Jan)     / Укороченное название месяца (Янв)
+    // {{M}}   - month number (1-12)        / номер месяца в году (1-12)
+    // {{D}}   - day number (1-31)          / Номер дня в месяце (1-31)
+    // {{WW}}  - full weekday name (Monday) / Полное название дня недели (Понедельник)
+    // {{W}}   - short weekday name (Mon)   / Укороченное название дня недели (Пон)
+    // {{h}}   - hour                       / часы
+    // {{m}}   - minute                     / минуты
+    // {{s}}   - second                     / секунды
+    //
+    // Clock format.
+    // Формат часов.
     "format": "<font face='$FieldFont'><font size='19'>{{W}} {{D%02d}} {{MM}}</font><font size='26'> {{h%02d}}:{{m%02d}}</font></font>",
+    // Shadow.
+    // Тень.
     "shadow": {
+      // false - no shadow.
+      // false - без тени.
       "enabled": true,
-      "distance": 0,             // (in pixels)
-      "angle": 0,                // (0.0 .. 360.0)
-      "color": "0x000000",       // "0xXXXXXX"
-      "alpha": 70,               // (0 .. 100)
-      "blur": 4,                 // (0.0 .. 255.0)
-      "strength": 2              // (0.0 .. 255.0)
+      "distance": 0,             // (in pixels)     / дистанция смещения
+      "angle": 0,                // (0.0 .. 360.0)  / угол смещения
+      "color": "0x000000",       // "0xXXXXXX"      / цвет
+      "alpha": 70,               // (0 .. 100)      / прозрачность
+      "blur": 4,                 // (0.0 .. 255.0)  / размер
+      "strength": 2              // (0.0 .. 255.0)  / интенсивность
     }
   }
 }

@@ -8,6 +8,7 @@ import traceback
 import gzip
 import StringIO
 import re
+import locale
 
 from constants import *
 from logger import *
@@ -27,7 +28,7 @@ def loadUrl(url, req=None):
 
     startTime = datetime.datetime.now()
 
-    (response, compressedSize) = _loadUrl(u, XVM_STAT_TIMEOUT, XVM_STAT_FINGERPRINT)
+    (response, compressedSize, errStr) = _loadUrl(u, XVM_STAT_TIMEOUT, XVM_STAT_FINGERPRINT)
 
     elapsed = datetime.datetime.now() - startTime
     msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
@@ -39,13 +40,14 @@ def loadUrl(url, req=None):
     else:
         duration = None
 
-    return (response, duration)
+    return (response, duration, errStr)
 
 def _loadUrl(u, timeout, fingerprint): # timeout in msec
     response = None
 
     response = None
     compressedSize = None
+    errStr = None
     conn = None
     try:
         #log(u)
@@ -73,19 +75,29 @@ def _loadUrl(u, timeout, fingerprint): # timeout in msec
         else:
             raise Exception('Encoding not supported: %s' % (encoding))
 
+        #log(response)
         if not resp.status in [200, 202]: # 200 OK, 202 Accepted
-            raise Exception('HTTP Error: [%i] %s. Response: %s' % (resp.status, resp.reason, response[:100]))
+            m = re.search(r'<body>\r?\n?(.+?)</body>', response, flags=re.S|re.I)
+            if m:
+                response = m.group(1)
+            response = re.sub(r'<[^>]+>', '', response)
+            raise Exception('HTTP Error: [%i] %s. Response: %s' % (resp.status, resp.reason, response[:256]))
 
-    except tlslite.TLSLocalAlert:
-        err('loadUrl failed: %s' % traceback.format_exc())
-    
-    except Exception:
+    except tlslite.TLSLocalAlert as ex:
+        err('loadUrl failed: %s' % utils.hide_guid(traceback.format_exc()))
+        errStr = str(ex)
+
+    except Exception as ex:
+        errStr = str(ex)
+        if not isinstance(errStr, unicode):
+            errStr = errStr.decode(locale.getdefaultlocale()[1]).encode("utf-8")
+        #log(errStr)
         response = None
         tb = traceback.format_exc(1).split('\n')
-        err('loadUrl failed: %s %s' % (tb[2], tb[1]))
-    
+        err('loadUrl failed: %s%s' % (utils.hide_guid(errStr), tb[1]))
+
     #finally:
         #if conn is not None:
         #    conn.close()
 
-    return (response, compressedSize)
+    return (response, compressedSize, errStr)

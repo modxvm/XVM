@@ -92,10 +92,10 @@ package xvm.tcarousel
                 });
 
                 setupStandardField(vehicleIcon.xp, cfg.fields.xp);
-                vehicleIcon.xp.x = w - vehicleIcon.xp.width - 2;
+                vehicleIcon.xp.x = w - vehicleIcon.xp.width - 2 + cfg.fields.xp.dx;
 
                 setupStandardField(vehicleIcon.multyXp, cfg.fields.multiXp);
-                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width - 2;
+                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width - 2 + cfg.fields.multiXp.dx;
 
                 setupTankNameField(cfg.fields.tankName, zoom);
 
