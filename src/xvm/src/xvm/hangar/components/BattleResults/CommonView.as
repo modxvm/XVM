@@ -98,8 +98,8 @@ package xvm.hangar.components.BattleResults
 
         private function showCrewExperience(data:Object):void
         {
-            var origCrewXP:int = data.tmenXP / (data.isPremium ? (data.premiumXPFactor10 / 10.0) : 1);
-            var premCrewXP:int = data.tmenXP * (data.isPremium ? 1 : (data.premiumXPFactor10 / 10.0));
+            var origCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col1"].split('<')[0]);
+            var premCrewXP:int = Utils.forceInt(data.xpData[data.xpData.length - 1]["col3"].split('<')[0]);
 
             var vdata:VehicleData = VehicleInfo.get(data.typeCompDescr);
             if (vdata != null && vdata.premium)
