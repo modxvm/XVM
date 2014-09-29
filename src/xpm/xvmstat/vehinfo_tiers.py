@@ -42,6 +42,7 @@ _special = {
     'ussr:Matilda_II_LL':           [ 5, 6 ],
     'usa:T14':                      [ 5, 6 ],
     'ussr:KV-220':                  [ 5, 6 ],
+    'ussr:KV-220_action':           [ 5, 6 ],
     'usa:M4A2E4':                   [ 5, 6 ],
     'uk:GB51_Excelsior':            [ 5, 6 ],
     'uk:GB68_Matilda_Black_Prince': [ 5, 6 ],
