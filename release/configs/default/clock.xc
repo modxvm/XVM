@@ -52,16 +52,19 @@
     // Macros available (case sensitive):
     // Доступные макросы (чувствительны к регистру):
     //
-    // {{Y}}   - full year (4 digits)       / год (4 цифры)
-    // {{MMM}} - full month name (January)  / Полное название месяца (Январь)
-    // {{MM}}  - short month name (Jan)     / Укороченное название месяца (Янв)
-    // {{M}}   - month number (1-12)        / номер месяца в году (1-12)
-    // {{D}}   - day number (1-31)          / Номер дня в месяце (1-31)
-    // {{WW}}  - full weekday name (Monday) / Полное название дня недели (Понедельник)
-    // {{W}}   - short weekday name (Mon)   / Укороченное название дня недели (Пон)
-    // {{h}}   - hour                       / часы
-    // {{m}}   - minute                     / минуты
-    // {{s}}   - second                     / секунды
+    // {{Y}}     - full year (4 digits)       / год (4 цифры)
+    // {{MMM}}   - full month name (January)  / Полное название месяца (Январь)
+    // {{MM}}    - short month name (Jan)     / Укороченное название месяца (Янв)
+    // {{M}}     - month number (1-12)        / номер месяца в году (1-12)
+    // {{D}}     - day number (1-31)          / Номер дня в месяце (1-31)
+    // {{WW}}    - full weekday name (Monday) / Полное название дня недели (Понедельник)
+    // {{W}}     - short weekday name (Mon)   / Укороченное название дня недели (Пон)
+    // {{h}}     - hour                       / часы
+    // {{m}}     - minute                     / минуты
+    // {{s}}     - second                     / секунды
+    // {{H}}     - hour in 12-hour format     / часы в 12-часовом формате
+    // {{AM|PM}} - AM/PM                      / AM/PM
+    // Macros formatting allowed, for example: {{AM?a.m.|p.m.}}
     //
     // Clock format.
     // Формат часов.

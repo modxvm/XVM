@@ -77,7 +77,8 @@
     },
     "clock": {
       //"x": 100,
-      //"y": 5
+      //"y": 5,
+      //"format": "<font face='$FieldFont'><font size='26'> {{H}}:{{m%02d}} {{AM?a.m.|p.m.}}</font></font>"
     }
   },
   "userInfo": {

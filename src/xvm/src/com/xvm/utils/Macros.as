@@ -643,6 +643,8 @@ package com.xvm.utils
                         case "h": return date.hours;
                         case "m": return date.minutes;
                         case "s": return date.seconds;
+                        case "H": return date.hours % 12;
+                        case "AM": return date.hours < 12 ? "AM" : null;
                         default: return "";
                     }
                 }
