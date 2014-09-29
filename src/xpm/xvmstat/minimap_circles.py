@@ -135,7 +135,7 @@ class _MinimapCircles(object):
 
     def updateConfig(self, descr, config):
         cfg = config['minimap']['circles']
- 
+
         #debug(vars(descr))
         #debug(vars(descr.type))
 

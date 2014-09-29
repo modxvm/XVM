@@ -56,6 +56,7 @@ package com.xvm.types.dossier
                 if (vdossier != null)
                 {
                     hitsRatio = vdossier.hitsRatio * 100;
+                    c_hitsRatio = MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HITSRATIO, hitsRatio, "#");
                     tdb = vdossier.avgDamageDealt;
                     c_tdb = MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, tdb, "#");
                     tdv = vdossier.damageDealt / (battles * maxHP);
@@ -110,6 +111,7 @@ package com.xvm.types.dossier
         public var winrate:Number;
         public var c_winrate:String;
         public var hitsRatio:Number;
+        public var c_hitsRatio:String;
         public var tdb:Number;
         public var c_tdb:String;
         public var tdv:Number;

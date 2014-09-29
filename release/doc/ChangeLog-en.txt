@@ -1,8 +1,9 @@
 ﻿XVM-5.3.6-dev:
-  * changed macro value: {{v.hitsRatio}} is in percents now
   * macro {{gun-marks}} changed to {{marksOnGun}}, section "gunmarks" changed to "marksOnGun",
     option "allowGunMarksInPanelsAndMinimap" changed "allowMarksOnGunInPanelsAndMinimap"
     for unification
+  * changed macro value: {{v.hitsRatio}} is in percents now
+  * added macro {{v.c_hitsRatio}} and colors section "hitsRatio"
   * added macro {{v.c_damageRating}} and colors section "damageRating"
   * added option "onHold" to the hotkeys settings for alternative minimap and players panel mode
 

@@ -1,10 +1,11 @@
 ﻿XVM-5.3.6-dev:
-  * изменено значение макроса: {{v.hitsRatio}} теперь в процентах
   * макрос {{gun-marks}} изменен на {{marksOnGun}}, секция "gunmarks" изменена на "marksOnGun",
     опция "allowGunMarksInPanelsAndMinimap" изменена на "allowMarksOnGunInPanelsAndMinimap"
     для однообразия
   * исправлена работа статистики в окне набора роты
-  * добавлен макрос {{damageRating}} и секция цветов "damageRating"
+  * изменено значение макроса: {{v.hitsRatio}} теперь в процентах
+  * добавлен макрос {{v.c_hitsRatio}} и секция цветов "hitsRatio"
+  * добавлен макрос {{v.c_damageRating}} и секция цветов "damageRating"
   * добавлена опция "onHold" в настройки клавиш альтернативной миникарты и режима ушей
 
 XVM-5.3.5:

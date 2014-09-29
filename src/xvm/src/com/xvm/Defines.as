@@ -120,6 +120,7 @@ package com.xvm
         public static const DYNAMIC_COLOR_AVGLVL:int = 16;
         public static const DYNAMIC_COLOR_WN8EFFD:int = 17;
         public static const DYNAMIC_COLOR_DAMAGERATING:int = 18;
+        public static const DYNAMIC_COLOR_HITSRATIO:int = 19;
 
         // Dynamic alpha types
         public static const DYNAMIC_ALPHA_EFF:int = 1;

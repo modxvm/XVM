@@ -35,6 +35,7 @@ Legend:
 │ {{v.elite}}                │ X │ . │ 'elite' for elite, empty for normal vehicle
 │ {{v.maxHP}}                │ X │ . │ maximum vehicle health points
 │ {{v.hitsRatio}}            │ X │ . │ percent of hits
+│ {{v.c_hitsRatio}}          │ X │ . │ dynamic color for this macro
 │ {{v.winrate}}              │ X │ . │ vehicle win rate (percent of wins on this vehicle)
 │ {{v.c_winrate}}            │ X │ . │ color for win rate
 │ {{v.tdb}}                  │ X │ . │ average damage - damage / battles

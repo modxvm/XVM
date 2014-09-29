@@ -22,18 +22,18 @@ package com.xvm
         public function Xvm():void
         {
             focusable = false;
-            Logger.add("Xvm.ctor()");
+            //Logger.add("Xvm.ctor()");
             //init();
         }
 
         override protected function onPopulate():void
         {
             super.onPopulate();
-            Logger.add("onPopulate");
+            //Logger.add("onPopulate");
             if (this.parent != App.instance)
                 (App.instance as MovieClip).addChild(this);
             visible = false;
-            Logger.add("Xvm.entryPoint");
+            //Logger.add("Xvm.entryPoint");
 
             VehicleInfo.populateData();
             Config.load(this, onConfigLoaded);
@@ -41,12 +41,13 @@ package com.xvm
 
         override protected function nextFrameAfterPopulateHandler():void
         {
-            Logger.add("nextFrameAfterPopulateHandler");
+            //Logger.add("nextFrameAfterPopulateHandler");
             if (this.parent != App.instance)
                 (App.instance as MovieClip).addChild(this);
             visible = false;
         }
 
+        /*
         private function init(e:Event = null):void
         {
             Logger.add("Xvm.init()");
@@ -64,6 +65,7 @@ package com.xvm
             VehicleInfo.populateData();
             Config.load(this, onConfigLoaded);
         }
+        */
 
         private function onConfigLoaded():void
         {
