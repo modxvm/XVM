@@ -284,7 +284,10 @@ class com.xvm.Macros
                         break;
                     value = vdata.hpTop;
                 }
-                res = Math.round(parseInt(norm) * value / Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1]).toString();
+                var maxBattleTierHp:Number = Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1];
+                if (pdata["veh-id"] == 65313) // M24 Chaffee Sport
+                    maxBattleTierHp = 1000;
+                res = Math.round(parseInt(norm) * value / maxBattleTierHp).toString();
                 //Logger.add("res: " + res);
                 break;
             case "hp-ratio":
