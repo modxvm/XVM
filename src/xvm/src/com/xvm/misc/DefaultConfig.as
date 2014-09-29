@@ -284,10 +284,9 @@ package com.xvm.misc
         {
             var c:CHotkeys = new CHotkeys();
             c.minimapZoom = { enabled: false, keyCode: 29, onHold: true }; // 29 - Left Ctrl
-            c.minimapAltMode = { enabled: false, keyCode: 29 };
-            c.playersPanelAltMode = { enabled: false, keyCode: 29 };
+            c.minimapAltMode = { enabled: false, keyCode: 29, onHold: true };
+            c.playersPanelAltMode = { enabled: false, keyCode: 29, onHold: true };
             /*
-            c.minimapExtended: { enabled: true, onHold: true, keycode: 16 }
             c.messages: [
               {  enabled: true, keycode: 113, text: "ШАНСЫ 5% АЙДА ТАПИЦА" }, // F2
               {  enabled: true, keycode: 114, text: "☆\nhey!\n☆" } // .split("\n")

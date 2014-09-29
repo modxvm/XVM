@@ -212,8 +212,15 @@ class wot.Minimap.Minimap
     {
         if (!mapExtended)
             return;
+
         //Logger.add("setAltMode: " + e.isDown);
-        MapConfig.isAltMode = e.isDown;
+        if (Config.config.hotkeys.minimapAltMode.onHold)
+            MapConfig.isAltMode = e.isDown;
+        else if (e.isDown)
+            MapConfig.isAltMode = !MapConfig.isAltMode;
+        else
+            return;
+
         GlobalEventDispatcher.dispatchEvent( { type: MinimapEvent.REFRESH } );
         if (stereoscope_exists)
         {

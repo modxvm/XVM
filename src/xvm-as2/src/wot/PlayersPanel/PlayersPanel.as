@@ -128,16 +128,22 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
     }
 
+    private var isAltMode:Boolean = false;
     private function setAltMode(e:Object)
     {
         //Logger.add("setAltMode: " + e.isDown + " " + m_altMode + " " + wrapper.state);
 
         if (m_altMode == null)
             return;
-        if (m_altMode == wrapper.state && e.isDown)
+
+        if (Config.config.hotkeys.playersPanelAltMode.onHold)
+            isAltMode = e.isDown;
+        else if (e.isDown)
+            isAltMode = !isAltMode;
+        else
             return;
 
-        if (e.isDown)
+        if (isAltMode)
         {
             if (m_savedState == null)
                 m_savedState = wrapper.state;
@@ -149,6 +155,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
                 wrapper.state = m_savedState;
             m_savedState = null;
         }
+
         updateSwitcherButton();
     }
 

@@ -8,8 +8,8 @@
     // onHold: false - take action by key click. true - while key is remains pressed.
     // onHold: false - произвести действие по разовому нажатию клавиши. true - по удержанию.
     "minimapZoom":         { "enabled": false, "keyCode": 29, "onHold": true },
-    "minimapAltMode":      { "enabled": false, "keyCode": 29 },
-    "playersPanelAltMode": { "enabled": false, "keyCode": 29 }
+    "minimapAltMode":      { "enabled": false, "keyCode": 29, "onHold": true },
+    "playersPanelAltMode": { "enabled": false, "keyCode": 29, "onHold": true }
   }
 }
 

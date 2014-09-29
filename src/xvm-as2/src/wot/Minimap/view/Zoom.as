@@ -63,7 +63,7 @@ class wot.Minimap.view.Zoom
 
     private function switchBehaviour():Void
     {
-        Logger.add("sw: " + currentState);
+        //Logger.add("sw: " + currentState);
         if (currentState)
         {
             zoomIn();
