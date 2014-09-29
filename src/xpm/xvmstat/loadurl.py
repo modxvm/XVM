@@ -77,10 +77,12 @@ def _loadUrl(u, timeout, fingerprint): # timeout in msec
 
         #log(response)
         if not resp.status in [200, 202]: # 200 OK, 202 Accepted
-            m = re.search(r'<body>\r?\n?(.+?)</body>', response, flags=re.S|re.I)
+            m = re.search(r'<body[^>]+?>\r?\n?(.+?)</body>', response, flags=re.S|re.I)
             if m:
                 response = m.group(1)
             response = re.sub(r'<[^>]+>', '', response)
+            response = re.sub(r'nginx/\d+\.\d+\.\d+', '', response)
+            response = response.strip()
             raise Exception('HTTP Error: [%i] %s. Response: %s' % (resp.status, resp.reason, response[:256]))
 
     except tlslite.TLSLocalAlert as ex:
