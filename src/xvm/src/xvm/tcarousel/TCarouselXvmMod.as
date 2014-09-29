@@ -9,7 +9,7 @@ package xvm.tcarousel
 
     public class TCarouselXvmMod extends XvmModBase
     {
-        public override function get logPrefix():String
+        override public function get logPrefix():String
         {
             return "[XVM:TCAROUSEL]";
         }
@@ -19,7 +19,13 @@ package xvm.tcarousel
             "hangar": TCarouselXvmView
         }
 
-        public override function get views():Object
+        override public function entryPoint():void
+        {
+            //Logger.add((new Error()).getStackTrace());
+            super.entryPoint();
+        }
+
+        override public function get views():Object
         {
             return _views;
         }

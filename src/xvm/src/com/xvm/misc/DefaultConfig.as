@@ -160,6 +160,13 @@ package com.xvm.misc
             c.carousel.alwaysShowFilters = false;
             c.carousel.hideBuyTank = false;
             c.carousel.hideBuySlot = false;
+            c.carousel.filters = {
+              nation:   { enabled: true },
+              type:     { enabled: true },
+              level:    { enabled: true },
+              prefs:    { enabled: true },
+              favorite: { enabled: true }
+            },
             c.carousel.fields = {
                 tankType: { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },
                 level:    { visible: true, dx: 0, dy: 0, alpha: 100, scale: 1 },

@@ -22,12 +22,26 @@ package com.xvm
         public function Xvm():void
         {
             focusable = false;
-            Config.load(this, init);
+            Logger.add("Xvm.ctor()");
+            //init();
+        }
+
+        override protected function onPopulate():void
+        {
+            super.onPopulate();
+            Logger.add("onPopulate");
+            if (this.parent != App.instance)
+                (App.instance as MovieClip).addChild(this);
+            visible = false;
+            Logger.add("Xvm.entryPoint");
+
+            VehicleInfo.populateData();
+            Config.load(this, onConfigLoaded);
         }
 
         override protected function nextFrameAfterPopulateHandler():void
         {
-            //Logger.add("nextFrameAfterPopulateHandler");
+            Logger.add("nextFrameAfterPopulateHandler");
             if (this.parent != App.instance)
                 (App.instance as MovieClip).addChild(this);
             visible = false;
@@ -35,6 +49,7 @@ package com.xvm
 
         private function init(e:Event = null):void
         {
+            Logger.add("Xvm.init()");
             if (!stage)
             {
                 addEventListener(Event.ADDED_TO_STAGE, init);
@@ -44,7 +59,14 @@ package com.xvm
 
             // entry point
 
+            Logger.add("Xvm.entryPoint");
+
             VehicleInfo.populateData();
+            Config.load(this, onConfigLoaded);
+        }
+
+        private function onConfigLoaded():void
+        {
             Cmd.getMods(this, onGetModsComplete);
         }
 
@@ -63,17 +85,17 @@ package com.xvm
                 var ctx:LoaderContext = new LoaderContext(false, ApplicationDomain.currentDomain);
 
                 var preload:Array = [ // TODO make configurable dependencies
+                    "nodesLib.swf",                 // xvm-treeview
+                    "TankCarousel.swf",             // xvm-tcarousel
+                    "serviceMessageComponents.swf", // xvm-svcmsg
+                    "profileStatistics.swf",        // xvm-profile
+                    "profileTechnique.swf",         // xvm-profile
+                    "squadWindow.swf",              // xvm-squad
                     "prebattleComponents.swf",      // xvm-company
                     "companiesListWindow.swf",      // xvm-company
                     "companyWindow.swf",            // xvm-company
-                    //"squadWindow.swf",              // xvm-squad
                     "battleResults.swf",            // xvm-hangar
-                    "battleLoading.swf",            // xvm-hangar
-                    "TankCarousel.swf",             // xvm-tcarousel
-                    "nodesLib.swf",                 // xvm-treeview
-                    "serviceMessageComponents.swf", // xvm-svcmsg
-                    "profileStatistics.swf",        // xvm-profile
-                    "profileTechnique.swf"          // xvm-profile
+                    "battleLoading.swf"             // xvm-hangar
                 ];
                 for (var x:int = 0; x < preload.length; ++x)
                 {

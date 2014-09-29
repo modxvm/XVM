@@ -4,23 +4,28 @@
  */
 {
   "hotkeys": {
-    // keycodes below
+    // keycodes below.
+    // коды клавиш внизу файла.
     // onHold: false - take action by key click. true - while key is remains pressed.
     // onHold: false - произвести действие по разовому нажатию клавиши. true - по удержанию.
+    //
+    // Minimap zooming.
+    // Увеличение миникарты.
     "minimapZoom":         { "enabled": false, "keyCode": 29, "onHold": true },
+    // Alternative minimap mode.
+    // Альтернативный режим миникарты.
     "minimapAltMode":      { "enabled": false, "keyCode": 29 },
+    // Alternative "ears" (players panels) mode.
+    // Альтернативный режим "ушей" (панелей игроков).
     "playersPanelAltMode": { "enabled": false, "keyCode": 29 }
   }
 }
 
 /*
 
-from keys.py:
+Keycodes:
+Коды клавиш:
 
-"""
-This module contains definitions of all keycodes known to the client.
-They are set to the values as in the C++ files.
-"""
 MODIFIER_SHIFT = 1
 MODIFIER_CTRL = 2
 MODIFIER_ALT = 4
@@ -268,6 +273,5 @@ AXIS_LX = 0
 AXIS_LY = 1
 AXIS_RX = 2
 AXIS_RY = 3
-
 
 */

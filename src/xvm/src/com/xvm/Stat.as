@@ -531,6 +531,9 @@ package com.xvm
                 });
             }
 
+            if (vis.length == 0)
+                return 0;
+
             // 2. Sort vehicles info by top tiers descending
             vis.sortOn("Tmax", Array.NUMERIC | Array.DESCENDING);
 

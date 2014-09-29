@@ -1,5 +1,7 @@
 """ XPM mods loader (c) www.modxvm.com 2013-2014 """
 
+_XPM_VER = '1.5.0'
+
 import glob
 import os
 import ResMgr
@@ -27,7 +29,8 @@ except Exception, err:
     wd = 'res_mods/%s/%s' % (ver, os.path.dirname(__file__))
     print ("[XPM]   fallback to the default path: %s" % wd)
 
-print "[XPM] Working dir: " + wd
+print "[XPM] %s" % _XPM_VER
+print "[XPM] Working dir: %s" % wd
 
 # add libs to path
 import sys

@@ -216,7 +216,8 @@ def _appStarted(event):
     g_entitiesFactories.addSettings(settings)
     app = g_windowsManager.window
     if app is not None:
-        BigWorld.callback(0, _loadView)
+        #BigWorld.callback(0, _loadView)
+        _loadView()
 
 def _loadView():
     try:

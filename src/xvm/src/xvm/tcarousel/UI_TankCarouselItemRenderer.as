@@ -91,11 +91,11 @@ package xvm.tcarousel
                     vehicleIcon.levelMc.visible = true;
                 });
 
-                vehicleIcon.xp.x = w - vehicleIcon.xp.width - 2;
                 setupStandardField(vehicleIcon.xp, cfg.fields.xp);
+                vehicleIcon.xp.x = w - vehicleIcon.xp.width - 2;
 
-                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width - 2;
                 setupStandardField(vehicleIcon.multyXp, cfg.fields.multiXp);
+                vehicleIcon.multyXp.x = w - vehicleIcon.multyXp.width - 2;
 
                 setupTankNameField(cfg.fields.tankName, zoom);
 
@@ -127,9 +127,9 @@ package xvm.tcarousel
                 vehicleIcon.tankNameBg.scaleX = vehicleIcon.tankNameBg.scaleY = cfg.scale;
             vehicleIcon.tankNameField.alpha = vehicleIcon.tankNameBg.alpha =
                 cfg.visible ? Math.max(Math.min(cfg.alpha / 100.0, 100), 0) : 0;
-            vehicleIcon.tankNameField.x += cfg.dx;
+            vehicleIcon.tankNameField.x += cfg.dx + (width - 4) * (1 - cfg.scale);
             vehicleIcon.tankNameField.y += cfg.dy;
-            vehicleIcon.tankNameBg.x += cfg.dx;
+            vehicleIcon.tankNameBg.x += cfg.dx + (width - 4) * (1 - cfg.scale);
             vehicleIcon.tankNameBg.y += cfg.dy;
         }
     }

@@ -9,6 +9,7 @@ package xvm.tcarousel
     import com.xvm.misc.*;
     import com.xvm.utils.*;
     import com.xvm.types.dossier.*;
+    import net.wg.data.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.infrastructure.events.*;
@@ -28,17 +29,24 @@ package xvm.tcarousel
 
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
+            //Logger.add((new Error()).getStackTrace());
             if (Config.config.hangar.carousel.enabled)
                 replaceCarouselControl();
         }
 
-        public override function onAfterPopulate(e:LifeCycleEvent):void
+        override public function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.addObject("onAfterPopulate: " + view.as_alias);
             try
             {
                 if (Config.config.hangar.carousel.enabled)
-                    init();
+                {
+                    //App.utils.scheduler.scheduleTask(function():void
+                    //{
+                    //    replaceCarouselControl();
+                        init();
+                    //}, 1000);
+                }
             }
             catch (ex:Error)
             {
@@ -46,16 +54,28 @@ package xvm.tcarousel
             }
         }
 
+        // PRIVATE
+
         private function replaceCarouselControl():void
         {
-            if (isNaN(Config.config.hangar.carousel.rows) || Config.config.hangar.carousel.rows <= 0)
-                Config.config.hangar.carousel.rows = 1;
+            try
+            {
+                if (isNaN(Config.config.hangar.carousel.rows) || Config.config.hangar.carousel.rows <= 0)
+                    Config.config.hangar.carousel.rows = 1;
 
-            var index:int = page.getChildIndex(page.carousel);
-            page.removeChildAt(index);
-            //page.carousel.dispose(); // TODO: exception
-            page.carousel = new UI_TankCarousel(Config.config.hangar.carousel);
-            page.addChildAt(page.carousel, index);
+                var index:int = page.getChildIndex(page.carousel);
+                page.removeChildAt(index);
+                //page.carousel.dispose(); // TODO: exception
+                var carousel:UI_TankCarousel = new UI_TankCarousel();
+                //page.unregisterComponent(Aliases.TANK_CAROUSEL);
+                //page.registerComponent(page.carousel, Aliases.TANK_CAROUSEL);
+                page.carousel = carousel;
+                page.addChildAt(carousel, index);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         private function init():void
