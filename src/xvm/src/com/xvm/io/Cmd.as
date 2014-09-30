@@ -31,6 +31,8 @@ package com.xvm.io
         private static const COMMAND_LOGSTAT:String = "logstat";
         private static const COMMAND_SAVE_SETTINGS:String = "save_settings";
         private static const COMMAND_LOAD_SETTINGS:String = "load_settings";
+        private static const COMMAND_GETCOMMENTS:String = "getComments";
+        private static const COMMAND_SETCOMMENTS:String = "setComments";
         private static const COMMAND_TEST:String = "test";
 
         public static const RESPOND_PINGDATA:String = "xvm.pingdata";
@@ -41,6 +43,7 @@ package com.xvm.io
         public static const RESPOND_BATTLESTATE:String = "xvm.battleState";
         public static const RESPOND_MARKSONGUN:String = "xvm.marksOnGun";
         public static const RESPOND_UPDATECURRENTVEHICLE:String = "xvm.updatecurrentvehicle";
+        public static const RESPOND_GETCOMMENTS:String = "xvm.getComments";
 
         public static function getMods(target:Object, callback:Function):void
         {
@@ -139,6 +142,16 @@ package com.xvm.io
             _call(null, null, [COMMAND_SAVE_SETTINGS, key, value]);
         }
 
+        public static function getComments():void
+        {
+            _call(null, null, [COMMAND_GETCOMMENTS]);
+        }
+
+        public static function setComments(value:String):void
+        {
+            _call(null, null, [COMMAND_SETCOMMENTS, value]);
+        }
+
         public static function runTest(... args):void
         {
             if (args[0] == "battleResults")
@@ -171,7 +184,7 @@ package com.xvm.io
                 ExternalInterface.addCallback("xvm.respond", _callback);
                 setTimeout(function():void {
                     Cmd._xvm_sandbox_cmd_initialized = true;
-                    Cmd._call(target, callback, args);
+                    Cmd._call_internal(target, callback, args, cmd);
                 }, 1);
             }
             else
