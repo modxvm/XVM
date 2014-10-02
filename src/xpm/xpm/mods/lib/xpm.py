@@ -49,7 +49,8 @@ def load_file(fn):
     try:
         return codecs.open(fn, 'r', 'utf-8-sig').read()
     except:
-        logtrace(__file__)
+        if fn != 'res_mods/xvm/configs/xvm.xc':
+            logtrace(__file__)
         return None
 
 def load_config(fn):

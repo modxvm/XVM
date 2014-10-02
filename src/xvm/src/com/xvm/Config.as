@@ -90,7 +90,7 @@ package com.xvm
                     }
                     else
                     {
-                        var text:String = e.message + ": ";
+                        var text:String = (e.filename ? "Error parsing file " + e.filename.replace(Defines.XVM_CONFIGS_DIR_NAME, '') : e.message) + ": ";
                         text += ConfigUtils.parseErrorEvent(e.error);
 
                         stateInfo = { error: text };
