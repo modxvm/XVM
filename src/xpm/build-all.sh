@@ -1,5 +1,8 @@
 #!/bin/sh
 
+CLEAR=0
+BUILD_LIBS=0
+
 ### Path vars can be assigned at .bashrc
 [ "$GAME_VER" = "" ] && GAME_VER="0.9.3"
 #[ "$GAME_VER" = "" ] && GAME_VER="0.9.3 Common Test"
@@ -24,6 +27,7 @@ build()
   echo "Build: $1"
   f=${1#*/}
   d=${f%/*}
+
   [ "$d" = "$f" ] && d=""
 
   "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
@@ -39,7 +43,7 @@ build()
   rm -f $1c
 }
 
-clear
+[ "$XPM_DEVELOPMENT" != "" -a "$CLEAR" != "0" ] && clear
 
 for dir in $(find . -maxdepth 1 -type "d" ! -path "./xpm*" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
@@ -49,6 +53,15 @@ done
 
 for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
+  if [ "$XPM_DEVELOPMENT" != "" -a "$BUILD_LIBS" = "0" ]; then
+    if [[ $f = kwg_waiting_fix/* ]]; then continue; fi
+    if [[ $f = xpm/mods/lib/six.py ]]; then continue; fi
+    if [[ $f = xpm/mods/lib/ssl.py ]]; then continue; fi
+    if [[ $f = xpm/mods/lib/simplejson/* ]]; then continue; fi
+    if [[ $f = xpm/mods/lib/tlslite/* ]]; then continue; fi
+    if [[ $f = xpm/mods/lib/websocket/* ]]; then continue; fi
+  fi
+
   m=${f%%/*}
   if [ "$m" = "xpm" ]; then
     build $f
