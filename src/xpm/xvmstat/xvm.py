@@ -57,9 +57,6 @@ class Xvm(object):
             res = None
             if cmd == COMMAND_LOG:
                 log(*args)
-            elif cmd == COMMAND_LOAD_FILE:
-                fn = os.path.join(XVM_DIR, args[0])
-                res = load_file(fn) if os.path.exists(fn) else None
             elif cmd == COMMAND_SET_CONFIG:
                 #debug('setConfig')
                 self.config_str = args[0]
@@ -103,11 +100,16 @@ class Xvm(object):
                 res = userprefs.get(args[0])
             elif cmd == COMMAND_SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
+            elif cmd == COMMAND_GETCOMMENTS:
+                res = token.getXvmUserComments()
+            elif cmd == COMMAND_SETCOMMENTS:
+                token.setXvmUserComments(args[0])
             elif cmd == COMMAND_TEST:
                 runTest(args)
             else:
                 err("unknown command: " + str(cmd))
-            proxy.movie.invoke(('xvm.respond', [id, res]))
+            proxy.movie.invoke(('xvm.respond',
+                [id] + res if isinstance(res, list) else [id, res]))
         except Exception, ex:
             err(traceback.format_exc())
 
