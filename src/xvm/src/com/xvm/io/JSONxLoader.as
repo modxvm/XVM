@@ -4,101 +4,68 @@
  */
 package com.xvm.io
 {
-    import com.xvm.io.JSONx;
-    import com.xvm.Logger;
-    import flash.display.Loader;
-    import flash.events.Event;
-    import flash.net.URLLoader;
-    import flash.net.URLRequest;
-    import flash.events.IOErrorEvent;
+    import com.xvm.*;
+    import com.xvm.io.*;
+    import flash.utils.*;
+    import net.wg.infrastructure.interfaces.entity.*;
 
     public class JSONxLoader
     {
-        private var rootPath:Object;
-        private var rootFileName:Object;
-        private var target:Object;
-        private var callback:Function;
-
-        private var file_cache:Object = { };
-        private var obj_cache:Object = { };
-        private var pendingFiles:Array = [ ];
-
-        private var rootObj:Object;
-
-        public static function LoadAndParse(filename:String, target:Object, callback:Function):void
+        public static function Load(filename:String):Object
         {
-            //Logger.add("LoadAndParse: " + filename);
-            var jxl:JSONxLoader = new JSONxLoader(filename, target, callback);
-            // WARNING: inline call does not work
-            jxl.LoadFiles();
+            try
+            {
+                //Logger.add("LoadAndParse: " + filename);
+                return (new JSONxLoader(filename))._Load();
+            }
+            catch (ex:Object)
+            {
+                if (ex is Error)
+                    return ex;
+                var er:* = new Error();
+                er.inner = ex;
+                return er;
+            }
+            return null;
         }
 
         // PRIVATE
 
-        function JSONxLoader(rootFileName:String, target:Object, callback:Function)
+        private var rootFileName:String;
+        private var file_cache:Dictionary;
+        private var obj_cache:Dictionary;
+
+        public function JSONxLoader(rootFileName:String)
         {
-            var a:Array = rootFileName.split("\\").join("/").split("/");
-            this.rootFileName = a.pop();
-            this.rootPath = a.length > 0 ? a.join("/") + "/" : "";
-            this.target = target;
-            this.callback = callback;
-            this.pendingFiles = [ this.rootFileName ];
-            this.rootObj = {$ref: { file: this.rootFileName, path: "." }};
+            this.rootFileName = rootFileName;
+            this.file_cache = new Dictionary();
+            this.obj_cache = new Dictionary();
         }
 
-        private var loadingCount:Number;
-        private function LoadFiles():void
-        {
-            Logger.add("LoadFiles: ['" + pendingFiles.join("', '") + "']");
-            loadingCount = pendingFiles.length;
-            for (var i:Number = 0; i < loadingCount; ++i)
-                LoadFile(pendingFiles[i]);
-            pendingFiles = [ ];
-        }
+        //private var rootFileName:Object;
+        private var pendingFiles:Vector.<String>;
 
-        private function LoadFile(filename:String):void
+        private function _Load():*
         {
-            var me:JSONxLoader = this;
-            var loader:URLLoader = new URLLoader();
-            var $this:JSONxLoader = this;
-            loader.addEventListener(Event.COMPLETE, function(e:Event):void { $this.onLoadFileComplete(e, filename) });
-            loader.addEventListener(IOErrorEvent.IO_ERROR, function(e:Event):void { $this.onLoadFileComplete(e, filename) });
-            try
+            var rootObj:Object = {$ref: { file: rootFileName, path: "." }};
+            pendingFiles = Vector.<String>([ rootFileName ]);
+
+            while (pendingFiles.length > 0)
             {
-                loader.load(new URLRequest(rootPath + filename));
-            }
-            catch (error:Error)
-            {
-                Logger.add(error.getStackTrace());
-            }
-        }
-
-        private function onLoadFileComplete(e:Event, filename:String):void
-        {
-            var loader:URLLoader = e.target as URLLoader;
-            file_cache[filename] = loader.data;
-            if (!--loadingCount)
-                LoadFileCallback();
-        }
-
-        private function LoadFileCallback():void
-        {
-            try
-            {
-                rootObj = Deref(rootObj);
-                if (pendingFiles.length > 0)
+                //Logger.addObject(pendingFiles);
+                pendingFiles.forEach(function(filename:String):void
                 {
-                    LoadFiles();
-                    return;
-                }
-            }
-            catch (ex:*)
-            {
-                callback.call(target, ex);
-                return;
+                    Logger.add("LoadFile: " + filename.replace(Defines.XVM_CONFIGS_DIR_NAME, ''));
+                    var data:String = Xvm.cmd(Xvm.XPM_COMMAND_LOADFILE, filename);
+                    if (data == null)
+                        throw { type: filename == rootFileName ? "NO_FILE" : "NO_REF_FILE", message: "file is missing: " + filename };
+                    file_cache[filename] = data;
+                });
+                pendingFiles = new Vector.<String>();
+                rootObj = Deref(rootObj);
             }
 
-            callback.call(target, { data:rootObj, filename:rootFileName } );
+            return rootObj;
         }
 
         private function Deref(data:Object, level:int = 0, file:String = null, obj_path:String = null):Object
@@ -169,10 +136,10 @@ package com.xvm.io
             {
                 try
                 {
-                    if (!obj_cache.hasOwnProperty(fn))
+                    if (obj_cache[fn] === undefined)
                         obj_cache[fn] = JSONx.parse(file_cache[fn]);
                     if (obj_cache[fn] == null)
-                        throw { type: fn == rootFileName ? "NO_FILE" : "NO_REF_FILE", message: "file is missing: " + fn };
+                        throw { type: fn == rootFileName ? "NO_FILE" : "NO_REF_FILE", message: "error parsing file: " + fn };
                     var value:* = getValue(obj_cache[fn], data.$ref.path);
                     if (value === undefined)
                         throw { type: "BAD_REF", message: "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };

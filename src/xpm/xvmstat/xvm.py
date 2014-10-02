@@ -14,7 +14,6 @@ from xpm import *
 
 from constants import *
 from logger import *
-from gameregion import *
 from pinger import *
 #from pinger_wg import *
 from stats import getBattleStat, getBattleResultsStat, getUserData
@@ -72,12 +71,6 @@ class Xvm(object):
             elif cmd == COMMAND_GETSCREENSIZE:
                 #return
                 res = simplejson.dumps(list(GUI.screenResolution()))
-            elif cmd == COMMAND_GETGAMEREGION:
-                #return
-                res = region
-            elif cmd == COMMAND_GETLANGUAGE:
-                #return
-                res = language
             elif cmd == COMMAND_GETVEHICLEINFODATA:
                 #return
                 res = getVehicleInfoDataStr()

@@ -24,7 +24,9 @@ package com.xvm
         private static const _XPM_COMMAND_INITIALIZED:String = "xpm.initialized";
 
         // public commands
-        private static const XPM_COMMAND_LOADFILE:String = "xpm.loadFile";
+        public static const XPM_COMMAND_LOADFILE:String = "xpm.loadFile";
+        public static const XPM_COMMAND_GETGAMEREGION:String = "xpm.gameRegion";
+        public static const XPM_COMMAND_GETGAMELANGUAGE:String = "xpm.gameLanguage";
 
         // static methods for Python-Flash communication
 
@@ -40,7 +42,7 @@ package com.xvm
         // private fields
 
         private var modsList:Vector.<String>;
-        private var loadedCount:Number;
+        private var loadedList:Vector.<String>;
         private var loadStart:Number;
 
         // initialization
@@ -75,7 +77,9 @@ package com.xvm
             super.onPopulate();
 
             VehicleInfo.populateData();
-            Config.load(this, onConfigLoaded);
+
+            Config.load();
+            LoadMods();
         }
 
         override protected function nextFrameAfterPopulateHandler():void
@@ -83,11 +87,6 @@ package com.xvm
             //Logger.add("nextFrameAfterPopulateHandler");
             if (this.parent != App.instance)
                 (App.instance as MovieClip).addChild(this);
-        }
-
-        private function onConfigLoaded():void
-        {
-            LoadMods();
         }
 
         private function LoadMods():void
@@ -116,8 +115,8 @@ package com.xvm
                 ]));
 
                 // load xvm mods
-                loadedCount = 0;
                 loadStart = (new Date()).getTime();
+                loadedList = new Vector.<String>;
                 modsList = modsList.map(function(x:String):String { return Defines.XVMMODS_ROOT + x.replace(/^.*\//, ''); } );
                 App.libraryLoader.load(modsList);
                 checkLoadComplete();
@@ -134,7 +133,7 @@ package com.xvm
             {
                 if (modsList.indexOf(e.url.replace(/^gui\/flash\//i, '')) < 0)
                     return;
-                loadedCount++;
+                loadedList.push(e.url.replace(/^.*\//, ''));
                 Logger.add("[XVM] Mod " + (e.loader == null ? "load failed" : "loaded") + ": " + e.url.replace(/^.*\//, ''));
             }
             catch (ex:Error)
@@ -147,12 +146,23 @@ package com.xvm
         {
             //Logger.add("checkLoadComplete");
 
-            if (modsList.length > loadedCount && ((new Date()).getTime() - loadStart) < 5000)
+            if (modsList.length > loadedList.length && ((new Date()).getTime() - loadStart) < 5000)
             {
                 App.utils.scheduler.envokeInNextFrame(checkLoadComplete);
-                return;
             }
-            cmd(_XPM_COMMAND_INITIALIZED);
+            else
+            {
+                cmd(_XPM_COMMAND_INITIALIZED);
+                if (modsList.length > loadedList.length)
+                {
+                    for (var i:int = 0; i < modsList.length; ++i)
+                    {
+                        var x:String = modsList[i].replace(/^.*\//, '');
+                        if (loadedList.indexOf(x) < 0)
+                            Logger.add("WARNING: mod is not loaded: " + x);
+                    }
+                }
+            }
         }
     }
 }

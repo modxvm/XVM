@@ -1,4 +1,4 @@
-""" XPM misc functions (c) www.modxvm.com 2013-2014 """
+""" XPM core functions (c) www.modxvm.com 2013-2014 """
 
 import os
 import datetime
@@ -153,6 +153,7 @@ def OverrideMethod(cls, method, handler):
 # WG-Specific
 
 import BigWorld
+import ResMgr
 
 def getCurrentPlayerId():
     player = BigWorld.player()
@@ -174,6 +175,32 @@ def isReplay():
     import BattleReplay
     return BattleReplay.g_replayCtrl.isPlaying
 
+### Region and language
+
+_updateurl = ResMgr.openSection('scripts_config.xml').readString('csisUrl')
+
+gameRegion = 'null'
+if _updateurl is not None:
+    if 'csis-ct.worldoftanks.' in _updateurl:
+        gameRegion = 'CT'
+    elif 'worldoftanks.ru' in _updateurl:
+        gameRegion = 'RU'
+    elif 'worldoftanks.eu' in _updateurl:
+        gameRegion = 'EU'
+    elif 'worldoftanks.com' in _updateurl:
+        gameRegion = 'NA'
+    elif 'worldoftanks.cn' in _updateurl:
+        gameRegion = 'CN'
+    elif 'worldoftanks.asia' in _updateurl:
+        gameRegion = 'ASIA'
+    elif 'worldoftanks.vn' in _updateurl:
+        gameRegion = 'VTC'
+    elif 'worldoftanks.kr' in _updateurl:
+        gameRegion = 'KR'
+
+from helpers import getClientLanguage
+gameLanguage = getClientLanguage()
+
 
 #####################################################################
 # SWF mods initializer
@@ -189,6 +216,8 @@ _XVM_SWF_URL = '../../../xvm/mods/xvm.swf'
 _XPM_COMMAND_GETMODS = "xpm.getMods"
 _XPM_COMMAND_INITIALIZED = "xpm.initialized"
 _XPM_COMMAND_LOADFILE = "xpm.loadFile"
+_XPM_COMMAND_GETGAMEREGION = "xpm.gameRegion"
+_XPM_COMMAND_GETGAMELANGUAGE = "xpm.gameLanguage"
 
 _xvmView = None
 _xpmInitialized = False
@@ -202,14 +231,20 @@ def _start():
 
     class XvmView(View):
         def xvm_cmd(self, cmd, *args):
-            log('[XPM] cmd: ' + cmd + str(args))
+            debug('[XPM] # ' + cmd + str(args))
             if cmd == _XPM_COMMAND_GETMODS:
                 return _xpm_getMods()
             elif cmd == _XPM_COMMAND_INITIALIZED:
                 global _xpmInitialized
                 _xpmInitialized = True
             elif cmd == _XPM_COMMAND_LOADFILE:
-                return loadFile(args[0])
+                return load_file(args[0])
+            elif cmd == _XPM_COMMAND_GETGAMEREGION:
+                global gameRegion
+                return gameRegion
+            elif cmd == _XPM_COMMAND_GETGAMELANGUAGE:
+                global gameLanguage
+                return gameLanguage
             else:
                 handlers = g_eventBus._EventBus__scopes[EVENT_BUS_SCOPE.DEFAULT][XPM_CMD]
                 for handler in handlers.copy():
@@ -278,12 +313,6 @@ def _onViewLoaded(view):
 
 def _xpm_getMods():
     try:
-        #from gui.WindowsManager import g_windowsManager
-        #app = g_windowsManager.window
-        #from gui.shared import g_eventBus, EVENT_BUS_SCOPE
-        #BigWorld.callback(5, lambda: app.fireEvent(events.LoadEvent(events.LoadEvent.LOAD_BARRACKS), scope = EVENT_BUS_SCOPE.LOBBY))
-        #BigWorld.callback(6, lambda: app.fireEvent(events.LoadEvent(events.LoadEvent.LOAD_HANGAR), scope = EVENT_BUS_SCOPE.LOBBY))
-
         mods_dir = _XVM_MODS_DIR
         if not os.path.isdir(mods_dir):
             return None

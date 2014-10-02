@@ -47,7 +47,6 @@ from xpm import *
 
 from constants import *
 from logger import *
-from gameregion import region
 from loadurl import loadUrl
 from token import getXvmStatActiveTokenData
 import utils
@@ -242,7 +241,7 @@ class _Stat(object):
     def _get_user(self):
         (value, isId) = self.req['args']
         orig_value = value
-        reg = region
+        reg = gameRegion
         if isId:
             value = str(int(value))
         else:

@@ -15,8 +15,6 @@ package com.xvm.io
         private static const COMMAND_SET_CONFIG:String = "setConfig";
         private static const COMMAND_PING:String = "ping";
         private static const COMMAND_GETSCREENSIZE:String = "getScreenSize";
-        private static const COMMAND_GETGAMEREGION:String = "getGameRegion";
-        private static const COMMAND_GETLANGUAGE:String = "getLanguage";
         private static const COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
         private static const COMMAND_GETXVMSTATTOKENDATA:String = "getXvmStatTokenData";
         private static const COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
@@ -62,16 +60,6 @@ package com.xvm.io
         public static function getScreenSize(target:Object, callback:Function):void
         {
             _call(target, callback, [COMMAND_GETSCREENSIZE]);
-        }
-
-        public static function getGameRegion(target:Object, callback:Function):void
-        {
-            _call(target, callback, [COMMAND_GETGAMEREGION]);
-        }
-
-        public static function getLanguage(target:Object, callback:Function):void
-        {
-            _call(target, callback, [COMMAND_GETLANGUAGE]);
         }
 
         public static function getVehicleInfoData(target:Object, callback:Function):void

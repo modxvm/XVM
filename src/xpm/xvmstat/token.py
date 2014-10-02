@@ -35,7 +35,6 @@ from gui import SystemMessages
 
 from constants import *
 import db
-from gameregion import region
 from logger import *
 from loadurl import loadUrl
 import utils
@@ -208,8 +207,8 @@ def _getVersionText(curVer):
     msg = ''
     global _verInfo
     if _verInfo is not None:
-        if region in _verInfo:
-            data = _verInfo[region]
+        if gameRegion in _verInfo:
+            data = _verInfo[gameRegion]
             if utils.compareVersions(data['ver'], curVer) == 1:
                 return '{{l10n:ver/newVersion:%s:%s}}\n' % (data['ver'], data['message'])
     return ''

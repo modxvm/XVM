@@ -28,7 +28,7 @@ package com.xvm
 
         public static function LoadLocaleFile():void
         {
-            JSONxLoader.LoadAndParse(Defines.XVM_ROOT + "l10n/" + Config.language + ".xc", Instance, Instance.languageFileCallback);
+            Instance.setupLanguage(JSONxLoader.Load(Defines.XVM_L10N_DIR_NAME + Config.language + ".xc"));
         }
 
         public static function get(format:String):String
@@ -314,33 +314,28 @@ package com.xvm
             s_lang_fallback = (Config.gameRegion == "RU") ? FALLBACK_RU : FALLBACK_EN;
         }
 
-        private function languageFileCallback(event:Object):void
+        private function setupLanguage(res:Object):void
         {
-            var result:Object = { };
-            try
+            var res:Object = { };
+
+            if (res is Error)
             {
-                if (event.error == null)
+                var e:Object = res.inner ? res.inner : res;
+                if (e.type == "NO_FILE")
                 {
-                    s_lang = event.data;
-                    Logger.add("Locale: Loaded " + Config.language);
+                    Logger.add("Locale: Can not find language file. " + e.message);
                 }
                 else
                 {
-                    if (event.error.type == "NO_FILE")
-                        Logger.add("Locale: Can not find language file. Filename: " + event.filename);
-                    else
-                    {
-                        var ex:* = event.error;
-                        var text:String = "Error loading language file '" + event.filename + "': ";
-                        text += ConfigUtils.parseErrorEvent(event);
-                        result.error = text;
-                        Logger.add(text);
-                    }
+                    var text:String = e.message + ": ";
+                    text += ConfigUtils.parseErrorEvent(e.error);
+                    Logger.add(text);
                 }
             }
-            finally
+            else
             {
-                dispatchEvent(new ObjectEvent(Defines.E_LOCALE_LOADED, result));
+                s_lang = res;
+                Logger.add("Locale: Loaded " + Config.language);
             }
         }
     }

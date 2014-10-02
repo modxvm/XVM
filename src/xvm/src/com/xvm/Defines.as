@@ -21,9 +21,6 @@ package com.xvm
         // res_mods/xvm/
         public static const XVM_ROOT:String = "../../../xvm/";
 
-        // res_mods/xvm/
-        public static const XVMCONF_ROOT:String = XVM_ROOT + "configs/";
-
         // res_mods/xvm/res/
         public static const XVMRES_ROOT:String = XVM_ROOT + "res/";
 
@@ -36,11 +33,17 @@ package com.xvm
         // res_mods/xvm/res/ (for <img> tag)
         public static const XVMRES_IMG_ROOT:String = "../xvm/res/";
 
-        // res_mods/xvm/res/SixthSense.png
-        public static const SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
+        // res_mods/xvm/configs/
+        public static const XVM_CONFIGS_DIR_NAME:String = "res_mods/xvm/configs/";
 
         // res_mods/xvm/configs/xvm.xc
-        public static const CONFIG_FILE_NAME:String = "xvm.xc";
+        public static const XVM_CONFIG_FILE_NAME:String = XVM_CONFIGS_DIR_NAME + "xvm.xc";
+
+        // res_mods/xvm/l10n
+        public static const XVM_L10N_DIR_NAME:String = "res_mods/xvm/l10n/";
+
+        // res_mods/xvm/res/SixthSense.png
+        public static const SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
 
         // Settings keys
         public static const SETTINGS_WIDGETS:String = "widgets";
@@ -58,7 +61,6 @@ package com.xvm
 
         // Events
         public static const E_CMD_RECEIVED:String = "cmd_rvcd";
-        public static const E_LOCALE_LOADED:String = "locale_loaded";
         public static const E_ITEM_UPDATED:String = "item_updated";
 
         // UI Colors
