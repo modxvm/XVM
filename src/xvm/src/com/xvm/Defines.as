@@ -57,6 +57,7 @@ package com.xvm
         public static const MAX_BATTLETIER_HPS:Array = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000];
 
         // Events
+        public static const E_CMD_RECEIVED:String = "cmd_rvcd";
         public static const E_LOCALE_LOADED:String = "locale_loaded";
         public static const E_ITEM_UPDATED:String = "item_updated";
 

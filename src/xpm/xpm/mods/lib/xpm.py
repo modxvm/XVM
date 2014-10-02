@@ -180,15 +180,58 @@ def isReplay():
 
 from gui.shared import events
 
-_APPLICATION_SWF = 'Application.swf'
-_COMMAND_GETMODS = "getMods"
+XPM_CMD = 'xpm.cmd'
+
 _XVM_MODS_DIR = "res_mods/xvm/mods"
 _XVM_VIEW_ALIAS = 'xvm'
 _XVM_SWF_URL = '../../../xvm/mods/xvm.swf'
 
+_XPM_COMMAND_GETMODS = "xpm.getMods"
+_XPM_COMMAND_INITIALIZED = "xpm.initialized"
+_XPM_COMMAND_LOADFILE = "xpm.loadFile"
+
+_xvmView = None
+_xpmInitialized = False
+
 def _start():
     #debug('start')
-    from gui.shared import g_eventBus
+
+    from gui.shared import g_eventBus, EVENT_BUS_SCOPE
+    from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
+    from gui.Scaleform.framework.entities.View import View
+
+    class XvmView(View):
+        def xvm_cmd(self, cmd, *args):
+            log('[XPM] cmd: ' + cmd + str(args))
+            if cmd == _XPM_COMMAND_GETMODS:
+                return _xpm_getMods()
+            elif cmd == _XPM_COMMAND_INITIALIZED:
+                global _xpmInitialized
+                _xpmInitialized = True
+            elif cmd == _XPM_COMMAND_LOADFILE:
+                return loadFile(args[0])
+            else:
+                handlers = g_eventBus._EventBus__scopes[EVENT_BUS_SCOPE.DEFAULT][XPM_CMD]
+                for handler in handlers.copy():
+                    try:
+                        (result, status) = handler(cmd, *args)
+                        if status:
+                            return result
+                    except TypeError:
+                        err(traceback.format_exc())
+                log('WARNING: unknown command: %s' % cmd)
+
+        def as_xvm_cmdS(self, cmd, *args):
+            return self.flashObject.as_xvm_cmd(cmd, *args)
+
+    g_entitiesFactories.addSettings(ViewSettings(
+        _XVM_VIEW_ALIAS,
+        XvmView,
+        _XVM_SWF_URL,
+        ViewTypes.SERVICE_LAYOUT,
+        None,
+        ScopeTemplates.GLOBAL_SCOPE))
+
     g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, _appStarted)
 
 def _fini():
@@ -196,64 +239,72 @@ def _fini():
     from gui.shared import g_eventBus
     g_eventBus.removeListener(events.GUICommonEvent.APP_STARTED, _appStarted)
 
-def _FlashInit(self, swf, className = 'Flash', args = None, path = None):
-    self.swf = swf
-    if self.swf == _APPLICATION_SWF:
-        self.addExternalCallback('xpm.cmd', lambda *args: _onXpmCommand(self, *args))
-
-def _FlashBeforeDelete(self):
-    if self.swf == _APPLICATION_SWF:
-        self.removeExternalCallback('xpm.cmd')
-
 def _appStarted(event):
     #debug('AppStarted')
-    from gui.WindowsManager import g_windowsManager
-    from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
-    from gui.Scaleform.framework.entities.View import View
-    viewType = ViewTypes.SERVICE_LAYOUT
-    scopeTemplate = ScopeTemplates.GLOBAL_SCOPE
-    settings = ViewSettings(_XVM_VIEW_ALIAS, View, _XVM_SWF_URL, viewType, None, scopeTemplate)
-    g_entitiesFactories.addSettings(settings)
-    app = g_windowsManager.window
-    if app is not None:
-        #BigWorld.callback(0, _loadView)
-        _loadView()
-
-def _loadView():
     try:
-        #debug('loadView')
         from gui.WindowsManager import g_windowsManager
-        g_windowsManager.window.loadView(_XVM_VIEW_ALIAS)
+        app = g_windowsManager.window
+        if app is not None:
+            global _xvmView
+            _xvmView = None
+            global _xpmInitialized
+            _xpmInitialized = False
+            app.loaderManager.onViewLoaded += _onViewLoaded
+            BigWorld.callback(0, lambda:app.loadView(_XVM_VIEW_ALIAS))
+            #app.loadView(_XVM_VIEW_ALIAS)
     except Exception, ex:
         err(traceback.format_exc())
 
-def _onXpmCommand(proxy, id, cmd, *args):
+def _AppLoadView(base, self, newViewAlias, name = None, *args, **kwargs):
+    #log('loadView: ' + newViewAlias)
+    if newViewAlias == 'hangar':
+        global _xpmInitialized
+        if _xpmInitialized == False:
+            BigWorld.callback(0, lambda:_AppLoadView(base, self, newViewAlias, name, *args, **kwargs))
+            return
+    base(self, newViewAlias, name, *args, **kwargs)
+
+def _onViewLoaded(view):
+    #log('onViewLoaded: ' + view.alias)
+    if view is not None and view.alias == _XVM_VIEW_ALIAS:
+        from gui.WindowsManager import g_windowsManager
+        app = g_windowsManager.window
+        #if app is not None:
+        #    app.loaderManager.onViewLoaded -= _onViewLoaded
+        global _xvmView
+        _xvmView = view
+
+# commands handlers
+
+def _xpm_getMods():
     try:
-        #debug("id=" + str(id) + " cmd=" + str(cmd) + " args=" + json.dumps(args))
-        res = None
-        if cmd == _COMMAND_GETMODS:
-            mods_dir = _XVM_MODS_DIR
-            if not os.path.isdir(mods_dir):
-                return None
-            mods = []
-            for m in glob.iglob(mods_dir + "/*.swf"):
-                m = m.replace('\\', '/')
-                if not m.lower().endswith("/xvm.swf"):
-                    mods.append(m)
-            res = json.dumps(mods) if mods else None
+        #from gui.WindowsManager import g_windowsManager
+        #app = g_windowsManager.window
+        #from gui.shared import g_eventBus, EVENT_BUS_SCOPE
+        #BigWorld.callback(5, lambda: app.fireEvent(events.LoadEvent(events.LoadEvent.LOAD_BARRACKS), scope = EVENT_BUS_SCOPE.LOBBY))
+        #BigWorld.callback(6, lambda: app.fireEvent(events.LoadEvent(events.LoadEvent.LOAD_HANGAR), scope = EVENT_BUS_SCOPE.LOBBY))
 
-        proxy.movie.invoke(('xpm.respond', [id, res]))
+        mods_dir = _XVM_MODS_DIR
+        if not os.path.isdir(mods_dir):
+            return None
+        mods = []
+        for m in glob.iglob(mods_dir + "/*.swf"):
+            m = m.replace('\\', '/')
+            if not m.lower().endswith("/xvm.swf"):
+                mods.append(m)
+        return mods
     except Exception, ex:
         err(traceback.format_exc())
+    return None
 
-from gui.Scaleform.Flash import Flash
-RegisterEvent(Flash, '__init__', _FlashInit)
-RegisterEvent(Flash, 'beforeDelete', _FlashBeforeDelete)
+# register events
+
 def _RegisterEvents():
     _start()
     import game
     RegisterEvent(game, 'fini', _fini)
-
+    from gui.Scaleform.framework.application import App
+    OverrideMethod(App, 'loadView', _AppLoadView)
 BigWorld.callback(0, _RegisterEvents)
 
 

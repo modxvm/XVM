@@ -41,11 +41,7 @@ package xvm.tcarousel
             {
                 if (Config.config.hangar.carousel.enabled)
                 {
-                    //App.utils.scheduler.scheduleTask(function():void
-                    //{
-                    //    replaceCarouselControl();
-                        init();
-                    //}, 1000);
+                    init();
                 }
             }
             catch (ex:Error)
@@ -67,8 +63,6 @@ package xvm.tcarousel
                 page.removeChildAt(index);
                 //page.carousel.dispose(); // TODO: exception
                 var carousel:UI_TankCarousel = new UI_TankCarousel();
-                //page.unregisterComponent(Aliases.TANK_CAROUSEL);
-                //page.registerComponent(page.carousel, Aliases.TANK_CAROUSEL);
                 page.carousel = carousel;
                 page.addChildAt(carousel, index);
             }

@@ -35,7 +35,8 @@ import net.wg.gui.notification.*; NotificationListView;
 import net.wg.gui.prebattle.company.*; CompanyMainWindow; CompanyListView; CompanyRoomView;
 import net.wg.gui.prebattle.squad.*; SquadWindow; MessengerUtils;
 import net.wg.infrastructure.base.*; BaseViewWrapper;
-import net.wg.infrastructure.events.*; LoaderEvent; LifeCycleEvent;
+import net.wg.infrastructure.events.*; LoaderEvent; LifeCycleEvent; LibraryLoaderEvent;
+import net.wg.infrastructure.helpers.*; LibraryLoader;
 import net.wg.infrastructure.managers.impl.*; ContainerManager;
 
 /**

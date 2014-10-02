@@ -11,10 +11,7 @@ package com.xvm.io
 
     public class Cmd
     {
-        private static const XPM_COMMAND_GETMODS:String = "getMods";
-
         private static const COMMAND_LOG:String = "log";
-        private static const COMMAND_LOAD_FILE:String = "loadFile";
         private static const COMMAND_SET_CONFIG:String = "setConfig";
         private static const COMMAND_PING:String = "ping";
         private static const COMMAND_GETSCREENSIZE:String = "getScreenSize";
@@ -45,19 +42,9 @@ package com.xvm.io
         public static const RESPOND_UPDATECURRENTVEHICLE:String = "xvm.updatecurrentvehicle";
         public static const RESPOND_GETCOMMENTS:String = "xvm.getComments";
 
-        public static function getMods(target:Object, callback:Function):void
-        {
-            _call_xpm(target, callback, [XPM_COMMAND_GETMODS]);
-        }
-
         public static function log(str:String):void
         {
             _call(null, null, [COMMAND_LOG, str]);
-        }
-
-        public static function loadFile(filename:String, target:Object, callback:Function):void
-        {
-            _call(target, callback, [COMMAND_LOAD_FILE, filename]);
         }
 
         public static function setConfig():void
