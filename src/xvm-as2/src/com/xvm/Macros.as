@@ -334,9 +334,9 @@ class com.xvm.Macros
             // {{name}}
             pdata["name"] = name;
             // {{clan}}
-            pdata["clan"] = clan;
+            pdata["clan"] = clan == "" ? null : clan;
             // {{clannb}}
-            pdata["clannb"] = Utils.GetClanName(fname);
+            pdata["clannb"] = clan == "" ? null : Utils.GetClanName(fname);
             // {{player}}
             pdata["player"] = data.himself == true ? "pl" : null;
         }
