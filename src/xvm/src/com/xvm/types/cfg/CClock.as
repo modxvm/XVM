@@ -20,6 +20,7 @@ package com.xvm.types.cfg
         public var rotation:Number;
         public var borderColor:String;
         public var bgColor:String;
+        public var bgImage:String;
         public var antiAliasType:String;
         public var format:String;
         public var shadow:CShadow;

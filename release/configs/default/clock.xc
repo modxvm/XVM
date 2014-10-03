@@ -46,6 +46,9 @@
     // If set, draw background with specified color ("0xXXXXXX").
     // Цвет фона, если задан ("0xXXXXXX").
     "bgColor": null,
+    // If set, draw image at background.
+    // Фоновое изображение, если задано.
+    "bgImage": null,
     // Anti aliasing mode ("advanced" or "normal").
     // Тип сглаживания ("advanced" или "normal").
     "antiAliasType": "advanced",

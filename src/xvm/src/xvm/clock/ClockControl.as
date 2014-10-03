@@ -8,6 +8,9 @@ package xvm.clock
     import com.xvm.types.cfg.*;
     import com.xvm.types.*;
     import com.xvm.utils.*;
+    import flash.display.*;
+    import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with LabelControl
+    import net.wg.gui.events.*;
     import scaleform.clik.constants.*;
     import scaleform.gfx.*;
 
@@ -30,7 +33,7 @@ package xvm.clock
         {
             super.configUI();
 
-            visible = true;
+            this.visible = true;
             this.focusable = false;
             this.mouseChildren = false;
             this.mouseEnabled = false;
@@ -55,6 +58,8 @@ package xvm.clock
                 textField.border = true;
                 textField.borderColor = parseInt(cfg.borderColor, 16);
             }
+            if (cfg.bgImage != null)
+                createBackgroundImage(cfg.bgImage);
             textField.rotation = cfg.rotation;
             if (cfg.shadow.enabled)
                 textField.filters = [ Utils.createShadowFilter(cfg.shadow) ];
@@ -81,6 +86,21 @@ package xvm.clock
         }
 
         // PRIVATE
+
+        private function createBackgroundImage(src:String):void
+        {
+            // wild coding style :)
+            this.addChildAt(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
+                autoSize: true,
+                maintainAspectRatio: false,
+                source: "../../" + Utils.fixImgTag(src).replace("img://", "")
+            }), 0).addEventListener(UILoaderEvent.COMPLETE, function(e:UILoaderEvent):void {
+                var img:UILoaderAlt = e.currentTarget as UILoaderAlt;
+                var loader:Loader = img.getChildAt(1) as Loader;
+                img.width = loader.contentLoaderInfo.content.width / scaleX;
+                img.height = loader.contentLoaderInfo.content.height / scaleY;
+            });
+        }
 
         private function updatePosition():void
         {

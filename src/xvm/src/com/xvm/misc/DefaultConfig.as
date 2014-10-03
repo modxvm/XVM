@@ -194,6 +194,7 @@ package com.xvm.misc
             c.clock.rotation = 0;
             c.clock.borderColor = null;
             c.clock.bgColor = null;
+            c.clock.bgImage = null;
             c.clock.antiAliasType = "advanced";
             c.clock.format = "<font face='$FieldFont'><font size='19'>{{W}} {{D%02d}} {{MM}}</font><font size='26'> {{h%02d}}:{{m%02d}}</font></font>";
             c.clock.shadow = new CShadow();
