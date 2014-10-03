@@ -206,6 +206,9 @@ package com.xvm.misc
             c.clock.shadow.blur = 4;
             c.clock.shadow.strength = 2;
 
+            c.comments = new CComments();
+            c.comments.enabled = true;
+
             return c;
         }
 

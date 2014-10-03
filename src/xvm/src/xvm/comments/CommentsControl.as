@@ -9,6 +9,7 @@ package xvm.comments
     import com.xvm.types.*;
     import com.xvm.utils.*;
     import scaleform.clik.constants.*;
+    import scaleform.clik.events.InputEvent;
     import scaleform.gfx.*;
 
     public class CommentsControl extends LabelControl
@@ -21,25 +22,15 @@ package xvm.comments
         {
             super.configUI();
 
-            visible = true;
-            this.focusable = false;
-            this.mouseChildren = false;
-            this.mouseEnabled = false;
-
             width = 200;
             height = 200;
             x = 300;
-            y = 150;
+            y = 0;
 
             textField.border = true;
             textField.borderColor = 0xFFFF00;
 
             invalidate();
-        }
-
-        override protected function draw():void
-        {
-            super.draw();
         }
     }
 }

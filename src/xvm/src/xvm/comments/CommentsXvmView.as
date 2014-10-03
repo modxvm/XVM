@@ -9,7 +9,7 @@ package xvm.comments
     import com.xvm.io.*;
     import com.xvm.types.cfg.*;
     import flash.external.*;
-    import net.wg.gui.lobby.*;
+    import net.wg.gui.messenger.windows.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
 
@@ -20,9 +20,9 @@ package xvm.comments
             super(view);
         }
 
-        public function get page():LobbyPage
+        public function get page():ContactsWindow
         {
-            return super.view as LobbyPage;
+            return super.view as ContactsWindow;
         }
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
@@ -43,12 +43,11 @@ package xvm.comments
 
         private function createComments():void
         {
-            //var cfg:CComments = Config.config.hangar.comments;
-            //if (cfg.enabled)
+            var cfg:CComments = Config.config.hangar.comments;
+            if (cfg.enabled)
             {
-                comments = page.addChildAt(new CommentsControl(), page.getChildIndex(page.header) + 1) as CommentsControl;
-                ExternalInterface.addCallback(Cmd.RESPOND_GETCOMMENTS, onGetCommentsReceived);
-                Cmd.getComments();
+                comments = page.addChild(new CommentsControl()) as CommentsControl;
+                Cmd.getComments(this, onGetCommentsReceived);
             }
         }
 
@@ -63,7 +62,12 @@ package xvm.comments
 
         private function onGetCommentsReceived(json_str:String):void
         {
-            Logger.add(json_str);
+            if (comments != null)
+                comments.text = json_str;
+            //var $this:Object = this;
+            //App.utils.scheduler.scheduleTask(function():void {
+            //    Cmd.setComments($this, onGetCommentsReceived, App.utils.dateTime.now().toString());
+            //}, 5000);
         }
     }
 }

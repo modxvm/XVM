@@ -38,7 +38,6 @@ package com.xvm.io
         public static const RESPOND_BATTLESTATE:String = "xvm.battleState";
         public static const RESPOND_MARKSONGUN:String = "xvm.marksOnGun";
         public static const RESPOND_UPDATECURRENTVEHICLE:String = "xvm.updatecurrentvehicle";
-        public static const RESPOND_GETCOMMENTS:String = "xvm.getComments";
 
         public static function log(str:String):void
         {
@@ -117,14 +116,14 @@ package com.xvm.io
             _call(null, null, [COMMAND_SAVE_SETTINGS, key, value]);
         }
 
-        public static function getComments():void
+        public static function getComments(target:Object, callback:Function):void
         {
-            _call(null, null, [COMMAND_GETCOMMENTS]);
+            _call(target, callback, [COMMAND_GETCOMMENTS]);
         }
 
-        public static function setComments(value:String):void
+        public static function setComments(target:Object, callback:Function, value:String):void
         {
-            _call(null, null, [COMMAND_SETCOMMENTS, value]);
+            _call(target, callback, [COMMAND_SETCOMMENTS, value]);
         }
 
         public static function runTest(... args):void

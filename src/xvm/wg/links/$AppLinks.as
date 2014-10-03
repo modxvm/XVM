@@ -31,6 +31,7 @@ import net.wg.gui.lobby.profile.pages.technique.*; ProfileTechniquePage; Profile
 import net.wg.gui.lobby.techtree.*; TechTreePage; ResearchPage;
 import net.wg.gui.lobby.window.*; ProfileWindow;
 import net.wg.gui.messenger.controls.*; MemberItemRenderer;
+import net.wg.gui.messenger.windows.*; ContactsWindow;
 import net.wg.gui.notification.*; NotificationListView;
 import net.wg.gui.prebattle.company.*; CompanyMainWindow; CompanyListView; CompanyRoomView;
 import net.wg.gui.prebattle.squad.*; SquadWindow; MessengerUtils;

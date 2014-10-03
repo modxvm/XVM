@@ -14,11 +14,12 @@ def getXvmStatTokenData(config):
 def getXvmMessageHeader(config):
     return _getXvmMessageHeader(config)
 
-def getXvmUserComments():
-    return _getXvmUserComments()
+def getToken():
+    return _token
 
-def setXvmUserComments(value):
-    return _setXvmUserComments(value)
+def setToken(value):
+    global _token
+    _token = value
 
 # PRIVATE
 
@@ -27,6 +28,7 @@ from random import randint
 import traceback
 import datetime
 import time
+import urllib
 
 import simplejson
 
@@ -42,6 +44,7 @@ from websock import g_websock
 
 _verInfo = None
 _tdataPrev = None
+_token = None
 
 def _checkVersion(config):
     playerId = getCurrentPlayerId()
@@ -149,6 +152,9 @@ def _getXvmStatTokenData(config):
             tdata['token'] = tdataActive['token']
         db.set('tokens', 'lastPlayerId', playerId)
 
+    global _token
+    _token = tdata.get('token', '').encode('ascii')
+
     return tdata
 
 def _checkToken(playerId, token):
@@ -212,77 +218,3 @@ def _getVersionText(curVer):
             if utils.compareVersions(data['ver'], curVer) == 1:
                 return '{{l10n:ver/newVersion:%s:%s}}\n' % (data['ver'], data['message'])
     return ''
-
-def _getXvmUserComments():
-    data = None
-    try:
-        global _tdataPrev
-        if _tdataPrev is None or not 'token' in _tdataPrev:
-            return None
-        token = _tdataPrev['token']
-
-        req = "getComments/%d" % playerId
-        if token is not None:
-            req += "/%s" % token.encode('ascii')
-        server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-        (response, duration, errStr) = loadUrl(server, req)
-
-        #response = """{"expires_at":1394834790589,"cnt":0,"_id":4630209,"status":"active","token":"84a45576-5f06-4945-a607-bbee61b4876a","__v":0,"start_at":1393625190589}"""
-        #response = """{"expires_at":1394817931657,"cnt":1,"_id":2178413,"status":"inactive","start_at":1393608331657}"""
-        #response = """{"expires_at":1394817931657,"cnt":3,"_id":2178413,"status":"badToken","start_at":1393608331657}"""
-
-        if not response:
-            #err('Empty response or parsing error')
-            pass
-        else:
-            try:
-                if response is None:
-                    return None
-                response = response.strip()
-                data = None if response in ('', '[]') else simplejson.loads(response)
-                log(utils.hide_guid(response))
-            except Exception, ex:
-                errStr = 'Bad answer: ' + response
-                err('  ' + errStr)
-                data = None
-    except Exception, ex:
-        errStr = str(ex)
-        err(traceback.format_exc())
-
-    return data
-
-def _setXvmUserComments(value):
-    try:
-        global _tdataPrev
-        if _tdataPrev is None or not 'token' in _tdataPrev:
-            return None
-        token = _tdataPrev['token']
-
-        #"addComments/token/str"
-        req = "checkToken/%d" % playerId
-        if token is not None:
-            req += "/%s" % token.encode('ascii')
-        server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-        (response, duration, errStr) = loadUrl(server, req)
-
-        #response = """{"expires_at":1394834790589,"cnt":0,"_id":4630209,"status":"active","token":"84a45576-5f06-4945-a607-bbee61b4876a","__v":0,"start_at":1393625190589}"""
-        #response = """{"expires_at":1394817931657,"cnt":1,"_id":2178413,"status":"inactive","start_at":1393608331657}"""
-        #response = """{"expires_at":1394817931657,"cnt":3,"_id":2178413,"status":"badToken","start_at":1393608331657}"""
-
-        if not response:
-            #err('Empty response or parsing error')
-            pass
-        else:
-            try:
-                if response is None:
-                    return None
-                response = response.strip()
-                data = None if response in ('', '[]') else simplejson.loads(response)
-                log(utils.hide_guid(response))
-            except Exception, ex:
-                errStr = 'Bad answer: ' + response
-                err('  ' + errStr)
-                data = None
-    except Exception, ex:
-        errStr = str(ex)
-        err(traceback.format_exc())

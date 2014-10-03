@@ -21,6 +21,7 @@ from dossier import getDossier
 from vehinfo import getVehicleInfoDataStr
 from vehstate import getVehicleStateData
 import token
+import comments
 import utils
 import userprefs
 from websock import g_websock
@@ -94,9 +95,9 @@ class Xvm(object):
             elif cmd == COMMAND_SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
             elif cmd == COMMAND_GETCOMMENTS:
-                res = token.getXvmUserComments()
+                res = simplejson.dumps(comments.getXvmUserComments())
             elif cmd == COMMAND_SETCOMMENTS:
-                token.setXvmUserComments(args[0])
+                res = simplejson.dumps(comments.setXvmUserComments(args[0]))
             elif cmd == COMMAND_TEST:
                 runTest(args)
             else:
@@ -208,6 +209,7 @@ class Xvm(object):
         if self.currentPlayerId is not None:
             self.currentPlayerId = None
             g_websock.send('id')
+            token.setToken(None)
 
     def onShowLobby(self, e=None):
         playerId = getCurrentPlayerId()

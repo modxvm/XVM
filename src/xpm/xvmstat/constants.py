@@ -36,7 +36,6 @@ RESPOND_MARKSONGUN = "xvm.marksOnGun"
 RESPOND_PINGDATA = "xvm.pingdata"
 RESPOND_USERDATA = "xvm.userdata"
 RESPOND_UPDATECURRENTVEHICLE = "xvm.updatecurrentvehicle"
-RESPOND_GETCOMMENTS = "xvm.getComments"
 
 #COMMAND_GETSTAT = "getstat"
 #COMMAND_LOGSTAT = "logstat"

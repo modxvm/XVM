@@ -301,7 +301,7 @@ def _AppLoadView(base, self, newViewAlias, name = None, *args, **kwargs):
     base(self, newViewAlias, name, *args, **kwargs)
 
 def _onViewLoaded(view):
-    #log('onViewLoaded: ' + view.alias)
+    debug('onViewLoaded: ' + view.alias)
     if view is not None and view.alias == _XVM_VIEW_ALIAS:
         from gui.WindowsManager import g_windowsManager
         app = g_windowsManager.window

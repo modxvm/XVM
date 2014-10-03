@@ -6,7 +6,10 @@
   * added macro {{v.c_hitsRatio}} and colors section "hitsRatio"
   * added macro {{v.c_damageRating}} and colors section "damageRating"
   * added option "onHold" to the hotkeys settings for alternative minimap and players panel mode
-  * added option "clock"/"bgImage" for background image in clock
+  * added option hangar/clock/bgImage for background image in clock
+  * new section:
+      hangar/carousel - extended tank carousel settings
+  * added section hangar/comments for comments for players mod
 
 XVM-5.3.5:
   * adaptation to WoT 0.9.3

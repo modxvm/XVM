@@ -17,7 +17,7 @@ package xvm.comments
 
         private static const _views:Object =
         {
-            "lobby": CommentsXvmView
+            "messenger/contactsWindow": CommentsXvmView
         }
 
         public override function get views():Object
