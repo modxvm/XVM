@@ -15,15 +15,16 @@ from logger import *
 import utils
 
 # result: (response, duration)
-def loadUrl(url, req=None):
+def loadUrl(url, req=None, showLog=True):
     url = url.replace("{API}", XVM_STAT_API_VERSION)
     if req is not None:
         url = url.replace("{REQ}", req)
     u = urlparse(url)
     ssl = url.lower().startswith('https://')
-    # hide some chars of token in the log
-    path_log = utils.hide_guid(u.path)
-    log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
+    if showLog or IS_DEVELOPMENT:
+        # hide some chars of token in the log
+        path_log = utils.hide_guid(u.path) if not IS_DEVELOPMENT else u.path
+        log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
     #time.sleep(5)
 
     startTime = datetime.datetime.now()

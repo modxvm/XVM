@@ -102,6 +102,8 @@ package com.xvm
                 // preload swfs
                 App.libraryLoader.load(Vector.<String>([ // TODO make configurable dependencies
                     "nodesLib.swf",                 // xvm-treeview
+                    "messengerControls.swf",        // xvm-comments
+                    "contactsWindow.swf",           // xvm-comments
                     "TankCarousel.swf",             // xvm-tcarousel
                     "serviceMessageComponents.swf", // xvm-svcmsg
                     "profileStatistics.swf",        // xvm-profile

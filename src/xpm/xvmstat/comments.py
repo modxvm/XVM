@@ -69,9 +69,9 @@ class _Comments:
             if t == '':
                 return {'error':'NO_TOKEN'}
 
-            req = "setComments/%s/%s" % (t, urllib.quote_plus(value))
+            req = "addComments/%s/%s" % (t, urllib.quote(value, safe=''))
             server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-            (response, duration, errStr) = loadUrl(server, req)
+            (response, duration, errStr) = loadUrl(server, req, False)
 
             if not response:
                 return {'error':'NO_RESPONSE', 'errStr':errStr}
@@ -81,11 +81,12 @@ class _Comments:
                 data = {} if response in ('', '[]') else simplejson.loads(response)
                 #log(utils.hide_guid(response))
                 self.cached_token = t
-                self.cached_data = simplejson.parse(value)
+                self.cached_data = data
                 return data
             except Exception, ex:
                 errStr = 'Bad answer: ' + response
                 err('  ' + errStr)
+                err(traceback.format_exc())
                 return {'error':'BAD_ANSWER', 'errStr':errStr}
         except Exception, ex:
             errStr = str(ex)
