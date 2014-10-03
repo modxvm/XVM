@@ -20,9 +20,9 @@ class com.xvm.Locale
 
     public static function get(format:String):String
     {
-        //Logger.add("[AS2][Locale][get]: id: " + format + " | value: " + s_lang.locale[format] + " | fallback value: " + s_lang_fallback[format]);
-        if (s_lang.locale && s_lang.locale.hasOwnProperty(format))
-            format =  s_lang.locale[format];
+        //Logger.add("[AS2][Locale][get]: id: " + format + " | value: " + s_lang[format] + " | fallback value: " + s_lang_fallback[format]);
+        if (s_lang && s_lang.hasOwnProperty(format))
+            format =  s_lang[format];
         else if (s_lang_fallback.hasOwnProperty(format))
             format = s_lang_fallback[format];
         /** each item in array begin with macro */
@@ -57,6 +57,8 @@ class com.xvm.Locale
     {
         try
         {
+            s_lang = null;
+
             LoadLanguageFallback();
 
             if (data_str == null)
@@ -168,7 +170,7 @@ class com.xvm.Locale
 
             // VehicleMarkersManager
             tr["blownUp"] = "Взрыв БК!";
-            
+
             //Vehicle status
             tr["Destroyed"] = "Уничтожен";
             tr["No data"] = "Нет данных";
