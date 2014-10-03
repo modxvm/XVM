@@ -33,10 +33,10 @@ package com.xvm
 
         public static function get(format:String):String
         {
-            //Logger.add("Locale[get]: string: " + format + " | string: " + s_lang.locale[format] + " | fallback string: " + s_lang_fallback[format]);
-            if (s_lang.locale && s_lang.locale.hasOwnProperty(format))
-                format = s_lang.locale[format];
-            else if (s_lang_fallback.hasOwnProperty(format))
+            //Logger.add("Locale[get]: string: " + format + " | string: " + s_lang[format] + " | fallback string: " + s_lang_fallback[format]);
+            if (s_lang && s_lang[format] != null)
+                format = s_lang[format];
+            else if (s_lang_fallback[format] != null)
                 format = s_lang_fallback[format];
 
             /** each item in array begin with macro */
@@ -300,7 +300,7 @@ package com.xvm
             "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet."
         };
 
-        public static var s_lang:Object = { };
+        public static var s_lang:Object;
         private static var s_lang_fallback:Object;
 
         //private var _initialized:Boolean = false;
@@ -310,14 +310,13 @@ package com.xvm
 
         function Locale()
         {
+            s_lang = null;
             // This strings will be used if [langcode].xc not found
             s_lang_fallback = (Config.gameRegion == "RU") ? FALLBACK_RU : FALLBACK_EN;
         }
 
         private function setupLanguage(res:Object):void
         {
-            var res:Object = { };
-
             if (res is Error)
             {
                 var e:Object = res.inner ? res.inner : res;
@@ -327,15 +326,16 @@ package com.xvm
                 }
                 else
                 {
-                    var text:String = e.message + ": ";
-                    text += ConfigUtils.parseErrorEvent(e.error);
+                    var text:String = "[" + e.type + "] " + e.message + ": ";
+                    text += ConfigUtils.parseErrorEvent(e);
                     Logger.add(text);
                 }
             }
             else
             {
-                s_lang = res;
-                Logger.add("Locale: Loaded " + Config.language);
+                s_lang = res.locale;
+                if (s_lang == null)
+                    Logger.add("Locale: \"locale\" section is not found in the file");
             }
         }
     }

@@ -33,14 +33,17 @@ package com.xvm
         // res_mods/xvm/res/ (for <img> tag)
         public static const XVMRES_IMG_ROOT:String = "../xvm/res/";
 
+        // res_mods/xvm/
+        public static const XVM_DIR_NAME:String = "res_mods/xvm/";
+
         // res_mods/xvm/configs/
-        public static const XVM_CONFIGS_DIR_NAME:String = "res_mods/xvm/configs/";
+        public static const XVM_CONFIGS_DIR_NAME:String = XVM_DIR_NAME + "configs/";
 
         // res_mods/xvm/configs/xvm.xc
         public static const XVM_CONFIG_FILE_NAME:String = XVM_CONFIGS_DIR_NAME + "xvm.xc";
 
         // res_mods/xvm/l10n
-        public static const XVM_L10N_DIR_NAME:String = "res_mods/xvm/l10n/";
+        public static const XVM_L10N_DIR_NAME:String = XVM_DIR_NAME + "l10n/";
 
         // res_mods/xvm/res/SixthSense.png
         public static const SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";

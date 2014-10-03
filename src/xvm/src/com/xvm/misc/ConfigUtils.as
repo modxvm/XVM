@@ -288,7 +288,7 @@ package com.xvm.misc
                 return e.getStackTrace();
 
             if (ex.at == null)
-                return ex.toString();
+                return ex.message;
 
             var head:String = ex.at > 0 ? ex.text.substring(0, ex.at) : "";
             head = head.split("\r").join("").split("\n").join("");

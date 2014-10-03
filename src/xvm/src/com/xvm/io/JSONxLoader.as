@@ -55,7 +55,7 @@ package com.xvm.io
                 //Logger.addObject(pendingFiles);
                 pendingFiles.forEach(function(filename:String):void
                 {
-                    Logger.add("LoadFile: " + filename.replace(Defines.XVM_CONFIGS_DIR_NAME, ''));
+                    Logger.add("LoadFile: " + filename.replace(Defines.XVM_DIR_NAME, ''));
                     var data:String = Xvm.cmd(Xvm.XPM_COMMAND_LOADFILE, filename);
                     if (data == null)
                         throw { type: filename == rootFileName ? "NO_FILE" : "NO_REF_FILE", message: "file is missing: " + filename };
@@ -78,7 +78,7 @@ package com.xvm.io
                 return null;
 
             // scalar
-            if (typeof data.toString == 'undefined')
+            if (data is String || data is Number || data is Boolean)
                 return data;
 
             if (!obj_path)
@@ -94,12 +94,10 @@ package com.xvm.io
             }
 
             // object
-            if (!data.hasOwnProperty('$ref'))
+            if (data.$ref === undefined)
             {
                 for (var n:String in data)
-                {
                     data[n] = Deref(data[n], level + 1, file, (obj_path == "" ? "" : obj_path + ".") + n);
-                }
                 return data;
             }
 
@@ -116,7 +114,7 @@ package com.xvm.io
                 fn = (d.d + (data.$ref.file || d.f));
             }
 
-            if (!file_cache.hasOwnProperty(fn))
+            if (file_cache[fn] === undefined)
             {
                 data.$ref.abs_path = fn;
                 var found:Boolean = false;
@@ -139,7 +137,7 @@ package com.xvm.io
                     if (obj_cache[fn] === undefined)
                         obj_cache[fn] = JSONx.parse(file_cache[fn]);
                     if (obj_cache[fn] == null)
-                        throw { type: fn == rootFileName ? "NO_FILE" : "NO_REF_FILE", message: "error parsing file: " + fn };
+                        throw { type: "PARSE_ERROR", message: "error parsing file: " + fn };
                     var value:* = getValue(obj_cache[fn], data.$ref.path);
                     if (value === undefined)
                         throw { type: "BAD_REF", message: "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };
@@ -161,7 +159,8 @@ package com.xvm.io
                 }
                 catch (ex:*)
                 {
-                    throw ex.error ? ex : { error: ex, filename: fn };
+                    ex.filename = fn;
+                    throw ex;
                 }
             }
 
@@ -181,9 +180,10 @@ package com.xvm.io
             var p_len:Number = p.length;
             for (var i:Number = 0; i < p_len; ++i)
             {
-                if (!o.hasOwnProperty(p[i]))
+                var opi:* = o[p[i]];
+                if (opi === undefined)
                     return undefined;
-                o = o[p[i]];
+                o = opi;
             }
             return o == null ? null : clone(o);
         }
