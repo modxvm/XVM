@@ -1,7 +1,10 @@
 package xvm.comments.UI
 {
     import com.xvm.*;
+    import flash.display.*;
     import flash.utils.*;
+    import net.wg.gui.components.windows.*;
+    import net.wg.gui.events.*;
     import net.wg.gui.prebattle.invites.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.data.*;
@@ -73,7 +76,24 @@ package xvm.comments.UI
         private function showContextMenu(e:SendInvitesEvent) : void
         {
             if (e.initItem)
-                App.contextMenuMgr.showUserContextMenu(this, e.initItem, new PrbSendInviteCIGeneratorX());
+            {
+                var menu:IContextMenu = App.contextMenuMgr.showUserContextMenu(this, e.initItem, new PrbSendInviteCIGeneratorX());
+                DisplayObject(menu).addEventListener(ContextMenuEvent.ON_ITEM_SELECT, this.onContextMenuAction);
+            }
+        }
+
+        private function onContextMenuAction(e:ContextMenuEvent):void
+        {
+            switch (e.id)
+            {
+                case PrbSendInviteCIGeneratorX.M_ADDGROUP:
+                case PrbSendInviteCIGeneratorX.M_EDITGROUP:
+                    break;
+                case PrbSendInviteCIGeneratorX.M_ADDCOMMENT:
+                case PrbSendInviteCIGeneratorX.M_EDITCOMMENT:
+                    EditCommentWindow.show(e.memberItemData);
+                    break;
+            }
         }
     }
 }

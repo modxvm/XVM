@@ -222,6 +222,14 @@ package com.xvm
             "token/unknown_status": "Неизвестный статус",
             "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете.",
 
+            // Comments
+            "Group": "Группа",
+            "Add group": "Добавить группу",
+            "Edit group": "Изменить группу",
+            "Comment": "Комментарий",
+            "Add comment": "Добавить комментарий",
+            "Edit comment": "Изменить комментарий",
+
             //Vehicle status
             "Destroyed": "Уничтожен",
             "No data": "Нет данных",

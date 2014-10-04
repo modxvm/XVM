@@ -14,11 +14,11 @@ import org.idmedia.as3commons.util.*; StringUtils;
 import net.wg.data.daapi.base.*; DAAPIDataClass;
 import net.wg.gui.components.common.*; MainViewContainer;
 import net.wg.gui.components.controls.ReadOnlyScrollingList; ReadOnlyScrollingList;
+import net.wg.gui.events.*; ContextMenuEvent;
 import net.wg.gui.intro.*; IntroPage;
 import net.wg.gui.login.impl.*; LoginPage;
 import net.wg.gui.lobby.*; LobbyPage;
 import net.wg.gui.lobby.dialogs.*; SimpleDialog;
-//TODO: 0.9.3 import net.wg.gui.lobby.header.*; TutorialControl;
 import net.wg.gui.lobby.hangar.*; Hangar; TankParam;
 import net.wg.gui.lobby.hangar.crew.*; Crew; RecruitRendererVO; CrewItemRenderer;
 import net.wg.gui.lobby.battleloading.*; BattleLoading; PlayerItemRenderer;
@@ -39,8 +39,8 @@ import net.wg.gui.prebattle.squad.*; SquadWindow; MessengerUtils;
 import net.wg.infrastructure.base.*; BaseViewWrapper;
 import net.wg.infrastructure.events.*; LoaderEvent; LifeCycleEvent; LibraryLoaderEvent;
 import net.wg.infrastructure.helpers.*; LibraryLoader;
-import net.wg.infrastructure.managers.impl.*; ContainerManager;
-import org.idmedia.as3commons.util.*;  HashMap;
+import net.wg.infrastructure.managers.impl.*; ContainerManager; ContextMenuManager;
+import org.idmedia.as3commons.util.*; HashMap;
 
 /**
  * UIs
@@ -93,6 +93,9 @@ squadItemRendererUI;
 // TankCarousel.swf
 TankCarouselUI;
 TankCarouselItemRendererUI;
+
+// windows.swf
+WindowUI;
 
 }
 

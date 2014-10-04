@@ -9,6 +9,11 @@
 
     public class PrbSendInviteCIGeneratorX extends PrbSendInviteCIGenerator
     {
+        public static const M_ADDGROUP:String = "xvm:addGroup";
+        public static const M_EDITGROUP:String = "xvm:editGroup";
+        public static const M_ADDCOMMENT:String = "xvm:addComment";
+        public static const M_EDITCOMMENT:String = "xvm:editComment";
+
         public function PrbSendInviteCIGeneratorX()
         {
             super();
@@ -27,10 +32,10 @@
                 {
                     // TODO
                     //var group:String = CommentsGlobalData.getGroup(param1.dbID);
-                    //res.put((group == null) ? "xvm:addGroup" : "xvm:editGroup", { "enabled": CommentsGlobalData.isAvailable() } );
+                    //res.put((group == null) ? M_ADDGROUP : M_EDITGROUP, { "enabled": CommentsGlobalData.isAvailable() } );
 
                     var comment:String = CommentsGlobalData.getComment(param1.dbID);
-                    res.put((comment == null) ? "xvm:addComment" : "xvm:editComment", { "enabled": CommentsGlobalData.isAvailable() } );
+                    res.put((comment == null) ? M_ADDCOMMENT : M_EDITCOMMENT, { "enabled": CommentsGlobalData.isAvailable() } );
                 }
                 res.put(entry.getKey(), entry.getValue());
             }
@@ -43,18 +48,18 @@
             var data:Vector.<IContextItem> = super.generateData(param1, param2);
             for each (var item:ContextItem in data)
             {
-                switch (item.label)
+                switch (item.id)
                 {
-                    case "#menu:contextMenu/xvm:addGroup":
+                    case M_ADDGROUP:
                         item.label = Locale.get("Add group");
                         break;
-                    case "#menu:contextMenu/xvm:editGroup":
+                    case M_EDITGROUP:
                         item.label = Locale.get("Edit group");
                         break;
-                    case "#menu:contextMenu/xvm:addComment":
+                    case M_ADDCOMMENT:
                         item.label = Locale.get("Add comment");
                         break;
-                    case "#menu:contextMenu/xvm:editComment":
+                    case M_EDITCOMMENT:
                         item.label = Locale.get("Edit comment");
                         break;
                 }

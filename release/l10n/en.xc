@@ -144,6 +144,14 @@
     "token/unknown_status": "Unknown status",
     "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet.",
 
+    // Comments
+    "Group": "Group",
+    "Add group": "Add group",
+    "Edit group": "Edit group",
+    "Comment": "Comment",
+    "Add comment": "Add comment",
+    "Edit comment": "Edit comment",
+
     //Vehicle status
     "Destroyed": "Destroyed",
     "No data": "No data",
