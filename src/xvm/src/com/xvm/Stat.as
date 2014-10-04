@@ -158,7 +158,7 @@ package com.xvm
                         // TODO
                         //StatData.s_data[nm].loadstate = (StatData.s_data[nm].vehicleKey == "UNKNOWN")
                         //    ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
-                        Macros.RegisterMacrosData(name);
+                        Macros.RegisterStatMacrosData(name);
                         //Logger.addObject(stat[name], 3, "stat[" + name + "]");
                     }
                     Macros.RegisterBattleTierData(guessBattleTier());
@@ -253,7 +253,7 @@ package com.xvm
                         var sd:StatData = ObjectConverter.convertData(response.players[name], StatData);
                         calculateStatValues(sd);
                         statCache[name] = sd;
-                        Macros.RegisterMacrosData(name);
+                        Macros.RegisterStatMacrosData(name);
                     }
                     Macros.RegisterBattleTierData(guessBattleTier());
                 }

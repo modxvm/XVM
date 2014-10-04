@@ -111,6 +111,10 @@ package xvm.hangar.components.BattleLoading
                 var o:MacrosFormatOptions = new MacrosFormatOptions();
                 o.alive = data.isAlive();
                 o.ready = data.isReady();
+                o.isCurrentPlayer = data.isCurrentPlayer;
+                o.isCurrentSquad = data.isCurrentSquad;
+                o.squadIndex = data.squadIndex;
+                o.isTeamKiller = data.isTeamKiller();
 
                 // Set Text Fields
                 if (_savedTextFieldColor == null)

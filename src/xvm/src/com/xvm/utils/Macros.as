@@ -407,13 +407,35 @@ package com.xvm.utils
             pdata["battletier-min"] = vdata.tierLo;
             // {{battletier-max}}
             pdata["battletier-max"] = vdata.tierHi;
+            // {{hp-max}}
+            pdata["hp-max"] = vdata.hpTop;
+
+            // Dynamic macros
+
+            if (!pdata.hasOwnProperty("alive"))
+            {
+                // {{alive}}
+                pdata["alive"] = function(o:MacrosFormatOptions):String { return o.alive ? 'alive' : null; }
+                // {{ready}}
+                pdata["ready"] = function(o:MacrosFormatOptions):String { return o.ready ? 'ready' : null; }
+                // {{player}}
+                pdata["player"] = function(o:MacrosFormatOptions):String { return o.isCurrentPlayer ? 'pl' : null; }
+                // {{squad}}
+                pdata["squad"] = function(o:MacrosFormatOptions):String { return o.isCurrentSquad ? 'sq' : null; }
+                // {{tk}}
+                pdata["tk"] = function(o:MacrosFormatOptions):String { return o.isTeamKiller ? 'tk' : null; }
+                // {{squad}}
+                pdata["squad"] = function(o:MacrosFormatOptions):String { return o.isCurrentSquad ? 'sq' : null; }
+                // {{squad-num}}
+                pdata["squad-num"] = function(o:MacrosFormatOptions):Number { return o.squadIndex <= 0 ? NaN : o.squadIndex; }
+            }
         }
 
         /**
-         * Register macros values for player
+         * Register stat macros values for player
          * @param pname player name without extra tags (clan, region, etc)
          */
-        public static function RegisterMacrosData(pname:String):void
+        public static function RegisterStatMacrosData(pname:String):void
         {
             var stat:StatData = Stat.getData(pname);
             if (stat == null)
@@ -422,54 +444,6 @@ package com.xvm.utils
             RegisterMinimalMacrosData(stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id);
 
             var pdata:Object = dict[pname];
-
-            var vdata:VehicleData = stat.v.data || new VehicleData({});
-
-            // {{hp-max}}
-            pdata["hp-max"] = stat.maxHealth;
-
-            // Dynamic macros
-
-            if (!pdata.hasOwnProperty("alive"))
-            {
-                // {{alive}}
-                pdata["alive"] = function(o:MacrosFormatOptions):String { return o.alive == true ? 'alive' : null; }
-                // {{ready}}
-                pdata["ready"] = function(o:MacrosFormatOptions):String { return o.ready == true ? 'ready' : null; }
-
-                // {{hp}}
-                pdata["hp"] = function(o:MacrosFormatOptions):Number { return isNaN(o.curHealth) ? NaN : o.curHealth; }
-                // {{hp-ratio}}
-                pdata["hp-ratio"] = function(o:MacrosFormatOptions):Number { return isNaN(o.curHealth) ? NaN : o.curHealth / stat.maxHealth * 100; }
-                // {{dmg}}
-                pdata["dmg"] = function(o:MacrosFormatOptions):Number { return isNaN(o.delta) ? NaN : o.delta; }
-                // {{dmg-ratio}}
-                pdata["dmg-ratio"] = function(o:MacrosFormatOptions):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / stat.maxHealth * 100); }
-                // {{dmg-kind}}
-                pdata["dmg-kind"] = function(o:MacrosFormatOptions):String { return o.damageType == null ? null : Locale.get(o.damageType); }
-
-                // Colors
-                // {{c:hp}}
-                pdata["c:hp"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
-                // {{c:hp-ratio}}, {{c:hp_ratio}}
-                pdata["c:hp-ratio"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / stat.maxHealth * 100); }
-                // {{c:dmg-kind}}, {{c:dmg_kind}}
-                pdata["c:dmg-kind"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDmgKindValue(o.damageType); }
-                // {{c:system}}
-                pdata["c:system"] = function(o:MacrosFormatOptions):String {
-                    return Utils.toHtmlColor(MacrosUtil.GetSystemColor(o.entityName, !o.alive, o.blowedUp));
-                }
-
-                // Alpha
-                // {{a:hp}}
-                pdata["a:hp"] = function(o:MacrosFormatOptions):Number { return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth) / 100.0; }
-                // {{a:hp-ratio}}, {{a:hp_ratio}}
-                pdata["a:hp-ratio"] = function(o:MacrosFormatOptions):Number {
-                    return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, Math.round(o.curHealth / stat.maxHealth * 100)) / 100.0;
-                }
-            }
-
-            // STAT
 
             if (Config.config.rating.showPlayersStatistics == false)
                 return;

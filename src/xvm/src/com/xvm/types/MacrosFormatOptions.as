@@ -7,6 +7,10 @@
 
         public var ready:Boolean = false;
         public var alive:Boolean = false;
+        public var isCurrentPlayer:Boolean = false;
+        public var isTeamKiller:Boolean = false;
+        public var isCurrentSquad:Boolean = false;
+        public var squadIndex:Number = NaN;
 
         public var curHealth:int = NaN;
         public var delta:int = NaN;
