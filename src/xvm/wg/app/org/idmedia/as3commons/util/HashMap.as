@@ -58,9 +58,9 @@ class EntryImpl extends Object implements Entry
         this.value = param2;
     }
     
-    private var key;
+    private var key:*;
     
-    private var value;
+    private var value:*;
     
     public function getKey() : *
     {

@@ -40,6 +40,7 @@ import net.wg.infrastructure.base.*; BaseViewWrapper;
 import net.wg.infrastructure.events.*; LoaderEvent; LifeCycleEvent; LibraryLoaderEvent;
 import net.wg.infrastructure.helpers.*; LibraryLoader;
 import net.wg.infrastructure.managers.impl.*; ContainerManager;
+import org.idmedia.as3commons.util.*;  HashMap;
 
 /**
  * UIs

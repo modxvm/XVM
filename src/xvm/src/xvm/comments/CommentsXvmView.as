@@ -17,12 +17,10 @@ package xvm.comments
 
     public class CommentsXvmView extends XvmViewBase
     {
-        public static var comments:Object;
-
         public function CommentsXvmView(view:IView)
         {
             super(view);
-            comments = null;
+            CommentsGlobalData.clearData();
         }
 
         public function get page():ContactsWindow
@@ -33,67 +31,69 @@ package xvm.comments
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
-            createComments();
+            this.init();
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
             //Logger.add("onBeforeDispose: " + view.as_alias);
-            removeComments();
+            this.dispose();
         }
 
         // PRIVATE
 
-        private function createComments():void
+        private function init():void
         {
             var cfg:CComments = Config.config.hangar.comments;
             if (!cfg.enabled)
                 return;
 
-            try
-            {
-                initTabs();
-
-                Cmd.getComments(this, onGetCommentsReceived);
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
+            Cmd.getComments(this, onGetCommentsReceived);
+            initTabs();
         }
 
-        private function removeComments():void
+        private function dispose():void
         {
             App.utils.scheduler.cancelTask(initTabs);
         }
 
-        private function initTabs():void
-        {
-            var dp:IDataProvider = page.tabs.dataProvider;
-            if (dp == null || dp.length == 0)
-            {
-                App.utils.scheduler.envokeInNextFrame(initTabs);
-                return;
-            }
-
-            dp[0]["linkage"] = getQualifiedClassName(UI_ContactsListForm);
-            page.tabs.selectedIndex = -1;
-            page.tabs.selectedIndex = 0;
-            page.validateNow();
-        }
-
         private function onGetCommentsReceived(json_str:String):void
         {
+            //Logger.add("onGetCommentsReceived");
             try
             {
                 var data:Object = JSONx.parse(json_str);
-                if (data.comments != null)
-                    comments = data.comments;
+                if (data.error != null)
+                {
+                    Logger.add("[XVM:COMMENTS] WARNING: [" + data.error + "] " + (data.errStr || ""));
+                }
+                else
+                {
+                    CommentsGlobalData.setData(data.comments);
+                }
                 page.invalidateData();
             }
             catch (ex:Error)
             {
                 Logger.add(ex.getStackTrace());
+            }
+        }
+
+        private function initTabs():void
+        {
+            //Logger.add("initTabs");
+
+            var dp:IDataProvider = page.tabs.dataProvider;
+            if (dp == null || dp.length == 0)
+            {
+                App.utils.scheduler.envokeInNextFrame(initTabs);
+            }
+            else
+            {
+                dp[0]["linkage"] = getQualifiedClassName(UI_ContactsListForm);
+                page.tabs.selectedIndex = -1;
+                page.tabs.selectedIndex = 0;
+                page.validateNow();
             }
         }
     }

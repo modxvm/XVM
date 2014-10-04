@@ -1,6 +1,6 @@
 diff -Naur app.orig/App.as app/App.as
 --- app.orig/App.as	2014-09-23 14:09:35.490510700 +0300
-+++ app/App.as	2014-09-24 23:05:57.479722800 +0300
++++ app/App.as	2014-09-23 14:24:12.829510700 +0300
 @@ -1,5 +1,6 @@
  package
  {
@@ -10,7 +10,7 @@ diff -Naur app.orig/App.as app/App.as
      import net.wg.infrastructure.managers.ISoundManager;
 diff -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/components/advanced/TankIcon.as
 --- app.orig/net/wg/gui/components/advanced/TankIcon.as	2014-09-23 14:15:40.877510700 +0300
-+++ app/net/wg/gui/components/advanced/TankIcon.as	2014-09-24 23:05:57.499722800 +0300
++++ app/net/wg/gui/components/advanced/TankIcon.as	2014-09-23 14:24:12.833510700 +0300
 @@ -90,7 +90,7 @@
          
          private var _isPremiumDirty:Boolean = true;
@@ -22,7 +22,7 @@ diff -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/co
          {
 diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/net/wg/gui/components/common/video/SimpleVideoPlayer.as
 --- app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-09-23 14:13:23.803510700 +0300
-+++ app/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-09-24 23:05:57.509722900 +0300
++++ app/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-09-23 14:24:12.836510700 +0300
 @@ -311,10 +311,10 @@
          }
      }
@@ -40,7 +40,7 @@ diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/
      {
 diff -Naur app.orig/net/wg/gui/components/controls/Carousel.as app/net/wg/gui/components/controls/Carousel.as
 --- app.orig/net/wg/gui/components/controls/Carousel.as	2014-09-23 14:13:26.579510700 +0300
-+++ app/net/wg/gui/components/controls/Carousel.as	2014-09-24 23:05:57.529722900 +0300
++++ app/net/wg/gui/components/controls/Carousel.as	2014-09-23 14:24:12.839510700 +0300
 @@ -91,9 +91,9 @@
          
          protected var selectedItemRenderer:IListItemRenderer = null;
@@ -73,7 +73,7 @@ diff -Naur app.orig/net/wg/gui/components/controls/Carousel.as app/net/wg/gui/co
  var _loc2_:* = NaN;
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as
 --- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-09-23 14:19:12.954510700 +0300
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-09-24 23:06:06.959736100 +0300
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-09-23 14:24:12.842510700 +0300
 @@ -86,9 +86,9 @@
          
          private var filterDataInvalid:Boolean = false;
@@ -109,7 +109,7 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg
          var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as
 --- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-09-23 14:19:37.948510700 +0300
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-09-24 23:05:57.549722900 +0300
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-09-23 14:24:12.846510700 +0300
 @@ -22,9 +22,9 @@
          
          public static var FILTER_READY:String = "ready";
@@ -124,7 +124,7 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app
          
 diff -Naur app.orig/net/wg/gui/lobby/header/LobbyHeader.as app/net/wg/gui/lobby/header/LobbyHeader.as
 --- app.orig/net/wg/gui/lobby/header/LobbyHeader.as	2014-09-23 14:18:49.645510700 +0300
-+++ app/net/wg/gui/lobby/header/LobbyHeader.as	2014-09-24 23:05:57.559722900 +0300
++++ app/net/wg/gui/lobby/header/LobbyHeader.as	2014-09-23 14:24:12.849510700 +0300
 @@ -56,7 +56,7 @@
          
          private var _mainMenuHelper:MainMenuHelper;
@@ -136,7 +136,7 @@ diff -Naur app.orig/net/wg/gui/lobby/header/LobbyHeader.as app/net/wg/gui/lobby/
          
 diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/gui/lobby/profile/ProfileTabNavigator.as
 --- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-09-23 14:16:20.647510700 +0300
-+++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-09-24 23:05:57.569722900 +0300
++++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-09-23 14:24:12.852510700 +0300
 @@ -36,7 +36,7 @@
          
          public var viewStack:ResizableViewStack;
@@ -148,7 +148,7 @@ diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/g
          
 diff -Naur app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as app/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as
 --- app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2014-09-23 14:18:22.977510700 +0300
-+++ app/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2014-09-24 23:05:57.579723000 +0300
++++ app/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as	2014-09-23 14:25:32.416510700 +0300
 @@ -599,7 +599,7 @@
                                  _loc12_ = _loc7_[_loc17_];
                                  if(!(_loc12_ == null) && _loc12_.index == _loc16_)
@@ -160,7 +160,7 @@ diff -Naur app.orig/net/wg/gui/lobby/techtree/math/ADG_ItemLevelsBuilder.as app/
                                  }
 diff -Naur app.orig/net/wg/gui/notification/NotificationPopUpViewer.as app/net/wg/gui/notification/NotificationPopUpViewer.as
 --- app.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2014-09-23 14:20:46.971510700 +0300
-+++ app/net/wg/gui/notification/NotificationPopUpViewer.as	2014-09-24 23:05:57.589723000 +0300
++++ app/net/wg/gui/notification/NotificationPopUpViewer.as	2014-09-23 14:24:12.855510700 +0300
 @@ -45,7 +45,7 @@
      
      private var maxAvailaleMessagesCount:uint = 5;
@@ -172,7 +172,7 @@ diff -Naur app.orig/net/wg/gui/notification/NotificationPopUpViewer.as app/net/w
      
 diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/gui/prebattle/squad/SquadItemRenderer.as
 --- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-09-23 14:12:04.976510700 +0300
-+++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-09-24 23:05:57.599723000 +0300
++++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-09-23 14:24:12.860510700 +0300
 @@ -171,7 +171,7 @@
                  }
                  this.setSpeakers(this.model.isPlayerSpeaking,true);
@@ -195,7 +195,7 @@ diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/g
                  if(!isNaN(_loc3_))
 diff -Naur app.orig/net/wg/gui/rally/events/RallyViewsEvent.as app/net/wg/gui/rally/events/RallyViewsEvent.as
 --- app.orig/net/wg/gui/rally/events/RallyViewsEvent.as	2014-09-23 14:18:05.106510700 +0300
-+++ app/net/wg/gui/rally/events/RallyViewsEvent.as	2014-09-24 23:05:57.609723000 +0300
++++ app/net/wg/gui/rally/events/RallyViewsEvent.as	2014-09-23 14:24:12.863510700 +0300
 @@ -41,7 +41,7 @@
          
          public static var VEH_BTN_ROLL_OUT:String = "vehBtnRollOut";
@@ -207,7 +207,7 @@ diff -Naur app.orig/net/wg/gui/rally/events/RallyViewsEvent.as app/net/wg/gui/ra
          {
 diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/wg/infrastructure/managers/IContainerManager.as
 --- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2014-09-23 14:09:35.358510700 +0300
-+++ app/net/wg/infrastructure/managers/IContainerManager.as	2014-09-24 23:05:57.609723000 +0300
++++ app/net/wg/infrastructure/managers/IContainerManager.as	2014-09-23 14:24:12.869510700 +0300
 @@ -15,6 +15,8 @@
          
          function isModalViewsExisting() : Boolean;
@@ -217,9 +217,36 @@ diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/
          function set loader(param1:ILoaderManager) : void;
          
          function get lastFocusedView() : IView;
+diff -Naur app.orig/org/idmedia/as3commons/util/EntrySetIterator.as app/org/idmedia/as3commons/util/EntrySetIterator.as
+--- app.orig/org/idmedia/as3commons/util/EntrySetIterator.as	2014-09-23 14:23:41.128510700 +0300
++++ app/org/idmedia/as3commons/util/EntrySetIterator.as	2014-10-04 13:35:59.466035500 +0300
+@@ -45,7 +45,7 @@
+             }
+             else
+             {
+-                _loc1_ = this.current.getKey();
++                var _loc1_:* = this.current.getKey();
+                 this.current = null;
+                 this.s.removeEntryForKey(_loc1_);
+                 return;
+diff -Naur app.orig/org/idmedia/as3commons/util/HashMap.as app/org/idmedia/as3commons/util/HashMap.as
+--- app.orig/org/idmedia/as3commons/util/HashMap.as	2014-09-23 14:21:01.371510700 +0300
++++ app/org/idmedia/as3commons/util/HashMap.as	2014-10-04 13:36:21.313285100 +0300
+@@ -58,9 +58,9 @@
+         this.value = param2;
+     }
+     
+-    private var key;
++    private var key:*;
+     
+-    private var value;
++    private var value:*;
+     
+     public function getKey() : *
+     {
 diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/controls/ButtonGroup.as
 --- app.orig/scaleform/clik/controls/ButtonGroup.as	2014-09-23 14:19:53.551510700 +0300
-+++ app/scaleform/clik/controls/ButtonGroup.as	2014-09-24 23:05:57.619723000 +0300
++++ app/scaleform/clik/controls/ButtonGroup.as	2014-09-23 14:24:12.872510700 +0300
 @@ -68,6 +68,7 @@
                  _loc1_ = _loc2_ as DisplayObjectContainer;
                  return _loc1_;
@@ -230,7 +257,7 @@ diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/co
          public function addButton(param1:Button) : void
 diff -Naur app.orig/scaleform/clik/ui/InputDetails.as app/scaleform/clik/ui/InputDetails.as
 --- app.orig/scaleform/clik/ui/InputDetails.as	2014-09-23 14:21:00.613510700 +0300
-+++ app/scaleform/clik/ui/InputDetails.as	2014-09-24 23:05:57.619723000 +0300
++++ app/scaleform/clik/ui/InputDetails.as	2014-09-23 14:24:12.875510700 +0300
 @@ -20,7 +20,7 @@
          
          public var code:Number;

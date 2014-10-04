@@ -1,22 +1,11 @@
-package
+package xvm.comments.UI
 {
-    import com.xvm.*;
-    //import com.xvm.misc.*;
-    import com.xvm.types.cfg.*;
-    //import com.xvm.types.dossier.*;
-    //import flash.display.*;
-    //import flash.geom.*;
-    //import flash.text.*;
-    //import net.wg.gui.lobby.profile.pages.technique.data.*;
-    //import scaleform.clik.constants.*;
-
-    public dynamic class ContactsIgnoredRosterUI extends UserRosterView
+    public dynamic class UI_ContactsIgnoredRoster extends ContactsIgnoredRosterUI
     {
-
-        public function ContactsIgnoredRosterUI()
+        public function UI_ContactsIgnoredRoster()
         {
-            Logger.add("UI_UserRosterItemRenderer");
             super();
+            rosterList.itemRenderer = UI_UserRosterItemRenderer;
         }
     }
 }

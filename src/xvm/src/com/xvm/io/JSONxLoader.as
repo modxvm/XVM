@@ -18,13 +18,9 @@ package com.xvm.io
                 //Logger.add("LoadAndParse: " + filename);
                 return (new JSONxLoader(filename))._Load();
             }
-            catch (ex:Object)
+            catch (ex:Error)
             {
-                if (ex is Error)
-                    return ex;
-                var er:* = new Error();
-                er.inner = ex;
-                return er;
+                return ex;
             }
             return null;
         }
@@ -157,7 +153,7 @@ package com.xvm.io
                     // deref result
                     data = Deref(value, level + 1, fn, obj_path);
                 }
-                catch (ex:*)
+                catch (ex:JSONxError)
                 {
                     ex.filename = fn;
                     throw ex;

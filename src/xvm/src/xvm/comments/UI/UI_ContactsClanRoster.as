@@ -1,22 +1,11 @@
-package
+package xvm.comments.UI
 {
-    import com.xvm.*;
-    //import com.xvm.misc.*;
-    import com.xvm.types.cfg.*;
-    //import com.xvm.types.dossier.*;
-    //import flash.display.*;
-    //import flash.geom.*;
-    //import flash.text.*;
-    //import net.wg.gui.lobby.profile.pages.technique.data.*;
-    //import scaleform.clik.constants.*;
-
-    public dynamic class ContactsClanRosterUI extends UserRosterView
+    public dynamic class UI_ContactsClanRoster extends ContactsClanRosterUI
     {
-
-        public function ContactsClanRosterUI()
+        public function UI_ContactsClanRoster()
         {
-            Logger.add("UI_UserRosterItemRenderer");
             super();
+            rosterList.itemRenderer = UI_UserRosterItemRenderer;
         }
     }
 }
