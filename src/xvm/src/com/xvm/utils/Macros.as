@@ -50,7 +50,7 @@ package com.xvm.utils
                         macros_cache[pname] = { alive: { }, dead: { }};
                         player_cache = macros_cache[pname];
                     }
-                    dead_value = (options.dead == true) ? "dead" : "alive";
+                    dead_value = (options.alive == true) ? "alive" : "dead";
                     var cached_value:* = player_cache[dead_value][format];
                     if (cached_value !== undefined)
                     {
@@ -428,36 +428,45 @@ package com.xvm.utils
             // {{hp-max}}
             pdata["hp-max"] = stat.maxHealth;
 
-            // dynamic
-            // {{hp}}
-            pdata["hp"] = function(o:MacrosFormatOptions):Number { return isNaN(o.curHealth) ? NaN : o.curHealth; }
-            // {{hp-ratio}}
-            pdata["hp-ratio"] = function(o:MacrosFormatOptions):Number { return isNaN(o.curHealth) ? NaN : o.curHealth / stat.maxHealth * 100; }
-            // {{dmg}}
-            pdata["dmg"] = function(o:MacrosFormatOptions):Number { return isNaN(o.delta) ? NaN : o.delta; }
-            // {{dmg-ratio}}
-            pdata["dmg-ratio"] = function(o:MacrosFormatOptions):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / stat.maxHealth * 100); }
-            // {{dmg-kind}}
-            pdata["dmg-kind"] = function(o:MacrosFormatOptions):String { return o.damageType == null ? null : Locale.get(o.damageType); }
+            // Dynamic macros
 
-            // Colors
-            // {{c:hp}}
-            pdata["c:hp"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
-            // {{c:hp-ratio}}, {{c:hp_ratio}}
-            pdata["c:hp-ratio"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / stat.maxHealth * 100); }
-            // {{c:dmg-kind}}, {{c:dmg_kind}}
-            pdata["c:dmg-kind"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDmgKindValue(o.damageType); }
-            // {{c:system}}
-            pdata["c:system"] = function(o:MacrosFormatOptions):String {
-                return Utils.toHtmlColor(MacrosUtil.GetSystemColor(o.entityName, o.dead, o.blowedUp));
-            }
+            if (!pdata.hasOwnProperty("alive"))
+            {
+                // {{alive}}
+                pdata["alive"] = function(o:MacrosFormatOptions):String { return o.alive == true ? 'alive' : null; }
+                // {{ready}}
+                pdata["ready"] = function(o:MacrosFormatOptions):String { return o.ready == true ? 'ready' : null; }
 
-            // Alpha
-            // {{a:hp}}
-            pdata["a:hp"] = function(o:MacrosFormatOptions):Number { return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth) / 100.0; }
-            // {{a:hp-ratio}}, {{a:hp_ratio}}
-            pdata["a:hp-ratio"] = function(o:MacrosFormatOptions):Number {
-                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, Math.round(o.curHealth / stat.maxHealth * 100)) / 100.0;
+                // {{hp}}
+                pdata["hp"] = function(o:MacrosFormatOptions):Number { return isNaN(o.curHealth) ? NaN : o.curHealth; }
+                // {{hp-ratio}}
+                pdata["hp-ratio"] = function(o:MacrosFormatOptions):Number { return isNaN(o.curHealth) ? NaN : o.curHealth / stat.maxHealth * 100; }
+                // {{dmg}}
+                pdata["dmg"] = function(o:MacrosFormatOptions):Number { return isNaN(o.delta) ? NaN : o.delta; }
+                // {{dmg-ratio}}
+                pdata["dmg-ratio"] = function(o:MacrosFormatOptions):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / stat.maxHealth * 100); }
+                // {{dmg-kind}}
+                pdata["dmg-kind"] = function(o:MacrosFormatOptions):String { return o.damageType == null ? null : Locale.get(o.damageType); }
+
+                // Colors
+                // {{c:hp}}
+                pdata["c:hp"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
+                // {{c:hp-ratio}}, {{c:hp_ratio}}
+                pdata["c:hp-ratio"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / stat.maxHealth * 100); }
+                // {{c:dmg-kind}}, {{c:dmg_kind}}
+                pdata["c:dmg-kind"] = function(o:MacrosFormatOptions):String { return MacrosUtil.GetDmgKindValue(o.damageType); }
+                // {{c:system}}
+                pdata["c:system"] = function(o:MacrosFormatOptions):String {
+                    return Utils.toHtmlColor(MacrosUtil.GetSystemColor(o.entityName, !o.alive, o.blowedUp));
+                }
+
+                // Alpha
+                // {{a:hp}}
+                pdata["a:hp"] = function(o:MacrosFormatOptions):Number { return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth) / 100.0; }
+                // {{a:hp-ratio}}, {{a:hp_ratio}}
+                pdata["a:hp-ratio"] = function(o:MacrosFormatOptions):Number {
+                    return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, Math.round(o.curHealth / stat.maxHealth * 100)) / 100.0;
+                }
             }
 
             // STAT

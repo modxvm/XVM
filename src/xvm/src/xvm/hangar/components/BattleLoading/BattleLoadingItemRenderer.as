@@ -1,6 +1,7 @@
 package xvm.hangar.components.BattleLoading
 {
     import com.xvm.*;
+    import com.xvm.types.MacrosFormatOptions;
     import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
     import com.xvm.types.veh.*;
@@ -98,7 +99,8 @@ package xvm.hangar.components.BattleLoading
         {
             try
             {
-                if (proxy.data == null)
+                var data:VehicleInfoVO = proxy.data as VehicleInfoVO;
+                if (data == null)
                     return;
                 if (Config.config.battle.highlightVehicleIcon == false && App.colorSchemeMgr != null)
                 {
@@ -106,19 +108,23 @@ package xvm.hangar.components.BattleLoading
                         App.colorSchemeMgr.getScheme(proxy.enabled ? "normal" : "normal_dead").colorTransform;
                 }
 
+                var o:MacrosFormatOptions = new MacrosFormatOptions();
+                o.alive = data.isAlive();
+                o.ready = data.isReady();
+
                 // Set Text Fields
                 if (_savedTextFieldColor == null)
                     _savedTextFieldColor = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
-                var a:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
-                    ? Config.config.battleLoading.formatLeftNick
-                    : Config.config.battleLoading.formatRightNick);
-                var b:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
-                    ? Config.config.battleLoading.formatLeftVehicle
-                    : Config.config.battleLoading.formatRightVehicle);
-                proxy.textField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + a + "</font>";
-                proxy.vehicleField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + b + "</font>";
 
-                //Logger.add(b);
+                var nickFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
+                    ? Config.config.battleLoading.formatLeftNick : Config.config.battleLoading.formatRightNick, o);
+                proxy.textField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + nickFieldText + "</font>";
+
+                var vehicleFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
+                    ? Config.config.battleLoading.formatLeftVehicle : Config.config.battleLoading.formatRightVehicle, o);
+                proxy.vehicleField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + vehicleFieldText + "</font>";
+
+                //Logger.add(vehicleFieldText);
                 //Logger.add(proxy.vehicleField.htmlText);
             }
             catch (ex:Error)
@@ -199,3 +205,26 @@ package xvm.hangar.components.BattleLoading
     }
 
 }
+
+/*
+data: { // net.wg.gui.lobby.battleloading.vo::VehicleInfoVO
+  "isPlayerTeam": false,
+  "isCurrentSquad": false,
+  "isCurrentPlayer": false,
+  "region": null,
+  "clanAbbrev": "",
+  "igrType": 0,
+  "playerName": "KKeqpuP4uKK",
+  "vehicleName": "Chi-Ni",
+  "vehicleIcon": "../../../xvm/res/contour/HARDicons/japan-Chi_Ni.png",
+  "vehicleAction": 0,
+  "squadIndex": 0,
+  "playerStatus": 0,
+  "vehicleStatus": 3,
+  "prebattleID": 20481354,
+  "vehicleID": 23974944,
+  "isSpeaking": false,
+  "isMuted": false,
+  "accountDBID": 5177220
+}
+*/

@@ -10,6 +10,7 @@
   * new section:
       hangar/carousel - extended tank carousel settings
   * added section hangar/comments for comments for players mod
+  * macros {{alive}} and {{ready}} works in the battle loading screen
 
 XVM-5.3.5:
   * adaptation to WoT 0.9.3
