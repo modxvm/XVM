@@ -57,6 +57,11 @@
             return VClassToVType(vclass);
         }
 
+        public function get sysname():String
+        {
+            return key.replace(':', '-');
+        }
+
         // PRIVATE
 
         // vclass = "mediumTank"

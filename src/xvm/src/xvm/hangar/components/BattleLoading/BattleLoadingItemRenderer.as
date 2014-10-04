@@ -77,7 +77,7 @@ package xvm.hangar.components.BattleLoading
                 // Alternative icon set
                 if (proxy.iconLoader.sourceAlt == Defines.WG_CONTOUR_ICON_NOIMAGE)
                 {
-                    proxy.iconLoader.sourceAlt = data.vehicleIcon;
+                    proxy.iconLoader.sourceAlt = Defines.WG_CONTOUR_ICON_PATH + vdata.sysname + ".png";
                     data.vehicleIcon = data.vehicleIcon.replace(Defines.WG_CONTOUR_ICON_PATH,
                         Defines.XVMRES_ROOT + ((team == Defines.TEAM_ALLY)
                         ? Config.config.iconset.battleLoadingAlly
