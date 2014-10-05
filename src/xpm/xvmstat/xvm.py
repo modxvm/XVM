@@ -95,7 +95,7 @@ class Xvm(object):
             elif cmd == COMMAND_SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
             elif cmd == COMMAND_GETCOMMENTS:
-                res = comments.getXvmUserComments()
+                res = comments.getXvmUserComments(args[0])
             elif cmd == COMMAND_SETCOMMENTS:
                 res = comments.setXvmUserComments(args[0])
             elif cmd == COMMAND_TEST:

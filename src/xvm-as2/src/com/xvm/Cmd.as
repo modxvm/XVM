@@ -13,6 +13,7 @@ class com.xvm.Cmd
     private static var COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
     private static var COMMAND_LOADUSERDATA:String = "loadUserData";
     private static var COMMAND_LOGSTAT:String = "logstat";
+    private static var COMMAND_GETCOMMENTS:String = "getComments";
 
     public static var RESPOND_CONFIG:String = "xvm.config";
     public static var RESPOND_KEY_EVENT:String = "xvm.keyevent";
@@ -44,6 +45,11 @@ class com.xvm.Cmd
     public static function logStat()
     {
         _call(null, null, [COMMAND_LOGSTAT]);
+    }
+
+    public static function getComments(target:Object, callback:Function, cachedOnly:Boolean)
+    {
+        _call(target, callback, [COMMAND_GETCOMMENTS, cachedOnly]);
     }
 
     /////////////////////////////////////////////////////////////////

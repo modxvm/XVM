@@ -2,8 +2,8 @@
 
 # PUBLIC
 
-def getXvmUserComments():
-    return _comments.getXvmUserComments()
+def getXvmUserComments(cachedOnly=False):
+    return _comments.getXvmUserComments(cachedOnly)
 
 def setXvmUserComments(value):
     return _comments.setXvmUserComments(value)
@@ -27,8 +27,8 @@ class _Comments:
         self.cached_data = None
         self.cached_token = None
 
-    def getXvmUserComments(self):
-        res = self._doRequest('getComments/%TOKEN%', True)
+    def getXvmUserComments(self, cachedOnly):
+        res = self._doRequest('getComments/%TOKEN%', True, cachedOnly)
         return res if isinstance(res, str) else simplejson.dumps(str)
 
     def setXvmUserComments(self, value):
@@ -36,9 +36,9 @@ class _Comments:
         value = value.replace('"', '\\"')
         # /temporary fix!
 
-        return self._doRequest('addComments/%TOKEN%/{0}'.format(urllib.quote(value, safe='')), False)
+        return self._doRequest('addComments/%TOKEN%/{0}'.format(urllib.quote(value, safe='')), False, False)
 
-    def _doRequest(self, req, useCache=True):
+    def _doRequest(self, req, useCache, cachedOnly):
         try:
             t = token.getToken()
             if t is None:
@@ -49,6 +49,9 @@ class _Comments:
             if useCache:
                 if self.cached_token is not None and self.cached_token == t:
                     return self.cached_data
+
+            if cachedOnly:
+                return {'error':'NOT_CACHED'}
 
             req = req.replace('%TOKEN%', t)
             server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]

@@ -116,9 +116,9 @@ package com.xvm.io
             _call(null, null, [COMMAND_SAVE_SETTINGS, key, value]);
         }
 
-        public static function getComments(target:Object, callback:Function):void
+        public static function getComments(target:Object, callback:Function, cachedOnly:Boolean = false):void
         {
-            _call(target, callback, [COMMAND_GETCOMMENTS]);
+            _call(target, callback, [COMMAND_GETCOMMENTS, cachedOnly]);
         }
 
         public static function setComments(target:Object, callback:Function, value:String):void
