@@ -1,4 +1,7 @@
-﻿XVM-5.3.6.1:
+﻿XVM-5.3.7-dev:
+  * added section hangar/comments for comments for players mod
+
+XVM-5.3.6.1:
   * fixed bug when xvm.xc is absent
 
 XVM-5.3.6:
