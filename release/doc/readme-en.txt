@@ -82,6 +82,8 @@
   Supported HTML tags:
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
+  WARNING: Macros in this file is not actual, see macros.txt and macros-hangar.txt for actual macros
+
   Macros available:
     In players panel, battle loading screen, statistic form and vehicle markers:
       {{nick}}        - player nickname with clan name

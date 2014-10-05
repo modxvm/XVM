@@ -83,6 +83,9 @@
   Поддерживаемые теги HTML:
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
+  ВНИМАНИЕ: Макрсосы в данном файле не актуальные, смотрите macros.txt и macros-hangar.txt для
+  актуальных макросов
+
   Используемые макросы:
     В ушах, на экране загрузки боя, в окне статистики боя по Tab и в маркерах над танком:
       {{nick}}        - ник игрока с названием клана

@@ -1,4 +1,5 @@
 ﻿XVM-5.3.6:
+  * исправлено множество ошибок
   * макрос {{gun-marks}} изменен на {{marksOnGun}}, секция "gunmarks" изменена на "marksOnGun",
     опция "allowGunMarksInPanelsAndMinimap" изменена на "allowMarksOnGunInPanelsAndMinimap"
     для однообразия
