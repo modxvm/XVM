@@ -12,12 +12,20 @@ package xvm.comments
 
         public static function show(data:Object):EditCommentWindow
         {
-            var w:EditCommentWindow = new EditCommentWindow();
-            var v:EditCommentView = new EditCommentView(data);
-            v.setWindow(w);
-            w.setWindowContent(v);
-            App.utils.popupMgr.show(w);
-            return w;
+            try
+            {
+                var w:EditCommentWindow = new EditCommentWindow();
+                var v:EditCommentView = new EditCommentView(data);
+                v.setWindow(w);
+                w.setWindowContent(v);
+                App.utils.popupMgr.show(w);
+                return w;
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+            return null;
         }
 
         // CTOR
@@ -26,21 +34,18 @@ package xvm.comments
         {
             //Logger.add("EditCommentWindow");
             super();
+            this.useTabs = true;
             this.useBottomBtns = true;
+            this.title = Locale.get("Edit comment");
+            addEventListener(ComponentEvent.HIDE, close);
         }
 
-        // OVERRIDES
+        // PUBLIC
 
-        override protected function closeButtonClickHandler(param1:ButtonEvent):void
+        public function close():void
         {
-            dispose();
             App.utils.popupMgr.remove(this);
-        }
-
-        override protected function onDispose():void
-        {
-            //Logger.add("dispose");
-            super.onDispose();
+            dispose();
         }
     }
 }

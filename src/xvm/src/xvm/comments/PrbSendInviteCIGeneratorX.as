@@ -34,8 +34,8 @@
                     //var group:String = CommentsGlobalData.getGroup(param1.dbID);
                     //res.put((group == null) ? M_ADDGROUP : M_EDITGROUP, { "enabled": CommentsGlobalData.isAvailable() } );
 
-                    var comment:String = CommentsGlobalData.getComment(param1.dbID);
-                    res.put((comment == null) ? M_ADDCOMMENT : M_EDITCOMMENT, { "enabled": CommentsGlobalData.isAvailable() } );
+                    var comment:String = CommentsGlobalData.instance.getComment(param1.dbID);
+                    res.put((comment == null) ? M_ADDCOMMENT : M_EDITCOMMENT, { "enabled": CommentsGlobalData.instance.isAvailable() } );
                 }
                 res.put(entry.getKey(), entry.getValue());
             }

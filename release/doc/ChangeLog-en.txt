@@ -1,4 +1,7 @@
-﻿XVM-5.3.6:
+﻿XVM-5.3.7-dev:
+  * added section hangar/comments for comments for players mod
+
+XVM-5.3.6:
   * many bugs fixed
   * macro {{gun-marks}} changed to {{marksOnGun}}, section "gunmarks" changed to "marksOnGun",
     option "allowGunMarksInPanelsAndMinimap" changed "allowMarksOnGunInPanelsAndMinimap"
@@ -8,9 +11,6 @@
   * added macro {{v.c_damageRating}} and colors section "damageRating"
   * added option "onHold" to the hotkeys settings for alternative minimap and players panel mode
   * added option hangar/clock/bgImage for background image in clock
-  * new section:
-      hangar/carousel - extended tank carousel settings
-  * added section hangar/comments for comments for players mod
   * macros {{alive}}, {{ready}}, {{player}}, {{tk}}, {{squad}}, {{squad-num}}, {{hp-max}} works in the 
     battle loading screen
 

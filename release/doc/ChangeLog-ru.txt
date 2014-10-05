@@ -1,4 +1,7 @@
-﻿XVM-5.3.6:
+﻿XVM-5.3.7-dev:
+  * добавлена секция hangar/comments для мода комментариев для игроков
+
+XVM-5.3.6:
   * исправлено множество ошибок
   * макрос {{gun-marks}} изменен на {{marksOnGun}}, секция "gunmarks" изменена на "marksOnGun",
     опция "allowGunMarksInPanelsAndMinimap" изменена на "allowMarksOnGunInPanelsAndMinimap"
@@ -9,7 +12,6 @@
   * добавлен макрос {{v.c_damageRating}} и секция цветов "damageRating"
   * добавлена опция "onHold" в настройки клавиш альтернативной миникарты и режима ушей
   * добавлена опция hangar/clock/bgImage для фонового изображения в часах
-  * добавлена секция hangar/comments для мода комментариев для игроков
   * макросы {{alive}}, {{ready}}, {{player}}, {{tk}}, {{squad}}, {{squad-num}}, {{hp-max}} работают 
     на экране загрузки боя
 

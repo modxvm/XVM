@@ -28,7 +28,7 @@ package net.wg.gui.messenger
         
         public var messageAreaScrollBar:ScrollBar = null;
         
-        public var messageArea:TextAreaSimple = null;
+        public var messageArea:net.wg.gui.components.advanced.TextAreaSimple = null;
         
         public var messageInput:TextInput = null;
         

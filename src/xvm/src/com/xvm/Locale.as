@@ -226,7 +226,6 @@ package com.xvm
             "Group": "Группа",
             "Add group": "Добавить группу",
             "Edit group": "Изменить группу",
-            "Comment": "Комментарий",
             "Add comment": "Добавить комментарий",
             "Edit comment": "Изменить комментарий",
 

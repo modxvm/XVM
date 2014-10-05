@@ -8,6 +8,7 @@ package xvm.comments
     import com.xvm.infrastructure.*;
     import com.xvm.io.*;
     import com.xvm.types.cfg.*;
+    import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.messenger.windows.*;
     import net.wg.infrastructure.events.*;
@@ -20,7 +21,7 @@ package xvm.comments
         public function CommentsXvmView(view:IView)
         {
             super(view);
-            CommentsGlobalData.clearData();
+            CommentsGlobalData.instance.clearData();
         }
 
         public function get page():ContactsWindow
@@ -31,45 +32,46 @@ package xvm.comments
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
-            this.init();
-        }
 
-        override public function onBeforeDispose(e:LifeCycleEvent):void
-        {
-            //Logger.add("onBeforeDispose: " + view.as_alias);
-            this.dispose();
-        }
-
-        // PRIVATE
-
-        private function init():void
-        {
             var cfg:CComments = Config.config.hangar.comments;
             if (!cfg.enabled)
                 return;
 
             Cmd.getComments(this, onGetCommentsReceived);
             initTabs();
+            CommentsGlobalData.instance.addEventListener(Event.CHANGE, onCommentsDataChange);
         }
 
-        private function dispose():void
+        override public function onBeforeDispose(e:LifeCycleEvent):void
         {
+            //Logger.add("onBeforeDispose: " + view.as_alias);
             App.utils.scheduler.cancelTask(initTabs);
+            CommentsGlobalData.instance.removeEventListener(Event.CHANGE, onCommentsDataChange);
         }
+
+        // PRIVATE
 
         private function onGetCommentsReceived(json_str:String):void
         {
             //Logger.add("onGetCommentsReceived");
             try
             {
-                var data:Object = JSONx.parse(json_str);
+                var data:Object = {}
+                try
+                {
+                    data = JSONx.parse(json_str);
+                }
+                catch (ex:Error)
+                {
+                    Logger.add(ex.getStackTrace());
+                }
                 if (data.error != null)
                 {
                     Logger.add("[XVM:COMMENTS] WARNING: [" + data.error + "] " + (data.errStr || ""));
                 }
                 else
                 {
-                    CommentsGlobalData.setData(data.comments);
+                    CommentsGlobalData.instance.setData(data.comments);
                 }
                 page.invalidateData();
             }
@@ -95,6 +97,11 @@ package xvm.comments
                 page.tabs.selectedIndex = 0;
                 page.validateNow();
             }
+        }
+
+        private function onCommentsDataChange(e:Event):void
+        {
+            Cmd.setComments(this, onGetCommentsReceived, CommentsGlobalData.instance.toJson());
         }
     }
 }

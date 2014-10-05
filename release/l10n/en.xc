@@ -148,7 +148,6 @@
     "Group": "Group",
     "Add group": "Add group",
     "Edit group": "Edit group",
-    "Comment": "Comment",
     "Add comment": "Add comment",
     "Edit comment": "Edit comment",
 

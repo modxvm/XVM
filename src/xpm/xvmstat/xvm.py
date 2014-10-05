@@ -95,9 +95,9 @@ class Xvm(object):
             elif cmd == COMMAND_SAVE_SETTINGS:
                 userprefs.set(args[0], args[1])
             elif cmd == COMMAND_GETCOMMENTS:
-                res = simplejson.dumps(comments.getXvmUserComments())
+                res = comments.getXvmUserComments()
             elif cmd == COMMAND_SETCOMMENTS:
-                res = simplejson.dumps(comments.setXvmUserComments(args[0]))
+                res = comments.setXvmUserComments(args[0])
             elif cmd == COMMAND_TEST:
                 runTest(args)
             else:

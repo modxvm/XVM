@@ -1,35 +1,79 @@
 ﻿package xvm.comments
 {
     import com.xvm.*;
+    import com.xvm.io.*;
+    import flash.events.*;
 
-    public class CommentsGlobalData
+    public class CommentsGlobalData extends EventDispatcher
     {
-        private static var data:CommentsData;
+        // singleton
+        private static var _instance:CommentsGlobalData = null;
 
-        public static function clearData():void
+        public static function get instance():CommentsGlobalData
+        {
+            if (_instance == null)
+                _instance = new CommentsGlobalData();
+            return _instance;
+        }
+
+        private var data:CommentsData;
+
+        public function clearData():void
         {
             data = null;
         }
 
-        public static function setData(json_str:String):void
+        public function setData(json_str:String):void
         {
             data = CommentsData.fromJsonString(json_str);
         }
 
-        public static function isAvailable():Boolean
+        public function toJson():String
+        {
+            return JSONx.stringify(data, '', true);
+        }
+
+        public function isAvailable():Boolean
         {
             return data != null;
         }
 
-        public static function getPlayerData(playerId:Number):PlayerCommentData
+        public function getPlayerData(playerId:Number):PlayerCommentData
         {
-            return isAvailable() ? data[playerId] : null;
+            return isAvailable() ? data.players[playerId] : null;
         }
 
-        public static function getComment(playerId:Number):String
+        public function setPlayerData(playerId:Number):PlayerCommentData
+        {
+            return isAvailable() ? data.players[playerId] : null;
+        }
+
+        public function getComment(playerId:Number):String
         {
             var pd:PlayerCommentData = getPlayerData(playerId);
             return pd == null ? null : pd.comment;
+        }
+
+        public function setComment(playerId:Number, comment:String):void
+        {
+            if (!isAvailable())
+                throw new Error("Comments is not available (network error?)");
+
+            if (isNaN(playerId) || playerId < 0)
+                throw new Error("Comments is not available (network error?)");
+
+            var pd:PlayerCommentData = getPlayerData(playerId);
+            if (pd == null)
+                pd = new PlayerCommentData();
+
+            pd.comment = comment;
+
+            if (pd.isEmpty())
+                delete data.players[playerId];
+            else
+                data.players[playerId] = pd;
+
+            dispatchEvent(new Event(Event.CHANGE));
         }
     }
 }
@@ -85,4 +129,9 @@ class PlayerCommentData
 {
     public var comment:String;
     public var group:String;
+
+    public function isEmpty():Boolean
+    {
+        return (comment == null || comment == "") && (group == null || group == "");
+    }
 }

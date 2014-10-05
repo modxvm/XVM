@@ -46,6 +46,9 @@ import org.idmedia.as3commons.util.*; HashMap;
  * UIs
  */
 
+// advanced.swf
+TextAreaSimple;
+
 // battleLoading.swf
 LeftItemRendererUI;
 RightItemRendererUI;

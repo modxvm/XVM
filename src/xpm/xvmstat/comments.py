@@ -28,17 +28,29 @@ class _Comments:
         self.cached_token = None
 
     def getXvmUserComments(self):
+        res = self._doRequest('getComments/%TOKEN%', True)
+        return res if isinstance(res, str) else simplejson.dumps(str)
+
+    def setXvmUserComments(self, value):
+        # temporary fix!
+        value = value.replace('"', '\\"')
+        # /temporary fix!
+
+        return self._doRequest('addComments/%TOKEN%/{0}'.format(urllib.quote(value, safe='')), False)
+
+    def _doRequest(self, req, useCache=True):
         try:
             t = token.getToken()
             if t is None:
-                return {'error':'NO_INITIALIZED'}
+                return {'error':'NOT_INITIALIZED'}
             if t == '':
                 return {'error':'NO_TOKEN'}
 
-            if self.cached_token is not None and self.cached_token == t:
-                return self.cached_data
+            if useCache:
+                if self.cached_token is not None and self.cached_token == t:
+                    return self.cached_data
 
-            req = "getComments/%s" % t
+            req = req.replace('%TOKEN%', t)
             server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
             (response, duration, errStr) = loadUrl(server, req)
 
@@ -47,46 +59,15 @@ class _Comments:
 
             try:
                 response = response.strip()
-                data = {} if response in ('', '[]') else simplejson.loads(response)
+                if response in ('', '[]', '{}'):
+                    response = None
                 #log(utils.hide_guid(response))
                 self.cached_token = t
-                self.cached_data = data
-                return data
+                self.cached_data = response
+                return response
             except Exception, ex:
                 errStr = 'Bad answer: ' + response
                 err('  ' + errStr)
-                return {'error':'BAD_ANSWER', 'errStr':errStr}
-        except Exception, ex:
-            errStr = str(ex)
-            err(traceback.format_exc())
-            return {'error':'EXCEPTION', 'errStr':errStr}
-
-    def setXvmUserComments(self, value):
-        try:
-            t = token.getToken()
-            if t is None:
-                return {'error':'NO_INITIALIZED'}
-            if t == '':
-                return {'error':'NO_TOKEN'}
-
-            req = "addComments/%s/%s" % (t, urllib.quote(value, safe=''))
-            server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-            (response, duration, errStr) = loadUrl(server, req, False)
-
-            if not response:
-                return {'error':'NO_RESPONSE', 'errStr':errStr}
-
-            try:
-                response = response.strip()
-                data = {} if response in ('', '[]') else simplejson.loads(response)
-                #log(utils.hide_guid(response))
-                self.cached_token = t
-                self.cached_data = data
-                return data
-            except Exception, ex:
-                errStr = 'Bad answer: ' + response
-                err('  ' + errStr)
-                err(traceback.format_exc())
                 return {'error':'BAD_ANSWER', 'errStr':errStr}
         except Exception, ex:
             errStr = str(ex)
