@@ -25,7 +25,8 @@ def loadUrl(url, req=None, showLog=True):
         # hide some chars of token in the log
         path_log = utils.hide_guid(u.path) if not IS_DEVELOPMENT else u.path
         log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
-    #time.sleep(5)
+    #import time
+    #time.sleep(3)
 
     startTime = datetime.datetime.now()
 

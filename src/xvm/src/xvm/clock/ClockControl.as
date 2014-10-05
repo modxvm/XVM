@@ -9,7 +9,7 @@ package xvm.clock
     import com.xvm.types.*;
     import com.xvm.utils.*;
     import flash.display.*;
-    import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with LabelControl
+    import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
     import net.wg.gui.events.*;
     import scaleform.clik.constants.*;
     import scaleform.gfx.*;

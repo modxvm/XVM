@@ -37,6 +37,8 @@ package xvm.comments
             if (!cfg.enabled)
                 return;
 
+            // TODO: async
+            //App.waiting.show("Loading...");
             Cmd.getComments(this, onGetCommentsReceived);
             initTabs();
             CommentsGlobalData.instance.addEventListener(Event.CHANGE, onCommentsDataChange);
@@ -56,6 +58,8 @@ package xvm.comments
             //Logger.add("onGetCommentsReceived");
             try
             {
+                //App.waiting.hide("");
+
                 var data:Object = {}
                 try
                 {
@@ -73,7 +77,7 @@ package xvm.comments
                 {
                     CommentsGlobalData.instance.setData(data.comments);
                 }
-                page.invalidateData();
+                page.invalidate("invalidateView");
             }
             catch (ex:Error)
             {
@@ -101,6 +105,7 @@ package xvm.comments
 
         private function onCommentsDataChange(e:Event):void
         {
+            //App.waiting.show("Saving...");
             Cmd.setComments(this, onGetCommentsReceived, CommentsGlobalData.instance.toJson());
         }
     }

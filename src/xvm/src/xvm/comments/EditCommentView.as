@@ -43,8 +43,10 @@
 
             cancelButton.addEventListener(MouseEvent.CLICK, onWindowClose);
             submitButton.addEventListener(MouseEvent.CLICK, onSumbitButtonClick);
+
             App.utils.focusHandler.setFocus(textArea);
             textArea.text = CommentsGlobalData.instance.getComment(data.uid);
+            textArea.position = textArea.text.length;
         }
 
         override protected function onDispose():void
@@ -98,7 +100,8 @@
                 x: 0,
                 y: 30,
                 width: 270,
-                height: 145
+                height: 145,
+                maxChars: 250
             });
             addChild(textArea);
 

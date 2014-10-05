@@ -1,18 +1,23 @@
 package xvm.comments.UI
 {
     import com.xvm.*;
+    import com.xvm.utils.*;
+    import flash.display.*;
+    import flash.events.MouseEvent;
+    import net.wg.gui.events.*;
+    import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
+    import xvm.comments.*;
 
     public dynamic class UI_UserRosterItemRenderer extends UserRosterItemRendererUI
     {
+        private var commentImg:UILoaderAlt = null;
+
         public function UI_UserRosterItemRenderer()
         {
             //Logger.add("UI_UserRosterItemRenderer");
             super();
-        }
 
-        override protected function configUI():void
-        {
-            super.configUI();
+            createControls();
         }
 
         override protected function draw():void
@@ -28,17 +33,8 @@ package xvm.comments.UI
 
                 if (dataDirty)
                 {
-/*                    if (dataVO == null)
-                        return;
-
-                    var id:Number = dataVO.compactDescr;
-                    var dossier:AccountDossier = Dossier.getAccountDossier();
-                    if (dossier != null)
-                    {
-                        var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(id);
-                        vdata.elite = dataVO.elite ? "elite" : null;
-                        ExtraFields.updateVehicleExtraFields(extraFields, vdata);
-                    }*/
+                    var comment:String = CommentsGlobalData.instance.getComment(data.uid);
+                    commentImg.visible = comment != null;
                 }
             }
             catch (ex:Error)
@@ -47,7 +43,42 @@ package xvm.comments.UI
             }
         }
 
+        override protected function handleMouseRollOver(param1:MouseEvent):void
+        {
+
+            super.handleMouseRollOver(param1);
+            var comment:String = CommentsGlobalData.instance.getComment(data.uid);
+            if (comment != null)
+                App.toolTipMgr.show(data.displayName + "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + comment + "</font>");
+        }
+
         // PRIVATE
 
+        private function createControls():void
+        {
+            this.textField.width -= 16;
+
+            this.commentImg = this.addChildAt(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
+                autoSize: true,
+                maintainAspectRatio: false,
+                x: this.actualWidth - 16,
+                width: 16,
+                height:16,
+                alpha: 0.5,
+                source: "../maps/icons/messenger/service_channel_icon.png"
+            }), 0) as UILoaderAlt;
+        }
     }
 }
+/*
+data: {
+  "userName": "M_r_A",
+  "himself": false,
+  "chatRoster": 1,
+  "displayName": "M_r_A",
+  "group": "group_2",
+  "colors": "8761728,6127961",
+  "online": false,
+  "uid": 7294494
+}
+*/
