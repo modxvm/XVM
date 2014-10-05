@@ -54,7 +54,7 @@ package com.xvm.io
                     Logger.add("LoadFile: " + filename.replace(Defines.XVM_DIR_NAME, ''));
                     var data:String = Xvm.cmd(Xvm.XPM_COMMAND_LOADFILE, filename);
                     if (data == null)
-                        throw { type: filename == rootFileName ? "NO_FILE" : "NO_REF_FILE", message: "file is missing: " + filename };
+                        throw new JSONxError(filename == rootFileName ? "NO_FILE" : "NO_REF_FILE", "file is missing: " + filename);
                     file_cache[filename] = data;
                 });
                 pendingFiles = new Vector.<String>();
@@ -101,7 +101,7 @@ package com.xvm.io
             //   "$ref": { "file": "...", "line": "..." }
 
             if (data.$ref.$ref != null)
-                throw { type: "BAD_REF", message: "endless reference recursion in " + file + ", " + obj_path};
+                throw new JSONxError("BAD_REF", "endless reference recursion in " + file + ", " + obj_path);
 
             var fn:String = data.$ref.abs_path;
             if (!fn)
@@ -133,10 +133,10 @@ package com.xvm.io
                     if (obj_cache[fn] === undefined)
                         obj_cache[fn] = JSONx.parse(file_cache[fn]);
                     if (obj_cache[fn] == null)
-                        throw { type: "PARSE_ERROR", message: "error parsing file: " + fn };
+                        throw new JSONxError("PARSE_ERROR", "error parsing file: " + fn);
                     var value:* = getValue(obj_cache[fn], data.$ref.path);
                     if (value === undefined)
-                        throw { type: "BAD_REF", message: "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };
+                        throw new JSONxError("BAD_REF", "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}");
 
                     // override referenced values
                     //   "damageText": {

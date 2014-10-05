@@ -324,16 +324,16 @@ package com.xvm
 
         private function setupLanguage(res:Object):void
         {
-            if (res is Error)
+            var e:Error = res as Error;
+            if (e != null)
             {
-                var e:Object = res.inner ? res.inner : res;
-                if (e.type == "NO_FILE")
+                if (res.type == "NO_FILE")
                 {
                     Logger.add("Locale: Can not find language file. " + e.message);
                 }
                 else
                 {
-                    var text:String = "[" + e.type + "] " + e.message + ": ";
+                    var text:String = "[" + res.type + "] " + res.message + ": ";
                     text += ConfigUtils.parseErrorEvent(e);
                     Logger.add(text);
                 }

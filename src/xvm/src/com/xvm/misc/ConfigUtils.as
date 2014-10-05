@@ -282,28 +282,28 @@ package com.xvm.misc
             return config;
         }
 
-        public static function parseErrorEvent(ex:Object):String {
-            var e:Error = ex as Error;
-            if (e != null)
+        public static function parseErrorEvent(ex:Error):String {
+            var e:JSONxError = ex as JSONxError;
+            if (e == null)
                 return e.getStackTrace();
 
-            if (ex.at == null)
-                return ex.message;
+            if (e.at < 0)
+                return e.type + e.getStackTrace();
 
-            var head:String = ex.at > 0 ? ex.text.substring(0, ex.at) : "";
+            var head:String = e.at > 0 ? e.text.substring(0, e.at) : "";
             head = head.split("\r").join("").split("\n").join("");
             while (head.indexOf("  ") != -1)
                 head = head.split("  ").join(" ");
             head = head.substr(head.length - 75, 75);
 
-            var tail:String = (ex.at + 1 < ex.text.length) ? ex.text.substring(ex.at + 1, ex.text.length) : "";
+            var tail:String = (e.at + 1 < e.text.length) ? e.text.substring(e.at + 1, e.text.length) : "";
             tail = tail.split("\r").join("").split("\n").join("");
             while (tail.indexOf("  ") != -1)
             tail = tail.split("  ").join(" ");
             tail = tail.substr(0, 125);
 
-            return "[" + ex.at + "] " + StringUtils.trim(ex.name) + ": " + StringUtils.trim(ex.message) + "\n  " +
-                head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
+            return "[" + e.at + "] " + StringUtils.trim(e.name) + ": " + StringUtils.trim(e.message) + "\n  " +
+                head + ">>>" + e.text.charAt(e.at) + "<<<" + tail;
         }
     }
 }

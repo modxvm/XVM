@@ -239,7 +239,7 @@ package com.xvm.io
             var _value:Function;
 
             var _error:Function = function(m:String):void {
-                throw new JSONxError(m, at - 1, text);
+                throw new JSONxError("PARSE_ERROR", m, at - 1, text);
             }
 
             var _next:Function = function():String {

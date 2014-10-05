@@ -81,17 +81,18 @@ package com.xvm
 
                 //Logger.addObject(res, 2);
 
-                if (res is Error)
+                var e:Error = res as Error;
+                if (e != null)
                 {
-                    var e:Object = res.inner ? res.inner : res;
-                    if (e.type == "NO_FILE")
+                    if (res.type == "NO_FILE")
                     {
                         stateInfo = { warning: "" };
+                        Logger.add("[XVM] WARNING: xvm.xc was not found, using internal config");
                     }
                     else
                     {
-                        var text:String = "[" + e.type + "] " +
-                            (e.filename ? "Error parsing file " + e.filename.replace(Defines.XVM_CONFIGS_DIR_NAME, '') : e.message) + ": ";
+                        var text:String = "[" + res.type + "] " +
+                            (res.filename ? "Error parsing file " + res.filename.replace(Defines.XVM_CONFIGS_DIR_NAME, '') : e.message) + ": ";
                         text += ConfigUtils.parseErrorEvent(e);
 
                         stateInfo = { error: text };
