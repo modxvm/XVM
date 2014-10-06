@@ -58,7 +58,7 @@ package xvm.comments
 
         private function onGetCommentsReceived(json_str:String):void
         {
-            Logger.add("onGetCommentsReceived: " + json_str);
+            //Logger.add("onGetCommentsReceived: " + json_str);
             try
             {
                 //App.waiting.hide("");
