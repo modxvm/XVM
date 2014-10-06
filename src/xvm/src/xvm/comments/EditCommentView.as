@@ -16,8 +16,8 @@
 
         private var playerNameField:LabelControl;
         private var textArea:TextAreaSimple;
-        private var cancelButton:SoundButtonEx;
         private var submitButton:SoundButtonEx;
+        private var cancelButton:SoundButtonEx;
 
         public function EditCommentView(data:Object)
         {
@@ -46,8 +46,8 @@
             super.configUI();
 
             textArea.addEventListener(Event.CHANGE, onTextChange);
-            cancelButton.addEventListener(MouseEvent.CLICK, onWindowClose);
             submitButton.addEventListener(MouseEvent.CLICK, onSumbitButtonClick);
+            cancelButton.addEventListener(MouseEvent.CLICK, onWindowClose);
 
             App.utils.focusHandler.setFocus(textArea);
             textArea.text = CommentsGlobalData.instance.getComment(data.uid);
@@ -58,8 +58,8 @@
         override protected function onDispose():void
         {
             textArea.removeEventListener(Event.CHANGE, onTextChange);
-            cancelButton.removeEventListener(MouseEvent.CLICK, onWindowClose);
             submitButton.removeEventListener(MouseEvent.CLICK, onSumbitButtonClick);
+            cancelButton.removeEventListener(MouseEvent.CLICK, onWindowClose);
             super.onDispose();
         }
 
@@ -112,18 +112,8 @@
             });
             addChild(textArea);
 
-            cancelButton = App.utils.classFactory.getComponent("ButtonNormal", SoundButtonEx, {
-                x: 95,
-                y: 170,
-                width: 100,
-                height: 25,
-                soundType: "cancelButton",
-                label: Locale.get("Cancel")
-            });
-            addChild(cancelButton);
-
             submitButton = App.utils.classFactory.getComponent("ButtonNormal", SoundButtonEx, {
-                x: 200,
+                x: 95,
                 y: 170,
                 width: 100,
                 height: 25,
@@ -131,6 +121,16 @@
                 label: Locale.get("Save")
             });
             addChild(submitButton);
+
+            cancelButton = App.utils.classFactory.getComponent("ButtonNormal", SoundButtonEx, {
+                x: 200,
+                y: 170,
+                width: 100,
+                height: 25,
+                soundType: "cancelButton",
+                label: Locale.get("Cancel")
+            });
+            addChild(cancelButton);
         }
 
         private function onTextChange(e:Event):void
