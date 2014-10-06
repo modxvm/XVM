@@ -53,7 +53,7 @@
             cancelButton.addEventListener(MouseEvent.CLICK, onWindowClose);
 
             App.utils.focusHandler.setFocus(textArea);
-            textArea.htmlText = CommentsGlobalData.instance.getComment(data.uid);
+            textArea.text = CommentsGlobalData.instance.getComment(data.uid);
             onTextChange(null);
             textArea.validateNow();
             textArea.textField.setSelection(textArea.length, textArea.length);
