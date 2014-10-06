@@ -48,6 +48,7 @@
     "bgColor": null,
     // If set, draw image at background.
     // Фоновое изображение, если задано.
+    // example: "bgImage": "xvm://configs/My/img/my.png",
     "bgImage": null,
     // Anti aliasing mode ("advanced" or "normal").
     // Тип сглаживания ("advanced" или "normal").
