@@ -15,7 +15,7 @@ from logger import *
 import utils
 
 # result: (response, duration)
-def loadUrl(url, req=None, showLog=True):
+def loadUrl(url, req=None, body=None, showLog=True):
     url = url.replace("{API}", XVM_STAT_API_VERSION)
     if req is not None:
         url = url.replace("{REQ}", req)
@@ -30,7 +30,7 @@ def loadUrl(url, req=None, showLog=True):
 
     startTime = datetime.datetime.now()
 
-    (response, compressedSize, errStr) = _loadUrl(u, XVM_STAT_TIMEOUT, XVM_STAT_FINGERPRINT)
+    (response, compressedSize, errStr) = _loadUrl(u, XVM_STAT_TIMEOUT, XVM_STAT_FINGERPRINT, body)
 
     elapsed = datetime.datetime.now() - startTime
     msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
@@ -44,7 +44,7 @@ def loadUrl(url, req=None, showLog=True):
 
     return (response, duration, errStr)
 
-def _loadUrl(u, timeout, fingerprint): # timeout in msec
+def _loadUrl(u, timeout, fingerprint, body): # timeout in msec
     response = None
 
     response = None
@@ -61,7 +61,7 @@ def _loadUrl(u, timeout, fingerprint): # timeout in msec
         headers = {
             "Connection":"Keep-Alive",
             "Accept-Encoding":"gzip"} # deflate
-        conn.request("GET", u.path, None, headers)
+        conn.request("GET" if body is None else "POST", u.path, body, headers)
         resp = conn.getresponse()
         #log(resp.status)
 
@@ -88,15 +88,16 @@ def _loadUrl(u, timeout, fingerprint): # timeout in msec
             raise Exception('HTTP Error: [%i] %s. Response: %s' % (resp.status, resp.reason, response[:256]))
 
     except tlslite.TLSLocalAlert as ex:
+        response = None
         err('loadUrl failed: %s' % utils.hide_guid(traceback.format_exc()))
         errStr = str(ex)
 
     except Exception as ex:
+        response = None
         errStr = str(ex)
         if not isinstance(errStr, unicode):
             errStr = errStr.decode(locale.getdefaultlocale()[1]).encode("utf-8")
         #log(errStr)
-        response = None
         tb = traceback.format_exc(1).split('\n')
         err('loadUrl failed: %s%s' % (utils.hide_guid(errStr), tb[1]))
 

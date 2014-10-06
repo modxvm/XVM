@@ -176,5 +176,10 @@ package com.xvm
         public static const WIDGET_MODE_2:int =        0x04;
         public static const WIDGET_MODE_DETAILED:int = 0x08;
         public static const WIDGET_MODES_ALL:int = WIDGET_MODE_HIDE | WIDGET_MODE_1 | WIDGET_MODE_2 | WIDGET_MODE_DETAILED;
+
+        // String templates
+        public static const SYSTEM_MESSAGE_HEADER:String =
+            '<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">' +
+            '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n%VALUE%';
     }
 }

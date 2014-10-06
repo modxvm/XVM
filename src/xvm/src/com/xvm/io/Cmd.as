@@ -26,8 +26,8 @@ package com.xvm.io
         private static const COMMAND_LOGSTAT:String = "logstat";
         private static const COMMAND_SAVE_SETTINGS:String = "save_settings";
         private static const COMMAND_LOAD_SETTINGS:String = "load_settings";
-        private static const COMMAND_GETCOMMENTS:String = "getComments";
-        private static const COMMAND_SETCOMMENTS:String = "setComments";
+        public static const COMMAND_GETCOMMENTS:String = "getComments";
+        public static const COMMAND_SETCOMMENTS:String = "setComments";
         private static const COMMAND_TEST:String = "test";
 
         public static const RESPOND_PINGDATA:String = "xvm.pingdata";

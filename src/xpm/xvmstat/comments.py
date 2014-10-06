@@ -28,17 +28,14 @@ class _Comments:
         self.cached_token = None
 
     def getXvmUserComments(self, cachedOnly):
-        res = self._doRequest('getComments/%TOKEN%', True, cachedOnly)
-        return res if isinstance(res, str) else simplejson.dumps(str)
+        res = self._doRequest('getComments', None, True, cachedOnly)
+        return res if isinstance(res, str) else simplejson.dumps(res)
 
     def setXvmUserComments(self, value):
-        # temporary fix!
-        value = value.replace('"', '\\"')
-        # /temporary fix!
+        res = self._doRequest('addComments', value, False, False)
+        return res if isinstance(res, str) else simplejson.dumps(res)
 
-        return self._doRequest('addComments/%TOKEN%/{0}'.format(urllib.quote(value, safe='')), False, False)
-
-    def _doRequest(self, req, useCache, cachedOnly):
+    def _doRequest(self, cmd, body, useCache, cachedOnly):
         try:
             t = token.getToken()
             if t is None:
@@ -53,25 +50,20 @@ class _Comments:
             if cachedOnly:
                 return {'error':'NOT_CACHED'}
 
-            req = req.replace('%TOKEN%', t)
+            req = '{0}/{1}'.format(cmd, t)
             server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-            (response, duration, errStr) = loadUrl(server, req)
+            (response, duration, errStr) = loadUrl(server, req, body=body)
 
             if not response:
                 return {'error':'NO_RESPONSE', 'errStr':errStr}
 
-            try:
-                response = response.strip()
-                if response in ('', '[]', '{}'):
-                    response = None
-                #log(utils.hide_guid(response))
-                self.cached_token = t
-                self.cached_data = response
-                return response
-            except Exception, ex:
-                errStr = 'Bad answer: ' + response
-                err('  ' + errStr)
-                return {'error':'BAD_ANSWER', 'errStr':errStr}
+            response = response.strip()
+            if response in ('', '[]', '{}'):
+                response = None
+            #log(utils.hide_guid(response))
+            self.cached_token = t
+            self.cached_data = response
+            return response
         except Exception, ex:
             errStr = str(ex)
             err(traceback.format_exc())

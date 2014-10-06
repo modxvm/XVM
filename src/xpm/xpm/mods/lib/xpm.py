@@ -207,6 +207,7 @@ gameLanguage = getClientLanguage()
 # SWF mods initializer
 
 from gui.shared import events
+from gui import SystemMessages
 
 XPM_CMD = 'xpm.cmd'
 
@@ -219,6 +220,8 @@ _XPM_COMMAND_INITIALIZED = "xpm.initialized"
 _XPM_COMMAND_LOADFILE = "xpm.loadFile"
 _XPM_COMMAND_GETGAMEREGION = "xpm.gameRegion"
 _XPM_COMMAND_GETGAMELANGUAGE = "xpm.gameLanguage"
+_XPM_COMMAND_MESSAGEBOX = 'xpm.messageBox'
+_XPM_COMMAND_SYSMESSAGE = 'xpm.systemMessage'
 
 _xvmView = None
 _xpmInitialized = False
@@ -246,6 +249,22 @@ def _start():
             elif cmd == _XPM_COMMAND_GETGAMELANGUAGE:
                 global gameLanguage
                 return gameLanguage
+            elif cmd == _XPM_COMMAND_MESSAGEBOX:
+                # title, message
+                from gui import DialogsInterface
+                from gui.Scaleform.daapi.view import dialogs
+                DialogsInterface.showDialog(dialogs.SimpleDialogMeta(
+                    args[0],
+                    args[1],
+                    dialogs.I18nInfoDialogButtons('common/error')),
+                    (lambda x: None))
+            elif cmd == _XPM_COMMAND_SYSMESSAGE:
+                # message, type
+                # Types: gui.SystemMessages.SM_TYPE:
+                #   'Error', 'Warning', 'Information', 'GameGreeting', ...
+                SystemMessages.pushMessage(
+                    args[0],
+                    type=SystemMessages.SM_TYPE.of(args[1]))
             else:
                 handlers = g_eventBus._EventBus__scopes[EVENT_BUS_SCOPE.DEFAULT][XPM_CMD]
                 for handler in handlers.copy():

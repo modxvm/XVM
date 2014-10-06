@@ -18,6 +18,8 @@ package xvm.comments
 
     public class CommentsXvmView extends XvmViewBase
     {
+        private var lastCommand:String = null;
+
         public function CommentsXvmView(view:IView)
         {
             super(view);
@@ -39,6 +41,7 @@ package xvm.comments
 
             // TODO: async
             //App.waiting.show("Loading...");
+            lastCommand = Cmd.COMMAND_GETCOMMENTS;
             Cmd.getComments(this, onGetCommentsReceived);
             initTabs();
             CommentsGlobalData.instance.addEventListener(Event.CHANGE, onCommentsDataChange);
@@ -55,7 +58,7 @@ package xvm.comments
 
         private function onGetCommentsReceived(json_str:String):void
         {
-            //Logger.add("onGetCommentsReceived");
+            Logger.add("onGetCommentsReceived: " + json_str);
             try
             {
                 //App.waiting.hide("");
@@ -64,6 +67,8 @@ package xvm.comments
                 try
                 {
                     data = JSONx.parse(json_str);
+                    if (data == null)
+                        data = {}
                 }
                 catch (ex:Error)
                 {
@@ -71,11 +76,22 @@ package xvm.comments
                 }
                 if (data.error != null)
                 {
+                    CommentsGlobalData.instance.clearData();
                     Logger.add("[XVM:COMMENTS] WARNING: [" + data.error + "] " + (data.errStr || ""));
+                    var err:String = "[" + data.error + "] " + (data.errStr || "") + "\n\n" + Locale.get("Comments disabled");
+                    if (lastCommand == Cmd.COMMAND_GETCOMMENTS)
+                    {
+                        err = Defines.SYSTEM_MESSAGE_HEADER.replace("%VALUE%", "<b>" + Locale.get("Error loading comments") + "</b>\n\n" + err);
+                        Xvm.cmd(Xvm.XPM_COMMAND_SYSMESSAGE, err, "Warning");
+                    }
+                    else
+                    {
+                        Xvm.cmd(Xvm.XPM_COMMAND_MESSAGEBOX, Locale.get("Error saving comments"), err);
+                    }
                 }
                 else
                 {
-                    CommentsGlobalData.instance.setData(data.comments);
+                    CommentsGlobalData.instance.setData(data);
                 }
                 page.invalidate("invalidateView");
             }
@@ -106,6 +122,7 @@ package xvm.comments
         private function onCommentsDataChange(e:Event):void
         {
             //App.waiting.show("Saving...");
+            lastCommand = Cmd.COMMAND_SETCOMMENTS;
             Cmd.setComments(this, onGetCommentsReceived, CommentsGlobalData.instance.toJson());
         }
     }

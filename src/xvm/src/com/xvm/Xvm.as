@@ -27,6 +27,11 @@ package com.xvm
         public static const XPM_COMMAND_LOADFILE:String = "xpm.loadFile";
         public static const XPM_COMMAND_GETGAMEREGION:String = "xpm.gameRegion";
         public static const XPM_COMMAND_GETGAMELANGUAGE:String = "xpm.gameLanguage";
+        // args: title, message
+        public static const XPM_COMMAND_MESSAGEBOX:String = 'xpm.messageBox';
+        // args: message, type
+        // Types: gui.SystemMessages.SM_TYPE: 'Error', 'Warning', 'Information', 'GameGreeting', ...
+        public static const XPM_COMMAND_SYSMESSAGE:String = 'xpm.systemMessage';
 
         // static methods for Python-Flash communication
 

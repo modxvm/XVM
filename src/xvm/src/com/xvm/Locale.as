@@ -82,6 +82,17 @@ package com.xvm
 
         /** Hardcoded RU language */
         private static const FALLBACK_RU:Object = {
+            // Common
+            "Warning": "Предупреждение",
+            "Error": "Ошибка",
+            "Information": "Информация",
+            "OK": "OK",
+            "Cancel": "Отмена",
+            "Save": "Сохранить",
+            "Remove": "Удалить",
+            "Yes": "Да",
+            "No": "Нет",
+
             // Ping
             "Initialization": "Инициализация",
 
@@ -223,6 +234,9 @@ package com.xvm
             "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете.",
 
             // Comments
+            "Comments disabled": "Comments disabled",
+            "Error loading comments": "Ошибка загрузки комментариев",
+            "Error saving comments": "Ошибка сохранения комментариев",
             "Group": "Группа",
             "Add group": "Добавить группу",
             "Edit group": "Изменить группу",

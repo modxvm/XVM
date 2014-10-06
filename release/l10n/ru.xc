@@ -3,6 +3,17 @@
  */
 {
   "locale": {
+    // Common
+    "Warning": "Предупреждение",
+    "Error": "Ошибка",
+    "Information": "Информация",
+    "OK": "OK",
+    "Cancel": "Отмена",
+    "Save": "Сохранить",
+    "Remove": "Удалить",
+    "Yes": "Да",
+    "No": "Нет",
+
     // Ping
     "Initialization": "Инициализация",
 
@@ -145,6 +156,9 @@
     "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете.",
 
     // Comments
+    "Error loading comments": "Ошибка загрузки комментариев",
+    "Error saving comments": "Ошибка сохранения комментариев",
+    "Comments disabled": "Комментарии отключены",
     "Group": "Группа",
     "Add group": "Добавить группу",
     "Edit group": "Изменить группу",

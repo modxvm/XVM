@@ -25,6 +25,10 @@
             super();
 
             this.visible = true;
+            this.isModal = false;
+            this.isCentered = true;
+            this.canClose = true;
+            this.enabledCloseBtn = true;
             this.width = 300;
             this.height = 190;
 
@@ -41,16 +45,19 @@
             //Logger.add("EditCommentView.configUI");
             super.configUI();
 
+            textArea.addEventListener(Event.CHANGE, onTextChange);
             cancelButton.addEventListener(MouseEvent.CLICK, onWindowClose);
             submitButton.addEventListener(MouseEvent.CLICK, onSumbitButtonClick);
 
             App.utils.focusHandler.setFocus(textArea);
             textArea.text = CommentsGlobalData.instance.getComment(data.uid);
+            onTextChange(null);
             textArea.position = textArea.text.length;
         }
 
         override protected function onDispose():void
         {
+            textArea.removeEventListener(Event.CHANGE, onTextChange);
             cancelButton.removeEventListener(MouseEvent.CLICK, onWindowClose);
             submitButton.removeEventListener(MouseEvent.CLICK, onSumbitButtonClick);
             super.onDispose();
@@ -101,7 +108,7 @@
                 y: 30,
                 width: 270,
                 height: 145,
-                maxChars: 250
+                maxChars: 1000
             });
             addChild(textArea);
 
@@ -111,7 +118,7 @@
                 width: 100,
                 height: 25,
                 soundType: "cancelButton",
-                label: App.utils.locale.makeString("#dialogs:controlsWrongNotification/cancel")
+                label: Locale.get("Cancel")
             });
             addChild(cancelButton);
 
@@ -121,10 +128,14 @@
                 width: 100,
                 height: 25,
                 soundType: "okButton",
-                label: App.utils.locale.makeString("#dialogs:controlsWrongNotification/submit"),
-                selected: true
+                label: Locale.get("Save")
             });
             addChild(submitButton);
+        }
+
+        private function onTextChange(e:Event):void
+        {
+            submitButton.label = textArea.text == null || textArea.text == "" ? Locale.get("Remove") : Locale.get("Save");
         }
 
         private function onSumbitButtonClick(e:MouseEventEx):void

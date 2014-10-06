@@ -3,6 +3,17 @@
  */
 {
   "locale": {
+    // Common
+    "Warning": "Warning",
+    "Error": "Error",
+    "Information": "Information",
+    "OK": "OK",
+    "Cancel": "Cancel",
+    "Save": "Save",
+    "Remove": "Remove",
+    "Yes": "Yes",
+    "No": "No",
+
     // Ping
     "Initialization": "Initialization",
 
@@ -145,6 +156,9 @@
     "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet.",
 
     // Comments
+    "Error loading comments": "Error loading comments",
+    "Error saving comments": "Error saving comments",
+    "Comments disabled": "Comments disabled",
     "Group": "Group",
     "Add group": "Add group",
     "Edit group": "Edit group",

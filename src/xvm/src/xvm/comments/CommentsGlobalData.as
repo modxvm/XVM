@@ -23,9 +23,9 @@
             data = null;
         }
 
-        public function setData(json_str:String):void
+        public function setData(data:Object):void
         {
-            data = CommentsData.fromJsonString(json_str);
+            this.data = CommentsData.fromObject(data);
         }
 
         public function toJson():String
@@ -92,26 +92,24 @@ class CommentsData extends Object
         players = { };
     }
 
-    public static function fromJsonString(json_str:String):CommentsData
+    public static function fromObject(obj:Object):CommentsData
     {
         var res:CommentsData = new CommentsData();
         try
         {
-            var d:Object = JSONx.parse(json_str);
-
-            if (d.ver == null)
+            if (obj.ver == null)
                 throw new Error();
 
             // TODO: version control
 
-            if (d.players != null)
+            if (obj.players != null)
             {
-                for (var id:String in d.players)
+                for (var id:String in obj.players)
                 {
-                    var dd:Object = d.players[id];
+                    var d:Object = obj.players[id];
                     var pd:PlayerCommentData = new PlayerCommentData();
-                    pd.comment = dd.comment;
-                    pd.group = dd.group;
+                    pd.comment = d.comment;
+                    pd.group = d.group;
                     res.players[id] = pd;
                 }
             }
