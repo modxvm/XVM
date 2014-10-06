@@ -10,6 +10,7 @@ package xvm.tcarousel
     import flash.display.*;
     import flash.events.*;
     import net.wg.gui.components.controls.*;
+    import net.wg.gui.events.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
     import net.wg.gui.lobby.hangar.tcarousel.data.*;
     import net.wg.gui.lobby.hangar.tcarousel.helper.*;
@@ -139,6 +140,7 @@ package xvm.tcarousel
             }
         }
 
+        // TankCarousel
         override public function as_updateVehicles(data:Object, initial:Boolean):void
         {
             //Logger.add("UI_TankCarousel.as_updateVehicles(...)");
@@ -159,6 +161,7 @@ package xvm.tcarousel
             }
         }
 
+        // TankCarousel
         override public function as_showVehicles(vehIds:Array):void
         {
             //Logger.add("UI_TankCarousel.as_showVehicles(...)");
@@ -169,6 +172,30 @@ package xvm.tcarousel
             catch (ex:Error)
             {
                 Logger.add(ex.getStackTrace());
+            }
+        }
+
+        private var _isMouseOver:Boolean = false;
+        override protected function onItemRollOver(param1:ListEventEx):void
+        {
+            _isMouseOver = true;
+            super.onItemRollOver(param1);
+        }
+
+        override protected function onItemRollOut(param1:ListEventEx):void
+        {
+            _isMouseOver = false;
+            super.onItemRollOut(param1);
+        }
+
+        // TankCarousel
+        override public function set isSliding(value:Boolean):void
+        {
+            this._isSliding = value;
+            if (!this._isSliding && this.dragHitArea && stage && this.dragHitArea.hitTestPoint(stage.mouseX, stage.mouseY, true) && this._isMouseOver)
+            {
+                if (selectedItemRenderer != null)
+                    (selectedItemRenderer as DragableListItemRenderer).imitateMouseOver();
             }
         }
 
