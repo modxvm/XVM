@@ -5,11 +5,11 @@
 def checkVersion(config):
     _checkVersion(config)
 
+def initializeXvmToken(config):
+    _initializeXvmToken(config)
+
 def getXvmStatActiveTokenData():
     return _getXvmStatActiveTokenData()
-
-def getXvmStatTokenData(config):
-    return _getXvmStatTokenData(config)
 
 def getXvmMessageHeader(config):
     return _getXvmMessageHeader(config)
@@ -103,12 +103,12 @@ def _getXvmStatActiveTokenData():
 
     return tdata
 
-def _getXvmStatTokenData(config):
+def _initializeXvmToken(config):
     global _tdataPrev
 
     playerId = getCurrentPlayerId()
     if playerId is None:
-        return None
+        return
 
     tdataActive = _getXvmStatActiveTokenData()
     (tdata, errStr) = _checkToken(playerId, None if tdataActive is None else tdataActive['token'])
@@ -155,7 +155,7 @@ def _getXvmStatTokenData(config):
     global _token
     _token = tdata.get('token', '').encode('ascii')
 
-    return tdata
+    return
 
 def _checkToken(playerId, token):
     data = None

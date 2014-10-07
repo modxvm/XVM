@@ -28,30 +28,9 @@ package xvm.hangar.views
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
-            initStatToken();
 
             //Cmd.runTest("battleResults", "18336627054037.dat");
             //Cmd.runTest("battleResults", "19708158929042709.dat");
-        }
-
-        public override function onBeforeDispose(e:LifeCycleEvent):void
-        {
-            //Logger.add("onBeforeDispose: " + view.as_alias);
-        }
-
-        // PRIVATE
-
-        // xvm stat token
-
-        private function initStatToken():void
-        {
-            if (Config.config.rating.showPlayersStatistics == true)
-                Cmd.getXvmStatTokenData(this, getXvmStatTokenDataCallback);
-        }
-
-        private function getXvmStatTokenDataCallback(json_str:String):void
-        {
-            //Logger.add(json_str);
         }
     }
 

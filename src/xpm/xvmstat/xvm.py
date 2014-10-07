@@ -75,8 +75,6 @@ class Xvm(object):
             elif cmd == COMMAND_GETVEHICLEINFODATA:
                 #return
                 res = getVehicleInfoDataStr()
-            elif cmd == COMMAND_GETXVMSTATTOKENDATA:
-                res = simplejson.dumps(token.getXvmStatTokenData(self.config))
             elif cmd == COMMAND_LOADBATTLESTAT:
                 getBattleStat(proxy, args)
             elif cmd == COMMAND_LOADBATTLERESULTSSTAT:
@@ -216,6 +214,8 @@ class Xvm(object):
         if playerId is not None and self.currentPlayerId != playerId:
             self.currentPlayerId = playerId
             token.checkVersion(self.config)
+            if self.config['rating']['showPlayersStatistics']:
+                token.initializeXvmToken(self.config)
             g_websock.send('id/%d' % playerId)
         if self.app is not None:
            self.app.loaderManager.onViewLoaded += self.onViewLoaded
