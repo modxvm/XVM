@@ -102,30 +102,30 @@ package xvm.hangar.components.BattleLoading
                 var data:VehicleInfoVO = proxy.data as VehicleInfoVO;
                 if (data == null)
                     return;
-                if (Config.config.battle.highlightVehicleIcon == false && App.colorSchemeMgr != null)
-                {
-                    proxy.iconLoader.transform.colorTransform =
-                        App.colorSchemeMgr.getScheme(proxy.enabled ? "normal" : "normal_dead").colorTransform;
-                }
 
-                var o:MacrosFormatOptions = new MacrosFormatOptions();
-                o.alive = data.isAlive();
-                o.ready = data.isReady();
-                o.isCurrentPlayer = data.isCurrentPlayer;
-                o.isCurrentSquad = data.isCurrentSquad;
-                o.squadIndex = data.squadIndex;
-                o.isTeamKiller = data.isTeamKiller();
+                var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Config.config.battleLoading.darkenNotReadyIcon || proxy.enabled);
+				
+                proxy.iconLoader.transform.colorTransform =
+                        App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
+
+                var formatOptions:MacrosFormatOptions = new MacrosFormatOptions();
+                formatOptions.alive = data.isAlive();
+                formatOptions.ready = data.isReady();
+                formatOptions.isCurrentPlayer = data.isCurrentPlayer;
+                formatOptions.isCurrentSquad = data.isCurrentSquad;
+                formatOptions.squadIndex = data.squadIndex;
+                formatOptions.isTeamKiller = data.isTeamKiller();
 
                 // Set Text Fields
                 if (_savedTextFieldColor == null)
                     _savedTextFieldColor = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
 
                 var nickFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
-                    ? Config.config.battleLoading.formatLeftNick : Config.config.battleLoading.formatRightNick, o);
+                    ? Config.config.battleLoading.formatLeftNick : Config.config.battleLoading.formatRightNick, formatOptions);
                 proxy.textField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + nickFieldText + "</font>";
 
                 var vehicleFieldText:String = Macros.Format(WGUtils.GetPlayerName(fullPlayerName), team == Defines.TEAM_ALLY
-                    ? Config.config.battleLoading.formatLeftVehicle : Config.config.battleLoading.formatRightVehicle, o);
+                    ? Config.config.battleLoading.formatLeftVehicle : Config.config.battleLoading.formatRightVehicle, formatOptions);
                 proxy.vehicleField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + vehicleFieldText + "</font>";
 
                 //Logger.add(vehicleFieldText);

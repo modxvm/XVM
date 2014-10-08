@@ -17,6 +17,7 @@ package com.xvm.types.cfg
         public var removeSquadIcon:Boolean; // Hide squad icon.
         public var clanIcon:CClanIcon;      // Playes/clan icon parameters.
         // Dispay formats.
+        public var darkenNotReadyIcon:Boolean;      // False - disable highlight of icons during battle start depends on ready state.
         public var formatLeftNick:String;
         public var formatLeftVehicle:String;
         public var formatRightNick:String;
