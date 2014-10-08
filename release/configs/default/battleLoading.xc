@@ -45,9 +45,9 @@
       // Прозрачность иконки игрока/клана.
       "alpha": 90
     },
-	// false - disable highlight of icons during battle start depends on ready state.
-	// false - отключить затемнение иконки не загрузившегося игрока.
-	"darkenNotReadyIcon": true,
+    // false - disable highlight of icons during battle start depends on ready state.
+    // false - отключить затемнение иконки не загрузившегося игрока.
+    "darkenNotReadyIcon": true,
     // Display format for the left panel (macros allowed, see readme-en.txt).
     // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
     "formatLeftNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
