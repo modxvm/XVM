@@ -12,12 +12,15 @@
 
     public class EditCommentView extends AbstractWindowView
     {
+        private static const WINDOW_WIDTH:uint = 350;
+        private static const WINDOW_HEIGHT:uint = 190;
+
         private var data:Object;
 
         private var playerNameField:LabelControl;
         private var textArea:TextAreaSimple;
-        private var cancelButton:SoundButtonEx;
         private var submitButton:SoundButtonEx;
+        private var cancelButton:SoundButtonEx;
 
         public function EditCommentView(data:Object)
         {
@@ -29,8 +32,8 @@
             this.isCentered = true;
             this.canClose = true;
             this.enabledCloseBtn = true;
-            this.width = 300;
-            this.height = 190;
+            this.width = WINDOW_WIDTH;
+            this.height = WINDOW_HEIGHT;
 
             this.data = data;
 
@@ -46,20 +49,21 @@
             super.configUI();
 
             textArea.addEventListener(Event.CHANGE, onTextChange);
-            cancelButton.addEventListener(MouseEvent.CLICK, onWindowClose);
             submitButton.addEventListener(MouseEvent.CLICK, onSumbitButtonClick);
+            cancelButton.addEventListener(MouseEvent.CLICK, onWindowClose);
 
             App.utils.focusHandler.setFocus(textArea);
             textArea.text = CommentsGlobalData.instance.getComment(data.uid);
             onTextChange(null);
-            textArea.position = textArea.text.length;
+            textArea.validateNow();
+            textArea.textField.setSelection(textArea.length, textArea.length);
         }
 
         override protected function onDispose():void
         {
             textArea.removeEventListener(Event.CHANGE, onTextChange);
-            cancelButton.removeEventListener(MouseEvent.CLICK, onWindowClose);
             submitButton.removeEventListener(MouseEvent.CLICK, onSumbitButtonClick);
+            cancelButton.removeEventListener(MouseEvent.CLICK, onWindowClose);
             super.onDispose();
         }
 
@@ -106,31 +110,31 @@
             textArea = App.utils.classFactory.getComponent("TextAreaSimple", TextAreaSimple, {
                 x: 0,
                 y: 30,
-                width: 270,
-                height: 145,
+                width: WINDOW_WIDTH - 30,
+                height: WINDOW_HEIGHT - 45,
                 maxChars: 1000
             });
             addChild(textArea);
 
-            cancelButton = App.utils.classFactory.getComponent("ButtonNormal", SoundButtonEx, {
-                x: 95,
-                y: 170,
-                width: 100,
-                height: 25,
-                soundType: "cancelButton",
-                label: Locale.get("Cancel")
-            });
-            addChild(cancelButton);
-
             submitButton = App.utils.classFactory.getComponent("ButtonNormal", SoundButtonEx, {
-                x: 200,
-                y: 170,
+                x: WINDOW_WIDTH - 205,
+                y: WINDOW_HEIGHT - 21,
                 width: 100,
                 height: 25,
                 soundType: "okButton",
                 label: Locale.get("Save")
             });
             addChild(submitButton);
+
+            cancelButton = App.utils.classFactory.getComponent("ButtonNormal", SoundButtonEx, {
+                x: WINDOW_WIDTH - 100,
+                y: WINDOW_HEIGHT - 21,
+                width: 100,
+                height: 25,
+                soundType: "cancelButton",
+                label: Locale.get("Cancel")
+            });
+            addChild(cancelButton);
         }
 
         private function onTextChange(e:Event):void
@@ -140,7 +144,7 @@
 
         private function onSumbitButtonClick(e:MouseEventEx):void
         {
-            Logger.add("onSumbitButtonClick");
+            //Logger.add("onSumbitButtonClick");
             try
             {
                 if (e.buttonIdx == 0)

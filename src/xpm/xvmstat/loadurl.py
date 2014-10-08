@@ -60,8 +60,9 @@ def _loadUrl(u, timeout, fingerprint, body): # timeout in msec
             conn = httplib.HTTPConnection(u.netloc, timeout=timeout/1000)
         headers = {
             "Connection":"Keep-Alive",
-            "Accept-Encoding":"gzip"} # deflate
-        conn.request("GET" if body is None else "POST", u.path, body, headers)
+            "Accept-Encoding":"gzip",
+            "Content-Type": "text/plain; charset=utf-8"}
+        conn.request("POST" if body else "GET", u.path, body, headers)
         resp = conn.getresponse()
         #log(resp.status)
 

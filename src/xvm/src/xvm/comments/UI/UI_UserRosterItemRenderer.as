@@ -45,11 +45,10 @@ package xvm.comments.UI
 
         override protected function handleMouseRollOver(param1:MouseEvent):void
         {
-
             super.handleMouseRollOver(param1);
             var comment:String = CommentsGlobalData.instance.getComment(data.uid);
             if (comment != null)
-                App.toolTipMgr.show(data.displayName + "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + comment + "</font>");
+                App.toolTipMgr.show(data.displayName + "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
         }
 
         // PRIVATE
