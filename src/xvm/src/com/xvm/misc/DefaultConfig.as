@@ -78,6 +78,8 @@ package com.xvm.misc
             c.pingServers.delimiter = ": ";
             c.pingServers.maxRows = 4;
             c.pingServers.columnGap = 10;
+            c.pingServers.leading = 0;
+            c.pingServers.topmost = true;
             c.pingServers.fontStyle = {
                 name: "$TextFont",
                 size: 12,
@@ -125,6 +127,8 @@ package com.xvm.misc
             c.pingServers.delimiter = ": ";
             c.pingServers.maxRows = 2;
             c.pingServers.columnGap = 3;
+            c.pingServers.leading = 0;
+            c.pingServers.topmost = true;
             c.pingServers.fontStyle = {
                 name: "$FieldFont",
                 size: 12,

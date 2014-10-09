@@ -1,6 +1,7 @@
 ﻿XVM-5.3.7-dev:
   * добавлена секция hangar/comments для мода комментариев для игроков
   * добавлена опция battleLoading/darkenNotReadyIcon для настройки затемнения иконок не загрузившихся игроков
+  * добавлены опции pingServers/leading и pingServers/topmost
 
 XVM-5.3.6.1:
   * исправлена ошибка при отсутствующем xvm.xc

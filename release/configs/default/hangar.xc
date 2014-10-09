@@ -41,6 +41,12 @@
       // Gap between columns
       // Пространство между колонками
       "columnGap": 3,
+      // Leading between lines.
+      // Пространство между строками
+      "leading": 0,
+      // true - place at top of other windows, false - at bottom.
+      // true - отображать поверх остальных окон, false - под.
+      "topmost": true,
       // Text style
       // Стиль текста
       "fontStyle": {

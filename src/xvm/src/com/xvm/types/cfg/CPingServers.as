@@ -15,6 +15,8 @@ package com.xvm.types.cfg
         public var delimiter:String;
         public var maxRows:Number;
         public var columnGap:Number;
+        public var leading:Number;
+        public var topmost:Boolean;
         public var fontStyle:Object;
         //{
             //name: "$FieldFont",

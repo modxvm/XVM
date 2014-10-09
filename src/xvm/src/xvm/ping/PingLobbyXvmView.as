@@ -34,7 +34,7 @@ package xvm.ping
             var cfg:CPingServers = Config.config.hangar.pingServers;
             PingServers.initFeature(cfg.enabled, cfg.updateInterval);
             if (cfg.enabled)
-                page.addChild(new PingServersView(cfg));
+                page.addChildAt(new PingServersView(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0);
         }
     }
 

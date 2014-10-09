@@ -1,6 +1,7 @@
 ﻿XVM-5.3.7-dev:
   * added section hangar/comments for comments for players mod
   * added option battleLoading/darkenNotReadyIcon for customize icons are not ready players
+  * added options pingServers/leading and pingServers/topmost
 
 XVM-5.3.6.1:
   * fixed bug when xvm.xc is absent

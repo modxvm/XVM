@@ -41,6 +41,9 @@
       // Gap between columns
       // Пространство между колонками
       "columnGap": 10,
+      // Leading between lines.
+      // Пространство между строками
+      "leading": 0,
       // Text style
       // Стиль текста
       "fontStyle": {
