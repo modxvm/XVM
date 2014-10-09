@@ -14,6 +14,7 @@ package xvm.tcarousel
     {
         private var cfg:CCarousel;
         private var extraFields:MovieClip;
+        private var lastSelectedState:Boolean;
 
         public function UI_TankCarouselItemRenderer()
         {
@@ -40,10 +41,12 @@ package xvm.tcarousel
 
                 this.scaleX = this.scaleY = cfg.zoom;
 
-                if (dataDirty)
+                if (dataVO == null)
+                    return;
+
+                if (dataDirty || lastSelectedState != this.selected)
                 {
-                    if (dataVO == null)
-                        return;
+                    lastSelectedState = this.selected;
 
                     var id:Number = dataVO.compactDescr;
                     var dossier:AccountDossier = Dossier.getAccountDossier();
@@ -51,6 +54,7 @@ package xvm.tcarousel
                     {
                         var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(id);
                         vdata.elite = dataVO.elite ? "elite" : null;
+                        vdata.selected = this.selected ? "sel" : null;
                         ExtraFields.updateVehicleExtraFields(extraFields, vdata);
                     }
                 }

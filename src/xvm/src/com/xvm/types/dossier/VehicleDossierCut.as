@@ -132,5 +132,6 @@ package com.xvm.types.dossier
 
         // extra
         public var elite:String;
+        public var selected:String;
     }
 }

@@ -69,5 +69,6 @@ Legend:
 │ {{v.gunAvgHit}}            │ . │ . │ average penetration for current gun AP/CR/HE
 │ {{v.gunDispersion}}        │ . │ . │ base dispersion at 100 m for current gun
 │ {{v.gunAimingTime}}        │ . │ . │ base aiming time for current gun
+│ {{v.selected}}             │ X │ . │ 'sel' for selected, empty for others
 │ {{l10n:ID}}                │ . │ . │ localizated text, see en.xc for id
 └────────────────────────────┴───┴───┴─────────────────────────────────
