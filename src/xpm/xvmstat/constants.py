@@ -39,11 +39,10 @@ RESPOND_UPDATECURRENTVEHICLE = "xvm.updatecurrentvehicle"
 #COMMAND_GETSTAT = "getstat"
 #COMMAND_LOGSTAT = "logstat"
 
+XVM_DIR = "res_mods/xvm"
+
 XVM_LOG_FILE_NAME = 'xvm.log'
 XVM_STAT_LOG_FILE_NAME = 'xvm-stat.log'
 
 TEAM_ALLY = 1
 TEAM_ENEMY = 2
-
-XVM_DIR = "res_mods/xvm"
-XVM_DB_DIR = XVM_DIR + "/db"

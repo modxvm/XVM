@@ -3,6 +3,9 @@
   * added option battleLoading/darkenNotReadyIcon for customize icons are not ready players
   * added options pingServers/leading and pingServers/topmost
   * carousel: added macro {{v.selected}}, returns 'sel' for selected, empty for others
+  * changed token location, now it is stored in the user preferences.
+    You need to reactivate XVM services (use "Add client" button in the personal cabinet on the
+    www.modxvm.com site). You can remove res_mods/xvm/db/ folder.
 
 XVM-5.3.6.1:
   * fixed bug when xvm.xc is absent
@@ -17,7 +20,7 @@ XVM-5.3.6:
   * added macro {{v.c_damageRating}} and colors section "damageRating"
   * added option "onHold" to the hotkeys settings for alternative minimap and players panel mode
   * added option hangar/clock/bgImage for background image in clock
-  * macros {{alive}}, {{ready}}, {{player}}, {{tk}}, {{squad}}, {{squad-num}}, {{hp-max}} works in the 
+  * macros {{alive}}, {{ready}}, {{player}}, {{tk}}, {{squad}}, {{squad-num}}, {{hp-max}} works in the
     battle loading screen
 
 XVM-5.3.5:

@@ -72,6 +72,7 @@
         { "x": 0, "y": 54, "format": "<font color='{{v.c_damageRating}}'>{{v.damageRating~%}}</font>", "shadow": {} },
         //{ "x": 60, "y": 12, "format": "<font color='{{v.c_type}}'>{{v.premium?1|0}}</font>", "shadow": {} },
         //{ "x": 60, "src": "xvm://res/contour/HARDicons/{{v.sysname}}.png" },
+        { "x": -2, "y": -1, "h": 100, "w": "164", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
         {}
       ]
     },

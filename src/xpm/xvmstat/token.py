@@ -36,9 +36,9 @@ import BigWorld
 from gui import SystemMessages
 
 from constants import *
-import db
 from logger import *
 from loadurl import loadUrl
+import userprefs
 import utils
 from websock import g_websock
 
@@ -92,14 +92,14 @@ def _getXvmStatActiveTokenData():
     if playerId is None:
         return None
 
-    tdata = db.get('tokens', playerId)
+    tdata = userprefs.get('tokens/{0}'.format(playerId))
     if tdata is None:
         # fallback to the last player id if replay is running
         if isReplay():
-            playerId = db.get('tokens', 'lastPlayerId')
+            playerId = userprefs.get('tokens/lastPlayerId')
             if playerId is None:
                 return None
-            tdata = db.get('tokens', playerId)
+            tdata = userprefs.get('tokens/{0}'.format(playerId))
 
     return tdata
 
@@ -147,10 +147,10 @@ def _initializeXvmToken(config):
     if tdata is not None:
         _tdataPrev = tdata
         if 'token' in tdata:
-            db.set('tokens', playerId, tdata)
+            userprefs.set('tokens/{0}'.format(playerId), tdata)
         elif tdataActive is not None:
             tdata['token'] = tdataActive['token']
-        db.set('tokens', 'lastPlayerId', playerId)
+        userprefs.set('tokens/lastPlayerId', playerId)
 
     global _token
     _token = tdata.get('token', '').encode('ascii')
