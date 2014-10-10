@@ -398,7 +398,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         img._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
         img._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
-
+        img._xscale = format.scaleX != null && !isNaN(format.scaleX) ? format.scaleX * 100 : 100;
+        img._yscale = format.scaleY != null && !isNaN(format.scaleY) ? format.scaleY * 100 : 100;
         img.autoSize = true;
         img.maintainAspectRatio = false;
         var me = this;
@@ -446,7 +447,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         tf._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
         tf._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
-
+        tf._xscale = format.scaleX != null && !isNaN(format.scaleX) ? format.scaleX * 100 : 100;
+        tf._yscale = format.scaleY != null && !isNaN(format.scaleY) ? format.scaleY * 100 : 100;
         tf.selectable = false;
         tf.html = true;
         tf.multiline = true;
@@ -503,6 +505,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
             delete format.alpha;
         if (format.rotation != null && (typeof format.rotation != "string" || format.rotation.indexOf("{{") < 0))
             delete format.rotation;
+        if (format.scaleX != null && (typeof format.scaleX != "string" || format.scaleX.indexOf("{{") < 0))
+            delete format.scaleX;
+        if (format.scaleY != null && (typeof format.scaleY != "string" || format.scaleY.indexOf("{{") < 0))
+            delete format.scaleY;
         if (format.borderColor != null && (typeof format.borderColor != "string" || format.borderColor.indexOf("{{") < 0))
             delete format.borderColor;
         if (format.bgColor != null && (typeof format.bgColor != "string" || format.bgColor.indexOf("{{") < 0))
@@ -561,6 +567,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
         if (format.rotation != null)
             f._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj)) || 0;
+        if (format.scaleX != null)
+            f._xscale = parseFloat(Macros.Format(m_name, format.scaleX, obj)) * 100 || 100;
+        if (format.scaleY != null)
+            f._yscale = parseFloat(Macros.Format(m_name, format.scaleY, obj)) * 100 || 100;
         if (format.borderColor != null)
             f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj).split("#").join("0x")) || 0;
         if (format.bgColor != null)

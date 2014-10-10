@@ -118,6 +118,7 @@
           //   "align" - horizontal alignment ("left", "center", "right")
           //      for left panel default value is "left"
           //      for right panel default value is "right"
+          //   "scaleX", "scaleY" - scaling (use negative values for mirroring)
           //
           // fields available for TextField format only:
           //   "valign" - vertical alignment ("top", "center", "bottom")

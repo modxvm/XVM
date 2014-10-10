@@ -6,6 +6,7 @@
   * changed token location, now it is stored in the user preferences.
     You need to reactivate XVM services (use "Add client" button in the personal cabinet on the
     www.modxvm.com site). You can remove res_mods/xvm/db/ folder.
+  * playersPanel: in extra fields added options "scaleX" and "scaleY"
 
 XVM-5.3.6.1:
   * fixed bug when xvm.xc is absent
