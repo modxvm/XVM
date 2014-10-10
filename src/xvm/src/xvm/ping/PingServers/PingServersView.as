@@ -148,8 +148,6 @@ package xvm.ping.PingServers
             tf.selectable = false;
             tf.styleSheet = Utils.createStyleSheet(createCss());
             tf.alpha = cfg.alpha / 100.0;
-            var f:TextFormat = tf.defaultTextFormat;
-            tf.defaultTextFormat = f;
             tf.htmlText =  "";
             if (cfg.shadow.enabled)
                 tf.filters = [ Utils.createShadowFilter(cfg.shadow) ];
