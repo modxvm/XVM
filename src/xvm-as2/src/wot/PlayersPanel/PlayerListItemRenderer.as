@@ -593,7 +593,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
             //var dead = (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
             //Logger.add(dead + " " + obj.dead + " " + m_name);
             var src:String = Macros.Format(m_name, format.src, obj);
-            src = "../../" + Utils.fixImgTag(src).split("img://").join("");
+            if (Strings.startsWith("img://gui/maps/icons/", src.toLowerCase()))
+                src = "../" + Utils.fixImgTag(src).slice(10);
+            else
+                src = "../../" + Utils.fixImgTag(src).split("img://").join("");
             if (f.source != src)
             {
                 //Logger.add(m_name + " " + f.source + " => " + src);
