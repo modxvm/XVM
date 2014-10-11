@@ -233,6 +233,13 @@ package com.xvm
             "token/unknown_status": "Неизвестный статус",
             "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете.",
 
+            // Carousel
+            "NonElite": "Не элитный",
+            "Premium": "Премиум",
+            "Normal": "Обычный",
+            "MultiXP": "Мультиопыт",
+            "NoMaster": "Нет мастера",
+
             // Comments
             "Comments disabled": "Comments disabled",
             "Error loading comments": "Ошибка загрузки комментариев",
@@ -318,7 +325,14 @@ package com.xvm
             "token/time_left_warn": "Time left:<tab/><font color='#EEEE00'>{0}d. {1}h. {2}m.</font>",
             "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",
             "token/unknown_status": "Unknown status",
-            "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet."
+            "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet.",
+
+            // Carousel
+            "NonElite": "Non elite",
+            "Premium": "Premium",
+            "Normal": "Normal",
+            "MultiXP": "Multi XP",
+            "NoMaster": "No master"
         };
 
         public static var s_lang:Object;

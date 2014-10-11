@@ -155,6 +155,13 @@
     "token/unknown_status": "Unknown status",
     "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet.",
 
+    // Carousel
+    "NonElite": "Non elite",
+    "Premium": "Premium",
+    "Normal": "Normal",
+    "MultiXP": "Multi XP",
+    "NoMaster": "No master",
+
     // Comments
     "Error loading comments": "Error loading comments",
     "Error saving comments": "Error saving comments",

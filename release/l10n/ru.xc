@@ -155,6 +155,13 @@
     "token/unknown_status": "Неизвестный статус",
     "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете.",
 
+    // Carousel
+    "NonElite": "Не элитный",
+    "Premium": "Премиум",
+    "Normal": "Обычный",
+    "MultiXP": "Мультиопыт",
+    "NoMaster": "Нет мастера",
+
     // Comments
     "Error loading comments": "Ошибка загрузки комментариев",
     "Error saving comments": "Ошибка сохранения комментариев",
