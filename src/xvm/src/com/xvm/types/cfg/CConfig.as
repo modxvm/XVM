@@ -8,7 +8,6 @@ package com.xvm.types.cfg
     {
         public var xvmVersion:String;
         public var configVersion:String;
-        public var editorVersion:String;
         public var language:String; // auto, en, ru, ...
         public var region:String; // auto, RU, EU, NA, CN, SEA, VN, KR
         public var definition:CDefinition;
