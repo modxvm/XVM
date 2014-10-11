@@ -166,11 +166,10 @@
     "Error loading comments": "Error loading comments",
     "Error saving comments": "Error saving comments",
     "Comments disabled": "Comments disabled",
+    "Edit data": "Edit data",
+    "Nick": "Nick",
     "Group": "Group",
-    "Add group": "Add group",
-    "Edit group": "Edit group",
-    "Add comment": "Add comment",
-    "Edit comment": "Edit comment",
+    "Comment": "Comment",
 
     //Vehicle status
     "Destroyed": "Destroyed",

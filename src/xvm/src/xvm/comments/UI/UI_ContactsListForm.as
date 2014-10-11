@@ -9,6 +9,7 @@ package xvm.comments.UI
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.data.*;
     import xvm.comments.*;
+    import xvm.comments.editors.*;
 
     public dynamic class UI_ContactsListForm extends ContactsListFormUI
     {
@@ -86,12 +87,8 @@ package xvm.comments.UI
         {
             switch (e.id)
             {
-                case PrbSendInviteCIGeneratorX.M_ADDGROUP:
-                case PrbSendInviteCIGeneratorX.M_EDITGROUP:
-                    break;
-                case PrbSendInviteCIGeneratorX.M_ADDCOMMENT:
-                case PrbSendInviteCIGeneratorX.M_EDITCOMMENT:
-                    EditCommentWindow.show(e.memberItemData);
+                case PrbSendInviteCIGeneratorX.M_EDITDATA:
+                    EditDataWindow.show(new EditDataView(e.memberItemData));
                     break;
             }
         }

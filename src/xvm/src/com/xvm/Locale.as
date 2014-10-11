@@ -244,11 +244,10 @@ package com.xvm
             "Comments disabled": "Comments disabled",
             "Error loading comments": "Ошибка загрузки комментариев",
             "Error saving comments": "Ошибка сохранения комментариев",
+            "Edit data": "Изменить данные",
+            "Nick": "Имя",
             "Group": "Группа",
-            "Add group": "Добавить группу",
-            "Edit group": "Изменить группу",
-            "Add comment": "Добавить комментарий",
-            "Edit comment": "Изменить комментарий",
+            "Comment": "Комментарий",
 
             //Vehicle status
             "Destroyed": "Уничтожен",

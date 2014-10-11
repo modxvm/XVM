@@ -9,10 +9,7 @@
 
     public class PrbSendInviteCIGeneratorX extends PrbSendInviteCIGenerator
     {
-        public static const M_ADDGROUP:String = "xvm:addGroup";
-        public static const M_EDITGROUP:String = "xvm:editGroup";
-        public static const M_ADDCOMMENT:String = "xvm:addComment";
-        public static const M_EDITCOMMENT:String = "xvm:editComment";
+        public static const M_EDITDATA:String = "xvm:editData";
 
         public function PrbSendInviteCIGeneratorX()
         {
@@ -30,12 +27,7 @@
                 entry = it.next() as Entry;
                 if (entry.getKey() === "copyToClipBoard")
                 {
-                    // TODO
-                    //var group:String = CommentsGlobalData.getGroup(param1.dbID);
-                    //res.put((group == null) ? M_ADDGROUP : M_EDITGROUP, { "enabled": CommentsGlobalData.isAvailable() } );
-
-                    var comment:String = CommentsGlobalData.instance.getComment(param1.dbID);
-                    res.put((comment == null) ? M_ADDCOMMENT : M_EDITCOMMENT, { "enabled": CommentsGlobalData.instance.isAvailable() } );
+                    res.put(M_EDITDATA, { "enabled": CommentsGlobalData.instance.isAvailable() } );
                 }
                 res.put(entry.getKey(), entry.getValue());
             }
@@ -50,17 +42,8 @@
             {
                 switch (item.id)
                 {
-                    case M_ADDGROUP:
-                        item.label = Locale.get("Add group");
-                        break;
-                    case M_EDITGROUP:
-                        item.label = Locale.get("Edit group");
-                        break;
-                    case M_ADDCOMMENT:
-                        item.label = Locale.get("Add comment");
-                        break;
-                    case M_EDITCOMMENT:
-                        item.label = Locale.get("Edit comment");
+                    case M_EDITDATA:
+                        item.label = Locale.get("Edit data");
                         break;
                 }
             }

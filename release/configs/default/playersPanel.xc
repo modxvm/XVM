@@ -94,7 +94,7 @@
           //   "{{nick}}",
           //   "<img src='xvm://res/img/panel-bg-l-{{alive|dead}}.png' width='318' height='28'>",
           //   // extended format
-          //   { "x": 20, "y": 10, "border": 1, "borderColor": "0xFFFFFF", "format": "{{nick}}" },
+          //   { "x": 20, "y": 10, "borderColor": "0xFFFFFF", "format": "{{nick}}" },
           //   { "x": 200, "src": "xvm://res/contour/{{vehiclename}}.png" }
           // ]
           //

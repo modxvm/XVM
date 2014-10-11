@@ -3,13 +3,15 @@ package xvm.comments.UI
     import com.xvm.*;
     import com.xvm.utils.*;
     import flash.display.*;
-    import flash.events.MouseEvent;
+    import flash.events.*;
     import net.wg.gui.events.*;
     import net.wg.gui.components.controls.UILoaderAlt; // '*' conflicts with UI classes
     import xvm.comments.*;
+    import xvm.comments.data.*;
 
     public dynamic class UI_UserRosterItemRenderer extends UserRosterItemRendererUI
     {
+        private var nickImg:UILoaderAlt = null;
         private var commentImg:UILoaderAlt = null;
 
         public function UI_UserRosterItemRenderer()
@@ -27,15 +29,20 @@ package xvm.comments.UI
                 //Logger.add("draw");
                 var dataDirty:Boolean = isInvalid("update_data") && data;
 
-                super.draw();
                 if (_baseDisposed)
                     return;
 
                 if (dataDirty)
                 {
-                    var comment:String = CommentsGlobalData.instance.getComment(data.uid);
-                    commentImg.visible = comment != null;
+                    var pd:PlayerCommentData = CommentsGlobalData.instance.getPlayerData(data.uid);
+
+                    if (pd != null && pd.nick != null)
+                        data.displayName = pd.nick;
+                    nickImg.visible = pd != null && pd.nick != null && pd.nick != "";
+                    commentImg.visible = pd != null && pd.comment != null && pd.comment != "";
                 }
+
+                super.draw();
             }
             catch (ex:Error)
             {
@@ -46,26 +53,45 @@ package xvm.comments.UI
         override protected function handleMouseRollOver(param1:MouseEvent):void
         {
             super.handleMouseRollOver(param1);
-            var comment:String = CommentsGlobalData.instance.getComment(data.uid);
-            if (comment != null)
-                App.toolTipMgr.show(data.displayName + "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+            var pd:PlayerCommentData = CommentsGlobalData.instance.getPlayerData(data.uid);
+            if (pd != null)
+            {
+                var comment:String = pd.comment;
+                if (comment != null)
+                    App.toolTipMgr.show(data.userName + "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+            }
         }
 
         // PRIVATE
 
         private function createControls():void
         {
-            this.textField.width -= 16;
+            var mc:Sprite = this.addChildAt(new Sprite(), 0) as Sprite;
+            mc.x = this.actualWidth - 24;
+            mc.width = 24;
+            mc.scaleX = 1 / scaleX;
+            mc.scaleY = 1 / scaleY;
 
-            this.commentImg = this.addChildAt(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
+            this.nickImg = mc.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
                 autoSize: true,
                 maintainAspectRatio: false,
-                x: this.actualWidth - 16,
+                x: 12,
+                width: 5,
+                height:16,
+                alpha: 0.5,
+                //source: "../maps/icons/library/okIcon.png"
+                source: "../maps/icons/messenger/iconContacts.png"
+            })) as UILoaderAlt;
+
+            this.commentImg = mc.addChild(App.utils.classFactory.getComponent("UILoaderAlt", UILoaderAlt, {
+                autoSize: true,
+                maintainAspectRatio: false,
+                x: 16,
                 width: 16,
                 height:16,
                 alpha: 0.5,
                 source: "../maps/icons/messenger/service_channel_icon.png"
-            }), 0) as UILoaderAlt;
+            })) as UILoaderAlt;
         }
     }
 }
