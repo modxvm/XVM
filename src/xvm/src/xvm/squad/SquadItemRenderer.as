@@ -7,9 +7,8 @@ package xvm.squad
     import com.xvm.*;
     import com.xvm.types.veh.*;
     import com.xvm.utils.*;
-    import flash.events.Event;
+    import flash.events.*;
     import flash.text.*;
-    import net.wg.gui.prebattle.squad.SquadItemRenderer;
 
     public class SquadItemRenderer
     {
@@ -82,7 +81,7 @@ package xvm.squad
             {
                 if (vehicleTierField == null)
                     createVehicleTierField();
-                Macros.RegisterMinimalMacrosData(proxy.data.fullName, vdata.vid);
+                Macros.RegisterMinimalMacrosData(proxy.data.dbID, proxy.data.fullName, vdata.vid);
                 vehicleTierField.htmlText = "<p class='xvm_vehicleTier' align='right'>" +
                     Macros.Format(proxy.data.userName, Config.config.squad.formatInfoField) + "</p>";
             }

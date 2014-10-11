@@ -207,7 +207,7 @@ class Xvm(object):
         if self.currentPlayerId is not None:
             self.currentPlayerId = None
             g_websock.send('id')
-            token.setToken(None)
+            token.clearToken()
 
     def onShowLobby(self, e=None):
         playerId = getCurrentPlayerId()
@@ -326,7 +326,8 @@ class Xvm(object):
                 movie.invoke((RESPOND_CONFIG, [
                     self.config_str,
                     self.lang_str,
-                    getVehicleInfoDataStr()]))
+                    getVehicleInfoDataStr(),
+                    comments.getXvmUserComments(not isReplay())]))
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
 

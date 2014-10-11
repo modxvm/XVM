@@ -20,7 +20,7 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:String, lang_str:String, vehInfoData:String)
+    public function GetConfigCallback(config_data:String, lang_str:String, vehInfoData:String, comments:String)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
@@ -29,6 +29,7 @@ class com.xvm.Config
             //Logger.addObject(Config.config);
             Locale.languageFileCallback(lang_str);
             VehicleInfo.onVehicleInfoData(vehInfoData);
+            Macros.RegisterCommentsData(comments);
 
             Logger.add("Config: Loaded");
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_CONFIG_LOADED } );

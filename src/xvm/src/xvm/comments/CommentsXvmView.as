@@ -66,12 +66,12 @@ package xvm.comments
             {
                 //App.waiting.hide("");
 
-                var data:Object = {}
+                var data:Object = { };
                 try
                 {
                     data = JSONx.parse(json_str);
                     if (data == null)
-                        data = {}
+                        data = { };
                 }
                 catch (ex:Error)
                 {

@@ -5,6 +5,7 @@
 package com.xvm.utils
 {
     import com.xvm.*;
+    import com.xvm.io.*;
     import com.xvm.types.*;
     import com.xvm.utils.*;
     import com.xvm.types.stat.*;
@@ -17,6 +18,7 @@ package com.xvm.utils
         private static var macros_cache:Object = { };
         private static var dict:Object = new Object(); //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
         private static var globals:Object = new Object();
+        public static var comments:Object = null;
 
         /**
          * Format string with macros substitutions
@@ -352,7 +354,7 @@ package com.xvm.utils
          * @param fullPlayerName full player name with extra tags (clan, region, etc)
          * @param vid vehicle id
          */
-        public static function RegisterMinimalMacrosData(fullPlayerName:String, vid:int):void
+        public static function RegisterMinimalMacrosData(playerId:Number, fullPlayerName:String, vid:int):void
         {
             if (fullPlayerName == null || fullPlayerName == "")
                 throw new Error("empty name");
@@ -372,7 +374,7 @@ package com.xvm.utils
 
             var pdata:Object = dict[pname];
 
-            var nick:String = modXvmDevLabel(pname);
+            var nick:String = getCustomPlayerName(pname, playerId);
             var clanWithoutBrackets:String = WGUtils.GetClanNameWithoutBrackets(fullPlayerName);
             var clanWithBrackets:String = WGUtils.GetClanNameWithBrackets(fullPlayerName);
 
@@ -441,7 +443,7 @@ package com.xvm.utils
             if (stat == null)
                 return;
 
-            RegisterMinimalMacrosData(stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id);
+            RegisterMinimalMacrosData(stat._id, stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id);
 
             var pdata:Object = dict[pname];
 
@@ -634,6 +636,25 @@ package com.xvm.utils
             }
         }
 
+        public static function RegisterCommentsData():void
+        {
+            Cmd.getComments(null, onGetCommentsReceived);
+        }
+
+        public static function onGetCommentsReceived(json_str:String):void
+        {
+            try
+            {
+                //Logger.addObject(json_str);
+                comments = JSONx.parse(json_str).players;
+                Logger.addObject(comments);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+        }
+
         // PRIVATE
 
         /**
@@ -641,7 +662,7 @@ package com.xvm.utils
          * @param pname player name
          * @return personal name
          */
-        private static function modXvmDevLabel(pname:String):String
+        private static function getCustomPlayerName(pname:String, uid:Number):String
         {
             switch (Config.gameRegion)
             {
@@ -674,6 +695,16 @@ package com.xvm.utils
                     if (pname == "sirmax" || pname == "0x01" || pname == "_SirMax_")
                         return "«sir Max» (XVM)";
                     break;
+            }
+
+            if (comments != null)
+            {
+                var cdata:Object = comments[String(uid)];
+                if (cdata != null)
+                {
+                    if (cdata.nick != null && cdata.nick != "")
+                        pname = cdata.nick;
+                }
             }
 
             return pname;

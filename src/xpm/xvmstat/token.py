@@ -15,9 +15,11 @@ def getXvmMessageHeader(config):
     return _getXvmMessageHeader(config)
 
 def getToken():
+    if isReplay():
+      getXvmStatActiveTokenData()
     return _token
 
-def setToken(value):
+def clearToken(value):
     global _token
     _token = value
 
@@ -100,6 +102,10 @@ def _getXvmStatActiveTokenData():
             if playerId is None:
                 return None
             tdata = userprefs.get('tokens/{0}'.format(playerId))
+
+    if not tdata is None:
+        global _token
+        _token = tdata.get('token', '').encode('ascii')
 
     return tdata
 

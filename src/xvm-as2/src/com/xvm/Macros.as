@@ -9,6 +9,7 @@ class com.xvm.Macros
 
     private static var dict:Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
     public static var globals:Object = {};
+    public static var comments:Object = null;
 
     public static function Format(pname:String, format:String, options:Object):String
     {
@@ -325,7 +326,7 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("nick"))
         {
             var fname:String = data.label + (data.label.indexOf("[") >= 0 || !data.clanAbbrev ? "" : "[" + data.clanAbbrev + "]");
-            var name:String = Macros.modXvmDevLabel(pname);
+            var name:String = Macros.getCustomPlayerName(pname, data.uid);
             var clan:String = Utils.GetClanNameWithBrackets(fname);
             var nick:String = name + clan;
 
@@ -478,6 +479,8 @@ class com.xvm.Macros
 
     public static function RegisterStatMacros(pname:String, stat:StatData)
     {
+        //Logger.addObject(stat);
+
         if (!stat)
             return;
         if (!dict.hasOwnProperty(pname))
@@ -662,19 +665,37 @@ class com.xvm.Macros
 
     public static function RegisterMarkerData(pname:String, data:Object)
     {
+        //Logger.addObject(data);
+
         if (!data)
             return;
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
         var pdata = dict[pname];
 
+        // {{name}}
+        pdata["name"] = Macros.getCustomPlayerName(pname, data.uid);
+
         // {{turret}}
         pdata["turret"] = data.turret || "";
     }
 
+    public static function RegisterCommentsData(json_str:String)
+    {
+        try
+        {
+            comments = JSONx.parse(json_str).players;
+            //Logger.addObject(comments, 2);
+        }
+        catch (ex:Error)
+        {
+            Logger.add("RegisterCommentsData: ERROR: " + ex.message);
+        }
+    }
+
     // PRIVATE
 
-    private static function modXvmDevLabel(pname:String):String
+    private static function getCustomPlayerName(pname:String, uid:Number):String
     {
         switch (Config.config.region)
         {
@@ -707,6 +728,16 @@ class com.xvm.Macros
                 if (pname == "sirmax" || pname == "0x01" || pname == "_SirMax_")
                     return "«sir Max» (XVM)";
                 break;
+        }
+
+        if (comments != null)
+        {
+            var cdata:Object = comments[String(uid)];
+            if (cdata != null)
+            {
+                if (cdata.nick != null && cdata.nick != "")
+                    pname = cdata.nick;
+            }
         }
 
         return pname;
