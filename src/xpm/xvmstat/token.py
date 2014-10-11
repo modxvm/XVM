@@ -124,9 +124,9 @@ def _initializeXvmToken(config):
     type = SystemMessages.SM_TYPE.Warning
     msg = _getXvmMessageHeader(config)
     if tdata is None:
-        msg += '{{l10n:token/network_error}}\n\n%s' % utils.hide_guid(errStr)
+        msg += '{{l10n:token/services_unavailable}}\n\n%s' % utils.hide_guid(errStr)
     elif tdata['status'] == 'badToken':
-        msg += '{{l10n:token/bad_token}}'
+        msg += '{{l10n:token/services_inactive}}'
     elif tdata['status'] == 'blocked':
         msg += '{{l10n:token/blocked}}'
     elif tdata['status'] == 'inactive':
