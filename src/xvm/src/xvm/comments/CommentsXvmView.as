@@ -35,6 +35,9 @@ package xvm.comments
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
 
+            if (!Config.config.rating.showPlayersStatistics)
+                return;
+
             var cfg:CComments = Config.config.hangar.comments;
             if (!cfg.enabled)
                 return;
