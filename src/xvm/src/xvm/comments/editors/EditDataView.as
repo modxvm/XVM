@@ -72,7 +72,7 @@
             cancelButton.addEventListener(MouseEvent.CLICK, onWindowClose);
 
             var pd:Object = CommentsGlobalData.instance.getPlayerData(data.uid);
-            nickTextInput.text = (pd != null && pd.nick != null && pd.nick != "") ? pd.nick : data.userName;
+            nickTextInput.text = (pd != null && pd.nick != null && pd.nick != "") ? pd.nick : (data.originalDisplayName || data.displayName);
             if (pd != null)
             {
                 groupDropDown.selectedIndex = 0; // pd.group
@@ -223,7 +223,10 @@
                 {
                     CommentsGlobalData.instance.setPlayerData(
                         data.uid,
-                        new PlayerCommentData(nickTextInput.text, groupDropDown.dataProvider[groupDropDown.selectedIndex], commentTextArea.text));
+                        new PlayerCommentData(
+                            nickTextInput.text == (data.originalDisplayName || data.displayName) ? null : nickTextInput.text,
+                            groupDropDown.dataProvider[groupDropDown.selectedIndex],
+                            commentTextArea.text));
                     onWindowClose();
                 }
             }
@@ -239,7 +242,7 @@ data: {
   "userName": "M_r_A",
   "himself": false,
   "chatRoster": 1,
-  "displayName": "M_r_A",
+  "displayName": "M_r_A [CLAN]",
   "group": "group_2",
   "colors": "8761728,6127961",
   "online": false,

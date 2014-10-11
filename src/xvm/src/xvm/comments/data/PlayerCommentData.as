@@ -8,9 +8,9 @@
 
         public function PlayerCommentData(nick:String, group:String, comment:String):void
         {
-            this.nick = nick;
-            this.group = group;
-            this.comment = comment;
+            this.nick = nick == null || nick == "" ? null : nick;
+            this.group = group == null || group == "" ? null : group;
+            this.comment = comment == null || comment == "" ? null : comment;
         }
 
         public function isEmpty():Boolean

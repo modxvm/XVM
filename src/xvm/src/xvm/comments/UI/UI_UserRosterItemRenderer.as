@@ -32,12 +32,17 @@ package xvm.comments.UI
                 if (_baseDisposed)
                     return;
 
+                //Logger.addObject(data);
+
                 if (dataDirty)
                 {
                     var pd:PlayerCommentData = CommentsGlobalData.instance.getPlayerData(data.uid);
 
                     if (pd != null && pd.nick != null)
+                    {
+                        data.originalDisplayName = data.displayName;
                         data.displayName = pd.nick;
+                    }
                     nickImg.visible = pd != null && pd.nick != null && pd.nick != "";
                     commentImg.visible = pd != null && pd.comment != null && pd.comment != "";
                 }
@@ -58,7 +63,7 @@ package xvm.comments.UI
             {
                 var comment:String = pd.comment;
                 if (comment != null)
-                    App.toolTipMgr.show(data.userName + "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+                    App.toolTipMgr.show((data.originalDisplayName || data.displayName) + "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
             }
         }
 
