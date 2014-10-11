@@ -647,7 +647,7 @@ package com.xvm.utils
             {
                 //Logger.addObject(json_str);
                 comments = JSONx.parse(json_str).players;
-                Logger.addObject(comments);
+                //Logger.addObject(comments);
             }
             catch (ex:Error)
             {

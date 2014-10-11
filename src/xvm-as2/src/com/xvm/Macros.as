@@ -325,19 +325,42 @@ class com.xvm.Macros
         // player name
         if (!pdata.hasOwnProperty("nick"))
         {
-            var fname:String = data.label + (data.label.indexOf("[") >= 0 || !data.clanAbbrev ? "" : "[" + data.clanAbbrev + "]");
             var name:String = Macros.getCustomPlayerName(pname, data.uid);
-            var clan:String = Utils.GetClanNameWithBrackets(fname);
-            var nick:String = name + clan;
+            var idx:Number = name.indexOf("[");
+            var clan:String = null;
+            var clannb:String = null;
+            if (idx >= 0)
+            {
+                clan = name.slice(idx);
+                clannb = name.slice(idx + 1).slice(0, name.indexOf("]"));
+            }
+            else
+            {
+                idx = data.label.indexOf("[");
+                if (idx >= 0)
+                {
+                    clan = data.label.slice(idx);
+                    clannb = data.label.slice(idx + 1).slice(0, data.label.indexOf("]"));
+                }
+                else
+                {
+                    if (data.clanAbbrev != null && data.clanAbbrev != "")
+                    {
+                        clan = "[" + data.clanAbbrev + "]";
+                        clannb = data.clanAbbrev;
+                    }
+                }
+            }
+            var nick:String = name + (clan || "");
 
             // {{nick}}
             pdata["nick"] = nick;
             // {{name}}
             pdata["name"] = name;
             // {{clan}}
-            pdata["clan"] = clan == "" ? null : clan;
+            pdata["clan"] = clan;
             // {{clannb}}
-            pdata["clannb"] = clan == "" ? null : Utils.GetClanName(fname);
+            pdata["clannb"] = clannb;
             // {{player}}
             pdata["player"] = data.himself == true ? "pl" : null;
         }
@@ -673,9 +696,6 @@ class com.xvm.Macros
             dict[pname] = { };
         var pdata = dict[pname];
 
-        // {{name}}
-        pdata["name"] = Macros.getCustomPlayerName(pname, data.uid);
-
         // {{turret}}
         pdata["turret"] = data.turret || "";
     }
@@ -697,6 +717,7 @@ class com.xvm.Macros
 
     private static function getCustomPlayerName(pname:String, uid:Number):String
     {
+        //Logger.add(pname + " " + uid);
         switch (Config.config.region)
         {
             case "RU":
@@ -730,7 +751,7 @@ class com.xvm.Macros
                 break;
         }
 
-        if (comments != null)
+        if (comments != null && !isNaN(uid) && uid > 0)
         {
             var cdata:Object = comments[String(uid)];
             if (cdata != null)

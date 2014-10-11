@@ -123,7 +123,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         Macros.RegisterMarkerData(m_playerName,
         {
-            uid: m_playerId,
             turret: turretStatusComponent.getMarker()
         });
 
