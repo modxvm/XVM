@@ -62,8 +62,8 @@ package xvm.comments.UI
             if (pd != null)
             {
                 var comment:String = pd.comment;
-                if (comment != null)
-                    App.toolTipMgr.show((data.originalDisplayName || data.displayName) + "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(comment) + "</font>");
+                App.toolTipMgr.show((data.originalDisplayName || data.displayName) +
+                    (pd.comment == null ? "" : "\n<font color='" + Utils.toHtmlColor(Defines.UICOLOR_LABEL) + "'>" + Utils.fixImgTag(pd.comment) + "</font>"));
             }
         }
 
