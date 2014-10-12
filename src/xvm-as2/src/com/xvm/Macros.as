@@ -332,7 +332,7 @@ class com.xvm.Macros
             if (idx >= 0)
             {
                 clan = name.slice(idx);
-                clannb = name.slice(idx + 1).slice(0, name.indexOf("]"));
+                clannb = clan.slice(1, clan.indexOf("]"));
             }
             else
             {
@@ -340,14 +340,14 @@ class com.xvm.Macros
                 if (idx >= 0)
                 {
                     clan = data.label.slice(idx);
-                    clannb = data.label.slice(idx + 1).slice(0, data.label.indexOf("]"));
+                    clannb = clan.slice(1, clan.indexOf("]"));
                 }
                 else
                 {
                     if (data.clanAbbrev != null && data.clanAbbrev != "")
                     {
-                        clan = "[" + data.clanAbbrev + "]";
                         clannb = data.clanAbbrev;
+                        clan = "[" + clannb + "]";
                     }
                 }
             }
