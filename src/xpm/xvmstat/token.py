@@ -15,9 +15,11 @@ def getXvmMessageHeader(config):
     return _getXvmMessageHeader(config)
 
 def getToken():
+    if isReplay():
+      getXvmStatActiveTokenData()
     return _token
 
-def setToken(value):
+def clearToken(value):
     global _token
     _token = value
 
@@ -101,6 +103,10 @@ def _getXvmStatActiveTokenData():
                 return None
             tdata = userprefs.get('tokens/id_{0}'.format(playerId))
 
+    if not tdata is None:
+        global _token
+        _token = tdata.get('token', '').encode('ascii')
+
     return tdata
 
 def _initializeXvmToken(config):
@@ -118,9 +124,9 @@ def _initializeXvmToken(config):
     type = SystemMessages.SM_TYPE.Warning
     msg = _getXvmMessageHeader(config)
     if tdata is None:
-        msg += '{{l10n:token/network_error}}\n\n%s' % utils.hide_guid(errStr)
+        msg += '{{l10n:token/services_unavailable}}\n\n%s' % utils.hide_guid(errStr)
     elif tdata['status'] == 'badToken':
-        msg += '{{l10n:token/bad_token}}'
+        msg += '{{l10n:token/services_inactive}}'
     elif tdata['status'] == 'blocked':
         msg += '{{l10n:token/blocked}}'
     elif tdata['status'] == 'inactive':

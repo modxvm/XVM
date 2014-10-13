@@ -9,10 +9,10 @@
     "enabled": true,
     // Horizontal position.
     // Положение по горизонтали.
-    "x": -15,
+    "x": -10,
     // Vertical position.
     // Положение по вертикали.
-    "y": 40,
+    "y": 28,
     // Width.
     // Ширина.
     "width": 300,
@@ -72,7 +72,7 @@
     //
     // Clock format.
     // Формат часов.
-    "format": "<font face='$FieldFont'><font size='19'>{{W}} {{D%02d}} {{MM}}</font><font size='26'> {{h%02d}}:{{m%02d}}</font></font>",
+    "format": "<textformat tabstops='[80]' leading='-39'><font face='$FieldFont'><font size='15'>{{D%02d}} {{MM}} {{Y}}<tab><font size='36'>{{h%02d}}:{{m%02d}}</font>\n<textformat rightMargin='87'>{{WW}}</font></textformat></textformat>",
     // Shadow.
     // Тень.
     "shadow": {

@@ -185,8 +185,8 @@ package com.xvm.misc
             // Clock
             c.clock = new CClock();
             c.clock.enabled = true;
-            c.clock.x = -15;
-            c.clock.y = 40;
+            c.clock.x = -10;
+            c.clock.y = 28;
             c.clock.width = 300;
             c.clock.height = 60;
             c.clock.topmost = true;
@@ -200,7 +200,7 @@ package com.xvm.misc
             c.clock.bgColor = null;
             c.clock.bgImage = null;
             c.clock.antiAliasType = "advanced";
-            c.clock.format = "<font face='$FieldFont'><font size='19'>{{W}} {{D%02d}} {{MM}}</font><font size='26'> {{h%02d}}:{{m%02d}}</font></font>";
+            c.clock.format = "<textformat tabstops='[80]' leading='-39'><font face='$FieldFont'><font size='15'>{{D%02d}} {{MM}} {{Y}}<tab><font size='36'>{{h%02d}}:{{m%02d}}</font>\n<textformat rightMargin='87'>{{WW}}</font></textformat></textformat>";
             c.clock.shadow = new CShadow();
             c.clock.shadow.enabled = true;
             c.clock.shadow.distance = 0;

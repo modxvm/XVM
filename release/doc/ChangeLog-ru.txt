@@ -1,4 +1,5 @@
 ﻿XVM-5.3.7-dev:
+  * новый мод: xvm-comments, позволяет изменять ники друзей и добавлять комментарии
   * добавлена секция hangar/comments для мода комментариев для игроков
   * добавлена опция battleLoading/darkenNotReadyIcon для настройки затемнения иконок не загрузившихся игроков
   * добавлены опции pingServers/leading и pingServers/topmost

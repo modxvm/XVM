@@ -67,7 +67,7 @@ package xvm.hangar.components.BattleLoading
                 }
 
                 var vdata:VehicleData = VehicleInfo.getByIcon(data.vehicleIcon);
-                Macros.RegisterMinimalMacrosData(fullPlayerName, vdata.vid);
+                Macros.RegisterMinimalMacrosData(data.accountDBID, fullPlayerName, vdata.vid);
                 data.playerName = Macros.Format(data.playerName, "{{name}}");
                 data.clanAbbrev = Macros.Format(data.playerName, "{{clannb}}");
 
@@ -104,7 +104,7 @@ package xvm.hangar.components.BattleLoading
                     return;
 
                 var isIconHighlighted:Boolean = App.colorSchemeMgr != null && (!Config.config.battleLoading.darkenNotReadyIcon || proxy.enabled);
-				
+
                 proxy.iconLoader.transform.colorTransform =
                         App.colorSchemeMgr.getScheme(isIconHighlighted ? "normal" : "normal_dead").colorTransform;
 

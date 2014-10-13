@@ -12,7 +12,6 @@ class _DefaultConfig(object):
     def __init__(self):
         self.config = {
             'configVersion': CONFIG_VERSION,
-            'editorVersion': '',
             'language': LOCALE_AUTO_DETECTION,
             'region': REGION_AUTO_DETECTION,
             'definition': self.getDefinitionSection(),

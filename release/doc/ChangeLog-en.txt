@@ -1,4 +1,5 @@
 ﻿XVM-5.3.7-dev:
+  * new mod: xvm-comments, allow to change nicks of the friends and add comments.
   * added section hangar/comments for comments for players mod
   * added option battleLoading/darkenNotReadyIcon for customize icons are not ready players
   * added options pingServers/leading and pingServers/topmost

@@ -6,13 +6,10 @@ package xvm.hangar.views
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import flash.events.*;
-    import flash.utils.*;
+    import com.xvm.utils.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
     import net.wg.gui.lobby.battleloading.*;
-    import net.wg.gui.components.controls.*;
-    import xvm.hangar.*;
     import xvm.hangar.components.BattleLoading.*;
     import xvm.hangar.UI.battleLoading.*;
 
@@ -33,6 +30,8 @@ package xvm.hangar.views
             //Logger.add("onAfterPopulate: " + view.as_alias);
 
             logBriefConfigurationInfo();
+
+            Macros.RegisterCommentsData();
 
             waitInit();
         }

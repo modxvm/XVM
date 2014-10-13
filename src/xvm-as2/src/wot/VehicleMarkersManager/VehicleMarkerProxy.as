@@ -208,6 +208,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
         pFullName:String, pName:String, pClan:String, pRegion:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void
+        /* added by XVM: playerId:Number, marksOnGun:Number, vehicleState:Number, frags:Number*/
     {
         /**
          * Invoked on new marker creation.
@@ -224,12 +225,15 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_curHealth = curHealth;
         m_dead = m_curHealth <= 0;
 
+        var playerId = arguments[14];
+
         // for markers, hitlog and hpleft
         var wr = wrapper;
         var registerMacros = function()
         {
             Macros.RegisterPlayerData(pName,
             {
+                uid: playerId,
                 label: pName + (pClan == "" ? "" : "[" + pClan + "]"),
                 vehicle: vType,
                 icon: vIconSource,

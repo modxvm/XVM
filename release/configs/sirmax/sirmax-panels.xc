@@ -17,6 +17,7 @@
     "extraFieldsLeft": [
       // for tests
       //{ "w": 1, "h": 23, "bgColor": "0xFFFFFF" },
+      //{ "x": 100, "scaleX": 1, "src": "img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png" },
 
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
       { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },

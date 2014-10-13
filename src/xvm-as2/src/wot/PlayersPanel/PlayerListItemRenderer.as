@@ -392,14 +392,14 @@ class wot.PlayersPanel.PlayerListItemRenderer
         img["data"] = {
             x: x, y: y, w: w, h: h,
             format: format,
-            align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
+            align: format.align != null ? format.align : (isLeftPanel ? "left" : "right"),
+            scaleX: format.scaleX != null && !isNaN(format.scaleX) ? format.scaleX * 100 : 100,
+            scaleY: format.scaleY != null && !isNaN(format.scaleY) ? format.scaleY * 100 : 100
         };
         //Logger.addObject(img["data"]);
 
         img._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
         img._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
-        img._xscale = format.scaleX != null && !isNaN(format.scaleX) ? format.scaleX * 100 : 100;
-        img._yscale = format.scaleY != null && !isNaN(format.scaleY) ? format.scaleY * 100 : 100;
         img.autoSize = true;
         img.maintainAspectRatio = false;
         var me = this;
@@ -427,6 +427,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
         img._y = 0;
         img.width = 0;
         img.height = 0;
+        img._xscale = data.scaleX;
+        img._yscale = data.scaleY;
         alignField(img);
 
         setTimeout(function() { img.visible = true; }, 1);
@@ -591,7 +593,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
             //var dead = (wrapper.data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
             //Logger.add(dead + " " + obj.dead + " " + m_name);
             var src:String = Macros.Format(m_name, format.src, obj);
-            src = "../../" + Utils.fixImgTag(src).split("img://").join("");
+            if (Strings.startsWith("img://gui/maps/icons/", src.toLowerCase()))
+                src = "../" + Utils.fixImgTag(src).slice(10);
+            else
+                src = "../../" + Utils.fixImgTag(src).split("img://").join("");
             if (f.source != src)
             {
                 //Logger.add(m_name + " " + f.source + " => " + src);
