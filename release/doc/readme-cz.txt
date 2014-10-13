@@ -61,7 +61,7 @@
 
   4. Je tu možnost používání "nočních" verzí XVM.
     Tyto verze jsou vytvořeny automaticky z aktuálního zdrojového kódu, nemusí být testovány a mohou obsahovat chyby!
-    Stahovat je můžete ze stránek http://wargaming.by-reservation.com/xvm/
+    Stahovat je můžete ze stránek http://nightly.modxvm.com/
 
 -----------------------------------------------------------
 3. Aktualizace

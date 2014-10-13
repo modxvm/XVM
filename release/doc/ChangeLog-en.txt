@@ -269,7 +269,7 @@ XVM-4.1.1:
   * squad window: text field with vehicle tier no longer creates artefacts
 
   [OTHER]
-  * automation: XVM nightly builds http://wargaming.by-reservation.com/xvm/
+  * automation: XVM nightly builds http://nightly.modxvm.com/
 
 XVM-4.1.0:
   [NEW FUNCTIONS]

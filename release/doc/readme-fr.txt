@@ -64,7 +64,7 @@
 
   4. Vous pouvez installer des versions journalières de développement d'XVM.
     Vous pouvez télécharger ces versions spéciales ici :
-      http://wargaming.by-reservation.com/xvm/ (en anglais)
+      http://nightly.modxvm.com/ (en anglais)
 
 -----------------------------------------------------------
 3. MISE A JOUR
