@@ -92,14 +92,14 @@ def _getXvmStatActiveTokenData():
     if playerId is None:
         return None
 
-    tdata = userprefs.get('tokens/{0}'.format(playerId))
+    tdata = userprefs.get('tokens/id_{0}'.format(playerId))
     if tdata is None:
         # fallback to the last player id if replay is running
         if isReplay():
             playerId = userprefs.get('tokens/lastPlayerId')
             if playerId is None:
                 return None
-            tdata = userprefs.get('tokens/{0}'.format(playerId))
+            tdata = userprefs.get('tokens/id_{0}'.format(playerId))
 
     return tdata
 
@@ -147,7 +147,7 @@ def _initializeXvmToken(config):
     if tdata is not None:
         _tdataPrev = tdata
         if 'token' in tdata:
-            userprefs.set('tokens/{0}'.format(playerId), tdata)
+            userprefs.set('tokens/id_{0}'.format(playerId), tdata)
         elif tdataActive is not None:
             tdata['token'] = tdataActive['token']
         userprefs.set('tokens/lastPlayerId', playerId)
