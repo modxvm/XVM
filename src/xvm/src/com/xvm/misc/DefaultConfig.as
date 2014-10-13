@@ -1059,11 +1059,11 @@ package com.xvm.misc
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
             c.wn8 = [
-                { value: 315,  color: Defines.C_RED },     // very bad
-                { value: 760,  color: Defines.C_ORANGE },  // bad
-                { value: 1325, color: Defines.C_YELLOW },  // normal
-                { value: 1980, color: Defines.C_GREEN },   // good
-                { value: 2570, color: Defines.C_BLUE },    // very good
+                { value: 355,  color: Defines.C_RED },     // very bad
+                { value: 820,  color: Defines.C_ORANGE },  // bad
+                { value: 1370, color: Defines.C_YELLOW },  // normal
+                { value: 2020, color: Defines.C_GREEN },   // good
+                { value: 2620, color: Defines.C_BLUE },    // very good
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
             c.wgr = [
@@ -1208,9 +1208,9 @@ package com.xvm.misc
                 { value: 9999, alpha: 40 }
             ];
             c.wn8 = [
-                { value: 760,  alpha: 100 },
-                { value: 1325, alpha: 80 },
-                { value: 1980, alpha: 60 },
+                { value: 820,  alpha: 100 },
+                { value: 1370, alpha: 80 },
+                { value: 2020, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.wgr = [
