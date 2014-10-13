@@ -1,52 +1,57 @@
 """ XVM (c) www.modxvm.com 2013-2014 """
 
 def get(key):
-    return _settings.get(key)
+    return _userPrefs.get(key)
 
+# key must be valid file name
 def set(key, value):
-    _settings.set(key, value)
+    _userPrefs.set(key, value)
 
 # PRIVATE
 
+import os
 import traceback
-import simplejson
 import cPickle
-import base64
 
 import BigWorld
-import Settings
 
 from logger import *
 
-class _Settings():
+class _UserPrefs():
     def __init__(self):
-        pass
+        try:
+            self.cache_dir = os.path.join(
+                os.path.dirname(unicode(BigWorld.wg_getPreferencesFilePath(), 'utf-8', errors = 'ignore')),
+                'xvm')
+            if not os.path.isdir(self.cache_dir):
+                os.makedirs(self.cache_dir)
+        except:
+            err('userPrefs.__init__() exception: ' + traceback.format_exc())
 
     def get(self, key):
+        fd = None
         try:
-            self._check_key(key)
-            prefs = Settings.g_instance.userPrefs['XVM']
-            value = prefs.readString(key)
-            return None if not value else cPickle.loads(base64.b64decode(value))
-        except Exception, ex:
-            err('settings.get() exception: ' + traceback.format_exc())
-        return None
+            fileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
+            if os.path.isfile(fileName):
+                fd = open(fileName, 'rb')
+                return cPickle.load(fd)
+        except:
+            err('userPrefs.get() exception: ' + traceback.format_exc())
+        finally:
+            if fd is not None:
+                fd.close()
 
     def set(self, key, value):
+        fd = None
         try:
-            self._check_key(key)
-            prefs = Settings.g_instance.userPrefs['XVM']
-            prefs.writeString(key, str(base64.b64encode(cPickle.dumps(value))))
-            Settings.g_instance.save()
-        except Exception, ex:
-            err('settings.set() exception: ' + traceback.format_exc())
+            fileName = os.path.join(self.cache_dir, '{0}.dat'.format(key))
+            fd = open(fileName, 'wb')
+            cPickle.dump(value, fd, -1)
+            os.fsync(fd)
+        except:
+            err('userPrefs.set() exception: ' + traceback.format_exc())
+        finally:
+            if fd is not None:
+                fd.close()
 
-    def _check_key(self, key):
-        prefs = Settings.g_instance.userPrefs
-        if not prefs.has_key('XVM'):
-            prefs.write('XVM', '')
-        xvm_prefs = prefs['XVM']
-        if not xvm_prefs.has_key(key):
-            xvm_prefs.writeString(key, '')
-
-_settings = _Settings()
+_userPrefs = _UserPrefs()
