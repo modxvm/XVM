@@ -5,7 +5,7 @@ If you can write code, [you can help us](https://confluence.atlassian.com/displa
 
 # Official Resources
 
-### Official resources
+### Official websites
 
 * [Homepage](http://www.modxvm.com/)
 * [News](http://www.modxvm.com/en/news/)
