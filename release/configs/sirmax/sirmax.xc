@@ -38,44 +38,7 @@
       "$ref": { "path":"def.pingServers" },
       "x": 5
     },
-    "carousel": {
-      //"enabled": false,
-      //"zoom": 0.66,
-      //"zoom": 0.75,
-      "zoom": 0.80,
-      //"zoom": 2,
-      "rows": 2,
-      "padding": { "horizontal": 2, "vertical": 2 },
-      "alwaysShowFilters": true,
-      //"hideBuyTank": true,
-      //"hideBuySlot": true,
-      "filters": {
-        //"nation":   { "enabled": false },
-        //"type":     { "enabled": false },
-        //"level":    { "enabled": false },
-        //"prefs":    { "enabled": false },
-        //"favorite": { "enabled": false }
-      },
-      "fields": {
-        "tankType": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "level":    { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "xp":       { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "multiXp":  { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 },
-        "tankName": { "visible": true, "dx": 0, "dy": 0, "alpha": 100, "scale": 1 }
-      },
-      "extraFields": [
-        //{ "x": "0", "y": 28, "w": 45, "h": 35, "bgColor": "0xFFFFFF", "alpha": 20 },
-        { "x": -1, "y": 10, "format": "<img src='img://gui/maps/icons/library/proficiency/class_icons_{{v.mastery}}.png' width='23' height='23'>" },
-        { "x": 22, "y": 12, "format": "<font color='{{v.c_winrate}}'>{{v.winrate%d~%}}</font>", "shadow": {} },
-        { "x": 0, "y": 28, "format": "<font color='{{v.c_wn8effd}}'>{{v.wn8effd%0.2f}}</font>", "shadow": {} },
-        { "x": 0, "y": 42, "format": "<font color='{{v.c_battles}}'>{{v.battles}}</font>", "shadow": {} },
-        { "x": 0, "y": 54, "format": "<font color='{{v.c_damageRating}}'>{{v.damageRating~%}}</font>", "shadow": {} },
-        //{ "x": 60, "y": 12, "format": "<font color='{{v.c_type}}'>{{v.premium?1|0}}</font>", "shadow": {} },
-        //{ "x": 60, "src": "xvm://res/contour/HARDicons/{{v.sysname}}.png" },
-        { "x": -2, "y": -1, "h": 100, "w": "164", "bgColor": "{{v.selected?#FFA759|#000000}}", "alpha": "{{v.selected?15|0}}" },
-        {}
-      ]
-    },
+    "carousel": ${"sirmax-carousel.xc":"carousel"},
     "clock": {
       //"x": 100,
       //"y": 5,
@@ -209,7 +172,7 @@
   },
   "texts": {
     //"vtype": { "LT":  "ЛТ" },
-    "marksOnGun": { "_0": "", "_1": "|", "_2": "||", "_3": "|||" }
+    "marksOnGun": { "_0": "0", "_1": "1", "_2": "2", "_3": "3" }
   },
   "colors": {
     "system": {
