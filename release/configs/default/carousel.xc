@@ -19,8 +19,8 @@
         "horizontal": 10,   // по горизонтали
         "vertical": 2       // по вертикали
     },
-    // true - show filters only if all tanks do not fit on the screen.
-    // true - показывать фильтры только, если все танки не помещаются на экране.
+    // true - show filters even if all tanks fit on the screen.
+    // true - показывать фильтры даже если все танки помещаются на экране.
     "alwaysShowFilters": false,
     // true - hide cell "Buy tank".
     // true - скрыть ячейку "Купить танк".
