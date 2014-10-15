@@ -144,16 +144,16 @@
     "websock/not_connected": "<font color='#FFFF00'>нет подключения к серверу XVM</font>",
 
     // Token
-    "token/services_unavailable": "Ошибка сети.\nСервисы XVM недоступны, попробуйте позже.",
-    "token/services_inactive": "Сервисы XVM неактивны.\n{{l10n:token/notify_site_activate}}",
-    "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>\n{{l10n:token/notify_site_activate}}",
-    "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>\n{{l10n:token/notify_site_activate}}",
+    "token/services_unavailable": "Сетевые сервисы недоступны.&nbsp;{{l10n:token/notify_site_info}}",
+    "token/services_inactive": "Сетевые сервисы неактивны.&nbsp;{{l10n:token/notify_site_info}}",
+    "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>&nbsp;{{l10n:token/notify_site_info}}",
+    "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>&nbsp;{{l10n:token/notify_site_info}}",
     "token/active": "Статус:<tab/><font color='#00FF00'>Активен</font>",
     "token/time_left": "Осталось:<tab/><font color='#EEEEEE'>{0}д. {1}ч. {2}м.</font>",
     "token/time_left_warn": "Осталось:<tab/><font color='#EEEE00'>{0}д. {1}ч. {2}м.</font>",
     "token/cnt": "Количество запросов:<tab/><font color='#EEEEEE'>{0}</font>",
     "token/unknown_status": "Неизвестный статус",
-    "token/notify_site_activate": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте сервисы XVM в личном кабинете, либо добавьте клиент, если вы уже активировали их ранее.",
+    "token/notify_site_info": "&nbsp;&nbsp;<a href='#XVM_SITE#'><font size='11'>подробнее</font></a>",
 
     // Carousel
     "NonElite": "Не элитный",
