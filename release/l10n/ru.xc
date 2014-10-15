@@ -144,7 +144,7 @@
     "websock/not_connected": "<font color='#FFFF00'>нет подключения к серверу XVM</font>",
 
     // Token
-    "token/services_unavailable": "Сетевые сервисы недоступны.&nbsp;{{l10n:token/notify_site_info}}",
+    "token/services_unavailable": "Сетевые сервисы недоступны.{{l10n:token/notify_site_info}}",
     "token/services_inactive": "Сетевые сервисы неактивны.&nbsp;{{l10n:token/notify_site_info}}",
     "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>&nbsp;{{l10n:token/notify_site_info}}",
     "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>&nbsp;{{l10n:token/notify_site_info}}",
