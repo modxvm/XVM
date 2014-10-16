@@ -223,9 +223,9 @@ package com.xvm
 
             // token
             "token/services_unavailable": "Сетевые сервисы недоступны.{{l10n:token/notify_site_info}}",
-            "token/services_inactive": "Сетевые сервисы неактивны.&nbsp;{{l10n:token/notify_site_info}}",
-            "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>&nbsp;{{l10n:token/notify_site_info}}",
-            "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>&nbsp;{{l10n:token/notify_site_info}}",
+            "token/services_inactive": "Сетевые сервисы неактивны.{{l10n:token/notify_site_info}}",
+            "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>{{l10n:token/notify_site_info}}",
+            "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>{{l10n:token/notify_site_info}}",
             "token/active": "Статус:<tab/><font color='#00FF00'>Активен</font>",
             "token/time_left": "Осталось:<tab/><font color='#EEEEEE'>{0}д. {1}ч. {2}м.</font>",
             "token/time_left_warn": "Осталось:<tab/><font color='#EEEE00'>{0}д. {1}ч. {2}м.</font>",
@@ -315,10 +315,10 @@ package com.xvm
             "websock/not_connected": "<font color='#FFFF00'>no connection to XVM server</font>",
 
             // token
-            "token/services_unavailable": "Network services are not available.&nbsp;{{l10n:token/notify_site_info}}",
-            "token/services_inactive": "Network services inactive.&nbsp;{{l10n:token/notify_site_info}}",
-            "token/blocked": "Status: <font color='#FF0000'>Blocked</font><br>{{l10n:token/notify_site_info}}",
-            "token/inactive": "Status: <font color='#FFFF00'>Inactive</font><br>{{l10n:token/notify_site_info}}",
+            "token/services_unavailable": "Network services unavailable.{{l10n:token/notify_site_info}}",
+            "token/services_inactive": "Network services inactive.{{l10n:token/notify_site_info}}",
+            "token/blocked": "Status: <font color='#FF0000'>Blocked</font>{{l10n:token/notify_site_info}}",
+            "token/inactive": "Status: <font color='#FFFF00'>Inactive</font>{{l10n:token/notify_site_info}}",
             "token/active": "Status:<tab/><font color='#00FF00'>Active</font>",
             "token/time_left": "Time left:<tab/><font color='#EEEEEE'>{0}d. {1}h. {2}m.</font>",
             "token/time_left_warn": "Time left:<tab/><font color='#EEEE00'>{0}d. {1}h. {2}m.</font>",
