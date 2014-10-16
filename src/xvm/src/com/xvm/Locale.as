@@ -231,7 +231,7 @@ package com.xvm
             "token/time_left_warn": "Осталось:<tab/><font color='#EEEE00'>{0}д. {1}ч. {2}м.</font>",
             "token/cnt": "Количество запросов:<tab/><font color='#EEEEEE'>{0}</font>",
             "token/unknown_status": "Неизвестный статус",
-            "token/notify_site_info": "&nbsp;&nbsp;<a href='#XVM_SITE#'><font size='11'>подробнее</font></a>",
+            "token/notify_site_info": "&nbsp;&nbsp;<a href='#XVM_SITE_INFO#'><font size='11'>подробнее</font></a>",
 
             // Carousel
             "NonElite": "Не элитный",
@@ -324,7 +324,7 @@ package com.xvm
             "token/time_left_warn": "Time left:<tab/><font color='#EEEE00'>{0}d. {1}h. {2}m.</font>",
             "token/cnt": "Requests count:<tab/><font color='#EEEEEE'>{0}</font>",
             "token/unknown_status": "Unknown status",
-            "token/notify_site_info": "&nbsp;&nbsp;<a href='#XVM_SITE#'><font size='11'>more info</font></a>",
+            "token/notify_site_info": "&nbsp;&nbsp;<a href='#XVM_SITE_INFO#'><font size='11'>more info</font></a>",
 
             // Carousel
             "NonElite": "Non elite",
