@@ -9,10 +9,13 @@ package com.xvm
     import com.xvm.io.*;
     import com.xvm.misc.*;
     import com.xvm.utils.*;
+    import com.xvm.types.*;
     import com.xvm.types.cfg.*;
 
     public class Config
     {
+        public static var networkServicesSettings:NetworkServicesSettings = new NetworkServicesSettings({});
+
         // instance
         private static var _instance:Config = null;
         private static function get instance():Config
@@ -103,8 +106,8 @@ package com.xvm
 
                 config = ConfigUtils.MergeConfigs(ConfigUtils.FixConfig(res), config);
 
-                //Logger.addObject(config, "config", 2);
-                //Logger.addObject(config.markers.enemy.alive.normal, "", 3);
+                //Logger.addObject(config, 2);
+                //Logger.addObject(config.markers.enemy.alive.normal, 3);
                 stateInfo = { };
 
                 ConfigUtils.TuneupConfig(config);
@@ -124,7 +127,7 @@ package com.xvm
             {
                 this.config.regionDetected = (this.config.region.toLowerCase() == Defines.REGION_AUTO_DETECTION);
                 if (this.config.regionDetected)
-                    this.config.region = Xvm.cmd(Xvm.XPM_COMMAND_GETGAMEREGION);
+                    this.config.region = Xvm.cmd(Defines.XPM_COMMAND_GETGAMEREGION);
             }
             catch (e:Error)
             {
@@ -142,7 +145,7 @@ package com.xvm
                 //Logger.add("TRACE: STAGE 3: loadLanguage()");
                 config.languageDetected = config.language.toLowerCase() == Defines.LOCALE_AUTO_DETECTION
                 if (config.languageDetected)
-                    config.language = Xvm.cmd(Xvm.XPM_COMMAND_GETGAMELANGUAGE);
+                    config.language = Xvm.cmd(Defines.XPM_COMMAND_GETGAMELANGUAGE);
                 Locale.LoadLocaleFile();
             }
             catch (e:Error)

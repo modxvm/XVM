@@ -16,7 +16,7 @@ import utils
 
 # result: (response, duration)
 def loadUrl(url, req=None, body=None, showLog=True):
-    url = url.replace("{API}", XVM_STAT_API_VERSION)
+    url = url.replace("{API}", XVM_API_VERSION)
     if req is not None:
         url = url.replace("{REQ}", req)
     u = urlparse(url)
@@ -30,7 +30,7 @@ def loadUrl(url, req=None, body=None, showLog=True):
 
     startTime = datetime.datetime.now()
 
-    (response, compressedSize, errStr) = _loadUrl(u, XVM_STAT_TIMEOUT, XVM_STAT_FINGERPRINT, body)
+    (response, compressedSize, errStr) = _loadUrl(u, XVM_TIMEOUT, XVM_FINGERPRINT, body)
 
     elapsed = datetime.datetime.now() - startTime
     msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000

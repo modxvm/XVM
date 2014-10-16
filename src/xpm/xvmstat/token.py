@@ -2,26 +2,28 @@
 
 # PUBLIC
 
-def checkVersion(config):
-    _checkVersion(config)
+def checkVersion():
+    _checkVersion()
 
-def initializeXvmToken(config):
-    _initializeXvmToken(config)
+def initializeXvmToken():
+    _initializeXvmToken()
 
-def getXvmStatActiveTokenData():
-    return _getXvmStatActiveTokenData()
+def getXvmActiveTokenData():
+    return _getXvmActiveTokenData()
 
-def getXvmMessageHeader(config):
-    return _getXvmMessageHeader(config)
+def getXvmMessageHeader():
+    return _getXvmMessageHeader()
 
 def getToken():
     if isReplay():
-      getXvmStatActiveTokenData()
+      getXvmActiveTokenData()
     return _token
 
 def clearToken(value):
     global _token
     _token = value
+    global networkServicesSettings
+    networkServicesSettings = _EMPTY_NETWORK_SERVICES_SETTINGS
 
 # PRIVATE
 
@@ -37,6 +39,7 @@ import simplejson
 import BigWorld
 from gui import SystemMessages
 
+import config
 from constants import *
 from logger import *
 from loadurl import loadUrl
@@ -48,14 +51,23 @@ _verInfo = None
 _tdataPrev = None
 _token = None
 
-def _checkVersion(config):
+_EMPTY_NETWORK_SERVICES_SETTINGS = {
+    'servicesActive': False,
+    'comments': False,
+    'statBattle': False,
+    'statCompany': False,
+    'statUserInfo': False}
+
+networkServicesSettings = _EMPTY_NETWORK_SERVICES_SETTINGS
+
+def _checkVersion():
     playerId = getCurrentPlayerId()
     if playerId is None:
         return
 
     try:
         req = "checkVersion/%d" % playerId
-        server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
+        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
         #response =
@@ -83,13 +95,7 @@ def _checkVersion(config):
     except Exception, ex:
         err(traceback.format_exc())
 
-    if not config['rating']['showPlayersStatistics']:
-        type = SystemMessages.SM_TYPE.GameGreeting
-        msg = _getXvmMessageHeader(config)
-        msg += '</textformat>'
-        SystemMessages.pushMessage(msg, type)
-
-def _getXvmStatActiveTokenData():
+def _getXvmActiveTokenData():
     playerId = getCurrentPlayerId()
     if playerId is None:
         return None
@@ -103,34 +109,35 @@ def _getXvmStatActiveTokenData():
                 return None
             tdata = userprefs.get('tokens.{0}'.format(playerId))
 
-    if not tdata is None:
+    if tdata is not None:
         global _token
         _token = tdata.get('token', '').encode('ascii')
 
     return tdata
 
-def _initializeXvmToken(config):
+def _initializeXvmToken():
     global _tdataPrev
+
+    global networkServicesSettings
+    networkServicesSettings = _EMPTY_NETWORK_SERVICES_SETTINGS
 
     playerId = getCurrentPlayerId()
     if playerId is None:
         return
 
-    tdataActive = _getXvmStatActiveTokenData()
+    tdataActive = _getXvmActiveTokenData()
     (tdata, errStr) = _checkToken(playerId, None if tdataActive is None else tdataActive['token'])
     if tdata is None:
         tdata = _tdataPrev
 
     type = SystemMessages.SM_TYPE.Warning
-    msg = _getXvmMessageHeader(config)
+    msg = _getXvmMessageHeader()
     if tdata is None:
         msg += '{{l10n:token/services_unavailable}}\n\n%s' % utils.hide_guid(errStr)
-    elif tdata['status'] == 'badToken':
+    elif tdata['status'] == 'badToken' or tdata['status'] == 'inactive':
         msg += '{{l10n:token/services_inactive}}'
     elif tdata['status'] == 'blocked':
         msg += '{{l10n:token/blocked}}'
-    elif tdata['status'] == 'inactive':
-        msg += '{{l10n:token/inactive}}'
     elif tdata['status'] == 'active':
         type = SystemMessages.SM_TYPE.GameGreeting
         msg += '{{l10n:token/active}}\n'
@@ -142,6 +149,15 @@ def _initializeXvmToken(config):
         token_name = 'time_left' if days_left >= 3 else 'time_left_warn'
         msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
         msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
+
+        # TODO
+        networkServicesSettings = {
+            'servicesActive': True,
+            'comments': True,
+            'statBattle': True,
+            'statCompany': True,
+            'statUserInfo': True,
+        }
     else:
         type = SystemMessages.SM_TYPE.Error
         msg += '{{l10n:token/unknown_status}}\n%s' % utils.hide_guid(simplejson.dumps(tdata))
@@ -170,11 +186,10 @@ def _checkToken(playerId, token):
         req = "checkToken/%d" % playerId
         if token is not None:
             req += "/%s" % token.encode('ascii')
-        server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
+        server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
         #response = """{"expires_at":1394834790589,"cnt":0,"_id":4630209,"status":"active","token":"84a45576-5f06-4945-a607-bbee61b4876a","__v":0,"start_at":1393625190589}"""
-        #response = """{"expires_at":1394817931657,"cnt":1,"_id":2178413,"status":"inactive","start_at":1393608331657}"""
         #response = """{"expires_at":1394817931657,"cnt":3,"_id":2178413,"status":"badToken","start_at":1393608331657}"""
 
         if not response:
@@ -197,7 +212,7 @@ def _checkToken(playerId, token):
 
     return (data, errStr)
 
-def _getXvmMessageHeader(config):
+def _getXvmMessageHeader():
     msg = '<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">'
     msg += '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n'
     rev = ''
@@ -206,8 +221,8 @@ def _getXvmMessageHeader(config):
         rev = __revision__
     except Exception, ex:
         err(traceback.format_exc())
-    msg += '{{l10n:ver/currentVersion:%s:%s}}\n' % (config['xvmVersion'], rev)
-    msg += _getVersionText(config['xvmVersion']) + '\n'
+    msg += '{{l10n:ver/currentVersion:%s:%s}}\n' % (config.config['xvmVersion'], rev)
+    msg += _getVersionText(config.config['xvmVersion']) + '\n'
     if g_websock.enabled and g_websock.connected:
         msg += '{{l10n:websock/not_connected}}\n'
         if g_websock.last_error:

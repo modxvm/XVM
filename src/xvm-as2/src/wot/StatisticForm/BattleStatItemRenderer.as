@@ -118,12 +118,12 @@ class wot.StatisticForm.BattleStatItemRenderer
         var saved_icon = wrapper.data.icon;
         var saved_label = wrapper.data.label;
 
-        wrapper.col3.condenseWhite = !Config.config.rating.showPlayersStatistics || !Stat.s_loaded;
+        wrapper.col3.condenseWhite = !Config.networkServicesSettings.servicesActive || !Stat.s_loaded;
 
         // Add data for Win Chance calculation
         //Logger.add(dlg.visible);
         //Logger.addObject(wrapper.data);
-        if (Config.config.rating.showPlayersStatistics)
+        if (Config.config.rating.statBattle)
         {
             if (Stat.s_data[name] && Stat.s_data[name].stat)
                 Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & VehicleStateInBattle.IS_ALIVE) != 0;

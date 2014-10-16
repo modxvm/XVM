@@ -17,7 +17,7 @@ package xvm.hangar.components.BattleResults
 
         public function WinChances(page:BattleResults)
         {
-            if (Config.config.rating.showPlayersStatistics == false)
+            if (Config.networkServicesSettings.statBattle == false)
                 return;
             if (Config.config.battleResults.showChances == false && Config.config.battleResults.showBattleTier == false)
                 return;

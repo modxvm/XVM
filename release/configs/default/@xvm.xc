@@ -89,10 +89,6 @@
   // Внутриигровая панель критов от навыка "эксперт".
   "expertPanel": ${"battle.xc":"expertPanel"},
 
-  // Options for player statistics.
-  // Блок управлением статистикой.
-  "rating": ${"rating.xc":"rating"},
-
   // Special XVM hotkeys.
   // Специальные горячие клавиши XVM.
   "hotkeys": ${"hotkeys.xc":"hotkeys"},

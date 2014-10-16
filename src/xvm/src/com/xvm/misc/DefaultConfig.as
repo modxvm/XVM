@@ -21,7 +21,6 @@ package com.xvm.misc
             c.login = getLoginSection();
             c.hangar = getHangarSection();
             c.battle = getBattleSection();
-            c.rating = getRatingSection();
             c.squad = getSquadSection();
             c.userInfo = getUserInfoSection();
             c.fragCorrelation = getFragCorrelationSection();
@@ -210,9 +209,6 @@ package com.xvm.misc
             c.clock.shadow.blur = 4;
             c.clock.shadow.strength = 2;
 
-            c.comments = new CComments();
-            c.comments.enabled = true;
-
             return c;
         }
 
@@ -245,17 +241,6 @@ package com.xvm.misc
                     }
                 }
             ];
-            return c;
-        }
-
-        private static function getRatingSection():CRating
-        {
-            var c:CRating = new CRating();
-            c.showPlayersStatistics = false;   // Global switch. Handles whole statisctics module.
-            c.loadEnemyStatsInFogOfWar = true; // Load players data in "fog of war".
-            c.enableStatisticsLog = false;     // Enable saving statistics to "xvm-stat.log" file
-            c.enableUserInfoStatistics = true; // Enable statistics in the user info window
-            c.enableCompanyStatistics = true;  // Enable statistics in the company window
             return c;
         }
 

@@ -202,7 +202,7 @@
       {{vehicle-short}} - zkrácený název vozydla
 
     Statistická makra:
-      V souboru s nastavení (\res_mods\xvm\configs\@Default\rating.xc) musí být povoleno "rating/showPlayersStatistics".
+      * Network services on the XVM site (www.modxvm.com) must be activated.
 
       {{avglvl}}      - průměrná úroveň (tier) vozidel
       {{eff}}         - efektivita hráče: http://wot-news.com/index.php/stat/calc/en/

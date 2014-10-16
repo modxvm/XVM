@@ -38,7 +38,7 @@ class com.xvm.Cmd
 
     public static function loadBattleStat(players:Array)
     {
-        _call(null, null, [COMMAND_LOADBATTLESTAT, Config.config.rating.showPlayersStatistics, players]);
+        _call(null, null, [COMMAND_LOADBATTLESTAT, players]);
     }
 
     public static function logStat()

@@ -13,6 +13,5 @@ package com.xvm.types.cfg
         public var pingServers:CPingServers;
         public var carousel:CCarousel;
         public var clock:CClock;
-        public var comments:CComments;
     }
 }

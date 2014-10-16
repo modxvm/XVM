@@ -28,9 +28,7 @@ package xvm.company
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
 
-            if (Config.config.rating.showPlayersStatistics != true)
-                return;
-            if (Config.config.rating.enableCompanyStatistics != true)
+            if (Config.networkServicesSettings.statCompany != true)
                 return;
 
             page.stack.addEventListener(ViewStackEvent.VIEW_CHANGED, onViewChanged);

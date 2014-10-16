@@ -11,7 +11,6 @@ package com.xvm.types.cfg
         public var language:String; // auto, en, ru, ...
         public var region:String; // auto, RU, EU, NA, CN, SEA, VN, KR
         public var definition:CDefinition;
-        public var rating:CRating;
         public var login:CLogin;
         public var hangar:CHangar;
         public var userInfo:CUserInfo;

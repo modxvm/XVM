@@ -447,7 +447,7 @@ package com.xvm.utils
 
             var pdata:Object = dict[pname];
 
-            if (Config.config.rating.showPlayersStatistics == false)
+            if (Config.networkServicesSettings.servicesActive == false)
                 return;
 
             // {{avglvl}}

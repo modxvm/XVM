@@ -147,7 +147,6 @@
     "token/services_unavailable": "Сетевые сервисы недоступны.{{l10n:token/notify_site_info}}",
     "token/services_inactive": "Сетевые сервисы неактивны.{{l10n:token/notify_site_info}}",
     "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>{{l10n:token/notify_site_info}}",
-    "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>{{l10n:token/notify_site_info}}",
     "token/active": "Статус:<tab/><font color='#00FF00'>Активен</font>",
     "token/time_left": "Осталось:<tab/><font color='#EEEEEE'>{0}д. {1}ч. {2}м.</font>",
     "token/time_left_warn": "Осталось:<tab/><font color='#EEEE00'>{0}д. {1}ч. {2}м.</font>",

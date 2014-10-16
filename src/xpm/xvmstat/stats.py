@@ -45,10 +45,11 @@ from items.vehicles import VEHICLE_CLASS_TAGS
 
 from xpm import *
 
+import config
 from constants import *
 from logger import *
 from loadurl import loadUrl
-from token import getXvmStatActiveTokenData
+import token
 import utils
 
 #############################
@@ -156,7 +157,7 @@ class _Stat(object):
                 self.players[vehId] = _Player(vehId, vData)
             self.players[vehId].update(vData)
 
-        allowNetwork = self.req['args'][0]
+        allowNetwork = token.networkServicesSettings['statBattle']
         plVehId = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
         self._load_stat(plVehId, allowNetwork)
 
@@ -258,16 +259,16 @@ class _Stat(object):
         data = None
         if cacheKey not in self.cacheUser:
             try:
-                tdata = getXvmStatActiveTokenData()
+                tdata = token.getXvmActiveTokenData()
                 if tdata is None or not 'token' in tdata:
-                    err('No valid token for XVM statistics (key=%s)' % cacheKey)
+                    err('No valid token for XVM network services (key=%s)' % cacheKey)
                 else:
                     tok = tdata['token'].encode('ascii')
                     if isId:
                         req = "user/%s/%s" % (tok, value)
                     else:
                         req = "nick/%s/%s/%s" % (tok, reg, value)
-                    server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
+                    server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
                     (response, duration, errStr) = loadUrl(server, req)
 
                     if not response:
@@ -327,19 +328,19 @@ class _Stat(object):
 
         try:
             if allowNetwork:
-                tdata = getXvmStatActiveTokenData()
+                tdata = token.getXvmActiveTokenData()
                 if tdata is None or not 'token' in tdata:
-                    err('No valid token for XVM statistics (id=%s)' % playerVehicleID)
+                    err('No valid token for XVM network services (id=%s)' % playerVehicleID)
                     return
 
                 cmd = 'rplstat' if isReplay() else 'stat'
                 updateRequest = '%s/%s/%s' % (cmd, tdata['token'].encode('ascii'), ','.join(requestList))
 
-                if XVM_STAT_SERVERS is None or len(XVM_STAT_SERVERS) <= 0:
-                    err('Cannot read statistics: no suitable server was found.')
+                if XVM_SERVERS is None or len(XVM_SERVERS) <= 0:
+                    err('Cannot read data: no suitable server was found.')
                     return
 
-                server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
+                server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
                 (response, duration, errStr) = loadUrl(server, updateRequest)
 
                 if not response:

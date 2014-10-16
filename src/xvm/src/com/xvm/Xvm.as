@@ -9,6 +9,7 @@ package com.xvm
     import com.xvm.*;
     import com.xvm.events.*;
     import com.xvm.io.*;
+    import com.xvm.types.*;
     import flash.display.*;
     import net.wg.data.constants.*;
     import net.wg.infrastructure.base.*;
@@ -22,16 +23,6 @@ package com.xvm
         // private commands
         private static const _XPM_COMMAND_GETMODS:String = "xpm.getMods";
         private static const _XPM_COMMAND_INITIALIZED:String = "xpm.initialized";
-
-        // public commands
-        public static const XPM_COMMAND_LOADFILE:String = "xpm.loadFile";
-        public static const XPM_COMMAND_GETGAMEREGION:String = "xpm.gameRegion";
-        public static const XPM_COMMAND_GETGAMELANGUAGE:String = "xpm.gameLanguage";
-        // args: title, message
-        public static const XPM_COMMAND_MESSAGEBOX:String = 'xpm.messageBox';
-        // args: message, type
-        // Types: gui.SystemMessages.SM_TYPE: 'Error', 'Warning', 'Information', 'GameGreeting', ...
-        public static const XPM_COMMAND_SYSMESSAGE:String = 'xpm.systemMessage';
 
         // static methods for Python-Flash communication
 
@@ -56,6 +47,7 @@ package com.xvm
         {
             _instance = this;
             focusable = false;
+            addEventListener(Defines.XPM_EVENT_CMD_RECEIVED, handleXpmCommand);
         }
 
         // DAAPI Python-Flash interface
@@ -71,7 +63,7 @@ package com.xvm
         public function as_xvm_cmd(cmd:*, ...rest):void
         {
             //Logger.add("as_xvm_cmd: " + cmd + " " + rest.join(", "));
-            dispatchEvent(new ObjectEvent(Defines.E_CMD_RECEIVED, x));
+            dispatchEvent(new ObjectEvent(Defines.XPM_EVENT_CMD_RECEIVED, { cmd: cmd, args: rest }));
         }
 
         // overrides
@@ -81,9 +73,8 @@ package com.xvm
             //Logger.add("onPopulate");
             super.onPopulate();
 
-            VehicleInfo.populateData();
-
             Config.load();
+            VehicleInfo.populateData();
             LoadMods();
         }
 
@@ -168,6 +159,24 @@ package com.xvm
                             Logger.add("WARNING: mod is not loaded: " + x);
                     }
                 }
+            }
+        }
+
+        private function handleXpmCommand(e:ObjectEvent):void
+        {
+            //Logger.add("handleXpmCommand");
+            try
+            {
+                switch (e.result.cmd)
+                {
+                    case Defines.XVM_AS_COMMAND_SET_SVC_SETTINGS:
+                        Config.networkServicesSettings = new NetworkServicesSettings(e.result.args[0]);
+                        break;
+                }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
             }
         }
     }

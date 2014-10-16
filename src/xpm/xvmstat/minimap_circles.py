@@ -10,6 +10,8 @@ from adisp import async, process
 from xpm import *
 from logger import *
 
+import config
+
 class _MinimapCircles(object):
     def __init__(self):
         self.clear()
@@ -32,7 +34,7 @@ class _MinimapCircles(object):
         self.radioman_inventor = 0.0
         self.camouflage = []
 
-    def updateCurrentVehicle(self, config):
+    def updateCurrentVehicle(self):
         #debug('updateCurrentVehicle')
 
         self.clear()
@@ -130,11 +132,11 @@ class _MinimapCircles(object):
             'ration_uk'])
         debug('  consumable: %s' % str(self.consumable))
 
-        self.updateConfig(self.item.descriptor, config)
+        self.updateConfig(self.item.descriptor)
 
 
-    def updateConfig(self, descr, config):
-        cfg = config['minimap']['circles']
+    def updateConfig(self, descr):
+        cfg = config.config['minimap']['circles']
 
         #debug(vars(descr))
         #debug(vars(descr.type))

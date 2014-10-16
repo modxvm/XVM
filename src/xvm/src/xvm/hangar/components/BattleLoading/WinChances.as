@@ -13,7 +13,7 @@ package xvm.hangar.components.BattleLoading
 
         public function WinChances(page:BattleLoading)
         {
-            if (Config.config.rating.showPlayersStatistics == false)
+            if (Config.networkServicesSettings.statBattle == false)
                 return;
             if (Config.config.battleLoading.showChances == false && Config.config.battleLoading.showBattleTier == false)
                 return;

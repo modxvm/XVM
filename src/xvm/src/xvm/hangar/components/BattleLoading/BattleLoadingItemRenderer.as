@@ -200,7 +200,7 @@ package xvm.hangar.components.BattleLoading
         private function onStatLoaded():void
         {
             //Logger.add("onStatLoaded: " + fullPlayerName);
-            if (Config.config.rating.showPlayersStatistics)
+            if (Config.networkServicesSettings.servicesActive)
                 proxy.vehicleField.condenseWhite = false;
             //draw();
             if (proxy.constraints != null)

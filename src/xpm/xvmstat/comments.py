@@ -51,7 +51,7 @@ class _Comments:
                 return {'error':'NOT_CACHED'}
 
             req = '{0}/{1}'.format(cmd, t)
-            server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
+            server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
             (response, duration, errStr) = loadUrl(server, req, body=body)
 
             if not response:

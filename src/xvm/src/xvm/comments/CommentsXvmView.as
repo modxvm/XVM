@@ -35,11 +35,7 @@ package xvm.comments
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
 
-            if (!Config.config.rating.showPlayersStatistics)
-                return;
-
-            var cfg:CComments = Config.config.hangar.comments;
-            if (!cfg.enabled)
+            if (Config.networkServicesSettings.comments != true)
                 return;
 
             // TODO: async
@@ -85,11 +81,11 @@ package xvm.comments
                     if (lastCommand == Cmd.COMMAND_GETCOMMENTS)
                     {
                         err = Defines.SYSTEM_MESSAGE_HEADER.replace("%VALUE%", "<b>" + Locale.get("Error loading comments") + "</b>\n\n" + err);
-                        Xvm.cmd(Xvm.XPM_COMMAND_SYSMESSAGE, err, "Warning");
+                        Xvm.cmd(Defines.XPM_COMMAND_SYSMESSAGE, err, "Warning");
                     }
                     else
                     {
-                        Xvm.cmd(Xvm.XPM_COMMAND_MESSAGEBOX, Locale.get("Error saving comments"), err);
+                        Xvm.cmd(Defines.XPM_COMMAND_MESSAGEBOX, Locale.get("Error saving comments"), err);
                     }
                 }
                 else

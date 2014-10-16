@@ -318,7 +318,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         if (ci.view_coated_optics == true)
             view_distance = view_distance * 1.1
 
-        //Logger.addObject(Config.config.minimap._internal, 2);
+        //Logger.addObject(Config.config.minimap.circles._internal, 2);
         //Logger.add("K=" + K + " view_distance=" + view_distance);
 
         // Drawing

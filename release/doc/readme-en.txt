@@ -197,7 +197,9 @@
       {{battletier-min}} - minimal vehicle battle tier
       {{battletier-max}} - maximal vehicle battle tier
 
-    Statistics macros ('rating/showPlayersStatistics' must be enabled):
+    Statistics macros:
+      * Network services on the XVM site (www.modxvm.com) must be activated.
+
       {{avglvl}}      - average level (tier) of tanks
       {{eff}}         - player efficiency: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - player efficiency aligned from left to 4 chars

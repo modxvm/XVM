@@ -199,7 +199,9 @@
       {{battletier-min}} - минимальный уровень боев танка
       {{battletier-max}} - максимальный уровень боев танка
 
-    Макроподстановки статистики (необходимо включить rating/showPlayersStatistics):
+    Макроподстановки статистики:
+      * Необходимо активировать сетевые сервисы на сайте XVM (www.modxvm.com).
+
       {{avglvl}}      - средний уровень танков игрока
       {{eff}}         - эффективность игрока: http://wot-news.com/index.php/stat/calc/ru/
       {{teff}}, {{e}} - эффективность игрока на текущем танке: http://www.koreanrandom.com/forum/topic/1643-

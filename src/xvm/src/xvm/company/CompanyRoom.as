@@ -32,9 +32,7 @@ package xvm.company
         {
             Logger.add("init: " + view.as_getPyAlias());
 
-            if (Config.config.rating.showPlayersStatistics != true)
-                return;
-            if (Config.config.rating.enableCompanyStatistics != true)
+            if (Config.networkServicesSettings.statCompany != true)
                 return;
 
             view.assignedList.itemRenderer = UI_TeamMemberRenderer;

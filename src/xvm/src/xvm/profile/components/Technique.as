@@ -127,7 +127,7 @@ package xvm.profile.components
                     filter.setFocus();
 
                 // stat
-                if (Config.config.rating.showPlayersStatistics  && Config.config.rating.enableUserInfoStatistics)
+                if (Config.networkServicesSettings.statUserInfo)
                     Stat.loadUserData(this, onStatLoaded, playerName, false);
             }
             catch (ex:Error)

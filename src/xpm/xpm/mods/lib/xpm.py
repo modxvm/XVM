@@ -223,7 +223,7 @@ _XPM_COMMAND_GETGAMELANGUAGE = "xpm.gameLanguage"
 _XPM_COMMAND_MESSAGEBOX = 'xpm.messageBox'
 _XPM_COMMAND_SYSMESSAGE = 'xpm.systemMessage'
 
-_xvmView = None
+g_xvmView = None
 _xpmInitialized = False
 
 def _start():
@@ -300,8 +300,8 @@ def _appStarted(event):
         from gui.WindowsManager import g_windowsManager
         app = g_windowsManager.window
         if app is not None:
-            global _xvmView
-            _xvmView = None
+            global g_xvmView
+            g_xvmView = None
             global _xpmInitialized
             _xpmInitialized = False
             app.loaderManager.onViewLoaded += _onViewLoaded
@@ -320,14 +320,18 @@ def _AppLoadView(base, self, newViewAlias, name = None, *args, **kwargs):
     base(self, newViewAlias, name, *args, **kwargs)
 
 def _onViewLoaded(view):
-    debug('onViewLoaded: ' + view.alias)
-    if view is not None and view.alias == _XVM_VIEW_ALIAS:
-        from gui.WindowsManager import g_windowsManager
-        app = g_windowsManager.window
-        #if app is not None:
-        #    app.loaderManager.onViewLoaded -= _onViewLoaded
-        global _xvmView
-        _xvmView = view
+    try:
+        debug('onViewLoaded: ' + view.alias)
+        if view.alias == _XVM_VIEW_ALIAS:
+            from gui.WindowsManager import g_windowsManager
+            app = g_windowsManager.window
+            #if app is not None:
+            #    app.loaderManager.onViewLoaded -= _onViewLoaded
+            global g_xvmView
+            g_xvmView = view
+            #log(g_xvmView)
+    except Exception, ex:
+        err(traceback.format_exc())
 
 # commands handlers
 

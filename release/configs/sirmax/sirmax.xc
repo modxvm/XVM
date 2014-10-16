@@ -68,13 +68,6 @@
     "clanIconsFolder": "clanicons",
     "elements": ${"elements"}
   },
-  "rating": {
-    "showPlayersStatistics": true,
-    "loadEnemyStatsInFogOfWar": true,
-    "enableStatisticsLog": true,
-    "enableUserInfoStatistics": true,
-    "enableCompanyStatistics": true
-  },
   "fragCorrelation": {
     "hideTeamTextFields": true
   },

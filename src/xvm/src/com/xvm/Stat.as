@@ -138,7 +138,7 @@ package com.xvm
 
         private function battleLoaded(json_str:String):void
         {
-            //Logger.add("TRACE: battleLoaded()");
+            Logger.add("TRACE: battleLoaded()");
 
             try
             {

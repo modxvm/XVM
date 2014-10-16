@@ -197,7 +197,9 @@ Zawartość:
       {{vehiclename}}    - Nazwa wewnętrzna pojazdu - usa-M24_Chaffee
       {{vehicle-short}}  - Skrócona nazwa pojazdu
 
-    Makra dla statystyk ('showPlayersStatistics' musi być włączone):
+    Makra dla statystyk:
+      * Network services on the XVM site (www.modxvm.com) must be activated.
+
       {{avglvl}}      - Przeciętny poziom(tier) pojazdów
       {{eff}}         - Wartość "efficiency" gracza: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - Zaokrąglona wartość "efficiency" gracza

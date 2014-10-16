@@ -52,7 +52,7 @@ package com.xvm.io
                 pendingFiles.forEach(function(filename:String):void
                 {
                     Logger.add("LoadFile: " + filename.replace(Defines.XVM_DIR_NAME, ''));
-                    var data:String = Xvm.cmd(Xvm.XPM_COMMAND_LOADFILE, filename);
+                    var data:String = Xvm.cmd(Defines.XPM_COMMAND_LOADFILE, filename);
                     if (data == null)
                         throw new JSONxError(filename == rootFileName ? "NO_FILE" : "NO_REF_FILE", "file is missing: " + filename);
                     file_cache[filename] = data;

@@ -12,6 +12,7 @@ from gui import SystemMessages
 
 from xpm import *
 
+import config
 from constants import *
 from logger import *
 from pinger import *
@@ -27,7 +28,6 @@ import userprefs
 from websock import g_websock
 from minimap_circles import g_minimap_circles
 from test import runTest
-#from config.default import g_default_config
 
 _LOG_COMMANDS = (
   COMMAND_LOADBATTLESTAT,
@@ -39,8 +39,8 @@ _LOG_COMMANDS = (
 class Xvm(object):
     def __init__(self):
         self.currentPlayerId = None
+        config.config = None
         self.config_str = None
-        self.config = None
         self.lang_str = None
         self.lang_data = None
         self.app = None
@@ -48,6 +48,15 @@ class Xvm(object):
         self.vmmFlashObject = None
         self._battleStateTimersId = dict()
         self._battleStateData = dict()
+
+    def onXpmCommand(self, cmd, *args):
+        try:
+            if (cmd in _LOG_COMMANDS):
+                debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
+            if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
+                return token.networkServicesSettings
+        except Exception, ex:
+            err(traceback.format_exc())
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
@@ -60,7 +69,7 @@ class Xvm(object):
             elif cmd == COMMAND_SET_CONFIG:
                 #debug('setConfig')
                 self.config_str = args[0]
-                self.config = simplejson.loads(self.config_str)
+                config.config = simplejson.loads(self.config_str)
                 if len(args) >= 2:
                     self.lang_str = args[1]
                     self.lang_data = simplejson.loads(self.lang_str)
@@ -139,7 +148,7 @@ class Xvm(object):
             if not isRepeated:
                 #debug("key=" + str(key) + ' ' + ('down' if isDown else 'up'))
                 #g_websock.send("%s/%i" % ('down' if isDown else 'up', key))
-                if self.config is not None:
+                if config.config is not None:
                     if self.battleFlashObject is not None:
                         if self.checkKeyEventBattle(key, isDown):
                             movie = self.battleFlashObject.movie
@@ -155,7 +164,7 @@ class Xvm(object):
         if MessengerEntry.g_instance.gui.isFocused():
             return False
 
-        c = self.config['hotkeys']
+        c = config.config['hotkeys']
 
         if (c['minimapZoom']['enabled'] == True and c['minimapZoom']['keyCode'] == key):
             return True
@@ -175,8 +184,8 @@ class Xvm(object):
            self.app.loaderManager.onViewLoaded -= self.onViewLoaded
 
     def initBattle(self):
-        g_minimap_circles.updateConfig(BigWorld.player().vehicleTypeDescriptor, self.config)
-        self.config_str = simplejson.dumps(self.config)
+        g_minimap_circles.updateConfig(BigWorld.player().vehicleTypeDescriptor)
+        self.config_str = simplejson.dumps(config.config)
         self.sendConfig(self.battleFlashObject)
         BigWorld.callback(0, self.invalidateBattleStates)
 
@@ -196,7 +205,7 @@ class Xvm(object):
     def on_websock_error(self, error):
         try:
             type = SystemMessages.SM_TYPE.Error
-            msg = token.getXvmMessageHeader(self.config)
+            msg = token.getXvmMessageHeader()
             msg += 'WebSocket error: %s' % str(error)
             msg += '</textformat>'
             SystemMessages.pushMessage(msg, type)
@@ -213,9 +222,10 @@ class Xvm(object):
         playerId = getCurrentPlayerId()
         if playerId is not None and self.currentPlayerId != playerId:
             self.currentPlayerId = playerId
-            token.checkVersion(self.config)
-            if self.config['rating']['showPlayersStatistics']:
-                token.initializeXvmToken(self.config)
+            token.checkVersion()
+            token.initializeXvmToken()
+            from xpm import g_xvmView
+            g_xvmView.as_xvm_cmdS(XVM_AS_COMMAND_SET_SVC_SETTINGS, token.networkServicesSettings)
             g_websock.send('id/%d' % playerId)
         if self.app is not None:
            self.app.loaderManager.onViewLoaded += self.onViewLoaded
@@ -237,13 +247,13 @@ class Xvm(object):
         try:
             self.updateCurrentVehicle()
             if self.app is not None:
-                data = simplejson.dumps(self.config['minimap']['circles']['_internal'])
+                data = simplejson.dumps(config.config['minimap']['circles']['_internal'])
                 self.app.movie.invoke((RESPOND_UPDATECURRENTVEHICLE, [data]))
         except Exception, ex:
             err('updateTankParams(): ' + traceback.format_exc())
 
     def updateCurrentVehicle(self):
-        g_minimap_circles.updateCurrentVehicle(self.config)
+        g_minimap_circles.updateCurrentVehicle()
 
     def invalidateBattleStates(self):
         import Vehicle
@@ -253,11 +263,11 @@ class Xvm(object):
 
     def invalidateBattleState(self, vehicle):
         #log("invalidateBattleState: " + str(vehicle.id))
-        if self.config is None:
+        if config.config is None:
             return
 
-        if self.config['battle']['allowMarksOnGunInPanelsAndMinimap'] and \
-            not self.config['battle']['allowHpInPanelsAndMinimap']:
+        if config.config['battle']['allowMarksOnGunInPanelsAndMinimap'] and \
+            not config.config['battle']['allowHpInPanelsAndMinimap']:
                 if self.battleFlashObject is not None:
                     movie = self.battleFlashObject.movie
                     if movie is not None:
@@ -265,7 +275,7 @@ class Xvm(object):
                             vehicle.publicInfo.name,
                             vehicle.publicInfo.marksOnGun))
 
-        if self.config['battle']['allowHpInPanelsAndMinimap']:
+        if config.config['battle']['allowHpInPanelsAndMinimap']:
             player = BigWorld.player()
             if player is None or not hasattr(player, 'arena') or player.arena is None:
                 return
@@ -317,7 +327,7 @@ class Xvm(object):
             err('updateVehicleStats(): ' + traceback.format_exc())
 
     def sendConfig(self, flashObject):
-        if self.config is None or flashObject is None:
+        if config.config is None or flashObject is None:
             return
         #debug('sendConfig')
         try:
@@ -327,6 +337,7 @@ class Xvm(object):
                     self.config_str,
                     self.lang_str,
                     getVehicleInfoDataStr(),
+                    token.networkServicesSettings,
                     comments.getXvmUserComments(not isReplay())]))
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())

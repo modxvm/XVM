@@ -63,7 +63,7 @@ package com.xvm
         public static const MAX_BATTLETIER_HPS:Array = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000];
 
         // Events
-        public static const E_CMD_RECEIVED:String = "cmd_rvcd";
+        public static const XPM_EVENT_CMD_RECEIVED:String = "cmd_rvcd";
         public static const E_ITEM_UPDATED:String = "item_updated";
 
         // UI Colors
@@ -181,5 +181,19 @@ package com.xvm
         public static const SYSTEM_MESSAGE_HEADER:String =
             '<textformat tabstops="[130]"><img src="img://../xvm/res/icons/xvm/16x16t.png" vspace="-5">' +
             '&nbsp;<a href="#XVM_SITE#"><font color="#E2D2A2">www.modxvm.com</font></a>\n\n%VALUE%';
+
+        // DAAPI commands
+
+        public static const XPM_COMMAND_LOADFILE:String = "xpm.loadFile";
+        public static const XPM_COMMAND_GETGAMEREGION:String = "xpm.gameRegion";
+        public static const XPM_COMMAND_GETGAMELANGUAGE:String = "xpm.gameLanguage";
+        // args: title, message
+        public static const XPM_COMMAND_MESSAGEBOX:String = 'xpm.messageBox';
+        // args: message, type
+        // Types: gui.SystemMessages.SM_TYPE: 'Error', 'Warning', 'Information', 'GameGreeting', ...
+        public static const XPM_COMMAND_SYSMESSAGE:String = 'xpm.systemMessage';
+
+        public static const XVM_COMMAND_GET_SVC_SETTINGS:String = "xvm.get_svc_settings";
+        public static const XVM_AS_COMMAND_SET_SVC_SETTINGS:String = "xvm.as.set_svc_settings";
     }
 }

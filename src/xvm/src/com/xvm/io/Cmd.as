@@ -67,7 +67,7 @@ package com.xvm.io
 
         public static function loadBattleStat(players:Array = null):void
         {
-            _call(null, null, [COMMAND_LOADBATTLESTAT, Config.config.rating.showPlayersStatistics, players]);
+            _call(null, null, [COMMAND_LOADBATTLESTAT, players]);
         }
 
         public static function loadBattleResultsStat(arenaUniqueId:String):void
@@ -136,11 +136,6 @@ package com.xvm.io
         private static function _call(target:Object, callback:Function, args:Array):void
         {
             _call_internal(target, callback, args, "xvm.cmd");
-        }
-
-        private static function _call_xpm(target:Object, callback:Function, args:Array):void
-        {
-            _call_internal(target, callback, args, "xpm.cmd");
         }
 
         private static var _xvm_sandbox_cmd_initialized:Boolean = false;
