@@ -6,6 +6,7 @@ package xvm.hangar.views
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.types.*;
     import com.xvm.utils.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
@@ -28,6 +29,8 @@ package xvm.hangar.views
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.add("onAfterPopulate: " + view.as_alias);
+
+            Config.networkServicesSettings = new NetworkServicesSettings(Xvm.cmd(Defines.XVM_COMMAND_GET_SVC_SETTINGS));
 
             logBriefConfigurationInfo();
 

@@ -108,6 +108,16 @@ def _getXvmActiveTokenData():
             if playerId is None:
                 return None
             tdata = userprefs.get('tokens.{0}'.format(playerId))
+            if tdata is not None:
+                # TODO
+                global networkServicesSettings
+                networkServicesSettings = {
+                    'servicesActive': True,
+                    'comments': True,
+                    'statBattle': True,
+                    'statCompany': True,
+                    'statUserInfo': True,
+                }
 
     if tdata is not None:
         global _token

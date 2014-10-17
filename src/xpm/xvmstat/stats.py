@@ -157,9 +157,8 @@ class _Stat(object):
                 self.players[vehId] = _Player(vehId, vData)
             self.players[vehId].update(vData)
 
-        allowNetwork = token.networkServicesSettings['statBattle']
         plVehId = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
-        self._load_stat(plVehId, allowNetwork)
+        self._load_stat(plVehId)
 
         players = {}
         for vehId in self.players:
@@ -304,7 +303,7 @@ class _Stat(object):
         return self._fix(s)
 
 
-    def _load_stat(self, playerVehicleID, allowNetwork=True):
+    def _load_stat(self, playerVehicleID):
         requestList = []
 
         replay = isReplay()
@@ -327,8 +326,8 @@ class _Stat(object):
             return
 
         try:
-            if allowNetwork:
-                tdata = token.getXvmActiveTokenData()
+            tdata = token.getXvmActiveTokenData()
+            if token.networkServicesSettings['statBattle']:
                 if tdata is None or not 'token' in tdata:
                     err('No valid token for XVM network services (id=%s)' % playerVehicleID)
                     return
@@ -349,6 +348,8 @@ class _Stat(object):
 
                 data = simplejson.loads(response)
             else:
+                if isReplay():
+                    log('XVM network services inactive (id=%s)' % playerVehicleID)
                 players = []
                 for vehId in self.players:
                     players.append(self._get_battle_stub(self.players[vehId]))

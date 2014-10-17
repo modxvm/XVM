@@ -49,14 +49,17 @@ class Xvm(object):
         self._battleStateTimersId = dict()
         self._battleStateData = dict()
 
+    # returns: (result, status)
     def onXpmCommand(self, cmd, *args):
         try:
             if (cmd in _LOG_COMMANDS):
                 debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
             if cmd == XVM_COMMAND_GET_SVC_SETTINGS:
-                return token.networkServicesSettings
+                token.getToken()
+                return (token.networkServicesSettings, True)
         except Exception, ex:
             err(traceback.format_exc())
+            return (None, False)
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
@@ -231,6 +234,8 @@ class Xvm(object):
            self.app.loaderManager.onViewLoaded += self.onViewLoaded
 
     def onViewLoaded(self, e=None):
+        if e is None:
+            return
         if e.uniqueName == 'hangar':
             self.hangarInit()
 
