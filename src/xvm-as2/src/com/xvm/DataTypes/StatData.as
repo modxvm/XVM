@@ -32,8 +32,8 @@ class com.xvm.DataTypes.StatData
         public var name:String = null;         // player name in current game ("sirmax2_RU" for Common Test)
         public var team:Number = NaN;          // team (1 or 2)
         public var squadnum:Number = NaN;      // squad number (0, 1, ...)
-        public var alive:Boolean = false;      // alive
-        public var ready:Boolean = false;      // avatarReady
+        public var alive:Boolean = false;      // alive // TODO: remove
+        public var ready:Boolean = false;      // avatarReady // TODO: remove
         public var maxHealth:Number = NaN;     // max health
         public var turretType:Number = NaN;    // turret type
 

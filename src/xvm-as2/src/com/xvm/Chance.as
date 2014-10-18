@@ -54,17 +54,11 @@ class com.xvm.Chance
 
         if (showChances)
         {
-            text += Locale.get("Chance to win") + ": " +
-                FormatChangeText(""/*Locale.get("global")*/, chG)// + ", " +
-                //FormatChangeText(Locale.get("per-vehicle"), chT);
+            text += Locale.get("Chance to win") + ": " + FormatChangeText("", chG);
             if (showLive)
             {
                 var chX1 = GetChance(ChanceFuncX1);
-                //var chX2 = GetChance(ChanceFuncX2);
                 text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1);
-                //    ", " + FormatChangeText("", chX2);
-                //lastChances.X1 = chX1.percentF;
-                //lastChances.X2 = chX2.percentF;
             }
         }
         if (showBattleTier)
@@ -75,6 +69,7 @@ class com.xvm.Chance
             //lastChances.X1 = chX1.percentF;
             //lastChances.X2 = chX2.percentF;
         }
+        //Logger.add(text);
         return text;
     }
 
@@ -88,12 +83,13 @@ class com.xvm.Chance
         for (var pname in Stat.s_data)
         {
             var stat:StatData = Stat.s_data[pname].stat;
+            var battleStateData:BattleStateData = BattleState.getUserData(pname);
             var vdata:VehicleData = stat.v.data;
             if (!vdata)
                 return { error: "[1] No data for: " + stat.nm };
 
             //Logger.add(pdata.vehicleState);
-            var K = chanceFunc(vdata, stat);
+            var K = chanceFunc(vdata, stat, battleStateData);
 
             Ka += (stat.team == Defines.TEAM_ALLY) ? K : 0;
             Ke += (stat.team == Defines.TEAM_ENEMY) ? K : 0;
@@ -120,7 +116,7 @@ class com.xvm.Chance
     }
 
     // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
-    private static function ChanceFuncG(vdata:VehicleData, stat:StatData): Number
+    private static function ChanceFuncG(vdata:VehicleData, stat:StatData, battleStateData:BattleStateData):Number
     {
         var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
 
@@ -153,7 +149,7 @@ class com.xvm.Chance
     }
 
     /*
-    private static function ChanceFuncT(vdata:VehicleData, stat): Number
+    private static function ChanceFuncT(vdata:VehicleData, stat, battleStateData:BattleStateData):Number
     {
         var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
 
@@ -199,9 +195,9 @@ class com.xvm.Chance
     }
     */
 
-    private static function ChanceFuncX1(vdata:VehicleData, stat): Number
+    private static function ChanceFuncX1(vdata:VehicleData, stat:StatData, battleStateData:BattleStateData):Number
     {
-        if (stat.alive == false)
+        if (battleStateData.dead == true)
             return 0;
 
         var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
@@ -235,7 +231,7 @@ class com.xvm.Chance
     }
 
     /*
-    private static function ChanceFuncX2(vdata:VehicleData, stat): Number
+    private static function ChanceFuncX2(vdata:VehicleData, stat, battleStateData:BattleStateData):Number
     {
         if (stat.alive == false)
             return 0;
