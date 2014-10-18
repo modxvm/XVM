@@ -646,7 +646,8 @@ package com.xvm.utils
             try
             {
                 //Logger.addObject(json_str);
-                comments = JSONx.parse(json_str).players;
+                var o:Object = JSONx.parse(json_str);
+                comments = (o != null && o.hasOwnProperty("players")) ? o.players : null;
                 //Logger.addObject(comments);
             }
             catch (ex:Error)

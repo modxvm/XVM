@@ -227,8 +227,6 @@ class Xvm(object):
             self.currentPlayerId = playerId
             token.checkVersion()
             token.initializeXvmToken()
-            from xpm import g_xvmView
-            g_xvmView.as_xvm_cmdS(XVM_AS_COMMAND_SET_SVC_SETTINGS, token.networkServicesSettings)
             g_websock.send('id/%d' % playerId)
         if self.app is not None:
            self.app.loaderManager.onViewLoaded += self.onViewLoaded
@@ -243,6 +241,9 @@ class Xvm(object):
         from CurrentVehicle import g_currentVehicle
         g_currentVehicle.onChanged += self.updateTankParams
         BigWorld.callback(0, self.updateTankParams)
+
+        from xpm import g_xvmView
+        g_xvmView.as_xvm_cmdS(XVM_AS_COMMAND_SET_SVC_SETTINGS, token.networkServicesSettings)
 
     def hangarDispose(self):
         from CurrentVehicle import g_currentVehicle

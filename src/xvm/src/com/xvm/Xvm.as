@@ -164,7 +164,7 @@ package com.xvm
 
         private function handleXpmCommand(e:ObjectEvent):void
         {
-            //Logger.add("handleXpmCommand");
+            //Logger.add("handleXpmCommand: " + e.result.cmd);
             try
             {
                 switch (e.result.cmd)
