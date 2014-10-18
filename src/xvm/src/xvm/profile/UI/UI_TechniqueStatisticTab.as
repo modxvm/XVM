@@ -1,11 +1,12 @@
 package xvm.profile.UI
 {
     import com.xvm.*;
-    import fl.transitions.easing.Strong;
-    import net.wg.gui.lobby.profile.pages.technique.data.ProfileVehicleDossierVO;
-    import net.wg.gui.utils.ExcludeTweenManager;
-    import xvm.profile.components.TechniqueStatisticTab;
-    import scaleform.clik.motion.Tween;
+    import fl.transitions.easing.*;
+    import net.wg.gui.lobby.profile.pages.technique.data.*;
+    import net.wg.gui.lobby.profile.pages.technique.ProfileTechnique;
+    import net.wg.gui.utils.*;
+    import xvm.profile.components.*;
+    import scaleform.clik.motion.*;
 
     public dynamic class UI_TechniqueStatisticTab extends TechniqueStatisticTab_UI
     {
@@ -21,7 +22,6 @@ package xvm.profile.UI
             super();
             worker = new TechniqueStatisticTab(this);
         }
-
         override protected function configUI():void
         {
             super.configUI();
@@ -33,7 +33,7 @@ package xvm.profile.UI
             if (_baseDisposed)
                 return;
 
-            if (worker.page && worker.page.battlesDropdown && (worker.page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
+            if (page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
             {
                 //TODO:0.9.0 worker.extraDataPanel.visible = false;
                 worker.lastBattleTimeTF.htmlText = "";
@@ -69,6 +69,8 @@ package xvm.profile.UI
             worker.update(arg1 as ProfileVehicleDossierVO);
         }
 
+        // PUBLIC
+
         public function updateBase(arg:Object):void
         {
             super.update(arg);
@@ -78,5 +80,17 @@ package xvm.profile.UI
         {
             return _baseDisposed;
         }
-   }
+
+        public function get page():ProfileTechnique
+        {
+            try
+            {
+                return parent.parent.parent.parent as ProfileTechnique;
+            }
+            catch (ex:Error)
+            {
+            }
+            return null;
+        }
+    }
 }

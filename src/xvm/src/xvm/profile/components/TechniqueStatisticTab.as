@@ -80,10 +80,6 @@ package xvm.profile.components
                 ];
                 */
 
-                createLastBattleTimeTF();
-                createRatingTF();
-                //createControls();
-
                 /*
                 controls.push(
                     { y: 202, width: DL_WIDTH, control: maxDamageDL },
@@ -93,10 +89,6 @@ package xvm.profile.components
                     { y: 473, width: DL_WIDTH + 200, control: bottomTF }
                 );
                 */
-
-                setupControls();
-                //createTextFields();
-                updateCommonData(null);
             }
             catch (ex:Error)
             {
@@ -108,7 +100,12 @@ package xvm.profile.components
         {
             try
             {
+                createLastBattleTimeTF();
+                createRatingTF();
+                createControls();
+
                 setupControls();
+                //createTextFields();
                 updateCommonData(null);
             }
             catch (ex:Error)
@@ -120,7 +117,6 @@ package xvm.profile.components
         public function update(raw_data:ProfileVehicleDossierVO):void
         {
             //Logger.addObject(raw_data);
-
             try
             {
                 if (_raw_data == raw_data)
@@ -155,21 +151,12 @@ package xvm.profile.components
             }
         }
 
-        // PUBLIC
-
-        public function get page():ProfileTechnique
-        {
-            try
-            {
-                return proxy.parent.parent.parent.parent as ProfileTechnique;
-            }
-            catch (ex:Error)
-            {
-            }
-            return null;
-        }
-
         // PRIVATE
+
+        private function get page():ProfileTechnique
+        {
+            return proxy.page;
+        }
 
         // utils
 
@@ -242,6 +229,7 @@ package xvm.profile.components
             lastBattleTimeTF.width = 450;
             lastBattleTimeTF.height = 25;
             lastBattleTimeTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 14, Defines.UICOLOR_LABEL));
+            lastBattleTimeTF.mouseEnabled = false;
             proxy.addChild(lastBattleTimeTF);
         }
 
@@ -259,6 +247,7 @@ package xvm.profile.components
             ratingTF.width = 400;
             ratingTF.height = 200;
             ratingTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
+            ratingTF.mouseEnabled = false;
             proxy.addChild(ratingTF);
         }
 

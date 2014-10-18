@@ -59,7 +59,7 @@ package xvm.svcmsg
                     value.messageVO.message = Locale.get(value.messageVO.message)
                       .split("#XVM_SITE#").join('event:http://www.modxvm.com/en/#wot-main')
                       .split("#XVM_SITE_DL#").join('event:http://www.modxvm.com/en/download-xvm/#wot-main')
-                      .split("#XVM_SITE_INFO#").join('event:http://www.modxvm.com/network-services-xvm/#wot-main');
+                      .split("#XVM_SITE_INFO#").join('event:http://www.modxvm.com/en/network-services-xvm/#wot-main');
                 }
             }
             return value;
