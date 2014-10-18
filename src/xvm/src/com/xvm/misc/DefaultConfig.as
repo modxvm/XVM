@@ -1065,7 +1065,7 @@ package com.xvm.misc
                 { value: 51.5,  color: Defines.C_YELLOW },   // normal
                 { value: 56.5,  color: Defines.C_GREEN },    // good
                 { value: 64.5,  color: Defines.C_BLUE },     // very good
-                { value: 101, color: Defines.C_PURPLE }      // unique
+                { value: 101,   color: Defines.C_PURPLE }    // unique
             ];
             c.e = [
                 { value: 3,    color: Defines.C_RED },     // very bad
@@ -1077,10 +1077,10 @@ package com.xvm.misc
             ];
             c.kb = [
                 { value: 2,   color: Defines.C_RED },
-                { value: 5,   color: Defines.C_ORANGE },
-                { value: 9,   color: Defines.C_YELLOW },
-                { value: 14,  color: Defines.C_GREEN },
-                { value: 20,  color: Defines.C_BLUE },
+                { value: 6,   color: Defines.C_ORANGE },
+                { value: 16,  color: Defines.C_YELLOW },
+                { value: 30,  color: Defines.C_GREEN },
+                { value: 43,  color: Defines.C_BLUE },
                 { value: 999, color: Defines.C_PURPLE }
             ];
             c.avglvl = [
@@ -1101,10 +1101,11 @@ package com.xvm.misc
             ];
             c.tdb = [
                 { value: 500,  color: Defines.C_RED },
+                { value: 750,  color: Defines.C_ORANGE },
                 { value: 1000, color: Defines.C_YELLOW },
                 { value: 1800, color: Defines.C_GREEN },
                 { value: 2500, color: Defines.C_BLUE },
-                { value: 3000, color: Defines.C_PURPLE }
+                { value: 9999, color: Defines.C_PURPLE }
             ];
             c.tdv = [
                 { value: 0.6,  color: Defines.C_RED },
@@ -1218,8 +1219,8 @@ package com.xvm.misc
             ];
             c.kb = [
                 { value: 2,   alpha: 100 },
-                { value: 10,  alpha: 80 },
-                { value: 20,  alpha: 60 },
+                { value: 16,  alpha: 80 },
+                { value: 30,  alpha: 60 },
                 { value: 999, alpha: 40 }
             ];
             c.avglvl = [
@@ -1232,9 +1233,9 @@ package com.xvm.misc
                 { value: 99999, alpha: 40 }
             ];
             c.tdb = [
-                { value: 1,   alpha: 100 },
-                { value: 500,  alpha: 80 },
-                { value: 1000,  alpha: 60 },
+                { value: 1,    alpha: 100 },
+                { value: 1000, alpha: 80 },
+                { value: 1800, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.tdv = [

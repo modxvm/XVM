@@ -112,10 +112,10 @@
     // Динамическая прозрачность по количеству кило-боев
     "kb": [
       { "value": 2,   "alpha": ${"alphaRating.very_bad" } },
-      { "value": 5,   "alpha": ${"alphaRating.bad"      } },
-      { "value": 9,   "alpha": ${"alphaRating.normal"   } },
-      { "value": 14,  "alpha": ${"alphaRating.good"     } },
-      { "value": 20,  "alpha": ${"alphaRating.very_good"} },
+      { "value": 6,   "alpha": ${"alphaRating.bad"      } },
+      { "value": 16,  "alpha": ${"alphaRating.normal"   } },
+      { "value": 30,  "alpha": ${"alphaRating.good"     } },
+      { "value": 43,  "alpha": ${"alphaRating.very_good"} },
       { "value": 999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by average level of player tanks
@@ -142,10 +142,11 @@
     // Динамическая прозрачность по среднему урону за бой на текущем танке
     "tdb": [
       { "value": 500,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 750,  "alpha": ${"alphaRating.bad"      } },
       { "value": 1000, "alpha": ${"alphaRating.normal"   } },
       { "value": 1800, "alpha": ${"alphaRating.good"     } },
       { "value": 2500, "alpha": ${"alphaRating.very_good"} },
-      { "value": 3000, "alpha": ${"alphaRating.unique"   } }
+      { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by average damage efficiency on current tank
     // Динамическая прозрачность по эффективности урона за бой на текущем танке
