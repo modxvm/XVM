@@ -15,11 +15,8 @@ def getXvmMessageHeader():
     return _getXvmMessageHeader()
 
 def getToken():
-    log('getToken')
     if isReplay():
-        log('  isReplay: True')
         getXvmActiveTokenData()
-    log('_token: {0}'.format(_token))
     return _token
 
 def clearToken(value):
@@ -99,42 +96,32 @@ def _checkVersion():
         err(traceback.format_exc())
 
 def _getXvmActiveTokenData():
-    log('_getXvmActiveTokenData()')
     playerId = getCurrentPlayerId()
-    log('playerId = {0}'.format(playerId))
     if playerId is None:
         return None
 
-    log('1')
     tdata = userprefs.get('tokens.{0}'.format(playerId))
     if tdata is None:
-        log('2')
         # fallback to the last player id if replay is running
         if isReplay():
-            log('3')
             playerId = userprefs.get('tokens.lastPlayerId')
             if playerId is None:
                 return None
-            log('4')
             tdata = userprefs.get('tokens.{0}'.format(playerId))
-            if tdata is not None:
-                # TODO
-                log('5')
-                global networkServicesSettings
-                networkServicesSettings = {
-                    'servicesActive': True,
-                    'comments': True,
-                    'statBattle': True,
-                    'statCompany': True,
-                    'statUserInfo': True,
-                }
 
-
-    log('6')
     if tdata is not None:
-        log('7')
         global _token
         _token = tdata.get('token', '').encode('ascii')
+        if isReplay():
+            # TODO
+            global networkServicesSettings
+            networkServicesSettings = {
+                'servicesActive': True,
+                'comments': True,
+                'statBattle': True,
+                'statCompany': True,
+                'statUserInfo': True,
+            }
 
     return tdata
 
