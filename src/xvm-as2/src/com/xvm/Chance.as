@@ -318,7 +318,7 @@ class com.xvm.Chance
             //var color = GraphicsUtil.brightenColor(GraphicsUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
             //htmlText += "<font color='#" + color.toString(16) + "'>" + chance.percent + "%</font>";
 
-            var n:Number = 5;
+            /*var n:Number = 5;
             var maxValue:Number = Math.max(chanceG.ally, chanceG.enemy);
             var a:Number = Math.round(chance.ally / maxValue * n);
             var e:Number = Math.round(chance.enemy / maxValue * n);
@@ -331,7 +331,17 @@ class com.xvm.Chance
                 Strings.padLeft("", e, "\u2588") +
                 "</font>" +
                 Strings.padLeft("", n - e, "\u2588") +
+                "</font>";*/
+
+            var s:String =
+                "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
+                chanceG.ally.toFixed() +
+                "</font>" +
+                " : " +
+                "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
+                chanceG.enemy.toFixed() +
                 "</font>";
+
             htmlText += s;
         }
 
