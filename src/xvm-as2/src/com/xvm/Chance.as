@@ -90,6 +90,9 @@ class com.xvm.Chance
             Ke += (stat.team == Defines.TEAM_ENEMY) ? K : 0;
         }
 
+        Ka /= maxTeamsCount;
+        Ke /= maxTeamsCount;
+
         //Logger.add("Ka=" + Ka + " Ke=" + Ke);
 /*
         if (DEBUG_EXP)
@@ -335,11 +338,11 @@ class com.xvm.Chance
 
             var s:String =
                 "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
-                chanceG.ally.toFixed() +
+                Math.round(chance.ally) +
                 "</font>" +
                 " : " +
                 "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
-                chanceG.enemy.toFixed() +
+                Math.round(chance.enemy) +
                 "</font>";
 
             htmlText += s;

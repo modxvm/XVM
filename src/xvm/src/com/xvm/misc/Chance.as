@@ -102,8 +102,8 @@ package com.xvm.misc
                 Ke += (stat.team == Defines.TEAM_ENEMY) ? K : 0;
             }
 
-            Ka /= maxTeamsCount;
-            Ke /= maxTeamsCount;
+            Ka /= 15;
+            Ke /= 15;
 
             var result:Object = PrepareChanceResults(Ka, Ke);
 
