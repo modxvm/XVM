@@ -6,6 +6,7 @@ package xvm.hangar.views
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.types.*;
     import flash.events.*;
     import flash.text.*;
     import net.wg.gui.events.ViewStackEvent;
@@ -31,6 +32,8 @@ package xvm.hangar.views
         {
             page.view_mc.addEventListener(ViewStackEvent.VIEW_CHANGED, this.onViewChanged);
             page.tabs_mc.addEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange);
+
+            Config.networkServicesSettings = new NetworkServicesSettings(Xvm.cmd(Defines.XVM_COMMAND_GET_SVC_SETTINGS));
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
