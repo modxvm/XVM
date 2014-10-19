@@ -322,7 +322,7 @@ package com.xvm.misc
         {
             var c:CStatisticForm = new CStatisticForm();
             c.showChances = false;     // Show game round win chances percentage.
-            c.showChancesLive = false; // Show "chance to win" only for live tanks.
+            c.showChancesLive = false; // Show "Team strength" only for live tanks.
             c.showBattleTier = false;  // Show battle tier.
             c.removeSquadIcon = false; // Hide squad icon.
             // Playes/clan icon parameters.

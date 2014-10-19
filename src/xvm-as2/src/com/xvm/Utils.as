@@ -39,6 +39,11 @@ class com.xvm.Utils
         return defaultValue ? value != "false" : value == "true";
     }
 
+    public static function toHtmlColor(value:Number):String
+    {
+        return "#" + Strings.padLeft(value.toString(16), 6, '0');
+    }
+
     public static function Timeout(target:Object, callback:Function, timeout:Number)
     {
         return _global.setTimeout(function() { callback.call(target) }, timeout);

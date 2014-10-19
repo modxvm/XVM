@@ -98,7 +98,7 @@ package com.xvm
 
             // Win chance
             "Chance error": "Ошибка расчета шансов",
-            "Chance to win": "Шансы на победу",
+            "Team strength": "Силы команд",
             //"global": "общий",
             //"per-vehicle": "по технике",
             "chanceLive": "Для живых",

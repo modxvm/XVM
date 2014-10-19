@@ -15,6 +15,8 @@ package com.xvm.misc
     public class Chance
     {
         private static var battleTier:Number = 0;
+        private static var maxTeamsCount:Number = 0;
+        private static var chanceG:Object;
 
         //public static var lastChances:Object = null;
 
@@ -34,46 +36,37 @@ package com.xvm.misc
                 Logger.add("playerNames: " + playerNames.join(", "));
                 teamsCount = CalculateTeamPlayersCount(playerNames);
                 Logger.add("teamsCount=" + teamsCount.ally + "/" + teamsCount.enemy);
-                // only equal and non empty team supported
+                // non empty teams required
                 if (teamsCount.ally == 0 || teamsCount.enemy == 0)
                     return "";
-                if (Math.abs(teamsCount.ally - teamsCount.enemy) > 2)
-                    return "";
+
+                maxTeamsCount = Math.max(teamsCount.ally, teamsCount.enemy);
 
                 Chance.battleTier = Macros.getGlobalValue("battletier");
                 Logger.add("battleTier=" + Chance.battleTier);
 
                 var chG:Object = GetChance(playerNames, ChanceFuncG);
-                //var chT:Object = GetChance(playerNames, ChanceFuncT);
 
                 var text:String = "";
 
                 if (chG.error)
                     return ChanceError("[G] " + chG.error);
 
-                //if (chT.error)
-                //    return ChanceError("[T] " + chT.error);
+                chanceG = chG;
 
-                //lastChances = { g: chG.percentF, t: chT.percentF };
                 if (showChance)
                 {
-                    text = Locale.get("Chance to win") + ": " +
-                        FormatChangeText(""/*Locale.get("global")*/, chG)// + ", " +
-                        //FormatChangeText(Locale.get("per-vehicle"), chT);
+                    text = Locale.get("Team strength") + ": " + FormatChangeText("", chG);
                     if (showLive)
                     {
                         var chX1:Object = GetChance(playerNames, ChanceFuncX1);
-                        //var chX2:Object = GetChance(playerNames, ChanceFuncX2);
                         text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1);
-                        //    ", " + FormatChangeText("", chX2);
-                        //lastChances.X1 = chX1.percentF;
-                        //lastChances.X2 = chX2.percentF;
                     }
                 }
                 if (showTier)
                 {
                     if (text != "")
-                        text += ". ";
+                        text += " ";
                     text += Locale.get("chanceBattleTier") + ": " + battleTier;
                 }
                 Logger.add("RESULT=" + text);
@@ -81,8 +74,6 @@ package com.xvm.misc
             }
             finally
             {
-                //if (teamsCount != null && teamsCount.ally != teamsCount.enemy)
-                //    Logger.addObject(chanceLog, 3);
                 Logger.add("========== end chance calculation ===========");
             }
             return null;
@@ -111,9 +102,14 @@ package com.xvm.misc
                 Ke += (stat.team == Defines.TEAM_ENEMY) ? K : 0;
             }
 
-            Logger.add("Ka=" + Ka + " Ke=" + Ke);
+            Ka /= maxTeamsCount;
+            Ke /= maxTeamsCount;
 
-            return PrepareChanceResults(Ka, Ke, chanceFunc);
+            var result:Object = PrepareChanceResults(Ka, Ke);
+
+            Logger.add("Ka=" + Ka.toFixed(2) + " Ke=" + Ke.toFixed(2) + " percent=" + result.percent);
+
+            return result;
         }
 
         // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
@@ -303,7 +299,7 @@ package com.xvm.misc
             return { ally: nally, enemy: nenemy };
         }
 
-        private static function PrepareChanceResults(Ea:Number, Ee:Number, chanceFunc:Function):Object
+        private static function PrepareChanceResults(Ea:Number, Ee:Number):Object
         {
             if (Ea == 0 && Ee == 0) Ea = Ee = 1;
             //Logger.add("Ea=" + Math.round(Ea) + " Ee=" + Math.round(Ee));
@@ -312,11 +308,11 @@ package com.xvm.misc
 
             // Normalize (5..95)
             return {
-                ally_value: Math.round(Ea),
-                enemy_value: Math.round(Ee),
+                ally: Ea,
+                enemy: Ee,
                 percent: Math.round(p),
                 raw: Ea / (Ea + Ee) * 100,
-                percentF: Math.round(1000 * p) / 1000
+                percentF: p.toFixed(2)
             };
         }
 
@@ -324,11 +320,28 @@ package com.xvm.misc
         {
             var htmlText:String = (txt && txt != "") ? txt + ": " : "";
             if (!chance)
-                htmlText += "xx%";
+                htmlText += "-";
             else
             {
-                var color:Number = GraphicsUtil.brightenColor(MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
-                htmlText += "<font color='" + Utils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
+                //Logger.addObject(chance);
+                //var color:Number = GraphicsUtil.brightenColor(MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
+                //htmlText += "<font color='" + Utils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
+
+                var n:int = 5;
+                var maxValue:Number = Math.max(chanceG.ally, chanceG.enemy);
+                var a:Number = Math.round(chance.ally / maxValue * n);
+                var e:Number = Math.round(chance.enemy / maxValue * n);
+                var s:String = "<font face='Arial' color='#444444' alpha='#CC'>" +
+                    StringUtils.leftPad("", n - a, "\u2588") +
+                    "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
+                    StringUtils.leftPad("", a, "\u2588") +
+                    "</font>" +
+                    "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
+                    StringUtils.leftPad("", e, "\u2588") +
+                    "</font>" +
+                    StringUtils.leftPad("", n - e, "\u2588") +
+                    "</font>";
+                htmlText += s;
             }
 
             return htmlText;

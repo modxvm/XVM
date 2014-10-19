@@ -10,6 +10,8 @@ class com.xvm.Chance
     private static var DEBUG_EXP = false;
 
     private static var battleTier: Number = 0;
+    private static var maxTeamsCount:Number = 0;
+    private static var chanceG:Object;
 
     //public static var lastChances: Object = null;
 
@@ -31,30 +33,25 @@ class com.xvm.Chance
     {
         var teamsCount:Object = CalculateTeamPlayersCount();
         //Logger.addObject(teamsCount);
-        // only non empty team supported
+        // non empty teams required
         if (teamsCount.ally == 0 || teamsCount.enemy == 0)
             return "";
-        //if (Math.abs(teamsCount.ally - teamsCount.enemy) > 2)
-        //    return "";
+
+        maxTeamsCount = Math.max(teamsCount.ally, teamsCount.enemy);
 
         Chance.battleTier = Macros.globals["battletier"];
 
         var chG = GetChance(ChanceFuncG);
-        //var chT = GetChance(ChanceFuncT);
+        chanceG = chG;
 
         var text = "";
 
         if (chG.error)
             return ChanceError("[G] " + chG.error);
 
-        //if (chT.error)
-        //    return ChanceError("[T] " + chT.error);
-
-        //lastChances = { g: chG.percentF/*, t: chT.percentF*/ };
-
         if (showChances)
         {
-            text += Locale.get("Chance to win") + ": " + FormatChangeText("", chG);
+            text += Locale.get("Team strength") + ": " + FormatChangeText("", chG);
             if (showLive)
             {
                 var chX1 = GetChance(ChanceFuncX1);
@@ -64,10 +61,8 @@ class com.xvm.Chance
         if (showBattleTier)
         {
             if (text !== "")
-                text += ". ";
+                text += " ";
             text += Locale.get("chanceBattleTier") + ": " + battleTier;
-            //lastChances.X1 = chX1.percentF;
-            //lastChances.X2 = chX2.percentF;
         }
         //Logger.add(text);
         return text;
@@ -112,7 +107,7 @@ class com.xvm.Chance
         }
 */
 
-        return PrepareChanceResults(Ka, Ke, chanceFunc);
+        return PrepareChanceResults(Ka, Ke);
     }
 
     // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
@@ -296,17 +291,17 @@ class com.xvm.Chance
         return { ally: nally, enemy: nenemy };
     }
 
-    private static function PrepareChanceResults(Ea, Ee, chanceFunc)
+    private static function PrepareChanceResults(Ea, Ee)
     {
         if (Ea == 0 && Ee == 0) Ea = Ee = 1;
         //Logger.add("Ea=" + Math.round(Ea) + " Ee=" + Math.round(Ee));
 
-        var p = Math.max(0.05, Math.min(0.95, (0.5 + (Ea / (Ea + Ee) - 0.5) * 1.5))) * 100;
+        var p:Number = Math.max(0.05, Math.min(0.95, (0.5 + (Ea / (Ea + Ee) - 0.5) * 1.5))) * 100;
 
         // Normalize (5..95)
         return {
-            ally_value: Math.round(Ea),
-            enemy_value: Math.round(Ee),
+            ally: Ea,
+            enemy: Ee,
             percent: Math.round(p),
             raw: Ea / (Ea + Ee) * 100,
             percentF: Math.round(1000 * p) / 1000
@@ -317,11 +312,27 @@ class com.xvm.Chance
     {
         var htmlText = (txt && txt != "") ? txt + ": " : "";
         if (!chance)
-            htmlText += "xx%";
+            htmlText += "-";
         else
         {
-            var color = GraphicsUtil.brightenColor(GraphicsUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
-            htmlText += "<font color='#" + color.toString(16) + "'>" + chance.percent + "%</font>";
+            //var color = GraphicsUtil.brightenColor(GraphicsUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
+            //htmlText += "<font color='#" + color.toString(16) + "'>" + chance.percent + "%</font>";
+
+            var n:Number = 5;
+            var maxValue:Number = Math.max(chanceG.ally, chanceG.enemy);
+            var a:Number = Math.round(chance.ally / maxValue * n);
+            var e:Number = Math.round(chance.enemy / maxValue * n);
+            var s:String = "<font face='Arial' color='#444444' alpha='#CC'>" +
+                Strings.padLeft("", n - a, "\u2588") +
+                "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
+                Strings.padLeft("", a, "\u2588") +
+                "</font>" +
+                "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
+                Strings.padLeft("", e, "\u2588") +
+                "</font>" +
+                Strings.padLeft("", n - e, "\u2588") +
+                "</font>";
+            htmlText += s;
         }
 
         return htmlText;
