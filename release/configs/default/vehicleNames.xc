@@ -221,6 +221,7 @@
     "uk-GB77_FV304":                    {"name": null, "short": null},
     "uk-GB78_Sexton_I":                 {"name": null, "short": null},
     "uk-GB79_FV206":                    {"name": null, "short": null},
+    "usa-A104_M4A3E8A":                 {"name": null, "short": null},
     "usa-M10_Wolverine":                {"name": null, "short": null},
     "usa-M103":                         {"name": null, "short": null},
     "usa-M12":                          {"name": null, "short": null},
