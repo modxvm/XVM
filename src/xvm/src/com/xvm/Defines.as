@@ -7,9 +7,9 @@ package com.xvm
     public class Defines
     {
         // Global versions
-        public static const XVM_VERSION:String = "5.4.0-dev";
+        public static const XVM_VERSION:String = "5.4.1-dev";
         public static const XVM_INTRO:String = "www.modxvm.com";
-        public static const WOT_VERSION:String = "0.9.3";
+        public static const WOT_VERSION:String = "0.9.4";
         public static const CONFIG_VERSION:String = "5.1.0";
 
         // Locale

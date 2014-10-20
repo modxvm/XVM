@@ -82,7 +82,6 @@ package net.wg.gui.lobby.header
             {
                 return;
             }
-            super.draw();
             if((isInvalid(InvalidationType.DATA)) && (this._items))
             {
                 this.demonstrationItem.visible = this._isShowDemonstrator;
@@ -101,11 +100,13 @@ package net.wg.gui.lobby.header
                 this.topLip.y = this._isShowDemonstrator?this.demonstrationItem.y - this.topLip.height:this.list.y - this.topLip.height - LIST_TOP_PADDING;
                 this.bottomLip.y = this.list.y + this.list.height + this.bottomLip.height - LIST_TOP_PADDING;
                 _loc3_ = this.hitSprite.graphics;
+                _loc3_.clear();
                 _loc3_.beginFill(0,0);
                 _loc3_.drawRect(0,0,this.list.width + LIST_RIGHT_PADDING + LIST_LEFT_PADDING,this.list.y + this.list.height + this.list._gap + LIST_TOP_PADDING + LIPS_PADDING);
                 _loc3_.endFill();
                 setSize(this.hitSprite.width,this.hitSprite.height);
             }
+            super.draw();
         }
         
         private function updateSelectedItem() : void

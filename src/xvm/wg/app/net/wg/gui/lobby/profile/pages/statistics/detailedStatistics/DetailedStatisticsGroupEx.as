@@ -2,8 +2,8 @@ package net.wg.gui.lobby.profile.pages.statistics.detailedStatistics
 {
     import net.wg.gui.components.common.containers.GroupEx;
     import net.wg.data.constants.Linkages;
-    import net.wg.gui.lobby.profile.pages.statistics.body.DetailedStatisticsUnit;
     import scaleform.clik.constants.InvalidationType;
+    import net.wg.gui.lobby.profile.pages.statistics.body.DetailedStatisticsUnit;
     
     public class DetailedStatisticsGroupEx extends GroupEx
     {
@@ -27,7 +27,6 @@ package net.wg.gui.lobby.profile.pages.statistics.detailedStatistics
         {
             var _loc1_:* = 0;
             var _loc2_:* = 0;
-            var _loc3_:DetailedStatisticsUnit = null;
             super.draw();
             if((isInvalid(UNIT_RENDERER_INVALID,InvalidationType.DATA)) && (this._unitRendererClass))
             {
@@ -35,11 +34,17 @@ package net.wg.gui.lobby.profile.pages.statistics.detailedStatistics
                 _loc2_ = 0;
                 while(_loc2_ < _loc1_)
                 {
-                    _loc3_ = DetailedStatisticsUnit(getChildAt(_loc2_));
-                    _loc3_.itemRendererClass = this._unitRendererClass;
+                    this.adjustUnitAt(_loc2_);
                     _loc2_++;
                 }
             }
+        }
+        
+        protected function adjustUnitAt(param1:int) : DetailedStatisticsUnit
+        {
+            var _loc2_:DetailedStatisticsUnit = DetailedStatisticsUnit(getChildAt(param1));
+            _loc2_.itemRendererClass = this._unitRendererClass;
+            return _loc2_;
         }
         
         public function get unitRendererClass() : Class

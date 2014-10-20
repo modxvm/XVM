@@ -65,6 +65,9 @@ package net.wg.gui.lobby.customization.renderers
         
         override protected function onDispose() : void
         {
+            this.newMarker = null;
+            this.rbtn.dispose();
+            this.rbtn = null;
             removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
             removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
             super.onDispose();

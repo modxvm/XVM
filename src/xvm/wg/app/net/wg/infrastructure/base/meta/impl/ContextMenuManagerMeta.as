@@ -19,8 +19,6 @@ package net.wg.infrastructure.base.meta.impl
         
         public var _isMoneyTransfer:Function = null;
         
-        public var isVehicleWasInBattle:Function = null;
-        
         public var showUserInfo:Function = null;
         
         public var showMoneyTransfer:Function = null;
@@ -67,6 +65,20 @@ package net.wg.infrastructure.base.meta.impl
         
         public var fortPrepareOrder:Function = null;
         
+        public var getContextMenuVehicleData:Function = null;
+        
+        public var showVehicleInfo:Function = null;
+        
+        public var toResearch:Function = null;
+        
+        public var vehicleSell:Function = null;
+        
+        public var favoriteVehicle:Function = null;
+        
+        public var showVehicleStats:Function = null;
+        
+        public var vehicleBuy:Function = null;
+        
         public function getOptionsS(param1:String, param2:String, param3:Number, param4:Object) : Array
         {
             App.utils.asserter.assertNotNull(this.getOptions,"getOptions" + Errors.CANT_NULL);
@@ -89,12 +101,6 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this._isMoneyTransfer,"_isMoneyTransfer" + Errors.CANT_NULL);
             return this._isMoneyTransfer();
-        }
-        
-        public function isVehicleWasInBattleS(param1:Number) : Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isVehicleWasInBattle,"isVehicleWasInBattle" + Errors.CANT_NULL);
-            return this.isVehicleWasInBattle(param1);
         }
         
         public function showUserInfoS(param1:Number, param2:String) : void
@@ -233,6 +239,48 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.fortPrepareOrder,"fortPrepareOrder" + Errors.CANT_NULL);
             this.fortPrepareOrder(param1);
+        }
+        
+        public function getContextMenuVehicleDataS(param1:Number) : Object
+        {
+            App.utils.asserter.assertNotNull(this.getContextMenuVehicleData,"getContextMenuVehicleData" + Errors.CANT_NULL);
+            return this.getContextMenuVehicleData(param1);
+        }
+        
+        public function showVehicleInfoS(param1:Number) : void
+        {
+            App.utils.asserter.assertNotNull(this.showVehicleInfo,"showVehicleInfo" + Errors.CANT_NULL);
+            this.showVehicleInfo(param1);
+        }
+        
+        public function toResearchS(param1:Number) : void
+        {
+            App.utils.asserter.assertNotNull(this.toResearch,"toResearch" + Errors.CANT_NULL);
+            this.toResearch(param1);
+        }
+        
+        public function vehicleSellS(param1:Number) : void
+        {
+            App.utils.asserter.assertNotNull(this.vehicleSell,"vehicleSell" + Errors.CANT_NULL);
+            this.vehicleSell(param1);
+        }
+        
+        public function favoriteVehicleS(param1:Number, param2:Boolean) : void
+        {
+            App.utils.asserter.assertNotNull(this.favoriteVehicle,"favoriteVehicle" + Errors.CANT_NULL);
+            this.favoriteVehicle(param1,param2);
+        }
+        
+        public function showVehicleStatsS(param1:Number) : void
+        {
+            App.utils.asserter.assertNotNull(this.showVehicleStats,"showVehicleStats" + Errors.CANT_NULL);
+            this.showVehicleStats(param1);
+        }
+        
+        public function vehicleBuyS(param1:Number) : void
+        {
+            App.utils.asserter.assertNotNull(this.vehicleBuy,"vehicleBuy" + Errors.CANT_NULL);
+            this.vehicleBuy(param1);
         }
     }
 }

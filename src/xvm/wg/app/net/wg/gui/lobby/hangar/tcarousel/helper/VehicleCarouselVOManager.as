@@ -147,14 +147,14 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
         private function update(param1:Number, param2:Object) : void
         {
             var _loc3_:VehicleCarouselVO = this._vehiclesDataList[param1];
-            _loc3_.parsObj(param2);
+            _loc3_.fromHash(param2);
             this._updatedData.push(_loc3_);
         }
         
         private function add(param1:Object) : void
         {
-            var _loc2_:VehicleCarouselVO = new VehicleCarouselVO();
-            var _loc3_:Number = _loc2_.parsObj(param1);
+            var _loc2_:VehicleCarouselVO = new VehicleCarouselVO(param1);
+            var _loc3_:Number = _loc2_.compactDescr;
             this._vehiclesDataList.push(_loc2_);
             this._vehiclesDataListIndexes.push(_loc3_);
             this._addedData.push(_loc2_);

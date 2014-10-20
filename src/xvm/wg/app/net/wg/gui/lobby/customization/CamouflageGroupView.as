@@ -39,6 +39,12 @@ package net.wg.gui.lobby.customization
             }
         }
         
+        override protected function onDispose() : void
+        {
+            this.hintLabel = null;
+            super.onDispose();
+        }
+        
         public function setDefaultLabel(param1:String) : void
         {
             this.defaultLbl = param1;

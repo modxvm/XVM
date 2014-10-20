@@ -20,5 +20,7 @@ package net.wg.infrastructure.base.meta
         function onHoverDirectionS() : void;
         
         function as_setData(param1:Object) : void;
+        
+        function as_updateBookMark(param1:Boolean) : void;
     }
 }

@@ -35,6 +35,8 @@ package net.wg.gui.lobby.sellDialog.VO
         
         public var intCD:Number = 0;
         
+        public var isRented:Boolean = false;
+        
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
             if(param1 == "action")

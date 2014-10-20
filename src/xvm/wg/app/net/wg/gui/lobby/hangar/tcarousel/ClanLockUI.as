@@ -30,6 +30,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         public function set timer(param1:Number) : void
         {
             this._timer = param1;
+            this.updateClanLock();
             invalidate();
         }
         

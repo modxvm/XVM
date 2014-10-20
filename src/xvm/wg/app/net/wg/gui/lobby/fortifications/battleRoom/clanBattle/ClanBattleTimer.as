@@ -16,6 +16,10 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             super();
         }
         
+        protected static var NORMAL_STATE:String = "normal";
+        
+        protected static var ALERT_STATE:String = "alert";
+        
         private static var TIMER_SEPARATOR:String = ":";
         
         private static var TIMER_TICK_SEC:int = 1000;
@@ -126,12 +130,22 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
         {
             if(this.leftTime <= 0)
             {
+                this.updateDefaultText();
                 this.stopTimer();
                 return;
             }
             this.leftTime = this.leftTime - 1;
             this.updateLabels();
             this.timerTick();
+        }
+        
+        private function updateDefaultText() : void
+        {
+            gotoAndStop(ALERT_STATE);
+            this.updateSeparator();
+            this.minutes.htmlText = this.replaceFormatter(this.model.timerDefaultValue);
+            this.seconds.htmlText = this.replaceFormatter(this.model.timerDefaultValue);
+            this.updateFilters();
         }
         
         private function updateLabels() : void

@@ -7,28 +7,17 @@ package net.wg.gui.components.controls
         
         public function HyperLink()
         {
-            this._linkType = LINK_TYPE_NORMAL;
             super();
-            buttonMode = true;
         }
         
-        public static var LINK_TYPE_NORMAL:String = "normal_";
+        private var _forceFocusView:Boolean = false;
         
-        public static var LINK_TYPE_ORANGE:String = "orange_";
-        
-        public var isUnderline:Boolean = true;
-        
-        private var _linkType:String;
-        
-        public function get linkType() : String
+        override protected function configUI() : void
         {
-            return this._linkType;
-        }
-        
-        public function set linkType(param1:String) : void
-        {
-            this._linkType = param1;
-            setState(_state);
+            super.configUI();
+            mouseChildren = true;
+            textField.mouseEnabled = true;
+            App.utils.styleSheetManager.setLinkStyle(textField);
         }
         
         override protected function changeFocus() : void
@@ -37,6 +26,7 @@ package net.wg.gui.components.controls
             {
                 return;
             }
+            this.forceFocusView = _focused > 0;
             setState((_focused) || (_displayFocus)?"over":"out");
             if((_pressedByKeyboard) && !_focused)
             {
@@ -46,19 +36,28 @@ package net.wg.gui.components.controls
         
         override protected function updateText() : void
         {
-            if(!(_label == null) && !(textField == null))
+            var _loc1_:String = null;
+            if(!(label == null) && !(textField == null))
             {
-                textField.text = _label;
-                if(this.isUnderline)
+                textField.text = label;
+                _loc1_ = textField.text;
+                if(this._forceFocusView)
                 {
-                    textField.htmlText = "<u>" + textField.text + "</u>";
+                    _loc1_ = App.utils.styleSheetManager.setForceFocusedStyle(_loc1_);
                 }
+                textField.htmlText = "<a href=\'event:hyperLink\'>" + _loc1_ + "</a>";
             }
         }
         
-        override protected function getStatePrefixes() : Vector.<String>
+        public function get forceFocusView() : Boolean
         {
-            return this.linkType == LINK_TYPE_NORMAL?statesDefault:Vector.<String>([this.linkType,""]);
+            return this._forceFocusView;
+        }
+        
+        public function set forceFocusView(param1:Boolean) : void
+        {
+            this._forceFocusView = param1;
+            this.updateText();
         }
     }
 }

@@ -38,6 +38,8 @@ package net.wg.gui.lobby.techtree.nodes
         
         public var flag:MovieClip;
         
+        public var rentLeftTF:TextField;
+        
         public var btnShowInHangar:SoundButtonEx;
         
         public function setupEx(param1:String) : void
@@ -115,6 +117,10 @@ package net.wg.gui.lobby.techtree.nodes
                 button.enabled = isActionEnabled();
                 button.visible = stateProps.visible;
                 button.setOwner(this,_doValidateNow);
+            }
+            if(this.rentLeftTF)
+            {
+                this.rentLeftTF.text = getRentLeft();
             }
             if(this.btnShowInHangar)
             {

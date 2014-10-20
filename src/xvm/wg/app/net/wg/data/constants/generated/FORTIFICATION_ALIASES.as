@@ -48,7 +48,7 @@ package net.wg.data.constants.generated
         
         public static var FORT_INTELLIGENCE_WINDOW:String = "FortIntelligenceWindow";
         
-        public static var FORT_INTELLIGENCE_WINDOW_PATCHCUT:String = "FortIntelligenceWindowPatchCut";
+        public static var FORT_INTELLIGENCE_NOT_AVAILABLE_WINDOW:String = "FortIntelligenceNotAvailableWindow";
         
         public static var FORT_DEMOUNT_BUILDING_WINDOW:String = "DemountBuildingWindow";
         
@@ -110,7 +110,7 @@ package net.wg.data.constants.generated
         
         public static var FORT_INTELLIGENCE_WINDOW_EVENT:String = "showFortIntelligenceWindow";
         
-        public static var FORT_INTELLIGENCE_WINDOW_PATCHCUT_EVENT:String = "showFortIntelligenceWindowPatchCut";
+        public static var FORT_INTELLIGENCE_NOT_AVAILABLE_WINDOW_EVENT:String = "showFortIntelligenceNotAvailableWindow";
         
         public static var FORT_DEMOUNT_BUILDING_WINDOW_EVENT:String = "showDemountBuildingWindow";
         
@@ -174,7 +174,7 @@ package net.wg.data.constants.generated
         
         public static var FORT_INTELLIGENCE_WINDOW_UI:String = "fortIntelligenceWindow.swf";
         
-        public static var FORT_INTELLIGENCE_WINDOW_PATCHCUT_UI:String = "fortIntelligenceWindowPatchCut.swf";
+        public static var FORT_INTELLIGENCE_NOT_AVAILABLE_WINDOW_UI:String = "fortIntelligenceNotAvailableWindow.swf";
         
         public static var FORT_DEMOUNT_BUILDING_WINDOW_UI:String = "demountBuildingWindow.swf";
         

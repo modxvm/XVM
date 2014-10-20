@@ -35,7 +35,7 @@ package net.wg.utils
         
         function cutBitmapFromBitmapData(param1:BitmapData, param2:Rectangle) : Bitmap;
         
-        function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0) : IUserProps;
+        function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:int = 0) : IUserProps;
         
         function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean;
         

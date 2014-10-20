@@ -19,6 +19,18 @@ package net.wg.gui.lobby.customization
             this.currentData = [null,null,null];
             this.newData = [null,null,null];
             super();
+            var _loc1_:* = 0;
+            var _loc2_:* = 0;
+            while(_loc2_ < _groupsDataProvider.length)
+            {
+                if(_groupsDataProvider.requestItemAt(_loc2_).selected)
+                {
+                    _loc1_ = _loc2_;
+                    break;
+                }
+                _loc2_++;
+            }
+            list.selectedIndex = _loc1_;
         }
         
         public var currentItemRenderer0:CamoDemoRenderer = null;
@@ -129,6 +141,7 @@ package net.wg.gui.lobby.customization
             this.updateTimeLeftVisibility();
             if(view != null)
             {
+                view.selectedItemIdx = 0;
                 view.invalidateListData(true);
             }
         }
@@ -220,6 +233,18 @@ package net.wg.gui.lobby.customization
             var _loc2_:CamoDemoRenderer = null;
             var _loc3_:CamoDropButton = null;
             var _loc4_:* = NaN;
+            this.currentItemRenderer0.dispose();
+            this.currentItemRenderer0 = null;
+            this.currentItemRenderer1.dispose();
+            this.currentItemRenderer1 = null;
+            this.currentItemRenderer2.dispose();
+            this.currentItemRenderer2 = null;
+            this.dropButton0.dispose();
+            this.dropButton0 = null;
+            this.dropButton1.dispose();
+            this.dropButton1 = null;
+            this.dropButton2.dispose();
+            this.dropButton2 = null;
             if(form != null)
             {
                 form.removeEventListener(CustomizationEvent.CHANGE_ACTIONS_LOCK,this.onChangeActionLock);
@@ -229,6 +254,7 @@ package net.wg.gui.lobby.customization
             if(view != null)
             {
                 view.removeEventListener(CustomizationEvent.SELECT_NEW,this.onSelectNewItem);
+                view.dispose();
                 view = null;
             }
             if(list != null)
@@ -274,32 +300,20 @@ package net.wg.gui.lobby.customization
         
         override protected function configUI() : void
         {
-            var _loc3_:CamoDemoRenderer = null;
-            var _loc4_:CamoDropButton = null;
-            var _loc5_:* = NaN;
-            var _loc6_:Object = null;
-            var _loc7_:String = null;
+            var _loc2_:CamoDemoRenderer = null;
+            var _loc3_:CamoDropButton = null;
+            var _loc4_:* = NaN;
+            var _loc5_:Object = null;
+            var _loc6_:String = null;
             mouseChildren = true;
             mouseEnabled = true;
-            var _loc1_:Number = 0;
             if(form != null)
             {
-                _loc6_ = form.getSectionData(this.getSectionName());
-                if(_loc6_ != null)
-                {
-                    if(_loc6_._new.id != null)
-                    {
-                        this.newItemData = _loc6_._new;
-                    }
-                    if(_loc6_.selectedGroupIdx != null)
-                    {
-                        _loc1_ = _loc6_.selectedGroupIdx;
-                    }
-                }
+                _loc5_ = form.getSectionData(this.getSectionName());
                 form.addEventListener(CustomizationEvent.CHANGE_ACTIONS_LOCK,this.onChangeActionLock);
                 form.addEventListener(CustomizationEvent.RESET_NEW_ITEM,this.onResetNewItem);
-                _loc7_ = this.getViewLinkage();
-                view = BaseTimedCustomizationGroupView(form.showView(_loc7_));
+                _loc6_ = this.getViewLinkage();
+                view = BaseTimedCustomizationGroupView(form.showView(_loc6_));
                 view.timeLabel = this.getTimeSectionLabel();
                 view.itemsDP = this.getItemsDP();
                 view.rentalPackageDP = this.getRentalPackagesDP();
@@ -310,32 +324,31 @@ package net.wg.gui.lobby.customization
             if(list != null)
             {
                 list.labelField = getListLabelFieldName();
-                list.selectedIndex = _loc1_;
                 list.dataProvider = _groupsDataProvider;
                 list.addEventListener(ListEvent.INDEX_CHANGE,this.handleChangeGroupSelectedIndex);
             }
-            var _loc2_:Number = 3;
-            _loc5_ = 0;
-            while(_loc5_ < _loc2_)
+            var _loc1_:Number = 3;
+            _loc4_ = 0;
+            while(_loc4_ < _loc1_)
             {
-                _loc3_ = this.getCurrRenderer(_loc5_);
-                if(_loc3_)
+                _loc2_ = this.getCurrRenderer(_loc4_);
+                if(_loc2_)
                 {
-                    _loc3_.addEventListener(ButtonEvent.CLICK,this.onClickRenderer);
-                    _loc3_.setData(this.currentData[_loc5_]);
-                    _loc3_.mouseEnabled = true;
-                    _loc3_.validateNow();
+                    _loc2_.addEventListener(ButtonEvent.CLICK,this.onClickRenderer);
+                    _loc2_.setData(this.currentData[_loc4_]);
+                    _loc2_.mouseEnabled = true;
+                    _loc2_.validateNow();
                 }
-                _loc4_ = this.getDropButton(_loc5_);
-                if(_loc4_ != null)
+                _loc3_ = this.getDropButton(_loc4_);
+                if(_loc3_ != null)
                 {
-                    _loc4_.visible = false;
-                    _loc4_.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverDropButton);
-                    _loc4_.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutDropButton);
-                    _loc4_.addEventListener(CustomizationEvent.DROP_ITEM,this.onClickDropButton);
-                    _loc4_.kind = _loc5_;
+                    _loc3_.visible = false;
+                    _loc3_.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverDropButton);
+                    _loc3_.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutDropButton);
+                    _loc3_.addEventListener(CustomizationEvent.DROP_ITEM,this.onClickDropButton);
+                    _loc3_.kind = _loc4_;
                 }
-                _loc5_++;
+                _loc4_++;
             }
             this._selectedKind = list.selectedIndex;
             this.requestCurrentItem();

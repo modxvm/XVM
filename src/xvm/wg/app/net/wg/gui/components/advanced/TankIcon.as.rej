@@ -1,0 +1,11 @@
+--- app.orig/net/wg/gui/components/advanced/TankIcon.as	2014-09-23 14:15:40.877510700 +0300
++++ app/net/wg/gui/components/advanced/TankIcon.as	2014-10-04 16:58:04.002310900 +0300
+@@ -90,7 +90,7 @@
+         
+         private var _isPremiumDirty:Boolean = true;
+         
+-        private var DIRTY_FLAGS:Array = [this._showMultyXpDirty,this._showXpDirty,this._showNameDirty,this._nationDirty,this._imageDirty,this._tankTypeDirty,this._levelDirty,this._multyXpValDirty,this._xpValDirty,this._tankNameDirty,this._isEliteDirty,this._isPremiumDirty];
++        public var DIRTY_FLAGS:Array = [_showMultyXpDirty,_showXpDirty,_showNameDirty,_nationDirty,_imageDirty,_tankTypeDirty,_levelDirty,_multyXpValDirty,_xpValDirty,_tankNameDirty,_isEliteDirty,_isPremiumDirty];
+         
+         override protected function onDispose() : void
+         {

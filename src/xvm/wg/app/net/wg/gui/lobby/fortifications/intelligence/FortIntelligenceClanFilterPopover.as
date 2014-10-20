@@ -5,24 +5,22 @@ package net.wg.gui.lobby.fortifications.intelligence
     import flash.text.TextField;
     import net.wg.gui.components.controls.RangeSlider;
     import net.wg.gui.components.controls.TimeNumericStepper;
-    import net.wg.gui.components.controls.DropdownMenu;
     import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.Sprite;
     import net.wg.gui.lobby.fortifications.data.IntelligenceClanFilterVO;
     import net.wg.infrastructure.interfaces.IWrapper;
     import net.wg.gui.components.popOvers.PopOver;
-    import net.wg.data.constants.Values;
     import net.wg.gui.components.popOvers.PopOverConst;
     import scaleform.clik.events.SliderEvent;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.Event;
-    import scaleform.clik.events.ListEvent;
-    import scaleform.clik.data.DataProvider;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.fortifications.data.FortInvalidationType;
     import flash.display.InteractiveObject;
+    import net.wg.data.constants.Values;
     import net.wg.gui.lobby.fortifications.utils.impl.FortCommonUtils;
     import scaleform.clik.interfaces.IDataProvider;
+    import scaleform.clik.events.ListEvent;
     
     public class FortIntelligenceClanFilterPopover extends FortIntelligenceClanFilterPopoverMeta implements IFortIntelligenceClanFilterPopoverMeta
     {
@@ -30,8 +28,6 @@ package net.wg.gui.lobby.fortifications.intelligence
         public function FortIntelligenceClanFilterPopover()
         {
             super();
-            this._defaultFilterData = this.getHelper().defaultFilterData;
-            this._lastSentData = this.getHelper().defaultFilterData;
         }
         
         private static var CONTENT_DEFAULT_WIDTH:int = 280;
@@ -54,8 +50,6 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         public var availabilityTF:TextField;
         
-        public var availabilityDropdown:DropdownMenu;
-        
         public var defaultButton:SoundButtonEx;
         
         public var applyButton:SoundButtonEx;
@@ -72,6 +66,8 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         private var _currentData:IntelligenceClanFilterVO;
         
+        private var _defaultDataWasSetOnStart:Boolean;
+        
         override public function set wrapper(param1:IWrapper) : void
         {
             super.wrapper = param1;
@@ -87,8 +83,7 @@ package net.wg.gui.lobby.fortifications.intelligence
             _loc1_.minClanLevel = int(this.rangeSlider.leftValue);
             _loc1_.maxClanLevel = int(this.rangeSlider.rightValue);
             _loc1_.startDefenseHour = int(this.defenseStartNumericStepper.value);
-            var _loc2_:Object = this.availabilityDropdown.dataProvider.requestItemAt(this.availabilityDropdown.selectedIndex);
-            _loc1_.availability = _loc2_?_loc2_.data:Values.DEFAULT_INT;
+            _loc1_.isDefault = this._defaultDataWasSetOnStart;
             this._filterData = new IntelligenceClanFilterVO(_loc1_);
             return this._filterData;
         }
@@ -110,13 +105,11 @@ package net.wg.gui.lobby.fortifications.intelligence
             this.applyButton.addEventListener(ButtonEvent.CLICK,this.applyButtonButtonClickHandler);
             this.defaultButton.addEventListener(ButtonEvent.CLICK,this.defaultButtonButtonClickHandler);
             this.defenseStartNumericStepper.addEventListener(Event.CHANGE,this.defenseStartNumericStepperChangeHandler);
-            this.availabilityDropdown.addEventListener(ListEvent.INDEX_CHANGE,this.onAvailabilityDropDownChange);
         }
         
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            this.availabilityDropdown.dataProvider = new DataProvider(getAvailabilityProviderS());
         }
         
         override protected function draw() : void
@@ -145,7 +138,7 @@ package net.wg.gui.lobby.fortifications.intelligence
             if(isInvalid(FortInvalidationType.INVALID_ENABLING))
             {
                 this.defaultButton.enabled = !this.isDefaultDataSet();
-                this.applyButton.enabled = !this.lastSearchDataSet();
+                this.applyButton.enabled = !this.lastSearchDataSet() || (this.isDefaultDataSet()) && (this._defaultDataWasSetOnStart);
             }
             super.draw();
         }
@@ -161,10 +154,8 @@ package net.wg.gui.lobby.fortifications.intelligence
             this.defenseStartNumericStepper.dispose();
             this.rangeSlider.removeEventListener(SliderEvent.VALUE_CHANGE,this.rangeSliderValueChangeHandler);
             this.defenseStartNumericStepper.removeEventListener(Event.CHANGE,this.defenseStartNumericStepperChangeHandler);
-            this.availabilityDropdown.removeEventListener(ListEvent.INDEX_CHANGE,this.onAvailabilityDropDownChange);
             this.rangeSlider = null;
             this.defenseStartNumericStepper = null;
-            this.availabilityDropdown = null;
             this.defaultButton.dispose();
             this.applyButton.dispose();
             this.cancelButton.dispose();
@@ -184,21 +175,17 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         override protected function setData(param1:IntelligenceClanFilterVO) : void
         {
+            this._defaultDataWasSetOnStart = param1.isDefault;
+            if(!this._defaultFilterData)
+            {
+                this._defaultFilterData = this.getHelper().getDefaultFilterData(this._defaultDataWasSetOnStart);
+            }
             this._isGlobalDataSet = true;
             assert(param1.maxClanLevel <= this._defaultFilterData.maxClanLevel && param1.maxClanLevel >= param1.minClanLevel,"FortIntelligenceClanFilterPopover | setData | incorrect maxClanLevel");
             assert(param1.minClanLevel <= this._defaultFilterData.maxClanLevel && param1.minClanLevel >= param1.minClanLevel,"FortIntelligenceClanFilterPopover | setData | incorrect minClanLevel");
             assert(param1.minClanLevel <= param1.maxClanLevel,"FortIntelligenceClanFilterPopover | setData | incorrect minClanLevel should be less or equal to maxClanLevel");
             this._currentData = new IntelligenceClanFilterVO(param1.toHash());
-            if(this._lastSentData)
-            {
-                if(!param1.isEquals(this._defaultFilterData))
-                {
-                    this._lastSentData.dispose();
-                    this._lastSentData = null;
-                    this._lastSentData = new IntelligenceClanFilterVO(param1.toHash());
-                }
-            }
-            else
+            if(!this._lastSentData)
             {
                 this._lastSentData = new IntelligenceClanFilterVO(param1.toHash());
             }
@@ -261,7 +248,6 @@ package net.wg.gui.lobby.fortifications.intelligence
                 this.defenseEndTF.htmlText = PERIOD_DELIMITER + Values.SPACE_STR + FortCommonUtils.instance.getNextHourText(param1.startDefenseHour);
                 this.defenseEndTF.visible = true;
             }
-            this.availabilityDropdown.selectedIndex = this.getDPItemIndex(this.availabilityDropdown.dataProvider,param1.availability);
         }
         
         private function disposeFilterData() : void
@@ -323,8 +309,6 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         private function applyButtonButtonClickHandler(param1:ButtonEvent) : void
         {
-            this.disposeLastSentData();
-            this._lastSentData = new IntelligenceClanFilterVO(this.filterData.toHash());
             useFilterS(this.filterData,this.isDefaultDataSet());
             App.popoverMgr.hide();
         }
@@ -343,7 +327,9 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         private function defaultButtonButtonClickHandler(param1:ButtonEvent) : void
         {
+            var _loc2_:Boolean = this._defaultDataWasSetOnStart;
             this.setData(this._defaultFilterData);
+            this._defaultDataWasSetOnStart = _loc2_;
         }
         
         private function onAvailabilityDropDownChange(param1:ListEvent) : void

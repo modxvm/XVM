@@ -135,7 +135,6 @@ package net.wg.gui.components.tooltips
             var _loc1_:ILocale = null;
             var _loc4_:* = NaN;
             var _loc5_:AchievementVO = null;
-            var _loc8_:String = null;
             var _loc9_:String = null;
             var _loc10_:String = null;
             _loc1_ = App.utils.locale;
@@ -233,7 +232,7 @@ package net.wg.gui.components.tooltips
                 this.notEnoughTF.width = 10;
                 this.notEnoughTF.visible = false;
             }
-            _loc8_ = this.getInfoText(_loc5_.type,_loc5_.params,_loc5_.value,_loc5_.localizedValue,_loc5_.achievedOn,_loc5_.closeToRecord);
+            var _loc8_:String = this.getInfoText(_loc5_.type,_loc5_.params,_loc5_.value,_loc5_.localizedValue,_loc5_.achievedOn,_loc5_.closeToRecord);
             if(_loc8_ != "")
             {
                 this.counter = this.getInfoCounter(_loc5_.type,_loc5_.value,_loc5_.localizedValue,_component);

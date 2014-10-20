@@ -10,7 +10,7 @@ package net.wg.gui.lobby.tankman
         
         public static var ROLE_TYPE_COMMON:String = "common";
         
-        public var name:String = null;
+        public var name:String = "";
         
         public var description:String = null;
         
@@ -24,8 +24,6 @@ package net.wg.gui.lobby.tankman
         
         public var isPerk:Boolean = false;
         
-        private var _level:int = -1;
-        
         public var userName:String = null;
         
         public var isNewSkill:Boolean = false;
@@ -34,9 +32,9 @@ package net.wg.gui.lobby.tankman
         
         public var enabled:Boolean = true;
         
-        public var roleType:String = null;
-        
         public var tankmanID:int = -1;
+        
+        private var _level:int = -1;
         
         public function get level() : int
         {

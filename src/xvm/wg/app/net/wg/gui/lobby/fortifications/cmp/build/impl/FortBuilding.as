@@ -148,6 +148,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
             this.model = param1;
             visible = !(this.model == null);
+            hitAreaControl.enabled = visible;
             if(visible)
             {
                 if(_loc2_ != param1.cooldown)
@@ -180,6 +181,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         
         public function updateTransportMode(param1:FortModeVO) : void
         {
+            DebugUtils.LOG_DEBUG("building: " + name + " uid:" + this.uid + " inited:" + initialized);
             switch(FortCommonUtils.instance.getFunctionalState(param1))
             {
                 case FunctionalStates.ENTER:
@@ -408,7 +410,11 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         {
             var _loc2_:* = false;
             var _loc1_:* = true;
-            if(this.isInNormalMode())
+            if((this.model) && (this.model.isDefenceHour) && (this.isInNormalMode()))
+            {
+                this.disableDefenceHour();
+            }
+            else if(this.isInNormalMode())
             {
                 this.enableForAll();
             }
@@ -436,6 +442,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             }
             
             
+            
             this.updateOrderTime();
             if(_loc1_)
             {
@@ -461,6 +468,15 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         private function isNotTrowelState() : Boolean
         {
             return !this.isTrowelState();
+        }
+        
+        private function disableDefenceHour() : void
+        {
+            trowel.alpha = 0;
+            ground.alpha = ALPHA_ENABLED;
+            this.updateInteractionEnabling(false);
+            indicators.visible = this.isNotTrowelState();
+            this.removeCommonBuildingListeners();
         }
         
         private function enableForAll() : void
@@ -538,7 +554,6 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         {
             hitAreaControl.buttonMode = param1;
             hitAreaControl.useHandCursor = param1;
-            hitAreaControl.enabled = param1;
             buildingMc.mouseEnabled = param1;
             buildingMc.mouseChildren = param1;
             buildingMc.buttonMode = param1;

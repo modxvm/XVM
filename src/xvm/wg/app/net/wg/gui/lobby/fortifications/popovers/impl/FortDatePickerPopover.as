@@ -22,7 +22,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         {
             super.configUI();
             this.calendar.needToInitFocus = false;
-            this.calendar.modalFocusHolder = this;
             this.calendar.dayVOClass = FortCalendarDayVO;
             this.calendar.setOutOfBoundsTooltip(App.utils.locale.makeString(FORTIFICATIONS.FORTDATEPICKERPOPOVER_CALENDAR_DAYTOOLTIP_NOTAVAILABLE_HEADER),App.utils.locale.makeString(FORTIFICATIONS.FORTDATEPICKERPOPOVER_CALENDAR_DAYTOOLTIP_NOTAVAILABLE_BODY));
         }

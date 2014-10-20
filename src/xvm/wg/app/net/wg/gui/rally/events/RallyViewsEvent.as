@@ -41,7 +41,7 @@ package net.wg.gui.rally.events
         
         public static var VEH_BTN_ROLL_OUT:String = "vehBtnRollOut";
         
-        public var data:*;
+        public var data;
         
         override public function clone() : Event
         {

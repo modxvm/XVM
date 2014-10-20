@@ -56,7 +56,7 @@ package net.wg.gui.lobby.store.shop.base
             }
             if(0 == _loc4_ && !(param1.requestType == FittingTypes.VEHICLE))
             {
-                param1.disabled = " ";
+                param1.disabled = true;
             }
             var _loc6_:* = false;
             if(this._isUseGoldAndCredits)
@@ -77,7 +77,7 @@ package net.wg.gui.lobby.store.shop.base
             }
             if(errorField)
             {
-                errorField.text = param1.disabled;
+                errorField.text = param1.statusMessage;
                 if(param1.statusLevel)
                 {
                     errorField.textColor = STORE_STATUS_COLOR.getColor(param1.statusLevel);
@@ -87,7 +87,7 @@ package net.wg.gui.lobby.store.shop.base
                     errorField.textColor = STORE_STATUS_COLOR.INFO;
                 }
             }
-            enabled = !(param1.disabled || _loc6_);
+            enabled = !((param1.disabled) || (_loc6_));
         }
         
         override protected function onPricesCalculated(param1:Number, param2:Number, param3:StoreTableData) : void

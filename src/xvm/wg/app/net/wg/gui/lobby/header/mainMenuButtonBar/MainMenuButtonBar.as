@@ -1,14 +1,13 @@
 package net.wg.gui.lobby.header.mainMenuButtonBar
 {
     import scaleform.clik.controls.ButtonBar;
-    import net.wg.gui.interfaces.IHelpLayoutComponent;
     import scaleform.clik.events.InputEvent;
     import scaleform.clik.controls.Button;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.controls.MainMenuButton;
     import scaleform.clik.constants.InvalidationType;
     
-    public class MainMenuButtonBar extends ButtonBar implements IHelpLayoutComponent
+    public class MainMenuButtonBar extends ButtonBar
     {
         
         public function MainMenuButtonBar()
@@ -28,28 +27,6 @@ package net.wg.gui.lobby.header.mainMenuButtonBar
         private var _disableNav:Boolean = false;
         
         private var _subItemSelectedIndex:Number = -1;
-        
-        public function showHelpLayout() : void
-        {
-            var _loc1_:Number = _renderers.length;
-            var _loc2_:Number = 1;
-            while(_loc2_ < _loc1_ - 1)
-            {
-                (_renderers[_loc2_] as IHelpLayoutComponent).showHelpLayout();
-                _loc2_++;
-            }
-        }
-        
-        public function closeHelpLayout() : void
-        {
-            var _loc1_:Number = _renderers.length;
-            var _loc2_:Number = 1;
-            while(_loc2_ < _loc1_ - 1)
-            {
-                (_renderers[_loc2_] as IHelpLayoutComponent).closeHelpLayout();
-                _loc2_++;
-            }
-        }
         
         public function setDisableNav(param1:Boolean) : void
         {
@@ -141,9 +118,8 @@ package net.wg.gui.lobby.header.mainMenuButtonBar
         private function updateLayout(param1:Number) : void
         {
             var _loc2_:Button = null;
-            var _loc4_:* = NaN;
             var _loc3_:Number = 0;
-            _loc4_ = this.paddingLeft;
+            var _loc4_:Number = this.paddingLeft;
             switch(_autoSize)
             {
                 case TextFieldAutoSize.NONE:

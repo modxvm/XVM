@@ -171,7 +171,7 @@ package net.wg.gui.prebattle.squad
                 }
                 this.setSpeakers(this.model.isPlayerSpeaking,true);
                 textField.alpha = this.vehicleNameField.alpha = 1;
-                var _loc1_:* = this.model.getStateString();
+                _loc1_ = this.model.getStateString();
                 if(_loc1_ != PrebattleStateString.UNKNOWN)
                 {
                     this.statusString = _loc1_;
@@ -186,8 +186,8 @@ package net.wg.gui.prebattle.squad
                         this.showToolTips();
                     }
                 }
-                var _loc2_:* = 4.290295975E9;
-                var _loc3_:* = _loc2_;
+                _loc2_ = 4.290295975E9;
+                _loc3_ = _loc2_;
                 this.updateVoiceWave();
                 _loc3_ = this.model.getCurrentColor();
                 if(!isNaN(_loc3_))

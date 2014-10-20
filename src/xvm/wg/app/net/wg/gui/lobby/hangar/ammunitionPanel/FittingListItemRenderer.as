@@ -71,7 +71,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             this.data = param1;
             invalidateData();
-            this.onRollOut();
+            this.onItemRollOut();
         }
         
         override protected function onDispose() : void
@@ -164,8 +164,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 this.errorField.mouseEnabled = false;
             }
             _loc1_.addEvent(this,MouseEvent.CLICK,this.onClick);
-            _loc1_.addEvent(this,MouseEvent.ROLL_OVER,this.onRollOver);
-            _loc1_.addEvent(this,MouseEvent.ROLL_OUT,this.onRollOut);
+            _loc1_.addEvent(this,MouseEvent.ROLL_OVER,this.onItemRollOver);
+            _loc1_.addEvent(this,MouseEvent.ROLL_OUT,this.onItemRollOut);
         }
         
         override protected function draw() : void
@@ -347,7 +347,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        private function onRollOver(param1:MouseEvent = null) : void
+        private function onItemRollOver(param1:MouseEvent = null) : void
         {
             var _loc2_:Array = [0,0];
             _loc2_[data.currency == Currencies.CREDITS?0:1] = data.price;
@@ -355,7 +355,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             App.toolTipMgr.showSpecial(Tooltips.HANGAR_MODULE,null,data.id,_loc2_,data.inventoryCount,data.vehicleCount,data.slotIndex?data.slotIndex:0);
         }
         
-        private function onRollOut(param1:MouseEvent = null) : void
+        private function onItemRollOut(param1:MouseEvent = null) : void
         {
             App.toolTipMgr.hide();
         }

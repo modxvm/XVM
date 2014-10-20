@@ -3,12 +3,14 @@ package net.wg.gui.components.controls
     import scaleform.clik.controls.CheckBox;
     import net.wg.infrastructure.interfaces.entity.ISoundable;
     import net.wg.infrastructure.interfaces.ITextContainer;
+    import scaleform.clik.events.ResizeEvent;
     import net.wg.data.constants.SoundManagerStates;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
     import flash.text.TextFormat;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.core.UIComponent;
+    import scaleform.clik.constants.ConstrainMode;
     
     public class CheckBox extends scaleform.clik.controls.CheckBox implements ISoundable, ITextContainer
     {
@@ -20,13 +22,19 @@ package net.wg.gui.components.controls
         
         public var soundId:String = "";
         
-        protected var _textColor:Number = 9868935;
+        private var _textColor:Number = 9868935;
         
-        protected var _disabledTextAlpha:Number = 0.5;
+        private var _disabledTextAlpha:Number = 0.5;
         
         private var _soundType:String = "checkBox";
         
         private var TEXT_FORMAT_INV:String = "textFormatInv";
+        
+        private var INVALIDATION_MULTILINE:String = "invalidationMultiline";
+        
+        private var INVALIDATION_WORD_WRAP:String = "invalidationWordWrap";
+        
+        private var INVALIDATION_TEXT_FIELD_HEIGHT:String = "invalidationTextFieldHeight";
         
         private var INFO_INV:String = "infoInv";
         
@@ -34,7 +42,13 @@ package net.wg.gui.components.controls
         
         private var _textSize:Number = 12;
         
+        private var _textLineSpacing:Number = 0.0;
+        
         private var _dynamicFrameUpdating:Boolean = false;
+        
+        private var _multiline:Boolean = false;
+        
+        private var _wordWrap:Boolean = false;
         
         private var _toolTip:String = "";
         
@@ -51,6 +65,10 @@ package net.wg.gui.components.controls
             if(this._infoIco)
             {
                 this.removeInfoIco();
+            }
+            if(constraints != null)
+            {
+                constraints.removeEventListener(ResizeEvent.RESIZE,this.handleResizeByConstraints);
             }
             super.onDispose();
         }
@@ -221,6 +239,50 @@ package net.wg.gui.components.controls
             return this._toolTip;
         }
         
+        public function get multiline() : Boolean
+        {
+            return this._multiline;
+        }
+        
+        public function set multiline(param1:Boolean) : void
+        {
+            if(this._multiline == param1)
+            {
+                return;
+            }
+            this._multiline = param1;
+            invalidate(this.INVALIDATION_MULTILINE);
+            if(constraints != null)
+            {
+                constraints.addEventListener(ResizeEvent.RESIZE,this.handleResizeByConstraints);
+            }
+        }
+        
+        private function handleResizeByConstraints(param1:ResizeEvent) : void
+        {
+            invalidate(this.INVALIDATION_TEXT_FIELD_HEIGHT);
+        }
+        
+        public function get wordWrap() : Boolean
+        {
+            return this._wordWrap;
+        }
+        
+        public function set wordWrap(param1:Boolean) : void
+        {
+            if(this._wordWrap == param1)
+            {
+                return;
+            }
+            this._wordWrap = param1;
+            invalidate(this.INVALIDATION_WORD_WRAP);
+        }
+        
+        private function updateTextFieldHeight() : void
+        {
+            textField.height = textField.textHeight + 5;
+        }
+        
         override public function set enabled(param1:Boolean) : void
         {
             super.enabled = param1;
@@ -255,6 +317,7 @@ package net.wg.gui.components.controls
                     _loc1_ = new TextFormat();
                     _loc1_.font = this._textFont;
                     _loc1_.size = this._textSize;
+                    _loc1_.leading = this._textLineSpacing;
                     textField.setTextFormat(_loc1_);
                     textField.alpha = enabled?1:this._disabledTextAlpha;
                 }
@@ -274,6 +337,23 @@ package net.wg.gui.components.controls
                 else
                 {
                     this.removeInfoIco();
+                }
+            }
+            if(textField != null)
+            {
+                if(isInvalid(this.INVALIDATION_MULTILINE))
+                {
+                    textField.multiline = this._multiline;
+                    invalidate(this.INVALIDATION_TEXT_FIELD_HEIGHT);
+                }
+                if(isInvalid(this.INVALIDATION_WORD_WRAP))
+                {
+                    textField.wordWrap = this._wordWrap;
+                    invalidate(this.INVALIDATION_TEXT_FIELD_HEIGHT);
+                }
+                if(isInvalid(this.INVALIDATION_TEXT_FIELD_HEIGHT))
+                {
+                    this.updateTextFieldHeight();
                 }
             }
         }
@@ -310,6 +390,30 @@ package net.wg.gui.components.controls
         override protected function updateAfterStateChange() : void
         {
             super.updateAfterStateChange();
+            invalidate(this.TEXT_FORMAT_INV,this.INVALIDATION_MULTILINE,this.INVALIDATION_WORD_WRAP);
+        }
+        
+        override protected function preInitialize() : void
+        {
+            super.preInitialize();
+            if(constraints != null)
+            {
+                constraints.scaleMode = ConstrainMode.REFLOW;
+            }
+        }
+        
+        public function get textLineSpacing() : Number
+        {
+            return this._textLineSpacing;
+        }
+        
+        public function set textLineSpacing(param1:Number) : void
+        {
+            if(this._textLineSpacing == param1)
+            {
+                return;
+            }
+            this._textLineSpacing = param1;
             invalidate(this.TEXT_FORMAT_INV);
         }
     }

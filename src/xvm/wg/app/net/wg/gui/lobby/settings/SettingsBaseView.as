@@ -20,6 +20,8 @@ package net.wg.gui.lobby.settings
         
         protected var _viewId:String = "";
         
+        protected var headDependedControls:Vector.<String> = null;
+        
         override protected function configUI() : void
         {
             super.configUI();
@@ -48,6 +50,7 @@ package net.wg.gui.lobby.settings
                     {
                         _loc4_ = this[param1 + SettingsConfig.TYPE_LABEL];
                         _loc4_.text = _loc3_;
+                        _loc4_.visible = true;
                     }
                     else
                     {
@@ -70,12 +73,43 @@ package net.wg.gui.lobby.settings
             this._data = param1.data;
             if(this.initialized)
             {
+                this.headDependedControls = new Vector.<String>();
                 this.setData(this._data);
             }
         }
         
         protected function setData(param1:Object) : void
         {
+            this.initDependedControls();
+        }
+        
+        private function initDependedControls() : void
+        {
+            this.headDependedControls.forEach(this.updateDependedControl);
+        }
+        
+        protected function updateDependedControl(param1:String) : void
+        {
+        }
+        
+        protected final function findSelectedIndexForDD(param1:Number, param2:Array) : Number
+        {
+            var _loc4_:* = undefined;
+            var _loc3_:Number = 0;
+            if((param2) && param2.length > 0)
+            {
+                _loc4_ = 0;
+                while(_loc4_ < param2.length)
+                {
+                    if((param2[_loc4_].hasOwnProperty("data")) && param1 == param2[_loc4_].data)
+                    {
+                        _loc3_ = _loc4_;
+                        break;
+                    }
+                    _loc4_++;
+                }
+            }
+            return _loc3_;
         }
         
         public function updateDependentData() : void
@@ -85,6 +119,11 @@ package net.wg.gui.lobby.settings
         override protected function onDispose() : void
         {
             super.onDispose();
+            while(this.headDependedControls.length)
+            {
+                this.headDependedControls.pop();
+            }
+            this.headDependedControls = null;
             this._data = null;
             this._viewId = null;
         }

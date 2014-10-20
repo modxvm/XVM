@@ -2,6 +2,8 @@ package net.wg.gui.prebattle.company
 {
     import net.wg.gui.prebattle.meta.impl.CompanyMainWindowMeta;
     import net.wg.gui.prebattle.meta.ICompanyMainWindowMeta;
+    import net.wg.infrastructure.base.interfaces.IWindow;
+    import net.wg.gui.components.windows.WindowEvent;
     import net.wg.infrastructure.events.FocusRequestEvent;
     import net.wg.infrastructure.interfaces.entity.IFocusContainer;
     import net.wg.gui.rally.events.RallyViewsEvent;
@@ -16,19 +18,39 @@ package net.wg.gui.prebattle.company
         public function CompanyMainWindow()
         {
             super();
+            canMinimize = true;
+            showWindowBgForm = false;
+        }
+        
+        override public function setWindow(param1:IWindow) : void
+        {
+            if(window)
+            {
+                window.removeEventListener(WindowEvent.SCALE_X_CHANGED,this.onScaleChanged);
+                window.removeEventListener(WindowEvent.SCALE_Y_CHANGED,this.onScaleChanged);
+            }
+            super.setWindow(param1);
+            if(window)
+            {
+                window.addEventListener(WindowEvent.SCALE_X_CHANGED,this.onScaleChanged,false,0,true);
+                window.addEventListener(WindowEvent.SCALE_Y_CHANGED,this.onScaleChanged,false,0,true);
+            }
         }
         
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            canMinimize = true;
-            showWindowBgForm = false;
             addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler,false,0,true);
         }
         
         override protected function onDispose() : void
         {
             removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+            if(window)
+            {
+                window.removeEventListener(WindowEvent.SCALE_X_CHANGED,this.onScaleChanged);
+                window.removeEventListener(WindowEvent.SCALE_Y_CHANGED,this.onScaleChanged);
+            }
             super.onDispose();
         }
         
@@ -81,6 +103,18 @@ package net.wg.gui.prebattle.company
         {
             window.setTitleIcon(param2);
             window.title = param1;
+        }
+        
+        private function onScaleChanged(param1:WindowEvent) : void
+        {
+            if(param1.type == WindowEvent.SCALE_X_CHANGED)
+            {
+                window.width = param1.prevValue;
+            }
+            else
+            {
+                window.height = param1.prevValue;
+            }
         }
     }
 }

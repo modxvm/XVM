@@ -4,6 +4,8 @@ package net.wg.gui.lobby.tankman
     import net.wg.infrastructure.interfaces.IViewStackContent;
     import net.wg.gui.components.carousels.AchievementCarousel;
     import flash.display.MovieClip;
+    import net.wg.gui.components.controls.UILoaderAlt;
+    import flash.text.TextField;
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.components.carousels.CarouselBase;
     import flash.display.InteractiveObject;
@@ -14,30 +16,25 @@ package net.wg.gui.lobby.tankman
         public function PersonalCaseStats()
         {
             super();
+            this.firstIcon.source = RES_ICONS.MAPS_ICONS_LIBRARY_PREM_SMALL_ICON;
+            this.secondIcon.source = RES_ICONS.MAPS_ICONS_LIBRARY_PREM_CHECKBOX;
         }
         
-        public var blocksArea:PersonalCaseBlocksArea;
+        public var blocksArea:PersonalCaseBlocksArea = null;
         
-        public var achievements:AchievementCarousel;
+        public var achievements:AchievementCarousel = null;
         
-        public var achivsBg:MovieClip;
+        public var achivsBg:MovieClip = null;
         
-        private var data:Object;
+        public var firstIcon:UILoaderAlt = null;
         
-        override protected function onDispose() : void
-        {
-            super.onDispose();
-            if(this.achievements)
-            {
-                this.achievements.dispose();
-                this.achievements = null;
-            }
-            if(this.blocksArea)
-            {
-                this.blocksArea.dispose();
-                this.blocksArea = null;
-            }
-        }
+        public var firstMsg:TextField = null;
+        
+        public var secondIcon:UILoaderAlt = null;
+        
+        public var secondMsg:TextField = null;
+        
+        private var data:Object = null;
         
         public function update(param1:Object) : void
         {
@@ -53,6 +50,8 @@ package net.wg.gui.lobby.tankman
                 this.achivsBg.visible = false;
             }
             this.blocksArea.setData(param1.stats);
+            this.firstMsg.htmlText = param1.firstMsg;
+            this.secondMsg.htmlText = param1.secondMsg;
         }
         
         public function getComponentForFocus() : InteractiveObject
@@ -60,15 +59,38 @@ package net.wg.gui.lobby.tankman
             return null;
         }
         
+        public function canShowAutomatically() : Boolean
+        {
+            return true;
+        }
+        
+        override protected function onDispose() : void
+        {
+            this.achivsBg = null;
+            this.firstMsg = null;
+            this.secondMsg = null;
+            this.firstIcon.dispose();
+            this.firstIcon = null;
+            this.secondIcon.dispose();
+            this.secondIcon = null;
+            if(this.achievements)
+            {
+                this.achievements.dispose();
+                this.achievements = null;
+            }
+            if(this.blocksArea)
+            {
+                this.blocksArea.dispose();
+                this.blocksArea = null;
+            }
+            this.data = null;
+            super.onDispose();
+        }
+        
         override protected function configUI() : void
         {
             super.configUI();
             this.achievements.visible = false;
-        }
-        
-        public function canShowAutomatically() : Boolean
-        {
-            return true;
         }
     }
 }

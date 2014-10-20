@@ -9,6 +9,7 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.lobby.hangar.data.HangarParamVO;
     import scaleform.clik.interfaces.IDataProvider;
     import net.wg.utils.IHelpLayout;
+    import flash.geom.Rectangle;
     import net.wg.data.constants.Directions;
     import scaleform.clik.data.DataProvider;
     
@@ -26,6 +27,10 @@ package net.wg.gui.lobby.hangar
         private var paramsListeners:ParamsListener = null;
         
         private var _helpLayout:DisplayObject;
+        
+        private var _helpLayoutX:Number = 0;
+        
+        private var _helpLayoutW:Number = 0;
         
         override protected function setValues(param1:HangarParamsVO) : void
         {
@@ -47,19 +52,26 @@ package net.wg.gui.lobby.hangar
             this.list.invalidateData();
         }
         
-        public function showHelpLayout() : void
+        public function showHelpLayoutEx(param1:Number, param2:Number) : void
         {
-            var _loc4_:* = NaN;
-            var _loc5_:TankParam = null;
+            this._helpLayoutX = param1;
+            this._helpLayoutW = param2;
+            this.showHelpLayout();
+        }
+        
+        public function getHelpLayoutWidth() : Number
+        {
+            var _loc2_:* = NaN;
+            var _loc3_:TankParam = null;
             var _loc1_:Number = 0;
             if((this.list) && this.list.dataProvider.length > 0)
             {
-                _loc4_ = 0;
-                while(_loc4_ < this.list.dataProvider.length)
+                _loc2_ = 0;
+                while(_loc2_ < this.list.dataProvider.length)
                 {
-                    _loc5_ = this.list.getRendererAt(_loc4_) as TankParam;
-                    _loc1_ = Math.max(_loc1_,_loc5_.tfField.width + _loc5_.paramField.textWidth);
-                    _loc4_++;
+                    _loc3_ = this.list.getRendererAt(_loc2_) as TankParam;
+                    _loc1_ = Math.max(_loc1_,_loc3_.tfField.width + _loc3_.paramField.textWidth);
+                    _loc2_++;
                 }
                 _loc1_ = _loc1_ + 15;
             }
@@ -67,9 +79,15 @@ package net.wg.gui.lobby.hangar
             {
                 _loc1_ = _width;
             }
-            var _loc2_:IHelpLayout = App.utils.helpLayout;
-            var _loc3_:Object = _loc2_.getProps(_loc1_ ^ 0,_height,Directions.LEFT,LOBBY_HELP.HANGAR_VEHICLE_PARAMETERS,_width - _loc1_ ^ 0,0,_loc2_.defConnectorLength);
-            this._helpLayout = _loc2_.create(root,_loc3_,this);
+            return _loc1_;
+        }
+        
+        public function showHelpLayout() : void
+        {
+            var _loc1_:IHelpLayout = App.utils.helpLayout;
+            var _loc2_:Rectangle = new Rectangle(this.list.x + this.list.width - this._helpLayoutW,0,this._helpLayoutW,this.list.rowHeight * this.list.dataProvider.length);
+            var _loc3_:Object = _loc1_.getProps(_loc2_,LOBBY_HELP.HANGAR_VEHICLE_PARAMETERS,Directions.RIGHT);
+            this._helpLayout = _loc1_.create(root,_loc3_,this);
         }
         
         public function closeHelpLayout() : void

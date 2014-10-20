@@ -1,16 +1,15 @@
 package net.wg.gui.lobby.hangar.tcarousel.data
 {
+    import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.gui.components.controls.VO.ActionPriceVO;
     
-    public class VehicleCarouselVO extends Object
+    public class VehicleCarouselVO extends DAAPIDataClass
     {
         
-        public function VehicleCarouselVO()
+        public function VehicleCarouselVO(param1:Object)
         {
-            super();
+            super(param1);
         }
-        
-        public var data:Number = -1;
         
         public var id:Number = 0;
         
@@ -28,7 +27,7 @@ package net.wg.gui.lobby.hangar.tcarousel.data
         
         public var stateLevel:String = "";
         
-        public var type:String = "";
+        public var tankType:String = "";
         
         public var exp:Number = 0;
         
@@ -50,6 +49,8 @@ package net.wg.gui.lobby.hangar.tcarousel.data
         
         public var enabled:Boolean = false;
         
+        public var rentLeft:String = "";
+        
         public var empty:Boolean = false;
         
         public var buyTank:Boolean = false;
@@ -62,33 +63,14 @@ package net.wg.gui.lobby.hangar.tcarousel.data
         
         public var availableSlots:Number = 0;
         
-        public function parsObj(param1:Object) : Number
+        override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
-            var _loc2_:String = null;
-            for(_loc2_ in param1)
+            if(param1 == "slotPriceActionData" && (param2))
             {
-                if(!(this[_loc2_] == undefined) && typeof this[_loc2_] == typeof param1[_loc2_])
-                {
-                    if(_loc2_ == "slotPriceActionData" && (param1[_loc2_]))
-                    {
-                        this.slotPriceActionData = new ActionPriceVO(param1[_loc2_]);
-                    }
-                    else
-                    {
-                        this[_loc2_] = param1[_loc2_];
-                    }
-                }
-                else if(_loc2_ == "tankType")
-                {
-                    this["type"] = param1[_loc2_];
-                }
-                else
-                {
-                    DebugUtils.LOG_WARNING("CarouselVehicleVO parsObj(data): VO has\'t property " + _loc2_ + " or properties have different types");
-                }
-                
+                this.slotPriceActionData = new ActionPriceVO(param2);
+                return false;
             }
-            return this.compactDescr;
+            return true;
         }
     }
 }

@@ -2,7 +2,7 @@ package net.wg.gui.lobby.hangar
 {
     import net.wg.infrastructure.base.meta.impl.HangarMeta;
     import net.wg.gui.lobby.hangar.interfaces.IHangar;
-    import net.wg.gui.components.controls.IconButton;
+    import net.wg.gui.components.controls.CrewOperationBtn;
     import net.wg.gui.lobby.hangar.crew.Crew;
     import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
     import net.wg.gui.lobby.hangar.ammunitionPanel.AmmunitionPanel;
@@ -33,9 +33,9 @@ package net.wg.gui.lobby.hangar
         
         private static var CAROUSEL_AMMUNITION_PADDING:int = 7;
         
-        private static var PARAMS_RIGHT_MARGIN:int = 0;
+        private static var PARAMS_RIGHT_MARGIN:int = 7;
         
-        private static var RESEARCH_PANEL_RIGHT_MARGIN:int = 290;
+        private static var RESEARCH_PANEL_RIGHT_MARGIN:int = 304;
         
         private static var MESSENGER_BAR_PADDING:int = 45;
         
@@ -47,7 +47,7 @@ package net.wg.gui.lobby.hangar
         
         public var tmenXpPanel:TmenXpPanel;
         
-        public var crewOperationBtn:IconButton;
+        public var crewOperationBtn:CrewOperationBtn;
         
         public var crew:Crew;
         
@@ -135,11 +135,10 @@ package net.wg.gui.lobby.hangar
             this.carousel.enabled = param1;
         }
         
-        public function as_setupAmmunitionPanel(param1:String, param2:String, param3:Boolean, param4:Boolean) : void
+        public function as_setupAmmunitionPanel(param1:Boolean, param2:Boolean) : void
         {
-            this.ammunitionPanel.setVehicleStatus(param1,param2);
-            this.ammunitionPanel.disableAmmunitionPanel(!param3);
-            this.ammunitionPanel.disableTuningButton(!param4);
+            this.ammunitionPanel.disableAmmunitionPanel(!param1);
+            this.ammunitionPanel.disableTuningButton(!param2);
         }
         
         public function as_setControlsVisible(param1:Boolean) : void
@@ -154,16 +153,14 @@ package net.wg.gui.lobby.hangar
         
         public function as_showHelpLayout() : void
         {
+            var _loc1_:* = NaN;
+            var _loc2_:* = NaN;
             if(!this._isShowHelpLayout)
             {
                 this._isShowHelpLayout = true;
                 if(this.crew.visible)
                 {
                     this.crew.showHelpLayout();
-                }
-                if(this.params.visible)
-                {
-                    this.params.showHelpLayout();
                 }
                 if(this.ammunitionPanel.visible)
                 {
@@ -173,9 +170,24 @@ package net.wg.gui.lobby.hangar
                 {
                     this.carousel.showHelpLayout();
                 }
+                if(this.questsControl.visible)
+                {
+                    this.questsControl.showHelpLayout();
+                }
+                if(this.crewOperationBtn.visible)
+                {
+                    _loc2_ = this.crewOperationBtn.width;
+                    _loc2_ = _loc2_ + (this.tmenXpPanel.panelVisible?this.tmenXpPanel.width:0);
+                    this.crewOperationBtn.showHelpLayoutEx(1,_loc2_);
+                }
+                _loc1_ = Math.max(this.params.getHelpLayoutWidth(),this.vehResearchPanel.getHelpLayoutWidth());
+                if(this.params.visible)
+                {
+                    this.params.showHelpLayoutEx(this.vehResearchPanel.x - this.params.x,_loc1_);
+                }
                 if(this.vehResearchPanel.visible)
                 {
-                    this.vehResearchPanel.showHelpLayout();
+                    this.vehResearchPanel.showHelpLayoutEx(this.params.x - this.vehResearchPanel.x,_loc1_);
                 }
             }
         }
@@ -190,6 +202,8 @@ package net.wg.gui.lobby.hangar
                 this.params.closeHelpLayout();
                 this.ammunitionPanel.closeHelpLayout();
                 this.carousel.closeHelpLayout();
+                this.questsControl.closeHelpLayout();
+                this.crewOperationBtn.closeHelpLayout();
                 this.vehResearchPanel.closeHelpLayout();
             }
         }
@@ -291,6 +305,7 @@ package net.wg.gui.lobby.hangar
                 App.gameInputMgr.setKeyHandler(Keyboard.F2,KeyboardEvent.KEY_UP,this.toggleGUIEditorHandler,true);
             }
             this.crewOperationBtn.tooltip = CREW_OPERATIONS.CREWOPERATIONS_BTN_TOOLTIP;
+            this.crewOperationBtn.helpText = LOBBY_HELP.HANGAR_CREWOPERATIONBTN;
             this.crewOperationBtn.addEventListener(ButtonEvent.CLICK,this.retrainBtnClickHandler,false,0,true);
             this.crewOperationBtn.iconSource = RES_ICONS.MAPS_ICONS_TANKMEN_CREW_CREWOPERATIONS;
         }

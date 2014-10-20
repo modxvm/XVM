@@ -211,7 +211,8 @@ package net.wg.gui.lobby.customization
                     "section":_loc5_,
                     "data":_loc5_ + this.SECTION_VIEW,
                     "linkage":_loc4_.linkage,
-                    "enabled":_loc4_.enabled
+                    "enabled":_loc4_.enabled,
+                    "showNewMarker":_loc4_.showNewMarker
                 });
                 this._priceDataProvider.push({"label":_loc4_.priceLabel,
                 "section":_loc5_,
@@ -355,12 +356,25 @@ setFocus(this.closeButton);
 
 override protected function onDispose() : void
 {
+this.background = null;
+this.titleBtn.dispose();
+this.titleBtn = null;
+this.totalCreditsField.dispose();
+this.totalCreditsField = null;
+this.totalGoldField.dispose();
+this.totalGoldField = null;
 App.stage.dispatchEvent(new LobbyEvent(LobbyEvent.UNREGISTER_DRAGGING));
 this.windowCloseButton.removeEventListener(ButtonEvent.CLICK,this.onWindowClose);
+this.windowCloseButton.dispose();
+this.windowCloseButton = null;
 this.closeButton.removeEventListener(ButtonEvent.CLICK,this.onWindowClose);
+this.closeButton.dispose();
+this.closeButton = null;
 this.applyButton.removeEventListener(ButtonEvent.CLICK,this.onClickApplyButton);
+this.applyButton.dispose();
+this.applyButton = null;
 this.accordion.removeEventListener(IndexEvent.INDEX_CHANGE,this.onViewChange);
-this.accordion.addEventListener(MouseEvent.CLICK,hideToolTip);
+this.accordion.removeEventListener(MouseEvent.CLICK,hideToolTip);
 this.accordion.removeEventListener(MouseEvent.ROLL_OVER,showToolTip);
 this.accordion.removeEventListener(MouseEvent.ROLL_OUT,hideToolTip);
 this.accordion.dispose();
@@ -368,8 +382,6 @@ this.accordion = null;
 this.priceList.removeEventListener(ListEvent.ITEM_CLICK,this.handleClickPriceItem);
 this.priceList.dispose();
 this.priceList = null;
-this.currentView.dispose();
-this.currentView = null;
 _instance = null;
 this._sectionsDataProvider.cleanUp();
 this._sectionsDataProvider = null;
@@ -393,6 +405,8 @@ this.inscriptionRightRentalPackageDP = null;
 this._sectionsData = null;
 this._selectedSections.splice(0);
 this._selectedSections = null;
+this.currentView.dispose();
+this.currentView = null;
 super.onDispose();
 }
 

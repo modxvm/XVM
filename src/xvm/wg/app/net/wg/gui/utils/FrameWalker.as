@@ -75,7 +75,6 @@ package net.wg.gui.utils
             this._callback = param4;
             if(this._intervalID != -1)
             {
-                trace("Warning! FrameWalker still works");
                 clearInterval(this._intervalID);
                 this._intervalID = -1;
             }
@@ -104,7 +103,6 @@ package net.wg.gui.utils
         {
             if(this._intervalID != -1)
             {
-                trace("Warning! FrameWalker still works");
                 clearInterval(this._intervalID);
                 this._intervalID = -1;
             }

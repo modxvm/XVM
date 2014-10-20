@@ -92,6 +92,8 @@ package net.wg.data.constants
         
         public static var PERSONAL_CASE_BLOCK_ITEM:String = "blockItemsUI";
         
+        public static var VERTICAL_SPLIT_LINE:String = "premSplitLine";
+        
         public static var TOOL_TIP_COMPLEX:String = "ToolTipComplexUI";
         
         public static var SERVICE_MESSAGES_POPUP:String = "ServiceMessagePopUp_UI";
@@ -140,8 +142,6 @@ package net.wg.data.constants
         
         public static var PYTHON_TWEEN:String = "net.wg.data.managers.impl.PythonTween";
         
-        public static var TWEEN_CONSTRUCTION:String = "net.wg.infrastructure.managers.utils.animation.impl.TweenConstruction";
-        
         public static var GLOW_IN_ANIM:String = "GlowInAnimUI";
         
         public static var GLOW_OUT_ANIM:String = "GlowOutAnimUI";
@@ -151,5 +151,7 @@ package net.wg.data.constants
         public static var SHADOW_OUT_ANIM:String = "ShadowOutAnimUI";
         
         public static var PRE_BATTLE_CHANNEL_RENDERER:String = "PreBattleChannelRendererUI";
+        
+        public static var PROGRESS_STEP_RENDERER:String = "ProgressStepRendererUI";
     }
 }

@@ -5,6 +5,8 @@ package net.wg.infrastructure.managers
     import net.wg.infrastructure.interfaces.IContextItem;
     import flash.display.DisplayObject;
     import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
+    import net.wg.data.daapi.ContextMenuVehicleVo;
+    import net.wg.infrastructure.interfaces.IVehicleContextMenuGenerator;
     
     public interface IContextMenuManager extends IDisposable
     {
@@ -13,9 +15,11 @@ package net.wg.infrastructure.managers
         
         function showUserContextMenu(param1:DisplayObject, param2:Object, param3:IUserContextMenuGenerator, param4:Function = null) : IContextMenu;
         
+        function showVehicleContextMenu(param1:DisplayObject, param2:ContextMenuVehicleVo, param3:IVehicleContextMenuGenerator, param4:Function = null) : IContextMenu;
+        
         function hide() : void;
         
-        function vehicleWasInBattle(param1:Number) : Boolean;
+        function getContextMenuVehicleDataByInvCD(param1:Number) : Object;
         
         function canGiveLeadershipTo(param1:Number) : Boolean;
         

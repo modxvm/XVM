@@ -7,8 +7,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import flash.text.TextField;
     import net.wg.gui.components.controls.IconTextButton;
     import net.wg.gui.components.advanced.ShellButton;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.DisplayObject;
     import net.wg.utils.IHelpLayout;
+    import flash.geom.Rectangle;
     import net.wg.data.constants.Directions;
     import net.wg.gui.events.ModuleInfoEvent;
     import net.wg.gui.events.DeviceEvent;
@@ -21,6 +23,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import scaleform.clik.constants.NavigationCode;
     import scaleform.clik.constants.InputValue;
     import scaleform.gfx.MouseEventEx;
+    import net.wg.gui.utils.ComplexTooltipHelper;
     import flash.text.TextFormat;
     
     public class AmmunitionPanel extends AmmunitionPanelMeta implements IHelpLayoutComponent, IAmmunitionPanelMeta
@@ -78,9 +81,15 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         public var historicalOverlay:HistoricalModulesOverlay;
         
+        public var toRent:SoundButtonEx = null;
+        
         private var _modulesHL:DisplayObject;
         
         private var _devicesHL:DisplayObject;
+        
+        private var _shellsHL:DisplayObject;
+        
+        private var _equipmentHL:DisplayObject;
         
         private var _hasTurret:Boolean;
         
@@ -90,17 +99,37 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         private var storeData:Object;
         
+        private var _vehicleStatusId:String = "";
+        
+        private var _vehicleStatusMessage:String = "";
+        
+        private var _vehicleStatusColor:uint = 4813330;
+        
+        private var VEHICLE_STATUS_INVALID:String = "vehicleStatusInvalid";
+        
+        private var VEHICLE_STATUS_RENTAL_IS_OVER:String = "rentalIsOver";
+        
+        private var TO_RENT_LEFT_MARGIN:Number = 10;
+        
         public function showHelpLayout() : void
         {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             var _loc2_:Number = this.radio.x + this.radio.width - this.gun.x;
-            var _loc3_:Object = _loc1_.getProps(_loc2_,this.gun.height,Directions.TOP,LOBBY_HELP.HANGAR_MODULES,this.gun.x,this.gun.y,_loc1_.defConnectorLength);
-            this._modulesHL = _loc1_.create(root,_loc3_,this);
+            var _loc3_:Rectangle = new Rectangle(this.gun.x,this.gun.y,_loc2_,this.gun.height);
+            var _loc4_:Object = _loc1_.getProps(_loc3_,LOBBY_HELP.HANGAR_MODULES,Directions.RIGHT);
+            this._modulesHL = _loc1_.create(root,_loc4_,this);
             _loc2_ = this.optionalDevice3.x + this.optionalDevice3.width - this.optionalDevice1.x;
-            _loc3_ = _loc1_.getProps(_loc2_,this.optionalDevice1.height,Directions.BOTTOM,LOBBY_HELP.HANGAR_OPTIONAL_DEVICES,this.optionalDevice1.x,this.optionalDevice1.y,_loc1_.defConnectorLength);
-            this._devicesHL = _loc1_.create(root,_loc3_,this);
-            this.maitenanceBtn.showHelpLayout();
-            this.tuningBtn.showHelpLayout();
+            var _loc5_:Rectangle = new Rectangle(this.optionalDevice1.x,this.optionalDevice1.y,_loc2_,this.optionalDevice1.height);
+            var _loc6_:Object = _loc1_.getProps(_loc5_,LOBBY_HELP.HANGAR_OPTIONAL_DEVICES,Directions.RIGHT);
+            this._devicesHL = _loc1_.create(root,_loc6_,this);
+            _loc2_ = this.shell3.x + this.shell3.width - this.shell1.x - 10;
+            var _loc7_:Rectangle = new Rectangle(this.shell1.x,this.shell1.y,_loc2_,this.shell1.height - 10);
+            var _loc8_:Object = _loc1_.getProps(_loc7_,LOBBY_HELP.HANGAR_SHELLS,Directions.RIGHT);
+            this._shellsHL = _loc1_.create(root,_loc8_,this);
+            _loc2_ = this.equipment3.x + this.equipment3.width - this.equipment1.x;
+            var _loc9_:Rectangle = new Rectangle(this.equipment1.x,this.equipment1.y,_loc2_,this.equipment1.height);
+            var _loc10_:Object = _loc1_.getProps(_loc9_,LOBBY_HELP.HANGAR_EQUIPMENT,Directions.RIGHT);
+            this._equipmentHL = _loc1_.create(root,_loc10_,this);
         }
         
         public function closeHelpLayout() : void
@@ -108,8 +137,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             _loc1_.destroy(this._modulesHL);
             _loc1_.destroy(this._devicesHL);
-            this.maitenanceBtn.closeHelpLayout();
-            this.tuningBtn.closeHelpLayout();
+            _loc1_.destroy(this._shellsHL);
+            _loc1_.destroy(this._equipmentHL);
         }
         
         public function disableAmmunitionPanel(param1:Boolean) : void
@@ -144,6 +173,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             var _loc1_:DeviceSlot = null;
             var _loc2_:ShellButton = null;
             super.onDispose();
+            this._modulesHL = null;
+            this._devicesHL = null;
+            this._shellsHL = null;
+            this._equipmentHL = null;
             if(this.storeData)
             {
                 this.storeData = null;
@@ -169,9 +202,14 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 this.events.removeEvent(_loc2_,ButtonEvent.CLICK,this.onModuleClick);
                 _loc2_.dispose();
             }
-            this.events = null;
             this.historicalOverlay.dispose();
             this.historicalOverlay = null;
+            this.events.removeEvent(this.toRent,MouseEvent.ROLL_OVER,this.showTooltip);
+            this.events.removeEvent(this.toRent,MouseEvent.ROLL_OUT,this.hideTooltip);
+            this.events.removeEvent(this.toRent,ButtonEvent.CLICK,this.toRentHandler);
+            this.toRent.dispose();
+            this.toRent = null;
+            this.events = null;
         }
         
         public function as_setData(param1:Array, param2:String) : void
@@ -226,7 +264,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.storeData = data;
             try
             {
-                this.__setVehicleStatus(data.stateMsg,this.__stateLevelToColor(data.stateLevel));
                 loaded = 0;
                 i = 0;
                 shellsCount = data.shells.length;
@@ -279,12 +316,12 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.setItemsEnabled(_loc2_,(param1) && (this._panelEnabled));
         }
         
-        public function setVehicleStatus(param1:String, param2:String) : void
+        override protected function draw() : void
         {
-            var param1:String = App.utils.locale.makeString(param1);
-            if((initialized) && param1.length > 0)
+            super.draw();
+            if(isInvalid(this.VEHICLE_STATUS_INVALID))
             {
-                this.__setVehicleStatus(param1,this.__stateLevelToColor(param2));
+                this.__setVehicleStatus(this._vehicleStatusId,this._vehicleStatusMessage,this._vehicleStatusColor);
             }
         }
         
@@ -329,6 +366,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
             this.events.addEvent(App.stage,ModuleInfoEvent.SHOW_INFO,this.onShowModuleInfo);
             this.events.addEvent(App.stage,DeviceEvent.DEVICE_REMOVE,this.onDeviceRemove);
+            this.events.addEvent(this.toRent,MouseEvent.ROLL_OVER,this.showTooltip);
+            this.events.addEvent(this.toRent,MouseEvent.ROLL_OUT,this.hideTooltip);
+            this.events.addEvent(this.toRent,ButtonEvent.CLICK,this.toRentHandler);
         }
         
         private function handleInputTest(param1:InputEvent) : void
@@ -427,6 +467,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         private function showTooltip(param1:MouseEvent) : void
         {
             var _loc2_:String = null;
+            var _loc3_:ComplexTooltipHelper = null;
             if(param1.target == this.maitenanceBtn)
             {
                 _loc2_ = TOOLTIPS.HANGAR_MAINTENANCE;
@@ -435,6 +476,14 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             {
                 _loc2_ = TOOLTIPS.HANGAR_TUNING;
             }
+            else if(param1.target == this.toRent)
+            {
+                _loc3_ = new ComplexTooltipHelper();
+                _loc3_.addBody(TOOLTIPS.HANGAR_STATUS_TORENT,true);
+                App.toolTipMgr.showComplex(_loc3_.make());
+                return;
+            }
+            
             
             App.toolTipMgr.showComplex(_loc2_);
         }
@@ -444,17 +493,19 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             App.toolTipMgr.hide();
         }
         
-        private function __setVehicleStatus(param1:String, param2:uint) : void
+        private function __setVehicleStatus(param1:String, param2:String, param3:uint) : void
         {
-            var _loc3_:TextFormat = null;
+            var _loc4_:TextFormat = null;
             if(this.vehicleStateMsg)
             {
-                this.vehicleStateMsg.text = param1;
-                _loc3_ = this.vehicleStateMsg.getTextFormat();
-                _loc3_.color = param2;
-                this.vehicleStateMsg.setTextFormat(_loc3_);
+                this.vehicleStateMsg.text = param2;
+                _loc4_ = this.vehicleStateMsg.getTextFormat();
+                _loc4_.color = param3;
+                this.vehicleStateMsg.setTextFormat(_loc4_);
                 this.vehicleStateMsg.width = this.vehicleStateMsg.textWidth;
-                this.vehicleStateMsg.x = (width - this.vehicleStateMsg.width) / 2;
+                this.vehicleStateMsg.x = width - this.vehicleStateMsg.width >> 1;
+                this.toRent.visible = param1 == this.VEHICLE_STATUS_RENTAL_IS_OVER;
+                this.toRent.x = this.vehicleStateMsg.x + this.vehicleStateMsg.width + this.TO_RENT_LEFT_MARGIN ^ 0;
             }
         }
         
@@ -487,6 +538,20 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                     _loc3_.enabled = (param2) && (this._hasTurret);
                 }
             }
+        }
+        
+        public function as_updateVehicleStatus(param1:String, param2:String, param3:String) : void
+        {
+            var param2:String = App.utils.locale.makeString(param2);
+            this._vehicleStatusId = param1;
+            this._vehicleStatusMessage = param2;
+            this._vehicleStatusColor = this.__stateLevelToColor(param3);
+            invalidate(this.VEHICLE_STATUS_INVALID);
+        }
+        
+        private function toRentHandler(param1:ButtonEvent) : void
+        {
+            toRentContinueS();
         }
     }
 }

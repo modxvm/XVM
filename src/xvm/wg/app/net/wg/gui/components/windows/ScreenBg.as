@@ -3,6 +3,7 @@ package net.wg.gui.components.windows
     import scaleform.clik.core.UIComponent;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.display.Sprite;
+    import net.wg.gui.components.controls.BitmapFill;
     import scaleform.clik.constants.InvalidationType;
     
     public class ScreenBg extends UIComponent implements IDisposable
@@ -17,9 +18,9 @@ package net.wg.gui.components.windows
         
         public var headerBg:Sprite = null;
         
-        public var bgFx:Sprite = null;
+        public var bitmapFill:BitmapFill = null;
         
-        public var bg:Sprite = null;
+        public var centerFx:Sprite = null;
         
         private var _isShowHeaderBg:Boolean = true;
         
@@ -38,12 +39,13 @@ package net.wg.gui.components.windows
             super.draw();
             if(isInvalid(InvalidationType.SIZE))
             {
-                this.bg.width = _width + 1;
-                this.bg.height = _height + 1;
+                this.bitmapFill.widthFill = _width + 1;
+                this.bitmapFill.heightFill = _height + 1;
+                this.centerFx.width = _width + 1;
+                this.centerFx.height = _height + 1;
                 this.headerBg.x = _width - this.headerBg.width >> 1;
-                this.bgFx.x = _width - this.bgFx.width >> 1;
             }
-            if(isInvalid(InvalidationType.SIZE))
+            if(isInvalid(STATE_INV))
             {
                 this.headerBg.visible = this._isShowHeaderBg;
             }
@@ -67,8 +69,9 @@ package net.wg.gui.components.windows
         override protected function onDispose() : void
         {
             this.headerBg = null;
-            this.bgFx = null;
-            this.bg = null;
+            this.bitmapFill.dispose();
+            this.bitmapFill = null;
+            this.centerFx = null;
             super.onDispose();
         }
     }

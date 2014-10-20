@@ -42,7 +42,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         public static var MEMBER_NAME:String = "userName";
         
-        public static var ROLE:String = "playerRole";
+        public static var ROLE_ID:String = "playerRoleID";
         
         public static var WEEK_MINING:String = "intWeekMining";
         
@@ -66,14 +66,13 @@ package net.wg.gui.lobby.fortifications.windows.impl
             _loc4_.dataSortType = Array.CASEINSENSITIVE;
             _loc1_.push(_loc4_);
             var _loc5_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
-            _loc5_.iconId = ROLE;
+            _loc5_.iconId = ROLE_ID;
             _loc5_.label = FORTIFICATIONS.CLANLISTWINDOW_TABLE_ROLE;
             _loc5_.buttonWidth = 199;
             _loc5_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
             _loc5_.sortOrder = 1;
             _loc5_.textAlign = TextFieldAutoSize.LEFT;
             _loc5_.toolTip = TOOLTIPS.FORTIFICATION_FIXEDPLAYERS_FORTROLE;
-            _loc5_.dataSortType = Array.CASEINSENSITIVE;
             _loc1_.push(_loc5_);
             var _loc6_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
             _loc6_.iconId = WEEK_MINING;

@@ -40,6 +40,12 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         private var players:Vector.<IndicationOfStatus> = null;
         
+        override public function changeButtonsState(param1:Boolean, param2:Boolean) : void
+        {
+            this.buttonsBG.visible = cancelButton.visible = param1;
+            cancelButton.enabled = param1;
+        }
+        
         override protected function updateView() : void
         {
             super.updateView();
@@ -47,24 +53,6 @@ package net.wg.gui.cyberSport.views.autoSearch
             updateTime();
             startTimer();
             this.initPlayersState(model.playersReadiness);
-        }
-        
-        private function initPlayersState(param1:Array) : void
-        {
-            var _loc2_:uint = param1.length;
-            var _loc3_:* = 0;
-            while(_loc3_ < _loc2_)
-            {
-                if(param1[_loc3_] == null)
-                {
-                    this.players[_loc3_].status = IndicationOfStatus.STATUS_LOCKED;
-                }
-                else
-                {
-                    this.players[_loc3_].status = param1[_loc3_]?IndicationOfStatus.STATUS_READY:IndicationOfStatus.STATUS_NORMAL;
-                }
-                _loc3_++;
-            }
         }
         
         override protected function onTimer() : void
@@ -91,6 +79,24 @@ package net.wg.gui.cyberSport.views.autoSearch
         {
             super.cancelButtonOnClick(param1);
             cancelButton.enabled = false;
+        }
+        
+        private function initPlayersState(param1:Array) : void
+        {
+            var _loc2_:uint = param1.length;
+            var _loc3_:* = 0;
+            while(_loc3_ < _loc2_)
+            {
+                if(param1[_loc3_] == null)
+                {
+                    this.players[_loc3_].status = IndicationOfStatus.STATUS_LOCKED;
+                }
+                else
+                {
+                    this.players[_loc3_].status = param1[_loc3_]?IndicationOfStatus.STATUS_READY:IndicationOfStatus.STATUS_NORMAL;
+                }
+                _loc3_++;
+            }
         }
     }
 }

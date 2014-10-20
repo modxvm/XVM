@@ -33,11 +33,21 @@ package net.wg.gui.lobby.store.views
         
         public var brockenChckBx:CheckBox = null;
         
+        public var rentalsChckBx:CheckBox = null;
+        
         override protected function configUI() : void
         {
             super.configUI();
             this.inHangarChkBx.enableDynamicFrameUpdating();
             this.brockenChckBx.enableDynamicFrameUpdating();
+            if(App.globalVarsMgr.isRentalsEnabledS())
+            {
+                this.rentalsChckBx.enableDynamicFrameUpdating();
+            }
+            else
+            {
+                this.rentalsChckBx.visible = false;
+            }
         }
         
         override public function resetTemporaryHandlers() : void
@@ -52,11 +62,25 @@ package net.wg.gui.lobby.store.views
         
         override protected function onFitsArrayRequest() : Array
         {
+            App.globalVarsMgr.isRentalsEnabledS();
+            var _loc1_:Array = null;
             if(getUIName() == STORE_TYPES.SHOP)
             {
-                return [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("inHangar",this.inHangarChkBx)];
+                _loc1_ = [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("inHangar",this.inHangarChkBx)];
+                if(App.globalVarsMgr.isRentalsEnabledS())
+                {
+                    _loc1_.push(new ViewUIElementVO("rentals",this.rentalsChckBx));
+                }
             }
-            return [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("brocken",this.brockenChckBx)];
+            else
+            {
+                _loc1_ = [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("brocken",this.brockenChckBx)];
+                if(App.globalVarsMgr.isRentalsEnabledS())
+                {
+                    _loc1_.push(new ViewUIElementVO("rentals",this.rentalsChckBx));
+                }
+            }
+            return _loc1_;
         }
         
         override protected function getFitsName() : String

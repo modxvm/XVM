@@ -132,6 +132,8 @@ public static var GAMMA:String = "gamma";
 
 public static var VERTICAL_SYNC:String = "vertSync";
 
+public static var TRIPLE_BUFFERED:String = "tripleBuffered";
+
 public static var FOV:String = "fov";
 
 public static var DYNAMIC_FOV:String = "dynamicFov";
@@ -260,7 +262,8 @@ public static var settingsData:Object = {"GameSettings":{"enableOlFilter":new Se
 "colorFilterIntensity":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
 "colorFilterImages":null,
 "fullScreen":new SettingsControlProp(null,null,TYPE_CHECKBOX),
-"vertSync":new SettingsControlProp(null,null,TYPE_CHECKBOX),
+"vertSync":new SettingsControlProp(null,null,TYPE_CHECKBOX,false,false,TRIPLE_BUFFERED),
+"tripleBuffered":new SettingsControlProp(null,null,TYPE_CHECKBOX),
 "isColorBlind":new SettingsControlProp(null,null,TYPE_CHECKBOX),
 "graphicsQuality":new SettingsControlProp(null,null,TYPE_DROPDOWN),
 "RENDER_PIPELINE":new SettingsControlProp(null,null,TYPE_BUTTON_BAR,false),
@@ -287,7 +290,7 @@ public static var settingsData:Object = {"GameSettings":{"enableOlFilter":new Se
 "qualityOrder":null,
 "presets":{}
 },
-"SoundSettings":{"PTT":new SettingsControlProp(null,null,TYPE_KEYINPUT,false,false,"pushToTalk",true),
+"SoundSettings":{"PTT":new SettingsControlProp(null,null,TYPE_KEYINPUT,false,false,PUSH_TO_TALK,true),
 "masterVolume":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
 "musicVolume":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
 "voiceVolume":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),

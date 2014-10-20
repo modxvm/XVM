@@ -9,6 +9,7 @@ package net.wg.gui.components.controls
     import flash.utils.Timer;
     import flash.events.TimerEvent;
     import flash.display.DisplayObject;
+    import scaleform.clik.constants.InvalidationType;
     
     public class SoundListItemRenderer extends ListItemRenderer implements ISoundable
     {
@@ -213,6 +214,15 @@ package net.wg.gui.components.controls
                     setState("kb_release");
                 }
             }
+        }
+        
+        override protected function draw() : void
+        {
+            if((isInvalid(InvalidationType.DATA)) && (data) && (data.hasOwnProperty("enabled")))
+            {
+                this.enabled = data.enabled;
+            }
+            super.draw();
         }
         
         override protected function onDispose() : void

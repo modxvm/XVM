@@ -63,5 +63,12 @@ package net.wg.gui.lobby.customization
             this.curLabel.text = MENU.CUSTOMIZATION_LABELS_EMBLEM_CURRENT;
             this.newLabel.text = MENU.CUSTOMIZATION_LABELS_EMBLEM_NEW;
         }
+        
+        override protected function onDispose() : void
+        {
+            this.curLabel = null;
+            this.newLabel = null;
+            super.onDispose();
+        }
     }
 }

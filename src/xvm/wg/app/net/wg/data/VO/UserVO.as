@@ -25,6 +25,8 @@ package net.wg.data.VO
         
         private var _igrType:int = 0;
         
+        private var _referralType:int = 0;
+        
         public function get accID() : Number
         {
             return this._accID;
@@ -103,6 +105,16 @@ package net.wg.data.VO
         public function get kickId() : Number
         {
             return this._dbID;
+        }
+        
+        public function get referralType() : int
+        {
+            return this._referralType;
+        }
+        
+        public function set referralType(param1:int) : void
+        {
+            this._referralType = param1;
         }
     }
 }

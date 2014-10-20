@@ -434,12 +434,6 @@ package
         
         public static var FORTIFICATION_POPOVER_UPGRADEBTN_DISABLEDBYDESTROY:String = "#tooltips:fortification/popOver/upgradeBtn_DisabledByDestroy";
         
-        public static var HEADERTUTORIAL_BREAKTUTORIAL:String = "#tooltips:headerTutorial/breakTutorial";
-        
-        public static var HEADERTUTORIAL_NEXT:String = "#tooltips:headerTutorial/next";
-        
-        public static var HEADERTUTORIAL_BACK:String = "#tooltips:headerTutorial/back";
-        
         public static var FORTIFICATION_CLANSTATS_PERIODDEFENCE_BATTLES_BATTLESCOUNT:String = "#tooltips:fortification/clanStats/periodDefence/battles/battlesCount";
         
         public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLENAME:String = "#tooltips:fortification/fortClanBattleList/battleName";
@@ -447,6 +441,14 @@ package
         public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLEDATE:String = "#tooltips:fortification/fortClanBattleList/battleDate";
         
         public static var FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME:String = "#tooltips:fortification/fortClanBattleList/battleTime";
+        
+        public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_ENABLED:String = "#tooltips:ReferralManagementWindow/createSquadBtn/enabled";
+        
+        public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_ISOFFLINE:String = "#tooltips:ReferralManagementWindow/createSquadBtn/disabled/isOffline";
+        
+        public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_SQUADISFULL:String = "#tooltips:ReferralManagementWindow/createSquadBtn/disabled/squadIsFull";
+        
+        public static var REFERRALMANAGEMENTWINDOW_TABLE_EXPERIENCE:String = "#tooltips:ReferralManagementWindow/table/experience";
         
         public static var SQUADWINDOW_BATTLETYPEINFO_HEADER:String = SQUADWINDOW_BATTLETYPEINFO + "/header";
         
@@ -505,6 +507,8 @@ package
         public static var ACTIONPRICE_FORACTION:String = "#tooltips:actionPrice/forAction";
         
         public static var ACTIONPRICE_FORACTIONS:String = "#tooltips:actionPrice/forActions";
+        
+        public static var ACTIONPRICE_RENTCOMPENSATION:String = "#tooltips:actionPrice/rentCompensation";
         
         public static var ACTIONPRICE_SELL_HEADER:String = "#tooltips:actionPrice/sell/header";
         
@@ -584,7 +588,11 @@ package
         
         public static var CYBERSPORT_UNITLEVEL_BODY_NOTRECOMMENDED:String = "#tooltips:cyberSport/unitLevel/body/notrecommended";
         
-        public static var CYBERSPORT_UNITLEVEL_BODY_NOTRECOMMENDEDSTATUS:String = "#tooltips:cyberSport/unitLevel/body/notrecommendedStatus";
+        public static var CYBERSPORT_UNITLEVEL_BODY_TOTALLEVEL:String = "#tooltips:cyberSport/unitLevel/body/totalLevel";
+        
+        public static var CYBERSPORT_UNITLEVEL_BODY_MINTOTALLEVELERROR:String = "#tooltips:cyberSport/unitLevel/body/minTotalLevelError";
+        
+        public static var CYBERSPORT_UNITLEVEL_BODY_MAXTOTALLEVELERROR:String = "#tooltips:cyberSport/unitLevel/body/maxTotalLevelError";
         
         public static var CYBERSPORT_UNITLEVEL_BODY_ERROR:String = "#tooltips:cyberSport/unitLevel/body/error";
         
@@ -657,6 +665,10 @@ package
         public static var REDBUTTON_DISABLED_VEHICLE_ROAMING_HEADER:String = "#tooltips:redButton/disabled/vehicle/roaming/header";
         
         public static var REDBUTTON_DISABLED_VEHICLE_ROAMING_BODY:String = "#tooltips:redButton/disabled/vehicle/roaming/body";
+        
+        public static var REDBUTTON_DISABLED_VEHICLE_RENTALSISOVER_HEADER:String = "#tooltips:redButton/disabled/vehicle/rentalsIsOver/header";
+        
+        public static var REDBUTTON_DISABLED_VEHICLE_RENTALSISOVER_BODY:String = "#tooltips:redButton/disabled/vehicle/rentalsIsOver/body";
         
         public static var REDBUTTON_DISABLED_VEHICLE_NOT_SUPPORTED_HEADER:String = "#tooltips:redButton/disabled/vehicle/not_supported/header";
         
@@ -843,6 +855,8 @@ package
         public static var HANGAR_MENU_HEADER:String = "#tooltips:hangar/menu/header";
         
         public static var HANGAR_MENU_BODY:String = "#tooltips:hangar/menu/body";
+        
+        public static var HANGAR_STATUS_TORENT:String = "#tooltips:hangar/status/toRent";
         
         public static var HANGAR_CREW_ASSIGNEDTO:String = "#tooltips:hangar/crew/assignedTo";
         
@@ -1086,6 +1100,10 @@ package
         
         public static var LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_RIGHT_BODY:String = LOBY_MESSENGER_NEW_CHANNELS_CAROUSEL_BUTTON_RIGHT + "/body";
         
+        public static var LOBBY_MESSENGER_REFERRAL_BODY:String = "#tooltips:lobby_messenger/referral/body";
+        
+        public static var LOBBY_MESSENGER_REFERRER_BODY:String = "#tooltips:lobby_messenger/referrer/body";
+        
         public static var TRAINING_CREATE_INVITES_CHECKBOX_HEADER:String = TRAINING_CREATE_INVITES_CHECKBOX + "/header";
         
         public static var TRAINING_CREATE_INVITES_CHECKBOX_BODY:String = TRAINING_CREATE_INVITES_CHECKBOX + "/body";
@@ -1310,6 +1328,8 @@ package
         
         public static var VEHICLE_ACTION_PRC:String = "#tooltips:vehicle/action_prc";
         
+        public static var VEHICLE_MINRENTALSPRICE:String = "#tooltips:vehicle/minRentalsPrice";
+        
         public static var VEHICLE_BUY_PRICE_ACTION:String = "#tooltips:vehicle/buy_price_action";
         
         public static var VEHICLE_SELL_PRICE:String = "#tooltips:vehicle/sell_price";
@@ -1331,6 +1351,10 @@ package
         public static var VEHICLE_RADIODISTANCE:String = "#tooltips:vehicle/radioDistance";
         
         public static var VEHICLE_TEXTDELIMITER_OR:String = "#tooltips:vehicle/textDelimiter/or";
+        
+        public static var VEHICLE_RENTLEFT_DAYS:String = "#tooltips:vehicle/rentLeft/days";
+        
+        public static var VEHICLE_RENTLEFT_HOURS:String = "#tooltips:vehicle/rentLeft/hours";
         
         public static var BUYSKILL_FULLY:String = "#tooltips:buySkill/fully";
         
@@ -1371,6 +1395,8 @@ package
         public static var VEHICLESTATUS_BATTLE_HEADER:String = "#tooltips:vehicleStatus/battle/header";
         
         public static var VEHICLESTATUS_LOCKED_HEADER:String = "#tooltips:vehicleStatus/locked/header";
+        
+        public static var VEHICLESTATUS_RENTALISOVER_HEADER:String = "#tooltips:vehicleStatus/rentalIsOver/header";
         
         public static var VEHICLESTATUS_INPREBATTLE_HEADER:String = "#tooltips:vehicleStatus/inPrebattle/header";
         
@@ -2354,18 +2380,6 @@ package
         
         public static var FORTIFICATION_FORTCREATEDIRWIN_NEWDIRBTN_DISABLEDBYPLAYERS_BODY:String = "#tooltips:fortification/fortCreateDirWin/newDirBtn/disabledByPlayers/body";
         
-        public static var HEADERTUTORIAL_BREAKTUTORIAL_HEADER:String = HEADERTUTORIAL_BREAKTUTORIAL + "/header";
-        
-        public static var HEADERTUTORIAL_BREAKTUTORIAL_BODY:String = HEADERTUTORIAL_BREAKTUTORIAL + "/body";
-        
-        public static var HEADERTUTORIAL_NEXT_HEADER:String = HEADERTUTORIAL_NEXT + "/header";
-        
-        public static var HEADERTUTORIAL_NEXT_BODY:String = HEADERTUTORIAL_NEXT + "/body";
-        
-        public static var HEADERTUTORIAL_BACK_HEADER:String = HEADERTUTORIAL_BACK + "/header";
-        
-        public static var HEADERTUTORIAL_BACK_BODY:String = HEADERTUTORIAL_BACK + "/body";
-        
         public static var FORTIFICATION_FORTBUILDINGCARDPOPOVER_MAPINFO_HEADER:String = "#tooltips:fortification/fortBuildingCardPopover/mapInfo/header";
         
         public static var FORTIFICATION_FORTBUILDINGCARDPOPOVER_MAPINFO_BODY:String = "#tooltips:fortification/fortBuildingCardPopover/mapInfo/body";
@@ -2373,6 +2387,74 @@ package
         public static var FORTIFICATION_FORTBUILDINGCARDPOPOVER_MAPINFO_NOBATTLE_HEADER:String = "#tooltips:fortification/fortBuildingCardPopover/mapInfo/noBattle/header";
         
         public static var FORTIFICATION_FORTBUILDINGCARDPOPOVER_MAPINFO_NOBATTLE_BODY:String = "#tooltips:fortification/fortBuildingCardPopover/mapInfo/noBattle/body";
+        
+        public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_ENABLED_HEADER:String = REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_ENABLED + "/header";
+        
+        public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_ENABLED_BODY:String = REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_ENABLED + "/body";
+        
+        public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_ISOFFLINE_HEADER:String = REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_ISOFFLINE + "/header";
+        
+        public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_ISOFFLINE_BODY:String = REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_ISOFFLINE + "/body";
+        
+        public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_SQUADISFULL_HEADER:String = REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_SQUADISFULL + "/header";
+        
+        public static var REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_SQUADISFULL_BODY:String = REFERRALMANAGEMENTWINDOW_CREATESQUADBTN_DISABLED_SQUADISFULL + "/body";
+        
+        public static var REFERRALMANAGEMENTWINDOW_TABLE_EXPERIENCE_HEADER:String = REFERRALMANAGEMENTWINDOW_TABLE_EXPERIENCE + "/header";
+        
+        public static var REFERRALMANAGEMENTWINDOW_TABLE_EXPERIENCE_BODY:String = REFERRALMANAGEMENTWINDOW_TABLE_EXPERIENCE + "/body";
+        
+        public static var TOOLTIPREFSYSAWARDS_TITLE_GENERAL:String = "#tooltips:ToolTipRefSysAwards/title/general";
+        
+        public static var TOOLTIPREFSYSAWARDS_TITLE_CREDITS:String = "#tooltips:ToolTipRefSysAwards/title/credits";
+        
+        public static var TOOLTIPREFSYSAWARDS_TITLE_TANKMAN:String = "#tooltips:ToolTipRefSysAwards/title/tankman";
+        
+        public static var TOOLTIPREFSYSAWARDS_TITLE_UNIQUETANK:String = "#tooltips:ToolTipRefSysAwards/title/uniqueTank";
+        
+        public static var TOOLTIPREFSYSAWARDS_INFOBODY_REQUIREMENTS:String = "#tooltips:ToolTipRefSysAwards/infoBody/requirements";
+        
+        public static var TOOLTIPREFSYSAWARDS_INFOBODY_REQUIREMENTS_NOTENOUGHMSG:String = "#tooltips:ToolTipRefSysAwards/infoBody/requirements/notEnoughMsg";
+        
+        public static var TOOLTIPREFSYSAWARDS_INFOBODY_REQUIREMENTS_NOTENOUGH:String = "#tooltips:ToolTipRefSysAwards/infoBody/requirements/notEnough";
+        
+        public static var TOOLTIPREFSYSAWARDS_INFOBODY_CONDITIONS:String = "#tooltips:ToolTipRefSysAwards/infoBody/conditions";
+        
+        public static var TOOLTIPREFSYSAWARDS_INFOBODY_ACCESS:String = "#tooltips:ToolTipRefSysAwards/infoBody/access";
+        
+        public static var TOOLTIPREFSYSAWARDS_INFOBODY_NOTACCESS:String = "#tooltips:ToolTipRefSysAwards/infoBody/notAccess";
+        
+        public static var TOOLTIPREFSYSDESCRIPTION_HEADER_TITLETF:String = "#tooltips:ToolTipRefSysDescription/header/titleTF";
+        
+        public static var TOOLTIPREFSYSDESCRIPTION_HEADER_ACTIONTF:String = "#tooltips:ToolTipRefSysDescription/header/actionTF";
+        
+        public static var TOOLTIPREFSYSDESCRIPTION_HEADER_AWARDSTITLETF:String = "#tooltips:ToolTipRefSysDescription/header/awardsTitleTF";
+        
+        public static var TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_CREDITS:String = "#tooltips:ToolTipRefSysDescription/awards/descr/credits";
+        
+        public static var TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_TANKMAN:String = "#tooltips:ToolTipRefSysDescription/awards/descr/tankman";
+        
+        public static var TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_VEHICLEWITHTANKMEN:String = "#tooltips:ToolTipRefSysDescription/awards/descr/vehicleWithTankmen";
+        
+        public static var TOOLTIPREFSYSDESCRIPTION_BOTTOM_BOTTOMTF:String = "#tooltips:ToolTipRefSysDescription/bottom/bottomTF";
+        
+        public static var TOOLTIPREFSYSXPMULTIPLIER_TITLE:String = "#tooltips:ToolTipRefSysXPMultiplier/title";
+        
+        public static var TOOLTIPREFSYSXPMULTIPLIER_DESCRIPTION:String = "#tooltips:ToolTipRefSysXPMultiplier/description";
+        
+        public static var TOOLTIPREFSYSXPMULTIPLIER_CONDITIONS:String = "#tooltips:ToolTipRefSysXPMultiplier/conditions";
+        
+        public static var TOOLTIPREFSYSXPMULTIPLIER_CONDITIONS_HOURS:String = "#tooltips:ToolTipRefSysXPMultiplier/conditions/hours";
+        
+        public static var TOOLTIPREFSYSXPMULTIPLIER_CONDITIONS_DAYS:String = "#tooltips:ToolTipRefSysXPMultiplier/conditions/days";
+        
+        public static var TOOLTIPREFSYSXPMULTIPLIER_CONDITIONS_OTHER:String = "#tooltips:ToolTipRefSysXPMultiplier/conditions/other";
+        
+        public static var TOOLTIPREFSYSXPMULTIPLIER_BOTTOM:String = "#tooltips:ToolTipRefSysXPMultiplier/bottom";
+        
+        public static var CALENDAR_NEXTMONTH:String = "#tooltips:Calendar/nextMonth";
+        
+        public static var CALENDAR_PREVMONTH:String = "#tooltips:Calendar/prevMonth";
         
         public static var TECHTREEPAGE_NATIONS_ENUM:Array = [TECHTREEPAGE_NATIONS_USSR,TECHTREEPAGE_NATIONS_GERMANY,TECHTREEPAGE_NATIONS_USA,TECHTREEPAGE_NATIONS_CHINA,TECHTREEPAGE_NATIONS_FRANCE,TECHTREEPAGE_NATIONS_UK,TECHTREEPAGE_NATIONS_JAPAN];
         
@@ -2386,9 +2468,11 @@ package
         
         public static var SQUADWINDOW_STATUS_ENUM:Array = [SQUADWINDOW_STATUS_COMMANDER,SQUADWINDOW_STATUS_NORMAL,SQUADWINDOW_STATUS_CANCELED,SQUADWINDOW_STATUS_READY,SQUADWINDOW_STATUS_INBATTLE,SQUADWINDOW_STATUS_LOCKED];
         
+        public static var TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_ENUM:Array = [TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_CREDITS,TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_TANKMAN,TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_VEHICLEWITHTANKMEN];
+        
         public static var LEVEL_ENUM:Array = [LEVEL_1,LEVEL_2,LEVEL_3,LEVEL_4,LEVEL_5,LEVEL_6,LEVEL_7,LEVEL_8,LEVEL_9,LEVEL_10];
         
-        public static var VEHICLE_ENUM:Array = [VEHICLE_GRAPH_NOTES_SHOWCONTEXTMENU,VEHICLE_GRAPH_NOTES_SHOWINFOWINDOW,VEHICLE_GRAPH_NOTES_VEHICLEUNLOCK,VEHICLE_GRAPH_NOTES_MODULEUNLOCK,VEHICLE_GRAPH_NOTES_EQUIP,VEHICLE_GRAPH_NOTES_BUYANDEQUIP,VEHICLE_GRAPH_NOTES_GOTONATIONTREE,VEHICLE_GRAPH_NOTES_GOTONEXTVEHICLE,VEHICLE_GRAPH_BODY_MODULEINSTALLED,VEHICLE_GRAPH_BODY_NOTENOUGH,VEHICLEPARAMS_SPEEDLIMITS,VEHICLEPARAMS_ENGINEPOWER,VEHICLEPARAMS_CHASSISROTATIONSPEED,VEHICLEPARAMS_DAMAGE,VEHICLEPARAMS_HULLARMOR,VEHICLEPARAMS_TURRETARMOR,VEHICLEPARAMS_PIERCINGPOWER,VEHICLE_INVENTORYCOUNT,VEHICLE_VEHICLECOUNT,VEHICLE_LEVEL,VEHICLE_ELITE,VEHICLE_CREW,VEHICLE_AMMO,VEHICLE_XP,VEHICLE_MULTIPLIED_XP,VEHICLE_UNLOCK_PRICE,VEHICLE_BUY_PRICE,VEHICLE_ACTION_PRC,VEHICLE_BUY_PRICE_ACTION,VEHICLE_SELL_PRICE,VEHICLE_EQUIPMENTS,VEHICLE_DEVICES,VEHICLE_FAVORITE,VEHICLE_DAILYXPFACTOR,VEHICLE_SPEEDLIMITS,VEHICLE_DAMAGE,VEHICLE_TURRETROTATIONSPEED,VEHICLE_RADIODISTANCE,VEHICLE_TEXTDELIMITER_OR,VEHICLESTATUS_BATTLE_HEADER,VEHICLESTATUS_LOCKED_HEADER,VEHICLESTATUS_INPREBATTLE_HEADER,VEHICLESTATUS_CLANLOCKED_HEADER,VEHICLESTATUS_AMMONOTFULL_HEADER,VEHICLESTATUS_DAMAGED_HEADER,VEHICLESTATUS_DESTROYED_HEADER,VEHICLESTATUS_EXPLODED_HEADER,VEHICLESTATUS_NOTPRESENT_HEADER,VEHICLESTATUS_UNDAMAGED_HEADER,VEHICLESTATUS_CREWNOTFULL_HEADER,VEHICLESTATUS_NOTUNLOCKED_HEADER,VEHICLESTATUS_INHANGAR_HEADER,VEHICLESTATUS_SERVERRESTRICTION_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_TEXT,VEHICLESTATUS_NOTENOUGHGOLD_HEADER,VEHICLESTATUS_NOTENOUGHGOLD_TEXT,VEHICLESTATUS_NOTSUITABLE_HEADER,VEHICLESELLDIALOG_RENDERER_ALERTICON_HEADER,VEHICLESELLDIALOG_RENDERER_ALERTICON_BODY,VEHICLESELECTOR_FILTER_NATION,VEHICLESELECTOR_FILTER_VEHTYPE,VEHICLESELECTOR_FILTER_VEHLVL,VEHICLESELECTOR_FILTER_MAINVEHICLE,VEHICLESELECTOR_SORTING_NATION_HEADER,VEHICLESELECTOR_SORTING_NATION_BODY,VEHICLESELECTOR_SORTING_VEHTYPE_HEADER,VEHICLESELECTOR_SORTING_VEHTYPE_BODY,VEHICLESELECTOR_SORTING_VEHLVL_HEADER,VEHICLESELECTOR_SORTING_VEHLVL_BODY,VEHICLESELECTOR_SORTING_VEHNAME_HEADER,VEHICLESELECTOR_SORTING_VEHNAME_BODY,VEHICLESELECTOR_OVERFLOWLEVEL_HEADER,VEHICLESELECTOR_OVERFLOWLEVEL_BODY];
+        public static var VEHICLE_ENUM:Array = [VEHICLE_GRAPH_NOTES_SHOWCONTEXTMENU,VEHICLE_GRAPH_NOTES_SHOWINFOWINDOW,VEHICLE_GRAPH_NOTES_VEHICLEUNLOCK,VEHICLE_GRAPH_NOTES_MODULEUNLOCK,VEHICLE_GRAPH_NOTES_EQUIP,VEHICLE_GRAPH_NOTES_BUYANDEQUIP,VEHICLE_GRAPH_NOTES_GOTONATIONTREE,VEHICLE_GRAPH_NOTES_GOTONEXTVEHICLE,VEHICLE_GRAPH_BODY_MODULEINSTALLED,VEHICLE_GRAPH_BODY_NOTENOUGH,VEHICLEPARAMS_SPEEDLIMITS,VEHICLEPARAMS_ENGINEPOWER,VEHICLEPARAMS_CHASSISROTATIONSPEED,VEHICLEPARAMS_DAMAGE,VEHICLEPARAMS_HULLARMOR,VEHICLEPARAMS_TURRETARMOR,VEHICLEPARAMS_PIERCINGPOWER,VEHICLE_INVENTORYCOUNT,VEHICLE_VEHICLECOUNT,VEHICLE_LEVEL,VEHICLE_ELITE,VEHICLE_CREW,VEHICLE_AMMO,VEHICLE_XP,VEHICLE_MULTIPLIED_XP,VEHICLE_UNLOCK_PRICE,VEHICLE_BUY_PRICE,VEHICLE_ACTION_PRC,VEHICLE_MINRENTALSPRICE,VEHICLE_BUY_PRICE_ACTION,VEHICLE_SELL_PRICE,VEHICLE_EQUIPMENTS,VEHICLE_DEVICES,VEHICLE_FAVORITE,VEHICLE_DAILYXPFACTOR,VEHICLE_SPEEDLIMITS,VEHICLE_DAMAGE,VEHICLE_TURRETROTATIONSPEED,VEHICLE_RADIODISTANCE,VEHICLE_TEXTDELIMITER_OR,VEHICLE_RENTLEFT_DAYS,VEHICLE_RENTLEFT_HOURS,VEHICLESTATUS_BATTLE_HEADER,VEHICLESTATUS_LOCKED_HEADER,VEHICLESTATUS_RENTALISOVER_HEADER,VEHICLESTATUS_INPREBATTLE_HEADER,VEHICLESTATUS_CLANLOCKED_HEADER,VEHICLESTATUS_AMMONOTFULL_HEADER,VEHICLESTATUS_DAMAGED_HEADER,VEHICLESTATUS_DESTROYED_HEADER,VEHICLESTATUS_EXPLODED_HEADER,VEHICLESTATUS_NOTPRESENT_HEADER,VEHICLESTATUS_UNDAMAGED_HEADER,VEHICLESTATUS_CREWNOTFULL_HEADER,VEHICLESTATUS_NOTUNLOCKED_HEADER,VEHICLESTATUS_INHANGAR_HEADER,VEHICLESTATUS_SERVERRESTRICTION_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_TEXT,VEHICLESTATUS_NOTENOUGHGOLD_HEADER,VEHICLESTATUS_NOTENOUGHGOLD_TEXT,VEHICLESTATUS_NOTSUITABLE_HEADER,VEHICLESELLDIALOG_RENDERER_ALERTICON_HEADER,VEHICLESELLDIALOG_RENDERER_ALERTICON_BODY,VEHICLESELECTOR_FILTER_NATION,VEHICLESELECTOR_FILTER_VEHTYPE,VEHICLESELECTOR_FILTER_VEHLVL,VEHICLESELECTOR_FILTER_MAINVEHICLE,VEHICLESELECTOR_SORTING_NATION_HEADER,VEHICLESELECTOR_SORTING_NATION_BODY,VEHICLESELECTOR_SORTING_VEHTYPE_HEADER,VEHICLESELECTOR_SORTING_VEHTYPE_BODY,VEHICLESELECTOR_SORTING_VEHLVL_HEADER,VEHICLESELECTOR_SORTING_VEHLVL_BODY,VEHICLESELECTOR_SORTING_VEHNAME_HEADER,VEHICLESELECTOR_SORTING_VEHNAME_BODY,VEHICLESELECTOR_OVERFLOWLEVEL_HEADER,VEHICLESELECTOR_OVERFLOWLEVEL_BODY];
         
         public static var TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_ENUM:Array = [TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_LIGHTTANK,TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_MEDIUMTANK,TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_HEAVYTANK,TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_AT_SPG,TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_SPG];
         
@@ -2441,6 +2525,14 @@ package
             var _loc2_:String = null;
             _loc2_ = "#tooltips:squadWindow/status/" + param1;
             App.utils.asserter.assert(!(SQUADWINDOW_STATUS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
+        
+        public static function tooltiprefsysdescription_awards_descr(param1:String) : String
+        {
+            var _loc2_:String = null;
+            _loc2_ = "#tooltips:ToolTipRefSysDescription/awards/descr/" + param1;
+            App.utils.asserter.assert(!(TOOLTIPREFSYSDESCRIPTION_AWARDS_DESCR_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         

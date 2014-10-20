@@ -15,8 +15,6 @@ package net.wg.infrastructure.managers
         
         function isModalViewsExisting() : Boolean;
         
-        function get loader() : ILoaderManager;
-
         function set loader(param1:ILoaderManager) : void;
         
         function get lastFocusedView() : IView;

@@ -3,6 +3,7 @@ package net.wg.utils
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
+    import flash.geom.Rectangle;
     
     public interface IHelpLayout extends IDisposable
     {
@@ -17,8 +18,6 @@ package net.wg.utils
         
         function destroy(param1:DisplayObject) : void;
         
-        function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number, param7:Number) : Object;
-        
-        function get defConnectorLength() : Number;
+        function getProps(param1:Rectangle, param2:String, param3:String) : Object;
     }
 }

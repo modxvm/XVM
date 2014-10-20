@@ -98,9 +98,9 @@ package net.wg.gui.lobby.battleResults
     
     public var imageSwitcher_mc:MovieClip;
     
-    public var medalsListLeft:MedalsList;
+    public var medalsListLeft:BattleResultsMedalsList;
     
-    public var medalsListRight:MedalsList;
+    public var medalsListRight:BattleResultsMedalsList;
     
     public var xpIcon:MovieClip;
     
@@ -194,6 +194,7 @@ package net.wg.gui.lobby.battleResults
     override protected function configUI() : void
     {
         var _loc2_:Object = null;
+        var _loc3_:Object = null;
         var _loc8_:IUserProps = null;
         var _loc9_:* = false;
         var _loc10_:IFormattedInt = null;
@@ -207,7 +208,7 @@ package net.wg.gui.lobby.battleResults
         var _loc1_:Object = this.myParent.data;
         this.effencyTitle.text = BATTLE_RESULTS.COMMON_BATTLEEFFICIENCY_TITLE;
         _loc2_ = _loc1_.personal;
-        var _loc3_:Object = _loc1_.common;
+        _loc3_ = _loc1_.common;
         var _loc4_:Array = _loc1_.quests as Array;
         var _loc5_:ILocale = App.utils.locale;
         var _loc6_:IFormattedInt = _loc5_.parseFormattedInteger(_loc2_.creditsStr);

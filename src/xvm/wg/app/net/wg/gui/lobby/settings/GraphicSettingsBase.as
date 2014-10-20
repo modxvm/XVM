@@ -62,6 +62,8 @@ package net.wg.gui.lobby.settings
         
         public var vertSyncCheckbox:CheckBox = null;
         
+        public var tripleBufferedCheckbox:CheckBox = null;
+        
         public var aspectRatioLabel:LabelControl = null;
         
         public var aspectRatioDropDown:DropdownMenu = null;
@@ -214,6 +216,7 @@ package net.wg.gui.lobby.settings
             this.refreshRateLabel = this.screenForm.refreshRateLabel;
             this.refreshRateDropDown = this.screenForm.refreshRateDropDown;
             this.vertSyncCheckbox = this.screenForm.vertSyncCheckbox;
+            this.tripleBufferedCheckbox = this.screenForm.tripleBufferedCheckbox;
             this.aspectRatioLabel = this.screenForm.aspectRatioLabel;
             this.aspectRatioDropDown = this.screenForm.aspectRatioDropDown;
             this.smoothingLabel = this.screenForm.smoothingLabel;
@@ -306,6 +309,7 @@ package net.wg.gui.lobby.settings
             this.toolTipMapping[this.smoothingLabel] = SettingsConfig.SMOOTHING;
             this.toolTipMapping[this.fullScreenCheckbox] = SettingsConfig.FULL_SCREEN;
             this.toolTipMapping[this.vertSyncCheckbox] = SettingsConfig.VERTICAL_SYNC;
+            this.toolTipMapping[this.tripleBufferedCheckbox] = SettingsConfig.TRIPLE_BUFFERED;
             this.toolTipMapping[this.isColorBlindCheckbox] = SettingsConfig.IS_COLOR_BLIND;
             this.toolTipMapping[this.gammaSlider] = SettingsConfig.GAMMA;
             this.toolTipMapping[this.gammaLabel] = SettingsConfig.GAMMA;
@@ -396,6 +400,7 @@ package net.wg.gui.lobby.settings
             this.refreshRateLabel = null;
             this.refreshRateDropDown = null;
             this.vertSyncCheckbox = null;
+            this.tripleBufferedCheckbox = null;
             this.aspectRatioLabel = null;
             this.aspectRatioDropDown = null;
             this.smoothingLabel = null;

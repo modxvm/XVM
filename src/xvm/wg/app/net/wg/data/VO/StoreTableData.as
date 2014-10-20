@@ -48,7 +48,9 @@ package net.wg.data.VO
         
         private var _type:String = "";
         
-        private var _disabled:String = "";
+        private var _disabled:Boolean = false;
+        
+        private var _statusMessage:String = "";
         
         private var _statusLevel:String = "";
         
@@ -67,6 +69,8 @@ package net.wg.data.VO
         private var _goldEqsForCredits:Boolean = false;
         
         private var _tableVO:StoreTableVO = null;
+        
+        private var _rentLeft:String = "";
         
         public function get goldEqsForCredits() : Boolean
         {
@@ -253,12 +257,12 @@ package net.wg.data.VO
             this._type = param1;
         }
         
-        public function get disabled() : String
+        public function get disabled() : Boolean
         {
             return this._disabled;
         }
         
-        public function set disabled(param1:String) : void
+        public function set disabled(param1:Boolean) : void
         {
             this._disabled = param1;
         }
@@ -355,6 +359,26 @@ package net.wg.data.VO
         public function set extraModuleInfo(param1:String) : void
         {
             this._extraModuleInfo = param1;
+        }
+        
+        public function get rentLeft() : String
+        {
+            return this._rentLeft;
+        }
+        
+        public function set rentLeft(param1:String) : void
+        {
+            this._rentLeft = param1;
+        }
+        
+        public function get statusMessage() : String
+        {
+            return this._statusMessage;
+        }
+        
+        public function set statusMessage(param1:String) : void
+        {
+            this._statusMessage = param1;
         }
     }
 }

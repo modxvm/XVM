@@ -221,7 +221,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
                 _loc2_.addEventListener(MouseEvent.MOUSE_OVER,this.onLinkTextfieldMouseOverHandler);
                 _loc2_.addEventListener(MouseEvent.MOUSE_OUT,onLinkTextfieldMouseOutHandler);
                 _loc2_.addEventListener(TextEvent.LINK,this.onLinkNavigationHandler);
-                _loc2_.styleSheet = App.utils.styleSheetManager.getYellowHyperlinkCSS();
+                App.utils.styleSheetManager.setLinkStyle(_loc2_);
             }
         }
         

@@ -2,14 +2,15 @@ package net.wg.gui.components.advanced
 {
     import scaleform.clik.core.UIComponent;
     import net.wg.infrastructure.interfaces.IDynamicContent;
+    import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import scaleform.clik.utils.Padding;
     import flash.text.TextField;
     import flash.display.MovieClip;
+    import flash.geom.Rectangle;
     import net.wg.data.constants.Directions;
-    import flash.text.TextFormat;
     import flash.text.TextFieldAutoSize;
-    import flash.text.TextFormatAlign;
     
-    public class HelpLayoutControl extends UIComponent implements IDynamicContent
+    public class HelpLayoutControl extends UIComponent implements IDynamicContent, IDisposable
     {
         
         public function HelpLayoutControl()
@@ -18,56 +19,36 @@ package net.wg.gui.components.advanced
             this.visible = false;
         }
         
-        public var textField:TextField;
+        public static var shadowPaddingOutside:Padding = new Padding(22,22,22,22);
         
-        public var connector:MovieClip;
+        public var textField:TextField;
         
         public var border:MovieClip;
         
         private var _text:String = "";
         
-        private var _direction:String = "T";
+        private var _extensibilityDirection:String = "T";
         
-        private var _borderWidth:Number = 256;
+        private var _rect:Rectangle = null;
         
-        private var _borderHeight:Number = 256;
-        
-        private var _connectorLength:Number = 12;
-        
-        private var TEXT_APP_BORDER_MARGIN:Number = 10;
+        private var INSIDE_PADDING:Number = 6;
         
         override protected function onDispose() : void
         {
             this.textField = null;
-            this.connector = null;
             this.border = null;
             super.onDispose();
         }
         
-        public function get connectorLength() : Number
+        public function set rect(param1:Rectangle) : void
         {
-            return this._connectorLength;
+            this._rect = param1;
         }
         
-        public function set connectorLength(param1:Number) : void
-        {
-            this._connectorLength = param1;
-        }
-        
-        public function set borderWidth(param1:Number) : void
-        {
-            this._borderWidth = param1;
-        }
-        
-        public function set borderHeight(param1:Number) : void
-        {
-            this._borderHeight = param1;
-        }
-        
-        public function set direction(param1:String) : void
+        public function set extensibilityDirection(param1:String) : void
         {
             App.utils.asserter.assert(!(Directions.LAYOUT_DIRECTIONS.indexOf(param1) == -1),"invalid direction: " + param1);
-            this._direction = param1;
+            this._extensibilityDirection = param1;
         }
         
         public function set text(param1:String) : void
@@ -79,104 +60,51 @@ package net.wg.gui.components.advanced
         {
             super.draw();
             scaleX = scaleY = 1;
-            this.border.width = this._borderWidth;
-            this.border.height = this._borderHeight;
-            this.setConnectorPosition();
-            this.setTextFieldPosition();
+            this.invalidPosition();
             super.draw();
             this.visible = true;
         }
         
-        private function setConnectorPosition() : void
-        {
-            if(this.connector == null)
-            {
-                return;
-            }
-            this.connector.height = this._connectorLength;
-            switch(this._direction)
-            {
-                case "T":
-                    this.connector.rotation = 180;
-                    this.connector.x = this._borderWidth >> 1;
-                    this.connector.y = 0;
-                    break;
-                case "R":
-                    this.connector.rotation = -90;
-                    this.connector.x = this._borderWidth;
-                    this.connector.y = (this._borderHeight >> 1) - (this.connector.height >> 1);
-                    break;
-                case "B":
-                    this.connector.x = this._borderWidth >> 1;
-                    this.connector.y = this._borderHeight;
-                    break;
-                case "L":
-                    this.connector.rotation = 90;
-                    this.connector.x = 0;
-                    this.connector.y = (this._borderHeight >> 1) - (this.connector.height >> 1);
-                    break;
-            }
-        }
-        
-        private function setTextFieldPosition() : void
+        private function invalidPosition() : void
         {
             if(this.textField == null)
             {
                 return;
             }
             this.textField.wordWrap = true;
-            var _loc1_:TextFormat = new TextFormat();
-            switch(this._direction)
+            this.textField.autoSize = TextFieldAutoSize.CENTER;
+            this.textField.text = this._text;
+            var _loc1_:Number = this.textField.textWidth + this.INSIDE_PADDING * 2;
+            var _loc2_:Number = this.textField.textHeight + this.INSIDE_PADDING * 2;
+            var _loc3_:Number = Math.max(this._rect.width,_loc1_) ^ 0;
+            var _loc4_:Number = Math.max(this._rect.height,_loc2_) ^ 0;
+            this.border.width = _loc3_ + shadowPaddingOutside.horizontal;
+            this.border.height = _loc4_ + shadowPaddingOutside.vertical;
+            var _loc5_:Number = 0;
+            var _loc6_:Number = 0;
+            switch(this._extensibilityDirection)
             {
                 case "T":
-                    this.textField.autoSize = TextFieldAutoSize.CENTER;
-                    _loc1_.align = TextFormatAlign.CENTER;
-                    this.textField.text = this._text;
-                    this.textField.x = this.getTextXPosForVerticalDirection();
-                    this.textField.y = -(this.connector.height + this.textField.textHeight + 2);
+                    if(_loc4_ > this._rect.height)
+                    {
+                        _loc6_ = this._rect.height - _loc4_ ^ 0;
+                    }
                     break;
                 case "R":
-                    this.textField.autoSize = TextFieldAutoSize.LEFT;
-                    _loc1_.align = TextFormatAlign.LEFT;
-                    this.textField.text = this._text;
-                    this.textField.x = this._borderWidth + this.connector.width;
-                    this.textField.y = (this._borderHeight >> 1) - (this.textField.textHeight >> 1) - 4;
                     break;
                 case "B":
-                    this.textField.autoSize = TextFieldAutoSize.CENTER;
-                    _loc1_.align = TextFormatAlign.CENTER;
-                    this.textField.text = this._text;
-                    this.textField.x = this.getTextXPosForVerticalDirection();
-                    this.textField.y = this._borderHeight + this.connector.height + 2;
                     break;
                 case "L":
-                    this.textField.autoSize = TextFieldAutoSize.RIGHT;
-                    _loc1_.align = TextFormatAlign.RIGHT;
-                    this.textField.text = this._text;
-                    this.textField.x = -(this.connector.width + this.textField.width);
-                    this.textField.y = (this._borderHeight >> 1) - (this.textField.textHeight >> 1) - 4;
+                    if(_loc3_ > this._rect.width)
+                    {
+                        _loc5_ = this._rect.width - _loc3_ ^ 0;
+                    }
                     break;
             }
-            this.textField.setTextFormat(_loc1_);
-        }
-        
-        private function getTextXPosForVerticalDirection() : Number
-        {
-            var _loc1_:Number = 0;
-            if(this.TEXT_APP_BORDER_MARGIN > this.x + (this._borderWidth - this.textField.textWidth >> 1))
-            {
-                _loc1_ = this.TEXT_APP_BORDER_MARGIN + (this.textField.textWidth - this.textField.width >> 1) - this.x;
-            }
-            else if(App.appWidth < this.x + (this._borderWidth + this.textField.textWidth >> 1) + this.TEXT_APP_BORDER_MARGIN)
-            {
-                _loc1_ = App.appWidth - this.x - (this.textField.width + this.textField.textWidth >> 1) - this.TEXT_APP_BORDER_MARGIN;
-            }
-            else
-            {
-                _loc1_ = (this._borderWidth >> 1) - (this.textField.width >> 1);
-            }
-            
-            return _loc1_;
+            this.border.x = _loc5_ - shadowPaddingOutside.left;
+            this.border.y = _loc6_ - shadowPaddingOutside.top;
+            this.textField.x = this.border.x + (this.border.width - this.textField.width >> 1);
+            this.textField.y = this.border.y + (this.border.height - this.textField.height >> 1);
         }
     }
 }

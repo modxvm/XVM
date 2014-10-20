@@ -12,7 +12,7 @@ done
 
 [ "$no_deploy" = "0" ] && ./deploy.sh
 
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT-CT
 CURRENT_DIRECTORY=`pwd`
 
 #SAMPLE_REPLAY=test.wotreplay

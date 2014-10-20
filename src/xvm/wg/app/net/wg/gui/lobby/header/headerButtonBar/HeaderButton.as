@@ -17,6 +17,8 @@ package net.wg.gui.lobby.header.headerButtonBar
     import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
     import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
     import net.wg.data.constants.Tooltips;
+    import net.wg.utils.IHelpLayout;
+    import flash.geom.Rectangle;
     
     public class HeaderButton extends SoundButtonEx implements IPopOverCaller, IClosePopoverCallback
     {
@@ -100,6 +102,7 @@ package net.wg.gui.lobby.header.headerButtonBar
             this.helpText = this._dataVo.helpText;
             this.enabled = this._dataVo.enabled;
             this._content.data = this._dataVo.data;
+            this.separator.visible = this.isShowSeparator;
             this.updateScreen(this._screen,this._wideScreenPrc,this._maxScreenPrc);
         }
         
@@ -252,39 +255,36 @@ package net.wg.gui.lobby.header.headerButtonBar
         
         override public function showHelpLayout() : void
         {
-            var _loc1_:Object = null;
+            var _loc1_:IHelpLayout = null;
+            var _loc2_:Rectangle = null;
+            var _loc3_:Object = null;
             if(helpText.length > 0)
             {
-                _loc1_ = {"borderWidth":this.bounds.width - 1,
-                "borderHeight":this.bounds.height - 2,
-                "direction":helpDirection,
-                "text":helpText,
-                "x":1,
-                "y":1,
-                "connectorLength":helpConnectorLength
-            };
-            setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
+                _loc1_ = App.utils.helpLayout;
+                _loc2_ = new Rectangle(3,2,this.bounds.width - 3,this.bounds.height - 4);
+                _loc3_ = _loc1_.getProps(_loc2_,helpText,helpDirection);
+                setHelpLayout(_loc1_.create(this.root,_loc3_,this));
+            }
         }
-    }
-    
-    public function get isShowSeparator() : Boolean
-    {
-        return this._isShowSeparator;
-    }
-    
-    public function set isShowSeparator(param1:Boolean) : void
-    {
-        if(this._isShowSeparator == param1)
+        
+        public function get isShowSeparator() : Boolean
         {
-            return;
+            return this._isShowSeparator;
         }
-        this._isShowSeparator = param1;
-        isInvalid(this.BTN_CONTENT_INVALID);
+        
+        public function set isShowSeparator(param1:Boolean) : void
+        {
+            if(this._isShowSeparator == param1)
+            {
+                return;
+            }
+            this._isShowSeparator = param1;
+            isInvalid(this.BTN_CONTENT_INVALID);
+        }
+        
+        public function get content() : IHeaderButtonContentItem
+        {
+            return this._content;
+        }
     }
-    
-    public function get content() : IHeaderButtonContentItem
-    {
-        return this._content;
-    }
-}
 }

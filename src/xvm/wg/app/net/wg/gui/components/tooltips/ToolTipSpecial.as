@@ -30,6 +30,10 @@ package net.wg.gui.components.tooltips
         
         public static var ID_HIDDEN_VEHICLE_COUNT:String = "hiddenVehicleCount";
         
+        public static var RENTALS:String = "rentals";
+        
+        public static var MIN_RENTALS_PRICE:String = "minRentalsPrice";
+        
         public static var SKIP_FIELDS:Array = [VehicleBaseVO.DEF_BUY_PRICE,VehicleBaseVO.DEF_SELL_PRICE,VehicleBaseVO.ACTION_PRC];
         
         protected var blockResults:Vector.<ToolTipBlockResultVO> = null;

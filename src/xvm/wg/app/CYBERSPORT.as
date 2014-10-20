@@ -162,11 +162,21 @@ package
         
         public static var WINDOW_UNIT_MESSAGE_READY:String = "#cyberSport:window/unit/message/ready";
         
-        public static var WINDOW_UNIT_MESSAGE_LEVELERROR:String = "#cyberSport:window/unit/message/levelError";
+        public static var WINDOW_UNIT_MESSAGE_MINLEVELERROR:String = "#cyberSport:window/unit/message/minLevelError";
+        
+        public static var WINDOW_UNIT_MESSAGE_MAXLEVELERROR:String = "#cyberSport:window/unit/message/maxLevelError";
         
         public static var WINDOW_UNIT_MESSAGE_WAITCOMMANDER:String = "#cyberSport:window/unit/message/waitCommander";
         
         public static var WINDOW_UNIT_MESSAGE_ALLREADY:String = "#cyberSport:window/unit/message/allReady";
+        
+        public static var WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_UNRESOLVED:String = "#cyberSport:window/unit/message/invalidLevelError/unresolved";
+        
+        public static var WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_6:String = "#cyberSport:window/unit/message/invalidLevelError/6";
+        
+        public static var WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_7:String = "#cyberSport:window/unit/message/invalidLevelError/7";
+        
+        public static var WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_6_7:String = "#cyberSport:window/unit/message/invalidLevelError/6_7";
         
         public static var WINDOW_UNIT_READY:String = "#cyberSport:window/unit/ready";
         
@@ -273,5 +283,18 @@ package
         public static var WINDOW_AUTOSEARCH_ERRORSTATE_CANCELLBL:String = "#cyberSport:window/autoSearch/errorState/cancelLbl";
         
         public static var WINDOW_BACKBTNLBL:String = "#cyberSport:window/backBtnLbl";
+        
+        public static var WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_ENUM:Array = [WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_UNRESOLVED,WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_6,WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_7,WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_6_7];
+        
+        public static function window_unit_message_invalidlevelerror(param1:String) : String
+        {
+            var _loc2_:String = "#cyberSport:window/unit/message/invalidLevelError/" + param1;
+            if(WINDOW_UNIT_MESSAGE_INVALIDLEVELERROR_ENUM.indexOf(_loc2_) == -1)
+            {
+                DebugUtils.LOG_WARNING("[window_unit_message_invalidlevelerror]:locale key \"" + _loc2_ + "\" was not found");
+                return null;
+            }
+            return _loc2_;
+        }
     }
 }

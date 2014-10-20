@@ -163,6 +163,10 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         private function clickHandler(param1:Event) : void
         {
             var _loc2_:FortIntelClanDescriptionEvent = null;
+            if(param1 is MouseEvent && !App.utils.commons.isLeftButton(param1 as MouseEvent))
+            {
+                return;
+            }
             if((this._model) && (this._model.canBeAttacked) && (this._canAttackMode))
             {
                 _loc2_ = new FortIntelClanDescriptionEvent(FortIntelClanDescriptionEvent.ATTACK_DIRECTION,this._model.uid);

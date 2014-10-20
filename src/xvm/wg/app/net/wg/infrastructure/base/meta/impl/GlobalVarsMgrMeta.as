@@ -17,8 +17,6 @@ package net.wg.infrastructure.base.meta.impl
         
         public var isShowServerStats:Function = null;
         
-        public var isShowServersList:Function = null;
-        
         public var isChina:Function = null;
         
         public var isKorea:Function = null;
@@ -45,6 +43,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var isShowTicker:Function = null;
         
+        public var isRentalsEnabled:Function = null;
+        
         public function isDevelopmentS() : Boolean
         {
             App.utils.asserter.assertNotNull(this.isDevelopment,"isDevelopment" + Errors.CANT_NULL);
@@ -61,12 +61,6 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.isShowServerStats,"isShowServerStats" + Errors.CANT_NULL);
             return this.isShowServerStats();
-        }
-        
-        public function isShowServersListS() : Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isShowServersList,"isShowServersList" + Errors.CANT_NULL);
-            return this.isShowServersList();
         }
         
         public function isChinaS() : Boolean
@@ -145,6 +139,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.isShowTicker,"isShowTicker" + Errors.CANT_NULL);
             return this.isShowTicker();
+        }
+        
+        public function isRentalsEnabledS() : Boolean
+        {
+            App.utils.asserter.assertNotNull(this.isRentalsEnabled,"isRentalsEnabled" + Errors.CANT_NULL);
+            return this.isRentalsEnabled();
         }
     }
 }

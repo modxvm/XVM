@@ -12,6 +12,8 @@ package net.wg.infrastructure.managers.impl
     import flash.events.Event;
     import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
     import net.wg.data.daapi.PlayerInfo;
+    import net.wg.data.daapi.ContextMenuVehicleVo;
+    import net.wg.infrastructure.interfaces.IVehicleContextMenuGenerator;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     
     public class ContextMenuManager extends ContextMenuManagerMeta implements IContextMenuManager
@@ -65,14 +67,16 @@ package net.wg.infrastructure.managers.impl
             return null;
         }
         
+        public function showVehicleContextMenu(param1:DisplayObject, param2:ContextMenuVehicleVo, param3:IVehicleContextMenuGenerator, param4:Function = null) : IContextMenu
+        {
+            var _loc5_:Vector.<IContextItem> = param3.generateData(param2);
+            this._extraHandler = param4;
+            return this.show(_loc5_,param1,this.handleVehicleContextMenu,param2);
+        }
+        
         public function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>, param3:Object = null) : IContextMenu
         {
             return this.show(param2,param1,this.handleUserContextMenu,param3);
-        }
-        
-        public function vehicleWasInBattle(param1:Number) : Boolean
-        {
-            return isVehicleWasInBattleS(param1);
         }
         
         public function canGiveLeadershipTo(param1:Number) : Boolean
@@ -114,6 +118,43 @@ package net.wg.infrastructure.managers.impl
         
         public function dispose() : void
         {
+            this.hide();
+        }
+        
+        private function handleVehicleContextMenu(param1:ContextMenuEvent) : void
+        {
+            var _loc2_:ContextMenuVehicleVo = param1.memberItemData as ContextMenuVehicleVo;
+            switch(param1.id)
+            {
+                case "vehicleInfo":
+                    showVehicleInfoS(_loc2_.inventoryId);
+                    break;
+                case "vehicleSell":
+                    vehicleSellS(_loc2_.inventoryId);
+                    break;
+                case "vehicleResearch":
+                    toResearchS(_loc2_.compactDescr);
+                    break;
+                case "vehicleCheck":
+                    favoriteVehicleS(_loc2_.inventoryId,true);
+                    break;
+                case "vehicleUncheck":
+                    favoriteVehicleS(_loc2_.inventoryId,false);
+                    break;
+                case "showVehicleStatistics":
+                    showVehicleStatsS(_loc2_.compactDescr);
+                    break;
+                case "vehicleBuy":
+                    vehicleBuyS(_loc2_.inventoryId);
+                    break;
+                case "vehicleRemove":
+                    vehicleSellS(_loc2_.inventoryId);
+                    break;
+            }
+            if(this._extraHandler != null)
+            {
+                this._extraHandler(param1);
+            }
             this.hide();
         }
         
@@ -208,6 +249,11 @@ package net.wg.infrastructure.managers.impl
                 this._handler(param1);
                 this.hide();
             }
+        }
+        
+        public function getContextMenuVehicleDataByInvCD(param1:Number) : Object
+        {
+            return getContextMenuVehicleDataS(param1);
         }
     }
 }

@@ -20,7 +20,7 @@ package scaleform.clik.ui
         
         public var code:Number;
         
-        public var value:*;
+        public var value;
         
         public var navEquivalent:String;
         

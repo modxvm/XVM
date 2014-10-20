@@ -2,6 +2,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
 {
     import net.wg.data.daapi.base.DAAPIDataClass;
     import net.wg.gui.components.controls.VO.ActionPriceVO;
+    import net.wg.gui.utils.VO.PriceVO;
     
     public class BuyingVehicleVO extends DAAPIDataClass
     {
@@ -25,9 +26,25 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         public var level:uint;
         
-        private var _isPremium:Boolean;
+        public var isRentable:Boolean = false;
+        
+        public var isRentAvailable:Boolean = false;
+        
+        private var _rentDataDD:Object = null;
+        
+        private var _rentDataProviderDD:Array = null;
+        
+        public var isStudyDisabled:Boolean = false;
+        
+        public var isNoAmmo:Boolean = false;
+        
+        private var _defSelectedRentIndex:Number = NaN;
+        
+        private var _rentDataSelectedId:int = -1;
         
         public var isElite:Boolean;
+        
+        public var isPremium:Boolean;
         
         public var tankmenCount:uint;
         
@@ -41,7 +58,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         private var _vehiclePrices:Array;
         
-        private var _actualPrice:uint;
+        private var _vehiclePrice:PriceVO = null;
         
         private var _vehiclePricesActionDataVo:ActionPriceVO;
         
@@ -103,28 +120,12 @@ package net.wg.gui.lobby.vehicleBuyWindow
             return super.onDataWrite(param1,param2);
         }
         
-        public function get isPremium() : Boolean
-        {
-            return this._isPremium;
-        }
-        
-        public function set isPremium(param1:Boolean) : void
-        {
-            this._isPremium = param1;
-            this.updateVehicleActionPrice();
-        }
-        
         private function updateVehicleActionPrice() : void
         {
             if(this._vehiclePricesActionDataVo)
             {
-                this._vehiclePricesActionDataVo.forCredits = !this._isPremium;
+                this._vehiclePricesActionDataVo.forCredits = !this.vehiclePrice.isGold;
             }
-        }
-        
-        public function get actualPrice() : uint
-        {
-            return this._actualPrice;
         }
         
         public function get vehiclePrices() : Array
@@ -135,21 +136,18 @@ package net.wg.gui.lobby.vehicleBuyWindow
         public function set vehiclePrices(param1:Array) : void
         {
             this._vehiclePrices = param1;
-            if(this._vehiclePrices[1] != 0)
-            {
-                this._actualPrice = this._vehiclePrices[1];
-                this.isPremium = true;
-            }
-            else
-            {
-                this._actualPrice = this._vehiclePrices[0];
-                this.isPremium = false;
-            }
+            this.vehiclePrice = new PriceVO(this._vehiclePrices);
+            this.isPremium = this.vehiclePrice.isGold;
         }
         
         public function get actualActionPriceDataVo() : ActionPriceVO
         {
             return this._vehiclePricesActionDataVo;
+        }
+        
+        public function set actualActionPriceDataVo(param1:ActionPriceVO) : void
+        {
+            this._vehiclePricesActionDataVo = param1;
         }
         
         public function set actualActionPriceData(param1:Object) : void
@@ -196,5 +194,86 @@ package net.wg.gui.lobby.vehicleBuyWindow
         {
             this._slotActionPriceDataVo = new ActionPriceVO(param1);
         }
+        
+        public function get rentDataDD() : Object
+        {
+            return this._rentDataDD;
+        }
+        
+        public function set rentDataDD(param1:Object) : void
+        {
+            this._rentDataDD = param1;
+            this._rentDataSelectedId = (this._rentDataDD.hasOwnProperty("selectedId")) && !(this._rentDataDD.selectedId == undefined) && !(this._rentDataDD.selectedId == null)?this._rentDataDD.selectedId:VehicleBuyRentItemVO.DEF_ITEM_ID;
+            this._rentDataProviderDD = [];
+            this.updateRentData(this._rentDataDD.data as Array);
+        }
+        
+        private function updateRentData(param1:Array) : void
+        {
+            var _loc2_:* = NaN;
+            var _loc3_:VehicleBuyRentItemVO = null;
+            if(param1)
+            {
+                _loc2_ = 0;
+                while(_loc2_ < param1.length)
+                {
+                    _loc3_ = new VehicleBuyRentItemVO(param1[_loc2_]);
+                    if(_loc3_.itemId == this._rentDataSelectedId)
+                    {
+                        this.defSelectedRentIndex = _loc2_;
+                    }
+                    this._rentDataProviderDD.push({"label":_loc3_.label,
+                    "data":_loc3_,
+                    "enabled":_loc3_.enabled
+                });
+                _loc2_++;
+            }
+        }
     }
+    
+    override protected function onDispose() : void
+    {
+        var _loc1_:VehicleBuyRentItemVO = null;
+        if(this._rentDataProviderDD)
+        {
+            while(this._rentDataProviderDD.length)
+            {
+                _loc1_ = VehicleBuyRentItemVO(this._rentDataProviderDD.pop().data);
+                _loc1_.dispose();
+            }
+        }
+        super.onDispose();
+    }
+    
+    public function get vehiclePrice() : PriceVO
+    {
+        return this._vehiclePrice;
+    }
+    
+    public function set vehiclePrice(param1:PriceVO) : void
+    {
+        this._vehiclePrice = param1;
+        this.updateVehicleActionPrice();
+    }
+    
+    public function get defSelectedRentIndex() : Number
+    {
+        return this._defSelectedRentIndex;
+    }
+    
+    public function set defSelectedRentIndex(param1:Number) : void
+    {
+        this._defSelectedRentIndex = param1;
+    }
+    
+    public function get rentDataProviderDD() : Array
+    {
+        return this._rentDataProviderDD;
+    }
+    
+    public function set rentDataProviderDD(param1:Array) : void
+    {
+        this._rentDataProviderDD = param1;
+    }
+}
 }

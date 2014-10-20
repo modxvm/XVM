@@ -37,7 +37,7 @@ package net.wg.gui.lobby.hangar
         
         public function as_setTankmenXpPanel(param1:Boolean, param2:Boolean) : void
         {
-            this._panelVisible = param1;
+            this.panelVisible = param1;
             this._panelSelected = param2;
             invalidate(INVALIDATE_XP_PANEL);
         }
@@ -57,7 +57,7 @@ package net.wg.gui.lobby.hangar
             super.draw();
             if(isInvalid(INVALIDATE_XP_PANEL))
             {
-                this.checkboxTankersBg.visible = this.xpToTmenCheckbox.visible = this._panelVisible;
+                this.checkboxTankersBg.visible = this.xpToTmenCheckbox.visible = this.panelVisible;
                 this.xpToTmenCheckbox.selected = this._panelSelected;
             }
         }
@@ -79,6 +79,16 @@ package net.wg.gui.lobby.hangar
             App.toolTipMgr.hide();
             DebugUtils.LOG_DEBUG(this.xpToTmenCheckbox.selected);
             accelerateTmenXpS(this.xpToTmenCheckbox.selected);
+        }
+        
+        public function get panelVisible() : Boolean
+        {
+            return this._panelVisible;
+        }
+        
+        public function set panelVisible(param1:Boolean) : void
+        {
+            this._panelVisible = param1;
         }
     }
 }

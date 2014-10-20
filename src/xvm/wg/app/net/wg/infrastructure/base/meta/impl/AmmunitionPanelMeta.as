@@ -21,6 +21,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public var highlightParams:Function = null;
         
+        public var toRentContinue:Function = null;
+        
         public function setVehicleModuleS(param1:String, param2:int, param3:String, param4:Boolean) : void
         {
             App.utils.asserter.assertNotNull(this.setVehicleModule,"setVehicleModule" + Errors.CANT_NULL);
@@ -49,6 +51,12 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.highlightParams,"highlightParams" + Errors.CANT_NULL);
             this.highlightParams(param1);
+        }
+        
+        public function toRentContinueS() : void
+        {
+            App.utils.asserter.assertNotNull(this.toRentContinue,"toRentContinue" + Errors.CANT_NULL);
+            this.toRentContinue();
         }
     }
 }

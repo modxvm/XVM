@@ -12,11 +12,11 @@ package net.wg.gui.lobby.fortifications.data.settings
         
         public var descriptionText:String = "";
         
-        public var vacationStart:String = "";
+        public var vacationStartText:String = "";
         
-        public var vacationDuration:String = "";
+        public var vacationDurationText:String = "";
         
-        public var ofDays:String = "";
+        public var ofDaysText:String = "";
         
         public var applyBtnLabel:String = "";
         
@@ -26,14 +26,14 @@ package net.wg.gui.lobby.fortifications.data.settings
         
         public var startVacation:Number = 0;
         
-        public var endVacation:Number = 0;
+        public var vacationDuration:int = 0;
         
         override protected function onDispose() : void
         {
             this.descriptionText = null;
-            this.vacationStart = null;
-            this.vacationDuration = null;
-            this.ofDays = null;
+            this.vacationStartText = null;
+            this.vacationDurationText = null;
+            this.ofDaysText = null;
             this.applyBtnLabel = null;
             this.cancelBtnLabel = null;
         }

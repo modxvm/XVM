@@ -98,7 +98,7 @@ package net.wg.gui.rally.controls
                 _loc3_.slotLabel.visible = !_loc4_;
                 if(param2.player)
                 {
-                    _loc6_ = App.utils.commons.getUserProps(param2.player.userName,param2.player.clanAbbrev,param2.player.region,param2.player.igrType);
+                    _loc6_ = App.utils.commons.getUserProps(param2.player.userName,param2.player.clanAbbrev,param2.player.region,param2.player.igrType,param2.player.referralType);
                     if(!param2.player.himself)
                     {
                         _loc6_.rgb = param2.player.color;

@@ -3,6 +3,7 @@ package net.wg.gui.components.controls
     import net.wg.gui.components.advanced.ScalableIconButton;
     import flash.text.TextField;
     import flash.display.MovieClip;
+    import net.wg.data.managers.ITooltipProps;
     import net.wg.data.constants.SortingInfo;
     import net.wg.gui.events.SortingEvent;
     import scaleform.clik.constants.InvalidationType;
@@ -12,12 +13,14 @@ package net.wg.gui.components.controls
     import flash.text.TextFormat;
     import flash.text.TextFieldAutoSize;
     import scaleform.gfx.TextFieldEx;
+    import flash.events.MouseEvent;
     
     public class NormalSortingButton extends ScalableIconButton
     {
         
         public function NormalSortingButton()
         {
+            this._toolTipSpecialArgs = [];
             super();
         }
         
@@ -27,7 +30,7 @@ package net.wg.gui.components.controls
         
         private static var TEXT_PADDING:int = 13;
         
-        private static var DESIGN_PADDING:int = 12;
+        private static var DESIGN_PADDING:int = 8;
         
         private static var PIXEL_PADDING:int = 1;
         
@@ -62,6 +65,12 @@ package net.wg.gui.components.controls
         private var _showDisabledState:Boolean = false;
         
         private var _previousSelectedSorDirection:String;
+        
+        private var _toolTipSpecialType:String = "";
+        
+        private var _toolTipSpecialProps:ITooltipProps = null;
+        
+        private var _toolTipSpecialArgs:Array;
         
         override public function set data(param1:Object) : void
         {
@@ -298,7 +307,21 @@ package net.wg.gui.components.controls
                 }
                 if(_loc2_.toolTip)
                 {
+                    App.utils.asserter.assertNull(_loc2_.toolTipSpecialType,"Can not show common tooltip and tooltip special at one time");
                     tooltip = _loc2_.toolTip;
+                }
+                if(_loc2_.toolTipSpecialType)
+                {
+                    App.utils.asserter.assertNull(_loc2_.toolTip,"Can not show common tooltip and tooltip special at one time");
+                    this._toolTipSpecialType = _loc2_.toolTipSpecialType;
+                }
+                if(_loc2_.toolTipSpecialProps)
+                {
+                    this._toolTipSpecialProps = _loc2_.toolTipSpecialProps;
+                }
+                if(_loc2_.toolTipSpecialArgs)
+                {
+                    this._toolTipSpecialArgs = _loc2_.toolTipSpecialArgs;
                 }
                 enabled = _loc2_.enabled;
                 this._id = _loc2_.iconId;
@@ -333,6 +356,20 @@ package net.wg.gui.components.controls
                 
                 this.labelField.setTextFormat(_loc2_);
                 TextFieldEx.setVerticalAlign(this.labelField,TextFieldEx.VAUTOSIZE_BOTTOM);
+            }
+        }
+        
+        override public function showTooltip(param1:MouseEvent) : void
+        {
+            var _loc2_:Array = null;
+            if(this._toolTipSpecialType)
+            {
+                _loc2_ = [this._toolTipSpecialType,this._toolTipSpecialProps].concat(this._toolTipSpecialArgs);
+                App.toolTipMgr.showSpecial.apply(null,_loc2_);
+            }
+            else
+            {
+                super.showTooltip(param1);
             }
         }
     }

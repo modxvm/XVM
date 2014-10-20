@@ -52,6 +52,8 @@ package net.wg.gui.lobby.sellDialog
         
         public var crewBG:MovieClip;
         
+        public var priceDots:MovieClip;
+        
         private var _tankPrice:Number = 0;
         
         private var _tankGoldPrice:Number = 0;
@@ -108,27 +110,34 @@ package net.wg.gui.lobby.sellDialog
             }
             this.inBarracsDrop.validateNow();
             this.crewTF.text = App.utils.toUpperOrLowerCase(_loc5_,true) + ": ";
-            if(param1.sellPrice[1] > 0)
+            if(param1.isRented)
             {
-                this._tankGoldPrice = param1.sellPrice[1];
-                this._tankPrice = 0;
+                this.tankGoldPrice = 0;
+                this.tankPrice = 0;
+                this.tankPriceTF.visible = this.priceDots.visible = this.emptySellIT.visible = this.vehicleActionPrice.visible = false;
+            }
+            else if(param1.sellPrice[1] > 0)
+            {
+                this.tankGoldPrice = param1.sellPrice[1];
+                this.tankPrice = 0;
                 if(param1.actionVo)
                 {
                     param1.actionVo.ico = IconsTypes.GOLD;
                 }
-                this.showPrice(true,this._tankGoldPrice,param1.actionVo);
+                this.showPrice(true,this.tankGoldPrice,param1.actionVo);
             }
             else
             {
-                this._tankPrice = param1.sellPrice[0];
-                this._tankGoldPrice = 0;
+                this.tankPrice = param1.sellPrice[0];
+                this.tankGoldPrice = 0;
                 if(param1.actionVo)
                 {
                     param1.actionVo.ico = IconsTypes.CREDITS;
                 }
-                this.showPrice(false,this._tankPrice,param1.actionVo);
-                this._creditsCommon = this._creditsCommon + this.tankPrice;
+                this.showPrice(false,this.tankPrice,param1.actionVo);
+                this.creditsCommon = this.creditsCommon + this.tankPrice;
             }
+            
         }
         
         public function getNextPosition() : int

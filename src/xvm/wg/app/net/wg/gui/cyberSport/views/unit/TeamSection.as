@@ -16,6 +16,7 @@ package net.wg.gui.cyberSport.views.unit
     import net.wg.gui.cyberSport.CSInvalidationType;
     import net.wg.gui.rally.controls.RallyInvalidationType;
     import flash.events.MouseEvent;
+    import net.wg.data.constants.Tooltips;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
     
@@ -214,69 +215,66 @@ package net.wg.gui.cyberSport.views.unit
                     App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNIT_CONFIGURE);
                     break;
                 case this.lblTeamPoints:
-                    App.toolTipMgr.showLocal("ToolTipUnitLevelUI",{"type":"",
-                    "component":"",
-                    "data":{"level":this.unitData.sumLevelsInt}
-                },null);
-                break;
+                    App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_UNIT_LEVEL,null,this.unitData.sumLevelsInt);
+                    break;
+            }
         }
-    }
-    
-    private function updateLevelLabels(param1:String) : void
-    {
-        this.lblTeamPoints.htmlText = param1;
-    }
-    
-    private function updateSettingsIcon() : void
-    {
-        if((this.unitData) && !this.unitData.isCommander)
+        
+        private function updateLevelLabels(param1:String) : void
         {
-            this.settingsIcons.visible = true;
-            this.settingsIcons.flakeVisible = this.unitData?this.unitData.isFreezed:false;
-            this.settingsIcons.gearVisible = this.unitData?this.unitData.hasRestrictions:false;
+            this.lblTeamPoints.htmlText = param1;
         }
-        else
+        
+        private function updateSettingsIcon() : void
         {
-            this.settingsIcons.visible = false;
-        }
-    }
-    
-    private function showTooltip(param1:String, param2:String) : void
-    {
-        var _loc3_:String = new ComplexTooltipHelper().addHeader(param1,true).addBody(param2,true).make();
-        if(_loc3_.length > 0)
-        {
-            App.toolTipMgr.showComplex(_loc3_);
-        }
-    }
-    
-    private function onStatusToggle(param1:ButtonEvent) : void
-    {
-        dispatchEvent(new CSComponentEvent(CSComponentEvent.TOGGLE_FREEZE_REQUEST));
-    }
-    
-    private function onConfigureClick(param1:ButtonEvent) : void
-    {
-        dispatchEvent(new CSComponentEvent(CSComponentEvent.CLICK_CONFIGURE_BUTTON));
-    }
-    
-    override public function cooldownSlots(param1:Boolean) : void
-    {
-        var _loc2_:* = 0;
-        var _loc3_:* = 0;
-        var _loc4_:IRallySimpleSlotRenderer = null;
-        super.cooldownSlots(param1);
-        if((rallyData) && (rallyData.isCommander))
-        {
-            _loc3_ = _slotsUi.length;
-            _loc2_ = 0;
-            while(_loc2_ < _loc3_)
+            if((this.unitData) && !this.unitData.isCommander)
             {
-                _loc4_ = _slotsUi[_loc2_];
-                _loc4_.cooldown(param1);
-                _loc2_++;
+                this.settingsIcons.visible = true;
+                this.settingsIcons.flakeVisible = this.unitData?this.unitData.isFreezed:false;
+                this.settingsIcons.gearVisible = this.unitData?this.unitData.hasRestrictions:false;
+            }
+            else
+            {
+                this.settingsIcons.visible = false;
+            }
+        }
+        
+        private function showTooltip(param1:String, param2:String) : void
+        {
+            var _loc3_:String = new ComplexTooltipHelper().addHeader(param1,true).addBody(param2,true).make();
+            if(_loc3_.length > 0)
+            {
+                App.toolTipMgr.showComplex(_loc3_);
+            }
+        }
+        
+        private function onStatusToggle(param1:ButtonEvent) : void
+        {
+            dispatchEvent(new CSComponentEvent(CSComponentEvent.TOGGLE_FREEZE_REQUEST));
+        }
+        
+        private function onConfigureClick(param1:ButtonEvent) : void
+        {
+            dispatchEvent(new CSComponentEvent(CSComponentEvent.CLICK_CONFIGURE_BUTTON));
+        }
+        
+        override public function cooldownSlots(param1:Boolean) : void
+        {
+            var _loc2_:* = 0;
+            var _loc3_:* = 0;
+            var _loc4_:IRallySimpleSlotRenderer = null;
+            super.cooldownSlots(param1);
+            if((rallyData) && (rallyData.isCommander))
+            {
+                _loc3_ = _slotsUi.length;
+                _loc2_ = 0;
+                while(_loc2_ < _loc3_)
+                {
+                    _loc4_ = _slotsUi[_loc2_];
+                    _loc4_.cooldown(param1);
+                    _loc2_++;
+                }
             }
         }
     }
-}
 }

@@ -15,6 +15,8 @@ package net.wg.infrastructure.base.meta
         
         function as_changeAutoSearchState(param1:Object) : void;
         
+        function as_changeAutoSearchBtnsState(param1:Boolean, param2:Boolean) : void;
+        
         function as_hideAutoSearch() : void;
     }
 }

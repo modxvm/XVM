@@ -4,11 +4,11 @@ package net.wg.gui.components.tooltips
     import flash.text.TextField;
     import net.wg.gui.components.tooltips.helpers.TankTypeIco;
     import net.wg.data.managers.ITooltipProps;
-    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import net.wg.gui.components.tooltips.VO.VehicleVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
     import flash.text.TextFormat;
     import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
+    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import net.wg.utils.ILocale;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
@@ -69,7 +69,6 @@ package net.wg.gui.components.tooltips
         
         override protected function redraw() : void
         {
-            var _loc2_:ToolTipBlockResultVO = null;
             var _loc5_:VehicleVO = null;
             var _loc11_:ToolTipBlockVO = null;
             var _loc12_:String = null;
@@ -85,17 +84,18 @@ package net.wg.gui.components.tooltips
             var _loc22_:String = null;
             var _loc23_:String = null;
             var _loc24_:* = NaN;
-            var _loc25_:ToolTipBlockVO = null;
-            var _loc26_:String = null;
-            var _loc27_:ToolTipBlockVO = null;
-            var _loc28_:* = NaN;
+            var _loc25_:* = false;
+            var _loc26_:ToolTipBlockVO = null;
+            var _loc27_:String = null;
+            var _loc28_:ToolTipBlockVO = null;
             var _loc29_:* = NaN;
-            var _loc30_:String = null;
-            var _loc31_:TextFormat = null;
-            var _loc32_:ToolTipStatusColorsVO = null;
+            var _loc30_:* = NaN;
+            var _loc31_:String = null;
+            var _loc32_:TextFormat = null;
+            var _loc33_:ToolTipStatusColorsVO = null;
             var _loc1_:Separator = null;
             separators = new Vector.<Separator>();
-            _loc2_ = null;
+            var _loc2_:ToolTipBlockResultVO = null;
             blockResults = new Vector.<ToolTipBlockResultVO>();
             var _loc3_:uint = 0;
             var _loc4_:uint = 0;
@@ -106,7 +106,6 @@ package net.wg.gui.components.tooltips
             var _loc6_:ILocale = App.utils.locale;
             if(!_loc6_)
             {
-                trace("WARNING: locale is undefined" + this);
                 return;
             }
             var _loc7_:* = "";
@@ -164,14 +163,14 @@ package net.wg.gui.components.tooltips
         _loc20_ = "";
         _loc3_ = _loc5_.stats.length;
         _loc4_ = 0;
-        while(_loc4_ < _loc3_)
+        for(;_loc4_ < _loc3_;_loc4_++)
         {
             _loc21_ = _loc5_.stats[_loc4_];
             _loc22_ = _loc21_[0];
             if(SKIP_FIELDS.indexOf(_loc22_) == -1)
             {
                 _loc20_ = Utils.instance.COLOR_NUMBER;
-                _loc19_ = _loc6_.makeString(TOOLTIPS.vehicle(_loc22_),{});
+                _loc19_ = _loc22_ != RENTALS?_loc6_.makeString(TOOLTIPS.vehicle(_loc22_),{}):"";
                 if(_loc22_ == ID_BUY_PRICE || _loc22_ == ID_SELL_PRICE)
                 {
                     _loc23_ = "";
@@ -241,10 +240,27 @@ package net.wg.gui.components.tooltips
                         _loc12_ = getAlertInfo(_loc6_,_loc18_,_loc13_,IconsTypes.XP_PRICE);
                         _loc20_ = _loc18_ != 0?Utils.instance.COLOR_ALERT:Utils.instance.COLOR_NUMBER;
                     }
+                    else if(_loc22_ == RENTALS)
+                    {
+                        if(_loc5_.rentLeft <= 0)
+                        {
+                            continue;
+                        }
+                        _loc16_ = _loc5_.rentLeft;
+                        _loc19_ = _loc5_.rentDescr;
+                    }
+                    else if(_loc22_ == MIN_RENTALS_PRICE)
+                    {
+                        _loc25_ = _loc21_[1][1] > 0;
+                        _loc16_ = _loc25_?Number(_loc21_[1][1]):Number(_loc21_[1][0]);
+                        _loc14_ = _loc25_?IconsTypes.GOLD:IconsTypes.CREDITS;
+                    }
                     else
                     {
                         _loc16_ = Number(_loc21_[1]);
                     }
+                    
+                    
                     if(_loc16_ >= 0)
                     {
                         _loc17_ = _loc6_.integer(_loc16_);
@@ -253,16 +269,16 @@ package net.wg.gui.components.tooltips
                             _loc14_ = Utils.instance.getIcon(_loc16_ > 2?ID_ACTION_XP_FACTOR:ID_DOUBLE_XP_FACTOR);
                             _loc17_ = "x" + _loc17_;
                         }
-                        else
+                        else if(_loc22_ != MIN_RENTALS_PRICE)
                         {
                             _loc14_ = Utils.instance.getIcon(_loc22_,_component,_loc5_.isPremium,_loc5_.isElite);
                         }
+                        
                         _loc11_.leftText = _loc11_.leftText + (Utils.instance.htmlWrapper(_loc17_,_loc20_,12,"$TextFont",false) + "<br/>");
                         _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc19_ + _loc12_ + "</h1>",_loc14_,_loc15_));
                     }
                 }
             }
-            _loc4_++;
         }
         _loc2_ = Utils.instance.createBlock(_loc11_,contentMargin.left + bgShadowMargin.left);
         blockResults.push(_loc2_);
@@ -276,21 +292,21 @@ package net.wg.gui.components.tooltips
     }
     if((_loc5_.characteristics) && _loc5_.characteristics.length > 0)
     {
-        _loc25_ = new ToolTipBlockVO();
-        _loc25_.header = _loc6_?_loc6_.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY):TOOLTIPS.TANKCARUSEL_MAINPROPERTY;
-        _loc25_.leftText = "";
-        _loc25_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
-        _loc25_.contener = content;
-        _loc25_.startYPos = topPosition;
-        _loc25_.childrenNamePrefix = "characteristics";
-        _loc25_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
-        _loc25_.rightTextCSS = new StyleSheet();
-        _loc25_.rightTextCSS.setStyle("h1",{"color":Utils.instance.COLOR_NORMAL,
+        _loc26_ = new ToolTipBlockVO();
+        _loc26_.header = _loc6_?_loc6_.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY):TOOLTIPS.TANKCARUSEL_MAINPROPERTY;
+        _loc26_.leftText = "";
+        _loc26_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
+        _loc26_.contener = content;
+        _loc26_.startYPos = topPosition;
+        _loc26_.childrenNamePrefix = "characteristics";
+        _loc26_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
+        _loc26_.rightTextCSS = new StyleSheet();
+        _loc26_.rightTextCSS.setStyle("h1",{"color":Utils.instance.COLOR_NORMAL,
         "fontSize":"11px",
         "fontFamily":"$TextFont",
         "leading":"2px"
     });
-    _loc25_.rightTextCSS.setStyle("p",{"color":Utils.instance.COLOR_SUB_NORMAL,
+    _loc26_.rightTextCSS.setStyle("p",{"color":Utils.instance.COLOR_SUB_NORMAL,
     "fontSize":"11px",
     "fontFamily":"$TextFont",
     "leading":"2px"
@@ -299,12 +315,12 @@ _loc3_ = _loc5_.characteristics.length;
 _loc4_ = 0;
 while(_loc4_ < _loc3_)
 {
-    _loc25_.leftText = _loc25_.leftText + (Utils.instance.htmlWrapper(_loc5_.characteristics[_loc4_][1],Utils.instance.COLOR_NUMBER,12,"$TextFont",false) + "<br/>");
-    _loc26_ = _loc6_?_loc6_.makeString(_loc5_.characteristics[_loc4_][0],{}):_loc5_.characteristics[_loc4_][0];
-    _loc25_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(_loc26_);
+    _loc26_.leftText = _loc26_.leftText + (Utils.instance.htmlWrapper(_loc5_.characteristics[_loc4_][1],Utils.instance.COLOR_NUMBER,12,"$TextFont",false) + "<br/>");
+    _loc27_ = _loc6_?_loc6_.makeString(_loc5_.characteristics[_loc4_][0],{}):_loc5_.characteristics[_loc4_][0];
+    _loc26_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(_loc27_);
     _loc4_++;
 }
-_loc2_ = Utils.instance.createBlock(_loc25_,contentMargin.left + bgShadowMargin.left);
+_loc2_ = Utils.instance.createBlock(_loc26_,contentMargin.left + bgShadowMargin.left);
 blockResults.push(_loc2_);
 topPosition = _loc2_.startYPos;
 hasIcon = _loc2_.hasIcons?true:hasIcon;
@@ -316,38 +332,38 @@ leftPartMaxW = _loc2_.leftPartMaxW > leftPartMaxW?_loc2_.leftPartMaxW:leftPartMa
 }
 if((_loc5_.equipments) && _loc5_.equipments.length > 0)
 {
-_loc27_ = new ToolTipBlockVO();
-_loc27_.leftText = "";
-_loc27_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
-_loc27_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
-_loc27_.contener = content;
-_loc27_.startYPos = topPosition;
-_loc27_.childrenNamePrefix = "equipments";
-_loc27_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
+_loc28_ = new ToolTipBlockVO();
+_loc28_.leftText = "";
+_loc28_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
+_loc28_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
+_loc28_.contener = content;
+_loc28_.startYPos = topPosition;
+_loc28_.childrenNamePrefix = "equipments";
+_loc28_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
 _loc3_ = _loc5_.equipments.length;
 _loc4_ = 0;
 while(_loc4_ < _loc3_)
 {
-    _loc28_ = _loc5_.equipments[_loc4_].current;
-    _loc29_ = _loc5_.equipments[_loc4_].total;
-    _loc30_ = _loc5_.equipments[_loc4_].label;
-    if(_loc28_ < _loc29_ && _loc30_ == "crew" && (_component == COMPONENT_CAROUSEL || _component == COMPONENT_INVENTORY))
+    _loc29_ = _loc5_.equipments[_loc4_].current;
+    _loc30_ = _loc5_.equipments[_loc4_].total;
+    _loc31_ = _loc5_.equipments[_loc4_].label;
+    if(_loc29_ < _loc30_ && _loc31_ == "crew" && (_component == COMPONENT_CAROUSEL || _component == COMPONENT_INVENTORY))
     {
-        _loc27_.leftText = _loc27_.leftText + (Utils.instance.htmlWrapper(_loc28_.toString(),Utils.instance.COLOR_ALERT) + Utils.instance.htmlWrapper("/" + _loc29_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
+        _loc28_.leftText = _loc28_.leftText + (Utils.instance.htmlWrapper(_loc29_.toString(),Utils.instance.COLOR_ALERT) + Utils.instance.htmlWrapper("/" + _loc30_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
     }
-    else if(_loc30_ == "crew" && _component == COMPONENT_SHOP)
+    else if(_loc31_ == "crew" && _component == COMPONENT_SHOP)
     {
-        _loc27_.leftText = _loc27_.leftText + Utils.instance.htmlWrapper(_loc29_.toString(),Utils.instance.COLOR_NUMBER);
+        _loc28_.leftText = _loc28_.leftText + Utils.instance.htmlWrapper(_loc30_.toString(),Utils.instance.COLOR_NUMBER);
     }
     else
     {
-        _loc27_.leftText = _loc27_.leftText + (Utils.instance.htmlWrapper(_loc28_.toString(),Utils.instance.COLOR_NUMBER) + Utils.instance.htmlWrapper("/" + _loc29_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
+        _loc28_.leftText = _loc28_.leftText + (Utils.instance.htmlWrapper(_loc29_.toString(),Utils.instance.COLOR_NUMBER) + Utils.instance.htmlWrapper("/" + _loc30_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
     }
     
-    _loc27_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(_loc30_));
+    _loc28_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(_loc31_));
     _loc4_++;
 }
-_loc2_ = Utils.instance.createBlock(_loc27_,contentMargin.left + bgShadowMargin.left);
+_loc2_ = Utils.instance.createBlock(_loc28_,contentMargin.left + bgShadowMargin.left);
 blockResults.push(_loc2_);
 topPosition = _loc2_.startYPos;
 hasIcon = _loc2_.hasIcons?true:hasIcon;
@@ -360,11 +376,11 @@ leftPartMaxW = _loc2_.leftPartMaxW > leftPartMaxW?_loc2_.leftPartMaxW:leftPartMa
 if(_loc5_.clanLockHeader != "")
 {
 topPosition = topPosition - Utils.instance.MARGIN_AFTER_SEPARATE;
-_loc31_ = new TextFormat();
-_loc31_.leading = -1;
+_loc32_ = new TextFormat();
+_loc32_.leading = -1;
 this.vehicleLockText.autoSize = TextFieldAutoSize.LEFT;
 this.vehicleLockText.htmlText = _loc5_.clanLockHeader;
-this.vehicleLockText.setTextFormat(_loc31_);
+this.vehicleLockText.setTextFormat(_loc32_);
 this.vehicleLockText.width = this.vehicleLockText.textWidth + 5;
 this.vehicleLock.alpha = 1;
 this.vehicleLock.visible = true;
@@ -381,11 +397,11 @@ this.vehicleLock.visible = false;
 }
 if(_loc5_.status)
 {
-_loc32_ = Utils.instance.getStatusColor(_loc5_.statusLevel);
+_loc33_ = Utils.instance.getStatusColor(_loc5_.statusLevel);
 this.tooltipStatus.y = topPosition;
 this.tooltipStatus.x = contentMargin.left + bgShadowMargin.left;
 this.tooltipStatus.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
-this.tooltipStatus.setData(_loc5_.statusHeader,_loc5_.statusText,_loc32_);
+this.tooltipStatus.setData(_loc5_.statusHeader,_loc5_.statusText,_loc33_);
 topPosition = topPosition + this.tooltipStatus.height;
 contentMargin.bottom = 14;
 }

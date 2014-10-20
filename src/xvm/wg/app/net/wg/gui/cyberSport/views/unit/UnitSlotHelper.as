@@ -4,13 +4,12 @@ package net.wg.gui.cyberSport.views.unit
     import net.wg.gui.rally.controls.interfaces.IRallySimpleSlotRenderer;
     import net.wg.gui.rally.interfaces.IRallySlotVO;
     import net.wg.gui.rally.controls.RallySimpleSlotRenderer;
-    import net.wg.gui.cyberSport.controls.GrayTransparentButton;
-    import net.wg.data.constants.Values;
     import net.wg.gui.rally.vo.RallySlotVO;
     import flash.display.InteractiveObject;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import net.wg.data.constants.Tooltips;
     import net.wg.gui.cyberSport.controls.CSVehicleButton;
+    import net.wg.gui.cyberSport.controls.GrayTransparentButton;
     
     public class UnitSlotHelper extends BaseRallySlotHelper
     {
@@ -60,13 +59,11 @@ if(_loc3_)
 
 override public function updateComponents(param1:IRallySimpleSlotRenderer, param2:IRallySlotVO) : void
 {
-var _loc5_:SlotRenderer = null;
-var _loc6_:* = false;
 super.updateComponents(param1,param2);
 this.updateCommonControls(param1,param2);
 var _loc3_:RallySimpleSlotRenderer = param1 as RallySimpleSlotRenderer;
 var _loc4_:IRallySlotVO = param2 as IRallySlotVO;
-_loc5_ = param1 as SlotRenderer;
+var _loc5_:SlotRenderer = param1 as SlotRenderer;
 if(_loc5_)
 {
     if(_loc4_)
@@ -74,50 +71,6 @@ if(_loc5_)
         _loc5_.setStatus(_loc4_.playerStatus);
         _loc5_.levelLbl.text = String(_loc4_.selectedVehicleLevel);
         _loc5_.levelLbl.alpha = _loc4_.selectedVehicleLevel?1:0.33;
-        if(!_loc4_.isClosed)
-        {
-            if(_loc4_.isCommanderState)
-            {
-                if(_loc4_.player)
-                {
-                    _loc5_.removeBtn.visible = _loc5_.index > 0;
-                    _loc5_.removeBtn.icon = GrayTransparentButton.ICON_CROSS;
-                    _loc5_.removeBtn.width = BTN_PROPS.remove.width;
-                    _loc5_.removeBtn.x = BTN_PROPS.remove.x;
-                    _loc5_.removeBtn.label = Values.EMPTY_STR;
-                }
-                else
-                {
-                    _loc5_.removeBtn.visible = _loc5_.index > 4;
-                    _loc5_.removeBtn.icon = GrayTransparentButton.ICON_NO_ICON;
-                    _loc5_.removeBtn.width = BTN_PROPS.lock.width;
-                    _loc5_.removeBtn.x = BTN_PROPS.lock.x;
-                    _loc5_.removeBtn.label = CYBERSPORT.WINDOW_UNIT_LOCKSLOT;
-                }
-            }
-            else
-            {
-                _loc6_ = (_loc4_.player) && (_loc4_.player.himself);
-                _loc5_.removeBtn.visible = _loc6_;
-                if(_loc6_)
-                {
-                    _loc5_.removeBtn.icon = GrayTransparentButton.ICON_CROSS;
-                    _loc5_.removeBtn.width = BTN_PROPS.remove.width;
-                    _loc5_.removeBtn.x = BTN_PROPS.remove.x;
-                    _loc5_.removeBtn.label = Values.EMPTY_STR;
-                }
-            }
-            _loc5_.statusIndicator.visible = true;
-        }
-        else
-        {
-            _loc5_.removeBtn.visible = _loc4_.isCommanderState;
-            _loc5_.removeBtn.icon = GrayTransparentButton.ICON_NO_ICON;
-            _loc5_.removeBtn.width = BTN_PROPS.lock.width;
-            _loc5_.removeBtn.x = BTN_PROPS.lock.x;
-            _loc5_.removeBtn.label = CYBERSPORT.WINDOW_UNIT_UNLOCKSLOT;
-            _loc5_.statusIndicator.visible = false;
-        }
         if(_loc4_.player)
         {
             _loc5_.setSpeakers(_loc4_.player.isPlayerSpeaking,true);

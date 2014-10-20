@@ -28,14 +28,15 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
         
         public function getDataVoForEmptySlot() : VehicleCarouselVO
         {
-            var _loc1_:VehicleCarouselVO = new VehicleCarouselVO();
+            var _loc1_:VehicleCarouselVO = new VehicleCarouselVO({});
             _loc1_.empty = true;
             return _loc1_;
         }
         
         public function getDataVoForBuyVehicle(param1:Number) : VehicleCarouselVO
         {
-            var _loc2_:VehicleCarouselVO = new VehicleCarouselVO();
+            var _loc2_:VehicleCarouselVO = null;
+            _loc2_ = new VehicleCarouselVO({});
             _loc2_.stat = "buyTank";
             _loc2_.buyTank = true;
             _loc2_.stateLevel = "buyState";
@@ -45,7 +46,7 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
         
         public function getDataVoForBuySlot(param1:Number, param2:ActionPriceVO) : VehicleCarouselVO
         {
-            var _loc3_:VehicleCarouselVO = new VehicleCarouselVO();
+            var _loc3_:VehicleCarouselVO = new VehicleCarouselVO({});
             _loc3_.stat = "buySlot";
             _loc3_.buySlot = true;
             _loc3_.stateLevel = "buyState";

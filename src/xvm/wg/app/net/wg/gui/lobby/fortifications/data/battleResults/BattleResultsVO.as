@@ -8,6 +8,8 @@ package net.wg.gui.lobby.fortifications.data.battleResults
         public function BattleResultsVO(param1:Object)
         {
             this.battles = [];
+            this.achievementsLeft = [];
+            this.achievementsRight = [];
             super(param1);
         }
         
@@ -34,5 +36,9 @@ package net.wg.gui.lobby.fortifications.data.battleResults
         public var playerResText:String = "";
         
         public var battles:Array;
+        
+        public var achievementsLeft:Array;
+        
+        public var achievementsRight:Array;
     }
 }

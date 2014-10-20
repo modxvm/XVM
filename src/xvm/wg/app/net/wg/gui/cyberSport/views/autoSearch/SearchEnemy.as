@@ -18,6 +18,12 @@ package net.wg.gui.cyberSport.views.autoSearch
         
         public var buttonsBG:MovieClip;
         
+        override public function changeButtonsState(param1:Boolean, param2:Boolean) : void
+        {
+            this.buttonsBG.visible = cancelButton.visible = param2;
+            cancelButton.enabled = param2;
+        }
+        
         override protected function updateView() : void
         {
             super.updateView();

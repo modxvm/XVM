@@ -8,9 +8,10 @@ package net.wg.gui.lobby.hangar.crew
     import scaleform.clik.data.DataProvider;
     import net.wg.gui.events.ListEventEx;
     import net.wg.data.constants.Tooltips;
-    import net.wg.gui.components.controls.ScrollingListEx;
     import flash.display.MovieClip;
     import flash.display.DisplayObject;
+    import net.wg.utils.IHelpLayout;
+    import flash.geom.Rectangle;
     import net.wg.gui.events.CrewEvent;
     
     public class Crew extends CrewMeta implements IHelpLayoutComponent, ICrewMeta, IDAAPIModule
@@ -49,7 +50,7 @@ package net.wg.gui.lobby.hangar.crew
             App.toolTipMgr.hide();
         }
         
-        public var list:ScrollingListEx;
+        public var list:CrewScrollingList;
         
         public var maskMC:MovieClip;
         
@@ -75,120 +76,115 @@ package net.wg.gui.lobby.hangar.crew
         
         public function showHelpLayout() : void
         {
-            var _loc1_:Object = {"borderWidth":204,
-            "borderHeight":height,
-            "direction":this.helpDirection,
-            "text":LOBBY_HELP.HANGAR_CREW,
-            "x":0,
-            "y":0,
-            "connectorLength":this.helpConnectorLength
-        };
-        this.setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
-    }
-    
-    public function closeHelpLayout() : void
-    {
-        if(this.getHelpLayout() != null)
-        {
-            App.utils.helpLayout.destroy(this.getHelpLayout());
+            var _loc1_:IHelpLayout = App.utils.helpLayout;
+            var _loc2_:Rectangle = new Rectangle(0,0,this.list.width,this.bg.height);
+            var _loc3_:Object = _loc1_.getProps(_loc2_,LOBBY_HELP.HANGAR_CREW,this.helpDirection);
+            this.setHelpLayout(_loc1_.create(this.root,_loc3_,this));
         }
-    }
-    
-    override public function get enabled() : Boolean
-    {
-        return super.enabled;
-    }
-    
-    override public function set enabled(param1:Boolean) : void
-    {
-        super.enabled = param1;
-        invalidate(INVALIDATE_ENABLE);
-    }
-    
-    override protected function onPopulate() : void
-    {
-        super.onPopulate();
-        invalidate(INVALIDATE_LIST);
-    }
-    
-    override protected function onDispose() : void
-    {
-        this.list.removeEventListener(ListEventEx.ITEM_ROLL_OVER,showTooltip);
-        this.list.removeEventListener(ListEventEx.ITEM_ROLL_OUT,hideTooltip);
-        this.list.removeEventListener(ListEventEx.ITEM_PRESS,hideTooltip);
-        App.stage.removeEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
-        App.stage.removeEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
-        removeEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
-        removeEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
-        this.list.dispose();
-        this.list = null;
-        this.bg = null;
-        if(this._helpLayout)
+        
+        public function closeHelpLayout() : void
         {
-            this.closeHelpLayout();
+            if(this.getHelpLayout() != null)
+            {
+                App.utils.helpLayout.destroy(this.getHelpLayout());
+            }
         }
-        this.maskMC = null;
-        this._helpLayout = null;
-        super.onDispose();
-    }
-    
-    override protected function configUI() : void
-    {
-        super.configUI();
-        mouseEnabled = false;
-        addEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
-        addEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
-        App.stage.addEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
-        App.stage.addEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
-        this.list.addEventListener(ListEventEx.ITEM_ROLL_OVER,showTooltip);
-        this.list.addEventListener(ListEventEx.ITEM_ROLL_OUT,hideTooltip);
-        this.list.addEventListener(ListEventEx.ITEM_PRESS,hideTooltip);
-        this.list.mouseEnabled = false;
-        this.list.validateNow();
-    }
-    
-    override protected function draw() : void
-    {
-        if(isInvalid(INVALIDATE_LIST))
+        
+        override public function get enabled() : Boolean
         {
-            updateTankmenS();
+            return super.enabled;
         }
-        if(isInvalid(INVALIDATE_ENABLE))
+        
+        override public function set enabled(param1:Boolean) : void
         {
+            super.enabled = param1;
+            invalidate(INVALIDATE_ENABLE);
+        }
+        
+        override protected function onPopulate() : void
+        {
+            super.onPopulate();
+            invalidate(INVALIDATE_LIST);
+        }
+        
+        override protected function onDispose() : void
+        {
+            this.list.removeEventListener(ListEventEx.ITEM_ROLL_OVER,showTooltip);
+            this.list.removeEventListener(ListEventEx.ITEM_ROLL_OUT,hideTooltip);
+            this.list.removeEventListener(ListEventEx.ITEM_PRESS,hideTooltip);
+            App.stage.removeEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
+            App.stage.removeEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
+            removeEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
+            removeEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
+            this.list.dispose();
+            this.list = null;
+            this.bg = null;
+            if(this._helpLayout)
+            {
+                this.closeHelpLayout();
+            }
+            this.maskMC = null;
+            this._helpLayout = null;
+            super.onDispose();
+        }
+        
+        override protected function configUI() : void
+        {
+            super.configUI();
+            mouseEnabled = false;
+            addEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
+            addEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
+            App.stage.addEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
+            App.stage.addEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
+            this.list.addEventListener(ListEventEx.ITEM_ROLL_OVER,showTooltip);
+            this.list.addEventListener(ListEventEx.ITEM_ROLL_OUT,hideTooltip);
+            this.list.addEventListener(ListEventEx.ITEM_PRESS,hideTooltip);
+            this.list.mouseEnabled = false;
             this.list.validateNow();
-            this.list.enabled = this.enabled;
-            this.list.mouseEnabled = this.enabled;
+        }
+        
+        override protected function draw() : void
+        {
+            if(isInvalid(INVALIDATE_LIST))
+            {
+                updateTankmenS();
+            }
+            if(isInvalid(INVALIDATE_ENABLE))
+            {
+                this.list.validateNow();
+                this.list.enabled = this.enabled;
+                this.list.mouseEnabled = this.enabled;
+            }
+        }
+        
+        protected function setHelpLayout(param1:DisplayObject) : void
+        {
+            this._helpLayout = param1;
+        }
+        
+        protected function getHelpLayout() : DisplayObject
+        {
+            return this._helpLayout;
+        }
+        
+        private function onEquipTankman(param1:CrewEvent) : void
+        {
+            equipTankmanS(param1.initProp.tankmanID,param1.initProp.slot);
+        }
+        
+        private function onUnloadTankman(param1:CrewEvent) : void
+        {
+            unloadTankmanS(param1.initProp.tankmanID);
+        }
+        
+        private function onShowRecruitWindow(param1:CrewEvent) : void
+        {
+            onShowRecruitWindowClickS(param1.initProp,param1.menuEnabled);
+        }
+        
+        private function openPersonalCaseHandler(param1:CrewEvent) : void
+        {
+            openPersonalCaseS(param1.initProp.tankmanID.toString(),param1.selectedTab);
         }
     }
-    
-    protected function setHelpLayout(param1:DisplayObject) : void
-    {
-        this._helpLayout = param1;
-    }
-    
-    protected function getHelpLayout() : DisplayObject
-    {
-        return this._helpLayout;
-    }
-    
-    private function onEquipTankman(param1:CrewEvent) : void
-    {
-        equipTankmanS(param1.initProp.tankmanID,param1.initProp.slot);
-    }
-    
-    private function onUnloadTankman(param1:CrewEvent) : void
-    {
-        unloadTankmanS(param1.initProp.tankmanID);
-    }
-    
-    private function onShowRecruitWindow(param1:CrewEvent) : void
-    {
-        onShowRecruitWindowClickS(param1.initProp,param1.menuEnabled);
-    }
-    
-    private function openPersonalCaseHandler(param1:CrewEvent) : void
-    {
-        openPersonalCaseS(param1.initProp.tankmanID.toString(),param1.selectedTab);
-    }
-}
 }

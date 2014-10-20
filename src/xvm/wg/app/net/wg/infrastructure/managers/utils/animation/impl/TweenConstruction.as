@@ -3,11 +3,10 @@ package net.wg.infrastructure.managers.utils.animation.impl
     import net.wg.utils.animation.ITweenConstruction;
     import net.wg.data.TweenDataByType;
     import net.wg.infrastructure.interfaces.ITweenTypesDuration;
-    import net.wg.data.constants.TweenTypes;
-    import net.wg.data.constants.TweenConstraints;
     import org.idmedia.as3commons.util.Map;
     import flash.display.DisplayObject;
     import net.wg.infrastructure.interfaces.ITweenConstructionHandler;
+    import net.wg.data.constants.TweenTypes;
     import net.wg.data.constants.Linkages;
     import net.wg.infrastructure.interfaces.ITween;
     import net.wg.infrastructure.interfaces.ISimpleTweenPropertiesVO;
@@ -19,6 +18,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
     import flash.display.MovieClip;
     import net.wg.infrastructure.interfaces.ITweenPropertiesVO;
     import net.wg.data.constants.DelayTypes;
+    import net.wg.infrastructure.managers.ITweenManagerHelper;
     
     public class TweenConstruction extends Object implements ITweenConstruction
     {
@@ -30,6 +30,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
             this.stateTargetAfterAnim = {};
             super();
             var _loc3_:ICommons = this.getCommon();
+            identicalTypes = new <TweenDataByType>[new TweenDataByType(TweenTypes.MOVE_TYPES,this.tweenMgrHelper.getMoveDuration()),new TweenDataByType(TweenTypes.FADE_TYPES,this.tweenMgrHelper.getFadeDuration()),new TweenDataByType(TweenTypes.GLOW_TYPES,this.tweenMgrHelper.getGlowDuration()),new TweenDataByType(TweenTypes.SHADOW_TYPES,this.tweenMgrHelper.getShadowDuration()),new TweenDataByType(TweenTypes.TURN_TYPES,this.tweenMgrHelper.getHalfTurnDuration())];
             this.tweenTypesMap = _loc3_.createMap([Linkages.GLOW_IN_ANIM,TweenTypes.GLOW_IN,Linkages.GLOW_OUT_ANIM,TweenTypes.GLOW_OUT,Linkages.SHADOW_IN_ANIM,TweenTypes.SHADOW_IN,Linkages.SHADOW_OUT_ANIM,TweenTypes.SHADOW_OUT]);
             var _loc4_:ITweenAnimator = this.getAnimator();
             this.pythonTweenCreators = _loc3_.createMap([TweenTypes.FADE_IN,_loc4_.addFadeInAnimEx,TweenTypes.FADE_OUT,_loc4_.addFadeOutAnimEx,TweenTypes.MOVE_DOWN,_loc4_.addMoveDownAnimEx,TweenTypes.MOVE_UP,_loc4_.addMoveUpAnimEx,TweenTypes.TURN_HALF,_loc4_.addHalfTurnAnimEx]);
@@ -39,7 +40,7 @@ package net.wg.infrastructure.managers.utils.animation.impl
             this._tweenConstructionHandler = param2;
         }
         
-        public static var IDENTICAL_TYPES:Vector.<TweenDataByType> = new <TweenDataByType>[new TweenDataByType(TweenTypes.MOVE_TYPES,TweenConstraints.MOVE_DURATION),new TweenDataByType(TweenTypes.FADE_TYPES,TweenConstraints.FADE_DURATION),new TweenDataByType(TweenTypes.GLOW_TYPES,TweenConstraints.GLOW_DURATION),new TweenDataByType(TweenTypes.SHADOW_TYPES,TweenConstraints.SHADOW_DURATION),new TweenDataByType(TweenTypes.TURN_TYPES,TweenConstraints.HALF_TURN_DURATION)];
+        private static var identicalTypes:Vector.<TweenDataByType>;
         
         private static var GLOBAL_DELAY_IDX:int = 0;
         
@@ -48,11 +49,11 @@ package net.wg.infrastructure.managers.utils.animation.impl
         private static function getTweenSettingByType(param1:String) : ITweenTypesDuration
         {
             var _loc2_:* = 0;
-            while(_loc2_ < IDENTICAL_TYPES.length)
+            while(_loc2_ < identicalTypes.length)
             {
-                if(IDENTICAL_TYPES[_loc2_].types.indexOf(param1))
+                if(identicalTypes[_loc2_].types.indexOf(param1))
                 {
-                    return IDENTICAL_TYPES[_loc2_];
+                    return identicalTypes[_loc2_];
                 }
                 _loc2_++;
             }
@@ -485,9 +486,9 @@ package net.wg.infrastructure.managers.utils.animation.impl
             var _loc7_:* = false;
             var _loc2_:Vector.<String> = null;
             var _loc3_:* = 0;
-            while(_loc3_ < IDENTICAL_TYPES.length)
+            while(_loc3_ < identicalTypes.length)
             {
-                _loc4_ = IDENTICAL_TYPES[_loc3_];
+                _loc4_ = identicalTypes[_loc3_];
                 if(_loc4_.types.indexOf(param1.tween.memberData.type) >= 0)
                 {
                     _loc2_ = _loc4_.types;
@@ -516,6 +517,11 @@ package net.wg.infrastructure.managers.utils.animation.impl
                 }
             }
             return true;
+        }
+        
+        private function get tweenMgrHelper() : ITweenManagerHelper
+        {
+            return App.tweenMgr.getTweenManagerHelper();
         }
     }
 }

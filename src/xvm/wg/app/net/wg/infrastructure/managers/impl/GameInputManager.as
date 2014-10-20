@@ -6,10 +6,11 @@ package net.wg.infrastructure.managers.impl
     import scaleform.clik.events.InputEvent;
     import flash.events.FocusEvent;
     import flash.utils.Dictionary;
+    import scaleform.clik.controls.TextInput;
+    import net.wg.infrastructure.events.LifeCycleEvent;
     import scaleform.clik.ui.InputDetails;
     import scaleform.clik.constants.InputValue;
     import flash.text.TextField;
-    import scaleform.clik.controls.TextInput;
     import flash.text.TextFieldType;
     import flash.display.InteractiveObject;
     import scaleform.gfx.Extensions;
@@ -98,11 +99,17 @@ package net.wg.infrastructure.managers.impl
         
         public function dispose() : void
         {
+            var _loc1_:TextInput = null;
             this.clearKeyHandlers();
             this._inputHandlers = null;
             if(this._changedTextFields)
             {
-                this._changedTextFields.splice();
+                for each(_loc1_ in this._changedTextFields)
+                {
+                    _loc1_.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeHandler,false);
+                }
+                _loc1_ = null;
+                this._changedTextFields.splice(0,this._changedTextFields.length);
                 this._changedTextFields = null;
             }
             this._dispatcher.removeEventListener(InputEvent.INPUT,this.onInputHandler);
@@ -173,9 +180,10 @@ package net.wg.infrastructure.managers.impl
                     {
                         for each(ti in this._changedTextFields)
                         {
+                            ti.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeHandler,false);
                             ti.editable = true;
                         }
-                        this._changedTextFields.splice();
+                        this._changedTextFields.splice(0,this._changedTextFields.length);
                     }
                 }
                 
@@ -222,6 +230,7 @@ package net.wg.infrastructure.managers.impl
                             this._changedTextFields = [];
                         }
                         this._changedTextFields.push(_loc3_);
+                        _loc3_.addEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeHandler,false,0,true);
                         _loc3_.editable = false;
                     }
                 }
@@ -236,6 +245,22 @@ package net.wg.infrastructure.managers.impl
             {
                 _loc1_ = true;
                 return _loc1_;
+            }
+        }
+        
+        private function onDisposeHandler(param1:LifeCycleEvent) : void
+        {
+            var _loc3_:TextInput = null;
+            if(!this._changedTextFields)
+            {
+                return;
+            }
+            var _loc2_:int = this._changedTextFields.indexOf(param1.target);
+            if(_loc2_ != -1)
+            {
+                _loc3_ = this._changedTextFields[_loc2_] as TextInput;
+                _loc3_.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeHandler,false);
+                this._changedTextFields.splice(_loc2_,1);
             }
         }
     }

@@ -48,7 +48,7 @@ package net.wg.gui.components.common.serverStats
             this.textField.text = MENU.LOBBY_MENU_SERVERS_TITLE;
             this.serverInfo.visible = App.globalVarsMgr.isShowServerStatsS();
             this.serverInfo.focusable = false;
-            this.regionDD.visible = App.globalVarsMgr.isShowServersListS();
+            this.regionDD.visible = !App.globalVarsMgr.isChinaS();
         }
         
         override protected function draw() : void
@@ -64,7 +64,7 @@ package net.wg.gui.components.common.serverStats
             }
             if(isInvalid(INVALIDATE_SERVERS))
             {
-                if(!App.globalVarsMgr.isShowServersListS())
+                if(App.globalVarsMgr.isChinaS())
                 {
                     this.updateOneServer(this._serversList);
                 }
@@ -80,7 +80,7 @@ package net.wg.gui.components.common.serverStats
         override protected function onPopulate() : void
         {
             super.onPopulate();
-            if((isCSISUpdateOnRequestS()) && (App.globalVarsMgr.isShowServersListS()))
+            if((isCSISUpdateOnRequestS()) && !App.globalVarsMgr.isChinaS())
             {
                 this.regionDD.addEventListener(DropdownMenuEvent.SHOW_DROP_DOWN,this.onServersDDClick);
                 this.regionDD.addEventListener(DropdownMenuEvent.CLOSE_DROP_DOWN,this.onServersDDClick);
@@ -90,7 +90,7 @@ package net.wg.gui.components.common.serverStats
         override protected function onDispose() : void
         {
             var _loc1_:String = null;
-            if(App.globalVarsMgr.isShowServersListS())
+            if(!App.globalVarsMgr.isChinaS())
             {
                 this.regionDD.removeEventListener(DropdownMenuEvent.SHOW_DROP_DOWN,this.onServersDDClick);
                 this.regionDD.removeEventListener(DropdownMenuEvent.CLOSE_DROP_DOWN,this.onServersDDClick);
@@ -112,7 +112,7 @@ package net.wg.gui.components.common.serverStats
             if(!param1)
             {
                 this._serversList = getServersS();
-                if(!App.globalVarsMgr.isShowServersListS())
+                if(App.globalVarsMgr.isChinaS())
                 {
                     this.updateOneServer(this._serversList);
                 }

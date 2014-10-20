@@ -12,6 +12,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import net.wg.gui.components.controls.ScrollBar;
     import net.wg.infrastructure.interfaces.IWrapper;
     import net.wg.gui.components.popOvers.PopOver;
+    import scaleform.gfx.TextFieldEx;
     import net.wg.data.constants.Time;
     import scaleform.clik.events.ListEvent;
     import scaleform.clik.events.IndexEvent;
@@ -89,7 +90,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var monthOffset:uint = 0;
         
-        private var today:Date = null;
+        private var startDay:Date = null;
         
         private var scrollBar:ScrollBar = null;
         
@@ -102,15 +103,11 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         override protected function configUI() : void
         {
             super.configUI();
-            this.today = App.utils.dateTime.now();
-            this.today.setHours(0,0,0,0);
+            TextFieldEx.setVerticalAlign(this.vacationResultTF,TextFieldEx.VALIGN_CENTER);
             this.dateStepper.minimum = DATE_MINIMUM;
             this.dateStepper.maximum = Time.MAX_MONTH_DAYS_COUNT;
             this.durationStepper.minimum = DURATION_MINIMUM;
             this.durationStepper.maximum = DURATION_MAXIMUM;
-            this.durationStepper.value = DURATION_MAXIMUM;
-            this.createStartDate();
-            this.changeVacationResultText();
             this.monthDropdown.addEventListener(ListEvent.INDEX_CHANGE,this.monthDropdownMenuSelectHandler);
             this.applyBtn.addEventListener(ButtonEvent.CLICK,this.onApplyBtnClick);
             this.applyBtn.addEventListener(MouseEvent.MOUSE_OVER,onApplyBtnRollOver);
@@ -151,7 +148,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             this.durationStepper = null;
             this.monthDropdown.dispose();
             this.monthDropdown = null;
-            this.today = null;
+            this.startDay = null;
             if(this.scrollBar)
             {
                 this.scrollBar.dispose();
@@ -173,6 +170,10 @@ package net.wg.gui.lobby.fortifications.popovers.impl
             }
             if(isInvalid(InvalidationType.DATA))
             {
+                this.startDay = App.utils.dateTime.shiftDate(this.startVacationDate,-2 * Time.WEEK);
+                this.startDay.setHours(0,0,0,0);
+                this.createStartDate();
+                this.changeVacationResultText();
                 _loc1_ = this.dateStepper.x < this.monthDropdown.x?this.dateStepper.x:this.monthDropdown.x;
                 _loc2_ = this.dateStepper.x < this.monthDropdown.x?this.monthDropdown.x - this.dateStepper.x - this.dateStepper.width:this.dateStepper.x - this.monthDropdown.x - this.monthDropdown.width;
                 if(this.isAmericanStyle)
@@ -203,16 +204,20 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         override protected function setTexts(param1:VacationPopoverVO) : void
         {
             this.descriptionTF.htmlText = param1.descriptionText;
-            this.vacationStartTF.htmlText = param1.vacationStart;
-            this.vacationDurationTF.htmlText = param1.vacationDuration;
-            this.ofDaysTF.htmlText = param1.ofDays;
+            this.vacationStartTF.htmlText = param1.vacationStartText;
+            this.vacationDurationTF.htmlText = param1.vacationDurationText;
+            this.ofDaysTF.htmlText = param1.ofDaysText;
             this.applyBtn.label = param1.applyBtnLabel;
             this.cancelBtn.label = param1.cancelBtnLabel;
         }
         
         override protected function setData(param1:VacationPopoverVO) : void
         {
+            this.startVacationDate = App.utils.dateTime.fromPyTimestamp(param1.startVacation);
+            this.endVacationDate = App.utils.dateTime.fromPyTimestamp(param1.startVacation + param1.vacationDuration * Time.DAY);
             this.isAmericanStyle = param1.isAmericanStyle;
+            this.durationStepper.value = param1.vacationDuration;
+            invalidateData();
         }
         
         override protected function onShowDropdownHandler(param1:DropdownMenuEvent) : void
@@ -231,8 +236,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         private function createStartDate() : void
         {
             var _loc1_:Array = [];
-            this.startVacationDate = App.utils.dateTime.shiftDate(this.today,2 * Time.WEEK);
-            this.endVacationDate = App.utils.dateTime.shiftDate(this.startVacationDate,this.durationStepper.value * Time.DAY);
             this.monthOffset = this.startVacationDate.month;
             var _loc2_:* = 0;
             while(_loc2_ < Time.MONTHS_IN_YEAR)
@@ -260,7 +263,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     {
         this.startVacationDate.fullYear = App.utils.dateTime.now().fullYear;
         this.setNewDateValues();
-        if(this.startVacationDate < App.utils.dateTime.shiftDate(this.today,2 * Time.WEEK))
+        if(this.startVacationDate < App.utils.dateTime.shiftDate(this.startDay,2 * Time.WEEK))
         {
             this.startVacationDate.fullYear++;
             this.setNewDateValues();
@@ -271,9 +274,9 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     {
         this.startVacationDate.date = 1;
         this.startVacationDate.month = this.getRealMonthIndex(this.monthDropdown.selectedIndex);
-        if(App.utils.dateTime.isSameMonth(App.utils.dateTime.shiftDate(this.today,2 * Time.WEEK),this.startVacationDate))
+        if(App.utils.dateTime.isSameMonth(App.utils.dateTime.shiftDate(this.startDay,2 * Time.WEEK),this.startVacationDate))
         {
-            this.dateStepper.minimum = App.utils.dateTime.shiftDate(this.today,2 * Time.WEEK).date;
+            this.dateStepper.minimum = App.utils.dateTime.shiftDate(this.startDay,2 * Time.WEEK).date;
         }
         else
         {
@@ -308,7 +311,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     private function onApplyBtnClick(param1:ButtonEvent) : void
     {
         var _loc2_:VacationPopoverVO = new VacationPopoverVO({"startVacation":App.utils.dateTime.toPyTimestamp(this.startVacationDate),
-        "endVacation":App.utils.dateTime.toPyTimestamp(this.endVacationDate)
+        "vacationDuration":this.durationStepper.value
     });
     onApplyS(_loc2_);
     App.popoverMgr.hide();

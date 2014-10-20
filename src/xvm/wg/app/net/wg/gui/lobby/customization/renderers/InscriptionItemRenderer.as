@@ -13,5 +13,19 @@ package net.wg.gui.lobby.customization.renderers
             super.configUI();
             uiLoader.setSourceSize(256,128);
         }
+        
+        override protected function updateCostPos() : void
+        {
+            if((data) && ((data.current) || (data.isInHangar)))
+            {
+                costFrame.x = 1;
+                costFrame.width = _costFrameW + _costFrameX - 1;
+            }
+            else
+            {
+                costFrame.x = _costFrameX;
+                costFrame.width = _costFrameW;
+            }
+        }
     }
 }

@@ -8,19 +8,11 @@ package
             super();
         }
         
-        public static var TIME_TIMEVALUE:String = "#fortifications:Time/timeValue";
-        
         public static var BUILDINGDIRECTION_TOOLTIP:String = "#fortifications:BuildingDirection/tooltip";
         
-        public static var CLANSTATS_PARAMS_SORTIE_BATTLESCOUNT_TOOLTIP:String = "#fortifications:clanStats/params/sortie/battlesCount/tooltip";
-        
-        public static var CLANSTATS_PARAMS_SORTIE_WINS_TOOLTIP:String = "#fortifications:clanStats/params/sortie/wins/tooltip";
-        
-        public static var CLANSTATS_PARAMS_SORTIE_AVGDEFRES_TOOLTIP:String = "#fortifications:clanStats/params/sortie/avgDefres/tooltip";
-        
-        public static var CLANSTATS_PARAMS_PERIODDEFENCE_AVGDEFRES_TOOLTIP:String = "#fortifications:clanStats/params/periodDefence/avgDefres/tooltip";
-        
         public static var FORTINTELLIGENCE_HEADERBLOCK:String = "#fortifications:FortIntelligence/headerBlock";
+        
+        public static var FORTINTELLIGENCE_HEADERBLOCKNODEFPERIOD:String = FORTINTELLIGENCE_HEADERBLOCK + "NoDefPeriod";
         
         public static var FORTINTELLIGENCE_TOPBLOCK:String = "#fortifications:FortIntelligence/topBlock";
         
@@ -28,13 +20,15 @@ package
         
         public static var FORTINTELLIGENCE_BOTTOMBLOCK:String = "#fortifications:FortIntelligence/bottomBlock";
         
-        public static var TIME_TIMEVALUE_DAYS:String = TIME_TIMEVALUE + "/days";
+        public static var CLANSTATS_PARAMS_SORTIE_BATTLESCOUNT_TOOLTIP:String = "#fortifications:clanStats/params/sortie/battlesCount/tooltip";
         
-        public static var TIME_TIMEVALUE_HOURS:String = TIME_TIMEVALUE + "/hours";
+        public static var CLANSTATS_PARAMS_SORTIE_WINS_TOOLTIP:String = "#fortifications:clanStats/params/sortie/wins/tooltip";
         
-        public static var TIME_TIMEVALUE_MIN:String = TIME_TIMEVALUE + "/min";
+        public static var CLANSTATS_PARAMS_SORTIE_AVGDEFRES_TOOLTIP:String = "#fortifications:clanStats/params/sortie/avgDefres/tooltip";
         
-        public static var TIME_TIMEVALUE_LESSMIN:String = TIME_TIMEVALUE + "/lessMin";
+        public static var CLANSTATS_PARAMS_PERIODDEFENCE_WINS_TOOLTIP:String = "#fortifications:clanStats/params/periodDefence/wins/tooltip";
+        
+        public static var CLANSTATS_PARAMS_PERIODDEFENCE_AVGDEFRES_TOOLTIP:String = "#fortifications:clanStats/params/periodDefence/avgDefres/tooltip";
         
         public static var GENERAL_DIRECTION:String = "#fortifications:General/direction";
         
@@ -290,9 +284,9 @@ package
         
         public static var CLANSTATS_PARAMS_PERIODDEFENCE_WINS_LABEL:String = "#fortifications:clanStats/params/periodDefence/wins/label";
         
-        public static var CLANSTATS_PARAMS_PERIODDEFENCE_WINS_TOOLTIP_HEADER:String = "#fortifications:clanStats/params/periodDefence/wins/tooltip/header";
+        public static var CLANSTATS_PARAMS_PERIODDEFENCE_WINS_TOOLTIP_HEADER:String = CLANSTATS_PARAMS_PERIODDEFENCE_WINS_TOOLTIP + "/header";
         
-        public static var CLANSTATS_PARAMS_PERIODDEFENCE_WINS_TOOLTIP_BODY:String = "#fortifications:clanStats/params/periodDefence/wins/tooltip/body";
+        public static var CLANSTATS_PARAMS_PERIODDEFENCE_WINS_TOOLTIP_BODY:String = CLANSTATS_PARAMS_PERIODDEFENCE_WINS_TOOLTIP + "/body";
         
         public static var CLANSTATS_PARAMS_PERIODDEFENCE_AVGDEFRES_LABEL:String = "#fortifications:clanStats/params/periodDefence/avgDefres/label";
         
@@ -353,6 +347,24 @@ package
         public static var BUILDINGS_BUILDINGNAME_CAR_BUILDING:String = "#fortifications:Buildings/buildingName/car_building";
         
         public static var BUILDINGS_BUILDINGNAME_OFFICE_BUILDING:String = "#fortifications:Buildings/buildingName/office_building";
+        
+        public static var BUILDINGS_MILITARY_BASE:String = "#fortifications:buildings/MILITARY_BASE";
+        
+        public static var BUILDINGS_MILITARY_ACADEMY:String = "#fortifications:buildings/MILITARY_ACADEMY";
+        
+        public static var BUILDINGS_TROPHY_BRIGADE:String = "#fortifications:buildings/TROPHY_BRIGADE";
+        
+        public static var BUILDINGS_TRAINING_DEPT:String = "#fortifications:buildings/TRAINING_DEPT";
+        
+        public static var BUILDINGS_TANKODROME:String = "#fortifications:buildings/TANKODROME";
+        
+        public static var BUILDINGS_INTENDANT_SERVICE:String = "#fortifications:buildings/INTENDANT_SERVICE";
+        
+        public static var BUILDINGS_FINANCIAL_DEPT:String = "#fortifications:buildings/FINANCIAL_DEPT";
+        
+        public static var BUILDINGS_TRANSPORT_DEPT:String = "#fortifications:buildings/TRANSPORT_DEPT";
+        
+        public static var BUILDINGS_OFFICE:String = "#fortifications:buildings/OFFICE";
         
         public static var CONGRATULATIONWINDOW_BUTTONLBL:String = "#fortifications:CongratulationWindow/buttonLbl";
         
@@ -778,6 +790,10 @@ package
         
         public static var FORTINTELLIGENCE_HEADERBLOCK_BODY:String = FORTINTELLIGENCE_HEADERBLOCK + "/body";
         
+        public static var FORTINTELLIGENCE_HEADERBLOCKNODEFPERIOD_HEADER:String = FORTINTELLIGENCE_HEADERBLOCK + "NoDefPeriod/header";
+        
+        public static var FORTINTELLIGENCE_HEADERBLOCKNODEFPERIOD_BODY:String = FORTINTELLIGENCE_HEADERBLOCK + "NoDefPeriod/body";
+        
         public static var FORTINTELLIGENCE_TOPBLOCK_HEADER:String = FORTINTELLIGENCE_TOPBLOCK + "/header";
         
         public static var FORTINTELLIGENCE_TOPBLOCK_BODY:String = FORTINTELLIGENCE_TOPBLOCK + "/body";
@@ -905,6 +921,8 @@ package
         public static var FORTINTELLIGENCE_CLANDESCRIPTION_DIRECTION_NOTAVAILABLE:String = "#fortifications:FortIntelligence/clanDescription/direction/notAvailable";
         
         public static var FORTINTELLIGENCE_CLANDESCRIPTION_ALREADYFOUGHT:String = "#fortifications:FortIntelligence/clanDescription/alreadyFought";
+        
+        public static var FORTINTELLIGENCE_CLANDESCRIPTION_ATTACKIMPOSSIBLE:String = "#fortifications:FortIntelligence/clanDescription/attackImpossible";
         
         public static var DEMOUNTBUILDING_WINDOWTITLE:String = "#fortifications:DemountBuilding/windowTitle";
         
@@ -1240,9 +1258,9 @@ package
         
         public static var FORTCLANBATTLELIST_RENDERBATTLENAME_ENUM:Array = [FORTCLANBATTLELIST_RENDERBATTLENAME_CLANBATTLEDEFENCE,FORTCLANBATTLELIST_RENDERBATTLENAME_CLANBATTLEOFFENCE];
         
-        public static var CHOICEDIVISION_DIVISIONTYPE_ENUM:Array = [CHOICEDIVISION_DIVISIONTYPE_MIDDLEDIVISION,CHOICEDIVISION_DIVISIONTYPE_CHAMPIONDIVISION,CHOICEDIVISION_DIVISIONTYPE_ABSOLUTEDIVISION];
-        
         public static var ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM:Array = [ORDERS_ORDERPOPOVER_ORDERTYPE_BATTLEPAYMENTS,ORDERS_ORDERPOPOVER_ORDERTYPE_REQUISITION,ORDERS_ORDERPOPOVER_ORDERTYPE_EVACUATION,ORDERS_ORDERPOPOVER_ORDERTYPE_HEAVYTRUCKS,ORDERS_ORDERPOPOVER_ORDERTYPE_MILITARYMANEUVERS,ORDERS_ORDERPOPOVER_ORDERTYPE_ADDITIONALBRIEFING,ORDERS_ORDERPOPOVER_ORDERTYPE_TACTICALTRAINING,ORDERS_ORDERPOPOVER_ORDERTYPE_SPECIALMISSION];
+        
+        public static var CHOICEDIVISION_DIVISIONTYPE_ENUM:Array = [CHOICEDIVISION_DIVISIONTYPE_MIDDLEDIVISION,CHOICEDIVISION_DIVISIONTYPE_CHAMPIONDIVISION,CHOICEDIVISION_DIVISIONTYPE_ABSOLUTEDIVISION];
         
         public static var FORTMAINVIEW_ENUM:Array = [FORTMAINVIEW_COMMON_TOTALDEPOTQUANTITYTEXT,FORTMAINVIEW_COMMON_TITLE,FORTMAINVIEW_DIRECTIONS_TITLE,FORTMAINVIEW_DIRECTIONS_SELECTINGSTATUS,FORTMAINVIEW_TRANSPORTING_TITLE,FORTMAINVIEW_TRANSPORTING_EXPORTINGSTATUS,FORTMAINVIEW_TRANSPORTING_IMPORTINGSTATUS,FORTMAINVIEW_TRANSPORTING_NOTAVAILABLESTATUS,FORTMAINVIEW_TRANSPORTING_TUTORIALDESCR,FORTMAINVIEW_SORTIEBUTTON_TITLE,FORTMAINVIEW_INTELLIGENCEBUTTON_TITLE,FORTMAINVIEW_HEADER_LEVELSLBL,FORTMAINVIEW_HEADER_DEFENCEPERIOD,FORTMAINVIEW_HEADER_FORTFROZEN,FORTMAINVIEW_LEAVE_BUTTON_LABEL,FORTMAINVIEW_DIRECTIONSTUTOR_TITLE,FORTMAINVIEW_COMMONTUTOR_TITLE,FORTMAINVIEW_TRANSPORTINGTUTOR_TITLE];
         
@@ -1305,17 +1323,17 @@ package
             return _loc2_;
         }
         
-        public static function choicedivision_divisiontype(param1:String) : String
-        {
-            var _loc2_:String = "#fortifications:ChoiceDivision/divisionType/" + param1;
-            App.utils.asserter.assert(!(CHOICEDIVISION_DIVISIONTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
-            return _loc2_;
-        }
-        
         public static function orders_orderpopover_ordertype(param1:String) : String
         {
             var _loc2_:String = "#fortifications:Orders/orderPopover/orderType/" + param1;
             App.utils.asserter.assert(!(ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
+        
+        public static function choicedivision_divisiontype(param1:String) : String
+        {
+            var _loc2_:String = "#fortifications:ChoiceDivision/divisionType/" + param1;
+            App.utils.asserter.assert(!(CHOICEDIVISION_DIVISIONTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         

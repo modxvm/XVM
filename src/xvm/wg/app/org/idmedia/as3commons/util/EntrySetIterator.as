@@ -45,7 +45,7 @@ package org.idmedia.as3commons.util
             }
             else
             {
-                var _loc1_:* = this.current.getKey();
+                _loc1_ = this.current.getKey();
                 this.current = null;
                 this.s.removeEntryForKey(_loc1_);
                 return;

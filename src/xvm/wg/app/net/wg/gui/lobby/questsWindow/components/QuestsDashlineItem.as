@@ -3,12 +3,13 @@ package net.wg.gui.lobby.questsWindow.components
     import net.wg.gui.components.advanced.DashLineTextItem;
     import net.wg.gui.lobby.questsWindow.components.interfaces.IResizableContent;
     import flash.events.MouseEvent;
-    import net.wg.gui.components.controls.SoundButton;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.MovieClip;
     import flash.text.TextField;
     import net.wg.gui.lobby.questsWindow.data.QuestDashlineItemVO;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.events.QuestEvent;
+    import flash.text.TextLineMetrics;
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
     
@@ -25,9 +26,9 @@ package net.wg.gui.lobby.questsWindow.components
         
         private static var INV_LINK_ID:String = "invLinkID";
         
-        public static var MIN_DASHLINE_WIDTH:int = 20;
-        
         public static var TEXT_PADDING:int = 5;
+        
+        public static var BTN_LINK_Y_PADDING:int = 2;
         
         private static function hideTooltip(param1:MouseEvent) : void
         {
@@ -36,7 +37,7 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var _isReadyForLayout:Boolean = false;
         
-        public var linkBtn:SoundButton;
+        public var linkBtn:SoundButtonEx;
         
         private var _linkID:String = "";
         
@@ -49,6 +50,8 @@ package net.wg.gui.lobby.questsWindow.components
         private var _contentAlign:String = "left";
         
         private var _isNumerated:Boolean = false;
+        
+        private var MIN_LAST_ITEM_WIDTH:int = 30;
         
         public function setData(param1:Object) : void
         {
@@ -119,6 +122,8 @@ package net.wg.gui.lobby.questsWindow.components
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
             var _loc5_:* = NaN;
+            var _loc6_:TextLineMetrics = null;
+            var _loc7_:* = undefined;
             if(isInvalid(VALUE_INV))
             {
                 if(_myEnabled)
@@ -137,7 +142,7 @@ package net.wg.gui.lobby.questsWindow.components
                 {
                     labelTextField.autoSize = TextFieldAutoSize.LEFT;
                     labelTextField.htmlText = label;
-                    labelTextField.width = _width - MIN_DASHLINE_WIDTH - valueTextField.width;
+                    labelTextField.width = _width - this.MIN_LAST_ITEM_WIDTH - valueTextField.width;
                     labelTextField.height = labelTextField.textHeight + TEXT_PADDING;
                     invalidate(InvalidationType.SIZE);
                 }
@@ -160,8 +165,10 @@ package net.wg.gui.lobby.questsWindow.components
                 _loc5_ = Math.round(labelTextField.textHeight + _loc4_);
                 if(this._linkID)
                 {
-                    this.linkBtn.x = Math.round(_loc1_ + 5);
-                    this.linkBtn.y = Math.round(_loc5_ - this.linkBtn.height);
+                    this.linkBtn.x = Math.round(_loc1_ + 7);
+                    _loc6_ = labelTextField.getLineMetrics(0);
+                    _loc7_ = labelTextField.numLines > 1?_loc6_.height + _loc6_.leading:_loc6_.height;
+                    this.linkBtn.y = Math.round(labelTextField.textHeight - _loc7_ + (_loc7_ - this.linkBtn.height) / 2) + BTN_LINK_Y_PADDING;
                     _loc3_ = Math.round(this.linkBtn.x + this.linkBtn.width);
                 }
                 if(this._isNotAvailable)

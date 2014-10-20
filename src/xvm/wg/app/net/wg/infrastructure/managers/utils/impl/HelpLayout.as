@@ -9,6 +9,7 @@ package net.wg.infrastructure.managers.utils.impl
     import net.wg.utils.IPopUpManager;
     import net.wg.data.constants.Linkages;
     import flash.display.Stage;
+    import flash.geom.Rectangle;
     
     public class HelpLayout extends Object implements IHelpLayout
     {
@@ -19,8 +20,6 @@ package net.wg.infrastructure.managers.utils.impl
         }
         
         private static var HL_MAIN_SOURCE:String = "HelpLayout";
-        
-        private static var DEF_CONNECTOR_LENGTH:Number = 12;
         
         private var _modalBackground:DisplayObject = null;
         
@@ -83,21 +82,14 @@ package net.wg.infrastructure.managers.utils.impl
         this.destroyBackground();
     }
     
-    public function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number, param7:Number) : Object
+    public function getProps(param1:Rectangle, param2:String, param3:String) : Object
     {
-        return {"borderWidth":param1,
-        "borderHeight":param2,
-        "direction":param3,
-        "text":param4,
-        "x":param5,
-        "y":param6,
-        "connectorLength":param7
+        return {"rect":param1,
+        "text":param2,
+        "extensibilityDirection":param3,
+        "x":param1.x,
+        "y":param1.y
     };
-}
-
-public function get defConnectorLength() : Number
-{
-    return DEF_CONNECTOR_LENGTH;
 }
 }
 }

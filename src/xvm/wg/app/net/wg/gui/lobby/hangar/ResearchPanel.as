@@ -8,6 +8,10 @@ package net.wg.gui.lobby.hangar
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.IconText;
     import flash.display.MovieClip;
+    import flash.display.DisplayObject;
+    import net.wg.utils.IHelpLayout;
+    import flash.geom.Rectangle;
+    import net.wg.data.constants.Directions;
     import scaleform.clik.events.ButtonEvent;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.IconsTypes;
@@ -41,6 +45,12 @@ package net.wg.gui.lobby.hangar
         private var _earnedXP:Number = 0;
         
         private var _isElite:Boolean = false;
+        
+        private var _helpLayout:DisplayObject = null;
+        
+        private var _helpLayoutX:Number = 0;
+        
+        private var _helpLayoutW:Number = 0;
         
         public function as_updateCurrentVehicle(param1:String, param2:String, param3:String, param4:Number, param5:Boolean) : void
         {
@@ -80,14 +90,30 @@ package net.wg.gui.lobby.hangar
             this.bg.mouseChildren = false;
         }
         
+        public function getHelpLayoutWidth() : Number
+        {
+            return this.bg.width + this.bg.x - (this.tankTypeIco.x - this.tankTypeIco.width);
+        }
+        
+        public function showHelpLayoutEx(param1:Number, param2:Number) : void
+        {
+            this._helpLayoutX = param1;
+            this._helpLayoutW = param2;
+            this.showHelpLayout();
+        }
+        
         public function showHelpLayout() : void
         {
-            this.button.showHelpLayout();
+            var _loc1_:IHelpLayout = App.utils.helpLayout;
+            var _loc2_:Rectangle = new Rectangle(this.bg.x + this.bg.width - this._helpLayoutW,0,this._helpLayoutW,this.bg.height);
+            var _loc3_:Object = _loc1_.getProps(_loc2_,LOBBY_HELP.HANGAR_VEHRESEARCHPANEL,Directions.RIGHT);
+            this._helpLayout = _loc1_.create(root,_loc3_,this);
         }
         
         public function closeHelpLayout() : void
         {
-            this.button.closeHelpLayout();
+            var _loc1_:IHelpLayout = App.utils.helpLayout;
+            _loc1_.destroy(this._helpLayout);
         }
         
         override protected function onPopulate() : void
@@ -100,7 +126,6 @@ package net.wg.gui.lobby.hangar
                 this.button.addEventListener(ButtonEvent.CLICK,this.handleButtonClick,false,0,true);
                 this.button.label = MENU.UNLOCKS_UNLOCKBUTTON;
                 this.button.tooltip = TOOLTIPS.HANGAR_UNLOCKBUTTON;
-                this.button.helpText = LOBBY_HELP.HANGAR_MODULES_POWER_LEVEL;
             }
         }
         
@@ -115,6 +140,7 @@ package net.wg.gui.lobby.hangar
             this.xpText = null;
             this.button.dispose();
             this.button = null;
+            this._helpLayout = null;
         }
         
         override protected function draw() : void

@@ -31,6 +31,12 @@ package net.wg.gui.login.EULA
         
         public var textArea:TextAreaSimple = null;
         
+        override protected function configUI() : void
+        {
+            super.configUI();
+            App.utils.styleSheetManager.setLinkStyle(this.textArea.textField);
+        }
+        
         override protected function onInitModalFocus(param1:InteractiveObject) : void
         {
             super.onInitModalFocus(param1);

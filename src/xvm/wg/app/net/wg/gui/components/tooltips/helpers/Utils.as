@@ -110,6 +110,9 @@ package net.wg.gui.components.tooltips.helpers
                         _loc5_ = IconsTypes.CREDITS;
                     }
                     break;
+                case "rentals":
+                    _loc5_ = IconsTypes.RENTALS;
+                    break;
                 default:
                     _loc5_ = IconsTypes.EMPTY;
             }

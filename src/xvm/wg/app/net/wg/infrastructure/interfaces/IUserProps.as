@@ -34,5 +34,9 @@ package net.wg.infrastructure.interfaces
         function get rgb() : Number;
         
         function set rgb(param1:Number) : void;
+        
+        function get referralType() : int;
+        
+        function set referralType(param1:int) : void;
     }
 }

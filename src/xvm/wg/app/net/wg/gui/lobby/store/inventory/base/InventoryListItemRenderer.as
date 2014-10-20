@@ -76,7 +76,7 @@ package net.wg.gui.lobby.store.inventory.base
                 credits.visible = !actionPrice.visible;
                 if(errorField)
                 {
-                    errorField.text = param1.disabled;
+                    errorField.text = param1.statusMessage;
                     if(param1.statusLevel)
                     {
                         errorField.textColor = STORE_STATUS_COLOR.getColor(param1.statusLevel);

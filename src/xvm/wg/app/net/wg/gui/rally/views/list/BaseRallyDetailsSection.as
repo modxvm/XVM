@@ -5,12 +5,12 @@ package net.wg.gui.rally.views.list
     import flash.text.TextField;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.rally.interfaces.IRallyVO;
-    import flash.events.MouseEvent;
     import net.wg.gui.rally.controls.RallyInvalidationType;
     import scaleform.clik.events.ButtonEvent;
+    import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.data.constants.Values;
     import net.wg.gui.rally.controls.RallySimpleSlotRenderer;
+    import net.wg.data.constants.Values;
     import net.wg.gui.rally.events.RallyViewsEvent;
     
     public class BaseRallyDetailsSection extends UIComponent
@@ -41,15 +41,6 @@ package net.wg.gui.rally.views.list
         protected var model:IRallyVO;
         
         private var _vehiclesLabel:String = "";
-        
-        protected function getSlots() : Array
-        {
-            return [];
-        }
-        
-        protected function onControlRollOver(param1:MouseEvent) : void
-        {
-        }
         
         public function setData(param1:IRallyVO) : void
         {
@@ -96,6 +87,43 @@ package net.wg.gui.rally.views.list
             {
                 this.updateElements();
             }
+        }
+        
+        override protected function onDispose() : void
+        {
+            var _loc1_:RallySimpleSlotRenderer = null;
+            if(this.joinButton)
+            {
+                this.joinButton.removeEventListener(ButtonEvent.CLICK,this.onJoinClick);
+                this.joinButton.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
+                this.joinButton.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+                this.joinButton.dispose();
+                this.joinButton = null;
+            }
+            if(this.headerTF)
+            {
+                this.headerTF.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
+                this.headerTF.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+                this.headerTF = null;
+            }
+            if(this.descriptionTF)
+            {
+                this.descriptionTF.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
+                this.descriptionTF.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+                this.descriptionTF = null;
+            }
+            for each(_loc1_ in this.slots)
+            {
+                _loc1_.dispose();
+                _loc1_ = null;
+            }
+            this.model = null;
+            super.onDispose();
+        }
+        
+        protected function getSlots() : Array
+        {
+            return [];
         }
         
         protected function updateVehicleInfoTF() : void
@@ -153,41 +181,13 @@ package net.wg.gui.rally.views.list
             }
         }
         
+        protected function onControlRollOver(param1:MouseEvent) : void
+        {
+        }
+        
         protected function onControlRollOut(param1:MouseEvent = null) : void
         {
             App.toolTipMgr.hide();
-        }
-        
-        override protected function onDispose() : void
-        {
-            var _loc1_:RallySimpleSlotRenderer = null;
-            if(this.joinButton)
-            {
-                this.joinButton.removeEventListener(ButtonEvent.CLICK,this.onJoinClick);
-                this.joinButton.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
-                this.joinButton.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
-                this.joinButton.dispose();
-                this.joinButton = null;
-            }
-            if(this.headerTF)
-            {
-                this.headerTF.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
-                this.headerTF.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
-                this.headerTF = null;
-            }
-            if(this.descriptionTF)
-            {
-                this.descriptionTF.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
-                this.descriptionTF.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
-                this.descriptionTF = null;
-            }
-            for each(_loc1_ in this.slots)
-            {
-                _loc1_.dispose();
-                _loc1_ = null;
-            }
-            this.model = null;
-            super.onDispose();
         }
         
         protected function onJoinClick(param1:ButtonEvent) : void

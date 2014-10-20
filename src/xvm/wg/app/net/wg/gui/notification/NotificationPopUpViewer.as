@@ -45,7 +45,7 @@ package net.wg.gui.notification
     
     private var maxAvailaleMessagesCount:uint = 5;
     
-    public var popupClass:Class;
+    private var popupClass:Class;
     
     private var animationManager:ExcludeTweenManager;
     

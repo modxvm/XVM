@@ -2,31 +2,28 @@ package net.wg.gui.lobby.messengerBar.carousel
 {
     import net.wg.infrastructure.base.meta.impl.ChannelCarouselMeta;
     import net.wg.infrastructure.base.meta.IChannelCarouselMeta;
-    import net.wg.gui.interfaces.IHelpLayoutComponent;
     import net.wg.data.daapi.base.DAAPIDataProvider;
     import net.wg.gui.lobby.messengerBar.carousel.data.ChannelListItemVO;
     import net.wg.infrastructure.base.interfaces.IAbstractWindowView;
     import net.wg.gui.components.windows.Window;
     import net.wg.gui.components.common.containers.GroupEx;
     import flash.display.Sprite;
-    import flash.display.DisplayObject;
     import net.wg.gui.components.common.containers.HorizontalGroupLayout;
     import net.wg.data.constants.Linkages;
     import net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent;
     import flash.events.Event;
     import net.wg.gui.events.MessengerBarEvent;
-    import net.wg.utils.IHelpLayout;
-    import net.wg.data.constants.Directions;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.interfaces.IDataProvider;
     import flash.events.EventPhase;
     import scaleform.clik.interfaces.IListItemRenderer;
     import net.wg.infrastructure.base.AbstractWindowView;
+    import flash.display.DisplayObject;
     import net.wg.infrastructure.base.interfaces.IWindow;
     import flash.geom.Point;
     import net.wg.gui.lobby.messengerBar.WindowOffsetsInBar;
     
-    public class ChannelCarousel extends ChannelCarouselMeta implements IChannelCarouselMeta, IHelpLayoutComponent
+    public class ChannelCarousel extends ChannelCarouselMeta implements IChannelCarouselMeta
     {
         
         public function ChannelCarousel()
@@ -82,8 +79,6 @@ package net.wg.gui.lobby.messengerBar.carousel
         
         protected var _battlesDataProvider:DAAPIDataProvider;
         
-        private var _commonChannelHL:DisplayObject;
-        
         override protected function configUI() : void
         {
             this.preBattlesGroup = new GroupEx();
@@ -114,20 +109,6 @@ package net.wg.gui.lobby.messengerBar.carousel
         public function as_getBattlesDataProvider() : Object
         {
             return this._battlesDataProvider;
-        }
-        
-        public function showHelpLayout() : void
-        {
-            var _loc1_:IHelpLayout = App.utils.helpLayout;
-            var _loc2_:DisplayObject = this.list.getRendererAt(0) as DisplayObject;
-            var _loc3_:Object = _loc1_.getProps(_loc2_.width,_loc2_.height,Directions.RIGHT,LOBBY_HELP.CHAT_CHANNEL_CAROUSEL,_loc2_.x,_loc2_.y,_loc1_.defConnectorLength);
-            this._commonChannelHL = _loc1_.create(root,_loc3_,this.list);
-        }
-        
-        public function closeHelpLayout() : void
-        {
-            var _loc1_:IHelpLayout = App.utils.helpLayout;
-            _loc1_.destroy(this._commonChannelHL);
         }
         
         override protected function draw() : void
@@ -203,7 +184,6 @@ package net.wg.gui.lobby.messengerBar.carousel
             this.list = null;
             this.scrollBar = null;
             this.background = null;
-            this._commonChannelHL = null;
             super.onDispose();
         }
         

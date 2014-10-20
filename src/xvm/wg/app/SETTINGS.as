@@ -114,6 +114,8 @@ package
         
         public static var TRIPLEBUFFERED:String = "#settings:tripleBuffered";
         
+        public static var TRIPLEBUFFERED_DESCRIPTION:String = "#settings:tripleBuffered/description";
+        
         public static var RENDER_PIPELINE:String = "#settings:RENDER_PIPELINE";
         
         public static var RENDER_PIPELINE_LABEL:String = "#settings:RENDER_PIPELINE/label";
@@ -235,6 +237,14 @@ package
         public static var DYNAMICFOV:String = "#settings:dynamicFov";
         
         public static var DYNAMICFOV_DESCRIPTION:String = "#settings:dynamicFov/description";
+        
+        public static var HAVOK_ENABLED:String = "#settings:HAVOK_ENABLED";
+        
+        public static var HAVOK_ENABLED_DESCRIPTION:String = "#settings:HAVOK_ENABLED/description";
+        
+        public static var HAVOK_ENABLED_ON:String = "#settings:HAVOK_ENABLED/ON";
+        
+        public static var HAVOK_ENABLED_OFF:String = "#settings:HAVOK_ENABLED/OFF";
         
         public static var GAME_REPLAYENABLED:String = "#settings:game/replayEnabled";
         

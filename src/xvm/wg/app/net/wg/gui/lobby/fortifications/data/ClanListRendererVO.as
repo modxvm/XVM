@@ -11,5 +11,7 @@ package net.wg.gui.lobby.fortifications.data
         public var intWeekMining:int = -1;
         
         public var intTotalMining:int = -1;
+        
+        public var playerRoleID:int = -1;
     }
 }

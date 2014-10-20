@@ -152,6 +152,11 @@ package net.wg.gui.lobby.techtree.nodes
             return this.dataInited?this._valueObject.iconPath:"";
         }
         
+        public function getRentLeft() : String
+        {
+            return this.dataInited?this._valueObject.rentLeftTimeStr:"";
+        }
+        
         public function getDisplayInfo() : Object
         {
             return this.dataInited?this._valueObject.displayInfo:null;
@@ -209,12 +214,17 @@ package net.wg.gui.lobby.techtree.nodes
                 return false;
             }
             var _loc1_:Number = this._valueObject.state;
-            return (_loc1_ & NodeState.UNLOCKED) > 0 && (_loc1_ & NodeState.ENOUGH_MONEY) > 0 && (_loc1_ & NodeState.IN_INVENTORY) == 0;
+            return (_loc1_ & NodeState.UNLOCKED) > 0 && (_loc1_ & NodeState.ENOUGH_MONEY) > 0 && ((_loc1_ & NodeState.IN_INVENTORY) == 0 || (_loc1_ & NodeState.VEHICLE_IN_RENT) > 0);
         }
         
         public function isAvailable4Sell() : Boolean
         {
             return (this.dataInited) && (this._valueObject.state & NodeState.CAN_SELL) > 0;
+        }
+        
+        public function isRented() : Boolean
+        {
+            return (this.dataInited) && (this._valueObject.state & NodeState.VEHICLE_IN_RENT) > 0;
         }
         
         public function isActionEnabled() : Boolean

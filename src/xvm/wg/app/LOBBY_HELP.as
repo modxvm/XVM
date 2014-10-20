@@ -20,36 +20,30 @@ package
         
         public static var HEADER_FINANCE_BLOCK:String = "#lobby_help:header/finance-block";
         
-        public static var HEADER_FIGHT_BUTTON:String = "#lobby_help:header/fight-button";
-        
-        public static var HEADER_MENU_INVENTORY:String = "#lobby_help:header/menu/inventory";
-        
-        public static var HEADER_MENU_SHOP:String = "#lobby_help:header/menu/shop";
-        
-        public static var HEADER_MENU_PROFILE:String = "#lobby_help:header/menu/profile";
-        
-        public static var HEADER_MENU_TECHTREE:String = "#lobby_help:header/menu/techtree";
-        
-        public static var CHAT_CHANNELS:String = "#lobby_help:chat/channels";
-        
         public static var CHAT_SERVICE_CHANNEL:String = "#lobby_help:chat/service-channel";
         
-        public static var CHAT_CHANNEL_CAROUSEL:String = "#lobby_help:chat/channel-carousel";
-        
-        public static var HANGAR_CREW:String = "#lobby_help:hangar/crew";
-        
-        public static var HANGAR_VEHICLE_PARAMETERS:String = "#lobby_help:hangar/vehicle-parameters";
+        public static var CHAT_CONTACTS_CHANNEL:String = "#lobby_help:chat/contacts-channel";
         
         public static var HANGAR_MODULES:String = "#lobby_help:hangar/modules";
         
         public static var HANGAR_OPTIONAL_DEVICES:String = "#lobby_help:hangar/optional-devices";
         
-        public static var HANGAR_MAINTENANCE_BUTTON:String = "#lobby_help:hangar/maintenance-button";
+        public static var HANGAR_SHELLS:String = "#lobby_help:hangar/shells";
         
-        public static var HANGAR_CUSTOMIZATION_BUTTON:String = "#lobby_help:hangar/customization-button";
+        public static var HANGAR_EQUIPMENT:String = "#lobby_help:hangar/equipment";
+        
+        public static var HANGAR_CREW:String = "#lobby_help:hangar/crew";
+        
+        public static var HANGAR_VEHICLE_PARAMETERS:String = "#lobby_help:hangar/vehicle-parameters";
         
         public static var HANGAR_VEHICLE_CAROUSEL:String = "#lobby_help:hangar/vehicle-carousel";
         
-        public static var HANGAR_MODULES_POWER_LEVEL:String = "#lobby_help:hangar/modules-power-level";
+        public static var HANGAR_QUESTSCONTROL:String = "#lobby_help:hangar/questsControl";
+        
+        public static var HANGAR_CREWOPERATIONBTN:String = "#lobby_help:hangar/crewOperationBtn";
+        
+        public static var HANGAR_VEHRESEARCHPANEL:String = "#lobby_help:hangar/vehResearchPanel";
+        
+        public static var HANGAR_VEHFILTERS:String = "#lobby_help:hangar/vehFilters";
     }
 }

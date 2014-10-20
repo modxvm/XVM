@@ -7,7 +7,6 @@ package net.wg.gui.lobby.hangar.tcarousel
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.ActionPrice;
     import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
-    import net.wg.gui.components.controls.VO.ActionPriceVO;
     import net.wg.data.constants.SoundTypes;
     import net.wg.data.constants.SoundManagerStates;
     import flash.text.TextFormat;
@@ -42,49 +41,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         public var focusIndicator1:MovieClip = null;
         
-        private var _id:Number = 0;
-        
-        private var _image:String = "";
-        
-        private var _nation:Number = -1;
-        
-        private var _level:Number = -1;
-        
-        private var _stat:String = "";
-        
-        private var _current:Number = -1;
-        
-        private var _stateLevel:String = "";
-        
-        private var _doubleXPReceived:Number = 0;
-        
-        private var _compactDescr:Number = -1;
-        
-        private var _favorite:Boolean = false;
-        
-        private var _canSell:Boolean = false;
-        
-        private var _clanLock:Number = -1;
-        
-        private var _elite:Boolean = false;
-        
         public var dataVO:VehicleCarouselVO = null;
         
-        private var _premium:Boolean = false;
-        
-        private var _tankType:String = "";
-        
-        private var _exp:Number = 0;
-        
-        private var _buyTank:Boolean = false;
-        
-        private var _buySlot:Boolean = false;
-        
-        private var _availableSlots:Number = 0;
-        
-        private var _slotPrice:Number = 0;
-        
-        private var _slotPriceActionData:ActionPriceVO = null;
+        private var STATUS_MARGIN:Number = 5;
         
         override protected function onDispose() : void
         {
@@ -121,29 +80,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 this.dataVO = VehicleCarouselVO(param1);
                 this.visible = false;
-                this.id = this.dataVO.id;
-                label = this.dataVO.label;
-                this.image = this.dataVO.image;
-                this.nation = this.dataVO.nation;
-                this.level = this.dataVO.level;
-                this.stat = this.dataVO.stat;
-                this.current = this.dataVO.current;
-                this._stateLevel = this.dataVO.stateLevel;
-                this._doubleXPReceived = this.dataVO.doubleXPReceived;
-                this._compactDescr = this.dataVO.compactDescr;
-                this.favorite = this.dataVO.favorite;
-                this._canSell = this.dataVO.canSell;
-                this._clanLock = this.dataVO.clanLock;
-                this._elite = this.dataVO.elite;
-                this._premium = this.dataVO.premium;
-                this._exp = this.dataVO.exp;
+                this.enabled = true;
                 empty = this.dataVO.empty;
-                this.buyTank = this.dataVO.buyTank;
-                this.buySlot = this.dataVO.buySlot;
-                this._tankType = this.dataVO.type;
-                this._availableSlots = this.dataVO.availableSlots;
-                this._slotPrice = this.dataVO.slotPrice;
-                this._slotPriceActionData = this.dataVO.slotPriceActionData;
                 _dataDirty = true;
                 invalidate();
             }
@@ -158,7 +96,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         {
             super.enabled = param1;
             useHandCursor = param1;
-            if(this.buySlot)
+            if((this.dataVO) && (this.dataVO.buySlot))
             {
                 this.mouseChildren = param1;
             }
@@ -177,142 +115,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             _displayFocus = param1;
             changeFocus();
-        }
-        
-        public function get favorite() : Boolean
-        {
-            return this._favorite;
-        }
-        
-        public function set favorite(param1:Boolean) : void
-        {
-            if(this._favorite == param1)
-            {
-                return;
-            }
-            this._favorite = param1;
-            _dataDirty = true;
-            invalidate();
-        }
-        
-        public function get buyTank() : Boolean
-        {
-            return this._buyTank;
-        }
-        
-        public function set buyTank(param1:Boolean) : void
-        {
-            if(this._buyTank == param1)
-            {
-                return;
-            }
-            this._buyTank = param1;
-            _dataDirty = true;
-            focusable = tabEnabled = this._buyTank?false:!this._buyTank;
-            setState(!enabled?"disabled":"up");
-        }
-        
-        public function get buySlot() : Boolean
-        {
-            return this._buySlot;
-        }
-        
-        public function set buySlot(param1:Boolean) : void
-        {
-            if(this._buySlot == param1)
-            {
-                return;
-            }
-            this._buySlot = param1;
-            _dataDirty = true;
-            focusable = tabEnabled = this._buySlot?false:!this._buySlot;
-            setState(!enabled?"disabled":"up");
-        }
-        
-        public function get id() : Number
-        {
-            return this._id;
-        }
-        
-        public function set id(param1:Number) : void
-        {
-            if(!isNaN(param1))
-            {
-                this._id = param1;
-            }
-        }
-        
-        public function get image() : String
-        {
-            return this._image;
-        }
-        
-        public function set image(param1:String) : void
-        {
-            if(param1)
-            {
-                this._image = param1;
-                _dataDirty = true;
-                invalidate();
-            }
-        }
-        
-        public function get nation() : Number
-        {
-            return this._nation;
-        }
-        
-        public function set nation(param1:Number) : void
-        {
-            if(param1 >= 0)
-            {
-                this._nation = param1;
-                _dataDirty = true;
-                invalidate();
-            }
-        }
-        
-        public function get level() : Number
-        {
-            return this._level;
-        }
-        
-        public function set level(param1:Number) : void
-        {
-            if(param1 >= 1)
-            {
-                this._level = param1;
-                _dataDirty = true;
-                invalidate();
-            }
-        }
-        
-        public function get stat() : String
-        {
-            return this._stat;
-        }
-        
-        public function set stat(param1:String) : void
-        {
-            if(param1 != "")
-            {
-                this._stat = param1;
-            }
-            _dataDirty = true;
-            invalidate();
-        }
-        
-        public function get current() : Number
-        {
-            return this._current;
-        }
-        
-        public function set current(param1:Number) : void
-        {
-            if(param1 >= 0)
-            {
-                this._current = param1;
-            }
         }
         
         override protected function configUI() : void
@@ -338,32 +140,33 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             if(_dataDirty)
             {
-                if((this.vehicleIcon && !empty) && (!this.buyTank) && !this.buySlot)
+                if((this.vehicleIcon && !empty) && (!this.dataVO.buyTank) && !this.dataVO.buySlot)
                 {
-                    this.vehicleIcon.image = this._image;
+                    this.vehicleIcon.image = this.dataVO.image;
                     this.vehicleIcon.showName = true;
-                    this.vehicleIcon.tankName = _label;
-                    this.vehicleIcon.level = this._level;
-                    this.vehicleIcon.isElite = this._elite;
-                    this.vehicleIcon.isPremium = this._premium;
-                    this.vehicleIcon.favorite = this._favorite;
-                    this.vehicleIcon.nation = this._nation;
+                    this.vehicleIcon.tankName = this.dataVO.label;
+                    this.vehicleIcon.level = this.dataVO.level;
+                    this.vehicleIcon.isElite = this.dataVO.elite;
+                    this.vehicleIcon.isPremium = this.dataVO.premium;
+                    this.vehicleIcon.favorite = this.dataVO.favorite;
+                    this.vehicleIcon.nation = this.dataVO.nation;
                     this.vehicleIcon.showMultyXp = true;
-                    this.vehicleIcon.multyXpVal = this._doubleXPReceived;
-                    this.vehicleIcon.tankType = this._tankType;
+                    this.vehicleIcon.multyXpVal = this.dataVO.doubleXPReceived;
+                    this.vehicleIcon.tankType = this.dataVO.tankType;
+                    this.vehicleIcon.rentInfo = this.dataVO.rentLeft;
                     this.vehicleIcon.validateNow();
-                    this.clanLockUI.timer = this._clanLock;
+                    this.clanLockUI.timer = this.dataVO.clanLock;
                 }
-                if((this._stat) && (this.bg_switcher))
+                if((this.dataVO.stat) && (this.bg_switcher))
                 {
-                    this.bg_switcher.gotoAndPlay(this.getBgLable(this._stat));
+                    this.bg_switcher.gotoAndPlay(this.getBgLable(this.dataVO.stat));
                 }
                 if(this.statusText)
                 {
-                    if(this._stat)
+                    if(this.dataVO.stat)
                     {
                         _loc2_ = new TextFormat();
-                        if((this.buyTank) || (this.buySlot))
+                        if((this.dataVO.buyTank) || (this.dataVO.buySlot))
                         {
                             _loc2_.leading = -6;
                         }
@@ -372,37 +175,37 @@ package net.wg.gui.lobby.hangar.tcarousel
                             _loc2_.leading = -4;
                         }
                         this.statusText.autoSize = "center";
-                        this.statusText.text = this._stat == "undamaged"?"":MENU.tankcarousel_vehiclestates(this._stat);
+                        this.statusText.text = this.dataVO.stat == "undamaged"?"":MENU.tankcarousel_vehiclestates(this.dataVO.stat);
                         this.statusText.setTextFormat(_loc2_);
-                        _loc3_ = this.getStatColor(this._stateLevel);
+                        _loc3_ = this.getStatColor(this.dataVO.stateLevel);
                         this.statusText.textColor = _loc3_.color;
                         this.statusText.filters = _loc3_.filterArray;
                         this.statusText.visible = true;
                     }
-                    if(this._clanLock > 0)
+                    if(this.clanLockUI.visible)
                     {
-                        this.statusText.y = Math.round(this.clanLockUI.y - this.clanLockUI.textField.height);
+                        this.statusText.y = Math.round(this.clanLockUI.y + this.clanLockUI.textField.height + this.STATUS_MARGIN);
                     }
                     else
                     {
                         this.statusText.y = _height - this.statusText.textHeight >> 1;
                     }
-                    _loc1_ = !(this._stat == "undamaged") && !_empty;
+                    _loc1_ = !(this.dataVO.stat == "undamaged") && !_empty;
                     this.statusText.visible = _loc1_;
                 }
                 this.emptyInfoTxt.visible = false;
-                if(this.buyTank)
+                if(this.dataVO.buyTank)
                 {
                     this.emptyInfoTxt.text = MENU.TANKCAROUSEL_VEHICLESTATES_BUYTANKEMPTYCOUNT;
-                    this.emptyInfoTxt.text = this.emptyInfoTxt.text + " " + this._availableSlots;
+                    this.emptyInfoTxt.text = this.emptyInfoTxt.text + " " + this.dataVO.availableSlots;
                     this.emptyInfoTxt.visible = true;
                 }
-                if((this.buySlot) && (this.slotPrice))
+                if((this.dataVO.buySlot) && (this.slotPrice))
                 {
-                    this.slotPrice.text = this._slotPrice.toString();
+                    this.slotPrice.text = this.dataVO.slotPrice.toString();
                     if(this.actionPrice)
                     {
-                        this.actionPrice.setData(this._slotPriceActionData);
+                        this.actionPrice.setData(this.dataVO.slotPriceActionData);
                         this.slotPrice.visible = !this.actionPrice.visible;
                         this.actionPrice.setup(this);
                     }
@@ -411,6 +214,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                 {
                     this.emptyInfoTxt.text = "";
                 }
+                focusable = tabEnabled = (this.dataVO.buySlot) || (this.dataVO.buyTank)?false:!this.dataVO.buySlot || !this.dataVO.buyTank;
                 _dataDirty = false;
             }
             this.scaleX = this.scaleY = 1;
@@ -418,7 +222,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         override protected function getStatePrefixes() : Vector.<String>
         {
-            if((_selected) && !_empty && !this._buyTank && !this._buySlot)
+            if((_selected && !_empty && this.dataVO) && (!this.dataVO.buyTank) && !this.dataVO.buySlot)
             {
                 return Vector.<String>(["selected_",""]);
             }
@@ -426,11 +230,11 @@ package net.wg.gui.lobby.hangar.tcarousel
             {
                 return Vector.<String>(["empty_"]);
             }
-            if(this._buyTank)
+            if((this.dataVO) && (this.dataVO.buyTank))
             {
                 return Vector.<String>(["buyTank_"]);
             }
-            if(this._buySlot)
+            if((this.dataVO) && (this.dataVO.buySlot))
             {
                 return Vector.<String>(["buySlot_"]);
             }

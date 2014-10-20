@@ -4,7 +4,7 @@ package net.wg.gui.lobby.battleResults
     import net.wg.gui.lobby.interfaces.ISubtaskComponent;
     import flash.events.MouseEvent;
     import flash.text.TextField;
-    import net.wg.gui.components.controls.SoundButton;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.questsWindow.components.QuestStatusComponent;
     import net.wg.gui.lobby.questsWindow.components.QuestsCounter;
     import net.wg.gui.lobby.questsWindow.QuestAwardsBlock;
@@ -29,7 +29,7 @@ package net.wg.gui.lobby.battleResults
         
         private static var BOTTOM_PADDING:int = 14;
         
-        private static var LINKBTN_PADDING:int = 10;
+        private static var LINKBTN_PADDING:int = 12;
         
         private static var AWARDS_PADDING:int = 5;
         
@@ -38,11 +38,9 @@ package net.wg.gui.lobby.battleResults
             App.toolTipMgr.hide();
         }
         
-        private static var PIXEL_PADDING:int = 1;
-        
         public var taskTF:TextField;
         
-        public var linkBtn:SoundButton;
+        public var linkBtn:SoundButtonEx;
         
         public var statusMC:QuestStatusComponent;
         
@@ -201,11 +199,11 @@ package net.wg.gui.lobby.battleResults
             if(this.taskTF.text != this.data.questInfo.description)
             {
                 this.taskTF.text = this.data.questInfo.description;
-                this.linkBtn.y = (this.taskTF.text?this.taskTF.textHeight + this.taskTF.y - this.linkBtn.height:this.taskTF.y) + PIXEL_PADDING;
-                this.linkBtn.x = this.taskTF.text?this.taskTF.x + this.taskTF.getLineMetrics(this.taskTF.numLines - 1).width + LINKBTN_PADDING:this.taskTF.x;
+                this.linkBtn.y = Math.round((this.taskTF.text?this.taskTF.textHeight + this.taskTF.y - this.linkBtn.height:this.taskTF.y) + 3);
+                this.linkBtn.x = Math.round(this.taskTF.text?this.taskTF.x + this.taskTF.getLineMetrics(this.taskTF.numLines - 1).width + LINKBTN_PADDING:this.taskTF.x);
                 this.taskTF.mouseEnabled = false;
             }
-            return Math.round(this.linkBtn.y + this.linkBtn.height - PIXEL_PADDING * 2);
+            return Math.round(this.linkBtn.y + this.linkBtn.height + 2);
         }
         
         private function checkCounter() : void

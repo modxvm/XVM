@@ -102,6 +102,8 @@ package net.wg.data
         
         public static var DISMISS_TANKMAN_DIALOG:String = "dismissTankmanDialog";
         
+        public static var REFERRAL_MANAGEMENT_WINDOW:String = "referralManagementWindow";
+        
         public static var LIB_CONTROLS:String = "controls";
         
         public static var LIB_ADVANCED:String = "advanced";

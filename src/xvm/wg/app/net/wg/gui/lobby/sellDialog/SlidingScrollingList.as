@@ -395,6 +395,10 @@ package net.wg.gui.lobby.sellDialog
         
         override protected function scrollList(param1:int) : void
         {
+            if(_scrollBar == null)
+            {
+                return;
+            }
             _scrollBar.position = _scrollBar.position - param1 * this.stepSize;
             _scrollBar.validateNow();
         }

@@ -97,14 +97,19 @@ package net.wg.gui.components.windows
             if(okBtn)
             {
                 okBtn.removeEventListener(MouseEvent.CLICK,this.onCloseButtonClick);
+                okBtn.dispose();
+                okBtn = null;
             }
-            this.bgForm = null;
-            this._formBgPadding = null;
-            okBtn = null;
+            this.titleBtnEx.dispose();
+            titleBtn = this.titleBtnEx = null;
+            this.resizeBtnEx.dispose();
+            resizeBtn = this.resizeBtnEx = null;
+            this.closeBtnEx.dispose();
+            closeBtn = this.closeBtnEx = null;
+            this.minimizeBtn.dispose();
             this.minimizeBtn = null;
-            titleBtn = null;
-            closeBtn = null;
-            resizeBtn = null;
+            this._formBgPadding = null;
+            this.bgForm = null;
             super.onDispose();
         }
         
@@ -417,7 +422,6 @@ package net.wg.gui.components.windows
                     }
                     catch(e:Error)
                     {
-                        trace(e);
                     }
                 }
                 if(this.windowContent.isSourceTracked)

@@ -133,8 +133,9 @@ private function initListColumns() : void
     _loc1_.label = FORTIFICATIONS.FORTCLANBATTLELIST_TABLEHEADER_BATTLENAME;
     _loc1_.buttonWidth = 247;
     _loc1_.textAlign = TextFieldAutoSize.LEFT;
-    _loc1_.iconId = "creatorName";
+    _loc1_.iconId = "direction";
     _loc1_.toolTip = TOOLTIPS.FORTIFICATION_FORTCLANBATTLELIST_BATTLENAME;
+    _loc1_.sortOrder = 1;
     _loc2_.push(_loc1_);
     _loc1_ = new NormalSortingBtnInfo();
     _loc1_.label = FORTIFICATIONS.FORTCLANBATTLELIST_TABLEHEADER_DAYOFBATTLE;
@@ -142,16 +143,18 @@ private function initListColumns() : void
     _loc1_.iconId = "description";
     _loc1_.textAlign = TextFieldAutoSize.CENTER;
     _loc1_.toolTip = TOOLTIPS.FORTIFICATION_FORTCLANBATTLELIST_BATTLEDATE;
+    _loc1_.sortOrder = 2;
     _loc2_.push(_loc1_);
     _loc1_ = new NormalSortingBtnInfo();
     _loc1_.label = FORTIFICATIONS.FORTCLANBATTLELIST_TABLEHEADER_BATTLETIME;
     _loc1_.textAlign = TextFieldAutoSize.RIGHT;
     _loc1_.buttonWidth = 122;
-    _loc1_.iconId = "playersCount";
+    _loc1_.iconId = "startTimeLeft";
     _loc1_.toolTip = TOOLTIPS.FORTIFICATION_FORTCLANBATTLELIST_BATTLETIME;
+    _loc1_.sortOrder = 0;
     _loc2_.push(_loc1_);
     rallyTable.headerDP = new DataProvider(_loc2_);
-    rallyTable.sortByField("creatorName",SortingInfo.ASCENDING_SORT);
+    rallyTable.sortByField("startTimeLeft",SortingInfo.ASCENDING_SORT);
 }
 
 private function onCreateClanBattleRoomHandler(param1:RallyViewsEvent) : void

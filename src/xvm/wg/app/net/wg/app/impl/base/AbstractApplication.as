@@ -455,6 +455,7 @@ package net.wg.app.impl.base
             this._containersMgr = null;
             this._popoverMgr.dispose();
             this._popoverMgr = null;
+            this._tweenMgr = null;
             this._eventLogManager = null;
             this._soundMgr = null;
             this._loaderMgr = null;

@@ -10,7 +10,6 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import net.wg.gui.lobby.fortifications.popovers.orderPopover.OrderInfoBlock;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.lobby.fortifications.data.OrderPopoverVO;
-    import net.wg.gui.components.controls.SoundButton;
     import flash.display.InteractiveObject;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.data.utilData.TwoDimensionalPadding;
@@ -88,7 +87,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
         
         private var _cooldownPeriod:Number = 0;
         
-        public var questLink:SoundButton;
+        public var questLink:SoundButtonEx;
         
         override protected function onInitModalFocus(param1:InteractiveObject) : void
         {
@@ -230,7 +229,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
                 this.bottomSeparator.y = this.infoBlock.y + this.infoBlock.height + TEXT_PADDING + this.bottomSeparator.height;
                 this.useOrderBtn.y = this.bottomSeparator.y - this.bottomSeparator.height + BUTTON_PADDING;
                 _loc2_ = Math.round(this.useOrderBtn.y + this.useOrderBtn.height + BUTTON_PADDING);
-                App.utils.commons.moveDsiplObjToEndOfText(this.questLink,this.descriptionTF,TEXT_PADDING,PIXEL_PADDING);
+                App.utils.commons.moveDsiplObjToEndOfText(this.questLink,this.descriptionTF,TEXT_PADDING + 2,PIXEL_PADDING);
                 if(this._data.canUseOrder)
                 {
                     setSize(this.width,_loc2_);

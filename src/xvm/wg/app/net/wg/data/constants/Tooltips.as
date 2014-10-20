@@ -48,6 +48,12 @@ package net.wg.data.constants
         
         public static var HANGAR_SHELL:String = "hangarShell";
         
+        public static var REF_SYS_AWARDS:String = "refSysAwards";
+        
+        public static var REF_SYS_DESCRIPTION:String = "refSysDescription";
+        
+        public static var REF_SYS_XP_MULTIPLIER:String = "refSysXPMultiplier";
+        
         public static var SHOP_MODULE:String = "shopModule";
         
         public static var TANKMAN_SKILL:String = "tankmanSkill";
@@ -70,6 +76,8 @@ package net.wg.data.constants
         
         public static var SETTINGS_BUTTON:String = "settingsButton";
         
+        public static var CUSTOMIZATION_ITEM:String = "customizationItem";
+        
         public static var CLAN_INFO:String = "clanInfo";
         
         public static var FORT_BUILDING_INFO:String = "fortBuildingInfo";
@@ -87,6 +95,8 @@ package net.wg.data.constants
         public static var CYBER_SPORT_SLOT_SELECTED:String = "cyberSportSlotSelected";
         
         public static var CYBER_SPORT_TEAM:String = "cyberSportTeam";
+        
+        public static var CYBER_SPORT_UNIT_LEVEL:String = "cyberSportUnitLevel";
         
         public static var CYBER_SPORT_VEHICLE_NOT_READY:String = "cyberSportVehicleNotReady";
         

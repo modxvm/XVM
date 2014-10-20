@@ -8,6 +8,10 @@ package
             super();
         }
         
+        public static var CHANNELS_SQUADREADY_TOOLTIP:String = "#chat:channels/squadReady/tooltip";
+        
+        public static var CHANNELS_SQUADNOTREADY_TOOLTIP:String = "#chat:channels/squadNotReady/tooltip";
+        
         public static var CHANNELS_PREBATTLE:String = "#chat:channels/prebattle";
         
         public static var CHANNELS_SYSTEM:String = "#chat:channels/system";
@@ -35,6 +39,14 @@ package
         public static var CHANNELS_TRAINING:String = "#chat:channels/training";
         
         public static var CHANNELS_SQUAD:String = "#chat:channels/squad";
+        
+        public static var CHANNELS_SQUADREADY_TOOLTIP_HEADER:String = CHANNELS_SQUADREADY_TOOLTIP + "/header";
+        
+        public static var CHANNELS_SQUADREADY_TOOLTIP_BODY:String = CHANNELS_SQUADREADY_TOOLTIP + "/body";
+        
+        public static var CHANNELS_SQUADNOTREADY_TOOLTIP_HEADER:String = CHANNELS_SQUADNOTREADY_TOOLTIP + "/header";
+        
+        public static var CHANNELS_SQUADNOTREADY_TOOLTIP_BODY:String = CHANNELS_SQUADNOTREADY_TOOLTIP + "/body";
         
         public static var ERRORS_USERBANHIMSELF:String = "#chat:errors/userbanhimself";
         

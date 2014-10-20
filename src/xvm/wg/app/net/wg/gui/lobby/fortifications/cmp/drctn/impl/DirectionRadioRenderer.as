@@ -161,6 +161,10 @@ package net.wg.gui.lobby.fortifications.cmp.drctn.impl
         
         private function clickHandler(param1:MouseEvent) : void
         {
+            if(param1 is MouseEvent && !App.utils.commons.isLeftButton(param1 as MouseEvent))
+            {
+                return;
+            }
             if((this._model) && (this._model.leftDirection.canAttackFrom))
             {
                 dispatchEvent(new Event(Event.SELECT));

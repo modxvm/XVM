@@ -4,7 +4,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
     import flash.events.MouseEvent;
     import flash.text.TextField;
     import net.wg.gui.components.controls.IconTextButton;
-    import net.wg.gui.components.controls.SoundButton;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import flash.display.MovieClip;
     import net.wg.gui.lobby.fortifications.cmp.drctn.impl.DirectionButtonRenderer;
     import net.wg.gui.lobby.fortifications.data.ClanDescriptionVO;
@@ -22,9 +22,9 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
             this.allRenderers = [this.direction0,this.direction1,this.direction2,this.direction3];
         }
         
-        private static var LINKBTN_OFFSET_X:int = 10;
+        private static var LINKBTN_OFFSET_X:int = 7;
         
-        private static var LINKBTN_OFFSET_Y:int = 3;
+        private static var LINKBTN_OFFSET_Y:int = 4;
         
         private static var CALENDAR_ICON_PNG:String = "calendar.png";
         
@@ -64,7 +64,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         public var calendarBtn:IconTextButton = null;
         
-        public var linkBtn:SoundButton = null;
+        public var linkBtn:SoundButtonEx = null;
         
         public var background:MovieClip = null;
         
@@ -158,7 +158,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
                     _loc3_ = this._model.directions[_loc1_];
                     _loc2_ = this.allRenderers[_loc1_];
                     _loc2_.model = _loc3_;
-                    _loc2_.canAttackMode = this._model.canAttackDirection;
+                    _loc2_.canAttackMode = (this._model.canAttackDirection) && !this._model.isOurFortFrozen;
                     _loc1_++;
                 }
             }
@@ -173,9 +173,22 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         private function updateElements() : void
         {
             var _loc1_:* = NaN;
+            this.selectDateTF.htmlText = this._model.selectedDateText;
+            if(this._model.warPlannedTime)
+            {
+                this.warTimeTF.visible = true;
+                this.warTimeTF.htmlText = this._model.warPlannedTime;
+                this.warTimeTF.addEventListener(MouseEvent.ROLL_OVER,this.onWarTimeTFRollOver);
+                this.warTimeTF.addEventListener(MouseEvent.ROLL_OUT,onWarTimeTFRollOut);
+            }
+            else
+            {
+                this.warTimeTF.visible = false;
+                this.warTimeTF.removeEventListener(MouseEvent.ROLL_OVER,this.onWarTimeTFRollOver);
+                this.warTimeTF.removeEventListener(MouseEvent.ROLL_OUT,onWarTimeTFRollOut);
+            }
             if(!this._model.canAttackDirection)
             {
-                this.selectDateTF.text = FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_SELECTDATE_CANTATTACK;
                 this.selectDateTF.visible = true;
                 this.warDeclaredTF.visible = false;
                 this.warDescriptionTF.visible = false;
@@ -186,72 +199,53 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
                 this.linkBtn.visible = false;
                 this.removeLinkBtnListeners();
                 this.background.alpha = ALPHA_ENABLE;
-                if(this._model.isWarDeclared)
-                {
-                    this.warTimeTF.visible = true;
-                    this.warTimeTF.htmlText = this._model.warPlannedTime;
-                    this.warTimeTF.addEventListener(MouseEvent.ROLL_OVER,this.onWarTimeTFRollOver);
-                    this.warTimeTF.addEventListener(MouseEvent.ROLL_OUT,onWarTimeTFRollOut);
-                }
-                else
-                {
-                    this.warTimeTF.visible = false;
-                    this.warTimeTF.removeEventListener(MouseEvent.ROLL_OVER,this.onWarTimeTFRollOver);
-                    this.warTimeTF.removeEventListener(MouseEvent.ROLL_OUT,onWarTimeTFRollOut);
-                }
+            }
+            else if(this._model.isWarDeclared)
+            {
+                this.selectDateTF.visible = false;
+                this.dateSelectedTF.visible = false;
+                this.calendarBtn.visible = false;
+                this.warDeclaredTF.visible = true;
+                this.warDescriptionTF.visible = true;
+                this.linkBtn.visible = true;
+                this.background.alpha = ALPHA_DISABLE;
+                this.warDeclaredTF.text = App.utils.locale.makeString(FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_WARDECLARED,{"clanName":this._model.clanTag});
+                this.warDescriptionTF.text = App.utils.locale.makeString(FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_NEXTAVAILABLEATTACKINAWEEK,{"nextDate":this._model.warPlannedDate});
+                _loc1_ = this.warDescriptionTF.getLineMetrics(this.warDescriptionTF.numLines - 1).width;
+                this.linkBtn.y = Math.round(this.warDescriptionTF.textHeight + this.warDescriptionTF.y - this.linkBtn.height + LINKBTN_OFFSET_Y);
+                this.linkBtn.x = Math.round(this.warDescriptionTF.x + _loc1_ + LINKBTN_OFFSET_X);
+                this.addLinkBtnListeners();
+                this.removeCalendarBtnListeners();
+            }
+            else if(this._model.isAlreadyFought)
+            {
+                this.selectDateTF.visible = false;
+                this.dateSelectedTF.visible = false;
+                this.calendarBtn.visible = false;
+                this.warDeclaredTF.visible = true;
+                this.warDescriptionTF.visible = true;
+                this.linkBtn.visible = false;
+                this.background.alpha = ALPHA_DISABLE;
+                this.warDeclaredTF.text = App.utils.locale.makeString(FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_ALREADYFOUGHT,{"clanName":this._model.clanTag});
+                this.warDescriptionTF.text = App.utils.locale.makeString(FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_NEXTAVAILABLEATTACK,{"nextDate":this._model.warNextAvailableDate});
+                this.removeLinkBtnListeners();
+                this.removeCalendarBtnListeners();
             }
             else
             {
-                this.warTimeTF.visible = false;
-                this.warTimeTF.removeEventListener(MouseEvent.ROLL_OVER,this.onWarTimeTFRollOver);
-                this.warTimeTF.removeEventListener(MouseEvent.ROLL_OUT,onWarTimeTFRollOut);
-                this.selectDateTF.text = FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_SELECTDATE;
-                if(this._model.isWarDeclared)
-                {
-                    this.selectDateTF.visible = false;
-                    this.dateSelectedTF.visible = false;
-                    this.calendarBtn.visible = false;
-                    this.warDeclaredTF.visible = true;
-                    this.warDescriptionTF.visible = true;
-                    this.linkBtn.visible = true;
-                    this.background.alpha = ALPHA_DISABLE;
-                    this.warDeclaredTF.text = App.utils.locale.makeString(FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_WARDECLARED,{"clanName":this._model.clanTag});
-                    this.warDescriptionTF.text = App.utils.locale.makeString(FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_NEXTAVAILABLEATTACKINAWEEK,{"nextDate":this._model.warPlannedDate});
-                    _loc1_ = this.warDescriptionTF.getLineMetrics(this.warDescriptionTF.numLines - 1).width;
-                    this.linkBtn.y = Math.round(this.warDescriptionTF.textHeight + this.warDescriptionTF.y - this.linkBtn.height + LINKBTN_OFFSET_Y);
-                    this.linkBtn.x = Math.round(this.warDescriptionTF.x + _loc1_ + LINKBTN_OFFSET_X);
-                    this.addLinkBtnListeners();
-                    this.removeCalendarBtnListeners();
-                }
-                else if(this._model.isAlreadyFought)
-                {
-                    this.selectDateTF.visible = false;
-                    this.dateSelectedTF.visible = false;
-                    this.calendarBtn.visible = false;
-                    this.warDeclaredTF.visible = true;
-                    this.warDescriptionTF.visible = true;
-                    this.linkBtn.visible = false;
-                    this.background.alpha = ALPHA_DISABLE;
-                    this.warDeclaredTF.text = App.utils.locale.makeString(FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_ALREADYFOUGHT,{"clanName":this._model.clanTag});
-                    this.warDescriptionTF.text = App.utils.locale.makeString(FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_NEXTAVAILABLEATTACK,{"nextDate":this._model.warNextAvailableDate});
-                    this.removeLinkBtnListeners();
-                    this.removeCalendarBtnListeners();
-                }
-                else
-                {
-                    this.selectDateTF.visible = true;
-                    this.dateSelectedTF.visible = true;
-                    this.calendarBtn.visible = true;
-                    this.warDeclaredTF.visible = false;
-                    this.warDescriptionTF.visible = false;
-                    this.linkBtn.visible = false;
-                    this.dateSelectedTF.text = this._model.dateSelected;
-                    this.background.alpha = ALPHA_ENABLE;
-                    this.addCalendarBtnListeners();
-                    this.removeLinkBtnListeners();
-                }
-                
+                this.selectDateTF.visible = true;
+                this.dateSelectedTF.visible = true;
+                this.calendarBtn.visible = true;
+                this.warDeclaredTF.visible = false;
+                this.warDescriptionTF.visible = false;
+                this.linkBtn.visible = false;
+                this.dateSelectedTF.text = this._model.dateSelected;
+                this.background.alpha = ALPHA_ENABLE;
+                this.addCalendarBtnListeners();
+                this.removeLinkBtnListeners();
             }
+            
+            
         }
         
         private function addCalendarBtnListeners() : void

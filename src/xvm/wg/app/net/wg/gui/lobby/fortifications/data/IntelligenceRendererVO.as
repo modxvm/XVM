@@ -18,8 +18,6 @@ package net.wg.gui.lobby.fortifications.data
         
         private var _avgBuildingLvl:Number = -1;
         
-        private var _availability:String = "";
-        
         private var _availabilityDays:int = -1;
         
         private var _clanID:Number = -1;
@@ -68,16 +66,6 @@ package net.wg.gui.lobby.fortifications.data
         public function set avgBuildingLvl(param1:Number) : void
         {
             this._avgBuildingLvl = param1;
-        }
-        
-        public function get availability() : String
-        {
-            return this._availability;
-        }
-        
-        public function set availability(param1:String) : void
-        {
-            this._availability = param1;
         }
         
         public function get isFavorite() : Boolean

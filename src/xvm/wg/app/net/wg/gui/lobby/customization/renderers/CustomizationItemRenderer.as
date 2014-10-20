@@ -14,6 +14,8 @@ package net.wg.gui.lobby.customization.renderers
     import scaleform.clik.constants.InvalidationType;
     import net.wg.data.constants.IconsTypes;
     import flash.geom.Point;
+    import net.wg.infrastructure.managers.ITooltipMgr;
+    import net.wg.data.constants.Tooltips;
     import flash.events.Event;
     import net.wg.data.constants.SoundTypes;
     
@@ -50,6 +52,8 @@ package net.wg.gui.lobby.customization.renderers
         
         public var freeTF:TextField;
         
+        public var disabledMc:Sprite;
+        
         protected var isNew:Boolean = false;
         
         protected var isGold:Boolean = false;
@@ -72,6 +76,14 @@ package net.wg.gui.lobby.customization.renderers
         
         private var _useHandCursorForce:Boolean = false;
         
+        protected var _costFrameX:int;
+        
+        protected var _costFrameW:int;
+        
+        protected var _freeTfX:int;
+        
+        protected var _freeTfW:int;
+        
         override public function setData(param1:Object) : void
         {
             var _loc2_:Boolean = this.isNew;
@@ -82,7 +94,7 @@ package net.wg.gui.lobby.customization.renderers
                 {
                     this.current = data.current;
                 }
-                this.costVisible = this.demoMode == CustomizationItemRenderer.DEMO_NEW && data.id > 0 && !data.isInHangar || this.demoMode == CustomizationItemRenderer.DEMO_OFF && !((data.current) || (data.isInHangar));
+                this.costVisible = this.demoMode == CustomizationItemRenderer.DEMO_NEW && data.id > 0 && !data.isInHangar || this.demoMode == CustomizationItemRenderer.DEMO_OFF;
                 if(data.price)
                 {
                     this.costVal = data.price.isGold?App.utils.locale.gold(data.price.cost):App.utils.locale.integer(data.price.cost);
@@ -130,13 +142,20 @@ package net.wg.gui.lobby.customization.renderers
                 this.actionPrice.dispose();
                 this.actionPrice = null;
             }
+            if(this.actionPriceVo != null)
+            {
+                this.actionPriceVo.dispose();
+                this.actionPriceVo = null;
+            }
             this.costField.dispose();
             this.costField = null;
+            this.disabledMc = null;
             this.costFrame = null;
             this.border = null;
             this.hitMc = null;
             this.targetIcon = null;
             this.freeTF = null;
+            this.prefixesVector = null;
             data = null;
         }
         
@@ -191,9 +210,12 @@ package net.wg.gui.lobby.customization.renderers
         
         override protected function configUI() : void
         {
-            var _loc1_:* = false;
             super.configUI();
-            _loc1_ = (this._useHandCursorForce) || this._demoMode == DEMO_OFF;
+            this._costFrameX = this.costFrame.x;
+            this._costFrameW = this.costFrame.width;
+            this._freeTfX = this.freeTF.x;
+            this._freeTfW = this.freeTF.width;
+            var _loc1_:Boolean = (this._useHandCursorForce) || this._demoMode == DEMO_OFF;
             super.enabled = _loc1_;
             useHandCursor = _loc1_;
             this.uiLoader.addEventListener(UILoaderEvent.COMPLETE,this.onImageLoadComplete);
@@ -224,51 +246,99 @@ package net.wg.gui.lobby.customization.renderers
             if(isInvalid(InvalidationType.DATA))
             {
                 this.visible = !(this.data == null);
-                this.costFrame.visible = this.costVisible;
-                _loc1_ = (this.freeTF && data && data.id > 0 && data.price && data.price.cost == 0) && !data.current && !data.isInHangar;
-                if(this.actionPrice)
+                if(this.data)
                 {
-                    if((this.actionPriceVo) && (this.costVisible))
+                    visible = true;
+                    this.costFrame.visible = this.costVisible;
+                    this.updateCostPos();
+                    _loc1_ = (this.freeTF) && data.id > 0 && (data.price) && data.price.cost == 0;
+                    if(this.actionPrice)
                     {
-                        this.actionPriceVo.ico = this.isGold?IconsTypes.GOLD:IconsTypes.CREDITS;
-                        this.actionPrice.setData(this.actionPriceVo);
+                        if((this.actionPriceVo) && (this.costVisible))
+                        {
+                            this.actionPriceVo.ico = this.isGold?IconsTypes.GOLD:IconsTypes.CREDITS;
+                            this.actionPrice.setData(this.actionPriceVo);
+                        }
+                        else
+                        {
+                            this.actionPrice.visible = false;
+                        }
+                        this.costField.visible = (this.costVisible) && !_loc1_ && !this.actionPrice.visible;
                     }
                     else
                     {
-                        this.actionPrice.visible = false;
+                        this.costField.visible = (this.costVisible) && !_loc1_;
                     }
-                    this.costField.visible = (this.costVisible) && !_loc1_ && !this.actionPrice.visible;
+                    if(_loc1_)
+                    {
+                        this.freeTF.visible = true;
+                        if((data.current) || (data.isInHangar))
+                        {
+                            this.freeTF.x = 0;
+                            this.freeTF.width = this._freeTfW + this._freeTfX;
+                            this.freeTF.text = this.demoMode == CustomizationItemRenderer.DEMO_OFF?"∞":"";
+                        }
+                        else
+                        {
+                            this.freeTF.x = this._freeTfX;
+                            this.freeTF.width = this._freeTfW;
+                            this.freeTF.text = VEHICLE_CUSTOMIZATION.IGR_FREE_FULL;
+                        }
+                        if(this.actionPrice)
+                        {
+                            this.actionPrice.visible = false;
+                        }
+                    }
+                    else
+                    {
+                        if(this.freeTF)
+                        {
+                            this.freeTF.visible = false;
+                        }
+                        this.costField.text = this.costVal;
+                        this.costField.icon = this.isGold?IconsTypes.GOLD:IconsTypes.CREDITS;
+                    }
+                    if(this.targetIcon)
+                    {
+                        this.targetIcon.visible = !(this.demoMode == DEMO_CURRENT) && ((data.current) || (data.isInHangar));
+                        if(this.targetIcon.visible)
+                        {
+                            this.targetIcon.gotoAndStop(data.current?"current":"hangar");
+                        }
+                    }
+                    if(this.disabledMc)
+                    {
+                        if((data.hasOwnProperty("canUse")) && !data.canUse)
+                        {
+                            this.disabledMc.visible = true;
+                            this.uiLoader.alpha = 0.4;
+                        }
+                        else
+                        {
+                            this.disabledMc.visible = false;
+                            this.uiLoader.alpha = 1;
+                        }
+                    }
+                    this.checkTooltip();
                 }
                 else
                 {
-                    this.costField.visible = (this.costVisible) && !_loc1_;
+                    visible = false;
                 }
-                if(_loc1_)
-                {
-                    this.freeTF.visible = true;
-                    if(this.actionPrice)
-                    {
-                        this.actionPrice.visible = false;
-                    }
-                }
-                else
-                {
-                    if(this.freeTF)
-                    {
-                        this.freeTF.visible = false;
-                    }
-                    this.costField.text = this.costVal;
-                    this.costField.icon = this.isGold?IconsTypes.GOLD:IconsTypes.CREDITS;
-                }
-                if(this.targetIcon)
-                {
-                    this.targetIcon.visible = !(this.demoMode == DEMO_CURRENT) && (data) && ((data.current) || (data.isInHangar));
-                    if(this.targetIcon.visible)
-                    {
-                        this.targetIcon.gotoAndStop(data.current?"current":"hangar");
-                    }
-                }
-                this.checkTooltip();
+            }
+        }
+        
+        protected function updateCostPos() : void
+        {
+            if((data) && ((data.current) || (data.isInHangar)))
+            {
+                this.costFrame.x = 0;
+                this.costFrame.width = this._costFrameW + this._costFrameX;
+            }
+            else
+            {
+                this.costFrame.x = this._costFrameX;
+                this.costFrame.width = this._costFrameW;
             }
         }
         
@@ -315,12 +385,13 @@ package net.wg.gui.lobby.customization.renderers
         protected function showIsNew(param1:Boolean) : void
         {
             this.isNew = param1;
-            if(param1)
+            if((param1) && this.demoMode == DEMO_OFF)
             {
                 if(!this.newMarker)
                 {
                     this.newMarker = App.utils.classFactory.getObject("NewMarker") as MovieClip;
-                    this.newMarker.x = this.newMarker.y = 2;
+                    this.newMarker.x = 1;
+                    this.newMarker.y = 2;
                     addChild(this.newMarker);
                 }
                 this.newMarker.visible = param1;
@@ -344,19 +415,32 @@ package net.wg.gui.lobby.customization.renderers
             }
         }
         
+        private function get toolTipMgr() : ITooltipMgr
+        {
+            return App.toolTipMgr;
+        }
+        
         private function showTooltip(param1:MouseEvent = null) : void
         {
             this._isMouseOver = true;
-            if((data) && data.description.length > 0)
+            if(data)
             {
-                App.toolTipMgr.showComplex(data.description);
+                if(data.isSpecialTooltip)
+                {
+                    this.toolTipMgr.showSpecial(Tooltips.CUSTOMIZATION_ITEM,null,data.type,data.id,data.nationId);
+                }
+                else if(data.description.length > 0)
+                {
+                    this.toolTipMgr.showComplex(data.description);
+                }
+                
             }
         }
         
         private function hideTooltip(param1:MouseEvent = null) : void
         {
             this._isMouseOver = false;
-            App.toolTipMgr.hide();
+            this.toolTipMgr.hide();
         }
         
         protected function onImageLoadComplete(param1:Event) : void

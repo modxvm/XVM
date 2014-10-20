@@ -68,7 +68,6 @@ package scaleform.clik.controls
                 _loc1_ = _loc2_ as DisplayObjectContainer;
                 return _loc1_;
             }
-            return null;
         }
         
         public function addButton(param1:Button) : void

@@ -7,7 +7,6 @@ package net.wg.gui.notification
     import flash.text.TextField;
     import net.wg.gui.notification.vo.NotificationInfoVO;
     import net.wg.gui.components.common.containers.Group;
-    import net.wg.gui.utils.TextFieldStyleSheet;
     import flash.text.TextFieldAutoSize;
     import flash.events.TextEvent;
     import flash.events.MouseEvent;
@@ -72,7 +71,7 @@ package net.wg.gui.notification
         {
             super.configUI();
             _focusable = tabEnabled = false;
-            TextFieldStyleSheet.setLinkStyle(this.textField);
+            App.utils.styleSheetManager.setLinkStyle(this.textField);
             this.textField.htmlText = "A long time ago, in a galaxy far, far away..." + "It is a period of civil war. Rebel spaceships, striking from a hidden base, " + "have won their first victory against the evil Galactic Empire.";
             this.textField.autoSize = TextFieldAutoSize.LEFT;
             this.textField.multiline = true;

@@ -1,12 +1,12 @@
 package net.wg.utils
 {
-    import flash.text.StyleSheet;
+    import flash.text.TextField;
     
     public interface IStyleSheetManager
     {
         
-        function getRedHyperlinkCSS() : StyleSheet;
+        function setLinkStyle(param1:TextField) : void;
         
-        function getYellowHyperlinkCSS() : StyleSheet;
+        function setForceFocusedStyle(param1:String) : String;
     }
 }

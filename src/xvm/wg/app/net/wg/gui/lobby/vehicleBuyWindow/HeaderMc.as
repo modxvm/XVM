@@ -6,6 +6,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
     import net.wg.gui.components.advanced.TextAreaSimple;
     import net.wg.gui.components.controls.IconText;
     import net.wg.gui.components.controls.ActionPrice;
+    import net.wg.gui.components.controls.DropdownMenu;
     import net.wg.gui.components.controls.ScrollBar;
     
     public class HeaderMc extends UIComponent
@@ -28,12 +29,16 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         public var tankActionPrice:ActionPrice;
         
+        public var rentDD:DropdownMenu;
+        
         public var descriptionScrollBar:ScrollBar;
         
         override protected function onDispose() : void
         {
             this.tankActionPrice.dispose();
             this.tankActionPrice = null;
+            this.rentDD.dispose();
+            this.rentDD = null;
             super.onDispose();
         }
     }

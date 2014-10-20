@@ -534,6 +534,15 @@ override protected function dispatchItemEvent(param1:Event) : Boolean
     return dispatchEvent(_loc8_);
 }
 
+protected function clearDragProps() : void
+{
+    this.lastDx = 0;
+    this.isPreDragging = false;
+    this.isSliding = false;
+    this.isMoving = false;
+    this.initDragListeners();
+}
+
 private function updateDrugPosition(param1:Carousel, param2:Object) : void
 {
     var _loc3_:* = NaN;
@@ -839,6 +848,12 @@ this.startSlideByArrow(param1.target == this.leftArrow?this.SLIDE_COURSE_LEFT:th
 
 private function onStageMouseUp(param1:MouseEvent) : void
 {
+this.initDragListeners();
+this.stopDragging();
+}
+
+private function initDragListeners() : void
+{
 if(stage.hasEventListener(MouseEvent.MOUSE_UP))
 {
     stage.removeEventListener(MouseEvent.MOUSE_UP,this.onStageMouseUp);
@@ -848,7 +863,6 @@ if((this._dragEnabled) && (this.allowDrag))
 {
     this.dragHitArea.addEventListener(MouseEvent.MOUSE_DOWN,this.onDragAreaMouseDown);
 }
-this.stopDragging();
 }
 
 private var wheelStopTimeoutId:Number = 0;

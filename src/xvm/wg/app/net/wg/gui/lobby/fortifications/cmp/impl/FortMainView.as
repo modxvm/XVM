@@ -28,6 +28,7 @@ package net.wg.gui.lobby.fortifications.cmp.impl
     import net.wg.gui.lobby.fortifications.utils.impl.FortsControlsAligner;
     import net.wg.infrastructure.events.LibraryLoaderEvent;
     import flash.events.Event;
+    import net.wg.infrastructure.exceptions.LifecycleException;
     import scaleform.clik.ui.InputDetails;
     import flash.ui.Keyboard;
     import scaleform.clik.constants.InputValue;
@@ -99,6 +100,11 @@ package net.wg.gui.lobby.fortifications.cmp.impl
                 return this.commanderHelpView.getComponentForFocus();
             }
             return this._header.getComponentForFocus();
+        }
+        
+        public function as_setClanIconId(param1:String) : void
+        {
+            this._header.clanInfo.setClanImage(param1);
         }
         
         public function as_toggleCommanderHelp(param1:Boolean) : void
@@ -419,6 +425,9 @@ package net.wg.gui.lobby.fortifications.cmp.impl
         
         private function onTransportButtonClickHandler(param1:ButtonEvent) : void
         {
+            DebugUtils.LOG_DEBUG("onTransportButtonClickHandler:" + initialized + "/" + this._buildings.isDAAPIInited);
+            var _loc2_:* = "onTransportButtonClickHandler invoked after dispose!";
+            App.utils.asserter.assert(!_baseDisposed,_loc2_,LifecycleException);
             App.eventLogManager.logUIEvent(param1,0);
             if(this.isInTransportingMode(this._mode))
             {

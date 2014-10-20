@@ -8,6 +8,8 @@ package
             super();
         }
         
+        public static var CAMOUFLAGE:String = "#vehicle_customization:camouflage";
+        
         public static var CAMOUFLAGE_DEFAULT:String = "#vehicle_customization:camouflage/default";
         
         public static var CAMOUFLAGE_HISTORICAL:String = "#vehicle_customization:camouflage/historical";
@@ -22,185 +24,389 @@ package
         
         public static var CAMOUFLAGE_DESERT:String = "#vehicle_customization:camouflage/desert";
         
-        public static var CAMOUFLAGE_USSR_BICOLOR_KATUKOV:String = "#vehicle_customization:camouflage/ussr/bicolor/Katukov";
+        public static var CAMOUFLAGE_NATION_GERMANY:String = "#vehicle_customization:camouflage/nation/germany";
         
-        public static var CAMOUFLAGE_USSR_BICOLOR_BROWNSTAINS:String = "#vehicle_customization:camouflage/ussr/bicolor/BrownStains";
+        public static var CAMOUFLAGE_NATION_USSR:String = "#vehicle_customization:camouflage/nation/ussr";
         
-        public static var CAMOUFLAGE_USSR_BICOLOR_SPRINGGHOST:String = "#vehicle_customization:camouflage/ussr/bicolor/SpringGhost";
+        public static var CAMOUFLAGE_NATION_JAPAN:String = "#vehicle_customization:camouflage/nation/japan";
         
-        public static var CAMOUFLAGE_USSR_TRICOLOR_LENINGRAD:String = "#vehicle_customization:camouflage/ussr/tricolor/Leningrad";
+        public static var CAMOUFLAGE_NATION_CHINA:String = "#vehicle_customization:camouflage/nation/china";
         
-        public static var CAMOUFLAGE_USSR_TRICOLOR_TRICOLORZEBRA:String = "#vehicle_customization:camouflage/ussr/tricolor/TricolorZebra";
+        public static var CAMOUFLAGE_NATION_UK:String = "#vehicle_customization:camouflage/nation/uk";
         
-        public static var CAMOUFLAGE_USSR_TRICOLOR_OLDSCHOOLRKKA:String = "#vehicle_customization:camouflage/ussr/tricolor/OldschoolRkka";
+        public static var CAMOUFLAGE_NATION_USA:String = "#vehicle_customization:camouflage/nation/usa";
         
-        public static var CAMOUFLAGE_USSR_TRICOLOR_TALVISOTA:String = "#vehicle_customization:camouflage/ussr/tricolor/Talvisota";
+        public static var CAMOUFLAGE_NATION_FRANCE:String = "#vehicle_customization:camouflage/nation/france";
         
-        public static var CAMOUFLAGE_USSR_TRICOLOR_GASOLINEPELLICLE:String = "#vehicle_customization:camouflage/ussr/tricolor/GasolinePellicle";
+        public static var TIMELEFT_TEMPORAL:String = "#vehicle_customization:timeLeft/temporal";
         
-        public static var CAMOUFLAGE_USSR_TRICOLOR_FOUR_COLOR_STAINS:String = "#vehicle_customization:camouflage/ussr/tricolor/four-color_stains";
+        public static var TIMELEFT_TEMPORAL_DAYS:String = "#vehicle_customization:timeLeft/temporal/days";
         
-        public static var CAMOUFLAGE_USSR_BICOLOR_BRANCHES:String = "#vehicle_customization:camouflage/ussr/bicolor/Branches";
+        public static var TIMELEFT_TEMPORAL_HOURS:String = "#vehicle_customization:timeLeft/temporal/hours";
         
-        public static var CAMOUFLAGE_USSR_BICOLOR_WINTER:String = "#vehicle_customization:camouflage/ussr/bicolor/Winter";
+        public static var TIMELEFT_TEMPORAL_MINUTES:String = "#vehicle_customization:timeLeft/temporal/minutes";
         
-        public static var CAMOUFLAGE_USSR_BICOLOR_WHITE_SPOTS:String = "#vehicle_customization:camouflage/ussr/bicolor/White_Spots";
+        public static var TIMELEFT_INFINITY:String = "#vehicle_customization:timeLeft/infinity";
         
-        public static var CAMOUFLAGE_USSR_BICOLOR_BAND:String = "#vehicle_customization:camouflage/ussr/bicolor/Band";
+        public static var CAMOUFLAGE_USSR_BICOLOR_KATUKOV_LABEL:String = "#vehicle_customization:camouflage/ussr/bicolor/Katukov/label";
         
-        public static var CAMOUFLAGE_USSR_BICOLOR_BROWN_SPOTS:String = "#vehicle_customization:camouflage/ussr/bicolor/Brown_Spots";
+        public static var CAMOUFLAGE_USSR_BICOLOR_KATUKOV_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/bicolor/Katukov/description";
         
-        public static var CAMOUFLAGE_GERMANY_BICOLOR_FELDGRAU:String = "#vehicle_customization:camouflage/germany/bicolor/Feldgrau";
+        public static var CAMOUFLAGE_USSR_BICOLOR_BROWNSTAINS_LABEL:String = "#vehicle_customization:camouflage/ussr/bicolor/BrownStains/label";
         
-        public static var CAMOUFLAGE_GERMANY_BICOLOR_WHITEDIAGONAL:String = "#vehicle_customization:camouflage/germany/bicolor/WhiteDiagonal";
+        public static var CAMOUFLAGE_USSR_BICOLOR_BROWNSTAINS_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/bicolor/BrownStains/description";
         
-        public static var CAMOUFLAGE_GERMANY_BICOLOR_YELLOWBACILLUS:String = "#vehicle_customization:camouflage/germany/bicolor/YellowBacillus";
+        public static var CAMOUFLAGE_USSR_BICOLOR_SPRINGGHOST_LABEL:String = "#vehicle_customization:camouflage/ussr/bicolor/SpringGhost/label";
         
-        public static var CAMOUFLAGE_GERMANY_TRICOLOR_SNOWONSPOTS:String = "#vehicle_customization:camouflage/germany/tricolor/SnowOnSpots";
+        public static var CAMOUFLAGE_USSR_BICOLOR_SPRINGGHOST_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/bicolor/SpringGhost/description";
         
-        public static var CAMOUFLAGE_GERMANY_TRICOLOR_SNOWONBANDS:String = "#vehicle_customization:camouflage/germany/tricolor/SnowOnBands";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_LENINGRAD_LABEL:String = "#vehicle_customization:camouflage/ussr/tricolor/Leningrad/label";
         
-        public static var CAMOUFLAGE_GERMANY_BICOLOR_REDCLOUDS:String = "#vehicle_customization:camouflage/germany/bicolor/RedClouds";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_LENINGRAD_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/tricolor/Leningrad/description";
         
-        public static var CAMOUFLAGE_GERMANY_BICOLOR_GRAYZIGZAG:String = "#vehicle_customization:camouflage/germany/bicolor/GrayZigzag";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_TRICOLORZEBRA_LABEL:String = "#vehicle_customization:camouflage/ussr/tricolor/TricolorZebra/label";
         
-        public static var CAMOUFLAGE_GERMANY_TRICOLOR_HONEYCOMB:String = "#vehicle_customization:camouflage/germany/tricolor/Honeycomb";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_TRICOLORZEBRA_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/tricolor/TricolorZebra/description";
         
-        public static var CAMOUFLAGE_GERMANY_TRICOLOR_BRANCH:String = "#vehicle_customization:camouflage/germany/tricolor/Branch";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_OLDSCHOOLRKKA_LABEL:String = "#vehicle_customization:camouflage/ussr/tricolor/OldschoolRkka/label";
         
-        public static var CAMOUFLAGE_GERMANY_TRICOLOR_RAGGED_PATCHES:String = "#vehicle_customization:camouflage/germany/tricolor/Ragged_Patches";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_OLDSCHOOLRKKA_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/tricolor/OldschoolRkka/description";
         
-        public static var CAMOUFLAGE_GERMANY_TRICOLOR_SPOTS:String = "#vehicle_customization:camouflage/germany/tricolor/Spots";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_TALVISOTA_LABEL:String = "#vehicle_customization:camouflage/ussr/tricolor/Talvisota/label";
         
-        public static var CAMOUFLAGE_GERMANY_BICOLOR_WINTER:String = "#vehicle_customization:camouflage/germany/bicolor/Winter";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_TALVISOTA_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/tricolor/Talvisota/description";
         
-        public static var CAMOUFLAGE_GERMANY_BICOLOR_POLYLINES:String = "#vehicle_customization:camouflage/germany/bicolor/Polylines";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_GASOLINEPELLICLE_LABEL:String = "#vehicle_customization:camouflage/ussr/tricolor/GasolinePellicle/label";
         
-        public static var CAMOUFLAGE_GERMANY_BICOLOR_DIAGONAL_STRIPES:String = "#vehicle_customization:camouflage/germany/bicolor/Diagonal_Stripes";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_GASOLINEPELLICLE_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/tricolor/GasolinePellicle/description";
         
-        public static var CAMOUFLAGE_GERMANY_BICOLOR_DARK_SPOTS:String = "#vehicle_customization:camouflage/germany/bicolor/Dark_Spots";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_FOUR_COLOR_STAINS_LABEL:String = "#vehicle_customization:camouflage/ussr/tricolor/four-color_stains/label";
         
-        public static var CAMOUFLAGE_GERMANY_DESERTTIGER:String = "#vehicle_customization:camouflage/germany/DesertTiger";
+        public static var CAMOUFLAGE_USSR_TRICOLOR_FOUR_COLOR_STAINS_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/tricolor/four-color_stains/description";
         
-        public static var CAMOUFLAGE_USA_BICOLOR_GUAMBICOLOR:String = "#vehicle_customization:camouflage/usa/bicolor/GuamBicolor";
+        public static var CAMOUFLAGE_USSR_BICOLOR_BRANCHES_LABEL:String = "#vehicle_customization:camouflage/ussr/bicolor/Branches/label";
         
-        public static var CAMOUFLAGE_USA_BICOLOR_IVOZIMABICOLOR:String = "#vehicle_customization:camouflage/usa/bicolor/IvozimaBicolor";
+        public static var CAMOUFLAGE_USSR_BICOLOR_BRANCHES_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/bicolor/Branches/description";
         
-        public static var CAMOUFLAGE_USA_BICOLOR_BRETAGNESKY:String = "#vehicle_customization:camouflage/usa/bicolor/BretagneSky";
+        public static var CAMOUFLAGE_USSR_BICOLOR_WINTER_LABEL:String = "#vehicle_customization:camouflage/ussr/bicolor/Winter/label";
         
-        public static var CAMOUFLAGE_USA_BICOLOR_WHITESCAR:String = "#vehicle_customization:camouflage/usa/bicolor/WhiteScar";
+        public static var CAMOUFLAGE_USSR_BICOLOR_WINTER_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/bicolor/Winter/description";
         
-        public static var CAMOUFLAGE_USA_TRICOLOR_RUDESHEIMTRICOLOR:String = "#vehicle_customization:camouflage/usa/tricolor/RudesheimTricolor";
+        public static var CAMOUFLAGE_USSR_BICOLOR_WHITE_SPOTS_LABEL:String = "#vehicle_customization:camouflage/ussr/bicolor/White_Spots/label";
         
-        public static var CAMOUFLAGE_USA_TRICOLOR_IVOZIMATRICOLOR:String = "#vehicle_customization:camouflage/usa/tricolor/IvozimaTricolor";
+        public static var CAMOUFLAGE_USSR_BICOLOR_WHITE_SPOTS_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/bicolor/White_Spots/description";
         
-        public static var CAMOUFLAGE_USA_TRICOLOR_OLDSCHOOLUSA:String = "#vehicle_customization:camouflage/usa/tricolor/OldschoolUsa";
+        public static var CAMOUFLAGE_USSR_BICOLOR_BAND_LABEL:String = "#vehicle_customization:camouflage/ussr/bicolor/Band/label";
         
-        public static var CAMOUFLAGE_USA_BICOLOR_MEMBANE:String = "#vehicle_customization:camouflage/usa/bicolor/Membane";
+        public static var CAMOUFLAGE_USSR_BICOLOR_BAND_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/bicolor/Band/description";
         
-        public static var CAMOUFLAGE_USA_TRICOLOR_TRI_COLOR_SPOTTED:String = "#vehicle_customization:camouflage/usa/tricolor/Tri-color_Spotted";
+        public static var CAMOUFLAGE_USSR_BICOLOR_BROWN_SPOTS_LABEL:String = "#vehicle_customization:camouflage/ussr/bicolor/Brown_Spots/label";
         
-        public static var CAMOUFLAGE_USA_TRICOLOR_TROPICAL_TRICOLOR:String = "#vehicle_customization:camouflage/usa/tricolor/Tropical_tricolor";
+        public static var CAMOUFLAGE_USSR_BICOLOR_BROWN_SPOTS_DESCRIPTION:String = "#vehicle_customization:camouflage/ussr/bicolor/Brown_Spots/description";
         
-        public static var CAMOUFLAGE_USA_BICOLOR_WINTER:String = "#vehicle_customization:camouflage/usa/bicolor/Winter";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_FELDGRAU_LABEL:String = "#vehicle_customization:camouflage/germany/bicolor/Feldgrau/label";
         
-        public static var CAMOUFLAGE_FRANCE_BICOLOR_FRANCH_1:String = "#vehicle_customization:camouflage/france/bicolor/franch_1";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_FELDGRAU_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/bicolor/Feldgrau/description";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_2:String = "#vehicle_customization:camouflage/france/tricolor/franch_2";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_WHITEDIAGONAL_LABEL:String = "#vehicle_customization:camouflage/germany/bicolor/WhiteDiagonal/label";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_3:String = "#vehicle_customization:camouflage/france/tricolor/franch_3";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_WHITEDIAGONAL_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/bicolor/WhiteDiagonal/description";
         
-        public static var CAMOUFLAGE_FRANCE_BICOLOR_FRANCH_4:String = "#vehicle_customization:camouflage/france/bicolor/franch_4";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_YELLOWBACILLUS_LABEL:String = "#vehicle_customization:camouflage/germany/bicolor/YellowBacillus/label";
         
-        public static var CAMOUFLAGE_FRANCE_BICOLOR_FRANCH_5:String = "#vehicle_customization:camouflage/france/bicolor/franch_5";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_YELLOWBACILLUS_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/bicolor/YellowBacillus/description";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_6:String = "#vehicle_customization:camouflage/france/tricolor/franch_6";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_SNOWONSPOTS_LABEL:String = "#vehicle_customization:camouflage/germany/tricolor/SnowOnSpots/label";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_7:String = "#vehicle_customization:camouflage/france/tricolor/franch_7";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_SNOWONSPOTS_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/tricolor/SnowOnSpots/description";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_8:String = "#vehicle_customization:camouflage/france/tricolor/franch_8";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_SNOWONBANDS_LABEL:String = "#vehicle_customization:camouflage/germany/tricolor/SnowOnBands/label";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_9:String = "#vehicle_customization:camouflage/france/tricolor/franch_9";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_SNOWONBANDS_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/tricolor/SnowOnBands/description";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_10:String = "#vehicle_customization:camouflage/france/tricolor/franch_10";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_REDCLOUDS_LABEL:String = "#vehicle_customization:camouflage/germany/bicolor/RedClouds/label";
         
-        public static var CAMOUFLAGE_FRANCE_BICOLOR_WINTER:String = "#vehicle_customization:camouflage/france/bicolor/Winter";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_REDCLOUDS_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/bicolor/RedClouds/description";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_BRANCHES_AND_LEAVES:String = "#vehicle_customization:camouflage/france/tricolor/Branches_and_Leaves";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_GRAYZIGZAG_LABEL:String = "#vehicle_customization:camouflage/germany/bicolor/GrayZigzag/label";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_GEOMETRIC_SHAPES:String = "#vehicle_customization:camouflage/france/tricolor/Geometric_Shapes";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_GRAYZIGZAG_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/bicolor/GrayZigzag/description";
         
-        public static var CAMOUFLAGE_FRANCE_TRICOLOR_GYRUS:String = "#vehicle_customization:camouflage/france/tricolor/Gyrus";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_HONEYCOMB_LABEL:String = "#vehicle_customization:camouflage/germany/tricolor/Honeycomb/label";
         
-        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_01:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_01";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_HONEYCOMB_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/tricolor/Honeycomb/description";
         
-        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_02:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_02";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_BRANCH_LABEL:String = "#vehicle_customization:camouflage/germany/tricolor/Branch/label";
         
-        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_03:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_03";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_BRANCH_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/tricolor/Branch/description";
         
-        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_04:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_04";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_RAGGED_PATCHES_LABEL:String = "#vehicle_customization:camouflage/germany/tricolor/Ragged_Patches/label";
         
-        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_05:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_05";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_RAGGED_PATCHES_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/tricolor/Ragged_Patches/description";
         
-        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_06:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_06";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_SPOTS_LABEL:String = "#vehicle_customization:camouflage/germany/tricolor/Spots/label";
         
-        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_07:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_07";
+        public static var CAMOUFLAGE_GERMANY_TRICOLOR_SPOTS_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/tricolor/Spots/description";
         
-        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_08:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_08";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_WINTER_LABEL:String = "#vehicle_customization:camouflage/germany/bicolor/Winter/label";
         
-        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_09:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_09";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_WINTER_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/bicolor/Winter/description";
         
-        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_10:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_10";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_POLYLINES_LABEL:String = "#vehicle_customization:camouflage/germany/bicolor/Polylines/label";
         
-        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_11:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_11";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_POLYLINES_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/bicolor/Polylines/description";
         
-        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_12:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_12";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_DIAGONAL_STRIPES_LABEL:String = "#vehicle_customization:camouflage/germany/bicolor/Diagonal_Stripes/label";
         
-        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_13:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_13";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_DIAGONAL_STRIPES_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/bicolor/Diagonal_Stripes/description";
         
-        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_14:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_14";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_DARK_SPOTS_LABEL:String = "#vehicle_customization:camouflage/germany/bicolor/Dark_Spots/label";
         
-        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_WINTER_1:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_winter_1";
+        public static var CAMOUFLAGE_GERMANY_BICOLOR_DARK_SPOTS_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/bicolor/Dark_Spots/description";
         
-        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_WINTER_2:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_winter_2";
+        public static var CAMOUFLAGE_GERMANY_DESERTTIGER_LABEL:String = "#vehicle_customization:camouflage/germany/DesertTiger/label";
         
-        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_DESERT:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_desert";
+        public static var CAMOUFLAGE_GERMANY_DESERTTIGER_DESCRIPTION:String = "#vehicle_customization:camouflage/germany/DesertTiger/description";
         
-        public static var CAMOUFLAGE_UK_BICOLOR_DESERT_SPLINTERED:String = "#vehicle_customization:camouflage/uk/bicolor/desert_splintered";
+        public static var CAMOUFLAGE_USA_BICOLOR_GUAMBICOLOR_LABEL:String = "#vehicle_customization:camouflage/usa/bicolor/GuamBicolor/label";
         
-        public static var CAMOUFLAGE_UK_BICOLOR_BICOLOR_CLASSIC:String = "#vehicle_customization:camouflage/uk/bicolor/bicolor_classic";
+        public static var CAMOUFLAGE_USA_BICOLOR_GUAMBICOLOR_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/bicolor/GuamBicolor/description";
         
-        public static var CAMOUFLAGE_UK_BICOLOR_GRASSY_GREEN:String = "#vehicle_customization:camouflage/uk/bicolor/grassy_green";
+        public static var CAMOUFLAGE_USA_BICOLOR_IVOZIMABICOLOR_LABEL:String = "#vehicle_customization:camouflage/usa/bicolor/IvozimaBicolor/label";
         
-        public static var CAMOUFLAGE_UK_BICOLOR_LRDG:String = "#vehicle_customization:camouflage/uk/bicolor/LRDG";
+        public static var CAMOUFLAGE_USA_BICOLOR_IVOZIMABICOLOR_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/bicolor/IvozimaBicolor/description";
         
-        public static var CAMOUFLAGE_UK_TRICOLOR_SOPHISTICATED_BICOLOR:String = "#vehicle_customization:camouflage/uk/tricolor/sophisticated_bicolor";
+        public static var CAMOUFLAGE_USA_BICOLOR_BRETAGNESKY_LABEL:String = "#vehicle_customization:camouflage/usa/bicolor/BretagneSky/label";
         
-        public static var CAMOUFLAGE_UK_TRICOLOR_TRICOLOR_CANADIAN:String = "#vehicle_customization:camouflage/uk/tricolor/tricolor_canadian";
+        public static var CAMOUFLAGE_USA_BICOLOR_BRETAGNESKY_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/bicolor/BretagneSky/description";
         
-        public static var CAMOUFLAGE_UK_TRICOLOR_TRICOLOR_CLASSIC:String = "#vehicle_customization:camouflage/uk/tricolor/tricolor_classic";
+        public static var CAMOUFLAGE_USA_BICOLOR_WHITESCAR_LABEL:String = "#vehicle_customization:camouflage/usa/bicolor/WhiteScar/label";
         
-        public static var CAMOUFLAGE_UK_TRICOLOR_TRICOLOR_DIAGONAL:String = "#vehicle_customization:camouflage/uk/tricolor/tricolor_diagonal";
+        public static var CAMOUFLAGE_USA_BICOLOR_WHITESCAR_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/bicolor/WhiteScar/description";
         
-        public static var CAMOUFLAGE_UK_TRICOLOR_STAINS_WITH_NOTCHES:String = "#vehicle_customization:camouflage/uk/tricolor/stains_with_notches";
+        public static var CAMOUFLAGE_USA_TRICOLOR_RUDESHEIMTRICOLOR_LABEL:String = "#vehicle_customization:camouflage/usa/tricolor/RudesheimTricolor/label";
         
-        public static var CAMOUFLAGE_UK_TRICOLOR_LARGE_SPOTTED:String = "#vehicle_customization:camouflage/uk/tricolor/large-spotted";
+        public static var CAMOUFLAGE_USA_TRICOLOR_RUDESHEIMTRICOLOR_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/tricolor/RudesheimTricolor/description";
         
-        public static var CAMOUFLAGE_UK_BICOLOR_LARGE_MICKEY_MOUSE_EARS:String = "#vehicle_customization:camouflage/uk/bicolor/large-Mickey_Mouse_ears";
+        public static var CAMOUFLAGE_USA_TRICOLOR_IVOZIMATRICOLOR_LABEL:String = "#vehicle_customization:camouflage/usa/tricolor/IvozimaTricolor/label";
         
-        public static var CAMOUFLAGE_UK_BICOLOR_WINTER:String = "#vehicle_customization:camouflage/uk/bicolor/winter";
+        public static var CAMOUFLAGE_USA_TRICOLOR_IVOZIMATRICOLOR_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/tricolor/IvozimaTricolor/description";
         
-        public static var CAMOUFLAGE_JAPAN_WINTER_WHITE:String = "#vehicle_customization:camouflage/japan/winter_white";
+        public static var CAMOUFLAGE_USA_TRICOLOR_OLDSCHOOLUSA_LABEL:String = "#vehicle_customization:camouflage/usa/tricolor/OldschoolUsa/label";
         
-        public static var CAMOUFLAGE_JAPAN_WINTER_SPOTS:String = "#vehicle_customization:camouflage/japan/winter_spots";
+        public static var CAMOUFLAGE_USA_TRICOLOR_OLDSCHOOLUSA_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/tricolor/OldschoolUsa/description";
         
-        public static var CAMOUFLAGE_JAPAN_SUMMER_FOUR_COLOR:String = "#vehicle_customization:camouflage/japan/summer_four-color";
+        public static var CAMOUFLAGE_USA_BICOLOR_MEMBANE_LABEL:String = "#vehicle_customization:camouflage/usa/bicolor/Membane/label";
         
-        public static var CAMOUFLAGE_JAPAN_SUMMER_THREE_COLOR_SPOTS:String = "#vehicle_customization:camouflage/japan/summer_three-color_spots";
+        public static var CAMOUFLAGE_USA_BICOLOR_MEMBANE_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/bicolor/Membane/description";
         
-        public static var CAMOUFLAGE_JAPAN_DESERT_BLUE_BROWN:String = "#vehicle_customization:camouflage/japan/desert_blue-brown";
+        public static var CAMOUFLAGE_USA_TRICOLOR_TRI_COLOR_SPOTTED_LABEL:String = "#vehicle_customization:camouflage/usa/tricolor/Tri-color_Spotted/label";
         
-        public static var CAMOUFLAGE_JAPAN_DESERT_GREEN_BROWN_SPOTS:String = "#vehicle_customization:camouflage/japan/desert_green-brown_spots";
+        public static var CAMOUFLAGE_USA_TRICOLOR_TRI_COLOR_SPOTTED_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/tricolor/Tri-color_Spotted/description";
+        
+        public static var CAMOUFLAGE_USA_TRICOLOR_TROPICAL_TRICOLOR_LABEL:String = "#vehicle_customization:camouflage/usa/tricolor/Tropical_tricolor/label";
+        
+        public static var CAMOUFLAGE_USA_TRICOLOR_TROPICAL_TRICOLOR_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/tricolor/Tropical_tricolor/description";
+        
+        public static var CAMOUFLAGE_USA_BICOLOR_WINTER_LABEL:String = "#vehicle_customization:camouflage/usa/bicolor/Winter/label";
+        
+        public static var CAMOUFLAGE_USA_BICOLOR_WINTER_DESCRIPTION:String = "#vehicle_customization:camouflage/usa/bicolor/Winter/description";
+        
+        public static var CAMOUFLAGE_FRANCE_BICOLOR_FRANCH_1_LABEL:String = "#vehicle_customization:camouflage/france/bicolor/franch_1/label";
+        
+        public static var CAMOUFLAGE_FRANCE_BICOLOR_FRANCH_1_DESCRIPTION:String = "#vehicle_customization:camouflage/france/bicolor/franch_1/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_2_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/franch_2/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_2_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/franch_2/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_3_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/franch_3/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_3_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/franch_3/description";
+        
+        public static var CAMOUFLAGE_FRANCE_BICOLOR_FRANCH_4_LABEL:String = "#vehicle_customization:camouflage/france/bicolor/franch_4/label";
+        
+        public static var CAMOUFLAGE_FRANCE_BICOLOR_FRANCH_4_DESCRIPTION:String = "#vehicle_customization:camouflage/france/bicolor/franch_4/description";
+        
+        public static var CAMOUFLAGE_FRANCE_BICOLOR_FRANCH_5_LABEL:String = "#vehicle_customization:camouflage/france/bicolor/franch_5/label";
+        
+        public static var CAMOUFLAGE_FRANCE_BICOLOR_FRANCH_5_DESCRIPTION:String = "#vehicle_customization:camouflage/france/bicolor/franch_5/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_6_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/franch_6/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_6_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/franch_6/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_7_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/franch_7/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_7_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/franch_7/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_8_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/franch_8/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_8_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/franch_8/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_9_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/franch_9/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_9_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/franch_9/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_10_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/franch_10/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_FRANCH_10_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/franch_10/description";
+        
+        public static var CAMOUFLAGE_FRANCE_BICOLOR_WINTER_LABEL:String = "#vehicle_customization:camouflage/france/bicolor/Winter/label";
+        
+        public static var CAMOUFLAGE_FRANCE_BICOLOR_WINTER_DESCRIPTION:String = "#vehicle_customization:camouflage/france/bicolor/Winter/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_BRANCHES_AND_LEAVES_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/Branches_and_Leaves/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_BRANCHES_AND_LEAVES_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/Branches_and_Leaves/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_GEOMETRIC_SHAPES_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/Geometric_Shapes/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_GEOMETRIC_SHAPES_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/Geometric_Shapes/description";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_GYRUS_LABEL:String = "#vehicle_customization:camouflage/france/tricolor/Gyrus/label";
+        
+        public static var CAMOUFLAGE_FRANCE_TRICOLOR_GYRUS_DESCRIPTION:String = "#vehicle_customization:camouflage/france/tricolor/Gyrus/description";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_01_LABEL:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_01/label";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_01_DESCRIPTION:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_01/description";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_02_LABEL:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_02/label";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_02_DESCRIPTION:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_02/description";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_03_LABEL:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_03/label";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_03_DESCRIPTION:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_03/description";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_04_LABEL:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_04/label";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_04_DESCRIPTION:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_04/description";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_05_LABEL:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_05/label";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_05_DESCRIPTION:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_05/description";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_06_LABEL:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_06/label";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_06_DESCRIPTION:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_06/description";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_07_LABEL:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_07/label";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_07_DESCRIPTION:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_07/description";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_08_LABEL:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_08/label";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_08_DESCRIPTION:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_08/description";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_09_LABEL:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_09/label";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_09_DESCRIPTION:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_09/description";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_10_LABEL:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_10/label";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_10_DESCRIPTION:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_10/description";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_11_LABEL:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_11/label";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_11_DESCRIPTION:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_11/description";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_12_LABEL:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_12/label";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_12_DESCRIPTION:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_12/description";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_13_LABEL:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_13/label";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_13_DESCRIPTION:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_13/description";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_14_LABEL:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_14/label";
+        
+        public static var CAMOUFLAGE_CHINA_TRICOLOR_CHINA_HISTORICAL_14_DESCRIPTION:String = "#vehicle_customization:camouflage/china/tricolor/china_historical_14/description";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_WINTER_1_LABEL:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_winter_1/label";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_WINTER_1_DESCRIPTION:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_winter_1/description";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_WINTER_2_LABEL:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_winter_2/label";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_WINTER_2_DESCRIPTION:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_winter_2/description";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_DESERT_LABEL:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_desert/label";
+        
+        public static var CAMOUFLAGE_CHINA_BICOLOR_CHINA_HISTORICAL_DESERT_DESCRIPTION:String = "#vehicle_customization:camouflage/china/bicolor/china_historical_desert/description";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_DESERT_SPLINTERED_LABEL:String = "#vehicle_customization:camouflage/uk/bicolor/desert_splintered/label";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_DESERT_SPLINTERED_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/bicolor/desert_splintered/description";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_BICOLOR_CLASSIC_LABEL:String = "#vehicle_customization:camouflage/uk/bicolor/bicolor_classic/label";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_BICOLOR_CLASSIC_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/bicolor/bicolor_classic/description";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_GRASSY_GREEN_LABEL:String = "#vehicle_customization:camouflage/uk/bicolor/grassy_green/label";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_GRASSY_GREEN_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/bicolor/grassy_green/description";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_LRDG_LABEL:String = "#vehicle_customization:camouflage/uk/bicolor/LRDG/label";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_LRDG_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/bicolor/LRDG/description";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_SOPHISTICATED_BICOLOR_LABEL:String = "#vehicle_customization:camouflage/uk/tricolor/sophisticated_bicolor/label";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_SOPHISTICATED_BICOLOR_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/tricolor/sophisticated_bicolor/description";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_TRICOLOR_CANADIAN_LABEL:String = "#vehicle_customization:camouflage/uk/tricolor/tricolor_canadian/label";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_TRICOLOR_CANADIAN_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/tricolor/tricolor_canadian/description";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_TRICOLOR_CLASSIC_LABEL:String = "#vehicle_customization:camouflage/uk/tricolor/tricolor_classic/label";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_TRICOLOR_CLASSIC_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/tricolor/tricolor_classic/description";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_TRICOLOR_DIAGONAL_LABEL:String = "#vehicle_customization:camouflage/uk/tricolor/tricolor_diagonal/label";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_TRICOLOR_DIAGONAL_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/tricolor/tricolor_diagonal/description";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_STAINS_WITH_NOTCHES_LABEL:String = "#vehicle_customization:camouflage/uk/tricolor/stains_with_notches/label";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_STAINS_WITH_NOTCHES_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/tricolor/stains_with_notches/description";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_LARGE_SPOTTED_LABEL:String = "#vehicle_customization:camouflage/uk/tricolor/large-spotted/label";
+        
+        public static var CAMOUFLAGE_UK_TRICOLOR_LARGE_SPOTTED_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/tricolor/large-spotted/description";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_LARGE_MICKEY_MOUSE_EARS_LABEL:String = "#vehicle_customization:camouflage/uk/bicolor/large-Mickey_Mouse_ears/label";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_LARGE_MICKEY_MOUSE_EARS_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/bicolor/large-Mickey_Mouse_ears/description";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_WINTER_LABEL:String = "#vehicle_customization:camouflage/uk/bicolor/winter/label";
+        
+        public static var CAMOUFLAGE_UK_BICOLOR_WINTER_DESCRIPTION:String = "#vehicle_customization:camouflage/uk/bicolor/winter/description";
+        
+        public static var CAMOUFLAGE_JAPAN_WINTER_WHITE_LABEL:String = "#vehicle_customization:camouflage/japan/winter_white/label";
+        
+        public static var CAMOUFLAGE_JAPAN_WINTER_WHITE_DESCRIPTION:String = "#vehicle_customization:camouflage/japan/winter_white/description";
+        
+        public static var CAMOUFLAGE_JAPAN_WINTER_SPOTS_LABEL:String = "#vehicle_customization:camouflage/japan/winter_spots/label";
+        
+        public static var CAMOUFLAGE_JAPAN_WINTER_SPOTS_DESCRIPTION:String = "#vehicle_customization:camouflage/japan/winter_spots/description";
+        
+        public static var CAMOUFLAGE_JAPAN_SUMMER_FOUR_COLOR_LABEL:String = "#vehicle_customization:camouflage/japan/summer_four-color/label";
+        
+        public static var CAMOUFLAGE_JAPAN_SUMMER_FOUR_COLOR_DESCRIPTION:String = "#vehicle_customization:camouflage/japan/summer_four-color/description";
+        
+        public static var CAMOUFLAGE_JAPAN_SUMMER_THREE_COLOR_SPOTS_LABEL:String = "#vehicle_customization:camouflage/japan/summer_three-color_spots/label";
+        
+        public static var CAMOUFLAGE_JAPAN_SUMMER_THREE_COLOR_SPOTS_DESCRIPTION:String = "#vehicle_customization:camouflage/japan/summer_three-color_spots/description";
+        
+        public static var CAMOUFLAGE_JAPAN_DESERT_BLUE_BROWN_LABEL:String = "#vehicle_customization:camouflage/japan/desert_blue-brown/label";
+        
+        public static var CAMOUFLAGE_JAPAN_DESERT_BLUE_BROWN_DESCRIPTION:String = "#vehicle_customization:camouflage/japan/desert_blue-brown/description";
+        
+        public static var CAMOUFLAGE_JAPAN_DESERT_GREEN_BROWN_SPOTS_LABEL:String = "#vehicle_customization:camouflage/japan/desert_green-brown_spots/label";
+        
+        public static var CAMOUFLAGE_JAPAN_DESERT_GREEN_BROWN_SPOTS_DESCRIPTION:String = "#vehicle_customization:camouflage/japan/desert_green-brown_spots/description";
         
         public static var IGR_FREE_FULL:String = "#vehicle_customization:IGR/free/full";
         
@@ -233,6 +439,8 @@ package
         public static var EMBLEM_COOL:String = "#vehicle_customization:emblem/cool";
         
         public static var EMBLEM_SIGNS:String = "#vehicle_customization:emblem/signs";
+        
+        public static var EMBLEM_CLAN_CONTENT:String = "#vehicle_customization:emblem/clan_content";
         
         public static var EMBLEM_IGR:String = "#vehicle_customization:emblem/IGR";
         
@@ -610,6 +818,16 @@ package
         
         public static var EMBLEM_GROUP5_STICKER_10:String = "#vehicle_customization:emblem/group5/sticker_10";
         
+        public static var EMBLEM_GROUP7_CLAN_CONTENT_01:String = "#vehicle_customization:emblem/group7/clan_content_01";
+        
+        public static var EMBLEM_GROUP7_CLAN_CONTENT_02:String = "#vehicle_customization:emblem/group7/clan_content_02";
+        
+        public static var EMBLEM_GROUP7_CLAN_CONTENT_03:String = "#vehicle_customization:emblem/group7/clan_content_03";
+        
+        public static var EMBLEM_GROUP7_CLAN_CONTENT_04:String = "#vehicle_customization:emblem/group7/clan_content_04";
+        
+        public static var EMBLEM_GROUP7_CLAN_CONTENT_05:String = "#vehicle_customization:emblem/group7/clan_content_05";
+        
         public static var INSCRIPTION_HISTORICAL:String = "#vehicle_customization:inscription/historical";
         
         public static var INSCRIPTION_MOTTO:String = "#vehicle_customization:inscription/motto";
@@ -625,6 +843,22 @@ package
         public static var INSCRIPTION_OTHER:String = "#vehicle_customization:inscription/other";
         
         public static var INSCRIPTION_IGR:String = "#vehicle_customization:inscription/IGR";
+        
+        public static var INSCRIPTION_CLAN_CONTENT:String = "#vehicle_customization:inscription/clan_content";
+        
+        public static var INSCRIPTION_CLAN_CONTENT_INSCRIPTION_01:String = "#vehicle_customization:inscription/clan_content/inscription_01";
+        
+        public static var INSCRIPTION_CLAN_CONTENT_INSCRIPTION_02:String = "#vehicle_customization:inscription/clan_content/inscription_02";
+        
+        public static var INSCRIPTION_CLAN_CONTENT_INSCRIPTION_03:String = "#vehicle_customization:inscription/clan_content/inscription_03";
+        
+        public static var INSCRIPTION_CLAN_CONTENT_INSCRIPTION_04:String = "#vehicle_customization:inscription/clan_content/inscription_04";
+        
+        public static var INSCRIPTION_CLAN_CONTENT_INSCRIPTION_05:String = "#vehicle_customization:inscription/clan_content/inscription_05";
+        
+        public static var INSCRIPTION_CLAN_CONTENT_INSCRIPTION_06:String = "#vehicle_customization:inscription/clan_content/inscription_06";
+        
+        public static var INSCRIPTION_CLAN_CONTENT_INSCRIPTION_07:String = "#vehicle_customization:inscription/clan_content/inscription_07";
         
         public static var INSCRIPTION_CHINA_PAIN:String = "#vehicle_customization:inscription/china/pain";
         

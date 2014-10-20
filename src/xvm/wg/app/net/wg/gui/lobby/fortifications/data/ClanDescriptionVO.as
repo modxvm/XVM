@@ -42,6 +42,8 @@ package net.wg.gui.lobby.fortifications.data
         
         public var isFrozen:Boolean = false;
         
+        public var isOurFortFrozen:Boolean = false;
+        
         public var isWarDeclared:Boolean = false;
         
         public var isAlreadyFought:Boolean = false;
@@ -53,6 +55,8 @@ package net.wg.gui.lobby.fortifications.data
         public var warPlannedTimeTT:String = "";
         
         public var warNextAvailableDate:String = "";
+        
+        public var selectedDateText:String = "";
         
         public var clanBattles:ClanStatItemVO;
         

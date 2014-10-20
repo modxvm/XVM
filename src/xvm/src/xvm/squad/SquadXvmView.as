@@ -26,7 +26,7 @@ package xvm.squad
             return super.view as SquadWindow;
         }
 
-        /* TODO:0.9.3
+        /* TODO:0.9.4
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             page.squadView.memberList.itemRenderer = UI_SquadItemRenderer;

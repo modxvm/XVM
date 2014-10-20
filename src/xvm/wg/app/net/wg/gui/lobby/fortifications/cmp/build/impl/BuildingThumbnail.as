@@ -144,7 +144,7 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
         public function set showLevel(param1:Boolean) : void
         {
             this._showLevel = param1;
-            if((this._showLevel) && !this.levelMC.visible)
+            if(this._showLevel)
             {
                 if((stage) && !this.alwaysShowLvl)
                 {
@@ -157,18 +157,15 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
                     this.levelMC.alpha = 1;
                 }
             }
-            else if(!this._showLevel && (this.levelMC.visible))
+            else if(stage)
             {
-                if(stage)
-                {
-                    this.animator.removeAnims(this.levelMC);
-                    this.animator.addFadeOutAnim(this.levelMC,null);
-                }
-                else
-                {
-                    this.levelMC.alpha = 0;
-                    this.levelMC.visible = false;
-                }
+                this.animator.removeAnims(this.levelMC);
+                this.animator.addFadeOutAnim(this.levelMC,null);
+            }
+            else
+            {
+                this.levelMC.alpha = 0;
+                this.levelMC.visible = false;
             }
             
         }

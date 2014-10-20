@@ -4,7 +4,6 @@ package net.wg.gui.lobby.questsWindow
     import flash.text.TextField;
     import flash.display.MovieClip;
     import net.wg.gui.lobby.questsWindow.components.ResizableContainer;
-    import flash.text.TextFieldAutoSize;
     import scaleform.clik.constants.InvalidationType;
     import flash.events.Event;
     
@@ -103,10 +102,7 @@ package net.wg.gui.lobby.questsWindow
             super.draw();
             if(isInvalid(INVALIDATE_ALIGN))
             {
-                if(this._contentAlign == TextFieldAutoSize.RIGHT)
-                {
-                    this.container.x = Math.round(this.awardTF.x + this.awardTF.textWidth + TEXT_PADDING);
-                }
+                this.container.x = Math.round(this.awardTF.x + this.awardTF.textWidth + TEXT_PADDING);
             }
             if(isInvalid(INVALIDATE_MASK_WIDTH))
             {
