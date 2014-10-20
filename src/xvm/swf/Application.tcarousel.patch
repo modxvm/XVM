@@ -1,6 +1,6 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm
---- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-09-13 19:57:04.143675400 +0300
-+++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-09-13 19:57:50.579331400 +0300
+--- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-10-20 23:43:58.435870400 +0300
++++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-10-20 23:55:25.560880600 +0300
 @@ -63,8 +63,8 @@
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "lastDx") type QName(PackageNamespace(""), "Number") value Integer(0) end
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "allowDrag") type QName(PackageNamespace(""), "Boolean") value False() end
@@ -39,7 +39,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
        returnvoid
       end ; code
-@@ -2363,7 +2363,7 @@
+@@ -2400,7 +2400,7 @@
  
        getlocal0
        getlocal0
@@ -48,7 +48,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "currentFirstRenderer")
  
        getlex              QName(PackageNamespace(""), "container")
-@@ -2385,7 +2385,7 @@
+@@ -2422,7 +2422,7 @@
      end ; body
     end ; method
    end ; trait
@@ -57,7 +57,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
     method
      refid "net.wg.gui.components.controls:Carousel/instance/net.wg.gui.components.controls:Carousel/instance/getCurrentFirstRendererOnAnim"
      returns QName(PackageNamespace(""), "Number")
-@@ -2487,7 +2487,7 @@
+@@ -2524,7 +2524,7 @@
        pushscope
  
        getlocal0
@@ -66,7 +66,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        convert_d
        setlocal1
  
-@@ -2722,7 +2722,7 @@
+@@ -2759,7 +2759,7 @@
  
        getlocal0
        getlocal0
@@ -75,7 +75,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "currentFirstRenderer")
  
        getlocal0
-@@ -2777,7 +2777,7 @@
+@@ -2814,7 +2814,7 @@
  
        getlocal0
        pushbyte            0
@@ -84,7 +84,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
        jump                L65
  
-@@ -2796,7 +2796,7 @@
+@@ -2833,7 +2833,7 @@
        pushbyte            255
        convert_d
  L64:
@@ -93,7 +93,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
  L65:
        getlocal0
-@@ -2826,7 +2826,7 @@
+@@ -2863,7 +2863,7 @@
        getlocal0
        findpropstrict      QName(PackageNamespace("flash.utils"), "setInterval")
        getlocal0
@@ -102,7 +102,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        getlocal0
        getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "INTERVAL_SPEED")
        callproperty        QName(PackageNamespace("flash.utils"), "setInterval"), 2
-@@ -2973,14 +2973,14 @@
+@@ -3010,14 +3010,14 @@
  
        getlocal0
        pushbyte            0
@@ -119,7 +119,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
     method
      refid "net.wg.gui.components.controls:Carousel/instance/net.wg.gui.components.controls:Carousel/instance/arrowSlide"
      returns QName(PackageNamespace(""), "void")
-@@ -3005,7 +3005,7 @@
+@@ -3042,7 +3042,7 @@
        getlocal0
        getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "maxDx")
        getlocal0
@@ -128,7 +128,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        multiply
        getlocal0
        getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "lastDx")
-@@ -3017,7 +3017,7 @@
+@@ -3054,7 +3054,7 @@
        initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "lastDx")
  
        getlocal0
@@ -137,7 +137,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        pushbyte            0
        ifne                L106
  
-@@ -3126,7 +3126,7 @@
+@@ -3163,7 +3163,7 @@
        setproperty         QName(PackageNamespace(""), "x")
  
        getlocal0
@@ -146,7 +146,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
        getlocal0
        getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "_currentFirstRendererOnAnim")
-@@ -3137,7 +3137,7 @@
+@@ -3174,7 +3174,7 @@
  
        pop
        getlocal0
@@ -155,7 +155,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        pushbyte            1
        equals
  L126:
-@@ -3149,7 +3149,7 @@
+@@ -3186,7 +3186,7 @@
  
        getlocal0
        pushbyte            0
@@ -164,7 +164,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
        jump                L160
  
-@@ -3167,7 +3167,7 @@
+@@ -3204,7 +3204,7 @@
  
        pop
        getlocal0
@@ -173,7 +173,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        pushbyte            255
        equals
  L149:
-@@ -3183,7 +3183,7 @@
+@@ -3220,7 +3220,7 @@
  
        getlocal0
        pushbyte            0
@@ -182,7 +182,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
  L160:
        returnvoid
-@@ -3214,7 +3214,7 @@
+@@ -3251,7 +3251,7 @@
        iffalse             L38
  
        getlocal0
@@ -192,8 +192,8 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        getproperty         QName(PackageNamespace(""), "renderersMask")
        getproperty         QName(PackageNamespace(""), "width")
 diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm Application.orig-0/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm
---- Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-09-13 19:57:14.478266500 +0300
-+++ Application.orig-0/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-09-13 19:57:50.599332500 +0300
+--- Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-10-20 23:44:07.705883400 +0300
++++ Application.orig-0/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-10-21 00:00:17.291289000 +0300
 @@ -120,8 +120,8 @@
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_createdRendersListByCompDescr") type QName(PackageNamespace(""), "Object") value Null() end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_createdRendersListByCompDescrLength") type QName(PackageNamespace(""), "Number") value Integer(0) end
@@ -204,14 +204,14 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
 +  trait slot QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "_slotForBuyVehicle") type QName(PackageNamespace("scaleform.clik.interfaces"), "IListItemRenderer") value Null() end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_updateInProgress") type QName(PackageNamespace(""), "Boolean") value False() end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_rendererHelpLayout") type QName(PackageNamespace("flash.display"), "DisplayObject") end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_isShowHelpLayout") type QName(PackageNamespace(""), "Boolean") value False() end
-@@ -402,31 +402,31 @@
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_filtersHelpLayout") type QName(PackageNamespace("flash.display"), "DisplayObject") end
+@@ -420,31 +420,31 @@
        callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "removeEmptySlots"), 0
  
        getlocal0
 -      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_slotForBuySlot")
 +      getproperty         QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "_slotForBuySlot")
-       iffalse             L105
+       iffalse             L120
  
        getlocal0
        getlocal0
@@ -224,11 +224,11 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
 -      initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_slotForBuySlot")
 +      initproperty        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "_slotForBuySlot")
  
- L105:
+ L120:
        getlocal0
 -      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_slotForBuyVehicle")
 +      getproperty         QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "_slotForBuyVehicle")
-       iffalse             L115
+       iffalse             L130
  
        getlocal0
        getlocal0
@@ -241,9 +241,9 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
 -      initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_slotForBuyVehicle")
 +      initproperty        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "_slotForBuyVehicle")
  
- L115:
+ L130:
        getlocal0
-@@ -677,7 +677,7 @@
+@@ -667,7 +667,7 @@
        setlocal3
  
        getlocal0
@@ -252,7 +252,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        pushnull
        ifeq                L83
  
-@@ -694,7 +694,7 @@
+@@ -684,7 +684,7 @@
        setlocal            4
  
        getlocal0
@@ -261,7 +261,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        pushnull
        ifeq                L245
  
-@@ -833,7 +833,7 @@
+@@ -823,7 +823,7 @@
  
  L199:
        getlocal0
@@ -270,7 +270,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace(""), "padding")
        getproperty         QName(PackageNamespace(""), "horizontal")
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
-@@ -845,11 +845,11 @@
+@@ -835,11 +835,11 @@
  
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
        getlocal0
@@ -284,7 +284,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace("flash.display"), "DisplayObject")
        astypelate
        coerce              QName(PackageNamespace("flash.display"), "DisplayObject")
-@@ -861,7 +861,7 @@
+@@ -851,7 +851,7 @@
  
  L222:
        getlocal0
@@ -293,7 +293,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace(""), "padding")
        getproperty         QName(PackageNamespace(""), "horizontal")
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
-@@ -873,7 +873,7 @@
+@@ -863,7 +863,7 @@
  
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
        getlocal0
@@ -302,25 +302,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        callpropvoid        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "push"), 1
  
        getlocal0
-@@ -1629,7 +1629,7 @@
-       initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_updateShowByCompactDescription")
- 
-       getlocal0
--      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "showHideFilters"), 0
-+      callpropvoid        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "showHideFilters"), 0
- 
-       getlocal0
-       callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "addAdvancedSlots"), 0
-@@ -1651,7 +1651,7 @@
-       iffalse             L175
- 
-       getlocal0
--      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "showHideFilters"), 0
-+      callpropvoid        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "showHideFilters"), 0
- 
-       getlocal0
-       callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "updateEmptySlots"), 0
-@@ -2195,7 +2195,7 @@
+@@ -2301,7 +2301,7 @@
        getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_currentShowRendersByIndex")
        getproperty         QName(PackageNamespace(""), "length")
        getlocal0
@@ -329,7 +311,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace("net.wg.gui.lobby.hangar.tcarousel.helper"), "VehicleCarouselVOBuilder")
        getproperty         QName(PackageNamespace(""), "instance")
        getlocal0
-@@ -2229,7 +2229,7 @@
+@@ -2335,7 +2335,7 @@
        getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_currentShowRendersByIndex")
        getproperty         QName(PackageNamespace(""), "length")
        getlocal0
@@ -338,16 +320,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace("net.wg.gui.lobby.hangar.tcarousel.helper"), "VehicleCarouselVOBuilder")
        getproperty         QName(PackageNamespace(""), "instance")
        getlocal0
-@@ -2715,7 +2715,7 @@
-     end ; body
-    end ; method
-   end ; trait
--  trait method QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "showHideFilters")
-+  trait method QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "showHideFilters")
-    method
-     refid "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance/net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance/showHideFilters"
-     returns QName(PackageNamespace(""), "void")
-@@ -3843,12 +3843,12 @@
+@@ -3918,12 +3918,12 @@
        callpropvoid        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "cleanUpRenderer"), 1
  
        getlocal0
@@ -362,7 +335,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
  
  L63:
        jump                L65
-@@ -3890,7 +3890,7 @@
+@@ -3965,7 +3965,7 @@
        ifngt               L72
  
        getlocal0
@@ -371,7 +344,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        iftrue              L49
  
        getlocal0
-@@ -3898,10 +3898,10 @@
+@@ -3973,10 +3973,10 @@
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
        getproperty         QName(PackageNamespace(""), "length")
        callproperty        QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "createRenderer"), 1
@@ -384,7 +357,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        pushnull
        ifeq                L48
  
-@@ -3910,7 +3910,7 @@
+@@ -3985,7 +3985,7 @@
        callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "updateSlotForBuyVehicle"), 1
  
        getlocal0
@@ -393,7 +366,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace(""), "padding")
        getproperty         QName(PackageNamespace(""), "horizontal")
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
-@@ -3922,11 +3922,11 @@
+@@ -3997,11 +3997,11 @@
  
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
        getlocal0
@@ -407,7 +380,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace("flash.display"), "DisplayObject")
        astypelate
        coerce              QName(PackageNamespace("flash.display"), "DisplayObject")
-@@ -3941,7 +3941,7 @@
+@@ -4016,7 +4016,7 @@
  
  L49:
        getlocal0
@@ -416,7 +389,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace(""), "padding")
        getproperty         QName(PackageNamespace(""), "horizontal")
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
-@@ -3953,11 +3953,11 @@
+@@ -4028,11 +4028,11 @@
  
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
        getlocal0
@@ -430,7 +403,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace("flash.display"), "DisplayObject")
        astypelate
        coerce              QName(PackageNamespace("flash.display"), "DisplayObject")
-@@ -3970,7 +3970,7 @@
+@@ -4045,7 +4045,7 @@
  
  L72:
        getlocal0
@@ -439,7 +412,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        pushnull
        ifne                L113
  
-@@ -3979,10 +3979,10 @@
+@@ -4054,10 +4054,10 @@
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
        getproperty         QName(PackageNamespace(""), "length")
        callproperty        QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "createRenderer"), 1
@@ -452,7 +425,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        pushnull
        ifeq                L112
  
-@@ -3991,7 +3991,7 @@
+@@ -4066,7 +4066,7 @@
        callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "updateSlotForBuySlot"), 1
  
        getlocal0
@@ -461,7 +434,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace(""), "padding")
        getproperty         QName(PackageNamespace(""), "horizontal")
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
-@@ -4003,11 +4003,11 @@
+@@ -4078,11 +4078,11 @@
  
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
        getlocal0
@@ -475,7 +448,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace("flash.display"), "DisplayObject")
        astypelate
        coerce              QName(PackageNamespace("flash.display"), "DisplayObject")
-@@ -4022,7 +4022,7 @@
+@@ -4097,7 +4097,7 @@
  
  L113:
        getlocal0
@@ -484,7 +457,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace(""), "padding")
        getproperty         QName(PackageNamespace(""), "horizontal")
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
-@@ -4034,11 +4034,11 @@
+@@ -4109,11 +4109,11 @@
  
        getlex              QName(ProtectedNamespace("scaleform.clik.controls:CoreList"), "_renderers")
        getlocal0

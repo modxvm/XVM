@@ -96,7 +96,7 @@ package net.wg.gui.components.advanced
         
         private var _isPremiumDirty:Boolean = true;
         
-        private var DIRTY_FLAGS:Array = [this._showMultyXpDirty,this._showXpDirty,this._showNameDirty,this._nationDirty,this._imageDirty,this._tankTypeDirty,this._levelDirty,this._multyXpValDirty,this._xpValDirty,this._tankNameDirty,this._isRentDirty,this._isEliteDirty,this._isPremiumDirty];
+        public var DIRTY_FLAGS:Array = [_showMultyXpDirty,_showXpDirty,_showNameDirty,_nationDirty,_imageDirty,_tankTypeDirty,_levelDirty,_multyXpValDirty,_xpValDirty,_tankNameDirty,_isRentDirty,_isEliteDirty,_isPremiumDirty];
         
         override protected function onDispose() : void
         {
