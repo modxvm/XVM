@@ -333,6 +333,7 @@ class com.xvm.Macros
             {
                 clan = name.slice(idx);
                 clannb = clan.slice(1, clan.indexOf("]"));
+                name = Strings.trim(name.slice(0, idx));
             }
             else
             {

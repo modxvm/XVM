@@ -375,6 +375,12 @@ package com.xvm.utils
             var pdata:Object = dict[pname];
 
             var nick:String = getCustomPlayerName(pname, playerId);
+            var clanIdx:int = nick.indexOf("[");
+            if (clanIdx > 0)
+            {
+                fullPlayerName = nick;
+                nick = StringUtils.trim(nick.slice(0, clanIdx));
+            }
             var clanWithoutBrackets:String = WGUtils.GetClanNameWithoutBrackets(fullPlayerName);
             var clanWithBrackets:String = WGUtils.GetClanNameWithBrackets(fullPlayerName);
 
