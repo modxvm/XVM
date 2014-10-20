@@ -201,6 +201,7 @@ _data = {
     'germany:VK3002DB_V1':              '3002DB',
     'germany:VK3002M':                  '3002M',
     'usa:M4A3E8_Sherman':               'SheE8',
+    "usa:A104_M4A3E8A":                 'Fury',
     'usa:Sherman_Jumbo':                'SheJm',
     'china:Ch20_Type58':                '58',
     'uk:GB21_Cromwell':                 'Cromw',
