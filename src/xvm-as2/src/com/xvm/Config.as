@@ -21,7 +21,7 @@ class com.xvm.Config
         return _instance;
     }
 
-    public function GetConfigCallback(config_data:String, lang_str:String, vehInfoData:String, networkServicesSettings:Object, comments:String)
+    public function GetConfigCallback(config_data:String, lang_str:String, vehInfoData:String, networkServicesSettings:String, comments:String)
     {
         //Logger.add("Config::GetConfigCallback()");
         try
@@ -30,7 +30,7 @@ class com.xvm.Config
             //Logger.addObject(Config.config);
             Locale.languageFileCallback(lang_str);
             VehicleInfo.onVehicleInfoData(vehInfoData);
-            Config.networkServicesSettings = networkServicesSettings;
+            Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
             Macros.RegisterCommentsData(comments);
 
             Logger.add("Config: Loaded");

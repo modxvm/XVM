@@ -343,7 +343,7 @@ class Xvm(object):
                     self.config_str,
                     self.lang_str,
                     getVehicleInfoDataStr(),
-                    token.networkServicesSettings,
+                    simplejson.dumps(token.networkServicesSettings),
                     comments.getXvmUserComments(not isReplay())]))
         except Exception, ex:
             err('sendConfig(): ' + traceback.format_exc())
