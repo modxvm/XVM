@@ -17,9 +17,7 @@ package xvm.hangar.components.BattleResults
 
         public function WinChances(page:BattleResults)
         {
-            if (Config.networkServicesSettings.statBattle == false)
-                return;
-            if (Config.config.battleResults.showChances == false && Config.config.battleResults.showBattleTier == false)
+            if (Config.networkServicesSettings.chance == false && Config.config.battleResults.showBattleTier == false)
                 return;
             this.page = page;
 
@@ -63,7 +61,7 @@ package xvm.hangar.components.BattleResults
                 }
             }
 
-            var chanceText:String = Chance.GetChanceText(playerNames, Config.config.battleResults.showChances, Config.config.battleResults.showBattleTier);
+            var chanceText:String = Chance.GetChanceText(playerNames, Config.networkServicesSettings.chance, Config.config.battleResults.showBattleTier);
             if (chanceText)
             {
                 chanceText = "<p class='txt' align='right'>" + chanceText + '</p>';

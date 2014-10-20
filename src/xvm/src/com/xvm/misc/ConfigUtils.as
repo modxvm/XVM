@@ -202,12 +202,6 @@ package com.xvm.misc
 
             if (v == "5.0.0")
             {
-                s = config.statisticForm;
-                if (s != null)
-                {
-                    if (s.showChancesExp != null && s.showChancesLive == null)
-                        s.showChancesLive = s.showChancesExp;
-                }
                 v = "5.0.1";
             }
 

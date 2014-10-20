@@ -127,7 +127,7 @@ package xvm.profile.components
                     filter.setFocus();
 
                 // stat
-                if (Config.networkServicesSettings.statUserInfo)
+                if (Config.networkServicesSettings.statAwards)
                     Stat.loadUserData(this, onStatLoaded, playerName, false);
             }
             catch (ex:Error)

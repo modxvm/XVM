@@ -23,7 +23,7 @@ def clearToken(value):
     global _token
     _token = value
     global networkServicesSettings
-    networkServicesSettings = _EMPTY_NETWORK_SERVICES_SETTINGS
+    networkServicesSettings = _makeNetworkServicesSettings(None)
 
 # PRIVATE
 
@@ -51,14 +51,19 @@ _verInfo = None
 _tdataPrev = None
 _token = None
 
-_EMPTY_NETWORK_SERVICES_SETTINGS = {
-    'servicesActive': False,
-    'comments': False,
-    'statBattle': False,
-    'statCompany': False,
-    'statUserInfo': False}
+def _makeNetworkServicesSettings(tdata):
+    svc = None if tdata is None else tdata.get('services', None)
+    return {
+        'servicesActive': tdata is not None,
+        'statBattle': False if svc is None else svc.get('statBattle', True),
+        'statAwards': False if svc is None else svc.get('statAwards', True),
+        'statCompany': False if svc is None else svc.get('statCompany', True),
+        'comments': False if svc is None else svc.get('comments', True),
+        'chance': False if svc is None else svc.get('chance', False),
+        'chanceLive': False if svc is None else svc.get('chanceLive', False),
+    }
 
-networkServicesSettings = _EMPTY_NETWORK_SERVICES_SETTINGS
+networkServicesSettings = _makeNetworkServicesSettings(None)
 
 def _checkVersion():
     playerId = getCurrentPlayerId()
@@ -113,23 +118,15 @@ def _getXvmActiveTokenData():
         global _token
         _token = tdata.get('token', '').encode('ascii')
         if isReplay():
-            # TODO
             global networkServicesSettings
-            networkServicesSettings = {
-                'servicesActive': True,
-                'comments': True,
-                'statBattle': True,
-                'statCompany': True,
-                'statUserInfo': True,
-            }
-
+            networkServicesSettings = _makeNetworkServicesSettings(tdata)
     return tdata
 
 def _initializeXvmToken():
     global _tdataPrev
 
     global networkServicesSettings
-    networkServicesSettings = _EMPTY_NETWORK_SERVICES_SETTINGS
+    networkServicesSettings = _makeNetworkServicesSettings(None)
 
     playerId = getCurrentPlayerId()
     if playerId is None:
@@ -160,14 +157,7 @@ def _initializeXvmToken():
         msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
         msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
 
-        # TODO
-        networkServicesSettings = {
-            'servicesActive': True,
-            'comments': True,
-            'statBattle': True,
-            'statCompany': True,
-            'statUserInfo': True,
-        }
+        networkServicesSettings = _makeNetworkServicesSettings(tdata)
     else:
         type = SystemMessages.SM_TYPE.Error
         msg += '{{l10n:token/unknown_status}}\n%s' % utils.hide_guid(simplejson.dumps(tdata))
@@ -178,10 +168,9 @@ def _initializeXvmToken():
 
     if tdata is not None:
         _tdataPrev = tdata
-        if 'token' in tdata:
-            userprefs.set('tokens.{0}'.format(playerId), tdata)
-        elif tdataActive is not None:
+        if not 'token' in tdata and tdataActive is not None:
             tdata['token'] = tdataActive['token']
+        userprefs.set('tokens.{0}'.format(playerId), tdata)
         userprefs.set('tokens.lastPlayerId', playerId)
 
     global _token

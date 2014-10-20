@@ -4,12 +4,6 @@
  */
 {
   "statisticForm": {
-    // true - Enable display of "chance to win"
-    // true - включить отображение шансов на победу
-    "showChances": false,
-    // true - Show "chance to win" only for live tanks.
-    // true - Показывать шансы только для живых танков.
-    "showChancesLive": false,
     // true - Enable display of battle tier.
     // true - включить отображение уровня боя.
     "showBattleTier": false,

@@ -92,8 +92,8 @@ class wot.StatisticForm.BattleStatItemRenderer
         if (s_state <= 0)
         {
             s_state = 1;
-            s_winChances.showChances = Config.config.statisticForm.showChances;
-            s_winChances.showLive = Config.config.statisticForm.showChancesLive;
+            s_winChances.showChances = Config.networkServicesSettings.chance;
+            s_winChances.showLive = Config.networkServicesSettings.chanceLive;
             s_winChances.showBattleTier = Config.config.statisticForm.showBattleTier;
         }
 
@@ -130,7 +130,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         }
 
         // Chance
-        if (Stat.s_loaded && (Config.config.statisticForm.showChances || Config.config.statisticForm.showBattleTier) && wrapper.selected == true)
+        if (Stat.s_loaded && (Config.networkServicesSettings.chance || Config.config.statisticForm.showBattleTier) && wrapper.selected == true)
             s_winChances.showWinChances();
 
         // Alternative icon set

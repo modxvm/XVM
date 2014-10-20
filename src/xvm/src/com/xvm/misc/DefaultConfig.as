@@ -296,7 +296,6 @@ package com.xvm.misc
             // A: No, it is possible to set clockFormat: "" to disable clock.
 
             c.clockFormat = "H:i:s";   // Format: http://php.net/date
-            c.showChances = false;     // Show game round win chances percentage.
             c.showBattleTier = false;  // Show battle tier.
             c.removeSquadIcon = false; // Hide squad icon.
             // Playes/clan icon parameters.
@@ -321,8 +320,6 @@ package com.xvm.misc
         private static function getStatisticFormSection():CStatisticForm
         {
             var c:CStatisticForm = new CStatisticForm();
-            c.showChances = false;     // Show game round win chances percentage.
-            c.showChancesLive = false; // Show "Team strength" only for live tanks.
             c.showBattleTier = false;  // Show battle tier.
             c.removeSquadIcon = false; // Hide squad icon.
             // Playes/clan icon parameters.
@@ -454,7 +451,6 @@ package com.xvm.misc
             c.showNetIncome = true;
             c.showExtendedInfo = true;
             c.showTotals = true;
-            c.showChances = false;
             c.showBattleTier = false;
             return c;
         }

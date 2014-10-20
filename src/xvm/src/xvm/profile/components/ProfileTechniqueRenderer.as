@@ -42,7 +42,7 @@ package xvm.profile.components
                     proxy.vehicleTF.textColor = Defines.UICOLOR_GOLD;
             }
 
-            if (Config.networkServicesSettings.statUserInfo)
+            if (Config.networkServicesSettings.statAwards)
             {
                 proxy.winsTF.htmlText = "<font color='" +
                     MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, proxy.data.winsEfficiency) + "'>" +

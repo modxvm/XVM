@@ -6,8 +6,6 @@ package com.xvm.types.cfg
 {
     public dynamic class CStatisticForm extends Object
     {
-        public var showChances:Boolean;     // Show game round win chances percentage.
-        public var showChancesLive:Boolean; // Show "Team strength" only for live tanks.
         public var showBattleTier:Boolean;  // Show battle tier.
         public var removeSquadIcon:Boolean; // Hide squad icon.
         public var clanIcon:CClanIcon;      // Playes/clan icon parameters.
