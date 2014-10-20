@@ -51,7 +51,8 @@ class com.xvm.Chance
 
         if (showChances)
         {
-            text += Locale.get("Team strength") + ": " + FormatChangeText("", chG);
+            text += Locale.get("Chance to win") + ": " + FormatChangeText("", chG);
+            //text += Locale.get("Team strength") + ": " + FormatChangeText("", chG);
             if (showLive)
             {
                 var chX1 = GetChance(ChanceFuncX1);
@@ -61,7 +62,7 @@ class com.xvm.Chance
         if (showBattleTier)
         {
             if (text !== "")
-                text += " ";
+                text += ". ";
             text += Locale.get("chanceBattleTier") + ": " + battleTier;
         }
         //Logger.add(text);
@@ -318,8 +319,8 @@ class com.xvm.Chance
             htmlText += "-";
         else
         {
-            //var color = GraphicsUtil.brightenColor(GraphicsUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
-            //htmlText += "<font color='#" + color.toString(16) + "'>" + chance.percent + "%</font>";
+            var color = GraphicsUtil.brightenColor(GraphicsUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
+            var s:String = "<font color='#" + color.toString(16) + "'>" + chance.percent + "%</font>";
 
             /*var n:Number = 5;
             var maxValue:Number = Math.max(chanceG.ally, chanceG.enemy);
@@ -336,14 +337,14 @@ class com.xvm.Chance
                 Strings.padLeft("", n - e, "\u2588") +
                 "</font>";*/
 
-            var s:String =
+            /*var s:String =
                 "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
                 Math.round(chance.ally) +
                 "</font>" +
                 " : " +
                 "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
                 Math.round(chance.enemy) +
-                "</font>";
+                "</font>";*/
 
             htmlText += s;
         }

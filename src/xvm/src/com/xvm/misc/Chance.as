@@ -56,7 +56,8 @@ package com.xvm.misc
 
                 if (showChance)
                 {
-                    text = Locale.get("Team strength") + ": " + FormatChangeText("", chG);
+                    text = Locale.get("Chance to win") + ": " + FormatChangeText("", chG);
+                    //text = Locale.get("Team strength") + ": " + FormatChangeText("", chG);
                     if (showLive)
                     {
                         var chX1:Object = GetChance(playerNames, ChanceFuncX1);
@@ -66,7 +67,7 @@ package com.xvm.misc
                 if (showTier)
                 {
                     if (text != "")
-                        text += " ";
+                        text += ". ";
                     text += Locale.get("chanceBattleTier") + ": " + battleTier;
                 }
                 Logger.add("RESULT=" + text);
@@ -324,8 +325,8 @@ package com.xvm.misc
             else
             {
                 //Logger.addObject(chance);
-                //var color:Number = GraphicsUtil.brightenColor(MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
-                //htmlText += "<font color='" + Utils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
+                var color:Number = GraphicsUtil.brightenColor(MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
+                var s:String = "<font color='" + Utils.toHtmlColor(color) + "'>" + chance.percent + "%</font>";
 
                 /*var n:int = 5;
                 var maxValue:Number = Math.max(chanceG.ally, chanceG.enemy);
@@ -342,14 +343,14 @@ package com.xvm.misc
                     StringUtils.leftPad("", n - e, "\u2588") +
                     "</font>";*/
 
-                var s:String =
+                /*var s:String =
                     "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["ally_alive"], 50)) + "'>" +
                     chanceG.ally.toFixed() +
                     "</font>" +
                     " : " +
                     "<font color='" + Utils.toHtmlColor(GraphicsUtil.brightenColor(Config.config.colors.system["enemy_alive"], 50)) + "'>" +
                     chanceG.enemy.toFixed() +
-                    "</font>";
+                    "</font>";*/
 
                 htmlText += s;
             }

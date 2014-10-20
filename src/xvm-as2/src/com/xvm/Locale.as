@@ -98,6 +98,7 @@ class com.xvm.Locale
             /** Hardcoded RU language */
             // Win chance
             tr["Chance error"] = "Ошибка расчета шансов";
+            tr["Chance to win"] = "Шансы на победу";
             tr["Team strength"] = "Силы команд";
             //tr["global"] = "общий";
             //tr["per-vehicle"] = "по технике";
