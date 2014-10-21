@@ -114,6 +114,9 @@ def _getXvmActiveTokenData():
                 return None
             tdata = userprefs.get('tokens.{0}'.format(playerId))
 
+    if not 'token' in tdata:
+        tdata = None
+
     if tdata is not None:
         global _token
         _token = tdata.get('token', '').encode('ascii')
