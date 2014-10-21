@@ -114,7 +114,7 @@ def _getXvmActiveTokenData():
                 return None
             tdata = userprefs.get('tokens.{0}'.format(playerId))
 
-    if not 'token' in tdata:
+    if tdata is not None and not 'token' in tdata:
         tdata = None
 
     if tdata is not None:
