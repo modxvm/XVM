@@ -177,7 +177,7 @@ def _initializeXvmToken():
         userprefs.set('tokens.lastPlayerId', playerId)
 
     global _token
-    _token = tdata.get('token', '').encode('ascii')
+    _token = '' if tdata is None else tdata.get('token', '').encode('ascii')
 
     return
 
