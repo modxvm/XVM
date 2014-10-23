@@ -52,15 +52,15 @@ _tdataPrev = None
 _token = None
 
 def _makeNetworkServicesSettings(tdata):
-    svc = None if tdata is None else tdata.get('services', None)
+    svc = {} if tdata is None else tdata.get('services', {})
     return {
         'servicesActive': tdata is not None,
-        'statBattle': False if svc is None else svc.get('statBattle', True),
-        'statAwards': False if svc is None else svc.get('statAwards', True),
-        'statCompany': False if svc is None else svc.get('statCompany', True),
-        'comments': False if svc is None else svc.get('comments', True),
-        'chance': False if svc is None else svc.get('chance', False),
-        'chanceLive': False if svc is None else svc.get('chanceLive', False),
+        'statBattle': svc.get('statBattle', True),
+        'statAwards': svc.get('statAwards', True),
+        'statCompany': svc.get('statCompany', True),
+        'comments': svc.get('comments', True),
+        'chance': svc.get('chance', False),
+        'chanceLive': svc.get('chanceLive', False),
     }
 
 networkServicesSettings = _makeNetworkServicesSettings(None)
@@ -114,7 +114,7 @@ def _getXvmActiveTokenData():
                 return None
             tdata = userprefs.get('tokens.{0}'.format(playerId))
 
-    if not 'token' in tdata:
+    if tdata is not None and not 'token' in tdata:
         tdata = None
 
     if tdata is not None:

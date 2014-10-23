@@ -1,4 +1,7 @@
-﻿XVM-5.4.0-dev:
+﻿XVM-5.4.0.1:
+  * fixed bug with online services setting
+
+XVM-5.4.0:
   * new mod: xvm-comments, allow to change nicks of the friends and add comments.
   * removed section "rating" - replaced with network services settings in the personal cabinet
   * removed options "showChances", "showChancesLive" - moved to personal cabinet
