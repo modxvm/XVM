@@ -1,4 +1,4 @@
-﻿XVM-5.4.0.1:
+﻿XVM-5.4.0.2:
   * fixed bug with online services setting
 
 XVM-5.4.0:
