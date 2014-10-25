@@ -187,7 +187,7 @@ class _MinimapCircles(object):
 
     @process
     def _updateCrew(self):
-        from gui.shared.utils.requesters import Requester
+        from gui.shared.utils.requesters.deprecated import Requester
 
         self.crew = []
         barracks = yield Requester('tankman').getFromInventory()
