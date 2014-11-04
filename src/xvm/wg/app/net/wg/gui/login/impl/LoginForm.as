@@ -278,7 +278,7 @@ package net.wg.gui.login.impl
         override protected function configUI() : void
         {
             super.configUI();
-            this._message.styleSheet = App.utils.styleSheetManager.getRedHyperlinkCSS();
+            App.utils.styleSheetManager.setLinkStyle(this._message);
             this._server.checkItemDisabledFunction = checkListItemDisabledFunction;
             this._server.menuWidth = App.globalVarsMgr.isDevelopmentS()?DEBUG_SERVER_LIST_SIZE:-1;
             this._submit.enabled = false;

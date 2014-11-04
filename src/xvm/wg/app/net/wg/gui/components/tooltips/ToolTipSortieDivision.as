@@ -45,7 +45,8 @@ package net.wg.gui.components.tooltips
         
         private function addSeparatorWithMargin() : Separator
         {
-            var _loc1_:Separator = Utils.instance.createSeparate(content);
+            var _loc1_:Separator = null;
+            _loc1_ = Utils.instance.createSeparate(content);
             _loc1_.y = topPosition ^ 0;
             _loc1_.x = LEFT_SEP_PADDING;
             separators.push(_loc1_);

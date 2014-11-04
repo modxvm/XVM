@@ -18,6 +18,7 @@ package net.wg.infrastructure.managers.utils.impl
     import flash.filters.ColorMatrixFilter;
     import net.wg.infrastructure.interfaces.IUserProps;
     import flash.text.TextFormat;
+    import net.wg.data.constants.generated.REFERRAL_SYSTEM;
     import net.wg.data.constants.Values;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
     import net.wg.utils.IAssertable;
@@ -45,6 +46,8 @@ package net.wg.infrastructure.managers.utils.impl
         private static var IMG_TAG_OPEN_BASIC:String = "<IMG SRC=\"img://gui/maps/icons/library/basic_small.png\" width=\"26\" height=\"16\" vspace=\"";
         
         private static var IMG_TAG_OPEN_PREMIUM:String = "<IMG SRC=\"img://gui/maps/icons/library/premium_small.png\" width=\"34\" height=\"16\" vspace=\"";
+        
+        private static var REFERRAL_IMG_TAG:String = "<IMG SRC=\"img://gui/maps/icons/referral/referralSmallHand.png\" width=\"16\" height=\"16\" vspace=\"-4\"/>";
         
         private static var CLAN_TAG_OPEN:String = "[";
         
@@ -159,9 +162,12 @@ package net.wg.infrastructure.managers.utils.impl
                         if(this.canToDestroying(_loc5_))
                         {
                             this.releaseReferences(_loc5_,false);
-                            if(_loc4_ is IDisposable)
+                            if(s_found.indexOf(param1) == -1)
                             {
-                                IDisposable(_loc4_).dispose();
+                                if(_loc4_ is IDisposable)
+                                {
+                                    IDisposable(_loc4_).dispose();
+                                }
                             }
                         }
                         DisplayObjectContainer(param1).removeChild(_loc5_);
@@ -282,40 +288,41 @@ package net.wg.infrastructure.managers.utils.impl
             object.filters = [colorFilter];
         }
         
-        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0) : IUserProps
+        public function getUserProps(param1:String, param2:String = null, param3:String = null, param4:int = 0, param5:int = 0) : IUserProps
         {
-            return new UserProps(param1,param2,param3,param4);
+            return new UserProps(param1,param2,param3,param4,param5);
         }
         
         public function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean
         {
-            var _loc10_:* = 0;
+            var _loc11_:* = 0;
             var _loc3_:TextFormat = param1.getTextFormat();
             var _loc4_:Object = _loc3_.size;
             var _loc5_:String = _loc3_.font;
             var _loc6_:String = _loc3_.align;
             var _loc7_:String = (param2.igrType == 2?IMG_TAG_OPEN_PREMIUM:IMG_TAG_OPEN_BASIC) + param2.igrVspace + IMG_TAG_CLOSE;
-            var _loc8_:String = param2.prefix + param2.userName + (param2.clanAbbrev?CLAN_TAG_OPEN + param2.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
-            var _loc9_:* = false;
-            this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);
+            var _loc8_:Boolean = (param2.referralType) && !(param2.referralType == REFERRAL_SYSTEM.TYPE_NO_REFERRAL);
+            var _loc9_:String = param2.prefix + param2.userName + (param2.clanAbbrev?CLAN_TAG_OPEN + param2.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (_loc8_?Values.SPACE_STR + REFERRAL_IMG_TAG:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
+            var _loc10_:* = false;
+            this.applyTextProps(param1,_loc9_,_loc3_,_loc4_,_loc5_,_loc6_);
             if(param1.width < param1.textWidth + 4)
             {
-                _loc9_ = true;
-                _loc8_ = param2.prefix + param2.userName + (param2.clanAbbrev?CUT_SYMBOLS_STR:Values.EMPTY_STR) + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
-                this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);
-                _loc10_ = param2.userName.length - 1;
-                while(param1.width < param1.textWidth + 4 && _loc10_ > 0)
+                _loc10_ = true;
+                _loc9_ = param2.prefix + param2.userName + (param2.clanAbbrev?CUT_SYMBOLS_STR:Values.EMPTY_STR) + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (_loc8_?Values.SPACE_STR + REFERRAL_IMG_TAG:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
+                this.applyTextProps(param1,_loc9_,_loc3_,_loc4_,_loc5_,_loc6_);
+                _loc11_ = param2.userName.length - 1;
+                while(param1.width < param1.textWidth + 4 && _loc11_ > 0)
                 {
-                    _loc8_ = param2.prefix + param2.userName.substr(0,_loc10_) + CUT_SYMBOLS_STR + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
-                    this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);
-                    _loc10_--;
+                    _loc9_ = param2.prefix + param2.userName.substr(0,_loc11_) + CUT_SYMBOLS_STR + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (_loc8_?Values.SPACE_STR + REFERRAL_IMG_TAG:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
+                    this.applyTextProps(param1,_loc9_,_loc3_,_loc4_,_loc5_,_loc6_);
+                    _loc11_--;
                 }
             }
             if(!isNaN(param2.rgb))
             {
                 param1.textColor = param2.rgb;
             }
-            return _loc9_;
+            return _loc10_;
         }
         
         public function truncateTextFieldText(param1:TextField, param2:String, param3:String = "..") : String
@@ -358,7 +365,8 @@ package net.wg.infrastructure.managers.utils.impl
         public function getFullPlayerName(param1:IUserProps) : String
         {
             var _loc2_:String = (param1.igrType == 2?IMG_TAG_OPEN_PREMIUM:IMG_TAG_OPEN_BASIC) + param1.igrVspace + IMG_TAG_CLOSE;
-            return param1.prefix + param1.userName + (param1.clanAbbrev?CLAN_TAG_OPEN + param1.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param1.region?Values.SPACE_STR + param1.region:Values.EMPTY_STR) + (param1.igrType > 0?Values.SPACE_STR + _loc2_:Values.EMPTY_STR) + param1.suffix;
+            var _loc3_:Boolean = (param1.referralType) && !(param1.referralType == REFERRAL_SYSTEM.TYPE_NO_REFERRAL);
+            return param1.prefix + param1.userName + (param1.clanAbbrev?CLAN_TAG_OPEN + param1.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param1.region?Values.SPACE_STR + param1.region:Values.EMPTY_STR) + (_loc3_?Values.SPACE_STR + REFERRAL_IMG_TAG:Values.EMPTY_STR) + (param1.igrType > 0?Values.SPACE_STR + _loc2_:Values.EMPTY_STR) + param1.suffix;
         }
         
         private function canToDestroying(param1:Object) : Boolean
@@ -459,13 +467,14 @@ import net.wg.infrastructure.interfaces.IUserProps;
 class UserProps extends Object implements IUserProps
 {
     
-    function UserProps(param1:String, param2:String, param3:String, param4:int)
+    function UserProps(param1:String, param2:String, param3:String, param4:int, param5:int)
     {
         super();
         this._userName = param1;
         this._clanAbbrev = param2;
         this._region = param3;
         this._igrType = param4;
+        this._referralType = param5;
     }
     
     private var _userName:String;
@@ -483,6 +492,8 @@ class UserProps extends Object implements IUserProps
     private var _igrVspace:int = -4;
     
     private var _rgb:Number = NaN;
+    
+    private var _referralType:int = 0;
     
     public function get userName() : String
     {
@@ -562,5 +573,15 @@ class UserProps extends Object implements IUserProps
     public function set rgb(param1:Number) : void
     {
         this._rgb = param1;
+    }
+    
+    public function get referralType() : int
+    {
+        return this._referralType;
+    }
+    
+    public function set referralType(param1:int) : void
+    {
+        this._referralType = param1;
     }
 }

@@ -65,14 +65,6 @@ public var allyForm:SettingsMarkersForm = null;
 
 public var deadForm:SettingsMarkersForm = null;
 
-private var FORM:String = "Form";
-
-private var __currentTab:uint = 0;
-
-private var _dynamicMarkersData:Object = null;
-
-private var _setDataInProgress:Boolean = false;
-
 public var markerEnemy:VehicleMarkerEnemy = null;
 
 public var markerEnemyAlt:VehicleMarkerEnemy = null;
@@ -84,6 +76,14 @@ public var markerAllyAlt:VehicleMarkerAlly = null;
 public var markerDead:VehicleMarkerAlly = null;
 
 public var markerDeadAlt:VehicleMarkerAlly = null;
+
+private var FORM:String = "Form";
+
+private var __currentTab:uint = 0;
+
+private var _dynamicMarkersData:Object = null;
+
+private var _setDataInProgress:Boolean = false;
 
 private var markerAllyData:Object;
 
@@ -177,6 +177,17 @@ this.updateShowContent();
 
 override protected function onDispose() : void
 {
+this.removeListeners();
+this.disposeMarkers();
+this.enemyForm.dispose();
+this.allyForm.dispose();
+this.deadForm.dispose();
+this._dynamicMarkersData = null;
+super.onDispose();
+}
+
+private function removeListeners() : void
+{
 this.tabs.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
 if(this.enemyForm.hasEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE))
 {
@@ -190,11 +201,34 @@ if(this.deadForm.hasEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE))
 {
     this.deadForm.removeEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE,this.onControlChange);
 }
-this.enemyForm.dispose();
-this.allyForm.dispose();
-this.deadForm.dispose();
-this._dynamicMarkersData = null;
-super.onDispose();
+}
+
+private function disposeMarkers() : void
+{
+if(this.markerEnemy)
+{
+    this.markerEnemy.dispose();
+}
+if(this.markerEnemyAlt)
+{
+    this.markerEnemyAlt.dispose();
+}
+if(this.markerAlly)
+{
+    this.markerAlly.dispose();
+}
+if(this.markerAllyAlt)
+{
+    this.markerAllyAlt.dispose();
+}
+if(this.markerDead)
+{
+    this.markerDead.dispose();
+}
+if(this.markerDeadAlt)
+{
+    this.markerDeadAlt.dispose();
+}
 }
 
 override public function toString() : String

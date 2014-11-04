@@ -98,6 +98,20 @@ package net.wg.gui.cyberSport.views.autoSearch
             this.onDispose();
         }
         
+        public function changeButtonsState(param1:Boolean, param2:Boolean) : void
+        {
+        }
+        
+        public function set changeState(param1:AutoSearchVO) : void
+        {
+            if(param1 == null)
+            {
+                return;
+            }
+            this.model = param1;
+            this.visibleState();
+        }
+        
         protected function onDispose() : void
         {
             App.utils.scheduler.cancelTask(this.onTimer);
@@ -117,16 +131,6 @@ package net.wg.gui.cyberSport.views.autoSearch
                 this.cancelButton.dispose();
             }
             removeEventListener(InputEvent.INPUT,this.handleInput);
-        }
-        
-        public function set changeState(param1:AutoSearchVO) : void
-        {
-            if(param1 == null)
-            {
-                return;
-            }
-            this.model = param1;
-            this.visibleState();
         }
         
         protected function updateView() : void

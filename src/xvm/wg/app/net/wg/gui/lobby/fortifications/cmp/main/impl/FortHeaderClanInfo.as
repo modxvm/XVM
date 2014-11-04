@@ -41,8 +41,12 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         public function applyClanData(param1:FortificationVO) : void
         {
             this.clanName.htmlText = param1.clanName;
-            this.clanEmblem.setImage(param1.clanIconId);
             this.levelText.text = param1.levelTitle;
+        }
+        
+        public function setClanImage(param1:String) : void
+        {
+            this.clanEmblem.setImage(param1);
         }
         
         override protected function configUI() : void

@@ -55,9 +55,13 @@ package net.wg.gui.lobby.customization.renderers
             this.enabled = !param1;
         }
         
-        override protected function configUI() : void
+        override protected function onDispose() : void
         {
-            super.configUI();
+            this.checkBox.dispose();
+            this.checkBox = null;
+            this.costField.dispose();
+            this.costField = null;
+            super.onDispose();
         }
         
         override protected function draw() : void

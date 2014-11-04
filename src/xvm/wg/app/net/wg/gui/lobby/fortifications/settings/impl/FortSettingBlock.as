@@ -6,6 +6,7 @@ package net.wg.gui.lobby.fortifications.settings.impl
     import flash.text.TextField;
     import net.wg.gui.lobby.fortifications.data.settings.FortSettingsBlockVO;
     import net.wg.data.constants.Values;
+    import flash.text.TextFieldAutoSize;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import net.wg.gui.lobby.fortifications.events.FortSettingsEvent;
@@ -43,6 +44,7 @@ package net.wg.gui.lobby.fortifications.settings.impl
             }
             
             this.blockCondition.htmlText = _loc2_.blockCondition;
+            this.alertMessage.autoSize = TextFieldAutoSize.RIGHT;
             this.alertMessage.htmlText = _loc2_.alertMessage;
             this.blockDescr.htmlText = _loc2_.blockDescr;
         }

@@ -1,6 +1,6 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asasm Application.orig-0/net/wg/gui/lobby/header/LobbyHeader.class.asasm
---- Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asasm	2014-09-14 11:38:13.093203700 +0300
-+++ Application.orig-0/net/wg/gui/lobby/header/LobbyHeader.class.asasm	2014-09-14 11:39:47.565607200 +0300
+--- Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asasm	2014-10-25 21:48:38 +0300
++++ Application.orig-0/net/wg/gui/lobby/header/LobbyHeader.class.asasm	2014-10-25 21:17:49 +0300
 @@ -26,7 +26,7 @@
       getlocal0
       getproperty         QName(PackageNamespace(""), "headerButtonBar")
@@ -19,7 +19,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "_isShowHelpLayout") type QName(PackageNamespace(""), "Boolean") value False() end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "_currentScreen") type QName(PackageNamespace(""), "String") value Utf8("") end
    trait const QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "NARROW_SCREEN_SIZE") type QName(PackageNamespace(""), "Number") value Integer(1024) end
-@@ -175,7 +175,7 @@
+@@ -174,7 +174,7 @@
        callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "updateSize"), 0
  
        getlocal0
@@ -28,7 +28,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        callpropvoid        QName(PackageNamespace(""), "setData"), 0
  
        getlocal0
-@@ -503,12 +503,12 @@
+@@ -452,12 +452,12 @@
        callpropvoid        QName(PackageNamespace(""), "removeEventListener"), 2
  
        getlocal0
@@ -43,7 +43,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
  
        getlocal0
        callsupervoid       QName(ProtectedNamespace("scaleform.clik.core:UIComponent"), "onDispose"), 0
-@@ -818,7 +818,7 @@
+@@ -770,7 +770,7 @@
  
        findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_AccountDataVo")
        getlocal0
@@ -52,7 +52,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_ACCOUNT")
        callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
-@@ -850,7 +850,7 @@
+@@ -802,7 +802,7 @@
        setproperty         QName(PackageNamespace(""), "isClan")
  
        getlocal0
@@ -61,7 +61,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_ACCOUNT")
        callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
-@@ -877,7 +877,7 @@
+@@ -829,7 +829,7 @@
  
        findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_AccountDataVo")
        getlocal0
@@ -70,7 +70,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_ACCOUNT")
        callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
-@@ -914,7 +914,7 @@
+@@ -866,7 +866,7 @@
        setproperty         QName(PackageNamespace(""), "clanEmblemId")
  
        getlocal0
@@ -79,7 +79,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_ACCOUNT")
        callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
-@@ -944,7 +944,7 @@
+@@ -896,7 +896,7 @@
  
        findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_PremDataVo")
        getlocal0
@@ -88,7 +88,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_PREM")
        callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
-@@ -972,7 +972,7 @@
+@@ -924,7 +924,7 @@
        setproperty         QName(PackageNamespace(""), "isYear")
  
        getlocal0
@@ -97,7 +97,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_PREM")
        callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
-@@ -999,7 +999,7 @@
+@@ -951,7 +951,7 @@
  
        findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_SquadDataVo")
        getlocal0
@@ -106,7 +106,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_SQUAD")
        callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
-@@ -1015,7 +1015,7 @@
+@@ -967,7 +967,7 @@
        setproperty         QName(PackageNamespace(""), "isInSquad")
  
        getlocal0
@@ -115,7 +115,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_SQUAD")
        callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
-@@ -1044,7 +1044,7 @@
+@@ -996,7 +996,7 @@
  
        findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_BattleTypeVo")
        getlocal0
@@ -124,7 +124,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_BATTLE_SELECTOR")
        callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
-@@ -1064,7 +1064,7 @@
+@@ -1016,7 +1016,7 @@
        setproperty         QName(PackageNamespace(""), "battleTypeIcon")
  
        getlocal0
@@ -133,7 +133,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_BATTLE_SELECTOR")
        callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
-@@ -1097,7 +1097,7 @@
+@@ -1049,7 +1049,7 @@
  
        findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_SettingsVo")
        getlocal0
@@ -142,7 +142,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_SETTINGS")
        callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
-@@ -1113,7 +1113,7 @@
+@@ -1065,7 +1065,7 @@
        setproperty         QName(PackageNamespace(""), "serverName")
  
        getlocal0
@@ -151,7 +151,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_SETTINGS")
        callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
-@@ -1140,7 +1140,7 @@
+@@ -1092,7 +1092,7 @@
  
        findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_FinanceVo")
        getlocal0
@@ -159,6 +159,24 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
 +      getproperty         QName(PackageNamespace(""), "_headerButtonsHelper")
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
        getproperty         QName(PackageNamespace(""), "ITEM_ID_GOLD")
+       callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
+@@ -1113,7 +1113,7 @@
+       setproperty         QName(PackageNamespace(""), "iconId")
+ 
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "_headerButtonsHelper")
++      getproperty         QName(PackageNamespace(""), "_headerButtonsHelper")
+       getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
+       getproperty         QName(PackageNamespace(""), "ITEM_ID_GOLD")
+       callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
+@@ -1140,7 +1140,7 @@
+ 
+       findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_FinanceVo")
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "_headerButtonsHelper")
++      getproperty         QName(PackageNamespace(""), "_headerButtonsHelper")
+       getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
+       getproperty         QName(PackageNamespace(""), "ITEM_ID_SILVER")
        callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
 @@ -1161,7 +1161,7 @@
        setproperty         QName(PackageNamespace(""), "iconId")
@@ -167,45 +185,27 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
 -      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "_headerButtonsHelper")
 +      getproperty         QName(PackageNamespace(""), "_headerButtonsHelper")
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
-       getproperty         QName(PackageNamespace(""), "ITEM_ID_GOLD")
+       getproperty         QName(PackageNamespace(""), "ITEM_ID_SILVER")
        callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
-@@ -1188,7 +1188,7 @@
+@@ -1189,7 +1189,7 @@
  
        findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_FinanceVo")
        getlocal0
 -      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "_headerButtonsHelper")
 +      getproperty         QName(PackageNamespace(""), "_headerButtonsHelper")
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
-       getproperty         QName(PackageNamespace(""), "ITEM_ID_SILVER")
+       getproperty         QName(PackageNamespace(""), "ITEM_ID_FREEXP")
        callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
-@@ -1209,7 +1209,7 @@
+@@ -1210,7 +1210,7 @@
        setproperty         QName(PackageNamespace(""), "iconId")
  
        getlocal0
 -      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "_headerButtonsHelper")
 +      getproperty         QName(PackageNamespace(""), "_headerButtonsHelper")
        getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
-       getproperty         QName(PackageNamespace(""), "ITEM_ID_SILVER")
+       getproperty         QName(PackageNamespace(""), "ITEM_ID_FREEXP")
        callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
 @@ -1237,7 +1237,7 @@
- 
-       findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.header.vo"), "HBC_FinanceVo")
-       getlocal0
--      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "_headerButtonsHelper")
-+      getproperty         QName(PackageNamespace(""), "_headerButtonsHelper")
-       getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
-       getproperty         QName(PackageNamespace(""), "ITEM_ID_FREEXP")
-       callproperty        QName(PackageNamespace(""), "getContentDataById"), 1
-@@ -1258,7 +1258,7 @@
-       setproperty         QName(PackageNamespace(""), "iconId")
- 
-       getlocal0
--      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.header:LobbyHeader/instance"), "_headerButtonsHelper")
-+      getproperty         QName(PackageNamespace(""), "_headerButtonsHelper")
-       getlex              QName(PackageNamespace("net.wg.gui.lobby.header.headerButtonBar"), "HeaderButtonsHelper")
-       getproperty         QName(PackageNamespace(""), "ITEM_ID_FREEXP")
-       callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
-@@ -1285,7 +1285,7 @@
        pushscope
  
        getlocal0
@@ -214,7 +214,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getlocal1
        getlocal2
        callpropvoid        QName(PackageNamespace(""), "setButtonEnabled"), 2
-@@ -1317,13 +1317,13 @@
+@@ -1269,13 +1269,13 @@
        callpropvoid        QName(Namespace("net.wg.infrastructure.interfaces:IGlobalVO"), "update"), 1
  
        getlocal0
@@ -231,8 +231,8 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/header/LobbyHeader.class.asa
        getproperty         QName(PackageNamespace(""), "ITEM_ID_FREEXP")
        callpropvoid        QName(PackageNamespace(""), "invalidateDataById"), 1
 diff -Naur Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm Application.orig-0/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm
---- Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-09-14 11:38:09.819016400 +0300
-+++ Application.orig-0/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-09-14 11:38:41.260814800 +0300
+--- Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-10-25 21:48:27 +0300
++++ Application.orig-0/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-10-25 21:17:53 +0300
 @@ -80,7 +80,7 @@
    end ; method
    trait slot QName(PackageNamespace(""), "bar") type QName(PackageNamespace("net.wg.gui.components.advanced"), "ButtonBarEx") end
@@ -292,7 +292,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.
        getlocal0
        pushnull
 -      initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
-+      getproperty         QName(PackageNamespace(""), "initData")
++      initproperty        QName(PackageNamespace(""), "initData")
  
  L23:
        getlocal0

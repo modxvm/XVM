@@ -8,12 +8,13 @@ package net.wg.gui.components.controls
     import scaleform.clik.motion.Tween;
     import net.wg.gui.utils.ExcludeTweenManager;
     import net.wg.utils.IClassFactory;
-    import net.wg.data.VO.SeparateItem;
+    import net.wg.data.constants.ContextMenuConstants;
     import net.wg.data.constants.Linkages;
     import scaleform.clik.events.ButtonEvent;
     import flash.display.DisplayObject;
     import flash.events.MouseEvent;
     import net.wg.gui.events.ContextMenuEvent;
+    import net.wg.data.VO.SeparateItem;
     import fl.transitions.easing.Strong;
     
     public class ContextMenu extends UIComponent implements IContextMenu
@@ -112,11 +113,12 @@ package net.wg.gui.components.controls
                 {
                     _loc14_ = null;
                     _loc15_ = null;
-                    if(_loc4_[_loc5_] is SeparateItem)
+                    _loc16_ = _loc4_[_loc5_];
+                    if(_loc16_.id == ContextMenuConstants.SEPARATE)
                     {
                         _loc14_ = _loc13_.getComponent(Linkages.CONTEXT_MENU_SEPARATE,ContextMenuItemSeparate);
                         _loc14_.index = _loc5_;
-                        _loc14_.id = _loc4_[_loc5_].id;
+                        _loc14_.id = _loc16_.id;
                         _loc14_.x = _loc9_;
                         _loc14_.y = _loc10_;
                         _loc10_ = _loc10_ + (_loc14_.height + this.padding.bottom + this.padding.top);
@@ -124,7 +126,6 @@ package net.wg.gui.components.controls
                     }
                     else
                     {
-                        _loc16_ = _loc4_[_loc5_];
                         _loc15_ = _loc13_.getComponent(Linkages.CONTEXT_MENU_ITEM,ContextMenuItem,_loc16_.initData);
                         _loc15_.index = _loc5_;
                         _loc15_.items = _loc4_[_loc5_].submenu?_loc4_[_loc5_].submenu.slice(0,_loc4_[_loc5_].submenu.length):new Vector.<IContextItem>();

@@ -12,10 +12,6 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             this.setVerticalAlign();
         }
         
-        private static var NORMAL_STATE:String = "normal";
-        
-        private static var ALERT_STATE:String = "alert";
-        
         private static var ALERT_MIN_TIME:int = 0;
         
         private static var ALERT_SEC_TIME:int = 10;

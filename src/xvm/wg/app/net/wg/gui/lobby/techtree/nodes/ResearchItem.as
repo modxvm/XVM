@@ -1,5 +1,6 @@
 package net.wg.gui.lobby.techtree.nodes
 {
+    import scaleform.clik.core.UIComponent;
     import flash.display.MovieClip;
     import flash.text.TextField;
     import net.wg.gui.lobby.techtree.controls.ExperienceLabel;
@@ -24,7 +25,7 @@ package net.wg.gui.lobby.techtree.nodes
             super();
         }
         
-        public var typeIcon:MovieClip;
+        public var typeIcon:UIComponent;
         
         public var levelIcon:MovieClip;
         
@@ -80,7 +81,7 @@ package net.wg.gui.lobby.techtree.nodes
                 if(_loc2_.length > 0)
                 {
                     this.typeIcon.visible = true;
-                    this.typeIcon.gotoAndPlay(_loc2_);
+                    this.typeIcon.gotoAndStop(_loc2_);
                 }
                 else
                 {

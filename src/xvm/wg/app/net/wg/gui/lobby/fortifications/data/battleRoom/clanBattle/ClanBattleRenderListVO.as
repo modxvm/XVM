@@ -31,6 +31,10 @@ package net.wg.gui.lobby.fortifications.data.battleRoom.clanBattle
         
         public var stateOfBattle:String = "";
         
+        public var startTimeLeft:int = -1;
+        
+        public var direction:int = -1;
+        
         override protected function onDataWrite(param1:String, param2:Object) : Boolean
         {
             if(param1 == TIMER_FIELD && !(param2 == null) && !(param2["timer"] == null))

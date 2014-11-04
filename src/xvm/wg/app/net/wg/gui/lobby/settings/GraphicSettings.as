@@ -162,6 +162,7 @@ package net.wg.gui.lobby.settings
         override protected function setData(param1:Object) : void
         {
             this.setControlsData(param1);
+            super.setData(param1);
         }
         
         private function setControlsData(param1:Object) : void
@@ -172,6 +173,24 @@ package net.wg.gui.lobby.settings
              * Error type: TranslateException
              */
             throw new Error("Not decompiled due to error");
+        }
+        
+        override protected function updateDependedControl(param1:String) : void
+        {
+            var _loc3_:CheckBox = null;
+            var _loc4_:* = false;
+            var _loc2_:SettingsControlProp = _data[param1];
+            if(param1 == SettingsConfig.VERTICAL_SYNC)
+            {
+                _loc3_ = this[_loc2_.isDependOn + SettingsConfig.TYPE_CHECKBOX];
+                _loc4_ = Boolean(_loc2_.changedVal);
+                if(!_loc4_)
+                {
+                    _loc3_.selected = false;
+                }
+                _loc3_.enabled = _loc4_;
+            }
+            super.updateDependedControl(param1);
         }
         
         private function initMonitors() : void
@@ -821,38 +840,38 @@ package net.wg.gui.lobby.settings
         var _loc7_:String = null;
         var _loc8_:* = NaN;
         var _loc2_:DropdownMenu = DropdownMenu(param1.target);
-        var _loc3_:Number = param1.index;
-        var _loc4_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
-        var _loc5_:SettingsControlProp = SettingsControlProp(_data[_loc4_]);
-        var _loc6_:Number = _loc5_.changedVal;
-        _loc5_.changedVal = _loc3_;
-        if(_loc4_ == SettingsConfig.SMOOTHING)
+        var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
+        var _loc4_:SettingsControlProp = SettingsControlProp(_data[_loc3_]);
+        var _loc5_:Number = (_loc4_.isDataAsSelectedIndex) && (_loc4_.options[param1.index].hasOwnProperty("data"))?_loc4_.options[param1.index].data:param1.index;
+        var _loc6_:Number = _loc4_.changedVal;
+        _loc4_.changedVal = _loc5_;
+        if(_loc3_ == SettingsConfig.SMOOTHING)
         {
             _loc7_ = this._isAdvanced?SettingsConfig.CUSTOM_AA:SettingsConfig.MULTISAMPLING;
-            _loc5_ = SettingsControlProp(_data[_loc7_]);
-            _loc5_.changedVal = _loc3_;
-            _loc5_.prevVal = _loc3_;
+            _loc4_ = SettingsControlProp(_data[_loc7_]);
+            _loc4_.changedVal = _loc5_;
+            _loc4_.prevVal = _loc5_;
         }
-        else if(_loc4_ == SettingsConfig.SIZE)
+        else if(_loc3_ == SettingsConfig.SIZE)
         {
-            _loc4_ = _isFullScreen?SettingsConfig.RESOLUTION:SettingsConfig.WINDOW_SIZE;
-            _loc5_ = SettingsControlProp(_data[_loc4_]);
-            _loc5_.changedVal = _loc3_;
+            _loc3_ = _isFullScreen?SettingsConfig.RESOLUTION:SettingsConfig.WINDOW_SIZE;
+            _loc4_ = SettingsControlProp(_data[_loc3_]);
+            _loc4_.changedVal = _loc5_;
             _loc8_ = monitorDropDown.selectedIndex;
-            _loc5_.prevVal[_loc8_] = _loc3_;
+            _loc4_.prevVal[_loc8_] = _loc5_;
             this.updateRefreshRate();
         }
         else
         {
-            _loc5_.prevVal = _loc3_;
+            _loc4_.prevVal = _loc5_;
         }
         
-        if(_loc4_ == SettingsConfig.MONITOR)
+        if(_loc3_ == SettingsConfig.MONITOR)
         {
             this.setSizeControl();
             this.updateRefreshRate();
         }
-        dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc4_,_loc3_));
+        dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc5_));
     }
     
     private function onRangeSliderChanged(param1:SliderEvent) : void
@@ -891,6 +910,8 @@ package net.wg.gui.lobby.settings
     {
         var _loc2_:CheckBox = CheckBox(param1.target);
         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
+        var _loc4_:SettingsControlProp = SettingsControlProp(_data[_loc3_]);
+        _loc4_.changedVal = _loc2_.selected;
         if(_loc3_ == SettingsConfig.FULL_SCREEN)
         {
             _isFullScreen = _loc2_.selected;
@@ -904,6 +925,10 @@ package net.wg.gui.lobby.settings
             this.setInitialFOVValues();
         }
         
+        if(_loc4_.isDependOn)
+        {
+            this.updateDependedControl(_loc3_);
+        }
         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.selected));
     }
     

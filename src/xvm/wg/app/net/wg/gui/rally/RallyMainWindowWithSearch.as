@@ -19,11 +19,25 @@ package net.wg.gui.rally
         
         private static var UPDATE_AUTO_SEARCH_MODEL:String = "autoSearchModel";
         
+        private static var UPDATE_AUTO_SEARCH_BUTTONS:String = "updateAutoSearchButtons";
+        
         public var autoSearch:ICSAutoSearchMainView;
         
         private var autoSearchModel:AutoSearchVO;
         
         private var lastFocusedElementUnderAS:InteractiveObject;
+        
+        private var waitingPlayers:Boolean = false;
+        
+        private var searchEnemy:Boolean = false;
+        
+        private var updatedBtns:Boolean = true;
+        
+        override public function as_loadView(param1:String, param2:String) : void
+        {
+            this.lastFocusedElementUnderAS = null;
+            super.as_loadView(param1,param2);
+        }
         
         public function as_autoSearchEnableBtn(param1:Boolean) : void
         {
@@ -48,10 +62,12 @@ package net.wg.gui.rally
             invalidate(UPDATE_AUTO_SEARCH_MODEL);
         }
         
-        override public function as_loadView(param1:String, param2:String) : void
+        public function as_changeAutoSearchBtnsState(param1:Boolean, param2:Boolean) : void
         {
-            this.lastFocusedElementUnderAS = null;
-            super.as_loadView(param1,param2);
+            this.updatedBtns = false;
+            this.waitingPlayers = param1;
+            this.searchEnemy = param2;
+            invalidate(UPDATE_AUTO_SEARCH_BUTTONS);
         }
         
         override protected function onDispose() : void
@@ -90,6 +106,11 @@ package net.wg.gui.rally
                 App.utils.scheduler.envokeInNextFrame(this.autoSearchUpdateFocus);
             }
             super.draw();
+            if(!this.updatedBtns && (isInvalid(UPDATE_AUTO_SEARCH_BUTTONS)) && (this.autoSearchModel))
+            {
+                this.updatedBtns = true;
+                this.autoSearch.changeButtonsState(this.waitingPlayers,this.searchEnemy);
+            }
         }
         
         override protected function registerCurrentView(param1:MovieClip, param2:String) : void

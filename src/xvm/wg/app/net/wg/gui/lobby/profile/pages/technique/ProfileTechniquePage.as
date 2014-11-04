@@ -76,8 +76,9 @@ package net.wg.gui.lobby.profile.pages.technique
         
         override public function as_setInitData(param1:Object) : void
         {
+            var _loc2_:TechStatisticsInitVO = null;
             super.as_setInitData(param1);
-            var _loc2_:TechStatisticsInitVO = new TechStatisticsInitVO(param1);
+            _loc2_ = new TechStatisticsInitVO(param1);
             this.checkBoxExistence.label = _loc2_.hangarVehiclesLabel;
             this.checkBoxExistence.selected = _loc2_.isInHangarSelected;
             this.checkBoxExistence.validateNow();

@@ -71,6 +71,7 @@ package net.wg.gui.lobby.messengerBar.carousel
             this.openButton.blinking = this._data.isNotified;
             this.openButton.selected = this._data.isWindowOpened;
             this.openButton.selectedFocused = this._data.isWindowFocused;
+            this.openButton.setTooltipData(this._data.tooltipDataVO);
             this.progressIndicator.visible = this._data.isInProgress;
             visible = true;
         }

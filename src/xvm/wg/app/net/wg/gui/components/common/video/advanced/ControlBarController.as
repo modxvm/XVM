@@ -44,7 +44,8 @@ package net.wg.gui.components.common.video.advanced
         
         private function videoPlayerStatusHandler(param1:VideoPlayerStatusEvent) : void
         {
-            var _loc2_:uint = videoPlayer.status;
+            var _loc2_:uint = 0;
+            _loc2_ = videoPlayer.status;
             if(_loc2_ == PlayerStatus.PLAYING)
             {
                 if(!this.timer)

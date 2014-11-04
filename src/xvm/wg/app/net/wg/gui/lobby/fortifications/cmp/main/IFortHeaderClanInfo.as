@@ -7,5 +7,7 @@ package net.wg.gui.lobby.fortifications.cmp.main
     {
         
         function applyClanData(param1:FortificationVO) : void;
+        
+        function setClanImage(param1:String) : void;
     }
 }

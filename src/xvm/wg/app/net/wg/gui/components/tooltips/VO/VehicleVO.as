@@ -47,6 +47,10 @@ package net.wg.gui.components.tooltips.VO
         
         public var actionPrc:Number = NaN;
         
+        public var rentLeft:Number = NaN;
+        
+        public var rentDescr:String = "";
+        
         public var characteristics:Array = null;
         
         public var equipments:Array = null;
@@ -134,6 +138,12 @@ package net.wg.gui.components.tooltips.VO
                         this.isAction = !(_loc14_ == 0);
                         this.actionPrc = _loc14_;
                     }
+                    else if(_loc10_ == ToolTipSpecial.RENTALS && (_loc9_[1]))
+                    {
+                        this.rentLeft = (_loc9_[1].hasOwnProperty("left")) && !(_loc9_[1].hasOwnProperty("left") == undefined)?_loc9_[1].left:this.rentLeft;
+                        this.rentDescr = (_loc9_[1].hasOwnProperty("descr")) && !(_loc9_[1].hasOwnProperty("descr") == undefined)?_loc9_[1].descr:this.rentDescr;
+                    }
+                    
                     
                     
                     

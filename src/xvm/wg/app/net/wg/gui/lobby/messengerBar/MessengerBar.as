@@ -9,6 +9,7 @@ package net.wg.gui.lobby.messengerBar
     import flash.geom.Point;
     import flash.display.DisplayObject;
     import net.wg.utils.IHelpLayout;
+    import flash.geom.Rectangle;
     import net.wg.data.constants.Directions;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
@@ -55,22 +56,26 @@ package net.wg.gui.lobby.messengerBar
         
         private var _notificationListBtnHL:DisplayObject;
         
+        private var _contactsChannelBtnHL:DisplayObject;
+        
         public var fakeChnlBtn:MovieClip;
         
         public function showHelpLayout() : void
         {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
-            var _loc2_:DisplayObject = this.notificationListBtn.button;
-            var _loc3_:Object = _loc1_.getProps(_loc2_.width,_loc2_.height,Directions.TOP,LOBBY_HELP.CHAT_SERVICE_CHANNEL,_loc2_.x,_loc2_.y,_loc1_.defConnectorLength);
-            this._notificationListBtnHL = _loc1_.create(root,_loc3_,this.notificationListBtn);
-            this.channelCarousel.showHelpLayout();
+            var _loc2_:Rectangle = new Rectangle(this.notificationListBtn.x,this.notificationListBtn.y,this.notificationListBtn.width,this.notificationListBtn.height);
+            var _loc3_:Object = _loc1_.getProps(_loc2_,LOBBY_HELP.CHAT_SERVICE_CHANNEL,Directions.LEFT);
+            this._notificationListBtnHL = _loc1_.create(root,_loc3_,this);
+            var _loc4_:Rectangle = new Rectangle(this.contactsListBtn.x + 1,this.contactsListBtn.y,this.channelButton.x + this.channelButton.width - this.contactsListBtn.x - 2,this.contactsListBtn.height - 2);
+            var _loc5_:Object = _loc1_.getProps(_loc4_,LOBBY_HELP.CHAT_CONTACTS_CHANNEL,Directions.LEFT);
+            this._contactsChannelBtnHL = _loc1_.create(root,_loc5_,this);
         }
         
         public function closeHelpLayout() : void
         {
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             _loc1_.destroy(this._notificationListBtnHL);
-            this.channelCarousel.closeHelpLayout();
+            _loc1_.destroy(this._contactsChannelBtnHL);
         }
         
         public function updateStage(param1:Number, param2:Number) : void
@@ -166,6 +171,7 @@ package net.wg.gui.lobby.messengerBar
             this.contactsListBtn = null;
             this.stageDimensions = null;
             this._notificationListBtnHL = null;
+            this._contactsChannelBtnHL = null;
         }
         
         override protected function configUI() : void

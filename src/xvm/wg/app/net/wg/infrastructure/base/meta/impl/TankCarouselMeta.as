@@ -11,12 +11,6 @@ package net.wg.infrastructure.base.meta.impl
             super();
         }
         
-        public var showVehicleInfo:Function = null;
-        
-        public var toResearch:Function = null;
-        
-        public var vehicleSell:Function = null;
-        
         public var vehicleChange:Function = null;
         
         public var buySlot:Function = null;
@@ -25,29 +19,7 @@ package net.wg.infrastructure.base.meta.impl
         
         public var setVehiclesFilter:Function = null;
         
-        public var favoriteVehicle:Function = null;
-        
-        public var showVehicleStats:Function = null;
-        
         public var getVehicleTypeProvider:Function = null;
-        
-        public function showVehicleInfoS(param1:String) : void
-        {
-            App.utils.asserter.assertNotNull(this.showVehicleInfo,"showVehicleInfo" + Errors.CANT_NULL);
-            this.showVehicleInfo(param1);
-        }
-        
-        public function toResearchS(param1:String) : void
-        {
-            App.utils.asserter.assertNotNull(this.toResearch,"toResearch" + Errors.CANT_NULL);
-            this.toResearch(param1);
-        }
-        
-        public function vehicleSellS(param1:String) : void
-        {
-            App.utils.asserter.assertNotNull(this.vehicleSell,"vehicleSell" + Errors.CANT_NULL);
-            this.vehicleSell(param1);
-        }
         
         public function vehicleChangeS(param1:String) : void
         {
@@ -71,18 +43,6 @@ package net.wg.infrastructure.base.meta.impl
         {
             App.utils.asserter.assertNotNull(this.setVehiclesFilter,"setVehiclesFilter" + Errors.CANT_NULL);
             this.setVehiclesFilter(param1,param2,param3);
-        }
-        
-        public function favoriteVehicleS(param1:String, param2:Boolean) : void
-        {
-            App.utils.asserter.assertNotNull(this.favoriteVehicle,"favoriteVehicle" + Errors.CANT_NULL);
-            this.favoriteVehicle(param1,param2);
-        }
-        
-        public function showVehicleStatsS(param1:Number) : void
-        {
-            App.utils.asserter.assertNotNull(this.showVehicleStats,"showVehicleStats" + Errors.CANT_NULL);
-            this.showVehicleStats(param1);
         }
         
         public function getVehicleTypeProviderS() : Array

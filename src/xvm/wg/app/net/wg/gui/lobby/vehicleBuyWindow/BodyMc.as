@@ -34,6 +34,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         public var ammoPrice:IconText;
         
+        public var crewInVehicle:TextField;
+        
         public var slotActionPrice:ActionPrice;
         
         public var ammoActionPrice:ActionPrice;
@@ -47,6 +49,10 @@ package net.wg.gui.lobby.vehicleBuyWindow
         private var btnGroup:ButtonGroup;
         
         private var lastSelectedButton:Button;
+        
+        private var _btnGroupEnabled:Boolean = true;
+        
+        public var freeRentSlot:TextField = null;
         
         public function get selectedPrice() : Number
         {
@@ -66,7 +72,29 @@ package net.wg.gui.lobby.vehicleBuyWindow
             return false;
         }
         
-        public function get groupEnabled() : Boolean
+        public function updateBtnGroupEnable() : void
+        {
+            var _loc1_:* = NaN;
+            var _loc2_:Button = null;
+            if(this.btnGroup)
+            {
+                _loc1_ = 0;
+                while(_loc1_ < this.btnGroup.length)
+                {
+                    _loc2_ = this.btnGroup.getButtonAt(_loc1_);
+                    _loc2_.enabled = this.btnGroupEnabled;
+                    _loc1_++;
+                }
+            }
+        }
+        
+        override protected function draw() : void
+        {
+            super.draw();
+            this.updateBtnGroupEnable();
+        }
+        
+        public function get lastItemSelected() : Boolean
         {
             if(this.lastSelectedButton)
             {
@@ -75,9 +103,9 @@ package net.wg.gui.lobby.vehicleBuyWindow
             return false;
         }
         
-        public function set groupEnabled(param1:Boolean) : void
+        public function set lastItemSelected(param1:Boolean) : void
         {
-            if(this.groupEnabled == param1)
+            if(this.lastItemSelected == param1)
             {
                 return;
             }
@@ -130,6 +158,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.slotCheckbox.label = _loc2_.makeString(DIALOGS.BUYVEHICLEDIALOG_SLOTCHECKBOX);
             this.ammoCheckbox.label = _loc2_.makeString(DIALOGS.BUYVEHICLEDIALOG_AMMOCHECKBOX);
             this.crewCheckbox.label = _loc2_.makeString(DIALOGS.BUYVEHICLEDIALOG_TANKMENCHECKBOX);
+            this.crewInVehicle.text = DIALOGS.BUYVEHICLEDIALOG_CREWINVEHICLE;
+            this.freeRentSlot.text = DIALOGS.BUYVEHICLEDIALOG_FREERENTSLOT;
             this.academyBtn.toggle = true;
             this.academyBtn.allowDeselect = false;
             this.scoolBtn.toggle = true;
@@ -161,6 +191,17 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.scoolBtn.dispose();
             this.freeBtn.dispose();
             super.onDispose();
+        }
+        
+        public function get btnGroupEnabled() : Boolean
+        {
+            return this._btnGroupEnabled;
+        }
+        
+        public function set btnGroupEnabled(param1:Boolean) : void
+        {
+            this._btnGroupEnabled = param1;
+            invalidate();
         }
     }
 }

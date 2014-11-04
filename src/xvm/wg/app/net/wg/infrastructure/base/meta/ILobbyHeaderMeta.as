@@ -47,10 +47,6 @@ package net.wg.infrastructure.base.meta
         
         function as_setFreeXP(param1:String, param2:Boolean) : void;
         
-        function as_highlightTutorialControls(param1:String) : void;
-        
-        function as_resetHighlightTutorialControls() : void;
-        
         function as_disableFightButton(param1:Boolean, param2:String) : void;
         
         function as_setFightButton(param1:String) : void;

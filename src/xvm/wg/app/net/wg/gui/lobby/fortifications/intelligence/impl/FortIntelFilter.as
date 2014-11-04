@@ -18,8 +18,10 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
     import net.wg.gui.lobby.fortifications.data.FortInterFilterVO;
     import scaleform.clik.data.DataProvider;
     import flash.events.IEventDispatcher;
+    import scaleform.clik.events.ButtonEvent;
     import flash.text.TextFormat;
     import net.wg.gui.lobby.fortifications.intelligence.FortIntelligenceWindowHelper;
+    import scaleform.gfx.MouseEventEx;
     import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
     import flash.ui.Keyboard;
     import scaleform.clik.constants.InputValue;
@@ -41,6 +43,8 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         private static var H7_STYLE_COLOR:int = 9211006;
         
         private static var MAX_CLAN_ABBREVIATE_LEN_DEF:int = 7;
+        
+        private static var SEARCH_BRACKETS_TEXT_LENGTH:int = 2;
         
         private static var FORT_RESULT_TEXT_OFFSET_X:int = 7;
         
@@ -73,6 +77,8 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         private var tooltips:Object = null;
         
+        private var _isSearchTextMaxCharsSetted:Boolean = false;
+        
         public function getComponentForFocus() : InteractiveObject
         {
             return this.clanTypeDropDn;
@@ -90,7 +96,15 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         public function as_setMaxClanAbbreviateLength(param1:uint) : void
         {
-            this.tagSearchTextInput.textField.maxChars = param1 + 2;
+            this.tagSearchTextInput.maxChars = param1 + SEARCH_BRACKETS_TEXT_LENGTH;
+            this._isSearchTextMaxCharsSetted = true;
+        }
+        
+        public function as_setClanAbbrev(param1:String) : void
+        {
+            this.clearTagSearchTextInput();
+            this.tagSearchTextInput.text = param1;
+            this.updateClearButtonVisibility();
         }
         
         public function as_setupCooldown(param1:Boolean) : void
@@ -135,9 +149,9 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
             this.tooltips[this.tagSearchButton] = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_TAGSEARCHBUTTON;
             this.tooltips[this.clearFilterBtn] = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_CLEARFILTERBTN;
             this.tooltips[this.filterButton] = TOOLTIPS.FORTIFICATION_INTELLIGENCEWINDOW_FILTERBUTTON;
-            if(this.tagSearchTextInput.textField.maxChars == 0)
+            if(!this._isSearchTextMaxCharsSetted)
             {
-                this.tagSearchTextInput.textField.maxChars = MAX_CLAN_ABBREVIATE_LEN_DEF;
+                this.tagSearchTextInput.maxChars = MAX_CLAN_ABBREVIATE_LEN_DEF;
             }
             this.tagSearchTextInput.defaultTextFormat.italic = false;
             this.tagSearchTextInput.defaultTextFormat.color = H5_STYLE_COLOR;
@@ -173,7 +187,6 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         {
             this.tagSearchTextInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
             this.tagSearchTextInput.removeEventListener(FocusHandlerEvent.FOCUS_IN,this.onTagSearchTextInputFocusInHandler);
-            this.clanTypeDropDn.removeEventListener(ListEvent.INDEX_CHANGE,this.onClanTypeDropDnIndexChangeHandler);
             this.removeInteractionListeners(this.tagSearchTextInput);
             this.removeInteractionListeners(this.clearFilterBtn);
             this.removeInteractionListeners(this.tagSearchButton);
@@ -199,7 +212,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         {
             if(param2)
             {
-                param1.addEventListener(MouseEvent.CLICK,this.onButtonClickHandler);
+                param1.addEventListener(ButtonEvent.CLICK,this.onButtonClickHandler);
             }
             param1.addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
             param1.addEventListener(MouseEvent.MOUSE_OUT,onMouseOutHandler);
@@ -207,7 +220,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         private function removeInteractionListeners(param1:IEventDispatcher) : void
         {
-            param1.removeEventListener(MouseEvent.CLICK,this.onButtonClickHandler);
+            param1.removeEventListener(ButtonEvent.CLICK,this.onButtonClickHandler);
             param1.removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOverHandler);
             param1.removeEventListener(MouseEvent.MOUSE_OUT,onMouseOutHandler);
         }
@@ -228,7 +241,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         private function updateClearButtonVisibility() : void
         {
-            this.clearFilterBtn.visible = this.clanTypeDropDn.selectedIndex == 0 && !this.isDefaultTextStyleNow();
+            this.clearFilterBtn.visible = this.clanTypeDropDn.selectedIndex == 0 && !this.isTagSearchEmptyNow();
             if(this.clearFilterBtn.visible)
             {
                 this.filterResultTextField.x = this.clearFilterBtn.x + this.clearFilterBtn.width + FORT_RESULT_TEXT_OFFSET_X;
@@ -239,9 +252,9 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
             }
         }
         
-        private function isDefaultTextStyleNow() : Boolean
+        private function isTagSearchEmptyNow() : Boolean
         {
-            return this.tagSearchTextInput.textField.getTextFormat().color == H5_STYLE_COLOR;
+            return this.tagSearchTextInput.text.length == 0;
         }
         
         private function applyFilter() : void
@@ -254,7 +267,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         private function tryToApplyFilter() : void
         {
-            if(!this.isDefaultTextStyleNow())
+            if(!this.isTagSearchEmptyNow())
             {
                 this.applyFilter();
             }
@@ -280,16 +293,16 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         private function onTagSearchTextInputFocusInHandler(param1:FocusHandlerEvent) : void
         {
-            if(this.isDefaultTextStyleNow())
+            if(this.isTagSearchEmptyNow())
             {
                 this.clearTagSearchTextInput();
             }
         }
         
-        private function onButtonClickHandler(param1:MouseEvent) : void
+        private function onButtonClickHandler(param1:ButtonEvent) : void
         {
             var _loc2_:String = null;
-            if(App.utils.commons.isLeftButton(param1))
+            if(param1.buttonIdx == MouseEventEx.LEFT_BUTTON)
             {
                 switch(param1.currentTarget)
                 {
@@ -327,7 +340,8 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         private function updateControlsVisibility(param1:int) : void
         {
-            var _loc2_:* = param1 == FORTIFICATION_ALIASES.CLAN_TYPE_FILTER_STATE_ALL;
+            var _loc2_:* = false;
+            _loc2_ = param1 == FORTIFICATION_ALIASES.CLAN_TYPE_FILTER_STATE_ALL;
             this.tagSearchTextInput.visible = this.filterButton.visible = this.tagSearchButton.visible = _loc2_;
             this.filterButtonStatusTextFieldWithEffect.alpha = this.filterButtonStatusTextField.alpha = _loc2_?1:0;
         }

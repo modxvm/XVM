@@ -4,7 +4,7 @@ package net.wg.gui.lobby.fortifications.cmp.main
     import net.wg.infrastructure.interfaces.entity.IFocusContainer;
     import flash.text.TextField;
     import net.wg.gui.components.controls.IconTextButton;
-    import net.wg.gui.components.advanced.ToggleButton;
+    import net.wg.gui.components.advanced.ToggleSoundButton;
     import net.wg.gui.components.advanced.ButtonDnmIcon;
     import net.wg.gui.lobby.fortifications.cmp.main.impl.VignetteYellow;
     import net.wg.infrastructure.interfaces.IUIComponentEx;
@@ -28,9 +28,9 @@ package net.wg.gui.lobby.fortifications.cmp.main
         
         function set calendarBtn(param1:IconTextButton) : void;
         
-        function get transportBtn() : ToggleButton;
+        function get transportBtn() : ToggleSoundButton;
         
-        function set transportBtn(param1:ToggleButton) : void;
+        function set transportBtn(param1:ToggleSoundButton) : void;
         
         function get settingBtn() : ButtonDnmIcon;
         

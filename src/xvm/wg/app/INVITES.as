@@ -42,6 +42,8 @@ package
         
         public static var INVITES_PREBATTLE_ALREADYJOINED_SORTIE:String = "#invites:invites/prebattle/alreadyJoined/SORTIE";
         
+        public static var INVITES_TEXT_CREATORNAME:String = "#invites:invites/text/creatorName";
+        
         public static var INVITES_TEXT_SQUAD:String = "#invites:invites/text/SQUAD";
         
         public static var INVITES_TEXT_COMPANY:String = "#invites:invites/text/COMPANY";
@@ -51,6 +53,14 @@ package
         public static var INVITES_TEXT_UNIT:String = "#invites:invites/text/UNIT";
         
         public static var INVITES_TEXT_SORTIE:String = "#invites:invites/text/SORTIE";
+        
+        public static var INVITES_TEXT_FORT_BATTLE:String = "#invites:invites/text/FORT_BATTLE";
+        
+        public static var INVITES_TEXT_FORT_OFFENCE:String = "#invites:invites/text/fort/offence";
+        
+        public static var INVITES_TEXT_FORT_DEFENCE:String = "#invites:invites/text/fort/defence";
+        
+        public static var INVITES_TEXT_FORT_DIRECTION:String = "#invites:invites/text/fort/direction";
         
         public static var INVITES_COMMENT:String = "#invites:invites/comment";
         
@@ -96,6 +106,10 @@ package
         
         public static var INVITES_NOTE_CHANGE_AND_LEAVE_SORTIE:String = "#invites:invites/note/change_and_leave/SORTIE";
         
+        public static var INVITES_NOTE_LEAVE_FORT_BATTLE:String = "#invites:invites/note/leave/FORT_BATTLE";
+        
+        public static var INVITES_NOTE_CHANGE_AND_LEAVE_FORT_BATTLE:String = "#invites:invites/note/change_and_leave/FORT_BATTLE";
+        
         public static var GUI_TITLES_RECEIVEDINVITES:String = "#invites:gui/titles/receivedInvites";
         
         public static var GUI_TITLES_INVITE:String = "#invites:gui/titles/invite";
@@ -124,11 +138,11 @@ package
         
         public static var INVITES_PREBATTLE_ACCEPTNOTALLOWED_ENUM:Array = [INVITES_PREBATTLE_ACCEPTNOTALLOWED_UNDEFINEDPERIPHERY,INVITES_PREBATTLE_ACCEPTNOTALLOWED_OTHERPERIPHERY];
         
-        public static var INVITES_TEXT_ENUM:Array = [INVITES_TEXT_SQUAD,INVITES_TEXT_COMPANY,INVITES_TEXT_TRAINING,INVITES_TEXT_UNIT,INVITES_TEXT_SORTIE];
+        public static var INVITES_TEXT_ENUM:Array = [INVITES_TEXT_CREATORNAME,INVITES_TEXT_SQUAD,INVITES_TEXT_COMPANY,INVITES_TEXT_TRAINING,INVITES_TEXT_UNIT,INVITES_TEXT_SORTIE,INVITES_TEXT_FORT_BATTLE,INVITES_TEXT_FORT_OFFENCE,INVITES_TEXT_FORT_DEFENCE,INVITES_TEXT_FORT_DIRECTION];
         
-        public static var INVITES_NOTE_CHANGE_AND_LEAVE_ENUM:Array = [INVITES_NOTE_CHANGE_AND_LEAVE_COMPANY,INVITES_NOTE_CHANGE_AND_LEAVE_SQUAD,INVITES_NOTE_CHANGE_AND_LEAVE_TRAINING,INVITES_NOTE_CHANGE_AND_LEAVE_UNIT,INVITES_NOTE_CHANGE_AND_LEAVE_CLAN,INVITES_NOTE_CHANGE_AND_LEAVE_TOURNAMENT,INVITES_NOTE_CHANGE_AND_LEAVE_HISTORICAL,INVITES_NOTE_CHANGE_AND_LEAVE_SORTIE];
+        public static var INVITES_NOTE_CHANGE_AND_LEAVE_ENUM:Array = [INVITES_NOTE_CHANGE_AND_LEAVE_COMPANY,INVITES_NOTE_CHANGE_AND_LEAVE_SQUAD,INVITES_NOTE_CHANGE_AND_LEAVE_TRAINING,INVITES_NOTE_CHANGE_AND_LEAVE_UNIT,INVITES_NOTE_CHANGE_AND_LEAVE_CLAN,INVITES_NOTE_CHANGE_AND_LEAVE_TOURNAMENT,INVITES_NOTE_CHANGE_AND_LEAVE_HISTORICAL,INVITES_NOTE_CHANGE_AND_LEAVE_SORTIE,INVITES_NOTE_CHANGE_AND_LEAVE_FORT_BATTLE];
         
-        public static var INVITES_NOTE_LEAVE_ENUM:Array = [INVITES_NOTE_LEAVE_COMPANY,INVITES_NOTE_LEAVE_SQUAD,INVITES_NOTE_LEAVE_TRAINING,INVITES_NOTE_LEAVE_UNIT,INVITES_NOTE_LEAVE_CLAN,INVITES_NOTE_LEAVE_TOURNAMENT,INVITES_NOTE_LEAVE_HISTORICAL,INVITES_NOTE_LEAVE_SORTIE];
+        public static var INVITES_NOTE_LEAVE_ENUM:Array = [INVITES_NOTE_LEAVE_COMPANY,INVITES_NOTE_LEAVE_SQUAD,INVITES_NOTE_LEAVE_TRAINING,INVITES_NOTE_LEAVE_UNIT,INVITES_NOTE_LEAVE_CLAN,INVITES_NOTE_LEAVE_TOURNAMENT,INVITES_NOTE_LEAVE_HISTORICAL,INVITES_NOTE_LEAVE_SORTIE,INVITES_NOTE_LEAVE_FORT_BATTLE];
         
         public static function invites_state(param1:String) : String
         {

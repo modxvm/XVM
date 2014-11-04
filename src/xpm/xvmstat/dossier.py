@@ -20,7 +20,6 @@ from gui.shared.gui_items import GUI_ITEM_TYPE
 from helpers.i18n import makeString
 from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.locale.PROFILE import PROFILE
-from gui.shared import g_itemsCache
 from items import vehicles
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
 
@@ -166,6 +165,7 @@ class _Dossier(object):
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
         })
 
+        #from gui.shared import g_itemsCache
         #vehicle = g_itemsCache.items.getItemByCD(res['vehId'])
         #if vehicle is not None and vehicle.invID >= 0:
         #_, nID, innID = vehicles.parseIntCompactDescr(res['vehId'])

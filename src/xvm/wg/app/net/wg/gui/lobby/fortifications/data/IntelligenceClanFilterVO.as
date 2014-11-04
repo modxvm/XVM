@@ -16,7 +16,7 @@ package net.wg.gui.lobby.fortifications.data
         
         public var startDefenseHour:int = -1;
         
-        public var availability:int = -1;
+        public var isDefault:Boolean = false;
         
         override protected function onDispose() : void
         {

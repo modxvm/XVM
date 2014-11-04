@@ -31,6 +31,8 @@ package net.wg.gui.lobby.header.headerButtonBar
         
         private var MAX_WIDTH_WIDE:Number = 60;
         
+        private var CLAN_EMBLEM_MARGIN:Number = 5;
+        
         override protected function configUI() : void
         {
             super.configUI();
@@ -51,7 +53,16 @@ package net.wg.gui.lobby.header.headerButtonBar
                 if(this._accountVo.clanEmblemId)
                 {
                     this.clanEmblem.setImage(this._accountVo.clanEmblemId);
-                    this.userName.x = this.clanEmblem.width >> 2;
+                    if(screen == LobbyHeader.MAX_SCREEN)
+                    {
+                        this.userName.x = this.clanEmblem.x + this.clanEmblem.width + this.CLAN_EMBLEM_MARGIN;
+                        this.clanEmblem.alpha = 1;
+                    }
+                    else
+                    {
+                        this.userName.x = this.clanEmblem.width >> 2;
+                        this.clanEmblem.alpha = 0.6;
+                    }
                 }
                 else
                 {

@@ -6,7 +6,7 @@
 XPM_MOD_VERSION    = "1.5.0"
 XPM_MOD_URL        = "http://www.modxvm.com/"
 XPM_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
-XPM_GAME_VERSIONS  = ["0.9.3"]
+XPM_GAME_VERSIONS  = ["0.9.4"]
 
 #####################################################################
 

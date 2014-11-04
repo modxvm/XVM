@@ -20,5 +20,7 @@ package net.wg.infrastructure.base.meta
         function as_setFilterButtonStatus(param1:String, param2:Boolean) : void;
         
         function as_setupCooldown(param1:Boolean) : void;
+        
+        function as_setClanAbbrev(param1:String) : void;
     }
 }

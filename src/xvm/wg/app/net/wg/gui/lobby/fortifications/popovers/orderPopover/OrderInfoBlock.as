@@ -3,7 +3,7 @@ package net.wg.gui.lobby.fortifications.popovers.orderPopover
     import scaleform.clik.core.UIComponent;
     import flash.events.MouseEvent;
     import flash.text.TextField;
-    import net.wg.gui.components.controls.SoundButton;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import scaleform.clik.constants.InvalidationType;
     
     public class OrderInfoBlock extends UIComponent
@@ -60,7 +60,7 @@ package net.wg.gui.lobby.fortifications.popovers.orderPopover
         
         public var producedName:TextField;
         
-        public var createOrderBtn:SoundButton;
+        public var createOrderBtn:SoundButtonEx;
         
         private var _duration:String = "";
         
@@ -155,8 +155,8 @@ package net.wg.gui.lobby.fortifications.popovers.orderPopover
                 _loc2_ = Math.round(this.buildingName.y + this.buildingName.height + AFTER_BUILDING_PADDING);
                 this.priceValue.y = this.priceName.y = Math.max(_loc1_,_loc2_);
                 this.producedValue.y = this.producedName.y = Math.round(this.priceValue.y + VERTICAL_PADDING);
-                this.createOrderBtn.y = Math.round(this.producedName.y + (this.producedName.height - this.createOrderBtn.height + 4) / 2);
-                this.createOrderBtn.x = Math.round(this.producedName.x + this.producedName.textWidth + TEXT_PADDING * 2);
+                this.createOrderBtn.y = Math.round(this.producedName.y + (this.producedName.height - this.createOrderBtn.height) / 2);
+                this.createOrderBtn.x = 2 + Math.round(this.producedName.x + this.producedName.textWidth + TEXT_PADDING * 2);
                 _loc3_ = Math.round(this.producedValue.y + this.producedValue.textHeight + TEXT_PADDING);
                 setSize(this.width,_loc3_);
             }

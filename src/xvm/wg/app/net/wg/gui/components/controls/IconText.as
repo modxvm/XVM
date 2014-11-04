@@ -21,6 +21,8 @@ package net.wg.gui.components.controls
             super();
         }
         
+        public static var ERROR_COLOR:Number = 16711680;
+        
         public var textField:TextField;
         
         public var iconClip:MovieClip;
@@ -294,7 +296,7 @@ package net.wg.gui.components.controls
             if(this.textField)
             {
                 _loc1_ = IconsTypes.getTextColor(this._icon);
-                this._textFormat.color = _loc1_ > -1?_loc1_:this._textColor;
+                this._textFormat.color = _loc1_ > -1 && !(this._textColor == ERROR_COLOR)?_loc1_:this._textColor;
                 this._textFormat.size = this._textSize;
                 this._textFormat.font = this._textFont;
                 this._textFormat.align = this._textAlign;

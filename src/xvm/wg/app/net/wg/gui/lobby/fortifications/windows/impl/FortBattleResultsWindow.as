@@ -5,6 +5,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
     import flash.display.MovieClip;
     import flash.text.TextField;
     import net.wg.gui.components.controls.SortableTable;
+    import net.wg.gui.lobby.battleResults.BattleResultsMedalsList;
     import net.wg.gui.lobby.fortifications.data.battleResults.BattleResultsVO;
     import scaleform.clik.constants.InvalidationType;
     import net.wg.gui.lobby.fortifications.events.FortBattleResultsEvent;
@@ -48,6 +49,10 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         public var table:SortableTable = null;
         
+        public var medalsListLeft:BattleResultsMedalsList = null;
+        
+        public var medalsListRight:BattleResultsMedalsList = null;
+        
         private var data:BattleResultsVO = null;
         
         public function as_notAvailableInfo(param1:int) : void
@@ -76,6 +81,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
                 this.setBGImage();
                 this.setTexts();
                 this.setTableData();
+                this.setMedalListsData();
                 this.clanResIcon.x = this.clanResTF.x + (this.clanResTF.width + this.clanResTF.textWidth >> 1) + RES_ICON_PADDING;
                 this.playerResIcon.x = this.playerResTF.x + (this.playerResTF.width + this.playerResTF.textWidth >> 1) + RES_ICON_PADDING;
             }
@@ -108,6 +114,10 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.clanResTF = null;
             this.playerResTF = null;
             this.journalTF = null;
+            this.medalsListLeft.dispose();
+            this.medalsListRight.dispose();
+            this.medalsListLeft = null;
+            this.medalsListRight = null;
             if(this.data)
             {
                 this.data.dispose();
@@ -138,6 +148,12 @@ package net.wg.gui.lobby.fortifications.windows.impl
         {
             this.table.headerDP = this.getHeadersDP();
             this.table.listDP = this.getListDP();
+        }
+        
+        private function setMedalListsData() : void
+        {
+            this.medalsListLeft.dataProvider = new DataProvider(this.data.achievementsLeft);
+            this.medalsListRight.dataProvider = new DataProvider(this.data.achievementsRight);
         }
         
         private function getHeadersDP() : DataProvider

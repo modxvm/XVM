@@ -121,12 +121,11 @@ package net.wg.gui.lobby.fortifications.windows.impl
         
         override protected function configUI() : void
         {
-            var _loc1_:* = 0;
             super.configUI();
             this.applyButton.mouseEnabledOnDisabled = true;
             this.applyButton.addEventListener(ButtonEvent.CLICK,this.onClickApplyBtnHandler);
             this.cancelButton.addEventListener(ButtonEvent.CLICK,this.onClickCancelBtnHandler);
-            _loc1_ = this.costLabel.x + HORIZONTAL_PADDING;
+            var _loc1_:int = this.costLabel.x + HORIZONTAL_PADDING;
             this.dashLine.width = Math.floor(this.costValue.x + this.costValue.width - _loc1_ - HORIZONTAL_PADDING);
             this.dashLine.x = _loc1_;
         }

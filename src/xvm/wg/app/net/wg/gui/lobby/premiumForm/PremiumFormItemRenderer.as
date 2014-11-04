@@ -116,7 +116,8 @@ package net.wg.gui.lobby.premiumForm
     
     private function updateDiscountPercent(param1:Number) : void
     {
-        var _loc2_:* = param1 > 0;
+        var _loc2_:* = false;
+        _loc2_ = param1 > 0;
         this.discount.visible = _loc2_;
         this.discount.quantity.text = _loc2_?"-" + param1 + "%":this.discount.quantity.text;
         this.price.icon = _loc2_?"goldDiscount":"gold";

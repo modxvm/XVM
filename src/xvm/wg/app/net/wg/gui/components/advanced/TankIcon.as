@@ -30,6 +30,8 @@ package net.wg.gui.components.advanced
         
         public var tankNameField:TextField;
         
+        public var rentInfoField:TextField;
+        
         public var tankNameBg:MovieClip;
         
         public var favoriteMc:MovieClip;
@@ -80,6 +82,10 @@ package net.wg.gui.components.advanced
         
         private var _tankName:String;
         
+        private var _rentInfo:String;
+        
+        private var _isRentDirty:Boolean = true;
+        
         private var _tankNameDirty:Boolean = true;
         
         private var _isElite:Boolean;
@@ -90,7 +96,7 @@ package net.wg.gui.components.advanced
         
         private var _isPremiumDirty:Boolean = true;
         
-        public var DIRTY_FLAGS:Array = [_showMultyXpDirty,_showXpDirty,_showNameDirty,_nationDirty,_imageDirty,_tankTypeDirty,_levelDirty,_multyXpValDirty,_xpValDirty,_tankNameDirty,_isEliteDirty,_isPremiumDirty];
+        public var DIRTY_FLAGS:Array = [_showMultyXpDirty,_showXpDirty,_showNameDirty,_nationDirty,_imageDirty,_tankTypeDirty,_levelDirty,_multyXpValDirty,_xpValDirty,_tankNameDirty,_isRentDirty,_isEliteDirty,_isPremiumDirty];
         
         override protected function onDispose() : void
         {
@@ -322,6 +328,18 @@ package net.wg.gui.components.advanced
             invalidate();
         }
         
+        public function get rentInfo() : String
+        {
+            return this._rentInfo;
+        }
+        
+        public function set rentInfo(param1:String) : void
+        {
+            this._rentInfo = param1;
+            this._isRentDirty = true;
+            invalidate();
+        }
+        
         override protected function configUI() : void
         {
             super.configUI();
@@ -344,6 +362,11 @@ package net.wg.gui.components.advanced
                     this.xp.textField.text = String(this.xpVal);
                 }
                 this._xpValDirty = this._showXpDirty = false;
+            }
+            if((this._isRentDirty) && (this.rentInfoField))
+            {
+                this.rentInfoField.text = this.rentInfo;
+                this._isRentDirty = false;
             }
             if((this._tankNameDirty || this._showNameDirty || this._isPremiumDirty) && (this.tankNameField) && (this.tankNameBg))
             {

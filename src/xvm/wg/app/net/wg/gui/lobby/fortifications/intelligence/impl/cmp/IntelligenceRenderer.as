@@ -23,8 +23,6 @@ package net.wg.gui.lobby.fortifications.intelligence.impl.cmp
         
         public var buildingsTF:TextField;
         
-        public var availableTF:TextField;
-        
         public var clanTag:TextField;
         
         public var bookmarkIcon:Sprite;
@@ -61,7 +59,6 @@ package net.wg.gui.lobby.fortifications.intelligence.impl.cmp
                     this.levelIcon.source = _loc1_.levelIcon;
                     this.timeTF.htmlText = _loc1_.defenceTime;
                     this.buildingsTF.htmlText = _loc1_.avgBuildingLvl.toString();
-                    this.availableTF.htmlText = _loc1_.availability;
                     this.clanTag.htmlText = _loc1_.clanTag;
                     this.bookmarkIcon.visible = _loc1_.isFavorite;
                 }
@@ -70,6 +67,17 @@ package net.wg.gui.lobby.fortifications.intelligence.impl.cmp
                     this.visible = false;
                 }
             }
+        }
+        
+        override protected function onDispose() : void
+        {
+            this.levelIcon.dispose();
+            this.levelIcon = null;
+            this.timeTF = null;
+            this.buildingsTF = null;
+            this.bookmarkIcon = null;
+            this.clanTag = null;
+            super.onDispose();
         }
     }
 }

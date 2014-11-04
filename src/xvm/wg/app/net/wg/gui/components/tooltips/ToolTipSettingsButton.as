@@ -44,12 +44,13 @@ package net.wg.gui.components.tooltips
         
         override protected function redraw() : void
         {
+            var _loc3_:ToolTipSettingsButtonVO = null;
             var _loc4_:* = NaN;
             topPosition = bgShadowMargin.top + contentMargin.top;
             var _loc1_:Separator = null;
             separators = new Vector.<Separator>();
             var _loc2_:Number = 5;
-            var _loc3_:ToolTipSettingsButtonVO = new ToolTipSettingsButtonVO(_data);
+            _loc3_ = new ToolTipSettingsButtonVO(_data);
             this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc3_.name,Utils.instance.COLOR_HEADER,18,"$TitleFont");
             this.headerTF.width = this.headerTF.textWidth + _loc2_;
             this.descriptionTF.multiline = true;

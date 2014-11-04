@@ -25,6 +25,8 @@ package net.wg.infrastructure.base.meta
         
         function getMonthsNamesS(param1:Boolean = true, param2:Boolean = false, param3:Boolean = false) : Array;
         
+        function getDateParamsS(param1:Number) : Object;
+        
         function intToStringWithPrefixPaternS(param1:int, param2:int, param3:String) : String;
         
         function isTwelveHoursFormatS() : Boolean;

@@ -6,7 +6,6 @@ package net.wg.gui.components.controls
     import flash.text.TextFieldAutoSize;
     import scaleform.clik.utils.ConstrainedElement;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.utils.IHelpLayout;
     import net.wg.data.constants.SoundTypes;
     
     public class MainMenuButton extends SoundButtonEx
@@ -151,6 +150,7 @@ package net.wg.gui.components.controls
         override protected function alignForAutoSize() : void
         {
             var _loc1_:* = NaN;
+            var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:* = NaN;
             if(!initialized || _autoSize == TextFieldAutoSize.NONE || !textField)
@@ -158,7 +158,7 @@ package net.wg.gui.components.controls
                 return;
             }
             _loc1_ = _width;
-            var _loc2_:Number = _width = this.calculateWidth();
+            _loc2_ = _width = this.calculateWidth();
             switch(_autoSize)
             {
                 case TextFieldAutoSize.RIGHT:
@@ -218,85 +218,67 @@ package net.wg.gui.components.controls
             }
         }
         
-        override public function showHelpLayout() : void
+        private function checkBrowserEffect() : void
         {
-            var _loc1_:Number = 8;
-            var _loc2_:IHelpLayout = App.utils.helpLayout;
-            var _loc3_:Object = {"borderWidth":width + _loc1_,
-            "borderHeight":this.fxTextField1.textHeight + 5,
-            "direction":data["helpDirection"],
-            "text":data["helpText"],
-            "x":-_loc1_ >> 1,
-            "y":0,
-            "connectorLength":data["helpConnectorLength"]
-        };
-        if(data["helpText"])
-        {
-            setHelpLayout(_loc2_.create(root,_loc3_,this));
-        }
-    }
-    
-    private function checkBrowserEffect() : void
-    {
-        if((data) && data.value == "browser")
-        {
-            App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
-            selected = false;
-        }
-    }
-    
-    private var _isBlinking:Boolean = false;
-    
-    private function changeEffectState() : void
-    {
-        if((selected) || !enabled)
-        {
-            filters = [];
-            this._isBlinking = false;
-            return;
-        }
-        if(this.fxTextField1)
-        {
-            if(isNaN(this.textColorBeforeBlink))
+            if((data) && data.value == "browser")
             {
-                this.textColorBeforeBlink = this.fxTextField1.textColor;
+                App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
+                selected = false;
             }
-            this._isBlinking = !this._isBlinking;
-            if(this._isBlinking)
-            {
-                this.fxTextField1.textColor = 16563563;
-            }
-            else
-            {
-                this.fxTextField1.textColor = this.textColorBeforeBlink;
-            }
-            App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
         }
-    }
-    
-    private function onBtnOver(param1:MouseEvent) : void
-    {
-        if((data) && data.value == "browser")
+        
+        private var _isBlinking:Boolean = false;
+        
+        private function changeEffectState() : void
         {
-            App.utils.scheduler.cancelTask(this.changeEffectState);
-            filters = [];
+            if((selected) || !enabled)
+            {
+                filters = [];
+                this._isBlinking = false;
+                return;
+            }
+            if(this.fxTextField1)
+            {
+                if(isNaN(this.textColorBeforeBlink))
+                {
+                    this.textColorBeforeBlink = this.fxTextField1.textColor;
+                }
+                this._isBlinking = !this._isBlinking;
+                if(this._isBlinking)
+                {
+                    this.fxTextField1.textColor = 16563563;
+                }
+                else
+                {
+                    this.fxTextField1.textColor = this.textColorBeforeBlink;
+                }
+                App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
+            }
+        }
+        
+        private function onBtnOver(param1:MouseEvent) : void
+        {
+            if((data) && data.value == "browser")
+            {
+                App.utils.scheduler.cancelTask(this.changeEffectState);
+                filters = [];
+            }
+        }
+        
+        private function onBtnOut(param1:MouseEvent) : void
+        {
+            this.checkBrowserEffect();
+        }
+        
+        public function setExternalState(param1:String) : void
+        {
+            this._externalState = param1;
+            setState(state);
+        }
+        
+        override protected function getStatePrefixes() : Vector.<String>
+        {
+            return _selected?statesSelected:this._externalState != ""?Vector.<String>([this._externalState]):statesDefault;
         }
     }
-    
-    private function onBtnOut(param1:MouseEvent) : void
-    {
-        this.checkBrowserEffect();
-    }
-    
-    public function setExternalState(param1:String) : void
-    {
-        this._externalState = param1;
-        setState(state);
-    }
-    
-    override protected function getStatePrefixes() : Vector.<String>
-    {
-        return _selected?statesSelected:this._externalState != ""?Vector.<String>([this._externalState]):statesDefault;
-    }
-}
 }

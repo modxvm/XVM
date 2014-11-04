@@ -15,6 +15,8 @@ package net.wg.infrastructure.base.meta
         
         function highlightParamsS(param1:String) : void;
         
+        function toRentContinueS() : void;
+        
         function as_setData(param1:Array, param2:String) : void;
         
         function as_setAmmo(param1:Object) : void;
@@ -24,5 +26,7 @@ package net.wg.infrastructure.base.meta
         function as_setHistoricalBattle(param1:Number) : void;
         
         function as_setModulesEnabled(param1:Boolean) : void;
+        
+        function as_updateVehicleStatus(param1:String, param2:String, param3:String) : void;
     }
 }

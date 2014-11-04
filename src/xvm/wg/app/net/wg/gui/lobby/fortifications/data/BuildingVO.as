@@ -14,6 +14,8 @@ package net.wg.gui.lobby.fortifications.data
         
         private static var CTX_MENU_DATA:String = "ctxMenuData";
         
+        public var isDefenceHour:Boolean = false;
+        
         public var toolTipData:Array = null;
         
         public var transportTooltipData:Array = null;

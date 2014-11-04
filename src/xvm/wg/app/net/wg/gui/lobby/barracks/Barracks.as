@@ -144,7 +144,6 @@ package net.wg.gui.lobby.barracks
         
         private function showDismissDialog(param1:CrewEvent) : void
         {
-            trace("showDismissDialog","compact",param1.initProp.compact);
             dismissTankmanS(param1.initProp.compact);
         }
         

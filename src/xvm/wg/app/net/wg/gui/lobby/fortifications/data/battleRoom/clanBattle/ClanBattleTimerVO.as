@@ -19,5 +19,7 @@ package net.wg.gui.lobby.fortifications.data.battleRoom.clanBattle
         public var glowColor:Number = -1;
         
         public var alertGlowColor:Number = -1;
+        
+        public var timerDefaultValue:String = "--";
     }
 }

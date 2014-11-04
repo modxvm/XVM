@@ -7,6 +7,7 @@ package net.wg.gui.lobby.header
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.data.VO.UserVO;
     import net.wg.gui.lobby.header.vo.AccountPopoverBlockVo;
+    import net.wg.gui.lobby.header.vo.AccountPopoverReferralBlockVO;
     import net.wg.gui.components.advanced.StatisticItem;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.components.popOvers.PopOverConst;
@@ -33,6 +34,8 @@ package net.wg.gui.lobby.header
         
         public var crewInfo:AccountPopoverBlock = null;
         
+        public var referralInfo:AccountPopoverReferralBlock = null;
+        
         private var _userVo:UserVO = null;
         
         private var _isTeamKiller:Boolean = false;
@@ -48,6 +51,8 @@ package net.wg.gui.lobby.header
         private var _clanEmblemId:String = null;
         
         private var _crewEmblemId:String = null;
+        
+        private var _referralData:AccountPopoverReferralBlockVO = null;
         
         private var BLOCK_MARGIN:Number = 18;
         
@@ -83,6 +88,9 @@ package net.wg.gui.lobby.header
                 case this.crewInfo.doActionBtn:
                     openCrewStatisticS();
                     break;
+                case this.referralInfo.moreInfoLinkBtn:
+                    openReferralManagementS();
+                    break;
             }
         }
         
@@ -105,6 +113,7 @@ package net.wg.gui.lobby.header
         
         private function updateData() : Number
         {
+            var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:StatisticItemVo = null;
             var _loc5_:StatisticItem = null;
@@ -135,7 +144,7 @@ package net.wg.gui.lobby.header
             }
             this.allAchievements.y = _loc1_ + this.BTN_MARGIN ^ 0;
             this.allAchievements.enabled = this._infoBtnEnabled;
-            var _loc2_:Number = this.allAchievements.y + this.allAchievements.height + this.BLOCK_MARGIN;
+            _loc2_ = this.allAchievements.y + this.allAchievements.height + this.BLOCK_MARGIN;
             if(this._clanData)
             {
                 this._clanData.emblemId = this._clanEmblemId;
@@ -163,6 +172,20 @@ package net.wg.gui.lobby.header
             {
                 this.crewInfo.y = 0;
                 this.crewInfo.visible = false;
+            }
+            if(this._referralData)
+            {
+                this.referralInfo.moreInfoLinkBtn.addEventListener(ButtonEvent.CLICK,this.onBtnClick);
+                this.referralInfo.setData(this._referralData);
+                this.referralInfo.visible = true;
+                this.referralInfo.y = _loc2_ ^ 0;
+                _loc2_ = _loc2_ + (this.referralInfo.height + this.BLOCK_MARGIN);
+            }
+            else
+            {
+                this.referralInfo.moreInfoLinkBtn.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
+                this.referralInfo.y = 0;
+                this.referralInfo.visible = false;
             }
             return _loc2_;
         }
@@ -194,6 +217,7 @@ package net.wg.gui.lobby.header
             this.allAchievements.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
             this.clanInfo.doActionBtn.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
             this.crewInfo.doActionBtn.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
+            this.referralInfo.moreInfoLinkBtn.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
             this.clearStatsItems();
             this._userVo.dispose();
             this._userVo = null;
@@ -215,12 +239,19 @@ package net.wg.gui.lobby.header
                 this._crewData.dispose();
                 this._crewData = null;
             }
+            if(this._referralData)
+            {
+                this._referralData.dispose();
+                this._referralData = null;
+            }
             this.userName.dispose();
             this.userName = null;
             this.clanInfo.dispose();
             this.clanInfo = null;
             this.crewInfo.dispose();
             this.crewInfo = null;
+            this.referralInfo.dispose();
+            this.referralInfo = null;
             super.onDispose();
         }
         
@@ -252,6 +283,12 @@ package net.wg.gui.lobby.header
                 return;
             }
             this._crewEmblemId = param1;
+            invalidateData();
+        }
+        
+        override protected function setReferralData(param1:AccountPopoverReferralBlockVO) : void
+        {
+            this._referralData = param1;
             invalidateData();
         }
     }

@@ -1,8 +1,8 @@
 package net.wg.data
 {
     import net.wg.infrastructure.interfaces.ITweenTypesDuration;
+    import net.wg.infrastructure.managers.ITweenManagerHelper;
     import net.wg.data.constants.TweenTypes;
-    import net.wg.data.constants.TweenConstraints;
     
     public class TweenDataByType extends Object implements ITweenTypesDuration
     {
@@ -10,15 +10,15 @@ package net.wg.data
         public function TweenDataByType(param1:Vector.<String>, param2:int)
         {
             super();
-            if(CHANGES_BY_TYPE == null)
+            if(propertiesByType == null)
             {
-                customizeConst();
+                customizeData();
             }
             this.types = Vector.<String>(param1);
             this.duration = param2;
         }
         
-        public static var CHANGES_BY_TYPE:Object = null;
+        private static var propertiesByType:Object = null;
         
         public static var TYPE_ADD:String = "add";
         
@@ -26,29 +26,30 @@ package net.wg.data
         
         public static function getPropertyChanges(param1:String) : Object
         {
-            return CHANGES_BY_TYPE[param1];
+            return propertiesByType[param1];
         }
         
-        private static function customizeConst() : void
+        private static function customizeData() : void
         {
-            CHANGES_BY_TYPE = {};
-            CHANGES_BY_TYPE[TweenTypes.FADE_IN] = {"type":TYPE_SET,
+            var _loc1_:ITweenManagerHelper = App.tweenMgr.getTweenManagerHelper();
+            propertiesByType = {};
+            propertiesByType[TweenTypes.FADE_IN] = {"type":TYPE_SET,
             "propertyName":"alpha",
-            "value":TweenConstraints.FADE_ALPHA_MAX
+            "value":_loc1_.getFadeAlphaMax()
         };
-        CHANGES_BY_TYPE[TweenTypes.FADE_OUT] = {"type":TYPE_SET,
+        propertiesByType[TweenTypes.FADE_OUT] = {"type":TYPE_SET,
         "propertyName":"alpha",
-        "value":TweenConstraints.FADE_ALPHA_MIN
+        "value":_loc1_.getFadeAlphaMin()
     };
-    CHANGES_BY_TYPE[TweenTypes.MOVE_UP] = {"type":TYPE_ADD,
+    propertiesByType[TweenTypes.MOVE_UP] = {"type":TYPE_ADD,
     "propertyName":"y",
-    "value":TweenConstraints.TRANSLATION_LENGTH
+    "value":_loc1_.getTranslationLength()
 };
-CHANGES_BY_TYPE[TweenTypes.MOVE_DOWN] = {"type":TYPE_ADD,
+propertiesByType[TweenTypes.MOVE_DOWN] = {"type":TYPE_ADD,
 "propertyName":"y",
-"value":TweenConstraints.TRANSLATION_LENGTH
+"value":_loc1_.getTranslationLength()
 };
-CHANGES_BY_TYPE[TweenTypes.TURN_HALF] = {"type":TYPE_ADD,
+propertiesByType[TweenTypes.TURN_HALF] = {"type":TYPE_ADD,
 "propertyName":"rotation",
 "value":180
 };
@@ -76,6 +77,11 @@ return this._duration;
 public function set duration(param1:int) : void
 {
 this._duration = param1;
+}
+
+private function get tweenMgrHelper() : ITweenManagerHelper
+{
+return App.tweenMgr.getTweenManagerHelper();
 }
 }
 }

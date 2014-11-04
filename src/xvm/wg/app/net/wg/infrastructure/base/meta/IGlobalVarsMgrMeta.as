@@ -11,8 +11,6 @@ package net.wg.infrastructure.base.meta
         
         function isShowServerStatsS() : Boolean;
         
-        function isShowServersListS() : Boolean;
-        
         function isChinaS() : Boolean;
         
         function isKoreaS() : Boolean;
@@ -38,5 +36,7 @@ package net.wg.infrastructure.base.meta
         function isFortificationBattleAvailableS() : Boolean;
         
         function isShowTickerS() : Boolean;
+        
+        function isRentalsEnabledS() : Boolean;
     }
 }

@@ -306,6 +306,8 @@ package
         
         public static var DETAILS_CALCULATIONS_AOGASFACTOR:String = "#battle_results:details/calculations/aogasFactor";
         
+        public static var DETAILS_CALCULATIONS_PREMIUMVEHICLEXP:String = "#battle_results:details/calculations/premiumVehicleXP";
+        
         public static var DETAILS_CALCULATIONS_TOTAL:String = "#battle_results:details/calculations/total";
         
         public static var DETAILS_CALCULATIONS_FIRSTWIN:String = "#battle_results:details/calculations/firstWin";
@@ -313,6 +315,8 @@ package
         public static var DETAILS_CALCULATIONS_IGRBONUS:String = "#battle_results:details/calculations/igrBonus";
         
         public static var DETAILS_CALCULATIONS_FORTORDER:String = "#battle_results:details/calculations/fortOrder";
+        
+        public static var DETAILS_CALCULATIONS_REFERRALBONUS:String = "#battle_results:details/calculations/referralBonus";
         
         public static var TANKSELECTOR_NEXT:String = "#battle_results:tankSelector/next";
         

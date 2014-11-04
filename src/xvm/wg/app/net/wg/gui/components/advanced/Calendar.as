@@ -2,13 +2,15 @@ package net.wg.gui.components.advanced
 {
     import net.wg.infrastructure.base.meta.impl.CalendarMeta;
     import net.wg.infrastructure.base.meta.ICalendarMeta;
+    import net.wg.infrastructure.interfaces.entity.IFocusContainer;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import flash.text.TextField;
     import flash.display.Sprite;
     import net.wg.gui.components.advanced.calendar.DayRenderer;
-    import net.wg.infrastructure.base.AbstractView;
+    import flash.display.InteractiveObject;
     import scaleform.clik.events.InputEvent;
     import scaleform.clik.events.ButtonEvent;
+    import flash.events.MouseEvent;
     import scaleform.clik.ui.InputDetails;
     import net.wg.data.constants.Time;
     import scaleform.clik.constants.InputValue;
@@ -16,12 +18,11 @@ package net.wg.gui.components.advanced
     import net.wg.gui.interfaces.IDate;
     import net.wg.utils.IDateTime;
     import net.wg.gui.components.advanced.calendar.WeekDayRenderer;
-    import flash.events.MouseEvent;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import net.wg.gui.components.advanced.events.CalendarEvent;
-    import flash.display.InteractiveObject;
+    import net.wg.infrastructure.events.FocusRequestEvent;
     
-    public class Calendar extends CalendarMeta implements ICalendarMeta
+    public class Calendar extends CalendarMeta implements ICalendarMeta, IFocusContainer
     {
         
         public function Calendar()
@@ -107,8 +108,6 @@ package net.wg.gui.components.advanced
         
         private var _selectedRenderer:DayRenderer;
         
-        public var modalFocusHolder:AbstractView;
-        
         public var needToInitFocus:Boolean = true;
         
         private var _isFocusInitialized:Boolean = false;
@@ -116,6 +115,8 @@ package net.wg.gui.components.advanced
         private var _prevMonthNeedFocusUpdate:Boolean = false;
         
         private var _nextMonthNeedFocusUpdate:Boolean = false;
+        
+        private var _componentForFocus:InteractiveObject;
         
         override protected function configUI() : void
         {
@@ -127,6 +128,10 @@ package net.wg.gui.components.advanced
             this.nextMonthButton.autoRepeat = true;
             this.prevMonthButton.addEventListener(ButtonEvent.CLICK,this.onMonthChangeClick);
             this.nextMonthButton.addEventListener(ButtonEvent.CLICK,this.onMonthChangeClick);
+            this.prevMonthButton.addEventListener(MouseEvent.ROLL_OVER,this.onPrevMonthBtnRollOverHandler);
+            this.prevMonthButton.addEventListener(MouseEvent.ROLL_OUT,this.onMonthBtnsRollOutHandler);
+            this.nextMonthButton.addEventListener(MouseEvent.ROLL_OVER,this.onNextMonthBtnRollOverHandler);
+            this.nextMonthButton.addEventListener(MouseEvent.ROLL_OUT,this.onMonthBtnsRollOutHandler);
             if(this.weekStart == -1)
             {
                 this.weekStart = App.utils.dateTime.getAS3FirstDayOfWeek();
@@ -139,11 +144,14 @@ package net.wg.gui.components.advanced
             removeEventListener(InputEvent.INPUT,this.handleInput,false);
             this.prevMonthButton.removeEventListener(ButtonEvent.CLICK,this.onMonthChangeClick);
             this.nextMonthButton.removeEventListener(ButtonEvent.CLICK,this.onMonthChangeClick);
+            this.prevMonthButton.removeEventListener(MouseEvent.ROLL_OVER,this.onPrevMonthBtnRollOverHandler);
+            this.prevMonthButton.removeEventListener(MouseEvent.ROLL_OUT,this.onMonthBtnsRollOutHandler);
+            this.nextMonthButton.removeEventListener(MouseEvent.ROLL_OVER,this.onNextMonthBtnRollOverHandler);
+            this.nextMonthButton.removeEventListener(MouseEvent.ROLL_OUT,this.onMonthBtnsRollOutHandler);
             this.prevMonthButton.dispose();
             this.prevMonthButton = null;
             this.nextMonthButton.dispose();
             this.nextMonthButton = null;
-            this.modalFocusHolder = null;
             this.clearWeekDays();
             this.clearMonthDays();
             this.monthTF = null;
@@ -157,7 +165,16 @@ package net.wg.gui.components.advanced
                 this._rawMonthEvents.splice(0);
                 this._rawMonthEvents = null;
             }
+            if(this._componentForFocus)
+            {
+                this._componentForFocus = null;
+            }
             this.disposeMonthEvents();
+            this._displayDate = null;
+            this._selectedDate = null;
+            this._minAvailableDate = null;
+            this._maxAvailableDate = null;
+            this._selectedRenderer = null;
             super.onDispose();
         }
         
@@ -187,6 +204,10 @@ package net.wg.gui.components.advanced
             }
             if(isInvalid(INVALID_DISPLAY_DATE,INVALID_DAY_RENDERER,INVALID_DAYS_LAYOUT))
             {
+                if((this._componentForFocus) && this._componentForFocus.parent == this.monthDaysContainer)
+                {
+                    this.requestNewFocus(this);
+                }
                 this.redrawMonthDays();
                 this.updateFocus();
             }
@@ -282,11 +303,8 @@ package net.wg.gui.components.advanced
                 }
                 if(_loc13_)
                 {
-                    if((this.modalFocusHolder) && (this.modalFocusHolder.hasFocus))
-                    {
-                        App.utils.focusHandler.setFocus(this.getRendererByDate(_loc13_));
-                        param1.handled = true;
-                    }
+                    this.requestNewFocus(this.getRendererByDate(_loc13_));
+                    param1.handled = true;
                 }
                 else if((_loc11_) && (this.canNavigateToNextMonth))
                 {
@@ -406,11 +424,10 @@ package net.wg.gui.components.advanced
         private function redrawWeekDays() : void
         {
             var _loc1_:WeekDayRenderer = null;
-            var _loc4_:* = 0;
             this.clearWeekDays();
             var _loc2_:Class = App.utils.classFactory.getClass(this._weekDayRenderer);
             var _loc3_:Array = App.utils.getWeekDayNamesS(false);
-            _loc4_ = 0;
+            var _loc4_:* = 0;
             while(_loc4_ < Time.DAYS_IN_WEEK)
             {
                 _loc1_ = App.utils.classFactory.getComponent(this._weekDayRenderer,_loc2_);
@@ -564,26 +581,23 @@ package net.wg.gui.components.advanced
         
         private function updateFocus() : void
         {
-            if((this.modalFocusHolder) && (this.modalFocusHolder.hasFocus))
+            if(!this._isFocusInitialized && (this.needToInitFocus))
             {
-                if(!this._isFocusInitialized && (this.needToInitFocus))
-                {
-                    App.utils.focusHandler.setFocus(this.getElementForInitialFocus());
-                    this._isFocusInitialized = true;
-                }
-                else if(this._nextMonthNeedFocusUpdate)
-                {
-                    App.utils.focusHandler.setFocus(this.getFirstMonthDayRenderer());
-                    this._nextMonthNeedFocusUpdate = false;
-                }
-                else if(this._prevMonthNeedFocusUpdate)
-                {
-                    App.utils.focusHandler.setFocus(this.getLastMonthDayRenderer());
-                    this._prevMonthNeedFocusUpdate = false;
-                }
-                
-                
+                this.requestNewFocus(this.getElementForInitialFocus());
+                this._isFocusInitialized = true;
             }
+            else if(this._nextMonthNeedFocusUpdate)
+            {
+                this.requestNewFocus(this.getFirstMonthDayRenderer());
+                this._nextMonthNeedFocusUpdate = false;
+            }
+            else if(this._prevMonthNeedFocusUpdate)
+            {
+                this.requestNewFocus(this.getLastMonthDayRenderer());
+                this._prevMonthNeedFocusUpdate = false;
+            }
+            
+            
         }
         
         private function getElementForInitialFocus() : InteractiveObject
@@ -730,6 +744,17 @@ package net.wg.gui.components.advanced
             App.toolTipMgr.hide();
         }
         
+        private function requestNewFocus(param1:InteractiveObject) : void
+        {
+            this._componentForFocus = param1;
+            dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
+        }
+        
+        public function getComponentForFocus() : InteractiveObject
+        {
+            return this._componentForFocus;
+        }
+        
         public function setOutOfBoundsTooltip(param1:String, param2:String) : void
         {
             this._outOfBoundsTTHeader = param1;
@@ -831,7 +856,6 @@ package net.wg.gui.components.advanced
         public function set selectedDate(param1:Date) : void
         {
             this._selectedDate = param1;
-            DebugUtils.LOG_DEBUG("set selectedDate!!!!!!!!!!",this._selectedDate);
             invalidate(INVALID_SELECTED_DATE);
         }
         
@@ -951,6 +975,21 @@ package net.wg.gui.components.advanced
         public function as_setMaxAvailableDate(param1:Number) : void
         {
             this.maxAvailableDate = App.utils.dateTime.fromPyTimestamp(param1);
+        }
+        
+        private function onPrevMonthBtnRollOverHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.show(TOOLTIPS.CALENDAR_PREVMONTH);
+        }
+        
+        private function onNextMonthBtnRollOverHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.show(TOOLTIPS.CALENDAR_NEXTMONTH);
+        }
+        
+        private function onMonthBtnsRollOutHandler(param1:MouseEvent) : void
+        {
+            App.toolTipMgr.hide();
         }
     }
 }

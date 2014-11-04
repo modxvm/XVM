@@ -448,10 +448,10 @@ class _Player(object):
         else:
             self.vId = 0
         self.team = vData['team']
-        from gui.BattleContext import g_battleContext
+        from gui.battle_control import g_sessionProvider
         self.squadnum = 0
-        if g_battleContext.arenaDP is not None:
-            vInfo = g_battleContext.arenaDP.getVehicleInfo(vID=vehId)
+        if g_sessionProvider.getCtx().getArenaDP() is not None:
+            vInfo = g_sessionProvider.getCtx().getArenaDP().getVehicleInfo(vID=vehId)
             self.squadnum = vInfo.squadIndex
             #if self.squadnum > 0:
             #    log("team=%d, squad=%d %s" % (self.team, self.squadnum, self.name))

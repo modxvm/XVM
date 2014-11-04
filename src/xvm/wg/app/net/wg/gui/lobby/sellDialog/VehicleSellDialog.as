@@ -308,7 +308,7 @@ package net.wg.gui.lobby.sellDialog
             }
             this.devicesComponent.removePrices = param4.hasOwnProperty("removePrice")?param4.removePrice:null;
             this.devicesComponent.removeActionPriceData = param4.hasOwnProperty("action")?param4.action:null;
-            this.window.title = App.utils.locale.makeString(DIALOGS.VEHICLESELLDIALOG_TITLE,{"name":param1.userName});
+            this.window.title = this.vehicleVo.isRented?App.utils.locale.makeString(DIALOGS.VEHICLEREMOVEDIALOG_TITLE,{"name":param1.userName}):App.utils.locale.makeString(DIALOGS.VEHICLESELLDIALOG_TITLE,{"name":param1.userName});
             invalidateData();
         }
         
@@ -467,34 +467,33 @@ package net.wg.gui.lobby.sellDialog
         
         private function setGoldText(param1:Number, param2:Number) : void
         {
-            var _loc9_:* = false;
-            var _loc10_:* = 0;
+            var _loc8_:* = false;
+            var _loc9_:* = 0;
             var _loc3_:ILocale = App.utils.locale;
-            var _loc4_:String = _loc3_.gold(param1);
-            var _loc5_:* = true;
-            var _loc6_:Number = this.headerComponent.tankGoldPrice > 0?this.headerComponent.tankGoldPrice - param2:param2;
-            if(_loc6_ >= 0)
+            var _loc4_:* = true;
+            var _loc5_:Number = this.headerComponent.tankGoldPrice > 0?this.headerComponent.tankGoldPrice - param2:param2;
+            if(_loc5_ >= 0)
             {
-                _loc5_ = !(this.headerComponent.tankGoldPrice > 0);
+                _loc4_ = !(this.headerComponent.tankGoldPrice > 0);
             }
             else
             {
-                _loc6_ = _loc6_ * -1;
+                _loc5_ = _loc5_ * -1;
             }
-            var _loc7_:String = _loc3_.gold(_loc6_);
-            var _loc8_:Number = param1 + this.creditsComplDev;
-            if(_loc6_ != 0)
+            var _loc6_:String = _loc3_.gold(_loc5_);
+            var _loc7_:Number = param1 + this.creditsComplDev;
+            if(_loc5_ != 0)
             {
                 this.result_mc.goldIT.visible = true;
-                this.result_mc.goldIT.text = _loc5_?"- " + _loc7_:"+ " + _loc7_;
+                this.result_mc.goldIT.text = _loc4_?"- " + _loc6_:"+ " + _loc6_;
             }
             else
             {
                 this.result_mc.goldIT.text = "0";
             }
-            if(_loc8_ > 0)
+            if(_loc7_ > 0)
             {
-                this.result_mc.creditsIT.text = "+ " + _loc3_.integer(_loc8_);
+                this.result_mc.creditsIT.text = "+ " + _loc3_.integer(_loc7_);
             }
             else
             {
@@ -503,9 +502,9 @@ package net.wg.gui.lobby.sellDialog
             if((this.controlQuestion) && (this.controlQuestion.visible))
             {
                 this.controlQuestion.cleanField();
-                _loc9_ = _loc8_ == 0;
-                _loc10_ = _loc9_?_loc6_:_loc8_;
-                setResultCreditS(_loc9_,_loc10_);
+                _loc8_ = _loc7_ == 0;
+                _loc9_ = _loc8_?_loc5_:_loc7_;
+                setResultCreditS(_loc8_,_loc9_);
                 if(this.controlQuestion.userInput.focused == false)
                 {
                     App.utils.scheduler.envokeInNextFrame(setFocus,this.controlQuestion.userInput);

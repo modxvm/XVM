@@ -8,7 +8,7 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
     import net.wg.gui.lobby.fortifications.cmp.main.IFortHeaderClanInfo;
     import net.wg.gui.components.controls.IconTextButton;
     import net.wg.gui.components.advanced.ButtonDnmIcon;
-    import net.wg.gui.components.advanced.ToggleButton;
+    import net.wg.gui.components.advanced.ToggleSoundButton;
     import net.wg.gui.lobby.fortifications.utils.IFortsControlsAligner;
     import flash.display.DisplayObject;
     import flash.geom.Rectangle;
@@ -56,7 +56,7 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
         
         private var _settingBtn:ButtonDnmIcon = null;
         
-        private var _transportBtn:ToggleButton = null;
+        private var _transportBtn:ToggleSoundButton = null;
         
         private var helper:IFortsControlsAligner = null;
         
@@ -118,12 +118,12 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this._calendarBtn = param1;
         }
         
-        public function get transportBtn() : ToggleButton
+        public function get transportBtn() : ToggleSoundButton
         {
             return this._transportBtn;
         }
         
-        public function set transportBtn(param1:ToggleButton) : void
+        public function set transportBtn(param1:ToggleSoundButton) : void
         {
             this._transportBtn = param1;
         }
@@ -206,6 +206,7 @@ package net.wg.gui.lobby.fortifications.cmp.main.impl
             this._vignetteYellow.mouseChildren = false;
             mouseEnabled = false;
             this.settingBtn.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_SETTINGS;
+            this.transportBtn.iconSource = RES_ICONS.MAPS_ICONS_BUTTONS_TRANSPORTING;
         }
         
         override protected function onDispose() : void

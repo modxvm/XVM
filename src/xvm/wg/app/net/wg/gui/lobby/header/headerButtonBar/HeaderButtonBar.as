@@ -409,9 +409,9 @@ package net.wg.gui.lobby.header.headerButtonBar
         
         public function showFinanceHelpLayout() : void
         {
-            var _loc10_:* = NaN;
-            var _loc11_:HeaderButtonVo = null;
-            var _loc12_:HeaderButton = null;
+            var _loc11_:* = NaN;
+            var _loc12_:HeaderButtonVo = null;
+            var _loc13_:HeaderButton = null;
             var _loc1_:IHelpLayout = App.utils.helpLayout;
             var _loc2_:Number = 0;
             var _loc3_:Number = 0;
@@ -422,65 +422,66 @@ package net.wg.gui.lobby.header.headerButtonBar
             var _loc8_:HeaderButton = null;
             if((_renderers) && _renderers.length > 0)
             {
-                _loc10_ = 0;
-                while(_loc10_ < _renderers.length)
+                _loc11_ = 0;
+                while(_loc11_ < _renderers.length)
                 {
-                    _loc11_ = HeaderButtonVo(dataProvider.requestItemAt(_loc10_));
-                    if(_loc4_.indexOf(_loc11_.id) > -1)
+                    _loc12_ = HeaderButtonVo(dataProvider.requestItemAt(_loc11_));
+                    if(_loc4_.indexOf(_loc12_.id) > -1)
                     {
-                        _loc12_ = this.getRendererAt(_loc10_);
+                        _loc13_ = this.getRendererAt(_loc11_);
                         if(_loc5_)
                         {
-                            if(_loc12_.x < _loc5_.x)
+                            if(_loc13_.x < _loc5_.x)
                             {
-                                _loc5_ = _loc12_;
+                                _loc5_ = _loc13_;
                             }
                         }
                         else
                         {
-                            _loc5_ = _loc12_;
+                            _loc5_ = _loc13_;
                         }
                         if(_loc6_)
                         {
-                            if(_loc12_.x > _loc6_.x)
+                            if(_loc13_.x > _loc6_.x)
                             {
-                                _loc6_ = _loc12_;
+                                _loc6_ = _loc13_;
                             }
                         }
                         else
                         {
-                            _loc6_ = _loc12_;
+                            _loc6_ = _loc13_;
                         }
                         if(_loc7_)
                         {
-                            if(_loc12_.y < _loc7_.y)
+                            if(_loc13_.y < _loc7_.y)
                             {
-                                _loc7_ = _loc12_;
+                                _loc7_ = _loc13_;
                             }
                         }
                         else
                         {
-                            _loc7_ = _loc12_;
+                            _loc7_ = _loc13_;
                         }
                         if(_loc8_)
                         {
-                            if(_loc12_.y > _loc8_.y)
+                            if(_loc13_.y > _loc8_.y)
                             {
-                                _loc8_ = _loc12_;
+                                _loc8_ = _loc13_;
                             }
                         }
                         else
                         {
-                            _loc8_ = _loc12_;
+                            _loc8_ = _loc13_;
                         }
                     }
-                    _loc10_++;
+                    _loc11_++;
                 }
                 _loc2_ = _loc6_.x + _loc6_.bounds.width - _loc5_.x;
                 _loc3_ = _loc8_.y + _loc8_.bounds.height - _loc7_.y;
             }
-            var _loc9_:Object = _loc1_.getProps(_loc2_ - 1,_loc3_ - 2,Directions.BOTTOM,LOBBY_HELP.HEADER_FINANCE_BLOCK,1,1,39);
-            this._financeHelpLayout = _loc1_.create(root,_loc9_,_loc5_);
+            var _loc9_:Rectangle = new Rectangle(1,1,_loc2_ - 1,_loc3_ - 2);
+            var _loc10_:Object = _loc1_.getProps(_loc9_,LOBBY_HELP.HEADER_FINANCE_BLOCK,Directions.RIGHT);
+            this._financeHelpLayout = _loc1_.create(root,_loc10_,_loc5_);
         }
         
         public function closeFinanceHelpLayout() : void
@@ -510,7 +511,7 @@ package net.wg.gui.lobby.header.headerButtonBar
         
         public function showHelpLayout() : void
         {
-            var _loc1_:Array = [HeaderButtonsHelper.ITEM_ID_SETTINGS,HeaderButtonsHelper.ITEM_ID_ACCOUNT,HeaderButtonsHelper.ITEM_ID_PREM,HeaderButtonsHelper.ITEM_ID_SQUAD,HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR];
+            var _loc1_:Array = [HeaderButtonsHelper.ITEM_ID_ACCOUNT,HeaderButtonsHelper.ITEM_ID_PREM,HeaderButtonsHelper.ITEM_ID_SQUAD,HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR];
             this.showHelpLayoutById(_loc1_);
             this.showFinanceHelpLayout();
         }

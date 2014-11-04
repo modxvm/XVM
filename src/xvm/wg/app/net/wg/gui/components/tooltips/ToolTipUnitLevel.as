@@ -1,144 +1,89 @@
 package net.wg.gui.components.tooltips
 {
     import flash.text.TextField;
-    import flash.text.TextFieldAutoSize;
-    import net.wg.gui.components.tooltips.helpers.Utils;
-    import flash.display.MovieClip;
     import flash.display.Sprite;
+    import flash.display.MovieClip;
+    import net.wg.gui.components.controls.UILoaderAlt;
+    import net.wg.gui.components.tooltips.VO.ToolTipUnitLevelVO;
     import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
-    import flash.filters.DropShadowFilter;
+    import net.wg.gui.components.tooltips.helpers.Utils;
+    import flash.text.TextFieldAutoSize;
     
-    public class ToolTipUnitLevel extends ToolTipBase
+    public class ToolTipUnitLevel extends ToolTipSpecial
     {
         
         public function ToolTipUnitLevel()
         {
             super();
+            this.headerTF = content.headerTF;
+            this.descriptionTF = content.descriptionTF;
+            this.whiteBg = content.whiteBg;
+            this.tooltipStatus = content.tooltipStatus;
+            this.bodyMC = content.bodyMC;
+            this.levelTF = this.bodyMC.levelTF;
+            this.levelDescriptionTF = this.bodyMC.levelDescriptionTF;
+            this.icon = this.bodyMC.icon;
         }
         
-        private function setHeader(param1:String) : Number
-        {
-            var _loc2_:TextField = content.headerTF;
-            _loc2_.autoSize = TextFieldAutoSize.LEFT;
-            _loc2_.htmlText = Utils.instance.htmlWrapper(param1,Utils.instance.COLOR_HEADER,18,"$TitleFont");
-            _loc2_.width = _loc2_.textWidth + 5;
-            _loc2_.x = bgShadowMargin.left + contentMargin.left;
-            _loc2_.y = topPosition ^ 0;
-            return _loc2_.textHeight + Utils.instance.MARGIN_AFTER_BLOCK;
-        }
+        private var headerTF:TextField;
         
-        private function addSeparatorWithMargin() : Separator
-        {
-            var _loc1_:Separator = Utils.instance.createSeparate(content);
-            _loc1_.y = topPosition ^ 0;
-            separators.push(_loc1_);
-            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
-            return _loc1_;
-        }
+        private var descriptionTF:TextField;
+        
+        private var whiteBg:Sprite;
+        
+        private var bodyMC:MovieClip;
+        
+        private var levelTF:TextField;
+        
+        private var icon:UILoaderAlt;
+        
+        private var levelDescriptionTF:TextField;
+        
+        private var tooltipStatus:Status;
+        
+        private var model:ToolTipUnitLevelVO;
         
         override protected function redraw() : void
         {
-            var _loc1_:* = 0;
-            var _loc4_:MovieClip = null;
-            var _loc5_:Status = null;
-            var _loc6_:Sprite = null;
-            var _loc7_:ToolTipStatusColorsVO = null;
-            var _loc8_:uint = 0;
-            var _loc9_:* = NaN;
-            var _loc10_:* = NaN;
-            var _loc11_:* = NaN;
-            var _loc12_:String = null;
-            var _loc13_:DropShadowFilter = null;
-            _loc1_ = _data.level;
+            var _loc3_:ToolTipStatusColorsVO = null;
+            this.model = new ToolTipUnitLevelVO(_data);
+            var _loc1_:int = _data.level;
             var _loc2_:Separator = null;
             separators = new Vector.<Separator>();
-            topPosition = topPosition + this.setHeader(App.utils.locale.makeString(TOOLTIPS.CYBERSPORT_UNITLEVEL_TITLE));
+            topPosition = topPosition + this.setHeader(this.model.header);
             _loc2_ = this.addSeparatorWithMargin();
-            var _loc3_:TextField = content.description;
-            _loc3_.y = topPosition;
-            _loc3_.x = contentMargin.left + bgShadowMargin.left;
-            _loc3_.text = TOOLTIPS.CYBERSPORT_UNITLEVEL_DESCRIPTION;
-            _loc3_.height = _loc3_.textHeight + 5;
-            topPosition = _loc3_.y + _loc3_.height + Utils.instance.MARGIN_AFTER_BLOCK;
+            this.descriptionTF.y = topPosition;
+            this.descriptionTF.x = contentMargin.left + bgShadowMargin.left;
+            this.descriptionTF.htmlText = this.model.description;
+            this.descriptionTF.height = this.descriptionTF.textHeight + 5;
+            topPosition = this.descriptionTF.y + this.descriptionTF.height + Utils.instance.MARGIN_AFTER_BLOCK;
             _loc2_ = this.addSeparatorWithMargin();
-            _loc4_ = content.bodyMC;
-            _loc4_.y = topPosition;
-            _loc4_.x = contentMargin.left + bgShadowMargin.left;
-            _loc4_.recommendedLevels.text = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_RECOMMENDED;
-            _loc4_.unrecommendedevels.text = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_NOTRECOMMENDED;
-            _loc4_.errorLevels.text = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_ERROR;
-            _loc4_.descriptions.htmlText = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY;
-            topPosition = _loc4_.y + _loc4_.height;
-            _loc5_ = content.tooltipStatus;
-            _loc6_ = content.whiteBg;
-            if(_loc1_ > 0)
+            this.bodyMC.y = topPosition;
+            this.bodyMC.x = contentMargin.left + bgShadowMargin.left;
+            this.levelTF.htmlText = this.model.level;
+            this.levelDescriptionTF.htmlText = this.model.levelDescription;
+            this.icon.source = this.model.icon;
+            topPosition = this.bodyMC.y + this.bodyMC.height;
+            if(this.model.statusMsg)
             {
                 topPosition = topPosition + Utils.instance.MARGIN_AFTER_BLOCK;
                 _loc2_ = this.addSeparatorWithMargin();
-                _loc6_.visible = true;
-                _loc6_.y = _loc2_.y;
-                _loc5_.visible = true;
-                _loc5_.y = topPosition;
-                _loc5_.x = contentMargin.left + bgShadowMargin.left;
-                _loc7_ = new ToolTipStatusColorsVO();
-                _loc8_ = 0;
-                _loc9_ = 0;
-                _loc10_ = 0;
-                _loc11_ = 0;
-                if(_loc1_ < 40)
-                {
-                    _loc7_.textColor = 15237413;
-                    _loc8_ = 16711680;
-                    _loc9_ = 0.5;
-                    _loc10_ = 0.27;
-                    _loc11_ = 11;
-                    _loc12_ = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_NOTRECOMMENDEDSTATUS;
-                }
-                else if(_loc1_ > 42)
-                {
-                    _loc7_.textColor = 16717591;
-                    _loc8_ = 16711680;
-                    _loc9_ = 0.5;
-                    _loc10_ = 0.27;
-                    _loc11_ = 11;
-                    _loc12_ = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_ERRORSTATUS;
-                }
-                else
-                {
-                    _loc7_.textColor = 8041216;
-                    _loc8_ = 3997440;
-                    _loc9_ = 0.5;
-                    _loc10_ = 0.27;
-                    _loc11_ = 11;
-                    _loc12_ = TOOLTIPS.CYBERSPORT_UNITLEVEL_BODY_RECOMMENDEDSTATUS;
-                }
-                
-                _loc7_.filters = [];
-                _loc13_ = new DropShadowFilter();
-                _loc13_.distance = 0;
-                _loc13_.angle = 0;
-                _loc13_.color = _loc8_;
-                _loc13_.alpha = _loc10_;
-                _loc13_.blurX = _loc11_;
-                _loc13_.blurY = _loc11_;
-                _loc13_.strength = _loc9_;
-                _loc13_.quality = 3;
-                _loc13_.inner = false;
-                _loc13_.knockout = false;
-                _loc13_.hideObject = false;
-                _loc7_.filters.push(_loc13_);
-                _loc5_.x = contentMargin.left + bgShadowMargin.left;
-                _loc5_.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
-                _loc5_.setData(App.utils.locale.makeString(_loc12_,{"sumLevels":_loc1_.toString()}),null,_loc7_);
-                topPosition = topPosition + (_loc5_.height + Utils.instance.MARGIN_AFTER_BLOCK);
-                _loc6_.height = topPosition - _loc6_.y;
+                this.whiteBg.visible = true;
+                this.whiteBg.y = _loc2_.y;
+                this.tooltipStatus.visible = true;
+                this.tooltipStatus.y = topPosition;
+                this.tooltipStatus.x = contentMargin.left + bgShadowMargin.left;
+                _loc3_ = Utils.instance.getStatusColor(this.model.statusLevel);
+                this.tooltipStatus.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
+                this.tooltipStatus.setData(this.model.statusMsg,"",_loc3_);
+                topPosition = topPosition + (this.tooltipStatus.height + Utils.instance.MARGIN_AFTER_BLOCK);
+                this.whiteBg.height = topPosition - this.whiteBg.y;
             }
             else
             {
-                _loc5_.visible = false;
-                _loc6_.visible = false;
+                this.tooltipStatus.visible = false;
+                this.whiteBg.visible = false;
             }
-            contentMargin.bottom = 0;
             super.redraw();
         }
         
@@ -150,6 +95,26 @@ package net.wg.gui.components.tooltips
             {
                 _loc1_.width = contentWidth + bgShadowMargin.horizontal;
             }
+        }
+        
+        private function setHeader(param1:String) : Number
+        {
+            this.headerTF.autoSize = TextFieldAutoSize.LEFT;
+            this.headerTF.htmlText = Utils.instance.htmlWrapper(param1,Utils.instance.COLOR_HEADER,18,"$TitleFont");
+            this.headerTF.width = this.headerTF.textWidth + 5;
+            this.headerTF.x = bgShadowMargin.left + contentMargin.left;
+            this.headerTF.y = topPosition ^ 0;
+            return this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK;
+        }
+        
+        private function addSeparatorWithMargin() : Separator
+        {
+            var _loc1_:Separator = null;
+            _loc1_ = Utils.instance.createSeparate(content);
+            _loc1_.y = topPosition ^ 0;
+            separators.push(_loc1_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            return _loc1_;
         }
     }
 }

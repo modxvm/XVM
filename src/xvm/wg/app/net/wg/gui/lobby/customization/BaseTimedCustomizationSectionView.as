@@ -246,6 +246,7 @@ package net.wg.gui.lobby.customization
             if(this.view)
             {
                 this.view.removeEventListener(CustomizationEvent.SELECT_NEW,this.onSelectNewItem);
+                this.view.dispose();
                 this.view = null;
             }
             if(this.list != null)
@@ -275,6 +276,7 @@ package net.wg.gui.lobby.customization
                 this.newItemRenderer.dispose();
                 this.newItemRenderer = null;
             }
+            this.timeLeftField = null;
             this._currentItemData = null;
             this._newItemData = null;
             this._groupsDataProvider = null;
@@ -414,7 +416,8 @@ package net.wg.gui.lobby.customization
         
         private function setNewItemView(param1:int, param2:Object, param3:int) : void
         {
-            var _loc4_:int = param2.id;
+            var _loc4_:* = 0;
+            _loc4_ = param2.id;
             if(this.currentItemData.id == _loc4_)
             {
                 this.newItemData = this.getEmptyDataItem();

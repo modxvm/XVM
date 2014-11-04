@@ -45,7 +45,6 @@ package net.wg.gui.lobby.window
             param1.roleIcon = param2.icon.role;
             param1.isActive = param2.isActive;
             param1.isCommon = param2.roleType == CarouselTankmanSkillsModel.ROLE_TYPE_COMMON;
-            param1.roleType = param2.roleType;
             param1.isPerk = param2.isPerk;
             param1.level = param2.level;
             param1.userName = param2.userName;

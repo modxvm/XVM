@@ -11,21 +11,19 @@ package net.wg.gui.lobby.header
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
     import scaleform.clik.events.ButtonEvent;
-    import net.wg.gui.lobby.header.events.HeaderEvents;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.data.constants.Values;
     import net.wg.gui.lobby.header.headerButtonBar.HeaderButton;
     import net.wg.gui.lobby.header.vo.HeaderButtonVo;
     import net.wg.data.Aliases;
     import net.wg.gui.lobby.header.vo.HBC_AccountDataVo;
     import net.wg.data.VO.UserVO;
+    import net.wg.data.constants.Values;
     import net.wg.gui.lobby.header.vo.HBC_PremDataVo;
     import net.wg.gui.lobby.header.vo.HBC_SquadDataVo;
     import net.wg.gui.lobby.header.vo.HBC_BattleTypeVo;
     import net.wg.gui.lobby.header.vo.HBC_SettingsVo;
     import net.wg.gui.lobby.header.vo.HBC_FinanceVo;
     import net.wg.data.constants.IconsTypes;
-    import net.wg.gui.lobby.headerTutorial.HeaderTutorialStates;
     
     public class LobbyHeader extends LobbyHeaderMeta implements ILobbyHeaderMeta, IHelpLayoutComponent
     {
@@ -68,8 +66,6 @@ package net.wg.gui.lobby.header
         
         private var MAX_SCREEN_SIZE:Number = 1600;
         
-        private var _currentHeaderHelpStepId:String = "";
-        
         override protected function onPopulate() : void
         {
             super.onPopulate();
@@ -95,7 +91,6 @@ package net.wg.gui.lobby.header
             this.headerButtonBar.updateCenterItem(this.fightBtn.getRectangle());
             this.mainMenuButtonBar.addEventListener(ButtonEvent.CLICK,this.mainMenuButtonClickHandler,false,0,true);
             this.headerButtonBar.addEventListener(ButtonEvent.CLICK,this.headerButtonClickHandler,false,0,true);
-            this.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION,this.onHeaderItemsReposition,false,0,true);
         }
         
         private function onFightClick(param1:ButtonEvent) : void
@@ -137,21 +132,12 @@ package net.wg.gui.lobby.header
             this.headerButtonBar.updateScreen(this._currentScreen,App.appWidth,_loc1_,_loc2_);
         }
         
-        private function onHeaderItemsReposition(param1:HeaderEvents) : void
-        {
-            if(this._currentHeaderHelpStepId != Values.EMPTY_STR)
-            {
-                this.as_highlightTutorialControls(this._currentHeaderHelpStepId);
-            }
-        }
-        
         override protected function onDispose() : void
         {
             this.mainMenuButtonBar.removeEventListener(ButtonEvent.CLICK,this.mainMenuButtonClickHandler);
             this.mainMenuButtonBar.dispose();
             this.mainMenuButtonBar = null;
             this.headerButtonBar.removeEventListener(ButtonEvent.CLICK,this.headerButtonClickHandler);
-            this.headerButtonBar.removeEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION,this.onHeaderItemsReposition);
             this.headerButtonBar.dispose();
             this.headerButtonBar = null;
             this._mainMenuHelper.dispose();
@@ -335,8 +321,6 @@ package net.wg.gui.lobby.header
         {
             this._isShowHelpLayout = true;
             App.helpLayout.createBackground();
-            this.fightBtn.showHelpLayout();
-            this.mainMenuButtonBar.showHelpLayout();
             this.headerButtonBar.showHelpLayout();
         }
     }
@@ -350,45 +334,9 @@ package net.wg.gui.lobby.header
         }
     }
     
-    public function as_highlightTutorialControls(param1:String) : void
-    {
-        this.hideHelpLayout();
-        this._isShowHelpLayout = true;
-        this._currentHeaderHelpStepId = param1;
-        switch(param1)
-        {
-            case HeaderTutorialStates.STEP1:
-                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_SETTINGS]);
-                break;
-            case HeaderTutorialStates.STEP2:
-                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_ACCOUNT]);
-                break;
-            case HeaderTutorialStates.STEP3:
-                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_PREM]);
-                break;
-            case HeaderTutorialStates.STEP4:
-                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_SQUAD]);
-                break;
-            case HeaderTutorialStates.STEP5:
-                this.headerButtonBar.showHelpLayoutById([HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR]);
-                break;
-            case HeaderTutorialStates.STEP6:
-                this.headerButtonBar.showFinanceHelpLayout();
-                break;
-        }
-    }
-    
     private function hideHelpLayout() : void
     {
-        this.fightBtn.closeHelpLayout();
-        this.mainMenuButtonBar.closeHelpLayout();
         this.headerButtonBar.closeHelpLayout();
-    }
-    
-    public function as_resetHighlightTutorialControls() : void
-    {
-        this._currentHeaderHelpStepId = Values.EMPTY_STR;
-        this.closeHelpLayout();
     }
     
     private var _actualEnabledVal:Boolean;

@@ -18,31 +18,19 @@ package net.wg.gui.lobby.header.mainMenuButtonBar
         },{"label":MENU.HEADERBUTTONS_INVENTORY,
         "value":"inventory",
         "subValues":[],
-        "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_INVENTORY,
-        "helpText":LOBBY_HELP.HEADER_MENU_INVENTORY,
-        "helpDirection":"B",
-        "helpConnectorLength":32
+        "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_INVENTORY
     },{"label":MENU.HEADERBUTTONS_SHOP,
     "value":"shop",
     "subValues":[],
-    "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_SHOP,
-    "helpText":LOBBY_HELP.HEADER_MENU_SHOP,
-    "helpDirection":"B",
-    "helpConnectorLength":82
+    "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_SHOP
 },{"label":MENU.HEADERBUTTONS_PROFILE,
 "value":"profile",
 "subValues":[],
-"tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_PROFILE,
-"helpText":LOBBY_HELP.HEADER_MENU_PROFILE,
-"helpDirection":"B",
-"helpConnectorLength":32
+"tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_PROFILE
 },{"label":MENU.HEADERBUTTONS_TECHTREE,
 "value":"techtree",
 "subValues":["research"],
-"tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_TECHTREE,
-"helpText":LOBBY_HELP.HEADER_MENU_TECHTREE,
-"helpDirection":"B",
-"helpConnectorLength":32
+"tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_TECHTREE
 },{"label":MENU.HEADERBUTTONS_BARRACKS,
 "value":"barracks",
 "subValues":[],

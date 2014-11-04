@@ -31,6 +31,11 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
         
         private var model:ClanDescriptionVO = null;
         
+        public function as_updateBookMark(param1:Boolean) : void
+        {
+            this.descriptionHeader.checkBox.selected = param1;
+        }
+        
         override protected function setData(param1:ClanDescriptionVO) : void
         {
             this.model = param1;
@@ -103,7 +108,7 @@ package net.wg.gui.lobby.fortifications.intelligence.impl
                 {
                     this.notSelectedTF.text = Values.EMPTY_STR;
                 }
-                else if((this.model.canAttackDirection) && !this.model.isFrozen)
+                else if((this.model.canAttackDirection) && !this.model.isOurFortFrozen)
                 {
                     this.notSelectedTF.text = FORTIFICATIONS.FORTINTELLIGENCE_CLANDESCRIPTION_NOTSELECTEDSCREEN_COMMANDER;
                 }

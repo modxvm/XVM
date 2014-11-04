@@ -12,6 +12,8 @@ package net.wg.infrastructure.managers
     import net.wg.infrastructure.events.LoaderEvent;
     import net.wg.infrastructure.interfaces.IView;
     import flash.display.LoaderInfo;
+    import flash.display.DisplayObject;
+    import flash.display.DisplayObjectContainer;
     
     public class LoaderManager extends LoaderManagerMeta implements ILoaderManager
     {
@@ -104,13 +106,13 @@ package net.wg.infrastructure.managers
             var config:Object = data.config;
             var token:String = data.token;
             var alias:String = data.alias;
-            var name:String = data.name;
             var view:IView = loader.content as IView;
             if(!view)
             {
                 try
                 {
                     view = IView(loader.content["main"]);
+                    this.removeExtraInstances(loader);
                 }
                 catch(e:*)
                 {
@@ -118,11 +120,7 @@ package net.wg.infrastructure.managers
             }
             if(view)
             {
-                view.as_token = token;
-                view.as_config = config;
-                view.as_alias = alias;
-                view.as_name = name;
-                view.loader = loader;
+                this.applyViewData(view,data,loader);
                 this.dispatchLoaderEvent(LoaderEvent.VIEW_LOADED,config,token,view);
                 viewLoadedS(token,view);
             }
@@ -133,6 +131,31 @@ package net.wg.infrastructure.managers
             data.dispose();
             delete this.loaderToToken[loader];
             true;
+        }
+        
+        private function applyViewData(param1:IView, param2:LoadInfo, param3:Loader) : void
+        {
+            param1.as_token = param2.token;
+            param1.as_config = param2.config;
+            param1.as_alias = param2.alias;
+            param1.as_name = param2.name;
+            param1.loader = param3;
+        }
+        
+        private function removeExtraInstances(param1:Loader) : void
+        {
+            var _loc4_:DisplayObject = null;
+            var _loc2_:int = DisplayObjectContainer(param1.content).numChildren;
+            var _loc3_:* = 0;
+            while(_loc3_ < _loc2_)
+            {
+                _loc4_ = DisplayObjectContainer(param1.content).getChildAt(_loc3_);
+                if(_loc4_.name != "main")
+                {
+                    App.utils.commons.releaseReferences(_loc4_);
+                }
+                _loc3_++;
+            }
         }
         
         private function onSWFLoadError(param1:IOErrorEvent) : void

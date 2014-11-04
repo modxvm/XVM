@@ -74,6 +74,8 @@ package net.wg.gui.lobby.tankman
             this.stats = {};
             this.stats.achievements = _loc2_;
             this.stats.stats = param1.stats;
+            this.stats.firstMsg = param1.firstMsg;
+            this.stats.secondMsg = param1.secondMsg;
             this.runtimeUpdateByModel(PersonalCaseStats,this.stats);
         }
         
@@ -296,7 +298,6 @@ package net.wg.gui.lobby.tankman
                 _loc7_.roleIcon = _loc8_.icon.role;
                 _loc7_.isActive = _loc8_.isActive;
                 _loc7_.isCommon = _loc8_.roleType == CarouselTankmanSkillsModel.ROLE_TYPE_COMMON;
-                _loc7_.roleType = _loc8_.roleType;
                 _loc7_.isPerk = _loc8_.isPerk;
                 _loc7_.level = _loc8_.level;
                 _loc7_.userName = _loc8_.userName;

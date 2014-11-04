@@ -1,6 +1,8 @@
 package net.wg.gui.components.controls
 {
     import scaleform.clik.core.UIComponent;
+    import net.wg.utils.IHelpLayout;
+    import flash.geom.Rectangle;
     import net.wg.data.constants.SoundTypes;
     
     public class IconTextButton extends IconButton
@@ -117,16 +119,11 @@ package net.wg.gui.components.controls
             }
         }
         
-        override protected function getParamsForHelpLayout(param1:String, param2:String, param3:Number) : Object
+        override protected function getParamsForHelpLayout(param1:String, param2:String) : Object
         {
-            return {"borderWidth":width - 3,
-            "borderHeight":height - 2,
-            "direction":param1,
-            "text":param2,
-            "x":0,
-            "y":0,
-            "connectorLength":param3
-        };
+            var _loc3_:IHelpLayout = App.utils.helpLayout;
+            var _loc4_:Rectangle = new Rectangle(0,0,width - 3,height - 2);
+            return _loc3_.getProps(_loc4_,param1,param2);
+        }
     }
-}
 }

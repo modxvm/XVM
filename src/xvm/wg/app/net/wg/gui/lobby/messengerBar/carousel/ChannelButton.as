@@ -5,6 +5,7 @@ package net.wg.gui.lobby.messengerBar.carousel
     import scaleform.clik.utils.Padding;
     import flash.display.MovieClip;
     import flash.geom.ColorTransform;
+    import net.wg.gui.lobby.messengerBar.carousel.data.IToolTipData;
     import scaleform.clik.utils.ConstrainedElement;
     import scaleform.clik.constants.InvalidationType;
     import flash.events.MouseEvent;
@@ -36,6 +37,8 @@ package net.wg.gui.lobby.messengerBar.carousel
         private var colorBgVisible:Boolean = false;
         
         private var _textFieldColorTransform:ColorTransform;
+        
+        private var _tooltipData:IToolTipData;
         
         override protected function configUI() : void
         {
@@ -73,7 +76,6 @@ package net.wg.gui.lobby.messengerBar.carousel
             if(_loc2_ != label)
             {
                 super.label = _loc2_;
-                this.tooltip = param1;
                 invalidate(LABEL_INVALID);
             }
         }
@@ -120,6 +122,18 @@ package net.wg.gui.lobby.messengerBar.carousel
             {
                 App.toolTipMgr.show(_tooltip);
             }
+            else if(this._tooltipData)
+            {
+                if(this._tooltipData.tooltipId)
+                {
+                    App.toolTipMgr.showComplex(this._tooltipData.tooltipId);
+                }
+                else
+                {
+                    App.toolTipMgr.show(this._tooltipData.label);
+                }
+            }
+            
         }
         
         override protected function handleMouseRollOut(param1:MouseEvent) : void
@@ -174,6 +188,17 @@ package net.wg.gui.lobby.messengerBar.carousel
         {
             this._textFieldColorTransform = param1;
             invalidate(TF_COLOR_TRANSFORM_INVALID);
+        }
+        
+        public function setTooltipData(param1:IToolTipData) : void
+        {
+            this._tooltipData = param1;
+        }
+        
+        override protected function onDispose() : void
+        {
+            this._tooltipData = null;
+            super.onDispose();
         }
     }
 }

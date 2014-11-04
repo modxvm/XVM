@@ -37,5 +37,7 @@ package net.wg.gui.lobby.techtree.constants
         public static var CAN_SELL:uint = 8192;
         
         public static var VEHICLE_CAN_BE_CHANGED:uint = 16384;
+        
+        public static var VEHICLE_IN_RENT:uint = 32768;
     }
 }

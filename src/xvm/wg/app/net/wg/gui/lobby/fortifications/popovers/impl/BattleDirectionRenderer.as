@@ -9,6 +9,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.fortifications.data.BattleDirectionRendererVO;
     import scaleform.clik.constants.InvalidationType;
+    import flash.text.TextFieldAutoSize;
     import net.wg.gui.lobby.fortifications.events.JoinFortBattleEvent;
     import net.wg.gui.lobby.fortifications.data.battleRoom.clanBattle.ClanBattleTimerVO;
     
@@ -133,6 +134,7 @@ package net.wg.gui.lobby.fortifications.popovers.impl
                     _loc1_ = BattleDirectionRendererVO(_data);
                     this.visible = true;
                     this.battleDescrTF.htmlText = _loc1_.description;
+                    this.timeTF.autoSize = TextFieldAutoSize.LEFT;
                     this.timeTF.htmlText = _loc1_.battleHour;
                     this.joinBtn.visible = _loc1_.canJoin;
                     this.timeTF.visible = !_loc1_.canJoin;

@@ -66,7 +66,7 @@ package net.wg.gui.lobby.profile.pages.technique
             var _loc7_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
             _loc7_.iconId = TechniqueList.LEVEL;
             _loc7_.iconSource = "../maps/icons/buttons/tab_sort_button/level.png";
-            _loc7_.buttonWidth = 28;
+            _loc7_.buttonWidth = 32;
             _loc7_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_LVL;
             _loc7_.defaultSortDirection = SortingInfo.DESCENDING_SORT;
             _loc7_.sortOrder = 2;
@@ -74,7 +74,7 @@ package net.wg.gui.lobby.profile.pages.technique
             var _loc8_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
             _loc8_.iconId = TechniqueList.SHORT_USER_NAME;
             _loc8_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_VEHICLENAME;
-            _loc8_.buttonWidth = 158;
+            _loc8_.buttonWidth = 154;
             _loc8_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NAME;
             _loc8_.defaultSortDirection = SortingInfo.ASCENDING_SORT;
             _loc8_.sortOrder = 7;
@@ -106,7 +106,7 @@ package net.wg.gui.lobby.profile.pages.technique
             _loc4_.push(_loc11_);
             var _loc12_:NormalSortingBtnInfo = new NormalSortingBtnInfo();
             _loc12_.iconId = TechniqueList.MARK_OF_MASTERY;
-            _loc12_.buttonWidth = 80;
+            _loc12_.buttonWidth = 83;
             _loc12_.showSeparator = false;
             _loc12_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_CLASSINESS;
             _loc12_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY;

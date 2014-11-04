@@ -16,5 +16,7 @@ package net.wg.gui.cyberSport.interfaces
         function set changeState(param1:AutoSearchVO) : void;
         
         function handleInput(param1:InputEvent) : void;
+        
+        function changeButtonsState(param1:Boolean, param2:Boolean) : void;
     }
 }

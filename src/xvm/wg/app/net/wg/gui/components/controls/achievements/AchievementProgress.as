@@ -13,27 +13,42 @@ package net.wg.gui.components.controls.achievements
         
         private static var PROGRESS_BAR_INVALID:String = "pbInv";
         
-        private static function getValidTextValue(param1:Number) : String
+        public static var MILLIONS:String = "M";
+        
+        public static var THOUSANDS:String = "K";
+        
+        public static function getShortTextValue(param1:Number) : String
         {
-            var _loc2_:Number = param1 / 1000000;
-            if(_loc2_ >= 1)
+            var _loc2_:String = prepareShortString(param1,1000000,MILLIONS);
+            if(_loc2_)
             {
-                return getIntegral(Math.floor(_loc2_)) + "M";
+                return _loc2_;
             }
-            _loc2_ = param1 / 1000;
-            if(_loc2_ >= 1)
+            _loc2_ = prepareShortString(param1,1000,THOUSANDS);
+            if(_loc2_)
             {
-                return getIntegral(Math.floor(_loc2_)) + "K";
+                return _loc2_;
             }
-            return param1.toString();
+            return getNiceStr(param1);
         }
         
-        private static function getIntegral(param1:Number) : String
+        private static function prepareShortString(param1:Number, param2:Number, param3:String = "") : String
+        {
+            var _loc4_:* = 10;
+            var _loc5_:Number = param1 * _loc4_ / param2;
+            if(_loc5_ >= _loc4_)
+            {
+                return getNiceStr(Math.round(_loc5_) / _loc4_) + param3;
+            }
+            return null;
+        }
+        
+        private static function getNiceStr(param1:Number) : String
         {
             var _loc2_:String = null;
             if(App.utils)
             {
-                _loc2_ = App.utils.locale.integer(param1);
+                _loc2_ = App.utils.locale.numberWithoutZeros(param1);
             }
             else
             {
@@ -92,7 +107,7 @@ package net.wg.gui.components.controls.achievements
                     this.progress.progressBar.minimum = 0;
                     this.progress.progressBar.maximum = _loc2_;
                     this.progress.progressBar.value = _loc3_;
-                    this.progress.progressTextField.text = getValidTextValue(_loc3_) + " / " + getValidTextValue(_loc2_);
+                    this.progress.progressTextField.text = getShortTextValue(_loc3_) + " / " + getShortTextValue(_loc2_);
                 }
             }
         }

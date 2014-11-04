@@ -14,23 +14,22 @@ package net.wg.gui.lobby.hangar.tcarousel
     import flash.display.DisplayObject;
     import scaleform.clik.events.ListEvent;
     import flash.events.Event;
+    import flash.events.MouseEvent;
     import flash.display.DisplayObjectContainer;
     import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
     import scaleform.clik.constants.InvalidationType;
+    import flash.geom.Rectangle;
     import net.wg.utils.IHelpLayout;
     import net.wg.data.constants.Directions;
-    import flash.events.MouseEvent;
     import net.wg.gui.events.ListEventEx;
     import net.wg.data.constants.Tooltips;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.hangar.tcarousel.helper.VehicleCarouselVOBuilder;
     import scaleform.clik.data.DataProvider;
     import net.wg.utils.INations;
-    import net.wg.infrastructure.interfaces.IContextItem;
-    import net.wg.data.components.UserContextItem;
-    import net.wg.data.VO.SeparateItem;
+    import net.wg.data.daapi.ContextMenuVehicleVo;
+    import net.wg.data.components.VehicleContextMenuGenerator;
     import scaleform.clik.data.ListData;
-    import net.wg.gui.events.ContextMenuEvent;
     
     public class TankCarousel extends TankCarouselMeta implements ITankCarouselMeta, IDAAPIModule, IHelpLayoutComponent
     {
@@ -63,8 +62,6 @@ package net.wg.gui.lobby.hangar.tcarousel
         }
         
         public static var FILTERS_CAROUSEL_OFFSET:Number = 15;
-        
-        public static var SHOW_VEHICLE_STATS:String = "showVehicleStatistics";
         
         public static var VO_VEHICLES_IS_INVALID:String = "vo_vehicles_is_invalid";
         
@@ -120,7 +117,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         private var _rendererHelpLayout:DisplayObject;
         
-        private var _isShowHelpLayout:Boolean = false;
+        private var _filtersHelpLayout:DisplayObject;
         
         private var skipScrollToIndex:Boolean = false;
         
@@ -157,6 +154,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.tankFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.onVehicleTypeFilterChanged);
             this.checkBoxToMain.removeEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
             this.nationFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.onNationFilterChanged);
+            leftArrow.removeEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel);
+            rightArrow.removeEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel);
             App.contextMenuMgr.hide();
             this.vehicleFilters.dispose();
             this.vehicleFilters = null;
@@ -175,6 +174,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.tankFilter = null;
             this.checkBoxToMain = null;
             this._rendererHelpLayout = null;
+            this._filtersHelpLayout = null;
             this._vehiclesVOManager.clear();
             this._vehiclesVOManager = null;
             this.removeEmptySlots();
@@ -191,12 +191,6 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.clearArrays(true);
             var _loc2_:DisplayObjectContainer = container;
             super.onDispose();
-            var _loc3_:Number = 0;
-            while(_loc3_ < _loc2_.numChildren)
-            {
-                trace("child: " + _loc2_.getChildAt(_loc3_).name);
-                _loc3_++;
-            }
             App.utils.asserter.assert(_loc2_.numChildren == 0,"container is not empty after dispose!");
         }
         
@@ -344,22 +338,40 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         public function showHelpLayout() : void
         {
-            var _loc1_:IHelpLayout = null;
-            var _loc2_:Object = null;
+            var _loc2_:Rectangle = null;
+            var _loc3_:Object = null;
+            var _loc4_:* = NaN;
+            var _loc5_:Rectangle = null;
+            var _loc6_:Object = null;
+            var _loc1_:IHelpLayout = App.utils.helpLayout;
             if(container)
             {
-                this._isShowHelpLayout = true;
-                _loc1_ = App.utils.helpLayout;
-                _loc2_ = _loc1_.getProps(162,102,Directions.RIGHT,LOBBY_HELP.HANGAR_VEHICLE_CAROUSEL,_defContainerPos + padding.left + padding.right,container.y,_loc1_.defConnectorLength);
-                this._rendererHelpLayout = _loc1_.create(root,_loc2_,this);
+                _loc2_ = new Rectangle(leftArrow.x,container.y,rightArrow.x - leftArrow.x,slotImageHeight);
+                _loc3_ = _loc1_.getProps(_loc2_,LOBBY_HELP.HANGAR_VEHICLE_CAROUSEL,Directions.RIGHT);
+                this._rendererHelpLayout = _loc1_.create(root,_loc3_,this);
+            }
+            if(this.vehicleFilters.visible)
+            {
+                _loc4_ = 5;
+                _loc5_ = new Rectangle(this.vehicleFilters.x - _loc4_,this.vehicleFilters.y,this.vehicleFilters.width + _loc4_ * 2,slotImageHeight);
+                _loc6_ = _loc1_.getProps(_loc5_,LOBBY_HELP.HANGAR_VEHFILTERS,Directions.RIGHT);
+                this._filtersHelpLayout = _loc1_.create(root,_loc6_,this);
             }
         }
         
         public function closeHelpLayout() : void
         {
-            this._isShowHelpLayout = false;
             var _loc1_:IHelpLayout = App.utils.helpLayout;
-            _loc1_.destroy(this._rendererHelpLayout);
+            if(this._rendererHelpLayout)
+            {
+                _loc1_.destroy(this._rendererHelpLayout);
+                this._rendererHelpLayout = null;
+            }
+            if(this._filtersHelpLayout)
+            {
+                _loc1_.destroy(this._filtersHelpLayout);
+                this._filtersHelpLayout = null;
+            }
         }
         
         public function onFilterChanged() : void
@@ -425,6 +437,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         override protected function configUI() : void
         {
             this.initFilters();
+            leftArrow.mouseEnabledOnDisabled = rightArrow.mouseEnabledOnDisabled = true;
+            leftArrow.addEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel,false,0,true);
+            rightArrow.addEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel,false,0,true);
             super.configUI();
         }
         
@@ -442,6 +457,10 @@ package net.wg.gui.lobby.hangar.tcarousel
             if((isInvalid(InvalidationType.RENDERERS)) && !(this._updateShowByCompactDescription == null))
             {
                 clearAllAnimIntervals();
+                if(isDragging)
+                {
+                    clearDragProps();
+                }
                 _loc1_ = 0;
                 _loc2_ = 0;
                 _loc3_ = 0;
@@ -522,7 +541,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         override protected function handleMouseWheel(param1:MouseEvent) : void
         {
-            if((enabled) && (allowDrag) && (dragHitArea.hitTestPoint(stage.mouseX,stage.mouseY)) && !isPreDragging)
+            if((enabled) && (allowDrag) && !isPreDragging && !(param1.target == bg))
             {
                 super.handleMouseWheel(param1);
             }
@@ -618,7 +637,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             else if(param1.buttonIdx == 1 && !_loc2_.buyTank && !_loc2_.buySlot)
             {
-                this.showContextMenu(_loc2_);
+                this.showContextMenu(_loc2_.inventoryId);
             }
             
         }
@@ -796,10 +815,12 @@ package net.wg.gui.lobby.hangar.tcarousel
         }
     }
     
-    private function showContextMenu(param1:VehicleCarouselVO) : void
+    private function showContextMenu(param1:Number) : void
     {
-        var _loc2_:String = !param1.favorite?"vehicleCheck":"vehicleUncheck";
-        App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("vehicleInfo"),new UserContextItem(SHOW_VEHICLE_STATS,{"enabled":App.contextMenuMgr.vehicleWasInBattle(param1.compactDescr)}),new SeparateItem(),new UserContextItem("vehicleSell",{"enabled":param1.canSell}),new SeparateItem(),new UserContextItem("vehicleResearch"),new UserContextItem(_loc2_)]),this,this.onContectMenuItemSelect,param1);
+        var _loc2_:Object = App.contextMenuMgr.getContextMenuVehicleDataByInvCD(param1);
+        var _loc3_:ContextMenuVehicleVo = new ContextMenuVehicleVo(_loc2_);
+        _loc3_.component = VehicleContextMenuGenerator.COMPONENT_HANGAR;
+        App.contextMenuMgr.showVehicleContextMenu(this,_loc3_,new VehicleContextMenuGenerator());
     }
     
     private function rebuildRenderers() : void
@@ -1094,32 +1115,6 @@ package net.wg.gui.lobby.hangar.tcarousel
     {
         this.filterData.nation = param1.itemData.data;
         this.onFilterChanged();
-    }
-    
-    private function onContectMenuItemSelect(param1:ContextMenuEvent) : void
-    {
-        var _loc2_:Object = param1.memberItemData;
-        switch(param1.id)
-        {
-            case "vehicleInfo":
-                showVehicleInfoS(_loc2_.id);
-                break;
-            case "vehicleSell":
-                vehicleSellS(_loc2_.inventoryId);
-                break;
-            case "vehicleResearch":
-                toResearchS(_loc2_.compactDescr);
-                break;
-            case "vehicleCheck":
-                favoriteVehicleS(_loc2_.id,true);
-                break;
-            case "vehicleUncheck":
-                favoriteVehicleS(_loc2_.id,false);
-                break;
-            case SHOW_VEHICLE_STATS:
-                showVehicleStatsS(_loc2_.compactDescr);
-                break;
-        }
     }
     
     override protected function onDispose() : void

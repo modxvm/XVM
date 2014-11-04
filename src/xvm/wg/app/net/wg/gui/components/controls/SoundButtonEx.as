@@ -7,6 +7,8 @@ package net.wg.gui.components.controls
     import flash.display.MovieClip;
     import scaleform.clik.utils.Constraints;
     import flash.events.MouseEvent;
+    import net.wg.utils.IHelpLayout;
+    import flash.geom.Rectangle;
     import net.wg.gui.events.StateManagerEvent;
     import scaleform.clik.events.ComponentEvent;
     import scaleform.clik.utils.ConstrainedElement;
@@ -186,175 +188,170 @@ package net.wg.gui.components.controls
             var _loc1_:Object = null;
             if(this._helpText.length > 0)
             {
-                _loc1_ = this.getParamsForHelpLayout(this._helpDirection,this._helpText,this._helpConnectorLength);
+                _loc1_ = this.getParamsForHelpLayout(this._helpText,this._helpDirection);
                 this.setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
             }
         }
         
-        protected function getParamsForHelpLayout(param1:String, param2:String, param3:Number) : Object
+        protected function getParamsForHelpLayout(param1:String, param2:String) : Object
         {
-            return {"borderWidth":width,
-            "borderHeight":height,
-            "direction":param1,
-            "text":param2,
-            "x":0,
-            "y":0,
-            "connectorLength":param3
-        };
-    }
-    
-    public function closeHelpLayout() : void
-    {
-        if(this.getHelpLayout() != null)
-        {
-            App.utils.helpLayout.destroy(this.getHelpLayout());
+            var _loc3_:IHelpLayout = App.utils.helpLayout;
+            var _loc4_:Rectangle = new Rectangle(0,0,width,height);
+            return _loc3_.getProps(_loc4_,param1,param2);
         }
-    }
-    
-    protected function getHelpLayout() : DisplayObject
-    {
-        return this._helpLayout;
-    }
-    
-    protected function setHelpLayout(param1:DisplayObject) : void
-    {
-        this._helpLayout = param1;
-    }
-    
-    override protected function updateAfterStateChange() : void
-    {
-        if(!initialized)
+        
+        public function closeHelpLayout() : void
         {
-            return;
-        }
-        if(!(constraints == null) && !constraintsDisabled)
-        {
-            if(textField != null)
+            if(this.getHelpLayout() != null)
             {
-                constraints.updateElement("textField",textField);
-            }
-            if(this.textField1 != null)
-            {
-                constraints.updateElement("textField1",this.textField1);
+                App.utils.helpLayout.destroy(this.getHelpLayout());
             }
         }
-        dispatchEvent(new StateManagerEvent(ComponentEvent.STATE_CHANGE,state));
-    }
-    
-    protected function updateDisable() : void
-    {
-        if(this.disableMc != null)
+        
+        protected function getHelpLayout() : DisplayObject
         {
-            this.disableMc.x = this.disabledFillPadding.left;
-            this.disableMc.y = this.disabledFillPadding.top;
-            this.disableMc.scaleX = 1 / this.scaleX;
-            this.disableMc.scaleY = 1 / this.scaleY;
-            this.disableMc.widthFill = Math.round(this.bgMc.width * this.scaleX) - this.disabledFillPadding.horizontal;
-            this.disableMc.heightFill = Math.round(this.bgMc.height * this.scaleY) - this.disabledFillPadding.vertical;
-            this.disableMc.visible = !enabled;
+            return this._helpLayout;
         }
-    }
-    
-    public function set inspectableDisabledFillPadding(param1:Object) : void
-    {
-        if(!componentInspectorSetting)
+        
+        protected function setHelpLayout(param1:DisplayObject) : void
         {
-            return;
+            this._helpLayout = param1;
         }
-        this.disabledFillPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
-    }
-    
-    public function get disabledFillPadding() : Padding
-    {
-        return this._disabledFillPadding;
-    }
-    
-    public function set disabledFillPadding(param1:Padding) : void
-    {
-        this._disabledFillPadding = param1;
-    }
-    
-    public function get paddingHorizontal() : Number
-    {
-        return this._paddingHorizontal;
-    }
-    
-    public function set paddingHorizontal(param1:Number) : void
-    {
-        this._paddingHorizontal = param1;
-        if(!(autoSize == "none") && !(textField == null) && (initialized))
+        
+        override protected function updateAfterStateChange() : void
         {
-            _width = width = this.calculateWidth();
-        }
-        this.updateAfterStateChange();
-    }
-    
-    override protected function calculateWidth() : Number
-    {
-        var _loc2_:* = NaN;
-        var _loc3_:ConstrainedElement = null;
-        var _loc1_:Number = actualWidth;
-        if(!constraintsDisabled)
-        {
-            _loc2_ = 0;
-            if(autoSize != "none")
-            {
-                _loc2_ = this._paddingHorizontal;
-            }
-            _loc3_ = constraints.getElement("textField");
-            _loc1_ = Math.ceil(textField.textWidth + _loc3_.left + _loc3_.right + 5 + _loc2_ * 2);
-        }
-        return _loc1_;
-    }
-    
-    override public function toString() : String
-    {
-        return "[WG SoundButtonEx " + name + "]";
-    }
-    
-    override protected function draw() : void
-    {
-        if(isInvalid(InvalidationType.STATE))
-        {
-            if(_newFrame)
-            {
-                gotoAndPlay(_newFrame);
-                _newFrame = null;
-            }
-            if((focusIndicator) && (_newFocusIndicatorFrame))
-            {
-                focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
-                _newFocusIndicatorFrame = null;
-            }
-            if(_baseDisposed)
+            if(!initialized)
             {
                 return;
             }
+            if(!(constraints == null) && !constraintsDisabled)
+            {
+                if(textField != null)
+                {
+                    constraints.updateElement("textField",textField);
+                }
+                if(this.textField1 != null)
+                {
+                    constraints.updateElement("textField1",this.textField1);
+                }
+            }
+            dispatchEvent(new StateManagerEvent(ComponentEvent.STATE_CHANGE,state));
+        }
+        
+        protected function updateDisable() : void
+        {
+            if(this.disableMc != null)
+            {
+                this.disableMc.x = this.disabledFillPadding.left;
+                this.disableMc.y = this.disabledFillPadding.top;
+                this.disableMc.scaleX = 1 / this.scaleX;
+                this.disableMc.scaleY = 1 / this.scaleY;
+                this.disableMc.widthFill = Math.round(this.bgMc.width * this.scaleX) - this.disabledFillPadding.horizontal;
+                this.disableMc.heightFill = Math.round(this.bgMc.height * this.scaleY) - this.disabledFillPadding.vertical;
+                this.disableMc.visible = !enabled;
+            }
+        }
+        
+        public function set inspectableDisabledFillPadding(param1:Object) : void
+        {
+            if(!componentInspectorSetting)
+            {
+                return;
+            }
+            this.disabledFillPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
+        }
+        
+        public function get disabledFillPadding() : Padding
+        {
+            return this._disabledFillPadding;
+        }
+        
+        public function set disabledFillPadding(param1:Padding) : void
+        {
+            this._disabledFillPadding = param1;
+        }
+        
+        public function get paddingHorizontal() : Number
+        {
+            return this._paddingHorizontal;
+        }
+        
+        public function set paddingHorizontal(param1:Number) : void
+        {
+            this._paddingHorizontal = param1;
+            if(!(autoSize == "none") && !(textField == null) && (initialized))
+            {
+                _width = width = this.calculateWidth();
+            }
             this.updateAfterStateChange();
-            dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
-            invalidate(InvalidationType.DATA,InvalidationType.SIZE);
         }
-        if(isInvalid(InvalidationType.DATA))
+        
+        override protected function calculateWidth() : Number
         {
-            this.updateText();
-            if(autoSize != TextFieldAutoSize.NONE)
-            {
-                invalidateSize();
-            }
-        }
-        if(isInvalid(InvalidationType.SIZE))
-        {
-            if(!preventAutosizing)
-            {
-                alignForAutoSize();
-                setActualSize(_width,_height);
-            }
+            var _loc2_:* = NaN;
+            var _loc3_:ConstrainedElement = null;
+            var _loc1_:Number = actualWidth;
             if(!constraintsDisabled)
             {
-                constraints.update(_width,_height);
+                _loc2_ = 0;
+                if(autoSize != "none")
+                {
+                    _loc2_ = this._paddingHorizontal;
+                }
+                _loc3_ = constraints.getElement("textField");
+                _loc1_ = Math.ceil(textField.textWidth + _loc3_.left + _loc3_.right + 5 + _loc2_ * 2);
             }
+            return _loc1_;
         }
-        this.updateDisable();
+        
+        override public function toString() : String
+        {
+            return "[WG SoundButtonEx " + name + "]";
+        }
+        
+        override protected function draw() : void
+        {
+            if(isInvalid(InvalidationType.STATE))
+            {
+                if(_newFrame)
+                {
+                    gotoAndPlay(_newFrame);
+                    _newFrame = null;
+                }
+                if((focusIndicator) && (_newFocusIndicatorFrame))
+                {
+                    focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
+                    _newFocusIndicatorFrame = null;
+                }
+                if(_baseDisposed)
+                {
+                    return;
+                }
+                this.updateAfterStateChange();
+                dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
+                invalidate(InvalidationType.DATA,InvalidationType.SIZE);
+            }
+            if(isInvalid(InvalidationType.DATA))
+            {
+                this.updateText();
+                if(autoSize != TextFieldAutoSize.NONE)
+                {
+                    invalidateSize();
+                }
+            }
+            if(isInvalid(InvalidationType.SIZE))
+            {
+                if(!preventAutosizing)
+                {
+                    alignForAutoSize();
+                    setActualSize(_width,_height);
+                }
+                if(!constraintsDisabled)
+                {
+                    constraints.update(_width,_height);
+                }
+            }
+            this.updateDisable();
+        }
     }
-}
 }

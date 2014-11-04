@@ -347,7 +347,6 @@ package scaleform.clik.controls
         {
             if(this.textField == null)
             {
-                trace(">>> Error :: " + this + ", textField is NULL.");
                 return;
             }
             this.updateText();
@@ -461,7 +460,7 @@ package scaleform.clik.controls
                     {
                         if(FocusManager.getFocus(_loc2_) == this)
                         {
-                            App.utils.scheduler.envokeInNextFrame(FocusManager.setFocus,this.textField,_loc2_);
+                            App.utils.scheduler.envokeInNextFrame(this.trySetFocus,_loc2_);
                         }
                         _loc2_++;
                     }
@@ -470,6 +469,14 @@ package scaleform.clik.controls
                 {
                     stage.focus = this.textField;
                 }
+            }
+        }
+        
+        private function trySetFocus(param1:int) : void
+        {
+            if(hasFocus)
+            {
+                FocusManager.setFocus(this.textField,param1);
             }
         }
         

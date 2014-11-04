@@ -2,6 +2,7 @@ package net.wg.gui.components.controls
 {
     import flash.display.Loader;
     import flash.net.URLRequest;
+    import scaleform.clik.constants.InvalidationType;
     import flash.display.LoaderInfo;
     import flash.events.Event;
     import flash.events.IOErrorEvent;
@@ -124,6 +125,11 @@ package net.wg.gui.components.controls
                 this.arrangeLayout = false;
                 this.configIcon();
             }
+            else if(isInvalid(InvalidationType.SIZE))
+            {
+                this.configIcon();
+            }
+            
         }
         
         protected function addIconListeners(param1:LoaderInfo) : void
@@ -136,8 +142,8 @@ package net.wg.gui.components.controls
         {
             if(this.loader)
             {
-                this.loader.x = this._iconOffsetLeft;
-                this.loader.y = this._iconOffsetTop;
+                this.loader.x = this._iconOffsetLeft * 1 / this.scaleX;
+                this.loader.y = this._iconOffsetTop * 1 / this.scaleY;
                 this.loader.tabEnabled = this.loader.mouseEnabled = false;
                 this.loader.visible = true;
                 this.loader.scaleX = 1 / this.scaleX;

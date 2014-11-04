@@ -195,10 +195,9 @@ package net.wg.gui.components.controls
         
         protected function updateRangeThumbs() : void
         {
-            var _loc3_:* = NaN;
             var _loc1_:Number = track.width - offsetLeft - offsetRight;
             var _loc2_:Number = _maximum - _minimum;
-            _loc3_ = offsetLeft - thumb.width / 2;
+            var _loc3_:Number = offsetLeft - thumb.width / 2;
             this.leftThumb.x = (this._leftValue - _minimum) / _loc2_ * _loc1_ + _loc3_ ^ 0;
             this.rightThumb.x = (this._rightValue - _minimum) / _loc2_ * _loc1_ + _loc3_ ^ 0;
             var _loc4_:Number = (this._leftValue - _minimum) / (_maximum - _minimum);

@@ -42,6 +42,7 @@ package net.wg.gui.lobby.customization
         
         override protected function onDispose() : void
         {
+            this.timeSectionLabel = null;
             this.clearData();
             super.onDispose();
         }

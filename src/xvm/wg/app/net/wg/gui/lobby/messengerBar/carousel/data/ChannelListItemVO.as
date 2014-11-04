@@ -30,7 +30,11 @@ package net.wg.gui.lobby.messengerBar.carousel.data
         
         private var _readyData:Object;
         
-        private var _readyDataVO:ReadyData;
+        private var _readyDataVO:ReadyDataVO;
+        
+        private var _tooltipDataVO:TooltipDataVO;
+        
+        private var _tooltipData:Object;
         
         public function get clientID() : Number
         {
@@ -90,8 +94,13 @@ package net.wg.gui.lobby.messengerBar.carousel.data
             }
             if(param1 == "readyData" && (param2))
             {
-                this._readyDataVO = new ReadyData(param2);
+                this._readyDataVO = new ReadyDataVO(param2);
             }
+            else if(param1 == "tooltipData" && (param2))
+            {
+                this._tooltipDataVO = new TooltipDataVO(param2);
+            }
+            
             return super.onDataWrite(param1,param2);
         }
         
@@ -135,9 +144,24 @@ package net.wg.gui.lobby.messengerBar.carousel.data
             this._readyData = param1;
         }
         
-        public function get readyDataVO() : ReadyData
+        public function get readyDataVO() : ReadyDataVO
         {
             return this._readyDataVO;
+        }
+        
+        public function get tooltipData() : Object
+        {
+            return this._tooltipData;
+        }
+        
+        public function set tooltipData(param1:Object) : void
+        {
+            this._tooltipData = param1;
+        }
+        
+        public function get tooltipDataVO() : TooltipDataVO
+        {
+            return this._tooltipDataVO;
         }
     }
 }

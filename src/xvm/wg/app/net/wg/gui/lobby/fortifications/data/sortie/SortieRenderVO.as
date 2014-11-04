@@ -27,14 +27,9 @@ package net.wg.gui.lobby.fortifications.data.sortie
         
         public var color:int = -1;
         
-        private var _rallyIndex:Number = -1;
-        
         public var igrType:int = -1;
         
-        public function set rallyIndex(param1:Number) : void
-        {
-            this._rallyIndex = param1;
-        }
+        private var _rallyIndex:Number = -1;
         
         public function get peripheryID() : Number
         {
@@ -49,6 +44,11 @@ package net.wg.gui.lobby.fortifications.data.sortie
         public function get rallyIndex() : Number
         {
             return this._rallyIndex;
+        }
+        
+        public function set rallyIndex(param1:Number) : void
+        {
+            this._rallyIndex = param1;
         }
     }
 }

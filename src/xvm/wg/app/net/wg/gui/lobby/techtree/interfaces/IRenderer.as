@@ -82,6 +82,8 @@ package net.wg.gui.lobby.techtree.interfaces
         
         function isAvailable4Sell() : Boolean;
         
+        function isRented() : Boolean;
+        
         function isActionEnabled() : Boolean;
         
         function isButtonVisible() : Boolean;

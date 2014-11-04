@@ -10,8 +10,6 @@ package net.wg.gui.lobby.fortifications.data
             super(param1);
         }
         
-        private var _clanIconId:String = "";
-        
         private var _clanName:String = "";
         
         private var _defResText:String = "";
@@ -38,16 +36,6 @@ package net.wg.gui.lobby.fortifications.data
         public function set levelTitle(param1:String) : void
         {
             this._levelTitle = param1;
-        }
-        
-        public function get clanIconId() : String
-        {
-            return this._clanIconId;
-        }
-        
-        public function set clanIconId(param1:String) : void
-        {
-            this._clanIconId = param1;
         }
         
         public function get clanName() : String

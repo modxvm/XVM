@@ -662,6 +662,14 @@ package
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_LOOTING_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_LOOTING + "/body";
         
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_ATTACKS_HEADER:String = "#profile:profile/params/tooltip/fortBattles/attacks/header";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_ATTACKS_BODY:String = "#profile:profile/params/tooltip/fortBattles/attacks/body";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_DEFENCES_HEADER:String = "#profile:profile/params/tooltip/fortBattles/defences/header";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_DEFENCES_BODY:String = "#profile:profile/params/tooltip/fortBattles/defences/body";
+        
         public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency/header";
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency/body";

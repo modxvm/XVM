@@ -141,8 +141,12 @@ package net.wg.gui.lobby.battleResults
                 this.positionBlock(this.xpSplitLine,this.resHeader,[this.resHeader,this.resTitle,this.resLbl,this.resValuesLbl,this.resPremValuesLbl,this.resSplitLine]);
                 this.populateResource(_loc1_.personal.resourceData);
                 height = this.fakeBg.height = this.resSplitLine.y + this.resSplitLine.height + BLOCK_PADDING;
-                dispatchEvent(new Event(Event.RESIZE));
             }
+            else
+            {
+                height = this.fakeBg.height = this.xpSplitLine.y + this.xpSplitLine.height;
+            }
+            dispatchEvent(new Event(Event.RESIZE));
         }
         
         override protected function onDispose() : void

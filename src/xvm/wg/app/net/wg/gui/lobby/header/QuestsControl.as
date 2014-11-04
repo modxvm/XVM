@@ -3,14 +3,19 @@ package net.wg.gui.lobby.header
     import net.wg.infrastructure.base.meta.impl.QuestsControlMeta;
     import net.wg.infrastructure.base.meta.IQuestsControlMeta;
     import net.wg.infrastructure.interfaces.IDAAPIModule;
+    import net.wg.gui.interfaces.IHelpLayoutComponent;
     import flash.display.MovieClip;
+    import flash.display.DisplayObject;
     import flash.events.MouseEvent;
     import scaleform.clik.constants.InvalidationType;
     import scaleform.clik.events.ComponentEvent;
     import net.wg.infrastructure.exceptions.base.WGGUIException;
     import net.wg.infrastructure.events.LifeCycleEvent;
+    import net.wg.utils.IHelpLayout;
+    import flash.geom.Rectangle;
+    import net.wg.data.constants.Directions;
     
-    public class QuestsControl extends QuestsControlMeta implements IQuestsControlMeta, IDAAPIModule
+    public class QuestsControl extends QuestsControlMeta implements IQuestsControlMeta, IDAAPIModule, IHelpLayoutComponent
     {
         
         public function QuestsControl()
@@ -33,6 +38,8 @@ package net.wg.gui.lobby.header
         private var _isDAAPIInited:Boolean = false;
         
         private var _hasNew:Boolean = false;
+        
+        private var _helpLayout:DisplayObject = null;
         
         public function get disposed() : Boolean
         {
@@ -69,6 +76,7 @@ package net.wg.gui.lobby.header
             removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
             removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
             this.anim = null;
+            this._helpLayout = null;
             super.onDispose();
         }
         
@@ -162,6 +170,21 @@ package net.wg.gui.lobby.header
         private function showTooltip(param1:MouseEvent) : void
         {
             App.toolTipMgr.showComplex(TOOLTIPS.QUESTS_NOTIFIER);
+        }
+        
+        public function showHelpLayout() : void
+        {
+            var _loc1_:IHelpLayout = App.utils.helpLayout;
+            var _loc2_:Rectangle = new Rectangle(7,0,this.width,this.height - 2);
+            var _loc3_:Object = _loc1_.getProps(_loc2_,LOBBY_HELP.HANGAR_QUESTSCONTROL,Directions.RIGHT);
+            this._helpLayout = _loc1_.create(this.root,_loc3_,this);
+        }
+        
+        public function closeHelpLayout() : void
+        {
+            var _loc1_:IHelpLayout = App.utils.helpLayout;
+            _loc1_.destroy(this._helpLayout);
+            this._helpLayout = null;
         }
     }
 }

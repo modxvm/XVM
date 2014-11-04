@@ -33,6 +33,8 @@ package net.wg.gui.lobby.settings
         
         public var vertSyncCheckbox:CheckBox = null;
         
+        public var tripleBufferedCheckbox:CheckBox = null;
+        
         public var aspectRatioLabel:LabelControl = null;
         
         public var aspectRatioDropDown:DropdownMenu = null;
@@ -94,7 +96,10 @@ package net.wg.gui.lobby.settings
             this.colorFilterDefaultImg.source = RES_ICONS.MAPS_ICONS_SETTINGS_COLOR_GRADING_TECHNIQUE_NONE;
             this.refreshRateDropDown.labelField = null;
             this.topShadow.mouseChildren = this.topShadow.mouseEnabled = false;
-            this.bottomShadow.mouseChildren = this.bottomShadow.mouseEnabled = false;
+            if(this.bottomShadow)
+            {
+                this.bottomShadow.mouseChildren = this.bottomShadow.mouseEnabled = false;
+            }
         }
         
         override protected function onDispose() : void
@@ -111,6 +116,7 @@ package net.wg.gui.lobby.settings
             this.aspectRatioDropDown.dispose();
             this.smoothingLabel.dispose();
             this.smoothingDropDown.dispose();
+            this.tripleBufferedCheckbox.dispose();
             this.gammaLabel.dispose();
             this.gammaSlider.dispose();
             this.colorFilterIntensityLabel.dispose();
@@ -136,6 +142,7 @@ package net.wg.gui.lobby.settings
             this.aspectRatioDropDown = null;
             this.smoothingLabel = null;
             this.smoothingDropDown = null;
+            this.tripleBufferedCheckbox = null;
             this.gammaLabel = null;
             this.gammaSlider = null;
             this.colorFilterIntensityLabel = null;

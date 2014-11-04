@@ -548,6 +548,12 @@ package
         
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ITEMS_NAME:String = "#messenger:serviceChannelMessages/battleResults/quests/items/name";
         
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_REFSYSTEMQUESTS:String = "#messenger:serviceChannelMessages/battleResults/refSystemQuests";
+        
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_REFSYSTEMBOUGHTVEHICLE:String = "#messenger:serviceChannelMessages/battleResults/refSystemBoughtVehicle";
+        
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_REFSYSTEMCONTRIBUTEXP:String = "#messenger:serviceChannelMessages/battleResults/refSystemContributeXp";
+        
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_FORTRESOURCE:String = "#messenger:serviceChannelMessages/battleResults/fortResource";
         
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_FORTBUILDING:String = "#messenger:serviceChannelMessages/battleResults/fortBuilding";
@@ -810,6 +816,8 @@ package
         
         public static var SERVICECHANNELMESSAGES_FORT_RESERVE_ACTIVATED:String = "#messenger:serviceChannelMessages/fort/RESERVE_ACTIVATED";
         
+        public static var SERVICECHANNELMESSAGES_FORT_PERMANENT_RESERVE_ACTIVATED:String = "#messenger:serviceChannelMessages/fort/PERMANENT_RESERVE_ACTIVATED";
+        
         public static var SERVICECHANNELMESSAGES_FORT_RESERVE_EXPIRED:String = "#messenger:serviceChannelMessages/fort/RESERVE_EXPIRED";
         
         public static var SERVICECHANNELMESSAGES_FORT_RESERVE_PRODUCED:String = "#messenger:serviceChannelMessages/fort/RESERVE_PRODUCED";
@@ -820,7 +828,106 @@ package
         
         public static var SERVICECHANNELMESSAGES_FORT_REATTACHED_TO_BASE:String = "#messenger:serviceChannelMessages/fort/REATTACHED_TO_BASE";
         
+        public static var SERVICECHANNELMESSAGES_FORT_DEF_HOUR_CHANGED:String = "#messenger:serviceChannelMessages/fort/DEF_HOUR_CHANGED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_DEF_HOUR_ACTIVATED:String = "#messenger:serviceChannelMessages/fort/DEF_HOUR_ACTIVATED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_OFF_DAY_ACTIVATED:String = "#messenger:serviceChannelMessages/fort/OFF_DAY_ACTIVATED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_NO_OFF_DAY_ACTIVATED:String = "#messenger:serviceChannelMessages/fort/NO_OFF_DAY_ACTIVATED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_VACATION_STARTED:String = "#messenger:serviceChannelMessages/fort/VACATION_STARTED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_PERIPHERY_CHANGED:String = "#messenger:serviceChannelMessages/fort/PERIPHERY_CHANGED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_BUILDING_DAMAGED:String = "#messenger:serviceChannelMessages/fort/BUILDING_DAMAGED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_BUILDING_DAMAGED_MILITARY_BASE:String = "#messenger:serviceChannelMessages/fort/BUILDING_DAMAGED_MILITARY_BASE";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_BASE_DESTROYED:String = "#messenger:serviceChannelMessages/fort/BASE_DESTROYED";
+        
+        public static var COMMAND_SUCCESS_USERBAN:String = "#messenger:command/success/USERBAN";
+        
+        public static var COMMAND_SUCCESS_USERUNBAN:String = "#messenger:command/success/USERUNBAN";
+        
+        public static var CHAT_ERROR_NOT_ALLOWED:String = "#messenger:chat_error/NOT_ALLOWED";
+        
+        public static var CHAT_ERROR_USER_NOT_FOUND:String = "#messenger:chat_error/USER_NOT_FOUND";
+        
+        public static var CHAT_ERROR_CANNOT_BAN_ONESELF:String = "#messenger:chat_error/CANNOT_BAN_ONESELF";
+        
+        public static var CHAT_ERROR_WRONG_ARGS:String = "#messenger:chat_error/WRONG_ARGS";
+        
+        public static var CHAT_ERROR_NOT_READY:String = "#messenger:chat_error/NOT_READY";
+        
+        public static var CHAT_ERROR_IS_BUSY:String = "#messenger:chat_error/IS_BUSY";
+        
+        public static var CHAT_ERROR_GENERIC_ERROR:String = "#messenger:chat_error/GENERIC_ERROR";
+        
+        public static var CLIENT_ERROR_COMMAND_NOT_SUPPORTED:String = "#messenger:client_error/command/not_supported";
+        
+        public static var CLIENT_ERROR_COMMAND_WRONG_BAN_TYPE:String = "#messenger:client_error/command/wrong_ban_type";
+        
+        public static var CLIENT_ERROR_COMMAND_WRONG_PLAYER_NAME:String = "#messenger:client_error/command/wrong_player_name";
+        
+        public static var CLIENT_ERROR_COMMAND_WRONG_BAN_PERIOD:String = "#messenger:client_error/command/wrong_ban_period";
+        
+        public static var CLIENT_ERROR_COMMAND_IN_COOLDOWN_WO_NAME:String = "#messenger:client_error/command/in_cooldown_wo_name";
+        
+        public static var CLIENT_ERROR_COMMAND_GENERIC_ERROR:String = "#messenger:client_error/command/generic_error";
+        
+        public static var CLIENT_ERROR_ACTION_IN_COOLDOWN:String = "#messenger:client_error/action/in_cooldown";
+        
+        public static var CLIENT_ERROR_ACTION_IN_COOLDOWN_WO_PERIOD:String = "#messenger:client_error/action/in_cooldown_wo_period";
+        
+        public static var CHAT_ACTION_BROADCAST_UNIT_MESSAGE:String = "#messenger:chat_action/BROADCAST_UNIT_MESSAGE";
+        
+        public static var CHAT_ACTION_BROADCAST_BATTLE_MESSAGE:String = "#messenger:chat_action/BROADCAST_BATTLE_MESSAGE";
+        
+        public static var CHAT_ACTION_FIND_USERS_BY_NAME:String = "#messenger:chat_action/FIND_USERS_BY_NAME";
+        
+        public static var CHAT_ACTION_GET_VOIP_CREDENTIALS:String = "#messenger:chat_action/GET_VOIP_CREDENTIALS";
+        
+        public static var COMMAND_SUCCESS_ENUM:Array = [COMMAND_SUCCESS_USERBAN,COMMAND_SUCCESS_USERUNBAN];
+        
+        public static var CHAT_ERROR_ENUM:Array = [CHAT_ERROR_NOT_ALLOWED,CHAT_ERROR_USER_NOT_FOUND,CHAT_ERROR_CANNOT_BAN_ONESELF,CHAT_ERROR_WRONG_ARGS,CHAT_ERROR_NOT_READY,CHAT_ERROR_IS_BUSY,CHAT_ERROR_GENERIC_ERROR];
+        
+        public static var CHAT_ACTION_ENUM:Array = [CHAT_ACTION_BROADCAST_UNIT_MESSAGE,CHAT_ACTION_BROADCAST_BATTLE_MESSAGE,CHAT_ACTION_FIND_USERS_BY_NAME,CHAT_ACTION_GET_VOIP_CREDENTIALS];
+        
         public static var DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_ENUM:Array = [DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_OFFLINE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_NOTREADY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_READY,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_INBATTLE,DIALOGS_SQUADCHANNEL_TOOLTIPS_STATUS_AFK];
+        
+        public static function command_success(param1:String) : String
+        {
+            var _loc2_:String = "#messenger:command/success/" + param1;
+            if(COMMAND_SUCCESS_ENUM.indexOf(_loc2_) == -1)
+            {
+                DebugUtils.LOG_WARNING("[command_success]:locale key \"" + _loc2_ + "\" was not found");
+                return null;
+            }
+            return _loc2_;
+        }
+        
+        public static function chat_error(param1:String) : String
+        {
+            var _loc2_:String = "#messenger:chat_error/" + param1;
+            if(CHAT_ERROR_ENUM.indexOf(_loc2_) == -1)
+            {
+                DebugUtils.LOG_WARNING("[chat_error]:locale key \"" + _loc2_ + "\" was not found");
+                return null;
+            }
+            return _loc2_;
+        }
+        
+        public static function chat_action(param1:String) : String
+        {
+            var _loc2_:String = "#messenger:chat_action/" + param1;
+            if(CHAT_ACTION_ENUM.indexOf(_loc2_) == -1)
+            {
+                DebugUtils.LOG_WARNING("[chat_action]:locale key \"" + _loc2_ + "\" was not found");
+                return null;
+            }
+            return _loc2_;
+        }
         
         public static function dialogs_squadchannel_tooltips_status(param1:String) : String
         {

@@ -4,8 +4,10 @@ package net.wg.gui.lobby.tankman
     import net.wg.infrastructure.interfaces.entity.IDisposable;
     import flash.display.Shape;
     import net.wg.data.constants.Linkages;
+    import net.wg.gui.interfaces.IPersonalCaseBlockTitle;
+    import flash.display.DisplayObject;
     import flash.display.MovieClip;
-    import scaleform.gfx.Extensions;
+    import net.wg.gui.components.tooltips.VO.PersonalCaseBlockItemVO;
     
     public class PersonalCaseBlocksArea extends UIComponent
     {
@@ -21,11 +23,36 @@ package net.wg.gui.lobby.tankman
         
         private static var PADDING_BETWEEN_BLOCK_TITLE:uint = 11;
         
+        private static var VERTICAL_LINE_X:int = 331;
+        
+        private static var VERTICAL_LINE_Y:int = 112;
+        
+        private static var VERTICAL_LINE_HEIGHT:int = 44;
+        
+        private static var STUDYING_FIELD:String = "studying";
+        
         private var data:Array;
         
         private var isElementsCreated:Boolean = false;
         
         private var paddingY:int = 17;
+        
+        public function setData(param1:Array) : void
+        {
+            if(!App.instance || param1 == null)
+            {
+                return;
+            }
+            this.data = param1;
+            if(this.isElementsCreated)
+            {
+                this.updateBlocks();
+            }
+            else
+            {
+                this.initializeBlocks();
+            }
+        }
         
         override protected function onDispose() : void
         {
@@ -45,23 +72,6 @@ package net.wg.gui.lobby.tankman
                 }
                 this.removeChildAt(_loc2_);
                 _loc2_--;
-            }
-        }
-        
-        public function setData(param1:Array) : void
-        {
-            if(!App.instance || param1 == null)
-            {
-                return;
-            }
-            this.data = param1;
-            if(this.isElementsCreated)
-            {
-                this.updateBlocks();
-            }
-            else
-            {
-                this.initializeBlocks();
             }
         }
         
@@ -98,42 +108,56 @@ package net.wg.gui.lobby.tankman
         
         private function createTitles(param1:Object) : void
         {
-            var _loc2_:MovieClip = this.classFactory(Linkages.PERSONAL_CASE_TITLE_BLOCK);
-            if(Extensions.isScaleform)
+            var _loc2_:IPersonalCaseBlockTitle = PersonalCaseBlockTitle(this.classFactory(Linkages.PERSONAL_CASE_TITLE_BLOCK));
+            _loc2_.setLeftText(MENU.profile_stats_blocks(param1.label));
+            var _loc3_:* = param1.label == STUDYING_FIELD;
+            var _loc4_:* = false;
+            if(_loc3_)
             {
-                _loc2_["blockName"].text = MENU.profile_stats_blocks(param1.label);
-            }
-            else
-            {
-                _loc2_["blockName"].text = param1.label;
+                _loc4_ = param1.isPremium;
+                _loc2_.premiumVehicle(param1.isPremium);
+                _loc2_.setRightText(param1.secondLabel);
             }
             _loc2_.y = this.paddingY;
-            this.addChild(_loc2_);
+            this.addChild(_loc2_ as DisplayObject);
             this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCKS;
-            this.creteRows(param1.stats);
+            this.creteRows(param1.stats,_loc3_,_loc4_);
+            this.createVerticalLine();
         }
         
-        private function creteRows(param1:Array) : void
+        private function createVerticalLine() : void
         {
-            var _loc3_:Object = null;
-            var _loc4_:PersonalCaseBlockItem = null;
-            var _loc2_:* = 0;
-            while(_loc2_ < param1.length)
+            var _loc1_:MovieClip = this.classFactory(Linkages.VERTICAL_SPLIT_LINE);
+            _loc1_.height = VERTICAL_LINE_HEIGHT;
+            _loc1_.x = VERTICAL_LINE_X;
+            _loc1_.y = VERTICAL_LINE_Y;
+            this.addChild(_loc1_);
+        }
+        
+        private function creteRows(param1:Array, param2:Boolean, param3:Boolean) : void
+        {
+            var _loc5_:Object = null;
+            var _loc6_:PersonalCaseBlockItem = null;
+            var _loc7_:PersonalCaseBlockItemVO = null;
+            var _loc4_:* = 0;
+            while(_loc4_ < param1.length)
             {
-                _loc3_ = param1[_loc2_];
-                _loc4_ = this.classFactory(Linkages.PERSONAL_CASE_BLOCK_ITEM);
-                _loc4_.setData = _loc3_;
-                _loc4_.y = this.paddingY;
-                this.addChild(_loc4_);
+                _loc5_ = param1[_loc4_];
+                _loc6_ = this.classFactory(Linkages.PERSONAL_CASE_BLOCK_ITEM);
+                _loc7_ = new PersonalCaseBlockItemVO(_loc5_);
+                _loc6_.useBlocks(param2,param3);
+                _loc6_.setData(_loc7_);
+                _loc6_.y = this.paddingY;
+                this.addChild(_loc6_);
                 this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCKS;
-                _loc2_++;
+                _loc4_++;
             }
             this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCK_TITLE;
         }
         
         private function classFactory(param1:String) : *
         {
-            return App.utils.classFactory.getComponent(param1,MovieClip);
+            return App.utils.classFactory.getComponent(param1,DisplayObject);
         }
     }
 }

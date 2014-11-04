@@ -51,7 +51,7 @@ package net.wg.gui.lobby.menu
         override protected function onPopulate() : void
         {
             var _loc1_:String = App.globalVarsMgr.isShowServerStatsS()?"":this.STATE_HIDE_SERVER_STATS;
-            _loc1_ = _loc1_ + (App.globalVarsMgr.isShowServersListS()?"":this.STATE_HIDE_SERVERS_LIST);
+            _loc1_ = _loc1_ + (App.globalVarsMgr.isChinaS()?this.STATE_HIDE_SERVERS_LIST:"");
             _loc1_ = _loc1_ == ""?this.STATE_SHOW_ALL:"hide" + _loc1_;
             this.gotoAndPlay(_loc1_);
             MovieClip(window.getBackground()).tabEnabled = false;

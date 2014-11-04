@@ -54,6 +54,8 @@ package net.wg.gui.lobby.techtree.data.vo
         
         public var extraInfo:String = null;
         
+        public var rentLeftTimeStr:String = null;
+        
         public function get earnedXP() : Number
         {
             return this._earnedXP;
@@ -84,6 +86,7 @@ package net.wg.gui.lobby.techtree.data.vo
         public function fromObject(param1:Object, param2:ILocale) : void
         {
             var _loc3_:String = null;
+            var _loc4_:String = null;
             if(param1 == null)
             {
                 return;
@@ -128,6 +131,14 @@ package net.wg.gui.lobby.techtree.data.vo
                 if(_loc3_)
                 {
                     this.extraInfo = _loc3_;
+                }
+            }
+            if(param1.hasOwnProperty("rentLeftTimeStr"))
+            {
+                _loc4_ = param1["rentLeftTimeStr"];
+                if(_loc4_)
+                {
+                    this.rentLeftTimeStr = _loc4_;
                 }
             }
             if(param1.smallIconPath != null)

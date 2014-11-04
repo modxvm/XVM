@@ -77,8 +77,8 @@ package net.wg.gui.lobby.fortifications.cmp.build.impl
             this.bgFore.y = this.shadowMC.y = -y;
             this.bgFore.setActualSize(App.appWidth,App.appHeight);
             this.shadowMC.setActualSize(App.appWidth,App.appHeight);
-            var _loc1_:Number = localToGlobal(new Point(0,0)).x;
-            this._landscapeBG.x = (App.appWidth - DEFAULT_LANDSCAPE_WIDTH >> 1) - _loc1_;
+            var _loc1_:Number = globalToLocal(new Point(0,0)).x;
+            this._landscapeBG.x = (App.appWidth - DEFAULT_LANDSCAPE_WIDTH >> 1) + _loc1_ ^ 0;
         }
         
         public function updateDirectionsMode(param1:FortModeVO) : void

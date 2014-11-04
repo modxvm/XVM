@@ -52,6 +52,8 @@ package
         
         public static var BONUSES_VEHICLES_CREWLVL:String = "#quests:bonuses/vehicles/crewLvl";
         
+        public static var BONUSES_VEHICLES_DESCRIPTION:String = "#quests:bonuses/vehicles/description";
+        
         public static var BONUSES_ITEM_TANKMENXP:String = "#quests:bonuses/item/tankmenXP";
         
         public static var BONUSES_ITEM_XPFACTOR:String = "#quests:bonuses/item/xpFactor";
@@ -69,6 +71,12 @@ package
         public static var BONUSES_ITEM_PREMIUM:String = "#quests:bonuses/item/premium";
         
         public static var BONUSES_ITEM_TASK:String = "#quests:bonuses/item/task";
+        
+        public static var BONUSES_CREDITS_DESCRIPTION:String = "#quests:bonuses/credits/description";
+        
+        public static var BONUSES_GOLD_DESCRIPTION:String = "#quests:bonuses/gold/description";
+        
+        public static var BONUSES_TANKMEN_DESCRIPTION:String = "#quests:bonuses/tankmen/description";
         
         public static var QUESTS_TITLE:String = "#quests:quests/title";
         

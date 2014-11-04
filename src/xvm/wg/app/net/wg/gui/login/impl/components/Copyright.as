@@ -3,7 +3,7 @@ package net.wg.gui.login.impl.components
     import scaleform.clik.core.UIComponent;
     import flash.display.MovieClip;
     import flash.text.TextField;
-    import net.wg.gui.components.controls.SoundButton;
+    import net.wg.gui.components.controls.SoundButtonEx;
     import flash.events.MouseEvent;
     import scaleform.clik.events.ButtonEvent;
     
@@ -19,9 +19,9 @@ package net.wg.gui.login.impl.components
         
         public var textField:TextField = null;
         
-        public var legalLink:SoundButton = null;
+        public var legalLink:SoundButtonEx = null;
         
-        private var LINK_MARGIN:Number = 5;
+        private var LINK_MARGIN:Number = 7;
         
         override protected function configUI() : void
         {
@@ -69,7 +69,7 @@ package net.wg.gui.login.impl.components
         
         private function updateLinkPosition() : void
         {
-            this.legalLink.x = this.textField.x + (this.textField.width - this.textField.textWidth >> 1) + this.textField.textWidth + this.LINK_MARGIN;
+            this.legalLink.x = Math.round(this.textField.x + (this.textField.width - this.textField.textWidth >> 1) + this.textField.textWidth + this.LINK_MARGIN);
         }
         
         public function get logos() : MovieClip

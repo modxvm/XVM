@@ -5,7 +5,6 @@ package net.wg.gui.messenger.windows
     import net.wg.gui.components.advanced.TextAreaSimple;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.ScrollBar;
-    import net.wg.gui.utils.TextFieldStyleSheet;
     import flash.text.TextField;
     import flash.events.TextEvent;
     import flash.events.MouseEvent;
@@ -36,7 +35,7 @@ package net.wg.gui.messenger.windows
         override protected function configUI() : void
         {
             super.configUI();
-            TextFieldStyleSheet.setLinkStyle(this.textArea.textField);
+            App.utils.styleSheetManager.setLinkStyle(this.textArea.textField);
             var _loc1_:TextField = this.textArea.textField;
             _loc1_.addEventListener(TextEvent.LINK,this.handleLinkClick,false,0,true);
             _loc1_.addEventListener(MouseEvent.CLICK,this.handleMouseClick,false,0,true);

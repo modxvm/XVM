@@ -7,6 +7,7 @@ package net.wg.gui.components.advanced
         
         public function SortingButtonInfo()
         {
+            this.defaultSortDirection = SortingInfo.WITHOUT_SORT;
             super();
         }
         
@@ -32,7 +33,7 @@ package net.wg.gui.components.advanced
         
         public var inverted:Boolean = false;
         
-        public var defaultSortDirection:String = "none";
+        public var defaultSortDirection:String;
         
         public var sortOrder:int = -1;
         
