@@ -1,6 +1,6 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/notification/NotificationPopUpViewer.class.asasm Application.orig-0/net/wg/gui/notification/NotificationPopUpViewer.class.asasm
---- Application.orig-0.orig/net/wg/gui/notification/NotificationPopUpViewer.class.asasm	2014-03-30 15:42:41.274519300 +0300
-+++ Application.orig-0/net/wg/gui/notification/NotificationPopUpViewer.class.asasm	2014-03-30 15:44:54.268706300 +0300
+--- Application.orig-0.orig/net/wg/gui/notification/NotificationPopUpViewer.class.asasm	2014-11-04 21:03:12 +0300
++++ Application.orig-0/net/wg/gui/notification/NotificationPopUpViewer.class.asasm	2014-11-04 21:16:15 +0300
 @@ -52,7 +52,7 @@
  
       getlocal0
@@ -27,4 +27,3 @@ diff -Naur Application.orig-0.orig/net/wg/gui/notification/NotificationPopUpView
 +      constructprop       QName(PackageNamespace(""), "popupClass"), 0
        coerce              QName(PackageNamespace("net.wg.gui.notification"), "ServiceMessagePopUp")
        setlocal            4
- 

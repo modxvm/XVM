@@ -1,6 +1,6 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm
---- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-10-25 21:48:15 +0300
-+++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-10-25 21:17:03 +0300
+--- Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class.asasm	2014-11-04 21:02:44 +0300
++++ Application.orig-0/net/wg/gui/components/controls/Carousel.class.asasm	2014-11-04 21:12:06 +0300
 @@ -63,8 +63,8 @@
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "lastDx") type QName(PackageNamespace(""), "Number") value Integer(0) end
    trait slot QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "allowDrag") type QName(PackageNamespace(""), "Boolean") value False() end
@@ -39,42 +39,6 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
        returnvoid
       end ; code
-@@ -2405,7 +2405,7 @@
- 
-       getlocal0
-       getlocal0
--      callproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim"), 0
-+      callproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim"), 0
-       initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "currentFirstRenderer")
- 
-       getlex              QName(PackageNamespace(""), "container")
-@@ -2427,7 +2427,7 @@
-     end ; body
-    end ; method
-   end ; trait
--  trait method QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim")
-+  trait method QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim")
-    method
-     refid "net.wg.gui.components.controls:Carousel/instance/net.wg.gui.components.controls:Carousel/instance/getCurrentFirstRendererOnAnim"
-     returns QName(PackageNamespace(""), "Number")
-@@ -2529,7 +2529,7 @@
-       pushscope
- 
-       getlocal0
--      callproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim"), 0
-+      callproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim"), 0
-       convert_d
-       setlocal1
- 
-@@ -2764,7 +2764,7 @@
- 
-       getlocal0
-       getlocal0
--      callproperty        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim"), 0
-+      callproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim"), 0
-       initproperty        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "currentFirstRenderer")
- 
-       getlocal0
 @@ -2819,7 +2819,7 @@
  
        getlocal0
@@ -93,16 +57,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
  L65:
        getlocal0
-@@ -2868,7 +2868,7 @@
-       getlocal0
-       findpropstrict      QName(PackageNamespace("flash.utils"), "setInterval")
-       getlocal0
--      getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "arrowSlide")
-+      getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "arrowSlide")
-       getlocal0
-       getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "INTERVAL_SPEED")
-       callproperty        QName(PackageNamespace("flash.utils"), "setInterval"), 2
-@@ -3015,14 +3015,14 @@
+@@ -3015,7 +3015,7 @@
  
        getlocal0
        pushbyte            0
@@ -111,14 +66,6 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
  
        returnvoid
       end ; code
-     end ; body
-    end ; method
-   end ; trait
--  trait method QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "arrowSlide")
-+  trait method QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "arrowSlide")
-    method
-     refid "net.wg.gui.components.controls:Carousel/instance/net.wg.gui.components.controls:Carousel/instance/arrowSlide"
-     returns QName(PackageNamespace(""), "void")
 @@ -3047,7 +3047,7 @@
        getlocal0
        getproperty         QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "maxDx")
@@ -137,15 +84,6 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        pushbyte            0
        ifne                L106
  
-@@ -3168,7 +3168,7 @@
-       setproperty         QName(PackageNamespace(""), "x")
- 
-       getlocal0
--      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.components.controls:Carousel/instance#0"), "getCurrentFirstRendererOnAnim"), 0
-+      callpropvoid        QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "getCurrentFirstRendererOnAnim"), 0
- 
-       getlocal0
-       getproperty         QName(ProtectedNamespace("net.wg.gui.components.controls:Carousel"), "_currentFirstRendererOnAnim")
 @@ -3179,7 +3179,7 @@
  
        pop
@@ -192,8 +130,8 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/controls/Carousel.class
        getproperty         QName(PackageNamespace(""), "renderersMask")
        getproperty         QName(PackageNamespace(""), "width")
 diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm Application.orig-0/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm
---- Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-10-25 21:48:41 +0300
-+++ Application.orig-0/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-10-25 21:17:49 +0300
+--- Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-11-04 21:03:00 +0300
++++ Application.orig-0/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.class.asasm	2014-11-04 21:13:57 +0300
 @@ -120,8 +120,8 @@
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_createdRendersListByCompDescr") type QName(PackageNamespace(""), "Object") value Null() end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_createdRendersListByCompDescrLength") type QName(PackageNamespace(""), "Number") value Integer(0) end
@@ -303,24 +241,6 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        callpropvoid        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "push"), 1
  
        getlocal0
-@@ -1737,7 +1737,7 @@
-       initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_updateShowByCompactDescription")
- 
-       getlocal0
--      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "showHideFilters"), 0
-+      callpropvoid        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "showHideFilters"), 0
- 
-       getlocal0
-       callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "addAdvancedSlots"), 0
-@@ -1759,7 +1759,7 @@
-       iffalse             L179
- 
-       getlocal0
--      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "showHideFilters"), 0
-+      callpropvoid        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "showHideFilters"), 0
- 
-       getlocal0
-       callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "updateEmptySlots"), 0
 @@ -2302,7 +2302,7 @@
        getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "_currentShowRendersByIndex")
        getproperty         QName(PackageNamespace(""), "length")
@@ -339,15 +259,6 @@ diff -Naur Application.orig-0.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouse
        getlex              QName(PackageNamespace("net.wg.gui.lobby.hangar.tcarousel.helper"), "VehicleCarouselVOBuilder")
        getproperty         QName(PackageNamespace(""), "instance")
        getlocal0
-@@ -2840,7 +2840,7 @@
-     end ; body
-    end ; method
-   end ; trait
--  trait method QName(PrivateNamespace(null, "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance#0"), "showHideFilters")
-+  trait method QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "showHideFilters")
-    method
-     refid "net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance/net.wg.gui.lobby.hangar.tcarousel:TankCarousel/instance/showHideFilters"
-     returns QName(PackageNamespace(""), "void")
 @@ -3937,12 +3937,12 @@
        callpropvoid        QName(ProtectedNamespace("net.wg.gui.lobby.hangar.tcarousel:TankCarousel"), "cleanUpRenderer"), 1
  
