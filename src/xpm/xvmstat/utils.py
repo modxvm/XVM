@@ -51,12 +51,12 @@ def getVehicleByHandle(handle):
     return None
 
 def getVehicleInfo(vehId):
-    from gui.BattleContext import g_battleContext
-    return g_battleContext.arenaDP.getVehicleInfo(vehId)
+    from gui.battle_control import g_sessionProvider
+    return g_sessionProvider.getCtx().getArenaDP().getVehicleInfo(vehId)
 
 def getVehicleStats(vehId):
-    from gui.BattleContext import g_battleContext
-    return g_battleContext.arenaDP.getVehicleStats(vehId)
+    from gui.battle_control import g_sessionProvider
+    return g_sessionProvider.getCtx().getArenaDP().getVehicleStats(vehId)
 
 # 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
 def compareVersions(v1, v2):
