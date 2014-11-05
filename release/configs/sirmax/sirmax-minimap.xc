@@ -49,7 +49,7 @@
   },
   "minimapAlt": {
     "$ref": { "path": "minimap" },
-    "enabled": false,
+    "enabled": true,
     "mapBackgroundImageAlpha": 50,
     "selfIconAlpha": 50,
     "cameraAlpha": 50,

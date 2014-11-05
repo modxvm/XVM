@@ -109,6 +109,7 @@ class wot.Minimap.Features
 
     private function onRefreshEvent(e)
     {
+        scaleMarkers(); // for Alt mode
         applyMajorMods();
     }
 

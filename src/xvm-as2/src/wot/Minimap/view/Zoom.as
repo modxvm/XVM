@@ -1,7 +1,8 @@
 import com.xvm.*;
 import net.wargaming.ingame.*;
+import wot.Minimap.Features;
 import wot.Minimap.MinimapProxy;
-import wot.Minimap.model.externalProxy.MapConfig;
+import wot.Minimap.model.externalProxy.*;
 
 /**
  * Handles minimap windows zoom and center positioning
@@ -118,6 +119,8 @@ class wot.Minimap.view.Zoom
     {
         var side:Number = Stage.height - MapConfig.zoomPixelsBack;
         minimap.setSize(side, side);
+        minimap.invalidateMarkers();
+        minimap.validateNow();
     }
 
     private function restoreSize():Void
