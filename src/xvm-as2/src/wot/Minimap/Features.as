@@ -87,6 +87,8 @@ class wot.Minimap.Features
 
     public function applyMajorMods():Void
     {
+        scaleMarkers();
+
         setBGMapImageAlpha();
         setPlayerIconAlpha();
 
@@ -104,7 +106,6 @@ class wot.Minimap.Features
 
     private function onRefreshEvent(e)
     {
-        scaleMarkers();
         applyMajorMods();
     }
 

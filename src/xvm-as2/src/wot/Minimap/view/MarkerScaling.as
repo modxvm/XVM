@@ -5,8 +5,6 @@ import wot.Minimap.model.externalProxy.*;
 class wot.Minimap.view.MarkerScaling
 {
 
-    private static var ORIGINAL_MARKERS_SCALING_FACTOR:Number = 0.5;
-
     public function MarkerScaling()
     {
         /**
@@ -36,7 +34,7 @@ class wot.Minimap.view.MarkerScaling
     private function scaleAllMarkersToOriginalSizes():Void
     {
         /** Original WG scaling behaviour invocation */
-        MinimapProxy.base.scaleMarkers(ORIGINAL_MARKERS_SCALING_FACTOR);
+        MinimapProxy.base.scaleMarkers(net.wargaming.ingame.Minimap.MARKERS_SCALING);
     }
 
     private function alternateVehicleScaling():Void
@@ -77,7 +75,7 @@ class wot.Minimap.view.MarkerScaling
          * TODO: can be fixed by detaching attachments to separate MovieClips
          * plus displacing onEnterFrame()
          */
-        //rescaleAttachments();
+        rescaleAttachments();
     }
 
     private function rescaleAttachments():Void
