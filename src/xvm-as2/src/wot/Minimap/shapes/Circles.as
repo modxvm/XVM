@@ -276,6 +276,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     private function onStereoscopeToggled(event)
     {
+        //Logger.add("onStereoscopeToggled: " + event.value);
+
         // workaround for stereoscope
         if (stereoscope_exists == false && event.value == true)
             stereoscope_exists = true;

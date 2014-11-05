@@ -33,9 +33,8 @@ class wot.battle.BattleMain
         TweenPlugin.activate([TintPlugin]);
 
         instance = new BattleMain();
-        gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
-        gfx.io.GameDelegate.addCallBack("battle.consumablesPanel.setCoolDownTime", instance, "setCoolDownTime");
+        gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
 
         gfx.io.GameDelegate.addCallBack("battle.damagePanel.setMaxHealth", instance, "setMaxHealth");
         gfx.io.GameDelegate.addCallBack("battle.damagePanel.updateHealth", instance, "updateHealth");
@@ -46,6 +45,10 @@ class wot.battle.BattleMain
         ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATE, instance, instance.onBattleStateChanged);
         ExternalInterface.addCallback(Cmd.RESPOND_MARKSONGUN, instance, instance.onMarksOnGun);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
+
+        // TODO: ditry hack
+        _root.consumablesPanel.setCoolDownTime_x = _root.consumablesPanel.setCoolDownTime;
+        _root.consumablesPanel.setCoolDownTime = instance.setCoolDownTime;
     }
 
     private static function BattleMainConfigLoaded()
@@ -96,7 +99,8 @@ class wot.battle.BattleMain
 
     function setCoolDownTime(idx, timeRemaining)
     {
-        _root.consumablesPanel.setCoolDownTime(idx, timeRemaining);
+        //Logger.add("setCoolDownTime: " + idx);
+        _root.consumablesPanel.setCoolDownTime_x(idx, timeRemaining);
         var renderer = _root.consumablesPanel.getRendererBySlotIdx(idx);
         if (renderer.iconPath.indexOf("/stereoscope.") > 0)
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
