@@ -98,17 +98,13 @@ class wot.StatisticForm.BattleStatItemRenderer
     // override
     function updateDataImpl()
     {
-        //Logger.add("updateData()");
+        //Logger.add("updateData");
 
         if (!wrapper.data)
         {
             base.updateData();
             return;
         }
-
-        var dlg = _root.statsDialog;
-        if (dlg == null)
-            return;
 
         var name = Utils.GetPlayerName(wrapper.data.label);
         var saved_icon = wrapper.data.icon;
@@ -117,7 +113,6 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.col3.condenseWhite = !Config.networkServicesSettings.servicesActive || !Stat.s_loaded;
 
         // Add data for Win Chance calculation
-        //Logger.add(dlg.visible);
         //Logger.addObject(wrapper.data);
         if (Config.networkServicesSettings.statBattle)
         {
@@ -165,6 +160,7 @@ class wot.StatisticForm.BattleStatItemRenderer
     // override
     function updateStateImpl()
     {
+        //Logger.add("updateState");
         base.updateState();
 
         if (Config.config.battle.highlightVehicleIcon == false && (wrapper.selected || wrapper.data.squad > 10))

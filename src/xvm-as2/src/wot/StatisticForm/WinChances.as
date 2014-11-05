@@ -9,11 +9,13 @@ class wot.StatisticForm.WinChances
     {
         //Logger.add("showWinChances()");
 
-        if (!_root.statsDialog)
-            return;
-
         if (!s_chanceField)
         {
+            if (!_root.statsDialog)
+            {
+                //Logger.addObject(_root); // debug
+                return;
+            }
             s_chanceField = Utils.duplicateTextField(_root.statsDialog, "battleText", _root.statsDialog.battleText, 20, "center");
             s_chanceField._width += 300;
             s_chanceField._x -= 150;

@@ -55,8 +55,8 @@ class com.xvm.Chance
             //text += Locale.get("Team strength") + ": " + FormatChangeText("", chG);
             if (showLive)
             {
-                var chX1 = GetChance(ChanceFuncX1);
-                text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1);
+                var chLive = GetChance(ChanceFuncLive);
+                text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chLive);
             }
         }
         if (showBattleTier)
@@ -70,8 +70,7 @@ class com.xvm.Chance
     }
 
     // PRIVATE
-    private static var _x1Logged = false;
-    private static var _x2Logged = false;
+    private static var _LiveLogged = false;
     private static function GetChance(chanceFunc: Function): Object
     {
         var Ka = 0;
@@ -98,15 +97,10 @@ class com.xvm.Chance
 /*
         if (DEBUG_EXP)
         {
-            if (!_x1Logged && chanceFunc == ChanceFuncX1)
+            if (!_LiveLogged && chanceFunc == ChanceFuncLive)
             {
-                _x1Logged = true;
-                Logger.add("X1: K = " + Ka + " / " + Ke + " => " + String(Math.round((Ka / (Ka + Ke) * 1000)) / 10) + "%");
-            }
-            else if (!_x2Logged && chanceFunc == ChanceFuncX2)
-            {
-                _x2Logged = true;
-                Logger.add("X2: K = " + Ka + " / " + Ke + " => " + String(Math.round((Ka / (Ka + Ke) * 1000)) / 10) + "%");
+                _LiveLogged = true;
+                Logger.add("Live: K = " + Ka + " / " + Ke + " => " + String(Math.round((Ka / (Ka + Ke) * 1000)) / 10) + "%");
             }
         }
 */
@@ -194,7 +188,7 @@ class com.xvm.Chance
     }
     */
 
-    private static function ChanceFuncX1(vdata:VehicleData, stat:StatData, battleStateData:BattleStateData):Number
+    private static function ChanceFuncLive(vdata:VehicleData, stat:StatData, battleStateData:BattleStateData):Number
     {
         if (battleStateData.dead == true)
             return 0;
@@ -228,56 +222,6 @@ class com.xvm.Chance
         // 5
         return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
     }
-
-    /*
-    private static function ChanceFuncX2(vdata:VehicleData, stat, battleStateData:BattleStateData):Number
-    {
-        if (stat.alive == false)
-            return 0;
-
-        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
-
-        var Tmin = vdata.tierLo;
-        var Tmax = vdata.tierHi;
-        var T = battleTier;
-        var Bt = stat.tb || 0;
-        var Et = stat.teff || 0;
-        var Rt = stat.tr || 0;
-        var AvgW = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
-        var Ea = stat.xwn8 == null ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
-        var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
-        var Ra = stat.r || Config.config.consts.AVG_GWR;
-        var Ba = stat.b || Config.config.consts.AVG_BATTLES;
-
-        // 1
-        var Klvl = (Tmax + Tmin) / 2 - T;
-
-        // 2
-        var Ktb = (Bt <= 50) ? 0                           //    0..50  => 0
-            : (Bt <= 500) ? (Bt - 50) / 1000               //  51..500  => 0..0.45
-            : (Bt <= 1000) ? 0.45 + (Bt - 500) / 2000      //  501..1000 => 0.45..0.7
-            : (Bt <= 2000) ? 0.7 + (Bt - 1000) / 4000      // 1001..2000 => 0.7..0.95
-            : 0.95 + (Bt - 2000) / 8000;                   // 2000..     => 0.95..
-        var Kab = (Ba <= 500) ? 0                          //   0..0.5k  => 0
-            : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
-            : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
-            : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
-            : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
-
-        // 3
-        var Krt = (100 + Rt - AvgW) / 100;
-        var Kra = (100 + Ra - 48.5) / 100;
-
-        // 4
-        var Eb = (Et > 0)
-            ? (((3 / 5 * (Et / 20) * Krt) * (Krt + Ktb)) +
-                ((2 / 5 * Ean * Kra) * (Kra + Kab))) * (Kra + 0.25 * Klvl)
-            : ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
-
-        // 5
-        return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
-    }
-    */
 
     // return: { ally: Number, enemy: Number }
     private static function CalculateTeamPlayersCount(): Object
