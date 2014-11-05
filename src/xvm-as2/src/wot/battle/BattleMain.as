@@ -47,6 +47,8 @@ class wot.battle.BattleMain
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
 
         // TODO: ditry hack
+        _root.consumablesPanel.addOptionalDeviceSlot_x = _root.consumablesPanel.addOptionalDeviceSlot;
+        _root.consumablesPanel.addOptionalDeviceSlot = instance.addOptionalDeviceSlot;
         _root.consumablesPanel.setCoolDownTime_x = _root.consumablesPanel.setCoolDownTime;
         _root.consumablesPanel.setCoolDownTime = instance.setCoolDownTime;
     }
@@ -97,10 +99,18 @@ class wot.battle.BattleMain
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_STAGE, width: width, height: height });
     }
 
+    function addOptionalDeviceSlot(idx, timeRemaining, deviceIconPath, tooltipText)
+    {
+        //Logger.add("addOptionalDeviceSlot: " + deviceIconPath);
+        _root.consumablesPanel.addOptionalDeviceSlot_x.apply(_root.consumablesPanel, arguments);
+        if (deviceIconPath.indexOf("/stereoscope.") > 0)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
+    }
+
     function setCoolDownTime(idx, timeRemaining)
     {
         //Logger.add("setCoolDownTime: " + idx);
-        _root.consumablesPanel.setCoolDownTime_x(idx, timeRemaining);
+        _root.consumablesPanel.setCoolDownTime_x.apply(_root.consumablesPanel, arguments);
         var renderer = _root.consumablesPanel.getRendererBySlotIdx(idx);
         if (renderer.iconPath.indexOf("/stereoscope.") > 0)
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_STEREOSCOPE_TOGGLED, value: timeRemaining != 0 } );
