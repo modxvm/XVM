@@ -91,9 +91,9 @@ package net.wg.gui.components.common.serverStats
         override protected function draw() : void
         {
             super.draw();
-            if((isInvalid(InvalidationType.SIZE)) && (this._relativelyOwner))
+            if((isInvalid(InvalidationType.SIZE)) && (this.relativelyOwner))
             {
-                this.x = this._relativelyOwner.x + (this._relativelyOwner.width - this.hitMc.width >> 1) ^ 0;
+                this.x = this.relativelyOwner.x + (this.relativelyOwner.width - this.hitMc.width >> 1) ^ 0;
             }
         }
         

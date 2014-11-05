@@ -8,8 +8,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
     import flash.events.Event;
     import scaleform.clik.utils.Padding;
     import flash.display.InteractiveObject;
-    import net.wg.utils.ILocale;
     import net.wg.gui.components.windows.Window;
+    import net.wg.utils.ILocale;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.components.controls.VO.ActionPriceVO;
     import flash.filters.DropShadowFilter;
@@ -74,6 +74,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
         private var isTotalResultChanged:Boolean;
         
         private var selectedRentId:int = -1;
+        
+        private var _isSubmitBtnEnabled:Boolean = true;
         
         override public function setWindow(param1:IWindow) : void
         {
@@ -154,7 +156,6 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         override protected function configUI() : void
         {
-            var _loc1_:ILocale = null;
             super.configUI();
             goldColor = this.footerMc.totalGoldPrice.textColor;
             creditsColor = this.footerMc.totalCreditsPrice.textColor;
@@ -169,7 +170,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
                 (window as Window).validateNow();
             }
             this.animManager = new VehicleBuyWindowAnimManager(this);
-            _loc1_ = App.utils.locale;
+            this.headerMc.rentIcon.visible = false;
+            var _loc1_:ILocale = App.utils.locale;
             this.footerMc.submitBtn.label = _loc1_.makeString(DIALOGS.BUYVEHICLEDIALOG_SUBMITBTN);
             this.footerMc.cancelBtn.label = _loc1_.makeString(DIALOGS.BUYVEHICLEDIALOG_CANCELBTN);
             this.footerMc.expandBtn.addEventListener(ButtonEvent.CLICK,this.expandButtonClickHandler,false,0,true);
@@ -184,7 +186,6 @@ package net.wg.gui.lobby.vehicleBuyWindow
         
         override protected function draw() : void
         {
-            var _loc1_:ILocale = null;
             var _loc2_:* = 0;
             var _loc3_:* = 0;
             var _loc4_:Object = null;
@@ -192,9 +193,10 @@ package net.wg.gui.lobby.vehicleBuyWindow
             var _loc6_:ActionPriceVO = null;
             var _loc7_:ActionPriceVO = null;
             var _loc8_:DropShadowFilter = null;
-            var _loc9_:* = NaN;
+            var _loc9_:Object = null;
             var _loc10_:* = NaN;
-            var _loc11_:* = false;
+            var _loc11_:* = NaN;
+            var _loc12_:* = false;
             super.draw();
             if((window) && (isInvalid(WindowViewInvalidationType.POSITION_INVALID)))
             {
@@ -217,7 +219,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
                     }
                 }
             }
-            _loc1_ = App.utils.locale;
+            var _loc1_:ILocale = App.utils.locale;
             if(this.isInitInfoChanged)
             {
                 this.isInitInfoChanged = false;
@@ -230,7 +232,6 @@ package net.wg.gui.lobby.vehicleBuyWindow
                 this.headerMc.icon.iconLoader.source = this.initInfo.icon;
                 this.headerMc.icon.nation = this.initInfo.nation;
                 this.headerMc.icon.level = this.initInfo.level;
-                this.updateVehiclePrice();
                 this.headerMc.icon.isElite = this.initInfo.isElite;
                 this.headerMc.icon.isPremium = this.initInfo.isPremium;
                 _loc5_ = "<b>" + _loc1_.makeString(DIALOGS.BUYVEHICLEDIALOG_TANKMEN) + " " + this.initInfo.tankmenCount + "</b>";
@@ -256,6 +257,15 @@ package net.wg.gui.lobby.vehicleBuyWindow
                 this.bodyMc.ammoCheckbox.textField.filters = [_loc8_.clone()];
                 this.bodyMc.slotCheckbox.textField.filters = [_loc8_.clone()];
                 this.updateRentItems();
+                _loc9_ = this.headerMc.rentDD.dataProvider[this.headerMc.rentDD.selectedIndex];
+                if((this.headerMc.rentDD.visible) && (_loc9_))
+                {
+                    this.checkRentDDSelectedItem(_loc9_.data);
+                }
+                else
+                {
+                    this.updateVehiclePrice();
+                }
             }
             if((this.isExpandedValueChanged) && (this.windowBackgroundSizeInitialized))
             {
@@ -265,52 +275,53 @@ package net.wg.gui.lobby.vehicleBuyWindow
             if(this.isTotalResultChanged)
             {
                 this.isTotalResultChanged = false;
-                _loc9_ = 0;
+                this.headerMc.rentIcon.visible = !(this.selectedRentId == VehicleBuyRentItemVO.DEF_ITEM_ID);
                 _loc10_ = 0;
-                _loc9_ = _loc9_ + (this.bodyMc.slotCheckbox.selected?this.initInfo.slotPrice:0);
-                _loc10_ = _loc10_ + (this.bodyMc.ammoCheckbox.selected?this.initInfo.ammoPrice:0);
+                _loc11_ = 0;
+                _loc10_ = _loc10_ + (this.bodyMc.slotCheckbox.selected?this.initInfo.slotPrice:0);
+                _loc11_ = _loc11_ + (this.bodyMc.ammoCheckbox.selected?this.initInfo.ammoPrice:0);
                 if(this.initInfo.vehiclePrice.isGold)
                 {
-                    _loc9_ = _loc9_ + this.initInfo.vehiclePrice.price;
+                    _loc10_ = _loc10_ + this.initInfo.vehiclePrice.price;
                 }
                 else
                 {
-                    _loc10_ = _loc10_ + this.initInfo.vehiclePrice.price;
+                    _loc11_ = _loc11_ + this.initInfo.vehiclePrice.price;
                 }
                 if(!this.bodyMc.crewCheckbox.selected)
                 {
                     if(this.bodyMc.isGoldPriceSelected)
                     {
-                        _loc9_ = _loc9_ + this.bodyMc.selectedPrice;
+                        _loc10_ = _loc10_ + this.bodyMc.selectedPrice;
                     }
                     else
                     {
-                        _loc10_ = _loc10_ + this.bodyMc.selectedPrice;
+                        _loc11_ = _loc11_ + this.bodyMc.selectedPrice;
                     }
                 }
-                this.footerMc.totalGoldPrice.text = _loc1_.gold(_loc9_);
-                _loc10_ = isNaN(_loc10_)?0:_loc10_;
-                this.footerMc.totalCreditsPrice.text = _loc1_.integer(_loc10_);
-                _loc11_ = true;
-                if(_loc9_ > this.userTotalGold)
+                this.footerMc.totalGoldPrice.text = _loc1_.gold(_loc10_);
+                _loc11_ = isNaN(_loc11_)?0:_loc11_;
+                this.footerMc.totalCreditsPrice.text = _loc1_.integer(_loc11_);
+                _loc12_ = true;
+                if(_loc10_ > this.userTotalGold)
                 {
                     this.footerMc.totalGoldPrice.textColor = IconText.ERROR_COLOR;
-                    _loc11_ = false;
+                    _loc12_ = false;
                 }
                 else
                 {
                     this.footerMc.totalGoldPrice.textColor = goldColor;
                 }
-                if(_loc10_ > this.userTotalCredits)
+                if(_loc11_ > this.userTotalCredits)
                 {
                     this.footerMc.totalCreditsPrice.textColor = IconText.ERROR_COLOR;
-                    _loc11_ = false;
+                    _loc12_ = false;
                 }
                 else
                 {
                     this.footerMc.totalCreditsPrice.textColor = creditsColor;
                 }
-                this.footerMc.submitBtn.enabled = _loc11_;
+                this.footerMc.submitBtn.enabled = (_loc12_) && (this._isSubmitBtnEnabled);
             }
         }
         
@@ -329,10 +340,17 @@ package net.wg.gui.lobby.vehicleBuyWindow
         {
             var _loc1_:ILocale = null;
             this.headerMc.rentDD.visible = this.initInfo.isRentable;
+            this.bodyMc.btnGroupEnabled = !this.initInfo.isStudyDisabled;
+            this.bodyMc.scoolBtn.showPriceLabel = !this.initInfo.isStudyDisabled;
+            this.bodyMc.academyBtn.showPriceLabel = !this.initInfo.isStudyDisabled;
+            this.bodyMc.freeBtn.showPriceLabel = !this.initInfo.isStudyDisabled;
+            this.bodyMc.crewCheckbox.visible = !this.initInfo.isStudyDisabled;
+            this.bodyMc.crewInVehicle.visible = this.initInfo.isStudyDisabled;
             if(this.initInfo.isRentable)
             {
                 this.headerMc.rentDD.dataProvider = new DataProvider(this.initInfo.rentDataProviderDD);
                 this.headerMc.rentDD.x = this.headerMc.tankPriceLabel.x + this.headerMc.tankPriceLabel.textWidth + DD_MARGIN ^ 0;
+                this.headerMc.rentIcon.x = this.headerMc.rentDD.x + this.headerMc.rentDD.width;
                 if(!this.headerMc.rentDD.hasEventListener(ListEvent.INDEX_CHANGE))
                 {
                     this.headerMc.rentDD.addEventListener(ListEvent.INDEX_CHANGE,this.onRentChange);
@@ -355,26 +373,28 @@ package net.wg.gui.lobby.vehicleBuyWindow
                 {
                     this.bodyMc.crewCheckbox.selected = false;
                 }
-                this.bodyMc.btnGroupEnabled = !this.initInfo.isStudyDisabled;
-                this.bodyMc.crewCheckbox.visible = !this.initInfo.isStudyDisabled;
-                this.bodyMc.crewInVehicle.visible = this.initInfo.isStudyDisabled;
             }
             else
             {
-                this.bodyMc.freeRentSlot.visible = this.bodyMc.crewInVehicle.visible = false;
+                this.bodyMc.freeRentSlot.visible = false;
             }
         }
         
         private function onRentChange(param1:ListEvent) : void
         {
-            var _loc3_:ActionPriceVO = null;
             var _loc2_:VehicleBuyRentItemVO = VehicleBuyRentItemVO(param1.itemData.data);
-            this.selectedRentId = _loc2_.itemId;
-            if(_loc2_.itemId == VehicleBuyRentItemVO.DEF_ITEM_ID)
+            this.checkRentDDSelectedItem(_loc2_);
+        }
+        
+        private function checkRentDDSelectedItem(param1:VehicleBuyRentItemVO) : void
+        {
+            var _loc2_:ActionPriceVO = null;
+            this.selectedRentId = param1.itemId;
+            if(param1.itemId == VehicleBuyRentItemVO.DEF_ITEM_ID)
             {
                 this.bodyMc.slotCheckbox.visible = true;
-                _loc3_ = this.initInfo.slotActionPriceDataVo;
-                this.bodyMc.slotActionPrice.setData(_loc3_);
+                _loc2_ = this.initInfo.slotActionPriceDataVo;
+                this.bodyMc.slotActionPrice.setData(_loc2_);
                 this.bodyMc.slotPrice.visible = !this.bodyMc.slotActionPrice.visible;
                 this.bodyMc.freeRentSlot.visible = false;
             }
@@ -386,8 +406,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
                 this.bodyMc.slotPrice.visible = false;
                 this.bodyMc.freeRentSlot.visible = true;
             }
-            this.initInfo.actualActionPriceDataVo = _loc2_.actionPriceDataVo;
-            this.initInfo.vehiclePrice = _loc2_.price;
+            this.initInfo.actualActionPriceDataVo = param1.actionPriceDataVo;
+            this.initInfo.vehiclePrice = param1.price;
             this.updateVehiclePrice();
             this.isTotalResultChanged = true;
             invalidate();
@@ -461,6 +481,13 @@ package net.wg.gui.lobby.vehicleBuyWindow
             invalidate();
         }
         
+        public function as_setEnabledSubmitBtn(param1:Boolean) : void
+        {
+            this._isSubmitBtnEnabled = param1;
+            this.isTotalResultChanged = true;
+            invalidate();
+        }
+        
         private function submitButtonClickHandler(param1:ButtonEvent) : void
         {
             var _loc2_:Object = {"buySlot":this.bodyMc.slotCheckbox.selected,
@@ -469,6 +496,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             "crewType":this.bodyMc.crewType,
             "rentId":this.selectedRentId
         };
+        this.footerMc.submitBtn.enabled = this._isSubmitBtnEnabled = false;
         submitS(_loc2_);
     }
     

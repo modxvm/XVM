@@ -211,22 +211,24 @@ package net.wg.gui.lobby.vehicleBuyWindow
         private function updateRentData(param1:Array) : void
         {
             var _loc2_:* = NaN;
-            var _loc3_:VehicleBuyRentItemVO = null;
+            var _loc3_:* = NaN;
+            var _loc4_:VehicleBuyRentItemVO = null;
             if(param1)
             {
-                _loc2_ = 0;
-                while(_loc2_ < param1.length)
+                _loc2_ = param1.length;
+                _loc3_ = 0;
+                while(_loc3_ < _loc2_)
                 {
-                    _loc3_ = new VehicleBuyRentItemVO(param1[_loc2_]);
-                    if(_loc3_.itemId == this._rentDataSelectedId)
+                    _loc4_ = new VehicleBuyRentItemVO(param1[_loc3_]);
+                    if(_loc4_.itemId == this._rentDataSelectedId)
                     {
-                        this.defSelectedRentIndex = _loc2_;
+                        this.defSelectedRentIndex = _loc3_;
                     }
-                    this._rentDataProviderDD.push({"label":_loc3_.label,
-                    "data":_loc3_,
-                    "enabled":_loc3_.enabled
+                    this._rentDataProviderDD.push({"label":_loc4_.label,
+                    "data":_loc4_,
+                    "enabled":_loc4_.enabled
                 });
-                _loc2_++;
+                _loc3_++;
             }
         }
     }

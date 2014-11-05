@@ -27,6 +27,6 @@ package net.wg.infrastructure.base.meta
         
         function as_setModulesEnabled(param1:Boolean) : void;
         
-        function as_updateVehicleStatus(param1:String, param2:String, param3:String) : void;
+        function as_updateVehicleStatus(param1:String, param2:String, param3:String, param4:Boolean) : void;
     }
 }

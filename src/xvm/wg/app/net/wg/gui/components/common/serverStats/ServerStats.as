@@ -7,6 +7,7 @@ package net.wg.gui.components.common.serverStats
     import flash.text.TextField;
     import scaleform.clik.events.ListEvent;
     import net.wg.gui.components.controls.events.DropdownMenuEvent;
+    import flash.text.TextFieldAutoSize;
     import scaleform.clik.data.DataProvider;
     
     public class ServerStats extends ServerStatsMeta implements IServerStatsMeta
@@ -48,6 +49,7 @@ package net.wg.gui.components.common.serverStats
             this.textField.text = MENU.LOBBY_MENU_SERVERS_TITLE;
             this.serverInfo.visible = App.globalVarsMgr.isShowServerStatsS();
             this.serverInfo.focusable = false;
+            this.serverInfo.relativelyOwner = this.regionDD;
             this.regionDD.visible = !App.globalVarsMgr.isChinaS();
         }
         
@@ -138,6 +140,7 @@ package net.wg.gui.components.common.serverStats
                 }
                 _loc3_++;
             }
+            this.textField.autoSize = TextFieldAutoSize.CENTER;
             this.textField.htmlText = App.utils.locale.makeString(MENU.LOBBY_MENU_SERVERS_TITLE) + " <font color=\"#8C8C7C\">" + _loc2_ + "</font>";
         }
         
@@ -177,6 +180,7 @@ package net.wg.gui.components.common.serverStats
         private function setupServersData(param1:Array) : void
         {
             var _loc5_:ServerVO = null;
+            this.textField.autoSize = TextFieldAutoSize.LEFT;
             var _loc2_:DataProvider = new DataProvider();
             var _loc3_:* = -1;
             var _loc4_:* = 0;

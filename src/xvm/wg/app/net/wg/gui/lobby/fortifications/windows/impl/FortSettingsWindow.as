@@ -13,6 +13,7 @@ package net.wg.gui.lobby.fortifications.windows.impl
     import net.wg.gui.lobby.fortifications.events.FortSettingsEvent;
     import net.wg.gui.events.ViewStackEvent;
     import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
+    import net.wg.gui.lobby.fortifications.settings.IFortSettingsActivatedContainer;
     import net.wg.infrastructure.interfaces.IViewStackContent;
     import flash.text.TextFormatAlign;
     import scaleform.gfx.TextFieldEx;
@@ -30,6 +31,8 @@ package net.wg.gui.lobby.fortifications.windows.impl
             this.mainStatusMsg.autoSize = TextFormatAlign.LEFT;
             TextFieldEx.setVerticalAlign(this.mainStatusMsg,TextFieldEx.VALIGN_CENTER);
         }
+        
+        private static var STATUS_PADDING:int = 2;
         
         public var mainStatusTitle:TextField = null;
         
@@ -66,8 +69,16 @@ package net.wg.gui.lobby.fortifications.windows.impl
             {
                 this.mainStatusMsg.htmlText = param2;
             }
-            this.mainStatusMsg.x = Math.round(this.mainStatusTitle.x + this.mainStatusTitle.width + 2);
+            this.mainStatusMsg.x = this.mainStatusTitle.x + this.mainStatusTitle.width + STATUS_PADDING ^ 0;
             this.statusMsgTooltip = param3;
+        }
+        
+        public function as_setCanDisableDefencePeriod(param1:Boolean) : void
+        {
+            if((this.activeModel) && (this.viewStack.currentView))
+            {
+                this.callAdditionalUpdate(param1);
+            }
         }
         
         override protected function setDataForActivated(param1:FortSettingsActivatedViewVO) : void
@@ -139,6 +150,14 @@ package net.wg.gui.lobby.fortifications.windows.impl
                 this.activeModel = null;
             }
             super.onDispose();
+        }
+        
+        private function callAdditionalUpdate(param1:Boolean) : void
+        {
+            if(this.viewStack.currentLinkage == FORTIFICATION_ALIASES.FORT_SETTINGS_ACTIVATED_VIEW)
+            {
+                IFortSettingsActivatedContainer(this.viewStack.currentView).canDisableDefHour(param1);
+            }
         }
         
         private function updateView() : void

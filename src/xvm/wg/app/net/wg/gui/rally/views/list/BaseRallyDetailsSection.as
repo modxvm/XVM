@@ -1,10 +1,12 @@
 package net.wg.gui.rally.views.list
 {
     import scaleform.clik.core.UIComponent;
-    import flash.display.Sprite;
+    import net.wg.gui.rally.interfaces.IRallyNoSortieScreen;
     import flash.text.TextField;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import flash.display.Sprite;
     import net.wg.gui.rally.interfaces.IRallyVO;
+    import flash.display.DisplayObject;
     import net.wg.gui.rally.controls.RallyInvalidationType;
     import scaleform.clik.events.ButtonEvent;
     import flash.events.MouseEvent;
@@ -22,7 +24,7 @@ package net.wg.gui.rally.views.list
             this.slots = this.getSlots();
         }
         
-        public var noRallyScreen:Sprite;
+        public var noRallyScreen:IRallyNoSortieScreen;
         
         public var headerTF:TextField;
         
@@ -36,11 +38,27 @@ package net.wg.gui.rally.views.list
         
         public var joinButton:SoundButtonEx;
         
+        public var slotsBg:Sprite = null;
+        
         protected var slots:Array;
         
         protected var model:IRallyVO;
         
         private var _vehiclesLabel:String = "";
+        
+        protected var changedVisibilityList:Vector.<DisplayObject> = null;
+        
+        protected function setChangedVisibilityItems() : void
+        {
+            this.changedVisibilityList = new Vector.<DisplayObject>();
+            this.changedVisibilityList.push(this.slotsBg);
+            this.changedVisibilityList.push(this.headerTF);
+            this.changedVisibilityList.push(this.descriptionTF);
+            this.changedVisibilityList.push(this.rallyInfoTF);
+            this.changedVisibilityList.push(this.vehiclesInfoTF);
+            this.changedVisibilityList.push(this.joinButton);
+            this.changedVisibilityList.push(this.joinInfoTF);
+        }
         
         public function setData(param1:IRallyVO) : void
         {
@@ -57,7 +75,10 @@ package net.wg.gui.rally.views.list
         override protected function configUI() : void
         {
             super.configUI();
+            this.setChangedVisibilityItems();
             this.noRallyScreen.visible = false;
+            this.slotsBg.visible = false;
+            this.slotsBg.mouseChildren = this.slotsBg.mouseEnabled = false;
             if(this.joinButton)
             {
                 this.joinButton.addEventListener(ButtonEvent.CLICK,this.onJoinClick);
@@ -92,6 +113,8 @@ package net.wg.gui.rally.views.list
         override protected function onDispose() : void
         {
             var _loc1_:RallySimpleSlotRenderer = null;
+            this.changedVisibilityList.splice(0,this.changedVisibilityList.length);
+            this.changedVisibilityList = null;
             if(this.joinButton)
             {
                 this.joinButton.removeEventListener(ButtonEvent.CLICK,this.onJoinClick);
@@ -148,9 +171,35 @@ package net.wg.gui.rally.views.list
         
         protected function updateNoRallyScreen(param1:Boolean) : void
         {
+            this.updateNoRallyScreenVisibility(param1);
+            this.updateElementsVisibility(!param1);
+        }
+        
+        protected function updateNoRallyScreenVisibility(param1:Boolean) : void
+        {
             if(this.noRallyScreen.visible != param1)
             {
                 this.noRallyScreen.visible = param1;
+            }
+        }
+        
+        protected function updateElementsVisibility(param1:Boolean) : void
+        {
+            var _loc2_:DisplayObject = null;
+            var _loc3_:RallySimpleSlotRenderer = null;
+            if(this.slots)
+            {
+                for each(_loc3_ in this.slots)
+                {
+                    _loc3_.visible = param1;
+                }
+            }
+            for each(_loc2_ in this.changedVisibilityList)
+            {
+                if(_loc2_)
+                {
+                    _loc2_.visible = param1;
+                }
             }
         }
         

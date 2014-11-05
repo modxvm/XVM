@@ -265,8 +265,9 @@ package net.wg.gui.lobby.settings
         
         private function showHideVoiceSettings() : void
         {
+            var _loc2_:* = false;
             var _loc1_:Boolean = App.voiceChatMgr.isYYS();
-            var _loc2_:Boolean = App.voiceChatMgr.isVOIPEnabledS();
+            _loc2_ = App.voiceChatMgr.isVOIPEnabledS();
             voiceConnectFieldSet.visible = _loc2_;
             enableVoIPCheckbox.visible = (_loc2_) || (_loc1_);
             PTTLabel.visible = _loc2_;

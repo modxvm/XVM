@@ -5,6 +5,7 @@ package net.wg.gui.lobby.menu
     import flash.text.TextField;
     import net.wg.gui.components.common.serverStats.ServerStats;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.data.constants.Values;
     import flash.display.MovieClip;
     import scaleform.clik.events.ButtonEvent;
     import flash.text.TextFieldAutoSize;
@@ -37,11 +38,13 @@ package net.wg.gui.lobby.menu
         
         public var cancelBtn:SoundButtonEx;
         
+        private var STATE_HIDE_ALL:String = "hide_all";
+        
+        private var STATE_SHOW_SERVER_NAME:String = "show_server_name";
+        
+        private var STATE_HIDE_SERVER_STATS_ITEM:String = "hide_server_stats_item";
+        
         private var STATE_SHOW_ALL:String = "showAll";
-        
-        private var STATE_HIDE_SERVER_STATS:String = "_server_stats";
-        
-        private var STATE_HIDE_SERVERS_LIST:String = "_servers_list";
         
         override public function updateStage(param1:Number, param2:Number) : void
         {
@@ -50,9 +53,15 @@ package net.wg.gui.lobby.menu
         
         override protected function onPopulate() : void
         {
-            var _loc1_:String = App.globalVarsMgr.isShowServerStatsS()?"":this.STATE_HIDE_SERVER_STATS;
-            _loc1_ = _loc1_ + (App.globalVarsMgr.isChinaS()?this.STATE_HIDE_SERVERS_LIST:"");
-            _loc1_ = _loc1_ == ""?this.STATE_SHOW_ALL:"hide" + _loc1_;
+            var _loc1_:String = App.globalVarsMgr.isChinaS()?this.STATE_SHOW_SERVER_NAME:Values.EMPTY_STR;
+            if(_loc1_ == Values.EMPTY_STR)
+            {
+                _loc1_ = !App.globalVarsMgr.isShowServerStatsS()?this.STATE_HIDE_SERVER_STATS_ITEM:Values.EMPTY_STR;
+            }
+            if(_loc1_ == Values.EMPTY_STR)
+            {
+                _loc1_ = this.STATE_SHOW_ALL;
+            }
             this.gotoAndPlay(_loc1_);
             MovieClip(window.getBackground()).tabEnabled = false;
             MovieClip(window.getBackground()).tabChildren = false;

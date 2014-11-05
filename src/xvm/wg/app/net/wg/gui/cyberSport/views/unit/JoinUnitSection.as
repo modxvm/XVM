@@ -4,6 +4,7 @@ package net.wg.gui.cyberSport.views.unit
     import flash.text.TextField;
     import flash.display.MovieClip;
     import net.wg.gui.cyberSport.controls.GrayButtonText;
+    import flash.display.Sprite;
     import net.wg.gui.rally.vo.RallyShortVO;
     import net.wg.gui.rally.BaseRallyMainWindow;
     import flash.events.MouseEvent;
@@ -18,6 +19,8 @@ package net.wg.gui.cyberSport.views.unit
         public function JoinUnitSection()
         {
             super();
+            noRallyScreen.update(CYBERSPORT.WINDOW_UNITLISTVIEW_NOUNITSELECTED);
+            joinButton = this.joinUnitButton;
         }
         
         public var headerRatingTF:TextField;
@@ -42,9 +45,23 @@ package net.wg.gui.cyberSport.views.unit
         
         public var slot6:SimpleSlotRenderer;
         
+        public var cs_lips:Sprite = null;
+        
+        public var cs_battleIcon:Sprite = null;
+        
         public function get unitModel() : RallyShortVO
         {
             return model as RallyShortVO;
+        }
+        
+        override protected function setChangedVisibilityItems() : void
+        {
+            super.setChangedVisibilityItems();
+            changedVisibilityList.push(this.cs_lips);
+            changedVisibilityList.push(this.cs_battleIcon);
+            changedVisibilityList.push(this.headerRatingTF);
+            changedVisibilityList.push(this.freezeIcon);
+            changedVisibilityList.push(this.restrictionIcon);
         }
         
         override protected function getSlots() : Array
@@ -63,6 +80,7 @@ package net.wg.gui.cyberSport.views.unit
         {
             joinButton = this.joinUnitButton;
             super.configUI();
+            this.cs_lips.mouseChildren = this.cs_lips.mouseEnabled = false;
             headerTF.text = CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM;
             rallyInfoTF.htmlText = BaseRallyMainWindow.getTeamHeader(CYBERSPORT.WINDOW_UNIT_TEAMMEMBERS,model);
             vehiclesInfoTF.text = CYBERSPORT.WINDOW_UNITLISTVIEW_VEHICLES;
@@ -144,6 +162,11 @@ package net.wg.gui.cyberSport.views.unit
                     }
                     break;
             }
+        }
+        
+        override protected function updateNoRallyScreen(param1:Boolean) : void
+        {
+            super.updateNoRallyScreen(param1);
         }
     }
 }

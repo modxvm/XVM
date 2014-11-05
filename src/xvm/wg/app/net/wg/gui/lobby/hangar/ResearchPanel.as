@@ -7,6 +7,7 @@ package net.wg.gui.lobby.hangar
     import flash.text.TextField;
     import net.wg.gui.components.controls.SoundButtonEx;
     import net.wg.gui.components.controls.IconText;
+    import flash.display.Sprite;
     import flash.display.MovieClip;
     import flash.display.DisplayObject;
     import net.wg.utils.IHelpLayout;
@@ -34,6 +35,8 @@ package net.wg.gui.lobby.hangar
         
         public var xpText:IconText = null;
         
+        public var premIGRBg:Sprite = null;
+        
         public var bg:MovieClip = null;
         
         private var _vehicleName:String = "";
@@ -46,19 +49,22 @@ package net.wg.gui.lobby.hangar
         
         private var _isElite:Boolean = false;
         
+        private var _isPremIGR:Boolean;
+        
         private var _helpLayout:DisplayObject = null;
         
         private var _helpLayoutX:Number = 0;
         
         private var _helpLayoutW:Number = 0;
         
-        public function as_updateCurrentVehicle(param1:String, param2:String, param3:String, param4:Number, param5:Boolean) : void
+        public function as_updateCurrentVehicle(param1:String, param2:String, param3:String, param4:Number, param5:Boolean, param6:Boolean) : void
         {
             this._vehicleName = param1;
             this._vehicleType = param2;
             this._vDescription = param3;
             this._earnedXP = param4;
             this._isElite = param5;
+            this._isPremIGR = param6;
             invalidateData();
         }
         
@@ -88,6 +94,7 @@ package net.wg.gui.lobby.hangar
             this.mouseEnabled = false;
             this.bg.mouseEnabled = false;
             this.bg.mouseChildren = false;
+            this.premIGRBg.mouseEnabled = this.premIGRBg.mouseChildren = false;
         }
         
         public function getHelpLayoutWidth() : Number
@@ -141,6 +148,7 @@ package net.wg.gui.lobby.hangar
             this.button.dispose();
             this.button = null;
             this._helpLayout = null;
+            this.premIGRBg = null;
         }
         
         override protected function draw() : void
@@ -154,6 +162,7 @@ package net.wg.gui.lobby.hangar
                 this.tankDescr.htmlText = this._vDescription;
                 this.xpText.text = App.utils != null?App.utils.locale.integer(this._earnedXP):this._earnedXP.toString();
                 this.xpText.icon = this._isElite?IconsTypes.ELITE_XP:IconsTypes.XP;
+                this.premIGRBg.visible = this._isPremIGR;
             }
         }
         

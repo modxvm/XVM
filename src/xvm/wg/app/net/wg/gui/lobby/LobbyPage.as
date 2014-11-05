@@ -11,9 +11,9 @@ package net.wg.gui.lobby
     import net.wg.gui.lobby.messengerBar.MessengerBar;
     import net.wg.gui.components.common.ticker.Ticker;
     import flash.display.Sprite;
-    import flash.display.InteractiveObject;
     import net.wg.infrastructure.interfaces.IManagedContainer;
     import net.wg.data.constants.DragType;
+    import flash.display.InteractiveObject;
     import net.wg.gui.events.LobbyEvent;
     import scaleform.clik.utils.Constraints;
     import scaleform.clik.constants.ConstrainMode;
@@ -54,11 +54,9 @@ package net.wg.gui.lobby
         
         private var _isShowHelpLayout:Boolean = false;
         
-        private var previousFocus:InteractiveObject;
+        private var tickerHeight:Number = 0;
         
         private var TOP_SUB_VIEW_POSITION:Number = 53;
-        
-        private var tickerHeight:Number = 0;
         
         override public function getSubContainer() : IManagedContainer
         {
@@ -131,7 +129,6 @@ package net.wg.gui.lobby
         {
             if(!this._isShowHelpLayout)
             {
-                this.previousFocus = App.utils.focusHandler.getFocus(0);
                 this._isShowHelpLayout = true;
                 this.header.showHelpLayout();
                 this.messengerBar.showHelpLayout();
@@ -140,12 +137,13 @@ package net.wg.gui.lobby
         
         public function as_closeHelpLayout() : void
         {
+            var _loc1_:InteractiveObject = null;
             if(this._isShowHelpLayout)
             {
-                if(this.previousFocus)
+                _loc1_ = InteractiveObject(this.subViewContainer.getTopmostView());
+                if(_loc1_)
                 {
-                    setFocus(this.previousFocus);
-                    this.previousFocus = null;
+                    setFocus(_loc1_);
                 }
                 this._isShowHelpLayout = false;
                 this.header.closeHelpLayout();
@@ -214,7 +212,6 @@ package net.wg.gui.lobby
             this.header = null;
             this.notificationPopupViewer = null;
             this.messengerBar = null;
-            this.previousFocus = null;
             this.ticker = null;
         }
         

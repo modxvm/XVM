@@ -19,6 +19,8 @@ package net.wg.infrastructure.base.meta
         
         function as_setDataForActivated(param1:Object) : void;
         
+        function as_setCanDisableDefencePeriod(param1:Boolean) : void;
+        
         function as_setDataForNotActivated(param1:Object) : void;
     }
 }

@@ -14,5 +14,7 @@ package net.wg.infrastructure.base.meta
         function as_setCredits(param1:Number) : void;
         
         function as_setInitData(param1:Object) : void;
+        
+        function as_setEnabledSubmitBtn(param1:Boolean) : void;
     }
 }

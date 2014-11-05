@@ -1,6 +1,6 @@
 diff -Naur app.orig/App.as app/App.as
---- app.orig/App.as	2014-10-20 22:59:42.193624000 +0300
-+++ app/App.as	2014-10-21 00:02:52.581506400 +0300
+--- app.orig/App.as	2014-11-05 11:26:55.185411200 +0200
++++ app/App.as	2014-11-05 11:46:39.301748000 +0200
 @@ -1,5 +1,6 @@
  package
  {
@@ -9,8 +9,8 @@ diff -Naur app.orig/App.as app/App.as
      import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
      import net.wg.infrastructure.managers.ISoundManager;
 diff -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/components/advanced/TankIcon.as
---- app.orig/net/wg/gui/components/advanced/TankIcon.as	2014-10-20 23:04:15.994172700 +0300
-+++ app/net/wg/gui/components/advanced/TankIcon.as	2014-10-21 00:06:55.431846400 +0300
+--- app.orig/net/wg/gui/components/advanced/TankIcon.as	2014-11-05 11:31:23.730674000 +0200
++++ app/net/wg/gui/components/advanced/TankIcon.as	2014-11-05 11:46:39.311748100 +0200
 @@ -96,7 +96,7 @@
          
          private var _isPremiumDirty:Boolean = true;
@@ -21,8 +21,8 @@ diff -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/co
          override protected function onDispose() : void
          {
 diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/net/wg/gui/components/common/video/SimpleVideoPlayer.as
---- app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-10-20 23:02:16.377771800 +0300
-+++ app/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-10-21 00:02:52.621506400 +0300
+--- app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-11-05 11:29:25.218897200 +0200
++++ app/net/wg/gui/components/common/video/SimpleVideoPlayer.as	2014-11-05 11:46:39.321748100 +0200
 @@ -311,10 +311,10 @@
          }
      }
@@ -39,8 +39,8 @@ diff -Naur app.orig/net/wg/gui/components/common/video/SimpleVideoPlayer.as app/
      public function get currentTime() : Number
      {
 diff -Naur app.orig/net/wg/gui/components/controls/Carousel.as app/net/wg/gui/components/controls/Carousel.as
---- app.orig/net/wg/gui/components/controls/Carousel.as	2014-10-20 23:02:18.937797700 +0300
-+++ app/net/wg/gui/components/controls/Carousel.as	2014-10-21 00:02:52.631506500 +0300
+--- app.orig/net/wg/gui/components/controls/Carousel.as	2014-11-05 11:29:27.782043800 +0200
++++ app/net/wg/gui/components/controls/Carousel.as	2014-11-05 11:46:39.331748100 +0200
 @@ -91,9 +91,9 @@
          
          protected var selectedItemRenderer:IListItemRenderer = null;
@@ -71,9 +71,21 @@ diff -Naur app.orig/net/wg/gui/components/controls/Carousel.as app/net/wg/gui/co
  {
  var _loc1_:* = NaN;
  var _loc2_:* = NaN;
+diff -Naur app.orig/net/wg/gui/components/tooltips/helpers/Utils.as app/net/wg/gui/components/tooltips/helpers/Utils.as
+--- app.orig/net/wg/gui/components/tooltips/helpers/Utils.as	2014-11-05 11:30:43.989401000 +0200
++++ app/net/wg/gui/components/tooltips/helpers/Utils.as	2014-11-05 11:50:46.924095900 +0200
+@@ -71,7 +71,7 @@
+         
+         public var STATUS_INFO:String = "info";
+         
+-        public var allowStatuses:Array = [this.STATUS_ADDITIONAL,this.STATUS_RENTED,this.STATUS_CRITICAL,this.STATUS_WARNING,this.STATUS_INFO];
++        public var allowStatuses:Array = [STATUS_ADDITIONAL,STATUS_RENTED,STATUS_CRITICAL,STATUS_WARNING,STATUS_INFO];
+         
+         public var MARGIN_AFTER_BLOCK:Number = 15;
+         
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as
---- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-10-20 23:07:23.069189500 +0300
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-10-21 00:02:52.651506500 +0300
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-11-05 11:34:32.929954400 +0200
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2014-11-05 11:48:06.441870000 +0200
 @@ -83,9 +83,9 @@
          
          private var filterDataInvalid:Boolean = false;
@@ -98,19 +110,19 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg
          
          private var _updateInProgress:Boolean = false;
          
-@@ -753,7 +753,7 @@
-         this.checkBoxToMain.addEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
-     }
-     
--    private function showHideFilters() : void
-+    protected function showHideFilters() : void
-     {
-         updateVisibleSlotsCount();
-         var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);
+@@ -757,7 +757,7 @@
+             this.checkBoxToMain.addEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
+         }
+         
+-        private function showHideFilters() : void
++        protected function showHideFilters() : void
+         {
+             updateVisibleSlotsCount();
+             var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as
---- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-10-20 23:07:44.807255600 +0300
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-10-21 00:02:52.651506500 +0300
-@@ -22,9 +22,9 @@
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-11-05 11:34:53.988002200 +0200
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2014-11-05 11:46:39.361748100 +0200
+@@ -24,9 +24,9 @@
          
          public static var FILTER_READY:String = "ready";
          
@@ -123,8 +135,8 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app
          public var checkBoxToMain:CheckBox;
          
 diff -Naur app.orig/net/wg/gui/lobby/header/LobbyHeader.as app/net/wg/gui/lobby/header/LobbyHeader.as
---- app.orig/net/wg/gui/lobby/header/LobbyHeader.as	2014-10-20 23:07:04.465156600 +0300
-+++ app/net/wg/gui/lobby/header/LobbyHeader.as	2014-10-21 00:02:52.661506500 +0300
+--- app.orig/net/wg/gui/lobby/header/LobbyHeader.as	2014-11-05 11:34:13.097094500 +0200
++++ app/net/wg/gui/lobby/header/LobbyHeader.as	2014-11-05 11:46:39.371748100 +0200
 @@ -54,7 +54,7 @@
          
          private var _mainMenuHelper:MainMenuHelper;
@@ -135,8 +147,8 @@ diff -Naur app.orig/net/wg/gui/lobby/header/LobbyHeader.as app/net/wg/gui/lobby/
          private var _isShowHelpLayout:Boolean = false;
          
 diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/gui/lobby/profile/ProfileTabNavigator.as
---- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-10-20 23:04:51.873451100 +0300
-+++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-10-21 00:02:52.671506500 +0300
+--- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-11-05 11:32:00.557779300 +0200
++++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-11-05 11:46:39.371748100 +0200
 @@ -36,7 +36,7 @@
          
          public var viewStack:ResizableViewStack;
@@ -147,8 +159,8 @@ diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/g
          private var _sectionsDataUtil:LinkageUtils;
          
 diff -Naur app.orig/net/wg/gui/messenger/ChannelComponent.as app/net/wg/gui/messenger/ChannelComponent.as
---- app.orig/net/wg/gui/messenger/ChannelComponent.as	2014-10-20 23:07:26.099193800 +0300
-+++ app/net/wg/gui/messenger/ChannelComponent.as	2014-10-21 00:02:52.681506500 +0300
+--- app.orig/net/wg/gui/messenger/ChannelComponent.as	2014-11-05 11:34:35.966959600 +0200
++++ app/net/wg/gui/messenger/ChannelComponent.as	2014-11-05 11:46:39.381748200 +0200
 @@ -28,7 +28,7 @@
          
          public var messageAreaScrollBar:ScrollBar = null;
@@ -159,8 +171,8 @@ diff -Naur app.orig/net/wg/gui/messenger/ChannelComponent.as app/net/wg/gui/mess
          public var messageInput:TextInput = null;
          
 diff -Naur app.orig/net/wg/gui/notification/NotificationPopUpViewer.as app/net/wg/gui/notification/NotificationPopUpViewer.as
---- app.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2014-10-20 23:08:46.027139700 +0300
-+++ app/net/wg/gui/notification/NotificationPopUpViewer.as	2014-10-21 00:02:52.691506500 +0300
+--- app.orig/net/wg/gui/notification/NotificationPopUpViewer.as	2014-11-05 11:35:58.011244500 +0200
++++ app/net/wg/gui/notification/NotificationPopUpViewer.as	2014-11-05 11:46:39.391748200 +0200
 @@ -45,7 +45,7 @@
      
      private var maxAvailaleMessagesCount:uint = 5;
@@ -171,8 +183,8 @@ diff -Naur app.orig/net/wg/gui/notification/NotificationPopUpViewer.as app/net/w
      private var animationManager:ExcludeTweenManager;
      
 diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/gui/prebattle/squad/SquadItemRenderer.as
---- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-10-20 23:01:23.119132100 +0300
-+++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-10-21 00:02:52.701506600 +0300
+--- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-11-05 11:28:32.522886500 +0200
++++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2014-11-05 11:46:39.401748200 +0200
 @@ -171,7 +171,7 @@
                  }
                  this.setSpeakers(this.model.isPlayerSpeaking,true);
@@ -194,8 +206,8 @@ diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/g
                  _loc3_ = this.model.getCurrentColor();
                  if(!isNaN(_loc3_))
 diff -Naur app.orig/net/wg/gui/rally/events/RallyViewsEvent.as app/net/wg/gui/rally/events/RallyViewsEvent.as
---- app.orig/net/wg/gui/rally/events/RallyViewsEvent.as	2014-10-20 23:06:29.869930500 +0300
-+++ app/net/wg/gui/rally/events/RallyViewsEvent.as	2014-10-21 00:02:52.701506600 +0300
+--- app.orig/net/wg/gui/rally/events/RallyViewsEvent.as	2014-11-05 11:33:37.991149100 +0200
++++ app/net/wg/gui/rally/events/RallyViewsEvent.as	2014-11-05 11:46:39.411748200 +0200
 @@ -41,7 +41,7 @@
          
          public static var VEH_BTN_ROLL_OUT:String = "vehBtnRollOut";
@@ -206,8 +218,8 @@ diff -Naur app.orig/net/wg/gui/rally/events/RallyViewsEvent.as app/net/wg/gui/ra
          override public function clone() : Event
          {
 diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/wg/infrastructure/managers/IContainerManager.as
---- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2014-10-20 22:59:42.100621500 +0300
-+++ app/net/wg/infrastructure/managers/IContainerManager.as	2014-10-21 00:02:52.711506600 +0300
+--- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2014-11-05 11:26:55.106406700 +0200
++++ app/net/wg/infrastructure/managers/IContainerManager.as	2014-11-05 11:46:39.411748200 +0200
 @@ -15,6 +15,8 @@
          
          function isModalViewsExisting() : Boolean;
@@ -218,8 +230,8 @@ diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/
          
          function get lastFocusedView() : IView;
 diff -Naur app.orig/org/idmedia/as3commons/util/EntrySetIterator.as app/org/idmedia/as3commons/util/EntrySetIterator.as
---- app.orig/org/idmedia/as3commons/util/EntrySetIterator.as	2014-10-20 23:11:30.098292900 +0300
-+++ app/org/idmedia/as3commons/util/EntrySetIterator.as	2014-10-21 00:02:52.711506600 +0300
+--- app.orig/org/idmedia/as3commons/util/EntrySetIterator.as	2014-11-05 11:38:46.364471500 +0200
++++ app/org/idmedia/as3commons/util/EntrySetIterator.as	2014-11-05 11:46:39.421748200 +0200
 @@ -45,7 +45,7 @@
              }
              else
@@ -230,8 +242,8 @@ diff -Naur app.orig/org/idmedia/as3commons/util/EntrySetIterator.as app/org/idme
                  this.s.removeEntryForKey(_loc1_);
                  return;
 diff -Naur app.orig/org/idmedia/as3commons/util/HashMap.as app/org/idmedia/as3commons/util/HashMap.as
---- app.orig/org/idmedia/as3commons/util/HashMap.as	2014-10-20 23:09:01.101166600 +0300
-+++ app/org/idmedia/as3commons/util/HashMap.as	2014-10-21 00:02:52.721506600 +0300
+--- app.orig/org/idmedia/as3commons/util/HashMap.as	2014-11-05 11:36:13.691659300 +0200
++++ app/org/idmedia/as3commons/util/HashMap.as	2014-11-05 11:46:39.421748200 +0200
 @@ -58,9 +58,9 @@
          this.value = param2;
      }
@@ -245,8 +257,8 @@ diff -Naur app.orig/org/idmedia/as3commons/util/HashMap.as app/org/idmedia/as3co
      public function getKey() : *
      {
 diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/controls/ButtonGroup.as
---- app.orig/scaleform/clik/controls/ButtonGroup.as	2014-10-20 23:07:59.009065100 +0300
-+++ app/scaleform/clik/controls/ButtonGroup.as	2014-10-21 00:02:52.731506600 +0300
+--- app.orig/scaleform/clik/controls/ButtonGroup.as	2014-11-05 11:35:07.968382200 +0200
++++ app/scaleform/clik/controls/ButtonGroup.as	2014-11-05 11:46:39.431748200 +0200
 @@ -68,6 +68,7 @@
                  _loc1_ = _loc2_ as DisplayObjectContainer;
                  return _loc1_;
@@ -256,8 +268,8 @@ diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/co
          
          public function addButton(param1:Button) : void
 diff -Naur app.orig/scaleform/clik/ui/InputDetails.as app/scaleform/clik/ui/InputDetails.as
---- app.orig/scaleform/clik/ui/InputDetails.as	2014-10-20 23:09:00.391165600 +0300
-+++ app/scaleform/clik/ui/InputDetails.as	2014-10-21 00:02:52.731506600 +0300
+--- app.orig/scaleform/clik/ui/InputDetails.as	2014-11-05 11:36:12.994656800 +0200
++++ app/scaleform/clik/ui/InputDetails.as	2014-11-05 11:46:39.431748200 +0200
 @@ -20,7 +20,7 @@
          
          public var code:Number;

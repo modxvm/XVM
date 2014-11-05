@@ -75,15 +75,17 @@ package net.wg.gui.lobby.vehicleBuyWindow
         public function updateBtnGroupEnable() : void
         {
             var _loc1_:* = NaN;
-            var _loc2_:Button = null;
+            var _loc2_:* = NaN;
+            var _loc3_:Button = null;
             if(this.btnGroup)
             {
-                _loc1_ = 0;
-                while(_loc1_ < this.btnGroup.length)
+                _loc1_ = this.btnGroup.length;
+                _loc2_ = 0;
+                while(_loc2_ < _loc1_)
                 {
-                    _loc2_ = this.btnGroup.getButtonAt(_loc1_);
-                    _loc2_.enabled = this.btnGroupEnabled;
-                    _loc1_++;
+                    _loc3_ = this.btnGroup.getButtonAt(_loc2_);
+                    _loc3_.enabled = this.btnGroupEnabled;
+                    _loc2_++;
                 }
             }
         }

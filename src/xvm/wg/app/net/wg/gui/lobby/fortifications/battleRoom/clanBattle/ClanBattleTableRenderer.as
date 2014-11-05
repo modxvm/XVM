@@ -80,6 +80,14 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
                 TextFieldEx.setVerticalAlign(this.beforeBegins,TextFieldEx.VALIGN_CENTER);
                 this.timer.visible = false;
             }
+            if(this.model.stateOfBattle == FORTIFICATION_ALIASES.CLAN_BATTLE_BATTLE_TOMORROW || this.model.stateOfBattle == FORTIFICATION_ALIASES.CLAN_BATTLE_BATTLE_TODAY)
+            {
+                doubleClickEnabled = false;
+            }
+            else
+            {
+                doubleClickEnabled = true;
+            }
             this.battleName.htmlText = this.model.battleName;
             this.battleDirection.htmlText = this.model.battleDirection;
             this.dayOfBattle.htmlText = this.model.dayOfBattle;

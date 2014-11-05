@@ -422,6 +422,7 @@ package net.wg.gui.components.windows
                     }
                     catch(e:Error)
                     {
+                        trace(e);
                     }
                 }
                 if(this.windowContent.isSourceTracked)

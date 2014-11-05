@@ -115,7 +115,7 @@ package net.wg.gui.components.controls
         {
             if(!(_label == null) && !(textField == null))
             {
-                textField.text = _label;
+                textField.htmlText = _label;
             }
         }
         

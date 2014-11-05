@@ -127,6 +127,11 @@ package net.wg.gui.lobby.techtree.nodes
             return this.dataInited?this._valueObject.id:0;
         }
         
+        public function isRemovable() : Boolean
+        {
+            return this.dataInited?this._valueObject.isRemovable:false;
+        }
+        
         public function getItemName() : String
         {
             return this.dataInited?this._valueObject.nameString:"";
@@ -152,9 +157,14 @@ package net.wg.gui.lobby.techtree.nodes
             return this.dataInited?this._valueObject.iconPath:"";
         }
         
-        public function getRentLeft() : String
+        public function getStatus() : String
         {
-            return this.dataInited?this._valueObject.rentLeftTimeStr:"";
+            return this.dataInited?this._valueObject.status:"";
+        }
+        
+        public function getStatusLevel() : String
+        {
+            return this.dataInited?this._valueObject.statusLevel:"";
         }
         
         public function getDisplayInfo() : Object

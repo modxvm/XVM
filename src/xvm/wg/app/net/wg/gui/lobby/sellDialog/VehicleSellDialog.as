@@ -309,7 +309,13 @@ package net.wg.gui.lobby.sellDialog
             this.devicesComponent.removePrices = param4.hasOwnProperty("removePrice")?param4.removePrice:null;
             this.devicesComponent.removeActionPriceData = param4.hasOwnProperty("action")?param4.action:null;
             this.window.title = this.vehicleVo.isRented?App.utils.locale.makeString(DIALOGS.VEHICLEREMOVEDIALOG_TITLE,{"name":param1.userName}):App.utils.locale.makeString(DIALOGS.VEHICLESELLDIALOG_TITLE,{"name":param1.userName});
+            this.updateSubmitBtnLabel();
             invalidateData();
+        }
+        
+        private function updateSubmitBtnLabel() : void
+        {
+            this.submitBtn.label = this.vehicleVo.isRented?DIALOGS.VEHICLESELLDIALOG_REMOVE:DIALOGS.VEHICLESELLDIALOG_SUBMIT;
         }
         
         public function motionCallBack(param1:Tween) : void
@@ -333,7 +339,7 @@ package net.wg.gui.lobby.sellDialog
             this.controlQuestion.addEventListener(ControlQuestionComponent.USER_INPUT_HANDLER,this.userInputHandler);
             this.slidingComponent.slidingScrList.addEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.wasDrawnHandler,false,1);
             this.cancelBtn.label = DIALOGS.VEHICLESELLDIALOG_CANCEL;
-            this.submitBtn.label = DIALOGS.VEHICLESELLDIALOG_SUBMIT;
+            this.updateSubmitBtnLabel();
             this.addEventListener(VehicleSellDialogEvent.UPDATE_RESULT,this.updateMoneyResult);
             this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.handleClose);
             this.submitBtn.addEventListener(ButtonEvent.CLICK,this.handleSubmit);

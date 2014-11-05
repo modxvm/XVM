@@ -2,6 +2,7 @@ package net.wg.gui.lobby.techtree.data
 {
     import net.wg.gui.lobby.techtree.interfaces.INodesDataProvider;
     import net.wg.gui.lobby.techtree.data.vo.NodeData;
+    import net.wg.gui.lobby.techtree.constants.NodeState;
     import flash.events.EventDispatcher;
     import net.wg.gui.lobby.techtree.TechTreeEvent;
     import net.wg.gui.lobby.techtree.data.vo.UnlockProps;
@@ -24,6 +25,10 @@ package net.wg.gui.lobby.techtree.data
             if(_loc6_ != null)
             {
                 _loc5_ = !((_loc6_.state & param3) == (param4 & param3));
+                if(!_loc5_ && param3 == NodeState.IN_INVENTORY)
+                {
+                    _loc5_ = !((_loc6_.state & NodeState.VEHICLE_IN_RENT) == (param4 & NodeState.VEHICLE_IN_RENT));
+                }
                 _loc6_.state = param4;
             }
             return _loc5_;

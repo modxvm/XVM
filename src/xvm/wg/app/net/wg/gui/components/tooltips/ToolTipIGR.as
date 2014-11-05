@@ -8,6 +8,7 @@ package net.wg.gui.components.tooltips
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
+    import net.wg.data.constants.Values;
     
     public class ToolTipIGR extends ToolTipSpecial
     {
@@ -20,6 +21,12 @@ package net.wg.gui.components.tooltips
             this.whiteBg = content.whiteBg;
         }
         
+        private static var UI_igrQuestBlock:String = "igrQuestBlockUI";
+        
+        private static var UI_igrQuestProgress:String = "igrQuestProgressUI";
+        
+        private static var UI_igrPremVehQuestBlock:String = "igrPremVehQuestBlockUI";
+        
         public var headerTF:TextField = null;
         
         public var discrTF:TextField = null;
@@ -27,6 +34,8 @@ package net.wg.gui.components.tooltips
         public var whiteBg:Sprite = null;
         
         private var progressBlock:IgrQuestProgressBlock = null;
+        
+        private var igrPremVehQuestBlocks:Vector.<IgrPremVehQuestBlock> = null;
         
         override public function build(param1:Object, param2:ITooltipProps) : void
         {
@@ -39,6 +48,11 @@ package net.wg.gui.components.tooltips
             {
                 content.removeChild(this.progressBlock);
                 this.progressBlock = null;
+            }
+            if(this.igrPremVehQuestBlocks)
+            {
+                this.igrPremVehQuestBlocks.splice(0,this.igrPremVehQuestBlocks.length);
+                this.igrPremVehQuestBlocks = null;
             }
             super.onDispose();
         }
@@ -58,6 +72,8 @@ package net.wg.gui.components.tooltips
             var _loc4_:* = NaN;
             var _loc5_:IgrVO = null;
             var _loc9_:IgrQuestBlock = null;
+            var _loc11_:* = false;
+            var _loc12_:IgrPremVehQuestBlock = null;
             var _loc1_:ILocale = App.utils.locale;
             var _loc2_:uint = 0;
             var _loc3_:uint = 0;
@@ -100,7 +116,7 @@ package net.wg.gui.components.tooltips
                 this.discrTF.visible = false;
             }
             var _loc8_:int = _loc5_.quests.length;
-            var _loc10_:Class = App.utils.classFactory.getClass("igrQuestBlockUI");
+            var _loc10_:Class = App.utils.classFactory.getClass(UI_igrQuestBlock);
             if((_loc5_.quests) && _loc5_.quests.length > 0)
             {
                 _loc8_ = _loc5_.quests.length;
@@ -123,15 +139,46 @@ package net.wg.gui.components.tooltips
             {
                 _loc6_ = Utils.instance.createSeparate(content);
                 _loc6_.y = topPosition | 0;
+                separators.push(_loc6_);
                 topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
-                this.progressBlock = App.utils.classFactory.getComponent("igrQuestProgressUI",IgrQuestProgressBlock);
+                this.progressBlock = App.utils.classFactory.getComponent(UI_igrQuestProgress,IgrQuestProgressBlock);
                 content.addChild(this.progressBlock);
                 this.progressBlock.setData(_loc5_.progressHeader,_loc5_.progress);
                 this.progressBlock.width = _loc4_ != 0?_loc4_ - bgShadowMargin.left - contentMargin.left:this.progressBlock.width;
                 this.progressBlock.x = bgShadowMargin.left + contentMargin.left;
                 this.progressBlock.y = topPosition;
                 topPosition = topPosition + (this.progressBlock.height + Utils.instance.MARGIN_AFTER_BLOCK);
-                contentMargin.bottom = contentMargin.bottom + Utils.instance.MARGIN_AFTER_BLOCK;
+                contentMargin.bottom = Utils.instance.MARGIN_AFTER_LASTITEM;
+            }
+            if((_loc5_.premVehQuests) && _loc5_.premVehQuests.length > 0)
+            {
+                this.igrPremVehQuestBlocks = new Vector.<IgrPremVehQuestBlock>();
+                _loc3_ = _loc5_.premVehQuests.length;
+                _loc11_ = false;
+                _loc2_ = 0;
+                while(_loc2_ < _loc3_)
+                {
+                    if((_loc5_.premVehQuests[_loc2_].hasOwnProperty("header") && _loc5_.premVehQuests[_loc2_].hasOwnProperty("descr")) && (!(_loc5_.premVehQuests[_loc2_].header == Values.EMPTY_STR)) && !(_loc5_.premVehQuests[_loc2_].descr == Values.EMPTY_STR))
+                    {
+                        _loc11_ = true;
+                        _loc6_ = Utils.instance.createSeparate(content);
+                        _loc6_.y = topPosition | 0;
+                        separators.push(_loc6_);
+                        topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+                        _loc12_ = App.utils.classFactory.getComponent(UI_igrPremVehQuestBlock,IgrPremVehQuestBlock);
+                        content.addChild(_loc12_);
+                        _loc12_.setData(_loc5_.premVehQuests[_loc2_].header,_loc5_.premVehQuests[_loc2_].descr);
+                        this.igrPremVehQuestBlocks.push(_loc12_);
+                        _loc12_.x = bgShadowMargin.left + contentMargin.left;
+                        _loc12_.y = topPosition;
+                        topPosition = topPosition + (_loc12_.height + Utils.instance.MARGIN_AFTER_BLOCK);
+                    }
+                    _loc2_++;
+                }
+                if(_loc11_)
+                {
+                    contentMargin.bottom = Utils.instance.MARGIN_AFTER_LASTITEM;
+                }
             }
             _loc5_ = null;
             updatePositions();

@@ -6,6 +6,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
     import net.wg.gui.components.advanced.TextAreaSimple;
     import net.wg.gui.components.controls.IconText;
     import net.wg.gui.components.controls.ActionPrice;
+    import flash.display.MovieClip;
     import net.wg.gui.components.controls.DropdownMenu;
     import net.wg.gui.components.controls.ScrollBar;
     
@@ -28,6 +29,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
         public var tankPrice:IconText;
         
         public var tankActionPrice:ActionPrice;
+        
+        public var rentIcon:MovieClip;
         
         public var rentDD:DropdownMenu;
         

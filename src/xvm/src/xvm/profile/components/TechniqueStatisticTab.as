@@ -424,7 +424,7 @@ package xvm.profile.components
                     var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(adata.winPercent));
                     s += size(Locale.get("Wins"), 13) + ": " + formatHtmlText(size(App.utils.locale.float(adata.winPercent) + "%", 13), ratingColor) + "  " +
                     formatHtmlText(size(getWinsToNextPercentStr(adata), 13), Defines.UICOLOR_LABEL) + "\n";
-                    s += "<font size='7'>\n\n\n</font>\t\t      " + formatHtmlText(size(getWinsToNextPercentStr(data)), Defines.UICOLOR_LABEL);
+                    s += "<font size='7'>\n\n\n</font>\t\t\t\t   " + formatHtmlText(size(getWinsToNextPercentStr(data)), Defines.UICOLOR_LABEL);
                 }
 
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";

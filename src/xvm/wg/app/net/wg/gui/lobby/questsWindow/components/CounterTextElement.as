@@ -73,6 +73,7 @@ package net.wg.gui.lobby.questsWindow.components
                 this.description.label = this.data.label;
                 this.description.value = this.data.value;
                 this.description.linkID = this.data.linkID;
+                this.description.fullLblData = this.data.fullLabel;
                 this.description.isNotAvailable = this.data.isNotAvailable;
                 this.statusMC.visible = this.data.showDone;
                 this.description.validateNow();

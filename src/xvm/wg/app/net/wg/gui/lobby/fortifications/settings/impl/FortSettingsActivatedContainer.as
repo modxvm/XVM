@@ -1,24 +1,23 @@
 package net.wg.gui.lobby.fortifications.settings.impl
 {
     import scaleform.clik.core.UIComponent;
-    import net.wg.gui.lobby.fortifications.settings.IFortSettingsContainer;
-    import net.wg.infrastructure.interfaces.IViewStackContent;
-    import net.wg.infrastructure.interfaces.IPopOverCaller;
+    import net.wg.gui.lobby.fortifications.settings.IFortSettingsActivatedContainer;
     import net.wg.gui.components.advanced.DashLine;
     import net.wg.gui.components.controls.InfoIcon;
     import net.wg.gui.components.controls.SoundButtonEx;
+    import net.wg.gui.lobby.fortifications.settings.IFortSettingsContainer;
     import net.wg.gui.cyberSport.controls.GrayTransparentButton;
     import flash.display.DisplayObject;
     import net.wg.gui.lobby.fortifications.data.settings.FortSettingsActivatedViewVO;
-    import scaleform.clik.events.ButtonEvent;
     import flash.display.InteractiveObject;
     import net.wg.gui.lobby.fortifications.events.FortSettingsEvent;
     import net.wg.gui.events.ViewStackContentEvent;
+    import scaleform.clik.events.ButtonEvent;
     import flash.geom.Point;
-    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
     import net.wg.infrastructure.managers.IPopoverManager;
+    import net.wg.data.constants.generated.FORTIFICATION_ALIASES;
     
-    public class FortSettingsActivatedContainer extends UIComponent implements IFortSettingsContainer, IViewStackContent, IPopOverCaller
+    public class FortSettingsActivatedContainer extends UIComponent implements IFortSettingsActivatedContainer
     {
         
         public function FortSettingsActivatedContainer()
@@ -50,22 +49,16 @@ package net.wg.gui.lobby.fortifications.settings.impl
         
         private var blocks:Vector.<IFortSettingsContainer> = null;
         
+        public function canDisableDefHour(param1:Boolean) : void
+        {
+            this.updateButtons(param1);
+        }
+        
         public function update(param1:Object) : void
         {
             var _loc2_:FortSettingsActivatedViewVO = null;
             _loc2_ = FortSettingsActivatedViewVO(param1);
-            this.disableDefenceTime.visible = _loc2_.canDisableDefencePeriod;
-            this.infoIcon.visible = this.cancelDisableBtn.visible = !_loc2_.canDisableDefencePeriod;
-            if(this.disableDefenceTime.visible)
-            {
-                this.disableDefenceTime.addEventListener(ButtonEvent.CLICK,this.onBtnClickHandler);
-                this.cancelDisableBtn.removeEventListener(ButtonEvent.CLICK,this.onCancelDisableHandler);
-            }
-            else
-            {
-                this.disableDefenceTime.removeEventListener(ButtonEvent.CLICK,this.onBtnClickHandler);
-                this.cancelDisableBtn.addEventListener(ButtonEvent.CLICK,this.onCancelDisableHandler);
-            }
+            this.updateButtons(_loc2_.canDisableDefencePeriod);
             this.disableDefenceTime.label = FORTIFICATIONS.SETTINGSWINDOW_DISABLEDEFENCEPERIODBTN_LBL;
             this.peripheryContainer.update(_loc2_.perepheryContainerVO);
             var _loc3_:int = _loc2_.settingsBlockVOs.length;
@@ -136,12 +129,37 @@ package net.wg.gui.lobby.fortifications.settings.impl
             super.onDispose();
         }
         
+        private function updateButtons(param1:Boolean) : void
+        {
+            this.disableDefenceTime.visible = param1;
+            this.infoIcon.visible = this.cancelDisableBtn.visible = !param1;
+            if(this.disableDefenceTime.visible)
+            {
+                this.disableDefenceTime.addEventListener(ButtonEvent.CLICK,this.onBtnClickHandler);
+                this.cancelDisableBtn.removeEventListener(ButtonEvent.CLICK,this.onCancelDisableHandler);
+            }
+            else
+            {
+                this.disableDefenceTime.removeEventListener(ButtonEvent.CLICK,this.onBtnClickHandler);
+                this.cancelDisableBtn.addEventListener(ButtonEvent.CLICK,this.onCancelDisableHandler);
+            }
+        }
+        
         private function showPopover(param1:String) : void
         {
             var _loc2_:Number = Math.round(this.popoverButton.x);
             var _loc3_:Number = Math.round(this.popoverButton.y);
             var _loc4_:Point = localToGlobal(new Point(_loc2_,_loc3_));
             App.popoverMgr.show(this,param1);
+        }
+        
+        private function hideAssociatedPopovers() : void
+        {
+            var _loc1_:IPopoverManager = App.instance.popoverMgr;
+            if(_loc1_.popoverCaller == this || _loc1_.popoverCaller == this.peripheryContainer)
+            {
+                _loc1_.hide();
+            }
         }
         
         private function onCancelDisableHandler(param1:ButtonEvent) : void
@@ -174,15 +192,6 @@ package net.wg.gui.lobby.fortifications.settings.impl
         private function onViewHide(param1:ViewStackContentEvent) : void
         {
             this.hideAssociatedPopovers();
-        }
-        
-        private function hideAssociatedPopovers() : void
-        {
-            var _loc1_:IPopoverManager = App.instance.popoverMgr;
-            if(_loc1_.popoverCaller == this || _loc1_.popoverCaller == this.peripheryContainer)
-            {
-                _loc1_.hide();
-            }
         }
     }
 }

@@ -5,11 +5,11 @@ package net.wg.gui.components.tooltips
     import net.wg.gui.components.tooltips.helpers.TankTypeIco;
     import net.wg.data.managers.ITooltipProps;
     import net.wg.gui.components.tooltips.VO.VehicleVO;
+    import net.wg.utils.ILocale;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
     import flash.text.TextFormat;
     import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
-    import net.wg.utils.ILocale;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.helpers.Utils;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
@@ -70,6 +70,7 @@ package net.wg.gui.components.tooltips
         override protected function redraw() : void
         {
             var _loc5_:VehicleVO = null;
+            var _loc6_:ILocale = null;
             var _loc11_:ToolTipBlockVO = null;
             var _loc12_:String = null;
             var _loc13_:String = null;
@@ -82,17 +83,20 @@ package net.wg.gui.components.tooltips
             var _loc20_:String = null;
             var _loc21_:Array = null;
             var _loc22_:String = null;
-            var _loc23_:String = null;
+            var _loc23_:Array = null;
             var _loc24_:* = NaN;
-            var _loc25_:* = false;
-            var _loc26_:ToolTipBlockVO = null;
-            var _loc27_:String = null;
-            var _loc28_:ToolTipBlockVO = null;
-            var _loc29_:* = NaN;
-            var _loc30_:* = NaN;
-            var _loc31_:String = null;
-            var _loc32_:TextFormat = null;
-            var _loc33_:ToolTipStatusColorsVO = null;
+            var _loc25_:String = null;
+            var _loc26_:* = NaN;
+            var _loc27_:* = false;
+            var _loc28_:* = false;
+            var _loc29_:ToolTipBlockVO = null;
+            var _loc30_:String = null;
+            var _loc31_:ToolTipBlockVO = null;
+            var _loc32_:* = NaN;
+            var _loc33_:* = NaN;
+            var _loc34_:String = null;
+            var _loc35_:TextFormat = null;
+            var _loc36_:ToolTipStatusColorsVO = null;
             var _loc1_:Separator = null;
             separators = new Vector.<Separator>();
             var _loc2_:ToolTipBlockResultVO = null;
@@ -103,9 +107,10 @@ package net.wg.gui.components.tooltips
             this.vehicleFavorite.visible = _loc5_.isFavorite;
             this.eliteGlow.gotoAndStop(_loc5_.isElite?"elite":"normal");
             this.tankTypeIco.type = _loc5_.isElite?_loc5_.vType + "_elite":_loc5_.vType;
-            var _loc6_:ILocale = App.utils.locale;
+            _loc6_ = App.utils.locale;
             if(!_loc6_)
             {
+                trace("WARNING: locale is undefined" + this);
                 return;
             }
             var _loc7_:* = "";
@@ -167,65 +172,75 @@ package net.wg.gui.components.tooltips
         {
             _loc21_ = _loc5_.stats[_loc4_];
             _loc22_ = _loc21_[0];
+            _loc23_ = null;
+            _loc24_ = Number.NaN;
+            if(_loc21_[1] is Array)
+            {
+                _loc23_ = _loc21_[1];
+            }
+            else
+            {
+                _loc24_ = _loc21_[1];
+            }
             if(SKIP_FIELDS.indexOf(_loc22_) == -1)
             {
                 _loc20_ = Utils.instance.COLOR_NUMBER;
                 _loc19_ = _loc22_ != RENTALS?_loc6_.makeString(TOOLTIPS.vehicle(_loc22_),{}):"";
                 if(_loc22_ == ID_BUY_PRICE || _loc22_ == ID_SELL_PRICE)
                 {
-                    _loc23_ = "";
+                    _loc25_ = "";
                     if((_loc5_.useCredits) && (_loc5_.useGold))
                     {
                         _loc14_ = Utils.instance.getIcon(_loc22_,_component,false);
-                        _loc16_ = _loc22_ == ID_BUY_PRICE?_loc21_[1][0][0]:_loc21_[1][0];
+                        _loc16_ = _loc22_ == ID_BUY_PRICE?_loc23_[0][0]:_loc23_[0];
                         _loc17_ = _loc6_.integer(_loc16_);
-                        _loc18_ = _loc22_ == ID_BUY_PRICE?_loc21_[1][1][0]:0;
+                        _loc18_ = _loc22_ == ID_BUY_PRICE?_loc23_[1][0]:0;
                         _loc12_ = getAlertInfo(_loc6_,_loc18_,_loc13_,IconsTypes.CREDITS);
                         _loc20_ = _loc18_ != 0?Utils.instance.COLOR_ALERT:Utils.instance.COLOR_NUMBER;
                         _loc11_.leftText = _loc11_.leftText + (Utils.instance.htmlWrapper(_loc17_,_loc20_,12,"$TextFont",false) + "<br/>");
                         _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc19_ + _loc12_ + "</h1>",_loc14_,_loc15_));
                         if((_loc5_.isAction) && _loc22_ == ID_BUY_PRICE && !(_loc5_.defBuyPrice == null) && !(_loc5_.defBuyPrice[0] == 0) && !(_loc16_ == _loc5_.defBuyPrice[0]))
                         {
-                            _loc23_ = getActionInfo(_loc6_,_loc5_.actionPrc,_loc5_.defBuyPrice[0],IconsTypes.CREDITS);
+                            _loc25_ = getActionInfo(_loc6_,_loc5_.actionPrc,_loc5_.defBuyPrice[0],IconsTypes.CREDITS);
                             _loc11_.leftText = _loc11_.leftText + "<br/>";
-                            _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc23_ + "</h1>"));
+                            _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc25_ + "</h1>"));
                         }
                         _loc17_ = _loc6_.makeString(TOOLTIPS.VEHICLE_TEXTDELIMITER_OR,{});
                         _loc11_.leftText = _loc11_.leftText + (Utils.instance.htmlWrapper(_loc17_,Utils.instance.COLOR_NORMAL,12,"$TextFont",false) + "<br/>");
                         _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO(" "));
                         _loc14_ = Utils.instance.getIcon(_loc22_,_component,true);
-                        _loc16_ = _loc22_ == ID_BUY_PRICE?_loc21_[1][0][1]:_loc21_[1][1];
+                        _loc16_ = _loc22_ == ID_BUY_PRICE?_loc23_[0][1]:_loc23_[1];
                         _loc17_ = _loc6_.gold(_loc16_);
-                        _loc18_ = _loc22_ == ID_BUY_PRICE?_loc21_[1][1][1]:0;
+                        _loc18_ = _loc22_ == ID_BUY_PRICE?_loc23_[1][1]:0;
                         _loc12_ = getAlertInfo(_loc6_,_loc18_,_loc13_,IconsTypes.GOLD);
                         _loc20_ = _loc18_ != 0?Utils.instance.COLOR_ALERT:Utils.instance.COLOR_NUMBER;
                         _loc11_.leftText = _loc11_.leftText + (Utils.instance.htmlWrapper(_loc17_,_loc20_,12,"$TextFont",false) + "<br/>");
                         _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc19_ + _loc12_ + "</h1>",_loc14_,_loc15_));
                         if((_loc5_.isAction) && _loc22_ == ID_BUY_PRICE && !(_loc5_.defBuyPrice == null) && !(_loc5_.defBuyPrice[1] == 0) && !(_loc16_ == _loc5_.defBuyPrice[1]))
                         {
-                            _loc23_ = getActionInfo(_loc6_,_loc5_.actionPrc,_loc5_.defBuyPrice[1],IconsTypes.GOLD);
+                            _loc25_ = getActionInfo(_loc6_,_loc5_.actionPrc,_loc5_.defBuyPrice[1],IconsTypes.GOLD);
                             _loc11_.leftText = _loc11_.leftText + "<br/>";
-                            _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc23_ + "</h1>"));
+                            _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc25_ + "</h1>"));
                         }
                     }
                     else
                     {
                         _loc14_ = Utils.instance.getIcon(_loc22_,_component,_loc5_.useGold);
-                        _loc16_ = _loc22_ == ID_BUY_PRICE?_loc5_.useCredits?_loc21_[1][0][0]:_loc21_[1][0][1]:_loc5_.useCredits?_loc21_[1][0]:_loc21_[1][1];
+                        _loc16_ = _loc22_ == ID_BUY_PRICE?_loc5_.useCredits?_loc23_[0][0]:_loc23_[0][1]:_loc5_.useCredits?_loc23_[0]:_loc23_[1];
                         _loc17_ = _loc5_.useCredits?_loc6_.integer(_loc16_):_loc6_.gold(_loc16_);
-                        _loc18_ = _loc22_ == ID_BUY_PRICE?_loc5_.useCredits?_loc21_[1][1][0]:_loc21_[1][1][1]:0;
+                        _loc18_ = _loc22_ == ID_BUY_PRICE?_loc5_.useCredits?_loc23_[1][0]:_loc23_[1][1]:0;
                         _loc12_ = getAlertInfo(_loc6_,_loc18_,_loc13_,_loc5_.useCredits?IconsTypes.CREDITS:IconsTypes.GOLD);
                         _loc20_ = _loc18_ != 0?Utils.instance.COLOR_ALERT:Utils.instance.COLOR_NUMBER;
                         _loc11_.leftText = _loc11_.leftText + (Utils.instance.htmlWrapper(_loc17_,_loc20_,12,"$TextFont",false) + "<br/>");
                         _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc19_ + _loc12_ + "</h1>",_loc14_,_loc15_));
                         if((_loc5_.isAction) && _loc22_ == ID_BUY_PRICE && !(_loc5_.defBuyPrice == null) && (!(_loc5_.defBuyPrice[0] == 0) || !(_loc5_.defBuyPrice[1] == 0)))
                         {
-                            _loc24_ = _loc5_.useCredits?_loc5_.defBuyPrice[0]:_loc5_.defBuyPrice[1];
-                            if(_loc16_ != _loc24_)
+                            _loc26_ = _loc5_.useCredits?_loc5_.defBuyPrice[0]:_loc5_.defBuyPrice[1];
+                            if(_loc16_ != _loc26_)
                             {
-                                _loc23_ = getActionInfo(_loc6_,_loc5_.actionPrc,_loc24_,_loc5_.useCredits?IconsTypes.CREDITS:IconsTypes.GOLD);
+                                _loc25_ = getActionInfo(_loc6_,_loc5_.actionPrc,_loc26_,_loc5_.useCredits?IconsTypes.CREDITS:IconsTypes.GOLD);
                                 _loc11_.leftText = _loc11_.leftText + "<br/>";
-                                _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc23_ + "</h1>"));
+                                _loc11_.rightTextList.push(new ToolTipBlockRightListItemVO("<h1>" + _loc25_ + "</h1>"));
                             }
                         }
                     }
@@ -235,8 +250,8 @@ package net.wg.gui.components.tooltips
                     _loc12_ = "";
                     if(_loc22_ == ID_UNLOCK_PRICE)
                     {
-                        _loc16_ = Number(_loc21_[1][0]);
-                        _loc18_ = _loc21_[1][1]?_loc21_[1][1]:0;
+                        _loc16_ = Number(_loc23_[0]);
+                        _loc18_ = _loc23_[1]?_loc23_[1]:0;
                         _loc12_ = getAlertInfo(_loc6_,_loc18_,_loc13_,IconsTypes.XP_PRICE);
                         _loc20_ = _loc18_ != 0?Utils.instance.COLOR_ALERT:Utils.instance.COLOR_NUMBER;
                     }
@@ -246,18 +261,21 @@ package net.wg.gui.components.tooltips
                         {
                             continue;
                         }
+                        Utils.instance.addEmptyBlock(_loc11_);
                         _loc16_ = _loc5_.rentLeft;
                         _loc19_ = _loc5_.rentDescr;
                     }
                     else if(_loc22_ == MIN_RENTALS_PRICE)
                     {
-                        _loc25_ = _loc21_[1][1] > 0;
-                        _loc16_ = _loc25_?Number(_loc21_[1][1]):Number(_loc21_[1][0]);
-                        _loc14_ = _loc25_?IconsTypes.GOLD:IconsTypes.CREDITS;
+                        _loc27_ = _loc23_[0][1] > 0;
+                        _loc16_ = _loc27_?Number(_loc23_[0][1]):Number(_loc23_[0][0]);
+                        _loc28_ = _loc27_?Boolean(_loc23_[1][1]):Boolean(_loc23_[1][0]);
+                        _loc20_ = _loc28_?Utils.instance.COLOR_NUMBER:Utils.instance.COLOR_ALERT;
+                        _loc14_ = _loc27_?IconsTypes.GOLD:IconsTypes.CREDITS;
                     }
                     else
                     {
-                        _loc16_ = Number(_loc21_[1]);
+                        _loc16_ = _loc24_;
                     }
                     
                     
@@ -292,21 +310,21 @@ package net.wg.gui.components.tooltips
     }
     if((_loc5_.characteristics) && _loc5_.characteristics.length > 0)
     {
-        _loc26_ = new ToolTipBlockVO();
-        _loc26_.header = _loc6_?_loc6_.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY):TOOLTIPS.TANKCARUSEL_MAINPROPERTY;
-        _loc26_.leftText = "";
-        _loc26_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
-        _loc26_.contener = content;
-        _loc26_.startYPos = topPosition;
-        _loc26_.childrenNamePrefix = "characteristics";
-        _loc26_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
-        _loc26_.rightTextCSS = new StyleSheet();
-        _loc26_.rightTextCSS.setStyle("h1",{"color":Utils.instance.COLOR_NORMAL,
+        _loc29_ = new ToolTipBlockVO();
+        _loc29_.header = _loc6_?_loc6_.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY):TOOLTIPS.TANKCARUSEL_MAINPROPERTY;
+        _loc29_.leftText = "";
+        _loc29_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
+        _loc29_.contener = content;
+        _loc29_.startYPos = topPosition;
+        _loc29_.childrenNamePrefix = "characteristics";
+        _loc29_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
+        _loc29_.rightTextCSS = new StyleSheet();
+        _loc29_.rightTextCSS.setStyle("h1",{"color":Utils.instance.COLOR_NORMAL,
         "fontSize":"11px",
         "fontFamily":"$TextFont",
         "leading":"2px"
     });
-    _loc26_.rightTextCSS.setStyle("p",{"color":Utils.instance.COLOR_SUB_NORMAL,
+    _loc29_.rightTextCSS.setStyle("p",{"color":Utils.instance.COLOR_SUB_NORMAL,
     "fontSize":"11px",
     "fontFamily":"$TextFont",
     "leading":"2px"
@@ -315,12 +333,12 @@ _loc3_ = _loc5_.characteristics.length;
 _loc4_ = 0;
 while(_loc4_ < _loc3_)
 {
-    _loc26_.leftText = _loc26_.leftText + (Utils.instance.htmlWrapper(_loc5_.characteristics[_loc4_][1],Utils.instance.COLOR_NUMBER,12,"$TextFont",false) + "<br/>");
-    _loc27_ = _loc6_?_loc6_.makeString(_loc5_.characteristics[_loc4_][0],{}):_loc5_.characteristics[_loc4_][0];
-    _loc26_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(_loc27_);
+    _loc29_.leftText = _loc29_.leftText + (Utils.instance.htmlWrapper(_loc5_.characteristics[_loc4_][1],Utils.instance.COLOR_NUMBER,12,"$TextFont",false) + "<br/>");
+    _loc30_ = _loc6_?_loc6_.makeString(_loc5_.characteristics[_loc4_][0],{}):_loc5_.characteristics[_loc4_][0];
+    _loc29_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(_loc30_);
     _loc4_++;
 }
-_loc2_ = Utils.instance.createBlock(_loc26_,contentMargin.left + bgShadowMargin.left);
+_loc2_ = Utils.instance.createBlock(_loc29_,contentMargin.left + bgShadowMargin.left);
 blockResults.push(_loc2_);
 topPosition = _loc2_.startYPos;
 hasIcon = _loc2_.hasIcons?true:hasIcon;
@@ -332,38 +350,38 @@ leftPartMaxW = _loc2_.leftPartMaxW > leftPartMaxW?_loc2_.leftPartMaxW:leftPartMa
 }
 if((_loc5_.equipments) && _loc5_.equipments.length > 0)
 {
-_loc28_ = new ToolTipBlockVO();
-_loc28_.leftText = "";
-_loc28_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
-_loc28_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
-_loc28_.contener = content;
-_loc28_.startYPos = topPosition;
-_loc28_.childrenNamePrefix = "equipments";
-_loc28_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
+_loc31_ = new ToolTipBlockVO();
+_loc31_.leftText = "";
+_loc31_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
+_loc31_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
+_loc31_.contener = content;
+_loc31_.startYPos = topPosition;
+_loc31_.childrenNamePrefix = "equipments";
+_loc31_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
 _loc3_ = _loc5_.equipments.length;
 _loc4_ = 0;
 while(_loc4_ < _loc3_)
 {
-    _loc29_ = _loc5_.equipments[_loc4_].current;
-    _loc30_ = _loc5_.equipments[_loc4_].total;
-    _loc31_ = _loc5_.equipments[_loc4_].label;
-    if(_loc29_ < _loc30_ && _loc31_ == "crew" && (_component == COMPONENT_CAROUSEL || _component == COMPONENT_INVENTORY))
+    _loc32_ = _loc5_.equipments[_loc4_].current;
+    _loc33_ = _loc5_.equipments[_loc4_].total;
+    _loc34_ = _loc5_.equipments[_loc4_].label;
+    if(_loc32_ < _loc33_ && _loc34_ == "crew" && (_component == COMPONENT_CAROUSEL || _component == COMPONENT_INVENTORY))
     {
-        _loc28_.leftText = _loc28_.leftText + (Utils.instance.htmlWrapper(_loc29_.toString(),Utils.instance.COLOR_ALERT) + Utils.instance.htmlWrapper("/" + _loc30_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
+        _loc31_.leftText = _loc31_.leftText + (Utils.instance.htmlWrapper(_loc32_.toString(),Utils.instance.COLOR_ALERT) + Utils.instance.htmlWrapper("/" + _loc33_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
     }
-    else if(_loc31_ == "crew" && _component == COMPONENT_SHOP)
+    else if(_loc34_ == "crew" && _component == COMPONENT_SHOP)
     {
-        _loc28_.leftText = _loc28_.leftText + Utils.instance.htmlWrapper(_loc30_.toString(),Utils.instance.COLOR_NUMBER);
+        _loc31_.leftText = _loc31_.leftText + Utils.instance.htmlWrapper(_loc33_.toString(),Utils.instance.COLOR_NUMBER);
     }
     else
     {
-        _loc28_.leftText = _loc28_.leftText + (Utils.instance.htmlWrapper(_loc29_.toString(),Utils.instance.COLOR_NUMBER) + Utils.instance.htmlWrapper("/" + _loc30_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
+        _loc31_.leftText = _loc31_.leftText + (Utils.instance.htmlWrapper(_loc32_.toString(),Utils.instance.COLOR_NUMBER) + Utils.instance.htmlWrapper("/" + _loc33_.toString(),Utils.instance.COLOR_NUMBER) + "<br/>");
     }
     
-    _loc28_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(_loc31_));
+    _loc31_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(_loc34_));
     _loc4_++;
 }
-_loc2_ = Utils.instance.createBlock(_loc28_,contentMargin.left + bgShadowMargin.left);
+_loc2_ = Utils.instance.createBlock(_loc31_,contentMargin.left + bgShadowMargin.left);
 blockResults.push(_loc2_);
 topPosition = _loc2_.startYPos;
 hasIcon = _loc2_.hasIcons?true:hasIcon;
@@ -376,11 +394,11 @@ leftPartMaxW = _loc2_.leftPartMaxW > leftPartMaxW?_loc2_.leftPartMaxW:leftPartMa
 if(_loc5_.clanLockHeader != "")
 {
 topPosition = topPosition - Utils.instance.MARGIN_AFTER_SEPARATE;
-_loc32_ = new TextFormat();
-_loc32_.leading = -1;
+_loc35_ = new TextFormat();
+_loc35_.leading = -1;
 this.vehicleLockText.autoSize = TextFieldAutoSize.LEFT;
 this.vehicleLockText.htmlText = _loc5_.clanLockHeader;
-this.vehicleLockText.setTextFormat(_loc32_);
+this.vehicleLockText.setTextFormat(_loc35_);
 this.vehicleLockText.width = this.vehicleLockText.textWidth + 5;
 this.vehicleLock.alpha = 1;
 this.vehicleLock.visible = true;
@@ -397,13 +415,13 @@ this.vehicleLock.visible = false;
 }
 if(_loc5_.status)
 {
-_loc33_ = Utils.instance.getStatusColor(_loc5_.statusLevel);
+_loc36_ = Utils.instance.getStatusColor(_loc5_.statusLevel);
 this.tooltipStatus.y = topPosition;
 this.tooltipStatus.x = contentMargin.left + bgShadowMargin.left;
 this.tooltipStatus.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
-this.tooltipStatus.setData(_loc5_.statusHeader,_loc5_.statusText,_loc33_);
+this.tooltipStatus.setData(_loc5_.statusHeader,_loc5_.statusText,_loc36_);
 topPosition = topPosition + this.tooltipStatus.height;
-contentMargin.bottom = 14;
+contentMargin.bottom = Utils.instance.MARGIN_AFTER_LASTITEM;
 }
 else
 {

@@ -3,6 +3,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import net.wg.infrastructure.base.meta.impl.AmmunitionPanelMeta;
     import net.wg.gui.interfaces.IHelpLayoutComponent;
     import net.wg.infrastructure.base.meta.IAmmunitionPanelMeta;
+    import net.wg.infrastructure.interfaces.entity.IFocusContainer;
     import net.wg.utils.IEventCollector;
     import flash.text.TextField;
     import net.wg.gui.components.controls.IconTextButton;
@@ -25,8 +26,10 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
     import scaleform.gfx.MouseEventEx;
     import net.wg.gui.utils.ComplexTooltipHelper;
     import flash.text.TextFormat;
+    import net.wg.infrastructure.events.FocusRequestEvent;
+    import flash.display.InteractiveObject;
     
-    public class AmmunitionPanel extends AmmunitionPanelMeta implements IHelpLayoutComponent, IAmmunitionPanelMeta
+    public class AmmunitionPanel extends AmmunitionPanelMeta implements IHelpLayoutComponent, IAmmunitionPanelMeta, IFocusContainer
     {
         
         public function AmmunitionPanel()
@@ -101,13 +104,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         
         private var _vehicleStatusId:String = "";
         
+        private var _rentAvailable:Boolean = false;
+        
         private var _vehicleStatusMessage:String = "";
         
         private var _vehicleStatusColor:uint = 4813330;
         
         private var VEHICLE_STATUS_INVALID:String = "vehicleStatusInvalid";
-        
-        private var VEHICLE_STATUS_RENTAL_IS_OVER:String = "rentalIsOver";
         
         private var TO_RENT_LEFT_MARGIN:Number = 10;
         
@@ -321,7 +324,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             super.draw();
             if(isInvalid(this.VEHICLE_STATUS_INVALID))
             {
-                this.__setVehicleStatus(this._vehicleStatusId,this._vehicleStatusMessage,this._vehicleStatusColor);
+                this.__setVehicleStatus(this._vehicleStatusId,this._vehicleStatusMessage,this._vehicleStatusColor,this._rentAvailable);
             }
         }
         
@@ -493,19 +496,23 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             App.toolTipMgr.hide();
         }
         
-        private function __setVehicleStatus(param1:String, param2:String, param3:uint) : void
+        private function __setVehicleStatus(param1:String, param2:String, param3:uint, param4:Boolean) : void
         {
-            var _loc4_:TextFormat = null;
+            var _loc5_:TextFormat = null;
             if(this.vehicleStateMsg)
             {
-                this.vehicleStateMsg.text = param2;
-                _loc4_ = this.vehicleStateMsg.getTextFormat();
-                _loc4_.color = param3;
-                this.vehicleStateMsg.setTextFormat(_loc4_);
+                this.vehicleStateMsg.htmlText = param2;
+                _loc5_ = this.vehicleStateMsg.getTextFormat();
+                _loc5_.color = param3;
+                this.vehicleStateMsg.setTextFormat(_loc5_);
                 this.vehicleStateMsg.width = this.vehicleStateMsg.textWidth;
                 this.vehicleStateMsg.x = width - this.vehicleStateMsg.width >> 1;
-                this.toRent.visible = param1 == this.VEHICLE_STATUS_RENTAL_IS_OVER;
+                this.toRent.visible = param4;
                 this.toRent.x = this.vehicleStateMsg.x + this.vehicleStateMsg.width + this.TO_RENT_LEFT_MARGIN ^ 0;
+                if(this.toRent.visible)
+                {
+                    dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
+                }
             }
         }
         
@@ -540,18 +547,27 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             }
         }
         
-        public function as_updateVehicleStatus(param1:String, param2:String, param3:String) : void
+        public function as_updateVehicleStatus(param1:String, param2:String, param3:String, param4:Boolean) : void
         {
             var param2:String = App.utils.locale.makeString(param2);
             this._vehicleStatusId = param1;
             this._vehicleStatusMessage = param2;
+            this._rentAvailable = param4;
             this._vehicleStatusColor = this.__stateLevelToColor(param3);
             invalidate(this.VEHICLE_STATUS_INVALID);
         }
         
         private function toRentHandler(param1:ButtonEvent) : void
         {
-            toRentContinueS();
+            if(this._rentAvailable)
+            {
+                toRentContinueS();
+            }
+        }
+        
+        public function getComponentForFocus() : InteractiveObject
+        {
+            return this.toRent;
         }
     }
 }

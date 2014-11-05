@@ -93,9 +93,12 @@ package net.wg.gui.components.controls
             var _loc11_:uint = 0;
             var _loc12_:uint = 0;
             var _loc13_:IClassFactory = null;
-            var _loc14_:ContextMenuItemSeparate = null;
-            var _loc15_:ContextMenuItem = null;
-            var _loc16_:IContextItem = null;
+            var _loc14_:* = NaN;
+            var _loc15_:* = undefined;
+            var _loc16_:ContextMenuItem = null;
+            var _loc17_:ContextMenuItemSeparate = null;
+            var _loc18_:IContextItem = null;
+            var _loc19_:* = NaN;
             this._data = param1;
             if(this._data)
             {
@@ -108,47 +111,59 @@ package net.wg.gui.components.controls
                 _loc12_ = 0;
                 this.items = new Array();
                 _loc13_ = App.utils.classFactory;
+                _loc14_ = _loc4_.length;
+                _loc16_ = null;
                 _loc5_ = 0;
-                while(_loc5_ < _loc4_.length)
+                while(_loc5_ < _loc14_)
                 {
-                    _loc14_ = null;
-                    _loc15_ = null;
-                    _loc16_ = _loc4_[_loc5_];
-                    if(_loc16_.id == ContextMenuConstants.SEPARATE)
+                    _loc17_ = null;
+                    _loc18_ = _loc4_[_loc5_];
+                    if(_loc18_.id == ContextMenuConstants.SEPARATE)
                     {
-                        _loc14_ = _loc13_.getComponent(Linkages.CONTEXT_MENU_SEPARATE,ContextMenuItemSeparate);
-                        _loc14_.index = _loc5_;
-                        _loc14_.id = _loc16_.id;
-                        _loc14_.x = _loc9_;
-                        _loc14_.y = _loc10_;
-                        _loc10_ = _loc10_ + (_loc14_.height + this.padding.bottom + this.padding.top);
-                        this.items.push(_loc14_);
+                        _loc17_ = _loc13_.getComponent(Linkages.CONTEXT_MENU_SEPARATE,ContextMenuItemSeparate);
+                        _loc17_.index = _loc5_;
+                        _loc17_.id = _loc18_.id;
+                        _loc17_.x = _loc9_;
+                        _loc17_.y = _loc10_;
+                        _loc10_ = _loc10_ + (_loc17_.height + this.padding.bottom + this.padding.top);
+                        this.items.push(_loc17_);
                     }
                     else
                     {
-                        _loc15_ = _loc13_.getComponent(Linkages.CONTEXT_MENU_ITEM,ContextMenuItem,_loc16_.initData);
+                        _loc15_ = _loc13_.getComponent(Linkages.CONTEXT_MENU_ITEM,ContextMenuItem,_loc18_.initData);
                         _loc15_.index = _loc5_;
                         _loc15_.items = _loc4_[_loc5_].submenu?_loc4_[_loc5_].submenu.slice(0,_loc4_[_loc5_].submenu.length):new Vector.<IContextItem>();
                         _loc15_.addEventListener(ButtonEvent.CLICK,this.onItemClick);
-                        _loc15_.id = _loc16_.id;
-                        _loc15_.label = _loc16_.label;
+                        _loc15_.id = _loc18_.id;
+                        _loc15_.label = _loc18_.label;
+                        _loc15_.invalidWidth();
                         _loc11_ = Math.max(_loc11_,_loc15_.width);
                         _loc15_.x = _loc9_;
                         _loc15_.y = _loc10_;
                         _loc10_ = _loc10_ + (_loc15_.height + this.padding.bottom + this.padding.top);
                         if(_loc15_.items.length > 0)
                         {
-                            this.createSubItems(_loc15_);
+                            _loc11_ = Math.max(_loc11_,this.createSubItems(_loc15_));
                         }
                         this.items.push(_loc15_);
                     }
-                    this.addChild(_loc14_ != null?_loc14_:_loc15_);
+                    this.addChild(_loc17_ != null?_loc17_:_loc15_);
                     _loc5_++;
                 }
+                _loc14_ = this.items.length;
                 _loc5_ = 0;
                 while(_loc5_ < this.items.length)
                 {
-                    this.items[_loc5_].width = _loc11_;
+                    _loc15_ = this.items[_loc5_];
+                    _loc15_.width = _loc11_;
+                    _loc19_ = _loc15_.subItems.length;
+                    _loc6_ = 0;
+                    while(_loc6_ < _loc19_)
+                    {
+                        _loc16_ = _loc15_.subItems[_loc6_];
+                        _loc16_.width = _loc11_;
+                        _loc6_++;
+                    }
                     _loc5_++;
                 }
                 _loc12_ = _loc10_ - this.MARGIN - this.padding.bottom - this.padding.top - this._bgShadowBorder.top - this.FIRST_ELEM_TOP_PADDING;
@@ -190,35 +205,40 @@ package net.wg.gui.components.controls
             }
         }
         
-        private function createSubItems(param1:ContextMenuItem) : void
+        private function createSubItems(param1:ContextMenuItem) : Number
         {
-            var _loc6_:IContextItem = null;
-            var _loc7_:ContextMenuItem = null;
+            var _loc8_:IContextItem = null;
+            var _loc9_:ContextMenuItem = null;
             var _loc2_:Number = param1.x;
             var _loc3_:Number = param1.y + param1.height + this.padding.top + this.padding.bottom - this.FIRST_ELEM_TOP_PADDING;
-            var _loc4_:IClassFactory = App.utils.classFactory;
-            var _loc5_:uint = 0;
-            while(_loc5_ < param1.items.length)
+            var _loc4_:Number = param1.items.length;
+            var _loc5_:IClassFactory = App.utils.classFactory;
+            var _loc6_:Number = 0;
+            var _loc7_:uint = 0;
+            while(_loc7_ < _loc4_)
             {
-                if(!(param1.items[_loc5_] is SeparateItem))
+                if(!(param1.items[_loc7_] is SeparateItem))
                 {
-                    _loc6_ = param1.items[_loc5_];
-                    _loc7_ = _loc4_.getComponent(Linkages.CONTEXT_MENU_ITEM,ContextMenuItem,_loc6_.initData);
-                    _loc7_.index = _loc5_;
-                    _loc7_.type = _loc7_.CONTEXT_MENU_ITEM_SUB;
-                    _loc7_.id = _loc6_.id;
-                    _loc7_.label = _loc6_.label;
-                    _loc7_.addEventListener(ButtonEvent.CLICK,this.onItemClick);
-                    _loc7_.x = _loc2_;
-                    _loc7_.y = _loc3_;
-                    _loc3_ = _loc3_ + (_loc7_.height + this.padding.top + this.padding.bottom);
-                    _loc7_.visible = false;
-                    _loc7_.alpha = 0;
-                    param1.subItems.push(_loc7_);
-                    this.addChild(_loc7_);
+                    _loc8_ = param1.items[_loc7_];
+                    _loc9_ = _loc5_.getComponent(Linkages.CONTEXT_MENU_ITEM,ContextMenuItem,_loc8_.initData);
+                    _loc9_.index = _loc7_;
+                    _loc9_.type = _loc9_.CONTEXT_MENU_ITEM_SUB;
+                    _loc9_.id = _loc8_.id;
+                    _loc9_.label = _loc8_.label;
+                    _loc9_.invalidWidth();
+                    _loc6_ = Math.max(_loc6_,_loc9_.width);
+                    _loc9_.addEventListener(ButtonEvent.CLICK,this.onItemClick);
+                    _loc9_.x = _loc2_;
+                    _loc9_.y = _loc3_;
+                    _loc3_ = _loc3_ + (_loc9_.height + this.padding.top + this.padding.bottom);
+                    _loc9_.visible = false;
+                    _loc9_.alpha = 0;
+                    param1.subItems.push(_loc9_);
+                    this.addChild(_loc9_);
                 }
-                _loc5_++;
+                _loc7_++;
             }
+            return _loc6_;
         }
         
         private function onItemClick(param1:ButtonEvent) : void

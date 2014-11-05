@@ -16,6 +16,8 @@ package net.wg.gui.lobby.hangar.tcarousel
         
         public static var FILTER_ALL_NATION:Number = -1;
         
+        public static var FILTER_IGR_NATION:Number = 100;
+        
         public static var FILTER_USSR:Number = 0;
         
         public static var FILTER_GERMANY:Number = 1;
@@ -67,5 +69,13 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.checkBoxToMain.enabled = param1;
             super.enabled = param1;
         }
+        
+        public function createFilterItem(param1:String, param2:Number, param3:String) : Object
+        {
+            return {"label":param1,
+            "data":param2,
+            "icon":param3
+        };
     }
+}
 }

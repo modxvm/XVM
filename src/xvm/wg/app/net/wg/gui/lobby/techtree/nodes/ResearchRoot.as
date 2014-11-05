@@ -8,7 +8,11 @@ package net.wg.gui.lobby.techtree.nodes
     import net.wg.gui.components.controls.SoundButtonEx;
     import scaleform.clik.events.ButtonEvent;
     import net.wg.gui.lobby.techtree.TechTreeEvent;
+    import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
+    import flash.text.TextFormat;
     import net.wg.gui.utils.VehicleStateString;
+    import net.wg.data.constants.Values;
+    import net.wg.gui.components.tooltips.helpers.Utils;
     import flash.display.DisplayObjectContainer;
     import net.wg.gui.lobby.techtree.MenuHandler;
     import net.wg.gui.lobby.techtree.interfaces.IRenderer;
@@ -38,7 +42,7 @@ package net.wg.gui.lobby.techtree.nodes
         
         public var flag:MovieClip;
         
-        public var rentLeftTF:TextField;
+        public var additionalStatusField:TextField;
         
         public var btnShowInHangar:SoundButtonEx;
         
@@ -83,6 +87,10 @@ package net.wg.gui.lobby.techtree.nodes
         override public function populateUI() : void
         {
             var _loc2_:String = null;
+            var _loc3_:String = null;
+            var _loc4_:String = null;
+            var _loc5_:ToolTipStatusColorsVO = null;
+            var _loc6_:TextFormat = null;
             var _loc1_:String = _container.getNation();
             if(!(this.flag == null) && !(this.flag.currentFrameLabel == _loc1_))
             {
@@ -118,9 +126,26 @@ package net.wg.gui.lobby.techtree.nodes
                 button.visible = stateProps.visible;
                 button.setOwner(this,_doValidateNow);
             }
-            if(this.rentLeftTF)
+            if(this.additionalStatusField)
             {
-                this.rentLeftTF.text = getRentLeft();
+                _loc3_ = getStatus();
+                _loc4_ = getStatusLevel();
+                if(!(_loc3_ == Values.EMPTY_STR) && !(Utils.instance.allowStatuses.indexOf(_loc4_) == -1))
+                {
+                    _loc5_ = Utils.instance.getStatusColor(_loc4_);
+                    this.additionalStatusField.htmlText = _loc3_;
+                    this.additionalStatusField.textColor = _loc5_.textColor;
+                    _loc6_ = this.additionalStatusField.getTextFormat();
+                    _loc6_.size = _loc5_.headerFontSize;
+                    _loc6_.font = _loc5_.headerFontFace;
+                    _loc6_.color = _loc5_.textColor;
+                    this.additionalStatusField.setTextFormat(_loc6_);
+                    this.additionalStatusField.filters = _loc5_.filters;
+                }
+                else
+                {
+                    this.additionalStatusField.htmlText = "";
+                }
             }
             if(this.btnShowInHangar)
             {

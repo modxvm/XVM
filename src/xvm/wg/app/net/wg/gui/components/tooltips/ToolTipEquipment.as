@@ -4,11 +4,11 @@ package net.wg.gui.components.tooltips
     import flash.display.Sprite;
     import net.wg.data.managers.ITooltipProps;
     import net.wg.gui.components.tooltips.VO.EquipmentVO;
+    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import net.wg.utils.ILocale;
     import flash.text.TextFormat;
     import flash.text.StyleSheet;
     import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
-    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import net.wg.gui.components.tooltips.helpers.Utils;
     import net.wg.data.constants.FittingTypes;
     import flash.text.TextFormatAlign;
@@ -75,6 +75,7 @@ package net.wg.gui.components.tooltips
         override protected function redraw() : void
         {
             var _loc3_:EquipmentVO = null;
+            var _loc5_:ToolTipBlockResultVO = null;
             var _loc7_:ILocale = null;
             var _loc10_:* = NaN;
             var _loc17_:String = null;
@@ -106,7 +107,7 @@ package net.wg.gui.components.tooltips
             _loc3_ = new EquipmentVO(_data);
             var _loc4_:Separator = null;
             separators = new Vector.<Separator>();
-            var _loc5_:ToolTipBlockResultVO = null;
+            _loc5_ = null;
             blockResults = new Vector.<ToolTipBlockResultVO>();
             this._defContentMarginBottom = contentMargin.bottom;
             this._defBGShadowMarginBottom = bgShadowMargin.bottom;

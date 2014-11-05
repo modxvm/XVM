@@ -24,6 +24,8 @@ package net.wg.gui.lobby.store.views.base
             super();
         }
         
+        protected static var CHECKBOX_Y_STEP:Number = 20;
+        
         protected static function assertGroupSelection(param1:ButtonGroup, param2:String, param3:Boolean = false) : void
         {
             var _loc4_:IAssertable = null;
@@ -67,7 +69,7 @@ package net.wg.gui.lobby.store.views.base
                     if(_loc6_.instance.visible)
                     {
                         _loc6_.instance.data = _loc6_.name;
-                        _loc6_.instance.label = param5(param1 + "/" + param4 + "/" + _loc6_.name + "/name");
+                        _loc6_.instance.label = param5(param1 + "/" + param4 + "/" + _loc6_.name + "/name",_loc6_.htmlIcon);
                     }
                 }
             }
@@ -86,6 +88,8 @@ package net.wg.gui.lobby.store.views.base
         private var _uiName:String = null;
         
         private var _localizator:Function = null;
+        
+        protected var isFiltersCountInvalid:String = "isFiltersCountInvalid";
         
         override protected function onDispose() : void
         {

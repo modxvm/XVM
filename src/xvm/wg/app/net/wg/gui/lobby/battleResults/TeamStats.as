@@ -185,7 +185,6 @@ dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
 
 private function onIndexChange(param1:ListEvent) : void
 {
-var _loc3_:* = false;
 var _loc4_:ScrollingListEx = null;
 if(param1.target.selectedIndex != -1)
 {
@@ -198,7 +197,7 @@ this.team2Stats.data = this.team2List.dataProvider[this.team2List.selectedIndex]
 this.team1Stats.visible = this.team1List.selectedIndex > -1 && (this.team1Stats.data);
 this.team2Stats.visible = this.team2List.selectedIndex > -1 && (this.team2Stats.data);
 var _loc2_:Boolean = this.team2List.selectedIndex == -1 || !this.team2Stats.visible;
-_loc3_ = this.team1List.selectedIndex == -1 || !this.team1Stats.visible;
+var _loc3_:Boolean = this.team1List.selectedIndex == -1 || !this.team1Stats.visible;
 this.team1List.tabEnabled = this.team1List.visible = this.header1.visible = _loc2_;
 this.team2List.tabEnabled = this.team2List.visible = this.header2.visible = _loc3_;
 }

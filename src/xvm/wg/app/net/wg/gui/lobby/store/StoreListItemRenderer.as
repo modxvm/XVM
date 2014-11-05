@@ -3,12 +3,14 @@ package net.wg.gui.lobby.store
     import net.wg.gui.components.controls.ActionPrice;
     import flash.text.TextField;
     import flash.display.Sprite;
+    import net.wg.gui.lobby.store.shop.ShopRent;
+    import net.wg.data.VO.StoreTableData;
+    import net.wg.data.constants.Values;
     import scaleform.gfx.TextFieldEx;
     import scaleform.clik.utils.Constraints;
     import flash.events.MouseEvent;
     import flash.geom.Point;
     import scaleform.clik.constants.InvalidationType;
-    import net.wg.data.VO.StoreTableData;
     import net.wg.infrastructure.exceptions.AbstractException;
     import net.wg.data.constants.Errors;
     import net.wg.infrastructure.managers.ITooltipMgr;
@@ -31,6 +33,25 @@ package net.wg.gui.lobby.store
         public var errorField:TextField = null;
         
         public var hitMc:Sprite;
+        
+        public var rent:ShopRent = null;
+        
+        private function updateRent(param1:StoreTableData) : void
+        {
+            if(this.rent)
+            {
+                if(!param1.rentLeft || param1.rentLeft == Values.EMPTY_STR)
+                {
+                    this.rent.visible = false;
+                }
+                else
+                {
+                    this.rent.updateText(param1.rentLeft);
+                    this.rent.y = descField.y + descField.textHeight ^ 0;
+                    this.rent.visible = true;
+                }
+            }
+        }
         
         override protected function onDispose() : void
         {
@@ -122,6 +143,7 @@ package net.wg.gui.lobby.store
                 {
                     this.shopTooltip();
                 }
+                this.updateRent(_loc1_);
             }
             else
             {

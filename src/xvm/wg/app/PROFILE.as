@@ -136,6 +136,10 @@ package
         
         public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_MAXRESOURCES:String = "#profile:profile/params/tooltip/fortBattles/maxResources";
         
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_DEFENCES:String = "#profile:profile/params/tooltip/fortBattles/defences";
+        
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_ATTACKS:String = "#profile:profile/params/tooltip/fortBattles/attacks";
+        
         public static var SECTION_TECHNIQUE_CHECKBOXHANGARVEHICLES_TOOLTIP:String = "#profile:section/technique/checkBoxHangarVehicles/tooltip";
         
         public static var PROFILE_TITLE:String = "#profile:profile/title";
@@ -253,6 +257,10 @@ package
         public static var SECTION_STATISTICS_SCORES_FORTSORTIE:String = "#profile:section/statistics/scores/fortSortie";
         
         public static var SECTION_STATISTICS_SCORES_LOOTING:String = "#profile:section/statistics/scores/looting";
+        
+        public static var SECTION_STATISTICS_SCORES_FORTBATTLES_ATTACKS:String = "#profile:section/statistics/scores/fortBattles/attacks";
+        
+        public static var SECTION_STATISTICS_SCORES_FORTBATTLES_DEFENCES:String = "#profile:section/statistics/scores/fortBattles/defences";
         
         public static var SECTION_STATISTICS_SCORES_FORTSORTIES_AVGRESOURCES:String = "#profile:section/statistics/scores/fortSorties/AvgResources";
         
@@ -662,13 +670,13 @@ package
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_LOOTING_BODY:String = PROFILE_PARAMS_TOOLTIP_FORT_LOOTING + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_ATTACKS_HEADER:String = "#profile:profile/params/tooltip/fortBattles/attacks/header";
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_ATTACKS_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_ATTACKS + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_ATTACKS_BODY:String = "#profile:profile/params/tooltip/fortBattles/attacks/body";
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_ATTACKS_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_ATTACKS + "/body";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_DEFENCES_HEADER:String = "#profile:profile/params/tooltip/fortBattles/defences/header";
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_DEFENCES_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_DEFENCES + "/header";
         
-        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_DEFENCES_BODY:String = "#profile:profile/params/tooltip/fortBattles/defences/body";
+        public static var PROFILE_PARAMS_TOOLTIP_FORTBATTLES_DEFENCES_BODY:String = PROFILE_PARAMS_TOOLTIP_FORTBATTLES_DEFENCES + "/body";
         
         public static var PROFILE_PARAMS_TOOLTIP_FORT_SORTIEWINSEFFICIENCY_HEADER:String = PROFILE_PARAMS_TOOLTIP_FORT_SORTIE + "WinsEfficiency/header";
         

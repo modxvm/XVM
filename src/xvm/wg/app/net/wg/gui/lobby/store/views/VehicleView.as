@@ -3,8 +3,10 @@ package net.wg.gui.lobby.store.views
     import net.wg.gui.lobby.store.views.base.BaseStoreMenuView;
     import net.wg.gui.components.controls.RadioButton;
     import net.wg.gui.components.controls.CheckBox;
-    import net.wg.gui.lobby.store.views.base.ViewUIElementVO;
+    import flash.text.TextField;
     import net.wg.data.constants.generated.STORE_TYPES;
+    import net.wg.gui.lobby.store.views.base.ViewUIElementVO;
+    import net.wg.infrastructure.interfaces.IImageUrlProperties;
     import net.wg.data.VO.ShopSubFilterData;
     
     public class VehicleView extends BaseStoreMenuView
@@ -35,6 +37,12 @@ package net.wg.gui.lobby.store.views
         
         public var rentalsChckBx:CheckBox = null;
         
+        public var premiumIGRChckBx:CheckBox = null;
+        
+        public var vehicleFilterExtraName:TextField = null;
+        
+        private var _isPremIGREnabled:Boolean = false;
+        
         override protected function configUI() : void
         {
             super.configUI();
@@ -47,6 +55,35 @@ package net.wg.gui.lobby.store.views
             else
             {
                 this.rentalsChckBx.visible = false;
+            }
+            this.isPremIGREnabled = (App.globalVarsMgr.isKoreaS()) && getUIName() == STORE_TYPES.INVENTORY;
+        }
+        
+        override public function setUIName(param1:String, param2:Function) : void
+        {
+            super.setUIName(param1,param2);
+            this.isPremIGREnabled = (App.globalVarsMgr.isKoreaS()) && getUIName() == STORE_TYPES.INVENTORY;
+            invalidate(isFiltersCountInvalid);
+        }
+        
+        override protected function draw() : void
+        {
+            var _loc1_:Array = null;
+            var _loc2_:* = NaN;
+            var _loc3_:* = NaN;
+            var _loc4_:ViewUIElementVO = null;
+            super.draw();
+            if(isInvalid(isFiltersCountInvalid))
+            {
+                _loc1_ = getFitsArray();
+                _loc2_ = this.vehicleFilterExtraName.y;
+                _loc3_ = 1;
+                while(_loc3_ <= _loc1_.length)
+                {
+                    _loc4_ = _loc1_[_loc3_ - 1];
+                    _loc4_.instance.y = _loc2_ + CHECKBOX_Y_STEP * _loc3_;
+                    _loc3_++;
+                }
             }
         }
         
@@ -62,7 +99,6 @@ package net.wg.gui.lobby.store.views
         
         override protected function onFitsArrayRequest() : Array
         {
-            App.globalVarsMgr.isRentalsEnabledS();
             var _loc1_:Array = null;
             if(getUIName() == STORE_TYPES.SHOP)
             {
@@ -78,6 +114,10 @@ package net.wg.gui.lobby.store.views
                 if(App.globalVarsMgr.isRentalsEnabledS())
                 {
                     _loc1_.push(new ViewUIElementVO("rentals",this.rentalsChckBx));
+                }
+                if(this.isPremIGREnabled)
+                {
+                    _loc1_.push(new ViewUIElementVO("premiumIGR",this.premiumIGRChckBx,App.utils.getHtmlIconTextS(App.utils.getImageUrlProperties(RES_ICONS.MAPS_ICONS_LIBRARY_PREMIUM_SMALL,34,16,-4) as IImageUrlProperties)));
                 }
             }
             return _loc1_;
@@ -117,6 +157,21 @@ package net.wg.gui.lobby.store.views
         
         override public function updateSubFilter(param1:int) : void
         {
+        }
+        
+        public function get isPremIGREnabled() : Boolean
+        {
+            return this._isPremIGREnabled;
+        }
+        
+        public function set isPremIGREnabled(param1:Boolean) : void
+        {
+            this._isPremIGREnabled = param1;
+            if(this._isPremIGREnabled)
+            {
+                this.premiumIGRChckBx.enableDynamicFrameUpdating();
+            }
+            this.premiumIGRChckBx.visible = this._isPremIGREnabled;
         }
     }
 }

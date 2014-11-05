@@ -49,6 +49,10 @@ package net.wg.gui.lobby.customization
         
         override public function getDropButtonTooltip() : String
         {
+            if(currentItemData.price.isGold)
+            {
+                return TOOLTIPS.CUSTOMIZATION_EMBLEMRIGHT_CURRENT_DISMOUNT;
+            }
             return TOOLTIPS.CUSTOMIZATION_EMBLEMRIGHT_CURRENT_DROP;
         }
         

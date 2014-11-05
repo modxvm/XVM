@@ -94,7 +94,7 @@ package net.wg.gui.lobby.customization.renderers
                 {
                     this.current = data.current;
                 }
-                this.costVisible = this.demoMode == CustomizationItemRenderer.DEMO_NEW && data.id > 0 && !data.isInHangar || this.demoMode == CustomizationItemRenderer.DEMO_OFF;
+                this.costVisible = this.demoMode == CustomizationItemRenderer.DEMO_NEW && data.id > 0 && !data.isInHangar || this.demoMode == CustomizationItemRenderer.DEMO_OFF && !((data.current) || (data.isInHangar));
                 if(data.price)
                 {
                     this.costVal = data.price.isGold?App.utils.locale.gold(data.price.cost):App.utils.locale.integer(data.price.cost);
@@ -242,6 +242,7 @@ package net.wg.gui.lobby.customization.renderers
         override protected function draw() : void
         {
             var _loc1_:* = false;
+            var _loc2_:* = false;
             super.draw();
             if(isInvalid(InvalidationType.DATA))
             {
@@ -249,9 +250,10 @@ package net.wg.gui.lobby.customization.renderers
                 if(this.data)
                 {
                     visible = true;
-                    this.costFrame.visible = this.costVisible;
-                    this.updateCostPos();
                     _loc1_ = (this.freeTF) && data.id > 0 && (data.price) && data.price.cost == 0;
+                    _loc2_ = ((data.current) || (data.isInHangar)) && this.demoMode == CustomizationItemRenderer.DEMO_OFF;
+                    this.costFrame.visible = (this.costVisible) || (_loc2_);
+                    this.updateCostPos();
                     if(this.actionPrice)
                     {
                         if((this.actionPriceVo) && (this.costVisible))
@@ -269,14 +271,21 @@ package net.wg.gui.lobby.customization.renderers
                     {
                         this.costField.visible = (this.costVisible) && !_loc1_;
                     }
-                    if(_loc1_)
+                    if((_loc1_) || (_loc2_))
                     {
-                        this.freeTF.visible = true;
-                        if((data.current) || (data.isInHangar))
+                        this.freeTF.visible = (this.costVisible) || (_loc2_);
+                        if(_loc2_)
                         {
                             this.freeTF.x = 0;
                             this.freeTF.width = this._freeTfW + this._freeTfX;
-                            this.freeTF.text = this.demoMode == CustomizationItemRenderer.DEMO_OFF?"∞":"";
+                            if(data.hasOwnProperty("timeLeftStr"))
+                            {
+                                this.freeTF.text = data.timeLeftStr;
+                            }
+                            else
+                            {
+                                this.freeTF.text = this.demoMode == CustomizationItemRenderer.DEMO_OFF?"∞":"";
+                            }
                         }
                         else
                         {

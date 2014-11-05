@@ -51,6 +51,8 @@ package net.wg.gui.lobby.questsWindow.components
         
         private var _isNumerated:Boolean = false;
         
+        private var _fullLblData:String = "";
+        
         private var MIN_LAST_ITEM_WIDTH:int = 30;
         
         public function setData(param1:Object) : void
@@ -89,6 +91,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.linkBtn.addEventListener(ButtonEvent.CLICK,this.linkBtnHandler);
             this.linkBtn.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.linkBtn.addEventListener(MouseEvent.ROLL_OVER,this.showLinkBtnTooltip);
+            labelTextField.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+            labelTextField.addEventListener(MouseEvent.ROLL_OVER,this.showFullLblTooltip);
         }
         
         private function showLinkBtnTooltip(param1:MouseEvent) : void
@@ -107,6 +111,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.linkBtn.removeEventListener(ButtonEvent.CLICK,this.linkBtnHandler);
             this.linkBtn.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
             this.linkBtn.removeEventListener(MouseEvent.ROLL_OVER,this.showLinkBtnTooltip);
+            labelTextField.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+            labelTextField.removeEventListener(MouseEvent.ROLL_OVER,this.showFullLblTooltip);
         }
         
         private function linkBtnHandler(param1:ButtonEvent) : void
@@ -263,6 +269,24 @@ package net.wg.gui.lobby.questsWindow.components
         public function set isNumerated(param1:Boolean) : void
         {
             this._isNumerated = param1;
+        }
+        
+        private function showFullLblTooltip(param1:MouseEvent) : void
+        {
+            if(this._fullLblData)
+            {
+                App.toolTipMgr.show(this._fullLblData);
+            }
+        }
+        
+        public function get fullLblData() : String
+        {
+            return this._fullLblData;
+        }
+        
+        public function set fullLblData(param1:String) : void
+        {
+            this._fullLblData = param1;
         }
     }
 }

@@ -94,7 +94,7 @@ package net.wg.gui.components.tooltips
                 this.infoTF.y = topPosition;
                 this.infoTF.width = this.infoTF.textWidth + 5;
                 topPosition = topPosition + (this.infoTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
-                contentMargin.bottom = 12;
+                contentMargin.bottom = Utils.instance.MARGIN_AFTER_LASTITEM;
             }
             else
             {

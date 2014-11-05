@@ -19,5 +19,7 @@ package net.wg.gui.components.tooltips.VO
         public var quests:Array = null;
         
         public var progress:Array = null;
+        
+        public var premVehQuests:Array = null;
     }
 }

@@ -36,6 +36,8 @@ package net.wg.gui.components.controls
 
 public static var TYPE_INVALID:String = "typeInvalid";
 
+public static var INV_PRICE_PROPS:String = "invPriceProps";
+
 public var bg:MovieClip;
 
 public var typeSwitcher:MovieClip;
@@ -54,6 +56,8 @@ private var _type:String = "free";
 
 private var _priceColors:Object;
 
+private var _showPriceLabel:Boolean = true;
+
 override protected function onDispose() : void
 {
     this.actionPrice.dispose();
@@ -68,11 +72,8 @@ override public function toString() : String
 
 public function updatePrice(param1:Number, param2:String, param3:ActionPriceVO = null) : void
 {
-    var _loc4_:String = null;
     if(!this._buy && !(this._type == "free") && !(param1 == 0))
     {
-        _loc4_ = !enabled?"disabled":"normal";
-        this.priceLabel.textColor = this._priceColors[_loc4_];
         this.priceLabel.text = this._type == "academy"?App.utils.locale.gold(param1):App.utils.locale.integer(param1);
         this.priceLabel.icon = this._type == "academy"?IconsTypes.GOLD:IconsTypes.CREDITS;
         if(param3)
@@ -81,6 +82,7 @@ public function updatePrice(param1:Number, param2:String, param3:ActionPriceVO =
         }
         this.actionPrice.setData(param3);
         this.priceLabel.visible = !this.actionPrice.visible;
+        invalidate(INV_PRICE_PROPS);
     }
     else
     {
@@ -108,6 +110,12 @@ public function set buy(param1:Boolean) : void
     }
     clearRepeatInterval();
     setState(this._buy?"buy":"up");
+}
+
+override public function set enabled(param1:Boolean) : void
+{
+    super.enabled = param1;
+    invalidate(INV_PRICE_PROPS);
 }
 
 public function get nation() : Number
@@ -162,6 +170,7 @@ override protected function configUI() : void
 
 override protected function draw() : void
 {
+    var _loc1_:String = null;
     super.draw();
     if(isInvalid("_nation"))
     {
@@ -188,6 +197,15 @@ override protected function draw() : void
         
         this.typeLabel.text = MENU.tankmantrainingwindow(this._type);
         this.typeSwitcher.gotoAndPlay(this._type);
+    }
+    if(isInvalid(INV_PRICE_PROPS))
+    {
+        _loc1_ = !enabled?"disabled":"normal";
+        this.priceLabel.textColor = this._priceColors[_loc1_];
+        if(!this._showPriceLabel)
+        {
+            this.actionPrice.visible = this.priceLabel.visible = this._showPriceLabel;
+        }
     }
 }
 
@@ -272,6 +290,17 @@ override public function set selected(param1:Boolean) : void
     }
     validateNow();
     dispatchEvent(new Event(Event.SELECT));
+}
+
+public function get showPriceLabel() : Boolean
+{
+    return this._showPriceLabel;
+}
+
+public function set showPriceLabel(param1:Boolean) : void
+{
+    this._showPriceLabel = param1;
+    invalidate(INV_PRICE_PROPS);
 }
 }
 }

@@ -18,7 +18,7 @@ package net.wg.gui.cyberSport
         public function CyberSportMainWindow()
         {
             super();
-            showWindowBgForm = false;
+            showWindowBgForm = true;
             canMinimize = true;
             visible = true;
         }

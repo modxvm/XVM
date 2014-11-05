@@ -40,25 +40,26 @@ package net.wg.data.components
         
         private function getContextItems(param1:ContextMenuVehicleVo) : Vector.<IContextItem>
         {
-            var _loc5_:Object = null;
-            var _loc6_:String = null;
+            var _loc6_:Object = null;
             var _loc7_:String = null;
+            var _loc8_:String = null;
             var _loc2_:Vector.<IContextItem> = new Vector.<IContextItem>();
             var _loc3_:Array = this.getVehicleMapForComponent(param1);
             App.utils.asserter.assertNotNull(_loc3_,"variable idsData:Map, method getContextItems, class VehicleContextMenuGenerator " + Errors.CANT_NULL);
-            var _loc4_:Number = 0;
-            while(_loc4_ < _loc3_.length)
+            var _loc4_:Number = _loc3_.length;
+            var _loc5_:Number = 0;
+            while(_loc5_ < _loc4_)
             {
-                _loc5_ = _loc3_[_loc4_];
-                for(_loc6_ in _loc5_)
+                _loc6_ = _loc3_[_loc5_];
+                for(_loc7_ in _loc6_)
                 {
-                    if(_loc6_ != Values.EMPTY_STR)
+                    if(_loc7_ != Values.EMPTY_STR)
                     {
-                        _loc7_ = _loc6_ == ContextMenuConstants.SEPARATE?null:MENU.contextmenu(_loc6_);
-                        _loc2_.push(new ContextItem(_loc6_,_loc7_,_loc5_[_loc6_]));
+                        _loc8_ = _loc7_ == ContextMenuConstants.SEPARATE?null:MENU.contextmenu(_loc7_);
+                        _loc2_.push(new ContextItem(_loc7_,_loc8_,_loc6_[_loc7_]));
                     }
                 }
-                _loc4_++;
+                _loc5_++;
             }
             return _loc2_;
         }
@@ -82,7 +83,7 @@ package net.wg.data.components
                 _loc2_.push(VEHICLE_BUY);
                 _loc2_.push({"enabled":param1.canBuyOrRent});
                 _loc2_.push(VEHICLE_REMOVE);
-                _loc2_.push({"enabled":param1.rentalIsOver});
+                _loc2_.push({"enabled":param1.rentalIsOver && param1.canSell});
             }
             else
             {

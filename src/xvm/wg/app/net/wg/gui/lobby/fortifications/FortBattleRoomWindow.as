@@ -19,7 +19,7 @@ package net.wg.gui.lobby.fortifications
         public function FortBattleRoomWindow()
         {
             super();
-            showWindowBgForm = false;
+            showWindowBgForm = true;
             canMinimize = true;
             UIID = 29;
         }

@@ -48,8 +48,6 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         public var defenseEndTF:TextField;
         
-        public var availabilityTF:TextField;
-        
         public var defaultButton:SoundButtonEx;
         
         public var applyButton:SoundButtonEx;
@@ -66,8 +64,6 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         private var _currentData:IntelligenceClanFilterVO;
         
-        private var _defaultDataWasSetOnStart:Boolean;
-        
         override public function set wrapper(param1:IWrapper) : void
         {
             super.wrapper = param1;
@@ -83,7 +79,6 @@ package net.wg.gui.lobby.fortifications.intelligence
             _loc1_.minClanLevel = int(this.rangeSlider.leftValue);
             _loc1_.maxClanLevel = int(this.rangeSlider.rightValue);
             _loc1_.startDefenseHour = int(this.defenseStartNumericStepper.value);
-            _loc1_.isDefault = this._defaultDataWasSetOnStart;
             this._filterData = new IntelligenceClanFilterVO(_loc1_);
             return this._filterData;
         }
@@ -138,7 +133,7 @@ package net.wg.gui.lobby.fortifications.intelligence
             if(isInvalid(FortInvalidationType.INVALID_ENABLING))
             {
                 this.defaultButton.enabled = !this.isDefaultDataSet();
-                this.applyButton.enabled = !this.lastSearchDataSet() || (this.isDefaultDataSet()) && (this._defaultDataWasSetOnStart);
+                this.applyButton.enabled = !this.lastSearchDataSet();
             }
             super.draw();
         }
@@ -175,10 +170,9 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         override protected function setData(param1:IntelligenceClanFilterVO) : void
         {
-            this._defaultDataWasSetOnStart = param1.isDefault;
             if(!this._defaultFilterData)
             {
-                this._defaultFilterData = this.getHelper().getDefaultFilterData(this._defaultDataWasSetOnStart);
+                this._defaultFilterData = this.getHelper().getDefaultFilterData();
             }
             this._isGlobalDataSet = true;
             assert(param1.maxClanLevel <= this._defaultFilterData.maxClanLevel && param1.maxClanLevel >= param1.minClanLevel,"FortIntelligenceClanFilterPopover | setData | incorrect maxClanLevel");
@@ -213,7 +207,6 @@ package net.wg.gui.lobby.fortifications.intelligence
             this.headerTF.htmlText = param1;
             this.clanLevelTF.htmlText = param2;
             this.startHourRangeTF.htmlText = param3;
-            this.availabilityTF.htmlText = param4;
         }
         
         public function as_setButtonsText(param1:String, param2:String, param3:String) : void
@@ -327,9 +320,7 @@ package net.wg.gui.lobby.fortifications.intelligence
         
         private function defaultButtonButtonClickHandler(param1:ButtonEvent) : void
         {
-            var _loc2_:Boolean = this._defaultDataWasSetOnStart;
             this.setData(this._defaultFilterData);
-            this._defaultDataWasSetOnStart = _loc2_;
         }
         
         private function onAvailabilityDropDownChange(param1:ListEvent) : void

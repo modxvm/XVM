@@ -16,6 +16,7 @@ package net.wg.gui.components.controls
             soundType = SoundTypes.CONTEXT_MENU;
             useRightButton = false;
             this._items = new Vector.<IContextItem>();
+            this.defItemTextWidth = this.width - textField.width;
         }
         
         public var CONTEXT_MENU_ITEM_MAIN:String = "main";
@@ -29,6 +30,10 @@ package net.wg.gui.components.controls
         private var _type:String = "";
         
         private var _items:Vector.<IContextItem>;
+        
+        private var defItemTextWidth:Number = 0;
+        
+        private var TEXT_MARGIN:Number = 5;
         
         public var subItems:Array;
         
@@ -142,12 +147,33 @@ package net.wg.gui.components.controls
         {
         }
         
+        public function invalidWidth() : void
+        {
+            this.updateText();
+            if(this.textFieldSub)
+            {
+                this.updateItemWidth(this.textFieldSub);
+            }
+            if(textField)
+            {
+                this.updateItemWidth(textField);
+            }
+        }
+        
         override protected function updateText() : void
         {
             super.updateText();
             if(!(_label == null) && !(this.textFieldSub == null))
             {
                 this.textFieldSub.text = _label;
+            }
+        }
+        
+        private function updateItemWidth(param1:TextField) : void
+        {
+            if(param1.width < param1.textWidth + this.TEXT_MARGIN)
+            {
+                this.width = this.TEXT_MARGIN + this.defItemTextWidth + param1.textWidth | 0;
             }
         }
         

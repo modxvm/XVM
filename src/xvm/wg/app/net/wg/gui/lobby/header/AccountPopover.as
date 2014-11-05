@@ -113,7 +113,6 @@ package net.wg.gui.lobby.header
         
         private function updateData() : Number
         {
-            var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:StatisticItemVo = null;
             var _loc5_:StatisticItem = null;
@@ -144,7 +143,7 @@ package net.wg.gui.lobby.header
             }
             this.allAchievements.y = _loc1_ + this.BTN_MARGIN ^ 0;
             this.allAchievements.enabled = this._infoBtnEnabled;
-            _loc2_ = this.allAchievements.y + this.allAchievements.height + this.BLOCK_MARGIN;
+            var _loc2_:Number = this.allAchievements.y + this.allAchievements.height + this.BLOCK_MARGIN;
             if(this._clanData)
             {
                 this._clanData.emblemId = this._clanEmblemId;

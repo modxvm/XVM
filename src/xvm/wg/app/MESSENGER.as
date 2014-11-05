@@ -492,9 +492,13 @@ package
         
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_VICTORY:String = "#messenger:serviceChannelMessages/battleResults/victory";
         
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_TECHVICTORY:String = "#messenger:serviceChannelMessages/battleResults/techVictory";
+        
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_DRAWGAME:String = "#messenger:serviceChannelMessages/battleResults/drawGame";
         
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_DEFEAT:String = "#messenger:serviceChannelMessages/battleResults/defeat";
+        
+        public static var SERVICECHANNELMESSAGES_BATTLERESULTS_TECHDEFEAT:String = "#messenger:serviceChannelMessages/battleResults/techDefeat";
         
         public static var SERVICECHANNELMESSAGES_BATTLERESULTS_BATTLE:String = "#messenger:serviceChannelMessages/battleResults/battle";
         
@@ -614,6 +618,8 @@ package
         
         public static var SERVICECHANNELMESSAGES_INVOICERECEIVED_VEHICLESDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/vehiclesDebited";
         
+        public static var SERVICECHANNELMESSAGES_INVOICERECEIVED_VEHICLESRENTED:String = "#messenger:serviceChannelMessages/invoiceReceived/vehiclesRented";
+        
         public static var SERVICECHANNELMESSAGES_INVOICERECEIVED_SLOTSACCRUED:String = "#messenger:serviceChannelMessages/invoiceReceived/slotsAccrued";
         
         public static var SERVICECHANNELMESSAGES_INVOICERECEIVED_SLOTSDEBITED:String = "#messenger:serviceChannelMessages/invoiceReceived/slotsDebited";
@@ -712,6 +718,8 @@ package
         
         public static var SERVICECHANNELMESSAGES_SYSMSG_TITLES_SELLING:String = "#messenger:serviceChannelMessages/sysMsg/titles/selling";
         
+        public static var SERVICECHANNELMESSAGES_SYSMSG_TITLES_REMOVE:String = "#messenger:serviceChannelMessages/sysMsg/titles/remove";
+        
         public static var SERVICECHANNELMESSAGES_SYSMSG_TITLES_REPAIR:String = "#messenger:serviceChannelMessages/sysMsg/titles/repair";
         
         public static var SERVICECHANNELMESSAGES_SYSMSG_TITLES_CUSTOMIZATION:String = "#messenger:serviceChannelMessages/sysMsg/titles/customization";
@@ -763,6 +771,8 @@ package
         public static var SERVICECHANNELMESSAGES_SERVERDOWNTIMECOMPENSATION_PLAYEREMBLEMS:String = "#messenger:serviceChannelMessages/serverDowntimeCompensation/playerEmblems";
         
         public static var SERVICECHANNELMESSAGES_SERVERDOWNTIMECOMPENSATION_PLAYERINSCRIPTIONS:String = "#messenger:serviceChannelMessages/serverDowntimeCompensation/playerInscriptions";
+        
+        public static var SERVICECHANNELMESSAGES_SERVERDOWNTIMECOMPENSATION_RENTALS:String = "#messenger:serviceChannelMessages/serverDowntimeCompensation/rentals";
         
         public static var SERVICECHANNELMESSAGES_ACTIONBEGIN:String = "#messenger:serviceChannelMessages/actionBegin";
         
@@ -846,6 +856,12 @@ package
         
         public static var SERVICECHANNELMESSAGES_FORT_BASE_DESTROYED:String = "#messenger:serviceChannelMessages/fort/BASE_DESTROYED";
         
+        public static var SERVICECHANNELMESSAGES_FORT_ORDER_COMPENSATED:String = "#messenger:serviceChannelMessages/fort/ORDER_COMPENSATED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_ATTACK_PLANNED:String = "#messenger:serviceChannelMessages/fort/ATTACK_PLANNED";
+        
+        public static var SERVICECHANNELMESSAGES_FORT_DEFENCE_PLANNED:String = "#messenger:serviceChannelMessages/fort/DEFENCE_PLANNED";
+        
         public static var COMMAND_SUCCESS_USERBAN:String = "#messenger:command/success/USERBAN";
         
         public static var COMMAND_SUCCESS_USERUNBAN:String = "#messenger:command/success/USERUNBAN";
@@ -887,6 +903,16 @@ package
         public static var CHAT_ACTION_FIND_USERS_BY_NAME:String = "#messenger:chat_action/FIND_USERS_BY_NAME";
         
         public static var CHAT_ACTION_GET_VOIP_CREDENTIALS:String = "#messenger:chat_action/GET_VOIP_CREDENTIALS";
+        
+        public static var SERVICECHANNELMESSAGES_VEHICLERENTED:String = "#messenger:serviceChannelMessages/vehicleRented";
+        
+        public static var SERVICECHANNELMESSAGES_RENTALSEXPIRED:String = "#messenger:serviceChannelMessages/rentalsExpired";
+        
+        public static var SERVICECHANNELMESSAGES_RENTCOMPENSATION_COMPENSATION:String = "#messenger:serviceChannelMessages/rentCompensation/compensation";
+        
+        public static var SERVICECHANNELMESSAGES_RENTCOMPENSATION_GOLDRECEIVED:String = "#messenger:serviceChannelMessages/rentCompensation/goldReceived";
+        
+        public static var SERVICECHANNELMESSAGES_RENTCOMPENSATION_CREDITSRECEIVED:String = "#messenger:serviceChannelMessages/rentCompensation/creditsReceived";
         
         public static var COMMAND_SUCCESS_ENUM:Array = [COMMAND_SUCCESS_USERBAN,COMMAND_SUCCESS_USERUNBAN];
         

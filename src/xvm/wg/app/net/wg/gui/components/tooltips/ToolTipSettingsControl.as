@@ -17,7 +17,7 @@ package net.wg.gui.components.tooltips
             this.warningTF = content.warningTF;
             this.warnIcon = content.warnIcon;
             this.whiteBg = content.whiteBg;
-            contentMargin.bottom = 18;
+            contentMargin.bottom = Utils.instance.MARGIN_AFTER_LASTITEM;
             contentMargin.right = 0;
         }
         

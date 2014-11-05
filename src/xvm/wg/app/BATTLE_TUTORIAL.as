@@ -58,6 +58,10 @@ package
         
         public static var BUTTONS_WATCH:String = "#battle_tutorial:buttons/watch";
         
+        public static var BUTTONS_YES:String = "#battle_tutorial:buttons/yes";
+        
+        public static var BUTTONS_NO:String = "#battle_tutorial:buttons/no";
+        
         public static var LOADING_HINT_TITLE:String = "#battle_tutorial:loading/hint/title";
         
         public static var LOADING_HINT_TEXT:String = "#battle_tutorial:loading/hint/text";
@@ -83,6 +87,12 @@ package
         public static var DIALOGS_GREETING_NOTES_TIME:String = "#battle_tutorial:dialogs/greeting/notes/time";
         
         public static var DIALOGS_GREETING_RESTART_HINT_TEXT:String = "#battle_tutorial:dialogs/greeting/restart-hint/text";
+        
+        public static var DIALOGS_CONFIRMREFUSE_TITLE:String = "#battle_tutorial:dialogs/confirmRefuse/title";
+        
+        public static var DIALOGS_CONFIRMREFUSE_MESSAGE_TEXT:String = "#battle_tutorial:dialogs/confirmRefuse/message/text";
+        
+        public static var DIALOGS_CONFIRMREFUSE_CHECKBOX_LABEL:String = "#battle_tutorial:dialogs/confirmRefuse/checkbox/label";
         
         public static var DIALOGS_REPLENISH_AMMO_TITLE:String = "#battle_tutorial:dialogs/replenish-ammo/title";
         

@@ -38,6 +38,8 @@ package
         
         public static var CAMOUFLAGE_NATION_FRANCE:String = "#vehicle_customization:camouflage/nation/france";
         
+        public static var TIMELEFT_TEMPORAL_USED:String = "#vehicle_customization:timeLeft/temporal/used";
+        
         public static var TIMELEFT_TEMPORAL:String = "#vehicle_customization:timeLeft/temporal";
         
         public static var TIMELEFT_TEMPORAL_DAYS:String = "#vehicle_customization:timeLeft/temporal/days";
@@ -47,6 +49,8 @@ package
         public static var TIMELEFT_TEMPORAL_MINUTES:String = "#vehicle_customization:timeLeft/temporal/minutes";
         
         public static var TIMELEFT_INFINITY:String = "#vehicle_customization:timeLeft/infinity";
+        
+        public static var TIMELEFT_INFINITYSYMBOL:String = "#vehicle_customization:timeLeft/infinitySymbol";
         
         public static var CAMOUFLAGE_USSR_BICOLOR_KATUKOV_LABEL:String = "#vehicle_customization:camouflage/ussr/bicolor/Katukov/label";
         
@@ -429,6 +433,12 @@ package
         public static var CAMOUFLAGE_IGR_K_SUMMER:String = "#vehicle_customization:camouflage/IGR_K_Summer";
         
         public static var CAMOUFLAGE_IGR_K_DESERT:String = "#vehicle_customization:camouflage/IGR_K_Desert";
+        
+        public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_01_LABEL:String = "#vehicle_customization:camouflage/Clan_camouflage_01/label";
+        
+        public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_01_DESCRIPTION:String = "#vehicle_customization:camouflage/Clan_camouflage_01/description";
+        
+        public static var EMBLEM:String = "#vehicle_customization:emblem";
         
         public static var EMBLEM_GROUP1_STAR:String = "#vehicle_customization:emblem/group1/star";
         
@@ -827,6 +837,8 @@ package
         public static var EMBLEM_GROUP7_CLAN_CONTENT_04:String = "#vehicle_customization:emblem/group7/clan_content_04";
         
         public static var EMBLEM_GROUP7_CLAN_CONTENT_05:String = "#vehicle_customization:emblem/group7/clan_content_05";
+        
+        public static var INSCRIPTION:String = "#vehicle_customization:inscription";
         
         public static var INSCRIPTION_HISTORICAL:String = "#vehicle_customization:inscription/historical";
         

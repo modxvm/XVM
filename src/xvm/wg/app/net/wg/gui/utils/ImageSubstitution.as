@@ -50,6 +50,7 @@ package net.wg.gui.utils
                 }
                 catch(error:ReferenceError)
                 {
+                    trace("<ReferenceError> " + error.message);
                     image = null;
                     result = false;
                 }

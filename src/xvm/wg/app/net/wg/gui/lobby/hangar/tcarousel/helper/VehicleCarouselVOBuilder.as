@@ -15,6 +15,18 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
         
         private static var __allowInstantiation:Boolean = false;
         
+        public static var STATUS_BUY_TANK:String = "buyTank";
+        
+        public static var STATUS_BUY_SLOTS:String = "buySlot";
+        
+        public static var STATUS_UNDAMAGED:String = "undamaged";
+        
+        public static var STATE_LEVEL_BUY:String = "buy";
+        
+        public static var STATE_LEVEL_CRITICAL:String = "critical";
+        
+        public static var STATE_LEVEL_INFO:String = "info";
+        
         public static function get instance() : VehicleCarouselVOBuilder
         {
             if(!__instance)
@@ -35,11 +47,10 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
         
         public function getDataVoForBuyVehicle(param1:Number) : VehicleCarouselVO
         {
-            var _loc2_:VehicleCarouselVO = null;
-            _loc2_ = new VehicleCarouselVO({});
-            _loc2_.stat = "buyTank";
+            var _loc2_:VehicleCarouselVO = new VehicleCarouselVO({});
+            _loc2_.stat = STATUS_BUY_TANK;
             _loc2_.buyTank = true;
-            _loc2_.stateLevel = "buyState";
+            _loc2_.stateLevel = STATE_LEVEL_BUY;
             _loc2_.availableSlots = param1;
             return _loc2_;
         }
@@ -47,9 +58,9 @@ package net.wg.gui.lobby.hangar.tcarousel.helper
         public function getDataVoForBuySlot(param1:Number, param2:ActionPriceVO) : VehicleCarouselVO
         {
             var _loc3_:VehicleCarouselVO = new VehicleCarouselVO({});
-            _loc3_.stat = "buySlot";
+            _loc3_.stat = STATUS_BUY_SLOTS;
             _loc3_.buySlot = true;
-            _loc3_.stateLevel = "buyState";
+            _loc3_.stateLevel = STATE_LEVEL_BUY;
             _loc3_.slotPriceActionData = param2;
             _loc3_.slotPrice = param1;
             return _loc3_;

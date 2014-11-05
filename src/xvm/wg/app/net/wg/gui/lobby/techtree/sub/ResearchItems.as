@@ -54,6 +54,7 @@ package net.wg.gui.lobby.techtree.sub
             }
             catch(error:*)
             {
+                trace("error",error.message);
                 throw new Error("The class " + name + " cannot be found in your library. Please ensure it exists.");
             }
             return classRef;
@@ -523,45 +524,52 @@ package net.wg.gui.lobby.techtree.sub
             var _loc5_:MatrixPosition = null;
             var _loc6_:* = false;
             var _loc1_:* = false;
-            if(this._levelsBuilder.nodesByLevel[0][1] == null)
+            if(this._levelsBuilder.nodesByLevel[0][1] != null)
             {
-                if(this.rootRenderer)
+                trace("ERROR: In zero level must has one node only.");
+            }
+            else if(!this.rootRenderer)
+            {
+                trace("ERROR: Root renderer must be on display list.");
+            }
+            else
+            {
+                trace("Sets root data.");
+                _loc1_ = true;
+                _loc2_ = this._dataProvider.getRootItem();
+                _loc3_ = this._dataProvider.getGlobalStats();
+                _loc4_ = this._dataProvider.nation;
+                _loc5_ = new MatrixPosition(0,0);
+                this.renderers[0][0] = this.rootRenderer;
+                this.positionByID[_loc2_.id] = new MatrixPosition(0,0);
+                this.rootRenderer.setup(0,_loc2_,0,_loc5_);
+                this.rootRenderer.setupEx(_loc3_.statusString);
+                this.rootRenderer.validateNowEx();
+                _loc6_ = this.rootRenderer.isPremium();
+                if(this.titleBar != null)
                 {
-                    _loc1_ = true;
-                    _loc2_ = this._dataProvider.getRootItem();
-                    _loc3_ = this._dataProvider.getGlobalStats();
-                    _loc4_ = this._dataProvider.nation;
-                    _loc5_ = new MatrixPosition(0,0);
-                    this.renderers[0][0] = this.rootRenderer;
-                    this.positionByID[_loc2_.id] = new MatrixPosition(0,0);
-                    this.rootRenderer.setup(0,_loc2_,0,_loc5_);
-                    this.rootRenderer.setupEx(_loc3_.statusString);
-                    this.rootRenderer.validateNowEx();
-                    _loc6_ = this.rootRenderer.isPremium();
-                    if(this.titleBar != null)
+                    this.titleBar.setNation(_loc3_.hasNationTree?_loc4_:"");
+                    this.titleBar.setTitle(_loc6_?"":_loc2_.longName);
+                    this.titleBar.setInfoMessage(_loc3_.warningMessage);
+                    this.titleBar.setHBID(_loc3_.historicalBattleID);
+                }
+                if(this.xpInfo != null)
+                {
+                    this.xpInfo.setFreeXP(_loc3_.freeXP);
+                }
+                if(_loc6_)
+                {
+                    if(!this.premiumLayout)
                     {
-                        this.titleBar.setNation(_loc3_.hasNationTree?_loc4_:"");
-                        this.titleBar.setTitle(_loc6_?"":_loc2_.longName);
-                        this.titleBar.setInfoMessage(_loc3_.warningMessage);
-                        this.titleBar.setHBID(_loc3_.historicalBattleID);
-                    }
-                    if(this.xpInfo != null)
-                    {
-                        this.xpInfo.setFreeXP(_loc3_.freeXP);
-                    }
-                    if(_loc6_)
-                    {
-                        if(!this.premiumLayout)
-                        {
-                            this.premiumLayout = PremiumLayout.show(this);
-                        }
-                    }
-                    else
-                    {
-                        this.premiumLayout = null;
+                        this.premiumLayout = PremiumLayout.show(this);
                     }
                 }
+                else
+                {
+                    this.premiumLayout = null;
+                }
             }
+            
             return _loc1_;
         }
         
@@ -985,6 +993,7 @@ package net.wg.gui.lobby.techtree.sub
             this._levelsBuilder.process();
             if(this._levelsBuilder.hasCyclicReference())
             {
+                trace("ERROR: Has cyclic reference.");
                 this.titleBar.setTitle("");
                 this.titleBar.setInfoMessage("");
                 if(this.view != null)

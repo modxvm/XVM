@@ -16,6 +16,7 @@ package net.wg.gui.lobby.hangar
     import flash.events.MouseEvent;
     import net.wg.gui.events.LobbyEvent;
     import scaleform.clik.events.ButtonEvent;
+    import net.wg.infrastructure.events.FocusRequestEvent;
     import flash.events.Event;
     import scaleform.clik.events.InputEvent;
     import flash.geom.Point;
@@ -41,6 +42,8 @@ package net.wg.gui.lobby.hangar
         
         public static var INVALIDATE_SERVER_INFO:String = "serverInfo";
         
+        private static var START_IGR_Y_POS:Number = 34;
+        
         private static var INVALIDATE_ENABLED_CREW:String = "InvalidateEnabledCrew";
         
         public var vehResearchPanel:ResearchPanel;
@@ -60,6 +63,8 @@ package net.wg.gui.lobby.hangar
         public var bottomBg:Sprite;
         
         public var igrLabel:IgrLabel;
+        
+        public var igrActionDaysLeft:IgrActionDaysLeft;
         
         public var questsControl:QuestsControl;
         
@@ -90,7 +95,8 @@ package net.wg.gui.lobby.hangar
                 this.bottomBg.y = _originalHeight - this.bottomBg.height + MESSENGER_BAR_PADDING;
                 this.bottomBg.width = _originalWidth;
             }
-            this.updateIgrPosition();
+            this.alignToCenter(this.igrLabel);
+            this.alignToCenter(this.igrActionDaysLeft);
             this.updatePlayerCounterPosition();
             if(this.params)
             {
@@ -208,6 +214,12 @@ package net.wg.gui.lobby.hangar
             }
         }
         
+        public function as_setVehicleIGR(param1:String) : void
+        {
+            this.igrActionDaysLeft.updateText(param1);
+            this.updateElementsPosition();
+        }
+        
         public function as_setIsIGR(param1:Boolean, param2:String) : void
         {
             if(param1)
@@ -220,6 +232,21 @@ package net.wg.gui.lobby.hangar
             else
             {
                 this.igrLabel.visible = false;
+            }
+            this.updateElementsPosition();
+        }
+        
+        private function updateElementsPosition() : void
+        {
+            var _loc1_:Number = App.globalVarsMgr.isShowServerStatsS()?this.serverInfo.y + this.serverInfo.height - 5:START_IGR_Y_POS;
+            if(this.igrLabel.visible)
+            {
+                this.igrLabel.y = _loc1_;
+                _loc1_ = _loc1_ + (this.igrLabel.height + 1);
+            }
+            if(this.igrActionDaysLeft.visible)
+            {
+                this.igrActionDaysLeft.y = _loc1_;
             }
         }
         
@@ -247,7 +274,7 @@ package net.wg.gui.lobby.hangar
             {
                 registerComponent(this.vehResearchPanel,Aliases.RESEARCH_PANEL);
             }
-            this.igrLabel.y = App.globalVarsMgr.isShowServerStatsS()?51:43;
+            this.updateElementsPosition();
         }
         
         override protected function onDispose() : void
@@ -269,11 +296,14 @@ package net.wg.gui.lobby.hangar
             this.tmenXpPanel = null;
             this.crew = null;
             this.params = null;
+            this.ammunitionPanel.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
             this.ammunitionPanel = null;
             this.carousel = null;
             this.bottomBg = null;
             this.igrLabel.dispose();
             this.igrLabel = null;
+            this.igrActionDaysLeft.dispose();
+            this.igrActionDaysLeft = null;
             this.questsControl = null;
             for(_loc1_ in this._serverInfoData)
             {
@@ -308,6 +338,12 @@ package net.wg.gui.lobby.hangar
             this.crewOperationBtn.helpText = LOBBY_HELP.HANGAR_CREWOPERATIONBTN;
             this.crewOperationBtn.addEventListener(ButtonEvent.CLICK,this.retrainBtnClickHandler,false,0,true);
             this.crewOperationBtn.iconSource = RES_ICONS.MAPS_ICONS_TANKMEN_CREW_CREWOPERATIONS;
+            this.ammunitionPanel.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+        }
+        
+        private function onRequestFocusHandler(param1:FocusRequestEvent) : void
+        {
+            setFocus(param1.focusContainer.getComponentForFocus());
         }
         
         override protected function draw() : void
@@ -324,11 +360,11 @@ package net.wg.gui.lobby.hangar
             }
         }
         
-        private function updateIgrPosition() : void
+        private function alignToCenter(param1:DisplayObject) : void
         {
-            if(this.igrLabel)
+            if(param1)
             {
-                this.igrLabel.x = width - this.igrLabel.width >> 1;
+                param1.x = width - param1.width >> 1;
             }
         }
         

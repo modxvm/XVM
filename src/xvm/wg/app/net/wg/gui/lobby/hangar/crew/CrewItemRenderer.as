@@ -2,14 +2,14 @@ package net.wg.gui.lobby.hangar.crew
 {
     import scaleform.clik.controls.DropdownMenu;
     import scaleform.clik.interfaces.IListItemRenderer;
-    import scaleform.clik.interfaces.IDataProvider;
-    import scaleform.clik.data.DataProvider;
     import net.wg.gui.components.controls.UILoaderAlt;
     import flash.display.MovieClip;
     import net.wg.gui.components.controls.TileList;
     import scaleform.clik.core.UIComponent;
     import flash.text.TextField;
     import scaleform.clik.data.ListData;
+    import scaleform.clik.interfaces.IDataProvider;
+    import scaleform.clik.data.DataProvider;
     import net.wg.gui.events.CrewEvent;
     import scaleform.clik.utils.Padding;
     import flash.utils.getDefinitionByName;
@@ -52,17 +52,6 @@ package net.wg.gui.lobby.hangar.crew
         private static var BUFF:String = "#00FF00";
         
         private static var DEBUFF:String = "#FF0000";
-        
-        private static function setupDataProvider(param1:Array) : IDataProvider
-        {
-            var _loc3_:Object = null;
-            var _loc2_:DataProvider = new DataProvider();
-            for each(_loc3_ in param1)
-            {
-                _loc2_.push(new RecruitRendererVO(_loc3_));
-            }
-            return _loc2_;
-        }
         
         private static function createSkillObj(param1:RecruitRendererVO, param2:Number) : SkillsVO
         {
@@ -118,6 +107,8 @@ package net.wg.gui.lobby.hangar.crew
         
         public var vehicleType:TextField;
         
+        public var emptySlotBgAnim:MovieClip;
+        
         public var lastSkillLevel:TextField;
         
         public var closeOnlyClickItem:Boolean = false;
@@ -133,6 +124,17 @@ package net.wg.gui.lobby.hangar.crew
             this.index = param1.index;
             selected = param1.selected;
             label = param1.label || "empty";
+        }
+        
+        private function setupDataProvider(param1:Array) : IDataProvider
+        {
+            var _loc3_:Object = null;
+            var _loc2_:DataProvider = new DataProvider();
+            for each(_loc3_ in param1)
+            {
+                _loc2_.push(new RecruitRendererVO(_loc3_));
+            }
+            return _loc2_;
         }
         
         public function setData(param1:Object) : void
@@ -151,7 +153,7 @@ package net.wg.gui.lobby.hangar.crew
             var rendererData:RecruitRendererVO = RecruitRendererVO(data);
             if(rendererData.recruitList)
             {
-                this.dataProvider = setupDataProvider(rendererData.recruitList.sort(function(param1:Object, param2:Object):Number
+                this.dataProvider = this.setupDataProvider(rendererData.recruitList.sort(function(param1:Object, param2:Object):Number
                 {
                     if((param1.personalCase) && !param2.personalCase)
                     {
@@ -256,6 +258,16 @@ package net.wg.gui.lobby.hangar.crew
             }
             this.roles.dataProvider = new DataProvider(rls);
             this.speed_xp_bg.visible = rendererData.isLessMastered;
+            if(isNaN(rendererData.tankmanID))
+            {
+                this.emptySlotBgAnim.gotoAndPlay(1);
+                this.emptySlotBgAnim.visible = true;
+            }
+            else
+            {
+                this.emptySlotBgAnim.gotoAndStop(1);
+                this.emptySlotBgAnim.visible = false;
+            }
             this.updateSkills(rendererData);
             selected = false;
             visible = true;

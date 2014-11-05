@@ -42,10 +42,12 @@ package scaleform.gfx
         
         public static function setFocus(param1:InteractiveObject, param2:uint = 0) : void
         {
+            trace("FocusManager.setFocus is only usable with GFx. Use stage.focus property in Flash.");
         }
         
         public static function getFocus(param1:uint = 0) : InteractiveObject
         {
+            trace("FocusManager.getFocus is only usable with GFx. Use stage.focus property in Flash.");
             return null;
         }
         

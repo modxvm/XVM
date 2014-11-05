@@ -32,5 +32,7 @@ package net.wg.infrastructure.base.meta
         function as_setServerStats(param1:Object) : void;
         
         function as_setServerStatsInfo(param1:String) : void;
+        
+        function as_setVehicleIGR(param1:String) : void;
     }
 }

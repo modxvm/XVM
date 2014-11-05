@@ -5,6 +5,7 @@ package net.wg.gui.lobby.techtree.controls
     import flash.text.TextFormat;
     import flash.text.TextField;
     import flash.display.MovieClip;
+    import flash.display.Sprite;
     import scaleform.clik.constants.InvalidationType;
     import flash.text.TextFieldAutoSize;
     import flash.text.TextFormatAlign;
@@ -35,6 +36,8 @@ package net.wg.gui.lobby.techtree.controls
         public var contentField:TextField;
         
         public var typeIcon:MovieClip;
+        
+        public var premIGRBg:Sprite;
         
         public function setData(param1:ExtraInformation) : void
         {
@@ -76,6 +79,10 @@ package net.wg.gui.lobby.techtree.controls
                 if(this.typeIcon != null)
                 {
                     this.typeIcon.gotoAndStop(this._data.type + ELITE_SUFFIX);
+                }
+                if(this.premIGRBg != null)
+                {
+                    this.premIGRBg.visible = this._data.isPremiumIgr;
                 }
             }
             super.draw();

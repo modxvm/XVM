@@ -60,6 +60,11 @@ package net.wg.gui.lobby.fortifications.battleRoom
         
         public var slot14:SortieSimpleSlot;
         
+        override protected function setChangedVisibilityItems() : void
+        {
+            super.setChangedVisibilityItems();
+        }
+        
         override protected function getSlots() : Array
         {
             var _loc2_:SortieSimpleSlot = null;

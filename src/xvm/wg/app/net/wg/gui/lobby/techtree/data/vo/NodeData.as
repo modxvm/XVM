@@ -54,7 +54,11 @@ package net.wg.gui.lobby.techtree.data.vo
         
         public var extraInfo:String = null;
         
-        public var rentLeftTimeStr:String = null;
+        public var status:String = null;
+        
+        public var statusLevel:String = null;
+        
+        public var isRemovable:Boolean = false;
         
         public function get earnedXP() : Number
         {
@@ -86,7 +90,6 @@ package net.wg.gui.lobby.techtree.data.vo
         public function fromObject(param1:Object, param2:ILocale) : void
         {
             var _loc3_:String = null;
-            var _loc4_:String = null;
             if(param1 == null)
             {
                 return;
@@ -133,13 +136,17 @@ package net.wg.gui.lobby.techtree.data.vo
                     this.extraInfo = _loc3_;
                 }
             }
-            if(param1.hasOwnProperty("rentLeftTimeStr"))
+            if(param1.hasOwnProperty("isRemovable"))
             {
-                _loc4_ = param1["rentLeftTimeStr"];
-                if(_loc4_)
-                {
-                    this.rentLeftTimeStr = _loc4_;
-                }
+                this.isRemovable = param1["isRemovable"];
+            }
+            if(param1.hasOwnProperty("statusLevel"))
+            {
+                this.statusLevel = param1["statusLevel"] as String;
+            }
+            if(param1.hasOwnProperty("status"))
+            {
+                this.status = param1["status"] as String;
             }
             if(param1.smallIconPath != null)
             {
@@ -263,7 +270,7 @@ package net.wg.gui.lobby.techtree.data.vo
         
         public function toString() : String
         {
-            return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n actionPriceDataVo = " + this._actionPriceDataVo + "\n]";
+            return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n shopPrice = " + this.shopPrice + ",\n displayInfo = " + this.displayInfo + ",\n actionPriceDataVo = " + this._actionPriceDataVo + "," + ",\n status = " + this.status + ",\n statusLevel = " + this.statusLevel + "\n]";
         }
     }
 }

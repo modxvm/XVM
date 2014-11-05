@@ -50,6 +50,11 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             super.onDispose();
         }
         
+        override protected function setChangedVisibilityItems() : void
+        {
+            super.setChangedVisibilityItems();
+        }
+        
         override protected function updateNoRallyScreen(param1:Boolean) : void
         {
             var _loc3_:* = false;
@@ -64,7 +69,15 @@ package net.wg.gui.lobby.fortifications.battleRoom.clanBattle
             {
                 this.battleCreator.setData(ClanBattleDetailsVO(model));
             }
-            super.updateNoRallyScreen(!this.battleCreator.visible && (param1));
+            if(_loc3_)
+            {
+                updateNoRallyScreenVisibility(false);
+                updateElementsVisibility(false);
+            }
+            else
+            {
+                super.updateNoRallyScreen(param1);
+            }
         }
         
         override protected function updateTitle(param1:IRallyVO) : void

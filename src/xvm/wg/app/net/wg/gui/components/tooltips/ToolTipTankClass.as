@@ -3,10 +3,10 @@ package net.wg.gui.components.tooltips
     import flash.text.TextField;
     import flash.display.Sprite;
     import net.wg.gui.components.tooltips.helpers.Utils;
-    import net.wg.utils.ILocale;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import flash.text.TextFormat;
     import flash.text.TextFormatAlign;
+    import net.wg.utils.ILocale;
     import flash.text.TextFieldAutoSize;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
@@ -36,7 +36,6 @@ package net.wg.gui.components.tooltips
         override protected function redraw() : void
         {
             var _loc1_:String = null;
-            var _loc4_:ILocale = null;
             var _loc12_:String = null;
             var _loc13_:String = null;
             var _loc14_:String = null;
@@ -59,7 +58,7 @@ package net.wg.gui.components.tooltips
             this.separator.y = topPosition;
             this.whiteBg.y = topPosition;
             topPosition = topPosition + this.utils.MARGIN_AFTER_BLOCK;
-            _loc4_ = App.utils.locale;
+            var _loc4_:ILocale = App.utils.locale;
             var _loc5_:* = _loc4_.makeString(ACHIEVEMENTS.MARKOFMASTERYCONTENT + "/" + _loc1_) + "%";
             _loc5_ = Utils.instance.htmlWrapper(_loc5_,Utils.instance.COLOR_NUMBER,12,"$TextFont");
             var _loc6_:String = _loc4_.makeString(ACHIEVEMENTS.MARKOFMASTERYCONTENT,{"val":_loc5_});

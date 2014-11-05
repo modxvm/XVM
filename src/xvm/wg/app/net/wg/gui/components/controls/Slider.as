@@ -233,12 +233,11 @@ package net.wg.gui.components.controls
         
         protected function updatePatterns() : void
         {
-            var _loc1_:* = NaN;
             if(!this.patternMc && !this.disablePatternMc)
             {
                 return;
             }
-            _loc1_ = this.hitMc.width;
+            var _loc1_:Number = this.hitMc.width;
             var _loc2_:Number = Math.abs(_maximum - _minimum);
             var _loc3_:Number = _loc1_;
             if(!isNaN(this._maxAvailableValue))

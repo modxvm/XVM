@@ -1,10 +1,10 @@
 package net.wg.gui.components.tooltips.helpers
 {
     import net.wg.data.constants.IconsTypes;
-    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
-    import net.wg.gui.components.controls.IconText;
     import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
+    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
+    import net.wg.gui.components.controls.IconText;
     import flash.text.TextFormat;
     import flash.text.TextField;
     import flash.text.TextFormatAlign;
@@ -63,11 +63,15 @@ package net.wg.gui.components.tooltips.helpers
         
         public var STATUS_ADDITIONAL:String = "additional";
         
+        public var STATUS_RENTED:String = "rented";
+        
         public var STATUS_CRITICAL:String = "critical";
         
         public var STATUS_WARNING:String = "warning";
         
         public var STATUS_INFO:String = "info";
+        
+        public var allowStatuses:Array = [STATUS_ADDITIONAL,STATUS_RENTED,STATUS_CRITICAL,STATUS_WARNING,STATUS_INFO];
         
         public var MARGIN_AFTER_BLOCK:Number = 15;
         
@@ -78,6 +82,8 @@ package net.wg.gui.components.tooltips.helpers
         public var MARGIN_AFTER_SUBHEADER:Number = 12;
         
         private var LEFT_TEXTFIELD_MIN_WIDTH:Number = 54;
+        
+        public var MARGIN_AFTER_LASTITEM:Number = 14;
         
         public function getIcon(param1:String, param2:String = "", param3:Boolean = false, param4:Boolean = false) : String
         {
@@ -138,6 +144,12 @@ package net.wg.gui.components.tooltips.helpers
             return Number("0x" + param1.slice(1));
         }
         
+        public function addEmptyBlock(param1:ToolTipBlockVO) : void
+        {
+            param1.leftText = param1.leftText + (Utils.instance.htmlWrapper(" ",this.COLOR_NUMBER,12,"$TextFont",false) + "<br/>");
+            param1.rightTextList.push(new ToolTipBlockRightListItemVO("<h1> </h1>",IconsTypes.EMPTY,0));
+        }
+        
         public function createBlock(param1:ToolTipBlockVO, param2:Number) : ToolTipBlockResultVO
         {
             /*
@@ -177,6 +189,15 @@ package net.wg.gui.components.tooltips.helpers
             var _loc6_:Number = 0;
             switch(param1)
             {
+                case this.STATUS_RENTED:
+                    _loc2_.textColor = 16754521;
+                    _loc2_.headerFontSize = 13;
+                    _loc2_.headerFontFace = "$FieldFont";
+                    _loc3_ = 16723968;
+                    _loc4_ = 2.6;
+                    _loc5_ = 0.6;
+                    _loc6_ = 12;
+                    break;
                 case this.STATUS_ADDITIONAL:
                     _loc2_.textColor = 16761699;
                     _loc2_.filters = [];

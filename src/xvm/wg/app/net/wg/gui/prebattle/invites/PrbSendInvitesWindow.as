@@ -385,11 +385,6 @@ if(MessengerUtils.isIgnored(_loc2_))
 showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_ADDIGNOREDUSER);
 return;
 }
-if(!_loc2_.online)
-{
-showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_USEROFFLINE);
-return;
-}
 if(this.hasUserInReceiverList(_loc2_) < 0)
 {
 this.receiverData.push(_loc2_);
@@ -415,7 +410,7 @@ var _loc3_:Number = 0;
 while(_loc3_ < _loc2_)
 {
 _loc5_ = makeRoster(param1[_loc3_]);
-if(!((MessengerUtils.isIgnored(_loc5_)) || !_loc5_.online))
+if(!MessengerUtils.isIgnored(_loc5_))
 {
 if(this.hasUserInReceiverList(_loc5_) < 0)
 {

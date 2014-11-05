@@ -119,6 +119,7 @@ package net.wg.gui.lobby.settings.components
         {
             if(_itemRenderer == null)
             {
+                trace("Renderer class not defined.");
                 return;
             }
             totalHeight = 0;

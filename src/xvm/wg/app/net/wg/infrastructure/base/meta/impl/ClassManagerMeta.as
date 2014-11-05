@@ -349,6 +349,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.components.popOvers.SmartPopOverLayoutInfo;
     import net.wg.gui.components.tooltips.AchievementsCustomBlockItem;
     import net.wg.gui.components.tooltips.ExtraModuleInfo;
+    import net.wg.gui.components.tooltips.IgrPremVehQuestBlock;
     import net.wg.gui.components.tooltips.IgrQuestBlock;
     import net.wg.gui.components.tooltips.IgrQuestProgressBlock;
     import net.wg.gui.components.tooltips.ModuleItem;
@@ -893,6 +894,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.fortifications.popovers.impl.FortSettingsPeripheryPopover;
     import net.wg.gui.lobby.fortifications.popovers.impl.FortSettingsVacationPopover;
     import net.wg.gui.lobby.fortifications.popovers.orderPopover.OrderInfoBlock;
+    import net.wg.gui.lobby.fortifications.settings.IFortSettingsActivatedContainer;
     import net.wg.gui.lobby.fortifications.settings.IFortSettingsContainer;
     import net.wg.gui.lobby.fortifications.settings.impl.FortSettingBlock;
     import net.wg.gui.lobby.fortifications.settings.impl.FortSettingPeripheryContainer;
@@ -928,6 +930,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.fortifications.windows.impl.FortTransportConfirmationWindow;
     import net.wg.gui.lobby.hangar.CrewDropDownEvent;
     import net.wg.gui.lobby.hangar.Hangar;
+    import net.wg.gui.lobby.hangar.IgrActionDaysLeft;
     import net.wg.gui.lobby.hangar.IgrLabel;
     import net.wg.gui.lobby.hangar.Params;
     import net.wg.gui.lobby.hangar.ParamsListener;
@@ -1210,6 +1213,8 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.questsWindow.components.CommonConditionsBlock;
     import net.wg.gui.lobby.questsWindow.components.ConditionSeparator;
     import net.wg.gui.lobby.questsWindow.components.CounterTextElement;
+    import net.wg.gui.lobby.questsWindow.components.CustomizationItemRenderer;
+    import net.wg.gui.lobby.questsWindow.components.CustomizationsBlock;
     import net.wg.gui.lobby.questsWindow.components.EventsResizableContent;
     import net.wg.gui.lobby.questsWindow.components.InnerResizableContent;
     import net.wg.gui.lobby.questsWindow.components.MovableBlocksContainer;
@@ -1508,6 +1513,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.lobby.window.ExtendedIconText;
     import net.wg.gui.lobby.window.ProfileWindow;
     import net.wg.gui.lobby.window.ProfileWindowInitVO;
+    import net.wg.gui.lobby.window.PromoPremiumIgrWindow;
     import net.wg.gui.lobby.window.PunishmentDialog;
     import net.wg.gui.lobby.window.RefManagementWindowVO;
     import net.wg.gui.lobby.window.ReferralManagementWindow;
@@ -1731,12 +1737,15 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.gui.tutorial.controls.TutorialBattleLoadingForm;
     import net.wg.gui.tutorial.meta.ITutorialBattleNoResultsMeta;
     import net.wg.gui.tutorial.meta.ITutorialBattleStatisticMeta;
+    import net.wg.gui.tutorial.meta.ITutorialConfirmRefuseDialogMeta;
     import net.wg.gui.tutorial.meta.ITutorialDialogMeta;
     import net.wg.gui.tutorial.meta.impl.TutorialBattleNoResultsMeta;
     import net.wg.gui.tutorial.meta.impl.TutorialBattleStatisticMeta;
+    import net.wg.gui.tutorial.meta.impl.TutorialConfirmRefuseDialogMeta;
     import net.wg.gui.tutorial.meta.impl.TutorialDialogMeta;
     import net.wg.gui.tutorial.windows.TutorialBattleNoResultsWindow;
     import net.wg.gui.tutorial.windows.TutorialBattleStatisticWindow;
+    import net.wg.gui.tutorial.windows.TutorialConfirmRefuseDialog;
     import net.wg.gui.tutorial.windows.TutorialDialog;
     import net.wg.gui.tutorial.windows.TutorialGreetingDialog;
     import net.wg.gui.tutorial.windows.TutorialQueueDialog;
@@ -1887,6 +1896,7 @@ package net.wg.infrastructure.base.meta.impl
     import net.wg.infrastructure.base.meta.IProfileTechniqueMeta;
     import net.wg.infrastructure.base.meta.IProfileTechniquePageMeta;
     import net.wg.infrastructure.base.meta.IProfileWindowMeta;
+    import net.wg.infrastructure.base.meta.IPromoPremiumIgrWindowMeta;
     import net.wg.infrastructure.base.meta.IPunishmentDialogMeta;
     import net.wg.infrastructure.base.meta.IQuestsControlMeta;
     import net.wg.infrastructure.base.meta.IQuestsCurrentTabMeta;
@@ -2660,6 +2670,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_EXTRAMODULEINFO:Class = ExtraModuleInfo;
         
+        public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRPREMVEHQUESTBLOCK:Class = IgrPremVehQuestBlock;
+        
         public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTBLOCK:Class = IgrQuestBlock;
         
         public static var NET_WG_GUI_COMPONENTS_TOOLTIPS_IGRQUESTPROGRESSBLOCK:Class = IgrQuestProgressBlock;
@@ -3252,7 +3264,7 @@ package net.wg.infrastructure.base.meta.impl
         
         public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CAMOUFLAGEITEMRENDERER:Class = CamouflageItemRenderer;
         
-        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CUSTOMIZATIONITEMRENDERER:Class = CustomizationItemRenderer;
+        public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_CUSTOMIZATIONITEMRENDERER:Class = net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer;
         
         public static var NET_WG_GUI_LOBBY_CUSTOMIZATION_RENDERERS_INSCRIPTIONITEMRENDERER:Class = InscriptionItemRenderer;
         
@@ -3748,6 +3760,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_POPOVERS_ORDERPOPOVER_ORDERINFOBLOCK:Class = OrderInfoBlock;
         
+        public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_SETTINGS_IFORTSETTINGSACTIVATEDCONTAINER:Class = IFortSettingsActivatedContainer;
+        
         public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_SETTINGS_IFORTSETTINGSCONTAINER:Class = IFortSettingsContainer;
         
         public static var NET_WG_GUI_LOBBY_FORTIFICATIONS_SETTINGS_IMPL_FORTSETTINGBLOCK:Class = FortSettingBlock;
@@ -3817,6 +3831,8 @@ package net.wg.infrastructure.base.meta.impl
         public static var NET_WG_GUI_LOBBY_HANGAR_CREWDROPDOWNEVENT:Class = CrewDropDownEvent;
         
         public static var NET_WG_GUI_LOBBY_HANGAR_HANGAR:Class = Hangar;
+        
+        public static var NET_WG_GUI_LOBBY_HANGAR_IGRACTIONDAYSLEFT:Class = IgrActionDaysLeft;
         
         public static var NET_WG_GUI_LOBBY_HANGAR_IGRLABEL:Class = IgrLabel;
         
@@ -4381,6 +4397,10 @@ package net.wg.infrastructure.base.meta.impl
         public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_CONDITIONSEPARATOR:Class = ConditionSeparator;
         
         public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_COUNTERTEXTELEMENT:Class = CounterTextElement;
+        
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_CUSTOMIZATIONITEMRENDERER:Class = net.wg.gui.lobby.questsWindow.components.CustomizationItemRenderer;
+        
+        public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_CUSTOMIZATIONSBLOCK:Class = CustomizationsBlock;
         
         public static var NET_WG_GUI_LOBBY_QUESTSWINDOW_COMPONENTS_EVENTSRESIZABLECONTENT:Class = EventsResizableContent;
         
@@ -4978,6 +4998,8 @@ package net.wg.infrastructure.base.meta.impl
         
         public static var NET_WG_GUI_LOBBY_WINDOW_PROFILEWINDOWINITVO:Class = ProfileWindowInitVO;
         
+        public static var NET_WG_GUI_LOBBY_WINDOW_PROMOPREMIUMIGRWINDOW:Class = PromoPremiumIgrWindow;
+        
         public static var NET_WG_GUI_LOBBY_WINDOW_PUNISHMENTDIALOG:Class = PunishmentDialog;
         
         public static var NET_WG_GUI_LOBBY_WINDOW_REFMANAGEMENTWINDOWVO:Class = RefManagementWindowVO;
@@ -5424,17 +5446,23 @@ package net.wg.infrastructure.base.meta.impl
         
         public static var NET_WG_GUI_TUTORIAL_META_ITUTORIALBATTLESTATISTICMETA:Class = ITutorialBattleStatisticMeta;
         
+        public static var NET_WG_GUI_TUTORIAL_META_ITUTORIALCONFIRMREFUSEDIALOGMETA:Class = ITutorialConfirmRefuseDialogMeta;
+        
         public static var NET_WG_GUI_TUTORIAL_META_ITUTORIALDIALOGMETA:Class = ITutorialDialogMeta;
         
         public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLENORESULTSMETA:Class = TutorialBattleNoResultsMeta;
         
         public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALBATTLESTATISTICMETA:Class = TutorialBattleStatisticMeta;
         
+        public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALCONFIRMREFUSEDIALOGMETA:Class = TutorialConfirmRefuseDialogMeta;
+        
         public static var NET_WG_GUI_TUTORIAL_META_IMPL_TUTORIALDIALOGMETA:Class = TutorialDialogMeta;
         
         public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLENORESULTSWINDOW:Class = TutorialBattleNoResultsWindow;
         
         public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALBATTLESTATISTICWINDOW:Class = TutorialBattleStatisticWindow;
+        
+        public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALCONFIRMREFUSEDIALOG:Class = TutorialConfirmRefuseDialog;
         
         public static var NET_WG_GUI_TUTORIAL_WINDOWS_TUTORIALDIALOG:Class = TutorialDialog;
         
@@ -5735,6 +5763,8 @@ package net.wg.infrastructure.base.meta.impl
         public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILETECHNIQUEPAGEMETA:Class = IProfileTechniquePageMeta;
         
         public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROFILEWINDOWMETA:Class = IProfileWindowMeta;
+        
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IPROMOPREMIUMIGRWINDOWMETA:Class = IPromoPremiumIgrWindowMeta;
         
         public static var NET_WG_INFRASTRUCTURE_BASE_META_IPUNISHMENTDIALOGMETA:Class = IPunishmentDialogMeta;
         
@@ -6077,6 +6107,8 @@ package net.wg.infrastructure.base.meta.impl
         public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILETECHNIQUEPAGEMETA:Class = ProfileTechniquePageMeta;
         
         public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROFILEWINDOWMETA:Class = ProfileWindowMeta;
+        
+        public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PROMOPREMIUMIGRWINDOWMETA:Class = PromoPremiumIgrWindowMeta;
         
         public static var NET_WG_INFRASTRUCTURE_BASE_META_IMPL_PUNISHMENTDIALOGMETA:Class = PunishmentDialogMeta;
         

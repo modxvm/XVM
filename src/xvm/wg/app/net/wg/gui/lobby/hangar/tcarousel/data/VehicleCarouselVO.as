@@ -25,6 +25,8 @@ package net.wg.gui.lobby.hangar.tcarousel.data
         
         public var stat:String = "";
         
+        public var statStr:String = "";
+        
         public var stateLevel:String = "";
         
         public var tankType:String = "";

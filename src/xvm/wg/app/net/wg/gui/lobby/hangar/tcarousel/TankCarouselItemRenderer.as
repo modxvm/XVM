@@ -10,6 +10,8 @@ package net.wg.gui.lobby.hangar.tcarousel
     import net.wg.data.constants.SoundTypes;
     import net.wg.data.constants.SoundManagerStates;
     import flash.text.TextFormat;
+    import flash.text.TextFormatAlign;
+    import net.wg.gui.lobby.hangar.tcarousel.helper.VehicleCarouselVOBuilder;
     import flash.display.FrameLabel;
     import flash.filters.GlowFilter;
     import flash.filters.DropShadowFilter;
@@ -174,8 +176,8 @@ package net.wg.gui.lobby.hangar.tcarousel
                         {
                             _loc2_.leading = -4;
                         }
-                        this.statusText.autoSize = "center";
-                        this.statusText.text = this.dataVO.stat == "undamaged"?"":MENU.tankcarousel_vehiclestates(this.dataVO.stat);
+                        this.statusText.autoSize = TextFormatAlign.CENTER;
+                        this.statusText.htmlText = this.dataVO.stat == VehicleCarouselVOBuilder.STATUS_BUY_SLOTS || this.dataVO.stat == VehicleCarouselVOBuilder.STATUS_BUY_TANK?MENU.tankcarousel_vehiclestates(this.dataVO.stat):this.dataVO.statStr;
                         this.statusText.setTextFormat(_loc2_);
                         _loc3_ = this.getStatColor(this.dataVO.stateLevel);
                         this.statusText.textColor = _loc3_.color;
@@ -190,7 +192,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                     {
                         this.statusText.y = _height - this.statusText.textHeight >> 1;
                     }
-                    _loc1_ = !(this.dataVO.stat == "undamaged") && !_empty;
+                    _loc1_ = !(this.dataVO.stat == VehicleCarouselVOBuilder.STATUS_UNDAMAGED) && !empty;
                     this.statusText.visible = _loc1_;
                 }
                 this.emptyInfoTxt.visible = false;
@@ -280,7 +282,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             var _loc14_:Array = [];
             switch(param1)
             {
-                case "buyState":
+                case VehicleCarouselVOBuilder.STATE_LEVEL_BUY:
                     _loc2_.color = 15329754;
                     _loc5_ = 16777150;
                     _loc6_ = 0.2;
@@ -302,7 +304,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                     _loc14_.push(_loc15_);
                     _loc2_.filterArray = _loc14_;
                     break;
-                case "critical":
+                case VehicleCarouselVOBuilder.STATE_LEVEL_CRITICAL:
                     _loc2_.color = 15400960;
                     _loc3_ = 0;
                     _loc4_ = 90;
@@ -330,7 +332,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                     _loc14_.push(_loc16_);
                     _loc2_.filterArray = _loc14_;
                     break;
-                case "info":
+                case VehicleCarouselVOBuilder.STATE_LEVEL_INFO:
                 default:
                     _loc2_.color = 13617064;
                     _loc3_ = 0;

@@ -177,7 +177,7 @@ package net.wg.gui.lobby.store
             this.form.nationFilter.nation.createNationFilter(param1);
             if(this.initializing)
             {
-                this.initMenu(this.getLocalizator());
+                this.initMenu(this.createFilterLabel);
             }
         }
         
@@ -210,6 +210,16 @@ package net.wg.gui.lobby.store
         protected function getLocalizator() : Function
         {
             throw new AbstractException("\'getLocalizator\'" + Errors.ABSTRACT_INVOKE);
+        }
+        
+        private function createFilterLabel(param1:String, param2:String = null) : String
+        {
+            var _loc3_:String = this.getLocalizator()(param1);
+            if(param2)
+            {
+                return App.utils.locale.makeString(_loc3_,{"icon":param2});
+            }
+            return _loc3_;
         }
         
         protected final function updateTable() : void
@@ -277,7 +287,7 @@ package net.wg.gui.lobby.store
                 this._currentView = param1;
                 if(this._currentView)
                 {
-                    this._currentView.setUIName(getNameS(),this.getLocalizator());
+                    this._currentView.setUIName(getNameS(),this.createFilterLabel);
                     this._currentView.addEventListener(StoreViewsEvent.POPULATE_MENU_FILTER,this.onPopulateMenuFilterNeedHandler);
                     this._currentView.addEventListener(StoreViewsEvent.VIEW_CHANGE,this.onMenuChangeHandler);
                 }

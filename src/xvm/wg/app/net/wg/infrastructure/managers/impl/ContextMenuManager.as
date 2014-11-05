@@ -15,6 +15,7 @@ package net.wg.infrastructure.managers.impl
     import net.wg.data.daapi.ContextMenuVehicleVo;
     import net.wg.infrastructure.interfaces.IVehicleContextMenuGenerator;
     import net.wg.infrastructure.interfaces.entity.IDisposable;
+    import net.wg.data.components.VehicleContextMenuGenerator;
     
     public class ContextMenuManager extends ContextMenuManagerMeta implements IContextMenuManager
     {
@@ -126,28 +127,28 @@ package net.wg.infrastructure.managers.impl
             var _loc2_:ContextMenuVehicleVo = param1.memberItemData as ContextMenuVehicleVo;
             switch(param1.id)
             {
-                case "vehicleInfo":
+                case VehicleContextMenuGenerator.VEHICLE_INFO:
                     showVehicleInfoS(_loc2_.inventoryId);
                     break;
-                case "vehicleSell":
+                case VehicleContextMenuGenerator.VEHICLE_SELL:
                     vehicleSellS(_loc2_.inventoryId);
                     break;
-                case "vehicleResearch":
+                case VehicleContextMenuGenerator.VEHICLE_RESEARCH:
                     toResearchS(_loc2_.compactDescr);
                     break;
-                case "vehicleCheck":
+                case VehicleContextMenuGenerator.VEHICLE_CHECK:
                     favoriteVehicleS(_loc2_.inventoryId,true);
                     break;
-                case "vehicleUncheck":
+                case VehicleContextMenuGenerator.VEHICLE_UNCHECK:
                     favoriteVehicleS(_loc2_.inventoryId,false);
                     break;
-                case "showVehicleStatistics":
+                case VehicleContextMenuGenerator.VEHICLE_STATISTIC:
                     showVehicleStatsS(_loc2_.compactDescr);
                     break;
-                case "vehicleBuy":
+                case VehicleContextMenuGenerator.VEHICLE_BUY:
                     vehicleBuyS(_loc2_.inventoryId);
                     break;
-                case "vehicleRemove":
+                case VehicleContextMenuGenerator.VEHICLE_REMOVE:
                     vehicleSellS(_loc2_.inventoryId);
                     break;
             }

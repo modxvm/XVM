@@ -24,6 +24,8 @@ package net.wg.gui.components.tooltips
         
         private static var LEFT_PADDINGS_IDX:int = 1;
         
+        private static var BOTTOM_PADDING:int = 20;
+        
         private var headerTF:TextField = null;
         
         private var kindTF:TextField = null;
@@ -37,6 +39,45 @@ package net.wg.gui.components.tooltips
         private var paddings:Object = null;
         
         private var displayedElements:Vector.<DisplayObject> = null;
+        
+        override protected function redraw() : void
+        {
+            super.redraw();
+            this.updateTextFieldsFromData();
+            this.updateSize();
+        }
+        
+        override protected function onDispose() : void
+        {
+            this.headerTF = null;
+            this.kindTF = null;
+            this.descriptionTF = null;
+            this.timeLeftTF = null;
+            this.vehicleTypeTF = null;
+            while(this.displayedElements.length > 0)
+            {
+                removeChild(this.displayedElements.pop());
+            }
+            this.displayedElements = null;
+            this.paddings = App.utils.commons.cleanupDynamicObject(this.paddings);
+            super.onDispose();
+        }
+        
+        override protected function updateSize() : void
+        {
+            super.updateSize();
+            var _loc1_:int = this.displayedElements.length;
+            var _loc2_:int = _loc1_ - 1;
+            while(_loc2_ > 0)
+            {
+                if(this.displayedElements[_loc2_].visible)
+                {
+                    background.height = this.displayedElements[_loc2_].y + this.displayedElements[_loc2_].height + BOTTOM_PADDING;
+                    break;
+                }
+                _loc2_--;
+            }
+        }
         
         private function getNewSeparator() : Separator
         {
@@ -59,29 +100,6 @@ package net.wg.gui.components.tooltips
             this.paddings[_loc3_.name] = [10,0];
             this.paddings[this.vehicleTypeTF.name] = [7,20];
             this.customizeTextFields();
-        }
-        
-        override protected function redraw() : void
-        {
-            super.redraw();
-            this.updateTextFieldsFromData();
-            updateSize();
-        }
-        
-        override protected function onDispose() : void
-        {
-            this.headerTF = null;
-            this.kindTF = null;
-            this.descriptionTF = null;
-            this.timeLeftTF = null;
-            this.vehicleTypeTF = null;
-            while(this.displayedElements.length > 0)
-            {
-                removeChild(this.displayedElements.pop());
-            }
-            this.displayedElements = null;
-            this.paddings = App.utils.commons.cleanupDynamicObject(this.paddings);
-            super.onDispose();
         }
         
         private function updatePositions() : void
@@ -125,11 +143,14 @@ package net.wg.gui.components.tooltips
             }
         }
         
-        private function changeVisibilityTimeLeft(param1:Boolean) : void
+        private function changeVisibility(param1:TextField, param2:Boolean) : void
         {
-            var _loc2_:int = this.displayedElements.indexOf(this.timeLeftTF);
-            var _loc3_:DisplayObject = this.displayedElements[_loc2_ + 1];
-            _loc3_.visible = this.timeLeftTF.visible = param1;
+            var _loc3_:int = this.displayedElements.indexOf(param1);
+            this.displayedElements[_loc3_].visible = param2;
+            if(_loc3_ - 1 >= 0 && this.displayedElements[_loc3_ - 1] is Separator)
+            {
+                this.displayedElements[_loc3_ - 1].visible = param2;
+            }
         }
         
         private function updateTextFieldsFromData() : void
@@ -138,9 +159,11 @@ package net.wg.gui.components.tooltips
             this.headerTF.htmlText = _loc1_.header;
             this.kindTF.htmlText = _loc1_.kind;
             this.descriptionTF.htmlText = _loc1_.description;
+            this.changeVisibility(this.descriptionTF,_loc1_.description.length > 0);
             this.timeLeftTF.htmlText = _loc1_.timeLeft;
-            this.changeVisibilityTimeLeft(_loc1_.timeLeft.length > 0);
+            this.changeVisibility(this.timeLeftTF,_loc1_.timeLeft.length > 0);
             this.vehicleTypeTF.htmlText = _loc1_.vehicleType;
+            this.changeVisibility(this.vehicleTypeTF,_loc1_.vehicleType.length > 0);
             this.updatePositions();
         }
     }

@@ -38,6 +38,7 @@ package net.wg.gui.login.legal
             var _loc1_:Padding = new Padding(window.formBgPadding.top,window.formBgPadding.right,window.formBgPadding.bottom + 1,window.formBgPadding.left);
             window.contentPadding = _loc1_;
             this.scrollPane.setSize(455,376);
+            trace(455,376,this.background.width,this.background.height);
             this.legalContent = this.scrollPane.target as LegalContent;
             this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onClose);
             getLegalInfoS();

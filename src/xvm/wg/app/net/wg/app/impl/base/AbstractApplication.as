@@ -144,6 +144,10 @@ package net.wg.app.impl.base
             var h:Number = param2;
             try
             {
+                if(this.appWidth == w && this.appHeight == h)
+                {
+                    return;
+                }
                 this.appWidth = w;
                 this.appHeight = h;
                 if(this.containerMgr)

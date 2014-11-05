@@ -149,7 +149,7 @@ package net.wg.gui.components.controls
         
         public function set rightValue(param1:Number) : void
         {
-            this._rightValue = param1;
+            this._rightValue = param1 > maximum?maximum:param1;
             this.dispatchChangeEvent();
             this.updateRangeThumbs();
         }
@@ -334,6 +334,23 @@ package net.wg.gui.components.controls
                     this.rightValue = _loc2_;
                 }
                 
+            }
+        }
+        
+        override public function get value() : Number
+        {
+            return this._rangeMode?this.rightValue:super.value;
+        }
+        
+        override public function set value(param1:Number) : void
+        {
+            if(this._rangeMode)
+            {
+                this.rightValue = param1 <= this._leftValue?this._leftValue:param1;
+            }
+            else
+            {
+                super.value = param1;
             }
         }
         
