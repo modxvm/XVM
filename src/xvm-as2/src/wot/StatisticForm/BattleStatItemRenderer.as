@@ -61,7 +61,7 @@ class wot.StatisticForm.BattleStatItemRenderer
 
     private function get team(): Number
     {
-        return (wrapper.owner._name == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
+        return (wrapper._parent._parent._name == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
     }
 
     function completeLoad()
@@ -90,12 +90,7 @@ class wot.StatisticForm.BattleStatItemRenderer
     public function onConfigLoaded(event)
     {
         if (s_state <= 0)
-        {
             s_state = 1;
-            s_winChances.showChances = Config.networkServicesSettings.chance;
-            s_winChances.showLive = Config.networkServicesSettings.chanceLive;
-            s_winChances.showBattleTier = Config.config.statisticForm.showBattleTier;
-        }
 
         wrapper.col3.condenseWhite = true;
     }
@@ -104,6 +99,7 @@ class wot.StatisticForm.BattleStatItemRenderer
     function updateDataImpl()
     {
         //Logger.add("updateData()");
+
         if (!wrapper.data)
         {
             base.updateData();
@@ -123,7 +119,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         // Add data for Win Chance calculation
         //Logger.add(dlg.visible);
         //Logger.addObject(wrapper.data);
-        if (Config.config.rating.statBattle)
+        if (Config.networkServicesSettings.statBattle)
         {
             if (Stat.s_data[name] && Stat.s_data[name].stat)
                 Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & VehicleStateInBattle.IS_ALIVE) != 0;
@@ -154,8 +150,6 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         wrapper.data.icon = saved_icon;
         wrapper.data.label = saved_label;
-
-        var team:Number = (wrapper.owner._name == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
 
         // Set Text Fields
         var c:String = "#" + Strings.padLeft(wrapper.textField.textColor.toString(16), 6, '0');
