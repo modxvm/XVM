@@ -9,7 +9,8 @@ class wot.Minimap.Features
 {
     private static var _instance:Features;
 
-    private static var MAP_BORDER_SIZE_INDEX:Number = 0;
+    private static var MAP_MIN_SIZE_INDEX:Number = 0;
+    private static var MAP_MAX_SIZE_INDEX:Number = 25;
 
     private var markerScaling:MarkerScaling;
     private var zoom:Zoom;
@@ -59,10 +60,14 @@ class wot.Minimap.Features
     {
         /** base.correctSizeIndex code is omitted to drop limits */
 
-        /** Do not allow size less than map border */
-        if (sizeIndex < MAP_BORDER_SIZE_INDEX)
+        if (sizeIndex < MAP_MIN_SIZE_INDEX)
         {
-            sizeIndex = MAP_BORDER_SIZE_INDEX;
+            sizeIndex = MAP_MIN_SIZE_INDEX;
+        }
+
+        if (sizeIndex > MAP_MAX_SIZE_INDEX)
+        {
+            sizeIndex = MAP_MAX_SIZE_INDEX;
         }
 
         return sizeIndex;
@@ -87,8 +92,6 @@ class wot.Minimap.Features
 
     public function applyMajorMods():Void
     {
-        scaleMarkers();
-
         setBGMapImageAlpha();
         setPlayerIconAlpha();
 

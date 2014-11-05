@@ -54,6 +54,11 @@ class wot.Minimap.MinimapEntry
         return this.invalidateImpl.apply(this, arguments);
     }
 
+    function draw()
+    {
+        return this.drawImpl.apply(this, arguments);
+    }
+
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -119,7 +124,9 @@ class wot.Minimap.MinimapEntry
      */
     public function rescaleAttachments():Void
     {
-        attachments._xscale = attachments._yscale = (1 / (wrapper._xscale / 100)) * 100;
+        var scale = (1 / (wrapper._xscale / 100)) * 100;
+        if (attachments._xscale != scale)
+            attachments._xscale = attachments._yscale = scale;
     }
 
     function lightPlayerImpl(visibility)
@@ -146,10 +153,17 @@ class wot.Minimap.MinimapEntry
 
     function invalidateImpl()
     {
-        //Logger.add('invalidateImpl ' + wrapper.entryName);
+        //Logger.add('invalidateImpl: ' + wrapper.entryName);
         base.invalidate();
         MarkerColor.setColor(wrapper);
         LabelViewBuilder.updateTextField(labelMc);
+    }
+
+    function drawImpl()
+    {
+        //Logger.add('drawImpl: ' + wrapper.entryName);
+        base.draw();
+        rescaleAttachments();
     }
 
     public static function getVehicleClassSymbol(vehicleClass:String):String

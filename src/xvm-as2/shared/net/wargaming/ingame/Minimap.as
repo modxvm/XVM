@@ -18,6 +18,7 @@ intrinsic class net.wargaming.ingame.Minimap extends UIComponent
     var MINIMAP_STEP:Number;
     var __height:Number;
     var m_sizeIndex:Number;
+    var _markersInvalid:Boolean;
 
     function Minimap();
     function scaleMarkers(val:Number);
@@ -25,6 +26,7 @@ intrinsic class net.wargaming.ingame.Minimap extends UIComponent
     function correctSizeIndex(sizeIndex, stageHeight);
     function sizeUp();
     function sizeDown();
+    function invalidateMarkers();
     function setupSize(size, stageHeight);
     function onRecreateDevice(width, height);
     function defaultScaleSprite(destinationSprite, ethaloneSprite);

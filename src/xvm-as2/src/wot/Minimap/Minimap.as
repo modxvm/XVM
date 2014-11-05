@@ -34,6 +34,11 @@ class wot.Minimap.Minimap
         return this.correctSizeIndexImpl.apply(this, arguments);
     }
 
+    function draw()
+    {
+        return this.drawImpl.apply(this, arguments);
+    }
+
     function sizeUp()
     {
         return this.sizeUpImpl.apply(this, arguments);
@@ -91,16 +96,10 @@ class wot.Minimap.Minimap
 
     function scaleMarkersImpl(factor:Number)
     {
-        if (!Config.config)
-        {
-            var me = this;
-            _global.setTimeout(function() { me.scaleMarkersImpl(factor); }, 1);
-            return;
-        }
-
         if (MapConfig.enabled)
         {
             Features.instance.scaleMarkers();
+            updateEntries();
         }
         else
         {
@@ -132,6 +131,11 @@ class wot.Minimap.Minimap
         var featureSizeIndex:Number = Features.instance.disableMapWindowSizeLimitation(sizeIndex);
 
         return featureSizeIndex;
+    }
+
+    function drawImpl():Void
+    {
+        base.draw();
     }
 
     /** Suitable for manual debug tracing by pushing "=" button */

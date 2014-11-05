@@ -67,25 +67,6 @@ class wot.Minimap.view.MarkerScaling
                 }
             }
         }
-
-        /**
-         * Attached MovieClips scaling is also affected.
-         * Have to be compensated.
-         *
-         * TODO: can be fixed by detaching attachments to separate MovieClips
-         * plus displacing onEnterFrame()
-         */
-        rescaleAttachments();
-    }
-
-    private function rescaleAttachments():Void
-    {
-        var entries:Array = IconsProxy.allEntries;
-        for (var i in entries)
-        {
-            var entry:MinimapEntry = entries[i];
-            entry.rescaleAttachments();
-        }
     }
 
     private function get icons():MovieClip

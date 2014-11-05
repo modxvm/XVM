@@ -1,6 +1,7 @@
 ﻿intrinsic class gfx.core.UIComponent extends MovieClip
 {
     public var initialized:Boolean;
+    public var sizeIsInvalid:Boolean;
 
     static function createInstance(context, symbol, name, depth, initObj);
 
