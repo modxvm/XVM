@@ -19,7 +19,7 @@ def getToken():
         getXvmActiveTokenData()
     return _token
 
-def clearToken(value):
+def clearToken(value=None):
     global _token
     _token = value
     global networkServicesSettings

@@ -1,4 +1,7 @@
-﻿XVM-5.4.1-dev:
+﻿XVM-5.4.1.1:
+  * fixed bug with online services activation
+
+XVM-5.4.1:
   * adaptation to Wot 0.9.4
 
 XVM-5.4.0.2:
