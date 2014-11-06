@@ -20,7 +20,7 @@ package xvm.profile.components
 
         protected var filter:FilterControl;
 
-        private var techniqueListAdjuster:TechniqueListAdjuster;
+        //private var techniqueListAdjuster:TechniqueListAdjuster;
 
         public function Technique(page:ProfileTechnique, playerName:String):void
         {
@@ -46,7 +46,7 @@ package xvm.profile.components
                 return;
 
                 // Add summary item to the first line of technique list
-                techniqueListAdjuster = new TechniqueListAdjuster(page);
+                //techniqueListAdjuster = new TechniqueListAdjuster(page);
 
                 // TODO
                 // create filter controls
@@ -144,9 +144,9 @@ package xvm.profile.components
         // virtual
         protected function createFilters():void
         {
-            filter = new FilterControl();
-            filter.addEventListener(Event.CHANGE, techniqueListAdjuster.applyFilter);
-            page.addChild(filter);
+            //filter = new FilterControl();
+            //filter.addEventListener(Event.CHANGE, techniqueListAdjuster.applyFilter);
+            //page.addChild(filter);
         }
 
         // PRIVATE
