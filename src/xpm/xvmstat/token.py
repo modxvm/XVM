@@ -160,8 +160,6 @@ def _initializeXvmToken():
         token_name = 'time_left' if days_left >= 3 else 'time_left_warn'
         msg += '{{l10n:token/%s:%d:%02d:%02d}}\n' % (token_name, days_left, hours_left, mins_left)
         msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
-
-        networkServicesSettings = _makeNetworkServicesSettings(tdata)
     else:
         type = SystemMessages.SM_TYPE.Error
         msg += '{{l10n:token/unknown_status}}\n%s' % utils.hide_guid(simplejson.dumps(tdata))
@@ -176,6 +174,9 @@ def _initializeXvmToken():
             tdata['token'] = tdataActive['token']
         userprefs.set('tokens.{0}'.format(playerId), tdata)
         userprefs.set('tokens.lastPlayerId', playerId)
+
+        if tdata['status'] == 'active':
+            networkServicesSettings = _makeNetworkServicesSettings(tdata)
 
     global _token
     _token = '' if tdata is None else tdata.get('token', '').encode('ascii')
