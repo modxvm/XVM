@@ -53,12 +53,13 @@ _token = None
 
 def _makeNetworkServicesSettings(tdata):
     svc = {} if tdata is None else tdata.get('services', {})
+    active = tdata is not None and tdata.get('token', None) is not None
     return {
-        'servicesActive': tdata is not None,
-        'statBattle': svc.get('statBattle', True),
-        'statAwards': svc.get('statAwards', True),
-        'statCompany': svc.get('statCompany', True),
-        'comments': svc.get('comments', True),
+        'servicesActive': active,
+        'statBattle': svc.get('statBattle', active),
+        'statAwards': svc.get('statAwards', active),
+        'statCompany': svc.get('statCompany', active),
+        'comments': svc.get('comments', active),
         'chance': svc.get('chance', False),
         'chanceLive': svc.get('chanceLive', False),
     }
@@ -191,6 +192,7 @@ def _checkToken(playerId, token):
         server = XVM_SERVERS[randint(0, len(XVM_SERVERS) - 1)]
         (response, duration, errStr) = loadUrl(server, req)
 
+        #response= """{"status":"inactive"}"""
         #response = """{"expires_at":1394834790589,"cnt":0,"_id":4630209,"status":"active","token":"84a45576-5f06-4945-a607-bbee61b4876a","__v":0,"start_at":1393625190589}"""
         #response = """{"expires_at":1394817931657,"cnt":3,"_id":2178413,"status":"badToken","start_at":1393608331657}"""
 

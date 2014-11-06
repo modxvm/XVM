@@ -45,9 +45,7 @@ class wot.Minimap.view.MarkerScaling
          *
          * icons._xscale is changed by minimap resize
          */
-        var scaleFactor:Number = 10000 / icons._xscale;
-        scaleFactor = scaleFactor + (100 - scaleFactor);
-        scaleFactor = scaleFactor * MapConfig.iconScale;
+        var scaleFactor = 100 * MapConfig.iconScale;
 
         for (var i in icons)
         {
