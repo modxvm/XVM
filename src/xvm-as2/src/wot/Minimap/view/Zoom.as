@@ -126,6 +126,8 @@ class wot.Minimap.view.Zoom
     private function restoreSize():Void
     {
         minimap.setupSize(minimap.m_sizeIndex, Stage.height);
+        minimap.invalidateMarkers();
+        minimap.validateNow();
     }
 
     /**
