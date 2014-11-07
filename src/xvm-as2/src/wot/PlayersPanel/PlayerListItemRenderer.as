@@ -416,10 +416,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
         //Logger.add("onExtraMovieClipLoadInit: " + m_name + " " + img.source);
 
         var data = img["data"];
-        if (isNaN(data.w) && data.format.w == null)
-            data.w = img.content._width;
-        if (isNaN(data.h) && data.format.h == null)
-            data.h = img.content._height;
         //Logger.addObject(data, 2, m_name);
 
         img.visible = false;
@@ -619,8 +615,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         var x:Number = (isLeftPanel ? data.x : -data.x);
         var y:Number = data.y;
-        var w:Number = data.w;
-        var h:Number = data.h;
+        var w:Number = isNaN(data.w) ? img.content._width : data.w;
+        var h:Number = isNaN(data.h) ? img.content._height : data.h;
 
         if (tf != null)
         {
