@@ -8,8 +8,6 @@ import com.xvm.*;
 
 class com.xvm.Locale
 {
-    public static var EVENT_LOADED:String = "locale_loaded";
-
     private static var MACRO_PREFIX:String = "l10n";
     public static var s_lang:Object;
     private static var s_lang_fallback:Object = {};
@@ -53,35 +51,27 @@ class com.xvm.Locale
         return res;
     }
 
-    public static function languageFileCallback(data_str:String):Void
+    public static function initializeLanguageFile(data_str:String):Void
     {
+        s_lang = null;
+
+        LoadLanguageFallback();
+
+        if (data_str == null)
+        {
+            Logger.add("Locale: Can not find language file. Filename: " + s_filename);
+            return;
+        }
+
         try
         {
-            s_lang = null;
-
-            LoadLanguageFallback();
-
-            if (data_str == null)
-            {
-                Logger.add("Locale: Can not find language file. Filename: " + s_filename);
-                return;
-            }
-
-            try
-            {
-                s_lang = JSONx.parse(data_str);
-                Logger.add("Locale: Loaded " + Config.config.language);
-            }
-            catch (ex:Error)
-            {
-                var text:String = "Error loading language file '" + s_filename + "': ";
-                text += parseError(ex);
-                Logger.add(text.substr(0, 200));
-            }
+            s_lang = JSONx.parse(data_str);
+            Logger.add("Locale: Loaded " + Config.config.language);
         }
-        finally
+        catch (ex)
         {
-            GlobalEventDispatcher.dispatchEvent( { type: EVENT_LOADED } );
+            var text:String = "Error loading language file '" + s_filename + "': " + Utils.parseError(ex);
+            Logger.add(text.substr(0, 200));
         }
     }
 
@@ -212,27 +202,6 @@ class com.xvm.Locale
 
             // VehicleMarkersManager
             tr["blownUp"] = "Blown-up!";
-        }
-    }
-
-    private static function parseError(ex):String {
-        if (ex.at == null)
-            return (ex.name != null ? Strings.trim(ex.name) + ": " : "") + Strings.trim(ex.message);
-        else
-        {
-            var head = ex.at > 0 ? ex.text.substring(0, ex.at) : "";
-            head = head.split("\r").join("").split("\n").join("");
-            while (head.indexOf("  ") != -1)
-                head = head.split("  ").join(" ");
-            head = head.substr(head.length - 75, 75);
-
-            var tail = (ex.at + 1 < ex.text.length) ? ex.text.substring(ex.at + 1, ex.text.length) : "";
-            tail = tail.split("\r").join("").split("\n").join("");
-            while (tail.indexOf("  ") != -1)
-            tail = tail.split("  ").join(" ");
-
-            return "[" + ex.at + "] " + Strings.trim(ex.name) + ": " + Strings.trim(ex.message) + "\n  " +
-                head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
         }
     }
 }

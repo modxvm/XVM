@@ -28,7 +28,7 @@ class com.xvm.Config
         {
             Config.config = JSONx.parse(config_data);
             //Logger.addObject(Config.config);
-            Locale.languageFileCallback(lang_str);
+            Locale.initializeLanguageFile(lang_str);
             VehicleInfo.onVehicleInfoData(vehInfoData);
             Config.networkServicesSettings = JSONx.parse(networkServicesSettings);
             Macros.RegisterCommentsData(comments);
@@ -36,9 +36,9 @@ class com.xvm.Config
             Logger.add("Config: Loaded");
             GlobalEventDispatcher.dispatchEvent( { type: Defines.E_CONFIG_LOADED } );
         }
-        catch (e:Error)
+        catch (ex)
         {
-            Logger.add("CONFIG LOAD ERROR: " + e.message);
+            Logger.add("CONFIG LOAD ERROR: " + Utils.parseError(ex));
         }
     }
 }

@@ -360,6 +360,26 @@ class com.xvm.Utils
         net.wargaming.managers.ToolTipManager.instance.hide();
     }
 
+    public static function parseError(ex):String
+    {
+        if (ex.at == null)
+            return (ex.name != null ? Strings.trim(ex.name) + ": " : "") + Strings.trim(ex.message);
+
+        var head = ex.at > 0 ? ex.text.substring(0, ex.at) : "";
+        head = head.split("\r").join("").split("\n").join("");
+        while (head.indexOf("  ") != -1)
+            head = head.split("  ").join(" ");
+        head = head.substr(head.length - 75, 75);
+
+        var tail = (ex.at + 1 < ex.text.length) ? ex.text.substring(ex.at + 1, ex.text.length) : "";
+        tail = tail.split("\r").join("").split("\n").join("");
+        while (tail.indexOf("  ") != -1)
+        tail = tail.split("  ").join(" ");
+
+        return "[" + ex.at + "] " + Strings.trim(ex.name) + ": " + Strings.trim(ex.message) + "\n  " +
+            head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
+    }
+
     // http://www.koreanrandom.com/forum/topic/2625-/
     public static function XEFF(EFF:Number):Number
     {

@@ -63,7 +63,7 @@ class com.xvm.StatLoader
         }
         catch (ex)
         {
-            Logger.add("[LoadStatDataCallback] ERROR: " + ex.toString());
+            Logger.add("[LoadStatDataCallback] ERROR: " + Utils.parseError(ex));
         }
         finally
         {

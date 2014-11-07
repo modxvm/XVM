@@ -708,9 +708,9 @@ class com.xvm.Macros
             comments = JSONx.parse(json_str).players;
             //Logger.addObject(comments, 2);
         }
-        catch (ex:Error)
+        catch (ex)
         {
-            Logger.add("RegisterCommentsData: ERROR: " + ex.message);
+            Logger.add("RegisterCommentsData: ERROR: " + Utils.parseError(ex));
         }
     }
 

@@ -103,9 +103,9 @@ class com.xvm.VehicleInfo
                 vehiclesMapName[data.localizedShortName] = data.vid; // for getByLocalizedShortName
             }
         }
-        catch (e:Error)
+        catch (ex)
         {
-            Logger.add(e.message);
+            Logger.add(Utils.parseError(ex));
         }
     }
 
