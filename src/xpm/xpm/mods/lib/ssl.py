@@ -5,6 +5,7 @@ from xpm import log
 CERT_NONE = 0
 CERT_REQUIRED = 1
 PROTOCOL_SSLv23 = 'SSLv23'
+PROTOCOL_TLSv1 = 'TLSv1'
 
 import tlslite
 from tlslite.tlsconnection import TLSConnection
