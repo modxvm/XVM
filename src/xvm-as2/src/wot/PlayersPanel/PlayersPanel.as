@@ -263,7 +263,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         var obj = BattleState.getUserData(data.userName);
         obj.frags = data.frags || NaN;
         //Logger.addObject(data);
-        obj.ready = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0;
+        obj.ready = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0 && !Boolean(data.isOffline);
         obj.dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_ALIVE) == 0;
         if (obj.dead == true && (!isNaN(obj.curHealth) && obj.curHealth > 0))
             obj.curHealth = 0;

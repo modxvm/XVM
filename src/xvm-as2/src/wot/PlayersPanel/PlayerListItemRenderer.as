@@ -3,11 +3,13 @@
  */
 import com.xvm.*;
 import flash.filters.*;
+import flash.geom.*;
 import gfx.core.*;
 import gfx.controls.*;
 import net.wargaming.*;
 import net.wargaming.controls.*;
 import net.wargaming.managers.*;
+import net.wargaming.ingame.*;
 import wot.Minimap.*;
 import wot.PlayersPanel.*;
 
@@ -122,11 +124,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     // IMPL
 
-    function __getColorTransformImpl(schemeName)
+    function __getColorTransformImpl(schemeName:String, force:Boolean)
     {
         //Logger.add(m_name + " scheme=" + schemeName);
 
-        if (Config.config.battle.highlightVehicleIcon == false)
+        if (Config.config.battle.highlightVehicleIcon == false && !force)
         {
             if (schemeName == "selected" || schemeName == "squad")
                 schemeName = "normal";
@@ -598,6 +600,25 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 //Logger.add(m_name + " " + f.source + " => " + src);
                 f._visible = false;
                 f.source = src;
+            }
+
+            if (format.highlight == true)
+            {
+                var state = wrapper.data.vehicleState;
+                var sn = PlayerStatus.getStatusColorSchemeNames(
+                    (state & net.wargaming.ingame.VehicleStateInBattle.NOT_AVAILABLE) != 0,
+                    !obj.dead,
+                    wrapper.selected,
+                    wrapper.data.squad,
+                    wrapper.data.teamKiller,
+                    wrapper.data.VIP,
+                    !obj.ready);
+                if (sn.vehicleSchemeName != format.__last_vehicleSchemeName)
+                {
+                    format.__last_vehicleSchemeName = sn.vehicleSchemeName;
+                    (new Transform(f)).colorTransform = this.__getColorTransform(sn.vehicleSchemeName, true);
+                    Logger.add(f.source + " " + sn.vehicleSchemeName);
+                }
             }
         }
 

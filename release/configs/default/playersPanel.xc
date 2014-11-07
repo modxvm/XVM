@@ -135,6 +135,9 @@
           //     "strength" (0.0 .. 255.0)
           //    }
           //
+          // fields available for MovieClip format only:
+          //     "highlight" - highlight icon depending on the player state, default false
+          //
           // * all fields are optional
           //
           "formats": []
