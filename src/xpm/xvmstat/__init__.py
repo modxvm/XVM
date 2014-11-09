@@ -153,6 +153,17 @@ def AmmunitionPanel_highlightParams(self, type):
     #debug('> AmmunitionPanel_highlightParams')
     g_xvm.updateTankParams()
 
+def onClientVersionDiffers():
+    if config.config is None:
+        BigWorld.callback(0, onClientVersionDiffers)
+        return
+
+    from BattleReplay import g_replayCtrl
+    savedValue = g_replayCtrl.scriptModalWindowsEnabled
+    g_replayCtrl.scriptModalWindowsEnabled = not config.config['login']['confirmOldReplays']
+    g_replayCtrl.onClientVersionDiffers()
+    g_replayCtrl.scriptModalWindowsEnabled = savedValue
+
 #####################################################################
 # Register events
 
@@ -200,5 +211,8 @@ def _RegisterEvents():
 
     from gui.Scaleform.daapi.view.lobby.hangar.AmmunitionPanel import AmmunitionPanel
     RegisterEvent(AmmunitionPanel, 'highlightParams', AmmunitionPanel_highlightParams)
+
+    from BattleReplay import g_replayCtrl
+    g_replayCtrl._BattleReplay__replayCtrl.clientVersionDiffersCallback = onClientVersionDiffers
 
 BigWorld.callback(0, _RegisterEvents)
