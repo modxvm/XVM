@@ -117,12 +117,7 @@ class wot.Minimap.Minimap
             //Logger.add("Minimap.onEntryInitedImpl()#extended");
             SyncModel.instance.updateIconUids();
 
-            /**
-             * Camera object reconstruction occurs sometimes and all its previous props are lost.
-             * Check if alpha is set.
-             */
             GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ON_ENTRY_INITED));
-            Features.instance.setCameraAlpha();
         }
     }
 
@@ -188,6 +183,7 @@ class wot.Minimap.Minimap
 
     private function updateEntries():Void
     {
+        Features.instance.setCameraAlpha();
         var entries:Array = IconsProxy.allEntries;
         for (var i in entries)
             entries[i].invalidate();
