@@ -715,10 +715,16 @@ package xvm.tcarousel
                     var remove:Boolean = false;
                     remove = levelFilter.selectedItems.length > 0 && levelFilter.selectedItems.indexOf(vdata.level) < 0;
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NON_ELITE) >= 0 && dataVO.elite == true);
-                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0 && dataVO.premium == false);
-                    remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0 && dataVO.premium == true);
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_MULTIXP) >= 0 && dataVO.doubleXPReceived < 0);
                     remove = remove || (prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NOMASTER) >= 0 && vdossier.mastery == 4);
+
+                    var removePrem:Boolean = prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_PREMIUM) >= 0;
+                    var removeNorm:Boolean = prefFilter.selectedItems.indexOf(PrefMultiSelectionDropDown.PREF_NORMAL) >= 0;
+                    if (removePrem != removeNorm)
+                    {
+                        remove = remove || removePrem && dataVO.premium == false;
+                        remove = remove || removeNorm && dataVO.premium == true;
+                    }
 
                     if (remove)
                         vehIds.splice(i, 1);
