@@ -183,7 +183,22 @@ class wot.Minimap.Minimap
 
     private function updateEntries():Void
     {
-        Features.instance.setCameraAlpha();
+        var waitFrame:Boolean = Features.instance.setCameraAlpha();
+        if (!waitFrame)
+            updateEntries2();
+        else
+        {
+            var $this = this;
+            IconsProxy.cameraEntry.wrapper.onEnterFrame = function():Void
+            {
+                delete this.onEnterFrame;
+                $this.updateEntries2();
+            }
+        }
+    }
+
+    private function updateEntries2():Void
+    {
         var entries:Array = IconsProxy.allEntries;
         for (var i in entries)
             entries[i].invalidate();

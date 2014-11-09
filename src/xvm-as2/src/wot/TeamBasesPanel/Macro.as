@@ -44,7 +44,7 @@ class wot.TeamBasesPanel.Macro
     }
 
     public function update(isSituationNormal:Boolean, timeLeftSec:Number, timeLeftMinSec:String,
-                            capturersNum:Number, points:Number, speed:Number):Void
+        capturersNum:Number, points:Number, speed:Number):Void
     {
         this.m_isSituationNormal = isSituationNormal;
         this.m_timeLeftSec = timeLeftSec.toString();

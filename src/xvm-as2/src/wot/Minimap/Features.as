@@ -81,13 +81,35 @@ class wot.Minimap.Features
      * Have to be public.
      * Invoked each time minimap.onEntryInited is called.
      */
-    public function setCameraAlpha():Void
+    public function setCameraAlpha():Boolean
     {
+        var waitFrame:Boolean = false;
+
         if (MapConfig.enabled)
         {
-            var camera:MinimapEntry = IconsProxy.cameraEntry;
-            camera.wrapper._alpha = MapConfig.cameraAlpha;
+            var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.cameraEntry.wrapper;
+            if (MapConfig.hideCameraTriangle)
+            {
+                if (camera._currentframe != 2)
+                {
+                    waitFrame = true;
+                    camera.gotoAndStop(2); // "ally"
+                    camera.player._visible = false;
+                }
+            }
+            else
+            {
+                if (camera._currentframe != 4)
+                {
+                    waitFrame = true;
+                    camera.gotoAndStop(4); // "cameraNormal"
+                }
+            }
+
+            camera._alpha = MapConfig.cameraAlpha;
         }
+
+        return waitFrame;
     }
 
     public function applyMajorMods():Void

@@ -39,7 +39,6 @@ class wot.TeamBasesPanel.TeamBasesPanel
 
     function addImpl(id, sortWeight, capColor, title, points, rate, baseNum)
     {
-        Logger.add("rate=" + rate);
         if (CapConfig.enabled)
         {
             /**

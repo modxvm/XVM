@@ -469,6 +469,7 @@ package com.xvm.misc
             c.enabled = true;
             c.mapBackgroundImageAlpha = 100;
             c.selfIconAlpha = 100;
+            c.hideCameraTriangle = false;
             c.cameraAlpha = 100;
             c.iconScale = 1;
 

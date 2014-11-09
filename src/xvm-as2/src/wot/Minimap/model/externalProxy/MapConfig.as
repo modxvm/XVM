@@ -12,6 +12,7 @@ class wot.Minimap.model.externalProxy.MapConfig
     public static function get enabled():Boolean                { return minimap.enabled; }
     public static function get mapBackgroundImageAlpha():Number { return minimap.mapBackgroundImageAlpha; }
     public static function get selfIconAlpha():Number           { return minimap.selfIconAlpha; }
+    public static function get hideCameraTriangle():Number      { return minimap.hideCameraTriangle; }
     public static function get cameraAlpha():Number             { return minimap.cameraAlpha; }
     public static function get iconScale():Number               { return minimap.iconScale; }
 

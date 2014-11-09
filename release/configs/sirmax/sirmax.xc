@@ -80,7 +80,7 @@
   },
   "hotkeys": {
     //"minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
-    //"minimapAltMode": { "enabled": true, "keyCode": 29 },
+    "minimapAltMode": { "enabled": true, "keyCode": 29 },
     //"playersPanelAltMode": { "enabled": true, "keyCode": 29 },
     "__stub__": {}
   },

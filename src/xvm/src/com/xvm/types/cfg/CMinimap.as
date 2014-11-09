@@ -9,6 +9,7 @@ package com.xvm.types.cfg
         public var enabled:Boolean;
         public var mapBackgroundImageAlpha:Number;
         public var selfIconAlpha:Number;
+        public var hideCameraTriangle:Boolean;
         public var cameraAlpha:Number;
         public var iconScale:Number;
         public var zoom: CMinimapZoom;

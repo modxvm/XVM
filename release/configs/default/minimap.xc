@@ -13,6 +13,9 @@
     // Self icon transparency. White pointing arrow.
     // Прозрачность своей иконки. Белая стрелка.
     "selfIconAlpha": 100,
+    // Hide camera direction green triangle.
+    // Спрятать зеленый треугольник направления камера.
+    "hideCameraTriangle": false,
     // Camera transparency and its attached geometry (green triangle).
     // Прозрачность камеры и прикрепленной геометрии (зеленый треугольник).
     "cameraAlpha": 100,

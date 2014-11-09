@@ -2,6 +2,7 @@
   * fixed small bugs
   * show capturing base number for battles with more then one base
     WARNING: There are changes in the localization files
+  * added option minimap/hideCameraTriangle - hide camera direction green triangle
 
 XVM-5.4.1.1:
   * fixed bug with online services activation

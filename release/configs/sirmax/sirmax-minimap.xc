@@ -3,6 +3,7 @@
     "enabled": true,
     "iconScale": 1.5,
     "zoom": { "centered": false },
+    "hideCameraTriangle": true,
     "cameraAlpha": 90,
     "circles": {
         "view": [
@@ -54,6 +55,7 @@
     "enabled": true,
     "mapBackgroundImageAlpha": 50,
     "selfIconAlpha": 50,
+    "hideCameraTriangle": false,
     "cameraAlpha": 100,
     "iconScale": 2,
     "circles": {

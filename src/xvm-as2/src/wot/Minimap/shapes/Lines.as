@@ -1,11 +1,9 @@
-import flash.geom.Point;
-import com.xvm.GlobalEventDispatcher;
-import wot.Minimap.MinimapEntry;
-import wot.Minimap.MinimapEvent;
-import wot.Minimap.model.externalProxy.IconsProxy;
-import wot.Minimap.model.externalProxy.MapConfig;
-import wot.Minimap.shapes.ShapeAttach;
-import wot.Minimap.dataTypes.cfg.LineCfg;
+import com.xvm.*;
+import flash.geom.*;
+import wot.Minimap.*;
+import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.shapes.*;
+import wot.Minimap.dataTypes.cfg.*;
 
 /**
  * Draws lines of sight and horizontal focusing angles

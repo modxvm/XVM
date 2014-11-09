@@ -1,8 +1,8 @@
 import com.xvm.*;
-import wot.Minimap.dataTypes.Player;
-import wot.Minimap.MinimapEvent;
-import wot.Minimap.model.SyncModel;
-import wot.Minimap.model.externalProxy.MapConfig;
+import wot.Minimap.*;
+import wot.Minimap.dataTypes.*;
+import wot.Minimap.model.*;
+import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.view.*;
 
 /**
