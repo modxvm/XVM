@@ -1,4 +1,9 @@
-﻿XVM-5.4.1.1:
+﻿XVM-5.4.1.2:
+  * fixed small bugs
+  * show capturing base number for battles with more then one base
+    WARNING: There are changes in the localization files
+
+XVM-5.4.1.1:
   * fixed bug with online services activation
 
 XVM-5.4.1:

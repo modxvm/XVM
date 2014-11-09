@@ -1,6 +1,5 @@
-import com.xvm.Locale;
-import com.xvm.Utils;
-import wot.TeamBasesPanel.CapConfig;
+import com.xvm.*;
+import wot.TeamBasesPanel.*;
 
 /**
  * Class prepares html formatted text.
@@ -23,8 +22,9 @@ class wot.TeamBasesPanel.Macro
     private var m_points:String;
 
     private var m_capColor:String;
+    private var m_baseNumText:String;
 
-    public function Macro(startingPoints:Number, capColor:String)
+    public function Macro(startingPoints:Number, capColor:String, baseNumText)
     {
        /**
         * Should be defined early because
@@ -35,6 +35,7 @@ class wot.TeamBasesPanel.Macro
         m_isSituationNormal = false;
         m_points = startingPoints.toString();
         m_capColor = capColor;
+        m_baseNumText = baseNumText;
 
         m_primaryTitleFormat = Locale.get(CapConfig.primaryTitleFormat(m_capColor));
         m_secondaryTitleFormat = Locale.get(CapConfig.secondaryTitleFormat(m_capColor));
@@ -79,27 +80,30 @@ class wot.TeamBasesPanel.Macro
 
     private function format(text:String):String
     {
-        if (text.indexOf("{{") == -1)
-            return Utils.fixImgTag(text);
+        if (text.indexOf("{{") >= 0)
+        {
+           /**
+            * Extra data is tanks capturing and time left.
+            * Extra can not be defined at every possible tick in time.
+            * And only stable capturing process defines presentable extra data.
+            * CaptureBar.isSituationNormal indicates normal values are being calculated.
+            */
+            if (m_isSituationNormal)
+                text = stringReplace("{{extra}}", m_extra, text);
+            else
+                text = stringReplace("{{extra}}", "", text)
 
-       /**
-        * Extra data is tanks capturing and time left.
-        * Extra can not be defined at every possible tick in time.
-        * And only stable capturing process defines presentable extra data.
-        * CaptureBar.isSituationNormal indicates normal values are being calculated.
-        */
-        if (m_isSituationNormal)
-            text = stringReplace("{{extra}}", m_extra, text);
-        else
-            text = stringReplace("{{extra}}", "", text)
+            text = stringReplace("{{tanks}}", m_capturersNum, text);
+            text = stringReplace("{{time}}", m_timeLeftMinSec, text);
+            text = stringReplace("{{time-sec}}", m_timeLeftSec, text);
+            text = stringReplace("{{speed}}", m_speed, text);
+            text = stringReplace("{{points}}", m_points, text);
+        }
 
-        text = stringReplace("{{tanks}}", m_capturersNum, text);
-        text = stringReplace("{{time}}", m_timeLeftMinSec, text);
-        text = stringReplace("{{time-sec}}", m_timeLeftSec, text);
-        text = stringReplace("{{speed}}", m_speed, text);
-        text = stringReplace("{{points}}", m_points, text);
+        text = Utils.fixImgTag(text);
+        text = Strings.substitute(text, [ m_baseNumText ]);
 
-        return Utils.fixImgTag(text);
+        return text;
     }
 
     private function stringReplace(what:String, to:String, where:String):String

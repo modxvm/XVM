@@ -59,4 +59,27 @@ class com.xvm.Strings
         }
         return str;
     }
+
+    /**
+     *  from  mx.utils.StringUtil;
+     *
+     *  Substitutes "{n}" tokens within the specified string
+     *  with the respective arguments passed in.
+     *
+     *  @example
+     *
+     *  var str:String = "here is some info '{0}' and {1}";
+     *  trace(StringUtil.substitute(str, 15.4, true));
+     */
+    public static function substitute(str:String, args:Array):String
+    {
+        if (str == null)
+            return '';
+
+        var len = args.length;
+        for (var i = 0; i < len; i++)
+            str = str.split("{" + i + "}").join(args[i]);
+
+        return str;
+    }
 }

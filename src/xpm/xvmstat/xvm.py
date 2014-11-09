@@ -108,6 +108,10 @@ class Xvm(object):
                 res = comments.getXvmUserComments(args[0])
             elif cmd == COMMAND_SETCOMMENTS:
                 res = comments.setXvmUserComments(args[0])
+            elif cmd == COMMAND_CAPTUREBARGETBASENUM:
+                n = int(args[0])
+                from gui.shared.utils.functions import getBattleSubTypeBaseNumder
+                res = getBattleSubTypeBaseNumder(BigWorld.player().arenaTypeID, n & 0x3, n >> 2)
             elif cmd == COMMAND_TEST:
                 runTest(args)
             else:

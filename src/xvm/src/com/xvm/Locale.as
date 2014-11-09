@@ -121,10 +121,10 @@ package com.xvm
             "hpLeftTitle": "Осталось HP:",
 
             // Capture
-            "enemyBaseCapture": "Захват базы союзниками!",
-            "enemyBaseCaptured": "База захвачена союзниками!",
-            "allyBaseCapture": "Захват базы врагами!",
-            "allyBaseCaptured": "База захвачена врагами!",
+            "enemyBaseCapture": "Захват базы{0} союзниками!",
+            "enemyBaseCaptured": "База{0} захвачена союзниками!",
+            "allyBaseCapture": "Захват базы{0} врагами!",
+            "allyBaseCaptured": "База{0} захвачена врагами!",
             */
 
             // BattleResults
@@ -270,10 +270,10 @@ package com.xvm
             "hpLeftTitle": "Hitpoints left:",
 
             // Capture
-            "enemyBaseCapture": "Base capture by allies!",
-            "enemyBaseCaptured": "Base captured by allies!",
-            "allyBaseCapture": "Base capture by enemies!",
-            "allyBaseCaptured": "Base captured by enemies!",
+            "enemyBaseCapture": "Base{0} capture by allies!",
+            "enemyBaseCaptured": "Base{0} captured by allies!",
+            "allyBaseCapture": "Base{0} capture by enemies!",
+            "allyBaseCaptured": "Base{0} captured by enemies!",
             */
 
             // BattleResults

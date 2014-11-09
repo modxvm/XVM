@@ -2,8 +2,8 @@
  * @author ilitvinov
  */
 
-import wot.TeamBasesPanel.CapConfig;
-import com.xvm.Utils;
+import com.xvm.*;
+import wot.TeamBasesPanel.*;
 
 /**
 * Creates and manages CaptureBar instances.
@@ -37,8 +37,9 @@ class wot.TeamBasesPanel.TeamBasesPanel
         Utils.TraceXvmModule("TeamBasesPanel");
     }
 
-    function addImpl(id, sortWeight, capColor, title, points)
+    function addImpl(id, sortWeight, capColor, title, points, rate, baseNum)
     {
+        Logger.add("rate=" + rate);
         if (CapConfig.enabled)
         {
             /**
@@ -48,16 +49,29 @@ class wot.TeamBasesPanel.TeamBasesPanel
             * Passing original values make text properties original
             * at that first moment.
             */
-            base.add(id, sortWeight, capColor, null, null);
+            base.add(id, sortWeight, capColor, null, null, null);
+
+            // Get capture base number text
+            Cmd.captureBarGetBaseNum(this, onCaptureBarGetBaseNum, id);
+
             /**
             * This array is defined at parent original WG class.
             * start() is XVMs method at worker CaptureBar class.
             */
-            wrapper.captureBars[wrapper.indexByID[id]].xvm_worker.start(points, capColor);
+            wrapper.captureBars[wrapper.indexByID[id]].xvm_worker.start(points, capColor, rate, baseNumText);
         }
         else
         {
-            base.add(id, sortWeight, capColor, title, points);
+            base.add.apply(base, arguments);
         }
+    }
+
+    // PRIVATE
+
+    private var baseNumText:String = "";
+
+    function onCaptureBarGetBaseNum(num:String)
+    {
+        baseNumText = num;
     }
 }

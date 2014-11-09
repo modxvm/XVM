@@ -617,7 +617,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 {
                     format.__last_vehicleSchemeName = sn.vehicleSchemeName;
                     (new Transform(f)).colorTransform = this.__getColorTransform(sn.vehicleSchemeName, true);
-                    Logger.add(f.source + " " + sn.vehicleSchemeName);
+                    //Logger.add(f.source + " " + sn.vehicleSchemeName);
                 }
             }
         }

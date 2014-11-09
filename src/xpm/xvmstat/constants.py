@@ -30,6 +30,7 @@ COMMAND_LOAD_SETTINGS = "load_settings"
 COMMAND_SAVE_SETTINGS = "save_settings"
 COMMAND_GETCOMMENTS = "getComments"
 COMMAND_SETCOMMENTS = "setComments"
+COMMAND_CAPTUREBARGETBASENUM = "captureBarGetBaseNum"
 COMMAND_LOGSTAT = "logstat"
 COMMAND_TEST = "test"
 

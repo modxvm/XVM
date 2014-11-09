@@ -12,6 +12,7 @@ class com.xvm.Cmd
     private static var COMMAND_GETSCREENSIZE:String = "getScreenSize";
     private static var COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
     private static var COMMAND_LOADUSERDATA:String = "loadUserData";
+    private static var COMMAND_CAPTUREBARGETBASENUM:String = "captureBarGetBaseNum";
     private static var COMMAND_LOGSTAT:String = "logstat";
 
     public static var RESPOND_CONFIG:String = "xvm.config";
@@ -39,6 +40,11 @@ class com.xvm.Cmd
     public static function loadBattleStat(players:Array)
     {
         _call(null, null, [COMMAND_LOADBATTLESTAT, players]);
+    }
+
+    public static function captureBarGetBaseNum(target:Object, callback:Function, id:Number)
+    {
+        _call(target, callback, [COMMAND_CAPTUREBARGETBASENUM, id]);
     }
 
     public static function logStat()

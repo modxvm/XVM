@@ -71,6 +71,8 @@ class wot.TeamBasesPanel.CaptureBar
     private var m_macro:Macro;       // defines user presentable html text
     private var m_capColor:String;
     private var m_captured:Boolean;
+    private var m_rate:Number;
+    private var m_baseNumText:String;
 
     /** Ugly hack to allow one tick earlier speed calculation */
     private var m_startPoints:Number
@@ -90,19 +92,19 @@ class wot.TeamBasesPanel.CaptureBar
         // Colorize capture bar
         var color = wrapper.m_colorFeature == "green" ? CapConfig.allyColor : CapConfig.enemyColor;
 
-		//Logger.add("c: " + color);
+        //Logger.add("c: " + color);
 
-		if (color != null && isNaN(color))
-			color = parseInt(color);
+        if (color != null && isNaN(color))
+            color = parseInt(color);
 
-		if (color == null || isNaN(color))
-		{
-			var type = wrapper.m_colorFeature == "green" ? "ally" : "enemy";
-			color = Config.config.markers.useStandardMarkers
-				? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
-				: ColorsManager.getSystemColor(type, false);
-		}
-		
+        if (color == null || isNaN(color))
+        {
+            var type = wrapper.m_colorFeature == "green" ? "ally" : "enemy";
+            color = Config.config.markers.useStandardMarkers
+                ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
+                : ColorsManager.getSystemColor(type, false);
+        }
+
         GraphicsUtil.colorize(wrapper.m_bgMC, color, 1);
         GraphicsUtil.colorize(wrapper.captureProgress.m_barMC, color, 1);
     }
@@ -112,7 +114,7 @@ class wot.TeamBasesPanel.CaptureBar
     * Cant be passed as argument externally easily.
     * Thus called straight by extended TeamBasesPanel class.
     */
-    public function start(startPoints:Number, capColor:String):Void
+    public function start(startPoints:Number, capColor:String, rate:Number, baseNumText:String):Void
     {
         //Logger.addObject(wrapper, 2);
 
@@ -121,6 +123,9 @@ class wot.TeamBasesPanel.CaptureBar
 
        /** colorFeature respects color blind */
         m_capColor = capColor;
+
+        m_rate = rate;
+        m_baseNumText = baseNumText;
 
        /**
         * autoSize extends field vertically
@@ -140,7 +145,7 @@ class wot.TeamBasesPanel.CaptureBar
         m_capSpeed = new CapSpeed();
 
         /** Substitutes macro text like {{speed}} with corresponding value to present at user interface */
-        m_macro = new Macro(startPoints, m_capColor);
+        m_macro = new Macro(startPoints, m_capColor, m_baseNumText);
 
        /**
         * At this moment TeamBasesPanel called "add" method.
