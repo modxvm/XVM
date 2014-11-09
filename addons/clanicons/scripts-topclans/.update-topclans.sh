@@ -16,7 +16,7 @@ parse_ivanerr()
   echo "Searching new top clans..."
   eflg=0
   i=0
-  cat "$tmpfn" | grep -Eo "(href=\"/../clan/([0-9]+)\"([\>]+)([A-Z0-9_-]{2,5})([\<]+).............a)" | while read line; do
+  cat "$tmpfn" | grep -Eo "(href=\"/.{2,4}/clan/([0-9]+)\"([\>]+)([A-Z0-9_-]{2,5})([\<]+).............a)" | while read line; do
     clan=`echo $line | cut -d\> -f2 | cut -d\< -f1`
     id=`echo $line | cut -d/ -f4 | cut -d\" -f1`
     l="$clan $id"
@@ -78,6 +78,7 @@ sort_topfile()
 update()
 {
   echo "Updating icons..."
+  mkdir -p ../../../release/res/clanicons/$dir/clan
   rm -f ../../../release/res/clanicons/$dir/clan/*
   i=0
   cat $topfile $topfile_persist | while read line; do
