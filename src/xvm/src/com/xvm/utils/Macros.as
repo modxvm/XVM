@@ -644,6 +644,7 @@ package com.xvm.utils
 
         public static function RegisterCommentsData():void
         {
+            //Logger.add("Macros::RegisterCommentsData");
             Cmd.getComments(null, onGetCommentsReceived);
         }
 

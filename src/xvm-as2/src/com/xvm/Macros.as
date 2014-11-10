@@ -444,7 +444,9 @@ class com.xvm.Macros
             // {{c:dmg}}
             pdata["c:dmg"] = function(o):String
             {
-                if isNaN(o.delta)
+                //Logger.addObject(o);
+                //Logger.addObject(data);
+                if (isNaN(o.delta))
                     return null;
                 switch (o.damageType)
                 {
@@ -455,7 +457,7 @@ class com.xvm.Macros
                     default:
                         return GraphicsUtil.GetDmgSrcValue(
                             Utils.damageFlagToDamageSource(o.damageFlag),
-                            o.entityName == 'teamKiller' ? (data.team + "tk") : o.entityName,
+                            o.teamKiller ? ((data.team == Defines.TEAM_ALLY ? "ally" : "enemy") + "tk") : o.entityName,
                             o.dead, o.blowedUp);
                 }
             }

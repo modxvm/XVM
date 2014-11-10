@@ -168,6 +168,10 @@
     "system": {
       //"ally_alive":          "0x029CF5",
       //"enemy_alive":         "0xFFBB28"
+    },
+    "damage": {
+      //"enemy_allytk_hit":      "0x00EAFF",
+      //"enemy_allytk_kill":     "0x00EAFF"
     }
   },
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }

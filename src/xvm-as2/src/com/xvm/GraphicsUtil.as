@@ -2,14 +2,10 @@
  * ...
  * @author sirmax2
  */
-import com.xvm.Config;
-import com.xvm.Defines;
-import com.xvm.Strings;
-import com.xvm.Utils;
-import com.xvm.VehicleInfo;
-import flash.filters.DropShadowFilter;
-import flash.geom.ColorTransform;
-import com.xvm.DataTypes.VehicleData;
+import com.xvm.*;
+import com.xvm.DataTypes.*;
+import flash.filters.*;
+import flash.geom.*;
 
 class com.xvm.GraphicsUtil
 {
@@ -159,9 +155,11 @@ class com.xvm.GraphicsUtil
                 return null;
             var key:String = damageSource + "_" + damageDest + "_";
             key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
-            if (!Config.config.colors.damage[key])
+            var value = Config.config.colors.damage[key];
+            if (!value)
                 return "";
-            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.damage[key], 0xFFFFFE).toString(16), 6, "0");
+            //Logger.add(key + " => " + value);
+            return prefix + Strings.padLeft(Utils.toInt(value, 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {

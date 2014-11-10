@@ -46,6 +46,8 @@
           "y": -55,
           "damageMessage": ${"def.damageMessageAlive"}
         },
+        "damageTextPlayer": ${"ally.alive.normal.damageText"},
+        "damageTextSquadman": ${"ally.alive.normal.damageText"},
         "actionMarker": {
           "y": -55
         },
@@ -98,6 +100,8 @@
           "y": -55,
           "damageMessage": ${"def.damageMessageAlive"}
         },
+        "damageTextPlayer": ${"ally.alive.extended.damageText"},
+        "damageTextSquadman": ${"ally.alive.extended.damageText"},
         "actionMarker": {
           "y": -55
         },
@@ -142,6 +146,8 @@
           "damageMessage": ${"def.damageMessageAllyDead"},
           "blowupMessage": "Blown-up!"
         },
+        "damageTextPlayer": ${"ally.dead.normal.damageText"},
+        "damageTextSquadman": ${"ally.dead.normal.damageText"},
         "actionMarker": {
           "y": -55
         }
@@ -156,6 +162,8 @@
           "damageMessage": ${"def.damageMessageAllyDead"},
           "blowupMessage": "Blown-up!"
         },
+        "damageTextPlayer": ${"ally.dead.extended.damageText"},
+        "damageTextSquadman": ${"ally.dead.extended.damageText"},
         "actionMarker": {
           "y": -55
         },
@@ -205,6 +213,8 @@
           //"shadow": { "color": null },
           "damageMessage": ${"def.damageMessageAlive"}
         },
+        "damageTextPlayer": ${"enemy.alive.normal.damageText"},
+        "damageTextSquadman": ${"enemy.alive.normal.damageText"},
         "actionMarker": {
           "y": -55
         },
@@ -257,6 +267,8 @@
           "y": -55,
           "damageMessage": ${"def.damageMessageAlive"}
         },
+        "damageTextPlayer": ${"enemy.alive.extended.damageText"},
+        "damageTextSquadman": ${"enemy.alive.extended.damageText"},
         "actionMarker": {
           "y": -55
         },
@@ -301,6 +313,8 @@
           "damageMessage": ${"def.damageMessageEnemyDead"},
           "blowupMessage": "<textformat leading='-5'>Blown-up!<br>{{vehicle}}</textformat>"
         },
+        "damageTextPlayer": ${"enemy.dead.normal.damageText"},
+        "damageTextSquadman": ${"enemy.dead.normal.damageText"},
         "actionMarker": {
           "y": -55
         }
@@ -315,6 +329,8 @@
           "damageMessage": ${"def.damageMessageEnemyDead"},
           "blowupMessage": "Blown-up!"
         },
+        "damageTextPlayer": ${"enemy.dead.extended.damageText"},
+        "damageTextSquadman": ${"enemy.dead.extended.damageText"},
         "actionMarker": {
           "y": -55
         },
