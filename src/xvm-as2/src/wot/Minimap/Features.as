@@ -112,6 +112,12 @@ class wot.Minimap.Features
         return waitFrame;
     }
 
+    public function updateSquare():Void
+    {
+        if (square != null)
+            square.update();
+    }
+
     public function applyMajorMods():Void
     {
         setBGMapImageAlpha();
@@ -209,6 +215,7 @@ class wot.Minimap.Features
         {
             square.Dispose();
             delete square;
+            square = null;
         }
         if (MapConfig.squareEnabled)
         {

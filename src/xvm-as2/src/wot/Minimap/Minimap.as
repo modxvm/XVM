@@ -199,6 +199,7 @@ class wot.Minimap.Minimap
 
     private function updateEntries2():Void
     {
+        Features.instance.updateSquare();
         var entries:Array = IconsProxy.allEntries;
         for (var i in entries)
             entries[i].invalidate();

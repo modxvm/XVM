@@ -93,9 +93,10 @@ class wot.Minimap.shapes.Square extends ShapeAttach
         return vdata == null ? false : vdata.vclass == "SPG";
     }
 
-    /** overwrite */
-    private function postmortemMod(event) {
+    // override
+    private function postmortemMod(event)
+    {
         squareClip._visible = false;
-        super.postmortemMod.apply(arguments);
+        super.postmortemMod(event);
     }
 }

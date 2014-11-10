@@ -39,14 +39,19 @@ class wot.Minimap.shapes.ShapeAttach
         /** Hide sphapes on players dead event (postmortem mod) */
         GlobalEventDispatcher.addEventListener(Defines.E_SELF_DEAD, this, postmortemMod);
 
-        var ud = BattleState.getSelfUserData();
-        if (ud != null && ud.dead == true)
-            postmortemMod();
+        update();
     }
 
     public function Dispose()
     {
         GlobalEventDispatcher.removeEventListener(Defines.E_SELF_DEAD, this, postmortemMod);
+    }
+
+    public function update()
+    {
+        var ud = BattleState.getSelfUserData();
+        if (ud != null && ud.dead == true)
+            postmortemMod();
     }
 
     // -- Private
@@ -56,7 +61,8 @@ class wot.Minimap.shapes.ShapeAttach
         return MapSizeModel.instance.getFullSide();
     }
 
-    private function postmortemMod(event) {
+    private function postmortemMod(event)
+    {
         selfAttachments._visible = false;
     }
 }
