@@ -174,10 +174,11 @@ package net.wg.gui.gameloading
         
         private function relayout() : void
         {
+            var _loc2_:* = NaN;
             var _loc3_:* = NaN;
             var _loc4_:TextFormat = null;
             var _loc1_:Number = this.appWidth - MIN_APP_WIDTH >> 1;
-            var _loc2_:Number = this.appHeight - MIN_APP_HEIGHT >> 1;
+            _loc2_ = this.appHeight - MIN_APP_HEIGHT >> 1;
             this.versionTF.x = this.initVersionTFPos.x - _loc1_;
             this.versionTF.y = this.initVersionTFPos.y - _loc2_;
             this.form.y = this.wotLogo.y + FORM_VERTICAL_OFFSET ^ 0;

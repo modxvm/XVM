@@ -416,23 +416,41 @@ package
         
         public static var IGR_FREE_CUT:String = "#vehicle_customization:IGR/free/cut";
         
-        public static var CAMOUFLAGE_IGR_WINTER:String = "#vehicle_customization:camouflage/IGR_Winter";
+        public static var CAMOUFLAGE_IGR_WINTER_LABEL:String = "#vehicle_customization:camouflage/IGR_Winter/label";
         
-        public static var CAMOUFLAGE_IGR_SUMMER:String = "#vehicle_customization:camouflage/IGR_Summer";
+        public static var CAMOUFLAGE_IGR_WINTER_DESCRIPTION:String = "#vehicle_customization:camouflage/IGR_Winter/description";
         
-        public static var CAMOUFLAGE_IGR_DESERT:String = "#vehicle_customization:camouflage/IGR_Desert";
+        public static var CAMOUFLAGE_IGR_SUMMER_LABEL:String = "#vehicle_customization:camouflage/IGR_Summer/label";
         
-        public static var CAMOUFLAGE_IGR_CH_WINTER:String = "#vehicle_customization:camouflage/IGR_Ch_Winter";
+        public static var CAMOUFLAGE_IGR_SUMMER_DESCRIPTION:String = "#vehicle_customization:camouflage/IGR_Summer/description";
         
-        public static var CAMOUFLAGE_IGR_CH_SUMMER:String = "#vehicle_customization:camouflage/IGR_Ch_Summer";
+        public static var CAMOUFLAGE_IGR_DESERT_LABEL:String = "#vehicle_customization:camouflage/IGR_Desert/label";
         
-        public static var CAMOUFLAGE_IGR_CH_DESERT:String = "#vehicle_customization:camouflage/IGR_Ch_Desert";
+        public static var CAMOUFLAGE_IGR_DESERT_DESCRIPTION:String = "#vehicle_customization:camouflage/IGR_Desert/description";
         
-        public static var CAMOUFLAGE_IGR_K_WINTER:String = "#vehicle_customization:camouflage/IGR_K_Winter";
+        public static var CAMOUFLAGE_IGR_CH_WINTER_LABEL:String = "#vehicle_customization:camouflage/IGR_Ch_Winter/label";
         
-        public static var CAMOUFLAGE_IGR_K_SUMMER:String = "#vehicle_customization:camouflage/IGR_K_Summer";
+        public static var CAMOUFLAGE_IGR_CH_WINTER_DESCRIPTION:String = "#vehicle_customization:camouflage/IGR_Ch_Winter/description";
         
-        public static var CAMOUFLAGE_IGR_K_DESERT:String = "#vehicle_customization:camouflage/IGR_K_Desert";
+        public static var CAMOUFLAGE_IGR_CH_SUMMER_LABEL:String = "#vehicle_customization:camouflage/IGR_Ch_Summer/label";
+        
+        public static var CAMOUFLAGE_IGR_CH_SUMMER_DESCRIPTION:String = "#vehicle_customization:camouflage/IGR_Ch_Summer/description";
+        
+        public static var CAMOUFLAGE_IGR_CH_DESERT_LABEL:String = "#vehicle_customization:camouflage/IGR_Ch_Desert/label";
+        
+        public static var CAMOUFLAGE_IGR_CH_DESERT_DESCRIPTION:String = "#vehicle_customization:camouflage/IGR_Ch_Desert/description";
+        
+        public static var CAMOUFLAGE_IGR_K_WINTER_LABEL:String = "#vehicle_customization:camouflage/IGR_K_Winter/label";
+        
+        public static var CAMOUFLAGE_IGR_K_WINTER_DESCRIPTION:String = "#vehicle_customization:camouflage/IGR_K_Winter/description";
+        
+        public static var CAMOUFLAGE_IGR_K_SUMMER_LABEL:String = "#vehicle_customization:camouflage/IGR_K_Summer/label";
+        
+        public static var CAMOUFLAGE_IGR_K_SUMMER_DESCRIPTION:String = "#vehicle_customization:camouflage/IGR_K_Summer/description";
+        
+        public static var CAMOUFLAGE_IGR_K_DESERT_LABEL:String = "#vehicle_customization:camouflage/IGR_K_Desert/label";
+        
+        public static var CAMOUFLAGE_IGR_K_DESERT_DESCRIPTION:String = "#vehicle_customization:camouflage/IGR_K_Desert/description";
         
         public static var CAMOUFLAGE_CLAN_CAMOUFLAGE_01_LABEL:String = "#vehicle_customization:camouflage/Clan_camouflage_01/label";
         
@@ -440,7 +458,7 @@ package
         
         public static var EMBLEM:String = "#vehicle_customization:emblem";
         
-        public static var EMBLEM_GROUP1_STAR:String = "#vehicle_customization:emblem/group1/star";
+        public static var EMBLEM_AUTO:String = "#vehicle_customization:emblem/auto";
         
         public static var EMBLEM_ANIMALS:String = "#vehicle_customization:emblem/animals";
         
@@ -453,6 +471,32 @@ package
         public static var EMBLEM_CLAN_CONTENT:String = "#vehicle_customization:emblem/clan_content";
         
         public static var EMBLEM_IGR:String = "#vehicle_customization:emblem/IGR";
+        
+        public static var EMBLEM_AUTO_STAR:String = "#vehicle_customization:emblem/auto/star";
+        
+        public static var EMBLEM_AUTO_GERMANY_CROSS:String = "#vehicle_customization:emblem/auto/germany_cross";
+        
+        public static var EMBLEM_AUTO_USA_STAR:String = "#vehicle_customization:emblem/auto/usa_star";
+        
+        public static var EMBLEM_AUTO_FRENCH_ROSE:String = "#vehicle_customization:emblem/auto/french_rose";
+        
+        public static var EMBLEM_AUTO_CHINA_STAR:String = "#vehicle_customization:emblem/auto/china_star";
+        
+        public static var EMBLEM_AUTO_BRITAIN_COLOR:String = "#vehicle_customization:emblem/auto/britain_color";
+        
+        public static var EMBLEM_AUTO_GERMANY_BUNDECROSS:String = "#vehicle_customization:emblem/auto/germany_bundecross";
+        
+        public static var EMBLEM_AUTO_JAPANESE_SUN:String = "#vehicle_customization:emblem/auto/japanese_sun";
+        
+        public static var EMBLEM_AUTO_CHINA_KUOMINTANG:String = "#vehicle_customization:emblem/auto/china_kuomintang";
+        
+        public static var EMBLEM_AUTO_ALPHA_TESTER:String = "#vehicle_customization:emblem/auto/alpha_tester";
+        
+        public static var EMBLEM_AUTO_BETA_TESTER:String = "#vehicle_customization:emblem/auto/beta_tester";
+        
+        public static var EMBLEM_AUTO_GERMANY_DDR:String = "#vehicle_customization:emblem/auto/germany_ddr";
+        
+        public static var EMBLEM_AUTO_MODER_RING:String = "#vehicle_customization:emblem/auto/moder_ring";
         
         public static var EMBLEM_GROUP1_ANIMAL_1:String = "#vehicle_customization:emblem/group1/animal_1";
         

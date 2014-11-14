@@ -862,6 +862,8 @@ package
         
         public static var SERVICECHANNELMESSAGES_FORT_DEFENCE_PLANNED:String = "#messenger:serviceChannelMessages/fort/DEFENCE_PLANNED";
         
+        public static var SERVICECHANNELMESSAGES_FORT_BATTLE_DELETED:String = "#messenger:serviceChannelMessages/fort/BATTLE_DELETED";
+        
         public static var COMMAND_SUCCESS_USERBAN:String = "#messenger:command/success/USERBAN";
         
         public static var COMMAND_SUCCESS_USERUNBAN:String = "#messenger:command/success/USERUNBAN";

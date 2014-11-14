@@ -39,7 +39,6 @@ package net.wg.gui.components.advanced
         
         override protected function handleMouseRelease(param1:MouseEvent) : void
         {
-            var _loc4_:uint = 0;
             var _loc5_:ButtonEvent = null;
             _autoRepeatEvent = null;
             if(!enabled)
@@ -48,7 +47,7 @@ package net.wg.gui.components.advanced
             }
             var _loc2_:MouseEventEx = param1 as MouseEventEx;
             var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
-            _loc4_ = _loc2_ == null?0:_loc2_.buttonIdx;
+            var _loc4_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
             _mouseDown = _mouseDown ^ 1 << _loc3_;
             if(_mouseDown == 0 && (_repeatTimer))
             {

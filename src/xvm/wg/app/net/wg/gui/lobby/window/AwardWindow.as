@@ -94,6 +94,7 @@ package net.wg.gui.lobby.window
             this.headerTF.htmlText = param1.header;
             this.descriptionTF.htmlText = param1.description;
             this.additionalTF.htmlText = param1.additionalText;
+            this.dashLine.visible = this.additionalTF.text.length > 0;
         }
         
         private function awardImageLoadedHandler(param1:UILoaderEvent) : void
