@@ -2246,6 +2246,8 @@ package
         
         public static var MAPS_ICONS_REFERRAL_AWARD_CREDITS:String = "../maps/icons/referral/award_credits.png";
         
+        public static var MAPS_ICONS_REFERRAL_AWARD_CREDITS_GLOW:String = "../maps/icons/referral/award_credits_glow.png";
+        
         public static var MAPS_ICONS_REFERRAL_BG_IMAGE:String = "../maps/icons/referral/bg_image.png";
         
         public static var MAPS_ICONS_REFERRAL_REFSYS_MEN_BW:String = "../maps/icons/referral/refSys_men_bw.png";
@@ -4066,6 +4068,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CHINA_CH17_WZ131_1_WZ132:String = "../maps/icons/vehicle/china-Ch17_WZ131_1_WZ132.png";
         
+        public static var MAPS_ICONS_VEHICLE_CHINA_CH17_WZ131_1_WZ132_IGR:String = "../maps/icons/vehicle/china-Ch17_WZ131_1_WZ132_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CHINA_CH18_WZ_120:String = "../maps/icons/vehicle/china-Ch18_WZ-120.png";
         
         public static var MAPS_ICONS_VEHICLE_CHINA_CH19_121:String = "../maps/icons/vehicle/china-Ch19_121.png";
@@ -4116,6 +4120,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_CHINA_CH17_WZ131_1_WZ132:String = "../maps/icons/vehicle/contour/china-Ch17_WZ131_1_WZ132.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_CHINA_CH17_WZ131_1_WZ132_IGR:String = "../maps/icons/vehicle/contour/china-Ch17_WZ131_1_WZ132_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_CHINA_CH18_WZ_120:String = "../maps/icons/vehicle/contour/china-Ch18_WZ-120.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_CHINA_CH19_121:String = "../maps/icons/vehicle/contour/china-Ch19_121.png";
@@ -4146,15 +4152,21 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_13_90:String = "../maps/icons/vehicle/contour/france-AMX_13_90.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_13_90_IGR:String = "../maps/icons/vehicle/contour/france-AMX_13_90_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_50FOSH_155:String = "../maps/icons/vehicle/contour/france-AMX_50Fosh_155.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_50_100:String = "../maps/icons/vehicle/contour/france-AMX_50_100.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_50_100_IGR:String = "../maps/icons/vehicle/contour/france-AMX_50_100_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_50_120:String = "../maps/icons/vehicle/contour/france-AMX_50_120.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_AC_MLE1946:String = "../maps/icons/vehicle/contour/france-AMX_AC_Mle1946.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_AC_MLE1948:String = "../maps/icons/vehicle/contour/france-AMX_AC_Mle1948.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_AC_MLE1948_IGR:String = "../maps/icons/vehicle/contour/france-AMX_AC_Mle1948_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_FRANCE_AMX_M4_1945:String = "../maps/icons/vehicle/contour/france-AMX_M4_1945.png";
         
@@ -4282,6 +4294,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_JAGDTIGER_SDKFZ_185:String = "../maps/icons/vehicle/contour/germany-JagdTiger_SdKfz_185.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_JAGDTIGER_SDKFZ_185_IGR:String = "../maps/icons/vehicle/contour/germany-JagdTiger_SdKfz_185_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_LEOPARD1:String = "../maps/icons/vehicle/contour/germany-Leopard1.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_LOWE:String = "../maps/icons/vehicle/contour/germany-Lowe.png";
@@ -4295,6 +4309,8 @@ package
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_NASHORN:String = "../maps/icons/vehicle/contour/germany-Nashorn.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PANTHER_II:String = "../maps/icons/vehicle/contour/germany-Panther_II.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PANTHER_II_IGR:String = "../maps/icons/vehicle/contour/germany-Panther_II_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PANTHER_M10:String = "../maps/icons/vehicle/contour/germany-Panther_M10.png";
         
@@ -4338,7 +4354,11 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PZVIB_TIGER_II:String = "../maps/icons/vehicle/contour/germany-PzVIB_Tiger_II.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PZVIB_TIGER_II_IGR:String = "../maps/icons/vehicle/contour/germany-PzVIB_Tiger_II_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PZVIB_TIGER_II_TRAINING:String = "../maps/icons/vehicle/contour/germany-PzVIB_Tiger_II_training.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PZVI_IGR:String = "../maps/icons/vehicle/contour/germany-PzVI_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_PZVI_TIGER_P:String = "../maps/icons/vehicle/contour/germany-PzVI_Tiger_P.png";
         
@@ -4367,6 +4387,8 @@ package
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_S35_CAPTURED:String = "../maps/icons/vehicle/contour/germany-S35_captured.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_STUG_40_AUSFG:String = "../maps/icons/vehicle/contour/germany-StuG_40_AusfG.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_STUG_40_AUSFG_IGR:String = "../maps/icons/vehicle/contour/germany-StuG_40_AusfG_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_GERMANY_STURER_EMIL:String = "../maps/icons/vehicle/contour/germany-Sturer_Emil.png";
         
@@ -4434,6 +4456,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_JAPAN_STA_1:String = "../maps/icons/vehicle/contour/japan-STA_1.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_JAPAN_STA_1_IGR:String = "../maps/icons/vehicle/contour/japan-STA_1_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_JAPAN_ST_B1:String = "../maps/icons/vehicle/contour/japan-ST_B1.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_JAPAN_TE_KE:String = "../maps/icons/vehicle/contour/japan-Te_Ke.png";
@@ -4460,6 +4484,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB11_CAERNARVON:String = "../maps/icons/vehicle/contour/uk-GB11_Caernarvon.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB11_CAERNARVON_IGR:String = "../maps/icons/vehicle/contour/uk-GB11_Caernarvon_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB12_CONQUEROR:String = "../maps/icons/vehicle/contour/uk-GB12_Conqueror.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB13_FV215B:String = "../maps/icons/vehicle/contour/uk-GB13_FV215b.png";
@@ -4468,9 +4494,13 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB21_CROMWELL:String = "../maps/icons/vehicle/contour/uk-GB21_Cromwell.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB21_CROMWELL_IGR:String = "../maps/icons/vehicle/contour/uk-GB21_Cromwell_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB22_COMET:String = "../maps/icons/vehicle/contour/uk-GB22_Comet.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB23_CENTURION:String = "../maps/icons/vehicle/contour/uk-GB23_Centurion.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB23_CENTURION_IGR:String = "../maps/icons/vehicle/contour/uk-GB23_Centurion_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB24_CENTURION_MK3:String = "../maps/icons/vehicle/contour/uk-GB24_Centurion_Mk3.png";
         
@@ -4529,6 +4559,8 @@ package
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB76_MK_VIC:String = "../maps/icons/vehicle/contour/uk-GB76_Mk_VIC.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB77_FV304:String = "../maps/icons/vehicle/contour/uk-GB77_FV304.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB77_FV304_IGR:String = "../maps/icons/vehicle/contour/uk-GB77_FV304_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_UK_GB78_SEXTON_I:String = "../maps/icons/vehicle/contour/uk-GB78_Sexton_I.png";
         
@@ -4610,6 +4642,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_SHERMAN_JUMBO:String = "../maps/icons/vehicle/contour/usa-Sherman_Jumbo.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_SHERMAN_JUMBO_IGR:String = "../maps/icons/vehicle/contour/usa-Sherman_Jumbo_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T110:String = "../maps/icons/vehicle/contour/usa-T110.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T110E3:String = "../maps/icons/vehicle/contour/usa-T110E3.png";
@@ -4654,6 +4688,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T34_HVY:String = "../maps/icons/vehicle/contour/usa-T34_hvy.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T34_HVY_IGR:String = "../maps/icons/vehicle/contour/usa-T34_hvy_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T37:String = "../maps/icons/vehicle/contour/usa-T37.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T40:String = "../maps/icons/vehicle/contour/usa-T40.png";
@@ -4668,9 +4704,15 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T67:String = "../maps/icons/vehicle/contour/usa-T67.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T67_IGR:String = "../maps/icons/vehicle/contour/usa-T67_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T69:String = "../maps/icons/vehicle/contour/usa-T69.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T69_IGR:String = "../maps/icons/vehicle/contour/usa-T69_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T71:String = "../maps/icons/vehicle/contour/usa-T71.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T71_IGR:String = "../maps/icons/vehicle/contour/usa-T71_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USA_T7_COMBAT_CAR:String = "../maps/icons/vehicle/contour/usa-T7_Combat_Car.png";
         
@@ -4708,6 +4750,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_IS_3:String = "../maps/icons/vehicle/contour/ussr-IS-3.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_IS_3_IGR:String = "../maps/icons/vehicle/contour/ussr-IS-3_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_IS_4:String = "../maps/icons/vehicle/contour/ussr-IS-4.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_IS_7:String = "../maps/icons/vehicle/contour/ussr-IS-7.png";
@@ -4717,6 +4761,8 @@ package
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_IS8:String = "../maps/icons/vehicle/contour/ussr-IS8.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_ISU_152:String = "../maps/icons/vehicle/contour/ussr-ISU-152.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_ISU_152_IGR:String = "../maps/icons/vehicle/contour/ussr-ISU-152_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_KV_13:String = "../maps/icons/vehicle/contour/ussr-KV-13.png";
         
@@ -4735,6 +4781,8 @@ package
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_KV1:String = "../maps/icons/vehicle/contour/ussr-KV1.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_KV2:String = "../maps/icons/vehicle/contour/ussr-KV2.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_KV2_IGR:String = "../maps/icons/vehicle/contour/ussr-KV2_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_KV4:String = "../maps/icons/vehicle/contour/ussr-KV4.png";
         
@@ -4775,6 +4823,8 @@ package
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_R104_OBJECT_430_II:String = "../maps/icons/vehicle/contour/ussr-R104_Object_430_II.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_R106_KV85:String = "../maps/icons/vehicle/contour/ussr-R106_KV85.png";
+        
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_R106_KV85_IGR:String = "../maps/icons/vehicle/contour/ussr-R106_KV85_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_R107_LTB:String = "../maps/icons/vehicle/contour/ussr-R107_LTB.png";
         
@@ -4838,6 +4888,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_T_44:String = "../maps/icons/vehicle/contour/ussr-T-44.png";
         
+        public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_T_44_IGR:String = "../maps/icons/vehicle/contour/ussr-T-44_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_T_46:String = "../maps/icons/vehicle/contour/ussr-T-46.png";
         
         public static var MAPS_ICONS_VEHICLE_CONTOUR_USSR_T_50:String = "../maps/icons/vehicle/contour/ussr-T-50.png";
@@ -4880,15 +4932,21 @@ package
         
         public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_13_90:String = "../maps/icons/vehicle/france-AMX_13_90.png";
         
+        public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_13_90_IGR:String = "../maps/icons/vehicle/france-AMX_13_90_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_50FOSH_155:String = "../maps/icons/vehicle/france-AMX_50Fosh_155.png";
         
         public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_50_100:String = "../maps/icons/vehicle/france-AMX_50_100.png";
+        
+        public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_50_100_IGR:String = "../maps/icons/vehicle/france-AMX_50_100_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_50_120:String = "../maps/icons/vehicle/france-AMX_50_120.png";
         
         public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_AC_MLE1946:String = "../maps/icons/vehicle/france-AMX_AC_Mle1946.png";
         
         public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_AC_MLE1948:String = "../maps/icons/vehicle/france-AMX_AC_Mle1948.png";
+        
+        public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_AC_MLE1948_IGR:String = "../maps/icons/vehicle/france-AMX_AC_Mle1948_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_FRANCE_AMX_M4_1945:String = "../maps/icons/vehicle/france-AMX_M4_1945.png";
         
@@ -5016,6 +5074,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_GERMANY_JAGDTIGER_SDKFZ_185:String = "../maps/icons/vehicle/germany-JagdTiger_SdKfz_185.png";
         
+        public static var MAPS_ICONS_VEHICLE_GERMANY_JAGDTIGER_SDKFZ_185_IGR:String = "../maps/icons/vehicle/germany-JagdTiger_SdKfz_185_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_GERMANY_LEOPARD1:String = "../maps/icons/vehicle/germany-Leopard1.png";
         
         public static var MAPS_ICONS_VEHICLE_GERMANY_LOWE:String = "../maps/icons/vehicle/germany-Lowe.png";
@@ -5029,6 +5089,8 @@ package
         public static var MAPS_ICONS_VEHICLE_GERMANY_NASHORN:String = "../maps/icons/vehicle/germany-Nashorn.png";
         
         public static var MAPS_ICONS_VEHICLE_GERMANY_PANTHER_II:String = "../maps/icons/vehicle/germany-Panther_II.png";
+        
+        public static var MAPS_ICONS_VEHICLE_GERMANY_PANTHER_II_IGR:String = "../maps/icons/vehicle/germany-Panther_II_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_GERMANY_PANTHER_M10:String = "../maps/icons/vehicle/germany-Panther_M10.png";
         
@@ -5070,6 +5132,10 @@ package
         
         public static var MAPS_ICONS_VEHICLE_GERMANY_PZVIB_TIGER_II:String = "../maps/icons/vehicle/germany-PzVIB_Tiger_II.png";
         
+        public static var MAPS_ICONS_VEHICLE_GERMANY_PZVIB_TIGER_II_IGR:String = "../maps/icons/vehicle/germany-PzVIB_Tiger_II_IGR.png";
+        
+        public static var MAPS_ICONS_VEHICLE_GERMANY_PZVI_IGR:String = "../maps/icons/vehicle/germany-PzVI_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_GERMANY_PZVI_TIGER_P:String = "../maps/icons/vehicle/germany-PzVI_Tiger_P.png";
         
         public static var MAPS_ICONS_VEHICLE_GERMANY_PZV_PZIV:String = "../maps/icons/vehicle/germany-PzV_PzIV.png";
@@ -5095,6 +5161,8 @@ package
         public static var MAPS_ICONS_VEHICLE_GERMANY_S35_CAPTURED:String = "../maps/icons/vehicle/germany-S35_captured.png";
         
         public static var MAPS_ICONS_VEHICLE_GERMANY_STUG_40_AUSFG:String = "../maps/icons/vehicle/germany-StuG_40_AusfG.png";
+        
+        public static var MAPS_ICONS_VEHICLE_GERMANY_STUG_40_AUSFG_IGR:String = "../maps/icons/vehicle/germany-StuG_40_AusfG_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_GERMANY_STURER_EMIL:String = "../maps/icons/vehicle/germany-Sturer_Emil.png";
         
@@ -5162,6 +5230,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_JAPAN_STA_1:String = "../maps/icons/vehicle/japan-STA_1.png";
         
+        public static var MAPS_ICONS_VEHICLE_JAPAN_STA_1_IGR:String = "../maps/icons/vehicle/japan-STA_1_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_JAPAN_ST_B1:String = "../maps/icons/vehicle/japan-ST_B1.png";
         
         public static var MAPS_ICONS_VEHICLE_JAPAN_TE_KE:String = "../maps/icons/vehicle/japan-Te_Ke.png";
@@ -5204,6 +5274,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_CHINA_CH17_WZ131_1_WZ132:String = "../maps/icons/vehicle/small/china-Ch17_WZ131_1_WZ132.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_CHINA_CH17_WZ131_1_WZ132_IGR:String = "../maps/icons/vehicle/small/china-Ch17_WZ131_1_WZ132_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_CHINA_CH18_WZ_120:String = "../maps/icons/vehicle/small/china-Ch18_WZ-120.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_CHINA_CH19_121:String = "../maps/icons/vehicle/small/china-Ch19_121.png";
@@ -5234,15 +5306,21 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_13_90:String = "../maps/icons/vehicle/small/france-AMX_13_90.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_13_90_IGR:String = "../maps/icons/vehicle/small/france-AMX_13_90_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_50FOSH_155:String = "../maps/icons/vehicle/small/france-AMX_50Fosh_155.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_50_100:String = "../maps/icons/vehicle/small/france-AMX_50_100.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_50_100_IGR:String = "../maps/icons/vehicle/small/france-AMX_50_100_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_50_120:String = "../maps/icons/vehicle/small/france-AMX_50_120.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_AC_MLE1946:String = "../maps/icons/vehicle/small/france-AMX_AC_Mle1946.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_AC_MLE1948:String = "../maps/icons/vehicle/small/france-AMX_AC_Mle1948.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_AC_MLE1948_IGR:String = "../maps/icons/vehicle/small/france-AMX_AC_Mle1948_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_FRANCE_AMX_M4_1945:String = "../maps/icons/vehicle/small/france-AMX_M4_1945.png";
         
@@ -5370,6 +5448,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_JAGDTIGER_SDKFZ_185:String = "../maps/icons/vehicle/small/germany-JagdTiger_SdKfz_185.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_JAGDTIGER_SDKFZ_185_IGR:String = "../maps/icons/vehicle/small/germany-JagdTiger_SdKfz_185_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_LEOPARD1:String = "../maps/icons/vehicle/small/germany-Leopard1.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_LOWE:String = "../maps/icons/vehicle/small/germany-Lowe.png";
@@ -5383,6 +5463,8 @@ package
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_NASHORN:String = "../maps/icons/vehicle/small/germany-Nashorn.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_PANTHER_II:String = "../maps/icons/vehicle/small/germany-Panther_II.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_PANTHER_II_IGR:String = "../maps/icons/vehicle/small/germany-Panther_II_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_PANTHER_M10:String = "../maps/icons/vehicle/small/germany-Panther_M10.png";
         
@@ -5424,6 +5506,10 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_PZVIB_TIGER_II:String = "../maps/icons/vehicle/small/germany-PzVIB_Tiger_II.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_PZVIB_TIGER_II_IGR:String = "../maps/icons/vehicle/small/germany-PzVIB_Tiger_II_IGR.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_PZVI_IGR:String = "../maps/icons/vehicle/small/germany-PzVI_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_PZVI_TIGER_P:String = "../maps/icons/vehicle/small/germany-PzVI_Tiger_P.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_PZV_PZIV:String = "../maps/icons/vehicle/small/germany-PzV_PzIV.png";
@@ -5449,6 +5535,8 @@ package
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_S35_CAPTURED:String = "../maps/icons/vehicle/small/germany-S35_captured.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_STUG_40_AUSFG:String = "../maps/icons/vehicle/small/germany-StuG_40_AusfG.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_STUG_40_AUSFG_IGR:String = "../maps/icons/vehicle/small/germany-StuG_40_AusfG_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_GERMANY_STURER_EMIL:String = "../maps/icons/vehicle/small/germany-Sturer_Emil.png";
         
@@ -5516,6 +5604,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_JAPAN_STA_1:String = "../maps/icons/vehicle/small/japan-STA_1.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_JAPAN_STA_1_IGR:String = "../maps/icons/vehicle/small/japan-STA_1_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_JAPAN_ST_B1:String = "../maps/icons/vehicle/small/japan-ST_B1.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_JAPAN_TE_KE:String = "../maps/icons/vehicle/small/japan-Te_Ke.png";
@@ -5544,6 +5634,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB11_CAERNARVON:String = "../maps/icons/vehicle/small/uk-GB11_Caernarvon.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB11_CAERNARVON_IGR:String = "../maps/icons/vehicle/small/uk-GB11_Caernarvon_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB12_CONQUEROR:String = "../maps/icons/vehicle/small/uk-GB12_Conqueror.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB13_FV215B:String = "../maps/icons/vehicle/small/uk-GB13_FV215b.png";
@@ -5552,9 +5644,13 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB21_CROMWELL:String = "../maps/icons/vehicle/small/uk-GB21_Cromwell.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB21_CROMWELL_IGR:String = "../maps/icons/vehicle/small/uk-GB21_Cromwell_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB22_COMET:String = "../maps/icons/vehicle/small/uk-GB22_Comet.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB23_CENTURION:String = "../maps/icons/vehicle/small/uk-GB23_Centurion.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB23_CENTURION_IGR:String = "../maps/icons/vehicle/small/uk-GB23_Centurion_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB24_CENTURION_MK3:String = "../maps/icons/vehicle/small/uk-GB24_Centurion_Mk3.png";
         
@@ -5613,6 +5709,8 @@ package
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB76_MK_VIC:String = "../maps/icons/vehicle/small/uk-GB76_Mk_VIC.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB77_FV304:String = "../maps/icons/vehicle/small/uk-GB77_FV304.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB77_FV304_IGR:String = "../maps/icons/vehicle/small/uk-GB77_FV304_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_UK_GB78_SEXTON_I:String = "../maps/icons/vehicle/small/uk-GB78_Sexton_I.png";
         
@@ -5692,6 +5790,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_SHERMAN_JUMBO:String = "../maps/icons/vehicle/small/usa-Sherman_Jumbo.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_USA_SHERMAN_JUMBO_IGR:String = "../maps/icons/vehicle/small/usa-Sherman_Jumbo_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_T110:String = "../maps/icons/vehicle/small/usa-T110.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_T110E3:String = "../maps/icons/vehicle/small/usa-T110E3.png";
@@ -5736,6 +5836,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_T34_HVY:String = "../maps/icons/vehicle/small/usa-T34_hvy.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_USA_T34_HVY_IGR:String = "../maps/icons/vehicle/small/usa-T34_hvy_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_T37:String = "../maps/icons/vehicle/small/usa-T37.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_T40:String = "../maps/icons/vehicle/small/usa-T40.png";
@@ -5750,9 +5852,15 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_T67:String = "../maps/icons/vehicle/small/usa-T67.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_USA_T67_IGR:String = "../maps/icons/vehicle/small/usa-T67_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_T69:String = "../maps/icons/vehicle/small/usa-T69.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_USA_T69_IGR:String = "../maps/icons/vehicle/small/usa-T69_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_T71:String = "../maps/icons/vehicle/small/usa-T71.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_USA_T71_IGR:String = "../maps/icons/vehicle/small/usa-T71_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USA_T7_COMBAT_CAR:String = "../maps/icons/vehicle/small/usa-T7_Combat_Car.png";
         
@@ -5790,6 +5898,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_IS_3:String = "../maps/icons/vehicle/small/ussr-IS-3.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_USSR_IS_3_IGR:String = "../maps/icons/vehicle/small/ussr-IS-3_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_IS_4:String = "../maps/icons/vehicle/small/ussr-IS-4.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_IS_7:String = "../maps/icons/vehicle/small/ussr-IS-7.png";
@@ -5799,6 +5909,8 @@ package
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_IS8:String = "../maps/icons/vehicle/small/ussr-IS8.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_ISU_152:String = "../maps/icons/vehicle/small/ussr-ISU-152.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_USSR_ISU_152_IGR:String = "../maps/icons/vehicle/small/ussr-ISU-152_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_KV_13:String = "../maps/icons/vehicle/small/ussr-KV-13.png";
         
@@ -5817,6 +5929,8 @@ package
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_KV1:String = "../maps/icons/vehicle/small/ussr-KV1.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_KV2:String = "../maps/icons/vehicle/small/ussr-KV2.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_USSR_KV2_IGR:String = "../maps/icons/vehicle/small/ussr-KV2_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_KV4:String = "../maps/icons/vehicle/small/ussr-KV4.png";
         
@@ -5857,6 +5971,8 @@ package
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_R104_OBJECT_430_II:String = "../maps/icons/vehicle/small/ussr-R104_Object_430_II.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_R106_KV85:String = "../maps/icons/vehicle/small/ussr-R106_KV85.png";
+        
+        public static var MAPS_ICONS_VEHICLE_SMALL_USSR_R106_KV85_IGR:String = "../maps/icons/vehicle/small/ussr-R106_KV85_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_R107_LTB:String = "../maps/icons/vehicle/small/ussr-R107_LTB.png";
         
@@ -5920,6 +6036,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_T_44:String = "../maps/icons/vehicle/small/ussr-T-44.png";
         
+        public static var MAPS_ICONS_VEHICLE_SMALL_USSR_T_44_IGR:String = "../maps/icons/vehicle/small/ussr-T-44_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_T_46:String = "../maps/icons/vehicle/small/ussr-T-46.png";
         
         public static var MAPS_ICONS_VEHICLE_SMALL_USSR_T_50:String = "../maps/icons/vehicle/small/ussr-T-50.png";
@@ -5966,6 +6084,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_UK_GB11_CAERNARVON:String = "../maps/icons/vehicle/uk-GB11_Caernarvon.png";
         
+        public static var MAPS_ICONS_VEHICLE_UK_GB11_CAERNARVON_IGR:String = "../maps/icons/vehicle/uk-GB11_Caernarvon_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_UK_GB12_CONQUEROR:String = "../maps/icons/vehicle/uk-GB12_Conqueror.png";
         
         public static var MAPS_ICONS_VEHICLE_UK_GB13_FV215B:String = "../maps/icons/vehicle/uk-GB13_FV215b.png";
@@ -5974,9 +6094,13 @@ package
         
         public static var MAPS_ICONS_VEHICLE_UK_GB21_CROMWELL:String = "../maps/icons/vehicle/uk-GB21_Cromwell.png";
         
+        public static var MAPS_ICONS_VEHICLE_UK_GB21_CROMWELL_IGR:String = "../maps/icons/vehicle/uk-GB21_Cromwell_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_UK_GB22_COMET:String = "../maps/icons/vehicle/uk-GB22_Comet.png";
         
         public static var MAPS_ICONS_VEHICLE_UK_GB23_CENTURION:String = "../maps/icons/vehicle/uk-GB23_Centurion.png";
+        
+        public static var MAPS_ICONS_VEHICLE_UK_GB23_CENTURION_IGR:String = "../maps/icons/vehicle/uk-GB23_Centurion_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_UK_GB24_CENTURION_MK3:String = "../maps/icons/vehicle/uk-GB24_Centurion_Mk3.png";
         
@@ -6035,6 +6159,8 @@ package
         public static var MAPS_ICONS_VEHICLE_UK_GB76_MK_VIC:String = "../maps/icons/vehicle/uk-GB76_Mk_VIC.png";
         
         public static var MAPS_ICONS_VEHICLE_UK_GB77_FV304:String = "../maps/icons/vehicle/uk-GB77_FV304.png";
+        
+        public static var MAPS_ICONS_VEHICLE_UK_GB77_FV304_IGR:String = "../maps/icons/vehicle/uk-GB77_FV304_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_UK_GB78_SEXTON_I:String = "../maps/icons/vehicle/uk-GB78_Sexton_I.png";
         
@@ -6118,6 +6244,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_USA_SHERMAN_JUMBO:String = "../maps/icons/vehicle/usa-Sherman_Jumbo.png";
         
+        public static var MAPS_ICONS_VEHICLE_USA_SHERMAN_JUMBO_IGR:String = "../maps/icons/vehicle/usa-Sherman_Jumbo_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_USA_T110:String = "../maps/icons/vehicle/usa-T110.png";
         
         public static var MAPS_ICONS_VEHICLE_USA_T110E3:String = "../maps/icons/vehicle/usa-T110E3.png";
@@ -6162,6 +6290,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_USA_T34_HVY:String = "../maps/icons/vehicle/usa-T34_hvy.png";
         
+        public static var MAPS_ICONS_VEHICLE_USA_T34_HVY_IGR:String = "../maps/icons/vehicle/usa-T34_hvy_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_USA_T37:String = "../maps/icons/vehicle/usa-T37.png";
         
         public static var MAPS_ICONS_VEHICLE_USA_T40:String = "../maps/icons/vehicle/usa-T40.png";
@@ -6176,9 +6306,15 @@ package
         
         public static var MAPS_ICONS_VEHICLE_USA_T67:String = "../maps/icons/vehicle/usa-T67.png";
         
+        public static var MAPS_ICONS_VEHICLE_USA_T67_IGR:String = "../maps/icons/vehicle/usa-T67_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_USA_T69:String = "../maps/icons/vehicle/usa-T69.png";
         
+        public static var MAPS_ICONS_VEHICLE_USA_T69_IGR:String = "../maps/icons/vehicle/usa-T69_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_USA_T71:String = "../maps/icons/vehicle/usa-T71.png";
+        
+        public static var MAPS_ICONS_VEHICLE_USA_T71_IGR:String = "../maps/icons/vehicle/usa-T71_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_USA_T7_COMBAT_CAR:String = "../maps/icons/vehicle/usa-T7_Combat_Car.png";
         
@@ -6216,6 +6352,8 @@ package
         
         public static var MAPS_ICONS_VEHICLE_USSR_IS_3:String = "../maps/icons/vehicle/ussr-IS-3.png";
         
+        public static var MAPS_ICONS_VEHICLE_USSR_IS_3_IGR:String = "../maps/icons/vehicle/ussr-IS-3_IGR.png";
+        
         public static var MAPS_ICONS_VEHICLE_USSR_IS_4:String = "../maps/icons/vehicle/ussr-IS-4.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_IS_7:String = "../maps/icons/vehicle/ussr-IS-7.png";
@@ -6225,6 +6363,8 @@ package
         public static var MAPS_ICONS_VEHICLE_USSR_IS8:String = "../maps/icons/vehicle/ussr-IS8.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_ISU_152:String = "../maps/icons/vehicle/ussr-ISU-152.png";
+        
+        public static var MAPS_ICONS_VEHICLE_USSR_ISU_152_IGR:String = "../maps/icons/vehicle/ussr-ISU-152_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_KV_13:String = "../maps/icons/vehicle/ussr-KV-13.png";
         
@@ -6243,6 +6383,8 @@ package
         public static var MAPS_ICONS_VEHICLE_USSR_KV1:String = "../maps/icons/vehicle/ussr-KV1.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_KV2:String = "../maps/icons/vehicle/ussr-KV2.png";
+        
+        public static var MAPS_ICONS_VEHICLE_USSR_KV2_IGR:String = "../maps/icons/vehicle/ussr-KV2_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_KV4:String = "../maps/icons/vehicle/ussr-KV4.png";
         
@@ -6283,6 +6425,8 @@ package
         public static var MAPS_ICONS_VEHICLE_USSR_R104_OBJECT_430_II:String = "../maps/icons/vehicle/ussr-R104_Object_430_II.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_R106_KV85:String = "../maps/icons/vehicle/ussr-R106_KV85.png";
+        
+        public static var MAPS_ICONS_VEHICLE_USSR_R106_KV85_IGR:String = "../maps/icons/vehicle/ussr-R106_KV85_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_R107_LTB:String = "../maps/icons/vehicle/ussr-R107_LTB.png";
         
@@ -6345,6 +6489,8 @@ package
         public static var MAPS_ICONS_VEHICLE_USSR_T_43:String = "../maps/icons/vehicle/ussr-T-43.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_T_44:String = "../maps/icons/vehicle/ussr-T-44.png";
+        
+        public static var MAPS_ICONS_VEHICLE_USSR_T_44_IGR:String = "../maps/icons/vehicle/ussr-T-44_IGR.png";
         
         public static var MAPS_ICONS_VEHICLE_USSR_T_46:String = "../maps/icons/vehicle/ussr-T-46.png";
         

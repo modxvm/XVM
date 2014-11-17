@@ -124,19 +124,12 @@ package net.wg.gui.lobby.settings
         {
             var _loc1_:String = null;
             var _loc2_:String = null;
-            trace(" ");
-            trace(" ");
-            trace("//////////////////////////////////////////////////////////////");
-            trace("------------------------------------SettingsChangesMap: ",this.length);
             for(_loc1_ in this._data)
             {
-                trace("SettingsChangesMap:",_loc1_,this._data[_loc1_]);
                 for(_loc2_ in this._data[_loc1_])
                 {
-                    trace("------",_loc2_,this._data[_loc1_][_loc2_]);
                 }
             }
-            trace("**************************************************************");
         }
     }
 }

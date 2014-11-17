@@ -28,6 +28,7 @@ Zawartość:
     * Autoładowanie załogi
     * Wyświetlanie pinga w garażu i przy logowaniu
     * Własna ikona szóstego zmysłu(+ opcjonalnie dźwięk)
+    * Karuzela dla listy pojazdów
 
   Strona projektu:  http://www.modxvm.com/
 
@@ -40,23 +41,20 @@ Zawartość:
 2. INSTALACJA
 -----------------------------------------------------------
 
-  // Od wersji 5.0.0 XVM nie wymaga xvm-stat.exe do wyświetlania statystyk, grę należy uruchamiać normalnie z launchera
-  // Ponadto od wersji 5.0.0 nie są potrzebne biblioteki Dokana, ani .NET Framework
-  // Standardowo statystyki graczy są wyłączone, aby je włączyć należy zmienić odpowiednie wartości w pliku rating.xc
-
   1. Wypakuj paczkę do głównego katalogu gry:
      Prawy klik na paczkę -> "Wypakuj wszystko..." -> wybierz folder gry -> "Wypakuj"
 
   2. Standardowo nie musisz niczego zmieniać.
 
     Jeśli chcesz używać innej konfiguracji, to musisz zmienić nazwę w pliku startowym:
-      \res_mods\xvm\configs\xvm.xc.sample do xvm.xc
+      \res_mods\xvm\xvm.xc.sample do xvm.xc
     Instrukcje znajdują sie w środku pliku.
 
     Wszystkie możliwe opcje konfiguracji możesz znaleźć w:
       \res_mods\xvm\configs\@Default\
+    lub możesz użyć edytora: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
-    WAŻNE: Jeśli konfigurujesz manualnie, używaj programów typu notatnik(czy innego edytora, który nie modyfikuje kodowania pliku - przykładowo notepad++), NIGDY nie używaj edytorów typu Word/Wordpad. Opcjonalnie możesz również użyć edytora XCPad(podświetla on tagi xvm): http://www.koreanrandom.com/forum/index.php?app=core&module=attach&section=attach&attach_id=22620
+    WAŻNE: Jeśli konfigurujesz manualnie, używaj programów typu notatnik(czy innego edytora, który nie modyfikuje kodowania pliku - przykładowo notepad++), NIGDY nie używaj edytorów typu Word/Wordpad.
 
   3. Jeśli XVM nie wykrywa prawidłowo języka gry,
    to w pliku konfiguracji (standardowo\res_mods\xvm\configs\@default\@xvm.xc)
@@ -64,6 +62,11 @@ Zawartość:
 
   4. Jest też możliwość instalacji tzw. "Nightly builds"(wersje testowe).
     Możesz je pobrać na http://nightly.modxvm.com/
+    
+    *** UWAGA! Statystyki oraz szanse na wygraną należy włączyć na stronie XVM:
+    a) Klikamy na "Sign UP",
+    b) Wybieramy "Activate Statistics",
+    c) W "Settings" wybieramy odpowiednie opcje.
 
 -----------------------------------------------------------
 3. AKTUALIZACJA
@@ -81,6 +84,8 @@ Zawartość:
   Pliki konfiguracyjne modyfikacji:
     \res_mods\xvm\configs\@Default\
   * Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\xvm\configs\user configs\ 
+  * Możesz utworzyć nową konfigurację lub edytować istniejącą w:
+    http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
   Wszystkie możliwe opcje konfiguracji znajdziesz tutaj:
     \res_mods\xvm\configs\@Default\
@@ -95,44 +100,41 @@ Zawartość:
       {{name}}        - Nick gracza bez nazwy klanu
       {{clan}}        - Nazwa klanu z nawiasami (puste, jeśli nie ma klanu)
       {{clannb}}      - Nazwa klanu bez nawiasów
+      {{squad}}       - wartość 'sq' dla własnego plutonu, pusty wpis dla innych
+      {{squad-num}}   - numer plutonu, bez plutonu pokazywany jest pusty wpis
       {{vehicle}}     - Nazwa pojazdu
       {{vehiclename}} - Wewnętrzna nazwa pojazdu (usa-M24_Chaffee)
       {{vtype}}       - Typ pojazdu
+      {{level}}       - Poziom pojazdu (cyfry arabskie)
+      {{rlevel}}      - Poziom pojazdu (cyfry rzymskie)
+      {{hp}}          - Aktualne punkty wytrzymałości
+      {{hp-ratio}}    - Współczynnik(ratio) aktualnych punktów wytrzymałości (bez znaku '%')
+      {{hp-max}}      - Maksymalne punkty wytrzymałości
+      {{c:hp}}        - Kolor zależny od aktualnych punktów wytrzymałości (tylko w znacznikach pojazdów)
+      {{c:hp-ratio}}  - Kolor zależny od współczynnika(ratio) aktualnych punktów wytrzymałości (tylko w znacznikach pojazdów)     
       {{c:vtype}}     - Kolor zależny od typu pojazdu
+      {{c:system}}    - Kolor systemowy (wyłacza nadpisanie koloru)
+      {{a:hp}}        - Przezroczystość zależna od aktualnych punktów wytrzymałości (tylko w znacznikach pojazdów)
+      {{a:hp-ratio}}  - Przezroczystość zależna od współczynnika(ratio) aktualnych punktów wytrzymałości (tylko w znacznikach pojazdów)
+      {{l10n:blownUp}} - Przetłumaczony tekst "Blown-up!"(wybuch pojazdu), tylko w znaczniku "blowupMessage"
+      {{battletier}}  - Przypuszczalny aktualny battle tier
       + makra na statystykach (poniżej)
 
+    W panelu gracza, ekranie ładowania bitwy i statystykach:
+      {{frags}}       - aktualna ilość zdobytych fragów
+      {{alive}}       - 'alive' dla sprawnego, '' dla zniszczonego    
+      
     W znacznikach pojazdów:
-      {{nick}}        - Nick gracza z nazwą klanu
-      {{name}}        - Nick gracza bez nazwy klanu
-      {{clan}}        - Nazwa klanu z nawiasami (puste, jeśli nie ma klanu)
-      {{clannb}}      - Nazwa klanu bez nawiasów
-      {{squad}}       - wartość 'sq' dla własnego plutonu, pusty dla innych
-      {{vehicle}}     - Nazwa pojazdu
-      {{vehiclename}} - Wewnętrzna nazwa pojazdu (usa-M24_Chaffee)
-      {{vtype}}       - Typ pojazdu
-      {{level}}       - Poziom(tier) pojazdu (Cyfry arabskie)
-      {{rlevel}}      - Poziom(tier) pojazdu (Cyfry rzymskie)
       {{turret}}      - wskaźnik seryjnej(stockowej) kopułki:
                          symbol "*"  - seryjna kopułka, nie można zamontować najlepszego działa
                          symbol "'"  - seryjna kopułka, można zamontować najlepsze działo
                          puste       - najlepsza kopułka
-      {{hp}}          - Aktualne punkty wytrzymałości
-      {{hp-ratio}}    - Aktualny współczynnik punktów wytrzymałości (bez '%')
-      {{hp-max}}      - Maksymalne punkty wytrzymałości
       {{dmg}}         - Obrażenia
       {{dmg-ratio}}   - Współczynnik obrażeń (bez '%')
       {{dmg-kind}}    - Typ obrażeń (zwykły atak, podpalenie, taranowanie, ...)
-      {{c:hp}}        - Kolor zależny od aktualnych punktów wytrzymałości (tylko we wskaźnikach pojazdów)
-      {{c:hp-ratio}}  - Kolor zależny od aktualnego współczynnika punktów wytrzymałości (tylko we wskaźnikach pojazdów)
       {{c:dmg}}       - Kolor zależny od źródła obrażeń
       {{c:dmg-kind}}  - Kolor zależny od typu obrażeń
-      {{c:vtype}}     - Kolor zależny od typu pojazdu
-      {{c:system}}    - Kolor systemowy (wyłączenie nadpisania kolorów)
-      {{a:hp}}        - przezroczystość zależna od aktualnych punktów wytrzymałości (tylko we wskaźnikach pojazdów)
-      {{a:hp-ratio}}  - przezroczystość zależna od aktualnego współczynnika punktów wytrzymałości (tylko we wskaźnikach pojazdów)
-      {{l10n:blownUp}}  - przetłumaczony tekst "Blown-up!", tylko w "blowupMessage"
-      + makra statystyk (poniżej)
-
+      
     W hitlogu:
       {{n}}           - Ogólna liczba trafień
       {{n-player}}    - Liczba trafień dla każdego gracza
@@ -195,20 +197,25 @@ Zawartość:
       {{vehicle-class}}  - Specjalny symbol zależny od typu pojazdu
       {{cellsize}}       - Wielkość kwadratu na minimapie
       {{vehiclename}}    - Nazwa wewnętrzna pojazdu - usa-M24_Chaffee
-      {{vehicle-short}}  - Skrócona nazwa pojazdu
+      
+    W plutonie:
+      {{level}}          - Poziom pojazdu (cyfry arabskie)
+      {{rlevel}}         - Poziom pojazdu (cyfry rzymskie)
+      {{vtype}}          - klasa pojazdu (zamiennik tekstowy z pliku konfiguracyjnego)
+      {{vtype-l}}        - klasa pojazdu (zamiennik tekstowy z pliku językowego)
+      {{battletier-min}} - minimalny battle tier pojazdu  
+      {{battletier-max}} - maksymalny battle tier pojazdu  
 
-    Makra dla statystyk:
-      * Network services on the XVM site (www.modxvm.com) must be activated.
-
+    Makra dla statystyk ('showPlayersStatistics' musi być włączone):
       {{avglvl}}      - Przeciętny poziom(tier) pojazdów
       {{eff}}         - Wartość "efficiency" gracza: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - Zaokrąglona wartość "efficiency" gracza
       {{teff}}, {{e}} - Wartość "efficiency" gracza dla danego pojazdu: http://www.koreanrandom.com/forum/topic/1643-
       {{wn6}}         - WN6 : http://www.koreanrandom.com/forum/topic/2575-
-	  {{wn8}}		  - WN8 : http://www.koreanrandom.com/forum/topic/2575-
+      {{wn8}}         - WN8 : http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - Skala XVM dla "efficiency" (wartości 00-99)
       {{xwn6}}        - Skala XVM dla WN6 (wartości 00-99)
-	  {{xwn8}}        - Skala XVM dla WN8 (wartości 00-99)
+      {{xwn8}}        - Skala XVM dla WN8 (wartości 00-99)
       {{rating}}      - GWR (Global Win Ratio)
       {{rating:3}}    - GWR zaokrąglone do 3 liczb z lewej
       {{battles}}     - Całkowita liczba bitw
@@ -233,16 +240,39 @@ Zawartość:
       {{c:eff}}       - Kolor zależny od wartości "efficiency" gracza
       {{c:e}}         - Kolor zależny od wartości "efficiency" dla danego pojazdu gracza
       {{c:wn6}}       - Kolor zależny od WN6 
-	  {{c:wn8}}       - Kolor zależny od WN8 
+      {{c:wn8}}       - Kolor zależny od WN8 
       {{c:xeff}}      - Kolor zależny od skali XVM dla "efficiency"
       {{c:xwn6}}      - Kolor zależny od skali XVM dla WN6
-      {{c:xwn8}}      - Kolor zależny od skali XVM dla WN8	  
+      {{c:xwn8}}      - Kolor zależny od skali XVM dla WN8    
       {{c:rating}}    - Kolor zależny od GWR
       {{c:kb}}        - Kolor zależny od kilo-bitw
+      {{c:avglvl}}    - Kolor zależny od przeciętnego poziomu pojazdów  
       {{c:t-rating}}  - Kolor zależny od aktualnej wartości wygranych
       {{c:t-battles}} - Kolor zależny od aktualnej liczby bitw pojazdu
       Każdy kolor możesz zmienić na makro przezroczystości ({{a: tdb}}).
 
+    Zasady formatowania rozszerzonych makr:
+        {{name[:norm][%[flag][width][.prec]type][~suf][?rep][|def]}}
+        name  - nazwa makro
+
+        :norm - normalizacja wartości, przykładowo {{hp-ratio:300}} zwraca wartość w przedziale 0..300
+
+        flag  - "-" dla usadowienia z lewej strony lub ewentualnie z prawej
+                "0" do zapełnienia z przodującymi zerami
+        width - minimalna szerokość
+        prec  - maksymalna szerokość dla linii lub cyfr po przecinku w liczbach dziesiętnych/setnych itd. 
+        type  - typ (s - ciąg, d - liczby dziesiętne, f - usadowienie, ...)
+
+        suf   - przyrostek dodany na końcu  
+        rep   - wartość zamienna, wprowadzona zamiar wartości domyślnej 
+        def   - wartość domnyślna, ustaw jeśli brakuje wartości:
+
+    Szczegóły: http://en.wikipedia.org/wiki/Printf
+    Przykładowo:
+      {{name%-16.16s}}      - Przycina nazwy posiadające więcej, niż 10 znaków i wypełnia nazwy posiadające mniej niż 10 znaków usadowione z lewej strony  
+      {{kb%4.01f~k|----}}   - szerokość na 4 znaki, dokładnie na 1 znak po kropce, usadowienie z prawej strony 
+                              if kb==null, display "----"
+        
     Używanie makr tłumaczenia języka - {{l10n:localizationKey}}
       Makra to po prostu odnośniki do wartości w plikach językowych res_mods/xvm/l10n/XX.xc file (XX oznacza kod języka).
       Jeśli nie znaleziono języka, to zostaje wyświetlony komunikat: "localizationKey".
@@ -285,7 +315,7 @@ Zawartość:
     nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
   150 najlepszych klanów jest dodane standardowo.
   Pełne archiwum ze wszystkimi klanami może być pobrane oddzielnie:
-    http://www.modxvm.com/en/download-xvm/
+    http://code.google.com/p/wot-xvm/downloads/list
     Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU),
     clanicons-full-us-XXX.zip (US), clanicons-full-sea-XXX.zip (SEA)
 
@@ -296,16 +326,16 @@ Zawartość:
   Hit Log.
   Współczynniki x, y pozwalają ustalić ułożenie panelu, w zależności od rozdzielczości.
 
-  Zegar w czasie ładowania bitwy.
-  Format: Y:rok, M:miesiąc, D:dzień, H:godzina, N:minuta, S:sekunda. "" - usuwa zegar.
+  Zegar w bitwie oraz na ekranie ładowania bitwy.
+  Format: Data PHP: http://php.net/date
   Np:
-  "clockFormat": "H:N"          => 01:23
-  "clockFormat": "Y.M.D H:N:S"  => 2013.05.20 01:23:45
-  Jest możliwość ustawienia tagów HTML dla zegara.
+  "clockFormat": "H:i"          => 01:23
+  "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
 
 _______________________________________________________________
   
   Wartości Efficiency per-pojazd {{teff}}, {{e}}.
+  
     TEFF       E
     0..299     1 - bardzo słaby gracz
     300..499   2 - słaby gracz
@@ -317,7 +347,7 @@ _______________________________________________________________
     1550..1799 8 - doskonały
     1800..1999 9 - mistrz
     2000+      E - Expert (top-100 graczy na danym pojeździe)
-	
+    
   Wartości Efficiency {{eff}}.
     0..549     1 - bardzo słaby gracz
     550..629   2 - słaby gracz
@@ -336,7 +366,7 @@ _______________________________________________________________
     1175..1569 4 - dobry gracz
     1570..1884 5 - bardzo dobry gracz
     1885+      6 - unikalny(unicum)
-	
+    
   Wartości WN8 {{wn8}}.
     0..299     1 - bardzo słaby gracz
     300..599   2 - słaby gracz
@@ -346,6 +376,6 @@ _______________________________________________________________
     1500..1749 6 - bardzo dobry
     1750..2299 7 - doskonały
     2300..2899 8 - unikalny(unicum)
-    2900+      9 - super unikalny(super unicum)	
+    2900+      9 - super unikalny(super unicum) 
 
 _______________________________________________________________

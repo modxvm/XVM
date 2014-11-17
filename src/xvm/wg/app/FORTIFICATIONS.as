@@ -348,6 +348,22 @@ package
         
         public static var BUILDINGS_BUILDINGNAME_OFFICE_BUILDING:String = "#fortifications:Buildings/buildingName/office_building";
         
+        public static var ORDERS_COMBAT_PAYMENTS:String = "#fortifications:orders/COMBAT_PAYMENTS";
+        
+        public static var ORDERS_TACTICAL_TRAINING:String = "#fortifications:orders/TACTICAL_TRAINING";
+        
+        public static var ORDERS_ADDITIONAL_BRIEFING:String = "#fortifications:orders/ADDITIONAL_BRIEFING";
+        
+        public static var ORDERS_MILITARY_EXERCISES:String = "#fortifications:orders/MILITARY_EXERCISES";
+        
+        public static var ORDERS_HEAVY_TRANSPORT:String = "#fortifications:orders/HEAVY_TRANSPORT";
+        
+        public static var ORDERS_EVACUATION:String = "#fortifications:orders/EVACUATION";
+        
+        public static var ORDERS_REQUISITION:String = "#fortifications:orders/REQUISITION";
+        
+        public static var ORDERS_SPECIAL_MISSION:String = "#fortifications:orders/SPECIAL_MISSION";
+        
         public static var BUILDINGS_MILITARY_BASE:String = "#fortifications:buildings/MILITARY_BASE";
         
         public static var BUILDINGS_MILITARY_ACADEMY:String = "#fortifications:buildings/MILITARY_ACADEMY";
@@ -1258,9 +1274,9 @@ package
         
         public static var FORTCLANBATTLELIST_RENDERBATTLENAME_ENUM:Array = [FORTCLANBATTLELIST_RENDERBATTLENAME_CLANBATTLEDEFENCE,FORTCLANBATTLELIST_RENDERBATTLENAME_CLANBATTLEOFFENCE];
         
-        public static var ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM:Array = [ORDERS_ORDERPOPOVER_ORDERTYPE_BATTLEPAYMENTS,ORDERS_ORDERPOPOVER_ORDERTYPE_REQUISITION,ORDERS_ORDERPOPOVER_ORDERTYPE_EVACUATION,ORDERS_ORDERPOPOVER_ORDERTYPE_HEAVYTRUCKS,ORDERS_ORDERPOPOVER_ORDERTYPE_MILITARYMANEUVERS,ORDERS_ORDERPOPOVER_ORDERTYPE_ADDITIONALBRIEFING,ORDERS_ORDERPOPOVER_ORDERTYPE_TACTICALTRAINING,ORDERS_ORDERPOPOVER_ORDERTYPE_SPECIALMISSION];
-        
         public static var CHOICEDIVISION_DIVISIONTYPE_ENUM:Array = [CHOICEDIVISION_DIVISIONTYPE_MIDDLEDIVISION,CHOICEDIVISION_DIVISIONTYPE_CHAMPIONDIVISION,CHOICEDIVISION_DIVISIONTYPE_ABSOLUTEDIVISION];
+        
+        public static var ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM:Array = [ORDERS_ORDERPOPOVER_ORDERTYPE_BATTLEPAYMENTS,ORDERS_ORDERPOPOVER_ORDERTYPE_REQUISITION,ORDERS_ORDERPOPOVER_ORDERTYPE_EVACUATION,ORDERS_ORDERPOPOVER_ORDERTYPE_HEAVYTRUCKS,ORDERS_ORDERPOPOVER_ORDERTYPE_MILITARYMANEUVERS,ORDERS_ORDERPOPOVER_ORDERTYPE_ADDITIONALBRIEFING,ORDERS_ORDERPOPOVER_ORDERTYPE_TACTICALTRAINING,ORDERS_ORDERPOPOVER_ORDERTYPE_SPECIALMISSION];
         
         public static var FORTMAINVIEW_ENUM:Array = [FORTMAINVIEW_COMMON_TOTALDEPOTQUANTITYTEXT,FORTMAINVIEW_COMMON_TITLE,FORTMAINVIEW_DIRECTIONS_TITLE,FORTMAINVIEW_DIRECTIONS_SELECTINGSTATUS,FORTMAINVIEW_TRANSPORTING_TITLE,FORTMAINVIEW_TRANSPORTING_EXPORTINGSTATUS,FORTMAINVIEW_TRANSPORTING_IMPORTINGSTATUS,FORTMAINVIEW_TRANSPORTING_NOTAVAILABLESTATUS,FORTMAINVIEW_TRANSPORTING_TUTORIALDESCR,FORTMAINVIEW_SORTIEBUTTON_TITLE,FORTMAINVIEW_INTELLIGENCEBUTTON_TITLE,FORTMAINVIEW_HEADER_LEVELSLBL,FORTMAINVIEW_HEADER_DEFENCEPERIOD,FORTMAINVIEW_HEADER_FORTFROZEN,FORTMAINVIEW_LEAVE_BUTTON_LABEL,FORTMAINVIEW_DIRECTIONSTUTOR_TITLE,FORTMAINVIEW_COMMONTUTOR_TITLE,FORTMAINVIEW_TRANSPORTINGTUTOR_TITLE];
         
@@ -1323,17 +1339,17 @@ package
             return _loc2_;
         }
         
-        public static function orders_orderpopover_ordertype(param1:String) : String
-        {
-            var _loc2_:String = "#fortifications:Orders/orderPopover/orderType/" + param1;
-            App.utils.asserter.assert(!(ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
-            return _loc2_;
-        }
-        
         public static function choicedivision_divisiontype(param1:String) : String
         {
             var _loc2_:String = "#fortifications:ChoiceDivision/divisionType/" + param1;
             App.utils.asserter.assert(!(CHOICEDIVISION_DIVISIONTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+            return _loc2_;
+        }
+        
+        public static function orders_orderpopover_ordertype(param1:String) : String
+        {
+            var _loc2_:String = "#fortifications:Orders/orderPopover/orderType/" + param1;
+            App.utils.asserter.assert(!(ORDERS_ORDERPOPOVER_ORDERTYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
             return _loc2_;
         }
         

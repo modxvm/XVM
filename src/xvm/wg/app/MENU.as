@@ -2334,6 +2334,8 @@ package
         
         public static var AWARDWINDOW_TITLE_NEWVEHICLE:String = "#menu:awardWindow/title/newVehicle";
         
+        public static var AWARDWINDOW_TITLE_CREDITS:String = "#menu:awardWindow/title/credits";
+        
         public static var AWARDWINDOW_OKBUTTON:String = "#menu:awardWindow/okButton";
         
         public static var AWARDWINDOW_REFERRAL_TANKMAN_HEADER:String = "#menu:awardWindow/referral/tankman/header";
@@ -2353,6 +2355,10 @@ package
         public static var AWARDWINDOW_REFERRAL_NEXTTANKMAN:String = "#menu:awardWindow/referral/nextTankman";
         
         public static var AWARDWINDOW_REFERRAL_COMPLETE:String = "#menu:awardWindow/referral/complete";
+        
+        public static var AWARDWINDOW_REFERRAL_CREDITS_HEADER:String = "#menu:awardWindow/referral/credits/header";
+        
+        public static var AWARDWINDOW_REFERRAL_CREDITS_DESCRIPTION:String = "#menu:awardWindow/referral/credits/description";
         
         public static var REFERRALMANAGEMENTWINDOW_TITLE:String = "#menu:ReferralManagementWindow/title";
         

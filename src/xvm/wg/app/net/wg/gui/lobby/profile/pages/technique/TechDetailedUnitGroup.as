@@ -13,7 +13,8 @@ package net.wg.gui.lobby.profile.pages.technique
         
         override protected function adjustUnitAt(param1:int) : DetailedStatisticsUnit
         {
-            var _loc2_:DetailedStatisticsUnit = super.adjustUnitAt(param1);
+            var _loc2_:DetailedStatisticsUnit = null;
+            _loc2_ = super.adjustUnitAt(param1);
             _loc2_.width = 350;
             return _loc2_;
         }

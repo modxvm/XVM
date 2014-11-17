@@ -41,11 +41,11 @@ package net.wg.gui.lobby.tankman
             _loc2_.hasNewSkill = param1.hasNewSkills;
             _loc2_.newSkillsCount = param1.newSkills[0];
             _loc2_.lastNewSkillLevel = param1.newSkills[1];
-            _loc2_.dropSkillFree = SkillDropModel.parseFromObject(param1.dropSkillsCost[0]);
+            _loc2_.dropSkillFree = DropSkillsCost.parseFromObject(param1.dropSkillsCost[0]);
             _loc2_.dropSkillFree.id = 0;
-            _loc2_.dropSkillCredits = SkillDropModel.parseFromObject(param1.dropSkillsCost[1]);
+            _loc2_.dropSkillCredits = DropSkillsCost.parseFromObject(param1.dropSkillsCost[1]);
             _loc2_.dropSkillCredits.id = 1;
-            _loc2_.dropSkillGold = SkillDropModel.parseFromObject(param1.dropSkillsCost[2]);
+            _loc2_.dropSkillGold = DropSkillsCost.parseFromObject(param1.dropSkillsCost[2]);
             _loc2_.dropSkillGold.id = 2;
             _loc2_.defaultSavingMode = param1.defaultSavingMode;
             return _loc2_;
