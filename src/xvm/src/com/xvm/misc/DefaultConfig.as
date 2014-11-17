@@ -903,7 +903,9 @@ package com.xvm.misc
                 teamKiller_blowedup: "0x096A75",
                 enemy_alive:         "0xF50800",
                 enemy_dead:          "0x840500",
-                enemy_blowedup:      "0x5A0401"
+                enemy_blowedup:      "0x5A0401",
+                ally_base:           "0x96FF00",
+                enemy_base:          "0xF50800"
             };
             // src: ally, squadman, enemy, unknown, player
             // dst: ally, squadman, allytk, enemytk, enemy

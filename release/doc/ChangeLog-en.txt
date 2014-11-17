@@ -2,6 +2,8 @@
   * new in-battle macros:
       {{selected}} - value 'sel' for selected player, empty for others
       {{xvm-stat}} - value 'stat' is statistic is active, empty if not
+  * added individual system colors for bases:
+      colors/system/ally_base and colors/system/enemy_base
 
 XVM-5.4.1.2:
   * fixed small bugs

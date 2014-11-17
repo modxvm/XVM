@@ -32,23 +32,25 @@ class wot.Minimap.view.MarkerColor
         else
         {
             // use standard team bases if color is not changed
-            if (wr_entryName == MinimapEntry.STATIC_ICON_BASE)
+            var isBase:Boolean = wr_entryName == MinimapEntry.STATIC_ICON_BASE;
+            var isSpawn:Boolean = wr_entryName == MinimapEntry.STATIC_ICON_SPAWN;
+            if (isBase)
             {
-                var aa = Config.config.colors.system["ally_alive"];
+                var aa = Config.config.colors.system["ally_base"];
                 var aad = Defines.C_ALLY_ALIVE;
                 if (wrapper.vehicleClass == "blue" && aa == aad)
                     return;
-                var ea = Config.config.colors.system["enemy_alive"];
+                var ea = Config.config.colors.system["enemy_base"];
                 var ead = Defines.C_ENEMY_ALIVE;
                 if (wrapper.vehicleClass == "red" && ea == ead)
                     return;
             }
-            var entryName = (wr_entryName != MinimapEntry.STATIC_ICON_BASE && wr_entryName != MinimapEntry.STATIC_ICON_SPAWN) ? wr_entryName
+            var entryName = (!isBase && !isSpawn) ? wr_entryName
                 : (wrapper.vehicleClass == "red") ? "enemy" : (wrapper.vehicleClass == "blue") ? "ally" : null;
             if (entryName == "teamKiller" && wrapper.m_type == "enemy")
                 entryName = "enemy";
             if (entryName != null)
-                color = ColorsManager.getSystemColor(entryName, wrapper.isDead);
+                color = ColorsManager.getSystemColor(entryName, wrapper.isDead, false, isBase);
             if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
             {
                 if (wrapper.orig_entryName == null)

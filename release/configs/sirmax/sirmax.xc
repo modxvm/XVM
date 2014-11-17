@@ -168,6 +168,8 @@
     "system": {
       //"ally_alive":          "0x029CF5",
       //"enemy_alive":         "0xFFBB28"
+      //"ally_base":          "0xFFFF80",
+      //"enemy_base":         "0x8080FF"
     },
     "damage": {
       //"enemy_allytk_hit":      "0x00EAFF",

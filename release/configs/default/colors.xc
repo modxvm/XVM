@@ -52,7 +52,9 @@
       "teamKiller_blowedup": "0x096A75",
       "enemy_alive":         ${"def.en"},
       "enemy_dead":          "0x840500",
-      "enemy_blowedup":      "0x5A0401"
+      "enemy_blowedup":      "0x5A0401",
+      "ally_base":           ${"def.al"},
+      "enemy_base":          ${"def.en"}
     },
     // Dynamic color by damage kind.
     // Динамический цвет по типу урона.
