@@ -392,6 +392,8 @@ package com.xvm.utils
             pdata["clan"] = clanWithBrackets;
             // {{clannb}}
             pdata["clannb"] = clanWithoutBrackets;
+            // {{xvm-stat}}
+            pdata["xvm-stat"] = Config.networkServicesSettings.servicesActive == true ? 'stat' : null;
 
             // Next macro unique for vehicle
             var vdata:VehicleData = VehicleInfo.get(vid);
@@ -426,6 +428,8 @@ package com.xvm.utils
                 pdata["alive"] = function(o:MacrosFormatOptions):String { return o.alive ? 'alive' : null; }
                 // {{ready}}
                 pdata["ready"] = function(o:MacrosFormatOptions):String { return o.ready ? 'ready' : null; }
+                // {{selected}}
+                pdata["selected"] = function(o:MacrosFormatOptions):String { return o.selected ? 'sel' : null; }
                 // {{player}}
                 pdata["player"] = function(o:MacrosFormatOptions):String { return o.isCurrentPlayer ? 'pl' : null; }
                 // {{squad}}

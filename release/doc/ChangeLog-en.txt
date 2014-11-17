@@ -1,4 +1,9 @@
-﻿XVM-5.4.1.2:
+﻿XVM-5.4.1.3-dev:
+  * new in-battle macros:
+      {{selected}} - value 'sel' for selected player, empty for others
+      {{xvm-stat}} - value 'stat' is statistic is active, empty if not
+
+XVM-5.4.1.2:
   * fixed small bugs
   * show capturing base number for battles with more then one base
     WARNING: There are changes in the localization files

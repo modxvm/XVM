@@ -364,6 +364,8 @@ class com.xvm.Macros
             pdata["clannb"] = clannb;
             // {{player}}
             pdata["player"] = data.himself == true ? "pl" : null;
+            // {{xvm-stat}}
+            pdata["xvm-stat"] = Config.networkServicesSettings.servicesActive == true ? 'stat' : null;
         }
 
         // vehicle
@@ -413,6 +415,8 @@ class com.xvm.Macros
             pdata["tk"] = function(o):String { return o.teamKiller == true ? 'tk' : null; }
             // {{marksOnGun}}
             pdata["marksOnGun"] = function(o):String { return isNaN(o.marksOnGun) || pdata["level"] < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun); }
+            // {{selected}}
+            pdata["selected"] = function(o):String { return o.selected == true ? 'sel' : null; }
 
             // hp
 

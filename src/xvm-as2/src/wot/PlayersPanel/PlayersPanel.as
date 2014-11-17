@@ -271,6 +271,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
         obj.blowedUp = obj.dead && (!isNaN(obj.curHealth) && obj.curHealth < 0);
         obj.teamKiller = data.teamKiller == true;
         obj.entityName = wrapper.type != "left" ? "enemy" : data.squad > 10 ? "squadman" : obj.teamKiller ? "teamKiller" : "ally";
+        obj.selected = data.isPostmortemView;
 
         if (data.himself)
             BattleState.setSelfUserName(data.userName);

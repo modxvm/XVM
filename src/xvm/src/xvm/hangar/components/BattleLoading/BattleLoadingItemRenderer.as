@@ -111,6 +111,7 @@ package xvm.hangar.components.BattleLoading
                 var formatOptions:MacrosFormatOptions = new MacrosFormatOptions();
                 formatOptions.alive = data.isAlive();
                 formatOptions.ready = data.isReady();
+                formatOptions.selected = data.isCurrentPlayer;
                 formatOptions.isCurrentPlayer = data.isCurrentPlayer;
                 formatOptions.isCurrentSquad = data.isCurrentSquad;
                 formatOptions.squadIndex = data.squadIndex;

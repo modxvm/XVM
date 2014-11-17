@@ -38,6 +38,7 @@ Legend:
 │ {{tk}}                     │ X │ X │ X │ X │ X │   │   │   │   │ value 'tk' for teamkiller, empty for others
 │ {{squad}}                  │ X │ X │ X │ X │ X │ X │ X │   │   │ value 'sq' for own squad, empty for others
 │ {{squad-num}}              │ X │ X │ X │ X │ X │ X │ X │   │   │ number of squad (1,2,...), empty if not in squad
+│ {{selected}}               │ X │ X │ X │ X │   │   │   │   │   │ value 'sel' for selected player, empty for others
 │ {{hp-max}}                 │ X │ X │ X │ X │ X │ X │ X │   │   │ maximum health points
 │ {{hp}}                     │   │ X │ X │ X │ X │ X │ X │   │   │ current health points
 │ {{hp-ratio}}               │   │ X │ X │ X │ X │ X │ X │   │   │ current health ratio (without '%' sign)
@@ -71,6 +72,7 @@ Legend:
 │ {{battletier-min}}         │ X │   │   │   │   │   │   │   │ X │ minimal vehicle battle tier
 │ {{battletier-max}}         │ X │   │   │   │   │   │   │   │ X │ maximal vehicle battle tier
 │ {{l10n:ID}}                │   │ X │   │   │ X │ X │ X │ X │   │ localizated text, see en.xc for id
+│ {{xvm-stat}}               │ X │ X │ X │ X │ X │   │   │   │   │ value 'stat' is statistic is active, empty if not
 └────────────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────
 
   Statistic macros
