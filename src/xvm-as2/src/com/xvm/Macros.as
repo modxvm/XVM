@@ -457,7 +457,7 @@ class com.xvm.Macros
                     default:
                         return GraphicsUtil.GetDmgSrcValue(
                             Utils.damageFlagToDamageSource(o.damageFlag),
-                            o.teamKiller ? ((data.team == Defines.TEAM_ALLY ? "ally" : "enemy") + "tk") : o.entityName,
+                            o.teamKiller ? ((team == Defines.TEAM_ALLY ? "ally" : "enemy") + "tk") : o.entityName,
                             o.dead, o.blowedUp);
                 }
             }
