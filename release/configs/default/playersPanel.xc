@@ -158,8 +158,8 @@
     "short": {
       // false - disable (отключить)
       "enabled": true,
-      // Width of the column, 0-250. Default is 0.
-      // Ширина поля, 0-250. По умолчанию: 0.
+      // Minimum width of the column, 0-250. Default is 0.
+      // Минимальная ширина поля, 0-250. По умолчанию: 0.
       "width": 0,
       // Display format for frags (macros allowed, see readme-en.txt).
       // Формат отображения фрагов (допускаются макроподстановки, см. readme-ru.txt).
@@ -207,7 +207,7 @@
       // false - disable (отключить)
       "enabled": true,
       // Maximum width of the vehicle name column, 0-250. Default is 65.
-      // Максимальная ширина названия танка, 0-250. По умолчанию: 65.
+      // Максимальная ширина поля названия танка, 0-250. По умолчанию: 65.
       "width": 65,
       // Display format for the left panel (macros allowed, see readme-en.txt).
       // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
@@ -234,7 +234,7 @@
       // false - disable (отключить)
       "enabled": true,
       // Minimum width of the player's name column, 0-250. Default is 170.
-      // Минимальная ширина имени игрока, 0-250. По умолчанию: 170.
+      // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 170.
       "width": 170,
       // Display format for player nickname (macros allowed, see readme-en.txt).
       // Формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt).
