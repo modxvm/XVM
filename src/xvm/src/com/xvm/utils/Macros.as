@@ -440,6 +440,8 @@ package com.xvm.utils
                 pdata["squad"] = function(o:MacrosFormatOptions):String { return o.isCurrentSquad ? 'sq' : null; }
                 // {{squad-num}}
                 pdata["squad-num"] = function(o:MacrosFormatOptions):Number { return o.squadIndex <= 0 ? NaN : o.squadIndex; }
+                // {{position}}
+                pdata["position"] = function(o:MacrosFormatOptions):Number { return o.position <= 0 ? NaN : o.position; }
             }
         }
 

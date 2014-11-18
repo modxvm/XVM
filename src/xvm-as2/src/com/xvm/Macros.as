@@ -417,6 +417,8 @@ class com.xvm.Macros
             pdata["marksOnGun"] = function(o):String { return isNaN(o.marksOnGun) || pdata["level"] < 5 ? null : Utils.getMarksOnGunText(o.marksOnGun); }
             // {{selected}}
             pdata["selected"] = function(o):String { return o.selected == true ? 'sel' : null; }
+            // {{position}}
+            pdata["position"] = function(o):String { return o.position <= 0 ? NaN : o.position; }
 
             // hp
 

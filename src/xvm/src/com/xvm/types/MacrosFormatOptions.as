@@ -12,6 +12,7 @@
         public var isTeamKiller:Boolean = false;
         public var isCurrentSquad:Boolean = false;
         public var squadIndex:Number = NaN;
+        public var position:Number = NaN;
 
         public var curHealth:int = NaN;
         public var delta:int = NaN;

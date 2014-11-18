@@ -73,6 +73,7 @@ Legend:
 │ {{battletier-max}}         │ X │   │   │   │   │   │   │   │ X │ maximal vehicle battle tier
 │ {{l10n:ID}}                │   │ X │   │   │ X │ X │ X │ X │   │ localizated text, see en.xc for id
 │ {{xvm-stat}}               │ X │ X │ X │ X │ X │   │   │   │   │ value 'stat' is statistic is active, empty if not
+│ {{position}}               │ X │ X │ X │ X │   │   │   │   │   │ position of the player in the beginning of the battle (1-15)
 └────────────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────
 
   Statistic macros

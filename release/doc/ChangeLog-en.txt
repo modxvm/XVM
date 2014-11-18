@@ -2,6 +2,7 @@
   * new in-battle macros:
       {{selected}} - value 'sel' for selected player, empty for others
       {{xvm-stat}} - value 'stat' is statistic is active, empty if not
+      {{position}} - position of the player in the beginning of the battle (1-15)
   * added individual system colors for bases:
       colors/system/ally_base and colors/system/enemy_base
 

@@ -115,6 +115,7 @@ package xvm.hangar.components.BattleLoading
                 formatOptions.isCurrentPlayer = data.isCurrentPlayer;
                 formatOptions.isCurrentSquad = data.isCurrentSquad;
                 formatOptions.squadIndex = data.squadIndex;
+                formatOptions.position = proxy.index + 1;
                 formatOptions.isTeamKiller = data.isTeamKiller();
 
                 // Set Text Fields
