@@ -13,6 +13,9 @@
     // true - Disable Platoon icons.
     // true - убрать отображение иконки взвода.
     "removeSquadIcon": false,
+    // true - disable background of the selected player.
+    // true - убрать подложку выбранного игрока.
+    "removeSelectedBackground": false,
     // true - Remove the Players Panel mode switcher (buttons for changing size).
     // true - убрать переключатель режимов ушей мышкой.
     "removePanelsModeSwitcher": false,

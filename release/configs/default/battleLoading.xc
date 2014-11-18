@@ -8,10 +8,10 @@
     // Формат часов на экране загрузки боя.
     // http://php.net/date
     "clockFormat": "H:i:s",
-    // true - Enable display of battle tier.
+    // true - enable display of battle tier.
     // true - включить отображение уровня боя.
     "showBattleTier": false,
-    // true - Disable Platoon icons. This blank space can house, for example, clan logos.
+    // true - disable Platoon icons. This blank space can house, for example, clan logos.
     // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
     "removeSquadIcon": false,
     // Display options for Team/Clan logos.

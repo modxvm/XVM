@@ -5,6 +5,7 @@
       {{position}} - позиция игрока в начале боя (1-15)
   * добавлены отдельные системные цвета для баз:
       colors/system/ally_base и colors/system/enemy_base
+  * добавлена опция playersPanel/removeSelectedBackground - убрать подложку выбранного игрока
 
 XVM-5.4.1.2:
   * исправлены мелкие ошибки

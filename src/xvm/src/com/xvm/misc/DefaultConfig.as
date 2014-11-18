@@ -343,10 +343,11 @@ package com.xvm.misc
         private static function getPlayersPanelSection():CPlayersPanel
         {
             var c:CPlayersPanel = new CPlayersPanel();
-            c.alpha = 60;              // Side panel transparency. 0 - transparent, 100 - opaque.
-            c.iconAlpha = 100;         // Side panel icons transparency. 0 - transparent, 100 - opaque.
-            c.removeSquadIcon = false; // Hide squad icon.
-            c.removePanelsModeSwitcher = false; // Set true to hide mouse modes switcher.
+            c.alpha = 60;
+            c.iconAlpha = 100;
+            c.removeSquadIcon = false;
+            c.removeSelectedBackground = false;
+            c.removePanelsModeSwitcher = false;
             c.startMode = "large";
             c.altMode = null;
             // Playes/clan icon parameters.
