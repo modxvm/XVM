@@ -11,6 +11,7 @@ class com.xvm.Macros
     public static var globals:Object = {};
     public static var comments:Object = null;
 
+    // {{name[:norm][%[flag][width][.prec]type][~suf][?rep][|def]}}
     public static function Format(pname:String, format:String, options:Object):String
     {
         //Logger.add("format:" + format + " player:" + pname);

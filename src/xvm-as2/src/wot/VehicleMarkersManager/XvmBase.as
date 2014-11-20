@@ -194,8 +194,8 @@ class wot.VehicleMarkersManager.XvmBase
             }
 
             textField._alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
-            textField._x = cfg.x - (textField._width / 2.0);
-            textField._y = cfg.y - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
+            textField._x = (isNaN(cfg.x) ? Macros.Format(cfg.x) : cfg.x) - (textField._width / 2.0);
+            textField._y = (isNaN(cfg.y) ? Macros.Format(cfg.y) : cfg.y) - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
             textField._visible = cfg.visible;
 
             return {
