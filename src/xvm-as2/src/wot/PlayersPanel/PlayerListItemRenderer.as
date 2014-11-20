@@ -34,6 +34,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
         return this.__getColorTransformImpl.apply(this, arguments);
     }
 
+    function setState()
+    {
+        return this.setStateImpl.apply(this, arguments);
+    }
+
     function update()
     {
         return this.updateImpl.apply(this, arguments);
@@ -139,6 +144,15 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
 
         return base.__getColorTransform(schemeName);
+    }
+
+    function setStateImpl()
+    {
+        var savedValue = wrapper.data.isPostmortemView;
+        if (Config.config.playersPanel.removeSelectedBackground)
+            wrapper.data.isPostmortemView = false;
+        base.setState();
+        wrapper.data.isPostmortemView = savedValue;
     }
 
     function updateImpl()

@@ -201,9 +201,6 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
                 fixBattleState(item);
 
-                if (item.isPostmortemView && Config.config.playersPanel.removeSelectedBackground)
-                    item.isPostmortemView = false;
-
                 //Logger.addObject(item);
                 Macros.RegisterPlayerData(item.userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 

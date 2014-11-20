@@ -8,6 +8,7 @@ class wot.wrapper.PlayersPanel.PlayerListItemRenderer extends net.wargaming.inga
 
         var OVERRIDE_FUNCTIONS:Array = [
             "__getColorTransform",
+            "setState",
             "update",
             "lightPlayer"
         ];
