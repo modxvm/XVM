@@ -311,8 +311,8 @@ class _Stat(object):
             pl = self.players[vehId]
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
 
-            if cacheKey in self.cache:
-                continue
+            #if cacheKey in self.cache:
+            #    continue
             if str(pl.playerId) in self.playersSkip:
                 continue
 
