@@ -211,154 +211,159 @@ from gui import SystemMessages
 
 XPM_CMD = 'xpm.cmd'
 
-_XVM_MODS_DIR = "res_mods/xvm/mods"
-_XVM_VIEW_ALIAS = 'xvm'
-_XVM_SWF_URL = '../../../xvm/mods/xvm.swf'
-
-_XPM_COMMAND_GETMODS = "xpm.getMods"
-_XPM_COMMAND_INITIALIZED = "xpm.initialized"
-_XPM_COMMAND_LOADFILE = "xpm.loadFile"
-_XPM_COMMAND_GETGAMEREGION = "xpm.gameRegion"
-_XPM_COMMAND_GETGAMELANGUAGE = "xpm.gameLanguage"
-_XPM_COMMAND_MESSAGEBOX = 'xpm.messageBox'
-_XPM_COMMAND_SYSMESSAGE = 'xpm.systemMessage'
-
 g_xvmView = None
-_xpmInitialized = False
 
-def _start():
-    #debug('start')
+_xvm_swf_file_name = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../../../../../xvm/mods/xvm.swf')
 
-    from gui.shared import g_eventBus, EVENT_BUS_SCOPE
-    from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
-    from gui.Scaleform.framework.entities.View import View
+if os.path.isfile(_xvm_swf_file_name):
 
-    class XvmView(View):
-        def xvm_cmd(self, cmd, *args):
-            debug('[XPM] # ' + cmd + str(args))
-            if cmd == _XPM_COMMAND_GETMODS:
-                return _xpm_getMods()
-            elif cmd == _XPM_COMMAND_INITIALIZED:
-                global _xpmInitialized
-                _xpmInitialized = True
-            elif cmd == _XPM_COMMAND_LOADFILE:
-                return load_file(args[0])
-            elif cmd == _XPM_COMMAND_GETGAMEREGION:
-                global gameRegion
-                return gameRegion
-            elif cmd == _XPM_COMMAND_GETGAMELANGUAGE:
-                global gameLanguage
-                return gameLanguage
-            elif cmd == _XPM_COMMAND_MESSAGEBOX:
-                # title, message
-                from gui import DialogsInterface
-                from gui.Scaleform.daapi.view import dialogs
-                DialogsInterface.showDialog(dialogs.SimpleDialogMeta(
-                    args[0],
-                    args[1],
-                    dialogs.I18nInfoDialogButtons('common/error')),
-                    (lambda x: None))
-            elif cmd == _XPM_COMMAND_SYSMESSAGE:
-                # message, type
-                # Types: gui.SystemMessages.SM_TYPE:
-                #   'Error', 'Warning', 'Information', 'GameGreeting', ...
-                SystemMessages.pushMessage(
-                    args[0],
-                    type=SystemMessages.SM_TYPE.of(args[1]))
-            else:
-                handlers = g_eventBus._EventBus__scopes[EVENT_BUS_SCOPE.DEFAULT][XPM_CMD]
-                for handler in handlers.copy():
-                    try:
-                        (result, status) = handler(cmd, *args)
-                        if status:
-                            return result
-                    except TypeError:
-                        err(traceback.format_exc())
-                log('WARNING: unknown command: %s' % cmd)
+    _XVM_MODS_DIR = "res_mods/xvm/mods"
+    _XVM_VIEW_ALIAS = 'xvm'
+    _XVM_SWF_URL = '../../../xvm/mods/xvm.swf'
 
-        def as_xvm_cmdS(self, cmd, *args):
-            return self.flashObject.as_xvm_cmd(cmd, *args)
+    _XPM_COMMAND_GETMODS = "xpm.getMods"
+    _XPM_COMMAND_INITIALIZED = "xpm.initialized"
+    _XPM_COMMAND_LOADFILE = "xpm.loadFile"
+    _XPM_COMMAND_GETGAMEREGION = "xpm.gameRegion"
+    _XPM_COMMAND_GETGAMELANGUAGE = "xpm.gameLanguage"
+    _XPM_COMMAND_MESSAGEBOX = 'xpm.messageBox'
+    _XPM_COMMAND_SYSMESSAGE = 'xpm.systemMessage'
 
-    g_entitiesFactories.addSettings(ViewSettings(
-        _XVM_VIEW_ALIAS,
-        XvmView,
-        _XVM_SWF_URL,
-        ViewTypes.SERVICE_LAYOUT,
-        None,
-        ScopeTemplates.GLOBAL_SCOPE))
+    _xpmInitialized = False
 
-    g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, _appStarted)
+    def _start():
+        #debug('start')
 
-def _fini():
-    #debug('fini')
-    from gui.shared import g_eventBus
-    g_eventBus.removeListener(events.GUICommonEvent.APP_STARTED, _appStarted)
+        from gui.shared import g_eventBus, EVENT_BUS_SCOPE
+        from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
+        from gui.Scaleform.framework.entities.View import View
 
-def _appStarted(event):
-    #debug('AppStarted')
-    try:
-        from gui.WindowsManager import g_windowsManager
-        app = g_windowsManager.window
-        if app is not None:
-            global g_xvmView
-            g_xvmView = None
-            global _xpmInitialized
-            _xpmInitialized = False
-            app.loaderManager.onViewLoaded += _onViewLoaded
-            BigWorld.callback(0, lambda:app.loadView(_XVM_VIEW_ALIAS))
-            #app.loadView(_XVM_VIEW_ALIAS)
-    except Exception, ex:
-        err(traceback.format_exc())
+        class XvmView(View):
+            def xvm_cmd(self, cmd, *args):
+                debug('[XPM] # ' + cmd + str(args))
+                if cmd == _XPM_COMMAND_GETMODS:
+                    return _xpm_getMods()
+                elif cmd == _XPM_COMMAND_INITIALIZED:
+                    global _xpmInitialized
+                    _xpmInitialized = True
+                elif cmd == _XPM_COMMAND_LOADFILE:
+                    return load_file(args[0])
+                elif cmd == _XPM_COMMAND_GETGAMEREGION:
+                    global gameRegion
+                    return gameRegion
+                elif cmd == _XPM_COMMAND_GETGAMELANGUAGE:
+                    global gameLanguage
+                    return gameLanguage
+                elif cmd == _XPM_COMMAND_MESSAGEBOX:
+                    # title, message
+                    from gui import DialogsInterface
+                    from gui.Scaleform.daapi.view import dialogs
+                    DialogsInterface.showDialog(dialogs.SimpleDialogMeta(
+                        args[0],
+                        args[1],
+                        dialogs.I18nInfoDialogButtons('common/error')),
+                        (lambda x: None))
+                elif cmd == _XPM_COMMAND_SYSMESSAGE:
+                    # message, type
+                    # Types: gui.SystemMessages.SM_TYPE:
+                    #   'Error', 'Warning', 'Information', 'GameGreeting', ...
+                    SystemMessages.pushMessage(
+                        args[0],
+                        type=SystemMessages.SM_TYPE.of(args[1]))
+                else:
+                    handlers = g_eventBus._EventBus__scopes[EVENT_BUS_SCOPE.DEFAULT][XPM_CMD]
+                    for handler in handlers.copy():
+                        try:
+                            (result, status) = handler(cmd, *args)
+                            if status:
+                                return result
+                        except TypeError:
+                            err(traceback.format_exc())
+                    log('WARNING: unknown command: %s' % cmd)
 
-def _AppLoadView(base, self, newViewAlias, name = None, *args, **kwargs):
-    #log('loadView: ' + newViewAlias)
-    if newViewAlias == 'hangar':
-        global _xpmInitialized
-        if _xpmInitialized == False:
-            BigWorld.callback(0, lambda:_AppLoadView(base, self, newViewAlias, name, *args, **kwargs))
-            return
-    base(self, newViewAlias, name, *args, **kwargs)
+            def as_xvm_cmdS(self, cmd, *args):
+                return self.flashObject.as_xvm_cmd(cmd, *args)
 
-def _onViewLoaded(view):
-    try:
-        debug('onViewLoaded: ' + view.alias)
-        if view.alias == _XVM_VIEW_ALIAS:
+        g_entitiesFactories.addSettings(ViewSettings(
+            _XVM_VIEW_ALIAS,
+            XvmView,
+            _XVM_SWF_URL,
+            ViewTypes.SERVICE_LAYOUT,
+            None,
+            ScopeTemplates.GLOBAL_SCOPE))
+
+        g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, _appStarted)
+
+    def _fini():
+        #debug('fini')
+        from gui.shared import g_eventBus
+        g_eventBus.removeListener(events.GUICommonEvent.APP_STARTED, _appStarted)
+
+    def _appStarted(event):
+        #debug('AppStarted')
+        try:
             from gui.WindowsManager import g_windowsManager
             app = g_windowsManager.window
-            #if app is not None:
-            #    app.loaderManager.onViewLoaded -= _onViewLoaded
-            global g_xvmView
-            g_xvmView = view
-            #log(g_xvmView)
-    except Exception, ex:
-        err(traceback.format_exc())
+            if app is not None:
+                global g_xvmView
+                g_xvmView = None
+                global _xpmInitialized
+                _xpmInitialized = False
+                app.loaderManager.onViewLoaded += _onViewLoaded
+                BigWorld.callback(0, lambda:app.loadView(_XVM_VIEW_ALIAS))
+                #app.loadView(_XVM_VIEW_ALIAS)
+        except Exception, ex:
+            err(traceback.format_exc())
 
-# commands handlers
+    def _AppLoadView(base, self, newViewAlias, name = None, *args, **kwargs):
+        #log('loadView: ' + newViewAlias)
+        if newViewAlias == 'hangar':
+            global _xpmInitialized
+            if _xpmInitialized == False:
+                BigWorld.callback(0, lambda:_AppLoadView(base, self, newViewAlias, name, *args, **kwargs))
+                return
+        base(self, newViewAlias, name, *args, **kwargs)
 
-def _xpm_getMods():
-    try:
-        mods_dir = _XVM_MODS_DIR
-        if not os.path.isdir(mods_dir):
-            return None
-        mods = []
-        for m in glob.iglob(mods_dir + "/*.swf"):
-            m = m.replace('\\', '/')
-            if not m.lower().endswith("/xvm.swf"):
-                mods.append(m)
-        return mods
-    except Exception, ex:
-        err(traceback.format_exc())
-    return None
+    def _onViewLoaded(view):
+        try:
+            debug('onViewLoaded: ' + view.alias)
+            if view.alias == _XVM_VIEW_ALIAS:
+                from gui.WindowsManager import g_windowsManager
+                app = g_windowsManager.window
+                #if app is not None:
+                #    app.loaderManager.onViewLoaded -= _onViewLoaded
+                global g_xvmView
+                g_xvmView = view
+                #log(g_xvmView)
+        except Exception, ex:
+            err(traceback.format_exc())
 
-# register events
+    # commands handlers
 
-def _RegisterEvents():
-    _start()
-    import game
-    RegisterEvent(game, 'fini', _fini)
-    from gui.Scaleform.framework.application import App
-    OverrideMethod(App, 'loadView', _AppLoadView)
-BigWorld.callback(0, _RegisterEvents)
+    def _xpm_getMods():
+        try:
+            mods_dir = _XVM_MODS_DIR
+            if not os.path.isdir(mods_dir):
+                return None
+            mods = []
+            for m in glob.iglob(mods_dir + "/*.swf"):
+                m = m.replace('\\', '/')
+                if not m.lower().endswith("/xvm.swf"):
+                    mods.append(m)
+            return mods
+        except Exception, ex:
+            err(traceback.format_exc())
+        return None
+
+    # register events
+
+    def _RegisterEvents():
+        _start()
+        import game
+        RegisterEvent(game, 'fini', _fini)
+        from gui.Scaleform.framework.application import App
+        OverrideMethod(App, 'loadView', _AppLoadView)
+    BigWorld.callback(0, _RegisterEvents)
 
 
 #####################################################################
