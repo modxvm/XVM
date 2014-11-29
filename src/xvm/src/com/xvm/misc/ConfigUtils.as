@@ -282,7 +282,7 @@ package com.xvm.misc
                 return e.getStackTrace();
 
             if (e.at < 0)
-                return e.type + e.getStackTrace();
+                return "[" + e.type + "] " + e.getStackTrace();
 
             var head:String = e.at > 0 ? e.text.substring(0, e.at) : "";
             head = head.split("\r").join("").split("\n").join("");

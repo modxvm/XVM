@@ -74,6 +74,11 @@ package com.xvm
         public function VehicleInfo()
         {
             //Logger.add("VehicleInfo::ctor()")
+            this.clear();
+        }
+
+        private function clear():void
+        {
             this.vehicles = {};
             this.vehiclesMapKey = {};
             this.vehiclesMapName = {};
@@ -81,6 +86,7 @@ package com.xvm
 
         private function onVehicleInfoData(json_str:String):void
         {
+            this.clear();
             //Logger.add("onVehicleInfoData(): " + json_str);
             try
             {

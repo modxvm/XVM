@@ -363,5 +363,11 @@ package com.xvm.utils
             return v;
         }
 
+        public static function encodeHtmlEntities(str:String):String
+        {
+            var xml:XML = <a/>;
+            xml.setChildren(str);
+            return xml.toXMLString();
+        }
     }
 }

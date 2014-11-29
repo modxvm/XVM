@@ -10,7 +10,9 @@ package com.xvm
     import com.xvm.events.*;
     import com.xvm.io.*;
     import com.xvm.types.*;
+    import com.xvm.utils.*;
     import flash.display.*;
+    import flash.events.Event;
     import net.wg.data.constants.*;
     import net.wg.infrastructure.base.*;
     import net.wg.infrastructure.events.*;
@@ -31,6 +33,21 @@ package com.xvm
             App.utils.asserter.assertNotNull(_instance, "Xvm" + Errors.CANT_NULL);
             rest.unshift(cmd);
             return _instance.xvm_cmdS.apply(_instance, rest);
+        }
+
+        public static function addEventListener(type:String, listener:Function):void
+        {
+            _instance.addEventListener(type, listener);
+        }
+
+        public static function removeEventListener(type:String, listener:Function):void
+        {
+            _instance.removeEventListener(type, listener);
+        }
+
+        public static function dispatchEvent(e:Event):void
+        {
+            _instance.dispatchEvent(e);
         }
 
         public static var _instance:Xvm;
@@ -74,7 +91,6 @@ package com.xvm
             super.onPopulate();
 
             Config.load();
-            VehicleInfo.populateData();
             LoadMods();
         }
 
@@ -171,6 +187,23 @@ package com.xvm
                 {
                     case Defines.XVM_AS_COMMAND_SET_SVC_SETTINGS:
                         Config.networkServicesSettings = new NetworkServicesSettings(e.result.args[0]);
+                        break;
+                    case Defines.XPM_AS_COMMAND_RELOAD_CONFIG:
+                        Logger.add("reload config");
+                        Config.load();
+                        var message:String = Locale.get("XVM config reloaded");
+                        var type:String = "Information";
+                        if (Config.stateInfo.warning != null)
+                        {
+                            message = Locale.get("xvm.xc was not found, using the built-in config");
+                            type = "Warning";
+                        }
+                        else if (Config.stateInfo.error != null)
+                        {
+                            message = Locale.get("Error loading XVM config") + ":\n" + Utils.encodeHtmlEntities(Config.stateInfo.error);
+                            type = "Error";
+                        }
+                        Xvm.cmd(Defines.XPM_COMMAND_SYSMESSAGE, message, type);
                         break;
                 }
             }

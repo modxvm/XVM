@@ -6,6 +6,7 @@ package com.xvm.infrastructure
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.utils.*;
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
@@ -49,7 +50,7 @@ package com.xvm.infrastructure
                 }
                 else
                 {
-                    addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+                    addEventListener(Event.ADDED_TO_STAGE, _onAddedToStage);
                 }
             }
             catch (ex:Error)
@@ -58,9 +59,14 @@ package com.xvm.infrastructure
             }
         }
 
-        private function onAddedToStage(e:Event):void
+        private function _onConfigLoaded(e:Event):void
         {
-            removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+            dispatchEvent(e);
+        }
+
+        private function _onAddedToStage(e:Event):void
+        {
+            removeEventListener(Event.ADDED_TO_STAGE, _onAddedToStage);
             init();
         }
 
@@ -68,8 +74,9 @@ package com.xvm.infrastructure
         {
             try
             {
-                entryPoint();
-                postInit();
+                Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, this._onConfigLoaded);
+                this.entryPoint();
+                this.postInit();
             }
             catch (ex:Error)
             {
@@ -126,10 +133,15 @@ package com.xvm.infrastructure
                     return;
 
                 var mod:IXvmView = new cls(view);
-                if (populated && mod != null)
+                if (mod != null)
                 {
-                    mod.onBeforePopulate(null);
-                    mod.onAfterPopulate(null);
+                    addEventListener(Defines.XVM_EVENT_CONFIG_LOADED,
+                        function(e:Event):void { Utils.safeCall(mod, mod.onConfigLoaded, [e]); });
+                    if (populated)
+                    {
+                        mod.onBeforePopulate(null);
+                        mod.onAfterPopulate(null);
+                    }
                 }
             }
             catch (ex:Error)

@@ -52,7 +52,7 @@ package xvm.squad
         public function afterSetData():void
         {
             draw();
-            proxy.owner.dispatchEvent(new Event(Defines.E_ITEM_UPDATED));
+            proxy.owner.dispatchEvent(new Event("item_updated"));
         }
 
         public function draw():void

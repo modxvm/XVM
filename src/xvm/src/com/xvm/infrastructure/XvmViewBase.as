@@ -6,6 +6,7 @@ package com.xvm.infrastructure
 {
     import com.xvm.*;
     import com.xvm.utils.*;
+    import flash.events.Event;
     import net.wg.infrastructure.interfaces.IView;
     import net.wg.infrastructure.events.LifeCycleEvent;
 
@@ -17,12 +18,9 @@ package com.xvm.infrastructure
             return _view;
         }
 
-        private var _viewAlias:String;
-
         public function XvmViewBase(view:IView)
         {
             _view = view;
-            _viewAlias = view.as_alias;
             view.addEventListener(LifeCycleEvent.ON_BEFORE_POPULATE, _onBeforePopulate);
             view.addEventListener(LifeCycleEvent.ON_AFTER_POPULATE, _onAfterPopulate);
             view.addEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE, _onBeforeDispose);
@@ -31,22 +29,27 @@ package com.xvm.infrastructure
 
         public virtual function onBeforePopulate(e:LifeCycleEvent):void
         {
-            //Logger.add("onBeforePopulate: " + _viewAlias);
+            //Logger.add("onBeforePopulate: " + view.as_alias);
         }
 
         public virtual function onAfterPopulate(e:LifeCycleEvent):void
         {
-            //Logger.add("onAfterPopulate: " + _viewAlias);
+            //Logger.add("onAfterPopulate: " + view.as_alias);
         }
 
         public virtual function onBeforeDispose(e:LifeCycleEvent):void
         {
-            //Logger.add("onBeforeDispose: " + _viewAlias);
+            //Logger.add("onBeforeDispose: " + view.as_alias);
         }
 
         public virtual function onAfterDispose(e:LifeCycleEvent):void
         {
-            //Logger.add("onAfterDispose: " + _viewAlias);
+            //Logger.add("onAfterDispose: " + view.as_alias);
+        }
+
+        public virtual function onConfigLoaded(e:Event):void
+        {
+            //Logger.add("onConfigLoaded: " + view.as_alias);
         }
 
         // PRIVATE

@@ -63,8 +63,8 @@ package com.xvm
         public static const MAX_BATTLETIER_HPS:Array = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000];
 
         // Events
-        public static const XPM_EVENT_CMD_RECEIVED:String = "cmd_rvcd";
-        public static const E_ITEM_UPDATED:String = "item_updated";
+        public static const XPM_EVENT_CMD_RECEIVED:String = "xpm.cmd_rvcd";
+        public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";
 
         // UI Colors
         public static const UICOLOR_LABEL:uint = 0xA19D95;
@@ -192,6 +192,7 @@ package com.xvm
         // args: message, type
         // Types: gui.SystemMessages.SM_TYPE: 'Error', 'Warning', 'Information', 'GameGreeting', ...
         public static const XPM_COMMAND_SYSMESSAGE:String = 'xpm.systemMessage';
+        public static const XPM_AS_COMMAND_RELOAD_CONFIG:String = "xpm.as.reload_config";
 
         public static const XVM_COMMAND_GET_SVC_SETTINGS:String = "xvm.get_svc_settings";
         public static const XVM_AS_COMMAND_SET_SVC_SETTINGS:String = "xvm.as.set_svc_settings";

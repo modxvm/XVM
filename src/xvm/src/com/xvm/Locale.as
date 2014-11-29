@@ -248,10 +248,15 @@ package com.xvm
             "Group": "Группа",
             "Comment": "Комментарий",
 
-            //Vehicle status
+            // Vehicle status
             "Destroyed": "Уничтожен",
             "No data": "Нет данных",
-            "Not ready": "Не готов"
+            "Not ready": "Не готов",
+
+            // Config loading
+            "XVM config reloaded": "Конфиг XVM перезагружен",
+            "Config file xvm.xc was not found, using the built-in config": "Файл конфигурации xvm.xc не найден, используем встроенную конфигурацию",
+            "Error loading XVM config": "Ошибка загрузки конфига XVM"
         };
 
         /** Hardcoded EN language */
