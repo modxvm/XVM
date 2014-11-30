@@ -1,5 +1,6 @@
 {
   "configVersion": "5.1.0",
+  "autoReloadConfig": true,
   //"language": "pl",
   "def": {
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
@@ -81,7 +82,7 @@
   "hotkeys": {
     //"minimapZoom": { "enabled": true, "keyCode": 29, "onHold": true },
     "minimapAltMode": { "enabled": true, "keyCode": 29 },
-    //"playersPanelAltMode": { "enabled": true, "keyCode": 29 },
+    "playersPanelAltMode": { "enabled": true, "keyCode": 56 }, // LAlt
     "__stub__": {}
   },
   "battleLoading": {

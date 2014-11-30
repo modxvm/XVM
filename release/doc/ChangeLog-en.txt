@@ -6,6 +6,8 @@
   * added individual system colors for bases:
       colors/system/ally_base and colors/system/enemy_base
   * added option playersPanel/removeSelectedBackground - disable background of the selected player
+  * added option autoReloadConfig - monitor res_mods/xvm/configs/ directory for changes and
+    automatically reload config (currently only in hangar). Disabled by default, can reduce performance.
 
 XVM-5.4.1.2:
   * fixed small bugs

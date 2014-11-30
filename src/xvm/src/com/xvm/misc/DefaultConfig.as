@@ -15,6 +15,7 @@ package com.xvm.misc
             var c:CConfig = new CConfig();
             c.xvmVersion = Defines.XVM_VERSION;
             c.configVersion = Defines.CONFIG_VERSION;
+            c.autoReloadConfig = false;
             c.language = Defines.LOCALE_AUTO_DETECTION;
             c.region =  Defines.REGION_AUTO_DETECTION;
             c.definition = getDefinitionSection();

@@ -249,6 +249,7 @@ if os.path.isfile(_xvm_swf_file_name):
                 elif cmd == _XPM_COMMAND_INITIALIZED:
                     global _xvmInitialized
                     _xvmInitialized = True
+                    _startConfigWatchdog()
                 elif cmd == _XPM_COMMAND_LOADFILE:
                     return load_file(args[0])
                 elif cmd == _XPM_COMMAND_GETGAMEREGION:
@@ -296,7 +297,6 @@ if os.path.isfile(_xvm_swf_file_name):
             ScopeTemplates.GLOBAL_SCOPE))
 
         g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, _appStarted)
-        _startConfigWatchdog()
 
     def _fini():
         #debug('fini')
@@ -361,13 +361,15 @@ if os.path.isfile(_xvm_swf_file_name):
         return None
 
     # config watchdog
-    _configWatchdogTimerId = 0
+    _configWatchdogTimerId = None
     _lastConfigDirState = None
 
     def _startConfigWatchdog():
-        global _lastConfigDirState
-        _lastConfigDirState = None
-        _configWatchdog()
+        _stopConfigWatchdog()
+        if _isConfigReloadingEnabled():
+            global _lastConfigDirState
+            _lastConfigDirState = None
+            _configWatchdog()
 
     def _configWatchdog():
         #log('_configWatchdog')
@@ -383,12 +385,23 @@ if os.path.isfile(_xvm_swf_file_name):
             if g_xvmView is not None:
                 g_xvmView.as_xvm_cmdS(_XPM_AS_COMMAND_RELOAD_CONFIG)
 
-        _configWatchdogTimerId = BigWorld.callback(1, _configWatchdog)
+        if _isConfigReloadingEnabled():
+            _configWatchdogTimerId = BigWorld.callback(1, _configWatchdog)
+        else:
+            _stopConfigWatchdog()
 
     def _stopConfigWatchdog():
         global _configWatchdogTimerId
         if _configWatchdogTimerId:
             BigWorld.cancelCallback(_configWatchdogTimerId)
+            _configWatchdogTimerId = None
+
+    def _isConfigReloadingEnabled():
+        try:
+            from gui.mods.xvmstat.config import config
+            return config['autoReloadConfig'] == True
+        except:
+            return False
 
     # register events
 
