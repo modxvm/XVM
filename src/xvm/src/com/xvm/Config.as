@@ -81,7 +81,10 @@ package com.xvm
             //Logger.add("TRACE: STAGE 1: loadXvmXc()");
             try
             {
+                var autoReloadConfig:Boolean = Config.config == null ? false : Config.config.autoReloadConfig;
+
                 this.config = DefaultConfig.config;
+
                 var res:Object = JSONxLoader.Load(Defines.XVM_CONFIG_FILE_NAME);
 
                 //Logger.addObject(res, 2);
@@ -89,6 +92,7 @@ package com.xvm
                 var e:Error = res as Error;
                 if (e != null)
                 {
+                    Config.config.autoReloadConfig = autoReloadConfig;
                     if (res.type == "NO_FILE")
                     {
                         stateInfo = { warning: "" };

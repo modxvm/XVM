@@ -204,6 +204,7 @@ package com.xvm
                             type = "Error";
                         }
                         Xvm.cmd(Defines.XPM_COMMAND_SYSMESSAGE, message, type);
+                        Xvm.cmd(_XPM_COMMAND_INITIALIZED);
                         break;
                 }
             }

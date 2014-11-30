@@ -367,8 +367,6 @@ if os.path.isfile(_xvm_swf_file_name):
     def _startConfigWatchdog():
         _stopConfigWatchdog()
         if _isConfigReloadingEnabled():
-            global _lastConfigDirState
-            _lastConfigDirState = None
             _configWatchdog()
 
     def _configWatchdog():
@@ -379,11 +377,15 @@ if os.path.isfile(_xvm_swf_file_name):
         global _configWatchdogTimerId
 
         x = [(nm, os.path.getmtime(nm)) for nm in [os.path.join(p, f) for p, n, fn in os.walk(_xvm_config_dir_name) for f in fn]]
-        if _lastConfigDirState != x:
+        if _lastConfigDirState is None:
+            _lastConfigDirState = x
+        elif _lastConfigDirState != x:
             _lastConfigDirState = x
             global g_xvmView
             if g_xvmView is not None:
+                _stopConfigWatchdog()
                 g_xvmView.as_xvm_cmdS(_XPM_AS_COMMAND_RELOAD_CONFIG)
+                return
 
         if _isConfigReloadingEnabled():
             _configWatchdogTimerId = BigWorld.callback(1, _configWatchdog)

@@ -38,7 +38,9 @@ package xvm.clock
 
         override public function onConfigLoaded(e:Event):void
         {
-            Logger.add("[CL] onConfigLoaded: " + view.as_alias);
+            //Logger.add("[CL] onConfigLoaded: " + view.as_alias);
+            removeClock();
+            createClock();
         }
 
         // PRIVATE
