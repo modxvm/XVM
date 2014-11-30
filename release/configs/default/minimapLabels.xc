@@ -44,7 +44,7 @@
           // Враг.
           "enemy":          "<span class='mm_e'>{{vehicle}}</span>",
           // Взводный.
-          "squad":          "<textformat leading='-2'><span class='mm_s'><i>{{nick%.5s}}</i>\n{{vehicle}}</span><textformat>",
+          "squad":          "<textformat leading='-2'><span class='mm_s'><i>{{nick%.5s}}</i>\n{{vehicle}}</span></textformat>",
           // Own marker or spectated subject.
           // Свой маркер и маркер приёмника камеры наблюдения в случае смерти.
           "oneself":        "",
@@ -59,7 +59,7 @@
           "lost":           "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_l'><i>{{vehicle}}</i></span>",
           // Out of radio range squadman
           // Взводный, с которым потеряна связь
-          "lostsquad":      "<textformat leading='-4'><span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ls'><i>{{nick%.5s}}</i>\n   {{vehicle}}</span><textformat>",
+          "lostsquad":      "<textformat leading='-4'><span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ls'><i>{{nick%.5s}}</i>\n   {{vehicle}}</span></textformat>",
           // Мертвый союзник.
           "deadally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'></span>",
           // Мертвый тимкиллер.
