@@ -24,6 +24,15 @@ package xvm.ping.PingServers
 
         public static function initFeature(enabled:Boolean, interval:Number = 0):void
         {
+            if (!enabled || interval <= 0)
+                return;
+
+            instance.ping();
+            instance.pingTimer = setInterval(instance.ping, interval);
+        }
+
+        public static function stop():void
+        {
             if (instance.pingTimer > 0)
             {
                 clearInterval(instance.pingTimer);
@@ -36,30 +45,16 @@ package xvm.ping.PingServers
                     clearTimeout(t);
                 instance.pingTimeouts = null;
             }
-
-            if (!enabled)
-                return;
-
-            // immediately
-            instance.ping();
-            // after 1, 3, 5, 7 sec
-            //instance.pingTimeouts = [
-                //setTimeout(instance.ping, 1000),
-                //setTimeout(instance.ping, 3000),
-                //setTimeout(instance.ping, 5000),
-                //setTimeout(instance.ping, 7000)
-            //];
-
-            if (interval > 0)
-            {
-                // periodically
-                instance.pingTimer = setInterval(instance.ping, interval);
-            }
         }
 
         public static function addListener(listener:Function):void
         {
             instance.addEventListener(Event.COMPLETE, listener);
+        }
+
+        public static function removeListener(listener:Function):void
+        {
+            instance.removeEventListener(Event.COMPLETE, listener);
         }
 
         // PRIVATE

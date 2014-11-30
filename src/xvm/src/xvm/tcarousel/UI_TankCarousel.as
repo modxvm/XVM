@@ -41,9 +41,12 @@ package xvm.tcarousel
         public function UI_TankCarousel()
         {
             //Logger.add("UI_TankCarousel.ctor()");
-
             super();
+            init();
+        }
 
+        private function init():void
+        {
             this.cfg = Config.config.hangar.carousel;
 
             disableAllFilters = !(cfg.filters.nation || cfg.filters.type || cfg.filters.level || cfg.filters.prefs || cfg.filters.favorite);

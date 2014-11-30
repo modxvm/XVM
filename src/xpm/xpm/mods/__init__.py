@@ -1,6 +1,6 @@
 """ XPM mods loader (c) www.modxvm.com 2013-2014 """
 
-_XPM_VER = '1.5.0'
+_XPM_VER = '1.6.0'
 
 import glob
 import os

@@ -30,8 +30,7 @@ package xvm.tcarousel
         override public function onBeforePopulate(e:LifeCycleEvent):void
         {
             //Logger.add((new Error()).getStackTrace());
-            if (Config.config.hangar.carousel.enabled)
-                replaceCarouselControl();
+            replaceCarouselControl();
         }
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
@@ -39,10 +38,7 @@ package xvm.tcarousel
             //Logger.addObject("onAfterPopulate: " + view.as_alias);
             try
             {
-                if (Config.config.hangar.carousel.enabled)
-                {
-                    init();
-                }
+                init();
             }
             catch (ex:Error)
             {
@@ -56,6 +52,9 @@ package xvm.tcarousel
         {
             try
             {
+                if (Config.config.hangar.carousel.enabled != true)
+                    return;
+
                 if (isNaN(Config.config.hangar.carousel.rows) || Config.config.hangar.carousel.rows <= 0)
                     Config.config.hangar.carousel.rows = 1;
 
@@ -74,8 +73,14 @@ package xvm.tcarousel
 
         private function init():void
         {
+            if (Config.config.hangar.carousel.enabled != true)
+                return;
             Macros.RegisterVehiclesMacros();
             Dossier.loadAccountDossier(this, onAccountDossierLoaded, PROFILE.PROFILE_DROPDOWN_LABELS_ALL);
+        }
+
+        private function remove():void
+        {
         }
 
         private function onAccountDossierLoaded():void

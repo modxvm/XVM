@@ -7,6 +7,7 @@ package xvm.ping
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
+    import flash.events.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -26,15 +27,34 @@ package xvm.ping
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            initPing();
+            init();
         }
 
-        private function initPing():void
+        override public function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            remove();
+        }
+
+        // PRIVATE
+
+        private var pingControl:PingServersView = null;
+
+        private function init():void
         {
             var cfg:CPingServers = Config.config.hangar.pingServers;
             PingServers.initFeature(cfg.enabled, cfg.updateInterval);
             if (cfg.enabled)
-                page.addChildAt(new PingServersView(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0);
+                pingControl = page.addChildAt(new PingServersView(cfg), cfg.topmost ? page.getChildIndex(page.header) + 1 : 0) as PingServersView;
+        }
+
+        private function remove():void
+        {
+            PingServers.stop();
+            if (pingControl != null)
+            {
+                pingControl.dispose();
+                pingControl = null;
+            }
         }
     }
 

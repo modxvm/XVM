@@ -7,8 +7,9 @@ package xvm.ping.PingServers
     import flash.display.*;
     import flash.text.*;
     import flash.filters.*;
+    import scaleform.clik.core.UIComponent;
 
-    public class PingServersView extends Sprite
+    public class PingServersView extends UIComponent
     {
         private static const QUALITY_BAD:String = "bad";
         private static const QUALITY_POOR:String = "poor";
@@ -26,6 +27,12 @@ package xvm.ping.PingServers
             var f:TextField = createNewField();
             f.htmlText = makeStyledRow( { cluster: Locale.get("Initialization"), time: "..." } );
             PingServers.addListener(update);
+        }
+
+        override protected function onDispose():void
+        {
+            PingServers.removeListener(update);
+            super.onDispose();
         }
 
         // -- Private

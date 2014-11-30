@@ -36,13 +36,6 @@ package xvm.clock
             removeClock();
         }
 
-        override public function onConfigLoaded(e:Event):void
-        {
-            //Logger.add("[CL] onConfigLoaded: " + view.as_alias);
-            removeClock();
-            createClock();
-        }
-
         // PRIVATE
 
         private var clock:ClockControl = null;
