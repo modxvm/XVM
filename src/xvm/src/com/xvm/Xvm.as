@@ -195,7 +195,7 @@ package com.xvm
                         var type:String = "Information";
                         if (Config.stateInfo.warning != null)
                         {
-                            message = Locale.get("xvm.xc was not found, using the built-in config");
+                            message = Locale.get("Config file xvm.xc was not found, using the built-in config");
                             type = "Warning";
                         }
                         else if (Config.stateInfo.error != null)

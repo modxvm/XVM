@@ -173,6 +173,11 @@
     //Vehicle status
     "Destroyed": "Destroyed",
     "No data": "No data",
-    "Not ready": "Not ready"
+    "Not ready": "Not ready",
+
+    // Config loading
+    "XVM config reloaded": "XVM config reloaded",
+    "Config file xvm.xc was not found, using the built-in config": "Config file xvm.xc was not found, using the built-in config",
+    "Error loading XVM config": "Error loading XVM config"
   }
 }
