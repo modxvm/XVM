@@ -7,7 +7,6 @@ package com.xvm.io
     import com.xvm.*;
     import com.xvm.io.*;
     import flash.utils.*;
-    import net.wg.infrastructure.interfaces.entity.*;
 
     public class JSONxLoader
     {

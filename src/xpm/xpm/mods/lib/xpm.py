@@ -400,9 +400,6 @@ if os.path.isfile(_xvm_swf_file_name):
                                 container.remove(view)
                             g_eventDispatcher.loadHangar()
                     return
-                else:
-                    # TODO: reload config in battle
-                    pass
 
         except Exception, ex:
             err(traceback.format_exc())
