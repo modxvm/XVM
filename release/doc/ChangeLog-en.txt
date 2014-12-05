@@ -1,4 +1,4 @@
-﻿XVM-5.4.1.3-dev:
+﻿XVM-5.4.1.3:
   * new in-battle macros:
       {{selected}} - value 'sel' for selected player, empty for others
       {{xvm-stat}} - value 'stat' is statistic is active, empty if not
