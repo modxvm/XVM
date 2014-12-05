@@ -29,7 +29,7 @@ except Exception, err:
     wd = 'res_mods/%s/%s' % (ver, os.path.dirname(__file__))
     print ("[XPM]   fallback to the default path: %s" % wd)
 
-print "[XPM] %s" % _XPM_VER
+print "[XPM] XPM %s" % _XPM_VER
 print "[XPM] Working dir: %s" % wd
 
 # add libs to path
